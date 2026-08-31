@@ -1,0 +1,2266 @@
+{
+  "city": "duesseldorf",
+  "apply": true,
+  "touched": 282,
+  "approachesFixed": 282,
+  "faqAdded": 0,
+  "data_version": 30,
+  "rows": [
+    {
+      "id": "duesseldorf_dusseldorf_hauptbahnhof",
+      "name": "Düsseldorf Hauptbahnhof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_dusseldorf_bilk_s",
+      "name": "Düsseldorf, Bilk S",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_dusseldorf_oberbilk",
+      "name": "Düsseldorf-Oberbilk",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_wehrhahn",
+      "name": "Wehrhahn",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_dusseldorf_friedrichstadt",
+      "name": "Düsseldorf-Friedrichstadt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_dusseldorf_volksgarten",
+      "name": "Düsseldorf Volksgarten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_dusseldorf_hbf",
+      "name": "Düsseldorf Hbf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_dusseldorf_volklinger_strasse",
+      "name": "Düsseldorf Völklinger Straße",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_heinrich_heine_allee",
+      "name": "Heinrich-Heine-Allee",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_d_benrather_strasse_u",
+      "name": "D-Benrather Straße U",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_oststrasse",
+      "name": "Oststraße",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_derendorf",
+      "name": "Derendorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_dusseldorf_flingern",
+      "name": "Düsseldorf-Flingern",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_d_hamm_s",
+      "name": "D-Hamm S",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_haltepunkt_dusseldorf_bilk",
+      "name": "Haltepunkt Düsseldorf-Bilk",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_einkaufsbahnhof_dusseldorf_hbf",
+      "name": "Einkaufsbahnhof Düsseldorf Hbf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_heinrich_heine_allee_u_bahnhof",
+      "name": "Heinrich-Heine-Allee U-Bahnhof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_volksgarten",
+      "name": "Volksgarten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_kd_ticket_office_dusseldorf",
+      "name": "KD Ticket Office Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_weisse_flotte_dusseldorf_gmbh",
+      "name": "Weiße Flotte Düsseldorf GmbH",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_sattgrun_hafen",
+      "name": "Sattgrün Hafen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_lido_hafen",
+      "name": "Lido Hafen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_alter_hafen_dusseldorf_ehemaliger_sicherheitshafen",
+      "name": "Alter Hafen Düsseldorf - Ehemaliger Sicherheitshafen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_rheinstrand",
+      "name": "Rheinstrand",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_medienhafen_dusseldorf_e_v",
+      "name": "MedienHafen Düsseldorf e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_hafen",
+      "name": "Hafen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_marina_dusseldorf",
+      "name": "Marina Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_brucke_am_medienhafen",
+      "name": "Brücke am Medienhafen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_sporthafen_lorick",
+      "name": "Sporthafen Lörick",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_innside_by_melia_dusseldorf_hafen",
+      "name": "INNSiDE by Meliá Düsseldorf Hafen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_kd_ablegestelle",
+      "name": "KD Ablegestelle",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_meerbar_restaurant_bar_lounge_im_dusseldorfer_medienhafen",
+      "name": "MEERBAR | Restaurant, Bar & Lounge im Düsseldorfer Medienhafen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_hafen_pizzeria_doner",
+      "name": "Hafen Pizzeria & Döner",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_kunstpalast",
+      "name": "Kunstpalast",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_kunsthalle_dusseldorf",
+      "name": "Kunsthalle Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_k20_kunstsammlung_nordrhein_westfalen",
+      "name": "K20, Kunstsammlung Nordrhein-Westfalen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_k21_kunstsammlung_nordrhein_westfalen",
+      "name": "K21, Kunstsammlung Nordrhein-Westfalen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_stadtmuseum_dusseldorf",
+      "name": "Stadtmuseum Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_nrw_forum_dusseldorf",
+      "name": "NRW-Forum Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_goethe_museum_dusseldorf",
+      "name": "Goethe-Museum Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_mahn_und_gedenkstatte_dusseldorf",
+      "name": "Mahn- und Gedenkstätte Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_aquazoo_lobbecke_museum_dusseldorf",
+      "name": "Aquazoo Löbbecke Museum Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_kunst_im_tunnel",
+      "name": "Kunst im Tunnel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_kunstmuseum_duesseldorf_im_ehrenhof",
+      "name": "Kunstmuseum Duesseldorf im Ehrenhof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_schifffahrtmuseum",
+      "name": "SchifffahrtMuseum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_skulpturenpark_auf_dem_metro_campus_in_dusseldorf",
+      "name": "Skulpturenpark auf dem METRO-Campus in Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_little_tokyo_dusseldorf",
+      "name": "Little Tokyo Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_tmd_theatermuseum_hofgartenhaus_dusseldorf",
+      "name": "TMD Theatermuseum Hofgartenhaus Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_sammlung_philara",
+      "name": "Sammlung Philara",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_heinrich_heine_institut",
+      "name": "Heinrich-Heine-Institut",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_st_maria_empfangnis",
+      "name": "St. Mariä Empfängnis",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_st_josephkapelle",
+      "name": "St. Josephkapelle",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_evangelische_johanneskirche_stadtkirche_evangelischer_kirchenkreis_d",
+      "name": "Evangelische Johanneskirche/Stadtkirche - Evangelischer Kirchenkreis Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_neanderkirche_dusseldorf",
+      "name": "Neanderkirche Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_st_maximilian",
+      "name": "St. Maximilian",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_st_peter",
+      "name": "St. Peter",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_st_apollinaris",
+      "name": "St. Apollinaris",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_kath_kirche_st_antonius",
+      "name": "Kath. Kirche St. Antonius",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_st_rochus",
+      "name": "St. Rochus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_st_elisabeth",
+      "name": "St. Elisabeth",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_heilig_geist_kapelle_im_uniklinikum_dusseldorf",
+      "name": "Heilig-Geist-Kapelle im Uniklinikum Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_calvary_chapel_dusseldorf_e_v",
+      "name": "Calvary Chapel Düsseldorf e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_stoffeler_kapelle",
+      "name": "Stoffeler Kapelle",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_st_antonius",
+      "name": "St. Antonius",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_new_life_church_dusseldorf",
+      "name": "New Life Church Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_freie_evangelische_gemeinde_dusseldorf",
+      "name": "Freie evangelische Gemeinde Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_versammlungshalle_der_gemeinde_in_dusseldorf",
+      "name": "Versammlungshalle der Gemeinde in Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_kreuzkirche_evangelische_kirchengemeinde_dusseldorf_mitte",
+      "name": "Kreuzkirche (Evangelische Kirchengemeinde Düsseldorf-Mitte)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_neckereibrunnen",
+      "name": "Neckereibrunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_cornelius_brunnen_dusseldorf",
+      "name": "cornelius brunnen düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_tritonenbrunnen",
+      "name": "Tritonenbrunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_brunnen_am_carlsplatz",
+      "name": "Brunnen am Carlsplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_gansebrunnen_dusseldorf",
+      "name": "Gänsebrunnen Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_musikbrunnen",
+      "name": "Musikbrunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_kriegerdenkmal_im_hofgarten",
+      "name": "Kriegerdenkmal im Hofgarten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_heinrich_heine_denkmal",
+      "name": "Heinrich-Heine-Denkmal",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_marchenbrunnen",
+      "name": "Märchenbrunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_mack_brunnen",
+      "name": "Mack-Brunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_bismarck_denkmal",
+      "name": "Bismarck-Denkmal",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_denkmal_peter_von_cornelius",
+      "name": "Denkmal Peter von Cornelius",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_landtagsbrunnen",
+      "name": "Landtagsbrunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_die_kugelspielerin",
+      "name": "Die Kugelspielerin",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_antes_brunnen",
+      "name": "Antes-Brunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_sudpark",
+      "name": "Südpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_naturschutzgebiet_himmelgeister_rheinbogen",
+      "name": "Naturschutzgebiet Himmelgeister Rheinbogen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_schone_aussicht",
+      "name": "Schöne Aussicht",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_stadt_natur_park_flingern",
+      "name": "Stadt-Natur-Park Flingern",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_volksgarten_dusseldorf",
+      "name": "Volksgarten Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_nordpark_dusseldorf",
+      "name": "Nordpark Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_rheinpark_bilk",
+      "name": "Rheinpark Bilk",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_standehauspark",
+      "name": "Ständehauspark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_nordliche_dussel",
+      "name": "Nördliche Düssel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_rheinpark_golzheim",
+      "name": "Rheinpark Golzheim",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_zoopark",
+      "name": "Zoopark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_florapark",
+      "name": "Florapark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_park_an_der_dussel",
+      "name": "Park an der Düssel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_ostpark_dusseldorf",
+      "name": "Ostpark Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_ihz_park",
+      "name": "IHZ-Park",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_sternwartpark",
+      "name": "Sternwartpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_alter_bilker_friedhof_sternwartpark_dusseldorf",
+      "name": "Alter Bilker Friedhof - Sternwartpark, Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_aussichtsturm_elbsee",
+      "name": "Aussichtsturm Elbsee",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_aussichtsplattform_am_rheinufer",
+      "name": "Aussichtsplattform am Rheinufer",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_rheinturm_park_view",
+      "name": "Rheinturm Park View",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_rheinturm_dusseldorf_gespiegelt",
+      "name": "Rheinturm Düsseldorf - gespiegelt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_leuchtturm",
+      "name": "Leuchtturm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_gsv_golf_sport_verein_dusseldorf_e_v",
+      "name": "GSV Golf-Sport-Verein Düsseldorf e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_ruff_indoor_golf_dusseldorf",
+      "name": "RUFF Indoor Golf - Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_freizeitbad_dusselstrand",
+      "name": "Freizeitbad Düsselstrand",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_schwarzlicht_minigolf_dusseldorf_golfzone",
+      "name": "Schwarzlicht Minigolf Düsseldorf | GolfZone",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_cosmo_sports",
+      "name": "COSMO SPORTS",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_glowing_rooms_3d_schwarzlicht_minigolf_dusseldorf",
+      "name": "Glowing Rooms 3D Schwarzlicht Minigolf Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_sportzentrum_nord",
+      "name": "Sportzentrum Nord",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_munster_therme",
+      "name": "Münster-Therme",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_golf_house_filiale_dusseldorf",
+      "name": "Golf House Filiale Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_sportplatz_uni_dusseldorf",
+      "name": "Sportplatz Uni Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_holmes_place_dusseldorf_konigsallee",
+      "name": "Holmes Place Düsseldorf Königsallee",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_axtwerfen_dusseldorf_axezone",
+      "name": "Axtwerfen Düsseldorf | AxeZone",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_holocafe_dusseldorf",
+      "name": "Holocafé Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_freizeit_und_sportpark_schlesische_strasse",
+      "name": "Freizeit und Sportpark Schlesische Straße",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_altstadt_dusseldorf",
+      "name": "Altstadt Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_aussichtspunkt_skyline_dusseldorf",
+      "name": "Aussichtspunkt Skyline Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_aussichtspunkt_rennbahn",
+      "name": "Aussichtspunkt Rennbahn",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_blick_in_den_alten_rhein",
+      "name": "Blick in den Alten Rhein",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_aussichtspunkt_dreiecksweiher",
+      "name": "Aussichtspunkt Dreiecksweiher",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_aussichtpunkt_urdenbacher_kampe",
+      "name": "Aussichtpunkt Urdenbacher Kämpe",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_rather_blick",
+      "name": "Rather Blick",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_aussichtspunkt",
+      "name": "Aussichtspunkt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_aussichtspunkt_nach_dusseldorf",
+      "name": "Aussichtspunkt nach Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_aussichtspunkt_deichsee",
+      "name": "Aussichtspunkt Deichsee",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_aussichtspunkt_menzelsee",
+      "name": "Aussichtspunkt Menzelsee",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_deutsche_oper_am_rhein_ballett_am_rhein",
+      "name": "Deutsche Oper am Rhein / Ballett am Rhein",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_dusseldorfer_schauspielhaus",
+      "name": "Düsseldorfer Schauspielhaus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_singlewandern_treffpunkt_dusseldorf_grafenberg",
+      "name": "SINGLEWANDERN® Treffpunkt Düsseldorf Grafenberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_rheinknie_dusseldorf",
+      "name": "Rheinknie (Düsseldorf)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_dussel_unterfuhrung_wersten",
+      "name": "Düssel Unterführung Wersten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_dussel_unterfuhrung",
+      "name": "Düssel Unterführung",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_entenparadies_mit_schoner_aussicht",
+      "name": "Entenparadies mit schöner Aussicht",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_naturschutzgebiet_rotthauser_bachtal",
+      "name": "Naturschutzgebiet Rotthäuser Bachtal",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_dusselauslauf",
+      "name": "Düsselauslauf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_dussel_wersten",
+      "name": "Düssel Wersten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_eselsbach_mundung",
+      "name": "Eselsbach Mündung",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_trimmparcours",
+      "name": "Trimmparcours",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_fischtreppen_bruckerbach",
+      "name": "Fischtreppen Brückerbach",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_adfc_allgemeiner_deutscher_fahrrad_club_dusseldorf_e_v",
+      "name": "ADFC Allgemeiner Deutscher Fahrrad-Club Düsseldorf e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_rad_ab_werkstatt",
+      "name": "Rad ab Werkstatt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_radstation_dusseldorf",
+      "name": "Radstation Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_die_edelhelfer_dusseldorf",
+      "name": "Die Edelhelfer Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_storck_bicycle_store_dusseldorf",
+      "name": "Storck Bicycle Store Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_rad_ab_verkauf",
+      "name": "Rad Ab Verkauf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_cube_store_dusseldorf_powered_by_lucky_bike",
+      "name": "Cube Store Düsseldorf powered by Lucky Bike",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_drahtesel_dusseldorf",
+      "name": "Drahtesel Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_fahrrad_de_store_dusseldorf",
+      "name": "fahrrad.de Store Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_radfieber_dusseldorf",
+      "name": "Radfieber Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_zweirad_center_stadler_dusseldorf_gmbh_co_kg",
+      "name": "Zweirad-Center Stadler Düsseldorf GmbH & Co. KG",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_giant_store_dusseldorf",
+      "name": "GIANT STORE Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_lucky_bike_dusseldorf_sud",
+      "name": "Lucky Bike Düsseldorf Süd",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_zweirad_re_cycler_e_k",
+      "name": "Zweirad re-Cycler e.K",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_magno_bike_gmbh",
+      "name": "Magno Bike GmbH",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_cycles_dusseldorf_bilk_zweiradmechanikerbetrieb",
+      "name": "Cycles Düsseldorf-Bilk Zweiradmechanikerbetrieb",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_cycling_club_dusseldorf_e_v",
+      "name": "Cycling Club Düsseldorf e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_fahrradshop_flingern",
+      "name": "Fahrradshop Flingern",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_bauernhof_sudpark",
+      "name": "Bauernhof Südpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_paintball_shop_dusseldorf",
+      "name": "Paintball Shop Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_spielplatz_wildpark_grafenberg",
+      "name": "Spielplatz Wildpark Grafenberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_wildpark_dusseldorf_grafenberg",
+      "name": "Wildpark Düsseldorf Grafenberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_freizeitpark_heerdt",
+      "name": "Freizeitpark Heerdt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_freizeitpark_ulenbergstrasse",
+      "name": "Freizeitpark Ulenbergstraße",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_7th_space_dusseldorf_virtual_reality_axtwerfen",
+      "name": "7th Space Düsseldorf - Virtual Reality & Axtwerfen!",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_megazoo_dusseldorf",
+      "name": "MEGAZOO Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_jump_galaxy_trampolinpark",
+      "name": "Jump Galaxy Trampolinpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_arrow_tag_dusseldorf_mit_mister_neo_jga_und_team_events",
+      "name": "Arrow Tag Düsseldorf mit Mister Neo - JGA und Team Events",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_souvenir_dusseldorf",
+      "name": "Souvenir-Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_dusseldorf_souvenirs_by_foto_sohn",
+      "name": "Düsseldorf-Souvenirs by Foto Söhn",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_jeckes_ladchen",
+      "name": "Jeckes Lädchen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_s_strene_grene",
+      "name": "Søstrene Grene",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_yo_european_trading_souvenirs_gmbh",
+      "name": "Yo (European) Trading & Souvenirs GmbH",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_hofgarten",
+      "name": "Hofgarten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_schloss_benrath",
+      "name": "Schloss Benrath",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_konigsallee",
+      "name": "Königsallee",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_botanischer_garten_dusseldorf",
+      "name": "Botanischer Garten Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_rheinpromenade",
+      "name": "Rheinpromenade",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_brunnen_mit_wasserspiel_dusseldorf",
+      "name": "Brunnen mit Wasserspiel Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_herz_jesu_kloster",
+      "name": "Herz-Jesu-Kloster",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_st_adolfus",
+      "name": "St. Adolfus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_alt_st_martin",
+      "name": "Alt St. Martin",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_st_maria_himmelfahrt_liebfrauen",
+      "name": "St. Mariä Himmelfahrt (Liebfrauen)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_berger_kirche",
+      "name": "Berger Kirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_agape_dusseldorf_junge_kirche_worship",
+      "name": "AGAPE Düsseldorf – Junge Kirche & Worship",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_schloss_eller",
+      "name": "Schloss Eller",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_tor_3",
+      "name": "Tor 3",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_freunde_schloss_und_park_benrath_e_v",
+      "name": "Freunde Schloss und Park Benrath e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_schloss_elbroich",
+      "name": "Schloß Elbroich",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_messe_dusseldorf_tor_1",
+      "name": "Messe Düsseldorf Tor 1",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_schloss_kalkum",
+      "name": "Schloss Kalkum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_spiegelweiher_schloss_benrath",
+      "name": "Spiegelweiher Schloss Benrath",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_schloss_benrath_garten_schlosspark",
+      "name": "Schloß Benrath, Garten / Schlosspark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_schloss_mickeln",
+      "name": "Schloss Mickeln",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_schlossmeierhof",
+      "name": "Schlossmeierhof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_ratinger_tor",
+      "name": "Ratinger Tor",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_schlosspark_benrath",
+      "name": "Schlosspark Benrath",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_schlusseldienst_dusseldorf_schloss",
+      "name": "Schlüsseldienst Düsseldorf Schloss",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_schlosspark_eller",
+      "name": "Schlosspark Eller",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_museum_fur_naturkunde_stiftung_schloss_und_park_benrath",
+      "name": "Museum für Naturkunde Stiftung Schloss und Park Benrath",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_panoramatreppe_unterbacher_see",
+      "name": "Panoramatreppe Unterbacher See",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_panorama",
+      "name": "Panorama",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_aussichtspunkt_hafen_und_gehry_gebaude",
+      "name": "Aussichtspunkt Hafen und Gehry-Gebäude",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_aussichtsplattform_elbsee",
+      "name": "Aussichtsplattform Elbsee",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_japanischer_garten",
+      "name": "Japanischer Garten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_nebeneingang_botanischer_garten",
+      "name": "Nebeneingang Botanischer Garten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_wasserachse_und_dahliengarten",
+      "name": "Wasserachse und Dahliengarten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_bauerngarten",
+      "name": "Bauerngarten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_alpinum",
+      "name": "Alpinum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_konifereninseln",
+      "name": "Konifereninseln",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_china",
+      "name": "China",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_mitteleuropa",
+      "name": "Mitteleuropa",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_rheingartchen",
+      "name": "Rheingärtchen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_gemeinschaftsgarten_dusselgrun_e_v",
+      "name": "Gemeinschaftsgarten düsselgrün e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_wassergraben_idr_schloss_eller",
+      "name": "Wassergraben IDR Schloss Eller",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_dussel",
+      "name": "Düssel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_dussel_im_volksgarten",
+      "name": "Düssel im Volksgarten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_fft_dusseldorf_forum_freies_theater",
+      "name": "FFT Düsseldorf – Forum Freies Theater",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_capitol_theater",
+      "name": "Capitol Theater",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_savoy_theater",
+      "name": "Savoy Theater",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_theater_an_der_ko",
+      "name": "Theater an der Kö",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_junges_schauspiel",
+      "name": "Junges Schauspiel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_neknerf_kasperltheater_dusseldorf",
+      "name": "Neknerf Kasperltheater Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_ballettprobenhaus",
+      "name": "Ballettprobenhaus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_theater_an_der_luegallee",
+      "name": "Theater an der Luegallee",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_orphea_theater_dusseldorf",
+      "name": "Orphea-Theater Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_theatergemeinde_dusseldorf",
+      "name": "Theatergemeinde Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_theaterfabrik",
+      "name": "Theaterfabrik",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_rheinfahre_zons_urdenbach_anleger_dusseldorf",
+      "name": "Rheinfähre Zons-Urdenbach Anleger Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_the_harbor_club",
+      "name": "The Harbor Club",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_d_alter_hafen",
+      "name": "D-Alter Hafen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_kunst_im_hafen_e_v",
+      "name": "Kunst im Hafen e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_dnw3_dusseldorf_amazon_deutschland_transport",
+      "name": "DNW3 - Düsseldorf Amazon Deutschland Transport",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_dch_dusseldorfer_container_hafen_gmbh",
+      "name": "DCH Düsseldorfer Container Hafen GmbH",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_bocconcino_italiener_mediterran_restaurant_dusseldorf_medienhafen",
+      "name": "Bocconcino Italiener mediterran | Restaurant Düsseldorf Medienhafen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_wasserspielplatz_zoopark",
+      "name": "Wasserspielplatz Zoopark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_spielplatz_am_zoo_ii",
+      "name": "Spielplatz am Zoo II",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_grafenberger_wald",
+      "name": "Grafenberger Wald",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_gino_s_kinderland_indoorspielplatz_dusseldorf",
+      "name": "Gino's Kinderland Indoorspielplatz Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_stadtfuhrungen_dusseldorf_taste_the_city",
+      "name": "Stadtführungen Düsseldorf - Taste The City",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_hotrod_tour_dusseldorf",
+      "name": "HOTROD TOUR Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_action_rib",
+      "name": "Action RIB",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_stadtstreicherin_stadtfuhrungen_in_dusseldorf_und_paris_mit_antje_ka",
+      "name": "Stadtstreicherin - Stadtführungen in Düsseldorf und Paris mit Antje Kahnt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_the_walkings_free_tour_dusseldorf",
+      "name": "The Walkings - Free Tour Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_stadtpfade",
+      "name": "Stadtpfade",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_dusseltours_fuhrungen_in_dusseldorf",
+      "name": "DüsselTours - Führungen in Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_segwaypoint_dusseldorf",
+      "name": "SegwayPoint Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_dusseldorf_bike_tours",
+      "name": "Düsseldorf Bike Tours",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_dusseldorfer_lowensenfladen",
+      "name": "Düsseldorfer Löwensenfladen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_villa_duckdich_das_geschenke_ladchen",
+      "name": "Villa Duckdich - Das Geschenke-Lädchen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_confiserie_heinemann",
+      "name": "Confiserie Heinemann",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_konditorei_heinemann",
+      "name": "Konditorei Heinemann",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_lettinis_italienische_feinkost_weine_geschenkkorbe_online_shop_und_o",
+      "name": "Lettinis - Italienische Feinkost, Weine, Geschenkkörbe & Online Shop und Online Tastings",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_torquato_quartier_dusseldorf",
+      "name": "Torquato Quartier Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_rheinischer_bauernmarkt_dusseldorf_pempelfort",
+      "name": "Rheinischer Bauernmarkt Düsseldorf-Pempelfort",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_wochenmarkt_auf_dem_barbarossaplatz",
+      "name": "Wochenmarkt auf dem Barbarossaplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_bauernmarkt_oberbilk",
+      "name": "Bauernmarkt Oberbilk",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_wochenmarkt_eller",
+      "name": "WOCHENMARKT ELLER",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_rheinischer_bauernmarkt_friedensplatzchen",
+      "name": "Rheinischer Bauernmarkt Friedensplätzchen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_markt_auf_dem_hermannplatz",
+      "name": "Markt auf dem Hermannplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_wochenmarkt_ahnfeldplatz",
+      "name": "Wochenmarkt Ahnfeldplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_wochenmarkt_lorick",
+      "name": "Wochenmarkt Lörick",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_ufa_palast_dusseldorf",
+      "name": "UFA-Palast Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_uci_dusseldorf",
+      "name": "UCI Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_bambi_filmstudio",
+      "name": "Bambi Filmstudio",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_alltours_kino",
+      "name": "Alltours Kino",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_cinestar_dusseldorf",
+      "name": "CineStar Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_einstein_klettern_in_der_boulderhalle_dusseldorf",
+      "name": "einstein - Klettern in der Boulderhalle Düsseldorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_monkeyspot_boulderhalle_dusseldorf",
+      "name": "MONKEYSPOT BOULDERHALLE DÜSSELDORF",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_superblock_boulderhalle",
+      "name": "Superblock Boulderhalle",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_kletterspielplatz_sudpark",
+      "name": "Kletterspielplatz Südpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_kletterspielplatz",
+      "name": "Kletterspielplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_wegkreuz_straussenkreuz",
+      "name": "Wegkreuz (Straußenkreuz)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_bildstock",
+      "name": "Bildstock",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_wegekreuz_oberbilk",
+      "name": "Wegekreuz, Oberbilk",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_wegekreuz_st_maria_rosenkranz",
+      "name": "Wegekreuz St. Maria Rosenkranz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_wegekreuz_stationskreuz_anno_1904",
+      "name": "Wegekreuz/Stationskreuz (anno 1904)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "duesseldorf_motor_yacht_club_dusseldorf_e_v",
+      "name": "Motor-Yacht-Club Düsseldorf e. V.",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "duesseldorf_c_est_la_vie_der_geschenkeladen",
+      "name": "C'est la vie - Der Geschenkeladen",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    }
+  ]
+}

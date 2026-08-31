@@ -42,6 +42,7 @@ import {
   namedBookingPortalPromptHints,
   userRequiresNamedBookingPortal,
 } from './bookingPlatformActions';
+import { isCelestialOrSkyQuery } from './celestialSkyQuery';
 import {
   isEventResearchQuery,
   researchTodaysEvents,
@@ -49,6 +50,21 @@ import {
   type EventResearchResult,
 } from './eventResearchService';
 import type { WebResearchResult } from '../research/webResearchService';
+
+/** Pack-POIs nur im Speech-Fokus der Pack-Stadt; sonst live/GPS-Stadt. */
+function packDatasetUsableForSuggestions(): boolean {
+  try {
+    const { isPackSpeechAllowed } = require('../softWorkingCity') as {
+      isPackSpeechAllowed: () => boolean;
+    };
+    return isPackSpeechAllowed();
+  } catch {
+    return true;
+  }
+}
+
+/** Harte Distanz: Pack-POI jenseits davon nie vorschlagen (andere Stadt). */
+const PACK_SUGGEST_MAX_M = 20_000;
 
 export type ConciergeKind =
   | 'food'
@@ -171,12 +187,14 @@ export function detectConciergeKind(text: string): ConciergeKind | null {
   if (WEATHER_RE.test(t)) return 'weather';
   if (INFRA_RE.test(t)) return 'infra';
   if (FOOD_RE.test(t)) return 'food';
-  if (TODAY_VIBES_RE.test(t) || CONCIERGE_ANY.test(t)) return 'general';
+  if (isTodayVibesQuery(t) || CONCIERGE_ANY.test(t)) return 'general';
   return null;
 }
 
 export function isTodayVibesQuery(text: string): boolean {
-  return TODAY_VIBES_RE.test(text.trim());
+  const t = text.trim();
+  if (isCelestialOrSkyQuery(t)) return false;
+  return TODAY_VIBES_RE.test(t);
 }
 
 export function queryWantsCarRental(text: string, kind?: ConciergeKind | null): boolean {
@@ -286,6 +304,7 @@ export async function findAccommodationCandidates(
   }>
 > {
   const coords = userCoords();
+  if (!packDatasetUsableForSuggestions()) return [];
   const pois = await getAllPois();
   const wantCheap = /\b(günstig|guenstig|billig|budget|hostel)\b/iu.test(text);
   const wantApartment =
@@ -301,7 +320,18 @@ export async function findAccommodationCandidates(
 
   for (const poi of pois) {
     if (!isAccommodationPoi(poi)) continue;
-    const blob = `${poi.name} ${(poi.category ?? '')} ${(poi.teaser_text ?? '')}`.toLowerCase();
+    let distanceM: number | null = null;
+    let walkMinutes: number | null = null;
+    if (coords) {
+      distanceM = Math.round(
+        haversineMeters(coords.lat, coords.lng, poi.lat, poi.lng),
+      );
+      if (distanceM > PACK_SUGGEST_MAX_M) continue;
+      walkMinutes = walkMin(distanceM);
+    }
+
+    const blob =
+      `${poi.name} ${(poi.category ?? '')} ${(poi.teaser_text ?? '')}`.toLowerCase();
     let score = 20;
     let why = 'Unterkunft vor Ort';
     if (/hotel/i.test(blob)) {
@@ -317,14 +347,7 @@ export async function findAccommodationCandidates(
       why = 'Ferienwohnung / Apartment';
     }
     if (wantCheap && /(hostel|budget|günstig)/i.test(blob)) score += 10;
-
-    let distanceM: number | null = null;
-    let walkMinutes: number | null = null;
-    if (coords) {
-      distanceM = Math.round(
-        haversineMeters(coords.lat, coords.lng, poi.lat, poi.lng),
-      );
-      walkMinutes = walkMin(distanceM);
+    if (distanceM != null) {
       score += Math.max(0, 30 - Math.min(30, Math.floor(distanceM / 200)));
     }
 
@@ -498,6 +521,7 @@ async function buildFoodCandidates(
   }>
 > {
   const coords = userCoords();
+  if (!packDatasetUsableForSuggestions()) return [];
   const pois = (await getAllPois()).filter(isGastroPoi);
   const scored: Array<{
     poi: Poi;
@@ -605,6 +629,7 @@ function formatDistCasual(distanceM: number, walkMinutes: number): string {
 
 async function buildTodayCandidates(limit = 3): Promise<TodayCandidate[]> {
   const coords = userCoords();
+  if (!packDatasetUsableForSuggestions()) return [];
   const pois = await getAllPois();
   const scored: Array<TodayCandidate & { score: number }> = [];
 
@@ -719,6 +744,7 @@ async function buildInfraCandidates(
   Array<{ poi: Poi; distanceM: number; walkMinutes: number; why: string }>
 > {
   const coords = userCoords();
+  if (!packDatasetUsableForSuggestions()) return [];
   const pois = await getAllPois();
   const wantBike = /fahrrad|stadtrad|leih|bike/i.test(text);
   const wantAtm = /geldautomat|bankomat|atm|bargeld/i.test(text);
@@ -821,6 +847,24 @@ export async function prepareConciergeContext(
         'Wetter in Tipps mitdenken (Regen→Indoor/Jacke, Hitze→Schatten/Pause, Wind→geschützt).',
       );
     }
+  }
+
+  try {
+    if (coords) {
+      const { maybeGrowPackFromUserTurn } = await import(
+        '../research/packGrowthFromTurn'
+      );
+      const grown = await maybeGrowPackFromUserTurn({
+        userText: text,
+        lat: coords.lat,
+        lng: coords.lng,
+      });
+      if (grown?.promptBlock) {
+        parts.push(grown.promptBlock);
+      }
+    }
+  } catch {
+    /* soft */
   }
 
   let eventResearch: EventResearchResult | null = null;
@@ -1014,7 +1058,7 @@ export async function prepareConciergeContext(
           else alternatives.push(offer);
         });
         parts.push(
-          'speechText PFLICHT: genau 2 Tipps aussprechen (nicht 3). Pro Tipp: KURZER Name + Entfernung/Gehzeit + Motto/Highlight. ' +
+          'speechText PFLICHT: genau 2 Tipps, flüssig gewebt (kein „Erstens“). Pro Tipp: Name + Entfernung/Gehzeit + Motto/Highlight in den Satz. ' +
             'KEINE Adressen, KEINE vollen DB-Marketingtitel (Slogan/Klammern kürzen). ' +
             'Kumpelton, keine Bullet-Liste im speechText. Am Ende: „Welchen nehmen wir?“ ' +
             'quickActions: GENAU diese 2 Orte als START_NAVIGATION — Label = kurzer Ortsname. KEINE Chip-Flut. ' +
@@ -1185,7 +1229,7 @@ export async function prepareConciergeContext(
       }
     }
     parts.push(
-      'Bei Regen: aktive Empfehlung (jetzt los ODER Indoor). Bei Outfit-Fragen: Wetter kurz erklären (Jetzt + Tageshoch/Trend) + Kleidung am Tagesverlauf — nicht nur Morgenkühle; begründete Tipps in visualBullets. Action-Outro nur wenn sinnvoll.',
+      'Bei Regen: aktive Empfehlung (jetzt los ODER Indoor). Bei Outfit-Fragen: Wetter kurz erklären (Jetzt + Tageshoch/Trend) + Kleidung für Jetzt und den Rest des Tages — keine nachgetragene Morgenkühle, Abend nur kühl nennen wenn belegt; begründete Tipps in visualBullets. Action-Outro nur wenn sinnvoll.',
     );
     wantsLiveSearch = true;
   }

@@ -1,0 +1,39 @@
+{
+  "scenarioId": "aut_quiet_desk_outlet",
+  "question": "Wir wollen was Ruhiges mit Wifi und Steckdose, nicht laut — zum Arbeiten eine Stunde.",
+  "at": "2026-08-29T00:20:00Z",
+  "call1": {
+    "source": "scripts/phase0bCall1Probe.ts (Gemini + Denkrahmen)",
+    "file": ".cursor/phase0b/aut_quiet_desk_outlet-call1.json",
+    "checksFile": ".cursor/phase0b/aut_quiet_desk_outlet-checks.json",
+    "checks": {
+      "ziel_klar": true,
+      "luecken_ehrlich": true,
+      "work_sinnvoll": true,
+      "keine_venues_in_call1": true,
+      "execution_passend": true,
+      "call2Brief_struktur": true
+    },
+    "verdict": "PASS",
+    "summary": {
+      "bridge": "Ich suche dir gerne einen ruhigen Ort zum Arbeiten mit WLAN und Steckdose…",
+      "execution": "pitch_module",
+      "mustHaves": ["WLAN", "Steckdose", "ruhig"],
+      "criteria": ["wifi/30", "power_outlet/30", "quiet/25"],
+      "when": "now (keine Fake-Uhr)",
+      "call2Brief": "Top-2 ruhige Arbeitsorte mit WLAN/Steckdose"
+    }
+  },
+  "device": {
+    "verdict": "PARTIAL",
+    "ask": "submitted (Tippfeld ging auf, Frage abgesendet)",
+    "uiAfter": "Karte/Home (Wetter 16°) — keine sichtbare Concierge-Antwort im Dump",
+    "logcatCall1": "kein [call1]-Treffer (Release ohne __DEV__ oder alter Bundle)",
+    "artifacts": [
+      ".cursor/phase0b/aut_quiet_desk_outlet-device.xml",
+      ".cursor/phase0b/aut_quiet_desk_outlet-device-texts.txt",
+      ".cursor/phase0b/aut_quiet_desk_outlet-device.png"
+    ],
+    "note": "End-to-End Speech/Buttons nicht belegt. Call-1-Bewertung aus Probe. Neue APK 2.0.26 noch nicht installiert."
+  }
+}

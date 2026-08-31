@@ -114,6 +114,17 @@ export async function requestSpeechDelivery(opts: {
 
   const kind = opts.kind ?? 'assistant';
 
+  try {
+    const { isReisebueroOverlayOpen } = require('../../reisebuero/store') as {
+      isReisebueroOverlayOpen: () => boolean;
+    };
+    if (isReisebueroOverlayOpen() && kind !== 'assistant') {
+      return false;
+    }
+  } catch {
+    /* soft */
+  }
+
   // Profile: Stumm / Nur Text — kein TTS; Untertitel = derselbe Text
   if (!wantsSpokenAudio()) {
     try {

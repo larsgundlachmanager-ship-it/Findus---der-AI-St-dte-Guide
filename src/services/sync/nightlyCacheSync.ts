@@ -178,15 +178,36 @@ export async function pushCommunityCacheImmediate(): Promise<void> {
   try {
     const since = now - 10 * 60_000;
     const delta = await collectCacheDelta(since);
+    let poiDrafts: Array<Record<string, unknown>> = [];
+    try {
+      const { getUnsyncedPoiDrafts } = await import(
+        '../research/poiDiscoveryResearch'
+      );
+      const drafts = await getUnsyncedPoiDrafts();
+      poiDrafts = drafts.slice(0, 20).map((d) => ({
+        kind: 'poi_draft',
+        place_id: d.id,
+        name: d.name,
+        lat: d.lat,
+        lng: d.lng,
+        types_json: JSON.stringify([d.category ?? 'landmark']),
+        facts_json: JSON.stringify(d.facts),
+        city_id: d.cityId,
+        fetched_at_ms: d.researchedAtMs,
+      }));
+    } catch {
+      poiDrafts = [];
+    }
     if (
       !delta.landmarks.length &&
       !delta.geocodes.length &&
-      !delta.streetViews.length
+      !delta.streetViews.length &&
+      !poiDrafts.length
     ) {
       return;
     }
     const cityHint = getCachedUserProfile()?.cityId ?? null;
-    const ok = await uploadDelta({ ...delta, cityHint });
+    const ok = await uploadDelta({ ...delta, cityHint, poiDrafts });
     if (__DEV__ && ok) {
       console.log(
         `[community-cache] immediate push L=${delta.landmarks.length} G=${delta.geocodes.length} SV=${delta.streetViews.length}`,
@@ -279,6 +300,15 @@ export async function runNightlyCacheSync(opts?: {
     /* soft */
   }
 
+  try {
+    const { tryAutoUploadPendingFeedback } = await import(
+      '../feedback/feedbackUploadService'
+    );
+    await tryAutoUploadPendingFeedback();
+  } catch {
+    /* soft — Feedback-Upload darf Cache-Sync nicht blockieren */
+  }
+
   const ok = await uploadDelta({
     landmarks,
     geocodes,
@@ -330,6 +360,12 @@ export function startNightlyCacheSyncMonitor(): () => void {
 
   const tick = () => {
     void runNightlyCacheSync();
+    void import('../feedback/feedbackUploadService')
+      .then((m) => m.tryAutoUploadPendingFeedback())
+      .catch(() => undefined);
+    void import('../diagnostics/deviceCostUpload')
+      .then((m) => m.uploadDeviceCostDay())
+      .catch(() => undefined);
   };
   tick();
   timer = setInterval(tick, 15 * 60_000);

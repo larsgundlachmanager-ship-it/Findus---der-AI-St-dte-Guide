@@ -8,7 +8,6 @@ import { getAllPois, haversineMeters } from '../../db/database';
 import type { Poi } from '../../db/types';
 import { useFinnusStore } from '../../store/useFinnusStore';
 import { useUserMemoryStore, type UserEntity } from '../../store/useUserMemoryStore';
-import { getCachedUserProfile } from '../userProfileService';
 import {
   geocodePlaceName,
   hasGoogleMapsNavKey,
@@ -241,12 +240,34 @@ async function resolvePlaceLabel(
     }
   }
 
-  // 3) Geocode
-  const profile = getCachedUserProfile();
+  // 3) Geocode — Bias = Live-GPS-Stadt, nie Home-Profil
+  let cityHint: string | null = null;
+  try {
+    const { nearestCityName, loadNearbyCitiesFromIndex } = require('./fuzzyCityResolve') as {
+      nearestCityName: (
+        lat: number | null,
+        lng: number | null,
+        cities: Array<{ name: string; lat: number; lng: number }>,
+      ) => string | null;
+      loadNearbyCitiesFromIndex: () => Array<{
+        name: string;
+        lat: number;
+        lng: number;
+      }>;
+    };
+    const st = useFinnusStore.getState();
+    cityHint = nearestCityName(
+      st.lastGpsLat,
+      st.lastGpsLng,
+      loadNearbyCitiesFromIndex(),
+    );
+  } catch {
+    cityHint = null;
+  }
   const geo = await geocodePlaceName(q, {
     biasLat: origin.lat,
     biasLng: origin.lng,
-    cityHint: profile?.cityName ?? profile?.cityId ?? null,
+    cityHint,
   });
   if (geo) {
     return {

@@ -186,8 +186,34 @@ function generateTimeResolverActions(leaveByMs: number, nowMs: number): any[] {
 
 export function activateCompoundSessionPlan(
   parsed: CompoundPlanParseResult,
-  opts?: { now?: Date },
+  opts?: { now?: Date; userText?: string },
 ): { plan: SessionPlan; reply: string; actions: any[] } | null {
+  // Legacy SessionPlan für Tages-Multi-Stops ist retired — Modul 5 ist SSOT.
+  try {
+    const { shouldBlockLegacyCompoundPlan } = require('../../module2/planning/planHandoffGuard') as {
+      shouldBlockLegacyCompoundPlan: (t: string) => boolean;
+    };
+    if (opts?.userText && shouldBlockLegacyCompoundPlan(opts.userText)) {
+      console.warn(
+        '[planning] legacy compound blocked — Modul 5 owns day plans',
+      );
+      return null;
+    }
+  } catch {
+    /* soft */
+  }
+  const timedFixed = parsed.stops.filter(
+    (s) =>
+      (s.kind === 'fixed' || s.kind === 'hotel') &&
+      Boolean(s.arriveByLocal),
+  );
+  if (timedFixed.length >= 2 || (parsed.stops.length >= 3 && !parsed.freeRoam)) {
+    console.warn(
+      '[planning] legacy compound blocked (multi timed stops) — use Modul 5',
+    );
+    return null;
+  }
+
   if (!parsed.isCompound || parsed.stops.length < 2) return null;
 
   const now = opts?.now ?? new Date();

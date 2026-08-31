@@ -1,5 +1,5 @@
 /**
- * Immediate local notifications when Findus wants to speak but phone is locked
+ * Immediate local notifications when Yorro wants to speak but phone is locked
  * without headset (no pocket speaker). Short teaser + sound/vibrate → tap for full TTS.
  */
 
@@ -20,8 +20,8 @@ async function ensureSpeechChannel(): Promise<void> {
   await configureNotificationHandler();
   if (Platform.OS !== 'android' || channelReady) return;
   await Notifications.setNotificationChannelAsync(SPEECH_ALERT_CHANNEL_ID, {
-    name: 'Findus Hinweise',
-    description: 'Kurzinfo wenn Findus etwas sagen möchte — mit Ton und Vibration',
+    name: 'Yorro Hinweise',
+    description: 'Kurzinfo wenn Yorro etwas sagen möchte — mit Ton und Vibration',
     importance: Notifications.AndroidImportance.HIGH,
     vibrationPattern: [0, 220, 100, 220],
     lightColor: '#C4A35A',

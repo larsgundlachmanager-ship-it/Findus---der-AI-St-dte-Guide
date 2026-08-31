@@ -25,21 +25,21 @@ export type StampMapLegendItem = {
 export const STAMP_MAP_LEGEND: StampMapLegendItem[] = [
   {
     id: 'modul1',
-    label: 'Modul 1',
+    label: 'Erkunden',
     /** Legenden-Chip; Pin-Farben kommen bei Aktivierung aus Interest-Tönen */
-    color: '#5B8DEF',
+    color: '#C4A86A',
   },
-  { id: 'essen', label: 'Essen', color: '#E07A5F' },
-  { id: 'cafe', label: 'Café', color: '#C4A35A' },
-  { id: 'kultur', label: 'Kultur', color: '#7B68EE' },
-  { id: 'natur', label: 'Natur / Aussicht', color: '#3DCF7A' },
-  { id: 'kirche', label: 'Kirche', color: '#A8B5AE' },
-  { id: 'transport', label: 'Bahn / Transport', color: '#5B8DEF' },
-  { id: 'hotel', label: 'Übernachtung', color: '#D4A0C4' },
-  { id: 'einkaufen', label: 'Einkaufen', color: '#F2CC8F' },
-  { id: 'service', label: 'Service / Geld', color: '#6EC6C0' },
-  { id: 'freizeit', label: 'Freizeit', color: '#81B29A' },
-  { id: 'sonstiges', label: 'Sonstiges', color: '#9CA3AF' },
+  { id: 'essen', label: 'Essen', color: '#C4785E' },
+  { id: 'cafe', label: 'Café', color: '#B08948' },
+  { id: 'kultur', label: 'Kultur', color: '#7A6FB0' },
+  { id: 'natur', label: 'Natur / Aussicht', color: '#5FA88A' },
+  { id: 'kirche', label: 'Kirche', color: '#8F9893' },
+  { id: 'transport', label: 'Bahn / Transport', color: '#5B84C4' },
+  { id: 'hotel', label: 'Übernachtung', color: '#A889A0' },
+  { id: 'einkaufen', label: 'Einkaufen', color: '#C4A86A' },
+  { id: 'service', label: 'Service / Geld', color: '#6A9E98' },
+  { id: 'freizeit', label: 'Freizeit', color: '#6F9A82' },
+  { id: 'sonstiges', label: 'Sonstiges', color: '#8B9290' },
 ];
 
 const COLOR_BY_ID = Object.fromEntries(

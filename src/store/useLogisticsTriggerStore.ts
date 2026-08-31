@@ -112,6 +112,15 @@ type LogisticsTriggerState = {
     /** Minuten vor Leave-by für Hauptwarnung (Prio 1–2 → 30, ab 3 → 5). */
     warnLeadMin?: number;
     planPriority?: number | null;
+    /**
+     * strict = Bahn/Flug (knapp = kritisch)
+     * forgiving = Parkticket (~10 Min drüber ok, weniger Nag)
+     */
+    deadlineSoftness?: 'strict' | 'forgiving' | null;
+    /** IBNR / Stop für Live-Poll */
+    stopId?: string | null;
+    directionHint?: string | null;
+    platform?: string | null;
   }) => { event: LogisticsEvent; triggers: LogisticsTrigger[]; leaveByMs: number };
   /** Simple absolute time reminder (call someone at 18:00). */
   upsertTimeReminder: (input: {
@@ -122,8 +131,8 @@ type LogisticsTriggerState = {
     alertLevel?: LogisticsTrigger['alertLevel'];
   }) => { event: LogisticsEvent; trigger: LogisticsTrigger };
   /**
-   * Wecker-Rhythmus: Mikro → 35-Min-Warnung → Wecker-Moment.
-   * Hard-Feuer übernimmt der native Wecker; hier progressive Checks.
+   * Wecker-Rhythmus: nur stille Mikro-Checks (ÖPNV/Lage).
+   * Kein Vorwarn-Speak — Hard-Feuer = nativer Systemwecker.
    */
   upsertWakeWatch: (input: {
     eventId?: string;
@@ -332,6 +341,12 @@ export const useLogisticsTriggerStore = create<LogisticsTriggerState>(
               ? 'train'
               : 'reminder';
 
+      const prio =
+        typeof input.planPriority === 'number' ? input.planPriority : null;
+      const warnLeadMin =
+        input.warnLeadMin ??
+        (prio != null && prio >= 3 ? 5 : 30);
+
       const event = get().upsertEvent({
         id: input.eventId,
         kind: eventKind,
@@ -358,13 +373,17 @@ export const useLogisticsTriggerStore = create<LogisticsTriggerState>(
           destLng: input.destLng ?? null,
           destName: input.destName ?? input.stationName ?? null,
           connectionStatus: input.connectionStatus ?? 'unknown',
-          warnLeadMin: input.warnLeadMin ?? null,
+          warnLeadMin,
           planPriority: input.planPriority ?? null,
+          deadlineSoftness: input.deadlineSoftness ?? 'strict',
+          stopId: input.stopId ?? null,
+          directionHint: input.directionHint ?? null,
+          platform: input.platform ?? null,
         },
       });
 
       const schedule = buildCheckSchedule(plan.leaveByMs, now, 'leave', {
-        warnLeadMin: input.warnLeadMin,
+        warnLeadMin,
       });
       const kept = get().triggers.filter(
         (t) =>
@@ -376,11 +395,12 @@ export const useLogisticsTriggerStore = create<LogisticsTriggerState>(
         kind: LogisticsCheckKind,
         role?: 'micro' | 'warn' | 'hard',
       ): LogisticsTrigger['alertLevel'] => {
-        if (role === 'micro' || kind === 'coarse' || kind === 'prep') {
-          return 'silent';
+        if (role === 'micro') return 'silent';
+        // 30- / 5-Min-Ansage + Hard → Stimme (Push allein reicht nicht)
+        if (role === 'warn' || role === 'hard' || kind === 'leave') {
+          return 'voice';
         }
-        if (role === 'warn' || kind === 'safety') return 'push';
-        if (kind === 'leave') return 'voice';
+        if (kind === 'coarse' || kind === 'prep') return 'silent';
         return 'hud';
       };
 
@@ -472,7 +492,7 @@ export const useLogisticsTriggerStore = create<LogisticsTriggerState>(
         id: eventId,
         kind: 'alarm',
         title: input.title,
-        detail: `Wecker ${formatClockMs(input.wakeAtMs)} · Vorwarnung 35 Min`,
+        detail: `Wecker ${formatClockMs(input.wakeAtMs)} · stille ÖPNV-Checks`,
         atMs: input.wakeAtMs,
         status: 'active',
         meta: {
@@ -498,25 +518,19 @@ export const useLogisticsTriggerStore = create<LogisticsTriggerState>(
         fireAtMs: cp.atMs,
         status: 'scheduled' as const,
         nextPollAtMs:
-          cp.role === 'hard'
-            ? null
-            : now +
-              nextPollIntervalMs({
-                leaveByMs: input.leaveByMs ?? input.wakeAtMs,
-                nowMs: now,
-              }),
+          now +
+          nextPollIntervalMs({
+            leaveByMs: input.leaveByMs ?? input.wakeAtMs,
+            nowMs: now,
+          }),
         leaveByMs: input.leaveByMs ?? input.wakeAtMs,
         walkEtaMin: null,
         arrivalBufferMin: null,
         delayMin: 0,
         mode: null,
         stationScale: null,
-        alertLevel:
-          cp.role === 'micro'
-            ? 'silent'
-            : cp.role === 'warn'
-              ? 'push'
-              : 'voice',
+        // Wecker: immer silent — Speech nur bei akutem ÖPNV-Problem (Guardian)
+        alertLevel: 'silent' as const,
         createdAtMs: now,
         updatedAtMs: now,
         lastFiredAtMs: null,
@@ -651,6 +665,19 @@ export const useLogisticsTriggerStore = create<LogisticsTriggerState>(
             : typeof meta.connectionStatus === 'string'
               ? meta.connectionStatus
               : 'unknown',
+        warnLeadMin:
+          typeof meta.warnLeadMin === 'number' ? meta.warnLeadMin : undefined,
+        planPriority:
+          typeof meta.planPriority === 'number' ? meta.planPriority : null,
+        deadlineSoftness:
+          meta.deadlineSoftness === 'forgiving' ||
+          meta.deadlineSoftness === 'strict'
+            ? meta.deadlineSoftness
+            : meta.mode === 'car'
+              ? 'forgiving'
+              : 'strict',
+        stopId: typeof meta.stopId === 'string' ? meta.stopId : null,
+        platform: typeof meta.platform === 'string' ? meta.platform : null,
       });
     },
 

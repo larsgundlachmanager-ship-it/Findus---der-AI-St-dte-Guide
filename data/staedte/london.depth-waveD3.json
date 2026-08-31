@@ -1,0 +1,581 @@
+{
+  "notes": [
+    "Deep-Research-Welle D3. Stabile historische, architektonische und kulturelle Angaben wurden gegen offizielle Betreiber-, Kommunal-, Museums- und Fachquellen geprüft.",
+    "Hauptquellen: Historic England; London Borough of Brent; Southbank Centre; Tate; Royal Museums Greenwich; Institution of Structural Engineers; The Monument/City of London; Tower Hamlets Council; The Royal Parks; Madame Tussauds; Westminster City Council; Network Rail.",
+    "Eintrittspreise, Öffnungszeiten, Führungen, Veranstaltungen, Sperrungen und Verkehrslagen sind veränderlich und deshalb ausschließlich als LIVE-Hinweis formuliert."
+  ],
+  "spots": [
+    {
+      "id": "london_wembley_stadium",
+      "name": "Wembley Stadium",
+      "general_info": "Das heutige Wembley Stadium eröffnete 2007 auf dem Gelände des 1923 errichteten Empire Stadium. Als englisches Nationalstadion verbindet es Fußballgeschichte und Großkonzerte mit einer markanten Ingenieurleistung: dem weithin sichtbaren, tragenden Wembley-Bogen.",
+      "deep_data_pool": [
+        {
+          "text": "Das erste Stadion entstand als Mittelpunkt der British Empire Exhibition von 1924/25. Sir John Simpson und Maxwell Ayrton entwarfen es, Sir Owen Williams verantwortete wesentliche Ingenieurarbeit. Nach dem ersten Spatenstich durch König George V wurde der Bau in nur zehn Monaten fertiggestellt und am 28. April 1923 eröffnet.",
+          "tags": ["geschichte", "architektur"]
+        },
+        {
+          "text": "Das Eröffnungsspiel war das FA-Cup-Finale 1923 zwischen Bolton Wanderers und West Ham United. Wegen der gewaltigen Menschenmenge ging es als „White Horse Final“ in die Geschichte ein: Der Polizist George Scorey half auf seinem hell wirkenden Pferd Billie, die Zuschauer vom Spielfeld zurückzudrängen.",
+          "tags": ["geschichte", "sport"]
+        },
+        {
+          "text": "Die beiden 126 Fuß hohen Türme des alten Stadions wurden zum Wahrzeichen. Ihre Kuppeln griffen Formen der Mogularchitektur auf, bestanden aber aus dem damals modernen Stahlbeton. Der Bau galt als Meilenstein der britischen Betonbauweise; ursprünglich war sogar erwogen worden, ihn nach der Empire Exhibition wieder abzureißen.",
+          "tags": ["architektur", "technik"]
+        },
+        {
+          "text": "Unternehmer Arthur Elvin sicherte das wirtschaftliche Überleben des alten Wembley unter anderem durch Windhundrennen und Speedway. Später wurde die Anlage zum Schauplatz des olympischen Wettbewerbs von 1948, des englischen WM-Siegs von 1966, großer FA-Cup-Endspiele und des Live-Aid-Konzerts von 1985.",
+          "tags": ["geschichte", "sport", "musik"]
+        },
+        {
+          "text": "Das alte Stadion schloss im Oktober 2000; der Abbruch begann 2002, einschließlich der berühmten Twin Towers. Der Neubau auf demselben Gelände wurde von Foster + Partners und dem Sportarchitekturbüro Populous entworfen, 2007 vollendet und besitzt 90.000 überdachte Sitzplätze.",
+          "tags": ["geschichte", "architektur"]
+        },
+        {
+          "text": "Der stählerne Gitterbogen steigt rund 133 Meter auf, überspannt 315 Meter und ist um etwa 22 Grad geneigt. Er trägt die gesamte Last des nördlichen Dachs und einen großen Teil des südlichen Dachs. Dadurch waren die ursprünglich erwogenen Dachmasten überflüssig und die Sichtlinien im Stadion blieben frei.",
+          "tags": ["technik", "architektur", "visuell"]
+        },
+        {
+          "text": "Unter der Spielfeldmitte wurde 2005 eine kugelförmige Zeitkapsel versenkt. Ihre Inhalte dokumentieren Erinnerungen an die vielfältige Rolle Wembleys seit den 1920er Jahren. Das Spielfeld liegt beim Neubau tiefer, während die Tribünen näher ans Spielgeschehen gerückt wurden als im Vorgängerbau.",
+          "tags": ["detail", "geschichte"]
+        },
+        {
+          "text": "Eigentümerin des neuen Wembley ist über ihre Stadiongesellschaft die Football Association, deren Hauptsitz sich im Gebäude befindet. Das erklärt die besondere Rolle als Nationalstadion: Hier werden die meisten Heimspiele der englischen Männernationalmannschaft und traditionell das FA-Cup-Finale ausgetragen.",
+          "tags": ["sport", "institution"]
+        },
+        {
+          "text": "LIVE: Wembley ist weiterhin ein aktiver Veranstaltungsort. Spielplan, Konzerttermine, Stadiontouren, Einlassregeln, zulässige Taschen, Anreisebeschränkungen und Ticketpreise müssen am Besuchstag über Wembley Stadium beziehungsweise den jeweiligen Veranstalter geprüft werden.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": []
+    },
+    {
+      "id": "london_southbank_centre",
+      "name": "Southbank Centre",
+      "general_info": "Das Southbank Centre ist Großbritanniens größtes Kunstzentrum und geht auf das Festival of Britain von 1951 zurück. Auf elf Acres vereint es Royal Festival Hall, Queen Elizabeth Hall, Purcell Room, Hayward Gallery und öffentliche Außenräume am Themseufer.",
+      "deep_data_pool": [
+        {
+          "text": "Das Festival of Britain sollte 1951, ein Jahrhundert nach der Great Exhibition, britische Leistungen in Kunst, Wissenschaft, Technik und Design zeigen und nach Krieg und Austerität Zuversicht stiften. Sein Hauptgelände lag am South Bank; die Ausstellungen dort zogen in fünf Monaten etwa 8,5 Millionen Besuche an.",
+          "tags": ["geschichte", "stadtgeschichte"]
+        },
+        {
+          "text": "Clement Attlee legte den Grundstein der Royal Festival Hall. König George VI eröffnete sie am 3. Mai 1951; am selben Abend dirigierten Sir Adrian Boult und Sir Malcolm Sargent das erste Konzert. Von den eigentlichen Festivalbauten am South Bank blieb nur diese Halle dauerhaft erhalten.",
+          "tags": ["geschichte", "musik"]
+        },
+        {
+          "text": "Sir Robert Matthew, Leslie Martin und Hubert Bennett entwarfen die Royal Festival Hall als modernes Kulturhaus. Das Auditorium wurde vom umgebenden Gebäude entkoppelt – oft als „Ei in einer Schachtel“ beschrieben –, um es gegen Bahnlärm zu isolieren. 1981 wurde sie als erster bedeutender Nachkriegsbau Grade I gelistet.",
+          "tags": ["architektur", "technik"]
+        },
+        {
+          "text": "1967 eröffnete Queen Elizabeth II den brutalistischen Komplex aus Queen Elizabeth Hall und Purcell Room; die Hayward Gallery folgte 1968. Sichtbeton, Terrassen und erhöhte Wege verkörpern eine bewusst andere Nachkriegsmoderne als die leichtere, festliche Architektur der Royal Festival Hall.",
+          "tags": ["architektur", "geschichte"]
+        },
+        {
+          "text": "Am 15. Januar 1968 fand in der Queen Elizabeth Hall das erste Londoner Konzert elektronischer Musik britischer Komponisten statt. Beteiligt waren unter anderem Delia Derbyshire, Peter Zinovieff und Tristram Cary – Namen, die für frühe britische Studio- und Synthesizerexperimente stehen.",
+          "tags": ["musik", "kulturgeschichte"]
+        },
+        {
+          "text": "Die Hayward Gallery zeigte früh programmatische zeitgenössische Kunst. 1972 erhielt Bridget Riley dort als erste zeitgenössische Malerin eine umfassende Retrospektive. 1989/90 präsentierte Rasheed Araeen „The Other Story“, eine wegweisende Ausstellung zu Künstlern afrikanischer, asiatischer und karibischer Herkunft im Nachkriegsbritannien.",
+          "tags": ["kunst", "geschichte"]
+        },
+        {
+          "text": "Seit der „open foyer“-Politik des Greater London Council von 1983 sind die Foyers stärker als öffentlicher Stadtraum gedacht. Zum elf Acres großen Areal gehören auch Freiflächen; unter der Queen Elizabeth Hall entwickelte sich ein international bekanntes Skateboard-Areal, das aus eigenständiger Nutzungskultur hervorging.",
+          "tags": ["stadtleben", "kultur"]
+        },
+        {
+          "text": "In der Royal Festival Hall befindet sich die National Poetry Library. Das Southbank Centre beschreibt sie als weltweit größte öffentlich zugängliche Sammlung moderner Lyrik. Damit ergänzt ein spezialisiertes Literaturarchiv die Konzert-, Ausstellungs- und Performancefunktionen des Komplexes.",
+          "tags": ["literatur", "sammlung"]
+        },
+        {
+          "text": "LIVE: Ausstellungen, Konzerte, Literaturveranstaltungen, Workshops, Zugang zu Terrassen und Foyers sowie mögliche Baustellen wechseln laufend. Auch kostenlose Angebote und Eintrittspreise sind vor Ort programmabhängig und müssen über den aktuellen Kalender des Southbank Centre geprüft werden.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": []
+    },
+    {
+      "id": "london_tate_britain",
+      "name": "Tate Britain",
+      "general_info": "Tate Britain bewahrt die nationale Sammlung britischer Kunst vom 16. Jahrhundert bis zur Gegenwart. Das 1897 eröffnete Haus auf dem Gelände des ehemaligen Millbank-Gefängnisses verbindet einen tempelartigen viktorianischen Kernbau mit späteren Erweiterungen, besonders der Clore Gallery für Turner.",
+      "deep_data_pool": [
+        {
+          "text": "Der Ortsname Millbank verweist auf eine Mühle der Westminster Abbey. Für die Galerie wählte man 1892 das Gelände des zuvor abgebrochenen Millbank Prison. Der Gefängniskomplex hatte zeitweise als Sammelstelle für Gefangene gedient, die in britische Kolonien transportiert werden sollten.",
+          "tags": ["ortsgeschichte", "geschichte"]
+        },
+        {
+          "text": "Der Zuckerunternehmer und Kunstsammler Henry Tate bot dem Staat seine Sammlung britischer Kunst des 19. Jahrhunderts an und unterstützte den Neubau mit 80.000 Pfund. Gemeinsam mit Werken aus der National Gallery bildete seine Stiftung den Grundstock des neuen Museums.",
+          "tags": ["sammlung", "geschichte"]
+        },
+        {
+          "text": "Sidney R. J. Smith entwarf den Kernbau. Sein erster, stärker dekorierter Vorschlag mit Adlern und Kuppeln wurde als zu prätentiös abgelehnt. Der ausgeführte Entwurf mit Portikus, zentraler Kuppel und Britannia-Gruppe aus Löwe und Einhorn sollte Würde, Tradition und den nationalen Auftrag sichtbar machen.",
+          "tags": ["architektur", "visuell"]
+        },
+        {
+          "text": "Der Prince of Wales eröffnete die National Gallery of British Art am 21. Juli 1897; für das Publikum öffnete sie am 16. August. Obwohl der offizielle Name zunächst anders lautete, sprach man nach dem Stifter bald von der Tate Gallery. Seit März 2000 heißt das Millbank-Haus Tate Britain.",
+          "tags": ["geschichte", "name"]
+        },
+        {
+          "text": "Die Trennung von Aufgaben wurde 2000 deutlich: Internationale moderne und zeitgenössische Kunst zog schwerpunktmäßig in die neue Tate Modern, während Tate Britain sich auf britische Kunst konzentrierte. Die Sammlung reicht von Tudor-Porträts bis zu Gegenwartskunst und umfasst Malerei, Skulptur, Arbeiten auf Papier, Archiv und Bibliothek.",
+          "tags": ["sammlung", "museum"]
+        },
+        {
+          "text": "J. M. W. Turners Vermächtnis an die Nation ist ein Kernbestand. Die 1987 eröffnete Clore Gallery von James Stirling wurde eigens für Turner und verwandte Bestände geschaffen; finanziert wurde sie durch Charles Clore und Vivien Duffield gemeinsam mit dem britischen Staat.",
+          "tags": ["kunst", "architektur"]
+        },
+        {
+          "text": "Caruso St John erneuerten zentrale Bereiche des Hauses bis 2013. Eine neue Marmortreppe stärkte die Sichtbeziehungen in der Rotunde; Terrazzo-Muster erinnern an den ursprünglichen Mosaikboden. Nischen der Rotunde wurden wieder als Ausstellungsorte genutzt, und die unteren Gewölbe erhielten neue öffentliche Funktionen.",
+          "tags": ["architektur", "restaurierung"]
+        },
+        {
+          "text": "Tate Britain ist eng mit dem Turner Prize verbunden, den Tate 1984 einführte und nach J. M. W. Turner benannte. Die Präsentation der Nominierten findet nicht ausnahmslos in Millbank statt, doch Preisgeschichte, Turner-Vermächtnis und die Auseinandersetzung mit aktueller britischer Kunst greifen hier institutionell ineinander.",
+          "tags": ["kunst", "institution"]
+        },
+        {
+          "text": "LIVE: Die Dauersammlung ist von wechselnden Sonderausstellungen, Raumrotationen und Leihverkehr betroffen. Aktuelle Öffnungszeiten, kostenpflichtige Ausstellungen, Reservierungsregeln, geschlossene Säle und der Zugang zur Clore Gallery sind ausschließlich über Tate am Besuchstag zu prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": []
+    },
+    {
+      "id": "london_queens_house",
+      "name": "Queen's House",
+      "general_info": "Das 1635 vollendete Queen’s House in Greenwich gilt als erster bewusst klassizistischer Bau Großbritanniens. Inigo Jones’ streng proportionierte weiße Villa brach radikal mit der roten Tudorarchitektur und bildet heute das Zentrum der berühmten Sichtachse des UNESCO-Welterbes Maritime Greenwich.",
+      "deep_data_pool": [
+        {
+          "text": "Anne von Dänemark, Gemahlin James’ I., beauftragte Inigo Jones 1616 mit einem Garten- und Lusthaus. Nach ihrem Tod 1619 blieb der Bau unvollendet. Jones führte ihn später für Königin Henrietta Maria, Gemahlin Charles’ I., weiter; die Struktur war 1635 fertig.",
+          "tags": ["geschichte", "royal"]
+        },
+        {
+          "text": "Eine öffentliche Straße zwischen dem Tudorpalast am Fluss und dem königlichen Jagdgebiet durchschnitt das Gelände. Jones plante das Haus so, dass zwei Hälften die Straße überbrückten. Damit wurde es zugleich Rückzugsort, Tor zwischen Palast und Park und Bühne für höfische Kunst und Feste.",
+          "tags": ["architektur", "ortsgeschichte"]
+        },
+        {
+          "text": "Jones hatte 1613/14 Italien bereist und die Villen Andrea Palladios studiert. Symmetrie, klare Geometrie und klassische Ordnungen waren im damaligen England revolutionär. Gegenüber dem unregelmäßigen roten Backstein des Tudorpalasts wirkte der weiße Kubus so fremd und modern wie ein späterer Glasbau.",
+          "tags": ["architektur", "einordnung"]
+        },
+        {
+          "text": "Der Great Hall ist als Würfel von 40 Fuß Kantenlänge entworfen. Sein weiß-goldenes Farbschema bezog sich auf Henrietta Marias französische Herkunft. Der 1636/37 unter Nicholas Stone verlegte Boden aus weißem italienischem Bardiglio- und schwarzem belgischem Marmor spiegelt die Geometrie der Decke.",
+          "tags": ["innenraum", "architektur"]
+        },
+        {
+          "text": "Die Tulip Stairs sind die früheste zentral nicht abgestützte Wendeltreppe Großbritanniens. Ihre Stufen greifen konstruktiv ineinander und leiten die Last in die Wand. Der Name beruht auf den stilisierten Blumen im schmiedeeisernen Geländer, die auch als Lilien gedeutet werden.",
+          "tags": ["technik", "visuell"]
+        },
+        {
+          "text": "Als Christopher Wren Ende des 17. Jahrhunderts das heutige Old Royal Naval College plante, verlangte Queen Mary II, die Sicht vom Queen’s House zum Fluss dürfe nicht blockiert werden. Wren teilte den Komplex deshalb in spiegelbildliche Flügel mit offenem Mittelraum – Grundlage der heutigen monumentalen Achse.",
+          "tags": ["quer", "architektur"]
+        },
+        {
+          "text": "1937 öffnete das Haus als Teil des neuen National Maritime Museum für die Öffentlichkeit. Heute zeigt es Kunst der Royal Museums Greenwich, darunter maritime Bilder und höfische Porträts. Zum bedeutenden Bestand gehört eine Fassung des Armada Portrait von Elizabeth I.",
+          "tags": ["museum", "kunst"]
+        },
+        {
+          "text": "Seit 1997 ist das Queen’s House Bestandteil des UNESCO-Welterbes Maritime Greenwich. Die Auszeichnung umfasst das Ensemble aus königlichem Park, Queen’s House und den späteren maritimen Bauten; gerade die freie Mittelachse macht die über Jahrhunderte abgestimmte Planung des Ortes ablesbar.",
+          "tags": ["welterbe", "ensemble"]
+        },
+        {
+          "text": "LIVE: Eintrittsmodell, Öffnungszeiten, verfügbare Räume, Führungen und temporäre Kunstinstallationen können wechseln. Royal Museums Greenwich weist aktuelle Zugangsregeln aus; auch eine grundsätzlich kostenlose Besichtigung kann an Zeitfenster, Sonderveranstaltungen oder Schließungen gebunden sein.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": []
+    },
+    {
+      "id": "london_millennium_bridge",
+      "name": "Millennium Bridge",
+      "general_info": "Die 2000 eröffnete Millennium Bridge ist eine reine Fußgängerbrücke zwischen St Paul’s Cathedral und Tate Modern. Ihr extrem flaches Profil hält die Blickachse frei; berühmt wurde sie zugleich durch das seitliche Schwingen am Eröffnungstag und die anschließend entwickelte Dämpfungstechnik.",
+      "deep_data_pool": [
+        {
+          "text": "Ein Wettbewerb von 1996 brachte den Entwurf „blade of light“ hervor, entwickelt von Foster and Partners, Arup und dem Bildhauer Sir Anthony Caro. Die Idee war eine möglichst dünne Linie über der Themse, damit die Brücke den Blick auf St Paul’s und die Stadtsilhouette wenig beeinträchtigt.",
+          "tags": ["architektur", "entwurf"]
+        },
+        {
+          "text": "Die Fußgängerbrücke ist rund 325 Meter lang und besitzt drei Hauptfelder. Acht Stahlseile verlaufen ungewöhnlich niedrig seitlich unterhalb der Gehfläche; Querarme tragen das Deck. Diese flache Hängebrückenform unterscheidet sie sichtbar von Brücken mit hohen Pylonen und darüber geführten Kabeln.",
+          "tags": ["technik", "visuell"]
+        },
+        {
+          "text": "Am 10. Juni 2000 wurde die Brücke für die Öffentlichkeit geöffnet. Große Menschenmengen erzeugten unerwartete seitliche Bewegungen; Zutrittsbegrenzungen lösten das Problem nicht. Am 12. Juni wurde sie geschlossen und erhielt in der Presse und Bevölkerung den dauerhaften Spitznamen „Wobbly Bridge“.",
+          "tags": ["geschichte", "technik"]
+        },
+        {
+          "text": "Arup bezeichnete den Mechanismus als synchrone laterale Anregung. Kleine zufällige Seitwärtsbewegungen verändern den Gang der Fußgänger; Menschen passen ihre Schritte unbewusst der Bewegung an und übertragen dadurch weitere seitliche Kraft auf das Deck. So kann sich eine Rückkopplung in einer dichten Menge verstärken.",
+          "tags": ["technik", "physik"]
+        },
+        {
+          "text": "Messungen zeigten besonders anfällige seitliche Eigenfrequenzen um 0,49 und 0,77 Hertz. Die Forschung ergab, dass das Phänomen nicht durch die besondere Gestalt allein verursacht wurde: Auch andere Brücken mit niedriger lateraler Frequenz, genügend Fußgängern und geringer Dämpfung können vergleichbar reagieren.",
+          "tags": ["technik", "forschung"]
+        },
+        {
+          "text": "Die Nachrüstung kombinierte viskose Flüssigkeitsdämpfer mit abgestimmten Massendämpfern. Letztere bewegen Zusatzmassen so, dass sie Schwingungen entgegenwirken; insgesamt wurden 52 abgestimmte Massendämpfer eingebaut. Die Geräte liegen größtenteils unsichtbar unter dem Deck und bewahren so den ursprünglichen Ausdruck.",
+          "tags": ["technik", "ingenieurwesen"]
+        },
+        {
+          "text": "Nach umfangreichen Versuchen – darunter Belastungstests mit hunderten Personen – öffnete die Brücke am 22. Februar 2002 wieder. Seither wurden keine vergleichbaren erheblichen Schwingungen gemeldet. Der Zwischenfall wurde zu einem international wichtigen Lehrbeispiel für Mensch-Bauwerk-Interaktion.",
+          "tags": ["geschichte", "forschung"]
+        },
+        {
+          "text": "Die Brücke schafft eine direkte Fußachse zwischen dem Vorplatz von St Paul’s auf der Nordseite und Bankside mit Tate Modern sowie Shakespeare’s Globe im Süden. Vom Südufer aus erscheint die Kathedrale nahezu in Verlängerung des Decks – eine städtebauliche Wirkung, die das niedrige Tragwerk bewusst unterstützt.",
+          "tags": ["orientierung", "stadtbild"]
+        },
+        {
+          "text": "LIVE: Die Brücke ist grundsätzlich ein öffentlicher Fußweg, kann aber bei Sicherheitslagen, Wartung, Veranstaltungen oder starkem Wetter zeitweise eingeschränkt werden. Aktuelle Sperrungen und Uferzugänge sind über City of London beziehungsweise lokale Verkehrsinformationen zu prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": []
+    },
+    {
+      "id": "london_the_monument",
+      "name": "The Monument",
+      "general_info": "The Monument erinnert an den Großen Brand von 1666 und an den Wiederaufbau der City. Die 1671 bis 1677 von Robert Hooke und Christopher Wren entwickelte dorische Säule aus Portlandstein ist 202 Fuß hoch – genau so weit steht sie vom Brandherd in Pudding Lane entfernt.",
+      "deep_data_pool": [
+        {
+          "text": "Der Große Brand begann am 2. September 1666 in der Bäckerei Thomas Farriners in Pudding Lane und wütete vier Tage. Enge Straßen, dicht stehende Holzhäuser und ein trockener Sommer begünstigten die Ausbreitung. Große Teile der mittelalterlichen City wurden zerstört und etwa 100.000 Menschen obdachlos.",
+          "tags": ["geschichte", "stadtbrand"]
+        },
+        {
+          "text": "Das Monument steht auf dem Areal von St Margaret, New Fish Street, der ersten Kirche, die das Feuer zerstörte. Seine Höhe von 202 Fuß beziehungsweise rund 61 Metern entspricht der horizontalen Entfernung zum Ausgangspunkt des Brandes; umgelegt würde die Säulenspitze diesen Bereich erreichen.",
+          "tags": ["ortsgeschichte", "symbolik"]
+        },
+        {
+          "text": "Robert Hooke entwickelte den Entwurf in enger Abstimmung mit Sir Christopher Wren, Surveyor-General unter Charles II. Der Bau begann 1671 und dauerte sechs Jahre. Beschaffung und sicherer Transport ausreichend großer Blöcke aus Portlandstein verzögerten sich auch wegen des Krieges mit den Niederlanden 1672–74.",
+          "tags": ["geschichte", "bau"]
+        },
+        {
+          "text": "Die kannelierte dorische Säule ist von einer vergoldeten Flammenurne bekrönt. Relief und Inschriften am Sockel erzählen Brand und Wiederaufbau aus der Perspektive des späten 17. Jahrhunderts. Das Grade-I-gelistete Bauwerk gehört zu den markantesten freistehenden Steinsäulen der Welt.",
+          "tags": ["architektur", "visuell"]
+        },
+        {
+          "text": "311 Wendeltreppenstufen führen zur öffentlichen Plattform, die etwa 160 Fuß beziehungsweise 48,7 Meter über dem Boden liegt. Die enge Treppe und die Aussicht machen die innere Konstruktion erfahrbar; die nutzbare Plattform liegt deutlich unterhalb der vergoldeten Flamme.",
+          "tags": ["architektur", "aussicht"]
+        },
+        {
+          "text": "Wren und Hooke planten die Säule zugleich als wissenschaftliches Instrument. Ein unterirdisches Labor war mit dem hohlen Schaft verbunden, der als riesiges Zenitteleskop sowie für Pendel- und Schwerkraftexperimente dienen sollte. Vibrationen des städtischen Verkehrs verhinderten jedoch präzise astronomische Messungen.",
+          "tags": ["wissenschaft", "technik"]
+        },
+        {
+          "text": "Das Monument feiert nicht nur die Katastrophe, sondern auch die wiederaufgebaute City. Wren entwarf nach dem Brand St Paul’s Cathedral und zahlreiche City-Kirchen; seine radikalen Gesamtpläne für ein neues Straßennetz wurden dagegen größtenteils nicht umgesetzt.",
+          "tags": ["stadtgeschichte", "quer"]
+        },
+        {
+          "text": "Das Bauwerk prägte seine unmittelbare Umgebung auch sprachlich: Die nahe Underground-Station trägt den Namen Monument und wurde 1884 eröffnet. Monument Street, die erst im späten 19. Jahrhundert entstand, erhielt ebenfalls ihren Namen von der Säule – nicht umgekehrt.",
+          "tags": ["name", "verkehrsgeschichte"]
+        },
+        {
+          "text": "LIVE: Öffnung der Treppe, Eintrittspreis, letzte Einlasszeit und mögliche Sperrungen der Plattform sind tagesabhängig. Wegen der 311 engen Stufen und der exponierten Aussicht gelten eigene Zugangs- und Sicherheitsregeln; verbindlich ist ausschließlich die aktuelle Seite von The Monument.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": []
+    },
+    {
+      "id": "london_brick_lane",
+      "name": "Brick Lane",
+      "general_info": "Brick Lane ist eine historische Nord-Süd-Straße im East End, deren Name auf die Ziegelherstellung aus lokalen Lehmgruben verweist. Ihre Häuser, Gewerbe und Gotteshäuser dokumentieren besonders dicht die aufeinanderfolgenden Hugenotten-, jüdischen und bengalischen Migrationsgeschichten von Spitalfields.",
+      "deep_data_pool": [
+        {
+          "text": "Bevor die Stadt heranwuchs, war Brick Lane ein Feldweg außerhalb der Citymauer, östlich des Priorats St Mary Spital, von dem Spitalfields seinen Namen erhielt. Die Straße wurde nach der Ziegelproduktion aus Lehmgruben nördlich in Richtung Bethnal Green benannt; Landwirtschaft und Bogenschießen prägten ebenfalls das Gebiet.",
+          "tags": ["ortsgeschichte", "name"]
+        },
+        {
+          "text": "Seit den 1680er Jahren ließen sich viele französische Protestanten nieder, die vor religiöser Verfolgung flohen. Hugenottische Weber und Händler brachten Kenntnisse aus Städten wie Lyon und Nantes mit und machten Spitalfields zu einem Zentrum der Londoner Seidenweberei.",
+          "tags": ["migration", "wirtschaftsgeschichte"]
+        },
+        {
+          "text": "Die schmalen, hohen Häuser der Hugenotten in Nebenstraßen wie Fournier Street verbanden Wohnen und Produktion. Große obere Fenster brachten Licht an die Webstühle. Architektur und Parzellen erzählen deshalb nicht nur von Wohlstand, sondern von einer Heimindustrie, die ganze Familien und Zulieferketten beschäftigte.",
+          "tags": ["architektur", "arbeit"]
+        },
+        {
+          "text": "Im späten 19. Jahrhundert kamen viele jiddischsprachige Juden aus Russland und Osteuropa, verstärkt nach Pogromen ab 1881. Sie bauten Schulen, Zeitungen, Vereine und Betriebe auf und arbeiteten häufig in Bekleidungs- und Textilgewerben. Mit wachsendem Wohlstand zogen viele Familien später in nördliche Vororte.",
+          "tags": ["migration", "geschichte"]
+        },
+        {
+          "text": "Das Gebäude an der Ecke Fournier Street verdichtet diese Schichten: 1743/44 als Hugenottenkapelle errichtet, später methodistische Kirche, ab 1898 Synagoge und seit den 1970er Jahren Moschee. Als Brick Lane Jamme Masjid dient es der bengalisch-muslimischen Gemeinde.",
+          "tags": ["religion", "architektur", "migration"]
+        },
+        {
+          "text": "Bengalische und besonders sylhetische Seeleute waren über Handels- und Schifffahrtsrouten schon früh im East End präsent. Nach dem Zweiten Weltkrieg und mit weiterer Migration aus Ostpakistan beziehungsweise Bangladesh wuchs die Gemeinde stark. Viele übernahmen Textilbetriebe oder eröffneten Lebensmittelgeschäfte und Restaurants.",
+          "tags": ["migration", "sozialgeschichte"]
+        },
+        {
+          "text": "Der Beiname Banglatown verweist auf die sichtbare bengalische Prägung, ist aber nur eine Schicht der Gegenwart. Märkte, Mode, Nachtleben, Ateliers, Street Art und Technologieunternehmen überlagern die ältere Gewerbe- und Migrationslandschaft; diese Dynamik bringt zugleich Debatten um Gentrifizierung und Verdrängung mit sich.",
+          "tags": ["stadtleben", "gegenwart"]
+        },
+        {
+          "text": "Zur jüdischen Infrastruktur von Spitalfields gehörten Schulen, Vereine, Betriebe und Presse. Der Jewish Chronicle, 1841 gegründet und als älteste fortlaufend erscheinende englischsprachige jüdische Zeitung beschrieben, ist ein Beispiel dafür, wie die Gemeinde eigene öffentliche Institutionen in London aufbaute.",
+          "tags": ["mediengeschichte", "migration"]
+        },
+        {
+          "text": "LIVE: Marktzeiten, Straßenstände, Gastronomie, Ausstellungen, Street-Art-Werke und Festivalprogramme ändern sich häufig. Einzelne Wandbilder können kurzfristig übermalt werden; aktuelle Öffnungen, Preise und Veranstaltungen müssen über Betreiber oder Tower Hamlets geprüft werden.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": []
+    },
+    {
+      "id": "london_regents_park",
+      "name": "Regent's Park",
+      "general_info": "Regent’s Park ist ein Meisterwerk aus Landschaftsplanung und Stadtentwicklung der Regency-Zeit. John Nash verband ab 1811 eine malerische Parklandschaft mit See, Villen, Terrassen und einer Repräsentationsachse; der nie gebaute Sommerpalast des Prince Regent blieb dabei die große Leerstelle.",
+      "deep_data_pool": [
+        {
+          "text": "Das Gelände gehörte einst zum Wald von Middlesex und hieß Marylebone Park. Es war bewaldet und reich an Wild. Im 16. Jahrhundert kam es an die Krone und wurde als Hirschpark eingefriedet; im 18. Jahrhundert war ein großer Teil als Acker- und Weideland verpachtet.",
+          "tags": ["geschichte", "landschaft"]
+        },
+        {
+          "text": "Als das Land 1811 an die Krone zurückfiel, verband der Prince Regent seine Palastpläne mit wirtschaftlicher Stadtentwicklung. John Nash entwarf einen großen gerundeten Park, private Villen, repräsentative Randterrassen, einen Sommerpalast und eine Prozessionsstraße bis zum St James’s Palace.",
+          "tags": ["planung", "royal"]
+        },
+        {
+          "text": "Nash hatte mit dem Landschaftsgestalter Humphry Repton gearbeitet. Dessen malerische Prinzipien zeigen sich in geschwungenem Wasser, unregelmäßigen Baumgruppen und bewusst inszenierten Blicken. Der Park war als „rus in urbe“, Landschaft innerhalb der Stadt, gedacht und zugleich als exklusives Immobilienprojekt.",
+          "tags": ["landschaftsarchitektur", "planung"]
+        },
+        {
+          "text": "Die ökonomisch überambitionierten Pläne wurden stark reduziert: Statt der großen Zahl vorgesehener Villen entstanden bis 1832 nur acht, und der Sommerpalast wurde nie gebaut. Erhalten blieb jedoch die städtebauliche Verbindung über Portland Place und Regent Street in Richtung des damaligen Carlton House.",
+          "tags": ["geschichte", "stadtplanung"]
+        },
+        {
+          "text": "Ein Teil des Parks wurde 1835 öffentlich zugänglich. Der Inner Circle wurde 1838 von der Royal Botanic Society gestaltet; heute liegen dort Queen Mary’s Gardens. Die Rosengärten in ihrer späteren Form stammen aus dem 20. Jahrhundert und gehören zu den bekanntesten botanischen Schwerpunkten des Parks.",
+          "tags": ["garten", "geschichte"]
+        },
+        {
+          "text": "Die Zoological Society of London richtete 1827 am Nordrand ihre zoologischen Gärten ein. London Zoo gilt als ältester wissenschaftlicher Zoo der Welt: Er entstand zunächst für Forschung und Mitglieder der Gesellschaft und wurde später einem breiteren Publikum geöffnet.",
+          "tags": ["wissenschaft", "tiergarten"]
+        },
+        {
+          "text": "Der Regent’s Canal verläuft am nördlichen Parkrand; See, Inner und Outer Circle strukturieren die Anlage. Zahlreiche Terrassen, Villen, Tore, Geländer und sogar Tierhäuser stehen unter Denkmalschutz. Das Freilufttheater gehört seit 1932 zur Kulturgeschichte des Parks.",
+          "tags": ["architektur", "kultur"]
+        },
+        {
+          "text": "Regent’s Park umfasst rund 487 Acres beziehungsweise 197 Hektar und liegt in den Boroughs Westminster und Camden. Primrose Hill schließt nördlich an und wird gemeinsam mit dem Park verwaltet, ist historisch und landschaftlich jedoch ein eigener Bereich mit einem erhöhten Blick über London.",
+          "tags": ["geografie", "landschaft"]
+        },
+        {
+          "text": "LIVE: Gartenblüte, Sportflächen, Bootsverleih, Open-Air-Theatre, Zoo, Gastronomie und Veranstaltungsbereiche haben saisonale oder eigene Zeiten und Preise. Sperrungen durch Pflege, Wetter und Events sind möglich; maßgeblich sind The Royal Parks und die jeweiligen Betreiber.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": []
+    },
+    {
+      "id": "london_madame_tussauds",
+      "name": "Madame Tussauds",
+      "general_info": "Madame Tussauds geht auf die Wachsbildnerin Marie Grosholtz zurück, die nach Revolutionszeit und jahrzehntelanger Wanderausstellung 1835 ein festes Haus in London eröffnete. Der heutige Standort an der Marylebone Road besteht seit 1884 und verbindet historische Schaukunst mit wechselnder Populärkultur.",
+      "deep_data_pool": [
+        {
+          "text": "Marie Grosholtz wurde 1761 in Straßburg geboren und lernte das Modellieren bei dem Arzt und Wachsbildner Philippe Curtius. Wachsfiguren waren nicht nur Unterhaltung: Vor Fotografie und Film vermittelten sie einem breiten Publikum die Gesichter berühmter und berüchtigter Zeitgenossen.",
+          "tags": ["biografie", "handwerk"]
+        },
+        {
+          "text": "1777 modellierte Marie den Philosophen Voltaire. Um 1780 arbeitete sie als Kunstlehrerin der Schwester Ludwigs XVI. und lebte zeitweise im Umfeld von Versailles. Diese Nähe zum Hof wurde während der Französischen Revolution lebensgefährlich; 1793 war sie mit ihrer Mutter im Gefängnis La Force.",
+          "tags": ["biografie", "geschichte"]
+        },
+        {
+          "text": "Nach eigener überlieferter Darstellung musste Marie Totenmasken hingerichteter Personen und früherer königlicher Bekannter fertigen, um Loyalität zur Revolution zu beweisen. Solche Geschichten wurden später Teil der Markenlegende; belegt ist, dass Revolutionsfiguren und Verbrecher früh einen düsteren Bereich der Ausstellung prägten.",
+          "tags": ["geschichte", "quellenkritik"]
+        },
+        {
+          "text": "Nach Curtius’ Tod 1794 erbte sie dessen Sammlung; 1795 heiratete sie François Tussaud. 1802 brachte sie die Schau nach Großbritannien. Die Napoleonischen Kriege verhinderten eine Rückkehr nach Frankreich, und sie bereiste mit ihren Figuren mehr als drei Jahrzehnte Großbritannien und Irland.",
+          "tags": ["biografie", "wanderausstellung"]
+        },
+        {
+          "text": "1835 richtete Madame Tussaud mit ihren Söhnen im Baker Street Bazaar eine dauerhafte Londoner Basis ein. Neben Herrschern, Autoren und Politikern zog der Bereich mit Verbrechern und Revolutionsrelikten Publikum an; die Bezeichnung „Chamber of Horrors“ erschien spätestens 1843 in der Werbung.",
+          "tags": ["museumsgeschichte", "populärkultur"]
+        },
+        {
+          "text": "Marie fertigte 1842 ein Selbstporträt aus Wachs, das im Londoner Haus erhalten ist. Sie starb 1850, doch ihre Familie führte das Unternehmen fort. Platzmangel am alten Standort veranlasste ihren Enkel Joseph Randall, einen Neubau an der Marylebone Road zu planen.",
+          "tags": ["biografie", "sammlung"]
+        },
+        {
+          "text": "Die neuen Galerien an der Marylebone Road öffneten am 14. Juli 1884. Das Unternehmen wurde 1889 als Madame Tussaud & Sons organisiert. Brände, Kriegsschäden, technische Medien und wechselnde Berühmtheitskulturen veränderten die Sammlung, während die Herstellung lebensnaher Wachsfiguren das zentrale Erkennungsmerkmal blieb.",
+          "tags": ["geschichte", "handwerk"]
+        },
+        {
+          "text": "1908 entstand die erste Wachsfigur eines jungen Winston Churchill; im Lauf seines Lebens folgten weitere Versionen. Das Beispiel zeigt, dass die Sammlung keine statische Prominentengalerie ist: Alter, Amt, Mode und öffentliches Bild einer Person können neue Modelle erforderlich machen.",
+          "tags": ["sammlung", "portraet"]
+        },
+        {
+          "text": "LIVE: Figuren, Themenräume, interaktive Attraktionen, Zeitfenster, Wartezeiten und Eintrittspreise wechseln. Nicht jede beworbene Figur ist jederzeit ausgestellt. Verbindliche Angaben zu Barrierefreiheit, Alters- oder Gesundheitshinweisen und Ticketbedingungen liefert nur Madame Tussauds London aktuell.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": []
+    },
+    {
+      "id": "london_notting_hill",
+      "name": "Notting Hill",
+      "general_info": "Notting Hill ist ein westlondoner Viertel mit viktorianischen Terrassen, Gartenplätzen und Portobello Road, dessen heutiges Bild durch soziale Gegensätze geprägt wurde. Hinter pastellfarbenen Fassaden stehen Landentwicklung, überbelegte Mietshäuser, karibische Migration, Rassismus, Carnival und Gentrifizierung.",
+      "deep_data_pool": [
+        {
+          "text": "Das Gebiet war lange ländlich und entwickelte sich im 19. Jahrhundert zum Vorort. Der Planer Thomas Allason entwarf für den Landbesitzer James Weller Ladbroke Straßen und private Gemeinschaftsgärten. Daraus entstanden die charakteristischen halbmondförmigen Straßen und Gartenplätze des Ladbroke Estate.",
+          "tags": ["stadtplanung", "geschichte"]
+        },
+        {
+          "text": "Portobello Road war ursprünglich ein Weg zur Portobello Farm, deren Name an den britischen Sieg bei Porto Bello im heutigen Panama 1739 erinnerte. Mit der Urbanisierung entwickelte sich im 19. Jahrhundert ein Markt; später wurden Antiquitäten, Secondhandware, Lebensmittel und Kleidung zu seinen bekannten Sparten.",
+          "tags": ["name", "marktgeschichte"]
+        },
+        {
+          "text": "Die repräsentativen Häuser verbargen im 20. Jahrhundert oft Armut. Viele Gebäude waren in kleine, überbelegte Zimmer aufgeteilt, und sogenannte Rachman-Vermieter wurden zum Symbol ausbeuterischer Wohnverhältnisse. Bombenschäden und mangelnde Investitionen verschärften die Krise nach dem Zweiten Weltkrieg.",
+          "tags": ["sozialgeschichte", "wohnen"]
+        },
+        {
+          "text": "Seit den 1950er Jahren prägten Menschen aus der Karibik, darunter Angehörige der Windrush-Generation, North Kensington. Sie trafen auf Diskriminierung bei Arbeit und Wohnung. Rassistische Angriffe und die Unruhen von 1958 gehören deshalb ebenso zur Ortsgeschichte wie spätere Bilder multikultureller Festlichkeit.",
+          "tags": ["migration", "sozialgeschichte"]
+        },
+        {
+          "text": "Die trinidadische Journalistin Claudia Jones organisierte 1959 im St Pancras Town Hall einen karibischen Indoor-Carnival als kulturelle Selbstbehauptung nach rassistischer Gewalt. Diese Veranstaltung war ein wichtiger Vorläufer, aber nicht identisch mit dem späteren Straßenkarneval in Notting Hill.",
+          "tags": ["kulturgeschichte", "migration"]
+        },
+        {
+          "text": "1966 initiierte die Aktivistin Rhaune Laslett ein Straßenfest für die unterschiedlichen lokalen Gemeinschaften. Als Russell Hendersons Steelband durch die Straßen zog, entstand eine Prozession. Daraus entwickelte sich der von der britisch-karibischen Community getragene Notting Hill Carnival am August-Feiertagswochenende.",
+          "tags": ["carnival", "geschichte"]
+        },
+        {
+          "text": "Seit dem späten 20. Jahrhundert stiegen Immobilienwerte stark. Restaurierte Fassaden und wohlhabende Zuzüge veränderten das Viertel, während bezahlbarer Wohnraum und lokale Kultur unter Druck gerieten. Der Film „Notting Hill“ von 1999 verstärkte das internationale romantische Image, bildet diese Konflikte aber kaum ab.",
+          "tags": ["gegenwart", "gentrifizierung"]
+        },
+        {
+          "text": "Mehrere Conservation Areas bewahren unterschiedliche historische Teilräume, darunter Ladbroke, Norland und Avondale. Der Schutz gilt nicht nur einzelnen Postkartenfassaden, sondern Straßenverläufen, Gartenplätzen, Parzellen und Gebäudegruppen – also dem geplanten räumlichen Zusammenhang des 19. Jahrhunderts.",
+          "tags": ["denkmalschutz", "stadtplanung"]
+        },
+        {
+          "text": "LIVE: Portobello-Marktsparten verteilen sich auf unterschiedliche Wochentage; Carnival-Routen, Straßensperrungen und Sicherheitsregeln werden jährlich neu festgelegt. Marktzeiten, Veranstaltungen, Filmorte mit privater Nutzung und Verkehrsänderungen sind aktuell beim Borough beziehungsweise Veranstalter zu prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": []
+    },
+    {
+      "id": "london_soho",
+      "name": "Soho",
+      "general_info": "Soho entstand ab den 1670er Jahren als vornehmes Wohnviertel westlich der damaligen City und wandelte sich später zu einem dichten Gewerbe-, Einwanderungs-, Musik-, Nachtleben- und Theaterquartier. Kleine Häuser des 17. und 18. Jahrhunderts stehen hier neben großen viktorianischen Straßendurchbrüchen.",
+      "deep_data_pool": [
+        {
+          "text": "Auf Karten des 16. Jahrhunderts erscheint das Gebiet als St Martin’s Field. Die Herkunft des Namens Soho ist nicht abschließend gesichert; häufig wird er mit einem Jagdruf verbunden. Sicher ist, dass die Bezeichnung bereits im 17. Jahrhundert für das Londoner Gebiet verwendet wurde.",
+          "tags": ["name", "quellenkritik"]
+        },
+        {
+          "text": "Nach der Restauration Charles’ II. und besonders nach dem Großen Brand von 1666 stieg der Bedarf an Wohnraum westlich der City. Bebauung begann in den 1670er Jahren um Golden Square, Gerrard Street und Old Compton Street; Soho Square wurde 1681 angelegt.",
+          "tags": ["stadtgeschichte", "planung"]
+        },
+        {
+          "text": "Soho rivalisierte zunächst mit Mayfair und St James’s als elegante Adresse. Ab Mitte des 18. Jahrhunderts verlor es diesen Status. Gerade der Prestigeverlust trug dazu bei, dass viele kleinteilige Häuser des 17. und 18. Jahrhunderts überlebten, statt durch durchgehend palastartige Neubauten ersetzt zu werden.",
+          "tags": ["sozialgeschichte", "architektur"]
+        },
+        {
+          "text": "Französische Hugenotten und spätere Einwanderungsgruppen prägten Gewerbe, Kirchen und Gastronomie. Nach dem Zweiten Weltkrieg entwickelte sich südlich der Shaftesbury Avenue um Gerrard Street das heutige Chinatown; 2005 erhielt es wegen seiner eigenen Identität ein separates Schutzgebiet.",
+          "tags": ["migration", "stadtentwicklung"]
+        },
+        {
+          "text": "Regent Street, Shaftesbury Avenue und Charing Cross Road durchschnitten im 19. Jahrhundert das ältere Straßengefüge. Sie verbesserten Erreichbarkeit und brachten größere viktorianische Bauten. Besonders entlang Shaftesbury Avenue entstand eine Konzentration spätviktorianischer und edwardianischer Theater.",
+          "tags": ["stadtplanung", "theater"]
+        },
+        {
+          "text": "Palace, Lyric, Apollo, Gielgud und das heutige Sondheim Theatre veranschaulichen den Theaterboom. Spezialisten wie C. J. Phipps, Frank Matcham und W. G. R. Sprague entwarfen auffällige Fassaden. Das konkave Palace Theatre war ursprünglich für Richard D’Oyly Carte als großes Opernhaus gedacht.",
+          "tags": ["architektur", "theater"]
+        },
+        {
+          "text": "Im 20. Jahrhundert wurde Soho ein Zentrum von Musikclubs, Film- und Medienfirmen, Restaurants, Sexgewerbe und LGBTQ+-Nachtleben. Diese Nutzungen lagen dicht nebeneinander. Das 1969 ausgewiesene und mehrfach erweiterte Soho Conservation Area schützt deshalb kein einheitliches Museumsbild, sondern ein dynamisches Mischquartier.",
+          "tags": ["kulturgeschichte", "stadtleben"]
+        },
+        {
+          "text": "Broadwick Street, früher Broad Street, ist mit John Snows Untersuchung des Choleraausbruchs von 1854 verbunden. Snow kartierte Todesfälle um eine öffentliche Wasserpumpe und stärkte damit die Erkenntnis, dass verunreinigtes Wasser die Krankheit übertrug; eine Replik der Pumpe erinnert heute daran.",
+          "tags": ["medizingeschichte", "wissenschaft"]
+        },
+        {
+          "text": "LIVE: Theaterprogramme, Clubs, Gastronomie, Straßennutzung und nächtliche Verkehrsregeln wechseln laufend. Chinatown grenzt an Soho, ist administrativ aber ein eigenes Conservation Area. Aktuelle Öffnungszeiten, Eintritt, Altersregeln und Veranstaltungen sind bei den jeweiligen Häusern zu prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": []
+    },
+    {
+      "id": "london_st_james_park",
+      "name": "St James's Park",
+      "general_info": "St James’s Park ist der älteste Royal Park im Londoner Zentrum. Aus sumpfigem Gelände und königlichem Hirschpark wurde über formale französische Anlagen und John Nashs romantische Neugestaltung eine scheinbar natürliche Seenlandschaft zwischen Buckingham Palace, The Mall und Horse Guards.",
+      "deep_data_pool": [
+        {
+          "text": "Heinrich VIII. erwarb 1532 sumpfiges Land von Eton College, durch das der Tyburn floss. Es lag nahe York Place, das nach dem Sturz Kardinal Wolseys königlich und später Whitehall Palace genannt wurde. Heinrich ließ das Gebiet als Hirschpark einfrieden und errichtete St James’s Palace als Jagdresidenz.",
+          "tags": ["geschichte", "royal"]
+        },
+        {
+          "text": "James I. ließ das Gelände ab 1603 entwässern und gestalten. Eine Menagerie hielt exotische Tiere wie Kamele, Krokodile und einen Elefanten; Volieren gaben Birdcage Walk seinen Namen. Der Park war damit zugleich höfische Sammlung, Experimentierfläche und Statussymbol.",
+          "tags": ["tiergeschichte", "name"]
+        },
+        {
+          "text": "Charles II. kannte aus seinem französischen Exil formale Schlossgärten. Nach 1660 wurde St James’s Park in diesem Stil umgestaltet, wahrscheinlich unter Beteiligung André Mollets. Ein langer gerader Kanal dominierte die Anlage; zugleich öffnete Charles den Park für die Öffentlichkeit.",
+          "tags": ["gartenkunst", "geschichte"]
+        },
+        {
+          "text": "1664 schenkte der russische Botschafter Charles II. Pelikane. Seitdem gehören die Vögel zur Parkidentität; seit 1897 besteht eine dauerhafte Präsenz. Über die Jahrhunderte lebten mehr als 50 Pelikane hier, überwiegend ergänzt durch Geschenke und Transfers, nicht als direkte Linie des ersten Paars.",
+          "tags": ["tiere", "tradition"]
+        },
+        {
+          "text": "John Nash gab dem Park 1827 die bis heute erkennbare romantische Form. Er verwandelte den geraden Kanal in einen geschwungen wirkenden See, schuf Inseln, Wege und malerische Blickachsen. Diese Gestaltung vermittelt Natürlichkeit, ist aber präzise auf Paläste und Regierungsbauten ausgerichtet.",
+          "tags": ["landschaftsarchitektur", "visuell"]
+        },
+        {
+          "text": "Die Blue Bridge bietet eine komponierte Doppelperspektive: nach Westen Buckingham Palace, nach Osten Horse Guards und Regierungsarchitektur. St James’s Lake besitzt zwei Inseln als wichtige Rückzugs- und Nistplätze; Hunderte London-Plane-Bäume prägen zusätzlich den Park.",
+          "tags": ["orientierung", "natur"]
+        },
+        {
+          "text": "2026 schlüpften erstmals in der dokumentierten 360-jährigen Parkgeschichte vier Pelikanküken. The Royal Parks arbeitete dabei mit Blackpool Zoo, Royal Veterinary College, ZSL und Wildfowl & Wetlands Trust zusammen; der Aufzuchtbereich war zum Schutz nicht öffentlich zugänglich.",
+          "tags": ["tiere", "geschichte", "2026"]
+        },
+        {
+          "text": "Während des Ersten Weltkriegs wurde der See 1916 trockengelegt, damit auf der Fläche vorübergehend Regierungsgebäude errichtet werden konnten. Dieses kaum sichtbare Kapitel zeigt, dass selbst die königliche Parklandschaft in Krisenzeiten als funktionale staatliche Reservefläche genutzt wurde.",
+          "tags": ["kriegsgeschichte", "landschaft"]
+        },
+        {
+          "text": "LIVE: Pelikanbestand, Fütterungszeit und Sichtbarkeit können sich aus Tierwohl- oder Pflegegründen ändern; Küken- und Nistbereiche bleiben gegebenenfalls gesperrt. Auch Wege und Gartenbereiche können bei Zeremonien oder Großereignissen geschlossen werden. Aktuell gilt nur The Royal Parks.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": []
+    },
+    {
+      "id": "london_kings_cross_station",
+      "name": "King's Cross Station",
+      "general_info": "King’s Cross wurde 1852 als Londoner Endbahnhof der Great Northern Railway eröffnet. Lewis Cubitts nüchterne Backsteinfassade mit zwei riesigen Rundbogenfenstern und Uhrturm verkörperte funktionalen Eisenbahnbau; die Erneuerung von 2012 stellte sie frei und ergänzte die große Western Concourse.",
+      "deep_data_pool": [
+        {
+          "text": "Die Great Northern Railway erreichte London 1850 und nutzte zunächst einen hölzernen provisorischen Bahnhof an Maiden Lane, heute York Way. Währenddessen entstanden der neue Kopfbahnhof und der Gasworks Tunnel unter dem Regent’s Canal. Das Gelände hatte zuvor unter anderem ein Pocken- und Fieberhospital getragen.",
+          "tags": ["geschichte", "eisenbahn"]
+        },
+        {
+          "text": "King’s Cross öffnete am 14. Oktober 1852. Lewis Cubitt plante es bewusst einfach und zweckmäßig. Damals war es der größte Bahnhof Großbritanniens: Zwei Hallen waren jeweils rund 800 Fuß lang, 105 Fuß breit und 71 Fuß hoch.",
+          "tags": ["architektur", "geschichte"]
+        },
+        {
+          "text": "Die 216 Fuß breite Backsteinfront schließt jede Halle mit einem großen Rundbogenfenster ab. Dazwischen steht der etwa 112 Fuß hohe italienisch anmutende Uhrturm, Cubitts wichtigster Schmuckakzent. Die beiden Bögen entsprachen ursprünglich einer Ankunfts- und einer Abfahrtshalle.",
+          "tags": ["architektur", "visuell"]
+        },
+        {
+          "text": "1923 ging der Bahnhof in der London and North Eastern Railway auf. Berühmte Züge und Lokomotiven wie Flying Scotsman und Mallard verbanden King’s Cross mit der britischen Eisenbahnmoderne. Später wurde er ein wichtiger Endpunkt für InterCity-125-Hochgeschwindigkeitszüge.",
+          "tags": ["eisenbahngeschichte", "technik"]
+        },
+        {
+          "text": "1972 erhielt die Front einen eingeschossigen Vorbau mit Halle und Fahrkartenschalter. Als provisorisch gedachte Lösung blieb er vier Jahrzehnte und verdeckte die Grade-I-gelistete Fassade. Wachstum, Überfüllung und zahlreiche Anbauten machten den historischen Bau gegen Ende des 20. Jahrhunderts schwer lesbar.",
+          "tags": ["architektur", "stadtgeschichte"]
+        },
+        {
+          "text": "Im Zuge einer umfassenden Erneuerung öffnete im März 2012 die Western Concourse von John McAslan + Partners. Ihr halbkreisförmiges Stahl-Glas-Dach lehnt sich seitlich an den Altbau. Die Form reagiert unter anderem auf das benachbarte Great Northern Hotel und den unterirdisch kanalisierten River Fleet.",
+          "tags": ["architektur", "technik"]
+        },
+        {
+          "text": "Nach Entfernung des Vorbaus wurde Cubitts Front wieder sichtbar; 2013 öffnete davor King’s Cross Square. Bereits 2010 hatte ein neues Gleis 0 auf der Ostseite zusätzliche Kapazität geschaffen. Die Neuordnung bindet St Pancras, Underground und das umgenutzte frühere Bahn- und Industriegelände nördlich an.",
+          "tags": ["stadtentwicklung", "verkehr"]
+        },
+        {
+          "text": "Direkt westlich steht das Great Northern Hotel, entworfen von Lewis Cubitts Bruder William und 1854 eröffnet. Seine geschwungene Form folgte dem damaligen Straßen- und Gleisraum. Bei der jüngsten Erneuerung wurde es in die Komposition zwischen historischem Bahnhof und Western Concourse einbezogen.",
+          "tags": ["architektur", "ensemble"]
+        },
+        {
+          "text": "LIVE: Abfahrten, Gleise, Zugbetreiber, Zugangskontrollen, Wartungsarbeiten und Öffnung einzelner Bahnhofseinrichtungen ändern sich. Auch der populäre Fotopunkt zu Gleis 9¾ kann verlegt oder stark ausgelastet sein; verbindlich sind Network Rail und die jeweiligen Bahnunternehmen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": []
+    }
+  ]
+}

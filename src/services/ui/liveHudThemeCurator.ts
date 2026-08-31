@@ -1,5 +1,5 @@
 /**
- * Idle Live-HUD: Findus wählt alle ~30 Min frei, welche optionalen Themen
+ * Idle Live-HUD: Yorro wählt alle ~30 Min frei, welche optionalen Themen
  * neben Ort/Wetter/Timer/Parken erscheinen (Sunset/Dinner nicht immer).
  */
 
@@ -49,7 +49,7 @@ function mulberry32(seed: number): () => number {
 function timeOk(theme: HudOptionalTheme, hour: number): boolean {
   if (theme === 'sunset') return hour >= 15 && hour <= 21;
   // „dinner“-Slot = Meal-Karte (Bäckerei/Lunch/Abend je nach Uhrzeit)
-  if (theme === 'dinner') return hour >= 6 && hour <= 22;
+  if (theme === 'dinner') return hour >= 6 && hour < 19;
   if (theme === 'concerts') return hour >= 14 || hour <= 2;
   if (theme === 'events') return hour >= 9 && hour <= 23;
   return true;
@@ -81,9 +81,19 @@ export function pickIdleHudThemes(nowMs = Date.now()): Set<HudOptionalTheme> {
   const picked = new Set<HudOptionalTheme>();
   for (const t of shuffled) {
     if (picked.size >= count) break;
-    // Sunset/Dinner bewusst seltener (~40% Chance wenn gezogen)
-    if ((t === 'sunset' || t === 'dinner') && rand() > 0.4) continue;
+    // Dinner bewusst seltener (~40% Chance wenn gezogen)
+    if (t === 'dinner' && rand() > 0.4) continue;
+    if (t === 'sunset') continue;
     picked.add(t);
+  }
+
+  // Nachmittag: Sunset nur solange die Karte selbst noch live ist
+  if (hour >= 15 && hour <= 21) {
+    picked.add('sunset');
+  }
+  // Ab 19 Uhr: kein Essens-Fragen mehr — Abendprogramm
+  if (hour >= 19 && hour <= 23) {
+    picked.add('events');
   }
 
   // Mindestens ein „Inhalt“ wenn Filter alles verworfen hat

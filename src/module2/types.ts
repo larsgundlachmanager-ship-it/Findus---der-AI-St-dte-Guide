@@ -70,7 +70,15 @@ export type MoneyAmount = {
 };
 
 export type ActionPayload =
-  | { kind: 'deep_link'; url: string; destName?: string }
+  | {
+      kind: 'deep_link';
+      url: string;
+      destName?: string;
+      destination?: string;
+      checkin?: string;
+      checkout?: string;
+      adults?: number;
+    }
   | { kind: 'dial'; phone: string }
   | {
       kind: 'navigate';
@@ -81,6 +89,17 @@ export type ActionPayload =
       keepCard?: boolean;
       skipClosingGate?: boolean;
       /** Radweg-Empfehlung → Routing im Bike-Modus */
+      preferBike?: boolean;
+      multiStop?: Array<{
+        name: string;
+        lat: number;
+        lng: number;
+        poiId?: number;
+      }>;
+    }
+  | {
+      /** Aktive Navigation auf Rad/Fuß umstellen (gleiche Destination) */
+      kind: 'switch_nav_mode';
       preferBike?: boolean;
     }
   | { kind: 'ui'; action: string; data?: Record<string, unknown> }
@@ -126,6 +145,9 @@ export type SynthesisPayload = {
   bullets: string[];
   buttons: Module2ActionButton[];
   fullDraftForUi: string;
+  /** Tap-Chips aus Call-2-Tail */
+  shortAnswers?: string[];
+  call2Tail?: Record<string, unknown>;
 };
 
 export type PipelineTurnInput = {

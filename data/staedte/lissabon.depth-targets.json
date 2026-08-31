@@ -1,0 +1,565 @@
+{
+  "count": 70,
+  "spots": [
+    {
+      "id": "lissabon_church_of_st_vincent_de_fora",
+      "name": "Church of St. Vincent de Fora",
+      "tier": 1,
+      "lat": 38.714887600000004,
+      "lng": -9.1276501,
+      "chars": 405
+    },
+    {
+      "id": "lissabon_miradouro_de_sao_pedro_de_alcantara",
+      "name": "Miradouro de São Pedro de Alcântara",
+      "tier": 1,
+      "lat": 38.7153095,
+      "lng": -9.144176200000002,
+      "chars": 255
+    },
+    {
+      "id": "lissabon_aqueduto_das_aguas_livres",
+      "name": "Aqueduto das Águas Livres",
+      "tier": 1,
+      "lat": 38.726550499999995,
+      "lng": -9.166528099999999,
+      "chars": 245
+    },
+    {
+      "id": "lissabon_parque_das_nacoes",
+      "name": "Parque das Nações",
+      "tier": 1,
+      "lat": 38.7673803,
+      "lng": -9.0923422,
+      "chars": 237
+    },
+    {
+      "id": "lissabon_palacio_nacional_da_ajuda",
+      "name": "Palácio Nacional da Ajuda",
+      "tier": 1,
+      "lat": 38.7076247,
+      "lng": -9.1979777,
+      "chars": 245
+    },
+    {
+      "id": "lissabon_igreja_de_sao_roque",
+      "name": "Igreja de São Roque",
+      "tier": 1,
+      "lat": 38.713516,
+      "lng": -9.143469399999999,
+      "chars": 238
+    },
+    {
+      "id": "lissabon_zoo_lissabon",
+      "name": "Zoo Lissabon",
+      "tier": 1,
+      "lat": 38.743091400000004,
+      "lng": -9.1692039,
+      "chars": 237
+    },
+    {
+      "id": "lissabon_museu_nacional_de_arte_antiga",
+      "name": "Museu Nacional de Arte Antiga",
+      "tier": 1,
+      "lat": 38.7048412,
+      "lng": -9.1614643,
+      "chars": 0
+    },
+    {
+      "id": "lissabon_museu_nacional_dos_coches",
+      "name": "Museu Nacional dos Coches",
+      "tier": 1,
+      "lat": 38.6965545,
+      "lng": -9.197485,
+      "chars": 0
+    },
+    {
+      "id": "lissabon_panteao_nacional",
+      "name": "Panteão Nacional",
+      "tier": 1,
+      "lat": 38.714994399999995,
+      "lng": -9.1246835,
+      "chars": 0
+    },
+    {
+      "id": "lissabon_arco_da_rua_augusta",
+      "name": "Arco da Rua Augusta",
+      "tier": 1,
+      "lat": 38.7084447,
+      "lng": -9.136824299999999,
+      "chars": 0
+    },
+    {
+      "id": "lissabon_elevador_da_gloria",
+      "name": "Elevador da Glória",
+      "tier": 1,
+      "lat": 38.7161171,
+      "lng": -9.1427607,
+      "chars": 0
+    },
+    {
+      "id": "lissabon_museu_do_oriente",
+      "name": "Museu do Oriente",
+      "tier": 1,
+      "lat": 38.7028828,
+      "lng": -9.1705943,
+      "chars": 0
+    },
+    {
+      "id": "lissabon_palacio_dos_marqueses_de_fronteira",
+      "name": "Palácio dos Marqueses de Fronteira",
+      "tier": 1,
+      "lat": 38.7401303,
+      "lng": -9.1803574,
+      "chars": 0
+    },
+    {
+      "id": "lissabon_convento_do_carmo",
+      "name": "Convento do Carmo",
+      "tier": 1,
+      "lat": 38.712038299999996,
+      "lng": -9.140612899999999,
+      "chars": 0
+    },
+    {
+      "id": "lissabon_museu_do_fado",
+      "name": "Museu do Fado",
+      "tier": 1,
+      "lat": 38.7111258,
+      "lng": -9.127616000000002,
+      "chars": 0
+    },
+    {
+      "id": "lissabon_elevador_da_bica",
+      "name": "Elevador da Bica",
+      "tier": 1,
+      "lat": 38.7089286,
+      "lng": -9.15227,
+      "chars": 0
+    },
+    {
+      "id": "lissabon_chiado",
+      "name": "Chiado",
+      "tier": 1,
+      "lat": 38.7105505,
+      "lng": -9.1425418,
+      "chars": 0
+    },
+    {
+      "id": "lissabon_jardim_da_estrela_playground",
+      "name": "Jardim da Estrela",
+      "tier": 2,
+      "lat": 38.7147384,
+      "lng": -9.1581201,
+      "chars": 402
+    },
+    {
+      "id": "lissabon_jardim_guerra_junqueiro",
+      "name": "Jardim Guerra Junqueiro",
+      "tier": 2,
+      "lat": 38.714765,
+      "lng": -9.159257499999999,
+      "chars": 397
+    },
+    {
+      "id": "lissabon_cinemateca_portuguesa_museu_do_cinema",
+      "name": "Cinemateca Portuguesa - Museu do Cinema",
+      "tier": 2,
+      "lat": 38.720997600000004,
+      "lng": -9.1487192,
+      "chars": 413
+    },
+    {
+      "id": "lissabon_estadio_da_luz",
+      "name": "Estádio da Luz",
+      "tier": 2,
+      "lat": 38.7526905,
+      "lng": -9.184692,
+      "chars": 404
+    },
+    {
+      "id": "lissabon_estadio_jose_alvalade_xxi",
+      "name": "Estádio José Alvalade XXI",
+      "tier": 2,
+      "lat": 38.7612216,
+      "lng": -9.16179,
+      "chars": 423
+    },
+    {
+      "id": "lissabon_jardim_do_torel",
+      "name": "Jardim do Torel",
+      "tier": 2,
+      "lat": 38.7191743,
+      "lng": -9.1411617,
+      "chars": 391
+    },
+    {
+      "id": "lissabon_reservatorio_da_mae_d_agua_das_amoreiras",
+      "name": "Reservatório da Mãe d'Água das Amoreiras",
+      "tier": 2,
+      "lat": 38.7212149,
+      "lng": -9.1555849,
+      "chars": 418
+    },
+    {
+      "id": "lissabon_mercado_de_campo_de_ourique",
+      "name": "Mercado de Campo de Ourique",
+      "tier": 2,
+      "lat": 38.7163117,
+      "lng": -9.1667393,
+      "chars": 401
+    },
+    {
+      "id": "lissabon_marques_de_pombal",
+      "name": "Praça Marquês de Pombal",
+      "tier": 2,
+      "lat": 38.725254899999996,
+      "lng": -9.150029199999999,
+      "chars": 237
+    },
+    {
+      "id": "lissabon_amoreiras_360_panoramic_view",
+      "name": "Amoreiras 360",
+      "tier": 2,
+      "lat": 38.723757,
+      "lng": -9.161325,
+      "chars": 250
+    },
+    {
+      "id": "lissabon_aussichtspunkt_park_eduardo_vii",
+      "name": "Aussichtspunkt Park Eduardo VII",
+      "tier": 2,
+      "lat": 38.7302994,
+      "lng": -9.154429799999999,
+      "chars": 252
+    },
+    {
+      "id": "lissabon_jardim_botanico_tropical",
+      "name": "Jardim Botânico Tropical",
+      "tier": 2,
+      "lat": 38.6981989,
+      "lng": -9.2037743,
+      "chars": 242
+    },
+    {
+      "id": "lissabon_jardim_da_fundacao_calouste_gulbenkian",
+      "name": "Jardim da Fundação Calouste Gulbenkian",
+      "tier": 2,
+      "lat": 38.7374065,
+      "lng": -9.154188,
+      "chars": 260
+    },
+    {
+      "id": "lissabon_teatro_nacional_d_maria_ii",
+      "name": "Teatro Nacional D. Maria II",
+      "tier": 2,
+      "lat": 38.714800499999996,
+      "lng": -9.139787499999999,
+      "chars": 247
+    },
+    {
+      "id": "lissabon_doca_de_santo_amaro",
+      "name": "Doca de Santo Amaro",
+      "tier": 2,
+      "lat": 38.700283,
+      "lng": -9.176694699999999,
+      "chars": 237
+    },
+    {
+      "id": "lissabon_centro_cultural_de_belem",
+      "name": "Centro Cultural de Belém",
+      "tier": 2,
+      "lat": 38.6955029,
+      "lng": -9.208354199999999,
+      "chars": 0
+    },
+    {
+      "id": "lissabon_pasteis_de_belem",
+      "name": "Pastéis de Belém",
+      "tier": 2,
+      "lat": 38.6975105,
+      "lng": -9.203227600000002,
+      "chars": 0
+    },
+    {
+      "id": "lissabon_museu_colecao_berardo",
+      "name": "Museu Coleção Berardo",
+      "tier": 2,
+      "lat": 38.6958741,
+      "lng": -9.2090914,
+      "chars": 0
+    },
+    {
+      "id": "lissabon_palacio_de_belem",
+      "name": "Palácio de Belém",
+      "tier": 2,
+      "lat": 38.697990499999996,
+      "lng": -9.200549299999999,
+      "chars": 0
+    },
+    {
+      "id": "lissabon_casa_fernando_pessoa",
+      "name": "Casa Fernando Pessoa",
+      "tier": 2,
+      "lat": 38.7167116,
+      "lng": -9.162497,
+      "chars": 0
+    },
+    {
+      "id": "lissabon_museu_da_marioneta",
+      "name": "Museu da Marioneta",
+      "tier": 2,
+      "lat": 38.707972,
+      "lng": -9.155776,
+      "chars": 0
+    },
+    {
+      "id": "lissabon_pink_street",
+      "name": "Pink Street",
+      "tier": 2,
+      "lat": 38.707246399999995,
+      "lng": -9.1437847,
+      "chars": 0
+    },
+    {
+      "id": "lissabon_torre_vasco_da_gama",
+      "name": "Torre Vasco da Gama",
+      "tier": 2,
+      "lat": 38.774940699999995,
+      "lng": -9.0914524,
+      "chars": 0
+    },
+    {
+      "id": "lissabon_telecabine_lisboa",
+      "name": "Telecabine Lisboa",
+      "tier": 2,
+      "lat": 38.762387499999996,
+      "lng": -9.0922881,
+      "chars": 0
+    },
+    {
+      "id": "lissabon_pavilhao_do_conhecimento",
+      "name": "Pavilhão do Conhecimento",
+      "tier": 2,
+      "lat": 38.7622587,
+      "lng": -9.095872,
+      "chars": 0
+    },
+    {
+      "id": "lissabon_praca_do_imperio",
+      "name": "Praça do Império",
+      "tier": 2,
+      "lat": 38.6971694,
+      "lng": -9.2063788,
+      "chars": 0
+    },
+    {
+      "id": "lissabon_museu_militar_de_lisboa",
+      "name": "Museu Militar de Lisboa",
+      "tier": 2,
+      "lat": 38.712697299999995,
+      "lng": -9.1246317,
+      "chars": 0
+    },
+    {
+      "id": "lissabon_campo_pequeno",
+      "name": "Campo Pequeno",
+      "tier": 2,
+      "lat": 38.7416308,
+      "lng": -9.145067,
+      "chars": 0
+    },
+    {
+      "id": "lissabon_assembleia_da_republica",
+      "name": "Assembleia da República",
+      "tier": 2,
+      "lat": 38.7125529,
+      "lng": -9.1538565,
+      "chars": 0
+    },
+    {
+      "id": "lissabon_casa_dos_bicos",
+      "name": "Casa dos Bicos",
+      "tier": 2,
+      "lat": 38.7090442,
+      "lng": -9.1326694,
+      "chars": 0
+    },
+    {
+      "id": "lissabon_igreja_da_graca",
+      "name": "Igreja da Graça",
+      "tier": 2,
+      "lat": 38.716504,
+      "lng": -9.131222800000002,
+      "chars": 0
+    },
+    {
+      "id": "lissabon_mouraria",
+      "name": "Mouraria",
+      "tier": 2,
+      "lat": 38.716820999999996,
+      "lng": -9.1355586,
+      "chars": 0
+    },
+    {
+      "id": "lissabon_largo_do_carmo",
+      "name": "Largo do Carmo",
+      "tier": 2,
+      "lat": 38.7118615,
+      "lng": -9.1410133,
+      "chars": 0
+    },
+    {
+      "id": "lissabon_praca_dos_restauradores",
+      "name": "Praça dos Restauradores",
+      "tier": 2,
+      "lat": 38.7157819,
+      "lng": -9.1412387,
+      "chars": 0
+    },
+    {
+      "id": "lissabon_elevador_do_lavra",
+      "name": "Elevador do Lavra",
+      "tier": 2,
+      "lat": 38.717835699999995,
+      "lng": -9.141782700000002,
+      "chars": 0
+    },
+    {
+      "id": "lissabon_cais_do_sodre",
+      "name": "Cais do Sodré",
+      "tier": 2,
+      "lat": 38.70589,
+      "lng": -9.14475,
+      "chars": 0
+    },
+    {
+      "id": "lissabon_pilar_7_bridge_experience",
+      "name": "Pilar 7 Bridge Experience",
+      "tier": 2,
+      "lat": 38.700403099999996,
+      "lng": -9.1788387,
+      "chars": 0
+    },
+    {
+      "id": "lissabon_livraria_bertrand",
+      "name": "Livraria Bertrand",
+      "tier": 2,
+      "lat": 38.7106505,
+      "lng": -9.141135499999999,
+      "chars": 0
+    },
+    {
+      "id": "lissabon_a_brasileira",
+      "name": "A Brasileira",
+      "tier": 2,
+      "lat": 38.7107003,
+      "lng": -9.142031700000002,
+      "chars": 0
+    },
+    {
+      "id": "lissabon_igreja_de_santo_antonio",
+      "name": "Igreja de Santo António",
+      "tier": 2,
+      "lat": 38.709972199999996,
+      "lng": -9.1338289,
+      "chars": 0
+    },
+    {
+      "id": "lissabon_igreja_de_sao_domingos",
+      "name": "Igreja de São Domingos",
+      "tier": 2,
+      "lat": 38.7147083,
+      "lng": -9.1387518,
+      "chars": 0
+    },
+    {
+      "id": "lissabon_miradouro_da_graca",
+      "name": "Miradouro da Graça",
+      "tier": 2,
+      "lat": 38.7164509,
+      "lng": -9.1315937,
+      "chars": 0
+    },
+    {
+      "id": "lissabon_miradouro_das_portas_do_sol",
+      "name": "Miradouro das Portas do Sol",
+      "tier": 2,
+      "lat": 38.7119253,
+      "lng": -9.1299568,
+      "chars": 0
+    },
+    {
+      "id": "lissabon_rua_augusta",
+      "name": "Rua Augusta",
+      "tier": 2,
+      "lat": 38.7106557,
+      "lng": -9.1376722,
+      "chars": 0
+    },
+    {
+      "id": "lissabon_jardim_da_estrela",
+      "name": "Jardim da Estrela",
+      "tier": 2,
+      "lat": 38.714765,
+      "lng": -9.159257499999999,
+      "chars": 0
+    },
+    {
+      "id": "lissabon_feira_da_ladra",
+      "name": "Feira da Ladra",
+      "tier": 3,
+      "lat": 38.715248,
+      "lng": -9.1262075,
+      "chars": 1059
+    },
+    {
+      "id": "lissabon_casino_lisboa",
+      "name": "Casino Lisboa",
+      "tier": 3,
+      "lat": 38.7646407,
+      "lng": -9.0966028,
+      "chars": 0
+    },
+    {
+      "id": "lissabon_centro_vasco_da_gama",
+      "name": "Centro Vasco da Gama",
+      "tier": 3,
+      "lat": 38.7685108,
+      "lng": -9.0971266,
+      "chars": 0
+    },
+    {
+      "id": "lissabon_casa_museu_anastacio_goncalves",
+      "name": "Casa-Museu Anastácio Gonçalves",
+      "tier": 3,
+      "lat": 38.732515899999996,
+      "lng": -9.1464418,
+      "chars": 0
+    },
+    {
+      "id": "lissabon_igreja_da_memoria",
+      "name": "Igreja da Memória",
+      "tier": 3,
+      "lat": 38.7030176,
+      "lng": -9.2020613,
+      "chars": 0
+    },
+    {
+      "id": "lissabon_forte_do_bom_sucesso",
+      "name": "Forte do Bom Sucesso",
+      "tier": 3,
+      "lat": 38.6921973,
+      "lng": -9.2170886,
+      "chars": 0
+    },
+    {
+      "id": "lissabon_instituto_superior_tecnico",
+      "name": "Instituto Superior Técnico",
+      "tier": 3,
+      "lat": 38.7368192,
+      "lng": -9.138705,
+      "chars": 0
+    }
+  ]
+}

@@ -1,0 +1,2617 @@
+{
+  "generated_at": "2026-08-28T06:31:50.995Z",
+  "summary": {
+    "city_id": "wandlitz",
+    "checked": 78,
+    "ok": 12,
+    "check": 20,
+    "bad": 46,
+    "errors": 0,
+    "max_delta_m": 180,
+    "city_halo_m": 28000,
+    "story_only": true
+  },
+  "rows": [
+    {
+      "id": "wandlitz_denkmal_fur_die_opfer_der_hexenverfolgung",
+      "name": "Denkmal für die Opfer der Hexenverfolgung",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.680126314285715,
+        "lng": 13.585531599999998
+      },
+      "query": "Denkmal für die Opfer der, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.5104759,
+        "lng": 13.3687981,
+        "display_name": "Denkmal für die Opfer der Aktion T4, Berlin Curves/Berlin Junction, Tiergartenstraße, Berlin, Deutschland",
+        "class": "historic",
+        "type": "memorial",
+        "provider": "photon"
+      },
+      "delta_m": 23878,
+      "from_city_m": 11206,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "wandlitz_kriegerdenkmal"
+      ]
+    },
+    {
+      "id": "wandlitz_gedenksaule",
+      "name": "Gedenksäule",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.7662361,
+        "lng": 13.625003575
+      },
+      "query": "Gedenksäule, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7565273,
+        "lng": 13.4550849,
+        "display_name": "Wandlitzsee, Wandlitz, Deutschland",
+        "class": "natural",
+        "type": "water",
+        "provider": "photon"
+      },
+      "delta_m": 11484,
+      "from_city_m": 10331,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "wandlitz_aussichtsplattform",
+      "name": "Aussichtsplattform",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.7916469,
+        "lng": 13.480812660000002
+      },
+      "query": "Aussichtsplattform, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.6917862,
+        "lng": 13.4999863,
+        "display_name": "Aussichtsplattform Schönower Heide, Bernauer Damm, Schönwalde, Wandlitz, Barnim, Brandenburg, 16348, Deutschland",
+        "class": "tourism",
+        "type": "viewpoint",
+        "importance": 0.00005160982681005596,
+        "osm_type": "node",
+        "osm_id": 3281910175,
+        "provider": "nominatim"
+      },
+      "delta_m": 11179,
+      "from_city_m": 4197,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "wandlitz_fahre_liepnitzsee_nord",
+        "wandlitz_fahre_liepnitzsee_sudufer",
+        "wandlitz_waldspielplatz_wandlitz",
+        "wandlitz_parkplatz_zweijahreszeiten",
+        "wandlitz_strandbad_stolzenhagen",
+        "wandlitz_ruheplatz_am_liepnitzsee",
+        "wandlitz_kleiner_bach",
+        "wandlitz_gefallenendenkmal_1_und_2_weltkrieg_klosterfelde",
+        "wandlitz_ingo_struntz",
+        "wandlitz_evangel_pfarramt",
+        "wandlitz_tor13",
+        "wandlitz_geschenkideen",
+        "wandlitz_schlosspark_lanke_lenne_park",
+        "wandlitz_biesenthaler_becken"
+      ]
+    },
+    {
+      "id": "wandlitz_wandlitz_bahnhof",
+      "name": "Wandlitz, Bahnhof",
+      "category": "bahnhof",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.744817000000005,
+        "lng": 13.465963
+      },
+      "query": "Wandlitz, Bahnhof, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.6498218,
+        "lng": 13.4223868,
+        "display_name": "Dachziegelwerke Nelskamp GmbH - Werk Wandlitz, 6, Schönerlinder Bahnhofstraße, Schönerlinde, Wandlitz, Barnim, Brandenburg, 16348, Deutschland",
+        "class": "office",
+        "type": "company",
+        "importance": 0.00005160982681005596,
+        "osm_type": "node",
+        "osm_id": 10130304485,
+        "provider": "nominatim"
+      },
+      "delta_m": 10964,
+      "from_city_m": 1142,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "wandlitz_wandlitz",
+        "wandlitz_osm_transit_2461877822"
+      ]
+    },
+    {
+      "id": "wandlitz_kriegerdenkmal_zerpenschleuse",
+      "name": "Kriegerdenkmal Zerpenschleuse",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.761492999999994,
+        "lng": 13.5648209
+      },
+      "query": "Kriegerdenkmal Zerpenschleuse, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.8515828,
+        "lng": 13.527697,
+        "display_name": "Zerpenschleuse, Wandlitz, Deutschland",
+        "class": "place",
+        "type": "village",
+        "provider": "photon"
+      },
+      "delta_m": 10324,
+      "from_city_m": 6247,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "wandlitz_alte_eiche",
+        "wandlitz_der_prinzenstein_im_lanker_forst",
+        "wandlitz_dorfkirche_lanke",
+        "wandlitz_waldsiedlung_wandlitz"
+      ]
+    },
+    {
+      "id": "wandlitz_biesenthaler_becken",
+      "name": "Biesenthaler Becken",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.7916469,
+        "lng": 13.480812660000002
+      },
+      "query": "Biesenthaler Becken, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7498384,
+        "lng": 13.6087066,
+        "display_name": "Biesenthaler Becken, Bernau, Barnim, Brandenburg, Deutschland",
+        "class": "leisure",
+        "type": "nature_reserve",
+        "importance": 0.23094323434513592,
+        "osm_type": "way",
+        "osm_id": 425696908,
+        "provider": "nominatim"
+      },
+      "delta_m": 9780,
+      "from_city_m": 4197,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "wandlitz_fahre_liepnitzsee_nord",
+        "wandlitz_fahre_liepnitzsee_sudufer",
+        "wandlitz_waldspielplatz_wandlitz",
+        "wandlitz_parkplatz_zweijahreszeiten",
+        "wandlitz_strandbad_stolzenhagen",
+        "wandlitz_ruheplatz_am_liepnitzsee",
+        "wandlitz_kleiner_bach",
+        "wandlitz_gefallenendenkmal_1_und_2_weltkrieg_klosterfelde",
+        "wandlitz_ingo_struntz",
+        "wandlitz_evangel_pfarramt",
+        "wandlitz_tor13",
+        "wandlitz_geschenkideen",
+        "wandlitz_schlosspark_lanke_lenne_park",
+        "wandlitz_aussichtsplattform"
+      ]
+    },
+    {
+      "id": "wandlitz_kriegerdenkmal",
+      "name": "Kriegerdenkmal",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.680126314285715,
+        "lng": 13.585531599999998
+      },
+      "query": "Kriegerdenkmal, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7609077,
+        "lng": 13.5647448,
+        "display_name": "Lanker Kriegerdenkmal, Am Obersee, Lanke, Wandlitz, Barnim, Brandenburg, 16359, Deutschland",
+        "class": "historic",
+        "type": "memorial",
+        "importance": 0.00005160982681005596,
+        "osm_type": "node",
+        "osm_id": 4999302064,
+        "provider": "nominatim"
+      },
+      "delta_m": 9091,
+      "from_city_m": 11206,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "wandlitz_denkmal_fur_die_opfer_der_hexenverfolgung"
+      ]
+    },
+    {
+      "id": "wandlitz_bunkeranlage_qualle",
+      "name": "Bunkeranlage Qualle",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.738896974999996,
+        "lng": 13.574100575
+      },
+      "query": "Bunkeranlage Qualle, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7289103,
+        "lng": 13.4584972,
+        "display_name": "Quelle Basdorfer Graben ehem. Grenzgraben oder ehem. Mühlenfließ oder L 121 oder Tegler Fließ, Lanker Straße, Wandlitz, Deutschland",
+        "class": "natural",
+        "type": "spring",
+        "provider": "photon"
+      },
+      "delta_m": 7862,
+      "from_city_m": 7030,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "wandlitz_naturpark_barnim",
+      "name": "Naturpark Barnim",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.7513418,
+        "lng": 13.4552426
+      },
+      "query": "Naturpark Barnim, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7908397,
+        "lng": 13.5508445,
+        "display_name": "Entlang der Heidekrautbahn im Naturpark Barnim, Prendener Dorfstraße, Prenden, Wandlitz, Barnim, Brandenburg, 16348, Deutschland",
+        "class": "information",
+        "type": "map",
+        "importance": 0.00005160982681005596,
+        "osm_type": "node",
+        "osm_id": 6019429045,
+        "provider": "nominatim"
+      },
+      "delta_m": 7788,
+      "from_city_m": 1222,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "wandlitz_holzpagode",
+      "name": "Holzpagode",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.69552385384616,
+        "lng": 13.408955800000001
+      },
+      "query": "Holzpagode, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7565273,
+        "lng": 13.4550849,
+        "display_name": "Wandlitzsee, Wandlitz, Deutschland",
+        "class": "natural",
+        "type": "water",
+        "provider": "photon"
+      },
+      "delta_m": 7461,
+      "from_city_m": 7815,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "wandlitz_alte_eiche",
+      "name": "Alte Eiche",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.761492999999994,
+        "lng": 13.5648209
+      },
+      "query": "Alte Eiche, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7565273,
+        "lng": 13.4550849,
+        "display_name": "Wandlitzsee, Wandlitz, Deutschland",
+        "class": "natural",
+        "type": "water",
+        "provider": "photon"
+      },
+      "delta_m": 7405,
+      "from_city_m": 6247,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "wandlitz_kriegerdenkmal_zerpenschleuse",
+        "wandlitz_der_prinzenstein_im_lanker_forst",
+        "wandlitz_dorfkirche_lanke",
+        "wandlitz_waldsiedlung_wandlitz"
+      ]
+    },
+    {
+      "id": "wandlitz_ingo_struntz",
+      "name": "Ingo Struntz",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.7916469,
+        "lng": 13.480812660000002
+      },
+      "query": "Ingo Struntz, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7318547,
+        "lng": 13.4912034,
+        "display_name": "Infotafel Waldsiedlung Wandlitz, Brandenburgallee, Bernau bei Berlin, Deutschland",
+        "class": "information",
+        "type": "board",
+        "provider": "photon"
+      },
+      "delta_m": 6685,
+      "from_city_m": 4197,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "wandlitz_fahre_liepnitzsee_nord",
+        "wandlitz_fahre_liepnitzsee_sudufer",
+        "wandlitz_waldspielplatz_wandlitz",
+        "wandlitz_parkplatz_zweijahreszeiten",
+        "wandlitz_strandbad_stolzenhagen",
+        "wandlitz_ruheplatz_am_liepnitzsee",
+        "wandlitz_kleiner_bach",
+        "wandlitz_gefallenendenkmal_1_und_2_weltkrieg_klosterfelde",
+        "wandlitz_evangel_pfarramt",
+        "wandlitz_tor13",
+        "wandlitz_geschenkideen",
+        "wandlitz_schlosspark_lanke_lenne_park",
+        "wandlitz_biesenthaler_becken",
+        "wandlitz_aussichtsplattform"
+      ]
+    },
+    {
+      "id": "wandlitz_badestelle_mit_sand",
+      "name": "Badestelle mit Sand",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.75920747058824,
+        "lng": 13.472346294117648
+      },
+      "query": "Badestelle, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.8102483,
+        "lng": 13.5028283,
+        "display_name": "Badestelle Kleiner Lottschesee, Seeweg, Siedlung Paul Rostin, Klosterfelde, Wandlitz, Barnim, Brandenburg, 16348, Deutschland",
+        "class": "leisure",
+        "type": "swimming_area",
+        "importance": 0.00005160982681005596,
+        "osm_type": "way",
+        "osm_id": 957430181,
+        "provider": "nominatim"
+      },
+      "delta_m": 6034,
+      "from_city_m": 555,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "wandlitz_st_konrad",
+        "wandlitz_minigolf_rahmersee_uwe_daul",
+        "wandlitz_liepnitzsee",
+        "wandlitz_haus_von_erich_honecker",
+        "wandlitz_wanderweg_am_liepnitzsee",
+        "wandlitz_wandlitzer_see",
+        "wandlitz_zweijahreszeiten",
+        "wandlitz_"
+      ]
+    },
+    {
+      "id": "wandlitz_ferienhaus_am_waldrand_von_wandlitz",
+      "name": "Ferienhaus am Waldrand von Wandlitz",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.7586234,
+        "lng": 13.4859166
+      },
+      "query": "Ferienhaus am Waldrand von Wandlitz, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7886311,
+        "lng": 13.559913,
+        "display_name": "Am Waldrand, Wandlitz, Deutschland",
+        "class": "highway",
+        "type": "living_street",
+        "provider": "photon"
+      },
+      "delta_m": 5993,
+      "from_city_m": 1011,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "wandlitz_brandenburgklinik_haus_potsdam",
+      "name": "Brandenburgklinik, Haus Potsdam",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.728743034482754,
+        "lng": 13.491266344827586
+      },
+      "query": "Brandenburgklinik, Haus Potsdam, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7767719,
+        "lng": 13.5255676,
+        "display_name": "Haus Potsdam, Nikolai-Ostrowski-Straße, Wandlitz, Deutschland",
+        "class": "building",
+        "type": "yes",
+        "provider": "photon"
+      },
+      "delta_m": 5818,
+      "from_city_m": 3094,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "wandlitz_schlosspark_lanke_lenne_park",
+      "name": "Schlosspark Lanke (Lenne Park)",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.7916469,
+        "lng": 13.480812660000002
+      },
+      "query": "Schlosspark Lanke, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7566218,
+        "lng": 13.5322965,
+        "display_name": "Wandlitzer Straße, Wandlitz, Deutschland",
+        "class": "highway",
+        "type": "secondary",
+        "provider": "photon"
+      },
+      "delta_m": 5212,
+      "from_city_m": 4197,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "wandlitz_fahre_liepnitzsee_nord",
+        "wandlitz_fahre_liepnitzsee_sudufer",
+        "wandlitz_waldspielplatz_wandlitz",
+        "wandlitz_parkplatz_zweijahreszeiten",
+        "wandlitz_strandbad_stolzenhagen",
+        "wandlitz_ruheplatz_am_liepnitzsee",
+        "wandlitz_kleiner_bach",
+        "wandlitz_gefallenendenkmal_1_und_2_weltkrieg_klosterfelde",
+        "wandlitz_ingo_struntz",
+        "wandlitz_evangel_pfarramt",
+        "wandlitz_tor13",
+        "wandlitz_geschenkideen",
+        "wandlitz_biesenthaler_becken",
+        "wandlitz_aussichtsplattform"
+      ]
+    },
+    {
+      "id": "wandlitz_fahre_liepnitzsee_nord",
+      "name": "Fähre Liepnitzsee Nord",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.7916469,
+        "lng": 13.480812660000002
+      },
+      "query": "Fähre Liepnitzsee Nord, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7499328,
+        "lng": 13.5144642,
+        "display_name": "Liepnitzseefähre, Anlegestelle Ützdorf Nordufer, Wandlitz, Deutschland",
+        "class": "amenity",
+        "type": "ferry_terminal",
+        "provider": "photon"
+      },
+      "delta_m": 5161,
+      "from_city_m": 4197,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "wandlitz_fahre_liepnitzsee_sudufer",
+        "wandlitz_waldspielplatz_wandlitz",
+        "wandlitz_parkplatz_zweijahreszeiten",
+        "wandlitz_strandbad_stolzenhagen",
+        "wandlitz_ruheplatz_am_liepnitzsee",
+        "wandlitz_kleiner_bach",
+        "wandlitz_gefallenendenkmal_1_und_2_weltkrieg_klosterfelde",
+        "wandlitz_ingo_struntz",
+        "wandlitz_evangel_pfarramt",
+        "wandlitz_tor13",
+        "wandlitz_geschenkideen",
+        "wandlitz_schlosspark_lanke_lenne_park",
+        "wandlitz_biesenthaler_becken",
+        "wandlitz_aussichtsplattform"
+      ]
+    },
+    {
+      "id": "wandlitz_ruheplatz_am_liepnitzsee",
+      "name": "Ruheplatz am Liepnitzsee",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.7916469,
+        "lng": 13.480812660000002
+      },
+      "query": "Ruheplatz am Liepnitzsee, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7544138,
+        "lng": 13.5184059,
+        "display_name": "Liepnitzsee-Stübchen, Am Liepnitzsee, Wandlitz, Deutschland",
+        "class": "amenity",
+        "type": "fast_food",
+        "provider": "photon"
+      },
+      "delta_m": 4851,
+      "from_city_m": 4197,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "wandlitz_fahre_liepnitzsee_nord",
+        "wandlitz_fahre_liepnitzsee_sudufer",
+        "wandlitz_waldspielplatz_wandlitz",
+        "wandlitz_parkplatz_zweijahreszeiten",
+        "wandlitz_strandbad_stolzenhagen",
+        "wandlitz_kleiner_bach",
+        "wandlitz_gefallenendenkmal_1_und_2_weltkrieg_klosterfelde",
+        "wandlitz_ingo_struntz",
+        "wandlitz_evangel_pfarramt",
+        "wandlitz_tor13",
+        "wandlitz_geschenkideen",
+        "wandlitz_schlosspark_lanke_lenne_park",
+        "wandlitz_biesenthaler_becken",
+        "wandlitz_aussichtsplattform"
+      ]
+    },
+    {
+      "id": "wandlitz_strandbad_stolzenhagen",
+      "name": "Strandbad Stolzenhagen",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.7916469,
+        "lng": 13.480812660000002
+      },
+      "query": "Strandbad Stolzenhagen, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7605186,
+        "lng": 13.4406271,
+        "display_name": "Strandbad Stolzenhagener See, Stolzenhagen, Wandlitz, Barnim, Brandenburg, Deutschland",
+        "class": "natural",
+        "type": "beach",
+        "importance": 0.10671827649347675,
+        "osm_type": "way",
+        "osm_id": 28543067,
+        "provider": "nominatim"
+      },
+      "delta_m": 4392,
+      "from_city_m": 4197,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "wandlitz_fahre_liepnitzsee_nord",
+        "wandlitz_fahre_liepnitzsee_sudufer",
+        "wandlitz_waldspielplatz_wandlitz",
+        "wandlitz_parkplatz_zweijahreszeiten",
+        "wandlitz_ruheplatz_am_liepnitzsee",
+        "wandlitz_kleiner_bach",
+        "wandlitz_gefallenendenkmal_1_und_2_weltkrieg_klosterfelde",
+        "wandlitz_ingo_struntz",
+        "wandlitz_evangel_pfarramt",
+        "wandlitz_tor13",
+        "wandlitz_geschenkideen",
+        "wandlitz_schlosspark_lanke_lenne_park",
+        "wandlitz_biesenthaler_becken",
+        "wandlitz_aussichtsplattform"
+      ]
+    },
+    {
+      "id": "wandlitz_fahre_liepnitzsee_sudufer",
+      "name": "Fähre Liepnitzsee Südufer",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.7916469,
+        "lng": 13.480812660000002
+      },
+      "query": "Fähre, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7565273,
+        "lng": 13.4550849,
+        "display_name": "Wandlitzsee, Wandlitz, Deutschland",
+        "class": "natural",
+        "type": "water",
+        "provider": "photon"
+      },
+      "delta_m": 4271,
+      "from_city_m": 4197,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "wandlitz_fahre_liepnitzsee_nord",
+        "wandlitz_waldspielplatz_wandlitz",
+        "wandlitz_parkplatz_zweijahreszeiten",
+        "wandlitz_strandbad_stolzenhagen",
+        "wandlitz_ruheplatz_am_liepnitzsee",
+        "wandlitz_kleiner_bach",
+        "wandlitz_gefallenendenkmal_1_und_2_weltkrieg_klosterfelde",
+        "wandlitz_ingo_struntz",
+        "wandlitz_evangel_pfarramt",
+        "wandlitz_tor13",
+        "wandlitz_geschenkideen",
+        "wandlitz_schlosspark_lanke_lenne_park",
+        "wandlitz_biesenthaler_becken",
+        "wandlitz_aussichtsplattform"
+      ]
+    },
+    {
+      "id": "wandlitz_waldspielplatz_wandlitz",
+      "name": "Waldspielplatz Wandlitz",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.7916469,
+        "lng": 13.480812660000002
+      },
+      "query": "Waldspielplatz Wandlitz, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7565273,
+        "lng": 13.4550849,
+        "display_name": "Wandlitzsee, Wandlitz, Deutschland",
+        "class": "natural",
+        "type": "water",
+        "provider": "photon"
+      },
+      "delta_m": 4271,
+      "from_city_m": 4197,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "wandlitz_fahre_liepnitzsee_nord",
+        "wandlitz_fahre_liepnitzsee_sudufer",
+        "wandlitz_parkplatz_zweijahreszeiten",
+        "wandlitz_strandbad_stolzenhagen",
+        "wandlitz_ruheplatz_am_liepnitzsee",
+        "wandlitz_kleiner_bach",
+        "wandlitz_gefallenendenkmal_1_und_2_weltkrieg_klosterfelde",
+        "wandlitz_ingo_struntz",
+        "wandlitz_evangel_pfarramt",
+        "wandlitz_tor13",
+        "wandlitz_geschenkideen",
+        "wandlitz_schlosspark_lanke_lenne_park",
+        "wandlitz_biesenthaler_becken",
+        "wandlitz_aussichtsplattform"
+      ]
+    },
+    {
+      "id": "wandlitz_tor13",
+      "name": "Tor13",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.7916469,
+        "lng": 13.480812660000002
+      },
+      "query": "Tor13, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7565273,
+        "lng": 13.4550849,
+        "display_name": "Wandlitzsee, Wandlitz, Deutschland",
+        "class": "natural",
+        "type": "water",
+        "provider": "photon"
+      },
+      "delta_m": 4271,
+      "from_city_m": 4197,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "wandlitz_fahre_liepnitzsee_nord",
+        "wandlitz_fahre_liepnitzsee_sudufer",
+        "wandlitz_waldspielplatz_wandlitz",
+        "wandlitz_parkplatz_zweijahreszeiten",
+        "wandlitz_strandbad_stolzenhagen",
+        "wandlitz_ruheplatz_am_liepnitzsee",
+        "wandlitz_kleiner_bach",
+        "wandlitz_gefallenendenkmal_1_und_2_weltkrieg_klosterfelde",
+        "wandlitz_ingo_struntz",
+        "wandlitz_evangel_pfarramt",
+        "wandlitz_geschenkideen",
+        "wandlitz_schlosspark_lanke_lenne_park",
+        "wandlitz_biesenthaler_becken",
+        "wandlitz_aussichtsplattform"
+      ]
+    },
+    {
+      "id": "wandlitz_geschenkideen",
+      "name": "Geschenkideen",
+      "category": "souvenir",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.7916469,
+        "lng": 13.480812660000002
+      },
+      "query": "Geschenkideen, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7565273,
+        "lng": 13.4550849,
+        "display_name": "Wandlitzsee, Wandlitz, Deutschland",
+        "class": "natural",
+        "type": "water",
+        "provider": "photon"
+      },
+      "delta_m": 4271,
+      "from_city_m": 4197,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "wandlitz_fahre_liepnitzsee_nord",
+        "wandlitz_fahre_liepnitzsee_sudufer",
+        "wandlitz_waldspielplatz_wandlitz",
+        "wandlitz_parkplatz_zweijahreszeiten",
+        "wandlitz_strandbad_stolzenhagen",
+        "wandlitz_ruheplatz_am_liepnitzsee",
+        "wandlitz_kleiner_bach",
+        "wandlitz_gefallenendenkmal_1_und_2_weltkrieg_klosterfelde",
+        "wandlitz_ingo_struntz",
+        "wandlitz_evangel_pfarramt",
+        "wandlitz_tor13",
+        "wandlitz_schlosspark_lanke_lenne_park",
+        "wandlitz_biesenthaler_becken",
+        "wandlitz_aussichtsplattform"
+      ]
+    },
+    {
+      "id": "wandlitz_minigolf_rahmersee_uwe_daul",
+      "name": "Minigolf Rahmersee - Uwe Daul",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.75920747058824,
+        "lng": 13.472346294117648
+      },
+      "query": "Minigolf Rahmersee, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7539701,
+        "lng": 13.4175614,
+        "display_name": "Rahmersee, Wandlitz, Deutschland",
+        "class": "place",
+        "type": "hamlet",
+        "provider": "photon"
+      },
+      "delta_m": 3732,
+      "from_city_m": 555,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "wandlitz_st_konrad",
+        "wandlitz_badestelle_mit_sand",
+        "wandlitz_liepnitzsee",
+        "wandlitz_haus_von_erich_honecker",
+        "wandlitz_wanderweg_am_liepnitzsee",
+        "wandlitz_wandlitzer_see",
+        "wandlitz_zweijahreszeiten",
+        "wandlitz_"
+      ]
+    },
+    {
+      "id": "wandlitz_brandenburgklinik_haus_barnim",
+      "name": "Brandenburgklinik - Haus Barnim",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.7322578,
+        "lng": 13.4890528
+      },
+      "query": "Brandenburgklinik, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7565273,
+        "lng": 13.4550849,
+        "display_name": "Wandlitzsee, Wandlitz, Deutschland",
+        "class": "natural",
+        "type": "water",
+        "provider": "photon"
+      },
+      "delta_m": 3537,
+      "from_city_m": 2677,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "wandlitz_kantorei_wandlitz_e_v",
+      "name": "KANTOREI WANDLITZ e.V.",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.76317722,
+        "lng": 13.437956080000001
+      },
+      "query": "KANTOREI WANDLITZ e.V., Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7506685,
+        "lng": 13.4839123,
+        "display_name": "Wandlitzer Schützengesellschaft 1888 e.V., Lanker Weg, Wandlitz, Deutschland",
+        "class": "building",
+        "type": "detached",
+        "provider": "photon"
+      },
+      "delta_m": 3391,
+      "from_city_m": 2546,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "wandlitz_wanderweg_am_liepnitzsee",
+      "name": "Wanderweg am Liepnitzsee",
+      "category": "wanderung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.75920747058824,
+        "lng": 13.472346294117648
+      },
+      "query": "Wanderweg am Liepnitzsee, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7544138,
+        "lng": 13.5184059,
+        "display_name": "Liepnitzsee-Stübchen, Am Liepnitzsee, Wandlitz, Deutschland",
+        "class": "amenity",
+        "type": "fast_food",
+        "provider": "photon"
+      },
+      "delta_m": 3145,
+      "from_city_m": 555,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "wandlitz_st_konrad",
+        "wandlitz_minigolf_rahmersee_uwe_daul",
+        "wandlitz_badestelle_mit_sand",
+        "wandlitz_liepnitzsee",
+        "wandlitz_haus_von_erich_honecker",
+        "wandlitz_wandlitzer_see",
+        "wandlitz_zweijahreszeiten",
+        "wandlitz_"
+      ]
+    },
+    {
+      "id": "wandlitz_liepnitzsee",
+      "name": "Liepnitzsee",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.75920747058824,
+        "lng": 13.472346294117648
+      },
+      "query": "Liepnitzsee, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7486478,
+        "lng": 13.5149749,
+        "display_name": "Liepnitzsee, Lanke, Wandlitz, Barnim, Brandenburg, Deutschland",
+        "class": "water",
+        "type": "lake",
+        "importance": 0.26244239079806453,
+        "osm_type": "relation",
+        "osm_id": 27235,
+        "provider": "nominatim"
+      },
+      "delta_m": 3100,
+      "from_city_m": 555,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "wandlitz_st_konrad",
+        "wandlitz_minigolf_rahmersee_uwe_daul",
+        "wandlitz_badestelle_mit_sand",
+        "wandlitz_haus_von_erich_honecker",
+        "wandlitz_wanderweg_am_liepnitzsee",
+        "wandlitz_wandlitzer_see",
+        "wandlitz_zweijahreszeiten",
+        "wandlitz_"
+      ]
+    },
+    {
+      "id": "wandlitz_forsthaus_am_liepnitzsee",
+      "name": "Forsthaus am Liepnitzsee",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.737499,
+        "lng": 13.489398999999997
+      },
+      "query": "Forsthaus am Liepnitzsee, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7544138,
+        "lng": 13.5184059,
+        "display_name": "Liepnitzsee-Stübchen, Am Liepnitzsee, Wandlitz, Deutschland",
+        "class": "amenity",
+        "type": "fast_food",
+        "provider": "photon"
+      },
+      "delta_m": 2711,
+      "from_city_m": 2170,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "wandlitz_kleiner_bach",
+      "name": "Kleiner Bach",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.7916469,
+        "lng": 13.480812660000002
+      },
+      "query": "Kleiner Bach, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.8107424,
+        "lng": 13.504423,
+        "display_name": "Kleiner Lottschesee, Wandlitz, Deutschland",
+        "class": "natural",
+        "type": "water",
+        "provider": "photon"
+      },
+      "delta_m": 2651,
+      "from_city_m": 4197,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "wandlitz_fahre_liepnitzsee_nord",
+        "wandlitz_fahre_liepnitzsee_sudufer",
+        "wandlitz_waldspielplatz_wandlitz",
+        "wandlitz_parkplatz_zweijahreszeiten",
+        "wandlitz_strandbad_stolzenhagen",
+        "wandlitz_ruheplatz_am_liepnitzsee",
+        "wandlitz_gefallenendenkmal_1_und_2_weltkrieg_klosterfelde",
+        "wandlitz_ingo_struntz",
+        "wandlitz_evangel_pfarramt",
+        "wandlitz_tor13",
+        "wandlitz_geschenkideen",
+        "wandlitz_schlosspark_lanke_lenne_park",
+        "wandlitz_biesenthaler_becken",
+        "wandlitz_aussichtsplattform"
+      ]
+    },
+    {
+      "id": "wandlitz_whirlpool_living_gmbh_wandlitz_bei_berlin",
+      "name": "Whirlpool & Living GmbH Wandlitz bei Berlin",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.73398544444444,
+        "lng": 13.449174000000001
+      },
+      "query": "Whirlpool, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7565273,
+        "lng": 13.4550849,
+        "display_name": "Wandlitzsee, Wandlitz, Deutschland",
+        "class": "natural",
+        "type": "water",
+        "provider": "photon"
+      },
+      "delta_m": 2538,
+      "from_city_m": 2754,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "wandlitz_see_wandlitz",
+      "name": "See Wandlitz",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.7600672,
+        "lng": 13.4429844
+      },
+      "query": "See Wandlitz, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7756587,
+        "lng": 13.4467312,
+        "display_name": "Stolzenhagen, Straße am See, Lanker Chaussee, Stolzenhagen, Wandlitz, Barnim, Brandenburg, 16348, Deutschland",
+        "class": "highway",
+        "type": "bus_stop",
+        "importance": 0.00005160982681005596,
+        "osm_type": "node",
+        "osm_id": 1714761868,
+        "provider": "nominatim"
+      },
+      "delta_m": 1752,
+      "from_city_m": 2107,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "wandlitz_studio_wandlitz",
+      "name": "STUDIO WANDLITZ",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.74285807692308,
+        "lng": 13.456314615384615
+      },
+      "query": "STUDIO WANDLITZ, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7565273,
+        "lng": 13.4550849,
+        "display_name": "Wandlitzsee, Wandlitz, Deutschland",
+        "class": "natural",
+        "type": "water",
+        "provider": "photon"
+      },
+      "delta_m": 1522,
+      "from_city_m": 1680,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "wandlitz_cafe_stall",
+      "name": "Café Stall",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.7528896,
+        "lng": 13.452149599999998
+      },
+      "query": "Café Stall, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7559524,
+        "lng": 13.4736807,
+        "display_name": "Zug Cafè Wandlitzsee, Bahnhofsplatz, Wandlitz, Deutschland",
+        "class": "amenity",
+        "type": "cafe",
+        "provider": "photon"
+      },
+      "delta_m": 1489,
+      "from_city_m": 1396,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "wandlitz_wandlitz",
+      "name": "Wandlitz",
+      "category": "bahnhof",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.744817000000005,
+        "lng": 13.465963
+      },
+      "query": "Wandlitz, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7537935,
+        "lng": 13.4519809,
+        "display_name": "Wandlitz, Wandlitz, Deutschland",
+        "class": "place",
+        "type": "village",
+        "provider": "photon"
+      },
+      "delta_m": 1372,
+      "from_city_m": 1142,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "wandlitz_wandlitz_bahnhof",
+        "wandlitz_osm_transit_2461877822"
+      ]
+    },
+    {
+      "id": "wandlitz_wandlitzsee",
+      "name": "Wandlitzsee",
+      "category": "bahnhof",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.756103384615386,
+        "lng": 13.473634615384615
+      },
+      "query": "Wandlitzsee, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7565273,
+        "lng": 13.4550849,
+        "display_name": "Wandlitzsee, Wandlitz, Barnim, Brandenburg, Deutschland",
+        "class": "natural",
+        "type": "water",
+        "importance": 0.2507397701059262,
+        "osm_type": "way",
+        "osm_id": 4746237,
+        "provider": "nominatim"
+      },
+      "delta_m": 1249,
+      "from_city_m": 217,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "wandlitz_wandlitz_wandlitzsee_bhf",
+        "wandlitz_offentlicher_parkplatz_am_strandbad_wandlitzsee"
+      ]
+    },
+    {
+      "id": "wandlitz_wandlitz_wandlitzsee_bhf",
+      "name": "Wandlitz, Wandlitzsee Bhf",
+      "category": "bahnhof",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.756103384615386,
+        "lng": 13.473634615384615
+      },
+      "query": "Wandlitz, Wandlitzsee Bhf, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7565273,
+        "lng": 13.4550849,
+        "display_name": "Wandlitzsee, Wandlitz, Deutschland",
+        "class": "natural",
+        "type": "water",
+        "provider": "photon"
+      },
+      "delta_m": 1249,
+      "from_city_m": 217,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "wandlitz_wandlitzsee",
+        "wandlitz_offentlicher_parkplatz_am_strandbad_wandlitzsee"
+      ]
+    },
+    {
+      "id": "wandlitz_wandlitzer_see",
+      "name": "Wandlitzer See",
+      "category": "radweg",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.75920747058824,
+        "lng": 13.472346294117648
+      },
+      "query": "Wandlitzer See, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7565273,
+        "lng": 13.4550849,
+        "display_name": "Wandlitzsee, Wandlitz, Barnim, Brandenburg, Deutschland",
+        "class": "natural",
+        "type": "water",
+        "importance": 0.2507397701059262,
+        "osm_type": "way",
+        "osm_id": 4746237,
+        "provider": "nominatim"
+      },
+      "delta_m": 1199,
+      "from_city_m": 555,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "wandlitz_st_konrad",
+        "wandlitz_minigolf_rahmersee_uwe_daul",
+        "wandlitz_badestelle_mit_sand",
+        "wandlitz_liepnitzsee",
+        "wandlitz_haus_von_erich_honecker",
+        "wandlitz_wanderweg_am_liepnitzsee",
+        "wandlitz_zweijahreszeiten",
+        "wandlitz_"
+      ]
+    },
+    {
+      "id": "wandlitz_zweijahreszeiten",
+      "name": "Zweijahreszeiten",
+      "category": "radweg",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.75920747058824,
+        "lng": 13.472346294117648
+      },
+      "query": "Zweijahreszeiten, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7565273,
+        "lng": 13.4550849,
+        "display_name": "Wandlitzsee, Wandlitz, Deutschland",
+        "class": "natural",
+        "type": "water",
+        "provider": "photon"
+      },
+      "delta_m": 1199,
+      "from_city_m": 555,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "wandlitz_st_konrad",
+        "wandlitz_minigolf_rahmersee_uwe_daul",
+        "wandlitz_badestelle_mit_sand",
+        "wandlitz_liepnitzsee",
+        "wandlitz_haus_von_erich_honecker",
+        "wandlitz_wanderweg_am_liepnitzsee",
+        "wandlitz_wandlitzer_see",
+        "wandlitz_"
+      ]
+    },
+    {
+      "id": "wandlitz_kinderspielplatz_wandlitzsee",
+      "name": "Kinderspielplatz Wandlitzsee",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.757646799999996,
+        "lng": 13.472432899999998
+      },
+      "query": "Kinderspielplatz Wandlitzsee, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7565273,
+        "lng": 13.4550849,
+        "display_name": "Wandlitzsee, Wandlitz, Deutschland",
+        "class": "natural",
+        "type": "water",
+        "provider": "photon"
+      },
+      "delta_m": 1174,
+      "from_city_m": 382,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "wandlitz_neuart",
+      "name": "NEUART",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.74952913999999,
+        "lng": 13.44227862
+      },
+      "query": "NEUART, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7565273,
+        "lng": 13.4550849,
+        "display_name": "Wandlitzsee, Wandlitz, Deutschland",
+        "class": "natural",
+        "type": "water",
+        "provider": "photon"
+      },
+      "delta_m": 1161,
+      "from_city_m": 2117,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "wandlitz_privathafen_zerpenschleuse",
+      "name": "Privathafen Zerpenschleuse",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.848047900000005,
+        "lng": 13.53857004
+      },
+      "query": "Privathafen Zerpenschleuse, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.8515828,
+        "lng": 13.527697,
+        "display_name": "Zerpenschleuse, Wandlitz, Deutschland",
+        "class": "place",
+        "type": "village",
+        "provider": "photon"
+      },
+      "delta_m": 829,
+      "from_city_m": 11332,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "wandlitz_klosterfelde",
+      "name": "Klosterfelde",
+      "category": "bahnhof",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.79130138571429,
+        "lng": 13.487958257142859
+      },
+      "query": "Klosterfelde, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7965937,
+        "lng": 13.4801974,
+        "display_name": "Klosterfelde, Wandlitz, Deutschland",
+        "class": "place",
+        "type": "village",
+        "provider": "photon"
+      },
+      "delta_m": 787,
+      "from_city_m": 4248,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "wandlitz_sg_union_1919_klosterfelde_e_v"
+      ]
+    },
+    {
+      "id": "wandlitz_kirche_klosterfelde_pfarrsprengel_klosterfelde",
+      "name": "Kirche Klosterfelde - Pfarrsprengel Klosterfelde",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.7916247,
+        "lng": 13.480089699999999
+      },
+      "query": "Kirche Klosterfelde, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7965937,
+        "lng": 13.4801974,
+        "display_name": "Klosterfelde, Wandlitz, Deutschland",
+        "class": "place",
+        "type": "village",
+        "provider": "photon"
+      },
+      "delta_m": 553,
+      "from_city_m": 4188,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "wandlitz_fachwerkkirche_prenden_mit_heimatmuseum",
+      "name": "Fachwerkkirche Prenden mit Heimatmuseum",
+      "category": "kirche",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.79039836,
+        "lng": 13.5500972
+      },
+      "query": "Fachwerkkirche Prenden, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.792903,
+        "lng": 13.5495308,
+        "display_name": "Prenden, Wandlitz, Deutschland",
+        "class": "place",
+        "type": "village",
+        "provider": "photon"
+      },
+      "delta_m": 281,
+      "from_city_m": 6576,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "wandlitz_strandbad_stolzenhagen_parkplatz_und_eingang",
+      "name": "Strandbad Stolzenhagen, Parkplatz und Eingang",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.76206214,
+        "lng": 13.441478460000003
+      },
+      "query": "Strandbad Stolzenhagen, Parkplatz, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7605186,
+        "lng": 13.4406271,
+        "display_name": "Strandbad Stolzenhagener See, Wandlitz, Deutschland",
+        "class": "natural",
+        "type": "beach",
+        "provider": "photon"
+      },
+      "delta_m": 181,
+      "from_city_m": 2279,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "wandlitz_pura_natura",
+      "name": "pura natura",
+      "category": "souvenir",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.75720028571429,
+        "lng": 13.473426857142856
+      },
+      "query": "pura natura, Wandlitz",
+      "osm": {
+        "lat": 41.1809902,
+        "lng": -8.6558419,
+        "display_name": "Natura Pura, Piso -2, Matosinhos, Portugal",
+        "class": "shop",
+        "type": "clothes",
+        "provider": "photon"
+      },
+      "delta_m": 2101185,
+      "from_city_m": 334,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "wandlitz_der_prinzenstein_im_lanker_forst",
+      "name": "Der Prinzenstein im Lanker Forst",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.761492999999994,
+        "lng": 13.5648209
+      },
+      "query": "Der Prinzenstein im Lanker Forst, Wandlitz, Germany",
+      "osm": {
+        "lat": 49.9995184,
+        "lng": 9.3866279,
+        "display_name": "Langrück, Forst Hain im Spessart, Deutschland",
+        "class": "place",
+        "type": "locality",
+        "provider": "photon"
+      },
+      "delta_m": 422245,
+      "from_city_m": 6247,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city",
+        "duplicate_center"
+      ],
+      "twins": [
+        "wandlitz_alte_eiche",
+        "wandlitz_kriegerdenkmal_zerpenschleuse",
+        "wandlitz_dorfkirche_lanke",
+        "wandlitz_waldsiedlung_wandlitz"
+      ]
+    },
+    {
+      "id": "wandlitz_haus_von_erich_honecker",
+      "name": "Haus von Erich Honecker",
+      "category": "altstadt",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.75920747058824,
+        "lng": 13.472346294117648
+      },
+      "query": "Haus von Erich, Wandlitz, Germany",
+      "osm": {
+        "lat": 50.6640401,
+        "lng": 9.3277636,
+        "display_name": "Erich-Archut-Haus, Unterdorf, Wallenrod, Deutschland",
+        "class": "amenity",
+        "type": "community_centre",
+        "provider": "photon"
+      },
+      "delta_m": 368434,
+      "from_city_m": 555,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city",
+        "duplicate_center"
+      ],
+      "twins": [
+        "wandlitz_st_konrad",
+        "wandlitz_minigolf_rahmersee_uwe_daul",
+        "wandlitz_badestelle_mit_sand",
+        "wandlitz_liepnitzsee",
+        "wandlitz_wanderweg_am_liepnitzsee",
+        "wandlitz_wandlitzer_see",
+        "wandlitz_zweijahreszeiten",
+        "wandlitz_"
+      ]
+    },
+    {
+      "id": "wandlitz_evangel_pfarramt",
+      "name": "Evangel. Pfarramt",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.7916469,
+        "lng": 13.480812660000002
+      },
+      "query": "Evangel. Pfarramt, Wandlitz, Germany",
+      "osm": {
+        "lat": 51.0853953,
+        "lng": 12.4318469,
+        "display_name": "Evangel.-Luth. Pfarramt, Heinrich-Pestalozzi-Straße, Regis-Breitingen, Deutschland",
+        "class": "office",
+        "type": "religion",
+        "provider": "photon"
+      },
+      "delta_m": 202891,
+      "from_city_m": 4197,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city",
+        "duplicate_center"
+      ],
+      "twins": [
+        "wandlitz_fahre_liepnitzsee_nord",
+        "wandlitz_fahre_liepnitzsee_sudufer",
+        "wandlitz_waldspielplatz_wandlitz",
+        "wandlitz_parkplatz_zweijahreszeiten",
+        "wandlitz_strandbad_stolzenhagen",
+        "wandlitz_ruheplatz_am_liepnitzsee",
+        "wandlitz_kleiner_bach",
+        "wandlitz_gefallenendenkmal_1_und_2_weltkrieg_klosterfelde",
+        "wandlitz_ingo_struntz",
+        "wandlitz_tor13",
+        "wandlitz_geschenkideen",
+        "wandlitz_schlosspark_lanke_lenne_park",
+        "wandlitz_biesenthaler_becken",
+        "wandlitz_aussichtsplattform"
+      ]
+    },
+    {
+      "id": "wandlitz_waldsiedlung_wandlitz",
+      "name": "Waldsiedlung Wandlitz",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.761492999999994,
+        "lng": 13.5648209
+      },
+      "query": "Waldsiedlung Wandlitz, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.6808581,
+        "lng": 13.4207591,
+        "display_name": "Waldsiedlung, Schönwalde, Wandlitz, Barnim, Brandenburg, 16348, Deutschland",
+        "class": "highway",
+        "type": "residential",
+        "importance": 0.0533849431601434,
+        "osm_type": "way",
+        "osm_id": 34285629,
+        "provider": "nominatim"
+      },
+      "delta_m": 13211,
+      "from_city_m": 6247,
+      "status": "CHECK",
+      "flags": [
+        "house_like_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "wandlitz_alte_eiche",
+        "wandlitz_kriegerdenkmal_zerpenschleuse",
+        "wandlitz_der_prinzenstein_im_lanker_forst",
+        "wandlitz_dorfkirche_lanke"
+      ]
+    },
+    {
+      "id": "wandlitz_parkplatz_zweijahreszeiten",
+      "name": "Parkplatz Zweijahreszeiten",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.7916469,
+        "lng": 13.480812660000002
+      },
+      "query": "Parkplatz Zweijahreszeiten, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7123978,
+        "lng": 13.4394497,
+        "display_name": "Am Parkplatz, Wandlitz, Deutschland",
+        "class": "highway",
+        "type": "residential",
+        "provider": "photon"
+      },
+      "delta_m": 9241,
+      "from_city_m": 4197,
+      "status": "CHECK",
+      "flags": [
+        "house_like_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "wandlitz_fahre_liepnitzsee_nord",
+        "wandlitz_fahre_liepnitzsee_sudufer",
+        "wandlitz_waldspielplatz_wandlitz",
+        "wandlitz_strandbad_stolzenhagen",
+        "wandlitz_ruheplatz_am_liepnitzsee",
+        "wandlitz_kleiner_bach",
+        "wandlitz_gefallenendenkmal_1_und_2_weltkrieg_klosterfelde",
+        "wandlitz_ingo_struntz",
+        "wandlitz_evangel_pfarramt",
+        "wandlitz_tor13",
+        "wandlitz_geschenkideen",
+        "wandlitz_schlosspark_lanke_lenne_park",
+        "wandlitz_biesenthaler_becken",
+        "wandlitz_aussichtsplattform"
+      ]
+    },
+    {
+      "id": "wandlitz_gefallenendenkmal_1_und_2_weltkrieg_klosterfelde",
+      "name": "Gefallenendenkmal 1. und 2. Weltkrieg Klosterfelde",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.7916469,
+        "lng": 13.480812660000002
+      },
+      "query": "Gefallenendenkmal 1., Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7560655,
+        "lng": 13.4736707,
+        "display_name": "Bahnhof Wandlitzsee, Bahnhofsplatz, Wandlitz, Deutschland",
+        "class": "building",
+        "type": "train_station",
+        "provider": "photon"
+      },
+      "delta_m": 3986,
+      "from_city_m": 4197,
+      "status": "CHECK",
+      "flags": [
+        "house_like_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "wandlitz_fahre_liepnitzsee_nord",
+        "wandlitz_fahre_liepnitzsee_sudufer",
+        "wandlitz_waldspielplatz_wandlitz",
+        "wandlitz_parkplatz_zweijahreszeiten",
+        "wandlitz_strandbad_stolzenhagen",
+        "wandlitz_ruheplatz_am_liepnitzsee",
+        "wandlitz_kleiner_bach",
+        "wandlitz_ingo_struntz",
+        "wandlitz_evangel_pfarramt",
+        "wandlitz_tor13",
+        "wandlitz_geschenkideen",
+        "wandlitz_schlosspark_lanke_lenne_park",
+        "wandlitz_biesenthaler_becken",
+        "wandlitz_aussichtsplattform"
+      ]
+    },
+    {
+      "id": "wandlitz_1_fv_eintracht_wandlitz_e_v",
+      "name": "1. FV Eintracht Wandlitz e.V.",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.74995260000001,
+        "lng": 13.447173000000001
+      },
+      "query": "1. FV Eintracht Wandlitz e.V., Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7498168,
+        "lng": 13.4457658,
+        "display_name": "1.FV Eintracht Wandlitz, Oranienburger Straße, Wandlitz, Deutschland",
+        "class": "leisure",
+        "type": "pitch",
+        "provider": "photon"
+      },
+      "delta_m": 96,
+      "from_city_m": 1787,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "wandlitz_kleines_schloss_lanke",
+      "name": "Kleines Schloß Lanke",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.759887799999994,
+        "lng": 13.564487199999999
+      },
+      "query": "Kleines Schloß Lanke, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.759749,
+        "lng": 13.5654579,
+        "display_name": "Schloss Lanke, Lanker Dorfstraße, Wandlitz, Deutschland",
+        "class": "building",
+        "type": "yes",
+        "provider": "photon"
+      },
+      "delta_m": 67,
+      "from_city_m": 6204,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "wandlitz_kunstrasenplatz_wandlitz",
+      "name": "Kunstrasenplatz Wandlitz",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.748020239999995,
+        "lng": 13.46667204
+      },
+      "query": "Kunstrasenplatz Wandlitz, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7478473,
+        "lng": 13.4676064,
+        "display_name": "Kunstrasenplatz, Bahnpromenade, Wandlitz, Barnim, Brandenburg, 16348, Deutschland",
+        "class": "leisure",
+        "type": "pitch",
+        "importance": 0.00005160982681005596,
+        "osm_type": "way",
+        "osm_id": 1284563298,
+        "provider": "nominatim"
+      },
+      "delta_m": 66,
+      "from_city_m": 802,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "wandlitz_stolzenhagen_bei_wandlitz_kirche",
+      "name": "Stolzenhagen (bei Wandlitz), Kirche",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.77755611111112,
+        "lng": 13.438603222222222
+      },
+      "query": "Stolzenhagen , Kirche, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7779294,
+        "lng": 13.4390367,
+        "display_name": "Stolzenhagen, Kirche, Am Anger, Wandlitz, Deutschland",
+        "class": "highway",
+        "type": "bus_stop",
+        "provider": "photon"
+      },
+      "delta_m": 51,
+      "from_city_m": 3467,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "wandlitz_dorfkirche_stolzenhagen_wandlitz"
+      ]
+    },
+    {
+      "id": "wandlitz_fischerstube_stolzenhagen",
+      "name": "Fischerstube Stolzenhagen",
+      "category": "radweg",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.7722706,
+        "lng": 13.4334838
+      },
+      "query": "Fischerstube Stolzenhagen, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7719271,
+        "lng": 13.4331898,
+        "display_name": "Fischerstube, 1a, Basdorfer Straße, Stolzenhagen, Wandlitz, Barnim, Brandenburg, 16348, Deutschland",
+        "class": "amenity",
+        "type": "restaurant",
+        "importance": 0.00005160982681005596,
+        "osm_type": "node",
+        "osm_id": 143795062,
+        "provider": "nominatim"
+      },
+      "delta_m": 43,
+      "from_city_m": 3319,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "wandlitz_osm_transit_3510185006"
+      ]
+    },
+    {
+      "id": "wandlitz_parkplatz_prenzlauer_chaussee_179_16348_wandlitz",
+      "name": "Parkplatz Prenzlauer Chaussee 179, 16348 Wandlitz",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.75809671428572,
+        "lng": 13.473757428571428
+      },
+      "query": "Parkplatz Prenzlauer Chaussee 179, 16348, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7582076,
+        "lng": 13.4739872,
+        "display_name": "Sonnenblume, Prenzlauer Chaussee, Wandlitz, Deutschland",
+        "class": "shop",
+        "type": "florist",
+        "provider": "photon"
+      },
+      "delta_m": 20,
+      "from_city_m": 436,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "wandlitz_osm_post_office_2071431770"
+      ]
+    },
+    {
+      "id": "wandlitz_st_konrad",
+      "name": "St. Konrad",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.75920746470587,
+        "lng": 13.472346276470589
+      },
+      "query": "St. Konrad, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7591986,
+        "lng": 13.472507,
+        "display_name": "St. Konrad, 2, Thälmannstraße, Wandlitz, Barnim, Brandenburg, 16348, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.1507975276546128,
+        "osm_type": "way",
+        "osm_id": 291300376,
+        "provider": "nominatim"
+      },
+      "delta_m": 11,
+      "from_city_m": 555,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "wandlitz_minigolf_rahmersee_uwe_daul",
+        "wandlitz_badestelle_mit_sand",
+        "wandlitz_liepnitzsee",
+        "wandlitz_haus_von_erich_honecker",
+        "wandlitz_wanderweg_am_liepnitzsee",
+        "wandlitz_wandlitzer_see",
+        "wandlitz_zweijahreszeiten",
+        "wandlitz_"
+      ]
+    },
+    {
+      "id": "wandlitz_dorfkirche_stolzenhagen_wandlitz",
+      "name": "Dorfkirche Stolzenhagen (Wandlitz)",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.77755611111112,
+        "lng": 13.438603222222222
+      },
+      "query": "Dorfkirche Stolzenhagen, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7775607,
+        "lng": 13.4385573,
+        "display_name": "Evangelische Dorfkirche Stolzenhagen, Am Anger, Stolzenhagen, Wandlitz, Barnim, Brandenburg, 16348, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.00005160982681005596,
+        "osm_type": "way",
+        "osm_id": 159735928,
+        "provider": "nominatim"
+      },
+      "delta_m": 3,
+      "from_city_m": 3467,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "wandlitz_stolzenhagen_bei_wandlitz_kirche"
+      ]
+    },
+    {
+      "id": "wandlitz_dorfkirche_lanke",
+      "name": "Dorfkirche Lanke",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.761492999999994,
+        "lng": 13.5648209
+      },
+      "query": "Dorfkirche Lanke, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7614883,
+        "lng": 13.5648524,
+        "display_name": "Lanker Dorfkirche, 1, Baggerberg, Lanke, Wandlitz, Barnim, Brandenburg, 16348, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.11734328469919902,
+        "osm_type": "way",
+        "osm_id": 510855971,
+        "provider": "nominatim"
+      },
+      "delta_m": 2,
+      "from_city_m": 6247,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "wandlitz_alte_eiche",
+        "wandlitz_kriegerdenkmal_zerpenschleuse",
+        "wandlitz_der_prinzenstein_im_lanker_forst",
+        "wandlitz_waldsiedlung_wandlitz"
+      ]
+    },
+    {
+      "id": "wandlitz_offentliche_badestelle_wandlitzsee",
+      "name": "Öffentliche Badestelle Wandlitzsee",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.758079801015235,
+        "lng": 13.452778655329949
+      },
+      "query": "Öffentliche Badestelle Wandlitzsee, Wandlitz",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 1412,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "wandlitz_",
+      "name": "Остров Штельмака",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.75920747058824,
+        "lng": 13.472346294117648
+      },
+      "query": "Остров Штельмака, Wandlitz",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 555,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "wandlitz_st_konrad",
+        "wandlitz_minigolf_rahmersee_uwe_daul",
+        "wandlitz_badestelle_mit_sand",
+        "wandlitz_liepnitzsee",
+        "wandlitz_haus_von_erich_honecker",
+        "wandlitz_wanderweg_am_liepnitzsee",
+        "wandlitz_wandlitzer_see",
+        "wandlitz_zweijahreszeiten"
+      ]
+    },
+    {
+      "id": "wandlitz_bootsverleih_strandbad_liepnitzsee",
+      "name": "Bootsverleih Strandbad Liepnitzsee",
+      "category": "tour",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.747370479999994,
+        "lng": 13.49476646
+      },
+      "query": "Bootsverleih Strandbad Liepnitzsee, Wandlitz",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 1665,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "wandlitz_alte_fremd_und_zwangsarbeiterlager_h_bauten",
+      "name": "Alte Fremd-und Zwangsarbeiterlager H-Bauten",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.7074191047619,
+        "lng": 13.443318261904762
+      },
+      "query": "Alte Fremd-und Zwangsarbeiterlager, Wandlitz, Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 5569,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "wandlitz_barnim_panorama_naturparkzentrum_agrarmuseum_wandlitz",
+      "name": "BARNIM PANORAMA Naturparkzentrum - Agrarmuseum Wandlitz",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.75162683999999,
+        "lng": 13.454546220000001
+      },
+      "query": "BARNIM PANORAMA Naturparkzentrum, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7517226,
+        "lng": 13.455413,
+        "display_name": "BARNIM PANORAMA Naturparkzentrum Agrarmuseum Wandlitz, 9, Breitscheidstraße, Wandlitz, Barnim, Brandenburg, 16348, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.19938740066310082,
+        "osm_type": "way",
+        "osm_id": 207479707,
+        "provider": "nominatim"
+      },
+      "delta_m": 59,
+      "from_city_m": 1260,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "wandlitz_rathaus_gemeinde_wandlitz",
+      "name": "Rathaus gemeinde Wandlitz",
+      "category": "verwaltung",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.754866,
+        "lng": 13.473003857142857
+      },
+      "query": "Rathaus gemeinde Wandlitz, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7545251,
+        "lng": 13.4729466,
+        "display_name": "Rathaus Wandlitz, Prenzlauer Chaussee, Wandlitz, Deutschland",
+        "class": "amenity",
+        "type": "townhall",
+        "provider": "photon"
+      },
+      "delta_m": 38,
+      "from_city_m": 74,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "wandlitz_waldhof_am_bogensee",
+      "name": "Waldhof am Bogensee",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.77420426315789,
+        "lng": 13.526158578947367
+      },
+      "query": "Waldhof am Bogensee, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7742308,
+        "lng": 13.52635,
+        "display_name": "Landhaus Bogensee, Platz der Freundschaft, FDJ-Jugendhochschule \"Wilhelm Pieck\", Bogensee, Lanke, Wandlitz, Barnim, Brandenburg, 16348, Deutschland",
+        "class": "building",
+        "type": "yes",
+        "importance": 0.00005160982681005596,
+        "osm_type": "way",
+        "osm_id": 42226068,
+        "provider": "nominatim"
+      },
+      "delta_m": 13,
+      "from_city_m": 4224,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "wandlitz_fischerbrunnen",
+      "name": "Fischerbrunnen",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.756128620000005,
+        "lng": 13.4719242
+      },
+      "query": "Fischerbrunnen, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7562035,
+        "lng": 13.4720229,
+        "display_name": "Fischerbrunnen, Prenzlauer Chaussee, Wandlitz, Barnim, Brandenburg, 16348, Deutschland",
+        "class": "amenity",
+        "type": "fountain",
+        "importance": 0.00005160982681005596,
+        "osm_type": "node",
+        "osm_id": 746650032,
+        "provider": "nominatim"
+      },
+      "delta_m": 11,
+      "from_city_m": 220,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "wandlitz_kulturbuhne_goldener_lowe",
+      "name": "Kulturbühne \"Goldener Löwe\"",
+      "category": "radweg",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.752798285714285,
+        "lng": 13.450986714285715
+      },
+      "query": "Kulturbühne \"Goldener Löwe\", Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7528348,
+        "lng": 13.4510971,
+        "display_name": "Kulturbühne Goldener Löwe, 18, Breitscheidstraße, Wandlitz, Barnim, Brandenburg, 16348, Deutschland",
+        "class": "amenity",
+        "type": "community_centre",
+        "importance": 0.00005160982681005596,
+        "osm_type": "node",
+        "osm_id": 5179547673,
+        "provider": "nominatim"
+      },
+      "delta_m": 8,
+      "from_city_m": 1475,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "wandlitz_la_finca_de_don_quijote",
+      "name": "La Finca de Don Quijote",
+      "category": "radweg",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.778620000000004,
+        "lng": 13.4401432
+      },
+      "query": "La Finca de Don Quijote, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7786597,
+        "lng": 13.44007,
+        "display_name": "Don Quijote Tapas Bar, Lanker Chaussee, Wandlitz, Deutschland",
+        "class": "amenity",
+        "type": "restaurant",
+        "provider": "photon"
+      },
+      "delta_m": 7,
+      "from_city_m": 3490,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "wandlitz_schloss_dammsmuhle",
+      "name": "Schloss Dammsmühle",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.69369275333333,
+        "lng": 13.407602359999998
+      },
+      "query": "Schloss Dammsmühle, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.6936951,
+        "lng": 13.4076921,
+        "display_name": "Schloss Dammsmühle, Schloßstraße, Schönwalde, Wandlitz, Barnim, Brandenburg, 16348, Deutschland",
+        "class": "tourism",
+        "type": "attraction",
+        "importance": 0.19283288150311992,
+        "osm_type": "way",
+        "osm_id": 18594974,
+        "provider": "nominatim"
+      },
+      "delta_m": 6,
+      "from_city_m": 8035,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "wandlitz_dorfkirche_schonerlinde",
+      "name": "Dorfkirche Schönerlinde",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.65366771333333,
+        "lng": 13.447156973333334
+      },
+      "query": "Dorfkirche Schönerlinde, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.6536776,
+        "lng": 13.4471952,
+        "display_name": "Dorfkirche, Berliner Allee, Schönerlinde, Wandlitz, Barnim, Brandenburg, 16348, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.00005160982681005596,
+        "osm_type": "way",
+        "osm_id": 72711339,
+        "provider": "nominatim"
+      },
+      "delta_m": 3,
+      "from_city_m": 11313,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "wandlitz_dorfkirche_schonwalde_barnim",
+      "name": "Dorfkirche Schönwalde (Barnim)",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.67905581111111,
+        "lng": 13.44021628888889
+      },
+      "query": "Dorfkirche Schönwalde, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.679052,
+        "lng": 13.4401773,
+        "display_name": "Dorfkirche Schönwalde, 103, Hauptstraße, Schönwalde, Wandlitz, Barnim, Brandenburg, 16348, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.09078915819201436,
+        "osm_type": "way",
+        "osm_id": 372880775,
+        "provider": "nominatim"
+      },
+      "delta_m": 3,
+      "from_city_m": 8641,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "wandlitz_dorfkirche_wandlitz",
+      "name": "Dorfkirche Wandlitz",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.753513545454545,
+        "lng": 13.451922363636362
+      },
+      "query": "Dorfkirche Wandlitz, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7535254,
+        "lng": 13.4519429,
+        "display_name": "ev. Dorfkirche Wandlitz, Breitscheidstraße, Wandlitz, Barnim, Brandenburg, 16348, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.14389741120638372,
+        "osm_type": "node",
+        "osm_id": 9976412697,
+        "provider": "nominatim"
+      },
+      "delta_m": 2,
+      "from_city_m": 1405,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "wandlitz_dorfkirche_basdorf_wandlitz",
+      "name": "Dorfkirche Basdorf (Wandlitz)",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.72673199999999,
+        "lng": 13.439472857142857
+      },
+      "query": "Dorfkirche Basdorf, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.7267197,
+        "lng": 13.4394444,
+        "display_name": "Dorfkirche Basdorf, 14, Prenzlauer Straße, Alt-Basdorf, Basdorf, Wandlitz, Barnim, Brandenburg, 16348, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.13618373728802152,
+        "osm_type": "way",
+        "osm_id": 773580320,
+        "provider": "nominatim"
+      },
+      "delta_m": 2,
+      "from_city_m": 3790,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "wandlitz_grosses_schloss_lanke",
+      "name": "Großes Schloss Lanke",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.759750707142864,
+        "lng": 13.565435364285715
+      },
+      "query": "Großes Schloss Lanke, Wandlitz, Germany",
+      "osm": {
+        "lat": 52.759749,
+        "lng": 13.5654579,
+        "display_name": "Schloss Lanke, Lanker Dorfstraße, Wandlitz, Deutschland",
+        "class": "building",
+        "type": "yes",
+        "provider": "photon"
+      },
+      "delta_m": 2,
+      "from_city_m": 6266,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    }
+  ]
+}

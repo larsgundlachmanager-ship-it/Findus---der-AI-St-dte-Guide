@@ -19,7 +19,8 @@ export function abortActionBoardDeep(): void {
 }
 
 export function runActionBoard(input: ActionBoardInput): ActionBoardResult {
-  const seed = input.seedActions ?? [];
+  let working: ActionBoardInput = input;
+  const seed = working.seedActions ?? [];
   const seedHasGroundedNav = seed.some(
     (a) =>
       a.type === 'START_NAVIGATION' &&
@@ -31,44 +32,100 @@ export function runActionBoard(input: ActionBoardInput): ActionBoardResult {
   );
 
   const entities =
-    input.entities?.length
-      ? input.entities
-      : input.module1
+    working.entities?.length
+      ? working.entities
+      : working.module1
         ? [
             {
-              name: input.module1.name,
+              name: working.module1.name,
               rank: 1 as const,
-              lat: input.module1.lat,
-              lng: input.module1.lng,
-              websiteUrl: input.module1.websiteUrl,
-              category: input.module1.hotel
+              lat: working.module1.lat,
+              lng: working.module1.lng,
+              websiteUrl: working.module1.websiteUrl,
+              category: working.module1.hotel
                 ? 'hotel'
-                : input.module1.activity
+                : working.module1.activity
                   ? 'attraction'
-                  : input.module1.category,
-              poiId: input.module1.poiId,
+                  : working.module1.category,
+              poiId: working.module1.poiId,
             },
           ]
         : // Kein Speech-Mining wenn schon echte Nav/URL-Seeds da sind
           seedHasGroundedNav || seedHasUrl
           ? []
-          : extractActionEntities(input.speechText, input.userText);
+          : extractActionEntities(working.speechText, working.userText);
 
-  const opportunities = scanOpportunities({
-    speechText: input.speechText,
-    userText: input.userText,
+  let opportunities = scanOpportunities({
+    speechText: working.speechText,
+    userText: working.userText,
     entities,
-    module1: input.module1,
+    module1: working.module1,
   });
 
+  // Nav-Seed da / Nav-Intent: kein WLAN / totes „Mehr“ / doppelte Route
+  if (seedHasGroundedNav) {
+    opportunities = opportunities.filter(
+      (o) =>
+        o.kind !== 'wifi_place' &&
+        o.kind !== 'expand' &&
+        o.kind !== 'esim' &&
+        o.kind !== 'route' &&
+        o.kind !== 'maps',
+    );
+  }
+
+  // Gesetz: Route nur ≤10 Min / explizit — sonst Maps statt START_NAV
+  try {
+    const { shouldSuppressNavActions } = require('../../module2/pitch/navActionPolicy') as {
+      shouldSuppressNavActions: (o?: {
+        visitAtMs?: number | null;
+        forceSoon?: boolean;
+      }) => boolean;
+    };
+    const { isExplicitNavIntent } = require('../intent/poiInfoVsNav') as {
+      isExplicitNavIntent: (t: string) => boolean;
+    };
+    const force =
+      working.forceNavActions === true ||
+      isExplicitNavIntent(working.userText || '') ||
+      isExplicitNavIntent(working.speechText || '');
+    const suppressRoute = shouldSuppressNavActions({
+      visitAtMs: working.visitAtMs ?? null,
+      forceSoon: force,
+    });
+    if (suppressRoute) {
+      opportunities = opportunities.map((o) =>
+        o.kind === 'route'
+          ? {
+              ...o,
+              kind: 'maps' as const,
+              reason: 'Route unterdrückt (nicht ≤10 Min / kein Nav-Intent) → Maps',
+              score: Math.min(o.score, 70),
+            }
+          : o,
+      );
+      if (working.seedActions?.length) {
+        working = {
+          ...working,
+          seedActions: working.seedActions.filter((a) => {
+            if (a.type !== 'START_NAVIGATION') return true;
+            return force;
+          }),
+        };
+      }
+    }
+  } catch {
+    /* soft */
+  }
+
   const { actions, deepJobs } = buildFastline({
-    input: { ...input, entities },
+    input: { ...working, entities },
     opportunities,
     entities,
   });
 
   const capped = prioritizeQuickActions(actions, {
-    maxActions: input.maxActions ?? 4,
+    maxActions: working.maxActions ?? 4,
   });
 
   return { actions: capped, deepJobs, opportunities };
@@ -90,6 +147,8 @@ export function applyActionBoardToResponse(
 ): { response: GeminiConciergeResponse; deepJobs: ActionBoardResult['deepJobs'] } {
   const seed = response.quickActions ?? [];
   const preserved = seed.filter((a) => PRESERVED_ACTION_TYPES.has(a.type));
+  const { shouldOfferExpandMore, isExpandShowMoreAction } =
+    require('./opportunityScan') as typeof import('./opportunityScan');
   const hints = seed.filter(
     (a) =>
       !PRESERVED_ACTION_TYPES.has(a.type) &&
@@ -98,7 +157,14 @@ export function applyActionBoardToResponse(
         (a.type === 'OPEN_URL' &&
           a.payload.url &&
           !/koche|peiner/i.test(a.label)) ||
-        a.type === 'BOOK_STAY22'),
+        a.type === 'BOOK_STAY22' ||
+        (a.type === 'SHOW_MORE' &&
+          isExpandShowMoreAction(a) &&
+          shouldOfferExpandMore({
+            userText: opts?.userText,
+            speechText: response.speechText,
+            module1: opts?.module1,
+          }))),
   );
 
   const board = runActionBoard({
@@ -121,7 +187,22 @@ export function applyActionBoardToResponse(
   return {
     response: {
       ...response,
-      quickActions: board.actions,
+      quickActions: (() => {
+        try {
+          const { stripUnbackedActions } = require('../concierge/zeroFakeActions') as {
+            stripUnbackedActions: (
+              a: typeof board.actions,
+              o?: { userText?: string; speechText?: string },
+            ) => typeof board.actions;
+          };
+          return stripUnbackedActions(board.actions, {
+            userText: opts?.userText,
+            speechText: response.speechText,
+          });
+        } catch {
+          return board.actions;
+        }
+      })(),
     },
     deepJobs: board.deepJobs,
   };

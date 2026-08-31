@@ -62,18 +62,31 @@ export function notePartialForManagerWarmup(
   }, STABLE_MS);
 }
 
-function similarEnough(a: string, b: string): boolean {
-  const na = a.toLowerCase().replace(/\s+/g, ' ').trim();
-  const nb = b.toLowerCase().replace(/\s+/g, ' ').trim();
+/** Nur fast-identisch — Prefix eines 10-Min-Satzes darf Call-1 nicht ersetzen. */
+const WARMUP_MAX_DELTA = 24;
+
+export function warmupMatchesFinalUtterance(
+  partial: string,
+  finalText: string,
+): boolean {
+  const na = partial.toLowerCase().replace(/\s+/g, ' ').trim();
+  const nb = finalText.toLowerCase().replace(/\s+/g, ' ').trim();
   if (na === nb) return true;
   if (na.length < 8 || nb.length < 8) return false;
-  // Final is extension of partial or vice versa
-  if (na.startsWith(nb.slice(0, Math.min(40, nb.length))) || nb.startsWith(na.slice(0, Math.min(40, na.length)))) {
+  if (Math.abs(na.length - nb.length) > WARMUP_MAX_DELTA) return false;
+  if (
+    na.startsWith(nb.slice(0, Math.min(40, nb.length))) ||
+    nb.startsWith(na.slice(0, Math.min(40, na.length)))
+  ) {
     const shorter = na.length < nb.length ? na : nb;
     const longer = na.length >= nb.length ? na : nb;
     return longer.includes(shorter.slice(0, Math.max(12, shorter.length - 8)));
   }
   return false;
+}
+
+function similarEnough(a: string, b: string): boolean {
+  return warmupMatchesFinalUtterance(a, b);
 }
 
 /** If warmup matches final text, reuse; else null. */

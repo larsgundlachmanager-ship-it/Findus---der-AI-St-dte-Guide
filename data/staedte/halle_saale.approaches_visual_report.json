@@ -1,0 +1,402 @@
+{
+  "city": "halle_saale",
+  "apply": true,
+  "touched": 49,
+  "approachesFixed": 49,
+  "faqAdded": 47,
+  "data_version": 14,
+  "rows": [
+    {
+      "id": "halle_saale_halle_saale_hauptbahnhof",
+      "name": "Halle (Saale) Hauptbahnhof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "halle_saale_landesmuseum_fur_vorgeschichte_halle_saale",
+      "name": "Landesmuseum für Vorgeschichte Halle (Saale)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "halle_saale_kunstmuseum_moritzburg_halle_saale",
+      "name": "Kunstmuseum Moritzburg Halle (Saale)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "halle_saale_archaologisches_museum",
+      "name": "Archäologisches Museum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "halle_saale_db_museum_halle_saale",
+      "name": "DB Museum Halle (Saale)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "halle_saale_neue_residenz",
+      "name": "Neue Residenz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "halle_saale_stadtmuseum_christian_wolff_haus",
+      "name": "Stadtmuseum Christian-Wolff-Haus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "halle_saale_beatles_museum",
+      "name": "Beatles Museum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "halle_saale_handel_haus_halle",
+      "name": "Händel-Haus Halle",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "halle_saale_halloren_schokoladenerlebniswelt",
+      "name": "Halloren Schokoladenerlebniswelt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "halle_saale_gedenkstatte_roter_ochse_halle_saale",
+      "name": "Gedenkstätte ROTER OCHSE Halle (Saale)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "halle_saale_oberburg_giebichenstein",
+      "name": "Oberburg Giebichenstein",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "halle_saale_historisches_strassenbahndepot_hallesche_strassenbahnfreunde_e_v",
+      "name": "Historisches Straßenbahndepot (Hallesche Straßenbahnfreunde e.V.)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "halle_saale_historisches_technikzentrum_der_stadtwerke_halle",
+      "name": "Historisches Technikzentrum der Stadtwerke Halle",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "halle_saale_museum_fur_haustierkunde_julius_kuhn",
+      "name": "Museum für Haustierkunde \"Julius Kühn\"",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "halle_saale_rechenwerk_computer_technikmuseum_halle",
+      "name": "Rechenwerk Computer- & Technikmuseum Halle",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "halle_saale_marktkirche_st_marien_unser_lieben_frauen_zu_halle_saale",
+      "name": "Marktkirche St. Marien Unser Lieben Frauen zu Halle (Saale)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "halle_saale_pauluskirche",
+      "name": "Pauluskirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "halle_saale_katholische_propsteikirche_st_franziskus_und_st_elisabeth",
+      "name": "Katholische Propsteikirche St. Franziskus und St. Elisabeth",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "halle_saale_moritzkirche",
+      "name": "Moritzkirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "halle_saale_eselsbrunnen",
+      "name": "Eselsbrunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "halle_saale_gobelbrunnen",
+      "name": "Göbelbrunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "halle_saale_georg_friedrich_handel_denkmal",
+      "name": "Georg-Friedrich-Händel-Denkmal",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "halle_saale_goldsolebrunnen",
+      "name": "Goldsolebrunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "halle_saale_park_an_der_saline",
+      "name": "Park an der Saline",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "halle_saale_peissnitz",
+      "name": "Peißnitz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "halle_saale_reichardts_garten",
+      "name": "Reichardts Garten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "halle_saale_klausberge",
+      "name": "Klausberge",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "halle_saale_amtsgarten",
+      "name": "Amtsgarten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "halle_saale_leipziger_turm",
+      "name": "Leipziger Turm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "halle_saale_wasserturm_sud",
+      "name": "Wasserturm Süd",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "halle_saale_altstadt",
+      "name": "Altstadt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "halle_saale_stadtgottesacker",
+      "name": "Stadtgottesacker",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "halle_saale_peissnitzhaus",
+      "name": "Peißnitzhaus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "halle_saale_dolauer_heide",
+      "name": "Dölauer Heide",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "halle_saale_zoologischer_garten_halle_bergzoo",
+      "name": "Zoologischer Garten Halle (Bergzoo)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "halle_saale_botanischer_garten",
+      "name": "Botanischer Garten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "halle_saale_riveufer_saalepromenade",
+      "name": "Riveufer Saalepromenade",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "halle_saale_passendorfer_schlosschen",
+      "name": "Passendorfer Schlößchen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "halle_saale_giebichensteinbrucke",
+      "name": "Giebichensteinbrücke",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "halle_saale_neues_theater",
+      "name": "Neues Theater",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "halle_saale_kammeroper_halle",
+      "name": "Kammeroper Halle",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "halle_saale_freilichtbuhne_peissnitz",
+      "name": "Freilichtbühne Peißnitz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 0
+    },
+    {
+      "id": "halle_saale_roter_turm",
+      "name": "Roter Turm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 0
+    },
+    {
+      "id": "halle_saale_franckesche_stiftungen",
+      "name": "Franckesche Stiftungen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 0
+    },
+    {
+      "id": "halle_saale_hallescher_dom",
+      "name": "Hallescher Dom",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 0
+    },
+    {
+      "id": "halle_saale_marktplatz_halle",
+      "name": "Marktplatz Halle",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "halle_saale_rathaus_halle",
+      "name": "Rathaus Halle",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 0
+    },
+    {
+      "id": "halle_saale_ulrichskirche",
+      "name": "Ulrichskirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 0
+    }
+  ]
+}

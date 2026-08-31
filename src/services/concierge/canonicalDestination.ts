@@ -11,6 +11,11 @@ import { detectHardNavOverride } from '../navigation/hardNavOverride';
 import { isExplicitNavIntent, isPoiInfoQuestion } from '../intent/poiInfoVsNav';
 import type { PendingNavOffer } from '../navigation/navigationTypes';
 import { geocodePlaceNameOsmFirst } from '../navigation/googleMapsNav';
+import {
+  looksLikeStreetAddress,
+  expandStreetAddressGeocodeQueries,
+  extractStreetAddressFromUtterance,
+} from '../navigation/streetAddressQuery';
 import { useFinnusStore } from '../../store/useFinnusStore';
 import { getCachedUserProfile } from '../userProfileService';
 import {
@@ -45,6 +50,11 @@ export function extractNamedDestinationLabel(text: string): string | null {
   if (!t || t.length < 4) return null;
   if (isPoiInfoQuestion(t) && !isExplicitNavIntent(t)) return null;
 
+  const spokenAddr = extractStreetAddressFromUtterance(t);
+  if (spokenAddr && (isExplicitNavIntent(t) || /\b(zum|zur|nach|zu|navi|route)\b/iu.test(t))) {
+    return spokenAddr;
+  }
+
   const hard = detectHardNavOverride(t);
   if (hard) return cleanLabel(hard);
 
@@ -71,12 +81,13 @@ export function extractNamedDestinationLabel(text: string): string | null {
 }
 
 async function matchPoiByName(name: string): Promise<PendingNavOffer | null> {
+  if (looksLikeStreetAddress(name)) return null;
   const q = name.toLowerCase().replace(/^restaurant\s+/i, '').trim();
   const pois = await getAllPois();
   const tokens = q
     .split(/\s+/)
     .map((t) => t.trim())
-    .filter((t) => t.length >= 3);
+    .filter((t) => t.length >= 3 && !/^\d{1,4}[a-z]?$/i.test(t));
 
   let best: { id: number; score: number; name: string } | null = null;
   for (const poi of pois) {
@@ -141,17 +152,32 @@ export async function resolveCanonicalDestination(
 
   const store = useFinnusStore.getState();
   const profile = getCachedUserProfile();
-  const geo = await geocodePlaceNameOsmFirst(queryName, {
+  const bias = {
     biasLat: store.lastGpsLat ?? undefined,
     biasLng: store.lastGpsLng ?? undefined,
     cityHint: profile?.cityName ?? profile?.cityId ?? null,
-  });
+    preferStreetAddress: looksLikeStreetAddress(queryName),
+  };
+  const candidates = bias.preferStreetAddress
+    ? expandStreetAddressGeocodeQueries(queryName, {
+        profileCity: bias.cityHint,
+        biasLat: bias.biasLat,
+        biasLng: bias.biasLng,
+      })
+    : [queryName];
+  let geo: Awaited<ReturnType<typeof geocodePlaceNameOsmFirst>> = null;
+  for (const cand of candidates) {
+    geo = await geocodePlaceNameOsmFirst(cand, bias);
+    if (geo) break;
+  }
   if (!geo) return null;
 
-  // Re-match local after geocode label
-  const local2 = await matchPoiByName(geo.label || queryName);
-  if (local2) {
-    return { offer: local2, named: true, queryName };
+  // Re-match local after geocode label (nicht bei Adressen)
+  if (!looksLikeStreetAddress(queryName)) {
+    const local2 = await matchPoiByName(geo.label || queryName);
+    if (local2) {
+      return { offer: local2, named: true, queryName };
+    }
   }
 
   return {
@@ -166,19 +192,4 @@ export async function resolveCanonicalDestination(
   };
 }
 
-/** Names roughly equal for speech↔button invariant. */
-export function namesAlign(a: string, b: string): boolean {
-  const norm = (s: string) =>
-    s
-      .toLowerCase()
-      .replace(/^📍\s*/u, '')
-      .replace(/^route:\s*/iu, '')
-      .replace(/^route\s+zu\s+/iu, '')
-      .replace(/^restaurant\s+/iu, '')
-      .replace(/[^\p{L}\p{N}]+/gu, ' ')
-      .trim();
-  const na = norm(a);
-  const nb = norm(b);
-  if (!na || !nb) return false;
-  return na === nb || na.includes(nb) || nb.includes(na);
-}
+export { namesAlign } from './namesAlign';

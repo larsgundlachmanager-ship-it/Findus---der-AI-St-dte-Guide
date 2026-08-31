@@ -7,17 +7,19 @@ alwaysApply: true
 
 ## Frühes Feedback
 
-- Lange Recherche (Web/Events/Dining): sofort intent-passendes Ack/Bridge-Audio — das ist das **einzige** Vorgeplänkel (Motivation, Bezug zu Bekanntem, „mega Plan“).
+- Lange Recherche (Web/Events/Dining): sofort Bridge = **Verstanden + Zusagen/Cover** — das ist das **einzige** Vorgeplänkel. Fakten/Optionen erst Call 2.
 - Ack vor Context/Decompose feuern (`researchAck.ts` / Floskel-Engine); Phrasen variieren.
 - Decompose: Heuristik-Agents starten parallel zum LLM-Decompose; fehlende Agenten danach nachziehen.
-- Finale Antwort nutzt Satz-Streaming (erster Satz startet TTS, Rest folgt) — erster Satz = klare Antwort/Lead.
+- Finale Antwort: **eine** TTS-Session (Fast-Hook + Prefetch). Gesperrt: `findus-tts-sentence-pipeline-lock.mdc` · `npm run test:tts-pipeline`.
+- Sobald der erste Hook/Satz steht: sofort TTS. Während Satz 1 spricht, Satz 2+ vorproduzieren. Bridge-Cover und Haupt-Speech hängen ohne Pause (Warm-Prefetch während der Bridge). Navi klemmt an der Satzgrenze ein oder stellt sich hinten an.
 
 ## Antwort-First (Haupt-Speech)
 
-- Nach der Bridge: **sofort** die Frage beantworten (optional 1–2 Sätze Zusammenfassung vorne, dann ausführen).
+- Nach der Bridge: **sofort** die Frage beantworten (Orte, Zahlen, Optionen) — kein zweites „tolle Idee“.
 - Tipps, Alternativen, Warnungen **hinten** — nicht vor der Lösung.
-- Kein zweites Lob-/Meta-Vorgeplänkel in `speechText` („gute Frage“, „ich schau mal“, doppelte Bridge).
-- SSOT: `FINDUS_ANSWER_FIRST_BLOCK` + `FINDUS_BRIDGE_CONTINUITY_BLOCK` in `findusResponsePolicy.ts`.
+- Kein zweites Lob-/Meta-Vorgeplänkel in `speechText` („gute Frage“, doppelte Bridge) — **außer ungefragte Vorschläge**: kurzer menschlicher Opener, dann Hiebsatz.
+- Hiebsatz: Zeit + Ort + Was in 1–2 knackigen Sätzen weben (`FINDUS_WOVEN_PITCH_SPEECH_BLOCK`). Zwei Optionen: Entweder A (Fakten im Satz) — oder B — kurze Wahlfrage.
+- Bridge = Verstanden + Zusagen (Call 1); Call 2 = echte Antwort. SSOT: `FINDUS_ANSWER_FIRST_BLOCK` + `FINDUS_BRIDGE_CONTINUITY_BLOCK` + `FINDUS_WOVEN_PITCH_SPEECH_BLOCK` in `findusResponsePolicy.ts`.
 
 ## Mehrteilige Fragen
 

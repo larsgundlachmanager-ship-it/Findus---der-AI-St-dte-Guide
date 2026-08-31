@@ -9,7 +9,6 @@
  */
 
 import { generateGeminiText, hasGeminiApiKey } from '../geminiService';
-import { isDeviceOffline } from '../navigation/networkState';
 import { parseConciergeResponse } from '../concierge/parseConciergeResponse';
 import type { GeminiConciergeResponse } from '../../types/concierge';
 import type { FindusLaw } from './findusLawRegistry';
@@ -212,8 +211,7 @@ export async function runLawJudgePass(opts: {
     return { ...result, actionNotes: finalNotes };
   };
 
-  const offline = await isDeviceOffline();
-  if (offline || !hasGeminiApiKey()) {
+  if (!hasGeminiApiKey()) {
     return finish({
       response: current,
       repaired,

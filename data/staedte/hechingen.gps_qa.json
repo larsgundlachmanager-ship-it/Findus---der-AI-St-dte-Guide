@@ -1,0 +1,1249 @@
+{
+  "generated_at": "2026-08-28T06:41:30.738Z",
+  "summary": {
+    "city_id": "hechingen",
+    "checked": 49,
+    "ok": 17,
+    "check": 28,
+    "bad": 4,
+    "errors": 0,
+    "max_delta_m": 180,
+    "city_halo_m": 28000,
+    "story_only": true
+  },
+  "rows": [
+    {
+      "id": "hechingen_dreifuerstenstein",
+      "name": "Dreifürstenstein",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 48.35706020000001,
+        "lng": 8.963256199999998
+      },
+      "query": "Dreifürstenstein, Zollernstadt Hechingen, Germany",
+      "osm": {
+        "lat": 48.3729516,
+        "lng": 9.044002,
+        "display_name": "Dreifürstenstein, Gloecklesweg, Hechingen, Deutschland",
+        "class": "information",
+        "type": "guidepost",
+        "provider": "photon"
+      },
+      "delta_m": 6221,
+      "from_city_m": 379,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hechingen_bahnhof_hechingen",
+        "hechingen_kloster_stetten",
+        "hechingen_hofgut_domane",
+        "hechingen_aussichtspunkt_beurener_heide",
+        "hechingen_meisterbackerei_schneckenburger",
+        "hechingen_feldkreuz_brachwiesle",
+        "hechingen_naturschutzgebiet_mittleres_starzeltal",
+        "hechingen_aussichtspunkt_auf_die_burg_hohenzollern"
+      ]
+    },
+    {
+      "id": "hechingen_wasserfall_hechingen",
+      "name": "Wasserfall Hechingen",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 48.352806,
+        "lng": 8.973945625
+      },
+      "query": "Wasserfall Hechingen, Zollernstadt Hechingen, Germany",
+      "osm": {
+        "lat": 48.3367005,
+        "lng": 9.0312688,
+        "display_name": "Wasserfall Weiler Schrofen, Jungingen, Deutschland",
+        "class": "waterway",
+        "type": "waterfall",
+        "provider": "photon"
+      },
+      "delta_m": 4599,
+      "from_city_m": 938,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hechingen_hofgut_domane",
+      "name": "Hofgut Domäne",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 48.35706020000001,
+        "lng": 8.963256199999998
+      },
+      "query": "Hofgut Domäne, Zollernstadt Hechingen, Germany",
+      "osm": {
+        "lat": 48.3362467,
+        "lng": 8.9501314,
+        "display_name": "Hofgut Domäne, Hechingen, Deutschland",
+        "class": "amenity",
+        "type": "biergarten",
+        "provider": "photon"
+      },
+      "delta_m": 2509,
+      "from_city_m": 379,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hechingen_bahnhof_hechingen",
+        "hechingen_kloster_stetten",
+        "hechingen_aussichtspunkt_beurener_heide",
+        "hechingen_dreifuerstenstein",
+        "hechingen_meisterbackerei_schneckenburger",
+        "hechingen_feldkreuz_brachwiesle",
+        "hechingen_naturschutzgebiet_mittleres_starzeltal",
+        "hechingen_aussichtspunkt_auf_die_burg_hohenzollern"
+      ]
+    },
+    {
+      "id": "hechingen_bahnhof_hechingen",
+      "name": "Bahnhof Hechingen",
+      "category": "bahnhof",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 48.35706014,
+        "lng": 8.96325632
+      },
+      "query": "Bahnhof Hechingen, Zollernstadt Hechingen, Germany",
+      "osm": {
+        "lat": 48.3596899,
+        "lng": 8.9679786,
+        "display_name": "Hechingen Bahnhof, Bahnhofstraße, Hechingen, Deutschland",
+        "class": "amenity",
+        "type": "bus_station",
+        "provider": "photon"
+      },
+      "delta_m": 455,
+      "from_city_m": 379,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hechingen_kloster_stetten",
+        "hechingen_hofgut_domane",
+        "hechingen_aussichtspunkt_beurener_heide",
+        "hechingen_dreifuerstenstein",
+        "hechingen_meisterbackerei_schneckenburger",
+        "hechingen_feldkreuz_brachwiesle",
+        "hechingen_naturschutzgebiet_mittleres_starzeltal",
+        "hechingen_aussichtspunkt_auf_die_burg_hohenzollern"
+      ]
+    },
+    {
+      "id": "hechingen_roemisches_freilichtmuseum",
+      "name": "Römisches Freilichtmuseum (Villa Rustica)",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 48.37620174,
+        "lng": 8.93351026
+      },
+      "query": "Römisches Freilichtmuseum, Zollernstadt Hechingen, Germany",
+      "osm": {
+        "lat": 48.3763864,
+        "lng": 8.9353306,
+        "display_name": "Römisches Freilichtmuseum Hechingen-Stein, Eichwäldle, Hechingen, Deutschland",
+        "class": "shop",
+        "type": "kiosk",
+        "provider": "photon"
+      },
+      "delta_m": 136,
+      "from_city_m": 3223,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hechingen_schloss_lindich",
+      "name": "Schloss Lindich",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 48.36348872727273,
+        "lng": 8.921636090909091
+      },
+      "query": "Schloss Lindich, Zollernstadt Hechingen, Germany",
+      "osm": {
+        "lat": 48.3641348,
+        "lng": 8.9215221,
+        "display_name": "Schloss Lindich, Schloß Lindich, Hechingen, Deutschland",
+        "class": "building",
+        "type": "yes",
+        "provider": "photon"
+      },
+      "delta_m": 72,
+      "from_city_m": 3123,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hechingen_burg_hohenzollern",
+      "name": "Burg Hohenzollern · Besucherstart P1",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 48.32557192,
+        "lng": 8.96365169
+      },
+      "query": "Burg Hohenzollern ·, Zollernstadt Hechingen, Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 3153,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hechingen_kloster_stetten",
+      "name": "Ehemaliges Dominikanerinnenkloster Stetten",
+      "category": "kirche",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 48.35706020000001,
+        "lng": 8.963256199999998
+      },
+      "query": "Ehemaliges Dominikanerinnenkloster Stetten, Zollernstadt Hechingen",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 379,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hechingen_bahnhof_hechingen",
+        "hechingen_hofgut_domane",
+        "hechingen_aussichtspunkt_beurener_heide",
+        "hechingen_dreifuerstenstein",
+        "hechingen_meisterbackerei_schneckenburger",
+        "hechingen_feldkreuz_brachwiesle",
+        "hechingen_naturschutzgebiet_mittleres_starzeltal",
+        "hechingen_aussichtspunkt_auf_die_burg_hohenzollern"
+      ]
+    },
+    {
+      "id": "hechingen_stadtgeschichte",
+      "name": "Geschichte von Zollernstadt Hechingen",
+      "category": "geschichte",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 48.35371271428571,
+        "lng": 8.961108785714286
+      },
+      "query": "Geschichte von Zollernstadt, Zollernstadt Hechingen, Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 27,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hechingen_barfusspark_hechingen",
+      "name": "Barfußpark Hechingen",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 48.34770214,
+        "lng": 8.95746326
+      },
+      "query": "Barfußpark Hechingen, Zollernstadt Hechingen",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 746,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hechingen_erleb_dich_pfad_hechingen",
+      "name": "erleb-dich-pfad Hechingen",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 48.344831240000005,
+        "lng": 8.95703508
+      },
+      "query": "erleb-dich-pfad Hechingen, Zollernstadt Hechingen",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 1057,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hechingen_marktplatz_brunnen",
+      "name": "Marktplatz Brunnen",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 48.35098800000001,
+        "lng": 8.9627408
+      },
+      "query": "Marktplatz Brunnen, Zollernstadt Hechingen",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 338,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hechingen_osm_transit_3007498463",
+        "hechingen_osm_post_box_9476295166"
+      ]
+    },
+    {
+      "id": "hechingen_krieger_denkmal",
+      "name": "Krieger Denkmal",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 48.35131772,
+        "lng": 8.96488588
+      },
+      "query": "Krieger Denkmal, Zollernstadt Hechingen",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 387,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hechingen_aussichtspunkt_hohenzollernblick",
+      "name": "Zeller Horn · Postkartenblick Burg",
+      "category": "aussicht",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 48.3124871,
+        "lng": 8.980073173333333
+      },
+      "query": "Zeller Horn ·, Zollernstadt Hechingen, Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 4807,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hechingen_starzelpark",
+      "name": "Starzelpark",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 48.35531714,
+        "lng": 8.96354034
+      },
+      "query": "Starzelpark, Zollernstadt Hechingen",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 226,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hechingen_aussichtspunkt_beurener_heide",
+      "name": "Aussichtspunkt Beurener Heide",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 48.35706020000001,
+        "lng": 8.963256199999998
+      },
+      "query": "Aussichtspunkt Beurener Heide, Zollernstadt Hechingen",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 379,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hechingen_bahnhof_hechingen",
+        "hechingen_kloster_stetten",
+        "hechingen_hofgut_domane",
+        "hechingen_dreifuerstenstein",
+        "hechingen_meisterbackerei_schneckenburger",
+        "hechingen_feldkreuz_brachwiesle",
+        "hechingen_naturschutzgebiet_mittleres_starzeltal",
+        "hechingen_aussichtspunkt_auf_die_burg_hohenzollern"
+      ]
+    },
+    {
+      "id": "hechingen_aussichtspunkt_burg_hohenzollern_bei_boll",
+      "name": "Aussichtspunkt Burg Hohenzollern bei Boll",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 48.326438683333336,
+        "lng": 9.008505152777778
+      },
+      "query": "Aussichtspunkt Burg Hohenzollern, Zollernstadt Hechingen, Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 4632,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hechingen_burgerburo",
+      "name": "Bürgerbüro",
+      "category": "verwaltung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 48.3524898,
+        "lng": 8.9637308
+      },
+      "query": "Bürgerbüro, Zollernstadt Hechingen",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 234,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hechingen_johanneskirche",
+      "name": "Evangelische Johanneskirche",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 48.349245894736846,
+        "lng": 8.962873578947368
+      },
+      "query": "Evangelische Johanneskirche, Zollernstadt Hechingen",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 528,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hechingen_medical_valley_bentley",
+      "name": "Medical Valley · Bentley Lotzenäcker",
+      "category": "denkmal",
+      "place_tier": 3,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 48.37307238461539,
+        "lng": 8.95852376923077
+      },
+      "query": "Medical Valley ·, Zollernstadt Hechingen, Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 2143,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hechingen_wallfahrtskirche_maria_zell",
+      "name": "Wallfahrtskirche Maria Zell",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 48.31752576875,
+        "lng": 8.98035595625
+      },
+      "query": "Wallfahrtskirche Maria Zell, Zollernstadt Hechingen",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 4280,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hechingen_panoramabad",
+      "name": "Panoramabad Hechingen (Hallen-/Freibad)",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 48.361284839999996,
+        "lng": 8.95650192
+      },
+      "query": "Panoramabad Hechingen, Zollernstadt Hechingen",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 897,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hechingen_buergergarde_gardeheim",
+      "name": "Historische Bürgergarde · Gardeheim",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 48.358048857142855,
+        "lng": 8.96139157142857
+      },
+      "query": "Historische Bürgergarde ·, Zollernstadt Hechingen, Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 463,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hechingen_naturschutzgebiet_mittleres_starzeltal",
+      "name": "Naturschutzgebiet Mittleres Starzeltal",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 48.35706020000001,
+        "lng": 8.963256199999998
+      },
+      "query": "Naturschutzgebiet Mittleres Starzeltal, Zollernstadt Hechingen",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 379,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hechingen_bahnhof_hechingen",
+        "hechingen_kloster_stetten",
+        "hechingen_hofgut_domane",
+        "hechingen_aussichtspunkt_beurener_heide",
+        "hechingen_dreifuerstenstein",
+        "hechingen_meisterbackerei_schneckenburger",
+        "hechingen_feldkreuz_brachwiesle",
+        "hechingen_aussichtspunkt_auf_die_burg_hohenzollern"
+      ]
+    },
+    {
+      "id": "hechingen_aussichtspunkt_auf_die_burg_hohenzollern",
+      "name": "Aussichtspunkt auf die Burg Hohenzollern",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 48.35706020000001,
+        "lng": 8.963256199999998
+      },
+      "query": "Aussichtspunkt auf die, Zollernstadt Hechingen, Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 379,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hechingen_bahnhof_hechingen",
+        "hechingen_kloster_stetten",
+        "hechingen_hofgut_domane",
+        "hechingen_aussichtspunkt_beurener_heide",
+        "hechingen_dreifuerstenstein",
+        "hechingen_meisterbackerei_schneckenburger",
+        "hechingen_feldkreuz_brachwiesle",
+        "hechingen_naturschutzgebiet_mittleres_starzeltal"
+      ]
+    },
+    {
+      "id": "hechingen_hangender_stein",
+      "name": "Hangender Stein",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 48.30623782222223,
+        "lng": 9.000343322222221
+      },
+      "query": "Hangender Stein, Zollernstadt Hechingen",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 6031,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hechingen_aussichtspunkt_jokenplatz",
+      "name": "Aussichtspunkt Jokenplatz",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 48.36572383999999,
+        "lng": 9.041458534285711
+      },
+      "query": "Aussichtspunkt Jokenplatz, Zollernstadt Hechingen",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 6062,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hechingen_aussichtspunkt_bismarckstein",
+      "name": "Aussichtspunkt Bismarckstein",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 48.35997099999999,
+        "lng": 9.02805
+      },
+      "query": "Aussichtspunkt Bismarckstein, Zollernstadt Hechingen",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 4974,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hechingen_aussichtspunkt",
+      "name": "Aussichtspunkt",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 48.34690465999999,
+        "lng": 8.9590279
+      },
+      "query": "Aussichtspunkt, Zollernstadt Hechingen",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 796,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hechingen_zollernalb_kinos",
+      "name": "Zollernalb Kinos",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 48.346515307692314,
+        "lng": 8.962239692307692
+      },
+      "query": "Zollernalb Kinos, Zollernstadt Hechingen",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 822,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hechingen_osm_transit_5899630098"
+      ]
+    },
+    {
+      "id": "hechingen_hohenzollernhalle_bisingen",
+      "name": "Hohenzollernhalle Bisingen",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 48.309771821428576,
+        "lng": 8.917570939285714
+      },
+      "query": "Hohenzollernhalle Bisingen, Zollernstadt Hechingen",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 5877,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hechingen_streichelzoo_hofgut_domane",
+      "name": "Streichelzoo Hofgut Domäne",
+      "category": "freizeitpark",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 48.3370082,
+        "lng": 8.950005
+      },
+      "query": "Streichelzoo Hofgut Domäne, Zollernstadt Hechingen",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 2056,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hechingen_obertorplatz_schaukelweg",
+      "name": "Obertorplatz & Schaukelweg häppy",
+      "category": "natur",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 48.350638000000004,
+        "lng": 8.963238999999998
+      },
+      "query": "Obertorplatz, Zollernstadt Hechingen, Germany",
+      "osm": {
+        "lat": 48.3507606,
+        "lng": 8.9626375,
+        "display_name": "Hechingen Obertorplatz, Obertorplatz, Hechingen, Deutschland",
+        "class": "information",
+        "type": "guidepost",
+        "provider": "photon"
+      },
+      "delta_m": 46,
+      "from_city_m": 387,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hechingen_furstengarten",
+      "name": "Fürstengarten & Villa Eugenia",
+      "category": "natur",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 48.34761864,
+        "lng": 8.961256879999999
+      },
+      "query": "Fürstengarten, Zollernstadt Hechingen, Germany",
+      "osm": {
+        "lat": 48.3479528,
+        "lng": 8.9609787,
+        "display_name": "Fürstengarten Hechingen, Hechingen, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "provider": "photon"
+      },
+      "delta_m": 42,
+      "from_city_m": 697,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hechingen_klosterkirche_st_luzen",
+      "name": "Klosterkirche St. Luzen",
+      "category": "kirche",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 48.35809414285715,
+        "lng": 8.971133857142856
+      },
+      "query": "Klosterkirche St. Luzen, Zollernstadt Hechingen, Germany",
+      "osm": {
+        "lat": 48.3580645,
+        "lng": 8.9716746,
+        "display_name": "Klosterkirche St. Luzen, St.-Luzen-Weg, Hechingen, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 40,
+      "from_city_m": 860,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hechingen_wasserturm_sickingen",
+      "name": "Wasserturm Sickingen",
+      "category": "aussicht",
+      "place_tier": 3,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 48.379102880000005,
+        "lng": 8.97304558
+      },
+      "query": "Wasserturm Sickingen, Zollernstadt Hechingen, Germany",
+      "osm": {
+        "lat": 48.3789341,
+        "lng": 8.9728398,
+        "display_name": "Am Wasserturm, Hechingen, Deutschland",
+        "class": "highway",
+        "type": "residential",
+        "provider": "photon"
+      },
+      "delta_m": 24,
+      "from_city_m": 2934,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hechingen_maerchenpfad",
+      "name": "Märchenpfad Hechingen",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 48.36259763636363,
+        "lng": 8.947764472727272
+      },
+      "query": "Märchenpfad Hechingen, Zollernstadt Hechingen, Germany",
+      "osm": {
+        "lat": 48.3626358,
+        "lng": 8.9480631,
+        "display_name": "Märchenpfad, Hechingen, Deutschland",
+        "class": "highway",
+        "type": "path",
+        "provider": "photon"
+      },
+      "delta_m": 22,
+      "from_city_m": 1395,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hechingen_burgtheater_kino",
+      "name": "Burgtheater · Hechinger Kinos",
+      "category": "freizeit",
+      "place_tier": 3,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 48.34994488888889,
+        "lng": 8.963684222222222
+      },
+      "query": "Burgtheater · Hechinger, Zollernstadt Hechingen, Germany",
+      "osm": {
+        "lat": 48.3499489,
+        "lng": 8.9634484,
+        "display_name": "Burgtheater, Heiligkreuzstraße, Hechingen, Deutschland",
+        "class": "amenity",
+        "type": "cinema",
+        "provider": "photon"
+      },
+      "delta_m": 17,
+      "from_city_m": 471,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hechingen_hohenzollerisches_landesmuseum",
+      "name": "Altes Schloss / Hohenzollerisches Landesmuseum",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 48.35344285714285,
+        "lng": 8.964109857142857
+      },
+      "query": "Altes Schloss / Hohenzollerisches Landesmuseum, Zollernstadt Hechingen, Germany",
+      "osm": {
+        "lat": 48.3533654,
+        "lng": 8.9639858,
+        "display_name": "Hohenzollerisches Landesmuseum, Schloßplatz, Hechingen, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 13,
+      "from_city_m": 209,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hechingen_juedischer_friedhof",
+      "name": "Jüdischer Friedhof Hechingen",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 48.37255675714285,
+        "lng": 8.964298171428572
+      },
+      "query": "Jüdischer Friedhof Hechingen, Zollernstadt Hechingen, Germany",
+      "osm": {
+        "lat": 48.3726308,
+        "lng": 8.9643986,
+        "display_name": "Jüdischer Friedhof, Hechingen, Deutschland",
+        "class": "landuse",
+        "type": "cemetery",
+        "provider": "photon"
+      },
+      "delta_m": 11,
+      "from_city_m": 2087,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hechingen_neues_schloss_sparkasse",
+      "name": "Neues Schloss · Sparkasse ATM",
+      "category": "service",
+      "place_tier": 3,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 48.353845322580646,
+        "lng": 8.963100225806452
+      },
+      "query": "Neues Schloss ·, Zollernstadt Hechingen, Germany",
+      "osm": {
+        "lat": 48.3538242,
+        "lng": 8.9631829,
+        "display_name": "Neues Schloss, Schloßplatz, Hechingen, Deutschland",
+        "class": "building",
+        "type": "yes",
+        "provider": "photon"
+      },
+      "delta_m": 7,
+      "from_city_m": 128,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hechingen_alte_synagoge",
+      "name": "Alte Synagoge Hechingen",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 48.35185388888888,
+        "lng": 8.965496777777778
+      },
+      "query": "Alte Synagoge Hechingen, Zollernstadt Hechingen, Germany",
+      "osm": {
+        "lat": 48.3518951,
+        "lng": 8.9654609,
+        "display_name": "Alte Synagoge, Goldschmiedstraße, Hechingen, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 5,
+      "from_city_m": 380,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hechingen_oldtimermuseum_zollernalb",
+      "name": "Oldtimermuseum Zollernalb & Kalendermuseum",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 48.353945580645174,
+        "lng": 8.965389838709674
+      },
+      "query": "Oldtimermuseum Zollernalb, Zollernstadt Hechingen, Germany",
+      "osm": {
+        "lat": 48.3539074,
+        "lng": 8.9653922,
+        "display_name": "Oldtimermuseum Zollernalb, Obere Mühlstraße, Hechingen, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 4,
+      "from_city_m": 298,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hechingen_martinsquelle",
+      "name": "Martinsquelle",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 48.36027585555556,
+        "lng": 8.943199622222222
+      },
+      "query": "Martinsquelle, Zollernstadt Hechingen, Germany",
+      "osm": {
+        "lat": 48.3602432,
+        "lng": 8.9432137,
+        "display_name": "Martinsquelle, Märchenpfad, Hechingen, Deutschland",
+        "class": "natural",
+        "type": "spring",
+        "provider": "photon"
+      },
+      "delta_m": 4,
+      "from_city_m": 1518,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hechingen_stiftskirche_st_jakobus",
+      "name": "Stiftskirche St. Jakobus",
+      "category": "kirche",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 48.3516322962963,
+        "lng": 8.963742851851851
+      },
+      "query": "Stiftskirche St. Jakobus, Zollernstadt Hechingen, Germany",
+      "osm": {
+        "lat": 48.3516155,
+        "lng": 8.9637294,
+        "display_name": "Stiftskirche St.Jakobus, Kapfgasse, Hechingen, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 2,
+      "from_city_m": 306,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hechingen_heiligkreuzkapelle_friedhof",
+      "name": "Heiligkreuzkapelle (Gottesackerkirche)",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 48.33944645454546,
+        "lng": 8.969881090909091
+      },
+      "query": "Heiligkreuzkapelle, Zollernstadt Hechingen, Germany",
+      "osm": {
+        "lat": 48.3394626,
+        "lng": 8.9698578,
+        "display_name": "Heiligkreuzkapelle, Zollerstraße, Hechingen, Deutschland",
+        "class": "building",
+        "type": "church",
+        "provider": "photon"
+      },
+      "delta_m": 2,
+      "from_city_m": 1725,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hechingen_unterer_turm",
+      "name": "Unterer Turm",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 48.353617142857146,
+        "lng": 8.964619142857144
+      },
+      "query": "Unterer Turm, Zollernstadt Hechingen, Germany",
+      "osm": {
+        "lat": 48.3536103,
+        "lng": 8.9646194,
+        "display_name": "Unterer Turm, Staig, Hechingen, Deutschland",
+        "class": "historic",
+        "type": "city_gate",
+        "provider": "photon"
+      },
+      "delta_m": 1,
+      "from_city_m": 243,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hechingen_rathaus_hechingen",
+      "name": "Rathaus Hechingen",
+      "category": "verwaltung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 48.352923800000006,
+        "lng": 8.9643783
+      },
+      "query": "Rathaus Hechingen, Zollernstadt Hechingen, Germany",
+      "osm": {
+        "lat": 48.3529202,
+        "lng": 8.9643598,
+        "display_name": "Rathaus, Marktplatz, Hechingen, Deutschland",
+        "class": "amenity",
+        "type": "townhall",
+        "provider": "photon"
+      },
+      "delta_m": 1,
+      "from_city_m": 247,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hechingen_weisses_hausle_billardhauschen",
+      "name": "Weißes Häusle / Billardhäuschen",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 48.3475776,
+        "lng": 8.961985799999999
+      },
+      "query": "Weißes Häusle /, Zollernstadt Hechingen, Germany",
+      "osm": {
+        "lat": 48.3475715,
+        "lng": 8.9619689,
+        "display_name": "Weißes Häusle, Zollernstraße, Hechingen, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 1,
+      "from_city_m": 703,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    }
+  ]
+}

@@ -5,7 +5,6 @@
  */
 
 import { AppState, type NativeEventSubscription } from 'react-native';
-import * as Network from 'expo-network';
 import { env } from '../config/env';
 import { haversineMeters } from '../db/database';
 import {
@@ -120,6 +119,53 @@ async function mergeCommunityLandmarks(
   return places.length;
 }
 
+async function mergeCommunityPoiDrafts(
+  rows: Array<Record<string, unknown>>,
+): Promise<number> {
+  let n = 0;
+  for (const r of rows) {
+    if (String(r.kind ?? '') !== 'poi_draft') continue;
+    const name = String(r.name ?? '').trim();
+    const lat = Number(r.lat);
+    const lng = Number(r.lng);
+    if (!name || !Number.isFinite(lat) || !Number.isFinite(lng)) continue;
+    let facts: string[] = [];
+    try {
+      const raw = r.facts_json;
+      const parsed = typeof raw === 'string' ? JSON.parse(raw) : raw;
+      if (Array.isArray(parsed)) {
+        facts = parsed
+          .map((f) =>
+            typeof f === 'string'
+              ? f
+              : String((f as { text?: string })?.text ?? ''),
+          )
+          .filter((t) => t.length >= 12);
+      }
+    } catch {
+      facts = [];
+    }
+    try {
+      const { upsertLearnedPoi } = await import('../db/learnedPoiOverlay');
+      const cityId =
+        r.city_id != null ? String(r.city_id) : getCachedUserProfile()?.cityId ?? null;
+      await upsertLearnedPoi({
+        cityId,
+        name,
+        lat,
+        lng,
+        category: 'landmark',
+        packRole: 'directory',
+        factTexts: facts.slice(0, 8),
+      });
+      n += 1;
+    } catch {
+      /* soft */
+    }
+  }
+  return n;
+}
+
 async function mergeCommunityGeocodes(
   rows: Array<Record<string, unknown>>,
 ): Promise<number> {
@@ -207,6 +253,7 @@ export async function pullCommunityNavCacheNear(opts: {
     let imported = 0;
     for (const row of rows) {
       imported += await mergeCommunityLandmarks(asRecordArray(row.landmarks_json));
+      imported += await mergeCommunityPoiDrafts(asRecordArray(row.landmarks_json));
       imported += await mergeCommunityGeocodes(asRecordArray(row.geocodes_json));
       imported += await mergeCommunityStreetViewHints(
         asRecordArray(row.street_views_json),
@@ -338,6 +385,19 @@ export async function tickGrowthOnGps(
     void pullCommunityNavCacheNear({ lat, lng });
   }
 
+  // Soft-Stadt: Unique-User zählen → ab 10 Queue für auto Pack-Bau
+  try {
+    const { maybePingCityPackDemand } = require('../services/cityPackDemand') as {
+      maybePingCityPackDemand: (o?: {
+        lat?: number;
+        lng?: number;
+      }) => Promise<unknown>;
+    };
+    void maybePingCityPackDemand({ lat, lng });
+  } catch {
+    /* soft */
+  }
+
   const targetLat = opts?.targetLat;
   const targetLng = opts?.targetLng;
   if (
@@ -404,22 +464,35 @@ export function startGrowthMonitor(): () => void {
 
   const stopNightly = startNightlyCacheSyncMonitor();
   const stopBetaSituations = startBetaSituationSyncMonitor();
+  try {
+    const { runBetaSituationEveningSync } = require('../services/memory/betaSituationSync') as {
+      runBetaSituationEveningSync: (o?: { force?: boolean }) => Promise<unknown>;
+    };
+    void runBetaSituationEveningSync({ force: true });
+  } catch {
+    /* soft */
+  }
   let stopCollective: (() => void) | undefined;
   try {
     const { startCollectiveLearningMonitor } = require('../services/memory/collectiveLearning') as {
       startCollectiveLearningMonitor: () => () => void;
     };
     stopCollective = startCollectiveLearningMonitor();
+    try {
+      const { publishLearnedBlueprintsRemote } = require('../module2/blueprints/autoLearn') as {
+        publishLearnedBlueprintsRemote: () => Promise<void>;
+      };
+      void publishLearnedBlueprintsRemote();
+    } catch {
+      /* soft */
+    }
   } catch {
     stopCollective = undefined;
   }
 
-  void Network.getNetworkStateAsync()
-    .then((net) => {
-      lastOnline =
-        net.type !== Network.NetworkStateType.NONE &&
-        net.type !== Network.NetworkStateType.UNKNOWN &&
-        net.isInternetReachable !== false;
+  void isDeviceOffline()
+    .then((offline) => {
+      lastOnline = !offline;
     })
     .catch(() => undefined);
 

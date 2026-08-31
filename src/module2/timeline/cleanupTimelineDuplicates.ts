@@ -161,6 +161,7 @@ export function cleanupFuturePlanDuplicates(dateKey: string): number {
     (s) =>
       !s.id.startsWith('choice_') &&
       !s.id.startsWith('wake_') &&
+      !s.id.startsWith('ft:') &&
       s.kind !== 'wish' &&
       s.kind !== 'nav_leg',
   );

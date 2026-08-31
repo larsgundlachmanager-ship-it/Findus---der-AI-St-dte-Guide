@@ -41,11 +41,16 @@ export function eveningCutoffMs(nowMs = Date.now()): number {
 
 const DRY_MAX_POP = 20;
 const POSSIBLE_MAX_POP = 39;
-/** Ab hier: konkretes Regenfenster nennen */
+/** Ab hier: „Schauer möglich“ (ohne Countdown), wenn kein mm-Wert */
 const RAIN_CALL_POP = 40;
+/** Konkreter Countdown nur mit belegtem Niederschlag (mm), nicht nur %. */
+const RAIN_TIMED_MIN_MM = 0.2;
 
 /**
  * Baut eine klare Regen-Aussage aus Stundenwerten (bis Abend / Horizont).
+ *
+ * Wichtig: Hohe Regen-*Wahrscheinlichkeit* ohne mm ≠ „Regen in X Min“.
+ * Modelle (Open-Meteo vs. Wetter Online) streuen stark bei Pop-only.
  */
 export function buildRainOutlook(opts: {
   hours: RainHourSample[];
@@ -83,8 +88,9 @@ export function buildRainOutlook(opts: {
   let nextRainAtMs: number | null = null;
   let nextRainPopPct: number | null = null;
   for (const h of window) {
-    const wet =
-      h.popPct >= RAIN_CALL_POP || (h.precipMm != null && h.precipMm >= 0.2);
+    const mm = h.precipMm;
+    // Countdown nur bei echter mm-Prognose — Pop allein → unten „möglich“.
+    const wet = mm != null && Number.isFinite(mm) && mm >= RAIN_TIMED_MIN_MM;
     if (!wet) continue;
     nextRainAtMs = h.atMs;
     nextRainPopPct = Math.round(h.popPct);
@@ -103,6 +109,18 @@ export function buildRainOutlook(opts: {
     };
   }
 
+  // Hohe % ohne mm: ehrlich unsicher — kein Countdown (Modelle divergeieren).
+  if (maxPop >= RAIN_CALL_POP) {
+    return {
+      speechSuffix: ` Schauer möglich (bis ca. ${maxPop} %) — kein sicheres Fenster.`,
+      shortLabel: `Schauer möglich ~${maxPop}%`,
+      kind: 'possible',
+      nextRainAtMs: null,
+      nextRainPopPct: maxPop,
+      maxPopUntilEvening: maxPop,
+    };
+  }
+
   if (maxPop >= DRY_MAX_POP + 1 && maxPop <= POSSIBLE_MAX_POP) {
     return {
       speechSuffix: ` Schauer möglich (bis ca. ${maxPop} %) — kein sicheres Trocken.`,
@@ -115,8 +133,8 @@ export function buildRainOutlook(opts: {
   }
 
   return {
-    speechSuffix: ' Trocken bis zum Abend.',
-    shortLabel: 'trocken bis Abend',
+    speechSuffix: ' Kein Regen bis zum Abend erwartet.',
+    shortLabel: 'kein Regen bis Abend',
     kind: 'dry',
     nextRainAtMs: null,
     nextRainPopPct: null,

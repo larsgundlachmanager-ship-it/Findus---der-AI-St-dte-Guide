@@ -1,16 +1,112 @@
-/** Google Maps helpers for city-pack tooling (Geocode / Places / Street View).
- * Kosten: Legacy Text Search ist teuer — maxPages default 1; Key muss im
- * Findus-GCP-Projekt liegen (nie „My First Project“).
+/** Google Maps helpers for city-pack tooling (Geocode / Places API New / Street View).
+ * Places Legacy (Text Search / Nearby) ist in neuen GCP-Projekten oft deaktiviert —
+ * wir nutzen Places API (New): places.googleapis.com/v1
  */
 
-import { loadEnvFile, sleep } from './lib.mjs';
+import fs from 'node:fs';
+import path from 'node:path';
+import { loadEnvFile, sleep, STAEDTE_DIR } from './lib.mjs';
 
 loadEnvFile();
 
+/**
+ * Field masks = SKU. websiteUri / rating / userRatingCount → Enterprise
+ * (~35 $/1k Text Search, ~20 $/1k Details). Pack-GPS braucht das nicht.
+ *
+ * Discovery: Text Search Pro (~32 $/1k) — Name, Pin, Adresse, Types.
+ * resolvePlace: Text Search IDs Only (kostenlos) + Details Essentials (~5 $/1k).
+ */
+const PLACES_FIELD_MASK_PRO =
+  'places.id,places.displayName,places.location,places.formattedAddress,places.types,places.googleMapsUri';
+const PLACES_FIELD_MASK_ID = 'places.id';
+const DETAILS_FIELD_MASK_ESSENTIALS =
+  'id,displayName,location,formattedAddress,types,googleMapsUri';
+const DETAILS_FIELD_MASK_REVIEWS =
+  'id,displayName,types,editorialSummary,reviews.text,reviews.rating';
+
+const CACHE_PATH = path.join(STAEDTE_DIR, '.places-cache.json');
+const CACHE_TTL_MS = 30 * 24 * 60 * 60 * 1000;
+
+const cost = {
+  textPro: 0,
+  textId: 0,
+  detailsEss: 0,
+  detailsReviews: 0,
+  geocode: 0,
+  cacheHit: 0,
+};
+
+function estUsd() {
+  return (
+    cost.textPro * 0.032 +
+    cost.detailsEss * 0.005 +
+    cost.detailsReviews * 0.025 +
+    cost.geocode * 0.005
+  );
+}
+
+function logCost(reason = 'done') {
+  const usd = estUsd();
+  if (cost.textPro + cost.textId + cost.detailsEss + cost.detailsReviews + cost.geocode + cost.cacheHit === 0) {
+    return;
+  }
+  console.log(
+    `[places] ${reason} searchPro=${cost.textPro} searchId=${cost.textId} details=${cost.detailsEss} reviews=${cost.detailsReviews} geocode=${cost.geocode} cacheHit=${cost.cacheHit} ≈ $${usd.toFixed(2)}`,
+  );
+}
+
+process.on('exit', () => logCost('exit'));
+
+function loadCache() {
+  try {
+    return JSON.parse(fs.readFileSync(CACHE_PATH, 'utf8'));
+  } catch {
+    return { savedAt: new Date().toISOString(), entries: {} };
+  }
+}
+
+function saveCache(cache) {
+  try {
+    fs.mkdirSync(STAEDTE_DIR, { recursive: true });
+    cache.savedAt = new Date().toISOString();
+    fs.writeFileSync(CACHE_PATH, JSON.stringify(cache), 'utf8');
+  } catch {
+    /* cache is best-effort */
+  }
+}
+
+function cacheGet(key) {
+  const cache = loadCache();
+  const hit = cache.entries?.[key];
+  if (!hit || !hit.at) return null;
+  if (Date.now() - new Date(hit.at).getTime() > CACHE_TTL_MS) return null;
+  cost.cacheHit += 1;
+  return hit.value;
+}
+
+function cacheSet(key, value) {
+  const cache = loadCache();
+  cache.entries = cache.entries || {};
+  cache.entries[key] = { at: new Date().toISOString(), value };
+  saveCache(cache);
+}
+
+function textCacheKey(kind, query, location) {
+  const lat = location?.lat != null ? Number(location.lat).toFixed(3) : '';
+  const lng = location?.lng != null ? Number(location.lng).toFixed(3) : '';
+  const r = location?.radiusM || '';
+  return `text:${kind}:${String(query).toLowerCase()}:${lat}:${lng}:${r}`;
+}
+
 export function requireGoogleKey() {
-  const key = process.env.GOOGLE_MAPS_API_KEY || '';
+  const key =
+    process.env.GOOGLE_MAPS_API_KEY ||
+    process.env.EXPO_PUBLIC_GOOGLE_MAPS_API_KEY ||
+    '';
   if (!key || key.includes('your-')) {
-    throw new Error('Missing GOOGLE_MAPS_API_KEY in .env');
+    throw new Error(
+      'Missing GOOGLE_MAPS_API_KEY / EXPO_PUBLIC_GOOGLE_MAPS_API_KEY in .env',
+    );
   }
   return key;
 }
@@ -22,6 +118,56 @@ async function gjson(url) {
     throw new Error(
       `${data.status}: ${data.error_message || url.slice(0, 100)}`,
     );
+  }
+  return data;
+}
+
+/** Normalize Places API (New) place → legacy Text Search result shape. */
+function fromNewPlace(place) {
+  if (!place) return null;
+  const rawId = String(place.id || '').replace(/^places\//, '');
+  const lat = place.location?.latitude;
+  const lng = place.location?.longitude;
+  const reviews = (place.reviews || [])
+    .map((r) => ({
+      rating: r.rating ?? null,
+      text: String(r.text?.text || r.originalText?.text || '').trim(),
+    }))
+    .filter((r) => r.text.length >= 8);
+  return {
+    place_id: rawId || null,
+    name: place.displayName?.text || place.formattedAddress || rawId,
+    geometry:
+      lat != null && lng != null
+        ? { location: { lat, lng } }
+        : undefined,
+    formatted_address: place.formattedAddress || null,
+    vicinity: place.formattedAddress || null,
+    types: place.types || [],
+    rating: place.rating ?? null,
+    user_ratings_total: place.userRatingCount ?? null,
+    website: place.websiteUri || null,
+    url: place.googleMapsUri || null,
+    editorialSummary: place.editorialSummary?.text || null,
+    reviews,
+  };
+}
+
+async function placesNewPost(path, body, fieldMask, key = requireGoogleKey()) {
+  const res = await fetch(`https://places.googleapis.com/v1/${path}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Goog-Api-Key': key,
+      'X-Goog-FieldMask': fieldMask,
+    },
+    body: JSON.stringify(body),
+  });
+  const data = await res.json();
+  if (!res.ok) {
+    const msg = data?.error?.message || res.statusText || 'Places New error';
+    const status = data?.error?.status || `HTTP_${res.status}`;
+    throw new Error(`${status}: ${msg}`);
   }
   return data;
 }
@@ -39,58 +185,98 @@ export async function geocode(query, bias, key = requireGoogleKey()) {
     );
   }
   await sleep(120);
+  cost.geocode += 1;
   return gjson(u.toString());
 }
 
 export async function placesText(query, location, key = requireGoogleKey()) {
-  const u = new URL(
-    'https://maps.googleapis.com/maps/api/place/textsearch/json',
-  );
-  u.searchParams.set('query', query);
-  u.searchParams.set('language', 'de');
-  u.searchParams.set('region', 'de');
-  u.searchParams.set('key', key);
-  if (location) {
-    u.searchParams.set('location', `${location.lat},${location.lng}`);
-    u.searchParams.set('radius', String(location.radiusM || 4000));
+  const body = {
+    textQuery: query,
+    languageCode: 'de',
+    maxResultCount: 20,
+  };
+  if (location?.lat != null && location?.lng != null) {
+    const radiusM = Number(location.radiusM || 4000);
+    body.locationBias = {
+      circle: {
+        center: { latitude: location.lat, longitude: location.lng },
+        radius: Math.min(Math.max(radiusM, 50), 50000),
+      },
+    };
   }
+  const cacheKey = textCacheKey('pro', query, location);
+  const cached = cacheGet(cacheKey);
+  if (cached) return cached;
   await sleep(120);
-  return gjson(u.toString());
+  try {
+    cost.textPro += 1;
+    const data = await placesNewPost(
+      'places:searchText',
+      body,
+      PLACES_FIELD_MASK_PRO,
+      key,
+    );
+    const results = (data.places || []).map(fromNewPlace).filter(Boolean);
+    const out = { results, status: results.length ? 'OK' : 'ZERO_RESULTS' };
+    cacheSet(cacheKey, out);
+    return out;
+  } catch (e) {
+    const msg = String(e?.message || e);
+    if (/REQUEST_DENIED|PERMISSION_DENIED|OVER_QUERY_LIMIT|RESOURCE_EXHAUSTED/i.test(msg)) {
+      console.warn('[placesText] soft-fail →', msg.slice(0, 120));
+      return { results: [], status: 'ZERO_RESULTS' };
+    }
+    throw e;
+  }
 }
 
 /**
- * Text Search with pagination (up to `maxPages` × ~20 results).
- * Default 1 page — jede weitere Seite = volle Text-Search-Rechnung.
- * Prefer OSM/cache in callers; Google nur für Lücken.
+ * Text Search (New). `maxPages` kept for API compat — New API uses maxResultCount.
  */
 export async function placesTextAll(
   query,
   location,
   { maxPages = 1, key = requireGoogleKey() } = {},
 ) {
-  const all = [];
-  let pageToken = null;
-  for (let page = 0; page < maxPages; page += 1) {
-    const u = new URL(
-      'https://maps.googleapis.com/maps/api/place/textsearch/json',
-    );
-    u.searchParams.set('query', query);
-    u.searchParams.set('language', 'de');
-    u.searchParams.set('region', 'de');
-    u.searchParams.set('key', key);
-    if (location) {
-      u.searchParams.set('location', `${location.lat},${location.lng}`);
-      u.searchParams.set('radius', String(location.radiusM || 6000));
-    }
-    if (pageToken) u.searchParams.set('pagetoken', pageToken);
-    // Google requires a short delay before pagetoken works
-    await sleep(pageToken ? 2000 : 120);
-    const data = await gjson(u.toString());
-    all.push(...(data.results || []));
-    pageToken = data.next_page_token || null;
-    if (!pageToken) break;
+  const maxResultCount = Math.min(20 * Math.max(1, maxPages), 20);
+  const body = {
+    textQuery: query,
+    languageCode: 'de',
+    maxResultCount,
+  };
+  if (location?.lat != null && location?.lng != null) {
+    const radiusM = Number(location.radiusM || 6000);
+    body.locationBias = {
+      circle: {
+        center: { latitude: location.lat, longitude: location.lng },
+        radius: Math.min(Math.max(radiusM, 50), 50000),
+      },
+    };
   }
-  return { results: all, status: all.length ? 'OK' : 'ZERO_RESULTS' };
+  const cacheKey = textCacheKey('pro', query, location);
+  const cached = cacheGet(cacheKey);
+  if (cached) return cached;
+  await sleep(120);
+  try {
+    cost.textPro += 1;
+    const data = await placesNewPost(
+      'places:searchText',
+      body,
+      PLACES_FIELD_MASK_PRO,
+      key,
+    );
+    const results = (data.places || []).map(fromNewPlace).filter(Boolean);
+    const out = { results, status: results.length ? 'OK' : 'ZERO_RESULTS' };
+    cacheSet(cacheKey, out);
+    return out;
+  } catch (e) {
+    const msg = String(e?.message || e);
+    if (/REQUEST_DENIED|PERMISSION_DENIED|OVER_QUERY_LIMIT|RESOURCE_EXHAUSTED/i.test(msg)) {
+      console.warn('[placesTextAll] soft-fail →', msg.slice(0, 120));
+      return { results: [], status: 'ZERO_RESULTS' };
+    }
+    throw e;
+  }
 }
 
 export async function placesNearby(
@@ -98,32 +284,96 @@ export async function placesNearby(
   { type, keyword, radiusM = 3500 } = {},
   key = requireGoogleKey(),
 ) {
-  const u = new URL(
-    'https://maps.googleapis.com/maps/api/place/nearbysearch/json',
-  );
-  u.searchParams.set('location', `${location.lat},${location.lng}`);
-  u.searchParams.set('radius', String(radiusM));
-  u.searchParams.set('language', 'de');
-  u.searchParams.set('key', key);
-  if (type) u.searchParams.set('type', type);
-  if (keyword) u.searchParams.set('keyword', keyword);
+  const body = {
+    languageCode: 'de',
+    maxResultCount: 20,
+    locationRestriction: {
+      circle: {
+        center: { latitude: location.lat, longitude: location.lng },
+        radius: Math.min(Math.max(Number(radiusM) || 3500, 50), 50000),
+      },
+    },
+  };
+  if (type) body.includedTypes = [type];
+  // New Nearby has no free-text keyword; fall back to Text Search bias.
+  if (keyword && !type) {
+    return placesText(keyword, { ...location, radiusM }, key);
+  }
+  if (keyword && type) {
+    return placesText(`${keyword} ${type}`, { ...location, radiusM }, key);
+  }
   await sleep(120);
-  return gjson(u.toString());
+  try {
+    cost.textPro += 1;
+    const data = await placesNewPost(
+      'places:searchNearby',
+      body,
+      PLACES_FIELD_MASK_PRO,
+      key,
+    );
+    const results = (data.places || []).map(fromNewPlace).filter(Boolean);
+    return { results, status: results.length ? 'OK' : 'ZERO_RESULTS' };
+  } catch (e) {
+    const msg = String(e?.message || e);
+    if (/REQUEST_DENIED|PERMISSION_DENIED|OVER_QUERY_LIMIT|RESOURCE_EXHAUSTED/i.test(msg)) {
+      console.warn('[placesNearby] soft-fail →', msg.slice(0, 120));
+      return { results: [], status: 'ZERO_RESULTS' };
+    }
+    throw e;
+  }
 }
 
 export async function placeDetails(placeId, key = requireGoogleKey()) {
-  const u = new URL(
-    'https://maps.googleapis.com/maps/api/place/details/json',
-  );
-  u.searchParams.set('place_id', placeId);
-  u.searchParams.set('language', 'de');
-  u.searchParams.set(
-    'fields',
-    'place_id,name,geometry,formatted_address,types,url,website,opening_hours,rating,user_ratings_total,entrance',
-  );
-  u.searchParams.set('key', key);
+  const id = String(placeId || '').replace(/^places\//, '');
+  if (!id) return { result: null, status: 'ZERO_RESULTS' };
+  const cacheKey = `details:${id}`;
+  const cached = cacheGet(cacheKey);
+  if (cached) return cached;
   await sleep(120);
-  return gjson(u.toString());
+  cost.detailsEss += 1;
+  const res = await fetch(`https://places.googleapis.com/v1/places/${encodeURIComponent(id)}`, {
+    method: 'GET',
+    headers: {
+      'X-Goog-Api-Key': key,
+      'X-Goog-FieldMask': DETAILS_FIELD_MASK_ESSENTIALS,
+    },
+  });
+  const data = await res.json();
+  if (!res.ok) {
+    const msg = data?.error?.message || res.statusText;
+    throw new Error(`${data?.error?.status || res.status}: ${msg}`);
+  }
+  const result = fromNewPlace(data);
+  const out = { result, status: result ? 'OK' : 'ZERO_RESULTS' };
+  cacheSet(cacheKey, out);
+  return out;
+}
+
+/** Place Details with reviews (Atmosphere). Cached separately from Essentials. */
+export async function placeDetailsReviews(placeId, key = requireGoogleKey()) {
+  const id = String(placeId || '').replace(/^places\//, '');
+  if (!id) return { result: null, status: 'ZERO_RESULTS' };
+  const cacheKey = `detailsReviews:v1:${id}`;
+  const cached = cacheGet(cacheKey);
+  if (cached) return cached;
+  await sleep(120);
+  cost.detailsReviews += 1;
+  const res = await fetch(`https://places.googleapis.com/v1/places/${encodeURIComponent(id)}`, {
+    method: 'GET',
+    headers: {
+      'X-Goog-Api-Key': key,
+      'X-Goog-FieldMask': DETAILS_FIELD_MASK_REVIEWS,
+    },
+  });
+  const data = await res.json();
+  if (!res.ok) {
+    const msg = data?.error?.message || res.statusText;
+    throw new Error(`${data?.error?.status || res.status}: ${msg}`);
+  }
+  const result = fromNewPlace(data);
+  const out = { result, status: result ? 'OK' : 'ZERO_RESULTS' };
+  cacheSet(cacheKey, out);
+  return out;
 }
 
 export async function streetViewMeta(lat, lng, key = requireGoogleKey()) {
@@ -134,6 +384,34 @@ export async function streetViewMeta(lat, lng, key = requireGoogleKey()) {
   u.searchParams.set('key', key);
   await sleep(80);
   return gjson(u.toString());
+}
+
+export async function placesTextIdsOnly(query, location, key = requireGoogleKey()) {
+  const body = {
+    textQuery: query,
+    languageCode: 'de',
+    maxResultCount: 5,
+  };
+  if (location?.lat != null && location?.lng != null) {
+    const radiusM = Number(location.radiusM || 4000);
+    body.locationBias = {
+      circle: {
+        center: { latitude: location.lat, longitude: location.lng },
+        radius: Math.min(Math.max(radiusM, 50), 50000),
+      },
+    };
+  }
+  await sleep(80);
+  cost.textId += 1;
+  const data = await placesNewPost(
+    'places:searchText',
+    body,
+    PLACES_FIELD_MASK_ID,
+    key,
+  );
+  return (data.places || [])
+    .map((p) => String(p.id || '').replace(/^places\//, ''))
+    .filter(Boolean);
 }
 
 function pickBest(results, preferTypes = []) {
@@ -176,7 +454,35 @@ export async function resolvePlace(
   query,
   { near, preferTypes = [], geocodeFallback = true } = {},
 ) {
-  const places = await placesText(query, near);
+  const cacheKey = textCacheKey(
+    'resolve',
+    query,
+    near ? { lat: near.lat, lng: near.lng, radiusM: near.radiusM || 4000 } : null,
+  );
+  const cached = cacheGet(cacheKey);
+  if (cached) return cached;
+
+  // Cheap path: ID-only search (free) + Details Essentials (~$5/1k).
+  try {
+    const ids = await placesTextIdsOnly(query, near);
+    if (ids[0]) {
+      const det = await placeDetails(ids[0]);
+      const loc = locOf(det.result);
+      if (loc) {
+        cacheSet(cacheKey, loc);
+        return loc;
+      }
+    }
+  } catch (e) {
+    console.warn('[resolvePlace] id-only soft-fail', String(e?.message || e).slice(0, 120));
+  }
+
+  let places = { results: [] };
+  try {
+    places = await placesText(query, near);
+  } catch (e) {
+    console.warn('[resolvePlace] places soft-fail', String(e?.message || e).slice(0, 120));
+  }
   let best = pickBest(places.results, preferTypes);
   if (!best && geocodeFallback) {
     const bias = near
@@ -190,15 +496,9 @@ export async function resolvePlace(
     const geo = await geocode(query, bias);
     best = pickBest(geo.results, preferTypes) || geo.results?.[0];
   }
-  if (!best?.place_id) return locOf(best);
-
-  // Details = better pin / entrance geometry when available
-  try {
-    const det = await placeDetails(best.place_id);
-    return locOf(det.result) || locOf(best);
-  } catch {
-    return locOf(best);
-  }
+  const loc = locOf(best);
+  if (loc) cacheSet(cacheKey, loc);
+  return loc;
 }
 
 /** Discovery queries for Module-1 coverage (stable POIs first). */

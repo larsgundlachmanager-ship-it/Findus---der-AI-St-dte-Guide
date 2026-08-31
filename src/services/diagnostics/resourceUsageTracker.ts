@@ -143,6 +143,20 @@ async function hydrate(): Promise<void> {
   }
 }
 
+
+function mapsCallLabel(url: string): string {
+  const u = url.toLowerCase();
+  if (u.includes('directions')) return 'directions';
+  if (u.includes('geocode')) return 'geocode';
+  if (u.includes('streetview')) return 'streetview';
+  if (u.includes('searchnearby') || u.includes('nearbysearch')) return 'places_nearby';
+  if (u.includes('searchtext') || u.includes('textsearch') || u.includes('findplace')) {
+    return 'places_text';
+  }
+  if (u.includes('/details') || u.includes('placedetails')) return 'place_details';
+  return 'maps';
+}
+
 export function classifyUrl(url: string): DataConsumerId {
   const u = url.toLowerCase();
   if (
@@ -233,6 +247,12 @@ export function installNetworkUsageProbe(): void {
           : (input as Request).url;
     const consumer = classifyUrl(url);
     const outBytes = byteLengthOfBody(init?.body);
+
+    if (consumer === 'maps') {
+      void import('../llm/apiUsageTracker')
+        .then((m) => m.trackMapsUsage(mapsCallLabel(url)))
+        .catch(() => undefined);
+    }
 
     const response = await original(input, init);
     let recorded = false;

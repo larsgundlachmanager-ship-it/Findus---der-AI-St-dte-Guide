@@ -7,7 +7,12 @@ import * as Speech from 'expo-speech';
 
 export async function speakWithExpoSpeech(
   text: string,
-  opts?: { language?: string; rate?: number; pitch?: number },
+  opts?: {
+    language?: string;
+    rate?: number;
+    pitch?: number;
+    onCharIndex?: (charIndex: number) => void;
+  },
 ): Promise<void> {
   const input = text.replace(/\s+/g, ' ').trim();
   if (!input) return;
@@ -19,6 +24,12 @@ export async function speakWithExpoSpeech(
         language: opts?.language ?? 'de-DE',
         rate: opts?.rate ?? 1.0,
         pitch: opts?.pitch ?? 1.0,
+        onBoundary: opts?.onCharIndex
+          ? (ev) => {
+              const idx = (ev as { charIndex?: number }).charIndex;
+              if (typeof idx === 'number') opts.onCharIndex!(idx);
+            }
+          : undefined,
         onDone: () => resolve(),
         onStopped: () => resolve(),
         onError: (err) =>

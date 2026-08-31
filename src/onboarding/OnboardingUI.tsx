@@ -1,16 +1,14 @@
 import React, { createContext, useContext } from 'react';
 import {
-  Platform,
   Pressable,
-  StatusBar,
   StyleSheet,
   Text,
   View,
   type StyleProp,
   type ViewStyle,
 } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors, spacing } from '../constants/theme';
+import { useSystemSafePad } from '../hooks/useSystemSafePad';
 import {
   ONBOARDING_METRICS,
   onboardingDensityForAge,
@@ -36,17 +34,9 @@ export function useOnboardingDensity(): OnboardingDensity {
   return useContext(DensityCtx);
 }
 
-/** Top-Inset inkl. Android-Fallback (Uhr/Statusleiste), wenn SafeArea 0 meldet. */
+/** @deprecated nutze useSystemSafePad — Alias für Onboarding. */
 export function useOnboardingSafePad(): { top: number; bottom: number } {
-  const insets = useSafeAreaInsets();
-  const androidStatus =
-    Platform.OS === 'android' ? StatusBar.currentHeight ?? 0 : 0;
-  // Nothing Phone / edge-to-edge: oft insets.top === 0 → harte Untergrenze unter der Uhr
-  const floor = Platform.OS === 'android' ? 52 : 28;
-  return {
-    top: Math.max(insets.top, androidStatus, floor),
-    bottom: Math.max(insets.bottom, Platform.OS === 'android' ? 16 : 0),
-  };
+  return useSystemSafePad();
 }
 
 export function OnboardingShell({

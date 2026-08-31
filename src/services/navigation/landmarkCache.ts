@@ -4,6 +4,7 @@
  */
 
 import { getDatabase } from '../../db/database';
+import { runExclusiveDbWrite } from '../../db/dbWriteLock';
 import type { DiscoveredPlace, PlaceLandmark } from './googleMapsNav';
 import { upsertCachedDestination } from './offlineNavCache';
 
@@ -205,54 +206,56 @@ export async function upsertCachedLandmarks(
   await ensureLandmarkCacheTable();
   const db = await getDatabase();
   const now = Date.now();
-  for (const p of places) {
-    const gh = geohashApprox(p.lat, p.lng);
-    // Dedup: same name+geohash → update
-    const existing = await db.getFirstAsync<{ id: number }>(
-      `SELECT id FROM landmark_cache
-       WHERE kind = ? AND name = ? AND geohash = ? LIMIT 1`,
-      kind,
-      p.name,
-      gh,
-    );
-    const typesJson = JSON.stringify(p.types ?? []);
-    const openNow =
-      p.openNow == null ? null : p.openNow ? 1 : 0;
-    if (existing?.id != null) {
-      await db.runAsync(
-        `UPDATE landmark_cache SET
-           lat = ?, lng = ?, types_json = ?, rating = ?, open_now = ?,
-           place_id = ?, query_key = ?, fetched_at_ms = ?
-         WHERE id = ?`,
-        p.lat,
-        p.lng,
-        typesJson,
-        p.rating ?? null,
-        openNow,
-        p.placeId ?? null,
-        queryKey ?? null,
-        now,
-        existing.id,
-      );
-    } else {
-      await db.runAsync(
-        `INSERT INTO landmark_cache
-          (kind, place_id, name, lat, lng, types_json, rating, open_now, geohash, query_key, fetched_at_ms)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+  await runExclusiveDbWrite(async () => {
+    for (const p of places) {
+      const gh = geohashApprox(p.lat, p.lng);
+      // Dedup: same name+geohash → update
+      const existing = await db.getFirstAsync<{ id: number }>(
+        `SELECT id FROM landmark_cache
+         WHERE kind = ? AND name = ? AND geohash = ? LIMIT 1`,
         kind,
-        p.placeId ?? null,
         p.name,
-        p.lat,
-        p.lng,
-        typesJson,
-        p.rating ?? null,
-        openNow,
         gh,
-        queryKey ?? null,
-        now,
       );
+      const typesJson = JSON.stringify(p.types ?? []);
+      const openNow =
+        p.openNow == null ? null : p.openNow ? 1 : 0;
+      if (existing?.id != null) {
+        await db.runAsync(
+          `UPDATE landmark_cache SET
+             lat = ?, lng = ?, types_json = ?, rating = ?, open_now = ?,
+             place_id = ?, query_key = ?, fetched_at_ms = ?
+           WHERE id = ?`,
+          p.lat,
+          p.lng,
+          typesJson,
+          p.rating ?? null,
+          openNow,
+          p.placeId ?? null,
+          queryKey ?? null,
+          now,
+          existing.id,
+        );
+      } else {
+        await db.runAsync(
+          `INSERT INTO landmark_cache
+            (kind, place_id, name, lat, lng, types_json, rating, open_now, geohash, query_key, fetched_at_ms)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+          kind,
+          p.placeId ?? null,
+          p.name,
+          p.lat,
+          p.lng,
+          typesJson,
+          p.rating ?? null,
+          openNow,
+          gh,
+          queryKey ?? null,
+          now,
+        );
+      }
     }
-  }
+  });
   for (const p of places) {
     void upsertCachedDestination({
       name: p.name,
@@ -313,20 +316,22 @@ export async function putCachedGeocode(
   const db = await getDatabase();
   const norm = query.trim().toLowerCase().replace(/\s+/g, ' ');
   if (norm.length < 2) return;
-  await db.runAsync(
-    `INSERT INTO geocode_cache (query_norm, label, lat, lng, fetched_at_ms)
-     VALUES (?, ?, ?, ?, ?)
-     ON CONFLICT(query_norm) DO UPDATE SET
-       label = excluded.label,
-       lat = excluded.lat,
-       lng = excluded.lng,
-       fetched_at_ms = excluded.fetched_at_ms`,
-    norm,
-    result.label,
-    result.lat,
-    result.lng,
-    Date.now(),
-  );
+  await runExclusiveDbWrite(async () => {
+    await db.runAsync(
+      `INSERT INTO geocode_cache (query_norm, label, lat, lng, fetched_at_ms)
+       VALUES (?, ?, ?, ?, ?)
+       ON CONFLICT(query_norm) DO UPDATE SET
+         label = excluded.label,
+         lat = excluded.lat,
+         lng = excluded.lng,
+         fetched_at_ms = excluded.fetched_at_ms`,
+      norm,
+      result.label,
+      result.lat,
+      result.lng,
+      Date.now(),
+    );
+  });
   void upsertCachedDestination({
     name: result.label,
     lat: result.lat,

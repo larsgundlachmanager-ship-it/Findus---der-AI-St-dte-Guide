@@ -24,6 +24,17 @@ export function selectPitchOption(requestId: string, optionId: string): void {
   const s = sessions.get(requestId);
   if (!s) return;
   s.selectedOptionId = optionId;
+  const chosen = s.options.find((o) => o.id === optionId);
+  if (chosen?.name) {
+    try {
+      const { setLastPlaceName } = require('../context/shortTermContext') as {
+        setLastPlaceName: (n: string | null) => void;
+      };
+      setLastPlaceName(chosen.name);
+    } catch {
+      /* soft */
+    }
+  }
 }
 
 export function getPitchSession(requestId: string): PitchSession | null {
@@ -102,15 +113,29 @@ export function startPitchDeepAppend(opts: {
         });
       }
 
+      const asMenu = (url: string | null | undefined): string | null => {
+        const u = String(url ?? '').trim();
+        if (!u || !isSafeOfferUrl(u)) return null;
+        try {
+          const { isMenuAssetUrl } = require('../planning/offerActionUtils') as {
+            isMenuAssetUrl: (x: string) => boolean;
+          };
+          return isMenuAssetUrl(u) ? u : null;
+        } catch {
+          return /speisekarte|\/ugd\/|\.pdf/i.test(u) ? u : null;
+        }
+      };
       const pickUrlForVenue = (optName: string, index: number): string | null => {
         const needle = optName.toLowerCase().slice(0, 18);
         const byName = namedUrls.find((u) =>
           u.label.toLowerCase().includes(needle),
         );
-        if (byName) return byName.url;
-        // Seed behalten wenn Deep nichts Besseres hat
-        const seed = live.options[index]?.menuUrl || live.options[index]?.websiteUrl;
-        return namedUrls[index]?.url ?? namedUrls[0]?.url ?? seed ?? null;
+        const fromNamed = namedUrls[index]?.url ?? namedUrls[0]?.url ?? null;
+        return (
+          asMenu(byName?.url) ||
+          asMenu(fromNamed) ||
+          asMenu(live.options[index]?.menuUrl)
+        );
       };
 
       const facts = String(res.draftText ?? '');
@@ -130,6 +155,7 @@ export function startPitchDeepAppend(opts: {
             ticketUrl: opt.ticketUrl,
             websiteUrl: opt.websiteUrl,
             role: opt.role === 'out_of_box' ? 'alternative' : opt.role,
+            suppressNav: true,
           });
         }
         const priceRe = new RegExp(

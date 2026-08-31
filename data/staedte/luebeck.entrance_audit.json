@@ -1,0 +1,1111 @@
+{
+  "city_id": "luebeck",
+  "apply": true,
+  "storyOnly": true,
+  "maxDelta": 80,
+  "country": "Germany",
+  "summary": {
+    "ok": 13,
+    "check": 16,
+    "bad": 3,
+    "errors": 0,
+    "applied": 18,
+    "skipped_directory": 786,
+    "skipped_cached_google": 59
+  },
+  "rows": [
+    {
+      "id": "luebeck_lubeck_hauptbahnhof",
+      "name": "Lübeck Hauptbahnhof",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.867626593181825,
+        "lng": 10.669959979545455
+      }
+    },
+    {
+      "id": "luebeck_europaisches_hansemuseum",
+      "name": "Europäisches Hansemuseum & Burgkloster",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.87403675588235,
+        "lng": 10.690820355882352
+      }
+    },
+    {
+      "id": "luebeck_museumsquartier",
+      "name": "Museumsquartier St. Annen",
+      "before": {
+        "lat": 53.8626214,
+        "lng": 10.688497
+      },
+      "google": {
+        "lat": 53.8627688,
+        "lng": 10.6888461,
+        "place_id": "ChIJbcxLu1sJskcR-mGHaMUKrSk",
+        "address": "St.-Annen-Straße 15, 23552 Lübeck-Lübecker Altstadt, Germany"
+      },
+      "delta_m": 28,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "luebeck_museum_behnhaus_dragerhaus",
+      "name": "Museum Behnhaus Drägerhaus",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.870241091666664,
+        "lng": 10.689850875
+      }
+    },
+    {
+      "id": "luebeck_museum_holstentor",
+      "name": "Holstentor",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.8658995,
+        "lng": 10.680195042105264
+      }
+    },
+    {
+      "id": "luebeck_museum_fur_natur_und_umwelt",
+      "name": "Museum für Natur und Umwelt",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.86039409999999,
+        "lng": 10.685646700000001
+      }
+    },
+    {
+      "id": "luebeck_museumshafen_lubeck",
+      "name": "Museumshafen Lübeck",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.872749428571424,
+        "lng": 10.68216382857143
+      }
+    },
+    {
+      "id": "luebeck_willy_brandt_haus_lubeck",
+      "name": "Willy-Brandt-Haus Lübeck",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.86973291666667,
+        "lng": 10.689544933333336
+      }
+    },
+    {
+      "id": "luebeck_ev_luth_kirchengemeinde_st_marien_zu_lubeck",
+      "name": "St. Marien zu Lübeck",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.86770811375,
+        "lng": 10.685170572500002
+      }
+    },
+    {
+      "id": "luebeck_st_petri_zu_lubeck",
+      "name": "Petrikirche Lübeck",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.86583764838708,
+        "lng": 10.683069406451612
+      }
+    },
+    {
+      "id": "luebeck_st_aegidien_kirche_lubeck_ev_luth_kirchengemeinde_st_aegidien_zu_lubeck",
+      "name": "St. Aegidien zu Lübeck",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.86395664285715,
+        "lng": 10.689815857142857
+      }
+    },
+    {
+      "id": "luebeck_st_jakobi_kirche_lubeck_ev_luth_kirchengemeinde_st_jakobi_lubeck",
+      "name": "St. Jakobi zu Lübeck",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.870867828571434,
+        "lng": 10.68902502
+      }
+    },
+    {
+      "id": "luebeck_propsteikirche_herz_jesu_lubeck",
+      "name": "Propsteikirche Herz Jesu, Lübeck",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.86257388235293,
+        "lng": 10.684400058823531
+      }
+    },
+    {
+      "id": "luebeck_ev_luth_laurentius_kirchengemeinde_lubeck_st_lorenz_kirche",
+      "name": "Ev.-Luth. Laurentius-Kirchengemeinde Lübeck / St. Lorenz-Kirche",
+      "before": {
+        "lat": 53.86842599999999,
+        "lng": 10.670037766666667
+      },
+      "google": {
+        "lat": 53.868448799999996,
+        "lng": 10.6700045,
+        "place_id": "ChIJdcL8CKsOskcRnPcM5VAlEGA",
+        "address": "Steinrader Weg 11A, 23558 Lübeck-St. Lorenz Nord, Germany"
+      },
+      "delta_m": 3,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "luebeck_kaiser_wilhelm_i_denkmal",
+      "name": "Kaiser-Wilhelm I.-Denkmal",
+      "before": {
+        "lat": 53.8666069,
+        "lng": 10.672335987499999
+      },
+      "google": {
+        "lat": 53.8668094,
+        "lng": 10.673456600000002,
+        "place_id": "ChIJTQvJMm0JskcRkjOjDEGiDDw",
+        "address": "Lindenpl., 23554 Lübeck, Germany"
+      },
+      "delta_m": 77,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "luebeck_johannes_brahms_statue",
+      "name": "Johannes Brahms Statue",
+      "before": {
+        "lat": 53.8648734,
+        "lng": 10.679305800000002
+      },
+      "google": {
+        "lat": 53.8649863,
+        "lng": 10.6795934,
+        "place_id": "ChIJSd-NNSUJskcRZM_OHypqIqg",
+        "address": "Obertravenbrücke, 23552 Lübeck, Germany"
+      },
+      "delta_m": 23,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "luebeck_brunnen_sod",
+      "name": "Brunnen Sod",
+      "before": {
+        "lat": 53.87084056956522,
+        "lng": 10.689029360869565
+      },
+      "google": {
+        "lat": 53.8714149,
+        "lng": 10.6886607,
+        "place_id": "ChIJa34fYwALskcRD8fwy1OQJAc",
+        "address": "Koberg 4, 23552 Lübeck-Lübecker Altstadt, Germany"
+      },
+      "delta_m": 68,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "luebeck_heinrich_der_lowe_denkmal",
+      "name": "Heinrich-der-Löwe-Denkmal",
+      "before": {
+        "lat": 53.86089044711538,
+        "lng": 10.68577971826923
+      },
+      "google": {
+        "lat": 53.861491,
+        "lng": 10.685248,
+        "place_id": "ChIJI9v_zSgJskcRSWAiOyQLhcc",
+        "address": "Parade 12, 23552 Lübeck-Lübecker Altstadt, Germany"
+      },
+      "delta_m": 75,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "luebeck_stadtpark",
+      "name": "Stadtpark",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.8766215076923,
+        "lng": 10.703605646153846
+      }
+    },
+    {
+      "id": "luebeck_burgerpark",
+      "name": "Bürgerpark",
+      "before": {
+        "lat": 53.89249736999999,
+        "lng": 10.682844710000003
+      },
+      "google": {
+        "lat": 53.892424999999996,
+        "lng": 10.683365,
+        "place_id": "ChIJr65EQxMLskcRyJx7i2fruTQ",
+        "address": "Warnowweg 32, 23554 Lübeck, Germany"
+      },
+      "delta_m": 35,
+      "status": "CHECK",
+      "streetview": "ZERO_RESULTS",
+      "applied": true
+    },
+    {
+      "id": "luebeck_wiese_an_der_wallstreet",
+      "name": "Wiese an der 'Wallstreet'",
+      "before": {
+        "lat": 53.860793071428574,
+        "lng": 10.681159585714287
+      },
+      "google": {
+        "lat": 53.861233399999996,
+        "lng": 10.680322900000002,
+        "place_id": "ChIJK71-Qc8JskcRYX9OgrL2PCI",
+        "address": "Wallstraße 37, 23552 Lübeck-Lübecker Altstadt, Germany"
+      },
+      "delta_m": 74,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "luebeck_muhlenteich",
+      "name": "Mühlenteich",
+      "before": {
+        "lat": 53.859731659999994,
+        "lng": 10.687911644444448
+      },
+      "google": {
+        "lat": 53.8598095,
+        "lng": 10.688436300000001,
+        "place_id": "ChIJfRJjM1sJskcRrPfITk58_7c",
+        "address": "Mühlenteich, 23552 Lübeck, Germany"
+      },
+      "delta_m": 35,
+      "status": "CHECK",
+      "streetview": "ZERO_RESULTS",
+      "applied": true
+    },
+    {
+      "id": "luebeck_historische_altstadt_lubeck",
+      "name": "Lübecker Altstadt · UNESCO",
+      "before": {
+        "lat": 53.86641568,
+        "lng": 10.68503202
+      },
+      "google": {
+        "lat": 53.866098199999996,
+        "lng": 10.685375599999999,
+        "place_id": "ChIJZY6CPAAJskcRBEpx2rfR6Wg",
+        "address": "Breite Str. 99-95, 23552 Lübeck, Germany"
+      },
+      "delta_m": 42,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "luebeck_panoramagang",
+      "name": "Panoramagang",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.8718720111111,
+        "lng": 10.690634211111112
+      }
+    },
+    {
+      "id": "luebeck_theater_lubeck",
+      "name": "Theater Lübeck",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.86564815714286,
+        "lng": 10.682266599999997
+      }
+    },
+    {
+      "id": "luebeck_theater_combinale_lubeck",
+      "name": "Theater Combinale Lübeck",
+      "before": {
+        "lat": 53.8650595375,
+        "lng": 10.692505237499999
+      },
+      "google": {
+        "lat": 53.8650001,
+        "lng": 10.692482,
+        "place_id": "ChIJfWIyqV4JskcRyt-V6x8iTQY",
+        "address": "Hüxstraße 115, 23552 Lübeck-Lübecker Altstadt, Germany"
+      },
+      "delta_m": 7,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "luebeck_theaterschiff_lubeck",
+      "name": "Theaterschiff Lübeck",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.869284325,
+        "lng": 10.679014158333333
+      }
+    },
+    {
+      "id": "luebeck_zaubertheater_lubeck",
+      "name": "Zaubertheater Lübeck",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.8695199,
+        "lng": 10.681114642857144
+      }
+    },
+    {
+      "id": "luebeck_hoftheater_lubeck",
+      "name": "Hoftheater Lübeck",
+      "before": {
+        "lat": 53.87351644285714,
+        "lng": 10.674173299999998
+      },
+      "google": {
+        "lat": 53.873526999999996,
+        "lng": 10.6744187,
+        "place_id": "ChIJNZoruf8LskcRsacDAWnXAlU",
+        "address": "Schwartauer Allee 39-41, 23554 Lübeck-St. Lorenz Nord, Germany"
+      },
+      "delta_m": 16,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "luebeck_wanderweg_an_der_trave",
+      "name": "Wanderweg an der Trave",
+      "before": {
+        "lat": 53.85673078181817,
+        "lng": 10.68755349090909
+      },
+      "google": {
+        "lat": 53.8570248,
+        "lng": 10.687513599999999,
+        "place_id": "ChIJNdsvYewJskcRzYQG1qEzLbo",
+        "address": "Wallstraße 42, 23560 Lübeck, Germany"
+      },
+      "delta_m": 33,
+      "status": "CHECK",
+      "streetview": "ZERO_RESULTS",
+      "applied": true
+    },
+    {
+      "id": "luebeck_wanderweg_dragerweg",
+      "name": "Wanderweg Drägerweg",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.865830634999995,
+        "lng": 10.683163205
+      }
+    },
+    {
+      "id": "luebeck_wakenitzufer",
+      "name": "Wakenitzufer",
+      "before": {
+        "lat": 53.867666628571435,
+        "lng": 10.703479514285716
+      },
+      "google": {
+        "lat": 53.8677933,
+        "lng": 10.7039178,
+        "place_id": "ChIJZUXwdGAJskcRjzehHgxq9EE",
+        "address": "Wakenitzufer, 23564 Lübeck-St. Jürgen, Germany"
+      },
+      "delta_m": 32,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "luebeck_lunapark",
+      "name": "Lunapark (Hanseplatz)",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.85987057,
+        "lng": 10.66322141
+      }
+    },
+    {
+      "id": "luebeck_filmhaus",
+      "name": "Filmhaus",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.86880798,
+        "lng": 10.68825292
+      }
+    },
+    {
+      "id": "luebeck_kommunales_kino_lubeck",
+      "name": "Kommunales Kino Lübeck",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.868651637499994,
+        "lng": 10.68116115
+      }
+    },
+    {
+      "id": "luebeck_kolosseum_festsaal",
+      "name": "Kolosseum Festsaal",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.85484521666666,
+        "lng": 10.689027350000002
+      }
+    },
+    {
+      "id": "luebeck_musik_und_kongresshalle_lubeck",
+      "name": "Musik- und Kongresshalle Lübeck",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.8692718,
+        "lng": 10.6779653
+      }
+    },
+    {
+      "id": "luebeck_naturschutzgebiet_schellbruch",
+      "name": "Naturschutzgebiet Schellbruch",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.865830634999995,
+        "lng": 10.683163205
+      }
+    },
+    {
+      "id": "luebeck_naturschutzgebiet_wakenitz_muggenbusch",
+      "name": "Naturschutzgebiet Wakenitz/Müggenbusch",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.865830634999995,
+        "lng": 10.683163205
+      }
+    },
+    {
+      "id": "luebeck_naturschutzgebiet_wakenitz_gartnergasse",
+      "name": "Naturschutzgebiet Wakenitz/Gärtnergasse",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.85137503684211,
+        "lng": 10.724422694736843
+      }
+    },
+    {
+      "id": "luebeck_wakenitz",
+      "name": "Wakenitz",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.865830634999995,
+        "lng": 10.683163205
+      }
+    },
+    {
+      "id": "luebeck_kleverschusskreuz",
+      "name": "Kleverschusskreuz",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.87562641666667,
+        "lng": 10.705606305555555
+      }
+    },
+    {
+      "id": "luebeck_ev_luth_kirchengemeinde_in_st_jurgen_kreuzkirche",
+      "name": "Ev.-luth. Kirchengemeinde in St. Jürgen / Kreuzkirche",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.84283576923077,
+        "lng": 10.687328923076924
+      }
+    },
+    {
+      "id": "luebeck_lubecker_dom",
+      "name": "Lübecker Dom",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.860897580645165,
+        "lng": 10.685886725806451
+      }
+    },
+    {
+      "id": "luebeck_thorweg",
+      "name": "Thorweg",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.865830634999995,
+        "lng": 10.683163205
+      }
+    },
+    {
+      "id": "luebeck_thomas_mann_stein",
+      "name": "Thomas-Mann-Stein",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.865830634999995,
+        "lng": 10.683163205
+      }
+    },
+    {
+      "id": "luebeck_burgergarten",
+      "name": "Bürgergärten",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.87049822857143,
+        "lng": 10.690722771428572
+      }
+    },
+    {
+      "id": "luebeck_wesloer_wald_see",
+      "name": "Wesloer Wald See",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.86768717222221,
+        "lng": 10.760858294444446
+      }
+    },
+    {
+      "id": "luebeck_wesloer_wald",
+      "name": "Wesloer Wald",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.865830634999995,
+        "lng": 10.683163205
+      }
+    },
+    {
+      "id": "luebeck_stadtgeschichte",
+      "name": "Lübeck Stadtgeschichte & Orientierung",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.8664305,
+        "lng": 10.6845816
+      }
+    },
+    {
+      "id": "luebeck_buddenbrookhaus",
+      "name": "Buddenbrookhaus & Gründungsviertel",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.867336977777775,
+        "lng": 10.684996211111113
+      }
+    },
+    {
+      "id": "luebeck_heiligen_geist",
+      "name": "Heiligen-Geist-Hospital & Koberg",
+      "before": {
+        "lat": 53.87067011666667,
+        "lng": 10.689722716666667
+      },
+      "google": {
+        "lat": 53.8714028,
+        "lng": 10.6899675,
+        "place_id": "ChIJ7_ldi-ILskcRwfgUsAK1D0k",
+        "address": "Koberg 11, 23552 Lübeck-Lübecker Altstadt, Germany"
+      },
+      "delta_m": 83,
+      "status": "BAD",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "luebeck_burgtor",
+      "name": "Burgtor Lübeck",
+      "before": {
+        "lat": 53.87390975555556,
+        "lng": 10.691188855555556
+      },
+      "google": {
+        "lat": 53.873945299999995,
+        "lng": 10.6911563,
+        "place_id": "ChIJq3L8COMLskcRm5iByzt62aE",
+        "address": "Große Burgstraße 5, 23552 Lübeck-Lübecker Altstadt, Germany"
+      },
+      "delta_m": 4,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "luebeck_rathaus",
+      "name": "Rathaus Lübeck",
+      "before": {
+        "lat": 53.86657646666667,
+        "lng": 10.685502249999999
+      },
+      "google": {
+        "lat": 53.8667242,
+        "lng": 10.68543,
+        "place_id": "ChIJcRf821kJskcRpDkIjLlii-8",
+        "address": "Breite Str. 62, 23552 Lübeck-Lübecker Altstadt, Germany"
+      },
+      "delta_m": 17,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "luebeck_salzspeicher",
+      "name": "Salzspeicher am Holstentor",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.8658995,
+        "lng": 10.680195042105264
+      }
+    },
+    {
+      "id": "luebeck_niederegger",
+      "name": "Niederegger Marzipan-Museum & Stammhaus",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.866526909090915,
+        "lng": 10.685895936363638
+      }
+    },
+    {
+      "id": "luebeck_passat",
+      "name": "Viermastbark Passat",
+      "before": {
+        "lat": 53.95801316666667,
+        "lng": 10.880874881818183
+      },
+      "google": {
+        "lat": 53.9580182,
+        "lng": 10.8808694,
+        "place_id": "ChIJfRYIDdyKrUcRcgppjHs_694",
+        "address": "Priwallpromenade 3a, 23570 Lübeck, Germany"
+      },
+      "delta_m": 1,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "luebeck_draegerpark",
+      "name": "Drägerpark & Wakenitzufer",
+      "before": {
+        "lat": 53.87009750666666,
+        "lng": 10.709446680000003
+      },
+      "google": {
+        "lat": 53.8701383,
+        "lng": 10.709154,
+        "place_id": "ChIJZ9BkzdgLskcRHsK6KcqBJbs",
+        "address": "Alexanderstraße 36A, 23566 Lübeck-St. Gertrud, Germany"
+      },
+      "delta_m": 20,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "luebeck_lohmuehle",
+      "name": "Stadion an der Lohmühle",
+      "before": {
+        "lat": 53.88152035,
+        "lng": 10.668621162500001
+      },
+      "google": {
+        "lat": 53.881481099999995,
+        "lng": 10.6684288,
+        "place_id": "ChIJY039ExwNskcRAiVaPuFRsZ0",
+        "address": "b. d. Lohmühle 13, 23554 Lübeck-St. Lorenz Nord, Germany"
+      },
+      "delta_m": 13,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "luebeck_alter_leuchtturm_travemuende",
+      "name": "Alter Leuchtturm Travemünde",
+      "before": {
+        "lat": 53.960636265000005,
+        "lng": 10.87932889
+      },
+      "google": {
+        "lat": 53.9606314,
+        "lng": 10.8794028,
+        "place_id": "ChIJQ93GHt2KrUcRCx1a4d_0fDQ",
+        "address": "Am Leuchtenfeld 1, 23570 Lübeck-Travemünde, Germany"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "luebeck_kolk17_figurentheater",
+      "name": "KOLK 17 Figurentheater & Museum",
+      "before": {
+        "lat": 53.865493166666674,
+        "lng": 10.682261833333333
+      },
+      "google": {
+        "lat": 53.8657226,
+        "lng": 10.682245199999999,
+        "place_id": "ChIJQZcWNFcJskcRDuo5SSNFoLw",
+        "address": "Kolk 14, 23552 Lübeck-Lübecker Altstadt, Germany"
+      },
+      "delta_m": 26,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "luebeck_guenter_grass_haus",
+      "name": "Günter-Grass-Haus",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.86937846666666,
+        "lng": 10.690530466666665
+      }
+    },
+    {
+      "id": "luebeck_schiffergesellschaft",
+      "name": "Schiffergesellschaft",
+      "before": {
+        "lat": 53.87118558333333,
+        "lng": 10.688048266666668
+      },
+      "google": {
+        "lat": 53.8711802,
+        "lng": 10.688088299999999,
+        "place_id": "ChIJLbw8o-ILskcRXGv7QbghQq8",
+        "address": "Breite Str. 2, 23552 Lübeck-Lübecker Altstadt, Germany"
+      },
+      "delta_m": 3,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "luebeck_st_katharinen",
+      "name": "St. Katharinen zu Lübeck",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.86919254444444,
+        "lng": 10.689810105555555
+      }
+    },
+    {
+      "id": "luebeck_rathaustreppe",
+      "name": "Rathaustreppe am Markt",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.86657646666667,
+        "lng": 10.685502249999999
+      }
+    },
+    {
+      "id": "luebeck_industriemuseum_herrenwyk",
+      "name": "Industriemuseum Herrenwyk",
+      "before": {
+        "lat": 53.903252480000006,
+        "lng": 10.80469742
+      },
+      "google": {
+        "lat": 53.9035489,
+        "lng": 10.8047919,
+        "place_id": "ChIJb-t82X8KskcRVAy2ek5Iz00",
+        "address": "Kokerstraße 1-3, 23569 Lübeck-Kücknitz, Germany"
+      },
+      "delta_m": 34,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "luebeck_ganghaus_museum_fur_magische_mechanik",
+      "name": "Ganghaus-Museum für magische Mechanik",
+      "before": {
+        "lat": 53.87174243333334,
+        "lng": 10.692360399999998
+      },
+      "google": {
+        "lat": 53.8718766,
+        "lng": 10.692504099999999,
+        "place_id": "ChIJ6Wr2WVkLskcRB73FwXwAvCQ",
+        "address": "Rosenstr, Rosen-Gang 17/Haus 4, 23552 Lübeck, Germany"
+      },
+      "delta_m": 18,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "luebeck_holstentorplatz",
+      "name": "Holstentorplatz",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.866255704444434,
+        "lng": 10.67964769111111
+      }
+    },
+    {
+      "id": "luebeck_an_der_obertrave",
+      "name": "An der Obertrave",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.86140283333333,
+        "lng": 10.681738833333334
+      }
+    },
+    {
+      "id": "luebeck_wasserkunst",
+      "name": "Wasserkunst",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.855295344,
+        "lng": 10.700542500000001
+      }
+    },
+    {
+      "id": "luebeck_fritz_reuter_denkmal",
+      "name": "Fritz Reuter Denkmal",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.87654916,
+        "lng": 10.70136354
+      }
+    },
+    {
+      "id": "luebeck_850_jahre_lubeck_gedenkstein",
+      "name": "850 Jahre Lübeck - Gedenkstein",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.87162528,
+        "lng": 10.70782032
+      }
+    },
+    {
+      "id": "luebeck_kath_kirche_st_vicelin",
+      "name": "Kath. Kirche St. Vicelin",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.843742999999996,
+        "lng": 10.699733285714284
+      }
+    },
+    {
+      "id": "luebeck_st_matthai_gemeinde_lubeck",
+      "name": "St.Matthäi Gemeinde Lübeck",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.8736064,
+        "lng": 10.67619418888889
+      }
+    },
+    {
+      "id": "luebeck_st_gertrud_kirche_lubeck_ev_luth_kirchengemeinde_st_gertrud_lubeck",
+      "name": "St.-Gertrud-Kirche Lübeck - Ev.-Luth. Kirchengemeinde St. Gertrud Lübeck",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.87766073333333,
+        "lng": 10.707131205555555
+      }
+    },
+    {
+      "id": "luebeck_palais_rantzau_ein_haus_der_deutschen_stiftung_denkmalschutz",
+      "name": "Palais Rantzau - ein Haus der Deutschen Stiftung Denkmalschutz",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.862835399999994,
+        "lng": 10.6854308
+      }
+    },
+    {
+      "id": "luebeck_lubecker_lowen",
+      "name": "Lübecker Löwen",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.86559043124999,
+        "lng": 10.6780189875
+      }
+    },
+    {
+      "id": "luebeck_aussichtspunkt",
+      "name": "Aussichtspunkt",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.86257388235293,
+        "lng": 10.684400058823531
+      }
+    },
+    {
+      "id": "luebeck_wanderweg",
+      "name": "Wanderweg",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.79532042352941,
+        "lng": 10.727820152941176
+      }
+    },
+    {
+      "id": "luebeck_kultourpunkt_treidelpfad_stecknitz",
+      "name": "Kultourpunkt Treidelpfad Stecknitz",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.795423152941176,
+        "lng": 10.630759070588233
+      }
+    },
+    {
+      "id": "luebeck_ein_archaologisch_naturkundlicher_wanderweg_im_waldhusener_forst",
+      "name": "Ein Archäologisch - Naturkundlicher Wanderweg im Waldhusener Forst",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.92260387777778,
+        "lng": 10.79331531111111
+      }
+    },
+    {
+      "id": "luebeck_alter_hafen_gothmund",
+      "name": "Alter Hafen Gothmund",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.90684468333333,
+        "lng": 10.75279825
+      }
+    },
+    {
+      "id": "luebeck_ganghaeuser",
+      "name": "Lübecker Gänge & Höfe",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.86960793333333,
+        "lng": 10.690743500000002
+      }
+    },
+    {
+      "id": "luebeck_travemunde_strand",
+      "name": "Travemünde Strand",
+      "before": {
+        "lat": 53.967757549999995,
+        "lng": 10.880563383333334
+      },
+      "google": {
+        "lat": 53.9677922,
+        "lng": 10.8814599,
+        "place_id": "ChIJRWVP6eWKrUcR-3bArA7mJiI",
+        "address": "Travemünde Strand, Strandpromenade 34A, 23570 Lübeck-Travemünde, Germany"
+      },
+      "delta_m": 59,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "luebeck_travemunde_strandpromenade",
+      "name": "Travemünde Strandpromenade",
+      "before": {
+        "lat": 53.964512400000004,
+        "lng": 10.880227
+      },
+      "google": {
+        "lat": 53.9650879,
+        "lng": 10.8808323,
+        "place_id": "ChIJxdJKrOeKrUcRuuFlncWG9HU",
+        "address": "Strandpromenade, 23570 Lübeck-Travemünde, Germany"
+      },
+      "delta_m": 75,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "luebeck_nordermole_travemunde",
+      "name": "Nordermole Travemünde",
+      "before": {
+        "lat": 53.96209864285714,
+        "lng": 10.887406885714284
+      },
+      "google": {
+        "lat": 53.9620688,
+        "lng": 10.888359099999999,
+        "place_id": "ChIJ5_2hKN6KrUcRU9rcXVB8EwY",
+        "address": "Alt Travemünde - Rönnau, 23570 Lübeck, Germany"
+      },
+      "delta_m": 62,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "luebeck_casino_travemunde",
+      "name": "Casino Travemünde",
+      "before": {
+        "lat": 53.95831295882353,
+        "lng": 10.871381947058824
+      },
+      "google": {
+        "lat": 53.9585663,
+        "lng": 10.871245199999999,
+        "place_id": "ChIJDfP1iMOKrUcRMzDZppbnKyk",
+        "address": "Kurgartenstraße 98, 23570 Lübeck-Travemünde, Germany"
+      },
+      "delta_m": 30,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "luebeck_promenadensteg_travemunde",
+      "name": "Promenadensteg Travemünde",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.964155999999996,
+        "lng": 10.881328
+      }
+    },
+    {
+      "id": "luebeck_priwall_strand",
+      "name": "Priwall Strand",
+      "before": {
+        "lat": 53.95812830999999,
+        "lng": 10.890085065
+      },
+      "google": {
+        "lat": 53.9565718,
+        "lng": 10.902179499999999,
+        "place_id": "ChIJAWmAEyOLrUcRgF5RqKOjL4Y",
+        "address": "Seeweg 131, 23570 Lübeck, Germany"
+      },
+      "delta_m": 810,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "luebeck_klingenbergplatz",
+      "name": "Klingenbergplatz",
+      "before": {
+        "lat": 53.864537199999994,
+        "lng": 10.685187380000002
+      },
+      "google": {
+        "lat": 53.864412099999996,
+        "lng": 10.685180899999999,
+        "place_id": "ChIJte3NOq8JskcRe3PwgiQQmmI",
+        "address": "23552 Lübeck-Lübecker Altstadt, Germany"
+      },
+      "delta_m": 14,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "luebeck_promenade_an_der_obertrave",
+      "name": "Promenade an der Obertrave",
+      "before": {
+        "lat": 53.86329133,
+        "lng": 10.68076963
+      },
+      "google": {
+        "lat": 53.8642312,
+        "lng": 10.6808473,
+        "place_id": "ChIJQWj0PQAJskcRL_6Pk184mO0",
+        "address": "An d. Obertrave 14, 23552 Lübeck, Germany"
+      },
+      "delta_m": 105,
+      "status": "BAD",
+      "streetview": "OK",
+      "applied": true
+    }
+  ]
+}

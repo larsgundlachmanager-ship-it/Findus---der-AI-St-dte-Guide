@@ -4,8 +4,8 @@
  *
  * Regeln:
  * - Stehenbleiben → Stille (keine Warnung, kein Reroute)
- * - Erst nach ~10 m aktivem Laufen weg von der Route → eine klare Warnung
- * - Danach stiller Reroute (kein Nachtreten)
+ * - Erst nach ~10 m aktivem Laufen weg von der Route → genau eine Warnung
+ * - Direkt danach automatischer Reroute (kein zweites Nörgeln, kein langes Warten)
  */
 
 import { distanceMeters } from './bearing';
@@ -17,10 +17,11 @@ const OFF_PATH_MIN_M = 12;
 const ACTIVE_WRONG_WALK_M = 10;
 /** Unter dieser Speed = stehen → nichts sagen. ~1,4 km/h */
 const STANDING_MAX_MS = 0.4;
-const HOLD_AFTER_WARN_BEFORE_REROUTE_MS = 8_000;
-/** Extra Meter nach Warnung, bevor still neu geroutet wird. */
-const EXTRA_WALK_AFTER_WARN_M = 8;
-export const REROUTE_COOLDOWN_MS = 30_000;
+/** Kurz nach der Warnung → Reroute (eine GPS-Tick-Pause reicht). */
+const HOLD_AFTER_WARN_BEFORE_REROUTE_MS = 800;
+export const REROUTE_COOLDOWN_MS = 25_000;
+/** Nach fehlgeschlagenem Reroute erneut versuchen. */
+const REROUTE_RETRY_MS = 6_000;
 
 export type WrongWayAction = 'none' | 'warn' | 'reroute';
 
@@ -28,6 +29,7 @@ type WrongWayState = {
   warnedAtMs: number | null;
   rerouteFired: boolean;
   lastRerouteAtMs: number | null;
+  lastRerouteAttemptAtMs: number | null;
   /** Meter, die der User seit Off-Route aktiv gelaufen ist. */
   walkedOffPathM: number;
   lastLat: number | null;
@@ -39,6 +41,7 @@ let state: WrongWayState = {
   warnedAtMs: null,
   rerouteFired: false,
   lastRerouteAtMs: null,
+  lastRerouteAttemptAtMs: null,
   walkedOffPathM: 0,
   lastLat: null,
   lastLng: null,
@@ -50,6 +53,7 @@ export function resetWrongWayMonitor(): void {
     warnedAtMs: null,
     rerouteFired: false,
     lastRerouteAtMs: null,
+    lastRerouteAttemptAtMs: null,
     walkedOffPathM: 0,
     lastLat: null,
     lastLng: null,
@@ -62,14 +66,31 @@ export function canSilentReroute(nowMs = Date.now()): boolean {
   return nowMs - state.lastRerouteAtMs >= REROUTE_COOLDOWN_MS;
 }
 
+/** Erfolgreicher Reroute — Episode zu, Cooldown starten. */
 export function markRerouteFired(nowMs = Date.now()): void {
   state.lastRerouteAtMs = nowMs;
+  state.lastRerouteAttemptAtMs = nowMs;
   state.warnedAtMs = null;
   state.rerouteFired = false;
   state.walkedOffPathM = 0;
   state.lastLat = null;
   state.lastLng = null;
   state.lastSampleAtMs = null;
+}
+
+/** Reroute gestartet (nach Warnung) — kein zweites Audio, kein Parallel-Trigger. */
+export function markRerouteAttemptStarted(nowMs = Date.now()): void {
+  state.rerouteFired = true;
+  state.lastRerouteAttemptAtMs = nowMs;
+}
+
+/**
+ * Reroute-Versuch fehlgeschlagen — darf nach kurzer Pause erneut feuern,
+ * ohne nochmal zu warnen.
+ */
+export function markRerouteAttemptFailed(nowMs = Date.now()): void {
+  state.lastRerouteAttemptAtMs = nowMs;
+  state.rerouteFired = false;
 }
 
 /**
@@ -95,10 +116,6 @@ export function tickWrongWayMonitor(opts: {
     return 'none';
   }
 
-  if (!canSilentReroute(now)) {
-    return 'none';
-  }
-
   const speed =
     typeof opts.speedMs === 'number' && Number.isFinite(opts.speedMs)
       ? opts.speedMs
@@ -121,10 +138,11 @@ export function tickWrongWayMonitor(opts: {
     return 'none';
   }
 
-  // Wieder auf Route → Zähler zurück
+  // Wieder auf Route → Episode zu (auch nach Warnung, wenn User selbst korrigiert)
   if (dist <= ON_ROUTE_M) {
     state.warnedAtMs = null;
     state.rerouteFired = false;
+    state.lastRerouteAttemptAtMs = null;
     state.walkedOffPathM = 0;
     state.lastLat = null;
     state.lastLng = null;
@@ -170,24 +188,29 @@ export function tickWrongWayMonitor(opts: {
   }
 
   // Noch keine 10 m aktiv falsch gelaufen → schweigen
-  if (state.walkedOffPathM < ACTIVE_WRONG_WALK_M) {
+  if (state.walkedOffPathM < ACTIVE_WRONG_WALK_M && state.warnedAtMs == null) {
     return 'none';
   }
 
-  // Eine klare Warnung
+  // Genau eine klare Warnung pro Off-Route-Episode
   if (state.warnedAtMs == null) {
+    if (!canSilentReroute(now)) {
+      return 'none';
+    }
     state.warnedAtMs = now;
     return 'warn';
   }
 
-  // Stiller Reroute: nach weiterer Bewegung oder kurzer Gnadenfrist
+  // Automatischer Reroute kurz nach der Warnung (kein zweites Audio)
   if (!state.rerouteFired) {
-    const walkedMore =
-      state.walkedOffPathM >= ACTIVE_WRONG_WALK_M + EXTRA_WALK_AFTER_WARN_M;
     const waited =
       now - state.warnedAtMs >= HOLD_AFTER_WARN_BEFORE_REROUTE_MS;
-    if (walkedMore || waited) {
+    const retryOk =
+      state.lastRerouteAttemptAtMs == null ||
+      now - state.lastRerouteAttemptAtMs >= REROUTE_RETRY_MS;
+    if (waited && retryOk && canSilentReroute(now)) {
       state.rerouteFired = true;
+      state.lastRerouteAttemptAtMs = now;
       return 'reroute';
     }
   }

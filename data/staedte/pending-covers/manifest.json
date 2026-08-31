@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-08-08T03:08:43.380Z",
+  "updated_at": "2026-08-21T18:30:13.489Z",
   "items": [
     {
       "id": "laboe",
@@ -390,6 +390,71 @@
       "applied_at": "2026-08-08T03:08:43.380Z",
       "updated_at": "2026-08-08T03:08:43.380Z",
       "asset": "assets/onboarding/city-frankfurt-soft.png",
+      "style": "findus_soft_photo_v1"
+    },
+    {
+      "id": "lissabon",
+      "city_name": "Lissabon",
+      "source": "data/staedte/pending-covers/lissabon/source.png",
+      "status": "applied",
+      "note": "",
+      "queued_at": "2026-08-12T19:57:25.882Z",
+      "stylized": "data/staedte/pending-covers/lissabon/stylized.png",
+      "applied_at": "2026-08-12T20:38:27.569Z",
+      "updated_at": "2026-08-12T20:38:27.569Z",
+      "asset": "assets/onboarding/city-lissabon-soft.png",
+      "style": "findus_soft_photo_v1"
+    },
+    {
+      "id": "london",
+      "city_name": "London",
+      "source": "data/staedte/pending-covers/london/source.png",
+      "status": "applied",
+      "note": "",
+      "queued_at": "2026-08-14T21:45:57.895Z",
+      "stylized": "data/staedte/pending-covers/london/stylized.png",
+      "applied_at": "2026-08-14T21:47:33.381Z",
+      "updated_at": "2026-08-14T21:47:33.381Z",
+      "asset": "assets/onboarding/city-london-soft.png",
+      "style": "findus_soft_photo_v1"
+    },
+    {
+      "id": "finsterwalde",
+      "city_name": "Finsterwalde",
+      "source": "data/staedte/pending-covers/finsterwalde/source.png",
+      "status": "applied",
+      "note": "",
+      "queued_at": "2026-08-20T19:32:18.663Z",
+      "stylized": "data/staedte/pending-covers/finsterwalde/stylized.png",
+      "applied_at": "2026-08-20T19:34:53.946Z",
+      "updated_at": "2026-08-20T19:34:53.946Z",
+      "asset": "assets/onboarding/city-finsterwalde-soft.png",
+      "style": "findus_soft_photo_v1"
+    },
+    {
+      "id": "halle_saale",
+      "city_name": "Halle (Saale)",
+      "source": "data/staedte/pending-covers/halle_saale/source.png",
+      "status": "applied",
+      "note": "",
+      "queued_at": "2026-08-20T19:35:41.586Z",
+      "stylized": "data/staedte/pending-covers/halle_saale/stylized.png",
+      "applied_at": "2026-08-20T19:36:47.208Z",
+      "updated_at": "2026-08-20T19:36:47.208Z",
+      "asset": "assets/onboarding/city-halle_saale-soft.png",
+      "style": "findus_soft_photo_v1"
+    },
+    {
+      "id": "kiel",
+      "city_name": "Kiel",
+      "source": "data/staedte/pending-covers/kiel/source.png",
+      "status": "applied",
+      "note": "",
+      "queued_at": "2026-08-21T18:25:26.509Z",
+      "stylized": "data/staedte/pending-covers/kiel/stylized.png",
+      "applied_at": "2026-08-21T18:30:13.489Z",
+      "updated_at": "2026-08-21T18:30:13.489Z",
+      "asset": "assets/onboarding/city-kiel-soft.png",
       "style": "findus_soft_photo_v1"
     }
   ]

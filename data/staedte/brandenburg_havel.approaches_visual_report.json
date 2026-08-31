@@ -1,0 +1,1442 @@
+{
+  "city": "brandenburg_havel",
+  "apply": true,
+  "touched": 179,
+  "approachesFixed": 179,
+  "faqAdded": 0,
+  "data_version": 35,
+  "rows": [
+    {
+      "id": "brandenburg_havel_brandenburg_hauptbahnhof",
+      "name": "Brandenburg Hauptbahnhof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_brandenburg_altstadt",
+      "name": "Brandenburg-Altstadt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_parkplatz_am_hauptbahnhof",
+      "name": "Parkplatz am Hauptbahnhof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_schotterparkplatz_1",
+      "name": "Schotterparkplatz 1",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_gesundheitszentrum_brandenburg_an_der_havel_gmbh",
+      "name": "Gesundheitszentrum Brandenburg an der Havel GmbH",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_brandenburg_hohenstucken_nord",
+      "name": "Brandenburg, Hohenstücken Nord",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_brandenburg_nicolaiplatz",
+      "name": "Brandenburg, Nicolaiplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_fouquestr_fachhochschule",
+      "name": "Fouquéstr./Fachhochschule",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_gordenbrucke",
+      "name": "Gördenbrücke",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_brandenburg_fontanestr",
+      "name": "Brandenburg, Fontanestr.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_gorden",
+      "name": "Görden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_schiffsanleger_am_wiesenweg",
+      "name": "Schiffsanleger Am Wiesenweg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_seilfahre_neuendorf",
+      "name": "Seilfähre Neuendorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_rewe_anleger_fur_sportboote",
+      "name": "Rewe Anleger für Sportboote",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_historischer_hafen_brandenburg_an_der_havel_e_v",
+      "name": "Historischer Hafen Brandenburg an der Havel e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_anleger_alfred_messelplatz",
+      "name": "Anleger Alfred Messelplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_anleger_buhnenhaus",
+      "name": "Anleger Buhnenhaus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_nordstern_reederei_e_k_buro",
+      "name": "Nordstern Reederei e. K. (Büro)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_havel_marin_gmbh",
+      "name": "HAVEL MARIN GmbH",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_wasserwanderrastplatz_salzhofufer",
+      "name": "Wasserwanderrastplatz Salzhofufer",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_stadtmarina_brandenburg_boote_camping",
+      "name": "Stadtmarina Brandenburg Boote & Camping",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_wasserwanderrastplatz_am_slawendorf",
+      "name": "Wasserwanderrastplatz am Slawendorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_bootshaus_radicke",
+      "name": "Bootshaus Radicke",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_slawendorf_brandenburg_an_der_havel",
+      "name": "Slawendorf Brandenburg an der Havel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_hausfloss_hafen_caasmann",
+      "name": "Hausfloss-Hafen CAASMANN",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_anleger_am_regattaring",
+      "name": "Anleger am Regattaring",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_yachtcharter_marina_schoners_wehr",
+      "name": "Yachtcharter Marina Schoners Wehr",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_nordstern_reederei",
+      "name": "Nordstern Reederei",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_marina_niederhavel",
+      "name": "Marina Niederhavel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_brandenburger_hafen",
+      "name": "Brandenburger Hafen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_archaologisches_landesmuseum_brandenburg",
+      "name": "Archäologisches Landesmuseum Brandenburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_industriemuseum_brandenburg_an_der_havel",
+      "name": "Industriemuseum Brandenburg an der Havel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_stadtmuseum_im_frey_haus",
+      "name": "Stadtmuseum im Frey-Haus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_psychiatriemuseum",
+      "name": "Psychiatriemuseum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_fahrradmuseum_brandenburg",
+      "name": "Fahrradmuseum Brandenburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_museum_steintorturm",
+      "name": "Museum Steintorturm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_brennabor_kunsthalle",
+      "name": "Brennabor Kunsthalle",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_strassenbahnmuseum",
+      "name": "Straßenbahnmuseum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_gedenkstatte_fur_die_opfer_der_euthanasie_morde",
+      "name": "Gedenkstätte für die Opfer der Euthanasie-Morde",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_gotisches_haus",
+      "name": "Gotisches Haus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_jakobskapelle_brandenburg_an_der_havel",
+      "name": "Jakobskapelle (Brandenburg an der Havel)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_st_katharinen_kirche_zu_brandenburg_an_der_havel",
+      "name": "St.-Katharinen-Kirche zu Brandenburg an der Havel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_petrikapelle",
+      "name": "Petrikapelle",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_st_johannis",
+      "name": "St. Johannis",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_st_gotthardt",
+      "name": "St. Gotthardt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_heilige_dreifaltigkeit",
+      "name": "Heilige Dreifaltigkeit",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_hofkirche_am_jakobsgraben",
+      "name": "Hofkirche am Jakobsgraben",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_st_nikolai",
+      "name": "St. Nikolai",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_neuapostolische_kirche_brandenburg",
+      "name": "Neuapostolische Kirche Brandenburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_dom_st_peter_und_paul",
+      "name": "Dom St. Peter und Paul",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_st_bernhard_gemeinschaftskirche",
+      "name": "St. Bernhard Gemeinschaftskirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_auferstehungskirche_auferstehungskirchengemeinde_brandenburg",
+      "name": "Auferstehungskirche - Auferstehungskirchengemeinde Brandenburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_hope_brandenburg_gemeinsam_gott_erleben",
+      "name": "Hope Brandenburg - Gemeinsam Gott erleben.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_kirche_jesu_christi_der_heiligen_der_letzten_tage",
+      "name": "Kirche Jesu Christi der Heiligen der Letzten Tage",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_kirche",
+      "name": "Kirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_christ_embassy_brandenburg_an_der_havel",
+      "name": "Christ Embassy Brandenburg an der Havel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_fritze_bollmann_brunnen",
+      "name": "Fritze Bollmann Brunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_bernini_skulpturen_vom_galateabrunnen",
+      "name": "Bernini-Skulpturen vom Galateabrunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_brunnen",
+      "name": "Brunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_springbrunnen_marienberg",
+      "name": "Springbrunnen Marienberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_waldmops_denkmal",
+      "name": "Waldmops (Denkmal)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_waldmops_denkmal_homage_an_loriot",
+      "name": "Waldmops (Denkmal) - Homage an Loriot",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_waldmops_denkmal_erinnerung_an_loriot",
+      "name": "Waldmops (Denkmal) - Erinnerung an Loriot",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_waldmops_am_brunnen",
+      "name": "Waldmops am Brunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_alexander_von_humboldt_denkmal",
+      "name": "Alexander von Humboldt-Denkmal",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_sitzender_waldmops",
+      "name": "Sitzender Waldmops",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_friedrich_schiller_denkmal",
+      "name": "Friedrich-Schiller-Denkmal",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_strand_an_der_regattastrecke",
+      "name": "Strand An der Regattastrecke",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_strand_am_grillendamm",
+      "name": "Strand am Grillendamm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_theaterpark",
+      "name": "Theaterpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_packhofgelande_park",
+      "name": "Packhofgelände Park",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_uferpromenade",
+      "name": "Uferpromenade",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_burgerpark_und_gartendenkmal_marienberg",
+      "name": "Bürgerpark und Gartendenkmal Marienberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_brandenburg_an_der_havel",
+      "name": "Brandenburg an der Havel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_marienberg",
+      "name": "Marienberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_aussichtsplattform_stadtkanal",
+      "name": "Aussichtsplattform Stadtkanal",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_heinrich_heine_ufer",
+      "name": "Heinrich-Heine-Ufer",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_yachtanleger_am_jungfernsteig",
+      "name": "Yachtanleger Am Jungfernsteig",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_parkplatz_grillendamm_4_14776_brandenburg_an_der_havel",
+      "name": "Parkplatz Grillendamm 4, 14776 Brandenburg an der Havel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_kanal_am_kleinen_beetzsee",
+      "name": "Kanal am kleinen Beetzsee",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_wallpromenade",
+      "name": "Wallpromenade",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_leuchtturm_breitlingsee",
+      "name": "Leuchtturm Breitlingsee",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_plauer_torturm",
+      "name": "Plauer Torturm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_rathenower_torturm",
+      "name": "Rathenower Torturm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_neustadtischer_muhlentorturm",
+      "name": "Neustädtischer Mühlentorturm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_marienbad_brandenburg",
+      "name": "Marienbad Brandenburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_dreifelderhalle_marienberg",
+      "name": "Dreifelderhalle Marienberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_dreifelderhalle_am_wiesenweg",
+      "name": "Dreifelderhalle Am Wiesenweg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_asc_brandenburg_03_e_v",
+      "name": "ASC Brandenburg 03 e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_wassersportzentrum_alte_feuerwache",
+      "name": "Wassersportzentrum Alte Feuerwache",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_regattastrecke_brandenburg_an_der_havel",
+      "name": "Regattastrecke Brandenburg an der Havel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_sportplatz",
+      "name": "Sportplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_sportplatz_am_packhof",
+      "name": "Sportplatz am Packhof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_brandenburger_stadtbefestigung",
+      "name": "Brandenburger Stadtbefestigung",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_die_altstadter_e_v",
+      "name": "Die Altstädter e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_panorama_service_gmbh",
+      "name": "Panorama Service GmbH",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_steg_am_muhlendamm",
+      "name": "Steg am Mühlendamm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_brandenburger_theater_gmbh",
+      "name": "Brandenburger Theater GmbH",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_postalisch_freilichtbuhne",
+      "name": "Postalisch Freilichtbühne",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_concerthaus_kino_brandenburg",
+      "name": "Concerthaus Kino Brandenburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_badestelle_gordensee",
+      "name": "Badestelle Gördensee",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_ziegelei_am_quenzsee",
+      "name": "ZIEGELEI AM QUENZSEE",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_alte_silobrucke",
+      "name": "ALTE SILOBRÜCKE",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_nanu_nana",
+      "name": "NANU-NANA",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_durerhaus_hans_peter_zahn",
+      "name": "Dürerhaus Hans-Peter Zahn",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_weltladen_brandenburg_an_der_havel",
+      "name": "Weltladen Brandenburg an der Havel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_waldmops_am_pfaffeufer",
+      "name": "Waldmops am Pfaffeufer",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_marchen_wandbild",
+      "name": "Märchen Wandbild",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_waldmops_am_salzhof",
+      "name": "Waldmops am Salzhof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_havelpegel",
+      "name": "Havelpegel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_havelgarten",
+      "name": "Havelgarten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_dl_garten_landschaftsbewasserung",
+      "name": "DL Garten - & Landschaftsbewässerung",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_garten_landheim",
+      "name": "Garten Landheim",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_gartensparte_buchenweg_e_v",
+      "name": "Gartensparte Buchenweg e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_marchengarten",
+      "name": "Märchengarten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_kleingartenverein_am_jakobsgraben_e_v",
+      "name": "Kleingartenverein \"Am Jakobsgraben\"e.V",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_kleingartensparte_helgoland",
+      "name": "Kleingartensparte Helgoland",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_kgv_einheit_e_v",
+      "name": "KGV Einheit e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_festplatz_wiesenweg",
+      "name": "Festplatz Wiesenweg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_brandenburger_karnevals_club_bkc_1964_e_v",
+      "name": "Brandenburger Karnevals-Club BKC 1964 e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_freilichtbuhne_marienberg",
+      "name": "Freilichtbühne Marienberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_marina_quenzsee",
+      "name": "Marina Quenzsee",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_boot_mieten_brandenburg",
+      "name": "Boot Mieten Brandenburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_charterpoint_havelland",
+      "name": "Charterpoint Havelland",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_altes_bootshaus",
+      "name": "Altes Bootshaus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_flossverleih_treibgut",
+      "name": "Floßverleih TreibGuT",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_wassersport_geisler_gmbh",
+      "name": "Wassersport Geisler Gmbh",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_happy_hausboot",
+      "name": "Happy Hausboot",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_action_brandenburg_an_havel",
+      "name": "Action Brandenburg an Havel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_wedekind_angel_sport_spiel_u_schreibwaren_freie_waffen",
+      "name": "Wedekind Angel, Sport-, Spiel- u. Schreibwaren & freie Waffen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_shirt_instyle",
+      "name": "Shirt Instyle",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_cardcastle_brandenburg",
+      "name": "CardCastle-Brandenburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_thomas_philipps_brandenburg_an_der_havel",
+      "name": "Thomas Philipps Brandenburg an der Havel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_nobunto_deutschland_ug_haftungsbeschrankt",
+      "name": "Nobunto Deutschland UG (haftungsbeschränkt)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_mac_geiz",
+      "name": "MÄC-GEIZ",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_lidl",
+      "name": "Lidl",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_movietown",
+      "name": "Movietown",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "brandenburg_havel_stahlpalast",
+      "name": "Stahlpalast",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "brandenburg_havel_mittlere_havel",
+      "name": "Mittlere Havel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_fontaneweg_plaue",
+      "name": "Fontaneweg Plaue",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_drk_kreisverband_brandenburg_e_v",
+      "name": "DRK Kreisverband Brandenburg e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_drk_kita_haus_6",
+      "name": "DRK Kita Haus 6",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_topferei_am_weinberg",
+      "name": "Töpferei am Weinberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_klein_kreutz",
+      "name": "Klein Kreutz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_pilgerpfad_brandenburg",
+      "name": "Pilgerpfad Brandenburg",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "brandenburg_havel_pavillion",
+      "name": "Pavillion",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "brandenburg_havel_mit_fontane_zu_tisch_plastik_von_jessica_dorhofer_und_klasse_f",
+      "name": "Mit Fontane zu Tisch (Plastik von Jessica Dörhöfer und klasse Fotomotiv)",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "brandenburg_havel_plauer_schleuse",
+      "name": "Plauer Schleuse",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "brandenburg_havel_krieger_denkmal",
+      "name": "Krieger-Denkmal",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 2,
+      "had_approaches": 1
+    },
+    {
+      "id": "brandenburg_havel_ehrendenkmal_befreiung_des_faschistischen_zuchthaus_brandenbur",
+      "name": "Ehrendenkmal Befreiung des faschistischen Zuchthaus Brandenburg-Görden",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "brandenburg_havel_schloss_gollwitz",
+      "name": "Schloss Gollwitz",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "brandenburg_havel_tontaubenschiessstand_im_schlosspark",
+      "name": "Tontaubenschießstand im Schloßpark",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "brandenburg_havel_sudsport_marketing_branden_burg_havel_gmbh",
+      "name": "Südsport-Marketing-Branden- burg/Havel GmbH",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "brandenburg_havel_muhlenberg",
+      "name": "Mühlenberg",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "brandenburg_havel_aussichtspunkt",
+      "name": "Aussichtspunkt",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "brandenburg_havel_kleingartensparte_immergrun",
+      "name": "Kleingartensparte Immergrün",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "brandenburg_havel_silberquelle",
+      "name": "Silberquelle",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "brandenburg_havel_rochow_wanderweg",
+      "name": "Rochow Wanderweg",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "brandenburg_havel_diebesgrund",
+      "name": "Diebesgrund",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "brandenburg_havel_fauler_see_im_naturschutzgebiet_granert",
+      "name": "Fauler See im Naturschutzgebiet \"Gränert\"",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "brandenburg_havel_",
+      "name": "Озеро купання",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "brandenburg_havel_havelradweg_bei_gollwitz",
+      "name": "Havelradweg bei Gollwitz",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "brandenburg_havel_marina_brandenburg",
+      "name": "Marina Brandenburg",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "brandenburg_havel_may_marina_plaue",
+      "name": "May Marina-Plaue",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "brandenburg_havel_marina_beetzsee_marina_caravan_ferienhaus",
+      "name": "Marina Beetzsee - Marina, Caravan, Ferienhaus",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "brandenburg_havel_wohnmobil_und_caravanstellplatz_marina_beetzsee",
+      "name": "Wohnmobil- und Caravanstellplatz Marina Beetzsee",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "brandenburg_havel_gattner_marina_plaue_gmbh",
+      "name": "Gattner Marina Plaue GmbH",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "brandenburg_havel_bunbo_das_bungalowboot_aquare_charter_gmbh",
+      "name": "BunBo das Bungalowboot - Aquare Charter GmbH",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "brandenburg_havel_hausboot_vermietung_bolle",
+      "name": "Hausboot Vermietung Bolle",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "brandenburg_havel_bootsverleih_m_rogge",
+      "name": "Bootsverleih M.Rogge",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "brandenburg_havel_bootvermietung_marko_wunderlich",
+      "name": "Bootvermietung Marko Wunderlich",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "brandenburg_havel_action_brandenburg_an_der_havel",
+      "name": "Action Brandenburg an der Havel",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "brandenburg_havel_verkehrsbetriebe_brandenburg_an_der_havel",
+      "name": "Verkehrsbetriebe Brandenburg an der Havel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_immobra_gmbh_immobilien_in_brandenburg",
+      "name": "IMMOBRA GmbH - Immobilien in Brandenburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "brandenburg_havel_havel_plaue_brandenburg",
+      "name": "Havel Plaue Brandenburg",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "brandenburg_havel_aussichtsturm_gotzer_berg",
+      "name": "Aussichtsturm Götzer Berg",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "brandenburg_havel_brandenburger_osthavelniederung",
+      "name": "Brandenburger Osthavelniederung",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "brandenburg_havel_krokodilstation_golzow",
+      "name": "Krokodilstation Golzow",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "brandenburg_havel_rathaus_brandenburg",
+      "name": "Rathaus Altstädtischer Markt Brandenburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    }
+  ]
+}

@@ -87,13 +87,18 @@ export const umweltAgent: Module2Agent = {
     let precip: number | null = null;
     let summary: string | null = null;
     let rainHint: string | null = null;
+    let tomorrowSummary: string | null = null;
+    let weatherCode: number | null = null;
     try {
       const snap = await ensureWeatherFresh(
         'force',
         a ? { lat: a.lat, lng: a.lng } : null,
+        { userAsked: true },
       );
       refreshRucksackWeather();
       summary = snap?.summaryLine ?? null;
+      tomorrowSummary = snap?.tomorrowSummary?.trim() || null;
+      weatherCode = snap?.weatherCode ?? null;
       const extracted = extractTempsFromWeatherText({
         summaryLine: snap?.summaryLine,
         promptBlock: snap?.promptBlock,
@@ -111,7 +116,12 @@ export const umweltAgent: Module2Agent = {
       rainHint =
         snap?.rainStartsInMin != null
           ? `Regen in etwa ${snap.rainStartsInMin} Minuten`
-          : null;
+          : snap?.nextRainAtMs
+            ? `Regen ab ca. ${new Date(snap.nextRainAtMs).toLocaleTimeString('de-DE', {
+                hour: '2-digit',
+                minute: '2-digit',
+              })}`
+            : null;
       useRucksackStore.getState().setWeather({
         updatedAtMs: snap?.fetchedAtMs ?? Date.now(),
         tempC: nowTemp,
@@ -133,15 +143,53 @@ export const umweltAgent: Module2Agent = {
       }
     }
 
+    const futureDay = /\b(morgen|übermorgen|uebermorgen)\b/iu.test(
+      task.rewrittenText,
+    );
     const plan = planEveningHint();
     const windyWater =
       /\b(wind|wasser|förde|foerde|strand|elbe|meer|küste|kueste)\b/i.test(
         task.rewrittenText,
       );
 
+    // „heute Nachmittag / um 17 Uhr anziehen“ → Zielstunde statt nur Jetzt
+    const hourMatch = task.rewrittenText.match(
+      /\b(?:um\s+)?(\d{1,2})(?::(\d{2}))?\s*uhr\b/i,
+    );
+    const afternoonAsk =
+      /\b(nachmittag|abend|später|spaeter|heute\s+abend)\b/i.test(
+        task.rewrittenText,
+      );
+    let targetHour: number | null = hourMatch
+      ? Math.min(23, Math.max(0, Number(hourMatch[1])))
+      : afternoonAsk
+        ? 17
+        : null;
+    let targetTempC: number | null = null;
+    if (targetHour != null && dayHigh != null && nowTemp != null) {
+      // Grobe Kurve: Jetzt/Vormittag → Hoch (mittags) → Abend bleibt warm nah am Hoch
+      const h = targetHour;
+      if (h <= 10) targetTempC = nowTemp;
+      else if (h <= 16) targetTempC = dayHigh;
+      else if (h <= 20) {
+        // 17–20 Uhr: kaum Abkühlung erfinden (z. B. 25° Hoch → ~24°)
+        targetTempC = Math.round(dayHigh - Math.max(0, (h - 16) * 0.35));
+      } else {
+        // Spätabend: leicht runter, aber nicht unter max(now, high−3)
+        const floor = Math.max(nowTemp, dayHigh - 3);
+        targetTempC = Math.round(
+          Math.max(floor, dayHigh - (h - 16) * 0.5),
+        );
+      }
+      targetTempC = Math.max(targetTempC, Math.min(nowTemp, dayHigh));
+    }
+
     const outfit = buildOutfitAdviceFromWeather({
       nowTempC: nowTemp,
       dayHighC: dayHigh,
+      // Nur als Abend-Temp durchreichen wenn User explizit Abend/Uhrzeit meint
+      eveningTempC:
+        targetHour != null && targetHour >= 17 ? targetTempC : null,
       precipProbPct: precip,
       windy: windyWater,
     });
@@ -149,19 +197,41 @@ export const umweltAgent: Module2Agent = {
     const clothingBits: string[] = [];
     if (plan.dresscode) clothingBits.push(`Dresscode-Hint: ${plan.dresscode}`);
     clothingBits.push(...outfit.clothingBits);
+    if (targetHour != null && targetTempC != null) {
+      clothingBits.push(
+        `Zielzeit ~${String(targetHour).padStart(2, '0')}:00 ≈ ${Math.round(targetTempC)} °C anziehen`,
+      );
+    }
     if (plan.stars === 5) {
       clothingBits.push('kein reiner Sportlook bei Fine-Dining/Rooftop');
     }
 
+    const wantsOutfit =
+      /\b(anzieh|outfit|kleidung|jacke|pulli|hose)\b/i.test(task.rewrittenText);
+
     const draft = [
       'FAKTEN Umwelt (nicht wörtlich vorlesen):',
       dest ? `Ort-Kontext: ${dest}` : null,
-      summary ? `Wetter-Summary: ${summary}` : null,
-      nowTemp != null ? `Jetzt ~${Math.round(Number(nowTemp))} °C` : null,
-      dayHigh != null ? `Tageshoch bis Abend ~${Math.round(dayHigh)} °C` : null,
-      outfit.eveningTempC != null
-        ? `Abend-Schätzung ~${outfit.eveningTempC} °C`
+      futureDay && tomorrowSummary
+        ? `Morgen-Vorhersage (belegt): ${tomorrowSummary}`
+        : summary
+          ? `Wetter-Summary: ${summary}`
+          : null,
+      !futureDay && nowTemp != null
+        ? `Jetzt ~${Math.round(Number(nowTemp))} °C`
         : null,
+      !futureDay && dayHigh != null
+        ? `Tageshoch bis Abend ~${Math.round(dayHigh)} °C`
+        : null,
+      weatherCode != null ? `Wettercode: ${weatherCode}` : null,
+      targetHour != null && targetTempC != null
+        ? `Für ~${String(targetHour).padStart(2, '0')}:00 ≈ ${Math.round(targetTempC)} °C`
+        : null,
+      outfit.eveningCool && outfit.eveningTempC != null
+        ? `Abend wirklich kühler ~${outfit.eveningTempC} °C (Extra-Lage ok)`
+        : outfit.eveningTempC != null && targetHour != null
+          ? `Abend-Schätzung ~${outfit.eveningTempC} °C (nicht als „frisch“ verkaufen wenn ≥16°)`
+          : null,
       outfit.trendHint ? `Trend: ${outfit.trendHint}` : null,
       precip != null
         ? `Niederschlagswahrscheinlichkeit ~${Math.round(precip)} %`
@@ -169,46 +239,73 @@ export const umweltAgent: Module2Agent = {
       rainHint ? `Radar: ${rainHint}` : null,
       plan.title ? `Plan heute Abend: ${plan.title}` : null,
       ...clothingBits,
-      'FLOW (Struktur, Wortlaut frei):',
-      '1) Konkrete Kleidung ZUERST — am TAGESHOCH / Tagesverlauf ausrichten, nicht nur an der ersten kühlen Stunde.',
-      '2) Wenn morgens frischer und später wärmer: kurze Extra-Lage (leichte Jacke) erwähnen; KEIN dicker Pulli / keine Winterhose als Haupt-Tipp nur wegen Morgenwert.',
-      '3) Wetter kurz als Begründung (Jetzt + Trend/Hoch + Regen).',
-      '4) Wenn Plan-Stop bekannt: Dresscode daran koppeln.',
-      '5) KEINE Timeline öffnen, kein „Passt der Plan?“.',
-      '6) Wohin-gehen nur wenn User danach fragt.',
+      'FLOW (Struktur, Wortlaut frei, locker wie ein lokaler Freund):',
+      'NUR Jetzt + Zukunft (Rest des Tages / gefragter Tag). Vergangene Morgenkühle NICHT nachtragen.',
+      'VERBOTEN: Aushang, schwarzes Brett, Bahnhof, „selber nachgucken“; kein Gewitter ohne Beleg.',
+      wantsOutfit
+        ? targetHour != null
+          ? `1) Konkrete Kleidung ZUERST — für ca. ${String(targetHour).padStart(2, '0')}:00, am belegten Trend.`
+          : '1) Konkrete Kleidung ZUERST — am Jetzt + Tageshoch ausrichten.'
+        : futureDay
+          ? '1) Morgen: Himmel (Sonne/Wolken), Temperatur von–bis, Regenrisiko — locker erzählen.'
+          : '1) Himmel + Temperatur (Jetzt/Spitze) + wann Regen — locker erzählen.',
+      wantsOutfit
+        ? '2) Wetter kurz als Begründung.'
+        : '2) Ein Kleidungstipp hinten (bei Nässe Jacke/Schirm); Jacke nicht erzwingen wenn mild/trocken.',
+      '3) Stichpunkte: Himmel · Temperatur · Kleidung.',
+      '4) Abend nur „frisch/kühl“ nennen wenn Forecast wirklich kühl (<~16°).',
+      '5) Wenn Plan-Stop bekannt und Outfit gefragt: Dresscode daran koppeln.',
+      '6) KEINE Timeline öffnen, kein „Passt der Plan?“.',
+      '7) Wohin-gehen nur wenn User danach fragt.',
     ]
       .filter(Boolean)
       .join('\n');
 
-    const wantsOutfit =
-      /\b(anzieh|outfit|kleidung|jacke|pulli|hose)\b/i.test(task.rewrittenText);
+    let bullets: string[] = [];
+    try {
+      const {
+        formatWeatherBullets,
+        formatTomorrowWeatherChat,
+      } = require('../../services/ui/weatherDayPlanSpeech') as {
+        formatWeatherBullets: (s: unknown) => string[];
+        formatTomorrowWeatherChat: (s: unknown) => { bullets: string[] };
+      };
+      if (futureDay && tomorrowSummary) {
+        bullets = formatTomorrowWeatherChat({
+          tomorrowSummary,
+          dayHighC: dayHigh,
+          nextRainProb: precip,
+          weatherCode,
+        }).bullets;
+      } else {
+        bullets = formatWeatherBullets({
+          currentTempC: nowTemp,
+          dayHighC: dayHigh,
+          nextRainProb: precip,
+          weatherCode,
+          summaryLine: summary,
+          isHeavyRain: false,
+          rainStartsInMin: null,
+        });
+      }
+    } catch {
+      bullets = [
+        dayHigh != null
+          ? `bis ~${Math.round(dayHigh)} °C`
+          : nowTemp != null
+            ? `~${Math.round(Number(nowTemp))} °C`
+            : 'Wetter',
+        precip != null && precip >= 40 ? 'Regen möglich' : 'weitgehend trocken',
+        clothingBits.find((b) => !/^Dresscode/i.test(b))?.slice(0, 40) ||
+          'leichte Lage',
+      ];
+    }
 
     return {
       agent: 'umwelt',
       ok: true,
       draftText: draft,
-      bullets: [
-        wantsOutfit
-          ? clothingBits.find((b) => !/^Dresscode/i.test(b))?.slice(0, 42) ||
-            'Schichten'
-          : dayHigh != null
-            ? `bis ~${Math.round(dayHigh)} °C`
-            : nowTemp != null
-              ? `~${Math.round(Number(nowTemp))} °C`
-              : 'Wetter',
-        precip != null && precip >= 40
-          ? 'Regenjacke'
-          : windyWater
-            ? 'Windjacke'
-            : outfit.morningFresher
-              ? 'leichte Jacke morgens'
-              : plan.dresscode
-                ? plan.dresscode.slice(0, 40)
-                : 'Schichten',
-        plan.title ? `Plan: ${plan.title.slice(0, 36)}` : null,
-      ]
-        .filter(Boolean)
-        .slice(0, 3) as string[],
+      bullets: bullets.slice(0, 3),
       buttons: [],
       meta: {
         weather_or_outfit: true,
@@ -218,6 +315,7 @@ export const umweltAgent: Module2Agent = {
         dayHighC: dayHigh,
         nowTempC: nowTemp,
         precipProbability: precip,
+        tomorrowSummary,
       },
     };
   },

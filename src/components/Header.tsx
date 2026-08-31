@@ -71,7 +71,7 @@ import { getCachedUserProfile } from '../services/userProfileService';
 import { resolvePersonaEngine } from '../services/personaEngine';
 import { resolveActiveTravelMode } from '../services/navigation/travelModeContext';
 import { pickNavHudEta } from '../services/navigation/navHudEta';
-import { stripNavDestLeak } from '../services/navigation/streetAddressQuery';
+import { stripEntranceDisplaySuffix, stripNavDestLeak } from '../services/navigation/streetAddressQuery';
 
 const ROUTE_HINT = 'Tippen für geplante Route';
 const TAP_TIPS_HINT = 'tippen für Tipps';
@@ -156,7 +156,9 @@ const NavHudMeta = React.memo(function NavHudMeta({
         : null) ||
       s.navTargetName ||
       'Ziel';
-    const destShort = stripNavDestLeak(destName.replace(/\s+/g, ' ').trim());
+    const destShort = stripEntranceDisplaySuffix(
+      stripNavDestLeak(destName.replace(/\s+/g, ' ').trim()),
+    );
     const landmarkBit =
       nextLandmark &&
       nextLandmark.toLowerCase() !== destShort.toLowerCase() &&
@@ -269,7 +271,9 @@ const NavHudTitle = React.memo(function NavHudTitle() {
         : null) ||
       s.navTargetName?.trim() ||
       'Ziel';
-    const clean = stripNavDestLeak(name.replace(/\s+/g, ' ').trim());
+    const clean = stripEntranceDisplaySuffix(
+      stripNavDestLeak(name.replace(/\s+/g, ' ').trim()),
+    );
     return formatNavHudTitle(clean, s.transportMode);
   });
   return (

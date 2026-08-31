@@ -1,0 +1,2154 @@
+{
+  "city": "stuttgart",
+  "apply": true,
+  "touched": 268,
+  "approachesFixed": 268,
+  "faqAdded": 0,
+  "data_version": 27,
+  "rows": [
+    {
+      "id": "stuttgart_stadtmitte",
+      "name": "Stadtmitte",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_arnulf_klett_platz",
+      "name": "Arnulf-Klett-Platz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_stuttgart_hauptbahnhof",
+      "name": "Stuttgart Hauptbahnhof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_einkaufsbahnhof_stuttgart_hbf",
+      "name": "Einkaufsbahnhof Stuttgart Hbf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_feuersee",
+      "name": "Feuersee",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_db_reisezentrum_stuttgart_hbf",
+      "name": "DB Reisezentrum Stuttgart Hbf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_schwabstrasse",
+      "name": "Schwabstraße",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_mittnachtstrasse",
+      "name": "Mittnachtstraße",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_db_information_stuttgart_hbf",
+      "name": "DB Information Stuttgart Hbf.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_stuttgart_hbf_schillerstrasse",
+      "name": "Stuttgart Hbf (Schillerstraße)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_schwabstrasse_s_bahn",
+      "name": "Schwabstraße S-Bahn",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_hauptbahnhof_arnulf_klett_platz",
+      "name": "Hauptbahnhof Arnulf-Klett-Platz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_nurnberger_strasse",
+      "name": "Nürnberger Straße",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_shuttle_zu_den_gleisen_stuttgart_hbf",
+      "name": "Shuttle zu den Gleisen, Stuttgart Hbf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_parkhaus_stuttgart_hauptbahnhof",
+      "name": "Parkhaus Stuttgart Hauptbahnhof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_hafen_stuttgart_gmbh",
+      "name": "Hafen Stuttgart GmbH",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_neckar_kapt_n_neckar_personen_schiffahrt_berta_epple_gmbh_co_kg",
+      "name": "Neckar Käpt'n Neckar-Personen-Schiffahrt Berta Epple GmbH + Co KG",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_stuttgarter_hafen",
+      "name": "Stuttgarter Hafen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_zollamt_hafen",
+      "name": "Zollamt Hafen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_ionian_gmbh",
+      "name": "Ionian GmbH",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_dp_world_intermodal_gmbh",
+      "name": "DP World Intermodal GmbH",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_hafen",
+      "name": "Hafen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_deisser_container_service",
+      "name": "Deisser Container Service",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_hafenbahn_stuttgart",
+      "name": "Hafenbahn Stuttgart",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_makadamwerk_schwaben_stuttgart",
+      "name": "Makadamwerk Schwaben - Stuttgart",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_neckarhafen",
+      "name": "Neckarhafen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_staatsgalerie_stuttgart",
+      "name": "Staatsgalerie Stuttgart",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_naturkundemuseum_stuttgart_museum_am_lowentor",
+      "name": "Naturkundemuseum Stuttgart, Museum am Löwentor",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_museum_der_illusionen_stuttgart",
+      "name": "Museum der Illusionen Stuttgart",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_stadtpalais_museum_fur_stuttgart",
+      "name": "StadtPalais - Museum für Stuttgart",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_landesmuseum_wurttemberg",
+      "name": "Landesmuseum Württemberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_mercedes_benz_museum",
+      "name": "Mercedes-Benz Museum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_naturkundemuseum_stuttgart_schloss_rosenstein",
+      "name": "Naturkundemuseum Stuttgart, Schloss Rosenstein",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_porsche_museum",
+      "name": "Porsche Museum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_linden_museum_stuttgart",
+      "name": "Linden-Museum Stuttgart",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_haus_der_geschichte_baden_wurttemberg",
+      "name": "Haus der Geschichte Baden-Württemberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_schweinemuseum_stuttgart",
+      "name": "SchweineMuseum Stuttgart",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_museum_der_bildenden_kunste_alte_staatsgalerie",
+      "name": "Museum Der Bildenden Künste / Alte Staatsgalerie",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_fruchtkasten_musikinstrumentenmuseum",
+      "name": "Fruchtkasten - Musikinstrumentenmuseum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_strassenbahnmuseum_stuttgart",
+      "name": "Straßenbahnmuseum Stuttgart",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_planetarium_stuttgart",
+      "name": "Planetarium Stuttgart",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_museum_hotel_silber",
+      "name": "Museum Hotel Silber",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_alfcas_ino",
+      "name": "AlfCas‌ino",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_miniaturwelten_stuttgart_stellwerk_s",
+      "name": "Miniaturwelten Stuttgart - Stellwerk S",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_museum_hegel_haus",
+      "name": "Museum Hegel-Haus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_stuttgart_rosenstein_die_ausstellung",
+      "name": "Stuttgart Rosenstein – Die Ausstellung",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_domkirche_st_eberhard",
+      "name": "Domkirche St. Eberhard",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_grabkapelle_auf_dem_wurttemberg",
+      "name": "Grabkapelle auf dem Württemberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_st_maria",
+      "name": "St. Maria",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_alt_katholische_kirche_st_katharina",
+      "name": "Alt-Katholische Kirche St. Katharina",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_johanneskirche_und_kirchengemeinde_stuttgart_west",
+      "name": "Johanneskirche und Kirchengemeinde Stuttgart-West",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_kath_kirchengemeinde_st_konrad",
+      "name": "Kath. Kirchengemeinde St. Konrad",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_celebrate_life_church",
+      "name": "Celebrate Life Church",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_kirche_und_hospitalkirchengemeinde",
+      "name": "Kirche und Hospitalkirchengemeinde",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_kroatische_katholische_gemeinde",
+      "name": "Kroatische Katholische Gemeinde",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_rote_kapelle",
+      "name": "Rote Kapelle",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_st_fidelis",
+      "name": "St. Fidelis",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_urban_life_church_stuttgart",
+      "name": "Urban Life Church Stuttgart",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_erloserkirche",
+      "name": "Erlöserkirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_liebfrauenkirche",
+      "name": "Liebfrauenkirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_city_chapel_stuttgart_e_v",
+      "name": "City Chapel Stuttgart e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_kesselkirche_stuttgart",
+      "name": "KesselKirche Stuttgart",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_galateabrunnen",
+      "name": "Galateabrunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_hans_im_gluck_brunnen",
+      "name": "Hans-im-Glück-Brunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_brunnen",
+      "name": "Brunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_skulptur_und_gedenkbrunnen",
+      "name": "Skulptur und Gedenkbrunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_sudlicher_springbrunnen",
+      "name": "Südlicher Springbrunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_eugen_denneler_brunnen",
+      "name": "Eugen-Denneler-Brunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_nordlicher_springbrunnen",
+      "name": "Nördlicher Springbrunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_schicksalsbrunnen",
+      "name": "Schicksalsbrunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_borsenbrunnen",
+      "name": "Börsenbrunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_pusteblumle_brunnen",
+      "name": "Pusteblümle-Brunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_sophienbrunnen",
+      "name": "Sophienbrunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_gansepeterbrunnen",
+      "name": "Gänsepeterbrunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_postplatzbrunnen",
+      "name": "Postplatzbrunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_sparkassenbrunnen",
+      "name": "Sparkassenbrunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_skulptur_von_alexander_calder",
+      "name": "Skulptur von Alexander Calder",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_herzog_christoph_denkmal",
+      "name": "Herzog-Christoph-Denkmal",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_hohenpark_killesberg",
+      "name": "Höhenpark Killesberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_rosensteinpark_stuttgart",
+      "name": "Rosensteinpark Stuttgart",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_aussichtsplattform_birkenwaldstrasse_stuttgart",
+      "name": "Aussichtsplattform Birkenwaldstraße Stuttgart",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_aussichtsanlage_schillerlinde",
+      "name": "Aussichtsanlage Schillerlinde",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_aussicht_wielandshohe",
+      "name": "Aussicht Wielandshöhe",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_mittlerer_schlossgarten",
+      "name": "Mittlerer Schlossgarten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_stadtstrand_stuttgart",
+      "name": "Stadtstrand Stuttgart",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_stuttgarter_aussichtsweinberg",
+      "name": "Stuttgarter Aussichtsweinberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_aussichtsterrasse_am_teehaus",
+      "name": "Aussichtsterrasse am Teehaus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_travertinpark_stuttgart",
+      "name": "Travertinpark Stuttgart",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_weissenburgpark",
+      "name": "Weißenburgpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_parkanlage_villa_berg",
+      "name": "Parkanlage Villa Berg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_wartbergpark_stuttgart",
+      "name": "Wartbergpark Stuttgart",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_rosensteinpark",
+      "name": "Rosensteinpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_karlshohe",
+      "name": "Karlshöhe",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_aussichtspunkt_straussstaffel",
+      "name": "Aussichtspunkt Straußstaffel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_stadtgarten",
+      "name": "Stadtgarten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_aussichtsturm_uhlandshohe",
+      "name": "Aussichtsturm Uhlandshöhe",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_aussichtsplattform_leibnizstrasse",
+      "name": "Aussichtsplattform Leibnizstraße",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_killesbergturm",
+      "name": "Killesbergturm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_aussichtsturm_burgholzhof",
+      "name": "Aussichtsturm Burgholzhof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_fernsehturm_stuttgart",
+      "name": "Fernsehturm Stuttgart",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_aussichtspunkt_uhlandshohe",
+      "name": "Aussichtspunkt Uhlandshöhe",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_kriegsbergturm",
+      "name": "Kriegsbergturm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_bismarckturm_stuttgart",
+      "name": "Bismarckturm Stuttgart",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_aussichtsplattform_zeppelinstrasse_stuttgart",
+      "name": "Aussichtsplattform Zeppelinstraße Stuttgart",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_kernenturm",
+      "name": "Kernenturm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_aussichtspunkt_am_oberen_berg",
+      "name": "Aussichtspunkt Am Oberen Berg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_infoturmstuttgart_hbf",
+      "name": "InfoTurmStuttgart Hbf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_aussichtspunkt_hasenbergsteige",
+      "name": "Aussichtspunkt Hasenbergsteige",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_plieninger_aussicht",
+      "name": "Plieninger Aussicht",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_daimler_turm_gottlieb_daimler_urvater_von_mercedes_benz",
+      "name": "Daimler Turm - Gottlieb Daimler - Urvater von Mercedes-Benz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_aussichtspunkt_bubenbad",
+      "name": "Aussichtspunkt Bubenbad",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_schul_und_vereinsbad_stuttgart_west",
+      "name": "Schul- und Vereinsbad Stuttgart West",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_indoor_golf_stuttgart",
+      "name": "Indoor Golf Stuttgart",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_minigolf_killesberg",
+      "name": "Minigolf Killesberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_golf_von_ecken",
+      "name": "Golf von Ecken",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_golf_house_filiale_stuttgart",
+      "name": "Golf House Filiale Stuttgart",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_inselbad_unterturkheim",
+      "name": "Inselbad Untertürkheim",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_0711golfschule",
+      "name": "0711Golfschule",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_fussgangerzone_altes_rathaus",
+      "name": "Fußgängerzone (Altes Rathaus)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_altstadt_bad_cannstatt_e_v",
+      "name": "Altstadt Bad Cannstatt e. V",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_aussichtspunkt",
+      "name": "Aussichtspunkt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_panoramaterrasse_rbk_stuttgart",
+      "name": "Panoramaterrasse RBK Stuttgart",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_panorama_restaurant_fellbach",
+      "name": "Panorama Restaurant Fellbach",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_panorama_bank",
+      "name": "Panorama-Bank",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_geroksruhe_aussichtspunkt",
+      "name": "Geroksruhe Aussichtspunkt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_aussichtspunkt_leonorenstrasse",
+      "name": "Aussichtspunkt Leonorenstraße",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_aussichtspunkt_am_flughafen_stuttgart",
+      "name": "Aussichtspunkt am Flughafen Stuttgart",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_aussichtspunkt_burgholzhof",
+      "name": "Aussichtspunkt Burgholzhof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_staatsoper_stuttgart",
+      "name": "Staatsoper Stuttgart",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_durrbachklinge",
+      "name": "Dürrbachklinge",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_fernwanderweg_s21",
+      "name": "Fernwanderweg S21",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_durrbachklinge_stauanlage",
+      "name": "Dürrbachklinge Stauanlage",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_staibhohenweg_teilweg_von_wandel_wege",
+      "name": "Staibhöhenweg (Teilweg von Wandel & Wege)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_rappenklingenstaffel_teilweg_von_wandel_wege",
+      "name": "Rappenklingenstaffel (Teilweg von Wandel & Wege)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_blaustrumpflerweg",
+      "name": "Blaustrümpflerweg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_falsche_klinge",
+      "name": "Falsche Klinge",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_joseflesweg_stuttgart",
+      "name": "Joseflesweg Stuttgart",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_wangener_hohe_bei_der_schillerlinde",
+      "name": "Wangener Höhe - Bei der Schillerlinde",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_heidenbrunnele",
+      "name": "Heidenbrünnele",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_faultannenfurche_teilweg_von_wandel_wege",
+      "name": "Faultannenfurche (Teilweg von Wandel & Wege)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_rotweg_kirchweg_teilweg_von_wandel_wege",
+      "name": "Rotweg/Kirchweg (Teilweg von Wandel & Wege)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_weinsteige",
+      "name": "Weinsteige",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_neckarradweg_promenade",
+      "name": "Neckarradweg & Promenade",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_fahrschneller_de_fahrrad_stuttgart",
+      "name": "fahrschneller.de | Fahrrad Stuttgart",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_fahrradstrasse_hauptradroute_1",
+      "name": "Fahrradstraße Hauptradroute 1",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_siebenmuhlental",
+      "name": "Siebenmühlental",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_stadtrad_stuttgart_west_gmbh",
+      "name": "STADTRAD Stuttgart-West GmbH",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_mobilitatsberatung_stuttgart",
+      "name": "MobilitätsBeratung Stuttgart",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_bikesnboards_stuttgart",
+      "name": "Bikesnboards Stuttgart",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_tretmuhle_stuttgart_gmbh",
+      "name": "Tretmühle Stuttgart GmbH",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_woodpecker_trail",
+      "name": "Woodpecker Trail",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_wilhelma",
+      "name": "Wilhelma",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_gepardenanlage",
+      "name": "Gepardenanlage",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_emu_anlage",
+      "name": "Emu-Anlage",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_streichelzoo_hohenpark_killesberg",
+      "name": "Streichelzoo Höhenpark Killesberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_paintballhandel",
+      "name": "Paintballhandel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_pinguine",
+      "name": "Pinguine",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_wilhelma_parkhaus",
+      "name": "Wilhelma-Parkhaus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_schneeleoparden",
+      "name": "Schneeleoparden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_terra_australis",
+      "name": "Terra Australis",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_giraffen_okapis_fenneks",
+      "name": "Giraffen, Okapis, Fenneks",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_menschenaffenhaus",
+      "name": "Menschenaffenhaus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_raubkatzenanlagen",
+      "name": "Raubkatzenanlagen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_s_strene_grene",
+      "name": "Søstrene Grene",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_elbenwald",
+      "name": "Elbenwald",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_nanu_nana",
+      "name": "NANU-NANA",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_0711store_m_ringhofer",
+      "name": "0711Store - M. Ringhofer",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_affle_pferdle",
+      "name": "Äffle & Pferdle",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_family_shop_stuttgart",
+      "name": "Family Shop Stuttgart",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_menq_gravur_geschenkideen_de",
+      "name": "MenQ Gravur-Geschenkideen.de",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_lakrids_by_bulow_breuninger_karlspassage",
+      "name": "LAKRIDS BY BÜLOW Breuninger Karlspassage",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_stuttgart_tourismus_touristinformation_ipunkt_stuttgart",
+      "name": "Stuttgart Tourismus - Touristinformation iPunkt Stuttgart",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_superjuju",
+      "name": "Superjuju",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_pappnase",
+      "name": "PAPPNASE",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_heslacher_wasserfalle",
+      "name": "Heslacher Wasserfälle",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_bastion_leibfried",
+      "name": "Bastion Leibfried",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_ruine_des_hasenbergturms",
+      "name": "Ruine des Hasenbergturms",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_stuttgardia_skulptur",
+      "name": "Stuttgardia Skulptur",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_neues_schloss_stuttgart",
+      "name": "Neues Schloss Stuttgart",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_kulturmeile_stuttgart",
+      "name": "Kulturmeile Stuttgart",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_losswand_stuttgart_munster",
+      "name": "Lößwand Stuttgart-Münster",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_springbrunnen_im_mittleren_schlossgarten",
+      "name": "Springbrunnen im Mittleren Schlossgarten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_paulinenbrunnen",
+      "name": "Paulinenbrunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_kunstgebaude_stuttgart",
+      "name": "Kunstgebäude Stuttgart",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_lumas_galerie_stuttgart",
+      "name": "LUMAS Galerie Stuttgart",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_galerie_schlichtenmaier",
+      "name": "Galerie Schlichtenmaier",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_kunstlerhaus_stuttgart",
+      "name": "Künstlerhaus Stuttgart",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_schacher_raum_fur_kunst",
+      "name": "Schacher – Raum für Kunst",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_das_priorat_st_athanasius_und_die_kirche_st_maria_himmelfahrt",
+      "name": "Das Priorat St. Athanasius und die Kirche St. Mariä Himmelfahrt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_schlosskirche_und_gesamtkirchengemeinde",
+      "name": "Schlosskirche und Gesamtkirchengemeinde",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_st_nikolaus_kathedrale",
+      "name": "St. Nikolaus Kathedrale",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_st_elisabeth",
+      "name": "St. Elisabeth",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_herz_jesu_kirche",
+      "name": "Herz-Jesu-Kirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_burg_hofen",
+      "name": "Burg Hofen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_schloss_solitude",
+      "name": "Schloss Solitude",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_burg_frauenberg",
+      "name": "Burg Frauenberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_ehemalige_burg",
+      "name": "Ehemalige Burg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_palm_sches_schloss",
+      "name": "Palm'sches Schloss",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_weisser_saal_im_neuen_schloss_stuttgart",
+      "name": "Weißer Saal im Neuen Schloss Stuttgart",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_ruine_der_burg_rohreck",
+      "name": "Ruine der Burg Rohreck",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_pavillon_stuttgart",
+      "name": "Pavillon Stuttgart",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_ruine_engelburg",
+      "name": "Ruine Engelburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_burg_altdischingen",
+      "name": "Burg Altdischingen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_aussichtspunkt_monchberg",
+      "name": "Aussichtspunkt Mönchberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_wilhelm_charlotten_blick",
+      "name": "Wilhelm-Charlotten-Blick",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_maurischer_garten_stuttgart",
+      "name": "Maurischer Garten Stuttgart",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_chinesischer_garten_stuttgart",
+      "name": "Chinesischer Garten Stuttgart",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_oberer_schlossgarten",
+      "name": "Oberer Schloßgarten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_tropenhaus",
+      "name": "Tropenhaus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_subtropenterrassen",
+      "name": "Subtropenterrassen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_wintergarten_palmenhaus",
+      "name": "Wintergarten/Palmenhaus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_unterer_schlossgarten",
+      "name": "Unterer Schlossgarten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_akademiegarten",
+      "name": "Akademiegarten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_der_japangarten",
+      "name": "Der Japangarten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_fitz_zentrum_fur_figurentheater",
+      "name": "FITZ Zentrum für Figurentheater",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_forum_theater_stuttgart",
+      "name": "Forum Theater Stuttgart",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_schauspielbuhnen_in_stuttgart",
+      "name": "Schauspielbühnen in Stuttgart",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_kammertheater",
+      "name": "Kammertheater",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_theaterhaus_stuttgart",
+      "name": "Theaterhaus Stuttgart",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_theater_la_lune_stuttgart",
+      "name": "Theater La Lune Stuttgart",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_studio_theater",
+      "name": "Studio Theater",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_theater_puppentheater_tredeschin",
+      "name": "Theater Puppentheater Tredeschin",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_altes_schauspielhaus",
+      "name": "Altes Schauspielhaus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_wortkino_das_theater_seit_1999",
+      "name": "Wortkino | Das Theater seit 1999",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_theater_stuttgart",
+      "name": "Theater Stuttgart",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_stuttgart_theatre_center",
+      "name": "Stuttgart Theatre Center",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_theater_am_olgaeck",
+      "name": "Theater am Olgaeck",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_la_beaute_by_marina_boras",
+      "name": "La Beauté by Marina Boras",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_handstand_hula_hoop_show_acts_marina_skulditskaya_stuttgart",
+      "name": "Handstand & Hula Hoop Show Acts - Marina Skulditskaya | Stuttgart",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_praxis_fur_sprachtherapie_zuffenhausen_marina_fakkas",
+      "name": "Praxis für Sprachtherapie Zuffenhausen - Marina Fakkas",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_mateco_gmbh_arbeitsbuhnenvermietung_ubergabestation_stuttgart_hafen",
+      "name": "mateco GmbH - Arbeitsbühnenvermietung - Übergabestation Stuttgart-Hafen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_rhenus_port_logstics_rhein_neckar_gmbh_co_kg_metallcenter",
+      "name": "Rhenus Port Logstics Rhein Neckar GmbH & Co. KG -Metallcenter-",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_l_w_cretschmar_gmbh_co_kg",
+      "name": "L.W. Cretschmar GmbH & Co. KG",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_rhenus_port_logistics_rhein_neckar_gmbh_co_kg",
+      "name": "Rhenus Port Logistics Rhein Neckar GmbH & Co. KG",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_marineverein_stuttgart_1899_e_v",
+      "name": "Marineverein Stuttgart 1899 e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_mercedes_benz_werk_hedelfingen",
+      "name": "Mercedes-Benz Werk Hedelfingen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_marina_shapiro",
+      "name": "Marina Shapiro",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_bast_baustoff_aufbereitung_stuttgart_gmbh_co_kg",
+      "name": "BAST Baustoff-Aufbereitung Stuttgart GmbH & Co. KG",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_marina_wagner_psychologische_beratung",
+      "name": "Marina Wagner, Psychologische Beratung",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_amazonienhaus",
+      "name": "Amazonienhaus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_elefanten_nashorner",
+      "name": "Elefanten, Nashörner",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_anselm_vogt_moykopf_driverguide_guide_fur_stuttgart_suddeutschland",
+      "name": "Anselm Vogt-Moykopf | Driverguide & Guide für Stuttgart & Süddeutschland",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_segway_tour_stuttgart_seg_tour_gmbh",
+      "name": "Segway Tour Stuttgart - SEG TOUR GmbH",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_k3_stadtfuhrungen_stuttgart",
+      "name": "k3 stadtführungen Stuttgart",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_sina_s_sightseeing_tours_stuttgart_ev",
+      "name": "Sina's Sightseeing Tours Stuttgart eV",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_stuttgarter_geister",
+      "name": "Stuttgarter Geister",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_kulturfuhrungen_stadtfuhrungen_in_stuttgart_esslingen_ludwigsburg_und_",
+      "name": "Kulturführungen - Stadtführungen in Stuttgart, Esslingen, Ludwigsburg und Tübingen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_laderach",
+      "name": "Läderach",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_tritschler_life_style",
+      "name": "Tritschler Life Style",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_butlers_home24_stuttgart_calwer_strasse",
+      "name": "BUTLERS@home24 Stuttgart Calwer Straße",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_party_deko_world",
+      "name": "Party Deko World",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_stuttgarter_wochenmarkt",
+      "name": "Stuttgarter Wochenmarkt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_wochenmarkt_stuttgart_mitte_wilhelmsplatz",
+      "name": "Wochenmarkt Stuttgart Mitte Wilhelmsplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_wochenmarkt_stuttgart_ost",
+      "name": "Wochenmarkt Stuttgart-Ost",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_wochenmarkt_bad_cannstatt",
+      "name": "Wochenmarkt Bad Cannstatt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_cinemaxx_stuttgart_liederhalle",
+      "name": "CinemaxX Stuttgart Liederhalle",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_das_metropol_kino_stuttgart",
+      "name": "Das Metropol Kino Stuttgart",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_atelier_am_bollwerk",
+      "name": "Atelier Am Bollwerk",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_delphi_arthaus_kino",
+      "name": "Delphi Arthaus Kino",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_dav_kletterzentrum_stuttgart",
+      "name": "DAV Kletterzentrum Stuttgart",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_cityrock",
+      "name": "[cityrock]",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_boulderblock_schelm48",
+      "name": "Boulderblock Schelm48",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_boulderblockle_stuttgart",
+      "name": "boulderblöckle Stuttgart",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_dav_kletteranlagen_gmbh_stuttgart",
+      "name": "DAV Kletteranlagen GmbH Stuttgart",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_kollektiv_sports",
+      "name": "Kollektiv-Sports",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_stuttgarter_eichenhain",
+      "name": "Stuttgarter Eichenhain",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_unteres_kakteenhaus",
+      "name": "Unteres Kakteenhaus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "stuttgart_mammutbaumwaldchen",
+      "name": "Mammutbaumwäldchen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    }
+  ]
+}

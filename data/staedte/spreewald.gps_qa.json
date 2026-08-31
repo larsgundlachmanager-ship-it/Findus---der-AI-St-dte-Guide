@@ -1,0 +1,2981 @@
+{
+  "generated_at": "2026-08-28T05:17:57.682Z",
+  "summary": {
+    "city_id": "spreewald",
+    "checked": 101,
+    "ok": 28,
+    "check": 27,
+    "bad": 46,
+    "errors": 0,
+    "max_delta_m": 180,
+    "city_halo_m": 28000,
+    "story_only": true
+  },
+  "rows": [
+    {
+      "id": "spreewald_kleingartenverein_maxim_gorki",
+      "name": "Kleingartenverein Maxim Gorki",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.8652016,
+        "lng": 13.973158399999999
+      },
+      "query": "Kleingartenverein Maxim Gorki, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.777911,
+        "lng": 14.0841884,
+        "display_name": "Bibliothek Lübbenau - Vetschau, Maxim-Gorki-Straße, Vetschau/Spreewald, Deutschland",
+        "class": "amenity",
+        "type": "library",
+        "provider": "photon"
+      },
+      "delta_m": 12347,
+      "from_city_m": 1318,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "spreewald_biospharenreservat_spreewald",
+        "spreewald_spreewaldladen",
+        "spreewald_aussichtspunkt_mit_rastplatz"
+      ]
+    },
+    {
+      "id": "spreewald_schleuse_in_lubben",
+      "name": "Schleuse in Lübben",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.93909337333333,
+        "lng": 13.896546093333335
+      },
+      "query": "Schleuse in Lübben, Lübbenau, Germany",
+      "osm": {
+        "lat": 52.0486307,
+        "lng": 13.8935816,
+        "display_name": "Schleuse Neu Lübbenau, Schlepzig, Deutschland",
+        "class": "lock",
+        "type": "yes",
+        "provider": "photon"
+      },
+      "delta_m": 12182,
+      "from_city_m": 9084,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "spreewald_schloss_lubben",
+      "name": "Schloss Lübben",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.93996937777778,
+        "lng": 13.899138388888888
+      },
+      "query": "Schloss Lübben, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8691173,
+        "lng": 13.9739442,
+        "display_name": "Schloß Lübbenau, Schloßbezirk, Lübbenau/Spreewald, Deutschland",
+        "class": "tourism",
+        "type": "hotel",
+        "provider": "photon"
+      },
+      "delta_m": 9402,
+      "from_city_m": 9097,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "spreewald_lubbenau_see",
+      "name": "Lübbenau See",
+      "category": "wanderung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.8363713,
+        "lng": 13.8948867
+      },
+      "query": "Lübbenau See, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8064726,
+        "lng": 13.9826062,
+        "display_name": "Bischdorfer See, Lübbenau/Spreewald, Deutschland",
+        "class": "natural",
+        "type": "water",
+        "provider": "photon"
+      },
+      "delta_m": 6885,
+      "from_city_m": 5191,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "spreewald_rad_und_wanderweg_lehde",
+      "name": "Rad- und Wanderweg Lehde",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.86598568000001,
+        "lng": 13.989054820000002
+      },
+      "query": "Rad-, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8754715,
+        "lng": 13.8900891,
+        "display_name": "Schloss Lübbenau, Lübbenau/Spreewald, Deutschland",
+        "class": "information",
+        "type": "board",
+        "provider": "photon"
+      },
+      "delta_m": 6876,
+      "from_city_m": 2410,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "spreewald_lubbenau_lehde",
+        "spreewald_osm_transit_1492071277"
+      ]
+    },
+    {
+      "id": "spreewald_hauptspree_lehder_flies",
+      "name": "Hauptspree - Lehder Flies",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.87354800000001,
+        "lng": 13.9729376
+      },
+      "query": "Hauptspree, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8445396,
+        "lng": 14.0588165,
+        "display_name": "Hauptspree, Leipe, Lübbenau/Spreewald, Oberspreewald-Lausitz - Górne Błota-Łužyca, Brandenburg, 03222, Deutschland",
+        "class": "waterway",
+        "type": "river",
+        "importance": 0.14672010299839774,
+        "osm_type": "way",
+        "osm_id": 1082674751,
+        "provider": "nominatim"
+      },
+      "delta_m": 6722,
+      "from_city_m": 1582,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "spreewald_spreewaldladen",
+      "name": "spreewaldladen",
+      "category": "souvenir",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.8652016,
+        "lng": 13.973158399999999
+      },
+      "query": "spreewaldladen, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.9189031,
+        "lng": 14.0150304,
+        "display_name": "Spreewaldladen, Hauptstraße, Alt Zauche-Wußwerk, Deutschland",
+        "class": "shop",
+        "type": "farm",
+        "provider": "photon"
+      },
+      "delta_m": 6627,
+      "from_city_m": 1318,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "spreewald_biospharenreservat_spreewald",
+        "spreewald_kleingartenverein_maxim_gorki",
+        "spreewald_aussichtspunkt_mit_rastplatz"
+      ]
+    },
+    {
+      "id": "spreewald_schwarzer_weg",
+      "name": "Schwarzer Weg",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.86248328571429,
+        "lng": 13.929167071428575
+      },
+      "query": "Schwarzer Weg, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8410602,
+        "lng": 14.0043383,
+        "display_name": "Schwarzer Weg, Boblitz - Bobolce, Lübbenau/Spreewald, Oberspreewald-Lausitz - Górne Błota-Łužyca, Brandenburg, 03222, Deutschland",
+        "class": "highway",
+        "type": "track",
+        "importance": 0.053386769665064435,
+        "osm_type": "way",
+        "osm_id": 113599225,
+        "provider": "nominatim"
+      },
+      "delta_m": 5686,
+      "from_city_m": 1735,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "spreewald_dorfkirche_zerkwitz",
+        "spreewald_schleuse_barzlin"
+      ]
+    },
+    {
+      "id": "spreewald_wehr_und_schleuse_ragow",
+      "name": "Wehr und Schleuse Ragow",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.893385275,
+        "lng": 13.937474337500001
+      },
+      "query": "Wehr, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.869626,
+        "lng": 14.0013782,
+        "display_name": "Wehr, Lehde, Lübbenau/Spreewald, Oberspreewald-Lausitz - Górne Błota-Łužyca, Brandenburg, 03222, Deutschland",
+        "class": "waterway",
+        "type": "weir",
+        "importance": 0.13338676966506444,
+        "osm_type": "way",
+        "osm_id": 149699680,
+        "provider": "nominatim"
+      },
+      "delta_m": 5121,
+      "from_city_m": 3303,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "spreewald_riesenmotorrad",
+      "name": "Riesenmotorrad",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.83153916,
+        "lng": 13.994688060000001
+      },
+      "query": "Riesenmotorrad, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8680114,
+        "lng": 13.9689477,
+        "display_name": "Lübbenau/Spreewald, Oberspreewald-Lausitz, Deutschland",
+        "class": "place",
+        "type": "town",
+        "provider": "photon"
+      },
+      "delta_m": 4424,
+      "from_city_m": 4698,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "spreewald_naturhafen_leipe",
+      "name": "Naturhafen Leipe",
+      "category": "radweg",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.853235919999996,
+        "lng": 14.05038418
+      },
+      "query": "Naturhafen Leipe, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8423064,
+        "lng": 13.9932814,
+        "display_name": "Naturhafen Boblitz, Hinter den Scheunen, Lübbenau/Spreewald, Deutschland",
+        "class": "leisure",
+        "type": "marina",
+        "provider": "photon"
+      },
+      "delta_m": 4106,
+      "from_city_m": 6760,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "spreewald_schleuse_barzlin",
+      "name": "Schleuse Barzlin",
+      "category": "radweg",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.86248328571429,
+        "lng": 13.929167071428575
+      },
+      "query": "Schleuse Barzlin, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.895993,
+        "lng": 13.9511778,
+        "display_name": "Barzlin, Stennewitzer Ringstraße, Lübbenau/Spreewald, Deutschland",
+        "class": "information",
+        "type": "board",
+        "provider": "photon"
+      },
+      "delta_m": 4021,
+      "from_city_m": 1735,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "spreewald_dorfkirche_zerkwitz",
+        "spreewald_schwarzer_weg"
+      ]
+    },
+    {
+      "id": "spreewald_pension_am_stadtgraben",
+      "name": "Pension \"Am Stadtgraben\"",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.87032466666667,
+        "lng": 13.960479333333332
+      },
+      "query": "Pension \"Am Stadtgraben\", Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8503425,
+        "lng": 13.9156477,
+        "display_name": "Hotel & Pension Am Mühlenberg, Luckauer Landstraße, Lübbenau/Spreewald, Deutschland",
+        "class": "tourism",
+        "type": "hotel",
+        "provider": "photon"
+      },
+      "delta_m": 3797,
+      "from_city_m": 700,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "spreewald_beobachtungsturm_kranichwiese",
+      "name": "Beobachtungsturm Kranichwiese",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.89882320961538,
+        "lng": 13.950492473076924
+      },
+      "query": "Beobachtungsturm, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8680114,
+        "lng": 13.9689477,
+        "display_name": "Lübbenau/Spreewald, Oberspreewald-Lausitz, Deutschland",
+        "class": "place",
+        "type": "town",
+        "provider": "photon"
+      },
+      "delta_m": 3653,
+      "from_city_m": 3715,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "spreewald_schloss_beuchow",
+      "name": "Schloss Beuchow",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.848541250000004,
+        "lng": 13.90340075
+      },
+      "query": "Schloss Beuchow, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8754715,
+        "lng": 13.8900891,
+        "display_name": "Schloss Lübbenau, A 13, Klein Radden, Lübbenau/Spreewald, Oberspreewald-Lausitz - Górne Błota-Łužyca, Brandenburg, 03222, Deutschland",
+        "class": "information",
+        "type": "board",
+        "importance": 0.00005585183489733757,
+        "osm_type": "node",
+        "osm_id": 7830844177,
+        "provider": "nominatim"
+      },
+      "delta_m": 3131,
+      "from_city_m": 3950,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "spreewald_brucke",
+      "name": "Brücke",
+      "category": "wanderung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.87438977777778,
+        "lng": 14.008836666666665
+      },
+      "query": "Brücke, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8680114,
+        "lng": 13.9689477,
+        "display_name": "Lübbenau/Spreewald, Oberspreewald-Lausitz, Deutschland",
+        "class": "place",
+        "type": "town",
+        "provider": "photon"
+      },
+      "delta_m": 2829,
+      "from_city_m": 3896,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "spreewald_gasthaus_wotschofska"
+      ]
+    },
+    {
+      "id": "spreewald_fussballplatz",
+      "name": "Fußballplatz",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.86113,
+        "lng": 13.936753000000001
+      },
+      "query": "Fußballplatz, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8680114,
+        "lng": 13.9689477,
+        "display_name": "Lübbenau/Spreewald, Oberspreewald-Lausitz, Deutschland",
+        "class": "place",
+        "type": "town",
+        "provider": "photon"
+      },
+      "delta_m": 2339,
+      "from_city_m": 1277,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "spreewald_lubbenauer_hofgarten",
+      "name": "Lübbenauer Hofgarten",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.86916852941175,
+        "lng": 13.974013411764705
+      },
+      "query": "Lübbenauer Hofgarten, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8861388,
+        "lng": 13.9679667,
+        "display_name": "Lübbenauer Buschspree, Lübbenau/Spreewald, Deutschland",
+        "class": "waterway",
+        "type": "river",
+        "provider": "photon"
+      },
+      "delta_m": 1932,
+      "from_city_m": 1437,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "spreewald_skatepark_lubbenau",
+        "spreewald_gartenanlage_freizeit_73_ev",
+        "spreewald_russische_kriegsgraber",
+        "spreewald_blau_gelb_arena_tsg_lubbenau",
+        "spreewald_bogenschiessplatz_ralf",
+        "spreewald_schloss_lubbenau"
+      ]
+    },
+    {
+      "id": "spreewald_die_gurkerei_gurken_mehr_lubbenau",
+      "name": "Die Gurkerei - Gurken & mehr… - Lübbenau",
+      "category": "souvenir",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.86202462499999,
+        "lng": 13.967382375
+      },
+      "query": "Die Gurkerei, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8600908,
+        "lng": 13.9424952,
+        "display_name": "Fraktion DIE LINKE Lübbenau, Otto-Grotewohl-Straße, Lübbenau/Spreewald, Deutschland",
+        "class": "office",
+        "type": "political_party",
+        "provider": "photon"
+      },
+      "delta_m": 1722,
+      "from_city_m": 998,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "spreewald_gartenanlage_freizeit_73_ev",
+      "name": "Gartenanlage Freizeit 73 ev",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.86916852941175,
+        "lng": 13.974013411764705
+      },
+      "query": "Gartenanlage Freizeit 73, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8538535,
+        "lng": 13.9703741,
+        "display_name": "Kleingärtnerverein \"Freizeit 73\", Chausseestraße, Lübbenau/Spreewald, Deutschland",
+        "class": "club",
+        "type": "allotments",
+        "provider": "photon"
+      },
+      "delta_m": 1721,
+      "from_city_m": 1437,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "spreewald_skatepark_lubbenau",
+        "spreewald_lubbenauer_hofgarten",
+        "spreewald_russische_kriegsgraber",
+        "spreewald_blau_gelb_arena_tsg_lubbenau",
+        "spreewald_bogenschiessplatz_ralf",
+        "spreewald_schloss_lubbenau"
+      ]
+    },
+    {
+      "id": "spreewald_tsg_lubbenau_63_e_v",
+      "name": "TSG Lübbenau 63 e.V.",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.863643833333334,
+        "lng": 13.951876333333333
+      },
+      "query": "TSG Lübbenau 63 e.V., Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8484495,
+        "lng": 13.9509688,
+        "display_name": "TSG Lübbenau 63 e.V. (Abteilung Bogensport), Neckarsulmer Straße, Am Spreewalddreieck, Groß Klessow, Lübbenau/Spreewald, Oberspreewald-Lausitz - Górne Błota-Łužyca, Brandenburg, 03222, Deutschland",
+        "class": "leisure",
+        "type": "sports_centre",
+        "importance": 0.00005343633173109052,
+        "osm_type": "way",
+        "osm_id": 173896727,
+        "provider": "nominatim"
+      },
+      "delta_m": 1691,
+      "from_city_m": 249,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "spreewald_skatepark_lubbenau",
+      "name": "Skatepark Lübbenau",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.86917913499999,
+        "lng": 13.973988069999999
+      },
+      "query": "Skatepark Lübbenau, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8635321,
+        "lng": 13.9536859,
+        "display_name": "Kirche Lübbenau-Neustadt, Straße des Friedens, Lübbenau/Spreewald, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 1529,
+      "from_city_m": 1435,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "spreewald_gartenanlage_freizeit_73_ev",
+        "spreewald_lubbenauer_hofgarten",
+        "spreewald_russische_kriegsgraber",
+        "spreewald_blau_gelb_arena_tsg_lubbenau",
+        "spreewald_bogenschiessplatz_ralf",
+        "spreewald_schloss_lubbenau"
+      ]
+    },
+    {
+      "id": "spreewald_premium_kahnfahrten_hafen_lubbenau_spreewald",
+      "name": "Premium Kahnfahrten - Hafen Lübbenau / Spreewald",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.869237,
+        "lng": 13.969883142857142
+      },
+      "query": "Premium Kahnfahrten, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8630854,
+        "lng": 13.9894657,
+        "display_name": "Bitzkers Kahnfahrten, Dorfstraße, Lübbenau/Spreewald, Deutschland",
+        "class": "amenity",
+        "type": "boat_rental",
+        "provider": "photon"
+      },
+      "delta_m": 1509,
+      "from_city_m": 1170,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "spreewald_spreewald_reederei_lubbenau",
+      "name": "Spreewald-Reederei Lübbenau",
+      "category": "tour",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.86609500000001,
+        "lng": 13.973875799999998
+      },
+      "query": "Spreewald-Reederei Lübbenau, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8635321,
+        "lng": 13.9536859,
+        "display_name": "Kirche Lübbenau-Neustadt, Straße des Friedens, Lübbenau/Spreewald, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 1415,
+      "from_city_m": 1369,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "spreewald_galerie_ro",
+      "name": "Galerie Ro",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.867503,
+        "lng": 13.970656199999999
+      },
+      "query": "Galerie Ro, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8568418,
+        "lng": 13.9608966,
+        "display_name": "Medizinisches Zentrum Lübbenau, Robert-Koch-Straße, Lübbenau/Spreewald, Deutschland",
+        "class": "amenity",
+        "type": "clinic",
+        "provider": "photon"
+      },
+      "delta_m": 1362,
+      "from_city_m": 1168,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "spreewald_insektenwiese",
+      "name": "Insektenwiese",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.86170384,
+        "lng": 13.95518178
+      },
+      "query": "Insektenwiese, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8680114,
+        "lng": 13.9689477,
+        "display_name": "Lübbenau/Spreewald, Oberspreewald-Lausitz, Deutschland",
+        "class": "place",
+        "type": "town",
+        "provider": "photon"
+      },
+      "delta_m": 1177,
+      "from_city_m": 428,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "spreewald_kahnfahrten_im_spreewald_henning_muller",
+      "name": "Kahnfahrten im Spreewald, Henning Müller",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.8650018,
+        "lng": 13.9738204
+      },
+      "query": "Kahnfahrten im Spreewald,, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8630854,
+        "lng": 13.9894657,
+        "display_name": "Bitzkers Kahnfahrten, Dorfstraße, Lübbenau/Spreewald, Deutschland",
+        "class": "amenity",
+        "type": "boat_rental",
+        "provider": "photon"
+      },
+      "delta_m": 1095,
+      "from_city_m": 1365,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "spreewald_energiefeld",
+      "name": "Energiefeld",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.861547816666665,
+        "lng": 13.958797166666669
+      },
+      "query": "Energiefeld, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8680114,
+        "lng": 13.9689477,
+        "display_name": "Lübbenau/Spreewald, Oberspreewald-Lausitz, Deutschland",
+        "class": "place",
+        "type": "town",
+        "provider": "photon"
+      },
+      "delta_m": 1001,
+      "from_city_m": 549,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "spreewald_minigolfplatz_lubbenau",
+      "name": "Minigolfplatz Lübbenau",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.865308875,
+        "lng": 13.965726874999998
+      },
+      "query": "Minigolfplatz Lübbenau, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8635321,
+        "lng": 13.9536859,
+        "display_name": "Kirche Lübbenau-Neustadt, Straße des Friedens, Lübbenau/Spreewald, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 850,
+      "from_city_m": 808,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "spreewald_fastfitness_lubbenau",
+      "name": "FastFitness Lübbenau",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.85991668965517,
+        "lng": 13.942782137931035
+      },
+      "query": "FastFitness Lübbenau, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8635321,
+        "lng": 13.9536859,
+        "display_name": "Kirche Lübbenau-Neustadt, Straße des Friedens, Lübbenau/Spreewald, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 850,
+      "from_city_m": 986,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "spreewald_osm_post_office_7518641231"
+      ]
+    },
+    {
+      "id": "spreewald_parkplatz_spreewelten_bad_lubbenau",
+      "name": "Parkplatz Spreewelten Bad Lübbenau",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.85674459999999,
+        "lng": 13.953324066666665
+      },
+      "query": "Parkplatz Spreewelten Bad Lübbenau, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8622034,
+        "lng": 13.9610584,
+        "display_name": "Spreewelten Bahnhof Lübbenau, Bahnhofstraße, Lübbenau/Spreewald, Deutschland",
+        "class": "shop",
+        "type": "travel_agency",
+        "provider": "photon"
+      },
+      "delta_m": 807,
+      "from_city_m": 972,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "spreewald_wochenmarkt_lubbenau",
+      "name": "Wochenmarkt Lübbenau",
+      "category": "geschichte",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.859710888888884,
+        "lng": 13.943714444444444
+      },
+      "query": "Wochenmarkt Lübbenau, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8635321,
+        "lng": 13.9536859,
+        "display_name": "Kirche Lübbenau-Neustadt, Straße des Friedens, Lübbenau/Spreewald, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 806,
+      "from_city_m": 952,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "spreewald_bahnhofstrasse",
+      "name": "Bahnhofstraße",
+      "category": "bahnhof",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.863747090909094,
+        "lng": 13.953935909090909
+      },
+      "query": "Bahnhofstraße, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8614966,
+        "lng": 13.9636673,
+        "display_name": "Bahnhofstraße, Stottoff - Štotup, Lübbenau/Spreewald, Oberspreewald-Lausitz - Górne Błota-Łužyca, Brandenburg, 03222, Deutschland",
+        "class": "highway",
+        "type": "secondary",
+        "importance": 0.053386769665064435,
+        "osm_type": "way",
+        "osm_id": 252763406,
+        "provider": "nominatim"
+      },
+      "delta_m": 714,
+      "from_city_m": 193,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "spreewald_st_maria_verkundigung"
+      ]
+    },
+    {
+      "id": "spreewald_biospharenreservat_spreewald",
+      "name": "Biosphärenreservat Spreewald",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.8652018,
+        "lng": 13.973158340000001
+      },
+      "query": "Biosphärenreservat Spreewald, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8691896,
+        "lng": 13.9805129,
+        "display_name": "Biosphärenreservat Spreewald, 20, Schloßbezirk, Erlenhorst, Stottoff - Štotup, Lübbenau/Spreewald, Oberspreewald-Lausitz - Górne Błota-Łužyca, Brandenburg, 03222, Deutschland",
+        "class": "information",
+        "type": "board",
+        "importance": 0.00005343633173109052,
+        "osm_type": "node",
+        "osm_id": 5679599845,
+        "provider": "nominatim"
+      },
+      "delta_m": 672,
+      "from_city_m": 1318,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "spreewald_kleingartenverein_maxim_gorki",
+        "spreewald_spreewaldladen",
+        "spreewald_aussichtspunkt_mit_rastplatz"
+      ]
+    },
+    {
+      "id": "spreewald_kirche_gross_lubbenau_pfarrsprengel_lubbenau_und_umland",
+      "name": "Kirche Groß Lübbenau - Pfarrsprengel Lübbenau und Umland",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.829626966666666,
+        "lng": 13.97791707777778
+      },
+      "query": "Kirche Groß Lübbenau, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8251239,
+        "lng": 13.9797892,
+        "display_name": "Kirche Groß Lübbenau, Groß Lübbenauer Poststraße, Groß Lübbenau, Lübbenau/Spreewald, Oberspreewald-Lausitz - Górne Błota-Łužyca, Brandenburg, 03222, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.00005343633173109052,
+        "osm_type": "node",
+        "osm_id": 6451517574,
+        "provider": "nominatim"
+      },
+      "delta_m": 517,
+      "from_city_m": 4313,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "spreewald_lehde",
+      "name": "Lehde",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.86735060000001,
+        "lng": 13.9895776
+      },
+      "query": "Lehde, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.863491,
+        "lng": 13.9915406,
+        "display_name": "Lehde, Lübbenau/Spreewald, Deutschland",
+        "class": "place",
+        "type": "village",
+        "provider": "photon"
+      },
+      "delta_m": 450,
+      "from_city_m": 2454,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "spreewald_aussichtspunkt_mit_rastplatz",
+      "name": "Aussichtspunkt mit Rastplatz",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.8652016,
+        "lng": 13.973158399999999
+      },
+      "query": "Aussichtspunkt, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8680114,
+        "lng": 13.9689477,
+        "display_name": "Lübbenau/Spreewald, Oberspreewald-Lausitz, Deutschland",
+        "class": "place",
+        "type": "town",
+        "provider": "photon"
+      },
+      "delta_m": 426,
+      "from_city_m": 1318,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "spreewald_biospharenreservat_spreewald",
+        "spreewald_kleingartenverein_maxim_gorki",
+        "spreewald_spreewaldladen"
+      ]
+    },
+    {
+      "id": "spreewald_rosengarten",
+      "name": "Rosengarten",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.868049000000006,
+        "lng": 13.9746636
+      },
+      "query": "Rosengarten, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8680114,
+        "lng": 13.9689477,
+        "display_name": "Lübbenau/Spreewald, Oberspreewald-Lausitz, Deutschland",
+        "class": "place",
+        "type": "town",
+        "provider": "photon"
+      },
+      "delta_m": 392,
+      "from_city_m": 1450,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "spreewald_lubbenau_lehde",
+      "name": "Lübbenau, Lehde",
+      "category": "radweg",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.8659856,
+        "lng": 13.9890548
+      },
+      "query": "Lübbenau, Lehde, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.863491,
+        "lng": 13.9915406,
+        "display_name": "Lehde, Lübbenau/Spreewald, Deutschland",
+        "class": "place",
+        "type": "village",
+        "provider": "photon"
+      },
+      "delta_m": 326,
+      "from_city_m": 2410,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "spreewald_rad_und_wanderweg_lehde",
+        "spreewald_osm_transit_1492071277"
+      ]
+    },
+    {
+      "id": "spreewald_leiper_weggraben",
+      "name": "Leiper Weggraben",
+      "category": "wanderung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.858454790909086,
+        "lng": 14.01087602727273
+      },
+      "query": "Leiper Weggraben, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.858552,
+        "lng": 14.006369,
+        "display_name": "Leiper Weggraben, Lehde, Lübbenau/Spreewald, Oberspreewald-Lausitz - Górne Błota-Łužyca, Brandenburg, Deutschland",
+        "class": "waterway",
+        "type": "stream",
+        "importance": 0.10672010299839778,
+        "osm_type": "way",
+        "osm_id": 34072725,
+        "provider": "nominatim"
+      },
+      "delta_m": 310,
+      "from_city_m": 3986,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "spreewald_bootsverleih_franke",
+      "name": "Bootsverleih Franke",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.86591524999999,
+        "lng": 13.976218500000002
+      },
+      "query": "Bootsverleih Franke, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8633938,
+        "lng": 13.9748204,
+        "display_name": "Bootsverleih Franke, 72, Dammstraße, Stottoff - Štotup, Lübbenau/Spreewald, Oberspreewald-Lausitz - Górne Błota-Łužyca, Brandenburg, 03222, Deutschland",
+        "class": "amenity",
+        "type": "boat_rental",
+        "importance": 0.00005343633173109052,
+        "osm_type": "node",
+        "osm_id": 2700748837,
+        "provider": "nominatim"
+      },
+      "delta_m": 296,
+      "from_city_m": 1529,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "spreewald_schlosspark",
+      "name": "Schlosspark",
+      "category": "natur",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.87024344444444,
+        "lng": 13.972330777777778
+      },
+      "query": "Schlosspark, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8701296,
+        "lng": 13.9764658,
+        "display_name": "Spreewald-Natur-Camping \"Am Schlosspark\", 20, Schloßbezirk, Erlenhorst, Stottoff - Štotup, Lübbenau/Spreewald, Oberspreewald-Lausitz - Górne Błota-Łužyca, Brandenburg, 03222, Deutschland",
+        "class": "tourism",
+        "type": "camp_site",
+        "importance": 0.00005343633173109052,
+        "osm_type": "way",
+        "osm_id": 94425116,
+        "provider": "nominatim"
+      },
+      "delta_m": 284,
+      "from_city_m": 1368,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "spreewald_spreewald_natur_camping_am_schlosspark",
+      "name": "Spreewald-Natur-Camping \"Am Schlosspark\"",
+      "category": "natur",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.869364857142855,
+        "lng": 13.980233714285715
+      },
+      "query": "Spreewald-Natur-Camping \"Am Schlosspark\", Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8701296,
+        "lng": 13.9764658,
+        "display_name": "Spreewald-Natur-Camping \"Am Schlosspark\", 20, Schloßbezirk, Erlenhorst, Stottoff - Štotup, Lübbenau/Spreewald, Oberspreewald-Lausitz - Górne Błota-Łužyca, Brandenburg, 03222, Deutschland",
+        "class": "tourism",
+        "type": "camp_site",
+        "importance": 0.00005343633173109052,
+        "osm_type": "way",
+        "osm_id": 94425116,
+        "provider": "nominatim"
+      },
+      "delta_m": 272,
+      "from_city_m": 1855,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "spreewald_stadtgraben_dorothengraben_lubbenau",
+      "name": "Stadtgraben - Dorothengraben (Lübbenau)",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.870948799999994,
+        "lng": 13.9652762
+      },
+      "query": "Stadtgraben, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8688879,
+        "lng": 13.9653642,
+        "display_name": "Stadtgraben Lübbenau, Erlenhorst, Stottoff - Štotup, Lübbenau/Spreewald, Oberspreewald-Lausitz - Górne Błota-Łužyca, Brandenburg, 03222, Deutschland",
+        "class": "waterway",
+        "type": "stream",
+        "importance": 0.12005343633173109,
+        "osm_type": "relation",
+        "osm_id": 3180765,
+        "provider": "nominatim"
+      },
+      "delta_m": 229,
+      "from_city_m": 986,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "spreewald_spreewald_touristinformation_lubbenau_e_v",
+      "name": "Spreewald-Touristinformation Lübbenau e.V.",
+      "category": "wanderung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.86851991666666,
+        "lng": 13.968209583333332
+      },
+      "query": "Spreewald-Touristinformation Lübbenau e.V., Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8694808,
+        "lng": 13.9654011,
+        "display_name": "Spreewald-Museum Lübbenau, Topfmarkt, Lübbenau/Spreewald, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 220,
+      "from_city_m": 1035,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "spreewald_st_liebs_hafen_lubbenau_kahnfahrtenlehde_wotschofska_im_spreewald",
+      "name": "✅St.Liebs Hafen🛶 Lübbenau | KahnfahrtenLehde-Wotschofska im Spreewald",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.865466999999995,
+        "lng": 13.974720666666668
+      },
+      "query": "✅St.Liebs Hafen🛶 Lübbenau, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8669536,
+        "lng": 13.9728629,
+        "display_name": "Hafen-Snack, Dammstraße, Lübbenau/Spreewald, Deutschland",
+        "class": "amenity",
+        "type": "fast_food",
+        "provider": "photon"
+      },
+      "delta_m": 209,
+      "from_city_m": 1425,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "spreewald_river_and_roots",
+      "name": "River and Roots",
+      "category": "tour",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.86429880000001,
+        "lng": 13.957178199999998
+      },
+      "query": "River and Roots, Lübbenau",
+      "osm": {
+        "lat": 51.628498,
+        "lng": -0.383004,
+        "display_name": "Roots, Carpenders Avenue, Three Rivers District, Vereinigtes Königreich",
+        "class": "shop",
+        "type": "hairdresser",
+        "provider": "photon"
+      },
+      "delta_m": 986011,
+      "from_city_m": 257,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "spreewald_bogenschiessplatz_ralf",
+      "name": "Bogenschießplatz Ralf",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.86916852941175,
+        "lng": 13.974013411764705
+      },
+      "query": "Bogenschießplatz Ralf, Lübbenau",
+      "osm": {
+        "lat": 47.4384901,
+        "lng": 9.6562132,
+        "display_name": "Raiffeisenbank Lustenau, Bahnhofstraße, Lustenau, Österreich",
+        "class": "amenity",
+        "type": "bank",
+        "provider": "photon"
+      },
+      "delta_m": 582291,
+      "from_city_m": 1437,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city",
+        "duplicate_center"
+      ],
+      "twins": [
+        "spreewald_skatepark_lubbenau",
+        "spreewald_gartenanlage_freizeit_73_ev",
+        "spreewald_lubbenauer_hofgarten",
+        "spreewald_russische_kriegsgraber",
+        "spreewald_blau_gelb_arena_tsg_lubbenau",
+        "spreewald_schloss_lubbenau"
+      ]
+    },
+    {
+      "id": "spreewald_kgv_gluck_auf_e_v_lubbenau",
+      "name": "KGV Glück Auf e.V. Lübbenau",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.860189405882366,
+        "lng": 13.970126378431369
+      },
+      "query": "KGV Glück Auf e.V. Lübbenau, Lübbenau, Germany",
+      "osm": {
+        "lat": 52.0882831,
+        "lng": 10.4423402,
+        "display_name": "KGV Glück auf e.V., Salzgitter, Deutschland",
+        "class": "landuse",
+        "type": "allotments",
+        "provider": "photon"
+      },
+      "delta_m": 242949,
+      "from_city_m": 1256,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "spreewald_russische_kriegsgraber",
+      "name": "Russische Kriegsgräber",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.86916852941175,
+        "lng": 13.974013411764705
+      },
+      "query": "Russische Kriegsgräber, Lübbenau, Germany",
+      "osm": {
+        "lat": 50.8959595,
+        "lng": 14.8163845,
+        "display_name": "russische Kriegsgräber 2. Weltkrieg, Hammerschmiedtstraße, Zittau, Deutschland",
+        "class": "amenity",
+        "type": "grave_yard",
+        "provider": "photon"
+      },
+      "delta_m": 122995,
+      "from_city_m": 1437,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city",
+        "duplicate_center"
+      ],
+      "twins": [
+        "spreewald_skatepark_lubbenau",
+        "spreewald_gartenanlage_freizeit_73_ev",
+        "spreewald_lubbenauer_hofgarten",
+        "spreewald_blau_gelb_arena_tsg_lubbenau",
+        "spreewald_bogenschiessplatz_ralf",
+        "spreewald_schloss_lubbenau"
+      ]
+    },
+    {
+      "id": "spreewald_magic_moments",
+      "name": "Magic Moments",
+      "category": "souvenir",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.86839580000001,
+        "lng": 13.967114800000001
+      },
+      "query": "Magic Moments, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.3670668,
+        "lng": 12.4373876,
+        "display_name": "Magic Moments Massagelounge, Föpplstraße, Leipzig, Deutschland",
+        "class": "shop",
+        "type": "massage",
+        "provider": "photon"
+      },
+      "delta_m": 119420,
+      "from_city_m": 959,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "spreewald_parkplatz_am_bahnhof",
+      "name": "Parkplatz am Bahnhof",
+      "category": "bahnhof",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.86072576764706,
+        "lng": 13.962395366176471
+      },
+      "query": "Parkplatz am Bahnhof, Lübbenau, Germany",
+      "osm": {
+        "lat": 52.2623213,
+        "lng": 12.9267213,
+        "display_name": "Parkplatz am Bahnhof, Straße am Bahnhof, Beelitz, Deutschland",
+        "class": "amenity",
+        "type": "parking",
+        "provider": "photon"
+      },
+      "delta_m": 83708,
+      "from_city_m": 784,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "spreewald_stadtkirche_st_nikolai",
+      "name": "Stadtkirche St. Nikolai",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.86787153333333,
+        "lng": 13.9693518
+      },
+      "query": "Stadtkirche St. Nikolai, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.7439882,
+        "lng": 14.6480296,
+        "display_name": "Stadtkirche St. Nikolai, Am Markt, Forst (Lausitz), Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 48653,
+      "from_city_m": 1090,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "spreewald_garten_grabpflege_martina_molle",
+      "name": "Garten & Grabpflege Martina Molle",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.8699848,
+        "lng": 13.9576324
+      },
+      "query": "Garten, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.861174,
+        "lng": 13.9720316,
+        "display_name": "Kleingartenweg, Stottoff - Štotup, Lübbenau/Spreewald, Oberspreewald-Lausitz - Górne Błota-Łužyca, Brandenburg, 03222, Deutschland",
+        "class": "highway",
+        "type": "residential",
+        "importance": 0.053386769665064435,
+        "osm_type": "way",
+        "osm_id": 39044881,
+        "provider": "nominatim"
+      },
+      "delta_m": 1392,
+      "from_city_m": 561,
+      "status": "CHECK",
+      "flags": [
+        "house_like_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "spreewald_freilandmuseum_lehde",
+      "name": "Freilandmuseum Lehde",
+      "category": "radweg",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.8625756,
+        "lng": 13.9910696
+      },
+      "query": "Freilandmuseum Lehde, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8624234,
+        "lng": 13.992456,
+        "display_name": "Freilandmuseum Lehde, 1a, An der Giglitza, Lehde, Lübbenau/Spreewald, Oberspreewald-Lausitz - Górne Błota-Łužyca, Brandenburg, 03222, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.17283327415591612,
+        "osm_type": "relation",
+        "osm_id": 20608202,
+        "provider": "nominatim"
+      },
+      "delta_m": 97,
+      "from_city_m": 2568,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "spreewald_gurkenmuseum",
+      "name": "Gurkenmuseum",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.8668464,
+        "lng": 13.991088999999999
+      },
+      "query": "Gurkenmuseum, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8660418,
+        "lng": 13.9910155,
+        "display_name": "Gurkenmuseum, 6, An der Dolzke, Lehde, Lübbenau/Spreewald, Oberspreewald-Lausitz - Górne Błota-Łužyca, Brandenburg, 03222, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.00005343633173109052,
+        "osm_type": "node",
+        "osm_id": 748503040,
+        "provider": "nominatim"
+      },
+      "delta_m": 90,
+      "from_city_m": 2554,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "spreewald_lubbenau",
+      "name": "Lübbenau",
+      "category": "bahnhof",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.861344125,
+        "lng": 13.9608075
+      },
+      "query": "Lübbenau, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8620528,
+        "lng": 13.9611658,
+        "display_name": "Lübbenau (Spreewald) / Lubnjow (Błota), Bahnhofstraße, Stottoff - Štotup, Lübbenau/Spreewald, Oberspreewald-Lausitz - Górne Błota-Łužyca, Brandenburg, 03222, Deutschland",
+        "class": "railway",
+        "type": "station",
+        "importance": 0.2782362227145218,
+        "osm_type": "node",
+        "osm_id": 2319624842,
+        "provider": "nominatim"
+      },
+      "delta_m": 83,
+      "from_city_m": 658,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "spreewald_sauenmoor",
+      "name": "Sauenmoor",
+      "category": "wanderung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.848280928571434,
+        "lng": 14.008949876190478
+      },
+      "query": "Sauenmoor, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8476402,
+        "lng": 14.008588,
+        "display_name": "Sauenmoor, Schwarzer Weg, Boblitz - Bobolce, Lübbenau/Spreewald, Oberspreewald-Lausitz - Górne Błota-Łužyca, Brandenburg, 03222, Deutschland",
+        "class": "information",
+        "type": "board",
+        "importance": 0.00005343633173109052,
+        "osm_type": "node",
+        "osm_id": 5179763862,
+        "provider": "nominatim"
+      },
+      "delta_m": 75,
+      "from_city_m": 4233,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "spreewald_barzlin",
+      "name": "Barzlin",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.89556514375001,
+        "lng": 13.950406831249996
+      },
+      "query": "Barzlin, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.895993,
+        "lng": 13.9511778,
+        "display_name": "Barzlin, Stennewitzer Ringstraße, Zerkwitz, Lübbenau/Spreewald, Oberspreewald-Lausitz - Górne Błota-Łužyca, Brandenburg, 03222, Deutschland",
+        "class": "information",
+        "type": "board",
+        "importance": 0.00005585183489733757,
+        "osm_type": "node",
+        "osm_id": 1978618817,
+        "provider": "nominatim"
+      },
+      "delta_m": 71,
+      "from_city_m": 3354,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "spreewald_gasthaus_wotschofska",
+      "name": "Gasthaus Wotschofska",
+      "category": "wanderung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.87438977777778,
+        "lng": 14.008836666666665
+      },
+      "query": "Gasthaus Wotschofska, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8744709,
+        "lng": 14.0092583,
+        "display_name": "Gasthaus Wotschofska, Leiper Weg, Lehde, Lübbenau/Spreewald, Oberspreewald-Lausitz - Górne Błota-Łužyca, Brandenburg, 03222, Deutschland",
+        "class": "amenity",
+        "type": "biergarten",
+        "importance": 0.00005343633173109052,
+        "osm_type": "way",
+        "osm_id": 235988194,
+        "provider": "nominatim"
+      },
+      "delta_m": 30,
+      "from_city_m": 3896,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "spreewald_brucke"
+      ]
+    },
+    {
+      "id": "spreewald_lubbenau_bahnhof",
+      "name": "Lübbenau, Bahnhof",
+      "category": "bahnhof",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.86223866666666,
+        "lng": 13.961184222222222
+      },
+      "query": "Lübbenau, Bahnhof, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8620528,
+        "lng": 13.9611658,
+        "display_name": "Lübbenau (Spreewald) / Lubnjow (Błota), Bahnhofstraße, Stottoff - Štotup, Lübbenau/Spreewald, Oberspreewald-Lausitz - Górne Błota-Łužyca, Brandenburg, 03222, Deutschland",
+        "class": "railway",
+        "type": "station",
+        "importance": 0.2782362227145218,
+        "osm_type": "node",
+        "osm_id": 2319624842,
+        "provider": "nominatim"
+      },
+      "delta_m": 21,
+      "from_city_m": 613,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "spreewald_osm_post_box_4511333138"
+      ]
+    },
+    {
+      "id": "spreewald_schloss_lubbenau",
+      "name": "Schloss Lübbenau",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.86917499000001,
+        "lng": 13.973975189999999
+      },
+      "query": "Schloss Lübbenau, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8691173,
+        "lng": 13.9739442,
+        "display_name": "Schloß Lübbenau, 6, Schloßbezirk, Erlenhorst, Stottoff - Štotup, Lübbenau/Spreewald, Oberspreewald-Lausitz - Górne Błota-Łužyca, Brandenburg, 03222, Deutschland",
+        "class": "tourism",
+        "type": "hotel",
+        "importance": 0.23648094285300414,
+        "osm_type": "way",
+        "osm_id": 37865839,
+        "provider": "nominatim"
+      },
+      "delta_m": 7,
+      "from_city_m": 1434,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "spreewald_skatepark_lubbenau",
+        "spreewald_gartenanlage_freizeit_73_ev",
+        "spreewald_lubbenauer_hofgarten",
+        "spreewald_russische_kriegsgraber",
+        "spreewald_blau_gelb_arena_tsg_lubbenau",
+        "spreewald_bogenschiessplatz_ralf"
+      ]
+    },
+    {
+      "id": "spreewald_st_maria_verkundigung",
+      "name": "St. Maria Verkündigung",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.863747090909094,
+        "lng": 13.953935909090909
+      },
+      "query": "St. Maria Verkündigung, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8637497,
+        "lng": 13.9538988,
+        "display_name": "St.-Maria-Verkündigung-Kirche, Straße des Friedens, Stottoff - Štotup, Lübbenau/Spreewald, Oberspreewald-Lausitz - Górne Błota-Łužyca, Brandenburg, 03222, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.1570394422394589,
+        "osm_type": "way",
+        "osm_id": 56672508,
+        "provider": "nominatim"
+      },
+      "delta_m": 3,
+      "from_city_m": 193,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "spreewald_bahnhofstrasse"
+      ]
+    },
+    {
+      "id": "spreewald_spreewelten_hallenbad_delphin",
+      "name": "Spreewelten Hallenbad Delphin",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.85824116666666,
+        "lng": 13.939198166666666
+      },
+      "query": "Spreewelten Hallenbad Delphin, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8582676,
+        "lng": 13.9391997,
+        "display_name": "Delphin-Hallenbad, Werner-Seelenbinder-Straße, Lübbenau/Spreewald, Deutschland",
+        "class": "leisure",
+        "type": "water_park",
+        "provider": "photon"
+      },
+      "delta_m": 3,
+      "from_city_m": 1295,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "spreewald_osm_transit_10918116761"
+      ]
+    },
+    {
+      "id": "spreewald_evangelisches_pfarramt_lubbenau_neustadt",
+      "name": "Evangelisches Pfarramt Lübbenau-Neustadt",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.863568,
+        "lng": 13.955026428571427
+      },
+      "query": "Evangelisches Pfarramt Lübbenau-Neustadt, Lübbenau",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 225,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "spreewald_evangelischer_friedhof_lubbenau_neustadt"
+      ]
+    },
+    {
+      "id": "spreewald_evangelischer_friedhof_lubbenau_neustadt",
+      "name": "Evangelischer Friedhof Lübbenau-Neustadt",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.863568,
+        "lng": 13.955026428571427
+      },
+      "query": "Evangelischer Friedhof Lübbenau-Neustadt, Lübbenau",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 225,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "spreewald_evangelisches_pfarramt_lubbenau_neustadt"
+      ]
+    },
+    {
+      "id": "spreewald_dorfkirche_zerkwitz",
+      "name": "Dorfkirche Zerkwitz",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.862483250000004,
+        "lng": 13.929167085714287
+      },
+      "query": "Dorfkirche Zerkwitz, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8624793,
+        "lng": 13.9291671,
+        "display_name": "Dorfkirche, 14, Hauptstraße, Zerkwitz, Lübbenau/Spreewald, Oberspreewald-Lausitz - Górne Błota-Łužyca, Brandenburg, 03222, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.1679799034751623,
+        "osm_type": "way",
+        "osm_id": 330352324,
+        "provider": "nominatim"
+      },
+      "delta_m": 0,
+      "from_city_m": 1735,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "spreewald_schleuse_barzlin",
+        "spreewald_schwarzer_weg"
+      ]
+    },
+    {
+      "id": "spreewald_parkplatz_poststrasse_ost_8_tag",
+      "name": "Parkplatz, Poststraße Ost 8€/Tag",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.866988074999995,
+        "lng": 13.96762465
+      },
+      "query": "Parkplatz, Poststraße Ost, Lübbenau, Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 953,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "spreewald_blau_gelb_arena_tsg_lubbenau",
+      "name": "Blau-Gelb Arena TSG Lübbenau",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.86916852941175,
+        "lng": 13.974013411764705
+      },
+      "query": "Blau-Gelb Arena TSG, Lübbenau, Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 1437,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "spreewald_skatepark_lubbenau",
+        "spreewald_gartenanlage_freizeit_73_ev",
+        "spreewald_lubbenauer_hofgarten",
+        "spreewald_russische_kriegsgraber",
+        "spreewald_bogenschiessplatz_ralf",
+        "spreewald_schloss_lubbenau"
+      ]
+    },
+    {
+      "id": "spreewald_bergbau_skulptur_baggerschaufel",
+      "name": "Bergbau-Skulptur Baggerschaufel",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.8615345,
+        "lng": 13.958362500000002
+      },
+      "query": "Bergbau-Skulptur Baggerschaufel, Lübbenau",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 533,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "spreewald_bootsanleger_fur_gewerbliche_kahne",
+      "name": "Bootsanleger für gewerbliche Kähne",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.86305557142857,
+        "lng": 13.98680485714286
+      },
+      "query": "Bootsanleger für gewerbliche, Lübbenau, Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 2271,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "spreewald_bootsverleih_bootshaus_kaupen",
+      "name": "Bootsverleih Bootshaus Kaupen",
+      "category": "tour",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.866242,
+        "lng": 13.9791066
+      },
+      "query": "Bootsverleih Bootshaus Kaupen, Lübbenau",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 1729,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "spreewald_tabakborse_ramona_hottas",
+      "name": "Tabakbörse Ramona Hottas",
+      "category": "souvenir",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.859691399999996,
+        "lng": 13.9511656
+      },
+      "query": "Tabakbörse Ramona Hottas, Lübbenau",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 672,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "spreewald_osm_post_box_11164750905"
+      ]
+    },
+    {
+      "id": "spreewald_gurkenmuseum_bauernhaus_in_der_hotelanlage_starick",
+      "name": "Gurkenmuseum & Bauernhaus in der Hotelanlage Starick",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.86599558333332,
+        "lng": 13.990185916666666
+      },
+      "query": "Gurkenmuseum, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8660418,
+        "lng": 13.9910155,
+        "display_name": "Gurkenmuseum, 6, An der Dolzke, Lehde, Lübbenau/Spreewald, Oberspreewald-Lausitz - Górne Błota-Łužyca, Brandenburg, 03222, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.00005343633173109052,
+        "osm_type": "node",
+        "osm_id": 748503040,
+        "provider": "nominatim"
+      },
+      "delta_m": 57,
+      "from_city_m": 2488,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "spreewald_spreewelten_bad_lubbenau",
+      "name": "Spreewelten Bad Lübbenau",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.856697499999996,
+        "lng": 13.952878026315787
+      },
+      "query": "Spreewelten Bad Lübbenau, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8567219,
+        "lng": 13.9535901,
+        "display_name": "Spreewelten Bad, 13, Alte Huttung, Stottoff - Štotup, Lübbenau/Spreewald, Oberspreewald-Lausitz - Górne Błota-Łužyca, Brandenburg, 03222, Deutschland",
+        "class": "leisure",
+        "type": "water_park",
+        "importance": 0.00005343633173109052,
+        "osm_type": "way",
+        "osm_id": 56253892,
+        "provider": "nominatim"
+      },
+      "delta_m": 49,
+      "from_city_m": 979,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "spreewald_hafen_snack_imbiss_am_gr_spreewaldhafen",
+      "name": "Hafen Snack - Imbiss am gr. Spreewaldhafen",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.867160909090906,
+        "lng": 13.97331181818182
+      },
+      "query": "Hafen Snack, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8669536,
+        "lng": 13.9728629,
+        "display_name": "Hafen-Snack, 77a, Dammstraße, Erlenhorst, Stottoff - Štotup, Lübbenau/Spreewald, Oberspreewald-Lausitz - Górne Błota-Łužyca, Brandenburg, 03222, Deutschland",
+        "class": "amenity",
+        "type": "fast_food",
+        "importance": 0.00005343633173109052,
+        "osm_type": "node",
+        "osm_id": 1760682861,
+        "provider": "nominatim"
+      },
+      "delta_m": 38,
+      "from_city_m": 1342,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "spreewald_kleiner_hafen_am_spreeschlosschen_lubbenau_kahnfahrmannsverein_der_spr",
+      "name": "Kleiner Hafen am Spreeschlößchen Lübbenau/ Kahnfährmannsverein der Spreewaldfreunde",
+      "category": "hafen",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.869870444444445,
+        "lng": 13.970128666666666
+      },
+      "query": "Kleiner Hafen am Spreeschlößchen Lübbenau/, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8698923,
+        "lng": 13.9706047,
+        "display_name": "Am Spreeschlößchen, Spreestraße, Lübbenau/Spreewald, Deutschland",
+        "class": "leisure",
+        "type": "marina",
+        "provider": "photon"
+      },
+      "delta_m": 33,
+      "from_city_m": 1213,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "spreewald_grosser_spreewaldhafen_lubbenau",
+      "name": "Großer Spreewaldhafen Lübbenau",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.8673676,
+        "lng": 13.9728476
+      },
+      "query": "Großer Spreewaldhafen Lübbenau, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.867202,
+        "lng": 13.973166,
+        "display_name": "Großer Spreewaldhafen, Erlenhorst, Stottoff - Štotup, Lübbenau/Spreewald, Oberspreewald-Lausitz - Górne Błota-Łužyca, Brandenburg, 03222, Deutschland",
+        "class": "highway",
+        "type": "pedestrian",
+        "importance": 0.053386769665064435,
+        "osm_type": "way",
+        "osm_id": 316312112,
+        "provider": "nominatim"
+      },
+      "delta_m": 29,
+      "from_city_m": 1314,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "spreewald_kleiner_hafen_kahnfahrten_am_muhlenwehr",
+      "name": "Kleiner Hafen, Kahnfahrten am Mühlenwehr",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.868190857142864,
+        "lng": 13.971351571428572
+      },
+      "query": "Kleiner Hafen, Kahnfahrten am Mühlenwehr, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8684002,
+        "lng": 13.9716152,
+        "display_name": "Kleiner Hafen am Mühlenwehr, Färbergasse, Lübbenau/Spreewald, Deutschland",
+        "class": "amenity",
+        "type": "boat_rental",
+        "provider": "photon"
+      },
+      "delta_m": 29,
+      "from_city_m": 1231,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "spreewald_bootsverleih_richter_kajaksports",
+      "name": "Bootsverleih Richter / Kajaksports",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.866528200000005,
+        "lng": 13.974624
+      },
+      "query": "Bootsverleih Richter / Kajaksports, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8664283,
+        "lng": 13.9742971,
+        "display_name": "Bootsverleih Richter, Dammstraße, Lübbenau/Spreewald, Deutschland",
+        "class": "amenity",
+        "type": "boat_rental",
+        "provider": "photon"
+      },
+      "delta_m": 25,
+      "from_city_m": 1423,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "spreewald_streichelzoo_vom_landhotel_burg",
+      "name": "Streichelzoo vom Landhotel Burg",
+      "category": "freizeitpark",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.85555171,
+        "lng": 14.10975808
+      },
+      "query": "Streichelzoo vom Landhotel Burg, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8554026,
+        "lng": 14.1100299,
+        "display_name": "Streichelzoo vom Landhotel Burg, Weidenweg, Burg (Spreewald), Deutschland",
+        "class": "tourism",
+        "type": "zoo",
+        "provider": "photon"
+      },
+      "delta_m": 25,
+      "from_city_m": 10756,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "spreewald_kreuzgraben_dorothengraben",
+      "name": "Kreuzgraben - Dorothengraben",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.87949581025641,
+        "lng": 13.960889933333332
+      },
+      "query": "Kreuzgraben, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8797006,
+        "lng": 13.961008,
+        "display_name": "Kreuzgraben, Erlenhorst, Stottoff - Štotup, Lübbenau/Spreewald, Oberspreewald-Lausitz - Górne Błota-Łužyca, Brandenburg, 03222, Deutschland",
+        "class": "waterway",
+        "type": "stream",
+        "importance": 0.10672010299839778,
+        "osm_type": "way",
+        "osm_id": 150255505,
+        "provider": "nominatim"
+      },
+      "delta_m": 24,
+      "from_city_m": 1629,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "spreewald_parkplatz_lubbenau",
+      "name": "Parkplatz Lübbenau",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.86160575714286,
+        "lng": 13.967768542857142
+      },
+      "query": "Parkplatz Lübbenau, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8615379,
+        "lng": 13.9680871,
+        "display_name": "Pkw-Parkplatz Dammstraße, P2, Kleingartenweg, Stottoff - Štotup, Lübbenau/Spreewald, Oberspreewald-Lausitz - Górne Błota-Łužyca, Brandenburg, 03222, Deutschland",
+        "class": "amenity",
+        "type": "parking",
+        "importance": 0.00005343633173109052,
+        "osm_type": "way",
+        "osm_id": 135931028,
+        "provider": "nominatim"
+      },
+      "delta_m": 23,
+      "from_city_m": 1041,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "spreewald_bootsverleih_spreewald_kanus_kajak_kanu",
+      "name": "Bootsverleih Spreewald-Kanus / Kajak / Kanu /",
+      "category": "tour",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.87001719999999,
+        "lng": 13.9801444
+      },
+      "query": "Bootsverleih Spreewald-Kanus /, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8701074,
+        "lng": 13.9799811,
+        "display_name": "Spreewald-Kanus, Schloßbezirk, Lübbenau/Spreewald, Deutschland",
+        "class": "amenity",
+        "type": "boat_rental",
+        "provider": "photon"
+      },
+      "delta_m": 15,
+      "from_city_m": 1867,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "spreewald_zeitlos_spiele_park",
+      "name": "Zeitlos-Spiele-Park",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.86056991999999,
+        "lng": 13.947578819999999
+      },
+      "query": "Zeitlos-Spiele-Park, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8604837,
+        "lng": 13.9476735,
+        "display_name": "Zeitlos Spielepark, Straße der Jugend, Lübbenau/Spreewald, Deutschland",
+        "class": "leisure",
+        "type": "playground",
+        "provider": "photon"
+      },
+      "delta_m": 12,
+      "from_city_m": 700,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "spreewald_dschungel_spielplatz",
+      "name": "Dschungel-Spielplatz",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.86299395,
+        "lng": 13.93982145
+      },
+      "query": "Dschungel-Spielplatz, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8630488,
+        "lng": 13.9399107,
+        "display_name": "Dschungel-Spielplatz, Dr.-Albert-Schweitzer-Straße, Kleeden - Kłodna, Lübbenau/Spreewald, Oberspreewald-Lausitz - Górne Błota-Łužyca, Brandenburg, 03222, Deutschland",
+        "class": "leisure",
+        "type": "playground",
+        "importance": 0.00005343633173109052,
+        "osm_type": "way",
+        "osm_id": 665264419,
+        "provider": "nominatim"
+      },
+      "delta_m": 9,
+      "from_city_m": 1010,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "spreewald_haus_fur_mensch_und_natur",
+      "name": "Haus für Mensch und Natur",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.86929216666667,
+        "lng": 13.968521333333333
+      },
+      "query": "Haus für Mensch, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.86922,
+        "lng": 13.968538,
+        "display_name": "Haus für Mensch und Natur, 9, Schulstraße, Erlenhorst, Stottoff - Štotup, Lübbenau/Spreewald, Oberspreewald-Lausitz - Górne Błota-Łužyca, Brandenburg, 03222, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.00005343633173109052,
+        "osm_type": "node",
+        "osm_id": 8978006356,
+        "provider": "nominatim"
+      },
+      "delta_m": 8,
+      "from_city_m": 1086,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "spreewald_kanuheim",
+      "name": "Kanuheim",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.8668768,
+        "lng": 13.9752288
+      },
+      "query": "Kanuheim, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8668431,
+        "lng": 13.9752958,
+        "display_name": "Kanuheim, Leiper Weg, Erlenhorst, Stottoff - Štotup, Lübbenau/Spreewald, Oberspreewald-Lausitz - Górne Błota-Łužyca, Brandenburg, 03222, Deutschland",
+        "class": "tourism",
+        "type": "chalet",
+        "importance": 0.00005343633173109052,
+        "osm_type": "way",
+        "osm_id": 100965200,
+        "provider": "nominatim"
+      },
+      "delta_m": 6,
+      "from_city_m": 1468,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "spreewald_marstall_lubbenau",
+      "name": "Marstall Lübbenau",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.868297600000005,
+        "lng": 13.9740724
+      },
+      "query": "Marstall Lübbenau, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8682712,
+        "lng": 13.9741491,
+        "display_name": "Marstall, Schloßbezirk, Erlenhorst, Stottoff - Štotup, Lübbenau/Spreewald, Oberspreewald-Lausitz - Górne Błota-Łužyca, Brandenburg, 03222, Deutschland",
+        "class": "building",
+        "type": "yes",
+        "importance": 0.23648094285300414,
+        "osm_type": "way",
+        "osm_id": 100963076,
+        "provider": "nominatim"
+      },
+      "delta_m": 6,
+      "from_city_m": 1416,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "spreewald_souvenirs_und_spielwaren_angela_glaubitz",
+      "name": "Souvenirs und Spielwaren Angela Glaubitz",
+      "category": "souvenir",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.86724783333333,
+        "lng": 13.972140166666668
+      },
+      "query": "Souvenirs, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8672743,
+        "lng": 13.9722046,
+        "display_name": "Souvenirs & Spielwaren, Dammstraße, Erlenhorst, Stottoff - Štotup, Lübbenau/Spreewald, Oberspreewald-Lausitz - Górne Błota-Łužyca, Brandenburg, 03222, Deutschland",
+        "class": "shop",
+        "type": "toys",
+        "importance": 0.00005343633173109052,
+        "osm_type": "node",
+        "osm_id": 1760682899,
+        "provider": "nominatim"
+      },
+      "delta_m": 5,
+      "from_city_m": 1264,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "spreewald_orangerie_schloss_lubbenau",
+      "name": "Orangerie Schloss Lübbenau",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.86823,
+        "lng": 13.9754392
+      },
+      "query": "Orangerie Schloss Lübbenau, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.868249,
+        "lng": 13.9755023,
+        "display_name": "Orangerie, Schloßbezirk, Lübbenau/Spreewald, Deutschland",
+        "class": "building",
+        "type": "yes",
+        "provider": "photon"
+      },
+      "delta_m": 5,
+      "from_city_m": 1506,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "spreewald_fahrrad_goyn",
+      "name": "Fahrrad Goyn",
+      "category": "radweg",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.86479340000001,
+        "lng": 13.9559982
+      },
+      "query": "Fahrrad Goyn, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8647832,
+        "lng": 13.9560521,
+        "display_name": "Fahrrad Goyn, 30, Bahnhofstraße, Stottoff - Štotup, Lübbenau/Spreewald, Oberspreewald-Lausitz - Górne Błota-Łužyca, Brandenburg, 03222, Deutschland",
+        "class": "shop",
+        "type": "bicycle",
+        "importance": 0.00005343633173109052,
+        "osm_type": "way",
+        "osm_id": 136732240,
+        "provider": "nominatim"
+      },
+      "delta_m": 4,
+      "from_city_m": 159,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "spreewald_stelter_s_freizeitoase_lubbenau_altstadt",
+      "name": "Stelter's Freizeitoase Lübbenau/Altstadt",
+      "category": "radweg",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.863206999999996,
+        "lng": 13.961573285714284
+      },
+      "query": "Stelter's Freizeitoase Lübbenau/Altstadt, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8632079,
+        "lng": 13.9616307,
+        "display_name": "Ferienwohnungen Stelter's Freizeitoase, Poststraße, Lübbenau/Spreewald, Deutschland",
+        "class": "tourism",
+        "type": "apartment",
+        "provider": "photon"
+      },
+      "delta_m": 4,
+      "from_city_m": 581,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "spreewald_spreewald_museum",
+      "name": "Spreewald-Museum",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.86950383333333,
+        "lng": 13.965404666666666
+      },
+      "query": "Spreewald-Museum, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8694808,
+        "lng": 13.9654011,
+        "display_name": "Spreewald-Museum Lübbenau, 12, Topfmarkt, Erlenhorst, Stottoff - Štotup, Lübbenau/Spreewald, Oberspreewald-Lausitz - Górne Błota-Łužyca, Brandenburg, 03222, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.18157831638402872,
+        "osm_type": "way",
+        "osm_id": 137691658,
+        "provider": "nominatim"
+      },
+      "delta_m": 3,
+      "from_city_m": 904,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "spreewald_bootsverleih_petrick",
+      "name": "Bootsverleih Petrick",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.870919,
+        "lng": 13.9764026
+      },
+      "query": "Bootsverleih Petrick, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8709259,
+        "lng": 13.9764444,
+        "display_name": "Bootsverleih Petrick, 22, Schloßbezirk, Erlenhorst, Stottoff - Štotup, Lübbenau/Spreewald, Oberspreewald-Lausitz - Górne Błota-Łužyca, Brandenburg, 03222, Deutschland",
+        "class": "amenity",
+        "type": "boat_rental",
+        "importance": 0.00005343633173109052,
+        "osm_type": "way",
+        "osm_id": 102072128,
+        "provider": "nominatim"
+      },
+      "delta_m": 3,
+      "from_city_m": 1655,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "spreewald_bunte_buhne",
+      "name": "Bunte Bühne",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.861564,
+        "lng": 13.96047288888889
+      },
+      "query": "Bunte Bühne, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8615634,
+        "lng": 13.9604239,
+        "display_name": "Bunte Bühne Lübbenau, 61, Güterbahnhofstraße, Stottoff - Štotup, Lübbenau/Spreewald, Oberspreewald-Lausitz - Górne Błota-Łužyca, Brandenburg, 03222, Deutschland",
+        "class": "amenity",
+        "type": "theatre",
+        "importance": 0.00005343633173109052,
+        "osm_type": "way",
+        "osm_id": 137731097,
+        "provider": "nominatim"
+      },
+      "delta_m": 3,
+      "from_city_m": 624,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "spreewald_fahrrad_vogi_verkauf_service_verleih",
+      "name": "Fahrrad Vogi - Verkauf - Service - Verleih",
+      "category": "radweg",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.864938222222214,
+        "lng": 13.964012666666667
+      },
+      "query": "Fahrrad Vogi, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8649248,
+        "lng": 13.9640553,
+        "display_name": "Vogi, Poststraße, Lübbenau/Spreewald, Deutschland",
+        "class": "shop",
+        "type": "bicycle",
+        "provider": "photon"
+      },
+      "delta_m": 3,
+      "from_city_m": 693,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "spreewald_bootsverleih_hannemann",
+      "name": "Bootsverleih Hannemann",
+      "category": "tour",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.8707988,
+        "lng": 13.970467600000001
+      },
+      "query": "Bootsverleih Hannemann, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8707751,
+        "lng": 13.9704752,
+        "display_name": "Bootsverleih Hannemann, Am Wasser, Erlenhorst, Stottoff - Štotup, Lübbenau/Spreewald, Oberspreewald-Lausitz - Górne Błota-Łužyca, Brandenburg, 03222, Deutschland",
+        "class": "amenity",
+        "type": "boat_rental",
+        "importance": 0.00005343633173109052,
+        "osm_type": "node",
+        "osm_id": 876355390,
+        "provider": "nominatim"
+      },
+      "delta_m": 3,
+      "from_city_m": 1278,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "spreewald_landwarenhaus_gross_beuchow",
+      "name": "Landwarenhaus Gross Beuchow",
+      "category": "radweg",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.8490278,
+        "lng": 13.906195599999998
+      },
+      "query": "Landwarenhaus Gross Beuchow, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.8490201,
+        "lng": 13.9062258,
+        "display_name": "Landwarenhaus Gross Beuchow, 10, Beuchower Hauptstraße, Groß Beuchow, Beuchow, Lübbenau/Spreewald, Oberspreewald-Lausitz - Górne Błota-Łužyca, Brandenburg, 03222, Deutschland",
+        "class": "amenity",
+        "type": "restaurant",
+        "importance": 0.00005343633173109052,
+        "osm_type": "way",
+        "osm_id": 631657921,
+        "provider": "nominatim"
+      },
+      "delta_m": 2,
+      "from_city_m": 3756,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "spreewald_raucherei_spreewaldspezialitaten",
+      "name": "Räucherei &Spreewaldspezialitäten",
+      "category": "radweg",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.86202540000001,
+        "lng": 13.930746199999998
+      },
+      "query": "Räucherei &Spreewaldspezialitäten, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.86201,
+        "lng": 13.9307349,
+        "display_name": "Räucherei - Spreewaldspezialitäten, 17, Hauptstraße, Zerkwitz, Lübbenau/Spreewald, Oberspreewald-Lausitz - Górne Błota-Łužyca, Brandenburg, 03222, Deutschland",
+        "class": "amenity",
+        "type": "cafe",
+        "importance": 0.00005343633173109052,
+        "osm_type": "way",
+        "osm_id": 330352322,
+        "provider": "nominatim"
+      },
+      "delta_m": 2,
+      "from_city_m": 1640,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "spreewald_radschober",
+      "name": "Radschober",
+      "category": "radweg",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.86738379999999,
+        "lng": 13.966966399999999
+      },
+      "query": "Radschober, Lübbenau, Germany",
+      "osm": {
+        "lat": 51.867382,
+        "lng": 13.9669552,
+        "display_name": "Radschober, Am Haag, Erlenhorst, Stottoff - Štotup, Lübbenau/Spreewald, Oberspreewald-Lausitz - Górne Błota-Łužyca, Brandenburg, 03222, Deutschland",
+        "class": "amenity",
+        "type": "bicycle_parking",
+        "importance": 0.00005343633173109052,
+        "osm_type": "way",
+        "osm_id": 1125942597,
+        "provider": "nominatim"
+      },
+      "delta_m": 1,
+      "from_city_m": 918,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    }
+  ]
+}

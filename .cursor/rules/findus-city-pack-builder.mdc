@@ -10,10 +10,10 @@ alwaysApply: false
 1. **Ein Datensatz pro Stadt** = eine Datei `staedte/<city_id>.json`. User lädt genau dieses Pack → SQLite (POIs, Fakten, Transit, Mobility, Live-Prompts, Aussprache-Scan) **plus** `_coverage` Stadt-Fläche für Stempelkarte.
 2. **Stadtauswahl-Cover**: User-Bild → Queue (`city:cover:queue`) → Cover-Agent stylisiert im **Kernrollen-Stil** (andere Perspektive, bewegliche Elemente, Himmel) → `city:cover:apply` nach `assets/onboarding/city-<id>.png` + `cityCovers.ts`. Fallback: Wikipedia-Thumbnail (`city:cover` / bei `city:skeleton`). Lokales Asset schlägt URL.
 3. **`_coverage` ≠ POI-Polygone**: BBox (`latMin/latMax/lngMin/lngMax`) + optional Stadt-Polygon steuert „% der Stadt erkundet“ und „in dieser Stadt“. Muss im Pack mitgeliefert werden (nicht nur App-Builtin).
-4. **Pack = stabil (~5 Jahre)**: Geschichte, Architektur, Orientierung, was man am Ort typischerweise machen kann, feste Besonderheiten. Keine Preise, keine Speisekarten-Inhalte, keine „heute Abend“-Termine, keine Hotelpreise.
+4. **Pack = stabil (~5 Jahre)**: Geschichte, Architektur, Orientierung, was man am Ort typischerweise machen kann, feste Besonderheiten. Keine Preise, keine Speisekarten-Inhalte, keine „heute Abend“-Termine, keine Hotelpreise. **Review-Facetten** (`city:review-facets`) sind erlaubt: nur stabile Tags aus Gäste-Reviews (steak, vegan, terrasse, …), kein Review-Volltext, keine Preise.
 5. **Live nur als Hinweis + Prompt**: Pro Ort Deep-Einträge mit Tags `live_hint` / Text `LIVE: …`. Stadtweit zusätzlich `_live_research[]`.
 6. **Modul 1** liest Pack für Story/Teaser/Polygon. **Modul 2** nutzt Pack zuerst (`packFactLookup`); fehlt etwas oder ist live → selbst recherchieren.
-7. **GPS**: Trigger-Zentrum = Google-Maps-Navigationspin / Haupteingang. **Jedes Main-Gebäude: Polygon**. `city:audit-entrances` + Gate.
+7. **GPS**: Trigger-Zentrum = Google-Maps-Navigationspin / Haupteingang. **Jedes Main-Gebäude: Polygon** (echte OSM-Umrisse, keine GPS-Box — `city:osm-footprints`, Teil von `city:gps-wegweiser`). Nach Build/Merge immer `city:gps-wegweiser` (Story-only Entrance-Audit + visuelle Approaches + OSM-Footprints). Absurde Google-Sprünge nicht forcen.
 8. **Aussprache**: Pack-Scan → Stadt-SQLite + Dictionary; TTS Modul 1+2 dieselbe Pipeline.
 9. **Breite vor Knappheit**: Lieber zu viele Orte (Story + Directory) als ein mageres Pack. Kleine Orte ≈12–25 Stories, Mittelstädte ≈25–45, große Städte (Lübeck-Klasse) ≈45+, Metropolen (Hamburg-Klasse) ≈80+ Stories — **nie** bei ~20 Stories für eine große Stadt stehen bleiben. Google Places Discovery mit Pagination (`placesTextAll`), erweiterten `STORY_DISCOVERY_QUERIES`, skalierendem Radius.
 9b. **Tiefe skaliert mit Stadtgröße (Depth Balance)**: Kleine Insel/Dorf darf **nicht** ähnlich viele Offline-FAQs oder gleichmäßige Deep-Dichte wie eine Millionenstadt haben. Messlatte = `deepAvg` der Story-Orte + sinnvolle `_offline_qa` (Infrastruktur + max. wenige spezifische Spot-FAQs), **nicht** Template-`spot_faq`-Spam. Zielband: Kleinort Stories ~12–18 deepAvg; Mittel ~8–12; Metro Kern-T1 ~8–15, Gesamt-Story-deepAvg Richtung ≥6–8 (dünne Mikro-Aussichten demoten, nicht 200×1-Fakt). Tool: `npm run city:prune-depth -- --cities … --apply [--demote-thin]`.
@@ -26,8 +26,9 @@ alwaysApply: false
 
 ```text
 npm run city:auto -- --city "Laboe" --id laboe
+→ Wikipedia + Wiki-Tiefe → polish → **review-facets** → **gps-wegweiser-loop** (Pins, OSM-Umrisse, Offline-Karte)
 → Agent-Webresearch (T1 / dünne Stories, Wangerooge-Tiefe)
-→ merge → gate → upload:city
+→ merge → **gps-wegweiser-loop** (automatisch, inkl. Wiki-Tiefe) → gate → upload:city
 ```
 
 Legacy / manuell:
@@ -35,7 +36,7 @@ Legacy / manuell:
 ```text
 city:skeleton → city:directory → city:classify
 → city:research-gaps --google → Deep Research
-→ city:merge-research → city:audit-entrances --apply
+→ city:merge-research → city:gps-wegweiser (in Merge enthalten)
 → city:gate --strict → upload:city
 ```
 
@@ -53,7 +54,7 @@ Legacy (Pinneberg `_t1/_t2`): `node scripts/cityPack/normalizeLegacyPack.mjs --c
 ## Zwei Schichten im Pack
 
 1. **Story / Trigger** (`pack_role: "story"`): tiefe Orte mit Polygon, Approaches, FAQ „Woran erkenne ich…?“, Querverbindungen.
-2. **Directory / Offline-Katalog** (`pack_role: "directory"`): Restaurants, Hotels, Supermärkte, Apotheken, Spielplätze, Golf, Multiplex-Kino, Aktivitäten, Wasserspender … — GPS + Kategorie + knappe Fakten + `LIVE:` für Zeiten/Preise. **Kein proaktives Wegweiser-Spam**; Modul 2 / Offline-Fragen nutzen sie trotzdem.
+2. **Directory / Offline-Katalog** (`pack_role: "directory"`): Restaurants, Hotels, Supermärkte, Apotheken, Spielplätze, Golf, Multiplex-Kino, Aktivitäten, Wasserspender … — GPS + Kategorie + knappe Fakten + `LIVE:` für Zeiten/Preise. Gastro bekommt **Review-Facetten** (steak, vegan, terrasse, …) aus Google-Reviews, damit Modul-2 ohne Live-Fetch präzise sucht. **Kein proaktives Wegweiser-Spam**; Modul 2 / Offline-Fragen nutzen sie trotzdem.
 
 UI-Zahl = Story + Directory (z. B. „160 Orte im Pack“), Trigger nur Story Tier 1–2 (+ selektiv Tier 3).
 

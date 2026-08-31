@@ -213,7 +213,30 @@ export function transformClockTimes(text: string): string {
   );
 }
 
-/** "1. Juni" → "erster Juni" */
+/** "18.08.2026" → "18. August 2026" (sonst buchstabiert TTS die Jahreszahl). */
+export function transformNumericDotDates(text: string): string {
+  const names = [
+    'Januar',
+    'Februar',
+    'März',
+    'April',
+    'Mai',
+    'Juni',
+    'Juli',
+    'August',
+    'September',
+    'Oktober',
+    'November',
+    'Dezember',
+  ];
+  return text.replace(/\b(\d{1,2})\.(\d{1,2})\.(\d{4})\b/g, (full, ds, ms, ys) => {
+    const d = Number(ds);
+    const mo = Number(ms);
+    const y = Number(ys);
+    if (d < 1 || d > 31 || mo < 1 || mo > 12) return full;
+    return `${d}. ${names[mo - 1]} ${y}`;
+  });
+}
 export function transformOrdinalDates(text: string): string {
   const re = new RegExp(`\\b([0-3]?\\d)\\.\\s*(${MONTHS})\\b`, 'gi');
   return text.replace(re, (_m, dayRaw: string, month: string) => {
@@ -292,6 +315,7 @@ const SHORT_GERMAN_NOUNS = new Set([
   'pier',
   'wall',
   'deich',
+  'bahn',
 ]);
 
 /** Audio-only: kurze Nomen + Komposita für eSpeak (UI behält Original). */
@@ -300,7 +324,7 @@ const SHORT_NOUN_AUDIO: Record<string, string> = {
   höfe: 'Höffe',
   hoefe: 'Höffe',
   innenhof: 'Innenhoff',
-  // Bahnhof/kurz/heißt: nicht hier — Cartesia-IPA in cartesiaInlinePhonemes.ts
+  // Bahnhof/kurz/heißt: nicht hier — Cartesia-IPA liegt im Phoneme-Pfad.
   bauernhof: 'Bauernhoff',
   schulhof: 'Schulhoff',
   hinterhof: 'Hinterhoff',
@@ -308,6 +332,15 @@ const SHORT_NOUN_AUDIO: Record<string, string> = {
   gasthof: 'Gasthoff',
   friedhof: 'Friedhoff',
   kirchhof: 'Kirchhoff',
+  // Nie B-A-H-N buchstabieren
+  bahn: 'Baan',
+  bahnen: 'Baanen',
+  bahnhof: 'Baanhoff',
+  's-bahn': 'äß-Baan',
+  'u-bahn': 'uh-Baan',
+  sbahn: 'äß-Baan',
+  ubahn: 'uh-Baan',
+  regionalbahn: 'Regionalbaan',
   // Cartesia: z→engl. /z/, st→engl. /st/, rein→engl. reen, sonst→falsch
   zack: 'Tsack',
   zahnrad: 'Tsahn-Raat',
@@ -661,6 +694,7 @@ export function prepareDisplayText(text: string): string {
   s = applyPlaceNamePhonetics(s);
   s = normalizeOnomatopoeia(s);
   s = transformClockTimes(s);
+  s = transformNumericDotDates(s);
   s = transformOrdinalDates(s);
   s = transformBareOrdinals(s);
   s = transformLetterCodes(s);
@@ -680,8 +714,8 @@ export function prepareSpokenText(text: string): string {
 }
 
 /**
- * Audio-Pfad für Cartesia (Hard-Reboot):
- * Display-Basis, keine Ortho-/IPA-/Fremdwort-Hacks.
+ * Audio-Pfad für Cartesia: Display-Basis, keine Ortho-/IPA-/Sounds-like.
+ * Umschreibungen (Tsihl, Ruute) ziehen de-DE-Stimmen in den US-Akzent.
  */
 export function prepareAudioText(text: string): string {
   let s = prepareDisplayText(text);

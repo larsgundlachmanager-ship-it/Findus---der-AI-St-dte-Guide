@@ -10,7 +10,6 @@ import type {
 } from '../services/navigation/navigationTypes';
 import type { ConciergeCardState, QuickAction } from '../types/concierge';
 import type { GygWidgetOptions } from '../services/affiliate/affiliateService';
-import type { CityMapView } from '../services/cityMapService';
 import { ATTENTION_CUE_MS } from '../services/navigation/navigationTypes';
 import { scanAttentionCue } from '../services/navigation/attentionCues';
 import { hapticAttentionCue } from '../services/navigation/haptics';
@@ -28,7 +27,7 @@ const GPS_EPS_DEG = 0.000008;
 
 export type GpsStatus = 'idle' | 'searching' | 'fix' | 'denied';
 
-/** Findus-Präsenz: ok=grün, degraded=orange, offline=grau. */
+/** Yorro-Präsenz: ok=grün, degraded/offline=orange (Mikro + Presence). */
 export type FindusPresence = 'ok' | 'degraded' | 'offline';
 
 /** TTS-Backend: Cartesia sonic-3.5 (primär) oder System-Fallback (Dev). */
@@ -130,6 +129,8 @@ interface FinnusState {
   navPhase: NavPhase | null;
   /** Multistopp-Tour (Joggen / Erkunden / Essen). */
   multiStopTour: MultiStopTour | null;
+  /** Steigt, wenn die Nav-Polyline neu gezeichnet werden muss. */
+  navRouteRev: number;
   /** Contextual discovery Fast-Click candidates. */
   discoveryCandidates: DiscoveryCandidate[];
   /** Multi-stop queue sheet visibility. */
@@ -149,13 +150,13 @@ interface FinnusState {
   affiliateRedirectAcked: boolean;
   /** GetYourGuide In-App-Widget. */
   gygWidget: GygWidgetOptions | null;
-  /** Offizielle Stadt-/Inselkarte (WebView). */
-  cityMap: CityMapView | null;
+  /** Speisekarte / Menu — In-App-Browser (WebView-Sheet). */
+  inAppBrowser: { url: string; title: string } | null;
   attentionCue: AttentionCue;
   /** HomeScreen öffnet Settings, wenn sich der Timestamp ändert. */
   settingsOpenRequestAtMs: number | null;
-  /** Optional: Setup-Untersektion nach Öffnen (z. B. voice). */
-  settingsOpenFocus: 'voice' | null;
+  /** Optional: Setup-Untersektion nach Öffnen (voice / mic). */
+  settingsOpenFocus: 'voice' | 'mic' | null;
 
   setCurrentLocationName: (name: string | null) => void;
   setCurrentPoiId: (id: number | null) => void;
@@ -187,6 +188,8 @@ interface FinnusState {
     lat: number;
     lng: number;
     accuracy?: number | null;
+    /** false = Last-Known / Kamera-Seed — kein Puck, kein Fog. */
+    live?: boolean;
   }) => void;
   addSoftPitchedSpotKey: (key: string) => void;
   addHeardApproachSpotKey: (key: string) => void;
@@ -208,8 +211,8 @@ interface FinnusState {
   setPendingAffiliateOffer: (action: QuickAction | null) => void;
   setAffiliateRedirectAcked: (acked: boolean) => void;
   setGygWidget: (opts: GygWidgetOptions | null) => void;
-  setCityMap: (map: CityMapView | null) => void;
-  requestOpenSettings: (focus?: 'voice' | null) => void;
+  setInAppBrowser: (opts: { url: string; title: string } | null) => void;
+  requestOpenSettings: (focus?: 'voice' | 'mic' | null) => void;
   patchNavigation: (
     partial: Partial<{
       navActive: boolean;
@@ -229,6 +232,17 @@ interface FinnusState {
       navPhase: NavPhase | null;
     }>,
   ) => void;
+}
+
+/** React-Selector: fehlendes Feld → false, kein Hermes-/Worklet-Throw. */
+export function selectNavRouteLoading(s: {
+  navRouteLoading?: boolean;
+}): boolean {
+  try {
+    return s.navRouteLoading === true;
+  } catch {
+    return false;
+  }
 }
 
 function createMessage(message: ChatMessage): ChatMessage {
@@ -289,6 +303,7 @@ export const useFinnusStore = create<FinnusState>((set, get) => ({
   navTurnHint: null,
   navPhase: null,
   multiStopTour: null,
+  navRouteRev: 0,
   discoveryCandidates: [],
   stopQueueVisible: false,
   pendingNavOffer: null,
@@ -299,7 +314,7 @@ export const useFinnusStore = create<FinnusState>((set, get) => ({
   pendingAffiliateOffer: null,
   affiliateRedirectAcked: false,
   gygWidget: null,
-  cityMap: null,
+  inAppBrowser: null,
   attentionCue: null,
   settingsOpenRequestAtMs: null,
   settingsOpenFocus: null,
@@ -368,16 +383,41 @@ export const useFinnusStore = create<FinnusState>((set, get) => ({
   setNeedsTourStart: (needs) => set({ needsTourStart: needs }),
   setGpsServicesEnabled: (enabled) => set({ gpsServicesEnabled: enabled }),
   reportGpsFix: (fix) => {
-    // Map/diagnostics subscribe to useGpsStore — not the main UI store.
-    useGpsStore.getState().reportFix(fix);
-    recordWalkFix(fix.lat, fix.lng);
-    // Soft-Stamp ohne zyklischen Import
-    void import('../services/discovery/walkStampService')
-      .then((m) => m.stampNearbyPoisFromWalk(fix.lat, fix.lng))
-      .catch(() => undefined);
+    const live = fix.live !== false;
+    const accOk =
+      fix.accuracy == null ||
+      (typeof fix.accuracy === 'number' &&
+        Number.isFinite(fix.accuracy) &&
+        fix.accuracy <= 80);
+    if (live) {
+      useGpsStore.getState().reportFix(fix);
+      if (accOk) {
+        recordWalkFix(fix.lat, fix.lng);
+        void import('../services/discovery/walkStampService')
+          .then((m) => m.stampNearbyPoisFromWalk(fix.lat, fix.lng))
+          .catch(() => undefined);
+      }
+    }
     const state = get();
     const nextAcc =
       typeof fix.accuracy === 'number' ? fix.accuracy : state.gpsAccuracyM;
+    if (!live) {
+      set({
+        lastGpsLat: fix.lat,
+        lastGpsLng: fix.lng,
+        lastGpsAtMs: Date.now(),
+      });
+      void import('../services/location/lastKnownMapGps')
+        .then((m) =>
+          m.persistLastMapGpsSoon({
+            lat: fix.lat,
+            lng: fix.lng,
+            accuracy: nextAcc,
+          }),
+        )
+        .catch(() => undefined);
+      return;
+    }
     const samePos =
       state.lastGpsLat != null &&
       state.lastGpsLng != null &&
@@ -389,6 +429,15 @@ export const useFinnusStore = create<FinnusState>((set, get) => ({
       const age = Date.now() - (state.lastGpsAtMs ?? 0);
       if (age < 5_000) return;
       set({ lastGpsAtMs: Date.now(), gpsAccuracyM: nextAcc });
+      void import('../services/location/lastKnownMapGps')
+        .then((m) =>
+          m.persistLastMapGpsSoon({
+            lat: fix.lat,
+            lng: fix.lng,
+            accuracy: nextAcc,
+          }),
+        )
+        .catch(() => undefined);
       return;
     }
     set({
@@ -398,6 +447,15 @@ export const useFinnusStore = create<FinnusState>((set, get) => ({
       lastGpsLat: fix.lat,
       lastGpsLng: fix.lng,
     });
+    void import('../services/location/lastKnownMapGps')
+      .then((m) =>
+        m.persistLastMapGpsSoon({
+          lat: fix.lat,
+          lng: fix.lng,
+          accuracy: nextAcc,
+        }),
+      )
+      .catch(() => undefined);
   },
   addSoftPitchedSpotKey: (key) =>
     set((state) =>
@@ -439,7 +497,9 @@ export const useFinnusStore = create<FinnusState>((set, get) => ({
           entry.lng != null &&
           Number.isFinite(entry.lat) &&
           Number.isFinite(entry.lng);
-        if (needTimeline || needCoords) {
+        const needCity =
+          !(cur.cityId ?? '').trim() && !!(entry.cityId ?? '').trim();
+        if (needTimeline || needCoords || needCity) {
           const next = [...state.visitedHistory];
           next[idx] = {
             ...cur,
@@ -449,6 +509,7 @@ export const useFinnusStore = create<FinnusState>((set, get) => ({
             kind: entry.kind || cur.kind,
             lat: cur.lat ?? entry.lat ?? null,
             lng: cur.lng ?? entry.lng ?? null,
+            cityId: (cur.cityId ?? entry.cityId ?? null) || null,
           };
           void saveStampPassport(next);
           return { visitedHistory: next };
@@ -469,6 +530,19 @@ export const useFinnusStore = create<FinnusState>((set, get) => ({
     set({ chatHistory: messages.map(createMessage) }),
 
   setPendingNavOffer: (offer) => {
+    if (offer?.name) {
+      try {
+        const { isBogusNavDestName } = require('../services/research/htmlResearchGate') as {
+          isBogusNavDestName: (n: string) => boolean;
+        };
+        if (isBogusNavDestName(offer.name)) {
+          set({ pendingNavOffer: null });
+          return;
+        }
+      } catch {
+        /* soft */
+      }
+    }
     if (
       offer &&
       typeof offer.lat === 'number' &&
@@ -486,7 +560,9 @@ export const useFinnusStore = create<FinnusState>((set, get) => ({
         searchQuery: offer.name.trim(),
       }).catch(() => undefined);
     }
-    set({ pendingNavOffer: offer });
+    set((state) => ({
+      pendingNavOffer: offer,
+    }));
   },
 
   setPreferredTravelMode: (mode) => set({ preferredTravelMode: mode }),
@@ -515,7 +591,8 @@ export const useFinnusStore = create<FinnusState>((set, get) => ({
 
   setGygWidget: (opts) => set({ gygWidget: opts }),
 
-  setCityMap: (map) => set({ cityMap: map }),
+  setInAppBrowser: (opts) => set({ inAppBrowser: opts }),
+
   requestOpenSettings: (focus = null) =>
     set({
       settingsOpenRequestAtMs: Date.now(),
@@ -525,11 +602,11 @@ export const useFinnusStore = create<FinnusState>((set, get) => ({
   patchNavigation: (partial) =>
     set((state) => {
       const next = { ...partial };
-      // Skip tiny bearing/distance churn so Audio/HUD don't re-render every tick.
+      // Skip micro bearing chatter; real turns clear this easily.
       if (
         typeof next.navBearingRel === 'number' &&
         typeof state.navBearingRel === 'number' &&
-        Math.abs(next.navBearingRel - state.navBearingRel) < 0.75
+        Math.abs(next.navBearingRel - state.navBearingRel) < 1.25
       ) {
         delete next.navBearingRel;
       }
@@ -568,7 +645,7 @@ export const useFinnusStore = create<FinnusState>((set, get) => ({
       activeConciergeCard: null,
       pendingAffiliateOffer: null,
       gygWidget: null,
-      cityMap: null,
+      inAppBrowser: null,
       navActive: false,
       navVisible: false,
       navMode: null,
@@ -584,6 +661,8 @@ export const useFinnusStore = create<FinnusState>((set, get) => ({
       navTurnHint: null,
       navPhase: null,
       multiStopTour: null,
+      navRouteRev: 0,
+      navRouteLoading: false,
       discoveryCandidates: [],
       stopQueueVisible: false,
       attentionCue: null,

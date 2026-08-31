@@ -6,7 +6,7 @@
  * - Navi unterbricht nur Explore (Modul 1); danach läuft Explore weiter.
  * - Modul 1 ist immer das Unwichtigste.
  * - clearSpeechJobQueue rejected Pending sauber — nie Jobs still verwerfen
- *   (sonst hängt await speak* und Findus bleibt stumm).
+ *   (sonst hängt await speak* und Yorro bleibt stumm).
  */
 
 export type SpeechPriority = 'question' | 'nav' | 'system' | 'explore';

@@ -17,6 +17,10 @@ import {
   migrateLegacyPersonality,
 } from '../../constants/personalityMatrix';
 import { FINDUS_FEW_SHOT_DISCLAIMER } from '../concierge/findusResponsePolicy';
+import {
+  buildCompactBridgeVoiceHint,
+  buildMatrixSpeechStyleBlock,
+} from './matrixSpeechStyle';
 
 export type EffectivePersonalityMatrix = {
   coreRole: CoreRoleId;
@@ -59,8 +63,9 @@ export function resolveEffectivePersonalityMatrix(
   };
 }
 
-export function matrixUsesFormalAddress(coreRole: CoreRoleId): boolean {
-  return coreRole === 'aristocrat';
+/** Früher Aristokrat = Sie; Founder-Regel: Yorro siezt nie. */
+export function matrixUsesFormalAddress(_coreRole: CoreRoleId): boolean {
+  return false;
 }
 
 export function matrixUsesBuddyAddress(coreRole: CoreRoleId): boolean {
@@ -79,18 +84,22 @@ function optionHint<T extends string>(
 /** Struktur-Hints für Master-Prompt / Synthese — Wortlaut frei. */
 export function buildPersonalityMatrixPromptBlock(
   profile?: UserProfile | null,
-  opts?: { activeSpleens?: SpleenId[] | null },
+  opts?: {
+    activeSpleens?: SpleenId[] | null;
+    /** Rucksack/Call-2 wenn kein volles Profil geladen */
+    matrixOverride?: EffectivePersonalityMatrix | null;
+  },
 ): string {
-  const m = resolveEffectivePersonalityMatrix(profile);
+  const m = opts?.matrixOverride ?? resolveEffectivePersonalityMatrix(profile);
   const spleens = (opts?.activeSpleens ?? m.spleens).slice(0, 2);
 
-  const addressRule = matrixUsesFormalAddress(m.coreRole)
-    ? '- Anrede: durchgehend Sie — gepflegt, respektvoll, keine Kumpel-Slang-Pflicht.'
-    : matrixUsesBuddyAddress(m.coreRole)
-      ? '- Anrede: Du, auf Augenhöhe — locker, aber respektvoll; kein erzwungenes Bro/Digga.'
-      : m.coreRole === 'innocent_child'
-        ? '- Anrede: Du. Tempo und Dynamik wie die Kind-Hörprobe: schneller, impulsiv, staunend, kurze Sätze, echte Neugier — kein ruhiger Erwachsenen-Vortrag.'
-        : '- Anrede: Du (Standard-Reisebegleiter), warm und klar.';
+  const addressRule = matrixUsesBuddyAddress(m.coreRole)
+    ? '- Anrede: IMMER Du, auf Augenhöhe — locker, aber respektvoll; kein erzwungenes Bro/Digga. Nie Siezen.'
+    : m.coreRole === 'innocent_child'
+      ? '- Anrede: IMMER Du. Tempo und Dynamik wie die Kind-Hörprobe: schneller, impulsiv, staunend, kurze Sätze, echte Neugier — kein ruhiger Erwachsenen-Vortrag. Nie Siezen.'
+      : m.coreRole === 'aristocrat'
+        ? '- Anrede: IMMER Du — gepflegt und edel, aber nie Siezen. Respekt über Wortwahl, nicht über Sie.'
+        : '- Anrede: IMMER Du (Standard-Reisebegleiter), warm und klar. Nie Siezen.';
 
   const tempoRule =
     m.vibeTone === 'mystic'
@@ -102,6 +111,8 @@ export function buildPersonalityMatrixPromptBlock(
       ? '- FAKTEN-PFLICHT: Mystik/„man munkelt“/Aura/Geheimnis NUR mit belegtem Stoff aus dem Datensatz. Ist der Datensatz dünn → kurz und ehrlich die echten Fakten, KEIN atmosphärisches Gelaber, KEINE erfundenen Koordinaten-Mythen.'
       : null;
 
+  const speechStyleBlock = buildMatrixSpeechStyleBlock(m);
+
   const roleHint = optionHint(CORE_ROLES, m.coreRole);
   const vibeHint = optionHint(VIBE_TONES, m.vibeTone);
   const knowHint = optionHint(KNOWLEDGE_STYLES, m.knowledgeStyle);
@@ -110,6 +121,10 @@ export function buildPersonalityMatrixPromptBlock(
     .filter(Boolean)
     .map((h) => `  · ${h}`)
     .join('\n');
+
+  const gigglerRule = spleens.includes('giggler')
+    ? '- Gekicher: Humor nur über Wortwahl und Interpunktion. Nie die Wörter kichern, kichert, lacht, hihi, haha in den Vorlese-Text schreiben — TTS liest sie wörtlich vor.'
+    : null;
 
   const rel: string[] = [];
   if (profile?.humorOk) rel.push('Humor explizit ok — Witze dosiert.');
@@ -135,25 +150,20 @@ export function buildPersonalityMatrixPromptBlock(
       rel.push(
         `Geparkte Themen (nur bei Resume): ${parked.join('; ')}`,
       );
-    } else if ((profile?.openThreads?.length ?? 0) > 0) {
-      rel.push(
-        `Offene Gesprächsfäden (kurz aufgreifen wenn passend): ${profile!.openThreads!.slice(-4).join('; ')}`,
-      );
     }
+    // Kein Fallback auf profile.openThreads — das belebt gelöschte Fäden.
   } catch {
-    if ((profile?.openThreads?.length ?? 0) > 0) {
-      rel.push(
-        `Offene Gesprächsfäden (kurz aufgreifen wenn passend): ${profile!.openThreads!.slice(-4).join('; ')}`,
-      );
-    }
+    /* Keine toten Profil-Fäden als Fallback */
   }
 
-  return `=== PERSÖNLICHKEITS-MATRIX (Struktur — Wortlaut frei) ===
+  return `${speechStyleBlock}
+${antiFluffRule ? `${antiFluffRule}\n` : ''}${tempoRule ? `${tempoRule}\n` : ''}=== PERSÖNLICHKEITS-MATRIX (Feintuning — Wortlaut frei) ===
 ${addressRule}
-${tempoRule ? `${tempoRule}\n` : ''}${antiFluffRule ? `${antiFluffRule}\n` : ''}- Rolle (Kat. 1): ${roleHint}
+- Rolle (Kat. 1): ${roleHint}
 - Vibe (Kat. 2): ${vibeHint}
 - Wissensstil (Kat. 3): ${knowHint}
 ${spleenHints ? `- Spleens (Kat. 4, dosiert):\n${spleenHints}` : '- Spleens: keine — zurückhaltend bleiben.'}
+${gigglerRule ? `${gigglerRule}\n` : ''}
 ${rel.length ? `- Beziehung/Kontext:\n${rel.map((l) => `  · ${l}`).join('\n')}` : ''}
 ${FINDUS_FEW_SHOT_DISCLAIMER}`;
 }
@@ -173,3 +183,25 @@ export function buildCharacterFlavorFromMatrix(
   }
   return parts.join(' | ');
 }
+
+/** Modul-1: gewählte Matrix als Stimme — Struktur bleibt immersiv. */
+export function formatModule1CharacterVoice(
+  profile?: UserProfile | null,
+): string {
+  const m = resolveEffectivePersonalityMatrix(profile);
+  const flavor = buildCharacterFlavorFromMatrix(profile);
+  const speech = buildMatrixSpeechStyleBlock(m);
+  const address = matrixUsesBuddyAddress(m.coreRole)
+    ? 'Anrede: Du, auf Augenhöhe — nie Siezen'
+    : m.coreRole === 'innocent_child'
+      ? 'Anrede: Du, staunend/kurz — nie Siezen'
+      : m.coreRole === 'aristocrat'
+        ? 'Anrede: Du, gepflegt — nie Siezen'
+        : 'Anrede: Du — nie Siezen';
+  return `${speech}
+STIMME / CHARAKTER (färbt immersive Story, nicht die Struktur):
+${address} · ${flavor}
+Dieselbe Szene → Brücke → Payoff — in GENAU dieser Stimme, mündlich und umgangssprachlich, nicht als Einheits-Bot.`;
+}
+
+export { buildCompactBridgeVoiceHint, buildMatrixSpeechStyleBlock } from './matrixSpeechStyle';

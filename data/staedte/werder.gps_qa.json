@@ -1,0 +1,4420 @@
+{
+  "generated_at": "2026-08-28T08:28:45.483Z",
+  "summary": {
+    "city_id": "werder",
+    "checked": 150,
+    "ok": 27,
+    "check": 66,
+    "bad": 57,
+    "errors": 0,
+    "max_delta_m": 180,
+    "city_halo_m": 28000,
+    "story_only": true
+  },
+  "rows": [
+    {
+      "id": "werder_stadtverwaltung_burgerservice",
+      "name": "Stadtverwaltung Bürgerservice",
+      "category": "verwaltung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.377463039999995,
+        "lng": 12.930887959999998
+      },
+      "query": "Stadtverwaltung Bürgerservice, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.4113385,
+        "lng": 12.5511599,
+        "display_name": "Stadtverwaltung Brandenburg - Bürgerservice, Humboldthain, Brandenburg an der Havel, Deutschland",
+        "class": "office",
+        "type": "government",
+        "provider": "photon"
+      },
+      "delta_m": 26040,
+      "from_city_m": 247,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_potsdam_museum_forum_fur_kunst_und_geschichte",
+      "name": "Potsdam Museum – Forum für Kunst und Geschichte",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.39525239583335,
+        "lng": 13.062171433333335
+      },
+      "query": "Potsdam Museum, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.4034436,
+        "lng": 12.8250569,
+        "display_name": "Lilienthal-Museum, Am Derwitzer Dorfplatz, Werder (Havel), Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 16113,
+      "from_city_m": 8936,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_toplitzer_spitze",
+      "name": "Töplitzer Spitze",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.31276992000001,
+        "lng": 12.932885160000001
+      },
+      "query": "Töplitzer Spitze, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.4346637,
+        "lng": 12.9050068,
+        "display_name": "Neu-Töplitzer Straße, Werder (Havel), Deutschland",
+        "class": "highway",
+        "type": "residential",
+        "provider": "photon"
+      },
+      "delta_m": 13685,
+      "from_city_m": 7084,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_aussichtspunkt_havel",
+        "werder_aussichtsplattform_caputher_gemunde",
+        "werder_aussichtspunkt_wublitz",
+        "werder_aussichtsplattform_schwielowsee",
+        "werder_kleingartenkolonie_berliner_bar",
+        "werder_garten_in_glindow",
+        "werder_kleiner_badestrand_von_alt_toplitz",
+        "werder_hausbootvermietung_werder_gbr",
+        "werder_bootscharter_keser"
+      ]
+    },
+    {
+      "id": "werder_kleiner_badestrand_von_alt_toplitz",
+      "name": "Kleiner Badestrand von Alt Töplitz",
+      "category": "wanderung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.31276992000001,
+        "lng": 12.932885160000001
+      },
+      "query": "Kleiner Badestrand von Alt Töplitz, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.4238363,
+        "lng": 12.9046533,
+        "display_name": "Kleiner Zernsee, Werder (Havel), Deutschland",
+        "class": "natural",
+        "type": "water",
+        "provider": "photon"
+      },
+      "delta_m": 12498,
+      "from_city_m": 7084,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_toplitzer_spitze",
+        "werder_aussichtspunkt_havel",
+        "werder_aussichtsplattform_caputher_gemunde",
+        "werder_aussichtspunkt_wublitz",
+        "werder_aussichtsplattform_schwielowsee",
+        "werder_kleingartenkolonie_berliner_bar",
+        "werder_garten_in_glindow",
+        "werder_hausbootvermietung_werder_gbr",
+        "werder_bootscharter_keser"
+      ]
+    },
+    {
+      "id": "werder_aussichtspunkt_wublitz",
+      "name": "Aussichtspunkt Wublitz",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.31276992000001,
+        "lng": 12.932885160000001
+      },
+      "query": "Aussichtspunkt Wublitz, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.4248919,
+        "lng": 12.9360027,
+        "display_name": "Wublitz, Werder (Havel), Deutschland",
+        "class": "natural",
+        "type": "water",
+        "provider": "photon"
+      },
+      "delta_m": 12469,
+      "from_city_m": 7084,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_toplitzer_spitze",
+        "werder_aussichtspunkt_havel",
+        "werder_aussichtsplattform_caputher_gemunde",
+        "werder_aussichtsplattform_schwielowsee",
+        "werder_kleingartenkolonie_berliner_bar",
+        "werder_garten_in_glindow",
+        "werder_kleiner_badestrand_von_alt_toplitz",
+        "werder_hausbootvermietung_werder_gbr",
+        "werder_bootscharter_keser"
+      ]
+    },
+    {
+      "id": "werder_bootscharter_keser",
+      "name": "Bootscharter Keser",
+      "category": "tour",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.31276992000001,
+        "lng": 12.932885160000001
+      },
+      "query": "Bootscharter Keser, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.4178295,
+        "lng": 12.9166134,
+        "display_name": "Yachtcharter Keser, Werder (Havel), Deutschland",
+        "class": "leisure",
+        "type": "marina",
+        "provider": "photon"
+      },
+      "delta_m": 11734,
+      "from_city_m": 7084,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_toplitzer_spitze",
+        "werder_aussichtspunkt_havel",
+        "werder_aussichtsplattform_caputher_gemunde",
+        "werder_aussichtspunkt_wublitz",
+        "werder_aussichtsplattform_schwielowsee",
+        "werder_kleingartenkolonie_berliner_bar",
+        "werder_garten_in_glindow",
+        "werder_kleiner_badestrand_von_alt_toplitz",
+        "werder_hausbootvermietung_werder_gbr"
+      ]
+    },
+    {
+      "id": "werder_parkplatz",
+      "name": "Parkplatz",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.3441066875,
+        "lng": 12.947276687500002
+      },
+      "query": "Parkplatz, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.4417058,
+        "lng": 12.898516,
+        "display_name": "Parkplatz Pension, Am Alten Weinberg, Göttin, Töplitz, Werder (Havel), Potsdam-Mittelmark, Brandenburg, 14542, Deutschland",
+        "class": "amenity",
+        "type": "parking",
+        "importance": 0.00005466163118939525,
+        "osm_type": "way",
+        "osm_id": 708292004,
+        "provider": "nominatim"
+      },
+      "delta_m": 11346,
+      "from_city_m": 3708,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_christine_berger_gmbh_co_kg",
+        "werder_badestelle_schwielowsee_petzow",
+        "werder_zelterhaus",
+        "werder_bootshaus_ditze"
+      ]
+    },
+    {
+      "id": "werder_burgruine_zolchow",
+      "name": "Burgruine Zolchow",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.31077957142857,
+        "lng": 12.929230828571425
+      },
+      "query": "Burgruine Zolchow, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.4032632,
+        "lng": 12.8703932,
+        "display_name": "Burgruine Zolchow, A 10, Plötzin, Werder (Havel), Potsdam-Mittelmark, Brandenburg, 14542, Deutschland",
+        "class": "historic",
+        "type": "ruins",
+        "importance": 0.18157831638402872,
+        "osm_type": "node",
+        "osm_id": 2016802255,
+        "provider": "nominatim"
+      },
+      "delta_m": 11033,
+      "from_city_m": 7312,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_staffelgiebelturme",
+        "werder_kajakverleih_am_glindower_see",
+        "werder_reederei_bernd_kuhl_gmbh_hier_keine_abfahrt",
+        "werder_evangelische_kirchengemeinde",
+        "werder_immobilienburo_vehlow",
+        "werder_loch",
+        "werder_aussichtspunkt_wachtelberg_phoben",
+        "werder_denkmal_otto_lilienthal_erste_fluge",
+        "werder_geo_concept_brunnenbau",
+        "werder_atelier_ralf_wilhelm_schmidt",
+        "werder_wald_galerie_ferch"
+      ]
+    },
+    {
+      "id": "werder_marina_ferch",
+      "name": "Marina Ferch",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.3136,
+        "lng": 12.93212
+      },
+      "query": "Marina Ferch, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3992318,
+        "lng": 12.9155838,
+        "display_name": "Marina Havelauen, Hafenpromenade, Werder (Havel), Deutschland",
+        "class": "leisure",
+        "type": "marina",
+        "provider": "photon"
+      },
+      "delta_m": 9588,
+      "from_city_m": 6992,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_die_statue_der_flora",
+      "name": "Die Statue der Flora",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.400527862500006,
+        "lng": 13.043210575
+      },
+      "query": "Die Statue der Flora, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.4009284,
+        "lng": 12.9215858,
+        "display_name": "Die Havelauen, Hafenpromenade, Werder (Havel), Deutschland",
+        "class": "information",
+        "type": "board",
+        "provider": "photon"
+      },
+      "delta_m": 8252,
+      "from_city_m": 7870,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_aussichtsturm_wietkiekenberg",
+      "name": "Aussichtsturm Wietkiekenberg",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.30752064000001,
+        "lng": 12.95018638
+      },
+      "query": "Aussichtsturm Wietkiekenberg, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3804641,
+        "lng": 12.9294564,
+        "display_name": "Aussichtsturm Bismarckhöhe, Hoher Weg, Werder (Havel), Deutschland",
+        "class": "man_made",
+        "type": "tower",
+        "provider": "photon"
+      },
+      "delta_m": 8232,
+      "from_city_m": 7744,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_obelisk_der_nachhaltigkeit",
+      "name": "Obelisk der Nachhaltigkeit",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.38242193240741,
+        "lng": 13.033898046296299
+      },
+      "query": "Obelisk der Nachhaltigkeit, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3436536,
+        "lng": 12.9460053,
+        "display_name": "Obelisk, Zelterstraße, Werder (Havel), Deutschland",
+        "class": "historic",
+        "type": "memorial",
+        "provider": "photon"
+      },
+      "delta_m": 7362,
+      "from_city_m": 6803,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_bootshaus_ditze",
+      "name": "Bootshaus Ditze",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.3441066875,
+        "lng": 12.947276687500002
+      },
+      "query": "Bootshaus Ditze, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3940026,
+        "lng": 12.9311264,
+        "display_name": "Bootshaus Ditze, Am Zernsee, Werder (Havel), Potsdam-Mittelmark, Brandenburg, 14542, Deutschland",
+        "class": "leisure",
+        "type": "marina",
+        "importance": 0.00005466163118939525,
+        "osm_type": "node",
+        "osm_id": 2076150580,
+        "provider": "nominatim"
+      },
+      "delta_m": 5655,
+      "from_city_m": 3708,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_christine_berger_gmbh_co_kg",
+        "werder_badestelle_schwielowsee_petzow",
+        "werder_parkplatz",
+        "werder_zelterhaus"
+      ]
+    },
+    {
+      "id": "werder_atelier_ralf_wilhelm_schmidt",
+      "name": "Atelier Ralf Wilhelm Schmidt",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.31077957142857,
+        "lng": 12.929230828571425
+      },
+      "query": "Atelier Ralf Wilhelm Schmidt, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3469846,
+        "lng": 12.9875925,
+        "display_name": "Galerie & Atelier Ralf Wilhelm Schmidt, Straße der Einheit, Schwielowsee, Deutschland",
+        "class": "craft",
+        "type": "atelier",
+        "provider": "photon"
+      },
+      "delta_m": 5651,
+      "from_city_m": 7312,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_staffelgiebelturme",
+        "werder_kajakverleih_am_glindower_see",
+        "werder_reederei_bernd_kuhl_gmbh_hier_keine_abfahrt",
+        "werder_evangelische_kirchengemeinde",
+        "werder_immobilienburo_vehlow",
+        "werder_loch",
+        "werder_aussichtspunkt_wachtelberg_phoben",
+        "werder_denkmal_otto_lilienthal_erste_fluge",
+        "werder_geo_concept_brunnenbau",
+        "werder_wald_galerie_ferch",
+        "werder_burgruine_zolchow"
+      ]
+    },
+    {
+      "id": "werder_wasserturm",
+      "name": "Wasserturm",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.39312660909092,
+        "lng": 12.927257663636363
+      },
+      "query": "Wasserturm, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3448032,
+        "lng": 12.9447791,
+        "display_name": "Wasserturm, Zelterstraße, Petzow, Werder (Havel), Potsdam-Mittelmark, Brandenburg, 14542, Deutschland",
+        "class": "man_made",
+        "type": "water_tower",
+        "importance": 0.00005466163118939525,
+        "osm_type": "way",
+        "osm_id": 643951568,
+        "provider": "nominatim"
+      },
+      "delta_m": 5503,
+      "from_city_m": 1910,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_schwielowsee_havelpromenade",
+      "name": "Schwielowsee Havelpromenade",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.38534834000001,
+        "lng": 12.95429554
+      },
+      "query": "Schwielowsee Havelpromenade, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3359762,
+        "lng": 12.9541789,
+        "display_name": "Schwielowsee, Werder (Havel), Deutschland",
+        "class": "water",
+        "type": "lake",
+        "provider": "photon"
+      },
+      "delta_m": 5490,
+      "from_city_m": 1687,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_garten_in_glindow",
+      "name": "Garten in Glindow",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.31276992000001,
+        "lng": 12.932885160000001
+      },
+      "query": "Garten in Glindow, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3581272,
+        "lng": 12.9077549,
+        "display_name": "Garten- und Landmaschinen, Ziemensstraße, Werder (Havel), Deutschland",
+        "class": "craft",
+        "type": "agricultural_engines",
+        "provider": "photon"
+      },
+      "delta_m": 5325,
+      "from_city_m": 7084,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_toplitzer_spitze",
+        "werder_aussichtspunkt_havel",
+        "werder_aussichtsplattform_caputher_gemunde",
+        "werder_aussichtspunkt_wublitz",
+        "werder_aussichtsplattform_schwielowsee",
+        "werder_kleingartenkolonie_berliner_bar",
+        "werder_kleiner_badestrand_von_alt_toplitz",
+        "werder_hausbootvermietung_werder_gbr",
+        "werder_bootscharter_keser"
+      ]
+    },
+    {
+      "id": "werder_kajakverleih_am_glindower_see",
+      "name": "Kajakverleih am Glindower See",
+      "category": "tour",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.31077957142857,
+        "lng": 12.929230828571425
+      },
+      "query": "Kajakverleih am Glindower See, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.348054,
+        "lng": 12.9385828,
+        "display_name": "Kajakverleih am Glindower See, 9-12, Zum Inselparadies, Petzow, Werder (Havel), Potsdam-Mittelmark, Brandenburg, 14542, Deutschland",
+        "class": "amenity",
+        "type": "boat_rental",
+        "importance": 0.00005466163118939525,
+        "osm_type": "node",
+        "osm_id": 14081691059,
+        "provider": "nominatim"
+      },
+      "delta_m": 4193,
+      "from_city_m": 7312,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_staffelgiebelturme",
+        "werder_reederei_bernd_kuhl_gmbh_hier_keine_abfahrt",
+        "werder_evangelische_kirchengemeinde",
+        "werder_immobilienburo_vehlow",
+        "werder_loch",
+        "werder_aussichtspunkt_wachtelberg_phoben",
+        "werder_denkmal_otto_lilienthal_erste_fluge",
+        "werder_geo_concept_brunnenbau",
+        "werder_atelier_ralf_wilhelm_schmidt",
+        "werder_wald_galerie_ferch",
+        "werder_burgruine_zolchow"
+      ]
+    },
+    {
+      "id": "werder_schloss_caputh",
+      "name": "Schloss Caputh",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.34912933,
+        "lng": 13.00008407
+      },
+      "query": "Schloss Caputh, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3440576,
+        "lng": 12.9466026,
+        "display_name": "Schloss Petzow, Zelterstraße, Werder (Havel), Deutschland",
+        "class": "building",
+        "type": "apartments",
+        "provider": "photon"
+      },
+      "delta_m": 3676,
+      "from_city_m": 5412,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_kleingartenverein_an_der_dahlienstrasse_e_v",
+      "name": "Kleingartenverein an der Dahlienstrasse e.V.",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.399006740000004,
+        "lng": 12.89703768
+      },
+      "query": "Kleingartenverein an der Dahlienstrasse e.V., Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3826768,
+        "lng": 12.943045,
+        "display_name": "Seglervereinigung Einheit Werder 1952 e.V., Werderwiesen, Werder (Havel), Deutschland",
+        "class": "club",
+        "type": "sport",
+        "provider": "photon"
+      },
+      "delta_m": 3612,
+      "from_city_m": 3553,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_fahre_petzow",
+      "name": "Fähre Petzow",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.37723421538462,
+        "lng": 12.944139080769228
+      },
+      "query": "Fähre Petzow, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3451445,
+        "lng": 12.9441332,
+        "display_name": "Petzow, Werder (Havel), Deutschland",
+        "class": "place",
+        "type": "village",
+        "provider": "photon"
+      },
+      "delta_m": 3568,
+      "from_city_m": 684,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_heilig_geist_kirche",
+        "werder_ev_heilig_geist_kirchengemeinde_werder_havel_buro_glindow"
+      ]
+    },
+    {
+      "id": "werder_mia_gallery",
+      "name": "MIA Gallery",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.378762325,
+        "lng": 12.941297387499999
+      },
+      "query": "MIA Gallery, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.4041416,
+        "lng": 12.9106136,
+        "display_name": "Die Havelauen, Mielestraße, Werder (Havel), Deutschland",
+        "class": "information",
+        "type": "board",
+        "provider": "photon"
+      },
+      "delta_m": 3507,
+      "from_city_m": 548,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_fuchsberg_bei_glindow",
+      "name": "Fuchsberg bei Glindow",
+      "category": "wanderung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.377171249999996,
+        "lng": 12.932369255555553
+      },
+      "query": "Fuchsberg bei Glindow, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3668469,
+        "lng": 12.8855298,
+        "display_name": "Fuchsberg, Plötziner Straße, Werder (Havel), Deutschland",
+        "class": "tourism",
+        "type": "viewpoint",
+        "provider": "photon"
+      },
+      "delta_m": 3381,
+      "from_city_m": 143,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_werder_havel_post",
+        "werder_inselsteg_werder",
+        "werder_prinz_albert_gedachtniswiese",
+        "werder_heiliger_zen_teich",
+        "werder_jahnufer",
+        "werder_belvedere_glindower_alpen",
+        "werder_aussichtspunkt",
+        "werder_holzfiguren"
+      ]
+    },
+    {
+      "id": "werder_kleingartenverein_asternstrasse_1981e_v",
+      "name": "Kleingartenverein Asternstraße 1981e.V.",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.39790624,
+        "lng": 12.900510880000002
+      },
+      "query": "Kleingartenverein Asternstraße 1981e.V., Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3826768,
+        "lng": 12.943045,
+        "display_name": "Seglervereinigung Einheit Werder 1952 e.V., Werderwiesen, Werder (Havel), Deutschland",
+        "class": "club",
+        "type": "sport",
+        "provider": "photon"
+      },
+      "delta_m": 3346,
+      "from_city_m": 3300,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_plettenbergs_garten",
+      "name": "Plettenbergs Gärten",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.38292546666667,
+        "lng": 12.931808816666667
+      },
+      "query": "Plettenbergs Gärten, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3581272,
+        "lng": 12.9077549,
+        "display_name": "Garten- und Landmaschinen, Ziemensstraße, Werder (Havel), Deutschland",
+        "class": "craft",
+        "type": "agricultural_engines",
+        "provider": "photon"
+      },
+      "delta_m": 3205,
+      "from_city_m": 735,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_belvedere_glindower_alpen",
+      "name": "Belvedere Glindower Alpen",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.377171249999996,
+        "lng": 12.932369255555553
+      },
+      "query": "Belvedere Glindower Alpen, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.350544,
+        "lng": 12.9217826,
+        "display_name": "Glindower Alpen, Werder (Havel), Deutschland",
+        "class": "leisure",
+        "type": "nature_reserve",
+        "provider": "photon"
+      },
+      "delta_m": 3047,
+      "from_city_m": 143,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_werder_havel_post",
+        "werder_inselsteg_werder",
+        "werder_prinz_albert_gedachtniswiese",
+        "werder_heiliger_zen_teich",
+        "werder_jahnufer",
+        "werder_aussichtspunkt",
+        "werder_holzfiguren",
+        "werder_fuchsberg_bei_glindow"
+      ]
+    },
+    {
+      "id": "werder_aussichtsplattform_schwielowsee",
+      "name": "Aussichtsplattform Schwielowsee",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.31276992000001,
+        "lng": 12.932885160000001
+      },
+      "query": "Aussichtsplattform Schwielowsee, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3359762,
+        "lng": 12.9541789,
+        "display_name": "Schwielowsee, Werder (Havel), Deutschland",
+        "class": "water",
+        "type": "lake",
+        "provider": "photon"
+      },
+      "delta_m": 2959,
+      "from_city_m": 7084,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_toplitzer_spitze",
+        "werder_aussichtspunkt_havel",
+        "werder_aussichtsplattform_caputher_gemunde",
+        "werder_aussichtspunkt_wublitz",
+        "werder_kleingartenkolonie_berliner_bar",
+        "werder_garten_in_glindow",
+        "werder_kleiner_badestrand_von_alt_toplitz",
+        "werder_hausbootvermietung_werder_gbr",
+        "werder_bootscharter_keser"
+      ]
+    },
+    {
+      "id": "werder_lauschpunkte_am_schwielowsee_und_in_werder_per_app",
+      "name": "Lauschpunkte am Schwielowsee und in Werder per App",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.377540020000005,
+        "lng": 12.9387496
+      },
+      "query": "Lauschpunkte am Schwielowsee, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3550104,
+        "lng": 12.9592959,
+        "display_name": "Am Schwielowsee, Werder (Havel), Deutschland",
+        "class": "highway",
+        "type": "tertiary",
+        "provider": "photon"
+      },
+      "delta_m": 2867,
+      "from_city_m": 334,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_landbackerei_kirstein",
+      "name": "Landbäckerei Kirstein",
+      "category": "souvenir",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.37896667499999,
+        "lng": 12.940064608333332
+      },
+      "query": "Landbäckerei Kirstein, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3987485,
+        "lng": 12.9192812,
+        "display_name": "Landbäckerei Kirstein, Zum Großen Zernsee, Werder (Havel), Potsdam-Mittelmark, Brandenburg, 14542, Deutschland",
+        "class": "shop",
+        "type": "bakery",
+        "importance": 0.00005466163118939525,
+        "osm_type": "node",
+        "osm_id": 4777400449,
+        "provider": "nominatim"
+      },
+      "delta_m": 2613,
+      "from_city_m": 488,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_christian_morgenstern",
+      "name": "Christian Morgenstern",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.37220276153846,
+        "lng": 12.922976030769231
+      },
+      "query": "Christian Morgenstern, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3918394,
+        "lng": 12.9247244,
+        "display_name": "Dr. Christian Sachse, Eisenbahnstraße, Werder (Havel), Deutschland",
+        "class": "healthcare",
+        "type": "doctor",
+        "provider": "photon"
+      },
+      "delta_m": 2187,
+      "from_city_m": 894,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_ton_kirschen_theater_e_v",
+      "name": "Ton & Kirschen Theater e.V.",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.36966688,
+        "lng": 12.911399379999997
+      },
+      "query": "Ton, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.354332,
+        "lng": 12.9237821,
+        "display_name": "Tonweg, Glindow, Werder (Havel), Potsdam-Mittelmark, Brandenburg, 14542, Deutschland",
+        "class": "highway",
+        "type": "track",
+        "importance": 0.05338799496452274,
+        "osm_type": "way",
+        "osm_id": 461631967,
+        "provider": "nominatim"
+      },
+      "delta_m": 1901,
+      "from_city_m": 1719,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_badestelle_schwielowsee_petzow",
+      "name": "Badestelle Schwielowsee Petzow",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.3441066875,
+        "lng": 12.947276687500002
+      },
+      "query": "Badestelle Schwielowsee Petzow, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3279844,
+        "lng": 12.9391373,
+        "display_name": "Schwielowsee, Werder (Havel), Deutschland",
+        "class": "waterway",
+        "type": "fairway",
+        "provider": "photon"
+      },
+      "delta_m": 1876,
+      "from_city_m": 3708,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_christine_berger_gmbh_co_kg",
+        "werder_parkplatz",
+        "werder_zelterhaus",
+        "werder_bootshaus_ditze"
+      ]
+    },
+    {
+      "id": "werder_landkreis_potsdam_mittelmark",
+      "name": "Landkreis Potsdam-Mittelmark",
+      "category": "verwaltung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.37596864000001,
+        "lng": 12.935377059999999
+      },
+      "query": "Landkreis Potsdam-Mittelmark, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3921305,
+        "lng": 12.9276442,
+        "display_name": "Rusbid Germany Shipping, 60, Adolf-Damaschke-Straße, Werder (Havel), Potsdam-Mittelmark, Brandenburg, 14542, Deutschland",
+        "class": "office",
+        "type": "logistics",
+        "importance": 0.00005466163118939525,
+        "osm_type": "node",
+        "osm_id": 7944515431,
+        "provider": "nominatim"
+      },
+      "delta_m": 1872,
+      "from_city_m": 101,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_neuapostolische_kirche_werder_havel",
+      "name": "Neuapostolische Kirche Werder (Havel)",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.37031232,
+        "lng": 12.9199149
+      },
+      "query": "Neuapostolische Kirche Werder, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3772453,
+        "lng": 12.9440893,
+        "display_name": "Heilig-Geist-Kirche, Kirchstraße, Werder (Havel), Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 1813,
+      "from_city_m": 1184,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_c_k_p_p_dienstleistungen",
+      "name": "C.K.P.P. Dienstleistungen",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.37872910000001,
+        "lng": 12.933821940000001
+      },
+      "query": "C.K.P.P. Dienstleistungen, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3637432,
+        "lng": 12.935988,
+        "display_name": "Tierärzte am Werderpark, Marktstraße, Werder (Havel), Deutschland",
+        "class": "amenity",
+        "type": "veterinary",
+        "provider": "photon"
+      },
+      "delta_m": 1673,
+      "from_city_m": 252,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_werder_havel_gluckstr",
+      "name": "Werder (Havel), Gluckstr.",
+      "category": "bahnhof",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.376908359999995,
+        "lng": 12.94253688
+      },
+      "query": "Werder , Gluckstr., Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.380756,
+        "lng": 12.9236911,
+        "display_name": "Gluckstraße, Werder (Havel), Deutschland",
+        "class": "highway",
+        "type": "residential",
+        "provider": "photon"
+      },
+      "delta_m": 1349,
+      "from_city_m": 572,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_atelier_werderkeramik"
+      ]
+    },
+    {
+      "id": "werder_werder_feinkost_gmbh",
+      "name": "Werder Feinkost GmbH",
+      "category": "souvenir",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.391632779999995,
+        "lng": 12.923675640000003
+      },
+      "query": "Werder Feinkost GmbH, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3999133,
+        "lng": 12.9118112,
+        "display_name": "Werder Feinkost, Hans-Grade-Straße, Werder (Havel), Deutschland",
+        "class": "man_made",
+        "type": "works",
+        "provider": "photon"
+      },
+      "delta_m": 1223,
+      "from_city_m": 1830,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_ev_heilig_geist_kirchengemeinde_werder_gemeindeburo",
+      "name": "Ev. Heilig-Geist- Kirchengemeinde Werder Gemeindebüro",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.384163690909084,
+        "lng": 12.93280248181818
+      },
+      "query": "Ev. Heilig-Geist- Kirchengemeinde, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3772453,
+        "lng": 12.9440893,
+        "display_name": "Heilig-Geist-Kirche, Kirchstraße, Werder (Havel), Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 1086,
+      "from_city_m": 860,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_zelterhaus",
+      "name": "Zelterhaus",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.3441066875,
+        "lng": 12.947276687500002
+      },
+      "query": "Zelterhaus, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3426681,
+        "lng": 12.9365121,
+        "display_name": "Zelterhaus, Zum Lindentor, Petzow, Werder (Havel), Potsdam-Mittelmark, Brandenburg, 14542, Deutschland",
+        "class": "historic",
+        "type": "memorial",
+        "importance": 0.00005466163118939525,
+        "osm_type": "node",
+        "osm_id": 2475418833,
+        "provider": "nominatim"
+      },
+      "delta_m": 749,
+      "from_city_m": 3708,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_christine_berger_gmbh_co_kg",
+        "werder_badestelle_schwielowsee_petzow",
+        "werder_parkplatz",
+        "werder_bootshaus_ditze"
+      ]
+    },
+    {
+      "id": "werder_regattastrecke_werder",
+      "name": "Regattastrecke Werder",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.3792487,
+        "lng": 12.939118100000002
+      },
+      "query": "Regattastrecke Werder, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.385219,
+        "lng": 12.9361367,
+        "display_name": "Regattastrecke Werder, Werder (Havel), Potsdam-Mittelmark, Brandenburg, 14542, Deutschland",
+        "class": "waterway",
+        "type": "navigation",
+        "importance": 0.13338799496452275,
+        "osm_type": "way",
+        "osm_id": 297120639,
+        "provider": "nominatim"
+      },
+      "delta_m": 694,
+      "from_city_m": 458,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_fahrradbrucke_zum_bahnhof_werder",
+      "name": "Fahrradbrücke zum Bahnhof Werder",
+      "category": "bahnhof",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.392461880000006,
+        "lng": 12.935654779999998
+      },
+      "query": "Fahrradbrücke zum Bahnhof Werder, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3926822,
+        "lng": 12.9255496,
+        "display_name": "Werder (Havel), Bahnhof, Adolf-Damaschke-Straße, Werder (Havel), Deutschland",
+        "class": "highway",
+        "type": "bus_stop",
+        "provider": "photon"
+      },
+      "delta_m": 686,
+      "from_city_m": 1781,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_wiese_an_der_regattastrecke_werder",
+      "name": "Wiese an der Regattastrecke Werder",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.3798829,
+        "lng": 12.9389649
+      },
+      "query": "Wiese an der Regattastrecke Werder, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.385219,
+        "lng": 12.9361367,
+        "display_name": "Regattastrecke Werder, Werder (Havel), Deutschland",
+        "class": "waterway",
+        "type": "navigation",
+        "provider": "photon"
+      },
+      "delta_m": 624,
+      "from_city_m": 501,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_ms_bismarckhohe",
+      "name": "MS Bismarckhöhe",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.37757378,
+        "lng": 12.939700519999999
+      },
+      "query": "MS Bismarckhöhe, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3813447,
+        "lng": 12.933638,
+        "display_name": "Bismarckhöhe, Eisenbahnstraße, Werder (Havel), Deutschland",
+        "class": "highway",
+        "type": "bus_stop",
+        "provider": "photon"
+      },
+      "delta_m": 587,
+      "from_city_m": 397,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_insel_werder",
+      "name": "Insel Werder",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.37921415714286,
+        "lng": 12.941223000000003
+      },
+      "query": "Insel Werder, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3836435,
+        "lng": 12.9377093,
+        "display_name": "Wasserzugang Nordspitze Insel, Werder (Havel), Potsdam-Mittelmark, Brandenburg, Deutschland",
+        "class": "landuse",
+        "type": "recreation_ground",
+        "importance": 0.0800546616311894,
+        "osm_type": "way",
+        "osm_id": 1549981083,
+        "provider": "nominatim"
+      },
+      "delta_m": 547,
+      "from_city_m": 569,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_werder_havel_markt"
+      ]
+    },
+    {
+      "id": "werder_dorfkirche_glindow",
+      "name": "Dorfkirche Glindow",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.36574538,
+        "lng": 12.9105244
+      },
+      "query": "Dorfkirche Glindow, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3642656,
+        "lng": 12.9041997,
+        "display_name": "Glindow, Werder (Havel), Deutschland",
+        "class": "place",
+        "type": "suburb",
+        "provider": "photon"
+      },
+      "delta_m": 460,
+      "from_city_m": 1998,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_heimatverein_glindow_e_v_im_heimatmuseum",
+        "werder_osm_transit_376294776"
+      ]
+    },
+    {
+      "id": "werder_petzow_schlosspark",
+      "name": "Petzow, Schloßpark",
+      "category": "natur",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.345545594444445,
+        "lng": 12.942106205555554
+      },
+      "query": "Petzow, Schloßpark, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.342463,
+        "lng": 12.9458832,
+        "display_name": "Schloßpark Petzow, Werder (Havel), Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "provider": "photon"
+      },
+      "delta_m": 428,
+      "from_city_m": 3481,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_kirche_petzow",
+        "werder_heimatverein_petzow_e_v",
+        "werder_osm_transit_2987462207"
+      ]
+    },
+    {
+      "id": "werder_marina_inselblick",
+      "name": "Marina Inselblick",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.3798027,
+        "lng": 12.9352699
+      },
+      "query": "Marina Inselblick, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.382872,
+        "lng": 12.9330456,
+        "display_name": "Inselblick, Werder (Havel), Deutschland",
+        "class": "highway",
+        "type": "residential",
+        "provider": "photon"
+      },
+      "delta_m": 373,
+      "from_city_m": 378,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_schiffsanleger_werder_insel",
+      "name": "Schiffsanleger Werder Insel",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.37980618,
+        "lng": 12.945119119999998
+      },
+      "query": "Schiffsanleger Werder Insel, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3766927,
+        "lng": 12.9442014,
+        "display_name": "Alter Friedhof Inselstadt Werder, Werder (Havel), Deutschland",
+        "class": "landuse",
+        "type": "cemetery",
+        "provider": "photon"
+      },
+      "delta_m": 352,
+      "from_city_m": 832,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_strand_am_glindower_see",
+      "name": "Strand am Glindower See",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.349731286666646,
+        "lng": 12.934502993333332
+      },
+      "query": "Strand am Glindower See, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.348054,
+        "lng": 12.9385828,
+        "display_name": "Kajakverleih am Glindower See, Zum Inselparadies, Werder (Havel), Deutschland",
+        "class": "amenity",
+        "type": "boat_rental",
+        "provider": "photon"
+      },
+      "delta_m": 334,
+      "from_city_m": 2973,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_historischer_fahranleger_phoben",
+      "name": "Historischer Fähranleger Phöben",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.42979056666667,
+        "lng": 12.882323766666667
+      },
+      "query": "Historischer Fähranleger Phöben, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.426956,
+        "lng": 12.8808367,
+        "display_name": "Phöben Ein historuscher Ort, An der Kirche, Werder (Havel), Deutschland",
+        "class": "information",
+        "type": "board",
+        "provider": "photon"
+      },
+      "delta_m": 331,
+      "from_city_m": 6893,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_marina_havelauen_in_werder_havel_pro_marin_maintenance_service",
+      "name": "Marina Havelauen in Werder (Havel) // PRO marin (Maintenance & Service)",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.400925977358476,
+        "lng": 12.911785767924533
+      },
+      "query": "Marina Havelauen in Werder //, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3992318,
+        "lng": 12.9155838,
+        "display_name": "Marina Havelauen, Hafenpromenade, Werder (Havel), Deutschland",
+        "class": "leisure",
+        "type": "marina",
+        "provider": "photon"
+      },
+      "delta_m": 319,
+      "from_city_m": 3114,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_heimatverein_petzow_e_v",
+      "name": "Heimatverein Petzow e.V",
+      "category": "wanderung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.345545594444445,
+        "lng": 12.942106205555554
+      },
+      "query": "Heimatverein Petzow e.V, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3472683,
+        "lng": 12.9451781,
+        "display_name": "Evangelischer Bergfriedhof Petzow, Werder (Havel), Deutschland",
+        "class": "landuse",
+        "type": "cemetery",
+        "provider": "photon"
+      },
+      "delta_m": 283,
+      "from_city_m": 3481,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_kirche_petzow",
+        "werder_petzow_schlosspark",
+        "werder_osm_transit_2987462207"
+      ]
+    },
+    {
+      "id": "werder_glindower_alpen",
+      "name": "Glindower Alpen",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.34999894090909,
+        "lng": 12.918232340909093
+      },
+      "query": "Glindower Alpen, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.350544,
+        "lng": 12.9217826,
+        "display_name": "Glindower Alpen, Petzow, Werder (Havel), Potsdam-Mittelmark, Brandenburg, Deutschland",
+        "class": "leisure",
+        "type": "nature_reserve",
+        "importance": 0.21584611680957558,
+        "osm_type": "way",
+        "osm_id": 69468916,
+        "provider": "nominatim"
+      },
+      "delta_m": 249,
+      "from_city_m": 3136,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_dorfkirche_plessow",
+      "name": "Dorfkirche Plessow",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.38670078260869,
+        "lng": 12.87659171304348
+      },
+      "query": "Dorfkirche Plessow, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3847606,
+        "lng": 12.8753411,
+        "display_name": "Plessow, Werder (Havel), Deutschland",
+        "class": "place",
+        "type": "village",
+        "provider": "photon"
+      },
+      "delta_m": 232,
+      "from_city_m": 4069,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_marina_vulkan_werft",
+      "name": "Marina Vulkan Werft",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.390776599999995,
+        "lng": 12.930561400000002
+      },
+      "query": "Marina Vulkan Werft, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3919173,
+        "lng": 12.9330067,
+        "display_name": "Marina Vulkan, Weg zum Ufer, Werder (Havel), Deutschland",
+        "class": "leisure",
+        "type": "marina",
+        "provider": "photon"
+      },
+      "delta_m": 209,
+      "from_city_m": 1609,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_heimatverein_glindow_e_v_im_heimatmuseum",
+      "name": "Heimatverein Glindow e.V. im Heimatmuseum",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.36574538,
+        "lng": 12.9105244
+      },
+      "query": "Heimatverein Glindow e.V., Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3656007,
+        "lng": 12.9134542,
+        "display_name": "Anglerverein Glindow e.V., Jahnufer, Werder (Havel), Deutschland",
+        "class": "leisure",
+        "type": "sports_centre",
+        "provider": "photon"
+      },
+      "delta_m": 200,
+      "from_city_m": 1998,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_dorfkirche_glindow",
+        "werder_osm_transit_376294776"
+      ]
+    },
+    {
+      "id": "werder_stadtpark",
+      "name": "Stadtpark",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.3774467120879,
+        "lng": 12.915812242857141
+      },
+      "query": "Stadtpark, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3780642,
+        "lng": 12.9183046,
+        "display_name": "Stadtwald Werder, Werder (Havel), Potsdam-Mittelmark, Brandenburg, Deutschland",
+        "class": "landuse",
+        "type": "forest",
+        "importance": 0.0800546616311894,
+        "osm_type": "relation",
+        "osm_id": 2850338,
+        "provider": "nominatim"
+      },
+      "delta_m": 183,
+      "from_city_m": 1249,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_ankerplatz_vor_halbinsel_werder_havel",
+      "name": "Ankerplatz vor Halbinsel Werder (Havel)",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.37981406,
+        "lng": 12.93406672
+      },
+      "query": "Ankerplatz vor Halbinsel Werder, Werder (Havel), Germany",
+      "osm": {
+        "lat": 53.4884738,
+        "lng": 13.0916333,
+        "display_name": "Halbinsel Werder, Penzlin, Deutschland",
+        "class": "highway",
+        "type": "residential",
+        "provider": "photon"
+      },
+      "delta_m": 123729,
+      "from_city_m": 372,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city",
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_flossvermietung_werder",
+        "werder_glamping_und_floss_vermietung_werder_havel"
+      ]
+    },
+    {
+      "id": "werder_denkmal_otto_lilienthal_erste_fluge",
+      "name": "Denkmal Otto Lilienthal \"Erste Flüge\"",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.31077957142857,
+        "lng": 12.929230828571425
+      },
+      "query": "Denkmal Otto Lilienthal \"Erste Flüge\", Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.7453513,
+        "lng": 12.393785,
+        "display_name": "Russisches Denkmal \"Erster Flieger Otto Lilienthal\", Kleiner Rundweg, Rhinow, Deutschland",
+        "class": "historic",
+        "type": "memorial",
+        "provider": "photon"
+      },
+      "delta_m": 60390,
+      "from_city_m": 7312,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city",
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_staffelgiebelturme",
+        "werder_kajakverleih_am_glindower_see",
+        "werder_reederei_bernd_kuhl_gmbh_hier_keine_abfahrt",
+        "werder_evangelische_kirchengemeinde",
+        "werder_immobilienburo_vehlow",
+        "werder_loch",
+        "werder_aussichtspunkt_wachtelberg_phoben",
+        "werder_geo_concept_brunnenbau",
+        "werder_atelier_ralf_wilhelm_schmidt",
+        "werder_wald_galerie_ferch",
+        "werder_burgruine_zolchow"
+      ]
+    },
+    {
+      "id": "werder_aussichtspunkt_wachtelberg_phoben",
+      "name": "Aussichtspunkt Wachtelberg Phöben",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.31077957142857,
+        "lng": 12.929230828571425
+      },
+      "query": "Aussichtspunkt Wachtelberg Phöben, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.4261215,
+        "lng": 12.8813296,
+        "display_name": "Am Phöbener Wachtelberg, Werder (Havel), Deutschland",
+        "class": "highway",
+        "type": "residential",
+        "provider": "photon"
+      },
+      "delta_m": 13231,
+      "from_city_m": 7312,
+      "status": "CHECK",
+      "flags": [
+        "house_like_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_staffelgiebelturme",
+        "werder_kajakverleih_am_glindower_see",
+        "werder_reederei_bernd_kuhl_gmbh_hier_keine_abfahrt",
+        "werder_evangelische_kirchengemeinde",
+        "werder_immobilienburo_vehlow",
+        "werder_loch",
+        "werder_denkmal_otto_lilienthal_erste_fluge",
+        "werder_geo_concept_brunnenbau",
+        "werder_atelier_ralf_wilhelm_schmidt",
+        "werder_wald_galerie_ferch",
+        "werder_burgruine_zolchow"
+      ]
+    },
+    {
+      "id": "werder_jahnufer",
+      "name": "Jahnufer",
+      "category": "altstadt",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.377171249999996,
+        "lng": 12.932369255555553
+      },
+      "query": "Jahnufer, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3575523,
+        "lng": 12.9202771,
+        "display_name": "Jahnufer, Glindow, Werder (Havel), Potsdam-Mittelmark, Brandenburg, 14542, Deutschland",
+        "class": "highway",
+        "type": "residential",
+        "importance": 0.05338799496452274,
+        "osm_type": "way",
+        "osm_id": 28230451,
+        "provider": "nominatim"
+      },
+      "delta_m": 2331,
+      "from_city_m": 143,
+      "status": "CHECK",
+      "flags": [
+        "house_like_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_werder_havel_post",
+        "werder_inselsteg_werder",
+        "werder_prinz_albert_gedachtniswiese",
+        "werder_heiliger_zen_teich",
+        "werder_belvedere_glindower_alpen",
+        "werder_aussichtspunkt",
+        "werder_holzfiguren",
+        "werder_fuchsberg_bei_glindow"
+      ]
+    },
+    {
+      "id": "werder_werder_parkplatz_historische_altstadt",
+      "name": "Werder Parkplatz Historische Altstadt",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.377714839999996,
+        "lng": 12.936283880000001
+      },
+      "query": "Werder Parkplatz Historische Altstadt, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3790282,
+        "lng": 12.9396289,
+        "display_name": "Lendelhaus & Historische Saftfabrik, Uferstraße, Werder (Havel), Deutschland",
+        "class": "tourism",
+        "type": "hotel",
+        "provider": "photon"
+      },
+      "delta_m": 270,
+      "from_city_m": 201,
+      "status": "CHECK",
+      "flags": [
+        "house_like_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_schlossgarten_petzow",
+      "name": "Schlossgarten Petzow",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.3453209,
+        "lng": 12.946534934374997
+      },
+      "query": "Schlossgarten Petzow, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3451445,
+        "lng": 12.9441332,
+        "display_name": "Petzow, Werder (Havel), Deutschland",
+        "class": "place",
+        "type": "village",
+        "provider": "photon"
+      },
+      "delta_m": 164,
+      "from_city_m": 3564,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_schlosspark_schloss_petzow",
+      "name": "Schlosspark Schloss Petzow",
+      "category": "natur",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.34385864000001,
+        "lng": 12.94657914
+      },
+      "query": "Schlosspark Schloss Petzow, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.342463,
+        "lng": 12.9458832,
+        "display_name": "Schloßpark Petzow, Werder (Havel), Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "provider": "photon"
+      },
+      "delta_m": 162,
+      "from_city_m": 3723,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_schloss_petzow"
+      ]
+    },
+    {
+      "id": "werder_strandbad_glindow",
+      "name": "Strandbad Glindow",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.3612487818182,
+        "lng": 12.916736190909091
+      },
+      "query": "Strandbad Glindow, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3618197,
+        "lng": 12.9147098,
+        "display_name": "Zum Strandbad, Glindow, Werder (Havel), Potsdam-Mittelmark, Brandenburg, 14542, Deutschland",
+        "class": "highway",
+        "type": "residential",
+        "importance": 0.05338799496452274,
+        "osm_type": "way",
+        "osm_id": 135467154,
+        "provider": "nominatim"
+      },
+      "delta_m": 152,
+      "from_city_m": 2064,
+      "status": "CHECK",
+      "flags": [
+        "house_like_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_kirche_petzow",
+      "name": "Kirche Petzow",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.345545594444445,
+        "lng": 12.942106205555554
+      },
+      "query": "Kirche Petzow, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3451445,
+        "lng": 12.9441332,
+        "display_name": "Petzow, Werder (Havel), Deutschland",
+        "class": "place",
+        "type": "village",
+        "provider": "photon"
+      },
+      "delta_m": 145,
+      "from_city_m": 3481,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_petzow_schlosspark",
+        "werder_heimatverein_petzow_e_v",
+        "werder_osm_transit_2987462207"
+      ]
+    },
+    {
+      "id": "werder_ziegeleimuseum_glindow",
+      "name": "Ziegeleimuseum Glindow",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.354904239999996,
+        "lng": 12.92099408
+      },
+      "query": "Ziegeleimuseum Glindow, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3537968,
+        "lng": 12.9220718,
+        "display_name": "Ziegeleimuseum & Ziegelmanufaktur Glindow, 47, Alpenstraße, Glindow, Werder (Havel), Potsdam-Mittelmark, Brandenburg, 14542, Deutschland",
+        "class": "amenity",
+        "type": "industrial",
+        "importance": 0.18157831638402872,
+        "osm_type": "way",
+        "osm_id": 293509734,
+        "provider": "nominatim"
+      },
+      "delta_m": 143,
+      "from_city_m": 2559,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_unruh_marine",
+      "name": "Unruh Marine",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.389553680000006,
+        "lng": 12.931793379999998
+      },
+      "query": "Unruh Marine, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3898936,
+        "lng": 12.9335057,
+        "display_name": "Hafen Unruh Marine, Weg zum Ufer, Werder (Havel), Potsdam-Mittelmark, Brandenburg, 14542, Deutschland",
+        "class": "leisure",
+        "type": "marina",
+        "importance": 0.00005466163118939525,
+        "osm_type": "node",
+        "osm_id": 2076369251,
+        "provider": "nominatim"
+      },
+      "delta_m": 122,
+      "from_city_m": 1463,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_atelier_werderkeramik",
+      "name": "Atelier Werderkeramik",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.376908359999995,
+        "lng": 12.94253688
+      },
+      "query": "Atelier Werderkeramik, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3779265,
+        "lng": 12.9420136,
+        "display_name": "Atelier Paula Grün, Kirchstraße, Werder (Havel), Deutschland",
+        "class": "tourism",
+        "type": "gallery",
+        "provider": "photon"
+      },
+      "delta_m": 119,
+      "from_city_m": 572,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_werder_havel_gluckstr"
+      ]
+    },
+    {
+      "id": "werder_aussichtsturm_wachtelberg",
+      "name": "Aussichtsturm Wachtelberg",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.36972224000001,
+        "lng": 12.93398182
+      },
+      "query": "Aussichtsturm Wachtelberg, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3693295,
+        "lng": 12.9324178,
+        "display_name": "Wachtelberg, Werder (Havel), Deutschland",
+        "class": "landuse",
+        "type": "vineyard",
+        "provider": "photon"
+      },
+      "delta_m": 115,
+      "from_city_m": 750,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_werderaner_fc_viktoria_1920",
+      "name": "Werderaner FC Viktoria 1920",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.381160699999995,
+        "lng": 12.9401979
+      },
+      "query": "Werderaner FC Viktoria 1920, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3817677,
+        "lng": 12.9414875,
+        "display_name": "Werderaner FC Viktoria 1920, 16, Werderwiesen, Kleingartenverein Havelstrand, Werder (Havel), Potsdam-Mittelmark, Brandenburg, 14542, Deutschland",
+        "class": "club",
+        "type": "sport",
+        "importance": 0.00005466163118939525,
+        "osm_type": "node",
+        "osm_id": 9010408093,
+        "provider": "nominatim"
+      },
+      "delta_m": 111,
+      "from_city_m": 664,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_werder_havel_post",
+      "name": "Werder (Havel), Post",
+      "category": "bahnhof",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.377171249999996,
+        "lng": 12.932369255555553
+      },
+      "query": "Werder , Post, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3768421,
+        "lng": 12.9337165,
+        "display_name": "Post, Eisenbahnstraße, Werder (Havel), Deutschland",
+        "class": "highway",
+        "type": "bus_stop",
+        "provider": "photon"
+      },
+      "delta_m": 99,
+      "from_city_m": 143,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_inselsteg_werder",
+        "werder_prinz_albert_gedachtniswiese",
+        "werder_heiliger_zen_teich",
+        "werder_jahnufer",
+        "werder_belvedere_glindower_alpen",
+        "werder_aussichtspunkt",
+        "werder_holzfiguren",
+        "werder_fuchsberg_bei_glindow"
+      ]
+    },
+    {
+      "id": "werder_marina_zernsee",
+      "name": "Marina Zernsee",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.407669580000004,
+        "lng": 12.91279972
+      },
+      "query": "Marina Zernsee, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.4082267,
+        "lng": 12.9135961,
+        "display_name": "Marina Zernsee, Am Jachthafen, Werder (Havel), Potsdam-Mittelmark, Brandenburg, 14542, Deutschland",
+        "class": "leisure",
+        "type": "marina",
+        "importance": 0.00005466163118939525,
+        "osm_type": "node",
+        "osm_id": 672102810,
+        "provider": "nominatim"
+      },
+      "delta_m": 82,
+      "from_city_m": 3759,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_werder_havel_bahnhof",
+      "name": "Werder (Havel), Bahnhof",
+      "category": "bahnhof",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.39278368666667,
+        "lng": 12.926388053333335
+      },
+      "query": "Werder , Bahnhof, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3926822,
+        "lng": 12.9255496,
+        "display_name": "Werder (Havel), Bahnhof, Adolf-Damaschke-Straße, Werder (Havel), Deutschland",
+        "class": "highway",
+        "type": "bus_stop",
+        "provider": "photon"
+      },
+      "delta_m": 58,
+      "from_city_m": 1889,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_werder_havel",
+        "werder_osm_transit_9043732861"
+      ]
+    },
+    {
+      "id": "werder_werder_havel_markt",
+      "name": "Werder (Havel), Markt",
+      "category": "bahnhof",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.37923458,
+        "lng": 12.941345420000001
+      },
+      "query": "Werder , Markt, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3789972,
+        "lng": 12.9406532,
+        "display_name": "Am Markt, Werder (Havel), Deutschland",
+        "class": "highway",
+        "type": "residential",
+        "provider": "photon"
+      },
+      "delta_m": 54,
+      "from_city_m": 577,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_insel_werder"
+      ]
+    },
+    {
+      "id": "werder_schloss_petzow",
+      "name": "Schloss Petzow",
+      "category": "wanderung",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.34394128,
+        "lng": 12.946714420000001
+      },
+      "query": "Schloss Petzow, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3440576,
+        "lng": 12.9466026,
+        "display_name": "Schloss Petzow, 5, Zelterstraße, Petzow, Werder (Havel), Potsdam-Mittelmark, Brandenburg, 14542, Deutschland",
+        "class": "historic",
+        "type": "manor",
+        "importance": 0.16273786379520622,
+        "osm_type": "way",
+        "osm_id": 38434905,
+        "provider": "nominatim"
+      },
+      "delta_m": 15,
+      "from_city_m": 3716,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_schlosspark_schloss_petzow"
+      ]
+    },
+    {
+      "id": "werder_alter_friedhof_inselstadt_werder",
+      "name": "Alter Friedhof Inselstadt Werder",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.376748616666674,
+        "lng": 12.94423467916667
+      },
+      "query": "Alter Friedhof Inselstadt Werder, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3766927,
+        "lng": 12.9442014,
+        "display_name": "Alter Friedhof Inselstadt Werder, Werder (Havel), Potsdam-Mittelmark, Brandenburg, Deutschland",
+        "class": "landuse",
+        "type": "cemetery",
+        "importance": 0.08004919584954602,
+        "osm_type": "way",
+        "osm_id": 52071506,
+        "provider": "nominatim"
+      },
+      "delta_m": 7,
+      "from_city_m": 686,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_anlegestelle_werder_insel",
+        "werder_inselterrassen_arielle"
+      ]
+    },
+    {
+      "id": "werder_ev_heilig_geist_kirchengemeinde_werder_havel_buro_glindow",
+      "name": "Ev. Heilig-Geist-Kirchengemeinde Werder/Havel Büro Glindow",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.37723421538462,
+        "lng": 12.944139080769228
+      },
+      "query": "Ev. Heilig-Geist-Kirchengemeinde Werder/Havel, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3772453,
+        "lng": 12.9440893,
+        "display_name": "Heilig-Geist-Kirche, Kirchstraße, Werder (Havel), Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 4,
+      "from_city_m": 684,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_fahre_petzow",
+        "werder_heilig_geist_kirche"
+      ]
+    },
+    {
+      "id": "werder_kirche_phoben",
+      "name": "Kirche Phöben",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.42689564117648,
+        "lng": 12.880367311764708
+      },
+      "query": "Kirche Phöben, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.4268939,
+        "lng": 12.8803116,
+        "display_name": "Kirche Phöben, An der Kirche, Phöben, Werder (Havel), Potsdam-Mittelmark, Brandenburg, 14542, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.00005466163118939525,
+        "osm_type": "way",
+        "osm_id": 74395996,
+        "provider": "nominatim"
+      },
+      "delta_m": 4,
+      "from_city_m": 6689,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_brunnenbau_phoben_gmbh_bernd_zander"
+      ]
+    },
+    {
+      "id": "werder_heilig_geist_kirche",
+      "name": "Heilig-Geist-Kirche",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.377238049999995,
+        "lng": 12.94413876923077
+      },
+      "query": "Heilig-Geist-Kirche, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3772453,
+        "lng": 12.9440893,
+        "display_name": "Heilig-Geist-Kirche, Kirchstraße, Werder (Havel), Potsdam-Mittelmark, Brandenburg, 14542, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.1570394422394589,
+        "osm_type": "way",
+        "osm_id": 32095375,
+        "provider": "nominatim"
+      },
+      "delta_m": 3,
+      "from_city_m": 684,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_fahre_petzow",
+        "werder_ev_heilig_geist_kirchengemeinde_werder_havel_buro_glindow"
+      ]
+    },
+    {
+      "id": "werder_werder_havel",
+      "name": "Werder (Havel)",
+      "category": "bahnhof",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.39278368666667,
+        "lng": 12.926388053333335
+      },
+      "query": "Werder, Werder (Havel)",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 1889,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_werder_havel_bahnhof",
+        "werder_osm_transit_9043732861"
+      ]
+    },
+    {
+      "id": "werder_parkhaus",
+      "name": "Parkhaus",
+      "category": "bahnhof",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.3923001,
+        "lng": 12.928381799999999
+      },
+      "query": "Parkhaus, Werder (Havel)",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 1803,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_anlegestelle_werder_insel",
+      "name": "Anlegestelle Werder (Insel)",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.376748616666674,
+        "lng": 12.94423467916667
+      },
+      "query": "Anlegestelle Werder, Werder (Havel)",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 686,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_alter_friedhof_inselstadt_werder",
+        "werder_inselterrassen_arielle"
+      ]
+    },
+    {
+      "id": "werder_christian_morgenstern_literaturmuseum",
+      "name": "Christian Morgenstern Literaturmuseum",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.38037084,
+        "lng": 12.92917808
+      },
+      "query": "Christian Morgenstern Literaturmuseum, Werder (Havel)",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 549,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_adventgemeinde_werder",
+      "name": "Adventgemeinde Werder",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.371310519999994,
+        "lng": 12.933076300000002
+      },
+      "query": "Adventgemeinde Werder, Werder (Havel)",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 578,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_alte_bergamotte_werder",
+      "name": "Alte Bergamotte Werder",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.377493699999995,
+        "lng": 12.9450156
+      },
+      "query": "Alte Bergamotte Werder, Werder (Havel)",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 747,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_kriegerdenkmal_geltow",
+      "name": "Kriegerdenkmal Geltow",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.363618040000006,
+        "lng": 12.961648020000002
+      },
+      "query": "Kriegerdenkmal Geltow, Werder (Havel)",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 2351,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_osm_transit_2142475965"
+      ]
+    },
+    {
+      "id": "werder_bronzeskulptur_fischotter",
+      "name": "Bronzeskulptur Fischotter",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.35882832,
+        "lng": 12.96325434
+      },
+      "query": "Bronzeskulptur Fischotter, Werder (Havel)",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 2785,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_inselsteg_werder",
+      "name": "Inselsteg Werder",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.377171249999996,
+        "lng": 12.932369255555553
+      },
+      "query": "Inselsteg Werder, Werder (Havel)",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 143,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_werder_havel_post",
+        "werder_prinz_albert_gedachtniswiese",
+        "werder_heiliger_zen_teich",
+        "werder_jahnufer",
+        "werder_belvedere_glindower_alpen",
+        "werder_aussichtspunkt",
+        "werder_holzfiguren",
+        "werder_fuchsberg_bei_glindow"
+      ]
+    },
+    {
+      "id": "werder_prinz_albert_gedachtniswiese",
+      "name": "Prinz Albert Gedächtniswiese",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.377171249999996,
+        "lng": 12.932369255555553
+      },
+      "query": "Prinz Albert Gedächtniswiese, Werder (Havel)",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 143,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_werder_havel_post",
+        "werder_inselsteg_werder",
+        "werder_heiliger_zen_teich",
+        "werder_jahnufer",
+        "werder_belvedere_glindower_alpen",
+        "werder_aussichtspunkt",
+        "werder_holzfiguren",
+        "werder_fuchsberg_bei_glindow"
+      ]
+    },
+    {
+      "id": "werder_heiliger_zen_teich",
+      "name": "Heiliger Zen-Teich",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.377171249999996,
+        "lng": 12.932369255555553
+      },
+      "query": "Heiliger Zen-Teich, Werder (Havel)",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 143,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_werder_havel_post",
+        "werder_inselsteg_werder",
+        "werder_prinz_albert_gedachtniswiese",
+        "werder_jahnufer",
+        "werder_belvedere_glindower_alpen",
+        "werder_aussichtspunkt",
+        "werder_holzfiguren",
+        "werder_fuchsberg_bei_glindow"
+      ]
+    },
+    {
+      "id": "werder_werderaner_rentner_umsonst",
+      "name": "Werderaner Rentner umsonst",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.376295240000005,
+        "lng": 12.935299479999998
+      },
+      "query": "Werderaner Rentner umsonst, Werder (Havel)",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 81,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_stadtarchiv_werder",
+      "name": "Stadtarchiv Werder",
+      "category": "verwaltung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.396556579999995,
+        "lng": 12.92381294
+      },
+      "query": "Stadtarchiv Werder, Werder (Havel)",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 2341,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_aussichtspunkt",
+      "name": "Aussichtspunkt",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.377171249999996,
+        "lng": 12.932369255555553
+      },
+      "query": "Aussichtspunkt, Werder (Havel)",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 143,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_werder_havel_post",
+        "werder_inselsteg_werder",
+        "werder_prinz_albert_gedachtniswiese",
+        "werder_heiliger_zen_teich",
+        "werder_jahnufer",
+        "werder_belvedere_glindower_alpen",
+        "werder_holzfiguren",
+        "werder_fuchsberg_bei_glindow"
+      ]
+    },
+    {
+      "id": "werder_holzfiguren",
+      "name": "Holzfiguren",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.377171249999996,
+        "lng": 12.932369255555553
+      },
+      "query": "Holzfiguren, Werder (Havel)",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 143,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_werder_havel_post",
+        "werder_inselsteg_werder",
+        "werder_prinz_albert_gedachtniswiese",
+        "werder_heiliger_zen_teich",
+        "werder_jahnufer",
+        "werder_belvedere_glindower_alpen",
+        "werder_aussichtspunkt",
+        "werder_fuchsberg_bei_glindow"
+      ]
+    },
+    {
+      "id": "werder_wanderweg_rund_um_geltow",
+      "name": "Wanderweg rund um Geltow",
+      "category": "wanderung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.37896938,
+        "lng": 12.99046376
+      },
+      "query": "Wanderweg rund um, Werder (Havel), Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 3833,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_wilde_badestelle_im_plessower_see",
+      "name": "Wilde Badestelle im Plessower See",
+      "category": "wanderung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.39297458,
+        "lng": 12.882963139999998
+      },
+      "query": "Wilde Badestelle im, Werder (Havel), Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 3929,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_christine_berger_gmbh_co_kg",
+      "name": "Christine Berger GmbH & Co. KG",
+      "category": "radweg",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.3441066875,
+        "lng": 12.947276687500002
+      },
+      "query": "Christine Berger GmbH, Werder (Havel)",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 3708,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_badestelle_schwielowsee_petzow",
+        "werder_parkplatz",
+        "werder_zelterhaus",
+        "werder_bootshaus_ditze"
+      ]
+    },
+    {
+      "id": "werder_gahejuwele",
+      "name": "GaheJuwele",
+      "category": "souvenir",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.399521379999996,
+        "lng": 12.919205140000003
+      },
+      "query": "GaheJuwele, Werder (Havel)",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 2756,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_atelier_werderkeramik_im_andenkenhaus_petzow_am_schlosspark",
+      "name": "Atelier Werderkeramik im Andenkenhaus Petzow am Schlosspark",
+      "category": "souvenir",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.34459482,
+        "lng": 12.94109518
+      },
+      "query": "Atelier Werderkeramik im, Werder (Havel), Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 3576,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_staffelgiebelturme",
+      "name": "Staffelgiebeltürme",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.31077957142857,
+        "lng": 12.929230828571425
+      },
+      "query": "Staffelgiebeltürme, Werder (Havel)",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 7312,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_kajakverleih_am_glindower_see",
+        "werder_reederei_bernd_kuhl_gmbh_hier_keine_abfahrt",
+        "werder_evangelische_kirchengemeinde",
+        "werder_immobilienburo_vehlow",
+        "werder_loch",
+        "werder_aussichtspunkt_wachtelberg_phoben",
+        "werder_denkmal_otto_lilienthal_erste_fluge",
+        "werder_geo_concept_brunnenbau",
+        "werder_atelier_ralf_wilhelm_schmidt",
+        "werder_wald_galerie_ferch",
+        "werder_burgruine_zolchow"
+      ]
+    },
+    {
+      "id": "werder_galerie_geltow",
+      "name": "Galerie - Geltow",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.36368364,
+        "lng": 12.912572540000003
+      },
+      "query": "Galerie, Werder (Havel)",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 2041,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_gut_schloss_golm",
+      "name": "Gut Schloß Golm",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.40599897142857,
+        "lng": 12.946840128571429
+      },
+      "query": "Gut Schloß Golm, Werder (Havel)",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 3395,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_pgg_potsdamer_gartengestaltung_wo_grun_begeistert",
+      "name": "PGG Potsdamer Gartengestaltung. Wo Grün begeistert",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.39803534,
+        "lng": 12.91407938
+      },
+      "query": "PGG Potsdamer Gartengestaltung., Werder (Havel), Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 2758,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_flossvermietung_werder",
+      "name": "Floßvermietung Werder",
+      "category": "tour",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.37981406,
+        "lng": 12.93406672
+      },
+      "query": "Floßvermietung Werder, Werder (Havel)",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 372,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_ankerplatz_vor_halbinsel_werder_havel",
+        "werder_glamping_und_floss_vermietung_werder_havel"
+      ]
+    },
+    {
+      "id": "werder_glamping_und_floss_vermietung_werder_havel",
+      "name": "Glamping und Floß Vermietung Werder (Havel)",
+      "category": "tour",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.37981406,
+        "lng": 12.93406672
+      },
+      "query": "Glamping, Werder (Havel)",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 372,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_ankerplatz_vor_halbinsel_werder_havel",
+        "werder_flossvermietung_werder"
+      ]
+    },
+    {
+      "id": "werder_reederei_bernd_kuhl_gmbh_hier_keine_abfahrt",
+      "name": "Reederei Bernd Kuhl Gmbh(Hier keine Abfahrt)",
+      "category": "tour",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.31077957142857,
+        "lng": 12.929230828571425
+      },
+      "query": "Reederei Bernd Kuhl, Werder (Havel), Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 7312,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_staffelgiebelturme",
+        "werder_kajakverleih_am_glindower_see",
+        "werder_evangelische_kirchengemeinde",
+        "werder_immobilienburo_vehlow",
+        "werder_loch",
+        "werder_aussichtspunkt_wachtelberg_phoben",
+        "werder_denkmal_otto_lilienthal_erste_fluge",
+        "werder_geo_concept_brunnenbau",
+        "werder_atelier_ralf_wilhelm_schmidt",
+        "werder_wald_galerie_ferch",
+        "werder_burgruine_zolchow"
+      ]
+    },
+    {
+      "id": "werder_perlenfischerei_on_tour_ug",
+      "name": "Perlenfischerei On Tour UG",
+      "category": "tour",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.356773280000006,
+        "lng": 12.959524400000001
+      },
+      "query": "Perlenfischerei On Tour, Werder (Havel), Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 2787,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_osm_post_box_9846859417"
+      ]
+    },
+    {
+      "id": "werder_my_rebella",
+      "name": "My Rebella",
+      "category": "souvenir",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.377152699999996,
+        "lng": 12.936063599999999
+      },
+      "query": "My Rebella, Werder (Havel)",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 151,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_loch",
+      "name": "LOCH",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.31077957142857,
+        "lng": 12.929230828571425
+      },
+      "query": "LOCH, Werder (Havel)",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 7312,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_staffelgiebelturme",
+        "werder_kajakverleih_am_glindower_see",
+        "werder_reederei_bernd_kuhl_gmbh_hier_keine_abfahrt",
+        "werder_evangelische_kirchengemeinde",
+        "werder_immobilienburo_vehlow",
+        "werder_aussichtspunkt_wachtelberg_phoben",
+        "werder_denkmal_otto_lilienthal_erste_fluge",
+        "werder_geo_concept_brunnenbau",
+        "werder_atelier_ralf_wilhelm_schmidt",
+        "werder_wald_galerie_ferch",
+        "werder_burgruine_zolchow"
+      ]
+    },
+    {
+      "id": "werder_geo_concept_brunnenbau",
+      "name": "GEO Concept Brunnenbau",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.31077957142857,
+        "lng": 12.929230828571425
+      },
+      "query": "GEO Concept Brunnenbau, Werder (Havel)",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 7312,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_staffelgiebelturme",
+        "werder_kajakverleih_am_glindower_see",
+        "werder_reederei_bernd_kuhl_gmbh_hier_keine_abfahrt",
+        "werder_evangelische_kirchengemeinde",
+        "werder_immobilienburo_vehlow",
+        "werder_loch",
+        "werder_aussichtspunkt_wachtelberg_phoben",
+        "werder_denkmal_otto_lilienthal_erste_fluge",
+        "werder_atelier_ralf_wilhelm_schmidt",
+        "werder_wald_galerie_ferch",
+        "werder_burgruine_zolchow"
+      ]
+    },
+    {
+      "id": "werder_statuenrondell_ohne_namen",
+      "name": "Statuenrondell ohne Namen",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.401323362068965,
+        "lng": 13.033278331034484
+      },
+      "query": "Statuenrondell ohne Namen, Werder (Havel)",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 7273,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_kriegerdenkmal",
+      "name": "Kriegerdenkmal",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.36366332857143,
+        "lng": 12.829857514285715
+      },
+      "query": "Kriegerdenkmal, Werder (Havel)",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 7222,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_freundschaftsbrunnen_gorch_wenske_heinz_dubel_eberhard_bachmann",
+      "name": "Freundschaftsbrunnen - Gorch Wenske, Heinz Dübel, Eberhard Bachmann",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.39596849999999,
+        "lng": 13.067773545454545
+      },
+      "query": "Freundschaftsbrunnen, Werder (Havel)",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 9324,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_rossbrunnen",
+      "name": "Roßbrunnen",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.40450206,
+        "lng": 13.038767693333334
+      },
+      "query": "Roßbrunnen, Werder (Havel)",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 7754,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_gedenkstele_jurgen_von_woyski",
+      "name": "Gedenkstele - Jürgen von Woyski",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.40963810000001,
+        "lng": 13.06322670909091
+      },
+      "query": "Gedenkstele, Werder (Havel)",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 9504,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_bastian_dressler_michael_geist_brunnenbau_gbr",
+      "name": "Bastian Dreßler & Michael Geist Brunnenbau GbR",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.42862531111111,
+        "lng": 12.90742791111111
+      },
+      "query": "Bastian Dreßler, Werder (Havel)",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 6076,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_wald_galerie_ferch",
+      "name": "WALD GALERIE FERCH",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.31077957142857,
+        "lng": 12.929230828571425
+      },
+      "query": "WALD GALERIE FERCH, Werder (Havel)",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 7312,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_staffelgiebelturme",
+        "werder_kajakverleih_am_glindower_see",
+        "werder_reederei_bernd_kuhl_gmbh_hier_keine_abfahrt",
+        "werder_evangelische_kirchengemeinde",
+        "werder_immobilienburo_vehlow",
+        "werder_loch",
+        "werder_aussichtspunkt_wachtelberg_phoben",
+        "werder_denkmal_otto_lilienthal_erste_fluge",
+        "werder_geo_concept_brunnenbau",
+        "werder_atelier_ralf_wilhelm_schmidt",
+        "werder_burgruine_zolchow"
+      ]
+    },
+    {
+      "id": "werder_aussichtspunkt_havel",
+      "name": "Aussichtspunkt Havel",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.31276992000001,
+        "lng": 12.932885160000001
+      },
+      "query": "Aussichtspunkt Havel, Werder (Havel)",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 7084,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_toplitzer_spitze",
+        "werder_aussichtsplattform_caputher_gemunde",
+        "werder_aussichtspunkt_wublitz",
+        "werder_aussichtsplattform_schwielowsee",
+        "werder_kleingartenkolonie_berliner_bar",
+        "werder_garten_in_glindow",
+        "werder_kleiner_badestrand_von_alt_toplitz",
+        "werder_hausbootvermietung_werder_gbr",
+        "werder_bootscharter_keser"
+      ]
+    },
+    {
+      "id": "werder_aussichtsplattform_caputher_gemunde",
+      "name": "Aussichtsplattform Caputher Gemünde",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.31276992000001,
+        "lng": 12.932885160000001
+      },
+      "query": "Aussichtsplattform Caputher Gemünde, Werder (Havel)",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 7084,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_toplitzer_spitze",
+        "werder_aussichtspunkt_havel",
+        "werder_aussichtspunkt_wublitz",
+        "werder_aussichtsplattform_schwielowsee",
+        "werder_kleingartenkolonie_berliner_bar",
+        "werder_garten_in_glindow",
+        "werder_kleiner_badestrand_von_alt_toplitz",
+        "werder_hausbootvermietung_werder_gbr",
+        "werder_bootscharter_keser"
+      ]
+    },
+    {
+      "id": "werder_kleingartenkolonie_berliner_bar",
+      "name": "Kleingartenkolonie Berliner Bär",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.31276992000001,
+        "lng": 12.932885160000001
+      },
+      "query": "Kleingartenkolonie Berliner Bär, Werder (Havel)",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 7084,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_toplitzer_spitze",
+        "werder_aussichtspunkt_havel",
+        "werder_aussichtsplattform_caputher_gemunde",
+        "werder_aussichtspunkt_wublitz",
+        "werder_aussichtsplattform_schwielowsee",
+        "werder_garten_in_glindow",
+        "werder_kleiner_badestrand_von_alt_toplitz",
+        "werder_hausbootvermietung_werder_gbr",
+        "werder_bootscharter_keser"
+      ]
+    },
+    {
+      "id": "werder_wegestern_im_wildpark",
+      "name": "Wegestern im Wildpark",
+      "category": "freizeitpark",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.38834956000001,
+        "lng": 12.999789095
+      },
+      "query": "Wegestern im Wildpark, Werder (Havel)",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 4647,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "werder_hausbootvermietung_werder_gbr",
+      "name": "Hausbootvermietung Werder GbR",
+      "category": "tour",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.31276992000001,
+        "lng": 12.932885160000001
+      },
+      "query": "Hausbootvermietung Werder GbR, Werder (Havel)",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 7084,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "werder_toplitzer_spitze",
+        "werder_aussichtspunkt_havel",
+        "werder_aussichtsplattform_caputher_gemunde",
+        "werder_aussichtspunkt_wublitz",
+        "werder_aussichtsplattform_schwielowsee",
+        "werder_kleingartenkolonie_berliner_bar",
+        "werder_garten_in_glindow",
+        "werder_kleiner_badestrand_von_alt_toplitz",
+        "werder_bootscharter_keser"
+      ]
+    },
+    {
+      "id": "werder_yachthafen_ringel",
+      "name": "Yachthafen Ringel",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.417324412499994,
+        "lng": 12.91710971875
+      },
+      "query": "Yachthafen Ringel, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.4170252,
+        "lng": 12.9163839,
+        "display_name": "Yachthafen Ringel, A 10, Töplitz, Werder (Havel), Potsdam-Mittelmark, Brandenburg, 14542, Deutschland",
+        "class": "leisure",
+        "type": "marina",
+        "importance": 0.00005466163118939525,
+        "osm_type": "way",
+        "osm_id": 413381420,
+        "provider": "nominatim"
+      },
+      "delta_m": 59,
+      "from_city_m": 4687,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "werder_erdeberg",
+      "name": "Erdeberg",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.359073620000004,
+        "lng": 12.896182139999999
+      },
+      "query": "Erdeberg, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3595799,
+        "lng": 12.8962298,
+        "display_name": "Erdeberg, Glindow, Werder (Havel), Potsdam-Mittelmark, Brandenburg, Deutschland",
+        "class": "water",
+        "type": "lake",
+        "importance": 0.13338799496452275,
+        "osm_type": "way",
+        "osm_id": 28262625,
+        "provider": "nominatim"
+      },
+      "delta_m": 56,
+      "from_city_m": 3223,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "werder_yachthafen_scheunhornweg",
+      "name": "Yachthafen Scheunhornweg",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.37367238,
+        "lng": 12.939744440000002
+      },
+      "query": "Yachthafen Scheunhornweg, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3739074,
+        "lng": 12.9404241,
+        "display_name": "Yachthafen Scheunhornweg, 7, Adolf-Kärger-Straße, Werder (Havel), Potsdam-Mittelmark, Brandenburg, 14542, Deutschland",
+        "class": "leisure",
+        "type": "marina",
+        "importance": 0.00005466163118939525,
+        "osm_type": "node",
+        "osm_id": 1996973134,
+        "provider": "nominatim"
+      },
+      "delta_m": 53,
+      "from_city_m": 491,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "werder_unter_den_linden_werder_havel",
+      "name": "Unter den Linden Werder (Havel)",
+      "category": "altstadt",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.3771959,
+        "lng": 12.936967
+      },
+      "query": "Unter den Linden Werder, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3770253,
+        "lng": 12.9363124,
+        "display_name": "Unter den Linden, Werder (Havel), Potsdam-Mittelmark, Brandenburg, 14542, Deutschland",
+        "class": "highway",
+        "type": "residential",
+        "importance": 0.05338799496452274,
+        "osm_type": "way",
+        "osm_id": 172919138,
+        "provider": "nominatim"
+      },
+      "delta_m": 48,
+      "from_city_m": 208,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "werder_museum_bockwindmuhle",
+      "name": "Museum Bockwindmühle",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.3773601,
+        "lng": 12.9432493
+      },
+      "query": "Museum Bockwindmühle, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3771181,
+        "lng": 12.9428522,
+        "display_name": "Bockwindmühle, Am Mühlenberg, Werder (Havel), Potsdam-Mittelmark, Brandenburg, 14542, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.00004919584954599859,
+        "osm_type": "node",
+        "osm_id": 5841526756,
+        "provider": "nominatim"
+      },
+      "delta_m": 38,
+      "from_city_m": 626,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "werder_lillienthal_gedenkhaus_derwitz",
+      "name": "Lillienthal-Gedenkhaus Derwitz",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.40351356,
+        "lng": 12.82450295
+      },
+      "query": "Lillienthal-Gedenkhaus Derwitz, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.4034436,
+        "lng": 12.8250569,
+        "display_name": "Lilienthal-Museum, Am Derwitzer Dorfplatz, Werder (Havel), Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 38,
+      "from_city_m": 8025,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "werder_strandbad_werder",
+      "name": "Strandbad Werder",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.378624939999995,
+        "lng": 12.90815158
+      },
+      "query": "Strandbad Werder, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3788723,
+        "lng": 12.9084948,
+        "display_name": "Strandbad Werder, Am Plessower See, Glindow, Werder (Havel), Potsdam-Mittelmark, Brandenburg, 14542, Deutschland",
+        "class": "leisure",
+        "type": "beach_resort",
+        "importance": 0.00005466163118939525,
+        "osm_type": "way",
+        "osm_id": 77908046,
+        "provider": "nominatim"
+      },
+      "delta_m": 36,
+      "from_city_m": 1781,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "werder_kirschgarten_werder",
+      "name": "Kirschgarten Werder",
+      "category": "wanderung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.38042987142857,
+        "lng": 12.862012357142858
+      },
+      "query": "Kirschgarten Werder, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3806563,
+        "lng": 12.8623839,
+        "display_name": "Kirschgarten Werder, Plötzin, Werder (Havel), Potsdam-Mittelmark, Brandenburg, Deutschland",
+        "class": "landuse",
+        "type": "orchard",
+        "importance": 0.0800546616311894,
+        "osm_type": "way",
+        "osm_id": 265751048,
+        "provider": "nominatim"
+      },
+      "delta_m": 36,
+      "from_city_m": 4916,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "werder_vs_mode_werder_havel",
+      "name": "VS-Mode Werder/ Havel",
+      "category": "souvenir",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.363836879999994,
+        "lng": 12.93614938
+      },
+      "query": "VS-Mode Werder/ Havel, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3636508,
+        "lng": 12.9357436,
+        "display_name": "VS Mode, 1f, Marktstraße, Werder (Havel), Potsdam-Mittelmark, Brandenburg, 14542, Deutschland",
+        "class": "shop",
+        "type": "clothes",
+        "importance": 0.00005466163118939525,
+        "osm_type": "node",
+        "osm_id": 14072948732,
+        "provider": "nominatim"
+      },
+      "delta_m": 34,
+      "from_city_m": 1411,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "werder_wasserwanderrastplatz_werder_havel",
+      "name": "Wasserwanderrastplatz Werder (Havel)",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.37901558000001,
+        "lng": 12.93644372
+      },
+      "query": "Wasserwanderrastplatz Werder, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3791636,
+        "lng": 12.9368547,
+        "display_name": "Wasserwanderrastplatz Werder, Bernhard-Kellermann-Straße, Werder (Havel), Potsdam-Mittelmark, Brandenburg, 14542, Deutschland",
+        "class": "leisure",
+        "type": "marina",
+        "importance": 0.00005466163118939525,
+        "osm_type": "node",
+        "osm_id": 1996973305,
+        "provider": "nominatim"
+      },
+      "delta_m": 32,
+      "from_city_m": 323,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "werder_yachtcharter_werder_in_berlin_brandenburg",
+      "name": "Yachtcharter Werder in Berlin/Brandenburg",
+      "category": "tour",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.38963318000001,
+        "lng": 12.932833640000002
+      },
+      "query": "Yachtcharter Werder in Berlin/Brandenburg, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3894068,
+        "lng": 12.932942,
+        "display_name": "Yachtcharter Werder, Adolf-Damaschke-Straße, Werder (Havel), Deutschland",
+        "class": "office",
+        "type": "company",
+        "provider": "photon"
+      },
+      "delta_m": 26,
+      "from_city_m": 1466,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "werder_werder_havel_werderpark",
+      "name": "Werder (Havel), Werderpark",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.36288284,
+        "lng": 12.93313216
+      },
+      "query": "Werder , Werderpark, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3630804,
+        "lng": 12.9331772,
+        "display_name": "Werderpark, Auf dem Strengfeld, Werder (Havel), Deutschland",
+        "class": "shop",
+        "type": "mall",
+        "provider": "photon"
+      },
+      "delta_m": 22,
+      "from_city_m": 1512,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "werder_denns_biomarkt_werder",
+      "name": "Denns BioMarkt Werder",
+      "category": "souvenir",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.3634865,
+        "lng": 12.933622699999999
+      },
+      "query": "Denns BioMarkt Werder, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3635524,
+        "lng": 12.9339169,
+        "display_name": "Denns BioMarkt, 6, Auf dem Strengfeld, Werder (Havel), Potsdam-Mittelmark, Brandenburg, 14542, Deutschland",
+        "class": "shop",
+        "type": "supermarket",
+        "importance": 0.00005466163118939525,
+        "osm_type": "node",
+        "osm_id": 5434254111,
+        "provider": "nominatim"
+      },
+      "delta_m": 21,
+      "from_city_m": 1444,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "werder_obelisk",
+      "name": "Obelisk",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.3435432,
+        "lng": 12.9457831
+      },
+      "query": "Obelisk, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3436536,
+        "lng": 12.9460053,
+        "display_name": "Obelisk, Zelterstraße, Petzow, Werder (Havel), Potsdam-Mittelmark, Brandenburg, 14542, Deutschland",
+        "class": "historic",
+        "type": "memorial",
+        "importance": 0.00005466163118939525,
+        "osm_type": "node",
+        "osm_id": 3441667961,
+        "provider": "nominatim"
+      },
+      "delta_m": 19,
+      "from_city_m": 3746,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "werder_schloss_paretz",
+      "name": "Schloss Paretz",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.46834937999999,
+        "lng": 12.876737420000001
+      },
+      "query": "Schloss Paretz, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.4684249,
+        "lng": 12.8769888,
+        "display_name": "Schloss Paretz, Parkring, Ketzin/Havel, Deutschland",
+        "class": "building",
+        "type": "yes",
+        "provider": "photon"
+      },
+      "delta_m": 19,
+      "from_city_m": 10933,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "werder_das_radhaus_werder_an_der_havel",
+      "name": "Das Radhaus Werder an der Havel",
+      "category": "radweg",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.363996179999994,
+        "lng": 12.942374180000002
+      },
+      "query": "Das Radhaus Werder an der, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3640345,
+        "lng": 12.9425885,
+        "display_name": "DAS RADHAUS Werder, Berliner Straße, Werder (Havel), Deutschland",
+        "class": "shop",
+        "type": "bicycle",
+        "provider": "photon"
+      },
+      "delta_m": 15,
+      "from_city_m": 1495,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "werder_ekz_werderpark",
+      "name": "EKZ Werderpark",
+      "category": "verwaltung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.36300860000001,
+        "lng": 12.9333381
+      },
+      "query": "EKZ Werderpark, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3630804,
+        "lng": 12.9331772,
+        "display_name": "Werderpark, Auf dem Strengfeld, Werder (Havel), Deutschland",
+        "class": "shop",
+        "type": "mall",
+        "provider": "photon"
+      },
+      "delta_m": 14,
+      "from_city_m": 1498,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "werder_kaim_bringt_s_werder_havel",
+      "name": "Kaim bringt's - Werder Havel",
+      "category": "souvenir",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.3763533,
+        "lng": 12.9329973
+      },
+      "query": "Kaim bringt's, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.376307,
+        "lng": 12.933159,
+        "display_name": "Kaim bringt's, 1a, Brandenburger Straße, Werder (Havel), Potsdam-Mittelmark, Brandenburg, 14542, Deutschland",
+        "class": "shop",
+        "type": "stationery",
+        "importance": 0.00005466163118939525,
+        "osm_type": "node",
+        "osm_id": 12645227579,
+        "provider": "nominatim"
+      },
+      "delta_m": 12,
+      "from_city_m": 79,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "werder_wachtelburg_christliches_jugendzentrum_und_begegnungsstatte",
+      "name": "Wachtelburg - Christliches Jugendzentrum und Begegnungsstätte",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.37072139375,
+        "lng": 12.933278268750001
+      },
+      "query": "Wachtelburg, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3707747,
+        "lng": 12.9334065,
+        "display_name": "Wachtelburg, 36,37, Wachtelwinkel, Werder (Havel), Potsdam-Mittelmark, Brandenburg, 14542, Deutschland",
+        "class": "building",
+        "type": "apartments",
+        "importance": 0.00005466163118939525,
+        "osm_type": "way",
+        "osm_id": 156319805,
+        "provider": "nominatim"
+      },
+      "delta_m": 11,
+      "from_city_m": 642,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "werder_drei_kaehne",
+      "name": "Drei Kaehne",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.34422612000001,
+        "lng": 12.94522306
+      },
+      "query": "Drei Kaehne, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.344268,
+        "lng": 12.945366,
+        "display_name": "Drei Kähne, 10, Zelterstraße, Petzow, Werder (Havel), Potsdam-Mittelmark, Brandenburg, 14542, Deutschland",
+        "class": "amenity",
+        "type": "cafe",
+        "importance": 0.00005466163118939525,
+        "osm_type": "node",
+        "osm_id": 12649889826,
+        "provider": "nominatim"
+      },
+      "delta_m": 11,
+      "from_city_m": 3664,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "werder_stadtgalerie_kunst_geschoss",
+      "name": "Stadtgalerie KUNST-GESCHOSS",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.380823299999996,
+        "lng": 12.939507700000002
+      },
+      "query": "Stadtgalerie KUNST-GESCHOSS, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3808705,
+        "lng": 12.9395646,
+        "display_name": "Kunst-Geschoss, Uferstraße, Werder (Havel), Deutschland",
+        "class": "tourism",
+        "type": "gallery",
+        "provider": "photon"
+      },
+      "delta_m": 7,
+      "from_city_m": 606,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "werder_bootsvermietung_kruger_till_werder_havel",
+      "name": "Bootsvermietung Krüger & Till Werder Havel",
+      "category": "radweg",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.3779202,
+        "lng": 12.937804499999999
+      },
+      "query": "Bootsvermietung Krüger, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3779396,
+        "lng": 12.9378789,
+        "display_name": "Bootsvermietung Krüger & Till, Unter den Linden, Werder (Havel), Potsdam-Mittelmark, Brandenburg, 14542, Deutschland",
+        "class": "amenity",
+        "type": "boat_rental",
+        "importance": 0.00005466163118939525,
+        "osm_type": "node",
+        "osm_id": 2998745674,
+        "provider": "nominatim"
+      },
+      "delta_m": 5,
+      "from_city_m": 296,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "werder_maria_meeresstern_katholische_kirche",
+      "name": "\"Maria Meeresstern\" Katholische Kirche",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.380282270588225,
+        "lng": 12.939565870588234
+      },
+      "query": "\"Maria Meeresstern\" Katholische Kirche, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3803032,
+        "lng": 12.9395726,
+        "display_name": "Maria Meeresstern, Uferstraße, Werder (Havel), Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 2,
+      "from_city_m": 561,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "werder_scala_kulturpalast",
+      "name": "Scala Kulturpalast",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.38194074615384,
+        "lng": 12.932930407692309
+      },
+      "query": "Scala Kulturpalast, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3819372,
+        "lng": 12.9329078,
+        "display_name": "Scala, Eisenbahnstraße, Werder (Havel), Deutschland",
+        "class": "amenity",
+        "type": "cinema",
+        "provider": "photon"
+      },
+      "delta_m": 2,
+      "from_city_m": 614,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "werder_museum_der_havellandischen_malerkolonie",
+      "name": "Museum der Havelländischen Malerkolonie",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.311345,
+        "lng": 12.929708880000002
+      },
+      "query": "Museum der Havelländischen Malerkolonie, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3113362,
+        "lng": 12.9297286,
+        "display_name": "Museum der Havelländischen Malerkolonie, Beelitzer Straße, Schwielowsee, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 2,
+      "from_city_m": 7248,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "werder_waschhaus_petzow",
+      "name": "Waschhaus Petzow",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.343935480000006,
+        "lng": 12.944733539999998
+      },
+      "query": "Waschhaus Petzow, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3439317,
+        "lng": 12.9447543,
+        "display_name": "Waschhaus, Zelterstraße, Petzow, Werder (Havel), Potsdam-Mittelmark, Brandenburg, 14542, Deutschland",
+        "class": "building",
+        "type": "yes",
+        "importance": 0.00005466163118939525,
+        "osm_type": "way",
+        "osm_id": 337070042,
+        "provider": "nominatim"
+      },
+      "delta_m": 1,
+      "from_city_m": 3689,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "werder_weintiene",
+      "name": "Weintiene",
+      "category": "radweg",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.36982247500001,
+        "lng": 12.933175625
+      },
+      "query": "Weintiene, Werder (Havel), Germany",
+      "osm": {
+        "lat": 52.3698252,
+        "lng": 12.9331691,
+        "display_name": "Straußwirtschaft Weintiene, 30, Wachtelwinkel, Werder (Havel), Potsdam-Mittelmark, Brandenburg, 14542, Deutschland",
+        "class": "amenity",
+        "type": "cafe",
+        "importance": 0.00005466163118939525,
+        "osm_type": "way",
+        "osm_id": 1086176486,
+        "provider": "nominatim"
+      },
+      "delta_m": 1,
+      "from_city_m": 742,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    }
+  ]
+}

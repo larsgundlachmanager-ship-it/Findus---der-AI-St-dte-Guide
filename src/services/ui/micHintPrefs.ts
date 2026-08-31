@@ -47,14 +47,12 @@ export async function loadMicHintPrefs(): Promise<MicHintPrefs> {
 }
 
 export function shouldShowMicHint(): boolean {
-  if (!cache) return true;
-  return !(cache.usedTap && cache.usedHold);
+  return false;
 }
 
-/** Ausführliche Lock-Erklärung, bis User einmal nach rechts gewischt hat. */
+/** Ausführliche Lock-Erklärung — dauerhaft aus (Mic-Coach entfernt). */
 export function shouldShowMicLockHint(): boolean {
-  if (!cache) return true;
-  return !cache.usedLock;
+  return false;
 }
 
 export async function markMicTapUsed(): Promise<void> {

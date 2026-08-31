@@ -1,0 +1,698 @@
+{
+  "city": "beelitz",
+  "apply": true,
+  "touched": 86,
+  "approachesFixed": 86,
+  "faqAdded": 0,
+  "data_version": 28,
+  "rows": [
+    {
+      "id": "beelitz_beelitz_stadt",
+      "name": "Beelitz Stadt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_beelitz_zum_bahnhof",
+      "name": "Beelitz, Zum Bahnhof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_alte_posthalterei_beelitz",
+      "name": "Alte Posthalterei Beelitz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_wassermuhle_ernst_vogel",
+      "name": "Wassermühle Ernst Vogel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_stadtpfarrkirche_st_marien_st_nikolai_zu_beelitz",
+      "name": "Stadtpfarrkirche St. Marien - St. Nikolai zu Beelitz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_kirchenpavillon",
+      "name": "Kirchenpavillon",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_grabhalle_friedhof_der_ev_kirchengemeinde_st_marien_st_nikolai_zu_beelit",
+      "name": "Grabhalle /Friedhof der Ev. Kirchengemeinde St. Marien - St. Nikolai zu Beelitz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_forderverein_stadtpfarrkirche_beelitz_e_v",
+      "name": "Förderverein Stadtpfarrkirche Beelitz e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_feldsteinkirche_schonefeld",
+      "name": "Feldsteinkirche Schönefeld",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_dorfkirche_reesdorf",
+      "name": "Dorfkirche Reesdorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_dorfkirche_elsholz",
+      "name": "Dorfkirche Elsholz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_dorfkirche_schlunkendorf",
+      "name": "Dorfkirche Schlunkendorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_carl_friedrich_wilhelm_herrmann_denkmal",
+      "name": "Carl Friedrich Wilhelm Herrmann-Denkmal",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_denkmal_der_sowjetischen_sanitater",
+      "name": "Denkmal der sowjetischen Sanitäter",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_die_drehende_kugel",
+      "name": "Die drehende Kugel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_stadtpark_beelitz",
+      "name": "Stadtpark Beelitz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_laga_beelitz",
+      "name": "LAGA Beelitz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_grosse_liegewiese",
+      "name": "Große Liegewiese",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_vogelbeobachtungsturm_bei_beelitz",
+      "name": "Vogelbeobachtungsturm bei Beelitz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_gelande_der_brandenburgischen_landesgartenschau_2022",
+      "name": "Gelände der Brandenburgischen Landesgartenschau 2022",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_laga_beelitz_parkplatz",
+      "name": "Laga Beelitz Parkplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_freibad_beelitz_eingang",
+      "name": "Freibad Beelitz Eingang",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_muhlenteich_mit_fontane",
+      "name": "Mühlenteich mit Fontäne",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_parkplatz_stadtpark_und_freilichtbuhne_beelitz",
+      "name": "Parkplatz Stadtpark und Freilichtbühne Beelitz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_teufelsee_feuchtgebietskette_ffh",
+      "name": "Teufelsee-Feuchtgebietskette (FFH)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_wasserturm_sternwarte",
+      "name": "Wasserturm / Sternwarte",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_baum_in_tur",
+      "name": "Baum in Tür",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_freibad_im_wasserturmpark_beelitz",
+      "name": "Freibad im Wasserturmpark Beelitz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_stadion_des_friedens",
+      "name": "Stadion des Friedens",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_skatepark_trendsportanlage_beelitz",
+      "name": "Skatepark Trendsportanlage Beelitz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_spielgarten_abenteuerland",
+      "name": "Spielgarten AbenteuerLand",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_sportplatz_beelitz",
+      "name": "Sportplatz Beelitz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_waldspielplatz_beelitz",
+      "name": "Waldspielplatz Beelitz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_sportplatz_bundeswehr",
+      "name": "Sportplatz Bundeswehr",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_reisemobilstellplatz_am_stadtpark_beelitz",
+      "name": "Reisemobilstellplatz am Stadtpark Beelitz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_tvg_sally_bein_beelitz_e_v",
+      "name": "TVG „Sally Bein“ Beelitz e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_parkplatz_freibad_beelitz",
+      "name": "Parkplatz Freibad Beelitz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_spielplatz_beelitz",
+      "name": "Spielplatz Beelitz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_einwohnermeldeamt_beelitz",
+      "name": "Einwohnermeldeamt Beelitz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_neues_lichtspielhaus_beelitz",
+      "name": "Neues Lichtspielhaus Beelitz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_alpakahof_elsholz",
+      "name": "Alpakahof Elsholz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_jakobs_hof_beelitz",
+      "name": "Jakobs-Hof Beelitz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_family_moden",
+      "name": "Family Moden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_bockwindmuhle_beelitz",
+      "name": "Bockwindmühle Beelitz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_fontane_im_ehemaligen_klarbecken",
+      "name": "Fontäne im ehemaligen Klärbecken",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_wasserkanal_laga_beelitz",
+      "name": "Wasserkanal Laga Beelitz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_kga_an_der_nieplitz_e_v",
+      "name": "KGA ,,An der Nieplitz\" e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_ballonfahrten_schafer_brandenburg",
+      "name": "Ballonfahrten Schäfer BRANDENBURG",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_malraus_das_reiseburo_dippe",
+      "name": "malraus - Das Reisebüro Dippe",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_regionales_spezialitaten",
+      "name": "Regionales & Spezialitäten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_lotto_toto_ina_muller_jahn",
+      "name": "Lotto-Toto Ina Müller-Jahn",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_nah_gut_piesik",
+      "name": "nah & gut Piesik",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_beelitzer_kaninchenspezialitaten_gmbh",
+      "name": "Beelitzer Kaninchenspezialitäten GmbH",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_kollektiv_lost",
+      "name": "KOLLEKTIV LOST",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_groschen_markt",
+      "name": "Groschen-Markt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_cafe_backerei_konditorei_neuendorff_patrick_kasten",
+      "name": "Café-Bäckerei-Konditorei Neuendorff Patrick Kasten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_fsh_landmarkt_geratetechnik",
+      "name": "FSH Landmarkt & Gerätetechnik",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_a_kamphenkel_getrankefachgrosshandel_west_gmbh",
+      "name": "A. Kamphenkel - Getränkefachgroßhandel West GmbH",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_insel_der_vielfalt_treffpunkt_fur_touren_nach_vereinbarung",
+      "name": "Insel der Vielfalt, Treffpunkt für Touren nach Vereinbarung",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "beelitz_mannersanatorium_beelitz_heilstatten",
+      "name": "Männersanatorium Beelitz-Heilstätten",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "beelitz_fasziation_beelitz_heilstatten",
+      "name": "Fasziation Beelitz-Heilstätten",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "beelitz_beelitz_heilstatten",
+      "name": "Beelitz Heilstätten",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 2,
+      "had_approaches": 1
+    },
+    {
+      "id": "beelitz_beelitzer_heilstatten",
+      "name": "Beelitzer Heilstätten",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "beelitz_beelitz_heilstatten_labor",
+      "name": "Beelitz-Heilstätten - Labor",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "beelitz_wasserspiel_auf_dem_spargelhof_klaistow",
+      "name": "Wasserspiel auf dem Spargelhof Klaistow",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "beelitz_beelitz_heilstatten_frauenpavillon",
+      "name": "Beelitz-Heilstätten - Frauenpavillon",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "beelitz_beelitz_heilstatten_kochkuche",
+      "name": "Beelitz-Heilstätten - Kochküche",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "beelitz_beelitz_heilstatten_das_alpenhaus",
+      "name": "Beelitz Heilstätten „Das Alpenhaus“",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "beelitz_dorfkirche_wittbrietzen",
+      "name": "Dorfkirche Wittbrietzen",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "beelitz_dorfkirche_salzbrunn",
+      "name": "Dorfkirche Salzbrunn",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "beelitz_dorfkirche_schape",
+      "name": "Dorfkirche Schäpe",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "beelitz_bohlensteg_blankensee",
+      "name": "Bohlensteg Blankensee",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "beelitz_schloss_blankensee",
+      "name": "Schloss Blankensee",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "beelitz_aussichtsturm_wietkiekenberg",
+      "name": "Aussichtsturm Wietkiekenberg",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "beelitz_beobachtungsturm_ungeheuerwiesen",
+      "name": "Beobachtungsturm Ungeheuerwiesen",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "beelitz_barfusspark_beelitz",
+      "name": "Barfußpark Beelitz",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "beelitz_beelitz_heilstatten_natur_park",
+      "name": "Beelitz Heilstätten Natur Park",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "beelitz_findlingsgarten_am_seddiner_see",
+      "name": "Findlingsgarten am Seddiner See",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "beelitz_obstplantage",
+      "name": "Obstplantage",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "beelitz_marina_ferch",
+      "name": "Marina Ferch",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "beelitz_spielplatz_an_der_marina",
+      "name": "Spielplatz an der Marina",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "beelitz_der_bootsverleih_wohlfuhlen_am_seddiner_see",
+      "name": "Der Bootsverleih - Wohlfühlen am Seddiner See",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "beelitz_bootsverleih_burgemeister",
+      "name": "Bootsverleih Burgemeister",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "beelitz_irene_krause",
+      "name": "Irene Krause",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "beelitz_snackstation_24_7_beelitz_snacks_getranke_zigaretten",
+      "name": "SnackStation 24/7 Beelitz – Snacks, Getränke & Zigaretten",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "beelitz_baumkronenpfad_beelitz",
+      "name": "Baumkronenpfad Beelitz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    }
+  ]
+}

@@ -21,11 +21,6 @@ import {
 } from '../../services/reservation/reservationPrefill';
 import { getCachedUserProfile } from '../../services/userProfileService';
 import { getReservationContact } from '../../types/userProfile';
-import {
-  detectOfferKind,
-  isSafeOfferUrl,
-  offerLabel,
-} from '../planning/offerActionUtils';
 import { shouldHandoffToPitchModule } from '../pitch/shouldHandoffPitch';
 import { researchPitchAsAgentResult } from '../pitch/pitchFactLane';
 
@@ -125,7 +120,11 @@ export const gastroAgent: Module2Agent = {
             label: shortenActionLabel(
               `${shortVenueLabel(advice.placeName || menuVenue || 'Karte', 12)} → Speisekarte`,
             ),
-            payload: { kind: 'deep_link', url: advice.menuUrl },
+            payload: {
+              kind: 'deep_link',
+              url: advice.menuUrl,
+              destName: advice.placeName || menuVenue || undefined,
+            },
           });
         }
         return {

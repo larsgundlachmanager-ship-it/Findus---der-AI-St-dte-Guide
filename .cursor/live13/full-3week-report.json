@@ -1,0 +1,188 @@
+{
+  "at": "2026-08-29T10:46:14.052066+00:00",
+  "device": "00143157P001105",
+  "apk": "2.0.26+fixes",
+  "results": [
+    {
+      "id": "wetter",
+      "q": "Wie ist das Wetter gerade hier?",
+      "family": "weather",
+      "verdict": "FAIL",
+      "bridge_ok": true,
+      "call2_ok": false,
+      "bullets_ok": true,
+      "buttons_ok": null,
+      "buttons_found": [
+        "route"
+      ],
+      "integration_ok": false,
+      "fails": [
+        "tippfeld_stuck",
+        "tippfeld_stuck"
+      ],
+      "snippet": "TIPPFELD_STUCK | Frage an Yorro | Schreib deine Frage an Yorro. | Abbrechen | Fragen | z. B. Seit wann gibt es den Bahnhof? | 🅿️ Parkplatz | Geparkt seit 1 Std 20 Min · 😊 Tippen | ✨ Was lohnt sich jetzt? | Kurzer Vorschlag passend zu dir · Tippen | Mittagessen nah? | 😊 Tippen für Vorschlag | 0 von 1 Orten · 0 % erkundet |  |  |  | Timeline | "
+    },
+    {
+      "id": "vegan",
+      "q": "Kein Fleisch bitte, ich will vegan essen",
+      "verdict": "FAIL",
+      "error": "NO_MODAL",
+      "bridge_ok": false,
+      "call2_ok": false,
+      "bullets_ok": false,
+      "buttons_ok": false,
+      "integration_ok": false,
+      "snippet": ""
+    },
+    {
+      "id": "angus",
+      "q": "Restaurant mit Angus-Steak in der Naehe",
+      "family": "dining_hard",
+      "verdict": "FAIL",
+      "bridge_ok": true,
+      "call2_ok": false,
+      "bullets_ok": true,
+      "buttons_ok": true,
+      "buttons_found": [
+        "route"
+      ],
+      "integration_ok": false,
+      "fails": [
+        "tippfeld_stuck",
+        "tippfeld_stuck"
+      ],
+      "snippet": "TIPPFELD_STUCK | Frage an Yorro | Schreib deine Frage an Yorro. | Abbrechen | Fragen | Restaurant mit Angus-Steak in der Naehe | 🅿️ Parkplatz | Geparkt seit 1 Std 23 Min · 😊 Tippen | ✨ Was lohnt sich jetzt? | Kurzer Vorschlag passend zu dir · Tippen | Mittagessen nah? | 😊 Tippen für Vorschlag | 0 % erkundet |  |  | Timeline |  | Orte"
+    },
+    {
+      "id": "oepnv",
+      "q": "Wie komme ich am schnellsten mit oeffentlichen Verkehrsmitteln zum Hauptbahnhof?",
+      "family": "transit",
+      "verdict": "FAIL",
+      "bridge_ok": true,
+      "call2_ok": false,
+      "bullets_ok": true,
+      "buttons_ok": true,
+      "buttons_found": [
+        "route"
+      ],
+      "integration_ok": false,
+      "fails": [],
+      "snippet": "Was geht heute Abend? | Kino, Konzert, Markt, Open Air in Prisdorf — nur was noch läuft. | 📍 Hier in der Gegend | ⛅ 18° | heute bis 21° | 0 von 1 Orten · 0 % erkundet |  |  | Timeline |  | Orte |  | Einst. | Was geht heute Abend?. Tippen: Tipps. Wischen: nächste Karte. Unten: Timeline · Orte · Einst. | 📍 Hier in der Gegend. Tippen: Tipps. Wischen: nächste Karte. Unten: Timeline · Orte · Einst. | ⛅ 18°. Tippen: Wetter und Tipps. Wischen: nächste Karte. | Showing a Map created with MapLibre. S"
+    },
+    {
+      "id": "nav_fast_hbf",
+      "q": "Bring mich schnell zum Hauptbahnhof",
+      "verdict": "FAIL",
+      "error": "NO_MODAL",
+      "bridge_ok": false,
+      "call2_ok": false,
+      "bullets_ok": false,
+      "buttons_ok": false,
+      "integration_ok": false,
+      "snippet": ""
+    },
+    {
+      "id": "compound_hh",
+      "q": "Morgen 9 Uhr los nach Hamburg, fruehstuecken, abends Pannfisch mit Elbblick, Michel rauf — wie hoch, wie teuer, was ist das, zwischendurch eine Tour, Sonnenuntergang",
+      "family": "compound",
+      "verdict": "FAIL",
+      "bridge_ok": true,
+      "call2_ok": false,
+      "bullets_ok": true,
+      "buttons_ok": true,
+      "buttons_found": [
+        "route"
+      ],
+      "integration_ok": false,
+      "fails": [],
+      "snippet": "Mittagessen nah? | 😊 Tippen für Vorschlag | Was geht heute Abend? | Kino, Konzert, Markt, Open Air in Prisdorf — nur was noch läuft. | 📍 Hier in der Gegend | 0 % erkundet |  |  |  | Timeline |  | Orte |  | Einst. | Mittagessen nah?. Tippen: Tipps. Wischen: nächste Karte. Unten: Timeline · Orte · Einst. | Was geht heute Abend?. Tippen: Tipps. Wischen: nächste Karte. Unten: Timeline · Orte · Einst. | 📍 Hier in der Gegend. Tippen: Tipps. Wischen: nächste Karte. Unten: Timeline · Orte · Einst. "
+    },
+    {
+      "id": "fuss_notfall",
+      "q": "Mein Freund hat den Fuss gebrochen, wo koennen wir hin?",
+      "family": "emergency",
+      "verdict": "FAIL",
+      "bridge_ok": true,
+      "call2_ok": false,
+      "bullets_ok": true,
+      "buttons_ok": true,
+      "buttons_found": [
+        "route"
+      ],
+      "integration_ok": false,
+      "fails": [
+        "tippfeld_stuck",
+        "tippfeld_stuck"
+      ],
+      "snippet": "TIPPFELD_STUCK | Frage an Yorro | Schreib deine Frage an Yorro. | Abbrechen | Fragen | Mein Freund hat den Fuss gebrochen, wo koennen wir hin? | ⛅ 18° | heute bis 21° | 🅿️ Parkplatz | Geparkt seit 1 Std 30 Min · 😊 Tippen | ✨ Was lohnt sich jetzt? | Kurzer Vorschlag passend zu dir · Tippen | 0 % erkundet |  |  | Timeline |  | Orte"
+    },
+    {
+      "id": "zahn",
+      "q": "Ich habe akute Zahnschmerzen, welcher Zahnarzt hat jetzt Notdienst?",
+      "family": "emergency",
+      "verdict": "FAIL",
+      "bridge_ok": true,
+      "call2_ok": false,
+      "bullets_ok": true,
+      "buttons_ok": true,
+      "buttons_found": [
+        "route"
+      ],
+      "integration_ok": false,
+      "fails": [],
+      "snippet": "Was geht heute Abend? | Kino, Konzert, Markt, Open Air in Prisdorf — nur was noch läuft. | 📍 Hier in der Gegend | ⛅ 18° | heute bis 21° | 0 von 29 Orten · 0 % erkundet |  |  |  | Timeline |  | Orte |  | Einst. | Was geht heute Abend?. Tippen: Tipps. Wischen: nächste Karte. Unten: Timeline · Orte · Einst. | 📍 Hier in der Gegend. Tippen: Tipps. Wischen: nächste Karte. Unten: Timeline · Orte · Einst. | ⛅ 18°. Tippen: Wetter und Tipps. Wischen: nächste Karte. | Showing a Map created with MapLib"
+    },
+    {
+      "id": "scooter",
+      "q": "Wo kann ich mir fuer heute einen E-Scooter leihen?",
+      "verdict": "FAIL",
+      "error": "NO_MODAL",
+      "bridge_ok": false,
+      "call2_ok": false,
+      "bullets_ok": false,
+      "buttons_ok": false,
+      "integration_ok": false,
+      "snippet": ""
+    },
+    {
+      "id": "pass_lost",
+      "q": "Ich habe meinen Reisepass verloren, wo ist mein Konsulat?",
+      "family": "safety",
+      "verdict": "FAIL",
+      "bridge_ok": true,
+      "call2_ok": false,
+      "bullets_ok": true,
+      "buttons_ok": true,
+      "buttons_found": [
+        "route"
+      ],
+      "integration_ok": false,
+      "fails": [
+        "tippfeld_stuck",
+        "tippfeld_stuck"
+      ],
+      "snippet": "TIPPFELD_STUCK | Frage an Yorro | Schreib deine Frage an Yorro. | Abbrechen | Fragen | z. B. Seit wann gibt es den Bahnhof? | Was geht heute Abend? | Kino, Konzert, Markt, Open Air in Prisdorf — nur was noch läuft. | 📍 Hier in der Gegend | ⛅ 18° | heute bis 21° | 0 von 29 Orten · 0 % erkundet |  |  | Timeline |  | Orte | "
+    },
+    {
+      "id": "museum_trex",
+      "q": "Wo kann ich einen Tyrannosaurus Rex sehen und welches Museum lohnt sich mehr?",
+      "family": "museum",
+      "verdict": "PASS",
+      "bridge_ok": true,
+      "call2_ok": true,
+      "bullets_ok": true,
+      "buttons_ok": true,
+      "buttons_found": [
+        "route"
+      ],
+      "integration_ok": true,
+      "fails": [],
+      "snippet": "📍 Hier in der Gegend | ⛅ 18° | heute bis 21° | 🅿️ Parkplatz | Geparkt seit 1 Std 37 Min · 😊 Tippen | 0 von 29 Orten · 0 % erkundet |  | Museum | ✕ | • Museum | • Museumsvergleich |  |  | Timeline |  | Orte |  | Einst."
+    }
+  ],
+  "summary": {
+    "pass": 1,
+    "total": 11,
+    "rate": 0.09090909090909091
+  }
+}

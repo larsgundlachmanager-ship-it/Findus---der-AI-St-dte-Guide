@@ -764,7 +764,19 @@ export function hasPromotedFollowUpSlot(opts: {
   const topic = (opts.topic || '').toLowerCase();
   return cachedPromoted.some((p) => {
     if (p.signalKind !== 'followup') return false;
-    if (fam && fam !== 'general' && p.intentFamily !== fam && p.intentFamily !== 'general') {
+    const sameCinemaCluster = (a: string, b: string): boolean => {
+      const cluster = (x: string) =>
+        x === 'cinema' || x === 'theater' || x === 'events';
+      if (cluster(a) && cluster(b)) return true;
+      return a === b;
+    };
+    if (
+      fam &&
+      fam !== 'general' &&
+      p.intentFamily !== fam &&
+      p.intentFamily !== 'general' &&
+      !sameCinemaCluster(fam, p.intentFamily)
+    ) {
       return false;
     }
     if (String(p.payload.slot ?? '') !== opts.slot) return false;

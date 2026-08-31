@@ -1,5 +1,5 @@
 ﻿/**
- * Stadtwechsel-Prompt â€” Cover + Fakten wie Stadt-Katalog, Yorro-Design.
+ * Stadtwechsel-Prompt — Cover + Fakten wie Stadt-Katalog, Yorro-Design.
  * Overlay statt RN-Modal (Android: Modal oft nur Fragmente / kein Inhalt).
  */
 
@@ -40,8 +40,10 @@ type Pending = {
 };
 
 function formatKm(km: number): string {
+  if (!(km >= 0) || !Number.isFinite(km)) return '—';
   if (km < 10) return `${km.toFixed(1)} km`;
-  return `${Math.round(km)} km`;
+  if (km < 100) return `${Math.round(km)} km`;
+  return `${Math.round(km / 10) * 10} km`;
 }
 
 function CityHero({
@@ -92,7 +94,7 @@ function CityHero({
       />
       <View style={styles.heroBadge}>
         <Text style={styles.heroBadgeText}>
-          {badge || (soft ? 'Neu erkannt' : 'NÃ¤her bei dir')}
+          {badge || (soft ? 'Neu erkannt' : 'Näher bei dir')}
         </Text>
       </View>
     </View>
@@ -109,15 +111,23 @@ function StatPill({ num, label }: { num: number; label: string }) {
 }
 
 /**
- * Einmal in App mounten â€” Presenter fÃ¼r cityProximityService.
- * Absolutes Overlay (kein RN-Modal) â†’ Android zeigt die Karte zuverlÃ¤ssig.
+ * Einmal in App mounten — Presenter für cityProximityService.
+ * Absolutes Overlay (kein RN-Modal) → Android zeigt die Karte zuverlässig.
  */
 export function CitySwitchPromptHost() {
   const [pending, setPending] = useState<Pending | null>(null);
   const [acceptedFlash, setAcceptedFlash] = useState(false);
   const acceptedRef = useRef(false);
   const pendingRef = useRef<Pending | null>(null);
+  const dismissTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   pendingRef.current = pending;
+
+  const clearDismissTimer = () => {
+    if (dismissTimerRef.current) {
+      clearTimeout(dismissTimerRef.current);
+      dismissTimerRef.current = null;
+    }
+  };
 
   const finish = (decision: CitySwitchDecision) => {
     const cur = pendingRef.current;
@@ -127,15 +137,19 @@ export function CitySwitchPromptHost() {
       if (acceptedRef.current) return;
       acceptedRef.current = true;
       setAcceptedFlash(true);
+      // Sofort freigeben → Download/Pack im Hintergrund; Karte nur kurz mit Haken.
       cur.resolve('accept');
-      setTimeout(() => {
+      clearDismissTimer();
+      dismissTimerRef.current = setTimeout(() => {
         acceptedRef.current = false;
         pendingRef.current = null;
         setPending(null);
         setAcceptedFlash(false);
-      }, 520);
+        dismissTimerRef.current = null;
+      }, 180);
       return;
     }
+    clearDismissTimer();
     try {
       cur.resolve('dismiss');
     } catch {
@@ -153,6 +167,7 @@ export function CitySwitchPromptHost() {
   useEffect(() => {
     registerCitySwitchPresenter((payload) => {
       return new Promise<CitySwitchDecision>((resolve) => {
+        clearDismissTimer();
         acceptedRef.current = false;
         setAcceptedFlash(false);
         const next = { payload, resolve };
@@ -162,12 +177,14 @@ export function CitySwitchPromptHost() {
     });
     registerCitySwitchSettledListener(() => {
       if (acceptedRef.current) return;
+      clearDismissTimer();
       pendingRef.current = null;
       setPending(null);
       setAcceptedFlash(false);
     });
     registerCitySwitchAbort((d) => finishRef.current(d));
     return () => {
+      clearDismissTimer();
       registerCitySwitchPresenter(null);
       registerCitySwitchSettledListener(null);
       registerCitySwitchAbort(null);
@@ -180,13 +197,15 @@ export function CitySwitchPromptHost() {
     pending.payload;
   const research = reason === 'research';
   const meta = citySearchMeta(nearest.id);
-  const regionLine = [meta.region, meta.country].filter(Boolean).join(' Â· ');
+  const regionLine = [meta.region, meta.country].filter(Boolean).join(' · ');
   const triggers = nearest.triggerCount ?? nearest.placeCount ?? 0;
   const zones = nearest.zoneCount ?? nearest.directoryCount ?? 0;
   const stories = nearest.storyCount ?? 0;
   const facts = nearest.factCount ?? 0;
   const selectedName = selected.name?.trim() || 'deiner Stadt';
   const soft = Boolean(softTarget);
+  const gapKm = Math.max(0, selectedKm - nearestKm);
+  const clearlyCloser = gapKm >= 3;
 
   return (
     <View
@@ -197,13 +216,13 @@ export function CitySwitchPromptHost() {
       <Pressable
         style={styles.backdropHit}
         onPress={() => finish('dismiss')}
-        accessibilityLabel="SchlieÃŸen"
+        accessibilityLabel="Schließen"
       />
       <View style={styles.centerWrap} pointerEvents="box-none">
         <View
           style={styles.card}
           accessibilityRole="summary"
-          accessibilityLabel={`${nearest.name} â€” ${soft ? 'neu erkannt' : `nÃ¤her als ${selectedName}`}`}
+          accessibilityLabel={`${nearest.name} — ${soft ? 'neu erkannt' : `näher als ${selectedName}`}`}
         >
           <ScrollView
             bounces={false}
@@ -219,10 +238,10 @@ export function CitySwitchPromptHost() {
             <View style={styles.body}>
               <Text style={styles.eyebrow}>
                 {research
-                  ? 'FÃ¼r die Recherche'
+                  ? 'Für die Recherche'
                   : soft
                     ? 'Stadt erkannt'
-                    : 'Stadt in der NÃ¤he'}
+                    : 'Stadt in der Nähe'}
               </Text>
               <Text style={styles.title}>{nearest.name}</Text>
               {regionLine && !soft ? (
@@ -231,7 +250,7 @@ export function CitySwitchPromptHost() {
                 </Text>
               ) : soft ? (
                 <Text style={styles.region} numberOfLines={2}>
-                  Ohne Datensatz â€” Restaurants, Hotels & Orte live vor Ort
+                  Ohne Datensatz — Restaurants, Hotels & Orte live vor Ort
                 </Text>
               ) : null}
 
@@ -244,7 +263,12 @@ export function CitySwitchPromptHost() {
                     {research ? 'jetzt' : formatKm(selectedKm)}
                   </Text>
                 </View>
-                <Text style={styles.compareArrow}>â†’</Text>
+                <Feather
+                  name="arrow-right"
+                  size={18}
+                  color={colors.accent}
+                  style={styles.compareArrowIcon}
+                />
                 <View style={[styles.compareCol, styles.compareColFocus]}>
                   <Text style={styles.compareLabelFocus} numberOfLines={1}>
                     {nearest.name}
@@ -266,10 +290,12 @@ export function CitySwitchPromptHost() {
 
               <Text style={styles.prompt}>
                 {research
-                  ? `FÃ¼r ${nearest.name} recherchiere ich besser, wenn wir wechseln. Wollen wir das?`
+                  ? `Für ${nearest.name} recherchiere ich besser, wenn wir wechseln. Wollen wir das?`
                   : soft
-                    ? `Du bist in ${nearest.name}. Hier weiter entdecken â€” Suche & Tipps laufen auf ${nearest.name}, auch ohne fertigen Datensatz.`
-                    : `Du bist nÃ¤her an ${nearest.name} als an ${selectedName}. Pack wechseln und hier weiter entdecken?`}
+                    ? `Du bist in ${nearest.name}. Hier weiter entdecken — Suche & Tipps laufen auf ${nearest.name}, auch ohne fertigen Datensatz.`
+                    : clearlyCloser
+                      ? `Du bist näher an ${nearest.name} als an ${selectedName}. Pack wechseln und hier weiter entdecken?`
+                      : `Hier ist ${nearest.name}. Pack wechseln und hier weiter entdecken?`}
               </Text>
             </View>
           </ScrollView>
@@ -291,7 +317,7 @@ export function CitySwitchPromptHost() {
               accessibilityRole="button"
               accessibilityLabel={
                 soft
-                  ? `${nearest.name} als Stadt wÃ¤hlen`
+                  ? `${nearest.name} als Stadt wählen`
                   : `Auf ${nearest.name} wechseln`
               }
             >
@@ -299,7 +325,7 @@ export function CitySwitchPromptHost() {
                 <View style={styles.acceptedRow}>
                   <Feather name="check" size={20} color={colors.bg} />
                   <Text style={styles.primaryText} numberOfLines={1}>
-                    {nearest.name}
+                    OK
                   </Text>
                 </View>
               ) : (
@@ -351,7 +377,7 @@ const styles = StyleSheet.create({
   },
   heroClip: {
     width: '100%',
-    // Covers sind 3:2 â€” Rahmen muss matchen, sonst fehlt unten Bildinhalt
+    // Covers sind 3:2 — Rahmen muss matchen, sonst fehlt unten Bildinhalt
     aspectRatio: 3 / 2,
     backgroundColor: colors.surface,
     overflow: 'hidden',
@@ -445,10 +471,8 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     marginTop: 2,
   },
-  compareArrow: {
-    color: colors.accent,
-    fontSize: 16,
-    fontWeight: '700',
+  compareArrowIcon: {
+    marginHorizontal: 2,
   },
   statRow: {
     flexDirection: 'row',

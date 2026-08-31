@@ -1,5 +1,5 @@
 /**
- * Modul 1: wann Findus im Hintergrund / bei gesperrtem Display sprechen darf.
+ * Modul 1: wann Yorro im Hintergrund / bei gesperrtem Display sprechen darf.
  */
 
 import React, { useCallback, useEffect, useState } from 'react';
@@ -52,7 +52,7 @@ export function Module1BackgroundSpeechSettings() {
     <View style={styles.wrap}>
       <Text style={styles.title}>Modul 1 — Hintergrund-Audio</Text>
       <Text style={styles.hint}>
-        Darf Findus an Orten erzählen, wenn die App zu ist oder das Handy
+        Darf Yorro an Orten erzählen, wenn die App zu ist oder das Handy
         gesperrt? Standard: Immer.
       </Text>
       <View style={styles.row}>

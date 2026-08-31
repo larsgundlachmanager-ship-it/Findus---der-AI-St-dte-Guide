@@ -15,7 +15,12 @@ export {
   OPPORTUNITY_SCORE_MIN,
 } from './types';
 export { extractActionEntities, entityMatchesAction } from './entityBind';
-export { scanOpportunities, isTrivialExpandQuery } from './opportunityScan';
+export {
+  scanOpportunities,
+  isTrivialExpandQuery,
+  shouldOfferExpandMore,
+  isExpandShowMoreAction,
+} from './opportunityScan';
 export {
   listActivePartners,
   rankHotelPartner,

@@ -2,42 +2,53 @@
  * Affiliate-Registry — commissionScore, deepLinkLevel, Partner-Priorität.
  * ActionBoard Partner active/inactive: siehe `actionBoard/partnerRouter.ts`
  * (Sales24 = inactive bis Credentials).
+ *
+ * Preis vs. Provision: `affiliatePickOffer.ts`
  */
 
 import type { TravelpayoutsPartner } from './travelpayoutsPartners';
 import { TRAVELPAYOUTS_PARTNERS } from './travelpayoutsPartners';
 import { FINDUS_FEW_SHOT_DISCLAIMER } from '../concierge/findusResponsePolicy';
+import type { AffiliateOfferCandidate } from './affiliatePickOffer';
 
-export type DeepLinkLevel = 'search' | 'category' | 'deep';
-
-export type AffiliateOfferCandidate = {
-  id: string;
-  label: string;
-  url: string;
-  /** 0–100 — höher = attraktiver für Findus */
-  commissionScore: number;
-  deepLinkLevel: DeepLinkLevel;
-  /** Live-Preis wenn bekannt (EUR) */
-  partnerPriceEur?: number | null;
-};
+export type { AffiliateOfferCandidate, DeepLinkLevel } from './affiliatePickOffer';
+export {
+  AFFILIATE_COMMISSION_TIE_BAND,
+  AFFILIATE_MAX_PRICE_DELTA,
+  pickAffiliateOffer,
+} from './affiliatePickOffer';
 
 const COMMISSION_SCORE: Partial<Record<string, number>> = {
   bounce: 72,
   expedia: 82,
   tiqets: 74,
+  camping_info: 71,
+  solmar: 69,
+  weg_de: 73,
+  check24: 78,
+  ab_in_den_urlaub: 70,
+  konfetti: 68,
+  reservix: 72,
+  economybookings_tpx: 76,
   travsim: 70,
   stay22: 68,
+  kiwi: 64,
   getyourguide: 65,
   musement: 62,
   viator: 60,
+  aviasales: 58,
   discovercars: 58,
   uber: 40,
   klook: 55,
   airalo: 50,
 };
 
-function scoreForPartnerId(id: string): number {
+export function commissionScoreForId(id: string): number {
   return COMMISSION_SCORE[id] ?? 45;
+}
+
+function scoreForPartnerId(id: string): number {
+  return commissionScoreForId(id);
 }
 
 export function enrichPartnerCandidate(
@@ -50,35 +61,6 @@ export function enrichPartnerCandidate(
     commissionScore: scoreForPartnerId(partner.id),
     deepLinkLevel: 'category',
   };
-}
-
-/**
- * Partner bevorzugen wenn Preis ≤ bestNonPartner × 1.10 (Masterbook soft affiliate).
- */
-export function pickAffiliateOffer(candidates: AffiliateOfferCandidate[]): AffiliateOfferCandidate | null {
-  if (!candidates.length) return null;
-  const withPrice = candidates.filter(
-    (c) => typeof c.partnerPriceEur === 'number' && c.partnerPriceEur > 0,
-  );
-  if (withPrice.length >= 2) {
-    const sorted = [...withPrice].sort(
-      (a, b) => (a.partnerPriceEur ?? 0) - (b.partnerPriceEur ?? 0),
-    );
-    const best = sorted[0]!;
-    const partner = sorted.find(
-      (c) => c.commissionScore >= 50 && c.id !== best.id,
-    );
-    if (
-      partner &&
-      partner.partnerPriceEur != null &&
-      best.partnerPriceEur != null &&
-      partner.partnerPriceEur <= best.partnerPriceEur * 1.1
-    ) {
-      return partner;
-    }
-    return best;
-  }
-  return [...candidates].sort((a, b) => b.commissionScore - a.commissionScore)[0] ?? null;
 }
 
 export function travelpayoutsCandidates(): AffiliateOfferCandidate[] {

@@ -16,14 +16,12 @@ import type { Poi, PoiKind, PoiWithFacts } from '../db/types';
 import type { UserProfile } from '../types/userProfile';
 import { buildPoiResearchContext } from '../constants/prompts';
 import { filterDeepStoryFacts } from '../services/ai/deepStoryFilter';
-import {
-  buildVisitedMemoryEntry,
-  extractOfflineGeneralInfo,
-} from '../services/ai/storyService';
+import { extractOfflineGeneralInfo } from '../services/ai/singleShotStory';
 import { commitNarrationFeatureTips } from './featureTipsModule';
 import {
   buildFastHook,
   buildWegweiserHook,
+  classifyPoiHookKind,
   extractWegweiserDestination,
 } from '../services/ai/fastHook';
 import { lockPoiTeaser } from '../services/poi/poiTeaserLocks';
@@ -160,6 +158,36 @@ export function displayPoiName(poi: Poi): string {
   return shortPoiDisplayName(poi.name);
 }
 
+function buildVisitedMemoryEntry(
+  poi: PoiWithFacts,
+  keyFacts: string[],
+  opts?: { onTimeline?: boolean },
+): {
+  poiId: number;
+  name: string;
+  kind: ReturnType<typeof classifyPoiHookKind>;
+  keyFacts: string[];
+  visitedAt: number;
+  onTimeline?: boolean;
+  lat?: number | null;
+  lng?: number | null;
+  cityId?: string | null;
+} {
+  const cityId =
+    (getCachedUserProfile()?.cityId ?? '').trim().toLowerCase() || null;
+  return {
+    poiId: poi.id,
+    name: shortPoiDisplayName(poi.name),
+    kind: classifyPoiHookKind(poi),
+    keyFacts,
+    visitedAt: Date.now(),
+    onTimeline: opts?.onTimeline ?? true,
+    lat: Number.isFinite(poi.lat) ? poi.lat : null,
+    lng: Number.isFinite(poi.lng) ? poi.lng : null,
+    cityId,
+  };
+}
+
 /** 50-m Bundle: max 2 Namen im Audio; Rest bleibt stumm (UI). */
 function applyApproachBundleTeaser(
   ctx: NarrationContext,
@@ -229,14 +257,114 @@ function factKey(text: string): string {
   return text.trim().toLowerCase().replace(/\s+/g, ' ').slice(0, 120);
 }
 
-function setPendingOfferFromPoi(poi: PoiWithFacts): void {
-  const id = poi.parent_poi_id ?? poi.id;
-  useFinnusStore.getState().setPendingNavOffer({
-    poiId: id,
-    name: displayPoiName(poi),
-    lat: poi.lat,
-    lng: poi.lng,
-  });
+async function setPendingOfferFromPoi(poi: PoiWithFacts): Promise<void> {
+  let poiId = poi.parent_poi_id ?? poi.id;
+  let name = displayPoiName(poi);
+  let lat = poi.lat;
+  let lng = poi.lng;
+
+  // Wegweiser → Nav zum Haupteingang (Parent), nie zum Approach-Punkt
+  if (poi.parent_poi_id != null || poi.kind === 'approach') {
+    try {
+      const parentId = poi.parent_poi_id ?? poi.id;
+      const parent = await getPoiWithFacts(parentId);
+      if (parent) {
+        poiId = parent.id;
+        name = displayPoiName(parent);
+        lat = parent.lat;
+        lng = parent.lng;
+        const kids = await getChildPois(parent.id);
+        const entrance =
+          kids.find(
+            (c) =>
+              /eingang|entrance|haupteingang/i.test(c.name || '') ||
+              (c.kind === 'sub' && /gps_entrance|eingang/i.test(c.tags_json || '')),
+          ) || null;
+        if (
+          entrance &&
+          Number.isFinite(entrance.lat) &&
+          Number.isFinite(entrance.lng)
+        ) {
+          lat = entrance.lat;
+          lng = entrance.lng;
+          name = displayPoiName(parent);
+        }
+      }
+    } catch {
+      /* soft — Fallback Approach-Coords */
+    }
+  }
+
+  const { armWegweiserMapPreview } = await import(
+    '../services/navigation/wegweiserMapPreview'
+  );
+  await armWegweiserMapPreview({ poiId, name, lat, lng });
+}
+
+/** Nach Wegweiser: Route-Button zum Hauptort (Just-Do-It). */
+async function presentApproachRouteCard(approachPoi: PoiWithFacts): Promise<void> {
+  const parentId = approachPoi.parent_poi_id;
+  if (parentId == null) return;
+  try {
+    const parent = await getPoiWithFacts(parentId);
+    if (!parent) return;
+    let destLat = parent.lat;
+    let destLng = parent.lng;
+    const kids = await getChildPois(parent.id);
+    const entrance = kids.find((c) =>
+      /eingang|haupteingang|entrance/i.test(c.name || ''),
+    );
+    if (entrance) {
+      destLat = entrance.lat;
+      destLng = entrance.lng;
+    }
+    const title = displayPoiName(parent);
+    const distHint =
+      Number.isFinite(destLat) && Number.isFinite(destLng)
+        ? (() => {
+            try {
+              const { lastGpsLat, lastGpsLng } = useFinnusStore.getState();
+              if (
+                typeof lastGpsLat === 'number' &&
+                typeof lastGpsLng === 'number'
+              ) {
+                const m = Math.round(
+                  haversineMeters(lastGpsLat, lastGpsLng, destLat, destLng),
+                );
+                if (m > 0 && m < 5000) return `ca. ${m} m`;
+              }
+            } catch {
+              /* soft */
+            }
+            return null;
+          })()
+        : null;
+    useFinnusStore.getState().setActiveConciergeCard({
+      id: `wegweiser_nav_${parent.id}_${Date.now()}`,
+      createdAtMs: Date.now(),
+      speechText: '',
+      visualBullets: [
+        distHint ? `Route zu ${title} (${distHint})` : `Route zu ${title}`,
+        'Linie auf der Karte — Route starten',
+      ].slice(0, 2),
+      quickActions: [
+        {
+          type: 'START_NAVIGATION',
+          label: '📍 Route hin',
+          payload: {
+            destLat,
+            destLng,
+            destName: title,
+            targetPoiId: parent.id,
+            keepCard: true,
+          },
+        },
+      ],
+      cardTitle: title,
+    });
+  } catch {
+    /* soft */
+  }
 }
 
 export async function speakTeaserOnly(
@@ -287,6 +415,29 @@ export async function speakTeaserOnly(
     store.setIsPlayingAudio(false);
     /* GPS queue flush via AudioVoiceService → notifyRuntimeSpeechEnded */
   }
+}
+
+function kickArrivalPrefetch(
+  poi: PoiWithFacts,
+  profile: UserProfile | null | undefined,
+): void {
+  void import('../services/ai/module1PoiChat')
+    .then(({ prefetchModule1Arrival }) => {
+      const brief = buildFindusStoryBrief({
+        poi,
+        profile,
+        sessionMemory: { entries: useFinnusStore.getState().visitedHistory },
+      });
+      prefetchModule1Arrival({
+        poi,
+        profile,
+        approachAlreadyHeard: true,
+        storyBriefBlock: brief.promptBlock,
+      });
+    })
+    .catch(() => {
+      /* soft */
+    });
 }
 
 async function buildSubHintLine(areaPoiId: number): Promise<string | null> {
@@ -397,25 +548,32 @@ export async function buildApproachVisualCue(
     deviceHeadingDeg: getDeviceHeadingDeg(),
   });
   const targetRelation = relateTargetToFacing(facing, toTarget);
-  const lookSidePhrase = targetRelation?.shortPhrase ?? 'vorne';
+  // Facing unsicher → keine links/rechts-Rate; Landmarken statt Seite
+  const facingUncertain =
+    facing.source === 'unknown' || facing.bearingDeg == null;
+  const lookSidePhrase = facingUncertain
+    ? null
+    : (targetRelation?.shortPhrase ?? 'vorne');
 
   const landmarkRelation = bestLandmark
-    ? relateTargetToFacing(
-        facing,
-        bearingDegrees(lastLat, lastLng, bestLandmark.lat, bestLandmark.lng),
-      )?.sidePhrase ??
-      relateFromRelativeBearing(
-        ((bearingDegrees(
-          lastLat,
-          lastLng,
-          bestLandmark.lat,
-          bestLandmark.lng,
-        ) -
-          (facing.bearingDeg ?? toTarget) +
-          540) %
-          360) -
-          180,
-      ).sidePhrase
+    ? facingUncertain
+      ? 'in der Nähe'
+      : relateTargetToFacing(
+          facing,
+          bearingDegrees(lastLat, lastLng, bestLandmark.lat, bestLandmark.lng),
+        )?.sidePhrase ??
+        relateFromRelativeBearing(
+          ((bearingDegrees(
+            lastLat,
+            lastLng,
+            bestLandmark.lat,
+            bestLandmark.lng,
+          ) -
+            (facing.bearingDeg ?? toTarget) +
+            540) %
+            360) -
+            180,
+        ).sidePhrase
     : lookSidePhrase;
 
   const geminiCue = await generateApproachVisualCue({
@@ -434,7 +592,13 @@ export async function buildApproachVisualCue(
 
   // Offline / no-Gemini fallback — still visual-first
   if (bestLandmark) {
+    if (facingUncertain || !lookSidePhrase) {
+      return `Richtung ${bestLandmark.name} — dort geht's weiter zu ${destName}.`;
+    }
     return `Schau nach ${lookSidePhrase}. Siehst du ${bestLandmark.name}? Genau dahin.`;
+  }
+  if (facingUncertain || !lookSidePhrase) {
+    return `Weiter Richtung ${destName} — folg der Linie auf der Karte.`;
   }
   return `Schau nach ${lookSidePhrase} — dort geht's weiter Richtung ${destName}.`;
 }
@@ -480,7 +644,7 @@ export async function runDriveByNarration(ctx: NarrationContext): Promise<void> 
     store.setIsGenerating(true);
     try {
       await speakTeaserOnly(pitch, onQueuedPoi);
-      setPendingOfferFromPoi(poi);
+      await setPendingOfferFromPoi(poi);
     } finally {
       store.setIsGenerating(false);
     }
@@ -563,8 +727,13 @@ export async function runTeaserWithInterestWatch(
       mainVisited,
     });
 
+    store.setCurrentPoiId(poi.id);
+    store.setCurrentLocationName(displayPoiName(poi));
+    kickArrivalPrefetch(poi, profile);
+
     await speakTeaserOnly(teaser, onQueuedPoi);
-    setPendingOfferFromPoi(poi);
+    await setPendingOfferFromPoi(poi);
+    void presentApproachRouteCard(poi);
   } finally {
     store.setIsGenerating(false);
   }
@@ -600,7 +769,9 @@ export async function runFlowA_Approach(ctx: NarrationContext): Promise<void> {
         lat: poi.lat,
         lng: poi.lng,
       });
-      setPendingOfferFromPoi(poi);
+      kickArrivalPrefetch(poi, profile);
+      await setPendingOfferFromPoi(poi);
+      void presentApproachRouteCard(poi);
       return;
     }
 
@@ -663,8 +834,10 @@ export async function runFlowA_Approach(ctx: NarrationContext): Promise<void> {
       });
     }
 
+    kickArrivalPrefetch(poi, profile);
     await speakTeaserOnly(teaser, onQueuedPoi);
-    setPendingOfferFromPoi(poi);
+    await setPendingOfferFromPoi(poi);
+    void presentApproachRouteCard(poi);
   } finally {
     store.setIsGenerating(false);
   }
@@ -701,9 +874,10 @@ export async function runFlowBC_FullStory(ctx: NarrationContext): Promise<void> 
   const sessionMemory = { entries: store.visitedHistory };
 
   let deep;
+  let storyBrief: ReturnType<typeof buildFindusStoryBrief> | null = null;
   try {
-    // Brief/Facts für Stempel & Told-Keys; Speech kommt aus POI-Chat
-    buildFindusStoryBrief({ poi, profile, sessionMemory });
+    // Brief für Live-Chat + Stempel/Told-Keys
+    storyBrief = buildFindusStoryBrief({ poi, profile, sessionMemory });
     deep = filterDeepStoryFacts(poi, { profile, sessionMemory });
     store.addChatMessage({
       role: 'system',
@@ -763,6 +937,8 @@ export async function runFlowBC_FullStory(ctx: NarrationContext): Promise<void> 
       mode: deepDive ? 'deep' : 'arrival',
       approachAlreadyHeard: skipTeaserHook || deepDive,
       timeoutMs: deepDive || interestOverride ? 40000 : 28000,
+      storyBriefBlock: storyBrief?.promptBlock ?? null,
+      interestOverride,
     })[Symbol.asyncIterator]();
     const firstGeminiPromise = geminiIter.next();
 
@@ -777,12 +953,26 @@ export async function runFlowBC_FullStory(ctx: NarrationContext): Promise<void> 
         collected.push(localHook);
         yield localHook;
       }
+      // Nach Wegweiser: Meta-/Geschichte-Oversell am Anfang killen (Kaltstart)
+      let stripColdMeta = Boolean(skipTeaserHook) && !localHook;
       let skipGeminiGreeting = Boolean(localHook);
+      const isColdStartMeta = (s: string) =>
+        /\b(flüstert\s+geschichte|fluestert\s+geschichte|rollt\s+geschichte|richtig\s+geschichte|volle?r?\s+geschichte|hörst\s+du\s+die\s+schienen|hoerst\s+du\s+die\s+schienen|tüt[-\s]?tüt|hier\s+steckt\s+richtig|nimm\s+dir\s+einen\s+moment|seine\s+eigene\s+geschichte)\b/iu.test(
+          s,
+        ) ||
+        (/^(pst|tüt)/iu.test(s) && s.length < 120);
+
       try {
         let step = await firstGeminiPromise;
         while (!step.done) {
-          const t = String(step.value ?? '').trim();
+          let t = String(step.value ?? '').trim();
           if (t) {
+            if (stripColdMeta && isColdStartMeta(t)) {
+              stripColdMeta = false;
+              step = await geminiIter.next();
+              continue;
+            }
+            stripColdMeta = false;
             if (skipGeminiGreeting) {
               skipGeminiGreeting = false;
               const looksLikeHook =
@@ -847,7 +1037,7 @@ export async function runFlowBC_FullStory(ctx: NarrationContext): Promise<void> 
     }
 
     store.setIsGenerating(false);
-    // Actions früh; Stichpunkte erst nach Speech
+    // Actions früh; Stichpunkte sobald genug Speech da ist (nicht erst nach TTS)
     void presentModule1LiveCard({
       poi,
       spokenText: '',
@@ -867,9 +1057,27 @@ export async function runFlowBC_FullStory(ctx: NarrationContext): Promise<void> 
         kind: deepDive ? 'deep' : 'main',
         fullText: '',
       });
+      let bulletPartial = '';
+      let lastBulletPushMs = 0;
+      let bulletsPresented = false;
       async function* trackedSentences(): AsyncGenerator<string, void, unknown> {
         for await (const s of storySentences()) {
           appendNarrationResumeText(s);
+          bulletPartial = `${bulletPartial} ${s}`.replace(/\s+/g, ' ').trim();
+          const now = Date.now();
+          if (
+            bulletPartial.length >= 80 &&
+            (now - lastBulletPushMs > 700 || !bulletsPresented)
+          ) {
+            lastBulletPushMs = now;
+            bulletsPresented = true;
+            void presentModule1LiveCard({
+              poi,
+              spokenText: bulletPartial,
+            }).catch((err) =>
+              console.warn('[module1LiveCard] mid-speech failed:', err),
+            );
+          }
           yield s;
         }
       }
@@ -979,7 +1187,7 @@ export async function runSoftPitchNarration(ctx: NarrationContext): Promise<void
   store.setIsGenerating(true);
   try {
     await speakTeaserOnly(plan.pitchText, onQueuedPoi);
-    setPendingOfferFromPoi(poi);
+    await setPendingOfferFromPoi(poi);
   } finally {
     store.setIsGenerating(false);
   }
@@ -1020,9 +1228,6 @@ export async function executeNarrationPlan(ctx: NarrationContext): Promise<void>
     return;
   }
 
-  if (!tideSoftPitch) {
-    markTriggerSpoken(poiId, kind);
-  }
   if (kind !== 'approach' && !tideSoftPitch) {
     store.setLastVisitedPoiId(poiId);
     if (poi.spot_key) {
@@ -1039,16 +1244,21 @@ export async function executeNarrationPlan(ctx: NarrationContext): Promise<void>
   try {
     if (plan.action === 'soft_pitch') {
       await runSoftPitchNarration(ctx);
+      if (!tideSoftPitch) markTriggerSpoken(poiId, kind);
       return;
     }
 
     if (plan.action === 'approach_hook' || kind === 'approach') {
       await runFlowA_Approach(ctx);
+      if (!tideSoftPitch) markTriggerSpoken(poiId, kind);
       return;
     }
 
     // full_story | interest_override | redirect handled upstream
     await runFlowBC_FullStory(ctx);
+    if (!tideSoftPitch) markTriggerSpoken(poiId, kind);
+  } catch {
+    unmarkTriggerSpoken(poiId, kind);
   } finally {
     releaseNarrationLock(epoch);
     // Nach Modul 1 immer Standby — verhindert hängendes „Ich erzähle“

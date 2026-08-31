@@ -1,283 +1,43 @@
 {
   "city_id": "prisdorf",
   "apply": true,
+  "storyOnly": true,
   "maxDelta": 80,
+  "country": "Germany",
   "summary": {
-    "ok": 39,
-    "check": 0,
-    "bad": 17,
+    "ok": 3,
+    "check": 4,
+    "bad": 10,
     "errors": 0,
-    "applied": 17
+    "applied": 4,
+    "skipped_directory": 123,
+    "skipped_cached_google": 13
   },
   "rows": [
     {
       "id": "prisdorf_bahnhof_wartehäuschen",
       "name": "Bahnhof Prisdorf",
       "before": {
-        "lat": 53.67549436,
-        "lng": 9.75960632
+        "lat": 53.67521911111111,
+        "lng": 9.760389655555556
       },
       "google": {
         "lat": 53.6755267,
         "lng": 9.7598793,
         "place_id": "ChIJEWMYFhCAsUcRPycLCZShgNE",
-        "address": "25497 Prisdorf, Deutschland"
+        "address": "25497 Prisdorf, Germany"
       },
-      "delta_m": 18,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "prisdorf_gemeindezentrum_hudenbarg",
-      "name": "Gemeindezentrum am Hudenbarg mit Bilsbekraum und Feuerwache",
-      "before": {
-        "lat": 53.67740658,
-        "lng": 9.75739578
-      },
-      "google": {
-        "lat": 53.6718604,
-        "lng": 9.769224099999999,
-        "place_id": "ChIJj0zrGvaAsUcRjYbZJt7-pBA",
-        "address": "Peiner Hag 13a, 25497 Prisdorf"
-      },
-      "delta_m": 994,
-      "status": "BAD",
-      "streetview": "OK",
-      "applied": true
-    },
-    {
-      "id": "prisdorf_kriegerehrenmal_bilsbek",
-      "name": "Kriegerehrenmal an der Bilsbekbrücke",
-      "before": {
-        "lat": 53.67990606000001,
-        "lng": 9.756834659999999
-      },
-      "google": {
-        "lat": 53.7139988,
-        "lng": 9.7906261,
-        "place_id": "ChIJ28H76hyAsUcRo9RNSHyaWLY",
-        "address": "Bilsbek"
-      },
-      "delta_m": 4395,
-      "status": "BAD",
+      "delta_m": 48,
+      "status": "CHECK",
       "streetview": "ZERO_RESULTS",
       "applied": true
     },
     {
-      "id": "prisdorf_peiner_hof",
-      "name": "Fairway Golf Peiner Hof mit Restaurant Goldschätzchen",
+      "id": "prisdorf_bahnwartehaeuschen",
+      "name": "Historisches Bahnwartehäuschen",
       "before": {
-        "lat": 53.668825260000006,
-        "lng": 9.76598294
-      },
-      "google": {
-        "lat": 53.6689061,
-        "lng": 9.7661194,
-        "place_id": "ChIJYaLh9xOAsUcRAD7tt-QMxPE",
-        "address": "Peiner Hof 7, 25497 Prisdorf-Peiner Hof"
-      },
-      "delta_m": 13,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "prisdorf_peiner_hag_gewerbe",
-      "name": "Gewerbegebiet Peiner Hag",
-      "before": {
-        "lat": 53.67154226,
-        "lng": 9.76769316
-      },
-      "google": {
-        "lat": 53.6721392,
-        "lng": 9.7731967,
-        "place_id": "ChIJx88A1RKAsUcRe5BIdpNwvhY",
-        "address": "Peiner Hag 1, 25497 Prisdorf"
-      },
-      "delta_m": 369,
-      "status": "BAD",
-      "streetview": "OK",
-      "applied": true
-    },
-    {
-      "id": "prisdorf_pinnau_ufer",
-      "name": "Pinnau-Niederung an der südlichen Gemeindegrenze",
-      "before": {
-        "lat": 53.67785418,
-        "lng": 9.76349618
-      },
-      "google": {
-        "lat": 53.65143,
-        "lng": 9.83016,
-        "place_id": "ChIJz8IgpsOAsUcRZDF9QJCiBvc",
-        "address": "Hauptstraße 60, 25462 Rellingen"
-      },
-      "delta_m": 5284,
-      "status": "BAD",
-      "streetview": "OK",
-      "applied": true
-    },
-    {
-      "id": "prisdorf_tsv_sportgelände",
-      "name": "TSV Prisdorf Sportgelände und Vereinsheim",
-      "before": {
-        "lat": 53.685554960000005,
-        "lng": 9.75054318
-      },
-      "google": {
-        "lat": 53.6856358,
-        "lng": 9.7506797,
-        "place_id": "ChIJ538iVwCAsUcRrwmbht1WA0g",
-        "address": "Ahrenloher Weg 21, 25497 Prisdorf"
-      },
-      "delta_m": 13,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "prisdorf_tcp_tennis",
-      "name": "Tennis-Club Prisdorf TCP",
-      "before": {
-        "lat": 53.68284206,
-        "lng": 9.7513864
-      },
-      "google": {
-        "lat": 53.68292289999999,
-        "lng": 9.7515229,
-        "place_id": "ChIJfSa2FgGAsUcRLCtGQ7eJbAA",
-        "address": "Ahrenloher Weg, 25497 Prisdorf"
-      },
-      "delta_m": 13,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "prisdorf_bilsbek_schule",
-      "name": "Bilsbek-Schule gemeinsame Grundschule",
-      "before": {
-        "lat": 53.6870999,
-        "lng": 9.778558559999999
-      },
-      "google": {
-        "lat": 53.6871502,
-        "lng": 9.7786435,
-        "place_id": "ChIJ8YY4jJ8qskcRbkgMQHvHzxA",
-        "address": "Prisdorfer Str. 72, 25495 Kummerfeld"
-      },
-      "delta_m": 8,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "prisdorf_eisenbahnbrücke_hudenbarg",
-      "name": "Eisenbahnbrücke am Hudenbarg",
-      "before": {
-        "lat": 53.67703206000001,
-        "lng": 9.755953680000001
-      },
-      "google": {
-        "lat": 53.556862,
-        "lng": 9.99729,
-        "place_id": "ChIJOat8aR-PsUcRkvTEZ7FT5m0",
-        "address": "Lombardsbrücke, 20354 Hamburg"
-      },
-      "delta_m": 20783,
-      "status": "BAD",
-      "streetview": "OK",
-      "applied": true
-    },
-    {
-      "id": "prisdorf_feuerlöschteich_gemeindeteich",
-      "name": "Feuerlöschteich und Gemeindeteich",
-      "before": {
-        "lat": 53.67884806000001,
-        "lng": 9.75623868
-      },
-      "google": {
-        "lat": 53.6159361,
-        "lng": 9.6958311,
-        "place_id": "ChIJYUK9t7d_sUcR0YgqEvwudjs",
-        "address": "Katastrophenweg, 25488 Holm"
-      },
-      "delta_m": 8049,
-      "status": "BAD",
-      "streetview": "ZERO_RESULTS",
-      "applied": true
-    },
-    {
-      "id": "prisdorf_alte_schule_lütte_prisdörper",
-      "name": "Kindergarten Lütte Prisdörper",
-      "before": {
-        "lat": 53.67712289999999,
-        "lng": 9.75761718
-      },
-      "google": {
-        "lat": 53.6771732,
-        "lng": 9.757702100000001,
-        "place_id": "ChIJ37zYRQWAsUcRxqD2ifbC8e0",
-        "address": "Hudenbarg 5, 25497 Prisdorf"
-      },
-      "delta_m": 8,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "prisdorf_marktkauf_meyers_frischecenter",
-      "name": "Marktkauf / Meyers Frischecenter Peiner Hag 1",
-      "before": {
-        "lat": 53.672049359999995,
-        "lng": 9.77304506
-      },
-      "google": {
-        "lat": 53.6721392,
-        "lng": 9.7731967,
-        "place_id": "ChIJx88A1RKAsUcRe5BIdpNwvhY",
-        "address": "Peiner Hag 1, 25497 Prisdorf"
-      },
-      "delta_m": 14,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "prisdorf_freiwillige_feuerwehr",
-      "name": "Freiwillige Feuerwehr Prisdorf seit 1889",
-      "before": {
-        "lat": 53.677599099999995,
-        "lng": 9.75672698
-      },
-      "google": {
-        "lat": 53.6776494,
-        "lng": 9.756811899999999,
-        "place_id": "ChIJk2tYrg-AsUcRl5qE4lchPFQ",
-        "address": "Hudenbarg 5, 25497 Prisdorf"
-      },
-      "delta_m": 8,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "prisdorf_grossstadtmission_dahl",
-      "name": "Großstadt-Mission Prisdorf (Dahl und Ellernstrang)",
-      "before": {
-        "lat": 53.68329339999999,
-        "lng": 9.755814959999999
-      },
-      "google": {
-        "lat": 53.6866034,
-        "lng": 9.761646899999999,
-        "place_id": "ChIJ1xFJYyaxY0ERJ1FPj-Vff9w",
-        "address": "Dahl 58, 25497 Prisdorf"
-      },
-      "delta_m": 532,
-      "status": "BAD",
-      "streetview": "ZERO_RESULTS",
-      "applied": true
-    },
-    {
-      "id": "prisdorf_heimatverein",
-      "name": "Heimatverein für Dorfgemeinschaft Prisdorf von 1967",
-      "before": {
-        "lat": 53.67790269999999,
-        "lng": 9.76357808
+        "lat": 53.675142640000004,
+        "lng": 9.76031818
       },
       "google": {
         "lat": 53.677953,
@@ -285,699 +45,384 @@
         "place_id": "ChIJf-vXag-AsUcR8ARYxmOJJAQ",
         "address": "Prisdorf, Deutschland"
       },
-      "delta_m": 8,
-      "status": "OK",
+      "delta_m": 382,
+      "status": "BAD",
       "streetview": "OK"
     },
     {
-      "id": "prisdorf_haus_prisdorf_altenheim",
-      "name": "Haus Prisdorf – Alten- und Pflegeheim",
+      "id": "prisdorf_kriegerehrenmal_bilsbek",
+      "name": "Kriegerehrenmal an der Bilsbekbrücke",
       "before": {
-        "lat": 53.679664700000004,
-        "lng": 9.757243659999999
+        "lat": 53.679919659999996,
+        "lng": 9.7569954
       },
       "google": {
-        "lat": 53.67971499999999,
-        "lng": 9.7573286,
-        "place_id": "ChIJN4sbsAWAsUcRgt14HHdbp6A",
-        "address": "Hauptstraße 80, 25497 Prisdorf"
+        "lat": 53.7139988,
+        "lng": 9.7906261,
+        "place_id": "ChIJ28H76hyAsUcRo9RNSHyaWLY",
+        "address": "Bilsbek, Germany"
       },
-      "delta_m": 8,
-      "status": "OK",
+      "delta_m": 4389,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "prisdorf_pinnau_ufer",
+      "name": "Pinnau-Niederung an der südlichen Gemeindegrenze",
+      "before": {
+        "lat": 53.66674518,
+        "lng": 9.76651222
+      },
+      "google": {
+        "lat": 51.8207793,
+        "lng": 13.867503399999999,
+        "place_id": "ChIJVVVVVQwBCEcRb9RpGReW9FA",
+        "address": "Germany"
+      },
+      "delta_m": 343918,
+      "status": "BAD",
       "streetview": "OK"
     },
     {
-      "id": "prisdorf_drk_ortsverein",
-      "name": "DRK Ortsverein Prisdorf seit 1940",
+      "id": "prisdorf_tcp_tennis",
+      "name": "Tennis-Club Prisdorf TCP",
       "before": {
-        "lat": 53.68665969999999,
-        "lng": 9.75986506
+        "lat": 53.68308614,
+        "lng": 9.75119866
       },
       "google": {
-        "lat": 53.68671,
-        "lng": 9.75995,
-        "place_id": "ChIJHbFTjweAsUcRsTSFy9ZMa9I",
-        "address": "Dahl 48, 25497 Prisdorf"
+        "lat": 53.682922899999994,
+        "lng": 9.7515229,
+        "place_id": "ChIJfSa2FgGAsUcRLCtGQ7eJbAA",
+        "address": "Ahrenloher Weg, 25497 Prisdorf, Germany"
       },
-      "delta_m": 8,
+      "delta_m": 28,
+      "status": "CHECK",
+      "streetview": "ZERO_RESULTS",
+      "applied": true
+    },
+    {
+      "id": "prisdorf_eisenbahnbrücke_hudenbarg",
+      "name": "Eisenbahnbrücke am Hudenbarg",
+      "before": {
+        "lat": 53.677097939999996,
+        "lng": 9.756224360000001
+      },
+      "google": {
+        "lat": 53.6755267,
+        "lng": 9.7598793,
+        "place_id": "ChIJEWMYFhCAsUcRPycLCZShgNE",
+        "address": "25497 Prisdorf, Germany"
+      },
+      "delta_m": 297,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "prisdorf_feuerlöschteich_gemeindeteich",
+      "name": "Feuerlöschteich und Gemeindeteich",
+      "before": {
+        "lat": 53.679456259999995,
+        "lng": 9.75662184
+      },
+      "google": {
+        "lat": 53.6159361,
+        "lng": 9.6958311,
+        "place_id": "ChIJYUK9t7d_sUcR0YgqEvwudjs",
+        "address": "Katastrophenweg, 25488 Holm, Germany"
+      },
+      "delta_m": 8120,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "prisdorf_alte_schule_lütte_prisdörper",
+      "name": "Alte Schule & Kindergarten Lütte Prisdörper",
+      "before": {
+        "lat": 53.67734779999999,
+        "lng": 9.75787769
+      },
+      "google": {
+        "lat": 53.6771732,
+        "lng": 9.757702100000001,
+        "place_id": "ChIJ37zYRQWAsUcRxqD2ifbC8e0",
+        "address": "Hudenbarg 5, 25497 Prisdorf, Germany"
+      },
+      "delta_m": 23,
       "status": "OK",
       "streetview": "ZERO_RESULTS"
     },
     {
-      "id": "prisdorf_bäcker_schlüter",
-      "name": "Bäcker Schlüter",
+      "id": "prisdorf_heimatverein",
+      "name": "Heimatverein für Dorfgemeinschaft Prisdorf von 1967",
       "before": {
-        "lat": 53.671490000000006,
-        "lng": 9.77129
+        "lat": 53.67783357999999,
+        "lng": 9.76340984
       },
       "google": {
-        "lat": 53.6714764,
-        "lng": 9.7713529,
-        "place_id": "ChIJAYO9SROAsUcRpM684f9Ato4",
-        "address": "Peiner Hag 11, 25497 Prisdorf"
+        "lat": 53.677953,
+        "lng": 9.763663,
+        "place_id": "ChIJf-vXag-AsUcR8ARYxmOJJAQ",
+        "address": "Prisdorf, Deutschland"
       },
-      "delta_m": 4,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "prisdorf_bäcker_allwörden_marktkauf",
-      "name": "von Allwörden Bäckerei Prisdorf Marktkauf",
-      "before": {
-        "lat": 53.671627560000005,
-        "lng": 9.77307878
-      },
-      "google": {
-        "lat": 53.6716563,
-        "lng": 9.773127299999999,
-        "place_id": "ChIJx88A1RKAsUcR2_6qxjxll2E",
-        "address": "Peiner Hag 1, 25497 Prisdorf"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "prisdorf_backstube_münster",
-      "name": "Münster's Backstube Zentralwerkstatt Werkstraße",
-      "before": {
-        "lat": 53.67400299999999,
-        "lng": 9.77074048
-      },
-      "google": {
-        "lat": 53.6740533,
-        "lng": 9.7708254,
-        "place_id": "ChIJo-CbkxKAsUcRKvxsR_tbP-o",
-        "address": "Werkstraße 8a, 25497 Prisdorf"
-      },
-      "delta_m": 8,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "prisdorf_team_tankstelle",
-      "name": "team Tankstelle Peiner Hag 1a",
-      "before": {
-        "lat": 53.672928660000004,
-        "lng": 9.77210066
-      },
-      "google": {
-        "lat": 53.6730185,
-        "lng": 9.7722523,
-        "place_id": "ChIJwUjI0RKAsUcRyTSix4S0zpY",
-        "address": "Peiner Hag 1a, 25497 Prisdorf"
-      },
-      "delta_m": 14,
+      "delta_m": 21,
       "status": "OK",
       "streetview": "OK"
     },
     {
       "id": "prisdorf_stadtgeschichte_gesamt",
       "name": "Prisdorf übergreifende Dorfgeschichte und Orientierung",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 53.677599099999995,
-        "lng": 9.75672698
-      },
-      "google": {
-        "lat": 53.6755267,
-        "lng": 9.7598793,
-        "place_id": "ChIJEWMYFhCAsUcRPycLCZShgNE",
-        "address": "25497 Prisdorf, Deutschland"
-      },
-      "delta_m": 310,
-      "status": "BAD",
-      "streetview": "ZERO_RESULTS",
-      "applied": true
-    },
-    {
-      "id": "prisdorf_staggenborg_apotheke",
-      "name": "Staggenborg Apotheke im Marktkauf-Center",
-      "before": {
-        "lat": 53.6718577,
-        "lng": 9.773268579999998
-      },
-      "google": {
-        "lat": 53.67190799999999,
-        "lng": 9.773353499999999,
-        "place_id": "ChIJx88A1RKAsUcRaeGmGnY-CBU",
-        "address": "Peiner Hag 1, 25497 Prisdorf"
-      },
-      "delta_m": 8,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "prisdorf_gemeinschaftspraxis",
-      "name": "Gemeinschaftspraxis Prisdorf",
-      "before": {
-        "lat": 53.67694506,
-        "lng": 9.760321119999999
-      },
-      "google": {
-        "lat": 53.6769774,
-        "lng": 9.7605941,
-        "place_id": "ChIJSRZf7g-AsUcROR1UkmHbHNQ",
-        "address": "Bahnhofstraße 14, 25497 Prisdorf"
-      },
-      "delta_m": 18,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "prisdorf_zahnarztpraxis",
-      "name": "Zahnarztpraxis Heilmann und von Döhren",
-      "before": {
-        "lat": 53.67737196,
-        "lng": 9.761086820000001
-      },
-      "google": {
-        "lat": 53.67740430000001,
-        "lng": 9.7613598,
-        "place_id": "ChIJjbzbvw-AsUcRhFthI2azfXs",
-        "address": "Bahnhofstraße 3, 25497 Prisdorf"
-      },
-      "delta_m": 18,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "prisdorf_friseur_klier",
-      "name": "Frisör Klier Marktkauf",
-      "before": {
-        "lat": 53.67211046,
-        "lng": 9.77314818
-      },
-      "google": {
-        "lat": 53.6721392,
-        "lng": 9.7731967,
-        "place_id": "ChIJx88A1RKAsUcRe5BIdpNwvhY",
-        "address": "Peiner Hag 1, 25497 Prisdorf"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "prisdorf_coiffeur_jensen",
-      "name": "Coiffeur C. Jensen",
-      "before": {
-        "lat": 53.67585206,
-        "lng": 9.76329778
-      },
-      "google": {
-        "lat": 53.67588079999999,
-        "lng": 9.7633463,
-        "place_id": "ChIJ54YyKA6AsUcRg4R3vfjjfFQ",
-        "address": "Schnickenfeld 53, 25497 Prisdorf"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "prisdorf_baumschule_huckfeldt",
-      "name": "Baumschule Holger Huckfeldt",
-      "before": {
-        "lat": 53.68220117999999,
-        "lng": 9.74973316
-      },
-      "google": {
-        "lat": 53.6823,
-        "lng": 9.7499,
-        "place_id": "ChIJc703emCAsUcRtQmSIr6O1Wo",
-        "address": "Hauptstraße 104 - 106, 25497 Prisdorf"
-      },
-      "delta_m": 16,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "prisdorf_gärtnerei_clematis_westphal",
-      "name": "Gärtnerei Clematis Westphal am Golfpark",
-      "before": {
-        "lat": 53.669195460000005,
-        "lng": 9.765864539999999
-      },
-      "google": {
-        "lat": 53.6692763,
-        "lng": 9.766001,
-        "place_id": "ChIJwS6iaxSAsUcRQuTSOdANwkk",
-        "address": "Peiner Hof 7, 25497 Prisdorf-Peiner Hof"
-      },
-      "delta_m": 13,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "prisdorf_kkiosk_post",
-      "name": "kkiosk Postfiliale DHL Marktkauf",
-      "before": {
-        "lat": 53.671761260000004,
-        "lng": 9.77310388
-      },
-      "google": {
-        "lat": 53.67178999999999,
-        "lng": 9.773152399999999,
-        "place_id": "ChIJddHSC-SBsUcREWLJ0aGmlLI",
-        "address": "Peiner Hag 1/k kiosk, 25497 Prisdorf"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "prisdorf_pm_service",
-      "name": "PM Service Schuh und Schlüssel",
-      "before": {
-        "lat": 53.67211046,
-        "lng": 9.77314818
-      },
-      "google": {
-        "lat": 53.6721392,
-        "lng": 9.7731967,
-        "place_id": "ChIJx88A1RKAsUcRe5BIdpNwvhY",
-        "address": "Peiner Hag 1, 25497 Prisdorf"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "prisdorf_hoyers_gasthof",
-      "name": "Hoyers Gasthof und Hotel",
-      "before": {
-        "lat": 53.681864759999996,
-        "lng": 9.75078666
-      },
-      "google": {
-        "lat": 53.6818935,
-        "lng": 9.750835200000001,
-        "place_id": "ChIJhRT_2gOAsUcR7_mMMb_Phho",
-        "address": "Hauptstraße 102, 25497 Prisdorf"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "prisdorf_santorini_gastro",
-      "name": "Santorini Südländische Spezialitäten",
-      "before": {
-        "lat": 53.67211046,
-        "lng": 9.77314818
-      },
-      "google": {
-        "lat": 53.6721392,
-        "lng": 9.7731967,
-        "place_id": "ChIJx88A1RKAsUcRe5BIdpNwvhY",
-        "address": "Peiner Hag 1, 25497 Prisdorf"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 53.67761347857142,
+        "lng": 9.757236757142858
+      }
     },
     {
       "id": "prisdorf_kitz_jungtierrettung",
       "name": "Kitz- und Jungtierrettung Prisdorf e.V.",
       "before": {
-        "lat": 53.67790269999999,
-        "lng": 9.76357808
+        "lat": 53.66690912,
+        "lng": 9.772556860000002
       },
       "google": {
         "lat": 53.901112,
         "lng": 9.8285951,
         "place_id": "ChIJq6qGhiozskcRaYmmNGoZ1r0",
-        "address": "Schulstraße 9a, 24576 Weddelbrook"
+        "address": "Schulstraße 9a, 24576 Weddelbrook, Germany"
       },
-      "delta_m": 25185,
+      "delta_m": 26301,
       "status": "BAD",
-      "streetview": "ZERO_RESULTS",
-      "applied": true
-    },
-    {
-      "id": "prisdorf_pmv_veranstaltungen",
-      "name": "Prisdorf macht Vergnügen Events",
-      "before": {
-        "lat": 53.677599099999995,
-        "lng": 9.75672698
-      },
-      "google": {
-        "lat": 53.6856358,
-        "lng": 9.7506797,
-        "place_id": "ChIJ538iVwCAsUcRrwmbht1WA0g",
-        "address": "Ahrenloher Weg 21, 25497 Prisdorf"
-      },
-      "delta_m": 978,
-      "status": "BAD",
-      "streetview": "ZERO_RESULTS",
-      "applied": true
+      "streetview": "ZERO_RESULTS"
     },
     {
       "id": "prisdorf_bilsbek_fluss",
       "name": "Bilsbek durch Prisdorf",
       "before": {
-        "lat": 53.67511578,
-        "lng": 9.761749179999999
+        "lat": 53.680017140000004,
+        "lng": 9.75642266
       },
       "google": {
         "lat": 53.6755267,
         "lng": 9.7598793,
         "place_id": "ChIJEWMYFhCAsUcRPycLCZShgNE",
-        "address": "25497 Prisdorf, Deutschland"
+        "address": "25497 Prisdorf, Germany"
       },
-      "delta_m": 131,
+      "delta_m": 549,
       "status": "BAD",
-      "streetview": "ZERO_RESULTS",
-      "applied": true
-    },
-    {
-      "id": "prisdorf_loeschbrunnen_außenbezirke",
-      "name": "Löschbrunnen Hauen und Rehmen",
-      "before": {
-        "lat": 53.6818449,
-        "lng": 9.769352260000002
-      },
-      "google": {
-        "lat": 53.6825701,
-        "lng": 9.7707128,
-        "place_id": "ChIJS4vIzDyBsUcRjqI04xPpsnE",
-        "address": "Hauen 45, 25497 Prisdorf"
-      },
-      "delta_m": 121,
-      "status": "BAD",
-      "streetview": "OK",
-      "applied": true
+      "streetview": "ZERO_RESULTS"
     },
     {
       "id": "prisdorf_kirche_kummerfeld",
       "name": "Kirchengemeinde Kummerfeld für Prisdorf",
       "before": {
-        "lat": 53.693813580000004,
-        "lng": 9.79401402
+        "lat": 53.69403676470589,
+        "lng": 9.794147594117646
       },
       "google": {
-        "lat": 53.69391239999999,
+        "lat": 53.693912399999995,
         "lng": 9.794180899999999,
         "place_id": "ChIJr-4BB_crskcRkAspBX6DgY4",
-        "address": "Langenbargen 2, 25495 Kummerfeld"
+        "address": "Langenbargen 2, 25495 Kummerfeld, Germany"
       },
-      "delta_m": 16,
+      "delta_m": 14,
       "status": "OK",
       "streetview": "OK"
-    },
-    {
-      "id": "prisdorf_zur_schwalbe_geschichte",
-      "name": "Kita-Geschichte Zur Schwalbe",
-      "before": {
-        "lat": 53.67790269999999,
-        "lng": 9.76357808
-      },
-      "google": {
-        "lat": 53.6472378,
-        "lng": 9.8076279,
-        "place_id": "ChIJ135N0-SAsUcRV3XYgUojKEk",
-        "address": "Kleiner Reitweg 4, 25421 Pinneberg"
-      },
-      "delta_m": 4478,
-      "status": "BAD",
-      "streetview": "ZERO_RESULTS",
-      "applied": true
-    },
-    {
-      "id": "prisdorf_bilsbekraum",
-      "name": "Bilsbekraum Bürgerservice",
-      "before": {
-        "lat": 53.674409579999995,
-        "lng": 9.76010208
-      },
-      "google": {
-        "lat": 53.6745084,
-        "lng": 9.7602689,
-        "place_id": "ChIJlTPbQRCAsUcR99Y1rftisfs",
-        "address": "Koppelstraße 12, 25497 Prisdorf"
-      },
-      "delta_m": 16,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "prisdorf_reiterverein_bilsbek",
-      "name": "Reiterverein Am Bilsbek",
-      "before": {
-        "lat": 53.67068816,
-        "lng": 9.80100154
-      },
-      "google": {
-        "lat": 53.670769,
-        "lng": 9.801138,
-        "place_id": "ChIJUfpHkGKAsUcRiKOdhAhdkQU",
-        "address": "Haidkamp 35, 25421 Pinneberg"
-      },
-      "delta_m": 13,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "prisdorf_blume_aktuell",
-      "name": "Blume aktuell Floristik",
-      "before": {
-        "lat": 53.669226,
-        "lng": 9.76591608
-      },
-      "google": {
-        "lat": 53.6771063,
-        "lng": 9.7928658,
-        "place_id": "ChIJQ1fLTnqAsUcRJvMIxr4if-g",
-        "address": "Elmshorner Str. 181, 25421 Pinneberg"
-      },
-      "delta_m": 1980,
-      "status": "BAD",
-      "streetview": "OK",
-      "applied": true
-    },
-    {
-      "id": "prisdorf_krause_karosserie",
-      "name": "Krause Karosseriebetrieb",
-      "before": {
-        "lat": 53.6742149,
-        "lng": 9.768896780000002
-      },
-      "google": {
-        "lat": 53.6742652,
-        "lng": 9.7689817,
-        "place_id": "ChIJM8TsZhKAsUcR1wc8bFjLweI",
-        "address": "Werkstraße 11, 25497 Prisdorf"
-      },
-      "delta_m": 8,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "prisdorf_ernstings_family",
-      "name": "Ernstings family Mode",
-      "before": {
-        "lat": 53.67208889999999,
-        "lng": 9.773111779999999
-      },
-      "google": {
-        "lat": 53.6721392,
-        "lng": 9.7731967,
-        "place_id": "ChIJx88A1RKAsUcRmE7sJG_Hevk",
-        "address": "Peiner Hag 1, 25497 Prisdorf"
-      },
-      "delta_m": 8,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "prisdorf_prisdorf_net",
-      "name": "Prisdorf im Internet prisdorf.net",
-      "before": {
-        "lat": 53.6855855,
-        "lng": 9.750594759999998
-      },
-      "google": {
-        "lat": 53.6856358,
-        "lng": 9.7506797,
-        "place_id": "ChIJ538iVwCAsUcRrwmbht1WA0g",
-        "address": "Ahrenloher Weg 21, 25497 Prisdorf"
-      },
-      "delta_m": 8,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
     },
     {
       "id": "prisdorf_wald_hauen",
       "name": "Wald Naherholung Hauen",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 53.68185926000001,
-        "lng": 9.769224859999998
-      },
-      "google": {
-        "lat": 53.7032787,
-        "lng": 9.762839099999999,
-        "place_id": "ChIJmexQFCMrskcRSpoJspZSxfo",
-        "address": "Esinger Waldweg, 25436 Tornesch"
-      },
-      "delta_m": 2419,
-      "status": "BAD",
-      "streetview": "ZERO_RESULTS",
-      "applied": true
-    },
-    {
-      "id": "prisdorf_fairway_hotel",
-      "name": "Fairway Hotel Peiner Hof",
-      "before": {
-        "lat": 53.668825260000006,
-        "lng": 9.76598294
-      },
-      "google": {
-        "lat": 53.6689061,
-        "lng": 9.7661194,
-        "place_id": "ChIJYaLh9xOAsUcRAD7tt-QMxPE",
-        "address": "Peiner Hof 7, 25497 Prisdorf-Peiner Hof"
-      },
-      "delta_m": 13,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "prisdorf_eat_happy_sushi",
-      "name": "EAT HAPPY Sushi To-Go",
-      "before": {
-        "lat": 53.67211026,
-        "lng": 9.77314848
-      },
-      "google": {
-        "lat": 53.67213899999999,
-        "lng": 9.773197,
-        "place_id": "ChIJ47DI0f2BsUcRBOhl0ZwtEiA",
-        "address": "Peiner Hag 1, 25497 Prisdorf"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "prisdorf_star_textilreinigung",
-      "name": "Star Textilreinigung",
-      "before": {
-        "lat": 53.67211046,
-        "lng": 9.77314818
-      },
-      "google": {
-        "lat": 53.6721392,
-        "lng": 9.7731967,
-        "place_id": "ChIJx88A1RKAsUcRdGYimgNLP60",
-        "address": "Peiner Hag 1, 25497 Prisdorf"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "prisdorf_toom_baumarkt",
-      "name": "toom Baumarkt Peiner Hag",
-      "before": {
-        "lat": 53.671591899999996,
-        "lng": 9.77324828
-      },
-      "google": {
-        "lat": 53.64753169999999,
-        "lng": 9.7699907,
-        "place_id": "ChIJAWHY3UuAsUcRaQrCEm_oVnY",
-        "address": "Westring 10, 25421 Pinneberg"
-      },
-      "delta_m": 2684,
-      "status": "BAD",
-      "streetview": "OK",
-      "applied": true
+        "lat": 53.681861960000006,
+        "lng": 9.7689317
+      }
     },
     {
       "id": "prisdorf_sav_angelteich",
-      "name": "SAV Angelteich und Vereinshütte Prisdorf",
+      "name": "SAV Angelteich Prisdorf",
       "before": {
-        "lat": 53.68553698000001,
-        "lng": 9.750512839999999
+        "lat": 53.67925504,
+        "lng": 9.74859412
       },
       "google": {
-        "lat": 53.6856358,
-        "lng": 9.7506797,
-        "place_id": "ChIJ538iVwCAsUcRrwmbht1WA0g",
-        "address": "Ahrenloher Weg 21, 25497 Prisdorf"
+        "lat": 53.663819,
+        "lng": 9.7463742,
+        "place_id": "ChIJ-7fvgyGAsUcRuV019vM824M",
+        "address": "Fuchsweg 15, 25482 Appen, Germany"
       },
-      "delta_m": 16,
-      "status": "OK",
+      "delta_m": 1723,
+      "status": "BAD",
       "streetview": "ZERO_RESULTS"
     },
     {
       "id": "prisdorf_jagdgemeinschaft",
       "name": "Jagdgemeinschaft Prisdorf",
       "before": {
-        "lat": 53.6855855,
-        "lng": 9.750594759999998
+        "lat": 53.685283119999994,
+        "lng": 9.75137158
       },
       "google": {
         "lat": 53.6856358,
         "lng": 9.7506797,
         "place_id": "ChIJ538iVwCAsUcRrwmbht1WA0g",
-        "address": "Ahrenloher Weg 21, 25497 Prisdorf"
+        "address": "Ahrenloher Weg 21, 25497 Prisdorf, Germany"
       },
-      "delta_m": 8,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+      "delta_m": 60,
+      "status": "CHECK",
+      "streetview": "ZERO_RESULTS",
+      "applied": true
     },
     {
       "id": "prisdorf_strassen_gestern_heute",
       "name": "Heimatverein Broschüre Straßen gestern und heute",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 53.6782727,
-        "lng": 9.76147508
-      },
-      "google": {
-        "lat": 51.347357,
-        "lng": 12.5400333,
-        "place_id": "ChIJ63iGMH3_pkcRwlQzCkWP-dI",
-        "address": "Rathausstraße 1, 04451 Borsdorf"
-      },
-      "delta_m": 320153,
-      "status": "BAD",
-      "streetview": "ZERO_RESULTS",
-      "applied": true
+        "lat": 53.67761347857142,
+        "lng": 9.757236757142858
+      }
     },
     {
       "id": "prisdorf_strassenverzeichnis",
       "name": "Prisdorfer Straßenverzeichnis 25497",
       "before": {
-        "lat": 53.6754764,
-        "lng": 9.759794379999999
+        "lat": 53.67761347857142,
+        "lng": 9.757236757142858
       },
       "google": {
         "lat": 53.6755267,
         "lng": 9.7598793,
         "place_id": "ChIJEWMYFhCAsUcRPycLCZShgNE",
-        "address": "25497 Prisdorf, Deutschland"
+        "address": "25497 Prisdorf, Germany"
       },
-      "delta_m": 8,
-      "status": "OK",
+      "delta_m": 290,
+      "status": "BAD",
       "streetview": "ZERO_RESULTS"
     },
     {
       "id": "prisdorfer_feldmark",
       "name": "Prisdorfer Feldmark Zonenweg",
       "before": {
-        "lat": 53.67785418,
-        "lng": 9.76349618
+        "lat": 53.6775717,
+        "lng": 9.76333564
       },
       "google": {
-        "lat": 53.677953,
-        "lng": 9.763663,
-        "place_id": "ChIJf-vXag-AsUcR8ARYxmOJJAQ",
-        "address": "Prisdorf"
+        "lat": 53.6755267,
+        "lng": 9.7598793,
+        "place_id": "ChIJEWMYFhCAsUcRPycLCZShgNE",
+        "address": "25497 Prisdorf, Germany"
       },
-      "delta_m": 16,
-      "status": "OK",
-      "streetview": "OK"
+      "delta_m": 322,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "prisdorf_esinger_wohld",
+      "name": "Esinger Wohld",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.7032787,
+        "lng": 9.762839099999999
+      }
+    },
+    {
+      "id": "prisdorf_arboretum_ellerhoop",
+      "name": "Arboretum Ellerhoop",
+      "before": {
+        "lat": 53.716626313888895,
+        "lng": 9.777382830555553
+      },
+      "google": {
+        "lat": 53.716673,
+        "lng": 9.776521299999999,
+        "place_id": "ChIJuQjE4sQqskcR_Dp_2brZJJs",
+        "address": "Thiensen 4, 25373 Ellerhoop, Germany"
+      },
+      "delta_m": 57,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "prisdorf_kriegerdenkmal",
+      "name": "Kriegerdenkmal",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.648816002500006,
+        "lng": 9.829285260000004
+      }
+    },
+    {
+      "id": "prisdorf_aussichtspunkt_tavsmoor_appen_heist",
+      "name": "Aussichtspunkt Tävsmoor Appen/Heist",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.6486582,
+        "lng": 9.716770700000001
+      }
+    },
+    {
+      "id": "prisdorf_baumpark_pinneberg",
+      "name": "Baumpark Pinneberg",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.640841175,
+        "lng": 9.7798439375
+      }
+    },
+    {
+      "id": "prisdorf_norddeutsche_gartenschau",
+      "name": "Norddeutsche Gartenschau",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.717381,
+        "lng": 9.77569132
+      }
+    },
+    {
+      "id": "prisdorf_pinneberg_pinnau_park",
+      "name": "Pinneberg Pinnau-Park",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.67336465999999,
+        "lng": 9.81887952
+      }
+    },
+    {
+      "id": "prisdorf_naturlehrpfad_liether_moor",
+      "name": "Naturlehrpfad Liether Moor",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.7230095,
+        "lng": 9.6968327
+      }
+    },
+    {
+      "id": "prisdorf_tavsmoor_haselauer_moor",
+      "name": "Tävsmoor / Haselauer Moor",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.6408297,
+        "lng": 9.706679699999999
+      }
+    },
+    {
+      "id": "prisdorf_johannes_schneider_halle",
+      "name": "Johannes Schneider Halle",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.690839419999996,
+        "lng": 9.813649700000001
+      }
+    },
+    {
+      "id": "prisdorf_florentina_theater",
+      "name": "Florentina-Theater",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.68754815999999,
+        "lng": 9.67603288
+      }
     }
   ]
 }

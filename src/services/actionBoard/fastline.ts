@@ -21,30 +21,28 @@ import {
   buildHotelBookAction,
   partnerSupportsIntent,
 } from './partnerRouter';
-import { isTrivialExpandQuery } from './opportunityScan';
+import {
+  isExpandShowMoreAction,
+  shouldOfferExpandMore,
+} from './opportunityScan';
 
 function mapsUrl(
   name: string,
-  lat?: number,
-  lng?: number,
+  _lat?: number,
+  _lng?: number,
   placeId?: string | null,
-): string {
-  if (placeId) {
-    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-      name,
-    )}&query_place_id=${encodeURIComponent(placeId)}`;
+): string | null {
+  try {
+    const { mapsUrlForGooglePlace } = require('../research/eventInfoUrl') as {
+      mapsUrlForGooglePlace: (o: {
+        placeName?: string | null;
+        placeId?: string | null;
+      }) => string | null;
+    };
+    return mapsUrlForGooglePlace({ placeName: name, placeId });
+  } catch {
+    return null;
   }
-  if (
-    typeof lat === 'number' &&
-    typeof lng === 'number' &&
-    Number.isFinite(lat) &&
-    Number.isFinite(lng)
-  ) {
-    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-      `${name}@${lat},${lng}`,
-    )}`;
-  }
-  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(name)}`;
 }
 
 function navAction(entity: ActionEntity, multi: boolean): QuickAction | null {
@@ -71,12 +69,14 @@ function navAction(entity: ActionEntity, multi: boolean): QuickAction | null {
   };
 }
 
-function mapsAction(entity: ActionEntity, multi: boolean): QuickAction {
+function mapsAction(entity: ActionEntity, multi: boolean): QuickAction | null {
+  const url = mapsUrl(entity.name, entity.lat, entity.lng, entity.placeId);
+  if (!url) return null;
   return {
     type: 'OPEN_URL',
     label: labelForOpportunity('maps', entity, { multiChoice: multi }),
     payload: {
-      url: mapsUrl(entity.name, entity.lat, entity.lng, entity.placeId),
+      url,
       destName: entity.name,
       entityName: entity.name,
       entityRank: entity.rank,
@@ -113,7 +113,15 @@ function expandAction(
 ): QuickAction | null {
   const user = (input.userText ?? '').trim();
   const speech = (input.speechText ?? '').trim();
-  if (isTrivialExpandQuery(user || speech)) return null;
+  if (
+    !shouldOfferExpandMore({
+      userText: user,
+      speechText: speech,
+      module1: input.module1,
+    })
+  ) {
+    return null;
+  }
 
   const activity = Boolean(input.module1?.activity);
   const isPoiCard = Boolean(input.module1);
@@ -133,13 +141,13 @@ function expandAction(
   const question = (user || speech).slice(0, 420);
   const prompt =
     expandKind === 'activity'
-      ? `Mehr zu diesem Aktivitäts-Ort — was man hier macht, Preise/Dauer nur wenn belegt. Max 3000 Zeichen. Nichts erfinden, schon Gesagtes nicht wiederholen. Keine Meta-Abschlussfrage.`
-      : expandKind === 'poi_history'
-        ? `Noch mehr Historie zu diesem Ort — tiefer, was du noch nicht gesagt hast. Max 3000 Zeichen. Am Ort bleiben. Nichts erfinden. Keine Abschlussfrage.`
+      ? `Mehr zu diesem Aktivitäts-Ort — was man hier macht, Preise/Dauer nur wenn belegt. Max 2000 Zeichen. Nichts erfinden, schon Gesagtes nicht wiederholen. Keine Meta-Abschlussfrage.`
+        : expandKind === 'poi_history'
+        ? `Noch mehr Historie zu diesem Ort — tiefer, was du noch nicht gesagt hast. Max 2000 Zeichen. Am Ort bleiben. Nichts erfinden. Keine Abschlussfrage.`
         : [
             'Vertiefe GENAU diese User-Frage ausführlicher und präziser.',
             `Frage: „${question}“`,
-            'Max 3000 Zeichen. Nur belegte Fakten. Schon Gesagtes nicht wiederholen.',
+            'Max 2000 Zeichen. Nur belegte Fakten. Schon Gesagtes nicht wiederholen.',
             'NICHT über den aktuellen GPS-/Stadt-Ort sprechen, außer die Frage betrifft genau diesen Ort.',
             'Keine Meta-Abschlussfrage.',
           ].join(' ');
@@ -163,7 +171,11 @@ function expandAction(
 
 function filterSeed(
   seed: QuickAction[],
-  ctx?: { speechText?: string; userText?: string },
+  ctx?: {
+    speechText?: string;
+    userText?: string;
+    module1?: ActionBoardInput['module1'];
+  },
 ): QuickAction[] {
   const speech = ctx?.speechText ?? '';
   const user = ctx?.userText ?? '';
@@ -178,6 +190,14 @@ function filterSeed(
     if (PRESERVED_ACTION_TYPES.has(a.type)) return true;
     if (a.type === 'SHOW_MORE' && a.payload.textPrompt?.startsWith('__')) {
       return true;
+    }
+    // Expand-„Noch mehr“ nur bei echtem Kontext (Modul 1 / Geschichte)
+    if (a.type === 'SHOW_MORE' && isExpandShowMoreAction(a)) {
+      return shouldOfferExpandMore({
+        userText: user,
+        speechText: speech,
+        module1: ctx?.module1,
+      });
     }
     if (a.type === 'START_NAVIGATION') {
       if (knowledgeOnly) return false;
@@ -200,7 +220,7 @@ function filterSeed(
 }
 
 /** Label/Speech und URL müssen thematisch passen — sonst Drop (kein obsucht.net bei App-Store). */
-function openUrlLooksRelevant(
+export function openUrlLooksRelevant(
   url: string,
   label: string,
   speech: string,
@@ -218,11 +238,19 @@ function openUrlLooksRelevant(
   const urlBlob = `${host} ${path}`;
   const topic = `${label} ${speech} ${user}`.toLowerCase();
 
-  // Bekannte Partner / Maps immer ok
+  // Bekannte Partner / Maps / Flug-Deeplinks immer ok
   if (
-    /expedia|stay22|getyourguide|musement|viator|tiqets|awin1|travelsecure|travsim|airalo|google\.[^/]*\/maps|maps\.google|apple\.com|developer\.apple/i.test(
+    /expedia|stay22|getyourguide|musement|viator|tiqets|awin1|travelsecure|travsim|airalo|google\.[^/]*\/maps|maps\.google|apple\.com|developer\.apple|kiwi\.com|c111\.travelpayouts|tpx\.li|aviasales|discovercars|bounce\.com|(?:^|\.)uber\.com|m\.uber|klook|kkday|welcomepickups|gettransfer|frisonaut|inselflieger/i.test(
       urlBlob,
     )
+  ) {
+    return true;
+  }
+
+  // Buchungs-CTA + Affiliate-Tracker (custom_url=kiwi…) — Label-Tokens stehen nicht im Host
+  if (
+    /\b(flug|buchen|buchung|ticket)\b/iu.test(`${label} ${speech} ${user}`) &&
+    /travelpayouts|tpx\.li|kiwi\.com|aviasales|frisonaut/i.test(urlBlob)
   ) {
     return true;
   }
@@ -273,14 +301,40 @@ export function buildFastline(opts: {
   for (const s of filterSeed(input.seedActions ?? [], {
     speechText: input.speechText,
     userText: input.userText,
+    module1: input.module1,
   })) {
     if (PRESERVED_ACTION_TYPES.has(s.type)) push(s);
+  }
+
+  // Prefill-Buchung (Kiwi / Aviasales / Airline) vor Speech-Mining
+  for (const s of filterSeed(input.seedActions ?? [], {
+    speechText: input.speechText,
+    userText: input.userText,
+    module1: input.module1,
+  })) {
+    if (
+      s.type === 'SHOW_MORE' &&
+      /\bnimm\s+flug\b/i.test(s.payload.textPrompt ?? '')
+    ) {
+      push(s);
+      continue;
+    }
+    if (s.type !== 'OPEN_URL' || !s.payload.url) continue;
+    if (
+      /kiwi\.com|c111\.travelpayouts|aviasales|tpx\.li\/zk7udfoO/i.test(
+        s.payload.url,
+      ) ||
+      /\b(buchen|vergleichen)\b|^Bei\s+/i.test(s.label)
+    ) {
+      push(s);
+    }
   }
 
   // Research-Hotel-Deeplinks zuerst — nie durch generische Suche ersetzen
   for (const s of filterSeed(input.seedActions ?? [], {
     speechText: input.speechText,
     userText: input.userText,
+    module1: input.module1,
   })) {
     if (
       s.type === 'OPEN_URL' &&
@@ -315,8 +369,11 @@ export function buildFastline(opts: {
           push(nav);
           usedKinds.add(key);
         } else {
-          push(mapsAction(opp.entity, multi));
-          usedKinds.add(key);
+          const maps = mapsAction(opp.entity, multi);
+          if (maps) {
+            push(maps);
+            usedKinds.add(key);
+          }
         }
         break;
       }
@@ -338,8 +395,11 @@ export function buildFastline(opts: {
         ) {
           break;
         }
-        push(mapsAction(opp.entity, multi));
-        usedKinds.add(key);
+        const maps = mapsAction(opp.entity, multi);
+        if (maps) {
+          push(maps);
+          usedKinds.add(key);
+        }
         break;
       }
       case 'hotel_book': {
@@ -366,6 +426,7 @@ export function buildFastline(opts: {
         const seedHit = filterSeed(input.seedActions ?? [], {
           speechText: input.speechText,
           userText: input.userText,
+          module1: input.module1,
         }).find(
           (a) =>
             a.type === 'OPEN_URL' &&
@@ -445,20 +506,13 @@ export function buildFastline(opts: {
       }
       case 'wifi_place': {
         if (!opp.entity) break;
-        // Maps-Suche WLAN in der Nähe
+        const maps = mapsAction(opp.entity, multi);
+        if (!maps) break;
         push({
-          type: 'OPEN_URL',
+          ...maps,
           label: labelForOpportunity('wifi_place', opp.entity, {
             multiChoice: multi,
           }),
-          payload: {
-            url: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-              `WLAN Café ${opp.entity.name}`,
-            )}`,
-            entityName: opp.entity.name,
-            entityRank: opp.entity.rank,
-            actionBoardId: `wifi:${opp.entity.rank}`,
-          },
         });
         usedKinds.add(key);
         break;
@@ -468,13 +522,26 @@ export function buildFastline(opts: {
     }
   }
 
-  // Seed NAV/URL die Entity-ok sind nachziehen wenn Platz
+  // Seed NAV/URL/Expand die Entity-ok sind nachziehen wenn Platz
   for (const s of filterSeed(input.seedActions ?? [], {
     speechText: input.speechText,
     userText: input.userText,
+    module1: input.module1,
   })) {
     if (actions.length >= max) break;
     if (PRESERVED_ACTION_TYPES.has(s.type)) continue;
+    if (s.type === 'SHOW_MORE' && isExpandShowMoreAction(s)) {
+      if (
+        shouldOfferExpandMore({
+          userText: input.userText,
+          speechText: input.speechText,
+          module1: input.module1,
+        })
+      ) {
+        push(s);
+      }
+      continue;
+    }
     if (s.type === 'START_NAVIGATION' || s.type === 'OPEN_URL') {
       const relabeled = { ...s };
       if (s.type === 'START_NAVIGATION' && s.payload.destName) {

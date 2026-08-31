@@ -18,10 +18,12 @@ import { isTurnManeuver } from './navPredictiveCue';
 
 export const ARROW_LOOKAHEAD_WALK_M = 25;
 export const ARROW_LOOKAHEAD_BIKE_M = 45;
-/** Ignore only tiny relative-bearing chatter (was 8° — felt sticky). */
-export const ARROW_MIN_SMOOTH_DEG = 2;
-/** Relative-bearing EMA — higher = needle tracks heading faster. */
-export const ARROW_EMA_ALPHA = 0.5;
+/** Hold micro relative-bearing chatter (heading filter already tracks turns). */
+export const ARROW_MIN_SMOOTH_DEG = 2.5;
+/** EMA for medium swings — keep light so we don't re-lag the heading filter. */
+export const ARROW_EMA_ALPHA = 0.88;
+/** Large relative jumps apply almost immediately (body turn / route bend). */
+export const ARROW_SNAP_DEG = 16;
 /** Clamp look-ahead this far before a sharp turn. */
 export const ARROW_TURN_CLAMP_M = 8;
 
@@ -55,9 +57,9 @@ export function resetSmartArrow(): void {
 }
 
 function lookAheadM(transportMode: TransportMode): number {
-  return transportMode === 'bicycle'
-    ? ARROW_LOOKAHEAD_BIKE_M
-    : ARROW_LOOKAHEAD_WALK_M;
+  if (transportMode === 'bicycle') return ARROW_LOOKAHEAD_BIKE_M;
+  if (transportMode === 'jog') return 32;
+  return ARROW_LOOKAHEAD_WALK_M;
 }
 
 /** Next significant turn along-route from projection index. */
@@ -90,11 +92,12 @@ function smoothRelativeBearing(rawRel: number): number {
     return rawRel;
   }
   const delta = shortestAngleDelta(smoothedBearingRelDeg, rawRel);
-  if (Math.abs(delta) < ARROW_MIN_SMOOTH_DEG) {
+  const abs = Math.abs(delta);
+  if (abs < ARROW_MIN_SMOOTH_DEG) {
     return smoothedBearingRelDeg;
   }
-  smoothedBearingRelDeg =
-    smoothedBearingRelDeg + ARROW_EMA_ALPHA * delta;
+  const a = abs >= ARROW_SNAP_DEG ? 0.96 : ARROW_EMA_ALPHA;
+  smoothedBearingRelDeg = smoothedBearingRelDeg + a * delta;
   return smoothedBearingRelDeg;
 }
 
@@ -179,7 +182,10 @@ export function computeSmartArrow(input: SmartArrowInput): SmartArrowResult {
       wp?.stationName?.trim() || wp?.landmark?.trim() || destination.name;
   }
 
-  const absBearing = bearingDegrees(userLat, userLng, targetLat, targetLng);
+  const absBearing =
+    distanceMeters(userLat, userLng, targetLat, targetLng) < 8
+      ? pathBearingDeg
+      : bearingDegrees(userLat, userLng, targetLat, targetLng);
   const rawRel = relativeBearingDeg(headingDeg, absBearing);
 
   return {

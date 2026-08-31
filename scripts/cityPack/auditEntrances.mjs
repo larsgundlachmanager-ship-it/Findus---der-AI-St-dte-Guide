@@ -6,6 +6,7 @@
  *   node scripts/cityPack/auditEntrances.mjs --city wangerooge
  *   node scripts/cityPack/auditEntrances.mjs --city prisdorf --apply
  *   node scripts/cityPack/auditEntrances.mjs --city pinneberg --apply --max-delta 120
+ *   node scripts/cityPack/auditEntrances.mjs --city luebeck --apply --story-only --max-delta 120
  */
 
 import path from 'node:path';
@@ -13,6 +14,7 @@ import {
   STAEDTE_DIR,
   arg,
   boxPolygon,
+  suggestedPolygonHalfM,
   centroid,
   distM,
   hasFlag,
@@ -25,6 +27,24 @@ import {
 import { requireGoogleKey, resolvePlace, streetViewMeta } from './google.mjs';
 
 loadEnvFile();
+
+function isStory(spot) {
+  const role = String(spot.pack_role || '').toLowerCase();
+  if (role === 'directory') return false;
+  if (role === 'story') return true;
+  const tier = Number(spot.place_tier);
+  if (Number.isFinite(tier) && tier <= 2) return true;
+  const tags = (spot.tags || []).map(String);
+  return tags.some((t) => /must_have|landmark|tier1|story/i.test(t));
+}
+
+function countryLabel(pack, cityId) {
+  const c = String(pack.country || pack.country_code || '').toLowerCase();
+  if (c === 'pt' || c === 'portugal' || cityId === 'lissabon') return 'Portugal';
+  if (c === 'at' || c === 'austria') return 'Austria';
+  if (c === 'ch' || c === 'switzerland') return 'Switzerland';
+  return 'Germany';
+}
 
 function packCenter(spot, trigger) {
   const c = centroid(spot.polygonCoordinates || spot.polygon);
@@ -62,7 +82,7 @@ function rebuildApproaches(spot, lat, lng) {
       radius_m: 32,
       teaser_text:
         existing[0]?.teaser_text ||
-        `Kurz vorher: ${spot.name} liegt voraus — Ziel ist der Haupteingang laut Google Maps.`,
+        `Kurz vorher: ${spot.name} liegt voraus â€” Ziel ist der Haupteingang laut Google Maps.`,
       condition_rule: 'always',
     },
     {
@@ -78,26 +98,56 @@ function rebuildApproaches(spot, lat, lng) {
   ];
 }
 
+function alreadyGooglePinned(spot, trigger) {
+  const pools = [
+    ...(trigger?.deep_data_pool || []),
+    ...(spot.deep_data_pool || []),
+  ];
+  return pools.some((e) => {
+    const tags = Array.isArray(e?.tags) ? e.tags : [];
+    return tags.some((t) => /sourced_google/i.test(String(t)));
+  });
+}
+
 async function main() {
   requireGoogleKey();
   const cityId = arg('city');
   if (!cityId) {
     console.error(
-      'Usage: node scripts/cityPack/auditEntrances.mjs --city <id> [--apply] [--max-delta 80]',
+      'Usage: node scripts/cityPack/auditEntrances.mjs --city <id> [--apply] [--story-only] [--force] [--max-delta 80]',
     );
     process.exit(1);
   }
   const pack = loadPack(cityId);
   if (!pack) throw new Error(`Pack not found: ${cityId}`);
   const apply = hasFlag('apply');
+  const storyOnly = hasFlag('story-only');
+  const force = hasFlag('force');
   const maxDelta = Number(arg('max-delta') || 80);
   const near = { lat: pack.lat, lng: pack.lng };
+  const country = countryLabel(pack, cityId);
 
   const rows = [];
+  let skippedDirectory = 0;
+  let skippedCached = 0;
   for (const spot of pack.spots || []) {
+    if (storyOnly && !isStory(spot)) {
+      skippedDirectory += 1;
+      continue;
+    }
     const trigger = (pack.trigger_points || []).find((t) => t.id === spot.id);
     const before = packCenter(spot, trigger);
-    const query = `${spot.name}, ${pack.name || cityId}, Germany`;
+    if (!force && before && alreadyGooglePinned(spot, trigger)) {
+      skippedCached += 1;
+      rows.push({
+        id: spot.id,
+        name: spot.name,
+        status: 'SKIP_CACHED_GOOGLE',
+        before,
+      });
+      continue;
+    }
+    const query = `${spot.name}, ${pack.name || cityId}, ${country}`;
     let google = null;
     try {
       google = await resolvePlace(query, {
@@ -162,8 +212,10 @@ async function main() {
       } else {
       spot._oldLat = before.lat;
       spot._oldLng = before.lng;
-      const half =
-        spot.category === 'bahnhof' || spot.category === 'hafen' ? 40 : 22;
+      const half = suggestedPolygonHalfM(
+        spot.category || spot.district,
+        spot.name,
+      );
       spot.polygonCoordinates = boxPolygon(google.lat, google.lng, half);
       spot.approach_triggers = rebuildApproaches(spot, google.lat, google.lng);
       delete spot._oldLat;
@@ -173,12 +225,12 @@ async function main() {
       const subs = spot.sub_pois || spot.subPois || [];
       const entrance = {
         id: `${spot.id}_sub_eingang`,
-        name: `${spot.name} · Haupteingang`,
+        name: `${spot.name} Â· Haupteingang`,
         lat: google.lat,
         lng: google.lng,
         radius_m: 10,
         fact_details:
-          'Haupteingang / Google-Maps-Navigationspin — Area-Trigger-Zentrum.',
+          'Haupteingang / Google-Maps-Navigationspin â€” Area-Trigger-Zentrum.',
         tags: ['sub_poi', 'eingang', 'gps_entrance', 'sourced_google'],
       };
       spot.sub_pois = [
@@ -196,7 +248,7 @@ async function main() {
         }));
         const pool = trigger.deep_data_pool || [];
         const gpsLine = {
-          text: `GPS-Eingang (Google Maps Pin): ${google.lat.toFixed(6)}, ${google.lng.toFixed(6)}${google.address ? ` — ${google.address}` : ''}.`,
+          text: `GPS-Eingang (Google Maps Pin): ${google.lat.toFixed(6)}, ${google.lng.toFixed(6)}${google.address ? ` â€” ${google.address}` : ''}.`,
           tags: ['gps_confirmed', 'sourced_google', 'orientierung'],
         };
         trigger.deep_data_pool = [
@@ -219,13 +271,17 @@ async function main() {
     {
       city_id: cityId,
       apply,
+      storyOnly,
       maxDelta,
+      country,
       summary: {
         ok: rows.filter((r) => r.status === 'OK').length,
         check: rows.filter((r) => r.status === 'CHECK').length,
         bad: rows.filter((r) => r.status === 'BAD').length,
         errors: rows.filter((r) => r.error).length,
         applied: rows.filter((r) => r.applied).length,
+        skipped_directory: skippedDirectory,
+        skipped_cached_google: skippedCached,
       },
       rows,
     },
@@ -233,13 +289,15 @@ async function main() {
 
   if (apply) {
     const file = savePack(pack, { bumpVersion: true });
-    console.log(`[audit] applied → ${file}`);
+    console.log(`[audit] applied â†’ ${file}`);
   }
-  console.log(`[audit] report ${reportPath}`);
+  console.log(
+    `[audit] report ${reportPath} skipCached=${skippedCached} force=${force}`,
+  );
   const bad = rows.filter((r) => r.status === 'BAD' || r.status === 'CHECK');
   for (const r of bad.slice(0, 20)) {
     console.log(
-      `  ${r.status} ${r.delta_m}m  ${r.id}  (${r.before?.lat?.toFixed?.(5)}→${r.google?.lat?.toFixed?.(5)})`,
+      `  ${r.status} ${r.delta_m}m  ${r.id}  (${r.before?.lat?.toFixed?.(5)}â†’${r.google?.lat?.toFixed?.(5)})`,
     );
   }
 }

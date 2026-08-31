@@ -1,3211 +1,1545 @@
 {
   "city_id": "hochheim_am_main",
   "apply": true,
+  "storyOnly": true,
   "maxDelta": 80,
+  "country": "Germany",
   "summary": {
-    "ok": 176,
-    "check": 1,
-    "bad": 11,
+    "ok": 1,
+    "check": 23,
+    "bad": 8,
     "errors": 0,
-    "applied": 1
+    "applied": 29,
+    "skipped_directory": 213,
+    "skipped_cached_google": 106
   },
   "rows": [
     {
       "id": "hochheim_am_main_hochheim",
       "name": "Hochheim",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.00416424,
-        "lng": 8.350279279999999
-      },
-      "google": {
-        "lat": 50.01358260000001,
-        "lng": 8.3599322,
-        "place_id": "ChIJ7yDl9UWYvUcRUH-bh-pOc58",
-        "address": "Hochheim am Main"
-      },
-      "delta_m": 1254,
-      "status": "BAD",
-      "streetview": "OK"
+        "lat": 50.00402020000001,
+        "lng": 8.350413833333333
+      }
     },
     {
       "id": "hochheim_am_main_p_r_hochheim_main",
       "name": "P+R Hochheim(Main)",
       "before": {
-        "lat": 50.00458164,
-        "lng": 8.34938258
+        "lat": 50.0044026875,
+        "lng": 8.350679375
       },
       "google": {
-        "lat": 50.0046535,
+        "lat": 50.004653499999996,
         "lng": 8.3494944,
         "place_id": "ChIJzRvy8bSZvUcRwirB13IFVOs",
-        "address": "Sandstraße 14, 65239 Hochheim am Main"
+        "address": "Sandstraße 14, 65239 Hochheim am Main, Germany"
       },
-      "delta_m": 11,
-      "status": "OK",
-      "streetview": "OK"
+      "delta_m": 89,
+      "status": "BAD",
+      "streetview": "OK",
+      "applied": true
     },
     {
       "id": "hochheim_am_main_hochheimer_weinfest",
       "name": "Hochheimer Weinfest",
       "before": {
-        "lat": 50.01118867999999,
-        "lng": 8.3502405
+        "lat": 50.01103865714286,
+        "lng": 8.350610985714285
       },
       "google": {
         "lat": 50.0112282,
         "lng": 8.350302,
         "place_id": "ChIJ6-2VxBGZvUcRW0DKNuR3g0E",
-        "address": "Am Plan, 65239 Hochheim am Main"
+        "address": "Am Plan, 65239 Hochheim am Main, Germany"
       },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+      "delta_m": 31,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
     },
     {
       "id": "hochheim_am_main_b_b_hotels_germany_gmbh",
       "name": "B&B Hotels Germany GmbH",
       "before": {
-        "lat": 50.011612979999995,
-        "lng": 8.365763000000001
+        "lat": 50.01176528,
+        "lng": 8.366082299999999
       },
       "google": {
         "lat": 50.0116525,
         "lng": 8.3658245,
         "place_id": "ChIJDaxtRK2ivUcRTTd_mCsATfw",
-        "address": "Altkönigstraße 10, 65239 Hochheim am Main"
+        "address": "Altkönigstraße 10, 65239 Hochheim am Main, Germany"
       },
-      "delta_m": 6,
+      "delta_m": 22,
       "status": "OK",
       "streetview": "OK"
     },
     {
       "id": "hochheim_am_main_stadtverwaltung_hochheim_am_main",
       "name": "Stadtverwaltung Hochheim am Main",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.01276208,
-        "lng": 8.3498615
-      },
-      "google": {
-        "lat": 50.0128016,
-        "lng": 8.349923,
-        "place_id": "ChIJ7Z_FlkmYvUcRLlUesT2rHVU",
-        "address": "Burgeffstraße 30, 65239 Hochheim am Main-Le Pontet-Platz"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 50.012860492307695,
+        "lng": 8.349849238461537
+      }
     },
     {
       "id": "hochheim_am_main_hochheimer_weinbaumuseum",
       "name": "Hochheimer Weinbaumuseum",
       "before": {
-        "lat": 50.011673779999995,
-        "lng": 8.3472187
+        "lat": 50.01202362,
+        "lng": 8.347726579999998
       },
       "google": {
         "lat": 50.0117133,
         "lng": 8.3472802,
         "place_id": "ChIJMwTm_zWYvUcRkHwJJFmzodo",
-        "address": "Wiesbadener Str. 1, 65239 Hochheim am Main"
+        "address": "Wiesbadener Str. 1, 65239 Hochheim am Main, Germany"
       },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+      "delta_m": 47,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
     },
     {
       "id": "hochheim_am_main_weinstadtjournal",
       "name": "Weinstadtjournal",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.011059880000005,
-        "lng": 8.3457258
-      },
-      "google": {
         "lat": 50.0110994,
-        "lng": 8.345787300000001,
-        "place_id": "ChIJT6Zb6TWYvUcR7xFMWmmH6s0",
-        "address": "Mainzer Str. 35, 65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lng": 8.345787300000001
+      }
     },
     {
       "id": "hochheim_am_main_aussichtsturm_am_mainhafen",
       "name": "Aussichtsturm am Mainhafen",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.00176518000001,
-        "lng": 8.311661599999999
-      },
-      "google": {
-        "lat": 50.0018047,
-        "lng": 8.3117231,
-        "place_id": "ChIJ2xbZfnyXvUcR_aIqefLzfqU",
-        "address": "Mainufer, 55246 Wiesbaden"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 50.001998099999994,
+        "lng": 8.31153754
+      }
     },
     {
       "id": "hochheim_am_main_sonderausstellung_hochheim_weinfestselig",
       "name": "Sonderausstellung HOCHHEIM:WEINFESTSELIG",
       "before": {
-        "lat": 50.010812380000004,
-        "lng": 8.3534156
+        "lat": 50.010206447619055,
+        "lng": 8.353185795238096
       },
       "google": {
         "lat": 50.0108519,
         "lng": 8.3534771,
         "place_id": "ChIJR8_qxjiZvUcRsf-pINKNCqA",
-        "address": "Alte Malzfabrik 1, 65239 Hochheim am Main"
+        "address": "Alte Malzfabrik 1, 65239 Hochheim am Main, Germany"
       },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+      "delta_m": 75,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
     },
     {
       "id": "hochheim_am_main_altes_rathaus_trausaal_standesamt_hochheim",
       "name": "Altes Rathaus (Trausaal Standesamt Hochheim)",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.00978538,
-        "lng": 8.350634600000001
-      },
-      "google": {
-        "lat": 50.0098249,
-        "lng": 8.3506961,
-        "place_id": "ChIJuTs5sEuYvUcRV1JEPmnTg_U",
-        "address": "Kirchstraße 13, 65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 50.00985250909091,
+        "lng": 8.350647500000001
+      }
     },
     {
       "id": "hochheim_am_main_pfarrkirche_st_peter_und_paul",
       "name": "Pfarrkirche St. Peter und Paul",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.00852048,
-        "lng": 8.3522785
-      },
-      "google": {
-        "lat": 50.00856,
-        "lng": 8.352340000000002,
-        "place_id": "ChIJEy8He0uYvUcRJpOpnDbUz9k",
-        "address": "Kirchstraße 27, 65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 50.008508247058835,
+        "lng": 8.352354641176472
+      }
     },
     {
       "id": "hochheim_am_main_evangelische_kirche_hochheim_am_main_evangelische_kirchengemein",
       "name": "Evangelische Kirche Hochheim am Main - Evangelische Kirchengemeinde Hochheim",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.01187498,
-        "lng": 8.351949000000001
-      },
-      "google": {
-        "lat": 50.0119145,
-        "lng": 8.3520105,
-        "place_id": "ChIJs3jNWjeZvUcRqUjl9qj3Fj4",
-        "address": "Burgeffstraße 5, 65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 50.01190905675676,
+        "lng": 8.351953081081081
+      }
     },
     {
       "id": "hochheim_am_main_neuapostolische_kirche_hochheim",
       "name": "Neuapostolische Kirche Hochheim",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.00963008,
-        "lng": 8.361666799999998
-      },
-      "google": {
-        "lat": 50.0096696,
-        "lng": 8.3617283,
-        "place_id": "ChIJXY4BNuyZvUcREwP7GnewlrI",
-        "address": "Auf d. Schlicht 75, 65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 50.009671780000005,
+        "lng": 8.36165728
+      }
     },
     {
       "id": "hochheim_am_main_st_bonifatius",
       "name": "St.Bonifatius",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.01600758000001,
-        "lng": 8.346127980000002
-      },
-      "google": {
-        "lat": 50.01604709999999,
-        "lng": 8.3461895,
-        "place_id": "ChIJafAhlDeYvUcR-RbzmqcKl5w",
-        "address": "Kolpingstraße 2, 65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 50.01612391515151,
+        "lng": 8.346242212121211
+      }
     },
     {
       "id": "hochheim_am_main_katholisches_vereinshaus_hochheim_am_main",
       "name": "Katholisches Vereinshaus, Hochheim am Main",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.01359608,
-        "lng": 8.350313700000001
-      },
-      "google": {
-        "lat": 50.0136356,
-        "lng": 8.3503752,
-        "place_id": "ChIJNV5spUmYvUcRF6qgdlKqSS4",
-        "address": "Wilhelmstraße 4, 65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 50.013731033333336,
+        "lng": 8.350362877777778
+      }
     },
     {
       "id": "hochheim_am_main_evangelische_kirche",
       "name": "Evangelische Kirche",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.03909138,
-        "lng": 8.38517656
-      },
-      "google": {
-        "lat": 50.0119145,
-        "lng": 8.3520105,
-        "place_id": "ChIJs3jNWjeZvUcRqUjl9qj3Fj4",
-        "address": "Burgeffstraße 5, 65239 Hochheim am Main"
-      },
-      "delta_m": 3840,
-      "status": "BAD",
-      "streetview": "OK"
+        "lat": 50.03913165555556,
+        "lng": 8.385218344444446
+      }
     },
     {
       "id": "hochheim_am_main_umsonst_laden_hochheim",
       "name": "Umsonst-Laden Hochheim",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.015036679999994,
-        "lng": 8.35270648
-      },
-      "google": {
-        "lat": 50.0150762,
-        "lng": 8.352768,
-        "place_id": "ChIJ5SvJo6CZvUcRELYuN1Iwj84",
-        "address": "Weiherstraße 39, 65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 50.01504958333334,
+        "lng": 8.352685966666668
+      }
     },
     {
       "id": "hochheim_am_main_konigin_victoria_denkmal",
       "name": "Königin-Victoria-Denkmal",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.003085580000004,
-        "lng": 8.3762741
-      },
-      "google": {
-        "lat": 50.0031251,
-        "lng": 8.376335599999999,
-        "place_id": "ChIJ04h4lAGZvUcRMqYSsGS9Ceo",
-        "address": "65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 50.016436920000004,
+        "lng": 8.352983260000002
+      }
     },
     {
       "id": "hochheim_am_main_weinberge",
       "name": "Weinberge",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.007178079999996,
-        "lng": 8.3527259
-      },
-      "google": {
-        "lat": 50.0072176,
-        "lng": 8.3527874,
-        "place_id": "ChIJPbDppkyYvUcRj2t6OFFdN8E",
-        "address": "Bahnhofstraße 2A, 65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 50.016436920000004,
+        "lng": 8.352983260000002
+      }
     },
     {
       "id": "hochheim_am_main_blasorchester_hochheim_am_main_e_v",
       "name": "Blasorchester Hochheim am Main e.V.",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.01697498,
-        "lng": 8.351739380000001
-      },
-      "google": {
-        "lat": 50.01701449999999,
-        "lng": 8.351800899999999,
-        "place_id": "ChIJOfAQ1EeYvUcR3LssO2TT_1E",
-        "address": "Am Weiher 2, 65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 50.017014499999995,
+        "lng": 8.351800899999999
+      }
     },
     {
       "id": "hochheim_am_main_buchhandlung_eulenspiegel",
       "name": "Buchhandlung Eulenspiegel",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.01251028,
-        "lng": 8.351507600000001
-      },
-      "google": {
-        "lat": 50.0125498,
-        "lng": 8.351569099999999,
-        "place_id": "ChIJv4X2cUmYvUcRIKoyCKJyI68",
-        "address": "Weiherstraße 16, 65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 50.012549799999995,
+        "lng": 8.351569099999999
+      }
     },
     {
       "id": "hochheim_am_main_florsheimer_st_anna_kapelle",
       "name": "Flörsheimer St. Anna Kapelle",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.010501479999995,
-        "lng": 8.392838800000002
-      },
-      "google": {
-        "lat": 50.010541,
-        "lng": 8.392900299999999,
-        "place_id": "ChIJZ_MAKOSYvUcRInaDk60ZRgg",
-        "address": "Unnamed Road, 65439 Flörsheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 50.01050806,
+        "lng": 8.39292558
+      }
     },
     {
       "id": "hochheim_am_main_evangelische_kirche_massenheim_evangelische_kirchengemeinde_mas",
       "name": "Evangelische Kirche Massenheim - Evangelische Kirchengemeinde Massenheim-Wicker",
       "before": {
-        "lat": 50.04077248,
-        "lng": 8.38828286
+        "lat": 50.040658050000005,
+        "lng": 8.387826200000001
       },
       "google": {
-        "lat": 50.040812,
+        "lat": 50.040811999999995,
         "lng": 8.3883444,
         "place_id": "ChIJV4hCNceZvUcRjxQTqRjgGuw",
-        "address": "Friedensstraße 5, 65239 Hochheim am Main"
+        "address": "Friedensstraße 5, 65239 Hochheim am Main, Germany"
       },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+      "delta_m": 41,
+      "status": "CHECK",
+      "streetview": "ZERO_RESULTS",
+      "applied": true
     },
     {
       "id": "hochheim_am_main_regionalpark_sitzkiesel_hochheim",
       "name": "Regionalpark Sitzkiesel Hochheim",
       "before": {
-        "lat": 50.02842048,
-        "lng": 8.367989380000001
+        "lat": 50.028384375,
+        "lng": 8.367380291666668
       },
       "google": {
-        "lat": 50.02846,
+        "lat": 50.028459999999995,
         "lng": 8.3680509,
         "place_id": "ChIJOa0vrWeYvUcRQlaXwl3HO2w",
-        "address": "K782, 65239 Hochheim am Main"
+        "address": "K782, 65239 Hochheim am Main, Germany"
       },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+      "delta_m": 49,
+      "status": "CHECK",
+      "streetview": "ZERO_RESULTS",
+      "applied": true
     },
     {
       "id": "hochheim_am_main_regionalpark_sitzkiesel",
       "name": "Regionalpark Sitzkiesel",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.02696958,
-        "lng": 8.341721179999999
-      },
-      "google": {
-        "lat": 50.0270091,
-        "lng": 8.3417827,
-        "place_id": "ChIJE_oAdz2YvUcRy7Rtp9vH41s",
-        "address": "B40, 65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 50.016436920000004,
+        "lng": 8.352983260000002
+      }
     },
     {
       "id": "hochheim_am_main_leinreiter_denkmal",
       "name": "Leinreiter-Denkmal",
       "before": {
-        "lat": 49.99687488000001,
-        "lng": 8.410939619999999
+        "lat": 49.99592783846154,
+        "lng": 8.411025961538462
       },
       "google": {
-        "lat": 49.99691439999999,
+        "lat": 49.996914399999994,
         "lng": 8.4110011,
         "place_id": "ChIJHx2tMi-ZvUcRSkKL0WknJxQ",
-        "address": "Parkplatz, Parkplatz, Dammgasse 7, 65428 Rüsselsheim am Main"
+        "address": "Parkplatz, Parkplatz, Dammgasse 7, 65428 Rüsselsheim am Main, Germany"
       },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+      "delta_m": 110,
+      "status": "BAD",
+      "streetview": "OK",
+      "applied": true
     },
     {
       "id": "hochheim_am_main_hexendenkmal",
       "name": "Hexendenkmal",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.00790678,
-        "lng": 8.3986829
-      },
-      "google": {
-        "lat": 50.0031251,
-        "lng": 8.376335599999999,
-        "place_id": "ChIJ04h4lAGZvUcRMqYSsGS9Ceo",
-        "address": "65239 Hochheim am Main"
-      },
-      "delta_m": 1683,
-      "status": "BAD",
-      "streetview": "ZERO_RESULTS"
+        "lat": 50.016436920000004,
+        "lng": 8.352983260000002
+      }
     },
     {
       "id": "hochheim_am_main_dauerparker_denkmal_fur_den_opel_manta_am_russelsheimer_kunstpf",
       "name": "\"Dauerparker\" Denkmal für den Opel Manta am Rüsselsheimer Kunstpfad",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 49.99709538,
-        "lng": 8.41188902
-      },
-      "google": {
-        "lat": 49.9971349,
-        "lng": 8.4119505,
-        "place_id": "ChIJdTcSKimZvUcRF3lbpppxEgU",
-        "address": "65428 Rüsselsheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 49.99711298,
+        "lng": 8.411959880000001
+      }
     },
     {
       "id": "hochheim_am_main_adlersaule",
       "name": "Adlersäule",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.02621047999999,
-        "lng": 8.40268548
-      },
-      "google": {
-        "lat": 50.02625,
-        "lng": 8.402747,
-        "place_id": "ChIJu0omn5WYvUcRYgdYR0AFkJQ",
-        "address": "65439 Flörsheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 50.0179917,
+        "lng": 8.402895633333333
+      }
     },
     {
       "id": "hochheim_am_main_hummelpark",
       "name": "Hummelpark",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.011691080000006,
-        "lng": 8.345817299999998
-      },
-      "google": {
-        "lat": 50.0117306,
-        "lng": 8.3458788,
-        "place_id": "ChIJgWAm4TWYvUcRySioNIrrCl0",
-        "address": "Am Daubhaus 2, 65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 50.0179917,
+        "lng": 8.402895633333333
+      }
     },
     {
       "id": "hochheim_am_main_spielpark_hochheim",
       "name": "Spielpark Hochheim",
       "before": {
-        "lat": 50.029817879999996,
-        "lng": 8.35516358
+        "lat": 50.030266082352945,
+        "lng": 8.355092264705881
       },
       "google": {
         "lat": 50.0298574,
         "lng": 8.3552251,
         "place_id": "ChIJ4UjNGmuYvUcR7vuLXaLa9bY",
-        "address": "65239 Hochheim am Main"
+        "address": "65239 Hochheim am Main, Germany"
       },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+      "delta_m": 46,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
     },
     {
       "id": "hochheim_am_main_aussichtskanzel_vogelnest",
       "name": "Aussichtskanzel Vogelnest",
       "before": {
-        "lat": 50.030683079999996,
-        "lng": 8.345812460000001
+        "lat": 50.031221285576926,
+        "lng": 8.345547403846151
       },
       "google": {
         "lat": 50.0307226,
         "lng": 8.345874,
         "place_id": "ChIJWXqKhBaYvUcRUFTNsNqICXQ",
-        "address": "L3028, 65239 Hochheim am Main"
+        "address": "L3028, 65239 Hochheim am Main, Germany"
       },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+      "delta_m": 60,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
     },
     {
       "id": "hochheim_am_main_hochheimer_mainufer",
       "name": "Hochheimer Mainufer",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.002652579999996,
-        "lng": 8.3610073
-      },
-      "google": {
-        "lat": 50.0026921,
-        "lng": 8.3610688,
-        "place_id": "ChIJR7RxZwGZvUcRSPr3VO2PMog",
-        "address": "65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 50.0183884,
+        "lng": 8.343932772727273
+      }
     },
     {
       "id": "hochheim_am_main_hochheimer_strand",
       "name": "Hochheimer strand",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.002162479999996,
-        "lng": 8.325987999999999
-      },
-      "google": {
-        "lat": 50.002202,
-        "lng": 8.3260495,
-        "place_id": "ChIJI3ETaACZvUcRw_4j-GR1Yuw",
-        "address": "282G+VC, 55246 Wiesbaden"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 50.0183884,
+        "lng": 8.343932772727273
+      }
     },
     {
       "id": "hochheim_am_main_mainwiesen_hochheim",
       "name": "Mainwiesen Hochheim",
       "before": {
-        "lat": 50.00143328,
-        "lng": 8.350161600000002
+        "lat": 50.002019180000005,
+        "lng": 8.350507700000001
       },
       "google": {
-        "lat": 50.00147279999999,
+        "lat": 50.001472799999995,
         "lng": 8.3502231,
         "place_id": "ChIJPyc7QpqZvUcRfpckRBo6bEw",
-        "address": "Mainweg 20, 65239 Hochheim am Main"
+        "address": "Mainweg 20, 65239 Hochheim am Main, Germany"
       },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+      "delta_m": 64,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
     },
     {
       "id": "hochheim_am_main_alter_wasserturm",
       "name": "Alter Wasserturm",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.01272308,
-        "lng": 8.345817299999998
-      },
-      "google": {
-        "lat": 50.0127626,
-        "lng": 8.3458788,
-        "place_id": "ChIJ2Yw8bTaYvUcR3b3CBnNj0Vo",
-        "address": "Königsberger Ring 7, 65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 50.012824205,
+        "lng": 8.345894009999999
+      }
     },
     {
       "id": "hochheim_am_main_aussicht_auf_russelsheim_den_main_und_die_opel_werke",
       "name": "Aussicht auf Rüsselsheim, den Main und die Opel-Werke",
       "before": {
-        "lat": 50.00317578000001,
-        "lng": 8.387561100000001
+        "lat": 50.00391211818182,
+        "lng": 8.387034445454544
       },
       "google": {
         "lat": 50.0032153,
         "lng": 8.3876226,
         "place_id": "ChIJWfpNG2CZvUcRnft8Z7rg14Y",
-        "address": "Flörsheimer Str., 65239 Hochheim am Main"
+        "address": "Flörsheimer Str., 65239 Hochheim am Main, Germany"
       },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+      "delta_m": 88,
+      "status": "BAD",
+      "streetview": "OK",
+      "applied": true
     },
     {
       "id": "hochheim_am_main_massenheimer_kiesgruben",
       "name": "Massenheimer Kiesgruben",
       "before": {
-        "lat": 50.03220657999999,
-        "lng": 8.360742259999999
+        "lat": 50.032358947058825,
+        "lng": 8.361761878431372
       },
       "google": {
-        "lat": 50.03224609999999,
+        "lat": 50.032246099999995,
         "lng": 8.3608038,
         "place_id": "ChIJAQAAsG6YvUcRVAC7PfUk6lk",
-        "address": "65239 Hochheim am Main"
+        "address": "65239 Hochheim am Main, Germany"
       },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "hochheim_am_main_am_wildbienenhotel",
-      "name": "Am Wildbienenhotel",
-      "before": {
-        "lat": 50.03900198,
-        "lng": 8.38279316
-      },
-      "google": {
-        "lat": 50.0390415,
-        "lng": 8.3828547,
-        "place_id": "ChIJhR3QYN2ZvUcRm06fcFlLw_U",
-        "address": "Untergasse 18, 65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+      "delta_m": 70,
+      "status": "CHECK",
+      "streetview": "ZERO_RESULTS",
+      "applied": true
     },
     {
       "id": "hochheim_am_main_daubhauschen",
       "name": "Daubhäuschen",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.010730980000005,
-        "lng": 8.3451333
-      },
-      "google": {
-        "lat": 50.0107705,
-        "lng": 8.3451948,
-        "place_id": "ChIJnTJ_wDWYvUcRSWA8F1RDLYY",
-        "address": "Mainzer Str. 28, 65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 50.0107651,
+        "lng": 8.345175955555556
+      }
     },
     {
       "id": "hochheim_am_main_calisthenics_park_hochheim",
       "name": "Calisthenics Park Hochheim",
       "before": {
-        "lat": 50.019303879999995,
-        "lng": 8.340623480000001
+        "lat": 50.01915248461538,
+        "lng": 8.339471923076925
       },
       "google": {
         "lat": 50.0193434,
         "lng": 8.340684999999999,
         "place_id": "ChIJX0AyBgCZvUcRj-KGtuC7zlI",
-        "address": "Käsbach Spielplatz, 65239 Hochheim am Main"
+        "address": "Käsbach Spielplatz, 65239 Hochheim am Main, Germany"
       },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+      "delta_m": 89,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS",
+      "applied": true
     },
     {
       "id": "hochheim_am_main_laufsteg_uber_die_wickerbachaue",
       "name": "Laufsteg über die Wickerbachaue",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.01121248,
-        "lng": 8.3906535
-      },
-      "google": {
-        "lat": 50.011252,
-        "lng": 8.390715,
-        "place_id": "ChIJ6Usjr6CZvUcRiDxyz9JYbbw",
-        "address": "Wickerbachaue von Flörsheim und Hochheim, Falkenbergstraße 4, 65439 Flörsheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 50.00946414666667,
+        "lng": 8.391479426666667
+      }
     },
     {
       "id": "hochheim_am_main_parkplatz_spielpark_hochheim",
       "name": "Parkplatz Spielpark Hochheim",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.02831838,
-        "lng": 8.35158408
-      },
-      "google": {
-        "lat": 50.0283579,
-        "lng": 8.3516456,
-        "place_id": "ChIJE15aMsCZvUcRB32h_BbhD68",
-        "address": "Unnamed Road, 65239, 65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 50.02842030625,
+        "lng": 8.3518603875
+      }
     },
     {
       "id": "hochheim_am_main_grillplatz",
       "name": "Grillplatz",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.00061218,
-        "lng": 8.3508709
-      },
-      "google": {
-        "lat": 50.0006517,
-        "lng": 8.3509324,
-        "place_id": "ChIJpSCeEQCZvUcRD1ezoJAlf4M",
-        "address": "Mainweg 33, 65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 50.0179917,
+        "lng": 8.402895633333333
+      }
     },
     {
       "id": "hochheim_am_main_wickerbachaue_von_florsheim_und_hochheim",
       "name": "Wickerbachaue von Flörsheim und Hochheim",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.01738668,
-        "lng": 8.40025698
-      },
-      "google": {
-        "lat": 50.0026561,
-        "lng": 8.3946581,
-        "place_id": "ChIJVVVVxR-ZvUcR4MjmoVgERxU",
-        "address": "Falkenbergstraße 4, 65439 Flörsheim am Main"
-      },
-      "delta_m": 1686,
-      "status": "BAD",
-      "streetview": "ZERO_RESULTS"
+        "lat": 50.01776455641026,
+        "lng": 8.40053927179487
+      }
     },
     {
       "id": "hochheim_am_main_wasserturm_hochheim_kutlev",
       "name": "Wasserturm Hochheim Kutlev",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.01898588,
-        "lng": 8.35785598
-      },
-      "google": {
-        "lat": 50.0190254,
-        "lng": 8.3579175,
-        "place_id": "ChIJp1n_SkSYvUcRthQjZQM267k",
-        "address": "Massenheimer Landstraße 3, 65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 50.0190243,
+        "lng": 8.357938337037037
+      }
     },
     {
       "id": "hochheim_am_main_sportplatz_am_wasserturm",
       "name": "Sportplatz Am Wasserturm",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.018427880000004,
-        "lng": 8.35956908
-      },
-      "google": {
-        "lat": 50.0184674,
-        "lng": 8.3596306,
-        "place_id": "ChIJ2RhIlkWYvUcRnWafxG2fTRA",
-        "address": "Massenheimer Landstraße 1, 65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 50.012824205,
+        "lng": 8.345894009999999
+      }
     },
     {
       "id": "hochheim_am_main_sport_und_kulturhalle_massenheim",
       "name": "Sport- und Kulturhalle Massenheim",
       "before": {
-        "lat": 50.038056080000004,
-        "lng": 8.381048860000002
+        "lat": 50.038277288888885,
+        "lng": 8.3816007
       },
       "google": {
         "lat": 50.0380956,
         "lng": 8.381110399999999,
         "place_id": "ChIJg8YjI4eYvUcRuRrNTcRGOwE",
-        "address": "Untergasse 17, 65239 Hochheim am Main"
+        "address": "Untergasse 17, 65239 Hochheim am Main, Germany"
       },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+      "delta_m": 40,
+      "status": "CHECK",
+      "streetview": "ZERO_RESULTS",
+      "applied": true
     },
     {
       "id": "hochheim_am_main_spielvereinigung_07_hochheim_e_v",
       "name": "Spielvereinigung 07 Hochheim e.V.",
       "before": {
-        "lat": 50.01748888,
-        "lng": 8.357718879999998
+        "lat": 50.01790977777777,
+        "lng": 8.356297955555556
       },
       "google": {
-        "lat": 50.0175284,
+        "lat": 50.017528399999996,
         "lng": 8.3577804,
         "place_id": "ChIJ2RhIlkWYvUcRxiK_qTJ286g",
-        "address": "Massenheimer Landstraße 1, 65239 Hochheim am Main"
+        "address": "Massenheimer Landstraße 1, 65239 Hochheim am Main, Germany"
       },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+      "delta_m": 114,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS",
+      "applied": true
     },
     {
       "id": "hochheim_am_main_altstadt_hochheim",
       "name": "Altstadt Hochheim",
       "before": {
-        "lat": 50.00969307999999,
-        "lng": 8.3492773
+        "lat": 50.0179917,
+        "lng": 8.402895633333333
       },
       "google": {
-        "lat": 50.01093359999999,
+        "lat": 50.010933599999994,
         "lng": 8.3508331,
         "place_id": "ChIJdWsUzkuYvUcRdP9GNtLYHQM",
-        "address": "Kirchstraße 2A, 65239 Hochheim am Main"
+        "address": "Kirchstraße 2A, 65239 Hochheim am Main, Germany"
       },
-      "delta_m": 177,
+      "delta_m": 3802,
       "status": "BAD",
       "streetview": "OK"
     },
     {
       "id": "hochheim_am_main_familienzentrum_mamma_mia_e_v",
       "name": "Familienzentrum Mamma Mia e.V.",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.01051808,
-        "lng": 8.352141900000001
-      },
-      "google": {
-        "lat": 50.0105576,
-        "lng": 8.3522034,
-        "place_id": "ChIJL3_p60uYvUcRQ5eShrN-uUM",
-        "address": "Hintergasse 10, 65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 50.01052695714286,
+        "lng": 8.352177214285714
+      }
     },
     {
       "id": "hochheim_am_main_weingut_dienst",
       "name": "Weingut Dienst",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.019318979999994,
-        "lng": 8.34286818
-      },
-      "google": {
-        "lat": 50.0193585,
-        "lng": 8.3429297,
-        "place_id": "ChIJD2LbiDmYvUcR-gQ9L7P3uLk",
-        "address": "Am Weiher 49, 65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 50.0179917,
+        "lng": 8.402895633333333
+      }
     },
     {
       "id": "hochheim_am_main_weingut_schafer_hochheim",
       "name": "Weingut Schäfer – Hochheim",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.013968180000006,
-        "lng": 8.3529179
-      },
-      "google": {
-        "lat": 50.0140077,
-        "lng": 8.352979399999999,
-        "place_id": "ChIJrSQFIEmYvUcRB-2W9AfNmlc",
-        "address": "Weingut Schäfer, Elisabethenstraße 4, 65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 50.0179917,
+        "lng": 8.402895633333333
+      }
     },
     {
       "id": "hochheim_am_main_sports_up_hochheim_und_das_leben_wird_leichter",
       "name": "Sports Up Hochheim ... und das Leben wird leichter",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.01562998,
-        "lng": 8.37307408
-      },
-      "google": {
-        "lat": 50.01566949999999,
-        "lng": 8.373135600000001,
-        "place_id": "ChIJB65_IliYvUcRKzMwLg5uPYk",
-        "address": "Hajo-Rüter-Straße 17, 65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 50.0179917,
+        "lng": 8.402895633333333
+      }
     },
     {
       "id": "hochheim_am_main_dr_med_julia_poliakov",
       "name": "Dr. med Julia Poliakov",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.01104828,
-        "lng": 8.351538300000001
-      },
-      "google": {
         "lat": 50.0110878,
-        "lng": 8.351599799999999,
-        "place_id": "ChIJEamzDVWZvUcRzt3tYVSMLpA",
-        "address": "Frankfurter Str. 8, 65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lng": 8.351599799999999
+      }
     },
     {
       "id": "hochheim_am_main_verein_der_hundefreunde_hochheim_2000_e_v",
       "name": "Verein der Hundefreunde Hochheim 2000 e.V.",
       "before": {
-        "lat": 50.01705568,
-        "lng": 8.335258479999998
+        "lat": 50.01693138571428,
+        "lng": 8.335831685714286
       },
       "google": {
         "lat": 50.0170952,
         "lng": 8.33532,
         "place_id": "ChIJnxx65C-YvUcRSh36g_bVO5s",
-        "address": "65239, Im Langgewann, 65479 Hochheim am Main"
+        "address": "65239, Im Langgewann, 65479 Hochheim am Main, Germany"
       },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+      "delta_m": 41,
+      "status": "CHECK",
+      "streetview": "ZERO_RESULTS",
+      "applied": true
     },
     {
       "id": "hochheim_am_main_zahnmedizinisches_zentrum_hochheim_oliver_j_pfeiffer_dr_silke_f",
       "name": "Zahnmedizinisches Zentrum Hochheim, Oliver J. Pfeiffer, Dr. Silke Fürstenfelder und Kollegen",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.014288379999996,
-        "lng": 8.3507646
-      },
-      "google": {
-        "lat": 50.0143279,
-        "lng": 8.350826099999999,
-        "place_id": "ChIJIWRtvQxAc0ERU4Qc5m_zXUs",
-        "address": "Wilhelmstraße 12, 65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 50.0179917,
+        "lng": 8.402895633333333
+      }
     },
     {
       "id": "hochheim_am_main_palais_hochheim",
       "name": "PALAIS HOCHHEIM",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.009152979999996,
-        "lng": 8.351478400000001
-      },
-      "google": {
         "lat": 50.0091925,
-        "lng": 8.351539899999999,
-        "place_id": "ChIJ__9zn0uYvUcRXNj9aMkSrmI",
-        "address": "Kirchstraße 21, 65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lng": 8.351539899999999
+      }
     },
     {
       "id": "hochheim_am_main_ember_asia_vietnamesische_spezialitaten_sushi",
       "name": "Ember Asia - Vietnamesische Spezialitäten & Sushi",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.00836098,
-        "lng": 8.370150800000001
-      },
-      "google": {
-        "lat": 50.0084005,
-        "lng": 8.3702123,
-        "place_id": "ChIJ8QqJXxWZvUcR5y2fObzV25U",
-        "address": "Herderstraße 19, 65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 50.0179917,
+        "lng": 8.402895633333333
+      }
     },
     {
       "id": "hochheim_am_main_irca_manufacturing_germany_gmbh",
       "name": "IRCA Manufacturing Germany GmbH",
       "before": {
-        "lat": 50.00372238,
-        "lng": 8.3475775
+        "lat": 50.00346364444445,
+        "lng": 8.34862941111111
       },
       "google": {
         "lat": 50.0037619,
         "lng": 8.347639,
         "place_id": "ChIJh0iNsrWZvUcRqobfmZlIox8",
-        "address": "IRCA Manufacturing Germany GmbH, Neckarstraße 9, 65239 Hochheim am Main"
+        "address": "IRCA Manufacturing Germany GmbH, Neckarstraße 9, 65239 Hochheim am Main, Germany"
       },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+      "delta_m": 78,
+      "status": "CHECK",
+      "streetview": "ZERO_RESULTS",
+      "applied": true
     },
     {
       "id": "hochheim_am_main_hochheimer_weinberge",
       "name": "Hochheimer Weinberge",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.00383708,
-        "lng": 8.385000199999999
-      },
-      "google": {
-        "lat": 50.00387660000001,
-        "lng": 8.3850617,
-        "place_id": "ChIJA90AmPiZvUcRjpQhMO752ts",
-        "address": "65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 50.0179917,
+        "lng": 8.402895633333333
+      }
     },
     {
       "id": "hochheim_am_main_fenster_zur_deponie",
       "name": "Fenster zur Deponie",
       "before": {
-        "lat": 50.025488280000005,
-        "lng": 8.373094980000001
+        "lat": 50.02558919285714,
+        "lng": 8.372805114285715
       },
       "google": {
         "lat": 50.0255278,
         "lng": 8.3731565,
         "place_id": "ChIJNWbmGHOZvUcRaiaFuXdQ9To",
-        "address": "65239 Hochheim am Main"
+        "address": "65239 Hochheim am Main, Germany"
       },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+      "delta_m": 26,
+      "status": "CHECK",
+      "streetview": "ZERO_RESULTS",
+      "applied": true
     },
     {
       "id": "hochheim_am_main_radweg_bischofsheim_russelsheim",
       "name": "Radweg Bischofsheim - Rüsselsheim",
       "before": {
-        "lat": 49.99586928,
-        "lng": 8.39506232
+        "lat": 49.99530796666667,
+        "lng": 8.39445925
       },
       "google": {
         "lat": 49.9959088,
         "lng": 8.3951238,
         "place_id": "ChIJS5f4v0SZvUcRZmXhc9mVOXw",
-        "address": "65428 Rüsselsheim am Main"
+        "address": "65428 Rüsselsheim, Germany"
       },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+      "delta_m": 82,
+      "status": "BAD",
+      "streetview": "OK",
+      "applied": true
     },
     {
       "id": "hochheim_am_main_zweirad_hartwin_neumann_e_k",
       "name": "Zweirad Hartwin Neumann e.K.",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.01170128,
-        "lng": 8.3545476
-      },
-      "google": {
-        "lat": 50.0117408,
-        "lng": 8.3546091,
-        "place_id": "ChIJze3krk6YvUcRlZ8VzM3Rncc",
-        "address": "Massenheimer Str. 1, 65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 50.011813025,
+        "lng": 8.3546335625
+      }
     },
     {
       "id": "hochheim_am_main_mohn_geschenkeboutique_gmbh",
       "name": "Möhn Geschenkeboutique GmbH",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.01289638,
-        "lng": 8.360786300000001
-      },
-      "google": {
-        "lat": 50.0129359,
-        "lng": 8.3608478,
-        "place_id": "ChIJ8wqjKU6YvUcR6-vyqG_IJJE",
-        "address": "Freiherr-vom-Stein-Ring 31, 65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_paracelsus_apotheke",
-      "name": "Paracelsus Apotheke",
-      "before": {
-        "lat": 50.01322408,
-        "lng": 8.352127999999999
-      },
-      "google": {
-        "lat": 50.01326359999999,
-        "lng": 8.3521895,
-        "place_id": "ChIJs4z65EiYvUcRlADP9JjTVE4",
-        "address": "Weiherstraße 25, 65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_apotheke_im_sanupark",
-      "name": "Apotheke im Sanupark",
-      "before": {
-        "lat": 50.01864218,
-        "lng": 8.372553880000002
-      },
-      "google": {
-        "lat": 50.01868169999999,
-        "lng": 8.372615399999999,
-        "place_id": "ChIJQ6UI182ZvUcRX3RHYbVunRU",
-        "address": "Frankfurter Str. 94, 65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_baren_apotheke",
-      "name": "Bären-Apotheke",
-      "before": {
-        "lat": 50.016486979999996,
-        "lng": 8.34499868
-      },
-      "google": {
-        "lat": 50.0165265,
-        "lng": 8.345060199999999,
-        "place_id": "ChIJtwrfVzaYvUcRMpJ-IGHs3EI",
-        "address": "Königsberger Ring 2-8, 65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_dr_med_rudolf_polsak_hno",
-      "name": "Dr. med. Rudolf Polsak HNO",
-      "before": {
-        "lat": 50.01220728,
-        "lng": 8.3508923
-      },
-      "google": {
-        "lat": 50.0122468,
-        "lng": 8.350953800000001,
-        "place_id": "ChIJhWqinqiZvUcRSA0h_JAlaP8",
-        "address": "Burgeffstraße 7A, 65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_herr_dr_med_steffen_fischer",
-      "name": "Herr Dr. med. Steffen Fischer",
-      "before": {
-        "lat": 50.01096808,
-        "lng": 8.3543853
-      },
-      "google": {
-        "lat": 50.0110076,
-        "lng": 8.3544468,
-        "place_id": "ChIJ0xgdZUmYvUcR7c6pcU70MnQ",
-        "address": "Flörsheimer Str. 4, 65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_hochheimer_gesundheitszentrum",
-      "name": "Hochheimer Gesundheitszentrum",
-      "before": {
-        "lat": 50.01795557999999,
-        "lng": 8.368010780000002
-      },
-      "google": {
-        "lat": 50.0187546,
-        "lng": 8.3727521,
-        "place_id": "ChIJMYIXZTeYvUcRkd6YKxvnXUQ",
-        "address": "Frankfurter Str. 94, 65239 Hochheim am Main"
-      },
-      "delta_m": 350,
-      "status": "BAD",
-      "streetview": "OK"
+        "lat": 50.0179917,
+        "lng": 8.402895633333333
+      }
     },
     {
       "id": "hochheim_am_main_labyrinth_florsheim_wicker",
       "name": "Labyrinth Flörsheim-Wicker",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.018423479999996,
-        "lng": 8.40276788
-      },
-      "google": {
         "lat": 50.018463,
-        "lng": 8.4028294,
-        "place_id": "ChIJOxo998GYvUcR3BDMRofjcM4",
-        "address": "65439 Flörsheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lng": 8.4028294
+      }
     },
     {
       "id": "hochheim_am_main_geodesia_stele",
       "name": "Geodesia-Stele",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 49.99870548,
-        "lng": 8.35350282
-      },
-      "google": {
-        "lat": 49.998745,
-        "lng": 8.3535643,
-        "place_id": "ChIJ0028q7GZvUcR1hpDmgMTgEg",
-        "address": "B43, 65474 Bischofsheim"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 50.0179917,
+        "lng": 8.402895633333333
+      }
     },
     {
       "id": "hochheim_am_main_eisenbaum",
       "name": "Eisenbaum",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.010423779999996,
-        "lng": 8.395473800000001
-      },
-      "google": {
-        "lat": 50.0104633,
-        "lng": 8.395535299999999,
-        "place_id": "ChIJaVTj-uaYvUcRK4H2zFzRQ7M",
-        "address": "65439 Flörsheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 50.0179917,
+        "lng": 8.402895633333333
+      }
     },
     {
       "id": "hochheim_am_main_galerie_rosemarie_jager",
       "name": "Galerie Rosemarie Jäger",
       "before": {
-        "lat": 50.010159279999996,
-        "lng": 8.348591899999999
+        "lat": 50.010185969999995,
+        "lng": 8.349379209999999
       },
       "google": {
         "lat": 50.0101988,
         "lng": 8.3486534,
         "place_id": "ChIJAVaIQUqYvUcRByp6wfXhfTg",
-        "address": "Wintergasse 13, 65239 Hochheim am Main"
+        "address": "Wintergasse 13, 65239 Hochheim am Main, Germany"
       },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_kleine_kapelle",
-      "name": "Kleine Kapelle",
-      "before": {
-        "lat": 50.004744779999996,
-        "lng": 8.403349
-      },
-      "google": {
-        "lat": 50.0047843,
-        "lng": 8.4034105,
-        "place_id": "ChIJQbxPTYyZvUcRSxNHonjDtug",
-        "address": "Hochheimer Str., 65439 Flörsheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_kleine_residenz_am_schloss",
-      "name": "Kleine Residenz Am Schloss",
-      "before": {
-        "lat": 50.04022898000001,
-        "lng": 8.384849159999998
-      },
-      "google": {
-        "lat": 50.0402685,
-        "lng": 8.384910699999999,
-        "place_id": "ChIJ3RXVKoeYvUcRocD04K1Jeyw",
-        "address": "Schlossgasse, 65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_pension_eventlocation_tor_zum_rheingau",
-      "name": "Pension & Eventlocation \"Tor zum Rheingau\"",
-      "before": {
-        "lat": 50.02704188,
-        "lng": 8.40272808
-      },
-      "google": {
-        "lat": 50.0270814,
-        "lng": 8.4027896,
-        "place_id": "ChIJqwUgupWYvUcRQSCQeLmBTFk",
-        "address": "Taunusstraße 6, 65439 Flörsheim am Main-Wicker"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "hochheim_am_main_opel_werk_russelsheim_tor_55",
-      "name": "Opel Werk Rüsselsheim Tor 55",
-      "before": {
-        "lat": 49.99312548,
-        "lng": 8.39306852
-      },
-      "google": {
-        "lat": 49.993165,
-        "lng": 8.393130000000001,
-        "place_id": "ChIJSfrd4zqZvUcR-ofNyPb7Mdk",
-        "address": "Mainzer Str., 65428 Rüsselsheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "hochheim_am_main_opel_russelsheim_tor_k_131",
-      "name": "Opel Rüsselsheim Tor K 131",
-      "before": {
-        "lat": 49.990400480000005,
-        "lng": 8.379885520000002
-      },
-      "google": {
-        "lat": 49.99044,
-        "lng": 8.379947,
-        "place_id": "ChIJiQRHbFGZvUcRVnLo__hieZI",
-        "address": "Werksstraße, 65428 Rüsselsheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "hochheim_am_main_burgpark",
-      "name": "Burgpark",
-      "before": {
-        "lat": 49.995276880000006,
-        "lng": 8.312606720000002
-      },
-      "google": {
-        "lat": 50.0298574,
-        "lng": 8.3552251,
-        "place_id": "ChIJ4UjNGmuYvUcR7vuLXaLa9bY",
-        "address": "65239 Hochheim am Main"
-      },
-      "delta_m": 4905,
-      "status": "BAD",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_opel_werk_russelsheim_tor_20",
-      "name": "Opel Werk Rüsselsheim, Tor 20",
-      "before": {
-        "lat": 49.99285348000001,
-        "lng": 8.39978452
-      },
-      "google": {
-        "lat": 49.992893,
-        "lng": 8.399846,
-        "place_id": "ChIJy-V1TiOZvUcR2Z3YEmH-dx8",
-        "address": "Mainzer Str., 65428 Rüsselsheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_kunstliche_burgruine_im_verna_park_stadtpark",
-      "name": "Künstliche Burgruine im Verna-Park (Stadtpark)",
-      "before": {
-        "lat": 49.997017979999995,
-        "lng": 8.41349072
-      },
-      "google": {
-        "lat": 49.9970575,
-        "lng": 8.4135522,
-        "place_id": "ChIJbesESimZvUcRUAc9rrVRwJc",
-        "address": "65428 Rüsselsheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "hochheim_am_main_opel_russelsheim_tor_15",
-      "name": "Opel Rüsselsheim Tor 15",
-      "before": {
-        "lat": 49.99263048,
-        "lng": 8.40421052
-      },
-      "google": {
-        "lat": 49.99267,
-        "lng": 8.404271999999999,
-        "place_id": "ChIJIYREKSWZvUcR3i7-5xN6EXc",
-        "address": "Weisenauer Str., 65428 Rüsselsheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_opel_werk_russelsheim_tor_15",
-      "name": "Opel Werk Rüsselsheim, Tor 15",
-      "before": {
-        "lat": 49.98534248,
-        "lng": 8.392293519999999
-      },
-      "google": {
-        "lat": 49.985382,
-        "lng": 8.392355,
-        "place_id": "ChIJd2IJqj-ZvUcR4E-XRv7YqFU",
-        "address": "Parkplatz, 65428 Rüsselsheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_aussichtspunkt_wickerer_weinberge",
-      "name": "Aussichtspunkt Wickerer Weinberge",
-      "before": {
-        "lat": 50.019409679999995,
-        "lng": 8.40314138
-      },
-      "google": {
-        "lat": 50.0194492,
-        "lng": 8.4032029,
-        "place_id": "ChIJSxt9LuWZvUcRMaj8pKnh9iA",
-        "address": "Landwehrweg, 65439 Flörsheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "hochheim_am_main_aussichtspunkt",
-      "name": "Aussichtspunkt",
-      "before": {
-        "lat": 50.023798479999996,
-        "lng": 8.40996628
-      },
-      "google": {
-        "lat": 50.0307226,
-        "lng": 8.345874,
-        "place_id": "ChIJWXqKhBaYvUcRUFTNsNqICXQ",
-        "address": "L3028, 65239 Hochheim am Main"
-      },
-      "delta_m": 4643,
-      "status": "BAD",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "hochheim_am_main_kleingarten_beim_vogelnest_hochheim",
-      "name": "Kleingarten beim Vogelnest Hochheim",
-      "before": {
-        "lat": 50.02546117999999,
-        "lng": 8.347095679999999
-      },
-      "google": {
-        "lat": 50.02550069999999,
-        "lng": 8.3471572,
-        "place_id": "ChIJybhMGwCZvUcRC-HMWAKomlQ",
-        "address": "28GW+6V, 65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_lehrpfad_baume_und_wiese",
-      "name": "Lehrpfad Bäume und Wiese",
-      "before": {
-        "lat": 49.992635379999996,
-        "lng": 8.370370820000002
-      },
-      "google": {
-        "lat": 49.9926749,
-        "lng": 8.3704323,
-        "place_id": "ChIJ-YdHUAiZvUcROnlQuUW7eoY",
-        "address": "Unnamed Road, 65474, Bischofsheim"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "hochheim_am_main_kleingartenverein_langgewann_hochheim_e_v",
-      "name": "Kleingartenverein Langgewann Hochheim e. V.",
-      "before": {
-        "lat": 50.01455308,
-        "lng": 8.3376305
-      },
-      "google": {
-        "lat": 50.0145926,
-        "lng": 8.337691999999999,
-        "place_id": "ChIJbRd6fjiYvUcRjRIMaRHeveM",
-        "address": "Breslauer Ring 18, 65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "hochheim_am_main_thomas_more_kultur_garten",
-      "name": "THOMAS MORE Kultur.Garten",
-      "before": {
-        "lat": 50.01315778,
-        "lng": 8.3387092
-      },
-      "google": {
-        "lat": 50.01319729999999,
-        "lng": 8.3387707,
-        "place_id": "ChIJc9zqj2CZvUcR7YC4Oxsta50",
-        "address": "Langgewannweg, 65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "hochheim_am_main_kita_storchennest",
-      "name": "Kita Storchennest",
-      "before": {
-        "lat": 50.02194988,
-        "lng": 8.359011380000002
-      },
-      "google": {
-        "lat": 50.0219894,
-        "lng": 8.3590729,
-        "place_id": "ChIJSe-4MbKZvUcRtWoWu4QfPfw",
-        "address": "Gerold-Buschlinger-Anlage 33, 65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_leons_garten",
-      "name": "Leons garten",
-      "before": {
-        "lat": 49.99954448,
-        "lng": 8.3587254
-      },
-      "google": {
-        "lat": 50.0114362,
-        "lng": 8.3534506,
-        "place_id": "ChIJ03DYU0mYvUcRolpJqZpievM",
-        "address": "Delkenheimer Str. 1, 65239 Hochheim am Main"
-      },
-      "delta_m": 1375,
-      "status": "BAD",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_am_beinweg_weinmeile_hock_go",
-      "name": "Am Beinweg (Weinmeile \"Hock & Go\")",
-      "before": {
-        "lat": 50.007012380000006,
-        "lng": 8.351149799999998
-      },
-      "google": {
-        "lat": 50.0070519,
-        "lng": 8.3512113,
-        "place_id": "ChIJxXrSEQCZvUcRlPHXV7rfsyI",
-        "address": "Bahnhofstraße 2A, 65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "hochheim_am_main_theatergruppe_delkenheim",
-      "name": "Theatergruppe Delkenheim",
-      "before": {
-        "lat": 50.04382048,
-        "lng": 8.359783160000001
-      },
-      "google": {
-        "lat": 50.04386,
-        "lng": 8.3598447,
-        "place_id": "ChIJ6fWmeZ-ivUcRnl0zWTk-1O0",
-        "address": "Bürgerhaus, Münchener Str. 2, 65205 Wiesbaden-Delkenheim"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_achterbahnchen",
-      "name": "ACHTERBÄHNCHEN",
-      "before": {
-        "lat": 49.99673317999999,
-        "lng": 8.32153932
-      },
-      "google": {
-        "lat": 49.9967727,
-        "lng": 8.321600799999999,
-        "place_id": "ChIJWXBmvtmZvUcRo1CT2JFjCv4",
-        "address": "Darmstädter Landstraße 64, 65462 Ginsheim-Gustavsburg-Gustavsburg"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_ole_vom_wald",
-      "name": "Ole vom Wald",
-      "before": {
-        "lat": 50.047379379999995,
-        "lng": 8.363478240000001
-      },
-      "google": {
-        "lat": 50.0474189,
-        "lng": 8.3635398,
-        "place_id": "ChIJ99SL-BGjvUcRkpghrjeBxlE",
-        "address": "Mechthildshausener Str. 4, 65205 Wiesbaden"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_segelclub_hochheim_e_v",
-      "name": "Segelclub Hochheim e.V.",
-      "before": {
-        "lat": 50.00097118,
-        "lng": 8.3523605
-      },
-      "google": {
-        "lat": 50.00101069999999,
-        "lng": 8.352421999999999,
-        "place_id": "ChIJ93ll0TCYvUcRBXFtoI3C0KI",
-        "address": "Mainweg 35, 65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "hochheim_am_main_hochheimer_stadtfuhrer",
-      "name": "Hochheimer Stadtführer",
-      "before": {
-        "lat": 50.01761218,
-        "lng": 8.352776780000001
-      },
-      "google": {
-        "lat": 50.01765169999999,
-        "lng": 8.3528383,
-        "place_id": "ChIJqeSzNkaYvUcRwI1vzS3U6Po",
-        "address": "Nordenstädter Str. 15, 65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_rhein_main_yacht_charter",
-      "name": "Rhein-Main-Yacht-Charter",
-      "before": {
-        "lat": 50.04284317999999,
-        "lng": 8.387096260000002
-      },
-      "google": {
-        "lat": 50.0428827,
-        "lng": 8.387157799999999,
-        "place_id": "ChIJtbF5qIGYvUcRXBm4cRRm4Lc",
-        "address": "Am Helgenhaus 5, 65239 Hochheim am Main-Massenheim"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "hochheim_am_main_weinerlebnisse",
-      "name": "Weinerlebnisse",
-      "before": {
-        "lat": 50.00989628,
-        "lng": 8.3571116
-      },
-      "google": {
-        "lat": 50.0099358,
-        "lng": 8.357173099999999,
-        "place_id": "ChIJ24Qk9mBC8aERJWZVkwZ7xP0",
-        "address": "Auf d. Schlicht 1, 65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_solu_me_accessories",
-      "name": "SoLu & Me Accessories",
-      "before": {
-        "lat": 50.02094047999999,
-        "lng": 8.35017848
-      },
-      "google": {
-        "lat": 50.02097999999999,
-        "lng": 8.35024,
-        "place_id": "ChIJGUNGhU2ZvUcRtxId4A5SO2o",
-        "address": "Zum Weidbachtal 34, 65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_polnische_spezialitaten_gbr",
-      "name": "Polnische Spezialitäten GbR",
-      "before": {
-        "lat": 50.018899880000006,
-        "lng": 8.35199638
-      },
-      "google": {
-        "lat": 50.0189394,
-        "lng": 8.352057900000002,
-        "place_id": "ChIJTfYdr0eYvUcR7fbf6UkPb7Y",
-        "address": "Dresdener Ring 1, 65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_alnatura_super_natur_markt",
-      "name": "Alnatura Super Natur Markt",
-      "before": {
-        "lat": 50.01562308,
-        "lng": 8.36655458
-      },
-      "google": {
-        "lat": 50.01566260000001,
-        "lng": 8.3666161,
-        "place_id": "ChIJ67kWhFaZvUcRiFxw6tX7u5k",
-        "address": "Frankfurter Str. 77A, 65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "hochheim_am_main_weinautomat_kunstler",
-      "name": "Weinautomat Künstler",
-      "before": {
-        "lat": 50.010789380000006,
-        "lng": 8.3469884
-      },
-      "google": {
-        "lat": 50.01082890000001,
-        "lng": 8.3470499,
-        "place_id": "ChIJV1REIKaZvUcRxa_ed7E282o",
-        "address": "Wiesbadener Str. 1A, 65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_el_markt_osteuropaische_spezialitaten",
-      "name": "EL - Markt „Osteuropäische Spezialitäten“",
-      "before": {
-        "lat": 50.01493938,
-        "lng": 8.364696480000001
-      },
-      "google": {
-        "lat": 50.0149789,
-        "lng": 8.364758,
-        "place_id": "ChIJpyFCF72ZvUcRwKYKFhJhnIg",
-        "address": "Frankfurter Str. 75, 65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_das_brotbackstubchen_hochheim",
-      "name": "Das Brotbackstübchen Hochheim",
-      "before": {
-        "lat": 50.01617728,
-        "lng": 8.35095738
-      },
-      "google": {
-        "lat": 50.0162168,
-        "lng": 8.3510189,
-        "place_id": "ChIJpd3epAqZvUcRGHxXrSaSiDQ",
-        "address": "Alleestraße 10, 65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_dm_drogerie_markt",
-      "name": "dm-drogerie markt",
-      "before": {
-        "lat": 50.01554218,
-        "lng": 8.36578388
-      },
-      "google": {
-        "lat": 50.0155817,
-        "lng": 8.3658454,
-        "place_id": "ChIJd05qnFCYvUcR3J7oAFlxIjQ",
-        "address": "Holger-Crafoord-Straße 2, 65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_innatura_massiv_holzmobel",
-      "name": "INNATURA Massiv - Holzmöbel",
-      "before": {
-        "lat": 50.01581028,
-        "lng": 8.367445379999998
-      },
-      "google": {
-        "lat": 50.0158498,
-        "lng": 8.3675069,
-        "place_id": "ChIJl1dQcFCYvUcRuLqwRJwqsCw",
-        "address": "Frankfurter Str. 77, 65239 Hochheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_aldi_sud",
-      "name": "ALDI SÜD",
-      "before": {
-        "lat": 50.01413726,
-        "lng": 8.36384426
-      },
-      "google": {
-        "lat": 50.014166,
-        "lng": 8.363889,
-        "place_id": "ChIJoea_XFCYvUcR1VhIea1YPc4",
-        "address": "Frankfurter Str. 71, 65239 Hochheim am Main"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "hochheim_am_main_hit_supermarkt",
-      "name": "HIT Supermarkt",
-      "before": {
-        "lat": 50.01966416,
-        "lng": 8.35299396
-      },
-      "google": {
-        "lat": 50.0196929,
-        "lng": 8.353038699999999,
-        "place_id": "ChIJnxs6LkKZvUcRV3pKvJ4AYAM",
-        "address": "Nordenstädter Str. 33, 65239 Hochheim am Main"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_polizeistation_florsheim_am_main",
-      "name": "Polizeistation Flörsheim am Main",
-      "before": {
-        "lat": 50.01707106,
-        "lng": 8.42942706
-      },
-      "google": {
-        "lat": 50.0170998,
-        "lng": 8.4294718,
-        "place_id": "ChIJ1YlXTMyYvUcRMIUGlgUesnI",
-        "address": "Im Brückenfeld 1, 65439 Flörsheim am Main-Weilbach"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_polizeistation_bischofsheim",
-      "name": "Polizeistation Bischofsheim",
-      "before": {
-        "lat": 49.99031516,
-        "lng": 8.35369498
-      },
-      "google": {
-        "lat": 49.9903439,
-        "lng": 8.3537397,
-        "place_id": "ChIJL1YirLyZvUcR3-IN8VIcs5g",
-        "address": "Mainzer Str. 9, 65474 Bischofsheim"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_spielplatz_schillerstrasse",
-      "name": "Spielplatz Schillerstraße",
-      "before": {
-        "lat": 50.010463560000005,
-        "lng": 8.36348726
-      },
-      "google": {
-        "lat": 50.0104923,
-        "lng": 8.363532,
-        "place_id": "ChIJu0fRqxaZvUcRwOO0dm5aDtA",
-        "address": "65239 Hochheim am Main"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_spielplatz_hans_bockler_strasse",
-      "name": "Spielplatz Hans-Böckler-Straße",
-      "before": {
-        "lat": 50.01159576,
-        "lng": 8.35869576
-      },
-      "google": {
-        "lat": 50.0116245,
-        "lng": 8.3587405,
-        "place_id": "ChIJlxnQYAOZvUcRlljxcBValrI",
-        "address": "65239 Hochheim am Main"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_spielplatz_schwedenstrasse",
-      "name": "Spielplatz Schwedenstraße",
-      "before": {
-        "lat": 50.01186166,
-        "lng": 8.37128266
-      },
-      "google": {
-        "lat": 50.0118904,
-        "lng": 8.3713274,
-        "place_id": "ChIJSTOYm1iZvUcRFgBKy8mNXI0",
-        "address": "Schwedenstraße 39, 65239 Hochheim am Main"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_spielplatz_melibokusstrasse",
-      "name": "Spielplatz Melibokusstraße",
-      "before": {
-        "lat": 50.01302826,
-        "lng": 8.36561606
-      },
-      "google": {
-        "lat": 50.013057,
-        "lng": 8.365660799999999,
-        "place_id": "ChIJjcrsiAaZvUcRIkl08yySwEc",
-        "address": "Melibokusstraße, 65239 Hochheim am Main"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "hochheim_am_main_spielplatz_anton_gunther_strasse",
-      "name": "Spielplatz Anton-Günther-Straße",
-      "before": {
-        "lat": 50.01003456000001,
-        "lng": 8.359594659999999
-      },
-      "google": {
-        "lat": 50.0100633,
-        "lng": 8.359639399999999,
-        "place_id": "ChIJb-mBqCqZvUcRWW86_s37Mao",
-        "address": "Flörsheimer Str. 61, 65239 Hochheim am Main"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_spielplatz_am_dornbusch",
-      "name": "Spielplatz Am Dornbusch",
-      "before": {
-        "lat": 50.03459636,
-        "lng": 8.37780794
-      },
-      "google": {
-        "lat": 50.0346251,
-        "lng": 8.3778527,
-        "place_id": "ChIJ-ZOLCFKZvUcRFF6nY2--BgI",
-        "address": "65239 Hochheim am Main-Gartenstadt"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_golf_club_main_taunus_e_v",
-      "name": "Golf-Club Main -Taunus e.V.",
-      "before": {
-        "lat": 50.03475126000001,
-        "lng": 8.356997739999999
-      },
-      "google": {
-        "lat": 50.03478,
-        "lng": 8.3570425,
-        "place_id": "ChIJFU6zPW6YvUcRbrbnl-4t0Yw",
-        "address": "Lange, Seegewann 2, 65205 Wiesbaden"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "hochheim_am_main_bahn_13",
-      "name": "Bahn 13",
-      "before": {
-        "lat": 50.032712860000004,
-        "lng": 8.36463684
-      },
-      "google": {
-        "lat": 50.03274159999999,
-        "lng": 8.364681599999999,
-        "place_id": "ChIJr-bQFW-YvUcRVBoPkInbCOA",
-        "address": "65239 Hochheim am Main"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "hochheim_am_main_kletterwand",
-      "name": "Kletterwand",
-      "before": {
-        "lat": 50.02147816,
-        "lng": 8.37601656
-      },
-      "google": {
-        "lat": 50.0215069,
-        "lng": 8.3760613,
-        "place_id": "ChIJwXxMZ1-YvUcRs_q2-_gAn60",
-        "address": "65239 Hochheim am Main"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "hochheim_am_main_parkplatz_mainweg",
-      "name": "Parkplatz Mainweg",
-      "before": {
-        "lat": 50.001480660000006,
-        "lng": 8.35110808
-      },
-      "google": {
-        "lat": 50.0015094,
-        "lng": 8.3511528,
-        "place_id": "ChIJd9b1-O6ZvUcROejp0Y2uVds",
-        "address": "Mainweg 22, 65239 Hochheim am Main"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "hochheim_am_main_parkplatz_marktgelande",
-      "name": "Parkplatz Marktgelände",
-      "before": {
-        "lat": 50.01722106,
-        "lng": 8.34654346
-      },
-      "google": {
-        "lat": 50.01724979999999,
-        "lng": 8.3465882,
-        "place_id": "ChIJG7e3JziYvUcRtIe1VVYx-e8",
-        "address": "Königsberger Ring, 65239 Hochheim am Main"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_parkplatz_massenheimer_landstrasse",
-      "name": "Parkplatz Massenheimer Landstraße",
-      "before": {
-        "lat": 50.019735860000004,
-        "lng": 8.357147959999999
-      },
-      "google": {
-        "lat": 50.01976459999999,
-        "lng": 8.357192699999999,
-        "place_id": "ChIJTUPfx0WYvUcRKmE-T7gydWs",
-        "address": "Massenheimer Landstraße 1-3, 65239 Hochheim am Main"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_hochheimer_ski_und_tennisverein",
-      "name": "Hochheimer Ski- und Tennisverein",
-      "before": {
-        "lat": 50.018496260000006,
-        "lng": 8.34454356
-      },
-      "google": {
-        "lat": 50.018525,
-        "lng": 8.3445883,
-        "place_id": "ChIJFxINvTmYvUcRf9_galhHXCU",
-        "address": "Am Weiher 42, 65239 Hochheim am Main"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_tennis_hoch_3_gmbh",
-      "name": "Tennis Hoch 3 GmbH",
-      "before": {
-        "lat": 50.01650476,
-        "lng": 8.371506459999999
-      },
-      "google": {
-        "lat": 50.01653349999999,
-        "lng": 8.371551199999999,
-        "place_id": "ChIJD0OtXvWZvUcRYTs0sR5xrM8",
-        "address": "Frankfurter Str. 83, 65239 Hochheim am Main"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "hochheim_am_main_tennisplatze",
-      "name": "Tennisplätze",
-      "before": {
-        "lat": 50.01851216,
-        "lng": 8.343507859999999
-      },
-      "google": {
-        "lat": 50.018525,
-        "lng": 8.3445883,
-        "place_id": "ChIJFxINvTmYvUcRf9_galhHXCU",
-        "address": "Am Weiher 42, 65239 Hochheim am Main"
-      },
-      "delta_m": 77,
+      "delta_m": 52,
       "status": "CHECK",
       "streetview": "OK",
       "applied": true
     },
     {
-      "id": "hochheim_am_main_kunstrasenplatz",
-      "name": "Kunstrasenplatz",
+      "id": "hochheim_am_main_kleine_kapelle",
+      "name": "Kleine Kapelle",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.01788376,
-        "lng": 8.36099286
+        "lat": 50.0179917,
+        "lng": 8.402895633333333
+      }
+    },
+    {
+      "id": "hochheim_am_main_kleine_residenz_am_schloss",
+      "name": "Kleine Residenz Am Schloss",
+      "before": {
+        "lat": 50.040690319999996,
+        "lng": 8.384443220000001
       },
       "google": {
-        "lat": 50.01791249999999,
-        "lng": 8.361037600000001,
-        "place_id": "ChIJQ1brWACZvUcRLPeCs13_Oo0",
-        "address": "65239 Hochheim am Main"
+        "lat": 50.040268499999996,
+        "lng": 8.384910699999999,
+        "place_id": "ChIJ3RXVKoeYvUcRocD04K1Jeyw",
+        "address": "Schlossgasse, 65239 Hochheim am Main, Germany"
       },
-      "delta_m": 5,
-      "status": "OK",
+      "delta_m": 58,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "hochheim_am_main_pension_eventlocation_tor_zum_rheingau",
+      "name": "Pension & Eventlocation \"Tor zum Rheingau\"",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 50.02703771,
+        "lng": 8.40269369
+      }
+    },
+    {
+      "id": "hochheim_am_main_opel_werk_russelsheim_tor_55",
+      "name": "Opel Werk Rüsselsheim Tor 55",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 49.99313755,
+        "lng": 8.3931874875
+      }
+    },
+    {
+      "id": "hochheim_am_main_opel_russelsheim_tor_k_131",
+      "name": "Opel Rüsselsheim Tor K 131",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 50.0179917,
+        "lng": 8.402895633333333
+      }
+    },
+    {
+      "id": "hochheim_am_main_burgpark",
+      "name": "Burgpark",
+      "before": {
+        "lat": 49.996393023333326,
+        "lng": 8.311954273333333
+      },
+      "google": {
+        "lat": 49.9953164,
+        "lng": 8.3126682,
+        "place_id": "ChIJif2RvMyXvUcRgH3CYbbA7lM",
+        "address": "Dr.-Herrmann-Straße 2, 65462 Ginsheim-Gustavsburg, Germany"
+      },
+      "delta_m": 130,
+      "status": "BAD",
       "streetview": "ZERO_RESULTS"
     },
     {
-      "id": "hochheim_am_main_hallenbad_hochheim_am_main",
-      "name": "Hallenbad Hochheim am Main",
+      "id": "hochheim_am_main_opel_werk_russelsheim_tor_20",
+      "name": "Opel Werk Rüsselsheim, Tor 20",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.017924459999996,
-        "lng": 8.356269959999999
-      },
-      "google": {
-        "lat": 50.0179532,
-        "lng": 8.3563147,
-        "place_id": "ChIJy_O850WYvUcRKCNfbQqRJTM",
-        "address": "Breslauer Ring 19B, 65239 Hochheim am Main"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 49.99285771666666,
+        "lng": 8.399779949999997
+      }
     },
     {
-      "id": "hochheim_am_main_trinkwasserspender",
-      "name": "Trinkwasserspender",
+      "id": "hochheim_am_main_kunstliche_burgruine_im_verna_park_stadtpark",
+      "name": "Künstliche Burgruine im Verna-Park (Stadtpark)",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.01680236,
-        "lng": 8.34777726
-      },
-      "google": {
-        "lat": 50.0168311,
-        "lng": 8.347821999999999,
-        "place_id": "ChIJ7Zp6cgCZvUcRsLx9A0Ckj4Y",
-        "address": "Alleestraße 36, 65239 Hochheim am Main"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 49.997037774999995,
+        "lng": 8.413564091666666
+      }
     },
     {
-      "id": "hochheim_am_main_oil_tankstelle",
-      "name": "OIL! Tankstelle",
+      "id": "hochheim_am_main_opel_russelsheim_tor_15",
+      "name": "Opel Rüsselsheim Tor 15",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.01407206,
-        "lng": 8.36178296
-      },
-      "google": {
-        "lat": 50.01410079999999,
-        "lng": 8.3618277,
-        "place_id": "ChIJS7uNLlCYvUcRj4ZUQvOOxWo",
-        "address": "Frankfurter Str. 63, 65239 Hochheim am Main"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 50.0179917,
+        "lng": 8.402895633333333
+      }
     },
     {
-      "id": "hochheim_am_main_shell_station",
-      "name": "Shell Station",
+      "id": "hochheim_am_main_opel_werk_russelsheim_tor_15",
+      "name": "Opel Werk Rüsselsheim, Tor 15",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.013903260000006,
-        "lng": 8.345389260000001
+        "lat": 49.98529631428572,
+        "lng": 8.392176385714285
+      }
+    },
+    {
+      "id": "hochheim_am_main_aussichtspunkt_wickerer_weinberge",
+      "name": "Aussichtspunkt Wickerer Weinberge",
+      "before": {
+        "lat": 50.01991269411764,
+        "lng": 8.403645
       },
       "google": {
-        "lat": 50.013932,
-        "lng": 8.345434,
-        "place_id": "ChIJLRtWdTeYvUcRLBEtZuIqRmY",
-        "address": "Königsberger Ring 7, 65239 Hochheim am Main"
+        "lat": 50.0194492,
+        "lng": 8.4032029,
+        "place_id": "ChIJSxt9LuWZvUcRMaj8pKnh9iA",
+        "address": "Landwehrweg, 65439 Flörsheim am Main, Germany"
       },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
+      "delta_m": 60,
+      "status": "CHECK",
+      "streetview": "ZERO_RESULTS",
+      "applied": true
+    },
+    {
+      "id": "hochheim_am_main_aussichtspunkt",
+      "name": "Aussichtspunkt",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 50.0179917,
+        "lng": 8.402895633333333
+      }
+    },
+    {
+      "id": "hochheim_am_main_kleingarten_beim_vogelnest_hochheim",
+      "name": "Kleingarten beim Vogelnest Hochheim",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 50.0179917,
+        "lng": 8.402895633333333
+      }
+    },
+    {
+      "id": "hochheim_am_main_lehrpfad_baume_und_wiese",
+      "name": "Lehrpfad Bäume und Wiese",
+      "before": {
+        "lat": 49.99226285,
+        "lng": 8.371194625
+      },
+      "google": {
+        "lat": 49.9926749,
+        "lng": 8.3704323,
+        "place_id": "ChIJ-YdHUAiZvUcROnlQuUW7eoY",
+        "address": "Unnamed Road, 65474, Bischofsheim, Germany"
+      },
+      "delta_m": 71,
+      "status": "CHECK",
+      "streetview": "ZERO_RESULTS",
+      "applied": true
+    },
+    {
+      "id": "hochheim_am_main_kleingartenverein_langgewann_hochheim_e_v",
+      "name": "Kleingartenverein Langgewann Hochheim e. V.",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 50.0179917,
+        "lng": 8.402895633333333
+      }
+    },
+    {
+      "id": "hochheim_am_main_thomas_more_kultur_garten",
+      "name": "THOMAS MORE Kultur.Garten",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 50.01324227,
+        "lng": 8.33862255
+      }
+    },
+    {
+      "id": "hochheim_am_main_kita_storchennest",
+      "name": "Kita Storchennest",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 50.0179917,
+        "lng": 8.402895633333333
+      }
+    },
+    {
+      "id": "hochheim_am_main_leons_garten",
+      "name": "Leons garten",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 49.99965126000001,
+        "lng": 8.35836371
+      }
+    },
+    {
+      "id": "hochheim_am_main_am_beinweg_weinmeile_hock_go",
+      "name": "Am Beinweg (Weinmeile \"Hock & Go\")",
+      "before": {
+        "lat": 50.00645454615384,
+        "lng": 8.350768707692309
+      },
+      "google": {
+        "lat": 50.0070519,
+        "lng": 8.3512113,
+        "place_id": "ChIJxXrSEQCZvUcRlPHXV7rfsyI",
+        "address": "Bahnhofstraße 2A, 65239 Hochheim am Main, Germany"
+      },
+      "delta_m": 74,
+      "status": "CHECK",
+      "streetview": "ZERO_RESULTS",
+      "applied": true
+    },
+    {
+      "id": "hochheim_am_main_theatergruppe_delkenheim",
+      "name": "Theatergruppe Delkenheim",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 50.043847975,
+        "lng": 8.359754433333334
+      }
+    },
+    {
+      "id": "hochheim_am_main_achterbahnchen",
+      "name": "ACHTERBÄHNCHEN",
+      "before": {
+        "lat": 49.996414873333315,
+        "lng": 8.321250684444445
+      },
+      "google": {
+        "lat": 49.9967727,
+        "lng": 8.321600799999999,
+        "place_id": "ChIJWXBmvtmZvUcRo1CT2JFjCv4",
+        "address": "Darmstädter Landstraße 64, 65462 Ginsheim-Gustavsburg-Gustavsburg, Germany"
+      },
+      "delta_m": 47,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "hochheim_am_main_ole_vom_wald",
+      "name": "Ole vom Wald",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 50.021660080000004,
+        "lng": 8.40542192
+      }
+    },
+    {
+      "id": "hochheim_am_main_segelclub_hochheim_e_v",
+      "name": "Segelclub Hochheim e.V.",
+      "before": {
+        "lat": 50.00131761111111,
+        "lng": 8.35295057777778
+      },
+      "google": {
+        "lat": 50.001010699999995,
+        "lng": 8.352421999999999,
+        "place_id": "ChIJ93ll0TCYvUcRBXFtoI3C0KI",
+        "address": "Mainweg 35, 65239 Hochheim am Main, Germany"
+      },
+      "delta_m": 51,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "hochheim_am_main_hochheimer_stadtfuhrer",
+      "name": "Hochheimer Stadtführer",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 50.021660080000004,
+        "lng": 8.40542192
+      }
+    },
+    {
+      "id": "hochheim_am_main_rhein_main_yacht_charter",
+      "name": "Rhein-Main-Yacht-Charter",
+      "before": {
+        "lat": 50.043020028571426,
+        "lng": 8.386519028571428
+      },
+      "google": {
+        "lat": 50.0428827,
+        "lng": 8.387157799999999,
+        "place_id": "ChIJtbF5qIGYvUcRXBm4cRRm4Lc",
+        "address": "Am Helgenhaus 5, 65239 Hochheim am Main-Massenheim, Germany"
+      },
+      "delta_m": 48,
+      "status": "CHECK",
+      "streetview": "ZERO_RESULTS",
+      "applied": true
+    },
+    {
+      "id": "hochheim_am_main_weinerlebnisse",
+      "name": "Weinerlebnisse",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 50.021660080000004,
+        "lng": 8.40542192
+      }
+    },
+    {
+      "id": "hochheim_am_main_solu_me_accessories",
+      "name": "SoLu & Me Accessories",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 50.021660080000004,
+        "lng": 8.40542192
+      }
+    },
+    {
+      "id": "hochheim_am_main_polnische_spezialitaten_gbr",
+      "name": "Polnische Spezialitäten GbR",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 50.01892395714286,
+        "lng": 8.35204827142857
+      }
+    },
+    {
+      "id": "hochheim_am_main_alnatura_super_natur_markt",
+      "name": "Alnatura Super Natur Markt",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 50.021660080000004,
+        "lng": 8.40542192
+      }
+    },
+    {
+      "id": "hochheim_am_main_weinautomat_kunstler",
+      "name": "Weinautomat Künstler",
+      "before": {
+        "lat": 50.01100875,
+        "lng": 8.347298683333333
+      },
+      "google": {
+        "lat": 50.01082890000001,
+        "lng": 8.3470499,
+        "place_id": "ChIJV1REIKaZvUcRxa_ed7E282o",
+        "address": "Wiesbadener Str. 1A, 65239 Hochheim am Main, Germany"
+      },
+      "delta_m": 27,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "hochheim_am_main_el_markt_osteuropaische_spezialitaten",
+      "name": "EL - Markt „Osteuropäische Spezialitäten“",
+      "before": {
+        "lat": 50.014510377777775,
+        "lng": 8.364993977777779
+      },
+      "google": {
+        "lat": 50.014978899999996,
+        "lng": 8.364758,
+        "place_id": "ChIJpyFCF72ZvUcRwKYKFhJhnIg",
+        "address": "Frankfurter Str. 75, 65239 Hochheim am Main, Germany"
+      },
+      "delta_m": 55,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "hochheim_am_main_das_brotbackstubchen_hochheim",
+      "name": "Das Brotbackstübchen Hochheim",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 50.021660080000004,
+        "lng": 8.40542192
+      }
+    },
+    {
+      "id": "hochheim_am_main_dm_drogerie_markt",
+      "name": "dm-drogerie markt",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 50.021660080000004,
+        "lng": 8.40542192
+      }
+    },
+    {
+      "id": "hochheim_am_main_innatura_massiv_holzmobel",
+      "name": "INNATURA Massiv - Holzmöbel",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 50.021660080000004,
+        "lng": 8.40542192
+      }
+    },
+    {
+      "id": "hochheim_am_main_kletterwand",
+      "name": "Kletterwand",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 50.021660080000004,
+        "lng": 8.40542192
+      }
     },
     {
       "id": "hochheim_am_main_fahncheskreuz",
       "name": "Fähncheskreuz",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.01923456000001,
-        "lng": 8.31164256
-      },
-      "google": {
-        "lat": 50.0192633,
-        "lng": 8.3116873,
-        "place_id": "ChIJQdUXSaSXvUcRsbEAGQDfblY",
-        "address": "Oberer Sampelweg, 55246 Wiesbaden"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "hochheim_am_main_bike_petry",
-      "name": "Bike-Petry",
-      "before": {
-        "lat": 50.01474766,
-        "lng": 8.37373156
-      },
-      "google": {
-        "lat": 50.0147764,
-        "lng": 8.3737763,
-        "place_id": "ChIJdTlhhTyZvUcRe_jM-21oRIM",
-        "address": "Hajo-Rüter-Straße 7, 65239 Hochheim am Main"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_trattoria_sapori_di_napoli",
-      "name": "Trattoria Sapori di Napoli",
-      "before": {
-        "lat": 50.01640776,
-        "lng": 8.352888759999999
-      },
-      "google": {
-        "lat": 50.0164365,
-        "lng": 8.352933499999999,
-        "place_id": "ChIJUzuGPgCZvUcRCO1bOpWAQWs",
-        "address": "Jahnstraße 2, 65239 Hochheim am Main"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_zum_wagenrad",
-      "name": "Zum Wagenrad",
-      "before": {
-        "lat": 50.01191566,
-        "lng": 8.35023306
-      },
-      "google": {
-        "lat": 50.0119444,
-        "lng": 8.350277799999999,
-        "place_id": "ChIJ1xnGhkmYvUcRP-QNeR-a8qc",
-        "address": "Neudorfgasse 20, 65239 Hochheim am Main"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_zum_woigiggel",
-      "name": "Zum Woigiggel",
-      "before": {
-        "lat": 50.011827960000005,
-        "lng": 8.34934556
-      },
-      "google": {
-        "lat": 50.0118567,
-        "lng": 8.3493903,
-        "place_id": "ChIJ32khikmYvUcRxa821teIR28",
-        "address": "Neudorfgasse 8, 65239 Hochheim am Main"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_restaurant_zum_taunus",
-      "name": "Restaurant zum Taunus",
-      "before": {
-        "lat": 50.012647859999994,
-        "lng": 8.353842060000002
-      },
-      "google": {
-        "lat": 50.0126766,
-        "lng": 8.3538868,
-        "place_id": "ChIJndAQNkmYvUcRgtAJvxTWMKM",
-        "address": "Delkenheimer Str. 13, 65239 Hochheim am Main"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_aquila_genuss_ohne_grenzen",
-      "name": "Aquila Genuss ohne Grenzen",
-      "before": {
-        "lat": 50.014298759999996,
-        "lng": 8.35209006
-      },
-      "google": {
-        "lat": 50.0143275,
-        "lng": 8.3521348,
-        "place_id": "ChIJL77Up9WZvUcR9c-jVtRrK8k",
-        "address": "Edelstraße 2, 65239 Hochheim am Main"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_lotus_garten",
-      "name": "Lotus Garten",
-      "before": {
-        "lat": 50.01140746,
-        "lng": 8.353405859999999
-      },
-      "google": {
-        "lat": 50.0114362,
-        "lng": 8.3534506,
-        "place_id": "ChIJ03DYU0mYvUcRolpJqZpievM",
-        "address": "Delkenheimer Str. 1, 65239 Hochheim am Main"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_unico_cafe",
-      "name": "UNICO Café",
-      "before": {
-        "lat": 50.01481156,
-        "lng": 8.36286316
-      },
-      "google": {
-        "lat": 50.0148403,
-        "lng": 8.3629079,
-        "place_id": "ChIJIUikzDWZvUcRh1oBAOIij5Q",
-        "address": "Frankfurter Str. 70, 65239 Hochheim am Main"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_zwei_raben_pension",
-      "name": "Zwei Raben Pension",
-      "before": {
-        "lat": 49.968771460000006,
-        "lng": 8.317539400000001
-      },
-      "google": {
-        "lat": 49.9688002,
-        "lng": 8.3175841,
-        "place_id": "ChIJSeTMvfiZvUcR4nGHKbDh_Qg",
-        "address": "Dammweg 7b, 55130 Laubenheim"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_hotel_victoria",
-      "name": "Hotel Victoria",
-      "before": {
-        "lat": 50.01444956,
-        "lng": 8.365250360000001
-      },
-      "google": {
-        "lat": 50.0144783,
-        "lng": 8.365295099999999,
-        "place_id": "ChIJWZpUjVCYvUcR5UXnmkOUa5g",
-        "address": "Feldbergstraße 10, 65239 Hochheim am Main"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_gasthof_gruner_wald",
-      "name": "Gasthof Grüner Wald",
-      "before": {
-        "lat": 50.06386156,
-        "lng": 8.369882319999999
-      },
-      "google": {
-        "lat": 50.0638903,
-        "lng": 8.3699271,
-        "place_id": "ChIJ4TdJj5OivUcRvrG612Wz1uk",
-        "address": "Johann-Philipp-Schleicher-Straße 2, 65719 Hofheim am Taunus-Wallau"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_hotel_weinhaus_wiedemann",
-      "name": "Hotel Weinhaus Wiedemann",
-      "before": {
-        "lat": 49.966968859999994,
-        "lng": 8.34799
-      },
-      "google": {
-        "lat": 49.9669976,
-        "lng": 8.3480347,
-        "place_id": "ChIJ35It24eZvUcRrALGprgE8c8",
-        "address": "Frankfurter Str. 31, 65462 Ginsheim-Gustavsburg"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_domane_mechtildshausen_hofladen",
-      "name": "Domäne Mechtildshausen - Hofläden",
-      "before": {
-        "lat": 50.037386559999995,
-        "lng": 8.32257654
-      },
-      "google": {
-        "lat": 50.0374153,
-        "lng": 8.3226213,
-        "place_id": "ChIJObbPsvCXvUcRFa8SFVjc5Yg",
-        "address": "Mechtildshausen 1, 65205 Wiesbaden-Mechthildshausen"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "hochheim_am_main_hotel_karthauser_hof",
-      "name": "HOTEL Karthäuser Hof",
-      "before": {
-        "lat": 50.01060426,
-        "lng": 8.42635926
-      },
-      "google": {
-        "lat": 50.010633,
-        "lng": 8.426404,
-        "place_id": "ChIJbyRZUC2fvUcRwKSBcU4RTTs",
-        "address": "Karthäuserstraße 1, 65439 Flörsheim am Main"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_hotel_europa",
-      "name": "Hotel Europa",
-      "before": {
-        "lat": 49.99452566,
-        "lng": 8.41121098
-      },
-      "google": {
-        "lat": 49.9945544,
-        "lng": 8.4112557,
-        "place_id": "ChIJfalQ7i6ZvUcRoRtKsnbSyUU",
-        "address": "Marktpl. 1, 65428 Rüsselsheim am Main"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "hochheim_am_main_pension_gasthaus_zum_rosengarten",
-      "name": "Pension & Gasthaus Zum Rosengarten",
-      "before": {
-        "lat": 50.008508860000006,
-        "lng": 8.31087558
-      },
-      "google": {
-        "lat": 50.0085376,
-        "lng": 8.3109203,
-        "place_id": "ChIJWfFrj3iXvUcRFghjygY5BJ4",
-        "address": "Hochheimer Str. 156, 55246 Wiesbaden-Mainz-Kostheim"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 50.021660080000004,
+        "lng": 8.40542192
+      }
     },
     {
       "id": "hochheim_am_main_regionalpark_besucherzentrum_weilbacher_kiesgruben",
       "name": "Regionalpark Besucherzentrum Weilbacher Kiesgruben",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.05232456,
-        "lng": 8.444336340000001
-      },
-      "google": {
-        "lat": 50.0523605,
-        "lng": 8.444392299999999,
-        "place_id": "ChIJV3f2tPChvUcRU5hW44r8Oag",
-        "address": "Frankfurter Str. 76, 65439 Flörsheim am Main-Weilbach"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 50.021660080000004,
+        "lng": 8.40542192
+      }
     },
     {
       "id": "hochheim_am_main_schneckenpark_florsheim",
       "name": "Schneckenpark Flörsheim",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.01889206,
-        "lng": 8.42830708
-      },
-      "google": {
-        "lat": 50.018928,
-        "lng": 8.428363,
-        "place_id": "ChIJnwic6kafvUcRUXwCgFmhHOA",
-        "address": "Eppsteiner Str. 19-45, 65439 Flörsheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 50.021660080000004,
+        "lng": 8.40542192
+      }
     },
     {
       "id": "hochheim_am_main_regionalpark_projekt_haus_des_dichters",
       "name": "Regionalpark Projekt - Haus des Dichters",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.04465896,
-        "lng": 8.44579974
-      },
-      "google": {
-        "lat": 50.0446949,
-        "lng": 8.445855700000001,
-        "place_id": "ChIJIVuRX_yhvUcRLhNPRWYOfCU",
-        "address": "Keltenstraße, 65439 Flörsheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 50.044635015384614,
+        "lng": 8.44588573076923
+      }
     },
     {
       "id": "hochheim_am_main_berliner_brunnen",
       "name": "Berliner Brunnen",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.01084356,
-        "lng": 8.42910378
-      },
-      "google": {
-        "lat": 50.01087949999999,
-        "lng": 8.4291597,
-        "place_id": "ChIJw5ZdFDifvUcRKCjdflk1NXM",
-        "address": "65439 Flörsheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 50.01086233999999,
+        "lng": 8.429163045
+      }
     },
     {
       "id": "hochheim_am_main_lourdeskapelle",
       "name": "Lourdeskapelle",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.02163725999999,
-        "lng": 8.40536658
-      },
-      "google": {
-        "lat": 50.0108755,
-        "lng": 8.350748000000001,
-        "place_id": "ChIJa_vezUuYvUcRNN6305BMjfU",
-        "address": "Kirchstraße, 65239 Hochheim am Main"
-      },
-      "delta_m": 4082,
-      "status": "BAD",
-      "streetview": "OK"
+        "lat": 50.021660080000004,
+        "lng": 8.40542192
+      }
     },
     {
       "id": "hochheim_am_main_festung_russelsheim",
       "name": "Festung Rüsselsheim",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 49.99921306,
-        "lng": 8.4192554
-      },
-      "google": {
-        "lat": 49.999249,
-        "lng": 8.4193113,
-        "place_id": "ChIJH9Eq-SqZvUcRuGbZyI_qOK8",
-        "address": "Hauptmann-Scheuermann-Weg 6, 65428 Rüsselsheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 49.99942286842105,
+        "lng": 8.419386478947368
+      }
     },
     {
       "id": "hochheim_am_main_aussichtspunkt_frankfurter_skyline",
       "name": "Aussichtspunkt Frankfurter Skyline",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.06487956,
-        "lng": 8.43026572
-      },
-      "google": {
-        "lat": 50.0649155,
-        "lng": 8.4303217,
-        "place_id": "ChIJ97O97GOjvUcRqZ5C2eSyqlU",
-        "address": "Heinrich-Weiss-Straße, 65719 Hofheim am Taunus"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 50.021660080000004,
+        "lng": 8.40542192
+      }
     },
     {
       "id": "hochheim_am_main_mainspitze",
       "name": "Mainspitze",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 49.99366216,
-        "lng": 8.2939409
-      },
-      "google": {
-        "lat": 49.9936981,
-        "lng": 8.2939968,
-        "place_id": "ChIJK650vmuXvUcReoOrQlINotI",
-        "address": "65462 Ginsheim-Gustavsburg"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 49.99270990476192,
+        "lng": 8.298860925396825
+      }
     },
     {
       "id": "hochheim_am_main_aussichtsturm_am_regionalpark_portal_weilbacher_kiesgruben",
       "name": "Aussichtsturm am Regionalpark Portal Weilbacher Kiesgruben",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.05148906,
-        "lng": 8.445111139999998
-      },
-      "google": {
-        "lat": 50.051525,
-        "lng": 8.445167099999999,
-        "place_id": "ChIJCeARqfChvUcRGxorGQVEQvQ",
-        "address": "Frankfurter Str. 76, 65439 Flörsheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 50.051405630769224,
+        "lng": 8.444907661538462
+      }
     },
     {
       "id": "hochheim_am_main_regionalpark_aussichtsbastion_schnecken_hugel_weilbach",
       "name": "Regionalpark Aussichtsbastion Schnecken-Hügel Weilbach",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.03819976,
-        "lng": 8.43070366
-      },
-      "google": {
-        "lat": 50.03823569999999,
-        "lng": 8.4307596,
-        "place_id": "ChIJFyBtoKuYvUcRbm2kuU-T8TU",
-        "address": "Faulbrunnenweg, 65439 Flörsheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 50.03823086249999,
+        "lng": 8.43067603125
+      }
     },
     {
       "id": "hochheim_am_main_aussichtsturm_am_silbersee_1",
       "name": "Aussichtsturm am Silbersee (1)",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.048386259999994,
-        "lng": 8.45560374
-      },
-      "google": {
-        "lat": 50.0484222,
-        "lng": 8.4556597,
-        "place_id": "ChIJebkwia-hvUcRHcObxdsKwnU",
-        "address": "Unnamed Road, 65439, 65439 Flörsheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 50.021660080000004,
+        "lng": 8.40542192
+      }
     },
     {
       "id": "hochheim_am_main_aussichtspunkt_marxheim",
       "name": "Aussichtspunkt Marxheim",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.07501626,
-        "lng": 8.42836712
-      },
-      "google": {
-        "lat": 50.07505219999999,
-        "lng": 8.4284231,
-        "place_id": "ChIJdbg3IQCjvUcRP1JUV5A3n6I",
-        "address": "In den Weingärten 8, 65719 Hofheim am Taunus"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 50.021660080000004,
+        "lng": 8.40542192
+      }
     },
     {
       "id": "hochheim_am_main_aussichtspunkt_zitadelle_mainz",
       "name": "Aussichtspunkt Zitadelle Mainz",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 49.99335686,
-        "lng": 8.275600399999998
-      },
-      "google": {
-        "lat": 49.9933928,
-        "lng": 8.275656300000001,
-        "place_id": "ChIJJ9tVgZuXvUcRnNsDvgnWoSw",
-        "address": "Zitadelle, 55131 Mainz"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 50.021660080000004,
+        "lng": 8.40542192
+      }
     },
     {
       "id": "hochheim_am_main_aussichtsturm_am_silbersee_4",
       "name": "Aussichtsturm am Silbersee (4)",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.05009606,
-        "lng": 8.462075440000001
-      },
-      "google": {
-        "lat": 50.050132,
-        "lng": 8.462131399999999,
-        "place_id": "ChIJkxK7sSChvUcRB5rGth2xtq4",
-        "address": "65439 Flörsheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 50.04875660322582,
+        "lng": 8.459004145161291
+      }
     },
     {
       "id": "hochheim_am_main_aussichtspunkt_an_der_landebahn_nordwest_spotterpoint",
       "name": "Aussichtspunkt an der Landebahn Nordwest (Spotterpoint)",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.03571546,
-        "lng": 8.490980959999998
-      },
-      "google": {
-        "lat": 50.0357514,
-        "lng": 8.4910369,
-        "place_id": "ChIJf_-crBqfvUcRKZepEeiKasw",
-        "address": "Professor-Staudinger-Straße, 65451 Kelsterbach"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "hochheim_am_main_botanischer_garten_der_johannes_gutenberg_universitat_mainz",
-      "name": "Botanischer Garten der Johannes Gutenberg-Universität Mainz",
-      "before": {
-        "lat": 49.99078916,
-        "lng": 8.2406419
-      },
-      "google": {
-        "lat": 49.9908251,
-        "lng": 8.2406978,
-        "place_id": "ChIJ-9nvIcKWvUcRYMUo0l3LoTg",
-        "address": "Johannes Gutenberg-Universität, Anselm-Franz-von-Bentzel-Weg 9, 55128 Mainz"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 50.021660080000004,
+        "lng": 8.40542192
+      }
     },
     {
       "id": "hochheim_am_main_verna_park_stadtpark",
       "name": "Verna-Park (Stadtpark)",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 49.99693306,
-        "lng": 8.415468100000002
-      },
-      "google": {
-        "lat": 49.996969,
-        "lng": 8.415524,
-        "place_id": "ChIJq1fvKAeZvUcRamgwAW-Eqhg",
-        "address": "65428 Rüsselsheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 49.996987958823524,
+        "lng": 8.41589875882353
+      }
     },
     {
       "id": "hochheim_am_main_fontanen_teich_im_verna_park_stadtpark",
       "name": "Fontänen-Teich im Verna-Park (Stadtpark)",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 49.99659986,
-        "lng": 8.4144568
-      },
-      "google": {
-        "lat": 49.9966358,
-        "lng": 8.4145127,
-        "place_id": "ChIJ695F94iZvUcRt1HdV1M6Gvw",
-        "address": "Frankfurter Str. 15, 65428 Rüsselsheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 49.996724490000005,
+        "lng": 8.41529762
+      }
     },
     {
       "id": "hochheim_am_main_verna_park_sudwest_eingang",
       "name": "Verna Park, Südwest-Eingang",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 49.995582060000004,
-        "lng": 8.4146555
-      },
-      "google": {
-        "lat": 49.995618,
-        "lng": 8.4147114,
-        "place_id": "ChIJRR5bCyiZvUcRcTDZG-_8mm4",
-        "address": "Frankfurter Str. 16, 65428 Rüsselsheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 50.021660080000004,
+        "lng": 8.40542192
+      }
     },
     {
       "id": "hochheim_am_main_park_bad_weilbach",
       "name": "Park Bad Weilbach",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.033976759999994,
-        "lng": 8.42667226
-      },
-      "google": {
-        "lat": 50.0340127,
-        "lng": 8.4267282,
-        "place_id": "ChIJSbpg-LaZvUcRxvPwngebrHU",
-        "address": "Parkstraße 8, 65439 Flörsheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "hochheim_am_main_bauschheim_trebur_radweg",
-      "name": "Bauschheim -Trebur Radweg",
-      "before": {
-        "lat": 49.94943966,
-        "lng": 8.35899326
-      },
-      "google": {
-        "lat": 49.9494756,
-        "lng": 8.3590491,
-        "place_id": "ChIJY7vIfwCbvUcR-Hx0vesNFXg",
-        "address": "W9X5+QJ, 65468 Trebur"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 50.021660080000004,
+        "lng": 8.40542192
+      }
     },
     {
       "id": "hochheim_am_main_showspielhaus_gmbh",
       "name": "ShowSpielhaus GmbH",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.08244156,
-        "lng": 8.4547425
-      },
-      "google": {
-        "lat": 50.0824775,
-        "lng": 8.454798499999999,
-        "place_id": "ChIJP_qM73ihvUcRSXisrbmF5iA",
-        "address": "Hattersheimer Str. 31, 65719 Hofheim am Taunus"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 50.082502777777776,
+        "lng": 8.45483091111111
+      }
     },
     {
       "id": "hochheim_am_main_avitect_studio_rhein_main",
       "name": "AVITECT Studio Rhein-Main",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.058004059999995,
-        "lng": 8.41333454
-      },
-      "google": {
-        "lat": 50.05804,
-        "lng": 8.4133905,
-        "place_id": "ChIJ51_X9ZejvUcROu_adNYXab8",
-        "address": "Wickerer Weg 28, 65719 Hofheim am Taunus"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 50.058027728571425,
+        "lng": 8.413379728571428
+      }
     },
     {
       "id": "hochheim_am_main_theater_russelsheim",
       "name": "Theater Rüsselsheim",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 49.99224416,
-        "lng": 8.425738200000001
-      },
-      "google": {
-        "lat": 49.9922801,
-        "lng": 8.4257941,
-        "place_id": "ChIJp5JTGdKevUcRxV7DPB-fI_o",
-        "address": "Am Treff 7, - Postadresse: Am Treff 1, 65428 Rüsselsheim am Main"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 49.992254482352955,
+        "lng": 8.425842794117647
+      }
     },
     {
       "id": "hochheim_am_main_oberfeldhof",
       "name": "Oberfeldhof",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.05129146,
-        "lng": 8.380276740000001
-      },
-      "google": {
-        "lat": 50.0500142,
-        "lng": 8.3798744,
-        "place_id": "ChIJve_aRoGivUcRD8BQvwSWNRc",
-        "address": "Oberfeldhof, 65239 Hochheim am Main"
-      },
-      "delta_m": 145,
-      "status": "BAD",
-      "streetview": "ZERO_RESULTS"
+        "lat": 50.05104425,
+        "lng": 8.380007766666667
+      }
     },
     {
       "id": "hochheim_am_main_marina_im_zollhafen_mainz",
       "name": "Marina im Zollhafen Mainz",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.013975359999996,
-        "lng": 8.25983558
-      },
-      "google": {
-        "lat": 50.0140113,
-        "lng": 8.2598915,
-        "place_id": "ChIJP_DiuluXvUcR9_8IGgyCgxs",
-        "address": "Baseler Platz 1, 55120 Mainz"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 50.01370375714286,
+        "lng": 8.2596005
+      }
     },
     {
       "id": "hochheim_am_main_yachtclub_untermain_e_v_im_adac",
       "name": "Yachtclub Untermain e.V. im ADAC",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.01333596,
-        "lng": 8.441731980000002
-      },
-      "google": {
-        "lat": 50.0133719,
-        "lng": 8.4417879,
-        "place_id": "ChIJ_6KvZzqfvUcRR1KrlCb2SHk",
-        "address": "Liebfrauenstraße 81, 65479 Raunheim"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 50.01334494,
+        "lng": 8.441263079999999
+      }
     },
     {
       "id": "hochheim_am_main_restaurant_bootshaus_haupt",
       "name": "Restaurant Bootshaus-Haupt",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 49.96255445999999,
-        "lng": 8.34431454
-      },
-      "google": {
-        "lat": 49.9625904,
-        "lng": 8.344370399999999,
-        "place_id": "ChIJ-ZeEM3GcvUcRnFsYo6h9btI",
-        "address": "An d. Fähre 5, 65462 Ginsheim-Gustavsburg"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 50.021660080000004,
+        "lng": 8.40542192
+      }
     },
     {
       "id": "hochheim_am_main_wassersportfreunde_bleiau_e_v",
       "name": "Wassersportfreunde Bleiau e.V.",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 49.98507926,
-        "lng": 8.313065120000001
-      },
-      "google": {
-        "lat": 49.9851152,
-        "lng": 8.313120999999999,
-        "place_id": "ChIJGf9XRaGZvUcRhgfQJVhrbEE",
-        "address": "Bleiauweg 12, 65462 Ginsheim-Gustavsburg"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 49.96351546923077,
+        "lng": 8.3441477
+      }
     },
     {
       "id": "hochheim_am_main_anlegestelle_altrheinfahre_johanna",
       "name": "Anlegestelle Altrheinfähre \"Johanna\"",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 49.96355816,
-        "lng": 8.342345139999999
-      },
-      "google": {
-        "lat": 49.96359409999999,
-        "lng": 8.342400999999999,
-        "place_id": "ChIJr7eWBieavUcRFaRCM7CKXw8",
-        "address": "65462 Ginsheim-Gustavsburg"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 49.96417198666666,
+        "lng": 8.342465753333334
+      }
     },
     {
       "id": "hochheim_am_main_yacht_club_mainz",
       "name": "Yacht-Club Mainz",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 49.99312686,
-        "lng": 8.286047
-      },
-      "google": {
-        "lat": 49.9931628,
-        "lng": 8.2861029,
-        "place_id": "ChIJ8QXBsRWXvUcRpvcgqzZSUnM",
-        "address": "Victor-Hugo-Ufer 5, 55131 Mainz"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 50.021660080000004,
+        "lng": 8.40542192
+      }
     },
     {
       "id": "hochheim_am_main_boots_club_maaraue_e_v",
       "name": "Boots-Club Maaraue e.V.",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.003534259999995,
-        "lng": 8.2844589
-      },
-      "google": {
-        "lat": 50.0035702,
-        "lng": 8.2845148,
-        "place_id": "ChIJK9hvxKuXvUcRhyny2T5qOFw",
-        "address": "Franziska-Retzinger-Promenade, 55246 Wiesbaden"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 50.0035664,
+        "lng": 8.28346708076923
+      }
     },
     {
       "id": "hochheim_am_main_historische_rheinschiffsmuhle_ginsheim",
       "name": "Historische Rheinschiffsmühle Ginsheim",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 49.97049416,
-        "lng": 8.328971540000001
-      },
-      "google": {
-        "lat": 49.9705301,
-        "lng": 8.3290274,
-        "place_id": "ChIJ9XfqLvSZvUcRdfKUoHo_guA",
-        "address": "An der Schiffsmühle 1, 65462 Ginsheim-Gustavsburg"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 49.970562883333336,
+        "lng": 8.328988783333335
+      }
     },
     {
       "id": "hochheim_am_main_segelclub_mainspitze_e_v",
       "name": "Segelclub Mainspitze e.V.",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 49.99267106,
-        "lng": 8.3019584
-      },
-      "google": {
-        "lat": 49.992707,
-        "lng": 8.3020143,
-        "place_id": "ChIJeXDznGiXvUcRvFVLIU1egKA",
-        "address": "Außerhalb 7, 65462 Ginsheim-Gustavsburg"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 49.99259188333333,
+        "lng": 8.302090900000001
+      }
     },
     {
       "id": "hochheim_am_main_wasserfreunde_weisenau_e_v",
       "name": "Wasserfreunde Weisenau e.V.",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 49.98309796,
-        "lng": 8.30529732
-      },
-      "google": {
-        "lat": 49.9831339,
-        "lng": 8.305353199999999,
-        "place_id": "ChIJWfW5K_aXvUcRZpy3KfXSpbg",
-        "address": "Am Leinpfad, 55130 Mainz"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 49.98278882,
+        "lng": 8.304907080000001
+      }
     },
     {
       "id": "hochheim_am_main_hafen_eden",
       "name": "Hafen Eden",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 50.01353736,
-        "lng": 8.26200748
-      },
-      "google": {
-        "lat": 50.0135733,
-        "lng": 8.262063399999999,
-        "place_id": "ChIJdd2uXgmXvUcR6tGUcaegbSk",
-        "address": "Clarissa-Kupferberg-Platz 11, 55118 Mainz"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "hochheim_am_main_wildpark_hofheim_am_taunus",
-      "name": "Wildpark Hofheim am Taunus",
-      "before": {
-        "lat": 50.09716426,
-        "lng": 8.440511079999999
-      },
-      "google": {
-        "lat": 50.0972002,
-        "lng": 8.440567099999999,
-        "place_id": "ChIJzX7RGtujvUcR-ky2KjH1Zh8",
-        "address": "Hundshager Weg 62, 65719 Hofheim am Taunus"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "hochheim_am_main_bootscharter_rhein_main",
-      "name": "Bootscharter Rhein Main",
-      "before": {
-        "lat": 50.02712165999999,
-        "lng": 8.258692960000001
-      },
-      "google": {
-        "lat": 50.0271576,
-        "lng": 8.2587489,
-        "place_id": "ChIJtbF5qIGYvUcRmML7D4np9PQ",
-        "address": "Biebricher Str. 21, 65203 Wiesbaden"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 50.01427164166666,
+        "lng": 8.262533383333333
+      }
     }
   ]
 }

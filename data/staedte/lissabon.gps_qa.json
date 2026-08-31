@@ -1,0 +1,2302 @@
+{
+  "generated_at": "2026-08-28T06:46:06.692Z",
+  "summary": {
+    "city_id": "lissabon",
+    "checked": 81,
+    "ok": 38,
+    "check": 24,
+    "bad": 19,
+    "errors": 0,
+    "max_delta_m": 180,
+    "city_halo_m": 28000,
+    "story_only": true
+  },
+  "rows": [
+    {
+      "id": "lissabon_eletrico_28",
+      "name": "Elétrico 28",
+      "category": "tour",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.71519918,
+        "lng": -9.136133659999999
+      },
+      "query": "Elétrico 28, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7046931,
+        "lng": -9.3917075,
+        "display_name": "Cablexport - Sociedade de Condutores Elétricos, Rua do Vale de Santa Rita, Estoril, Portugal",
+        "class": "office",
+        "type": "company",
+        "provider": "photon"
+      },
+      "delta_m": 22206,
+      "from_city_m": 836,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "lissabon_museu_colecao_berardo",
+      "name": "Museu Coleção Berardo",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.71222636363636,
+        "lng": -9.13931518181818
+      },
+      "query": "Museu Coleção Berardo, Lissabon, Germany",
+      "osm": {
+        "lat": 38.6956474,
+        "lng": -9.20931,
+        "display_name": "Museu de Arte Contemporânea MAC/CCB, Praça do Império, Lissabon, Portugal",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 6347,
+      "from_city_m": 1120,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "lissabon_elevador_de_santa_justa",
+        "lissabon_museu_calouste_gulbenkian",
+        "lissabon_jardim_botanico_tropical",
+        "lissabon_centro_cultural_de_belem",
+        "lissabon_casa_fernando_pessoa",
+        "lissabon_casa_museu_anastacio_goncalves",
+        "lissabon_campo_pequeno"
+      ]
+    },
+    {
+      "id": "lissabon_centro_cultural_de_belem",
+      "name": "Centro Cultural de Belém",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.71222636363636,
+        "lng": -9.13931518181818
+      },
+      "query": "Centro Cultural de Belém, Lissabon, Germany",
+      "osm": {
+        "lat": 38.6953052,
+        "lng": -9.2085388,
+        "display_name": "Centro Cultural de Belém, Praça do Império, Lissabon, Portugal",
+        "class": "amenity",
+        "type": "arts_centre",
+        "provider": "photon"
+      },
+      "delta_m": 6295,
+      "from_city_m": 1120,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "lissabon_elevador_de_santa_justa",
+        "lissabon_museu_calouste_gulbenkian",
+        "lissabon_jardim_botanico_tropical",
+        "lissabon_museu_colecao_berardo",
+        "lissabon_casa_fernando_pessoa",
+        "lissabon_casa_museu_anastacio_goncalves",
+        "lissabon_campo_pequeno"
+      ]
+    },
+    {
+      "id": "lissabon_jardim_botanico_tropical",
+      "name": "Jardim Botânico Tropical",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.71222636363636,
+        "lng": -9.13931518181818
+      },
+      "query": "Jardim Botânico Tropical, Lissabon, Germany",
+      "osm": {
+        "lat": 38.6995984,
+        "lng": -9.201922,
+        "display_name": "Tropischer Botanischer Garten, Calçada do Galvão, Lissabon, Portugal",
+        "class": "leisure",
+        "type": "park",
+        "provider": "photon"
+      },
+      "delta_m": 5611,
+      "from_city_m": 1120,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "lissabon_elevador_de_santa_justa",
+        "lissabon_museu_calouste_gulbenkian",
+        "lissabon_centro_cultural_de_belem",
+        "lissabon_museu_colecao_berardo",
+        "lissabon_casa_fernando_pessoa",
+        "lissabon_casa_museu_anastacio_goncalves",
+        "lissabon_campo_pequeno"
+      ]
+    },
+    {
+      "id": "lissabon_stadtgeschichte",
+      "name": "Geschichte von Lissabon",
+      "category": "geschichte",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.722209279999994,
+        "lng": -9.13939186
+      },
+      "query": "Geschichte von Lissabon, Lissabon",
+      "osm": {
+        "lat": 38.7453673,
+        "lng": -9.1719039,
+        "display_name": "Zoologischer Garten von Lissabon, Praça Marechal Humberto Delgado, Lissabon, Portugal",
+        "class": "tourism",
+        "type": "zoo",
+        "provider": "photon"
+      },
+      "delta_m": 3819,
+      "from_city_m": 13,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "lissabon_campo_pequeno",
+      "name": "Campo Pequeno",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.71222636363636,
+        "lng": -9.13931518181818
+      },
+      "query": "Campo Pequeno, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7411145,
+        "lng": -9.1467836,
+        "display_name": "Campo Pequeno, Ciclovia Avenida da República, Lissabon, Portugal",
+        "class": "railway",
+        "type": "station",
+        "provider": "photon"
+      },
+      "delta_m": 3277,
+      "from_city_m": 1120,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "lissabon_elevador_de_santa_justa",
+        "lissabon_museu_calouste_gulbenkian",
+        "lissabon_jardim_botanico_tropical",
+        "lissabon_centro_cultural_de_belem",
+        "lissabon_museu_colecao_berardo",
+        "lissabon_casa_fernando_pessoa",
+        "lissabon_casa_museu_anastacio_goncalves"
+      ]
+    },
+    {
+      "id": "lissabon_aqueduto_das_aguas_livres",
+      "name": "Aqueduto das Águas Livres",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.72663,
+        "lng": -9.1660432
+      },
+      "query": "Aqueduto das Águas Livres, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7129561,
+        "lng": -9.1985324,
+        "display_name": "Aqueduto das Águas Livres, Rua Ildefonso Borges, Lissabon, Portugal",
+        "class": "historic",
+        "type": "aqueduct",
+        "provider": "photon"
+      },
+      "delta_m": 3203,
+      "from_city_m": 2369,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "lissabon_museu_calouste_gulbenkian",
+      "name": "Museu Calouste Gulbenkian",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.71222636363636,
+        "lng": -9.13931518181818
+      },
+      "query": "Museu Calouste Gulbenkian, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7378228,
+        "lng": -9.1535149,
+        "display_name": "Calouste-Gulbenkian-Museum, Percurso do Lago, Lissabon, Portugal",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 3101,
+      "from_city_m": 1120,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "lissabon_elevador_de_santa_justa",
+        "lissabon_jardim_botanico_tropical",
+        "lissabon_centro_cultural_de_belem",
+        "lissabon_museu_colecao_berardo",
+        "lissabon_casa_fernando_pessoa",
+        "lissabon_casa_museu_anastacio_goncalves",
+        "lissabon_campo_pequeno"
+      ]
+    },
+    {
+      "id": "lissabon_casa_museu_anastacio_goncalves",
+      "name": "Casa-Museu Anastácio Gonçalves",
+      "category": "museum",
+      "place_tier": 3,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.71222636363636,
+        "lng": -9.13931518181818
+      },
+      "query": "Casa-Museu Anastácio Gonçalves, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7325611,
+        "lng": -9.1463225,
+        "display_name": "Casa-Museu Doutor Anastácio Gonçalves, Avenida Cinco de Outubro, Lissabon, Portugal",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 2341,
+      "from_city_m": 1120,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "lissabon_elevador_de_santa_justa",
+        "lissabon_museu_calouste_gulbenkian",
+        "lissabon_jardim_botanico_tropical",
+        "lissabon_centro_cultural_de_belem",
+        "lissabon_museu_colecao_berardo",
+        "lissabon_casa_fernando_pessoa",
+        "lissabon_campo_pequeno"
+      ]
+    },
+    {
+      "id": "lissabon_casa_fernando_pessoa",
+      "name": "Casa Fernando Pessoa",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.71222636363636,
+        "lng": -9.13931518181818
+      },
+      "query": "Casa Fernando Pessoa, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7166447,
+        "lng": -9.1624508,
+        "display_name": "Casa Fernando Pessoa, Campo de Ourique, Lissabon, Portugal",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 2067,
+      "from_city_m": 1120,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "lissabon_elevador_de_santa_justa",
+        "lissabon_museu_calouste_gulbenkian",
+        "lissabon_jardim_botanico_tropical",
+        "lissabon_centro_cultural_de_belem",
+        "lissabon_museu_colecao_berardo",
+        "lissabon_casa_museu_anastacio_goncalves",
+        "lissabon_campo_pequeno"
+      ]
+    },
+    {
+      "id": "lissabon_assembleia_da_republica",
+      "name": "Assembleia da República",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.70887944444445,
+        "lng": -9.134184
+      },
+      "query": "Assembleia da República, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7127151,
+        "lng": -9.1538085,
+        "display_name": "Versammlung der Republik, Calçada da Estrela, Lissabon, Portugal",
+        "class": "office",
+        "type": "government",
+        "provider": "photon"
+      },
+      "delta_m": 1755,
+      "from_city_m": 1557,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "lissabon_church_nossa_senhora_da_conceicao_velha"
+      ]
+    },
+    {
+      "id": "lissabon_telecabine_lisboa",
+      "name": "Telecabine Lisboa",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.7623986,
+        "lng": -9.092304200000001
+      },
+      "query": "Telecabine Lisboa, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7735725,
+        "lng": -9.0914829,
+        "display_name": "Telecabine Lisboa, Passeio das Tágides, Lissabon, Portugal",
+        "class": "shop",
+        "type": "ticket",
+        "provider": "photon"
+      },
+      "delta_m": 1245,
+      "from_city_m": 6041,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "lissabon_ponte_25_de_abril",
+      "name": "Ponte 25 de Abril",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.702828555555556,
+        "lng": -9.180222111111112
+      },
+      "query": "Ponte 25 de Abril, Lissabon, Germany",
+      "osm": {
+        "lat": 38.6961507,
+        "lng": -9.178543,
+        "display_name": "Ponte 25 de Abril, Rua de Cascais, Lissabon, Portugal",
+        "class": "man_made",
+        "type": "bridge",
+        "provider": "photon"
+      },
+      "delta_m": 757,
+      "from_city_m": 4159,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "lissabon_avenida_da_liberdade",
+      "name": "Avenida da Liberdade",
+      "category": "altstadt",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.72049418,
+        "lng": -9.14595756
+      },
+      "query": "Avenida da Liberdade, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7247512,
+        "lng": -9.1497126,
+        "display_name": "Avenida da Liberdade, Lissabon, Portugal",
+        "class": "highway",
+        "type": "primary",
+        "provider": "photon"
+      },
+      "delta_m": 575,
+      "from_city_m": 611,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "lissabon_parque_das_nacoes",
+      "name": "Parque das Nações",
+      "category": "natur",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.768454289795926,
+        "lng": -9.093940475
+      },
+      "query": "Parque das Nações, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7638712,
+        "lng": -9.0953729,
+        "display_name": "Park der Nationen, Lissabon, Portugal",
+        "class": "place",
+        "type": "suburb",
+        "provider": "photon"
+      },
+      "delta_m": 525,
+      "from_city_m": 6466,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "lissabon_elevador_da_bica",
+      "name": "Elevador da Bica",
+      "category": "aussicht",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.708857125,
+        "lng": -9.151512375
+      },
+      "query": "Elevador da Bica, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7097674,
+        "lng": -9.1462286,
+        "display_name": "Elevador da Bica, Travessa do Cabral, Lissabon, Portugal",
+        "class": "railway",
+        "type": "funicular",
+        "provider": "photon"
+      },
+      "delta_m": 470,
+      "from_city_m": 1832,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "lissabon_zoo_lissabon",
+      "name": "Zoo Lissabon",
+      "category": "freizeitpark",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.74317410952381,
+        "lng": -9.169200652380955
+      },
+      "query": "Zoo Lissabon, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7453673,
+        "lng": -9.1719039,
+        "display_name": "Zoologischer Garten von Lissabon, Praça Marechal Humberto Delgado, Lissabon, Portugal",
+        "class": "tourism",
+        "type": "zoo",
+        "provider": "photon"
+      },
+      "delta_m": 338,
+      "from_city_m": 3481,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "lissabon_cais_do_sodre",
+      "name": "Cais do Sodré",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.70650228,
+        "lng": -9.14365012
+      },
+      "query": "Cais do Sodré, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7061547,
+        "lng": -9.1468269,
+        "display_name": "Cais do Sodré, Avenida 24 de Julho, Lissabon, Portugal",
+        "class": "railway",
+        "type": "station",
+        "provider": "photon"
+      },
+      "delta_m": 278,
+      "from_city_m": 1797,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "lissabon_duke_of_terceira"
+      ]
+    },
+    {
+      "id": "lissabon_alfama",
+      "name": "Alfama",
+      "category": "altstadt",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.71334862,
+        "lng": -9.13010976
+      },
+      "query": "Alfama, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7117704,
+        "lng": -9.12838,
+        "display_name": "Alfama, Lissabon, Portugal",
+        "class": "place",
+        "type": "neighbourhood",
+        "provider": "photon"
+      },
+      "delta_m": 231,
+      "from_city_m": 1275,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "lissabon_alfama_souvenirs",
+        "lissabon_alfama_cork_gallery_luggage_store"
+      ]
+    },
+    {
+      "id": "lissabon_igreja_da_graca",
+      "name": "Igreja da Graça",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.7164183,
+        "lng": -9.130828087500001
+      },
+      "query": "Igreja da Graça, Lissabon, Germany",
+      "osm": {
+        "lat": 39.0902756,
+        "lng": -9.2587681,
+        "display_name": "Igreja da Graça, Praça 25 de Abril, Torres Vedras, Portugal",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 43020,
+      "from_city_m": 984,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city",
+        "duplicate_center"
+      ],
+      "twins": [
+        "lissabon_black_cat_cinema"
+      ]
+    },
+    {
+      "id": "lissabon_maat",
+      "name": "MAAT",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.69592008260869,
+        "lng": -9.19347689347826
+      },
+      "query": "MAAT, Lissabon, Germany",
+      "osm": {
+        "lat": 38.6957445,
+        "lng": -9.1953987,
+        "display_name": "MAAT - A Fábrica da Eletricidade, Passeio Carlos do Carmo, Lissabon, Portugal",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 168,
+      "from_city_m": 5541,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "lissabon_mouraria",
+      "name": "Mouraria",
+      "category": "altstadt",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.71639694736842,
+        "lng": -9.135396947368418
+      },
+      "query": "Mouraria, Lissabon, Germany",
+      "osm": {
+        "lat": 38.714991,
+        "lng": -9.1348415,
+        "display_name": "Mouraria, Lissabon, Portugal",
+        "class": "place",
+        "type": "neighbourhood",
+        "provider": "photon"
+      },
+      "delta_m": 164,
+      "from_city_m": 739,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "lissabon_chiado",
+      "name": "Chiado",
+      "category": "altstadt",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.71049918,
+        "lng": -9.14225916
+      },
+      "query": "Chiado, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7103298,
+        "lng": -9.1405186,
+        "display_name": "Chiado, Lissabon, Portugal",
+        "class": "place",
+        "type": "neighbourhood",
+        "provider": "photon"
+      },
+      "delta_m": 152,
+      "from_city_m": 1337,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "lissabon_doca_de_santo_amaro",
+      "name": "Doca de Santo Amaro",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.700381666666665,
+        "lng": -9.176740666666667
+      },
+      "query": "Doca de Santo Amaro, Lissabon, Germany",
+      "osm": {
+        "lat": 38.6993661,
+        "lng": -9.177543,
+        "display_name": "Doca de Santo Amaro, Avenida de Brasília, Lissabon, Portugal",
+        "class": "leisure",
+        "type": "marina",
+        "provider": "photon"
+      },
+      "delta_m": 133,
+      "from_city_m": 4061,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "lissabon_praca_do_imperio",
+      "name": "Praça do Império",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.69722294285714,
+        "lng": -9.206131771428572
+      },
+      "query": "Praça do Império, Lissabon, Germany",
+      "osm": {
+        "lat": 38.6960697,
+        "lng": -9.206021,
+        "display_name": "Platz des Império, Praça do Império, Lissabon, Portugal",
+        "class": "leisure",
+        "type": "park",
+        "provider": "photon"
+      },
+      "delta_m": 129,
+      "from_city_m": 6434,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "lissabon_elevador_da_gloria",
+      "name": "Elevador da Glória",
+      "category": "aussicht",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.7162326,
+        "lng": -9.142846299999999
+      },
+      "query": "Elevador da Glória, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7152317,
+        "lng": -9.1434042,
+        "display_name": "Elevador da Glória, Calçada da Glória, Lissabon, Portugal",
+        "class": "railway",
+        "type": "funicular",
+        "provider": "photon"
+      },
+      "delta_m": 121,
+      "from_city_m": 742,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "lissabon_se_catedral_de_lisboa",
+      "name": "Sé Catedral de Lisboa",
+      "category": "kirche",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.70915663636364,
+        "lng": -9.131752454545456
+      },
+      "query": "Sé Catedral de Lisboa, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7098185,
+        "lng": -9.1328001,
+        "display_name": "Sé de Lisboa, Largo da Sé, Lissabon, Portugal",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 117,
+      "from_city_m": 1601,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "lissabon_amar_lisboa"
+      ]
+    },
+    {
+      "id": "lissabon_jardim_botanico_de_lisboa",
+      "name": "Jardim Botânico de Lisboa",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.719524142857146,
+        "lng": -9.14928357142857
+      },
+      "query": "Jardim Botânico de Lisboa, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7185344,
+        "lng": -9.1488564,
+        "display_name": "Botanischer Garten von Lissabon, Rua da Escola Politécnica, Lissabon, Portugal",
+        "class": "leisure",
+        "type": "park",
+        "provider": "photon"
+      },
+      "delta_m": 116,
+      "from_city_m": 919,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "lissabon_toilette_botanical_garden_lisboa"
+      ]
+    },
+    {
+      "id": "lissabon_forte_do_bom_sucesso",
+      "name": "Forte do Bom Sucesso",
+      "category": "denkmal",
+      "place_tier": 3,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.69213255000001,
+        "lng": -9.217248059999998
+      },
+      "query": "Forte do Bom Sucesso, Lissabon, Germany",
+      "osm": {
+        "lat": 38.6926201,
+        "lng": -9.2184065,
+        "display_name": "Forte do Bom Sucesso, Ciclovia do Jardim António Viana Barreto, Lissabon, Portugal",
+        "class": "historic",
+        "type": "fort",
+        "provider": "photon"
+      },
+      "delta_m": 114,
+      "from_city_m": 7550,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "lissabon_palacio_dos_marqueses_de_fronteira",
+      "name": "Palácio dos Marqueses de Fronteira",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.74001134000001,
+        "lng": -9.180460203333332
+      },
+      "query": "Palácio dos Marqueses de Fronteira, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7390712,
+        "lng": -9.180214,
+        "display_name": "Jardim do Palácio Marquês de Fronteira, Largo São Domingos de Benfica, Lissabon, Portugal",
+        "class": "leisure",
+        "type": "park",
+        "provider": "photon"
+      },
+      "delta_m": 107,
+      "from_city_m": 4077,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "lissabon_centro_vasco_da_gama",
+      "name": "Centro Vasco da Gama",
+      "category": "einkaufen",
+      "place_tier": 3,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.76846767999999,
+        "lng": -9.097181899999999
+      },
+      "query": "Centro Vasco da Gama, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7676651,
+        "lng": -9.0968435,
+        "display_name": "Centro Comercial Vasco da Gama, Avenida Dom João II, Lissabon, Portugal",
+        "class": "shop",
+        "type": "mall",
+        "provider": "photon"
+      },
+      "delta_m": 94,
+      "from_city_m": 6300,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "lissabon_palacio_nacional_da_ajuda",
+      "name": "Palácio Nacional da Ajuda",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.707573628,
+        "lng": -9.19879436
+      },
+      "query": "Palácio Nacional da Ajuda, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7076314,
+        "lng": -9.1978334,
+        "display_name": "Palácio Nacional da Ajuda, Largo da Ajuda, Lissabon, Portugal",
+        "class": "historic",
+        "type": "castle",
+        "provider": "photon"
+      },
+      "delta_m": 84,
+      "from_city_m": 5415,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "lissabon_mosteiro_de_sao_vicente_de_fora",
+      "name": "Mosteiro de São Vicente de Fora",
+      "category": "wanderung",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.714509,
+        "lng": -9.128396166666667
+      },
+      "query": "Mosteiro de São Vicente de, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7147286,
+        "lng": -9.1274895,
+        "display_name": "Igreja de São Vicente de Fora, Largo de São Vicente, Lissabon, Portugal",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 82,
+      "from_city_m": 1283,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "lissabon_rua_augusta",
+      "name": "Rua Augusta",
+      "category": "altstadt",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.7106041,
+        "lng": -9.1377959
+      },
+      "query": "Rua Augusta, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7113158,
+        "lng": -9.1379346,
+        "display_name": "Rua Augusta, Lissabon, Portugal",
+        "class": "highway",
+        "type": "pedestrian",
+        "provider": "photon"
+      },
+      "delta_m": 80,
+      "from_city_m": 1307,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "lissabon_bairro_alto",
+      "name": "Bairro Alto",
+      "category": "altstadt",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.71278998,
+        "lng": -9.145113460000001
+      },
+      "query": "Bairro Alto, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7133919,
+        "lng": -9.1455522,
+        "display_name": "Oberstadt, Lissabon, Portugal",
+        "class": "place",
+        "type": "suburb",
+        "provider": "photon"
+      },
+      "delta_m": 77,
+      "from_city_m": 1172,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "lissabon_elevador_do_lavra",
+      "name": "Elevador do Lavra",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.71803671428571,
+        "lng": -9.141786714285713
+      },
+      "query": "Elevador do Lavra, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7180663,
+        "lng": -9.1408957,
+        "display_name": "Elevador do Lavra, Vila Ferreira à Calçada do Lavra, Lissabon, Portugal",
+        "class": "railway",
+        "type": "funicular",
+        "provider": "photon"
+      },
+      "delta_m": 77,
+      "from_city_m": 521,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "lissabon_biclas_com"
+      ]
+    },
+    {
+      "id": "lissabon_rossio",
+      "name": "Rossio",
+      "category": "altstadt",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.714060499999995,
+        "lng": -9.138775166666667
+      },
+      "query": "Rossio, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7140244,
+        "lng": -9.1379408,
+        "display_name": "Rossio, Rua do Amparo, Lissabon, Portugal",
+        "class": "railway",
+        "type": "station",
+        "provider": "photon"
+      },
+      "delta_m": 73,
+      "from_city_m": 917,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "lissabon_brunnen_am_rossio",
+        "lissabon_city_lockers_praca_da_figueira_parking_rossio"
+      ]
+    },
+    {
+      "id": "lissabon_praca_dos_restauradores",
+      "name": "Praça dos Restauradores",
+      "category": "altstadt",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.7157732,
+        "lng": -9.140964199999999
+      },
+      "query": "Praça dos Restauradores, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7157093,
+        "lng": -9.1416527,
+        "display_name": "Platz der Restauratore, Lissabon, Portugal",
+        "class": "place",
+        "type": "square",
+        "provider": "photon"
+      },
+      "delta_m": 60,
+      "from_city_m": 740,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "lissabon_fabrica_da_nata_pasteis_de_nata"
+      ]
+    },
+    {
+      "id": "lissabon_miradouro_das_portas_do_sol",
+      "name": "Miradouro das Portas do Sol",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.711862,
+        "lng": -9.1303408
+      },
+      "query": "Miradouro das Portas do Sol, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7123462,
+        "lng": -9.1303665,
+        "display_name": "Miradouro das Portas do Sol, Largo das Portas do Sol 1100-411 LISBOA, Lissabon, Portugal",
+        "class": "tourism",
+        "type": "viewpoint",
+        "provider": "photon"
+      },
+      "delta_m": 54,
+      "from_city_m": 1397,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "lissabon_miradouro_de_santa_luzia"
+      ]
+    },
+    {
+      "id": "lissabon_pilar_7_bridge_experience",
+      "name": "Pilar 7 Bridge Experience",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.700374499999995,
+        "lng": -9.17887625
+      },
+      "query": "Pilar 7 Bridge Experience, Lissabon",
+      "osm": {
+        "lat": 38.7003799,
+        "lng": -9.1793844,
+        "display_name": "Experiência Pilar 7, Avenida da Índia, Lissabon, Portugal",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 44,
+      "from_city_m": 4211,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "lissabon_escala25"
+      ]
+    },
+    {
+      "id": "lissabon_miradouro_de_santa_luzia",
+      "name": "Miradouro de Santa Luzia",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.711862,
+        "lng": -9.1303408
+      },
+      "query": "Miradouro de Santa Luzia, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7117413,
+        "lng": -9.130216,
+        "display_name": "Miradouro de Santa Luzia, Largo de Santa Luzia, Lissabon, Portugal",
+        "class": "tourism",
+        "type": "viewpoint",
+        "provider": "photon"
+      },
+      "delta_m": 17,
+      "from_city_m": 1397,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "lissabon_miradouro_das_portas_do_sol"
+      ]
+    },
+    {
+      "id": "lissabon_elevador_de_santa_justa",
+      "name": "Elevador de Santa Justa",
+      "category": "aussicht",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.71211653333333,
+        "lng": -9.1394052
+      },
+      "query": "Elevador de Santa Justa, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7121169,
+        "lng": -9.1393753,
+        "display_name": "Elevador de Santa Justa, Rua de Santa Justa, Lissabon, Portugal",
+        "class": "tourism",
+        "type": "attraction",
+        "provider": "photon"
+      },
+      "delta_m": 3,
+      "from_city_m": 1132,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "lissabon_museu_calouste_gulbenkian",
+        "lissabon_jardim_botanico_tropical",
+        "lissabon_centro_cultural_de_belem",
+        "lissabon_museu_colecao_berardo",
+        "lissabon_casa_fernando_pessoa",
+        "lissabon_casa_museu_anastacio_goncalves",
+        "lissabon_campo_pequeno"
+      ]
+    },
+    {
+      "id": "lissabon_mosteiro_dos_jeronimos",
+      "name": "Mosteiro dos Jerónimos",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.69776514,
+        "lng": -9.20686504
+      },
+      "query": "Mosteiro dos Jerónimos, Lissabon",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 6466,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "lissabon_museu_nacional_dos_coches",
+      "name": "Museu Nacional dos Coches",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.69642874,
+        "lng": -9.19764614
+      },
+      "query": "Museu Nacional dos Coches, Lissabon, Germany",
+      "osm": {
+        "lat": 38.6968643,
+        "lng": -9.1979875,
+        "display_name": "Nationales Kutschenmuseum, Avenida da Índia, Lissabon, Portugal",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 57,
+      "from_city_m": 5823,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "lissabon_igreja_de_sao_domingos",
+      "name": "Igreja de São Domingos",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.71464542,
+        "lng": -9.13883238
+      },
+      "query": "Igreja de São Domingos, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7146588,
+        "lng": -9.1382866,
+        "display_name": "Dominikanerkirche, Largo de São Domingos, Lissabon, Portugal",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 47,
+      "from_city_m": 852,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "lissabon_pavilhao_do_conhecimento",
+      "name": "Pavilhão do Conhecimento",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.76213294,
+        "lng": -9.09603328
+      },
+      "query": "Pavilhão do Conhecimento, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7622806,
+        "lng": -9.0955818,
+        "display_name": "Pavilhão do Conhecimento, Largo José Mariano Gago, Lissabon, Portugal",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 42,
+      "from_city_m": 5805,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "lissabon_miradouro_de_sao_pedro_de_alcantara",
+      "name": "Miradouro de São Pedro de Alcântara",
+      "category": "aussicht",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.7152324,
+        "lng": -9.144376342857143
+      },
+      "query": "Miradouro de São Pedro de, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7154373,
+        "lng": -9.1440476,
+        "display_name": "Miradouro de São Pedro de Alcântara, Rua de São Pedro de Alcântara, Lissabon, Portugal",
+        "class": "tourism",
+        "type": "viewpoint",
+        "provider": "photon"
+      },
+      "delta_m": 37,
+      "from_city_m": 901,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "lissabon_jardim_da_fundacao_calouste_gulbenkian",
+      "name": "Jardim da Fundação Calouste Gulbenkian",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.73708560909091,
+        "lng": -9.154442490909092
+      },
+      "query": "Jardim da Fundação Calouste Gulbenkian, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7368881,
+        "lng": -9.1541278,
+        "display_name": "Gärten der Calouste-Gulbenkian-Stiftung, Avenida de Berna, Lissabon, Portugal",
+        "class": "leisure",
+        "type": "park",
+        "provider": "photon"
+      },
+      "delta_m": 35,
+      "from_city_m": 2104,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "lissabon_palacio_de_belem",
+      "name": "Palácio de Belém",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.69792762,
+        "lng": -9.20062988
+      },
+      "query": "Palácio de Belém, Lissabon, Germany",
+      "osm": {
+        "lat": 38.6982031,
+        "lng": -9.2004337,
+        "display_name": "Nationalpalast zu Belém, Praça Afonso de Albuquerque, Lissabon, Portugal",
+        "class": "tourism",
+        "type": "attraction",
+        "provider": "photon"
+      },
+      "delta_m": 35,
+      "from_city_m": 5972,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "lissabon_instituto_superior_tecnico",
+      "name": "Instituto Superior Técnico",
+      "category": "denkmal",
+      "place_tier": 3,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.73675632,
+        "lng": -9.13878562
+      },
+      "query": "Instituto Superior Técnico, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7367455,
+        "lng": -9.1383914,
+        "display_name": "Instituto Superior Técnico, Avenida Rovisco Pais, Lissabon, Portugal",
+        "class": "amenity",
+        "type": "university",
+        "provider": "photon"
+      },
+      "delta_m": 34,
+      "from_city_m": 1608,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "lissabon_praca_do_comercio",
+      "name": "Praça do Comércio",
+      "category": "altstadt",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.707521625,
+        "lng": -9.13646325
+      },
+      "query": "Praça do Comércio, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7077934,
+        "lng": -9.1365543,
+        "display_name": "Handelsplatz, Lissabon, Portugal",
+        "class": "place",
+        "type": "square",
+        "provider": "photon"
+      },
+      "delta_m": 31,
+      "from_city_m": 1662,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "lissabon_museu_nacional_do_azulejo",
+      "name": "Museu Nacional do Azulejo",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.724930140000005,
+        "lng": -9.1137002
+      },
+      "query": "Museu Nacional do Azulejo, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7247242,
+        "lng": -9.113914,
+        "display_name": "Museu Nacional do Azulejo, Rua da Madre de Deus, Lissabon, Portugal",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 29,
+      "from_city_m": 2240,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "lissabon_torre_vasco_da_gama",
+      "name": "Torre Vasco da Gama",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.774897579999994,
+        "lng": -9.0915077
+      },
+      "query": "Torre Vasco da Gama, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7747401,
+        "lng": -9.0912585,
+        "display_name": "Vasco da Gama Turm, Cais das Naus, Lissabon, Portugal",
+        "class": "man_made",
+        "type": "tower",
+        "provider": "photon"
+      },
+      "delta_m": 28,
+      "from_city_m": 7168,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "lissabon_parque_eduardo_vii",
+      "name": "Parque Eduardo VII",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.72832658000001,
+        "lng": -9.152772086666666
+      },
+      "query": "Parque Eduardo VII, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7282116,
+        "lng": -9.1530143,
+        "display_name": "Parque Eduardo VII, Parque Eduardo VII, Lissabon, Portugal",
+        "class": "leisure",
+        "type": "park",
+        "provider": "photon"
+      },
+      "delta_m": 25,
+      "from_city_m": 1347,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "lissabon_museu_da_marioneta",
+      "name": "Museu da Marioneta",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.7078285,
+        "lng": -9.155695833333333
+      },
+      "query": "Museu da Marioneta, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7080039,
+        "lng": -9.1557935,
+        "display_name": "Museu da Marioneta, Rua da Esperança, Lissabon, Portugal",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 21,
+      "from_city_m": 2148,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "lissabon_igreja_de_sao_roque",
+      "name": "Igreja de São Roque",
+      "category": "kirche",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.713653,
+        "lng": -9.14320677777778
+      },
+      "query": "Igreja de São Roque, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7136201,
+        "lng": -9.1434271,
+        "display_name": "Igreja de São Roque, Largo Trindade Coelho, Lissabon, Portugal",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 19,
+      "from_city_m": 1019,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "lissabon_jardim_da_estrela",
+      "name": "Jardim da Estrela",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.714624285714294,
+        "lng": -9.159241
+      },
+      "query": "Jardim da Estrela, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7146949,
+        "lng": -9.1590528,
+        "display_name": "Jardim da Estrela, Praça da Estrela, Lissabon, Portugal",
+        "class": "leisure",
+        "type": "park",
+        "provider": "photon"
+      },
+      "delta_m": 18,
+      "from_city_m": 1929,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "lissabon_casino_lisboa",
+      "name": "Casino Lisboa",
+      "category": "freizeit",
+      "place_tier": 3,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.76477743181818,
+        "lng": -9.09643380909091
+      },
+      "query": "Casino Lisboa, Lissabon, Germany",
+      "osm": {
+        "lat": 38.764863,
+        "lng": -9.0965972,
+        "display_name": "Casino Lisboa, Alameda dos Oceanos, Lissabon, Portugal",
+        "class": "amenity",
+        "type": "casino",
+        "provider": "photon"
+      },
+      "delta_m": 17,
+      "from_city_m": 6011,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "lissabon_miradouro_da_senhora_do_monte",
+      "name": "Miradouro da Senhora do Monte",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.7192778,
+        "lng": -9.13291622
+      },
+      "query": "Miradouro da Senhora do Monte, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7191589,
+        "lng": -9.1328103,
+        "display_name": "Miradouro Nossa Senhora do Monte, Largo do Monte, Lissabon, Portugal",
+        "class": "leisure",
+        "type": "park",
+        "provider": "photon"
+      },
+      "delta_m": 16,
+      "from_city_m": 648,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "lissabon_museu_do_fado",
+      "name": "Museu do Fado",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.71092542857143,
+        "lng": -9.127566571428572
+      },
+      "query": "Museu do Fado, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7110254,
+        "lng": -9.1276597,
+        "display_name": "Museu do Fado, Largo do Chafariz de Dentro, Lissabon, Portugal",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 14,
+      "from_city_m": 1624,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "lissabon_castelo_de_sao_jorge",
+      "name": "Castelo de São Jorge",
+      "category": "aussicht",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.71403958,
+        "lng": -9.13349774
+      },
+      "query": "Castelo de São Jorge, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7139258,
+        "lng": -9.133483,
+        "display_name": "Castelo de São Jorge, Rua de Santa Cruz do Castelo, Lissabon, Portugal",
+        "class": "tourism",
+        "type": "attraction",
+        "provider": "photon"
+      },
+      "delta_m": 13,
+      "from_city_m": 1047,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "lissabon_torre_de_belem",
+      "name": "Torre de Belém",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.691677494736844,
+        "lng": -9.215883784210526
+      },
+      "query": "Torre de Belém, Lissabon, Germany",
+      "osm": {
+        "lat": 38.691586,
+        "lng": -9.2159288,
+        "display_name": "Turm von Belém, Avenida de Brasília, Lissabon, Portugal",
+        "class": "tourism",
+        "type": "attraction",
+        "provider": "photon"
+      },
+      "delta_m": 11,
+      "from_city_m": 7467,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "lissabon_museu_do_oriente",
+      "name": "Museu do Oriente",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.70293728571429,
+        "lng": -9.170469
+      },
+      "query": "Museu do Oriente, Lissabon, Germany",
+      "osm": {
+        "lat": 38.702901,
+        "lng": -9.1705708,
+        "display_name": "Museum des Orients, Avenida de Brasília, Lissabon, Portugal",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 10,
+      "from_city_m": 3457,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "lissabon_pink_street",
+      "name": "Pink Street",
+      "category": "altstadt",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.707161799999994,
+        "lng": -9.143863
+      },
+      "query": "Pink Street, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7072497,
+        "lng": -9.143845,
+        "display_name": "Pink Street, Rua Nova do Carvalho, Lissabon, Portugal",
+        "class": "tourism",
+        "type": "artwork",
+        "provider": "photon"
+      },
+      "delta_m": 10,
+      "from_city_m": 1729,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "lissabon_convento_do_carmo",
+      "name": "Convento do Carmo",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.71197542,
+        "lng": -9.14069348
+      },
+      "query": "Convento do Carmo, Lissabon, Germany",
+      "osm": {
+        "lat": 38.712006,
+        "lng": -9.1405862,
+        "display_name": "Museu Arqueológico do Carmo, Largo do Carmo, Lissabon, Portugal",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 10,
+      "from_city_m": 1154,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "lissabon_marques_de_pombal",
+      "name": "Praça Marquês de Pombal",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.72525420750001,
+        "lng": -9.149999657499999
+      },
+      "query": "Praça Marquês de Pombal, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7253359,
+        "lng": -9.1500197,
+        "display_name": "Praça Marquês de Pombal, Lissabon, Portugal",
+        "class": "place",
+        "type": "square",
+        "provider": "photon"
+      },
+      "delta_m": 9,
+      "from_city_m": 985,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "lissabon_amoreiras_360_panoramic_view",
+      "name": "Amoreiras 360",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.72373725,
+        "lng": -9.16132875
+      },
+      "query": "Amoreiras 360, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7236835,
+        "lng": -9.1613866,
+        "display_name": "Miradouro Amoreiras 360º Panoramic View, Lissabon, Portugal",
+        "class": "highway",
+        "type": "footway",
+        "provider": "photon"
+      },
+      "delta_m": 8,
+      "from_city_m": 1918,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "lissabon_museu_nacional_de_arte_antiga",
+      "name": "Museu Nacional de Arte Antiga",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.70474166666666,
+        "lng": -9.16154095238095
+      },
+      "query": "Museu Nacional de Arte Antiga, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7047853,
+        "lng": -9.1614657,
+        "display_name": "Nationalmuseum für alte Kunst, Rua das Janelas Verdes, Lissabon, Portugal",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 8,
+      "from_city_m": 2745,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "lissabon_museu_militar_de_lisboa",
+      "name": "Museu Militar de Lisboa",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.71301079999999,
+        "lng": -9.124346074999997
+      },
+      "query": "Museu Militar de Lisboa, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7130774,
+        "lng": -9.1243809,
+        "display_name": "Museu Militar de Lisboa, Largo do Museu de Artilharia, Lissabon, Portugal",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 8,
+      "from_city_m": 1658,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "lissabon_miradouro_da_graca",
+      "name": "Miradouro da Graça",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.71640778,
+        "lng": -9.13164896
+      },
+      "query": "Miradouro da Graça, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7163749,
+        "lng": -9.1315673,
+        "display_name": "Sophia de Mello Breyner Andresen Belvedere, Caracol da Graça, Lissabon, Portugal",
+        "class": "tourism",
+        "type": "viewpoint",
+        "provider": "photon"
+      },
+      "delta_m": 8,
+      "from_city_m": 933,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "lissabon_pasteis_de_belem",
+      "name": "Pastéis de Belém",
+      "category": "cafe",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.69751621428572,
+        "lng": -9.203266999999999
+      },
+      "query": "Pastéis de Belém, Lissabon, Germany",
+      "osm": {
+        "lat": 38.6974795,
+        "lng": -9.2033202,
+        "display_name": "Pastéis de Belém, Rua de Belém, Lissabon, Portugal",
+        "class": "shop",
+        "type": "pastry",
+        "provider": "photon"
+      },
+      "delta_m": 6,
+      "from_city_m": 6197,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "lissabon_livraria_bertrand",
+      "name": "Livraria Bertrand",
+      "category": "einkaufen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.71063083333333,
+        "lng": -9.141094
+      },
+      "query": "Livraria Bertrand, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7106621,
+        "lng": -9.1411539,
+        "display_name": "Livraria Bertrand - Chiado, Rua Garrett, Lissabon, Portugal",
+        "class": "shop",
+        "type": "books",
+        "provider": "photon"
+      },
+      "delta_m": 6,
+      "from_city_m": 1307,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "lissabon_padrao_dos_descobrimentos",
+      "name": "Padrão dos Descobrimentos",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.693652021428576,
+        "lng": -9.205718292857146
+      },
+      "query": "Padrão dos Descobrimentos, Lissabon, Germany",
+      "osm": {
+        "lat": 38.6936054,
+        "lng": -9.2057002,
+        "display_name": "Denkmal der Entdeckungen, Windrose, Lissabon, Portugal",
+        "class": "tourism",
+        "type": "attraction",
+        "provider": "photon"
+      },
+      "delta_m": 5,
+      "from_city_m": 6585,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "lissabon_basilica_da_estrela",
+      "name": "Basílica da Estrela",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.71321647619047,
+        "lng": -9.160530047619048
+      },
+      "query": "Basílica da Estrela, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7132508,
+        "lng": -9.1605133,
+        "display_name": "Basílica da Estrela, Praça da Estrela, 12, Lissabon, Portugal",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 4,
+      "from_city_m": 2101,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "lissabon_teatro_nacional_d_maria_ii",
+      "name": "Teatro Nacional D. Maria II",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.71475936363636,
+        "lng": -9.139796545454546
+      },
+      "query": "Teatro Nacional D. Maria II, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7147786,
+        "lng": -9.1397709,
+        "display_name": "Teatro Nacional Dona Maria II, Praça Dom Pedro IV, Lissabon, Portugal",
+        "class": "amenity",
+        "type": "theatre",
+        "provider": "photon"
+      },
+      "delta_m": 3,
+      "from_city_m": 840,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "lissabon_igreja_da_memoria",
+      "name": "Igreja da Memória",
+      "category": "kirche",
+      "place_tier": 3,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.70298713809524,
+        "lng": -9.201987480952381
+      },
+      "query": "Igreja da Memória, Lissabon, Germany",
+      "osm": {
+        "lat": 38.702973,
+        "lng": -9.2019794,
+        "display_name": "Igreja da Memória, Largo da Memória, Lissabon, Portugal",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 2,
+      "from_city_m": 5848,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "lissabon_casa_dos_bicos",
+      "name": "Casa dos Bicos",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.7091415,
+        "lng": -9.132640833333333
+      },
+      "query": "Casa dos Bicos, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7091589,
+        "lng": -9.1326355,
+        "display_name": "Casa dos Bicos, Rua dos Bacalhoeiros, Lissabon, Portugal",
+        "class": "building",
+        "type": "civic",
+        "provider": "photon"
+      },
+      "delta_m": 2,
+      "from_city_m": 1573,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "lissabon_igreja_de_santo_antonio",
+      "name": "Igreja de Santo António",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.70998578947368,
+        "lng": -9.133683999999999
+      },
+      "query": "Igreja de Santo António, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7099754,
+        "lng": -9.1336994,
+        "display_name": "Igreja de Santo António de Lisboa, Largo da Sé, Lissabon, Portugal",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 2,
+      "from_city_m": 1453,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "lissabon_oceanario_de_lisboa",
+      "name": "Oceanário de Lisboa",
+      "category": "freizeitpark",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.763514107692316,
+        "lng": -9.093728746153845
+      },
+      "query": "Oceanário de Lisboa, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7635196,
+        "lng": -9.0937161,
+        "display_name": "Oceanário de Lisboa, Esplanada Dom Carlos I, Lissabon, Portugal",
+        "class": "tourism",
+        "type": "aquarium",
+        "provider": "photon"
+      },
+      "delta_m": 1,
+      "from_city_m": 6052,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "lissabon_panteao_nacional",
+      "name": "Panteão Nacional",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.71497418867926,
+        "lng": -9.124687943396228
+      },
+      "query": "Panteão Nacional, Lissabon, Germany",
+      "osm": {
+        "lat": 38.714978,
+        "lng": -9.1246825,
+        "display_name": "Panteão Nacional, Campo de Santa Clara, Lissabon, Portugal",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 1,
+      "from_city_m": 1507,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "lissabon_arco_da_rua_augusta",
+      "name": "Arco da Rua Augusta",
+      "category": "altstadt",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 38.7084405,
+        "lng": -9.1368143125
+      },
+      "query": "Arco da Rua Augusta, Lissabon, Germany",
+      "osm": {
+        "lat": 38.7084431,
+        "lng": -9.136816,
+        "display_name": "Arco do Triunfo da Rua Augusta, Rua Augusta, Lissabon, Portugal",
+        "class": "tourism",
+        "type": "attraction",
+        "provider": "photon"
+      },
+      "delta_m": 0,
+      "from_city_m": 1556,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    }
+  ]
+}

@@ -6,6 +6,7 @@ import * as FileSystem from 'expo-file-system';
 import type { BetaSituationEvent } from '../../types/situationBlueprints';
 import type { LearnedRule } from '../../types/learnedRules';
 import { getCachedUserProfile } from '../userProfileService';
+import { mergeOwnerGoldIntoPack } from '../../module2/blueprints/ownerGold';
 
 const QUEUE_PATH = `${FileSystem.documentDirectory}findus-beta-situation-queue.json`;
 const CONTRIBUTOR_PATH = `${FileSystem.documentDirectory}findus-beta-contributor.json`;
@@ -166,17 +167,17 @@ export async function loadActiveSituationBlueprintsPack(): Promise<
 let cachedPack: import('../../types/situationBlueprints').SituationBlueprint[] | null =
   null;
 
-/** Sync read for master prompt (filled after evening download / force reload). */
+/** Sync read for master prompt (downloaded pack + Owner-Gold). */
 export function getCachedSituationBlueprintsSync(): import('../../types/situationBlueprints').SituationBlueprint[] {
-  return cachedPack ?? [];
+  return mergeOwnerGoldIntoPack(cachedPack ?? []);
 }
 
 export async function getActiveSituationBlueprintsCached(
   forceReload = false,
 ): Promise<import('../../types/situationBlueprints').SituationBlueprint[]> {
-  if (!forceReload && cachedPack) return cachedPack;
+  if (!forceReload && cachedPack) return mergeOwnerGoldIntoPack(cachedPack);
   cachedPack = await loadActiveSituationBlueprintsPack();
-  return cachedPack;
+  return mergeOwnerGoldIntoPack(cachedPack);
 }
 
 export function invalidateSituationBlueprintCache(): void {

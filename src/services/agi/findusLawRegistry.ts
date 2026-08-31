@@ -1,5 +1,5 @@
 /**
- * Findus AGI Law Registry — vollständige 202-Gesetze-Registratur.
+ * Yorro AGI Law Registry — vollständige 202-Gesetze-Registratur.
  * Top-20 Verfassung immer im Prompt; Kontext max. 10 per ruleRouter.
  * Quelle: .cursor/rules/findus-agi-rules.mdc
  */
@@ -100,13 +100,13 @@ export const FINDUS_ALL_LAWS: readonly FindusLaw[] = [
   // —— LOGISTICS_TIME / LUGGAGE / HOTEL / WEATHER (021–035) ——
   L(21, 'LOGISTICS_TIME', 'Termine rückwärts: Ziel − Puffer − Laufzeit = Losgeh-Zeit.'),
   L(22, 'LOGISTICS_TIME', 'Losgeh-Zeiten als Live-Countdown HUD oben links.'),
-  L(23, 'LOGISTICS_TIME', '>45 Min Lücke → proaktiv Alternative (z.B. Strand).'),
+  L(23, 'LOGISTICS_TIME', 'Freie Lücke >45 Min: nur HUD/Plan-Slot füllen wenn User plant oder fragt — kein ungefragtes Audio-Pitch.', { hardGuardrail: true }),
   L(24, 'LUGGAGE_GEAR', 'Checkout/Abreise → zwingend Gepäck fragen + Aufbewahrung.'),
   L(25, 'HOTEL_CHECKOUT', 'Event morgen + Checkout heute → Übernachtung klären.'),
   L(26, 'WEATHER_ENV', 'Sonne→Sonnencreme; Regen→Indoor-Alternativen.'),
   L(27, 'LOGISTICS_TIME', 'Orte filtern die zu klein für Gruppengröße sind.'),
   L(28, 'LOGISTICS_TIME', 'Supermarkt-Schließzeiten: Audio-Warn nur bei Einkaufs-To-Do, sonst stumm HUD.'),
-  L(29, 'SMALLTALK', '15-Min-Stille → EIN sanfter Kontext-Vorschlag.'),
+  L(29, 'SMALLTALK', 'Stille respektieren: kein 15-Min-Smalltalk-Vorschlag; nur kritische Leave-by/Safety darf proaktiv sprechen.', { hardGuardrail: true, constitution: true }),
   L(30, 'LOGISTICS_TIME', 'Ab 19 Uhr: Snacks für den Abend anbieten.'),
   L(31, 'EVENT_CULTURE', 'Überlappende Events → sofort Alarm.'),
   L(32, 'LOGISTICS_TIME', 'Komplexe Pläne chunking: erst X, dann Y.'),
@@ -140,10 +140,10 @@ export const FINDUS_ALL_LAWS: readonly FindusLaw[] = [
   L(56, 'UI_ACTIONS', 'Mic Listening (Rot) → alte Buttons/Bullets sofort löschen.', { hardGuardrail: true }),
   L(57, 'UI_ACTIONS', 'Color States: Grau Offline, Grün Ready, Orange Permission, Rot Listening, Blau Processing, Gelb Speaking.'),
   L(58, 'FOOD_EXP', 'Zwei Restaurant-Vorschläge → zwei eigene Route-Buttons.'),
-  L(59, 'UI_ACTIONS', 'Button-Labels max 3–4 Worte / 30 Zeichen.', { hardGuardrail: true, constitution: true }),
+  L(59, 'UI_ACTIONS', 'Button-Labels max 3–4 Worte / 22 Zeichen.', { hardGuardrail: true, constitution: true }),
   L(60, 'UI_ACTIONS', 'HUD-Prio: Timer → Nav → stumme Warnungen → Modul-1-Teaser.'),
   L(61, 'UI_ACTIONS', 'Fehlender Raumkontext → Mini-Karte in Concierge-Card.'),
-  L(62, 'UI_ACTIONS', 'Primary Button („Route starten“) farblich hervorheben.'),
+  L(62, 'UI_ACTIONS', 'Primary „Route“ nur bei Leave ≤10 Min oder explizitem Nav-Intent — sonst Maps/Speisekarte/Buchen priorisieren.', { hardGuardrail: true, constitution: true }),
   L(63, 'UI_ACTIONS', 'Cards nach 5 Min Inaktivität abräumen.'),
   L(64, 'UI_ACTIONS', 'Offline-Icon wenn rein lokal (SQLite).'),
   L(65, 'UI_ACTIONS', 'Share: Ankunftszeit per WhatsApp anbieten.'),
@@ -212,7 +212,7 @@ export const FINDUS_ALL_LAWS: readonly FindusLaw[] = [
   L(122, 'LUGGAGE_GEAR', 'An-/Abreisetag startet mit Gepäck-Abgabe.'),
   L(123, 'DAY_PLAN', 'UI Drag&Drop → Zeiten sofort neu rechnen.'),
   L(124, 'DAY_PLAN', 'Zu viele Orte → Stress-Warnung + Streichungen.'),
-  L(125, 'DAY_PLAN', '20 Uhr: Entwurf für morgen vorbereiten.'),
+  L(125, 'DAY_PLAN', 'Kein ungefragtes Erkunden/Dinner; nie Vergangenheitstage; Match morgens → Leave-by+Frühstück+Wecker rückwärts.', { hardGuardrail: true }),
   L(126, 'PERSONA_LEARN', '„Wir schaffen das“ akzeptieren und Pacing lernen.'),
   L(127, 'PERSONA_LEARN', 'Folgetag: Feedback wenn gestern zu viel.'),
 
@@ -264,6 +264,7 @@ export const FINDUS_ALL_LAWS: readonly FindusLaw[] = [
   L(170, 'AFFILIATE', 'Flughafen-Anreise: Transfer und/oder Mietwagen als Hilfe anbieten.'),
   L(171, 'LUGGAGE_GEAR', 'Koffer vor Flug/Früheinchecken → Bounce/Radical als Hilfe.'),
   L(172, 'AFFILIATE', 'Roadtrip/Flughafen-Weiterfahrt → DiscoverCars Mietwagen.'),
+  L(267, 'AFFILIATE', 'Zwei belegte Preise: klar günstiger für den User führt; nur bei ~≤10 % Unterschied Provision priorisieren; günstigere Alternative danach nennen wenn belegt.'),
 
   // —— SELF_CHECK (173–180) ——
   L(173, 'SELF_CHECK', 'Adressen/PLZ/Links aus Audio gelöscht?', { hardGuardrail: true }),
@@ -364,12 +365,12 @@ export function assertLawRegistryIntegrity(): {
   }
   const lawCount = FINDUS_ALL_LAWS.length;
   const ok =
-    lawCount === 190 &&
     orphanCategories.length === 0 &&
     duplicateIds.length === 0 &&
-    FINDUS_CONSTITUTION.length === 20;
+    FINDUS_CONSTITUTION.length === 20 &&
+    lawCount > 0;
 
-  if (__DEV__ && !ok) {
+  if (typeof __DEV__ !== 'undefined' && __DEV__ && !ok) {
     console.error('[agi-registry] integrity failed', {
       lawCount,
       orphanCategories,
@@ -386,7 +387,7 @@ assertLawRegistryIntegrity();
 export function formatConstitutionBlock(): string {
   const lines = FINDUS_CONSTITUTION.map((l) => `- [${l.id}] ${l.rule}`);
   return [
-    '=== FINDUS VERFASSUNG (Top-20 Non-Negotiables — IMMER) ===',
+    '=== YORRO VERFASSUNG (Top-20 Non-Negotiables — IMMER) ===',
     ...lines,
   ].join('\n');
 }

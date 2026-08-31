@@ -48,11 +48,13 @@ function expandMemoKey(opts: {
   openNow?: boolean;
   minResults?: number;
   fallbackTypes?: string[];
+  strictOpenNow?: boolean;
 }): string {
   return [
     opts.placeType,
     (opts.keyword ?? '').toLowerCase().trim(),
     opts.openNow === false ? 'any' : 'open',
+    opts.strictOpenNow ? 'strict' : 'flex',
     opts.minResults ?? 2,
     (opts.fallbackTypes ?? []).join(','),
     opts.lat.toFixed(3),
@@ -75,6 +77,8 @@ export async function searchPlacesExpanding(opts: {
   rings?: readonly number[];
   /** Fallback placeTypes wenn Primärtyp leer bleibt (z. B. restaurant → meal_takeaway) */
   fallbackTypes?: string[];
+  /** Kein Closed-Fallback („besser als nichts“) — Survival/Handy-laden. */
+  strictOpenNow?: boolean;
 }): Promise<ExpandingPlaceSearchResult> {
   const key = expandMemoKey(opts);
   const cached = expandMemo.get(key);
@@ -127,6 +131,7 @@ async function runExpandingSearch(opts: {
   minResults?: number;
   rings?: readonly number[];
   fallbackTypes?: string[];
+  strictOpenNow?: boolean;
 }): Promise<ExpandingPlaceSearchResult> {
   const rings = opts.rings?.length ? opts.rings : PLACE_EXPAND_RINGS_M;
   const minResults = Math.max(1, opts.minResults ?? 2);
@@ -172,8 +177,9 @@ async function runExpandingSearch(opts: {
     if (collected.length >= minResults) break;
   }
 
-  // Letzter Versuch: größter Ring ohne openNow (geschlossene zählen besser als nichts)
-  if (collected.length < 1 && opts.openNow !== false) {
+  // Letzter Versuch: größter Ring ohne openNow (geschlossene zählen besser als nichts).
+  // Survival / Handy-laden: nie — geschlossenes Café ist kein Lade-Spot.
+  if (collected.length < 1 && opts.openNow !== false && !opts.strictOpenNow) {
     const lastRing = rings[rings.length - 1] ?? 50_000;
     ringUsedM = lastRing;
     for (const placeType of typesToTry) {

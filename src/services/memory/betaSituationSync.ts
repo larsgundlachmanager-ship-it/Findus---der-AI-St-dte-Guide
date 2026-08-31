@@ -255,7 +255,7 @@ export function startBetaSituationSyncMonitor(): () => void {
   if (started) return () => undefined;
   started = true;
   const tick = () => {
-    void runBetaSituationEveningSync();
+    void runBetaSituationEveningSync({ force: true });
   };
   tick();
   timer = setInterval(tick, 20 * 60_000);
@@ -284,7 +284,7 @@ export function blueprintsToPseudoRules(
     expect: b.expect,
     avoid: b.avoid,
     summary: b.summary || 'Product situation blueprint',
-    strength: 0.85,
+    strength: b.source === 'owner_gold' ? 0.92 : 0.85,
     hitCount: 0,
     createdAt: ts,
     updatedAt: b.updatedAt ?? ts,
@@ -332,8 +332,8 @@ export function formatProductBlueprintsPromptBlock(
 ): string {
   if (!rules.length) return '';
   const lines = [
-    '=== PRODUCT SITUATION-BLAUPAUSEN (Beta→Release, für alle) ===',
-    'Struktur aus freigegebenen Crowd-Korrekturen. Wortlaut frei. Keine Orts-Hardcodes.',
+    '=== PRODUCT SITUATION-BLAUPAUSEN (Founder-Gold + Beta→Release) ===',
+    'Struktur aus Korrekturen. Wortlaut frei. Keine Orts-Hardcodes.',
   ];
   for (const r of rules) {
     const exp = r.expect

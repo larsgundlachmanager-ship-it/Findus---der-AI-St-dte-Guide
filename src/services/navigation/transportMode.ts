@@ -1,28 +1,44 @@
 /**
- * Realtime-Bewegungsmodus aus GPS-Speed (m/s) + dynamische Schwellen.
+ * Realtime-Bewegungsmodus aus GPS-Speed (m/s) + Schrittfrequenz.
  * Getrennt von promptBuilder.TransportMode (Onboarding-Präferenz).
+ *
+ * Cut (User-Feedback):
+ * - Gehen: typisch ~5 km/h, hart max ~10 km/h
+ * - Jogging: hohe Schrittfrequenz + Tempo bis ~15 km/h
+ * - Rad: darüber / schnell mit wenig Schritten
+ * - ÖPNV: sehr schnell + kaum Schritte
  */
+
+import {
+  ensureMotionCadenceWatching,
+  getRecentStepsPerMin,
+  resetMotionCadence,
+} from './motionCadence';
 
 export type MotionTransportMode =
   | 'walk'
+  | 'jog'
   | 'bicycle'
   | 'transit_bus'
   | 'transit_train';
 
-/** m/s-Grenzen (≈ 10 km/h / 30 km/h). */
-export const SPEED_WALK_MAX_MS = 2.8;
-export const SPEED_BIKE_MAX_MS = 8.3;
+/** ≈ 10 km/h — harte Fuß-Obergrenze (darüber Rad oder Jog). */
+export const SPEED_WALK_MAX_MS = 2.78;
+/** ≈ 15 km/h — darüber kaum noch Jog ohne Fahrzeug. */
+export const SPEED_JOG_MAX_MS = 4.2;
+/** ≈ 22 km/h — typisch ÖPNV / schnelles Rad; mit Steps weiter differenzieren. */
+export const SPEED_BIKE_MAX_MS = 6.1;
+
+/** Schritte/min: Jog vs. Gehen / Rad. */
+export const JOG_MIN_STEPS_PER_MIN = 135;
+/** Unter dieser spm bei Tempo ≥ Fuß-Max → eher Rad/ÖPNV. */
+export const LOW_STEP_SPM = 35;
 
 export type ModeDistanceThresholds = {
-  /** Abbiege-Pulse / Waypoint-Advance. */
   waypointAdvanceM: number;
-  /** Proximity / Geofence-Skalierung (Ziel-Radius-Äquivalent). */
   proximityTriggerM: number;
-  /** Turn-imminent Distanz. */
   turnImminentM: number;
-  /** Haltestelle als „passiert“ zählen. */
   stationPassM: number;
-  /** Multiplikator auf Pack-POI-Radien im Free-Roam. */
   geofenceRadiusScale: number;
 };
 
@@ -36,6 +52,13 @@ export const THRESHOLDS_BY_MODE: Record<
     turnImminentM: 25,
     stationPassM: 30,
     geofenceRadiusScale: 1,
+  },
+  jog: {
+    waypointAdvanceM: 18,
+    proximityTriggerM: 28,
+    turnImminentM: 40,
+    stationPassM: 35,
+    geofenceRadiusScale: 1.35,
   },
   bicycle: {
     waypointAdvanceM: 35,
@@ -66,19 +89,21 @@ let stickyMode: MotionTransportMode = 'walk';
 let stickySinceMs = 0;
 
 const SPEED_EMA_ALPHA = 0.35;
-const MODE_HOLD_MS = 4000;
+const MODE_HOLD_MS = 4500;
+/** Fuß→Rad nach ~4 s Tempo ≥ ~10 km/h. */
+const WALK_TO_BIKE_HOLD_MS = 4_000;
 
 export function resetMotionTransportState(): void {
   speedEmaMs = null;
   stickyMode = 'walk';
   stickySinceMs = 0;
+  resetMotionCadence();
 }
 
 export function pushSpeedSample(speedMs: number | null | undefined): number {
   if (typeof speedMs !== 'number' || !Number.isFinite(speedMs) || speedMs < 0) {
     return speedEmaMs ?? 0;
   }
-  // GPS liefert oft 0 im Stand / negative → clamp
   const s = Math.max(0, speedMs);
   speedEmaMs =
     speedEmaMs == null ? s : speedEmaMs * (1 - SPEED_EMA_ALPHA) + s * SPEED_EMA_ALPHA;
@@ -89,10 +114,51 @@ export function getSmoothedSpeedMs(): number {
   return speedEmaMs ?? 0;
 }
 
-function rawModeFromSpeed(speedMs: number): MotionTransportMode {
-  if (speedMs > SPEED_BIKE_MAX_MS) return 'transit_bus';
-  if (speedMs >= SPEED_WALK_MAX_MS) return 'bicycle';
+/**
+ * Speed + optional Schrittfrequenz → Roh-Modus.
+ * Ohne Steps: klarer Cut bei 9 km/h (Fuß) / ~22 km/h (ÖPNV).
+ */
+export function rawModeFromSpeedAndCadence(
+  speedMs: number,
+  stepsPerMin: number | null,
+): MotionTransportMode {
+  const spm = stepsPerMin;
+  const hasSpm = typeof spm === 'number' && Number.isFinite(spm);
+
+  // Sehr schnell + kaum Schritte → ÖPNV
+  if (speedMs >= SPEED_BIKE_MAX_MS) {
+    if (hasSpm && spm! >= JOG_MIN_STEPS_PER_MIN && speedMs < SPEED_JOG_MAX_MS + 0.5) {
+      return 'jog';
+    }
+    if (hasSpm && spm! < LOW_STEP_SPM) return 'transit_bus';
+    if (speedMs >= 8.3) return 'transit_bus'; // ~30 km/h
+    return 'bicycle';
+  }
+
+  // Über Fuß-Max: Jog wenn hohe Frequenz, sonst Rad
+  if (speedMs >= SPEED_WALK_MAX_MS) {
+    if (hasSpm && spm! >= JOG_MIN_STEPS_PER_MIN && speedMs <= SPEED_JOG_MAX_MS) {
+      return 'jog';
+    }
+    if (hasSpm && spm! < LOW_STEP_SPM) return 'bicycle';
+    // Unklar ohne Steps: über 10 km/h = Rad (User-Cut), nicht „schnelles Gehen“
+    return 'bicycle';
+  }
+
+  // Unter 10 km/h: Jog möglich bei sehr hoher Frequenz (Intervall)
+  if (
+    hasSpm &&
+    spm! >= JOG_MIN_STEPS_PER_MIN &&
+    speedMs >= 1.8 // ~6,5 km/h
+  ) {
+    return 'jog';
+  }
+
   return 'walk';
+}
+
+function rawModeFromSpeed(speedMs: number): MotionTransportMode {
+  return rawModeFromSpeedAndCadence(speedMs, getRecentStepsPerMin());
 }
 
 /**
@@ -104,30 +170,50 @@ export function classifyMotionTransportMode(opts?: {
   preferBike?: boolean;
   nowMs?: number;
 }): MotionTransportMode {
+  void ensureMotionCadenceWatching();
   const now = opts?.nowMs ?? Date.now();
   const speed =
     typeof opts?.speedMs === 'number' && Number.isFinite(opts.speedMs)
       ? pushSpeedSample(opts.speedMs)
       : getSmoothedSpeedMs();
 
-  let next = rawModeFromSpeed(speed);
+  const spm = getRecentStepsPerMin(now);
+  let next = rawModeFromSpeedAndCadence(speed, spm);
 
-  // Profil-Hinweis: bei mittlerer Speed eher Bike; bei hoher eher Transit
+  // Profil-Hinweis
   if (opts?.preferTransit && speed >= SPEED_WALK_MAX_MS) {
-    next = speed > SPEED_BIKE_MAX_MS * 0.7 ? 'transit_bus' : next;
+    if (!spm || spm < LOW_STEP_SPM) {
+      next = speed > SPEED_BIKE_MAX_MS * 0.85 ? 'transit_bus' : next;
+    }
   }
   if (opts?.preferBike && next === 'walk' && speed >= 1.8) {
     next = 'bicycle';
   }
+  // Explizit Rad: Jog nicht überschreiben wenn hohe Frequenz
+  if (opts?.preferBike && next === 'jog' && (!spm || spm < JOG_MIN_STEPS_PER_MIN)) {
+    next = 'bicycle';
+  }
 
   if (next !== stickyMode) {
+    // Timer startet beim ersten abweichenden Sample (nicht vom letzten Walk-Tick)
     if (stickySinceMs === 0) stickySinceMs = now;
-    if (now - stickySinceMs >= MODE_HOLD_MS || stickyMode === 'walk') {
+    // Fuß→Rad: ~4 s ≥10 km/h; darunter wieder Fuß
+    let hold = MODE_HOLD_MS;
+    if (
+      (stickyMode === 'walk' || stickyMode === 'jog') &&
+      next === 'bicycle' &&
+      speed >= SPEED_WALK_MAX_MS
+    ) {
+      hold = WALK_TO_BIKE_HOLD_MS;
+    } else if (stickyMode === 'walk' || stickyMode === 'jog') {
+      hold = Math.min(MODE_HOLD_MS, 2800);
+    }
+    if (now - stickySinceMs >= hold) {
       stickyMode = next;
-      stickySinceMs = now;
+      stickySinceMs = 0;
     }
   } else {
-    stickySinceMs = now;
+    stickySinceMs = 0;
   }
 
   return stickyMode;
@@ -143,10 +229,13 @@ export function isTransitMode(mode: MotionTransportMode): boolean {
   return mode === 'transit_bus' || mode === 'transit_train';
 }
 
+export function isPedestrianMode(mode: MotionTransportMode): boolean {
+  return mode === 'walk' || mode === 'jog';
+}
+
 /**
  * Google Directions Mode — walking-first.
- * Nie driving/Autoverkehr. Bike nur bei Rad-Präferenz/erkanntem Rad;
- * Transit nur bei ÖPNV-Präferenz (nicht nur wegen hoher GPS-Speed).
+ * Jog → walking. Bike nur bei Rad. Transit bei ÖPNV.
  */
 export function directionsModeForNav(opts?: {
   motion?: MotionTransportMode | null;
@@ -154,7 +243,6 @@ export function directionsModeForNav(opts?: {
   preferBike?: boolean;
 }): 'walking' | 'bicycling' | 'transit' {
   const motion = opts?.motion ?? 'walk';
-  // In Transit: echte Haltestellenkette aus Directions transit_details.
   if (
     opts?.preferTransit ||
     motion === 'transit_bus' ||
@@ -166,10 +254,10 @@ export function directionsModeForNav(opts?: {
   return 'walking';
 }
 
-/** Off-route Schwelle (m) je Modus — Abseits der Route → neu berechnen. */
 export function offRouteThresholdM(mode: MotionTransportMode): number {
   if (mode === 'bicycle') return 90;
   if (isTransitMode(mode)) return 220;
+  if (mode === 'jog') return 65;
   return 55;
 }
 
@@ -180,37 +268,45 @@ export function formatRemainingStations(n: number | null | undefined): string {
   return `Noch ${Math.round(n)} Stationen`;
 }
 
-/** Kompass-HUD: nur Modus-Emoji (🚶 / 🚴 / 🚌 / 🚆). */
 export function navTransportEmoji(
   mode: MotionTransportMode | null | undefined,
 ): string {
+  if (mode === 'jog') return '🏃';
   if (mode === 'bicycle') return '🚴';
   if (mode === 'transit_bus') return '🚌';
   if (mode === 'transit_train') return '🚆';
   return '🚶';
 }
 
-/** Kompass-Statuszeile: `🚶 → Ort` (nie „Navigiere zum Wegpunkt“). */
+export function shortenNavDestName(
+  destName: string | null | undefined,
+  maxChars = 48,
+): string {
+  const place = (destName ?? '').replace(/\s+/g, ' ').trim() || 'Ziel';
+  if (place.length <= maxChars) return place;
+  const cut = place.slice(0, Math.max(8, maxChars - 1));
+  const sp = cut.lastIndexOf(' ');
+  const base = (sp > 10 ? cut.slice(0, sp) : cut).trim();
+  return `${base}…`;
+}
+
 export function formatNavHudTitle(
   destName: string | null | undefined,
   mode: MotionTransportMode | null | undefined,
 ): string {
-  const place = (destName ?? '').trim() || 'Ziel';
+  // Volle Breite nutzen — Kürzung nur als Notbremse; Text wrappt auf 2 Zeilen.
+  const place = shortenNavDestName(destName, 56);
   return `${navTransportEmoji(mode)} → ${place}`;
 }
 
-/** Typisches Tempo (m/s), wenn GPS-Speed fehlt oder Stand. */
 const TYPICAL_SPEED_MS: Record<MotionTransportMode, number> = {
   walk: 1.35, // ≈ 4,9 km/h
+  jog: 2.5, // ≈ 9 km/h
   bicycle: 4.5, // ≈ 16 km/h
   transit_bus: 7.0, // ≈ 25 km/h
   transit_train: 11.0, // ≈ 40 km/h
 };
 
-/**
- * ETA in Minuten aus Distanz + GPS-Tempo (mit Modus-Floor).
- * Bei sehr niedriger Speed: typisches Tempo des aktuellen Modus.
- */
 export function estimateEtaMinutes(
   distanceM: number,
   speedMs: number | null | undefined,
@@ -220,7 +316,6 @@ export function estimateEtaMinutes(
   const typical = TYPICAL_SPEED_MS[mode] ?? TYPICAL_SPEED_MS.walk;
   const raw =
     typeof speedMs === 'number' && Number.isFinite(speedMs) ? speedMs : 0;
-  // Unter ~0,7 m/s: Stand/GPS-Rauschen → typisches Tempo
   const pace = raw >= 0.7 ? raw : typical;
   const minutes = distanceM / pace / 60;
   if (!Number.isFinite(minutes) || minutes <= 0) return null;
@@ -234,4 +329,9 @@ export function formatEtaMinutes(mins: number | null | undefined): string {
   const m = mins % 60;
   if (m === 0) return `circa ${h} Stunden`;
   return `circa ${h} Stunden ${m} Minuten`;
+}
+
+/** @deprecated use rawModeFromSpeedAndCadence */
+export function __testRawModeFromSpeed(speedMs: number): MotionTransportMode {
+  return rawModeFromSpeed(speedMs);
 }

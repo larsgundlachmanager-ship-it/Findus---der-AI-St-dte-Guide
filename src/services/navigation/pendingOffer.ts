@@ -3,9 +3,7 @@ import {
   isPoiInfoQuestion,
   isExplicitNavIntent,
 } from '../intent/poiInfoVsNav';
-
-const STOP_NAV =
-  /\b(stopp|stop|abbrechen|abbruch|breche|abbrech|navigation\s+(?:bitte\s+)?(?:beenden|aus|stopp|stoppen)|route\s+(?:bitte\s+)?(?:löschen|loeschen|abbrechen|beenden|stopp)|ziel\s+(löschen|loeschen)|genug|lass\s+mal|nicht\s+(?:navigier|die\s+route|zum\s+hotel)|doch\s+nicht|war\s+nicht\s+(?:mein|meine)|falsch(?:e)?\s+(?:route|navigation)|kompass\s+(?:aus|stopp)|navigat(?:ion)?\s+(?:bitte\s+)?stopp)\b/iu;
+import { isStopOrClearNavigationIntent } from './hardNavOverride';
 
 const AFFIRM =
   /^(ja|jo|jap|jep|yes|yep|ok|okay|klar|gerne|los|zeig|zeige|bring|führ|fuehr|mach|natürlich|natuerlich|schon|sicher|mach\s+(ihn|den|mir)|anmachen|den\s+ersten|die\s+erste|option\s*1|nummer\s*1)(?:\s+bitte)?\s*[.!]?$/iu;
@@ -16,15 +14,23 @@ const NAV_INTENT =
 export function isNavAffirmation(text: string): boolean {
   const t = text.trim();
   if (!t) return false;
-  if (STOP_NAV.test(t)) return false;
+  if (isStopOrClearNavigationIntent(t)) return false;
   if (isPoiInfoQuestion(t)) return false;
+  // „Bring mich zum Bäcker/Aldi/…“ = neues Ziel, keine Ja-Bestätigung des Pending-Offers
+  if (
+    isExplicitNavIntent(t) &&
+    /\b(zum|zur|nach|zu|ins)\s+\S{3,}/iu.test(t)
+  ) {
+    return false;
+  }
   if (AFFIRM.test(t)) return true;
-  if (NAV_INTENT.test(t) && t.length < 80) return true;
+  // Kurze Follow-ups („zeig mir“, „navigier dahin“) — keine langen neuen Aufträge
+  if (NAV_INTENT.test(t) && t.length < 36) return true;
   return false;
 }
 
 export function isStopNavigationIntent(text: string): boolean {
-  return STOP_NAV.test(text.trim());
+  return isStopOrClearNavigationIntent(text);
 }
 
 function nameMatchesOffer(text: string, offer: PendingNavOffer): boolean {
@@ -57,6 +63,15 @@ export function resolveNavOfferFromReply(
     ...(primary ? [primary] : []),
     ...alternatives.filter((a) => a.poiId !== primary?.poiId),
   ];
+
+  // Explizite Nav mit neuem Ziel → Pending-Offer nie stehlen
+  if (
+    isExplicitNavIntent(t) &&
+    /\b(zum|zur|nach|zu|ins)\s+\S{3,}/iu.test(t) &&
+    !all.some((o) => nameMatchesOffer(t, o))
+  ) {
+    return null;
+  }
 
   for (const offer of all) {
     if (!nameMatchesOffer(t, offer)) continue;

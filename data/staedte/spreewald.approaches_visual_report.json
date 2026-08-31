@@ -1,0 +1,834 @@
+{
+  "city": "spreewald",
+  "apply": true,
+  "touched": 103,
+  "approachesFixed": 103,
+  "faqAdded": 0,
+  "data_version": 34,
+  "rows": [
+    {
+      "id": "spreewald_lubbenau",
+      "name": "Lübbenau",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_lubbenau_bahnhof",
+      "name": "Lübbenau, Bahnhof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_parkplatz_am_bahnhof",
+      "name": "Parkplatz am Bahnhof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_bahnhofstrasse",
+      "name": "Bahnhofstraße",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_grosser_spreewaldhafen_lubbenau",
+      "name": "Großer Spreewaldhafen Lübbenau",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_kleiner_hafen_am_spreeschlosschen_lubbenau_kahnfahrmannsverein_der_spr",
+      "name": "Kleiner Hafen am Spreeschlößchen Lübbenau/ Kahnfährmannsverein der Spreewaldfreunde",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_st_liebs_hafen_lubbenau_kahnfahrtenlehde_wotschofska_im_spreewald",
+      "name": "✅St.Liebs Hafen🛶 Lübbenau | KahnfahrtenLehde-Wotschofska im Spreewald",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_kahnfahrten_im_spreewald_henning_muller",
+      "name": "Kahnfahrten im Spreewald, Henning Müller",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_premium_kahnfahrten_hafen_lubbenau_spreewald",
+      "name": "Premium Kahnfahrten - Hafen Lübbenau / Spreewald",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_kleiner_hafen_kahnfahrten_am_muhlenwehr",
+      "name": "Kleiner Hafen, Kahnfahrten am Mühlenwehr",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_hafen_snack_imbiss_am_gr_spreewaldhafen",
+      "name": "Hafen Snack - Imbiss am gr. Spreewaldhafen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_spreewald_museum",
+      "name": "Spreewald-Museum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_stadtkirche_st_nikolai",
+      "name": "Stadtkirche St. Nikolai",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_st_maria_verkundigung",
+      "name": "St. Maria Verkündigung",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_evangelisches_pfarramt_lubbenau_neustadt",
+      "name": "Evangelisches Pfarramt Lübbenau-Neustadt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_evangelischer_friedhof_lubbenau_neustadt",
+      "name": "Evangelischer Friedhof Lübbenau-Neustadt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_dorfkirche_zerkwitz",
+      "name": "Dorfkirche Zerkwitz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_schlosspark",
+      "name": "Schlosspark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_zeitlos_spiele_park",
+      "name": "Zeitlos-Spiele-Park",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_haus_fur_mensch_und_natur",
+      "name": "Haus für Mensch und Natur",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_spreewald_natur_camping_am_schlosspark",
+      "name": "Spreewald-Natur-Camping \"Am Schlosspark\"",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_biospharenreservat_spreewald",
+      "name": "Biosphärenreservat Spreewald",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_energiefeld",
+      "name": "Energiefeld",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_spreewelten_bad_lubbenau",
+      "name": "Spreewelten Bad Lübbenau",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_rosengarten",
+      "name": "Rosengarten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_rad_und_wanderweg_lehde",
+      "name": "Rad- und Wanderweg Lehde",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_skatepark_lubbenau",
+      "name": "Skatepark Lübbenau",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_gartenanlage_freizeit_73_ev",
+      "name": "Gartenanlage Freizeit 73 ev",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_parkplatz_spreewelten_bad_lubbenau",
+      "name": "Parkplatz Spreewelten Bad Lübbenau",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_kanuheim",
+      "name": "Kanuheim",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_lubbenauer_hofgarten",
+      "name": "Lübbenauer Hofgarten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_insektenwiese",
+      "name": "Insektenwiese",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_russische_kriegsgraber",
+      "name": "Russische Kriegsgräber",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_parkplatz_lubbenau",
+      "name": "Parkplatz Lübbenau",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_parkplatz_poststrasse_ost_8_tag",
+      "name": "Parkplatz, Poststraße Ost 8€/Tag",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_marstall_lubbenau",
+      "name": "Marstall Lübbenau",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_beobachtungsturm_kranichwiese",
+      "name": "Beobachtungsturm Kranichwiese",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_barzlin",
+      "name": "Barzlin",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_pension_am_stadtgraben",
+      "name": "Pension \"Am Stadtgraben\"",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_minigolfplatz_lubbenau",
+      "name": "Minigolfplatz Lübbenau",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_spreewelten_hallenbad_delphin",
+      "name": "Spreewelten Hallenbad Delphin",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_tsg_lubbenau_63_e_v",
+      "name": "TSG Lübbenau 63 e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_blau_gelb_arena_tsg_lubbenau",
+      "name": "Blau-Gelb Arena TSG Lübbenau",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_bootsverleih_richter_kajaksports",
+      "name": "Bootsverleih Richter / Kajaksports",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_fussballplatz",
+      "name": "Fußballplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_bogenschiessplatz_ralf",
+      "name": "Bogenschießplatz Ralf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_bootsverleih_franke",
+      "name": "Bootsverleih Franke",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_dschungel_spielplatz",
+      "name": "Dschungel-Spielplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_bootsverleih_petrick",
+      "name": "Bootsverleih Petrick",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_fastfitness_lubbenau",
+      "name": "FastFitness Lübbenau",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_bunte_buhne",
+      "name": "Bunte Bühne",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_sauenmoor",
+      "name": "Sauenmoor",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_brucke",
+      "name": "Brücke",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_gasthaus_wotschofska",
+      "name": "Gasthaus Wotschofska",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_spreewald_touristinformation_lubbenau_e_v",
+      "name": "Spreewald-Touristinformation Lübbenau e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_leiper_weggraben",
+      "name": "Leiper Weggraben",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_fahrrad_vogi_verkauf_service_verleih",
+      "name": "Fahrrad Vogi - Verkauf - Service - Verleih",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_schleuse_barzlin",
+      "name": "Schleuse Barzlin",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_radschober",
+      "name": "Radschober",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_fahrrad_goyn",
+      "name": "Fahrrad Goyn",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_landwarenhaus_gross_beuchow",
+      "name": "Landwarenhaus Gross Beuchow",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_lubbenau_lehde",
+      "name": "Lübbenau, Lehde",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_raucherei_spreewaldspezialitaten",
+      "name": "Räucherei &Spreewaldspezialitäten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_freilandmuseum_lehde",
+      "name": "Freilandmuseum Lehde",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_stelter_s_freizeitoase_lubbenau_altstadt",
+      "name": "Stelter's Freizeitoase Lübbenau/Altstadt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_souvenirs_und_spielwaren_angela_glaubitz",
+      "name": "Souvenirs und Spielwaren Angela Glaubitz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_hauptspree_lehder_flies",
+      "name": "Hauptspree - Lehder Flies",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_bergbau_skulptur_baggerschaufel",
+      "name": "Bergbau-Skulptur Baggerschaufel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_stadtgraben_dorothengraben_lubbenau",
+      "name": "Stadtgraben - Dorothengraben (Lübbenau)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_kreuzgraben_dorothengraben",
+      "name": "Kreuzgraben - Dorothengraben",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_lehde",
+      "name": "Lehde",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_schwarzer_weg",
+      "name": "Schwarzer Weg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_wehr_und_schleuse_ragow",
+      "name": "Wehr und Schleuse Ragow",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_gurkenmuseum",
+      "name": "Gurkenmuseum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_gurkenmuseum_bauernhaus_in_der_hotelanlage_starick",
+      "name": "Gurkenmuseum & Bauernhaus in der Hotelanlage Starick",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_galerie_ro",
+      "name": "Galerie Ro",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_orangerie_schloss_lubbenau",
+      "name": "Orangerie Schloss Lübbenau",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_wochenmarkt_lubbenau",
+      "name": "Wochenmarkt Lübbenau",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_schloss_lubbenau",
+      "name": "Schloss Lübbenau",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_schloss_beuchow",
+      "name": "Schloss Beuchow",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_kleingartenverein_maxim_gorki",
+      "name": "Kleingartenverein Maxim Gorki",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_kgv_gluck_auf_e_v_lubbenau",
+      "name": "KGV Glück Auf e.V. Lübbenau",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_garten_grabpflege_martina_molle",
+      "name": "Garten & Grabpflege Martina Molle",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_bootsanleger_fur_gewerbliche_kahne",
+      "name": "Bootsanleger für gewerbliche Kähne",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_bootsverleih_bootshaus_kaupen",
+      "name": "Bootsverleih Bootshaus Kaupen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_bootsverleih_spreewald_kanus_kajak_kanu",
+      "name": "Bootsverleih Spreewald-Kanus / Kajak / Kanu /",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_bootsverleih_hannemann",
+      "name": "Bootsverleih Hannemann",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_spreewald_reederei_lubbenau",
+      "name": "Spreewald-Reederei Lübbenau",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_river_and_roots",
+      "name": "River and Roots",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_die_gurkerei_gurken_mehr_lubbenau",
+      "name": "Die Gurkerei - Gurken & mehr… - Lübbenau",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_tabakborse_ramona_hottas",
+      "name": "Tabakbörse Ramona Hottas",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_magic_moments",
+      "name": "Magic Moments",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_spreewaldladen",
+      "name": "spreewaldladen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_deutsches_rotes_kreuz_kreisverband_calau_e_v",
+      "name": "Deutsches Rotes Kreuz Kreisverband Calau e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_gipfelkreuz_schwarzer_berg",
+      "name": "Gipfelkreuz Schwarzer Berg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "spreewald_riesenmotorrad",
+      "name": "Riesenmotorrad",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "spreewald_schleuse_in_lubben",
+      "name": "Schleuse in Lübben",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "spreewald_kirche_gross_lubbenau_pfarrsprengel_lubbenau_und_umland",
+      "name": "Kirche Groß Lübbenau - Pfarrsprengel Lübbenau und Umland",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 2,
+      "had_approaches": 1
+    },
+    {
+      "id": "spreewald_schloss_lubben",
+      "name": "Schloss Lübben",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "spreewald_aussichtspunkt_mit_rastplatz",
+      "name": "Aussichtspunkt mit Rastplatz",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "spreewald_lubbenau_see",
+      "name": "Lübbenau See",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "spreewald_naturhafen_leipe",
+      "name": "Naturhafen Leipe",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "spreewald_streichelzoo_vom_landhotel_burg",
+      "name": "Streichelzoo vom Landhotel Burg",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    }
+  ]
+}

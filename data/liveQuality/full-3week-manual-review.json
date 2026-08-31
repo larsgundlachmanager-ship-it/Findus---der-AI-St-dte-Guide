@@ -1,0 +1,282 @@
+{
+  "manual_pass": 27,
+  "total": 43,
+  "auto_pass": 31,
+  "items": {
+    "wetter": {
+      "auto": "FAIL",
+      "manual": "FAIL",
+      "notes": [
+        "weather_empty"
+      ],
+      "snip": "✨ Was lohnt sich jetzt? | Kurzer Vorschlag passend zu dir · Tippen | Neu in Prisdorf? | Baustellen, Sperrungen, neue Spots — kurzer Stadt-Pulse, der den Tag leichter macht. | Museum, das zu dir passt?"
+    },
+    "outfit": {
+      "auto": "PASS",
+      "manual": "PASS",
+      "notes": [
+        "clothes_ok",
+        "stale_title"
+      ],
+      "snip": "🅿️ Parkplatz · T− 8 Std 25 Min | Geparkt seit 1 Std 16 Min · 😊 Tippen | ✨ Was lohnt sich jetzt? | Kurzer Vorschlag passend zu dir · Tippen | Neu in Prisdorf? | Baustellen, Sperrungen, neue Spots — kur"
+    },
+    "steak": {
+      "auto": "PASS",
+      "manual": "PASS",
+      "notes": [],
+      "snip": "🌧 Regen noch 42 Min | 16° · heute bis 20° | 🅿️ Parkplatz · T− 8 Std 24 Min | Geparkt seit 1 Std 17 Min · 😊 Tippen | ✨ Was lohnt sich jetzt? | Kurzer Vorschlag passend zu dir · Tippen | 0 von 29 Orten "
+    },
+    "steak_fu_reject": {
+      "auto": "PASS",
+      "manual": "PASS",
+      "notes": [],
+      "snip": "Museum, das zu dir passt? | Du magst Museen — ich kann das nächste Offene mit kurzer Route nennen. | 📍 Hier in der Gegend | 🌧 16° | heute bis 20° | 0 von 29 Orten · 0 % erkundet |  | Alternativen | ✕"
+    },
+    "vegan": {
+      "auto": "FAIL",
+      "manual": "FAIL",
+      "notes": [],
+      "snip": "✨ Was lohnt sich jetzt? | Kurzer Vorschlag passend zu dir · Tippen | Neu in Prisdorf? | Baustellen, Sperrungen, neue Spots — kurzer Stadt-Pulse, der den Tag leichter macht. | Museum, das zu dir passt?"
+    },
+    "veg_abend": {
+      "auto": "PASS",
+      "manual": "PASS",
+      "notes": [],
+      "snip": "🌧 16° | heute bis 20° | 🅿️ Parkplatz · T− 8 Std 19 Min | Geparkt seit 1 Std 22 Min · 😊 Tippen | ✨ Was lohnt sich jetzt? | Kurzer Vorschlag passend zu dir · Tippen | 0 von 29 Orten · 0 % erkundet |  |"
+    },
+    "angus": {
+      "auto": "FAIL",
+      "manual": "FAIL",
+      "notes": [],
+      "snip": "📍 Hier in der Gegend | 🌧 16° | heute bis 20° | 🅿️ Parkplatz · T− 8 Std 18 Min | Geparkt seit 1 Std 23 Min · 😊 Tippen | 0 von 29 Orten · 0 % erkundet |  |  |  | Timeline"
+    },
+    "pannfisch": {
+      "auto": "PASS",
+      "manual": "PASS",
+      "notes": [],
+      "snip": "Neu in Prisdorf? | Baustellen, Sperrungen, neue Spots — kurzer Stadt-Pulse, der den Tag leichter macht. | Museum, das zu dir passt? | Du magst Museen — ich kann das nächste Offene mit kurzer Route nen"
+    },
+    "fischbroetchen": {
+      "auto": "PASS",
+      "manual": "PASS",
+      "notes": [],
+      "snip": "🅿️ Parkplatz · T− 8 Std 15 Min | Geparkt seit 1 Std 26 Min · 😊 Tippen | ✨ Was lohnt sich jetzt? | Kurzer Vorschlag passend zu dir · Tippen | Neu in Prisdorf? | Baustellen, Sperrungen, neue Spots — kur"
+    },
+    "hotel_pool": {
+      "auto": "PASS",
+      "manual": "PASS",
+      "notes": [],
+      "snip": "Museum, das zu dir passt? | Du magst Museen — ich kann das nächste Offene mit kurzer Route nennen. | 📍 Hier in der Gegend | 🌧 16° | heute bis 20° | 0 von 29 Orten · 0 % erkundet |  | Alternativen | ✕"
+    },
+    "hotel_fu_pool": {
+      "auto": "PASS",
+      "manual": "PASS",
+      "notes": [],
+      "snip": "Was geht heute Abend? | Kino, Konzert, Markt, Open Air in Prisdorf — nur was noch läuft. | Museum, das zu dir passt? | Du magst Museen — ich kann das nächste Offene mit kurzer Route nennen. | 📍 Hier i"
+    },
+    "oepnv": {
+      "auto": "PASS",
+      "manual": "FAIL",
+      "notes": [
+        "too_thin"
+      ],
+      "snip": "✨ Was lohnt sich jetzt? | Kurzer Vorschlag passend zu dir · Tippen | Was geht heute Abend? | Kino, Konzert, Markt, Open Air in Prisdorf — nur was noch läuft. | Museum, das zu dir passt? | Du magst Mus"
+    },
+    "nav_prisdorf": {
+      "auto": "PASS",
+      "manual": "PASS",
+      "notes": [],
+      "snip": "Bahnhof Prisdorf | 356 m · ca. 5 Min · Ankunft 09:39 | 0 von 29 Orten · 0 % erkundet |  | 5 | Minuten. |  |  | Timeline | "
+    },
+    "nav_fast_hbf": {
+      "auto": "PASS",
+      "manual": "FAIL",
+      "notes": [
+        "wrong_hbf"
+      ],
+      "snip": "Bahnhof Prisdorf | 417 m · ca. 5 Min · Ankunft 09:41 | 0 von 29 Orten · 0 % erkundet |  | Sorry, |  |  | Timeline |  | Orte"
+    },
+    "toilet": {
+      "auto": "FAIL",
+      "manual": "FAIL",
+      "notes": [
+        "tippfeld_stuck"
+      ],
+      "snip": "Frage an Yorro | Schreib deine Frage an Yorro. | Abbrechen | Fragen | z. B. Seit wann gibt es den Bahnhof? | Bahnhof Prisdorf | 417 m · ca. 5 Min · Ankunft 09:42 | 0 von 29 Orten · 0 % erkundet |  | "
+    },
+    "flug_wien_taxi": {
+      "auto": "FAIL",
+      "manual": "FAIL",
+      "notes": [
+        "tippfeld_stuck"
+      ],
+      "snip": "Frage an Yorro | Schreib deine Frage an Yorro. | Abbrechen | Fragen | z. B. Seit wann gibt es den Bahnhof? | Was geht heute Abend? | Kino, Konzert, Markt, Open Air in Prisdorf — nur was noch läuft. | "
+    },
+    "flug_fu_leaveby": {
+      "auto": "PASS",
+      "manual": "PASS",
+      "notes": [],
+      "snip": "🅿️ Parkplatz · T− 8 Std 2 Min | Geparkt seit 1 Std 39 Min · 😊 Tippen | ✨ Was lohnt sich jetzt? | Kurzer Vorschlag passend zu dir · Tippen | Was geht heute Abend? | Kino, Konzert, Markt, Open Air in Pr"
+    },
+    "flug_fu_handgepaeck": {
+      "auto": "PASS",
+      "manual": "PASS",
+      "notes": [],
+      "snip": "📍 Hier in der Gegend | 🌧 17° | heute bis 21° | 🅿️ Parkplatz · T− 8 Std | Geparkt seit 1 Std 41 Min · 😊 Tippen | 0 von 29 Orten · 0 % erkundet |  | Airline? |  | "
+    },
+    "flug_barcelona": {
+      "auto": "FAIL",
+      "manual": "FAIL",
+      "notes": [],
+      "snip": "📍 Hier in der Gegend | 🌧 17° | heute bis 21° | 🅿️ Parkplatz · T− 7 Std 59 Min | Geparkt seit 1 Std 42 Min · 😊 Tippen | 0 von 29 Orten · 0 % erkundet |  | Wann fliegst du? | ✕ | • HAM → BCN"
+    },
+    "wangerooge": {
+      "auto": "FAIL",
+      "manual": "FAIL",
+      "notes": [],
+      "snip": "Was geht heute Abend? | Kino, Konzert, Markt, Open Air in Prisdorf — nur was noch läuft. | Museum, das zu dir passt? | Du magst Museen — ich kann das nächste Offene mit kurzer Route nennen. | 📍 Hier i"
+    },
+    "kino": {
+      "auto": "PASS",
+      "manual": "PASS",
+      "notes": [],
+      "snip": "Was geht heute Abend? | Kino, Konzert, Markt, Open Air in Prisdorf — nur was noch läuft. | Museum, das zu dir passt? | Du magst Museen — ich kann das nächste Offene mit kurzer Route nennen. | 📍 Hier i"
+    },
+    "kino_fu_spiderman": {
+      "auto": "PASS",
+      "manual": "PASS",
+      "notes": [],
+      "snip": "🅿️ Parkplatz · T− 7 Std 55 Min | Geparkt seit 1 Std 46 Min · 😊 Tippen | ✨ Was lohnt sich jetzt? | Kurzer Vorschlag passend zu dir · Tippen | Was geht heute Abend? | Kino, Konzert, Markt, Open Air in P"
+    },
+    "rooftop": {
+      "auto": "PASS",
+      "manual": "PASS",
+      "notes": [],
+      "snip": "Was geht heute Abend? | Kino, Konzert, Markt, Open Air in Prisdorf — nur was noch läuft. | Museum, das zu dir passt? | Du magst Museen — ich kann das nächste Offene mit kurzer Route nennen. | 📍 Hier i"
+    },
+    "kiel_party": {
+      "auto": "PASS",
+      "manual": "PASS",
+      "notes": [],
+      "snip": "Museum, das zu dir passt? | Du magst Museen — ich kann das nächste Offene mit kurzer Route nennen. | 📍 Hier in der Gegend | 🌧 17° | heute bis 21° | 0 von 29 Orten · 0 % erkundet |  | Programm in Kiel"
+    },
+    "compound_hh": {
+      "auto": "FAIL",
+      "manual": "FAIL",
+      "notes": [],
+      "snip": "Was geht heute Abend? | Kino, Konzert, Markt, Open Air in Prisdorf — nur was noch läuft. | Museum, das zu dir passt? | Du magst Museen — ich kann das nächste Offene mit kurzer Route nennen. | 📍 Hier i"
+    },
+    "compound_fu_punkte": {
+      "auto": "PASS",
+      "manual": "PASS",
+      "notes": [],
+      "snip": "‹ | So., 30. August | › | Heute | Leeren | Monat | ✕ | Route planen: sag Yorro wohin — sie erscheint in dieser Timeline, nicht extra auf dem Homescreen. | 📍 Basis jetzt: Hier | 🏠 Basis ab Plan-Tag: Pr"
+    },
+    "tour_1h": {
+      "auto": "PASS",
+      "manual": "PASS",
+      "notes": [],
+      "snip": "Museum, das zu dir passt? | Du magst Museen — ich kann das nächste Offene mit kurzer Route nennen. | 📍 Hier in der Gegend | 🌧 17° | heute bis 21° | 0 von 29 Orten · 0 % erkundet |  |  | Timeline | "
+    },
+    "kiel_combo": {
+      "auto": "FAIL",
+      "manual": "FAIL",
+      "notes": [],
+      "snip": "Was geht heute Abend? | Kino, Konzert, Markt, Open Air in Prisdorf — nur was noch läuft. | Museum, das zu dir passt? | Du magst Museen — ich kann das nächste Offene mit kurzer Route nennen. | 📍 Hier i"
+    },
+    "day_budget": {
+      "auto": "PASS",
+      "manual": "PASS",
+      "notes": [],
+      "snip": "📍 Hier in der Gegend | 🌧 17° | heute bis 21° | 🅿️ Parkplatz · T− 7 Std 43 Min | Geparkt seit 1 Std 58 Min · 😊 Tippen | 0 von 29 Orten · 0 % erkundet |  | Keine tagesaktuellen Live-Daten für | ✕ | • K"
+    },
+    "modul1": {
+      "auto": "PASS",
+      "manual": "PASS",
+      "notes": [],
+      "snip": "✨ Was lohnt sich jetzt? | Kurzer Vorschlag passend zu dir · Tippen | Museum, das zu dir passt? | Du magst Museen — ich kann das nächste Offene mit kurzer Route nennen. | Pause / Park? | 😊 Tippen für V"
+    },
+    "modul1_fu_mehr": {
+      "auto": "PASS",
+      "manual": "PASS",
+      "notes": [],
+      "snip": "🌧 17° | heute bis 21° | 🅿️ Parkplatz · T− 7 Std 40 Min | Geparkt seit 2 Std 1 Min · 😊 Tippen | ✨ Was lohnt sich jetzt? | Kurzer Vorschlag passend zu dir · Tippen | 0 von 29 Orten · 0 % erkundet |  | "
+    },
+    "elbe_width": {
+      "auto": "PASS",
+      "manual": "PASS",
+      "notes": [],
+      "snip": "Museum, das zu dir passt? | Du magst Museen — ich kann das nächste Offene mit kurzer Route nennen. | Pause / Park? | 😊 Tippen für Vorschlag | 📍 Hier in der Gegend | 0 von 29 Orten · 0 % erkundet |  |"
+    },
+    "fuss_notfall": {
+      "auto": "FAIL",
+      "manual": "FAIL",
+      "notes": [],
+      "snip": "📍 Hier in der Gegend | 🌧 17° | heute bis 21° | 🅿️ Parkplatz · T− 7 Std 37 Min | Geparkt seit 2 Std 4 Min · 😊 Tippen | 0 von 29 Orten · 0 % erkundet |  |  |  | Timeline"
+    },
+    "zahn": {
+      "auto": "FAIL",
+      "manual": "FAIL",
+      "notes": [],
+      "snip": "Pause / Park? | 😊 Tippen für Vorschlag | 📍 Hier in der Gegend | 🌧 17° | heute bis 21° | 0 von 29 Orten · 0 % erkundet |  |  |  | Timeline"
+    },
+    "apotheke": {
+      "auto": "PASS",
+      "manual": "PASS",
+      "notes": [],
+      "snip": "Museum, das zu dir passt? | Du magst Museen — ich kann das nächste Offene mit kurzer Route nennen. | Pause / Park? | 😊 Tippen für Vorschlag | 📍 Hier in der Gegend | 0 von 29 Orten · 0 % erkundet |  |"
+    },
+    "london": {
+      "auto": "PASS",
+      "manual": "PASS",
+      "notes": [],
+      "snip": " | Yorro Reisebüro | Von welchem Startort reist ihr ab? | grün muss | gelb Wunsch | weiß optional | rot No-Go | 📅 | Wochenende · 2 Nächte | 📍"
+    },
+    "lisbon": {
+      "auto": "PASS",
+      "manual": "PASS",
+      "notes": [],
+      "snip": " | Yorro Reisebüro | Was ist euer Budget? | grün muss | gelb Wunsch | weiß optional | rot No-Go | 📅 | Wochenende · 2 Nächte | 📍"
+    },
+    "scooter": {
+      "auto": "FAIL",
+      "manual": "FAIL",
+      "notes": [],
+      "snip": "Pause / Park? | 😊 Tippen für Vorschlag | 📍 Hier in der Gegend | 🌧 17° | heute bis 21° | 0 von 29 Orten · 0 % erkundet |  |  |  | Timeline"
+    },
+    "pass_lost": {
+      "auto": "PASS",
+      "manual": "FAIL",
+      "notes": [
+        "not_consulate"
+      ],
+      "snip": "✨ Was lohnt sich jetzt? | Kurzer Vorschlag passend zu dir · Tippen | Museum, das zu dir passt? | Du magst Museen — ich kann das nächste Offene mit kurzer Route nennen. | Pause / Park? | 😊 Tippen für V"
+    },
+    "spikeball": {
+      "auto": "PASS",
+      "manual": "PASS",
+      "notes": [],
+      "snip": "Pause / Park? | 😊 Tippen für Vorschlag | 📍 Hier in der Gegend | 🌧 17° | heute bis 21° | 0 von 29 Orten · 0 % erkundet |  |  |  | Timeline"
+    },
+    "museum_trex": {
+      "auto": "PASS",
+      "manual": "FAIL",
+      "notes": [
+        "thin_museum"
+      ],
+      "snip": "Pause / Park? | 😊 Tippen für Vorschlag | 📍 Hier in der Gegend | 🌧 17° | heute bis 21° | 0 von 29 Orten · 0 % erkundet |  | Museum | ✕ | • Museum"
+    },
+    "parking_ticket": {
+      "auto": "PASS",
+      "manual": "PASS",
+      "notes": [],
+      "snip": "Pause / Park? | 😊 Tippen für Vorschlag | 📍 Hier in der Gegend | 🌧 17° | heute bis 21° | 0 von 29 Orten · 0 % erkundet |  |  | Timeline | "
+    },
+    "aldi": {
+      "auto": "PASS",
+      "manual": "PASS",
+      "notes": [],
+      "snip": "📍 Hier in der Gegend | 🌧 17° | heute bis 21° | 🅿️ Parkplatz · T− 7 Std 20 Min | Geparkt seit 2 Std 21 Min · 😊 Tippen | 0 von 29 Orten · 0 % erkundet |  | ✕ | 🎟️ Touren suchen | *"
+    }
+  }
+}

@@ -1,0 +1,2 @@
+﻿--------- beginning of main
+08-21 23:23:22.935 11111 11154 I ReactNativeJS: [stt] recognition started

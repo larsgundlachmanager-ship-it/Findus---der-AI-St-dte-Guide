@@ -1,0 +1,15 @@
+08-22 23:46:28.784     0     0 W [    C1] [rt_task_fixup][725]: RT task was runnable for more than 200000 ns on CPU 1, moved it to CPU 0 (rcu_preempt-14)
+08-22 23:46:28.984     0     0 W [    C2] [rt_task_fixup][725]: RT task was runnable for more than 200000 ns on CPU 2, moved it to CPU 0 (crtc_commit:146-1151)
+08-22 23:46:29.036     0     0 W [    C1] [rt_task_fixup][725]: RT task was runnable for more than 200000 ns on CPU 1, moved it to CPU 0 (rcuog/0-15)
+08-22 23:46:29.795  7437  7437 I TaskService: Handling intent with task name 'FINDUS_BACKGROUND_LOCATION' and app scoping identifier 'de.findus.app'.
+08-22 23:46:29.795  7437  7437 W JobInfo : Job 'de.findus.app/expo.modules.taskManager.TaskJobService#0' has a deadline with no functional constraints. The deadline won't improve job execution latency. Consider removing the deadline.
+08-22 23:46:29.818  3070  4432 W JobInfo : Job 'de.findus.app/expo.modules.taskManager.TaskJobService#0' has a deadline with no functional constraints. The deadline won't improve job execution latency. Consider removing the deadline.
+08-22 23:46:29.821  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: bindService is called for service : de.findus.app/expo.modules.taskManager.TaskJobService and for client system
+08-22 23:46:29.821  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: total connections for service : de.findus.app/expo.modules.taskManager.TaskJobServiceare :1
+08-22 23:46:29.830  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: unbindService is called for service : de.findus.app/expo.modules.taskManager.TaskJobService and for client system
+08-22 23:46:29.830  3070  4420 W JobScheduler: Job didn't exist in JobStore: 5919b50 #u0a520/0 de.findus.app/expo.modules.taskManager.TaskJobService
+08-22 23:46:29.831  7437  7437 I TaskService: Handling job with task name 'FINDUS_BACKGROUND_LOCATION' for app with scoping identifier 'de.findus.app'.
+08-22 23:46:30.399  7437  7437 D FindusCompass: deg=318.9906769589685 acc=-1
+08-22 23:46:30.340     0     0 W [    C2] [rt_task_fixup][725]: RT task was runnable for more than 200000 ns on CPU 2, moved it to CPU 1 (rcu_preempt-14)
+08-22 23:46:30.512     0     0 W [    C0] [rt_task_fixup][725]: RT task was runnable for more than 200000 ns on CPU 0, moved it to CPU 1 (gmu_f2h-2279)
+08-22 23:46:30.513     0     0 W [    C1] [rt_task_fixup][725]: RT task was runnable for more than 200000 ns on CPU 1, moved it to CPU 0 (gmu_f2h-2279)

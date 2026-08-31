@@ -5,6 +5,32 @@
 
 export type OfferKind = 'menu' | 'drinks' | 'ticket' | 'web';
 
+/** Domain-Root / index — nie als Speisekarte verkaufen. */
+export function isBareSiteUrl(url: string): boolean {
+  try {
+    const u = new URL(url.trim());
+    const p = (u.pathname || '/').replace(/\/+$/, '') || '/';
+    return p === '/' || /^\/(index|home|start)(\.(html?|php))?$/i.test(p);
+  } catch {
+    return false;
+  }
+}
+
+/** Echte Menü-/PDF-URL (Wix `/_files/ugd/`, /karte, Speisekarte) — nicht Homepage. */
+export function isMenuAssetUrl(url: string): boolean {
+  const raw = url.trim();
+  if (!/^https?:\/\//i.test(raw) || isBareSiteUrl(raw)) return false;
+  const blob = raw.toLowerCase();
+  return (
+    /\.pdf(\?|#|$)/i.test(blob) ||
+    /\/_files\/ugd\//i.test(blob) ||
+    /\/ugd\/[a-z0-9_]+/i.test(blob) ||
+    /speisekarte|speise-?karte|menuekarte|menükarte|food[\-_]?menu/i.test(blob) ||
+    /tageskarte|mittagskarte|dessertkarte|specialkarte|wochenkarte/i.test(blob) ||
+    /\/(menu|menue|speisen|karte|tageskarte|mittagskarte)(\/|\.pdf|$|\?)/i.test(blob)
+  );
+}
+
 export function isSafeOfferUrl(url: string): boolean {
   const u = url.trim();
   if (!/^https?:\/\//i.test(u)) return false;
@@ -26,7 +52,7 @@ export function detectOfferKind(blob: string): OfferKind {
     return 'drinks';
   }
   if (
-    /\b(museum|galerie|ausstellung|konzert|event|ticket|theater|oper|kino|show)\b/i.test(
+    /\b(museum|galerie|ausstellung|konzert|event|ticket|theater|oper|kino|show|kirche|dom|turm|michel|aussicht|plattform|sehenswürdigkeit|sehenswuerdigkeit)\b/i.test(
       t,
     )
   ) {
@@ -57,6 +83,7 @@ export function offerLabel(kind: OfferKind): {
 export function urlMatchesOfferKind(url: string, kind: OfferKind): boolean {
   const blob = url.toLowerCase();
   if (kind === 'menu') {
+    if (!isMenuAssetUrl(url)) return false;
     if (
       /getränk|getraenk|drinks?|beverage/i.test(blob) &&
       !/speise|food|menu|karte/i.test(blob)

@@ -2,6 +2,7 @@
  * Supabase Auth — Google / Apple / Magic Link + Session Persist.
  */
 
+import { Platform } from 'react-native';
 import * as Linking from 'expo-linking';
 import * as WebBrowser from 'expo-web-browser';
 import { getSupabase, isSupabaseConfigured } from '../supabase';
@@ -131,6 +132,124 @@ export async function signInWithOAuthProvider(
   });
   if (error) return { ok: false, error: error.message };
   return { ok: true, url: data.url };
+}
+
+export type AuthSignInResult = {
+  ok: boolean;
+  user?: AuthSessionUser;
+  error?: string;
+  cancelled?: boolean;
+};
+
+/** In-App-Browser OAuth (Google überall, Apple-Fallback). */
+export async function signInWithOAuthInApp(
+  provider: 'google' | 'apple',
+): Promise<AuthSignInResult> {
+  const res = await signInWithOAuthProvider(provider);
+  if (!res.ok || !res.url) {
+    return { ok: false, error: res.error ?? 'Login nicht verfügbar' };
+  }
+  const redirect = getAuthRedirectUrl();
+  const result = await WebBrowser.openAuthSessionAsync(res.url, redirect);
+  if (result.type !== 'success' || !result.url) {
+    return {
+      ok: false,
+      cancelled: result.type === 'cancel' || result.type === 'dismiss',
+      error: 'Anmeldung abgebrochen oder fehlgeschlagen.',
+    };
+  }
+  const user = await handleAuthRedirectUrl(result.url);
+  if (!user) {
+    return { ok: false, error: 'Anmeldung abgebrochen oder fehlgeschlagen.' };
+  }
+  return { ok: true, user };
+}
+
+export async function signInWithGoogle(): Promise<AuthSignInResult> {
+  return signInWithOAuthInApp('google');
+}
+
+function randomNonce(): string {
+  const bytes = new Uint8Array(16);
+  if (typeof globalThis.crypto?.getRandomValues === 'function') {
+    globalThis.crypto.getRandomValues(bytes);
+  } else {
+    for (let i = 0; i < bytes.length; i++) {
+      bytes[i] = Math.floor(Math.random() * 256);
+    }
+  }
+  return Array.from(bytes, (b) => b.toString(16).padStart(2, '0')).join('');
+}
+
+async function sha256Hex(value: string): Promise<string> {
+  try {
+    const Crypto = await import('expo-crypto');
+    return Crypto.digestStringAsync(Crypto.CryptoDigestAlgorithm.SHA256, value);
+  } catch {
+    return value;
+  }
+}
+
+/** iOS: natives Sign in with Apple. Sonst / bei Fehler: OAuth wie Google. */
+export async function signInWithApple(): Promise<AuthSignInResult> {
+  if (Platform.OS === 'ios') {
+    try {
+      const AppleAuthentication = await import('expo-apple-authentication');
+      const available = await AppleAuthentication.isAvailableAsync();
+      if (available) {
+        const rawNonce = randomNonce();
+        const hashedNonce = await sha256Hex(rawNonce);
+        const credential = await AppleAuthentication.signInAsync({
+          requestedScopes: [
+            AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
+            AppleAuthentication.AppleAuthenticationScope.EMAIL,
+          ],
+          nonce: hashedNonce,
+        });
+        const sb = getSupabase();
+        if (!sb || !credential.identityToken) {
+          return { ok: false, error: 'Apple-Login fehlgeschlagen.' };
+        }
+        const { data, error } = await sb.auth.signInWithIdToken({
+          provider: 'apple',
+          token: credential.identityToken,
+          nonce: rawNonce,
+        });
+        if (!error && data.user) {
+          lastSessionUser = mapUser(data.user);
+          const given = credential.fullName?.givenName?.trim();
+          const family = credential.fullName?.familyName?.trim();
+          const fullName = [given, family].filter(Boolean).join(' ');
+          if (fullName) {
+            await sb.auth.updateUser({
+              data: {
+                full_name: fullName,
+                given_name: given,
+                family_name: family,
+              },
+            });
+            lastSessionUser = { ...lastSessionUser, fullName };
+          }
+          return { ok: true, user: lastSessionUser };
+        }
+        console.warn('[auth] apple native failed:', error?.message);
+      }
+    } catch (err) {
+      const code =
+        err && typeof err === 'object' && 'code' in err
+          ? String((err as { code?: string }).code)
+          : '';
+      if (code === 'ERR_REQUEST_CANCELED') {
+        return {
+          ok: false,
+          cancelled: true,
+          error: 'Anmeldung abgebrochen oder fehlgeschlagen.',
+        };
+      }
+      console.warn('[auth] apple native error:', err);
+    }
+  }
+  return signInWithOAuthInApp('apple');
 }
 
 function dismissAuthBrowserSoft() {

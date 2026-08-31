@@ -33,7 +33,9 @@ function parseReminder(text: string): {
     atMs = d.getTime();
   }
   const isWake =
-    /\b(weck|wecker|aufweck|wecke)\w*\b/i.test(text) || isPowerNap;
+    /\b(weck|wecker|aufweck|wecke|geweckt|auf\s*steh|aufsteh|alarm)\w*\b/i.test(
+      text,
+    ) || isPowerNap;
   let label = isWake ? 'Aufstehen' : 'Erinnerung';
   if (isPowerNap) label = 'Powernap';
   else if (/zähne|zaehne|putzen/i.test(text)) label = 'Zähne putzen';
@@ -120,16 +122,21 @@ export const triggerAgent: Module2Agent = {
       return {
         agent: 'trigger',
         ok: started.ok,
-        draftText: [
-          'FAKTEN Trigger:',
-          `Aktion: ${label}`,
-          `Dauer: ${Math.round(durationMs / 60_000)} Min`,
-          started.ok ? 'Timer aktiv + Timeline eingetragen' : 'Timer fehlgeschlagen',
-          'FLOW: Bridge fortsetzen → knappe Bestätigung, kein zweites „ich verstehe Timer“.',
-        ].join('\n'),
-        bullets: [],
+        draftText: started.ok
+          ? `${label} läuft ${Math.round(durationMs / 60_000)} Minuten — Timer steht.`
+          : started.speech ||
+            `Timer für ${label} ging gerade nicht.`,
+        bullets: started.ok
+          ? [`⏱️ ${Math.round(durationMs / 60_000)} Min`]
+          : [],
         buttons: [],
-        meta: { label, durationMs, endsAtMs: started.endsAtMs },
+        meta: {
+          label,
+          durationMs,
+          endsAtMs: started.endsAtMs,
+          skipLlm: true,
+          timeTrigger: true,
+        },
         error: started.ok
           ? undefined
           : { code: 'timer', message: started.speech },
@@ -140,15 +147,10 @@ export const triggerAgent: Module2Agent = {
       return {
         agent: 'trigger',
         ok: true,
-        draftText: [
-          'FAKTEN Trigger:',
-          `Label: ${label}`,
-          'Status: Uhrzeit fehlt',
-          'FLOW: eine gezielte Rückfrage zur Uhrzeit — Wortlaut frei.',
-        ].join('\n'),
+        draftText: `Für ${label} brauche ich noch die Uhrzeit — wann soll ich dich wecken?`,
         bullets: [],
         buttons: [],
-        meta: { label, atMs: null },
+        meta: { label, atMs: null, skipLlm: true, timeTrigger: true },
       };
     }
 
@@ -167,13 +169,8 @@ export const triggerAgent: Module2Agent = {
       return {
         agent: 'trigger',
         ok: true,
-        draftText: [
-          'FAKTEN Trigger:',
-          `Bestehend: ${oldWhen}`,
-          `Neu: ${when}`,
-          'FLOW: Konflikt — ersetzen oder zweiten stellen (Buttons).',
-        ].join('\n'),
-        bullets: [],
+        draftText: `Du hast schon einen Wecker um ${oldWhen}. Soll ich auf ${when} aktualisieren oder einen zweiten stellen?`,
+        bullets: [`Bestehend ${oldWhen}`, `Neu ${when}`],
         buttons: [
           {
             id: 'wake_replace',
@@ -203,21 +200,26 @@ export const triggerAgent: Module2Agent = {
             },
           },
         ],
-        meta: { label, atMs, needsChoice: true },
+        meta: {
+          label,
+          atMs,
+          needsChoice: true,
+          skipLlm: true,
+          timeTrigger: true,
+        },
       };
     }
 
     return {
       agent: 'trigger',
       ok: result.ok,
-      draftText: [
-        'FAKTEN Trigger:',
-        `Label: ${label}`,
-        `Zeit: ${when}`,
-        result.ok ? 'Wecker aktiv + Timeline' : 'Wecker fehlgeschlagen',
-        'FLOW: knappe Bestätigung auf Bridge aufbauend.',
-      ].join('\n'),
-      bullets: [],
+      draftText: result.ok
+        ? isWake
+          ? `Ich habe deinen Wecker auf ${when} gestellt.`
+          : `Erinnerung um ${when} für ${label} ist gesetzt.`
+        : result.message ||
+          `Konnte den ${isWake ? 'Wecker' : 'Timer'} um ${when} nicht setzen.`,
+      bullets: result.ok ? [`⏰ ${when}`] : [],
       buttons: result.ok
         ? []
         : [
@@ -234,7 +236,14 @@ export const triggerAgent: Module2Agent = {
               },
             },
           ],
-      meta: { label, atMs, channel: result.channel },
+      meta: {
+        label,
+        atMs,
+        channel: result.channel,
+        skipLlm: true,
+        timeTrigger: true,
+        alarmActuallySet: result.ok === true,
+      },
       error: result.ok
         ? undefined
         : { code: 'wake_alarm', message: result.message ?? 'fail' },

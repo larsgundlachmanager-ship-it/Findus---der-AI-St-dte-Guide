@@ -1,5 +1,5 @@
 /**
- * Feature-Tips: Findus erwähnt App-Potenzial höchstens einmal (abgehakt),
+ * Feature-Tips: Yorro erwähnt App-Potenzial höchstens einmal (abgehakt),
  * situativ und nie überladen — max. ein Tip pro Story.
  */
 
@@ -297,26 +297,26 @@ export function hasSpokenFeatureTip(
   return s.spoken.includes(id) || s.completed.includes(id);
 }
 
-/** Kurztexte für den Master-Prompt — Findus formuliert selbst, knackig. */
+/** Kurztexte für den Master-Prompt — Yorro formuliert selbst, knackig. */
 export const FEATURE_TIP_PROMPT: Record<FeatureTipId, string> = {
   ask_followups:
     'Rückfragen: Einmal beiläufig, dass man dich zu Details fragen kann — ohne „Soll ich…?“ und ohne Druck. Kein App-Handbuch.',
   navigation:
     'Navigation: Einmal knapp, dass du zu Orten führen kannst — z. B. „Ich kann dich auch hin navigieren, teste es einfach.“ Kein Spam.',
   voice_mic:
-    'Mikrofon: Einmal klar — kurz tippen = schreiben, lange halten = sprechen (unterbricht Findus).',
+    'Mikrofon: Einmal klar die vier Gesten — halten = sofort zuhören; kurz tippen = Tippfeld; während Halten nach rechts = Feststelltaste (Mikro bleibt an); nach links = Live-Chat. Kein Handbuch, ein Halbsatz reicht.',
   tune_profile:
-    'Profil: Einmal, dass Interessen in den Einstellungen Findus persönlicher machen — ein Halbsatz reicht.',
+    'Profil: Einmal, dass Interessen in den Einstellungen Yorro persönlicher machen — ein Halbsatz reicht.',
   session_memory:
     'Gedächtnis: Einmal, dass du dir merkst, was ihr schon gesehen habt / was ihn interessiert.',
   visit_passport:
-    'Stempel/Pass: Einmal, dass oben die Karte/Stempelkarte ist — erkundete Orte & Stadt-% .',
+    'Orte: Einmal, dass unten Orte Legende und Suche sind — und oben der Erkundungs-Zähler.',
   mute_museum:
-    'Museum/Indoor: Einmal erklären, dass man Findus stumm schalten kann — Wake nach 1 Std., 2 Std., Uhrzeit oder 100/200 m Geofence. Kein „Wegweiser“ sagen.',
+    'Museum/Indoor: Einmal erklären, dass man Yorro stumm schalten kann — Wake nach 1 Std., 2 Std., Uhrzeit oder 100/200 m Geofence. Kein „Wegweiser“ sagen.',
   plan_calendar:
     'Kalender: Einmal, dass oben rechts der Plan-/Tageskalender steckt — Tippen öffnet die Timeline.',
   settings_gear:
-    'Zahnrad: Einmal, dass oben rechts die Einstellungen sind (Profil, Trigger, Erklärungen).',
+    'Einstellungen: Einmal, dass unten rechts unter Einst. Profil, Audio und Erklärungen liegen.',
   triggers:
     'Trigger: Einmal, dass Leave-by/Erinnerungen unter Einstellungen → Meine Trigger liegen und automatisch mit dem Plan laufen.',
   live_delays:

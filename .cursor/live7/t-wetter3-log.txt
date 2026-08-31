@@ -1,0 +1,2 @@
+08-23 00:44:20.817     0     0 W [    C1] [rt_task_fixup][725]: RT task was runnable for more than 200000 ns on CPU 1, moved it to CPU 0 (rcu_preempt-14)
+08-23 00:44:21.364     0     0 W [    C0] [rt_task_fixup][725]: RT task was runnable for more than 200000 ns on CPU 0, moved it to CPU 1 (RegionSampling-2515)

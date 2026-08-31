@@ -7,7 +7,8 @@
  *
  * Steps:
  *   skeleton → directory → classify → live-hints → wiki-enrich
- *   → baseline polish → entrances → cover → gate → agent-brief.md
+ *   → baseline polish → review-facets (Gastro-Tags aus Reviews)
+ *   → GPS/Wegweiser-Loop (inkl. OSM-Umrisse) → cover → gate → agent-brief.md
  *
  * Wangerooge-level depth still needs Agent web-research on T1 after this
  * (see .cursor/rules/findus-city-auto.mdc).
@@ -24,6 +25,7 @@ import {
   savePack,
   slugify,
   distM,
+  packCostIsCheap,
 } from './lib.mjs';
 import { runQualityGate } from './qualityGate.mjs';
 import { findPending, pendingBriefSection } from './pendingCovers.mjs';
@@ -196,6 +198,8 @@ function main() {
   const doUpload = hasFlag('upload');
   const skipWiki = hasFlag('skip-wiki');
   const radius = arg('radius');
+  const cheap = packCostIsCheap();
+  console.log(`[auto] cost-mode=${cheap ? 'cheap' : 'full'} (FINDUS_PACK_COST / --cheap / --full)`);
 
   const skeletonArgs = ['--city', city, '--id', id];
   if (radius) skeletonArgs.push('--radius', String(radius));
@@ -203,14 +207,20 @@ function main() {
   run('expandCityDirectory.mjs', ['--city', id], 'directory');
   const classifyArgs = ['--city', id];
   if (radius) classifyArgs.push('--radius', String(radius));
+  if (cheap) classifyArgs.push('--skip-discover');
   run('classifyPackCategories.mjs', classifyArgs, 'classify');
   run('seedLiveHints.mjs', ['--city', id, '--apply'], 'live-hints');
 
   if (!skipWiki) {
     try {
-      run('enrichFromWikipedia.mjs', ['--city', id, '--apply', '--limit', '25'], 'wikipedia');
+      run('enrichFromWikipedia.mjs', ['--city', id, '--apply', '--limit', '40'], 'wikipedia');
     } catch (e) {
       console.warn('[auto] wikipedia failed (non-fatal) — Agent Deep Research übernimmt Tiefe', e?.message || e);
+    }
+    try {
+      run('expandStoryWiki.mjs', ['--city', id], 'wiki-depth');
+    } catch (e) {
+      console.warn('[auto] wiki-depth failed (non-fatal)', e?.message || e);
     }
   }
 
@@ -219,7 +229,17 @@ function main() {
   savePack(pack, { bumpVersion: true });
   console.log(`[auto] polish demoted=${polish.demoted} promoted=${polish.promoted}`);
 
-  run('auditEntrances.mjs', ['--city', id, '--apply'], 'entrances');
+  try {
+    run('enrichReviewFacets.mjs', ['--city', id], 'review-facets');
+  } catch (e) {
+    console.warn('[auto] review-facets failed (non-fatal)', e?.message || e);
+  }
+
+  run(
+    'gpsWegweiserLoop.mjs',
+    ['--city', id],
+    'gps-wegweiser (story pins + visual approaches + OSM footprints)',
+  );
 
   const pendingCover = findPending(id);
   const hasLocalCover = fs.existsSync(

@@ -3,6 +3,10 @@
  * Fallback Luftlinie. Pace aus User-Profil (walk/bike).
  */
 
+import {
+  formatDurationMinutesDe,
+  formatDwellSinceDe,
+} from './travelEtaFormat';
 import { haversineMeters } from '../../db/database';
 import { getCachedUserProfile } from '../userProfileService';
 import { resolvePersonaEngine } from '../personaEngine';
@@ -13,10 +17,6 @@ import {
 } from '../weather/weatherRouting';
 import { getWeatherRoutingAdjustment } from '../weatherService';
 import {
-  getPlanBikeMPerMin,
-  getPlanWalkMPerMin,
-} from '../mobility/paceProfile';
-import {
   fetchRouteDirectionsResult,
   walkingDistanceFromSteps,
 } from './googleMapsNav';
@@ -24,6 +24,12 @@ import {
   formatObstacleBufferHint,
 } from './routeObstaclePolicy';
 import { scanRouteObstaclesWithFallback } from './routeObstacleScan';
+import {
+  getPlanBikeMPerMin,
+  getPlanWalkKmhForSpeech,
+  getPlanWalkMPerMinForSpeech,
+  hasLearnedPace,
+} from '../mobility/paceProfile';
 
 /** Grobe Insel-Bounding-Box Wangerooge (ohne Harlesiel-Festland). */
 const WANGEROOGE_BOX = {
@@ -46,6 +52,8 @@ export function formatDistanceKmOrM(distanceM: number): string {
   }
   return `${m} m`;
 }
+
+export { formatDurationMinutesDe, formatDwellSinceDe };
 
 export type TravelEta = {
   /** Distanz Route oder Fallback Luftlinie (m) */
@@ -84,7 +92,7 @@ function cityId(): string {
 }
 
 function walkMpm(): number {
-  return getPlanWalkMPerMin();
+  return getPlanWalkMPerMinForSpeech();
 }
 
 function bikeMpm(): number {
@@ -123,10 +131,45 @@ function buildEtaFromDistance(opts: {
   destLng: number;
   obstacleBufferMin?: number;
   obstacleHint?: string | null;
+  /**
+   * Provider-Dauer (Google Maps / OSRM) in Sekunden.
+   * Default-Baseline; wird mit gelerntem User-Pace skaliert.
+   */
+  providerDurationSec?: number | null;
 }): TravelEta {
   const weather = getWeatherRoutingAdjustment(opts.destName);
   const distanceM = Math.round(opts.distanceM);
-  const directWalkMinutes = walkMinutesForDistanceM(distanceM, weather);
+
+  // Baseline: Provider-Zeit (Maps/OSRM) → sonst Distanz × Pace
+  let directWalkMinutes: number;
+  const providerSec =
+    typeof opts.providerDurationSec === 'number' &&
+    Number.isFinite(opts.providerDurationSec) &&
+    opts.providerDurationSec > 0
+      ? opts.providerDurationSec
+      : null;
+
+  if (providerSec != null) {
+    let baseMin = Math.max(1, Math.ceil(providerSec / 60));
+    // Gelerntes Tempo: nur verlangsamen wenn User langsamer als Maps — nie „sportlicher“
+    if (hasLearnedPace('walk') && distanceM > 40) {
+      const impliedKmh = distanceM / 1000 / (providerSec / 3600);
+      const userKmh = getPlanWalkKmhForSpeech();
+      if (impliedKmh > 0.8 && userKmh > 0.8) {
+        const ratio = impliedKmh / userKmh;
+        if (ratio > 1.08) {
+          baseMin = Math.max(1, Math.ceil(baseMin * ratio));
+        }
+      }
+    }
+    directWalkMinutes = applyWalkEtaWeatherMultiplier(
+      baseMin,
+      weather.walkEtaMultiplier,
+    );
+  } else {
+    directWalkMinutes = walkMinutesForDistanceM(distanceM, weather);
+  }
+
   const bikeMinutes = bikeMinutesForDistanceM(distanceM);
   const obstacleBufferMin = Math.max(0, Math.round(opts.obstacleBufferMin ?? 0));
   const obstacleHint =
@@ -184,8 +227,8 @@ function buildEtaFromDistance(opts: {
       Math.max(directWalkMinutes, 45) + obstacleBufferMin;
     const label =
       directWalkMinutes >= 60
-        ? `eher ${Math.round(directWalkMinutes / 60)} Stunden unterwegs`
-        : `circa ${totalMinutes} Minuten (nicht nur kurzer Fußweg)`;
+        ? `eher ${formatDurationMinutesDe(directWalkMinutes, 'short')} unterwegs`
+        : `${formatDurationMinutesDe(totalMinutes, 'short')} (nicht nur kurzer Fußweg)`;
     return {
       distanceM,
       routed: opts.routed,
@@ -199,8 +242,8 @@ function buildEtaFromDistance(opts: {
       obstacleBufferMin,
       obstacleHint,
       promptHint:
-        `ETA vom aktuellen GPS (${distLabel}): circa ${directWalkMinutes} Min zu Fuß / ${bikeMinutes} Min Rad (User-Pace). ` +
-        `Keine kürzere Zeit erfinden.` +
+        `ETA vom aktuellen GPS (${distLabel}): ${formatDurationMinutesDe(directWalkMinutes, 'speech')} zu Fuß / ${formatDurationMinutesDe(bikeMinutes, 'speech')} Rad (User-Pace). ` +
+        `Ab ~20 Min Fuß ÖPNV bevorzugen — keine Fantasie-Fußmärsche vorlesen.` +
         rainHint +
         obstaclePrompt,
     };
@@ -212,21 +255,26 @@ function buildEtaFromDistance(opts: {
   const totalMinutes = baseMinutes + obstacleBufferMin;
   const bufferLabel =
     obstacleBufferMin > 0 ? ` inkl. ${obstacleBufferMin} Min Puffer` : '';
+  const paceNote = providerSec != null
+    ? hasLearnedPace('walk')
+      ? 'Maps-Baseline, an dein Tempo angepasst'
+      : 'Maps-/Router-Standardzeit'
+    : 'persönliches Tempo';
   return {
     distanceM,
     routed: opts.routed,
     directWalkMinutes,
     bikeMinutes,
     totalMinutes,
-    label: `${modeLabel} circa ${totalMinutes} Minuten${bufferLabel} · ${formatDistanceKmOrM(distanceM)} Route`,
+    label: `${modeLabel} ${formatDurationMinutesDe(totalMinutes, 'short')}${bufferLabel} · ${formatDistanceKmOrM(distanceM)} Route`,
     needsFerryLogistics: false,
     weatherWalkMultiplier: weather.walkEtaMultiplier,
     weatherVoiceAlert: weather.voiceAlert,
     obstacleBufferMin,
     obstacleHint,
     promptHint:
-      `ETA vom aktuellen GPS zu „${name}“: ${distLabel} ≈ ${directWalkMinutes} Min Fuß / ${bikeMinutes} Min Rad (persönliches Tempo). ` +
-      `Nur diese Zahlen nutzen — keine Fantasie-Minuten, keine Luftlinie als Route verkaufen.` +
+      `ETA vom aktuellen GPS zu „${name}“: ${distLabel} ≈ ${formatDurationMinutesDe(directWalkMinutes, 'short')} Fuß / ${formatDurationMinutesDe(bikeMinutes, 'short')} Rad (${paceNote}). ` +
+      `Nur diese Zahlen nutzen — ab ~20 Min Fuß ÖPNV, keine Fantasie-Fußmärsche.` +
       rainHint +
       obstaclePrompt,
   };
@@ -330,6 +378,7 @@ export async function estimateTravelEtaRouted(opts: {
           routed: true,
           obstacleBufferMin,
           obstacleHint,
+          providerDurationSec: result.durationSec ?? null,
         });
         if (ROUTED_ETA_CACHE.size >= ROUTED_ETA_CACHE_MAX) {
           const oldest = ROUTED_ETA_CACHE.keys().next().value;
@@ -363,17 +412,23 @@ export function formatEtaBullet(eta: TravelEta): string {
 /** Speech-Zeile: Fuß + Rad mit Routenmetern. */
 export function formatWalkBikeEtaSpeech(eta: TravelEta): string {
   const km = formatDistanceKmOrM(eta.distanceM);
-  return `Route ca. ${km} — zu Fuß etwa ${eta.directWalkMinutes} Minuten, mit dem Rad eher ${eta.bikeMinutes} Minuten`;
+  return `Route ca. ${km} — zu Fuß ${formatDurationMinutesDe(eta.directWalkMinutes, 'speech')}, mit dem Rad eher ${formatDurationMinutesDe(eta.bikeMinutes, 'speech')}`;
 }
 
 /** Speech-Lead nur Rad — für „wie lange mit dem Fahrrad“. */
 export function formatBikeEtaSpeech(eta: TravelEta): string {
   const km = formatDistanceKmOrM(eta.distanceM);
-  return `Mit dem Rad brauchst du etwa ${eta.bikeMinutes} Minuten (${km})`;
+  if (eta.routed === false) {
+    return `Luftlinie etwa ${km} — genaue Radzeit lade ich noch`;
+  }
+  return `Mit dem Rad brauchst du ${formatDurationMinutesDe(eta.bikeMinutes, 'speech')} (${km})`;
 }
 
 /** Speech-Lead nur Fuß. */
 export function formatWalkEtaSpeech(eta: TravelEta): string {
   const km = formatDistanceKmOrM(eta.distanceM);
-  return `Zu Fuß brauchst du etwa ${eta.directWalkMinutes} Minuten (${km})`;
+  if (eta.routed === false) {
+    return `Luftlinie etwa ${km} — genaue Gehzeit lade ich noch`;
+  }
+  return `Zu Fuß brauchst du ${formatDurationMinutesDe(eta.directWalkMinutes, 'speech')} (${km})`;
 }

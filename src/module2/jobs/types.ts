@@ -1,5 +1,5 @@
 /**
- * Findus Job Contracts — Absicht → Pflicht-Paket (nicht 400 Scripts).
+ * Yorro Job Contracts — Absicht → Pflicht-Paket (nicht 400 Scripts).
  * SSOT für Classifier, Bridge, Completeness, Speech-Budget, Fast/Slow-Lane.
  */
 
@@ -75,8 +75,8 @@ export type JobContract = {
   slowFacts: JobFactKey[];
   /** Buttons die idealerweise da sind (soft wenn Slow noch läuft) */
   requiredActions: JobActionKey[];
-  /** Bridge-Stil */
-  bridgeMode: 'cheer' | 'motivate' | 'calm_help' | 'fact_ack' | 'urgency';
+  /** Bridge-Stil — `none` = kein Ack/Cheer (Quick-Lookup) */
+  bridgeMode: 'cheer' | 'motivate' | 'calm_help' | 'fact_ack' | 'urgency' | 'none';
 };
 
 export type JobClassification = {

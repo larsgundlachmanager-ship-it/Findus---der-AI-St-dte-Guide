@@ -35,6 +35,13 @@ export function isRealityLockedStop(
 ): boolean {
   if (!stop) return false;
   if (stop.id.startsWith('visit_') || stop.id.startsWith('hist_')) return true;
+  if (
+    stop.id === 'nav_live_active' ||
+    stop.id === 'nav_live_dest' ||
+    stop.id.startsWith('nav_live_tour_')
+  ) {
+    return false;
+  }
   if (stop.status === 'done') return true;
   if (stop.kind === 'wish' || stop.kind === 'nav_leg') return false;
   const t = stop.plannedEndMs ?? stop.plannedStartMs;
@@ -65,6 +72,13 @@ export function assertFuturePlanWritable(
   nowMs = Date.now(),
 ): { ok: boolean; reason?: string } {
   if (stop.id.startsWith('visit_') || stop.kind === 'wish') {
+    return { ok: true };
+  }
+  if (
+    stop.id === 'nav_live_active' ||
+    stop.id === 'nav_live_dest' ||
+    stop.id.startsWith('nav_live_tour_')
+  ) {
     return { ok: true };
   }
   const existing = useFuturePlanStore

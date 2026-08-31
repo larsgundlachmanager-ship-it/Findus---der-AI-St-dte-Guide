@@ -49,6 +49,31 @@ function labelForTags(tags: Record<string, string>): string | null {
   if (tags.amenity === 'waste_basket') return 'Mülleimer';
   if (tags.highway === 'crossing') return 'Fußgängerüberweg';
   if (tags.amenity === 'fountain') return 'Brunnen';
+  // Brücke / Steg (ways kommen mit center lat/lon)
+  const bridgeVal = (tags.bridge || '').toLowerCase();
+  const isBridge =
+    tags.man_made === 'bridge' ||
+    bridgeVal === 'yes' ||
+    bridgeVal === 'boardwalk' ||
+    bridgeVal === 'cantilever' ||
+    bridgeVal === 'movable' ||
+    bridgeVal === 'covered';
+  if (isBridge) {
+    if (tags.name) return tags.name;
+    const hw = (tags.highway || '').toLowerCase();
+    if (
+      hw === 'footway' ||
+      hw === 'path' ||
+      hw === 'pedestrian' ||
+      hw === 'steps' ||
+      hw === 'cycleway' ||
+      tags.foot === 'designated' ||
+      tags.foot === 'yes'
+    ) {
+      return 'Fußgängerbrücke';
+    }
+    return 'Brücke';
+  }
   if (tags.natural === 'tree' && tags.name) return `Baum „${tags.name}"`;
   if (tags.shop) return tags.name || `Laden (${tags.shop})`;
   if (tags.tourism === 'artwork' && tags.name) return tags.name;
@@ -73,8 +98,11 @@ export async function fetchOsmVisualLandmark(opts: {
   node(around:${radius},${opts.lat},${opts.lng})["highway"~"traffic_signals|crossing"];
   node(around:${radius},${opts.lat},${opts.lng})["shop"];
   node(around:${radius},${opts.lat},${opts.lng})["tourism"="artwork"];
+  way(around:${radius},${opts.lat},${opts.lng})["bridge"];
+  way(around:${radius},${opts.lat},${opts.lng})["man_made"="bridge"];
+  way(around:${radius},${opts.lat},${opts.lng})["highway"~"footway|path|pedestrian"]["bridge"];
 );
-out body 12;
+out center body 16;
 `;
   const ctrl = new AbortController();
   const timer = setTimeout(() => ctrl.abort(), FETCH_MS);
@@ -90,27 +118,54 @@ out body 12;
       elements?: Array<{
         lat?: number;
         lon?: number;
+        center?: { lat: number; lon: number };
         tags?: Record<string, string>;
       }>;
     };
     const elems = data.elements ?? [];
     let best: VisualLandmarkCue | null = null;
     for (const el of elems) {
-      if (el.lat == null || el.lon == null || !el.tags) continue;
+      const lat = el.lat ?? el.center?.lat;
+      const lon = el.lon ?? el.center?.lon;
+      if (lat == null || lon == null || !el.tags) continue;
       const label = labelForTags(el.tags);
       if (!label) continue;
-      const d = haversine(opts.lat, opts.lng, el.lat, el.lon);
+      const d = haversine(opts.lat, opts.lng, lat, lon);
       if (d > radius) continue;
+      const feminine =
+        label === 'Fußgängerbrücke' ||
+        label === 'Brücke' ||
+        /brücke$/i.test(label) ||
+        label === 'Ampel' ||
+        label === 'Bank';
       const cue: VisualLandmarkCue = {
         labelDe: label,
-        typ: el.tags.amenity || el.tags.highway || el.tags.shop || 'poi',
+        typ:
+          el.tags.amenity ||
+          el.tags.highway ||
+          el.tags.man_made ||
+          el.tags.shop ||
+          'poi',
         distanceM: Math.round(d),
-        lat: el.lat,
-        lng: el.lon,
-        ttsLine: `Orientier dich am ${label} — etwa ${Math.round(d)} Meter.`,
+        lat,
+        lng: lon,
+        ttsLine: feminine
+          ? `Orientier dich an der ${label} — etwa ${Math.round(d)} Meter.`
+          : `Orientier dich am ${label} — etwa ${Math.round(d)} Meter.`,
         streetViewButtonReady: false,
       };
-      if (!best || cue.distanceM < best.distanceM) best = cue;
+      // Fußgängerbrücke leicht bevorzugen gegenüber generischem Street-Furniture
+      const prefer =
+        label === 'Fußgängerbrücke' || /brücke$/i.test(label) ? -8 : 0;
+      const score = cue.distanceM + prefer;
+      const bestScore =
+        best == null
+          ? Number.POSITIVE_INFINITY
+          : best.distanceM +
+            (best.labelDe === 'Fußgängerbrücke' || /brücke$/i.test(best.labelDe)
+              ? -8
+              : 0);
+      if (!best || score < bestScore) best = cue;
     }
     if (!best) return null;
 

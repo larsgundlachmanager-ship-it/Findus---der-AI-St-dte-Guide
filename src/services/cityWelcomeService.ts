@@ -1,9 +1,10 @@
 /**
  * Stadt-Begrüßung:
- * - Erster Besuch (Registrierung / Ortswechsel / erstes Betreten): Willkommen +
- *   narrative Orts-Historie (max. 1000 Zeichen Historie+Heute) + was heute abgeht / erkunden.
- * - Wiederkehr: frühestens nach 150 h — ohne Historie, mit Rückkehr-Hook,
- *   Datensatz-Änderungen und personalisierten Vorschlägen.
+ * - Erster Besuch: Willkommen + narrative Historie (max. ~1200 Zeichen) + was heute abgeht.
+ * - Schon mal da (Stempel/Visit-Log/Welcome-Record): kein volles Programm —
+ *   kurze Rückkehr (max. ~40 Wörter), max. EIN Vorschlag.
+ * - Wiederkehr-Speech frühestens nach 150 h erneut; dazwischen still.
+ * - First-open nach Erklärung: `runPostExplanationCityWelcome` (Onboarding).
  */
 
 import * as FileSystem from 'expo-file-system';
@@ -23,11 +24,14 @@ import { loadStampPassport } from './navigation/stampPassportPersistence';
 import { useUserMemoryStore } from '../store/useUserMemoryStore';
 import { useSessionPlanStore } from '../store/useSessionPlanStore';
 import type { PoiHookKind } from './ai/fastHook';
+import type { UserProfile } from '../types/userProfile';
 
 const STATE_PATH = `${FileSystem.documentDirectory}findus-city-welcome.json`;
 const ENTER_RADIUS_KM = 8;
 const APPROACH_RADIUS_KM = 18;
 const CHECK_INTERVAL_MS = 60_000;
+/** Stempel nahe Stadtmitte = schon mal da gewesen */
+const PRIOR_VISIT_STAMP_KM = 12;
 
 /** Willkommensnachricht in bekannter Stadt frühestens nach 150 h erneut */
 export const CITY_RETURN_WELCOME_MS = 150 * 60 * 60_000;
@@ -125,7 +129,6 @@ async function loadState(): Promise<WelcomeState> {
           };
         }
       }
-      // Legacy: shownCityIds → cities ohne Zeitstempel (als „schon begrüßt“)
       if (Array.isArray(raw.shownCityIds)) {
         const now = Date.now();
         for (const id of raw.shownCityIds.map(String)) {
@@ -172,9 +175,65 @@ function isSuggestableKind(kind: string): boolean {
   const k = kind.toLowerCase();
   if (EXCLUDE_KINDS.has(k)) return false;
   if (SUGGEST_KINDS.has(k)) return true;
-  // restaurant / attraction aus Memory
   if (k === 'restaurant' || k === 'attraction' || k === 'custom') return true;
   if (k === 'hotel' || k === 'transit') return false;
+  return false;
+}
+
+/**
+ * Schon mal in der Stadt gewesen? Welcome-Record, Visit-Log oder Stempel nahe Zentrum.
+ */
+export async function hasPriorCityVisit(
+  city: Pick<CityCatalogItem, 'id' | 'name' | 'lat' | 'lng'>,
+): Promise<boolean> {
+  const id = String(city.id).toLowerCase();
+  try {
+    const state = await loadState();
+    const rec = state.cities[city.id] ?? state.cities[id];
+    if (rec && rec.visitCount >= 1) return true;
+  } catch {
+    /* soft */
+  }
+
+  try {
+    const { getVisitLogSnapshot, hydrateVisitLog } = require('./timeline/visitLog') as {
+      hydrateVisitLog: () => Promise<unknown>;
+      getVisitLogSnapshot: () => Array<{ cityId?: string | null }>;
+    };
+    await hydrateVisitLog();
+    const log = getVisitLogSnapshot();
+    if (
+      log.some(
+        (e) =>
+          typeof e.cityId === 'string' && e.cityId.toLowerCase() === id,
+      )
+    ) {
+      return true;
+    }
+  } catch {
+    /* soft */
+  }
+
+  const lat = typeof city.lat === 'number' ? city.lat : null;
+  const lng = typeof city.lng === 'number' ? city.lng : null;
+  if (lat != null && lng != null) {
+    try {
+      const stamps = await loadStampPassport();
+      if (
+        stamps.some(
+          (s) =>
+            typeof s.lat === 'number' &&
+            typeof s.lng === 'number' &&
+            haversineKm(lat, lng, s.lat, s.lng) <= PRIOR_VISIT_STAMP_KM,
+        )
+      ) {
+        return true;
+      }
+    } catch {
+      /* soft */
+    }
+  }
+
   return false;
 }
 
@@ -203,7 +262,10 @@ async function buildReturnContext(cityId: string): Promise<{
   }
 
   const stamps = await loadStampPassport().catch(() => []);
-  const visitCounts = new Map<string, { name: string; n: number; kind: string }>();
+  const visitCounts = new Map<
+    string,
+    { name: string; n: number; kind: string }
+  >();
   for (const e of stamps) {
     if (!isSuggestableKind(e.kind)) continue;
     const key = e.name.trim().toLowerCase();
@@ -215,14 +277,13 @@ async function buildReturnContext(cityId: string): Promise<{
   const favorites = [...visitCounts.values()]
     .filter((v) => v.n >= 2)
     .sort((a, b) => b.n - a.n)
-    .slice(0, 3)
-    .map((v) => `${v.name} (${v.kind}, ${v.n}×)`);
+    .slice(0, 2)
+    .map((v) => `${v.name} (${v.kind})`);
 
-  // Falls keine Mehrfachbesuche: Top-3 besuchte suggestable Orte
   if (favorites.length === 0) {
     const singles = [...visitCounts.values()]
       .sort((a, b) => b.n - a.n)
-      .slice(0, 3)
+      .slice(0, 1)
       .map((v) => `${v.name} (${v.kind})`);
     favorites.push(...singles);
   }
@@ -231,10 +292,10 @@ async function buildReturnContext(cityId: string): Promise<{
   const entities = mem
     .findEntities({ cityId })
     .filter((e) => isSuggestableKind(e.type) && e.name.trim())
-    .slice(0, 8);
+    .slice(0, 4);
 
   for (const e of entities) {
-    if (favorites.length >= 3) break;
+    if (favorites.length >= 2) break;
     const label = e.name.trim();
     if (favorites.some((f) => f.toLowerCase().includes(label.toLowerCase()))) {
       continue;
@@ -249,17 +310,17 @@ async function buildReturnContext(cityId: string): Promise<{
       if (s.done) continue;
       const label = (s.label ?? '').trim();
       if (label) unfinished.push(label);
-      if (unfinished.length >= 4) break;
+      if (unfinished.length >= 2) break;
     }
   }
 
   const wanted: string[] = [];
   const want = profile?.wantToExperience?.trim();
-  if (want) wanted.push(want.slice(0, 120));
+  if (want) wanted.push(want.slice(0, 80));
 
   return {
-    favorites: favorites.slice(0, 3),
-    unfinished: unfinished.slice(0, 4),
+    favorites: favorites.slice(0, 2),
+    unfinished: unfinished.slice(0, 2),
     wanted,
     newPlaceHint,
     lastPoiCount,
@@ -272,7 +333,11 @@ async function buildReturnContext(cityId: string): Promise<{
  */
 export async function generateLiveCityWelcome(
   city: Pick<CityCatalogItem, 'id' | 'name' | 'symbol'>,
-  opts?: { mode?: CityWelcomeMode },
+  opts?: {
+    mode?: CityWelcomeMode;
+    weatherLine?: string | null;
+    eventHints?: Array<{ name: string; whenLabel: string; hook: string }>;
+  },
 ): Promise<string> {
   const mode = opts?.mode ?? 'first_enter';
   const name = city.name?.trim() || city.id;
@@ -284,44 +349,42 @@ export async function generateLiveCityWelcome(
   if (mode === 'return') {
     const ctx = await buildReturnContext(city.id);
     if (!offline && hasGeminiApiKey()) {
+      const tipSource =
+        ctx.unfinished[0] ??
+        ctx.wanted[0] ??
+        ctx.favorites[0]?.split(' (')[0] ??
+        null;
       const prompt = [
-        'Du bist Findus — lockerer Fußgänger-/Reisebegleiter auf Deutsch.',
-        'Der User war schon mal in dieser Stadt. Schreib GENAU EINE Rückkehr-Begrüßung.',
+        'Du bist Yorro — lockerer Reisebegleiter auf Deutsch.',
+        'FLOW-BLAUPAUSE Rückkehr (Wortlaut frei, nie festen Satz übernehmen):',
+        'Kurzes Wiedersehen → optional 1 neuer Datensatz-Hinweis → max. EIN konkreter Vorschlag.',
         'Regeln:',
         '- Du-Form, Alltagsdeutsch, kein Markdown.',
-        '- KEINE Orts-Historie / Geschichts-Erzählung.',
-        '- Ton: cool, dass du wieder hier bist — wirklich schöne Stadt.',
-        '- Wenn Datensatz-Änderungen genannt sind: kurz erwähnen, was neu/relevant sein könnte.',
-        '- Danach Vorschläge: offene Orte vom letzten Mal, Wünsche, oder 3 Beispiele aus Favoriten',
-        '  (Restaurants, Museen, Parks, Shopping — NIEMALS Verkehr/Bahnhof/Unterkunft).',
-        '- Max. ca. 90 Wörter.',
-        userName ? `User-Name: ${userName}` : 'Kein Name.',
-        `Stadtname: ${name}`,
-        ctx.newPlaceHint
-          ? `Datensatz: ${ctx.newPlaceHint} (aktuell ${ctx.currentPoiCount} Orte).`
-          : `Datensatz: keine klare Zunahme (aktuell ${ctx.currentPoiCount} Orte).`,
-        ctx.unfinished.length
-          ? `Noch offen / nicht geschafft: ${ctx.unfinished.join('; ')}`
-          : 'Keine offenen Stopps bekannt.',
-        ctx.wanted.length
-          ? `User wollte erleben: ${ctx.wanted.join('; ')}`
-          : 'Kein expliziter Wunsch-Text.',
-        ctx.favorites.length
-          ? `Favoriten / oft da: ${ctx.favorites.join('; ')}`
-          : 'Keine Favoriten bekannt — nenne dann 3 typische Erlebnisrichtungen (Essen, Kultur, Park/Shopping) ohne Fake-Namen.',
+        '- KEINE Orts-Historie, keine Stadtführung, kein „volles Programm“.',
+        '- Max. 40 Wörter. Max. 1 Vorschlag (kein Aufzählen von 3 Optionen).',
+        '- Namen des Users nur wenn natürlich, nicht erzwingen.',
+        `Stadt: ${name}`,
+        ctx.newPlaceHint ? `Neu im Pack: ${ctx.newPlaceHint}` : 'Kein Pack-Delta.',
+        tipSource
+          ? `Ein Vorschlags-Anker (nur denselben nutzen): ${tipSource}`
+          : 'Kein Anker — dann nur kurzes Wiedersehen, kein Fake-Ort.',
+        'Dies sind nur abstrakte Beispiele für den logischen Ablauf. Übernimm niemals den genauen Wortlaut.',
       ].join('\n');
 
       try {
         const live = await generateGeminiText(prompt, {
           task: 'generic',
-          maxTokens: 280,
-          temperature: 0.85,
+          maxTokens: 120,
+          temperature: 0.8,
         });
         const cleaned = live
           .replace(/^["„]|["“]$/g, '')
           .replace(/\s+/g, ' ')
           .trim();
-        if (cleaned.length >= 20) return cleaned;
+        if (cleaned.length >= 12 && cleaned.length <= 320) return cleaned;
+        if (cleaned.length > 320) {
+          return `${cleaned.slice(0, 300).replace(/\s+\S*$/, '')}…`;
+        }
       } catch (err) {
         console.warn('[cityWelcome] return gemini failed:', err);
       }
@@ -329,30 +392,70 @@ export async function generateLiveCityWelcome(
 
     const who = userName ? ` ${userName}` : '';
     const tip =
-      ctx.unfinished[0] ??
-      ctx.favorites[0]?.split(' (')[0] ??
-      'Restaurants, Museen oder einen schönen Park';
+      ctx.unfinished[0] ?? ctx.favorites[0]?.split(' (')[0] ?? null;
     const neu = ctx.newPlaceHint
-      ? ` Übrigens: ${ctx.newPlaceHint.toLowerCase()} — könnte was für dich sein.`
+      ? ` ${ctx.newPlaceHint.replace(/im Datensatz seit dem letzten Besuch/i, 'neu im Pack')}.`
       : '';
-    return `Cool${who}, dass du wieder in ${name} bist — wirklich eine schöne Stadt.${neu} Wie wär's mit ${tip}?`;
+    if (tip) {
+      return `Schön wieder in ${name}${who}.${neu} ${tip}?`;
+    }
+    return `Schön wieder in ${name}${who}.${neu}`.trim();
   }
 
-  // first_enter / switch
+  // first_enter / switch — nur wenn wirklich erster Kontakt
   if (!offline && hasGeminiApiKey()) {
+    let tripHint = '';
+    try {
+      const { useTripModeStore } = require('../store/useTripModeStore') as {
+        useTripModeStore: {
+          getState: () => {
+            active: boolean;
+            cityName: string | null;
+            dayCount: number;
+            isTripCity: (id?: string | null, name?: string | null) => boolean;
+            getTripDayIndex: () => number | null;
+          };
+        };
+      };
+      const trip = useTripModeStore.getState();
+      if (trip.active && trip.isTripCity(city.id, name)) {
+        const idx = trip.getTripDayIndex();
+        if (idx != null) {
+          tripHint = `Trip-Kontext: Tag ${idx} von ${trip.dayCount}${
+            trip.cityName ? ` in ${trip.cityName}` : ''
+          }. Begrüße wie zum Start eines Städtetrips (kurz Ankommen, was heute lohnt) — kein Alltags-Chat.`;
+        }
+      }
+    } catch {
+      /* soft */
+    }
+
+    const eventBlock =
+      (opts?.eventHints ?? [])
+        .slice(0, 2)
+        .map(
+          (e) =>
+            `- ${e.name}${e.whenLabel ? ` · ${e.whenLabel}` : ''}${e.hook ? `: ${e.hook.slice(0, 140)}` : ''}`,
+        )
+        .join('\n') || '';
+    const weatherLine = (opts?.weatherLine || '').trim();
+
     const prompt = [
-      'Du bist Findus — lockerer Fußgänger-/Reisebegleiter auf Deutsch.',
+      'Du bist Yorro — lockerer Fußgänger-/Reisebegleiter auf Deutsch.',
       'Schreib GENAU EINE Stadt-Willkommensnachricht für den ERSTEN Besuch.',
-      'Struktur (zwingend):',
+      'Struktur (zwingend, Wortlaut frei):',
       `1) Kurz willkommen heißen in ${name}${userName ? ` (Name: ${userName})` : ''}.`,
-      '2) Dann EINE spannende, narrative Mini-Geschichte zur Historie des Ortes',
-      '   — packend, bildhaft, direkt ins Geschehen (kein Wikipedia-Ton).',
-      '3) Dann: was heutzutage in der Stadt abgeht und was man hier erkunden kann.',
+      '2) Dann eine spannende, narrative Mini-Geschichte zur Historie des Ortes',
+      '   — packend, bildhaft, direkt ins Geschehen (kein Wikipedia-Ton). Ziel ~1200 Zeichen nur für diesen Historie-Teil.',
+      '3) Abschluss: Wetter jetzt + kurzer Verlauf — NUR wenn Wetter-Fakten unten stehen, nichts erfinden.',
+      '4) Danach max. 1 heutiges Event im Umkreis ~5 km, als Hiebsatz (Zeit + Ort + Was), kein Los-jetzt-Ton.',
+      '   Tagesfeste (Straßenfest, Weinfest, Hafengeburtstag, Umzug) dürfen schon laufen — dann „läuft noch bis“ nur mit belegtem Ende.',
+      '   Kino/Konzert/Auftritt/Finsternis: nur wenn der Start noch kommt. Schon vorbei → weglassen.',
+      '   Kein Event-Stoff unten → weglassen, nicht erfinden, nicht ersetzen.',
       'Regeln:',
       '- Du-Form, Alltagsdeutsch, kein Markdown, kein Emoji-Overkill.',
       '- Keine erfundenen Öffnungszeiten oder Ticketpreise.',
-      '- Gesamtlänge MAXIMAL 1000 Zeichen für Historie UND Heute zusammen.',
-      '- Stil wie Reportage: Schlamm/Höfe/Menschen — Lust auf mehr machen.',
+      '- Historie ~1200 Zeichen; Wetter + Event danach extra. Gesamtlänge MAXIMAL 1600 Zeichen.',
       `Modus: ${mode === 'switch' ? 'Stadtwechsel' : 'erstes Betreten'}.`,
       `Stadtname: ${name}`,
       `Stadt-ID: ${city.id}`,
@@ -360,6 +463,12 @@ export async function generateLiveCityWelcome(
       profile?.wantToExperience?.trim()
         ? `User-Interesse: ${profile.wantToExperience.trim().slice(0, 100)}`
         : '',
+      weatherLine ? `Wetter-Fakten: ${weatherLine}` : 'Kein Wetter — dann Wetter weglassen.',
+      eventBlock
+        ? `Heutige Events in ~5 km (belegt):\n${eventBlock}`
+        : 'Keine belegten Events in 5 km — Event-Teil weglassen.',
+      tripHint,
+      'Dies sind nur abstrakte Beispiele für den logischen Ablauf. Übernimm niemals den genauen Wortlaut.',
     ]
       .filter(Boolean)
       .join('\n');
@@ -367,14 +476,18 @@ export async function generateLiveCityWelcome(
     try {
       const live = await generateGeminiText(prompt, {
         task: 'generic',
-        maxTokens: 420,
+        maxTokens: 900,
         temperature: 0.9,
       });
       const cleaned = live
         .replace(/^["„]|["“]$/g, '')
         .replace(/\s+/g, ' ')
         .trim();
-      if (cleaned.length >= 40) return cleaned;
+      if (cleaned.length >= 40) {
+        return cleaned.length > 1650
+          ? `${cleaned.slice(0, 1600).replace(/\s+\S*$/, '')}…`
+          : cleaned;
+      }
     } catch (err) {
       console.warn('[cityWelcome] gemini failed:', err);
     }
@@ -385,13 +498,10 @@ export async function generateLiveCityWelcome(
   return (
     `${prefix}Willkommen${who} in ${name}! ` +
     `Diese Stadt hat Charakter — alte Geschichten und ein lebendiges Heute. ` +
-    `Ich zeig dir, was hier abgeht und was sich zu erkunden lohnt. Sag mir, wohin oder worauf du Lust hast.`
+    `Sag mir, wohin oder worauf du Lust hast.`
   );
 }
 
-/**
- * Nächste Stadt im Katalog innerhalb APPROACH_RADIUS (GPS), sonst Profil-Stadt.
- */
 async function resolveWelcomeCity(
   lat: number,
   lng: number,
@@ -428,18 +538,27 @@ async function resolveWelcomeCity(
   return null;
 }
 
-function resolveModeForCity(
+async function resolveModeForCity(
+  city: Pick<CityCatalogItem, 'id' | 'name' | 'lat' | 'lng'>,
   record: CityWelcomeRecord | undefined,
   preferSwitch: boolean,
-): CityWelcomeMode | null {
+): Promise<CityWelcomeMode | null> {
   const now = Date.now();
-  if (!record) {
-    return preferSwitch ? 'switch' : 'first_enter';
+  const prior = await hasPriorCityVisit(city);
+
+  if (record) {
+    if (now - record.lastWelcomeAtMs < CITY_RETURN_WELCOME_MS) {
+      return null;
+    }
+    return 'return';
   }
-  if (now - record.lastWelcomeAtMs < CITY_RETURN_WELCOME_MS) {
-    return null;
+
+  // Kein Welcome-Record, aber Stempel/Visit-Log → kein volles Erstprogramm
+  if (prior) {
+    return 'return';
   }
-  return 'return';
+
+  return preferSwitch ? 'switch' : 'first_enter';
 }
 
 /**
@@ -447,7 +566,8 @@ function resolveModeForCity(
  * Gibt false wenn Cooldown / busy / Setup unvollständig.
  */
 export async function speakCityWelcomeForCity(
-  city: Pick<CityCatalogItem, 'id' | 'name' | 'symbol'>,
+  city: Pick<CityCatalogItem, 'id' | 'name' | 'symbol'> &
+    Partial<Pick<CityCatalogItem, 'lat' | 'lng'>>,
   opts?: { preferSwitch?: boolean; forceMode?: CityWelcomeMode },
 ): Promise<boolean> {
   if (speaking) return false;
@@ -455,12 +575,32 @@ export async function speakCityWelcomeForCity(
 
   const profile = getCachedUserProfile();
   if (!profile?.setupComplete) return false;
+  try {
+    const { isProactiveAlertEnabled } = require('./notifications/proactiveAlerts') as {
+      isProactiveAlertEnabled: (
+        k: 'cityWelcome',
+        p?: unknown,
+      ) => boolean;
+    };
+    if (!isProactiveAlertEnabled('cityWelcome', profile)) return false;
+  } catch {
+    /* soft */
+  }
 
   const state = await loadState();
   const record = state.cities[city.id];
   const mode =
     opts?.forceMode ??
-    resolveModeForCity(record, opts?.preferSwitch === true);
+    (await resolveModeForCity(
+      {
+        id: city.id,
+        name: city.name,
+        lat: city.lat,
+        lng: city.lng,
+      },
+      record,
+      opts?.preferSwitch === true,
+    ));
   if (!mode) return false;
 
   speaking = true;
@@ -497,6 +637,120 @@ export async function speakCityWelcomeForCity(
 }
 
 /**
+ * Nach der App-Erklärung: volle Erst-Begrüßung (Historie + Wetter + Event in 5 km).
+ */
+export async function runPostExplanationCityWelcome(
+  profile: UserProfile,
+): Promise<boolean> {
+  if (speaking) return false;
+  if (useFinnusStore.getState().isSimulationMode) return false;
+
+  const cityName = (profile.cityName ?? profile.cityId ?? '').trim();
+  const cityId = (profile.cityId ?? '').trim() || cityName.toLowerCase();
+  if (!cityName || !cityId) return false;
+
+  speaking = true;
+  try {
+    let catalogCity: CityCatalogItem | null = null;
+    try {
+      const catalog = await loadCityCatalog(null);
+      catalogCity =
+        catalog.find((c) => c.id === cityId) ||
+        catalog.find(
+          (c) => c.name.toLowerCase() === cityName.toLowerCase(),
+        ) ||
+        null;
+    } catch {
+      catalogCity = null;
+    }
+    const city = {
+      id: catalogCity?.id || cityId,
+      name: catalogCity?.name || cityName,
+      symbol: catalogCity?.symbol,
+      lat: catalogCity?.lat,
+      lng: catalogCity?.lng,
+    };
+
+    let weatherLine: string | null = null;
+    try {
+      const { getCachedWeatherSummary, getCachedWeatherSnapshot } = await import(
+        './weatherService'
+      );
+      weatherLine =
+        getCachedWeatherSummary()?.trim() ||
+        getCachedWeatherSnapshot()?.summaryLine?.trim() ||
+        null;
+    } catch {
+      weatherLine = null;
+    }
+
+    const eventHints: Array<{ name: string; whenLabel: string; hook: string }> =
+      [];
+    try {
+      const { isNachtruhe } = await import('./ui/nachtruhePolicy');
+      if (!isNachtruhe()) {
+        const { useGpsStore } = await import('../store/useGpsStore');
+        const gps = useGpsStore.getState();
+        const lat =
+          typeof gps.lat === 'number' ? gps.lat : city.lat ?? null;
+        const lng =
+          typeof gps.lng === 'number' ? gps.lng : city.lng ?? null;
+        if (typeof lat === 'number' && typeof lng === 'number') {
+          const { researchTemporaryLiveSpots } = await import(
+            './research/temporaryLiveSpots'
+          );
+          const spots = await researchTemporaryLiveSpots({
+            lat,
+            lng,
+            cityHint: city.name,
+            timeoutMs: 2_500,
+            maxDistanceM: 5_000,
+            forAmbientPitch: true,
+          });
+          for (const s of spots.slice(0, 2)) {
+            eventHints.push({
+              name: s.name,
+              whenLabel: s.whenLabel,
+              hook: s.hook,
+            });
+          }
+          if (spots[0]) {
+            const { noteEventPitchSpoken } = await import(
+              './research/eventPitchMemory'
+            );
+            await noteEventPitchSpoken(spots[0]).catch(() => undefined);
+          }
+        }
+      }
+    } catch {
+      /* soft */
+    }
+
+    const intro = await generateLiveCityWelcome(city, {
+      mode: 'first_enter',
+      weatherLine,
+      eventHints,
+    });
+    useFinnusStore.getState().addChatMessage({
+      role: 'assistant',
+      content: intro,
+    });
+    const voice = await getVoiceSettingsForTour();
+    await speakAssistantText(intro, {
+      voiceId: profile.voiceId || voice.voiceId,
+      speechRate: voice.speechRate,
+    });
+    await markCityWelcomeSpoken(city.id);
+    return true;
+  } catch (err) {
+    console.warn('[cityWelcome] post-explanation failed:', err);
+    return false;
+  } finally {
+    speaking = false;
+  }
+}
+
+/**
  * GPS-Tick: Begrüßung für neue / fällige Stadt.
  */
 export async function maybeSpeakFirstCityWelcome(
@@ -524,6 +778,34 @@ export async function maybeSpeakFirstCityWelcome(
   if (distKm > ENTER_RADIUS_KM && distKm > 12) return false;
 
   return speakCityWelcomeForCity(city);
+}
+
+/**
+ * Markiert Stadt-Welcome als gesprochen (ohne TTS) —
+ * z. B. nach First-Open-Kette in der Erklärung.
+ */
+export async function markCityWelcomeSpoken(
+  cityId: string,
+  opts?: { poiCount?: number | null },
+): Promise<void> {
+  const id = String(cityId || '').trim();
+  if (!id) return;
+  const state = await loadState();
+  const record = state.cities[id];
+  const now = Date.now();
+  const poiCount =
+    opts?.poiCount != null && Number.isFinite(opts.poiCount)
+      ? opts.poiCount
+      : currentPoiCount();
+  const nextRec: CityWelcomeRecord = {
+    firstWelcomeAtMs: record?.firstWelcomeAtMs ?? now,
+    lastWelcomeAtMs: now,
+    visitCount: (record?.visitCount ?? 0) + 1,
+    lastPoiCount: poiCount > 0 ? poiCount : (record?.lastPoiCount ?? null),
+  };
+  await persist({
+    cities: { ...state.cities, [id]: nextRec },
+  });
 }
 
 /** Für Tests / Reset. */

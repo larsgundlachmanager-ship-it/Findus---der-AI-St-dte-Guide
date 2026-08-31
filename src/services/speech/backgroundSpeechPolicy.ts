@@ -1,11 +1,13 @@
 /**
- * Hintergrund-Speech: weiterreden nur bei bewusstem Link-Open aus Findus.
- * Sonst (Notification → andere App, Home, Wegwischen) → TTS stoppen.
- * Kill: Prozess stirbt sowieso; Snapshot für Session-Resume separat.
+ * Hintergrund-Speech: Link-Open ODER Modul-1-Pref „Immer“ / Kopfhörer.
+ * Sonst (Home / andere App ohne Pref) → TTS stoppen.
  */
 
 import { AppState, type AppStateStatus, Platform } from 'react-native';
 import { Audio, InterruptionModeAndroid, InterruptionModeIOS } from 'expo-av';
+import { shouldKeepTalkingOnAction } from './keepTalkingOnAction';
+
+export { shouldKeepTalkingOnAction } from './keepTalkingOnAction';
 
 let linkArmUntilMs = 0;
 let linkArmReason = '';
@@ -41,7 +43,35 @@ export function getLinkBackgroundSpeechReason(): string | null {
 
 /** Darf laufende Speech im Hintergrund weiterlaufen? */
 export function shouldContinueSpeechInBackground(): boolean {
-  return isLinkBackgroundSpeechArmed();
+  if (isLinkBackgroundSpeechArmed()) return true;
+  // Navigation / Tour: Sperrbildschirm darf Ansagen nicht killen
+  try {
+    const { useFinnusStore } = require('../../store/useFinnusStore') as {
+      useFinnusStore: { getState: () => { navActive?: boolean } };
+    };
+    if (useFinnusStore.getState().navActive) return true;
+  } catch {
+    /* soft */
+  }
+  try {
+    const {
+      getModule1BackgroundSpeechModeSync,
+    } = require('./module1BackgroundSpeechPrefs') as {
+      getModule1BackgroundSpeechModeSync: () => 'always' | 'headphones' | 'app_open';
+    };
+    const mode = getModule1BackgroundSpeechModeSync();
+    if (mode === 'always') return true;
+    if (mode === 'headphones') {
+      // Sync-Pfad: kein Jack-Check — Sperre/Hintergrund nicht killen.
+      return (
+        AppState.currentState === 'inactive' ||
+        AppState.currentState === 'background'
+      );
+    }
+  } catch {
+    /* Prefs optional */
+  }
+  return false;
 }
 
 async function ensureBackgroundAudioStayAlive(): Promise<void> {
@@ -50,9 +80,9 @@ async function ensureBackgroundAudioStayAlive(): Promise<void> {
       allowsRecordingIOS: false,
       playsInSilentModeIOS: true,
       staysActiveInBackground: true,
-      shouldDuckAndroid: true,
-      interruptionModeAndroid: InterruptionModeAndroid.DoNotMix,
-      interruptionModeIOS: InterruptionModeIOS.DoNotMix,
+      shouldDuckAndroid: false,
+      interruptionModeAndroid: InterruptionModeAndroid.DuckOthers,
+      interruptionModeIOS: InterruptionModeIOS.MixWithOthers,
     });
   } catch {
     /* soft */
@@ -95,9 +125,13 @@ async function onLeaveForeground(next: AppStateStatus): Promise<void> {
     /* soft */
   }
 
-  // iOS Control-Center = oft nur inactive — Speech nicht killen
-  if (next === 'inactive' && Platform.OS === 'ios') {
-    return;
+  // iOS Control-Center / Android Custom-Tab oft nur inactive
+  if (next === 'inactive') {
+    if (shouldContinueSpeechInBackground()) {
+      await ensureBackgroundAudioStayAlive();
+      return;
+    }
+    if (Platform.OS === 'ios') return;
   }
 
   if (shouldContinueSpeechInBackground()) {
@@ -160,4 +194,12 @@ export function bootstrapBackgroundSpeechPolicy(): void {
   bootstrapped = true;
   lastState = AppState.currentState;
   AppState.addEventListener('change', onAppState);
+  try {
+    const { loadModule1BackgroundSpeechPrefs } = require('./module1BackgroundSpeechPrefs') as {
+      loadModule1BackgroundSpeechPrefs: () => Promise<unknown>;
+    };
+    void loadModule1BackgroundSpeechPrefs();
+  } catch {
+    /* Prefs optional */
+  }
 }

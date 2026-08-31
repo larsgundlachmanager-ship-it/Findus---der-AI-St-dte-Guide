@@ -1,4 +1,5 @@
 import type { SQLiteDatabase } from 'expo-sqlite';
+import { runExclusiveDbWrite } from './dbWriteLock';
 
 export type UserCustomPhoneticRow = {
   word: string;
@@ -34,30 +35,32 @@ export async function upsertUserCustomPhonetics(
   let updated = 0;
   const now = new Date().toISOString();
 
-  await db.withTransactionAsync(async () => {
-    for (const e of entries) {
-      const word = e.word.normalize('NFKC').toLowerCase().trim();
-      const phonetic = e.phonetic.trim();
-      if (!word || !phonetic || word.length < 2) continue;
+  await runExclusiveDbWrite(async () => {
+    await db.withTransactionAsync(async () => {
+      for (const e of entries) {
+        const word = e.word.normalize('NFKC').toLowerCase().trim();
+        const phonetic = e.phonetic.trim();
+        if (!word || !phonetic || word.length < 2) continue;
 
-      const existing = await db.getFirstAsync<{ word: string }>(
-        'SELECT word FROM user_custom_phonetics WHERE word = ?',
-        word,
-      );
+        const existing = await db.getFirstAsync<{ word: string }>(
+          'SELECT word FROM user_custom_phonetics WHERE word = ?',
+          word,
+        );
 
-      await db.runAsync(
-        `INSERT OR REPLACE INTO user_custom_phonetics
-         (word, phonetic, source_city_id, learned_at)
-         VALUES (?, ?, ?, ?)`,
-        word,
-        phonetic,
-        e.sourceCityId?.trim().toLowerCase() ?? null,
-        now,
-      );
+        await db.runAsync(
+          `INSERT OR REPLACE INTO user_custom_phonetics
+           (word, phonetic, source_city_id, learned_at)
+           VALUES (?, ?, ?, ?)`,
+          word,
+          phonetic,
+          e.sourceCityId?.trim().toLowerCase() ?? null,
+          now,
+        );
 
-      if (existing) updated += 1;
-      else added += 1;
-    }
+        if (existing) updated += 1;
+        else added += 1;
+      }
+    });
   });
 
   return { added, updated };

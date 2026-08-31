@@ -179,7 +179,7 @@ export function applyDiningDeparturePlan(opts: {
   store.upsertStop(leaveStop);
   markFresh([leaveStop.id, opts.stopId]);
 
-  // Erinnerungen: Prio 1–2 → 30+5 Min; ab Prio 3 → 5 Min (buildCheckSchedule warnLeadMin)
+  // Erinnerungen: Prio 1–2 → 30 Min Lead; Prio 3–4 → 5; Prio 5–6 → kein Push
   try {
     const venue = opts.venueTitle.replace(/^Essen:\s*/i, '').trim();
     const mode =
@@ -194,17 +194,28 @@ export function applyDiningDeparturePlan(opts: {
               : primary.transport === 'taxi'
                 ? ('taxi' as const)
                 : ('generic' as const);
-    void registerDepartureWatch({
-      eventId: `plan_${opts.stopId}`,
-      title: venue,
-      departureMs: opts.appointmentMs,
-      walkEtaMin: primary.travelMin,
-      mode,
-      destLat: opts.destLat,
-      destLng: opts.destLng,
-      destName: venue,
-      detail: `${primary.label} · Leave ${formatHm(primary.leaveByMs)}`,
-    });
+    const mealStop = useFuturePlanStore
+      .getState()
+      .plan.stops.find((s) => s.id === opts.stopId);
+    const prio = (mealStop?.planPriority ?? 3) as number;
+    // Niedrige Prio: kein OS-Push-Spam
+    if (prio <= 4) {
+      const warnLeadMin = prio <= 2 ? 30 : 5;
+      void registerDepartureWatch({
+        eventId: `plan_${opts.stopId}`,
+        title: venue,
+        departureMs: opts.appointmentMs,
+        walkEtaMin: primary.travelMin,
+        mode,
+        destLat: opts.destLat,
+        destLng: opts.destLng,
+        destName: venue,
+        detail: `${primary.label} · Leave ${formatHm(primary.leaveByMs)}`,
+        warnLeadMin,
+        planPriority: prio,
+        scheduleOsPush: true,
+      });
+    }
     // Legacy dining_* Event streichen (SSOT = plan_)
     try {
       const { useLogisticsTriggerStore } = require('../../store/useLogisticsTriggerStore') as {

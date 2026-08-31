@@ -73,7 +73,7 @@ function flavorFact(flavor: VoiceFlavor): string | null {
     case 'bavarian':
       return 'Rede-Stil: bayrisch/österreichisch angehaucht (servus, gell, oida) — leicht spiegeln, nicht übertreiben.';
     case 'formal':
-      return 'Rede-Stil: förmlich / Beamten-Deutsch — Siezen, sachlich, keine Kumpel-Floskeln.';
+      return 'Rede-Stil: förmlich / klar / sachlich — aber IMMER Duzen, nie Siezen; keine Kumpel-Floskeln.';
     default:
       return null;
   }
@@ -126,7 +126,8 @@ export function questionStylePromptHint(): string {
   );
   const lines: string[] = [
     '=== NUTZER-WORTWAHL (SOFT) ===',
-    '- Spiegle Formulierungen natürlich (bayrisch→leicht bayrisch, förmlich→Siezen).',
+    '- Spiegle Formulierungen natürlich (bayrisch→leicht bayrisch, förmlich→sachlich/klar).',
+    '- Anrede immer Du — nie Siezen, auch wenn der User förmlich klingt.',
     '- Slang (Bro, Digga, Dicker) nur extrem sparsam, nie erzwungen, nur wenn 100% natürlich.',
     '- KEINE harten Verbote („Sag niemals Bro“) — bleib Kumpel-Ton, sparsam mit Slang.',
     '- Wenn unsicher zur Anrede: charmant fragen („Hey, wie soll ich dich eigentlich am liebsten nennen?“).',

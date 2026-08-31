@@ -104,5 +104,49 @@ export function validateCityPack(pack) {
     }
   }
 
+  // Spot far outside city → wrong city / bad GPS
+  const cityLat = pack.lat;
+  const cityLng = pack.lng;
+  const cov = pack._coverage;
+  if (typeof cityLat === 'number' && typeof cityLng === 'number') {
+    for (const c of areaCenters) {
+      const dKm =
+        Math.hypot(
+          (c.lat - cityLat) * 111.32,
+          (c.lng - cityLng) *
+            111.32 *
+            Math.cos((cityLat * Math.PI) / 180),
+        );
+      if (dKm > 35) {
+        errors.push(
+          `${c.id}: centroid ${dKm.toFixed(1)} km from city center — likely wrong city/GPS`,
+        );
+      } else if (dKm > 18) {
+        warnings.push(
+          `${c.id}: centroid ${dKm.toFixed(1)} km from city center — check GPS`,
+        );
+      }
+      if (
+        cov &&
+        typeof cov.latMin === 'number' &&
+        typeof cov.latMax === 'number' &&
+        typeof cov.lngMin === 'number' &&
+        typeof cov.lngMax === 'number'
+      ) {
+        const pad = 0.02; // ~2 km
+        if (
+          c.lat < cov.latMin - pad ||
+          c.lat > cov.latMax + pad ||
+          c.lng < cov.lngMin - pad ||
+          c.lng > cov.lngMax + pad
+        ) {
+          warnings.push(
+            `${c.id}: outside _coverage BBox (padded) — verify position`,
+          );
+        }
+      }
+    }
+  }
+
   return { ok: errors.length === 0, errors, warnings };
 }

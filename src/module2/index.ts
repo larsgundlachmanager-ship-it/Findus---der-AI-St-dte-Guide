@@ -83,6 +83,7 @@ export {
 } from './reboot';
 export { analyzeManagerTurn } from './router/analyzeTurn';
 export { runConciergeTurn } from './router/runConciergeTurn';
+export { continueTurnFromChoice } from './router/continueTurnFromChoice';
 export { listBlueprints, getBlueprintContract } from './blueprints/registry';
 export {
   weeklyDigestText,
@@ -101,6 +102,16 @@ export {
   useLivePitchStore,
 } from './pitch';
 export { shouldHandoffToPitchModule } from './pitch/shouldHandoffPitch';
+export {
+  decideTopicCut,
+  splitTurnIntents,
+  shouldScrubDeadThread,
+  looksLikeWhereAmIQuery,
+  looksLikeExplicitNavOrAddress,
+  looksLikeOpenDestinationCommit,
+  looksLikeCurrentFlightUtterance,
+  resolveTurnBridgePace,
+} from './kernel/turnKernel';
 export {
   buildPitchRequestFromText,
   buildPitchRequestFromWish,

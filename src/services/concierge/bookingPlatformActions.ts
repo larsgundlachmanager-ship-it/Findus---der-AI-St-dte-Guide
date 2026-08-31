@@ -31,6 +31,60 @@ export const NAMED_BOOKING_PORTALS: NamedBookingPortal[] = [
       'Mietrad (mietrad.de) ist eine Buchungsplattform für Fahrradverleihe — selbst kein Verleiher; lokale Partner listen dort Räder zur Online-Reservierung.',
     domainRe: /mietrad\.de/i,
   },
+  {
+    id: 'getyourguide',
+    re: /\b(get\s*your\s*guide|gyg)\b/iu,
+    homeUrl: 'https://www.getyourguide.com/',
+    label: '🎟 GetYourGuide',
+    explainHint:
+      'GetYourGuide ist eine Buchungsplattform für Touren und Tickets — lokale Anbieter listen dort buchbare Erlebnisse.',
+    domainRe: /getyourguide\.com/i,
+  },
+  {
+    id: 'viator',
+    re: /\bviator\b/iu,
+    homeUrl: 'https://www.viator.com/',
+    label: '🎟 Viator',
+    explainHint:
+      'Viator ist eine Buchungsplattform für Touren und Aktivitäten.',
+    domainRe: /viator\.com/i,
+  },
+  {
+    id: 'eventim',
+    re: /\beventim\b/iu,
+    homeUrl: 'https://www.eventim.de/',
+    label: '🎟 Eventim',
+    explainHint:
+      'Eventim ist ein Ticketportal für Konzerte, Theater und Events.',
+    domainRe: /eventim\.de/i,
+  },
+  {
+    id: 'ticketmaster',
+    re: /\bticket\s*master\b/iu,
+    homeUrl: 'https://www.ticketmaster.de/',
+    label: '🎟 Ticketmaster',
+    explainHint:
+      'Ticketmaster ist ein Ticketportal für Konzerte und Veranstaltungen.',
+    domainRe: /ticketmaster\./i,
+  },
+  {
+    id: 'booking',
+    re: /\bbooking(?:\.com)?\b/iu,
+    homeUrl: 'https://www.booking.com/',
+    label: '🏨 Booking.com',
+    explainHint:
+      'Booking.com ist eine Hotel-Buchungsplattform mit Live-Verfügbarkeit.',
+    domainRe: /booking\.com/i,
+  },
+  {
+    id: 'konfetti',
+    re: /\b(konfetti|confetti|go\s*konfetti|gokonfetti)\b/iu,
+    homeUrl: 'https://www.gokonfetti.com/de-de/',
+    label: '🎫 Konfetti',
+    explainHint:
+      'Konfetti (gokonfetti) ist eine Buchungsplattform für Workshops, Weinproben und Erlebnisse — Anbieter listen dort buchbare Termine.',
+    domainRe: /gokonfetti\.com|konfetti\.|confetti\./i,
+  },
 ];
 
 export function detectNamedBookingPortals(text: string): NamedBookingPortal[] {
@@ -48,17 +102,31 @@ function preferPortalSourceUrl(
   portal: NamedBookingPortal,
   web?: WebResearchResult | null,
 ): string | null {
-  if (!web?.sources?.length) return null;
-  for (const s of web.sources) {
+  const pool: string[] = [];
+  for (const s of web?.sources ?? []) {
     if (s.url && portal.domainRe.test(s.url) && /^https?:\/\//i.test(s.url)) {
-      return s.url;
+      pool.push(s.url);
     }
   }
-  for (const f of web.facts ?? []) {
+  for (const f of web?.facts ?? []) {
     const u = f.sourceUrl?.trim();
-    if (u && portal.domainRe.test(u) && /^https?:\/\//i.test(u)) return u;
+    if (u && portal.domainRe.test(u) && /^https?:\/\//i.test(u)) pool.push(u);
   }
-  return null;
+  if (!pool.length) return null;
+  try {
+    const { pickBestScoredUrl } = require('../research/liveDeepLink') as {
+      pickBestScoredUrl: (
+        urls: string[],
+        opts: { intent: 'booking' | 'ticket' },
+      ) => string | null;
+    };
+    const intent = /ticket|eventim|ticketmaster|konfetti/i.test(portal.id)
+      ? 'ticket'
+      : 'booking';
+    return pickBestScoredUrl(pool, { intent }) ?? pool[0] ?? null;
+  } catch {
+    return pool[0] ?? null;
+  }
 }
 
 /**
@@ -87,8 +155,19 @@ export function buildNamedBookingPortalActions(opts: {
     if (already || out.some((a) => portal.domainRe.test(a.payload.url ?? ''))) {
       continue;
     }
-    const url =
+    const rawUrl =
       preferPortalSourceUrl(portal, opts.webResearch) ?? portal.homeUrl;
+    let url = rawUrl;
+    if (portal.id === 'konfetti') {
+      try {
+        const { preferKonfettiAffiliateUrl } = require('../affiliate/konfettiAffiliate') as {
+          preferKonfettiAffiliateUrl: (u: string) => string;
+        };
+        url = preferKonfettiAffiliateUrl(rawUrl);
+      } catch {
+        url = rawUrl;
+      }
+    }
     out.push({
       type: 'OPEN_URL',
       label: shortenActionLabel(portal.label),

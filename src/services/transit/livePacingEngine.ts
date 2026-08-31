@@ -7,6 +7,7 @@
 import type { JourneyItinerary } from './journeyPlanner';
 import { recalculateMissedConnection } from './journeyPlanner';
 import type { TransitDeparture } from './transitAdvisor';
+import { STATION_ARRIVE_BEFORE_MIN } from './stationArriveBuffer';
 import {
   formatMissedSilentHud,
   type MissedConnectionPick,
@@ -33,7 +34,6 @@ export type PacingResult = {
 };
 
 const RELAXED_BUFFER_MIN = 5;
-const TIGHT_BUFFER_MIN = 3;
 
 function formatClock(d: Date): string {
   const h = d.getHours().toString().padStart(2, '0');
@@ -81,9 +81,9 @@ export function evaluateLivePacing(opts: {
   });
 
   let scenario: PacingScenario = 'ok';
-  if (dep.cancelled || until < 0 || bufferMin < -1) {
+  if (dep.cancelled || until < 0) {
     scenario = 'missed';
-  } else if (bufferMin <= TIGHT_BUFFER_MIN) {
+  } else if (bufferMin < STATION_ARRIVE_BEFORE_MIN) {
     scenario = 'tight';
   } else if (bufferMin >= RELAXED_BUFFER_MIN && (delayMin ?? 0) >= 2) {
     scenario = 'relaxed';
@@ -123,10 +123,27 @@ export function formatPacingSpeech(
   }
 
   if (pacing.scenario === 'tight') {
+    let walkBit = `du brauchst noch etwa ${walk} Minuten zur Haltestelle.`;
+    try {
+      const { walkToStopPhrase } = require('../tts/offlinePhraseBank') as {
+        walkToStopPhrase: (m: number) => string;
+      };
+      walkBit = walkToStopPhrase(walk);
+    } catch {
+      /* keep */
+    }
+    const untilB = Math.max(1, Math.round(until));
+    if (untilB <= 3) {
+      return (
+        `In ${untilB} Minuten fährt die ${line} — ` +
+        `${walkBit} ` +
+        `Wenn du dich beeilst, schaffst du sie vielleicht noch.`
+      );
+    }
     return (
-      `Achtung: Die ${line} Richtung ${pacing.direction} fährt in ${until} Minuten — ` +
-      `du brauchst noch etwa ${walk} Minuten zur Haltestelle. ` +
-      `Enger Puffer — wenn du es ruhig angehen willst, nimm lieber die nächste.`
+      `Die ${line} fährt in ${untilB} Minuten — ` +
+      `${walkBit} ` +
+      `Lauf lieber jetzt los.`
     );
   }
 

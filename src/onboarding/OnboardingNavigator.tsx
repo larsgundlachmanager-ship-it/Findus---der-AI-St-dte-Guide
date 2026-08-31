@@ -22,6 +22,8 @@ import {
   StepSubtitle,
   StepTitle,
 } from './OnboardingUI';
+import { NamePronunciationEditor } from '../components/settings/NamePronunciationEditor';
+import { AktuelleReiseEditor } from '../components/settings/AktuelleReiseEditor';
 import { AgeLifeSlider } from './AgeLifeSlider';
 import { AudioWave } from '../components/AudioWave';
 import { SubtitlesSlot } from '../components/liveStage/SubtitlesSlot';
@@ -51,7 +53,6 @@ import { VoiceSelectorList } from '../components/VoiceSelectorList';
 import {
   CHARACTER_CATEGORIES,
   EXPERIENCE_CARDS,
-  TRAVEL_STYLE_CARD_IDS,
   type ExperienceCard,
 } from '../constants/onboardingOptions';
 import {
@@ -61,17 +62,17 @@ import {
   type ExplanationHint,
 } from '../i18n';
 import { markFirstMapWelcomeDone } from '../services/onboarding/firstMapWelcomeService';
-import { queuePostTourQuestion } from '../services/onboarding/pendingPostTourQuestion';
+import { runPostExplanationCityWelcome } from '../services/cityWelcomeService';
 import {
   buildGuidedFeatureTourSegments,
   cityDemoPack,
+  createExplanationSpeechCursor,
+  explanationSegmentHoldMs,
+  explanationSpeechChunkStream,
+  POST_EXPLANATION_SETTLE_MS,
 } from '../services/onboarding/guidedFeatureTour';
 import { GuidedFeatureTourOverlays } from './GuidedFeatureTourOverlays';
-import {
-  ensureWeatherFresh,
-  getCachedWeatherSnapshot,
-  getCachedWeatherSummary,
-} from '../services/weatherService';
+import { ensureWeatherFresh } from '../services/weatherService';
 import type {
   AppLanguage,
   SwipePreference,
@@ -95,19 +96,32 @@ import {
   voicePreloader,
 } from '../services/ttsService';
 import { useFinnusStore } from '../store/useFinnusStore';
+import { useHomeMapUiStore } from '../store/useHomeMapUiStore';
 import {
   startListening,
   stopListening,
   isSttAvailable,
 } from '../services/sttService';
-import { saveUserProfile } from '../services/userProfileService';
+import { getCachedUserProfile, saveUserProfile } from '../services/userProfileService';
 import { appendSpeechSegment } from '../utils/speechText';
 import { showPermissionMissingAlert } from '../utils/permissionAlerts';
 import { SwipeBackView } from '../components/SwipeBackView';
 import { PlayPauseIcon } from '../components/PlayPauseIcon';
 import { Header } from '../components/Header';
+import { HomeDockBar } from '../components/HomeDockBar';
 import { MicButton } from '../components/MicButton';
 import { PlanCalendarModal } from '../components/PlanCalendarModal';
+import { PlaceSeekSheet } from '../components/PlaceSeekSheet';
+import { HomePresenceMap } from '../components/homeMap/HomePresenceMap';
+import { HomeMapPlacePopup } from '../components/homeMap/HomeMapPlacePopup';
+import { SettingsScreen } from '../screens/SettingsScreenLazy';
+import { UI_LAYER } from '../constants/uiLayers';
+import { useSystemSafePad } from '../hooks/useSystemSafePad';
+import {
+  HOME_DOCK_BAR_H,
+  HOME_MIC_DOCK_GAP,
+  HOME_MIC_HINT_RESERVE,
+} from '../components/liveStage';
 import { PathChoiceStep } from './PathChoiceStep';
 import { ExpressSetupStep } from './ExpressSetupStep';
 import { MicConsentStep } from './MicConsentStep';
@@ -118,23 +132,22 @@ import { OnboardingInfoSheet } from './OnboardingInfoSheet';
 import { CityStep } from './CityStep';
 import { warmCityCatalogForOnboarding } from '../services/cityCatalogService';
 import type { OnboardingMode, TravelParty, MobilityPrefs } from '../types/userProfile';
+import { profileHasFinishedSetup } from '../types/userProfile';
 import type { BudgetCategory, EnergyLevel } from '../types/userProfile';
 import { useFuturePlanStore } from '../module2/timeline/futurePlanState';
 import { todayDateKey } from '../utils/dateKeys';
 import { resolveVoiceForPersonality } from '../services/persona/personalityVoiceMap';
 import {
   sendMagicLink,
-  signInWithOAuthProvider,
+  signInWithGoogle,
+  signInWithApple,
   mergeAuthIntoProfile,
   refreshAuthSession,
-  handleAuthRedirectUrl,
   subscribeAuthRedirects,
-  getAuthRedirectUrl,
   signOutAuth,
   getLastAuthUser,
   type AuthSessionUser,
 } from '../services/account/findusAuth';
-import * as WebBrowser from 'expo-web-browser';
 
 type FlowStep =
   | 'language'
@@ -156,8 +169,8 @@ const EXPRESS_FLOW: FlowStep[] = [
   'path',
   'auth',
   'city',
-  'express',
   'mic',
+  'express',
   'summary',
 ];
 const STANDARD_FLOW: FlowStep[] = [
@@ -214,8 +227,22 @@ export function OnboardingNavigator({
   const flow = mode === 'express' ? EXPRESS_FLOW : STANDARD_FLOW;
   const step = flow[Math.min(flowIndex, flow.length - 1)] ?? 'path';
 
-  const applyAuthUser = useCallback(
-    (u: AuthSessionUser, advance: boolean) => {
+  const completeRestoredProfile = useCallback(
+    (p: import('../types/userProfile').UserProfile) => {
+      onComplete({
+        ...p,
+        language: 'de',
+        setupComplete: true,
+        firstMapWelcomeDone: true,
+        accountMode: 'registered',
+        completedAt: p.completedAt ?? new Date().toISOString(),
+      });
+    },
+    [onComplete],
+  );
+
+  const restoreFinishedAccount = useCallback(
+    async (u: AuthSessionUser): Promise<boolean> => {
       setAuthUser(u);
       setDraft((d) => ({
         ...d,
@@ -227,21 +254,42 @@ export function OnboardingNavigator({
           ? `Angemeldet als ${u.email}`
           : 'Konto bestätigt — du kannst weiter.',
       );
-      if (!advance) return;
-      setFlowIndex((idx) => {
-        if (EXPRESS_FLOW[idx] === 'auth' || STANDARD_FLOW[idx] === 'auth') {
-          return idx + 1;
-        }
-        return idx;
+      try {
+        const { pullUserCloudOnLogin } = await import(
+          '../services/account/userCloudSync'
+        );
+        await pullUserCloudOnLogin();
+      } catch {
+        /* soft */
+      }
+      const p = getCachedUserProfile();
+      if (!profileHasFinishedSetup(p) || !p) return false;
+      completeRestoredProfile(p);
+      return true;
+    },
+    [completeRestoredProfile],
+  );
+
+  const applyAuthUser = useCallback(
+    (u: AuthSessionUser, advance: boolean) => {
+      void restoreFinishedAccount(u).then((done) => {
+        if (done || !advance) return;
+        setFlowIndex((idx) => {
+          if (EXPRESS_FLOW[idx] === 'auth' || STANDARD_FLOW[idx] === 'auth') {
+            return idx + 1;
+          }
+          return idx;
+        });
       });
     },
-    [],
+    [restoreFinishedAccount],
   );
 
   const patch = (p: Partial<UserProfile>) =>
     setDraft((d) => ({ ...d, ...p }));
 
   const persist = async (next: UserProfile) => {
+    if (profileHasFinishedSetup(getCachedUserProfile())) return;
     await saveUserProfile({ ...next, setupComplete: false });
   };
 
@@ -284,7 +332,8 @@ export function OnboardingNavigator({
       ...override,
       language: 'de',
       setupComplete: true,
-      completedAt: new Date().toISOString(),
+      firstMapWelcomeDone: true,
+      completedAt: override?.completedAt ?? draft.completedAt ?? new Date().toISOString(),
       onboardingMode: mode ?? override?.onboardingMode ?? 'standard',
     });
   };
@@ -296,6 +345,13 @@ export function OnboardingNavigator({
     void persist(next);
     const nextIndex = Math.min(flowIndex + 1, flow.length - 1);
     const nextStep = flow[nextIndex];
+    if (
+      nextStep === 'summary' &&
+      (profileHasFinishedSetup(getCachedUserProfile()) || next.firstMapWelcomeDone)
+    ) {
+      finish(next);
+      return;
+    }
     // Stadt/Stimmen schon warmen, bevor der Screen kommt — kein sichtbarer GPS-Sprung
     if (
       nextStep === 'city' ||
@@ -312,12 +368,13 @@ export function OnboardingNavigator({
       });
       void prefetchVoiceSamples(next.voiceId || 'sebastian');
     }
-    // Erklärung: Opener + Engine schon warm, bevor der Screen mountet
+    // Erklärung: Stimme + Wetter schon warm, bevor der Screen mountet
     if (nextStep === 'summary') {
       const voiceId = next.voiceId;
       void warmupTtsEngine({ voiceId });
       void startVoiceBuffer({ speechRate: 1, priorityVoiceId: voiceId });
       void prepareOnboardingVoiceSamples({ priorityVoiceId: voiceId });
+      void ensureWeatherFresh('open');
     }
     setFlowIndex(nextIndex);
   };
@@ -373,25 +430,22 @@ export function OnboardingNavigator({
     setAuthBusy(true);
     setAuthStatus(null);
     try {
-      const res = await signInWithOAuthProvider(provider);
-      if (!res.ok || !res.url) {
-        setAuthStatus(res.error ?? 'Login nicht verfügbar');
+      const res =
+        provider === 'apple'
+          ? await signInWithApple()
+          : await signInWithGoogle();
+      if (res.ok && res.user) {
+        const restored = await restoreFinishedAccount(res.user);
+        if (restored) return;
+        goNext({
+          accountMode: 'registered',
+          ...mergeAuthIntoProfile(draft, res.user),
+        });
         return;
       }
-      const redirect = getAuthRedirectUrl();
-      const result = await WebBrowser.openAuthSessionAsync(res.url, redirect);
-      if (result.type === 'success' && result.url) {
-        const user = await handleAuthRedirectUrl(result.url);
-        if (user) {
-          applyAuthUser(user, false);
-          goNext({
-            accountMode: 'registered',
-            ...mergeAuthIntoProfile(draft, user),
-          });
-          return;
-        }
-      }
-      setAuthStatus('Anmeldung abgebrochen oder fehlgeschlagen.');
+      setAuthStatus(
+        res.error ?? 'Anmeldung abgebrochen oder fehlgeschlagen.',
+      );
     } finally {
       setAuthBusy(false);
     }
@@ -400,7 +454,11 @@ export function OnboardingNavigator({
   return (
     <View style={styles.safe}>
       <OnboardingDensityProvider age={draft.age}>
-      <SwipeBackView enabled={flowIndex > 0} onBack={goBack}>
+      <SwipeBackView
+        enabled={flowIndex > 0 && step !== 'summary'}
+        captureHardwareBack={flowIndex > 0 && step !== 'summary'}
+        onBack={goBack}
+      >
         {step === 'path' && <PathChoiceStep onChoose={choosePath} />}
 
         {step === 'language' && (
@@ -417,12 +475,18 @@ export function OnboardingNavigator({
             statusMessage={authStatus}
             isSignedIn={!!authUser}
             signedInEmail={authUser?.email ?? draft.email ?? null}
-            onContinueSignedIn={() =>
-              goNext({
-                accountMode: 'registered',
-                ...(authUser ? mergeAuthIntoProfile(draft, authUser) : {}),
-              })
-            }
+            onContinueSignedIn={() => {
+              void (async () => {
+                if (authUser) {
+                  const restored = await restoreFinishedAccount(authUser);
+                  if (restored) return;
+                }
+                goNext({
+                  accountMode: 'registered',
+                  ...(authUser ? mergeAuthIntoProfile(draft, authUser) : {}),
+                });
+              })();
+            }}
             onSwitchAccount={() => {
               setAuthBusy(true);
               void signOutAuth()
@@ -440,7 +504,7 @@ export function OnboardingNavigator({
                 setAuthBusy(false);
                 setAuthStatus(
                   r.ok
-                    ? 'Magic Link gesendet. Tippe den Link in der Mail — Findus öffnet sich danach von selbst.'
+                    ? 'Magic Link gesendet. Tippe den Link in der Mail — Yorro öffnet sich danach von selbst.'
                     : r.error ?? 'Fehler',
                 );
                 if (r.ok) {
@@ -805,6 +869,137 @@ function AboutMeVoiceField({
   );
 }
 
+function AboutAllergyBlock({
+  draft,
+  onChange,
+}: {
+  draft: UserProfile;
+  onChange: (p: Partial<UserProfile>) => void;
+}) {
+  const [allergyOpen, setAllergyOpen] = useState(() => {
+    const tags = draft.allergyTags ?? [];
+    return tags.some((t) => t !== 'keine');
+  });
+
+  const toggleAllergy = (id: string) => {
+    const cur = (draft.allergyTags ?? []).filter((x) => x !== 'keine');
+    const next = cur.includes(id)
+      ? cur.filter((x) => x !== id)
+      : [...cur, id];
+    onChange({ allergyTags: next });
+  };
+
+  return (
+    <>
+      <View style={styles.chipRow}>
+        {(
+          [
+            { id: false, label: 'Keine' },
+            { id: true, label: 'Ja' },
+          ] as const
+        ).map((o) => {
+          const on = allergyOpen === o.id;
+          return (
+            <Pressable
+              key={String(o.id)}
+              onPress={() => {
+                setAllergyOpen(o.id);
+                if (!o.id) onChange({ allergyTags: ['keine'] });
+                else {
+                  onChange({
+                    allergyTags: (draft.allergyTags ?? []).filter(
+                      (x) => x !== 'keine',
+                    ),
+                  });
+                }
+              }}
+              style={[styles.prefChip, on && styles.prefChipOn]}
+            >
+              <Text style={styles.prefChipLabel}>{o.label}</Text>
+            </Pressable>
+          );
+        })}
+      </View>
+      {allergyOpen ? (
+        <View style={styles.chipRow}>
+          {ALLERGY_INTOLERANCE_OPTIONS.map((o) => {
+            const on = (draft.allergyTags ?? []).includes(o.id);
+            return (
+              <Pressable
+                key={o.id}
+                onPress={() => toggleAllergy(o.id)}
+                style={[styles.prefChip, on && styles.prefChipOn]}
+              >
+                <Text style={styles.prefChipLabel}>{o.label}</Text>
+              </Pressable>
+            );
+          })}
+        </View>
+      ) : null}
+      <Field
+        label="Sonstiges (optional)"
+        value={draft.allergies ?? ''}
+        onChangeText={(allergies) => onChange({ allergies })}
+      />
+    </>
+  );
+}
+
+function AboutAccessibilityBlock({
+  draft,
+  onChange,
+}: {
+  draft: UserProfile;
+  onChange: (p: Partial<UserProfile>) => void;
+}) {
+  return (
+    <>
+      <View style={styles.chipRow}>
+        {(
+          [
+            { id: false, label: 'Nein' },
+            { id: true, label: 'Ja — Details' },
+          ] as const
+        ).map((o) => {
+          const on = !!draft.accessibilityCare === o.id;
+          return (
+            <Pressable
+              key={String(o.id)}
+              onPress={() => onChange({ accessibilityCare: o.id })}
+              style={[styles.prefChip, on && styles.prefChipOn]}
+            >
+              <Text style={styles.prefChipLabel}>{o.label}</Text>
+            </Pressable>
+          );
+        })}
+      </View>
+      {draft.accessibilityCare ? (
+        <View style={styles.chipRow}>
+          {ACCESSIBILITY_NEED_OPTIONS.map((o) => {
+            const on = (draft.accessibility ?? []).includes(o.id);
+            return (
+              <Pressable
+                key={o.id}
+                onPress={() => {
+                  const cur = draft.accessibility ?? [];
+                  onChange({
+                    accessibility: on
+                      ? cur.filter((x) => x !== o.id)
+                      : [...cur, o.id],
+                  });
+                }}
+                style={[styles.prefChip, on && styles.prefChipOn]}
+              >
+                <Text style={styles.prefChipLabel}>{o.label}</Text>
+              </Pressable>
+            );
+          })}
+        </View>
+      ) : null}
+    </>
+  );
+}
+
 function AboutYouStep({
   lang,
   draft,
@@ -833,7 +1028,10 @@ function AboutYouStep({
   return (
     <OnboardingShell>
       <StepTitle>{t(lang, 'aboutTitle')}</StepTitle>
-      <ScrollView>
+      <ScrollView
+        keyboardShouldPersistTaps="always"
+        keyboardDismissMode="none"
+      >
         {isGuest ? (
           <Text style={[styles.muted, { marginBottom: spacing.md }]}>
             Als Gast reicht der Vorname. E-Mail und Telefon holen wir bei der
@@ -845,6 +1043,7 @@ function AboutYouStep({
           value={draft.firstName}
           onChangeText={(firstName) => onChange({ firstName })}
         />
+        <NamePronunciationEditor draft={draft} onChange={onChange} />
         {!isGuest ? (
           <Field
             label={`${t(lang, 'lastName')} *`}
@@ -877,7 +1076,7 @@ function AboutYouStep({
         />
         {!isGuest && !phoneOk ? (
           <Text style={{ color: '#c45c26', fontSize: 13, marginBottom: spacing.sm }}>
-            Telefon ist Pflicht — damit Findus Anrufe/Rückrufe vorbereiten kann.
+            Telefon ist Pflicht — damit Yorro Anrufe/Rückrufe vorbereiten kann.
           </Text>
         ) : null}
         <Text style={styles.rateLabel}>Geschlecht</Text>
@@ -908,6 +1107,37 @@ function AboutYouStep({
           yearsLabel={t(lang, 'years')}
           onChange={(age) => onChange({ age })}
         />
+
+        <Text style={styles.rateLabel}>Ernährung</Text>
+        <View style={styles.chipRow}>
+          {DIETARY_OPTIONS.filter((o) =>
+            ['vegan', 'vegetarisch', 'fisch', 'glutenfrei'].includes(o.id),
+          ).map((o) => {
+            const on = (draft.dietaryTags ?? []).includes(o.id);
+            return (
+              <Pressable
+                key={o.id}
+                onPress={() => {
+                  const cur = draft.dietaryTags ?? [];
+                  onChange({
+                    dietaryTags: on
+                      ? cur.filter((x) => x !== o.id)
+                      : [...cur, o.id],
+                  });
+                }}
+                style={[styles.prefChip, on && styles.prefChipOn]}
+              >
+                <Text style={styles.prefChipLabel}>{o.label}</Text>
+              </Pressable>
+            );
+          })}
+        </View>
+
+        <Text style={styles.rateLabel}>Allergien & Unverträglichkeiten</Text>
+        <AboutAllergyBlock draft={draft} onChange={onChange} />
+
+        <Text style={styles.rateLabel}>Barriere & besondere Bedürfnisse</Text>
+        <AboutAccessibilityBlock draft={draft} onChange={onChange} />
       </ScrollView>
       <PrimaryButton
         label={t(lang, 'continue')}
@@ -938,6 +1168,8 @@ function Field({
         style={styles.input}
         placeholderTextColor={colors.textMuted}
         keyboardType={keyboardType}
+        autoCorrect={false}
+        showSoftInputOnFocus
         autoCapitalize={
           keyboardType === 'email-address' || keyboardType === 'phone-pad'
             ? 'none'
@@ -1063,8 +1295,8 @@ function CharacterStep({
             {cat.maxSelect != null && cat.maxSelect > 1 ? (
               <Text style={styles.catHint}>
                 {uiLang(lang) === 'de'
-                  ? `Mehrfachauswahl möglich — max. ${cat.maxSelect}. Findus mixt den Stil.`
-                  : `Multi-select — max ${cat.maxSelect}. Findus mixes the style.`}
+                  ? `Mehrfachauswahl möglich — max. ${cat.maxSelect}. Yorro mixt den Stil.`
+                  : `Multi-select — max ${cat.maxSelect}. Yorro mixes the style.`}
               </Text>
             ) : null}
             <View style={styles.chipRow}>
@@ -1107,593 +1339,28 @@ function ExperienceStep({
   onChange: (p: Partial<UserProfile>) => void;
   onNext: (override?: Partial<UserProfile>) => void;
 }) {
-  const experienceCards = EXPERIENCE_CARDS.filter(
-    (c) =>
-      (c.category === 'wissen' || c.category === 'vibes') &&
-      c.id !== 'budget' &&
-      c.id !== 'jahreszahlen' &&
-      c.id !== 'geschichte' &&
-      c.id !== 'barrierearm' &&
-      c.id !== 'geheimtipps' &&
-      c.id !== 'typisch_touri',
-  );
-
-  const [periodPreset, setPeriodPreset] = useState<TravelPeriodPreset>(() =>
-    matchTravelPeriodPreset(draft.travelPeriod),
-  );
-  const [allergyOpen, setAllergyOpen] = useState(() => {
-    const tags = draft.allergyTags ?? [];
-    return tags.some((t) => t !== 'keine');
-  });
-
-  const setPref = (id: string, value: SwipePreference) => {
-    const nextPrefs = { ...draft.experiencePrefs, [id]: value };
-    const patch: Partial<UserProfile> = { experiencePrefs: nextPrefs };
-    if (id === 'budget') {
-      patch.budgetCategory =
-        value === 'no' ? 'sparsam' : value === 'yes' ? 'komfort' : 'mittel';
-    }
-    if (id === 'weg_vom_trubel' && value === 'yes') {
-      patch.touristMode = 'insider';
-    }
-    onChange(patch);
-  };
-
-  const setMobility = (
-    key: keyof MobilityPrefs,
-    value: NonNullable<MobilityPrefs[typeof key]>,
-  ) => {
-    onChange({
-      mobilityPrefs: { ...(draft.mobilityPrefs ?? {}), [key]: value },
-    });
-  };
-
-  const toggleDietary = (id: string) => {
-    const cur = draft.dietaryTags ?? [];
-    const next = cur.includes(id) ? cur.filter((x) => x !== id) : [...cur, id];
-    onChange({ dietaryTags: next });
-  };
-
-  const toggleAllergy = (id: string) => {
-    const cur = (draft.allergyTags ?? []).filter((x) => x !== 'keine');
-    const next = cur.includes(id)
-      ? cur.filter((x) => x !== id)
-      : [...cur, id];
-    onChange({ allergyTags: next });
-  };
-
-  const setPeriod = (preset: TravelPeriodPreset) => {
-    setPeriodPreset(preset);
-    if (preset === 'custom') {
-      if (matchTravelPeriodPreset(draft.travelPeriod) !== 'custom') {
-        onChange({ travelPeriod: '' });
-      }
-      return;
-    }
-    const hit = TRAVEL_PERIOD_PRESETS.find((p) => p.id === preset);
-    onChange({ travelPeriod: hit?.value ?? '' });
-  };
-
-  const ensureDefaults = () => {
+  useEffect(() => {
     const prefs = { ...draft.experiencePrefs };
     for (const card of EXPERIENCE_CARDS) {
       if (!prefs[card.id]) prefs[card.id] = 'neutral';
     }
     onChange({ experiencePrefs: prefs });
-  };
-
-  useEffect(() => {
-    ensureDefaults();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const [micTarget, setMicTarget] = useState<'want' | 'avoid' | null>(null);
-  const micTargetRef = useRef<'want' | 'avoid' | null>(null);
-  const silenceTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const wantBaseRef = useRef('');
-  const avoidBaseRef = useRef('');
-
-  const clearSilenceTimer = () => {
-    if (silenceTimer.current) {
-      clearTimeout(silenceTimer.current);
-      silenceTimer.current = null;
-    }
-  };
-
-  const resetSilenceTimer = () => {
-    clearSilenceTimer();
-    silenceTimer.current = setTimeout(() => {
-      void stopMic();
-    }, 3000);
-  };
-
-  const stopMic = async () => {
-    clearSilenceTimer();
-    const target = micTargetRef.current;
-    micTargetRef.current = null;
-    setMicTarget(null);
-    if (!target) {
-      try {
-        await stopListening();
-      } catch {
-        // ignore
-      }
-      return;
-    }
-
-    const baseRef = target === 'want' ? wantBaseRef : avoidBaseRef;
-    try {
-      const text = await stopListening();
-      const committed = appendSpeechSegment(baseRef.current, text);
-      baseRef.current = committed;
-      if (target === 'want') onChange({ wantToExperience: committed });
-      else onChange({ avoidExperience: committed });
-    } catch {
-      // ignore
-    }
-  };
-
-  const startMic = async (target: 'want' | 'avoid') => {
-    if (micTargetRef.current === target) {
-      await stopMic();
-      return;
-    }
-
-    if (micTargetRef.current) {
-      await stopMic();
-    }
-
-    if (!(await isSttAvailable())) {
-      showPermissionMissingAlert('speechUnavailable', { force: true });
-      return;
-    }
-
-    const baseRef = target === 'want' ? wantBaseRef : avoidBaseRef;
-    baseRef.current = (
-      target === 'want' ? draft.wantToExperience : draft.avoidExperience
-    ).trim();
-
-    micTargetRef.current = target;
-    setMicTarget(target);
-
-    const onPartial = (partial: string) => {
-      resetSilenceTimer();
-      const display = appendSpeechSegment(baseRef.current, partial);
-      if (target === 'want') onChange({ wantToExperience: display });
-      else onChange({ avoidExperience: display });
-    };
-
-    const result = await startListening(onPartial, { replaceActive: true });
-    if (!result.ok) {
-      micTargetRef.current = null;
-      setMicTarget(null);
-      // Popup bereits über sttService
-      return;
-    }
-
-    resetSilenceTimer();
-  };
-
-  useEffect(() => {
-    return () => {
-      void stopMic();
-    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <OnboardingShell>
-      <StepTitle>Rahmenbedingungen</StepTitle>
-      <ScrollView contentContainerStyle={{ paddingBottom: 24 }}>
-        <Text style={styles.rahmenLead}>
-          Alles Wichtige in einer Reihe — du entscheidest, nichts ist vorausgewählt.
-        </Text>
-
-        <View style={styles.sectionGroup}>
-          <Text style={styles.sectionGroupTitle}>Reisezeitraum</Text>
-          <EqualChipRow count={TRAVEL_PERIOD_PRESETS.length}>
-            {TRAVEL_PERIOD_PRESETS.map((p) => {
-              const on = periodPreset === p.id;
-              return (
-                <Pressable
-                  key={p.id}
-                  onPress={() => setPeriod(p.id)}
-                  style={[styles.prefChip, on && styles.prefChipOn]}
-                >
-                  <Text style={styles.prefChipLabel}>{p.label}</Text>
-                </Pressable>
-              );
-            })}
-          </EqualChipRow>
-          {periodPreset === 'custom' ? (
-            <TextInput
-              style={styles.input}
-              placeholder="z. B. 3.–10. August"
-              placeholderTextColor={colors.textMuted}
-              value={draft.travelPeriod ?? ''}
-              onChangeText={(travelPeriod) => onChange({ travelPeriod })}
-            />
-          ) : null}
-        </View>
-
-        <View style={styles.sectionGroup}>
-          <Text style={styles.sectionGroupTitle}>Tempo & Budget</Text>
-          <Text style={styles.fieldLabel}>Energielevel</Text>
-          <EqualChipRow count={ENERGY_OPTIONS.length}>
-            {ENERGY_OPTIONS.map((o) => {
-              const on = draft.energyLevel === o.id;
-              return (
-                <Pressable
-                  key={o.id}
-                  onPress={() =>
-                    onChange({ energyLevel: o.id as EnergyLevel })
-                  }
-                  style={[styles.prefChip, on && styles.prefChipOn]}
-                >
-                  <Text style={styles.prefChipLabel}>{o.label}</Text>
-                  <Text style={styles.prefChipHint}>{o.hint}</Text>
-                </Pressable>
-              );
-            })}
-          </EqualChipRow>
-
-          <Text style={styles.fieldLabel}>Budget — Preisorientierung</Text>
-          <EqualChipRow count={BUDGET_OPTIONS.length}>
-            {BUDGET_OPTIONS.map((o) => {
-              const on = draft.budgetCategory === o.id;
-              return (
-                <Pressable
-                  key={o.id}
-                  onPress={() =>
-                    onChange({
-                      budgetCategory: o.id as BudgetCategory,
-                      experiencePrefs: {
-                        ...draft.experiencePrefs,
-                        budget:
-                          o.id === 'sparsam'
-                            ? 'no'
-                            : o.id === 'komfort'
-                              ? 'yes'
-                              : 'neutral',
-                      },
-                    })
-                  }
-                  style={[styles.prefChip, on && styles.prefChipOn]}
-                >
-                  <Text style={styles.prefChipLabel}>{o.label}</Text>
-                  <Text style={styles.prefChipHint}>{o.hint}</Text>
-                </Pressable>
-              );
-            })}
-          </EqualChipRow>
-
-          <Text style={styles.fieldLabel}>Restaurant-Niveau</Text>
-          <EqualChipRow count={3}>
-            {(
-              [
-                { id: 'fast_cheap' as const, label: 'Schnell & günstig' },
-                { id: 'decent' as const, label: 'Vernünftig' },
-                { id: 'highlights' as const, label: 'Highlights' },
-              ] as const
-            ).map((o) => {
-              const on = draft.diningLevel === o.id;
-              return (
-                <Pressable
-                  key={o.id}
-                  onPress={() => onChange({ diningLevel: o.id })}
-                  style={[styles.prefChip, on && styles.prefChipOn]}
-                >
-                  <Text style={styles.prefChipLabel}>{o.label}</Text>
-                </Pressable>
-              );
-            })}
-          </EqualChipRow>
-        </View>
-
-        <View style={styles.sectionGroup}>
-          <Text style={styles.sectionGroupTitle}>Mobilität</Text>
-          <Text style={[styles.muted, { marginBottom: spacing.sm }]}>
-            Wähle deine Präferenzen
-          </Text>
-          <Text style={styles.fieldLabel}>Wie reist du?</Text>
-          <EqualChipRow count={TRAVEL_MODE_OPTIONS.length}>
-            {TRAVEL_MODE_OPTIONS.map((o) => {
-              const on = (draft.travelModes ?? []).includes(o.id);
-              return (
-                <Pressable
-                  key={o.id}
-                  onPress={() => {
-                    const cur = draft.travelModes ?? [];
-                    const next = on
-                      ? cur.filter((x) => x !== o.id)
-                      : [...cur, o.id];
-                    onChange({ travelModes: next });
-                  }}
-                  style={[styles.prefChip, on && styles.prefChipOn]}
-                >
-                  <Text style={styles.prefChipLabel}>{o.label}</Text>
-                </Pressable>
-              );
-            })}
-          </EqualChipRow>
-          {(
-            [
-              {
-                key: 'walk' as const,
-                label: 'Zu Fuß',
-                opts: [
-                  { id: 'primary', label: 'Geht gut' },
-                  { id: 'rather_not', label: 'Eher nicht' },
-                ],
-              },
-              {
-                key: 'transit' as const,
-                label: 'ÖPNV',
-                opts: [
-                  { id: 'love', label: 'Gerne' },
-                  { id: 'if_needed', label: 'Wenn nötig' },
-                  { id: 'avoid', label: 'Vermeiden' },
-                ],
-              },
-              {
-                key: 'bike' as const,
-                label: 'Fahrrad',
-                opts: [
-                  { id: 'own', label: 'Habe ich' },
-                  { id: 'rent', label: 'Würde leihen' },
-                  { id: 'no', label: 'Nein' },
-                ],
-              },
-              {
-                key: 'scooter' as const,
-                label: 'E-Scooter',
-                opts: [
-                  { id: 'own', label: 'Habe ich' },
-                  { id: 'rent', label: 'Würde leihen' },
-                  { id: 'no', label: 'Nein' },
-                ],
-              },
-            ] as const
-          ).map((row) => (
-            <View key={row.key} style={{ marginBottom: spacing.sm }}>
-              <Text style={styles.muted}>{row.label}</Text>
-              <EqualChipRow count={row.opts.length}>
-                {row.opts.map((o) => {
-                  const on = (draft.mobilityPrefs ?? {})[row.key] === o.id;
-                  return (
-                    <Pressable
-                      key={o.id}
-                      onPress={() => setMobility(row.key, o.id as never)}
-                      style={[styles.prefChip, on && styles.prefChipOn]}
-                    >
-                      <Text style={styles.prefChipLabel}>{o.label}</Text>
-                    </Pressable>
-                  );
-                })}
-              </EqualChipRow>
-            </View>
-          ))}
-          <View style={{ marginBottom: spacing.sm }}>
-            <Text style={styles.muted}>Taxi</Text>
-            <EqualChipRow count={TAXI_PREF_OPTIONS.length}>
-              {TAXI_PREF_OPTIONS.map((o) => {
-                const taxi = (draft.mobilityPrefs ?? {}).taxi;
-                const car = (draft.mobilityPrefs ?? {}).car;
-                const on =
-                  taxi === o.id ||
-                  (!taxi &&
-                    ((o.id === 'love' && car === 'taxi_love') ||
-                      (o.id === 'if_saves_time' && car === 'taxi_saves_time') ||
-                      (o.id === 'no' &&
-                        (car === 'none' || car === 'own_avoid'))));
-                return (
-                  <Pressable
-                    key={o.id}
-                    onPress={() =>
-                      onChange({
-                        mobilityPrefs: {
-                          ...(draft.mobilityPrefs ?? {}),
-                          taxi: o.id,
-                          car: o.car,
-                        },
-                      })
-                    }
-                    style={[styles.prefChip, on && styles.prefChipOn]}
-                  >
-                    <Text style={styles.prefChipLabel}>{o.label}</Text>
-                  </Pressable>
-                );
-              })}
-            </EqualChipRow>
-          </View>
-        </View>
-
-        <View style={styles.sectionGroup}>
-          <Text style={styles.sectionGroupTitle}>Barriere / besondere Bedürfnisse?</Text>
-          <EqualChipRow count={2}>
-            {(
-              [
-                { id: false, label: 'Nein' },
-                { id: true, label: 'Ja — Details' },
-              ] as const
-            ).map((o) => {
-              const on = !!draft.accessibilityCare === o.id;
-              return (
-                <Pressable
-                  key={String(o.id)}
-                  onPress={() => onChange({ accessibilityCare: o.id })}
-                  style={[styles.prefChip, on && styles.prefChipOn]}
-                >
-                  <Text style={styles.prefChipLabel}>{o.label}</Text>
-                </Pressable>
-              );
-            })}
-          </EqualChipRow>
-          {draft.accessibilityCare ? (
-            <EqualChipRow count={ACCESSIBILITY_NEED_OPTIONS.length}>
-              {ACCESSIBILITY_NEED_OPTIONS.map((o) => {
-                const on = (draft.accessibility ?? []).includes(o.id);
-                return (
-                  <Pressable
-                    key={o.id}
-                    onPress={() => {
-                      const cur = draft.accessibility ?? [];
-                      onChange({
-                        accessibility: on
-                          ? cur.filter((x) => x !== o.id)
-                          : [...cur, o.id],
-                      });
-                    }}
-                    style={[styles.prefChip, on && styles.prefChipOn]}
-                  >
-                    <Text style={styles.prefChipLabel}>{o.label}</Text>
-                  </Pressable>
-                );
-              })}
-            </EqualChipRow>
-          ) : null}
-        </View>
-
-        <View style={styles.sectionGroup}>
-          <Text style={styles.sectionGroupTitle}>Essen</Text>
-          <Text style={styles.fieldLabel}>Essen — Kategorien</Text>
-          <EqualChipRow count={4}>
-            {DIETARY_OPTIONS.filter((o) =>
-              ['vegan', 'vegetarisch', 'fisch', 'glutenfrei'].includes(o.id),
-            ).map((o) => {
-              const on = (draft.dietaryTags ?? []).includes(o.id);
-              return (
-                <Pressable
-                  key={o.id}
-                  onPress={() => toggleDietary(o.id)}
-                  style={[styles.prefChip, on && styles.prefChipOn]}
-                >
-                  <Text style={styles.prefChipLabel}>{o.label}</Text>
-                </Pressable>
-              );
-            })}
-          </EqualChipRow>
-
-          <Text style={styles.fieldLabel}>Allergien & Unverträglichkeiten</Text>
-          <EqualChipRow count={2}>
-            {(
-              [
-                { id: false, label: 'Keine' },
-                { id: true, label: 'Ja' },
-              ] as const
-            ).map((o) => {
-              const on = allergyOpen === o.id;
-              return (
-                <Pressable
-                  key={String(o.id)}
-                  onPress={() => {
-                    setAllergyOpen(o.id);
-                    if (!o.id) onChange({ allergyTags: ['keine'] });
-                    else {
-                      const cur = (draft.allergyTags ?? []).filter(
-                        (x) => x !== 'keine',
-                      );
-                      onChange({ allergyTags: cur });
-                    }
-                  }}
-                  style={[styles.prefChip, on && styles.prefChipOn]}
-                >
-                  <Text style={styles.prefChipLabel}>{o.label}</Text>
-                </Pressable>
-              );
-            })}
-          </EqualChipRow>
-          {allergyOpen ? (
-            <EqualChipRow count={ALLERGY_INTOLERANCE_OPTIONS.length}>
-              {ALLERGY_INTOLERANCE_OPTIONS.map((o) => {
-                const on = (draft.allergyTags ?? []).includes(o.id);
-                return (
-                  <Pressable
-                    key={o.id}
-                    onPress={() => toggleAllergy(o.id)}
-                    style={[styles.prefChip, on && styles.prefChipOn]}
-                  >
-                    <Text style={styles.prefChipLabel}>{o.label}</Text>
-                  </Pressable>
-                );
-              })}
-            </EqualChipRow>
-          ) : null}
-          <Field
-            label="Sonstiges (optional)"
-            value={draft.allergies ?? ''}
-            onChangeText={(allergies) => onChange({ allergies })}
-          />
-        </View>
-
-        <View style={styles.sectionGroup}>
-          <Text style={styles.sectionGroupTitle}>Reise-Stil</Text>
-          <EqualChipRow count={TRAVEL_STYLE_CARD_IDS.length}>
-            {EXPERIENCE_CARDS.filter((c) =>
-              (TRAVEL_STYLE_CARD_IDS as readonly string[]).includes(c.id),
-            ).map((card) => (
-              <Pressable
-                key={card.id}
-                onPress={() => {
-                  const cur = draft.experiencePrefs[card.id] ?? 'neutral';
-                  setPref(card.id, cur === 'yes' ? 'neutral' : 'yes');
-                }}
-                style={[
-                  styles.prefChip,
-                  draft.experiencePrefs[card.id] === 'yes' && styles.prefChipOn,
-                ]}
-              >
-                <Text style={styles.prefChipLabel}>{card.labelDe}</Text>
-              </Pressable>
-            ))}
-          </EqualChipRow>
-        </View>
-
-        <View style={[styles.sectionGroup, styles.catBlock]}>
-          <Text style={styles.catTitle}>Jetzt aber — was spricht dich an</Text>
-          <Text style={[styles.muted, { marginBottom: spacing.sm }]}>
-            Wissen, Kultur, Orte & Vibes — was dich anzieht.
-          </Text>
-          {experienceCards.map((card) => (
-            <SwipeCard
-              key={card.id}
-              card={card}
-              lang={lang}
-              value={draft.experiencePrefs[card.id] ?? 'neutral'}
-              onChange={(v) => setPref(card.id, v)}
-            />
-          ))}
-        </View>
-
-        <Text style={styles.fieldLabel}>{t(lang, 'wantExperience')}</Text>
-        <View style={styles.micRow}>
-          <TextInput
-            style={[styles.input, { flex: 1 }]}
-            value={draft.wantToExperience}
-            onChangeText={(wantToExperience) => onChange({ wantToExperience })}
-            multiline
-            placeholderTextColor={colors.textMuted}
-          />
-          <SpeechMicButton
-            active={micTarget === 'want'}
-            onPress={() => void startMic('want')}
-          />
-        </View>
-
-        <Text style={styles.fieldLabel}>{t(lang, 'avoidExperience')}</Text>
-        <View style={styles.micRow}>
-          <TextInput
-            style={[styles.input, { flex: 1 }]}
-            value={draft.avoidExperience}
-            onChangeText={(avoidExperience) => onChange({ avoidExperience })}
-            multiline
-            placeholderTextColor={colors.textMuted}
-          />
-          <SpeechMicButton
-            active={micTarget === 'avoid'}
-            onPress={() => void startMic('avoid')}
-          />
-        </View>
+      <StepTitle>Aktuelle Reise</StepTitle>
+      <StepSubtitle>
+        Gleich wie in den Einstellungen — Reisezweck, Mobilität, Tempo und
+        Interessen.
+      </StepSubtitle>
+      <ScrollView
+        contentContainerStyle={{ paddingBottom: 24 }}
+        keyboardShouldPersistTaps="always"
+        keyboardDismissMode="none"
+      >
+        <AktuelleReiseEditor draft={draft} onChange={onChange} mode="full" />
       </ScrollView>
       <PrimaryButton
         label={t(lang, 'continue')}
@@ -1780,9 +1447,7 @@ function SwipeCard({
   );
 }
 
-/** Pause zwischen Tour-Abschnitten — bewusst kurz. */
-const SEGMENT_PAUSE_MS = 500;
-const SETTINGS_ACCORDION_MS = 420;
+/** Früher Pause zwischen speakText-Calls — Stream braucht das nicht mehr. */
 const LAYOUT_WAIT_MS = 140;
 
 function SummaryIntroStep({
@@ -1795,7 +1460,6 @@ function SummaryIntroStep({
   onSetVoiceId: (voiceId: VoiceId) => void;
 }) {
   void onSetVoiceId;
-  const isPlaying = useFinnusStore((s) => s.isAudiblySpeaking);
   const subtitleText = useFinnusStore((s) => s.subtitleText);
 
   const [canSkip, setCanSkip] = useState(true);
@@ -1821,9 +1485,14 @@ function SummaryIntroStep({
   const stampMapRef = useRef<View>(null);
   const lastHintRef = useRef<ExplanationHint | null>(null);
   const [tourLandmark, setTourLandmark] = useState<string | null>(null);
-  const [helpReady, setHelpReady] = useState(false);
   const [planCalendarOpen, setPlanCalendarOpen] = useState(false);
+  const [placeSeekOpen, setPlaceSeekOpen] = useState(false);
+  const [realSettingsOpen, setRealSettingsOpen] = useState(false);
+  const [tourPlaceDemo, setTourPlaceDemo] = useState(false);
+  const [hudHeight, setHudHeight] = useState(96);
+  const placePopup = useHomeMapUiStore((s) => s.placePopup);
   const demoStopIdsRef = useRef<string[]>([]);
+  const safePad = useSystemSafePad();
 
   const finishedRef = useRef(false);
   const segmentsRef = useRef<{ hint: ExplanationHint; text: string }[]>([]);
@@ -1995,6 +1664,9 @@ function SummaryIntroStep({
       if (hint === 'none') {
         setSettingsDemoOpen(false);
         setPlanCalendarOpen(false);
+        setPlaceSeekOpen(false);
+        setRealSettingsOpen(false);
+        setTourPlaceDemo(false);
         clearTourTimeline();
         await new Promise<void>((resolve) => {
           Animated.timing(fingerOpacity, {
@@ -2012,7 +1684,10 @@ function SummaryIntroStep({
       // Settings: erst Finger auf Zahnrad (Panel bleibt zu) — Speech folgt im Runner
       if (hint === 'settings') {
         setPlanCalendarOpen(false);
+        setPlaceSeekOpen(false);
+        setTourPlaceDemo(false);
         setSettingsDemoOpen(false);
+        setRealSettingsOpen(false);
         await new Promise<void>((r) => setTimeout(r, LAYOUT_WAIT_MS));
         await revealFingerAt('settings');
         bumpFinger();
@@ -2023,46 +1698,44 @@ function SummaryIntroStep({
       // Settings-Panel: öffnen, Accordion kurz durchwandern (parallel zur Speech im Runner)
       if (hint === 'settings_panel') {
         setPlanCalendarOpen(false);
-        setSettingsDemoOpen(true);
-        setSettingsAccordion('setup');
+        setPlaceSeekOpen(false);
+        setTourPlaceDemo(false);
+        setSettingsDemoOpen(false);
+        setRealSettingsOpen(true);
         await new Promise<void>((r) => setTimeout(r, LAYOUT_WAIT_MS));
-        if (settingsDemoRef.current && rootRef.current) {
-          await new Promise<void>((resolve) => {
-            rootRef.current!.measureInWindow((rx, ry) => {
-              settingsDemoRef.current!.measureInWindow((x, y, w, h) => {
-                setFingerPos({
-                  x: x - rx + Math.min(48, w * 0.2),
-                  y: y - ry + 56,
-                });
-                setFingerVisible(true);
-                resolve();
-              });
-            });
-          });
-          bumpFinger();
-        }
-        // Accordion-Walk im Hintergrund — Speech startet sofort danach im Runner
-        void (async () => {
-          const walk = [
-            'setup',
-            'city',
-            'saverAudio',
-            'explanations',
-            'feedback',
-            'triggers',
-          ];
-          for (const id of walk) {
-            if (finishedRef.current) return;
-            setSettingsAccordion(id);
-            bumpFinger();
-            await new Promise<void>((r) => setTimeout(r, SETTINGS_ACCORDION_MS));
-          }
-        })();
+        await revealFingerAt('settings');
+        bumpFinger();
+        return;
+      }
+
+      if (hint === 'passport') {
+        setSettingsDemoOpen(false);
+        setRealSettingsOpen(false);
+        setPlanCalendarOpen(false);
+        setTourPlaceDemo(false);
+        setPlaceSeekOpen(false);
+        await new Promise<void>((r) => setTimeout(r, LAYOUT_WAIT_MS));
+        await revealFingerAt('passport');
+        bumpFinger();
+        return;
+      }
+
+      if (hint === 'actions') {
+        setPlaceSeekOpen(false);
+        setPlanCalendarOpen(false);
+        setRealSettingsOpen(false);
+        setTourPlaceDemo(true);
+        await new Promise<void>((r) => setTimeout(r, LAYOUT_WAIT_MS));
+        await revealFingerAt('passport');
+        bumpFinger();
         return;
       }
 
       if (hint === 'timeline') {
         setSettingsDemoOpen(false);
+        setRealSettingsOpen(false);
+        setPlaceSeekOpen(false);
+        setTourPlaceDemo(false);
         setPlanCalendarOpen(false);
         await new Promise<void>((r) => setTimeout(r, LAYOUT_WAIT_MS));
         await revealFingerAt('timeline');
@@ -2077,7 +1750,10 @@ function SummaryIntroStep({
       }
 
       setSettingsDemoOpen(false);
+      setRealSettingsOpen(false);
       setPlanCalendarOpen(false);
+      setPlaceSeekOpen(false);
+      setTourPlaceDemo(false);
 
       await new Promise<void>((r) =>
         setTimeout(
@@ -2115,6 +1791,10 @@ function SummaryIntroStep({
       new Promise<void>((resolve) => setTimeout(resolve, ms));
 
     (async () => {
+      if (profileHasFinishedSetup(draft) || draft.firstMapWelcomeDone) {
+        onFinished();
+        return;
+      }
       const voiceOpts = {
         voiceId: draft.voiceId,
         speechRate: 1 as const,
@@ -2125,15 +1805,9 @@ function SummaryIntroStep({
         speechRate: 1,
         priorityVoiceId: draft.voiceId,
       });
+      // Nicht awaiten — Wetter braucht die Erklärung nicht, Stadt-Welcome später schon
+      void ensureWeatherFresh('open').catch(() => undefined);
 
-      await pause(80);
-      if (cancelled || finishedRef.current) return;
-
-      try {
-        await ensureWeatherFresh('open');
-      } catch {
-        /* soft */
-      }
       if (cancelled || finishedRef.current) return;
 
       const pack = cityDemoPack(draft.cityName ?? draft.cityId);
@@ -2141,48 +1815,106 @@ function SummaryIntroStep({
 
       const tour = buildGuidedFeatureTourSegments({
         profile: draft,
-        weatherSummary: getCachedWeatherSummary(),
-        weatherSnapshot: getCachedWeatherSnapshot(),
       });
       const segments = tour;
       segmentsRef.current = segments;
 
-      // Sequentiell mit kurzer Pause — Demo-Sync
+      // Fast-Hook zuerst, dann Phrase-Chunks mit wachsendem Prefetch (2→5).
+      // Finger folgt der Stimme (Chunk-Start), nicht einer Zeichen-Stoppuhr.
+      const cursor = createExplanationSpeechCursor(segments);
+      let speechSettled = false;
+
+      const speechPromise = (async () => {
+        try {
+          await speakSentenceStream(
+            explanationSpeechChunkStream(segments),
+            voiceOpts,
+            {
+              bypassDeliveryPolicy: true,
+              priority: 'system',
+              onChunkText: (text) => cursor.pushChunk(text),
+            },
+          );
+        } catch (e) {
+          console.warn('[explanation] speak stream failed:', e);
+          const clock = (async () => {
+            for (const s of segments) {
+              if (cancelled || finishedRef.current) return;
+              cursor.pushChunk(s.text);
+              await pause(explanationSegmentHoldMs(s.text));
+            }
+          })();
+          try {
+            await speakText(
+              segments.map((s) => s.text).join(' '),
+              voiceOpts,
+              { bypassDeliveryPolicy: true },
+            );
+          } catch (e2) {
+            console.warn('[explanation] speak fallback failed:', e2);
+          }
+          await clock;
+        } finally {
+          speechSettled = true;
+        }
+      })();
+
       for (let i = 0; i < segments.length; i++) {
-        if (cancelled || finishedRef.current) return;
+        if (cancelled || finishedRef.current) break;
         const seg = segments[i]!;
+        await cursor.waitForSegment(
+          i,
+          () => !cancelled && !finishedRef.current && !speechSettled,
+        );
+        if (cancelled || finishedRef.current) break;
         lastHintRef.current = seg.hint;
         await showFinger(seg.hint);
-        try {
-          await speakText(seg.text, voiceOpts);
-        } catch (e) {
-          console.warn('[explanation] speak failed:', e);
+        if (seg.hint === 'passport') {
+          void (async () => {
+            while (
+              !cancelled &&
+              !finishedRef.current &&
+              lastHintRef.current === 'passport'
+            ) {
+              if (cursor.passportPlacesCue()) {
+                setPlaceSeekOpen(true);
+                return;
+              }
+              await pause(80);
+            }
+          })();
         }
-        // Nach Settings-Panel: schließen
-        if (seg.hint === 'settings_panel') {
-          setSettingsDemoOpen(false);
-          setSettingsAccordion(null);
-          await pause(280);
-        }
-        if (i < segments.length - 1) await pause(SEGMENT_PAUSE_MS);
       }
+
+      await speechPromise;
 
       if (cancelled || finishedRef.current) return;
       await markFirstMapWelcomeDone(draft);
-      setHelpReady(true);
       setCanSkip(false);
       setPlanCalendarOpen(false);
-      setActiveHint('help_prompt');
-      await showFinger('help_prompt');
-      await pause(300);
-      // User kann Hilfe-Chips / Mic tippen; sonst nach kurzer Zeit fertig
-      await pause(10_000);
-      if (!cancelled && !finishedRef.current) {
-        finishedRef.current = true;
-        await showFinger('none');
-        clearTourTimeline();
-        onFinished();
+      setPlaceSeekOpen(false);
+      setRealSettingsOpen(false);
+      setTourPlaceDemo(false);
+      setActiveHint('none');
+      await showFinger('none');
+
+      // Kurz selbst ankommen, dann Stadt-Welcome auf derselben Karte
+      const settleUntil = Date.now() + POST_EXPLANATION_SETTLE_MS;
+      while (Date.now() < settleUntil) {
+        if (cancelled || finishedRef.current) return;
+        await pause(250);
       }
+      if (cancelled || finishedRef.current) return;
+      try {
+        await runPostExplanationCityWelcome(draft);
+      } catch (err) {
+        console.warn('[explanation] city welcome failed:', err);
+      }
+      if (cancelled || finishedRef.current) return;
+      finishedRef.current = true;
+      await showFinger('none');
+      clearTourTimeline();
+      onFinished();
     })();
 
     return () => {
@@ -2193,84 +1925,66 @@ function SummaryIntroStep({
   }, [clearTourTimeline, draft, onFinished, showFinger]);
 
   const cityLabel = draft.cityName ?? draft.cityId ?? 'dein Ort';
+  const mapBottomChrome = HOME_DOCK_BAR_H + safePad.bottom;
 
   return (
-    <SafeAreaView style={styles.homeLike} edges={['top', 'bottom']}>
-      <View ref={rootRef} style={styles.homeLikeInner} collapsable={false}>
-      <Header
-        locationRef={locationRef}
-        settingsRef={settingsRef}
-        planCalendarRef={planCalendarRef}
-        stampMapRef={stampMapRef}
-        settingsDisabled={false}
-        onOpenPassport={() => {
-          bumpFinger();
-          setActiveHint('passport');
-        }}
-        onOpenPlanCalendar={() => {
-          bumpFinger();
-          seedTourTimeline();
-          setPlanCalendarOpen(true);
-        }}
-        onOpenSettings={() => {
-          setSettingsDemoOpen(true);
-          setSettingsAccordion('setup');
-          bumpFinger();
-        }}
+    <View ref={rootRef} style={styles.homeLikeInner} collapsable={false}>
+      <HomePresenceMap
+        hudHeight={hudHeight}
+        bottomChrome={mapBottomChrome}
+        tourPlaceDemo={tourPlaceDemo}
+        paused={realSettingsOpen || planCalendarOpen || placeSeekOpen}
       />
 
-      {canSkip ? (
-        <View style={styles.skipWrap}>
-          <SecondaryButton
-            label={t(draft.language, 'skipExplanation')}
-            onPress={() => {
-              finishedRef.current = true;
-              setSettingsDemoOpen(false);
-              setPlanCalendarOpen(false);
-              clearTourTimeline();
-              setActiveHint('none');
-              lastHintRef.current = null;
-              void markFirstMapWelcomeDone(draft);
-              void stopSpeaking();
-              onFinished();
-            }}
-          />
-        </View>
-      ) : null}
+      <View
+        style={[styles.hudOverlay, { paddingTop: safePad.top }]}
+        pointerEvents="box-none"
+        onLayout={(e) => {
+          const h = Math.round(e.nativeEvent.layout.height);
+          if (h > 40 && Math.abs(h - hudHeight) >= 2) setHudHeight(h);
+        }}
+      >
+        <Header
+          overlay
+          hideTools
+          fullBleedLive
+          locationRef={locationRef}
+          onOpenPlanCalendar={() => {
+            seedTourTimeline();
+            setPlanCalendarOpen(true);
+          }}
+        />
+      </View>
 
-      <View style={styles.introMain}>
-        <AudioWave mood={isPlaying ? 'speaking' : 'idle'} />
-        <View style={styles.introSubtitles} pointerEvents="none">
-          {subtitleText?.trim() ? (
-            <SubtitlesSlot text={subtitleText} />
-          ) : null}
-        </View>
+      <View
+        style={[
+          styles.tourSubtitles,
+          {
+            bottom:
+              HOME_DOCK_BAR_H +
+              safePad.bottom +
+              HOME_MIC_DOCK_GAP +
+              HOME_MIC_HINT_RESERVE +
+              88,
+          },
+        ]}
+        pointerEvents="none"
+      >
+        {subtitleText?.trim() ? (
+          <SubtitlesSlot text={subtitleText} />
+        ) : null}
       </View>
 
       <GuidedFeatureTourOverlays
         hint={activeHint}
         cityName={cityLabel}
         landmarkName={tourLandmark}
-        settingsOpen={settingsDemoOpen}
+        settingsOpen={false}
         settingsAccordion={settingsAccordion}
         onToggleAccordion={(id) =>
           setSettingsAccordion((prev) => (prev === id ? null : id))
         }
-        helpInteractive={helpReady}
-        onHelpAction={(prompt) => {
-          finishedRef.current = true;
-          setSettingsDemoOpen(false);
-          setPlanCalendarOpen(false);
-          clearTourTimeline();
-          setActiveHint('none');
-          lastHintRef.current = null;
-          void markFirstMapWelcomeDone(draft);
-          void stopSpeaking();
-          if (prompt?.trim()) {
-            queuePostTourQuestion(prompt);
-          }
-          onFinished();
-        }}
+        helpInteractive={false}
         module1Ref={module1Ref}
         bulletsRef={bulletsRef}
         actionsRef={actionsRef}
@@ -2292,12 +2006,62 @@ function SummaryIntroStep({
         isGenerating={false}
       />
 
-      <View ref={micRef} collapsable={false}>
-        <MicButton
-          onPressIn={() => bumpFinger()}
-          onPressOut={() => undefined}
-          isListening={false}
-          isGenerating={false}
+      <PlaceSeekSheet
+        visible={placeSeekOpen}
+        onClose={() => setPlaceSeekOpen(false)}
+      />
+
+      <SettingsScreen
+        visible={realSettingsOpen}
+        profile={draft}
+        onClose={() => setRealSettingsOpen(false)}
+        onSaved={(nextProfile) => {
+          void saveUserProfile(nextProfile);
+        }}
+        onReset={() => undefined}
+      />
+
+      <View
+        style={[
+          styles.micFloat,
+          {
+            bottom:
+              HOME_DOCK_BAR_H +
+              safePad.bottom +
+              HOME_MIC_DOCK_GAP +
+              HOME_MIC_HINT_RESERVE,
+          },
+        ]}
+        pointerEvents="box-none"
+      >
+        <View ref={micRef} collapsable={false} style={styles.tourMicCenter}>
+          <MicButton
+            onPressIn={() => bumpFinger()}
+            onPressOut={() => undefined}
+            isListening={false}
+            isGenerating={false}
+          />
+        </View>
+      </View>
+
+      <View style={styles.dockWrap} pointerEvents="box-none">
+        <HomeDockBar
+          timelineRef={planCalendarRef}
+          placesRef={stampMapRef}
+          settingsRef={settingsRef}
+          onTimeline={() => {
+            bumpFinger();
+            seedTourTimeline();
+            setPlanCalendarOpen(true);
+          }}
+          onPlaces={() => {
+            bumpFinger();
+            setPlaceSeekOpen(true);
+          }}
+          onSettings={() => {
+            setRealSettingsOpen(true);
+            bumpFinger();
+          }}
         />
       </View>
 
@@ -2311,17 +2075,55 @@ function SummaryIntroStep({
               top: fingerPos.y,
               opacity: fingerOpacity,
               transform: [{ scale: Animated.multiply(pulse, tapBoost) }],
+              zIndex: UI_LAYER.overlay,
+              elevation: UI_LAYER.overlay,
             },
           ]}
         >
           <Text style={styles.fingerEmoji}>👆</Text>
         </Animated.View>
       ) : null}
-      </View>
-    </SafeAreaView>
-  );
-}
 
+      <HomeMapPlacePopup
+        place={placePopup}
+        onClose={() => useHomeMapUiStore.getState().setPlacePopup(null)}
+      />
+
+      {canSkip ? (
+        <View
+          style={[styles.skipWrap, { top: Math.max(6, safePad.top + 4) }]}
+          pointerEvents="box-none"
+        >
+          <Pressable
+            onPress={() => {
+              finishedRef.current = true;
+              setSettingsDemoOpen(false);
+              setPlanCalendarOpen(false);
+              setPlaceSeekOpen(false);
+              setRealSettingsOpen(false);
+              setTourPlaceDemo(false);
+              clearTourTimeline();
+              setActiveHint('none');
+              lastHintRef.current = null;
+              void markFirstMapWelcomeDone(draft);
+              void stopSpeaking();
+              onFinished();
+            }}
+            style={styles.skipPill}
+            accessibilityRole="button"
+            accessibilityLabel={t(draft.language, 'skipExplanation')}
+            hitSlop={8}
+          >
+            <Text style={styles.skipPillText} numberOfLines={2}>
+              {t(draft.language, 'skipExplanation')}
+            </Text>
+          </Pressable>
+        </View>
+      ) : null}
+    </View>
+  );
+
+}
 
 const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: colors.bg },
@@ -2370,6 +2172,7 @@ const styles = StyleSheet.create({
   },
   homeLikeInner: {
     flex: 1,
+    backgroundColor: colors.bg,
   },
   introMain: {
     flex: 1,
@@ -2383,16 +2186,65 @@ const styles = StyleSheet.create({
     marginTop: spacing.md,
     justifyContent: 'center',
   },
-  skipWrap: {
+  hudOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    alignItems: 'stretch',
+    zIndex: UI_LAYER.hud,
+    elevation: UI_LAYER.hud,
+  },
+  micFloat: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    zIndex: UI_LAYER.sheet - 1,
+    elevation: UI_LAYER.sheet - 1,
+  },
+  dockWrap: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    zIndex: UI_LAYER.hud,
+    elevation: UI_LAYER.hud,
+  },
+  tourMicCenter: {
     alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: spacing.sm,
-    paddingHorizontal: spacing.md,
-    zIndex: 30,
+  },
+  tourSubtitles: {
+    position: 'absolute',
+    left: spacing.md,
+    right: spacing.md,
+    zIndex: UI_LAYER.subtitles,
+  },
+  skipWrap: {
+    position: 'absolute',
+    right: 10,
+    alignItems: 'flex-end',
+    maxWidth: 158,
+    zIndex: UI_LAYER.askSheet + 1,
+    elevation: UI_LAYER.askSheet + 1,
+  },
+  skipPill: {
+    backgroundColor: 'rgba(12, 28, 24, 0.88)',
+    borderRadius: 999,
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.22)',
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+  },
+  skipPillText: {
+    color: colors.text,
+    fontSize: 12,
+    fontWeight: '700',
+    textAlign: 'right',
+    lineHeight: 15,
   },
   finger: {
     position: 'absolute',
-    zIndex: 40,
+    zIndex: UI_LAYER.overlay,
   },
   fingerEmoji: {
     fontSize: 36,

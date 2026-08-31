@@ -21,11 +21,12 @@ import {
   useHistoricalTimelineStore,
   type HistoricalEntry,
 } from './historicalTimelineState';
+import { formatDwellSinceDe } from '../../services/navigation/travelEtaFormat';
 import { isPastMs, isRealityLockedStop } from './planNowGuard';
+import { isLiveNavLegId } from './syncLiveNavToPlan';
 
 export type TimelineTone = 'default' | 'change' | 'conflict' | 'trigger' | 'reality';
 
-/** Nav-Rolle für UI-Farbe: nur reminder/trigger = grün; path = blau/rot. */
 export type TimelineNavRole = 'reminder' | 'trigger' | 'path';
 
 export type TimelineNode = {
@@ -43,6 +44,8 @@ export type TimelineNode = {
   untilNow?: boolean;
   /** Nav: Luftlinie (rot) bis OSRM nachzieht */
   routeEstimate?: 'fallback' | 'routed' | null;
+  /** ÖPNV: volle Verbindung (Akkordeon) */
+  journeyDetail?: string | null;
   hardAnchor?: boolean;
   /** Nur nav_leg: Erinnerung / Trigger / reiner Weg */
   navRole?: TimelineNavRole | null;
@@ -50,32 +53,50 @@ export type TimelineNode = {
   mapsUrl?: string | null;
   menuUrl?: string | null;
   reserveUrl?: string | null;
+  websiteUrl?: string | null;
+  badge?: string | null;
   /** true = PROPOSAL_ITEM (blauer Rahmen, Pitch + Action Cards) */
   isProposal?: boolean;
   /** Offener Wunsch auf der Zeitachse (blaues Band, zeitlich einsortiert) */
   isOpenBand?: boolean;
   /** Oberhalb NOW / Visit — keine Auto-Verschiebung */
   realityLocked?: boolean;
+  groupId?: string | null;
+  groupLabel?: string | null;
 };
 
-/** SSOT: welche Nav-Zeile grün darf (Trigger + Erinnerung). */
+/** SSOT: welche Nav-Zeile Trigger-Rot darf (Erinnerung + Losgehen). */
 export function resolveNavRole(s: FuturePlanStop): TimelineNavRole | null {
-  if (s.kind !== 'nav_leg') return null;
+  if (s.id.startsWith('wake_') || /^Wecker\b/i.test(s.title)) {
+    return 'reminder';
+  }
   if (s.id.startsWith('nav_remind_') || /^Erinnerung\s*·/i.test(s.title)) {
     return 'reminder';
   }
-  // Reine Wege nie Trigger — auch nicht zu Hard-Stops
-  if (/^Weg nach\s+/i.test(s.title) || s.id.startsWith('nav_here_')) {
-    return 'path';
-  }
-  // Hard-Aufbruch / Leave-By-Trigger (Prio 1–3, Los zu …)
+  // Leave-by vor dem nav_live_-Weg-Filter — sonst wird Losgehen blau.
   if (
     s.id.startsWith('leave_') ||
+    s.id.endsWith(':leave') ||
+    s.id.includes('leaveby') ||
     s.id.startsWith('nav_fix_') ||
-    (Boolean(s.hardAnchor) && /^(Los zu|Aufbruch)\b/i.test(s.title)) ||
+    (Boolean(s.hardAnchor) && /^(Los zu|Aufbruch|Losgehen|Losfahren)\b/i.test(s.title)) ||
     /Trigger\s*·/i.test(s.notes ?? '')
   ) {
     return 'trigger';
+  }
+  if (s.kind !== 'nav_leg') return null;
+  // Reine Wege nie Trigger — auch nicht zu Hard-Stops
+  if (
+    /^Weg nach\s+/i.test(s.title) ||
+    /^Fußweg nach\s+/i.test(s.title) ||
+    /^zu Fuß\b/i.test(s.title) ||
+    s.id.startsWith('nav_here_') ||
+    s.id.startsWith('nav_live_')
+  ) {
+    return 'path';
+  }
+  if (s.id.startsWith('ft:')) {
+    return 'path';
   }
   return 'path';
 }
@@ -134,7 +155,7 @@ function visitToNode(v: VisitLogEntry, nowMs: number): TimelineNode {
     title: v.name,
     subtitle: open
       ? dwellLive != null && dwellLive > 0
-        ? `Aufenthalt · seit ${dwellLive} Min`
+        ? `Aufenthalt · seit ${formatDwellSinceDe(dwellLive)}`
         : 'Aufenthalt · bis jetzt'
       : v.source === 'dwell'
         ? 'Aufenthalt'
@@ -171,10 +192,18 @@ function stopToNode(s: FuturePlanStop, nowMs: number): TimelineNode {
   let status = s.status ?? 'planned';
   const navRole = resolveNavRole(s);
   const locked = isRealityLockedStop(s, nowMs);
-  // Stop-Karten: kurz vor Leave-By als Trigger markieren (nicht Nav-Wege)
-  if (
+  if (s.id.startsWith('wake_') || /^Wecker\b/i.test(s.title)) {
+    const t = s.plannedStartMs;
+    const due =
+      t != null && nowMs >= t - 10 * 60_000 && nowMs <= t + 20 * 60_000;
+    status = due ? 'trigger_active' : 'pending_change';
+  }
+  if (s.id.startsWith('ft:') && status !== 'conflict') {
+    status = 'pending_change';
+  } else if (
     !locked &&
     s.kind !== 'nav_leg' &&
+    !isLiveNavLegId(s.id) &&
     status === 'planned' &&
     s.plannedStartMs != null &&
     s.bufferMin > 0
@@ -184,24 +213,38 @@ function stopToNode(s: FuturePlanStop, nowMs: number): TimelineNode {
       status = 'trigger_active';
     }
   }
-  // Nav: Tone nur für Reminder/Trigger grün spiegeln — Wege nie
+  // Nav: Planung (pending_change) bleibt blau; Trigger/Erinnerung erst danach rot
   if (s.kind === 'nav_leg') {
-    if (navRole === 'reminder' || navRole === 'trigger') {
+    if (status === 'pending_change') {
+      /* planning blue */
+    } else if (navRole === 'reminder' || navRole === 'trigger') {
       status = 'trigger_active';
     } else if (status === 'trigger_active') {
-      status = s.status === 'pending_change' ? 'pending_change' : 'planned';
+      status = 'planned';
     }
   }
+  const livePathTitle =
+    /^(zu Fuß|Rad|ÖPNV|Fahrt)\s*·/.test(s.title) ||
+    /\bRichtung\b/.test(s.title) ||
+    s.groupId === 'live_journey';
+  const notesTrim = s.notes?.trim();
+  const isFtLeg = s.id.startsWith('ft:');
   const transportHint =
     s.kind === 'nav_leg'
-      ? (s.notes?.trim() ||
-        `${TRANSPORT_EMOJI[s.transport]} ${TRANSPORT_LABEL[s.transport]}`.trim())
+      ? notesTrim && notesTrim !== s.title.trim()
+        ? notesTrim
+        : livePathTitle || isFtLeg
+          ? undefined
+          : `${TRANSPORT_EMOJI[s.transport]} ${TRANSPORT_LABEL[s.transport]}`.trim()
       : undefined;
+  if (isFtLeg && s.kind === 'nav_leg') {
+  }
   // Vergangene Plan-Stops = Reality (oberhalb NOW), nicht editierbar
   const pastPlan =
     locked &&
     s.kind === 'stop' &&
     !s.id.startsWith('choice_') &&
+    !isLiveNavLegId(s.id) &&
     isPastMs(s.plannedEndMs ?? s.plannedStartMs, nowMs);
   return {
     id: `plan_${s.id}`,
@@ -219,12 +262,17 @@ function stopToNode(s: FuturePlanStop, nowMs: number): TimelineNode {
     transport: s.transport,
     kind: pastPlan ? 'reality' : s.kind ?? 'stop',
     routeEstimate: s.kind === 'nav_leg' ? s.routeEstimate ?? null : null,
+    journeyDetail: s.kind === 'nav_leg' ? s.journeyDetail ?? null : null,
     hardAnchor: s.hardAnchor,
     navRole,
     mapsUrl: s.mapsUrl ?? null,
     menuUrl: s.menuUrl ?? null,
     reserveUrl: s.reserveUrl ?? null,
+    websiteUrl: s.websiteUrl ?? null,
+    badge: s.badge ?? null,
     realityLocked: locked || pastPlan,
+    groupId: s.groupId ?? null,
+    groupLabel: s.groupLabel ?? null,
     isProposal:
       !pastPlan &&
       s.status === 'pending_change' &&
@@ -311,15 +359,28 @@ export function buildDayTimeline(dateKey: string, nowMs = Date.now()): {
   // Zeitachse: getimte Stops + Nav-Legs + getimte offene Wünsche (blaue Bänder)
   const futureOnAxis = plan.stops
     .filter((s) => {
-      if (s.status === 'done') return false;
+      if (s.status === 'done') {
+        return (
+          s.transport === 'flight' ||
+          s.id.startsWith('ft:') ||
+          Boolean(s.groupId)
+        );
+      }
       if (s.kind === 'wish') {
-        // Nur mit Zeit auf die Achse — sonst unten in Offene Pläne
         return s.plannedStartMs != null;
       }
       return true;
     })
     .filter((s) => {
       if (s.kind !== 'nav_leg') return true;
+      if (
+        s.id.startsWith('ft:') ||
+        s.transport === 'flight' ||
+        s.groupId === 'live_journey' ||
+        isLiveNavLegId(s.id)
+      ) {
+        return true;
+      }
       const end = s.plannedEndMs ?? s.plannedStartMs;
       if (end == null) return true;
       return end >= nowMs - 5 * 60_000;
@@ -419,7 +480,15 @@ export function buildDayTimeline(dateKey: string, nowMs = Date.now()): {
     nodes.push(...insertNowChronologically(timed));
     nodes.push(...untimed);
   } else if (dateKey < todayDateKey()) {
-    nodes.push(...enforceChronologyGate([...reality]));
+    const pastPlan = plan.stops
+      .filter(
+        (s) =>
+          s.transport === 'flight' ||
+          s.id.startsWith('ft:') ||
+          Boolean(s.groupId),
+      )
+      .map((s) => stopToNode(s, nowMs));
+    nodes.push(...enforceChronologyGate([...reality, ...pastPlan]));
   } else {
     const merged = [...futureOnAxis, ...reality];
     nodes.push(...enforceChronologyGate(merged));

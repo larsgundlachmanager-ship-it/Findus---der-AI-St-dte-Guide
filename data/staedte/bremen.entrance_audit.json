@@ -1,0 +1,472 @@
+{
+  "city_id": "bremen",
+  "apply": true,
+  "storyOnly": true,
+  "maxDelta": 80,
+  "country": "Germany",
+  "summary": {
+    "ok": 12,
+    "check": 4,
+    "bad": 2,
+    "errors": 0,
+    "applied": 4,
+    "skipped_directory": 372,
+    "skipped_cached_google": 16
+  },
+  "rows": [
+    {
+      "id": "bremen_bremen_hauptbahnhof",
+      "name": "Bremen Hauptbahnhof",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.083482743243245,
+        "lng": 8.813732594594594
+      }
+    },
+    {
+      "id": "bremen_ubersee_museum_bremen",
+      "name": "Übersee-Museum Bremen",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.08334081578947,
+        "lng": 8.810678900000003
+      }
+    },
+    {
+      "id": "bremen_kunsthalle_bremen",
+      "name": "Kunsthalle Bremen",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.07274676060605,
+        "lng": 8.813443075757577
+      }
+    },
+    {
+      "id": "bremen_universum_bremen",
+      "name": "Universum Bremen",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.10669211071428,
+        "lng": 8.84497197142857
+      }
+    },
+    {
+      "id": "bremen_weserburg_museum_fur_moderne_kunst",
+      "name": "Weserburg Museum für moderne Kunst",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.07712505862069,
+        "lng": 8.79783614137931
+      }
+    },
+    {
+      "id": "bremen_paula_modersohn_becker_museum",
+      "name": "Paula Modersohn-Becker Museum",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.075132925,
+        "lng": 8.806311
+      }
+    },
+    {
+      "id": "bremen_hafenmuseum_bremen",
+      "name": "Hafenmuseum Bremen",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.09751483636362,
+        "lng": 8.769274724999999
+      }
+    },
+    {
+      "id": "bremen_focke_museum_bremer_landesmuseum_fur_kunst_und_kulturgeschichte",
+      "name": "Focke-Museum, Bremer Landesmuseum für Kunst und Kulturgeschichte",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.09271958947368,
+        "lng": 8.864101147368421
+      }
+    },
+    {
+      "id": "bremen_dom_museum",
+      "name": "Dom-Museum",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.07550625443039,
+        "lng": 8.80915698227848
+      }
+    },
+    {
+      "id": "bremen_die_bremer_stadtmusikanten",
+      "name": "Die Bremer Stadtmusikanten",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.076171800000004,
+        "lng": 8.807273273913042
+      }
+    },
+    {
+      "id": "bremen_kulturkirche_st_stephani",
+      "name": "Kulturkirche St. Stephani",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.08083069215686,
+        "lng": 8.794160937254903
+      }
+    },
+    {
+      "id": "bremen_rhododendron_park",
+      "name": "Rhododendron-Park",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.09008200000001,
+        "lng": 8.88446274
+      }
+    },
+    {
+      "id": "bremen_burgerpark_bremen",
+      "name": "Bürgerpark Bremen",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.09334345192308,
+        "lng": 8.82606107884615
+      }
+    },
+    {
+      "id": "bremen_theater_am_goetheplatz",
+      "name": "Theater am Goetheplatz",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.07204171590908,
+        "lng": 8.815562538636364
+      }
+    },
+    {
+      "id": "bremen_weserpromenade_bremen_schlachte",
+      "name": "Weserpromenade Bremen („Schlachte“)",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.07523775714286,
+        "lng": 8.802795835714285
+      }
+    },
+    {
+      "id": "bremen_botanika",
+      "name": "botanika",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.09341088536584,
+        "lng": 8.884102112195125
+      }
+    },
+    {
+      "id": "bremen_bremer_roland",
+      "name": "Bremer Roland",
+      "before": {
+        "lat": 53.075905414285714,
+        "lng": 8.807329028571429
+      },
+      "google": {
+        "lat": 53.0759237,
+        "lng": 8.8073277,
+        "place_id": "ChIJ7eOMbRoosUcRfRbQSyjYwGo",
+        "address": "Am Markt, 28195 Bremen, Germany"
+      },
+      "delta_m": 2,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "bremen_bremer_rathaus",
+      "name": "Bremer Rathaus",
+      "before": {
+        "lat": 53.076171800000004,
+        "lng": 8.807273273913042
+      },
+      "google": {
+        "lat": 53.0760221,
+        "lng": 8.8079321,
+        "place_id": "ChIJU6csoBAosUcR6zaE5SdyF48",
+        "address": "Am Markt 21, 28195 Bremen, Germany"
+      },
+      "delta_m": 47,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "bremen_bremer_dom",
+      "name": "Bremer Dom",
+      "before": {
+        "lat": 53.07550625443039,
+        "lng": 8.80915698227848
+      },
+      "google": {
+        "lat": 53.0755426,
+        "lng": 8.8090624,
+        "place_id": "ChIJW2a-gBAosUcRW9ORPq1Dnf4",
+        "address": "Sandstraße 10-12, 28195 Bremen, Germany"
+      },
+      "delta_m": 8,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "bremen_marktplatz_bremen",
+      "name": "Marktplatz Bremen",
+      "before": {
+        "lat": 53.07550305144229,
+        "lng": 8.809147544230772
+      },
+      "google": {
+        "lat": 53.0757432,
+        "lng": 8.8071942,
+        "place_id": "ChIJdRGvoRAosUcR4DS5VDzWQ0g",
+        "address": "Am Markt 2, 28195 Bremen, Germany"
+      },
+      "delta_m": 133,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "bremen_bottcherstrasse",
+      "name": "Böttcherstraße",
+      "before": {
+        "lat": 53.075105681818194,
+        "lng": 8.805566131818182
+      },
+      "google": {
+        "lat": 53.0750456,
+        "lng": 8.805696,
+        "place_id": "ChIJtc5LAxoosUcRoOJ8JNIxg1E",
+        "address": "Böttcherstraße, 28195 Bremen, Germany"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "bremen_schnoor",
+      "name": "Schnoor",
+      "before": {
+        "lat": 53.072770628571426,
+        "lng": 8.809547528571427
+      },
+      "google": {
+        "lat": 53.072827,
+        "lng": 8.8096563,
+        "place_id": "ChIJy2ec4RoosUcRXzZgu7nBsQY",
+        "address": "Schnoor, 28195 Bremen, Germany"
+      },
+      "delta_m": 10,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "bremen_die_glocke",
+      "name": "Die Glocke",
+      "before": {
+        "lat": 53.075088593055554,
+        "lng": 8.809297736111112
+      },
+      "google": {
+        "lat": 53.074906,
+        "lng": 8.8093713,
+        "place_id": "ChIJM-tvhxoosUcREDILqweK7uE",
+        "address": "Domsheide 6-8, 28195 Bremen, Germany"
+      },
+      "delta_m": 21,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "bremen_liebfrauenkirche",
+      "name": "Liebfrauenkirche",
+      "before": {
+        "lat": 53.076489797619054,
+        "lng": 8.807608621428571
+      },
+      "google": {
+        "lat": 53.076484,
+        "lng": 8.807447999999999,
+        "place_id": "ChIJq-qEvhAosUcRUZgQliZ90Eg",
+        "address": "Unser Lieben Frauen Kirchhof 27-29, 28195 Bremen, Germany"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "bremen_schutting",
+      "name": "Schütting",
+      "before": {
+        "lat": 53.07591367142859,
+        "lng": 8.805630010204082
+      },
+      "google": {
+        "lat": 53.075689399999995,
+        "lng": 8.8066508,
+        "place_id": "ChIJdfIsCBoosUcRkMk4bh22e4M",
+        "address": "Am Markt 13, 28195 Bremen, Germany"
+      },
+      "delta_m": 73,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "bremen_weserstadion",
+      "name": "Weserstadion",
+      "before": {
+        "lat": 53.066673278431374,
+        "lng": 8.837818343137258
+      },
+      "google": {
+        "lat": 53.066803199999995,
+        "lng": 8.8379294,
+        "place_id": "ChIJlZN9Y_cnsUcRAnMVWDfb6Ks",
+        "address": "Franz-Böhmert-Straße 1, 28205 Bremen-Östliche Vorstadt, Germany"
+      },
+      "delta_m": 16,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "bremen_universitat_bremen",
+      "name": "Universität Bremen",
+      "before": {
+        "lat": 53.10641494782608,
+        "lng": 8.855404369565218
+      },
+      "google": {
+        "lat": 53.106541199999995,
+        "lng": 8.8553306,
+        "place_id": "ChIJ6d_ZgDImsUcRBL5oEOrb8UU",
+        "address": "Bibliothekstraße 1, 28359 Bremen-Horn-Lehe, Germany"
+      },
+      "delta_m": 15,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "bremen_bleikeller",
+      "name": "Bleikeller",
+      "before": {
+        "lat": 53.075088593055554,
+        "lng": 8.809297736111112
+      },
+      "google": {
+        "lat": 53.0752379,
+        "lng": 8.808709799999999,
+        "place_id": "ChIJW_zmfxoosUcRonQ5s3v7InY",
+        "address": "Am Dom 1, 28195 Bremen, Germany"
+      },
+      "delta_m": 43,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "bremen_ludwig_roselius_museum",
+      "name": "Ludwig Roselius Museum",
+      "before": {
+        "lat": 53.07498135000001,
+        "lng": 8.80582017
+      },
+      "google": {
+        "lat": 53.0750462,
+        "lng": 8.805835199999999,
+        "place_id": "ChIJP1C4BBoosUcR6FL5Q5c3wGA",
+        "address": "Böttcherstraße 6-10, 28195 Bremen, Germany"
+      },
+      "delta_m": 7,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "bremen_haus_atlantis",
+      "name": "Haus Atlantis",
+      "before": {
+        "lat": 53.07475528695652,
+        "lng": 8.805432999999999
+      },
+      "google": {
+        "lat": 53.0747364,
+        "lng": 8.8051319,
+        "place_id": "ChIJe5p6CukpsUcRH4ILY1Laqcw",
+        "address": "Böttcherstraße 1, 28195 Bremen, Germany"
+      },
+      "delta_m": 20,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "bremen_das_viertel",
+      "name": "Das Viertel",
+      "before": {
+        "lat": 53.0760799,
+        "lng": 8.81838572
+      },
+      "google": {
+        "lat": 53.0733153,
+        "lng": 8.812911099999999,
+        "place_id": "ChIJ7X-CMAUosUcR7a8DmfcPjp4",
+        "address": "Viertel, 28195 Bremen, Germany"
+      },
+      "delta_m": 478,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "bremen_uberseestadt",
+      "name": "Überseestadt",
+      "before": {
+        "lat": 53.09147873125001,
+        "lng": 8.771389668749999
+      },
+      "google": {
+        "lat": 53.0918316,
+        "lng": 8.770632299999999,
+        "place_id": "ChIJhUvLuLMpsUcRRjob5AkNPiQ",
+        "address": "Überseestadt, Bremen-Walle, Germany"
+      },
+      "delta_m": 64,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "bremen_stadtwaage",
+      "name": "Stadtwaage",
+      "before": {
+        "lat": 53.07645861428572,
+        "lng": 8.805493228571429
+      },
+      "google": {
+        "lat": 53.0764357,
+        "lng": 8.8055725,
+        "place_id": "ChIJZVdUILcpsUcR-6COjeZnMKw",
+        "address": "Langenstraße 13, 28195 Bremen, Germany"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "bremen_muhle_am_wall",
+      "name": "Mühle am Wall",
+      "before": {
+        "lat": 53.080165779999994,
+        "lng": 8.806884389999999
+      },
+      "google": {
+        "lat": 53.0801701,
+        "lng": 8.806884,
+        "place_id": "ChIJMzEysxYosUcRH7ijeL3N6zE",
+        "address": "Am Wall 212, 28195 Bremen, Germany"
+      },
+      "delta_m": 0,
+      "status": "OK",
+      "streetview": "OK"
+    }
+  ]
+}

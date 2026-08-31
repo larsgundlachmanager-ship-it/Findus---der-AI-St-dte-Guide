@@ -54,7 +54,13 @@ export const BulletsSlot = React.memo(function BulletsSlot({ card }: Props) {
 
   const onBulletsLayout = (e: LayoutChangeEvent) => {
     const w = Math.round(e.nativeEvent.layout.width);
-    if (w > 0 && Math.abs(w - contentW) >= 2) setContentW(w);
+    if (w > 0 && Math.abs(w - contentW) >= 2) {
+      setContentW(w);
+      void import('../../module2/reboot/pipeline/bulletUiBudget').then(
+        ({ noteBulletUiMeasurement }) =>
+          noteBulletUiMeasurement({ widthPx: w, fontSize: BULLET_FONT }),
+      );
+    }
   };
 
   return (
@@ -66,9 +72,16 @@ export const BulletsSlot = React.memo(function BulletsSlot({ card }: Props) {
     >
       <View style={styles.card}>
         <View style={styles.headerRow}>
-          <Text style={styles.title} numberOfLines={1}>
-            {card.cardTitle?.trim() || 'Spickzettel'}
-          </Text>
+          <View style={styles.titleBlock}>
+            <Text style={styles.title} numberOfLines={1}>
+              {card.cardTitle?.trim() || 'Spickzettel'}
+            </Text>
+            {card.cardSubtitle?.trim() ? (
+              <Text style={styles.subtitle} numberOfLines={1}>
+                {card.cardSubtitle.trim()}
+              </Text>
+            ) : null}
+          </View>
           <Pressable
             onPress={dismissConciergeCard}
             hitSlop={10}
@@ -113,24 +126,35 @@ const styles = StyleSheet.create({
   },
   headerRow: {
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     justifyContent: 'space-between',
     marginBottom: spacing.sm,
   },
-  title: {
+  titleBlock: {
     flex: 1,
+    marginRight: spacing.sm,
+  },
+  title: {
     color: colors.accent,
     fontSize: 15,
     fontWeight: '700',
     letterSpacing: 0.2,
-    marginRight: spacing.sm,
     lineHeight: 20,
+  },
+  subtitle: {
+    marginTop: 2,
+    color: colors.textMuted,
+    fontSize: 12,
+    fontWeight: '500',
+    letterSpacing: 0.15,
+    lineHeight: 16,
   },
   close: {
     color: colors.textMuted,
     fontSize: 16,
     fontWeight: '600',
     paddingHorizontal: 4,
+    paddingTop: 1,
   },
   bullets: {
     gap: 6,

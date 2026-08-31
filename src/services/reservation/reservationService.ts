@@ -52,9 +52,15 @@ function extractFromFacts(facts: string[]): {
   };
 }
 
+function bookingUrlFromTags(tags: string[]): string | undefined {
+  const hit = tags.find((t) => t.startsWith('booking_url:'));
+  if (!hit) return undefined;
+  const url = hit.slice('booking_url:'.length).trim();
+  return /^https?:\/\//i.test(url) ? url : undefined;
+}
+
 /**
- * Baut Reservierungs-Meta aus POI + Fakten (Tags / Text).
- * Später: Pack-Felder openTableId etc. direkt aus Stadt-JSON.
+ * Baut Reservierungs-Meta aus POI + Fakten (Tags / Text / Pack-Booking-Felder).
  */
 export function buildPoiReservationInfo(
   poi: Poi,
@@ -68,15 +74,27 @@ export function buildPoiReservationInfo(
   let openTableId: string | undefined;
   let quandooId: string | undefined;
   let resmioId: string | undefined;
-  let bookingUrl = fromFacts.bookingUrl;
+  let bookingUrl = fromFacts.bookingUrl || bookingUrlFromTags(tags);
 
-  if (/opentable/.test(blob) || tags.includes('opentable')) {
+  if (
+    /opentable/.test(blob) ||
+    tags.includes('opentable') ||
+    tags.some((t) => t.startsWith('ot:'))
+  ) {
     provider = 'opentable';
     openTableId = tags.find((t) => t.startsWith('ot:'))?.slice(3);
-  } else if (/quandoo/.test(blob) || tags.includes('quandoo')) {
+  } else if (
+    /quandoo/.test(blob) ||
+    tags.includes('quandoo') ||
+    tags.some((t) => t.startsWith('qd:'))
+  ) {
     provider = 'quandoo';
     quandooId = tags.find((t) => t.startsWith('qd:'))?.slice(3);
-  } else if (/resmio/.test(blob) || tags.includes('resmio')) {
+  } else if (
+    /resmio/.test(blob) ||
+    tags.includes('resmio') ||
+    tags.some((t) => t.startsWith('rm:'))
+  ) {
     provider = 'resmio';
     resmioId = tags.find((t) => t.startsWith('rm:'))?.slice(3);
   } else if (/dish\.de|dish\b/.test(blob)) {
@@ -120,7 +138,7 @@ export function resolveReservationBookingUrl(
   return null;
 }
 
-/** Welche Stufe Findus dem User anbieten soll. */
+/** Welche Stufe Yorro dem User anbieten soll. */
 export function resolveReservationTier(
   info: PoiReservationInfo,
   _profile: UserProfile | null,
@@ -183,7 +201,7 @@ export function describeReservationOffer(
   if (info.phoneNumber) {
     return {
       preferredTier: tiers,
-      speechHint: `Online geht hier nichts — soll ich dir die Nummer von ${info.name} zum Anrufen aufschalten?`,
+        speechHint: `Online geht hier nichts — Nummer von ${info.name} zum Anrufen ist dabei.`,
     };
   }
   return {
@@ -419,7 +437,7 @@ async function executeAiCall(
       ok: false,
       tier: 'AI_CALL',
       message:
-        'Der KI-Anruf ist fehlgeschlagen. Soll ich dir stattdessen die Nummer zum Anrufen aufschalten?',
+        'Der KI-Anruf ist fehlgeschlagen. Nummer zum Anrufen ist dabei.',
     };
   }
 }
@@ -430,49 +448,91 @@ export async function executeReservation(
   details: ReservationRequestDetails,
   profile: UserProfile | null,
 ): Promise<ReservationExecuteResult> {
+  let result: ReservationExecuteResult;
   if (tier === 'API') {
-    return executeApiReservation(info, details);
-  }
-  if (tier === 'EMAIL') {
+    result = await executeApiReservation(info, details);
+  } else if (tier === 'EMAIL') {
     if (!profile) {
-      return {
+      result = {
         ok: false,
         tier: 'EMAIL',
         message: 'Profil fehlt für die E-Mail-Reservierung.',
       };
+    } else {
+      result = await executeEmailReservation(info, details, profile);
     }
-    return executeEmailReservation(info, details, profile);
-  }
-  if (tier === 'AI_CALL') {
+  } else if (tier === 'AI_CALL') {
     if (!profile) {
-      return {
+      result = {
         ok: false,
         tier: 'AI_CALL',
         message: 'Profil fehlt für den KI-Anruf.',
       };
+    } else {
+      result = await executeAiCall(info, details, profile);
     }
-    return executeAiCall(info, details, profile);
-  }
-
-  // DIAL_ONLY
-  if (!info.phoneNumber) {
-    return {
+  } else if (!info.phoneNumber) {
+    result = {
       ok: false,
       tier: 'DIAL_ONLY',
       message: 'Keine Nummer hinterlegt.',
     };
+  } else {
+    const tel = `tel:${info.phoneNumber.replace(/[^\d+]/g, '')}`;
+    const can = await Linking.canOpenURL(tel);
+    if (!can) {
+      result = { ok: false, tier: 'DIAL_ONLY', message: 'Anrufe nicht möglich.' };
+    } else {
+      await Linking.openURL(tel);
+      result = {
+        ok: true,
+        tier: 'DIAL_ONLY',
+        message: `Ich öffne die Anruf-App für ${info.name}.`,
+      };
+    }
   }
-  const tel = `tel:${info.phoneNumber.replace(/[^\d+]/g, '')}`;
-  const can = await Linking.canOpenURL(tel);
-  if (!can) {
-    return { ok: false, tier: 'DIAL_ONLY', message: 'Anrufe nicht möglich.' };
+
+  try {
+    const {
+      useReservationMemoryStore,
+    } = require('../../store/useReservationMemoryStore') as {
+      useReservationMemoryStore: {
+        getState: () => {
+          record: (p: Record<string, unknown>) => void;
+        };
+      };
+    };
+    const { getCachedUserProfile } = require('../userProfileService') as {
+      getCachedUserProfile: () => { cityId?: string | null } | null;
+    };
+    const status =
+      !result.ok
+        ? 'failed'
+        : result.tier === 'API'
+          ? 'opened'
+          : result.tier === 'EMAIL'
+            ? 'emailed'
+            : result.tier === 'DIAL_ONLY' || result.tier === 'AI_CALL'
+              ? 'dialed'
+              : 'pending';
+    useReservationMemoryStore.getState().record({
+      poiName: info.name,
+      poiId: info.poiId ?? null,
+      cityId: getCachedUserProfile()?.cityId ?? null,
+      dayKey: details.dateIso ?? null,
+      partySize: details.partySize ?? null,
+      timeLabel: details.timeLabel ?? null,
+      dateIso: details.dateIso ?? null,
+      tier: result.tier,
+      status,
+      openUrl: result.openUrl ?? null,
+      note: result.ok ? null : result.message,
+    });
+  } catch {
+    /* soft */
   }
-  await Linking.openURL(tel);
-  return {
-    ok: true,
-    tier: 'DIAL_ONLY',
-    message: `Ich öffne die Anruf-App für ${info.name}.`,
-  };
+
+  return result;
 }
 
 /** Prompt-Block für Gemini / Concierge. */

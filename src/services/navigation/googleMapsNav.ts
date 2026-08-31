@@ -27,22 +27,61 @@ import {
 } from './streetViewCache';
 import { scheduleImmediateCommunityCachePush } from '../sync/nightlyCacheSync';
 import { sanitizePlaceWebsiteUri } from './placeWebsiteUri';
+import { parseGoogleRouteFare } from './googleRouteFare';
 
 
 
 const PLACES_NEARBY =
   'https://maps.googleapis.com/maps/api/place/nearbysearch/json';
 const DIRECTIONS = 'https://maps.googleapis.com/maps/api/directions/json';
-const PUBLIC_OSRM_BASE = 'https://router.project-osrm.org/route/v1';
+/**
+ * project-osrm.org hat nur ein Auto-Graph — `/foot` und `/bike` liefern trotzdem
+ * Driving-Geometrie (Straßen, keine Fußgängerbrücken). Nie als Fuß/Rad nutzen.
+ */
+const CAR_ONLY_OSRM_HOST = 'router.project-osrm.org';
+void CAR_ONLY_OSRM_HOST;
+/** FOSSGIS: Profil steckt im Host-Pfad; URL-Segment bleibt `driving`. */
+const FOSSGIS_FOOT_OSRM_BASE =
+  'https://routing.openstreetmap.de/routed-foot/route/v1';
+const FOSSGIS_BIKE_OSRM_BASE =
+  'https://routing.openstreetmap.de/routed-bike/route/v1';
 const GEOCODE = 'https://maps.googleapis.com/maps/api/geocode/json';
 const SV_META = 'https://maps.googleapis.com/maps/api/streetview/metadata';
 const SV_STATIC = 'https://maps.googleapis.com/maps/api/streetview';
 
+/** Auto-Umweg-Heuristik: Fußroute >> Luftlinie → verwerfen. */
+export function isImplausiblePedestrianDetour(
+  routeDistanceM: number,
+  airDistanceM: number,
+  travelMode: PedestrianTravelMode = 'walking',
+): boolean {
+  if (travelMode === 'transit') return false;
+  if (!Number.isFinite(routeDistanceM) || !Number.isFinite(airDistanceM)) {
+    return false;
+  }
+  if (airDistanceM < 40) return false;
+  const maxRatio = travelMode === 'bicycling' ? 2.8 : 2.0;
+  const minExtraM = travelMode === 'bicycling' ? 550 : 280;
+  return (
+    routeDistanceM > airDistanceM * maxRatio &&
+    routeDistanceM - airDistanceM > minExtraM
+  );
+}
 
-
-function resolveOsrmBase(): string {
-  const configured = env.osrmBaseUrl().replace(/\/$/, '');
-  return configured || PUBLIC_OSRM_BASE;
+function airDistanceMeters(
+  a: { lat: number; lng: number },
+  b: { lat: number; lng: number },
+): number {
+  const R = 6_371_000;
+  const dLat = ((b.lat - a.lat) * Math.PI) / 180;
+  const dLng = ((b.lng - a.lng) * Math.PI) / 180;
+  const x =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos((a.lat * Math.PI) / 180) *
+      Math.cos((b.lat * Math.PI) / 180) *
+      Math.sin(dLng / 2) *
+      Math.sin(dLng / 2);
+  return 2 * R * Math.asin(Math.min(1, Math.sqrt(x)));
 }
 
 
@@ -79,10 +118,12 @@ export type DiscoveredPlace = {
   websiteUri?: string | null;
   phoneNumber?: string | null;
   openNow: boolean;
-  /** Minuten seit Mitternacht — Öffnung heute, wenn bekannt */
+  /** Minuten seit Mitternacht — Öffnung am Besuchstag, wenn bekannt */
   opensAtMin?: number | null;
-  /** Minuten seit Mitternacht — Schließung heute, wenn bekannt (ggf. >1440 bei overnight) */
+  /** Minuten seit Mitternacht — Schließung am Besuchstag, wenn bekannt (ggf. >1440 bei overnight) */
   closesAtMin?: number | null;
+  /** Periods vorhanden, aber kein Slot am Besuchstag (z. B. Ruhetag / Pause) */
+  closedOnVisitDay?: boolean | null;
 };
 
 
@@ -149,6 +190,8 @@ export type DirectionsStep = {
   instruction: string;
   roadName: string | null;
   distanceM: number;
+  /** Sekunden für diesen Step (Google/OSRM), wenn bekannt */
+  durationSec?: number;
   travelMode?: 'WALKING' | 'TRANSIT' | 'BICYCLING' | string;
 };
 
@@ -167,6 +210,24 @@ export function walkingDistanceFromSteps(steps: DirectionsStep[]): number {
     }
   }
   return Math.round(total);
+}
+
+/** Summe Step-Dauern (Fuß/Rad), Fallback null. */
+export function walkingDurationSecFromSteps(steps: DirectionsStep[]): number | null {
+  let total = 0;
+  let any = false;
+  for (const s of steps) {
+    const mode = (s.travelMode ?? 'WALKING').toUpperCase();
+    if (mode === 'TRANSIT') continue;
+    if (mode === 'WALKING' || mode === 'BICYCLING' || !s.travelMode) {
+      const d = s.durationSec;
+      if (typeof d === 'number' && Number.isFinite(d) && d > 0) {
+        total += d;
+        any = true;
+      }
+    }
+  }
+  return any ? Math.round(total) : null;
 }
 
 
@@ -194,9 +255,16 @@ export type RouteDirectionsResult = {
   overviewPolyline: string | null;
   /** Fallback path: step endpoints (+ origin). */
   pathPoints: Array<{ lat: number; lng: number }>;
+  /**
+   * Provider-Gesamtdauer in Sekunden (Google Maps / OSRM).
+   * Baseline für ETA bevor User-Pace greift.
+   */
+  durationSec?: number | null;
+  /** google | osrm — wer die Dauer geliefert hat */
+  durationSource?: 'google' | 'osrm' | null;
+  /** Transit-Fahrpreis, nur wenn Google ihn belegt. */
+  fareText?: string | null;
 };
-
-
 
 function mapsKey(): string {
   return (
@@ -287,6 +355,7 @@ type RawStep = {
   html_instructions?: string;
   maneuver?: string;
   distance?: { value?: number };
+  duration?: { value?: number };
   end_location?: { lat?: number; lng?: number };
   start_location?: { lat?: number; lng?: number };
   travel_mode?: string;
@@ -333,11 +402,34 @@ function parseDirectionsSteps(
         instruction,
         roadName: extractRoadName(instruction),
         distanceM: Math.round(s.distance?.value ?? 0),
+        durationSec:
+          typeof s.duration?.value === 'number' && Number.isFinite(s.duration.value)
+            ? Math.round(s.duration.value)
+            : undefined,
         travelMode: (s.travel_mode as DirectionsStep['travelMode']) ?? undefined,
       });
     }
   }
   return out.length ? out : null;
+}
+
+/** Gesamtdauer aller Legs (Google Directions). */
+function parseGoogleRouteDurationSec(data: Record<string, unknown>): number | null {
+  if (data.status !== 'OK') return null;
+  const routes = data.routes as Array<{
+    legs?: Array<{ duration?: { value?: number } }>;
+  }>;
+  const legs = routes?.[0]?.legs ?? [];
+  let total = 0;
+  let any = false;
+  for (const leg of legs) {
+    const v = leg.duration?.value;
+    if (typeof v === 'number' && Number.isFinite(v) && v > 0) {
+      total += v;
+      any = true;
+    }
+  }
+  return any ? Math.round(total) : null;
 }
 
 
@@ -356,12 +448,27 @@ function parseOverviewPolyline(data: Record<string, unknown>): string | null {
 function pathPointsFromSteps(
   origin: { lat: number; lng: number },
   steps: DirectionsStep[],
+  destination?: { lat: number; lng: number } | null,
 ): Array<{ lat: number; lng: number }> {
   const path: Array<{ lat: number; lng: number }> = [
     { lat: origin.lat, lng: origin.lng },
   ];
   for (const s of steps) {
     path.push({ lat: s.lat, lng: s.lng });
+  }
+  if (
+    destination &&
+    Number.isFinite(destination.lat) &&
+    Number.isFinite(destination.lng)
+  ) {
+    const last = path[path.length - 1];
+    const d =
+      last != null
+        ? airDistanceMeters(last, destination)
+        : Number.POSITIVE_INFINITY;
+    if (d > 8) {
+      path.push({ lat: destination.lat, lng: destination.lng });
+    }
   }
   return path;
 }
@@ -494,6 +601,7 @@ async function fetchDirectionsRaw(
   destination: { lat: number; lng: number },
   travelMode: PedestrianTravelMode,
   signal: AbortSignal,
+  timeOpts?: { arriveByMs?: number; departAtMs?: number },
 ): Promise<Record<string, unknown> | null> {
   const u = new URL(DIRECTIONS);
   u.searchParams.set('origin', `${origin.lat},${origin.lng}`);
@@ -502,8 +610,23 @@ async function fetchDirectionsRaw(
   u.searchParams.set('language', 'de');
   u.searchParams.set('units', 'metric');
   if (travelMode === 'transit') {
-    u.searchParams.set('departure_time', 'now');
     u.searchParams.set('transit_mode', 'bus|rail|subway|tram|train');
+    if (timeOpts?.arriveByMs && timeOpts.arriveByMs > Date.now() + 60_000) {
+      u.searchParams.set(
+        'arrival_time',
+        String(Math.floor(timeOpts.arriveByMs / 1000)),
+      );
+    } else if (
+      timeOpts?.departAtMs &&
+      timeOpts.departAtMs > Date.now() + 60_000
+    ) {
+      u.searchParams.set(
+        'departure_time',
+        String(Math.floor(timeOpts.departAtMs / 1000)),
+      );
+    } else {
+      u.searchParams.set('departure_time', 'now');
+    }
   }
   u.searchParams.set('key', mapsKey());
   return fetchJson(u.toString(), signal);
@@ -517,25 +640,61 @@ async function fetchOsrmDirectionsRaw(
   travelMode: PedestrianTravelMode,
   signal: AbortSignal,
 ): Promise<Record<string, unknown> | null> {
-  const profile = travelMode === 'bicycling' ? 'bike' : 'foot';
+  // Fuß/Rad: immer FOSSGIS — Env darf nie wieder auf Auto-OSRM rutschen
+  const wantBike = travelMode === 'bicycling';
+  const base = wantBike ? FOSSGIS_BIKE_OSRM_BASE : FOSSGIS_FOOT_OSRM_BASE;
+  const profileSegment = 'driving';
   const u = new URL(
-    `${resolveOsrmBase()}/${profile}/${origin.lng},${origin.lat};${destination.lng},${destination.lat}`,
+    `${base}/${profileSegment}/${origin.lng},${origin.lat};${destination.lng},${destination.lat}`,
   );
   u.searchParams.set('overview', 'full');
   u.searchParams.set('geometries', 'polyline');
   u.searchParams.set('steps', 'true');
+  // alternatives=true lastet öffentliche FOSSGIS-Server stark aus (oft +2–6 s).
+  // Primärroute reicht; pickShortestOsrmRoute bleibt für den Fall >1 Route.
+  u.searchParams.set('alternatives', 'false');
+  u.searchParams.set('continue_straight', 'false');
+  if (__DEV__) {
+    console.log('[nav] OSRM', wantBike ? 'bike' : 'foot', u.origin + u.pathname);
+  }
   return fetchJson(u.toString(), signal);
 }
 
 
 
-function parseOsrmDirectionsSteps(data: Record<string, unknown>, travelMode: string): DirectionsStep[] | null {
+function pickShortestOsrmRoute(
+  data: Record<string, unknown>,
+): { geometry?: string; duration?: number; legs?: Array<{ steps?: any[]; duration?: number; distance?: number }>; distance?: number } | null {
   if (data.code !== 'Ok') return null;
   const routes = data.routes as Array<{
     geometry?: string;
-    legs?: Array<{ steps?: any[] }>;
+    duration?: number;
+    distance?: number;
+    legs?: Array<{ steps?: any[]; duration?: number; distance?: number }>;
   }>;
-  const leg = routes?.[0]?.legs?.[0];
+  if (!Array.isArray(routes) || routes.length === 0) return null;
+  let best = routes[0]!;
+  let bestDist =
+    typeof best.distance === 'number'
+      ? best.distance
+      : (best.legs?.[0]?.distance ?? Number.POSITIVE_INFINITY);
+  for (let i = 1; i < routes.length; i++) {
+    const r = routes[i]!;
+    const d =
+      typeof r.distance === 'number'
+        ? r.distance
+        : (r.legs?.[0]?.distance ?? Number.POSITIVE_INFINITY);
+    if (d < bestDist) {
+      best = r;
+      bestDist = d;
+    }
+  }
+  return best;
+}
+
+function parseOsrmDirectionsSteps(data: Record<string, unknown>, travelMode: string): DirectionsStep[] | null {
+  const route = pickShortestOsrmRoute(data);
+  const leg = route?.legs?.[0];
   if (!leg?.steps) return null;
 
 
@@ -616,18 +775,26 @@ function parseOsrmDirectionsSteps(data: Record<string, unknown>, travelMode: str
       instruction,
       roadName,
       distanceM: Math.round(s.distance || 0),
+      durationSec:
+        typeof s.duration === 'number' && Number.isFinite(s.duration)
+          ? Math.round(s.duration)
+          : undefined,
       travelMode: travelMode === 'bicycling' ? 'BICYCLING' : 'WALKING'
     });
   }
   return out.length ? out : null;
 }
 
-
+function parseOsrmRouteDurationSec(data: Record<string, unknown>): number | null {
+  const route = pickShortestOsrmRoute(data);
+  const d = route?.duration;
+  if (typeof d === 'number' && Number.isFinite(d) && d > 0) return Math.round(d);
+  return null;
+}
 
 function parseOsrmOverviewPolyline(data: Record<string, unknown>): string | null {
-  if (data.code !== 'Ok') return null;
-  const routes = data.routes as Array<{ geometry?: string }>;
-  const points = routes?.[0]?.geometry;
+  const route = pickShortestOsrmRoute(data);
+  const points = route?.geometry;
   return typeof points === 'string' && points.length > 4 ? points : null;
 }
 
@@ -636,38 +803,61 @@ function parseOsrmOverviewPolyline(data: Record<string, unknown>): string | null
 /**
  * Google Directions — nur walking / bicycling / transit (nie driving).
  * Liefert Steps + echte Haltestellenkette bei Transit.
+ * Fuß/Rad: immer kürzeste Geh-/Radroute (FOSSGIS + ggf. Google, Auto-Umwege verwerfen).
  */
 export async function fetchRouteDirectionsResult(
   origin: { lat: number; lng: number },
   destination: { lat: number; lng: number },
   mode: PedestrianTravelMode = 'walking',
+  timeOpts?: { arriveByMs?: number; departAtMs?: number },
 ): Promise<RouteDirectionsResult | null> {
   const travelMode: PedestrianTravelMode =
     mode === 'bicycling' || mode === 'transit' ? mode : 'walking';
-  const ctrl = new AbortController();
-  const timer = setTimeout(() => ctrl.abort(), FETCH_MS);
-
-  
+  const airM = airDistanceMeters(origin, destination);
 
   try {
     let steps: DirectionsStep[] | null = null;
     let stations: TransitStationStop[] = [];
     let overviewPolyline: string | null = null;
     let usedMode = travelMode;
+    let durationSec: number | null = null;
+    let durationSource: 'google' | 'osrm' | null = null;
+    let fareText: string | null = null;
 
+    type Candidate = {
+      steps: DirectionsStep[];
+      stations: TransitStationStop[];
+      overviewPolyline: string | null;
+      durationSec: number | null;
+      durationSource: 'google' | 'osrm';
+      distanceM: number;
+      usedMode: PedestrianTravelMode;
+      fareText?: string | null;
+    };
 
+    const acceptCandidate = (
+      c: Candidate | null,
+    ): Candidate | null => {
+      if (!c?.steps?.length) return null;
+      if (
+        travelMode !== 'transit' &&
+        isImplausiblePedestrianDetour(c.distanceM, airM, travelMode)
+      ) {
+        console.warn('[nav] reject car-like detour', {
+          routeM: Math.round(c.distanceM),
+          airM: Math.round(airM),
+          source: c.durationSource,
+        });
+        return null;
+      }
+      return c;
+    };
 
-    // Hands-Free: OSRM always first. Google Directions = emergency fallback only.
-    // preferGoogleRouting() is permanently false after reboot.
-
-
-
-    const tryOsrm = async (): Promise<void> => {
-      if (travelMode === 'transit') return;
+    const tryOsrm = async (): Promise<Candidate | null> => {
+      if (travelMode === 'transit') return null;
       try {
         const osrmCtrl = new AbortController();
-        // Primary path — etwas mehr Zeit als früherer 1,8s-Fallback
-        const osrmTimer = setTimeout(() => osrmCtrl.abort(), 2_500);
+        const osrmTimer = setTimeout(() => osrmCtrl.abort(), 4_000);
         try {
           const osrmData = await fetchOsrmDirectionsRaw(
             origin,
@@ -675,60 +865,204 @@ export async function fetchRouteDirectionsResult(
             travelMode,
             osrmCtrl.signal,
           );
-          if (osrmData) {
-            steps = parseOsrmDirectionsSteps(osrmData, travelMode);
-            overviewPolyline = parseOsrmOverviewPolyline(osrmData);
-          }
+          if (!osrmData) return null;
+          const osrmSteps = parseOsrmDirectionsSteps(osrmData, travelMode);
+          if (!osrmSteps?.length) return null;
+          const distanceM =
+            pickShortestOsrmRoute(osrmData)?.distance ??
+            walkingDistanceFromSteps(osrmSteps);
+          const dur =
+            parseOsrmRouteDurationSec(osrmData) ??
+            walkingDurationSecFromSteps(osrmSteps);
+          return acceptCandidate({
+            steps: osrmSteps,
+            stations: [],
+            overviewPolyline: parseOsrmOverviewPolyline(osrmData),
+            durationSec: dur,
+            durationSource: 'osrm',
+            distanceM,
+            usedMode: travelMode,
+          });
         } finally {
           clearTimeout(osrmTimer);
         }
       } catch (err) {
         console.warn('[nav] OSRM routing failed', err);
+        return null;
       }
     };
 
+    const tryGoogle = async (): Promise<Candidate | null> => {
+      if (!hasGoogleMapsNavKey()) return null;
+      const gCtrl = new AbortController();
+      const gTimer = setTimeout(() => gCtrl.abort(), FETCH_MS);
+      try {
+        let data = await fetchDirectionsRaw(
+          origin,
+          destination,
+          travelMode,
+          gCtrl.signal,
+          timeOpts,
+        );
+        let gSteps = data ? parseDirectionsSteps(data) : null;
+        let gStations =
+          data && travelMode === 'transit' ? parseTransitStationChain(data) : [];
+        let poly = data ? parseOverviewPolyline(data) : null;
+        let dur =
+          (data ? parseGoogleRouteDurationSec(data) : null) ??
+          (gSteps ? walkingDurationSecFromSteps(gSteps) : null);
+        let modeUsed = travelMode;
 
-
-    const tryGoogle = async (): Promise<void> => {
-      if (!hasGoogleMapsNavKey()) return;
-      let data = await fetchDirectionsRaw(origin, destination, travelMode, ctrl.signal);
-      steps = data ? parseDirectionsSteps(data) : null;
-      stations = data && travelMode === 'transit' ? parseTransitStationChain(data) : [];
-      overviewPolyline = data ? parseOverviewPolyline(data) : null;
-
-
-
-      if (!steps && travelMode !== 'walking') {
-        data = await fetchDirectionsRaw(origin, destination, 'walking', ctrl.signal);
-        steps = data ? parseDirectionsSteps(data) : null;
-        stations = [];
-        usedMode = 'walking';
-        overviewPolyline = data ? parseOverviewPolyline(data) : null;
+        if (!gSteps && travelMode !== 'walking') {
+          data = await fetchDirectionsRaw(
+            origin,
+            destination,
+            'walking',
+            gCtrl.signal,
+          );
+          gSteps = data ? parseDirectionsSteps(data) : null;
+          gStations = [];
+          modeUsed = 'walking';
+          poly = data ? parseOverviewPolyline(data) : null;
+          dur =
+            (data ? parseGoogleRouteDurationSec(data) : null) ??
+            (gSteps ? walkingDurationSecFromSteps(gSteps) : null);
+        }
+        if (!gSteps?.length) return null;
+        const fareText =
+          travelMode === 'transit' && modeUsed === 'transit'
+            ? parseGoogleRouteFare(data)
+            : null;
+        return acceptCandidate({
+          steps: gSteps,
+          stations: gStations,
+          overviewPolyline: poly,
+          durationSec: dur,
+          durationSource: 'google',
+          distanceM: walkingDistanceFromSteps(gSteps),
+          usedMode: modeUsed,
+          fareText,
+        });
+      } finally {
+        clearTimeout(gTimer);
       }
     };
 
-
+    const pickShortestCandidate = (
+      a: Candidate | null,
+      b: Candidate | null,
+    ): Candidate | null => {
+      if (a && b) return a.distanceM <= b.distanceM ? a : b;
+      return a ?? b;
+    };
 
     if (travelMode === 'transit') {
-      // Directions-Transit nur Notfall (door-to-door: startTransitHandsFree / planJourney)
-      await tryGoogle();
+      const g = await tryGoogle();
+      if (!g) return null;
+      steps = g.steps;
+      stations = g.stations;
+      overviewPolyline = g.overviewPolyline;
+      durationSec = g.durationSec;
+      durationSource = g.durationSource;
+      usedMode = g.usedMode;
+      fareText = g.fareText ?? null;
     } else {
-      await tryOsrm();
-      if (!steps) await tryGoogle();
+      const tryOfflineCity = async (): Promise<Candidate | null> => {
+        try {
+          const { routeOfflineOnCityGraph } = await import('./offlineCityRouter');
+          const r = await routeOfflineOnCityGraph({
+            originLat: origin.lat,
+            originLng: origin.lng,
+            destLat: destination.lat,
+            destLng: destination.lng,
+            travelMode,
+          });
+          if (!r || r.pathPoints.length < 2) return null;
+          const localSteps: DirectionsStep[] = r.pathPoints
+            .slice(1)
+            .map((p, i) => {
+              const prev = r.pathPoints[i]!;
+              const d = airDistanceMeters(prev, p);
+              return {
+                lat: p.lat,
+                lng: p.lng,
+                maneuver: i === 0 ? 'depart' : null,
+                instruction: '',
+                roadName: null,
+                distanceM: d,
+                durationSec: Math.round(
+                  d / (travelMode === 'bicycling' ? 3.7 : 1.33),
+                ),
+                travelMode:
+                  travelMode === 'bicycling' ? 'BICYCLING' : 'WALKING',
+              };
+            });
+          return acceptCandidate({
+            steps: localSteps,
+            stations: [],
+            overviewPolyline: null,
+            durationSec: r.durationSec,
+            durationSource: 'osrm',
+            distanceM: r.distanceM,
+            usedMode: travelMode,
+          });
+        } catch {
+          return null;
+        }
+      };
+
+      let offline = false;
+      try {
+        const net = await import('./networkState');
+        offline = await net.isDeviceOffline();
+      } catch {
+        offline = false;
+      }
+
+      let best: Candidate | null = null;
+      if (offline) {
+        best = await tryOfflineCity();
+      } else {
+        // OSRM zuerst (schnell). Offline-Graph nur Fallback —
+        // parallel warten ließ den Stadt-Dijkstra die Linie ~30s blockieren.
+        const osrmCand = await tryOsrm();
+        if (osrmCand) {
+          best = osrmCand;
+        } else {
+          const [offlineCand, googleCand] = await Promise.all([
+            tryOfflineCity(),
+            tryGoogle(),
+          ]);
+          best = pickShortestCandidate(offlineCand, googleCand);
+          if (!best && airM > 12_000) best = googleCand;
+        }
+      }
+      const resolved = best;
+      if (!resolved) return null;
+      steps = resolved.steps;
+      stations = resolved.stations;
+      overviewPolyline = resolved.overviewPolyline;
+      durationSec = resolved.durationSec;
+      durationSource = resolved.durationSource;
+      usedMode = resolved.usedMode;
     }
 
-
-
     if (!steps) return null;
+    if (durationSec == null) {
+      durationSec = walkingDurationSecFromSteps(steps);
+    }
     return {
       steps,
       stations,
       travelMode: usedMode,
       overviewPolyline,
-      pathPoints: pathPointsFromSteps(origin, steps),
+      pathPoints: pathPointsFromSteps(origin, steps, destination),
+      durationSec,
+      durationSource,
+      fareText,
     };
-  } finally {
-    clearTimeout(timer);
+  } catch {
+    return null;
   }
 }
 
@@ -797,30 +1131,91 @@ export async function geocodePlaceNameOsmFirst(
     biasLat?: number;
     biasLng?: number;
     cityHint?: string | null;
+    /** Prefer rooftop / street_address over establishment (address nav). */
+    preferStreetAddress?: boolean;
   },
 ): Promise<GeocodeResult | null> {
-  const q = query.replace(/\s+/g, ' ').trim();
+  let q = query.replace(/\s+/g, ' ').trim();
   if (q.length < 2) return null;
-  const withCity =
-    opts?.cityHint &&
-    !q.toLowerCase().includes(opts.cityHint.toLowerCase())
-      ? `${q}, ${opts.cityHint}`
-      : q;
+  try {
+    const { sanitizeNavDestQuery } = require('./streetAddressQuery') as {
+      sanitizeNavDestQuery: (s: string) => string;
+    };
+    q = sanitizeNavDestQuery(q) || q;
+  } catch {
+    /* soft */
+  }
+  let biasLat = opts?.biasLat;
+  let biasLng = opts?.biasLng;
+  let cityHint = opts?.cityHint ?? null;
+  try {
+    const { geocodeBiasForSpokenCity } = require('./fuzzyCityResolve') as {
+      geocodeBiasForSpokenCity: (s: string) => {
+        cityHint: string;
+        biasLat?: number;
+        biasLng?: number;
+      } | null;
+    };
+    const spoken = geocodeBiasForSpokenCity(q);
+    if (spoken) {
+      cityHint = spoken.cityHint;
+      biasLat = spoken.biasLat;
+      biasLng = spoken.biasLng;
+    }
+  } catch {
+    /* soft */
+  }
+  const biasOpts = { biasLat, biasLng, cityHint };
+  let withCity = q;
+  try {
+    const { composeGeocodeQuery } = require('./fuzzyCityResolve') as {
+      composeGeocodeQuery: (query: string, hint?: string | null) => string;
+    };
+    withCity = composeGeocodeQuery(q, cityHint);
+  } catch {
+    if (cityHint && !q.toLowerCase().includes(cityHint.toLowerCase())) {
+      withCity = `${q}, ${cityHint}`;
+    }
+  }
 
 
+
+  const hitMatchesCity = (hit: GeocodeResult | null): GeocodeResult | null => {
+    if (!hit) return null;
+    try {
+      const { geocodeHitMatchesSpokenCity } = require('./fuzzyCityResolve') as {
+        geocodeHitMatchesSpokenCity: (
+          h: { lat: number; lng: number; label?: string | null },
+          query: string,
+        ) => boolean;
+      };
+      if (!geocodeHitMatchesSpokenCity(hit, q)) return null;
+    } catch {
+      /* soft */
+    }
+    return hit;
+  };
 
   try {
     const cached = await getCachedGeocode(withCity);
-    if (cached) return cached;
+    const okCached = !opts?.preferStreetAddress ? hitMatchesCity(cached) : null;
+    if (okCached) return okCached;
     const cachedQ = await getCachedGeocode(q);
-    if (cachedQ) return cachedQ;
+    const okQ = !opts?.preferStreetAddress ? hitMatchesCity(cachedQ) : null;
+    if (okQ) return okQ;
   } catch {
     // cache optional
   }
 
 
 
-  const fromNominatim = await geocodeViaNominatim(withCity);
+  const fromNominatim = hitMatchesCity(
+    await geocodeViaNominatim(withCity, {
+      biasLat: biasOpts.biasLat,
+      biasLng: biasOpts.biasLng,
+      preferStreetAddress: opts?.preferStreetAddress === true,
+    }),
+  );
   if (fromNominatim) {
     void putCachedGeocode(withCity, fromNominatim).catch(() => undefined);
     return fromNominatim;
@@ -828,7 +1223,13 @@ export async function geocodePlaceNameOsmFirst(
 
 
 
-  const fromGoogle = await geocodeViaGoogle(withCity, opts);
+  const fromGoogle = hitMatchesCity(
+    await geocodeViaGoogle(withCity, {
+      biasLat: biasOpts.biasLat,
+      biasLng: biasOpts.biasLng,
+      preferStreetAddress: opts?.preferStreetAddress,
+    }),
+  );
   if (fromGoogle) {
     void putCachedGeocode(withCity, fromGoogle).catch(() => undefined);
     return fromGoogle;
@@ -836,10 +1237,18 @@ export async function geocodePlaceNameOsmFirst(
 
 
 
-  const fromPlaces = await findPlaceViaGoogle(withCity, opts);
-  if (fromPlaces) {
-    void putCachedGeocode(withCity, fromPlaces).catch(() => undefined);
-    return fromPlaces;
+  // Straße+Nr.: Places Find überspringen (sonst Establishment statt Adresse)
+  if (!opts?.preferStreetAddress) {
+    const fromPlaces = hitMatchesCity(
+      await findPlaceViaGoogle(withCity, {
+        biasLat: biasOpts.biasLat,
+        biasLng: biasOpts.biasLng,
+      }),
+    );
+    if (fromPlaces) {
+      void putCachedGeocode(withCity, fromPlaces).catch(() => undefined);
+      return fromPlaces;
+    }
   }
 
 
@@ -852,16 +1261,23 @@ export async function geocodePlaceNameOsmFirst(
       Number.isFinite(first.latitude) &&
       Number.isFinite(first.longitude)
     ) {
-      const result = {
+      const result = hitMatchesCity({
         lat: first.latitude,
         lng: first.longitude,
         label: q,
-      };
-      void putCachedGeocode(withCity, result).catch(() => undefined);
-      return result;
+      });
+      if (result) {
+        void putCachedGeocode(withCity, result).catch(() => undefined);
+        return result;
+      }
     }
   } catch {
     // Expo Geocode optional
+  }
+
+  // Lokaler Miss (z. B. „Holstentor, Prisdorf“) → ohne Stadt-Bias nochmal
+  if (withCity !== q && !opts?.preferStreetAddress) {
+    return geocodePlaceNameOsmFirst(q);
   }
   return null;
 }
@@ -870,7 +1286,11 @@ export async function geocodePlaceNameOsmFirst(
 
 async function geocodeViaGoogle(
   address: string,
-  opts?: { biasLat?: number; biasLng?: number },
+  opts?: {
+    biasLat?: number;
+    biasLng?: number;
+    preferStreetAddress?: boolean;
+  },
 ): Promise<GeocodeResult | null> {
   if (!hasGoogleMapsNavKey()) return null;
   const ctrl = new AbortController();
@@ -880,6 +1300,9 @@ async function geocodeViaGoogle(
     u.searchParams.set('address', address);
     u.searchParams.set('language', 'de');
     u.searchParams.set('key', mapsKey());
+    if (opts?.preferStreetAddress) {
+      u.searchParams.set('result_type', 'street_address|premise|subpremise');
+    }
     if (
       opts?.biasLat != null &&
       opts?.biasLng != null &&
@@ -894,12 +1317,33 @@ async function geocodeViaGoogle(
     const data = await fetchJson(u.toString(), ctrl.signal);
     const results = (data?.results as Array<{
       formatted_address?: string;
+      types?: string[];
       geometry?: { location?: { lat?: number; lng?: number } };
     }>) ?? [];
-    const hit = results[0];
+    const preferTypes = new Set([
+      'street_address',
+      'premise',
+      'subpremise',
+    ]);
+    const hit =
+      (opts?.preferStreetAddress
+        ? results.find((r) =>
+            (r.types ?? []).some((t) => preferTypes.has(t)),
+          )
+        : null) ?? results[0];
     const lat = hit?.geometry?.location?.lat;
     const lng = hit?.geometry?.location?.lng;
-    if (lat == null || lng == null) return null;
+    if (lat == null || lng == null) {
+      // Fallback ohne result_type-Filter, wenn street_address leer
+      if (opts?.preferStreetAddress && results.length === 0) {
+        return geocodeViaGoogle(address, {
+          biasLat: opts.biasLat,
+          biasLng: opts.biasLng,
+          preferStreetAddress: false,
+        });
+      }
+      return null;
+    }
     return {
       lat,
       lng,
@@ -963,6 +1407,11 @@ async function findPlaceViaGoogle(
 
 async function geocodeViaNominatim(
   query: string,
+  opts?: {
+    biasLat?: number;
+    biasLng?: number;
+    preferStreetAddress?: boolean;
+  },
 ): Promise<GeocodeResult | null> {
   const ctrl = new AbortController();
   const timer = setTimeout(() => ctrl.abort(), FETCH_MS);
@@ -970,8 +1419,24 @@ async function geocodeViaNominatim(
     const u = new URL('https://nominatim.openstreetmap.org/search');
     u.searchParams.set('q', query);
     u.searchParams.set('format', 'json');
-    u.searchParams.set('limit', '1');
-    u.searchParams.set('addressdetails', '0');
+    const wantMany =
+      opts?.preferStreetAddress === true ||
+      (opts?.biasLat != null && opts?.biasLng != null);
+    u.searchParams.set('limit', wantMany ? '5' : '1');
+    u.searchParams.set('addressdetails', '1');
+    if (
+      opts?.biasLat != null &&
+      Number.isFinite(opts.biasLat) &&
+      opts?.biasLng != null &&
+      Number.isFinite(opts.biasLng)
+    ) {
+      const d = 0.4;
+      u.searchParams.set(
+        'viewbox',
+        `${opts.biasLng - d},${opts.biasLat + d},${opts.biasLng + d},${opts.biasLat - d}`,
+      );
+      u.searchParams.set('bounded', '0');
+    }
     const res = await fetch(u.toString(), {
       signal: ctrl.signal,
       headers: {
@@ -985,17 +1450,144 @@ async function geocodeViaNominatim(
       lon?: string;
       display_name?: string;
     }>;
-    const hit = rows[0];
-    const lat = hit?.lat != null ? Number(hit.lat) : NaN;
-    const lng = hit?.lon != null ? Number(hit.lon) : NaN;
-    if (!Number.isFinite(lat) || !Number.isFinite(lng)) return null;
-    return {
-      lat,
-      lng,
-      label: (hit.display_name ?? query).trim(),
-    };
+    const hits = (rows ?? [])
+      .map((hit) => {
+        const lat = hit?.lat != null ? Number(hit.lat) : NaN;
+        const lng = hit?.lon != null ? Number(hit.lon) : NaN;
+        if (!Number.isFinite(lat) || !Number.isFinite(lng)) return null;
+        return {
+          lat,
+          lng,
+          label: (hit.display_name ?? query).trim(),
+        };
+      })
+      .filter((h): h is GeocodeResult => h != null);
+    if (!hits.length) return null;
+    let spokenCity: string | null = null;
+    try {
+      const { spokenCityFromQuery } = require('./fuzzyCityResolve') as {
+        spokenCityFromQuery: (q: string) => string | null;
+      };
+      spokenCity = spokenCityFromQuery(query);
+    } catch {
+      spokenCity = null;
+    }
+    if (spokenCity) {
+      const key = spokenCity.toLowerCase();
+      const cityHit = hits.find((h) => h.label.toLowerCase().includes(key));
+      if (cityHit) return cityHit;
+      try {
+        const {
+          nearestCityName,
+          loadNearbyCitiesFromIndex,
+          citiesShareCore,
+        } = require('./fuzzyCityResolve') as {
+          nearestCityName: (
+            lat: number,
+            lng: number,
+            cities: Array<{ name: string; lat: number; lng: number }>,
+          ) => string | null;
+          loadNearbyCitiesFromIndex: () => Array<{
+            name: string;
+            lat: number;
+            lng: number;
+          }>;
+          citiesShareCore: (a: string, b: string) => boolean;
+        };
+        const cities = loadNearbyCitiesFromIndex();
+        const nearHit = hits.find((h) => {
+          const dc = nearestCityName(h.lat, h.lng, cities);
+          return Boolean(dc && citiesShareCore(spokenCity!, dc));
+        });
+        if (nearHit) return nearHit;
+      } catch {
+        /* soft */
+      }
+      return null;
+    }
+    if (
+      opts?.biasLat != null &&
+      Number.isFinite(opts.biasLat) &&
+      opts?.biasLng != null &&
+      Number.isFinite(opts.biasLng)
+    ) {
+      let best = hits[0]!;
+      let bestD = airDistanceMeters(
+        { lat: opts.biasLat, lng: opts.biasLng },
+        best,
+      );
+      for (const h of hits) {
+        const d = airDistanceMeters(
+          { lat: opts.biasLat, lng: opts.biasLng },
+          h,
+        );
+        if (d < bestD) {
+          best = h;
+          bestD = d;
+        }
+      }
+      return best;
+    }
+    return hits[0]!;
   } catch {
     return null;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+/**
+ * Mehrere Nominatim-Treffer ohne GPS-Viewbox — damit Hamburg und Lübeck
+ * beide auftauchen, nicht nur der nächste zum Standort.
+ */
+export async function geocodeNamedPlaceHits(
+  query: string,
+): Promise<GeocodeResult[]> {
+  let q = query.replace(/\s+/g, ' ').trim();
+  if (q.length < 2) return [];
+  try {
+    const { sanitizeNavDestQuery } = require('./streetAddressQuery') as {
+      sanitizeNavDestQuery: (s: string) => string;
+    };
+    q = sanitizeNavDestQuery(q) || q;
+  } catch {
+    /* soft */
+  }
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), FETCH_MS);
+  try {
+    const u = new URL('https://nominatim.openstreetmap.org/search');
+    u.searchParams.set('q', q);
+    u.searchParams.set('format', 'json');
+    u.searchParams.set('limit', '5');
+    u.searchParams.set('addressdetails', '1');
+    const res = await fetch(u.toString(), {
+      signal: ctrl.signal,
+      headers: {
+        Accept: 'application/json',
+        'User-Agent': 'FindusNav/2.0 (tourist walking guide)',
+      },
+    });
+    if (!res.ok) return [];
+    const rows = (await res.json()) as Array<{
+      lat?: string;
+      lon?: string;
+      display_name?: string;
+    }>;
+    return (rows ?? [])
+      .map((hit) => {
+        const lat = hit?.lat != null ? Number(hit.lat) : NaN;
+        const lng = hit?.lon != null ? Number(hit.lon) : NaN;
+        if (!Number.isFinite(lat) || !Number.isFinite(lng)) return null;
+        return {
+          lat,
+          lng,
+          label: (hit.display_name ?? q).trim(),
+        };
+      })
+      .filter((h): h is GeocodeResult => h != null);
+  } catch {
+    return [];
   } finally {
     clearTimeout(timer);
   }
@@ -1154,7 +1746,7 @@ const PLACES_NEW_FIELD_MASK_DISCOVERY =
  * (ein Call, nicht bei jedem Expanding-Ring).
  */
 const PLACES_NEW_FIELD_MASK_ENRICH =
-  'places.id,places.displayName,places.location,places.rating,places.userRatingCount,places.types,places.businessStatus,places.websiteUri,places.nationalPhoneNumber,places.internationalPhoneNumber,places.currentOpeningHours.openNow,places.currentOpeningHours.periods';
+  'places.id,places.displayName,places.location,places.rating,places.userRatingCount,places.types,places.businessStatus,places.websiteUri,places.nationalPhoneNumber,places.internationalPhoneNumber,places.currentOpeningHours.openNow,places.currentOpeningHours.periods,places.regularOpeningHours.periods';
 
 /** Kurzzeit-Cache: gleiche Text-Query nicht doppelt bezahlen (Agents parallel). */
 const TEXT_SEARCH_MEMO_TTL_MS = 8 * 60_000;
@@ -1212,6 +1804,12 @@ type PlacesNewHit = {
       close?: { day?: number; hour?: number; minute?: number };
     }>;
   };
+  regularOpeningHours?: {
+    periods?: Array<{
+      open?: { day?: number; hour?: number; minute?: number };
+      close?: { day?: number; hour?: number; minute?: number };
+    }>;
+  };
 };
 
 
@@ -1221,14 +1819,22 @@ type PlacePeriod = {
   close?: { day?: number; hour?: number; minute?: number };
 };
 
-/** Google Places day: 0=Sunday … 6=Saturday → open/close minutes heute. */
+/** Google Places day: 0=Sunday … 6=Saturday → open/close minutes am Besuchstag. */
 function openCloseMinFromPeriods(
   periods: PlacePeriod[] | undefined,
-): { opensAtMin: number | null; closesAtMin: number | null } {
-  if (!periods?.length) return { opensAtMin: null, closesAtMin: null };
-  const jsDay = new Date().getDay(); // 0=Sun
+  visitMs?: number | null,
+): {
+  opensAtMin: number | null;
+  closesAtMin: number | null;
+  closedThisDay: boolean;
+} {
+  if (!periods?.length) {
+    return { opensAtMin: null, closesAtMin: null, closedThisDay: false };
+  }
+  const jsDay = new Date(visitMs ?? Date.now()).getDay(); // 0=Sun
   let opensAtMin: number | null = null;
   let closesAtMin: number | null = null;
+  let matched = false;
   for (const p of periods) {
     const openDay = p.open?.day;
     const open = p.open;
@@ -1236,6 +1842,7 @@ function openCloseMinFromPeriods(
     if (openDay == null || open?.hour == null) continue;
     const openMin = open.hour * 60 + (open.minute ?? 0);
     if (openDay === jsDay) {
+      matched = true;
       opensAtMin =
         opensAtMin == null ? openMin : Math.min(opensAtMin, openMin);
     }
@@ -1254,12 +1861,17 @@ function openCloseMinFromPeriods(
         closesAtMin == null ? closeMin : Math.max(closesAtMin, closeMin);
     }
   }
-  return { opensAtMin, closesAtMin };
+  return {
+    opensAtMin,
+    closesAtMin,
+    closedThisDay: !matched,
+  };
 }
 
 function mapPlacesNewHits(
   places: PlacesNewHit[],
   origin: { lat: number; lng: number },
+  forVisitMs?: number | null,
 ): DiscoveredPlace[] {
   const out: DiscoveredPlace[] = [];
   for (const r of places) {
@@ -1291,7 +1903,12 @@ function mapPlacesNewHits(
             : true;
     const phone =
       (r.internationalPhoneNumber || r.nationalPhoneNumber || '').trim() || null;
-    const hours = openCloseMinFromPeriods(r.currentOpeningHours?.periods);
+    const hours = openCloseMinFromPeriods(
+      (r.currentOpeningHours?.periods?.length
+        ? r.currentOpeningHours.periods
+        : r.regularOpeningHours?.periods) as PlacePeriod[] | undefined,
+      forVisitMs,
+    );
     out.push({
       placeId: r.id ?? `new:${name}`,
       name,
@@ -1307,6 +1924,7 @@ function mapPlacesNewHits(
       openNow,
       opensAtMin: hours.opensAtMin,
       closesAtMin: hours.closesAtMin,
+      closedOnVisitDay: hours.closedThisDay,
     });
   }
   return out.sort((a, b) => a.distanceM - b.distanceM);
@@ -1324,6 +1942,8 @@ async function searchPlacesByTextNew(opts: {
   includedType?: string | null;
   /** Enterprise-Felder (Hours/Rating/Kontakt) — teurer, nur bei Bedarf. */
   enrich?: boolean;
+  /** Besuchsmoment — Öffnungs-Perioden für diesen Wochentag */
+  forVisitMs?: number | null;
 }): Promise<{ places: DiscoveredPlace[]; hardError: boolean }> {
   if (!hasGoogleMapsNavKey()) return { places: [], hardError: false };
   const enrich = Boolean(opts.enrich);
@@ -1373,10 +1993,14 @@ async function searchPlacesByTextNew(opts: {
       return { places: [], hardError: res.status >= 400 };
     }
     const data = (await res.json()) as { places?: PlacesNewHit[] };
-    const mapped = mapPlacesNewHits(data.places ?? [], {
-      lat: opts.lat,
-      lng: opts.lng,
-    });
+    const mapped = mapPlacesNewHits(
+      data.places ?? [],
+      {
+        lat: opts.lat,
+        lng: opts.lng,
+      },
+      opts.forVisitMs,
+    );
     console.log('[places] new-text', opts.query.slice(0, 40), mapped.length);
     const places = mapped.slice(0, 12);
     putTextSearchMemo(memoKey, places);
@@ -1474,6 +2098,8 @@ export async function searchPlacesByText(opts: {
   includedType?: string | null;
   /** Hours/Rating/Kontakt mitladen (Enterprise) — Default false. */
   enrich?: boolean;
+  /** Besuchsmoment für Öffnungszeiten am richtigen Wochentag */
+  forVisitMs?: number | null;
 }): Promise<DiscoveredPlace[]> {
   if (!hasGoogleMapsNavKey()) return [];
   const q = opts.query.replace(/\s+/g, ' ').trim();
@@ -1493,9 +2119,13 @@ export async function searchPlacesByText(opts: {
             ? 'cafe'
             : /\b(frühstück|fruehstueck|breakfast|brunch)\b/i.test(q)
               ? 'cafe'
-              : /\brestaurant|gastro|abendessen|mittag\b/i.test(q)
+              : /\b(steak|grill|vegan|vegetar|sushi|pizza|pannfisch|pannenfisch|pfannfisch|fischrestaurant)\b/i.test(q)
+                ? null
+                : /\brestaurant|gastro|abendessen|mittag\b/i.test(q)
                 ? 'restaurant'
-                : null;
+                : /\b(packstation|parcel.?locker|paketautomat)\b/i.test(q)
+                  ? 'parcel_lockers'
+                  : null;
     const neuCtrl = new AbortController();
     const neuTimer = setTimeout(() => neuCtrl.abort(), 7_000);
     try {
@@ -1507,11 +2137,16 @@ export async function searchPlacesByText(opts: {
         signal: neuCtrl.signal,
         includedType,
         enrich,
+        forVisitMs: opts.forVisitMs,
       });
       if (neu.places.length) return neu.places;
       hardError = neu.hardError;
-      // Leere Treffer = kein Legacy (spart doppelte Text-Search-Rechnung).
-      if (!hardError) return [];
+      // Gastro-Textsuche: leere New-API darf Legacy versuchen (Maps findet oft Review-Treffer).
+      const foodLive =
+        /\b(restaurant|steak|grill|pizza|sushi|vegan|vegetar|gastro|essen|pannfisch|pannenfisch|pfannfisch|fischrestaurant|\bfisch\b)\b/i.test(
+          q,
+        );
+      if (!hardError && !foodLive) return [];
     } finally {
       clearTimeout(neuTimer);
     }
@@ -1520,6 +2155,8 @@ export async function searchPlacesByText(opts: {
   }
 
   if (!hardError) return [];
+  // Packstation: kein Legacy-Namenssuche-Fallback (sonst DHL-Suche statt Locker).
+  if (/\b(packstation|parcel.?locker|paketautomat)\b/i.test(q)) return [];
 
   const ctrl = new AbortController();
   const timer = setTimeout(() => ctrl.abort(), FETCH_MS);
@@ -1785,17 +2422,19 @@ export async function searchOpenPlacesAhead(opts: {
     } else if (opts.placeType === 'ice_cream') {
       u.searchParams.set('keyword', 'eisdiele eis ice cream');
     } else if (opts.placeType === 'powerbank') {
+      // Nie DE-„laden“ (Geschäft) — sonst Heimat-/Souvenirläden ohne Ladeoption.
       u.searchParams.set(
         'keyword',
-        'powerbank power bank mieten voozaa cheetah batterybar',
+        'powerbank voozaa cheetah batterybar rechargy chargery',
       );
     } else if (opts.placeType === 'phone_charge') {
       u.searchParams.set(
         'keyword',
-        'powerbank steckdose handy laden charging station',
+        'powerbank charging station usb charger device charging station',
       );
     } else if (opts.placeType === 'outlet_cafe') {
-      u.searchParams.set('keyword', 'café steckdose usb laden');
+      // type=cafe + openNow; keyword ohne „laden“ (DE = Shop).
+      u.searchParams.set('keyword', 'usb steckdose');
       u.searchParams.set('type', 'cafe');
     } else {
       u.searchParams.set('type', googleType);
@@ -2045,9 +2684,9 @@ export async function fetchStreetViewImageBase64(
 ): Promise<string | null> {
   try {
     const cached = await getCachedStreetView(lat, lng, headingDeg);
-    if (cached) {
-      return cached.available ? cached.base64 : null;
-    }
+    // Nur negativ cachen blockiert; available ohne Bild → weiter laden
+    if (cached && !cached.available) return null;
+    if (cached?.base64) return cached.base64;
   } catch {
     /* miss → network once */
   }

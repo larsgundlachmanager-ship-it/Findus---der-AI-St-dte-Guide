@@ -1,0 +1,194 @@
+{
+  "city": "finsterwalde",
+  "apply": true,
+  "touched": 23,
+  "approachesFixed": 23,
+  "faqAdded": 0,
+  "data_version": 17,
+  "rows": [
+    {
+      "id": "finsterwalde_finsterwalde",
+      "name": "Finsterwalde",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "finsterwalde_marktplatz_finsterwalde",
+      "name": "Marktplatz Finsterwalde",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "finsterwalde_sanger_und_kaufmannsmuseum_finsterwalde",
+      "name": "Sänger- und Kaufmannsmuseum Finsterwalde",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "finsterwalde_stadtpfarrkirche_st_trinitatis",
+      "name": "Stadtpfarrkirche St. Trinitatis",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "finsterwalde_kath_pfarramt_st_maria_mater_dolorosa",
+      "name": "Kath. Pfarramt St. Maria Mater Dolorosa",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "finsterwalde_katharinenkirche",
+      "name": "Katharinenkirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "finsterwalde_ehrenmal_finsterwalde",
+      "name": "Ehrenmal, Finsterwalde",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "finsterwalde_sangerdenkmal",
+      "name": "Sängerdenkmal",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "finsterwalde_schloss_park_finsterwalde",
+      "name": "Schloß Park Finsterwalde",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "finsterwalde_burgerheide",
+      "name": "Bürgerheide",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "finsterwalde_ascheberg_finsterwalde",
+      "name": "Ascheberg Finsterwalde",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "finsterwalde_stadtpark",
+      "name": "Stadtpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "finsterwalde_schloss_finsterwalde",
+      "name": "Schloss Finsterwalde",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "finsterwalde_tierpark_finsterwalde",
+      "name": "Tierpark Finsterwalde",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "finsterwalde_wasserturm",
+      "name": "Wasserturm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "finsterwalde_freibad_schwimmstadion_der_freundschaft_finsterwalde",
+      "name": "Freibad Schwimmstadion der Freundschaft Finsterwalde",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "finsterwalde_rathaus",
+      "name": "Rathaus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "finsterwalde_marchenhaus_finsterwalde",
+      "name": "Märchenhaus Finsterwalde",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "finsterwalde_kulturweberei_finsterwalde",
+      "name": "Kulturweberei Finsterwalde",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "finsterwalde_weltspiegel_kino",
+      "name": "Weltspiegel Kino",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "finsterwalde_glaserne_sanger",
+      "name": "Gläserne Sänger",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "finsterwalde_feuerwehrmuseum_finsterwalde",
+      "name": "Feuerwehrmuseum Finsterwalde",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "finsterwalde_flugplatz_finsterwalde_heinrichsruh",
+      "name": "Flugplatz Finsterwalde-Heinrichsruh",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    }
+  ]
+}

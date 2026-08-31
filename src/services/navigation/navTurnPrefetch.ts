@@ -12,6 +12,7 @@ import {
   hasCartesiaTtsKey,
   synthesizeCartesiaSpeechWav,
 } from '../cartesiaTtsService';
+import { closedVocabWarmList } from '../tts/offlinePhraseBank';
 
 type TurnPrefetchSlot = {
   key: string;
@@ -171,6 +172,27 @@ export function countPreparedNavAudioSlots(): number {
     if (s.uri && !s.played && !s.key.startsWith('hybrid:')) n += 1;
   }
   return n;
+}
+
+let closedVocabWarmStarted = false;
+
+/** Häufige Nav-/Wetter-/Halt-Sätze in den Cartesia-Dateicache — nicht in die 14 Nav-Slots. */
+export async function warmClosedVocabPhrases(): Promise<void> {
+  if (closedVocabWarmStarted) return;
+  closedVocabWarmStarted = true;
+  if (!hasCartesiaTtsKey()) return;
+  try {
+    const voice = await getVoiceSettingsForTour();
+    for (const text of closedVocabWarmList()) {
+      try {
+        await synthesizeCartesiaSpeechWav(text, voice.voiceId);
+      } catch {
+        /* einzelne Zeile darf fehlen */
+      }
+    }
+  } catch (err) {
+    if (__DEV__) console.warn('[nav-prefetch] vocab warm failed:', err);
+  }
 }
 
 export function clearNavTurnPrefetch(): void {

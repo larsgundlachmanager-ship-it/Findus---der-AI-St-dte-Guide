@@ -18,18 +18,17 @@ function turnWord(
   maneuver: string | null | undefined,
   bearingRelDeg?: number,
 ): string {
+  const fromRoute = turnWordFromManeuver(maneuver);
+  if (fromRoute.includes('links') || fromRoute.includes('rechts')) {
+    return fromRoute;
+  }
   if (typeof bearingRelDeg === 'number' && Number.isFinite(bearingRelDeg)) {
     if (bearingRelDeg > 55) return 'scharf rechts';
     if (bearingRelDeg > 25) return 'rechts';
     if (bearingRelDeg < -55) return 'scharf links';
     if (bearingRelDeg < -25) return 'links';
-    const fromRoute = turnWordFromManeuver(maneuver);
-    if (fromRoute.includes('links') || fromRoute.includes('rechts')) {
-      return 'geradeaus';
-    }
-    return fromRoute;
   }
-  return turnWordFromManeuver(maneuver);
+  return fromRoute;
 }
 
 function formatDistance(m: number): string {

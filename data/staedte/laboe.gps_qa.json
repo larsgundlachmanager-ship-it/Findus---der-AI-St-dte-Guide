@@ -1,0 +1,948 @@
+{
+  "generated_at": "2026-08-28T05:13:03.444Z",
+  "summary": {
+    "city_id": "laboe",
+    "checked": 32,
+    "ok": 9,
+    "check": 14,
+    "bad": 9,
+    "errors": 0,
+    "max_delta_m": 180,
+    "city_halo_m": 28000,
+    "story_only": true
+  },
+  "rows": [
+    {
+      "id": "laboe_ostseestrand",
+      "name": "Ostseestrand",
+      "category": "natur",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.408759499999995,
+        "lng": 10.223656499999999
+      },
+      "query": "Ostseestrand, Laboe, Germany",
+      "osm": {
+        "lat": 54.3863491,
+        "lng": 10.4894745,
+        "display_name": "Campingpark Ostseestrand, Strandstraße, Hohenfelde, Deutschland",
+        "class": "tourism",
+        "type": "camp_site",
+        "provider": "photon"
+      },
+      "delta_m": 17387,
+      "from_city_m": 736,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "laboe_laboe_strand"
+      ]
+    },
+    {
+      "id": "laboe_naturerlebnisraum_kinderabenteuerland",
+      "name": "Abenteuerspaziergang Strandpromenade",
+      "category": "freizeitpark",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.41166073846154,
+        "lng": 10.284775530769231
+      },
+      "query": "Abenteuerspaziergang Strandpromenade, Laboe, Germany",
+      "osm": {
+        "lat": 54.4041153,
+        "lng": 10.2183108,
+        "display_name": "Strandpromenade, Laboe, Deutschland",
+        "class": "highway",
+        "type": "pedestrian",
+        "provider": "photon"
+      },
+      "delta_m": 4382,
+      "from_city_m": 3972,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "laboe_gedenkstatte_im_laboer_kurpark",
+      "name": "Gedenkstätte im Laboer Kurpark",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.4071376,
+        "lng": 10.2260826
+      },
+      "query": "Gedenkstätte im Laboer, Laboe, Germany",
+      "osm": {
+        "lat": 54.3735472,
+        "lng": 10.2577015,
+        "display_name": "Denkmal Röbsdorf, Zur Linde, Schrevendorf, Röbsdorf, Probsteierhagen, Probstei, Kreis Plön, Schleswig-Holstein, 24253, Deutschland",
+        "class": "historic",
+        "type": "memorial",
+        "importance": -0.04734696039114067,
+        "osm_type": "node",
+        "osm_id": 3823456190,
+        "provider": "nominatim"
+      },
+      "delta_m": 4259,
+      "from_city_m": 546,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "laboe_stoschplatz",
+      "name": "Stoschplatz",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.396900569565226,
+        "lng": 10.21912764347826
+      },
+      "query": "Stoschplatz, Laboe, Germany",
+      "osm": {
+        "lat": 54.4022528,
+        "lng": 10.2256616,
+        "display_name": "Laboe, Kreis Plön, Deutschland",
+        "class": "place",
+        "type": "town",
+        "provider": "photon"
+      },
+      "delta_m": 730,
+      "from_city_m": 725,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "laboe_beachvolleyballfelder_strand_laboe",
+      "name": "Beachvolleyballfelder Strand Laboe",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.406664639999995,
+        "lng": 10.21970672
+      },
+      "query": "Beachvolleyballfelder Strand Laboe, Laboe, Germany",
+      "osm": {
+        "lat": 54.4111679,
+        "lng": 10.2272481,
+        "display_name": "Laboe Strand, Laboe, Deutschland",
+        "class": "natural",
+        "type": "beach",
+        "provider": "photon"
+      },
+      "delta_m": 699,
+      "from_city_m": 622,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "laboe_minigolf_laboe_getranke_snacks_und_grillmoglichkeit",
+      "name": "Minigolf Laboe",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.40778,
+        "lng": 10.224980125
+      },
+      "query": "Minigolf Laboe, Laboe, Germany",
+      "osm": {
+        "lat": 54.4022528,
+        "lng": 10.2256616,
+        "display_name": "Laboe, Kreis Plön, Deutschland",
+        "class": "place",
+        "type": "town",
+        "provider": "photon"
+      },
+      "delta_m": 616,
+      "from_city_m": 618,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "laboe_lachmoewen_theater"
+      ]
+    },
+    {
+      "id": "laboe_windmuehle",
+      "name": "Windmühle Laboe",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.40125263636364,
+        "lng": 10.221604999999998
+      },
+      "query": "Windmühle Laboe, Laboe, Germany",
+      "osm": {
+        "lat": 54.4022528,
+        "lng": 10.2256616,
+        "display_name": "Laboe, Kreis Plön, Deutschland",
+        "class": "place",
+        "type": "town",
+        "provider": "photon"
+      },
+      "delta_m": 285,
+      "from_city_m": 279,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "laboe_naturerlebnisraum_dunenlandschaft_laboe",
+      "name": "Naturerlebnisraum \"Dünenlandschaft Laboe\"",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.41501024,
+        "lng": 10.23491418
+      },
+      "query": "Naturerlebnisraum \"Dünenlandschaft Laboe\", Laboe, Germany",
+      "osm": {
+        "lat": 54.414833,
+        "lng": 10.2390268,
+        "display_name": "Naturerlebnisraum Dünenlandschaft Laboe, An der Au, Laboe, Probstei, Kreis Plön, Schleswig-Holstein, 24235, Deutschland",
+        "class": "information",
+        "type": "board",
+        "importance": 0.00005529640650029782,
+        "osm_type": "node",
+        "osm_id": 361206355,
+        "provider": "nominatim"
+      },
+      "delta_m": 267,
+      "from_city_m": 1544,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "laboe_strandpromenade",
+      "name": "Strandpromenade",
+      "category": "natur",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.4094654,
+        "lng": 10.225443599999998
+      },
+      "query": "Strandpromenade, Laboe, Germany",
+      "osm": {
+        "lat": 54.4108628,
+        "lng": 10.2270114,
+        "display_name": "Strandpromenade, Laboe, Probstei, Kreis Plön, Schleswig-Holstein, 24235, Deutschland",
+        "class": "highway",
+        "type": "pedestrian",
+        "importance": 0.05338862973983364,
+        "osm_type": "way",
+        "osm_id": 160919201,
+        "provider": "nominatim"
+      },
+      "delta_m": 186,
+      "from_city_m": 804,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "laboe_knepel_maren",
+      "name": "Knepel Maren",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.401498863636355,
+        "lng": 10.217418181818182
+      },
+      "query": "Knepel Maren, Laboe",
+      "osm": {
+        "lat": -25.0291501,
+        "lng": 46.9685868,
+        "display_name": "Tatirano Laboratory & Shop, Avenue du Maréchal Foch, Tolagnaro, Madagaskar",
+        "class": "shop",
+        "type": "water",
+        "provider": "photon"
+      },
+      "delta_m": 9506312,
+      "from_city_m": 534,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city",
+        "duplicate_center"
+      ],
+      "twins": [
+        "laboe_yacht_und_gewerbehafen_ostseebad_laboe"
+      ]
+    },
+    {
+      "id": "laboe_alte_ausgebrannte_eiche",
+      "name": "Alte ausgebrannte Eiche",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.361424326666686,
+        "lng": 10.21713332
+      },
+      "query": "Alte ausgebrannte Eiche, Laboe, Germany",
+      "osm": {
+        "lat": 48.8115053,
+        "lng": 12.2818893,
+        "display_name": "1000 Jaehrige Eiche, Laberweinting, Deutschland",
+        "class": "historic",
+        "type": "memorial",
+        "provider": "photon"
+      },
+      "delta_m": 633322,
+      "from_city_m": 4571,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "laboe_scholz_jurgen",
+      "name": "Scholz Jürgen",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.39999540000001,
+        "lng": 10.2278806
+      },
+      "query": "Scholz Jürgen, Laboe, Germany",
+      "osm": {
+        "lat": 48.9525237,
+        "lng": 8.50227,
+        "display_name": "Praxis Jürgen Scholz, Pfefferäckerstraße, Karlsruhe, Deutschland",
+        "class": "amenity",
+        "type": "doctors",
+        "provider": "photon"
+      },
+      "delta_m": 617256,
+      "from_city_m": 291,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "laboe_dr_feld_partner_gmbh",
+      "name": "Dr. Feld & Partner GmbH",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.39864428571428,
+        "lng": 10.220244857142857
+      },
+      "query": "Dr. Feld, Laboe, Germany",
+      "osm": {
+        "lat": 54.3978357,
+        "lng": 10.2272617,
+        "display_name": "Feldstraße, Laboe, Probstei, Kreis Plön, Schleswig-Holstein, 24235, Deutschland",
+        "class": "highway",
+        "type": "residential",
+        "importance": 0.05338862973983364,
+        "osm_type": "way",
+        "osm_id": 27994201,
+        "provider": "nominatim"
+      },
+      "delta_m": 463,
+      "from_city_m": 528,
+      "status": "CHECK",
+      "flags": [
+        "house_like_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "laboe_laboe",
+      "name": "LABOE",
+      "category": "freizeit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.403245,
+        "lng": 10.219101
+      },
+      "query": "LABOE, Laboe, Germany",
+      "osm": {
+        "lat": 54.403862,
+        "lng": 10.2170314,
+        "display_name": "Laboe, Strandpromenade, Laboe, Probstei, Kreis Plön, Schleswig-Holstein, 24235, Deutschland",
+        "class": "information",
+        "type": "board",
+        "importance": 0.000028699931334355954,
+        "osm_type": "node",
+        "osm_id": 392544678,
+        "provider": "nominatim"
+      },
+      "delta_m": 150,
+      "from_city_m": 433,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "laboe_dgzrs_die_seenotretter_station_laboe",
+      "name": "DGzRS - Die Seenotretter (Station Laboe)",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.403239140000004,
+        "lng": 10.21689404
+      },
+      "query": "DGzRS, Laboe, Germany",
+      "osm": {
+        "lat": 54.4028544,
+        "lng": 10.2189803,
+        "display_name": "Die Seenotretter DGzRS, 4, Hafenstraße, Laboe, Probstei, Kreis Plön, Schleswig-Holstein, 24235, Deutschland",
+        "class": "emergency",
+        "type": "lifeguard",
+        "importance": 0.00005529640650029782,
+        "osm_type": "node",
+        "osm_id": 4898691816,
+        "provider": "nominatim"
+      },
+      "delta_m": 142,
+      "from_city_m": 572,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "laboe_yacht_und_gewerbehafen_ostseebad_laboe",
+      "name": "Yacht- und Gewerbehafen Ostseebad Laboe",
+      "category": "hafen",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.401498863636355,
+        "lng": 10.217418181818182
+      },
+      "query": "Yacht-, Laboe, Germany",
+      "osm": {
+        "lat": 54.4020637,
+        "lng": 10.2162286,
+        "display_name": "Yachthafen Laboe, Börn, Laboe, Deutschland",
+        "class": "leisure",
+        "type": "marina",
+        "provider": "photon"
+      },
+      "delta_m": 99,
+      "from_city_m": 534,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "laboe_knepel_maren"
+      ]
+    },
+    {
+      "id": "laboe_laboe_baltic_bay_hafen",
+      "name": "Baltic Bay Hafen",
+      "category": "hafen",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.399970076923076,
+        "lng": 10.214808615384614
+      },
+      "query": "Baltic Bay Hafen, Laboe, Germany",
+      "osm": {
+        "lat": 54.4003831,
+        "lng": 10.2134896,
+        "display_name": "Yachthafen \"Baltic Bay\", Fördewanderweg, Laboe, Deutschland",
+        "class": "leisure",
+        "type": "marina",
+        "provider": "photon"
+      },
+      "delta_m": 97,
+      "from_city_m": 741,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "laboe_hundestrand_laboe",
+      "name": "Hundestrand Laboe",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.414312800000005,
+        "lng": 10.229592285714286
+      },
+      "query": "Hundestrand Laboe, Laboe, Germany",
+      "osm": {
+        "lat": 54.414087,
+        "lng": 10.228192,
+        "display_name": "Hundestrand Laboe, Laboe, Probstei, Kreis Plön, Schleswig-Holstein, Deutschland",
+        "class": "natural",
+        "type": "beach",
+        "importance": 0.10672196307316699,
+        "osm_type": "way",
+        "osm_id": 27419061,
+        "provider": "nominatim"
+      },
+      "delta_m": 94,
+      "from_city_m": 1368,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "laboe_lachmoewen_theater",
+      "name": "Lachmöwen-Theater",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.40778,
+        "lng": 10.224980125
+      },
+      "query": "Lachmöwen-Theater, Laboe, Germany",
+      "osm": {
+        "lat": 54.4079344,
+        "lng": 10.2251553,
+        "display_name": "De Laboer Lachmöwen, 4, Katzbek, Laboe, Probstei, Kreis Plön, Schleswig-Holstein, 24235, Deutschland",
+        "class": "amenity",
+        "type": "theatre",
+        "importance": 0.09078915819201436,
+        "osm_type": "node",
+        "osm_id": 858726027,
+        "provider": "nominatim"
+      },
+      "delta_m": 21,
+      "from_city_m": 618,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "laboe_minigolf_laboe_getranke_snacks_und_grillmoglichkeit"
+      ]
+    },
+    {
+      "id": "laboe_wiking_apotheke_laboe",
+      "name": "Wiking Apotheke Laboe",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.40391667857143,
+        "lng": 10.221820678571424
+      },
+      "query": "Wiking Apotheke Laboe, Laboe, Germany",
+      "osm": {
+        "lat": 54.4040149,
+        "lng": 10.2218954,
+        "display_name": "Wiking Apotheke, 10, Dellenberg, Laboe, Probstei, Kreis Plön, Schleswig-Holstein, 24235, Deutschland",
+        "class": "amenity",
+        "type": "pharmacy",
+        "importance": 0.00005529640650029782,
+        "osm_type": "node",
+        "osm_id": 392721173,
+        "provider": "nominatim"
+      },
+      "delta_m": 12,
+      "from_city_m": 306,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "laboe_osm_post_office_893959450"
+      ]
+    },
+    {
+      "id": "laboe_anker_gottes_kirche_ev_luth_anker_gottes_kirchengemeinde_laboe",
+      "name": "Anker-Gottes-Kirche Laboe",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.40241133333333,
+        "lng": 10.226533666666667
+      },
+      "query": "Anker-Gottes-Kirche Laboe, Laboe, Germany",
+      "osm": {
+        "lat": 54.4024165,
+        "lng": 10.2265269,
+        "display_name": "Anker-Gottes-Kirche, 1, Brodersdorfer Weg, Laboe, Probstei, Kreis Plön, Schleswig-Holstein, 24235, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.00005529640650029782,
+        "osm_type": "way",
+        "osm_id": 171451304,
+        "provider": "nominatim"
+      },
+      "delta_m": 1,
+      "from_city_m": 65,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "laboe_laboe_kirche"
+      ]
+    },
+    {
+      "id": "laboe_strandkunst_am_stromkasten",
+      "name": "Strandkunst am Stromkasten",
+      "category": "denkmal",
+      "place_tier": 3,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.411,
+        "lng": 10.2273
+      },
+      "query": "Strandkunst am Stromkasten, Laboe",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 981,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "laboe_schiffsschraube_d_stentrans",
+      "name": "Schiffsschraube Stentrans",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.40383385714285,
+        "lng": 10.218734142857143
+      },
+      "query": "Schiffsschraube Stentrans, Laboe",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 477,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "laboe_fischkueche_laboe"
+      ]
+    },
+    {
+      "id": "laboe_museumshafen_probstei_e_v",
+      "name": "Museumshafen Probstei",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.4192611,
+        "lng": 10.280602049999999
+      },
+      "query": "Museumshafen Probstei, Laboe, Germany",
+      "osm": {
+        "lat": 54.4192034,
+        "lng": 10.2812711,
+        "display_name": "Museumshafen Probstei, Ostseepromenade, Wendtorf, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 44,
+      "from_city_m": 4033,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "laboe_spielplatz_laboe",
+      "name": "Spielplatz Laboe",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.39534971428571,
+        "lng": 10.231710142857143
+      },
+      "query": "Spielplatz Laboe, Laboe, Germany",
+      "osm": {
+        "lat": 54.3954607,
+        "lng": 10.2321063,
+        "display_name": "Naturspielplatz Laboe Krützkrög, Hummelweg, Krützkroog, Laboe, Probstei, Kreis Plön, Schleswig-Holstein, 24235, Deutschland",
+        "class": "leisure",
+        "type": "playground",
+        "importance": 0.00005529640650029782,
+        "osm_type": "way",
+        "osm_id": 1007581191,
+        "provider": "nominatim"
+      },
+      "delta_m": 28,
+      "from_city_m": 863,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "laboe_fordewanderweg_laboe",
+      "name": "Fördewanderweg Laboe",
+      "category": "wanderung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.40038025,
+        "lng": 10.217195
+      },
+      "query": "Fördewanderweg Laboe, Laboe, Germany",
+      "osm": {
+        "lat": 54.4002535,
+        "lng": 10.2174979,
+        "display_name": "Fördewanderweg, Laboe, Probstei, Kreis Plön, Schleswig-Holstein, 24235, Deutschland",
+        "class": "highway",
+        "type": "residential",
+        "importance": 0.05338862973983364,
+        "osm_type": "way",
+        "osm_id": 30648277,
+        "provider": "nominatim"
+      },
+      "delta_m": 24,
+      "from_city_m": 580,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "laboe_technisches_museum_u_995",
+      "name": "U-Boot U 995",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.412272200000004,
+        "lng": 10.228647599999999
+      },
+      "query": "U-Boot U 995, Laboe, Germany",
+      "osm": {
+        "lat": 54.4123425,
+        "lng": 10.2289344,
+        "display_name": "U-Boot U 995, 92, Strandstraße, Laboe, Probstei, Kreis Plön, Schleswig-Holstein, 24235, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.00005529640650029782,
+        "osm_type": "way",
+        "osm_id": 109998388,
+        "provider": "nominatim"
+      },
+      "delta_m": 20,
+      "from_city_m": 1134,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "laboe_fordepanorama_uber_kieler_bucht",
+      "name": "Fördepanorama über Kieler Bucht",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.41613158,
+        "lng": 10.2418319
+      },
+      "query": "Fördepanorama über Kieler Bucht, Laboe, Germany",
+      "osm": {
+        "lat": 54.4161063,
+        "lng": 10.2416626,
+        "display_name": "Fördepanorama u. Kieler Bucht, An der Au, Laboe, Deutschland",
+        "class": "tourism",
+        "type": "viewpoint",
+        "provider": "photon"
+      },
+      "delta_m": 11,
+      "from_city_m": 1869,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "laboe_kurpark_laboe",
+      "name": "Kurpark Laboe",
+      "category": "natur",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.406949860869574,
+        "lng": 10.22435121304348
+      },
+      "query": "Kurpark Laboe, Laboe, Germany",
+      "osm": {
+        "lat": 54.4069778,
+        "lng": 10.2242487,
+        "display_name": "Kurpark, Laboe, Probstei, Kreis Plön, Schleswig-Holstein, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "importance": 0.08005529640650032,
+        "osm_type": "way",
+        "osm_id": 32210416,
+        "provider": "nominatim"
+      },
+      "delta_m": 7,
+      "from_city_m": 530,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "laboe_marine_ehrenmal",
+      "name": "Marine-Ehrenmal Laboe",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.4121710625,
+        "lng": 10.2307636875
+      },
+      "query": "Marine-Ehrenmal Laboe, Laboe, Germany",
+      "osm": {
+        "lat": 54.4121577,
+        "lng": 10.2307984,
+        "display_name": "Marine-Ehrenmal Laboe, Feuerwehrzufahrt Marinedenkmal Ehrenmal, Laboe, Probstei, Kreis Plön, Schleswig-Holstein, 24235, Deutschland",
+        "class": "man_made",
+        "type": "tower",
+        "importance": 0.3583819294050449,
+        "osm_type": "way",
+        "osm_id": 23039799,
+        "provider": "nominatim"
+      },
+      "delta_m": 3,
+      "from_city_m": 1155,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "laboe_moltenort_u_boat_memorial",
+      "name": "U-Boot-Ehrenmal Möltenort",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.379344200000006,
+        "lng": 10.1947346
+      },
+      "query": "U-Boot-Ehrenmal Möltenort, Laboe, Germany",
+      "osm": {
+        "lat": 54.3793407,
+        "lng": 10.1947787,
+        "display_name": "U-Boot-Ehrenmal Möltenort, An der Schanze, Heikendorf, Deutschland",
+        "class": "historic",
+        "type": "monument",
+        "provider": "photon"
+      },
+      "delta_m": 3,
+      "from_city_m": 3235,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "laboe_freya_frahm_haus",
+      "name": "Freya-Frahm-Haus",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.406429777777774,
+        "lng": 10.220251222222224
+      },
+      "query": "Freya-Frahm-Haus, Laboe, Germany",
+      "osm": {
+        "lat": 54.4064134,
+        "lng": 10.2202196,
+        "display_name": "Freya-Frahm-Haus, 15, Strandstraße, Laboe, Probstei, Kreis Plön, Schleswig-Holstein, 24235, Deutschland",
+        "class": "tourism",
+        "type": "attraction",
+        "importance": 0.00005529640650029782,
+        "osm_type": "way",
+        "osm_id": 125118607,
+        "provider": "nominatim"
+      },
+      "delta_m": 3,
+      "from_city_m": 580,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    }
+  ]
+}

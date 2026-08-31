@@ -161,20 +161,45 @@ export function buildHotelBookAction(
   });
 
   if (direct && /^https?:\/\//i.test(direct) && looksLikeHotelBookUrl(direct)) {
-    return {
-      type: 'OPEN_URL',
-      label,
-      payload: {
-        url: normalizeAffiliateUrl(direct),
-        destination: dest,
-        destName: dest,
-        entityName: dest,
-        entityRank: entity.rank,
-        affiliateMarked: true,
-        actionBoardId: `hotel:${entity.rank}:${dest}`,
-        ...dateOpts,
-      },
-    };
+    const url = normalizeAffiliateUrl(direct);
+    try {
+      const { isHollowPartnerUrl } = require('../affiliate/hollowPartnerUrl') as {
+        isHollowPartnerUrl: (u: string) => boolean;
+      };
+      if (isHollowPartnerUrl(url)) {
+        // Fall through → Stay22/Expedia mit Hotelnamen
+      } else {
+        return {
+          type: 'OPEN_URL',
+          label,
+          payload: {
+            url,
+            destination: dest,
+            destName: dest,
+            entityName: dest,
+            entityRank: entity.rank,
+            affiliateMarked: true,
+            actionBoardId: `hotel:${entity.rank}:${dest}`,
+            ...dateOpts,
+          },
+        };
+      }
+    } catch {
+      return {
+        type: 'OPEN_URL',
+        label,
+        payload: {
+          url,
+          destination: dest,
+          destName: dest,
+          entityName: dest,
+          entityRank: entity.rank,
+          affiliateMarked: true,
+          actionBoardId: `hotel:${entity.rank}:${dest}`,
+          ...dateOpts,
+        },
+      };
+    }
   }
 
   const winner = rankHotelPartner();

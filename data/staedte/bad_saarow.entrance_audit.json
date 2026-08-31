@@ -1,2701 +1,998 @@
 {
   "city_id": "bad_saarow",
   "apply": true,
+  "storyOnly": true,
   "maxDelta": 80,
+  "country": "Germany",
   "summary": {
-    "ok": 146,
-    "check": 0,
-    "bad": 12,
+    "ok": 0,
+    "check": 8,
+    "bad": 3,
     "errors": 0,
-    "applied": 1
+    "applied": 10,
+    "skipped_directory": 99,
+    "skipped_cached_google": 87
   },
   "rows": [
     {
       "id": "bad_saarow_bad_saarow",
       "name": "Bad Saarow",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.293147639999994,
-        "lng": 14.0646674
-      },
-      "google": {
-        "lat": 52.27429619999999,
-        "lng": 14.0546568,
-        "place_id": "ChIJXYFx30aKB0cRUCdeW0YgIQQ",
-        "address": "Bad Saarow"
-      },
-      "delta_m": 2204,
-      "status": "BAD",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.29258030555556,
+        "lng": 14.058335988888892
+      }
     },
     {
       "id": "bad_saarow_bad_saarow_klinikum",
       "name": "Bad Saarow Klinikum",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.28443814,
-        "lng": 14.06586252
-      },
-      "google": {
-        "lat": 52.282535,
-        "lng": 14.0632725,
-        "place_id": "ChIJfbHbPxiKB0cRu0t-RIJN8A4",
-        "address": "Pieskower Str. 33, 15526 Bad Saarow"
-      },
-      "delta_m": 275,
-      "status": "BAD",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.2925836,
+        "lng": 14.0583358
+      }
     },
     {
       "id": "bad_saarow_pieskow",
       "name": "Pieskow",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.270699539999995,
-        "lng": 14.070893159999997
-      },
-      "google": {
-        "lat": 52.2929869,
-        "lng": 14.056792,
-        "place_id": "ChIJf4M7JfaJB0cRrPDEWKQ4FR8",
-        "address": "Bad Saarow-Pieskow, 15526 Bad Saarow"
-      },
-      "delta_m": 2657,
-      "status": "BAD",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.2930512,
+        "lng": 14.056737799999999
+      }
     },
     {
       "id": "bad_saarow_bad_saarow_bahnhof",
       "name": "Bad Saarow, Bahnhof",
       "before": {
-        "lat": 52.294048139999994,
-        "lng": 14.0646125
+        "lat": 52.2925836,
+        "lng": 14.0583358
       },
       "google": {
         "lat": 52.2932195,
         "lng": 14.0647849,
         "place_id": "ChIJHScjBfWJB0cRGzhHhnMTzbA",
-        "address": "15526 Bad Saarow, Deutschland"
+        "address": "15526 Bad Saarow, Germany"
       },
-      "delta_m": 93,
+      "delta_m": 444,
       "status": "BAD",
-      "streetview": "ZERO_RESULTS",
-      "applied": true
+      "streetview": "OK"
     },
     {
       "id": "bad_saarow_bad_saarow_hafen",
       "name": "Bad Saarow, Hafen",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.29107814,
-        "lng": 14.0448225
-      },
-      "google": {
-        "lat": 52.29114999999999,
-        "lng": 14.04494,
-        "place_id": "ChIJp30PNQKKB0cRX--mT4Q0niI",
-        "address": "15526 Bad Saarow, Deutschland"
-      },
-      "delta_m": 11,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 52.2925836,
+        "lng": 14.0583358
+      }
     },
     {
       "id": "bad_saarow_bad_saarow_schifffahrts_gmbh",
       "name": "Bad Saarow Schifffahrts GmbH",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.291336279999996,
-        "lng": 14.04743538
-      },
-      "google": {
-        "lat": 52.2913758,
-        "lng": 14.0475,
-        "place_id": "ChIJCVOaD_WJB0cRr2yuxO0-AOY",
-        "address": "Seestraße 40, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.29142445,
+        "lng": 14.047519250000002
+      }
     },
     {
       "id": "bad_saarow_fontanepark",
       "name": "Fontanepark",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.284825780000006,
-        "lng": 14.04313268
-      },
-      "google": {
-        "lat": 52.2848653,
-        "lng": 14.0431973,
-        "place_id": "ChIJGzvopgWKB0cRILdySFr2qZE",
-        "address": "Uferstraße 15A, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.2925836,
+        "lng": 14.0583358
+      }
     },
     {
       "id": "bad_saarow_marina_hafen_freilichtbuhne",
       "name": "Marina Hafen Freilichtbühne",
       "before": {
-        "lat": 52.29007818,
-        "lng": 14.046341479999999
+        "lat": 52.29036243571428,
+        "lng": 14.046524957142855
       },
       "google": {
-        "lat": 52.2901177,
-        "lng": 14.0464061,
+        "lat": 52.290117699999996,
+        "lng": 14.046406099999999,
         "place_id": "ChIJiRpi3naLB0cRSNzX6lvPd3g",
-        "address": "Scharmützelsee, 15526 Bad Saarow"
+        "address": "Scharmützelsee, 15526 Bad Saarow, Germany"
       },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+      "delta_m": 28,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
     },
     {
       "id": "bad_saarow_scharwenka_kulturforum",
       "name": "Scharwenka Kulturforum",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.294259579999995,
-        "lng": 14.05699088
-      },
-      "google": {
-        "lat": 52.2942991,
-        "lng": 14.0570555,
-        "place_id": "ChIJM940TvaJB0cRrRaeokd1_Zw",
-        "address": "Moorstraße 3, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 52.2925836,
+        "lng": 14.0583358
+      }
     },
     {
       "id": "bad_saarow_saarowcentrum",
       "name": "Saarowcentrum",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.29297738,
-        "lng": 14.058162979999997
-      },
-      "google": {
-        "lat": 52.2930169,
-        "lng": 14.0582276,
-        "place_id": "ChIJdV4GEfaJB0cRFX_kxXhXBZc",
-        "address": "Ulmenstraße 15, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 52.293094839999995,
+        "lng": 14.058179400000002
+      }
     },
     {
       "id": "bad_saarow_kinderkunst_galerie",
       "name": "KinderKunst Galerie",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.293129379999996,
-        "lng": 14.059247379999999
-      },
-      "google": {
-        "lat": 52.2931689,
-        "lng": 14.059312,
-        "place_id": "ChIJY_I8tWeJB0cRNKC1WgaWPnE",
-        "address": "Lindenstraße, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 52.293219,
+        "lng": 14.0594866
+      }
     },
     {
       "id": "bad_saarow_evangelische_kirche",
       "name": "Evangelische Kirche",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.29325838,
-        "lng": 14.05417568
-      },
-      "google": {
-        "lat": 52.2932979,
-        "lng": 14.0542403,
-        "place_id": "ChIJ99Yl2veJB0cRfphn2om4XQY",
-        "address": "Kirchstraße 0, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.2935232,
+        "lng": 14.0541742
+      }
     },
     {
       "id": "bad_saarow_dorfkirche_pieskow",
       "name": "Dorfkirche Pieskow",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.267137579999996,
-        "lng": 14.063112620000002
-      },
-      "google": {
-        "lat": 52.2671771,
-        "lng": 14.0631772,
-        "place_id": "ChIJZ0Kr2EaKB0cRAuIvZK-u6YU",
-        "address": "Dorfstraße 6, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 52.267134379999995,
+        "lng": 14.06319163
+      }
     },
     {
       "id": "bad_saarow_denkmal_titel_unbekannt",
       "name": "Denkmal (Titel unbekannt)",
       "before": {
-        "lat": 52.28310907999999,
-        "lng": 14.063291700000002
+        "lat": 52.28407136875001,
+        "lng": 14.063041925000002
       },
       "google": {
         "lat": 52.2831486,
-        "lng": 14.0633563,
+        "lng": 14.063356299999999,
         "place_id": "ChIJa0s8DwCLB0cRROJ7ZoGQcz0",
-        "address": "15526 Bad Saarow"
+        "address": "15526 Bad Saarow, Germany"
       },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+      "delta_m": 105,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS",
+      "applied": true
     },
     {
       "id": "bad_saarow_steinbach_brunnen",
       "name": "Steinbach-Brunnen",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.28991137999999,
-        "lng": 14.060621180000002
-      },
-      "google": {
-        "lat": 52.2899509,
-        "lng": 14.0606858,
-        "place_id": "ChIJ6xv1RB6KB0cRW2_9fKVQjDs",
-        "address": "Ludwig-Lesser-Promenade, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 52.284065428571445,
+        "lng": 14.063075571428572
+      }
     },
     {
       "id": "bad_saarow_skulptur_schwebender_findling",
       "name": "Skulptur \"schwebender Findling\"",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.25631218000001,
-        "lng": 14.04878822
-      },
-      "google": {
-        "lat": 52.2563517,
-        "lng": 14.0488528,
-        "place_id": "ChIJsWbhIQCLB0cReQoa0Rje3HI",
-        "address": "Friedrich-Engels-Damm 125a, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.283352642857146,
+        "lng": 14.06235114285714
+      }
     },
     {
       "id": "bad_saarow_die_statue_von_johannes_r_becher",
       "name": "Die Statue von Johannes R.Becher",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.291773680000006,
-        "lng": 14.04837188
-      },
-      "google": {
-        "lat": 52.2918132,
-        "lng": 14.0484365,
-        "place_id": "ChIJbSHfCACLB0cR10agGs0NhTM",
-        "address": "Seestraße 40, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.283668275000004,
+        "lng": 14.0617348875
+      }
     },
     {
       "id": "bad_saarow_bad_saarow_strand",
       "name": "Bad Saarow Strand",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.291170580000006,
-        "lng": 14.05008338
-      },
-      "google": {
-        "lat": 52.2912101,
-        "lng": 14.050148,
-        "place_id": "ChIJI7_qSxqLB0cRzzl4m46ESms",
-        "address": "Friedrich-Engels-Damm 99, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.283668375,
+        "lng": 14.061734875000003
+      }
     },
     {
       "id": "bad_saarow_badestelle_bad_saarow_pieskow",
       "name": "Badestelle Bad Saarow Pieskow",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.26376518000001,
-        "lng": 14.06589112
-      },
-      "google": {
-        "lat": 52.26380469999999,
-        "lng": 14.0659557,
-        "place_id": "ChIJ2epBOLiJB0cR0tYaKnQxSUE",
-        "address": "Trift 1, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.283668375,
+        "lng": 14.061734875000003
+      }
     },
     {
       "id": "bad_saarow_kurpark",
       "name": "Kurpark",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.29104158,
-        "lng": 14.05897698
-      },
-      "google": {
-        "lat": 52.2910811,
-        "lng": 14.0637906,
-        "place_id": "ChIJ1ZrK0h-KB0cR5pimzh4uQ_A",
-        "address": "Am Kurpark, 15526 Bad Saarow"
-      },
-      "delta_m": 327,
-      "status": "BAD",
-      "streetview": "OK"
+        "lat": 52.29061818139535,
+        "lng": 14.058712109302329
+      }
     },
     {
       "id": "bad_saarow_park_kurpark_kolonnaden",
       "name": "Park Kurpark Kolonnaden",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.29274248,
-        "lng": 14.06088438
-      },
-      "google": {
-        "lat": 52.292782,
-        "lng": 14.060949,
-        "place_id": "ChIJpUYj7PWJB0cRuVgcYxbeDF0",
-        "address": "Am Kurpark, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 52.29061818139535,
+        "lng": 14.058712109302329
+      }
     },
     {
       "id": "bad_saarow_cecilienpark",
       "name": "Cecilienpark",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.27972828000001,
-        "lng": 14.056614000000001
-      },
-      "google": {
-        "lat": 52.27976779999999,
-        "lng": 14.0566786,
-        "place_id": "ChIJl08LnSOLB0cR_OWk6x81eUE",
-        "address": "Karl-Marx-Damm, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.2798766625,
+        "lng": 14.056854731250002
+      }
     },
     {
       "id": "bad_saarow_kleistpark",
       "name": "Kleistpark",
       "before": {
-        "lat": 52.281083179999996,
-        "lng": 14.040589799999998
+        "lat": 52.28107962,
+        "lng": 14.039986760000001
       },
       "google": {
         "lat": 52.2811227,
         "lng": 14.0406544,
         "place_id": "ChIJd6FgGw-KB0cRQtNc7xvZ980",
-        "address": "Platanenstraße 1, 15526 Bad Saarow"
+        "address": "Platanenstraße 1, 15526 Bad Saarow, Germany"
       },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+      "delta_m": 46,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
     },
     {
       "id": "bad_saarow_badestelle_westufer_scharmutzelsee",
       "name": "Badestelle Westufer Scharmützelsee",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.27470758,
-        "lng": 14.043043
-      },
-      "google": {
-        "lat": 52.2747471,
-        "lng": 14.0431076,
-        "place_id": "ChIJxfPnIWyLB0cRWosjCBZhrcc",
-        "address": "Alte Eichen, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.284065428571445,
+        "lng": 14.063075571428572
+      }
     },
     {
       "id": "bad_saarow_schlosspark_bad_saarow",
       "name": "Schlosspark Bad Saarow",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.260481479999996,
-        "lng": 14.073167619999998
-      },
-      "google": {
-        "lat": 52.260521,
-        "lng": 14.0732322,
-        "place_id": "ChIJy1OP1k2KB0cRk1kX8LN_NMI",
-        "address": "Am Theresienhof 60, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 52.26052259999999,
+        "lng": 14.073256400000002
+      }
     },
     {
       "id": "bad_saarow_regattaplatz",
       "name": "Regattaplatz",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.27642018,
-        "lng": 14.043149
-      },
-      "google": {
-        "lat": 52.2764597,
-        "lng": 14.0432136,
-        "place_id": "ChIJNSBbriiLB0cR0uWFmjUBTKI",
-        "address": "Regattastraße 7A, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.2925836,
+        "lng": 14.0583358
+      }
     },
     {
       "id": "bad_saarow_anlegestelle_bad_saarow_strand",
       "name": "Anlegestelle Bad Saarow Strand",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.25320878,
-        "lng": 14.05164054
-      },
-      "google": {
-        "lat": 52.2532483,
-        "lng": 14.0517051,
-        "place_id": "ChIJQ5t3xHWLB0cRNAcR5m9GJNQ",
-        "address": "15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.2925836,
+        "lng": 14.0583358
+      }
     },
     {
       "id": "bad_saarow_badestelle_diensdorf_radlow",
       "name": "Badestelle Diensdorf-Radlow",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.24369328,
-        "lng": 14.064279039999999
-      },
-      "google": {
-        "lat": 52.2437328,
-        "lng": 14.0643436,
-        "place_id": "ChIJrSJmPO-KB0cRAWe6tdWfVgg",
-        "address": "Scharmützelsee, 15864 Diensdorf-Radlow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.2925836,
+        "lng": 14.0583358
+      }
     },
     {
       "id": "bad_saarow_markgrafenplatz",
       "name": "Markgrafenplatz",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.284181880000006,
-        "lng": 14.056560480000002
-      },
-      "google": {
-        "lat": 52.2842214,
-        "lng": 14.0566251,
-        "place_id": "ChIJBe4knhmKB0cRllOiKokhsfI",
-        "address": "Karl-Marx-Damm 37, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 52.28379962,
+        "lng": 14.05735646
+      }
     },
     {
       "id": "bad_saarow_platz_am_stein",
       "name": "Platz am Stein",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.287536779999996,
-        "lng": 14.056678080000001
-      },
-      "google": {
-        "lat": 52.2875763,
-        "lng": 14.0567427,
-        "place_id": "ChIJDYcdqB6KB0cR_eRnzN1J7U0",
-        "address": "Karl-Marx-Damm, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.287534533333336,
+        "lng": 14.056544650000001
+      }
     },
     {
       "id": "bad_saarow_freilich_am_see",
       "name": "Freilich am See",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.27908218,
-        "lng": 14.056980099999999
-      },
-      "google": {
-        "lat": 52.2791217,
-        "lng": 14.0570447,
-        "place_id": "ChIJX731BxeKB0cRoMCb6NkdPIo",
-        "address": "Karl-Marx-Damm 47a, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.27906111111112,
+        "lng": 14.057069333333333
+      }
     },
     {
       "id": "bad_saarow_scharmutzelseegebiet",
       "name": "Scharmützelseegebiet",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.26720358,
-        "lng": 14.053826520000001
-      },
-      "google": {
-        "lat": 52.26724309999999,
-        "lng": 14.0538911,
-        "place_id": "ChIJZ0z5X2qKB0cRGlyE40GBrIM",
-        "address": "Forsthausstraße, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.2925836,
+        "lng": 14.0583358
+      }
     },
     {
       "id": "bad_saarow_aussichtspunkt_scharmutzelsee",
       "name": "Aussichtspunkt Scharmützelsee",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.29014118,
-        "lng": 14.053553579999999
-      },
-      "google": {
-        "lat": 52.2901807,
-        "lng": 14.0536182,
-        "place_id": "ChIJm2WvUdiLB0cRf90zAk6BYbU",
-        "address": "Scharmützelsee, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.2925836,
+        "lng": 14.0583358
+      }
     },
     {
       "id": "bad_saarow_wasserwerk_bad_saarow_gbr",
       "name": "Wasserwerk Bad Saarow GbR",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.292377779999995,
-        "lng": 14.058125579999999
-      },
-      "google": {
-        "lat": 52.2924173,
-        "lng": 14.0581902,
-        "place_id": "ChIJCVnnHPaJB0cRsygL4OlQ3fk",
-        "address": "Ulmenstraße 12, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.2925836,
+        "lng": 14.0583358
+      }
     },
     {
       "id": "bad_saarow_seebalkon_am_kurpark",
       "name": "Seebalkon am Kurpark",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.29022008,
-        "lng": 14.057734779999999
-      },
-      "google": {
-        "lat": 52.2902596,
-        "lng": 14.0577994,
-        "place_id": "ChIJR7oge1iLB0cRYYJdXtNtRSY",
-        "address": "Am Kurpark 1, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 52.29061818139535,
+        "lng": 14.058712109302329
+      }
     },
     {
       "id": "bad_saarow_golf_club_bad_saarow",
       "name": "Golf Club Bad Saarow",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.23969648,
-        "lng": 14.02934626
-      },
-      "google": {
-        "lat": 52.239736,
-        "lng": 14.0294108,
-        "place_id": "ChIJjyPRbH6KB0cR7MBv8YEAevI",
-        "address": "Parkallee 3, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 52.2925836,
+        "lng": 14.0583358
+      }
     },
     {
       "id": "bad_saarow_stan_eby_golfplatz",
       "name": "Stan Eby Golfplatz",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.248573480000005,
-        "lng": 14.019377939999998
-      },
-      "google": {
-        "lat": 52.248613,
-        "lng": 14.0194425,
-        "place_id": "ChIJNaccg4OKB0cRXLYiXEdIcKc",
-        "address": "UGOLF Germany GmbH, Parkallee 3, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.292145125000005,
+        "lng": 14.0558161
+      }
     },
     {
       "id": "bad_saarow_tennis_center_bad_saarow",
       "name": "Tennis Center Bad Saarow",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.24846888,
-        "lng": 14.029189339999999
-      },
-      "google": {
-        "lat": 52.2485084,
-        "lng": 14.0292539,
-        "place_id": "ChIJK3kaloiKB0cRFn5eLmRpV14",
-        "address": "Am Golfpl. 1, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.292147,
+        "lng": 14.055825571428572
+      }
     },
     {
       "id": "bad_saarow_amt_scharmutzelsee",
       "name": "Amt-Scharmützelsee",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.28634047999999,
-        "lng": 14.05998548
-      },
-      "google": {
-        "lat": 52.28637999999999,
-        "lng": 14.0600501,
-        "place_id": "ChIJN26C1RiKB0cRAe2nuuXYtxY",
-        "address": "Forsthausstraße 4, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 52.2863474,
+        "lng": 14.060089199999998
+      }
     },
     {
       "id": "bad_saarow_lieblingsblick_scharmutzelsee",
       "name": "Lieblingsblick Scharmützelsee",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.290556179999996,
-        "lng": 14.05586348
-      },
-      "google": {
-        "lat": 52.2905957,
-        "lng": 14.0559281,
-        "place_id": "ChIJgQ1IBgCLB0cR5K4T1y0vkdg",
-        "address": "Seestraße 22, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.29118651111112,
+        "lng": 14.054367788888888
+      }
     },
     {
       "id": "bad_saarow_theater_am_see_restaurant",
       "name": "Theater am See | Restaurant",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.29120777999999,
-        "lng": 14.05564798
-      },
-      "google": {
-        "lat": 52.2912473,
-        "lng": 14.0557126,
-        "place_id": "ChIJz02uBQCLB0cRy4NrnacUJlk",
-        "address": "Seestraße 22, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.291151,
+        "lng": 14.055693058823529
+      }
     },
     {
       "id": "bad_saarow_eibenhof_kultur_und_eventlocation",
       "name": "Eibenhof - Kultur- und Eventlocation",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.278071579999995,
-        "lng": 14.047309899999998
-      },
-      "google": {
-        "lat": 52.2781111,
-        "lng": 14.0473745,
-        "place_id": "ChIJYWFsmxGKB0cREXrVWth7UzE",
-        "address": "Alte Eichen 33, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.2782382,
+        "lng": 14.0474434
+      }
     },
     {
       "id": "bad_saarow_cinema_by_velotel",
       "name": "Cinema by Velotel",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.29262308,
-        "lng": 14.062587279999999
-      },
-      "google": {
-        "lat": 52.2926626,
-        "lng": 14.0626519,
-        "place_id": "ChIJcURNWxGJB0cR46sSczxvm7I",
-        "address": "Ulmenstraße 2, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 52.292147,
+        "lng": 14.055825571428572
+      }
     },
     {
       "id": "bad_saarow_as_am_see",
       "name": "AS am See",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.29201868,
-        "lng": 14.061578079999999
-      },
-      "google": {
-        "lat": 52.2920582,
-        "lng": 14.0616427,
-        "place_id": "ChIJ87YJjPWJB0cRnqZFAe528YM",
-        "address": "Seestraße 9, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 52.29206146153847,
+        "lng": 14.061647153846154
+      }
     },
     {
       "id": "bad_saarow_hotel_esplanade_resort_spa",
       "name": "Hotel Esplanade Resort & Spa",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.29176728,
-        "lng": 14.04681688
-      },
-      "google": {
-        "lat": 52.2918068,
-        "lng": 14.0468815,
-        "place_id": "ChIJoyH-WAKKB0cRy3yQ_4pdwaY",
-        "address": "Seestraße 49, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.29172583333334,
+        "lng": 14.046982833333333
+      }
     },
     {
       "id": "bad_saarow_wierich_wiesen",
       "name": "Wierich-Wiesen",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.29821848,
-        "lng": 14.054317359999999
-      },
-      "google": {
-        "lat": 52.298258,
-        "lng": 14.054382,
-        "place_id": "ChIJR6QUUHiJB0cRLalbS9g5hJs",
-        "address": "Moorstraße, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.292147,
+        "lng": 14.055825571428572
+      }
     },
     {
       "id": "bad_saarow_liegewiese",
       "name": "Liegewiese",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.25265108,
-        "lng": 14.05133214
-      },
-      "google": {
-        "lat": 52.2526906,
-        "lng": 14.0513967,
-        "place_id": "ChIJBQMqSACLB0cRUg1mRXtFqIA",
-        "address": "Friedrich-Engels-Damm 271, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.292147,
+        "lng": 14.055825571428572
+      }
     },
     {
       "id": "bad_saarow_bank_mit_aussicht",
       "name": "Bank mit Aussicht",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.298834680000006,
-        "lng": 14.059207359999998
-      },
-      "google": {
-        "lat": 52.2988742,
-        "lng": 14.059272,
-        "place_id": "ChIJpQlhdACJB0cRevnglmwqKDM",
-        "address": "Moorstraße, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.292147,
+        "lng": 14.055825571428572
+      }
     },
     {
       "id": "bad_saarow_fahrradverleih_ernest_scheffler_home_of_bikes",
       "name": "Fahrradverleih Ernest Scheffler \"home of bikes\"",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.29472038,
-        "lng": 14.067197479999999
-      },
-      "google": {
-        "lat": 52.2947599,
-        "lng": 14.0672621,
-        "place_id": "ChIJ_zX3w_SJB0cRVifEaF4Lf2o",
-        "address": "Golmer Str. 6B, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 52.29476614285714,
+        "lng": 14.067304714285713
+      }
     },
     {
       "id": "bad_saarow_marchenwald_bad_saarow_pieskow",
       "name": "Märchenwald Bad Saarow Pieskow",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.266759379999996,
-        "lng": 14.064801120000002
-      },
-      "google": {
-        "lat": 52.2667989,
-        "lng": 14.0648657,
-        "place_id": "ChIJp_cx_EaKB0cRwRn85LeuMG8",
-        "address": "Dorfstraße 4, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.2671345,
+        "lng": 14.063191699999999
+      }
     },
     {
       "id": "bad_saarow_zur_alten_gartnerei",
       "name": "zur Alten Gärtnerei",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.295710480000004,
-        "lng": 14.033985379999999
-      },
-      "google": {
-        "lat": 52.29575,
-        "lng": 14.03405,
-        "place_id": "ChIJp5HrKFUnqEcR99xLBAFK--w",
-        "address": "Kolpiner Str. 15, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.29556371428571,
+        "lng": 14.034078571428568
+      }
     },
     {
       "id": "bad_saarow_ferienhaus_direkt_am_scharmutzelsee_bad_saarow_halbinsel_alte_eichen",
       "name": "Ferienhaus direkt am Scharmützelsee Bad-Saarow Halbinsel Alte Eichen",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.27629108,
-        "lng": 14.0439524
-      },
-      "google": {
-        "lat": 52.27633059999999,
-        "lng": 14.044017,
-        "place_id": "ChIJWcctDRKKB0cRRwDmk7WeOxg",
-        "address": "Alte Eichen 16, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 52.2671345,
+        "lng": 14.063191699999999
+      }
     },
     {
       "id": "bad_saarow_scharmutzelsee",
       "name": "Scharmützelsee",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.24647298,
-        "lng": 14.054855739999999
-      },
-      "google": {
-        "lat": 52.24651249999999,
-        "lng": 14.0549203,
-        "place_id": "ChIJYTHVoIuKB0cRRsEbsxlqd7g",
-        "address": "Scharmützelsee, Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.2671345,
+        "lng": 14.063191699999999
+      }
     },
     {
       "id": "bad_saarow_der_fitness_treff_hajo_schrobitz",
       "name": "Der Fitness Treff, Hajo Schrobitz",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.290771480000004,
-        "lng": 14.06012668
-      },
-      "google": {
-        "lat": 52.290811,
-        "lng": 14.0601913,
-        "place_id": "ChIJObV8EB6KB0cR-pEMPLjZTpc",
-        "address": "Am Kurpark 1, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 52.29106827777778,
+        "lng": 14.059845722222223
+      }
     },
     {
       "id": "bad_saarow_kletterwald_bad_saarow",
       "name": "Kletterwald Bad Saarow",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.29301448,
-        "lng": 14.04819738
-      },
-      "google": {
-        "lat": 52.293054,
-        "lng": 14.048262,
-        "place_id": "ChIJ6VTxNQKKB0cRV4FtOUt3Yuc",
-        "address": "Seestraße 47, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 52.2671345,
+        "lng": 14.063191699999999
+      }
     },
     {
       "id": "bad_saarow_lounge_catwalk",
       "name": "Lounge Catwalk",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.29143398,
-        "lng": 14.06315318
-      },
-      "google": {
-        "lat": 52.2914735,
-        "lng": 14.0632178,
-        "place_id": "ChIJUbL61h-KB0cRy8OU4H5mK5k",
-        "address": "Pieskower Str. 1, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "bad_saarow_helios_klinikum_bad_saarow",
-      "name": "Helios Klinikum Bad Saarow",
-      "before": {
-        "lat": 52.28249548,
-        "lng": 14.0632079
-      },
-      "google": {
-        "lat": 52.282535,
-        "lng": 14.0632725,
-        "place_id": "ChIJfbHbPxiKB0cRu0t-RIJN8A4",
-        "address": "Pieskower Str. 33, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "bad_saarow_zentrale_notaufnahme_und_rettungsmedizin_helios_klinikum_bad_saarow",
-      "name": "Zentrale Notaufnahme und Rettungsmedizin | Helios Klinikum Bad Saarow",
-      "before": {
-        "lat": 52.283543380000005,
-        "lng": 14.061482280000002
-      },
-      "google": {
-        "lat": 52.2835829,
-        "lng": 14.0615469,
-        "place_id": "ChIJHV_laCKKB0cRtmwazzYJyrI",
-        "address": "Pieskower Str. 33, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "bad_saarow_apotheke_am_klinikum",
-      "name": "Apotheke am Klinikum",
-      "before": {
-        "lat": 52.28436148000001,
-        "lng": 14.064347779999997
-      },
-      "google": {
-        "lat": 52.284401,
-        "lng": 14.0644124,
-        "place_id": "ChIJDXAJfiKKB0cR87ULBpqUAYo",
-        "address": "Pieskower Str. 33, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "bad_saarow_apotheke_am_kurpark",
-      "name": "Apotheke am Kurpark",
-      "before": {
-        "lat": 52.290405680000006,
-        "lng": 14.06123738
-      },
-      "google": {
-        "lat": 52.2904452,
-        "lng": 14.061302,
-        "place_id": "ChIJb8fQRx6KB0cRwlbO1V-b9W8",
-        "address": "Am Kurpark 6, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 52.2914888,
+        "lng": 14.063227000000001
+      }
     },
     {
       "id": "bad_saarow_stolperstein_philippi",
       "name": "Stolperstein Philippi",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.29000678,
-        "lng": 14.04332938
-      },
-      "google": {
-        "lat": 52.2900463,
-        "lng": 14.043394,
-        "place_id": "ChIJLxxe-g-LB0cRLDaOygiK5WE",
-        "address": "Silberberger Str. 7, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 52.290211,
+        "lng": 14.043212599999999
+      }
     },
     {
       "id": "bad_saarow_scharmutzelsee_umgebung",
       "name": "Scharmützelsee & Umgebung",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.291291580000006,
-        "lng": 14.05420298
-      },
-      "google": {
-        "lat": 52.29133110000001,
-        "lng": 14.0542676,
-        "place_id": "ChIJoSee9HmLB0cR9E6qz6mWWTc",
-        "address": "15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.291186555555555,
+        "lng": 14.05436788888889
+      }
     },
     {
       "id": "bad_saarow_stolperstein_goldstein",
       "name": "Stolperstein Goldstein",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.29273648000001,
-        "lng": 14.063408380000002
-      },
-      "google": {
-        "lat": 52.292776,
-        "lng": 14.063473,
-        "place_id": "ChIJy6_ggeaJB0cReAF3pxRL2ZA",
-        "address": "Bahnhofspl. 10, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 52.2671345,
+        "lng": 14.063191699999999
+      }
     },
     {
       "id": "bad_saarow_stolperstein_behrens",
       "name": "Stolperstein Behrens",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.282479179999996,
-        "lng": 14.0401237
-      },
-      "google": {
-        "lat": 52.2825187,
-        "lng": 14.0401883,
-        "place_id": "ChIJ2Wxk9SCLB0cRkdxt8gb0Khs",
-        "address": "Platanenstraße 7, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.282524333333335,
+        "lng": 14.040334166666666
+      }
     },
     {
       "id": "bad_saarow_stolperstein_herrnstadt",
       "name": "Stolperstein Herrnstadt",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.29400937999999,
-        "lng": 14.05459118
-      },
-      "google": {
-        "lat": 52.2940489,
-        "lng": 14.0546558,
-        "place_id": "ChIJgyikfNqJB0cRv1yUsfo1I5Y",
-        "address": "Kirchstraße 4, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 52.294044799999995,
+        "lng": 14.054611399999999
+      }
     },
     {
       "id": "bad_saarow_bad_saarow_theresienhof",
       "name": "Bad Saarow, Theresienhof",
       "before": {
-        "lat": 52.260740479999996,
-        "lng": 14.07388542
+        "lat": 52.260817640000006,
+        "lng": 14.073219380000001
       },
       "google": {
         "lat": 52.26078,
         "lng": 14.07395,
         "place_id": "ChIJC4K11E2KB0cRfUVp4WX6-sM",
-        "address": "15526 Bad Saarow, Deutschland"
+        "address": "15526 Bad Saarow, Germany"
       },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+      "delta_m": 50,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
     },
     {
       "id": "bad_saarow_bad_saarow_silberberg",
       "name": "Bad Saarow, Silberberg",
       "before": {
-        "lat": 52.25010048,
-        "lng": 14.027745439999999
+        "lat": 52.25112622,
+        "lng": 14.02616812
       },
       "google": {
-        "lat": 52.2510614,
+        "lat": 52.251061400000005,
         "lng": 14.0257387,
         "place_id": "ChIJoSwWcoeKB0cR0LaC1kggIQo",
-        "address": "15526 Bad Saarow-Silberberg"
+        "address": "15526 Bad Saarow-Silberberg, Germany"
       },
-      "delta_m": 173,
-      "status": "BAD",
-      "streetview": "ZERO_RESULTS"
+      "delta_m": 30,
+      "status": "CHECK",
+      "streetview": "ZERO_RESULTS",
+      "applied": true
     },
     {
       "id": "bad_saarow_erich_weinert_platz",
       "name": "Erich-Weinert-Platz",
       "before": {
-        "lat": 52.29080638000001,
-        "lng": 14.04608628
+        "lat": 52.29065935555556,
+        "lng": 14.045645488888887
       },
       "google": {
         "lat": 52.2908459,
-        "lng": 14.0461509,
+        "lng": 14.046150899999999,
         "place_id": "ChIJaXZllASLB0cRnLRM2brWF8Y",
-        "address": "Seestraße 49, 15526 Bad Saarow"
+        "address": "Seestraße 49, 15526 Bad Saarow, Germany"
       },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+      "delta_m": 40,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
     },
     {
       "id": "bad_saarow_bad_saarow_ferienhaus_am_hafen",
       "name": "Bad Saarow Ferienhaus am Hafen",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.28460267999999,
-        "lng": 14.04083048
-      },
-      "google": {
-        "lat": 52.2846422,
-        "lng": 14.0408951,
-        "place_id": "ChIJx0ySIx-LB0cRbSyrIo3hyJg",
-        "address": "Uferstraße 21, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.2846484,
+        "lng": 14.0408928
+      }
     },
     {
       "id": "bad_saarow_spielplatz_klinikum_bad_saarow",
       "name": "Spielplatz Klinikum Bad Saarow",
       "before": {
-        "lat": 52.28366348000001,
-        "lng": 14.063701080000001
+        "lat": 52.284065428571445,
+        "lng": 14.063075571428572
       },
       "google": {
-        "lat": 52.283703,
+        "lat": 52.283702999999996,
         "lng": 14.0637657,
         "place_id": "ChIJvWBAzf2LB0cR9xX6U8jjemo",
-        "address": "Pieskower Str. 33, 15526 Bad Saarow"
+        "address": "Pieskower Str. 33, 15526 Bad Saarow, Germany"
       },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+      "delta_m": 62,
+      "status": "CHECK",
+      "streetview": "ZERO_RESULTS",
+      "applied": true
     },
     {
       "id": "bad_saarow_waldfriedhof_bad_saarow",
       "name": "Waldfriedhof Bad Saarow",
       "before": {
-        "lat": 52.28444478,
-        "lng": 14.027829879999999
+        "lat": 52.28365919374999,
+        "lng": 14.0278505875
       },
       "google": {
-        "lat": 52.2844843,
-        "lng": 14.0278945,
+        "lat": 52.284484299999995,
+        "lng": 14.027894499999999,
         "place_id": "ChIJexYPyC4hqEcRjBFFG0c4v40",
-        "address": "Friedhofsweg, 15526 Bad Saarow"
+        "address": "Friedhofsweg, 15526 Bad Saarow, Germany"
       },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+      "delta_m": 92,
+      "status": "BAD",
+      "streetview": "OK",
+      "applied": true
     },
     {
       "id": "bad_saarow_aja_bad_saarow",
       "name": "aja Bad Saarow",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.24736908,
-        "lng": 14.030422640000001
-      },
-      "google": {
-        "lat": 52.2474086,
-        "lng": 14.0304872,
-        "place_id": "ChIJtb1c1IiKB0cRSXTa-Se6M9E",
-        "address": "Am Golfpl. 2, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.24735209090909,
+        "lng": 14.030932181818184
+      }
     },
     {
       "id": "bad_saarow_die_neue_buhne",
       "name": "Die Neue Bühne",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.29368907999999,
-        "lng": 14.064052379999998
-      },
-      "google": {
-        "lat": 52.29372859999999,
-        "lng": 14.064117,
-        "place_id": "ChIJEdVyB_WJB0cRS7wvifwjPZU",
-        "address": "Bahnhofspl. 3, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 52.293763923076924,
+        "lng": 14.064246615384615
+      }
     },
     {
       "id": "bad_saarow_ulmenhaus",
       "name": "Ulmenhaus",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.29241517999999,
-        "lng": 14.055819979999999
-      },
-      "google": {
-        "lat": 52.29245470000001,
-        "lng": 14.0558846,
-        "place_id": "ChIJ__7-KfaJB0cRiO4c1o47520",
-        "address": "Ulmenstraße 16, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.2924224,
+        "lng": 14.055942399999998
+      }
     },
     {
       "id": "bad_saarow_surf_fun",
       "name": "Surf & Fun",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.25896518,
-        "lng": 14.071177420000001
-      },
-      "google": {
-        "lat": 52.2590047,
-        "lng": 14.071242,
-        "place_id": "ChIJlcLFaNiLB0cRpa07fbv090c",
-        "address": "Am Theresienhof 10, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 52.259034199999995,
+        "lng": 14.071213199999999
+      }
     },
     {
       "id": "bad_saarow_ahoi_mitsegeln_saarow_axel_henschke_ute_berger_gbr",
       "name": "AHOI - Mitsegeln Saarow - Axel Henschke & Ute Berger GbR",
       "before": {
-        "lat": 52.28949098,
-        "lng": 14.04578048
+        "lat": 52.28993625714286,
+        "lng": 14.045214257142858
       },
       "google": {
         "lat": 52.2895305,
         "lng": 14.0458451,
         "place_id": "ChIJ2-VtAQOKB0cRLU72yJqyF6k",
-        "address": "Neue Str. 7, 15526 Bad Saarow"
+        "address": "Neue Str. 7, 15526 Bad Saarow, Germany"
       },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+      "delta_m": 62,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
     },
     {
       "id": "bad_saarow_wohlfuhlboot_hausboot_mieten_in_berlin_brandenburg_bad_saarow_am_scha",
       "name": "Wohlfühlboot Hausboot mieten in Berlin & Brandenburg ( Bad Saarow am Scharmützelsee )",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.290518680000005,
-        "lng": 14.04695198
-      },
-      "google": {
-        "lat": 52.2905582,
-        "lng": 14.0470166,
-        "place_id": "ChIJa5dNRls3qEcRtgSdV5bEO-s",
-        "address": "Wohlfühlboot Marina Freilichtbühne bei, Seestraße 49, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.292748874999994,
+        "lng": 14.062138875
+      }
     },
     {
       "id": "bad_saarow_sonne3000_clubschiff3000",
       "name": "Sonne3000 - Clubschiff3000",
       "before": {
-        "lat": 52.28063848000001,
-        "lng": 14.0560541
+        "lat": 52.28051059999999,
+        "lng": 14.05686501111111
       },
       "google": {
-        "lat": 52.28067799999999,
-        "lng": 14.0561187,
+        "lat": 52.280677999999995,
+        "lng": 14.056118699999999,
         "place_id": "ChIJteyAm1-KB0cRSHE55sURv0g",
-        "address": "Karl-Marx-Damm 47a, 15526 Bad Saarow"
+        "address": "Karl-Marx-Damm 47a, 15526 Bad Saarow, Germany"
       },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+      "delta_m": 54,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
     },
     {
       "id": "bad_saarow_sonne3000_events_erlebnisse",
       "name": "Sonne3000 - Events & Erlebnisse",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.30041158,
-        "lng": 14.065304860000001
-      },
-      "google": {
-        "lat": 52.3004511,
-        "lng": 14.0653695,
-        "place_id": "ChIJoyH-WAKKB0cRZEH9JKIA7hw",
-        "address": "Fürstenwalder Ch 27g, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.30057933333333,
+        "lng": 14.06555088888889
+      }
     },
     {
       "id": "bad_saarow_kutsch_und_kremserfahrten_fred_peter",
       "name": "Kutsch- und Kremserfahrten Fred Peter",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.28118048,
-        "lng": 14.0339054
-      },
-      "google": {
-        "lat": 52.28122,
-        "lng": 14.03397,
-        "place_id": "ChIJj-H5qQmKB0cRH0IMY_0ZiBE",
-        "address": "Reichenwalder Str. 9, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.28119819999999,
+        "lng": 14.034009399999999
+      }
     },
     {
       "id": "bad_saarow_traumzeitboot_hausboote_yachten",
       "name": "Traumzeitboot Hausboote & Yachten",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.28083048,
-        "lng": 14.0580195
-      },
-      "google": {
-        "lat": 52.28087,
-        "lng": 14.0580841,
-        "place_id": "ChIJG8JCLr-LB0cRmGWvtHkQN8A",
-        "address": "Karl-Marx-Damm 47, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "bad_saarow_edeka_bad_saarow",
-      "name": "EDEKA Bad Saarow",
-      "before": {
-        "lat": 52.291486580000004,
-        "lng": 14.064333379999999
-      },
-      "google": {
-        "lat": 52.2915261,
-        "lng": 14.064398,
-        "place_id": "ChIJLWLbYfWJB0cRl9xTUQuT4dI",
-        "address": "Pieskower Str. 2A, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.28087075,
+        "lng": 14.058038750000001
+      }
     },
     {
       "id": "bad_saarow_boutique_vived",
       "name": "Boutique Vived",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.29452038000001,
-        "lng": 14.063694380000001
-      },
-      "google": {
-        "lat": 52.2945599,
-        "lng": 14.063759,
-        "place_id": "ChIJ2fqM1-WJB0cRtwefLpB6LUY",
-        "address": "Fürstenwalder Ch 3c, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 52.29455057142858,
+        "lng": 14.063953428571429
+      }
     },
     {
       "id": "bad_saarow_einfach_tele_mobil_stefan_von_collrepp",
       "name": "Einfach-Tele-Mobil Stefan von Collrepp",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.29256458,
-        "lng": 14.064265180000001
-      },
-      "google": {
-        "lat": 52.2926041,
-        "lng": 14.0643298,
-        "place_id": "ChIJPQHr5BGJB0cRo3X9y4ceaB8",
-        "address": "Bahnhofspl. 8, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.29260089473683,
+        "lng": 14.06448947368421
+      }
     },
     {
       "id": "bad_saarow_wriezener_backstube",
       "name": "Wriezener Backstube",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.29195978,
-        "lng": 14.06312048
-      },
-      "google": {
-        "lat": 52.2919993,
-        "lng": 14.0631851,
-        "place_id": "ChIJF5D_1x-KB0cRh164GS_-yqo",
-        "address": "Seestraße 1, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 52.292060000000006,
+        "lng": 14.063121599999999
+      }
     },
     {
       "id": "bad_saarow_hofgemeinschaft_marienhohe_gbr",
       "name": "Hofgemeinschaft Marienhöhe GbR",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.29089288,
-        "lng": 14.022789079999999
-      },
-      "google": {
-        "lat": 52.2909324,
-        "lng": 14.0228537,
-        "place_id": "ChIJ99390q0gqEcRHqO1dfFYUKU",
-        "address": "Marienhöhe 3, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "bad_saarow_netto_marken_discount",
-      "name": "Netto Marken-Discount",
-      "before": {
-        "lat": 52.26960276,
-        "lng": 14.06798172
-      },
-      "google": {
-        "lat": 52.2696315,
-        "lng": 14.0680287,
-        "place_id": "ChIJReWI60eKB0cRswjxvYK193Y",
-        "address": "Diensdorfer Str. 11, 15526 Bad Saarow"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "bad_saarow_spielplatz_am_badestrand_von_diensdorf",
-      "name": "Spielplatz am Badestrand von Diensdorf",
-      "before": {
-        "lat": 52.243310959999995,
-        "lng": 14.06498636
-      },
-      "google": {
-        "lat": 52.2433397,
-        "lng": 14.0650333,
-        "place_id": "ChIJlXnAsv6KB0cRiAS_L0PsylU",
-        "address": "Hauptstraße 22, 15864 Diensdorf-Radlow-Diensdorf"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "bad_saarow_spielplatz",
-      "name": "Spielplatz",
-      "before": {
-        "lat": 52.28847946,
-        "lng": 14.0603398
-      },
-      "google": {
-        "lat": 52.2218566,
-        "lng": 14.0100699,
-        "place_id": "ChIJ-1JhY6-KB0cRWPiFgyshUkE",
-        "address": "Am Freizeitpark 1, 15864 Wendisch Rietz"
-      },
-      "delta_m": 8160,
-      "status": "BAD",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "bad_saarow_indoorspielplatz_duellarena",
-      "name": "Indoorspielplatz \"Duellarena\"",
-      "before": {
-        "lat": 52.328570160000005,
-        "lng": 14.06890736
-      },
-      "google": {
-        "lat": 52.3285989,
-        "lng": 14.0689544,
-        "place_id": "ChIJm9fvguOJB0cRBoXj7idDydM",
-        "address": "Am Fuchsbau 7, 15526 Bad Saarow"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "bad_saarow_kinderspielplatz_gretanien",
-      "name": "Kinderspielplatz Gretanien",
-      "before": {
-        "lat": 52.21566116,
-        "lng": 14.011335879999999
-      },
-      "google": {
-        "lat": 52.2156899,
-        "lng": 14.0113828,
-        "place_id": "ChIJL0yrEVGLB0cR2zXnQPnSVy8",
-        "address": "bei Unnamed Road, 15864, 15864 Wendisch Rietz"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "bad_saarow_scharmuntzelland_freizeitpark_wendisch_rietz",
-      "name": "Scharmuntzelland - Freizeitpark Wendisch Rietz",
-      "before": {
-        "lat": 52.22182786,
-        "lng": 14.010022979999999
-      },
-      "google": {
-        "lat": 52.2218566,
-        "lng": 14.0100699,
-        "place_id": "ChIJ-1JhY6-KB0cRWPiFgyshUkE",
-        "address": "Am Freizeitpark 1, 15864 Wendisch Rietz"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "bad_saarow_spielplatz_an_der_seepromenade",
-      "name": "Spielplatz an der Seepromenade",
-      "before": {
-        "lat": 52.25273886,
-        "lng": 13.94583834
-      },
-      "google": {
-        "lat": 52.2527676,
-        "lng": 13.9458853,
-        "place_id": "ChIJZ7G6QwghqEcRVvs6Wz1uoLc",
-        "address": "Fritz-Reuter-Straße 52, 15859 Storkow (Mark)"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "bad_saarow_parkplatz_silberbergerstrasse",
-      "name": "Parkplatz Silberbergerstraße",
-      "before": {
-        "lat": 52.28740106,
-        "lng": 14.039096
-      },
-      "google": {
-        "lat": 52.2874298,
-        "lng": 14.039143,
-        "place_id": "ChIJD7Bb-4OLB0cR18w6TIgdjPE",
-        "address": "Silberberger Str., 15526 Bad Saarow"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "bad_saarow_parkplatz_am_regattaplatz",
-      "name": "Parkplatz am Regattaplatz",
-      "before": {
-        "lat": 52.276938959999995,
-        "lng": 14.04139232
-      },
-      "google": {
-        "lat": 52.2769677,
-        "lng": 14.0414393,
-        "place_id": "ChIJG554JwCLB0cRI5LfZ-eDY_I",
-        "address": "Regattastraße 4, 15526 Bad Saarow"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "bad_saarow_fsv_preussen_e_v",
-      "name": "FSV Preußen e.V.",
-      "before": {
-        "lat": 52.28020126,
-        "lng": 14.05804302
-      },
-      "google": {
-        "lat": 52.28023,
-        "lng": 14.05809,
-        "place_id": "ChIJMRrllheKB0cRjbmwUfHrOn8",
-        "address": "Karl-Marx-Damm 49a, 15526 Bad Saarow"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "bad_saarow_precise_resort_bad_saarow",
-      "name": "Precise Resort Bad Saarow",
-      "before": {
-        "lat": 52.23859556,
-        "lng": 14.02904666
-      },
-      "google": {
-        "lat": 52.2386243,
-        "lng": 14.0290936,
-        "place_id": "ChIJ26xCiXqLB0cRCOc-ffWclNg",
-        "address": "Parkallee 1, 15526 Bad Saarow"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "bad_saarow_bad_saarow_schulstr",
-      "name": "Bad Saarow, Schulstr.",
-      "before": {
-        "lat": 52.28739126000001,
-        "lng": 14.060032999999999
-      },
-      "google": {
-        "lat": 52.28742,
-        "lng": 14.06008,
-        "place_id": "ChIJZbUV3h6KB0cR28Xipc0LLqw",
-        "address": "15526 Bad Saarow, Deutschland"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "bad_saarow_aral",
-      "name": "Aral",
-      "before": {
-        "lat": 52.335639259999994,
-        "lng": 14.073484959999998
-      },
-      "google": {
-        "lat": 52.335668,
-        "lng": 14.073532,
-        "place_id": "ChIJD4uMUy2IB0cRApF-6L3TPKk",
-        "address": "Friedenstraße 36, 15517 Fürstenwalde/Spree"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "bad_saarow_chargepoint_ladestation",
-      "name": "ChargePoint-Ladestation",
-      "before": {
-        "lat": 52.291506860000005,
-        "lng": 14.060770999999999
-      },
-      "google": {
-        "lat": 52.2919625,
-        "lng": 14.0636491,
-        "place_id": "ChIJkct0e_WJB0cRyK-Yj7GfAc4",
-        "address": "Pieskower Str. 2, 15526 Bad Saarow"
-      },
-      "delta_m": 202,
-      "status": "BAD",
-      "streetview": "OK"
-    },
-    {
-      "id": "bad_saarow_shell",
-      "name": "Shell",
-      "before": {
-        "lat": 52.337634060000006,
-        "lng": 14.07383806
-      },
-      "google": {
-        "lat": 52.3376628,
-        "lng": 14.0738851,
-        "place_id": "ChIJ05HM8i2IB0cRk1145uC9mVU",
-        "address": "August-Bebel-Straße 71, 15517 Fürstenwalde/Spree"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "bad_saarow_kosmetiksalon_du_mont_claire",
-      "name": "Kosmetiksalon Du Mont Claire",
-      "before": {
-        "lat": 52.28307126000001,
-        "lng": 14.058443019999999
-      },
-      "google": {
-        "lat": 52.2831,
-        "lng": 14.05849,
-        "place_id": "ChIJo4hmsxmKB0cRsyRL_XlxJ6U",
-        "address": "Karl-Marx-Damm 38, 15526 Bad Saarow"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "bad_saarow_offentliche_toilette",
-      "name": "Öffentliche Toilette",
-      "before": {
-        "lat": 52.27662216000001,
-        "lng": 14.042365619999998
-      },
-      "google": {
-        "lat": 52.27934699999999,
-        "lng": 14.0573331,
-        "place_id": "ChIJV_e262mLB0cRee3qSzcN5Cw",
-        "address": "Karl-Marx-Damm 47a, 15526 Bad Saarow"
-      },
-      "delta_m": 1062,
-      "status": "BAD",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "bad_saarow_toom_baumarkt_furstenwalde_spree_sud",
-      "name": "toom Baumarkt Fürstenwalde/Spree-Süd",
-      "before": {
-        "lat": 52.33566886,
-        "lng": 14.08021856
-      },
-      "google": {
-        "lat": 52.3356976,
-        "lng": 14.0802656,
-        "place_id": "ChIJTzszeTSIB0cRJnMKXsg45eE",
-        "address": "Alte Langewahler Ch 11, 15517 Fürstenwalde/Spree"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "bad_saarow_woolworth",
-      "name": "Woolworth",
-      "before": {
-        "lat": 52.341496459999995,
-        "lng": 14.08518024
-      },
-      "google": {
-        "lat": 52.3415252,
-        "lng": 14.0852273,
-        "place_id": "ChIJge4VNDeIB0cRoZCyLQCsrNo",
-        "address": "Bahnhofstraße 22a, 15517 Fürstenwalde/Spree"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "bad_saarow_aldi_nord",
-      "name": "ALDI Nord",
-      "before": {
-        "lat": 52.336743260000006,
-        "lng": 14.077190960000001
-      },
-      "google": {
-        "lat": 52.336772,
-        "lng": 14.077238,
-        "place_id": "ChIJlcpgSTKIB0cR6pv5YnW8GBY",
-        "address": "Alte Langewahler Ch 4, 15517 Fürstenwalde/Spree"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "bad_saarow_kaufland_furstenwalde_alte_langew",
-      "name": "Kaufland Fürstenwalde, Alte Langew.",
-      "before": {
-        "lat": 52.336201460000005,
-        "lng": 14.081256759999999
-      },
-      "google": {
-        "lat": 52.3362302,
-        "lng": 14.0813038,
-        "place_id": "ChIJTzszeTSIB0cR1P06zBjzktM",
-        "address": "Alte Langewahler Ch 11, 15517 Fürstenwalde/Spree"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "bad_saarow_tourist_information_wendisch_rietz_tourismusverein_scharmutzelsee_e_v",
-      "name": "Tourist-Information Wendisch Rietz - Tourismusverein Scharmützelsee e.V.",
-      "before": {
-        "lat": 52.215301260000004,
-        "lng": 14.004613280000001
-      },
-      "google": {
-        "lat": 52.21532999999999,
-        "lng": 14.0046602,
-        "place_id": "ChIJP76Qb6yKB0cRyZdegBA-EvU",
-        "address": "Kleine Promenade 1, 15864 Wendisch Rietz"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "bad_saarow_das_dorsch",
-      "name": "Das Dorsch",
-      "before": {
-        "lat": 52.25074576000001,
-        "lng": 14.04896884
-      },
-      "google": {
-        "lat": 52.2507745,
-        "lng": 14.0490158,
-        "place_id": "ChIJQyN-nF-KB0cR7c0lbZAJZdE",
-        "address": "Humboldtstraße 16, 15526 Bad Saarow"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "bad_saarow_villa_contessa_restaurant",
-      "name": "Villa Contessa Restaurant",
-      "before": {
-        "lat": 52.291209259999995,
-        "lng": 14.0569229
-      },
-      "google": {
-        "lat": 52.291238,
-        "lng": 14.0569699,
-        "place_id": "ChIJU6NtwR2KB0cRptYHcL1834E",
-        "address": "Seestraße 18, 15526 Bad Saarow"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "bad_saarow_restaurant_fischtopf",
-      "name": "Restaurant Fischtopf",
-      "before": {
-        "lat": 52.28991216000001,
-        "lng": 14.045128299999998
-      },
-      "google": {
-        "lat": 52.2899409,
-        "lng": 14.0451753,
-        "place_id": "ChIJOTeCvAOKB0cRaw6WpE4h1-0",
-        "address": "Neue Str. 6, 15526 Bad Saarow"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "bad_saarow_cafeteria",
-      "name": "Cafeteria",
-      "before": {
-        "lat": 52.284827760000006,
-        "lng": 14.0637428
-      },
-      "google": {
-        "lat": 52.2848565,
-        "lng": 14.0637898,
-        "place_id": "ChIJ3cOMDCKKB0cRTk1-6pfhBQQ",
-        "address": "Cafeteria im Helios Klinikum, Pieskower Str. 33, 15526 Bad Saarow"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "bad_saarow_eiscafe_bad_saarow",
-      "name": "Eiscafé Bad Saarow",
-      "before": {
-        "lat": 52.28518326,
-        "lng": 14.042106999999998
-      },
-      "google": {
-        "lat": 52.28521199999999,
-        "lng": 14.042154,
-        "place_id": "ChIJvzxSuAWKB0cR7DXvupYGo_w",
-        "address": "Uferstraße 15A, 15526 Bad Saarow"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "bad_saarow_hotel_fischhaus_wendisch_rietz",
-      "name": "Hotel Fischhaus Wendisch Rietz",
-      "before": {
-        "lat": 52.20117746,
-        "lng": 14.0169148
-      },
-      "google": {
-        "lat": 52.20120619999999,
-        "lng": 14.0169617,
-        "place_id": "ChIJafOg_Mj1B0cRwAxztLBQj2Q",
-        "address": "Am Kleinen Glubigsee 31, 15864 Wendisch Rietz"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "bad_saarow_hotel_einklang",
-      "name": "Hotel Einklang",
-      "before": {
-        "lat": 52.21545856,
-        "lng": 14.008980580000003
-      },
-      "google": {
-        "lat": 52.2154873,
-        "lng": 14.0090275,
-        "place_id": "ChIJeRrVnB6LB0cRTLH2di7KHQw",
-        "address": "Strandstraße 6, 15864 Wendisch Rietz"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "bad_saarow_gut_klostermuhle_madlitzer_muhle_betriebs_gmbh_co_kg",
-      "name": "Gut Klostermühle - MADLITZER MÜHLE BETRIEBS GMBH & CO. KG",
-      "before": {
-        "lat": 52.37898766000001,
-        "lng": 14.310408899999999
-      },
-      "google": {
-        "lat": 52.3790164,
-        "lng": 14.310456,
-        "place_id": "ChIJHRSWBReFB0cRwlRuE7wfDk8",
-        "address": "Mühlenstraße 11, 15518 Briesen (Mark)"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "bad_saarow_schweizerhaus_falkenhagen",
-      "name": "Schweizerhaus Falkenhagen",
-      "before": {
-        "lat": 52.42995516,
-        "lng": 14.326086459999999
-      },
-      "google": {
-        "lat": 52.4299839,
-        "lng": 14.3261336,
-        "place_id": "ChIJ9VDJfJ-EB0cRc0f7_FRfKUo",
-        "address": "Ernst-Thälmann-Straße 33, 15306 Falkenhagen (Mark)"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "bad_saarow_alwine_landhaus_an_den_spreewiesen",
-      "name": "Alwine - Landhaus an den Spreewiesen",
-      "before": {
-        "lat": 52.25576926,
-        "lng": 14.255448840000003
-      },
-      "google": {
-        "lat": 52.255798,
-        "lng": 14.2554958,
-        "place_id": "ChIJRXBK6fCNB0cRJygEpodSjv0",
-        "address": "Raßmannsdorf 10b, 15848 Rietz-Neuendorf-Neubrück"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "bad_saarow_alte_schule_reichenwalde",
-      "name": "Alte Schule Reichenwalde",
-      "before": {
-        "lat": 52.26469345999999,
-        "lng": 13.998286339999998
-      },
-      "google": {
-        "lat": 52.26472219999999,
-        "lng": 13.9983333,
-        "place_id": "ChIJtX6eeI4gqEcRpHOD7YIWUoc",
-        "address": "Kolpiner Str. 2, 15526 Reichenwalde"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "bad_saarow_pension_stuck",
-      "name": "Pension Stuck",
-      "before": {
-        "lat": 52.31868256,
-        "lng": 14.073839079999999
-      },
-      "google": {
-        "lat": 52.3187113,
-        "lng": 14.0738861,
-        "place_id": "ChIJl9AHB8SJB0cRhky-zXU57FA",
-        "address": "a. See 41, 15526 Bad Saarow-Petersdorf"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "bad_saarow_hotel_und_restaurant_raueneck",
-      "name": "Hotel und Restaurant Raueneck",
-      "before": {
-        "lat": 52.292758459999995,
-        "lng": 14.0515572
-      },
-      "google": {
-        "lat": 52.2927872,
-        "lng": 14.0516042,
-        "place_id": "ChIJOZvd8PeJB0cRvkUZc3hRQIA",
-        "address": "Ahornallee 5, 15526 Bad Saarow"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "bad_saarow_seehotel_luisenhof_panda_restaurant",
-      "name": "Seehotel Luisenhof&Panda Restaurant",
-      "before": {
-        "lat": 52.418594860000006,
-        "lng": 14.313176859999999
-      },
-      "google": {
-        "lat": 52.4186236,
-        "lng": 14.313224,
-        "place_id": "ChIJJ040qZaEB0cR3Q9_eECVVno",
-        "address": "Am Gabelsee 1, 15306 Falkenhagen (Mark)"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "bad_saarow_hotel_resort_markisches_meer",
-      "name": "HOTEL-RESORT Märkisches Meer",
-      "before": {
-        "lat": 52.249093859999995,
-        "lng": 14.06968084
-      },
-      "google": {
-        "lat": 52.2491226,
-        "lng": 14.0697278,
-        "place_id": "ChIJ-5Y4wVWKB0cRvO3pL7bmTxE",
-        "address": "Hauptstraße 2, 15864 Diensdorf-Radlow-Diensdorf"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "bad_saarow_karlslust_hotel_restaurant",
-      "name": "Karlslust Hotel & Restaurant",
-      "before": {
-        "lat": 52.249049660000004,
-        "lng": 13.951028240000003
-      },
-      "google": {
-        "lat": 52.24907839999999,
-        "lng": 13.9510752,
-        "place_id": "ChIJmWRVFLMhqEcRN1lKEoX2gIw",
-        "address": "Karlsluster Str. 25, 15859 Storkow"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "bad_saarow_seehotel_kollnitz",
-      "name": "Seehotel Köllnitz",
-      "before": {
-        "lat": 52.23544766,
-        "lng": 13.886161860000001
-      },
-      "google": {
-        "lat": 52.2354764,
-        "lng": 13.8862088,
-        "place_id": "ChIJGdrYpNQhqEcR_aow55HV0a0",
-        "address": "Groß Schauener Hauptstraße 31, 15859 Storkow (Mark)"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.29086866666666,
+        "lng": 14.022775166666667
+      }
     },
     {
       "id": "bad_saarow_bunkermuseum_fuchsbau",
       "name": "Bunkermuseum Fuchsbau",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.32334636,
-        "lng": 14.05763202
-      },
-      "google": {
-        "lat": 52.3233823,
-        "lng": 14.0576908,
-        "place_id": "ChIJs0FuwNmJB0cRSWYhy5Dgw9U",
-        "address": "Am Fuchsbau 8a, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.32343010000001,
+        "lng": 14.057665359999998
+      }
     },
     {
       "id": "bad_saarow_zufahrt_zum_bunkermuseum_fuchsbau",
       "name": "Zufahrt zum Bunkermuseum Fuchsbau",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.32799636,
-        "lng": 14.066556
-      },
-      "google": {
-        "lat": 52.3233823,
-        "lng": 14.0576908,
-        "place_id": "ChIJs0FuwNmJB0cRSWYhy5Dgw9U",
-        "address": "Am Fuchsbau 8a, 15526 Bad Saarow"
-      },
-      "delta_m": 791,
-      "status": "BAD",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.327735919999995,
+        "lng": 14.065926
+      }
     },
     {
       "id": "bad_saarow_burg_storkow",
       "name": "Burg Storkow",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.25283886,
-        "lng": 13.933242000000002
-      },
-      "google": {
-        "lat": 52.2528748,
-        "lng": 13.9333007,
-        "place_id": "ChIJG3pky6QhqEcR8_-D0ATuSkc",
-        "address": "Schloßstraße 6, 15859 Storkow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 52.252791773684216,
+        "lng": 13.933276205263159
+      }
     },
     {
       "id": "bad_saarow_schloss_hubertushohe",
       "name": "Schloss Hubertushöhe",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.23578836,
-        "lng": 13.967612220000001
-      },
-      "google": {
-        "lat": 52.2358243,
-        "lng": 13.9676709,
-        "place_id": "ChIJzagvJTkgqEcRS_JJsvTPGmM",
-        "address": "Robert-Koch-Straße 1, 15859 Storkow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.235874027272736,
+        "lng": 13.96773479090909
+      }
     },
     {
       "id": "bad_saarow_ferienhaus_am_see",
       "name": "Ferienhaus am See",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.31432835999999,
-        "lng": 14.06771092
-      },
-      "google": {
-        "lat": 52.3143643,
-        "lng": 14.0677697,
-        "place_id": "ChIJb-VDQsKJB0cRbwnihgWl-8U",
-        "address": "a. See 10, 15526 Bad Saarow-Petersdorf"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 52.31423910000001,
+        "lng": 14.06767628
+      }
     },
     {
       "id": "bad_saarow_aussichtsturm_rauener_berge",
       "name": "Aussichtsturm Rauener Berge",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.32011626,
-        "lng": 14.03957752
-      },
-      "google": {
-        "lat": 52.3201522,
-        "lng": 14.0396363,
-        "place_id": "ChIJrY4DMQAnqEcRt4a-Si2eXA0",
-        "address": "15518 Rauen"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "bad_saarow_kneipp_park_wendisch_rietz",
-      "name": "Kneipp-Park Wendisch Rietz",
-      "before": {
-        "lat": 52.21523426000001,
-        "lng": 14.010610860000003
-      },
-      "google": {
-        "lat": 52.2152702,
-        "lng": 14.0106695,
-        "place_id": "ChIJSZU79dWLB0cRLks3ElqjbEA",
-        "address": "Strandstraße 13, 15864 Wendisch Rietz"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "bad_saarow_heimattiergarten_furstenwalde",
-      "name": "Heimattiergarten Fürstenwalde",
-      "before": {
-        "lat": 52.367397159999996,
-        "lng": 14.048440160000002
-      },
-      "google": {
-        "lat": 52.3674331,
-        "lng": 14.048499,
-        "place_id": "ChIJQaU02-gnqEcRonvxpoVsQcM",
-        "address": "Dr.-Wilhelm-Külz-Straße 10B, 15517 Fürstenwalde/Spree"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "bad_saarow_stadtpark",
-      "name": "Stadtpark",
-      "before": {
-        "lat": 52.36710956,
-        "lng": 14.05087396
-      },
-      "google": {
-        "lat": 52.3674331,
-        "lng": 14.048499,
-        "place_id": "ChIJQaU02-gnqEcRonvxpoVsQcM",
-        "address": "Dr.-Wilhelm-Külz-Straße 10B, 15517 Fürstenwalde/Spree"
-      },
-      "delta_m": 165,
-      "status": "BAD",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "bad_saarow_gartensparte_an_der_autobahn_furstenwalde_e_v",
-      "name": "Gartensparte \"An der Autobahn Fürstenwalde e.V.\"",
-      "before": {
-        "lat": 52.335517259999996,
-        "lng": 14.0925296
-      },
-      "google": {
-        "lat": 52.3355532,
-        "lng": 14.0925884,
-        "place_id": "ChIJHUt5NqyJB0cRfQapyrUiH2k",
-        "address": "15517 Fürstenwalde/Spree"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.32013522000001,
+        "lng": 14.039564480000001
+      }
     },
     {
       "id": "bad_saarow_insekten_paradies_garten_der_burg_storkow",
       "name": "Insekten Paradies Garten der Burg Storkow",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.25313166000001,
-        "lng": 13.9343075
-      },
-      "google": {
-        "lat": 52.2531676,
-        "lng": 13.9343662,
-        "place_id": "ChIJC6kxn3AhqEcRZYRlPrCKUec",
-        "address": "Schloßstraße 9, 15859 Storkow (Mark)"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 52.252791773684216,
+        "lng": 13.933276205263159
+      }
     },
     {
       "id": "bad_saarow_bad_saarow_classics",
       "name": "BAD SAAROW CLASSICS",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.29164416,
-        "lng": 14.05980916
-      },
-      "google": {
-        "lat": 52.2916801,
-        "lng": 14.0598679,
-        "place_id": "ChIJY7DKHxaKB0cRdErF4Atuxzc",
-        "address": "Seestraße 12, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "bad_saarow_gross_schauener_seenkette",
-      "name": "Groß Schauener Seenkette",
-      "before": {
-        "lat": 52.21376956,
-        "lng": 13.921775459999997
-      },
-      "google": {
-        "lat": 52.2138055,
-        "lng": 13.9218341,
-        "place_id": "ChIJN2eTrNYhqEcRKjlOzPohfU0",
-        "address": "Bugker Weg 19, 15859 Storkow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.29169585714285,
+        "lng": 14.059860714285715
+      }
     },
     {
       "id": "bad_saarow_andre_streine",
       "name": "André Streine",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.25891326000001,
-        "lng": 14.1361162
-      },
-      "google": {
-        "lat": 52.2589492,
-        "lng": 14.1361749,
-        "place_id": "ChIJ-e0IcIuLB0cRPsIU26RKdyU",
-        "address": "Hauptstraße 16, 15848 Rietz-Neuendorf-Wilmersdorf"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 52.21366666,
+        "lng": 14.01139778
+      }
     },
     {
       "id": "bad_saarow_parkbuhne_furstenwalde",
       "name": "Parkbühne Fürstenwalde",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.36577705999999,
-        "lng": 14.050802260000001
-      },
-      "google": {
-        "lat": 52.365813,
-        "lng": 14.0508611,
-        "place_id": "ChIJ160Nzu4nqEcRnrzOwtyId2c",
-        "address": "Dr.-Wilhelm-Külz-Straße 10, 15517 Fürstenwalde/Spree"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.365504380000004,
+        "lng": 14.05097472
+      }
     },
     {
       "id": "bad_saarow_hafen_wendisch_rietz",
       "name": "Hafen Wendisch Rietz",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.21304076,
-        "lng": 14.01100136
-      },
-      "google": {
-        "lat": 52.21307669999999,
-        "lng": 14.01106,
-        "place_id": "ChIJK4dwm7KKB0cRJhLgZMtIVj0",
-        "address": "Scharmützelsee, 15864 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "bad_saarow_irrlandia_der_mitmachpark",
-      "name": "Irrlandia - der MitMachPark",
-      "before": {
-        "lat": 52.26603616,
-        "lng": 13.93401648
-      },
-      "google": {
-        "lat": 52.2660721,
-        "lng": 13.9340752,
-        "place_id": "ChIJpZoAXwohqEcRstd9oOvJX4w",
-        "address": "Lebbiner Str. 1, 15859 Storkow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "bad_saarow_scharmutzelbob",
-      "name": "Scharmützelbob",
-      "before": {
-        "lat": 52.327460959999996,
-        "lng": 14.0694076
-      },
-      "google": {
-        "lat": 52.3274969,
-        "lng": 14.0694664,
-        "place_id": "ChIJ76RDzveJB0cRIb2zPpbjkNQ",
-        "address": "Am Fuchsbau 7, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "bad_saarow_scharmutzelsee_region_wendisch_rietz",
-      "name": "Scharmützelsee Region (Wendisch Rietz)",
-      "before": {
-        "lat": 52.212939659999996,
-        "lng": 14.018452759999999
-      },
-      "google": {
-        "lat": 52.2129756,
-        "lng": 14.0185114,
-        "place_id": "ChIJs7f72ZWLB0cRwhTe28sJnJM",
-        "address": "Kleine Promenade, 15864 Wendisch Rietz"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "bad_saarow_spreeflitzer",
-      "name": "Spreeflitzer",
-      "before": {
-        "lat": 52.32817726,
-        "lng": 14.0699346
-      },
-      "google": {
-        "lat": 52.3282132,
-        "lng": 14.0699934,
-        "place_id": "ChIJCcV9_dGJB0cRu5ofsfhT170",
-        "address": "Am Fuchsbau 2, 15526 Bad Saarow-Petersdorf"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "bad_saarow_schwapp_spassbad_sauna_reha_und_fitness",
-      "name": "Schwapp - Spaßbad, Sauna, Reha und Fitness",
-      "before": {
-        "lat": 52.37439756,
-        "lng": 14.07487624
-      },
-      "google": {
-        "lat": 52.37443349999999,
-        "lng": 14.0749351,
-        "place_id": "ChIJb_Wtq_8nqEcRKLJLBvYh3aw",
-        "address": "Große Freizeit 1, 15517 Fürstenwalde/Spree"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 52.21280081428572,
+        "lng": 14.011501842857141
+      }
     },
     {
       "id": "bad_saarow_yaas_yacht_akademie_axel_schmidt",
       "name": "YAAS - Yacht Akademie Axel Schmidt",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.237656460000004,
-        "lng": 14.029691719999999
-      },
-      "google": {
-        "lat": 52.2376924,
-        "lng": 14.0297504,
-        "place_id": "ChIJMZvTbpGKB0cRa0kayGqiTQo",
-        "address": "Parkallee 2, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "bad_saarow_bootsverleih_furstenwalde",
-      "name": "Bootsverleih Fürstenwalde",
-      "before": {
-        "lat": 52.35359715999999,
-        "lng": 14.07814608
-      },
-      "google": {
-        "lat": 52.3536331,
-        "lng": 14.0782049,
-        "place_id": "ChIJKzH6zPKJB0cRQqzYtK7CLiU",
-        "address": "Uferstraße 25, 15517 Fürstenwalde/Spree"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "bad_saarow_sup_verleih_am_kanal",
-      "name": "SUP Verleih Am Kanal",
-      "before": {
-        "lat": 52.21359976,
-        "lng": 14.006211060000002
-      },
-      "google": {
-        "lat": 52.2136357,
-        "lng": 14.0062697,
-        "place_id": "ChIJu9UBzXyLB0cRsXuqbrfN2cM",
-        "address": "Am Kanal 7, 15864 Wendisch Rietz"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "bad_saarow_flussfloss",
-      "name": "FlussFloß",
-      "before": {
-        "lat": 52.259301060000006,
-        "lng": 13.9417472
-      },
-      "google": {
-        "lat": 52.259337,
-        "lng": 13.9418059,
-        "place_id": "ChIJLzWd6akiqEcR5lM8E2E1mEA",
-        "address": "Seestraße 24, 15859 Storkow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.23773315999999,
+        "lng": 14.029770199999998
+      }
     },
     {
       "id": "bad_saarow_thermomix_reprasentantin_dajana_steinert",
       "name": "Thermomix-Repräsentantin Dajana Steinert",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.31708036,
-        "lng": 14.071279319999999
-      },
-      "google": {
-        "lat": 52.3171163,
-        "lng": 14.0713381,
-        "place_id": "ChIJnTgkOP2JB0cRvz39JElgcaI",
-        "address": "a. See 15, 15526 Bad Saarow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.31709254,
+        "lng": 14.071297300000001
+      }
     },
     {
       "id": "bad_saarow_markgrafensteine",
       "name": "Markgrafensteine",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.319550760000006,
-        "lng": 14.035266180000002
-      },
-      "google": {
-        "lat": 52.3195795,
-        "lng": 14.0353132,
-        "place_id": "ChIJM3yXLWYnqEcRUamXnWF_HAU",
-        "address": "15518 Rauen"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "bad_saarow_moorsteg_moor_bei_wendisch_rietz",
-      "name": "Moorsteg - Moor bei Wendisch Rietz",
-      "before": {
-        "lat": 52.22452326,
-        "lng": 13.99103308
-      },
-      "google": {
-        "lat": 52.224552,
-        "lng": 13.99108,
-        "place_id": "ChIJR8PvBXohqEcRUU6zfHssXU4",
-        "address": "Unnamed Road, 15859, 15859 Storkow (Mark)"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "bad_saarow_sukhavati_apartments",
-      "name": "Sukhavati Apartments",
-      "before": {
-        "lat": 52.28670886,
-        "lng": 14.056998199999999
-      },
-      "google": {
-        "lat": 52.2867376,
-        "lng": 14.0570452,
-        "place_id": "ChIJC3V8yZmLB0cRMx3JBLip1Mc",
-        "address": "Karl-Marx-Damm 25, 15526 Bad Saarow"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 52.21366666,
+        "lng": 14.01139778
+      }
     },
     {
       "id": "bad_saarow_wettermuseum_e_v",
       "name": "Wettermuseum e.V.",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.20811156,
-        "lng": 14.11359646
-      },
-      "google": {
-        "lat": 52.2081475,
-        "lng": 14.1136551,
-        "place_id": "ChIJ1Y3SzamMB0cRiYTNUcowZ3I",
-        "address": "Herzberger Str. 21, 15848 Tauche-Lindenberg"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 52.20884732,
+        "lng": 14.113822840000001
+      }
     },
     {
       "id": "bad_saarow_museum_furstenwalde",
       "name": "Museum Fürstenwalde",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.35748276,
-        "lng": 14.065687460000001
-      },
-      "google": {
-        "lat": 52.3575187,
-        "lng": 14.0657463,
-        "place_id": "ChIJoZiplPQnqEcRxIc0Zt4x63U",
-        "address": "Dompl. 7, 15517 Fürstenwalde/Spree"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 52.357512328571424,
+        "lng": 14.065736857142857
+      }
     },
     {
       "id": "bad_saarow_brauereimuseum",
       "name": "Brauereimuseum",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.35850276,
-        "lng": 14.063492359999998
-      },
-      "google": {
-        "lat": 52.3585387,
-        "lng": 14.0635512,
-        "place_id": "ChIJe3xSkPQnqEcR8-8VyM2A52w",
-        "address": "Am Markt 1, 15517 Fürstenwalde/Spree"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "bad_saarow_wendisch_rietz_freizeitpark",
-      "name": "Wendisch Rietz, Freizeitpark",
-      "before": {
-        "lat": 52.22114405999999,
-        "lng": 14.007421339999999
-      },
-      "google": {
-        "lat": 52.2218566,
-        "lng": 14.0100699,
-        "place_id": "ChIJ-1JhY6-KB0cRWPiFgyshUkE",
-        "address": "Am Freizeitpark 1, 15864 Wendisch Rietz"
-      },
-      "delta_m": 197,
-      "status": "BAD",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.35848493333334,
+        "lng": 14.063521266666667
+      }
     }
   ]
 }

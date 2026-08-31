@@ -1,5 +1,5 @@
 /**
- * Findus Runtime — Phase 0/1 foundation.
+ * Yorro Runtime — Phase 0/1 foundation.
  * Orchestrator + Audio Pipeline + Relevance Engine + GPS Policy.
  */
 

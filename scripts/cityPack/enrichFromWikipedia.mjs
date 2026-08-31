@@ -18,6 +18,46 @@ import { runQualityGate } from './qualityGate.mjs';
 
 loadEnvFile();
 
+function sleep(ms) {
+  return new Promise((r) => setTimeout(r, ms));
+}
+
+class WikiRateLimitError extends Error {
+  constructor() {
+    super('wikipedia_rate_limited');
+    this.name = 'WikiRateLimitError';
+  }
+}
+
+async function wikiFetch(url) {
+  for (let attempt = 0; attempt < 4; attempt += 1) {
+    try {
+      const res = await fetch(url, {
+        headers: {
+          'User-Agent': 'FindusCityPack/1.0 (city enrich; local research)',
+        },
+        signal: AbortSignal.timeout(12000),
+      });
+      if (res.status === 429 || res.status === 403) {
+        if (attempt >= 2) throw new WikiRateLimitError();
+        await sleep(15000 * (attempt + 1));
+        continue;
+      }
+      const text = await res.text();
+      if (/too many requests/i.test(text)) {
+        if (attempt >= 2) throw new WikiRateLimitError();
+        await sleep(20000 * (attempt + 1));
+        continue;
+      }
+      return new Response(text, { status: res.status, headers: res.headers });
+    } catch (err) {
+      if (err instanceof WikiRateLimitError) throw err;
+      await sleep(1200 * (attempt + 1));
+    }
+  }
+  return null;
+}
+
 async function wikiSearch(query, lang = 'de') {
   const u = new URL(`https://${lang}.wikipedia.org/w/api.php`);
   u.searchParams.set('action', 'query');
@@ -26,19 +66,10 @@ async function wikiSearch(query, lang = 'de') {
   u.searchParams.set('srlimit', '5');
   u.searchParams.set('format', 'json');
   u.searchParams.set('origin', '*');
-  for (let attempt = 0; attempt < 4; attempt += 1) {
-    const res = await fetch(u, {
-      headers: { 'User-Agent': 'FindusCityPack/1.0 (city enrich; local research)' },
-    });
-    if (res.status === 429) {
-      await new Promise((r) => setTimeout(r, 1500 * (attempt + 1)));
-      continue;
-    }
-    if (!res.ok) return [];
-    const j = await res.json();
-    return j?.query?.search || [];
-  }
-  return [];
+  const res = await wikiFetch(u);
+  if (!res || !res.ok) return [];
+  const j = await res.json();
+  return j?.query?.search || [];
 }
 
 async function wikiExtract(title, lang = 'de') {
@@ -50,24 +81,15 @@ async function wikiExtract(title, lang = 'de') {
   u.searchParams.set('titles', title);
   u.searchParams.set('format', 'json');
   u.searchParams.set('origin', '*');
-  for (let attempt = 0; attempt < 4; attempt += 1) {
-    const res = await fetch(u, {
-      headers: { 'User-Agent': 'FindusCityPack/1.0 (city enrich; local research)' },
-    });
-    if (res.status === 429) {
-      await new Promise((r) => setTimeout(r, 1500 * (attempt + 1)));
-      continue;
-    }
-    if (!res.ok) return null;
-    const j = await res.json();
-    const pages = j?.query?.pages || {};
-    const page = Object.values(pages)[0];
-    if (!page || page.missing != null) return null;
-    const extract = String(page.extract || '').trim();
-    if (extract.length < 80) return null;
-    return { title: page.title, extract };
-  }
-  return null;
+  const res = await wikiFetch(u);
+  if (!res || !res.ok) return null;
+  const j = await res.json();
+  const pages = j?.query?.pages || {};
+  const page = Object.values(pages)[0];
+  if (!page || page.missing != null) return null;
+  const extract = String(page.extract || '').trim();
+  if (extract.length < 80) return null;
+  return { title: page.title, extract };
 }
 
 function pushDeep(trigger, text, tags) {
@@ -135,6 +157,9 @@ async function enrichCityHistory(pack, cityName) {
 async function enrichSpot(pack, spot, cityName) {
   const t = (pack.trigger_points || []).find((x) => x.id === spot.id);
   if (!t) return { ok: false, reason: 'no_trigger' };
+  if ((spot.tags || []).includes('wikipedia_enriched')) {
+    return { ok: false, reason: 'already_tagged' };
+  }
   const deep = t.deep_data_pool || [];
   if (deep.length >= 8 && (t.general_info || '').length >= 120) {
     return { ok: false, reason: 'already_rich' };
@@ -197,7 +222,17 @@ async function main() {
   if (!pack) throw new Error(`Pack not found: ${cityId}`);
   const cityName = pack.name || cityId;
 
-  const hist = await enrichCityHistory(pack, cityName);
+  let hist = false;
+  try {
+    hist = await enrichCityHistory(pack, cityName);
+  } catch (err) {
+    if (err?.name === 'WikiRateLimitError') {
+      console.error('[wiki] rate-limited on city history — abort');
+      console.log(JSON.stringify({ apply, aborted: 'rate_limit', enriched: 0 }, null, 2));
+      return;
+    }
+    throw err;
+  }
   const stories = (pack.spots || [])
     .filter((s) => s.pack_role !== 'directory' && (s.place_tier ?? 9) <= 2)
     .map((s) => {
@@ -213,14 +248,40 @@ async function main() {
   const report = { city: cityId, history: hist, spots: [] };
   let n = 0;
   let attempts = 0;
-  const maxAttempts = Math.max(limit * 8, 80);
+  let consecutiveMiss = 0;
+  const maxAttempts = Math.max(limit * 3, 40);
   for (const s of stories) {
     if (n >= limit) break;
     if (attempts >= maxAttempts) break;
     attempts += 1;
-    const r = await enrichSpot(pack, s, cityName);
+    let r;
+    try {
+      r = await enrichSpot(pack, s, cityName);
+    } catch (err) {
+      if (err?.name === 'WikiRateLimitError') {
+        console.error(`[wiki] rate-limited after ${n} spots — stopping`);
+        break;
+      }
+      r = { ok: false, error: String(err?.message || err) };
+    }
     report.spots.push({ id: s.id, name: s.name, ...r });
-    if (r.ok) n += 1;
+    if (r.ok) {
+      n += 1;
+      consecutiveMiss = 0;
+      console.error(`[wiki] ${n}/${limit} ${s.name}`);
+      await sleep(800);
+    } else {
+      consecutiveMiss += 1;
+      console.error(`[wiki] skip ${s.name} (${r.reason || r.error || 'miss'})`);
+      if (consecutiveMiss >= 8) {
+        console.error('[wiki] too many consecutive misses — stopping');
+        break;
+      }
+      await sleep(400);
+    }
+    if (apply && r.ok && n % 5 === 0) {
+      savePack(pack, { bumpVersion: false });
+    }
   }
 
   pack._pack_index = {

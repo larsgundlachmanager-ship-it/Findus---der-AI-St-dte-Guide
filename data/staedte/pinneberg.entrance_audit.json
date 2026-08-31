@@ -1,63 +1,51 @@
 {
   "city_id": "pinneberg",
   "apply": true,
+  "storyOnly": true,
   "maxDelta": 80,
+  "country": "Germany",
   "summary": {
-    "ok": 7,
-    "check": 0,
-    "bad": 0,
+    "ok": 6,
+    "check": 2,
+    "bad": 3,
     "errors": 0,
-    "applied": 0
+    "applied": 4,
+    "skipped_directory": 313,
+    "skipped_cached_google": 10
   },
   "rows": [
     {
       "id": "pinneberg_bahnhof_pr",
       "name": "Bahnhof Pinneberg & P+R Anlage",
       "before": {
-        "lat": 53.65480228,
-        "lng": 9.798750459999999
+        "lat": 53.65542512666668,
+        "lng": 9.797612873333332
       },
       "google": {
         "lat": 53.6549011,
         "lng": 9.7989172,
         "place_id": "ChIJRVcfqFiAsUcRfDlbllL0rtE",
-        "address": "Rockvillestraße, 25421 Pinneberg"
+        "address": "Rockvillestraße, 25421 Pinneberg, Germany"
       },
-      "delta_m": 16,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "pinneberg_hotel_cap_polonio",
-      "name": "Hotel Cap Polonio",
-      "before": {
-        "lat": 53.65791409999999,
-        "lng": 9.806662919999999
-      },
-      "google": {
-        "lat": 53.6579644,
-        "lng": 9.8067478,
-        "place_id": "ChIJ1S5lkfOAsUcRUZlMd7BOnzA",
-        "address": "Fahltskamp 48, 25421 Pinneberg"
-      },
-      "delta_m": 8,
-      "status": "OK",
-      "streetview": "OK"
+      "delta_m": 104,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS",
+      "applied": true
     },
     {
       "id": "pinneberg_die_drostei",
-      "name": "Die Drostei (Kreiskulturzentrum)",
+      "name": "Die Drostei",
       "before": {
-        "lat": 53.6608997,
-        "lng": 9.796551099999999
+        "lat": 53.66092833333334,
+        "lng": 9.796642833333333
       },
       "google": {
         "lat": 53.66095,
         "lng": 9.796636,
         "place_id": "ChIJSQZUwF-AsUcRUhQsT2Ek1hI",
-        "address": "Dingstätte 23, 25421 Pinneberg"
+        "address": "Dingstätte 23, 25421 Pinneberg, Germany"
       },
-      "delta_m": 8,
+      "delta_m": 2,
       "status": "OK",
       "streetview": "OK"
     },
@@ -65,69 +53,247 @@
       "id": "pinneberg_stadtmuseum",
       "name": "Stadtmuseum Pinneberg",
       "before": {
-        "lat": 53.660928,
-        "lng": 9.795998999999998
+        "lat": 53.6609623625,
+        "lng": 9.7960745875
       },
       "google": {
         "lat": 53.6609783,
         "lng": 9.7960839,
         "place_id": "ChIJd9V9yF-AsUcRrwTUOQiE4Kw",
-        "address": "Dingstätte 25, 25421 Pinneberg"
+        "address": "Dingstätte 25, 25421 Pinneberg, Germany"
       },
-      "delta_m": 8,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "pinneberg_rathauspassage",
-      "name": "Rathauspassage Pinneberg & Wochenmarkt",
-      "before": {
-        "lat": 53.662425080000006,
-        "lng": 9.79862254
-      },
-      "google": {
-        "lat": 53.6625239,
-        "lng": 9.7987893,
-        "place_id": "ChIJhTofDGCAsUcRHjFa_hlN4EI",
-        "address": "Friedrich-Ebert-Straße 31, 25421 Pinneberg"
-      },
-      "delta_m": 16,
+      "delta_m": 2,
       "status": "OK",
       "streetview": "OK"
     },
     {
       "id": "pinneberg_kriegerdenkmal_bahnhofvorplatz",
       "name": "Kriegerdenkmal Bahnhofsvorplatz",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 53.65573807999999,
-        "lng": 9.79767526
-      },
-      "google": {
         "lat": 53.6558369,
-        "lng": 9.797842000000001,
-        "place_id": "ChIJtzFvJA-BsUcRvuY7woCXRC8",
-        "address": "Rockvillestraße, 25421 Pinneberg"
-      },
-      "delta_m": 16,
-      "status": "OK",
-      "streetview": "OK"
+        "lng": 9.797842000000001
+      }
     },
     {
       "id": "pinneberg_deutsches_baumschulmuseum",
       "name": "Deutsches Baumschulmuseum (Ortsteil Thesdorf)",
       "before": {
-        "lat": 53.6415109,
-        "lng": 9.820492840000002
+        "lat": 53.6416524,
+        "lng": 9.8206126
       },
       "google": {
         "lat": 53.6415612,
         "lng": 9.8205777,
         "place_id": "ChIJ3Q8WiOCAsUcRnUS79o3cURY",
-        "address": "Halstenbeker Str. 29, 25421 Pinneberg"
+        "address": "Halstenbeker Str. 29, 25421 Pinneberg, Germany"
       },
-      "delta_m": 8,
+      "delta_m": 10,
       "status": "OK",
       "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "pinneberg_stadtgeschichte",
+      "name": "Pinneberg Stadtgeschichte & Orientierung",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.660962375,
+        "lng": 9.7960745
+      }
+    },
+    {
+      "id": "pinneberg_samlandmuseum",
+      "name": "Samlandmuseum",
+      "before": {
+        "lat": 53.65989176923077,
+        "lng": 9.80180023076923
+      },
+      "google": {
+        "lat": 53.6595072,
+        "lng": 9.8032258,
+        "place_id": "ChIJ8fnZ8fSAsUcRfPOfOuMzV9o",
+        "address": "Fahltskamp 30, 25421 Pinneberg, Germany"
+      },
+      "delta_m": 103,
+      "status": "BAD",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "pinneberg_wasserturm_pinneberg",
+      "name": "Wasserturm Pinneberg",
+      "before": {
+        "lat": 53.66495872727273,
+        "lng": 9.784197
+      },
+      "google": {
+        "lat": 53.66464200000001,
+        "lng": 9.7843683,
+        "place_id": "ChIJJ6orrzOBsUcR3C7OgZAfgWo",
+        "address": "Peinerweg 20, 25421 Pinneberg, Germany"
+      },
+      "delta_m": 37,
+      "status": "CHECK",
+      "streetview": "ZERO_RESULTS",
+      "applied": true
+    },
+    {
+      "id": "pinneberg_torhaus_ilo_park",
+      "name": "Torhaus ILO Park",
+      "before": {
+        "lat": 53.654775111111114,
+        "lng": 9.796781000000001
+      },
+      "google": {
+        "lat": 53.6547479,
+        "lng": 9.7967502,
+        "place_id": "ChIJXXBPJvaAsUcRXr6otvGJvTM",
+        "address": "An d. Mühlenau 12, 25421 Pinneberg, Germany"
+      },
+      "delta_m": 4,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "pinneberg_drosteipark",
+      "name": "Drosteipark",
+      "before": {
+        "lat": 53.6598242,
+        "lng": 9.7973896
+      },
+      "google": {
+        "lat": 53.6599396,
+        "lng": 9.7971032,
+        "place_id": "ChIJC7fIm1-AsUcRNuELJRlsaHE",
+        "address": "Am Drosteipark, 25421 Pinneberg, Germany"
+      },
+      "delta_m": 23,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "pinneberg_christuskirche_pinneberg",
+      "name": "Christuskirche Pinneberg",
+      "before": {
+        "lat": 53.65733910526316,
+        "lng": 9.799439263157893
+      },
+      "google": {
+        "lat": 53.6573615,
+        "lng": 9.7992898,
+        "place_id": "ChIJ574gvvWAsUcRcAd01FnUGq8",
+        "address": "Bahnhofstraße 2A, 25421 Pinneberg, Germany"
+      },
+      "delta_m": 10,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "pinneberg_rathaus_pinneberg",
+      "name": "Rathaus Pinneberg",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.66232343181819,
+        "lng": 9.797984704545456
+      }
+    },
+    {
+      "id": "pinneberg_waldgebiet_fahlt",
+      "name": "Waldgebiet Fahlt",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.654597945614036,
+        "lng": 9.804757263157896
+      }
+    },
+    {
+      "id": "pinneberg_rosengarten_pinneberg",
+      "name": "Rosengarten Pinneberg",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.65244163125001,
+        "lng": 9.807137174999998
+      }
+    },
+    {
+      "id": "pinneberg_bahnhof_thesdorf",
+      "name": "S-Bahn Station Pinneberg-Thesdorf",
+      "before": {
+        "lat": 53.660962375,
+        "lng": 9.7960745
+      },
+      "google": {
+        "lat": 53.6443431,
+        "lng": 9.813916299999999,
+        "place_id": "ChIJtzgOCuSAsUcR2_ZDIX8tlvY",
+        "address": "25421 Pinneberg, Germany"
+      },
+      "delta_m": 2190,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "pinneberg_pinneberg_pinnau_park",
+      "name": "Pinneberg Pinnau-Park",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.660962375,
+        "lng": 9.7960745
+      }
+    },
+    {
+      "id": "pinneberg_kreuzkirche_ev_luth_kreuz_kirchengemeinde_pinneberg",
+      "name": "Kreuzkirche - Ev.-Luth. Kreuz-Kirchengemeinde Pinneberg",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.62080188461539,
+        "lng": 9.78593736153846
+      }
+    },
+    {
+      "id": "pinneberg_arboretum_ellerhoop",
+      "name": "Arboretum Ellerhoop",
+      "before": {
+        "lat": 53.716626313888895,
+        "lng": 9.777382830555553
+      },
+      "google": {
+        "lat": 53.716673,
+        "lng": 9.776521299999999,
+        "place_id": "ChIJuQjE4sQqskcR_Dp_2brZJJs",
+        "address": "Thiensen 4, 25373 Ellerhoop, Germany"
+      },
+      "delta_m": 57,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "pinneberg_herman_wupperman_denkmal",
+      "name": "Herman-Wupperman-Denkmal",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.663983099999996,
+        "lng": 9.789321659999999
+      }
+    },
+    {
+      "id": "pinneberg_stolperstein_fur_heinrich_geick",
+      "name": "Stolperstein für Heinrich Geick",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.6672498,
+        "lng": 9.7960982
+      }
+    },
+    {
+      "id": "pinneberg_historische_wupperman_hallen",
+      "name": "Historische Wupperman Hallen",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 53.660962375,
+        "lng": 9.7960745
+      }
     }
   ]
 }

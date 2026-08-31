@@ -13,8 +13,6 @@ import type { ClassifiedTurn } from './turnComplexityClassifier';
 import { clearVisionCueCache } from './visionCueCache';
 import { fetchOsmVisualLandmark } from './osmVisualLandmark';
 import { scrubRoboticNavSpeak } from './spatialOrientation';
-import type { QuickAction } from '../../types/concierge';
-import { useFinnusStore } from '../../store/useFinnusStore';
 
 export const PREFETCH_ZONE_MIN_M = 40;
 export const PREFETCH_ZONE_MAX_M = 50;
@@ -45,6 +43,64 @@ type LookAheadSlot = {
 let slots = new Map<string, LookAheadSlot>();
 let activeJob: Promise<void> | null = null;
 let classifiedTurns: ClassifiedTurn[] = [];
+/** Letztes Street-View-Angebot (für Voice „zeig Street View“). */
+let lastStreetViewOffer: {
+  lat: number;
+  lng: number;
+  heading: number;
+  atMs: number;
+} | null = null;
+
+export function getLastStreetViewOffer(): {
+  lat: number;
+  lng: number;
+  heading: number;
+} | null {
+  if (!lastStreetViewOffer) return null;
+  if (Date.now() - lastStreetViewOffer.atMs > 15 * 60_000) return null;
+  return lastStreetViewOffer;
+}
+
+export function isStreetViewVoiceAsk(text: string): boolean {
+  const t = text.replace(/\s+/g, ' ').trim();
+  return /\b(street\s*view|straßenansicht|strassenansicht|live[-\s]?aufnahme|nahschau\w*|schau\s+(?:mal\s+)?nah|zeig(?:e| mir)?\s+(?:die\s+)?(?:kreuzung|straße|strasse|aufnahme)|aufnahme\s+(?:zeigen|bitte)|hast\s+du\s+(?:das\s+)?nicht\s+gesehen|nicht\s+gesehen\??)\b/iu.test(
+    t,
+  );
+}
+
+/** Voice: zuletzt angebotene Kreuzung als Street View öffnen. */
+export async function fulfillStreetViewVoiceAsk(): Promise<{
+  ok: boolean;
+  message?: string;
+}> {
+  const offer = getLastStreetViewOffer();
+  if (!offer) {
+    return {
+      ok: false,
+      message: 'Gerade habe ich keine Street-View-Kreuzung parat.',
+    };
+  }
+  try {
+    const { handleQuickAction } = await import('../actionHandlerService');
+    const r = await handleQuickAction({
+      type: 'SHOW_STREET_VIEW',
+      label: 'Street View zeigen',
+      payload: {
+        destLat: offer.lat,
+        destLng: offer.lng,
+        headingDeg: offer.heading,
+        destName: 'Kreuzung',
+      },
+    });
+    return {
+      ok: r.ok !== false,
+      message: r.message,
+    };
+  } catch (err) {
+    console.warn('[lookAhead] street view voice failed', err);
+    return { ok: false, message: 'Street View ließ sich nicht laden.' };
+  }
+}
 
 function turnWordFromManeuver(maneuver: string | null | undefined): string {
   const m = (maneuver ?? '').toLowerCase();
@@ -114,12 +170,8 @@ async function buildOsmTurnCue(opts: {
       : `abbiegen nach ${opts.turn}`;
 
   if (osm?.ttsLine) {
-    const cue = scrubRoboticNavSpeak(
-      `${osm.ttsLine} Dann ${turnPart}${
-        opts.roadName ? ` auf ${opts.roadName}` : ''
-      }.`,
-    );
-    return { cue, streetViewReady: streetViewReady || osm.streetViewButtonReady };
+    const cue = scrubRoboticNavSpeak(`${osm.ttsLine} Dann ${turnPart}.`);
+    return { cue, streetViewReady };
   }
 
   if (opts.placeHint) {
@@ -131,50 +183,13 @@ async function buildOsmTurnCue(opts: {
     };
   }
 
-  if (opts.roadName) {
-    return {
-      cue: scrubRoboticNavSpeak(
-        `An der Kreuzung ${turnPart} auf ${opts.roadName}.`,
-      ),
-      streetViewReady,
-    };
-  }
+  // Keine Straßennamen — visuelle Kreuzung reicht
+  void opts.roadName;
 
   return {
-    cue: scrubRoboticNavSpeak(
-      `Gleich unübersichtliche Kreuzung — ${turnPart}.`,
-    ),
+    cue: scrubRoboticNavSpeak(`Gleich ${turnPart}.`),
     streetViewReady,
   };
-}
-
-function offerStreetViewButton(slot: LookAheadSlot): void {
-  if (!slot.streetViewReady || slot.buttonOffered) return;
-  slot.buttonOffered = true;
-  const action: QuickAction = {
-    type: 'SHOW_STREET_VIEW',
-    label: 'Street View zeigen',
-    payload: {
-      destLat: slot.lat,
-      destLng: slot.lng,
-      headingDeg: slot.heading,
-      destName: 'Kreuzung',
-    },
-  };
-  try {
-    useFinnusStore.getState().setActiveConciergeCard({
-      id: `sv-${slot.waypointIndex}-${Date.now()}`,
-      createdAtMs: Date.now(),
-      speechText: '',
-      visualBullets: [
-        'Unübersichtliche Kreuzung — Street View nur auf Wunsch.',
-      ],
-      quickActions: [action],
-      cardTitle: 'Orientierung',
-    });
-  } catch {
-    /* soft */
-  }
 }
 
 async function runPrefetch(slot: LookAheadSlot): Promise<void> {
@@ -299,8 +314,6 @@ export function tickLookAheadBuffer(opts: {
       const key = turnPrefetchKey(ct.waypointIndex, slot.visionCue);
       slot.ttsWarmed = true;
       void warmNavTurnCue(key, slot.visionCue);
-      // Button vorbereiten — Bild noch nicht laden
-      offerStreetViewButton(slot);
     }
   }
 }
@@ -308,7 +321,6 @@ export function tickLookAheadBuffer(opts: {
 export function consumeVisionCue(waypointIndex: number): string | null {
   const slot = slots.get(slotId(waypointIndex));
   if (!slot || slot.status !== 'ready' || !slot.visionCue) return null;
-  offerStreetViewButton(slot);
   return slot.visionCue;
 }
 
@@ -329,9 +341,9 @@ export function buildComplexTurnFallback(
 ): string {
   const turn = turnWordFromManeuver(maneuver);
   if (turn === 'geradeaus') {
-    return 'Gleich unübersichtliche Stelle — ich orientiere mich an sichtbaren Markierungen.';
+    return 'Gleich weiter geradeaus.';
   }
-  return `An der nächsten Kreuzung ${turn} — ich nutze sichtbare Markierungen für dich.`;
+  return `An der nächsten Kreuzung ${turn}.`;
 }
 
 export function isComplexTurnWaypoint(

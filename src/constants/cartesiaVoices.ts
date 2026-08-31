@@ -1,5 +1,5 @@
 /**
- * Cartesia sonic-3.5 — Findus-Personas.
+ * Cartesia sonic-3.5 — Yorro-Personas.
  * Alina + Sebastian = Original-UUIDs (native de-DE), unverändert.
  */
 import type { VoiceId } from '../types/userProfile';
@@ -7,8 +7,12 @@ import type { VoiceId } from '../types/userProfile';
 export const CARTESIA_MODEL_ID = 'sonic-3.5';
 export const CARTESIA_TTS_URL = 'https://api.cartesia.ai/tts/bytes';
 export const CARTESIA_API_VERSION = '2025-04-16';
-/** ~0,009 € / 1.000 Zeichen (9 € / 1M). */
-export const CARTESIA_EUR_PER_1K_CHARS = 0.009;
+/**
+ * Cartesia Pro-Overage: 65 $ / 1M Credits ≈ 1 Credit/Zeichen.
+ * USD≈EUR für Diagnostik (kein FX). In-Plan (erste 100k) wäre ~0,05 — wir
+ * rechnen mit Overage, weil Produktion das Kontingent regelmäßig überschreitet.
+ */
+export const CARTESIA_EUR_PER_1K_CHARS = 0.065;
 
 export type CartesiaVoiceDefinition = {
   id: VoiceId;
@@ -29,7 +33,7 @@ export type CartesiaVoiceDefinition = {
 
 /**
  * Exakte Sortierung — Index 0 = Alina, Index 1 = Sebastian.
- * Samples: kurzer Name + Findus-Moment im Golden-Stil der Persona.
+ * Samples: kurzer Name + Yorro-Moment im Golden-Stil der Persona.
  */
 export const CARTESIA_VOICES: readonly CartesiaVoiceDefinition[] = [
   {

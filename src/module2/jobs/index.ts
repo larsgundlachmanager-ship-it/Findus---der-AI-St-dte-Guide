@@ -15,6 +15,12 @@ export {
   shouldPreferJobOverRouter,
 } from './classifyJob';
 export {
+  analogJobHints,
+  looksLikeTicketedPlaceAccess,
+  looksLikeMediaCatalogRequest,
+  looksLikeHikeOnly,
+} from './jobAnalogy';
+export {
   bridgeLineForJob,
   speakJobBridgeFireAndForget,
 } from './bridgeForJob';

@@ -45,20 +45,27 @@ const MIN_SEGMENT_M = 1000;
 /** Neue Segment-Mittel vs. bisherige Basis */
 const LEARN_EMA = 0.55;
 
-/** Defaults */
-export const DEFAULT_WALK_KMH = 3.5;
+/** Defaults — Google-Maps-nah (~5 km/h zu Fuß), bis User-Pace gelernt ist */
+export const DEFAULT_WALK_KMH = 5;
 export const DEFAULT_BIKE_KMH = 13;
+
+/**
+ * Cap für gesprochene/geplante Fuß-ETAs.
+ * Gelerntes Tempo darf live-HUD beschleunigen, aber Ansagen nie „sportlicher“
+ * als Maps (~5 km/h) wirken — sonst 2,5 km → 17 Min statt ~30.
+ */
+export const PLANNING_WALK_CAP_KMH = 5.2;
 
 /** Clamp: auch sehr langsam / sehr zügig messen dürfen */
 export const WALK_KMH_MIN = 1;
-export const WALK_KMH_MAX = 12;
+export const WALK_KMH_MAX = 9;
 export const BIKE_KMH_MIN = 6;
 export const BIKE_KMH_MAX = 35;
 
 /** Unter dieser Speed → Pause / Segment unterbrechen */
 const STOP_MS = 0.35; // ~1,3 km/h
-const BIKE_ENTER_MS = 2.2; // ~8 km/h
-const WALK_MAX_MS = 2.0; // ~7,2 km/h
+const BIKE_ENTER_MS = 2.5; // ~9 km/h — Fuß-Hardcap
+const WALK_MAX_MS = 2.5; // ~9 km/h
 
 let state: PaceState = {
   walkKmh: DEFAULT_WALK_KMH,
@@ -175,7 +182,19 @@ export function modeHintFromSessionTravel(): PaceMode | null {
 
 export function getPlanWalkKmh(): number {
   void hydratePaceProfile();
+  // Altes Default 3,5 → Maps-nah 5 km/h, solange noch kein gelerntes Tempo
+  if (
+    state.segments.filter((s) => s.mode === 'walk').length === 0 &&
+    Math.abs(state.walkKmh - 3.5) < 0.05
+  ) {
+    return DEFAULT_WALK_KMH;
+  }
   return state.walkKmh;
+}
+
+/** Für Speech/Planung: nie schneller als Maps-Baseline planen. */
+export function getPlanWalkKmhForSpeech(): number {
+  return Math.min(getPlanWalkKmh(), PLANNING_WALK_CAP_KMH);
 }
 
 export function getPlanBikeKmh(): number {
@@ -190,6 +209,11 @@ export function getPlanKmh(mode: PaceMode): number {
 /** m/min für Planung */
 export function getPlanWalkMPerMin(): number {
   return (getPlanWalkKmh() * 1000) / 60;
+}
+
+/** m/min für Speech/ETA-Ansage (cap) */
+export function getPlanWalkMPerMinForSpeech(): number {
+  return (getPlanWalkKmhForSpeech() * 1000) / 60;
 }
 
 export function getPlanBikeMPerMin(): number {

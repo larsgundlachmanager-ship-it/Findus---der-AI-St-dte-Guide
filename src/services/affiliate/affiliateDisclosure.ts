@@ -1,6 +1,6 @@
 /**
  * Affiliate-Transparenz ohne störenden Karten-Footer:
- * - Button-Kennzeichnung mit Sternchen (★), kein „Anzeige“-Wort
+ * - Button-Kennzeichnung mit Sternchen (*), kein „Anzeige“-Wort
  * - einmalige Soft-Bestätigung (persistent)
  * - voller Text in Einstellungen
  */
@@ -12,14 +12,14 @@ import { useFinnusStore } from '../../store/useFinnusStore';
 
 const ACK_PATH = `${FileSystem.documentDirectory}findus-affiliate-ack.json`;
 
-/** Partner-Buttons dezent mit ★ (Settings erklären das Sternchen). */
+/** Partner-Buttons dezent mit * (Settings erklären das Sternchen). */
 export function withAnzeigeLabel(label: string): string {
   const t = label.trim();
-  if (!t) return '★';
-  if (/★/.test(t) || /\banzeige\b/i.test(t)) {
-    return t.replace(/\banzeige\b/gi, '★').trim();
+  if (!t) return '*';
+  if (/\*/.test(t) || /★/.test(t) || /\banzeige\b/i.test(t)) {
+    return t.replace(/\banzeige\b/gi, '*').replace(/★/g, '*').trim();
   }
-  return `${t} ★`.slice(0, 20);
+  return `${t} *`.slice(0, 20);
 }
 
 export function partnerActionShowsAnzeige(action: QuickAction): boolean {

@@ -33,17 +33,29 @@ import {
 } from '../../services/handsFree/liveChatSession';
 import { isDeicticPoiQuestion } from '../../services/intent/poiInfoVsNav';
 import { REBOOT_MAX_PARALLEL_FACT_JOBS } from './contracts';
-import { isHourTourQuery, researchHourTour } from './hourTourFacts';
 
 export type FactLaneId =
   | 'amenity_nav'
   | 'combo_cluster'
   | 'pack_match'
   | 'parking_care'
-  | 'hour_tour'
   | 'pitch_choice'
+  | 'time_trigger'
   | 'agent_fallback'
   | 'system_control';
+
+function wantsTimeTrigger(text: string): boolean {
+  try {
+    const { isClockIntent } = require('../../services/alarms/clockIntents') as {
+      isClockIntent: (t: string) => boolean;
+    };
+    return isClockIntent(text);
+  } catch {
+    return /\b(wecker|timer|eieruhr|powernap|weck\s+mich|erinner\s+mich\s+(?:in|um))\b/i.test(
+      text,
+    );
+  }
+}
 
 function wantsSystemAppControl(text: string): boolean {
   if (wantsHandsFreeSetup(text)) return true;
@@ -76,6 +88,14 @@ function wantsSystemAppControl(text: string): boolean {
 
 /** Pack-Match nur für echte Orts-/Historie-Fragen — nicht Punkte/Kino/Outfit. */
 function wantsPackMatchStory(jobId: FindusJobId, text: string): boolean {
+  try {
+    const { isWorldFactUtterance } = require('./pipeline/worldFactGuard') as {
+      isWorldFactUtterance: (s: string) => boolean;
+    };
+    if (isWorldFactUtterance(text)) return false;
+  } catch {
+    /* soft */
+  }
   if (isMoreHistoryUtterance(text) || isDeicticPoiQuestion(text)) return true;
   if (jobId === 'poi_identify' || jobId === 'museum_theme') return true;
   if (
@@ -108,6 +128,36 @@ async function runOneFactLane(opts: {
   const text = opts.userText;
   const a = anchorCoords(opts.rucksack);
 
+  if (!opts.secondary && wantsTimeTrigger(text)) {
+    let clockOnly = true;
+    try {
+      const { isClockOnlyUtterance } = require('./pipeline/orchestrateSlots') as {
+        isClockOnlyUtterance: (s: string) => boolean;
+      };
+      clockOnly = isClockOnlyUtterance(text);
+    } catch {
+      clockOnly = true;
+    }
+    if (clockOnly) {
+      const task: PipelineTask = {
+        id: 'time_trigger',
+        rawText: text,
+        rewrittenText: text,
+        intent: 'trigger',
+        priority: 1,
+        subject: opts.subject,
+        city: opts.city,
+        jobId: opts.jobId,
+      };
+      const result = await agentForIntent('trigger').run({
+        task,
+        rucksack: opts.rucksack,
+        signal: opts.signal,
+      });
+      return { lane: 'time_trigger', result };
+    }
+  }
+
   if (!opts.secondary && wantsSystemAppControl(text)) {
     const task: PipelineTask = {
       id: 'system_control',
@@ -133,11 +183,25 @@ async function runOneFactLane(opts: {
       isParkingCareUtterance(text) ||
       opts.thinkAhead.includes('parking_leave_by'))
   ) {
-    if (isParkingCareUtterance(text) || /\bparkticket\b/i.test(text)) {
-      return {
-        lane: 'parking_care',
-        result: await researchParkingCare({ userText: text }),
+    try {
+      const { isParkingSearchIntent } = require('../../services/concierge/timeCareIntent') as {
+        isParkingSearchIntent: (s: string) => boolean;
       };
+      if (isParkingSearchIntent(text)) {
+        /* Suche → Pitch, nicht Spot speichern */
+      } else if (isParkingCareUtterance(text) || /\bparkticket\b/i.test(text)) {
+        return {
+          lane: 'parking_care',
+          result: await researchParkingCare({ userText: text }),
+        };
+      }
+    } catch {
+      if (isParkingCareUtterance(text) || /\bparkticket\b/i.test(text)) {
+        return {
+          lane: 'parking_care',
+          result: await researchParkingCare({ userText: text }),
+        };
+      }
     }
   }
 
@@ -184,23 +248,6 @@ async function runOneFactLane(opts: {
         cityHint: opts.city,
         subject: opts.subject,
         depth: isMoreHistoryUtterance(text) ? 'deep' : 'arrival',
-      }),
-    };
-  }
-
-  // 1h-Tour / unbesuchte Sights (vor generischem Knowledge)
-  if (
-    !opts.secondary &&
-    (opts.jobId === 'sight_recommend' || isHourTourQuery(text)) &&
-    isHourTourQuery(text)
-  ) {
-    return {
-      lane: 'hour_tour',
-      result: await researchHourTour({
-        userText: text,
-        lat: a.lat,
-        lng: a.lng,
-        cityHint: opts.city,
       }),
     };
   }
@@ -297,7 +344,7 @@ function mergeFactResults(primary: AgentResult, secondary: AgentResult): AgentRe
 }
 
 /**
- * Primär + optional 1 Secondary-Job (max 2 parallel) — z. B. Party + Outfit.
+ * Alle Child-Jobs parallel (Cap REBOOT_MAX_PARALLEL_FACT_JOBS). Plan webt, ersetzt nicht.
  */
 export async function runFactLanes(opts: {
   userText: string;
@@ -309,28 +356,32 @@ export async function runFactLanes(opts: {
   city?: string | null;
   signal?: AbortSignal;
 }): Promise<{ lane: FactLaneId; result: AgentResult }> {
-  const secondaryId = (opts.secondaryJobIds ?? []).find(
-    (id) => id && id !== opts.jobId,
-  );
-
-  if (!secondaryId || REBOOT_MAX_PARALLEL_FACT_JOBS < 2) {
-    return runOneFactLane(opts);
+  const seen = new Set<string>();
+  const ids: FindusJobId[] = [];
+  for (const id of [opts.jobId, ...(opts.secondaryJobIds ?? [])]) {
+    if (!id || seen.has(id)) continue;
+    seen.add(id);
+    ids.push(id);
+  }
+  const capped = ids.slice(0, Math.max(1, REBOOT_MAX_PARALLEL_FACT_JOBS));
+  if (capped.length <= 1) {
+    return runOneFactLane({ ...opts, jobId: capped[0] ?? opts.jobId });
   }
 
-  // Compound: Primary + Secondary parallel (keine doppelten Amenity-Lanes)
-  const [primary, secondary] = await Promise.all([
-    runOneFactLane(opts),
-    runOneFactLane({
-      ...opts,
-      jobId: secondaryId,
-      secondary: true,
-    }),
-  ]);
-
-  return {
-    lane: primary.lane,
-    result: mergeFactResults(primary.result, secondary.result),
-  };
+  const ran = await Promise.all(
+    capped.map((id, i) =>
+      runOneFactLane({
+        ...opts,
+        jobId: id,
+        secondary: i > 0,
+      }),
+    ),
+  );
+  let merged = ran[0]!.result;
+  for (let i = 1; i < ran.length; i++) {
+    merged = mergeFactResults(merged, ran[i]!.result);
+  }
+  return { lane: ran[0]!.lane, result: merged };
 }
 
 export function intentForJob(jobId: FindusJobId): AgentIntent {

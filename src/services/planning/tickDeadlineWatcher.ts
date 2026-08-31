@@ -8,6 +8,7 @@ import { resolveAndStartNavigation } from '../navigation/resolveNavTarget';
 import { setRuntimeModule } from '../../runtime/orchestrator';
 import { speakRuntimeText } from '../../runtime/speechModule';
 import { useSessionPlanStore } from '../../store/useSessionPlanStore';
+import { useFuturePlanStore } from '../../module2/timeline/futurePlanState';
 import { useFinnusStore } from '../../store/useFinnusStore';
 import { getVoiceSettingsForTour } from '../ttsService';
 import { computeLeaveByMs } from './activateSessionPlan';
@@ -26,7 +27,7 @@ async function speakLeaveLine(planLabel: string, arriveLocal: string): Promise<v
     try {
       const raw = await generateGeminiText(
         [
-          'Du bist Findus. Der User hat noch frei erkundet, jetzt ist der Zeitpuffer für einen Termin aufgebraucht.',
+          'Du bist Yorro. Der User hat noch frei erkundet, jetzt ist der Zeitpuffer für einen Termin aufgebraucht.',
           `Ziel: ${planLabel}. Ankunftszeit: ${arriveLocal}.`,
           'Formuliere GENAU 1–2 kurze Sätze Deutsch (du-Form): freundlich drängen, Aufbruch, Navigation startet.',
           'Keine Listen, kein JSON, max. 40 Wörter.',
@@ -68,6 +69,28 @@ export async function tickDeadlineWatcher(): Promise<void> {
   const store = useSessionPlanStore.getState();
   const plan = store.getActivePlan();
   if (!plan || plan.deadlineFired || !plan.freeRoam) return;
+
+  const live = useFuturePlanStore.getState().plan.stops.filter(
+    (s) => s.status !== 'done' && s.kind !== 'nav_leg',
+  );
+  const undone = plan.stops.filter((s) => !s.done);
+  const stillOnTimeline =
+    live.length > 0 &&
+    undone.some((u) =>
+      live.some((s) => {
+        const a = (s.title || '').toLowerCase();
+        const b = (u.label || '').toLowerCase();
+        return (
+          s.id === u.id ||
+          (b.length >= 4 && a.includes(b.slice(0, 12))) ||
+          (a.length >= 4 && b.includes(a.slice(0, 12)))
+        );
+      }),
+    );
+  if (!stillOnTimeline) {
+    store.clearPlan();
+    return;
+  }
 
   const finnus = useFinnusStore.getState();
   const origin =

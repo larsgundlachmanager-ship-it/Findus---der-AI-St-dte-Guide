@@ -1,5 +1,5 @@
 /**
- * Lightweight public-page / PDF text fetch for Findus research.
+ * Lightweight public-page / PDF text fetch for Yorro research.
  * No login, no JS-rendered SPAs — honest fail if content unavailable.
  * Extracts links + forms for the open Web-Agent.
  */
@@ -63,6 +63,32 @@ function resolveUrl(base: string, href: string): string | null {
   } catch {
     return null;
   }
+}
+
+/** Speisekarten/PDFs inkl. Wix `/_files/ugd/` — auch ohne <a href> (JSON/SPA). */
+export function extractMenuAndPdfUrls(html: string, baseUrl: string): string[] {
+  const out: string[] = [];
+  const seen = new Set<string>();
+  const push = (raw: string) => {
+    const cleaned = raw.trim().replace(/[),.;]+$/, '').replace(/\\u002F/g, '/');
+    if (!cleaned) return;
+    const abs = /^https?:\/\//i.test(cleaned)
+      ? cleaned
+      : resolveUrl(baseUrl, cleaned);
+    if (!abs || !/^https?:\/\//i.test(abs) || seen.has(abs)) return;
+    seen.add(abs);
+    out.push(abs);
+  };
+  const absRe =
+    /https?:\/\/[^\s"'<>\\]+(?:\.pdf|\/ugd\/[a-z0-9_]+(?:\.[a-z0-9]+)?)/gi;
+  let m: RegExpExecArray | null;
+  while ((m = absRe.exec(html))) push(m[0]);
+  const relRe = /\/_files\/ugd\/[a-z0-9_]+(?:\.[a-z0-9]+)?/gi;
+  while ((m = relRe.exec(html))) push(m[0]);
+  const jsonRe =
+    /"(?:url|uri|src|link|document)"\s*:\s*"(https?:[^"]+\.pdf[^"]*)"/gi;
+  while ((m = jsonRe.exec(html))) push(m[1]);
+  return out.slice(0, 24);
 }
 
 /** Extract navigable links from HTML for multi-step browsing. */
@@ -206,7 +232,7 @@ export async function fetchPublicDocument(url: string): Promise<FetchedDoc> {
       headers: {
         Accept: 'text/html,application/xhtml+xml,application/pdf,text/plain,*/*',
         'User-Agent':
-          'FindusResearchBot/1.0 (+https://findus.app; travel-assistant)',
+          'YorroResearchBot/1.0 (+https://yorro.app; travel-assistant)',
       },
     });
 
@@ -251,28 +277,17 @@ export async function fetchPublicDocument(url: string): Promise<FetchedDoc> {
       };
     }
 
-  const html = await res.text();
+    const html = await res.text();
     const text = stripHtml(html).slice(0, MAX_HTML_CHARS);
     const links = extractLinksFromHtml(html, clean);
-    // Extra: PDF/ugd-URLs die nicht in <a> stecken (Wix etc.)
-    const pdfRe =
-      /https?:\/\/[^\s"'<>]+(?:\.pdf|_files\/ugd\/[^\s"'<>]+)/gi;
     const seen = new Set(links.map((l) => l.href));
-    let pm: RegExpExecArray | null;
-    while ((pm = pdfRe.exec(html))) {
-      const href = pm[0].replace(/[),.;]+$/, '');
+    for (const href of extractMenuAndPdfUrls(html, clean)) {
       if (seen.has(href)) continue;
       seen.add(href);
-      const around = html
-        .slice(Math.max(0, pm.index - 120), pm.index + 40)
-        .toLowerCase();
-      const label = /getränk|getraenk|drink/.test(around)
-        ? 'Getränkekarte'
-        : /speise|food|menu|karte/.test(around)
-          ? 'Speisekarte'
-          : 'PDF';
-      links.push({ href, label });
-      if (links.length >= MAX_LINKS) break;
+      links.unshift({
+        href,
+        label: /\.pdf|\/ugd\//i.test(href) ? 'Speisekarte' : 'Karte',
+      });
     }
     const forms = extractFormsFromHtml(html, clean);
     if (text.length < 40 && !links.length) {

@@ -45,6 +45,14 @@ export type QuickActionPayload = {
   destLat?: number;
   destLng?: number;
   destName?: string;
+  /** Laufende Nav ersetzen (Tour-Modus: „Route neu“). */
+  replaceRoute?: boolean;
+  /** Als Stopp einsortieren, Reihenfolge neu optimieren. */
+  addStop?: boolean;
+  /** Uber: formatierte Zieladresse (Anzeige in Uber-App). */
+  dropoffFormattedAddress?: string;
+  /** Uber: gewünschte Abholzeit HH:mm → Reserve-Deep-Link mit pickup_formatted_time. */
+  pickupTimeLabel?: string;
   /** Stay22 Zielstadt / Adresse */
   destination?: string;
   /** Hotel: vorausgefüllte Daten (Stay22 / Expedia) */
@@ -55,6 +63,10 @@ export type QuickActionPayload = {
   headingDeg?: number;
   /** Closing-gate bypass after explicit „trotzdem“ */
   skipClosingGate?: boolean;
+  /** Fernziel-Verify überspringen (User hat Pin/Ja bestätigt) */
+  skipDestVerify?: boolean;
+  /** ÖPNV door-to-door: gecachte Journey starten */
+  journeyNav?: boolean;
   /** Nach Navigation Karte/Stichpunkte behalten (Arzt/Notfall) */
   keepCard?: boolean;
   /** Modul-1 „Mehr Historie“ → Deep-Dive am aktuellen POI (nicht Modul-2/Planung) */
@@ -67,6 +79,10 @@ export type QuickActionPayload = {
   offlineOnly?: boolean;
   /** Radweg / Bike-Empfehlung → Session auf Zweirad umstellen */
   preferBike?: boolean;
+  /** User hat explizit Zu-Fuß gewählt (keine erneute ÖPNV-Wahl) */
+  preferWalk?: boolean;
+  /** User hat explizit ÖPNV gewählt (Journey planen/starten, kein Auto-Fuß) */
+  preferTransit?: boolean;
   /** Local post-action flow, e.g. after choosing a restaurant */
   autoFollowUp?: 'reservation';
   /** Multi-Stop: Essen → Aussicht usw. (Action startet Tour) */
@@ -92,6 +108,13 @@ export type QuickActionPayload = {
   expandKind?: 'poi_history' | 'activity' | 'knowledge' | 'offer';
   /** Affiliate-Kennzeichnung */
   affiliateMarked?: boolean;
+  /** Tap-Chip ohne Mic (continueTurnFromChoice) */
+  choiceTap?: {
+    parentTurnId: string;
+    choiceId: string;
+    slotKey: string;
+    label: string;
+  };
 };
 
 export type QuickAction = {
@@ -119,6 +142,8 @@ export type GeminiConciergeResponse = {
   quickActions: QuickAction[];
   /** Optionaler Kartentitel */
   cardTitle?: string;
+  /** Optionaler Untertitel (z. B. Kategorie unter dem Pin-Namen) */
+  cardSubtitle?: string;
   /**
    * Native Side-Effects (Wecker etc.).
    * Müssen erfolgreich laufen, bevor speechText Erfolg behauptet.

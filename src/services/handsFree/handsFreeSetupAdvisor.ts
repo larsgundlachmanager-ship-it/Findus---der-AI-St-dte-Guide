@@ -42,7 +42,7 @@ export function wantsHandsFreeSetup(text: string): boolean {
     /\b(sprechen[- ]?notification|mikro(?:fon)?[- ]?(?:shortcut|taste|button))\b/i.test(
       t,
     ) ||
-    /\b(findus\s+aktivier|mikro\s+aktivier|leichter\s+ansprechen)\b/i.test(t) ||
+    /\b((?:yorro|findus)\s+aktivier|mikro\s+aktivier|leichter\s+ansprechen)\b/i.test(t) ||
     /\b(power[- ]?taste|gemini|assistent(?:en)?[- ]?(?:taste|einstellung))\b/i.test(
       t,
     )
@@ -121,7 +121,7 @@ export async function enableSpeakNotification(): Promise<{
       return {
         ok: false,
         message:
-          'Notification-Recht fehlt noch — bitte unter System → Apps → Findus erlauben, dann sag nochmal „Notification an“.',
+          'Notification-Recht fehlt noch — bitte unter System → Apps → Yorro erlauben, dann sag nochmal „Notification an“.',
       };
     }
     await syncHandsFreeListenNotification();
@@ -129,7 +129,7 @@ export async function enableSpeakNotification(): Promise<{
   return {
     ok: true,
     message:
-      'Passt — „Findus bereit“ mit dem Button „Sprechen“ liegt jetzt in den Notifications. Tippen startet das Mikro hands-free, auch vom Sperrbildschirm.',
+      'Passt — „Yorro bereit“ mit dem Button „Sprechen“ liegt jetzt in den Notifications. Tippen startet das Mikro hands-free, auch vom Sperrbildschirm.',
   };
 }
 
@@ -150,7 +150,7 @@ export async function pinListenHomeShortcut(): Promise<{
       return {
         ok: false,
         message:
-          'Dein Launcher lässt kein automatisches Anpinnen zu. Lang aufs Findus-Icon drücken → „Sprechen“ auf den Homescreen ziehen.',
+          'Dein Launcher lässt kein automatisches Anpinnen zu. Lang aufs Yorro-Icon drücken → „Sprechen“ auf den Homescreen ziehen.',
       };
     }
     return {
@@ -210,7 +210,7 @@ export function buildHandsFreeOffer(report: HandsFreeCapabilityReport): {
         : 'Notification „Sprechen“ möglich',
     );
     lines.push(
-      'Ich kann eine feste Notification „Findus bereit“ mit dem Button „Sprechen“ legen — Tippen startet das Mikro, auch vom Sperrbildschirm.',
+      'Ich kann eine feste Notification „Yorro bereit“ mit dem Button „Sprechen“ legen — Tippen startet das Mikro, auch vom Sperrbildschirm.',
     );
     buttons.push(
       promptButton(
@@ -236,7 +236,7 @@ export function buildHandsFreeOffer(report: HandsFreeCapabilityReport): {
   } else if (report.hasLauncherLongPressShortcut) {
     bullets.push('Icon lang drücken → Sprechen');
     lines.push(
-      'Automatisches Anpinnen geht auf dem Launcher nicht — aber: Findus-Icon lange drücken, „Sprechen“ erscheint und kannst du auf den Homescreen legen.',
+      'Automatisches Anpinnen geht auf dem Launcher nicht — aber: Yorro-Icon lange drücken, „Sprechen“ erscheint und kannst du auf den Homescreen legen.',
     );
   }
 

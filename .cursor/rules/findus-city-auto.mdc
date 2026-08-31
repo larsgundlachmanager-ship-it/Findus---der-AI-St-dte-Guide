@@ -19,7 +19,7 @@ Wenn der User **nur einen Stadtnamen** nennt oder schreibt:
 ## Pflicht-Ablauf (Agent)
 
 1. `npm run city:auto -- --city "<Name>" --id <slug>`  
-   (Skeleton → Directory → Classify → Live-Hints → Wikipedia → Polish → Entrances → Cover → Gate → `data/staedte/<id>.agent-brief.md`)
+ (Skeleton → Directory → Classify → Live-Hints → Wikipedia → **Wiki-Tiefe** (`city:wiki-depth`) → Polish → **Review-Facetten** (`city:review-facets`: stabile Gastro-Tags aus Google-Reviews, keine Preise) → **GPS/Wegweiser-Loop** (`city:gps-wegweiser`: Story-Pins + visuelle Approaches + **OSM-Gebäudeumrisse** wie Prisdorf + Offline-Karte) → Cover → Gate → `data/staedte/<id>.agent-brief.md`)
 2. **Deep Research selbst** nach `findus-agent-deep-research.mdc` (ehem. Gemini-Prompt):  
    Spots + 50 Kategorien, Web/Chroniken/Gemeinde — nichts erfinden; LIVE-only; keine Dialog-Skripte  
 3. Merge per ID (`*.research.json` + Merge/Polish; Merge-Matcher: **ID first**, kurze Stadtnamen nicht falsch matchen)
@@ -53,6 +53,24 @@ Optional: User darf trotzdem Research pasten — dann nur mergen.
 ## SSOT Scripts
 
 - `npm run city:auto`
+- `npm run city:refresh-all` — bestehende Packs auf denselben Stand (Wiki-Tiefe + Review-Facetten + GPS/Wegweiser + OSM-Umrisse + Offline-Karte + `upload:city`; Resume über `data/staedte/_refresh_all_state.json`)
+- `npm run city:demand:process` — Queue ab **10 Unique-Usern** in Soft-Stadt → `city:auto` + `upload:city` (CI: `.github/workflows/city-pack-demand.yml`)
+- `npm run city:gps-wegweiser -- --city <id>` (Story-GPS + visuelle Wegweiser + OSM-Umrisse + Offline-Karte — läuft in `city:auto` und nach Research-Merge automatisch)
+- `npm run city:osm-footprints -- --city <id>` (einzeln; in gps-wegweiser mit `--no-upload` enthalten)
 - `npm run city:wiki -- --city <id> --apply`
+- `npm run city:wiki-depth -- --city <id>` (Story-Textpool aus Wikipedia, nur belegte Sätze)
+- `npm run city:review-facets -- --city <id>` (stabile Gastro-Tags aus Reviews: Steak/vegan/Terrasse — keine Preise, kein Review-Volltext)
 - `npm run city:cover:queue` / `city:cover:pending` / `city:cover:apply`
 - Pack-Builder-Details: `findus-city-pack-builder.mdc`
+
+## Auto aus Nachfrage (≥ 10 User)
+
+App pinged Soft-/GPS-Städte ohne Pack (`cityPackDemand` → Supabase `ping_city_pack_demand`).
+Ab **10** Unique-Contributors: Status `queued` → Workflow/`city:demand:process` baut vollen Datensatz und lädt hoch.
+
+## Auto aus neuem Ort (User fragt / „wo bin ich“)
+
+App recherchiert → schreibt den Ort **sofort lokal** in SQLite (Overlay überlebt Pack-Replace) → `submit_pack_spot` in `pack_spot_inbox`.
+CI `city:spot:process` merget in `data/staedte/<id>.json` (neue Pack-Version), läuft wiki-depth + review-facets + gps-wegweiser (über `city:merge-research`) und `upload:city`.
+**Live-Recherche** (Gastro-Treffer + Review-Tags) geht denselben Weg automatisch — auch bei schon bekannten Orten, wenn neue Facetten dazukommen.
+Bushaltestellen/Shops bleiben Directory; Museen/Denkmäler mit Wiki werden Story.

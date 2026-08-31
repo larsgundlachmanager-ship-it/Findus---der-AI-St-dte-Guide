@@ -227,18 +227,33 @@ export function formatCommunityTipSpeech(
   tip: CommunityPlaceAggregate,
 ): string | null {
   const total = tip.positiveCount + tip.negativeCount;
-  if (tip.positiveCount < 3) return null; // zu wenig Signal
-  const disappointRate =
-    total > 0 ? tip.negativeCount / total : 0;
+  if (total < 1) return null;
+
+  const disappointRate = total > 0 ? tip.negativeCount / total : 0;
+
+  // Stark negativ (≥3 Negativ, Mehrheit enttäuscht) → Avoid für alle
+  if (tip.negativeCount >= 3 && disappointRate >= 0.5) {
+    const kind =
+      tip.placeType === 'hotel'
+        ? 'dieses Hotel'
+        : tip.placeType === 'restaurant'
+          ? 'dieses Restaurant'
+          : tip.placeName;
+    return `Kurz von anderen Yorro-Usern: ${
+      kind === tip.placeName ? tip.placeName : `${kind} (${tip.placeName})`
+    } kam oft schlecht an — eher meiden, wenn du Alternativen hast.`;
+  }
+
+  if (tip.positiveCount < 3) return null; // zu wenig Positiv-Signal
   if (disappointRate > 0.35) return null;
 
   let crowd: string;
   if (tip.positiveCount >= 100) {
-    crowd = `über ${Math.floor(tip.positiveCount / 10) * 10} Findus-User`;
+    crowd = `über ${Math.floor(tip.positiveCount / 10) * 10} Yorro-User`;
   } else if (tip.positiveCount >= 20) {
-    crowd = 'schon viele Findus-User';
+    crowd = 'schon viele Yorro-User';
   } else {
-    crowd = 'schon mehrere Findus-User';
+    crowd = 'schon mehrere Yorro-User';
   }
 
   const rarely =
@@ -268,15 +283,19 @@ export function communityTipsPromptBlock(
     .map((t) => {
       const speech = formatCommunityTipSpeech(t);
       if (!speech) return null;
+      const avoid =
+        t.negativeCount >= 3 &&
+        t.negativeCount / Math.max(1, t.positiveCount + t.negativeCount) >= 0.5;
       return `- ${t.placeName}: +${t.positiveCount}/−${t.negativeCount}${
         t.topDishes[0] ? ` · Gerichte: ${t.topDishes.join(', ')}` : ''
-      } → Stimme: „${speech}“`;
+      }${avoid ? ' · AVOID' : ''} → Stimme: „${speech}“`;
     })
     .filter(Boolean);
   if (!lines.length) return '';
   return [
-    '=== COMMUNITY-TIPPS (anonym, von Findus-Usern) ===',
-    'Wenn relevant: natürlich einflechten (nicht als Werbung). Schwache Signale (<3 positiv) ignorieren.',
+    '=== COMMUNITY-TIPPS (anonym, von Yorro-Usern) ===',
+    'Wenn relevant: natürlich einflechten. Positiv ab ~3; stark negativ (AVOID) ehrlich meiden/Alternative.',
+    'Schwache Signale ignorieren — nichts erfinden.',
     ...lines,
   ].join('\n');
 }

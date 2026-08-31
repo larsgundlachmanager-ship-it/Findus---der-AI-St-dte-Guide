@@ -1,4 +1,4 @@
-import { haversineMeters } from '../../db/database';
+import { haversineMeters } from '../geo/haversine';
 
 /** Absolute bearing from A → B in degrees [0, 360), 0 = north, 90 = east. */
 export function bearingDegrees(

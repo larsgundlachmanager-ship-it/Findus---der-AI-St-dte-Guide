@@ -52,6 +52,30 @@ function toMultiStop(req: TourRequest, result: TourResult): MultiStopTour {
   };
 }
 
+/** Pack-Heimat ≠ genannte Zielstadt → kein 80-km-Dump aus dem falschen Pack. */
+function packCityMismatchesDest(req: TourRequest): boolean {
+  try {
+    const { readRucksackSync } = require('../rucksack/rucksackStore') as {
+      readRucksackSync: () => { cityHint?: string | null };
+    };
+    const pack = (readRucksackSync()?.cityHint || '').trim();
+    let dest = (req.areaHint || '').trim();
+    if (!dest) {
+      const { extractCityFromText } = require('../context/shortTermContext') as {
+        extractCityFromText: (s: string) => string | null;
+      };
+      dest = extractCityFromText(`${req.title} ${req.context}`) || '';
+    }
+    if (!pack || !dest) return false;
+    const { sameFoldedCity } = require('../planning/planDestinationCity') as {
+      sameFoldedCity: (a: string, b: string) => boolean;
+    };
+    return !sameFoldedCity(pack, dest);
+  } catch {
+    return false;
+  }
+}
+
 export async function runTourModule(req: TourRequest): Promise<TourResult> {
   if (req.needsDurationAsk) {
     useTourDurationPendingStore.getState().setPending({
@@ -82,9 +106,108 @@ export async function runTourModule(req: TourRequest): Promise<TourResult> {
     };
   }
 
-  const pool = await collectTourCandidates(req);
-  const ranked = filterAndRankCandidates(req, pool);
-  const planned = await planWithRetries({ req, ranked });
+  let working: TourRequest = { ...req };
+  if (!working.endAnchor) {
+    try {
+      const { resolveTourEndAnchorFromText } = await import('./endAnchor');
+      const end = await resolveTourEndAnchorFromText(
+        working.context,
+        working.anchor,
+      );
+      if (end) working = { ...working, endAnchor: end };
+    } catch {
+      /* soft */
+    }
+  }
+
+  const { resolveTourExploreAnchor } = await import('./exploreAnchor');
+  const explore = await resolveTourExploreAnchor(working);
+  const anchored: TourRequest = {
+    ...working,
+    anchor: { lat: explore.lat, lng: explore.lng },
+    radiusM: explore.radiusM,
+  };
+
+  let pool = await collectTourCandidates(anchored);
+  if (pool.length < 4) {
+    const wider: TourRequest = {
+      ...anchored,
+      radiusM: Math.max(explore.radiusM, 12_000),
+      areaHint: null,
+      categoryMust: [],
+      visitedExclude: false,
+    };
+    pool = await collectTourCandidates(wider);
+    Object.assign(anchored, {
+      radiusM: wider.radiusM,
+      areaHint: null,
+      categoryMust: [],
+      visitedExclude: false,
+    });
+  }
+  // Letzter Halt: Pack-Highlights stadtweit, nicht Tennis-GPS-Radius —
+  // nie das Heimat-Pack in eine andere Zielstadt kippen.
+  if (
+    pool.length < 4 &&
+    anchored.mode === 'stop_tour' &&
+    !packCityMismatchesDest(anchored)
+  ) {
+    const cityWide: TourRequest = {
+      ...anchored,
+      radiusM: 80_000,
+      areaHint: null,
+      categoryMust: [],
+      visitedExclude: false,
+    };
+    pool = await collectTourCandidates(cityWide);
+    Object.assign(anchored, {
+      radiusM: cityWide.radiusM,
+      areaHint: null,
+      categoryMust: [],
+      visitedExclude: false,
+    });
+  }
+  const ranked = filterAndRankCandidates(anchored, pool);
+  let planned = await planWithRetries({ req: anchored, ranked });
+  if (planned.stops.length < 2 && ranked.length >= 2) {
+    planned = {
+      ...planned,
+      stops: ranked.slice(0, 4).map((c, i) => ({
+        poiId: c.poiId,
+        name: c.name,
+        lat: c.lat,
+        lng: c.lng,
+        dwellMin: i === 0 ? 15 : 12,
+        waypoint: false,
+        priority: c.priority,
+      })),
+      totalMin:
+        planned.totalMin > 10
+          ? planned.totalMin
+          : anchored.timeBudgetMin ?? anchored.softDurationMin ?? 90,
+      softFail: false,
+    };
+  }
+  if (planned.stops.length < 2 && !packCityMismatchesDest(anchored)) {
+    const { fallbackCityHighlightStops } = await import('./candidatePool');
+    const highlights = await fallbackCityHighlightStops(anchored);
+    if (highlights.length >= 2) {
+      planned = {
+        ...planned,
+        stops: highlights.slice(0, 4).map((c, i) => ({
+          poiId: c.poiId,
+          name: c.name,
+          lat: c.lat,
+          lng: c.lng,
+          dwellMin: i === 0 ? 18 : 12,
+          waypoint: false,
+          priority: 'must' as const,
+        })),
+        totalMin: anchored.timeBudgetMin ?? anchored.softDurationMin ?? 90,
+        softFail: false,
+      };
+    }
+  }
 
   const spokenText = buildTourSpeech({
     req,

@@ -58,8 +58,49 @@ function persistSoon(): void {
     void FileSystem.writeAsStringAsync(
       PATH,
       JSON.stringify({ entries: prune(entries), savedAt: Date.now() }),
-    ).catch(() => undefined);
+    )
+      .then(() => notifyCloudSoon())
+      .catch(() => undefined);
   }, 1_200);
+}
+
+function notifyCloudSoon(): void {
+  void import('../account/userCloudSync')
+    .then((m) => m.scheduleUserCloudPush())
+    .catch(() => undefined);
+}
+
+export function snapshotVisitLogForCloud(): VisitLogEntry[] {
+  return entries.slice(-8_000);
+}
+
+export async function applyVisitLogFromCloud(
+  remote: VisitLogEntry[],
+): Promise<void> {
+  await hydrateVisitLog();
+  if (!Array.isArray(remote) || remote.length === 0) return;
+  const map = new Map<string, VisitLogEntry>();
+  for (const e of remote) {
+    if (e?.id) map.set(e.id, e);
+  }
+  for (const e of entries) {
+    const cur = map.get(e.id);
+    if (!cur) {
+      map.set(e.id, e);
+      continue;
+    }
+    const score = (x: VisitLogEntry) => (x.leftAtMs ?? 0) + x.arrivedAtMs;
+    map.set(e.id, score(e) >= score(cur) ? e : cur);
+  }
+  entries = prune([...map.values()]);
+  try {
+    await FileSystem.writeAsStringAsync(
+      PATH,
+      JSON.stringify({ entries, savedAt: Date.now() }),
+    );
+  } catch {
+    /* soft */
+  }
 }
 
 export async function hydrateVisitLog(): Promise<void> {

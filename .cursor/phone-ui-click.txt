@@ -1,0 +1,26 @@
+[440,152][534,247]	›	
+[614,156][770,243]	Heute	
+[780,155][944,244]	Monatsansicht öffnen	
+[954,147][1059,252]	Timeline schließen	
+[75,301][789,399]	Route auf- oder zuklappen	
+[815,311][1006,389]	Route beenden	
+[238,652][1028,760]	Heisterhoop 12, Aufenthalt	
+[21,803][1059,992]	01:55, &#128205;	
+[238,841][1028,949]	Heisterhoop 12, Aufenthalt	
+[21,992][1059,1181]	02:41, Jetzt	
+[21,1181][1059,1276]	02:41	
+[226,1192][457,1265]	Löschen	
+[21,1276][1059,1465]	02:45, 02:53, &#128205;	
+[259,1314][1028,1421]	1 · von 1967, Ankunft · Tour fertig ~02:53	
+[226,1287][457,1455]	Löschen	
+[681,276][786,381]	Auf meine Position zentrieren. Nochmal innerhalb von 5 Sekunden: Karte folgt dir.	
+[807,276][912,381]	Norden oben. Nochmal innerhalb von 5 Sekunden: Karte dreht mit der Blickrichtung.	
+[933,276][1038,381]	Kompass kalibrieren	
+[367,2194][713,2329]	Orte finden	
+[713,2194][1059,2329]	Einstellungen	540 202  &#127783; Aktuell 12°. Tippen: Wetter und Tipps. Wischen: nächste Karte.
+1038 202  &#128205; Hier in der Gegend. Tippen: Tipps. Wischen: nächste Karte. Unten: Timeline · Orte · Einst.
+733 328  Auf meine Position zentrieren. Nochmal innerhalb von 5 Sekunden: Karte folgt dir.
+859 328  Norden oben. Nochmal innerhalb von 5 Sekunden: Karte dreht mit der Blickrichtung.
+985 328  Kompass kalibrieren
+540 2261  Orte finden
+886 2261  Einstellungen

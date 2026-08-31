@@ -1,0 +1,717 @@
+{
+  "notes": [
+    "Deep Research D für Amsterdam, Stand 21.08.2026. Alle angeforderten IDs sind exakt übernommen; die Texte sind deutsch, faktenorientiert und ohne Dialog- oder Vorleseskripte.",
+    "Stabile Orts-, Bau- und Nutzungsgeschichte wurde mit offiziellen Institutionen, Gemeente Amsterdam, Stadsarchief, Erfgoedregister, Architektur- und Museumsseiten sowie ergänzenden Enzyklopädiequellen abgeglichen.",
+    "Öffnungszeiten, Eintritt, Märkte, Fahrpläne, Konzerte, Ausstellungen, Gottesdienste, Führungen und Zugänglichkeit sind veränderlich und stehen ausschließlich als LIVE-Hinweise."
+  ],
+  "sources": [
+    "https://www.amsterdam.nl/stadsarchief/",
+    "https://erfgoedregister.amsterdam.nl/",
+    "https://www.amsterdam.nl/nieuws/erfgoed-week/archeologie-waterlooplein/",
+    "https://www.amsterdammuseum.nl/en/tickets-and-visit/locations/huis-willet-holthuysen/3632",
+    "https://www.hartmuseum.nl/",
+    "https://www.micropia.nl/en/discover/",
+    "https://www.houseboatmuseum.nl/",
+    "https://www.oba.nl/",
+    "https://www.operaballet.nl/stopera-amsterdam",
+    "https://www.muziekgebouw.nl/en/about-us/the-building/",
+    "https://www.bimhuis.nl/over-ons/geschiedenis",
+    "https://www.paradiso.nl/",
+    "https://www.melkweg.nl/",
+    "https://carre.nl/pagina/geschiedenis-carre",
+    "https://www.olympischstadion.nl/geschiedenis/",
+    "https://westergas.nl/en/history/",
+    "https://whc.unesco.org/en/list/1349/",
+    "https://www.hetschip.nl/en/visitors/locations-opening-hours/het-schip",
+    "https://www.amsterdam.nl/verkeer-vervoer/sprong-ij-snel-makkelijk-veilig-overkant/ponten-ij/",
+    "https://ijhallen.nl/en/locatie.php",
+    "https://www.amsterdam.nl/leefomgeving/parken-recreatiegebieden/",
+    "https://www.felixmeritis.nl/",
+    "https://www.dekrijtberg.nl/",
+    "https://bijbelsmuseum.nl/"
+  ],
+  "spots": [
+    {
+      "id": "amsterdam_singel",
+      "name": "Singel",
+      "general_info": "Der Singel war vom späten Mittelalter bis zur Stadterweiterung um 1585 Amsterdams äußerer Wassergraben. Heute markiert seine Bogenform den Rand des mittelalterlichen Kerns und führt vom IJ am Muntplein zurück zur Amstel.",
+      "deep_data_pool": [
+        {"text": "Der Singel wurde im frühen 15. Jahrhundert als äußerer Stadtgraben angelegt. Er schloss die damalige Siedlung zusammen mit Kloveniersburgwal und Geldersekade ein; die drei Wasserläufe machten die Grenze der spätmittelalterlichen Stadt lesbar.", "tags": ["geschichte","stadtbefestigung"]},
+        {"text": "Bis zur Erweiterung von 1585 lag am Singel die Außenseite der Stadt. Danach rückten Wall und Graben zur heutigen Singelgracht, und der alte Wehrgraben wurde Teil des innerstädtischen Grachtennetzes statt militärischer Rand.", "tags": ["stadtentwicklung","wasser"]},
+        {"text": "Der nördliche Abschnitt öffnet sich am IJ und folgt über Haarlemmerstraat und Brouwersgracht dem alten Hafenraum. Südlich endet der Bogen am Muntplein, wo die Amstel als Rokin in den historischen Kern hineinführt.", "tags": ["orientierung","stadtgrundriss"]},
+        {"text": "Im 17. Jahrhundert wurde besonders die Westseite mit Wohn- und Handelshäusern verdichtet. Speicher, Kaufmannshäuser und schmale Parzellen zeigen, dass die Gracht zugleich Adresse, Verkehrsweg und wirtschaftliche Infrastruktur war.", "tags": ["grachtenhaus","handel"]},
+        {"text": "An der Torensluis lag der Jan-Rodenpoortstoren, ein großer mittelalterlicher Wehrturm. Sein Unterbau blieb in der breiten Brücke erhalten; damit verbindet der Singel sichtbare Grachtenidylle mit Resten der ehemaligen Befestigung.", "tags": ["torensluis","quer"]},
+        {"text": "Der Bloemenmarkt liegt auf schwimmenden beziehungsweise auf dem Wasser stehenden Verkaufsständen am südlichen Singel. Sein heutiges Sortiment und seine touristische Prägung sind jünger als die Gracht selbst und dürfen nicht mit deren mittelalterlicher Geschichte verwechselt werden.", "tags": ["markt","einordnung"]},
+        {"text": "Visuell: Der Singel ist keine einzelne Platzadresse, sondern ein langer Kanalbogen. Orientierung geben Torensluis, Ronde Lutherse Kerk, Koningsplein und Munt; die Fassaden stehen dicht an schmalen Kaimauern mit regelmäßig wiederkehrenden Brücken.", "tags": ["visuell","wegweiser"]},
+        {"text": "LIVE: Baustellen an Kaimauern, Brückensperrungen, Marktbelegung, Schifffahrt und sichere Fuß- oder Radrouten verändern sich. Aktuelle Hinweise der Stadt und Betreiber prüfen; historische Nutzungen sagen nichts über heutige Öffnungen aus.", "tags": ["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q": "War der Singel immer eine Wohngracht?", "a": "Nein. Er begann als äußerer Wehr- und Stadtgraben und wurde erst nach späteren Erweiterungen zur innerstädtischen Gracht."}]
+    },
+    {
+      "id": "amsterdam_waterlooplein",
+      "name": "Waterlooplein",
+      "general_info": "Der Waterlooplein entstand 1882 durch das Zuschütten von Leprozengracht und Houtgracht auf der früheren Insel Vlooienburg. Markt, jüdische Stadtgeschichte, Kriegszerstörung und Stopera überlagern sich hier.",
+      "deep_data_pool": [
+        {"text": "Vlooienburg war seit dem späten 16. Jahrhundert eine künstlich angelegte Insel. Im 17. Jahrhundert ließen sich dort viele aus Portugal, Spanien und später Mittel- und Osteuropa kommende jüdische Familien nieder; das Viertel war ein Kerngebiet, aber kein abgeschlossenes Ghetto.", "tags": ["juedische_geschichte","vlooienburg"]},
+        {"text": "Vier von fünf Bewohnern Vlooienburgs waren zeitweise jüdisch. Wohnungen, kleine Betriebe, Synagogen in der Umgebung und später diamantverarbeitende Fabriken machten die Insel zu einem dicht bewohnten Arbeits- und Lebensraum.", "tags": ["alltag","arbeit"]},
+        {"text": "1882 wurden Leprozengracht und Houtgracht verfüllt. Der neue Platz erhielt den Namen Waterlooplein und nahm Händler auf, die zuvor unter anderem am Jodenbreestraat-Markt tätig gewesen waren; der Gebrauchtwarenhandel wurde zu seinem bekanntesten Merkmal.", "tags": ["markt","stadtumbau"]},
+        {"text": "Die deutsche Besatzung zerstörte die soziale Struktur des Viertels. Rund 1.600 auf Vlooienburg verbliebene jüdische Bewohner wurden deportiert; geplünderte und verlassene Häuser machten die Gegend nach dem Krieg zu einer nahezu entvölkerten Ruinenlandschaft.", "tags": ["zweiter_weltkrieg","erinnerung"]},
+        {"text": "Die letzten älteren Wohnhäuser verschwanden 1981 für den Bau des Rathaus- und Opernkomplexes. Vorher führte die Stadt eine große archäologische Ausgrabung durch; Funde und Modelle dokumentieren die unter dem heutigen Platz liegenden Schichten.", "tags": ["archaeologie","stopera"]},
+        {"text": "Die Stopera schließt die Südostseite, während Mozes-en-Aäronkerk und der Zugang zum Joods Cultureel Kwartier die historischen Nachbarschaften markieren. Der Platz ist deshalb Verbindung zwischen Amstel, Nieuwmarkt und Plantage.", "tags": ["orientierung","quer"]},
+        {"text": "Visuell: Eine offene, langgestreckte Marktfläche liegt vor dem hellen, gebogenen Rathauskomplex. Reihen temporärer Verkaufsstände können den Raum prägen; ohne Markt bleibt die weite Pflasterfläche zwischen Amstelstraat und Stopera sichtbar.", "tags": ["visuell","wegweiser"]},
+        {"text": "LIVE: Markttage, Standbelegung, Aufbauzeiten, Veranstaltungen und Baustellen nur bei Gemeente Amsterdam und Marktbetreibern prüfen. Einzelne Händler, Waren oder Öffnungszeiten sind nicht als dauerhafte Pack-Fakten zu behandeln.", "tags": ["live_hint","ephemeral","markt"]}
+      ],
+      "faqs": [{"q": "Was lag vor dem Waterlooplein hier?", "a": "Die Insel Vlooienburg mit Grachten und einem dicht bewohnten, stark jüdisch geprägten Stadtviertel."}]
+    },
+    {
+      "id": "amsterdam_noorderkerk",
+      "name": "Noorderkerk",
+      "general_info": "Die 1620 bis 1623 errichtete Noorderkerk war die erste eigens für protestantischen Gottesdienst entworfene Kirche Amsterdams. Ihr zentraler Kreuzgrundriss steht mitten im Jordaan am Noordermarkt.",
+      "deep_data_pool": [
+        {"text": "Die Stadt beschloss 1620 den Bau einer Kirche für die rasch gewachsene Bevölkerung des Jordaan. Sie gehörte mit Zuiderkerk, Westerkerk und Oosterkerk zu den neuen reformierten Kirchen, die verschiedene Himmelsrichtungen der expandierenden Stadt versorgten.", "tags": ["geschichte","reformation"]},
+        {"text": "Hendrick de Keyser entwarf die Noorderkerk kurz vor seinem Tod 1621; sein Sohn Pieter führte die Arbeiten fort. Die Eröffnung folgte 1623. Anders als ältere, für katholische Liturgie gebaute Kirchen entstand sie von Anfang an für die reformierte Predigt.", "tags": ["architekt","baugeschichte"]},
+        {"text": "Der Grundriss bildet ein griechisches Kreuz mit annähernd gleich langen Armen. Vier große Pfeiler strukturieren den Zentralraum, sodass Kanzel und gesprochenes Wort aus vielen Richtungen gut wahrnehmbar waren.", "tags": ["architektur","grundriss"]},
+        {"text": "Der gedrungene Dachreiter sitzt über dem Zentrum. Außen wechseln Backsteinflächen, Natursteindetails und große Rundbogenfenster; der Bau wirkt kompakter als die langgestreckten mittelalterlichen Hallenkirchen der Altstadt.", "tags": ["visuell","architektur"]},
+        {"text": "Auf dem Noordermarkt erinnert eine Gedenktafel an den Jordaan-Aufstand von 1934, der sich gegen Kürzungen der Arbeitslosenunterstützung richtete und gewaltsam niedergeschlagen wurde. Kirche und Platz gehören damit auch zur Geschichte des Arbeiterviertels.", "tags": ["jordaan","sozialgeschichte"]},
+        {"text": "Am 24. Februar 1941 versammelten sich Menschen auf dem Platz zu einem Auftakt des Februarstreiks gegen die Judenverfolgung. Die Noorderkerk steht dadurch nahe einem wichtigen Erinnerungsort zivilen Widerstands.", "tags": ["februarstreik","erinnerung"]},
+        {"text": "Visuell: Der freistehende, kreuzförmige Backsteinbau steht auf der Nordseite des Noordermarkt. Erkennbar sind die vier kräftigen Giebelarme, hohe Rundbogenfenster und der kleine mittige Dachreiter statt eines hohen Westturms.", "tags": ["visuell","wegweiser"]},
+        {"text": "LIVE: Gottesdienste, Konzerte, Besichtigungen, Marktaufbau und Zugänglichkeit des Innenraums aktuell bei Gemeinde und Veranstaltern prüfen. Kirchliche Nutzung und Wochenmarkt können den Zugang unterschiedlich beeinflussen.", "tags": ["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q": "Warum ist die Noorderkerk kreuzförmig?", "a": "Der Zentralbau wurde für protestantische Predigtgottesdienste geplant; Kanzel und Wort sollten von vielen Plätzen gut erreichbar sein."}]
+    },
+    {
+      "id": "amsterdam_museum_willet_holthuysen",
+      "name": "Museum Willet-Holthuysen",
+      "general_info": "Das doppelt breite Grachtenhaus Herengracht 605 bewahrt die Wohnwelt des Sammlerehepaars Abraham Willet und Louisa Holthuysen. Louisa vermachte Haus und Sammlung 1895 der Stadt Amsterdam.",
+      "deep_data_pool": [
+        {"text": "Das Haus wurde im 17. Jahrhundert angelegt und erhielt im 18. Jahrhundert seine repräsentative doppelte Fassade. Seine außergewöhnliche Breite machte Raum für getrennte Empfangs-, Wohn- und Dienstbereiche eines wohlhabenden Haushalts.", "tags": ["baugeschichte","grachtenhaus"]},
+        {"text": "Louisa Holthuysen heiratete 1861 Abraham Willet. Das Paar sammelte Gemälde, Glas, Silber, Keramik, Bücher und kunstgewerbliche Objekte; Abraham bewegte sich als Kunstkenner und Amateurmaler in Amsterdamer Sammlerkreisen.", "tags": ["sammlung","bewohner"]},
+        {"text": "Die Innenräume wurden im Geschmack des 18. und 19. Jahrhunderts gestaltet. Ballsaal, Speisezimmer, Salons und Schlafzimmer zeigen nicht einfach einen unveränderten Zustand von 1700, sondern mehrere Phasen bewusster historischer Inszenierung.", "tags": ["interieur","zeitschichten"]},
+        {"text": "Hinter den repräsentativen Zimmern lagen Küchen- und Dienstbereiche. Sie machen die unsichtbare Arbeit deutlich, die den Lebensstil der Eigentümer trug; das Haus erzählt daher sowohl von Reichtum als auch von Hauspersonal und sozialer Hierarchie.", "tags": ["alltag","sozialgeschichte"]},
+        {"text": "Louisa Holthuysen starb 1895 und vermachte Haus, Einrichtung und Sammlung der Stadt unter der Bedingung, daraus ein Museum zu machen. 1896 öffnete das Museum; es gehört heute zum Amsterdam Museum.", "tags": ["museumsgeschichte","stiftung"]},
+        {"text": "Der formale Garten hinter dem Haus wurde nach historischen Vorbildern rekonstruiert. Seine symmetrischen Beete und geschnittenen Formen gehören zur Präsentation des Stadthauses, sind aber keine unverändert erhaltene Momentaufnahme des 19. Jahrhunderts.", "tags": ["garten","denkmalpflege"]},
+        {"text": "Visuell: An der Herengracht fällt eine symmetrische, doppelt breite Sandsteinfassade mit hohem Treppenaufgang auf. Innen folgen reich dekorierte Period Rooms; der Garten liegt verborgen hinter dem tiefen Grundstück.", "tags": ["visuell","wegweiser"]},
+        {"text": "LIVE: Öffnungszeiten, Eintritt, restaurierungsbedingt geschlossene Zimmer, zeitgenössische Wechselausstellungen und Gartenöffnung ausschließlich beim Amsterdam Museum prüfen. Die historischen Räume können abschnittsweise anders inszeniert sein.", "tags": ["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q": "Warum heißt das Haus Willet-Holthuysen?", "a": "Nach Abraham Willet und Louisa Holthuysen, dem Sammlerehepaar, dessen Haus und Besitz Louisa der Stadt vermachte."}]
+    },
+    {
+      "id": "amsterdam_h_art_museum",
+      "name": "H'ART Museum",
+      "general_info": "Das H'ART Museum nutzt das monumentale Amstelhof, ein 1683 eröffnetes Diakoniewaisen- und Altenhaus an der Amstel. Seit 2009 dient der Komplex als Ausstellungshaus; 2023 erhielt er seinen heutigen Namen.",
+      "deep_data_pool": [
+        {"text": "Die reformierte Diakonie ließ den Amstelhof im 17. Jahrhundert für ältere, bedürftige Frauen errichten. Der große Vierflügelbau öffnete 1683 und gruppiert sich um einen Innenhof; seine Dimension zeigt die institutionalisierte Armenfürsorge der reichen Handelsstadt.", "tags": ["geschichte","fuersorge"]},
+        {"text": "Später nahm das Haus auch Männer auf und blieb mehr als drei Jahrhunderte Pflegeeinrichtung. Schlafsäle, Regentenräume, Kirche, Küchen und Wirtschaftsbereiche waren Teil einer weitgehend in sich geschlossenen sozialen Institution.", "tags": ["sozialgeschichte","nutzung"]},
+        {"text": "Die klassisch strenge Fassade an der Amstel besitzt einen hervorgehobenen Mittelrisalit und regelmäßige Fensterachsen. Hinter ihr liegt ein großer Hof, der den massiven Komplex belichtet und seine vier Flügel ordnet.", "tags": ["architektur","visuell"]},
+        {"text": "Nachdem die Pflegefunktion verlegt worden war, wurde der denkmalgeschützte Bau umfassend zum Museum umgebaut. 2009 öffnete er als Hermitage Amsterdam und zeigte Ausstellungen in Zusammenarbeit mit der Eremitage in Sankt Petersburg.", "tags": ["umbau","museumsgeschichte"]},
+        {"text": "Nach dem russischen Angriff auf die Ukraine beendete die Institution 2022 die Verbindung zur Eremitage. Seit September 2023 heißt sie H'ART Museum und arbeitet mit internationalen Museumspartnern statt mit einer einzigen Sammlung.", "tags": ["institution","gegenwart"]},
+        {"text": "Zum Ensemble gehört die historische Nieuwe Keizersgracht-Seite; nahe liegen Portugiesische Synagoge, Joods Museum, Hortus und Wertheimpark. Der Standort verbindet damit Fürsorgegeschichte mit dem ehemaligen jüdischen Viertel.", "tags": ["quer","stadtgeschichte"]},
+        {"text": "Visuell: Der sehr lange, helle Backsteinbau steht unmittelbar an der Amstel. Ein symmetrischer Mittelteil, hohe Fensterreihen und der große rechteckige Innenhof unterscheiden ihn von den schmalen privaten Grachtenhäusern.", "tags": ["visuell","wegweiser"]},
+        {"text": "LIVE: Ausstellungspartner, Titel, Leihgaben, Eintritt, Öffnungszeiten und zugängliche historische Räume ändern sich. Ausschließlich die aktuelle Museumsseite prüfen; aus dem früheren Namen Hermitage keine heutige Kooperation ableiten.", "tags": ["live_hint","ephemeral","ausstellung"]}
+      ],
+      "faqs": [{"q": "War der Amstelhof ursprünglich ein Museum?", "a": "Nein. Er wurde 1683 als diakonisches Alten- und Pflegehaus eröffnet und erst im 21. Jahrhundert zum Ausstellungshaus."}]
+    },
+    {
+      "id": "amsterdam_micropia",
+      "name": "Micropia",
+      "general_info": "Micropia ist das 2014 eröffnete Mikrobenmuseum von ARTIS. Im historischen Ledenlokalen-Komplex am Artisplein macht es Mikroorganismen, ihre Ökosysteme und ihre Rolle im menschlichen Alltag sichtbar.",
+      "deep_data_pool": [
+        {"text": "ARTIS entwickelte Micropia als Museum für die unsichtbare Mehrheit des Lebens. Es öffnete am 30. September 2014 und war als eigenständiges Publikumsmuseum konzipiert, nicht bloß als einzelne Zooabteilung.", "tags": ["museumsgeschichte","wissenschaft"]},
+        {"text": "Mikroben umfassen unter anderem Bakterien, mikroskopische Pilze, Algen und Protozoen. Das Museum erklärt ihre enorme Vielfalt und vermeidet die Verkürzung, Mikroorganismen seien grundsätzlich Krankheitserreger.", "tags": ["mikrobiologie","einordnung"]},
+        {"text": "Präparate, Mikroskope, Projektionen und interaktive Installationen übersetzen Größenordnungen, die das bloße Auge nicht auflösen kann. Lebende Kulturen verlangen kontrollierte Bedingungen und fachliche Pflege hinter der Ausstellungsoberfläche.", "tags": ["vermittlung","technik"]},
+        {"text": "Ein Schwerpunkt liegt auf dem menschlichen Mikrobiom: Haut, Mund und Darm sind Lebensräume zahlreicher Mikroorganismen. Ihre Funktionen reichen von Verdauung und Stoffwechsel bis zur Konkurrenz mit krankmachenden Arten.", "tags": ["mensch","mikrobiom"]},
+        {"text": "Weitere Beispiele zeigen mikrobielle Arbeit bei Fermentation, Abbauprozessen, Wasserreinigung und Stoffkreisläufen. Käse, Brot oder Kompost verbinden Grundlagenforschung mit alltäglichen Beobachtungen.", "tags": ["alltag","oekologie"]},
+        {"text": "Micropia gehört zum ARTIS-Komplex am Plantage Kerklaan, ist inhaltlich aber kein klassischer Tierparkraum. Der Standort neben dem Artisplein verbindet das Museum mit dem 1838 gegründeten naturkundlichen Bildungsensemble.", "tags": ["artis","quer"]},
+        {"text": "Visuell: Der Eingang liegt am Artisplein in einem historischen Backsteinensemble; innen dominieren dunkle Ausstellungsräume, leuchtende Vergrößerungen und Laborästhetik. Das Museum ist nicht an einem freistehenden futuristischen Bau zu erkennen.", "tags": ["visuell","wegweiser"]},
+        {"text": "LIVE: Gezeigte Kulturen, Laborvorführungen, Vorträge, Kombitickets, Eintritt und Öffnungszeiten aktuell bei Micropia/ARTIS prüfen. Lebende Demonstrationen oder bestimmte Stationen können zeitweise nicht verfügbar sein.", "tags": ["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q": "Zeigt Micropia nur gefährliche Keime?", "a": "Nein. Es erklärt besonders die nützlichen und ökologisch unverzichtbaren Rollen von Mikroorganismen."}]
+    },
+    {
+      "id": "amsterdam_houseboat_museum",
+      "name": "Houseboat Museum",
+      "general_info": "Das Houseboat Museum befindet sich auf dem 1914 gebauten Frachtschiff Hendrika Maria an der Prinsengracht. Die frühere Ladeluke wurde zum Wohnraum und vermittelt die räumlichen Besonderheiten eines Amsterdamer Hausboots.",
+      "deep_data_pool": [
+        {"text": "Die Hendrika Maria wurde 1914 als Frachtschiff gebaut. Ihr flacher Rumpf und der große Laderaum dienten dem Gütertransport auf niederländischen Binnengewässern, bevor das Schiff später dauerhaft zum Wohnen umgebaut wurde.", "tags": ["schifffahrt","geschichte"]},
+        {"text": "Das Museum wurde 1997 von Vincent van Loon eröffnet, der selbst auf einem Hausboot gelebt hatte. Es sollte eine praktische Frage beantworten, die Uferbesucher von außen kaum klären können: Wie ist das Leben unter und knapp über der Wasserlinie organisiert?", "tags": ["museumsgeschichte","wohnen"]},
+        {"text": "Im ehemaligen Laderaum entstanden Wohnzimmer, Schlafbereich und weitere häusliche Funktionen. Gebogene Bordwände, niedrige Raumhöhen und kompakte Wege unterscheiden das Innere deutlich von einem Grachtenhaus gleicher Grundfläche.", "tags": ["interieur","alltag"]},
+        {"text": "Die frühere Schifferwohnung im Heck bewahrt den Bezug zur Arbeitswelt an Bord. Sie macht sichtbar, dass Binnenschiffe zugleich Arbeitsplatz, Transportmittel und Familienwohnung sein konnten.", "tags": ["arbeitsgeschichte","schiffer"]},
+        {"text": "Amsterdam besitzt sowohl umgebaute Schiffe als auch rechteckige Wohnarken, die nie für Fahrt bestimmt waren. Die Hendrika Maria repräsentiert daher eine bestimmte Form des Hausboots und nicht alle schwimmenden Wohnungen der Stadt.", "tags": ["typologie","einordnung"]},
+        {"text": "Hausboote benötigen Liegeplätze und Anschlüsse; Genehmigungen, Abwasserregeln und Sicherheitsanforderungen gehören zum Wohnen auf dem Wasser. Diese Verwaltungsbedingungen verändern sich und sind von der historischen Schiffsgeschichte zu trennen.", "tags": ["stadtleben","wasser"]},
+        {"text": "Visuell: Das Museum liegt als dunkler, niedriger Lastkahn an der Prinsengracht nahe der Elandsgracht. Der Zugang führt vom Kai über einen Steg; ein Museumsname am Schiff unterscheidet es von bewohnten Nachbarbooten.", "tags": ["visuell","wegweiser"]},
+        {"text": "LIVE: Öffnungszeiten, Eintritt, Kapazität, Zugänglichkeit über den Steg und mögliche Schließungen wegen Wartung oder Wasserbedingungen direkt beim Museum prüfen. Enge Schiffsräume können besondere Barrieren haben.", "tags": ["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q": "War die Hendrika Maria immer ein Hausboot?", "a": "Nein. Sie wurde 1914 als Frachtschiff gebaut und erst später zu einer schwimmenden Wohnung umgestaltet."}]
+    },
+    {
+      "id": "amsterdam_oba_centrale_bibliotheek",
+      "name": "OBA Centrale Bibliotheek",
+      "general_info": "Die 2007 eröffnete Centrale Bibliotheek der Openbare Bibliotheek Amsterdam steht am Oosterdok. Jo Coenen entwarf sie als großes öffentliches Wissenshaus mit gestapelten Ebenen, Stadtblick und vielfältigen Lernräumen.",
+      "deep_data_pool": [
+        {"text": "Die Amsterdamer öffentliche Bibliothek geht auf eine 1919 eröffnete Einrichtung zurück. Ihr zentraler Standort wechselte mehrfach; der Neubau am Oosterdok ersetzte 2007 die frühere Hauptbibliothek an der Prinsengracht.", "tags": ["institution","geschichte"]},
+        {"text": "Architekt Jo Coenen ordnete die Bibliothek vertikal auf zahlreichen Geschossen. Rolltreppen, Lufträume und offene Sichtbeziehungen machen den Weg durch die Sammlungen zu einer räumlichen Promenade statt zu einer Folge abgeschlossener Magazine.", "tags": ["architektur","innenraum"]},
+        {"text": "Das Gebäude war bei seiner Eröffnung eine der größten öffentlichen Bibliotheken Europas. Neben Büchern gehören Arbeitsplätze, Kinderbereiche, Medien, Ausstellungen, Veranstaltungen und gastronomische Nutzungen zum Konzept eines städtischen Aufenthaltsortes.", "tags": ["bibliothek","nutzung"]},
+        {"text": "Große Fenster richten sich zum Oosterdok und zur Innenstadt. Von oberen Ebenen lässt sich die Beziehung zwischen historischem Zentrum, Hauptbahnhof, NEMO und den neuen Bauten auf den ehemaligen Hafenflächen erkennen.", "tags": ["aussicht","stadtentwicklung"]},
+        {"text": "Der Oosterdok war früher Teil des Hafen- und Eisenbahnraums. Bibliothek, Conservatorium und Wohn- beziehungsweise Bürogebäude stehen für die Umwandlung der östlichen Bahnhofs- und Uferzone in ein dichtes Kulturquartier.", "tags": ["oosterdok","quer"]},
+        {"text": "Die OBA ist ein Netzwerk mit vielen Stadtteilfilialen; die Centrale ist nicht mit der gesamten Institution gleichzusetzen. Sammlung und Programme verbinden lokale Grundversorgung mit einer zentralen Bühne für Sprache und Wissen.", "tags": ["stadtgesellschaft","netzwerk"]},
+        {"text": "Visuell: Ein hoher, heller Block mit großer Glasfront steht an der Oosterdokskade östlich des Hauptbahnhofs. Innen führen lange Rolltreppen durch offene Geschosse; oben öffnet sich der Blick über Dächer und Wasser.", "tags": ["visuell","wegweiser"]},
+        {"text": "LIVE: Öffnungszeiten, Arbeitsplatzbelegung, Ausweise, Ausstellungen, Veranstaltungen, Restaurantbetrieb und zugängliche Aussichtspunkte auf oba.nl prüfen. Bibliothekszugang und einzelne kostenpflichtige Angebote können verschieden geregelt sein.", "tags": ["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q": "Ist die Centrale die einzige OBA?", "a": "Nein. Sie ist die Hauptbibliothek eines Netzes von Bibliotheksstandorten in Amsterdam."}]
+    },
+    {
+      "id": "amsterdam_stopera",
+      "name": "Stopera",
+      "general_info": "Die Stopera verbindet Rathaus und Musiktheater in einem 1986 bis 1988 eröffneten Komplex an Amstel und Waterlooplein. Der Spitzname vereint stadhuis und opera und erinnert zugleich an Protest gegen das Projekt.",
+      "deep_data_pool": [
+        {"text": "Amsterdam plante seit dem frühen 20. Jahrhundert sowohl ein neues Rathaus als auch ein Opernhaus. Jahrzehnte wechselnder Standorte und Wettbewerbe endeten 1979 mit dem Beschluss, beide Funktionen in einem gemeinsamen Bau zusammenzuführen.", "tags": ["planung","stadtgeschichte"]},
+        {"text": "Wilhelm Holzbauer prägte den Rathausentwurf, Cees Dam den Theaterteil. Die Architekten verbanden Verwaltungsbüros, Ratssaal, Foyers, Bühne und Zuschauerraum in einem großen Komplex mit unterschiedlichen Fassaden zur Stadt und zur Amstel.", "tags": ["architektur","funktion"]},
+        {"text": "Der Bau begann 1982. Das Muziektheater eröffnete am 23. September 1986; die Stadtverwaltung bezog den Rathausbereich 1988. Nationale Opera und Nationalballett erhielten damit eine gemeinsame Spielstätte.", "tags": ["baugeschichte","eroeffnung"]},
+        {"text": "Stopera setzt sich aus stadhuis und opera zusammen. Während der Proteste wurde das Wort auch als englisch klingender Aufruf Stop Opera gelesen; Kritik richtete sich gegen Kosten, Maßstab, Abriss und Entscheidungsprozess.", "tags": ["protest","name"]},
+        {"text": "Der Bau steht auf dem Gebiet des früheren Vlooienburg. Für ihn verschwanden 1981 letzte Häuser des historisch stark jüdisch geprägten Viertels; archäologische Funde und Modelle machen diese verdrängte Schicht heute wieder sichtbar.", "tags": ["vlooienburg","erinnerung"]},
+        {"text": "Die gebogene, verglaste Theaterfront folgt der Amstel, während Rathausbereiche den Waterlooplein fassen. Eine öffentliche Passage sollte Verwaltung, Kultur und Stadtraum miteinander verbinden.", "tags": ["stadtgrundriss","amstel"]},
+        {"text": "Visuell: Der ausgedehnte helle Komplex besitzt eine markante halbkreisförmige Glasfassade am Wasser und einen hohen Büroturm. Vom Waterlooplein wirkt er wie Platzwand, von der Amstel wie ein gebogenes Kulturhaus.", "tags": ["visuell","wegweiser"]},
+        {"text": "LIVE: Rathauszugänge, öffentliche Schalter, Ratssitzungen, Demonstrationen, Opern- und Ballettprogramm, Führungen und Sicherheitskontrollen aktuell bei Stadt und Nationale Opera & Ballet prüfen.", "tags": ["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q": "Woher kommt der Name Stopera?", "a": "Er kombiniert stadhuis und opera; während der Proteste wurde er zugleich als gegen das Projekt gerichtetes Stop Opera verstanden."}]
+    },
+    {
+      "id": "amsterdam_muziekgebouw_aan_t_ij",
+      "name": "Muziekgebouw aan 't IJ",
+      "general_info": "Das 2005 eröffnete Muziekgebouw aan 't IJ ist Amsterdams Zentrum für zeitgenössische Musik. Der von 3XN entworfene Glasbau an der Piet Heinkade integriert Säle, Foyers, Terrassen und das vorspringende BIMHUIS.",
+      "deep_data_pool": [
+        {"text": "Das Haus führt die Arbeit des Muziekcentrum de IJsbreker fort, das an der Weesperzijde ein wichtiges Podium für neue Musik war. Der größere Neubau am IJ gab zeitgenössischer komponierter Musik eine dauerhafte zentrale Bühne.", "tags": ["musikgeschichte","institution"]},
+        {"text": "Das dänische Büro 3XN entwarf den Komplex, der 2005 öffnete. Ein weit auskragendes Dach bündelt die verglasten Foyers; Treppen, Balkone und Terrassen richten Besucher immer wieder auf Wasser und Hafenstadt aus.", "tags": ["architektur","3xn"]},
+        {"text": "Der große Konzertsaal wurde für flexible Besetzungen und zeitgenössische Klanganforderungen geplant. Bewegliche Elemente und variable Bühnensituationen erlauben Formate, die über den frontalen Orchesterabend hinausgehen.", "tags": ["akustik","saal"]},
+        {"text": "Klangkunst, elektronische Musik, Ensembles, Festivals und Education gehören zur programmatischen Identität. Das Gebäude ist dadurch Labor und Aufführungsort, nicht nur repräsentativer Konzertsaal.", "tags": ["gegenwartsmusik","vermittlung"]},
+        {"text": "Das BIMHUIS ist als dunkler, weit über die Fassade ragender Baukörper integriert. Es bleibt organisatorisch und musikalisch als Jazz- und Improvisationsbühne erkennbar, teilt aber Erschließung und Uferlage mit dem Muziekgebouw.", "tags": ["bimhuis","quer"]},
+        {"text": "Die Piet Heinkade entstand aus ehemaligen Hafen- und Bahnflächen. Muziekgebouw, Passenger Terminal und Oostelijke Handelskade markieren den Wandel des IJ-Ufers von Umschlag und Lagerung zu Kultur, Wohnen und internationalem Verkehr.", "tags": ["hafen","stadtentwicklung"]},
+        {"text": "Visuell: Ein großer gläserner Bau steht direkt am IJ unter einem extrem breiten, flachen Dach. Das schwarze BIMHUIS ragt seitlich wie eine Box über das Wasser; breite Außentreppen führen zur erhöhten Eingangsebene.", "tags": ["visuell","wegweiser"]},
+        {"text": "LIVE: Konzertprogramm, Festivals, Soundwalks, Führungen, Kartenpreise, Saalzugang und öffentlich nutzbare Terrassen aktuell beim Muziekgebouw prüfen. Künstler und Formate niemals aus älteren Spielplänen ableiten.", "tags": ["live_hint","ephemeral","programm"]}
+      ],
+      "faqs": [{"q": "Warum steckt ein schwarzer Kubus in der Fassade?", "a": "Darin liegt das BIMHUIS, die eigenständige Jazz- und Improvisationsbühne innerhalb des Komplexes."}]
+    },
+    {
+      "id": "amsterdam_bimhuis",
+      "name": "BIMHUIS",
+      "general_info": "Das BIMHUIS entstand 1974 als von Musikern getragene Bühne für niederländischen Jazz und Improvisation. Seit 2005 sitzt es als schwarzer, über das IJ ragender Kubus im Muziekgebouw-Komplex.",
+      "deep_data_pool": [
+        {"text": "Hans Dulfer, Willem Breuker, Willem van Manen, Misha Mengelberg und weitere Musiker suchten 1974 einen eigenen Ort für die experimentelle niederländische Jazzszene. Sie bauten eine ehemalige Möbelhandlung an der Oudeschans mit einfachen Mitteln zur Bühne um.", "tags": ["gruendung","jazz"]},
+        {"text": "Der Name leitet sich vom Beroepsvereniging van Improviserende Musici ab. Das frühe Haus verstand sich als Ort von Musikern für Musiker, mit Raum für neue Formen und dem Anspruch, auftretende Künstler fair zu bezahlen.", "tags": ["name","institution"]},
+        {"text": "Internationale Improvisatoren wie Charles Mingus, Archie Shepp, Cecil Taylor, Pharoah Sanders und Sun Ra traten an der Oudeschans auf. Zugleich blieb die Bühne Treffpunkt verschiedener Generationen der niederländischen Szene.", "tags": ["musikgeschichte","international"]},
+        {"text": "Der alte Standort war intim und provisorisch, wurde aber räumlich zu klein. 2005 zog das BIMHUIS in den Neubau des Muziekgebouw aan 't IJ und gewann einen eigens entwickelten Saal mit Blick auf das Wasser.", "tags": ["umzug","baugeschichte"]},
+        {"text": "Der heutige Saal lässt sich durch die Glasfront mit der Hafenlandschaft verbinden; während Aufführungen kann sie verdunkelt werden. Diese kontrollierte Öffnung macht Stadtblick und konzentrierten Clubraum zu zwei Zuständen desselben Saals.", "tags": ["architektur","saal"]},
+        {"text": "Jazz wird hier weit gefasst: komponierte und freie Improvisation, internationale Ensembles, Nachwuchs, Workshops und genreübergreifende Projekte gehören zur Tradition. Einzelne Reihen sind jedoch kein dauerhafter Pack-Fakt.", "tags": ["programmprofil","vermittlung"]},
+        {"text": "Visuell: Das BIMHUIS ist der dunkle, kantige Kubus, der aus der gläsernen Seite des Muziekgebouw über das IJ ragt. Der Zugang erfolgt über den gemeinsamen erhöhten Komplex an der Piet Heinkade.", "tags": ["visuell","wegweiser"]},
+        {"text": "LIVE: Auftretende Künstler, Sessions, Einlass, Saalaufstellung, Preise, Livestreams und Restaurantbetrieb ausschließlich beim BIMHUIS prüfen. Historisch genannte Musiker belegen die Tradition, nicht das aktuelle Programm.", "tags": ["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q": "Was bedeutet BIMHUIS?", "a": "Der Name verweist auf die Berufsvereinigung improvisierender Musiker, aus deren Umfeld die Bühne entstand."}]
+    },
+    {
+      "id": "amsterdam_paradiso",
+      "name": "Paradiso",
+      "general_info": "Paradiso ist seit 1968 ein Musik- und Kulturzentrum in einem 1880 errichteten Versammlungsbau der Vrije Gemeente. Kirchenähnlicher Saal, hohe Fenster und Balkone prägen Amsterdams bekannte Popbühne.",
+      "deep_data_pool": [
+        {"text": "Die Vrije Gemeente ließ das Gebäude 1879 bis 1880 als religiösen Versammlungsort errichten. Die liberale Gemeinschaft wollte einen großen Saal außerhalb enger konfessioneller Formen; Architektur und Raum erinnern dennoch deutlich an eine Kirche.", "tags": ["baugeschichte","religion"]},
+        {"text": "Nach dem Wegzug der Gemeinde 1965 stand der Bau vor einer anderen Nutzung. 1967 besetzten junge Kulturaktivisten das Gebäude kurzzeitig und forderten einen eigenen Ort für Musik und Jugendkultur.", "tags": ["protest","jugendkultur"]},
+        {"text": "Am 30. März 1968 öffnete das Cosmisch Ontspanningscentrum Paradiso. Psychedelische Musik, Gegenkultur und experimentelle Veranstaltungen machten den Ort zu einem zentralen Schauplatz des Amsterdamer kulturellen Umbruchs.", "tags": ["gruendung","gegenkultur"]},
+        {"text": "Der Große Saal besitzt umlaufende Balkone und hohe bleiverglaste Fenster hinter beziehungsweise nahe der Bühne. Diese sakral wirkende Raumform begründete den verbreiteten Beinamen poptempel.", "tags": ["innenraum","visuell"]},
+        {"text": "Viele internationale und niederländische Künstler spielten hier, oft in relativ unmittelbarer Clubatmosphäre. Historische Auftritte sind Teil des kulturellen Gedächtnisses, dürfen aber nicht als Qualitätsversprechen für ein heutiges Konzert benutzt werden.", "tags": ["musikgeschichte","einordnung"]},
+        {"text": "Paradiso entwickelte neben Rock und Pop auch Clubnächte, elektronische Musik, Gesprächs-, Literatur- und genreübergreifende Formate. Die Institution programmiert außerdem zeitweise andere Orte in der Stadt.", "tags": ["kulturzentrum","nutzung"]},
+        {"text": "Visuell: Der rote Backsteinbau an der Weteringschans besitzt eine symmetrische, kirchenartige Front mit hohen Rundbogenfenstern und mittigem Eingang. Er liegt nahe Leidseplein und Max Euweplein, gegenüber dem früheren Gefängniskomplex.", "tags": ["visuell","wegweiser"]},
+        {"text": "LIVE: Programm, Altersgrenzen, Mitgliedschaft, Einlass, Garderobe, Barrierefreiheit und Spielort jeder Veranstaltung direkt bei Paradiso prüfen. Der Institutionsname garantiert nicht, dass ein Termin im Hauptgebäude stattfindet.", "tags": ["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q": "War Paradiso früher eine Kirche?", "a": "Es war der religiöse Versammlungsbau der Vrije Gemeente, jedoch keine traditionelle Pfarrkirche."}]
+    },
+    {
+      "id": "amsterdam_melkweg",
+      "name": "Melkweg",
+      "general_info": "Die Melkweg ist ein 1970 gegründetes multidisziplinäres Kulturzentrum in einer früheren Zuckerraffinerie und Molkerei nahe Leidseplein. Musik, Club, Film, Fotografie und Theater teilen sich das Industrieensemble.",
+      "deep_data_pool": [
+        {"text": "Auf dem Gelände arbeitete im 19. Jahrhundert eine Zuckerraffinerie. 1920 übernahm die Vereenigde Ontvang- en Verzendinrichting voor Melkproducten den Komplex als Milchverarbeitungsbetrieb; daraus entstand der spätere Name Melkweg.", "tags": ["industriegeschichte","name"]},
+        {"text": "Nach der Schließung der Molkerei 1969 richteten Cor Schlösser und Mitstreiter im Sommer 1970 ein experimentelles Kulturprojekt ein. Das erste Programm begann am 17. Juli und verband Musik, Theater, Film, Essen und Begegnung.", "tags": ["gruendung","gegenkultur"]},
+        {"text": "Der Versuch war zunächst nur für einen Sommer gedacht. Er kehrte 1971 und 1972 zurück und wurde 1973 zu einer ganzjährig arbeitenden Institution; das Provisorische blieb Teil ihrer Identität.", "tags": ["institution","entwicklung"]},
+        {"text": "In den 1980er Jahren gewann Live-Musik an Gewicht, ohne andere Sparten vollständig zu verdrängen. Eine Fotogalerie kam 1985 hinzu; Film und Bühnenkunst blieben Bestandteile des Hauses.", "tags": ["programmgeschichte","fotografie"]},
+        {"text": "Mit der Eröffnung des Saals The Max 1995 konnte die Melkweg größere Produktionen aufnehmen. Weitere Räume haben unterschiedliche Größen und technische Profile; der Komplex ist daher kein einzelner Konzertsaal.", "tags": ["saele","umbau"]},
+        {"text": "Die Nähe zu Leidseplein, Stadsschouwburg, Paradiso und Theaterquartieren konzentriert verschiedene Formen von Nacht- und Hochkultur. Melkweg steht dabei für die Umnutzung von Industriearchitektur durch die Nachkriegskultur.", "tags": ["stadtentwicklung","quer"]},
+        {"text": "Visuell: Der Zugang liegt am Lijnbaansgracht hinter dem Leidseplein. Backsteinfassaden und ineinander geschobene Gebäudeteile verraten den gewachsenen Fabrikkomplex; der Name Melkweg markiert den Haupteingang.", "tags": ["visuell","wegweiser"]},
+        {"text": "LIVE: Künstler, Clubnächte, Saal, Altersgrenzen, Einlass, Tickets, Ausstellungen und Kinoprogramm ausschließlich bei Melkweg prüfen. Veranstaltungen können parallel in verschiedenen Räumen stattfinden.", "tags": ["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q": "Warum heißt das Kulturzentrum Melkweg?", "a": "Der Komplex war vor seiner kulturellen Nutzung eine Milchfabrik; der Name bedeutet zugleich Milchstraße."}]
+    },
+    {
+      "id": "amsterdam_theater_carre",
+      "name": "Koninklijk Theater Carré",
+      "general_info": "Carré wurde 1887 von Oscar Carré als permanenter Zirkus an der Amstel eröffnet. Der neorenaissanceartige Bau wandelte sich vom Wintercircus zu einer Bühne für Varieté, Theater, Revue, Musical und Musik.",
+      "deep_data_pool": [
+        {"text": "Die Zirkusfamilie Carré gastierte seit den 1860er Jahren in den Niederlanden. Oscar Carré wählte Amsterdam als festen Winterstandort und ließ an der Amstel ein steinernes Zirkusgebäude errichten.", "tags": ["zirkus","gruendung"]},
+        {"text": "J.P.F. van Rossem und W.J. Vuyk entwarfen den Bau, der am 3. Dezember 1887 eröffnete. Der hufeisenförmige Zuschauerraum und die zentrale Manege waren auf Pferdedressur und Rundsicht ausgerichtet.", "tags": ["architektur","eroeffnung"]},
+        {"text": "Schon früh nutzten Varietéveranstalter das Haus außerhalb der Zirkussaison. Revue, Operette, Theater und später Konzerte und Musicals machten aus dem saisonalen Circus Carré eine ganzjährig bespielte Mehrzweckbühne.", "tags": ["programmgeschichte","variete"]},
+        {"text": "Die klassizistisch-neorenaissanceartige Amstelfassade besitzt einen tempelartigen Mittelteil. Hinter der repräsentativen Front blieb die räumliche Erinnerung an die Zirkusarena trotz späterer Bühnenerweiterungen erhalten.", "tags": ["fassade","visuell"]},
+        {"text": "1968 drohte der Abriss für verschiedene Neubauideen. Öffentlicher Einsatz trug zur Rettung bei; 1977 kaufte die Stadt Amsterdam das Gebäude und sicherte damit den Theaterbetrieb.", "tags": ["denkmalpflege","rettung"]},
+        {"text": "Zum hundertjährigen Bestehen erhielt das Haus 1987 das Prädikat Koninklijk. Umbauten 1992/93 und 2003/04 vergrößerten Bühne und Technik, während historische Fassade und charakteristische Innenraumwirkung bewahrt wurden.", "tags": ["umbau","koeniglich"]},
+        {"text": "Visuell: Carré steht als breiter, symmetrischer Bau unmittelbar am Ostufer der Amstel. Der vorspringende Mittelgiebel mit Säulenmotiv und der Schriftzug markieren die Front; die gekrümmte Saalform liegt dahinter.", "tags": ["visuell","wegweiser"]},
+        {"text": "LIVE: Produktionen, Saalplan, Einlass, Führungen, Restaurierungsphasen, Kartenpreise und barrierefreie Plätze direkt bei Carré prüfen. Die historische Zirkusfunktion sagt nichts über das aktuelle Genre aus.", "tags": ["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q": "Warum ist der Zuschauerraum so rund?", "a": "Carré wurde als permanenter Zirkus mit Manege gebaut; die frühe Raumform orientierte sich an Rundsicht und Pferdeshows."}]
+    },
+    {
+      "id": "amsterdam_olympisch_stadion",
+      "name": "Olympisch Stadion",
+      "general_info": "Jan Wils entwarf das Olympisch Stadion für die Sommerspiele 1928 im Stil des Nieuwe Bouwen. Marathonturm, klare Backsteinformen und die nach 1996 zurückgebaute ursprüngliche Schale prägen das Denkmal.",
+      "deep_data_pool": [
+        {"text": "Amsterdam erhielt 1921 den Zuschlag für die Olympischen Spiele 1928. Jan Wils gewann den Stadionwettbewerb; sein Entwurf verband funktionale Verkehrsführung mit expressionistischen Backsteinflächen und moderner Stahlbetonkonstruktion.", "tags": ["olympia","architektur"]},
+        {"text": "Das Stadion eröffnete 1928 als Zentrum der IX. Olympischen Sommerspiele. Leichtathletik, Zeremonien und weitere Wettbewerbe fanden hier statt; die Anlage war Teil eines größeren Sportareals im damals expandierenden Süden.", "tags": ["sportgeschichte","1928"]},
+        {"text": "Der schlanke Marathonturm trug während der Spiele ein Feuer. Die sichtbare Flamme als Zeichen der laufenden Spiele wurde danach zu einem festen Element olympischer Eröffnungszeremonien; der spätere Fackellauf entstand jedoch erst 1936.", "tags": ["marathonturm","olympisches_feuer"]},
+        {"text": "Wils integrierte ein systematisches Wegenetz für Besucher und Verkehr. Die Spiele werden auch mit frühen international bekannt gewordenen Parkplatz-Piktogrammen verbunden; wichtig ist die Unterscheidung zwischen Zeichenentwicklung und späterer weltweiter Standardisierung.", "tags": ["design","verkehr"]},
+        {"text": "1937 kam ein zweiter, größerer Zuschauerring hinzu. Nach dem Bau der Johan-Cruijff-ArenA verlor das Stadion zentrale Fußballfunktionen und war vom Abriss bedroht.", "tags": ["umbau","fussball"]},
+        {"text": "Eine umfassende Restaurierung entfernte den späteren zweiten Ring und stellte die Proportionen von 1928 weitgehend wieder her. 2000 wurde das erneuerte Stadion eröffnet; Büros, Sport und Veranstaltungen halten die Anlage in Nutzung.", "tags": ["restaurierung","denkmalpflege"]},
+        {"text": "Visuell: Die ovale Backsteinschale liegt am Stadionplein. Der asymmetrisch stehende, schmale Marathonturm mit offenen Bögen und Schale ist das wichtigste Fernzeichen; niedrige Tribünen folgen dem Leichtathletikoval.", "tags": ["visuell","wegweiser"]},
+        {"text": "LIVE: Sporttermine, Laufveranstaltungen, Führungen, Innenraumzugang, Bürobetrieb und mögliche Sperrungen beim Stadion prüfen. Ein Blick in die Arena ist außerhalb von Veranstaltungen nicht automatisch garantiert.", "tags": ["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q": "Ist die heutige Tribüne vollständig von 1928?", "a": "Die Grundanlage stammt von 1928; ein 1937 ergänzter zweiter Ring wurde bei der Restaurierung wieder entfernt."}]
+    },
+    {
+      "id": "amsterdam_westergasfabriek",
+      "name": "Westergasfabriek",
+      "general_info": "Die Westergasfabriek entstand ab 1883 als städtisches Gaswerk nach Plänen Isaac Gosschalks. Nach Stilllegung, Sanierung und Parkumbau bilden ihre Industriebauten heute das Kulturensemble Westergas im Westerpark.",
+      "deep_data_pool": [
+        {"text": "Amsterdam vergab 1883 eine Konzession an die Imperial Continental Gas Association für ein neues Gaswerk westlich der Stadt. Das Werk lag strategisch zwischen Bahn und Wasser, sodass große Mengen Kohle angeliefert und Nebenprodukte abtransportiert werden konnten.", "tags": ["industriegeschichte","gaswerk"]},
+        {"text": "Isaac Gosschalk entwarf die wichtigsten Gebäude in einer malerischen niederländischen Neorenaissance. Roter und gelber Backstein, Natursteinbänder, Giebel und dekorative Details gaben selbst funktionalen Hallen eine repräsentative Gestalt.", "tags": ["architektur","gosschalk"]},
+        {"text": "Kohle wurde in Öfen unter Luftabschluss erhitzt. Das entstehende Stadtgas speiste Beleuchtung und später Haushalte; Koks, Teer, Ammoniak und andere Rückstände gehörten zum Prozess und belasteten den Boden langfristig.", "tags": ["technik","umweltgeschichte"]},
+        {"text": "Die Stadt übernahm das Werk 1898. Mit wachsendem Gasbedarf wurde erweitert, doch Erdgas aus Groningen machte die Produktion schließlich überflüssig. 1967 endete die Gaserzeugung; Teile dienten noch eine Zeit als Verteilungsanlage.", "tags": ["stadtwerke","stilllegung"]},
+        {"text": "Nach dem Betriebsende verfielen Gebäude, während die starke Bodenkontamination neue Nutzungen erschwerte. Bürgerinitiativen, Planer und Kulturschaffende setzten sich dafür ein, das Areal nicht vollständig abzureißen.", "tags": ["buergerinitiative","denkmalpflege"]},
+        {"text": "In den 1990er Jahren nutzten Festivals und kreative Projekte die leer stehenden Hallen vorläufig. Diese Zwischenphase zeigte, dass Industriearchitektur große, flexible Kulturräume bieten konnte und prägte das spätere Konzept.", "tags": ["umnutzung","kultur"]},
+        {"text": "Die Landschaftsarchitektin Kathryn Gustafson entwarf den neuen Westerpark auf und um das frühere Werk. Der Park eröffnete 2003 und verbindet sanierte Industrieflächen, Wasser, offene Wiesen und ökologisch behandelte Bereiche.", "tags": ["landschaftsarchitektur","westerpark"]},
+        {"text": "Die Gashouder von 1902 ist ein runder Stahlbehälterbau mit großer stützenfreier Innenfläche. Früher bewegte sich darin ein Gasbehälter je nach gespeicherter Menge; heute macht gerade das riesige Volumen die Halle für Veranstaltungen interessant.", "tags": ["gashouder","technik"]},
+        {"text": "Weitere erhaltene Bauten wie Transformatorhuis, Machinegebouw, Ketelhuis und Zuiveringshal erinnern an einzelne Arbeitsschritte. Die heutigen Namen bewahren industrielle Funktionen, obwohl Gastronomie, Büros und Kultur eingezogen sind.", "tags": ["ensemble","industriekultur"]},
+        {"text": "Die Sanierung musste Denkmalschutz und Altlasten verbinden. Verunreinigter Boden wurde entfernt, isoliert oder kontrolliert behandelt; deshalb ist die grüne Parklandschaft zugleich Ergebnis komplexer Umwelttechnik.", "tags": ["altlasten","sanierung"]},
+        {"text": "Visuell: Im Westerpark erscheint eine Gruppe reich gegliederter Backsteinhallen, Schornstein- und Maschinenbaureste; westlich steht die große runde Gashouder. Es handelt sich um ein verteiltes Areal, nicht um einen einzigen Fabrikbau.", "tags": ["visuell","wegweiser"]},
+        {"text": "LIVE: Festivals, Märkte, Ausstellungen, Gastronomie, Gebäudezugänge, Parkarbeiten und Tickets stets bei Westergas und Veranstaltern prüfen. Historische Hallennamen geben keine Garantie, dass ein Raum heute öffentlich offen ist.", "tags": ["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q": "Warum stehen im Park Fabrikhallen?", "a": "Der Park integriert die erhaltenen Bauten eines ab 1883 betriebenen Gaswerks, das nach der Stilllegung saniert und kulturell umgenutzt wurde."}]
+    },
+    {
+      "id": "amsterdam_java_eiland",
+      "name": "Java-eiland",
+      "general_info": "Java-eiland ist eine Ende des 19. Jahrhunderts aufgeschüttete Hafenhalbinsel im Oostelijk Havengebied. Seit den 1990er Jahren prägen Sjoerd Soeters' Grachten, dichte Wohnblöcke und vielfältige Fassaden das frühere Umschlagareal.",
+      "deep_data_pool": [
+        {"text": "Amsterdam legte die östlichen Hafeninseln ab den 1870er Jahren an, weil größere Dampfschiffe mehr Kaifläche und tiefere Becken benötigten. Das spätere Java-eiland entstand aus Wellenbrechern und Aufschüttungen im IJ.", "tags": ["hafen","stadtentwicklung"]},
+        {"text": "Die Stoomvaart Maatschappij Nederland nutzte das Areal besonders für Linien nach Niederländisch-Ostindien. Der Name Java und benachbarte Straßennamen spiegeln koloniale Handelsnetze und müssen mit deren Macht- und Ausbeutungsgeschichte gelesen werden.", "tags": ["kolonialgeschichte","schifffahrt"]},
+        {"text": "Nach dem Rückgang des Stückgutverkehrs und der Verlagerung des Hafens nach Westen verloren Kais und Lagerhäuser ihre Funktion. Die Stadt plante das Oostelijk Havengebied ab den 1980er Jahren als innerstädtisches Wohngebiet neu.", "tags": ["strukturwandel","wohnen"]},
+        {"text": "Sjoerd Soeters entwarf den städtebaulichen Plan für Java-eiland. Vier schmale, quer verlaufende Kanäle teilen die langgestreckte Insel; kleine Brücken und versetzte Häuserfronten übersetzen Motive der Altstadt in moderne Dichte.", "tags": ["staedtebau","architektur"]},
+        {"text": "Entlang der Javakade stehen größere Wohnblöcke, während an den Binnenkanälen viele Architekten einzelne Fassaden gestalteten. Die Vielfalt ist geplant und erzeugt das Bild individueller Grachtenhäuser innerhalb eines zusammenhängenden Neubauquartiers.", "tags": ["fassaden","wohnbau"]},
+        {"text": "Die Jan Schaeferbrug verbindet Java-eiland mit der Piet Heinkade. Ihre beweglichen beziehungsweise herausnehmbaren Teile halten eine Passage für besondere Schiffe frei; nach Osten geht die Insel in KNSM-eiland über.", "tags": ["bruecke","quer"]},
+        {"text": "Visuell: Eine lange Uferinsel mit breiten Kaipromenaden und modernen Backsteinblöcken wird innen von vier schmalen Grachten durchschnitten. Kleine individuelle Brücken und stark variierende Hausfronten sind die besten Erkennungsmerkmale.", "tags": ["visuell","wegweiser"]},
+        {"text": "LIVE: Brückenöffnungen, Bauarbeiten, Uferzugänge, Fährverbindungen und Veranstaltungen aktuell bei Stadt und GVB prüfen. Java-eiland ist überwiegend Wohngebiet; private Höfe und Gebäude nicht als öffentlich zugänglich behandeln.", "tags": ["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q": "Ist Java-eiland eine natürliche Insel?", "a": "Nein. Es entstand aus Aufschüttungen des im späten 19. Jahrhundert ausgebauten östlichen Hafens."}]
+    },
+    {
+      "id": "amsterdam_knsm_eiland",
+      "name": "KNSM-eiland",
+      "general_info": "KNSM-eiland war der Stützpunkt der Koninklijke Nederlandsche Stoomboot-Maatschappij im östlichen Hafen. Seit den 1990er Jahren verbinden große Wohnbauten, erhaltene Hafenreste und Jo Coenens Masterplan Industriegeschichte mit Stadtwohnen.",
+      "deep_data_pool": [
+        {"text": "Die künstliche Insel entstand im Zuge des östlichen Hafenausbaus. Ab Anfang des 20. Jahrhunderts richtete die Koninklijke Nederlandsche Stoomboot-Maatschappij hier Kais, Lager und Verwaltung für ihre internationalen Dampfschifflinien ein.", "tags": ["hafen","knsm"]},
+        {"text": "Die KNSM fuhr vor allem europäische, mediterrane und transatlantische Routen. Schiffe, Besatzungen, Güter und Passagiere machten das Areal zu einem abgeschlossenen Arbeitsraum mit eigener Infrastruktur.", "tags": ["schifffahrt","arbeit"]},
+        {"text": "Der Containerverkehr und die Verlagerung von Hafenfunktionen nach Westen ließen den Betrieb zurückgehen. Nach dem Wegzug der KNSM 1979 standen Gebäude leer und wurden zeitweise von Künstlern und Hausbesetzern genutzt.", "tags": ["strukturwandel","zwischenutzung"]},
+        {"text": "Jo Coenen entwickelte den Masterplan für die Wohnbebauung. Eine starke Mittelachse, große monumentale Blöcke und geschlossene Straßenräume unterscheiden KNSM-eiland von den kleinteiligeren Grachten auf Java-eiland.", "tags": ["staedtebau","jo_coenen"]},
+        {"text": "Hans Kollhoffs Piraeus umschließt und überbaut einen erhaltenen früheren Hafenbau. Der massive, vielfach geknickte Wohnblock zeigt exemplarisch, wie neue Dichte mit fragmentarischem Industriebestand verbunden wurde.", "tags": ["piraeus","architektur"]},
+        {"text": "Das ehemalige KNSM-Verwaltungsgebäude und der Levantkade-Raum erinnern an die Reederei. Straßennamen und maritime Gestaltung bewahren Geschichte, ersetzen aber keine kritische Einordnung der kolonialen Handelsverflechtungen.", "tags": ["erinnerung","kolonialgeschichte"]},
+        {"text": "Visuell: KNSM-eiland verlängert Java-eiland nach Osten. Breite Kais, große geschlossene Wohnblöcke, die zentrale KNSM-Laan und der monumentale Piraeus-Komplex prägen die Silhouette stärker als kleine Einzelhäuser.", "tags": ["visuell","wegweiser"]},
+        {"text": "LIVE: Baustellen, Kaizugänge, Geschäfte, Ateliers, Veranstaltungen und die Fährverbindung am Azartplein aktuell prüfen. Wohnhöfe und Treppenhäuser sind grundsätzlich privat, auch wenn Architekturführungen sie erwähnen.", "tags": ["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q": "Wofür steht KNSM?", "a": "Für Koninklijke Nederlandsche Stoomboot-Maatschappij, die auf der Insel ihren Amsterdamer Hafenstützpunkt hatte."}]
+    },
+    {
+      "id": "amsterdam_spui",
+      "name": "Spui",
+      "general_info": "Das Spui war bis zur Verfüllung 1882 ein Wasserlauf und zuvor südliche Stadtgrenze. Heute verbinden der weitgehend autofreie Platz, Buchkultur, Maagdenhuis, Begijnhofzugang und Lieverdje mehrere Schichten der Innenstadt.",
+      "deep_data_pool": [
+        {"text": "Spui bezeichnet einen regulierbaren Wasserabfluss. Der Wasserlauf bildete bis zur Anlage des Singel im 15. Jahrhundert die südliche Grenze Amsterdams und verband die inneren Gewässer mit dem äußeren Stadtgraben.", "tags": ["wasser","stadtgrenze"]},
+        {"text": "Brücken führten Kalverstraat und weitere Wege über das Wasser. Mit der Verfüllung 1882 verschwanden Kanal und Osjessluis aus dem Straßenbild; aus der schmalen Wasserachse entstand der heutige Platz.", "tags": ["stadtumbau","19_jahrhundert"]},
+        {"text": "Das Maagdenhuis von 1780 diente ursprünglich als katholisches Waisenhaus für Mädchen und wurde später Hauptgebäude der Universität Amsterdam. Studentenbesetzungen machten es wiederholt zum Symbol hochschulpolitischen Protests.", "tags": ["maagdenhuis","universitaet"]},
+        {"text": "Eine unscheinbare Tür führt vom Platz in den Begijnhof. Der Kontrast zwischen öffentlichem Stadtplatz und geschlossenem historischem Hof erklärt, warum das Spui ein wichtiger Übergangsraum statt isolierter Sehenswürdigkeit ist.", "tags": ["begijnhof","quer"]},
+        {"text": "Das bronzene Lieverdje von Carel Kneulman wurde 1960 aufgestellt. In den 1960er Jahren versammelte sich die Provo-Bewegung hier zu Happenings; das kleine Straßenkind wurde dadurch mit Amsterdamer Gegenkultur verbunden.", "tags": ["provo","denkmal"]},
+        {"text": "Buchhandlungen, Verlage und regelmäßige Buch- beziehungsweise Kunstmärkte prägten die kulturelle Identität des Platzes. Konkrete Händler und Termine sind veränderlich, die langfristige Verbindung zur Buchstadt ist dagegen stabil.", "tags": ["buchkultur","markt"]},
+        {"text": "Visuell: Der kleine unregelmäßige Platz liegt zwischen Rokin, Nieuwezijds Voorburgwal, Singel und Kalverstraat. Lieverdje, Maagdenhuis und der schmale Begijnhofeingang sind Orientierungspunkte; Wasser ist hier nicht mehr sichtbar.", "tags": ["visuell","wegweiser"]},
+        {"text": "LIVE: Buch- und Kunstmarkt, Demonstrationen, Universitätszugang, Begijnhofregeln, Gastronomie und Baustellen aktuell prüfen. Marktstände dürfen nicht als tägliche oder dauerhaft identische Einrichtung beschrieben werden.", "tags": ["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q": "Warum heißt ein trockener Platz Spui?", "a": "Weil hier bis 1882 ein als Spui bezeichneter Wasser- und Abflusslauf verlief."}]
+    },
+    {
+      "id": "amsterdam_kalverstraat",
+      "name": "Kalverstraat",
+      "general_info": "Die rund 730 Meter lange Kalverstraat folgt einem alten Deichweg westlich der Amstel vom Dam zum Muntplein. Ihr Name erinnert an den früheren Kälbermarkt; heute dominiert eine stark frequentierte Fußgänger-Einkaufsstraße.",
+      "deep_data_pool": [
+        {"text": "Die Straßenlinie gehörte zum westlichen Amsteldeich und setzt sich nach Norden in der Nieuwendijk fort. Damit ist sie älter als viele heutige Fassaden und bewahrt eine frühe Nord-Süd-Achse der Siedlung.", "tags": ["stadtgrundriss","deich"]},
+        {"text": "Der Name Kalverstraat ist bereits 1393 belegt und verweist auf den Kälberhandel. Der Markt wurde im frühen 17. Jahrhundert verlegt; südliche Abschnitte waren zeitweise als Byndewyck oder Ossenmarkt bekannt.", "tags": ["name","marktgeschichte"]},
+        {"text": "Die Straße verbindet Dam, Spui und Muntplein nahezu parallel zum Rokin. Fünfzehn Seitenstraßen und Gassen zeigen die schmale mittelalterliche Parzellierung und führen zu Höfen, Kirchen und früheren Handelsräumen.", "tags": ["orientierung","mittelalter"]},
+        {"text": "An der Kalverstraat lag das Burgerweeshuis, heute Teil des Amsterdam Museum-Komplexes. Die erhaltene Weeshuispoort erinnert daran, dass hinter der Verkaufsfront große soziale Institutionen verborgen waren.", "tags": ["waisenhaus","quer"]},
+        {"text": "De Papegaai, die Kirche St. Peter und Paul, liegt zurückgesetzt hinter einer schmalen Fassade. Sie steht für katholische Präsenz in einer Straße, deren öffentliches Erscheinungsbild lange von Handel geprägt wurde.", "tags": ["kirche","stadtgeschichte"]},
+        {"text": "Im 19. und 20. Jahrhundert entwickelte sich die Achse zur wichtigsten Einkaufsstraße. Warenhäuser, Filialbetriebe und wiederholte Fassadenumbauten ersetzten viele ältere Wohnnutzungen, während der enge Straßenquerschnitt blieb.", "tags": ["handel","strukturwandel"]},
+        {"text": "Visuell: Eine lange, enge, meist sehr belebte Fußgängerstraße führt vom Dam südwärts. Moderne Ladenfronten stehen unter teils historischen Obergeschossen; am Spui öffnet sich der Raum kurz, bevor die Achse zum Muntplein weiterläuft.", "tags": ["visuell","wegweiser"]},
+        {"text": "LIVE: Ladenbestand, Öffnungszeiten, Baustellen, Menschenandrang und temporäre Zugangsregeln ändern sich ständig. Aktuelle Geschäfte und Angebote nicht aus dem Pack vorlesen; bei hoher Dichte auf Taschendiebstahlhinweise der Stadt achten.", "tags": ["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q": "Woher kommt der Name Kalverstraat?", "a": "Von einem Kälbermarkt, der hier bis ins frühe 17. Jahrhundert abgehalten wurde."}]
+    },
+    {
+      "id": "amsterdam_zeedijk",
+      "name": "Zeedijk",
+      "general_info": "Der Zeedijk ist ein mittelalterlicher Deichweg vom alten Hafen zum Nieuwmarkt. Seefahrerquartier, wohlhabende Kaufmannsadresse, Vergnügungsstraße, Krisengebiet und Teil von Chinatown haben seine enge Kurve nacheinander geprägt.",
+      "deep_data_pool": [
+        {"text": "Der Deich schützte die frühe Siedlung am Ostufer der Amstel gegen das IJ. Zusammen mit Warmoesstraat und Nieuwendijk gehört seine Linie zu den ältesten tragenden Strukturen der Stadt.", "tags": ["deich","mittelalter"]},
+        {"text": "Nahe Hafen und Oude Kerk wohnten und arbeiteten Seeleute, Wirte und Händler. Im 17. Jahrhundert waren Abschnitte der gekrümmten Straße begehrte Adressen wohlhabender Kaufleute, bevor diese an die neuen Grachten zogen.", "tags": ["hafen","handel"]},
+        {"text": "Zeedijk 1 ist eines der wenigen erhaltenen Holzhäuser Amsterdams und stammt in wesentlichen Teilen aus dem 16. Jahrhundert. Es ist jedoch nicht pauschal als ältestes Haus der Stadt zu bezeichnen.", "tags": ["holzhaus","architektur"]},
+        {"text": "Mit der Verlagerung wohlhabender Bewohner verstärkten sich Gasthäuser, Unterhaltung und Sexarbeit. Im 20. Jahrhundert verschärften Drogenhandel, Leerstand und Gewalt die Krise des Viertels.", "tags": ["sozialgeschichte","nachtleben"]},
+        {"text": "Ab den 1980er Jahren kauften Stadt und die Gesellschaft Zeedijk vernachlässigte Gebäude, restaurierten sie und vergaben Räume neu. Bewohnerinitiativen spielten bei der Stabilisierung eine entscheidende Rolle.", "tags": ["stadterneuerung","buergerinitiative"]},
+        {"text": "Chinesische und andere asiatische Unternehmer prägten die Umgebung seit dem 20. Jahrhundert. Zweisprachige Straßenschilder und der Fo-Guang-Shan-He-Hua-Tempel machen diese Migrationsgeschichte sichtbar.", "tags": ["chinatown","migration"]},
+        {"text": "Visuell: Die schmale Straße steigt und krümmt sich vom Prins Hendrikkade-Bereich zur Nieuwmarktseite. Historische Giebel, Gastronomie, chinesische Schriftzeichen und nahe der Geldersekade der buddhistische Tempel dienen als Orientierung.", "tags": ["visuell","wegweiser"]},
+        {"text": "LIVE: Gastronomie, Geschäfte, Tempelzugang, Baustellen und Sicherheitslage aktuell prüfen. Historische Beschreibungen als ehemaliges Krisengebiet nicht als pauschale heutige Gefahrenbehauptung verwenden.", "tags": ["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q": "Ist der Zeedijk wirklich ein Deich?", "a": "Ja. Die Straßenlinie entstand auf einem mittelalterlichen Schutzdeich am früheren IJ-Ufer."}]
+    },
+    {
+      "id": "amsterdam_chinatown_amsterdam",
+      "name": "Chinatown Amsterdam",
+      "general_info": "Amsterdams Chinatown ist kein scharf begrenztes Viertel, sondern ein asiatisch geprägter Stadtraum um Zeedijk, Geldersekade und Nieuwmarkt. Seine Geschichte begann mit chinesischen Seeleuten und Unternehmen im frühen 20. Jahrhundert.",
+      "deep_data_pool": [
+        {"text": "Chinesische Seeleute kamen über niederländische und internationale Reedereien nach Amsterdam. Um 1911 bildete sich nahe Hafen und Binnen Bantammerstraat eine kleine Gemeinschaft; einige Männer blieben nach dem Ende ihrer Verträge in der Stadt.", "tags": ["migration","seefahrt"]},
+        {"text": "Frühe Bewohner stammten häufig aus südchinesischen Küstenregionen. Pensionen, Wäschereien, Handel und später Restaurants boten Arbeit in einer Zeit, in der Rassismus und prekäre Beschäftigung den Alltag bestimmten.", "tags": ["alltag","arbeitsgeschichte"]},
+        {"text": "In der Weltwirtschaftskrise verloren viele chinesische Seeleute Arbeit. Behörden behandelten sie restriktiv und schoben Menschen ab; diese verletzliche Geschichte gehört neben der späteren Gastronomie zum Viertel.", "tags": ["diskriminierung","1930er"]},
+        {"text": "Nach 1945 wuchs das Angebot asiatischer Restaurants und Geschäfte. Zuwanderung aus Hongkong, Festlandchina, Indonesien, Suriname, Thailand und anderen Regionen machte das Gebiet breiter asiatisch als der Name Chinatown vermuten lässt.", "tags": ["diaspora","vielfalt"]},
+        {"text": "Der Fo-Guang-Shan-He-Hua-Tempel wurde 2000 eröffnet und gilt als markantes chinesisch-buddhistisches Bauwerk in Europa. Seine traditionelle Dachform setzt an der Zeedijk einen bewussten architektonischen Akzent.", "tags": ["tempel","religion"]},
+        {"text": "Zweisprachige Straßenschilder kamen als sichtbares Zeichen der chinesisch-niederländischen Präsenz hinzu. Das Viertel überlappt zugleich mit De Wallen und dem mittelalterlichen Hafenraum; seine Grenzen sind kulturell, nicht administrativ.", "tags": ["stadtgrundriss","zeedijk"]},
+        {"text": "Visuell: Chinesische Schriftzeichen an Läden und Straßenschildern konzentrieren sich um Zeedijk und Geldersekade. Der reich geschmückte Tempel mit aufwärts gebogenen Dachkanten ist das deutlichste Einzelzeichen, ersetzt aber keine feste Viertelsgrenze.", "tags": ["visuell","wegweiser"]},
+        {"text": "LIVE: Restaurants, Läden, Neujahrsfeiern, Tempelöffnungen und Kulturprogramme aktuell prüfen. Keine Speisekarten, Preise oder laufenden Veranstaltungen dauerhaft speichern; respektvoll zwischen Religionsort und Touristenkulisse unterscheiden.", "tags": ["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q": "Hat Chinatown eine offizielle Grenze?", "a": "Nein. Es ist ein kulturell geprägter Bereich um Zeedijk, Geldersekade und Nieuwmarkt, der mit anderen Altstadtvierteln überlappt."}]
+    },
+    {
+      "id": "amsterdam_reguliersgracht",
+      "name": "Reguliersgracht",
+      "general_info": "Die Reguliersgracht ist eine Quergracht der südlichen Grachtenerweiterung des 17. Jahrhunderts. Ihre Folge gemauerter Bogenbrücken verbindet Herengracht, Keizersgracht und Prinsengracht mit der Amstel.",
+      "deep_data_pool": [
+        {"text": "Die Gracht entstand bei der vierten Stadterweiterung ab 1662. Sie folgte ungefähr einer älteren Entwässerungs- und Wegeachse zum Regulierspoort und ordnete neue Bauparzellen im südlichen Grachtengürtel.", "tags": ["stadtentwicklung","17_jahrhundert"]},
+        {"text": "Der Name verweist auf die Reguliers, einen mittelalterlichen Klosterorden, dessen Besitz und Kloster südlich der früheren Stadt lagen. Auch Reguliersbreestraat und Reguliersdwarsstraat bewahren diesen Bezug.", "tags": ["name","klostergeschichte"]},
+        {"text": "Als Querverbindung schneidet die Reguliersgracht die drei Hauptgrachten. Von geeigneten Standpunkten entsteht deshalb eine gestaffelte Perspektive mehrerer Bogenbrücken, die populär als Sieben-Brücken-Blick bezeichnet wird.", "tags": ["bruecken","perspektive"]},
+        {"text": "Die oft genannte Zahl sieben hängt von Blickrichtung, Zählweise und Sichtpunkt ab. Entscheidend ist die räumliche Folge gemauerter Brücken, nicht ein garantiert jederzeit vollständig freier Fotoblick.", "tags": ["einordnung","visuell"]},
+        {"text": "Schmale Grachtenhäuser, teils aus dem 17. und 18. Jahrhundert, säumen die Ufer. Unterschiede in Giebeln, Breiten und Bauhöhen spiegeln einzelne Parzellen innerhalb eines planmäßig angelegten Stadtviertels.", "tags": ["grachtenhaus","architektur"]},
+        {"text": "Eine geplante Verfüllung der Gracht im 20. Jahrhundert wurde nicht umgesetzt. Ihr Erhalt zeigt den Wandel von funktionalem Verkehrs- und Abwassersystem zum geschützten historischen Stadtbild.", "tags": ["denkmalpflege","wasser"]},
+        {"text": "Visuell: Eine relativ schmale, ruhige Gracht läuft geradlinig zur Amstel. Wiederholte niedrige Backsteinbogenbrücken, dicht stehende Fassaden und Bäume erzeugen die charakteristische Tiefenstaffelung.", "tags": ["visuell","wegweiser"]},
+        {"text": "LIVE: Kaimauersanierungen, Brückensperrungen, Einbahnregelungen für Boote und Sichtbehinderungen aktuell prüfen. Grachtenfahrten, private Anlegestellen und beleuchtete Ansichten sind keine dauerhaft garantierten Angebote.", "tags": ["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q": "Sieht man dort immer genau sieben Brücken?", "a": "Die Bezeichnung meint eine berühmte gestaffelte Brückenperspektive; Zahl und Sichtbarkeit hängen vom Standort und freien Blick ab."}]
+    },
+    {
+      "id": "amsterdam_trippenhuis",
+      "name": "Trippenhuis",
+      "general_info": "Das 1660 bis 1662 für die Waffen- und Eisenhändler Louys und Hendrick Trip errichtete Trippenhuis ist ein Hauptwerk des Holländischen Klassizismus. Heute beherbergt es die Königliche Niederländische Akademie der Wissenschaften.",
+      "deep_data_pool": [
+        {"text": "Die Brüder Louys und Hendrick Trip verdienten ihr Vermögen mit Eisen, Waffen und Munition sowie schwedischen Hüttenwerken. Ihr Doppelhaus an der Kloveniersburgwal sollte Familienmacht und internationalen Handel darstellen.", "tags": ["auftraggeber","handel"]},
+        {"text": "Justus Vingboons entwarf das Gebäude, das 1662 vollendet wurde. Hinter einer einheitlichen monumentalen Front liegen zwei spiegelbildlich gedachte Wohnhäuser; das Ensemble wirkt dadurch wie ein Stadtpalais.", "tags": ["architektur","vingboons"]},
+        {"text": "Die breite Sandsteinfassade verwendet korinthische Pilaster und einen kräftigen Mittelgiebel. Kanonenrohre, Waffen, Lorbeer und Symbole von Krieg und Frieden verweisen direkt auf das Geschäft der Bauherren.", "tags": ["fassade","symbolik"]},
+        {"text": "Deckengemälde von Nicolaas de Heldt Stockade allegorisieren Frieden und Freiheit. Die Bildsprache stellt Wohlstand als Ergebnis militärisch gesicherter Ordnung dar und macht die ethische Spannung des Waffenhandels sichtbar.", "tags": ["kunst","machtgeschichte"]},
+        {"text": "Skandinavische Landschaftsdarstellungen beziehen sich auf schwedische Eisenwerke der Familie. Innenräume verbanden damit Amsterdamer Repräsentation mit entfernten Produktionslandschaften und Rohstoffketten.", "tags": ["schweden","industriegeschichte"]},
+        {"text": "Das Rijksmuseum nutzte das Trippenhuis im 19. Jahrhundert, bevor es 1885 in Cuypers' Neubau umzog. Kurz danach bezog die Koninklijke Nederlandse Akademie van Wetenschappen den Komplex.", "tags": ["museumsgeschichte","wissenschaft"]},
+        {"text": "Visuell: An der Kloveniersburgwal steht eine ungewöhnlich breite, streng symmetrische Sandsteinfront. Hohe Pilaster, Dreiecksgiebel und eingearbeitete Kanonenmotive unterscheiden sie deutlich von schmalen Nachbarhäusern.", "tags": ["visuell","wegweiser"]},
+        {"text": "LIVE: Das Trippenhuis ist Arbeits- und Veranstaltungsort der KNAW, kein ständig frei zugängliches Museum. Öffentliche Vorträge, Führungen, Sicherheitsregeln und zugängliche Räume ausschließlich aktuell bei der Akademie prüfen.", "tags": ["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q": "Warum sind Waffen an der Fassade?", "a": "Die Bauherren Trip handelten mit Eisen, Waffen und Munition; die Fassadensymbolik stellte ihre wirtschaftliche Macht dar."}]
+    },
+    {
+      "id": "amsterdam_felix_meritis",
+      "name": "Felix Meritis",
+      "general_info": "Felix Meritis wurde 1788 als Haus einer aufklärerischen Bürgergesellschaft eröffnet. Jacob Otten Husly schichtete an der Keizersgracht spezialisierte Säle für Musik, Wissenschaft, Zeichnen, Handel und Literatur übereinander.",
+      "deep_data_pool": [
+        {"text": "Die Gesellschaft Felix Meritis war 1777 gegründet worden. Ihr lateinischer Name bedeutet ungefähr glücklich durch Verdienste; wohlhabende Bürger wollten Künste, Naturwissenschaft und Handel außerhalb traditioneller Zünfte fördern.", "tags": ["aufklaerung","gesellschaft"]},
+        {"text": "Jacob Otten Husly gewann den Entwurfswettbewerb. Das 1788 eröffnete Gebäude erhielt eine monumentale klassizistische Fassade, deren korinthische Säulen und Reliefs die verschiedenen Abteilungen symbolisieren.", "tags": ["architektur","husly"]},
+        {"text": "Im Inneren lagen übereinander ein Konzertsaal, Räume für Physik, Zeichnen, Handel und Literatur sowie eine Sternwarte auf dem Dach. Die vertikale Organisation übersetzte das enzyklopädische Ideal in Architektur.", "tags": ["innenraum","wissenschaft"]},
+        {"text": "Der ovale Konzertsaal war für seine Akustik bekannt und diente später als Vorbild für die Kleine Zaal des Concertgebouw. Internationale Musiker und Amsterdamer Liebhaber traten hier in bürgerlichem Rahmen auf.", "tags": ["musikgeschichte","akustik"]},
+        {"text": "Die ursprüngliche Gesellschaft löste sich 1888 auf. Danach beherbergte der Bau unter anderem Druck- und Verlagsarbeit, politische Organisationen und nach 1945 die kommunistische Zeitung De Waarheid.", "tags": ["nutzungsgeschichte","politik"]},
+        {"text": "In der zweiten Hälfte des 20. Jahrhunderts wurde Felix Meritis erneut ein Ort für Theater, Debatte, Festivals und internationale Kultur. Restaurierungen versuchten, historische Raumfolgen mit zeitgemäßer Nutzung zu verbinden.", "tags": ["kulturzentrum","denkmalpflege"]},
+        {"text": "Visuell: Die breite klassizistische Fassade an der Keizersgracht besitzt einen hervorgehobenen Mittelteil mit vier kolossalen Halbsäulen und Dreiecksgiebel. Der große Bau nimmt mehrere übliche Grachtenhausbreiten ein.", "tags": ["visuell","wegweiser"]},
+        {"text": "LIVE: Programm, Veranstalter, Gebäudeführungen, Gastronomie, Saalzugang und Tickets aktuell bei Felix Meritis prüfen. Historische Säle sind außerhalb gebuchter Veranstaltungen nicht automatisch geöffnet.", "tags": ["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q": "Was war Felix Meritis ursprünglich?", "a": "Das eigene Haus einer 1777 gegründeten Bürgergesellschaft zur Förderung von Kunst, Wissenschaft und Handel."}]
+    },
+    {
+      "id": "amsterdam_museum_het_schip",
+      "name": "Museum Het Schip",
+      "general_info": "Museum Het Schip erklärt die Amsterdamer Schule in Michel de Klerks expressionistischem Wohnblock von 1919 bis 1921. Das Arbeiterwohnungsensemble verband bezahlbare Wohnungen, Schule und Postamt mit außergewöhnlichem Design.",
+      "deep_data_pool": [
+        {"text": "Die Woningwet von 1901 schuf höhere Wohnstandards und öffentliche Finanzierungsmöglichkeiten. Wohnungsbauvereine wie Eigen Haard konnten dadurch gesunde Arbeiterwohnungen statt überfüllter, unsanitärer Mietskasernen errichten.", "tags": ["wohnungsreform","sozialgeschichte"]},
+        {"text": "Eigen Haard beauftragte Michel de Klerk mit drei Blöcken am Spaarndammerplantsoen. Het Schip, der berühmteste, entstand 1919 bis 1921 und erhielt wegen seiner dynamischen, schiffsähnlichen Silhouette seinen Spitznamen.", "tags": ["de_klerk","baugeschichte"]},
+        {"text": "Wellenförmiger Backstein, ungewöhnliche Fenster, abgerundete Ecken, Skulptur und ein turmartiger Abschluss lösen die Fassade plastisch auf. Konstruktion und Dekor sollten selbst sozialen Wohnungsbau zu Gesamtkunst machen.", "tags": ["amsterdamer_schule","architektur"]},
+        {"text": "Der Block enthielt ursprünglich 102 Wohnungen sowie Versammlungs-, Schul- und Postfunktionen. Die Grundrisse waren vergleichsweise kompakt, boten aber bessere Belichtung, Sanitär- und Wohnbedingungen als viele ältere Arbeiterquartiere.", "tags": ["wohnen","alltag"]},
+        {"text": "Das ehemalige Postamt ist bis in Möbel, Schalter, Briefkasten und Farbgestaltung als Gesamtkunstwerk entworfen. Es zeigt, dass die Amsterdamer Schule Architektur und angewandte Kunst nicht trennte.", "tags": ["postamt","design"]},
+        {"text": "Alice Roegholt und Ton Heijdra gründeten das Museum 2001. Neben dem Gebäudekomplex erschließen Museumswohnung und rekonstruierte Elendswohnung den Kontrast zwischen Wohnungsnot und reformiertem sozialen Wohnungsbau.", "tags": ["museumsgeschichte","vermittlung"]},
+        {"text": "Visuell: Der dreieckige Backsteinblock in der Spaarndammerbuurt wirkt wie ein Schiffskörper. Wellenmauerwerk, kleine verspielte Fenster, skulpturale Details und der hohe runde Turm machen ihn unverwechselbar.", "tags": ["visuell","wegweiser"]},
+        {"text": "LIVE: Ausstellungen, Führungsroute, Zugang zu Postamt und Wohnungen, Eintritt und Restaurierungsarbeiten aktuell beim Museum prüfen. Der Wohnblock ist weiterhin bewohnt; private Eingänge respektieren.", "tags": ["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q": "Warum heißt das Gebäude Het Schip?", "a": "Seine langgezogene, plastisch geschwungene Form erinnerte Bewohner an ein Schiff."}]
+    },
+    {
+      "id": "amsterdam_blauwbrug",
+      "name": "Blauwbrug",
+      "general_info": "Die Blauwbrug überspannt die Amstel zwischen Waterlooplein und Rembrandtplein. Die heutige reich dekorierte Steinbrücke entstand 1883 nach Pariser Vorbildern und ersetzte eine ältere blau gestrichene Holzbrücke.",
+      "deep_data_pool": [
+        {"text": "Eine Brücke verband hier seit dem späten 16. Jahrhundert die Befestigungs- und Erweiterungsbereiche beider Amstelseiten. Der ältere Holzbau war blau gestrichen; davon blieb der Name erhalten, obwohl die heutige Brücke aus Stein besteht.", "tags": ["name","stadtbefestigung"]},
+        {"text": "Die heutige Brücke wurde 1883 im Zusammenhang mit der Internationalen Kolonial- und Exportausstellung errichtet. Bastiaan de Greef und Willem Springer orientierten sich an repräsentativen Pariser Brücken.", "tags": ["baugeschichte","19_jahrhundert"]},
+        {"text": "Natursteinpfeiler, reich verzierte Laternen, Masken und Schiffsbugmotive geben der Brücke eine monumentale Wirkung. Kaiserkrone und maritime Details beziehen sich auf Amsterdam und seine Handelsgeschichte.", "tags": ["architektur","symbolik"]},
+        {"text": "Drei flache Bögen überspannen den Fluss. Die breite Fahrbahn machte die Blauwbrug zu einer wichtigen Verbindung zwischen dem östlichen Zentrum, Rembrandtplein und dem Waterlooplein.", "tags": ["technik","verkehr"]},
+        {"text": "Während der Krönungsunruhen am 30. April 1980 kam es im Umfeld der Brücke zu heftigen Auseinandersetzungen zwischen Demonstrierenden und Polizei. Bilder von der Blauwbrug wurden zu Symbolen dieses Konflikts.", "tags": ["1980","protest"]},
+        {"text": "Von der Brücke sind Stopera, Amstel, Herengrachtmündung und weiter südlich Carré räumlich miteinander verbunden. Sie ist damit ein guter Lesepunkt für Fluss, Grachtenring und Stadterweiterung.", "tags": ["aussicht","quer"]},
+        {"text": "Visuell: Eine breite helle Steinbrücke mit drei Bögen, kräftigen Pfeilern und hohen ornamentierten Laternen liegt an der Amstel. Ihr Dekor ist wesentlich aufwendiger als bei den typischen schmalen Backsteinbogenbrücken.", "tags": ["visuell","wegweiser"]},
+        {"text": "LIVE: Straßenbahn-, Rad- und Autoverkehr, Demonstrationen, Bauarbeiten und freie Aussicht ändern sich. Sperrungen und sichere Querung aktuell prüfen; auf der stark genutzten Brücke nicht unachtsam in Radwege treten.", "tags": ["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q": "Warum heißt die Steinbrücke Blauwbrug?", "a": "Sie übernahm den Namen ihrer hölzernen Vorgängerin, die blau gestrichen war."}]
+    },
+    {
+      "id": "amsterdam_torensluis",
+      "name": "Torensluis",
+      "general_info": "Die 1648 vollendete Torensluis ist die breiteste historische Brücke über den Singel. Unter ihrem Pflaster liegen Gewölbe und Fundamente des Jan-Rodenpoortstoren, eines 1829 abgetragenen mittelalterlichen Wehrturms.",
+      "deep_data_pool": [
+        {"text": "Am mittelalterlichen Stadtrand stand seit dem 15. Jahrhundert der Jan-Rodenpoortstoren. Der große Wehr- und Torturm kontrollierte den Zugang über den Singel und diente mit seinen Glocken auch als städtisches Signalbauwerk.", "tags": ["wehrturm","mittelalter"]},
+        {"text": "Die heutige steinerne Brücke wurde 1648 angelegt. Ihre ungewöhnliche Breite erklärt sich daraus, dass sie den massiven Turm aufnehmen musste; der Verkehrsraum war ursprünglich Bauplatz und Sockel einer Befestigung.", "tags": ["bruecke","baugeschichte"]},
+        {"text": "Im Unterbau lagen Gefängniszellen und Gewölberäume. Vergitterte Öffnungen knapp über dem Wasser erinnern daran, dass der Ort neben Verteidigung auch städtischer Strafvollzug war.", "tags": ["gefaengnis","unterbau"]},
+        {"text": "Der Turm wurde 1829 abgebrochen, nachdem er seine militärische und praktische Funktion verloren hatte. Im Pflaster markierte Linien beziehungsweise der breite Grundriss machen seine frühere Position weiterhin ablesbar.", "tags": ["abriss","denkmalpflege"]},
+        {"text": "Die Brücke liegt an der Oude Leliestraat und verbindet Jordaan-Rand und mittelalterlichen Kern. Der Singel war hier einst Stadtgrenze; heute wirkt die breite Fläche eher wie ein kleiner Platz über dem Wasser.", "tags": ["stadtgrundriss","orientierung"]},
+        {"text": "Seit 1987 steht auf der Brücke eine Statue Multatulis von Hans Bayens. Sie ehrt den Schriftsteller Eduard Douwes Dekker, dessen Werk Max Havelaar die koloniale Ausbeutung in Niederländisch-Indien angriff.", "tags": ["multatuli","kolonialkritik"]},
+        {"text": "Visuell: Eine außergewöhnlich breite Steinbrücke überspannt den Singel und trägt Sitz- beziehungsweise Platzflächen. Vergitterte Bogenöffnungen am Wasserrand, Turmumriss im Pflaster und Multatuli-Statue sind die wichtigsten Details.", "tags": ["visuell","wegweiser"]},
+        {"text": "LIVE: Nutzung der Gewölbe, Veranstaltungen, Gastronomie, Baustellen und sichere Zugänge am Kai aktuell prüfen. Die unterirdischen Räume sind nicht allein wegen ihrer historischen Bedeutung frei betretbar.", "tags": ["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q": "Warum ist die Torensluis so breit?", "a": "Sie trug einst den massiven Jan-Rodenpoortstoren; dessen Unterbau und Gewölbe stecken noch in der Brücke."}]
+    },
+    {
+      "id": "amsterdam_overhoeks",
+      "name": "Overhoeks",
+      "general_info": "Overhoeks ist ein neues Stadtquartier am IJ auf dem früheren Shell-Forschungsgelände in Amsterdam-Noord. Der erhaltene A'DAM-Toren, die EYE-Silhouette und neue Hochhäuser markieren den Wandel vom abgeschlossenen Industrieareal zum Wohn- und Kulturviertel.",
+      "deep_data_pool": [
+        {"text": "Das Gelände gegenüber dem Hauptbahnhof gehörte seit dem frühen 20. Jahrhundert zu Shell. Labore, Büros und technische Anlagen bildeten einen weitgehend abgeschlossenen Forschungs- und Industriestandort am Nordufer des IJ.", "tags": ["industriegeschichte","shell"]},
+        {"text": "Der 1971 eröffnete Shell-Hauptturm wurde von Arthur Staal entworfen. Seine diagonale Stellung gab dem Gebiet den Namen Overhoeks: Der Turm stand schräg, also überhoeks, zur Ufer- und Straßenstruktur.", "tags": ["name","architektur"]},
+        {"text": "Shell verlagerte große Teile seiner Arbeit, und die Stadt erwarb Flächen für eine neue Nutzung. Seit den 2000er Jahren entstand schrittweise ein dichtes Quartier aus Wohnen, Büros, Kultur und öffentlichem Uferraum.", "tags": ["strukturwandel","stadtentwicklung"]},
+        {"text": "Der frühere Shell-Turm wurde zum A'DAM-Toren umgebaut und 2016 neu eröffnet. Die dunkle Hochhausscheibe bewahrt den Kern des Bürobaus, erhielt aber neue Fassaden-, Aussichts- und Unterhaltungsnutzungen.", "tags": ["umbau","hochhaus"]},
+        {"text": "EYE Filmmuseum steht seit 2012 als weißer, skulpturaler Bau unmittelbar am IJ. Es bildet mit dem Turm ein starkes Kulturensemble, ist aber eine eigenständige Institution und nicht Teil des Overhoeks-Hochhauses.", "tags": ["eye","quer"]},
+        {"text": "Neue Wohntürme verändern die Skyline und schaffen zugleich Konflikte um Dichte, Wind, Schatten und Zugänglichkeit. Der Masterplan verbindet Hochhauscluster mit niedrigeren Wohnfeldern und einer Uferpromenade.", "tags": ["wohnen","staedtebau"]},
+        {"text": "Visuell: Direkt gegenüber Amsterdam Centraal stehen der dunkle rechteckige A'DAM-Toren und das weiße, kantig auskragende EYE. Dahinter wächst ein Cluster moderner Wohntürme; die Fähre landet südlich davon am Buiksloterweg.", "tags": ["visuell","wegweiser"]},
+        {"text": "LIVE: Baustellen, Hochhauszugänge, Aussicht, Gastronomie, Veranstaltungen und Uferwege aktuell prüfen. Overhoeks bleibt ein wachsendes Quartier; Bauphasen und öffentliche Durchgänge können sich kurzfristig ändern.", "tags": ["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q": "Woher kommt der Name Overhoeks?", "a": "Vom schräg zur Umgebung gestellten früheren Shell-Turm, der als überhoeks bezeichnet wurde."}]
+    },
+    {
+      "id": "amsterdam_centraal_noord_ferry",
+      "name": "Fähren Amsterdam Centraal–Noord",
+      "general_info": "Hinter Amsterdam Centraal verbinden kommunale GVB-Fähren das Zentrum mit Amsterdam-Noord. Die Anlegestellen am IJ ersetzen auf mehreren Relationen eine feste Querung und machen den Bahnhof zugleich zum Wasserverkehrsknoten.",
+      "deep_data_pool": [
+        {"text": "Das breite IJ trennt historische Innenstadt und Amsterdam-Noord. Fähren gehören seit langem zur städtischen Verbindung; heute betreibt GVB sie im Auftrag der Gemeinde als Teil des öffentlichen Verkehrsnetzes.", "tags": ["verkehrsgeschichte","ij"]},
+        {"text": "Die zentralen Anleger liegen an der De-Ruijterkade-Seite hinter dem Bahnhof. Sie werden durch die IJ-Passage und weitere Bahnhofsdurchgänge erreicht; damit liegt der Wasserverkehr direkt neben Bahn, Metro, Bus und Tram.", "tags": ["umstieg","orientierung"]},
+        {"text": "Von Centraal führen Verbindungen unter anderem nach Buiksloterweg, IJplein und NDSM. Jede Relation erschließt einen anderen Teil Noords; die Fähren sind nicht austauschbar, obwohl sie am Zentrum nah beieinander starten.", "tags": ["liniennetz","noord"]},
+        {"text": "Fußgänger, Fahrräder und zugelassene leichte Fahrzeuge teilen die offenen Decks. Beim Anlegen entstehen starke Gegenströme; erst Aussteigende passieren zu lassen ist für den sicheren, schnellen Betrieb wesentlich.", "tags": ["alltag","sicherheit"]},
+        {"text": "Die Fähren erfüllen eine niederschwellige Verbindung für Fuß- und Radverkehr zwischen den durch das IJ getrennten Stadtteilen. Tarif- oder Kostenfreiheit ist dagegen kein stabiler Ortsfakt und gehört ausschließlich in die LIVE-Prüfung.", "tags": ["verkehr","einordnung"]},
+        {"text": "Elektrifizierung und neue Fährtypen sollen Emissionen und Kapazität verbessern. Gleichzeitig plant Amsterdam langfristig Brücken und weitere Querungen, weil Einwohnerzahl und Radverkehr in Noord stark wachsen.", "tags": ["zukunft","mobilitaet"]},
+        {"text": "Visuell: Nördlich hinter der Bahnhofshalle öffnen sich mehrere beschilderte Rampen direkt zum IJ. Flache Doppelendfähren pendeln zwischen parallelen Pontons; die Zielanzeige am jeweiligen Anleger ist wichtiger als die Schiffslackierung.", "tags": ["visuell","wegweiser"]},
+        {"text": "LIVE: Ziel, Anleger, Fahrplan, Nachtbetrieb, Störungen, Wetterausfälle und aktuelle Kostenfreiheit ausschließlich bei GVB prüfen. Nie aus einer früheren Liniennummer oder Taktangabe eine heutige Abfahrt ableiten.", "tags": ["live_hint","ephemeral","verkehr"]}
+      ],
+      "faqs": [{"q": "Fahren alle Fähren hinter Centraal zum selben Ziel?", "a": "Nein. Mehrere Anleger bedienen unterschiedliche Ziele wie Buiksloterweg, IJplein und NDSM."}]
+    },
+    {
+      "id": "amsterdam_buiksloterveer",
+      "name": "Buiksloterveer",
+      "general_info": "Das Buiksloterwegveer, heute GVB-Linie F3, ist die kurze zentrale IJ-Verbindung zwischen Amsterdam Centraal und Buiksloterweg. Es erschließt Overhoeks, EYE, A'DAM-Toren und Tolhuistuin.",
+      "deep_data_pool": [
+        {"text": "Fährverkehr zwischen der Stadt und Buiksloot beziehungsweise dem Nordufer existierte lange vor dessen Eingemeindung. Das IJ war Verkehrsweg und Grenze zugleich; die Fähre verband ländlich-industrielles Noord mit dem Zentrum.", "tags": ["geschichte","buiksloot"]},
+        {"text": "Der heutige Name bezieht sich auf die Buiksloterweg-Anlegestelle, nicht auf das weiter nördlich gelegene alte Dorfzentrum allein. Historisch ist auch die Bezeichnung Tolhuispont nach dem nahen Tolhuis gebräuchlich.", "tags": ["name","tolhuis"]},
+        {"text": "Seit dem Ausbau von Overhoeks und der Eröffnung von EYE nahm die Bedeutung stark zu. Pendler, Bewohner und Besucher teilen die kurze Querung, wodurch sie zu den meistgenutzten Fährrelationen Amsterdams zählt.", "tags": ["stadtentwicklung","alltag"]},
+        {"text": "Doppelendfähren müssen im Regelbetrieb nicht wenden. Breite Ein- und Ausfahrten verkürzen den Aufenthalt am Ponton, doch Fahrräder und Fußgänger erzeugen bei hohem Andrang komplexe Bewegungsströme.", "tags": ["technik","verkehr"]},
+        {"text": "Auf der Südseite liegt der Anleger hinter Amsterdam Centraal, auf der Nordseite unmittelbar an IJpromenade und Buiksloterweg. Die Überfahrt bietet einen klaren Blick auf Bahnhofsinsel, EYE und A'DAM-Toren.", "tags": ["orientierung","aussicht"]},
+        {"text": "Die Verbindung ist Teil des kommunalen GVB-Netzes und wird nach Bedarf in ihrer Kapazität angepasst. Konkrete Zahl eingesetzter Schiffe, Takte und Nachtfahrten sind ausschließlich aktuelle Betriebsdaten.", "tags": ["gvb","einordnung"]},
+        {"text": "Visuell: Der nördliche Ponton liegt zwischen dem weißen EYE-Bau und dem dunklen A'DAM-Toren. Flache Fähren fahren fast geradlinig zur Rückseite von Centraal; Zieltafeln nennen Buiksloterweg beziehungsweise Centraal Station.", "tags": ["visuell","wegweiser"]},
+        {"text": "LIVE: Linie, Anleger, Frequenz, Nachtbetrieb, Wartung, Wetterstörung und Zugangsregeln bei GVB prüfen. Fahrräder nicht in markierten Laufwegen abstellen und beim Anlegen erst die Gegenrichtung aussteigen lassen.", "tags": ["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q": "Ist das Buiksloterveer dasselbe wie die NDSM-Fähre?", "a": "Nein. Es fährt kurz nach Buiksloterweg; NDSM liegt weiter westlich und wird über eine andere Relation bedient."}]
+    },
+    {
+      "id": "amsterdam_nationale_opera_ballet",
+      "name": "Nationale Opera & Ballet",
+      "general_info": "Nationale Opera & Ballet vereint Dutch National Opera und Dutch National Ballet im 1986 eröffneten Musiktheater der Stopera. Bühnenhaus, Werkstätten und großer Zuschauerraum liegen an der gebogenen Amstelfassade.",
+      "deep_data_pool": [
+        {"text": "Die Nederlandse Operastichting entstand 1965 als nationale Opernorganisation; das Het Nationale Ballet war 1961 aus der Fusion zweier Ensembles hervorgegangen. Beide arbeiteten lange ohne gemeinsames modernes Haus.", "tags": ["institution","geschichte"]},
+        {"text": "1979 wurden die Pläne für Rathaus und Opernhaus zusammengelegt. Cees Dam verantwortete wesentlich den Theaterentwurf innerhalb des mit Wilhelm Holzbauer entwickelten Stopera-Komplexes.", "tags": ["planung","architektur"]},
+        {"text": "Das Muziektheater eröffnete am 23. September 1986. Oper und Ballett erhielten einen gemeinsamen großen Saal, Probenräume und technische Werkstätten; die Verwaltung der Stadt bezog den benachbarten Teil später.", "tags": ["eroeffnung","stopera"]},
+        {"text": "Die Dutch National Opera arbeitet projektweise mit Sängern, Orchestern und Regieteams; das Dutch National Ballet besitzt ein festes Tänzerensemble. Das gemeinsame Haus bedeutet daher keine Verschmelzung der Kunstformen.", "tags": ["oper","ballett"]},
+        {"text": "Große Bühnen-, Seiten- und Hinterbühnen ermöglichen aufwendige Wechsel. Kostüm-, Dekor- und Probenarbeit gehören zur Produktion, auch wenn Besucher gewöhnlich nur Foyer und Zuschauerraum sehen.", "tags": ["buehnentechnik","handwerk"]},
+        {"text": "Das Nationalballett entstand 1961 durch die Vereinigung des Nederlands Ballet und des Amsterdams Ballet der Nederlandse Opera. Sonia Gaskell wurde erste künstlerische Leiterin; die neue Kompanie sollte klassische Tradition und niederländische Choreografie zusammenführen.", "tags": ["ballettgeschichte","gruendung"]},
+        {"text": "Die Opernorganisation von 1965 arbeitete als Stagione-Betrieb: Produktionen wurden für begrenzte Serien mit wechselnden Sängerensembles erarbeitet, statt dauerhaft jede Rolle aus einem festen Solistenensemble zu besetzen. Dieses Produktionsprinzip prägt die Unterscheidung zwischen Haus und auftretenden Gästen.", "tags": ["operngeschichte","produktion"]},
+        {"text": "Der Zuschauerraum ist hufeisenförmig um die Bühne gebogen und auf mehrere Ränge verteilt. Orchestergraben, Bühnenöffnung und technische Ebenen sind für Oper und großes Handlungsballett ausgelegt; der Bau unterscheidet sich damit deutlich von einem reinen Konzertsaal.", "tags": ["saal","architektur"]},
+        {"text": "Ateliers für Kostüm, Hüte, Schuhe, Requisiten und Bühnenbilder machen das Haus zu einer Produktionsstätte. Die sichtbare Vorstellung ist nur der Endpunkt langer Proben- und Handwerksketten, die viele spezialisierte Berufe verbinden.", "tags": ["handwerk","hinter_den_kulissen"]},
+        {"text": "Die gebogene Glasfront öffnet Foyers zur Amstel. Innen führen breite Treppen und rote beziehungsweise helle Raumflächen zu den Rängen; das Theater bildet den runden Teil des ansonsten kantigeren Rathauskomplexes.", "tags": ["innenraum","visuell"]},
+        {"text": "Der Standort liegt auf dem früheren Vlooienburg und neben Waterlooplein. Jede Hausgeschichte muss deshalb die ausgelöschte jüdische Nachbarschaft und die kontroversen Abrisse für die Stopera mitdenken.", "tags": ["erinnerung","quer"]},
+        {"text": "LIVE: Spielplan, Besetzung, Orchester, Einlass, Übertitel, Führungen, Kartenpreise und barrierefreie Plätze ausschließlich bei Nationale Opera & Ballet prüfen. Repertoire und Zugänglichkeit wechseln je Produktion.", "tags": ["live_hint","ephemeral","programm"]}
+      ],
+      "faqs": [{"q": "Sind Oper und Ballett eine einzige Kompanie?", "a": "Nein. Dutch National Opera und Dutch National Ballet sind unterschiedliche Kunstensembles unter einem gemeinsamen institutionellen Dach."}]
+    },
+    {
+      "id": "amsterdam_ij_hallen",
+      "name": "IJ-Hallen",
+      "general_info": "Die IJ-Hallen nutzen große ehemalige Werfthallen auf dem NDSM-Gelände für einen regelmäßig stattfindenden Flohmarkt. Industrievolumen, Außenflächen und viele Einzelstände prägen das Ereignis, nicht ein täglich geöffnetes Kaufhaus.",
+      "deep_data_pool": [
+        {"text": "Das NDSM-Areal war ein bedeutender Schiffbaustandort am IJ. Große Montagehallen, Kräne und Slipanlagen entstanden für den Bau und die Reparatur von Schiffen und verloren nach dem Werftende ihre ursprüngliche Funktion.", "tags": ["werft","industriegeschichte"]},
+        {"text": "Nach dem Konkurs der Nederlandsche Dok en Scheepsbouw Maatschappij 1984 entwickelten sich auf dem Gelände Ateliers, Kultur, Veranstaltungen und neue Unternehmen. Die IJ-Hallen sind Teil dieser postindustriellen Nutzung.", "tags": ["strukturwandel","ndsm"]},
+        {"text": "Der Markt verteilt sich je nach Ausgabe auf Innenhallen und Außenbereiche. Viele private und gewerbliche Verkäufer bieten gebrauchte Waren an; konkrete Sortimente entstehen jeweils neu und sind kein stabiler Ortsfakt.", "tags": ["flohmarkt","nutzung"]},
+        {"text": "Die Bezeichnung als sehr großer oder größter Flohmarkt Europas bezieht sich auf Zahl und Fläche der Stände bei Veranstaltungen. Sie bedeutet nicht, dass der Markt täglich oder mit unveränderter Größe besteht.", "tags": ["einordnung","markt"]},
+        {"text": "Die Hallen bewahren die enorme Spannweite industrieller Schiffbauarchitektur. Ihr robuster, wenig verfeinerter Charakter erlaubt große temporäre Einbauten, macht Temperatur und Akustik aber anders als in einem Einkaufszentrum.", "tags": ["architektur","halle"]},
+        {"text": "Der Fähranleger NDSM-Werf liegt in fußläufiger Beziehung zu den Hallen und verknüpft das Marktareal räumlich mit dem IJ. Ob und wie eine Verbindung fährt, sowie Buslinien und Takte, gehört ausschließlich in die LIVE-Prüfung.", "tags": ["anreise","quer"]},
+        {"text": "Visuell: Riesige dunkle Industriehallen mit IJ-Hallen-Schriftzug stehen auf dem NDSM-Werftgelände. Bei Marktterminen füllen Reihen von Ständen Hallen und Vorplätze; ohne Termin kann das Areal deutlich ruhiger wirken.", "tags": ["visuell","wegweiser"]},
+        {"text": "LIVE: Marktdatum, Hallennutzung, Eintritt, Standzahl, Wetterbetrieb, Fährplan und Barrierefreiheit auf ijhallen.nl und bei GVB prüfen. Ohne bestätigten Termin niemals behaupten, der Markt sei gerade geöffnet.", "tags": ["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q": "Sind die IJ-Hallen täglich ein Flohmarkt?", "a": "Nein. Der Flohmarkt findet zu angekündigten Terminen statt; Datum und genutzte Flächen müssen aktuell geprüft werden."}]
+    },
+    {
+      "id": "amsterdam_amstelpark",
+      "name": "Amstelpark",
+      "general_info": "Der Amstelpark entstand für die Gartenbauausstellung Floriade 1972. Themengärten, alte Ausstellungsspuren, Wasserläufe und Baumgruppen bilden heute einen südlichen Stadtpark zwischen Amstel und Europaboulevard.",
+      "deep_data_pool": [
+        {"text": "Die Floriade 1972 verteilte sich auf Amstelpark und Beatrixpark. Für die internationale Gartenbauausstellung wurden Wege, Gärten, Pavillons, Wasserflächen und Verkehrsanlagen in einer zuvor landwirtschaftlich geprägten Randzone geschaffen.", "tags": ["floriade","geschichte"]},
+        {"text": "Nach Ausstellungsende blieb der größere südliche Teil als Amstelpark erhalten. Temporäre Schauen verschwanden, während Gehölze, Gartenräume und einzelne Bau- beziehungsweise Kunstspuren in einen dauerhaften Park überführt wurden.", "tags": ["parkgeschichte","nachnutzung"]},
+        {"text": "Thematische Bereiche wie Rosarium, Rhododendronzone und formale Gärten zeigen verschiedene gärtnerische Konzepte. Pflanzenbestand und Blüte verändern sich saisonal; einzelne Artnamen oder Zustände müssen aktuell beobachtet werden.", "tags": ["botanik","gartenkunst"]},
+        {"text": "Die Nähe zur Amstel verbindet den Park mit der historischen Polder- und Flusslandschaft. Deiche, Entwässerung und spätere Stadtplanung erklären, warum ein großer Grünraum am Rand des bebauten Zuid erhalten blieb.", "tags": ["landschaft","wasser"]},
+        {"text": "Der Glazen Huis-Ausstellungsraum und Kunst im Park setzen die kulturelle Nutzung der Floriade fort. Konkrete Ausstellungen sind vergänglich und gehören ausschließlich in LIVE-Recherche.", "tags": ["kunst","ausstellung"]},
+        {"text": "Spiel-, Tier- und Freizeitangebote wurden über Jahrzehnte ergänzt. Der Amstelpark ist deshalb keine unveränderte Gartenschau von 1972, sondern ein weiterentwickelter öffentlicher Park mit historischen Grundstrukturen.", "tags": ["freizeit","entwicklung"]},
+        {"text": "Visuell: Breite Grünräume, verschlungene Wege, Teiche, Rosengärten und teils exotisch wirkende Pflanzungen liegen hinter Eingängen am Europaboulevard und Amsteldeich. Es gibt kein einzelnes dominantes Monument.", "tags": ["visuell","wegweiser"]},
+        {"text": "LIVE: Eingangszeiten, saisonale Gärten, Bahn- oder Freizeitangebote, Ausstellungen, Gastronomie und Pflegearbeiten bei der Stadt prüfen. Blüte, Tierzugang und einzelne Attraktionen nie dauerhaft garantieren.", "tags": ["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q": "Warum gibt es im Amstelpark so viele Themengärten?", "a": "Der Park ging aus der internationalen Gartenbauausstellung Floriade 1972 hervor."}]
+    },
+    {
+      "id": "amsterdam_flevopark",
+      "name": "Flevopark",
+      "general_info": "Der Flevopark liegt zwischen Indische Buurt, Nieuwe Diep und dem alten Jüdischen Friedhof. Er wurde in den 1930er Jahren als Zuiderzeepark angelegt und später nach der neuen Provinz Flevoland benannt.",
+      "deep_data_pool": [
+        {"text": "Naturkundelehrer Jac. P. Thijsse setzte sich früh für einen Park am Ostrand der dicht bebauten Indische Buurt ein. Das Gelände bestand aus feuchten Polder- und Uferflächen nahe dem Nieuwe Diep.", "tags": ["parkgeschichte","thijsse"]},
+        {"text": "Der Park wurde in den 1930er Jahren als Zuiderzeepark eröffnet. Nach Abschluss großer Zuiderzee- und Flevoland-Projekte erhielt er 1971 den Namen Flevopark.", "tags": ["name","20_jahrhundert"]},
+        {"text": "Landschaftliche Wege, Wiesen, Gehölze und Wasser bilden einen Übergang zwischen Stadtviertel und Nieuwe Diep. Die Randlage macht den Park ökologisch und räumlich offener als streng formale Innenstadtparks.", "tags": ["landschaft","oekologie"]},
+        {"text": "Am Parkrand liegt der Jüdische Friedhof Zeeburg, der 1714 eingerichtet wurde. Nur Teile sind zugänglich beziehungsweise sichtbar; er ist ein eigenständiger Erinnerungsort und kein gewöhnlicher Parkbereich.", "tags": ["juedischer_friedhof","quer"]},
+        {"text": "Das Nieuwe Diep ist ein Rest der historischen Wasserlandschaft östlich der Stadt. Deiche und spätere Verkehrsachsen rahmen den Park; seine Seen und Gräben hängen mit Polderentwässerung und Uferentwicklung zusammen.", "tags": ["wasser","polder"]},
+        {"text": "Freibad, Sport, Spiel und Gastronomie ergänzten die Grünanlage. Ihre konkrete Öffnung ist veränderlich und darf nicht mit der grundsätzlich öffentlichen Parkfunktion gleichgesetzt werden.", "tags": ["freizeit","nutzung"]},
+        {"text": "Visuell: Der Park öffnet sich östlich der Indische Buurt mit großen Wiesen, alten Baumgruppen und Wasser am Nieuwe Diep. Eingänge an Valentijnkade und Insulindeweg führen in ein landschaftliches Wegenetz.", "tags": ["visuell","wegweiser"]},
+        {"text": "LIVE: Freibad, Brennerei/Gastronomie, Veranstaltungen, Wegearbeiten und Friedhofszugang aktuell prüfen. Nach Sturm oder Starkregen können ufernahe Wege gesperrt sein; saisonale Natur nicht garantieren.", "tags": ["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q": "Hieß der Flevopark immer so?", "a": "Nein. Er wurde als Zuiderzeepark angelegt und 1971 in Flevopark umbenannt."}]
+    },
+    {
+      "id": "amsterdam_park_frankendael",
+      "name": "Park Frankendael",
+      "general_info": "Park Frankendael umgibt das historische Landhaus Frankendael in der Watergraafsmeer. Formale Gartenreste, landschaftliche Partien und die Geschichte des 1629 trockengelegten Polders treffen hier aufeinander.",
+      "deep_data_pool": [
+        {"text": "Die Watergraafsmeer entstand, nachdem der Diemermeer 1629 trockengelegt worden war. Wohlhabende Amsterdamer errichteten im Polder Landsitze, um Sommer, Garten und frische Luft außerhalb der dichten Stadt zu genießen.", "tags": ["polder","stadtgeschichte"]},
+        {"text": "Frankendael ist der einzige weitgehend erhaltene Landsitz dieser Reihe. Das heutige Haupthaus erhielt im 18. Jahrhundert seine repräsentative Gestalt; frühere Bauphasen reichen weiter zurück.", "tags": ["landhaus","baugeschichte"]},
+        {"text": "Der Name wird mit dem deutschen Ort Frankenthal und früheren Eigentümern verbunden. Besitzwechsel und Umbauten zeigen, dass das Ensemble kein unveränderter Moment, sondern eine lange Folge privater und öffentlicher Nutzungen ist.", "tags": ["name","besitzgeschichte"]},
+        {"text": "Vor dem Haus liegt ein formaler Garten mit geometrischen Formen; andere Parkteile wurden landschaftlicher gestaltet. Wassergräben erinnern zugleich an Entwässerung und Abgrenzung des Landsitzes.", "tags": ["gartenkunst","wasser"]},
+        {"text": "Im 19. und 20. Jahrhundert dienten Haus und Gelände verschiedenen Zwecken, darunter gärtnerische Ausbildung und kommunale Nutzung. Der heutige öffentliche Park entstand aus dieser schrittweisen Öffnung.", "tags": ["nutzungsgeschichte","oeffentlicher_raum"]},
+        {"text": "Zeitgenössische Gartenbereiche und Kunst ergänzen historische Elemente. Veranstaltungen und Gastronomie beleben das Landhaus, sind jedoch nicht mit dem frei zugänglichen Park als Ganzem gleichzusetzen.", "tags": ["gegenwart","kultur"]},
+        {"text": "Visuell: Ein helles symmetrisches Herrenhaus steht hinter Wasser und formaler Gartenachse. Alte Bäume, Wiesen und verschlungene Wege umgeben den Kern; der Haupteindruck ist eher Landsitz als städtischer Sportpark.", "tags": ["visuell","wegweiser"]},
+        {"text": "LIVE: Hauszugang, Restaurant, Markt, Veranstaltungen, Gartenpflege und Wegsperrungen aktuell prüfen. Das historische Gebäude ist nicht automatisch während jeder Parköffnung innen zugänglich.", "tags": ["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q": "Was macht Frankendael besonders?", "a": "Es ist der einzige weitgehend erhaltene historische Landsitz der früher zahlreichen Buitenplaatsen in der Watergraafsmeer."}]
+    },
+    {
+      "id": "amsterdam_wertheimpark",
+      "name": "Wertheimpark",
+      "general_info": "Der 1812 eröffnete Wertheimpark gilt als ältester öffentlicher Park Amsterdams. In der Plantage verbindet die kleine Grünanlage frühe Stadtverschönerung mit dem Auschwitzmonument und jüdischer Erinnerung.",
+      "deep_data_pool": [
+        {"text": "Der Park wurde 1812 während der französischen Herrschaft öffentlich eröffnet. Er trug zunächst andere Namen und war Teil der grünen Plantagezone östlich der Innenstadt.", "tags": ["parkgeschichte","1812"]},
+        {"text": "Die Plantage war seit dem 17. Jahrhundert als Garten- und Erholungsgebiet angelegt worden, weil dauerhafte Steinbebauung zunächst eingeschränkt war. Der Park bewahrt einen Rest dieser grüneren Stadtstruktur.", "tags": ["plantage","stadtentwicklung"]},
+        {"text": "1898 erhielt die Anlage den Namen des jüdischen Bankiers und Philanthropen Abraham Carel Wertheim. Er engagierte sich in städtischen, kulturellen und wohltätigen Organisationen.", "tags": ["wertheim","name"]},
+        {"text": "Jan Wolkers schuf das Auschwitzmonument Nooit Meer Auschwitz aus zerbrochenen Spiegelplatten. Der gebrochene Himmel spiegelt sich in Fragmenten und verweigert ein harmonisches Erinnerungsbild.", "tags": ["auschwitzmonument","kunst"]},
+        {"text": "Seit 1993 steht das Monument im Wertheimpark; jährlich findet dort die niederländische Auschwitz-Gedenkveranstaltung statt. Der Park ist deshalb zugleich Alltagserholungsraum und nationaler Erinnerungsort.", "tags": ["gedenken","zweiter_weltkrieg"]},
+        {"text": "In der Umgebung liegen frühere jüdische Viertel, Hollandsche Schouwburg, Joods Cultureel Kwartier und Hortus. Der kleine Park gehört räumlich zu einem dichten Netz von Verfolgungs- und Kulturgeschichte.", "tags": ["juedische_geschichte","quer"]},
+        {"text": "Visuell: Eine kleine, von alten Bäumen beschattete Grünfläche liegt am Nieuwe Herengracht. Das Monument aus flachen, gebrochen wirkenden Spiegelplatten ist bewusst niedrig und kann zwischen Rasen und Wegen leicht übersehen werden.", "tags": ["visuell","wegweiser"]},
+        {"text": "LIVE: Gedenktermine, Zeremoniesperrungen, Pflegearbeiten und Zugänge aktuell bei Stadt und Auschwitz Comité prüfen. Am Monument respektvoll Abstand zu Gedenkhandlungen halten; Veranstaltungen nicht aus Vorjahren ableiten.", "tags": ["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q": "Warum liegen zerbrochene Spiegel im Park?", "a": "Sie bilden Jan Wolkers' Auschwitzmonument Nooit Meer Auschwitz und spiegeln den Himmel bewusst fragmentiert."}]
+    },
+    {
+      "id": "amsterdam_kadijken",
+      "name": "Kadijken",
+      "general_info": "Die Kadijken bilden zwei lange, schmale Insel- und Deichstraßen östlich der alten Stadt. Entstanden bei der Erweiterung um 1660, verbanden sie Schiffbau, Lagerung, Wohnen und die wasserreiche Plantagekante.",
+      "deep_data_pool": [
+        {"text": "Nieuwe Herengracht, Entrepotdok und Nieuwe Vaart rahmen das Gebiet. Bei der vierten Stadterweiterung wurden um 1660 Deiche und Inselstreifen angelegt, die als Grote und Kleine Kadijk bekannt wurden.", "tags": ["stadtentwicklung","deich"]},
+        {"text": "Anders als die vornehmen Hauptgrachten war das Gebiet stark von Werften, Holz, Schiffsausrüstung, Lagerhäusern und Handwerk geprägt. Wasserzugang und Randlage machten emissions- und platzintensive Arbeit möglich.", "tags": ["arbeit","hafen"]},
+        {"text": "Die schmale Parzellierung führte zu dicht stehenden Häusern entlang langer Straßen. Hinter Wohnfassaden lagen Höfe, Werkstätten und Speicher; die Mischung unterschied sich von reinen Kaufmannsadressen der Herengracht.", "tags": ["wohnen","stadtstruktur"]},
+        {"text": "Das Entrepotdok entwickelte sich im 19. Jahrhundert zum abgeschlossenen Zolllager. Seine lange Speicherfront grenzt südlich an die Kadijken und wurde später zu Wohnungen und anderen Nutzungen umgebaut.", "tags": ["entrepotdok","strukturwandel"]},
+        {"text": "Die Oosterkerk von 1671 liegt am östlichen Ende des Inselraums und diente der reformierten Bevölkerung in den neuen Hafenvierteln. Ihr zentraler Grundriss setzt einen monumentalen Gegenpunkt zur kleinteiligen Bebauung.", "tags": ["oosterkerk","quer"]},
+        {"text": "Sanierung und Wohnumbau im 20. Jahrhundert bewahrten viel historische Struktur, veränderten aber die frühere Arbeiter- und Gewerbemischung. Gentrifizierung ist daher Teil der jüngeren Gebietsgeschichte.", "tags": ["stadterneuerung","sozialgeschichte"]},
+        {"text": "Visuell: Zwei lange, schmale Straßen- und Inselzüge ziehen sich zwischen Nieuwe Herengracht, Entrepotdok und Nieuwe Vaart. Kleine Backsteinhäuser, Brückenblicke, Lagerfronten und Oosterkerk strukturieren den Raum.", "tags": ["visuell","wegweiser"]},
+        {"text": "LIVE: Brücken- und Kaimauersanierungen, Hausbootzugänge, Baustellen und lokale Nutzungen aktuell prüfen. Kadijken sind überwiegend Wohnquartier; Innenhöfe, Stege und Hauseingänge als privat respektieren.", "tags": ["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q": "Sind die Kadijken eine einzelne Sehenswürdigkeit?", "a": "Nein. Es ist ein historisches Gebiet aus Deich- und Inselstraßen, Wasserläufen, Wohnhäusern, Speichern und Kirchen."}]
+    },
+    {
+      "id": "amsterdam_tolhuistuin",
+      "name": "Tolhuistuin",
+      "general_info": "Der Tolhuistuin liegt am alten Fähr- und Zollhausplatz in Amsterdam-Noord. Aus dem Garten des 19. Jahrhunderts und späterem Shell-Kantinenareal entwickelte sich ein öffentliches Kulturensemble gegenüber dem Hauptbahnhof.",
+      "deep_data_pool": [
+        {"text": "Am Nordufer lag ein Tolhuis, an dem Reisende auf dem Weg nach Waterland Abgaben entrichteten. Die nahe Fähre wurde deshalb lange Tolhuispont genannt; Garten und Ortsname bewahren diese Verkehrsgeschichte.", "tags": ["zoll","verkehrsgeschichte"]},
+        {"text": "Im 19. Jahrhundert wurde der Tolhuistuin ein beliebtes Ausflugsziel mit Garten, Musik und Bewirtung. Die kurze Fährfahrt erlaubte Stadtbewohnern einen Wechsel in das damals ländlicher wirkende Noord.", "tags": ["freizeitgeschichte","garten"]},
+        {"text": "Shell übernahm das Gelände im 20. Jahrhundert und nutzte Teile als Betriebs- und Personalgarten. Das markante frühere Kantinengebäude entstand im Umfeld des Forschungsstandorts.", "tags": ["shell","industriegeschichte"]},
+        {"text": "Nach der Öffnung des Shell-Areals wurde der Garten wieder öffentlich und Kultur zog in Bestandsbauten ein. Paradiso Noord beziehungsweise Kulturpartner nutzten Säle für Musik, Debatte und gesellschaftliche Programme.", "tags": ["umnutzung","kultur"]},
+        {"text": "Das Ensemble liegt zwischen Buiksloterweg-Fähre, A'DAM-Toren und dem älteren Noord. Dadurch vermittelt es zwischen neuer Hochhausentwicklung und historischen Grün- beziehungsweise Verkehrsstrukturen.", "tags": ["overhoeks","quer"]},
+        {"text": "Der Garten besitzt alte Bäume und offene Aufenthaltsbereiche. Gebäude aus verschiedenen Zeiten verhindern ein einheitliches Denkmalbild; gerade die Überlagerung von Zollort, Ausflugsgarten und Firmencampus ist zentral.", "tags": ["landschaft","zeitschichten"]},
+        {"text": "Visuell: Hinter dem Fähranleger Buiksloterweg öffnet sich ein grünes Gelände mit großen Bäumen und mehreren Kulturgebäuden. Der dunkle A'DAM-Toren steht unmittelbar daneben und dient als Fernzeichen.", "tags": ["visuell","wegweiser"]},
+        {"text": "LIVE: Konzertprogramm, Veranstaltungsort, Gartenöffnung, Gastronomie und Gebäudeeingänge aktuell beim Tolhuistuin und jeweiligen Partnern prüfen. Nicht jede Veranstaltung findet im gleichen Saal statt.", "tags": ["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q": "Was bedeutet Tolhuis?", "a": "Es bezeichnete ein Zoll- beziehungsweise Abgabenhaus am alten Übergang vom IJ nach Waterland."}]
+    },
+    {
+      "id": "amsterdam_ziggo_dome",
+      "name": "Ziggo Dome",
+      "general_info": "Der 2012 eröffnete Ziggo Dome ist eine für verstärkte Live-Musik entworfene Großarena in Amsterdam-Zuidoost. Benthem Crouwel Architects fassten den nahezu kubischen Bau in eine schwarze, medial bespielbare Fassade.",
+      "deep_data_pool": [
+        {"text": "Die Arena wurde als mittelgroße bis große Konzerthalle zwischen Clubbühnen und Fußballstadion geplant. Der Bau öffnete 2012 und ergänzt Johan-Cruijff-ArenA, AFAS Live und weitere Veranstaltungsorte in Zuidoost.", "tags": ["baugeschichte","veranstaltungsquartier"]},
+        {"text": "Benthem Crouwel Architects entwarfen einen kompakten schwarzen Kubus. Tausende LED-Leuchten in der Fassade können bewegte Muster und Bilder erzeugen, ohne die klare Grundform des Gebäudes aufzulösen.", "tags": ["architektur","medienfassade"]},
+        {"text": "Trotz des Namens ist der Bau nicht kuppelförmig. Dome bezeichnet die Arena als Veranstaltungsraum; äußerlich ist sie ein fast geschlossener Quader mit wenigen großen Öffnungen.", "tags": ["name","einordnung"]},
+        {"text": "Der Innenraum wurde gezielt für Pop- und Rockkonzerte optimiert. Akustische Verkleidungen, kompakte Zuschauerränge und technische Infrastruktur sollen verstärkte Musik kontrollierter wiedergeben als eine primär für Sport gebaute Halle.", "tags": ["akustik","technik"]},
+        {"text": "Die Bühne wird je Produktion eingebaut; Kapazität und Sichtlinien verändern sich mit Stehplatz-, Sitz- oder Sonderkonfiguration. Eine feste Zahl beschreibt daher nicht jede Veranstaltung korrekt.", "tags": ["saal","produktion"]},
+        {"text": "Der Standort am ArenA-Boulevard ist über Bahnhof Bijlmer ArenA an Bahn und Metro angebunden. Große Veranstaltungen in mehreren Nachbarhallen können die gesamten Fuß- und Verkehrsströme des Quartiers beeinflussen.", "tags": ["verkehr","quer"]},
+        {"text": "Visuell: Ein großer schwarzer, nahezu fensterloser Kubus steht am De Passage/ArenA-Boulevard. Nach Einbruch der Dunkelheit zeichnet die LED-Fassade Bilder oder Muster; tagsüber dominiert die dunkle Rasterhaut.", "tags": ["visuell","wegweiser"]},
+        {"text": "LIVE: Konzert, Einlass, Taschenregeln, Sitzplan, Garderobe, Support, Ende, Bahnverkehr und Tickets ausschließlich beim Ziggo Dome und Veranstalter prüfen. Fassadenbild und Hallenkonfiguration wechseln je Termin.", "tags": ["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q": "Ist der Ziggo Dome eine Sportkuppel?", "a": "Nein. Er ist ein kubischer, besonders für verstärkte Live-Musik entwickelter Veranstaltungsbau."}]
+    },
+    {
+      "id": "amsterdam_de_krijtberg",
+      "name": "De Krijtberg",
+      "general_info": "Die katholische Jesuitenkirche St. Franciscus Xaverius, genannt De Krijtberg, wurde 1881 bis 1883 an der Singel errichtet. Alfred Tepe schuf eine schmale, hohe neugotische Kirche auf begrenzter Grachtenparzelle.",
+      "deep_data_pool": [
+        {"text": "Jesuiten wirkten seit dem 17. Jahrhundert an diesem Ort in einer versteckten Hauskirche, als katholischer Gottesdienst in der reformierten Republik nur eingeschränkt öffentlich sichtbar sein durfte.", "tags": ["religionsgeschichte","schuilkerk"]},
+        {"text": "Der Name De Krijtberg stammt von einem früheren Hausnamen. Die heutige Kirche ist dem Jesuitenmissionar Franz Xaver geweiht; Alltagsname und offizielles Patrozinium bestehen nebeneinander.", "tags": ["name","jesuiten"]},
+        {"text": "Nach Wiederherstellung der katholischen Hierarchie und wachsender öffentlicher Freiheit entstand 1881 bis 1883 ein repräsentativer Neubau. Alfred Tepe gehörte zu den wichtigsten Architekten der niederländischen Neugotik.", "tags": ["baugeschichte","emanzipation"]},
+        {"text": "Die knappe Parzelle zwischen Singel und Kalverstraat führte zu einem ungewöhnlich hohen, schmalen Bau. Zwei spitze Fronttürme nutzen die geringe Straßenbreite vertikal und machen die Kirche über der Gracht sichtbar.", "tags": ["architektur","stadtgrundriss"]},
+        {"text": "Das reich ausgestattete Innere verbindet farbiges Glas, Altäre, Heiligenfiguren, Holz- und Wanddekoration. Die starke Raumhöhe kompensiert die geringe Breite und zieht den Blick zum Chor.", "tags": ["innenraum","sakralkunst"]},
+        {"text": "Die Kirche blieb ein Zentrum jesuitischer Seelsorge in der Innenstadt. Liturgie, Beichte, Musik und soziale Arbeit gehören zur lebendigen Nutzung; sie ist daher nicht nur historisches Schaustück.", "tags": ["gemeinde","gegenwart"]},
+        {"text": "Visuell: Am Singel erhebt sich eine sehr schmale, hohe Backsteinfront mit zwei symmetrischen Spitzhelmtürmen, Maßwerkfenstern und reicher neugotischer Gliederung. Nachbarhäuser wirken daneben auffallend niedrig.", "tags": ["visuell","wegweiser"]},
+        {"text": "LIVE: Gottesdienste, Beichte, Konzerte, Besichtigung, Spendenregeln und Einschränkungen während liturgischer Feiern aktuell bei De Krijtberg prüfen. Andacht und laufende Gottesdienste haben Vorrang vor Besichtigung.", "tags": ["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q": "Warum ist De Krijtberg so schmal und hoch?", "a": "Die Kirche musste auf eine enge Grachtenparzelle passen; der neugotische Entwurf nutzte deshalb starke Vertikalität."}]
+    },
+    {
+      "id": "amsterdam_bijbels_museum",
+      "name": "Bijbels Museum",
+      "general_info": "Das Bijbels Museum entstand aus der Sammlung des Pfarrers Leendert Schouten und war lange in den Cromhouthuizen an der Herengracht untergebracht. Seit 2020 arbeitet es als wanderndes Museum ohne dauerhaftes eigenes Ausstellungsgebäude.",
+      "deep_data_pool": [
+        {"text": "Leendert Schouten baute im 19. Jahrhundert eine Sammlung auf, die biblische Geschichte durch Modelle, archäologische Objekte, Bücher und Naturmaterialien anschaulich machen sollte. 1852 öffnete er sie für Besucher.", "tags": ["gruendung","sammlung"]},
+        {"text": "Zu den bekannten Vermittlungsobjekten gehörte ein maßstäbliches Modell des Jerusalemer Tempels nach damaligem Forschungsstand. Solche Modelle zeigen zugleich, wie sich Bibelarchäologie und historische Vorstellungen im Lauf der Zeit verändern.", "tags": ["modell","vermittlung"]},
+        {"text": "Das Museum zog 1975 in die Cromhouthuizen an der Herengracht. Die repräsentativen Grachtenhäuser waren 1660 bis 1662 von Philips Vingboons für die Kaufmannsfamilie Cromhout entworfen worden.", "tags": ["cromhouthuizen","architektur"]},
+        {"text": "Historische Bibelausgaben, religiöse Kunst und Alltagsobjekte dokumentierten Übersetzung, Druck und Gebrauch der Bibel. Die Sammlung behandelte damit nicht nur die antike Welt, sondern auch niederländische Religions- und Buchgeschichte.", "tags": ["buchgeschichte","religion"]},
+        {"text": "Die dauerhafte Präsentation in den Cromhouthuizen endete 2020. Das Bijbels Museum bezeichnet sich seither als Museum in Bewegung und entwickelt Ausstellungen mit Partnerinstitutionen an wechselnden Orten.", "tags": ["institution","wandel"]},
+        {"text": "Aktuelle Projekte betrachten biblische Themen aus unterschiedlichen religiösen, kulturellen und gesellschaftlichen Perspektiven. Eine frühere Hausadresse darf deshalb nicht als heutiger garantierter Museumsstandort ausgegeben werden.", "tags": ["gegenwart","einordnung"]},
+        {"text": "Orientierung: Die klassizistischen Cromhouthuizen an der Herengracht sind die historische frühere Museumsadresse. Aus dieser Vergangenheit darf kein heutiges Ziel abgeleitet werden; der konkrete Ausstellungsort gehört ausschließlich in die LIVE-Prüfung.", "tags": ["orientierung","wegweiser"]},
+        {"text": "LIVE: Laufende Ausstellung, Partnerhaus, Adresse, Termine, Tickets und Zugänglichkeit ausschließlich auf bijbelsmuseum.nl prüfen. Ohne aktuelle Bestätigung keine Navigation zur Herengracht als Museumsbesuch anbieten.", "tags": ["live_hint","ephemeral","standort"]}
+      ],
+      "faqs": [{"q": "Kann man das Bijbels Museum immer an der Herengracht besuchen?", "a": "Nein. Seit 2020 arbeitet es ohne dauerhaftes eigenes Haus mit Ausstellungen an wechselnden Partnerorten."}]
+    }
+  ],
+  "new_places": [],
+  "offline_qa": []
+}

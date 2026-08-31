@@ -1,0 +1,3600 @@
+{
+  "generated_at": "2026-08-28T05:22:43.237Z",
+  "summary": {
+    "city_id": "luebeck",
+    "checked": 121,
+    "ok": 42,
+    "check": 43,
+    "bad": 36,
+    "errors": 0,
+    "max_delta_m": 180,
+    "city_halo_m": 28000,
+    "story_only": true
+  },
+  "rows": [
+    {
+      "id": "luebeck_leuchtturm_redner_lubeck",
+      "name": "Leuchtturm Redner Lübeck",
+      "category": "aussicht",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.86280466666667,
+        "lng": 10.682063333333334
+      },
+      "query": "Leuchtturm Redner Lübeck, Lübeck, Germany",
+      "osm": {
+        "lat": 53.9606313,
+        "lng": 10.8793256,
+        "display_name": "Alter Leuchtturm Travemünde, Am Leuchtenfeld, Lübeck, Deutschland",
+        "class": "man_made",
+        "type": "lighthouse",
+        "provider": "photon"
+      },
+      "delta_m": 16890,
+      "from_city_m": 418,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "luebeck_burgerpark",
+      "name": "Bürgerpark",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.89229924,
+        "lng": 10.68315158
+      },
+      "query": "Bürgerpark, Lübeck, Germany",
+      "osm": {
+        "lat": 53.9247969,
+        "lng": 10.8267078,
+        "display_name": "Bürgerpark, Alt-Kücknitz / Dummersdorf / Roter Hahn, Kücknitz, Lübeck, Schleswig-Holstein, Deutschland",
+        "class": "landuse",
+        "type": "recreation_ground",
+        "importance": 0.08007299687190048,
+        "osm_type": "relation",
+        "osm_id": 18623605,
+        "provider": "nominatim"
+      },
+      "delta_m": 10074,
+      "from_city_m": 2992,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "luebeck_wanderweg_an_der_trave",
+      "name": "Wanderweg an der Trave",
+      "category": "wanderung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.856981680000004,
+        "lng": 10.6874405
+      },
+      "query": "Wanderweg an der Trave, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8853008,
+        "lng": 10.820795,
+        "display_name": "HKL Baumaschinen - Center Lübeck Ost, An der Trave, Selmsdorf, Deutschland",
+        "class": "building",
+        "type": "commercial",
+        "provider": "photon"
+      },
+      "delta_m": 9293,
+      "from_city_m": 945,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "luebeck_wanderweg",
+      "name": "Wanderweg",
+      "category": "wanderung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.79532042352941,
+        "lng": 10.727820152941176
+      },
+      "query": "Wanderweg, Lübeck, Germany",
+      "osm": {
+        "lat": 53.866444,
+        "lng": 10.684738,
+        "display_name": "Lübeck, Deutschland",
+        "class": "place",
+        "type": "city",
+        "provider": "photon"
+      },
+      "delta_m": 8399,
+      "from_city_m": 8257,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "luebeck_sport_und_freizeitareal_falkenwiese",
+      "name": "Sport- und Freizeitareal Falkenwiese",
+      "category": "freizeit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.8710448,
+        "lng": 10.7014956
+      },
+      "query": "Sport-, Lübeck, Germany",
+      "osm": {
+        "lat": 53.7976379,
+        "lng": 10.7087557,
+        "display_name": "Zum Sportplatz, Ausbildungspark Blankensee, Blankensee, Sankt Jürgen, Lübeck, Schleswig-Holstein, 23560, Deutschland",
+        "class": "highway",
+        "type": "service",
+        "importance": 0.0400729968719005,
+        "osm_type": "way",
+        "osm_id": 59203453,
+        "provider": "nominatim"
+      },
+      "delta_m": 8176,
+      "from_city_m": 1159,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "luebeck_hoftheater_lubeck",
+      "name": "Hoftheater Lübeck",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.87351644285714,
+        "lng": 10.674173299999998
+      },
+      "query": "Hoftheater Lübeck, Lübeck, Germany",
+      "osm": {
+        "lat": 53.804929,
+        "lng": 10.7126079,
+        "display_name": "Flughafen Lübeck, Blankenseer Straße, Lübeck, Deutschland",
+        "class": "aeroway",
+        "type": "aerodrome",
+        "provider": "photon"
+      },
+      "delta_m": 8033,
+      "from_city_m": 1209,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "luebeck_rathaustreppe",
+      "name": "Rathaustreppe am Markt",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.86657646666667,
+        "lng": 10.685502249999999
+      },
+      "query": "Rathaustreppe am Markt, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8869913,
+        "lng": 10.7998961,
+        "display_name": "Neuapostolische Kirche Lübeck-Schlutup, Am Schlutuper Markt, Lübeck, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 7835,
+      "from_city_m": 141,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "luebeck_rossmann_drogeriemarkt",
+        "luebeck_rathaus",
+        "luebeck_osm_transit_605017924"
+      ]
+    },
+    {
+      "id": "luebeck_lubeck_zwischenzeilen_das_kulturmagazin",
+      "name": "Lübeck Zwischenzeilen - Das Kulturmagazin",
+      "category": "souvenir",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.865601857142856,
+        "lng": 10.678015214285717
+      },
+      "query": "Lübeck Zwischenzeilen, Lübeck, Germany",
+      "osm": {
+        "lat": 53.804929,
+        "lng": 10.7126079,
+        "display_name": "Flughafen Lübeck, Blankenseer Straße, Lübeck, Deutschland",
+        "class": "aeroway",
+        "type": "aerodrome",
+        "provider": "photon"
+      },
+      "delta_m": 7118,
+      "from_city_m": 560,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "luebeck_lubecker_lowen"
+      ]
+    },
+    {
+      "id": "luebeck_stadtgeschichte",
+      "name": "Lübeck Stadtgeschichte & Orientierung",
+      "category": "geschichte",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.8664305,
+        "lng": 10.6845816
+      },
+      "query": "Lübeck Stadtgeschichte, Lübeck, Germany",
+      "osm": {
+        "lat": 53.804929,
+        "lng": 10.7126079,
+        "display_name": "Flughafen Lübeck, Blankenseer Straße, Lübeck, Deutschland",
+        "class": "aeroway",
+        "type": "aerodrome",
+        "provider": "photon"
+      },
+      "delta_m": 7082,
+      "from_city_m": 168,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "luebeck_st_petri_zu_lubeck",
+      "name": "Petrikirche Lübeck",
+      "category": "kirche",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.86583764838708,
+        "lng": 10.683069406451612
+      },
+      "query": "Petrikirche Lübeck, Lübeck, Germany",
+      "osm": {
+        "lat": 53.804929,
+        "lng": 10.7126079,
+        "display_name": "Flughafen Lübeck, Blankenseer Straße, Lübeck, Deutschland",
+        "class": "aeroway",
+        "type": "aerodrome",
+        "provider": "photon"
+      },
+      "delta_m": 7045,
+      "from_city_m": 233,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "luebeck_wanderweg_dragerweg",
+        "luebeck_naturschutzgebiet_schellbruch",
+        "luebeck_naturschutzgebiet_wakenitz_muggenbusch",
+        "luebeck_wakenitz",
+        "luebeck_thorweg",
+        "luebeck_thomas_mann_stein",
+        "luebeck_wesloer_wald"
+      ]
+    },
+    {
+      "id": "luebeck_zentralbad_lubeck",
+      "name": "Zentralbad Lübeck",
+      "category": "freizeit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.86481927777777,
+        "lng": 10.684043166666665
+      },
+      "query": "Zentralbad Lübeck, Lübeck, Germany",
+      "osm": {
+        "lat": 53.804929,
+        "lng": 10.7126079,
+        "display_name": "Flughafen Lübeck, Blankenseer Straße, Lübeck, Deutschland",
+        "class": "aeroway",
+        "type": "aerodrome",
+        "provider": "photon"
+      },
+      "delta_m": 6918,
+      "from_city_m": 180,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "luebeck_niederegger",
+      "name": "Niederegger Marzipan-Museum & Stammhaus",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.866526909090915,
+        "lng": 10.685895936363638
+      },
+      "query": "Niederegger Marzipan-Museum, Lübeck, Germany",
+      "osm": {
+        "lat": 53.9119286,
+        "lng": 10.7330765,
+        "display_name": "Niederegger Marzipan, Dänischburger Landstraße, Lübeck, Deutschland",
+        "class": "shop",
+        "type": "confectionery",
+        "provider": "photon"
+      },
+      "delta_m": 5920,
+      "from_city_m": 126,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "luebeck_hansestadt_lubeck",
+      "name": "Hansestadt Lübeck",
+      "category": "verwaltung",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.865367875000004,
+        "lng": 10.686797625
+      },
+      "query": "Hansestadt Lübeck, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8571572,
+        "lng": 10.609523,
+        "display_name": "Hansestadt Lübeck, A 1, Roggenhorst, Groß Steinrade / Schönböcken, Sankt Lorenz Nord, Lübeck, Schleswig-Holstein, 23556, Deutschland",
+        "class": "information",
+        "type": "board",
+        "importance": 0.00007299687190046566,
+        "osm_type": "node",
+        "osm_id": 496048013,
+        "provider": "nominatim"
+      },
+      "delta_m": 5149,
+      "from_city_m": 19,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "luebeck_wesloer_wald",
+      "name": "Wesloer Wald",
+      "category": "wanderung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.865830634999995,
+        "lng": 10.683163205
+      },
+      "query": "Wesloer Wald, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8682731,
+        "lng": 10.7614493,
+        "display_name": "Wesloer Moor, Lübeck, Deutschland",
+        "class": "natural",
+        "type": "water",
+        "provider": "photon"
+      },
+      "delta_m": 5140,
+      "from_city_m": 226,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "luebeck_st_petri_zu_lubeck",
+        "luebeck_wanderweg_dragerweg",
+        "luebeck_naturschutzgebiet_schellbruch",
+        "luebeck_naturschutzgebiet_wakenitz_muggenbusch",
+        "luebeck_wakenitz",
+        "luebeck_thorweg",
+        "luebeck_thomas_mann_stein"
+      ]
+    },
+    {
+      "id": "luebeck_wanderweg_dragerweg",
+      "name": "Wanderweg Drägerweg",
+      "category": "wanderung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.865830634999995,
+        "lng": 10.683163205
+      },
+      "query": "Wanderweg Drägerweg, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8330113,
+        "lng": 10.735124,
+        "display_name": "Drägerweg, Lübeck, Deutschland",
+        "class": "highway",
+        "type": "cycleway",
+        "provider": "photon"
+      },
+      "delta_m": 4993,
+      "from_city_m": 226,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "luebeck_st_petri_zu_lubeck",
+        "luebeck_naturschutzgebiet_schellbruch",
+        "luebeck_naturschutzgebiet_wakenitz_muggenbusch",
+        "luebeck_wakenitz",
+        "luebeck_thorweg",
+        "luebeck_thomas_mann_stein",
+        "luebeck_wesloer_wald"
+      ]
+    },
+    {
+      "id": "luebeck_naturschutzgebiet_schellbruch",
+      "name": "Naturschutzgebiet Schellbruch",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.865830634999995,
+        "lng": 10.683163205
+      },
+      "query": "Naturschutzgebiet Schellbruch, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8966688,
+        "lng": 10.7158238,
+        "display_name": "Naturschutzgebiet \"Schellbruch\", Schwarzer Weg, Karlshof, Karlshof / Israelsdorf / Gothmund, Sankt Gertrud, Lübeck, Schleswig-Holstein, 23568, Deutschland",
+        "class": "information",
+        "type": "board",
+        "importance": 0.00007299687190046566,
+        "osm_type": "node",
+        "osm_id": 366273007,
+        "provider": "nominatim"
+      },
+      "delta_m": 4042,
+      "from_city_m": 226,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "luebeck_st_petri_zu_lubeck",
+        "luebeck_wanderweg_dragerweg",
+        "luebeck_naturschutzgebiet_wakenitz_muggenbusch",
+        "luebeck_wakenitz",
+        "luebeck_thorweg",
+        "luebeck_thomas_mann_stein",
+        "luebeck_wesloer_wald"
+      ]
+    },
+    {
+      "id": "luebeck_skulptur",
+      "name": "Skulptur",
+      "category": "denkmal",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.8663584,
+        "lng": 10.6755486
+      },
+      "query": "Skulptur, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8365603,
+        "lng": 10.6948143,
+        "display_name": "Skulptur, Grüne Fuge, Gut Mönkhof, Strecknitz, Sankt Jürgen, Lübeck, Schleswig-Holstein, 23562, Deutschland",
+        "class": "tourism",
+        "type": "artwork",
+        "importance": 0.00007299687190046566,
+        "osm_type": "node",
+        "osm_id": 5217240908,
+        "provider": "nominatim"
+      },
+      "delta_m": 3546,
+      "from_city_m": 729,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "luebeck_kath_kirche_st_vicelin",
+      "name": "Kath. Kirche St. Vicelin",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.843742999999996,
+        "lng": 10.699733285714284
+      },
+      "query": "Kath. Kirche St., Lübeck, Germany",
+      "osm": {
+        "lat": 53.8677749,
+        "lng": 10.6850966,
+        "display_name": "St.-Marien-Kirche, Marienkirchhof, Lübeck, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 2839,
+      "from_city_m": 2566,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "luebeck_fritz_reuter_denkmal",
+      "name": "Fritz Reuter Denkmal",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.87654916,
+        "lng": 10.70136354
+      },
+      "query": "Fritz Reuter Denkmal, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8520693,
+        "lng": 10.694752,
+        "display_name": "Fritz-Reuter-Straße, Lübeck, Deutschland",
+        "class": "highway",
+        "type": "residential",
+        "provider": "photon"
+      },
+      "delta_m": 2756,
+      "from_city_m": 1569,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "luebeck_pitchingzone",
+      "name": "PitchingZone",
+      "category": "freizeit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.8457808,
+        "lng": 10.677161000000002
+      },
+      "query": "PitchingZone, Lübeck, Germany",
+      "osm": {
+        "lat": 53.866444,
+        "lng": 10.684738,
+        "display_name": "Lübeck, Deutschland",
+        "class": "place",
+        "type": "city",
+        "provider": "photon"
+      },
+      "delta_m": 2351,
+      "from_city_m": 2274,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "luebeck_naturufer",
+      "name": "Naturufer",
+      "category": "natur",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.8676919,
+        "lng": 10.7077572
+      },
+      "query": "Naturufer, Lübeck, Germany",
+      "osm": {
+        "lat": 53.866444,
+        "lng": 10.684738,
+        "display_name": "Lübeck, Deutschland",
+        "class": "place",
+        "type": "city",
+        "provider": "photon"
+      },
+      "delta_m": 1516,
+      "from_city_m": 1412,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "luebeck_dearuniverse",
+      "name": "DearUniverse",
+      "category": "souvenir",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.87229612,
+        "lng": 10.67071366
+      },
+      "query": "DearUniverse, Lübeck, Germany",
+      "osm": {
+        "lat": 53.866444,
+        "lng": 10.684738,
+        "display_name": "Lübeck, Deutschland",
+        "class": "place",
+        "type": "city",
+        "provider": "photon"
+      },
+      "delta_m": 1126,
+      "from_city_m": 1287,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "luebeck_osm_post_office_1204011485"
+      ]
+    },
+    {
+      "id": "luebeck_ganghaeuser",
+      "name": "Lübecker Gänge & Höfe",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.86960793333333,
+        "lng": 10.690743500000002
+      },
+      "query": "Lübecker Gänge, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8682674,
+        "lng": 10.6759539,
+        "display_name": "Lübecker Stadtgraben, Lübeck, Deutschland",
+        "class": "waterway",
+        "type": "canal",
+        "provider": "photon"
+      },
+      "delta_m": 981,
+      "from_city_m": 536,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "luebeck_priwall_strand",
+      "name": "Priwall Strand",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.95812830999999,
+        "lng": 10.890085065
+      },
+      "query": "Priwall Strand, Lübeck, Germany",
+      "osm": {
+        "lat": 53.9565905,
+        "lng": 10.903466,
+        "display_name": "Priwall Strand Infotafel, Seeweg, Priwall-Wochenendhaussiedlung, Priwall, Travemünde, Lübeck, Schleswig-Holstein, 23570, Deutschland",
+        "class": "information",
+        "type": "board",
+        "importance": 0.000045001144426596745,
+        "osm_type": "node",
+        "osm_id": 10850721990,
+        "provider": "nominatim"
+      },
+      "delta_m": 892,
+      "from_city_m": 16848,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "luebeck_travemunde_strandpromenade",
+      "name": "Travemünde Strandpromenade",
+      "category": "wanderung",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.96504478000001,
+        "lng": 10.880758999999998
+      },
+      "query": "Travemünde Strandpromenade, Lübeck, Germany",
+      "osm": {
+        "lat": 53.9717085,
+        "lng": 10.8829349,
+        "display_name": "DLRG Lübeck, Wasserrettungsstation Travemünde | Turm 3, Strandpromenade, Alt-Travemünde / Rönnau, Travemünde, Lübeck, Schleswig-Holstein, 23570, Deutschland",
+        "class": "emergency",
+        "type": "lifeguard",
+        "importance": 0.000040322728313069614,
+        "osm_type": "way",
+        "osm_id": 391347897,
+        "provider": "nominatim"
+      },
+      "delta_m": 755,
+      "from_city_m": 16863,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "luebeck_panoramagang",
+      "name": "Panoramagang",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.8718720111111,
+        "lng": 10.690634211111112
+      },
+      "query": "Panoramagang, Lübeck, Germany",
+      "osm": {
+        "lat": 53.866444,
+        "lng": 10.684738,
+        "display_name": "Lübeck, Deutschland",
+        "class": "place",
+        "type": "city",
+        "provider": "photon"
+      },
+      "delta_m": 717,
+      "from_city_m": 761,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "luebeck_wesloer_wald_see",
+      "name": "Wesloer Wald See",
+      "category": "wanderung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.86768717222221,
+        "lng": 10.760858294444446
+      },
+      "query": "Wesloer Wald See, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8704732,
+        "lng": 10.7514423,
+        "display_name": "Deutsche Waldjugend, Wesloer Landstraße, Lübeck, Deutschland",
+        "class": "amenity",
+        "type": "social_facility",
+        "provider": "photon"
+      },
+      "delta_m": 691,
+      "from_city_m": 4878,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "luebeck_nsg_schellbruch",
+      "name": "NSG Schellbruch",
+      "category": "natur",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.9020448,
+        "lng": 10.7152084
+      },
+      "query": "NSG Schellbruch, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8966688,
+        "lng": 10.7158238,
+        "display_name": "Naturschutzgebiet \"Schellbruch\", Schwarzer Weg, Karlshof, Karlshof / Israelsdorf / Gothmund, Sankt Gertrud, Lübeck, Schleswig-Holstein, 23568, Deutschland",
+        "class": "information",
+        "type": "board",
+        "importance": 0.00007299687190046566,
+        "osm_type": "node",
+        "osm_id": 366273007,
+        "provider": "nominatim"
+      },
+      "delta_m": 599,
+      "from_city_m": 4480,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "luebeck_domspielplatz",
+      "name": "Domspielplatz",
+      "category": "kirche",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.861390285714286,
+        "lng": 10.684728071428571
+      },
+      "query": "Domspielplatz, Lübeck, Germany",
+      "osm": {
+        "lat": 53.866444,
+        "lng": 10.684738,
+        "display_name": "Lübeck, Deutschland",
+        "class": "place",
+        "type": "city",
+        "provider": "photon"
+      },
+      "delta_m": 562,
+      "from_city_m": 469,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "luebeck_industriemuseum_herrenwyk",
+      "name": "Industriemuseum Herrenwyk",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.903423139999994,
+        "lng": 10.804578440000002
+      },
+      "query": "Industriemuseum Herrenwyk, Lübeck, Germany",
+      "osm": {
+        "lat": 53.9000028,
+        "lng": 10.7986473,
+        "display_name": "Herrenwyk, Lübeck, Deutschland",
+        "class": "place",
+        "type": "suburb",
+        "provider": "photon"
+      },
+      "delta_m": 544,
+      "from_city_m": 8811,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "luebeck_travemunde_strand",
+      "name": "Travemünde Strand",
+      "category": "natur",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.967666439999995,
+        "lng": 10.881246100000002
+      },
+      "query": "Travemünde Strand, Lübeck, Germany",
+      "osm": {
+        "lat": 53.9648668,
+        "lng": 10.8759593,
+        "display_name": "Lübeck-Travemünde Strand, Fehlingstraße, Alt-Travemünde / Rönnau, Travemünde, Lübeck, Schleswig-Holstein, 23570, Deutschland",
+        "class": "railway",
+        "type": "halt",
+        "importance": 0.2574973608523206,
+        "osm_type": "node",
+        "osm_id": 11650672920,
+        "provider": "nominatim"
+      },
+      "delta_m": 465,
+      "from_city_m": 17079,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "luebeck_aussichtspunkt",
+      "name": "Aussichtspunkt",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.86257388235293,
+        "lng": 10.684400058823531
+      },
+      "query": "Aussichtspunkt, Lübeck, Germany",
+      "osm": {
+        "lat": 53.866444,
+        "lng": 10.684738,
+        "display_name": "Lübeck, Deutschland",
+        "class": "place",
+        "type": "city",
+        "provider": "photon"
+      },
+      "delta_m": 431,
+      "from_city_m": 352,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "luebeck_propsteikirche_herz_jesu_lubeck"
+      ]
+    },
+    {
+      "id": "luebeck_burgtor",
+      "name": "Burgtor Lübeck",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.87390975555556,
+        "lng": 10.691188855555556
+      },
+      "query": "Burgtor Lübeck, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8760577,
+        "lng": 10.6926208,
+        "display_name": "Ältester Kreuzweg Deutschlands, Gustav-Radbruch-Platz, Burgtor / Stadtpark, Sankt Gertrud, Lübeck, Schleswig-Holstein, 23568, Deutschland",
+        "class": "information",
+        "type": "board",
+        "importance": 0.00007299687190046566,
+        "osm_type": "node",
+        "osm_id": 2839635441,
+        "provider": "nominatim"
+      },
+      "delta_m": 257,
+      "from_city_m": 987,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "luebeck_klingenbergplatz",
+      "name": "Klingenbergplatz",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.864537199999994,
+        "lng": 10.685187380000002
+      },
+      "query": "Klingenbergplatz, Lübeck, Germany",
+      "osm": {
+        "lat": 53.866444,
+        "lng": 10.684738,
+        "display_name": "Lübeck, Deutschland",
+        "class": "place",
+        "type": "city",
+        "provider": "photon"
+      },
+      "delta_m": 214,
+      "from_city_m": 137,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "luebeck_sportzentrum_falkenwiese",
+      "name": "Sportzentrum Falkenwiese",
+      "category": "freizeit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.8691902,
+        "lng": 10.70191
+      },
+      "query": "Sportzentrum Falkenwiese, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8708083,
+        "lng": 10.7009772,
+        "display_name": "Falkenwiese, Falkenstraße, Sankt Jürgen, Hüxtertor / Mühlentor / Gärtnergasse, Sankt Jürgen, Lübeck, Schleswig-Holstein, 23564, Deutschland",
+        "class": "leisure",
+        "type": "sports_centre",
+        "importance": 0.00007299687190046566,
+        "osm_type": "way",
+        "osm_id": 132050673,
+        "provider": "nominatim"
+      },
+      "delta_m": 190,
+      "from_city_m": 1088,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "luebeck_stadtpark",
+      "name": "Stadtpark",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.8766215076923,
+        "lng": 10.703605646153846
+      },
+      "query": "Stadtpark, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8783014,
+        "lng": 10.703749,
+        "display_name": "Stadtpark, Burgtor / Stadtpark, Sankt Gertrud, Lübeck, Schleswig-Holstein, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "importance": 0.19283288150311992,
+        "osm_type": "way",
+        "osm_id": 5889141,
+        "provider": "nominatim"
+      },
+      "delta_m": 187,
+      "from_city_m": 1670,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "luebeck_ev_luth_laurentius_kirchengemeinde_lubeck_st_lorenz_kirche",
+      "name": "Ev.-Luth. Laurentius-Kirchengemeinde Lübeck / St. Lorenz-Kirche",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.86842599999999,
+        "lng": 10.670037766666667
+      },
+      "query": "Ev.-Luth. Laurentius-Kirchengemeinde Lübeck / St., Lübeck, Germany",
+      "osm": {
+        "lat": 50.8173476,
+        "lng": 12.3873051,
+        "display_name": "Ev.-Luth. St. Laurentius-Kirchengemeinde, Kirchplatz, Crimmitschau, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 358733,
+      "from_city_m": 1132,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "luebeck_minigolf_in_den_wallanlagen",
+      "name": "Minigolf in den Wallanlagen",
+      "category": "freizeit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.8604822,
+        "lng": 10.681805700000002
+      },
+      "query": "Minigolf in den Wallanlagen, Lübeck, Germany",
+      "osm": {
+        "lat": 52.2804528,
+        "lng": 8.9195079,
+        "display_name": "Minigolf Minden, Weserpromenade, Minden, Deutschland",
+        "class": "leisure",
+        "type": "miniature_golf",
+        "provider": "photon"
+      },
+      "delta_m": 211479,
+      "from_city_m": 636,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "luebeck_wiese_an_der_wallstreet",
+      "name": "Wiese an der 'Wallstreet'",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.86110764,
+        "lng": 10.680109640000001
+      },
+      "query": "Wiese an der 'Wallstreet', Lübeck, Germany",
+      "osm": {
+        "lat": 52.4066708,
+        "lng": 8.6480741,
+        "display_name": "An den Wiesen, Espelkamp, Deutschland",
+        "class": "highway",
+        "type": "unclassified",
+        "provider": "photon"
+      },
+      "delta_m": 211007,
+      "from_city_m": 643,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "luebeck_ev_luth_kirchengemeinde_in_st_jurgen_kreuzkirche",
+      "name": "Ev.-luth. Kirchengemeinde in St. Jürgen / Kreuzkirche",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.84283576923077,
+        "lng": 10.687328923076924
+      },
+      "query": "Ev.-luth. Kirchengemeinde in St. Jürgen, Lübeck, Germany",
+      "osm": {
+        "lat": 54.7912025,
+        "lng": 9.4422118,
+        "display_name": "Ev. Luth. Kirchengemeinde St. Jürgen, Jürgensgaarder Straße, Flensburg, Deutschland",
+        "class": "information",
+        "type": "board",
+        "provider": "photon"
+      },
+      "delta_m": 132820,
+      "from_city_m": 2517,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "luebeck_lubecker_hafen_gesellschaft_mbh",
+      "name": "Lübecker Hafen - Gesellschaft mbH",
+      "category": "hafen",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.89054837142857,
+        "lng": 10.698710142857141
+      },
+      "query": "Lübecker Hafen, Lübeck, Germany",
+      "osm": {
+        "lat": 54.092843,
+        "lng": 12.1080196,
+        "display_name": "Lübecker Straße, Rostock, Deutschland",
+        "class": "highway",
+        "type": "primary",
+        "provider": "photon"
+      },
+      "delta_m": 94834,
+      "from_city_m": 2900,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "luebeck_hafenrundfahrt",
+      "name": "Hafenrundfahrt",
+      "category": "hafen",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.870902,
+        "lng": 10.6774506
+      },
+      "query": "Hafenrundfahrt, Lübeck, Germany",
+      "osm": {
+        "lat": 53.5453092,
+        "lng": 9.9666126,
+        "display_name": "Hafenrundfahrt, St. Pauli-Elbtunnel, Hamburg, Deutschland",
+        "class": "information",
+        "type": "office",
+        "provider": "photon"
+      },
+      "delta_m": 59157,
+      "from_city_m": 850,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "luebeck_panorama_lubecker_altstadt",
+      "name": "Panorama Lübecker Altstadt",
+      "category": "aussicht",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.87043300000001,
+        "lng": 10.6789171
+      },
+      "query": "Panorama Lübecker Altstadt, Lübeck, Germany",
+      "osm": {
+        "lat": 53.6289276,
+        "lng": 11.409598,
+        "display_name": "Lübecker Straße, Schwerin, Deutschland",
+        "class": "highway",
+        "type": "pedestrian",
+        "provider": "photon"
+      },
+      "delta_m": 55039,
+      "from_city_m": 746,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "luebeck_historische_altstadt_lubeck",
+      "name": "Lübecker Altstadt · UNESCO",
+      "category": "altstadt",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.86605508,
+        "lng": 10.68530248
+      },
+      "query": "Lübecker Altstadt · UNESCO, Lübeck, Germany",
+      "osm": {
+        "lat": 53.6289276,
+        "lng": 11.409598,
+        "display_name": "Lübecker Straße, Schwerin, Deutschland",
+        "class": "highway",
+        "type": "pedestrian",
+        "provider": "photon"
+      },
+      "delta_m": 54437,
+      "from_city_m": 105,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "luebeck_lubecker_altstadt",
+      "name": "Lübecker Altstadt",
+      "category": "altstadt",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.866992416666676,
+        "lng": 10.688087766666667
+      },
+      "query": "Lübecker Altstadt, Lübeck, Germany",
+      "osm": {
+        "lat": 53.6289276,
+        "lng": 11.409598,
+        "display_name": "Lübecker Straße, Schwerin, Deutschland",
+        "class": "highway",
+        "type": "pedestrian",
+        "provider": "photon"
+      },
+      "delta_m": 54327,
+      "from_city_m": 197,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city",
+        "duplicate_center"
+      ],
+      "twins": [
+        "luebeck_stadt_apotheke_lubeck"
+      ]
+    },
+    {
+      "id": "luebeck_wakenitzufer",
+      "name": "Wakenitzufer",
+      "category": "wanderung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.86775018000001,
+        "lng": 10.70384468
+      },
+      "query": "Wakenitzufer, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8663782,
+        "lng": 10.7036454,
+        "display_name": "Wakenitzufer, Sankt Jürgen, Hüxtertor / Mühlentor / Gärtnergasse, Sankt Jürgen, Lübeck, Schleswig-Holstein, 23564, Deutschland",
+        "class": "highway",
+        "type": "residential",
+        "importance": 0.05340633020523381,
+        "osm_type": "way",
+        "osm_id": 4100141,
+        "provider": "nominatim"
+      },
+      "delta_m": 153,
+      "from_city_m": 1161,
+      "status": "CHECK",
+      "flags": [
+        "house_like_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "luebeck_theater_lubeck",
+      "name": "Theater Lübeck",
+      "category": "theater",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.86564815714286,
+        "lng": 10.682266599999997
+      },
+      "query": "Theater Lübeck, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8645197,
+        "lng": 10.6815066,
+        "display_name": "Großer Saal Musikhochschule Lübeck, Depenau, Innenstadt, Lübeck, Schleswig-Holstein, 23552, Deutschland",
+        "class": "amenity",
+        "type": "theatre",
+        "importance": 0.00007299687190046566,
+        "osm_type": "node",
+        "osm_id": 11578654587,
+        "provider": "nominatim"
+      },
+      "delta_m": 135,
+      "from_city_m": 282,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "luebeck_kolk17_figurentheater"
+      ]
+    },
+    {
+      "id": "luebeck_zob_hauptbahnhof_lubeck",
+      "name": "ZOB/Hauptbahnhof - Lübeck",
+      "category": "bahnhof",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.866039,
+        "lng": 10.671342166666664
+      },
+      "query": "ZOB/Hauptbahnhof, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8662273,
+        "lng": 10.6693194,
+        "display_name": "Lübeck Hauptbahnhof (Beim Retteich), Beim Retteich, Sankt Lorenz Süd, Lübeck, Schleswig-Holstein, 23558, Deutschland",
+        "class": "highway",
+        "type": "bus_stop",
+        "importance": 0.00007299687190046566,
+        "osm_type": "node",
+        "osm_id": 10658301085,
+        "provider": "nominatim"
+      },
+      "delta_m": 134,
+      "from_city_m": 1000,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "luebeck_lubeck_zob_hauptbahnhof",
+        "luebeck_pinguin_apotheke_am_hauptbahnhof",
+        "luebeck_osm_transit_362868780",
+        "luebeck_osm_post_box_408759917",
+        "luebeck_osm_transit_2576584228",
+        "luebeck_osm_post_box_6241001124",
+        "luebeck_osm_transit_10658301082",
+        "luebeck_osm_transit_10658301085"
+      ]
+    },
+    {
+      "id": "luebeck_buddenbrookhaus",
+      "name": "Buddenbrookhaus & Gründungsviertel",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.867336977777775,
+        "lng": 10.684996211111113
+      },
+      "query": "Buddenbrookhaus, Lübeck, Germany",
+      "osm": {
+        "lat": 53.868354,
+        "lng": 10.6857917,
+        "display_name": "Buddenbrookhaus, 4, Mengstraße, Innenstadt, Lübeck, Schleswig-Holstein, 23552, Deutschland",
+        "class": "building",
+        "type": "yes",
+        "importance": 0.322688475709118,
+        "osm_type": "way",
+        "osm_id": 147134945,
+        "provider": "nominatim"
+      },
+      "delta_m": 125,
+      "from_city_m": 232,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "luebeck_promenade_an_der_obertrave",
+      "name": "Promenade an der Obertrave",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.86416832,
+        "lng": 10.680740660000001
+      },
+      "query": "Promenade an der Obertrave, Lübeck, Germany",
+      "osm": {
+        "lat": 53.863262,
+        "lng": 10.6805456,
+        "display_name": "An der Obertrave, Lübeck, Deutschland",
+        "class": "highway",
+        "type": "residential",
+        "provider": "photon"
+      },
+      "delta_m": 102,
+      "from_city_m": 408,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "luebeck_sana_kliniken_lubeck_gmbh",
+      "name": "Sana Kliniken Lübeck GmbH",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.849268,
+        "lng": 10.686768052631578
+      },
+      "query": "Sana Kliniken Lübeck GmbH, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8486167,
+        "lng": 10.6858061,
+        "display_name": "Sana Kliniken Lübeck, Kronsforder Allee, Lübeck, Deutschland",
+        "class": "highway",
+        "type": "bus_stop",
+        "provider": "photon"
+      },
+      "delta_m": 96,
+      "from_city_m": 1801,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "luebeck_sana_kliniken_lubeck_gmbh_notaufnahme"
+      ]
+    },
+    {
+      "id": "luebeck_lubeck_zob_hauptbahnhof",
+      "name": "Lübeck ZOB/Hauptbahnhof",
+      "category": "bahnhof",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.866039,
+        "lng": 10.671342166666664
+      },
+      "query": "Lübeck ZOB/Hauptbahnhof, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8654494,
+        "lng": 10.6703922,
+        "display_name": "Lübeck ZOB/Hauptbahnhof, Hansestraße, Sankt Lorenz Süd, Lübeck, Schleswig-Holstein, 23558, Deutschland",
+        "class": "highway",
+        "type": "bus_stop",
+        "importance": 0.00007299687190046566,
+        "osm_type": "node",
+        "osm_id": 605017887,
+        "provider": "nominatim"
+      },
+      "delta_m": 90,
+      "from_city_m": 1000,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "luebeck_zob_hauptbahnhof_lubeck",
+        "luebeck_pinguin_apotheke_am_hauptbahnhof",
+        "luebeck_osm_transit_362868780",
+        "luebeck_osm_post_box_408759917",
+        "luebeck_osm_transit_2576584228",
+        "luebeck_osm_post_box_6241001124",
+        "luebeck_osm_transit_10658301082",
+        "luebeck_osm_transit_10658301085"
+      ]
+    },
+    {
+      "id": "luebeck_europaisches_hansemuseum",
+      "name": "Europäisches Hansemuseum & Burgkloster",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.87403675588235,
+        "lng": 10.690820355882352
+      },
+      "query": "Europäisches Hansemuseum, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8738959,
+        "lng": 10.6895344,
+        "display_name": "Europäisches Hansemuseum, 1, An der Untertrave, Innenstadt, Lübeck, Schleswig-Holstein, 23552, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.00007299687190046566,
+        "osm_type": "way",
+        "osm_id": 150196022,
+        "provider": "nominatim"
+      },
+      "delta_m": 86,
+      "from_city_m": 993,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "luebeck_osm_transit_3502312069"
+      ]
+    },
+    {
+      "id": "luebeck_museumshafen_lubeck",
+      "name": "Museumshafen Lübeck",
+      "category": "hafen",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.872749428571424,
+        "lng": 10.68216382857143
+      },
+      "query": "Museumshafen Lübeck, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8719959,
+        "lng": 10.682407,
+        "display_name": "Museumshafen, Wenditzufer, Innenstadt, Lübeck, Schleswig-Holstein, 23552, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.25876906166717667,
+        "osm_type": "node",
+        "osm_id": 366273044,
+        "provider": "nominatim"
+      },
+      "delta_m": 85,
+      "from_city_m": 859,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "luebeck_salzspeicher",
+      "name": "Salzspeicher am Holstentor",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.8658995,
+        "lng": 10.680195042105264
+      },
+      "query": "Salzspeicher am Holstentor, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8660368,
+        "lng": 10.6813191,
+        "display_name": "Hotel Jensen am Holstentor, An der Obertrave, Lübeck, Deutschland",
+        "class": "tourism",
+        "type": "hotel",
+        "provider": "photon"
+      },
+      "delta_m": 75,
+      "from_city_m": 420,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "luebeck_museum_holstentor"
+      ]
+    },
+    {
+      "id": "luebeck_dragerpark",
+      "name": "Drägerpark",
+      "category": "natur",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.87009750666666,
+        "lng": 10.709446680000003
+      },
+      "query": "Drägerpark, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8699837,
+        "lng": 10.7083303,
+        "display_name": "Drägerpark, Marli / Brandenbaum, Sankt Gertrud, Lübeck, Schleswig-Holstein, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "importance": 0.13618373728802152,
+        "osm_type": "relation",
+        "osm_id": 1123264,
+        "provider": "nominatim"
+      },
+      "delta_m": 74,
+      "from_city_m": 1587,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "luebeck_draegerpark",
+        "luebeck_osm_transit_995022446"
+      ]
+    },
+    {
+      "id": "luebeck_draegerpark",
+      "name": "Drägerpark & Wakenitzufer",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.87009750666666,
+        "lng": 10.709446680000003
+      },
+      "query": "Drägerpark, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8699837,
+        "lng": 10.7083303,
+        "display_name": "Drägerpark, Marli / Brandenbaum, Sankt Gertrud, Lübeck, Schleswig-Holstein, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "importance": 0.13618373728802152,
+        "osm_type": "relation",
+        "osm_id": 1123264,
+        "provider": "nominatim"
+      },
+      "delta_m": 74,
+      "from_city_m": 1587,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "luebeck_dragerpark",
+        "luebeck_osm_transit_995022446"
+      ]
+    },
+    {
+      "id": "luebeck_lubecker_lowen",
+      "name": "Lübecker Löwen",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.86559043124999,
+        "lng": 10.6780189875
+      },
+      "query": "Lübecker Löwen, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8661926,
+        "lng": 10.6775602,
+        "display_name": "Lübecker Löwen, Holstentorplatz, Innenstadt, Lübeck, Schleswig-Holstein, 23552, Deutschland",
+        "class": "tourism",
+        "type": "artwork",
+        "importance": 0.00007299687190046566,
+        "osm_type": "node",
+        "osm_id": 1138316550,
+        "provider": "nominatim"
+      },
+      "delta_m": 73,
+      "from_city_m": 560,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "luebeck_lubeck_zwischenzeilen_das_kulturmagazin"
+      ]
+    },
+    {
+      "id": "luebeck_850_jahre_lubeck_gedenkstein",
+      "name": "850 Jahre Lübeck - Gedenkstein",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.87162528,
+        "lng": 10.70782032
+      },
+      "query": "850 Jahre Lübeck, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8709853,
+        "lng": 10.7079671,
+        "display_name": "850 Jahre Hansestadt Lübeck, Alexanderstraße, Marli, Marli / Brandenbaum, Sankt Gertrud, Lübeck, Schleswig-Holstein, 23566, Deutschland",
+        "class": "historic",
+        "type": "memorial",
+        "importance": 0.00007299687190046566,
+        "osm_type": "node",
+        "osm_id": 857474928,
+        "provider": "nominatim"
+      },
+      "delta_m": 72,
+      "from_city_m": 1553,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "luebeck_hansefloss"
+      ]
+    },
+    {
+      "id": "luebeck_lubeck_hbf_gleis_2",
+      "name": "Lübeck hbf | Gleis 2",
+      "category": "wanderung",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.8676834,
+        "lng": 10.6708336
+      },
+      "query": "Lübeck hbf, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8671234,
+        "lng": 10.6704782,
+        "display_name": "Lübeck Hauptbahnhof, 2-6, Am Bahnhof, Sankt Lorenz Süd, Lübeck, Schleswig-Holstein, 23558, Deutschland",
+        "class": "building",
+        "type": "train_station",
+        "importance": 0.40167951396006313,
+        "osm_type": "way",
+        "osm_id": 214484180,
+        "provider": "nominatim"
+      },
+      "delta_m": 66,
+      "from_city_m": 1060,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "luebeck_lubeck_hauptbahnhof",
+      "name": "Lübeck Hauptbahnhof",
+      "category": "bahnhof",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.867626593181825,
+        "lng": 10.669959979545455
+      },
+      "query": "Lübeck Hauptbahnhof, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8671234,
+        "lng": 10.6704782,
+        "display_name": "Lübeck Hauptbahnhof, 2-6, Am Bahnhof, Sankt Lorenz Süd, Lübeck, Schleswig-Holstein, 23558, Deutschland",
+        "class": "building",
+        "type": "train_station",
+        "importance": 0.40167951396006313,
+        "osm_type": "way",
+        "osm_id": 214484180,
+        "provider": "nominatim"
+      },
+      "delta_m": 65,
+      "from_city_m": 1115,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "luebeck_db_reisezentrum_lubeck_hbf",
+        "luebeck_osm_transit_25149874",
+        "luebeck_osm_post_box_290879981"
+      ]
+    },
+    {
+      "id": "luebeck_gemeinschaftspraxis_huxtertor",
+      "name": "Gemeinschaftspraxis Hüxtertor",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.86283064285715,
+        "lng": 10.697977628571428
+      },
+      "query": "Gemeinschaftspraxis Hüxtertor, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8629994,
+        "lng": 10.6970505,
+        "display_name": "Gemeinschaftspraxis Willruth, 27, Hüxtertorallee, Sankt Jürgen, Hüxtertor / Mühlentor / Gärtnergasse, Sankt Jürgen, Lübeck, Schleswig-Holstein, 23564, Deutschland",
+        "class": "amenity",
+        "type": "dentist",
+        "importance": 0.00007299687190046566,
+        "osm_type": "node",
+        "osm_id": 941551530,
+        "provider": "nominatim"
+      },
+      "delta_m": 64,
+      "from_city_m": 804,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "luebeck_lubecker_dom",
+      "name": "Lübecker Dom",
+      "category": "kirche",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.860897580645165,
+        "lng": 10.685886725806451
+      },
+      "query": "Lübecker Dom, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8613289,
+        "lng": 10.6852499,
+        "display_name": "Lübecker Lutherbuche, Domkirchhof, Lübeck, Deutschland",
+        "class": "natural",
+        "type": "tree",
+        "provider": "photon"
+      },
+      "delta_m": 64,
+      "from_city_m": 510,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "luebeck_rathaus",
+      "name": "Rathaus Lübeck",
+      "category": "geschichte",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.86657646666667,
+        "lng": 10.685502249999999
+      },
+      "query": "Rathaus Lübeck, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8671337,
+        "lng": 10.6854562,
+        "display_name": "Rathaus, 64, Breite Straße, Innenstadt, Lübeck, Schleswig-Holstein, 23552, Deutschland",
+        "class": "amenity",
+        "type": "townhall",
+        "importance": 0.3514206354333152,
+        "osm_type": "way",
+        "osm_id": 43625520,
+        "provider": "nominatim"
+      },
+      "delta_m": 62,
+      "from_city_m": 141,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "luebeck_rossmann_drogeriemarkt",
+        "luebeck_rathaustreppe",
+        "luebeck_osm_transit_605017924"
+      ]
+    },
+    {
+      "id": "luebeck_nordermole_travemunde",
+      "name": "Nordermole Travemünde",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.962025679999996,
+        "lng": 10.888285800000002
+      },
+      "query": "Nordermole Travemünde, Lübeck, Germany",
+      "osm": {
+        "lat": 53.9619319,
+        "lng": 10.8892085,
+        "display_name": "Nordermole, Travemünde, Lübeck, Schleswig-Holstein, 23570, Deutschland",
+        "class": "man_made",
+        "type": "lighthouse",
+        "importance": 0.07194870560319186,
+        "osm_type": "node",
+        "osm_id": 4160067589,
+        "provider": "nominatim"
+      },
+      "delta_m": 61,
+      "from_city_m": 17024,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "luebeck_museum_holstentor",
+      "name": "Holstentor",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.8658995,
+        "lng": 10.680195042105264
+      },
+      "query": "Holstentor, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8662729,
+        "lng": 10.6796841,
+        "display_name": "Holstentor, Holstentorplatz, Innenstadt, Lübeck, Schleswig-Holstein, 23552, Deutschland",
+        "class": "building",
+        "type": "civic",
+        "importance": 0.41215939017041997,
+        "osm_type": "way",
+        "osm_id": 27075168,
+        "provider": "nominatim"
+      },
+      "delta_m": 53,
+      "from_city_m": 420,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "luebeck_salzspeicher"
+      ]
+    },
+    {
+      "id": "luebeck_db_reisezentrum_lubeck_hbf",
+      "name": "DB Reisezentrum Lübeck Hbf",
+      "category": "bahnhof",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.867626593181825,
+        "lng": 10.669959979545455
+      },
+      "query": "DB Reisezentrum Lübeck Hbf, Lübeck, Germany",
+      "osm": {
+        "lat": 53.867967,
+        "lng": 10.6695553,
+        "display_name": "DB Reisezentrum, Steinrader Weg, Lübeck, Deutschland",
+        "class": "shop",
+        "type": "ticket",
+        "provider": "photon"
+      },
+      "delta_m": 46,
+      "from_city_m": 1115,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "luebeck_lubeck_hauptbahnhof",
+        "luebeck_osm_transit_25149874",
+        "luebeck_osm_post_box_290879981"
+      ]
+    },
+    {
+      "id": "luebeck_musik_und_kongresshalle_lubeck",
+      "name": "Musik- und Kongresshalle Lübeck",
+      "category": "kino",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.8692718,
+        "lng": 10.6779653
+      },
+      "query": "Musik-, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8693781,
+        "lng": 10.6780487,
+        "display_name": "Musik- und Kongresshalle, 10, Willy-Brandt-Allee, Innenstadt, Lübeck, Schleswig-Holstein, 23554, Deutschland",
+        "class": "amenity",
+        "type": "events_venue",
+        "importance": 0.22274623325780465,
+        "osm_type": "way",
+        "osm_id": 26970742,
+        "provider": "nominatim"
+      },
+      "delta_m": 13,
+      "from_city_m": 705,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "luebeck_osm_transit_7636350131"
+      ]
+    },
+    {
+      "id": "luebeck_kolk17_figurentheater",
+      "name": "KOLK 17 Figurentheater & Museum",
+      "category": "theater",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.86567948,
+        "lng": 10.68217208
+      },
+      "query": "KOLK 17 Figurentheater, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8657157,
+        "lng": 10.6823181,
+        "display_name": "Figurentheater Lübeck, Kolk, Lübeck, Deutschland",
+        "class": "amenity",
+        "type": "theatre",
+        "provider": "photon"
+      },
+      "delta_m": 10,
+      "from_city_m": 289,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "luebeck_theater_lubeck"
+      ]
+    },
+    {
+      "id": "luebeck_lunapark",
+      "name": "Lunapark (Hanseplatz)",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.85987057,
+        "lng": 10.66322141
+      },
+      "query": "Lunapark, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8599202,
+        "lng": 10.6633336,
+        "display_name": "Hanseplatz, Sankt Lorenz Süd, Lübeck, Schleswig-Holstein, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "importance": 0.08007299687190048,
+        "osm_type": "way",
+        "osm_id": 10509332,
+        "provider": "nominatim"
+      },
+      "delta_m": 9,
+      "from_city_m": 1652,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "luebeck_wochenmarkt_am_hanseplatz"
+      ]
+    },
+    {
+      "id": "luebeck_stadt_apotheke_lubeck",
+      "name": "Stadt-Apotheke Lübeck",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.866992416666676,
+        "lng": 10.688087766666667
+      },
+      "query": "Stadt-Apotheke Lübeck, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8669393,
+        "lng": 10.6879821,
+        "display_name": "Stadt-Apotheke, 27, Fleischhauerstraße, Innenstadt, Lübeck, Schleswig-Holstein, 23552, Deutschland",
+        "class": "amenity",
+        "type": "pharmacy",
+        "importance": 0.00007299687190046566,
+        "osm_type": "node",
+        "osm_id": 293971031,
+        "provider": "nominatim"
+      },
+      "delta_m": 9,
+      "from_city_m": 197,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "luebeck_lubecker_altstadt"
+      ]
+    },
+    {
+      "id": "luebeck_st_jurgen_apotheke",
+      "name": "St. Jürgen-Apotheke",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.85763925,
+        "lng": 10.692652083333334
+      },
+      "query": "St. Jürgen-Apotheke, Lübeck, Germany",
+      "osm": {
+        "lat": 53.857698,
+        "lng": 10.6926929,
+        "display_name": "Sankt Jürgen-Apotheke, Radroute Plus / Radschnellweg, Sankt Jürgen, Hüxtertor / Mühlentor / Gärtnergasse, Sankt Jürgen, Lübeck, Schleswig-Holstein, 23564, Deutschland",
+        "class": "amenity",
+        "type": "pharmacy",
+        "importance": 0.00007299687190046566,
+        "osm_type": "node",
+        "osm_id": 392351054,
+        "provider": "nominatim"
+      },
+      "delta_m": 7,
+      "from_city_m": 958,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "luebeck_osm_transit_295922738"
+      ]
+    },
+    {
+      "id": "luebeck_propsteikirche_herz_jesu_lubeck",
+      "name": "Propsteikirche Herz Jesu, Lübeck",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.86257388235293,
+        "lng": 10.684400058823531
+      },
+      "query": "Propsteikirche Herz Jesu, Lübeck, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8625651,
+        "lng": 10.6844655,
+        "display_name": "Propsteikirche Herz Jesu, 4, Parade, Innenstadt, Lübeck, Schleswig-Holstein, 23552, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.2328416436185146,
+        "osm_type": "way",
+        "osm_id": 139886764,
+        "provider": "nominatim"
+      },
+      "delta_m": 4,
+      "from_city_m": 352,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "luebeck_aussichtspunkt"
+      ]
+    },
+    {
+      "id": "luebeck_principessa_geschenkartikel_wohnaccessoires",
+      "name": "Principessa - Geschenkartikel & Wohnaccessoires",
+      "category": "souvenir",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.866547733333334,
+        "lng": 10.686718533333334
+      },
+      "query": "Principessa, Lübeck, Germany",
+      "osm": {
+        "lat": 53.866513,
+        "lng": 10.6866973,
+        "display_name": "Principessa, 17, Hüxstraße, Innenstadt, Lübeck, Schleswig-Holstein, 23552, Deutschland",
+        "class": "shop",
+        "type": "interior_decoration",
+        "importance": 0.00007299687190046566,
+        "osm_type": "node",
+        "osm_id": 2066061306,
+        "provider": "nominatim"
+      },
+      "delta_m": 4,
+      "from_city_m": 121,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "luebeck_osm_parcel_locker_13671216872",
+        "luebeck_osm_parcel_locker_13671216874",
+        "luebeck_osm_parcel_locker_13671216875"
+      ]
+    },
+    {
+      "id": "luebeck_fahranleger_ms_hanse",
+      "name": "Fähranleger „MS Hanse“",
+      "category": "hafen",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.8735783,
+        "lng": 10.6873190875
+      },
+      "query": "Fähranleger „MS Hanse“, Lübeck",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 903,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "luebeck_osm_transit_21897367",
+        "luebeck_osm_transit_3502312068"
+      ]
+    },
+    {
+      "id": "luebeck_ganghaus_museum_fur_magische_mechanik",
+      "name": "Ganghaus-Museum für magische Mechanik",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.87174243333334,
+        "lng": 10.692360399999998
+      },
+      "query": "Ganghaus-Museum für magische, Lübeck, Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 795,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "luebeck_kultourpunkt_treidelpfad_stecknitz",
+      "name": "Kultourpunkt Treidelpfad Stecknitz",
+      "category": "wanderung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.795423152941176,
+        "lng": 10.630759070588233
+      },
+      "query": "Kultourpunkt Treidelpfad Stecknitz, Lübeck",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 8606,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "luebeck_casino_travemunde",
+      "name": "Casino Travemünde",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.95850342,
+        "lng": 10.87113832
+      },
+      "query": "Casino Travemünde, Lübeck",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 15911,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "luebeck_promenadensteg_travemunde",
+      "name": "Promenadensteg Travemünde",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.964155999999996,
+        "lng": 10.881328
+      },
+      "query": "Promenadensteg Travemünde, Lübeck",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 16827,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "luebeck_hausarztpraxis_wolken_wiltsch",
+      "name": "Hausarztpraxis Wolken + Wiltsch",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.87014562857143,
+        "lng": 10.688341757142856
+      },
+      "query": "Hausarztpraxis Wolken + Wiltsch, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8700454,
+        "lng": 10.6891999,
+        "display_name": "Wolken + Wiltsch, Breite Straße, Lübeck, Deutschland",
+        "class": "amenity",
+        "type": "doctors",
+        "provider": "photon"
+      },
+      "delta_m": 57,
+      "from_city_m": 533,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "luebeck_altstadtbad_krahenteich",
+      "name": "Altstadtbad Krähenteich",
+      "category": "altstadt",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.862194666666674,
+        "lng": 10.689719333333334
+      },
+      "query": "Altstadtbad Krähenteich, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8620176,
+        "lng": 10.6905059,
+        "display_name": "Altstadtbad Krähenteich, An der Mauer, Innenstadt, Lübeck, Schleswig-Holstein, 23552, Deutschland",
+        "class": "leisure",
+        "type": "water_park",
+        "importance": 0.00007299687190046566,
+        "osm_type": "node",
+        "osm_id": 1689196930,
+        "provider": "nominatim"
+      },
+      "delta_m": 55,
+      "from_city_m": 419,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "luebeck_holstentorplatz",
+      "name": "Holstentorplatz",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.866255704444434,
+        "lng": 10.67964769111111
+      },
+      "query": "Holstentorplatz, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8660248,
+        "lng": 10.678905,
+        "display_name": "Holstentorplatz, Innenstadt, Lübeck, Schleswig-Holstein, 23552, Deutschland",
+        "class": "highway",
+        "type": "secondary",
+        "importance": 0.05340633020523381,
+        "osm_type": "way",
+        "osm_id": 151585371,
+        "provider": "nominatim"
+      },
+      "delta_m": 55,
+      "from_city_m": 462,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "luebeck_st_katharinen",
+      "name": "St. Katharinen zu Lübeck",
+      "category": "kirche",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.86919254444444,
+        "lng": 10.689810105555555
+      },
+      "query": "St. Katharinen zu Lübeck, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8688643,
+        "lng": 10.6895125,
+        "display_name": "Katharineum zu Lübeck, Königstraße, Lübeck, Deutschland",
+        "class": "amenity",
+        "type": "school",
+        "provider": "photon"
+      },
+      "delta_m": 41,
+      "from_city_m": 466,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "luebeck_muhlenteich",
+      "name": "Mühlenteich",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.85968374,
+        "lng": 10.688223060000002
+      },
+      "query": "Mühlenteich, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8596082,
+        "lng": 10.6876634,
+        "display_name": "Mühlenteich, Innenstadt, Lübeck, Schleswig-Holstein, Deutschland",
+        "class": "water",
+        "type": "reservoir",
+        "importance": 0.13340633020523382,
+        "osm_type": "way",
+        "osm_id": 4244393,
+        "provider": "nominatim"
+      },
+      "delta_m": 38,
+      "from_city_m": 652,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "luebeck_museumsquartier",
+      "name": "Museumsquartier St. Annen",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.86264304,
+        "lng": 10.68863284
+      },
+      "query": "Museumsquartier St. Annen, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8627823,
+        "lng": 10.6891433,
+        "display_name": "Museumsquartier Sankt Annen, 15, Sankt-Annen-Straße, Innenstadt, Lübeck, Schleswig-Holstein, 23552, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.2548773901198179,
+        "osm_type": "relation",
+        "osm_id": 1824185,
+        "provider": "nominatim"
+      },
+      "delta_m": 37,
+      "from_city_m": 342,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "luebeck_schwarzlicht_minigolf_in_lubeck",
+      "name": "Schwarzlicht Minigolf in Lübeck",
+      "category": "freizeit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.89582514,
+        "lng": 10.711278471999996
+      },
+      "query": "Schwarzlicht Minigolf in Lübeck, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8955972,
+        "lng": 10.7115519,
+        "display_name": "Schwarzlicht Minigolf, An der Hülshorst, Lübeck, Deutschland",
+        "class": "leisure",
+        "type": "miniature_golf",
+        "provider": "photon"
+      },
+      "delta_m": 31,
+      "from_city_m": 3744,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "luebeck_denkmal_lubeck_niendorf",
+      "name": "Denkmal Lübeck-Niendorf",
+      "category": "denkmal",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.832681,
+        "lng": 10.6087415
+      },
+      "query": "Denkmal Lübeck-Niendorf, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8326418,
+        "lng": 10.6092003,
+        "display_name": "Gefallenendenkmal, Im Block, Niendorf / Moorgarten, Moisling, Niendorf, Lübeck, Schleswig-Holstein, 23560, Deutschland",
+        "class": "historic",
+        "type": "memorial",
+        "importance": 0.00007299687190046566,
+        "osm_type": "node",
+        "osm_id": 1719210597,
+        "provider": "nominatim"
+      },
+      "delta_m": 30,
+      "from_city_m": 6273,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "luebeck_myjump_lubeck_trampolinpark_trampolinhalle_schleswig_holstein",
+      "name": "MYJUMP LÜBECK - TRAMPOLINPARK & TRAMPOLINHALLE - Schleswig Holstein",
+      "category": "freizeitpark",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.851932375000004,
+        "lng": 10.674807687499998
+      },
+      "query": "MYJUMP LÜBECK, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8519652,
+        "lng": 10.6752536,
+        "display_name": "MyJump Lübeck, 8-9, Geniner Ufer, Sankt Jürgen, Hüxtertor / Mühlentor / Gärtnergasse, Sankt Jürgen, Lübeck, Schleswig-Holstein, 23560, Deutschland",
+        "class": "leisure",
+        "type": "trampoline_park",
+        "importance": 0.00007299687190046566,
+        "osm_type": "node",
+        "osm_id": 13306078192,
+        "provider": "nominatim"
+      },
+      "delta_m": 29,
+      "from_city_m": 1691,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "luebeck_skulptur_der_maria_magdalena",
+      "name": "Skulptur der Maria Magdalena",
+      "category": "denkmal",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.873864119230774,
+        "lng": 10.689360103846155
+      },
+      "query": "Skulptur der Maria Magdalena, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8736509,
+        "lng": 10.6893948,
+        "display_name": "Maria Magdalena, An der Untertrave, Lübeck, Deutschland",
+        "class": "tourism",
+        "type": "artwork",
+        "provider": "photon"
+      },
+      "delta_m": 24,
+      "from_city_m": 952,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "luebeck_lubeck_laden",
+      "name": "Lübeck Laden",
+      "category": "souvenir",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.86775331964286,
+        "lng": 10.685960649999998
+      },
+      "query": "Lübeck Laden, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8675499,
+        "lng": 10.6858951,
+        "display_name": "Lübeck Laden, 62, Breite Straße, Innenstadt, Lübeck, Schleswig-Holstein, 23552, Deutschland",
+        "class": "shop",
+        "type": "gift",
+        "importance": 0.00007299687190046566,
+        "osm_type": "node",
+        "osm_id": 661180185,
+        "provider": "nominatim"
+      },
+      "delta_m": 23,
+      "from_city_m": 257,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "luebeck_lasertag_lubeck",
+      "name": "Lasertag Lübeck",
+      "category": "freizeitpark",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.841373899999994,
+        "lng": 10.6760008
+      },
+      "query": "Lasertag Lübeck, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8413807,
+        "lng": 10.6757151,
+        "display_name": "Lasertag.de Lübeck, 130b, Kronsforder Allee, Strecknitz, Sankt Jürgen, Lübeck, Schleswig-Holstein, 23560, Deutschland",
+        "class": "leisure",
+        "type": "sports_centre",
+        "importance": 0.00007299687190046566,
+        "osm_type": "node",
+        "osm_id": 3079776675,
+        "provider": "nominatim"
+      },
+      "delta_m": 19,
+      "from_city_m": 2767,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "luebeck_filmhaus",
+      "name": "Filmhaus",
+      "category": "kino",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.86880798,
+        "lng": 10.68825292
+      },
+      "query": "Filmhaus, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8687547,
+        "lng": 10.6885328,
+        "display_name": "Filmhaus, 40, Königstraße, Innenstadt, Lübeck, Schleswig-Holstein, 23552, Deutschland",
+        "class": "amenity",
+        "type": "cinema",
+        "importance": 0.16273786379520622,
+        "osm_type": "node",
+        "osm_id": 25393513,
+        "provider": "nominatim"
+      },
+      "delta_m": 19,
+      "from_city_m": 388,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "luebeck_ein_archaologisch_naturkundlicher_wanderweg_im_waldhusener_forst",
+      "name": "Ein Archäologisch - Naturkundlicher Wanderweg im Waldhusener Forst",
+      "category": "wanderung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.92260387777778,
+        "lng": 10.79331531111111
+      },
+      "query": "Ein Archäologisch, Lübeck, Germany",
+      "osm": {
+        "lat": 53.9225397,
+        "lng": 10.7930888,
+        "display_name": "Ein archäologisch - naturkundlicher Weg im Waldhusener Forst, Holzweg, Wallberg, Dänischburg / Siems / Rangenberg / Wallberg, Kücknitz, Lübeck, Schleswig-Holstein, 23569, Deutschland",
+        "class": "information",
+        "type": "board",
+        "importance": 0.00007299687190046566,
+        "osm_type": "node",
+        "osm_id": 3399641147,
+        "provider": "nominatim"
+      },
+      "delta_m": 16,
+      "from_city_m": 9450,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "luebeck_sportbad_st_lorenz",
+      "name": "Sportbad St. Lorenz",
+      "category": "freizeit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.86368405263158,
+        "lng": 10.648481631578946
+      },
+      "query": "Sportbad St. Lorenz, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8635916,
+        "lng": 10.6486151,
+        "display_name": "Sportbad St. Lorenz, 152, Ziegelstraße, Sankt Lorenz Nord, Holstentor-Nord, Sankt Lorenz Nord, Lübeck, Schleswig-Holstein, 23556, Deutschland",
+        "class": "leisure",
+        "type": "sports_centre",
+        "importance": 0.00007299687190046566,
+        "osm_type": "way",
+        "osm_id": 31358269,
+        "provider": "nominatim"
+      },
+      "delta_m": 14,
+      "from_city_m": 2505,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "luebeck_kommunales_kino_lubeck",
+      "name": "Kommunales Kino Lübeck",
+      "category": "kino",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.868651637499994,
+        "lng": 10.68116115
+      },
+      "query": "Kommunales Kino Lübeck, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8687386,
+        "lng": 10.681002,
+        "display_name": "Kommunales Kino (KoKi), 35, Mengstraße, Innenstadt, Lübeck, Schleswig-Holstein, 23552, Deutschland",
+        "class": "amenity",
+        "type": "cinema",
+        "importance": 0.10540294855860563,
+        "osm_type": "node",
+        "osm_id": 25393512,
+        "provider": "nominatim"
+      },
+      "delta_m": 14,
+      "from_city_m": 501,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "luebeck_nanu_nana",
+      "name": "NANU-NANA",
+      "category": "souvenir",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.867675080000005,
+        "lng": 10.68829938
+      },
+      "query": "NANU-NANA, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8677266,
+        "lng": 10.6881239,
+        "display_name": "Nanu-Nana, 47, Königstraße, Innenstadt, Lübeck, Schleswig-Holstein, 23552, Deutschland",
+        "class": "shop",
+        "type": "gift",
+        "importance": 0.00007299687190046566,
+        "osm_type": "node",
+        "osm_id": 669102316,
+        "provider": "nominatim"
+      },
+      "delta_m": 13,
+      "from_city_m": 271,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "luebeck_alter_hafen_gothmund",
+      "name": "Alter Hafen Gothmund",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.90684468333333,
+        "lng": 10.75279825
+      },
+      "query": "Alter Hafen Gothmund, Lübeck, Germany",
+      "osm": {
+        "lat": 53.9069415,
+        "lng": 10.7527741,
+        "display_name": "Hafen Gothmund, Fischerweg, Lübeck, Deutschland",
+        "class": "leisure",
+        "type": "marina",
+        "provider": "photon"
+      },
+      "delta_m": 11,
+      "from_city_m": 6326,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "luebeck_theater_combinale_lubeck",
+      "name": "Theater Combinale Lübeck",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.8650595375,
+        "lng": 10.692505237499999
+      },
+      "query": "Theater Combinale Lübeck, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8649753,
+        "lng": 10.6924408,
+        "display_name": "Theater Combinale, 115, Hüxstraße, Innenstadt, Lübeck, Schleswig-Holstein, 23552, Deutschland",
+        "class": "amenity",
+        "type": "theatre",
+        "importance": 0.00007299687190046566,
+        "osm_type": "node",
+        "osm_id": 25393506,
+        "provider": "nominatim"
+      },
+      "delta_m": 10,
+      "from_city_m": 393,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "luebeck_theaterschiff_lubeck",
+      "name": "Theaterschiff Lübeck",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.869284325,
+        "lng": 10.679014158333333
+      },
+      "query": "Theaterschiff Lübeck, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8693775,
+        "lng": 10.6790022,
+        "display_name": "Theaterschiff Lübeck, Wenditzufer, Innenstadt, Lübeck, Schleswig-Holstein, 23552, Deutschland",
+        "class": "amenity",
+        "type": "theatre",
+        "importance": 0.00007299687190046566,
+        "osm_type": "way",
+        "osm_id": 34091033,
+        "provider": "nominatim"
+      },
+      "delta_m": 10,
+      "from_city_m": 652,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "luebeck_st_gertrud_apotheke",
+      "name": "St. Gertrud Apotheke",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.875807416666674,
+        "lng": 10.701204833333334
+      },
+      "query": "St. Gertrud Apotheke, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8757243,
+        "lng": 10.7012768,
+        "display_name": "Sankt Gertrud-Apotheke, Roeckstraße, Burgtor / Stadtpark, Sankt Gertrud, Lübeck, Schleswig-Holstein, 23568, Deutschland",
+        "class": "amenity",
+        "type": "pharmacy",
+        "importance": 0.00007299687190046566,
+        "osm_type": "node",
+        "osm_id": 318023662,
+        "provider": "nominatim"
+      },
+      "delta_m": 10,
+      "from_city_m": 1498,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "luebeck_ev_luth_kirchengemeinde_st_marien_zu_lubeck",
+      "name": "St. Marien zu Lübeck",
+      "category": "kirche",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.86770811375,
+        "lng": 10.685170572500002
+      },
+      "query": "St. Marien zu Lübeck, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8677749,
+        "lng": 10.6850966,
+        "display_name": "St.-Marien-Kirche, Marienkirchhof, Lübeck, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 9,
+      "from_city_m": 265,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "luebeck_heinrich_der_lowe_denkmal",
+      "name": "Heinrich-der-Löwe-Denkmal",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.86142812000001,
+        "lng": 10.685141380000001
+      },
+      "query": "Heinrich-der-Löwe-Denkmal, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8614705,
+        "lng": 10.685253,
+        "display_name": "Heinrich-der-Löwe-Denkmal, Domkirchhof, Innenstadt, Lübeck, Schleswig-Holstein, 23552, Deutschland",
+        "class": "tourism",
+        "type": "artwork",
+        "importance": 0.13618373728802152,
+        "osm_type": "node",
+        "osm_id": 316977803,
+        "provider": "nominatim"
+      },
+      "delta_m": 9,
+      "from_city_m": 459,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "luebeck_kolosseum_festsaal",
+      "name": "Kolosseum Festsaal",
+      "category": "konzert",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.85484521666666,
+        "lng": 10.689027350000002
+      },
+      "query": "Kolosseum Festsaal, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8547659,
+        "lng": 10.6890056,
+        "display_name": "Kolosseum-Stube, Kronsforder Allee, Lübeck, Deutschland",
+        "class": "amenity",
+        "type": "restaurant",
+        "provider": "photon"
+      },
+      "delta_m": 9,
+      "from_city_m": 1192,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "luebeck_guenter_grass_haus",
+      "name": "Günter-Grass-Haus",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.86937846666666,
+        "lng": 10.690530466666665
+      },
+      "query": "Günter-Grass-Haus, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8693164,
+        "lng": 10.6906019,
+        "display_name": "Günter-Grass-Haus, 21, Glockengießerstraße, Innenstadt, Lübeck, Schleswig-Holstein, 23552, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.2521482229732802,
+        "osm_type": "node",
+        "osm_id": 297044410,
+        "provider": "nominatim"
+      },
+      "delta_m": 8,
+      "from_city_m": 507,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "luebeck_an_der_obertrave",
+      "name": "An der Obertrave",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.86140283333333,
+        "lng": 10.681738833333334
+      },
+      "query": "An der Obertrave, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8613543,
+        "lng": 10.6816544,
+        "display_name": "An der Obertrave, Innenstadt, Lübeck, Schleswig-Holstein, 23552, Deutschland",
+        "class": "highway",
+        "type": "living_street",
+        "importance": 0.23648094285300414,
+        "osm_type": "way",
+        "osm_id": 151583593,
+        "provider": "nominatim"
+      },
+      "delta_m": 8,
+      "from_city_m": 552,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "luebeck_zaubertheater_lubeck",
+      "name": "Zaubertheater Lübeck",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.8695199,
+        "lng": 10.681114642857144
+      },
+      "query": "Zaubertheater Lübeck, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8695763,
+        "lng": 10.6810934,
+        "display_name": "Zaubertheater Lübeck, 87, Beckergrube, Innenstadt, Lübeck, Schleswig-Holstein, 23552, Deutschland",
+        "class": "amenity",
+        "type": "theatre",
+        "importance": 0.00007299687190046566,
+        "osm_type": "node",
+        "osm_id": 5361074487,
+        "provider": "nominatim"
+      },
+      "delta_m": 6,
+      "from_city_m": 575,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "luebeck_heiligen_geist",
+      "name": "Heiligen-Geist-Hospital & Koberg",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.871339920000004,
+        "lng": 10.689860840000001
+      },
+      "query": "Heiligen-Geist-Hospital, Lübeck, Germany",
+      "osm": {
+        "lat": 53.871379,
+        "lng": 10.6899139,
+        "display_name": "Heiligen-Geist-Hospital, 11, Koberg, Innenstadt, Lübeck, Schleswig-Holstein, 23552, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.3363461829037416,
+        "osm_type": "node",
+        "osm_id": 25393497,
+        "provider": "nominatim"
+      },
+      "delta_m": 6,
+      "from_city_m": 688,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "luebeck_st_matthai_gemeinde_lubeck",
+      "name": "St.Matthäi Gemeinde Lübeck",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.8736064,
+        "lng": 10.67619418888889
+      },
+      "query": "St.Matthäi Gemeinde Lübeck, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8736553,
+        "lng": 10.6762414,
+        "display_name": "Pastorat St.Matthäi und Gemeindebüro, Schwartauer Allee, Lübeck, Deutschland",
+        "class": "building",
+        "type": "church",
+        "provider": "photon"
+      },
+      "delta_m": 6,
+      "from_city_m": 1132,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "luebeck_museum_behnhaus_dragerhaus",
+      "name": "Museum Behnhaus Drägerhaus",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.870241091666664,
+        "lng": 10.689850875
+      },
+      "query": "Museum Behnhaus Drägerhaus, Lübeck, Germany",
+      "osm": {
+        "lat": 53.870247,
+        "lng": 10.6897926,
+        "display_name": "Museum Behnhaus Drägerhaus, 9, Königstraße, Innenstadt, Lübeck, Schleswig-Holstein, 23552, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.00007299687190046566,
+        "osm_type": "node",
+        "osm_id": 13758404711,
+        "provider": "nominatim"
+      },
+      "delta_m": 4,
+      "from_city_m": 573,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "luebeck_st_aegidien_kirche_lubeck_ev_luth_kirchengemeinde_st_aegidien_zu_lubeck",
+      "name": "St. Aegidien zu Lübeck",
+      "category": "kirche",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.86395664285715,
+        "lng": 10.689815857142857
+      },
+      "query": "St. Aegidien zu Lübeck, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8639513,
+        "lng": 10.6897596,
+        "display_name": "St.-Aegidien-Kirche, Aegidienkirchhof, Lübeck, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 4,
+      "from_city_m": 272,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "luebeck_st_jakobi_kirche_lubeck_ev_luth_kirchengemeinde_st_jakobi_lubeck",
+      "name": "St. Jakobi zu Lübeck",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.870867828571434,
+        "lng": 10.68902502
+      },
+      "query": "St. Jakobi zu Lübeck, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8708878,
+        "lng": 10.68897,
+        "display_name": "St.-Jakobi-Kirche, Jakobikirchhof, Lübeck, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 4,
+      "from_city_m": 622,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "luebeck_aparthotel_stadtpark_lubeck",
+      "name": "Aparthotel Stadtpark Lübeck",
+      "category": "hotel",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.87606281666667,
+        "lng": 10.697735216666667
+      },
+      "query": "Aparthotel Stadtpark Lübeck, Lübeck, Germany",
+      "osm": {
+        "lat": 53.876032,
+        "lng": 10.6977653,
+        "display_name": "Aparthotel Stadtpark, Lange Reihe, Burgtor / Stadtpark, Sankt Gertrud, Lübeck, Schleswig-Holstein, 23568, Deutschland",
+        "class": "tourism",
+        "type": "apartment",
+        "importance": 0.00007299687190046566,
+        "osm_type": "node",
+        "osm_id": 2031487337,
+        "provider": "nominatim"
+      },
+      "delta_m": 4,
+      "from_city_m": 1387,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "luebeck_cinestar_lubeck_stadthalle",
+      "name": "CineStar Lübeck Stadthalle",
+      "category": "kino",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.860438599999995,
+        "lng": 10.6903388
+      },
+      "query": "CineStar Lübeck Stadthalle, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8604315,
+        "lng": 10.6903783,
+        "display_name": "CineStar Stadthalle, Mühlenbrücke, Lübeck, Deutschland",
+        "class": "amenity",
+        "type": "cinema",
+        "provider": "photon"
+      },
+      "delta_m": 3,
+      "from_city_m": 612,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "luebeck_schiffergesellschaft",
+      "name": "Schiffergesellschaft",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.87118558333333,
+        "lng": 10.688048266666668
+      },
+      "query": "Schiffergesellschaft, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8711652,
+        "lng": 10.6880867,
+        "display_name": "Schiffergesellschaft, 2, Breite Straße, Innenstadt, Lübeck, Schleswig-Holstein, 23552, Deutschland",
+        "class": "historic",
+        "type": "building",
+        "importance": 0.00007299687190046566,
+        "osm_type": "way",
+        "osm_id": 149007922,
+        "provider": "nominatim"
+      },
+      "delta_m": 3,
+      "from_city_m": 643,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "luebeck_palais_rantzau_ein_haus_der_deutschen_stiftung_denkmalschutz",
+      "name": "Palais Rantzau - ein Haus der Deutschen Stiftung Denkmalschutz",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.862835399999994,
+        "lng": 10.6854308
+      },
+      "query": "Palais Rantzau, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8628192,
+        "lng": 10.6854672,
+        "display_name": "Schloss Rantzau, Parade, Lübeck, Deutschland",
+        "class": "building",
+        "type": "yes",
+        "provider": "photon"
+      },
+      "delta_m": 3,
+      "from_city_m": 302,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "luebeck_passat",
+      "name": "Viermastbark Passat",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.95801316666667,
+        "lng": 10.880874881818183
+      },
+      "query": "Viermastbark Passat, Lübeck, Germany",
+      "osm": {
+        "lat": 53.9580193,
+        "lng": 10.8808994,
+        "display_name": "Museumsschiff Passat, Priwallpromenade, Lübeck, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 2,
+      "from_city_m": 16367,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "luebeck_st_gertrud_kirche_lubeck_ev_luth_kirchengemeinde_st_gertrud_lubeck",
+      "name": "St.-Gertrud-Kirche Lübeck - Ev.-Luth. Kirchengemeinde St. Gertrud Lübeck",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.87766073333333,
+        "lng": 10.707131205555555
+      },
+      "query": "St.-Gertrud-Kirche Lübeck, Lübeck, Germany",
+      "osm": {
+        "lat": 53.877671,
+        "lng": 10.7071093,
+        "display_name": "St.-Gertrud-Kirche, 1, Bonnusstraße, Burgtor / Stadtpark, Sankt Gertrud, Lübeck, Schleswig-Holstein, 23568, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.19619210675062,
+        "osm_type": "way",
+        "osm_id": 154199767,
+        "provider": "nominatim"
+      },
+      "delta_m": 2,
+      "from_city_m": 1912,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "luebeck_museum_fur_natur_und_umwelt",
+      "name": "Museum für Natur und Umwelt",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.86039409999999,
+        "lng": 10.685646700000001
+      },
+      "query": "Museum für Natur, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8603842,
+        "lng": 10.6856317,
+        "display_name": "Museum für Natur und Umwelt, Musterbahn, Innenstadt, Lübeck, Schleswig-Holstein, 23552, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.26704010519783294,
+        "osm_type": "node",
+        "osm_id": 25393491,
+        "provider": "nominatim"
+      },
+      "delta_m": 1,
+      "from_city_m": 567,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "luebeck_willy_brandt_haus_lubeck",
+      "name": "Willy-Brandt-Haus Lübeck",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.86973291666667,
+        "lng": 10.689544933333336
+      },
+      "query": "Willy-Brandt-Haus Lübeck, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8697428,
+        "lng": 10.6895494,
+        "display_name": "Willy-Brandt-Haus, 21, Königstraße, Innenstadt, Lübeck, Schleswig-Holstein, 23552, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.2548773901198179,
+        "osm_type": "way",
+        "osm_id": 153789584,
+        "provider": "nominatim"
+      },
+      "delta_m": 1,
+      "from_city_m": 513,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "luebeck_alter_leuchtturm_travemuende",
+      "name": "Alter Leuchtturm Travemünde",
+      "category": "aussicht",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.960636265000005,
+        "lng": 10.87932889
+      },
+      "query": "Alter Leuchtturm Travemünde, Lübeck, Germany",
+      "osm": {
+        "lat": 53.9606313,
+        "lng": 10.8793256,
+        "display_name": "Alter Leuchtturm Travemünde, Am Leuchtenfeld, Alt-Travemünde / Rönnau, Travemünde, Lübeck, Schleswig-Holstein, 23570, Deutschland",
+        "class": "man_made",
+        "type": "lighthouse",
+        "importance": 0.21080589711721126,
+        "osm_type": "way",
+        "osm_id": 138339304,
+        "provider": "nominatim"
+      },
+      "delta_m": 1,
+      "from_city_m": 16474,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "luebeck_wasserkunst",
+      "name": "Wasserkunst",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.855295344,
+        "lng": 10.700542500000001
+      },
+      "query": "Wasserkunst, Lübeck, Germany",
+      "osm": {
+        "lat": 53.8552871,
+        "lng": 10.7005444,
+        "display_name": "Wasserkunst, Alter Wasserturm, Sankt Jürgen, Hüxtertor / Mühlentor / Gärtnergasse, Sankt Jürgen, Lübeck, Schleswig-Holstein, 23564, Deutschland",
+        "class": "man_made",
+        "type": "water_tower",
+        "importance": 0.19619210675062,
+        "osm_type": "way",
+        "osm_id": 155290510,
+        "provider": "nominatim"
+      },
+      "delta_m": 1,
+      "from_city_m": 1456,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    }
+  ]
+}

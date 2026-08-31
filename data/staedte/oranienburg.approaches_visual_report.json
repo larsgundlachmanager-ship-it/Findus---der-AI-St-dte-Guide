@@ -1,0 +1,1138 @@
+{
+  "city": "oranienburg",
+  "apply": true,
+  "touched": 141,
+  "approachesFixed": 141,
+  "faqAdded": 0,
+  "data_version": 31,
+  "rows": [
+    {
+      "id": "oranienburg_oranienburg",
+      "name": "Oranienburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_s_bahn_berlin_instandhaltung_stutzpunkt_oranienburg",
+      "name": "S-Bahn Berlin Instandhaltung Stützpunkt Oranienburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_s_oranienburg_bhf",
+      "name": "S Oranienburg Bhf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_p_r_bahnhof_oranienburg",
+      "name": "P+R Bahnhof Oranienburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_reiseservice",
+      "name": "Reiseservice",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_oranienburg_schlosshafen",
+      "name": "Oranienburg Schloßhafen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_schlosshafen_oranienburg_mit_reisemobilstellplatz",
+      "name": "Schlosshafen Oranienburg mit Reisemobilstellplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_bollwerk_anleger",
+      "name": "Bollwerk-Anleger",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_caravanstellplatz_am_schlosshafen_oranienburg",
+      "name": "Caravanstellplatz am Schloßhafen Oranienburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_stadtanleger_oranienburg",
+      "name": "Stadtanleger Oranienburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_schlossmuseum_oranienburg",
+      "name": "Schlossmuseum Oranienburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_st_nicolai_kirche_pfarrsprengel_oranienburg",
+      "name": "St.-Nicolai-Kirche - Pfarrsprengel Oranienburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_neuapostolische_kirche_oranienburg",
+      "name": "Neuapostolische Kirche Oranienburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_ev_kirchengemeinde_st_nicolai_oranienburg",
+      "name": "Ev. Kirchengemeinde St. Nicolai Oranienburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_katholische_pfarrkirche_herz_jesu",
+      "name": "Katholische Pfarrkirche Herz Jesu",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_dorfkirche_sachsenhausen_oranienburg",
+      "name": "Dorfkirche Sachsenhausen (Oranienburg)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_evangelisch_freikirchliche_gemeinde_oranienburg",
+      "name": "Evangelisch-Freikirchliche Gemeinde Oranienburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_bethlehemkapelle_oranienburg",
+      "name": "Bethlehemkapelle Oranienburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_kic_evangelisch_methodistische_kirche_oranienburg",
+      "name": "KiC Evangelisch-methodistische Kirche Oranienburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_c_z_glaube_in_aktion_e_v_oranienburg",
+      "name": "C.Z. Glaube in Aktion e.V. Oranienburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_freikirche_der_siebenten_tags_adventisten_gemeinde_oranienburg",
+      "name": "Freikirche der Siebenten-Tags-Adventisten Gemeinde Oranienburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_tagespflege_an_der_nicolai_kirche_oranienburg",
+      "name": "Tagespflege An der Nicolai Kirche Oranienburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_gemeinschaft_der_siebenten",
+      "name": "Gemeinschaft der Siebenten-",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_landeskirchliche_gemeinschaft_lkg_oranienburg_eden",
+      "name": "Landeskirchliche Gemeinschaft (LKG) Oranienburg - Eden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_denkmal_fur_das_kz_sachsenhausen",
+      "name": "Denkmal für das KZ Sachsenhausen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_denkmal_konzentrationslager_oranienburg",
+      "name": "Denkmal Konzentrationslager Oranienburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_f_f_runge",
+      "name": "F. F. Runge",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_die_anklagende",
+      "name": "Die Anklagende",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_klinkerhafenbrucke",
+      "name": "Klinkerhafenbrücke",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_gedenkstatte_kz_aussenlager_klinkerwerk",
+      "name": "Gedenkstätte KZ-Außenlager Klinkerwerk",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_reichsfreiherr_otto_von_schwerin",
+      "name": "Reichsfreiherr Otto von Schwerin",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_krassin_park",
+      "name": "Krassin Park",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_schlosspark_oranienburg",
+      "name": "Schlosspark Oranienburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_schlossgarten",
+      "name": "Schlossgarten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_weisser_strand_am_lehnitzsee",
+      "name": "Weißer Strand am Lehnitzsee",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_oranienburger_strand",
+      "name": "Oranienburger Strand",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_pferdeinsel",
+      "name": "Pferdeinsel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_bollwerk",
+      "name": "Bollwerk",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_athletic_park_oranienburg",
+      "name": "Athletic Park Oranienburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_turm_erlebniscity",
+      "name": "TURM ErlebnisCity",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_spielplatz_schlosspark_oranienburg",
+      "name": "Spielplatz Schlosspark Oranienburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_freizeitgelande_tolora",
+      "name": "Freizeitgelände TolOra",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_strand_bolli_am_lehnitzsee",
+      "name": "Strand \"Bolli\" am Lehnitzsee",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_pinnower_see",
+      "name": "Pinnower See",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_wild_west_oranienburg_am_weissen_strand_two_bedroom_house",
+      "name": "Wild West Oranienburg am Weißen Strand - Two-Bedroom House",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_turmchen",
+      "name": "Türmchen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_oranienburg_turm_erlebniscity",
+      "name": "Oranienburg, TURM ErlebnisCity",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_christliche_kita_leuchtturm_im_cjo_e_v",
+      "name": "Christliche Kita Leuchtturm im CJO e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_sportplatz_am_schloss",
+      "name": "Sportplatz am Schloss",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_orafol_arena",
+      "name": "Orafol-Arena",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_wassersportclub_mowe_oranienburg_e_v",
+      "name": "Wassersportclub Möwe Oranienburg e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_familyrocks_boulderhalle",
+      "name": "FamilyRocks Boulderhalle",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_burgerzentrum_oranienburg",
+      "name": "Bürgerzentrum Oranienburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_steganlage_oranienburg",
+      "name": "Steganlage Oranienburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_spielplatz_pferdeinsel",
+      "name": "Spielplatz Pferdeinsel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_familien_sport_verein_oberhavel_e_v_fsvo_e_v",
+      "name": "Familien-Sport-Verein Oberhavel E.V.-FSVO e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_turn_und_sportgemeinschaft_eden_e_v",
+      "name": "Turn- und Sportgemeinschaft Eden e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_stadtverwaltung_oranienburg",
+      "name": "Stadtverwaltung Oranienburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_stadthof_der_stadt_oranienburg",
+      "name": "Stadthof der Stadt Oranienburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_kurfurstin_louise_henriette_von_oranien",
+      "name": "Kurfürstin Louise Henriette von Oranien",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_altstadtklause",
+      "name": "Altstadtklause",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_tourist_information_oranienburg",
+      "name": "Tourist-Information Oranienburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_orangerie_im_schlosspark",
+      "name": "Orangerie im Schlosspark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_gedenkstatte_und_museum_sachsenhausen",
+      "name": "Gedenkstätte und Museum Sachsenhausen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_lehnitzschleuse",
+      "name": "Lehnitzschleuse",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_traumschuff_theater",
+      "name": "Traumschüff Theater",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_filmpalast_oranienburg",
+      "name": "Filmpalast Oranienburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_sven_o_winter_theater_bau_herr_winter",
+      "name": "Sven O. Winter Theater Bau Herr Winter",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_naturlehrpfad",
+      "name": "Naturlehrpfad",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_saubucht_lehnitzsee",
+      "name": "Saubucht Lehnitzsee",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_rad_sport_oranienburg",
+      "name": "Rad-Sport Oranienburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_fahrrad_center_hebestreit_inh_m_schleising",
+      "name": "Fahrrad Center Hebestreit Inh. M. Schleising",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_fahrradhaus_klaas",
+      "name": "Fahrradhaus Klaas",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_little_john_bikes",
+      "name": "Little John Bikes",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_cook_rein_breite_strasse",
+      "name": "COOK REIN BREITE STRASSE",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_lehnitzsee",
+      "name": "Lehnitzsee",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_oranienburger_kanal",
+      "name": "Oranienburger Kanal",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_tiergarten_schleuse",
+      "name": "Tiergarten Schleuse",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_ladengalerie_kolorit_maria_windisch",
+      "name": "Ladengalerie kolorit Maria Windisch",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_geschenkekiste",
+      "name": "Geschenkekiste",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_gerson_getranke",
+      "name": "Gerson Getränke",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_blumenladen_oranienburg",
+      "name": "BLUMENLADEN ORANIENBURG",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_gold_silber_galerie_im_oranienprk",
+      "name": "GOLD & SILBER GALERIE Im ORANIENPRK",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_august_wilhelm_steg_oranienburg",
+      "name": "August Wilhelm Steg Oranienburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_ehemalige_schleuse_sachsenhausen",
+      "name": "ehemalige Schleuse Sachsenhausen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_kleines_wehr_sachsenhausen",
+      "name": "Kleines Wehr Sachsenhausen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_museum_sowjetisches_speziallager_nr_7_nr_1",
+      "name": "Museum \"Sowjetisches Speziallager Nr. 7 / Nr. 1\"",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_grabstatte_von_silvio_gesell",
+      "name": "Grabstätte von Silvio Gesell",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_restaurant_galerie",
+      "name": "Restaurant Galerie",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_bob_ross_instructor_galerie_augustburk",
+      "name": "Bob Ross Instructor Galerie Augustburk",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_bistro_an_der_gedenkstatte_sachsenhausen",
+      "name": "Bistro an der Gedenkstätte Sachsenhausen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_massengrab_an_der_dune",
+      "name": "Massengrab An Der Düne",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_gedenkstatte_todesmarsch",
+      "name": "Gedenkstätte Todesmarsch",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_gedenkort_station_z",
+      "name": "Gedenkort \"Station Z\"",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_oranienburger_wochenmarkt",
+      "name": "ORANIENBURGER WOCHENMARKT",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_parkplatz_am_schloss",
+      "name": "Parkplatz am Schloss",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_schlossparkcafe",
+      "name": "Schlossparkcafé",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_tiny_forest_grunzug_walther_bothe_strasse",
+      "name": "Tiny Forest Grünzug Walther-Bothe-Straße",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_kleingartenverein_havelfreude_e_v",
+      "name": "Kleingartenverein Havelfreude E.v.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_gartengemeinschaft_e_v",
+      "name": "Gartengemeinschaft e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_schlappmeisterei_hundeauslaufgebiet",
+      "name": "Schlappmeisterei Hundeauslaufgebiet",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_grunpflege_gartenzwerg",
+      "name": "Grünpflege Gartenzwerg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_gedenkort_zum_klinkerwerk",
+      "name": "Gedenkort Zum Klinkerwerk",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_hafenrestaurant_lubea",
+      "name": "Hafenrestaurant LuBea",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_wassersport_oranienburg_bootsschule_bootsverleih",
+      "name": "Wassersport Oranienburg Bootsschule Bootsverleih",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_bootsschule_oranienburg_seit_1991",
+      "name": "Bootsschule Oranienburg seit 1991",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_kanuverleih",
+      "name": "Kanuverleih",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_oranienburger_fahrgastschifffahrt_gbr_manfred_und_rudiger_ulack",
+      "name": "Oranienburger Fahrgastschifffahrt GbR, Manfred und Rüdiger Ulack",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_nani_s_kinderparadies",
+      "name": "Nani´s Kinderparadies",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_action_oranienburg",
+      "name": "Action Oranienburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_schreibwaren_am_bahnhof",
+      "name": "Schreibwaren Am Bahnhof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_marktschwarmer_oranienburg",
+      "name": "Marktschwärmer Oranienburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_wochenmarkt_bernauer_str",
+      "name": "wochenmarkt bernauer str.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_orchester_ronny_heinrich",
+      "name": "Orchester Ronny Heinrich",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_drk_kreisverband_markisch_oder_havel_spree_e_v",
+      "name": "DRK Kreisverband Märkisch-Oder-Havel-Spree e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_sv_friedrichsthal_e_v",
+      "name": "SV Friedrichsthal e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_heilstatte_grabowsee",
+      "name": "Heilstätte Grabowsee",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_staustufe_friedrichsthal",
+      "name": "Staustufe Friedrichsthal",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_deutsches_rotes_kreuz_jugendarbeit",
+      "name": "Deutsches Rotes Kreuz Jugendarbeit",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_evangelische_kirche_friedrichsthal_oranienburg",
+      "name": "Evangelische Kirche Friedrichsthal (Oranienburg)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_drk",
+      "name": "DRK",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 4,
+      "had_approaches": 1
+    },
+    {
+      "id": "oranienburg_grabowseebrucke",
+      "name": "Grabowseebrücke",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_souveniermunzen_automat",
+      "name": "Souveniermünzen Automat",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "oranienburg_vulkan_im_tier_freizeit_und_saurierpark_germendorf",
+      "name": "Vulkan im Tier-, Freizeit- und Saurierpark Germendorf",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "oranienburg_tier_freizeit_und_saurierpark_germendorf",
+      "name": "Tier-, Freizeit- und Saurierpark Germendorf",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "oranienburg_bismarckeiche",
+      "name": "Bismarckeiche",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "oranienburg_alter_bunker",
+      "name": "Alter Bunker",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "oranienburg_preussischer_meilenstein",
+      "name": "Preußischer Meilenstein",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "oranienburg_louise_henriette_brunnen",
+      "name": "Louise-Henriette-Brunnen",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "oranienburg_dorfkirche_zehlendorf_oranienburg",
+      "name": "Dorfkirche Zehlendorf (Oranienburg)",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "oranienburg_kirche_germendorf_pfarrsprengel_oranienburg",
+      "name": "Kirche Germendorf - Pfarrsprengel Oranienburg",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 2,
+      "had_approaches": 1
+    },
+    {
+      "id": "oranienburg_trainings_park_calisthenics_park_berliner_weg",
+      "name": "Trainings Park - Calisthenics Park Berliner Weg",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "oranienburg_borgsdorf_briesewanderweg",
+      "name": "Borgsdorf, Briesewanderweg",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "oranienburg_adfc_ortsgruppe_oranienburg",
+      "name": "ADFC Ortsgruppe Oranienburg",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "oranienburg_weinberg_muhlensee",
+      "name": "Weinberg Mühlensee",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "oranienburg_schleuse_pinnow",
+      "name": "Schleuse Pinnow",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "oranienburg_mauerweg_nordpunkt",
+      "name": "Mauerweg Nordpunkt",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "oranienburg_ferienhaus_am_alten_malzer_kanal",
+      "name": "Ferienhaus am Alten Malzer Kanal",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "oranienburg_bernsteinsee_badesee",
+      "name": "Bernsteinsee (Badesee)",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "oranienburg_wsc_lehnitz_e_v",
+      "name": "WSC Lehnitz e.V.",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "oranienburg_hausboot_fahren",
+      "name": "Hausboot-fahren",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    }
+  ]
+}

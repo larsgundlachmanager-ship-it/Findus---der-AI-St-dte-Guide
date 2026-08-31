@@ -14,7 +14,7 @@ const NAMED_ITINERARY_RE =
   /\b(danach|dann|anschließend|anschliessend|zuerst|als\s+nächstes|als\s+naechstes).{0,40}\b(und|,)\b/iu;
 
 const MULTI_STOP_RE =
-  /\b(mehrere|ein\s+paar|paar|verschiedene|ein\s+bisschen\s+(die\s+)?stadt|rumführ|rumfuehr|führ\s+mich\s+(herum|durch|rum)|fuehr\s+mich\s+(herum|durch|rum)|stadtführung|stadtfuehrung|rundgang|erkunden|unbesucht|noch\s+nicht\s+(gesehen|besucht)|must[\s-]?haves?|highlights?|tour\s+(machen|planen)|zeig\s+mir\s+(die\s+stadt|was)|(?:kleine|kurze|schnelle)\s+tour|(?:tour).{0,40}\b(?:\d+|zwei|drei|vier|paar)\s*stops?|(?:\d+|zwei|drei|vier|paar)\s*stops?\b)/iu;
+  /\b(mehrere|ein\s+paar|paar|verschiedene|ein\s+bisschen\s+(die\s+)?stadt|rumführ|rumfuehr|führ\s+mich\s+(herum|durch|rum)|fuehr\s+mich\s+(herum|durch|rum)|stadtführung|stadtfuehrung|rundgang|erkunden|unbesucht|noch\s+nicht\s+(gesehen|besucht)|must[\s-]?haves?|highlights?|tour\s+(machen|planen)|zeig\s+mir\s+(die\s+stadt|was)|welche\s+orte|was\s+kann\s+ich\s+(denn\s+)?(?:hier|in\s+\w+)?\s*(?:noch\s+)?(?:alles\s+)?(?:anschauen|erkunden|sehen)|(?:kleine|kurze|schnelle)\s+tour|(?:tour).{0,40}\b(?:\d+|zwei|drei|vier|paar)\s*stops?|(?:\d+|zwei|drei|vier|paar)\s*stops?\b)/iu;
 
 const THEME_MULTI_RE =
   /\b(alle|mehrere|ein\s+paar|paar)\s+(kirchen|museen|parks|denkmäler|denkmaeler|aussichten|strände|straende)\b/iu;
@@ -38,6 +38,43 @@ const THEME_MAP: Array<{ re: RegExp; key: string }> = [
   { re: /\bstrand|bucht/iu, key: 'strand' },
   { re: /\bspeicherstadt|altstadt/iu, key: 'altstadt' },
 ];
+
+/** „Noch nicht gesehen / unbesucht“ → Auto-Tour mit visitedExclude. */
+export function wantsUnseenTour(text: string): boolean {
+  const t = text.replace(/\s+/g, ' ').trim();
+  if (!t) return false;
+  return /\b(unbesucht|noch\s+nicht\s+(gesehen|besucht)|nicht\s+gesehen|noch\s+nie\s+(gesehen|besucht)|was\s+(habe|haben)\s+(ich|wir).{0,40}noch\s+nicht)\b/iu.test(
+    t,
+  );
+}
+
+/**
+ * End-Anker aus Floskeln wie „am Ende gerne am Hafen“.
+ * Nicht als Area-/Theme-Filter missbrauchen.
+ */
+export function parseEndAnchorKind(text: string): string | null {
+  const t = text.replace(/\s+/g, ' ').trim();
+  if (!t) return null;
+  const m = t.match(
+    /\b(?:am\s+ende|zum\s+schluss|danach|anschlie(?:ß|ss)end|fertig\s+bei|enden?\s+bei|richtung)\s+(?:gerne\s+)?(?:am\s+|an\s+der\s+|beim?\s+|zum?\s+|zur\s+)?(hafen|strand|markt|rathaus|kirche|museum|hotel|bahnhof|altstadt|förde|foerde|alster|elbe)\b/iu,
+  );
+  return m?.[1]?.toLowerCase() ?? null;
+}
+
+export function wantsParkingNearEnd(text: string): boolean {
+  return /\b(parkplatz|parken|parkmöglichkeit|parkmoeglichkeit)\b/iu.test(text);
+}
+
+/** Stadt-Rundgang / Highlights — Anker auf Pack, nicht Tennis-GPS. */
+export function wantsCityExplore(text: string): boolean {
+  const t = text.replace(/\s+/g, ' ').trim();
+  if (!t) return false;
+  if (/\b(joggen|jogging|wandern|radtour|fahrradtour)\b/iu.test(t)) return false;
+  if (wantsUnseenTour(t)) return true;
+  return /\b(erkunden|stadt\s+(?:angucken|zeigen|ansehen)|rundgang|highlights?|must[\s-]?haves?|stadt(?:führung|fuehrung|tour)|tour|rumlaufen|herumlaufen|stopps?)\b/iu.test(
+    t,
+  );
+}
 
 export function looksLikeNamedItinerary(text: string): boolean {
   const t = text.replace(/\s+/g, ' ').trim();
@@ -65,6 +102,12 @@ export function detectTourMode(text: string): TourMode | null {
   }
   if (MULTI_STOP_RE.test(t) || THEME_MULTI_RE.test(t)) return 'stop_tour';
   if (
+    /\b(tour|rundgang)\b/iu.test(t) &&
+    parseDurationMin(t) != null
+  ) {
+    return 'stop_tour';
+  }
+  if (
     /\b(tour)\b/iu.test(t) &&
     /\b(?:\d+|zwei|drei|vier|paar)\s*stops?\b/iu.test(t)
   ) {
@@ -73,6 +116,13 @@ export function detectTourMode(text: string): TourMode | null {
   if (/\b(erkunden|rumlaufen|herumlaufen|stadt\s+zeigen)\b/iu.test(t)) {
     return 'stop_tour';
   }
+  if (
+    /\b(welche\s+orte|was\s+(kann|gibt)|wohin\s+kann)\b/iu.test(t) &&
+    /\b(erkunden|anschauen|sehen|besuchen|bummel|rundgang)\b/iu.test(t)
+  ) {
+    return 'stop_tour';
+  }
+  if (wantsUnseenTour(t)) return 'stop_tour';
   return null;
 }
 
@@ -88,6 +138,20 @@ export function shouldPreferTourOverPitch(text: string): boolean {
 
 export function parseDurationMin(text: string): number | null {
   const t = text.replace(/\s+/g, ' ').trim();
+  if (
+    /\b(?:so\s+schnell|schnellstmöglich|schnellstmoeglich|kurz(?:e)?\s+tour|kompakt)\b/iu.test(
+      t,
+    )
+  ) {
+    return 60;
+  }
+  if (
+    /\b(?:ein[e]?\s*(?:bis|-|–)\s*zwei|1\s*[-–]\s*2|ein\s+zwei|eine?\s+oder\s+zwei)\s*stunden?\b/iu.test(
+      t,
+    )
+  ) {
+    return 90;
+  }
   const hours = t.match(/(\d+[.,]?\d*)\s*(stunden?|h)\b/iu);
   if (hours) {
     const n = Number(String(hours[1]).replace(',', '.'));
@@ -128,7 +192,12 @@ export function parseHardArriveByMs(text: string, nowMs = Date.now()): number | 
 }
 
 export function resolveStartMode(text: string): TourStartMode {
-  if (/\b(später|spaeter|morgen|heute\s+abend|um\s+\d)/iu.test(text) && !/\b(jetzt|sofort|gleich)\b/iu.test(text)) {
+  if (
+    /\b(später|spaeter|morgen|übermorgen|uebermorgen|heute\s+abend|um\s+\d|montag|dienstag|mittwoch|donnerstag|freitag|samstag|sonntag)\b/iu.test(
+      text,
+    ) &&
+    !/\b(jetzt|sofort|gleich)\b/iu.test(text)
+  ) {
     return 'scheduled';
   }
   return 'now';
@@ -144,18 +213,36 @@ export function resolveMobility(text: string): TourMobility {
 }
 
 export function extractThemeFilters(text: string): string[] {
+  const endKind = parseEndAnchorKind(text);
+  // End-Anker-Satz raus, damit „am Ende am Hafen“ nicht alle Stops auf Hafen filtert
+  const scrubbed = text
+    .replace(
+      /\b(?:am\s+ende|zum\s+schluss|danach|anschlie(?:ß|ss)end|fertig\s+bei|enden?\s+bei|richtung)\s+(?:gerne\s+)?(?:am\s+|an\s+der\s+|beim?\s+|zum?\s+|zur\s+)?(?:hafen|strand|markt|rathaus|kirche|museum|hotel|bahnhof|altstadt|förde|foerde|alster|elbe)\b[^.!?]*/giu,
+      ' ',
+    )
+    .replace(/\s+/g, ' ');
   const out: string[] = [];
   for (const { re, key } of THEME_MAP) {
-    if (re.test(text)) out.push(key);
+    if (endKind && key === endKind && !re.test(scrubbed)) continue;
+    if (re.test(scrubbed)) out.push(key);
   }
   return out;
 }
 
 export function extractAreaHint(text: string): string | null {
-  const m = text.match(
+  const endKind = parseEndAnchorKind(text);
+  const scrubbed = text
+    .replace(
+      /\b(?:am\s+ende|zum\s+schluss|danach|anschlie(?:ß|ss)end|fertig\s+bei|enden?\s+bei|richtung)\s+(?:gerne\s+)?(?:am\s+|an\s+der\s+|beim?\s+|zum?\s+|zur\s+)?(?:hafen|strand|markt|rathaus|kirche|museum|hotel|bahnhof|altstadt|förde|foerde|alster|elbe)\b[^.!?]*/giu,
+      ' ',
+    )
+    .replace(/\s+/g, ' ');
+  const m = scrubbed.match(
     /\b(an\s+der\s+elbe|elbe|speicherstadt|altstadt|hafen|förde|foerde|alster)\b/iu,
   );
-  return m?.[1]?.toLowerCase() ?? null;
+  const hit = m?.[1]?.toLowerCase() ?? null;
+  if (hit && endKind && hit.includes(endKind)) return null;
+  return hit;
 }
 
 export function buildPathSpec(text: string): TourPathSpec | null {
@@ -179,7 +266,15 @@ export function needsDurationAsk(opts: {
 }): boolean {
   if (opts.durationMin != null || opts.distanceKm != null) return false;
   if (opts.hardArriveByMs != null) return false;
+  // Stadt erkunden / Unseen: Default-Dauer, nie nachfragen
+  if (wantsCityExplore(opts.text) || wantsUnseenTour(opts.text)) return false;
   return true;
+}
+
+/** Default-Dauer für Unseen-Auto-Tour (JUST-DO-IT). */
+export function defaultUnseenTourDurationMin(text: string): number | null {
+  if (!wantsUnseenTour(text)) return null;
+  return 60;
 }
 
 export function buildTourPrefSlice(text: string): TourPrefSlice {

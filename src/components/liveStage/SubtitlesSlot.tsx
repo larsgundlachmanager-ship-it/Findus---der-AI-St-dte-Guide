@@ -1,8 +1,8 @@
 /**
  * Eine Untertitel-Zeile, linksbündig, Wort für Wort 1:1 zur Stimme.
  *
- * - Zeile füllen von links
- * - Vorletztes Wort / Zeile voll / Satzende → Zeile 280ms ausfaden, dann neu von links
+ * - Zeile füllen von links (Satzende knüpft an, keine neue Zeile)
+ * - Zeile voll → 280ms ausfaden, dann neu von links
  * - 5s ohne neues Wort → langsam ausblenden
  */
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
@@ -20,7 +20,6 @@ import { getAudioOutputMode } from '../../services/userProfileService';
 import { useUiScaleStore } from '../../services/ui/uiScale';
 import { useFinnusStore } from '../../store/useFinnusStore';
 import {
-  isSubtitleSentenceEndWord,
   SUBTITLE_IDLE_FADE_MS,
   SUBTITLE_IDLE_HOLD_MS,
   SUBTITLE_LINE_FADE_MS,
@@ -29,6 +28,8 @@ import {
   SUBTITLE_RISE_PX,
   SUBTITLE_WIDTH_SAFETY_PX,
   SUBTITLE_WORD_GAP,
+  subtitleFeedAdvance,
+  subtitleWordRevealDelayMs,
 } from '../../utils/subtitleWholeWords';
 
 type Props = { text: string | null };
@@ -40,8 +41,6 @@ const RISE_EASE = Easing.bezier(
   SUBTITLE_RISE_EASING[2],
   SUBTITLE_RISE_EASING[3],
 );
-
-const WORD_TICK_MS = 55;
 
 function estW(text: string, fontSize: number): number {
   let u = 0;
@@ -194,22 +193,37 @@ export const SubtitlesSlot = React.memo(function SubtitlesSlot({ text }: Props) 
   const [line, setLine] = useState<Word[]>([]);
   const [riseId, setRiseId] = useState<string | null>(null);
   const [fade, setFade] = useState<{ id: string; words: Word[] } | null>(null);
-  const [tick, setTick] = useState(0);
 
   const lineR = useRef<Word[]>([]);
   const emittedR = useRef<string[]>([]);
   const seqR = useRef(0);
   const fadingR = useRef(false);
-  const tickTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const idleTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const idleOp = useSharedValue(1);
   const idleOn = useRef(false);
+  const queueR = useRef<string[]>([]);
+  const dripTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const drippingR = useRef(false);
+  const karaokeR = useRef(false);
+  const areaWR = useRef(areaW);
+  const fontSizeR = useRef(fontSize);
+  const gapXR = useRef(gapX);
+  areaWR.current = areaW;
+  fontSizeR.current = fontSize;
+  gapXR.current = gapX;
+
+  const stopDrip = useCallback(() => {
+    if (dripTimer.current) {
+      clearTimeout(dripTimer.current);
+      dripTimer.current = null;
+    }
+    drippingR.current = false;
+    queueR.current = [];
+    karaokeR.current = false;
+  }, []);
 
   const clearAll = useCallback(() => {
-    if (tickTimer.current) {
-      clearTimeout(tickTimer.current);
-      tickTimer.current = null;
-    }
+    stopDrip();
     lineR.current = [];
     emittedR.current = [];
     seqR.current = 0;
@@ -217,7 +231,7 @@ export const SubtitlesSlot = React.memo(function SubtitlesSlot({ text }: Props) 
     setLine([]);
     setRiseId(null);
     setFade(null);
-  }, []);
+  }, [stopDrip]);
 
   const onFadeDone = useCallback((id: string) => {
     setFade((cur) => {
@@ -227,14 +241,57 @@ export const SubtitlesSlot = React.memo(function SubtitlesSlot({ text }: Props) 
     });
   }, []);
 
-  /** Aktuelle Zeile ausfaden und leeren. */
+  /** Volle Zeile: Overlay-Fade wenn frei, Live-Zeile immer neu. */
   const recycleLine = useCallback((from: Word[]): Word[] => {
     if (!from.length) return from;
-    if (fadingR.current) return [];
-    fadingR.current = true;
-    setFade({ id: `f${seqR.current}`, words: [...from] });
+    if (!fadingR.current) {
+      fadingR.current = true;
+      setFade({ id: `f${seqR.current}`, words: [...from] });
+    }
     return [];
   }, []);
+
+  const commitWord = useCallback(
+    (w: string) => {
+      let next = [...lineR.current];
+      if (!canFit(next, w, areaWR.current, fontSizeR.current, gapXR.current)) {
+        next = recycleLine(next);
+      }
+      const id = `w${seqR.current++}`;
+      next = [...next, { id, text: w }];
+      lineR.current = next;
+      setLine(next);
+      setRiseId(id);
+    },
+    [recycleLine],
+  );
+
+  const pumpDrip = useCallback(() => {
+    if (dripTimer.current) return;
+    const run = () => {
+      dripTimer.current = null;
+      const w = queueR.current.shift();
+      if (!w) {
+        drippingR.current = false;
+        karaokeR.current = false;
+        return;
+      }
+      commitWord(w);
+      if (queueR.current.length === 0) {
+        drippingR.current = false;
+        karaokeR.current = false;
+        return;
+      }
+      const delay = subtitleWordRevealDelayMs(
+        w,
+        queueR.current.length,
+        karaokeR.current,
+      );
+      dripTimer.current = setTimeout(run, delay);
+    };
+    drippingR.current = true;
+    run();
+  }, [commitWord]);
 
   useEffect(() => {
     if (!display) {
@@ -242,64 +299,26 @@ export const SubtitlesSlot = React.memo(function SubtitlesSlot({ text }: Props) 
       return;
     }
 
-    const emitted = emittedR.current;
-    let pending: string[];
-
-    if (
-      emitted.length > 0 &&
-      feedWords.length >= emitted.length &&
-      emitted.every((w, i) => feedWords[i] === w)
-    ) {
-      pending = feedWords.slice(emitted.length);
-    } else if (
-      emitted.length > feedWords.length &&
-      feedWords.every((w, i) => emitted[i] === w)
-    ) {
-      return;
-    } else {
+    const step = subtitleFeedAdvance(emittedR.current, feedWords);
+    if (step.reset) {
+      stopDrip();
       clearAll();
-      pending = feedWords;
     }
-
+    const pending = step.pending;
     if (pending.length === 0) return;
-
-    const w = pending[0]!;
-
-    let next = [...lineR.current];
-    const last = next.length > 0 ? next[next.length - 1]! : null;
-
-    // Satzende oder Wort passt nicht → Zeile recyclen, neu von links
-    if (last && isSubtitleSentenceEndWord(last.text)) {
-      next = recycleLine(next);
-    } else if (!canFit(next, w, areaW, fontSize, gapX)) {
-      next = recycleLine(next);
+    emittedR.current = [...emittedR.current, ...pending];
+    if (
+      pending.length === 1 &&
+      queueR.current.length === 0 &&
+      !drippingR.current
+    ) {
+      commitWord(pending[0]!);
+      return;
     }
-
-    const id = `w${seqR.current++}`;
-    next = [...next, { id, text: w }];
-
-    lineR.current = next;
-    emittedR.current = [...emittedR.current, w];
-    setLine(next);
-    setRiseId(id);
-
-    if (pending.length > 1) {
-      if (tickTimer.current) clearTimeout(tickTimer.current);
-      tickTimer.current = setTimeout(() => {
-        tickTimer.current = null;
-        setTick((n) => n + 1);
-      }, WORD_TICK_MS);
-    }
-  }, [
-    display,
-    feedWords,
-    areaW,
-    fontSize,
-    gapX,
-    tick,
-    clearAll,
-    recycleLine,
-  ]);
+    if (pending.length > 2) karaokeR.current = true;
+    queueR.current.push(...pending);
+    pumpDrip();
+  }, [display, feedWords, clearAll, commitWord, pumpDrip, stopDrip]);
 
   useEffect(() => {
     if (!riseId) return;
@@ -309,8 +328,8 @@ export const SubtitlesSlot = React.memo(function SubtitlesSlot({ text }: Props) 
 
   useEffect(
     () => () => {
-      if (tickTimer.current) clearTimeout(tickTimer.current);
       if (idleTimer.current) clearTimeout(idleTimer.current);
+      if (dripTimer.current) clearTimeout(dripTimer.current);
     },
     [],
   );
@@ -355,7 +374,7 @@ export const SubtitlesSlot = React.memo(function SubtitlesSlot({ text }: Props) 
     return () => {
       if (idleTimer.current) clearTimeout(idleTimer.current);
     };
-  }, [busy, display, feedWords.length, finishIdle, idleOp]);
+  }, [busy, display, feedWords.length, line, finishIdle, idleOp]);
 
   const idleStyle = useAnimatedStyle(() => ({ opacity: idleOp.value }));
 

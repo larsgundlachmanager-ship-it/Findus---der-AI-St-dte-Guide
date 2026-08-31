@@ -1,0 +1,14 @@
+{
+  "name": "findus-map-native",
+  "version": "1.0.0",
+  "description": "Native map helpers: off-thread JSON parse + iOS compass (Android compass stays in app)",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {},
+  "license": "UNLICENSED",
+  "peerDependencies": {
+    "expo": "*",
+    "react": "*",
+    "react-native": "*"
+  }
+}

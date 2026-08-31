@@ -9,6 +9,7 @@ import type {
   FindusJobId,
   JobClassification,
 } from './types';
+import { wantsTaxiRide } from '../../services/mobility/taxiRideIntent';
 
 function uniq(list: string[]): string[] {
   const out: string[] = [];
@@ -26,14 +27,30 @@ function extractMustHaves(text: string): string[] {
   const t = text.toLowerCase();
   const found: string[] = [];
   const pairs: Array<[RegExp, string]> = [
-    [/\bpannfisch\b/u, 'Pannfisch'],
+    [/\bpann(?:en)?fisch\b/u, 'Pannfisch'],
+    [/\bmichel\b/u, 'Michel'],
     [/\bfischbrötchen|fischbroetchen\b/u, 'Fischbrötchen'],
+    [/\bspaghetti[-\s]?eis\b/u, 'Spaghetti-Eis'],
+    [/\bspeiseeis\b/u, 'Speiseeis'],
+    [/\berdbeerbecher\b/u, 'Erdbeerbecher'],
+    [/\beisbecher\b/u, 'Eisbecher'],
     [/\belbblick\b|\bblick\s+auf\s+die\s+elbe\b/u, 'Elbblick'],
     [/\brooftop\b/u, 'Rooftop'],
     [/\bpool\b/u, 'Pool'],
     [/\bsauna\b/u, 'Sauna'],
+    [/\bmassagen?\b/u, 'Massage'],
+    [/\ball[\s-]*inclusive\b|\ballinclusive\b/u, 'All-inclusive'],
     [/\bglutenfrei|zöliakie|zoeliakie\b/u, 'glutenfrei'],
-    [/\bvegan\b/u, 'vegan'],
+    [/\bvegan\w*/u, 'vegan'],
+    [/\bsteak|rumpsteak|ribeye|steakhouse\b/u, 'Steak'],
+    [/\b(?:black\s+)?angus|agno|angos\b/u, 'Angus'],
+    [/\bd[öo]ner|kebab|kebap\b/u, 'Döner'],
+    [/\bwagyu\b/u, 'Wagyu'],
+    [/\bkobe\b/u, 'Kobe'],
+    [/\bfleckvieh|simmental\b/u, 'Fleckvieh'],
+    [/\bzugrestaurant|speisewagen|dining[\s-]?car|bahnrestaurant|restaurant\s+im\s+zug\b/u, 'Zugrestaurant'],
+    [/\basiatisch\w*|\basian\b|\bthai\b/u, 'asiatisch'],
+    [/\bsushi\b/u, 'Sushi'],
     [/\bvegetar(?:isch|ier|ierin)?\b/u, 'vegetarisch'],
     [/\bhalal\b/u, 'Halal'],
     [/\bspider[-\s]?man\b/u, 'Spider-Man'],
@@ -45,6 +62,7 @@ function extractMustHaves(text: string): string[] {
     [/\bförde|foerde\b/u, 'Förde'],
     [/\bspikeball\b/u, 'Spikeball'],
     [/\bmeerblick|seeblick\b/u, 'Meerblick'],
+    [/\bgünstigst|guenstigst|billigst\b/u, 'günstigste Option'],
   ];
   for (const [re, label] of pairs) {
     if (re.test(t)) found.push(label);
@@ -54,6 +72,15 @@ function extractMustHaves(text: string): string[] {
     /(?:unter|max(?:imal)?|bis)\s*(\d{2,4})\s*(?:€|euro)/u,
   );
   if (budget) found.push(`Budget ${budget[1]}€`);
+  try {
+    const { extractCityFromText } = require('../context/shortTermContext') as {
+      extractCityFromText: (s: string) => string | null;
+    };
+    const city = extractCityFromText(text);
+    if (city) found.push(city);
+  } catch {
+    /* soft */
+  }
   return uniq(found);
 }
 
@@ -68,7 +95,7 @@ function detectCommitment(text: string, jobId: FindusJobId): CommitmentStage {
     return 'urgent';
   }
   if (
-    /\b(ich\s+will|ich\s+möchte|ich\s+moechte|lass\s+uns|bring\s+mich|navigier|fahr\s+mich|geh(?:en)?\s+wir)\b/u.test(
+    /\b(ich\s+will|ich\s+möchte|ich\s+moechte|lass\s+uns|bring\s+mich|navigier(?:e|en|t)?|fahr\s+mich|geh(?:en)?\s+wir)\b/u.test(
       t,
     ) ||
     /\b(schon\s+entschieden|auf\s+jeden\s+fall\s+(?:dahin|hin))\b/u.test(t)
@@ -125,7 +152,7 @@ function scoreJobs(text: string): Hit[] {
       /\b(schauen|laufen|ticket|heute|abend)\b/u.test(t)) ||
     /\b(spätvorstellung|spaetvorstellung)\b/u.test(t)
   ) {
-    add('tonight_live', 11);
+    add('tonight_live', 13);
   }
   if (
     /\b(theater|konzert|oper|ballett|varieté|variete|cabaret)\b/u.test(t) &&
@@ -134,30 +161,60 @@ function scoreJobs(text: string): Hit[] {
     add('tonight_live', 10);
   }
 
-  // Nightlife / Party (schlägt „Konzert heute“ wenn Party-Wort da)
+  // Nightlife / Events / Party — inkl. „Was geht heute Abend?“
+  // Himmel/Astronomie (Sternschnuppen, Finsternis) ist KEIN lokales Nightlife.
+  const celestial =
+    /\b(sonnenfinsternis|mondfinsternis|sternschnuppe|sternstunde|meteor|perseiden|leoniden|geminiden|nordlicht|polarlicht|aurora|vollmond|supermond|komet|eclipse|planetenparade)\b/u.test(
+      t,
+    );
   if (
-    /\b(club|techno|rooftop[-\s]?party|disco|nachtleben|feiern\s+gehen|karaoke|speakeasy|jazz[-\s]?bar|party\s+machen|was\s+geht.{0,20}party|heute\s+abend.{0,30}party)\b/u.test(
+    !celestial &&
+    !/\b(bring\s+mich|navigier(?:e|en|t)?|führ\s+mich|fuehr\s+mich|route\s+zu)\b/u.test(
+      t,
+    ) &&
+    !/\btennis\w*\b/u.test(t) &&
+    !(
+      /\b(anziehen|outfit|kleidung)\b/u.test(t) &&
+      !/\b(party|club|rooftop|disco|feiern|kino|film)\b/u.test(t)
+    ) &&
+    (/\b(club|techno|rooftop[-\s]?party|disco|nachtleben|feiern\s+gehen|karaoke|speakeasy|jazz[-\s]?bar|party\s+machen|was\s+geht.{0,20}party|heute\s+abend.{0,30}party)\b/u.test(
       t,
     ) ||
-    (/\bparty\b/u.test(t) &&
-      /\b(heute|abend|kiel|stadt|nacht)\b/u.test(t))
+      (/\bparty\b/u.test(t) &&
+        /\b(heute|abend|kiel|stadt|nacht)\b/u.test(t)) ||
+      /\b(was\s+(heute\s+)?geht|was\s+geht\s+heute|was\s+ist\s+(heute\s+)?los|heute\s+abend|heut\s+abend|ausgehen|events?|veranstaltungen?)\b/u.test(
+        t,
+      ))
   ) {
     add('nightlife_vibe', 12);
   }
 
-  // Dining hard match vs open
+  // Dining hard match vs open — „günstigste“ allein ist KEIN Gastro-Signal (sonst Hotel-Diebstahl)
+  const stayish =
+    /\b(hotel|hostel|airbnb|übernacht|uebernacht|unterkunft|glamping|campingplatz|kapselhotel|pension)\b/u.test(
+      t,
+    );
+  const mustHaves = extractMustHaves(text);
+  // Nur echte Dish-/View-Constraints → dining_hard_match.
+  // Städte, Budget, Hotel-Amenities und weiche Diät (vegetarisch) zählen nicht.
+  const dishMustHaves = mustHaves.filter((m) =>
+    /^(Pannfisch|Fischbrötchen|Spaghetti-Eis|Speiseeis|Erdbeerbecher|Eisbecher|Steak|Döner|Sushi|asiatisch|Elbblick|Meerblick|Rooftop|glutenfrei|Halal|vegan|Angus|Wagyu|Kobe|Fleckvieh|Zugrestaurant)$/iu.test(
+      m.trim(),
+    ),
+  );
   const hardFood =
-    /\b(pannfisch|fischbrötchen|fischbroetchen|elbblick|glutenfrei|zöliakie|zoeliakie|halal|vegan\s+restaurant|sternrestaurant|kaminfeuer|speisekarte|günstigste[sn]?)\b/u.test(
+    !stayish &&
+    (/\b(pannfisch|fischbrötchen|fischbroetchen|elbblick|glutenfrei|zöliakie|zoeliakie|halal|vegan\s+restaurant|sternrestaurant|kaminfeuer|speisekarte|spaghetti[-\s]?eis|speiseeis|erdbeerbecher|zugrestaurant|speisewagen|dining[\s-]?car|bahnrestaurant|(?:black\s+)?angus|wagyu|kobe|fleckvieh)\b/u.test(
       t,
     ) ||
-    (/\b(restaurant|essen|mittag|abendessen|fischrestaurant)\b/u.test(t) &&
-      extractMustHaves(text).length >= 1 &&
-      /\b(speisekarte|karte\s+zeigen|vegetar|pool|elbblick|fisch)\b/u.test(t)) ||
-    (/\b(restaurant|essen|mittag|abendessen)\b/u.test(t) &&
-      extractMustHaves(text).length >= 2);
+    (/\b(restaurant|essen|mittag|abendessen|fischrestaurant|eisdiele|eiscafe|eiscafé|gelato|steak)\b/u.test(t) &&
+      dishMustHaves.length >= 1) ||
+    (/\b(restaurant|essen|mittag|abendessen|eis)\b/u.test(t) &&
+      dishMustHaves.length >= 2));
   if (hardFood) add('dining_hard_match', 12);
   else if (
-    /\b(essen|restaurant|frühstück|fruehstueck|brunch|burger|sushi|hunger|café|cafe|imbiss|streetfood|eisdiele|vegetar)\b/u.test(
+    !stayish &&
+    /\b(essen|restaurant|frühstück|fruehstueck|brunch|burger|sushi|hunger|café|cafe|imbiss|streetfood|eisdiele|eiscafe|eiscafé|gelato|vegetar|steak|vegan|asiatisch|angus|wagyu|zugrestaurant|speisewagen)\b/u.test(
       t,
     )
   ) {
@@ -165,12 +222,8 @@ function scoreJobs(text: string): Hit[] {
   }
 
   // Stay
-  if (
-    /\b(hotel|hostel|airbnb|übernacht|uebernacht|unterkunft|glamping|campingplatz|kapselhotel)\b/u.test(
-      t,
-    )
-  ) {
-    add('stay_search', 10);
+  if (stayish) {
+    add('stay_search', 14);
   }
   if (
     /\b(schließfach|schliessfach|bounce|gepäck|gepaeck|backpack|einschlie[sß]en|aufbewahr)\b/u.test(
@@ -180,27 +233,80 @@ function scoreJobs(text: string): Hit[] {
     add('luggage_practical', 9);
   }
 
-  // Transit / nav
-  if (
-    /\b(u[-\s]?bahn|s[-\s]?bahn|tagesticket|fähre|faehre|letzter\s+zug|gleis|nachtbus|öpnv|oepnv|hvv|verbindung|überlandbus|ueberlandbus|tram|hop[-\s]?on|nacht(?:s)?\s+(?:noch\s+)?(?:ein\s+)?bus|fährt\s+(?:hier\s+)?nacht|bus\s+nacht|zug\s+ab|abfahrt)\b/u.test(
+  const taxiRide = wantsTaxiRide(text);
+  // Zugrestaurant / Speisewagen = Gastro, kein ÖPNV
+  const trainDining =
+    /\b(zugrestaurant|zug[\s-]?restaurant|bahnrestaurant|speisewagen|dining[\s-]?car|restaurantwagen|restaurant\s+im\s+zug)\b/u.test(
+      t,
+    );
+  // Transit / nav — Taxi/Uber zum Bahnhof ist KEIN ÖPNV
+  const transitMode =
+    !taxiRide &&
+    !trainDining &&
+    (/\b(u[-\s]?bahn|s[-\s]?bahn|tagesticket|fähre|faehre|fährtickets?|faehrtickets?|letzter\s+zug|gleis|nachtbus|öpnv|oepnv|hvv|verbindung|überlandbus|ueberlandbus|tram|hop[-\s]?on|nacht(?:s)?\s+(?:noch\s+)?(?:ein\s+)?bus|fährt\s+(?:hier\s+)?nacht|bus\s+nacht|zug\s+ab|abfahrt)\b/u.test(
       t,
     ) ||
-    /\böffentlich\w*\s+verkehr/u.test(t) ||
-    /\bverkehrsmittel/u.test(t) ||
-    /\bmit\s+(?:dem\s+)?(?:bus|zug|bahn|öpnv|oepnv)\b/u.test(t) ||
-    (/\b(bus|zug|bahn)\b/u.test(t) &&
-      /\b(nacht|fährt|faehrt|ticket|haltestelle|linie)\b/u.test(t))
-  ) {
-    add('transit_live', 11);
+      /\böffentlich\w*\s+verkehr/u.test(t) ||
+      /\bverkehrsmittel/u.test(t) ||
+      /\bmit\s+(?:dem\s+)?(?:bus|zug|bahn|öpnv|oepnv)\b/u.test(t) ||
+      (/\b(bus|zug|bahn)\b/u.test(t) &&
+        /\b(nacht|fährt|faehrt|ticket|haltestelle|linie)\b/u.test(t)));
+  if (transitMode) {
+    add('transit_live', 16);
   }
   if (
-    /\b(e[-\s]?scooter|leihfahrrad|mietwagen|mietauto|bolt\b|uber\b)\b/u.test(t) &&
-    !/\btaxi\b/u.test(t) &&
+    !taxiRide &&
+    /\b(e[-\s]?scooter|leihfahrrad|mietwagen|mietauto)\b/u.test(t) &&
     !/\bpark/u.test(t)
   ) {
     add('mobility_rent', 8);
   }
-  if (/\b(taxi|taxistand)\b/u.test(t)) add('taxi_rideshare', 8);
+  if (taxiRide) add('taxi_rideshare', 16);
+  try {
+    const { wantsTransitTicketFare } = require('../../services/transit/transitTicketFareParse') as {
+      wantsTransitTicketFare: (s: string) => boolean;
+    };
+    if (!taxiRide && wantsTransitTicketFare(text)) add('transit_live', 16);
+  } catch {
+    /* soft */
+  }
+  try {
+    const { analogJobHints } = require('./jobAnalogy') as {
+      analogJobHints: (s: string) => Array<{
+        jobId: FindusJobId;
+        score: number;
+        shape: string;
+      }>;
+    };
+    for (const h of analogJobHints(text)) {
+      if (h.shape === 'ticketed_place_access' && taxiRide) continue;
+      add(h.jobId, h.score);
+    }
+  } catch {
+    /* soft */
+  }
+  try {
+    const { looksLikeStreetAddress, extractStreetAddressFromUtterance } = require('../../services/navigation/streetAddressQuery') as {
+      looksLikeStreetAddress: (s: string) => boolean;
+      extractStreetAddressFromUtterance: (s: string) => string | null;
+    };
+    const { looksLikeSpokenCityCorrection } = require('../../services/navigation/navDestCityCorrection') as {
+      looksLikeSpokenCityCorrection: (s: string) => boolean;
+    };
+    if (
+      !taxiRide &&
+      !stayish &&
+      !transitMode &&
+      !/\b(budget|plane\s+mir|\d{1,4}\s*(?:€|euro))\b/u.test(t) &&
+      (looksLikeStreetAddress(t) ||
+        extractStreetAddressFromUtterance(t) ||
+        looksLikeSpokenCityCorrection(t))
+    ) {
+      add('nav_route', 15);
+    }
+  } catch {
+    /* soft */
+  }
   // Parken nur wenn nicht Tour/Explore („am Ende Parkplatz“) und nicht Multi-Kombi
   const tourish =
     /\b(noch\s+nicht\s+gesehen|eine\s+stunde|tour|umlaufen|erkunden|route\s+mit)\b/u.test(
@@ -210,6 +316,7 @@ function scoreJobs(text: string): Hit[] {
     /\b(parken|parkplatz)\b/u.test(t) &&
     /\b(pizza|essen|takeaway)\b/u.test(t) &&
     /\b(förde|foerde|sonnenuntergang|aussicht)\b/u.test(t);
+  if (comboTriple) add('day_plan_budget', 16);
   if (
     !tourish &&
     !comboTriple &&
@@ -220,26 +327,49 @@ function scoreJobs(text: string): Hit[] {
     add('parking_ev', 9);
   }
   if (
-    /\b(bring\s+mich|navigier|führ\s+mich|fuehr\s+mich|route\s+zu|wie\s+komme\s+ich|am\s+schnellsten\s+zum)\b/u.test(
-      t,
-    )
+    (() => {
+      try {
+        const { isExplicitNavIntent } = require('../../services/intent/poiInfoVsNav') as {
+          isExplicitNavIntent: (s: string) => boolean;
+        };
+        return isExplicitNavIntent(t);
+      } catch {
+        return /\b(bring\s+mich|navigier(?:e|en|t)?|navi(?:gation)?\s+(?:zu|nach|zum|zur)|führ\s+mich|fuehr\s+mich|route\s+zu|wie\s+komme\s+ich|am\s+schnellsten\s+zum)\b/u.test(
+          t,
+        );
+      }
+    })()
   ) {
-    // Explizite Nav schlägt Sport-Job (sonst landet „Tennisclub navigieren“ in Knowledge)
-    const navBoost =
-      /\b(tennis|club|café|cafe|restaurant|hotel|museum|apotheke|supermarkt)\b/u.test(
-        t,
-      )
-        ? 12
-        : 7;
-    add('nav_route', navBoost);
+    // Explizite Nav schlägt Sport-/Nightlife-Job (sonst landet „Tennisclub navigieren“ falsch).
+    // ÖPNV-Modus bleibt Transit — „wie komme ich mit dem Bus“ ist keine Fuß-Nav.
+    if (!taxiRide && !transitMode) {
+      const navBoost =
+        /\b(tennis|club|café|cafe|restaurant|hotel|museum|apotheke|supermarkt)\b/u.test(
+          t,
+        ) || /\btennisclub\b/u.test(t)
+          ? 14
+          : 13;
+      add('nav_route', navBoost);
+    }
   }
 
   // Activity
   if (
-    /\b(spikeball|bouldern|bungee|surf(?:en|kurs)?|kitesurf|sup\b|stand[-\s]?up|wandern|joggen|inline|beachvolleyball|klettern|paragliding|rafting|tauchen|golf|tennis|paintball)\b/u.test(
+    /\b(spikeball|bouldern|bungee|surfschule|surf[-\s]?kurs|surfen|surfspot|kitesurf|wasserski|wakeboard|sup\b|stand[-\s]?up|wandern|joggen|inline|beachvolleyball|klettern|paragliding|rafting|tauchen|golf|tennis|paintball)\b/u.test(
       t,
     ) &&
-    !/\b(bring\s+mich|navigier|führ\s+mich|fuehr\s+mich|route\s+zu)\b/u.test(t)
+    !(() => {
+      try {
+        const { isExplicitNavIntent } = require('../../services/intent/poiInfoVsNav') as {
+          isExplicitNavIntent: (s: string) => boolean;
+        };
+        return isExplicitNavIntent(t);
+      } catch {
+        return /\b(bring\s+mich|navigier(?:e|en|t)?|führ\s+mich|fuehr\s+mich|route\s+zu)\b/u.test(
+          t,
+        );
+      }
+    })()
   ) {
     add('activity_sport', 10);
   }
@@ -258,6 +388,10 @@ function scoreJobs(text: string): Hit[] {
     /\b(was\s+ist\s+das|was\s+für\s+ein\s+gebäude|goldene\s+kuppel|wie\s+alt\s+ist\s+die\s+brücke|wie\s+alt\s+ist)\b/u.test(
       t,
     ) ||
+    /\b(wo\s+bin\s+ich|wo\s+stehe\s+ich|was\s+ist\s+das\s+hier)\b/u.test(t)
+  ) {
+    add('poi_identify', 16);
+  } else if (
     /\b(warum|wieso|weshalb).{0,40}\b(geschlossen|abgerissen|saniert|schwimmbad|halle)\b/u.test(
       t,
     ) ||
@@ -266,7 +400,7 @@ function scoreJobs(text: string): Hit[] {
     add('poi_identify', 11);
   }
   if (
-    /\b(sehenswürdigkeit|must[-\s]?see|noch\s+nicht\s+gesehen|aussichtspunkt|drei\s+stunden\s+luft|free[-\s]?walking|eine\s+stunde|umlaufen|wo\s+kannst\s+du\s+mich\s+hinschicken)\b/u.test(
+    /\b(sehenswürdigkeit|must[-\s]?see|noch\s+nicht\s+gesehen|aussichtspunkt|drei\s+stunden\s+luft|free[-\s]?walking|eine\s+stunde|umlaufen|wo\s+kannst\s+du\s+mich\s+hinschicken|strand|baden|ins\s+wasser)\b/u.test(
       t,
     ) ||
     (tourish &&
@@ -308,21 +442,12 @@ function scoreJobs(text: string): Hit[] {
     add('weather_outfit', 9);
   }
 
-  // Multi-Constraint Kombi (Parken + Essen + Aussicht) → Tagesplan-Job als Cluster-Träger
-  if (
-    (/\b(parken|parkplatz)\b/u.test(t) &&
-      /\b(pizza|essen|takeaway|imbiss)\b/u.test(t) &&
-      /\b(förde|foerde|sonnenuntergang|aussicht|strand|elbe)\b/u.test(t)) ||
-    (/\b(kostenlos\s+parken|gratis\s+parken)\b/u.test(t) &&
-      /\b(und|sowie|plus)\b/u.test(t) &&
-      /\b(pizza|essen|förde|foerde|sunset)\b/u.test(t))
-  ) {
-    add('day_plan_budget', 14);
-  }
+  // Multi-Constraint Kombi (Parken + Essen + Aussicht) → Combo-Cluster / Pitch, KEIN Tagesplan
+  // (bewusst kein day_plan_budget — siehe Plan Modul5)
 
   // Day plan
   if (
-    /\b(tagesplan|plane\s+mir|budget\s+für\s+heute|kompletten\s+tag|indoor[-\s]?aktivit|danach\s+(?:ins|in\s+ein|zum)|danach\s+(?:ein\s+)?café|danach\s+(?:ein\s+)?cafe)\b/u.test(
+    /\b(tagesplan|plane\s+mir|budget\s+für\s+heute|kompletten\s+tag|indoor[-\s]?aktivit|danach\s+(?:ins|in\s+ein|zum)|danach\s+(?:ein\s+)?café|danach\s+(?:ein\s+)?cafe|einplanen|eintragen)\b/u.test(
       t,
     ) ||
     (/\b(?:und\s+)?danach\b/u.test(t) &&
@@ -330,16 +455,44 @@ function scoreJobs(text: string): Hit[] {
   ) {
     add('day_plan_budget', 11);
   }
+  try {
+    const { looksLikeArriveByAppointment } = require('../kernel/utteranceFamily') as {
+      looksLikeArriveByAppointment: (s: string) => boolean;
+    };
+    if (looksLikeArriveByAppointment(text)) {
+      add('day_plan_budget', 14);
+    }
+  } catch {
+    /* soft */
+  }
 
-  // Fact number
+  // Fact number / Quick-Lookup (wann/was + Himmel)
   if (
-    /\b(wie\s+(?:breit|hoch|alt|tief|viele|viel)|einwohner|punkte\s+bekomm|wie\s+viele\s+(?:schiffe|boote|stufen|brücken|bruecken)|sonnenuntergang(?:\s+exakt)?|exakt\s+sonnenuntergang|hitzerekord|bürgermeister|buergermeister)\b/u.test(
+    /\b(wie\s+(?:breit|hoch|alt|tief|viele|viel)|einwohner|punkte\s+bekomm|wie\s+viele\s+(?:schiffe|boote|stufen|brücken|bruecken)|wann\s+(?:ist\s+)?(?:der\s+)?sonnenuntergang|sonnenuntergang\s+exakt|exakt\s+sonnenuntergang|hitzerekord|bürgermeister|buergermeister|sonnenfinsternis|mondfinsternis|sternschnuppe|meteor(?:iten)?(?:schauer)?|perseiden|nordlicht|polarlicht|aurora|vollmond|supermond|komet|eclipse|planetenparade)\b/u.test(
       t,
     ) ||
     (/\b(gewonnen|erste\s+runde|turnier)\b/u.test(t) &&
-      /\b(punkt|score|krieg)\b/u.test(t))
+      /\b(punkt|score|krieg)\b/u.test(t)) ||
+    (/\b((?:wann|was|wer)\s+(?:ist|war|sind|wird|gibt|heißt|heisst|passiert)|was\s+bedeutet)\b/u.test(
+      t,
+    ) &&
+      !/\b(restaurant|essen|navigier|führ\s+mich|fuehr\s+mich|plane\s+mir|party|club)\b/u.test(
+        t,
+      ))
   ) {
-    add('fact_number', 10);
+    add('fact_number', 14);
+  }
+
+  // Smalltalk / Companion (emotional, Persönlichkeit) — vor Travel-Fallback
+  if (
+    /\b(brauch(?:e)?\s+(?:mal\s+)?(?:deinen?\s+)?rat|rat\s+brauch|red(?:e)?\s+(?:mal\s+)?mit\s+mir|hör\s+(?:mir\s+)?zu|hoer\s+(?:mir\s+)?zu|geht\s+mir\s+(?:nicht\s+)?gut|bin\s+(?:traurig|gestresst|überfordert|ueberfordert|einsam)|fühl\s+mich|fuehl\s+mich|sei\s+(?:mal\s+)?für\s+mich\s+da|fuer\s+mich\s+da)\b/u.test(
+      t,
+    ) &&
+    !/\b(restaurant|pizza|eis|navig|führ\s+mich|fuehr\s+mich|hotel|museum)\b/u.test(
+      t,
+    )
+  ) {
+    add('smalltalk_general', 16);
   }
 
   // Smalltalk fallback signals
@@ -350,6 +503,29 @@ function scoreJobs(text: string): Hit[] {
     hits.length === 0
   ) {
     add('smalltalk_general', 5);
+  }
+
+  try {
+    const { orchestrateUtterance } = require('../reboot/pipeline/orchestrateSlots') as {
+      orchestrateUtterance: (s: string) => {
+        weaveDayPlan: boolean;
+        jobs: FindusJobId[];
+        slots: unknown[];
+      };
+    };
+    const { childJobsBesidesPlan } = require('../reboot/pipeline/dispatchJobs') as {
+      childJobsBesidesPlan: (jobs: FindusJobId[]) => FindusJobId[];
+    };
+    const orch = orchestrateUtterance(text);
+    const compoundWeave =
+      orch.weaveDayPlan &&
+      orch.slots.length >= 4 &&
+      childJobsBesidesPlan(orch.jobs).length >= 3;
+    if (compoundWeave) {
+      add('day_plan_budget', 20);
+    }
+  } catch {
+    /* soft */
   }
 
   return hits.sort((a, b) => b.score - a.score);
@@ -371,7 +547,14 @@ export function classifyJob(userText: string): JobClassification {
     .slice(0, 2)
     .map((h) => h.jobId);
 
-  // Kombi: Outfit + Nightlife oft parallel
+  if (
+    (jobId === 'weather_outfit' || secondaryJobIds.includes('weather_outfit')) &&
+    /\b(wie\s+lange|fahrzeit|da\s+hin|wie\s+weit)\b/iu.test(text)
+  ) {
+    if (!secondaryJobIds.includes('nav_route') && jobId !== 'nav_route') {
+      secondaryJobIds.push('nav_route');
+    }
+  }
   if (
     jobId === 'nightlife_vibe' &&
     /\b(anziehen|outfit|frieren|jacke)\b/iu.test(text)
@@ -380,10 +563,11 @@ export function classifyJob(userText: string): JobClassification {
       secondaryJobIds.unshift('weather_outfit');
     }
   }
-  // „Was anziehen?“ allein → Manager soll Plan/Abend mitdenken (Hint in Synthese)
+  // „Was anziehen?“ + Party/Abend → Dresscode mitdenken. Stadtbummel/Wetter allein bleibt Outfit.
   if (
     jobId === 'weather_outfit' &&
-    /\b(anziehen|outfit|was\s+soll\s+ich\s+an)\b/iu.test(text)
+    /\b(anziehen|outfit|was\s+soll\s+ich\s+an)\b/iu.test(text) &&
+    /\b(party|club|feiern|rooftop|disco|nightlife|heute\s+abend)\b/iu.test(text)
   ) {
     if (!secondaryJobIds.includes('nightlife_vibe')) {
       secondaryJobIds.push('nightlife_vibe');
@@ -396,6 +580,34 @@ export function classifyJob(userText: string): JobClassification {
     if (!secondaryJobIds.includes('weather_outfit')) {
       secondaryJobIds.push('weather_outfit');
     }
+  }
+
+  try {
+    const { orchestrateUtterance } = require('../reboot/pipeline/orchestrateSlots') as {
+      orchestrateUtterance: (s: string) => {
+        weaveDayPlan: boolean;
+        jobs: FindusJobId[];
+        slots: unknown[];
+      };
+    };
+    const { dispatchJobsForUtterance, childJobsBesidesPlan } = require('../reboot/pipeline/dispatchJobs') as {
+      dispatchJobsForUtterance: (s: string) => FindusJobId[];
+      childJobsBesidesPlan: (jobs: FindusJobId[]) => FindusJobId[];
+    };
+    const orch = orchestrateUtterance(text);
+    const compoundWeave =
+      orch.weaveDayPlan &&
+      orch.slots.length >= 4 &&
+      childJobsBesidesPlan(orch.jobs).length >= 3;
+    if (compoundWeave) {
+      for (const j of dispatchJobsForUtterance(text)) {
+        if (j !== jobId && !secondaryJobIds.includes(j)) {
+          secondaryJobIds.push(j);
+        }
+      }
+    }
+  } catch {
+    /* soft */
   }
 
   const confidence = top
@@ -434,6 +646,7 @@ export function shouldPreferJobOverRouter(
     'fact_number',
     'stay_search',
     'transit_live',
+    'taxi_rideshare',
     'friction_now',
     'safety_lost',
   ];

@@ -302,19 +302,19 @@ async function composeFullWelcomeSpeech(opts: {
 
   if (hasGeminiApiKey()) {
     const prompt = [
-      'Du bist Findus — lockerer Reisebegleiter auf Deutsch.',
+      'Du bist Yorro — lockerer Reisebegleiter auf Deutsch.',
       isMorning && briefing
-        ? 'Schreib GENAU EINEN Morgen-Bericht (max. 95 Wörter). FLOW: Gruß → gestern kurz → heute Highlights → Druck/entspannt → Wetter+Kleidung → ggf. Todos/Reise. Leere Slots stumm. Wortlaut frei.'
+        ? 'Schreib GENAU EINEN Morgen-Bericht (max. 95 Wörter). FLOW: Gruß → gestern kurz → heute Highlights → Druck/entspannt → Wetter+Kleidung → ggf. Todos/Reise. Leere Slots stumm. Wortlaut frei. Keine Meta („erst sag ich…“, „jetzt zum Wetter“) — flüssig einweben.'
         : 'Schreib GENAU EINE kurze Welcome-Back-Begrüßung (max. 42 Wörter).',
       'Regeln:',
       '- Du-Form, natürlich, kein Markdown, kein Emoji-Overkill.',
       '- Nur Belegtes aus KONTEXT — nichts erfinden, nichts Leeres erwähnen.',
       isMorning && briefing
         ? '- Wenn offener Wecker + User schon wach: anerkennen und fragen, ob der Wecker gelöscht werden soll.'
-        : '- Referenziere KONKRET etwas aus dem Kontext (Ort, Plan, Hotel, Absicht oder offenes Gesprächsthema).',
+        : '- Referenziere KONKRET etwas aus dem Kontext (Ort, Plan, Hotel, Absicht oder offenes Gesprächsthema) — aber NIEMALS Straßennamen, Hausnummern oder reine Adressen als „weitermachen“-Ziel. Straßen sind Orte zum Navigieren, keine offenen Themen.',
       isMorning && briefing
         ? '- Kein Aufsatz. Dicht, natürlich, wie ein guter Reise-Manager am Morgen.'
-        : '- Biete an, dort weiterzumachen — als Frage, nicht als Befehl. Bei offenem Thread: direkt anknüpfen.',
+        : '- Nur bei echtem offenen Plan/Thread (kein Straßenname): anbieten weiterzumachen. Sonst: begrüßen und fragen, was heute dran ist.',
       '- Wenn Kontext dünn: freundlich begrüßen und fragen, was heute dran ist.',
       '- Jede Begrüßung soll sich anders anfühlen als die vermiedenen.',
       name ? `User-Name: ${name}` : 'Kein Name.',
@@ -359,8 +359,8 @@ async function composeFullWelcomeSpeech(opts: {
     );
   }
   const variants = [
-    `${hey}${place} Schön, dass du wieder da bist — wollen wir dort weitermachen, wo wir aufgehört haben?`,
-    `${hey}${place} Neuer Anlauf — soll ich kurz anknüpfen an das Letzte?`,
+    `${hey}${place} Schön, dass du wieder da bist — was steht als Nächstes an?`,
+    `${hey}${place} Neuer Anlauf — worauf hast du Lust?`,
     `${name ? `Hey ${name}!` : 'Hey!'}${place} Bereit für den nächsten Schritt — was steht an?`,
   ];
   const picked =
@@ -448,14 +448,14 @@ async function composeDaypartSpeech(opts: {
 
   if (hasGeminiApiKey()) {
     const prompt = [
-      'Du bist Findus — lockerer Reisebegleiter auf Deutsch.',
+      'Du bist Yorro — lockerer Reisebegleiter auf Deutsch.',
       `FLOW-BLAUPAUSE (${intensity}) — Wortlaut frei, nie festen Satz übernehmen.`,
       `Schreib GENAU EINE kurze ${daypartLabel(part)}-Begrüßung (max. 28 Wörter).`,
       'Du-Form, kein Markdown.',
       opts.userName ? `Name: ${opts.userName}` : 'Kein Name.',
       opts.cityName ? `Stadt: ${opts.cityName}` : '',
       threadRecall
-        ? `Offene Gesprächsthemen (höchstens EINS kurz anbieten, nicht alle aufzählen):\n${threadRecall}`
+        ? `Offene Gesprächsthemen (höchstens EINS kurz anbieten, nicht alle aufzählen; NIEMALS Straßennamen/Adressen):\n${threadRecall}`
         : 'Keine Vorschläge, keine Plan-Ideen, keine „soll ich …?“-Angebote — nur Begrüßung.',
       opts.avoid.length
         ? `Vermeide diese früheren Formulierungen:\n${opts.avoid
@@ -499,10 +499,18 @@ async function deliverSpeech(
     pendingWakeAtMs?: number | null;
   },
 ): Promise<void> {
+  const voice = await getVoiceSettingsForTour();
+  // Speech zuerst — Karte/Stichpunkte erst danach (sonst UI vor Audio).
+  const speakP = speakAssistantText(speech, {
+    voiceId: voice.voiceId,
+    speechRate: voice.speechRate,
+  });
+
   useFinnusStore.getState().addChatMessage({
     role: 'assistant',
     content: speech,
   });
+
   if (opts.card) {
     const wakeActions =
       opts.pendingWakeAtMs != null
@@ -525,6 +533,7 @@ async function deliverSpeech(
       label: string;
       payload: { textPrompt: string };
     }> = [];
+    let hasMeaningfulResume = false;
     try {
       const { dateKeyFromMs } = require('../../utils/dateKeys') as {
         dateKeyFromMs: (ms: number) => string;
@@ -546,15 +555,36 @@ async function deliverSpeech(
     } catch {
       unfinishedActions = [];
     }
+    try {
+      const {
+        formatResumableThreadsForWelcome,
+        loadConversationThreads,
+      } = require('./conversationThreads') as {
+        loadConversationThreads: () => Promise<unknown>;
+        formatResumableThreadsForWelcome: (max?: number) => string;
+      };
+      await loadConversationThreads();
+      hasMeaningfulResume = formatResumableThreadsForWelcome(1).length > 0;
+    } catch {
+      hasMeaningfulResume = false;
+    }
 
-    const continueAction = {
-      type: 'SHOW_MORE' as const,
-      label: 'Ja, weitermachen',
-      payload: {
-        textPrompt:
-          'Ja, lass uns dort weitermachen, wo wir aufgehört haben.',
-      },
-    };
+    const continueAction = hasMeaningfulResume
+      ? {
+          type: 'SHOW_MORE' as const,
+          label: 'Ja, weitermachen',
+          payload: {
+            textPrompt:
+              'Ja, lass uns dort weitermachen, wo wir aufgehört haben — aber nur beim offenen Thema, keine Straßenadresse.',
+          },
+        }
+      : null;
+
+    const visualBullets = bulletsFromWelcomeSpeech(speech, {
+      full: opts.full,
+      morning: daypartNow() === 'morning',
+      unfinished: unfinishedActions.length > 0,
+    });
 
     useFinnusStore.getState().setActiveConciergeCard({
       id: `welcome-back-${Date.now()}`,
@@ -565,27 +595,47 @@ async function deliverSpeech(
           : 'Willkommen zurück'
         : daypartLabel(daypartNow()),
       speechText: speech,
-      visualBullets: opts.full
-        ? daypartNow() === 'morning'
-          ? unfinishedActions.length
-            ? ['Gestern offen', 'Heute', 'Wetter']
-            : ['Heute', 'Wetter', 'Plan']
-          : ['Wieder da', 'Kontext im Blick', 'Weiter?']
-        : [daypartLabel(daypartNow())],
+      visualBullets,
       quickActions: opts.full
         ? ([
             ...wakeActions,
             ...unfinishedActions,
-            continueAction,
+            ...(continueAction ? [continueAction] : []),
           ] as import('../../types/concierge').QuickAction[]).slice(0, 4)
         : (wakeActions as import('../../types/concierge').QuickAction[]),
     });
   }
-  const voice = await getVoiceSettingsForTour();
-  await speakAssistantText(speech, {
-    voiceId: voice.voiceId,
-    speechRate: voice.speechRate,
+
+  try {
+    await speakP;
+  } catch (err) {
+    console.warn('[welcomeBack] speak failed:', err);
+  }
+}
+
+/** Stichpunkte aus dem gesprochenen Text — keine Platzhalter wie „Weiter?“. */
+function bulletsFromWelcomeSpeech(
+  speech: string,
+  opts: { full: boolean; morning: boolean; unfinished: boolean },
+): string[] {
+  const parts = speech
+    .replace(/\s+/g, ' ')
+    .trim()
+    .split(/(?<=[.!?])\s+/)
+    .map((p) => p.replace(/^["„]|["“.!?]+$/g, '').trim())
+    .filter((p) => p.length >= 8);
+  const fromSpeech = parts.slice(0, 3).map((p) => {
+    const words = p.split(/\s+/).filter(Boolean);
+    return words.slice(0, 7).join(' ');
   });
+  if (fromSpeech.length >= 2) return fromSpeech.slice(0, 3);
+  if (!opts.full) return [daypartLabel(daypartNow())];
+  if (opts.morning) {
+    return opts.unfinished
+      ? ['Gestern offen', 'Heute', 'Wetter'].slice(0, 3)
+      : ['Heute', 'Wetter'].slice(0, 3);
+  }
+  return fromSpeech.length ? fromSpeech : ['Willkommen zurück'];
 }
 
 /**
@@ -599,6 +649,14 @@ export async function maybeSpeakWelcomeBack(): Promise<boolean> {
 
   const profile = getCachedUserProfile();
   if (!profile?.setupComplete) return false;
+  try {
+    const { isProactiveAlertEnabled } = require('../notifications/proactiveAlerts') as {
+      isProactiveAlertEnabled: (k: 'welcomeBack', p?: unknown) => boolean;
+    };
+    if (!isProactiveAlertEnabled('welcomeBack', profile)) return false;
+  } catch {
+    /* soft */
+  }
 
   const now = Date.now();
   const setupAt = profile.completedAt ? Date.parse(profile.completedAt) : NaN;

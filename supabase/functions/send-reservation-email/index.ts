@@ -6,7 +6,7 @@
  *
  * Secrets:
  *   supabase secrets set RESEND_API_KEY=re_xxx
- *   supabase secrets set RESERVATION_FROM_EMAIL="Findus <buchung@deine-domain.de>"
+ *   supabase secrets set RESERVATION_FROM_EMAIL="Yorro <buchung@deine-domain.de>"
  *
  * App .env:
  *   EXPO_PUBLIC_RESERVATION_EMAIL_ENDPOINT=https://<project>.supabase.co/functions/v1/send-reservation-email
@@ -43,7 +43,7 @@ serve(async (req) => {
     const resendKey = Deno.env.get('RESEND_API_KEY');
     const from =
       Deno.env.get('RESERVATION_FROM_EMAIL') ||
-      'Findus Concierge <onboarding@resend.dev>';
+      'Yorro Concierge <onboarding@resend.dev>';
 
     if (!resendKey) {
       return new Response(
@@ -77,7 +77,7 @@ serve(async (req) => {
       body.guestPhone || null,
       ``,
       `Viele Grüße`,
-      `Findus Concierge (im Auftrag von ${body.guestName})`,
+      `Yorro Concierge (im Auftrag von ${body.guestName})`,
     ]
       .filter((l) => l != null)
       .join('\n');

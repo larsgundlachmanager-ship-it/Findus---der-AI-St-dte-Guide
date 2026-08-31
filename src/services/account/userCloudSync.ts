@@ -12,7 +12,11 @@ import {
   saveUserProfile,
   subscribeUserProfile,
 } from '../userProfileService';
-import { createDefaultProfile, type UserProfile } from '../../types/userProfile';
+import { createDefaultProfile, profileHasFinishedSetup, type UserProfile } from '../../types/userProfile';
+import {
+  finishedCloudProfile,
+  mergeCloudUserProfiles as mergeProfilesCore,
+} from './userCloudProfileMerge';
 import {
   loadStampPassport,
   saveStampPassport,
@@ -46,6 +50,16 @@ import {
   applyLowChatterStateFromCloud,
   snapshotLowChatterState,
 } from '../persona/lowChatterMode';
+import {
+  applyWalkTrackFromCloud,
+  loadWalkTrack,
+  snapshotWalkTrackForCloud,
+} from '../discovery/walkTrackService';
+import {
+  applyVisitLogFromCloud,
+  hydrateVisitLog,
+  snapshotVisitLogForCloud,
+} from '../timeline/visitLog';
 
 const PLAN_PATH = `${FileSystem.documentDirectory}findus-plan-timeline-v1.json`;
 const META_PATH = `${FileSystem.documentDirectory}findus-cloud-sync-meta.json`;
@@ -204,11 +218,13 @@ function mergeProfiles(
   remote: { profile: UserProfile; updatedAt: string } | null,
 ): UserProfile {
   if (!remote) return local;
-  const pickRemote = remote.updatedAt > localUpdatedAt;
-  const base = pickRemote ? remote.profile : local;
   const auth = getLastAuthUser();
-  const authPatch = auth ? mergeAuthIntoProfile(base, auth) : {};
-  return { ...base, ...authPatch };
+  const authBase =
+    profileHasFinishedSetup(remote.profile) && !profileHasFinishedSetup(local)
+      ? remote.profile
+      : local;
+  const authPatch = auth ? mergeAuthIntoProfile(authBase, auth) : {};
+  return mergeProfilesCore(local, localUpdatedAt, remote, authPatch);
 }
 
 function mergeStamps(
@@ -370,6 +386,8 @@ type SettingsExtrasPayload = {
   stampPassportUx: unknown;
   featureTips?: unknown;
   lowChatter?: unknown;
+  walkTrack?: { points: unknown; updatedAt: string };
+  visits?: { entries: unknown; updatedAt: string };
   updatedAt: string;
 };
 
@@ -388,6 +406,8 @@ async function buildLocalSnapshots(): Promise<{
   const stampUx = await loadStampPassportUxPrefs();
   const featureTips = await loadFeatureTipState();
   const lowChatter = await snapshotLowChatterState();
+  await loadWalkTrack();
+  await hydrateVisitLog();
   const learnedFacts = profile?.learnedFacts ?? [];
   const learnedRules = profile?.learnedRules ?? [];
 
@@ -408,6 +428,14 @@ async function buildLocalSnapshots(): Promise<{
       stampPassportUx: stampUx,
       featureTips,
       lowChatter,
+      walkTrack: {
+        points: snapshotWalkTrackForCloud(),
+        updatedAt: new Date().toISOString(),
+      },
+      visits: {
+        entries: snapshotVisitLogForCloud(),
+        updatedAt: new Date().toISOString(),
+      },
       updatedAt: new Date().toISOString(),
     },
   };
@@ -488,7 +516,11 @@ export async function pullUserCloudOnLogin(): Promise<void> {
       });
       await saveUserProfile(merged);
     } else if (!localProfile && remoteEnv?.profile) {
-      await saveUserProfile(remoteEnv.profile);
+      await saveUserProfile(
+        profileHasFinishedSetup(remoteEnv.profile)
+          ? finishedCloudProfile(remoteEnv.profile)
+          : remoteEnv.profile,
+      );
     }
 
     const localStamps = await loadStampPassport();
@@ -546,6 +578,14 @@ export async function pullUserCloudOnLogin(): Promise<void> {
       );
       await applyFeatureTipStateFromCloud(remoteExtras.featureTips as never);
       await applyLowChatterStateFromCloud(remoteExtras.lowChatter as never);
+      const remoteWalk = remoteExtras.walkTrack?.points;
+      if (Array.isArray(remoteWalk) && remoteWalk.length) {
+        await applyWalkTrackFromCloud(remoteWalk as never);
+      }
+      const remoteVisits = remoteExtras.visits?.entries;
+      if (Array.isArray(remoteVisits) && remoteVisits.length) {
+        await applyVisitLogFromCloud(remoteVisits as never);
+      }
     }
 
     await pullMarketing(userId);
@@ -567,13 +607,24 @@ async function pushUserCloud(): Promise<void> {
     const profilePayload = snapshots.profile;
     const profileHash = contentHash(profilePayload);
     if (meta.lastUploadedHash.user_profiles !== profileHash) {
-      const ok = await upsertRow(
-        'user_profiles',
-        userId,
-        profilePayload,
-        profileHash,
-      );
-      if (ok) meta.lastUploadedHash.user_profiles = profileHash;
+      const localP = profilePayload.profile;
+      let skipProfile = false;
+      if (!profileHasFinishedSetup(localP)) {
+        const remoteDoneRow = await fetchRow('user_profiles', userId);
+        const remoteP = (
+          remoteDoneRow?.payload as { profile?: UserProfile } | undefined
+        )?.profile;
+        skipProfile = profileHasFinishedSetup(remoteP);
+      }
+      if (!skipProfile) {
+        const ok = await upsertRow(
+          'user_profiles',
+          userId,
+          profilePayload,
+          profileHash,
+        );
+        if (ok) meta.lastUploadedHash.user_profiles = profileHash;
+      }
     }
 
     const stampsPayload = snapshots.stamps;

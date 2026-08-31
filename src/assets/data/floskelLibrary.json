@@ -73,6 +73,18 @@
         "Kurzer Event-Scan für heute."
       ]
     },
+    "named_schedule": {
+      "label": "Genannter Termin / Spielplan",
+      "phrases": [
+        "Alles klar — ich check den Spielplan kurz.",
+        "Verstanden, ich hol die nächsten Termine.",
+        "Jo, ich schau nach Datum und Anpfiff.",
+        "Moment, ich check offizielle Termine und Tickets.",
+        "Klar, ich recherchiere den nächsten Termin.",
+        "Ich hole Datum, Uhrzeit und Tickets nach.",
+        "Passt, ich check den genannten Termin."
+      ]
+    },
     "complex_plan": {
       "label": "Komplexe Planung",
       "phrases": [
@@ -501,14 +513,11 @@
     "generic": {
       "label": "Allgemein",
       "phrases": [
-        "Alles klar — ich guck kurz nach.",
-        "Check, ich kümmere mich drum.",
-        "Okay, ich recherchiere kurz.",
-        "Jo, Moment — ich hol das für dich.",
-        "Ah okay, ich bin dran.",
-        "Einen Augenblick, ich kümmere mich.",
-        "Kurz nachschauen — gleich zurück.",
-        "Ich bin dabei, hang tight."
+        "Verstehe — ich setz genau da an.",
+        "Passt, ich mach dir das konkret.",
+        "Passt, ich hol dir die nützlichen Fakten dazu.",
+        "Genau das klären wir jetzt.",
+        "Alles klar, ich geh an dein Anliegen ran."
       ]
     },
     "accommodation_search": {

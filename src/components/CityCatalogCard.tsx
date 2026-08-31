@@ -6,11 +6,13 @@ import React, { useEffect, useState } from 'react';
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import { colors, spacing } from '../constants/theme';
 import {
-  cityCoverFocus,
   citySearchMeta,
-  prefetchCityCover,
   resolveCityCoverSource,
 } from '../constants/cityCovers';
+import {
+  ensureCityCoverCached,
+  peekCachedCoverFile,
+} from '../services/cityCoverCache';
 import { CITY_CARD_HERO } from '../constants/personaPortraits';
 import { t, type AppLanguage } from '../i18n';
 import type { CityCatalogItem } from '../services/cityCatalogService';
@@ -37,22 +39,36 @@ export function CityCatalogCard({
   const meta = citySearchMeta(city.id);
   const regionLine = [meta.region, meta.country].filter(Boolean).join(' · ');
   const compact = variant === 'grid';
-  const focus = cityCoverFocus(city.id);
   const triggers = city.triggerCount ?? city.placeCount ?? 0;
   const zones = city.zoneCount ?? city.directoryCount ?? 0;
   const facts = city.factCount ?? 0;
   const stories = city.storyCount ?? 0;
+  const hasStats = triggers > 0 || zones > 0 || facts > 0 || stories > 0;
   const [coverPhase, setCoverPhase] = useState<'primary' | 'hero'>('primary');
+  const [localCover, setLocalCover] = useState<string | null>(() =>
+    peekCachedCoverFile(city.id, city.coverUrl),
+  );
 
   useEffect(() => {
     setCoverPhase('primary');
-    prefetchCityCover(city.coverUrl);
+    const peek = peekCachedCoverFile(city.id, city.coverUrl);
+    setLocalCover(peek);
+    if (peek) return;
+    let cancelled = false;
+    void ensureCityCoverCached(city.id, city.coverUrl).then((uri) => {
+      if (!cancelled && uri) setLocalCover(uri);
+    });
+    return () => {
+      cancelled = true;
+    };
   }, [city.id, city.coverUrl]);
 
   const coverSource =
     coverPhase === 'hero'
       ? CITY_CARD_HERO
-      : resolveCityCoverSource(city.id, city.coverUrl);
+      : localCover
+        ? { uri: localCover.startsWith('file:') ? localCover : `file://${localCover}` }
+        : resolveCityCoverSource(city.id, city.coverUrl);
 
   return (
     <Pressable
@@ -71,16 +87,7 @@ export function CityCatalogCard({
         <Image
           key={`${city.id}:${coverPhase}:${city.coverUrl || ''}`}
           source={coverSource}
-          style={[
-            styles.heroImg,
-            {
-              transform: [
-                { scale: focus.scale },
-                { translateY: focus.translateY },
-                { translateX: focus.translateX },
-              ],
-            },
-          ]}
+          style={styles.heroImg}
           resizeMode="cover"
           onError={() => {
             setCoverPhase('hero');
@@ -120,14 +127,15 @@ export function CityCatalogCard({
             {regionLine}
           </Text>
         ) : null}
-        {!compact ? (
+        {hasStats && !compact ? (
           <View style={styles.statRow}>
             <StatPill num={triggers} label="Trigger" />
             <StatPill num={zones} label="Orte" />
             <StatPill num={stories} label="Stories" />
             <StatPill num={facts} label="Fakten" />
           </View>
-        ) : (
+        ) : null}
+        {hasStats && compact ? (
           <View style={styles.gridStatsBlock}>
             <Text style={styles.gridStats} numberOfLines={1}>
               <Text style={styles.gridStatNum}>{triggers}</Text>
@@ -142,7 +150,7 @@ export function CityCatalogCard({
               <Text style={styles.gridStatLabel}> Fakten</Text>
             </Text>
           </View>
-        )}
+        ) : null}
         {busy ? (
           <Text style={styles.busyHint}>{t(lang, 'downloadingCity')}</Text>
         ) : null}
@@ -180,15 +188,13 @@ const styles = StyleSheet.create({
   },
   heroClip: {
     width: '100%',
-    backgroundColor: '#2A3140',
+    backgroundColor: colors.surface,
+    // Covers sind 3:2 — Rahmen muss matchen, sonst fehlt unten Bildinhalt
     overflow: 'hidden',
+    aspectRatio: 3 / 2,
   },
-  heroFull: {
-    height: 220,
-  },
-  heroGrid: {
-    height: 132,
-  },
+  heroFull: {},
+  heroGrid: {},
   heroImg: {
     width: '100%',
     height: '100%',

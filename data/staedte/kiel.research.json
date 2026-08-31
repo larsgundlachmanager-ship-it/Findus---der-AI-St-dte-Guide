@@ -1,0 +1,3407 @@
+{
+  "notes": [
+    "Kiel A+B"
+  ],
+  "city_history": "Kiel entstand im 13. Jahrhundert an einer eiszeitlich geformten Förde. Graf Adolf IV. gründete die planmäßig angelegte Stadt; 1242 erhielt sie lübisches Recht. Über Jahrhunderte blieb die Altstadt klein. Der große Wachstumsschub begann, als Preußen 1865 seine Marinestation der Ostsee nach Kiel verlegte und die Stadt 1871 Reichskriegshafen wurde: Marine, Werften, Eisenbahn und Hafen ließen Bevölkerung und Stadtgebiet rasant wachsen. 1895 öffnete der Kaiser-Wilhelm-Kanal, heute Nord-Ostsee-Kanal. Aus einer Regatta von 20 Yachten im Jahr 1882 entwickelte sich die Kieler Woche. Der Matrosenaufstand im November 1918 wurde zum Ausgangspunkt der Revolution und des Endes der Monarchie. Luftangriffe zerstörten große Teile der Hafen- und Innenstadt. Seit 1946 ist Kiel Landeshauptstadt Schleswig-Holsteins; heute prägen Universität, Meeresforschung, Fährhafen, Werften und Segelsport die Stadt.",
+  "spots": [
+    {
+      "id": "kiel_kieler_forde",
+      "name": "Kieler Förde",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Die rund 17 Kilometer lange, eiszeitlich geformte Kieler Förde verbindet die Hörn im Stadtzentrum mit der Kieler Bucht. Sie ist Naturraum, Tiefwasserhafen, Verkehrsachse, Forschungsfeld und Bühne der Kieler Woche.",
+      "deep_data_pool": [
+        {
+          "text": "Die Förde entstand durch Gletscherbewegungen der letzten Eiszeit. Sie schiebt sich als schmaler Meeresarm zwischen Dänischem Wohld im Westen und Wagrien im Osten ins Land. Vom innersten Hafenbecken, der Hörn, öffnet sie sich nach Norden zur Kieler Bucht und damit zur Ostsee; die Friedrichsorter Enge verengt den Wasserweg markant.",
+          "tags": [
+            "geologie",
+            "landschaft",
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Die geschützte, tiefe Wasserlage war die Grundlage für Kiels Hafenentwicklung. Die mittelalterliche Stadt lag nahe dem südlichen Ende, während spätere Werften, Marineanlagen, Fährterminals und Sporthäfen weit an beiden Ufern entlangwuchsen. Die Wasserfläche trennt West- und Ostufer sichtbar und verbindet sie zugleich durch Schiffe und Fähren.",
+          "tags": [
+            "hafen",
+            "stadtentwicklung"
+          ]
+        },
+        {
+          "text": "1865 wurde die preußische Marinestation der Ostsee von Danzig nach Kiel verlegt; 1871 folgte die Ernennung zum Reichskriegshafen. Diese Entscheidungen lösten einen enormen Ausbau von Marine, Werften und Wohnquartieren aus. Die Förde wurde damit von einem Handels- und Fischereiraum zu einem Zentrum staatlicher und industrieller Seemacht.",
+          "tags": [
+            "marine",
+            "werften",
+            "19_jahrhundert"
+          ]
+        },
+        {
+          "text": "Am 23. Juli 1882 starteten 20 Yachten zu einer eintägigen Wettfahrt auf der Förde vor Düsternbrook. Die erfolgreiche Regatta wurde wiederholt und erweitert; 1894 tauchte erstmals die Bezeichnung Kieler Woche auf. Das Segelrevier ist deshalb nicht bloße Kulisse, sondern der historische Kern des späteren internationalen Großereignisses.",
+          "tags": [
+            "kieler_woche",
+            "segeln",
+            "sportgeschichte"
+          ]
+        },
+        {
+          "text": "In Holtenau mündet der 98,637 Kilometer lange Nord-Ostsee-Kanal in die Förde. Der 1895 als Kaiser-Wilhelm-Kanal eröffnete Wasserweg verbindet Ostsee und Unterelbe. Seeschiffe können dadurch die Fahrt um Jütland vermeiden; Schleusen gleichen die wechselnden Wasserstände an den Enden des ansonsten spiegelgleichen Kanals aus.",
+          "tags": [
+            "nord_ostsee_kanal",
+            "holtenau",
+            "schifffahrt"
+          ]
+        },
+        {
+          "text": "Die Förde ist Teil des Brackwasserraums der westlichen Ostsee. Salzgehalt, Temperatur, Wind und Wasseraustausch prägen ihre Tier- und Pflanzenwelt. Kieler Einrichtungen wie GEOMAR, Aquarium und Universität machen diese Bedingungen öffentlich sichtbar und erforschen zugleich größere Fragen von Ozean, Klima und Küstenökologie.",
+          "tags": [
+            "natur",
+            "meeresforschung",
+            "quer"
+          ]
+        },
+        {
+          "text": "Visuell: In der Innenförde liegen große Fähr- und Kreuzfahrtschiffe fast mitten in der Stadt; weiter nördlich dominieren Segelboote, Fördedampfer, Marine- und Werftanlagen. Die Ufer sind sehr unterschiedlich: urbane Kaimauern im Süden, Promenaden und Villen am Westufer, Industrie- und Hafenflächen am Ostufer.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Die Fördeschifffahrt ist Teil des Nahverkehrs. Die SFK verbindet Anleger auf beiden Ufern und saisonal Ziele bis Laboe, Schilksee und Strande. Linienführung, Saison, Fahrradmitnahme und Anschlüsse ändern sich; die Schiffe sind zugleich Verkehrsmittel und unmittelbare Möglichkeit, die Stadtgeografie vom Wasser aus zu verstehen.",
+          "tags": [
+            "faehre",
+            "orientierung"
+          ]
+        },
+        {
+          "text": "Quer: Kiellinie, Seegarten, Fischhalle, Ostseekai, Schwedenkai, Hörnbrücke und Norwegenkai erzählen unterschiedliche Nutzungen desselben Wassers: Freizeit, Museum, Kreuzfahrt, Fährverkehr und Alltag. Die Friedrichsorter Enge, Laboe und Holtenau markieren dagegen den Übergang von Stadtförde zu Ostsee und Kanal.",
+          "tags": [
+            "quer",
+            "stadtstruktur"
+          ]
+        },
+        {
+          "text": "LIVE: Wind, Wasserstand, Schiffsanläufe, Fördefähr-Fahrpläne, Regatten, Badehinweise und Hafenbeschränkungen aktuell bei SFK, PORT OF KIEL, Kieler Woche und den zuständigen Behörden prüfen. Einzelne Schiffe oder heutige Routen nie aus dem stabilen Pack ableiten.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": []
+    },
+    {
+      "id": "kiel_kiellinie",
+      "name": "Kiellinie",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Die Kiellinie ist Kiels lange Uferpromenade am Westufer der Förde. Zwischen Ostseekai und Wik bündelt sie Segelsport, Forschung, Landespolitik, Fördeschiffe und unmittelbare Blicke auf Hafen und Ostufer.",
+      "deep_data_pool": [
+        {
+          "text": "Die Promenade folgt dem Westufer vom innerstädtischen Ostseekai durch Düsternbrook bis in die Wik. Sie entstand nicht in einem einzigen Bauabschnitt: Uferbefestigungen, Strandwege und Erweiterungen wurden seit dem späten 19. und im 20. Jahrhundert schrittweise zusammengefügt. Erst dadurch wurde der heute selbstverständlich wirkende durchgehende Wasserweg möglich.",
+          "tags": [
+            "stadtentwicklung",
+            "ufer"
+          ]
+        },
+        {
+          "text": "Der südliche Abschnitt erhielt 1972 im Umfeld der olympischen Segelwettbewerbe den Namen Kiellinie. Der nördliche Teil hieß lange Hindenburgufer. 2014 dehnte die Ratsversammlung den Namen Kiellinie auf den übrigen Verlauf aus; die Umbenennung entfernte den Bezug auf den historisch belasteten Reichspräsidenten Paul von Hindenburg.",
+          "tags": [
+            "name",
+            "erinnerungskultur"
+          ]
+        },
+        {
+          "text": "An der Kiellinie liegen Einrichtungen, die Kiels moderne Identität prägen: GEOMAR und Aquarium stehen für Meeresforschung, das Landeshaus für Schleswig-Holsteins Politik, das Institut für Weltwirtschaft für Wirtschaftsforschung. Sporthäfen, Ruder- und Segelclubs zeigen daneben, wie eng wissenschaftliche, staatliche und alltägliche Wassernutzung beieinanderliegen.",
+          "tags": [
+            "forschung",
+            "politik",
+            "segeln"
+          ]
+        },
+        {
+          "text": "Die erste Regatta, aus der die Kieler Woche hervorging, wurde 1882 vor Düsternbrook ausgetragen. Die heutige Promenade ist während des Festes eine zentrale Veranstaltungsachse, während die sportlichen Wettfahrten überwiegend weiter draußen stattfinden. Ihre historische Verbindung zum Segeln reicht damit tiefer als die temporären Bühnen und Stände.",
+          "tags": [
+            "kieler_woche",
+            "sportgeschichte"
+          ]
+        },
+        {
+          "text": "Visuell: Auf der Wasserseite wechseln niedrige Stege, Sporthäfen, Vereinsboote und freie Fördeblicke; landwärts folgen Forschungsbauten, Villen, Landeshaus und das Grün des Düsternbrooker Gehölzes. Das Seehundbecken des Aquariums liegt unmittelbar an der Promenade und ist durch große Scheiben zur Wasserseite erkennbar.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Die Promenade macht die Maßstäbe des Hafens ablesbar. Fähren und Kreuzfahrtschiffe wirken in der Innenförde ungewöhnlich nah, Werftkräne stehen am gegenüberliegenden Ostufer, und nördlich öffnet sich der Blick Richtung Friedrichsort und Laboe. Dadurch ist die Kiellinie zugleich Aussichtspunkt und geografische Längsachse.",
+          "tags": [
+            "orientierung",
+            "hafenbild"
+          ]
+        },
+        {
+          "text": "Mehrere Fördefähr-Anleger liegen an oder nahe der Kiellinie. Reventlou ist ein wichtiger Zugang zur Fördelinie; von dort sind Verbindungen zu Ostufer, Mönkeberg, Möltenort oder Laboe möglich. Welche Anleger bedient werden, ist saisonal und fahrplanabhängig und gehört daher nicht als dauerhafte Zusage in den Pack.",
+          "tags": [
+            "faehre",
+            "mobilitaet"
+          ]
+        },
+        {
+          "text": "Die Kiellinie ist kein historisch einheitlicher Boulevard. Gerade die Mischung aus aufgeschütteten und befestigten Uferabschnitten, Nachkriegsplanung, olympischer Infrastruktur und jüngeren Aufenthaltsflächen erklärt ihre wechselnde Breite und Gestaltung. Der Name fasst heute mehrere ältere Straßen- und Ufergeschichten zusammen.",
+          "tags": [
+            "architektur",
+            "stadtplanung"
+          ]
+        },
+        {
+          "text": "Quer: Kunsthalle, Zoologisches Museum und Schlossgarten liegen erhöht am südlichen Zugang; Aquarium und GEOMAR folgen nördlich. In Richtung Innenstadt schließen Ostseekai, Seegarten und Fischhalle an. Die Folge verbindet Kunst, Naturkunde, Hafen- und Meeresgeschichte ohne künstliche Themenwechsel.",
+          "tags": [
+            "quer",
+            "museen_am_meer"
+          ]
+        },
+        {
+          "text": "LIVE: Baustellen, Badefreigaben, Veranstaltungen, Kieler-Woche-Nutzungen, Fördefähren, Segelangebote und Zugänge zu Stegen aktuell auf kiel.de, bei SFK und den jeweiligen Einrichtungen prüfen. Die Promenade bleibt zugänglichkeits- und wetterabhängig.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": []
+    },
+    {
+      "id": "kiel_bootshafen",
+      "name": "Bootshafen",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Der dreieckige Bootshafen ist ein Rest des Meeresarms, der Kiels Altstadt einst fast vollständig umgab. Dämme, Straßen und Hafenbau trennten ihn schrittweise von Kleinem Kiel und Förde.",
+      "deep_data_pool": [
+        {
+          "text": "Bootshafen und Kleiner Kiel waren Teile eines natürlichen Seitenarms der Förde. Dieser umschloss die mittelalterliche Altstadt im Süden und Westen, während nördlich eine sumpfige Niederung lag. Die heutige Altstadtinsel war daher ursprünglich weit stärker vom Wasser bestimmt, als Straßen und Plätze erkennen lassen.",
+          "tags": [
+            "geografie",
+            "mittelalter"
+          ]
+        },
+        {
+          "text": "1846 verengte ein Damm für die Eisenbahn die Verbindung zur Förde; Brücken ermöglichten zunächst weiter die Passage. Mit dem Ausbau von Hafen und Verkehr ging die offene Wasserlandschaft Stück für Stück verloren. Der Name Bootshafen erscheint im Kieler Stadtplan von 1883.",
+          "tags": [
+            "eisenbahn",
+            "stadtentwicklung"
+          ]
+        },
+        {
+          "text": "1901 wurde die offene Verbindung zum Kleinen Kiel nach dem Abbruch von Holsten- und Kehdenbrücke zugeschüttet und durch ein Rohr ersetzt. 1982 verschwand beim Bau des Schwedenkais auch die offene Verbindung zur Förde; ein östliches Rohr hält den Wasseraustausch aufrecht.",
+          "tags": [
+            "zuschüttung",
+            "hafenbau"
+          ]
+        },
+        {
+          "text": "Die Wasserfläche umfasst ungefähr 4.200 Quadratmeter und hat eine auffällig dreieckige Form. Sie ist kein künstlicher Zierteich, sondern ein stark verkleinerter geologischer und stadtgeschichtlicher Rest. Die hohen Kanten und die Nähe der Innenstadt machen den Maßstab des verlorenen Wasserarms sichtbar.",
+          "tags": [
+            "visuell",
+            "stadtgeschichte"
+          ]
+        },
+        {
+          "text": "Nach der Abtrennung verlor der Bootshafen seine Hafenfunktion; Spundwände verfielen und geringe Wasserzirkulation begünstigte Algenprobleme. Bei der Neugestaltung 2002 entschied sich Kiel gegen eine vollständige Zuschüttung. Treppenartige Terrassen führten den öffentlichen Raum wieder bis ans Wasser.",
+          "tags": [
+            "umbau",
+            "oeffentlicher_raum"
+          ]
+        },
+        {
+          "text": "Das 2020 fertiggestellte Holstenfleet stellt westlich wieder einen sichtbaren Wasserbezug zum Kleinen Kiel her, ohne den historischen Meeresarm vollständig zu rekonstruieren. Schilffilter und gestaltete Wasserflächen verbinden Stadtklima, Wasserreinigung und Erinnerung an den früheren Stadtgrundriss.",
+          "tags": [
+            "holstenfleet",
+            "gegenwart"
+          ]
+        },
+        {
+          "text": "Visuell: Der Bootshafen liegt zwischen Einkaufsstadt und Schwedenkai. Auf einer Seite führen breite Stufen zur Wasserfläche, auf der anderen schieben sich Hafen- und Verkehrsflächen zwischen Becken und Förde. Diese harte Trennung erklärt die kaum noch erkennbare frühere Verbindung.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Quer: Alter Markt und Holstenstraße markieren die alte Stadt, das Holstenfleet den früheren Wasserlauf, der Schwedenkai die moderne Überformung. Zusammengenommen lässt sich nachvollziehen, wie aus einer wasserumgebenen Handelsstadt eine von Straßen und Großfähren geprägte Innenstadt wurde.",
+          "tags": [
+            "quer",
+            "orientierung"
+          ]
+        },
+        {
+          "text": "LIVE: Veranstaltungen auf den Stufen, temporäre Gastronomie, Wasserqualität, Baustellen und Sperrungen ändern sich. Aktuelle Nutzung über Kiel-Marketing und Stadt Kiel prüfen; aus der Bezeichnung Hafen keine heutige Anlegemöglichkeit ableiten.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": []
+    },
+    {
+      "id": "kiel_hornbrucke",
+      "name": "Hörnbrücke",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Die 1997 fertiggestellte Hörnbrücke verbindet Hauptbahnhof und Westufer mit Germaniahafen, Gaarden und Norwegenkai. Ihr stählerner Überbau faltet sich für Schiffe in drei Segmente.",
+      "deep_data_pool": [
+        {
+          "text": "Die Brücke überspannt die Hörn, das südlichste Becken der Kieler Förde. Sie wurde vor allem gebaut, um Fußgänger und Radfahrer vom Hauptbahnhof direkt zum neuen Norwegenkai und nach Gaarden-Ost zu führen. Damit beseitigte sie eine kurze Luftlinie, die zuvor einen langen Landumweg verlangte.",
+          "tags": [
+            "stadtverbindung",
+            "mobilitaet"
+          ]
+        },
+        {
+          "text": "Die Grundsatzplanung begann 1995, die Fertigstellung folgte 1997. Der Entwurf stammt von Gerkan, Marg und Partner; an der Ingenieurplanung war Jörg Schlaich beteiligt. Die Entscheidung fiel auf eine damals neuartige Dreifeld-Klapp-Zugbrücke.",
+          "tags": [
+            "planung",
+            "architektur"
+          ]
+        },
+        {
+          "text": "Beim Öffnen faltet sich der Stahlüberbau in drei Segmente zu einer steilen Form zusammen. Das Dreifeldzugklappprinzip gilt als weltweit einzigartig. Die eigentliche bewegliche Brücke ist 25,6 Meter lang und fünf Meter breit; sie ist Teil eines längeren Stegzugangs.",
+          "tags": [
+            "technik",
+            "konstruktion"
+          ]
+        },
+        {
+          "text": "Technische Schwierigkeiten verzögerten die Inbetriebnahme. Damit Passagiere dennoch den Norwegenkai erreichen konnten, entstand daneben kurzfristig eine hydraulische Schub- beziehungsweise Rollverschubbrücke. Das Provisorium blieb erhalten und dient bei Wartung oder Ausfall als alternative Querung.",
+          "tags": [
+            "baugeschichte",
+            "ersatzbruecke"
+          ]
+        },
+        {
+          "text": "Die Verzögerungen und hohen Kosten führten zu spöttischen Kieler Beinamen wie Klappt-Nix-Brücke. Die lokale Skepsis gehört zur Rezeptionsgeschichte, während die ungewöhnliche Konstruktion später zum anerkannten Wahrzeichen wurde. Technikgeschichte und Stadthumor liegen hier eng beieinander.",
+          "tags": [
+            "stadtkultur",
+            "rezeption"
+          ]
+        },
+        {
+          "text": "Visuell: Vom Westufer läuft ein schmaler Steg auf den niedrigen, stählernen Brückenkörper zu. Im geöffneten Zustand stehen die drei gefalteten Teile wie ein Zickzack über der Hörn. Die parallele Ersatzbrücke ist als eigenes, flacheres Bauwerk zu erkennen.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Östlich folgen Germaniahafen und Museumsschiffe; weiter liegt der Norwegenkai. Westlich stehen Hauptbahnhof und Innenstadt. Die Brücke ist deshalb nicht nur Einzelobjekt, sondern Gelenk zwischen Bahn, internationaler Fähre, Wohnstadt und maritimem Freiraum.",
+          "tags": [
+            "orientierung",
+            "quer"
+          ]
+        },
+        {
+          "text": "Für passierende Schiffe muss die Querung geöffnet werden. Die Beweglichkeit erinnert daran, dass die Hörn trotz ihrer urbanen Lage aktives Hafenwasser ist. Fuß- und Radverkehr sind daher nicht absolut vorrangig, sondern teilen den engen Raum mit Schifffahrt und Hafenbetrieb.",
+          "tags": [
+            "hafenbetrieb",
+            "alltag"
+          ]
+        },
+        {
+          "text": "Die Brücke setzte ein frühes Zeichen für das städtebauliche Zusammenwachsen von West- und Ostufer. Zusammen mit einer späteren Fußgängerbrücke über die Werftstraße verbesserte sie die Anbindung Gaardens an Bahnhof und Zentrum und veränderte die Wahrnehmung des lange industriell geprägten Hörnraums.",
+          "tags": [
+            "gaardens",
+            "stadtplanung"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Wartung, Ausfälle und Nutzung der Ersatzbrücke aktuell bei der Stadt Kiel prüfen. Bei geöffneter oder gesperrter Brücke keine feste Querungszeit versprechen; Umleitungen sind betriebsabhängig.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": []
+    },
+    {
+      "id": "kiel_schwedenkai",
+      "name": "Schwedenkai",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Der Schwedenkai liegt unmittelbar an Kiels Innenstadt und dient vor allem dem Fährverkehr nach Göteborg. Seine großen RoPax-Schiffe verbinden Passagierverkehr und rollende Fracht mitten im Stadthafen.",
+      "deep_data_pool": [
+        {
+          "text": "Der Kai liegt am westlichen Fördeufer zwischen Bootshafen und Seegarten. Seine Innenstadtlage macht internationale Fährschifffahrt ungewöhnlich direkt sichtbar: Schiffe, Rampen, Terminal und Zufahrten liegen nur wenige Schritte von Holstenstraße und Altstadt entfernt.",
+          "tags": [
+            "lage",
+            "hafen"
+          ]
+        },
+        {
+          "text": "Vor 1982 gehörte das Gelände zum Bollhörnkai. Für den Fährverkehr nach Göteborg entstand 1982 ein eigener Anleger, der seitdem Schwedenkai heißt. Der Ausbau schüttete Wasserflächen zwischen Förde und Bootshafen zu und veränderte den historischen Uferverlauf dauerhaft.",
+          "tags": [
+            "geschichte",
+            "stadtumbau"
+          ]
+        },
+        {
+          "text": "Der Schwedenkai bildet mit Norwegenkai und Ostseekai das innerstädtische Passagierhafen-System. Während der Ostseekai vor allem Kreuzfahrten bedient und der Norwegenkai die Oslo-Verbindung, ist der Schwedenkai mit der Göteborg-Linie der Stena Line verbunden.",
+          "tags": [
+            "faehren",
+            "orientierung"
+          ]
+        },
+        {
+          "text": "RoPax-Fähren transportieren Reisende, Pkw und Lastverkehr gemeinsam. Die großen Heck- und Bugrampen, getrennten Zufahrtsströme und weiten Aufstellflächen erklären, weshalb ein Fährterminal trotz zentraler Lage viel Raum benötigt. Der Kai ist daher Verkehrsmaschine und Stadtkante zugleich.",
+          "tags": [
+            "logistik",
+            "technik"
+          ]
+        },
+        {
+          "text": "Ein neues Terminal wurde nach rund zweieinhalb Jahren Bauzeit 2010 fertiggestellt. Anlass waren unter anderem größere Schiffe auf der Göteborg-Route. Terminalgebäude, Logistik und Infrastruktur wurden gemeinsam erneuert, um Passagier- und Ladungsabfertigung leistungsfähiger zu machen.",
+          "tags": [
+            "terminal",
+            "modernisierung"
+          ]
+        },
+        {
+          "text": "Seit 2021 können Fähren am Schwedenkai Landstrom aus der am Ostseekai errichteten Anlage beziehen. Dadurch lassen sich während der Liegezeit Bordgeneratoren ersetzen. Ob und wie ein konkretes Schiff angeschlossen ist, bleibt ein aktueller Betriebsfakt.",
+          "tags": [
+            "landstrom",
+            "umwelt"
+          ]
+        },
+        {
+          "text": "Visuell: Das Terminal wird von hohen Fährschiffen, gläsernen beziehungsweise hellen Abfertigungsbereichen, Rampen und abgesperrten Fahrspuren geprägt. Vom Bootshafen aus wirkt die Hafenfläche wie eine Barriere zur Förde und macht die Zuschüttung des alten Wasserzusammenhangs verständlich.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Quer: Der Bootshafen zeigt den früheren Seitenarm der Förde, die Holstenstraße das Stadtzentrum, der Hauptbahnhof den landseitigen Fernverkehr. Am Schwedenkai treffen alle drei Entwicklungslinien auf die moderne Verbindung nach Skandinavien.",
+          "tags": [
+            "quer",
+            "stadtgeschichte"
+          ]
+        },
+        {
+          "text": "Die Fährroute nach Göteborg ist keine touristische Hafenrundfahrt, sondern eine internationale Verkehrslinie mit Frachtanteil. Check-in, Sicherheitsbereich und Fahrzeugabfertigung folgen den Regeln eines Terminals; frei zugängliche Aussichtspunkte sind von Betriebsflächen zu unterscheiden.",
+          "tags": [
+            "nutzung",
+            "sicherheit"
+          ]
+        },
+        {
+          "text": "LIVE: Abfahrten, Check-in-Zeiten, Schiffe, Tarife, Gepäck-, Pkw- und Fahrradregeln sowie Terminalzugänge aktuell bei Stena Line und PORT OF KIEL prüfen. Hafenflächen nie als frei zugänglich annehmen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": []
+    },
+    {
+      "id": "kiel_kiel_norwegenkai",
+      "name": "Norwegenkai",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Der Norwegenkai am Ostufer der Hörn ist Kiels Terminal für die Fährverbindung nach Oslo. Hörnbrücke und Hauptbahnhof liegen in direkter Nachbarschaft.",
+      "deep_data_pool": [
+        {
+          "text": "Der Norwegenkai liegt am Ostufer der Hörn gegenüber dem Hauptbahnhof. Seine Lage verbindet internationale Seereise mit Bahn und Innenstadt auf engem Raum; die Hörnbrücke wurde wesentlich für den direkten Fußweg zwischen Terminal und Westufer geschaffen.",
+          "tags": [
+            "lage",
+            "orientierung"
+          ]
+        },
+        {
+          "text": "Color Line bezog den neuen Norwegenkai 1997. Zuvor nutzte die Oslo-Verbindung den Oslo-Kai am heutigen Ostseekai. Der Umzug schuf am Westufer Raum für ein spezialisiertes Kreuzfahrtterminal und verlagerte die Norwegenfähren an die Hörn.",
+          "tags": [
+            "geschichte",
+            "faehre"
+          ]
+        },
+        {
+          "text": "Nach Angaben des PORT OF KIEL ist die Verbindung Kiel–Oslo die einzige direkte Fährverbindung zwischen Deutschland und Norwegen. Die Schiffe sind RoPax-Fähren und transportieren Passagiere, Fahrzeuge und rollende Ladung.",
+          "tags": [
+            "norwegen",
+            "verkehr"
+          ]
+        },
+        {
+          "text": "Das Terminal besitzt getrennte Bereiche für Passagier- und Frachtabfertigung, einen Gleisanschluss und kurze Wege zu anderen Verkehrsträgern. Diese Kombination zeigt den Hafen nicht nur als Reiseort, sondern als Logistikknoten.",
+          "tags": [
+            "terminal",
+            "logistik"
+          ]
+        },
+        {
+          "text": "Ein Landstromanschluss ermöglicht geeigneten Schiffen, während der Liegezeit Strom vom Land zu beziehen. Die technische Verfügbarkeit ist ein stabiler Infrastruktur-Fakt; der Anschluss eines bestimmten Schiffs zu einem bestimmten Zeitpunkt bleibt LIVE.",
+          "tags": [
+            "landstrom",
+            "umwelt"
+          ]
+        },
+        {
+          "text": "Visuell: Das große Terminal steht hinter dem Germaniahafen am östlichen Rand der Hörn. Hohe Fähren überragen bei Liegezeit die umliegenden Gebäude; Hörnbrücke, Gleise, Zufahrten und Rampen ordnen den Raum.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Quer: Museumshafen und Hörnbrücke liegen auf dem Weg vom Bahnhof. Der Kontrast zwischen fahrenden Traditionsseglern im Germaniahafen und moderner Großfähre am Norwegenkai spannt mehrere Jahrhunderte Küstenschifffahrt auf kurzer Strecke auf.",
+          "tags": [
+            "quer",
+            "schifffahrtsgeschichte"
+          ]
+        },
+        {
+          "text": "LIVE: Abfahrten, Schiffe, Check-in, Tarife, Fahrzeug- und Gepäckregeln sowie Fußwege bei Color Line und PORT OF KIEL prüfen. Sicherheits- und Abfertigungsflächen sind nicht allgemein zugänglich.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": []
+    },
+    {
+      "id": "kiel_kreuzfahrtterminal_ostseekai",
+      "name": "Kreuzfahrtterminal Ostseekai",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Der Ostseekai ist Kiels zentrales Kreuzfahrtterminal mit zwei Liegeplätzen direkt am westlichen Fördeufer. Seine Vorgeschichte reicht zum 1961 eröffneten Oslo-Kai zurück.",
+      "deep_data_pool": [
+        {
+          "text": "Der Ostseekai liegt unmittelbar nördlich der Altstadt. Kreuzfahrtschiffe können dadurch fast im Stadtzentrum festmachen; Bahnhof, Holstenstraße, Museen und Kiellinie sind landseitig eng angebunden.",
+          "tags": [
+            "lage",
+            "kreuzfahrt"
+          ]
+        },
+        {
+          "text": "1961 wurde hier der Oslo-Kai als Kiels erster größerer Fährhafen eingeweiht. Neben Oslo-Fähren nutzten zeitweise auch Schweden- und Langeland-Verbindungen das Areal. Der Ort war damit vor seiner Kreuzfahrtrolle ein Schlüssel der modernen Fährgeschichte.",
+          "tags": [
+            "oslo_kai",
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Nach dem Umzug der Color Line zum Norwegenkai 1997 wurde der frühere Oslo-Kai für Kreuzfahrten umgebaut. Nach einer weiteren sechsmonatigen Bauphase eröffnete 2007 das Kreuzfahrtterminal unter dem Namen Ostseekai.",
+          "tags": [
+            "umbau",
+            "terminal"
+          ]
+        },
+        {
+          "text": "Zwei Liegeplätze und die Terminals 27 und 28 dienen Ankunft, Gepäck- und Passagierabfertigung. Helle Wartezonen und Terrassen orientieren sich zur Förde; die Anlagen sind für den schnellen Wechsel großer Passagierzahlen ausgelegt.",
+          "tags": [
+            "architektur",
+            "logistik"
+          ]
+        },
+        {
+          "text": "Der Untergrund verweist auf den Wiederaufbau der Hafenstadt: Teile des Geländes bestehen aus Trümmerschutt; eine große Stahlplatte stabilisierte den früheren Oslo-Kai. Moderne Tourismusinfrastruktur liegt damit buchstäblich auf Nachkriegsschichten.",
+          "tags": [
+            "nachkrieg",
+            "baugeschichte"
+          ]
+        },
+        {
+          "text": "Eine Landstromanlage versorgt geeignete Kreuzfahrt- und Fährschiffe während der Liegezeit. Von ihr profitieren auch Fähren am Schwedenkai. Der Ausbau verbindet Hafenleistung mit dem Ziel, lokale Emissionen im Stadthafen zu senken.",
+          "tags": [
+            "landstrom",
+            "hafeninfrastruktur"
+          ]
+        },
+        {
+          "text": "Visuell: Bei Schiffsanlauf verdecken hohe Bordwände einen großen Teil des Fördeblicks; ohne Schiff dominieren breite Kaiflächen und moderne Terminalbauten. Der Beginn der Kiellinie und die Kunsthalle liegen nördlich, Fischhalle und Altstadt südlich.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "LIVE: Schiffsanläufe, Liegeplätze, Sperrbereiche, Besucherterrassen, Passagierzahlen und Landstromnutzung aktuell im Cruise-Schedule des PORT OF KIEL prüfen. Ein angekündigtes Schiff kann sich verspäten oder den Liegeplatz wechseln.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": []
+    },
+    {
+      "id": "kiel_museumshafen_kiel_e_v",
+      "name": "Museumshafen Kiel e.V.",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Der Museumshafen im Germaniahafen ist ein lebendiger Traditionsschiffhafen. Der 2004 gegründete gemeinnützige Verein erhält historische Berufsfahrzeuge und hält viele davon weiter in Fahrt.",
+      "deep_data_pool": [
+        {
+          "text": "Der gemeinnützige Verein besteht seit 2004 und betreibt den Traditionshafen im Germaniabecken. Ziel sind Aufbau und Unterhaltung eines Museumshafens sowie Erhaltung, Restaurierung und gegebenenfalls Nachbau historischer Berufsschiffe.",
+          "tags": [
+            "verein",
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Der Schwerpunkt liegt auf Fahrzeugen, die für die Küstenregionen Nordeuropas kulturgeschichtlich prägend waren: Küstenfischerboote, Frachtschiffe, Schoner, Barkassen und andere traditionelle Arbeitsfahrzeuge.",
+          "tags": [
+            "schiffstypen",
+            "kuestenschifffahrt"
+          ]
+        },
+        {
+          "text": "Die Schiffe sollen nicht dauerhaft als starre Exponate festliegen. Viele bleiben fahrbereit, verlassen den Hafen und kehren zurück. Arbeiten der Besatzungen an Rumpf, Rigg und Ausrüstung sind Teil des lebendigen Hafenbildes.",
+          "tags": [
+            "traditionsschifffahrt",
+            "handwerk"
+          ]
+        },
+        {
+          "text": "Zur Pflege des immateriellen Erbes zählen traditionelle Seemannschaft, maritime Handwerkskunst und Musik. Der Museumshafen bewahrt damit nicht nur Schiffskörper, sondern auch Kenntnisse und Praktiken, die für deren Betrieb nötig sind.",
+          "tags": [
+            "kulturerbe",
+            "seemannschaft"
+          ]
+        },
+        {
+          "text": "Zur bekannten Flotte gehören unter anderem die 1896 in Kiel gebaute Sampo und der 1905 in Nyborg gebaute Marstalschoner Zuversicht. Welche Schiffe tatsächlich im Hafen liegen, ändert sich durch Fahrten und Wartung.",
+          "tags": [
+            "schiffe",
+            "beispiele"
+          ]
+        },
+        {
+          "text": "Visuell: Masten, Gaffelriggs, Holz- und Stahlrümpfe staffeln sich im schmalen Germaniahafen. Die Hörnbrücke liegt am westlichen Zugang, moderne Gebäude und der Norwegenkai bilden einen deutlichen Kontrast.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Quer: Die Hörnbrücke führt vom Hauptbahnhof direkt zum Hafen; der Norwegenkai zeigt moderne RoPax-Schifffahrt. Die Fischhalle am anderen Ufer ergänzt das Freiluftbild durch die museale Erzählung von Werften, Marine und Seefahrt.",
+          "tags": [
+            "quer",
+            "orientierung"
+          ]
+        },
+        {
+          "text": "LIVE: Flottenbelegung, Mitsegelmöglichkeiten, Tag der offenen Luke, Konzerte und Besichtigungen aktuell auf der Vereinswebsite prüfen. Vom frei einsehbaren Hafen nicht auf freien Zugang zu Decks oder privaten Schiffen schließen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": []
+    },
+    {
+      "id": "kiel_kieler_schifffahrtsmuseum_fischhalle",
+      "name": "Kieler Schifffahrtsmuseum Fischhalle",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Die 1910 eröffnete städtische Fischhalle beherbergt seit 1978 das Schifffahrtsmuseum. Gebäude, Sammlung und Museumsbrücke erzählen Kiels Weg zur Marine-, Werften-, Fähr- und Segelstadt.",
+      "deep_data_pool": [
+        {
+          "text": "Stadtbaurat Georg Pauly entwarf die Fischhalle am Wall; 1910 wurde sie eröffnet. Sie bündelte den zuvor dezentral am Hafen betriebenen Groß- und Einzelhandel mit Fisch unter einem Dach. Ihre Lage direkt am Wasser war funktionaler Teil des Handels.",
+          "tags": [
+            "architektur",
+            "fischhandel"
+          ]
+        },
+        {
+          "text": "Der Bau ist durch große Fenster, eine klare Hallenform und maritime Lage geprägt. Dass heute Schifffahrtsgeschichte in einer echten Hafen- und Handelshalle gezeigt wird, verbindet Gebäude und Thema unmittelbar.",
+          "tags": [
+            "denkmal",
+            "visuell"
+          ]
+        },
+        {
+          "text": "Nach dem Zweiten Weltkrieg verlor Kiel bedeutende Landesmuseen an Schleswig. In den 1970er Jahren baute die Stadt eine eigene Museumslandschaft auf. Private maritime Sammlungen und ein Förderkreis beschleunigten die Entscheidung für die Fischhalle.",
+          "tags": [
+            "museumsgeschichte",
+            "nachkrieg"
+          ]
+        },
+        {
+          "text": "Nach Renovierungsarbeiten ab 1975 wurde das Schifffahrtsmuseum am 30. April 1978 eröffnet. Eine umfassende Sanierung und Neukonzeption folgte 2014. Der Schwerpunkt liegt auf maritimer Stadtgeschichte des 19. und 20. Jahrhunderts.",
+          "tags": [
+            "eroeffnung",
+            "sanierung"
+          ]
+        },
+        {
+          "text": "Die Verlegung der preußischen Marinestation nach Kiel 1865 bildet einen Wendepunkt der Dauerausstellung. Marine, Reichskriegshafen, große Werften und abhängige Industrien ließen Kiel wachsen, schufen aber auch militärische Abhängigkeit und machten die Stadt im Krieg zum Angriffsziel.",
+          "tags": [
+            "marine",
+            "werften"
+          ]
+        },
+        {
+          "text": "Modelle von Frachtern, Passagierschiffen, Kreuzern, U-Booten und Segelyachten dokumentieren in Kiel gebaute oder bereederte Schiffe. Themen sind außerdem Fischerei, Fähr- und Kreuzfahrt, Nord-Ostsee-Kanal, Segelsport sowie koloniale Verflechtungen.",
+          "tags": [
+            "sammlung",
+            "schiffsmodelle"
+          ]
+        },
+        {
+          "text": "Zu den Originalobjekten gehören ein Finn-Dinghy der olympischen Segelwettbewerbe 1972, ein über 200 Jahre alter Ellerbeker Fischerkahn und ein Wracksegment eines Klein-U-Bootes vom Typ Seehund. Kieler Erfindungen wie Kreiselkompass und Echolot ergänzen die Technikgeschichte.",
+          "tags": [
+            "originale",
+            "technikgeschichte"
+          ]
+        },
+        {
+          "text": "An der Museumsbrücke liegen Tonnenleger Bussard, Feuerlöschboot Kiel und Seenotrettungskreuzer Hindenburg als authentische Arbeitsfahrzeuge. Sie stehen für Seezeichenwesen, Brandschutz und Seenotrettung, nicht für repräsentative Luxusfahrt.",
+          "tags": [
+            "museumsbruecke",
+            "arbeitsschiffe"
+          ]
+        },
+        {
+          "text": "Visuell: Die breite Backsteinhalle steht am Seegarten unmittelbar hinter den historischen Schiffen. Große Fenster und das Hallendach unterscheiden sie von den nahen Terminals; der ehemalige Handelszweck bleibt an Form und Wasserkante nachvollziehbar.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Sonderausstellungen, Schiffszugänge und Saison der Museumsbrücke aktuell beim Stadt- und Schifffahrtsmuseum prüfen. Die Außenschiffe sind nicht automatisch jederzeit betretbar.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": []
+    },
+    {
+      "id": "kiel_stadt_und_schifffahrtsmuseum",
+      "name": "Stadt- und Schifffahrtsmuseum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Das Kieler Stadt- und Schifffahrtsmuseum ist ein Verbund mehrerer Standorte. Warleberger Hof, Fischhalle, Museumsbrücke, Metallgießerei und Depot erschließen Stadt-, Kultur-, Industrie- und Hafengeschichte.",
+      "deep_data_pool": [
+        {
+          "text": "Das Museum ist keine einzelne Ausstellung in nur einem Haus. Es arbeitet an fünf Standorten und verbindet Stadtgeschichte, maritime Geschichte, Industriekultur, Sammlungsdepot und historische Schiffe. Der Warleberger Hof und die Fischhalle sind die wichtigsten Besucherhäuser.",
+          "tags": [
+            "museumsverbund",
+            "struktur"
+          ]
+        },
+        {
+          "text": "Der Warleberger Hof konzentriert sich auf Kultur- und Stadtgeschichte; die Fischhalle auf Marine, Werften, Schifffahrt und Segelsport. Die Museumsbrücke ergänzt Originalschiffe, die Howaldtsche Metallgießerei industrielle Produktion.",
+          "tags": [
+            "standorte",
+            "themen"
+          ]
+        },
+        {
+          "text": "Seit der Öffnung des Stadtmuseums 1970 beziehungsweise 1973 und des Schifffahrtsmuseums 1978 entstand ein städtischer Wissensspeicher. Die Sammlungen umfassen zehntausende historische Objekte und wachsen durch Erwerbungen, Schenkungen und Dokumentation.",
+          "tags": [
+            "sammlung",
+            "museumsgeschichte"
+          ]
+        },
+        {
+          "text": "Kiels Entwicklung von der mittelalterlichen Handelsstadt zur Marine- und Werftenmetropole ist ein roter Faden. Dazu gehören der Eisenbahnbau, Reichskriegshafen, Nord-Ostsee-Kanal, Matrosenaufstand 1918, Kriegszerstörung und Wiederaufbau.",
+          "tags": [
+            "stadtgeschichte",
+            "industrie"
+          ]
+        },
+        {
+          "text": "Das Museum behandelt auch problematische Seiten der maritimen Geschichte: Militarisierung, U-Boot-Bau, koloniale Beziehungen, Arbeitswelten und Abhängigkeit der Stadt von Marine und Großwerften. Maritime Identität wird dadurch nicht nur gefeiert, sondern historisch eingeordnet.",
+          "tags": [
+            "reflexion",
+            "marinegeschichte"
+          ]
+        },
+        {
+          "text": "Die Standorte selbst sind Exponate: Adelshof von 1616, Fischhalle von 1910, historische Gießerei und Arbeitsschiffe besitzen eigene Nutzungsspuren. Das Museum erzählt daher mit Gebäuden und Objekten zugleich.",
+          "tags": [
+            "architektur",
+            "authentischer_ort"
+          ]
+        },
+        {
+          "text": "Visuell: Als Verbund besitzt das Museum kein einziges Erkennungsbild. In der Altstadt weist der Warleberger Hof mit Sandsteinportal und Gewölbekeller auf Stadtgeschichte; an der Förde markieren Fischhalle und Museumsschiffe den maritimen Teil.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Quer: Der Weg zwischen Warleberger Hof und Fischhalle verbindet Alter Markt, Nikolaikirche, Hafenstraße und Seegarten. So lässt sich die räumliche Verlagerung vom mittelalterlichen Stadtkern zum modernen Hafen unmittelbar nachvollziehen.",
+          "tags": [
+            "quer",
+            "stadtrundgang"
+          ]
+        },
+        {
+          "text": "Die Einrichtung gehört zum Netzwerk museen am meer, in dem städtische, universitäre und GEOMAR-Häuser kooperieren. Kunst, Zoologie, Meereskunde und Geschichte liegen in der Innenstadt und am Fördeufer eng beieinander.",
+          "tags": [
+            "museen_am_meer",
+            "kooperation"
+          ]
+        },
+        {
+          "text": "LIVE: Welcher Standort geöffnet ist, welche Ausstellung läuft und ob Gießerei, Depot oder Schiffe zugänglich sind, aktuell beim Museum prüfen. Verbundzugehörigkeit bedeutet keine identischen Öffnungszeiten oder einheitlichen Zugänge.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": []
+    },
+    {
+      "id": "kiel_stadtmuseum_warleberger_hof",
+      "name": "Stadtmuseum Warleberger Hof",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Der Warleberger Hof von 1616 ist der einzige erhaltene Kieler Adelshof und der einzige Privatbau der Altstadt aus der Zeit vor 1864. Heute zeigt er Stadt- und Kulturgeschichte.",
+      "deep_data_pool": [
+        {
+          "text": "Das Gebäude entstand 1616 als städtischer Adelshof. Solche Freihöfe dienten landsässigen Adelsfamilien als repräsentative Stadtresidenzen. Der Warleberger Hof ist der einzige erhaltene Kieler Adelshof aus dem frühen 17. Jahrhundert.",
+          "tags": [
+            "adel",
+            "baugeschichte"
+          ]
+        },
+        {
+          "text": "Der Name geht auf Henning von Thienen auf Warleberg zurück, der den Hof 1695 erwarb. Das heutige Erscheinungsbild prägte Henning Bendix von Rumohr mit Umbauten ab 1765.",
+          "tags": [
+            "name",
+            "umbau"
+          ]
+        },
+        {
+          "text": "Als einziger erhaltener Privatbau der Kieler Altstadt aus der Zeit vor 1864 überstand der Hof den radikalen Wandel durch Gründerzeit, Marineausbau und Kriegszerstörung. Seine Substanz ist deshalb ein seltener Maßstab für das ältere Kiel.",
+          "tags": [
+            "denkmal",
+            "altstadt"
+          ]
+        },
+        {
+          "text": "Besonders anschaulich sind Gewölbekeller, historische Raumfolgen und das repräsentative Portal. Sie zeigen, dass die Dänische Straße einst von Adelshöfen und gehobener Wohnkultur geprägt war.",
+          "tags": [
+            "innenraum",
+            "visuell"
+          ]
+        },
+        {
+          "text": "Seit 1970 beherbergt der Hof das Stadtmuseum. Wechselnde Ausstellungen behandeln Kunst, Kultur und Alltagsgeschichte Kiels; empfindliche Originalräume begrenzen zugleich die Möglichkeiten eines modernen Ausstellungsbetriebs.",
+          "tags": [
+            "museum",
+            "nutzung"
+          ]
+        },
+        {
+          "text": "In der Nähe stand der 1944 zerstörte Buchwaldsche Hof. Dort wurde am 14. Januar 1814 der Kieler Frieden zwischen Dänemark, Schweden und Großbritannien geschlossen. Eine Stele und der Platz des Kieler Friedens erinnern an den verschwundenen Nachbarhof.",
+          "tags": [
+            "kieler_frieden",
+            "quer"
+          ]
+        },
+        {
+          "text": "Visuell: Der Hof liegt zurückhaltend in der Dänischen Straße. Das historische Portal, steile Dach und die im Vergleich zur Nachkriegsumgebung kleinteilige Fassade kennzeichnen ihn; die entscheidenden älteren Schichten liegen auch im Gewölbekeller.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Sonderausstellungen, Führungen und Zugänglichkeit des Gewölbekellers aktuell beim Stadtmuseum prüfen. Die wechselnden Ausstellungen nicht als dauerhaften Sammlungsinhalt behandeln.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": []
+    },
+    {
+      "id": "kiel_kunsthalle_zu_kiel",
+      "name": "Kunsthalle zu Kiel",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Die 1909 eröffnete Kunsthalle gehört zur Christian-Albrechts-Universität und beherbergt den Schleswig-Holsteinischen Kunstverein sowie die Antikensammlung. Sie liegt erhöht über Förde und Schlossgarten.",
+      "deep_data_pool": [
+        {
+          "text": "Der 1843 gegründete Schleswig-Holsteinische Kunstverein legte den Grundstock der Sammlung. Ein erstes eigenes Haus eröffnete 1857 in der Dänischen Straße; das heutige Gebäude verdankt seinen Standort dem Vermächtnis Charlotte Lotte Hegewischs.",
+          "tags": [
+            "kunstverein",
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Der Anfangsentwurf des heutigen Hauses stammt von Georg Thür und wurde von Georg Lohr weiterentwickelt. 1909 eröffnete die Kunsthalle am Düsternbrooker Weg in markanter Hanglage über der Förde.",
+          "tags": [
+            "architektur",
+            "eroeffnung"
+          ]
+        },
+        {
+          "text": "Im Zweiten Weltkrieg wurde das Gebäude schwer beschädigt und erst 1958 wieder für das Publikum geöffnet. Die Wisent-Skulpturen August Gauls überstanden die Zerstörung und stehen wieder vor dem Haus.",
+          "tags": [
+            "krieg",
+            "wisente"
+          ]
+        },
+        {
+          "text": "Ein Erweiterungsbau von Diethelm Hoffmann schafft seit 1986 zusätzliche Ausstellungs-, Vermittlungs- und Bibliotheksflächen. 2012 öffnete ein neuer Eingang von Sunder-Plassmann Architekten das Haus stärker zur Förde.",
+          "tags": [
+            "umbau",
+            "gegenwartsarchitektur"
+          ]
+        },
+        {
+          "text": "Die Sammlung reicht von der Dürerzeit bis zur internationalen Gegenwart. Schwerpunkte sind Kunst des 19. Jahrhunderts, dänisches Goldenes Zeitalter, Impressionismus, Expressionismus, Neue Sachlichkeit und Gegenwartskunst.",
+          "tags": [
+            "sammlung",
+            "kunstgeschichte"
+          ]
+        },
+        {
+          "text": "Zum Bestand gehören ungefähr 1.100 Gemälde, 300 Skulpturen sowie mehr als 30.000 grafische Werke, ergänzt um Fotografie und Video. Wegen wechselnder Präsentationen ist kein einzelnes Werk dauerhaft garantiert sichtbar.",
+          "tags": [
+            "bestand",
+            "grafik"
+          ]
+        },
+        {
+          "text": "Die Antikensammlung ist im selben Gebäude unter eigener Leitung untergebracht. Außenskulpturen setzen die Ausstellungsfläche in den Schlossgarten fort und verknüpfen Museum, Park und öffentlichen Raum.",
+          "tags": [
+            "antikensammlung",
+            "schlossgarten"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, aktuelle Ausstellungen, Sanierungen und sichtbare Sammlungswerke auf kunsthalle-kiel.de prüfen. Wechselnde Hängungen und Leihverkehr sind ausdrücklich ephemer.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": []
+    },
+    {
+      "id": "kiel_aquarium_geomar",
+      "name": "Aquarium GEOMAR",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Das 1972 eröffnete und 2008 modernisierte Aquarium vermittelt Meeresleben aus Ostsee, Nordsee, Mittelmeer und Tropen. Das Seehundbecken liegt außen direkt an der Kiellinie.",
+      "deep_data_pool": [
+        {
+          "text": "Das Aquarium wurde 1972 als öffentliches Schaufenster der Kieler Meereskunde eröffnet und 2008 modernisiert. Es gehört zum Umfeld des GEOMAR Helmholtz-Zentrums für Ozeanforschung.",
+          "tags": [
+            "geschichte",
+            "meeresforschung"
+          ]
+        },
+        {
+          "text": "Auf rund 350 Quadratmetern zeigen etwa 20 Schaubecken Fische, Krebse, Korallentiere und andere Meeresorganismen. Einzelbecken fassen ungefähr 200 bis 17.000 Liter Meerwasser.",
+          "tags": [
+            "aquarien",
+            "sammlung"
+          ]
+        },
+        {
+          "text": "Vier große Kreislaufsysteme versorgen Ostsee-, Nordsee-, Mittelmeer- und Tropenbecken. Das Wasser wird aufbereitet und zurückgeführt; unterschiedliche Temperatur und Salinität bilden die jeweiligen Lebensräume technisch nach.",
+          "tags": [
+            "technik",
+            "wasser"
+          ]
+        },
+        {
+          "text": "Für den Ostseekreislauf wird Wasser aus der Kieler Förde entnommen, gefiltert und aufbereitet. Nachbildungen von Seegraswiese, Schilkseer und Steiner Mole verknüpfen die Aquarien mit regionalen Küstenlebensräumen.",
+          "tags": [
+            "ostsee",
+            "regional"
+          ]
+        },
+        {
+          "text": "Ein Rundbecken zeigt einen Heringsschwarm, dessen Haltung in Gefangenschaft besonders anspruchsvoll ist. Nordseebecken präsentieren unter anderem typische Fische und Wirbellose; Artenbesatz kann sich verändern.",
+          "tags": [
+            "heringe",
+            "nordsee"
+          ]
+        },
+        {
+          "text": "Das außen gelegene Seehundbecken fasst 250.000 Liter Ostseewasser und wird laufend mit Wasser aus der Förde versorgt. Unterwasserfenster ermöglichen Beobachtung von der Kiellinie; ein nicht einsehbarer Nachtstall dient als Rückzugsraum.",
+          "tags": [
+            "seehunde",
+            "visuell"
+          ]
+        },
+        {
+          "text": "Das Aquarium will besonders heimische Meerestiere und ihre Lebensräume verständlich machen. Die direkte Lage zwischen Forschungsinstitut und Förde verbindet Ausstellung, reale Ostsee und wissenschaftliche Arbeit.",
+          "tags": [
+            "vermittlung",
+            "quer"
+          ]
+        },
+        {
+          "text": "LIVE: Tierbestand, Fütterungs- und Trainingszeiten, Putztage, Öffnungszeiten und Eintritt aktuell beim Aquarium prüfen. Tiernamen und Anzahl der Seehunde können sich ändern und sind keine stabilen Packfakten.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": []
+    },
+    {
+      "id": "kiel_zoologisches_museum_kiel",
+      "name": "Zoologisches Museum Kiel",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Das Zoologische Museum wurde 1881 im innovativen Bau von Martin Gropius und Heino Schmieden eröffnet. Lichtdurchflutete Halle, Forschungssammlungen und Walskelette verbinden Architektur- und Naturwissenschaftsgeschichte.",
+      "deep_data_pool": [
+        {
+          "text": "Martin Gropius und Heino Schmieden entwickelten den Bau gemeinsam mit dem Zoologen Karl August Möbius. Das 1881 eröffnete Haus ist innen und außen ungewöhnlich weitgehend erhalten.",
+          "tags": [
+            "gropius",
+            "architektur"
+          ]
+        },
+        {
+          "text": "Die hohe Mittelhalle besitzt zwei umlaufende Galerien und erhält Licht durch große Glasflächen der Dachlaterne. Glas, Stahl und Licht schaffen einen repräsentativen Raum für große Präparate.",
+          "tags": [
+            "halle",
+            "visuell"
+          ]
+        },
+        {
+          "text": "Innovativ war die klare Trennung von öffentlichen Schauräumen und nichtöffentlichen Forschungs- und Sammlungsbereichen in Dach und Keller. Das Kieler Haus wurde zum Referenzbau des Hallenmuseum-Typs.",
+          "tags": [
+            "museumskonzept",
+            "forschung"
+          ]
+        },
+        {
+          "text": "Die Sammlungen reichen in die frühe Universitätsgeschichte zurück. Material der Galathea-Weltumseglung 1845 bis 1847 vergrößerte die Bestände erheblich und besitzt bis heute wissenschaftlichen Wert.",
+          "tags": [
+            "sammlung",
+            "galathea"
+          ]
+        },
+        {
+          "text": "Karl August Möbius erforschte Austernbänke und prägte den Begriff Biocönose für Lebensgemeinschaften. Seine Nord- und Ostseesammlungen dokumentieren historische Faunen und ermöglichen Vergleiche zu Klima- und Umweltwandel.",
+          "tags": [
+            "moebius",
+            "oekologie"
+          ]
+        },
+        {
+          "text": "Die Walausstellung zeigt zwölf Skelette aus rund 160 Jahren, darunter einen 14 Meter langen Pottwal und ein junges Blauwalweibchen. Ein Großer Tümmler wurde als Kieler Kanalschwimmer regional bekannt.",
+          "tags": [
+            "wale",
+            "dauerausstellung"
+          ]
+        },
+        {
+          "text": "Der Schweinswal ist die einzige dauerhaft in der Ostsee heimische Walart; andere Wale gelangen als Gäste oder Irrgäste in Nord- und Ostsee. Die Präparate verbinden globale Evolution mit regionalen Strandungen.",
+          "tags": [
+            "ostsee",
+            "naturkunde"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Sonderausstellungen, Führungen und sichtbare Präparate aktuell beim Zoologischen Museum prüfen. Forschungsbedingte Ausleihen und Umbauten können Präsentationen verändern.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": []
+    },
+    {
+      "id": "kiel_rathausturm_kiel",
+      "name": "Rathausturm Kiel",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Der 106 Meter hohe Rathausturm gehört zum 1907 bis 1911 nach Plänen Hermann Billings errichteten Rathaus. Seine 27 Meter hohe Kupferhaube prägt Kiels Stadtsilhouette.",
+      "deep_data_pool": [
+        {
+          "text": "Das mittelalterliche Rathaus am Alten Markt war der stark gewachsenen Marine- und Werftenstadt zu klein geworden. Nach einem Wettbewerb entstand das neue Rathaus auf dem Gelände der früheren Gasanstalt an der Fleethörn.",
+          "tags": [
+            "stadtwachstum",
+            "rathaus"
+          ]
+        },
+        {
+          "text": "Hermann Billing entwarf den von 1907 bis 1911 errichteten Bau. Der Turm ist 106 Meter hoch; seine 27 Meter hohe Kupferhaube macht ihn zum weithin sichtbaren Orientierungspunkt.",
+          "tags": [
+            "architektur",
+            "masse"
+          ]
+        },
+        {
+          "text": "Rathaus und benachbartes Opernhaus bilden ein bewusst geplantes repräsentatives Ensemble am heutigen Rathausplatz. Das Opernhaus entstand bereits 1905 bis 1907 nach Plänen Heinrich Seelings.",
+          "tags": [
+            "ensemble",
+            "oper"
+          ]
+        },
+        {
+          "text": "Seit 1911 wird im Rathaus Stadtpolitik betrieben. Der Neubau verlagerte das Verwaltungszentrum aus der mittelalterlichen Altstadt in die damalige Vorstadt und dokumentiert Kiels rasantes Wachstum.",
+          "tags": [
+            "verwaltung",
+            "stadtentwicklung"
+          ]
+        },
+        {
+          "text": "Bomben zerstörten im Zweiten Weltkrieg Teile des Rathauses, der Turm blieb erhalten. 1950 wurde der wiederaufgebaute Bau in Anwesenheit von Bundespräsident Theodor Heuss eingeweiht.",
+          "tags": [
+            "krieg",
+            "wiederaufbau"
+          ]
+        },
+        {
+          "text": "Der Turm orientiert sich in seiner Wirkung an italienischen Campanili, ohne eine Kopie zu sein. Heller Schaft, Uhr, offene Schallzone und große grüne Kupferhaube gliedern die vertikale Silhouette.",
+          "tags": [
+            "visuell",
+            "bauform"
+          ]
+        },
+        {
+          "text": "Das Glockenspiel ist Teil des städtischen Wahrzeichens. Melodie, Spielzeiten, Führungen und Turmzugang sind veränderlich und dürfen nicht aus historischen Angaben als tägliche Zusage abgeleitet werden.",
+          "tags": [
+            "glockenspiel",
+            "orientierung"
+          ]
+        },
+        {
+          "text": "LIVE: Turmfahrten, Glockenspiel, Rathausführungen, Veranstaltungen und Sicherheitszugang aktuell auf kiel.de prüfen. Die politische Nutzung des Gebäudes kann Besuche einschränken.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": []
+    },
+    {
+      "id": "kiel_nikolaikirche",
+      "name": "Nikolaikirche",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "St. Nikolai am Alten Markt ist Kiels älteste erhaltene Kirche. Der gotische Backsteinbau, Kriegsschäden und Wiederaufbau sowie Ernst Barlachs Geistkämpfer bündeln Stadt-, Religions- und Kunstgeschichte.",
+      "deep_data_pool": [
+        {
+          "text": "Der Bau begann kurz nach der Stadtgründung um 1242. Vom Gründungsbau des mittleren 13. Jahrhunderts sind Strukturen in der Nordwand und im unteren Turmbereich erhalten. Die Kirche war von Beginn an zentraler Sakralbau der planmäßig angelegten Stadt.",
+          "tags": [
+            "mittelalter",
+            "gruendung"
+          ]
+        },
+        {
+          "text": "Im 14. Jahrhundert wurde der Bau nach dem Vorbild von St. Petri in Lübeck zur dreischiffigen Backsteinhallenkirche umgestaltet und um einen längeren Chor erweitert. Der breite Hallenraum spiegelt den Einfluss der großen Hansestadt Lübeck.",
+          "tags": [
+            "gotik",
+            "architektur"
+          ]
+        },
+        {
+          "text": "1344 entstand die große Bronzetaufe, deren Wappenschilde bürgerliches Selbstbewusstsein zeigen. Ein mittelalterlicher Altar aus dem aufgehobenen Franziskanerkloster gelangte 1541 nach St. Nikolai und verbindet die Kirche mit dem verlorenen Kloster des Stadtgründers Adolf IV.",
+          "tags": [
+            "ausstattung",
+            "franziskaner"
+          ]
+        },
+        {
+          "text": "1526 wurde in Kiel die Reformation eingeführt. Melchior Hofmann löste mit radikalen Predigten Konflikte aus, in die Martin Luther 1528 mit Briefen eingriff. St. Nikolai ist deshalb auch ein Ort der norddeutschen Reformationsgeschichte.",
+          "tags": [
+            "reformation",
+            "luther"
+          ]
+        },
+        {
+          "text": "Eine rigorose Restaurierung von 1878 bis 1884 veränderte Außenbau und Innenraum stark: neue Backsteinverblendung, andere Dächer, neugotische Details und neue Ausstattung schufen ein historistisches Mittelalterbild. Der Umbau kam außen teilweise einem Neubau nahe.",
+          "tags": [
+            "neugotik",
+            "restaurierung"
+          ]
+        },
+        {
+          "text": "Im Zweiten Weltkrieg wurde die Kirche schwer beschädigt. Beim Wiederaufbau um 1950 vereinigte Gerhard Langmaack Chor und Schiff unter einer flachen Stahlbetondecke mit schlanken Pilzpfeilern. Der heutige Innenraum ist daher eine bewusste Nachkriegsinterpretation, keine vollständige Rekonstruktion.",
+          "tags": [
+            "krieg",
+            "wiederaufbau"
+          ]
+        },
+        {
+          "text": "Vor der Kirche steht Ernst Barlachs 1928 geschaffener Geistkämpfer: Ein Engel mit erhobenem Schwert steht auf einem wolfsartigen Wesen. Die Stadt bestellte die Plastik für die Heiligengeistkirche; die Bevölkerung gab ihr den später vom Künstler übernommenen Namen.",
+          "tags": [
+            "barlach",
+            "kunst"
+          ]
+        },
+        {
+          "text": "1937 entfernten die Nationalsozialisten den Geistkämpfer als entartete Kunst. Freunde Barlachs retteten ihn vor dem Einschmelzen und versteckten ihn. Nach Rückkauf durch die Stadt erhielt die Bronze 1954 ihren heutigen Platz an St. Nikolai.",
+          "tags": [
+            "nationalsozialismus",
+            "erinnerungskultur"
+          ]
+        },
+        {
+          "text": "Visuell: Die Kirche steht direkt am Alten Markt. Backstein, kräftiger Westturm und breite Hallenform prägen das Äußere; der Geistkämpfer auf hohem Steinsockel markiert die Marktseite und ist als eigenständiges Kunstwerk zu lesen.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "LIVE: Gottesdienste, Konzerte, Öffnung, Führungen und zugängliche Kunstwerke aktuell bei der Kirchengemeinde prüfen. Sakrale Nutzung hat Vorrang; aus der Bezeichnung offene Kirche keine durchgehende Zugänglichkeit ableiten.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": []
+    },
+    {
+      "id": "kiel_kiel_hauptbahnhof",
+      "name": "Kiel Hauptbahnhof",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Der 1899 eröffnete Kopfbahnhof liegt unmittelbar an der Hörn. Kaiserportal, Kriegszerstörung, vereinfachter Wiederaufbau und Umbau ab 1999 spiegeln Kiels Verkehrs- und Stadtgeschichte.",
+      "deep_data_pool": [
+        {
+          "text": "Kiels erster Bahnhof lag seit 1844/46 weiter nördlich an der Klinke. Der neue Hauptbahnhof wurde ab 1895 näher an Hörn und wachsende Stadt gebaut; sein westlicher Teil öffnete 1899, der Ostflügel 1900.",
+          "tags": [
+            "eisenbahn",
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Während der Bauzeit fuhren Züge durch eine Lücke im neuen Gebäude weiter zum alten Bahnhof. Erst nach dessen Stilllegung konnte die Fassade geschlossen werden. Westflügel und vollständige Bahnsteighalle waren bis 1911 fertig.",
+          "tags": [
+            "bauablauf",
+            "kopfbahnhof"
+          ]
+        },
+        {
+          "text": "Auf der Ostseite lagen Fürstenzimmer. Kaiser Wilhelm II. gab für ihre Ausstattung die Jacht Hohenzollern als Vorbild vor. Kaisertreppe und geschwungene Auffahrt führten auf kurzem Weg zum Anleger der kaiserlichen Jacht.",
+          "tags": [
+            "kaiserzeit",
+            "kaisertreppe"
+          ]
+        },
+        {
+          "text": "1944 wurde der Bahnhof schwer beschädigt. Ab 1950 erfolgte ein vereinfachter Wiederaufbau mit glatterem Rotziegelmauerwerk, Rechteckfenstern und flacheren Formen; das Kaiserportal wurde vermauert.",
+          "tags": [
+            "krieg",
+            "wiederaufbau"
+          ]
+        },
+        {
+          "text": "Ab 1999 wurde der Bahnhof umfassend umgebaut. Die historische Raumhöhe der Eingangshalle wurde wiederhergestellt, das Kaiserportal geöffnet und die Kaisertreppe erneut als Ausgang zum Wasser nutzbar gemacht.",
+          "tags": [
+            "sanierung",
+            "architektur"
+          ]
+        },
+        {
+          "text": "Visuell: Der Kopfbahnhof öffnet seine Halle zum Querbahnsteig; der östliche Ausgang orientiert sich zur Hörn. Gegenüber liegen Hörnbrücke und Germaniahafen, westlich schließt das Sophienhof-Quartier an.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Die Nähe zu Fähren ist historisch beabsichtigt und bis heute besonders. Zu Fuß sind Schwedenkai, Norwegenkai über die Hörnbrücke und Fördeschiffe erreichbar; konkrete Wege hängen von Terminal- und Baustellensituation ab.",
+          "tags": [
+            "umstieg",
+            "hafen"
+          ]
+        },
+        {
+          "text": "LIVE: Abfahrten, Gleise, Fern- und Regionalverbindungen, Aufzüge, Baustellen, Gepäckangebote und Schienenersatzverkehr aktuell bei DB, NAH.SH und KVG prüfen. Historische Linien nicht als heutigen Fahrplan behandeln.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": []
+    },
+    {
+      "id": "kiel_holstenstrasse",
+      "name": "Holstenstraße",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Die Holstenstraße verbindet Alten Markt und südliche Innenstadt. Aus der mittelalterlichen Hauptachse wurde 1953 Deutschlands erste für den Autoverkehr dauerhaft gesperrte Einkaufsstraße.",
+      "deep_data_pool": [
+        {
+          "text": "Die Straße folgt einer Hauptachse der 1242 gegründeten Stadt. Vom Markt führte sie zum südlichen Holstentor und weiter ins Land. Ihr Verlauf verbindet den mittelalterlichen Kern bis heute mit der später gewachsenen Vorstadt.",
+          "tags": [
+            "mittelalter",
+            "stadtgrundriss"
+          ]
+        },
+        {
+          "text": "Der Name verweist auf das Holstentor und das südlich gelegene Holstein. Handel, Markt und Zugangstor machten die Straße früh zu einer zentralen Geschäfts- und Verkehrsachse der kleinen Altstadt.",
+          "tags": [
+            "name",
+            "handel"
+          ]
+        },
+        {
+          "text": "Kiels Innenstadt wurde im Zweiten Weltkrieg großflächig zerstört. Der Wiederaufbau veränderte Parzellen, Fassaden und Straßenräume; nur wenige ältere Gebäude überstanden die Bomben. Die heutige Holstenstraße ist daher wesentlich Nachkriegsstadt.",
+          "tags": [
+            "krieg",
+            "wiederaufbau"
+          ]
+        },
+        {
+          "text": "Am 12. Dezember 1953 wurde der obere Abschnitt für den Autoverkehr gesperrt. Die Holstenstraße gilt damit als erste dauerhaft eingerichtete Fußgänger-Einkaufsstraße Deutschlands und wurde zum Vorbild für viele Innenstädte.",
+          "tags": [
+            "fussgaengerzone",
+            "1953"
+          ]
+        },
+        {
+          "text": "Die Umwandlung war keine reine Verschönerung, sondern eine neue Trennung von Verkehrsarten im Wiederaufbau. Warenanlieferung, Busachsen und Parken wurden an die Ränder verlagert, während Einkaufen und Gehen den Kernraum bestimmten.",
+          "tags": [
+            "stadtplanung",
+            "verkehr"
+          ]
+        },
+        {
+          "text": "Am nördlichen Ende öffnet sich der Alte Markt mit Nikolaikirche; südlich folgen Holstenplatz und Bahnhofsumfeld. Bootshafen und Holstenfleet liegen östlich beziehungsweise in unmittelbarer Nähe und erinnern an die frühere Wasserumgrenzung.",
+          "tags": [
+            "orientierung",
+            "quer"
+          ]
+        },
+        {
+          "text": "Die Blaue Linie aus im Pflaster liegenden Klinkern verbindet Hauptbahnhof und Kreuzfahrtterminal und führt durch die Innenstadt. Sie dient Gästen als sichtbare Orientierung, ohne die historische Straßenachse zu ersetzen.",
+          "tags": [
+            "blaue_linie",
+            "visuell"
+          ]
+        },
+        {
+          "text": "Aktuelle Umgestaltungen entwickeln Holstenstraße, Asmus-Bremer-Platz und Hafenstraße als zusammenhängenden öffentlichen Raum neu. Das Holstenfleet behält dabei eine eigene Material- und Wasserlandschaft am Eingang zur Altstadtinsel.",
+          "tags": [
+            "umbau",
+            "gegenwart"
+          ]
+        },
+        {
+          "text": "Visuell: Die Straße ist eine lineare Fußgängerzone mit stark wechselnder Nachkriegsarchitektur. Am oberen Ende erscheinen Markt und Kirchturm; Richtung Süden wird der Raum breiter und geht in Plätze und jüngere Einkaufsbauten über.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "LIVE: Baustellen, Ladenbelegung, Märkte, Veranstaltungen und Durchgänge aktuell bei der Stadt Kiel prüfen. Geschäfte und Gastronomie sind keine stabilen historischen Packfakten.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": []
+    },
+    {
+      "id": "kiel_alter_markt",
+      "name": "Alter Markt",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Der Alte Markt ist der historische Mittelpunkt der 1242 gegründeten Altstadt. Nikolaikirche, verlorenes Rathaus, Persianische Häuser und die Umgestaltung von 1972 zeigen erhaltene und zerstörte Schichten.",
+      "deep_data_pool": [
+        {
+          "text": "Der Platz entstand mit der planmäßigen Stadtgründung und lag im Zentrum der kleinen Altstadtinsel. Bis 1987 hieß er schlicht Markt; der Zusatz Alt unterscheidet ihn heute von jüngeren Stadtplätzen.",
+          "tags": [
+            "stadtgruendung",
+            "name"
+          ]
+        },
+        {
+          "text": "St. Nikolai steht als älteste erhaltene Kirche direkt am Platz. Markt, Kirche und Rathaus bildeten die zentralen Institutionen der mittelalterlichen Stadt: Handel, Religion und kommunale Herrschaft.",
+          "tags": [
+            "mittelalter",
+            "stadtstruktur"
+          ]
+        },
+        {
+          "text": "Von etwa 1266 bis 1943 stand das Alte Rathaus am Markt. Am 24. März 1848 wurde hier zu Beginn der Schleswig-Holsteinischen Erhebung die provisorische Regierung ausgerufen. Bomben zerstörten das Gebäude bis auf Kellerreste.",
+          "tags": [
+            "altes_rathaus",
+            "1848"
+          ]
+        },
+        {
+          "text": "Persianische Häuser schlossen den Platz vor der Kirche. Herzog Friedrich III. plante sie im 17. Jahrhundert als Packhäuser für einen Seidenhandel mit Persien; das Vorhaben scheiterte, die Bauten wurden anders genutzt.",
+          "tags": [
+            "persianische_haeuser",
+            "handel"
+          ]
+        },
+        {
+          "text": "Gründerzeitliche Geschäftshäuser ersetzten im 19. Jahrhundert viele ältere Bürgerhäuser. Der Zweite Weltkrieg vernichtete wiederum große Teile dieser Bebauung. Der Platzrand ist deshalb kein geschlossenes historisches Ensemble.",
+          "tags": [
+            "gründerzeit",
+            "krieg"
+          ]
+        },
+        {
+          "text": "Für die Olympischen Spiele 1972 gestaltete Wilhelm Neveling den Markt grundlegend um. Eine abgesenkte, mit Granit gepflasterte Mitte und Pavillons trennten den Platz stärker vom Straßennetz; diese Nachkriegsmoderne prägt sein Bild.",
+          "tags": [
+            "1972",
+            "stadtplanung"
+          ]
+        },
+        {
+          "text": "Seit 1975 knüpft der Kieler Umschlag als Stadtfest an historische Markt- und Handelstraditionen an. Programm, Termin und Nutzungen sind jedoch LIVE und dürfen nicht als dauerhafter Platzbetrieb beschrieben werden.",
+          "tags": [
+            "kieler_umschlag",
+            "tradition"
+          ]
+        },
+        {
+          "text": "Visuell: Die Nikolaikirche dominiert eine Platzseite, während die abgesenkte Steinfläche und Pavillons den Innenraum markieren. Das fehlende Alte Rathaus ist als historische Leerstelle zu verstehen.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "LIVE: Markt, Gastronomie, Veranstaltungen, Baustellen und Kirchenzugang aktuell prüfen. Die erhaltenen Rathauskeller liegen in privat genutzten Bereichen und sind nicht automatisch öffentlich zugänglich.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": []
+    },
+    {
+      "id": "kiel_seegarten",
+      "name": "Seegarten",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Der Seegarten vor der Fischhalle wandelte sich vom Werftgelände zum Ausflugsort, olympischen Aufmarschplatz und Museumsufer. Die Museumsbrücke bewahrt historische Arbeitsschiffe.",
+      "deep_data_pool": [
+        {
+          "text": "Bis etwa 1884 lagen hier auf Holzschiffbau spezialisierte Werften, darunter Conradi sowie Reuter & Ihms. Nach deren Ende wurde das Ufer als Garten- und Aufenthaltsgelände neu geordnet.",
+          "tags": [
+            "werften",
+            "19_jahrhundert"
+          ]
+        },
+        {
+          "text": "Ab 1885 entstanden drei Seebrücken, Wirtschaftsgebäude und ein dreigeschossiges Restaurant mit Aussichtsturm. 1889 nahm der Seegarten als Ausflugs- und Unterhaltungsort Fahrt auf.",
+          "tags": [
+            "restaurant",
+            "ausflug"
+          ]
+        },
+        {
+          "text": "Die Anleger waren wichtige Ausgangspunkte der Personendampfschifffahrt auf der Förde. Garten, Restaurant und Schiffe verbanden Freizeit an Land mit Ausflügen auf dem Wasser.",
+          "tags": [
+            "foerdeschifffahrt",
+            "freizeit"
+          ]
+        },
+        {
+          "text": "1929 ergänzte eine Bootstankstelle das Gelände. 1935 wurden Restaurant und Nebengebäude abgerissen; für die olympischen Segelwettbewerbe 1936 wurde der Garten zu einem gepflasterten Aufmarschplatz umgestaltet.",
+          "tags": [
+            "olympia_1936",
+            "umbau"
+          ]
+        },
+        {
+          "text": "Ab 1966 diente der Platz Gästen der Oslo-Fähre als Parkplatz; Sandaufschüttungen vergrößerten später die nutzbare Fläche. Der Name Seegarten blieb erhalten, obwohl von der grünen Anlage wenig übrig war.",
+          "tags": [
+            "faehre",
+            "parkplatz"
+          ]
+        },
+        {
+          "text": "Seit der Eröffnung des Schifffahrtsmuseums 1978 ist der Seegarten dessen Vorplatz. Eine der früheren Seebrücken dient als Museumsbrücke, eine weitere weiterhin dem Fährverkehr; die dritte wurde abgebrochen.",
+          "tags": [
+            "museum",
+            "seebruecken"
+          ]
+        },
+        {
+          "text": "An der Museumsbrücke liegen Bussard, Feuerlöschboot Kiel und Seenotrettungskreuzer Hindenburg. Die drei Arbeitsschiffe stehen für Seezeichenpflege, Hafenbrandschutz und Rettung auf See.",
+          "tags": [
+            "museumsbruecke",
+            "schiffe"
+          ]
+        },
+        {
+          "text": "Visuell: Fischhalle, breite befestigte Vorfläche und historische Schiffe bilden das Ensemble. Der heutige steinerne Raum erklärt den Namen Garten nicht; erst die Geschichte von Promenade, Grün und Restaurant löst den Widerspruch.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "LIVE: Zugang und Saison der Museumsbrücke, Schiffsbesichtigung, Fördefähr-Anleger, Veranstaltungen und Baustellen aktuell beim Museum und der SFK prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": []
+    },
+    {
+      "id": "kiel_schleusen_holtenau",
+      "name": "Schleusen Kiel-Holtenau",
+      "general_info": "Die Holtenauer Schleusen sichern den östlichen Zugang zum Nord-Ostsee-Kanal. Kleine Kammern von 1895 und Große Kammern von 1914 machen hier zwei Ausbauphasen einer internationalen Seeschifffahrtsstraße sichtbar.",
+      "deep_data_pool": [
+        {
+          "text": "Der Nord-Ostsee-Kanal ging 1895 als Kaiser-Wilhelm-Kanal in Betrieb. An beiden Enden entstanden je zwei Kammern, heute Kleine Schleusen genannt. Sie begrenzten Strömung, obwohl der mittlere Wasserstand zwischen Kieler Förde und Kanal meist nur um Dezimeter differiert; Wind und Gezeiten können diese Differenz jedoch stark verändern.",
+          "tags": [
+            "geschichte",
+            "wasserbau"
+          ]
+        },
+        {
+          "text": "Der rasch wachsende Schiffsverkehr und größere Schiffe führten zur ersten Kanalerweiterung. In Kiel-Holtenau wurden von 1911 bis 1914 zwei Große Schleusen gebaut. Ihre Kammern besitzen nach Angaben der Wasserstraßenverwaltung 310 Meter Nutzlänge und 42 Meter Nutzbreite; sie prägen bis heute den regulären Seeschiffsverkehr.",
+          "tags": [
+            "technik",
+            "ausbau"
+          ]
+        },
+        {
+          "text": "Eine Schleusung gleicht nicht einfach einen festen Gezeitenhub aus. Tore trennen Kanal und Förde, Wasser wird kontrolliert ein- oder ausgelassen und das Schiff bleibt an Leinen beziehungsweise unter nautischer Führung in der Kammer. So werden gefährliche Strömungen im langen Kanal vermieden.",
+          "tags": [
+            "funktion",
+            "schifffahrt"
+          ]
+        },
+        {
+          "text": "Die Kleine Schleuse ist seit Juni 2014 außer Betrieb. Dieser Status, Baustellenbereiche und die Verfügbarkeit einzelner Großer Kammern können sich ändern. Dauerhaft stabil ist die historische Zweiteilung der Anlage in die 1895 eröffneten kleinen und die 1914 eröffneten großen Kammern.",
+          "tags": [
+            "geschichte",
+            "quellenkritik"
+          ]
+        },
+        {
+          "text": "Die offizielle Besucherplattform liegt auf der Südseite in Kiel-Wik, nicht am Tiessenkai. Sie steht über der Schleusentorkammer Nummer 4 auf einem Torbunker aus dem Zweiten Weltkrieg. Von oben lassen sich Tore, Kammern und Schiffe aus unmittelbarer Nähe beobachten, ohne das gesicherte Betriebsgelände zu betreten.",
+          "tags": [
+            "besuch",
+            "orientierung"
+          ]
+        },
+        {
+          "text": "Auf der Plattform erläutern Tafeln und Modelle die Schleusenfunktion. Der historische Flyer nennt einen Aufzug für barrierefreien Zugang; aktuelle Zugänglichkeit muss trotzdem geprüft werden. Die Anlage ist kritische Verkehrsinfrastruktur, daher können Sicherheitslagen, Bauarbeiten oder Betriebsgründe den Besuch kurzfristig einschränken.",
+          "tags": [
+            "barrierefreiheit",
+            "sicherheit"
+          ]
+        },
+        {
+          "text": "Visuell: Von Wik erkennt man die langen parallelen Kammern, massive Mittelmauern, bewegliche Schleusentore, Leitstände und wartende Schiffe. Die Plattform selbst ist ein erhöhter Baukörper mit Geländern und Informationselementen über dem südlichen Torbereich; sie ist nicht mit dem Leuchtturm am Nordufer zu verwechseln.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Quer: Nordufer, Tiessenkai, Kanalpackhaus und Leuchtturm erzählen die repräsentative Seite der Kanaleröffnung. Die Aussichtsplattform in Wik zeigt dagegen den arbeitenden Wasserbau. Beide Ufer ergänzen sich, sind aber durch Schleusenbecken und Kanal getrennt; die direkte Luftlinie ist kein kurzer Fußweg.",
+          "tags": [
+            "quer",
+            "stadtraum"
+          ]
+        },
+        {
+          "text": "Der Kanal ist eine Bundeswasserstraße und Teil internationaler Handelsrouten. Schleusenbetrieb, Verkehrslenkung, Lotsen und Kanalsteuerer bilden ein zusammenhängendes System. Beobachtete Wartezeiten sagen deshalb nicht allein etwas über technische Probleme aus; Schiffsgröße, Gegenverkehr und Verkehrsgruppen beeinflussen den Ablauf.",
+          "tags": [
+            "logistik",
+            "einordnung"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnung und Barrierefreiheit der Besucherplattform, Zugangsrouten, Führungen, Sicherheitsauflagen, aktuelle Schleusenkammern, Bauphasen und erwartete Schiffsbewegungen ausschließlich bei WSA NOK und Kiel-Marketing prüfen. Keine garantierte Schiffsankunft oder uneingeschränkte Sicht aus historischen Angaben ableiten.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Wo kann man die Schleusen am besten ansehen?",
+          "a": "Von der offiziellen Aussichtsplattform auf der Südseite in Kiel-Wik; sie liegt über einem Torbunker an der Großen Schleuse."
+        },
+        {
+          "q": "Warum braucht der Kanal an der Ostsee überhaupt Schleusen?",
+          "a": "Sie verhindern starke Strömungen durch wechselnde Wasserstände zwischen Förde, Kanal, Elbe und Nordsee und ermöglichen kontrollierten Schiffsverkehr."
+        }
+      ]
+    },
+    {
+      "id": "kiel_nord_ostsee_kanal",
+      "name": "Nord-Ostsee-Kanal",
+      "general_info": "Der 98,6 Kilometer lange Nord-Ostsee-Kanal verbindet die Kieler Förde mit der Elbe bei Brunsbüttel. Die 1895 eröffnete Bundeswasserstraße verkürzt den Seeweg um Skagen für viele Schiffe deutlich.",
+      "deep_data_pool": [
+        {
+          "text": "Der Kanal wurde von 1887 bis 1895 gebaut und als Kaiser-Wilhelm-Kanal eröffnet. Er griff teilweise die Idee des älteren Eiderkanals auf, war aber als moderne Seeschifffahrtsstraße dimensioniert. Seit 1948 trägt er in Deutschland amtlich den Namen Nord-Ostsee-Kanal; international ist Kiel Canal gebräuchlich.",
+          "tags": [
+            "geschichte",
+            "name"
+          ]
+        },
+        {
+          "text": "Zwischen 1907 und 1914 wurde die Wasserstraße verbreitert und vertieft. Zu dieser Erweiterung gehörten die Großen Schleusen in Holtenau und Brunsbüttel sowie neue Hochbrücken. Der Kanal ist deshalb kein Bauwerk eines einzigen Zustands, sondern ein über Generationen angepasstes technisches System.",
+          "tags": [
+            "ausbau",
+            "technik"
+          ]
+        },
+        {
+          "text": "Die offizielle Länge beträgt 98,6 Kilometer. Der Kanal erspart gegenüber der Route um Skagen je nach Start und Ziel ungefähr 250 Seemeilen beziehungsweise rund 460 Kilometer. Diese Verkürzung senkt Fahrzeit und Brennstoffbedarf, ersetzt aber nicht die nautischen Regeln, Lotsen- und Gebührenprüfung.",
+          "tags": [
+            "geografie",
+            "schifffahrt"
+          ]
+        },
+        {
+          "text": "Zehn Hochbrücken, zwei Tunnel, Fähren und Ausweichstellen verbinden oder kreuzen den Kanal. Brücken müssen eine große lichte Höhe bieten, damit Seeschiffe passieren können. Die kostenlosen Kanalfähren gehören zum Ersatz für Wege, die der Bau der Bundeswasserstraße durchschnitten hat.",
+          "tags": [
+            "infrastruktur",
+            "querungen"
+          ]
+        },
+        {
+          "text": "Entlang des Kanals verkehren Frachter, Tanker, Feeder, Spezialschiffe, Marineeinheiten und Sportboote unter unterschiedlichen Regeln. Der Blick vom Ufer zeigt daher globale Logistik in einer ländlich und städtisch wechselnden Landschaft; ein einzelnes großes Schiff ist nie ein garantierter Programmpunkt.",
+          "tags": [
+            "logistik",
+            "alltag"
+          ]
+        },
+        {
+          "text": "Visuell: In Kiel-Holtenau beginnt der Kanal hinter den Schleusenkammern als breite, geradlinige Wasserfläche. Leitdalben, Signale, Betriebsgebäude und hohe Brücken unterscheiden ihn von einem natürlichen Fluss. Am Tiessenkai sieht man die Fördeseite, weiter westlich den eigentlichen Kanalraum.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Quer: Der Leuchtturm markiert die östliche Zufahrt und erinnert an die Eröffnung; die Schleusen kontrollieren den Wasserübergang. Die Holtenauer Hochbrücken zeigen die verkehrliche Überquerung. Zusammen erklären diese drei Orte Navigation, Wasserbau und Landverkehr.",
+          "tags": [
+            "quer",
+            "technikgeschichte"
+          ]
+        },
+        {
+          "text": "Rad- und Fußwege begleiten lange Abschnitte, verlaufen aber nicht lückenlos identisch und können durch Betriebsflächen, Baustellen oder Fährübergänge unterbrochen sein. Für eine Tour müssen Uferseite, Brücken oder Fähren und Rückweg konkret geplant werden; die reine Kanallänge ist keine passende Tagesetappe für alle.",
+          "tags": [
+            "aktivitaet",
+            "orientierung"
+          ]
+        },
+        {
+          "text": "LIVE: Verkehrslage, Sperrungen, Fährbetrieb, Baustellen, Radwegführung, Schiffsankünfte und Besuchszugänge aktuell bei WSA NOK und den Verkehrsbetreibern prüfen. Angaben zur weltweiten Rangfolge nach Verkehrszahlen nur mit aktuellem Bezugsjahr verwenden.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Wie lang ist der Nord-Ostsee-Kanal?",
+          "a": "98,6 Kilometer zwischen Kiel-Holtenau und Brunsbüttel."
+        },
+        {
+          "q": "Kann man den ganzen Kanal an einem Tag mit dem Rad fahren?",
+          "a": "Die Distanz ist sportlich möglich, erfordert aber genaue Planung von Uferwegen, Querungen, Fähren und Rücktransport."
+        }
+      ]
+    },
+    {
+      "id": "kiel_leuchtturm_kiel_holtenau",
+      "name": "Leuchtturm Kiel-Holtenau",
+      "general_info": "Der 1895 in Betrieb genommene Leuchtturm markiert die Zufahrt zum Nord-Ostsee-Kanal. Seezeichen, Drei-Kaiser-Halle und Kanalgrundstein verbinden Navigation mit wilhelminischer Repräsentation.",
+      "deep_data_pool": [
+        {
+          "text": "Der heutige Leuchtturm entstand zusammen mit dem Nord-Ostsee-Kanal. Kaiser Wilhelm I. legte 1887 den Grundstein für den Kanal im Fundament des späteren Turms; Wilhelm II. eröffnete die Wasserstraße 1895. Das Bauwerk ist damit Seezeichen und materieller Erinnerungsort der Kanalgründung.",
+          "tags": [
+            "geschichte",
+            "kanal"
+          ]
+        },
+        {
+          "text": "Die achteckige Drei-Kaiser-Halle erinnert an Wilhelm I., Friedrich III. und Wilhelm II., die während der Bauzeit regierten. Ihre Ausstattung gehört zur politischen Repräsentation des Kaiserreichs und sollte den technischen Kanalbau als nationales Prestigeprojekt inszenieren.",
+          "tags": [
+            "innenraum",
+            "kaiserreich"
+          ]
+        },
+        {
+          "text": "Über dem Haupteingang reichen sich zwei Meerjungfrauen die Hände. Das Relief von Ernst Herter personifiziert Nordsee und Ostsee und übersetzt den Zweck des Kanals in ein leicht lesbares Bild. Es ist eines der wichtigsten sichtbaren Details am Turm.",
+          "tags": [
+            "kunst",
+            "symbolik"
+          ]
+        },
+        {
+          "text": "Der Turm steht auf aufgeschüttetem Gelände am Nordufer der Kanalzufahrt. Mit Tiessenkai, historischem Kanalpackhaus und Schleusen bildet er ein Ensemble, in dem Versorgung, Schifffahrt, Navigation und staatliche Selbstdarstellung unmittelbar nebeneinanderliegen.",
+          "tags": [
+            "stadtraum",
+            "ensemble"
+          ]
+        },
+        {
+          "text": "Das Leuchtfeuer ist bis heute ein aktives Navigationszeichen und wird technisch überwacht. Seine konkrete Kennung und Reichweite gehören zur nautischen Fachinformation; für eine Besuchsgeschichte genügt die stabile Funktion als Einfahrtsfeuer an der östlichen Kanalzufahrt.",
+          "tags": [
+            "navigation",
+            "technik"
+          ]
+        },
+        {
+          "text": "Visuell: Der gedrungene rote Backsteinturm besitzt einen breiten Sockel, eine polygonale Halle und eine dunkle Laterne. Am Tiessenkai steht er deutlich erhöht am Wasser. Das Meerjungfrauenrelief über der Tür und die historistische Gliederung unterscheiden ihn von modernen Zweckleuchtfeuern.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Quer: Das nahe Kanalpackhaus stammt noch aus der Zeit des Eiderkanals. Traditionssegler am Tiessenkai, Leuchtturm und moderne Seeschiffe vor den Schleusen lassen mehrere Jahrhunderte Kanal- und Hafenentwicklung an einem Uferabschnitt ablesen.",
+          "tags": [
+            "quer",
+            "hafen"
+          ]
+        },
+        {
+          "text": "Der Turm ist kein frei zugänglicher Aussichtsturm. Trauungen und Sonderzugänge zeigen, dass Innenräume genutzt werden können, begründen aber keine allgemeine Besichtigungsmöglichkeit. Außenansicht und Uferensemble sind vom Tiessenkai erfahrbar.",
+          "tags": [
+            "besuch",
+            "quellenkritik"
+          ]
+        },
+        {
+          "text": "LIVE: Innenzugang, Trauungen, Führungen, Sperrungen am Tiessenkai und aktuelle nautische Angaben ausschließlich bei Kiel-Marketing und WSA NOK prüfen. Öffnungszeiten externer Portale nicht als dauerhafte Eigenschaft des Leuchtturms speichern.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Warum heißt der Innenraum Drei-Kaiser-Halle?",
+          "a": "Er erinnert an die drei Kaiser, die während der Kanalbauzeit von 1887 bis 1895 regierten."
+        },
+        {
+          "q": "Kann man auf den Leuchtturm steigen?",
+          "a": "Er ist kein regulär frei zugänglicher Aussichtsturm; besondere Innenzugänge müssen aktuell geprüft werden."
+        }
+      ]
+    },
+    {
+      "id": "kiel_marine_ehrenmal_laboe",
+      "name": "Marine-Ehrenmal Laboe",
+      "general_info": "Das 1936 eingeweihte Marine-Ehrenmal begann als national geprägtes Gefallenendenkmal. Seit 1954 wurde es zu einer internationalen Gedenkstätte für auf See Gebliebene und zu einem Mahnmal friedlicher Seefahrt umgedeutet.",
+      "deep_data_pool": [
+        {
+          "text": "Der ehemalige Obermaat Wilhelm Lammertz schlug 1925 ein Denkmal für die im Ersten Weltkrieg gefallenen Angehörigen der Kaiserlichen Marine vor. 1927 wurde auf dem Gelände einer früheren Küstenbatterie der Grundstein gelegt. Marinevereine und Spender finanzierten den langwierigen Bau weitgehend.",
+          "tags": [
+            "geschichte",
+            "erster_weltkrieg"
+          ]
+        },
+        {
+          "text": "Der expressionistische Entwurf stammt von Gustav August Munzer. Der etwa 85 Meter hohe, geklinkerte Turm ist keine Nachbildung eines Schiffsteils, obwohl seine Silhouette oft als Bug, Segel oder Turm gelesen wird. Munzer wollte eine eigenständige, weithin sichtbare Monumentalform schaffen.",
+          "tags": [
+            "architektur",
+            "expressionismus"
+          ]
+        },
+        {
+          "text": "Die Einweihung am 30. Mai 1936 fand im nationalsozialistischen Deutschland statt. Der Ort verband Trauer mit nationalistischen und revanchistischen Deutungen von Marine und Seemacht. Eine heutige Darstellung muss diese Entstehung kritisch benennen und darf das Monument nicht als zeitlos neutralen Erinnerungsort behandeln.",
+          "tags": [
+            "nationalsozialismus",
+            "erinnerungskultur"
+          ]
+        },
+        {
+          "text": "Nach 1945 beschlagnahmten die Alliierten die Anlage. 1954 erhielt der neu gegründete Deutsche Marinebund sie zurück und änderte die Widmung in Richtung Versöhnung und Gedenken an Tote aller Seiten. Später wurde die Formulierung weiter internationalisiert: Gedenkstätte für die auf See Gebliebenen aller Nationen und Mahnmal friedlicher Seefahrt.",
+          "tags": [
+            "nachkrieg",
+            "umdeutung"
+          ]
+        },
+        {
+          "text": "Die Anlage umfasst neben dem Turm eine etwa 7000 Quadratmeter große, mit Wesersandstein belegte Freifläche, eine Historische Halle und unterirdische beziehungsweise sockelnahe Gedenkräume. Der Aufstieg im Turm führt zu einer Aussichtsplattform mit weitem Blick über Kieler Förde und Ostsee.",
+          "tags": [
+            "anlage",
+            "aussicht"
+          ]
+        },
+        {
+          "text": "In der Historischen Halle werden Marine- und Schifffahrtsgeschichte sowie die Entwicklung des Gedenkortes vermittelt. Die Ausstellung wurde 2010 nach Umbau neu eröffnet. Ihre konkrete Präsentation kann sich ändern; stabil ist, dass der Ort selbst zum Gegenstand kritischer Erinnerungskultur geworden ist.",
+          "tags": [
+            "ausstellung",
+            "museum"
+          ]
+        },
+        {
+          "text": "Von 1993 bis 1998 wurde die Anlage umfassend saniert. Parallel überprüften Fachleute problematische und missverständliche Aussagen. 1996 kamen Gedenkstätten für die Deutsche Marine und die zivile Schifffahrt hinzu. Die Umdeutung ist deshalb ein fortdauernder Prozess und kein einmaliger Schlussstrich.",
+          "tags": [
+            "denkmalpflege",
+            "rezeption"
+          ]
+        },
+        {
+          "text": "Visuell: Der hohe, leicht gekrümmte Klinkerturm steht auf einer monumentalen Terrasse oberhalb des Strandes. Seine vertikale Silhouette ist schon von der Förde sichtbar. Vom Strand führt der Blick zugleich zum aufgestellten U-Boot U 995; beide Orte sind räumlich nah, inhaltlich aber getrennt zu erklären.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Quer: U 995 zeigt die Enge und Technik eines konkreten Kriegsschiffes. Das Ehrenmal behandelt Verlust, politische Deutung und Erinnerung. Ein gemeinsamer Besuch ist praktisch, sollte aber nicht Technikfaszination und Gedenken vermischen. Der Strand von Laboe und die Fördefähre setzen beide in eine heutige Küstenlandschaft.",
+          "tags": [
+            "quer",
+            "einordnung"
+          ]
+        },
+        {
+          "text": "Die Aussicht macht die Geografie der Kieler Förde lesbar: gegenüber liegen Westufer und Schifffahrtsroute, südlich zieht sich die Förde nach Kiel, nördlich öffnet sie sich zur Ostsee. Wetter und Sichtweite bestimmen, welche Küstenpunkte erkennbar sind.",
+          "tags": [
+            "geografie",
+            "aussicht"
+          ]
+        },
+        {
+          "text": "Der Standort liegt in Laboe und gehört nicht zum Kieler Stadtgebiet. Als Ausflugsziel ist er von Kiel über Land und saisonal beziehungsweise fahrplanabhängig über die Förde erreichbar. Diese Verwaltungsgrenze muss bei lokalen Aussagen erhalten bleiben.",
+          "tags": [
+            "location_isolation",
+            "orientierung"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Turmzugang, Aufzugstatus, Ausstellungen, Gruppenangebote, Barrierefreiheit, Sicherheitsregeln und Anreise per Fördefähre ausschließlich beim Deutschen Marinebund und den Verkehrsbetrieben prüfen. Wetterabhängige Aussicht nie versprechen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Ist das Marine-Ehrenmal ein Bau aus der NS-Zeit?",
+          "a": "Der Bau begann 1927, wurde 1936 im NS-Staat eingeweiht und trug nationalistische Deutungen; seit 1954 wurde seine Widmung mehrfach international und friedensorientiert verändert."
+        },
+        {
+          "q": "Gehört das Ehrenmal zu Kiel?",
+          "a": "Nein, es steht in der Gemeinde Laboe, ist aber ein gut kombinierbares Ausflugsziel an der Kieler Förde."
+        }
+      ]
+    },
+    {
+      "id": "kiel_u_boot_u_995_laboe",
+      "name": "U-Boot U 995 Laboe",
+      "general_info": "U 995 ist ein erhaltenes deutsches U-Boot des Typs VII C/41. Es diente ab 1943 im Zweiten Weltkrieg, fuhr später als norwegische Kaura und steht seit 1972 als technisches Museum am Strand von Laboe.",
+      "deep_data_pool": [
+        {
+          "text": "U 995 wurde bei Blohm & Voss in Hamburg gebaut und am 16. September 1943 in Dienst gestellt. Es gehört zum Typ VII C/41, einer Weiterentwicklung des meistgebauten deutschen U-Boot-Typs. Das Boot wurde überwiegend im Nordmeer gegen alliierte Geleitzüge und Sicherungskräfte eingesetzt.",
+          "tags": [
+            "geschichte",
+            "zweiter_weltkrieg"
+          ]
+        },
+        {
+          "text": "Das Boot macht die materielle Seite des U-Boot-Krieges sichtbar, darf aber nicht von dessen Folgen getrennt werden. Deutsche U-Boote griffen Versorgungswege an; Besatzungen und gegnerische Seeleute starben in großer Zahl. Technikgeschichte muss hier in die Gewaltgeschichte des Seekrieges eingeordnet werden.",
+          "tags": [
+            "krieg",
+            "einordnung"
+          ]
+        },
+        {
+          "text": "Nach der deutschen Kapitulation lag U 995 in Norwegen. Die norwegische Marine übernahm es, modernisierte es und setzte es ab 1952 als Kaura mit der Kennung S-309 ein. Diese zweite Dienstphase erklärt, warum der heutige Zustand nicht in jedem Detail exakt dem Auslieferungszustand von 1943 entspricht.",
+          "tags": [
+            "norwegen",
+            "nachkrieg"
+          ]
+        },
+        {
+          "text": "Norwegen gab das Boot 1965 an die Bundesrepublik Deutschland zurück. Im Marinearsenal Kiel wurde es für die Museumsnutzung hergerichtet und weitgehend in einen Zustand zurückversetzt, der die deutsche Kriegszeit vermittelt. Restaurierung und Umbauten müssen bei technischen Detailfragen mitgedacht werden.",
+          "tags": [
+            "museumsgeschichte",
+            "restaurierung"
+          ]
+        },
+        {
+          "text": "Am 13. März 1972 transportierten zwei Schwimmkräne U 995 nach Laboe. Dafür wurde ein etwa 500 Meter langer, drei Meter tiefer und 42 Meter breiter Kanal ausgebaggert. Das Boot wurde am Strand auf ein vorbereitetes Fundament gesetzt und ist seither trocken von außen und innen zugänglich.",
+          "tags": [
+            "transport",
+            "technik"
+          ]
+        },
+        {
+          "text": "Im Inneren folgen auf engem Raum Torpedoräume, Unterkünfte, Zentrale, Funk- und Maschinenbereiche. Schlafplätze, Leitungen, Instrumente und Schotten zeigen, dass fast jeder Kubikmeter mehreren Funktionen diente. Die niedrigen Durchgänge und engen Fluchtwege sind ein zentraler körperlicher Eindruck.",
+          "tags": [
+            "innenraum",
+            "alltag"
+          ]
+        },
+        {
+          "text": "Ein Typ-VII-Boot war für eine Besatzung von ungefähr 45 Mann ausgelegt, je nach Einsatz konnte die Zahl abweichen. Privatsphäre war kaum vorhanden; Kojen wurden teilweise geteilt, Vorräte lagen in Wohnbereichen und Feuchtigkeit, Dieselgeruch, Hitze oder Kälte prägten den Alltag.",
+          "tags": [
+            "besatzung",
+            "alltag"
+          ]
+        },
+        {
+          "text": "Visuell: Das graue Boot liegt auf einem Sockel direkt am Strand unterhalb des Marine-Ehrenmals. Der schmale Rumpf, Turm, Deckgeschützbereich und die geöffneten Besucherzugänge sind von außen erkennbar. Der Eingang führt nicht in eine großzügige Ausstellungshalle, sondern in den Originalkörper eines U-Bootes.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Die Besichtigung verläuft durch sehr enge Räume und über hohe Schotten. Menschen mit eingeschränkter Mobilität, Platzangst oder Gleichgewichtsproblemen sollten die aktuelle Eignung vorab prüfen. Ein Rückweg gegen die Besucherführung kann betrieblich unmöglich sein.",
+          "tags": [
+            "barrierefreiheit",
+            "sicherheit"
+          ]
+        },
+        {
+          "text": "Quer: Das unmittelbar benachbarte Marine-Ehrenmal thematisiert Gedenken und seine politische Veränderung. U 995 ist ein technisches Objekt mit konkreter Einsatzgeschichte. Beide sollten gemeinsam kritisch gelesen werden, ohne das U-Boot zum Abenteuerobjekt oder das Ehrenmal zur bloßen Aussichtskanzel zu reduzieren.",
+          "tags": [
+            "quer",
+            "erinnerungskultur"
+          ]
+        },
+        {
+          "text": "Der Standort in Laboe liegt außerhalb Kiels. Eine Anreise über die Förde kann den historischen Hafen- und Schifffahrtsraum sichtbar machen, hängt aber von Saison und Fahrplan ab. Über Land bestehen Bus- und Straßenverbindungen, deren aktuelle Dauer nicht stabil ist.",
+          "tags": [
+            "orientierung",
+            "location_isolation"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnung, Eintritt, Besucherführung, Wartezeiten, Innenzugang, Alters- oder Sicherheitsregeln, Barrierefreiheit, Restaurierungsarbeiten und Anreise aktuell beim Deutschen Marinebund und den Verkehrsunternehmen prüfen. Keine uneingeschränkte Begehbarkeit aus dem Museumsstatus ableiten.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Ist U 995 innen original erhalten?",
+          "a": "Es ist ein originales Boot, wurde aber in Norwegen umgebaut und später für die Museumsnutzung sowie einen angenäherten Kriegszustand restauriert."
+        },
+        {
+          "q": "Ist die Besichtigung barrierefrei?",
+          "a": "Der originale U-Boot-Körper hat enge Räume und hohe Schotten; die aktuelle Zugänglichkeit muss individuell geprüft werden."
+        }
+      ]
+    },
+    {
+      "id": "kiel_strand_falckenstein",
+      "name": "Strand Falckenstein",
+      "general_info": "Falckenstein ist ein langer Naturstrand am westlichen Ausgang der Kieler Förde. Sand, Dünen- und Steilküstenabschnitte, Blick auf Schifffahrt und die nahe Friedrichsorter Enge prägen den Ort.",
+      "deep_data_pool": [
+        {
+          "text": "Der Strand liegt am Westufer nahe Friedrichsort und gegenüber von Laboe. Hier verengt sich die äußere Förde, bevor sie sich zur Ostsee öffnet. Ein- und auslaufende Fähren, Frachter, Segelboote und Marineschiffe können aus sicherer Uferentfernung beobachtet werden.",
+          "tags": [
+            "geografie",
+            "schifffahrt"
+          ]
+        },
+        {
+          "text": "Falckenstein ist kein vollständig urbanisierter Promenadenstrand. Sandflächen gehen in Dünen, bewachsene Böschungen und Abschnitte mit natürlicher Küstendynamik über. Wind, Wellen und Strömung verändern die Strandgestalt; Schutzbereiche und Abbruchkanten dürfen nicht betreten werden.",
+          "tags": [
+            "natur",
+            "kueste"
+          ]
+        },
+        {
+          "text": "Der Name Falckenstein ist mit der früheren Küstenbefestigung und dem Fort Falckenstein verbunden. Militärische Anlagen sicherten die strategisch wichtige Einfahrt zur Kieler Förde. Heute dominiert die Freizeitnutzung, doch die Lage erklärt den historischen Verteidigungswert.",
+          "tags": [
+            "geschichte",
+            "militaer"
+          ]
+        },
+        {
+          "text": "Der Friedrichsorter Leuchtturm und die gegenüberliegende Küste geben Orientierung. Je nach Standort sind außerdem das Marine-Ehrenmal Laboe und der Schiffsverkehr durch die Förde sichtbar. Sichtbarkeit hängt von Wetter, Dunst und Vegetation ab.",
+          "tags": [
+            "aussicht",
+            "orientierung"
+          ]
+        },
+        {
+          "text": "Visuell: Der Zugang führt aus bewaldeten beziehungsweise dünenartigen Randbereichen auf einen breiten Sandstrand. Das freie Wasser liegt östlich; markante Schiffe ziehen in Nord-Süd-Richtung durch die Förde. Der Strand ist langgezogen und besitzt mehrere Zugänge statt eines einzigen Haupteingangs.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Quer: Nach Süden schließen Friedrichsort und der Leuchtturm an, nördlich führt die Küstenlandschaft Richtung Schilksee. Laboe mit Ehrenmal und U 995 liegt am gegenüberliegenden Ufer und ist trotz Sichtkontakt nicht schwimmend oder zu Fuß direkt erreichbar.",
+          "tags": [
+            "quer",
+            "stadtraum"
+          ]
+        },
+        {
+          "text": "Baden in der Förde ist von Wind, Wassertemperatur, Strömung, Algenlage und Wasserqualität abhängig. Sichtbare Schifffahrt verläuft in markierten Fahrwassern; Schwimmende müssen örtliche Begrenzungen und Hinweise beachten. Historische Strandbeschreibungen ersetzen keine aktuelle Sicherheitsprüfung.",
+          "tags": [
+            "baden",
+            "sicherheit"
+          ]
+        },
+        {
+          "text": "LIVE: Badeaufsicht, Wasserqualität, Blaualgen oder Quallen, Hunderegeln, Toiletten, Gastronomie, Parken, ÖPNV, Strandzugänge und Sturmfolgen aktuell bei Stadt Kiel und zuständigen Diensten prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Kann man von Falckenstein das Marine-Ehrenmal sehen?",
+          "a": "Bei klarer Sicht ist die markante Silhouette am gegenüberliegenden Fördeufer erkennbar."
+        }
+      ]
+    },
+    {
+      "id": "kiel_olympiazentrum_schilksee",
+      "name": "Olympiazentrum Schilksee",
+      "general_info": "Das Olympiazentrum entstand 1968 bis 1972 für die Segelwettbewerbe der Münchner Sommerspiele. Hafen, terrassierte Wohnbauten und öffentliche Promenade blieben als Wassersport- und Wohnquartier erhalten.",
+      "deep_data_pool": [
+        {
+          "text": "Nachdem München 1966 die Sommerspiele erhalten hatte, wurde Kiel 1967 als Austragungsort der Segelwettbewerbe bestimmt. Schilksee setzte sich gegen eine Wiederverwendung des Olympiahafens von 1936 durch. Auf dem Gelände eines früheren Marinedepots entstand ein neues Zentrum.",
+          "tags": [
+            "olympia",
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Das Architekturbüro Storch Ehlers Partner plante die Anlage ab 1968; 1969 begannen die Bauarbeiten. Kern ist ein mehrere hundert Meter langer, gestaffelter Betonriegel, der Bootshallen und Funktionsräume im Sockel mit Promenade und terrassierten Wohnungen verbindet.",
+          "tags": [
+            "architektur",
+            "brutalismus"
+          ]
+        },
+        {
+          "text": "Der vorhandene Sportboothafen wurde für die Spiele etwa verdoppelt. Zusätzlich entstanden Liegeplätze in weiteren Fördehäfen. Die Segelwettbewerbe waren damit nicht nur ein Sportereignis, sondern ein Ausbauprogramm für die maritime Infrastruktur der gesamten Kieler Förde.",
+          "tags": [
+            "hafen",
+            "stadtentwicklung"
+          ]
+        },
+        {
+          "text": "Zum Ensemble gehörten Schwimm- und Sporthalle, Presse- und Verwaltungsräume, Unterkünfte, Hochhäuser, ein Hotel und Bungalows. Viele Sportlerunterkünfte wurden nach 1972 zu regulären Wohnungen. Diese geplante Nachnutzung unterscheidet Schilksee von temporären Olympiabauten.",
+          "tags": [
+            "nachnutzung",
+            "wohnen"
+          ]
+        },
+        {
+          "text": "Die Spiele beschleunigten weitere Kieler Projekte: Autobahnanbindung, zweite Holtenauer Hochbrücke, B 503, Fördestraße, Kiellinie und Veränderungen am Rathausplatz. Schilksee ist deshalb ein Schlüsselort für die Modernisierung Kiels um 1972.",
+          "tags": [
+            "quer",
+            "infrastruktur"
+          ]
+        },
+        {
+          "text": "Visuell: Vom Hafen fällt der langgezogene, hellgraue Terrassenbau auf, dessen gestaffelte Geschosse wie eine künstliche Fortsetzung der Küstenkante wirken. Davor liegen breite Hafenbecken, Masten und Promenade; Hochhäuser markieren den südlichen Teil des Ensembles.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Das Olympiafeuer von 1972 und weitere Erinnerungszeichen verankern die Sportgeschichte im Gelände. Ihre genaue Zugänglichkeit und heutige Inszenierung können sich ändern. Dauerhaft lesbar bleibt die enge Verbindung von Regattahafen, Wohnen und öffentlichem Küstenraum.",
+          "tags": [
+            "erinnerung",
+            "sport"
+          ]
+        },
+        {
+          "text": "Schilksee ist ein zentraler Regattastandort der Kieler Woche. Die Regatten finden auf verschiedenen Bahnen vor der Küste statt; vom Hafen aus ist nicht jedes Rennen gleich gut sichtbar. Windrichtung, Klassen und Sicherheitszonen bestimmen das Geschehen.",
+          "tags": [
+            "segeln",
+            "kieler_woche"
+          ]
+        },
+        {
+          "text": "LIVE: Regatten, Kieler-Woche-Programm, Hafenbereiche, Sperrungen, Führungen, Gastronomie, Schwimmhalle, Parken, Fähren und Busse aktuell prüfen. Die historische Olympianutzung bedeutet nicht, dass alle Sportanlagen jederzeit öffentlich nutzbar sind.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Gehört Schilksee zu den Olympischen Spielen von München 1972?",
+          "a": "Ja. Kiel-Schilksee war der Austragungsort der olympischen Segelwettbewerbe."
+        },
+        {
+          "q": "Kann man dort heute noch segeln?",
+          "a": "Der Hafen wird weiterhin für Wassersport und Regatten genutzt; konkrete Angebote und Zugänge müssen aktuell geprüft werden."
+        }
+      ]
+    },
+    {
+      "id": "kiel_schrevenpark",
+      "name": "Schrevenpark",
+      "general_info": "Der ab 1901 angelegte Schrevenpark ist ein weitgehend erhaltener Kieler Landschaftspark der Kaiserzeit. Teich, geschwungene Wege, Rasen und alter Baumbestand bilden sein charakteristisches Gefüge.",
+      "deep_data_pool": [
+        {
+          "text": "Stadtgartenbaudirektor Ferdinand Hurtzig begann 1901 mit der Anlage; im Juli 1902 wurde der Park der Öffentlichkeit übergeben. Er entstand in einer Phase starken Kieler Wachstums, als neue Wohnquartiere bewusst mit öffentlichen Grünräumen ausgestattet wurden.",
+          "tags": [
+            "geschichte",
+            "stadtentwicklung"
+          ]
+        },
+        {
+          "text": "Der Park bewahrt stärker als viele andere Kieler Anlagen die Form eines Landschaftsparks der Kaiserzeit. Geschwungene Wege, wechselnde Baumgruppen, offene Rasen und Wasserflächen erzeugen inszenierte Blickfolgen statt einer streng geometrischen Gartenordnung.",
+          "tags": [
+            "gartenkunst",
+            "architektur"
+          ]
+        },
+        {
+          "text": "Der Schreventeich ist räumlicher Mittelpunkt. Ufervegetation und Wege rahmen das Wasser; die Teichfläche ist kein natürlich unberührtes Moor, sondern Teil einer gestalteten städtischen Parkanlage mit ökologischen und erholungsbezogenen Funktionen.",
+          "tags": [
+            "wasser",
+            "natur"
+          ]
+        },
+        {
+          "text": "Hurtzig prägte weitere Kieler Grünanlagen. Der Schrevenpark steht daher für den Übergang von privaten oder herrschaftlichen Gärten zu kommunaler Freiraumplanung, die Gesundheit, Erholung und Stadtgestaltung verbinden sollte.",
+          "tags": [
+            "gruengeschichte",
+            "quer"
+          ]
+        },
+        {
+          "text": "Visuell: Vom Rand führen geschwungene Wege zwischen dichtem Altbaumbestand zur offenen Teich- und Rasenlandschaft. Der Wechsel aus schattigen Partien und freien Blicken ist wichtiger als ein einzelnes Monument; der Park besitzt mehrere gleichwertige Zugänge.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Der heutige Name erinnert an das umgebende Quartier Schreventeich. Frühere Benennungen und politische Erinnerungsschichten können in historischen Karten abweichen; für die Orientierung ist der Teich das stabile Zentrum.",
+          "tags": [
+            "name",
+            "stadtraum"
+          ]
+        },
+        {
+          "text": "Als innerstädtischer Park wird die Anlage alltäglich für Wege, Ruhe, Spiel und Begegnung genutzt. Veranstaltungen oder intensive Nutzung können den Charakter zeitweise verändern, sind aber keine dauerhafte Eigenschaft des historischen Parks.",
+          "tags": [
+            "alltag",
+            "nutzung"
+          ]
+        },
+        {
+          "text": "LIVE: Wegearbeiten, Teichpflege, Veranstaltungen, Beleuchtung, Spielangebote, Hunderegeln und nächtliche Zugänglichkeit aktuell bei der Stadt Kiel prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Was ist am Schrevenpark historisch besonders?",
+          "a": "Er bewahrt im Wesentlichen die Gestaltung eines kommunalen Landschaftsparks der Kaiserzeit."
+        }
+      ]
+    },
+    {
+      "id": "kiel_schlossgarten",
+      "name": "Schlossgarten",
+      "general_info": "Der Schlossgarten verbindet die Umgebung des Kieler Schlosses mit Förde und Kunsthalle. Seine Geschichte reicht von höfischer Gartenfläche über den ersten Universitätsgarten bis zum öffentlichen Stadtgrün.",
+      "deep_data_pool": [
+        {
+          "text": "Der Garten gehörte historisch zum Kieler Schloss und veränderte sich mit dessen Ausbau. Herrschaftliche Repräsentation, Nutzflächen und spätere öffentliche Gestaltung überlagerten sich; der heutige Grünraum ist daher kein unverändert erhaltener Barockgarten.",
+          "tags": [
+            "geschichte",
+            "gartenkunst"
+          ]
+        },
+        {
+          "text": "1669 legte Johann Daniel Major in einem Teil des Schlossgartens den ersten Botanischen Garten der Christian-Albrechts-Universität als Hortus Medicus an. Damit begann die über 350-jährige Geschichte des Botanischen Gartens Kiel, der später mehrfach umzog.",
+          "tags": [
+            "universitaet",
+            "botanik"
+          ]
+        },
+        {
+          "text": "Im 19. Jahrhundert wurde der Schlossgarten stärker öffentlich und denkmalpolitisch geprägt. 1879 entstand ein Kriegerdenkmal, 1896 wurde das Kaiser-Wilhelm-Denkmal eingeweiht. Solche Monumente machten den Garten zu einem Ort staatlicher Erinnerung.",
+          "tags": [
+            "denkmal",
+            "kaiserreich"
+          ]
+        },
+        {
+          "text": "Die Kriegszerstörung des benachbarten Schlosses und der funktionale Neubau der 1960er Jahre veränderten die räumliche Kulisse grundlegend. Der Garten vermittelt heute daher zwischen historischen Resten, Nachkriegsarchitektur, Kunsthalle und Fördeufer.",
+          "tags": [
+            "zweiter_weltkrieg",
+            "stadtraum"
+          ]
+        },
+        {
+          "text": "Visuell: Große Rasenflächen, alter Baumbestand und Wege öffnen sich zwischen Schlossareal, Kunsthalle und Düsternbrooker Ufer. Einzelne Denkmäler strukturieren den Park. Die Förde liegt östlich, die Altstadt südlich.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Quer: Vom Schlossgarten sind Kieler Schloss, Alter Botanischer Garten und Kunsthalle eng verknüpft. Diese Nachbarschaft erzählt vom herzoglichen Zentrum über Universitätsgründung und Gartenwissenschaft bis zur modernen Kulturmeile.",
+          "tags": [
+            "quer",
+            "kultur"
+          ]
+        },
+        {
+          "text": "Die heutige Nutzung als öffentlicher Park darf nicht mit der historischen Ausdehnung gleichgesetzt werden. Straßen, Gebäude und Uferentwicklung schnitten und formten das Gelände wiederholt neu.",
+          "tags": [
+            "quellenkritik",
+            "stadtentwicklung"
+          ]
+        },
+        {
+          "text": "LIVE: Veranstaltungen, Denkmal- oder Wegearbeiten, Beleuchtung, Zugänge zum Schloss und zur Kunsthalle sowie temporäre Sperrungen aktuell bei Stadt Kiel und den Institutionen prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "War im Schlossgarten einmal ein Botanischer Garten?",
+          "a": "Ja. 1669 entstand hier der erste botanische Lehrgarten der Kieler Universität."
+        }
+      ]
+    },
+    {
+      "id": "kiel_alter_botanischer_garten",
+      "name": "Alter Botanischer Garten",
+      "general_info": "Der Alte Botanische Garten am Schwanenweg war ab 1873 der vierte Standort des Kieler Universitätsgartens. Historische Gehölze, Topfhaus und Aussichtspavillon erinnern an Forschung und Gartenkunst.",
+      "deep_data_pool": [
+        {
+          "text": "Kiels botanischer Garten wurde 1669 gegründet und zog mehrfach um. Ab 1873 entstand am Schwanenweg sein vierter Standort. Die Anlage galt als früher Garten, der Pflanzen nach pflanzengeografischen Gesichtspunkten ordnete.",
+          "tags": [
+            "geschichte",
+            "botanik"
+          ]
+        },
+        {
+          "text": "Der Garten diente Forschung und Lehre der Christian-Albrechts-Universität. Pflanzen waren nicht bloß Dekoration, sondern Anschauungs- und Vergleichsmaterial. Geländeformen und Mikroklima halfen, Arten aus unterschiedlichen Regionen zu kultivieren.",
+          "tags": [
+            "wissenschaft",
+            "universitaet"
+          ]
+        },
+        {
+          "text": "1985 zog der Botanische Garten an den heutigen Campusstandort in der Leibnizstraße. Der Schwanenweg-Garten blieb als öffentliche Grünanlage erhalten und wird deshalb Alter Botanischer Garten genannt; er ist nicht der heutige wissenschaftliche Hauptgarten.",
+          "tags": [
+            "umzug",
+            "stadtentwicklung"
+          ]
+        },
+        {
+          "text": "Das Topfhaus ist der erhaltene Rest der früheren Gewächshausanlage. Die eigentlichen Glashäuser verschwanden. Zusammen mit dem Literaturhaus zeigt es, wie historische Funktionsbauten neue kulturelle Nutzungen erhielten.",
+          "tags": [
+            "architektur",
+            "nachnutzung"
+          ]
+        },
+        {
+          "text": "Am höchsten Punkt steht ein Pavillon mit Blick über Förde und Hafen. Die topografische Staffelung vom Schwanenweg hinauf macht die Anlage zugleich Garten und Aussichtsort. Vegetation kann Blickachsen saisonal verdecken.",
+          "tags": [
+            "aussicht",
+            "gartenkunst"
+          ]
+        },
+        {
+          "text": "Visuell: Schmale, ansteigende Wege führen zwischen dichtem alten Baumbestand, Stauden und ehemaligen Gartenstrukturen zum runden Aussichtspavillon. Das Topfhaus liegt nahe der Höhe; das Literaturhaus markiert den unteren Bereich am Schwanenweg.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Quer: Der Schlossgarten war Standort des ersten Kieler Botanischen Gartens. Der heutige Garten auf dem Universitätscampus ist der fünfte Standort. Diese drei Orte erzählen die räumliche Entwicklung botanischer Forschung seit 1669.",
+          "tags": [
+            "quer",
+            "wissenschaftsgeschichte"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnung, Pflegearbeiten, Veranstaltungen im Topfhaus oder Literaturhaus, Zugänglichkeit des Pavillons und barrierearme Wege aktuell bei den Betreibern prüfen. Steigungen und historische Wege können Mobilität einschränken.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Ist das noch der Botanische Garten der Universität?",
+          "a": "Nein. Der wissenschaftliche Garten zog 1985 auf den Campus; die alte Anlage blieb als öffentlicher Garten erhalten."
+        }
+      ]
+    },
+    {
+      "id": "kiel_forstbaumschule",
+      "name": "Forstbaumschule",
+      "general_info": "Die Forstbaumschule entstand aus der Baumschule einer staatlichen Forstlehranstalt und wurde ab 1896 zum Landschaftspark umgestaltet. Seit 1898 ist sie öffentlich zugänglich.",
+      "deep_data_pool": [
+        {
+          "text": "Auf dem Gelände lag ursprünglich die Baumschule der staatlichen Forstlehrschule. Der Name bezeichnet daher zuerst eine praktische Ausbildungs- und Pflanzenanzuchtfläche, nicht das später gleichnamige Ausflugslokal.",
+          "tags": [
+            "geschichte",
+            "forst"
+          ]
+        },
+        {
+          "text": "Ab 1896 gestaltete die Stadt das Areal als erste eigens angelegte öffentliche Parkanlage Kiels. 1898 wurde es als Park zugänglich. Damit steht die Forstbaumschule am Beginn kommunaler Grünplanung in der stark wachsenden Marinestadt.",
+          "tags": [
+            "stadtentwicklung",
+            "park"
+          ]
+        },
+        {
+          "text": "Die Anlage folgt dem englischen Landschaftspark: Wald- und Strauchgruppen, dekorative Einzelbäume und große Rasenflächen erzeugen abwechslungsreiche Bilder. Ein wesentlicher Teil des alten Baumbestands blieb erhalten und ist als Naturdenkmal geschützt.",
+          "tags": [
+            "gartenkunst",
+            "naturdenkmal"
+          ]
+        },
+        {
+          "text": "1904 entstand eine Gastwirtschaft als Ausflugslokal. Park und Gastronomie entwickelten sich dadurch zu einem beliebten Ziel zwischen Stadt und Förde. Der Name Forstbaumschule kann heute sowohl den Park als auch den gastronomischen Betrieb meinen.",
+          "tags": [
+            "gastrogeschichte",
+            "name"
+          ]
+        },
+        {
+          "text": "Visuell: Weite Rasen liegen zwischen mächtigen Solitärbäumen und dichterem Gehölz. Geschwungene Wege und wechselnde Baumgruppen prägen den Park; das historische Gaststättengebäude bildet einen baulichen Orientierungspunkt.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Quer: Schrevenpark und Forstbaumschule zeigen zwei frühe Phasen Kieler Parkpolitik. Die Forstbaumschule ging aus einer Nutzfläche hervor; der Schrevenpark wurde wenig später als städtischer Landschaftspark geplant.",
+          "tags": [
+            "quer",
+            "gruengeschichte"
+          ]
+        },
+        {
+          "text": "Die alten Bäume sind zugleich Gestaltungselement, Lebensraum und empfindliches Naturdenkmal. Sturm, Trockenheit und Verkehrssicherung können einzelne Bereiche verändern; ein historischer Plan garantiert keinen unveränderten heutigen Bestand.",
+          "tags": [
+            "oekologie",
+            "quellenkritik"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnung und Angebot der Gaststätte, Veranstaltungen, Wegearbeiten, Baumpflege, Spiel- und Hunderegeln aktuell prüfen. Gastronomiepreise und Reservierungen gehören nicht in den stabilen Parkfaktenpool.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Warum heißt der Park Forstbaumschule?",
+          "a": "Weil hier ursprünglich die Pflanzenanzucht einer staatlichen Forstlehrschule lag."
+        }
+      ]
+    },
+    {
+      "id": "kiel_moorteichwiese",
+      "name": "Moorteichwiese",
+      "general_info": "Die Moorteichwiese ist eine große Grün- und Sportfläche südwestlich der Kieler Innenstadt. Ihre offene Wiesenlandschaft erinnert an feuchte Niederungen, wurde aber stark für städtische Erholung und Sport geformt.",
+      "deep_data_pool": [
+        {
+          "text": "Der Ortsname verweist auf den historischen Moorteich und feuchte Niederungsflächen. Entwässerung, Aufschüttung und städtische Nutzung veränderten das Gelände; die heutige Wiese ist deshalb keine unveränderte Moorlandschaft.",
+          "tags": [
+            "name",
+            "landschaft"
+          ]
+        },
+        {
+          "text": "Mit dem Wachstum Kiels wurde die Fläche in das System öffentlicher Grün- und Sportanlagen einbezogen. Offene Rasen boten Raum für Bewegung und Vereinsnutzung, während Randgehölze die große Fläche in den Stadtraum einbinden.",
+          "tags": [
+            "stadtentwicklung",
+            "sport"
+          ]
+        },
+        {
+          "text": "Die Weite unterscheidet die Moorteichwiese von den stärker inszenierten Landschaftsparks Schrevenpark und Forstbaumschule. Hier dominiert nutzbare Offenheit statt einer Folge romantischer Gartenbilder.",
+          "tags": [
+            "gartenkunst",
+            "vergleich"
+          ]
+        },
+        {
+          "text": "Sportplätze und Wege machen das Areal zu einem Alltagsort. Welche Flächen frei nutzbar oder Vereinen zugeordnet sind, kann wechseln; öffentliche Grünfläche bedeutet nicht, dass jede markierte Sportanlage jederzeit verfügbar ist.",
+          "tags": [
+            "nutzung",
+            "quellenkritik"
+          ]
+        },
+        {
+          "text": "Visuell: Eine breite, weitgehend ebene Wiese mit Sportfeldern und Wegen liegt zwischen dichter bebauten Quartieren. Baumreihen und Gehölzränder fassen das Gelände. Es gibt keinen monumentalen Haupteingang.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Quer: Über den Kieler Grüngürtel lässt sich die Moorteichwiese mit weiteren Parks, Kleingärten und Sportflächen lesen. Sie zeigt die soziale und gesundheitliche Seite moderner Stadtplanung stärker als höfische oder botanische Repräsentation.",
+          "tags": [
+            "quer",
+            "gruenguertel"
+          ]
+        },
+        {
+          "text": "Nach starkem Regen können tiefe Bereiche nass sein. Dieser Umstand passt zur historischen Topografie, muss aber aktuell beurteilt werden. Wege- und Bodenverhältnisse sind wetterabhängig.",
+          "tags": [
+            "natur",
+            "sicherheit"
+          ]
+        },
+        {
+          "text": "LIVE: Belegung von Sportflächen, Veranstaltungen, Baustellen, Wegequalität, Beleuchtung und wetterbedingte Einschränkungen aktuell bei der Stadt Kiel prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Ist die Moorteichwiese ein echtes Moor?",
+          "a": "Nein. Der Name erinnert an historische feuchte Niederungen; das heutige Gelände ist eine gestaltete Grün- und Sportfläche."
+        }
+      ]
+    },
+    {
+      "id": "kiel_opernhaus_kiel_theater_kiel",
+      "name": "Opernhaus Kiel",
+      "general_info": "Das 1905 bis 1907 errichtete Kieler Opernhaus ist der große Bühnenbau am Rathausplatz. Jugendstil-Backstein außen und denkmalgeschützte Nachkriegsmoderne innen erzählen Zerstörung und Wiederaufbau.",
+      "deep_data_pool": [
+        {
+          "text": "Das Haus entstand 1905 bis 1907 als Stadttheater unmittelbar neben dem neuen Rathaus. Seine Lage bündelte kommunale Verwaltung und repräsentative Kultur am Rathausplatz und markierte Kiels Aufstieg zur Groß- und Marinestadt.",
+          "tags": [
+            "geschichte",
+            "stadtentwicklung"
+          ]
+        },
+        {
+          "text": "Der backsteinrote Bau verwendet Formen des Jugendstils und der norddeutschen Backsteintradition. Monumentale Rundungen und plastischer Fassadenschmuck heben das Theater vom strengeren Rathausturm ab, ohne den Platz räumlich zu verlassen.",
+          "tags": [
+            "architektur",
+            "jugendstil"
+          ]
+        },
+        {
+          "text": "Im Zweiten Weltkrieg wurde das Opernhaus schwer beschädigt. Anfang der 1950er Jahre erfolgte der Wiederaufbau. Die Innenausstattung der damaligen neuen Moderne steht heute unter Denkmalschutz und ist keine Rekonstruktion des Zustands von 1907.",
+          "tags": [
+            "zweiter_weltkrieg",
+            "wiederaufbau"
+          ]
+        },
+        {
+          "text": "Das Haus verfügt über mehr als 800 Plätze sowie Drehbühne und computergesteuerte Unter- und Obermaschinerie. Diese Technik erlaubt Oper, Ballett, Musical, Operette und Konzerte mit sehr unterschiedlichen Bühnenbildern.",
+          "tags": [
+            "buehnentechnik",
+            "nutzung"
+          ]
+        },
+        {
+          "text": "Foyers und kleinere Räume wie das Klaiber-Studio dienen auch experimentellen Produktionen und Kammerformaten. Das Opernhaus ist daher nicht nur ein großer Zuschauerraum, sondern ein Ensemble verschiedener Spiel- und Arbeitsbereiche.",
+          "tags": [
+            "innenraum",
+            "kultur"
+          ]
+        },
+        {
+          "text": "Visuell: Der rote, geschwungene Theaterbau steht direkt südlich des hohen Rathausturms. Der Zuschauereingang orientiert sich zum Rathausplatz. Backstein, große Bogenformen und skulpturale Details unterscheiden ihn von der nüchternen Nachkriegsbebauung der Umgebung.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Quer: Rathaus, Rathausplatz und Opernhaus entstanden als repräsentatives Zentrum des frühen 20. Jahrhunderts. Die nahe Ostseehalle ergänzt diese Kulturachse um die große Mehrzweck- und Handballarena der Nachkriegszeit.",
+          "tags": [
+            "quer",
+            "stadtraum"
+          ]
+        },
+        {
+          "text": "LIVE: Spielplan, Besetzungen, Karten, Führungen, Einlass, Baustellen, Barrierefreiheit und heutige Nebenorte ausschließlich beim Theater Kiel prüfen. Eine historische Platzanzahl oder Bühnentechnik garantiert keine konkrete Sitz- oder Besuchssituation.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Ist der Innenraum noch von 1907?",
+          "a": "Nein. Nach schweren Kriegsschäden wurde das Haus Anfang der 1950er Jahre wiederaufgebaut; die damalige moderne Innenausstattung steht heute selbst unter Denkmalschutz."
+        }
+      ]
+    },
+    {
+      "id": "kiel_theater_kiel_schauspielhaus",
+      "name": "Schauspielhaus Kiel",
+      "general_info": "Das 1907 eröffnete Schauspielhaus an der Holtenauer Straße war Kiels zweite Bühne. Nach wechselnden Nutzungen wurde das historische Gebäude 1996 bis 1998 umfassend saniert und modernisiert.",
+      "deep_data_pool": [
+        {
+          "text": "Das Theater an der Holtenauer Straße eröffnete 1907 als zweite Kieler Bühne neben dem damaligen Stadttheater. Zunächst standen Lustspiele, Operetten und Possen im Vordergrund; das Programm richtete sich damit anders aus als die repräsentative Hauptbühne.",
+          "tags": [
+            "geschichte",
+            "theater"
+          ]
+        },
+        {
+          "text": "Die Lage in einem wachsenden nördlichen Stadtquartier brachte Theaterkultur aus dem Rathausplatz-Zentrum näher an Wohn- und Geschäftsstraßen. Das Haus ist deshalb Teil der Urbanisierung von Brunswik und Ravensberg um 1900.",
+          "tags": [
+            "stadtentwicklung",
+            "quartier"
+          ]
+        },
+        {
+          "text": "Ab 1949 war für fünf Jahre ein Kino im Gebäude untergebracht. Diese Zwischennutzung zeigt, wie Kulturhäuser nach Krieg und Zerstörung pragmatisch neu belegt wurden, bevor sich wieder ein eigenständiger Schauspielbetrieb etablierte.",
+          "tags": [
+            "nachkrieg",
+            "kino"
+          ]
+        },
+        {
+          "text": "Von 1996 bis 1998 wurde das historische Gebäude grundlegend saniert und modernisiert. Zuschauerraum, Akustik und Bühnentechnik wurden für zeitgenössischen Betrieb ertüchtigt, ohne die lange Theatergeschichte des Hauses zu löschen.",
+          "tags": [
+            "sanierung",
+            "technik"
+          ]
+        },
+        {
+          "text": "Der Saal fasst mehr als 400 Menschen. Das Repertoire umfasst klassische Bühnenliteratur, Gegenwartsstücke, Gastspiele und Uraufführungen. Konkrete Produktionen sind live, die Funktion als zentrale Schauspielspielstätte des Theater Kiel ist stabil.",
+          "tags": [
+            "programmprofil",
+            "kultur"
+          ]
+        },
+        {
+          "text": "Visuell: Das Schauspielhaus liegt als städtischer Theaterbau in der Häuserflucht der Holtenauer Straße. Eingang, Schriftzug und Vorplatz markieren es deutlicher als eine freistehende Monumentalfassade; der Ort wird aus dem Geschäftsstraßenraum heraus betreten.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Quer: In derselben Straße liegen Heiligengeist- und Anscharkirche nahe beieinander. Das Quartier verbindet damit Theater, Kirchenbau und die stark frequentierte Holtenauer Einkaufsstraße auf engem Raum.",
+          "tags": [
+            "quer",
+            "stadtraum"
+          ]
+        },
+        {
+          "text": "LIVE: Spielplan, Karten, Einlass, Führungen, Barrierefreiheit, Kassenzeiten und aktuelle Bauarbeiten ausschließlich beim Theater Kiel prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "War das Schauspielhaus einmal ein Kino?",
+          "a": "Ja. Von 1949 an wurde das Gebäude fünf Jahre lang als Kino genutzt."
+        }
+      ]
+    },
+    {
+      "id": "kiel_wunderino_arena",
+      "name": "Ostseehalle",
+      "general_info": "Die 1951 eröffnete Ostseehalle entstand im kriegszerstörten Kiel aus wiederverwendeten Stahlteilen eines Flugzeughangars. Sponsornamen sind veränderlich und müssen zur Laufzeit aufgelöst werden.",
+      "deep_data_pool": [
+        {
+          "text": "Die Kieler Ratsversammlung beschloss 1950 den Hallenbau; Architekt Wilhelm Neveling entwickelte die Anlage. Schon am 17. Juni 1951 wurde sie zur Kieler Woche eingeweiht, 1952 war der Bau vollständig fertig.",
+          "tags": [
+            "geschichte",
+            "nachkrieg"
+          ]
+        },
+        {
+          "text": "Für die Tragkonstruktion wurden Stahlteile eines demontierten Flugzeughangars vom Fliegerhorst List auf Sylt wiederverwendet. Diese pragmatische Materialgeschichte steht exemplarisch für schnellen Wiederaufbau und Ressourcenknappheit der frühen Nachkriegszeit.",
+          "tags": [
+            "architektur",
+            "wiederverwendung"
+          ]
+        },
+        {
+          "text": "Der Standort lag im stark zerstörten Kuhbergviertel nahe der Innenstadt. Die Halle wurde zu einem neuen öffentlichen Anker zwischen Exerzierplatz, Rathaus und Hauptbahnhof und ersetzte kleinteilige Vorkriegsstrukturen durch eine großmaßstäbliche Veranstaltungsarchitektur.",
+          "tags": [
+            "stadtentwicklung",
+            "stadtraum"
+          ]
+        },
+        {
+          "text": "Die Ostseehalle ist eng mit dem THW Kiel verbunden und wurde zum prägenden Ort des deutschen Handballs. Daneben dient sie Konzerten, Shows und weiteren Großveranstaltungen. Kapazität und Bestuhlung ändern sich je nach Format.",
+          "tags": [
+            "handball",
+            "veranstaltung"
+          ]
+        },
+        {
+          "text": "Mehrere Umbauten erweiterten und modernisierten die Halle. Beim großen Umbau um 2000/2001 entstanden unter anderem ein zusätzlicher Rang im Flügeldach und eine große Glasfassade. Der heutige Bau ist daher deutlich mehr als die Hülle von 1951.",
+          "tags": [
+            "umbau",
+            "architektur"
+          ]
+        },
+        {
+          "text": "Der traditionelle Name Ostseehalle galt zunächst bis 2007. Danach folgten wechselnde Sponsornamen, darunter Sparkassen-Arena und ab 2020 Wunderino Arena. Der exakte Pack-ID bleibt aus technischen Gründen historisch; gesprochene Ausgaben müssen den aktuellen Namen live auflösen.",
+          "tags": [
+            "name",
+            "quellenkritik"
+          ]
+        },
+        {
+          "text": "Visuell: Die große Mehrzweckhalle liegt am Europaplatz. Breite Glasflächen, das geschwungene Flügeldach und Veranstaltungsbeschilderung prägen den heutigen Eindruck. Sie ist wenige Gehminuten von Rathausplatz und Hauptbahnhof entfernt.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "LIVE: Aktuellen Hallennamen, Veranstaltungen, Spieltermine, Einlass, Tickets, Kapazität, Taschenregeln, Barrierefreiheit und Verkehrsmaßnahmen ausschließlich bei Betreiber und Veranstalter prüfen. Sponsornamen niemals aus der Pack-ID ableiten.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Heißt die Halle noch Wunderino Arena?",
+          "a": "Der Sponsorenname ist veränderlich. LIVE: Den aktuellen Hallennamen auf der offiziellen Betreiberseite prüfen; Wunderino bleibt nur in der technischen Pack-ID erhalten."
+        }
+      ]
+    },
+    {
+      "id": "kiel_heiligengeistkirche",
+      "name": "Heiligengeistkirche",
+      "general_info": "Die Heiligengeistkirche geht auf die mittelalterliche Klosterkirche der Kieler Franziskaner zurück. Nach der Reformation diente sie Hospitalstiftungen, später Gemeinde und Universität.",
+      "deep_data_pool": [
+        {
+          "text": "Graf Adolf IV. gründete in Kiel ein Franziskanerkloster und trat selbst in den Orden ein. Die erhaltene Kirche gehört zu den wenigen baulichen Zeugen des mittelalterlichen Klosterbezirks nahe der Altstadt.",
+          "tags": [
+            "mittelalter",
+            "franziskaner"
+          ]
+        },
+        {
+          "text": "Das Heiligengeisthospital war 1257 als Einrichtung für Arme, Kranke und Alte gegründet worden. Nach der Reformation zog die Stiftung auf das aufgehobene Franziskanerklostergelände; die frühere Klosterkirche erhielt 1562 durch Ratsbeschluss den Namen Heiliggeistkirche.",
+          "tags": [
+            "sozialgeschichte",
+            "reformation"
+          ]
+        },
+        {
+          "text": "Das Gelände wurde zum Zentrum städtischer Armenfürsorge. Hospitalvermögen, Verwaltung und Konflikte um Kontrolle zeigen, dass mittelalterliche Frömmigkeit, kommunale Sozialpolitik und städtische Macht eng verbunden waren.",
+          "tags": [
+            "stadtgeschichte",
+            "hospital"
+          ]
+        },
+        {
+          "text": "Mit dem Wachstum Düsternbrooks lag die Kirche zunehmend am Rand der Heiligengeistgemeinde. 1925 wechselte die Gemeinde zur zentraler gelegenen Pauluskirche; die alte Heiligengeistkirche blieb vor allem Universitätsgottesdiensten vorbehalten.",
+          "tags": [
+            "gemeinde",
+            "universitaet"
+          ]
+        },
+        {
+          "text": "Ernst Barlachs Geistkämpfer stand ursprünglich an der Heiligengeistkirche, wurde 1937 als sogenannte entartete Kunst entfernt und später an der Nikolaikirche neu aufgestellt. Diese Ortsverlagerung verbindet die Kirche mit Kiels Kunst- und NS-Geschichte.",
+          "tags": [
+            "kunst",
+            "nationalsozialismus"
+          ]
+        },
+        {
+          "text": "Visuell: Der schlichte Backsteinbau liegt zurückgesetzt im historischen Klosterareal. Spitzbogige Formen und die geringe Monumentalität unterscheiden ihn von den großen Kirchen des Kaiserreichs an der Holtenauer Straße.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Quer: Die Kirche verbindet Stadtgründung, Franziskanerorden, Hospitalwesen und Christian-Albrechts-Universität. Das nahe Kieler Schloss markiert die weltliche und dynastische Seite derselben Altstadtgeschichte.",
+          "tags": [
+            "quer",
+            "stadtgeschichte"
+          ]
+        },
+        {
+          "text": "LIVE: Gottesdienste, Universitätsveranstaltungen, Innenzugang, Führungen und Barrierefreiheit aktuell bei Gemeinde und Universität prüfen. Kirchliche Nutzung kann Besichtigungen einschränken.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Warum heißt die frühere Klosterkirche Heiligengeistkirche?",
+          "a": "Nach der Reformation wurden Hospitalstiftungen auf das Klostergelände verlegt; 1562 bestimmte der Rat diesen Namen."
+        }
+      ]
+    },
+    {
+      "id": "kiel_anscharkirche",
+      "name": "Anscharkirche",
+      "general_info": "Die Anscharkirche an der Holtenauer Straße ist ein evangelischer Kirchenbau des frühen 20. Jahrhunderts. Ihre heutige Gestalt verbindet historisches Mauerwerk mit Wiederaufbau nach Kriegszerstörung.",
+      "deep_data_pool": [
+        {
+          "text": "Die Kirche ist nach Ansgar benannt, dem frühmittelalterlichen Missionar des Nordens. Die Namenswahl stellte die wachsende Kieler Gemeinde in eine norddeutsch-skandinavische Kirchengeschichte.",
+          "tags": [
+            "name",
+            "religion"
+          ]
+        },
+        {
+          "text": "Der Bau entstand für die rasch wachsenden nördlichen Stadtquartiere, in denen Industrialisierung, Marineausbau und Bevölkerungszunahme neue Gemeinden erforderlich machten. Die Lage an der Holtenauer Straße verankerte die Kirche mitten im urbanen Alltag.",
+          "tags": [
+            "stadtentwicklung",
+            "gemeinde"
+          ]
+        },
+        {
+          "text": "Wie viele Kieler Kirchen wurde die Anscharkirche im Zweiten Weltkrieg beschädigt. Wiederaufbau und spätere Veränderungen führten dazu, dass heutige Innen- und Außenwirkung nicht vollständig dem ursprünglichen Zustand entsprechen.",
+          "tags": [
+            "zweiter_weltkrieg",
+            "wiederaufbau"
+          ]
+        },
+        {
+          "text": "Backstein und hohe Kirchenfenster knüpfen an norddeutsche Bautraditionen an. Der Bau behauptet sich in der geschlossenen Straßenbebauung weniger als freistehendes Monument denn als markanter vertikaler Akzent.",
+          "tags": [
+            "architektur",
+            "backstein"
+          ]
+        },
+        {
+          "text": "Die Kirche dient Gottesdiensten, Kirchenmusik und Gemeindearbeit. Konzerte oder soziale Angebote sind veränderlich; stabil ist die Funktion als evangelischer Gemeindemittelpunkt im Quartier.",
+          "tags": [
+            "nutzung",
+            "kirchenmusik"
+          ]
+        },
+        {
+          "text": "Visuell: Der Backsteinbau liegt direkt an der Holtenauer Straße. Turm beziehungsweise hohe Fassadenpartien, Portal und Kirchenfenster heben ihn aus der Häuserzeile hervor. Der Zugang ist vom stark frequentierten Straßenraum aus erkennbar.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Quer: Schauspielhaus und Heiligengeistkirche liegen in derselben städtischen Achse. Zusammen zeigen sie, wie Kultur, Gemeinde und Einkauf in den um 1900 gewachsenen nördlichen Quartieren eng nebeneinanderliegen.",
+          "tags": [
+            "quer",
+            "stadtraum"
+          ]
+        },
+        {
+          "text": "LIVE: Gottesdienste, Konzerte, Gemeindeveranstaltungen, Innenbesichtigung, Barrierefreiheit und mögliche Bauarbeiten aktuell bei der Kirchengemeinde prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Nach wem ist die Anscharkirche benannt?",
+          "a": "Nach dem Missionar Ansgar, der als Apostel des Nordens bekannt ist."
+        }
+      ]
+    },
+    {
+      "id": "kiel_blucherbrucke",
+      "name": "Blücherbrücke",
+      "general_info": "Die Blücherbrücke ist ein Anleger am westlichen Fördeufer bei Düsternbrook. Yachthafen, Wassersport und Fördeschifffahrt prägen den Ort stärker als eine klassische Straßenbrücke.",
+      "deep_data_pool": [
+        {
+          "text": "Der Begriff Brücke bezeichnet an der Kieler Förde häufig eine Landungs- oder Hafenbrücke. Die Blücherbrücke führt deshalb nicht als Verkehrsbrücke über die Förde, sondern erschließt Liegeplätze und den Zugang zum Wasser.",
+          "tags": [
+            "name",
+            "orientierung"
+          ]
+        },
+        {
+          "text": "Der Name folgt dem benachbarten Blücherplatz beziehungsweise dem nach Gebhard Leberecht von Blücher benannten Stadtbereich. Die militärische Namensgeschichte gehört zur Entwicklung des wilhelminischen Kiel.",
+          "tags": [
+            "stadtgeschichte",
+            "name"
+          ]
+        },
+        {
+          "text": "Der Hafenabschnitt ist eng mit Segelvereinen und Yachtsport verbunden. Masten, Stege und Vereinsanlagen bilden eine maritime Alltagslandschaft, die sich von den großen Fähr- und Kreuzfahrtterminals der Innenstadt unterscheidet.",
+          "tags": [
+            "segeln",
+            "hafen"
+          ]
+        },
+        {
+          "text": "Während großer Regatten gewinnt der Anleger als logistischer und sportlicher Ort zusätzliche Bedeutung. Welche Schiffe, Fähren oder Vereinsangebote ihn konkret nutzen, ist jedoch veränderlich.",
+          "tags": [
+            "regatta",
+            "nutzung"
+          ]
+        },
+        {
+          "text": "Visuell: Vom Hindenburgufer beziehungsweise der Kiellinie führen Stege in den Yachthafen. Dichte Reihen von Segelmasten und die offene Förde liegen östlich; landseitig schließen Grün- und Wohnbereiche Düsternbrooks an.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Quer: Südlich liegt die Reventloubrücke, nördlich folgen weitere Yachthäfen und die Wik. Beide Brücken sind gute Lesepunkte für Kiels Beziehung zwischen Stadtpromenade, Fördeschifffahrt und Segelsport.",
+          "tags": [
+            "quer",
+            "kiellinie"
+          ]
+        },
+        {
+          "text": "Hafenstege sind Arbeits- und Sicherheitsräume. Frei sichtbare Anlagen sind nicht automatisch öffentlich begehbar; Vereinsbereiche, nasse Stege und Manöver erfordern Rücksicht.",
+          "tags": [
+            "sicherheit",
+            "quellenkritik"
+          ]
+        },
+        {
+          "text": "LIVE: Fördefährhalte, Regattabetrieb, Stegzugang, Vereinsangebote, Sperrungen und Baustellen aktuell bei SFK, Hafen- und Vereinsbetreibern prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Ist die Blücherbrücke eine Brücke über die Förde?",
+          "a": "Nein. In Kiel bezeichnet Brücke hier einen Anleger beziehungsweise eine Hafenbrücke."
+        }
+      ]
+    },
+    {
+      "id": "kiel_reventloubrucke",
+      "name": "Reventloubrücke",
+      "general_info": "Die Reventloubrücke ist ein traditionsreicher Anleger an der Kiellinie. Fördefähren, Hafenrundfahrten und der Blick über das innere Fördebecken machen sie zu einem wichtigen Übergang zwischen Stadt und Wasser.",
+      "deep_data_pool": [
+        {
+          "text": "Wie bei mehreren Kieler Brücken bezeichnet der Name einen Anleger, keine Querung über die Förde. Die Brücke schafft einen kontrollierten Zugang vom Ufer zu Fähren und Ausflugsschiffen.",
+          "tags": [
+            "name",
+            "orientierung"
+          ]
+        },
+        {
+          "text": "Der Anleger liegt an der Kiellinie im Bereich Düsternbrook. Er verbindet die Uferpromenade mit dem öffentlichen Fördeverkehr und macht das Wasser zu einem Teil des städtischen Nahverkehrs.",
+          "tags": [
+            "verkehr",
+            "stadtraum"
+          ]
+        },
+        {
+          "text": "Von hier lassen sich westliches Ufer, Ostufer und der längs gerichtete Schiffsverkehr der Förde überblicken. Große Fähren fahren weiter südlich zu ihren Terminals; kleinere Fördeschiffe bedienen je nach Fahrplan verschiedene Anleger.",
+          "tags": [
+            "aussicht",
+            "schifffahrt"
+          ]
+        },
+        {
+          "text": "Die Reventloubrücke ist nach der in Schleswig-Holstein bedeutenden Familie Reventlow benannt; die Schreibweise des Ortes ist historisch als Reventloubrücke etabliert. Namensformen können in Quellen variieren.",
+          "tags": [
+            "name",
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Visuell: Ein Steg- und Wartebereich ragt von der Kiellinie in die Förde. Beschilderung, Fahrgastzugang und anlegende Fördeschiffe unterscheiden ihn von benachbarten reinen Yachtstegen.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Quer: Südlich liegen Landeshaus, Aquarium und Alter Botanischer Garten, nördlich Blücherbrücke und Yachthäfen. Der Anleger ist deshalb ein guter Ausgangspunkt, um Kultur- und Grünorte mit Fördeschifffahrt zu verbinden.",
+          "tags": [
+            "quer",
+            "kiellinie"
+          ]
+        },
+        {
+          "text": "Wind und Wellenschlag können Ein- und Ausstieg beeinflussen. Der Anleger ist Betriebsfläche; Absperrungen, Personalhinweise und Sicherheitslinien haben Vorrang vor Aussicht oder Fotoposition.",
+          "tags": [
+            "sicherheit",
+            "hafen"
+          ]
+        },
+        {
+          "text": "LIVE: Fahrplan, bediente Linien, Ticketregeln, Barrierefreiheit, Ausfälle, Hafenrundfahrten und Kieler-Woche-Sonderverkehr aktuell bei SFK und Veranstaltern prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Fahren von der Reventloubrücke Fähren nach Laboe?",
+          "a": "Je nach Saison und aktuellem Fahrplan können Fördelinien Laboe anbinden; die konkrete Verbindung muss live geprüft werden."
+        }
+      ]
+    },
+    {
+      "id": "kiel_kieler_schloss",
+      "name": "Kieler Schloss",
+      "general_info": "Das Kieler Schloss entstand aus einer Burg der Stadtgründungszeit. Residenz, Universitätsgründungsort, Parlament, Lazarett und Nachkriegs-Kulturzentrum überlagern sich in einem stark veränderten Ensemble.",
+      "deep_data_pool": [
+        {
+          "text": "Die Schauenburger Grafen ließen vermutlich um 1242 zugleich mit der Stadtgründung eine Burg am Fördeufer anlegen. Ihre Randlage zur Altstadt kontrollierte Hafen und Herrschaftszentrum. Vom mittelalterlichen Zustand ist oberirdisch kaum etwas unmittelbar ablesbar.",
+          "tags": [
+            "mittelalter",
+            "stadtgruendung"
+          ]
+        },
+        {
+          "text": "Nach dem Aussterben der Schauenburger Linie kam das Schloss 1460 mit Christian I. an das dänische Königshaus und die Herzöge von Schleswig und Holstein. Kiel lag damit in einem Herrschaftsraum, der eng mit Dänemark und Gottorf verbunden war.",
+          "tags": [
+            "daenemark",
+            "dynastie"
+          ]
+        },
+        {
+          "text": "Im 16. Jahrhundert wurde die Burg zur Renaissance-Residenz ausgebaut. Das Schloss diente Verwaltung und Angehörigen der Herrscherfamilie. Verschiedene Umbauten schufen keinen dauerhaft einheitlichen Zustand, sondern ein gewachsenes Ensemble.",
+          "tags": [
+            "renaissance",
+            "architektur"
+          ]
+        },
+        {
+          "text": "Herzog Christian Albrecht gründete 1665 im Schloss die nach ihm benannte Universität. Die Lehranstalt nutzte zunächst das ehemalige Franziskanerkloster; der Gründungsakt im Schloss verband dynastische Repräsentation mit einem neuen Bildungsinstitut.",
+          "tags": [
+            "universitaet",
+            "geschichte"
+          ]
+        },
+        {
+          "text": "1728 wurde Karl Peter Ulrich von Schleswig-Holstein-Gottorf im Schloss geboren. Er bestieg 1762 als Peter III. für kurze Zeit den russischen Zarenthron. Seine Biografie zeigt die europäischen Verbindungen der Gottorfer Dynastie.",
+          "tags": [
+            "russland",
+            "dynastie"
+          ]
+        },
+        {
+          "text": "Während der schleswig-holsteinischen Erhebung tagte von 1848 bis 1851 die Landesversammlung im Schloss. Im Deutsch-Dänischen Krieg 1864 diente es als Lazarett. Nach dem Übergang Schleswig-Holsteins an Preußen wechselten Eigentum und Funktionen erneut.",
+          "tags": [
+            "politik",
+            "19_jahrhundert"
+          ]
+        },
+        {
+          "text": "Von 1888 bis 1918 wohnte Prinz Heinrich von Preußen im Kieler Schloss. Als Marineoffizier und Bruder Kaiser Wilhelms II. verkörperte er die enge Verbindung von Residenz, Reichsmarine und Kiels Entwicklung zum Flottenstützpunkt.",
+          "tags": [
+            "kaiserreich",
+            "marine"
+          ]
+        },
+        {
+          "text": "Luftangriffe beschädigten das Schloss schwer; 1944 brannte es weitgehend aus. Der historische Rantzau-Bau von 1697 blieb erhalten, große Teile des Hauptbaus wurden jedoch abgetragen. Der Verlust prägt die bis heute kontroverse Erinnerung an Kiels Wiederaufbau.",
+          "tags": [
+            "zweiter_weltkrieg",
+            "zerstoerung"
+          ]
+        },
+        {
+          "text": "Auf den alten Fundamenten entstand Anfang der 1960er Jahre ein funktionaler Neubau, der 1965 als Kultur- und Veranstaltungszentrum eröffnet wurde. Seine moderne Form rekonstruiert das Renaissance-Schloss bewusst nicht und macht den Bruch der Nachkriegsplanung sichtbar.",
+          "tags": [
+            "nachkriegsmoderne",
+            "kultur"
+          ]
+        },
+        {
+          "text": "Visuell: Das heutige Ensemble besteht aus einem modernen, langgestreckten Veranstaltungsbau am Wasser und dem erhaltenen historischen Rantzau-Bau. Wer ein geschlossenes Renaissance-Schloss erwartet, sieht stattdessen die architektonische Schichtung von Rest, Verlust und Neubau.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Quer: Schlossgarten, Heiligengeistkirche und Alter Botanischer Garten liegen in unmittelbarer Nähe. Gemeinsam erzählen sie Stadtgründung, herzogliche Herrschaft, Universitätsgeschichte und die Umformung des Fördeufers.",
+          "tags": [
+            "quer",
+            "stadtraum"
+          ]
+        },
+        {
+          "text": "LIVE: Veranstaltungen, Konzertprogramm, Gastronomie, Innenzugang, Führungen, Sanierungen und Barrierefreiheit aktuell beim Betreiber und der Stadt Kiel prüfen. Der Name Kieler Schloss bezeichnet heute sowohl den historischen Ort als auch den modernen Veranstaltungsbau.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Ist das heutige Kieler Schloss noch der Renaissancebau?",
+          "a": "Nur ein historischer Teil blieb erhalten; der große Veranstaltungsbau entstand in den 1960er Jahren nach Kriegszerstörung und Abriss."
+        },
+        {
+          "q": "Wurde die Kieler Universität im Schloss gegründet?",
+          "a": "Ja. Herzog Christian Albrecht vollzog dort 1665 die Gründung der Universität."
+        }
+      ]
+    },
+    {
+      "id": "kiel_christian_albrechts_universitat",
+      "name": "Christian-Albrechts-Universität zu Kiel",
+      "general_info": "Die 1665 gegründete Christian-Albrechts-Universität ist Schleswig-Holsteins älteste Universität. Vom Schloss und Kloster zog sie über mehrere Standorte zum weitläufigen Campus nördlich der Innenstadt.",
+      "deep_data_pool": [
+        {
+          "text": "Herzog Christian Albrecht von Schleswig-Holstein-Gottorf gründete die Universität 1665, siebzehn Jahre nach dem Ende des Dreißigjährigen Krieges. Der lateinische Wahlspruch Pax optima rerum erklärt Frieden zum höchsten Gut und verweist auf diesen historischen Hintergrund.",
+          "tags": [
+            "gruendung",
+            "dreissigjaehriger_krieg"
+          ]
+        },
+        {
+          "text": "Der Gründungsakt fand im Kieler Schloss statt. Der Lehrbetrieb begann im ehemaligen Franziskanerkloster, dem späteren Klosterbereich bei der Heiligengeistkirche. Die frühe Universität war damit eng in Altstadt, Herrschaft und Kirchengeschichte eingebettet.",
+          "tags": [
+            "schloss",
+            "kloster"
+          ]
+        },
+        {
+          "text": "Anfangs besaß die Universität einen eigenen Rechtsbereich. Professoren und Studenten unterstanden universitärer Gerichtsbarkeit und genossen Privilegien; die Universität war sogar als eigener Stand im Landtag vertreten. Sie war daher mehr als eine reine Bildungseinrichtung.",
+          "tags": [
+            "rechtsgeschichte",
+            "privilegien"
+          ]
+        },
+        {
+          "text": "Schon 1669 gründete Johann Daniel Major im Schlossgarten einen Hortus Medicus. Daraus entwickelte sich über fünf Standorte der Botanische Garten Kiel. Botanik, Medizin und Sammlungswesen gehörten früh zur wissenschaftlichen Identität der Hochschule.",
+          "tags": [
+            "botanik",
+            "wissenschaft"
+          ]
+        },
+        {
+          "text": "Im 19. Jahrhundert wuchs die Universität und zog in neue Gebäude. Der Alte Botanische Garten am Schwanenweg und frühere Universitätsbauten entlang der Förde zeigen, dass der heutige Campus nur eine Phase ihrer räumlichen Geschichte ist.",
+          "tags": [
+            "stadtentwicklung",
+            "campus"
+          ]
+        },
+        {
+          "text": "Nationalsozialismus, Vertreibung und Gleichschaltung betrafen auch die Kieler Universität. Eine verantwortliche Darstellung darf die Geschichte nicht als ungebrochene Erfolgslinie erzählen; Forschung, Lehre und Personalpolitik waren in das Regime verstrickt.",
+          "tags": [
+            "nationalsozialismus",
+            "erinnerung"
+          ]
+        },
+        {
+          "text": "Nach starken Kriegszerstörungen entstand nördlich der Innenstadt ein moderner Campus. Institute, Bibliothek, Audimax und Mensa verteilen sich auf ein großes Areal, das über Jahrzehnte erweitert wurde. Es gibt deshalb kein einzelnes Hauptgebäude, das die gesamte Universität repräsentiert.",
+          "tags": [
+            "wiederaufbau",
+            "architektur"
+          ]
+        },
+        {
+          "text": "Die CAU entwickelte ein breites Fächerspektrum von Geistes- und Rechtswissenschaften über Medizin bis Natur- und Meereswissenschaften. Die Lage an Förde und Ostsee begünstigte besonders maritime Forschung, ohne die Universität darauf zu reduzieren.",
+          "tags": [
+            "forschung",
+            "meer"
+          ]
+        },
+        {
+          "text": "Visuell: Der heutige Campus ist ein Ensemble verschiedener Bauzeiten. Das Audimax mit markanter Großform, Bibliotheks- und Institutsbauten sowie offene Grünachsen geben Orientierung. Historische Gründungsorte liegen dagegen in der Altstadt und am Schloss.",
+          "tags": [
+            "visuell",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Quer: Kieler Schloss, Heiligengeistkirche, Schlossgarten und Alter Botanischer Garten bilden eine historische Universitätsroute. Der heutige Campus ergänzt diese um Wiederaufbau, Massenuniversität und moderne Forschungsinfrastruktur.",
+          "tags": [
+            "quer",
+            "stadtraum"
+          ]
+        },
+        {
+          "text": "Der Universitätsname ehrt den Gründer Christian Albrecht. Die Abkürzung CAU ist lokal und institutionell gebräuchlich. Sie sollte nicht mit einzelnen Kliniken oder dem Universitätsklinikum Schleswig-Holstein gleichgesetzt werden.",
+          "tags": [
+            "name",
+            "orientierung"
+          ]
+        },
+        {
+          "text": "LIVE: Öffentliche Vorträge, Ausstellungen, Bibliothekszugang, Campusführungen, Museumsöffnungen, Baustellen und Barrierefreiheit aktuell bei der CAU prüfen. Lehrgebäude sind Arbeitsorte und nicht automatisch frei touristisch zugänglich.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Wo wurde die CAU gegründet?",
+          "a": "Der Gründungsakt fand 1665 im Kieler Schloss statt; der erste Lehrbetrieb nutzte das ehemalige Franziskanerkloster."
+        },
+        {
+          "q": "Warum lautet das Motto Pax optima rerum?",
+          "a": "Die Universität entstand kurz nach dem Dreißigjährigen Krieg; der Wahlspruch bezeichnet Frieden als höchstes Gut."
+        }
+      ]
+    }
+  ],
+  "offline_qa": [
+    {
+      "q": "Was ist die Kieler Förde?",
+      "a": "Ein rund 17 Kilometer langer, eiszeitlich geformter Meeresarm der Ostsee. Er reicht von der Hörn im Zentrum bis zur Kieler Bucht.",
+      "tags": [
+        "foerde",
+        "geografie"
+      ]
+    },
+    {
+      "q": "Wofür steht KiWo?",
+      "a": "Für Kieler Woche. Sie entwickelte sich aus einer Regatta von 20 Yachten im Jahr 1882 und verbindet heute Segelsport mit einem großen Stadt- und Kulturprogramm.",
+      "tags": [
+        "kieler_woche"
+      ]
+    },
+    {
+      "q": "Wann ist die Kieler Woche?",
+      "a": "LIVE: Der Termin liegt üblicherweise im Juni, muss aber für das konkrete Jahr auf kieler-woche.de geprüft werden.",
+      "tags": [
+        "kieler_woche",
+        "live_hint",
+        "ephemeral"
+      ]
+    },
+    {
+      "q": "Wo mündet der Nord-Ostsee-Kanal in Kiel?",
+      "a": "In Kiel-Holtenau an der westlichen Seite der Kieler Förde.",
+      "tags": [
+        "nok",
+        "holtenau"
+      ]
+    },
+    {
+      "q": "Wie lang ist der Nord-Ostsee-Kanal?",
+      "a": "Die Wasserstraßen- und Schifffahrtsverwaltung gibt 98,637 Kilometer an.",
+      "tags": [
+        "nok",
+        "fakt"
+      ]
+    },
+    {
+      "q": "Sind die Fähren über den Nord-Ostsee-Kanal kostenlos?",
+      "a": "Ja. Die WSV-Fährpassagen über den Kanal sind für Personen und Fahrzeuge kostenlos; die Personenfähre Holtenau–Wik nimmt Fußgänger und Fahrräder mit.",
+      "tags": [
+        "nok",
+        "faehre"
+      ]
+    },
+    {
+      "q": "Wie komme ich mit dem Schiff nach Laboe?",
+      "a": "LIVE: Die SFK-Fördelinie F1 bedient saison- und fahrplanabhängig Laboe ab Kieler Anlegern. Aktuelle Abfahrt, Fahrradmitnahme und Saison bei sfk-kiel.de prüfen.",
+      "tags": [
+        "laboe",
+        "sfk",
+        "live_hint",
+        "ephemeral"
+      ]
+    },
+    {
+      "q": "Wer fährt die Busse in Kiel?",
+      "a": "Vor allem die Kieler Verkehrsgesellschaft KVG; Tarif- und Verbundauskünfte laufen über NAH.SH. Linien und Abfahrten sind LIVE.",
+      "tags": [
+        "kvg",
+        "oepnv"
+      ]
+    },
+    {
+      "q": "Wer betreibt die Fördefähren?",
+      "a": "Die Schlepp- und Fährgesellschaft Kiel, kurz SFK, betreibt die Fördelinien F1 und F2 sowie Schleppschifffahrt.",
+      "tags": [
+        "sfk",
+        "faehre"
+      ]
+    },
+    {
+      "q": "Welche internationale Fähre fährt nach Oslo?",
+      "a": "Color Line fährt vom Norwegenkai. LIVE: Abfahrt, Schiff, Check-in und Tarif direkt bei der Reederei prüfen.",
+      "tags": [
+        "color_line",
+        "oslo",
+        "ephemeral"
+      ]
+    },
+    {
+      "q": "Welche internationale Fähre fährt nach Göteborg?",
+      "a": "Stena Line fährt vom Schwedenkai. LIVE: Abfahrt, Schiff, Check-in und Tarif direkt bei der Reederei prüfen.",
+      "tags": [
+        "stena_line",
+        "goeteborg",
+        "ephemeral"
+      ]
+    },
+    {
+      "q": "Wo legen Kreuzfahrtschiffe an?",
+      "a": "Vor allem am Ostseekai; weitere Liegeplätze können genutzt werden. LIVE: Das aktuelle Cruise-Schedule des PORT OF KIEL prüfen.",
+      "tags": [
+        "kreuzfahrt",
+        "hafen",
+        "ephemeral"
+      ]
+    },
+    {
+      "q": "Was ist die Hörnbrücke?",
+      "a": "Eine 1997 fertiggestellte Fuß- und Radbrücke zwischen Hauptbahnhof und Ostufer. Ihr Stahlüberbau faltet sich für Schiffe in drei Segmente.",
+      "tags": [
+        "hoernbruecke"
+      ]
+    },
+    {
+      "q": "Warum ist Kiel eine Marinestadt?",
+      "a": "Preußen verlegte 1865 seine Marinestation der Ostsee nach Kiel; 1871 wurde Kiel Reichskriegshafen. Marine und Werften ließen die Stadt stark wachsen.",
+      "tags": [
+        "marine",
+        "geschichte"
+      ]
+    },
+    {
+      "q": "Was geschah beim Kieler Matrosenaufstand?",
+      "a": "Anfang November 1918 widersetzten sich Matrosen Befehlen und organisierten Räte. Die Bewegung breitete sich aus und wurde zum Ausgangspunkt der deutschen Revolution und des Endes der Monarchie.",
+      "tags": [
+        "1918",
+        "matrosenaufstand"
+      ]
+    },
+    {
+      "q": "Warum ist die Holstenstraße besonders?",
+      "a": "Ihr oberer Abschnitt wurde 1953 dauerhaft für Autos gesperrt und gilt als erste dauerhaft eingerichtete Fußgänger-Einkaufsstraße Deutschlands.",
+      "tags": [
+        "holstenstrasse"
+      ]
+    },
+    {
+      "q": "Welche Museen gehören zu museen am meer?",
+      "a": "Zum Verbund zählen Kunsthalle und Antikensammlung, Aquarium GEOMAR, Zoologisches Museum, Medizin- und Pharmaziehistorische Sammlung, Schifffahrtsmuseum, Stadtmuseum Warleberger Hof und Stadtgalerie.",
+      "tags": [
+        "museen_am_meer"
+      ]
+    },
+    {
+      "q": "Wofür ist der THW Kiel bekannt?",
+      "a": "Der THW Kiel ist der international erfolgreiche Handballverein der Stadt und trägt seine Heimspiele in der großen Arena nahe dem Exerzierplatz aus.",
+      "tags": [
+        "thw",
+        "handball"
+      ]
+    },
+    {
+      "q": "Kann ich von Kiel aus direkt nach Laboe fahren?",
+      "a": "LIVE: Ja, wenn die saisonale SFK-Fördelinie Laboe bedient. Alternativ bestehen Busverbindungen; aktuelle Auskunft über SFK beziehungsweise NAH.SH.",
+      "tags": [
+        "laboe",
+        "mobilitaet",
+        "live_hint",
+        "ephemeral"
+      ]
+    },
+    {
+      "q": "Wo liegt Kiels historisches Zentrum?",
+      "a": "Rund um Alten Markt, Nikolaikirche und Dänische Straße auf der Altstadtinsel. Große Teile der historischen Bebauung wurden im Zweiten Weltkrieg zerstört.",
+      "tags": [
+        "altstadt",
+        "orientierung"
+      ]
+    },
+    {
+      "q": "Wo beobachtet man die Schleusen in Kiel-Holtenau am besten?",
+      "a": "Auf der offiziellen Besucherplattform auf der Südseite in Kiel-Wik. Sie liegt über einem Torbunker an der Großen Schleuse; aktuellen Zugang vorher prüfen.",
+      "tags": [
+        "schleusen",
+        "aussicht",
+        "orientierung"
+      ]
+    },
+    {
+      "q": "Liegt die Schleusenplattform beim Leuchtturm?",
+      "a": "Nein. Der Leuchtturm steht am Nordufer beim Tiessenkai, die offizielle Aussichtsplattform am Südufer in Wik. Der direkte Weg um die Anlage ist deutlich länger als die Luftlinie.",
+      "tags": [
+        "schleusen",
+        "leuchtturm",
+        "orientierung"
+      ]
+    },
+    {
+      "q": "Warum werden Schiffe in Holtenau geschleust?",
+      "a": "Die Schleusen trennen Förde und Kanal und verhindern gefährliche Strömungen durch wechselnde Wasserstände, Wind und den Einfluss von Elbe und Nordsee.",
+      "tags": [
+        "schleusen",
+        "technik"
+      ]
+    },
+    {
+      "q": "Kann ich einen bestimmten Frachter an der Schleuse fest einplanen?",
+      "a": "Nein. Schiffsbewegungen und Schleusenzeiten sind betriebsabhängig. LIVE: Verkehrslage und aktuelle Hinweise beim WSA NOK prüfen.",
+      "tags": [
+        "schleusen",
+        "live_hint",
+        "ephemeral"
+      ]
+    },
+    {
+      "q": "Wie kombiniere ich Marine-Ehrenmal und U 995?",
+      "a": "Beide liegen direkt beieinander am Strand von Laboe und lassen sich an einem Ausflugstag verbinden. Inhaltlich zuerst oder anschließend bewusst zwischen Gedenkort und technischem Museum unterscheiden.",
+      "tags": [
+        "laboe",
+        "tagesausflug"
+      ]
+    },
+    {
+      "q": "Gehört Laboe zu Kiel?",
+      "a": "Nein. Laboe ist eine eigene Gemeinde am Ostufer der Kieler Förde; Ehrenmal und U 995 werden hier nur als Kieler Tagesausflug geführt.",
+      "tags": [
+        "laboe",
+        "location_isolation"
+      ]
+    },
+    {
+      "q": "Wie komme ich von Kiel nach Laboe?",
+      "a": "Über Land per Bus beziehungsweise Auto und fahrplanabhängig per Fördeschiff. LIVE: Saison, Abfahrtsanleger, Fahrzeit, Tickets und letzte Rückfahrt bei den Verkehrsbetreibern prüfen.",
+      "tags": [
+        "laboe",
+        "faehre",
+        "live_hint",
+        "ephemeral"
+      ]
+    },
+    {
+      "q": "Ist U 995 für Menschen mit eingeschränkter Mobilität geeignet?",
+      "a": "Der originale Bootskörper ist eng und besitzt hohe Schotten. LIVE: individuelle Zugänglichkeit und Besucherführung vor dem Besuch beim Deutschen Marinebund prüfen.",
+      "tags": [
+        "u995",
+        "barrierefreiheit",
+        "live_hint",
+        "ephemeral"
+      ]
+    },
+    {
+      "q": "Was ist in Schilksee von Olympia 1972 erhalten?",
+      "a": "Der erweiterte Regattahafen, der lange terrassierte Gebäuderiegel, Wohn- und Funktionsbauten sowie Erinnerungszeichen prägen das weiterhin genutzte Olympiazentrum.",
+      "tags": [
+        "schilksee",
+        "olympia"
+      ]
+    },
+    {
+      "q": "Kann man in Schilksee heute Segelregatten sehen?",
+      "a": "Der Hafen ist weiterhin Regattastandort, besonders zur Kieler Woche. LIVE: Klassen, Bahnen, Startzeiten, Zuschauerbereiche und Sperrungen aktuell prüfen.",
+      "tags": [
+        "schilksee",
+        "segeln",
+        "live_hint",
+        "ephemeral"
+      ]
+    },
+    {
+      "q": "Wann findet die Kieler Woche statt?",
+      "a": "Traditionell Ende Juni über neun Tage rund um das letzte volle Juniwochenende. LIVE: exakte Daten und Programm jedes Jahr auf der offiziellen Kieler-Woche-Seite prüfen.",
+      "tags": [
+        "kieler_woche",
+        "timing",
+        "live_hint",
+        "ephemeral"
+      ]
+    },
+    {
+      "q": "Ist die Kieler Woche nur ein Volksfest?",
+      "a": "Nein. Sie verbindet internationale Segelregatten mit einem großen Stadt- und Kulturprogramm. Sportbahnen liegen auf der Förde und Ostsee, Bühnen und Märkte verteilen sich über die Stadt.",
+      "tags": [
+        "kieler_woche",
+        "segeln",
+        "veranstaltung"
+      ]
+    },
+    {
+      "q": "Wo ist Segeln bei der Kieler Woche besonders präsent?",
+      "a": "Schilksee ist das zentrale Regattazentrum; an Kiellinie, Fördeanlegern und weiteren Häfen ist ebenfalls maritimer Betrieb sichtbar. Die beste Position hängt live von Regattabahn und Programm ab.",
+      "tags": [
+        "kieler_woche",
+        "schilksee",
+        "orientierung"
+      ]
+    },
+    {
+      "q": "Kann ich Falckenstein und Schilksee an einem Tag verbinden?",
+      "a": "Ja, beide liegen am nördlichen Westufer. Route und Rückfahrt sollten wegen Distanz, Küstenwegen und ÖPNV live geplant werden.",
+      "tags": [
+        "falckenstein",
+        "schilksee",
+        "tagesausflug"
+      ]
+    },
+    {
+      "q": "Welche Kieler Parks erklären die Stadtgeschichte besonders gut?",
+      "a": "Forstbaumschule und Schrevenpark zeigen kommunale Landschaftsparks um 1900; Schlossgarten und Alter Botanischer Garten verbinden Residenz- und Universitätsgeschichte.",
+      "tags": [
+        "parks",
+        "geschichte"
+      ]
+    }
+  ],
+  "city_facts_non_place": [
+    "Kiel ist seit 1946 Landeshauptstadt Schleswig-Holsteins.",
+    "Die Christian-Albrechts-Universität wurde 1665 gegründet.",
+    "Der Kieler Matrosenaufstand von 1918 war ein Ausgangspunkt der Novemberrevolution.",
+    "KVG bezeichnet die Kieler Verkehrsgesellschaft, SFK die Schlepp- und Fährgesellschaft Kiel.",
+    "Der THW Kiel ist ein international erfolgreicher Handballverein.",
+    "Kiel liegt an einer tief in das Land reichenden Ostseeförde; West- und Ostufer sind im Alltag durch Straßen, Busse und fahrplanabhängige Fördeschifffahrt verbunden.",
+    "Der Nord-Ostsee-Kanal wurde 1887 bis 1895 gebaut und 1907 bis 1914 wesentlich erweitert.",
+    "Die Kieler Woche verbindet internationale Segelregatten mit einem stadtweiten Kulturprogramm; konkrete Termine und Angebote sind LIVE.",
+    "Die olympischen Segelwettbewerbe von 1972 beschleunigten zahlreiche Infrastrukturprojekte in Kiel.",
+    "Kiels Stadtbild wurde durch Marineausbau, schwere Kriegszerstörung und funktionalen Wiederaufbau besonders stark verändert."
+  ]
+}

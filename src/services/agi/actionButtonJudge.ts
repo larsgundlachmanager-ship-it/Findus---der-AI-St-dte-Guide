@@ -291,17 +291,16 @@ export function judgeActionButtons(
       case 'SET_WAKE_ALARM':
       case 'SET_TIMER':
       case 'SET_DEPARTURE_REMINDER': {
-        // timeLabel oder textPrompt als Anker
-        if (
-          isBlank(payload.timeLabel) &&
-          isBlank(payload.textPrompt) &&
-          isBlank(payload.dateIso) &&
-          !(
-            typeof payload.durationMs === 'number' &&
+        // Zeit-Anker ODER konkreter Ort (destName) — Soft-Offer ohne beides fliegt raus
+        const hasWhen =
+          !isBlank(payload.timeLabel) ||
+          !isBlank(payload.textPrompt) ||
+          !isBlank(payload.dateIso) ||
+          (typeof payload.durationMs === 'number' &&
             Number.isFinite(payload.durationMs) &&
-            payload.durationMs >= 1000
-          )
-        ) {
+            payload.durationMs >= 1000);
+        const hasPlace = !isBlank(payload.destName);
+        if (!hasWhen && !hasPlace) {
           removeReason = 'reminder_empty_when';
         }
         break;

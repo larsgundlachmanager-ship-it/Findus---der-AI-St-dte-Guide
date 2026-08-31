@@ -3,6 +3,11 @@
  * Shortlinks aus dem Dashboard — keine erfundenen Deep-Link-Formeln.
  */
 
+import {
+  buildAviasalesCompactSearchUrl,
+  buildKiwiResultsPageUrl,
+} from './partnerBookingDeepLink';
+
 export const TRAVELPAYOUTS_MARKER = '760293';
 
 export type TravelpayoutsCategory =
@@ -57,7 +62,7 @@ export type TravelpayoutsPartner = {
   commissionNote: string;
   /** Einsatz-Schwerpunkt. */
   geo: string;
-  /** Wann Findus den Button sinnvoll anbietet. */
+  /** Wann Yorro den Button sinnvoll anbietet. */
   whenUseful: string;
 };
 
@@ -79,7 +84,36 @@ export function buildKiwiTravelpayoutsUrl(
   );
 }
 
-/** Alle freigeschalteten Travelpayouts-Programme (Findus Marker). */
+/** Prefill origin/dest/date/pax — Ergebnis-Liste; Tracking via Travelpayouts. */
+export function buildKiwiSearchPageUrl(opts: {
+  fromIata: string;
+  toIata: string;
+  dateKey: string;
+  adults?: number;
+  children?: number;
+  infants?: number;
+  bagsPerAdult?: string;
+}): string {
+  return buildKiwiResultsPageUrl(opts);
+}
+
+/** Aviasales-Suche HAM1209ATH2 + Marker (kein leeres Portal-Home). */
+export function buildAviasalesSearchUrl(opts: {
+  fromIata: string;
+  toIata: string;
+  dateKey: string;
+  adults?: number;
+}): string {
+  return buildAviasalesCompactSearchUrl({
+    fromIata: opts.fromIata,
+    toIata: opts.toIata,
+    dateKey: opts.dateKey,
+    adults: opts.adults,
+    marker: TRAVELPAYOUTS_MARKER,
+  });
+}
+
+/** Alle freigeschalteten Travelpayouts-Programme (Yorro Marker). */
 export const TRAVELPAYOUTS_PARTNERS: readonly TravelpayoutsPartner[] = [
   {
     id: 'klook',

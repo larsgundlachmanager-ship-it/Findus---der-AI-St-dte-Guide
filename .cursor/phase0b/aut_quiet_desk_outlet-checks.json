@@ -1,0 +1,17 @@
+{
+  "scenarioId": "aut_quiet_desk_outlet",
+  "checks": {
+    "ziel_klar": true,
+    "luecken_ehrlich": true,
+    "work_sinnvoll": true,
+    "keine_venues_in_call1": true,
+    "execution_passend": true,
+    "call2Brief_struktur": true
+  },
+  "expect": [
+    "Ziel: Ort zum Arbeiten finden + hingehen",
+    "criteria: ruhig, wifi, steckdose, naehe — Gewichte selbst setzen",
+    "work: places/pack Pitch Top-5",
+    "keine Café-Namen in Call 1"
+  ]
+}

@@ -106,7 +106,7 @@ function voicePickButtons(): Module2ActionButton[] {
 
 function overviewSpeech(): string {
   return (
-    'Ich bin Findus — dein Reise-Concierge. Am Mikrofon fragst du mich alles: Essen, Route, Geschichte, Wetter, Wecker. ' +
+    'Ich bin Yorro — dein Reise-Concierge. Am Mikrofon fragst du mich alles: Essen, Route, Geschichte, Wetter, Wecker. ' +
     'An Wahrzeichen erzähle ich von allein. Oben rechts: Kalender für Timeline und Planung, Zahnrad für Einstellungen. ' +
     'Stimme ändern: sag „Stimme von Alina“ oder „Stimme ändern“. Wecker: „Wecker um sieben“. ' +
     'Frag jederzeit „Wie geht …?“ — ich erklär mich selbst.'

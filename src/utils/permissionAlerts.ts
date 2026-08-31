@@ -12,6 +12,14 @@ export type PermissionAlertKind =
   | 'audioConsent'
   | 'notifications';
 
+export type PermissionAlertOptions = {
+  force?: boolean;
+  /** In-App Settings (z. B. Mikrofon-Einwilligung) statt System-Settings. */
+  onOpenInAppSettings?: () => void;
+  /** Optional: Tippfeld öffnen — ohne zweites Modal parallel. */
+  onTypeAsk?: () => void;
+};
+
 const COPY: Record<
   PermissionAlertKind,
   { title: string; message: string; openSettings: boolean }
@@ -19,19 +27,19 @@ const COPY: Record<
   location: {
     title: 'Standort-Berechtigung',
     message:
-      'Findus braucht deinen Standort für Orte in der Nähe und Navigation. Bitte erlauben — danach kannst du „Immer zulassen“ direkt im System-Dialog tippen.',
+      'Yorro braucht deinen Standort für Orte in der Nähe und Navigation. Bitte erlauben — danach kannst du „Immer zulassen“ direkt im System-Dialog tippen.',
     openSettings: true,
   },
   locationServices: {
     title: 'Standort-Dienste aus',
     message:
-      'Am Gerät sind die Standort-Dienste deaktiviert. Bitte schalte sie ein, damit Findus Orte in der Nähe finden, Navigationshinweise geben und Trigger rechtzeitig erkennen kann.',
+      'Am Gerät sind die Standort-Dienste deaktiviert. Bitte schalte sie ein, damit Yorro Orte in der Nähe finden, Navigationshinweise geben und Trigger rechtzeitig erkennen kann.',
     openSettings: true,
   },
   microphone: {
     title: 'Mikrofon-Berechtigung fehlt',
     message:
-      'Ohne Mikrofon-Zugriff kann Findus dich nicht hören. Bitte erlaube das Mikrofon in den Systemeinstellungen.',
+      'Ohne Mikrofon-Zugriff kann Yorro dich nicht hören. Bitte erlaube das Mikrofon in den Systemeinstellungen.',
     openSettings: true,
   },
   speechUnavailable: {
@@ -43,13 +51,13 @@ const COPY: Record<
   audioConsent: {
     title: 'Mikrofon-Einwilligung fehlt',
     message:
-      'Bitte bestätige unter Einstellungen → Einrichtung → Datenschutz & Mikrofon, dass Spracheingaben verarbeitet werden dürfen.',
+      'Spracheingabe ist aus oder noch nicht bestätigt. Tippe „Zu den Einstellungen“, aktiviere „Sprache an“ unter Allgemeine Einstellungen → Audio & Sparmodus — danach hören Halten, Fixieren und Live-Chat wieder.',
     openSettings: false,
   },
   notifications: {
     title: 'Benachrichtigungen fehlen',
     message:
-      'Damit Findus dich rechtzeitig zum Bus oder Flug erinnern oder wecken kann — auch bei gesperrtem Bildschirm — bitte Benachrichtigungen erlauben.',
+      'Damit Yorro dich rechtzeitig zum Bus oder Flug erinnern oder wecken kann — auch bei gesperrtem Bildschirm — bitte Benachrichtigungen erlauben.',
     openSettings: true,
   },
 };
@@ -63,7 +71,7 @@ const DEBOUNCE_MS = 2800;
  */
 export function showPermissionMissingAlert(
   kind: PermissionAlertKind,
-  options?: { force?: boolean },
+  options?: PermissionAlertOptions,
 ): void {
   const now = Date.now();
   if (
@@ -76,17 +84,80 @@ export function showPermissionMissingAlert(
   lastShownAt[kind] = now;
 
   const copy = COPY[kind];
-  const buttons = copy.openSettings
-    ? [
-        { text: 'Später', style: 'cancel' as const },
-        {
-          text: 'Einstellungen öffnen',
-          onPress: () => {
-            void Linking.openSettings();
-          },
-        },
-      ]
-    : [{ text: 'OK' }];
+  const buttons: {
+    text: string;
+    style?: 'cancel' | 'destructive' | 'default';
+    onPress?: () => void;
+  }[] = [{ text: 'Später', style: 'cancel' }];
+
+  if (options?.onTypeAsk) {
+    buttons.push({
+      text: 'Frage tippen',
+      onPress: () => {
+        options.onTypeAsk?.();
+      },
+    });
+  }
+
+  if (kind === 'audioConsent' && options?.onOpenInAppSettings) {
+    buttons.push({
+      text: 'Zu den Einstellungen',
+      onPress: () => {
+        options.onOpenInAppSettings?.();
+      },
+    });
+  } else if (copy.openSettings) {
+    buttons.push({
+      text: 'Einstellungen öffnen',
+      onPress: () => {
+        void Linking.openSettings();
+      },
+    });
+  } else if (kind === 'audioConsent') {
+    // Fallback ohne Callback: trotzdem in-App Settings ansteuern
+    buttons.push({
+      text: 'Zu den Einstellungen',
+      onPress: () => {
+        try {
+          const { useFinnusStore } = require('../store/useFinnusStore') as {
+            useFinnusStore: {
+              getState: () => {
+                requestOpenSettings: (focus?: 'voice' | 'mic' | null) => void;
+              };
+            };
+          };
+          useFinnusStore.getState().requestOpenSettings('mic');
+        } catch {
+          /* soft */
+        }
+      },
+    });
+  }
 
   Alert.alert(copy.title, copy.message, buttons);
+}
+
+/** Ein Popup für fehlende In-App-Mikrofon-Einwilligung (kein zweites Tippfeld parallel). */
+export function showAudioConsentMissingAlert(options?: {
+  force?: boolean;
+  onTypeAsk?: () => void;
+}): void {
+  showPermissionMissingAlert('audioConsent', {
+    force: options?.force ?? true,
+    onTypeAsk: options?.onTypeAsk,
+    onOpenInAppSettings: () => {
+      try {
+        const { useFinnusStore } = require('../store/useFinnusStore') as {
+          useFinnusStore: {
+            getState: () => {
+              requestOpenSettings: (focus?: 'voice' | 'mic' | null) => void;
+            };
+          };
+        };
+        useFinnusStore.getState().requestOpenSettings('mic');
+      } catch {
+        /* soft */
+      }
+    },
+  });
 }

@@ -1,13 +1,13 @@
 {
-  "atIso": "2026-08-08T00:29:21.724Z",
-  "title": "Findus Live-Qualität — echte User-Fragen",
+  "atIso": "2026-08-27T20:32:56.177Z",
+  "title": "Yorro Live-Qualität — echte User-Fragen",
   "passThreshold": 0.85,
-  "passed": 20,
-  "total": 20,
+  "passed": 35,
+  "total": 35,
   "ratio": 1,
   "gateOk": true,
-  "mustPassed": 10,
-  "mustTotal": 10,
+  "mustPassed": 23,
+  "mustTotal": 23,
   "mustGateOk": true,
   "playbook": [
     "App starten, GPS an, Mikro bereit",
@@ -74,6 +74,26 @@
       ]
     },
     {
+      "id": "lq_hamburg_compound_day",
+      "question": "Morgen 9 Uhr los nach Hamburg, frühstücken, abends Pannfisch mit Elbblick, Michel rauf — wie hoch, wie teuer, was ist das, zwischendurch eine Tour, Sonnenuntergang.",
+      "tier": "device_must",
+      "ok": true,
+      "score": 1,
+      "expectJob": "day_plan_budget",
+      "gotJob": "day_plan_budget",
+      "confidence": 0.95,
+      "mustHavesOk": true,
+      "secondaryOk": true,
+      "contractOk": true,
+      "notes": [],
+      "deviceChecks": [
+        "Compound: parallele Jobs, kein exklusives M5",
+        "📅 Tagesplan-Button nach Antwort",
+        "Kalender: Anreise, Frühstück, Pannfisch, Michel, Tour, Sunset",
+        "Michel Höhe/Preis in Speech beantwortet"
+      ]
+    },
+    {
       "id": "lq_hotel_weekend",
       "question": "Hotel fürs Wochenende von Freitag bis Sonntag mit Pool und Sauna unter 500 Euro",
       "tier": "device_must",
@@ -90,6 +110,25 @@
         "Zwei Hotel-Optionen",
         "Stay22/Buchungs-Link mit Datum vorausgefüllt",
         "Pool/Sauna nur wenn belegt"
+      ]
+    },
+    {
+      "id": "lq_hotel_all_inclusive_massage",
+      "question": "Hotel all-inclusive mit Massage und Pool unter 800 Euro",
+      "tier": "device_must",
+      "ok": true,
+      "score": 1,
+      "expectJob": "stay_search",
+      "gotJob": "stay_search",
+      "confidence": 0.95,
+      "mustHavesOk": true,
+      "secondaryOk": true,
+      "contractOk": true,
+      "notes": [],
+      "deviceChecks": [
+        "All-inclusive und Massage nur wenn belegt — Spa allein reicht nicht",
+        "Fehlende Amenities ehrlich nennen",
+        "Zwei Optionen + Stay22/Buchungs-Link"
       ]
     },
     {
@@ -174,7 +213,7 @@
       "score": 1,
       "expectJob": "nightlife_vibe",
       "gotJob": "nightlife_vibe",
-      "confidence": 0.9,
+      "confidence": 0.95,
       "mustHavesOk": true,
       "secondaryOk": true,
       "contractOk": true,
@@ -350,7 +389,7 @@
       "score": 1,
       "expectJob": "poi_identify",
       "gotJob": "poi_identify",
-      "confidence": 0.9,
+      "confidence": 0.95,
       "mustHavesOk": true,
       "secondaryOk": true,
       "contractOk": true,
@@ -368,7 +407,7 @@
       "score": 1,
       "expectJob": "nav_route",
       "gotJob": "nav_route",
-      "confidence": 0.8,
+      "confidence": 0.95,
       "mustHavesOk": true,
       "secondaryOk": true,
       "contractOk": true,
@@ -376,6 +415,264 @@
       "deviceChecks": [
         "Route startklar",
         "wenig Geschwafel"
+      ]
+    },
+    {
+      "id": "lq_laboe_fischbroetchen",
+      "question": "Wo kriege ich das günstigste Fischbrötchen in der Nähe und wie teuer ist es?",
+      "tier": "device_must",
+      "ok": true,
+      "score": 1,
+      "expectJob": "dining_hard_match",
+      "gotJob": "dining_hard_match",
+      "confidence": 0.95,
+      "mustHavesOk": true,
+      "secondaryOk": true,
+      "contractOk": true,
+      "notes": [],
+      "deviceChecks": [
+        "1–2 konkrete Buden",
+        "Preis nur wenn belegt",
+        "Nav-Button oben / startklar",
+        "Keine Taxi/Airbnb-Drift"
+      ]
+    },
+    {
+      "id": "lq_laboe_what_is_this",
+      "question": "Was ist das hier eigentlich?",
+      "tier": "device_must",
+      "ok": true,
+      "score": 1,
+      "expectJob": "poi_identify",
+      "gotJob": "poi_identify",
+      "confidence": 0.95,
+      "mustHavesOk": true,
+      "secondaryOk": true,
+      "contractOk": true,
+      "notes": [],
+      "deviceChecks": [
+        "Pack-GPS-Match / Kandidaten",
+        "Gleicher Topic-Thread für Rückfragen",
+        "Keine Bridge bei Follow-up",
+        "Kein Wechsel zum Ort von vor einer Stunde"
+      ]
+    },
+    {
+      "id": "lq_laboe_story_followup",
+      "question": "Warum wurde das alte Schwimmbad geschlossen?",
+      "tier": "device_must",
+      "ok": true,
+      "score": 1,
+      "expectJob": "poi_identify",
+      "gotJob": "poi_identify",
+      "confidence": 0.95,
+      "mustHavesOk": true,
+      "secondaryOk": true,
+      "contractOk": true,
+      "notes": [],
+      "deviceChecks": [
+        "Beantwortet die Warum-Frage direkt",
+        "alreadySaid nicht wiederholen",
+        "Pack-Gap → Research erlaubt",
+        "Keine neue Bridge"
+      ]
+    },
+    {
+      "id": "lq_laboe_aldi_unique_nav",
+      "question": "Wo ist der nächste Aldi oder Lidl?",
+      "tier": "device_must",
+      "ok": true,
+      "score": 1,
+      "expectJob": "shopping_errand",
+      "gotJob": "shopping_errand",
+      "confidence": 0.95,
+      "mustHavesOk": true,
+      "secondaryOk": true,
+      "contractOk": true,
+      "notes": [],
+      "deviceChecks": [
+        "1 Treffer im Radius → Nav sofort / klarer Start-CTA",
+        "2+ Treffer → kurz wählen",
+        "Meter/ETA aus aktiver Route",
+        "Laufende Tour: Aldi einweben, Queue nicht löschen; on-route Stop vorher",
+        "Kein Swap zurück zu stale Discovery/Offer",
+        "Max 1 kurze Bridge"
+      ]
+    },
+    {
+      "id": "lq_kiel_combo_park_pizza_foerde",
+      "question": "Wir wollen nach Kiel: kostenlos parken, Pizza Takeaway mitnehmen und an der Förde den Sonnenuntergang sehen — beste Kombi?",
+      "tier": "device_must",
+      "ok": true,
+      "score": 1,
+      "expectJob": "day_plan_budget",
+      "gotJob": "day_plan_budget",
+      "confidence": 0.95,
+      "mustHavesOk": true,
+      "secondaryOk": true,
+      "contractOk": true,
+      "notes": [],
+      "deviceChecks": [
+        "Eine Cluster-Empfehlung (Parken + Pizza + Förde)",
+        "Kurze Wege begründet",
+        "2–3 Optionen wenn sinnvoll",
+        "Budget/Diet-Filter wenn im Profil"
+      ]
+    },
+    {
+      "id": "lq_ostsee_spikeball_compare",
+      "question": "Wir wollen an die Ostsee Spikeball spielen, nicht ultra weit fahren — welche Strände passen und wo ist Platz?",
+      "tier": "device_must",
+      "ok": true,
+      "score": 1,
+      "expectJob": "activity_sport",
+      "gotJob": "activity_sport",
+      "confidence": 0.95,
+      "mustHavesOk": true,
+      "secondaryOk": true,
+      "contractOk": true,
+      "notes": [],
+      "deviceChecks": [
+        "Strände vergleichen nicht nur Ortskern",
+        "Sand/Platz/Crowding mitdenken",
+        "1 Empfehlung + Alternative"
+      ]
+    },
+    {
+      "id": "lq_parking_ticket_statement",
+      "question": "Das ist mein Parkplatz, Parkticket gilt bis 17:42 Uhr",
+      "tier": "device_must",
+      "ok": true,
+      "score": 1,
+      "expectJob": "parking_ev",
+      "gotJob": "parking_ev",
+      "confidence": 0.95,
+      "mustHavesOk": true,
+      "secondaryOk": true,
+      "contractOk": true,
+      "notes": [],
+      "deviceChecks": [
+        "Spot + Expiry speichern ohne Rückfrage",
+        "Leave-by / Reminder Care",
+        "Auto weg → Reminder irrelevant",
+        "Keine Bridge-Schleife"
+      ]
+    },
+    {
+      "id": "lq_outfit_plan_weather",
+      "question": "Was soll ich heute Abend anziehen?",
+      "tier": "device_must",
+      "ok": true,
+      "score": 1,
+      "expectJob": "weather_outfit",
+      "gotJob": "weather_outfit",
+      "confidence": 0.9,
+      "mustHavesOk": true,
+      "secondaryOk": true,
+      "contractOk": true,
+      "notes": [],
+      "deviceChecks": [
+        "Plan heute Abend (z. B. 5★) + Wetter kombinieren",
+        "Konkrete Kleidung zuerst",
+        "Kein reines Wetter-Gelaber ohne Dresscode-Hint"
+      ]
+    },
+    {
+      "id": "lq_hotel_pool_stay22_prefill",
+      "question": "Hotel Freitag bis Sonntag mit Pool unter 500 Euro zu zweit",
+      "tier": "device_must",
+      "ok": true,
+      "score": 1,
+      "expectJob": "stay_search",
+      "gotJob": "stay_search",
+      "confidence": 0.95,
+      "mustHavesOk": true,
+      "secondaryOk": true,
+      "contractOk": true,
+      "notes": [],
+      "deviceChecks": [
+        "Pool-Hard-Filter",
+        "2 Optionen + Auswahl",
+        "Stay22 mit Daten/Zimmer vorausgefüllt",
+        "Slow-Lane Deep-Link darf nachpoppen"
+      ]
+    },
+    {
+      "id": "lq_kiel_party_tonight_links",
+      "question": "Was geht heute Abend noch in Kiel — Party oder Konzert?",
+      "tier": "device_must",
+      "ok": true,
+      "score": 1,
+      "expectJob": "nightlife_vibe",
+      "gotJob": "nightlife_vibe",
+      "confidence": 0.95,
+      "mustHavesOk": true,
+      "secondaryOk": true,
+      "contractOk": true,
+      "notes": [],
+      "deviceChecks": [
+        "Live-Quellen (Stadt/rausgegangen o. ä.)",
+        "Alters-/Pref-Filter",
+        "Ticket/Web-Links — Slow-Lane pending ok",
+        "3–4 konkrete Vorschläge"
+      ]
+    },
+    {
+      "id": "lq_tour_hour_prefs",
+      "question": "Wir haben eine Stunde — was haben wir in Laboe noch nicht gesehen? Am Ende gerne am Hafen mit Parkplatz",
+      "tier": "device_must",
+      "ok": true,
+      "score": 1,
+      "expectJob": "sight_recommend",
+      "gotJob": "sight_recommend",
+      "confidence": 0.95,
+      "mustHavesOk": true,
+      "secondaryOk": true,
+      "contractOk": true,
+      "notes": [],
+      "deviceChecks": [
+        "Prefs filtern (Museen raus wenn skip)",
+        "Mehrere Orte nicht nur einer",
+        "Zeitbudget / Laufweite",
+        "Multi-Stop Richtung Hafen"
+      ]
+    },
+    {
+      "id": "lq_veg_no_steakhouse",
+      "question": "Ich bin Vegetarier — wo essen wir gut zu Abend?",
+      "tier": "device_should",
+      "ok": true,
+      "score": 1,
+      "expectJob": "dining_open",
+      "gotJob": "dining_open",
+      "confidence": 0.8500000000000001,
+      "mustHavesOk": true,
+      "secondaryOk": true,
+      "contractOk": true,
+      "notes": [
+        "Contract requiredActions ohne START_NAVIGATION (Deep-Fill ok)"
+      ],
+      "deviceChecks": [
+        "Kein Steakhaus",
+        "Speisekarte wenn URL"
+      ]
+    },
+    {
+      "id": "lq_menu_links_required",
+      "question": "Welches Fischrestaurant lohnt sich und zeig mir die Speisekarte",
+      "tier": "device_should",
+      "ok": true,
+      "score": 1,
+      "expectJob": "dining_hard_match",
+      "gotJob": "dining_hard_match",
+      "confidence": 0.95,
+      "mustHavesOk": true,
+      "secondaryOk": true,
+      "contractOk": true,
+      "notes": [],
+      "deviceChecks": [
+        "Speisekarte als Action",
+        "Fast-Antwort zuerst, Link darf nachladen"
       ]
     }
   ]

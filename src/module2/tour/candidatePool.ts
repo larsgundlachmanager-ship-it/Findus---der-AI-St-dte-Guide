@@ -57,8 +57,13 @@ export async function collectTourCandidates(
     const cat = (p.category || '').toLowerCase();
     const name = cleanName(p.name);
     const blob = `${name} ${cat} ${tags.join(' ')}`.toLowerCase();
+    const coreSight =
+      /must_have|wahrzeichen|holstentor|marienkirche|rathaus|unesco|kultur|kirche|museum|denkmal|altstadt/i.test(
+        blob,
+      );
     if (
-      /hotel|restaurant|café|cafe|supermarket|tankstelle|toilet|spielplatz|kindergarten|büro|buero/i.test(
+      !coreSight &&
+      /hotel|restaurant|café|cafe|supermarket|tankstelle|toilet|spielplatz|kindergarten|büro|buero|directory|amenity_skip|tier4|tennis|schule|parkplatz|offline_lookup/i.test(
         blob,
       )
     ) {
@@ -82,4 +87,30 @@ export async function collectTourCandidates(
   }
 
   return out;
+}
+
+/** Nie leere Tour: Must-Haves / Wahrzeichen aus dem geladenen Pack. */
+export async function fallbackCityHighlightStops(
+  req: TourRequest,
+): Promise<TourCandidate[]> {
+  const wide: TourRequest = {
+    ...req,
+    radiusM: 80_000,
+    areaHint: null,
+    categoryMust: [],
+    visitedExclude: false,
+  };
+  const pool = await collectTourCandidates(wide);
+  const scored = pool
+    .map((c) => {
+      const b = `${c.name} ${c.category} ${c.tags.join(' ')}`.toLowerCase();
+      let s = 0;
+      if (/must_have|wahrzeichen|unesco/.test(b)) s += 8;
+      if (/kirche|museum|rathaus|holstentor|marien|petri/.test(b)) s += 5;
+      s += Math.max(0, 3 - c.distanceM / 2000);
+      return { c, s };
+    })
+    .sort((a, b) => b.s - a.s)
+    .map((x) => x.c);
+  return scored.slice(0, 6);
 }

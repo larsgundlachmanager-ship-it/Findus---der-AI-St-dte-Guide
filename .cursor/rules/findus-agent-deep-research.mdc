@@ -95,7 +95,7 @@ Am Ende optional: Fragen 1:1 kurz beantworten — **nur Verifiziertes**, sonst �
 
 1. IDs auf bestehendes Pack mappen (nie kurzer Stadtname-Match)  
 2. `data/staedte/<id>.research.json` schreiben  
-3. Merge + Polish + Gate  
+3. Merge + Polish + **GPS/Wegweiser-Loop** (in Merge enthalten) + Gate  
 4. Upload (`npm run upload:city`) — ohne Extra-Freigabe
 
 ## Qualität

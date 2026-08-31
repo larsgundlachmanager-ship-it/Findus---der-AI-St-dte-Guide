@@ -1,4 +1,4 @@
-# Upload-fertiges Android App Bundle (.aab) für Google Play.
+﻿# Upload-fertiges Android App Bundle (.aab) fuer Google Play.
 # Signiert mit android/keystore.properties + Upload-Keystore.
 param(
     [switch]$SkipFetch
@@ -10,8 +10,16 @@ Set-Location (Split-Path $PSScriptRoot -Parent)
 . "$PSScriptRoot\android-env.ps1"
 Set-FindusAndroidEnv
 
-# Guard: expo-modules-core's index.js is intentionally null (Node stub).
-# Metro must resolve via "main": "src/index.ts" — otherwise black screen on boot.
+if (-not $env:NODE_ENV) { $env:NODE_ENV = 'production' }
+
+$portableNode = Join-Path (Get-Location) '.tools\node-v22.14.0-win-x64'
+if (Test-Path (Join-Path $portableNode 'node.exe')) {
+    $env:PATH = "$portableNode;$env:PATH"
+    Write-Host "NODE=$(node -v) (portable)"
+}
+
+# NEVER flip expo-modules-core "main" to the null stub (black-screen APKs).
+node .\scripts\ensure-expo-modules-core-main.cjs
 $emcPkg = Join-Path (Get-Location) 'node_modules\expo-modules-core\package.json'
 if (Test-Path $emcPkg) {
     $emcMain = (Get-Content $emcPkg -Raw | ConvertFrom-Json).main
@@ -30,11 +38,43 @@ if (-not $SkipFetch) {
     npm run generate:voice-assets
 }
 
+Write-Host "Sync Android app icons…"
+node .\scripts\sync-android-icons.mjs
+if ($LASTEXITCODE -ne 0) { throw "Icon-Sync fehlgeschlagen (Exit $LASTEXITCODE)" }
+
 Write-Host "Starte Play-Bundle-Build (bundleRelease)…"
 Set-Location android
-& .\gradlew.bat bundleRelease
-$code = $LASTEXITCODE
-Set-Location ..
+
+$prevNodeOptions = $env:NODE_OPTIONS
+if ($env:NODE_OPTIONS) {
+    if ($env:NODE_OPTIONS -notmatch 'experimental-strip-types') {
+        $env:NODE_OPTIONS = "$env:NODE_OPTIONS --experimental-strip-types"
+    }
+} else {
+    $env:NODE_OPTIONS = '--experimental-strip-types'
+}
+
+try {
+    & .\gradlew.bat :expo-constants:createExpoConfig
+    if ($LASTEXITCODE -ne 0) { throw "createExpoConfig fehlgeschlagen (Exit $LASTEXITCODE)" }
+
+    Set-Location ..
+    node .\scripts\ensure-expo-modules-core-main.cjs
+    $emcMain2 = (Get-Content $emcPkg -Raw | ConvertFrom-Json).main
+    if ($emcMain2 -ne 'src/index.ts') {
+        throw "expo-modules-core main drifted to '$emcMain2' before bundleRelease."
+    }
+    Set-Location android
+
+    & .\gradlew.bat bundleRelease
+    $code = $LASTEXITCODE
+} finally {
+    $env:NODE_OPTIONS = $prevNodeOptions
+    Set-Location (Split-Path $PSScriptRoot -Parent)
+    node .\scripts\ensure-expo-modules-core-main.cjs
+}
+
+Set-Location (Split-Path $PSScriptRoot -Parent)
 
 if ($code -ne 0) {
     throw "AAB-Build fehlgeschlagen (Exit $code)"
@@ -48,7 +88,6 @@ if ($aab) {
     Write-Host ""
     Write-Host "Upload-AAB bereit:" -ForegroundColor Green
     Write-Host $aab.FullName
-    Write-Host ("Größe: {0:N1} MB" -f ($aab.Length / 1MB))
 } else {
     Write-Warning "Build abgeschlossen, aber keine AAB unter android\app\build\outputs\bundle\release gefunden."
 }

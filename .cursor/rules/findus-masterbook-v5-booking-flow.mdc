@@ -11,6 +11,53 @@ Deep-Search (live API/HTTP)
 
 Never invent “ca. 50–60 €”, “je nach Tide/Wetter” when a live source exists.
 
+**Goldstandard:** Expedia Property + Daten → Zimmer wählen (User nur noch zahlen).  
+Gleichen Anspruch an alle Partner: so weit vorbefüllen, wie die öffentliche Deeplink-API erlaubt.
+
+## Preis vs. Provision (SSOT)
+
+`pickAffiliateOffer` in `affiliateRegistry.ts`:
+
+1. User will explizit das Günstigste → immer der niedrigste Live-Preis, auch ohne Cut.
+2. Sonst: Kandidaten mit mehr als **15 %** Aufschlag vs. Günstigstem raus.
+3. Innerhalb **5 %** → höchste erwartete Provision (`Preis × commissionScore`).
+4. 5–15 % → User-Preis.
+5. Ohne vergleichbare Live-Preise → höherer `commissionScore`.
+
+Vergleich nur bei **gleichem Produkt + Datum + Personen** (`quoteIdentity.ts`). Stadt-Suche vs. Produktseite ist kein Vergleich.
+
+QuoteCollector (`quoteCollector.ts`): max. 2–3 Produkt-URLs parallel, Timeout ~1 s = Kandidat ohne Preis. Bridge/Ack vorher. Preise aus Harvest (Stay22, Research-HTML/JSON-LD) oder Partner-Produktseite — kein Gemini-Preis-Orakel, kein CHECK24-vs-weg.de-Scraping.
+
+`preferTicketSource` / `preferTicketSourceQuoted`: Produkt-Kandidaten → Quotes → `pickAffiliateOffer` → Deep-Link + Tracking. Suche nur Fallback.
+
+Flüge: Kiwi vs. Aviasales dieselbe Route (`cheapFlightBook.ts`) — ein Primär-„buchen“, Vergleich-Button wenn Spread >15 %, User vergleicht, oder ohne zweiten Preis.
+
+Mietwagen: DiscoverCars primär. Economy/CHECK24 nicht ohne Live-Quote gegeneinander tippen.
+
+Hilfe zuerst (Transfer, Gepäck, eSIM) — Provision ist Folge, kein Pitch. Pauschal/Last-Minute nur bei klarem Buchungsintent, nicht bei jedem „Kurztrip“ in der Speech.
+
+SSOT Prefill-Helfer: `src/services/affiliate/partnerDeepPrefill.ts` + `partnerBookingDeepLink.ts`  
+SSOT Builder: `src/services/affiliate/affiliateService.ts`  
+Quote-Identity: `src/services/affiliate/quoteIdentity.ts`  
+QuoteCollector: `src/services/affiliate/quoteCollector.ts`  
+Hollow-Guard: `src/services/affiliate/hollowPartnerUrl.ts`  
+Live-Deep-Link: `src/services/research/liveDeepLink.ts`
+
+---
+
+## Action-Buttons — Live Deep-Link (SSOT)
+
+```
+Kandidaten (Research / Grounding / Venue-HTML)
+  → Score: Pfad-Tiefe + Intent (Ticket/Karte/Buchung) + aktuelles Jahr
+  → Live-Probe (404 / 410 / Soft-404 / Redirect→Home)
+  → Button = bester lebender Deep-Link
+  → tot → Google-Suche, nie erfundener Slug
+```
+
+Code: `src/services/research/liveDeepLink.ts`  
+Last-Mile: `actionButtonSync` · `presentConcierge` · Tap: `actionHandlerService`
+
 ---
 
 ## Inselflieger — what works 1:1
@@ -44,8 +91,8 @@ Code: `src/services/flights/inselfliegerAdvisor.ts`
 | Primary only if priced | `price.total` present → book button | ✅ |
 | Sold out / unpriced → alternatives | City search with prices only | ✅ |
 | Affiliate deep link with dates | Stay22 Allez `aid` + checkin/checkout | ✅ |
+| Expedia property + dates | `/go/hotel/info/{id}/{in}/{out}` → Partnerize | ✅ |
 | Maps-Pitch (Reviews + Flair) | Places Details + Gemini Slow-Lane | ✅ |
-| Günstigstes Zimmer lebendig verkaufen | Stay22 Fast-Lane + Maps Deep | ✅ |
 
 ### What does NOT work 1:1
 
@@ -54,8 +101,140 @@ Code: `src/services/flights/inselfliegerAdvisor.ts`
 | Guaranteed Hotel-Hanken match every time | Fuzzy name search | Stay22 geocode sometimes returns nearby only | Prefer `lat/lng` + `hotelname`; store Booking property IDs on POIs |
 | High rate limits | Demo mode 5 req/min | No Stay22 API key in app yet | Set `EXPO_PUBLIC_STAY22_API_KEY` from Stay22 Hub |
 | Scrape booking.com HTML | Blocked / ToS | Not allowed | Stay22 / Booking Demand API only |
+| Guest/payment fields | Not in Expedia deeplink | Partner checkout | Impossible without their guest API |
 
-Code: `src/services/concierge/hotelAvailabilityService.ts` + `hotelBookingPack.ts` + `venueMapsPitch.ts` + `mapsPitchDeepResearch.ts`
+Code: `src/services/concierge/hotelAvailabilityService.ts` + `hotelBookingPack.ts` + `hotelPropertyDeepLink.ts`
+
+---
+
+## eSIM — Deep-Prefill
+
+| Step | Status |
+|------|--------|
+| travSIM Land → `/de/products/{slug}-esim` + AWIN mid=15561 / publisher 3021215 | ✅ |
+| Airalo Landesseite `/greece` (nicht `/greece-esim?selected-segment=unlimited`) + Travelpayouts `tp.media` p=8310 Marker 760293 | ✅ |
+| Konkreter GB-Tarif in URL | ❌ (Shop-UI; kein öffentlicher Plan-SKU-Deeplink) |
+| Hollow Home ohne Land | Guard blockt „buchen“-Claims |
+
+---
+
+## Camping.info — Deep-Prefill
+
+| Step | Status |
+|------|--------|
+| Konkreter Platz → `/de/campingplatz/{slug}` + arrival/departure/adults/flex + AWIN mid=44063 | ✅ |
+| Stadt ohne Platzname → Hub `campsite-{slug}` mit Daten/Personen (Wahl am Platz) | ✅ |
+| Stellplatz + Bezahlung in URL | ❌ (Platz-intern) |
+
+---
+
+## Uber / Taxi — Deep-Prefill
+
+| Step | Status |
+|------|--------|
+| Dropoff lat/lng + Adresse als JSON `drop[0]` | ✅ |
+| Pickup GPS / Adresse oder `pickup=my_location` | ✅ |
+| Adresse ohne Koordinaten → Geocode vor Open | ✅ |
+| Jetzt: `m.uber.com/go/product-selection` (Preis + ETA auf der Seite) | ✅ + `client_id` |
+| Reserve: `/go/reserve/select-time` + `pickup_formatted_time` | ✅ |
+| Geplante Uhrzeit 5-Min-Raster, **abrunden** | ✅ |
+| Berufsverkehr (Mo–Fr 06:00–09:30 / 15:00–19:00) | ✅ Taxi-Dauer ×1,35 (mind. +5 Min) |
+
+FreeNow / Bolt: noch keine Builder.
+
+**Taxi rufen (Struktur, Wortlaut frei):** User will Taxi/Uber zu einem genannten Ziel → neues Thema → Auto-Dauer → Uber-Button (Produktwahl/Reserve) → Taxinummer wenn belegt. Fahrpreis/Wartezeit nur vorlesen, wenn die Uber-Seite sie zeigt — nicht erfinden. Nie „ich kann kein Taxi rufen“.
+
+---
+
+## Tickets / Touren
+
+| Partner | Prefill | Provision |
+|---------|---------|-----------|
+| GetYourGuide Produkt | `adults` + `date_from` + `partner_id=ZVQGONB` | Ja, Partner-ID auf Produkt **und** Suche |
+| GetYourGuide Suche | Stadt/Query + Datum/Personen, ehrliches „suchen“ | Ja, gleiche Partner-ID |
+| Speech-Preis | Belegter **Gesamtpreis** der Option (z. B. 68 € für zwei), nie Sidebar-„ab 29 €“ | — |
+| Tiqets | `selected_date` + Slot + Variante; Checkout `/booking_details/` wenn Datum da | Ja, AWIN mid=12428 auf jedem Hop |
+| Viator | `date` + `adults`/`pax` + `pid`/`mcid` | Ja |
+| Musement | Produkt/Suche + `aid`/`client_id` | Ja |
+| OpenTable | Datum/Covers/Name | **Nein**, bis `EXPO_PUBLIC_OPENTABLE_AFFILIATE_ID` gesetzt |
+| Quandoo | `/place/{id}` + covers/date/time nur mit Pack-Tag `qd:` | **Nein**, DE-AWIN zu; Env `EXPO_PUBLIC_QUANDOO_PARTNER_ID` leer |
+
+---
+
+## Mietwagen (DiscoverCars)
+
+| Step | Status |
+|------|--------|
+| Suche starten `/de/search?sq=` (Datum, Uhr, Drop-off, Alter 24, IATA/Ort) + `a_aid=Yorro-Ai` | ✅ |
+| Prefill vom letzten Flug-Commit (Ziel-IATA + Abflugtag als Pickup) | ✅ `BOOK_CAR_RENTAL` ohne URL |
+| DiscoverCars interne PickupLocationId | ❌ ohne deren Location-API; IATA/Name im `sq` |
+| Rückgabedatum wenn unbekannt | fragen, nicht still +3 Tage erfinden |
+
+## Economy Bookings (Backup)
+
+| Step | Status |
+|------|--------|
+| `/de/cars/results` + `py/pm/pd` `dy/dm/dd` `pt/dt` `age` `pcntry` + `utm_content=text-link_16yupj` | ✅ |
+| `plc` / `dlc` / `cr` Location-SKUs | ❌ nur durchreichen, nie erfinden |
+| `tc_id` Session-UUID / `target_circle` | ❌ nie erfinden; fremdes Affiliate nicht kopieren |
+
+## Konfetti / gokonfetti (AWIN 31804)
+
+| Step | Status |
+|------|--------|
+| Event `/de-de/e/{slug}/` + AWIN | ✅ Slug nur aus Research |
+| `qid=` Query-Session | ❌ nie erfinden, streichen |
+
+---
+
+## Flüge (Kiwi / Aviasales)
+
+| Step | Status |
+|------|--------|
+| Kiwi Ergebnis-Liste `/de/search/results/{from}/{to}/{date}/no-return/` + adults/bags | ✅ + Travelpayouts `custom_url` |
+| Speech: belegter Best-Preis, vergleichen mit Billigst/Kürzest wenn belegt | ✅ Policy |
+| Aviasales `/search/HAM1209ATH2` + `marker=760293` | ✅ |
+
+### Gebuchter Hinflug — Rückwärtsplan (Advisor, nicht Chat-Blaupause)
+
+Struktur (Wortlaut frei, stadt-agnostisch):
+
+1. Uhr fehlt → fragen, wann genau.
+2. Nächsten Verkehrsflughafen vom GPS.
+3. Live-Tafel (Gate/Terminal/Check-in) wenn belegt.
+4. Rückwärts: Boarding → Gate → Security → Check-in → Terminal.
+5. Zwei Optionen unter Offene Pläne: Taxi/Uber (Los-Uhr + Reserve-Link zuerst) **oder** ÖPNV-Akkordeon (eigene Gruppe, Live-Zeit/Preis). Max 4 Transfer-Partner.
+6. Wecker nur nach Frage, nie auto.
+7. Nach Bestätigung der Hinfahrt: Hotel-Frage im **Ziel** autonom, Pitch-Modul.
+8. Taxi-ETA zur **geplanten** Los-Zeit (Berufsverkehr dort), nie „aktuell“ um 1 Uhr nachts für den Morgenflug.
+
+Ausführung: `flightTripAdvisor` / `flightTimeline`. Vertrag `flight_leave_by` nur Think-Ahead — nicht Chat-Lane.
+
+---
+
+## Bounce / Transfers / Bike / City Pass / Tours (TPX)
+
+| Partner | Prefill | Gap |
+|---------|---------|-----|
+| Bounce | `/s/location/{uuid}/book` wenn UUID belegt; sonst `/s?query=` + GPS + `from`/`to` + `standardBags` + `ref=FINDUS…` | Bounce hat keine öffentliche Location-API — Shop-UUID nicht raten. PayPal nur im Checkout, kein öffentlicher Prefill-Param |
+| Welcome Pickups | `/en/{city}/transfer/new` + date/time/pax/luggage + from/to Name/GPS | `from_location_id` / `to_location_id` nur durchreichen, nie erfinden |
+| GetTransfer | `/de/transfers/new` + TPX `sub_id` | Öffentliches Formular; OD-Felder nicht dokumentiert |
+| KiwiTaxi | Tracking `tpo=760293` auf vorhandener URL | `booking_token` ist Checkout-Session — nie erfinden |
+| Intui | Produktpfad + `partnerID=287737` | Route-ID `p_*` und Base64-Slot nicht raten |
+| Klook | Activity `/activity/{id}-…` + `affiliate.klook.com` `k_site` + `aff_pid` | Activity-ID nur aus Research |
+| KKday | `/product/{id}-…` + invl.me `aff_sub` | Produkt-ID nur aus Research |
+| WeGoTrip | Produkt + `date=` + `sub_id` | Varianten-ID `id-7357` nicht raten |
+| Go City | `/{city}/passes/explorer?standard-choices&plus-days&adults` + Partnerize `camref:1100l4xn8` | Trip-Planner-Itinerary-UUID nicht raten |
+| Localrent | `/{country}/?pickup_date&dropoff_date&pc` + `r=2869` | Session-`s=` nicht raten; Station-Code nur wenn belegt |
+| GetRentACar | `/de/autovermietung/request` + Ort + DE-Datum + `track_id` | — |
+| AutoEurope | `/results/` + `aff=travelpayoutseu` | Pickup-Query nicht öffentlich dokumentiert |
+| BikesBooking | `/en/search/?begin&end` + `sub_id` | `country=` / `pickUpCity=` interne IDs — nicht raten |
+| Radical Storage | `/luggage-storage/{city}` + GPS + dropOff/pickUp + `track_id=760293` | Spot-Slug (Bahnhof/Centre) nur durchreichen |
+| AirHelp | `funnel.airhelp.com/claims/new/trip-details` + `a_aid=Travelpayouts` | Flugdaten im Formular, kein öffentlicher Prefill |
+| Compensair | `/de/check-flight.html` + `sub_id` | Flugnummer im Formular |
+| QEEQ | `/car/search_map` + lat/lng + `utm_source=travelpayouts` | Listing-`id` nicht raten |
+| Saily | `/de/esim-{land}/` + `go.saily.site` `aff_id=8014` | GB-Tarif im Shop |
+| Yesim | `/country/{land}/` + `partner_id=636` + `sub_id` | GB-Tarif im Shop |
 
 ---
 
@@ -68,10 +247,19 @@ Places Details (reviews + editorial)
   → Buttons = Book / Web / Tickets
 ```
 
-Fast-Lane Hotel = Stay22 inventar + lebendiger Sell.  
-Slow-Lane = Google-Maps-Reviews nachreichen (ohne Doppel-Skript).
+---
 
-Code: `src/services/navigation/placePitchDetails.ts`, `src/services/research/venueMapsPitch.ts`, `src/module2/agents/mapsPitchDeepResearch.ts`
+## AWIN DACH — Pauschal / Mietwagen / Versicherung
+
+| Partner | Prefill | Gap |
+|---------|---------|-----|
+| CHECK24 Pauschal | `check24.net/pauschalreisen-vergleich/` + `c24pp_departure_date` / return / duration `5-8` / `c24pp_airport` / `c24pp_adult` + AWIN `9364` | `c24pp_city_id`, `c24pp_region_id`, `hotelId`, `hotelListId` nur durchreichen, nie erfinden |
+| CHECK24 Mietwagen | `check24.net/mietwagen-preisvergleich/` + AWIN `9364` | Pickup-IDs nicht öffentlich |
+| weg.de | `staedtereisen.weg.de` + `dateFrom`/`dateTo`/`origin`/`adults`; tote `seed`/`searchId`/`rctx`/`/s/tsx/` raus | `destination=`-SKU nur durchreichen |
+| ab-in-den-urlaub | `/find/hotel/{giata}-giata/offers` wenn GIATA belegt, sonst `/find/offers` + `dateMin`/`dateMax`/`airports`/`rooms=A,A` + AWIN `9369` | `destinationId=city-gr-99-athen` und `boardTypes=IT06-HB` nur durchreichen |
+| Solmar | `/{stadt}/{hotel-slug}` wenn belegt + AWIN `114510` | Hotel-Slug nicht raten |
+| TravelSecure | `/tarifrechnerts/tarifrechner-rr.html` + AWIN `106517` | Tarif-IDs im Rechner |
+| Konfetti | `/de-de/e/{slug}/` + AWIN `31804` | `qid` Session nicht erfinden |
 
 ---
 

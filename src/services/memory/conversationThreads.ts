@@ -7,6 +7,11 @@
 import * as FileSystem from 'expo-file-system';
 import { getCachedUserProfile } from '../userProfileService';
 import { useUserProfileStore } from '../../store/useUserProfileStore';
+import { foldCityKey } from '../navigation/landmarkAliases';
+import {
+  looksLikeNewConcreteDestination,
+  wantsTaxiRide,
+} from '../mobility/taxiRideIntent';
 
 export type ThreadCategory =
   | 'cinema'
@@ -38,7 +43,13 @@ export type ConversationThread = {
   lastUserText: string;
   lastAssistantSnippet: string;
   lastIntent: string | null;
+  /** Display-Label der Stadt */
   cityHint: string | null;
+  /**
+   * Harte Partition (foldCityKey). Pflicht — Legacy ohne Key → 'unknown'.
+   * Resume/Continue nur bei gleichem cityKey.
+   */
+  cityKey: string;
 };
 
 export type TopicRouteMode = 'continue' | 'new' | 'resume' | 'parallel';
@@ -64,6 +75,8 @@ export const THREAD_RESUME_HORIZON_MS = 7 * 24 * 60 * 60_000;
 let cache: ThreadStoreState | null = null;
 let loaded = false;
 let loadPromise: Promise<ThreadStoreState> | null = null;
+/** Letztes abgeschlossenes Thema (nach Park/beantworteter Frage). */
+let lastClosedTopicMemo: string | null = null;
 
 function nowMs(): number {
   return Date.now();
@@ -71,6 +84,27 @@ function nowMs(): number {
 
 function uid(): string {
   return `th_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 8)}`;
+}
+
+/** Kanonischer Stadt-Key für Partition (nie leer). */
+export function normalizeThreadCityKey(
+  raw: string | null | undefined,
+): string {
+  const k = foldCityKey(raw);
+  return k || 'unknown';
+}
+
+function migrateThread(t: ConversationThread): ConversationThread {
+  const hint = t.cityHint?.trim() || null;
+  const key =
+    (t as ConversationThread & { cityKey?: string }).cityKey ||
+    (hint ? foldCityKey(hint) : '') ||
+    'unknown';
+  return {
+    ...t,
+    cityHint: hint,
+    cityKey: normalizeThreadCityKey(key),
+  };
 }
 
 function emptyState(): ThreadStoreState {
@@ -179,6 +213,23 @@ export function inferThreadCategory(opts: {
   const subject = (opts.subject || '').toLowerCase();
   const blob = `${t} ${subject}`;
 
+  try {
+    const { looksLikeStreetAddress } = require('../navigation/streetAddressQuery') as {
+      looksLikeStreetAddress: (s: string) => boolean;
+    };
+    const { looksLikeSpokenCityCorrection } = require('../navigation/navDestCityCorrection') as {
+      looksLikeSpokenCityCorrection: (s: string) => boolean;
+    };
+    if (
+      looksLikeStreetAddress(opts.userText) ||
+      looksLikeSpokenCityCorrection(opts.userText)
+    ) {
+      return 'nav';
+    }
+  } catch {
+    /* soft */
+  }
+
   if (intent === 'emergency' || /\b(notfall|rettung|krankenwagen|112|arzt|apotheke)\b/u.test(blob)) {
     return 'emergency';
   }
@@ -194,6 +245,21 @@ export function inferThreadCategory(opts: {
     return 'cinema';
   }
   if (
+    intent === 'mobility' ||
+    wantsTaxiRide(opts.userText) ||
+    /\b(taxi|uber|bolt|freenow)\b/u.test(blob)
+  ) {
+    if (
+      /\b(bahn|zug|bus|u-bahn|s-bahn|hafas|verbindung|abfahrt|ankunft|hbf|fahrplan)\b/u.test(
+        blob,
+      ) &&
+      !wantsTaxiRide(opts.userText)
+    ) {
+      return 'transit';
+    }
+    return 'nav';
+  }
+  if (
     /\b(bahn|zug|bus|u-bahn|s-bahn|hafas|verbindung|abfahrt|ankunft|hbf|fahrplan)\b/u.test(
       blob,
     )
@@ -207,8 +273,13 @@ export function inferThreadCategory(opts: {
     return 'booking';
   }
   if (
+    /\b(flug|fliegen|flieger|flughafen|airport|boarding)\b/u.test(blob)
+  ) {
+    return 'transit';
+  }
+  if (
     intent === 'planning' ||
-    /\b(plan|timeline|itinerary|tagesplan|morgen\s+früh|leave[- ]?by)\b/u.test(blob)
+    /\b(plan|einplanen|eintragen|timeline|itinerary|tagesplan|morgen\s+früh|leave[- ]?by)\b/u.test(blob)
   ) {
     return 'planning';
   }
@@ -300,22 +371,154 @@ function extractEntities(opts: {
 function hasAnaphora(text: string): boolean {
   const t = text.replace(/\s+/g, ' ').trim();
   if (
-    /\b(dort|da|davon|dazu|dasselbe|dieselbe|derselbe|weiter|nochmal|noch\s+mal|mehr\s+dazu|und\s+dann|und\s+jetzt)\b/iu.test(
+    /\b(dort|da|davon|dazu|dahin|dorthin|dasselbe|dieselbe|derselbe|weiter|nochmal|noch\s+mal|mehr\s+dazu|und\s+dann|und\s+jetzt|der\s+andere|die\s+andere|das\s+andere|und\s+der|und\s+die)\b/iu.test(
       t,
     )
   ) {
     return true;
   }
-  if (/^(und|auch|mehr|weiter|erzähl|erzaehl)\b/iu.test(t)) return true;
+  if (
+    /\b(wie\s+weit|wie\s+lange|wie\s+teuer|wie\s+viel|öffnungszeiten|oeffnungszeiten|eintritt|tickets?|geschlossen|geöffnet|geoeffnet)\b/iu.test(
+      t,
+    )
+  ) {
+    return true;
+  }
+  if (/^(und|auch|mehr|weiter|erzähl|erzaehl|wann|wohin|wozu)\b/iu.test(t)) {
+    return true;
+  }
   return false;
 }
 
 /** Neue Blaupause / neuer Chat-Tab — nicht an alten Thread kleben. */
 export function looksLikeFreshSessionOpener(text: string): boolean {
   const t = text.replace(/\s+/g, ' ').trim();
-  if (t.length < 12) return false;
+  if (t.length < 8) return false;
+  if (wantsTaxiRide(t)) return true;
   if (hasAnaphora(t)) return false;
-  return /\b(?:welche\s+filme|ins\s+kino|kino\s+gehen|kinoprogramm|empfehl\w*.{0,48}\b(?:film|kino)|(?:morgen|heute)\s+abend.{0,40}\b(?:kino|film)|wo\s+(?:kann|gibt).{0,48}\b(?:essen|trinken|restaurant)|ich\s+(?:hab|habe|hätt|haette?)\b.{0,24}\büberlegt|lass\s+uns\b|was\s+geht\s+(?:heute|morgen)|tagesplan|unterkunft|\bhotel\b)\b/iu.test(
+  try {
+    const {
+      looksLikeExplicitNavOrAddress,
+      looksLikeWhereAmIQuery,
+      decideTopicCut,
+    } = require('../../module2/kernel/turnKernel') as {
+      looksLikeExplicitNavOrAddress: (s: string) => boolean;
+      looksLikeWhereAmIQuery: (s: string) => boolean;
+      decideTopicCut: (o: {
+        userText: string;
+        openLoop?: string | null;
+        lastClosedTopic?: string | null;
+        foregroundLabel?: string | null;
+      }) => string;
+    };
+    if (looksLikeExplicitNavOrAddress(t) || looksLikeWhereAmIQuery(t)) return true;
+    const ctx = getTopicCutContext();
+    const mode = decideTopicCut({
+      userText: t,
+      openLoop: ctx.openLoop,
+      lastClosedTopic: ctx.lastClosedTopic,
+      foregroundLabel: ctx.foregroundLabel,
+    });
+    if (mode === 'weave' || mode === 'continue') return false;
+    if (mode === 'new' || mode === 'closed_new') return true;
+  } catch {
+    /* soft */
+  }
+  return /\b(?:welche\s+filme|ins\s+kino|kino\s+gehen|kinoprogramm|empfehl\w*.{0,48}\b(?:film|kino)|(?:morgen|heute)\s+abend.{0,40}\b(?:kino|film)|wo\s+(?:kann|gibt).{0,48}\b(?:essen|trinken|restaurant)|ich\s+(?:hab|habe|hätt|haette?)\b.{0,24}\büberlegt|lass\s+uns\b|was\s+geht\s+(?:heute|morgen)|tagesplan|unterkunft|\bhotel\b|friseur|frisör|frisoer|eis\s+(?:essen|wäre|waere)|einplanen|eintragen)\b/iu.test(
+    t,
+  );
+}
+
+/** Offener Auftrag / totes Thema für Kernel-Topic-Cut. */
+export function getTopicCutContext(): {
+  openLoop: string | null;
+  lastClosedTopic: string | null;
+  foregroundLabel: string | null;
+} {
+  const fg = getForegroundThread();
+  const openFromLoops = fg?.openLoops[0]?.trim() || null;
+  const openFromCat =
+    fg && (fg.category === 'nav' || fg.category === 'planning')
+      ? fg.label?.trim() || null
+      : null;
+  return {
+    openLoop: openFromLoops || openFromCat,
+    lastClosedTopic:
+      lastClosedTopicMemo || fg?.entities?.lastClosedTopic || null,
+    foregroundLabel: fg?.label?.trim() || null,
+  };
+}
+
+/** Thema tot: nicht mehr resumierbar, nicht in Welcome/Prompt. */
+export function closeThreadsMatchingHint(hint: string): number {
+  const q = hint.replace(/\s+/g, ' ').trim().toLowerCase();
+  if (q.length < 2) return 0;
+  let n = 0;
+  mutate((s) => {
+    for (const t of s.threads) {
+      if (t.status === 'closed') continue;
+      const hay = [
+        t.label,
+        t.summary,
+        ...t.openLoops,
+        ...Object.values(t.entities),
+      ]
+        .join(' ')
+        .toLowerCase();
+      const label = (t.label || '').toLowerCase();
+      const hit =
+        hay.includes(q) ||
+        q.includes(label) ||
+        (label.length >= 4 && q.includes(label.slice(0, 12)));
+      if (!hit) continue;
+      t.status = 'closed';
+      t.openLoops = [];
+      t.updatedAt = nowMs();
+      t.entities = { ...t.entities, retired: '1' };
+      n += 1;
+      if (s.foregroundId === t.id) s.foregroundId = null;
+    }
+  });
+  return n;
+}
+
+export function closeForegroundThread(reason?: string): boolean {
+  const fg = getForegroundThread();
+  if (!fg) return false;
+  mutate((s) => {
+    const t = s.threads.find((x) => x.id === fg.id);
+    if (!t) return;
+    t.status = 'closed';
+    t.openLoops = [];
+    t.updatedAt = nowMs();
+    if (reason) {
+      t.entities = { ...t.entities, retiredReason: reason.slice(0, 80) };
+    }
+    if (s.foregroundId === t.id) s.foregroundId = null;
+  });
+  return true;
+}
+
+/** Frage beantwortet — Loop bleibt wenn Nav/Plan noch offen. */
+export function markQuestionClosed(label: string): void {
+  const t = label.replace(/\s+/g, ' ').trim().slice(0, 80);
+  if (!t) return;
+  lastClosedTopicMemo = t;
+  const fg = getForegroundThread();
+  if (!fg) return;
+  mutate((s) => {
+    const th = s.threads.find((x) => x.id === fg.id);
+    if (!th) return;
+    th.entities = { ...th.entities, lastClosedTopic: t };
+    th.updatedAt = nowMs();
+  });
+}
+
+/** Cue-Wörter für Rückfragen (ohne reine Längen-Heuristik). */
+function hasFollowUpCue(text: string): boolean {
+  const t = text.replace(/\s+/g, ' ').trim();
+  if (wantsTaxiRide(t) || looksLikeNewConcreteDestination(t)) return false;
+  return /\b(?:warum|wieso|weshalb|und\s+dann|was\s+noch|mehr\s+dazu|erzähl|erzaehl|geschlossen|wann|wie\s+(?:weit|lange|teuer|viel)|noch\s+mehr|welche\s+uhrzeit|um\s+wie\s*viel|tickets?|davon|dazu|dahin|dorthin|und\s+der|und\s+die|der\s+andere|die\s+andere|öffnungszeiten|oeffnungszeiten|eintritt)\b/iu.test(
     t,
   );
 }
@@ -323,10 +526,28 @@ export function looksLikeFreshSessionOpener(text: string): boolean {
 /** Kurze Rückfrage im laufenden Blaupausen-Chat. */
 export function isLikelyShortFollowUp(text: string): boolean {
   const t = text.replace(/\s+/g, ' ').trim();
-  if (t.length > 0 && t.length <= 48) return true;
-  return /\b(?:warum|wieso|weshalb|und\s+dann|was\s+noch|mehr\s+dazu|erzähl|erzaehl|geschlossen|wann|wie\s+viel|noch\s+mehr|welche\s+uhrzeit|um\s+wie\s*viel|tickets?|dafür|davon|dazu|und\s+der|und\s+die|der\s+andere|die\s+andere)\b/iu.test(
-    t,
-  );
+  try {
+    const { looksLikeSpokenCityCorrection } = require('../navigation/navDestCityCorrection') as {
+      looksLikeSpokenCityCorrection: (s: string) => boolean;
+    };
+    if (looksLikeSpokenCityCorrection(t)) return false;
+  } catch {
+    /* soft */
+  }
+  try {
+    const { looksLikeStreetAddress } = require('../navigation/streetAddressQuery') as {
+      looksLikeStreetAddress: (s: string) => boolean;
+    };
+    if (looksLikeStreetAddress(t)) return false;
+  } catch {
+    /* soft */
+  }
+  if (hasFollowUpCue(t) || hasAnaphora(t)) return true;
+  // Sehr kurz + kein frischer Opener → oft „und dann?“ ohne Cue-Wort
+  if (t.length > 0 && t.length <= 36 && !looksLikeFreshSessionOpener(t)) {
+    return true;
+  }
+  return false;
 }
 
 /**
@@ -348,6 +569,13 @@ export function shouldSuppressEarlyBridge(userText: string): boolean {
     fg.category === 'other' ||
     category === 'chat';
   if (sameCat && isLikelyShortFollowUp(text)) return true;
+  // Frische Cue-/Anapher-Rückfrage — auch bei Kategorie-Mismatch
+  if (
+    nowMs() - fg.updatedAt < 12 * 60_000 &&
+    (hasAnaphora(text) || hasFollowUpCue(text))
+  ) {
+    return true;
+  }
   return false;
 }
 
@@ -447,9 +675,12 @@ export async function loadConversationThreads(): Promise<ThreadStoreState> {
         const raw = await FileSystem.readAsStringAsync(PATH);
         const parsed = JSON.parse(raw) as Partial<ThreadStoreState>;
         const threads = Array.isArray(parsed.threads)
-          ? (parsed.threads as ConversationThread[]).filter(
-              (t) => t && typeof t.id === 'string' && typeof t.label === 'string',
-            )
+          ? (parsed.threads as ConversationThread[])
+              .filter(
+                (t) =>
+                  t && typeof t.id === 'string' && typeof t.label === 'string',
+              )
+              .map(migrateThread)
           : [];
         cache = {
           threads,
@@ -477,14 +708,16 @@ export function getForegroundThread(): ConversationThread | null {
   return s.threads.find((t) => t.id === s.foregroundId) ?? null;
 }
 
-export function listResumableThreads(): ConversationThread[] {
+export function listResumableThreads(cityKey?: string | null): ConversationThread[] {
   const s = getConversationThreadsSync();
   const cutoff = nowMs() - THREAD_RESUME_HORIZON_MS;
+  const key = cityKey ? normalizeThreadCityKey(cityKey) : null;
   return s.threads
     .filter(
       (t) =>
         (t.status === 'parked' || t.status === 'active') &&
-        t.updatedAt >= cutoff,
+        t.updatedAt >= cutoff &&
+        (!key || normalizeThreadCityKey(t.cityKey || t.cityHint) === key),
     )
     .sort((a, b) => b.updatedAt - a.updatedAt);
 }
@@ -492,7 +725,13 @@ export function listResumableThreads(): ConversationThread[] {
 function parkThread(state: ThreadStoreState, id: string): void {
   const t = state.threads.find((x) => x.id === id);
   if (!t) return;
-  if (t.status === 'active') t.status = 'parked';
+  if (t.status === 'active') {
+    t.status = 'parked';
+    if (t.label?.trim()) {
+      lastClosedTopicMemo = t.label.trim();
+      t.entities = { ...t.entities, lastClosedTopic: t.label.trim() };
+    }
+  }
   t.updatedAt = nowMs();
 }
 
@@ -517,9 +756,14 @@ export function routeConversationTopic(opts: {
   intent?: string | null;
   subject?: string | null;
   cityHint?: string | null;
+  /** Pflicht-Partition; fehlt → aus cityHint / unknown */
+  cityKey?: string | null;
 }): TopicRouteDecision {
-  const state = cache ?? emptyState();
   const text = (opts.userText || '').trim();
+  const cityKey = normalizeThreadCityKey(
+    opts.cityKey || opts.cityHint || null,
+  );
+  const cityHint = opts.cityHint?.trim() || null;
   const category = inferThreadCategory({
     userText: text,
     intent: opts.intent,
@@ -528,7 +772,7 @@ export function routeConversationTopic(opts: {
   const entities = extractEntities({
     userText: text,
     subject: opts.subject,
-    cityHint: opts.cityHint,
+    cityHint,
     category,
   });
   const fg = getForegroundThread();
@@ -543,7 +787,9 @@ export function routeConversationTopic(opts: {
   }
 
   const freshFg = getForegroundThread();
-  const resumable = listResumableThreads().filter((t) => t.id !== freshFg?.id);
+  const resumable = listResumableThreads(cityKey).filter(
+    (t) => t.id !== freshFg?.id,
+  );
 
   // Explicit resume or strong entity match
   let best: { thread: ConversationThread; score: number } | null = null;
@@ -551,11 +797,12 @@ export function routeConversationTopic(opts: {
     const score = scoreResumeMatch(t, text);
     if (!best || score > best.score) best = { thread: t, score };
   }
-  // Härterer Cut: Resume nur bei explizitem Zurück-Wollen oder sehr starkem Entity-Treffer —
-  // nicht schon wegen gleicher Kategorie („Kino“ klebt sonst an gestern).
+  // Härterer Cut: Resume nur bei gleichem cityKey
   const resumeHit =
     best &&
     !looksLikeFreshSessionOpener(text) &&
+    normalizeThreadCityKey(best.thread.cityKey || best.thread.cityHint) ===
+      cityKey &&
     (wantsExplicitResume(text)
       ? best.score >= 8
       : best.score >= 14);
@@ -570,7 +817,8 @@ export function routeConversationTopic(opts: {
         th.entities = { ...th.entities, ...entities };
         th.lastUserText = text.slice(0, 240);
         th.lastIntent = opts.intent ?? th.lastIntent;
-        if (opts.cityHint) th.cityHint = opts.cityHint;
+        th.cityKey = cityKey;
+        if (cityHint) th.cityHint = cityHint;
         th.updatedAt = nowMs();
         thread = { ...th };
       }
@@ -578,8 +826,10 @@ export function routeConversationTopic(opts: {
     return { mode: 'resume', thread, parkedIds };
   }
 
-  // Continue foreground
+  // Continue foreground — nur gleiche Stadt
   if (freshFg) {
+    const sameCity =
+      normalizeThreadCityKey(freshFg.cityKey || freshFg.cityHint) === cityKey;
     const sameCat =
       freshFg.category === category ||
       category === 'other' ||
@@ -596,14 +846,17 @@ export function routeConversationTopic(opts: {
         normalizeToken(text).includes(normalizeToken(v)),
       );
     const recent = nowMs() - freshFg.updatedAt < 45 * 60_000;
-    // Continue nur bei Anapher, Entity-Treffer oder kurzer Rückfrage —
-    // nicht bei jedem neuen Satz derselben Kategorie in 45 Min (klebt an „gestern“).
+    const veryRecent = nowMs() - freshFg.updatedAt < 12 * 60_000;
     const cont =
+      sameCity &&
       !wantsExplicitNewTopic(text) &&
       !looksLikeFreshSessionOpener(text) &&
+      !wantsTaxiRide(text) &&
+      !(looksLikeNewConcreteDestination(text) && !entityHit) &&
       (hasAnaphora(text) ||
         (sameCat && entityHit) ||
-        (sameCat && recent && isLikelyShortFollowUp(text)));
+        (sameCat && recent && isLikelyShortFollowUp(text)) ||
+        (veryRecent && (hasAnaphora(text) || hasFollowUpCue(text))));
 
     if (cont && !(wantsParallel(text) && !sameCat && !hasAnaphora(text))) {
       let thread = freshFg;
@@ -615,7 +868,8 @@ export function routeConversationTopic(opts: {
         th.entities = { ...th.entities, ...entities };
         th.lastUserText = text.slice(0, 240);
         th.lastIntent = opts.intent ?? th.lastIntent;
-        if (opts.cityHint) th.cityHint = opts.cityHint;
+        th.cityKey = cityKey;
+        if (cityHint) th.cityHint = cityHint;
         if (category !== 'other' && category !== 'chat') th.category = category;
         th.updatedAt = nowMs();
         thread = { ...th };
@@ -628,6 +882,7 @@ export function routeConversationTopic(opts: {
   const parallel =
     wantsParallel(text) &&
     freshFg &&
+    normalizeThreadCityKey(freshFg.cityKey || freshFg.cityHint) === cityKey &&
     (freshFg.category !== category || wantsExplicitNewTopic(text));
 
   // New topic (default when not continue/resume)
@@ -650,7 +905,7 @@ export function routeConversationTopic(opts: {
         category,
         subject: opts.subject,
         userText: text,
-        cityHint: opts.cityHint,
+        cityHint,
       }),
       category,
       status: 'active',
@@ -662,7 +917,8 @@ export function routeConversationTopic(opts: {
       lastUserText: text.slice(0, 240),
       lastAssistantSnippet: '',
       lastIntent: opts.intent ?? null,
-      cityHint: opts.cityHint?.trim() || null,
+      cityHint,
+      cityKey,
     };
     s.threads.push(thread);
     s.foregroundId = thread.id;
@@ -719,6 +975,7 @@ export function commitThreadTurn(opts: {
   intent?: string | null;
   subject?: string | null;
   cityHint?: string | null;
+  cityKey?: string | null;
   openLoop?: string | null;
   /** Fact-Zeilen die als „schon gesagt“ gelten */
   saidFactLines?: string[];
@@ -727,6 +984,9 @@ export function commitThreadTurn(opts: {
   if (!fg) return null;
   const speech = (opts.assistantSpeech || '').replace(/\s+/g, ' ').trim();
   const snippet = speech.slice(0, 180);
+  const cityKey = normalizeThreadCityKey(
+    opts.cityKey || opts.cityHint || fg.cityKey || fg.cityHint,
+  );
   let updated: ConversationThread | null = null;
   mutate((s) => {
     const th = s.threads.find((x) => x.id === fg.id);
@@ -740,10 +1000,27 @@ export function commitThreadTurn(opts: {
         th.label = opts.subject.trim().slice(0, 56);
       }
     }
+    th.cityKey = cityKey;
     if (opts.cityHint?.trim()) th.cityHint = opts.cityHint.trim();
+    else if (!th.cityHint && opts.cityKey) th.cityHint = opts.cityKey.trim().slice(0, 48);
     if (opts.openLoop?.trim()) {
       const loop = opts.openLoop.trim().slice(0, 100);
       th.openLoops = [loop, ...th.openLoops.filter((x) => x !== loop)].slice(0, 5);
+    } else {
+      try {
+        const { looksLikeOpenDestinationCommit } = require('../../module2/kernel/turnKernel') as {
+          looksLikeOpenDestinationCommit: (s: string) => boolean;
+        };
+        if (looksLikeOpenDestinationCommit(opts.userText)) {
+          const loop = (opts.subject || opts.userText).trim().slice(0, 100);
+          th.openLoops = [loop, ...th.openLoops.filter((x) => x !== loop)].slice(
+            0,
+            5,
+          );
+        }
+      } catch {
+        /* soft */
+      }
     }
     const nextSummary = [
       th.label,
@@ -798,22 +1075,36 @@ export function addOpenLoopToForeground(loop: string): void {
 
 /**
  * Prompt-Pack: nur aktiver Thread + knapper Index geparkter Themen.
- * Kein fremder Dialog-Dump.
+ * Kein fremder Dialog-Dump. Optional cityKey → nur gleiche Stadt.
  */
 export function formatThreadContextForPrompt(opts?: {
   includeParkedIndex?: boolean;
   maxParked?: number;
+  cityKey?: string | null;
 }): string {
-  const fg = getForegroundThread();
+  const scopeKey = opts?.cityKey
+    ? normalizeThreadCityKey(opts.cityKey)
+    : null;
+  let fg = getForegroundThread();
+  if (
+    fg &&
+    scopeKey &&
+    normalizeThreadCityKey(fg.cityKey || fg.cityHint) !== scopeKey
+  ) {
+    fg = null;
+  }
   const includeParked = opts?.includeParkedIndex !== false;
   const maxParked = opts?.maxParked ?? 3;
   const lines: string[] = [
     '=== GESPRÄCHS-THREAD (SSOT — nur dieser Kontext für Kontinuität) ===',
   ];
+  if (scopeKey) {
+    lines.push(`cityKey=${scopeKey}`);
+  }
   if (!fg) {
     lines.push('Kein aktiver Thread — frischer Start, nicht auf alte Themen beziehen.');
     if (includeParked) {
-      const parked = listResumableThreads().slice(0, maxParked);
+      const parked = listResumableThreads(scopeKey).slice(0, maxParked);
       if (parked.length) {
         lines.push(
           `Geparkt (nur bei klarem Bezug/Resume aufgreifen): ${parked
@@ -823,13 +1114,18 @@ export function formatThreadContextForPrompt(opts?: {
       }
     }
     lines.push(
-      'Regel: Neues Thema = kein Bezug auf geparkte Threads. Resume nur bei Entity-/„nochmal wegen…“.',
+      'Regel: Zuerst DIESE Äußerung. Geparktes nur bei klarem Bezug (gleiches Ziel/Thema). Uhrzeit+Tag allein = kein Resume.',
     );
     return lines.join('\n');
   }
 
   const ageMin = Math.round((nowMs() - fg.updatedAt) / 60_000);
-  lines.push(`Aktiv: ${fg.label} [${fg.category}] · vor ${ageMin} Min`);
+  const ageH = Math.round((nowMs() - fg.updatedAt) / 3_600_000);
+  const age =
+    ageMin < 90 ? `vor ${ageMin} Min` : `vor ~${Math.max(1, ageH)} h`;
+  lines.push(
+    `Aktiv: ${fg.label} [${fg.category}] · cityKey=${normalizeThreadCityKey(fg.cityKey || fg.cityHint)} · ${age}`,
+  );
   if (fg.summary) lines.push(`Stand: ${fg.summary}`);
   const ents = Object.entries(fg.entities);
   if (ents.length) {
@@ -844,8 +1140,8 @@ export function formatThreadContextForPrompt(opts?: {
     lines.push(`Zuletzt gesagt (kurz): ${fg.lastAssistantSnippet}`);
   }
   if (includeParked) {
-    const parked = listResumableThreads()
-      .filter((t) => t.id !== fg.id)
+    const parked = listResumableThreads(scopeKey || fg.cityKey || fg.cityHint)
+      .filter((t) => t.id !== fg!.id)
       .slice(0, maxParked);
     if (parked.length) {
       lines.push(
@@ -856,14 +1152,49 @@ export function formatThreadContextForPrompt(opts?: {
     }
   }
   lines.push(
-    'Regel: Bleib im aktiven Thread. Andere Themen nur bei klarem Resume-Signal. Keine Cross-Talk-Bezüge.',
+    'Regel: Zuerst DIESE Äußerung. Aktiven/geparkten Thread nur aufgreifen, wenn der Satz klar dazugehört (gleiches Ziel, Anapher, „der Flieger“). Uhrzeit+Tag allein = kein Resume.',
   );
   return lines.join('\n');
 }
 
+/** Straße/Hausadresse — kein „weitermachen“-Ziel für Welcome-Back. */
+function isStreetLikeWelcomeTopic(label: string, category?: ThreadCategory): boolean {
+  const t = (label || '').replace(/\s+/g, ' ').trim();
+  if (!t) return true;
+  try {
+    const {
+      looksLikeStreetAddress,
+      parseStreetHouseQuery,
+    } = require('../navigation/streetAddressQuery') as {
+      looksLikeStreetAddress: (s: string) => boolean;
+      parseStreetHouseQuery: (
+        s: string,
+      ) => { street: string; housenumber: string } | null;
+    };
+    if (looksLikeStreetAddress(t) || parseStreetHouseQuery(t)) return true;
+  } catch {
+    /* soft */
+  }
+  // „Heisterhoop“, „Hauptstraße“ ohne Nummer — oft Nav-Thread-Label
+  if (
+    category === 'nav' &&
+    /\b(?:straße|strasse|str\.?|weg|allee|platz|gasse|ring|damm|hof|hoop)\b/iu.test(
+      t,
+    )
+  ) {
+    return true;
+  }
+  return false;
+}
+
 /** Für Welcome-Back / Memory: resumierbare Kurzzeilen. */
-export function formatResumableThreadsForWelcome(max = 3): string {
-  const list = listResumableThreads().slice(0, max);
+export function formatResumableThreadsForWelcome(
+  max = 3,
+  cityKey?: string | null,
+): string {
+  const list = listResumableThreads(cityKey)
+    .filter((t) => !isStreetLikeWelcomeTopic(t.label, t.category))
+    .slice(0, max);
   if (!list.length) return '';
   return list
     .map((t) => {
@@ -893,4 +1224,27 @@ export function threadTopicHint(): string | null {
   const fg = getForegroundThread();
   if (!fg) return null;
   return fg.label || fg.summary.slice(0, 80) || null;
+}
+
+/**
+ * Pack/GPS-Stadtwechsel: Foreground parken wenn andere Stadt —
+ * neuer Chat startet beim nächsten Turn mit neuem cityKey.
+ */
+export function parkForegroundOnCitySwitch(nextCityName: string): void {
+  const nextKey = normalizeThreadCityKey(nextCityName);
+  if (nextKey === 'unknown') return;
+  mutate((s) => {
+    const fg = s.foregroundId
+      ? s.threads.find((t) => t.id === s.foregroundId)
+      : null;
+    if (!fg) return;
+    const prevKey = normalizeThreadCityKey(fg.cityKey || fg.cityHint);
+    if (prevKey === nextKey) {
+      fg.cityKey = nextKey;
+      fg.cityHint = nextCityName.trim().slice(0, 48);
+      return;
+    }
+    parkThread(s, fg.id);
+    s.foregroundId = null;
+  });
 }

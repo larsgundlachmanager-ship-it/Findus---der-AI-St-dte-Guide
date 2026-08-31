@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "title": "Findus Live-Qualität — echte User-Fragen",
+  "title": "Yorro Live-Qualität — echte User-Fragen",
   "gpsHint": "Ideal: Hamburg oder aktuelle Reise-Stadt mit GPS an",
   "passThreshold": 0.85,
   "devicePlaybook": [
@@ -53,6 +53,21 @@
       ]
     },
     {
+      "id": "lq_hamburg_compound_day",
+      "tier": "device_must",
+      "question": "Morgen 9 Uhr los nach Hamburg, frühstücken, abends Pannfisch mit Elbblick, Michel rauf — wie hoch, wie teuer, was ist das, zwischendurch eine Tour, Sonnenuntergang.",
+      "expectJob": "day_plan_budget",
+      "expectMustHaves": ["Hamburg", "Pannfisch", "Michel"],
+      "expectSecondary": ["transit_live", "dining_hard_match", "poi_identify"],
+      "requireContractFacts": ["venue_options", "concrete_place"],
+      "deviceChecks": [
+        "Compound: parallele Jobs, kein exklusives M5",
+        "📅 Tagesplan-Button nach Antwort",
+        "Kalender: Anreise, Frühstück, Pannfisch, Michel, Tour, Sunset",
+        "Michel Höhe/Preis in Speech beantwortet"
+      ]
+    },
+    {
       "id": "lq_hotel_weekend",
       "tier": "device_must",
       "question": "Hotel fürs Wochenende von Freitag bis Sonntag mit Pool und Sauna unter 500 Euro",
@@ -64,6 +79,20 @@
         "Zwei Hotel-Optionen",
         "Stay22/Buchungs-Link mit Datum vorausgefüllt",
         "Pool/Sauna nur wenn belegt"
+      ]
+    },
+    {
+      "id": "lq_hotel_all_inclusive_massage",
+      "tier": "device_must",
+      "question": "Hotel all-inclusive mit Massage und Pool unter 800 Euro",
+      "expectJob": "stay_search",
+      "expectMustHaves": ["All-inclusive", "Massage", "Pool", "Budget 800€"],
+      "requireContractFacts": ["venue_options", "hard_match_evidence"],
+      "requireActions": ["BOOK_STAY22", "OPEN_URL"],
+      "deviceChecks": [
+        "All-inclusive und Massage nur wenn belegt — Spa allein reicht nicht",
+        "Fehlende Amenities ehrlich nennen",
+        "Zwei Optionen + Stay22/Buchungs-Link"
       ]
     },
     {

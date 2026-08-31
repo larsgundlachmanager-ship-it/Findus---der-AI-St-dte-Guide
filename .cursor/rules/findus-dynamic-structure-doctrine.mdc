@@ -16,11 +16,12 @@ Wenn der User ein Beispiel oder einen Flow liefert (z. B. Restaurant in einer St
 - Ableiten: **Struktur, Art und Weise, Flow** — als abstrakte Blaupause.
 - Die KI entscheidet Wortlaut, Ton und Formulierungen frei aus dem `ContextRucksack`.
 - Dieselbe Blaupause muss ohne Fall-Hardcoding für andere Formulierungen, Städte, Orte und Themen funktionieren.
+- **Lern-first:** Testfeedback zuerst als LearnedRule / Owner-Gold / Policy-Constraint umsetzen — Kernel/Architektur nur bei echtem Bug (`findus-test-feedback-learn.mdc`).
 
 ## Vier Regeln
 
 1. **No Hardcoded Scripts** — Nie konkrete Sätze, feste Wortwahl oder Ortsnamen (z. B. Prisdorf) als zwingende Ausgabe in Prompts/Code.
-2. **Struktur als Blaupause** — z. B. `klare Antwort/Empfehlung vorne → Begründung → Tipps/Alternativen hinten`, nie „Sag genau diesen Satz.“ Bridge = einziges Vorgeplänkel.
+2. **Struktur als Blaupause** — z. B. `Verstanden/Zusagen (Bridge) → klare Antwort/Empfehlung (Call 2) → Tipps hinten`, nie „Sag genau diesen Satz.“ Bridge = einziges Vorgeplänkel, kein Fakten-Spoil.
 3. **Kontext-Agnostik** — Restaurant-Flow = Museum-Flow = Surfschule-Flow; Variablen aus Kontext.
 4. **Few-Shot Disclaimer** — Bei jedem Beispiel zwingend:
 
@@ -28,6 +29,7 @@ Wenn der User ein Beispiel oder einen Flow liefert (z. B. Restaurant in einer St
 
 ## SSOT
 
-- Prompt-Block: `FINDUS_DYNAMIC_STRUCTURE_DOCTRINE` + `FINDUS_FEW_SHOT_DISCLAIMER` in `src/services/concierge/findusResponsePolicy.ts`
+- Prompt-Block: `FINDUS_DYNAMIC_STRUCTURE_DOCTRINE` + `FINDUS_SYNTHESIS_RAIL_BLOCK` + `FINDUS_FEW_SHOT_DISCLAIMER` in `src/services/concierge/findusResponsePolicy.ts`
+- Call-2-Tipps = Geländer (Form erben, Slots der Frage, schiefer Fit weglassen) — `src/module2/speech/synthesisRails.ts`
 - Agent-Drafts = Fakten/Struktur-Hints für die Synthese, keine Vorlese-Skripte
 - Notfall-Fallbacks im Code dürfen knapp sein, dürfen aber keine Ort-/Wortwahl-Lehre werden

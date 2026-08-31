@@ -19,10 +19,10 @@ const HOTEL_STOP =
   /^(moment|prinzip|griff|weg|zentrum|café|cafe|park|museum|bahnhof|restaurant|supermarkt|markt|laden|dm|rossmann|aldi|lidl|rewe|edeka|apotheke|toilette|klo|meer|strand|hafen|insel|stadt|zimmer|bett|frühstück|fruehstueck|zahnbürste|zahnbuerste|cola|bier|wegbier|wasser|einkauf|kaufen|brauch|benötig)$/i;
 
 const EXPLICIT_HOTEL_SAVE =
-  /\b(?:mein\s+hotel\s+(?:heißt|heisst|ist)|ich\s+(?:bin|wohne|schlafe|übernachte|uebernachte)\s+(?:im|in|beim)|zum\s+hotel|ins\s+hotel|navigier(?:e|en)?\s+(?:mich\s+)?(?:zum\s+)?hotel)\b/iu;
+  /\b(?:mein\s+hotel\s+(?:heißt|heisst|ist)|ich\s+(?:bin|wohne|schlafe|übernachte|uebernachte)\s+(?:im|in|beim)|zum\s+hotel|ins\s+hotel|navigier(?:e|en)?\s+(?:mich\s+)?(?:zum\s+)?hotel|merk(?:e)?\s+(?:dir|das)|als\s+(?:meine?\s+)?(?:homebase|basis|unterkunft)|homebase|neue\s+basis)\b/iu;
 
 const CLEAR_HOTEL_STAY =
-  /\b(?:mein|unser)\s+hotel\b|\b(?:ich|wir)\s+(?:wohne|wohnen|schlafe|schlafen|übernachte|uebernachte|übernachten|uebernachten)\b/iu;
+  /\b(?:mein|unser)\s+hotel\b|\b(?:ich|wir)\s+(?:wohne|wohnen|schlafe|schlafen|übernachte|uebernachte|übernachten|uebernachten|bin)\b.*\b(?:hotel|pension|hostel|unterkunft)\b|\b(?:hotel|pension|hostel)\b.*\b(?:merk(?:e)?\s+dir|homebase|als\s+basis)\b/iu;
 
 /** „Das ist mein Haus / meine Ferienwohnung / Startpunkt hier“ → Unterkunft speichern */
 const HOME_STAY_RE =
@@ -67,10 +67,12 @@ function extractHotelNameFromText(
   if (!skipExplicitGuard && EXPLICIT_HOTEL_SAVE.test(t)) return null;
 
   const patterns: RegExp[] = [
-    /\b(?:hotel|pension|hostel)\s+([A-ZÄÖÜa-zäöüß][\wÄÖÜäöüß\-']+(?:\s+[A-ZÄÖÜa-zäöüß][\wÄÖÜäöüß\-']+){0,3})/u,
-    /\b(?:im|in|beim|bei)\s+hotel\s+([A-ZÄÖÜa-zäöüß][\wÄÖÜäöüß\-']+(?:\s+[A-ZÄÖÜa-zäöüß][\wÄÖÜäöüß\-']+){0,3})/u,
-    /\b(?:wir\s+(?:sind|wohnen|schlafen|übernachten|uebernachten)|unser\s+hotel(?:\s+(?:heißt|heisst|ist))?|mein\s+hotel(?:\s+(?:heißt|heisst|ist))?)\s+(?:im|in|beim|bei)?\s*(?:hotel\s+)?([A-ZÄÖÜa-zäöüß][\wÄÖÜäöüß\-']+(?:\s+[A-ZÄÖÜa-zäöüß][\wÄÖÜäöüß\-']+){0,3})/iu,
-    // NOTE: bare "ist X" removed — it falsely tagged shopping words as hotel names
+    /\b(?:hotel|pension|hostel)\s+([A-ZÄÖÜa-zäöüß][\wÄÖÜäöüß\-']+(?:\s+[A-ZÄÖÜa-zäöüß][\wÄÖÜäöüß\-']+){0,5})/u,
+    /\b(?:im|in|beim|bei)\s+hotel\s+([A-ZÄÖÜa-zäöüß][\wÄÖÜäöüß\-']+(?:\s+[A-ZÄÖÜa-zäöüß][\wÄÖÜäöüß\-']+){0,5})/u,
+    /\b(?:wir\s+(?:sind|wohnen|schlafen|übernachten|uebernachten)|unser\s+hotel(?:\s+(?:heißt|heisst|ist))?|mein\s+hotel(?:\s+(?:heißt|heisst|ist))?)\s+(?:im|in|beim|bei)?\s*(?:hotel\s+)?([A-ZÄÖÜa-zäöüß][\wÄÖÜäöüß\-']+(?:\s+[A-ZÄÖÜa-zäöüß][\wÄÖÜäöüß\-']+){0,5})/iu,
+    // STT-Quirks: „Bett for Night“ / „… for Night“
+    /\b((?:[\wÄÖÜäöüß\-']+\s+){0,3}bett\s+for\s+night)\b/iu,
+    /\b((?:gold\s*)?schätze?\s+(?:will\s+das\s+)?bett\s+for\s+night)\b/iu,
   ];
 
   for (const re of patterns) {
@@ -160,6 +162,16 @@ async function silentSaveHotel(hotelName: string): Promise<void> {
   });
   mem.setPendingHotelConfirm(null);
   mem.setAwaitingHotelName(false);
+  try {
+    const { applyConfirmedHotelAsDayBase } = await import('./hotelBasePresence');
+    applyConfirmedHotelAsDayBase({
+      name: hotelName,
+      lat: coords.lat,
+      lng: coords.lng,
+    });
+  } catch {
+    /* soft */
+  }
   if (__DEV__) console.log(`[memory] silent hotel save: ${hotelName}`);
 }
 
@@ -186,6 +198,16 @@ async function silentSaveHomeStay(opts: {
   });
   mem.setPendingHotelConfirm(null);
   mem.setAwaitingHotelName(false);
+  try {
+    const { applyConfirmedHotelAsDayBase } = await import('./hotelBasePresence');
+    applyConfirmedHotelAsDayBase({
+      name,
+      lat: gps.lastGpsLat,
+      lng: gps.lastGpsLng,
+    });
+  } catch {
+    /* soft */
+  }
   if (__DEV__) console.log(`[memory] home/stay save: ${name}`);
 }
 
@@ -205,6 +227,14 @@ function detectHomeStayLabel(text: string): {
     return { label: 'Mein Hotel', kind: 'haus' };
   }
   return { label: 'Mein Haus', kind: 'haus' };
+}
+
+let parkingJustSaved = false;
+
+export function consumeParkingJustSaved(): boolean {
+  const v = parkingJustSaved;
+  parkingJustSaved = false;
+  return v;
 }
 
 export async function captureSideChannelHints(
@@ -228,6 +258,7 @@ export async function captureSideChannelHints(
       lng: gps.lastGpsLng,
       maxDurationMin,
     });
+    parkingJustSaved = true;
     const untilClock = text.match(
       /\b(?:bis|gilt\s+bis|läuft\s+bis|laeuft\s+bis|ticket\s+bis)\s*(\d{1,2})[:.](\d{2})\b/iu,
     );
@@ -248,52 +279,69 @@ export async function captureSideChannelHints(
     await silentSaveHomeStay(home);
   }
 
+  try {
+    const { tryConfirmPendingHotelFromUtterance } = await import(
+      './hotelBasePresence'
+    );
+    if (tryConfirmPendingHotelFromUtterance(text)) {
+      return result;
+    }
+  } catch {
+    /* soft */
+  }
+
   if (!mem.pendingHotelConfirmId && !mem.awaitingHotelName) {
     // Never invent hotel names from shopping / multi-goal speech
     const shoppingNoise =
       /\b(?:zahnbürste|zahnbuerste|cola|bier|wegbier|wasser|einkaufen|kaufen|supermarkt|drogerie)\b/iu.test(
         text,
       );
+    const clear = isClearHotelMention(text);
+    // Explizite Hotel-/Basis-Aussage: Länge egal (sonst blockt „merk dir … Homebase“)
     const multiGoal =
-      /\b(?:vorher|außerdem|ausserdem|pünktlich|puenktlich|verabredung)\b/iu.test(
+      !clear &&
+      (/\b(?:vorher|außerdem|ausserdem|pünktlich|puenktlich|verabredung)\b/iu.test(
         text,
-      ) || text.length > 120;
+      ) ||
+        text.length > 120);
 
     if (!shoppingNoise && !multiGoal) {
-    const clear = isClearHotelMention(text);
-    const hotelName = clear
-      ? extractHotelNameFromText(text, true)
-      : extractIncidentalHotelName(text);
+      const hotelName = clear
+        ? extractHotelNameFromText(text, true)
+        : extractIncidentalHotelName(text);
 
-    if (hotelName && (await hotelNameLooksReal(hotelName))) {
-      const confirmed = mem.getConfirmedHotel();
-      const sameConfirmed =
-        confirmed &&
-        confirmed.name.toLowerCase().replace(/^hotel\s+/i, '') ===
-          hotelName.toLowerCase().replace(/^hotel\s+/i, '');
+      if (hotelName && (await hotelNameLooksReal(hotelName))) {
+        const confirmed = mem.getConfirmedHotel();
+        const sameConfirmed =
+          confirmed &&
+          confirmed.name.toLowerCase().replace(/^hotel\s+/i, '') ===
+            hotelName.toLowerCase().replace(/^hotel\s+/i, '');
 
-      if (!sameConfirmed) {
-        if (clear) {
+        if (!sameConfirmed) {
+          if (clear) {
+            await silentSaveHotel(hotelName);
+          } else {
+            const coords = await resolveHotelCoords(hotelName);
+            const short = hotelName.replace(/^Hotel\s+/i, '');
+            const entity = mem.addOrUpdateEntity({
+              type: 'hotel',
+              name: hotelName,
+              isConfirmed: false,
+              lat: coords.lat,
+              lng: coords.lng,
+              poiId: coords.poiId,
+              notes: 'Nebenbei erwähnt — wartet auf Bestätigung',
+              visitedAt: new Date().toISOString(),
+            });
+            mem.setPendingHotelConfirm(entity.id);
+            result.hotelAsk =
+              `Ah — war „${short}“ ein Hotelname? Ist das dein Hotel?`;
+          }
+        } else if (clear && confirmed) {
+          // Schon bekannt — trotzdem als Tages-Basis setzen
           await silentSaveHotel(hotelName);
-        } else {
-          const coords = await resolveHotelCoords(hotelName);
-          const short = hotelName.replace(/^Hotel\s+/i, '');
-          const entity = mem.addOrUpdateEntity({
-            type: 'hotel',
-            name: hotelName,
-            isConfirmed: false,
-            lat: coords.lat,
-            lng: coords.lng,
-            poiId: coords.poiId,
-            notes: 'Nebenbei erwähnt — wartet auf Bestätigung',
-            visitedAt: new Date().toISOString(),
-          });
-          mem.setPendingHotelConfirm(entity.id);
-          result.hotelAsk =
-            `Ah — war „${short}“ ein Hotelname? Ist das dein Hotel?`;
         }
       }
-    }
     }
   }
 

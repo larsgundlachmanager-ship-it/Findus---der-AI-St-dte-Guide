@@ -1,0 +1,13 @@
+ route; visit coverage depends on stamp/visit-log completeness, not pack visit graph alone.
+
+### 5. Wangerooge ferry vs flight — price / how it works
+**PARTIAL** — Two **separate** paths, not one comparison flow: island **flight** via `inselfliegerAdvisor.ts` (slots, tariffs, Frisonaut book links) routed from `flightTripAdvisor.ts`; **ferry** via `ferryTicketResearch.ts` + `transit_live`/`runChatLane` (operator OPEN_URL). Smoke case `j23` covers ferry tickets. **Gap:** no unified “Fähre vs Flug — Preis und Ablauf” comparator; user gets mode-specific research, not side-by-side decision support.
+
+### 6. Chat lane: Pope age, Hamburg population, London population
+**PARTIAL** — Single world-fact turns are wired: `fact_number` + `worldFactGuard.ts` (Pope, `einwohner`), smoke cases in `liveReplay.cases.ts` / `hamburgCompound.smoke.test.ts`, answer via reboot (`runFactLanes` → `synthesizeRebootTurn`) or `runChatLane` when `handoff === 'none'` and not compound-owned. **Gaps:** triple trivia in **one** utterance has no dedicated multi-fact orchestration/smoke test; compound ownership may route away from chat lane; population answers are LLM/web-backed, not a cached facts DB.
+
+### 7. Nav with intermediate stops added smoothly
+**WORKS** (with context) — `resolveNavTarget.ts`: active multi-stop tour → `weaveSpontaneousStop`; explicit `addStop` → `addOptimizedTourStop`; `multiStopTour.ts` + `navigationService.advanceMultiStopTour` continue the queue; map UI supports add-stop mode (`HomeMapPlacePopup.tsx`). Smooth in-session weaving is implemented; cold-start “nav to A, then add B and C” is less polished unless a tour queue already exists.
+
+### 8. Taxi booking; flight “fly Berlin tonight” + leave-by; ticket booking
+**PARTIAL** — **Taxi:** `taxi_rideshare` job → `taxiRideshare.ts` + `wiringBattery` j25/j26: ETA, Uber deep link, `DIAL_PHONE` fallback — organizes ride, doesn’t book in-app. **Flight:** strong path — `shouldEnterFlightAdvisor` / `prepareFlightTripFollowUp` in `flightTripAdvisor.ts` with extensive `flightTripIntent.smoke.ts` (leave-by, wake, Berlin/London). **Tickets:

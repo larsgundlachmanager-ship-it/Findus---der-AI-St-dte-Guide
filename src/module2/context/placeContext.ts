@@ -13,9 +13,21 @@
 import {
   extractCityFromText,
   getLastMentionedCity,
+  getLastLiveInventory,
   wantsLocalCityStay,
 } from './shortTermContext';
 import { getCachedUserProfile } from '../../services/userProfileService';
+import {
+  getWorkingCityName,
+  getSoftWorkingCity,
+} from '../../services/softWorkingCity';
+import {
+  computeCityChatScope,
+  type CityChatScope,
+  type CityChatScopeSource,
+} from './cityChatScope';
+
+export type { CityChatScope, CityChatScopeSource };
 
 export type PlaceBiasMode = 'named_city' | 'gps';
 
@@ -26,7 +38,7 @@ export type PlaceContext = {
   speechPlace: string;
   /** named_city = User meint eine Stadt → City-Center-Bias erlaubt; gps = am Standort suchen */
   biasMode: PlaceBiasMode;
-  source: 'explicit' | 'conversation' | 'live_label' | 'gps' | 'profile';
+  source: 'explicit' | 'conversation' | 'live_label' | 'gps' | 'profile' | 'soft';
 };
 
 function profileCityName(): string | null {
@@ -37,6 +49,50 @@ function profileCityName(): string | null {
   } catch {
     return null;
   }
+}
+
+/**
+ * Aktive Stadt für Thread-Partition / Speech.
+ * Soft-/GPS-Arbeitsstadt schlägt Pack-Profil, wenn wir außerhalb des Pack-Fokus sind.
+ */
+export function resolveActiveCity(): string | null {
+  const soft = getWorkingCityName();
+  const profile = profileCityName();
+  const working = getSoftWorkingCity();
+  // Soft-Stadt ohne Pack oder bewusst gesetzt → Grundlage
+  if (working?.soft && soft) return soft;
+  if (soft && profile && soft.toLowerCase() !== profile.toLowerCase()) {
+    // GPS-Ort weicht von Pack ab → Soft gewinnt (Wedel statt Hamburg-Pack)
+    return soft;
+  }
+  return soft || profile;
+}
+
+/**
+ * Harte Stadt-Chat-Partition für Threads / Regelwerk / M5-Tag.
+ * Sticky nur bei Follow-up / Live-Inventar / gleicher Stadt — sonst Active.
+ */
+export function resolveCityChatScope(
+  userText?: string | null,
+  liveLocationLabel?: string | null,
+): CityChatScope {
+  void liveLocationLabel;
+  const text = (userText || '').trim();
+  const explicit =
+    text && !wantsLocalCityStay(text) ? extractCityFromText(text) : null;
+  let liveInventoryOpen = false;
+  try {
+    liveInventoryOpen = Boolean(getLastLiveInventory());
+  } catch {
+    liveInventoryOpen = false;
+  }
+  return computeCityChatScope({
+    userText: text,
+    activeCity: resolveActiveCity(),
+    stickyCity: getLastMentionedCity(),
+    explicitCity: explicit,
+    liveInventoryOpen,
+  });
 }
 
 export function resolvePlaceContext(
@@ -53,27 +109,41 @@ export function resolvePlaceContext(
     };
   }
 
-  // Lokaler Spazier-/Stay-Intent: Profilstadt schlägt Chat-Sticky (z. B. Hamburg vom Ostsee-Thread)
+  // Lokaler Spazier-/Stay-Intent: Arbeitsstadt (Soft/Pack) vor Chat-Sticky
   if (wantsLocalCityStay(text)) {
-    const profile = profileCityName();
-    if (profile) {
+    const active = resolveActiveCity();
+    if (active) {
       return {
-        city: profile,
-        speechPlace: profile,
+        city: active,
+        speechPlace: active,
         biasMode: 'named_city',
-        source: 'profile',
+        source: getSoftWorkingCity()?.soft ? 'soft' : 'profile',
       };
     }
   }
 
   const mentioned = getLastMentionedCity();
   if (mentioned) {
-    return {
-      city: mentioned,
-      speechPlace: mentioned,
-      biasMode: 'named_city',
-      source: 'conversation',
-    };
+    // Produkt/Prospekt: GPS/Active — Sticky-Flugstadt (Athen) nicht übernehmen.
+    let skipSticky = false;
+    try {
+      const {
+        isSupermarketOfferQuery,
+      } = require('../../services/research/supermarketProspectGates') as {
+        isSupermarketOfferQuery: (s: string) => boolean;
+      };
+      skipSticky = isSupermarketOfferQuery(text);
+    } catch {
+      skipSticky = false;
+    }
+    if (!skipSticky) {
+      return {
+        city: mentioned,
+        speechPlace: mentioned,
+        biasMode: 'named_city',
+        source: 'conversation',
+      };
+    }
   }
 
   const live = liveLocationLabel?.trim() || null;
@@ -87,13 +157,13 @@ export function resolvePlaceContext(
     };
   }
 
-  const profile = profileCityName();
-  if (profile) {
+  const active = resolveActiveCity();
+  if (active) {
     return {
-      city: profile,
-      speechPlace: profile,
+      city: active,
+      speechPlace: active,
       biasMode: 'named_city',
-      source: 'profile',
+      source: getSoftWorkingCity()?.soft ? 'soft' : 'profile',
     };
   }
 

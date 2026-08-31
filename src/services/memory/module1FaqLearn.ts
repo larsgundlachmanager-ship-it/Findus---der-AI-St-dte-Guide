@@ -163,10 +163,14 @@ export async function getMustSayFactTexts(
     spot_key: poi.spot_key,
     name: poi.name ?? '',
   });
-  return state.facts
-    .filter((f) => f.poiKey === key && f.mustSay && f.factText.trim())
-    .map((f) => f.factText.trim())
-    .slice(0, 8);
+  // mustSay (≥3 User) zuerst; danach alle gelernten Fakten (Gerät wächst sofort)
+  const rows = state.facts
+    .filter((f) => f.poiKey === key && f.factText.trim())
+    .sort((a, b) => {
+      if (a.mustSay !== b.mustSay) return a.mustSay ? -1 : 1;
+      return b.updatedAtMs - a.updatedAtMs;
+    });
+  return rows.map((f) => f.factText.trim()).slice(0, 8);
 }
 
 /**
@@ -227,6 +231,19 @@ export async function ingestVerifiedFaqFact(input: {
 
   row.mustSay = row.askUserIds.length >= MODULE1_MUST_SAY_MIN_USERS;
   await save(state);
+  try {
+    // Sofort in lokale Pack-SQLite — Datensatz wächst auf dem Gerät
+    const { appendLearnedFactToPoi } = await import('../../db/database');
+    if (input.poi.id != null && Number.isFinite(input.poi.id)) {
+      void appendLearnedFactToPoi({
+        poiId: input.poi.id,
+        factText: row.factText,
+        idHint: row.id,
+      });
+    }
+  } catch {
+    /* soft */
+  }
   try {
     scheduleImmediateCommunityCachePush();
   } catch {

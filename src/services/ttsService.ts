@@ -3,7 +3,6 @@
  */
 export {
   speakAssistantText,
-  speakTwoPhase,
   speakText,
   speakSentenceStream,
   speakOnboardingIntro,
@@ -13,6 +12,7 @@ export {
   prepareOnboardingVoiceSamples,
   prefetchSingleVoiceSample,
   playVoiceSample,
+  previewUserNamePronunciation,
   hydrateSampleCacheFromDisk,
   startVoiceBuffer,
   isVoiceSampleReady,
@@ -26,6 +26,7 @@ export {
   playCachedNavCueWav,
   flushQueuedNavSpeechCue,
   enqueueNavSpeechCue,
+  hasPendingNavSpeechCue,
   isFindusSpeechBusyForNav,
   getActiveTtsSessionCount,
   releaseSpeakingUiIfIdle,

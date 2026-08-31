@@ -1,6 +1,6 @@
 import type { RemoteFact, RemotePoi } from './supabase';
 import type { GeoLatLng, PoiTriggerKind } from '../types/poiGeo';
-import { serializePolygon } from './geo/polygon';
+import { serializePolygon, serializePolygonRings } from './geo/polygon';
 import { clearNavWaypointsRegistry, setNavWaypointsForSpot } from './navigation/navWaypointsRegistry';
 import {
   clearTransitStationRegistry,
@@ -23,6 +23,11 @@ import {
   type PackOfflineQa,
 } from './research/offlineQaRegistry';
 import { registerCoverageBoundsFromPack } from './discovery/cityCoverageBounds';
+import {
+  APPROACH_STORY_MIN_M,
+  AREA_STORY_MIN_M,
+  isStoryTriggerPoi,
+} from './geo/triggerRadius';
 
 type PlaceFactsPack = {
   origin?: string;
@@ -74,10 +79,27 @@ type CitySpot = {
   relevance?: string[];
   polygon?: Array<{ lat: number; lng: number } | GeoLatLng>;
   polygonCoordinates?: GeoLatLng[];
+  /** Mehrere OSM-Ringe (z. B. zwei Bahnsteige) — Karte zeichnet alle. */
+  polygonRings?: GeoLatLng[][];
   approach_triggers?: ApproachPack[];
   approachTriggers?: ApproachPack[];
   sub_pois?: SubPoiPack[];
   subPois?: SubPoiPack[];
+  /**
+   * Buchungs-IDs / URL (Touristen Stage A).
+   * Werden als Tags `ot:` / `qd:` / `rm:` / `booking_url:` in SQLite geschrieben.
+   */
+  booking?: {
+    openTableId?: string;
+    quandooId?: string;
+    resmioId?: string;
+    url?: string;
+  };
+  openTableId?: string;
+  quandooId?: string;
+  resmioId?: string;
+  bookingUrl?: string;
+  booking_url?: string;
   /** Baked Smart Compass waypoints (Phase 1 routing UI). */
   nav_waypoints?: Array<{
     lat: number;
@@ -258,6 +280,32 @@ function collectTags(spot: CitySpot): string[] {
     tags.add('promi');
     tags.add(`famous:${spot.facts.famousPersonConnected}`);
   }
+
+  const ot =
+    spot.booking?.openTableId?.trim() || spot.openTableId?.trim() || '';
+  const qd = spot.booking?.quandooId?.trim() || spot.quandooId?.trim() || '';
+  const rm = spot.booking?.resmioId?.trim() || spot.resmioId?.trim() || '';
+  const bookUrl =
+    spot.booking?.url?.trim() ||
+    spot.bookingUrl?.trim() ||
+    spot.booking_url?.trim() ||
+    '';
+  if (ot) {
+    tags.add('opentable');
+    tags.add(`ot:${ot}`);
+  }
+  if (qd) {
+    tags.add('quandoo');
+    tags.add(`qd:${qd}`);
+  }
+  if (rm) {
+    tags.add('resmio');
+    tags.add(`rm:${rm}`);
+  }
+  if (bookUrl && /^https?:\/\//i.test(bookUrl)) {
+    tags.add(`booking_url:${bookUrl}`);
+  }
+
   return [...tags];
 }
 
@@ -300,6 +348,10 @@ export function mapCityPackToRemote(
       lngMax: pack._coverage.lngMax,
       polygon: pack._coverage.polygon,
     });
+    // Straßennetz einmal cachen (Homescreen-Karte offline) — fire-and-forget
+    void import('./homeMap/mapRoadsCache').then((m) =>
+      m.ensureCityMapRoads(pack.city_id),
+    );
   }
   const triggers = pack.trigger_points ?? [];
   const triggerById = new Map(triggers.map((tp) => [tp.id, tp]));
@@ -409,17 +461,22 @@ export function mapCityPackToRemote(
       if (typeof lat !== 'number' || typeof lng !== 'number') continue;
       const teaser = cleanFactText(a.teaserText ?? a.teaser_text ?? '');
       const id = nextPoiId++;
+      const tagsJson = JSON.stringify(tags);
+      const storyApproach = isStoryTriggerPoi(tagsJson);
+      const rawApproachR = a.radiusMeters ?? a.radius_m ?? 35;
       pois.push({
         id,
         name: `${spot.name} · Wegweiser`,
         lat,
         lng,
-        radius_meters: a.radiusMeters ?? a.radius_m ?? 35,
+        radius_meters: storyApproach
+          ? Math.max(rawApproachR, APPROACH_STORY_MIN_M)
+          : rawApproachR,
         spot_key: spotKey,
         parent_poi_id: areaPoiId,
         kind: 'approach',
         category,
-        tags_json: JSON.stringify(tags),
+        tags_json: tagsJson,
         polygon_json: null,
         teaser_text: teaser || null,
         condition_rule: a.conditionRule ?? a.condition_rule ?? 'always',
@@ -473,17 +530,54 @@ export function mapCityPackToRemote(
 
   for (const spot of pack.spots ?? []) {
     const trigger = resolveTrigger(spot);
+    const extraRings = (spot.polygonRings ?? [])
+      .map((r) => normalizePolygon(r as GeoLatLng[]))
+      .filter((r): r is GeoLatLng[] => !!r && r.length >= 2);
     const polygon =
+      extraRings[0] ??
       normalizePolygon(spot.polygonCoordinates) ??
       normalizePolygon(spot.polygon) ??
       (trigger ? normalizePolygon(trigger.polygon) : null);
+    const mapRings =
+      extraRings.length >= 2
+        ? extraRings
+        : polygon
+          ? [polygon]
+          : [];
 
-    let lat: number | undefined = trigger?.lat;
-    let lng: number | undefined = trigger?.lng;
+    let lat: number | undefined;
+    let lng: number | undefined;
+    // Reihenfolge: Spot-Lat → Trigger → Polygon-Zentroid → gps_entrance gewinnt zuletzt.
+    if (typeof spot.lat === 'number' && typeof spot.lng === 'number') {
+      lat = spot.lat;
+      lng = spot.lng;
+    }
+    if (typeof trigger?.lat === 'number' && typeof trigger?.lng === 'number') {
+      lat = trigger.lat;
+      lng = trigger.lng;
+    }
     if (polygon) {
       const c = centroidOf(polygon);
       lat = lat ?? c.lat;
       lng = lng ?? c.lng;
+    }
+    // Nav-/Karten-Pin: gps_entrance / nav_target Sub-POI schlägt alles andere.
+    const subsEarly = spot.sub_pois ?? spot.subPois ?? [];
+    for (const s of subsEarly) {
+      const tags = (s.tags ?? []).map((t) => String(t).toLowerCase());
+      const name = String(s.name ?? '').toLowerCase();
+      const isEntrance =
+        tags.includes('nav_target') ||
+        tags.includes('gps_entrance') ||
+        /haupteingang|eingang/.test(name);
+      if (!isEntrance) continue;
+      const slat = s.latitude ?? s.lat;
+      const slng = s.longitude ?? s.lng;
+      if (typeof slat === 'number' && typeof slng === 'number') {
+        lat = slat;
+        lng = slng;
+        break;
+      }
     }
 
     if (typeof lat !== 'number' || typeof lng !== 'number') {
@@ -539,18 +633,25 @@ export function mapCityPackToRemote(
     }
 
     const kind: PoiTriggerKind = polygon ? 'area' : 'legacy';
+    const tagsJson = JSON.stringify(tags);
+    const storyArea = isStoryTriggerPoi(tagsJson);
+    const rawAreaR = trigger?.radius_m ?? (polygon ? 40 : 80);
     pois.push({
       id: areaId,
       name: spot.name,
       lat,
       lng,
-      radius_meters: trigger?.radius_m ?? (polygon ? 40 : 80),
+      radius_meters: storyArea ? Math.max(rawAreaR, AREA_STORY_MIN_M) : rawAreaR,
       spot_key: spotKey,
       parent_poi_id: null,
       kind,
       category,
-      tags_json: JSON.stringify(tags),
-      polygon_json: polygon ? serializePolygon(polygon) : null,
+      tags_json: tagsJson,
+      polygon_json: mapRings.length
+        ? serializePolygonRings(mapRings)
+        : polygon
+          ? serializePolygon(polygon)
+          : null,
       teaser_text: null,
       condition_rule: trigger?.condition_rule ?? 'always',
       special_radius_m: trigger?.special_radius_m ?? null,

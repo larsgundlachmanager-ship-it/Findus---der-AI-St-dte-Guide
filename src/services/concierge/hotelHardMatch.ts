@@ -36,6 +36,23 @@ const AMENITY_NEEDS: HotelAmenityNeed[] = [
     evidence: /\b(spa|wellness|jacuzzi|whirlpool|hot\s*tub|thermal)\b/i,
   },
   {
+    id: 'massage',
+    label: 'Massage',
+    // Spa allein reicht nicht — Massage muss belegt sein (Treatment/Menü).
+    trigger: /\bmassagen?\b/i,
+    evidence:
+      /\b(massage|massagen|massageangebot|massagesalon|spa\s*massage|ayurveda\s*massage|thai\s*massage|hot\s*stone)\b/i,
+  },
+  {
+    id: 'all_inclusive',
+    label: 'All-inclusive',
+    // Nicht „inklusive Frühstück“ — nur echte All-inclusive-Formulierungen.
+    trigger:
+      /\ball[\s-]*inclusive\b|\ballinclusive\b|\bai[\s-]*board\b|\bvollpension\s*\+\s*getränke|\ball\s+inklusi[vw]/i,
+    evidence:
+      /\ball[\s-]*inclusive\b|\ballinclusive\b|\bai[\s-]*board\b|\ball\s+inklusi[vw]|ultra\s*all[\s-]*inclusive|soft\s*all[\s-]*inclusive/i,
+  },
+  {
     id: 'breakfast',
     label: 'Frühstück',
     trigger: /\b(frühstück|fruehstueck|breakfast)\s*(inkl|inklusive|mit)?\b/i,
@@ -53,11 +70,103 @@ const AMENITY_NEEDS: HotelAmenityNeed[] = [
     trigger: /\b(fitness|gym|fitnessraum)\b/i,
     evidence: /\b(fitness|gym|fitnessraum|fitness\s*center)\b/i,
   },
+  {
+    id: 'late_checkin',
+    label: 'Spät-Check-in',
+    trigger:
+      /\b(spät[\s-]*check[\s-]*in|spaet[\s-]*check[\s-]*in|late[\s-]*check[\s-]*in|check[\s-]*in\s+(?:bis|nach|möglich)|24\s*h\s*(?:rezeption|reception)|nachtankunft)\b/i,
+    evidence:
+      /\b(24\s*h|24-hour|late\s*check[\s-]*in|spät[\s-]*check|spaet[\s-]*check|night\s*reception|rezeption\s*(?:rund\s*um|24)|check[\s-]*in\s*(?:until|bis)\s*\d)/i,
+  },
 ];
 
+function escapeRe(s: string): string {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+/**
+ * User-Must-Haves inkl. dynamischer „*blick“/Aussicht (stadt-agnostisch aus dem Wunschtext).
+ */
 export function parseHotelAmenityNeeds(text: string): HotelAmenityNeed[] {
   const t = text || '';
-  return AMENITY_NEEDS.filter((n) => n.trigger.test(t));
+  const out: HotelAmenityNeed[] = AMENITY_NEEDS.filter((n) => n.trigger.test(t));
+  const seen = new Set(out.map((n) => n.id));
+  for (const m of t.matchAll(
+    /\b([A-Za-zÄÖÜäöüß]{2,16}blick|river\s*view|sea\s*view|lake\s*view|harbour\s*view|harbor\s*view)\b/giu,
+  )) {
+    const raw = String(m[1] ?? '').replace(/\s+/g, ' ').trim();
+    if (!raw) continue;
+    const id = `view_${raw.toLowerCase().replace(/\s+/g, '_')}`;
+    if (seen.has(id)) continue;
+    seen.add(id);
+    const stem = raw.replace(/blick$/i, '').trim();
+    const parts = [raw, stem, 'aussicht', 'blick', 'view']
+      .filter((p) => p.length >= 2)
+      .map(escapeRe);
+    out.push({
+      id,
+      label: raw.replace(/\b\w/g, (c) => c.toUpperCase()),
+      trigger: new RegExp(escapeRe(raw), 'i'),
+      evidence: new RegExp(`\\b(${parts.join('|')})\\b`, 'i'),
+    });
+  }
+  return out;
+}
+
+/**
+ * Maps/Reviews nachziehen, wenn Stay22-Amenities dünn sind — nur Belege, nichts erfinden.
+ */
+export async function enrichHotelStaysForAmenityNeeds(
+  stays: HotelLiveStay[],
+  needs: HotelAmenityNeed[],
+  city: string,
+  signal?: AbortSignal,
+): Promise<HotelLiveStay[]> {
+  if (!needs.length || stays.length === 0) return stays;
+  const thin = stays.filter(
+    (s) =>
+      !s.amenities?.length ||
+      !needs.every((n) => n.evidence.test((s.amenities ?? []).join(' '))),
+  );
+  if (!thin.length) return stays;
+
+  try {
+    const { fetchPlacePitchDetails } = await import(
+      '../navigation/placePitchDetails'
+    );
+    const sample = thin.slice(0, 12);
+    const enriched = await Promise.all(
+      sample.map(async (s) => {
+        try {
+          const lat = s.lat ?? undefined;
+          const lng = s.lng ?? undefined;
+          const details = await fetchPlacePitchDetails({
+            query: `${s.name} ${city} hotel`.trim(),
+            lat: lat ?? 0,
+            lng: lng ?? 0,
+            signal,
+            includeAtmosphere: true,
+          });
+          if (!details) return s;
+          const evidence = [
+            details.editorialSummary,
+            details.generativeSummary,
+            ...details.reviews.map((r) => r.text),
+            details.types.join(' '),
+          ]
+            .filter(Boolean)
+            .join('\n');
+          return mergeAmenityEvidence(s, evidence);
+        } catch {
+          return s;
+        }
+      }),
+    );
+    const byId = new Map(enriched.map((s) => [s.id, s]));
+    return stays.map((s) => byId.get(s.id) ?? s);
+  } catch {
+    return stays;
+  }
 }
 
 export function amenityEvidenceBlob(stay: HotelLiveStay): string {
@@ -97,12 +206,21 @@ export function mergeAmenityEvidence(
       found.push(n.label);
     }
   }
-  // Extra Spa-Details aus Evidenz
+  // Extra Spa-/Board-Details aus Evidenz
   if (/\bjacuzzi|whirlpool|hot\s*tub\b/i.test(blob) && !found.some((a) => /jacuzzi|whirl/i.test(a))) {
     found.push('Jacuzzi');
   }
   if (/\bdampfbad|steam\b/i.test(blob) && !found.some((a) => /dampf|steam/i.test(a))) {
     found.push('Dampfbad');
+  }
+  if (/\bmassagen?\b/i.test(blob) && !found.some((a) => /massage/i.test(a))) {
+    found.push('Massage');
+  }
+  if (
+    /\ball[\s-]*inclusive\b|\ballinclusive\b/i.test(blob) &&
+    !found.some((a) => /all[\s-]*inclusive|allinclusive/i.test(a))
+  ) {
+    found.push('All-inclusive');
   }
   return { ...stay, amenities: found.slice(0, 20) };
 }

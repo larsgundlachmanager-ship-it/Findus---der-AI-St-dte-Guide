@@ -1,0 +1,2256 @@
+{
+  "generated_at": "2026-08-28T05:11:43.246Z",
+  "summary": {
+    "city_id": "korbach",
+    "checked": 78,
+    "ok": 20,
+    "check": 25,
+    "bad": 32,
+    "errors": 1,
+    "max_delta_m": 180,
+    "city_halo_m": 28000,
+    "story_only": true
+  },
+  "rows": [
+    {
+      "id": "korbach_kilianskirche",
+      "name": "Kilianskirche",
+      "category": "kirche",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.27169852499999,
+        "lng": 8.872656899999997
+      },
+      "query": "Kilianskirche, Korbach, Germany",
+      "osm": {
+        "lat": 51.2840121,
+        "lng": 8.6638132,
+        "display_name": "Kilianskirche, Hochsauerlandstraße, Usseln, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 14591,
+      "from_city_m": 645,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "korbach_alte_landwehr_300_meter_langer_schutzwall_aus_dem_mittelalter"
+      ]
+    },
+    {
+      "id": "korbach_haubert",
+      "name": "Haubert",
+      "category": "wanderung",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.30606720000001,
+        "lng": 8.8982006
+      },
+      "query": "Haubert, Korbach, Germany",
+      "osm": {
+        "lat": 51.2559045,
+        "lng": 8.8426963,
+        "display_name": "Korbach, Waldeck-Frankenberg, Deutschland",
+        "class": "place",
+        "type": "municipality",
+        "provider": "photon"
+      },
+      "delta_m": 6783,
+      "from_city_m": 3706,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "korbach_alpakafarm_berndorf",
+      "name": "Alpakafarm Berndorf",
+      "category": "freizeitpark",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.3086368,
+        "lng": 8.9026976
+      },
+      "query": "Alpakafarm Berndorf, Korbach, Germany",
+      "osm": {
+        "lat": 51.2756972,
+        "lng": 8.8715417,
+        "display_name": "Am Berndorfer Tor, Korbach, Deutschland",
+        "class": "place",
+        "type": "square",
+        "provider": "photon"
+      },
+      "delta_m": 4255,
+      "from_city_m": 4113,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "korbach_lalelu_abenteuerland_gmbh",
+      "name": "LaLeLu - Abenteuerland GmbH",
+      "category": "freizeit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.29166157142858,
+        "lng": 8.855295714285715
+      },
+      "query": "LaLeLu, Korbach, Germany",
+      "osm": {
+        "lat": 51.2559045,
+        "lng": 8.8426963,
+        "display_name": "Korbach, Waldeck-Frankenberg, Deutschland",
+        "class": "place",
+        "type": "municipality",
+        "provider": "photon"
+      },
+      "delta_m": 4071,
+      "from_city_m": 1924,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "korbach_besucherbergwerk_korbach_goldhausen",
+      "name": "Besucherbergwerk Korbach-Goldhausen",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.26997581818182,
+        "lng": 8.87255690909091
+      },
+      "query": "Besucherbergwerk Korbach-Goldhausen, Korbach, Germany",
+      "osm": {
+        "lat": 51.2492465,
+        "lng": 8.8248303,
+        "display_name": "Besucherbergwerk Eisenberg, GOR/ERL/KBP/EBU, Goldhausen, Korbach, Landkreis Waldeck-Frankenberg, Hessen, 34497, Deutschland",
+        "class": "tourism",
+        "type": "attraction",
+        "importance": 0.00005674143587391497,
+        "osm_type": "node",
+        "osm_id": 474363189,
+        "provider": "nominatim"
+      },
+      "delta_m": 4043,
+      "from_city_m": 833,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "korbach_enser_tor"
+      ]
+    },
+    {
+      "id": "korbach_alte_landwehr_300_meter_langer_schutzwall_aus_dem_mittelalter",
+      "name": "Alte Landwehr. 300 Meter langer Schutzwall aus dem Mittelalter",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.27169852499999,
+        "lng": 8.872656899999997
+      },
+      "query": "Alte Landwehr. 300, Korbach, Germany",
+      "osm": {
+        "lat": 51.3044124,
+        "lng": 8.8667566,
+        "display_name": "In der Landwehr, Korbach, Deutschland",
+        "class": "place",
+        "type": "locality",
+        "provider": "photon"
+      },
+      "delta_m": 3661,
+      "from_city_m": 645,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "korbach_kilianskirche"
+      ]
+    },
+    {
+      "id": "korbach_kriegerdenkmal",
+      "name": "Kriegerdenkmal",
+      "category": "denkmal",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.2658871,
+        "lng": 8.8897845
+      },
+      "query": "Kriegerdenkmal, Korbach, Germany",
+      "osm": {
+        "lat": 51.2559045,
+        "lng": 8.8426963,
+        "display_name": "Korbach, Waldeck-Frankenberg, Deutschland",
+        "class": "place",
+        "type": "municipality",
+        "provider": "photon"
+      },
+      "delta_m": 3459,
+      "from_city_m": 1831,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "korbach_historische_richtstatte_der_stadt_korbach_und_der_grafen_von_waldeck_am_",
+      "name": "Historische Richtstätte der Stadt Korbach und der Grafen von Waldeck am Klusenberg",
+      "category": "denkmal",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.2582566,
+        "lng": 8.8277872
+      },
+      "query": "Historische Richtstätte der Stadt Korbach, Korbach, Germany",
+      "osm": {
+        "lat": 51.2724425,
+        "lng": 8.8706144,
+        "display_name": "Die Korbacher Städtevereinigung, Stechbahn, Korbach, Deutschland",
+        "class": "tourism",
+        "type": "artwork",
+        "provider": "photon"
+      },
+      "delta_m": 3372,
+      "from_city_m": 3683,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "korbach_wochenmarkt_samstags",
+      "name": "Wochenmarkt (samstags)",
+      "category": "markt",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.2731005,
+        "lng": 8.8698665
+      },
+      "query": "Wochenmarkt, Korbach, Germany",
+      "osm": {
+        "lat": 51.2559045,
+        "lng": 8.8426963,
+        "display_name": "Korbach, Waldeck-Frankenberg, Deutschland",
+        "class": "place",
+        "type": "municipality",
+        "provider": "photon"
+      },
+      "delta_m": 2689,
+      "from_city_m": 485,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "korbach_gildehaus",
+      "name": "Gildehaus",
+      "category": "tour",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.270539,
+        "lng": 8.872295400000002
+      },
+      "query": "Gildehaus, Korbach, Germany",
+      "osm": {
+        "lat": 51.2559045,
+        "lng": 8.8426963,
+        "display_name": "Korbach, Waldeck-Frankenberg, Deutschland",
+        "class": "place",
+        "type": "municipality",
+        "provider": "photon"
+      },
+      "delta_m": 2625,
+      "from_city_m": 769,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "korbach_theaterwoche_korbach",
+      "name": "Theaterwoche Korbach",
+      "category": "theater",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.269923799999994,
+        "lng": 8.8572126
+      },
+      "query": "Theaterwoche Korbach, Korbach, Germany",
+      "osm": {
+        "lat": 51.2559045,
+        "lng": 8.8426963,
+        "display_name": "Korbach, Waldeck-Frankenberg, Deutschland",
+        "class": "place",
+        "type": "municipality",
+        "provider": "photon"
+      },
+      "delta_m": 1857,
+      "from_city_m": 1269,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "korbach_baderbetriebsgesellschaft_korbach_mbh",
+      "name": "Bäderbetriebsgesellschaft Korbach mbH",
+      "category": "freizeit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.27254654545456,
+        "lng": 8.86923609090909
+      },
+      "query": "Bäderbetriebsgesellschaft Korbach mbH, Korbach, Germany",
+      "osm": {
+        "lat": 51.2743352,
+        "lng": 8.8950432,
+        "display_name": "RSB Bödefeld und Partner mbH, Fröbelstraße, Korbach, Deutschland",
+        "class": "office",
+        "type": "accountant",
+        "provider": "photon"
+      },
+      "delta_m": 1806,
+      "from_city_m": 554,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "korbach_aussichtsplatz",
+      "name": "Aussichtsplatz",
+      "category": "aussicht",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.24836,
+        "lng": 8.864999
+      },
+      "query": "Aussichtsplatz, Korbach, Germany",
+      "osm": {
+        "lat": 51.2559045,
+        "lng": 8.8426963,
+        "display_name": "Korbach, Waldeck-Frankenberg, Deutschland",
+        "class": "place",
+        "type": "municipality",
+        "provider": "photon"
+      },
+      "delta_m": 1764,
+      "from_city_m": 3257,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "korbach_tor_2_continental_werk_korbach",
+      "name": "Tor 2 Continental Werk Korbach",
+      "category": "denkmal",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.28358,
+        "lng": 8.86833
+      },
+      "query": "Tor 2 Continental Werk Korbach, Korbach, Germany",
+      "osm": {
+        "lat": 51.277898,
+        "lng": 8.8904205,
+        "display_name": "Korbacher Werkstätten, Christian-Paul-Straße, Korbach, Deutschland",
+        "class": "shop",
+        "type": "laundry",
+        "provider": "photon"
+      },
+      "delta_m": 1661,
+      "from_city_m": 711,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "korbach_medizinisches_versorgungszentrum_korbach_gemeinnutzige_gmbh",
+      "name": "Medizinisches Versorgungszentrum Korbach gemeinnützige GmbH",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.26761648809524,
+        "lng": 8.871155130952381
+      },
+      "query": "Medizinisches Versorgungszentrum Korbach, Korbach, Germany",
+      "osm": {
+        "lat": 51.2807668,
+        "lng": 8.8755148,
+        "display_name": "Ambulanter medizinischer Pflegedienst, Arolser Landstraße, Korbach, Deutschland",
+        "class": "amenity",
+        "type": "social_facility",
+        "provider": "photon"
+      },
+      "delta_m": 1493,
+      "from_city_m": 1089,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "korbach_stadtkrankenhaus_korbach",
+        "korbach_herr_dr_med_arved_winfried_schneider"
+      ]
+    },
+    {
+      "id": "korbach_kumpe_brunnen_am_alten_marktplatz",
+      "name": "Kümpe (Brunnen) am alten Marktplatz",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.270865875,
+        "lng": 8.873886375
+      },
+      "query": "Kümpe am alten, Korbach, Germany",
+      "osm": {
+        "lat": 51.2593898,
+        "lng": 8.8630452,
+        "display_name": "Am alten Nordenbecker Wege, Korbach, Deutschland",
+        "class": "place",
+        "type": "locality",
+        "provider": "photon"
+      },
+      "delta_m": 1482,
+      "from_city_m": 755,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "korbach_tor_4_continental_werk_korbach",
+      "name": "Tor 4 Continental Werk Korbach",
+      "category": "denkmal",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.2874673,
+        "lng": 8.868837
+      },
+      "query": "Tor 4 Continental Werk Korbach, Korbach, Germany",
+      "osm": {
+        "lat": 51.2756543,
+        "lng": 8.8709549,
+        "display_name": "Manhenke, Am Berndorfer Tor, Korbach, Deutschland",
+        "class": "shop",
+        "type": "clothes",
+        "provider": "photon"
+      },
+      "delta_m": 1322,
+      "from_city_m": 1129,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "korbach_redback_rent",
+      "name": "Redback Rent",
+      "category": "freizeitpark",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.26777758333333,
+        "lng": 8.874504250000001
+      },
+      "query": "Redback Rent, Korbach, Germany",
+      "osm": {
+        "lat": 51.2787279,
+        "lng": 8.8740409,
+        "display_name": "Deutsche Rentenversicherung Hessen, Arolser Landstraße, Korbach, Deutschland",
+        "class": "office",
+        "type": "insurance",
+        "provider": "photon"
+      },
+      "delta_m": 1218,
+      "from_city_m": 1098,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "korbach_meineringhauser_warte",
+      "name": "Meineringhäuser Warte",
+      "category": "wanderung",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.25109675,
+        "lng": 8.913761999999998
+      },
+      "query": "Meineringhäuser Warte, Korbach, Germany",
+      "osm": {
+        "lat": 51.2609588,
+        "lng": 8.9140824,
+        "display_name": "Am Meineringhäuser Wege, Korbach, Deutschland",
+        "class": "place",
+        "type": "locality",
+        "provider": "photon"
+      },
+      "delta_m": 1097,
+      "from_city_m": 4173,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "korbach_grosssporthalle_auf_der_hauer",
+      "name": "Großsporthalle \"Auf der Hauer\"",
+      "category": "freizeit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.27302336363637,
+        "lng": 8.860438454545452
+      },
+      "query": "Großsporthalle \"Auf der, Korbach, Germany",
+      "osm": {
+        "lat": 51.2679588,
+        "lng": 8.8472712,
+        "display_name": "Auf der Hundebreite, Korbach, Deutschland",
+        "class": "place",
+        "type": "locality",
+        "provider": "photon"
+      },
+      "delta_m": 1075,
+      "from_city_m": 881,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "korbach_fussballplatz_hauer"
+      ]
+    },
+    {
+      "id": "korbach_praxis_dr_poku",
+      "name": "Praxis Dr. Poku",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.277629142857144,
+        "lng": 8.872495
+      },
+      "query": "Praxis Dr. Poku, Korbach, Germany",
+      "osm": {
+        "lat": 51.2681383,
+        "lng": 8.8717593,
+        "display_name": "Ärztlicher Bereitschaftsdienst Korbach, Dr.-Hartwig-Straße, Korbach, Deutschland",
+        "class": "amenity",
+        "type": "doctors",
+        "provider": "photon"
+      },
+      "delta_m": 1057,
+      "from_city_m": 108,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "korbach_herr_dr_med_arved_winfried_schneider",
+      "name": "Herr Dr. med. Arved-Winfried Schneider",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.26761648809524,
+        "lng": 8.871155130952381
+      },
+      "query": "Herr Dr. med., Korbach, Germany",
+      "osm": {
+        "lat": 51.2770193,
+        "lng": 8.8704274,
+        "display_name": "Dr. Med. Gerhard Eschenhagen, Flechtdorfer Straße, Korbach, Deutschland",
+        "class": "amenity",
+        "type": "doctors",
+        "provider": "photon"
+      },
+      "delta_m": 1047,
+      "from_city_m": 1089,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "korbach_stadtkrankenhaus_korbach",
+        "korbach_medizinisches_versorgungszentrum_korbach_gemeinnutzige_gmbh"
+      ]
+    },
+    {
+      "id": "korbach_st_nicolai",
+      "name": "St. Nicolai",
+      "category": "kirche",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.2745656,
+        "lng": 8.858339400000002
+      },
+      "query": "St. Nicolai, Korbach, Germany",
+      "osm": {
+        "lat": 51.2708495,
+        "lng": 8.8668137,
+        "display_name": "St. Marien Korbach, Sachsenberger Landstraße, Korbach, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 720,
+      "from_city_m": 935,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "korbach_storchennest",
+      "name": "Storchennest",
+      "category": "denkmal",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.25917219999999,
+        "lng": 8.848097899999999
+      },
+      "query": "Storchennest, Korbach, Germany",
+      "osm": {
+        "lat": 51.2559045,
+        "lng": 8.8426963,
+        "display_name": "Korbach, Waldeck-Frankenberg, Deutschland",
+        "class": "place",
+        "type": "municipality",
+        "provider": "photon"
+      },
+      "delta_m": 523,
+      "from_city_m": 2578,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "korbach_herr_dr_med_bernardo_fritzsche",
+      "name": "Herr Dr. med. Bernardo Fritzsche",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.2770915,
+        "lng": 8.8638445
+      },
+      "query": "Herr Dr. med., Korbach, Germany",
+      "osm": {
+        "lat": 51.2770193,
+        "lng": 8.8704274,
+        "display_name": "Dr. Med. Gerhard Eschenhagen, Flechtdorfer Straße, Korbach, Deutschland",
+        "class": "amenity",
+        "type": "doctors",
+        "provider": "photon"
+      },
+      "delta_m": 458,
+      "from_city_m": 498,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "korbach_naherholungsgebiet_marbecktal",
+      "name": "Naherholungsgebiet \"Marbecktal\"",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.25816179473684,
+        "lng": 8.853271505263155
+      },
+      "query": "Naherholungsgebiet \"Marbecktal\", Korbach, Germany",
+      "osm": {
+        "lat": 51.2561595,
+        "lng": 8.8578319,
+        "display_name": "Marbecktal, Korbach, Deutschland",
+        "class": "leisure",
+        "type": "nature_reserve",
+        "provider": "photon"
+      },
+      "delta_m": 388,
+      "from_city_m": 2470,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "korbach_hanse_juwelier_e_k",
+      "name": "Hanse-Juwelier e.K.",
+      "category": "souvenir",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.27661483333333,
+        "lng": 8.8718275
+      },
+      "query": "Hanse-Juwelier e.K., Korbach, Germany",
+      "osm": {
+        "lat": 51.2735027,
+        "lng": 8.8702634,
+        "display_name": "Kunstverein Hansestadt Korbach e.V., Kirchstraße, Korbach, Deutschland",
+        "class": "club",
+        "type": "art",
+        "provider": "photon"
+      },
+      "delta_m": 363,
+      "from_city_m": 106,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "korbach_stadtwald_waldecker_berg",
+      "name": "Stadtwald \"Waldecker Berg\"",
+      "category": "natur",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.2665934,
+        "lng": 8.8864017
+      },
+      "query": "Stadtwald \"Waldecker Berg\", Korbach, Germany",
+      "osm": {
+        "lat": 51.2645878,
+        "lng": 8.8899086,
+        "display_name": "Waldecker Berg, Korbach, Deutschland",
+        "class": "natural",
+        "type": "wood",
+        "provider": "photon"
+      },
+      "delta_m": 331,
+      "from_city_m": 1611,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "korbach_waldecker_land_informationsburo_der_touristik_service_waldeck_ederbergla",
+      "name": "Waldecker Land - Informationsbüro der Touristik Service Waldeck-Ederbergland GmbH, c/o Dreiraum Coworking",
+      "category": "tour",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.27475716666666,
+        "lng": 8.867723666666668
+      },
+      "query": "Waldecker Land, Korbach, Germany",
+      "osm": {
+        "lat": 51.2773585,
+        "lng": 8.8663916,
+        "display_name": "Familiengemeinschaften Waldecker Land e.V, 27, Briloner Landstraße, Korbach, Landkreis Waldeck-Frankenberg, Hessen, 34497, Deutschland",
+        "class": "office",
+        "type": "association",
+        "importance": 0.00005674143587391497,
+        "osm_type": "node",
+        "osm_id": 11471076182,
+        "provider": "nominatim"
+      },
+      "delta_m": 304,
+      "from_city_m": 372,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "korbach_naturheilpraxis_am_stadtpark",
+      "name": "Naturheilpraxis am Stadtpark",
+      "category": "natur",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.27549760000001,
+        "lng": 8.8735814
+      },
+      "query": "Naturheilpraxis am Stadtpark, Korbach, Germany",
+      "osm": {
+        "lat": 51.2733671,
+        "lng": 8.875796,
+        "display_name": "Am Stadtpark, Korbach, Deutschland",
+        "class": "highway",
+        "type": "unclassified",
+        "provider": "photon"
+      },
+      "delta_m": 283,
+      "from_city_m": 279,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "korbach_waldecker_berg_kita",
+      "name": "Waldecker Berg Kita",
+      "category": "wanderung",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.2631539,
+        "lng": 8.8927208
+      },
+      "query": "Waldecker Berg Kita, Korbach, Germany",
+      "osm": {
+        "lat": 51.2645878,
+        "lng": 8.8899086,
+        "display_name": "Waldecker Berg, Korbach, Deutschland",
+        "class": "natural",
+        "type": "wood",
+        "provider": "photon"
+      },
+      "delta_m": 252,
+      "from_city_m": 2190,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "korbach_continental_tor_3",
+      "name": "Continental Tor 3",
+      "category": "denkmal",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.2824114,
+        "lng": 8.8739276
+      },
+      "query": "Continental Tor 3, Korbach, Germany",
+      "osm": {
+        "lat": 51.2801658,
+        "lng": 8.8737745,
+        "display_name": "Continentalstraße, Industriegebiet Nord, Korbach, Landkreis Waldeck-Frankenberg, Hessen, 34497, Deutschland",
+        "class": "highway",
+        "type": "residential",
+        "importance": 0.053390074769207256,
+        "osm_type": "way",
+        "osm_id": 28196129,
+        "provider": "nominatim"
+      },
+      "delta_m": 250,
+      "from_city_m": 593,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "korbach_hessisch_waldeckische_gebirgs_und_heimatverein_korbach_hwghv_1928_e_v",
+      "name": "Hessisch-Waldeckische Gebirgs- und Heimatverein Korbach (HWGHV) 1928 e.V.",
+      "category": "wanderung",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.272138,
+        "lng": 8.8879984
+      },
+      "query": "Hessisch-Waldeckische Gebirgs-, Korbach, Germany",
+      "osm": {
+        "lat": 51.3136395,
+        "lng": 9.4926571,
+        "display_name": "Hessisch-Waldeckische Gebirgsverein Kassel e. V., Wilhelmsstraße, Kassel, Deutschland",
+        "class": "club",
+        "type": "hicking",
+        "provider": "photon"
+      },
+      "delta_m": 42297,
+      "from_city_m": 1320,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "korbach_denkmal_louis_peter",
+      "name": "Denkmal Louis Peter",
+      "category": "denkmal",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.273544,
+        "lng": 8.8619358
+      },
+      "query": "Denkmal Louis Peter, Korbach, Germany",
+      "osm": {
+        "lat": 51.2749332,
+        "lng": 8.8627885,
+        "display_name": "Louis-Peter-Straße, Korbach, Deutschland",
+        "class": "highway",
+        "type": "tertiary",
+        "provider": "photon"
+      },
+      "delta_m": 165,
+      "from_city_m": 762,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "korbach_parkplatz_stadtkrankenhaus",
+      "name": "Parkplatz Stadtkrankenhaus",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.266557272727276,
+        "lng": 8.86948590909091
+      },
+      "query": "Parkplatz Stadtkrankenhaus, Korbach, Germany",
+      "osm": {
+        "lat": 51.2674541,
+        "lng": 8.8710857,
+        "display_name": "Hessenklinik Stadtkrankenhaus Korbach, Enser Straße, Korbach, Deutschland",
+        "class": "amenity",
+        "type": "hospital",
+        "provider": "photon"
+      },
+      "delta_m": 149,
+      "from_city_m": 1211,
+      "status": "CHECK",
+      "flags": [
+        "house_like_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "korbach_historische_altstadt",
+      "name": "Historische Altstadt Korbach",
+      "category": "altstadt",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.27296288888889,
+        "lng": 8.871475333333331
+      },
+      "query": "Historische Altstadt Korbach, Korbach, Germany",
+      "osm": {
+        "lat": 51.2728341,
+        "lng": 8.8694796,
+        "display_name": "Korbacher Hanse, Oberstraße, Korbach, Deutschland",
+        "class": "office",
+        "type": "association",
+        "provider": "photon"
+      },
+      "delta_m": 140,
+      "from_city_m": 495,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "korbach_stadtkrankenhaus_korbach",
+      "name": "Stadtkrankenhaus Korbach",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.26761648809524,
+        "lng": 8.871155130952381
+      },
+      "query": "Stadtkrankenhaus Korbach, Korbach, Germany",
+      "osm": {
+        "lat": 51.2675228,
+        "lng": 8.8697427,
+        "display_name": "Stadtkrankenhaus, Enser Straße, Korbach, Landkreis Waldeck-Frankenberg, Hessen, 34497, Deutschland",
+        "class": "highway",
+        "type": "bus_stop",
+        "importance": 0.00005674143587391497,
+        "osm_type": "node",
+        "osm_id": 6208678718,
+        "provider": "nominatim"
+      },
+      "delta_m": 99,
+      "from_city_m": 1089,
+      "status": "CHECK",
+      "flags": [
+        "house_like_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "korbach_medizinisches_versorgungszentrum_korbach_gemeinnutzige_gmbh",
+        "korbach_herr_dr_med_arved_winfried_schneider"
+      ]
+    },
+    {
+      "id": "korbach_melchiors_teich",
+      "name": "Melchiors Teich",
+      "category": "natur",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.2649315,
+        "lng": 8.8734059
+      },
+      "query": "Melchiors Teich, Korbach, Germany",
+      "osm": {
+        "lat": 51.2650075,
+        "lng": 8.8748051,
+        "display_name": "Melchiors Teich, Korbach, Landkreis Waldeck-Frankenberg, Hessen, Deutschland",
+        "class": "water",
+        "type": "pond",
+        "importance": 0.08005674143587393,
+        "osm_type": "way",
+        "osm_id": 37229397,
+        "provider": "nominatim"
+      },
+      "delta_m": 98,
+      "from_city_m": 1397,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "korbach_stadtpark_korbach",
+      "name": "Stadtpark Korbach",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.27357344000001,
+        "lng": 8.87488248
+      },
+      "query": "Stadtpark Korbach, Korbach, Germany",
+      "osm": {
+        "lat": 51.2744319,
+        "lng": 8.8748269,
+        "display_name": "Stadtpark, Korbach, Landkreis Waldeck-Frankenberg, Hessen, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "importance": 0.08005674143587393,
+        "osm_type": "way",
+        "osm_id": 28401306,
+        "provider": "nominatim"
+      },
+      "delta_m": 96,
+      "from_city_m": 505,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "korbach_hexengarten",
+      "name": "Hexengarten",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.272924939999996,
+        "lng": 8.87815858
+      },
+      "query": "Hexengarten, Korbach, Germany",
+      "osm": {
+        "lat": 51.272136,
+        "lng": 8.8781674,
+        "display_name": "Hexengarten, Korbach, Landkreis Waldeck-Frankenberg, Hessen, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "importance": 0.08005674143587393,
+        "osm_type": "way",
+        "osm_id": 37335619,
+        "provider": "nominatim"
+      },
+      "delta_m": 88,
+      "from_city_m": 705,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "korbach_stadthalle",
+      "name": "Stadthalle",
+      "category": "theater",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.272327153846156,
+        "lng": 8.86297092307692
+      },
+      "query": "Stadthalle, Korbach, Germany",
+      "osm": {
+        "lat": 51.2729769,
+        "lng": 8.8623203,
+        "display_name": "Stadthalle, Louis-Peter-Straße, Korbach, Landkreis Waldeck-Frankenberg, Hessen, 34497, Deutschland",
+        "class": "highway",
+        "type": "bus_stop",
+        "importance": 0.00005674143587391497,
+        "osm_type": "node",
+        "osm_id": 5326236393,
+        "provider": "nominatim"
+      },
+      "delta_m": 85,
+      "from_city_m": 794,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "korbach_naturschutzgebiet_alte_badeanstalt",
+      "name": "Naturschutzgebiet \"Alte Badeanstalt\"",
+      "category": "natur",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.2891617,
+        "lng": 8.8402162
+      },
+      "query": "Naturschutzgebiet \"Alte Badeanstalt\", Korbach, Germany",
+      "osm": {
+        "lat": 51.2888616,
+        "lng": 8.8410527,
+        "display_name": "Alte Badeanstalt, Korbach, Deutschland",
+        "class": "natural",
+        "type": "wood",
+        "provider": "photon"
+      },
+      "delta_m": 67,
+      "from_city_m": 2508,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "korbach_korbacher_spalte",
+      "name": "Korbacher Spalte",
+      "category": "aussicht",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.262143679999994,
+        "lng": 8.881155
+      },
+      "query": "Korbacher Spalte, Korbach, Germany",
+      "osm": {
+        "lat": 51.2618686,
+        "lng": 8.8803397,
+        "display_name": "Korbacher Spalte, Frankenberger Landstraße, Korbach, Landkreis Waldeck-Frankenberg, Hessen, 34497, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.16273786379520622,
+        "osm_type": "way",
+        "osm_id": 39161127,
+        "provider": "nominatim"
+      },
+      "delta_m": 64,
+      "from_city_m": 1839,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "korbach_schanzenberg_bei_korbach",
+      "name": "Schanzenberg bei Korbach",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.25743764,
+        "lng": 8.882410340000002
+      },
+      "query": "Schanzenberg bei Korbach, Korbach, Germany",
+      "osm": {
+        "lat": 51.2569616,
+        "lng": 8.8828927,
+        "display_name": "Schanzenberg bei Korbach, Korbach, Landkreis Waldeck-Frankenberg, Hessen, Deutschland",
+        "class": "leisure",
+        "type": "nature_reserve",
+        "importance": 0.08005674143587393,
+        "osm_type": "way",
+        "osm_id": 39181151,
+        "provider": "nominatim"
+      },
+      "delta_m": 63,
+      "from_city_m": 2358,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "korbach_freilichtbuhne_korbach_e_v",
+      "name": "Freilichtbühne Korbach e.V.",
+      "category": "theater",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.2712758,
+        "lng": 8.870967799999999
+      },
+      "query": "Freilichtbühne Korbach e.V., Korbach, Germany",
+      "osm": {
+        "lat": 51.2710989,
+        "lng": 8.8702037,
+        "display_name": "Freilichtbühne Korbach e.V., Schulstraße, Alte Altstadt, Korbach, Landkreis Waldeck-Frankenberg, Hessen, 34497, Deutschland",
+        "class": "amenity",
+        "type": "theatre",
+        "importance": 0.00005674143587391497,
+        "osm_type": "way",
+        "osm_id": 28283241,
+        "provider": "nominatim"
+      },
+      "delta_m": 57,
+      "from_city_m": 682,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "korbach_freilichtbuhne_korbach"
+      ]
+    },
+    {
+      "id": "korbach_fussballplatz_hauer",
+      "name": "Fußballplatz Hauer",
+      "category": "freizeit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.273021725,
+        "lng": 8.860461183333333
+      },
+      "query": "Fußballplatz Hauer, Korbach, Germany",
+      "osm": {
+        "lat": 51.272663,
+        "lng": 8.8604892,
+        "display_name": "Hauer, Karpatenstraße, Korbach, Deutschland",
+        "class": "amenity",
+        "type": "parking",
+        "provider": "photon"
+      },
+      "delta_m": 40,
+      "from_city_m": 880,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "korbach_grosssporthalle_auf_der_hauer"
+      ]
+    },
+    {
+      "id": "korbach_enser_tor",
+      "name": "Enser Tor",
+      "category": "wanderung",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.26997581818182,
+        "lng": 8.87255690909091
+      },
+      "query": "Enser Tor, Korbach, Germany",
+      "osm": {
+        "lat": 51.2699306,
+        "lng": 8.8720861,
+        "display_name": "Enser Tor, Enser Straße, Korbach, Landkreis Waldeck-Frankenberg, Hessen, 34497, Deutschland",
+        "class": "historic",
+        "type": "city_gate",
+        "importance": 0.00005674143587391497,
+        "osm_type": "node",
+        "osm_id": 347257128,
+        "provider": "nominatim"
+      },
+      "delta_m": 33,
+      "from_city_m": 833,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "korbach_besucherbergwerk_korbach_goldhausen"
+      ]
+    },
+    {
+      "id": "korbach_kara_korbach",
+      "name": "KARA Korbach",
+      "category": "souvenir",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.274574055555554,
+        "lng": 8.882228944444444
+      },
+      "query": "KARA Korbach, Korbach, Germany",
+      "osm": {
+        "lat": 51.2746166,
+        "lng": 8.8824889,
+        "display_name": "Kara, 34, Strother Straße, Korbach, Landkreis Waldeck-Frankenberg, Hessen, 34497, Deutschland",
+        "class": "shop",
+        "type": "supermarket",
+        "importance": 0.00005674143587391497,
+        "osm_type": "node",
+        "osm_id": 764426276,
+        "provider": "nominatim"
+      },
+      "delta_m": 19,
+      "from_city_m": 843,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "korbach_osm_post_office_6435467399"
+      ]
+    },
+    {
+      "id": "korbach_rathaus",
+      "name": "Rathaus Korbach",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.272440470588236,
+        "lng": 8.870780705882352
+      },
+      "query": "Rathaus Korbach, Korbach, Germany",
+      "osm": {
+        "lat": 51.2724748,
+        "lng": 8.8709718,
+        "display_name": "Rathaus - Gebäude A, 1, Stechbahn, Alte Altstadt, Korbach, Landkreis Waldeck-Frankenberg, Hessen, 34497, Deutschland",
+        "class": "amenity",
+        "type": "townhall",
+        "importance": 0.00005674143587391497,
+        "osm_type": "way",
+        "osm_id": 47290915,
+        "provider": "nominatim"
+      },
+      "delta_m": 14,
+      "from_city_m": 552,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "korbach_kreis_und_hansestadt_korbach"
+      ]
+    },
+    {
+      "id": "korbach_dalwigker_tor",
+      "name": "Dalwigker Tor",
+      "category": "denkmal",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.27094566666667,
+        "lng": 8.875321111111113
+      },
+      "query": "Dalwigker Tor, Korbach, Germany",
+      "osm": {
+        "lat": 51.270865,
+        "lng": 8.8754204,
+        "display_name": "Hotel Am Dalwigker Tor, Dalwigker Straße, Alte Altstadt, Korbach, Landkreis Waldeck-Frankenberg, Hessen, 34497, Deutschland",
+        "class": "tourism",
+        "type": "hotel",
+        "importance": 0.00005674143587391497,
+        "osm_type": "node",
+        "osm_id": 12277176632,
+        "provider": "nominatim"
+      },
+      "delta_m": 11,
+      "from_city_m": 779,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "korbach_restaurant_hotel_am_dalwigker_tor_bei_meier_s"
+      ]
+    },
+    {
+      "id": "korbach_jysk_korbach",
+      "name": "JYSK Korbach",
+      "category": "souvenir",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.279976,
+        "lng": 8.857046666666669
+      },
+      "query": "JYSK Korbach, Korbach, Germany",
+      "osm": {
+        "lat": 51.2800371,
+        "lng": 8.857043,
+        "display_name": "JYSK, Briloner Landstraße, Korbach, Landkreis Waldeck-Frankenberg, Hessen, 34497, Deutschland",
+        "class": "shop",
+        "type": "furniture",
+        "importance": 0.00005674143587391497,
+        "osm_type": "node",
+        "osm_id": 496064324,
+        "provider": "nominatim"
+      },
+      "delta_m": 7,
+      "from_city_m": 1011,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "korbach_osm_transit_308480213"
+      ]
+    },
+    {
+      "id": "korbach_kaufland_korbach",
+      "name": "Kaufland Korbach",
+      "category": "souvenir",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.2775973888889,
+        "lng": 8.86966688888889
+      },
+      "query": "Kaufland Korbach, Korbach, Germany",
+      "osm": {
+        "lat": 51.2776109,
+        "lng": 8.8697447,
+        "display_name": "Kaufland, 5, Flechtdorfer Straße, Innenstadt, Korbach, Landkreis Waldeck-Frankenberg, Hessen, 34497, Deutschland",
+        "class": "shop",
+        "type": "supermarket",
+        "importance": 0.00005674143587391497,
+        "osm_type": "node",
+        "osm_id": 456338658,
+        "provider": "nominatim"
+      },
+      "delta_m": 6,
+      "from_city_m": 94,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "korbach_osm_parcel_locker_13386712209"
+      ]
+    },
+    {
+      "id": "korbach_hirsch_apotheke",
+      "name": "Hirsch-Apotheke",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.273318666666675,
+        "lng": 8.871239
+      },
+      "query": "Hirsch-Apotheke, Korbach, Germany",
+      "osm": {
+        "lat": 51.2733248,
+        "lng": 8.8712441,
+        "display_name": "Hirsch-Apotheke, Professor-Kümmell-Straße, Neue Altstadt, Korbach, Landkreis Waldeck-Frankenberg, Hessen, 34497, Deutschland",
+        "class": "amenity",
+        "type": "pharmacy",
+        "importance": 0.00005674143587391497,
+        "osm_type": "way",
+        "osm_id": 690136981,
+        "provider": "nominatim"
+      },
+      "delta_m": 1,
+      "from_city_m": 455,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "korbach_osm_transit_4194592285"
+      ]
+    },
+    {
+      "id": "korbach_kc_o9o2",
+      "name": "KC o9o2",
+      "category": "wanderung",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.2697526,
+        "lng": 8.8273675
+      },
+      "query": "KC o9o2, Korbach",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 3151,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "korbach_kooperation_diemelradweg",
+      "name": "Kooperation Diemelradweg",
+      "category": "tour",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.26887699999999,
+        "lng": 8.857002388888892
+      },
+      "query": "Kooperation Diemelradweg, Korbach",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 1359,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "korbach_patricia_s_reiterhof",
+      "name": "Patricia's Reiterhof",
+      "category": "tour",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.289538400000005,
+        "lng": 8.8355354
+      },
+      "query": "Patricia's Reiterhof, Korbach",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 2811,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "korbach_greenstories_gmbh_store",
+      "name": "greenstories GmbH Store",
+      "category": "souvenir",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.27821814285715,
+        "lng": 8.869322428571428
+      },
+      "query": "greenstories GmbH Store, Korbach",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 147,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "korbach_expand_your_horizon",
+      "name": "expand your horizon",
+      "before": {
+        "lat": 51.271148000000004,
+        "lng": 8.8971516
+      },
+      "status": "NOMINATIM_ERROR",
+      "error": "fetch failed",
+      "flags": []
+    },
+    {
+      "id": "korbach_am_berndorfer_tor",
+      "name": "Am Berndorfer Tor",
+      "category": "denkmal",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.2755456,
+        "lng": 8.8722925
+      },
+      "query": "Am Berndorfer Tor, Korbach, Germany",
+      "osm": {
+        "lat": 51.2756972,
+        "lng": 8.8715417,
+        "display_name": "Am Berndorfer Tor, Innenstadt, Korbach, Landkreis Waldeck-Frankenberg, Hessen, Deutschland",
+        "class": "place",
+        "type": "square",
+        "importance": 0.06672340810254063,
+        "osm_type": "way",
+        "osm_id": 816210202,
+        "provider": "nominatim"
+      },
+      "delta_m": 55,
+      "from_city_m": 226,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "korbach_stadtpark_laaker_teich",
+      "name": "Stadtpark Laaker Teich",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.27702034,
+        "lng": 8.85560216
+      },
+      "query": "Stadtpark Laaker Teich, Korbach, Germany",
+      "osm": {
+        "lat": 51.2771117,
+        "lng": 8.8560524,
+        "display_name": "Laaker Teich, Korbach, Deutschland",
+        "class": "landuse",
+        "type": "recreation_ground",
+        "provider": "photon"
+      },
+      "delta_m": 33,
+      "from_city_m": 1071,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "korbach_korbach_hauptbahnhof",
+      "name": "Korbach Hauptbahnhof",
+      "category": "bahnhof",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.27882418,
+        "lng": 8.873112039999999
+      },
+      "query": "Korbach Hauptbahnhof, Korbach, Germany",
+      "osm": {
+        "lat": 51.2789035,
+        "lng": 8.8726688,
+        "display_name": "Korbach Hauptbahnhof, Am Hauptbahnhof, Korbach, Landkreis Waldeck-Frankenberg, Hessen, 34497, Deutschland",
+        "class": "railway",
+        "type": "station",
+        "importance": 0.2647815871063118,
+        "osm_type": "node",
+        "osm_id": 4529161946,
+        "provider": "nominatim"
+      },
+      "delta_m": 32,
+      "from_city_m": 216,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "korbach_rustom_kiosk",
+      "name": "Rustom Kiosk",
+      "category": "souvenir",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.278450799999995,
+        "lng": 8.873090899999998
+      },
+      "query": "Rustom Kiosk, Korbach, Germany",
+      "osm": {
+        "lat": 51.2783498,
+        "lng": 8.8733164,
+        "display_name": "Rustom Kiosk, Am Hauptbahnhof, Korbach, Landkreis Waldeck-Frankenberg, Hessen, 34497, Deutschland",
+        "class": "shop",
+        "type": "kiosk",
+        "importance": 0.00005674143587391497,
+        "osm_type": "node",
+        "osm_id": 9913504553,
+        "provider": "nominatim"
+      },
+      "delta_m": 19,
+      "from_city_m": 187,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "korbach_familienpraxis_dr_plotz_potthoff_dr_werning",
+      "name": "Familienpraxis Dr. Plotz-Potthoff & Dr. Werning",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.278016727272735,
+        "lng": 8.873831454545455
+      },
+      "query": "Familienpraxis Dr. Plotz-Potthoff, Korbach, Germany",
+      "osm": {
+        "lat": 51.2781247,
+        "lng": 8.8737754,
+        "display_name": "Familienpraxis Plotz-Potthoff & Werning, Am Hauptbahnhof, Korbach, Deutschland",
+        "class": "amenity",
+        "type": "doctors",
+        "provider": "photon"
+      },
+      "delta_m": 13,
+      "from_city_m": 209,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "korbach_schiesshagen",
+      "name": "Schießhagen",
+      "category": "denkmal",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.2707876,
+        "lng": 8.8710752
+      },
+      "query": "Schießhagen, Korbach, Germany",
+      "osm": {
+        "lat": 51.2707082,
+        "lng": 8.8712136,
+        "display_name": "Schießhagen, Korbach, Landkreis Waldeck-Frankenberg, Hessen, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "importance": 0.08005674143587393,
+        "osm_type": "way",
+        "osm_id": 28283242,
+        "provider": "nominatim"
+      },
+      "delta_m": 13,
+      "from_city_m": 736,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "korbach_spielpark_korberg",
+      "name": "Spielpark Korberg",
+      "category": "freizeitpark",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.2771398,
+        "lng": 8.8588911
+      },
+      "query": "Spielpark Korberg, Korbach, Germany",
+      "osm": {
+        "lat": 51.2770425,
+        "lng": 8.8589789,
+        "display_name": "Korberg, Schlesische Straße, Korbach, Landkreis Waldeck-Frankenberg, Hessen, 34497, Deutschland",
+        "class": "leisure",
+        "type": "playground",
+        "importance": 0.00005674143587391497,
+        "osm_type": "way",
+        "osm_id": 1317093256,
+        "provider": "nominatim"
+      },
+      "delta_m": 12,
+      "from_city_m": 842,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "korbach_e_center_herkules_korbach",
+      "name": "E-Center Herkules Korbach",
+      "category": "souvenir",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.27823654999999,
+        "lng": 8.86257635
+      },
+      "query": "E-Center Herkules Korbach, Korbach, Germany",
+      "osm": {
+        "lat": 51.278255,
+        "lng": 8.8627405,
+        "display_name": "Herkules (Edeka), Briloner Landstraße, Korbach, Deutschland",
+        "class": "shop",
+        "type": "supermarket",
+        "provider": "photon"
+      },
+      "delta_m": 12,
+      "from_city_m": 592,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "korbach_geofoyer_kalkturm_korbach",
+      "name": "GeoFoyer Kalkturm Korbach",
+      "category": "aussicht",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.262920166666675,
+        "lng": 8.881971333333333
+      },
+      "query": "GeoFoyer Kalkturm Korbach, Korbach, Germany",
+      "osm": {
+        "lat": 51.2630143,
+        "lng": 8.8819551,
+        "display_name": "GeoFoyer Kalkturm Korbach, Frankenberger Landstraße, Korbach, Landkreis Waldeck-Frankenberg, Hessen, 34497, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.00005674143587391497,
+        "osm_type": "way",
+        "osm_id": 1247436769,
+        "provider": "nominatim"
+      },
+      "delta_m": 11,
+      "from_city_m": 1783,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "korbach_dr_med_helmut_goldhofer",
+      "name": "Dr med Helmut Goldhofer",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.27659000000001,
+        "lng": 8.87030705
+      },
+      "query": "Dr med Helmut Goldhofer, Korbach, Germany",
+      "osm": {
+        "lat": 51.2766468,
+        "lng": 8.8704314,
+        "display_name": "Dr. med. Helmut Goldhofer, Flechtdorfer Straße, Innenstadt, Korbach, Landkreis Waldeck-Frankenberg, Hessen, 34497, Deutschland",
+        "class": "amenity",
+        "type": "doctors",
+        "importance": 0.00005674143587391497,
+        "osm_type": "node",
+        "osm_id": 10719235178,
+        "provider": "nominatim"
+      },
+      "delta_m": 11,
+      "from_city_m": 102,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "korbach_wolfgang_bonhage_museum",
+      "name": "Wolfgang-Bonhage-MUSEUM KORBACH",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.27133255555556,
+        "lng": 8.872498777777778
+      },
+      "query": "Wolfgang-Bonhage-MUSEUM KORBACH, Korbach, Germany",
+      "osm": {
+        "lat": 51.2713598,
+        "lng": 8.8723621,
+        "display_name": "Wolfgang-Bonhage-Museum, 2, Kirchplatz, Alte Altstadt, Korbach, Landkreis Waldeck-Frankenberg, Hessen, 34497, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.16273786379520622,
+        "osm_type": "way",
+        "osm_id": 47029394,
+        "provider": "nominatim"
+      },
+      "delta_m": 10,
+      "from_city_m": 684,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "korbach_herbert_kuhaupt_sportzentrum_korbach",
+      "name": "Herbert-Kuhaupt-Sportzentrum Korbach",
+      "category": "freizeit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.272057999999994,
+        "lng": 8.859582545454545
+      },
+      "query": "Herbert-Kuhaupt-Sportzentrum Korbach, Korbach, Germany",
+      "osm": {
+        "lat": 51.2719848,
+        "lng": 8.8595816,
+        "display_name": "Herbert-Kuhaupt-Sportzentrum, 22, Karpatenstraße, Korbach, Landkreis Waldeck-Frankenberg, Hessen, 34497, Deutschland",
+        "class": "building",
+        "type": "yes",
+        "importance": 0.00005674143587391497,
+        "osm_type": "way",
+        "osm_id": 812505655,
+        "provider": "nominatim"
+      },
+      "delta_m": 8,
+      "from_city_m": 992,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "korbach_carl_henkel_ideen_fachgeschaft",
+      "name": "Carl Henkel - Ideen Fachgeschäft",
+      "category": "souvenir",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.274850066666666,
+        "lng": 8.871312266666667
+      },
+      "query": "Carl Henkel, Korbach, Germany",
+      "osm": {
+        "lat": 51.2748367,
+        "lng": 8.8714159,
+        "display_name": "Carl Henkel, 6, Professor-Bier-Straße, Innenstadt, Korbach, Landkreis Waldeck-Frankenberg, Hessen, 34497, Deutschland",
+        "class": "shop",
+        "type": "houseware",
+        "importance": 0.00005674143587391497,
+        "osm_type": "node",
+        "osm_id": 457317875,
+        "provider": "nominatim"
+      },
+      "delta_m": 7,
+      "from_city_m": 285,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "korbach_apotheke_am_berndorfer_tor",
+      "name": "Apotheke am Berndorfer Tor",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.27589214285714,
+        "lng": 8.870631785714286
+      },
+      "query": "Apotheke am Berndorfer Tor, Korbach, Germany",
+      "osm": {
+        "lat": 51.275897,
+        "lng": 8.8707127,
+        "display_name": "Apotheke am Berndorfer Tor, 5, Am Berndorfer Tor, Innenstadt, Korbach, Landkreis Waldeck-Frankenberg, Hessen, 34497, Deutschland",
+        "class": "amenity",
+        "type": "pharmacy",
+        "importance": 0.00005674143587391497,
+        "osm_type": "node",
+        "osm_id": 309268165,
+        "provider": "nominatim"
+      },
+      "delta_m": 6,
+      "from_city_m": 170,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "korbach_baren_apotheke",
+      "name": "Bären-Apotheke",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.27103171428571,
+        "lng": 8.88933357142857
+      },
+      "query": "Bären-Apotheke, Korbach, Germany",
+      "osm": {
+        "lat": 51.2709888,
+        "lng": 8.8892843,
+        "display_name": "Bären Apotheke, 28, Solinger Straße, Korbach, Landkreis Waldeck-Frankenberg, Hessen, 34497, Deutschland",
+        "class": "amenity",
+        "type": "pharmacy",
+        "importance": 0.00005674143587391497,
+        "osm_type": "node",
+        "osm_id": 309268156,
+        "provider": "nominatim"
+      },
+      "delta_m": 6,
+      "from_city_m": 1460,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "korbach_ice_cubes_korbach",
+      "name": "Ice Cubes Korbach",
+      "category": "souvenir",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.267128,
+        "lng": 8.8592716
+      },
+      "query": "Ice Cubes Korbach, Korbach, Germany",
+      "osm": {
+        "lat": 51.2670929,
+        "lng": 8.8593297,
+        "display_name": "Ice Cubes Korbach, Sachsenberger Landstraße, Korbach, Landkreis Waldeck-Frankenberg, Hessen, 34497, Deutschland",
+        "class": "shop",
+        "type": "ice",
+        "importance": 0.00005674143587391497,
+        "osm_type": "node",
+        "osm_id": 13075968289,
+        "provider": "nominatim"
+      },
+      "delta_m": 6,
+      "from_city_m": 1404,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "korbach_hausarztpraxis_dorota_adam_kandziora",
+      "name": "Hausarztpraxis Dorota & Adam Kandziora",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.277045625,
+        "lng": 8.870397500000001
+      },
+      "query": "Hausarztpraxis Dorota, Korbach, Germany",
+      "osm": {
+        "lat": 51.2770489,
+        "lng": 8.8704731,
+        "display_name": "Hausarztpraxis Kandizora, Flechtdorfer Straße, Korbach, Deutschland",
+        "class": "amenity",
+        "type": "doctors",
+        "provider": "photon"
+      },
+      "delta_m": 5,
+      "from_city_m": 57,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "korbach_clever_fit_korbach",
+      "name": "clever fit Korbach",
+      "category": "freizeit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.28112807692308,
+        "lng": 8.859134461538462
+      },
+      "query": "clever fit Korbach, Korbach, Germany",
+      "osm": {
+        "lat": 51.2811014,
+        "lng": 8.85909,
+        "display_name": "Clever fit, 2, Am Mühlengraben, Gewerbegebiet West, Korbach, Landkreis Waldeck-Frankenberg, Hessen, 34497, Deutschland",
+        "class": "leisure",
+        "type": "fitness_centre",
+        "importance": 0.00005674143587391497,
+        "osm_type": "node",
+        "osm_id": 7459251698,
+        "provider": "nominatim"
+      },
+      "delta_m": 4,
+      "from_city_m": 922,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "korbach_georg_viktor_turm",
+      "name": "Georg-Viktor-Turm",
+      "category": "aussicht",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.251235888888885,
+        "lng": 8.827474444444444
+      },
+      "query": "Georg-Viktor-Turm, Korbach, Germany",
+      "osm": {
+        "lat": 51.2512241,
+        "lng": 8.8274613,
+        "display_name": "Georg-Viktor-Turm, EBU, Goldhausen, Korbach, Landkreis Waldeck-Frankenberg, Hessen, 34497, Deutschland",
+        "class": "tourism",
+        "type": "viewpoint",
+        "importance": 0.12743869505990896,
+        "osm_type": "way",
+        "osm_id": 165992798,
+        "provider": "nominatim"
+      },
+      "delta_m": 2,
+      "from_city_m": 4199,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "korbach_vera_kaplienko_wolff",
+      "name": "Vera Kaplienko-Wolff",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.271801333333336,
+        "lng": 8.871356333333333
+      },
+      "query": "Vera Kaplienko-Wolff, Korbach, Germany",
+      "osm": {
+        "lat": 51.2718009,
+        "lng": 8.8713615,
+        "display_name": "Hausärztliche Praxis Kaplienko-Wolff, Adwan, Wolff, Stechbahn, Korbach, Deutschland",
+        "class": "amenity",
+        "type": "doctors",
+        "provider": "photon"
+      },
+      "delta_m": 0,
+      "from_city_m": 624,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    }
+  ]
+}

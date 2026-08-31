@@ -22,6 +22,8 @@ export type IngestGeoAnchor = {
 export type IngestFixedNode = {
   title: string;
   time: string | null;
+  /** Ende HH:mm wenn User „von–bis“ sagt — sonst Default-Dauer */
+  endTime?: string | null;
   priority: 1 | 2 | 3;
   location: string | null;
   needsClarification?: boolean;
@@ -38,6 +40,8 @@ export type IngestOpenWish = {
   id?: string;
   /** Grobes Zeitfenster HH:mm */
   estimatedTime?: string | null;
+  /** Ende HH:mm bei von–bis (Training 14–20) */
+  endTime?: string | null;
   lat?: number | null;
   lng?: number | null;
   address?: string | null;
@@ -65,6 +69,8 @@ export type PlanTask = {
 export type IngestedPlan = {
   targetDate: string;
   geoAnchor: IngestGeoAnchor;
+  /** Genannte Zielstadt (kann ≠ GPS-/Pack-Stadt sein). geoAnchor bleibt der Start. */
+  destinationCity?: string | null;
   fixedNodes: IngestFixedNode[];
   openWishesQueue: IngestOpenWish[];
   /** Abgeleitete / LLM-gebaute Aufgabenliste */

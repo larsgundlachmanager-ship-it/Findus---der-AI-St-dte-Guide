@@ -15,8 +15,25 @@ import {
   FINDUS_HELP_FIRST_MONETIZATION_BLOCK,
 } from '../../services/concierge/findusResponsePolicy';
 import { sanitizePlanSpeech } from './planSpeechSanitize';
+import { patchPlanForDestinationCity } from './planDestinationCity';
+import { mergeUtteranceSlotsIntoPlan } from './planUtteranceSlots';
+import { applyTurnFrameToPlan } from './applyTurnFrame';
+import { formatTurnFrameForPlanPrompt } from '../router/turnFrame';
+import type { TurnFrame } from '../router/turnFrame';
+import { usePlanSessionStore } from './planSessionState';
 import { geminiOptsForPlanIngest, tryConsumePlanProSlot } from './planProScore';
 import { prefsBlockForPrompt, loadPlanTripPrefs } from './planTripPrefs';
+import { derivePlanTasks } from './derivePlanTasks';
+export { derivePlanTasks } from './derivePlanTasks';
+import {
+  appointmentNeedsExactAddress,
+} from './planLocationGranularity';
+import {
+  normalizeHmLoose,
+  parseHmRangeFromText,
+} from './planTimeRange';
+import { FINDUS_PLAN_SMART_OVERVIEW_BLOCK } from './planSmartOverview';
+import { planBaseSynonymPromptBlock } from './planBaseSynonyms';
 import type {
   IngestedPlan,
   IngestFixedNode,
@@ -28,25 +45,45 @@ import type {
   TaskCompleteness,
 } from './planningTypes';
 
-export const MASTER_INGEST_SYSTEM = `Du bist der MASTERPLANER für Findus Modul 5.
+export const MASTER_INGEST_SYSTEM = `Du bist der MASTERPLANER für Yorro Modul 5.
 Du bekommst: User-Nachricht + Snapshot der Timeline für den Zieldatum-Tag.
 Du baust EINMAL den kompletten Tagesplan — nicht Stück für Stück.
 
 ${FINDUS_DYNAMIC_STRUCTURE_DOCTRINE}
 
+${FINDUS_PLAN_SMART_OVERVIEW_BLOCK}
+
 ABLAUF (verbindlich):
 1) Lage: Welcher Tag? Neu / hinzu / ändern? Was steht SCHON in der Timeline?
-2) User-Wünsche vollständig extrahieren — nichts weglassen (Meeting, Hotel, Frühstück, Fahrt, Essen, Erkunden).
+   Wenn etwas SCHON eingetragen ist und der User es ändern will (Ort, Zeit, Adresse): lageMode=change, fixedNodes aktualisieren — NIEMALS nachfragen „ist das schon eingetragen?“ oder neu anlegen.
+2) User-Wünsche vollständig extrahieren — nichts weglassen (Meeting, Hotel, Frühstück, Fahrt, Essen, genannte Orte).
+   Jeder genannte Ort/Aktivität = eigener openWish mit Uhrzeit. Nicht auf einen Slot kollabieren.
 3) Rückwärts um harte Anker planen. Konflikte selbst lösen nach Opfer-Reihenfolge:
    Prio 6 frei → Prio 5 löschen nur markieren als Frage → Prio 4 nur verschieben → Prio 3 Frage → Prio 1–2 heilig.
 4) JEDEN Slot mit realistischer Uhrzeit (HH:mm) befüllen — auch offene Wünsche.
-   HEUTE: nie Zeiten in der Vergangenheit. Liegt „jetzt“ nach deinem Slot → auf nächste volle :00/:30 in der Zukunft runden (mind. ~20–30 Min voraus).
+   HEUTE — nur openWishesQueue (Prio 4–6): nie Zeiten in der Vergangenheit; sonst auf nächste volle :00/:30 runden (mind. ~20–30 Min voraus).
+   fixedNodes / Prio 1–2 mit User-Uhrzeit: Zeit NIEMALS wegen „jetzt“ verschieben — exakt so lassen, auch wenn die Zeit schon (knapp) vorbei ist.
    Abend/Spaziergang/Dinner/„heute Abend“ → estimatedTime ab ~18:30–20:30, NIE Mittag (11–15 Uhr).
-5) Prio 6 (Erkunden/Inspiration/Spaziergang) IMMER zuletzt in openWishesQueue — erst nachdem der Wunschplan steht.
+   Soft-Wünsche (Essen/Mittag) NIEMALS über feste Termine (Bewerbung/Meeting) legen — freie Lücke davor/danach.
+5) Prio 6 (Erkunden/Inspiration/Spaziergang) NUR wenn der User ERKENNEN/SPAZIEREN/BUMMELN/HIGHLIGHTS explizit will.
+   NIEMALS von allein „Stadt erkunden“, „Freizeit“, „Inspiration“ oder 17:00-Default-Erkunden erfinden.
+   Wenn User nur Frühstück/Termin/Hotel/Essen plant → openWishesQueue OHNE Prio-6.
    Spaziergang/Abendspaziergang/Bummel = Outdoor/Erkunden (Prio 6), KEINE Restaurant-Wünsche daraus.
 6) Travel-Lücken als Hinweis in openQuestions nennen (z. B. „Fahrt nach Hamburg“), nicht als Fake-Ort.
 7) Titel kurz zusammenfassen (max ~40 Zeichen) — NIEMALS die ganze User-Frage als Titel.
 8) Outfit/Kleidung/Wetter-Fragen gehören NICHT hierher — wenn die Nachricht primär „was anziehen“ ist: fixedNodes=[], openWishesQueue=[], bridgeSpeech kurz ablehnen („das ist Outfit, kein Plan“) und initialVoiceConfirm leer.
+9) targetDate: NIEMALS ein Datum in der Vergangenheit. „Dienstag“ an einem Mittwoch = nächster Dienstag (Zukunft), nie gestern.
+10) ZIELSTADT vs GPS-PACK: STADT-HINT ist oft nur wo der User JETZT steht, NICHT der Plan-Ort.
+    Nennt der User eine andere Stadt (in/nach/für X, Tagesplan X): das ist die ZIELSTADT für Wünsche, Recherche und Touren.
+    geoAnchor bleibt der Start (GPS/Hotel). Fahrt dorthin = Travel-Lücke, kein Fake-Ort in der Startstadt.
+    „um 9:00 los“ / „Bahn ab 9“ = ABFAHRT vom Start (Zug/Bahn), kein Frühstück und keine Aktivität um 9 am GPS-Ort.
+    Frühstück „dann bei Ankunft“ / „voraussichtlich ab 10“ = in der ZIELSTADT NACH der Anreise.
+    Nennt der User eine Ankunfts-/Frühstückszeit → diese Zeit; sonst grob ~60 Min nach Abfahrt.
+    Alle genannten Zielstadt-Wünsche behalten — jeder genannte Ort ein Slot. Nicht auf einen leeren „Start 09:00“-Slot in der GPS-Stadt kollabieren.
+    Reihenfolge: erst Fixpunkte, dann weiche Wünsche (Bahn, Frühstück, genannte Orte, Essen), Touren/Erkunden der Zielstadt zuletzt (ein openWish Prio 6).
+    Wecker/Aufstehen NIEMALS jetzt stellen — „um X los“ ist Abfahrt, nicht Weckzeit. Wecker kommt erst, wenn der Plan steht (Code, rückwärts von der ersten Abfahrt).
+    Recherche-Reihenfolge (Code): erst das Gerüst in die Timeline, dann Step-Pitches Frühstück → Abend/Sunset → genannte Landmarke/Ticket, danach eine Tour in der Lücke. Timeline bleibt chronologisch. Genannte Orte ohne Uhrzeit = eigener Slot ohne estimatedTime. Sunset-Essen grob ~19:30 (vor dem Sonnenuntergang), nicht 19:00.
+    Sunset+Essen: Wetter ehrlich — wenn Sunset schlecht, nicht extra drauf optimieren; Blick trotzdem halten wenn der Ort ihn hergibt.
 
 TASK-VOLLSTÄNDIGKEIT:
 - completeness 0: Zeit + Titel + Ort fest (fixedNodes)
@@ -58,18 +95,23 @@ PRIORITÄTEN:
 4 Zeitfenster · 5 flexibler Wunsch · 6 Erkunden (zuletzt!)
 
 SPEECH:
-- bridgeSpeech: max 1–2 kurze Sätze — EINZIGES Vorgeplänkel: grobe Tages-Zusammenfassung + Motivation/Anerkennung (Bezug zu Bekanntem ok). KEINE Liste aller offenen Fragen. KEINE Wiederholung der User-Frage. KEINE Confirm-Frage („Passt der…?“ / „Passt der Fokus…?“) — Confirm kommt separat genau 1× und NUR bei Fixterminen. KEINE konkreten Stopps/Tipps in der Bridge (die kommen in der Hauptantwort).
+- bridgeSpeech: IMMER leer lassen (""). Planungsmodus spricht keine Bridge — Confirm/Rückfragen/Pitches kommen separat im Code.
 - initialVoiceConfirm: EINE kurze Confirm-Frage — nur wenn fixedNodes mit Zeit/Prio≤2 vorliegen. Sonst leer lassen.
-- openQuestions: intern für Code ok, aber bridgeSpeech nicht damit vollstopfen.
+- openQuestions: intern für Code ok, nie vorlesen.
 
 STADT ERKUNDEN / MUST-SEES / HIGHLIGHTS-ROUTE:
-- Als EINEN openWish mit priority 6 (Erkunden), NICHT als feste 2er-Auswahl-Pitches (kein Ort-A vs. Ort-B vor Confirm).
-- estimatedTime = grobes Fenster-Start (z. B. 10:00), nicht zig Einzelwünsche.
-- Nach Confirm legt der Code selbst eine Mehr-Stopp-Highlight-Route in Laufreihenfolge — LLM soll keine Einzel-Sehenswürdigkeiten als openWishes vorab listen.
+- GENANNTE Orte (Name, Viertel, Aktivität) = JEWEILS ein eigener openWish mit Zeit. Nicht in Prio-6 zusammenquetschen.
+- Nur unbenanntes „Stadt erkunden / Highlights / Must-Sees“ = EIN openWish mit priority 6 am Ende.
+- Nach Confirm legt der Code eine Mehr-Stopp-Highlight-Route für den Prio-6-Rest — genannte Orte bleiben eigene Slots.
 
 ${FINDUS_HELP_FIRST_MONETIZATION_BLOCK}
 
-fixedNodes = nur Prio 1–3 mit time. openWishesQueue = Prio 4–6, JEDE mit estimatedTime, Prio 6 am Ende.
+fixedNodes = nur Prio 1–3 mit time (+ optional endTime bei von–bis). openWishesQueue = Prio 4–6, JEDE mit estimatedTime, Prio 6 am Ende.
+
+TERMINE / BEWERBUNG / MEETING:
+- Bei konkretem Termin (Bewerbung, Meeting, Arzt, Tennis/Turnier…): wenn Ort nur Stadt / „Tennisplätze“ ohne Club/Adresse → needsClarification true; location trotzdem grob setzen. Nie Stadtmitte als Fake-GPS für Turniere.
+- endTime setzen wenn User „von … bis …“ / „14–20“ sagt (time=Start, endTime=Ende) — außer Hotel.
+- Hotel/Übernachtung: NUR Check-in als estimatedTime (eine Uhrzeit), endTime IMMER null — kein 18–19-Band. Check-in smart nach vorherigem Fixtermin (+~30 Min) oder User-Zeit.
 
 ${FINDUS_FEW_SHOT_DISCLAIMER}
 
@@ -79,21 +121,22 @@ GIB NUR JSON:
   "lageMode": "new" | "add" | "change",
   "geoAnchor": { "name": "...", "type": "CURRENT_GPS" | "HOTEL_START", "needsClarification": false },
   "fixedNodes": [
-    { "title": "Meeting Café", "time": "15:00", "priority": 1, "location": "Café unklar", "needsClarification": true }
+    { "title": "Meeting Café", "time": "15:00", "endTime": null, "priority": 1, "location": "Café unklar", "needsClarification": true },
+    { "title": "Bewerbungsgespräch", "time": "10:00", "endTime": "12:00", "priority": 1, "location": "Stadtteil", "needsClarification": true }
   ],
   "openWishesQueue": [
-    { "title": "Frühstück Prisdorf", "priority": 4, "context": "Frühstück in Prisdorf", "estimatedTime": "09:00", "completeness": 2 },
+    { "title": "Bahn", "priority": 4, "context": "Abfahrt Richtung Zielstadt", "estimatedTime": "09:00", "completeness": 2 },
+    { "title": "Frühstück", "priority": 4, "context": "Frühstück nach Ankunft in der Zielstadt", "estimatedTime": "10:00", "completeness": 2 },
     { "title": "Hotel Check-in", "priority": 4, "context": "neues Hotel Hamburg, nach Meeting", "estimatedTime": "16:00", "completeness": 2 },
-    { "title": "Italiener Elbblick", "priority": 4, "context": "Abendessen Italiener mit echtem Elbblick", "estimatedTime": "19:00", "completeness": 2 },
-    { "title": "Hamburg erkunden", "priority": 6, "context": "ein bisschen Stadt erleben", "estimatedTime": "17:00", "completeness": 2 }
+    { "title": "Italiener Elbblick", "priority": 4, "context": "Abendessen Italiener mit echtem Elbblick", "estimatedTime": "19:30", "completeness": 2 }
   ],
   "openQuestions": [
     "Welches Café fürs Meeting um 15?",
-    "Frühstück in Prisdorf — welcher Laden?",
+    "Frühstück nach Ankunft — welcher Laden?",
     "Welches Hotel zum Einchecken?",
     "Italiener mit echtem Elbblick — welche zwei Optionen?"
   ],
-  "bridgeSpeech": "Kurz: du willst Montag Frühstück in Prisdorf, Meeting 15 Uhr, danach Hotel und abends Italiener mit Elbblick — Erkunden erst danach. Ich hab den Tag grob durchgerechnet. Offen: Café, Frühstücksladen, Hotel, Italiener.",
+  "bridgeSpeech": "",
   "initialVoiceConfirm": "Passt der grobe Plan so für dich?"
 }`;
 
@@ -207,16 +250,38 @@ function sanitizeFixed(raw: unknown): IngestFixedNode[] {
       o.location == null || o.location === ''
         ? null
         : String(o.location).trim();
-    const time =
+    let time =
       normalizeHm(o.time) ??
       (o.time == null || o.time === '' ? null : String(o.time).trim());
+    let endTime =
+      normalizeHm(o.endTime) ??
+      normalizeHmLoose(o.endTime) ??
+      null;
+    const rangeFromBlob = parseHmRangeFromText(
+      `${title} ${location ?? ''} ${String(o.context ?? '')}`,
+    );
+    if (rangeFromBlob) {
+      if (!time) time = rangeFromBlob.start;
+      if (!endTime) endTime = rangeFromBlob.end;
+    }
+    const hotelFix =
+      /\b(hotel|übernacht|uebernacht|pension|unterkunft|hostel|zimmer|airbnb|ferienwohnung)\b/i.test(
+        `${title} ${location ?? ''}`,
+      );
+    if (hotelFix) {
+      endTime = null;
+    }
+    const needsAddr = appointmentNeedsExactAddress(title, location);
     out.push({
       title,
       time,
+      endTime,
       priority: prio as 1 | 2 | 3,
       location,
       needsClarification:
-        o.needsClarification === true || (!location && prio <= 2),
+        o.needsClarification === true ||
+        (!location && prio <= 2) ||
+        needsAddr,
       lat: typeof o.lat === 'number' ? o.lat : null,
       lng: typeof o.lng === 'number' ? o.lng : null,
       address: typeof o.address === 'string' ? o.address : null,
@@ -225,7 +290,37 @@ function sanitizeFixed(raw: unknown): IngestFixedNode[] {
   return out;
 }
 
-function sanitizeWishes(raw: unknown): IngestOpenWish[] {
+/** Ganze Plan-Aufforderung ist kein Timeline-Stopp („Plane mir eine Tour durch …“). */
+export function looksLikePlanCommandEcho(
+  title: string,
+  utterance?: string,
+): boolean {
+  const t = (title ?? '').replace(/\s+/g, ' ').trim();
+  if (!t) return false;
+  if (
+    /^(plane?\s+mir|mach\s+mir(?:\s+einen)?|organisiere|tour\s+durch|tagesplan)\b/i.test(
+      t,
+    )
+  ) {
+    return true;
+  }
+  if (/\bplane?\s+mir\b/i.test(t) && /\b(tour|tag|durch|plan)\b/i.test(t)) {
+    return true;
+  }
+  const utt = (utterance ?? '').replace(/\s+/g, ' ').trim();
+  if (!utt) return false;
+  const norm = (s: string) =>
+    s.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').trim();
+  const tn = norm(t);
+  const un = norm(utt);
+  if (tn.length < 12) return false;
+  if (un.startsWith(tn) || un.includes(tn)) {
+    return /\b(plane?|tour durch|tagesplan|mach mir)\b/i.test(tn);
+  }
+  return false;
+}
+
+function sanitizeWishes(raw: unknown, utterance?: string): IngestOpenWish[] {
   if (!Array.isArray(raw)) return [];
   const soft: IngestOpenWish[] = [];
   const explore: IngestOpenWish[] = [];
@@ -235,16 +330,33 @@ function sanitizeWishes(raw: unknown): IngestOpenWish[] {
     const o = item as Record<string, unknown>;
     const titleRaw = String(o.title ?? '').trim();
     if (!titleRaw) continue;
+    if (looksLikePlanCommandEcho(titleRaw, utterance)) continue;
     const title =
       titleRaw.length <= 48
         ? titleRaw
         : `${titleRaw.slice(0, 46).replace(/\s+\S*$/u, '').trim()}…`;
     let prio = clampPrio(o.priority, 5);
     if (prio < 4) prio = 5;
-    const estimatedTime = normalizeHm(o.estimatedTime);
     const context = String(o.context ?? '').trim() || title;
+    const estimatedTime = normalizeHm(o.estimatedTime);
+    let endTime =
+      normalizeHm(o.endTime) ?? normalizeHmLoose(o.endTime) ?? null;
+    const range = parseHmRangeFromText(
+      `${title} ${context} ${String(o.estimatedTime ?? '')} ${String(o.endTime ?? '')}`,
+    );
+    if (range) {
+      endTime = endTime || range.end;
+    }
+    // Hotel = nur Check-in-Zeit, nie 18–19-Band
+    const hotelWish =
+      /\b(hotel|übernacht|uebernacht|pension|unterkunft|hostel|zimmer|airbnb|ferienwohnung)\b/i.test(
+        `${title} ${context}`,
+      );
+    if (hotelWish) {
+      endTime = null;
+    }
     const completeness = inferCompleteness({
-      time: estimatedTime,
+      time: estimatedTime || range?.start || null,
       location: context,
       completeness: o.completeness,
     });
@@ -253,7 +365,8 @@ function sanitizeWishes(raw: unknown): IngestOpenWish[] {
       title,
       priority: prio as 4 | 5 | 6,
       context,
-      estimatedTime,
+      estimatedTime: estimatedTime || range?.start || null,
+      endTime,
       completeness,
     };
     if (prio === 6) explore.push(wish);
@@ -263,73 +376,57 @@ function sanitizeWishes(raw: unknown): IngestOpenWish[] {
   return [...soft, ...explore];
 }
 
-export function derivePlanTasks(plan: {
-  fixedNodes: IngestFixedNode[];
-  openWishesQueue: IngestOpenWish[];
-  targetDate: string;
-}): PlanTask[] {
-  const tasks: PlanTask[] = [];
-  for (const n of plan.fixedNodes) {
-    const completeness = inferCompleteness({
-      time: n.time,
-      location: n.location,
-      needsClarification: n.needsClarification,
-      lat: n.lat,
-      lng: n.lng,
-    });
-    tasks.push({
-      id: `fix_${plan.targetDate}_${n.title.replace(/\W+/g, '_').slice(0, 24)}_${n.priority}`,
-      title: n.title,
-      priority: n.priority,
-      completeness,
-      timeHm: n.time,
-      location: n.location,
-      context: n.location || n.title,
-      lat: n.lat,
-      lng: n.lng,
-      address: n.address,
-      hard: true,
-      status:
-        completeness === 0
-          ? 'inserted'
-          : completeness === 1
-            ? 'needs_place'
-            : 'queued',
-    });
+/** Kein erfundenes Erkunden — außer User will es oder nennt eine Zielstadt ≠ GPS. */
+function dropInventedExploreWishes(
+  utterance: string,
+  wishes: IngestOpenWish[],
+  gpsCity?: string | null,
+): IngestOpenWish[] {
+  const cleaned = wishes.filter(
+    (w) => !looksLikePlanCommandEcho(w.title, utterance),
+  );
+  const t = utterance.toLowerCase();
+  const userWantsExplore =
+    /\b(erkunden|erleben|sightseeing|must[-\s]?see|highlights?|sehenswürdig|tour|stadtrund|bummel|spazier|inspiration|frei\s*zeit|was\s+(geht|machen)|stadt\s+ansehen|tagesplan|tag\s+in|plan(?:e|en|ung)?)\b/i.test(
+      t,
+    );
+  if (userWantsExplore) return cleaned;
+  try {
+    const { keepExploreWishForDestination } = require('./planDestinationCity') as {
+      keepExploreWishForDestination: (u: string, g?: string | null) => boolean;
+    };
+    if (keepExploreWishForDestination(utterance, gpsCity)) return cleaned;
+  } catch {
+    /* soft */
   }
-  plan.openWishesQueue.forEach((w, i) => {
-    const completeness =
-      w.completeness ??
-      inferCompleteness({
-        time: w.estimatedTime ?? null,
-        location: w.context,
-        lat: w.lat,
-        lng: w.lng,
-      });
-    tasks.push({
-      id: w.id ?? `wish_${plan.targetDate}_${i}`,
-      title: w.title,
-      priority: w.priority,
-      completeness,
-      timeHm: w.estimatedTime ?? null,
-      location: w.address ?? null,
-      context: w.context,
-      lat: w.lat,
-      lng: w.lng,
-      address: w.address,
-      hard: false,
-      status: completeness === 0 ? 'inserted' : 'queued',
-    });
+  return cleaned.filter((w) => {
+    if (w.priority !== 6) return true;
+    const blob = `${w.title} ${w.context}`.toLowerCase();
+    return !/\b(erkunden|erleben|sightseeing|highlight|tour|bummel|spazier|inspiration|sehenswürdig)\b/i.test(
+      blob,
+    );
   });
-  return tasks.sort((a, b) => {
-    // Prio 6 ans Ende der Abarbeitung; sonst nach Zeit dann Prio
-    if (a.priority === 6 && b.priority !== 6) return 1;
-    if (b.priority === 6 && a.priority !== 6) return -1;
-    const ta = a.timeHm || '99:99';
-    const tb = b.timeHm || '99:99';
-    if (ta !== tb) return ta.localeCompare(tb);
-    return a.priority - b.priority;
-  });
+}
+
+function patchIngestDestination(
+  plan: IngestedPlan,
+  utterance: string,
+  gpsCity?: string | null,
+  frame?: TurnFrame | null,
+): IngestedPlan {
+  try {
+    if (frame) {
+      return applyTurnFrameToPlan(plan, frame, utterance, gpsCity);
+    }
+    const dested = patchPlanForDestinationCity(plan, utterance, gpsCity);
+    return mergeUtteranceSlotsIntoPlan(dested, utterance);
+  } catch {
+    try {
+      return mergeUtteranceSlotsIntoPlan(plan, utterance);
+    } catch {
+      return plan;
+    }
+  }
 }
 
 function normalizeLageMode(raw: unknown, utterance: string): PlanLageMode {
@@ -371,6 +468,13 @@ export function normalizeTargetDate(raw: unknown, utterance: string): string {
     ) {
       return fromUtterance;
     }
+    // Nie Vergangenheitstage akzeptieren
+    const today = todayDateKey();
+    if (raw < today) {
+      return fromUtterance && fromUtterance >= today
+        ? fromUtterance
+        : today;
+    }
     return raw;
   }
   return fromUtterance ?? todayDateKey();
@@ -387,25 +491,10 @@ function defaultBridge(mode: PlanLageMode, date: string): string {
 }
 
 function snapshotTimelineForDay(dayKey: string): string {
-  const plan = useFuturePlanStore.getState().getPlanForDay(dayKey);
-  const lines = plan.stops
-    .filter((s) => s.status !== 'done' && !s.id.startsWith('choice_'))
-    .sort((a, b) => (a.plannedStartMs ?? 0) - (b.plannedStartMs ?? 0))
-    .slice(0, 40)
-    .map((s) => {
-      const t =
-        s.plannedStartMs != null
-          ? new Date(s.plannedStartMs).toLocaleTimeString('de-DE', {
-              hour: '2-digit',
-              minute: '2-digit',
-            })
-          : 'ohne Zeit';
-      return `- ${t} | ${s.kind ?? 'stop'} | prio=${s.planPriority ?? '?'} | ${s.title}`;
-    });
-  if (lines.length === 0) {
-    return `(Timeline ${dayKey}: noch leer)`;
-  }
-  return `BESTEHENDE TIMELINE ${dayKey}:\n${lines.join('\n')}`;
+  const { formatTimelineSnapshotForPrompt } = require('../timeline/timelineSnapshot') as {
+    formatTimelineSnapshotForPrompt: (dayKey: string) => string;
+  };
+  return formatTimelineSnapshotForPrompt(dayKey);
 }
 
 function heuristicFallback(utterance: string): IngestedPlan {
@@ -427,6 +516,7 @@ function heuristicFallback(utterance: string): IngestedPlan {
   return {
     targetDate,
     geoAnchor,
+    destinationCity: null,
     fixedNodes,
     openWishesQueue,
     tasks: derivePlanTasks(planBase),
@@ -444,7 +534,13 @@ function shortWishTitle(utterance: string): string {
   if (/\b(spazier|bummel|raus)\b/i.test(t) && /\b(abend|heute)\b/i.test(t)) {
     return 'Abendspaziergang';
   }
-  if (/\b(essen|restaurant|dinner)\b/i.test(t)) return 'Abendessen';
+  if (/\b(essen|restaurant|dinner)\b/i.test(t) && !/\bplan(e|en)?\b/i.test(t)) {
+    return 'Abendessen';
+  }
+  if (looksLikePlanCommandEcho(t, t) || /\bplan(e|en)?\b/i.test(t)) {
+    const city = t.match(/\b(?:durch|in)\s+([A-ZÄÖÜ][\p{L}'-]{2,})\b/u);
+    return city?.[1] ? `Tag in ${city[1]}` : 'Tagesplan';
+  }
   const first = (t.split(/[?.!]/)[0] ?? t).trim();
   if (first.length <= 36) return first;
   const cut = first.slice(0, 34);
@@ -472,19 +568,13 @@ function hmToTodayMs(dayKey: string, hm: string, nowMs = Date.now()): number | n
   return new Date(y!, mo! - 1, d!, Number(m[1]), Number(m[2]), 0, 0).getTime();
 }
 
+/** Feste Termine behalten ihre Uhrzeit — nie auf „jetzt+X“ schieben. */
 function bumpPastTimesOnDay(
   nodes: IngestFixedNode[],
-  dayKey: string,
-  nowMs = Date.now(),
+  _dayKey: string,
+  _nowMs = Date.now(),
 ): IngestFixedNode[] {
-  if (dayKey !== todayDateKey()) return nodes;
-  const floor = nextFutureHalfHourSlot(dayKey, nowMs);
-  return nodes.map((n) => {
-    if (!n.time) return n;
-    const ms = hmToTodayMs(dayKey, n.time, nowMs);
-    if (ms == null || ms >= nowMs + 20 * 60_000) return n;
-    return { ...n, time: floor };
-  });
+  return nodes;
 }
 
 /** Abend-/Spazier-Wunsch: Mittags-Slot (11–15) ist Quatsch → Abend. */
@@ -494,7 +584,7 @@ function looksLikeEveningWish(w: IngestOpenWish): boolean {
 }
 
 function eveningSlotFloor(dayKey: string, nowMs = Date.now()): string {
-  const evening = '19:00';
+  const evening = '19:30';
   if (dayKey !== todayDateKey()) return evening;
   const floor = nextFutureHalfHourSlot(dayKey, nowMs);
   const floorMin = (() => {
@@ -508,38 +598,89 @@ function bumpPastWishTimesOnDay(
   wishes: IngestOpenWish[],
   dayKey: string,
   nowMs = Date.now(),
+  fixedNodes: IngestFixedNode[] = [],
 ): IngestOpenWish[] {
   const isToday = dayKey === todayDateKey();
   const floor = isToday
     ? nextFutureHalfHourSlot(dayKey, nowMs)
     : '20:00';
+
+  const hardIntervals: Array<{ start: number; end: number }> = [];
+  for (const n of fixedNodes) {
+    if (!n.time) continue;
+    const start = hmToTodayMs(dayKey, n.time, nowMs);
+    if (start == null) continue;
+    const endHm = n.endTime ? hmToTodayMs(dayKey, n.endTime, nowMs) : null;
+    hardIntervals.push({
+      start,
+      end: endHm != null && endHm > start ? endHm : start + 60 * 60_000,
+    });
+  }
+  try {
+    const { hardIntervalsFromStops } =
+      require('./planHardLock') as typeof import('./planHardLock');
+    hardIntervals.push(
+      ...hardIntervalsFromStops(
+        useFuturePlanStore.getState().getPlanForDay(dayKey).stops,
+      ),
+    );
+  } catch {
+    /* soft */
+  }
+  hardIntervals.sort((a, b) => a.start - b.start);
+
+  const snapHm = (hm: string): string => {
+    const ms = hmToTodayMs(dayKey, hm, nowMs);
+    if (ms == null) return hm;
+    try {
+      const {
+        dayBoundsMs,
+        findFreeSlotStartMs,
+        msToHmLabel,
+      } = require('./planHardLock') as typeof import('./planHardLock');
+      const bounds = dayBoundsMs(dayKey);
+      const free = findFreeSlotStartMs({
+        preferredStartMs: ms,
+        durationMs: 45 * 60_000,
+        hardIntervals,
+        dayStartMs: bounds.start,
+        dayEndMs: bounds.end,
+        nowFloorMs: isToday ? nowMs + 15 * 60_000 : bounds.start,
+      });
+      return free != null ? msToHmLabel(free) : hm;
+    } catch {
+      return hm;
+    }
+  };
+
   return wishes.map((w) => {
     let time = w.estimatedTime;
     if (!time) {
       time = looksLikeEveningWish(w)
         ? eveningSlotFloor(dayKey, nowMs)
         : floor;
-      return { ...w, estimatedTime: time };
+      return { ...w, estimatedTime: snapHm(time) };
     }
     const hm = time.match(/^(\d{1,2}):(\d{2})$/);
     const hour = hm ? Number(hm[1]) : null;
-    // Abend-Wunsch mit Mittagszeit → auf Abend schieben
     if (
       looksLikeEveningWish(w) &&
       hour != null &&
       hour >= 11 &&
       hour < 16
     ) {
-      return { ...w, estimatedTime: eveningSlotFloor(dayKey, nowMs) };
+      return { ...w, estimatedTime: snapHm(eveningSlotFloor(dayKey, nowMs)) };
     }
-    if (!isToday) return w;
+    if (!isToday) return { ...w, estimatedTime: snapHm(time) };
     const ms = hmToTodayMs(dayKey, time, nowMs);
-    if (ms == null || ms >= nowMs + 20 * 60_000) return w;
+    if (ms == null || ms >= nowMs + 20 * 60_000) {
+      return { ...w, estimatedTime: snapHm(time) };
+    }
     return {
       ...w,
-      estimatedTime: looksLikeEveningWish(w)
-        ? eveningSlotFloor(dayKey, nowMs)
-        : floor,
+      estimatedTime: snapHm(
+        looksLikeEveningWish(w) ? eveningSlotFloor(dayKey, nowMs) : floor,
+      ),
     };
   });
 }
@@ -557,6 +698,15 @@ export async function geocodeIngestedPlan(
 
   const fixedNodes = await Promise.all(
     plan.fixedNodes.map(async (n) => {
+      // Vage Sport-Venues nie blind geocoden (sonst „Lübeck Tennisplätze“ → Stadtmitte)
+      if (appointmentNeedsExactAddress(n.title, n.location)) {
+        return {
+          ...n,
+          lat: null,
+          lng: null,
+          needsClarification: true,
+        };
+      }
       if (!n.location?.trim() || n.needsClarification) return n;
       if (
         typeof n.lat === 'number' &&
@@ -567,14 +717,41 @@ export async function geocodeIngestedPlan(
         return n;
       }
       try {
+        const {
+          resolvePlanBaseDestination,
+        } = await import('./planBaseSynonyms');
+        const baseHit = resolvePlanBaseDestination(
+          `${n.title} ${n.location}`,
+        );
+        if (
+          baseHit &&
+          baseHit.lat != null &&
+          baseHit.lng != null &&
+          Number.isFinite(baseHit.lat) &&
+          Number.isFinite(baseHit.lng)
+        ) {
+          return {
+            ...n,
+            location: baseHit.label,
+            lat: baseHit.lat,
+            lng: baseHit.lng,
+            address: baseHit.label,
+            needsClarification: false,
+          };
+        }
         const geo = await geocodePlaceName(n.location, bias);
         if (!geo) return n;
+        // Stadtteil-Geocode ≠ Terminadresse — Klärung offen lassen
+        const stillNeedsAddr = appointmentNeedsExactAddress(
+          n.title,
+          n.location,
+        );
         return {
           ...n,
-          lat: geo.lat,
-          lng: geo.lng,
+          lat: stillNeedsAddr ? null : geo.lat,
+          lng: stillNeedsAddr ? null : geo.lng,
           address: geo.label || n.location,
-          needsClarification: false,
+          needsClarification: stillNeedsAddr ? true : false,
         };
       } catch {
         return n;
@@ -621,7 +798,11 @@ export async function geocodeIngestedPlan(
  */
 export async function runPlanningIngestion(
   utterance: string,
-  opts?: { signal?: AbortSignal; dayKeyHint?: string | null },
+  opts?: {
+    signal?: AbortSignal;
+    dayKeyHint?: string | null;
+    frame?: TurnFrame | null;
+  },
 ): Promise<IngestedPlan> {
   const text = utterance.replace(/\s+/g, ' ').trim();
   if (!text) return geocodeIngestedPlan(heuristicFallback(''));
@@ -632,12 +813,17 @@ export async function runPlanningIngestion(
   const guessedDate = normalizeTargetDate(opts?.dayKeyHint, text);
   const timelineSnap = snapshotTimelineForDay(guessedDate);
 
+  const sessionDest =
+    usePlanSessionStore.getState().plan?.destinationCity?.trim() || null;
   const userPrompt = [
     planningClockContextBlock(),
     `STADT-HINT (GPS-Pack, oft NICHT der Zielort): ${bag.cityHint || 'unbekannt'}`,
+    `ZIELSTADT (laufender Plan, oft ≠ GPS): ${opts?.frame?.destCity || sessionDest || 'noch unbekannt'}`,
+    opts?.frame ? formatTurnFrameForPlanPrompt(opts.frame) : '',
     `DEFAULT_GEO: ${geoDefault.name} (${geoDefault.type}) lat=${geoDefault.lat} lng=${geoDefault.lng}`,
     `GEGUESSTER_TAG (verbindlich wenn User morgen/Wochentag nennt): ${guessedDate}`,
     `BEKANNTE_PREFS: ${prefsBlockForPrompt()}`,
+    planBaseSynonymPromptBlock(),
     `LIVE_CHAT: an | idle_timeout_s: 60`,
     timelineSnap,
     `USER_ROHTEXT (unverändert):`,
@@ -675,7 +861,15 @@ export async function runPlanningIngestion(
       });
       parsed = parseJsonObject(raw);
     }
-    if (!parsed) return geocodeIngestedPlan(heuristicFallback(text));
+    if (!parsed) {
+      const fb = {
+        ...heuristicFallback(text),
+        destinationCity: opts?.frame?.destCity || sessionDest,
+      };
+      return geocodeIngestedPlan(
+        patchIngestDestination(fb, text, bag.cityHint, opts?.frame),
+      );
+    }
 
     const geoRaw =
       parsed.geoAnchor && typeof parsed.geoAnchor === 'object'
@@ -711,8 +905,14 @@ export async function runPlanningIngestion(
       targetDate,
     );
     const openWishesQueue = bumpPastWishTimesOnDay(
-      sanitizeWishes(parsed.openWishesQueue),
+      dropInventedExploreWishes(
+        text,
+        sanitizeWishes(parsed.openWishesQueue, text),
+        bag.cityHint,
+      ),
       targetDate,
+      Date.now(),
+      fixedNodes,
     );
 
     const openQuestions = Array.isArray(parsed.openQuestions)
@@ -731,12 +931,7 @@ export async function runPlanningIngestion(
         .replace(/\s{2,}/g, ' ')
         .trim();
 
-    const bridgeSpeech = stripConfirm(
-      sanitizePlanSpeech(
-        String(parsed.bridgeSpeech ?? '').trim() ||
-          defaultBridge(lageMode, targetDate),
-      ),
-    );
+    const bridgeSpeech = ''; // Planungsmodus: keine Bridge-Speech
     let initialVoiceConfirm = sanitizePlanSpeech(
       String(parsed.initialVoiceConfirm ?? '').trim() ||
         'Passt der grobe Plan so für dich?',
@@ -755,6 +950,7 @@ export async function runPlanningIngestion(
     const plan: IngestedPlan = {
       targetDate,
       geoAnchor,
+      destinationCity: opts?.frame?.destCity || sessionDest,
       fixedNodes,
       openWishesQueue:
         openWishesQueue.length > 0
@@ -766,10 +962,27 @@ export async function runPlanningIngestion(
       openQuestions,
       initialVoiceConfirm,
     };
-    plan.tasks = derivePlanTasks(plan);
-    return geocodeIngestedPlan(plan);
+    const patched = patchIngestDestination(plan, text, bag.cityHint, opts?.frame);
+    patched.tasks = derivePlanTasks(patched);
+    console.log('[module5] ingest', {
+      dest: patched.destinationCity,
+      gps: bag.cityHint,
+      wishes: patched.openWishesQueue.map((w) => w.title),
+      fixed: patched.fixedNodes.map((n) => n.title),
+    });
+    return geocodeIngestedPlan(patched);
   } catch (err) {
     console.warn('[module5] master ingest failed', err);
-    return geocodeIngestedPlan(heuristicFallback(text));
+    return geocodeIngestedPlan(
+      patchIngestDestination(
+        {
+          ...heuristicFallback(text),
+          destinationCity: opts?.frame?.destCity || sessionDest,
+        },
+        text,
+        bag.cityHint,
+        opts?.frame,
+      ),
+    );
   }
 }

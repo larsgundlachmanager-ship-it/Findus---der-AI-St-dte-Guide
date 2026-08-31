@@ -1,5 +1,5 @@
 /**
- * In-Ear / Headset-Taste → Findus (aus / einmal / Live-Chat).
+ * In-Ear / Headset-Taste → Yorro (aus / einmal / Live-Chat).
  */
 
 import { NativeEventEmitter, NativeModules, Platform } from 'react-native';

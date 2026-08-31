@@ -1,0 +1,1114 @@
+{
+  "city": "hochheim_am_main",
+  "apply": true,
+  "touched": 138,
+  "approachesFixed": 138,
+  "faqAdded": 0,
+  "data_version": 24,
+  "rows": [
+    {
+      "id": "hochheim_am_main_hochheim",
+      "name": "Hochheim",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_p_r_hochheim_main",
+      "name": "P+R Hochheim(Main)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_hochheimer_weinfest",
+      "name": "Hochheimer Weinfest",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_b_b_hotels_germany_gmbh",
+      "name": "B&B Hotels Germany GmbH",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_stadtverwaltung_hochheim_am_main",
+      "name": "Stadtverwaltung Hochheim am Main",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_hochheimer_weinbaumuseum",
+      "name": "Hochheimer Weinbaumuseum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_weinstadtjournal",
+      "name": "Weinstadtjournal",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_aussichtsturm_am_mainhafen",
+      "name": "Aussichtsturm am Mainhafen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_sonderausstellung_hochheim_weinfestselig",
+      "name": "Sonderausstellung HOCHHEIM:WEINFESTSELIG",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_altes_rathaus_trausaal_standesamt_hochheim",
+      "name": "Altes Rathaus (Trausaal Standesamt Hochheim)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_pfarrkirche_st_peter_und_paul",
+      "name": "Pfarrkirche St. Peter und Paul",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_evangelische_kirche_hochheim_am_main_evangelische_kirchengemein",
+      "name": "Evangelische Kirche Hochheim am Main - Evangelische Kirchengemeinde Hochheim",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_neuapostolische_kirche_hochheim",
+      "name": "Neuapostolische Kirche Hochheim",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_st_bonifatius",
+      "name": "St.Bonifatius",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_katholisches_vereinshaus_hochheim_am_main",
+      "name": "Katholisches Vereinshaus, Hochheim am Main",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_evangelische_kirche",
+      "name": "Evangelische Kirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_umsonst_laden_hochheim",
+      "name": "Umsonst-Laden Hochheim",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_konigin_victoria_denkmal",
+      "name": "Königin-Victoria-Denkmal",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_weinberge",
+      "name": "Weinberge",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_blasorchester_hochheim_am_main_e_v",
+      "name": "Blasorchester Hochheim am Main e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_buchhandlung_eulenspiegel",
+      "name": "Buchhandlung Eulenspiegel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_florsheimer_st_anna_kapelle",
+      "name": "Flörsheimer St. Anna Kapelle",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_evangelische_kirche_massenheim_evangelische_kirchengemeinde_mas",
+      "name": "Evangelische Kirche Massenheim - Evangelische Kirchengemeinde Massenheim-Wicker",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_regionalpark_sitzkiesel_hochheim",
+      "name": "Regionalpark Sitzkiesel Hochheim",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_regionalpark_sitzkiesel",
+      "name": "Regionalpark Sitzkiesel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_leinreiter_denkmal",
+      "name": "Leinreiter-Denkmal",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_hexendenkmal",
+      "name": "Hexendenkmal",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_dauerparker_denkmal_fur_den_opel_manta_am_russelsheimer_kunstpf",
+      "name": "\"Dauerparker\" Denkmal für den Opel Manta am Rüsselsheimer Kunstpfad",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_adlersaule",
+      "name": "Adlersäule",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_hummelpark",
+      "name": "Hummelpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_spielpark_hochheim",
+      "name": "Spielpark Hochheim",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_aussichtskanzel_vogelnest",
+      "name": "Aussichtskanzel Vogelnest",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_hochheimer_mainufer",
+      "name": "Hochheimer Mainufer",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_hochheimer_strand",
+      "name": "Hochheimer strand",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_mainwiesen_hochheim",
+      "name": "Mainwiesen Hochheim",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_alter_wasserturm",
+      "name": "Alter Wasserturm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_aussicht_auf_russelsheim_den_main_und_die_opel_werke",
+      "name": "Aussicht auf Rüsselsheim, den Main und die Opel-Werke",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_massenheimer_kiesgruben",
+      "name": "Massenheimer Kiesgruben",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_daubhauschen",
+      "name": "Daubhäuschen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_calisthenics_park_hochheim",
+      "name": "Calisthenics Park Hochheim",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_laufsteg_uber_die_wickerbachaue",
+      "name": "Laufsteg über die Wickerbachaue",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_parkplatz_spielpark_hochheim",
+      "name": "Parkplatz Spielpark Hochheim",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_grillplatz",
+      "name": "Grillplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_wickerbachaue_von_florsheim_und_hochheim",
+      "name": "Wickerbachaue von Flörsheim und Hochheim",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_wasserturm_hochheim_kutlev",
+      "name": "Wasserturm Hochheim Kutlev",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_sportplatz_am_wasserturm",
+      "name": "Sportplatz Am Wasserturm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_sport_und_kulturhalle_massenheim",
+      "name": "Sport- und Kulturhalle Massenheim",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_spielvereinigung_07_hochheim_e_v",
+      "name": "Spielvereinigung 07 Hochheim e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_altstadt_hochheim",
+      "name": "Altstadt Hochheim",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_familienzentrum_mamma_mia_e_v",
+      "name": "Familienzentrum Mamma Mia e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_weingut_dienst",
+      "name": "Weingut Dienst",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_weingut_schafer_hochheim",
+      "name": "Weingut Schäfer – Hochheim",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_sports_up_hochheim_und_das_leben_wird_leichter",
+      "name": "Sports Up Hochheim ... und das Leben wird leichter",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_dr_med_julia_poliakov",
+      "name": "Dr. med Julia Poliakov",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_verein_der_hundefreunde_hochheim_2000_e_v",
+      "name": "Verein der Hundefreunde Hochheim 2000 e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_zahnmedizinisches_zentrum_hochheim_oliver_j_pfeiffer_dr_silke_f",
+      "name": "Zahnmedizinisches Zentrum Hochheim, Oliver J. Pfeiffer, Dr. Silke Fürstenfelder und Kollegen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_palais_hochheim",
+      "name": "PALAIS HOCHHEIM",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_ember_asia_vietnamesische_spezialitaten_sushi",
+      "name": "Ember Asia - Vietnamesische Spezialitäten & Sushi",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_irca_manufacturing_germany_gmbh",
+      "name": "IRCA Manufacturing Germany GmbH",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_hochheimer_weinberge",
+      "name": "Hochheimer Weinberge",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_fenster_zur_deponie",
+      "name": "Fenster zur Deponie",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_radweg_bischofsheim_russelsheim",
+      "name": "Radweg Bischofsheim - Rüsselsheim",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_zweirad_hartwin_neumann_e_k",
+      "name": "Zweirad Hartwin Neumann e.K.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_mohn_geschenkeboutique_gmbh",
+      "name": "Möhn Geschenkeboutique GmbH",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_labyrinth_florsheim_wicker",
+      "name": "Labyrinth Flörsheim-Wicker",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_geodesia_stele",
+      "name": "Geodesia-Stele",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_eisenbaum",
+      "name": "Eisenbaum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_galerie_rosemarie_jager",
+      "name": "Galerie Rosemarie Jäger",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_kleine_kapelle",
+      "name": "Kleine Kapelle",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_kleine_residenz_am_schloss",
+      "name": "Kleine Residenz Am Schloss",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_pension_eventlocation_tor_zum_rheingau",
+      "name": "Pension & Eventlocation \"Tor zum Rheingau\"",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_opel_werk_russelsheim_tor_55",
+      "name": "Opel Werk Rüsselsheim Tor 55",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_opel_russelsheim_tor_k_131",
+      "name": "Opel Rüsselsheim Tor K 131",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_burgpark",
+      "name": "Burgpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_opel_werk_russelsheim_tor_20",
+      "name": "Opel Werk Rüsselsheim, Tor 20",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_kunstliche_burgruine_im_verna_park_stadtpark",
+      "name": "Künstliche Burgruine im Verna-Park (Stadtpark)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_opel_russelsheim_tor_15",
+      "name": "Opel Rüsselsheim Tor 15",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_opel_werk_russelsheim_tor_15",
+      "name": "Opel Werk Rüsselsheim, Tor 15",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_aussichtspunkt_wickerer_weinberge",
+      "name": "Aussichtspunkt Wickerer Weinberge",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_aussichtspunkt",
+      "name": "Aussichtspunkt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_kleingarten_beim_vogelnest_hochheim",
+      "name": "Kleingarten beim Vogelnest Hochheim",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_lehrpfad_baume_und_wiese",
+      "name": "Lehrpfad Bäume und Wiese",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_kleingartenverein_langgewann_hochheim_e_v",
+      "name": "Kleingartenverein Langgewann Hochheim e. V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_thomas_more_kultur_garten",
+      "name": "THOMAS MORE Kultur.Garten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_kita_storchennest",
+      "name": "Kita Storchennest",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_leons_garten",
+      "name": "Leons garten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_am_beinweg_weinmeile_hock_go",
+      "name": "Am Beinweg (Weinmeile \"Hock & Go\")",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_theatergruppe_delkenheim",
+      "name": "Theatergruppe Delkenheim",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_achterbahnchen",
+      "name": "ACHTERBÄHNCHEN",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_ole_vom_wald",
+      "name": "Ole vom Wald",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_segelclub_hochheim_e_v",
+      "name": "Segelclub Hochheim e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_hochheimer_stadtfuhrer",
+      "name": "Hochheimer Stadtführer",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_rhein_main_yacht_charter",
+      "name": "Rhein-Main-Yacht-Charter",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_weinerlebnisse",
+      "name": "Weinerlebnisse",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_solu_me_accessories",
+      "name": "SoLu & Me Accessories",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_polnische_spezialitaten_gbr",
+      "name": "Polnische Spezialitäten GbR",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_alnatura_super_natur_markt",
+      "name": "Alnatura Super Natur Markt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_weinautomat_kunstler",
+      "name": "Weinautomat Künstler",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_el_markt_osteuropaische_spezialitaten",
+      "name": "EL - Markt „Osteuropäische Spezialitäten“",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_das_brotbackstubchen_hochheim",
+      "name": "Das Brotbackstübchen Hochheim",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_dm_drogerie_markt",
+      "name": "dm-drogerie markt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_innatura_massiv_holzmobel",
+      "name": "INNATURA Massiv - Holzmöbel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_kletterwand",
+      "name": "Kletterwand",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_fahncheskreuz",
+      "name": "Fähncheskreuz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "hochheim_am_main_regionalpark_besucherzentrum_weilbacher_kiesgruben",
+      "name": "Regionalpark Besucherzentrum Weilbacher Kiesgruben",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "hochheim_am_main_schneckenpark_florsheim",
+      "name": "Schneckenpark Flörsheim",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "hochheim_am_main_regionalpark_projekt_haus_des_dichters",
+      "name": "Regionalpark Projekt - Haus des Dichters",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "hochheim_am_main_berliner_brunnen",
+      "name": "Berliner Brunnen",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "hochheim_am_main_lourdeskapelle",
+      "name": "Lourdeskapelle",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "hochheim_am_main_festung_russelsheim",
+      "name": "Festung Rüsselsheim",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "hochheim_am_main_aussichtspunkt_frankfurter_skyline",
+      "name": "Aussichtspunkt Frankfurter Skyline",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "hochheim_am_main_mainspitze",
+      "name": "Mainspitze",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "hochheim_am_main_aussichtsturm_am_regionalpark_portal_weilbacher_kiesgruben",
+      "name": "Aussichtsturm am Regionalpark Portal Weilbacher Kiesgruben",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "hochheim_am_main_regionalpark_aussichtsbastion_schnecken_hugel_weilbach",
+      "name": "Regionalpark Aussichtsbastion Schnecken-Hügel Weilbach",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "hochheim_am_main_aussichtsturm_am_silbersee_1",
+      "name": "Aussichtsturm am Silbersee (1)",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "hochheim_am_main_aussichtspunkt_marxheim",
+      "name": "Aussichtspunkt Marxheim",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "hochheim_am_main_aussichtspunkt_zitadelle_mainz",
+      "name": "Aussichtspunkt Zitadelle Mainz",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "hochheim_am_main_aussichtsturm_am_silbersee_4",
+      "name": "Aussichtsturm am Silbersee (4)",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "hochheim_am_main_aussichtspunkt_an_der_landebahn_nordwest_spotterpoint",
+      "name": "Aussichtspunkt an der Landebahn Nordwest (Spotterpoint)",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "hochheim_am_main_verna_park_stadtpark",
+      "name": "Verna-Park (Stadtpark)",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "hochheim_am_main_fontanen_teich_im_verna_park_stadtpark",
+      "name": "Fontänen-Teich im Verna-Park (Stadtpark)",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "hochheim_am_main_verna_park_sudwest_eingang",
+      "name": "Verna Park, Südwest-Eingang",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "hochheim_am_main_park_bad_weilbach",
+      "name": "Park Bad Weilbach",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "hochheim_am_main_showspielhaus_gmbh",
+      "name": "ShowSpielhaus GmbH",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "hochheim_am_main_avitect_studio_rhein_main",
+      "name": "AVITECT Studio Rhein-Main",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "hochheim_am_main_theater_russelsheim",
+      "name": "Theater Rüsselsheim",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "hochheim_am_main_oberfeldhof",
+      "name": "Oberfeldhof",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "hochheim_am_main_marina_im_zollhafen_mainz",
+      "name": "Marina im Zollhafen Mainz",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "hochheim_am_main_yachtclub_untermain_e_v_im_adac",
+      "name": "Yachtclub Untermain e.V. im ADAC",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "hochheim_am_main_restaurant_bootshaus_haupt",
+      "name": "Restaurant Bootshaus-Haupt",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "hochheim_am_main_wassersportfreunde_bleiau_e_v",
+      "name": "Wassersportfreunde Bleiau e.V.",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "hochheim_am_main_anlegestelle_altrheinfahre_johanna",
+      "name": "Anlegestelle Altrheinfähre \"Johanna\"",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "hochheim_am_main_yacht_club_mainz",
+      "name": "Yacht-Club Mainz",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "hochheim_am_main_boots_club_maaraue_e_v",
+      "name": "Boots-Club Maaraue e.V.",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "hochheim_am_main_historische_rheinschiffsmuhle_ginsheim",
+      "name": "Historische Rheinschiffsmühle Ginsheim",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "hochheim_am_main_segelclub_mainspitze_e_v",
+      "name": "Segelclub Mainspitze e.V.",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "hochheim_am_main_wasserfreunde_weisenau_e_v",
+      "name": "Wasserfreunde Weisenau e.V.",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "hochheim_am_main_hafen_eden",
+      "name": "Hafen Eden",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 2,
+      "had_approaches": 1
+    }
+  ]
+}

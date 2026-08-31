@@ -1,5 +1,13 @@
 /**
- * Live Cartesia-Emotion aus Situation Gate + Matrix-Vibe.
+ * Live Cartesia generation_config — Tempo/Lautstärke, keine Emotion-Tags.
+ *
+ * Cartesia-`emotion` (excited, determined, …) ist auf englische Stimmen
+ * trainiert. Auf native de-DE-Voices (Alina/Sebastian) zieht das den
+ * ganzen Satz in einen US-Akzent. Die Offline-Hörproben klingen sauber,
+ * weil sie kein `generation_config.emotion` schicken.
+ *
+ * Emotion kommt aus dem deutschen Text (Satzzeichen, Wortwahl) —
+ * Cartesia interpretiert das von allein.
  */
 
 import type { CartesiaGenerationConfig } from '../cartesiaTtsService';
@@ -10,20 +18,17 @@ import {
   vibeToneForEmotion,
 } from './situationGate';
 
-const STRESS_EMOTION: CartesiaGenerationConfig = {
-  emotion: 'determined',
-  speed: 1.06,
+const STRESS_PACE: CartesiaGenerationConfig = {
+  speed: 1.22,
   volume: 1.05,
 };
 
-const CALM_EMOTION: CartesiaGenerationConfig = {
-  emotion: 'content',
-  speed: 0.98,
+const CALM_PACE: CartesiaGenerationConfig = {
+  speed: 1.14,
   volume: 1.0,
 };
 
-const WONDER_CHILD_EMOTION: CartesiaGenerationConfig = {
-  emotion: 'excited',
+const WONDER_CHILD_PACE: CartesiaGenerationConfig = {
   speed: 1.14,
   volume: 1.12,
 };
@@ -40,9 +45,19 @@ function withVoiceSpeed(
   voiceId?: VoiceId | null,
 ): CartesiaGenerationConfig {
   const base = typeof cfg.speed === 'number' ? cfg.speed : 1;
+  let volume = cfg.volume;
+  try {
+    const { applyUserTtsVolume } = require('../speech/ttsVolumePref') as {
+      applyUserTtsVolume: (b?: number | null) => number;
+    };
+    volume = applyUserTtsVolume(volume ?? 1.02);
+  } catch {
+    /* soft */
+  }
   return {
     ...cfg,
     speed: Math.min(1.45, Math.max(0.7, base + voiceSpeedBias(voiceId))),
+    volume,
   };
 }
 
@@ -58,59 +73,36 @@ export function resolveCartesiaGenerationForChunk(
   const isWonderChild =
     profile?.coreRole === 'innocent_child' || voiceId === 'rena';
 
-  // Kind / Rena: wie Hörprobe — schneller, dynamischer, staunend
   if (isWonderChild && !ctx.stress) {
-    return withVoiceSpeed(
-      {
-        ...WONDER_CHILD_EMOTION,
-        emotion: /oh|schau|riesig|cool|wow|komm/iu.test(text)
-          ? 'excited'
-          : 'happy',
-      },
-      voiceId,
-    );
+    return withVoiceSpeed({ ...WONDER_CHILD_PACE }, voiceId);
   }
 
   if (ctx.stress || ctx.priority >= 85) {
     if (/flüster|geheim|psst|leise/iu.test(text)) {
-      return withVoiceSpeed(
-        { emotion: 'anxious', speed: 0.95, volume: 0.85 },
-        voiceId,
-      );
+      return withVoiceSpeed({ speed: 0.95, volume: 0.85 }, voiceId);
     }
-    return withVoiceSpeed({ ...STRESS_EMOTION }, voiceId);
+    return withVoiceSpeed({ ...STRESS_PACE }, voiceId);
   }
 
   if (ctx.id === 'humor_banter' || profile?.humorOk) {
     if (/haha|witz|lol/iu.test(text)) {
-      return withVoiceSpeed(
-        { emotion: 'happy', speed: 1.08, volume: 1.1 },
-        voiceId,
-      );
+      return withVoiceSpeed({ speed: 1.08, volume: 1.1 }, voiceId);
     }
   }
 
   if (ctx.id === 'sunset_moment' || ctx.id === 'beach_relax') {
-    return withVoiceSpeed(
-      { emotion: 'reflective', speed: 0.98, volume: 0.98 },
-      voiceId,
-    );
+    return withVoiceSpeed({ speed: 0.98, volume: 0.98 }, voiceId);
   }
 
   if (
     profile?.spleens?.includes('whisperer') &&
     /geheim|flüster|saga|psst|leise/iu.test(text)
   ) {
-    // Nur bei echtem Flüster-Moment leiser — Tempo nicht in die Schnecke
-    return withVoiceSpeed(
-      { emotion: 'anxious', speed: 0.98, volume: 0.9 },
-      voiceId,
-    );
+    return withVoiceSpeed({ speed: 0.98, volume: 0.9 }, voiceId);
   }
 
   return withVoiceSpeed(
     {
-      emotion: vibe.baseEmotion,
       speed: vibe.speed,
       volume: 1.02,
     },
@@ -127,5 +119,5 @@ export function createLiveEmotionResolver(
 }
 
 export function defaultLiveGenerationConfig(): CartesiaGenerationConfig {
-  return { ...CALM_EMOTION };
+  return { ...CALM_PACE };
 }

@@ -3,6 +3,7 @@
  */
 
 import type { ManagerAnalysis } from './types';
+import { frameHasWorker, frameOwnsDayPlan } from './turnFrame';
 
 export type HandoffKind =
   | 'none'
@@ -12,6 +13,12 @@ export type HandoffKind =
   | 'memory';
 
 export function resolveHandoff(analysis: ManagerAnalysis): HandoffKind {
+  if (frameOwnsDayPlan(analysis.frame) || analysis.chatLane === 'plan') {
+    return 'm5_plan';
+  }
+  if (frameHasWorker(analysis.frame, 'flight')) {
+    return 'none';
+  }
   switch (analysis.route) {
     case 'm1_poi':
       return 'm1_poi_offer';
@@ -66,14 +73,26 @@ export async function buildM1PoiOffer(opts: {
       };
     }
     const name = hit.poi?.name || 'dieser Ort';
-    const snippet = (hit.facts[0] || '').slice(0, 160);
+    const snippet = (hit.facts[0] || '').slice(0, 220);
+    const poiId = hit.poi?.id != null ? String(hit.poi.id) : null;
+    if (poiId) {
+      try {
+        const { triggerPoiArrival } = await import('../../runtime/exploreModule');
+        const numId = Number(poiId);
+        if (Number.isFinite(numId)) {
+          void triggerPoiArrival(numId, { force: true });
+        }
+      } catch {
+        /* soft — speech below still identifies */
+      }
+    }
     return {
       speech: snippet
-        ? `Das wirkt nach ${name}. ${snippet} Möchtest du mehr dazu hören?`
-        : `Das wirkt nach ${name}. Möchtest du mehr dazu hören?`,
-      poiId: hit.poi?.id != null ? String(hit.poi.id) : null,
+        ? `Das wirkt nach ${name}. ${snippet}`
+        : `Das wirkt nach ${name}.`,
+      poiId,
       placeName: name,
-      askMore: true,
+      askMore: false,
     };
   } catch {
     return {

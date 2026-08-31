@@ -332,11 +332,16 @@ export function detectExistingPlanEditIntent(utterance: string): {
     /verschieb|leg\s+.+?\s+(auf|um)|später\s+legen|spaeter\s+legen|früher\s+legen|frueher\s+legen|\+\s*15|\-\s*15/.test(
       lower,
     ) ||
+    // „ändere Turnier von 14 auf 16“ / „setz Tennis auf 16 Uhr“
+    (/\b(änder|aender|ändern|aendern|setz|stell)\w*\b/.test(lower) &&
+      /\b(auf|um|von)\s+\d{1,2}(?::\d{2})?\b/.test(lower)) ||
     (/(\bauf\s+\d{1,2}|\bum\s+\d{1,2}).*uhr/.test(lower) &&
-      /verschieb|leg|setz/.test(lower)) ||
+      /verschieb|leg|setz|änder|aender/.test(lower)) ||
     softLater ||
-    (/\b(termin|eintrag|stopp|punkt)\b/.test(lower) &&
-      /\b(später|spaeter|früher|frueher|auf\s+\d{1,2})\b/.test(lower));
+    (/\b(termin|eintrag|stopp|punkt|turnier|tennis)\b/.test(lower) &&
+      /\b(später|spaeter|früher|frueher|auf\s+\d{1,2}|von\s+\d{1,2}\s+auf)\b/.test(
+        lower,
+      ));
 
   let deltaMin: number | undefined;
   if (/später|spaeter|\+\s*15|15\s*min(?:uten)?\s*später/.test(lower)) {

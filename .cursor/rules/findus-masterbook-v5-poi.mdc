@@ -10,10 +10,11 @@ alwaysApply: true
 - Haupt erlebt / teaser-locked → alle Wegpunkte dieses Parents **skip**
 - Approach 2× mit ≥1 h Abstand, nie am Haupt → Approach **dauerhaft skip**
 - Cooldown = **Defer** (nicht permanent skip): nach Ende + **3 s** Radius-Recheck
-- Stille: **10 s** nach M1/Nav · **30 s** nach Modul 2 · **60 s** nach Planung
+- Stille: **15 s** nach M1/Nav · **60 s** nach Modul 2 / Planung
 - Free-Roam Full unter **10 km/h** (kein Stillstand nötig)
 - Nav-Mode (`navExploreMode`, Settings): `quiet` (Default) / `mute_until_dest` / `full`
-- Place-Tiers: `must_have` immer · `amenity_skip` raus · Zeit (Bäcker morgens) · Prefs
+- Place-Tiers: `must_have` immer · harte Amenities (`toilette`/`praxis`/…) raus · Directory-Venues (Sport/Theater/Kino/Café/Aktivität) feuern bei Pref **yes** · Zeit (Bäcker morgens) · Prefs
+- Theater / Kino / Museum / Konzert / Aktivität: bei Arrival LIVE Programm/Ausstellung + Eintritt einbauen (nur belegt) — analog Aktivität-Orte
 - **Einziger Sonderpfad:** `interest_override` — Pref sagt nein, aber starker User-Hook → Research/neuer Text
 
 ## Wegweiser (Early Teaser)
@@ -22,21 +23,26 @@ alwaysApply: true
 2. **Visuell erkennen** — woran man den Ort erkennt.
 3. **Motivation/Hook** — wieso hingehen; Prefs ehrlich; **keine Fake-Versprechen**.
 - Wort „Wegweiser“ nie aussprechen.
-- Keine volle Story, kein 1200-Zeichen-Ziel.
+- Keine volle Story, kein 1000-Zeichen-Ziel.
 
 ## Main POI (Arrival) — Audio-Blueprint
 
-1. **Visuell** — wie sieht der Ort aus (**skip**, wenn Wegweiser das schon hatte).
-2. **Historie** — früher / wann / wie / wo / warum / Fun Facts → flüssig → Heute.
-3. **Leben jetzt** — was man hier machen kann nur aus `placeOffers` / belegten Fakten.
-4. **Nähe ≤50 m** — optional ein Nebenpunkt mit kurzem „wenn du willst, wegen …“.
-5. Optional Stadt-/Dorfgeschichte einweben wenn thematisch linked und noch nicht gesagt.
-6. **Max. 1200 Zeichen**, nichts erfinden, kein Mindestmaß.
-7. **Stadt-agnostisch**: keine POI-/Stadt-Hardcodes.
+**Default (`module1StoryMode: full`):** immersive Story, **max. ~1000 Zeichen** — Geschichte zum Anfassen, spannend, viele belegte Fakten, kein Rumreden. Stimme folgt der Persönlichkeits-Matrix.
+
+Ziel anpeilen (Ortstyp darf dosieren):
+1. **Historie ~65 %** — User ist Teil der Geschichte (Du/Sinne); kleben bleiben, Neues lernen.
+2. **Flüssiger Übergang + Aktuelles ~25 %** — was geht JETZT am Ort (nur belegt).
+3. **Rest** — was man hier jetzt konkret tun/sehen/anfassen kann (`placeOffers` / LIVE nur belegt).
+4. Optional Nähe ≤50 m / Stadtgeschichte wenn thematisch linked.
+5. **Stadt-agnostisch**; SSOT `FINDUS_MODULE1_IMMERSIVE_STORY_BLOCK`.
+
+**Kurzantworten (`module1StoryMode: brief`, Settings opt-in):** nur **Name + Zusammenfassung**, max. **400 Zeichen**.
+
+**Hardfacts (UI):** immer aus dem **Gesprochenen** — max. **3 Stichpunkte**, je max. **~2 Zeilen**.
 
 ### Aktivitäts-Orte (Sport, Wasserski, Freizeit, Buchung…)
 
-- Historie **kurz**; Schwerpunkt **Leben jetzt**: Aktivität, Besonderheit, Preis/Dauer/Mitbringen **nur belegt**.
+- Historie **kürzer**; Schwerpunkt **Leben jetzt**: Aktivität, Besonderheit, Preis/Dauer/Mitbringen **nur belegt**.
 - Abschluss: Charakter-angepasste **Motivation zum Mitmachen** (ohne Meta-„frag mich“, ohne erfundene Zahlen).
 - UI-Button: **„Mehr dazu“** (nicht „Mehr Historie“); Website/Buchung-Links **zuerst**.
 - Stichpunkte: Preise/Dauer/Angebot — **nie** Adresse, GPS, Koordinaten, Straßenzeile (außer User fragt danach).
@@ -52,14 +58,14 @@ alwaysApply: true
 
 ## UI nach Story
 
-- 1–3 Stichpunkte aus dem **gesprochenen** Text (harte Fakten, je 1 Zeile) — keine Pack-Dumps, keine Tel/E-Mail/PLZ/**Adresse/GPS** außer User fragt danach.
+- 1–3 Stichpunkte aus dem **gesprochenen** Text (harte Fakten, je max. ~2 Zeilen) — keine Pack-Dumps, keine Tel/E-Mail/PLZ/**Adresse/GPS** außer User fragt danach.
 - Buttons: „Mehr Historie“ (Kultur) bzw. „Mehr dazu“ (Aktivität) → Modul-1 `interestDeepDive`.
 - **Kein Audio-Selbstvorschlag** („frag mich“, App-Features, Mikro) — Story endet am Ort.
 - Ort-Links aus Pack-URLs (`buildPlaceOfferUrlActions`); Nähe kategoriebasiert; Hotel-Label generisch aus Name.
 
 ## Mehr Historie
 
-- Tiefer am **selben POI** (noch nicht Gesagtes), ebenfalls **max. 1200 Zeichen**, nichts erfinden.
+- Tiefer am **selben POI** (noch nicht Gesagtes), **max. 2000 Zeichen**, nichts erfinden.
 - Keine Timeline, keine fremden Museen/„zwei Stationen in der Nähe“, kein Explore-Drift.
 - Routing: Geschichte/Historie schlägt Gastro-Keyword im Ortsnamen.
 
@@ -73,4 +79,4 @@ Voll erklärt oder besucht → für Teaser-Trigger **LOCKED**.
 
 ## Adjustable Depth
 
-User / Button „Mehr Historie“ → tiefer am selben Ort; max. 1200 Zeichen; schon Gesagtes nicht wiederholen.
+User / Button „Mehr Historie“ → tiefer am selben Ort; max. **2000** Zeichen; schon Gesagtes nicht wiederholen.

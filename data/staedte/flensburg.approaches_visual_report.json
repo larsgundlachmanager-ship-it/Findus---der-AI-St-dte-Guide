@@ -1,0 +1,666 @@
+{
+  "city": "flensburg",
+  "apply": true,
+  "touched": 82,
+  "approachesFixed": 82,
+  "faqAdded": 0,
+  "data_version": 41,
+  "rows": [
+    {
+      "id": "flensburg_schiffahrtsmuseum_flensburg",
+      "name": "Schiffahrtsmuseum - Flensburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_flensburg_bahnhof",
+      "name": "Flensburg Hauptbahnhof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_sudermarkt",
+      "name": "Südermarkt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_hafenspitze",
+      "name": "Hafenspitze",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_museumsberg_flensburg",
+      "name": "Museumsberg Flensburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_phanomenta",
+      "name": "Phänomenta",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_braasch_rum_rum_manufaktur_museum",
+      "name": "Braasch Rum & Rum Manufaktur Museum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_museumshafen_flensburg_e_v",
+      "name": "Museumshafen Flensburg e. V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_museumsberg_flensburg_hans_christiansen_haus",
+      "name": "Museumsberg Flensburg, Hans-Christiansen-Haus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_tauchermuseum_flensburg",
+      "name": "Tauchermuseum Flensburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_eiszeit_haus",
+      "name": "Eiszeit Haus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_st_nikolai_kirche_zu_flensburg_der_ev_luth_st_nikolai_kirchengemeinde_",
+      "name": "St. Nikolai-Kirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_st_marien_kirche_flensburg",
+      "name": "St. Marien Kirche Flensburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_katholische_kirche_st_marien",
+      "name": "Katholische Kirche St. Marien",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_st_jurgen_kirche_flensburg_ev_luth_kirchengemeinde_flensburg_st_jurgen",
+      "name": "St. Jürgen Kirche Flensburg - Ev.-Luth. Kirchengemeinde Flensburg-St. Jürgen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_helligandskirken_dansk",
+      "name": "Helligåndskirken - dansk",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_st_johannis_kirche_flensburg_ev_luth_kirchengemeinde_flensburg_st_joha",
+      "name": "St. Johannis Kirche Flensburg - Ev.-Luth. Kirchengemeinde Flensburg-St. Johannis",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_bundsenkapelle",
+      "name": "Bundsenkapelle",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_christuskirche_zu_flensburg_murwik_der_ev_luth_kirchengemeinde_murwik",
+      "name": "Christuskirche zu Flensburg Mürwik der Ev.-Luth. Kirchengemeinde Mürwik",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_st_michael_kirche_flensburg_ev_luth_kirchengemeinde_st_michael_in_flen",
+      "name": "St. Michael Kirche Flensburg - Ev.-Luth. Kirchengemeinde St. Michael in Flensburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_st_johannis_kirche_zu_flensburg_der_ev_luth_kirchengemeinde_adelby_eng",
+      "name": "St. Johannis Kirche zu Flensburg der Ev.-Luth. Kirchengemeinde Adelby-Engelsby",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_evangelisch_freikirchliche_gemeinde_flensburg_baptisten_kdor",
+      "name": "Evangelisch-Freikirchliche Gemeinde Flensburg (Baptisten) KdöR",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_st_petri_kirche_flensburg_ev_luth_st_petrigemeinde_in_flensburg",
+      "name": "St. Petri Kirche Flensburg - Ev.-Luth. St. Petrigemeinde in Flensburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_campelle_esg_flensburg",
+      "name": "Campelle ESG Flensburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_neuapostolische_kirche_flensburg",
+      "name": "Neuapostolische Kirche Flensburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_ansgar_kirke_flensborg_nord",
+      "name": "Ansgar Kirke Flensborg Nord",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_katholische_kirche_st_ansgar",
+      "name": "Katholische Kirche St Ansgar",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_st_gertrud_kirche_flensburg_ev_luth_kirchengemeinde_st_gertrud_zu_flen",
+      "name": "St. Gertrud Kirche Flensburg - Ev.-Luth. Kirchengemeinde St. Gertrud zu Flensburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_equippers_flensburg_e_v",
+      "name": "Equippers Flensburg e.V. ⛪",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_idstedtlowe",
+      "name": "Idstedtlöwe",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_solitude",
+      "name": "Solitüde",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_ostseebad_flensburg",
+      "name": "Ostseebad Flensburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_volkspark",
+      "name": "Volkspark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_aussichtsplattform_am_volkspark",
+      "name": "Aussichtsplattform am Volkspark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_wasserturm_fruerlund",
+      "name": "Wasserturm Flensburg-Mürwik",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_flensburger_stadion",
+      "name": "Flensburger Stadion",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_tsb_flensburg_sportanlage",
+      "name": "TSB Flensburg Sportanlage",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_niederdeutsche_buhne_flensburg_gemeinnutzige_gmbh",
+      "name": "Niederdeutsche Bühne Flensburg gemeinnützige GmbH",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_kleine_buhne",
+      "name": "Kleine Bühne",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_theaterschule_flensburg_ggmbh",
+      "name": "Theaterschule Flensburg gGmbH",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_stadttheater_flensburg",
+      "name": "Stadttheater - Flensburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_det_lille_teater_flensborg",
+      "name": "Det lille Teater Flensborg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_forum_theater_flensburg",
+      "name": "Forum Theater Flensburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_plop_shop_vor_der_flensburger_brauerei",
+      "name": "Plop-Shop vor der Flensburger Brauerei",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_funk_und_telegraphenhaus_flensburg_murwik",
+      "name": "Funk- und Telegraphenhaus (Flensburg-Mürwik)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_flensburg_galerie",
+      "name": "Flensburg Galerie",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_galerie_der_miezen_katzenkunst_norderstrasse_flensburg",
+      "name": "Galerie der Miezen - Katzenkunst Norderstraße Flensburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_gallery4",
+      "name": "Gallery4",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_restaurant_galerie",
+      "name": "Restaurant Galerie",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_haptik_galerie_fur_gebrauchskunst",
+      "name": "haptik - Galerie für Gebrauchskunst",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_katholische_ordensschwestern_dienerinnen_vom_heiligen_blut",
+      "name": "Katholische Ordensschwestern \"Dienerinnen vom Heiligen Blut\"",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_pauluskirche_zu_flensburg_der_ev_luth_paulus_kirchengemeinde_flensburg",
+      "name": "Pauluskirche zu Flensburg der Ev.-Luth. Paulus-Kirchengemeinde Flensburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_rathausplatz",
+      "name": "Rathausplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_rathaus_flensburg",
+      "name": "Rathaus - Flensburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_schloss_glucksburg",
+      "name": "Schloss Glücksburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_duburg",
+      "name": "Duburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_kompagnietor",
+      "name": "Kompagnietor",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_christiansenpark",
+      "name": "Christiansenpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_broschmann_finke_theater_company",
+      "name": "Broschmann & Finke Theater Company",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_russisch_deutsche_buhne",
+      "name": "Russisch-Deutsche Bühne",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_kulturwerkstatt_kuhlhaus",
+      "name": "Kulturwerkstatt Kühlhaus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_sonwik_yachthafen",
+      "name": "Sonwik Yachthafen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_wochenmarkt_auf_dem_sudermarkt",
+      "name": "Wochenmarkt auf dem Südermarkt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_roxy_concerts",
+      "name": "Roxy Concerts",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_flensbloc_boulderhalle_flensburg",
+      "name": "FlensBloc - Boulderhalle Flensburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_kletterhalle_flensburg",
+      "name": "Kletterhalle Flensburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_nsg_twedter_feld",
+      "name": "NSG Twedter Feld",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_fordeblick",
+      "name": "Fördeblick",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "flensburg_mehrjahrige_bluhflache_flensburg_bluht",
+      "name": "Mehrjährige Blühfläche Flensburg blüht",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_kreuzlucke_flensburg",
+      "name": "Kreuzlücke - Flensburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_harrisleer_kreuz",
+      "name": "Harrisleer Kreuz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_dr_kreuz",
+      "name": "Dr. Kreuz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_tbz_recyclinghof_kauslund",
+      "name": "TBZ Recyclinghof Kauslund",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_ehrenhain",
+      "name": "Ehrenhain",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "flensburg_nordertor",
+      "name": "Nordertor",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_marineschule_murwik",
+      "name": "Marineschule Mürwik",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_rote_strasse",
+      "name": "Rote Straße",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_ggw_arena",
+      "name": "GGW Arena",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_johannisviertel",
+      "name": "Johannisviertel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_zob_flensburg",
+      "name": "ZOB Flensburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_salondampfer_alexandra",
+      "name": "Salondampfer Alexandra",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "flensburg_schiffbruecke",
+      "name": "Schiffbrücke",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    }
+  ]
+}

@@ -38,15 +38,21 @@ function displayPoiName(poi: { name: string }): string {
 
 function mapsOpenUrl(
   name: string,
-  lat: number,
-  lng: number,
+  _lat: number,
+  _lng: number,
   placeId?: string | null,
 ): string {
-  if (placeId) {
-    return `https://www.google.com/maps/search/?api=1&query_place_id=${encodeURIComponent(placeId)}`;
+  try {
+    const { mapsUrlForGooglePlace } = require('../research/eventInfoUrl') as {
+      mapsUrlForGooglePlace: (o: {
+        placeName?: string | null;
+        placeId?: string | null;
+      }) => string | null;
+    };
+    return mapsUrlForGooglePlace({ placeName: name, placeId }) || '';
+  } catch {
+    return '';
   }
-  const q = encodeURIComponent(`${name}@${lat},${lng}`);
-  return `https://www.google.com/maps/search/?api=1&query=${q}`;
 }
 
 const NEARBY_M = 50;
@@ -55,8 +61,8 @@ const ALREADY_HERE_M = 35;
 const MAX_BULLETS = 3;
 /** Mehr Historie + bis 2 Ort-Links oder Nähe */
 const MAX_ACTIONS = 4;
-/** ~1 Zeile à ~42 Zeichen in BulletsSlot */
-const BULLET_MAX_CHARS = 42;
+/** Max. ~2 UI-Zeilen pro Stichpunkt — nur aus der Speech */
+const BULLET_MAX_CHARS = 120;
 
 const HARD_FACT_RE =
   /\b(seit|gebaut|eröffnet|eroeffnet|denkmal|rb\s*\d+|linie|rosen|topf|gutshof|haltepunkt|feuerwehr|jugendfeuerwehr|weihnachts|golf|zimmer|ferien|zufluss|reguliert|begradigt|fachwerk|walmdach)\b/iu;
@@ -98,6 +104,23 @@ function cleanBullet(raw: string): string {
 function fitBulletLine(text: string): string {
   // Nie mitten im Wort kürzen, kein „…“ — lieber an Wortgrenze stoppen
   return truncateToWholeWords(text, BULLET_MAX_CHARS, { ellipsis: false });
+}
+
+/** Abgeschnittene Stichpunkte verwerfen („fiel hier“, „das alte“, „Zum Schuljahr und“). */
+function looksIncompleteBullet(text: string): boolean {
+  const t = text.trim();
+  if (
+    /\b(und|oder|dass|weil|der|die|das|den|dem|des|ein|eine|zum|zur|von|mit|für|fuer|am|im|ab|als|nach)\s*$/iu.test(
+      t,
+    )
+  ) {
+    return true;
+  }
+  if (/\b(fiel|kommt|wurde)\s+(hier|dort)?\s*$/iu.test(t)) return true;
+  if (/^(zum|zur|weil|und|dass)\b/iu.test(t) && t.split(/\s+/).length <= 6) {
+    return true;
+  }
+  return false;
 }
 
 function isHardFactBullet(clause: string): boolean {
@@ -181,6 +204,8 @@ export function buildModule1Bullets(
       !c ||
       looksLikeContactDump(c) ||
       looksLikeAddressOrGeoDump(c) ||
+      looksIncompleteBullet(c) ||
+      looksIncompleteBullet(cleaned) ||
       /\?$/.test(c) ||
       c.length < 8
     ) {
@@ -251,7 +276,11 @@ export function buildModule1Bullets(
     }
   }
 
-  return out.slice(0, MAX_BULLETS);
+  const capped: string[] = [];
+  for (const line of out.slice(0, MAX_BULLETS)) {
+    capped.push(line);
+  }
+  return capped;
 }
 
 function looksLikeHotel(poi: Poi | PoiWithFacts): boolean {
@@ -272,7 +301,7 @@ export function looksLikeActivityVenue(poi: Poi | PoiWithFacts): boolean {
       ? poi.facts.map((f) => f.fact_text ?? '').join(' ')
       : '';
   const blob = `${poi.name} ${poi.category ?? ''} ${tags} ${factBlob}`;
-  return /\b(wasserski|wakeboard|cable\s*ski|surf|klettern|kletterhalle|minigolf|bowling|kart|escape|golf|tennis|sportzentrum|freizeitpark|baden|schwimm|tauchen|reiten|kanu|kajak|segelsport|sport\s*gmbh|erlebnis|aktivit)/i.test(
+  return /\b(wasserski|wakeboard|cable\s*ski|surf|klettern|kletterhalle|minigolf|bowling|kart|escape|golf|tennis|sportzentrum|freizeitpark|baden|schwimm|tauchen|reiten|kanu|kajak|segelsport|sport\s*gmbh|erlebnis|aktivit|beach\s*volley|beachvolleyball|trampolin|lasertag)\b/i.test(
     blob,
   );
 }
@@ -395,6 +424,37 @@ export async function buildModule1Actions(
   const offers = extractPlaceOffers(poi);
   let urlActions = buildPlaceOfferUrlActions(offers);
 
+  // Live-Programm/Ticket aus Venue-Research (wenn gerade geholt)
+  try {
+    const { getRememberedVenueProgramHit } = require('./venueProgramCache') as {
+      getRememberedVenueProgramHit: (id: number) => {
+        ticketUrl?: string | null;
+        websiteUrl?: string | null;
+      } | null;
+    };
+    const live = getRememberedVenueProgramHit(poi.id);
+    const liveUrls = [live?.ticketUrl, live?.websiteUrl].filter(
+      (u): u is string => Boolean(u && /^https?:\/\//i.test(u)),
+    );
+    for (const url of liveUrls) {
+      if (urlActions.some((a) => a.payload.url === url)) continue;
+      urlActions = [
+        {
+          type: 'OPEN_URL' as const,
+          label: shortenActionLabel(
+            /ticket|eventim|reservix|ticketmaster/i.test(url)
+              ? '🎟 Tickets'
+              : '🌐 Programm',
+          ),
+          payload: { url, destName: name },
+        },
+        ...urlActions,
+      ].slice(0, 3);
+    }
+  } catch {
+    /* soft */
+  }
+
   // Pack-_links / _meta.sources matchen (wenn Fakten keine URL haben)
   if (urlActions.length < 2) {
     try {
@@ -414,28 +474,16 @@ export async function buildModule1Actions(
     }
   }
 
-  // 1) Maps immer zuerst bei Orten mit Koordinaten
-  if (
-    Number.isFinite(poi.lat) &&
-    Number.isFinite(poi.lng) &&
-    actions.length < MAX_ACTIONS
-  ) {
-    actions.push({
-      type: 'OPEN_URL',
-      label: shortenActionLabel('🗺️ Maps'),
-      payload: {
-        url: mapsOpenUrl(name, poi.lat, poi.lng, null),
-      },
-    });
-  }
+  // Kein Maps/Route zum eigenen Ort — User steht schon da (Masterbook / Arrival)
+  // Website / Events / Buchung weiter ok.
 
-  // 2) Hotel: Expedia/Stay22 Pflicht-Slot (vor Nähe)
+  // 1) Hotel: Expedia/Stay22 Pflicht-Slot (vor Nähe)
   if (hotel && actions.length < MAX_ACTIONS) {
     const stay = buildHotelBookAction({ name, rank: 1 });
     actions.push(stay);
   }
 
-  // 3) Website / Events / Buchung
+  // 2) Website / Events / Buchung
   for (const urlAction of urlActions) {
     if (actions.length >= MAX_ACTIONS) break;
     actions.push(urlAction);
@@ -452,8 +500,8 @@ export async function buildModule1Actions(
         entityName: name,
         actionBoardId: `expand:${poi.id}`,
         textPrompt: activity
-          ? `Mehr zu diesem Aktivitäts-Ort — was man hier macht, Preise/Dauer nur wenn belegt, was besonders ist, praktische Tipps. Max 3000 Zeichen. Keine Planungsvorschläge, keine anderen Museen. Charakter-angepasste Motivation am Ende ok. Keine Meta-Abschlussfrage.`
-          : `Mehr Historie zu diesem Ort hier vor Ort — tiefer, was du noch nicht gesagt hast. Max 3000 Zeichen. Keine Planungsvorschläge, keine anderen Museen. Keine Abschlussfrage.`,
+          ? `Mehr zu diesem Aktivitäts-Ort — was man hier macht, Preise/Dauer nur wenn belegt, was besonders ist, praktische Tipps. Max 2000 Zeichen. Keine Planungsvorschläge, keine anderen Museen. Charakter-angepasste Motivation am Ende ok. Keine Meta-Abschlussfrage.`
+          : `Mehr Historie zu diesem Ort hier vor Ort — tiefer, was du noch nicht gesagt hast. Max 2000 Zeichen. Keine Planungsvorschläge, keine anderen Museen. Keine Abschlussfrage.`,
       },
     });
   }
@@ -482,7 +530,7 @@ export async function buildModule1Actions(
     }
   }
 
-  // ActionBoard: Labels + Pending Speisekarte + Expand vereinheitlichen
+  // ActionBoard: Labels + Expand — KEIN Self-Route/Maps (User ist vor Ort)
   const websiteFromOffers =
     urlActions.find((a) => a.payload.url)?.payload.url ?? null;
   const cardId = `m1_${poi.id}_${Date.now()}`;
@@ -508,8 +556,29 @@ export async function buildModule1Actions(
     },
   );
 
+  // Self-Nav / Self-Maps hart rausfiltern (falls Scan trotzdem seeded)
+  const filtered = boarded.response.quickActions.filter((a) => {
+    if (a.type === 'START_NAVIGATION') {
+      const sameId = a.payload.targetPoiId === poi.id;
+      const sameCoord =
+        typeof a.payload.destLat === 'number' &&
+        typeof a.payload.destLng === 'number' &&
+        haversineMeters(a.payload.destLat, a.payload.destLng, poi.lat, poi.lng) <
+          ALREADY_HERE_M;
+      return !sameId && !sameCoord;
+    }
+    if (a.type === 'OPEN_URL') {
+      const url = a.payload.url ?? '';
+      if (/google\.[^/]+\/maps|maps\.google|maps\.app\.goo/i.test(url)) {
+        // Nur Self-Maps killen — fremde Maps-Links (Nähe) behalten wir nicht als Maps-Button zum Self
+        return false;
+      }
+    }
+    return true;
+  });
+
   return {
-    actions: boarded.response.quickActions.slice(0, MAX_ACTIONS),
+    actions: filtered.slice(0, MAX_ACTIONS),
     deepJobs: boarded.deepJobs,
     cardId,
   };
@@ -523,6 +592,40 @@ export async function presentModule1LiveCard(opts: {
   actionsOnly?: boolean;
 }): Promise<void> {
   const { poi, spokenText } = opts;
+  // Live-Programm/Tickets vor Actions (nicht blockierend lang)
+  try {
+    const { detectVenueProgramKind, researchVenueProgram } = require('../research/venueProgramResearch') as {
+      detectVenueProgramKind: (p: PoiWithFacts) => string | null;
+      researchVenueProgram: (o: {
+        poi: PoiWithFacts;
+        cityHint?: string | null;
+        timeoutMs?: number;
+      }) => Promise<{
+        ticketUrl?: string | null;
+        websiteUrl?: string | null;
+        promptBlock?: string | null;
+        bullets?: string[];
+      } | null>;
+    };
+    const { rememberVenueProgramHit, getRememberedVenueProgramHit } = require('./venueProgramCache') as {
+      rememberVenueProgramHit: (id: number, h: unknown) => void;
+      getRememberedVenueProgramHit: (id: number) => unknown;
+    };
+    if (detectVenueProgramKind(poi) && !getRememberedVenueProgramHit(poi.id)) {
+      const cityHint =
+        getCachedUserProfile()?.cityName ??
+        getCachedUserProfile()?.cityId ??
+        null;
+      const hit = await researchVenueProgram({
+        poi,
+        cityHint,
+        timeoutMs: opts.actionsOnly ? 4_000 : 6_500,
+      });
+      if (hit) rememberVenueProgramHit(poi.id, hit);
+    }
+  } catch {
+    /* soft */
+  }
   const actionsOnly = Boolean(opts.actionsOnly) || !spokenText.trim();
   const bullets = actionsOnly ? [] : buildModule1Bullets(spokenText, poi);
   const built = await buildModule1Actions(poi);

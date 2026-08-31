@@ -1,27 +1,59 @@
 ---
 description: Findus V5 — Modul 5 Planungsassistent (Masterplan Reboot)
-globs: ["src/module2/planning/**/*.ts", "src/components/PlanCalendarModal.tsx"]
+globs: ["src/module2/planning/**/*.ts", "src/components/PlanCalendarModal.tsx", "src/module2/timeline/gapFillTravel.ts"]
 ---
 
 # Findus V5 — Modul 5 (Masterplan)
 
 SSOT-Einstieg: `runPlanningModule.ts` → Ingest → `runPlanSession`.
+Pitch + Tour sind **eng verdrahtet** in Modul 5 (keine parallelen Legacy-Compound-Pfade).
 
 ## Dateien
 
-1. `planningLlmIngestion.ts` — `MASTER_INGEST_SYSTEM`, Prio 1–6, GPS/Hotel-Anker, `estimatedTime` HH:mm, Geocode nach Ingest
-2. `planSessionOrchestrator.ts` — Start-Anker + Fixes/Wishes auto-insert, Confirm (Ändern|Bestätigen), Gap-Fill, Explore 3/8/12
-3. `planPlacesResearch.ts` — `DEEP_RESEARCH_SYSTEM`, 2 Optionen als `choice_*` Stops, je Ort `speechPitch` ~300, Top Maps/Speisekarte, Bottom nur „Neu suchen“
-4. `planMobilityEngine.ts` — Walk/Bike/Transit/Taxi (5/10-Min-Regeln), Round-5 + 10 Puffer
-5. `planConflictResolve.ts` — Drop Prio 6→4, Geo-Injection, Trigger 30/10/5; Final Tisch/Taxi/Tickets = OPEN_URL (kein Re-Ingest)
+1. `planningLlmIngestion.ts` — `MASTER_INGEST_SYSTEM` + `FINDUS_PLAN_SMART_OVERVIEW_BLOCK`, Prio 1–6, GPS/Hotel-Anker, Basis-Synonyme, `estimatedTime` HH:mm, Geocode nach Ingest
+2. `planSessionOrchestrator.ts` — Start-Anker + Fixes/Wishes auto-insert, Confirm, Gap-Fill, Explore
+3. `planPlacesResearch.ts` — Deep Research, 2 Optionen als `choice_*`, Pitch-Cache in `notes` + Maps/Menü/Reserve
+4. `planMobilityPolicy.ts` — SSOT Fuß/Rad ≤20 Min; ÖPNV wenn ≥5 Min schneller; ab ~30 Min Fuß immer ÖPNV
+5. `planMobilityEngine.ts` / `gapFillTravel.ts` — nutzen `pickPlanMobilityMode`
+6. `planConflictResolve.ts` — Drop Prio 6→4, Geo-Injection, Trigger; Final = OPEN_URL
+7. `planAgentSession.ts` — Smart-Overview + FOCUSED_STOP + Basis-Synonyme; Tools statt Meta-Speech
+8. `planSpeechPolicy.ts` — Plan spricht bei aktiver Session; M2 nur bei wichtigem Off-Topic
+9. `planHandoffGuard.ts` — Auto-Handoff an Modul 5; bei Session Default = M5
 
-## UX-Regeln
+## Speech
 
-- Timeline-Achse: auch bei alleinigem „Jetzt“ vertikale Connectoren
-- Auswahl nur per Timeline-Tap auf `choice_*`; Short-Answer Reject = Re-Research
-- „Tisch reservieren“ / „Taxi vorbestellen“ / „Tickets“ → Actions, nie `runPlanningModule` Ingest
+- Zusammen auf Plan → Modul 5 spricht; Modul 2 bleibt still.
+- Ausnahme: wichtiges Off-Topic (Notfall/Survival, Pack-Story, kritisches GPS) → M2 zu Ende.
+- Wetter/Outfit: M2/Wetter-Agent darf antworten; Plan nutzt die Info danach.
+- Ingest-`bridgeSpeech` bleibt leer (kein LLM-Skript). Cover-Bridge aus `contextualBridge` sofort bei frischem Session-Start, dann Answer-First nach Plan-Tools.
+
+## Smart-Plan (Agent)
+
+- Priorität: sichtbarer/fokussierter Stop → genannter Tag/Termin → nächster Anker.
+- Historische Orte = Bezug für **neuen** Stop am Ziel-Tag (kein Timeline-Sprung Monate zurück).
+- Anker (Turnier/Show/Check-out+Bahn) nie für Tour verschieben; Tour nur in echten Lücken.
+- Zeiten selbst denken (Abendessen, Check-in, Frühstück vs. Zug); strukturierte Tool-Calls.
+
+## UX
+
+- Planung oben; Tap auf Stop → Expand (Notes/Pitch-Cache, Maps, Speisekarte/Reserve).
+- ÖPNV-Leg (geplant wie Live): Akkordeon mit Beinen (zu Fuß → Bahn → Umstieg); Tippen klappt auf/zu.
+- Rechts wischen → „Löschen?“; Bestätigen löscht (Hard-Locks geschützt).
+- Auswahl nur per Timeline-Tap auf `choice_*`; Short-Answer Reject = Re-Research.
+- „Tisch / Taxi / Tickets“ → Actions, nie Re-Ingest.
 
 ## Routing
 
-- Timeline offen oder Tagesplan-Utterance → Modul 5
-- Mic sonst → Modul 2
+- Timeline offen / aktive Session / Tagesplan-Utterance → Modul 5 (frisch: vor Call-1)
+- Zukunftstag + andere Stadt + „los“ = Timeline, keine Live-Nav vom GPS-Pack
+- Mic sonst → Modul 2 (außer Force-Handoff)
+
+## Zielstadt vs GPS-Pack
+
+- GPS/aktives Pack = Start, nicht automatisch der Plan-Ort.
+- Nennt der User eine andere Stadt: Recherche und Touren laufen dort. „um 9 los“ / „Bahn ab 9“ = Abfahrt, keine lokale Aktivität am GPS-Ort. Frühstück „bei Ankunft“ / „ab 10“ = in der Zielstadt nach der Anreise.
+- Pack der Zielstadt nicht installiert → **sofort** Wechsel-Popup + 1-Wort-Chips (Ja/Nein) + Mic wieder auf (Tipp, kurze Antwort oder flüssig weiterreden). Recherche braucht den Datensatz.
+- Pack schon auf dem Gerät → Recherche nutzt ihn, auch wenn man physisch in einer anderen Stadt steht. Kein Zwangs-Switch.
+- Ablauf: kompletten Plan **einmal** in die Timeline schreiben (jeder genannte Punkt ein Slot; Fixpunkte zuerst, Touren zuletzt). Danach offene Punkte Stück für Stück recherchieren/pitchen — nichts aus dem Rohtext vergessen.
+- Pitch = Frühstück/Abendessen/Hotel; Rest (Landmarken, Lücken-Tour, Anreise) = Tour-Modul. Recherche: Abend-Fixpunkt → Frühstück → eine Tour Frühstück→genannte Orte→Abendessen.
+- „um X los“ = Abfahrt, kein Wecker. **Wecker erst am Planende**, rückwärts von der ersten Morgen-Abfahrt (Leave-by − Prep).

@@ -2,7 +2,7 @@
  * ActionBoard Labels — 🥇/🥈 für Favoriten, konkrete Einzel-Labels sonst.
  */
 
-import { shortenActionLabel } from '../concierge/actionLabelShorten';
+import { shortenActionLabel, compactPlaceForAction } from '../concierge/actionLabelShorten';
 import type { ActionEntity, ActionOpportunityKind } from './types';
 
 const INTENT_EMOJI: Partial<Record<ActionOpportunityKind, string>> = {
@@ -80,7 +80,9 @@ export function singleEntityLabel(
     return shortenActionLabel(`${emoji} Noch mehr${pending}`);
   }
   if (name && (kind === 'route' || kind === 'maps' || kind === 'website')) {
-    const short = name.length > 16 ? `${name.slice(0, 14).trim()}…` : name;
+    // Max 22 inkl. Emoji — Ort kompakt neu formulieren (z. B. TC Prisdorf)
+    const budget = Math.max(8, 22 - Array.from(`${emoji} `).length);
+    const short = compactPlaceForAction(name, budget);
     return shortenActionLabel(`${emoji} ${short}${pending}${star}`);
   }
   return shortenActionLabel(`${emoji} ${word}${pending}${star}`);
@@ -97,7 +99,10 @@ export function labelForOpportunity(
 ): string {
   if (opts?.multiChoice && entity) {
     if (kind === 'hotel_book') {
-      const short = entity.name.split(/[|,]/)[0]!.trim().slice(0, 12);
+      const short = compactPlaceForAction(
+        entity.name.split(/[|,]/)[0]!.trim(),
+        18,
+      );
       const medal = entity.rank === 1 ? '🥇' : '🥈';
       const pending = opts?.pending ? '…' : '';
       const star = opts?.affiliate ? '*' : '';
@@ -107,7 +112,10 @@ export function labelForOpportunity(
   }
   if (entity && (kind === 'hotel_book' || !opts?.multiChoice)) {
     if (kind === 'hotel_book') {
-      const short = entity.name.split(/[|,]/)[0]!.trim().slice(0, 14);
+      const short = compactPlaceForAction(
+        entity.name.split(/[|,]/)[0]!.trim(),
+        16,
+      );
       const emoji = INTENT_EMOJI.hotel_book ?? '🛏️';
       const pending = opts?.pending ? '…' : '';
       const star = opts?.affiliate ? '*' : '';

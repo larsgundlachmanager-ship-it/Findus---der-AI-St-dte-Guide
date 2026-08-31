@@ -1,0 +1,4157 @@
+{
+  "generated_at": "2026-08-28T05:46:15.619Z",
+  "summary": {
+    "city_id": "oranienburg",
+    "checked": 140,
+    "ok": 41,
+    "check": 46,
+    "bad": 53,
+    "errors": 0,
+    "max_delta_m": 180,
+    "city_halo_m": 28000,
+    "story_only": true
+  },
+  "rows": [
+    {
+      "id": "oranienburg_traumschuff_theater",
+      "name": "Traumschüff Theater",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.75102347999999,
+        "lng": 13.22351406
+      },
+      "query": "Traumschüff Theater, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.5258054,
+        "lng": 13.3943591,
+        "display_name": "Galli Theater Berlin, Oranienburger Straße, Berlin, Deutschland",
+        "class": "amenity",
+        "type": "theatre",
+        "provider": "photon"
+      },
+      "delta_m": 27569,
+      "from_city_m": 1280,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_s_bahn_berlin_instandhaltung_stutzpunkt_oranienburg",
+      "name": "S-Bahn Berlin Instandhaltung Stützpunkt Oranienburg",
+      "category": "bahnhof",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.74793158,
+        "lng": 13.25419976
+      },
+      "query": "S-Bahn Berlin Instandhaltung Stützpunkt Oranienburg, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.5304937,
+        "lng": 13.3899349,
+        "display_name": "S-Bahn Gleichrichterwerk Nordbahnhof, Tieckstraße, Berlin, Deutschland",
+        "class": "building",
+        "type": "electricity",
+        "provider": "photon"
+      },
+      "delta_m": 25855,
+      "from_city_m": 1248,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_mauerweg_nordpunkt",
+      "name": "Mauerweg Nordpunkt",
+      "category": "radweg",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.662083434999985,
+        "lng": 13.285793954999999
+      },
+      "query": "Mauerweg Nordpunkt, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.5373868,
+        "lng": 13.3934314,
+        "display_name": "Berliner Mauerweg, Strelitzer Straße, Berlin, Deutschland",
+        "class": "information",
+        "type": "guidepost",
+        "provider": "photon"
+      },
+      "delta_m": 15656,
+      "from_city_m": 10845,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_preussischer_meilenstein",
+      "name": "Preußischer Meilenstein",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.664199800000006,
+        "lng": 13.28412274
+      },
+      "query": "Preußischer Meilenstein, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.6967927,
+        "lng": 13.1114343,
+        "display_name": "Preußischer Meilenstein, Am Eichenring, Eichstädt, Deutschland",
+        "class": "historic",
+        "type": "milestone",
+        "provider": "photon"
+      },
+      "delta_m": 12193,
+      "from_city_m": 10587,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_louise_henriette_brunnen",
+      "name": "Louise-Henriette-Brunnen",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.69160766666666,
+        "lng": 13.276265733333332
+      },
+      "query": "Louise-Henriette-Brunnen, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7479744,
+        "lng": 13.2313789,
+        "display_name": "Louise-Henriette-Gymnasium, Dr.-Kurt-Schumacher-Straße, Oranienburg, Deutschland",
+        "class": "amenity",
+        "type": "school",
+        "provider": "photon"
+      },
+      "delta_m": 6959,
+      "from_city_m": 7519,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_borgsdorf_briesewanderweg",
+      "name": "Borgsdorf, Briesewanderweg",
+      "category": "wanderung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.73364568732395,
+        "lng": 13.372129535211263
+      },
+      "query": "Borgsdorf, Briesewanderweg, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7379269,
+        "lng": 13.2702575,
+        "display_name": "Verkehrswacht-Oranienburg e.V., Mühlenbecker Weg, Hohen Neuendorf, Deutschland",
+        "class": "building",
+        "type": "industrial",
+        "provider": "photon"
+      },
+      "delta_m": 6875,
+      "from_city_m": 9171,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_naturlehrpfad",
+      "name": "Naturlehrpfad",
+      "category": "wanderung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.7761463888889,
+        "lng": 13.2408855
+      },
+      "query": "Naturlehrpfad, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.744948,
+        "lng": 13.1578412,
+        "display_name": "Naturlehrpfad, Germendorf, Oranienburg, Oberhavel, Brandenburg, 16515, Deutschland",
+        "class": "highway",
+        "type": "footway",
+        "importance": 0.04005840619516288,
+        "osm_type": "way",
+        "osm_id": 26949398,
+        "provider": "nominatim"
+      },
+      "delta_m": 6577,
+      "from_city_m": 2270,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "oranienburg_sven_o_winter_theater_bau_herr_winter",
+        "oranienburg_lehnitzsee",
+        "oranienburg_oranienburger_kanal",
+        "oranienburg_geschenkekiste",
+        "oranienburg_massengrab_an_der_dune"
+      ]
+    },
+    {
+      "id": "oranienburg_bernsteinsee_badesee",
+      "name": "Bernsteinsee (Badesee)",
+      "category": "radweg",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.69849956944444,
+        "lng": 13.223728355555554
+      },
+      "query": "Bernsteinsee, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7529379,
+        "lng": 13.2457591,
+        "display_name": "Oranienburg, Oberhavel, Deutschland",
+        "class": "place",
+        "type": "town",
+        "provider": "photon"
+      },
+      "delta_m": 6232,
+      "from_city_m": 6468,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_parkplatz_am_schloss",
+      "name": "Parkplatz am Schloss",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.756372539999994,
+        "lng": 13.235347899999999
+      },
+      "query": "Parkplatz am Schloss, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.769216,
+        "lng": 13.3224211,
+        "display_name": "Parkplatz am Friedhof, Mühlenweg, Oranienburg, Deutschland",
+        "class": "amenity",
+        "type": "parking",
+        "provider": "photon"
+      },
+      "delta_m": 6030,
+      "from_city_m": 378,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_klinkerhafenbrucke",
+      "name": "Klinkerhafenbrücke",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.75156133999999,
+        "lng": 13.20574234
+      },
+      "query": "Klinkerhafenbrücke, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7785351,
+        "lng": 13.280215,
+        "display_name": "Klinkerhafenbrücke, Friedrichsthal, Schmachtenhagen, Oranienburg, Oberhavel, Brandenburg, 16515, Deutschland",
+        "class": "man_made",
+        "type": "bridge",
+        "importance": 0.09078915819201436,
+        "osm_type": "way",
+        "osm_id": 1302693318,
+        "provider": "nominatim"
+      },
+      "delta_m": 5840,
+      "from_city_m": 2409,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "oranienburg_stadtanleger_oranienburg",
+        "oranienburg_gemeinschaft_der_siebenten",
+        "oranienburg_landeskirchliche_gemeinschaft_lkg_oranienburg_eden",
+        "oranienburg_denkmal_fur_das_kz_sachsenhausen",
+        "oranienburg_denkmal_konzentrationslager_oranienburg",
+        "oranienburg_krassin_park",
+        "oranienburg_schlosspark_oranienburg",
+        "oranienburg_schlossgarten",
+        "oranienburg_weisser_strand_am_lehnitzsee",
+        "oranienburg_sportplatz_am_schloss",
+        "oranienburg_spielplatz_pferdeinsel",
+        "oranienburg_stadthof_der_stadt_oranienburg"
+      ]
+    },
+    {
+      "id": "oranienburg_bootsschule_oranienburg_seit_1991",
+      "name": "Bootsschule Oranienburg seit 1991",
+      "category": "tour",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.74250403999999,
+        "lng": 13.25891876
+      },
+      "query": "Bootsschule Oranienburg seit, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7482542,
+        "lng": 13.1809431,
+        "display_name": "Megalodon Boote / Bootsscheune, Germendorfer Dorfstraße, Oranienburg, Deutschland",
+        "class": "shop",
+        "type": "boat",
+        "provider": "photon"
+      },
+      "delta_m": 5288,
+      "from_city_m": 1908,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_weisser_strand_am_lehnitzsee",
+      "name": "Weißer Strand am Lehnitzsee",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.75156133999999,
+        "lng": 13.20574234
+      },
+      "query": "Weißer Strand am, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7573597,
+        "lng": 13.2757543,
+        "display_name": "Weißer Strand Lehnitz, Oranienburg, Deutschland",
+        "class": "natural",
+        "type": "beach",
+        "provider": "photon"
+      },
+      "delta_m": 4756,
+      "from_city_m": 2409,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "oranienburg_stadtanleger_oranienburg",
+        "oranienburg_gemeinschaft_der_siebenten",
+        "oranienburg_landeskirchliche_gemeinschaft_lkg_oranienburg_eden",
+        "oranienburg_denkmal_fur_das_kz_sachsenhausen",
+        "oranienburg_denkmal_konzentrationslager_oranienburg",
+        "oranienburg_klinkerhafenbrucke",
+        "oranienburg_krassin_park",
+        "oranienburg_schlosspark_oranienburg",
+        "oranienburg_schlossgarten",
+        "oranienburg_sportplatz_am_schloss",
+        "oranienburg_spielplatz_pferdeinsel",
+        "oranienburg_stadthof_der_stadt_oranienburg"
+      ]
+    },
+    {
+      "id": "oranienburg_oranienburger_kanal",
+      "name": "Oranienburger Kanal",
+      "category": "radweg",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.7761463888889,
+        "lng": 13.2408855
+      },
+      "query": "Oranienburger Kanal, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7375909,
+        "lng": 13.2245119,
+        "display_name": "Oranienburger Kanal, Fichtengrund, Oranienburg, Oberhavel, Brandenburg, Deutschland",
+        "class": "waterway",
+        "type": "canal",
+        "importance": 0.21822785325192331,
+        "osm_type": "relation",
+        "osm_id": 412850,
+        "provider": "nominatim"
+      },
+      "delta_m": 4427,
+      "from_city_m": 2270,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "oranienburg_sven_o_winter_theater_bau_herr_winter",
+        "oranienburg_naturlehrpfad",
+        "oranienburg_lehnitzsee",
+        "oranienburg_geschenkekiste",
+        "oranienburg_massengrab_an_der_dune"
+      ]
+    },
+    {
+      "id": "oranienburg_die_anklagende",
+      "name": "Die Anklagende",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.7541491,
+        "lng": 13.237382799999999
+      },
+      "query": "Die Anklagende, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7342503,
+        "lng": 13.1849765,
+        "display_name": "Die Sandluke, Oranienburg, Deutschland",
+        "class": "landuse",
+        "type": "plant_nursery",
+        "provider": "photon"
+      },
+      "delta_m": 4164,
+      "from_city_m": 293,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_hausboot_fahren",
+      "name": "Hausboot-fahren",
+      "category": "tour",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.818009499999995,
+        "lng": 13.3306083
+      },
+      "query": "Hausboot-fahren, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7927117,
+        "lng": 13.2878193,
+        "display_name": "An der Fähre, Grabowseebrücke, Oranienburg, Deutschland",
+        "class": "amenity",
+        "type": "biergarten",
+        "provider": "photon"
+      },
+      "delta_m": 4023,
+      "from_city_m": 9185,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_spielplatz_pferdeinsel",
+      "name": "Spielplatz Pferdeinsel",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.75156133999999,
+        "lng": 13.20574234
+      },
+      "query": "Spielplatz Pferdeinsel, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7678627,
+        "lng": 13.2556487,
+        "display_name": "Spielplatz Friedrich-Ebert-Straße, Friedrich-Ebert-Straße, Oranienburg, Deutschland",
+        "class": "leisure",
+        "type": "playground",
+        "provider": "photon"
+      },
+      "delta_m": 3816,
+      "from_city_m": 2409,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "oranienburg_stadtanleger_oranienburg",
+        "oranienburg_gemeinschaft_der_siebenten",
+        "oranienburg_landeskirchliche_gemeinschaft_lkg_oranienburg_eden",
+        "oranienburg_denkmal_fur_das_kz_sachsenhausen",
+        "oranienburg_denkmal_konzentrationslager_oranienburg",
+        "oranienburg_klinkerhafenbrucke",
+        "oranienburg_krassin_park",
+        "oranienburg_schlosspark_oranienburg",
+        "oranienburg_schlossgarten",
+        "oranienburg_weisser_strand_am_lehnitzsee",
+        "oranienburg_sportplatz_am_schloss",
+        "oranienburg_stadthof_der_stadt_oranienburg"
+      ]
+    },
+    {
+      "id": "oranienburg_lehnitzsee",
+      "name": "Lehnitzsee",
+      "category": "radweg",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.7761463888889,
+        "lng": 13.2408855
+      },
+      "query": "Lehnitzsee, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7553774,
+        "lng": 13.2691834,
+        "display_name": "Lehnitzsee, Oranienburg, Oberhavel, Brandenburg, Deutschland",
+        "class": "water",
+        "type": "lake",
+        "importance": 0.18157831638402872,
+        "osm_type": "relation",
+        "osm_id": 60992,
+        "provider": "nominatim"
+      },
+      "delta_m": 2993,
+      "from_city_m": 2270,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "oranienburg_sven_o_winter_theater_bau_herr_winter",
+        "oranienburg_naturlehrpfad",
+        "oranienburg_oranienburger_kanal",
+        "oranienburg_geschenkekiste",
+        "oranienburg_massengrab_an_der_dune"
+      ]
+    },
+    {
+      "id": "oranienburg_blumenladen_oranienburg",
+      "name": "BLUMENLADEN ORANIENBURG",
+      "category": "souvenir",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.75748278749999,
+        "lng": 13.251010424999999
+      },
+      "query": "BLUMENLADEN ORANIENBURG, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7375909,
+        "lng": 13.2245119,
+        "display_name": "Oranienburger Kanal, Oranienburg, Deutschland",
+        "class": "waterway",
+        "type": "canal",
+        "provider": "photon"
+      },
+      "delta_m": 2841,
+      "from_city_m": 710,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_steganlage_oranienburg",
+      "name": "Steganlage Oranienburg",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.75101384,
+        "lng": 13.25892052
+      },
+      "query": "Steganlage Oranienburg, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7375909,
+        "lng": 13.2245119,
+        "display_name": "Oranienburger Kanal, Oranienburg, Deutschland",
+        "class": "waterway",
+        "type": "canal",
+        "provider": "photon"
+      },
+      "delta_m": 2755,
+      "from_city_m": 1324,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_schlossgarten",
+      "name": "Schlossgarten",
+      "category": "natur",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.75156133999999,
+        "lng": 13.20574234
+      },
+      "query": "Schlossgarten, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7529379,
+        "lng": 13.2457591,
+        "display_name": "Oranienburg, Oberhavel, Deutschland",
+        "class": "place",
+        "type": "town",
+        "provider": "photon"
+      },
+      "delta_m": 2698,
+      "from_city_m": 2409,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "oranienburg_stadtanleger_oranienburg",
+        "oranienburg_gemeinschaft_der_siebenten",
+        "oranienburg_landeskirchliche_gemeinschaft_lkg_oranienburg_eden",
+        "oranienburg_denkmal_fur_das_kz_sachsenhausen",
+        "oranienburg_denkmal_konzentrationslager_oranienburg",
+        "oranienburg_klinkerhafenbrucke",
+        "oranienburg_krassin_park",
+        "oranienburg_schlosspark_oranienburg",
+        "oranienburg_weisser_strand_am_lehnitzsee",
+        "oranienburg_sportplatz_am_schloss",
+        "oranienburg_spielplatz_pferdeinsel",
+        "oranienburg_stadthof_der_stadt_oranienburg"
+      ]
+    },
+    {
+      "id": "oranienburg_geschenkekiste",
+      "name": "Geschenkekiste",
+      "category": "souvenir",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.7761463888889,
+        "lng": 13.2408855
+      },
+      "query": "Geschenkekiste, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7529379,
+        "lng": 13.2457591,
+        "display_name": "Oranienburg, Oberhavel, Deutschland",
+        "class": "place",
+        "type": "town",
+        "provider": "photon"
+      },
+      "delta_m": 2601,
+      "from_city_m": 2270,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "oranienburg_sven_o_winter_theater_bau_herr_winter",
+        "oranienburg_naturlehrpfad",
+        "oranienburg_lehnitzsee",
+        "oranienburg_oranienburger_kanal",
+        "oranienburg_massengrab_an_der_dune"
+      ]
+    },
+    {
+      "id": "oranienburg_turn_und_sportgemeinschaft_eden_e_v",
+      "name": "Turn- und Sportgemeinschaft Eden e.V.",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.75163798,
+        "lng": 13.207313899999999
+      },
+      "query": "Turn-, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7529379,
+        "lng": 13.2457591,
+        "display_name": "Oranienburg, Oberhavel, Deutschland",
+        "class": "place",
+        "type": "town",
+        "provider": "photon"
+      },
+      "delta_m": 2591,
+      "from_city_m": 2303,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_gartengemeinschaft_e_v",
+      "name": "Gartengemeinschaft e.V.",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.76505944,
+        "lng": 13.24099318
+      },
+      "query": "Gartengemeinschaft e.V., Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7429746,
+        "lng": 13.2393962,
+        "display_name": "DRK Kreisverband Orranienburg e.V., Berliner Straße, Oranienburg, Deutschland",
+        "class": "office",
+        "type": "ngo",
+        "provider": "photon"
+      },
+      "delta_m": 2458,
+      "from_city_m": 1037,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_wassersport_oranienburg_bootsschule_bootsverleih",
+      "name": "Wassersport Oranienburg Bootsschule Bootsverleih",
+      "category": "tour",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.7674762,
+        "lng": 13.2466162
+      },
+      "query": "Wassersport Oranienburg Bootsschule, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7472785,
+        "lng": 13.2592857,
+        "display_name": "Oranienburger Wassersport Verein, André-Pican-Straße, Oranienburg, Deutschland",
+        "class": "club",
+        "type": "sport",
+        "provider": "photon"
+      },
+      "delta_m": 2402,
+      "from_city_m": 1362,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_oranienburger_wochenmarkt",
+      "name": "ORANIENBURGER WOCHENMARKT",
+      "category": "geschichte",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.75616178,
+        "lng": 13.24267326
+      },
+      "query": "ORANIENBURGER WOCHENMARKT, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7375909,
+        "lng": 13.2245119,
+        "display_name": "Oranienburger Kanal, Oranienburg, Deutschland",
+        "class": "waterway",
+        "type": "canal",
+        "provider": "photon"
+      },
+      "delta_m": 2400,
+      "from_city_m": 131,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_restaurant_galerie",
+      "name": "Restaurant Galerie",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.75368384000001,
+        "lng": 13.255085600000001
+      },
+      "query": "Restaurant Galerie, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.749483,
+        "lng": 13.2234885,
+        "display_name": "Gold Silber Galerie, Friedensstraße, Oranienburg, Deutschland",
+        "class": "shop",
+        "type": "jewelry",
+        "provider": "photon"
+      },
+      "delta_m": 2177,
+      "from_city_m": 984,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_stadthof_der_stadt_oranienburg",
+      "name": "Stadthof der Stadt Oranienburg",
+      "category": "verwaltung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.75156133999999,
+        "lng": 13.20574234
+      },
+      "query": "Stadthof der Stadt Oranienburg, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7485312,
+        "lng": 13.2370253,
+        "display_name": "KZ Oranienburg, Berliner Straße, Oranienburg, Deutschland",
+        "class": "historic",
+        "type": "memorial",
+        "provider": "photon"
+      },
+      "delta_m": 2132,
+      "from_city_m": 2409,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "oranienburg_stadtanleger_oranienburg",
+        "oranienburg_gemeinschaft_der_siebenten",
+        "oranienburg_landeskirchliche_gemeinschaft_lkg_oranienburg_eden",
+        "oranienburg_denkmal_fur_das_kz_sachsenhausen",
+        "oranienburg_denkmal_konzentrationslager_oranienburg",
+        "oranienburg_klinkerhafenbrucke",
+        "oranienburg_krassin_park",
+        "oranienburg_schlosspark_oranienburg",
+        "oranienburg_schlossgarten",
+        "oranienburg_weisser_strand_am_lehnitzsee",
+        "oranienburg_sportplatz_am_schloss",
+        "oranienburg_spielplatz_pferdeinsel"
+      ]
+    },
+    {
+      "id": "oranienburg_stadtanleger_oranienburg",
+      "name": "Stadtanleger Oranienburg",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.75156133999999,
+        "lng": 13.20574234
+      },
+      "query": "Stadtanleger Oranienburg, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7375909,
+        "lng": 13.2245119,
+        "display_name": "Oranienburger Kanal, Oranienburg, Deutschland",
+        "class": "waterway",
+        "type": "canal",
+        "provider": "photon"
+      },
+      "delta_m": 2002,
+      "from_city_m": 2409,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "oranienburg_gemeinschaft_der_siebenten",
+        "oranienburg_landeskirchliche_gemeinschaft_lkg_oranienburg_eden",
+        "oranienburg_denkmal_fur_das_kz_sachsenhausen",
+        "oranienburg_denkmal_konzentrationslager_oranienburg",
+        "oranienburg_klinkerhafenbrucke",
+        "oranienburg_krassin_park",
+        "oranienburg_schlosspark_oranienburg",
+        "oranienburg_schlossgarten",
+        "oranienburg_weisser_strand_am_lehnitzsee",
+        "oranienburg_sportplatz_am_schloss",
+        "oranienburg_spielplatz_pferdeinsel",
+        "oranienburg_stadthof_der_stadt_oranienburg"
+      ]
+    },
+    {
+      "id": "oranienburg_dorfkirche_sachsenhausen_oranienburg",
+      "name": "Dorfkirche Sachsenhausen (Oranienburg)",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.77848497000001,
+        "lng": 13.241780143333331
+      },
+      "query": "Dorfkirche Sachsenhausen, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7662803,
+        "lng": 13.2628047,
+        "display_name": "Gedenkstätte und Museum Sachsenhausen, Straße der Nationen, Oranienburg, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 1960,
+      "from_city_m": 2530,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "oranienburg_osm_transit_312827292",
+        "oranienburg_osm_transit_312827293"
+      ]
+    },
+    {
+      "id": "oranienburg_praxis_oranienburg_ch_vogel_suhrig_und_dr_u_freyburg",
+      "name": "Praxis Oranienburg - Ch. Vogel-Sührig und Dr. U. Freyburg",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.7576373,
+        "lng": 13.2491221
+      },
+      "query": "Praxis Oranienburg, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7426244,
+        "lng": 13.2637679,
+        "display_name": "Praxis am Lehnitzsee, Friedrich-Wolf-Straße, Lehnitz, Oranienburg, Oberhavel, Brandenburg, 16515, Deutschland",
+        "class": "amenity",
+        "type": "doctors",
+        "importance": 0.00005840619516284455,
+        "osm_type": "node",
+        "osm_id": 12163383001,
+        "provider": "nominatim"
+      },
+      "delta_m": 1939,
+      "from_city_m": 595,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_schlosspark_oranienburg",
+      "name": "Schlosspark Oranienburg",
+      "category": "natur",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.75156133999999,
+        "lng": 13.20574234
+      },
+      "query": "Schlosspark Oranienburg, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7561821,
+        "lng": 13.2330282,
+        "display_name": "Schlosspark Oranienburg, 1, Oranienburg, Oberhavel, Brandenburg, 16515, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "importance": 0.08005840619516286,
+        "osm_type": "relation",
+        "osm_id": 4740551,
+        "provider": "nominatim"
+      },
+      "delta_m": 1907,
+      "from_city_m": 2409,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "oranienburg_stadtanleger_oranienburg",
+        "oranienburg_gemeinschaft_der_siebenten",
+        "oranienburg_landeskirchliche_gemeinschaft_lkg_oranienburg_eden",
+        "oranienburg_denkmal_fur_das_kz_sachsenhausen",
+        "oranienburg_denkmal_konzentrationslager_oranienburg",
+        "oranienburg_klinkerhafenbrucke",
+        "oranienburg_krassin_park",
+        "oranienburg_schlossgarten",
+        "oranienburg_weisser_strand_am_lehnitzsee",
+        "oranienburg_sportplatz_am_schloss",
+        "oranienburg_spielplatz_pferdeinsel",
+        "oranienburg_stadthof_der_stadt_oranienburg"
+      ]
+    },
+    {
+      "id": "oranienburg_denkmal_konzentrationslager_oranienburg",
+      "name": "Denkmal Konzentrationslager Oranienburg",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.75156133999999,
+        "lng": 13.20574234
+      },
+      "query": "Denkmal Konzentrationslager Oranienburg, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7501605,
+        "lng": 13.2316094,
+        "display_name": "Denkmal der Gefallenen des 1. Weltkrieges, Kremmener Straße, Oranienburg, Deutschland",
+        "class": "historic",
+        "type": "memorial",
+        "provider": "photon"
+      },
+      "delta_m": 1748,
+      "from_city_m": 2409,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "oranienburg_stadtanleger_oranienburg",
+        "oranienburg_gemeinschaft_der_siebenten",
+        "oranienburg_landeskirchliche_gemeinschaft_lkg_oranienburg_eden",
+        "oranienburg_denkmal_fur_das_kz_sachsenhausen",
+        "oranienburg_klinkerhafenbrucke",
+        "oranienburg_krassin_park",
+        "oranienburg_schlosspark_oranienburg",
+        "oranienburg_schlossgarten",
+        "oranienburg_weisser_strand_am_lehnitzsee",
+        "oranienburg_sportplatz_am_schloss",
+        "oranienburg_spielplatz_pferdeinsel",
+        "oranienburg_stadthof_der_stadt_oranienburg"
+      ]
+    },
+    {
+      "id": "oranienburg_saubucht_lehnitzsee",
+      "name": "Saubucht Lehnitzsee",
+      "category": "wanderung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.767852299999994,
+        "lng": 13.2789426
+      },
+      "query": "Saubucht Lehnitzsee, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7553774,
+        "lng": 13.2691834,
+        "display_name": "Lehnitzsee, Oranienburg, Deutschland",
+        "class": "water",
+        "type": "lake",
+        "provider": "photon"
+      },
+      "delta_m": 1535,
+      "from_city_m": 2895,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "oranienburg_lehnitzschleuse"
+      ]
+    },
+    {
+      "id": "oranienburg_marktschwarmer_oranienburg",
+      "name": "Marktschwärmer Oranienburg",
+      "category": "markt",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.75133892,
+        "lng": 13.225650519999999
+      },
+      "query": "Marktschwärmer Oranienburg, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7375909,
+        "lng": 13.2245119,
+        "display_name": "Oranienburger Kanal, Oranienburg, Deutschland",
+        "class": "waterway",
+        "type": "canal",
+        "provider": "photon"
+      },
+      "delta_m": 1531,
+      "from_city_m": 1135,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_massengrab_an_der_dune",
+      "name": "Massengrab An Der Düne",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.7761463888889,
+        "lng": 13.2408855
+      },
+      "query": "Massengrab An Der Düne, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7738577,
+        "lng": 13.2604948,
+        "display_name": "An den Dünen, Oranienburg, Deutschland",
+        "class": "highway",
+        "type": "residential",
+        "provider": "photon"
+      },
+      "delta_m": 1343,
+      "from_city_m": 2270,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "oranienburg_sven_o_winter_theater_bau_herr_winter",
+        "oranienburg_naturlehrpfad",
+        "oranienburg_lehnitzsee",
+        "oranienburg_oranienburger_kanal",
+        "oranienburg_geschenkekiste"
+      ]
+    },
+    {
+      "id": "oranienburg_ev_kirchengemeinde_st_nicolai_oranienburg",
+      "name": "Ev. Kirchengemeinde St. Nicolai Oranienburg",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.7539345,
+        "lng": 13.243936099999999
+      },
+      "query": "Ev. Kirchengemeinde St. Nicolai Oranienburg, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7429746,
+        "lng": 13.2393962,
+        "display_name": "DRK Kreisverband Orranienburg e.V., Berliner Straße, Oranienburg, Deutschland",
+        "class": "office",
+        "type": "ngo",
+        "provider": "photon"
+      },
+      "delta_m": 1256,
+      "from_city_m": 288,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_wassersportclub_mowe_oranienburg_e_v",
+      "name": "Wassersportclub Möwe Oranienburg e.V.",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.75269023999999,
+        "lng": 13.24086522
+      },
+      "query": "Wassersportclub Möwe Oranienburg e.V., Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7429746,
+        "lng": 13.2393962,
+        "display_name": "DRK Kreisverband Orranienburg e.V., Berliner Straße, Oranienburg, Deutschland",
+        "class": "office",
+        "type": "ngo",
+        "provider": "photon"
+      },
+      "delta_m": 1085,
+      "from_city_m": 339,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_oberhavel_gesundheitszentrum_mvz_oranienburg",
+      "name": "Oberhavel Gesundheitszentrum - MVZ Oranienburg",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.7437125,
+        "lng": 13.2433758
+      },
+      "query": "Oberhavel Gesundheitszentrum, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7529379,
+        "lng": 13.2457591,
+        "display_name": "Oranienburg, Oberhavel, Deutschland",
+        "class": "place",
+        "type": "town",
+        "provider": "photon"
+      },
+      "delta_m": 1038,
+      "from_city_m": 1347,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_kurfurstin_louise_henriette_von_oranien",
+      "name": "Kurfürstin Louise Henriette von Oranien",
+      "category": "altstadt",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.7541242,
+        "lng": 13.2363401
+      },
+      "query": "Kurfürstin Louise Henriette von Oranien, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7571023,
+        "lng": 13.2495893,
+        "display_name": "Louise-Henriette von Oranien, Bernauer Straße, Oranienburg, Deutschland",
+        "class": "amenity",
+        "type": "social_facility",
+        "provider": "photon"
+      },
+      "delta_m": 951,
+      "from_city_m": 353,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_athletic_park_oranienburg",
+      "name": "Athletic Park Oranienburg",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.756460759999996,
+        "lng": 13.2626229
+      },
+      "query": "Athletic Park Oranienburg, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7510165,
+        "lng": 13.2539331,
+        "display_name": "Parkplatz Lehrbauhof Oranienburg, Dr.-Heinrich-Byk-Straße, Oranienburg, Deutschland",
+        "class": "amenity",
+        "type": "parking",
+        "provider": "photon"
+      },
+      "delta_m": 842,
+      "from_city_m": 1466,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_gedenkort_zum_klinkerwerk",
+      "name": "Gedenkort Zum Klinkerwerk",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.769435539999996,
+        "lng": 13.28106394
+      },
+      "query": "Gedenkort Zum Klinkerwerk, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7755853,
+        "lng": 13.2811895,
+        "display_name": "Gedenkort KZ-Außenlager Klinkerwerk, Am Klinkerhafen, Oranienburg, Deutschland",
+        "class": "historic",
+        "type": "memorial",
+        "provider": "photon"
+      },
+      "delta_m": 684,
+      "from_city_m": 3104,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_wochenmarkt_bernauer_str",
+      "name": "wochenmarkt bernauer str.",
+      "category": "markt",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.75180152,
+        "lng": 13.2373837
+      },
+      "query": "wochenmarkt bernauer str., Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7558051,
+        "lng": 13.2418856,
+        "display_name": "Oranienburg, Bernauer Straße, Bernauer Straße, Oranienburg, Deutschland",
+        "class": "highway",
+        "type": "bus_stop",
+        "provider": "photon"
+      },
+      "delta_m": 538,
+      "from_city_m": 496,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_p_r_bahnhof_oranienburg",
+      "name": "P+R Bahnhof Oranienburg",
+      "category": "bahnhof",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.750752780000006,
+        "lng": 13.24996444
+      },
+      "query": "P+R Bahnhof Oranienburg, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7498328,
+        "lng": 13.2576448,
+        "display_name": "TURM ErlebnisCity, André-Pican-Straße, Oranienburg, Deutschland",
+        "class": "leisure",
+        "type": "sports_centre",
+        "provider": "photon"
+      },
+      "delta_m": 527,
+      "from_city_m": 826,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_bollwerk",
+      "name": "Bollwerk",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.75318324,
+        "lng": 13.23851642
+      },
+      "query": "Bollwerk, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7529379,
+        "lng": 13.2457591,
+        "display_name": "Oranienburg, Oberhavel, Deutschland",
+        "class": "place",
+        "type": "town",
+        "provider": "photon"
+      },
+      "delta_m": 488,
+      "from_city_m": 325,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_f_f_runge",
+      "name": "F. F. Runge",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.757701938095245,
+        "lng": 13.241222028571428
+      },
+      "query": "F. F. Runge, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7569133,
+        "lng": 13.2458132,
+        "display_name": "F.F. Runge Buchhandlung, Bernauer Straße, Oranienburg, Oberhavel, Brandenburg, 16515, Deutschland",
+        "class": "shop",
+        "type": "books",
+        "importance": 0.00005840619516284455,
+        "osm_type": "node",
+        "osm_id": 2225212573,
+        "provider": "nominatim"
+      },
+      "delta_m": 321,
+      "from_city_m": 220,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_tier_freizeit_und_saurierpark_germendorf",
+      "name": "Tier-, Freizeit- und Saurierpark Germendorf",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.74728834,
+        "lng": 13.156360760000002
+      },
+      "query": "Tier-, Freizeit-, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7445033,
+        "lng": 13.1570784,
+        "display_name": "Tier-, Freizeit- und Saurierpark Germendorf, An den Waldseen, Oranienburg, Deutschland",
+        "class": "tourism",
+        "type": "zoo",
+        "provider": "photon"
+      },
+      "delta_m": 313,
+      "from_city_m": 5764,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_burgerzentrum_oranienburg",
+      "name": "Bürgerzentrum Oranienburg",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.74477014482758,
+        "lng": 13.24103743103448
+      },
+      "query": "Bürgerzentrum Oranienburg, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7472674,
+        "lng": 13.242633,
+        "display_name": "Bürgerzentrum Oranienburg, 17, Albert-Buchmann-Straße, Oranienburg, Oberhavel, Brandenburg, 16515, Deutschland",
+        "class": "building",
+        "type": "yes",
+        "importance": 0.00005840619516284455,
+        "osm_type": "way",
+        "osm_id": 766633946,
+        "provider": "nominatim"
+      },
+      "delta_m": 298,
+      "from_city_m": 1219,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_bistro_an_der_gedenkstatte_sachsenhausen",
+      "name": "Bistro an der Gedenkstätte Sachsenhausen",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.763943299999994,
+        "lng": 13.260791466666667
+      },
+      "query": "Bistro an der Gedenkstätte Sachsenhausen, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7662803,
+        "lng": 13.2628047,
+        "display_name": "Gedenkstätte und Museum Sachsenhausen, Straße der Nationen, Oranienburg, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 293,
+      "from_city_m": 1622,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "oranienburg_osm_transit_312633111"
+      ]
+    },
+    {
+      "id": "oranienburg_ferienhaus_am_alten_malzer_kanal",
+      "name": "Ferienhaus am Alten Malzer Kanal",
+      "category": "radweg",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.798410755,
+        "lng": 13.283853815
+      },
+      "query": "Ferienhaus am Alten Malzer Kanal, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7977905,
+        "lng": 13.2878581,
+        "display_name": "Am Malzer Kanal, Oranienburg, Deutschland",
+        "class": "highway",
+        "type": "footway",
+        "provider": "photon"
+      },
+      "delta_m": 278,
+      "from_city_m": 5557,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_pferdeinsel",
+      "name": "Pferdeinsel",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.75159984,
+        "lng": 13.24260382
+      },
+      "query": "Pferdeinsel, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7529379,
+        "lng": 13.2457591,
+        "display_name": "Oranienburg, Oberhavel, Deutschland",
+        "class": "place",
+        "type": "town",
+        "provider": "photon"
+      },
+      "delta_m": 259,
+      "from_city_m": 474,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_oranienburg_schlosshafen",
+      "name": "Oranienburg Schloßhafen",
+      "category": "hafen",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.758379579999996,
+        "lng": 13.23545962
+      },
+      "query": "Oranienburg Schloßhafen, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7573627,
+        "lng": 13.238498,
+        "display_name": "Schlosshafen Oranienburg, 47, Rungestraße, Oranienburg, Oberhavel, Brandenburg, 16515, Deutschland",
+        "class": "tourism",
+        "type": "caravan_site",
+        "importance": 0.00005840619516284455,
+        "osm_type": "way",
+        "osm_id": 218730120,
+        "provider": "nominatim"
+      },
+      "delta_m": 234,
+      "from_city_m": 468,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_weinberg_muhlensee",
+      "name": "Weinberg Mühlensee",
+      "category": "radweg",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.7177975,
+        "lng": 13.0879572
+      },
+      "query": "Weinberg Mühlensee, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7196018,
+        "lng": 13.0890888,
+        "display_name": "Mühlensee, Weinbergsteg, Vehlefanz, Deutschland",
+        "class": "information",
+        "type": "board",
+        "provider": "photon"
+      },
+      "delta_m": 215,
+      "from_city_m": 11125,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_reiseservice",
+      "name": "Reiseservice",
+      "category": "bahnhof",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.75365514444445,
+        "lng": 13.248387633333332
+      },
+      "query": "Reiseservice, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7529379,
+        "lng": 13.2457591,
+        "display_name": "Oranienburg, Oberhavel, Deutschland",
+        "class": "place",
+        "type": "town",
+        "provider": "photon"
+      },
+      "delta_m": 194,
+      "from_city_m": 557,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_freikirche_der_siebenten_tags_adventisten_gemeinde_oranienburg",
+      "name": "Freikirche der Siebenten-Tags-Adventisten Gemeinde Oranienburg",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.74754169090909,
+        "lng": 13.234992336363637
+      },
+      "query": "Freikirche der Siebenten-Tags-Adventisten Gemeinde Oranienburg, Oranienburg",
+      "osm": {
+        "lat": 47.4257703,
+        "lng": 8.5099292,
+        "display_name": "Freikirche der Siebenten-Tags-Adventisten Gemeinde Wolfswinkel, Wolfswinkel, Zürich, Schweiz",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 680697,
+      "from_city_m": 993,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_orangerie_im_schlosspark",
+      "name": "Orangerie im Schlosspark",
+      "category": "aussicht",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.754445725,
+        "lng": 13.229635895000001
+      },
+      "query": "Orangerie im Schlosspark, Oranienburg",
+      "osm": {
+        "lat": 48.0415796,
+        "lng": 14.4172239,
+        "display_name": "Orangerie im Schlosspark, Blumauergasse, Steyr, Österreich",
+        "class": "amenity",
+        "type": "restaurant",
+        "provider": "photon"
+      },
+      "delta_m": 530744,
+      "from_city_m": 769,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_sven_o_winter_theater_bau_herr_winter",
+      "name": "Sven O. Winter Theater Bau Herr Winter",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.7761463888889,
+        "lng": 13.2408855
+      },
+      "query": "Sven O. Winter Theater Bau, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.388514,
+        "lng": 9.7511729,
+        "display_name": "Sven Göth, Oskar-Winter-Straße, Hannover, Deutschland",
+        "class": "office",
+        "type": "consulting",
+        "provider": "photon"
+      },
+      "delta_m": 239662,
+      "from_city_m": 2270,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city",
+        "duplicate_center"
+      ],
+      "twins": [
+        "oranienburg_naturlehrpfad",
+        "oranienburg_lehnitzsee",
+        "oranienburg_oranienburger_kanal",
+        "oranienburg_geschenkekiste",
+        "oranienburg_massengrab_an_der_dune"
+      ]
+    },
+    {
+      "id": "oranienburg_frau_dr_med_beate_duwel",
+      "name": "Frau Dr. med. Beate Düwel",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.7562176,
+        "lng": 13.2449174
+      },
+      "query": "Frau Dr. med. Beate Düwel, Oranienburg, Germany",
+      "osm": {
+        "lat": 50.8154987,
+        "lng": 12.3908417,
+        "display_name": "Fachärztin für Augenheilkunde Frau Dr. med. Beate Piehler, Bahnhofstraße, Crimmitschau, Deutschland",
+        "class": "amenity",
+        "type": "doctors",
+        "provider": "photon"
+      },
+      "delta_m": 223647,
+      "from_city_m": 278,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_tagespflege_an_der_nicolai_kirche_oranienburg",
+      "name": "Tagespflege An der Nicolai Kirche Oranienburg",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.75158269473685,
+        "lng": 13.23433253157895
+      },
+      "query": "Tagespflege An der Nicolai Kirche, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.4010488,
+        "lng": 10.8278779,
+        "display_name": "St.-Nicolai-Kirche, An der Kirche, Wolfsburg, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 167210,
+      "from_city_m": 638,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city",
+        "duplicate_center"
+      ],
+      "twins": [
+        "oranienburg_st_nicolai_kirche_pfarrsprengel_oranienburg"
+      ]
+    },
+    {
+      "id": "oranienburg_gedenkstatte_todesmarsch",
+      "name": "Gedenkstätte Todesmarsch",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.76244464,
+        "lng": 13.255274660000001
+      },
+      "query": "Gedenkstätte Todesmarsch, Oranienburg, Germany",
+      "osm": {
+        "lat": 53.2563117,
+        "lng": 12.4676899,
+        "display_name": "Gedenkstätte Todesmarsch im Belower Wald, Eldetal, Deutschland",
+        "class": "historic",
+        "type": "memorial",
+        "provider": "photon"
+      },
+      "delta_m": 76106,
+      "from_city_m": 1223,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_bollwerk_anleger",
+      "name": "Bollwerk-Anleger",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.75149288,
+        "lng": 13.24011964
+      },
+      "query": "Bollwerk-Anleger, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.9781673,
+        "lng": 14.1159568,
+        "display_name": "Anleger Bollwerk Stolper Turm, Am Kanal, Angermünde, Deutschland",
+        "class": "leisure",
+        "type": "marina",
+        "provider": "photon"
+      },
+      "delta_m": 63968,
+      "from_city_m": 474,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_denkmal_fur_das_kz_sachsenhausen",
+      "name": "Denkmal für das KZ Sachsenhausen",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.75156133999999,
+        "lng": 13.20574234
+      },
+      "query": "Denkmal für das KZ Sachsenhausen, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.3895699,
+        "lng": 13.4136652,
+        "display_name": "Denkmal für das KZ Sachsenhausen, Außenlager Lichtenrade, Bornhagenweg, Berlin, Deutschland",
+        "class": "historic",
+        "type": "memorial",
+        "provider": "photon"
+      },
+      "delta_m": 42634,
+      "from_city_m": 2409,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city",
+        "duplicate_center"
+      ],
+      "twins": [
+        "oranienburg_stadtanleger_oranienburg",
+        "oranienburg_gemeinschaft_der_siebenten",
+        "oranienburg_landeskirchliche_gemeinschaft_lkg_oranienburg_eden",
+        "oranienburg_denkmal_konzentrationslager_oranienburg",
+        "oranienburg_klinkerhafenbrucke",
+        "oranienburg_krassin_park",
+        "oranienburg_schlosspark_oranienburg",
+        "oranienburg_schlossgarten",
+        "oranienburg_weisser_strand_am_lehnitzsee",
+        "oranienburg_sportplatz_am_schloss",
+        "oranienburg_spielplatz_pferdeinsel",
+        "oranienburg_stadthof_der_stadt_oranienburg"
+      ]
+    },
+    {
+      "id": "oranienburg_oranienburger_strand",
+      "name": "Oranienburger Strand",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.75597304,
+        "lng": 13.2648812
+      },
+      "query": "Oranienburger Strand, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.5336443,
+        "lng": 13.3846433,
+        "display_name": "Strandhütte, Caroline-Michaelis-Straße, Berlin, Deutschland",
+        "class": "building",
+        "type": "yes",
+        "provider": "photon"
+      },
+      "delta_m": 26009,
+      "from_city_m": 1616,
+      "status": "CHECK",
+      "flags": [
+        "house_like_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_trainings_park_calisthenics_park_berliner_weg",
+      "name": "Trainings Park - Calisthenics Park Berliner Weg",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.797063279999996,
+        "lng": 13.277380400000002
+      },
+      "query": "Trainings Park, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7740667,
+        "lng": 13.2382139,
+        "display_name": "Am Park, Oranienburg, Deutschland",
+        "class": "highway",
+        "type": "residential",
+        "provider": "photon"
+      },
+      "delta_m": 3671,
+      "from_city_m": 5211,
+      "status": "CHECK",
+      "flags": [
+        "house_like_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "oranienburg_sv_friedrichsthal_e_v",
+        "oranienburg_staustufe_friedrichsthal",
+        "oranienburg_evangelische_kirche_friedrichsthal_oranienburg",
+        "oranienburg_adfc_ortsgruppe_oranienburg"
+      ]
+    },
+    {
+      "id": "oranienburg_wild_west_oranienburg_am_weissen_strand_two_bedroom_house",
+      "name": "Wild West Oranienburg am Weißen Strand - Two-Bedroom House",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.759089394117645,
+        "lng": 13.279798829411767
+      },
+      "query": "Wild West Oranienburg am Weißen, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.747487,
+        "lng": 13.2314738,
+        "display_name": "Feuerwehr Oranienburg, Am Wolfsbusch, Oranienburg, Deutschland",
+        "class": "building",
+        "type": "warehouse",
+        "provider": "photon"
+      },
+      "delta_m": 3499,
+      "from_city_m": 2646,
+      "status": "CHECK",
+      "flags": [
+        "house_like_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_krassin_park",
+      "name": "Krassin Park",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.75156133999999,
+        "lng": 13.20574234
+      },
+      "query": "Krassin Park, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7740667,
+        "lng": 13.2382139,
+        "display_name": "Am Park, Oranienburg, Deutschland",
+        "class": "highway",
+        "type": "residential",
+        "provider": "photon"
+      },
+      "delta_m": 3322,
+      "from_city_m": 2409,
+      "status": "CHECK",
+      "flags": [
+        "house_like_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "oranienburg_stadtanleger_oranienburg",
+        "oranienburg_gemeinschaft_der_siebenten",
+        "oranienburg_landeskirchliche_gemeinschaft_lkg_oranienburg_eden",
+        "oranienburg_denkmal_fur_das_kz_sachsenhausen",
+        "oranienburg_denkmal_konzentrationslager_oranienburg",
+        "oranienburg_klinkerhafenbrucke",
+        "oranienburg_schlosspark_oranienburg",
+        "oranienburg_schlossgarten",
+        "oranienburg_weisser_strand_am_lehnitzsee",
+        "oranienburg_sportplatz_am_schloss",
+        "oranienburg_spielplatz_pferdeinsel",
+        "oranienburg_stadthof_der_stadt_oranienburg"
+      ]
+    },
+    {
+      "id": "oranienburg_sportplatz_am_schloss",
+      "name": "Sportplatz am Schloss",
+      "category": "freizeit",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.75156133999999,
+        "lng": 13.20574234
+      },
+      "query": "Sportplatz am Schloss, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7573901,
+        "lng": 13.2396716,
+        "display_name": "Am Schlosshafen, Oranienburg, Deutschland",
+        "class": "highway",
+        "type": "residential",
+        "provider": "photon"
+      },
+      "delta_m": 2374,
+      "from_city_m": 2409,
+      "status": "CHECK",
+      "flags": [
+        "house_like_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "oranienburg_stadtanleger_oranienburg",
+        "oranienburg_gemeinschaft_der_siebenten",
+        "oranienburg_landeskirchliche_gemeinschaft_lkg_oranienburg_eden",
+        "oranienburg_denkmal_fur_das_kz_sachsenhausen",
+        "oranienburg_denkmal_konzentrationslager_oranienburg",
+        "oranienburg_klinkerhafenbrucke",
+        "oranienburg_krassin_park",
+        "oranienburg_schlosspark_oranienburg",
+        "oranienburg_schlossgarten",
+        "oranienburg_weisser_strand_am_lehnitzsee",
+        "oranienburg_spielplatz_pferdeinsel",
+        "oranienburg_stadthof_der_stadt_oranienburg"
+      ]
+    },
+    {
+      "id": "oranienburg_grunpflege_gartenzwerg",
+      "name": "Grünpflege Gartenzwerg",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.759001122222216,
+        "lng": 13.251091716666666
+      },
+      "query": "Grünpflege Gartenzwerg, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7530397,
+        "lng": 13.2247155,
+        "display_name": "Gartenweg, Oranienburg, Deutschland",
+        "class": "highway",
+        "type": "residential",
+        "provider": "photon"
+      },
+      "delta_m": 1895,
+      "from_city_m": 778,
+      "status": "CHECK",
+      "flags": [
+        "house_like_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_strand_bolli_am_lehnitzsee",
+      "name": "Strand \"Bolli\" am Lehnitzsee",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.74759377058824,
+        "lng": 13.263525976470588
+      },
+      "query": "Strand \"Bolli\" am Lehnitzsee, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7468612,
+        "lng": 13.2617773,
+        "display_name": "Strand Bolli Lehnitzsee, Oranienburg, Deutschland",
+        "class": "natural",
+        "type": "beach",
+        "provider": "photon"
+      },
+      "delta_m": 143,
+      "from_city_m": 1774,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "oranienburg_wsc_lehnitz_e_v"
+      ]
+    },
+    {
+      "id": "oranienburg_caravanstellplatz_am_schlosshafen_oranienburg",
+      "name": "Caravanstellplatz am Schloßhafen Oranienburg",
+      "category": "hafen",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.7573021111111,
+        "lng": 13.238722500000002
+      },
+      "query": "Caravanstellplatz am Schloßhafen Oranienburg, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.756214,
+        "lng": 13.2396921,
+        "display_name": "AOK Nordost – Servicecenter Oranienburg, Am Schlosshafen, Oranienburg, Deutschland",
+        "class": "office",
+        "type": "insurance",
+        "provider": "photon"
+      },
+      "delta_m": 137,
+      "from_city_m": 226,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "oranienburg_schlosshafen_oranienburg_mit_reisemobilstellplatz"
+      ]
+    },
+    {
+      "id": "oranienburg_spielplatz_schlosspark_oranienburg",
+      "name": "Spielplatz Schlosspark Oranienburg",
+      "category": "natur",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.75715554000001,
+        "lng": 13.2341934
+      },
+      "query": "Spielplatz Schlosspark Oranienburg, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7561821,
+        "lng": 13.2330282,
+        "display_name": "Schlosspark Oranienburg, Schlossplatz, Oranienburg, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "provider": "photon"
+      },
+      "delta_m": 134,
+      "from_city_m": 476,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_gedenkstatte_und_museum_sachsenhausen",
+      "name": "Gedenkstätte und Museum Sachsenhausen",
+      "category": "aussicht",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.76580541111111,
+        "lng": 13.264335666666664
+      },
+      "query": "Gedenkstätte, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7662803,
+        "lng": 13.2628047,
+        "display_name": "Gedenkstätte und Museum Sachsenhausen, 22, Straße der Nationen, Oranienburg, Oberhavel, Brandenburg, 16515, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.6031835612375621,
+        "osm_type": "way",
+        "osm_id": 34957261,
+        "provider": "nominatim"
+      },
+      "delta_m": 116,
+      "from_city_m": 1936,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_kanuverleih",
+      "name": "Kanuverleih",
+      "category": "tour",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.72424968,
+        "lng": 13.2510887
+      },
+      "query": "Kanuverleih, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7250902,
+        "lng": 13.2500829,
+        "display_name": "Kanuverleih Oranienburg, 6, Spitzwegstraße, Anglersiedlung, Süd, Pinnower Schleuse, Oranienburg, Oberhavel, Brandenburg, 16515, Deutschland",
+        "class": "amenity",
+        "type": "boat_rental",
+        "importance": 0.00005840619516284455,
+        "osm_type": "node",
+        "osm_id": 2781953439,
+        "provider": "nominatim"
+      },
+      "delta_m": 115,
+      "from_city_m": 3568,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_oberhavel_kliniken_gmbh_klinik_oranienburg_zentrale_notaufnahme",
+      "name": "Oberhavel Kliniken GmbH - Klinik Oranienburg - Zentrale Notaufnahme",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.7421356,
+        "lng": 13.241512
+      },
+      "query": "Oberhavel Kliniken GmbH, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7430371,
+        "lng": 13.2420139,
+        "display_name": "Oberhavel Kliniken, Robert-Koch-Straße, Oranienburg, Deutschland",
+        "class": "amenity",
+        "type": "hospital",
+        "provider": "photon"
+      },
+      "delta_m": 106,
+      "from_city_m": 1513,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_oranienburg",
+      "name": "Oranienburg",
+      "category": "bahnhof",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.754552970588236,
+        "lng": 13.248477611764706
+      },
+      "query": "Oranienburg, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7539059,
+        "lng": 13.2493207,
+        "display_name": "Oranienburg, Stralsunder Straße, Neustadt, Oranienburg, Oberhavel, Brandenburg, 16515, Deutschland",
+        "class": "railway",
+        "type": "station",
+        "importance": 0.38493605591222957,
+        "osm_type": "node",
+        "osm_id": 610830383,
+        "provider": "nominatim"
+      },
+      "delta_m": 92,
+      "from_city_m": 529,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "oranienburg_s_oranienburg_bhf"
+      ]
+    },
+    {
+      "id": "oranienburg_s_oranienburg_bhf",
+      "name": "S Oranienburg Bhf",
+      "category": "bahnhof",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.754552970588236,
+        "lng": 13.248477611764706
+      },
+      "query": "S Oranienburg Bhf, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.754943,
+        "lng": 13.2477652,
+        "display_name": "Oranienburg Bhf (S), Stralsunder Straße, Oranienburg, Oberhavel, Brandenburg, 16515, Deutschland",
+        "class": "highway",
+        "type": "platform",
+        "importance": 0.00005840619516284455,
+        "osm_type": "way",
+        "osm_id": 225239479,
+        "provider": "nominatim"
+      },
+      "delta_m": 65,
+      "from_city_m": 529,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "oranienburg_oranienburg"
+      ]
+    },
+    {
+      "id": "oranienburg_gold_silber_galerie_im_oranienprk",
+      "name": "GOLD & SILBER GALERIE Im ORANIENPRK",
+      "category": "souvenir",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.748929180000005,
+        "lng": 13.22332686
+      },
+      "query": "GOLD, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.749483,
+        "lng": 13.2234885,
+        "display_name": "Gold Silber Galerie, 8, Friedensstraße, Altstadt, Oranienburg, Oberhavel, Brandenburg, 16515, Deutschland",
+        "class": "shop",
+        "type": "jewelry",
+        "importance": 0.00005840619516284455,
+        "osm_type": "node",
+        "osm_id": 1584496617,
+        "provider": "nominatim"
+      },
+      "delta_m": 63,
+      "from_city_m": 1402,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_lehnitzschleuse",
+      "name": "Lehnitzschleuse",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.76780917999999,
+        "lng": 13.27887134
+      },
+      "query": "Lehnitzschleuse, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7680243,
+        "lng": 13.2789453,
+        "display_name": "Lehnitzschleuse, Oranienburg, Oberhavel, Brandenburg, 16515, Deutschland",
+        "class": "highway",
+        "type": "service",
+        "importance": 0.04005840619516288,
+        "osm_type": "way",
+        "osm_id": 8771017,
+        "provider": "nominatim"
+      },
+      "delta_m": 24,
+      "from_city_m": 2888,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "oranienburg_saubucht_lehnitzsee"
+      ]
+    },
+    {
+      "id": "oranienburg_schlosshafen_oranienburg_mit_reisemobilstellplatz",
+      "name": "Schlosshafen Oranienburg mit Reisemobilstellplatz",
+      "category": "hafen",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.7573021111111,
+        "lng": 13.238722500000002
+      },
+      "query": "Schlosshafen Oranienburg, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7573627,
+        "lng": 13.238498,
+        "display_name": "Schlosshafen Oranienburg, 47, Rungestraße, Oranienburg, Oberhavel, Brandenburg, 16515, Deutschland",
+        "class": "tourism",
+        "type": "caravan_site",
+        "importance": 0.00005840619516284455,
+        "osm_type": "way",
+        "osm_id": 218730120,
+        "provider": "nominatim"
+      },
+      "delta_m": 17,
+      "from_city_m": 226,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "oranienburg_caravanstellplatz_am_schlosshafen_oranienburg"
+      ]
+    },
+    {
+      "id": "oranienburg_wsc_lehnitz_e_v",
+      "name": "WSC Lehnitz e.V.",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.74759377058824,
+        "lng": 13.263525976470588
+      },
+      "query": "WSC Lehnitz e.V., Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7476407,
+        "lng": 13.2636823,
+        "display_name": "WSC Lehnitz e.V., 2, Badeweg, Lehnitz, Oranienburg, Oberhavel, Brandenburg, 16515, Deutschland",
+        "class": "leisure",
+        "type": "marina",
+        "importance": 0.00005840619516284455,
+        "osm_type": "way",
+        "osm_id": 1232985607,
+        "provider": "nominatim"
+      },
+      "delta_m": 12,
+      "from_city_m": 1774,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "oranienburg_strand_bolli_am_lehnitzsee"
+      ]
+    },
+    {
+      "id": "oranienburg_gerson_getranke",
+      "name": "Gerson Getränke",
+      "category": "souvenir",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.7500574,
+        "lng": 13.21828878
+      },
+      "query": "Gerson Getränke, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7500468,
+        "lng": 13.2183875,
+        "display_name": "Gerson, Eichendorffstraße, Oranienburg, Deutschland",
+        "class": "shop",
+        "type": "beverages",
+        "provider": "photon"
+      },
+      "delta_m": 7,
+      "from_city_m": 1645,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "oranienburg_osm_post_office_5407355421"
+      ]
+    },
+    {
+      "id": "oranienburg_st_nicolai_kirche_pfarrsprengel_oranienburg",
+      "name": "St.-Nicolai-Kirche - Pfarrsprengel Oranienburg",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.75158269473685,
+        "lng": 13.23433253157895
+      },
+      "query": "St.-Nicolai-Kirche, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7515966,
+        "lng": 13.2343942,
+        "display_name": "Pfarrkirche St. Nikolai, Havelstraße, Oranienburg, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 4,
+      "from_city_m": 638,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "oranienburg_tagespflege_an_der_nicolai_kirche_oranienburg"
+      ]
+    },
+    {
+      "id": "oranienburg_preussen_apotheke_oranienburg",
+      "name": "Preussen Apotheke Oranienburg",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.7584599,
+        "lng": 13.2531967
+      },
+      "query": "Preussen Apotheke Oranienburg, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7584259,
+        "lng": 13.2531941,
+        "display_name": "Preussen-Apotheke, 100, Bernauer Straße, Neustadt, Oranienburg, Oberhavel, Brandenburg, 16515, Deutschland",
+        "class": "amenity",
+        "type": "pharmacy",
+        "importance": 0.00005840619516284455,
+        "osm_type": "node",
+        "osm_id": 571286720,
+        "provider": "nominatim"
+      },
+      "delta_m": 4,
+      "from_city_m": 883,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "oranienburg_osm_post_box_1237211297"
+      ]
+    },
+    {
+      "id": "oranienburg_gemeinschaft_der_siebenten",
+      "name": "Gemeinschaft der Siebenten-",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.75156133999999,
+        "lng": 13.20574234
+      },
+      "query": "Gemeinschaft der Siebenten-, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7515765,
+        "lng": 13.2057484,
+        "display_name": "Landeskirchliche Gemeinschaft Oranienburg-Eden, Baltzerweg, Oranienburg, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 2,
+      "from_city_m": 2409,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "oranienburg_stadtanleger_oranienburg",
+        "oranienburg_landeskirchliche_gemeinschaft_lkg_oranienburg_eden",
+        "oranienburg_denkmal_fur_das_kz_sachsenhausen",
+        "oranienburg_denkmal_konzentrationslager_oranienburg",
+        "oranienburg_klinkerhafenbrucke",
+        "oranienburg_krassin_park",
+        "oranienburg_schlosspark_oranienburg",
+        "oranienburg_schlossgarten",
+        "oranienburg_weisser_strand_am_lehnitzsee",
+        "oranienburg_sportplatz_am_schloss",
+        "oranienburg_spielplatz_pferdeinsel",
+        "oranienburg_stadthof_der_stadt_oranienburg"
+      ]
+    },
+    {
+      "id": "oranienburg_landeskirchliche_gemeinschaft_lkg_oranienburg_eden",
+      "name": "Landeskirchliche Gemeinschaft (LKG) Oranienburg - Eden",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.75156133999999,
+        "lng": 13.20574234
+      },
+      "query": "Landeskirchliche Gemeinschaft Oranienburg, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7515765,
+        "lng": 13.2057484,
+        "display_name": "Landeskirchliche Gemeinschaft Oranienburg-Eden, 70, Baltzerweg, Eden, Oranienburg, Oberhavel, Brandenburg, 16515, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.00005840619516284455,
+        "osm_type": "way",
+        "osm_id": 326944731,
+        "provider": "nominatim"
+      },
+      "delta_m": 2,
+      "from_city_m": 2409,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "oranienburg_stadtanleger_oranienburg",
+        "oranienburg_gemeinschaft_der_siebenten",
+        "oranienburg_denkmal_fur_das_kz_sachsenhausen",
+        "oranienburg_denkmal_konzentrationslager_oranienburg",
+        "oranienburg_klinkerhafenbrucke",
+        "oranienburg_krassin_park",
+        "oranienburg_schlosspark_oranienburg",
+        "oranienburg_schlossgarten",
+        "oranienburg_weisser_strand_am_lehnitzsee",
+        "oranienburg_sportplatz_am_schloss",
+        "oranienburg_spielplatz_pferdeinsel",
+        "oranienburg_stadthof_der_stadt_oranienburg"
+      ]
+    },
+    {
+      "id": "oranienburg_evangelisch_freikirchliche_gemeinde_oranienburg",
+      "name": "Evangelisch-Freikirchliche Gemeinde Oranienburg",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.754720320000004,
+        "lng": 13.245505
+      },
+      "query": "Evangelisch-Freikirchliche Gemeinde Oranienburg, Oranienburg",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 332,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_c_z_glaube_in_aktion_e_v_oranienburg",
+      "name": "C.Z. Glaube in Aktion e.V. Oranienburg",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.754949857142854,
+        "lng": 13.254937585714288
+      },
+      "query": "C.Z. Glaube in, Oranienburg, Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 951,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_freizeitgelande_tolora",
+      "name": "Freizeitgelände TolOra",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.749740537499996,
+        "lng": 13.242403125000003
+      },
+      "query": "Freizeitgelände TolOra, Oranienburg",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 675,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_pinnower_see",
+      "name": "Pinnower See",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.72049624722222,
+        "lng": 13.245792441666666
+      },
+      "query": "Pinnower See, Oranienburg",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 3932,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_familien_sport_verein_oberhavel_e_v_fsvo_e_v",
+      "name": "Familien-Sport-Verein Oberhavel E.V.-FSVO e.V.",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.754169739999995,
+        "lng": 13.2427078
+      },
+      "query": "Familien-Sport-Verein Oberhavel E.V.-FSVO, Oranienburg, Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 214,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_ladengalerie_kolorit_maria_windisch",
+      "name": "Ladengalerie kolorit Maria Windisch",
+      "category": "souvenir",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.756223750000004,
+        "lng": 13.24156043125
+      },
+      "query": "Ladengalerie kolorit Maria, Oranienburg, Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 72,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_dr_juliane_rettig_zimmermann",
+      "name": "Dr. Juliane Rettig-Zimmermann",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.7573914,
+        "lng": 13.2480954
+      },
+      "query": "Dr. Juliane Rettig-Zimmermann, Oranienburg",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 520,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_hausarztpraxis_viktoria_basinkevich",
+      "name": "Hausarztpraxis Viktoria Basinkevich",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.775248,
+        "lng": 13.2339926
+      },
+      "query": "Hausarztpraxis Viktoria Basinkevich, Oranienburg",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 2218,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_grabstatte_von_silvio_gesell",
+      "name": "Grabstätte von Silvio Gesell",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.749577120000005,
+        "lng": 13.226329119999999
+      },
+      "query": "Grabstätte von Silvio, Oranienburg, Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 1194,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_bob_ross_instructor_galerie_augustburk",
+      "name": "Bob Ross Instructor Galerie Augustburk",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.7249277,
+        "lng": 13.2465464
+      },
+      "query": "Bob Ross Instructor, Oranienburg, Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 3447,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_tiny_forest_grunzug_walther_bothe_strasse",
+      "name": "Tiny Forest Grünzug Walther-Bothe-Straße",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.744357539999996,
+        "lng": 13.23230466
+      },
+      "query": "Tiny Forest Grünzug, Oranienburg, Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 1390,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "oranienburg_osm_transit_2208406286"
+      ]
+    },
+    {
+      "id": "oranienburg_schlappmeisterei_hundeauslaufgebiet",
+      "name": "Schlappmeisterei Hundeauslaufgebiet",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.7579504,
+        "lng": 13.236426
+      },
+      "query": "Schlappmeisterei Hundeauslaufgebiet, Oranienburg",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 387,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_oranienburger_fahrgastschifffahrt_gbr_manfred_und_rudiger_ulack",
+      "name": "Oranienburger Fahrgastschifffahrt GbR, Manfred und Rüdiger Ulack",
+      "category": "tour",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.751176199999996,
+        "lng": 13.240884099999999
+      },
+      "query": "Oranienburger Fahrgastschifffahrt GbR,, Oranienburg, Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 507,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_vulkan_im_tier_freizeit_und_saurierpark_germendorf",
+      "name": "Vulkan im Tier-, Freizeit- und Saurierpark Germendorf",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.744032700000005,
+        "lng": 13.15192288
+      },
+      "query": "Vulkan im Tier-,, Oranienburg, Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 6126,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_adfc_ortsgruppe_oranienburg",
+      "name": "ADFC Ortsgruppe Oranienburg",
+      "category": "radweg",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.797063279999996,
+        "lng": 13.277380400000002
+      },
+      "query": "ADFC Ortsgruppe Oranienburg, Oranienburg",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 5211,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "oranienburg_sv_friedrichsthal_e_v",
+        "oranienburg_staustufe_friedrichsthal",
+        "oranienburg_evangelische_kirche_friedrichsthal_oranienburg",
+        "oranienburg_trainings_park_calisthenics_park_berliner_weg"
+      ]
+    },
+    {
+      "id": "oranienburg_hafenrestaurant_lubea",
+      "name": "Hafenrestaurant LuBea",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.75485148,
+        "lng": 13.26247674
+      },
+      "query": "Hafenrestaurant LuBea, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7551016,
+        "lng": 13.263265,
+        "display_name": "LuBea, Rüdesheimer Straße, Oranienburg, Deutschland",
+        "class": "amenity",
+        "type": "restaurant",
+        "provider": "photon"
+      },
+      "delta_m": 60,
+      "from_city_m": 1458,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_orafol_arena",
+      "name": "Orafol-Arena",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.748122939999995,
+        "lng": 13.25673664
+      },
+      "query": "Orafol-Arena, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7482885,
+        "lng": 13.2575294,
+        "display_name": "Orafol-Arena, André-Pican-Straße, Oranienburg, Oberhavel, Brandenburg, 16515, Deutschland",
+        "class": "leisure",
+        "type": "pitch",
+        "importance": 0.00005840619516284455,
+        "osm_type": "way",
+        "osm_id": 193460560,
+        "provider": "nominatim"
+      },
+      "delta_m": 56,
+      "from_city_m": 1363,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_turmchen",
+      "name": "Türmchen",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.74986208,
+        "lng": 13.256700760000001
+      },
+      "query": "Türmchen, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7499479,
+        "lng": 13.2574875,
+        "display_name": "TURM-Restaurant türmchen, André-Pican-Straße, Oranienburg, Oberhavel, Brandenburg, 16515, Deutschland",
+        "class": "amenity",
+        "type": "restaurant",
+        "importance": 0.00005840619516284455,
+        "osm_type": "node",
+        "osm_id": 4185753593,
+        "provider": "nominatim"
+      },
+      "delta_m": 54,
+      "from_city_m": 1250,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_familyrocks_boulderhalle",
+      "name": "FamilyRocks Boulderhalle",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.76810444,
+        "lng": 13.24640544
+      },
+      "query": "FamilyRocks Boulderhalle, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7680806,
+        "lng": 13.24715,
+        "display_name": "FamilyRocks Boulderhalle, 62, Chausseestraße, Sachsenhausen, Oranienburg, Oberhavel, Brandenburg, 16515, Deutschland",
+        "class": "leisure",
+        "type": "sports_centre",
+        "importance": 0.00005840619516284455,
+        "osm_type": "way",
+        "osm_id": 362758028,
+        "provider": "nominatim"
+      },
+      "delta_m": 50,
+      "from_city_m": 1425,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_oranienburg_turm_erlebniscity",
+      "name": "Oranienburg, TURM ErlebnisCity",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.750192999999996,
+        "lng": 13.2577844
+      },
+      "query": "Oranienburg, TURM ErlebnisCity, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7498328,
+        "lng": 13.2576448,
+        "display_name": "TURM ErlebnisCity, André-Pican-Straße, Oranienburg, Deutschland",
+        "class": "leisure",
+        "type": "sports_centre",
+        "provider": "photon"
+      },
+      "delta_m": 41,
+      "from_city_m": 1295,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_stadtverwaltung_oranienburg",
+      "name": "Stadtverwaltung Oranienburg",
+      "category": "verwaltung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.75588668,
+        "lng": 13.23639786
+      },
+      "query": "Stadtverwaltung Oranienburg, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.755579,
+        "lng": 13.2361099,
+        "display_name": "Stadtverwaltung, 1, Schloßplatz, Oranienburg, Oberhavel, Brandenburg, 16515, Deutschland",
+        "class": "amenity",
+        "type": "townhall",
+        "importance": 0.00005840619516284455,
+        "osm_type": "way",
+        "osm_id": 14757196,
+        "provider": "nominatim"
+      },
+      "delta_m": 39,
+      "from_city_m": 301,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_oberhavel_kliniken_gmbh_klinik_oranienburg",
+      "name": "Oberhavel Kliniken GmbH - Klinik Oranienburg",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.74317869999999,
+        "lng": 13.2425312
+      },
+      "query": "Oberhavel Kliniken GmbH, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7430371,
+        "lng": 13.2420139,
+        "display_name": "Oberhavel Kliniken, Robert-Koch-Straße, Oranienburg, Deutschland",
+        "class": "amenity",
+        "type": "hospital",
+        "provider": "photon"
+      },
+      "delta_m": 38,
+      "from_city_m": 1401,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_bismarckeiche",
+      "name": "Bismarckeiche",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.769859960000005,
+        "lng": 13.326959879999999
+      },
+      "query": "Bismarckeiche, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7701658,
+        "lng": 13.3267161,
+        "display_name": "Bismarck-Eiche, Am Dorfanger, Oranienburg, Deutschland",
+        "class": "natural",
+        "type": "tree",
+        "provider": "photon"
+      },
+      "delta_m": 38,
+      "from_city_m": 6002,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_museum_sowjetisches_speziallager_nr_7_nr_1",
+      "name": "Museum \"Sowjetisches Speziallager Nr. 7 / Nr. 1\"",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.769115420000006,
+        "lng": 13.259121159999998
+      },
+      "query": "Museum \"Sowjetisches Speziallager Nr. 7, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7694475,
+        "lng": 13.2592057,
+        "display_name": "Museum \"Sowjetisches Speziallager\", Erich-Schmidt-Straße, Oranienburg, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 37,
+      "from_city_m": 1929,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_ehemalige_schleuse_sachsenhausen",
+      "name": "ehemalige Schleuse Sachsenhausen",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.77612412,
+        "lng": 13.24257906
+      },
+      "query": "ehemalige Schleuse Sachsenhausen, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7763639,
+        "lng": 13.2428839,
+        "display_name": "Alte Schleuse Sachsenhausen, Oranienburg, Deutschland",
+        "class": "waterway",
+        "type": "weir",
+        "provider": "photon"
+      },
+      "delta_m": 34,
+      "from_city_m": 2270,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_gedenkort_station_z",
+      "name": "Gedenkort \"Station Z\"",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.767378740000005,
+        "lng": 13.25925364
+      },
+      "query": "Gedenkort \"Station Z\", Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7674602,
+        "lng": 13.2596445,
+        "display_name": "Gedenkort \"Station Z\" für die KZ-Opfer, Erschießungsgraben, Oranienburg, Oberhavel, Brandenburg, 16515, Deutschland",
+        "class": "building",
+        "type": "yes",
+        "importance": 0.00005840619516284455,
+        "osm_type": "relation",
+        "osm_id": 2848822,
+        "provider": "nominatim"
+      },
+      "delta_m": 28,
+      "from_city_m": 1791,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_turm_erlebniscity",
+      "name": "TURM ErlebnisCity",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.75006724,
+        "lng": 13.25757662
+      },
+      "query": "TURM ErlebnisCity, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7498328,
+        "lng": 13.2576448,
+        "display_name": "TURM ErlebnisCity, 42, André-Pican-Straße, Oranienburg, Oberhavel, Brandenburg, 16515, Deutschland",
+        "class": "leisure",
+        "type": "sports_centre",
+        "importance": 0.00005840619516284455,
+        "osm_type": "way",
+        "osm_id": 212712437,
+        "provider": "nominatim"
+      },
+      "delta_m": 26,
+      "from_city_m": 1289,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_nani_s_kinderparadies",
+      "name": "Nani´s Kinderparadies",
+      "category": "souvenir",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.7553762,
+        "lng": 13.24110162
+      },
+      "query": "Nani´s Kinderparadies, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7555644,
+        "lng": 13.2412715,
+        "display_name": "Nani's Kinderparadies, 25, Bernauer Straße, Oranienburg, Oberhavel, Brandenburg, 16515, Deutschland",
+        "class": "shop",
+        "type": "toys",
+        "importance": 0.00005840619516284455,
+        "osm_type": "node",
+        "osm_id": 347302589,
+        "provider": "nominatim"
+      },
+      "delta_m": 24,
+      "from_city_m": 43,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_tourist_information_oranienburg",
+      "name": "Tourist-Information Oranienburg",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.7535914,
+        "lng": 13.2375668
+      },
+      "query": "Tourist-Information Oranienburg, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.753728,
+        "lng": 13.237663,
+        "display_name": "Touristen Information, Schloßplatz, Oranienburg, Deutschland",
+        "class": "office",
+        "type": "government",
+        "provider": "photon"
+      },
+      "delta_m": 17,
+      "from_city_m": 326,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_action_oranienburg",
+      "name": "Action Oranienburg",
+      "category": "souvenir",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.74463449999999,
+        "lng": 13.238457544444445
+      },
+      "query": "Action Oranienburg, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7446721,
+        "lng": 13.2382131,
+        "display_name": "Action, 78, Berliner Straße, Weiße Stadt, Oranienburg, Oberhavel, Brandenburg, 16515, Deutschland",
+        "class": "shop",
+        "type": "variety_store",
+        "importance": 0.00005840619516284455,
+        "osm_type": "node",
+        "osm_id": 13438204782,
+        "provider": "nominatim"
+      },
+      "delta_m": 17,
+      "from_city_m": 1245,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_schleuse_pinnow",
+      "name": "Schleuse Pinnow",
+      "category": "radweg",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.716668719999994,
+        "lng": 13.23781008
+      },
+      "query": "Schleuse Pinnow, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7166028,
+        "lng": 13.2380234,
+        "display_name": "Schleuse Pinnow, Pinnower Schleuse, Oranienburg, Oberhavel, Brandenburg, 16515, Deutschland",
+        "class": "lock",
+        "type": "yes",
+        "importance": 0.2328416436185146,
+        "osm_type": "way",
+        "osm_id": 161976115,
+        "provider": "nominatim"
+      },
+      "delta_m": 16,
+      "from_city_m": 4349,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_gedenkstatte_kz_aussenlager_klinkerwerk",
+      "name": "Gedenkstätte KZ-Außenlager Klinkerwerk",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.77550122,
+        "lng": 13.281007160000001
+      },
+      "query": "Gedenkstätte KZ-Außenlager Klinkerwerk, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7755853,
+        "lng": 13.2811895,
+        "display_name": "Gedenkort KZ-Außenlager Klinkerwerk, Am Klinkerhafen, Fichtengrund, Oranienburg, Oberhavel, Brandenburg, 16515, Deutschland",
+        "class": "historic",
+        "type": "memorial",
+        "importance": 0.00005840619516284455,
+        "osm_type": "node",
+        "osm_id": 4134255855,
+        "provider": "nominatim"
+      },
+      "delta_m": 15,
+      "from_city_m": 3482,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_rad_sport_oranienburg",
+      "name": "Rad-Sport Oranienburg",
+      "category": "radweg",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.75524648,
+        "lng": 13.238406260000001
+      },
+      "query": "Rad-Sport Oranienburg, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7552715,
+        "lng": 13.2386066,
+        "display_name": "Rad-Sport Oranienburg, 2, Bernauer Straße, Oranienburg, Oberhavel, Brandenburg, 16515, Deutschland",
+        "class": "shop",
+        "type": "bicycle",
+        "importance": 0.00005840619516284455,
+        "osm_type": "node",
+        "osm_id": 3670244865,
+        "provider": "nominatim"
+      },
+      "delta_m": 14,
+      "from_city_m": 174,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_tiergarten_schleuse",
+      "name": "Tiergarten Schleuse",
+      "category": "freizeitpark",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.78098692857143,
+        "lng": 13.208197642857144
+      },
+      "query": "Tiergarten Schleuse, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7809061,
+        "lng": 13.2080437,
+        "display_name": "Schleuse Tiergarten, Tiergartenschleuse, Sachsenhausen, Oranienburg, Oberhavel, Brandenburg, 16515, Deutschland",
+        "class": "lock",
+        "type": "yes",
+        "importance": 0.14389741120638372,
+        "osm_type": "way",
+        "osm_id": 452386059,
+        "provider": "nominatim"
+      },
+      "delta_m": 14,
+      "from_city_m": 3566,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_fahrradhaus_klaas",
+      "name": "Fahrradhaus Klaas",
+      "category": "radweg",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.7554716,
+        "lng": 13.239445199999999
+      },
+      "query": "Fahrradhaus Klaas, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7555057,
+        "lng": 13.2392993,
+        "display_name": "Fahrradhaus Klaas, 10, Bernauer Straße, Oranienburg, Oberhavel, Brandenburg, 16515, Deutschland",
+        "class": "shop",
+        "type": "bicycle",
+        "importance": 0.00005840619516284455,
+        "osm_type": "node",
+        "osm_id": 1801725570,
+        "provider": "nominatim"
+      },
+      "delta_m": 11,
+      "from_city_m": 100,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_schreibwaren_am_bahnhof",
+      "name": "Schreibwaren Am Bahnhof",
+      "category": "souvenir",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.755562242857145,
+        "lng": 13.24701597142857
+      },
+      "query": "Schreibwaren Am Bahnhof, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7556415,
+        "lng": 13.2471076,
+        "display_name": "Schreibwaren Am Bahnhof, 6, Stralsunder Straße, Oranienburg, Oberhavel, Brandenburg, 16515, Deutschland",
+        "class": "shop",
+        "type": "stationery",
+        "importance": 0.00005840619516284455,
+        "osm_type": "node",
+        "osm_id": 12811359884,
+        "provider": "nominatim"
+      },
+      "delta_m": 11,
+      "from_city_m": 414,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_christliche_kita_leuchtturm_im_cjo_e_v",
+      "name": "Christliche Kita Leuchtturm im CJO e.V.",
+      "category": "aussicht",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.75762699090908,
+        "lng": 13.240106199999998
+      },
+      "query": "Christliche Kita Leuchtturm im CJO, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7576379,
+        "lng": 13.2399643,
+        "display_name": "Christliche Kita Leuchtturm, Am Schloßhafen, Oranienburg, Deutschland",
+        "class": "amenity",
+        "type": "kindergarten",
+        "provider": "photon"
+      },
+      "delta_m": 10,
+      "from_city_m": 216,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_stern_apotheke_im_arztehaus",
+      "name": "Stern Apotheke im Ärztehaus",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.7606039,
+        "lng": 13.2430569
+      },
+      "query": "Stern Apotheke im Ärztehaus, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7606493,
+        "lng": 13.2431483,
+        "display_name": "Stern-Apotheke im Ärztehaus, 32, Sachsenhausener Straße, Oranienburg, Oberhavel, Brandenburg, 16515, Deutschland",
+        "class": "amenity",
+        "type": "pharmacy",
+        "importance": 0.00005840619516284455,
+        "osm_type": "node",
+        "osm_id": 3356502016,
+        "provider": "nominatim"
+      },
+      "delta_m": 8,
+      "from_city_m": 561,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_reichsfreiherr_otto_von_schwerin",
+      "name": "Reichsfreiherr Otto von Schwerin",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.753430820000005,
+        "lng": 13.2358598
+      },
+      "query": "Reichsfreiherr Otto von Schwerin, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7534937,
+        "lng": 13.2358673,
+        "display_name": "Otto Von Schwerin, Breite Straße, Oranienburg, Deutschland",
+        "class": "historic",
+        "type": "memorial",
+        "provider": "photon"
+      },
+      "delta_m": 7,
+      "from_city_m": 423,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_altstadtklause",
+      "name": "Altstadtklause",
+      "category": "altstadt",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.75143,
+        "lng": 13.232759999999999
+      },
+      "query": "Altstadtklause, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7514241,
+        "lng": 13.2328591,
+        "display_name": "Altstadtklause, Havelstraße, Altstadt, Oranienburg, Oberhavel, Brandenburg, 16515, Deutschland",
+        "class": "amenity",
+        "type": "restaurant",
+        "importance": 0.00005840619516284455,
+        "osm_type": "node",
+        "osm_id": 3022768111,
+        "provider": "nominatim"
+      },
+      "delta_m": 7,
+      "from_city_m": 726,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_dorfkirche_zehlendorf_oranienburg",
+      "name": "Dorfkirche Zehlendorf (Oranienburg)",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.783860122222215,
+        "lng": 13.386501144444445
+      },
+      "query": "Dorfkirche Zehlendorf, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7838829,
+        "lng": 13.3866044,
+        "display_name": "Dorfkirche Zehlendorf, 53A, Alte Dorfstraße, Zehlendorf, Oranienburg, Oberhavel, Brandenburg, 16515, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.09078915819201436,
+        "osm_type": "way",
+        "osm_id": 76937577,
+        "provider": "nominatim"
+      },
+      "delta_m": 7,
+      "from_city_m": 10285,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_schlossmuseum_oranienburg",
+      "name": "Schlossmuseum Oranienburg",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.75487606470588,
+        "lng": 13.236613923529411
+      },
+      "query": "Schlossmuseum Oranienburg, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7548315,
+        "lng": 13.2366621,
+        "display_name": "Schlossmuseum, 1, Schloßplatz, Oranienburg, Oberhavel, Brandenburg, 16515, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.00005840619516284455,
+        "osm_type": "node",
+        "osm_id": 974492418,
+        "provider": "nominatim"
+      },
+      "delta_m": 6,
+      "from_city_m": 302,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_kleines_wehr_sachsenhausen",
+      "name": "Kleines Wehr Sachsenhausen",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.77548492,
+        "lng": 13.24295976
+      },
+      "query": "Kleines Wehr Sachsenhausen, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7755264,
+        "lng": 13.2430078,
+        "display_name": "Kleines Wehr Sachsenhausen, Fichtengrund, Oranienburg, Oberhavel, Brandenburg, 16515, Deutschland",
+        "class": "waterway",
+        "type": "weir",
+        "importance": 0.1333917395284962,
+        "osm_type": "node",
+        "osm_id": 321893621,
+        "provider": "nominatim"
+      },
+      "delta_m": 6,
+      "from_city_m": 2201,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_katholische_pfarrkirche_herz_jesu",
+      "name": "Katholische Pfarrkirche Herz Jesu",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.746984368000014,
+        "lng": 13.238938220000001
+      },
+      "query": "Katholische Pfarrkirche Herz Jesu, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7469793,
+        "lng": 13.2388664,
+        "display_name": "Katholische Kirche Herz-Jesu, Emil-Polesky-Straße, Oranienburg, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 5,
+      "from_city_m": 982,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_cook_rein_breite_strasse",
+      "name": "COOK REIN BREITE STRASSE",
+      "category": "radweg",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.7525732,
+        "lng": 13.2355167
+      },
+      "query": "COOK REIN BREITE STRASSE, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7525249,
+        "lng": 13.2355211,
+        "display_name": "Cook rein, 7, Breite Straße, Altstadt, Oranienburg, Oberhavel, Brandenburg, 16515, Deutschland",
+        "class": "amenity",
+        "type": "cafe",
+        "importance": 0.00005840619516284455,
+        "osm_type": "node",
+        "osm_id": 9194495682,
+        "provider": "nominatim"
+      },
+      "delta_m": 5,
+      "from_city_m": 503,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_kirche_germendorf_pfarrsprengel_oranienburg",
+      "name": "Kirche Germendorf - Pfarrsprengel Oranienburg",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.74915604285714,
+        "lng": 13.17545194285714
+      },
+      "query": "Kirche Germendorf, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7491553,
+        "lng": 13.1755198,
+        "display_name": "Kirche Germendorf, Germendorfer Dorfstraße, Germendorf, Oranienburg, Oberhavel, Brandenburg, 16515, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.00005840619516284455,
+        "osm_type": "way",
+        "osm_id": 201076266,
+        "provider": "nominatim"
+      },
+      "delta_m": 5,
+      "from_city_m": 4463,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_filmpalast_oranienburg",
+      "name": "Filmpalast Oranienburg",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.75010267142857,
+        "lng": 13.237771228571429
+      },
+      "query": "Filmpalast Oranienburg, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7500687,
+        "lng": 13.237743,
+        "display_name": "Filmpalast Oranienburg, 40, Berliner Straße, Oranienburg, Oberhavel, Brandenburg, 16515, Deutschland",
+        "class": "amenity",
+        "type": "cinema",
+        "importance": 0.00005840619516284455,
+        "osm_type": "way",
+        "osm_id": 193835768,
+        "provider": "nominatim"
+      },
+      "delta_m": 4,
+      "from_city_m": 660,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_schlossparkcafe",
+      "name": "Schlossparkcafé",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.7578744,
+        "lng": 13.2344213
+      },
+      "query": "Schlossparkcafé, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7578709,
+        "lng": 13.2343579,
+        "display_name": "Schlosspark-Café, Parkstraße, Oranienburg, Deutschland",
+        "class": "amenity",
+        "type": "cafe",
+        "provider": "photon"
+      },
+      "delta_m": 4,
+      "from_city_m": 495,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_kic_evangelisch_methodistische_kirche_oranienburg",
+      "name": "KiC Evangelisch-methodistische Kirche Oranienburg",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.74674445714286,
+        "lng": 13.232600442857143
+      },
+      "query": "KiC Evangelisch-methodistische Kirche Oranienburg, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7467694,
+        "lng": 13.232585,
+        "display_name": "Evangelisch-methodistische Kirche, Julius-Leber-Straße, Oranienburg, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 3,
+      "from_city_m": 1144,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_fahrrad_center_hebestreit_inh_m_schleising",
+      "name": "Fahrrad Center Hebestreit Inh. M. Schleising",
+      "category": "radweg",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.75257588000001,
+        "lng": 13.23426776
+      },
+      "query": "Fahrrad Center Hebestreit Inh. M., Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7525623,
+        "lng": 13.2343111,
+        "display_name": "Fahrrad-Center-Hebestreit, Bötzower Platz, Oranienburg, Deutschland",
+        "class": "shop",
+        "type": "bicycle",
+        "provider": "photon"
+      },
+      "delta_m": 3,
+      "from_city_m": 566,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_alter_bunker",
+      "name": "Alter Bunker",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.78880392,
+        "lng": 13.27948988
+      },
+      "query": "Alter Bunker, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.788781,
+        "lng": 13.2794842,
+        "display_name": "Bunker Koralle, Malzer Chaussee, Oranienburg, Deutschland",
+        "class": "military",
+        "type": "bunker",
+        "provider": "photon"
+      },
+      "delta_m": 3,
+      "from_city_m": 4503,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_neuapostolische_kirche_oranienburg",
+      "name": "Neuapostolische Kirche Oranienburg",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.74525166666667,
+        "lng": 13.235169544444442
+      },
+      "query": "Neuapostolische Kirche Oranienburg, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.745243,
+        "lng": 13.2351969,
+        "display_name": "Neuapostolische Kirche Oranienburg, 43, Erzbergerstraße, Weiße Stadt, Oranienburg, Oberhavel, Brandenburg, 16515, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.00005840619516284455,
+        "osm_type": "way",
+        "osm_id": 998575853,
+        "provider": "nominatim"
+      },
+      "delta_m": 2,
+      "from_city_m": 1227,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_little_john_bikes",
+      "name": "Little John Bikes",
+      "category": "radweg",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.74471488571429,
+        "lng": 13.25424347142857
+      },
+      "query": "Little John Bikes, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7447296,
+        "lng": 13.254244,
+        "display_name": "Little John Bikes, 87;89, Lehnitzstraße, Oranienburg, Oberhavel, Brandenburg, 16515, Deutschland",
+        "class": "shop",
+        "type": "bicycle",
+        "importance": 0.00005840619516284455,
+        "osm_type": "way",
+        "osm_id": 122430604,
+        "provider": "nominatim"
+      },
+      "delta_m": 2,
+      "from_city_m": 1521,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_kleingartenverein_havelfreude_e_v",
+      "name": "Kleingartenverein Havelfreude E.v.",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.76057144,
+        "lng": 13.234285520000004
+      },
+      "query": "Kleingartenverein Havelfreude E.v., Oranienburg, Germany",
+      "osm": {
+        "lat": 52.760585,
+        "lng": 13.2342877,
+        "display_name": "Kleingartenverein Havelfreude e.V., 4, Blumenweg, Oranienburg, Oberhavel, Brandenburg, 16515, Deutschland",
+        "class": "club",
+        "type": "allotments",
+        "importance": 0.00005840619516284455,
+        "osm_type": "way",
+        "osm_id": 1292353080,
+        "provider": "nominatim"
+      },
+      "delta_m": 2,
+      "from_city_m": 697,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_bethlehemkapelle_oranienburg",
+      "name": "Bethlehemkapelle Oranienburg",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.73029527999999,
+        "lng": 13.248627840000001
+      },
+      "query": "Bethlehemkapelle Oranienburg, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.730284,
+        "lng": 13.2486392,
+        "display_name": "Bethlehemkapelle, Saalestraße, Anglersiedlung, Süd, Oranienburg, Oberhavel, Brandenburg, 16515, Deutschland",
+        "class": "building",
+        "type": "chapel",
+        "importance": 0.00005840619516284455,
+        "osm_type": "way",
+        "osm_id": 1328457200,
+        "provider": "nominatim"
+      },
+      "delta_m": 1,
+      "from_city_m": 2877,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "oranienburg_august_wilhelm_steg_oranienburg",
+      "name": "August Wilhelm Steg Oranienburg",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.758139199999995,
+        "lng": 13.2372178
+      },
+      "query": "August Wilhelm Steg Oranienburg, Oranienburg, Germany",
+      "osm": {
+        "lat": 52.7581473,
+        "lng": 13.2372164,
+        "display_name": "August-Wilhelm-Steg, Oranienburg, Oberhavel, Brandenburg, 16515, Deutschland",
+        "class": "highway",
+        "type": "path",
+        "importance": 0.04005840619516288,
+        "osm_type": "way",
+        "osm_id": 26126268,
+        "provider": "nominatim"
+      },
+      "delta_m": 1,
+      "from_city_m": 363,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    }
+  ]
+}

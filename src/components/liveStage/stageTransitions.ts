@@ -18,6 +18,6 @@ export const ACTIONS_ENTERING = FadeInUp.springify().damping(20).stiffness(160);
 export const ACTIONS_EXITING = FadeOutDown.duration(160);
 
 /**
- * Reserved height for the subtitle slot — 1 Zeile + Luft.
+ * Reserved height for the subtitle slot — 1 Zeile + Schatten/Unterlängen.
  */
-export const SUBTITLE_SLOT_H = 32;
+export const SUBTITLE_SLOT_H = 40;

@@ -26,7 +26,7 @@ export type FacingReference = {
 };
 
 /**
- * Resolve which absolute bearing Findus should treat as "voraus".
+ * Resolve which absolute bearing Yorro should treat as "voraus".
  */
 export function resolveFacingBearingDeg(opts: {
   speedMs?: number | null;
@@ -99,20 +99,26 @@ export function buildVisualDirectionalPromptRule(opts?: {
   facingSource?: FacingSource;
 }): string {
   const side = opts?.lookSidePhrase?.trim();
+  const uncertain =
+    opts?.facingSource === 'unknown' || !side;
   const sourceHint =
     opts?.facingSource === 'gps_vector'
       ? 'User bewegt sich — links/rechts relativ zur Gehrichtung (GPS-Vektor).'
       : opts?.facingSource === 'compass'
         ? 'User steht — links/rechts relativ zur Handy-Blickrichtung (Compass).'
-        : 'Wenn Bewegung messbar: GPS-Gehrichtung; sonst Compass.';
+        : 'Facing unklar — KEINE links/rechts-Rate. Landmarken / Kartenlinie statt Seite.';
 
   return [
     '## Visuelles Verankern (EISERN — Modul 1 & 3)',
-    'Starte IMMER mit der Blickrichtung. Dann markante visuelle Details. Dann erst Name/Aktion.',
+    uncertain
+      ? 'Starte mit Landmarke oder „Richtung …“, nicht mit geratenem links/rechts.'
+      : 'Starte IMMER mit der Blickrichtung. Dann markante visuelle Details. Dann erst Name/Aktion.',
     sourceHint,
-    side ? `Aktuelle Richtungsvorgabe: ${side}.` : '',
-    'Gold-Muster: „Schau nach rechts. Siehst du das runde, weiße Gebäude, das dort oben thront? Da steht groß Café Pudding drauf.“',
-    'Verboten: Ort zuerst benennen ohne Richtung. Keine Himmelsrichtungen. Kein Broschüren-Ton.',
+    side ? `Aktuelle Richtungsvorgabe: ${side}.` : 'Keine sichere Seite — Landmarken bevorzugen.',
+    uncertain
+      ? 'Gold-Muster: „Richtung der Haltestelle / Kirche — siehst du das runde, weiße Gebäude?“'
+      : 'Gold-Muster: „Schau nach rechts. Siehst du das runde, weiße Gebäude, das dort oben thront? Da steht groß Café Pudding drauf.“',
+    'Verboten: Ort zuerst benennen ohne Richtung. Keine Himmelsrichtungen. Kein Broschüren-Ton. Kein falsches links/rechts bei unsicherem Facing.',
   ]
     .filter(Boolean)
     .join('\n');

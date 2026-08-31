@@ -5,12 +5,13 @@
  */
 
 import { playSentenceChunks, interruptAudioPipeline } from '../../runtime/audioPipeline';
-import { chunkTextForTts } from './ttsChunker';
+import { sentencesFromFullText } from '../../services/ai/sentenceStream';
 import {
   getActiveTtsSessionCount,
   isAudiblyPlaying,
 } from '../../services/AudioVoiceService';
 import { useFinnusStore } from '../../store/useFinnusStore';
+import { resetFusedTurnSpeech } from './fusedTurnSpeech';
 
 export type SpeechJobKind = 'bridging' | 'main' | 'deep_research';
 
@@ -53,9 +54,41 @@ export function subscribeSpeechQueue(fn: Listener): () => void {
   return () => listeners.delete(fn);
 }
 
+function idleWaitMsForSpokenBridge(text: string): number {
+  const words = text.trim().split(/\s+/).filter(Boolean).length;
+  return Math.min(28_000, Math.max(8_000, Math.round((words / 2.2) * 1000) + 5_000));
+}
+
+export function hasBridgingJob(): boolean {
+  return (
+    currentJob?.kind === 'bridging' ||
+    queue.some((j) => j.kind === 'bridging')
+  );
+}
+
+/**
+ * Bridge komplett zu Ende — Hauptantwort hängt danach an, ohne sich gegenseitig
+ * abzuschneiden. Pump darf derweil schon Sätze sammeln.
+ */
+export async function waitForBridgingToFinish(
+  timeoutMs = 28_000,
+): Promise<void> {
+  const deadline = Date.now() + timeoutMs;
+  while (Date.now() < deadline) {
+    if (!hasBridgingJob()) {
+      await waitUntilSpeechIdle(80);
+      return;
+    }
+    await sleep(40);
+  }
+  await waitUntilSpeechIdle(80);
+}
+
 /**
  * Wartet bis wirklich nichts mehr spricht (Sessions + Audible-Flag).
  * Verhindert, dass Main startet während Bridging noch ausklingt.
+ * Nicht auf isPlayingAudio warten — das Flag ist UI und wird beim Enqueue
+ * schon gesetzt, sonst hängt jeder Job am Timeout (600ms–8s „lädt“).
  */
 async function waitUntilSpeechIdle(timeoutMs = 8_000): Promise<void> {
   const deadline = Date.now() + timeoutMs;
@@ -64,8 +97,7 @@ async function waitUntilSpeechIdle(timeoutMs = 8_000): Promise<void> {
   while (Date.now() < deadline) {
     const sessions = getActiveTtsSessionCount();
     const audible = isAudiblyPlaying();
-    const uiPlaying = useFinnusStore.getState().isPlayingAudio;
-    if (sessions <= 0 && !audible && !uiPlaying) return;
+    if (sessions <= 0 && !audible) return;
     await sleep(50);
   }
 }
@@ -78,8 +110,23 @@ export function enqueueSpeech(opts: {
   alreadySpoken?: boolean;
 }): string {
   const id = `sq_${++jobSeq}`;
-  const text = (opts.text ?? '').replace(/\s+/g, ' ').trim();
-  if (!text) return id;
+  let text = (opts.text ?? '').replace(/\s+/g, ' ').trim();
+  if (!text) {
+    if (opts.kind !== 'main') return id;
+    text =
+      'Dazu hab ich gerade nichts Greifbares. Sag nochmal, worum es geht.';
+  }
+
+  try {
+    const { isReisebueroOverlayOpen } = require('../../reisebuero/store') as {
+      isReisebueroOverlayOpen: () => boolean;
+    };
+    if (isReisebueroOverlayOpen() && opts.kind === 'bridging') {
+      return id;
+    }
+  } catch {
+    /* soft */
+  }
 
   // Bridging nach Main derselben Turn ist sinnlos — Main hat Vorrang in der Queue-Logik
   if (
@@ -92,6 +139,43 @@ export function enqueueSpeech(opts: {
 
   if (opts.kind === 'main') {
     mainActiveOrPending = true;
+  }
+
+  // Mood-Bridge: blau halten bis TTS hörbar (kein Idle-Flash nach Generating)
+  try {
+    const st = useFinnusStore.getState();
+    if (!st.isAudiblySpeaking) {
+      st.setIsPlayingAudio(true);
+    }
+  } catch {
+    /* soft */
+  }
+
+  // Bridge + Hauptantwort: immer dieselbe TTS-Session (nicht erst wenn schon live).
+  // Sonst: Pitch/M5 startet Jobs nacheinander mit Idle-Warte → Pausen zwischen Sätzen.
+  if (
+    (opts.kind === 'bridging' || opts.kind === 'main') &&
+    opts.alreadySpoken !== true
+  ) {
+    try {
+      const fused = require('./fusedTurnSpeech') as {
+        fusedEnqueue: (o: {
+          kind: 'bridging' | 'main';
+          text: string;
+          turnId: string;
+        }) => Promise<boolean>;
+        isFusedTurnLive: () => boolean;
+      };
+      void fused.fusedEnqueue({
+        kind: opts.kind,
+        text,
+        turnId: opts.turnId,
+      });
+      if (opts.kind === 'main') mainActiveOrPending = true;
+      return id;
+    } catch {
+      /* fall through — alte Zwei-Job-Queue */
+    }
   }
 
   queue.push({
@@ -144,15 +228,17 @@ async function drain(): Promise<void> {
         continue;
       }
 
-      // Vor Start: sicher idle (kein Rest-Audio vom vorherigen Job)
-      await waitUntilSpeechIdle();
-      // Nach Timeout: hängendes UI-Flag freigeben, sonst blockiert die Queue
-      if (
-        getActiveTtsSessionCount() <= 0 &&
-        !isAudiblyPlaying() &&
-        useFinnusStore.getState().isPlayingAudio
-      ) {
-        useFinnusStore.getState().setIsPlayingAudio(false);
+      // Vor Start: Rest-Audio vom vorherigen Job. Laufende Cover-Bridge nicht abwürgen.
+      // alreadySpoken = Live-Pump läuft schon — nicht auf Idle warten (sonst 8s-Loch).
+      if (!next.alreadySpoken) {
+        await waitUntilSpeechIdle(600);
+        if (
+          getActiveTtsSessionCount() <= 0 &&
+          !isAudiblyPlaying() &&
+          useFinnusStore.getState().isPlayingAudio
+        ) {
+          useFinnusStore.getState().setIsPlayingAudio(false);
+        }
       }
       if (abortedTurnId && next.turnId === abortedTurnId) continue;
 
@@ -161,22 +247,32 @@ async function drain(): Promise<void> {
 
       try {
         if (next.alreadySpoken) {
-          // Mic/Bridge-Pfad hat TTS schon — nur Idle abwarten
-          await waitUntilSpeechIdle();
-        } else {
-          // Ein Stream, gleiche Priority — keine Preemption Bridging↔Main
-          await playSentenceChunks(
-            (async function* () {
-              const parts = chunkTextForTts(next.text);
-              if (parts.length === 0) {
-                yield next.text;
-                return;
-              }
-              for (const p of parts) yield p;
-            })(),
-            undefined,
-            { priority: 'question' },
+          // Mic/Bridge-Pfad hat TTS schon — Idle bis die Einleitung wirklich fertig ist
+          await waitUntilSpeechIdle(
+            next.kind === 'bridging'
+              ? idleWaitMsForSpokenBridge(next.text)
+              : 8_000,
           );
+        } else {
+          let skipSecondSession = false;
+          try {
+            const { isFusedTurnLive } = require('./fusedTurnSpeech') as {
+              isFusedTurnLive: () => boolean;
+            };
+            skipSecondSession =
+              isFusedTurnLive() &&
+              (next.kind === 'bridging' || next.kind === 'main');
+          } catch {
+            /* soft */
+          }
+          if (!skipSecondSession) {
+            // Phrase-Stream (First-Hook ≤100 + Prefetch) — keine 600er-Blöcke
+            await playSentenceChunks(
+              sentencesFromFullText(next.text),
+              undefined,
+              { priority: 'question' },
+            );
+          }
         }
       } catch {
         /* soft — nächster Job trotzdem */
@@ -189,12 +285,15 @@ async function drain(): Promise<void> {
         mainActiveOrPending = queue.some((j) => j.kind === 'main');
       }
 
-      // Nach Bridging sofort Idle prüfen, dann Main ohne lange Pause
-      await waitUntilSpeechIdle();
-      // Mikro-Pause nur nach Bridging → Main (natürlicher Anschluss, kein Overlap)
-      if (next.kind === 'bridging' && queue.some((j) => j.kind === 'main')) {
-        await sleep(120);
-      }
+      // Nach Bridging: nur Mikro-Settle, dann Main. Lange Idle-Pause = hörbare Lücke.
+      await waitUntilSpeechIdle(
+        next.alreadySpoken && next.kind === 'bridging'
+          ? idleWaitMsForSpokenBridge(next.text)
+          : next.kind === 'bridging' && queue.some((j) => j.kind === 'main')
+            ? 80
+            : 350,
+      );
+      // Keine Extra-Pause zwischen Jobs — Fusion hängt in derselben Session.
     }
   } finally {
     currentJob = null;
@@ -213,6 +312,11 @@ export async function bargeInFlush(turnId?: string): Promise<void> {
   queue = [];
   mainActiveOrPending = false;
   currentJob = null;
+  try {
+    resetFusedTurnSpeech();
+  } catch {
+    /* soft */
+  }
   emit({ type: 'flush' });
   await interruptAudioPipeline();
   setTimeout(() => {

@@ -8,6 +8,7 @@ import type {
   EnergyLevel,
   MobilityMode,
   MustHaveStyleId,
+  TourLengthPref,
   TouristVsInsider,
   TravelParty,
   UserProfile,
@@ -39,7 +40,40 @@ export const ENERGY_OPTIONS: PrefOption<EnergyLevel>[] = [
   { id: 'low', label: 'Ruhig', hint: 'Viele Pausen, wenig Hetze' },
   { id: 'medium', label: 'Ausgewogen', hint: 'Klassisches Tempo' },
   { id: 'high', label: 'Aktiv', hint: 'Viel sehen, wenig Leerlauf' },
+  { id: 'extreme', label: 'Extrem', hint: 'Volle Power — wenig Pause' },
 ];
+
+export const TOUR_LENGTH_OPTIONS: PrefOption<TourLengthPref>[] = [
+  { id: 'fewer_stops', label: 'Weniger Stops', hint: 'Entspannt, weniger Wechsel' },
+  { id: 'balanced', label: 'Mittelmaß', hint: 'Ausgewogene Tour' },
+  { id: 'more_stops', label: 'Mehr Stops', hint: 'Viel entdecken' },
+  { id: 'max_stops', label: 'Durchpasten', hint: 'Maximum — richtig voll' },
+];
+
+/** Sync Tourlänge-Chips → experiencePrefs. */
+export function patchFromTourLength(
+  id: TourLengthPref,
+  draft: UserProfile,
+): Partial<UserProfile> {
+  return {
+    tourLengthPref: id,
+    experiencePrefs: {
+      ...draft.experiencePrefs,
+      tour_stops:
+        id === 'more_stops' || id === 'max_stops'
+          ? 'yes'
+          : id === 'fewer_stops'
+            ? 'no'
+            : 'neutral',
+      kurztrip:
+        id === 'fewer_stops'
+          ? 'yes'
+          : id === 'more_stops' || id === 'max_stops'
+            ? 'no'
+            : 'neutral',
+    },
+  };
+}
 
 export const BUDGET_OPTIONS: PrefOption<BudgetCategory>[] = [
   {
@@ -71,7 +105,7 @@ export const TOURIST_MODE_OPTIONS: PrefOption<TouristVsInsider>[] = [
   },
 ];
 
-/** Must-haves: Mehrfachauswahl — Findus mixt die gewählten Stile. */
+/** Must-haves: Mehrfachauswahl — Yorro mixt die gewählten Stile. */
 export const MUST_HAVE_STYLE_OPTIONS: PrefOption<MustHaveStyleId>[] = [
   { id: 'tourist', label: 'Typisch Touri', hint: 'Klassiker & Highlights' },
   { id: 'insider', label: 'Weg vom Trubel', hint: 'Lokal & abseits' },

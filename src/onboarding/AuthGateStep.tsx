@@ -11,6 +11,7 @@ import {
   StepSubtitle,
   StepTitle,
 } from './OnboardingUI';
+import { SocialAuthButtons } from '../components/account/SocialAuthButtons';
 import { colors, spacing } from '../constants/theme';
 
 export type AuthGateChoice = 'guest' | 'login' | 'register';
@@ -85,20 +86,15 @@ export function AuthGateStep({
     <OnboardingShell>
       <StepTitle>Konto oder Gast?</StepTitle>
       <StepSubtitle>
-        Mit Konto bleiben Stempelkarte, Pläne und Prefs auf dem neuen Gerät.
+        Mit Konto bleiben Stempelkarte, Fog, Pläne und Prefs auf dem neuen Gerät.
         Als Gast reicht der Vorname — alles bleibt nur lokal.
       </StepSubtitle>
 
       <View style={styles.stack}>
-        <PrimaryButton
-          label="Mit Google anmelden"
-          onPress={onGoogle}
-          disabled={!!busy}
-        />
-        <PrimaryButton
-          label="Mit Apple anmelden"
-          onPress={onApple}
-          disabled={!!busy}
+        <SocialAuthButtons
+          onGoogle={onGoogle}
+          onApple={onApple}
+          busy={busy}
         />
         <SecondaryButton
           label="Per E-Mail (Magic Link)"

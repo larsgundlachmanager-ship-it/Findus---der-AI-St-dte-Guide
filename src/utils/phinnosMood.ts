@@ -5,21 +5,22 @@ export function derivePhinnosMood(opts: {
   isListening: boolean;
   isFinalizing: boolean;
   isGenerating: boolean;
-  /** Legacy: Session busy — nicht für „Ich erzähle“ */
+  /** Legacy: Session busy — nicht allein Thinking (sonst Dauer-Drehen wenn sticky) */
   isPlayingAudio: boolean;
   /** Echt hörbar — steuert speaking/standby */
   isAudiblySpeaking?: boolean;
   navRouteLoading?: boolean;
+  /** Tour läuft schon — Ladebalken darf Orb nicht dauerblau halten. */
+  navActive?: boolean;
 }): FindusMood {
-  if (opts.isListening) return 'listening';
-  if (
-    opts.isFinalizing ||
-    opts.isGenerating ||
-    opts.navRouteLoading
-  ) {
+  // Blau (denken) vor Rot (Mic): Recherche darf nicht wie „sprich jetzt“ aussehen.
+  if (opts.isAudiblySpeaking) return 'speaking';
+  const routePending = Boolean(opts.navRouteLoading) && !opts.navActive;
+  if (opts.isFinalizing || opts.isGenerating || routePending) {
     return 'thinking';
   }
-  // Nur bei echtem Audio „Ich erzähle“ — sonst Standby (idle)
-  if (opts.isAudiblySpeaking) return 'speaking';
+  if (opts.isListening) return 'listening';
+  // isPlayingAudio allein = kein Lade-Spinner (verhindert „überlegt“-Falschpositiv)
+  void opts.isPlayingAudio;
   return 'idle';
 }

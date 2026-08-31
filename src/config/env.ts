@@ -39,6 +39,12 @@ export const env = {
   openAiApiKey: () => getPublicEnv('EXPO_PUBLIC_OPENAI_API_KEY'),
   /** Cartesia sonic-3.5 TTS (primäre Stimme). */
   cartesiaApiKey: () => getPublicEnv('EXPO_PUBLIC_CARTESIA_API_KEY'),
+  /**
+   * Optional: Cartesia Pronunciation Dictionary ID (Playground).
+   * Gilt request-weit für alle Stimmen.
+   */
+  cartesiaPronunciationDictId: () =>
+    getPublicEnv('EXPO_PUBLIC_CARTESIA_PRONUNCIATION_DICT_ID').trim(),
   geminiApiKey: () =>
     getPublicEnv('EXPO_PUBLIC_GEMINI_API_KEY') ||
     getPublicEnv('EXPO_PUBLIC_GOOGLE_API_KEY'),
@@ -70,12 +76,13 @@ export const env = {
   },
   /**
    * OSRM Directions Base (`…/route/v1`).
-   * Prod: eigene Findus-OSRM-URL via EXPO_PUBLIC_OSRM_BASE setzen.
-   * Leer → Public-Demo (nur Dev; Rate-Limits / Timeouts möglich).
+   * Prod: eigene Yorro-OSRM-URL via EXPO_PUBLIC_OSRM_BASE setzen.
+   * Leer → FOSSGIS Fuß-Routing (googleMapsNav wählt foot/bike).
+   * Nie project-osrm.org für Fuß/Rad — dort nur Auto-Graph.
    */
   osrmBaseUrl: () =>
     getPublicEnv('EXPO_PUBLIC_OSRM_BASE').replace(/\/$/, '') ||
-    'https://router.project-osrm.org/route/v1',
+    'https://routing.openstreetmap.de/routed-foot/route/v1',
   /**
    * Hands-Free Reboot: Google-first routing retired.
    * Always OSRM primary; Google Directions only as emergency fallback inside fetchRouteDirectionsResult.
@@ -125,7 +132,7 @@ export const env = {
   /** DiscoverCars Mietwagen Affiliate (Primär für BOOK_CAR_RENTAL). */
   discoverCarsAffiliateUrl: () =>
     getPublicEnv('EXPO_PUBLIC_DISCOVER_CARS_AFFILIATE_URL') ||
-    'https://www.discovercars.com/?a_aid=Findus-Ai',
+    'https://www.discovercars.com/?a_aid=Yorro-Ai',
   /** Expedia Partnerize camref (Affiliate). */
   expediaCamref: () =>
     getPublicEnv('EXPO_PUBLIC_EXPEDIA_CAMREF') || '1101l5Qcvp',
@@ -134,10 +141,10 @@ export const env = {
     getPublicEnv('EXPO_PUBLIC_EXPEDIA_CREATIVEREF') || '1100l86803',
   /** Expedia affiliate siteid (meist 1). */
   expediaSiteId: () =>
-    getPublicEnv('EXPO_PUBLIC_EXPEDIA_SITE_ID') || '1',
+    getPublicEnv('EXPO_PUBLIC_EXPEDIA_SITE_ID') || '20',
   /** Optional: Expedia adref aus Link-Builder. */
   expediaAdref: () => getPublicEnv('EXPO_PUBLIC_EXPEDIA_ADREF') || '',
-  /** AWIN Publisher-ID (Findus). */
+  /** AWIN Publisher-ID (Yorro). */
   awinPublisherId: () =>
     getPublicEnv('EXPO_PUBLIC_AWIN_PUBLISHER_ID') || '3021215',
   /** TravelSecure AWIN Tracking-URL (optional Override). */
@@ -152,6 +159,32 @@ export const env = {
   /** Tiqets AWIN Tracking-URL (optional volle Override). */
   tiqetsAffiliateUrl: () =>
     getPublicEnv('EXPO_PUBLIC_TIQETS_AFFILIATE_URL'),
+  /** Konfetti / gokonfetti AWIN Merchant-ID (Default 31804). */
+  konfettiAwinMid: () =>
+    getPublicEnv('EXPO_PUBLIC_KONFETTI_AWIN_MID') || '31804',
+  /** Konfetti AWIN Tracking-URL (optional volle Override). */
+  konfettiAffiliateUrl: () =>
+    getPublicEnv('EXPO_PUBLIC_KONFETTI_AFFILIATE_URL'),
+  reservixAwinMid: () =>
+    getPublicEnv('EXPO_PUBLIC_RESERVIX_AWIN_MID') || '31293',
+  reservixAffiliateUrl: () =>
+    getPublicEnv('EXPO_PUBLIC_RESERVIX_AFFILIATE_URL'),
+  /** camping.info AWIN Tracking-URL (optional Override). */
+  campingInfoAffiliateUrl: () =>
+    getPublicEnv('EXPO_PUBLIC_CAMPING_INFO_AFFILIATE_URL'),
+  /** Solmar DE AWIN Tracking-URL (optional Override). */
+  solmarAffiliateUrl: () =>
+    getPublicEnv('EXPO_PUBLIC_SOLMAR_AFFILIATE_URL'),
+  check24PackageAffiliateUrl: () =>
+    getPublicEnv('EXPO_PUBLIC_CHECK24_PACKAGE_AFFILIATE_URL'),
+  check24CarAffiliateUrl: () =>
+    getPublicEnv('EXPO_PUBLIC_CHECK24_CAR_AFFILIATE_URL'),
+  /** ab-in-den-urlaub DE AWIN Tracking-URL (optional Override). */
+  abInDenUrlaubAffiliateUrl: () =>
+    getPublicEnv('EXPO_PUBLIC_AB_IN_DEN_URLAUB_AFFILIATE_URL'),
+  /** weg.de DE AWIN Tracking-URL (optional Override). */
+  wegDeAffiliateUrl: () =>
+    getPublicEnv('EXPO_PUBLIC_WEG_DE_AFFILIATE_URL'),
   /** Bounce Gepäckaufbewahrung Affiliate-URL. */
   bounceLuggageUrl: () =>
     getPublicEnv('EXPO_PUBLIC_BOUNCE_LUGGAGE_URL') ||

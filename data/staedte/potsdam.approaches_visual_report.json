@@ -1,0 +1,2114 @@
+{
+  "city": "potsdam",
+  "apply": true,
+  "touched": 263,
+  "approachesFixed": 263,
+  "faqAdded": 0,
+  "data_version": 28,
+  "rows": [
+    {
+      "id": "potsdam_potsdam_hauptbahnhof",
+      "name": "Potsdam Hauptbahnhof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_s_potsdam_hauptbahnhof_nord_ilb",
+      "name": "S Potsdam Hauptbahnhof/Nord ILB",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_potsdam_hbf",
+      "name": "Potsdam Hbf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_s_potsdam_hauptbahnhof",
+      "name": "S Potsdam Hauptbahnhof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_hauptbahnhof_friedrich_engels_str",
+      "name": "Hauptbahnhof/Friedrich-Engels-Str.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_bahnhof_babelsberg",
+      "name": "Bahnhof Babelsberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_charlottenhof",
+      "name": "Charlottenhof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_park_sanssouci",
+      "name": "Park Sanssouci",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_platz_der_einheit_west",
+      "name": "Platz der Einheit/West",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_parkhaus_apcoa_potsdam_hauptbahnhof",
+      "name": "Parkhaus APCOA Potsdam Hauptbahnhof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_rehbrucke",
+      "name": "Rehbrücke",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_schifffahrt_in_potsdam",
+      "name": "SCHIFFFAHRT in POTSDAM",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_fahre_f1_auf_dem_kiewitt_hermannswerder",
+      "name": "Fähre F1 - Auf dem Kiewitt - Hermannswerder",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_potsdam_hermannswerder_fahre",
+      "name": "Potsdam, Hermannswerder/Fähre",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_havelbucht_potsdam_city_hafen",
+      "name": "Havelbucht Potsdam City Hafen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_anlegestelle_station_3_potsdamer_wassertaxi_cecilienhof_meierei",
+      "name": "Anlegestelle Station 3 Potsdamer Wassertaxi \"Cecilienhof - Meierei\"",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_anlegestelle_aldi_bootsliegeplatz",
+      "name": "Anlegestelle - Aldi Bootsliegeplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_lange_brucke",
+      "name": "Lange Brücke",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_anlegestelle_station_6_potsdamer_wassertaxi_schiffbauergasse",
+      "name": "Anlegestelle Station 6 Potsdamer Wassertaxi \"Schiffbauergasse\"",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_steganlage_havelbucht",
+      "name": "Steganlage Havelbucht",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_marina_am_tiefen_see",
+      "name": "Marina am Tiefen See",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_yachthafen_potsdam",
+      "name": "Yachthafen Potsdam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_potsdam_museum_forum_fur_kunst_und_geschichte",
+      "name": "Potsdam Museum – Forum für Kunst und Geschichte",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_museum_barberini",
+      "name": "Museum Barberini",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_das_minsk_kunsthaus_in_potsdam",
+      "name": "DAS MINSK Kunsthaus in Potsdam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_filmmuseum_potsdam",
+      "name": "Filmmuseum Potsdam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_naturkundemuseum_potsdam",
+      "name": "Naturkundemuseum Potsdam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_brandenburg_museum_fur_zukunft_gegenwart_und_geschichte",
+      "name": "Brandenburg Museum für Zukunft, Gegenwart und Geschichte",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_nano_wissenschaft_begreifen",
+      "name": "NANO - Wissenschaft begreifen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_bildergalerie_von_sanssouci",
+      "name": "Bildergalerie von Sanssouci",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_museum_fluxus",
+      "name": "museum FLUXUS+",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_historische_muhle_von_sanssouci",
+      "name": "Historische Mühle von Sanssouci",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_museum_jan_bouman_haus",
+      "name": "Museum Jan Bouman Haus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_st_nikolaikirche_potsdam",
+      "name": "St. Nikolaikirche Potsdam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_kapelle_st_josef_krankenhaus_potsdam",
+      "name": "Kapelle St-Josef-Krankenhaus Potsdam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_kirche_st_peter_und_paul",
+      "name": "Kirche St. Peter und Paul",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_nagelkreuzkapelle",
+      "name": "Nagelkreuzkapelle",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_friedenskirche",
+      "name": "Friedenskirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_franzosische_kirche",
+      "name": "Französische Kirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_martin_luther_kapelle_der_evangelischen_auferstehungsgemeinde_potsdam",
+      "name": "Martin-Luther-Kapelle der evangelischen Auferstehungsgemeinde Potsdam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_neuapostolische_kirche_potsdam",
+      "name": "Neuapostolische Kirche Potsdam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_alte_neuendorfer_kirche",
+      "name": "Alte Neuendorfer Kirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_arnim_sche_kapelle",
+      "name": "Arnim'sche Kapelle",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_klein_glienicker_kapelle",
+      "name": "Klein Glienicker Kapelle",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_erloserkirche",
+      "name": "Erlöserkirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_alexander_newski_gedachtniskirche",
+      "name": "Alexander-Newski-Gedächtniskirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_feg_mittendrin_kirche_fur_die_stadt",
+      "name": "FeG mittendrin - Kirche für die Stadt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_the_stone_church_potsdam",
+      "name": "The Stone Church Potsdam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_evangelisch_freikirchliche_gemeinde_potsdam_baptisten_kirche",
+      "name": "Evangelisch-Freikirchliche Gemeinde Potsdam (Baptisten-Kirche)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_evangelische_erloserkirchengemeinde_potsdam",
+      "name": "Evangelische Erlöserkirchengemeinde Potsdam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_denkmal_fur_den_unbekannten_deserteur_mehmet_aksoy",
+      "name": "Denkmal für den unbekannten Deserteur - Mehmet Aksoy",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_buchstaben_skulptur_potsdam",
+      "name": "Buchstaben-Skulptur POTSDAM",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_denkmal_f_die_gefallenen_sanitater_im_1_wk",
+      "name": "Denkmal f. die gefallenen Sanitäter im 1. WK",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_rossbrunnen",
+      "name": "Roßbrunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_statuenrondell_ohne_namen",
+      "name": "Statuenrondell ohne Namen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_spielplatz_am_brunnen",
+      "name": "Spielplatz Am Brunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_springbrunnen",
+      "name": "Springbrunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_freundschaftsbrunnen_gorch_wenske_heinz_dubel_eberhard_bachmann",
+      "name": "Freundschaftsbrunnen - Gorch Wenske, Heinz Dübel, Eberhard Bachmann",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_planetengarten_potsdam",
+      "name": "Planetengarten Potsdam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_berserker_skulptur",
+      "name": "Berserker (Skulptur)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_springbrunnen_auf_dem_luisenplatz",
+      "name": "Springbrunnen auf dem Luisenplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_brunnen",
+      "name": "Brunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_herz_und_flamme_der_revolution",
+      "name": "Herz und Flamme der Revolution",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_seitigkeiten_volker_bartsch_potsdam_walk_of_modern_art",
+      "name": "SeiTiGKeiTeN- Volker Bartsch - Potsdam Walk Of Modern Art",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_neptunbassin_mit_stahl_nebel_lichtskulptur_neptuns_triumph",
+      "name": "Neptunbassin mit Stahl-Nebel-Lichtskulptur „Neptuns Triumph“",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_gedenkstele_jurgen_von_woyski",
+      "name": "Gedenkstele - Jürgen von Woyski",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_skulpturensammlung",
+      "name": "Skulpturensammlung",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_liebespaar_unter_dem_schirm_jurgen_von_woyski",
+      "name": "Liebespaar unter dem Schirm - Jürgen von Woyski",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_park_babelsberg",
+      "name": "Park Babelsberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_uferpark_landzunge",
+      "name": "Uferpark Landzunge",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_volkspark_potsdam",
+      "name": "Volkspark Potsdam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_flatowturm_im_park_babelsberg",
+      "name": "Flatowturm im Park Babelsberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_nuthepark",
+      "name": "Nuthepark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_freundschaftsinsel",
+      "name": "Freundschaftsinsel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_in_den_wallen",
+      "name": "In den Wällen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_neuer_garten",
+      "name": "Neuer Garten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_stadtgarten_am_obelisk",
+      "name": "Stadtgarten am Obelisk",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_rehgarten",
+      "name": "Rehgarten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_normannischer_turm_auf_dem_ruinenberg",
+      "name": "Normannischer Turm auf dem Ruinenberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_musenrondell_im_park_sanssouci",
+      "name": "Musenrondell im Park Sanssouci",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_grosser_wiesenpark",
+      "name": "Großer Wiesenpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_jachthafen_am_waldbad_templiner_see",
+      "name": "Jachthafen Am Waldbad Templiner See",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_belvedere_auf_dem_muhlenberg",
+      "name": "Belvedere auf dem Mühlenberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_kleiner_wiesenpark",
+      "name": "Kleiner Wiesenpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_der_turm",
+      "name": "Der Turm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_einsteinturm",
+      "name": "Einsteinturm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_domizil_leuchtturm_ggmbh_wohngruppe_potsdam",
+      "name": "Domizil Leuchtturm gGmbH | Wohngruppe Potsdam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_kleiner_ravensberg",
+      "name": "Kleiner Ravensberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_turmspitze_der_garnisonkirche",
+      "name": "Turmspitze der Garnisonkirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_baumhaus",
+      "name": "Baumhaus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_aussichtspunkt_birnenweg",
+      "name": "Aussichtspunkt Birnenweg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_domizil_leuchtturm_ggmbh_projekt_indoor_ambulante_hilfen_potsdam",
+      "name": "Domizil Leuchtturm gGmbH | Projekt Indoor & Ambulante Hilfen Potsdam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_blu_das_sport_und_freizeitbad_potsdam",
+      "name": "blu - Das Sport- und Freizeitbad - Potsdam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_hyzernauts_discgolfparcours_volkspark_potsdam",
+      "name": "Hyzernauts Discgolfparcours, Volkspark Potsdam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_minigolf_pit_pat",
+      "name": "Minigolf / Pit-Pat",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_sportplatz_potsdamer_kickers_94",
+      "name": "Sportplatz Potsdamer Kickers 94",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_luftschiffhafen_potsdam",
+      "name": "Luftschiffhafen Potsdam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_fitness_parcours",
+      "name": "Fitness-Parcours",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_stadtbad_park_babelsberg",
+      "name": "Stadtbad Park Babelsberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_schwimmbad_im_werner_alfred_bad",
+      "name": "Schwimmbad im Werner-Alfred-Bad",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_sportplatz_sandscholle",
+      "name": "Sportplatz Sandscholle",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_potsdamer_sport_union_04_e_v",
+      "name": "Potsdamer Sport-Union 04 e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_sportforum_potsdam_waldstadt",
+      "name": "Sportforum Potsdam Waldstadt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_cityfit_hochschulsport_potsdam",
+      "name": "cityFIT Hochschulsport Potsdam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_spielbank_potsdam",
+      "name": "Spielbank Potsdam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_rathaus_stadt_potsdam",
+      "name": "Rathaus Stadt Potsdam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_burgerservicecenter_potsdam",
+      "name": "Bürgerservicecenter Potsdam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_stadtverwaltung_der_landeshauptstadt_potsdam",
+      "name": "Stadtverwaltung der Landeshauptstadt Potsdam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_historischer_pegelstandsanzeiger",
+      "name": "Historischer Pegelstandsanzeiger",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_stadtschloss",
+      "name": "Stadtschloss",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_kellertorwache",
+      "name": "Kellertorwache",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_neuer_markt",
+      "name": "Neuer Markt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_jagertor_potsdam",
+      "name": "Jägertor Potsdam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_alte_wache",
+      "name": "Alte Wache",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_nauener_tor",
+      "name": "Nauener Tor",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_alter_stadtkanal",
+      "name": "Alter Stadtkanal",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_altes_sud_und_kesselhaus",
+      "name": "Altes Sud-und Kesselhaus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_reste_der_potsdamer_stadtmauer",
+      "name": "Reste der Potsdamer Stadtmauer",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_potsdams_neue_mitte",
+      "name": "Potsdams Neue Mitte",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_alter_markt_5",
+      "name": "Alter Markt 5",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_",
+      "name": "Памятник погибшим советским воинам с Мемориалом",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_aussichtspunkt_auf_der_freundschaftsinsel",
+      "name": "Aussichtspunkt auf der Freundschaftsinsel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_kleiner_aussichtspunkt",
+      "name": "Kleiner Aussichtspunkt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_aussichtspunkt_havel",
+      "name": "Aussichtspunkt Havel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_aussichtspunkt_am_griebnitzsee_philosophenwiese",
+      "name": "Aussichtspunkt am Griebnitzsee \"Philosophenwiese\"",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_aussichtspunkt_heiliger_see",
+      "name": "Aussichtspunkt Heiliger See",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_aussichtspunkt_griebnitzsee",
+      "name": "Aussichtspunkt Griebnitzsee",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_havelblick",
+      "name": "Havelblick",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_aussichtspunkt_neuer_garten",
+      "name": "Aussichtspunkt Neuer Garten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_aussichtspunkt_1_templiner_see",
+      "name": "Aussichtspunkt 1 Templiner See",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_belvedere_pfingstberg",
+      "name": "Belvedere Pfingstberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_hans_otto_theater",
+      "name": "Hans Otto Theater",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_schlosstheater_im_neuen_palais",
+      "name": "Schlosstheater im Neuen Palais",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_theaterschiff_potsdam",
+      "name": "Theaterschiff Potsdam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_fabrik_potsdam",
+      "name": "fabrik Potsdam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_reithalle",
+      "name": "Reithalle",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_theater_poetenpack",
+      "name": "Theater Poetenpack",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_heckentheater_am_neuen_palais",
+      "name": "Heckentheater am Neuen Palais",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_neues_globe_theater",
+      "name": "Neues Globe Theater",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_kabarett_obelisk_e_v",
+      "name": "Kabarett Obelisk e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_lieder_spiel_theater_pampelmuse",
+      "name": "Lieder-Spiel-Theater Pampelmuse",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_open_air_kinosommer_am_waschhaus",
+      "name": "Open Air Kinosommer am Waschhaus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_nikolaisaal_potsdam",
+      "name": "Nikolaisaal Potsdam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_probebuhne",
+      "name": "Probebühne",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_musicalminds_potsdam",
+      "name": "MusicalMinds Potsdam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_erholungswald_ravensberge",
+      "name": "Erholungswald Ravensberge",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_uferpromenade_an_der_neustadter_bucht",
+      "name": "Uferpromenade an der Neustädter Bucht",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_uferweg",
+      "name": "Uferweg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_arado_rundgang",
+      "name": "Arado Rundgang",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_wanderkonzepte",
+      "name": "Wanderkonzepte",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_wasserturm_hermannswerder",
+      "name": "Wasserturm Hermannswerder",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_berliner_mauerweg_altes_sperrkreuz",
+      "name": "Berliner Mauerweg - \"Altes Sperrkreuz\"",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_uferradweg",
+      "name": "Uferradweg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_pmsg_potsdam_marketing_und_service_gmbh",
+      "name": "PMSG Potsdam Marketing und Service GmbH",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_allgemeiner_deutscher_fahrrad_club_ortsgruppe_potsdam",
+      "name": "Allgemeiner Deutscher Fahrrad-Club Ortsgruppe Potsdam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_helmuts_fahrrad_center_potsdam",
+      "name": "Helmuts Fahrrad Center Potsdam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_alter_fritz_stadttourismus_schlosserrundfahrten_susanne_lang",
+      "name": "Alter Fritz\" Stadttourismus Schlösserrundfahrten Susanne Lang",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_pedales_radstation",
+      "name": "Pedales Radstation",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_fahrrad_eickhoff_gbr",
+      "name": "Fahrrad Eickhoff GbR",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_brucke_am_hasengraben",
+      "name": "Brücke am Hasengraben",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_raderei_am_kanal",
+      "name": "räderei am kanal",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_filmpark_babelsberg",
+      "name": "Filmpark Babelsberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_biosphare_potsdam",
+      "name": "Biosphäre Potsdam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_wald_jagd_naturerlebnis_e_v",
+      "name": "Wald-Jagd-Naturerlebnis e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_wisteria_s_room",
+      "name": "Wisteria's Room",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_feentraum_gmbh",
+      "name": "Feentraum GmbH",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_uckerose_rosenboutique",
+      "name": "Uckerose Rosenboutique",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_handwerksstube_dregeno_fachgeschaft",
+      "name": "Handwerksstube | DREGENO Fachgeschäft",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_butlers_home24_potsdam_brandenburger_strasse",
+      "name": "BUTLERS@home24 Potsdam Brandenburger Straße",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_rotholz",
+      "name": "ROTHOLZ",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_galerie_waldbach_what_the_artist_made",
+      "name": "Galerie Waldbach - What The Artist Made",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_zeiteinander_das_onlineportal_fur_nachhaltige_erlebnisse_geschenke",
+      "name": "zeiteinander - das Onlineportal für nachhaltige Erlebnisse & Geschenke",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_schloss_charlottenhof",
+      "name": "Schloss Charlottenhof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_marmorpalais",
+      "name": "Marmorpalais",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_blick_auf_die_freundschaftsinsel",
+      "name": "Blick auf die Freundschaftsinsel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_neues_palais",
+      "name": "Neues Palais",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_dampfmaschinenhaus",
+      "name": "Dampfmaschinenhaus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_neptungrotte",
+      "name": "Neptungrotte",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_chinesisches_haus_im_park_sanssouci",
+      "name": "Chinesisches Haus im Park Sanssouci",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_die_statue_der_flora",
+      "name": "Die Statue der Flora",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_siegessaule",
+      "name": "Siegessäule",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_denkmal_der_heldenjungfrau_eleonore_prochaska",
+      "name": "Denkmal der Heldenjungfrau Eleonore Prochaska",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_obelisk_der_nachhaltigkeit",
+      "name": "Obelisk der Nachhaltigkeit",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_kunstraum_potsdam",
+      "name": "Kunstraum Potsdam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_kunstverein_kunsthaus_potsdam_e_v",
+      "name": "Kunstverein KunstHaus Potsdam e. V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_kunsthaus_sans_titre",
+      "name": "Kunsthaus sans titre",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_galerie_kunst_kontor",
+      "name": "Galerie KUNST-KONTOR",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_galerie_schindler",
+      "name": "Galerie Schindler",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_galeria_potsdam_stadtpalais",
+      "name": "GALERIA Potsdam Stadtpalais",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_gedenkstatte_leistikowstrasse_potsdam",
+      "name": "Gedenkstätte Leistikowstraße Potsdam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_a2_galerie",
+      "name": "A2 Galerie",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_katholische_kirchengemeinde_st_antonius",
+      "name": "Katholische Kirchengemeinde St. Antonius",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_schloss_babelsberg",
+      "name": "Schloss Babelsberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_berliner_tor_seitenflugel",
+      "name": "Berliner Tor Seitenflügel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_schloss_lindstedt",
+      "name": "Schloss Lindstedt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_potsdam_schloss_sanssouci",
+      "name": "Potsdam, Schloss Sanssouci",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_stiftung_preussische_schlosser_und_garten_berlin_brandenburg",
+      "name": "Stiftung Preußische Schlösser und Gärten Berlin-Brandenburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_botanischer_garten_der_universitat_potsdam",
+      "name": "Botanischer Garten der Universität Potsdam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_kaskade",
+      "name": "Kaskade",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_campusgarten_potsdam",
+      "name": "Campusgarten Potsdam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_sizilianischer_garten",
+      "name": "Sizilianischer Garten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_teich",
+      "name": "Teich",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_potsdamer_speicherstadt",
+      "name": "Potsdamer Speicherstadt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_fussgangerbrucke_uferweg",
+      "name": "Fußgängerbrücke Uferweg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_schiffbauergasse_uferweg",
+      "name": "Schiffbauergasse/Uferweg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_templiner_see",
+      "name": "Templiner See",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_velo_west_fahrrader",
+      "name": "Velo-West Fahrräder",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_puppenbuhne_burattino",
+      "name": "Puppenbühne Burattino",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_das_theater_der_sprachen_potsdam",
+      "name": "Das Theater der Sprachen Potsdam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_improvisationstheater_potsdam_e_v",
+      "name": "Improvisationstheater Potsdam e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_yachthafen_nymphaea",
+      "name": "Yachthafen Nymphaea",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_neuer_steg_an_der_havel",
+      "name": "Neuer Steg an der Havel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_potsdam_bootscharter",
+      "name": "Potsdam Bootscharter",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_bootsvermietung_moisl_templiner_see",
+      "name": "Bootsvermietung Moisl - Templiner See",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_private_bootsausfluge_potsdam",
+      "name": "Private Bootsausflüge Potsdam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_fritz_peter_stadtfuhrungen_in_potsdam",
+      "name": "Fritz & Peter | Stadtführungen in Potsdam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_bella_potsdam",
+      "name": "Bella Potsdam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_tagesfahrten_grossy_tours",
+      "name": "Tagesfahrten - Großy Tours",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_stadtrundgang_potsdam_zum_kennenlernen",
+      "name": "Stadtrundgang - Potsdam zum Kennenlernen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_berlins_taiga_stadtfuhrung_potsdam",
+      "name": "Berlins Taiga - Stadtführung Potsdam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_confiserie_felicitas_gmbh_potsdam",
+      "name": "Confiserie Felicitas GmbH Potsdam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_menuett_musik_kunst_salon_geschenkeladen",
+      "name": "Menuett - Musik & Kunst Salon - Geschenkeladen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_petermann_potsdam_burobedarf_geschenkartikel_schreibwaren",
+      "name": "Petermann Potsdam Bürobedarf Geschenkartikel Schreibwaren",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_lakritzkontor_potsdam",
+      "name": "Lakritzkontor Potsdam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_notfallsets",
+      "name": "Notfallsets",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_wochenmarkt_potsdam_am_bassinplatz",
+      "name": "Wochenmarkt Potsdam am Bassinplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_floh_und_bauernmarkt_auf_dem_weberplatz",
+      "name": "Floh- und Bauernmarkt auf dem Weberplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_thalia_das_programmkino",
+      "name": "Thalia - Das Programmkino",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_7aplus_boulderhalle_potsdam",
+      "name": "7aplus Boulderhalle Potsdam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_abenteuerpark_potsdam_kletterwald",
+      "name": "AbenteuerPark Potsdam Kletterwald",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_kletterturm_kahleberg_in_potsdam",
+      "name": "Kletterturm Kahleberg in Potsdam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_dustere_teiche",
+      "name": "Düstere Teiche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_moosfenn_hochmoor",
+      "name": "Moosfenn Hochmoor",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_deutsches_rotes_kreuz_regionalzentrum_potsdam",
+      "name": "Deutsches Rotes Kreuz -Regionalzentrum Potsdam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_deutsches_rotes_kreuz_drk_kreisverband_potsdam_zauch_belzig",
+      "name": "Deutsches Rotes Kreuz (DRK) Kreisverband Potsdam/Zauch-Belzig",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_potsdam_rote_kreuz_str",
+      "name": "Potsdam, Rote-Kreuz-Str.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_deutsches_rotes_kreuz_drk_katastrophenschutz_zentrum",
+      "name": "Deutsches Rotes Kreuz (DRK) Katastrophenschutz Zentrum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_potsdam_kreuzstr",
+      "name": "Potsdam, Kreuzstr.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_evangelische_erloserkirchengemeinde_potsdam_heilig_kreuz_haus",
+      "name": "Evangelische Erlöserkirchengemeinde Potsdam | Heilig-Kreuz-Haus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_deutsches_rotes_kreuz_drk_heimatstern_potsdam",
+      "name": "Deutsches Rotes Kreuz (DRK) Heimatstern Potsdam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_galerie_sperl",
+      "name": "Galerie Sperl",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "potsdam_schloss_sacrow",
+      "name": "Schloss Sacrow",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "potsdam_aussichtspunkt_fahrlander_see",
+      "name": "Aussichtspunkt Fahrlander See",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "potsdam_kirchberg",
+      "name": "Kirchberg",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "potsdam_reiherberg",
+      "name": "Reiherberg",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "potsdam_berliner_mauerweg_und_waldstrand_sudlicher_krampnitzsee",
+      "name": "Berliner Mauerweg und Waldstrand Südlicher Krampnitzsee",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "potsdam_berliner_mauerweg_potsdamer_route_alter_grenzerpfad",
+      "name": "Berliner Mauerweg - Potsdamer Route, Alter Grenzerpfad",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "potsdam_konigswald_mit_havelseen_und_seeburger_agrarlandschaft",
+      "name": "Königswald mit Havelseen und Seeburger Agrarlandschaft",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "potsdam_persiusturm",
+      "name": "Persiusturm",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "potsdam_potsdam_per_pedales",
+      "name": "Potsdam per Pedales",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "potsdam_park_sacrow",
+      "name": "Park Sacrow",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "potsdam_marina_am_jungfernsee",
+      "name": "Marina am Jungfernsee",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "potsdam_wassersportclub_potsdam_int_e_v_marina_potsd_nf",
+      "name": "Wassersportclub Potsdam Int.e.V., Marina Potsd.NF",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "potsdam_waldhaus_grosser_ravensberg",
+      "name": "Waldhaus Großer Ravensberg",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "potsdam_wegestern_im_wildpark",
+      "name": "Wegestern im Wildpark",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "potsdam_wassersport_potsdam",
+      "name": "Wassersport Potsdam",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "potsdam_kaiser_tour_potsdam",
+      "name": "Kaiser-Tour Potsdam",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "potsdam_nanu_nana",
+      "name": "NANU-NANA",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "potsdam_orangerie_sanssouci",
+      "name": "Orangerie Schloss Sanssouci",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 4,
+      "had_approaches": 1
+    },
+    {
+      "id": "potsdam_hollaendisches_viertel",
+      "name": "Holländisches Viertel",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 4,
+      "had_approaches": 1
+    },
+    {
+      "id": "potsdam_schloss_cecilienhof",
+      "name": "Schloss Cecilienhof",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 4,
+      "had_approaches": 1
+    },
+    {
+      "id": "potsdam_glienicker_bruecke",
+      "name": "Glienicker Brücke",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "potsdam_freundschaftstempel",
+      "name": "Freundschaftstempel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    }
+  ]
+}

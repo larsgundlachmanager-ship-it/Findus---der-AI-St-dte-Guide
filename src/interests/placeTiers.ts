@@ -6,6 +6,13 @@ import { parseTagsJson } from '../services/geo/triggerPolicy';
 import type { Poi } from '../db/types';
 import type { UserProfile } from '../types/userProfile';
 
+export {
+  amenitySkipBlocksProactive,
+  isHardAmenityNoise,
+  isInterestVisitVenue,
+  isNonStoryTouristNoisePoi,
+} from './amenityInterestPolicy';
+
 export type PlaceTier =
   | 'must_have'
   | 'touristic'
@@ -16,7 +23,7 @@ export type PlaceTier =
   | 'neutral';
 
 const AMENITY_SKIP_RE =
-  /\b(zahnarzt|zahnmedizin|arztpraxis|hausarzt|\bpraxis\b|gemeinschaftspraxis|klinik|reinigung|textilreinigung|wäscherei|waescherei|dry\s*clean|parkplatz|parkhaus|tiefgarage|tankstelle|autohaus|versicher|notar|steuerberater)\b/i;
+  /\b(zahnarztpraxis|zahnarzt|zahnmedizin|arztpraxis|hausarzt|\bpraxis\b|gemeinschaftspraxis|klinik|apotheke|apotheker|ärzte|aerzte|\barzt\b|reinigung|textilreinigung|wäscherei|waescherei|dry\s*clean|parkplatz|parkhaus|tiefgarage|tankstelle|autohaus|versicher|notar|steuerberater)\b/i;
 
 const BAKERY_RE = /\b(bäck|baeck|bäcker|baecker|bakery|konditor)\b/i;
 const HOTEL_RE = /\b(hotel|pension|gasthof|hostel)\b/i;

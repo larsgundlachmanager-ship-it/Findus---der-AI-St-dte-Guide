@@ -10,6 +10,7 @@ import {
   maybeRunActionAutoFollowUp,
 } from '../../services/actionHandlerService';
 import { interruptAndNavigateToDiscovery } from '../../services/navigation/contextualDiscovery';
+import { useFinnusStore } from '../../store/useFinnusStore';
 import { shouldShowConfirmationButton } from '../../services/concierge/speechAsksConfirmation';
 import { isCityMapUrl } from '../../services/cityMapService';
 import {
@@ -18,8 +19,34 @@ import {
 } from '../../services/affiliate/prioritizeActions';
 import { recordFindusActionClicked } from '../../services/feedback/executionTracking';
 
-/** User tippt → Speech sofort weg (auch bei Maps/Speisekarte; Ansage kommt danach neu). */
-async function abortAudioOnUserTap(_action?: QuickAction): Promise<void> {
+/** User tippt → Speech weg, außer Link/Buchung (Yorro redet weiter). Mic immer tot. */
+async function abortAudioOnUserTap(action?: QuickAction): Promise<void> {
+  // Antwort kam per UI → Rückfrage-Mic / Live-Listen sofort abbrechen
+  try {
+    const {
+      abortListenSessionForUiChoice,
+    } = await import('../../services/handsFree/scheduleMicAfterAsk');
+    await abortListenSessionForUiChoice(
+      action ? `ui_${action.type}` : 'ui_choice',
+    );
+  } catch {
+    /* soft */
+  }
+  try {
+    const {
+      shouldKeepTalkingOnAction,
+      armLinkBackgroundSpeech,
+    } = require('../../services/speech/backgroundSpeechPolicy') as {
+      shouldKeepTalkingOnAction: (t: string) => boolean;
+      armLinkBackgroundSpeech: (o?: { reason?: string }) => void;
+    };
+    if (action && shouldKeepTalkingOnAction(action.type)) {
+      armLinkBackgroundSpeech({ reason: action.type });
+      return;
+    }
+  } catch {
+    /* soft */
+  }
   try {
     const { stopVoiceOnUserTap } = await import(
       '../../module2/speech/speechQueue'
@@ -141,6 +168,12 @@ export function useConciergeActions(
         recordFindusActionClicked(action, Date.now());
 
         if (action.type === 'START_NAVIGATION') {
+          // Say–Do: blauer Ladebalken sofort, bevor Journey/Nav awaits
+          try {
+            useFinnusStore.getState().setNavRouteLoading(true);
+          } catch {
+            /* soft */
+          }
           // Gecachte door-to-door Journey → Stempelkarte mit echten Beinen
           try {
             const {
@@ -164,6 +197,7 @@ export function useConciergeActions(
             if (
               remembered &&
               (action.payload.skipClosingGate === true ||
+                action.payload.journeyNav === true ||
                 /öpnv\s*starten/i.test(action.label))
             ) {
               const { startJourneyNavigation } = require('../../services/navigation/startJourneyNavigation') as {
@@ -178,9 +212,24 @@ export function useConciergeActions(
                 if (action.payload.keepCard !== true) {
                   dismissConciergeCard();
                 }
+                if (jr.reply) {
+                  try {
+                    const { speakAssistantText } = require('../../services/ttsService') as {
+                      speakAssistantText: (t: string) => Promise<void>;
+                    };
+                    void speakAssistantText(jr.reply).catch(() => {});
+                  } catch {
+                    /* soft */
+                  }
+                }
                 await maybeRunActionAutoFollowUp(action);
                 return;
               }
+              alertActionError(
+                jr.reply ||
+                  'ÖPNV-Route konnte nicht starten — bitte nochmal tippen.',
+              );
+              return;
             }
           } catch {
             /* fall through to normal nav */
@@ -192,11 +241,19 @@ export function useConciergeActions(
             action.payload.destName ||
             action.label.replace(/\s*\([^)]*\)\s*$/, '').trim();
           if (lat != null && lng != null && name) {
+            const rawPoi = action.payload.targetPoiId;
+            const poiId =
+              typeof rawPoi === 'number' && Number.isFinite(rawPoi)
+                ? rawPoi
+                : typeof rawPoi === 'string' && /^\d+$/.test(rawPoi)
+                  ? Number(rawPoi)
+                  : undefined;
             const ok = await interruptAndNavigateToDiscovery(
-              { name, lat, lng },
+              { name, lat, lng, ...(poiId != null ? { poiId } : {}) },
               {
                 emergency: action.payload.skipClosingGate === true,
                 skipClosingGate: action.payload.skipClosingGate === true,
+                skipDestVerify: action.payload.skipDestVerify === true,
               },
             );
             if (ok) {
@@ -205,6 +262,15 @@ export function useConciergeActions(
                 dismissConciergeCard();
               }
               await maybeRunActionAutoFollowUp(action);
+              return;
+            }
+            // Fernziel-/Schließ-Nachfrage schon gesetzt — nicht still erneut starten
+            const cardId =
+              useFinnusStore.getState().activeConciergeCard?.id ?? '';
+            if (
+              cardId.startsWith('nav-confirm') ||
+              cardId.startsWith('closing-gate')
+            ) {
               return;
             }
           }
@@ -226,7 +292,7 @@ export function useConciergeActions(
           onFollowUp?.(result.followUpPrompt);
         }
         if (result.ok && action.type === 'START_NAVIGATION') {
-          if (action.payload.keepCard !== true) {
+          if (action.payload.keepCard !== true && result.keepCard !== true) {
             dismissConciergeCard();
           }
           await maybeRunActionAutoFollowUp(action);

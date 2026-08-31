@@ -1,203 +1,33 @@
 {
   "city_id": "laboe",
   "apply": true,
+  "storyOnly": true,
   "maxDelta": 80,
+  "country": "Germany",
   "summary": {
-    "ok": 93,
-    "check": 4,
-    "bad": 12,
+    "ok": 4,
+    "check": 2,
+    "bad": 3,
     "errors": 0,
-    "applied": 8
+    "applied": 4,
+    "skipped_directory": 179,
+    "skipped_cached_google": 20
   },
   "rows": [
-    {
-      "id": "laboe_laboe_hafen",
-      "name": "Laboe, Hafen",
-      "before": {
-        "lat": 54.40357814,
-        "lng": 10.22021654
-      },
-      "google": {
-        "lat": 54.40365,
-        "lng": 10.22034,
-        "place_id": "ChIJd_Ucy7b5skcRkKueWFqLAYk",
-        "address": "24235 Laboe, Deutschland"
-      },
-      "delta_m": 11,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "laboe_laboer_brucke_laboe",
-      "name": "Laboer Brücke - Laboe",
-      "before": {
-        "lat": 54.403374140000004,
-        "lng": 10.215913539999999
-      },
-      "google": {
-        "lat": 54.403446,
-        "lng": 10.216037,
-        "place_id": "ChIJj2etWrH5skcRUD5r5rc7z8M",
-        "address": "24235 Laboe, Deutschland"
-      },
-      "delta_m": 11,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "laboe_oberdorf_laboe",
-      "name": "Oberdorf - Laboe",
-      "before": {
-        "lat": 54.40515813999999,
-        "lng": 10.22628654
-      },
-      "google": {
-        "lat": 54.4051617,
-        "lng": 10.2254472,
-        "place_id": "ChIJc0HIsbf5skcRWhnZApySu0g",
-        "address": "Oberdorf, 24235 Laboe"
-      },
-      "delta_m": 54,
-      "status": "CHECK",
-      "streetview": "OK",
-      "applied": true
-    },
-    {
-      "id": "laboe_steffis_haltestelle_fordegrill_laboe",
-      "name": "Steffis Haltestelle, Fördegrill Laboe",
-      "before": {
-        "lat": 54.411006640000004,
-        "lng": 10.22966842
-      },
-      "google": {
-        "lat": 54.4110785,
-        "lng": 10.2297919,
-        "place_id": "ChIJAfwEo7j5skcR2TFQSe_-ggQ",
-        "address": "Birkenweg 4, 24235 Laboe"
-      },
-      "delta_m": 11,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "laboe_ostlandstrasse_laboe",
-      "name": "Ostlandstraße - Laboe",
-      "before": {
-        "lat": 54.40023814,
-        "lng": 10.22968654
-      },
-      "google": {
-        "lat": 54.40031,
-        "lng": 10.22981,
-        "place_id": "ChIJF26fI8r5skcRMFxaI_5SL-s",
-        "address": "24235 Laboe, Deutschland"
-      },
-      "delta_m": 11,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "laboe_laboe_neustein",
-      "name": "Laboe Neustein",
-      "before": {
-        "lat": 54.41546214,
-        "lng": 10.2403515
-      },
-      "google": {
-        "lat": 54.415534,
-        "lng": 10.240475,
-        "place_id": "ChIJ0zhmIML5skcRXLlotcgirdg",
-        "address": "24235 Laboe, Deutschland"
-      },
-      "delta_m": 11,
-      "status": "OK",
-      "streetview": "OK"
-    },
     {
       "id": "laboe_dgzrs_die_seenotretter_station_laboe",
       "name": "DGzRS - Die Seenotretter (Station Laboe)",
       "before": {
-        "lat": 54.403293039999994,
-        "lng": 10.216986639999998
+        "lat": 54.403221675000005,
+        "lng": 10.217982675
       },
       "google": {
         "lat": 54.4033649,
         "lng": 10.2171101,
         "place_id": "ChIJMT62bbH5skcRxEuP5ProFhw",
-        "address": "Fischereihafen, Südmole, 24235 Laboe"
+        "address": "Fischereihafen, Südmole, 24235 Laboe, Germany"
       },
-      "delta_m": 11,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "laboe_laboe_ostlandstrasse",
-      "name": "Laboe Ostlandstraße",
-      "before": {
-        "lat": 54.40097813999999,
-        "lng": 10.22843654
-      },
-      "google": {
-        "lat": 54.40031,
-        "lng": 10.22981,
-        "place_id": "ChIJF26fI8r5skcRMFxaI_5SL-s",
-        "address": "24235 Laboe, Deutschland"
-      },
-      "delta_m": 116,
-      "status": "BAD",
-      "streetview": "OK",
-      "applied": true
-    },
-    {
-      "id": "laboe_laboe_oberdorf",
-      "name": "Laboe Oberdorf",
-      "before": {
-        "lat": 54.40467814,
-        "lng": 10.22504654
-      },
-      "google": {
-        "lat": 54.40523,
-        "lng": 10.22641,
-        "place_id": "ChIJzWcou7f5skcRqizvSENYeiE",
-        "address": "24235 Laboe, Deutschland"
-      },
-      "delta_m": 107,
-      "status": "BAD",
-      "streetview": "OK",
-      "applied": true
-    },
-    {
-      "id": "laboe_brodersdorfer_weg",
-      "name": "Brodersdorfer Weg",
-      "before": {
-        "lat": 54.39831814,
-        "lng": 10.233156560000001
-      },
-      "google": {
-        "lat": 54.3981477,
-        "lng": 10.2336267,
-        "place_id": "ChIJdXPxe8v5skcRCI0azSZ7ezY",
-        "address": "Brodersdorfer Weg, 24235 Laboe"
-      },
-      "delta_m": 36,
-      "status": "CHECK",
-      "streetview": "OK",
-      "applied": true
-    },
-    {
-      "id": "laboe_laboe_am_ehrenmal",
-      "name": "Laboe Am Ehrenmal",
-      "before": {
-        "lat": 54.40878814,
-        "lng": 10.231736520000002
-      },
-      "google": {
-        "lat": 54.40826000000001,
-        "lng": 10.23141,
-        "place_id": "ChIJV9QOvMf5skcRN962f5aIioo",
-        "address": "24235 Laboe, Deutschland"
-      },
-      "delta_m": 62,
+      "delta_m": 59,
       "status": "CHECK",
       "streetview": "OK",
       "applied": true
@@ -205,428 +35,178 @@
     {
       "id": "laboe_meeresbiologische_station_laboe",
       "name": "Meeresbiologische Station Laboe",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 54.41414543999999,
-        "lng": 10.2351688
-      },
-      "google": {
-        "lat": 54.4142173,
-        "lng": 10.2352923,
-        "place_id": "ChIJSW0MzIGq2EMRMKFNOVj29II",
-        "address": "Strand 1, 24235 Laboe"
-      },
-      "delta_m": 11,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "laboe_steinkampberg_laboe",
-      "name": "Steinkampberg - Laboe",
-      "before": {
-        "lat": 54.40158914,
-        "lng": 10.22429054
-      },
-      "google": {
-        "lat": 54.401661,
-        "lng": 10.224414,
-        "place_id": "ChIJcRUndrb5skcRj1NCNi46KDo",
-        "address": "24235 Laboe, Deutschland"
-      },
-      "delta_m": 11,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "laboe_laboe_brodersdorfer_weg",
-      "name": "Laboe Brodersdorfer Weg",
-      "before": {
-        "lat": 54.39918814,
-        "lng": 10.23210654
-      },
-      "google": {
-        "lat": 54.39839,
-        "lng": 10.23328,
-        "place_id": "ChIJDa1BhMv5skcR776Tg9BxbKM",
-        "address": "24235 Laboe, Deutschland"
-      },
-      "delta_m": 117,
-      "status": "BAD",
-      "streetview": "OK",
-      "applied": true
-    },
-    {
-      "id": "laboe_laboe_strand",
-      "name": "Laboe-Strand",
-      "before": {
-        "lat": 54.40884043999999,
-        "lng": 10.22308102
-      },
-      "google": {
-        "lat": 54.4089123,
-        "lng": 10.2232045,
-        "place_id": "ChIJ_-g9atr5skcRMgtiRsNMz3Y",
-        "address": "Strandstraße, 24235 Laboe"
-      },
-      "delta_m": 11,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "laboe_e_bike_ladestation",
-      "name": "E-Bike Ladestation",
-      "before": {
-        "lat": 54.407287440000005,
-        "lng": 10.221446320000002
-      },
-      "google": {
-        "lat": 54.4073593,
-        "lng": 10.2215698,
-        "place_id": "ChIJ4eTaNwD5skcRP7VWQLhSqEQ",
-        "address": "Parkplatz, Strandstraße 25, 24235 Laboe"
-      },
-      "delta_m": 11,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 54.41417557142858,
+        "lng": 10.235195142857142
+      }
     },
     {
       "id": "laboe_laboe_baltic_bay_hafen",
-      "name": "Laboe Baltic Bay Hafen",
+      "name": "Baltic Bay Hafen",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 54.40001218,
-        "lng": 10.214786
-      },
-      "google": {
-        "lat": 54.40005170000001,
-        "lng": 10.2148539,
-        "place_id": "ChIJewbbG8r5skcRnFlvhvKPX9Q",
-        "address": "Fördewanderweg 2, 24235 Laboe"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 54.399970076923076,
+        "lng": 10.214808615384614
+      }
     },
     {
       "id": "laboe_technisches_museum_u_995",
       "name": "U-Boot U 995",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 54.41232717999999,
-        "lng": 10.228648179999999
-      },
-      "google": {
-        "lat": 54.4123667,
-        "lng": 10.2287161,
-        "place_id": "ChIJj3oFK4r4skcRAMTaktqUlc0",
-        "address": "Strandstraße 92, 24235 Laboe"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 54.412272200000004,
+        "lng": 10.228647599999999
+      }
     },
     {
       "id": "laboe_marine_ehrenmal",
       "name": "Marine-Ehrenmal Laboe",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 54.41216208000001,
-        "lng": 10.230643279999999
-      },
-      "google": {
-        "lat": 54.4122016,
-        "lng": 10.2307112,
-        "place_id": "ChIJ8dxluLj5skcRQmBi6NPfjkY",
-        "address": "Strandstraße 92, 24235 Laboe"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 54.4121710625,
+        "lng": 10.2307636875
+      }
     },
     {
       "id": "laboe_anker_gottes_kirche_ev_luth_anker_gottes_kirchengemeinde_laboe",
       "name": "Anker-Gottes-Kirche Laboe",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 54.402306079999995,
-        "lng": 10.2264096
-      },
-      "google": {
-        "lat": 54.4023456,
-        "lng": 10.2264775,
-        "place_id": "ChIJs5OUxUz5skcRG8o2INpOIxI",
-        "address": "Brodersdorfer Weg 1, 24235 Laboe"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "laboe_friedhofskapelle_laboe",
-      "name": "Friedhofskapelle Laboe",
-      "before": {
-        "lat": 54.399818679999996,
-        "lng": 10.229223200000002
-      },
-      "google": {
-        "lat": 54.3998582,
-        "lng": 10.2292911,
-        "place_id": "ChIJB1r9N8r5skcRrn3ycS3BPAg",
-        "address": "24235 Laboe"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "laboe_laboe_kirche",
-      "name": "Laboe, Kirche",
-      "before": {
-        "lat": 54.402829479999994,
-        "lng": 10.225051099999998
-      },
-      "google": {
-        "lat": 54.4023456,
-        "lng": 10.2264775,
-        "place_id": "ChIJs5OUxUz5skcRG8o2INpOIxI",
-        "address": "Brodersdorfer Weg 1, 24235 Laboe"
-      },
-      "delta_m": 107,
-      "status": "BAD",
-      "streetview": "OK",
-      "applied": true
-    },
-    {
-      "id": "laboe_strohfigur_laboe",
-      "name": "Strohfigur Laboe",
-      "before": {
-        "lat": 54.41004588,
-        "lng": 10.23285778
-      },
-      "google": {
-        "lat": 54.4100854,
-        "lng": 10.2329257,
-        "place_id": "ChIJPSzUewD5skcR5zMSbfqEeEs",
-        "address": "Steiner Weg 15, 24235 Laboe"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 54.40241133333333,
+        "lng": 10.226533666666667
+      }
     },
     {
       "id": "laboe_moltenort_u_boat_memorial",
-      "name": "Möltenort U-Boat Memorial",
+      "name": "U-Boot-Ehrenmal Möltenort",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 54.37934797999999,
-        "lng": 10.194634439999998
-      },
-      "google": {
-        "lat": 54.3793875,
-        "lng": 10.1947023,
-        "place_id": "ChIJ1ZZLh174skcRohHxQw-4YDc",
-        "address": "24226 Heikendorf"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 54.379344200000006,
+        "lng": 10.1947346
+      }
     },
     {
       "id": "laboe_naturerlebnisraum_dunenlandschaft_laboe",
       "name": "Naturerlebnisraum \"Dünenlandschaft Laboe\"",
       "before": {
-        "lat": 54.41509648,
-        "lng": 10.235062379999999
+        "lat": 54.41484610510203,
+        "lng": 10.23445258673469
       },
       "google": {
         "lat": 54.415136,
         "lng": 10.2351303,
         "place_id": "ChIJFVxd_rX5skcRJgYnglFxwnY",
-        "address": "Professor-Munzer-Ring 1, 24235 Laboe"
+        "address": "Professor-Munzer-Ring 1, 24235 Laboe, Germany"
       },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+      "delta_m": 54,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
     },
     {
       "id": "laboe_hundestrand_laboe",
       "name": "Hundestrand Laboe",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 54.41422368,
-        "lng": 10.22933858
-      },
-      "google": {
-        "lat": 54.4142632,
-        "lng": 10.2294065,
-        "place_id": "ChIJCwlIfr_5skcRAoZzKaVyv_k",
-        "address": "Hundestrand Laboe, 24235 Laboe"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 54.414312800000005,
+        "lng": 10.229592285714286
+      }
     },
     {
       "id": "laboe_kurpark_laboe",
       "name": "Kurpark Laboe",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 54.40711828,
-        "lng": 10.22426488
-      },
-      "google": {
-        "lat": 54.4071578,
-        "lng": 10.2243328,
-        "place_id": "ChIJm3Pp4sD5skcRUNHuRX8RPGo",
-        "address": "Katzbek, 24235 Laboe"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 54.406949860869574,
+        "lng": 10.22435121304348
+      }
     },
     {
       "id": "laboe_strandpromenade",
       "name": "Strandpromenade",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 54.40959937999999,
-        "lng": 10.22506338
-      },
-      "google": {
-        "lat": 54.4140584,
-        "lng": 10.235182,
-        "place_id": "ChIJby2LZrj5skcRwH9njxf4akc",
-        "address": "Strandpromenade, 24235 Laboe"
-      },
-      "delta_m": 821,
-      "status": "BAD",
-      "streetview": "ZERO_RESULTS"
+        "lat": 54.4094654,
+        "lng": 10.225443599999998
+      }
     },
     {
       "id": "laboe_ostseestrand",
       "name": "Ostseestrand",
       "before": {
-        "lat": 54.40839158,
-        "lng": 10.22236068
+        "lat": 54.408759499999995,
+        "lng": 10.223656499999999
       },
       "google": {
-        "lat": 54.4089123,
-        "lng": 10.2232045,
-        "place_id": "ChIJ_-g9atr5skcRMgtiRsNMz3Y",
-        "address": "Strandstraße, 24235 Laboe"
+        "lat": 54.4022362,
+        "lng": 10.225569499999999,
+        "place_id": "ChIJB7gn_7b5skcRxgXkNyAYxaE",
+        "address": "Laboe, Germany"
       },
-      "delta_m": 80,
-      "status": "CHECK",
-      "streetview": "ZERO_RESULTS",
-      "applied": true
-    },
-    {
-      "id": "laboe_stranddusche",
-      "name": "Stranddusche",
-      "before": {
-        "lat": 54.406212679999996,
-        "lng": 10.2190318
-      },
-      "google": {
-        "lat": 54.4062522,
-        "lng": 10.2190997,
-        "place_id": "ChIJ8SIIwLD5skcR9lAIhyh4Yiw",
-        "address": "24235 Laboe"
-      },
-      "delta_m": 6,
-      "status": "OK",
+      "delta_m": 736,
+      "status": "BAD",
       "streetview": "OK"
     },
     {
       "id": "laboe_gedenkstatte_im_laboer_kurpark",
       "name": "Gedenkstätte im Laboer Kurpark",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 54.407273780000004,
-        "lng": 10.225588579999998
-      },
-      "google": {
-        "lat": 54.4073133,
-        "lng": 10.2256565,
-        "place_id": "ChIJxdggp8v5skcRJBYW4jc3lgY",
-        "address": "Katzbek, 24235 Laboe"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 54.4071376,
+        "lng": 10.2260826
+      }
     },
     {
       "id": "laboe_fordepanorama_uber_kieler_bucht",
       "name": "Fördepanorama über Kieler Bucht",
       "before": {
-        "lat": 54.416135180000005,
-        "lng": 10.241838079999999
+        "lat": 54.415712299999996,
+        "lng": 10.243100655000001
       },
       "google": {
         "lat": 54.4161747,
         "lng": 10.241906,
         "place_id": "ChIJjYvHF1X5skcRqYrk47511Ds",
-        "address": "24235 Stein"
+        "address": "24235 Stein, Germany"
       },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "laboe_leuchtturm_friedrichsort",
-      "name": "Leuchtturm Friedrichsort",
-      "before": {
-        "lat": 54.39053288,
-        "lng": 10.19332412
-      },
-      "google": {
-        "lat": 54.3905724,
-        "lng": 10.193392,
-        "place_id": "ChIJUz_tNVb4skcR2DEXYy4wDwM",
-        "address": "Friedrichsort, Kiel"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+      "delta_m": 93,
+      "status": "BAD",
+      "streetview": "OK",
+      "applied": true
     },
     {
       "id": "laboe_minigolf_laboe_getranke_snacks_und_grillmoglichkeit",
       "name": "Minigolf Laboe",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 54.40779038000001,
-        "lng": 10.22530878
-      },
-      "google": {
-        "lat": 54.4078299,
-        "lng": 10.2253767,
-        "place_id": "ChIJ8QJMKLj5skcRJSjRgusWrd8",
-        "address": "Katzbek 6, 24235 Laboe"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 54.40778,
+        "lng": 10.224980125
+      }
     },
     {
       "id": "laboe_vfr_laboe",
       "name": "VfR Laboe",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 54.396245379999996,
-        "lng": 10.2193363
-      },
-      "google": {
         "lat": 54.3962849,
-        "lng": 10.2194042,
-        "place_id": "ChIJzYrUpocAYkERlZ8Gx79C0Rg",
-        "address": "Heikendorfer Weg 41, 24235 Laboe-Altheikendorf"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lng": 10.2194042
+      }
     },
     {
       "id": "laboe_spielplatz_laboe",
       "name": "Spielplatz Laboe",
       "before": {
-        "lat": 54.39538768,
-        "lng": 10.2318309
+        "lat": 54.39534971428571,
+        "lng": 10.231710142857143
       },
       "google": {
         "lat": 54.3954272,
         "lng": 10.2318988,
         "place_id": "ChIJI6txXqf5skcR9TrdMANCYlQ",
-        "address": "Hummelweg 10, 24235 Laboe"
+        "address": "Hummelweg 10, 24235 Laboe, Germany"
       },
-      "delta_m": 6,
+      "delta_m": 15,
       "status": "OK",
       "streetview": "ZERO_RESULTS"
     },
@@ -634,1240 +214,140 @@
       "id": "laboe_beachvolleyballfelder_strand_laboe",
       "name": "Beachvolleyballfelder Strand Laboe",
       "before": {
-        "lat": 54.406750880000004,
-        "lng": 10.21985488
+        "lat": 54.4060116,
+        "lng": 10.219019
       },
       "google": {
         "lat": 54.4067904,
-        "lng": 10.2199228,
+        "lng": 10.219922799999999,
         "place_id": "ChIJESCfXeX5skcRv5yJAJ4jQw0",
-        "address": "24235 Laboe"
+        "address": "24235 Laboe, Germany"
       },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "laboe_strandhotel",
-      "name": "Strandhotel",
-      "before": {
-        "lat": 54.40503478000001,
-        "lng": 10.2188228
-      },
-      "google": {
-        "lat": 54.4050743,
-        "lng": 10.2188907,
-        "place_id": "ChIJ0xMk37D5skcRNjru2pW6wHY",
-        "address": "Strandstraße 5, 24235 Laboe"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+      "delta_m": 105,
+      "status": "BAD",
+      "streetview": "OK",
+      "applied": true
     },
     {
       "id": "laboe_stoschplatz",
       "name": "Stoschplatz",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 54.39685888,
-        "lng": 10.219131899999999
-      },
-      "google": {
-        "lat": 54.3968984,
-        "lng": 10.2191998,
-        "place_id": "ChIJD889anT5skcRbEgM1KGAXeY",
-        "address": "Heikendorfer Weg 41, 24235 Laboe"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "laboe_gemeinde_ostseebad_laboe",
-      "name": "Gemeinde Ostseebad Laboe",
-      "before": {
-        "lat": 54.40550028,
-        "lng": 10.220087699999999
-      },
-      "google": {
-        "lat": 54.4055398,
-        "lng": 10.2201556,
-        "place_id": "ChIJe5-MlLP5skcRIYkuQ7yY2fU",
-        "address": "Reventloustraße 20, 24235 Laboe"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "laboe_haus_panorama_laboe_beachview",
-      "name": "Haus Panorama Laboe Beachview",
-      "before": {
-        "lat": 54.40447858,
-        "lng": 10.2186019
-      },
-      "google": {
-        "lat": 54.4045181,
-        "lng": 10.2186698,
-        "place_id": "ChIJP-XPI7H5skcRRrxvv_9PrS8",
-        "address": "24235 Laboe, Deutschland"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 54.396900569565226,
+        "lng": 10.21912764347826
+      }
     },
     {
       "id": "laboe_fordewanderweg_laboe",
       "name": "Fördewanderweg Laboe",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 54.40021448,
-        "lng": 10.2174601
-      },
-      "google": {
-        "lat": 54.400254,
-        "lng": 10.217528,
-        "place_id": "ChIJMxfQkLP5skcRUk9KO1DeHmY",
-        "address": "Fördewanderweg, 24235 Laboe"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 54.40038025,
+        "lng": 10.217195
+      }
     },
     {
       "id": "laboe_naturerlebnisraum_kinderabenteuerland",
-      "name": "Naturerlebnisraum Kinderabenteuerland",
+      "name": "Abenteuerspaziergang Strandpromenade",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 54.41163528,
-        "lng": 10.28425808
-      },
-      "google": {
-        "lat": 54.4116748,
-        "lng": 10.284326,
-        "place_id": "ChIJ6-uc8mn3skcRASUKZcDZTbg",
-        "address": "Strandstraße 2B, 24235 Wendtorf"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "laboe_luv_lee_geschenkidee",
-      "name": "Luv & Lee - Geschenkidee",
-      "before": {
-        "lat": 54.40481628,
-        "lng": 10.220875799999998
-      },
-      "google": {
-        "lat": 54.4048558,
-        "lng": 10.2209437,
-        "place_id": "ChIJQ5DSK7f5skcR0rcxKy2Ejiw",
-        "address": "Reventloustraße 8, 24235 Laboe"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "laboe_wiking_apotheke_laboe",
-      "name": "Wiking Apotheke Laboe",
-      "before": {
-        "lat": 54.403927880000005,
-        "lng": 10.221848500000002
-      },
-      "google": {
-        "lat": 54.4039674,
-        "lng": 10.2219164,
-        "place_id": "ChIJNW8R2rb5skcRbjzYsODfnAQ",
-        "address": "Dellenberg 10, 24235 Laboe"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "laboe_hausarzt_facharzt_praxis_laboe_oberdorf",
-      "name": "Hausarzt- Facharzt Praxis Laboe Oberdorf",
-      "before": {
-        "lat": 54.404121280000005,
-        "lng": 10.2240961
-      },
-      "google": {
-        "lat": 54.4041608,
-        "lng": 10.224164,
-        "place_id": "ChIJh-PrVbb5skcRlK2M5gVBXqs",
-        "address": "Oberdorf 1, 24235 Laboe"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "laboe_knepel_maren",
-      "name": "Knepel Maren",
-      "before": {
-        "lat": 54.40183558,
-        "lng": 10.217782000000001
-      },
-      "google": {
-        "lat": 54.4018751,
-        "lng": 10.2178499,
-        "place_id": "ChIJ4Ubw47P5skcRPfrNuQIRC40",
-        "address": "Börn 4, 24235 Laboe"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "laboe_scholz_jurgen",
-      "name": "Scholz Jürgen",
-      "before": {
-        "lat": 54.399987079999995,
-        "lng": 10.2277805
-      },
-      "google": {
-        "lat": 54.4000266,
-        "lng": 10.2278484,
-        "place_id": "ChIJYV5WE8r5skcRWCeRoe_U9RU",
-        "address": "Karkkamp 7, 24235 Laboe"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "laboe_dr_feld_partner_gmbh",
-      "name": "Dr. Feld & Partner GmbH",
-      "before": {
-        "lat": 54.39859778,
-        "lng": 10.2201665
-      },
-      "google": {
-        "lat": 54.3986373,
-        "lng": 10.2202344,
-        "place_id": "ChIJp32E7bT5skcRPM62b9VLOes",
-        "address": "Heikendorfer Weg 36, 24235 Laboe"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "laboe_strandkunst_am_stromkasten",
-      "name": "Strandkunst am Stromkasten",
-      "before": {
-        "lat": 54.410939080000006,
-        "lng": 10.227196379999999
-      },
-      "google": {
-        "lat": 54.4109786,
-        "lng": 10.2272643,
-        "place_id": "ChIJT_roDgD5skcRjl-dv4heCBo",
-        "address": "Strandstraße 84-88, 24235 Laboe"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "laboe_laboe",
-      "name": "LABOE",
-      "before": {
-        "lat": 54.40320548,
-        "lng": 10.219033099999999
-      },
-      "google": {
-        "lat": 54.4022362,
-        "lng": 10.2255695,
-        "place_id": "ChIJB7gn_7b5skcRxgXkNyAYxaE",
-        "address": "Laboe"
-      },
-      "delta_m": 437,
-      "status": "BAD",
-      "streetview": "OK"
-    },
-    {
-      "id": "laboe_seebrucke_stein",
-      "name": "Seebrücke Stein",
-      "before": {
-        "lat": 54.41851848,
-        "lng": 10.26846208
-      },
-      "google": {
-        "lat": 54.418558,
-        "lng": 10.26853,
-        "place_id": "ChIJF1DAiFL3skcR4gIMR3PlFVw",
-        "address": "Dorfring 34, 24235 Stein"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 54.41166073846154,
+        "lng": 10.284775530769231
+      }
     },
     {
       "id": "laboe_schiffsschraube_d_stentrans",
-      "name": "Schiffsschraube d. \" Stentrans\"",
+      "name": "Schiffsschraube Stentrans",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 54.40373328,
-        "lng": 10.218321
-      },
-      "google": {
-        "lat": 54.4037728,
-        "lng": 10.2183889,
-        "place_id": "ChIJrW3bpTD5skcRZwM96_Sxg8A",
-        "address": "Hafenpl. 1, 24235 Laboe"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 54.40383385714285,
+        "lng": 10.218734142857143
+      }
     },
     {
       "id": "laboe_museumshafen_probstei_e_v",
-      "name": "Museumshafen Probstei e.V.",
+      "name": "Museumshafen Probstei",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 54.41919168,
-        "lng": 10.28076696
-      },
-      "google": {
-        "lat": 54.4192312,
-        "lng": 10.2808349,
-        "place_id": "ChIJNUeSpUT3skcRxya6oAx9USM",
-        "address": "Ostseepromenade c/o Vereinsvorstand, Ellernbrook 2, Stein, 24235 Wendtorf"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "laboe_anleger_altheikendorf",
-      "name": "Anleger Altheikendorf",
-      "before": {
-        "lat": 54.36830088000001,
-        "lng": 10.19530966
-      },
-      "google": {
-        "lat": 54.3683404,
-        "lng": 10.1953775,
-        "place_id": "ChIJd-UT8yH5skcRoehmAWHYZoc",
-        "address": "Hafenstraße, 24226 Heikendorf"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "laboe_alter_leuchtturm_friedrichsort",
-      "name": "Alter Leuchtturm Friedrichsort",
-      "before": {
-        "lat": 54.39539958,
-        "lng": 10.1734068
-      },
-      "google": {
-        "lat": 54.3954391,
-        "lng": 10.1734747,
-        "place_id": "ChIJWxsA9Mj5skcROUT-DYHltFg",
-        "address": "An d. Schanze 46, 24159 Kiel-Pries-Friedrichsort"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "laboe_baumerlebnispfad_brodersdorf",
-      "name": "Baumerlebnispfad Brodersdorf",
-      "before": {
-        "lat": 54.38474268,
-        "lng": 10.25293162
-      },
-      "google": {
-        "lat": 54.3847822,
-        "lng": 10.2529995,
-        "place_id": "ChIJG2_vTQD3skcRsr8UQEhNdE0",
-        "address": "Lüttenhof, 24235 Brodersdorf"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "laboe_koffiehuis_cafe_u_galerie_cafe",
-      "name": "Koffiehuis Café u. Galerie Café",
-      "before": {
-        "lat": 54.41464758000001,
-        "lng": 10.238545779999999
-      },
-      "google": {
-        "lat": 54.41468709999999,
-        "lng": 10.2386137,
-        "place_id": "ChIJHRHimsH5skcR89AIs_8VL00",
-        "address": "An d. Au 2, 24235 Laboe"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "laboe_kunstlermuseum_heikendorf_kieler_forde_heinrich_blunck_stiftung",
-      "name": "Künstlermuseum Heikendorf - Kieler Förde Heinrich-Blunck-Stiftung",
-      "before": {
-        "lat": 54.36797738,
-        "lng": 10.20344786
-      },
-      "google": {
-        "lat": 54.3680169,
-        "lng": 10.2035157,
-        "place_id": "ChIJ4xx8-m74skcRizRAHLp_CAk",
-        "address": "Teichtor 9, 24226 Heikendorf"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "laboe_festung_friedrichsort",
-      "name": "Festung Friedrichsort",
-      "before": {
-        "lat": 54.390901480000004,
-        "lng": 10.185181019999998
-      },
-      "google": {
-        "lat": 54.390941,
-        "lng": 10.1852489,
-        "place_id": "ChIJHZH2nPn4skcRx2xZU-Wh5CI",
-        "address": "Christianspries, 24159 Kiel"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "laboe_niro_schmidt_laboe",
-      "name": "Niro Schmidt Laboe",
-      "before": {
-        "lat": 54.40268608,
-        "lng": 10.218781000000002
-      },
-      "google": {
-        "lat": 54.4027256,
-        "lng": 10.2188489,
-        "place_id": "ChIJZRBjS7H5skcR5hJyQ5ahjZY",
-        "address": "Hafenstraße 8, 24235 Laboe"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "laboe_forde_events",
-      "name": "Förde Events",
-      "before": {
-        "lat": 54.39786048,
-        "lng": 10.2308021
-      },
-      "google": {
-        "lat": 54.3979,
-        "lng": 10.23087,
-        "place_id": "ChIJw2IZmGFWskcRMFvOMHTBaoI",
-        "address": "Reiherweg 15, 24235 Laboe"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "laboe_restaurant_athen",
-      "name": "Restaurant Athen",
-      "before": {
-        "lat": 54.40514458,
-        "lng": 10.223501299999999
-      },
-      "google": {
-        "lat": 54.4051841,
-        "lng": 10.2235692,
-        "place_id": "ChIJd_cjaLX5skcR1yqqbYH_eTI",
-        "address": "Oberdorf 7, 24235 Laboe"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "laboe_camping_fordeblick",
-      "name": "Camping Fördeblick",
-      "before": {
-        "lat": 54.414018580000004,
-        "lng": 10.24830708
-      },
-      "google": {
-        "lat": 54.4140581,
-        "lng": 10.248375,
-        "place_id": "ChIJZ25sMN35skcRovLyWwx9ZPY",
-        "address": "Ellernbrook 12, 24235 Stein"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "laboe_forde_wanderweg",
-      "name": "Förde Wanderweg",
-      "before": {
-        "lat": 54.370685879999996,
-        "lng": 10.19565404
-      },
-      "google": {
-        "lat": 54.400254,
-        "lng": 10.217528,
-        "place_id": "ChIJMxfQkLP5skcRUk9KO1DeHmY",
-        "address": "Fördewanderweg, 24235 Laboe"
-      },
-      "delta_m": 3580,
-      "status": "BAD",
-      "streetview": "ZERO_RESULTS"
+        "lat": 54.4192611,
+        "lng": 10.280602049999999
+      }
     },
     {
       "id": "laboe_yacht_und_gewerbehafen_ostseebad_laboe",
       "name": "Yacht- und Gewerbehafen Ostseebad Laboe",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 54.40117968,
-        "lng": 10.217009200000001
-      },
-      "google": {
-        "lat": 54.4012192,
-        "lng": 10.2170771,
-        "place_id": "ChIJi8TC4bP5skcRdILtaJQnG7g",
-        "address": "Börn 8, 24235 Laboe"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "laboe_laboe_yachtcharter",
-      "name": "Laboe Yachtcharter",
-      "before": {
-        "lat": 54.40123808,
-        "lng": 10.2142716
-      },
-      "google": {
-        "lat": 54.4012776,
-        "lng": 10.2143395,
-        "place_id": "ChIJ_ZSYN7L5skcRAYVQBFcctG4",
-        "address": "Börn 17, 24235 Laboe"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "laboe_rib_rally",
-      "name": "RIB Rally",
-      "before": {
-        "lat": 54.40318048,
-        "lng": 10.221212099999999
-      },
-      "google": {
-        "lat": 54.40322,
-        "lng": 10.22128,
-        "place_id": "ChIJT6xKv7b5skcRFafI-unpAoE",
-        "address": "Steinkampberg 7, 24235 Laboe"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "laboe_forde_verleih",
-      "name": "Förde-Verleih",
-      "before": {
-        "lat": 54.37466468,
-        "lng": 10.196867840000001
-      },
-      "google": {
-        "lat": 54.3747042,
-        "lng": 10.1969357,
-        "place_id": "ChIJq13cO9RXskcRFlv8DVk6N-I",
-        "address": "Strandweg, 24226 Heikendorf"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "laboe_gefion",
-      "name": "Gefion",
-      "before": {
-        "lat": 54.40207098,
-        "lng": 10.2199616
-      },
-      "google": {
-        "lat": 54.4021105,
-        "lng": 10.2200295,
-        "place_id": "ChIJab_Aqbb5skcRtZSgG-VTcEo",
-        "address": "Rosenstraße 5, 24235 Laboe"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "laboe_foerdeboote",
-      "name": "foerdeboote",
-      "before": {
-        "lat": 54.41266137999999,
-        "lng": 10.27770278
-      },
-      "google": {
-        "lat": 54.4127009,
-        "lng": 10.2777707,
-        "place_id": "ChIJRwZnBnv3skcR93FNq6cssuc",
-        "address": "Brammersoll 11, 24235 Stein"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "laboe_ostsee_yacht_charter",
-      "name": "ostsee-yacht-charter",
-      "before": {
-        "lat": 54.402196679999996,
-        "lng": 10.225501599999998
-      },
-      "google": {
-        "lat": 54.4012776,
-        "lng": 10.2143395,
-        "place_id": "ChIJ_ZSYN7L5skcRAYVQBFcctG4",
-        "address": "Börn 17, 24235 Laboe"
-      },
-      "delta_m": 730,
-      "status": "BAD",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "laboe_strandganger_filiale_laboe_promenade",
-      "name": "Strandgänger Filiale Laboe Promenade",
-      "before": {
-        "lat": 54.40562677999999,
-        "lng": 10.219052999999999
-      },
-      "google": {
-        "lat": 54.4056663,
-        "lng": 10.2191209,
-        "place_id": "ChIJZV3WwrD5skcRwKnOigk9tl4",
-        "address": "Strandstraße 7, 24235 Laboe"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "laboe_aldi_nord",
-      "name": "ALDI Nord",
-      "before": {
-        "lat": 54.396640260000005,
-        "lng": 10.233194619999999
-      },
-      "google": {
-        "lat": 54.396669,
-        "lng": 10.233244,
-        "place_id": "ChIJ8Vh0hMz5skcRmMN6ysqckZ0",
-        "address": "Bullbrücke 1, 24235 Laboe"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "laboe_edeka_alpen",
-      "name": "EDEKA Alpen",
-      "before": {
-        "lat": 54.39744036,
-        "lng": 10.232710619999999
-      },
-      "google": {
-        "lat": 54.3974691,
-        "lng": 10.23276,
-        "place_id": "ChIJXXhLe8v5skcRCHlBhYJuV2k",
-        "address": "Bullbrücke 4, 24235 Laboe"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "laboe_aldi_ladestation",
-      "name": "Aldi-Ladestation",
-      "before": {
-        "lat": 54.39737256000001,
-        "lng": 10.23430772
-      },
-      "google": {
-        "lat": 54.3974013,
-        "lng": 10.2343571,
-        "place_id": "ChIJFxZZmcz5skcR_ejF58TxQSo",
-        "address": "Bullbrücke 1, 24235 Laboe"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "laboe_seniorenstift_laboe",
-      "name": "Seniorenstift \"Laboe\"",
-      "before": {
-        "lat": 54.40099875999999,
-        "lng": 10.222041019999999
-      },
-      "google": {
-        "lat": 54.4010275,
-        "lng": 10.2220904,
-        "place_id": "ChIJOUKTwR75skcRRzPEEajHciA",
-        "address": "Mühlenstraße 9, 24235 Laboe"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "laboe_dr_med_jan_hendrik_puls",
-      "name": "Dr. med. Jan Hendrik Puls",
-      "before": {
-        "lat": 54.40460356,
-        "lng": 10.222202719999999
-      },
-      "google": {
-        "lat": 54.4046323,
-        "lng": 10.2222521,
-        "place_id": "ChIJk8dxrzn5skcRfG-lcaDUQuU",
-        "address": "Parkstraße 6, 24235 Laboe"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "laboe_spielplatz",
-      "name": "Spielplatz",
-      "before": {
-        "lat": 54.404494060000005,
-        "lng": 10.23152382
-      },
-      "google": {
-        "lat": 54.3954272,
-        "lng": 10.2318988,
-        "place_id": "ChIJI6txXqf5skcR9TrdMANCYlQ",
-        "address": "Hummelweg 10, 24235 Laboe"
-      },
-      "delta_m": 1008,
-      "status": "BAD",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "laboe_golf_club_kitzeberg",
-      "name": "Golf-Club Kitzeberg",
-      "before": {
-        "lat": 54.35798796,
-        "lng": 10.19952376
-      },
-      "google": {
-        "lat": 54.3580167,
-        "lng": 10.1995731,
-        "place_id": "ChIJnzbccXb4skcRR1b_jzEJxAg",
-        "address": "Wildgarten 1, 24226 Heikendorf"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "laboe_golf_landclub_gut_uhlenhorst",
-      "name": "Golf- & LandClub Gut Uhlenhorst",
-      "before": {
-        "lat": 54.41922726,
-        "lng": 10.1338586
-      },
-      "google": {
-        "lat": 54.419256,
-        "lng": 10.133908,
-        "place_id": "ChIJDfUVMcv-skcRGEEtXNxZaho",
-        "address": "Mühlenstraße 37, 24229 Dänischenhagen"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "laboe_dav_kletterzentrum_kiel",
-      "name": "DAV Kletterzentrum Kiel",
-      "before": {
-        "lat": 54.33188126,
-        "lng": 10.192740699999998
-      },
-      "google": {
-        "lat": 54.33191,
-        "lng": 10.19279,
-        "place_id": "ChIJB2wPKOpXskcRdumOCeLIrRI",
-        "address": "Jahn-Sportplatz, Strohredder 17, 24149 Kiel-Neumühlen-Dietrichsdorf"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "laboe_high_spirits",
-      "name": "High Spirits",
-      "before": {
-        "lat": 54.399611359999994,
-        "lng": 10.18843982
-      },
-      "google": {
-        "lat": 54.3996401,
-        "lng": 10.1884892,
-        "place_id": "ChIJmXkt-wH5skcRr8LfkJbPW6E",
-        "address": "Falckensteiner Strand 15, 24159 Kiel-Pries-Friedrichsort"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "laboe_parkplatz_wiesenweg_gebuhrenpflichtig",
-      "name": "Parkplatz Wiesenweg - gebührenpflichtig",
-      "before": {
-        "lat": 54.406071759999996,
-        "lng": 10.22285872
-      },
-      "google": {
-        "lat": 54.4061005,
-        "lng": 10.2229081,
-        "place_id": "ChIJRbAdlwH5skcRx2YBEJqoqd4",
-        "address": "Wiesenweg 2-14, 24235 Laboe"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "laboe_parkplatz_am_buerbarg_kostenpflichtig",
-      "name": "Parkplatz am Buerbarg, kostenpflichtig",
-      "before": {
-        "lat": 54.40038806,
-        "lng": 10.22031592
-      },
-      "google": {
-        "lat": 54.4004168,
-        "lng": 10.2203653,
-        "place_id": "ChIJiU1vWhD5skcRtdT-yXpRkwE",
-        "address": "Buerbarg, 24235 Laboe"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "laboe_tagesparkplatz",
-      "name": "Tagesparkplatz",
-      "before": {
-        "lat": 54.409549260000006,
-        "lng": 10.2331372
-      },
-      "google": {
-        "lat": 54.409578,
-        "lng": 10.2331866,
-        "place_id": "ChIJWTCJGzX5skcRpZaAftFiwm0",
-        "address": "Am Ehrenmal 45, 24235 Laboe"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 54.401498863636355,
+        "lng": 10.217418181818182
+      }
     },
     {
       "id": "laboe_naturschutzgebiet_bottsand",
       "name": "Naturschutzgebiet Bottsand",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 54.42577946,
-        "lng": 10.286775980000002
-      },
-      "google": {
-        "lat": 54.42580820000001,
-        "lng": 10.2868254,
-        "place_id": "ChIJg0xA0lD3skcRC8pKdm3-78s",
-        "address": "24235, 24235 Wendtorf"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "laboe_parkplatz",
-      "name": "Parkplatz",
-      "before": {
-        "lat": 54.41337576000001,
-        "lng": 10.2313559
-      },
-      "google": {
-        "lat": 54.4076016,
-        "lng": 10.2220365,
-        "place_id": "ChIJc0Z2_rn5skcRYJTubQ65d9w",
-        "address": "Parkplatz, Strandstraße, 24235 Laboe"
-      },
-      "delta_m": 881,
-      "status": "BAD",
-      "streetview": "OK"
-    },
-    {
-      "id": "laboe_ltc_blau_weiss_v_1970_e_v",
-      "name": "LTC Blau-Weiss v. 1970 e.V.",
-      "before": {
-        "lat": 54.39699976000001,
-        "lng": 10.21772662
-      },
-      "google": {
-        "lat": 54.3970285,
-        "lng": 10.217776,
-        "place_id": "ChIJGfof27D5skcR64wuvODkReE",
-        "address": "Heikendorfer Weg 36E, 24235 Laboe"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "laboe_laboe_alte_backerei",
-      "name": "Laboe Alte Bäckerei",
-      "before": {
-        "lat": 54.40432886,
-        "lng": 10.22090152
-      },
-      "google": {
-        "lat": 54.4043576,
-        "lng": 10.2209509,
-        "place_id": "ChIJlfNe0fz5skcRq7akrVjrz8U",
-        "address": "Reventloustraße 1, 24235 Laboe"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "laboe_dm_drogerie_markt",
-      "name": "dm-drogerie markt",
-      "before": {
-        "lat": 54.39780346,
-        "lng": 10.23332132
-      },
-      "google": {
-        "lat": 54.3978322,
-        "lng": 10.2333707,
-        "place_id": "ChIJMQwGfsv5skcRu2yTDHaZE-4",
-        "address": "Bullbrücke, Brodersdorfer Weg 2 Ecke, 24235 Laboe"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "laboe_deutsches_rotes_kreuz_ortsverein",
-      "name": "Deutsches Rotes Kreuz Ortsverein",
-      "before": {
-        "lat": 54.40986216000001,
-        "lng": 10.2259831
-      },
-      "google": {
-        "lat": 54.4098909,
-        "lng": 10.2260325,
-        "place_id": "ChIJG1f3ALn5skcRZhXzGWFOvEg",
-        "address": "Strandstraße 64, 24235 Laboe"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "laboe_offentliche_toilette",
-      "name": "Öffentliche Toilette",
-      "before": {
-        "lat": 54.406253660000004,
-        "lng": 10.223657620000001
-      },
-      "google": {
-        "lat": 54.4012192,
-        "lng": 10.2170771,
-        "place_id": "ChIJzT4JwbP5skcR7ayTepRXVkI",
-        "address": "Börn 8, 24235 Laboe"
-      },
-      "delta_m": 703,
-      "status": "BAD",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "laboe_wc_a_la_deihar",
-      "name": "WC A La Deihar",
-      "before": {
-        "lat": 54.406739359999996,
-        "lng": 10.22112992
-      },
-      "google": {
-        "lat": 54.4067681,
-        "lng": 10.2211793,
-        "place_id": "ChIJvxDcHgD5skcRxf3s1ObSc94",
-        "address": "Strandstraße 22, 24235 Laboe"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "laboe_bosna",
-      "name": "Bosna",
-      "before": {
-        "lat": 54.401637959999995,
-        "lng": 10.22550622
-      },
-      "google": {
-        "lat": 54.4016667,
-        "lng": 10.2255556,
-        "place_id": "ChIJxWY5Crb5skcRCDB7n9-2Lmw",
-        "address": "Heikendorfer Weg 1, 24235 Laboe"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "laboe_strandklause_laboe",
-      "name": "Strandklause Laboe",
-      "before": {
-        "lat": 54.41312196,
-        "lng": 10.2321566
-      },
-      "google": {
-        "lat": 54.4131507,
-        "lng": 10.232206,
-        "place_id": "ChIJv73eSsf5skcRYe6_jVOAV20",
-        "address": "Professor-Munzer-Ring 1, 24235 Laboe"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "laboe_hotel_admiral_scheer",
-      "name": "Hotel Admiral Scheer",
-      "before": {
-        "lat": 54.41153696,
-        "lng": 10.2287872
-      },
-      "google": {
-        "lat": 54.4115657,
-        "lng": 10.2288366,
-        "place_id": "ChIJ8dxluLj5skcRibzFDJQvZHk",
-        "address": "Strandstraße 92, 24235 Laboe"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "laboe_haus_erholung",
-      "name": "Haus Erholung",
-      "before": {
-        "lat": 54.406082360000006,
-        "lng": 10.22106172
-      },
-      "google": {
-        "lat": 54.4061111,
-        "lng": 10.2211111,
-        "place_id": "ChIJPVEzNbf5skcRLArh7L2PLUQ",
-        "address": "Friedrichstraße 8, 24235 Laboe"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "laboe_hotel_runge",
-      "name": "Hotel Runge",
-      "before": {
-        "lat": 54.315604359999995,
-        "lng": 10.149563220000001
-      },
-      "google": {
-        "lat": 54.3156331,
-        "lng": 10.1496125,
-        "place_id": "ChIJ52r8lFdWskcR0vogeuVOwUQ",
-        "address": "Elisabethstraße 16, 24143 Kiel-Gaarden"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "laboe_heikendorf_ostseebad_strandhotel_mit_sauna_by_belvilla",
-      "name": "Heikendorf Ostseebad Strandhotel Mit Sauna by Belvilla",
-      "before": {
-        "lat": 54.37935956,
-        "lng": 10.19709304
-      },
-      "google": {
-        "lat": 54.3793883,
-        "lng": 10.1971424,
-        "place_id": "ChIJvZiTNFz4skcRd4EYi4WkX24",
-        "address": "Uferweg 2, 24226 Heikendorf"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "laboe_hotel_kieler_forde",
-      "name": "Hotel Kieler Förde",
-      "before": {
-        "lat": 54.38794226,
-        "lng": 10.167402540000001
-      },
-      "google": {
-        "lat": 54.387971,
-        "lng": 10.1674519,
-        "place_id": "ChIJHSlGN-_4skcRcSJMOiUNUFE",
-        "address": "Prieser Strand 4, 24159 Kiel-Pries-Friedrichsort"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "laboe_pure_hotel_danischer_hof",
-      "name": "Pure Hotel Dänischer Hof",
-      "before": {
-        "lat": 54.391228260000005,
-        "lng": 10.12002262
-      },
-      "google": {
-        "lat": 54.391257,
-        "lng": 10.120072,
-        "place_id": "ChIJn_NooDH_skcRIYcuGB51jPI",
-        "address": "Kronsberg 31, 24161 Altenholz-Klausdorf"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "laboe_witt_s_gasthof",
-      "name": "Witt's Gasthof",
-      "before": {
-        "lat": 54.378699759999996,
-        "lng": 10.39899314
-      },
-      "google": {
-        "lat": 54.37872849999999,
-        "lng": 10.3990425,
-        "place_id": "ChIJDaOdU1zEs0cR43Ay_ZjGr48",
-        "address": "Im Dorfe 9, 24217 Krummbek"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "laboe_rabe_s_hotel",
-      "name": "Rabe's Hotel",
-      "before": {
-        "lat": 54.31574756,
-        "lng": 10.127176619999998
-      },
-      "google": {
-        "lat": 54.3157763,
-        "lng": 10.1272259,
-        "place_id": "ChIJIYOTeYpWskcRTmFjstahwf0",
-        "address": "Ringstraße 30, 24103 Kiel"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 54.42523265999999,
+        "lng": 10.28601244
+      }
     },
     {
       "id": "laboe_alte_ausgebrannte_eiche",
       "name": "Alte ausgebrannte Eiche",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 54.36104836,
-        "lng": 10.21633104
-      },
-      "google": {
-        "lat": 54.36108429999999,
-        "lng": 10.2163927,
-        "place_id": "ChIJg_CqMN35skcRte0du-QZnds",
-        "address": "Schrevenborner Weg 60, 24226 Heikendorf"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 54.361424326666686,
+        "lng": 10.21713332
+      }
     },
     {
-      "id": "laboe_leuchtturm_kiel_holtenau",
-      "name": "Leuchtturm Kiel-Holtenau",
+      "id": "laboe_freya_frahm_haus",
+      "name": "Freya-Frahm-Haus",
       "before": {
-        "lat": 54.36922896000001,
-        "lng": 10.153885820000001
+        "lat": 54.406429777777774,
+        "lng": 10.220251222222224
       },
       "google": {
-        "lat": 54.3692649,
-        "lng": 10.1539475,
-        "place_id": "ChIJwT2n45f4skcRZ-pXb38TmzI",
-        "address": "Tiessenkai, 24159 Kiel-Holtenau"
+        "lat": 54.4064165,
+        "lng": 10.2202326,
+        "place_id": "ChIJb3gYt7D5skcRxf4wuL6CwNM",
+        "address": "Strandstraße 15, 24235 Laboe, Germany"
       },
-      "delta_m": 6,
+      "delta_m": 2,
       "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "laboe_schloss_hagen",
-      "name": "Schloss Hagen",
-      "before": {
-        "lat": 54.35986045999999,
-        "lng": 10.28484744
-      },
-      "google": {
-        "lat": 54.3598964,
-        "lng": 10.2849091,
-        "place_id": "ChIJy-UNAsX3skcRJCpS7LEzaZQ",
-        "address": "Schloßstraße 16, 24253 Probsteierhagen"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "laboe_schlosspark",
-      "name": "Schlosspark",
-      "before": {
-        "lat": 54.35892746,
-        "lng": 10.28380834
-      },
-      "google": {
-        "lat": 54.4122016,
-        "lng": 10.2307112,
-        "place_id": "ChIJ8dxluLj5skcRQmBi6NPfjkY",
-        "address": "Strandstraße 92, 24235 Laboe"
-      },
-      "delta_m": 6849,
-      "status": "BAD",
       "streetview": "OK"
     },
     {
-      "id": "laboe_leuchtturm_heidkate",
-      "name": "Leuchtturm Heidkate",
+      "id": "laboe_lachmoewen_theater",
+      "name": "Lachmöwen-Theater",
       "before": {
-        "lat": 54.43390306,
-        "lng": 10.31698312
+        "lat": 54.40778,
+        "lng": 10.224980125
       },
       "google": {
-        "lat": 54.433939,
-        "lng": 10.3170449,
-        "place_id": "ChIJOR5RYM3wskcRFLuMEGXVnxs",
-        "address": "Strandweg, 24217 Wisch-Heidkate"
+        "lat": 54.407797099999996,
+        "lng": 10.2250587,
+        "place_id": "ChIJmVKozbn5skcRlY3OYiABuiA",
+        "address": "Katzbek 4, 24235 Laboe, Germany"
       },
-      "delta_m": 6,
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "laboe_windmuehle",
+      "name": "Windmühle Laboe",
+      "before": {
+        "lat": 54.40125263636364,
+        "lng": 10.221604999999998
+      },
+      "google": {
+        "lat": 54.4012841,
+        "lng": 10.2216483,
+        "place_id": "ChIJQ6UuJRr5skcR9WFaleG5nik",
+        "address": "Mühlenstraße 7, 24235 Laboe, Germany"
+      },
+      "delta_m": 4,
       "status": "OK",
       "streetview": "OK"
     }

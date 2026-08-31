@@ -1,0 +1,1545 @@
+{
+  "city_history": "Lissabon liegt an der Mündung des Tejo in den Atlantik und wuchs als Hafen- und Handelsstadt. Im Zeitalter der Entdeckungsfahrten wurde Belém zum Ausgangspunkt portugiesischer Seereisen; manuelinische Bauten erinnern an diesen Reichtum. Das Erdbeben vom 1. November 1755 mit Bränden und Flutwellen zerstörte große Teile der Unterstadt. Unter dem Marquês de Pombal entstand die planmäßig aufgebaute Baixa neu. Hügel, Aussichtspunkte und Standseilbahnen prägen das Stadtbild; Alfama bewahrt enge ältere Gassen. In Belém gehören Torre de Belém und Mosteiro dos Jerónimos seit 1983 zum UNESCO-Welterbe.",
+  "notes": [
+    "Tier-1-Ikonen besitzen große Rohstoffpools für Hauptgeschichte und Mehr-Historie; die Laufzeitausgabe bleibt auf die jeweils relevanten Fakten begrenzt.",
+    "Tier-2-Orte besitzen mindestens acht thematisch getrennte Einträge und ausreichend Material für eine eigenständige Story.",
+    "Öffnungszeiten, Preise, Fahrpläne, Sperrungen, Ausstellungen und Ticketregeln stehen ausschließlich als LIVE-Hinweise im Pool.",
+    "Die Texte sind Fakten- und Strukturmaterial, keine Dialogskripte und kein vorgeschriebener Wortlaut."
+  ],
+  "offline_qa": [
+    {
+      "q": "Wie komme ich vom Flughafen ins Zentrum von Lissabon?",
+      "a": "Der Flughafen Humberto Delgado ist an die rote Metrolinie angebunden. Je nach Ziel ist ein Umstieg nötig; aktuelle Betriebszeiten, Störungen und Alternativen immer LIVE prüfen.",
+      "tags": ["anreise", "flughafen", "metro"]
+    },
+    {
+      "q": "Welche Fernbahnhöfe sind für Lissabon wichtig?",
+      "a": "Gare do Oriente ist ein großer Bahn-, Metro- und Busknoten im Parque das Nações. Santa Apolónia ist ein historischer Kopfbahnhof am Tejo und über die blaue Metrolinie erreichbar. Die passende Verbindung LIVE prüfen.",
+      "tags": ["anreise", "bahn"]
+    },
+    {
+      "q": "Was sollte ich bei einem ersten Besuch sehen?",
+      "a": "Zu den Kernorten gehören Alfama mit Castelo und Sé, die Praça do Comércio sowie in Belém der Torre de Belém und das Mosteiro dos Jerónimos. Aussichtspunkte zeigen, wie stark Hügel und Tejo die Stadt formen.",
+      "tags": ["must_see", "orientierung"]
+    },
+    {
+      "q": "Was ist besonders an der Straßenbahn 28?",
+      "a": "Die Linie 28E fährt mit klassischen gelben Wagen durch enge, steile Straßen mehrerer historischer Viertel. Route, Endpunkte, Takt und mögliche Kürzungen sind betrieblich veränderlich und müssen LIVE bei Carris geprüft werden.",
+      "tags": ["tram", "verkehr", "live"]
+    },
+    {
+      "q": "Was gehört in Belém zusammen?",
+      "a": "Torre de Belém und Mosteiro dos Jerónimos bilden das UNESCO-Ensemble. In der Nähe liegen außerdem Padrão dos Descobrimentos und MAAT; die Entfernungen entlang des Tejo sind gut zu Fuß erfassbar.",
+      "tags": ["belem", "unesco"]
+    },
+    {
+      "q": "Welche Notrufnummer gilt in Lissabon?",
+      "a": "Der europaweite Notruf ist 112 für medizinische Notfälle, Feuerwehr und Polizei.",
+      "tags": ["notfall", "sicherheit"]
+    },
+    {
+      "q": "Ist Lissabon zu Fuß leicht zu erkunden?",
+      "a": "Viele Ziele liegen nah beieinander, doch Pflaster, Treppen und starke Steigungen können Wege anstrengend machen. Metro, Straßenbahn, Aufzüge und Standseilbahnen ergänzen Fußwege; Barrierefreiheit und Betrieb LIVE prüfen.",
+      "tags": ["mobilitaet", "barrierefreiheit"]
+    }
+  ],
+  "spots": [
+    {
+      "id": "lissabon_torre_de_belem",
+      "name": "Torre de Belém",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Manuelinischer Wehr- und Repräsentationsturm am Tejo, 1514–1519 unter Manuel I. nach Plänen Francisco de Arrudas erbaut. Seit 1983 mit dem Jerónimos-Kloster UNESCO-Welterbe.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Am flachen Ufer steht ein heller, ungefähr 30 Meter hoher Turm aus Lioz-Kalkstein. Ein massiver viergeschossiger Hauptkörper erhebt sich über einer niedrigeren, in den Tejo vorspringenden Bastion; Zinnen, kleine Wachhäuschen, Balkone und reiches Steinornament machen den Bau zugleich wehrhaft und repräsentativ.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Historie: König Manuel I. ließ den Turm als Teil der Verteidigung der Tejo-Mündung errichten. Gebaut wurde von 1514 bis 1519; als Architekt gilt Francisco de Arruda, der zuvor in Nordafrika gearbeitet hatte. Die Anlage ergänzte vorhandene Befestigungen am Zugang zum Hafen von Lissabon.",
+          "tags": ["geschichte", "manuelinik"]
+        },
+        {
+          "text": "Name und Funktion: Der Bau war dem heiligen Vinzenz, dem Schutzpatron Lissabons, geweiht und ist auch als Turm des heiligen Vinzenz bekannt. Er kontrollierte den Flusszugang, diente aber ebenso als sichtbares Zeichen königlicher Macht an jener Wasserstraße, über die Schiffe die Hauptstadt erreichten und verließen.",
+          "tags": ["geschichte", "funktion"]
+        },
+        {
+          "text": "Lagewandel: Der Torre wurde auf einer kleinen Insel beziehungsweise einem Felsen im Tejo nahe dem damaligen Ufer errichtet. Durch langfristige Veränderungen der Uferlinie und Aufschüttungen ist der Turm heute vom Land aus direkt erreichbar. Seine ursprüngliche Stellung im Wasser erklärt die rundum ausgerichtete Wehrarchitektur.",
+          "tags": ["geschichte", "geografie"]
+        },
+        {
+          "text": "Architektur: Die Manuelinik verbindet spätgotische Bauformen mit maritimen und königlichen Symbolen. Seile, Knoten, Wappen, Kreuze des Christusordens und naturalistische Motive verwandeln militärischen Steinbau in ein Bildprogramm des manuelinischen Portugal, ohne die Bastion und ihre Geschützstellungen zu verbergen.",
+          "tags": ["architektur", "kunst"]
+        },
+        {
+          "text": "Material: Der helle Lioz-Kalkstein stammt aus der Region um Lissabon und wurde an zahlreichen repräsentativen Bauten verwendet. Seine feine Bearbeitbarkeit ermöglichte das dichte Relief der Brüstungen, Fensterrahmen und Türmchen. Licht vom Wasser lässt die plastischen Details je nach Tageszeit deutlich hervortreten.",
+          "tags": ["architektur", "material"]
+        },
+        {
+          "text": "Bastion: Der niedrige, polygonale Vorbau war für Artillerie bestimmt. Schießöffnungen liegen dicht über dem Wasserniveau, während der Turmschaft Wohn- und Repräsentationsräume aufnimmt. Diese Verbindung aus moderner Festungsaufgabe der frühen Neuzeit und dekorativer Hofarchitektur ist ein Kern der Besonderheit.",
+          "tags": ["architektur", "militaer"]
+        },
+        {
+          "text": "Innenraum: Enge Wendeltreppen verbinden die Ebenen des Turms. Gewölbte Räume, Fenster zum Fluss und die Dachterrasse machen den Wechsel zwischen Festung und Aussichtsbau erfahrbar. Die begrenzte Erschließung erklärt, warum Zugang und Besucherführung empfindlich auf Andrang oder Bauarbeiten reagieren können.",
+          "tags": ["architektur", "innenraum"]
+        },
+        {
+          "text": "Welterbe: UNESCO nahm Torre de Belém und Mosteiro dos Jerónimos 1983 gemeinsam in die Welterbeliste auf. Beide Monumente verknüpfen Belém mit Portugals maritimer Expansion, zeigen aber unterschiedliche Seiten: der Turm markiert den Flusszugang, das Kloster bündelt Religion, Dynastie und Erinnerung.",
+          "tags": ["unesco", "geschichte"]
+        },
+        {
+          "text": "Rezeption: 2007 wurde der Torre de Belém in einer landesweiten Wahl zu einem der Sieben Wunder Portugals gezählt. Die Auszeichnung ist jünger als das Denkmal, zeigt aber seine heutige Rolle als nationales Symbol. Sein Bild steht international häufig stellvertretend für Lissabon und das maritime Portugal.",
+          "tags": ["rezeption", "kultur"]
+        },
+        {
+          "text": "Leben jetzt: Vom Uferweg lassen sich die ursprüngliche Wasserlage, die Bastion und die dekorierten Fassaden auch ohne Innenbesuch gut lesen. Der Ort eignet sich als Ausgangspunkt, um am Tejo zwischen Jerónimos-Kloster, Padrão dos Descobrimentos und der jüngeren Museumslandschaft von Belém zu vergleichen.",
+          "tags": ["leben_jetzt", "orientierung"]
+        },
+        {
+          "text": "Detailblick: An einer der kleinen Wachkuppeln erscheint ein steinernes Nashorn. Das Motiv wird mit dem Tier verbunden, das 1515 an den Hof Manuels I. gelangte und europaweit Aufmerksamkeit erregte. Es ist ein konkretes Beispiel dafür, wie Nachrichten aus den portugiesischen Seeverbindungen in die Bauornamentik eingingen.",
+          "tags": ["kunst", "detail"]
+        },
+        {
+          "text": "LIVE: Öffnung, Zeitfenster, Tickets, Innenzugang, Warteschlangen, Restaurierungen und mögliche Einschränkungen wegen Wasserstand oder Wetter ephemer auf der offiziellen Monument-Seite prüfen; keine alten Tarif- oder Zeitangaben aus dem Pack verwenden.",
+          "tags": ["live_hint", "ephemeral"]
+        },
+        {
+          "text": "Quer: Das Mosteiro dos Jerónimos entstand fast gleichzeitig unter Manuel I. und teilt manuelinische Formensprache und UNESCO-Status. Das Padrão dos Descobrimentos ist dagegen ein Denkmal des 20. Jahrhunderts; gemeinsam erlauben die drei Orte einen kritischen Vergleich verschiedener Erinnerungsbilder der Seefahrt.",
+          "tags": ["quer"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich den Torre de Belém?",
+          "a": "Am hellen Kalksteinturm mit niedriger Flussbastion, Zinnen, Balkonen und kleinen kuppelartigen Wachhäuschen direkt am Tejo."
+        }
+      ]
+    },
+    {
+      "id": "lissabon_mosteiro_dos_jeronimos",
+      "name": "Mosteiro dos Jerónimos",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Unter Manuel I. ab etwa 1501/1502 errichtetes Hieronymitenkloster in Belém. Manuelinischer Kreuzgang, Kirche Santa Maria de Belém und UNESCO-Status seit 1983 prägen das Monument.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Das langgestreckte helle Kloster zeigt eine dicht gegliederte Südfassade, hohe Kirchenfenster, reich skulptierte Portale und einen zweigeschossigen Kreuzgang. Der Lioz-Kalkstein verbindet das Ensemble farblich mit dem nahen Torre de Belém, während Maßwerk und Reliefs die Flächen fast stofflich wirken lassen.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Gründung: Manuel I. gab das Kloster um 1501/1502 in Auftrag. Es entstand nahe der kleinen Kapelle, in der Seeleute vor Reisen gebetet haben sollen. Der König übergab die Anlage dem Hieronymitenorden; dessen Mönche verbanden klösterliches Leben mit religiöser Betreuung der Seefahrer und königlicher Memoria.",
+          "tags": ["geschichte", "gruendung"]
+        },
+        {
+          "text": "Finanzierung: Der aufwendige Bau wurde unter anderem aus Einnahmen einer Abgabe auf Gewürze und andere Waren des Überseehandels finanziert. Damit ist die Pracht nicht nur Stilgeschichte, sondern materiell mit den Handelsnetzen des portugiesischen Weltreichs und deren wirtschaftlichen wie kolonialen Folgen verbunden.",
+          "tags": ["geschichte", "handel"]
+        },
+        {
+          "text": "Baumeister: Diogo de Boitaca leitete die frühe Bauphase und prägte den manuelinischen Grundcharakter. João de Castilho führte wichtige Teile weiter und entwickelte die Konstruktion und Dekoration. Der lange Bauprozess erklärt, warum spätgotische, manuelinische und bereits stärker renaissancezeitliche Lösungen nebeneinander stehen.",
+          "tags": ["architektur", "personen"]
+        },
+        {
+          "text": "Manuelinik: Taue, Pflanzen, Wappen, Armillarsphären und Kreuze des Christusordens gehören zum reichen Formenrepertoire. Nicht jedes Ornament ist rein maritim, doch zusammen entsteht eine Hofkunst, die dynastische Herrschaft, christliche Symbolik und Portugals damalige Seeverbindungen in Stein miteinander verschränkt.",
+          "tags": ["architektur", "kunst"]
+        },
+        {
+          "text": "Kreuzgang: Der zweigeschossige Kreuzgang gilt als Hauptwerk der Manuelinik. Filigrane Arkaden, Maßwerkbrüstungen und wechselnde Reliefmotive umgeben den ruhigen Innenhof. Er war Raum für klösterliche Wege und Kontemplation, wirkt aber zugleich wie ein repräsentatives steinernes Bildprogramm der Regierungszeit Manuels I.",
+          "tags": ["architektur", "kreuzgang"]
+        },
+        {
+          "text": "Kirche: Santa Maria de Belém besitzt einen weiten, hallenartigen Innenraum. Schlanke Pfeiler tragen ein aufwendig geripptes Gewölbe und lassen die Grenzen der Schiffe optisch zurücktreten. Die technische Kühnheit und die reiche Dekoration zeigen, dass der Kirchenraum zugleich Gottesdienstort und königliche Repräsentation war.",
+          "tags": ["architektur", "kirche"]
+        },
+        {
+          "text": "Grabmäler: In der Kirche befinden sich die Grabmäler Vasco da Gamas und des Dichters Luís de Camões. Beide wurden zu nationalen Erinnerungsfiguren der Seefahrt und Literatur. Ihre Präsenz verstärkt die Funktion des Ensembles als Gedächtnisort, auch wenn Baugeschichte und spätere nationale Deutung auseinanderzuhalten sind.",
+          "tags": ["geschichte", "memoria"]
+        },
+        {
+          "text": "Dynastie: Das Kloster war eng mit dem Haus Avis-Beja und Manuel I. verbunden. Königliche Grablegen und die monumentale Ausstattung machten Belém zu einem Ort dynastischer Erinnerung. Die religiöse Stiftung sollte Seelenheil, Herrschaftsanspruch und die Erfolge des Reiches in dauerhaft sichtbarer Architektur vereinen.",
+          "tags": ["geschichte", "dynastie"]
+        },
+        {
+          "text": "Erdbeben: Das Ensemble überstand das Erdbeben von 1755 besser als viele Bauten im Zentrum, erlitt jedoch Schäden und spätere Veränderungen. Die Aufhebung religiöser Orden im 19. Jahrhundert beendete das ursprüngliche Klosterleben. Danach erhielten Teile des großen Komplexes neue öffentliche und kulturelle Nutzungen.",
+          "tags": ["geschichte", "wandel"]
+        },
+        {
+          "text": "Welterbe: UNESCO erklärte das Kloster 1983 zusammen mit dem Torre de Belém zum Welterbe. Die Paarung macht die Landschaft von Belém lesbar: religiös-dynastische Stiftung und befestigter Flusszugang entstanden aus demselben manuelinischen Kontext, erfüllen architektonisch jedoch klar verschiedene Aufgaben.",
+          "tags": ["unesco", "geschichte"]
+        },
+        {
+          "text": "Leben jetzt: Kirche, Kreuzgang und die im Gebäudekomplex untergebrachten Kulturinstitutionen können unterschiedliche Zugänge und Regeln haben. Für eine Erzählung vor Ort sind Südportal, Hallenkirche und Kreuzgang getrennt zu betrachten; die lange Fassade darf nicht als ein einziger gleichzeitig zugänglicher Museumsraum missverstanden werden.",
+          "tags": ["leben_jetzt", "orientierung"]
+        },
+        {
+          "text": "Historischer Kontext: Belém lag außerhalb des dichten alten Stadtkerns, aber unmittelbar an der Route zum Atlantik. Das Kloster übersetzte die Seereisen in eine sakrale Landschaft. Eine heutige Einordnung sollte technische und künstlerische Leistungen würdigen, ohne Handel, Mission und koloniale Gewalt auszublenden.",
+          "tags": ["geschichte", "kontext"]
+        },
+        {
+          "text": "LIVE: Öffnung von Kirche und Kreuzgang, getrennte Eingänge, Tickets, Gottesdienste, Restaurierungen und vorübergehend geschlossene Bereiche ausschließlich aktuell bei der offiziellen Verwaltung prüfen; ephemere Angaben nicht als stabilen Pack-Fakt behandeln.",
+          "tags": ["live_hint", "ephemeral"]
+        },
+        {
+          "text": "Quer: Der Torre de Belém teilt Epoche, Material und UNESCO-Eintrag. Das Padrão dos Descobrimentos entstand erst 1960 und zeigt eine spätere, staatlich geprägte Erinnerung an dieselbe Seefahrtsgeschichte. MAAT und Central Tejo ergänzen am Ufer die Perspektive um Energie, Industrie und Gegenwartskultur.",
+          "tags": ["quer"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Was ist der wichtigste Bereich des Jerónimos-Klosters?",
+          "a": "Der reich skulptierte zweigeschossige Kreuzgang gilt als Hauptwerk; auch die hallenartige Kirche Santa Maria de Belém ist architektonisch zentral."
+        }
+      ]
+    },
+    {
+      "id": "lissabon_castelo_de_sao_jorge",
+      "name": "Castelo de São Jorge",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Burganlage auf dem Hügel über Alfama. Die maurische Alcáçova wurde 1147 von Afonso Henriques erobert, später Königssitz und nach dem Erdbeben von 1755 stark verändert.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Über Alfamas roten Dächern liegt ein ummauerter Komplex mit zinnengekrönten Mauern, rechteckigen Türmen und weiten Höfen. Von der Stadt aus wirkt die Burg als steinerne Horizontkante; oben öffnen sich Blicke über Baixa, Mouraria, den Tejo und die gegenüberliegende Uferlandschaft.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Frühe Schichten: Der strategische Hügel war lange vor der portugiesischen Monarchie besiedelt. Die heute prägende mittelalterliche Befestigung geht wesentlich auf die islamische Stadt zurück. Als Alcáçova schützte der befestigte Höhenbereich Herrschaftszentrum und Elitequartier oberhalb des dicht bebauten Lissabon.",
+          "tags": ["geschichte", "archaeologie"]
+        },
+        {
+          "text": "Eroberung 1147: Afonso Henriques nahm Lissabon mit Unterstützung von Kreuzfahrern während der christlichen Expansion auf der Iberischen Halbinsel ein. Die Burg wurde zum Schlüsselort des Herrschaftswechsels. Spätere Legenden verdichteten die Belagerung zu Heldengeschichten, die von gesicherten Befunden zu trennen sind.",
+          "tags": ["geschichte", "1147"]
+        },
+        {
+          "text": "Königssitz: Nach der Eroberung wandelte sich die Alcáçova schrittweise zu einer königlichen Residenz. Als Lissabon zum politischen Zentrum des Reiches aufstieg, wurden Palastbereiche erweitert. Die Burg war daher nicht nur Militäranlage, sondern Schauplatz von Hof, Verwaltung, Empfang und dynastischer Repräsentation.",
+          "tags": ["geschichte", "koenigspalast"]
+        },
+        {
+          "text": "Funktionsverlust: Mit dem Ausbau des Paço da Ribeira am Tejo verlagerte sich der Königshof aus der Höhenburg an das wirtschaftliche Zentrum am Fluss. Die alte Residenz verlor ihre Vorrangstellung. Dieser Wechsel spiegelt Lissabons Entwicklung von der geschützten Hügelstadt zur global vernetzten Hafenmetropole.",
+          "tags": ["geschichte", "stadtentwicklung"]
+        },
+        {
+          "text": "Sankt Georg: Die Bezeichnung São Jorge setzte sich in königlichem Zusammenhang durch. Georg war im englischen Raum besonders verehrt; seine Aufnahme wird mit der englisch-portugiesischen Allianz und dem Vertrag von Windsor verbunden. Der Name markiert damit politische Beziehungen, nicht die maurische Entstehungsphase.",
+          "tags": ["geschichte", "name"]
+        },
+        {
+          "text": "Mauern und Türme: Der Kern besitzt einen annähernd quadratischen Grundriss mit mehreren Türmen und Wehrgängen. Zinnen und schmale Durchgänge vermitteln mittelalterliche Verteidigung, doch sichtbare Formen sind Ergebnis verschiedener Bau-, Reparatur- und Restaurierungsphasen und nicht vollständig unverändert überliefert.",
+          "tags": ["architektur", "militaer"]
+        },
+        {
+          "text": "Erdbeben 1755: Das Beben beschädigte Burg und ehemalige Palastbereiche schwer. Militärische und andere Nutzungen überformten das Areal weiter. Was Besucher heute erleben, verbindet archäologische Reste, rekonstruierte Mauern und die Ergebnisse umfangreicher Restaurierungen des 20. Jahrhunderts.",
+          "tags": ["geschichte", "erdbeben"]
+        },
+        {
+          "text": "Restaurierung: Während des Estado Novo wurde die Burg umfassend freigelegt und in ein bewusst mittelalterlich wirkendes Nationaldenkmal verwandelt. Spätere Archäologie differenziert dieses Bild durch Funde islamischer Wohnstrukturen und älterer Besiedlung. Die Anlage ist deshalb auch ein Beispiel für Geschichte der Denkmalpflege.",
+          "tags": ["geschichte", "denkmalpflege"]
+        },
+        {
+          "text": "Archäologie: Im Burgareal sind Spuren verschiedener Epochen erhalten, darunter Reste des islamischen Viertels und des königlichen Palastes. Sie zeigen, dass der Hügel nicht nur aus Festungsmauern bestand, sondern ein bewohnter, politischer und wirtschaftlicher Teil der Stadt war.",
+          "tags": ["archaeologie", "stadtleben"]
+        },
+        {
+          "text": "Aussicht: Die erhöhte Lage erklärt den militärischen Wert unmittelbar. Sichtachsen reichen zur Baixa, zur Praça do Comércio, über den Tejo und hinüber zur südlichen Uferzone. Von hier lässt sich auch erkennen, wie Alfamas Gassen dem Hang folgen, während die nach 1755 erneuerte Baixa regelmäßiger organisiert ist.",
+          "tags": ["aussicht", "orientierung"]
+        },
+        {
+          "text": "Leben jetzt: Mauerrundgang, Höfe, Aussicht und archäologische Bereiche bieten unterschiedliche Erzählachsen. Unebene Steine, Treppen und steile Zugänge gehören zur historischen Topografie; für Mobilität und barrierearme Wege müssen aktuelle Hinweise der Anlage berücksichtigt werden.",
+          "tags": ["leben_jetzt", "orientierung"]
+        },
+        {
+          "text": "Stadtgeschichte: Castelo, Sé und Alfama bilden ein enges räumliches Dreieck. Die Burg steht für Macht und Verteidigung, die Kathedrale für die kirchliche Neuordnung nach 1147 und Alfama für das fortlebende Stadtgewebe am Hang. Zusammen erklären sie Lissabons mittelalterliche Schichten besser als ein Einzelbau.",
+          "tags": ["geschichte", "stadtentwicklung"]
+        },
+        {
+          "text": "LIVE: Öffnung, Eintritt, Führungen, Zugang zu Türmen und Wehrgängen, Camera-obscura-Betrieb, Veranstaltungen sowie Sperrungen bei Wetter oder Bauarbeiten ephemer auf der offiziellen Burgseite prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        },
+        {
+          "text": "Quer: Unterhalb liegen Alfama und die Sé; westlich zeigt die Baixa den pombalinischen Wiederaufbau nach 1755. Der Miradouro da Senhora do Monte bietet einen Gegenblick auf Burg und Hügel, sodass Lage und Silhouette aus einer zweiten Perspektive verständlich werden.",
+          "tags": ["quer"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Ist die heutige Burg vollständig mittelalterlich erhalten?",
+          "a": "Nein. Sie enthält mittelalterliche Substanz, wurde nach Schäden und späteren Nutzungen aber besonders im 20. Jahrhundert stark restauriert."
+        }
+      ]
+    },
+    {
+      "id": "lissabon_praca_do_comercio",
+      "name": "Praça do Comércio",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Monumentaler Tejo-Platz auf dem Gelände des 1755 zerstörten Paço da Ribeira. Die pombalinische Neubebauung, Arkaden und der Arco da Rua Augusta verbinden Fluss und Baixa.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Ein weiter rechteckiger Platz öffnet sich an einer Seite direkt zum Tejo. Drei Seiten werden von gleichmäßigen gelben Fassaden und durchlaufenden Arkaden gefasst; im Zentrum steht das Reiterstandbild Josés I., im Norden bildet der Arco da Rua Augusta das Tor zur gerasterten Baixa.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Terreiro do Paço: Vor 1755 lag hier der Paço da Ribeira, der königliche Palast am Fluss. Der ältere Name Terreiro do Paço, Palasthof, lebt im Alltag und in der Metrostation fort. Hof, Verwaltung und Hafen lagen dicht zusammen und spiegelten die maritime Ausrichtung der Monarchie.",
+          "tags": ["geschichte", "koenigspalast"]
+        },
+        {
+          "text": "Katastrophe 1755: Erdbeben, Brände und Flutwellen zerstörten am 1. November große Teile des Palastes und der Unterstadt. Der offene Uferraum war unmittelbar betroffen. Verloren gingen nicht nur Gebäude, sondern auch Sammlungen, Archive und die gebaute Bühne des alten Königshofes.",
+          "tags": ["geschichte", "erdbeben"]
+        },
+        {
+          "text": "Pombalinischer Wiederaufbau: Unter dem Marquês de Pombal wurde der Platz als Teil einer planmäßigen neuen Unterstadt gestaltet. Einheitliche Fassaden, Arkaden und klare Achsen ersetzten das frühere Gefüge. Der Raum wurde nun stärker als Handels- und Verwaltungstor der erneuerten Stadt verstanden.",
+          "tags": ["geschichte", "pombalinisch"]
+        },
+        {
+          "text": "Name: Praça do Comércio, Handelsplatz, verweist auf die neue wirtschaftliche und administrative Funktion. Behörden und Einrichtungen des Handels bezogen die Randbauten. Die Benennung verschob die Erinnerung bewusst vom zerstörten königlichen Palast zur organisierten Handelsstadt.",
+          "tags": ["geschichte", "stadtentwicklung"]
+        },
+        {
+          "text": "Städtebau: Die Rua Augusta führt vom Platz geradlinig durch die Baixa zum Rossio. Diese Achse macht den Wiederaufbau körperlich erfahrbar: vom Tejo durch einen triumphbogenartigen Abschluss in das regelmäßige Straßennetz und weiter zum älteren nördlichen Stadtplatz.",
+          "tags": ["architektur", "stadtplanung"]
+        },
+        {
+          "text": "Arco da Rua Augusta: Der monumentale Bogen schließt die Nordseite und wurde erst lange nach dem Erdbeben vollendet. Skulpturen und Inschriften inszenieren nationale Geschichte und Leistung. Seine erhöhte Plattform bietet einen Blick auf Platzgeometrie, Fluss und das Raster der Baixa.",
+          "tags": ["architektur", "denkmal"]
+        },
+        {
+          "text": "Reiterstandbild: Im Zentrum steht José I. zu Pferd, geschaffen von Joaquim Machado de Castro und 1775 eingeweiht. Das Denkmal verankert den wiederaufgebauten Platz in der Regierungszeit des Königs, während die Planung politisch besonders mit seinem Minister Pombal verbunden ist.",
+          "tags": ["kunst", "geschichte"]
+        },
+        {
+          "text": "Cais das Colunas: Marmorstufen und zwei Säulen markieren den historischen Wasserzugang. Staatsgäste und Reisende konnten vom Tejo unmittelbar auf die repräsentative Stadtbühne gelangen. Heute macht diese Kante den engen Zusammenhang von Platz, Hafen und Flusslandschaft sichtbar.",
+          "tags": ["architektur", "tejo"]
+        },
+        {
+          "text": "Politischer Ort: Wegen seiner Größe und zentralen Lage war der Platz wiederholt Bühne staatlicher Zeremonien, politischer Ereignisse und öffentlicher Versammlungen. Ein besonders einschneidendes Ereignis war das Attentat auf König Carlos I. und den Kronprinzen Luís Filipe im Jahr 1908.",
+          "tags": ["geschichte", "politik"]
+        },
+        {
+          "text": "Leben jetzt: Arkaden, Flusskante und die Achse der Rua Augusta machen den Platz zu einem zentralen Durchgangs- und Aufenthaltsraum. Das architektonische Ensemble lässt sich am besten von der offenen Mitte lesen; die Colunas erklären, dass die historische Hauptfront Lissabons zum Wasser orientiert war.",
+          "tags": ["leben_jetzt", "orientierung"]
+        },
+        {
+          "text": "Erdbebensichere Planung: Die pombalinische Baixa steht für rationalisierten Wiederaufbau und frühe systematische Überlegungen zu erdbebenresistenter Konstruktion. Der Platz selbst ist die repräsentative Front dieses Projekts; die konstruktiven Prinzipien lassen sich eher in den umgebenden Baixa-Blöcken erklären.",
+          "tags": ["architektur", "erdbeben"]
+        },
+        {
+          "text": "Flussraum: Der breite Tejo wirkt hier fast wie eine Bucht. Fähren, Ufer und gegenüberliegende Siedlungen zeigen, dass der Platz kein abgeschlossenes Binnenforum ist. Seine Proportionen und Öffnung sind auf Ankunft, Handel und Sicht über das Wasser angelegt.",
+          "tags": ["geografie", "orientierung"]
+        },
+        {
+          "text": "LIVE: Zugang zum Arco-Aussichtspunkt, Tickets, Veranstaltungen, Demonstrationen, temporäre Sperrungen und geänderte Verkehrsführung ephemer prüfen; der frei zugängliche Platz und einzelne Attraktionen haben unterschiedliche Regeln.",
+          "tags": ["live_hint", "ephemeral"]
+        },
+        {
+          "text": "Quer: Rossio und Praça do Comércio sind durch die pombalinische Baixa und Rua Augusta verbunden. Vom Castelo erkennt man das regelmäßige Raster aus der Höhe; Santa Luzias Azulejo-Panorama zeigt eine bildliche Vorstellung des Terreiro do Paço vor dem Erdbeben.",
+          "tags": ["quer"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Warum heißt der Platz auch Terreiro do Paço?",
+          "a": "Weil hier bis zum Erdbeben von 1755 der königliche Paço da Ribeira stand; der ältere Name Palasthof blieb gebräuchlich."
+        }
+      ]
+    },
+    {
+      "id": "lissabon_se_catedral_de_lisboa",
+      "name": "Sé Catedral de Lisboa",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Seit 1147 errichtete Kathedrale auf dem Gelände einer Moschee. Romanische Doppelturmfassade, gotischer Kreuzgang und zahlreiche Wiederaufbauten machen sie zu einem Schichtbau der Stadtgeschichte.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Die Westfassade wirkt wie eine Festung: zwei kräftige Türme flankieren ein großes Rundfenster und das romanische Portal. Der Bau sitzt eng zwischen ansteigenden Straßen Alfamas; vorbeifahrende Straßenbahnen verdeutlichen den Gegensatz zwischen massiver mittelalterlicher Front und dichtem Stadtverkehr.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Gründung 1147: Nach der Eroberung Lissabons durch Afonso Henriques begann auf dem Gelände der Hauptmoschee der Bau einer christlichen Kathedrale. Diese bewusste Ortswahl markierte den politischen und religiösen Herrschaftswechsel in der Stadt.",
+          "tags": ["geschichte", "1147"]
+        },
+        {
+          "text": "Erster Bischof: Gilbert von Hastings, ein englischer Kreuzfahrer und Geistlicher, wurde erster Bischof des eroberten Lissabon. Seine Herkunft erinnert daran, dass auswärtige Kreuzfahrer an der Einnahme der Stadt beteiligt waren und die Neuordnung der Diözese europäische Verbindungen besaß.",
+          "tags": ["geschichte", "personen"]
+        },
+        {
+          "text": "Romanik: Grundriss, schwere Mauern und Doppelturmfassade folgen romanischen Kathedraltraditionen. Das Langhaus besitzt Pfeiler, Emporen und ein Tonnengewölbe. Die wehrhafte Wirkung ist architektonisch real, sollte aber nicht mit der Aussage verwechselt werden, die Kirche sei primär eine Burg gewesen.",
+          "tags": ["architektur", "romanik"]
+        },
+        {
+          "text": "Gotischer Kreuzgang: Im späten Mittelalter wurde östlich der Kirche ein gotischer Kreuzgang angelegt. Seine Lage am Hang verlangte bauliche Anpassungen. Archäologische Untersuchungen in diesem Bereich legten Schichten älterer Besiedlung frei und verbinden Sakralbau mit der langen Stadtgeschichte des Hügels.",
+          "tags": ["architektur", "archaeologie"]
+        },
+        {
+          "text": "Sankt Vinzenz: Die Reliquien des heiligen Vinzenz wurden im 12. Jahrhundert nach Lissabon gebracht und in der Kathedrale verehrt. Vinzenz wurde Schutzpatron der Stadt; Schiff und Raben im Lissabonner Wappen beziehen sich auf die Überlieferung seiner Reliquienüberführung.",
+          "tags": ["geschichte", "religion"]
+        },
+        {
+          "text": "Erdbeben und Umbauten: Die Sé wurde im Lauf der Jahrhunderte von mehreren Erdbeben beschädigt. Besonders 1755 litten Teile des Baus. Reparaturen, barocke Eingriffe und spätere Restaurierungen veränderten das Erscheinungsbild; die heutige romanische Strenge ist auch Ergebnis moderner Denkmalentscheidungen.",
+          "tags": ["geschichte", "erdbeben"]
+        },
+        {
+          "text": "Nationaldenkmal: Die Kathedrale ist als portugiesisches Monument von nationaler Bedeutung geschützt. Dieser Status würdigt nicht nur einzelne Kunstwerke, sondern den Bau als seltene materielle Verbindung zwischen Eroberung von 1147, mittelalterlicher Diözese, Erdbeben und moderner Restaurierung.",
+          "tags": ["denkmal", "geschichte"]
+        },
+        {
+          "text": "Innenraum: Das dunklere romanische Langhaus lenkt zur Vierung und zum Chor. Seitenschiffe, Emporen und Kapellen zeigen unterschiedliche Epochen. Für eine genaue Erzählung sollte zwischen ursprünglicher Romanik, gotischen Ergänzungen und später restaurierten Partien unterschieden werden.",
+          "tags": ["architektur", "innenraum"]
+        },
+        {
+          "text": "Schatz und Kapellen: Kirchenschatz und Kapellen bewahren religiöse Kunst und Ausstattungsstücke verschiedener Jahrhunderte. Ihre Zugänglichkeit kann getrennt vom allgemeinen Kirchenraum geregelt sein. Stabil ist die Bedeutung der Sé als Kathedrale und aktiver Sitz des Patriarchats von Lissabon.",
+          "tags": ["kunst", "religion"]
+        },
+        {
+          "text": "Stadtraum: Die Sé liegt auf dem Weg zwischen Baixa und Castelo. Ihre Front steht nicht frei auf einem großen Platz, sondern ist in enge Straßen eingebunden. Dadurch bleibt die mittelalterlich geprägte Topografie besonders spürbar und die gelbe Straßenbahn erscheint fast direkt vor den Türmen.",
+          "tags": ["stadtentwicklung", "orientierung"]
+        },
+        {
+          "text": "Leben jetzt: Die Sé ist zugleich Denkmal, Gebetsort und Kathedrale. Besichtigung muss Gottesdienste und religiöse Nutzung respektieren. Außen lassen sich Portal, Rundfenster, Türme und Hanglage ohne Eintritt erklären; Kreuzgang und weitere Bereiche können eigene Zugänge besitzen.",
+          "tags": ["leben_jetzt", "religion"]
+        },
+        {
+          "text": "Historische Einordnung: Der Bau auf dem Moscheestandort steht für einen tiefen Bruch, doch Lissabons Bevölkerung und Kultur wurden nicht in einem einzigen Moment ausgetauscht. Archäologische Schichten erinnern an römische, spätantike und islamische Stadtphasen unter dem späteren christlichen Monument.",
+          "tags": ["geschichte", "kontext"]
+        },
+        {
+          "text": "LIVE: Gottesdienste, Öffnung, Zugang zu Kreuzgang oder Schatz, Tickets, liturgische Sperrungen und Restaurierungsbereiche aktuell auf offiziellen Kanälen prüfen; Ruhe- und Bekleidungsregeln respektieren.",
+          "tags": ["live_hint", "ephemeral"]
+        },
+        {
+          "text": "Quer: Castelo und Sé teilen das Schlüsseljahr 1147 aus politischer und kirchlicher Perspektive. Alfamas Gassen umgeben beide Orte; der Miradouro de Santa Luzia liegt nur hangaufwärts und eröffnet den Blick über das Viertel zum Tejo.",
+          "tags": ["quer"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Warum wirkt die Sé wie eine Festung?",
+          "a": "Ihre romanische Doppelturmfassade, dicken Mauern und das große Rundfenster erzeugen die wehrhafte Wirkung; sie ist dennoch als Kathedrale errichtet worden."
+        }
+      ]
+    },
+    {
+      "id": "lissabon_elevador_de_santa_justa",
+      "name": "Elevador de Santa Justa",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Neugotischer Eisenaufzug von Raoul Mesnier du Ponsard, 1902 eröffnet. Er verbindet die Baixa mit dem Largo do Carmo, ist rund 45 Meter hoch und seit 2002 Nationaldenkmal.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Ein schlanker, rund 45 Meter hoher Eisenturm steigt zwischen den Häusern der Baixa auf. Neugotische Bögen, filigrane Streben und ornamentierte Plattformen gliedern das dunkle Metall; oben führt ein Steg zum Largo do Carmo, während die Kabinen im Turmschacht verkehren.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Planer: Der portugiesisch-französische Ingenieur Raoul Mesnier du Ponsard entwarf den Aufzug. Er arbeitete an mehreren mechanischen Aufstiegshilfen Lissabons. Die oft wiederholte Behauptung, er sei Schüler Gustave Eiffels gewesen, ist nicht belegt und soll daher nicht als Fakt erzählt werden.",
+          "tags": ["geschichte", "personen"]
+        },
+        {
+          "text": "Eröffnung: Der Elevador wurde 1902 in Betrieb genommen. Er löste ein alltägliches topografisches Problem: Zwischen der tiefer gelegenen Baixa und dem Carmo-Hügel liegt ein abrupter Höhenunterschied. Der vertikale Verkehr verkürzte den mühsamen Weg durch steile Straßen und Treppen.",
+          "tags": ["geschichte", "mobilitaet"]
+        },
+        {
+          "text": "Antrieb: Anfangs bewegte eine Dampfmaschine die Kabinen. 1907 wurde der Betrieb elektrifiziert. Dieser Wechsel macht den Aufzug zu einem anschaulichen Technikdenkmal der städtischen Modernisierung, in der Elektrizität ältere mechanische Systeme zunehmend ersetzte.",
+          "tags": ["technik", "geschichte"]
+        },
+        {
+          "text": "Konstruktion: Der Turm besteht aus genieteten Eisenelementen und verbindet Tragwerk mit Dekoration. Spitzbögen, Maßwerkformen und ornamentale Details zitieren Gotik, obwohl Material und Funktion industriell-modern sind. Gerade dieser Kontrast bestimmt seine unverwechselbare Erscheinung.",
+          "tags": ["architektur", "technik"]
+        },
+        {
+          "text": "Stadtverbindung: Unten liegt die Rua de Santa Justa in der pombalinischen Baixa; oben erreicht der Steg den Largo do Carmo. Der Aufzug verbindet damit nicht nur zwei Höhen, sondern auch zwei Stadtgeschichten: planmäßigen Wiederaufbau und die Ruinenlandschaft des Carmo-Klosters.",
+          "tags": ["stadtentwicklung", "orientierung"]
+        },
+        {
+          "text": "Aussicht: Die obere Plattform bietet Blick auf Baixa, Rossio, Castelo und Tejo. Das regelmäßige Straßenraster ist von hier besonders klar erkennbar. Die Aussicht ist eine spätere touristische Hauptattraktion, während die ursprüngliche Kernaufgabe im praktischen öffentlichen Höhentransport lag.",
+          "tags": ["aussicht", "funktion"]
+        },
+        {
+          "text": "Carris: Der Aufzug gehört zum historischen Verkehrssystem der städtischen Carris. Dadurch ist er weder nur Aussichtsplattform noch bloß Museumsobjekt. Tarifzugang, Betrieb und Besucherströme folgen jedoch aktuellen Verkehrs- und Sicherheitsregeln und können sich ändern.",
+          "tags": ["mobilitaet", "verkehr"]
+        },
+        {
+          "text": "Nationaldenkmal: 2002 wurde der Elevador de Santa Justa als Nationaldenkmal eingestuft, hundert Jahre nach seiner Eröffnung. Geschützt ist damit ein Bau, der Ingenieurwesen, öffentliche Mobilität, neugotische Gestaltung und die besondere Hügeltopografie Lissabons zusammenführt.",
+          "tags": ["denkmal", "geschichte"]
+        },
+        {
+          "text": "Carmo-Steg: Der obere Laufsteg überbrückt die letzte Distanz zum Hügel. Seine Lage macht sichtbar, dass der Turm nicht allein stehen kann: Erst die horizontale Brücke vollendet die Verbindung. Am Ausgang liegt der Bereich des ehemaligen Convento do Carmo.",
+          "tags": ["architektur", "orientierung"]
+        },
+        {
+          "text": "Leben jetzt: Auch ohne Fahrt lässt sich der Turm von mehreren Straßenachsen der Baixa betrachten. Für den praktischen Höhenwechsel existieren Fußwege und andere Verkehrsoptionen; bei großem Andrang ist der Elevador nicht automatisch die schnellste Verbindung.",
+          "tags": ["leben_jetzt", "mobilitaet"]
+        },
+        {
+          "text": "Mythencheck: Die Ähnlichkeit eiserner Tragwerke des späten 19. Jahrhunderts erklärt, warum der Aufzug oft direkt mit Eiffel verbunden wird. Belegt sind Mesnier du Ponsard als Konstrukteur und die neugotische Eisengestaltung; ein Schülerverhältnis zu Eiffel darf ohne Quelle nicht behauptet werden.",
+          "tags": ["mythencheck", "geschichte"]
+        },
+        {
+          "text": "Stadttechnik: Lissabons Aufzüge und Standseilbahnen reagieren auf dieselbe Geografie mit unterschiedlichen Lösungen. Santa Justa fährt vertikal im Turm; Bica, Glória und Lavra folgen geneigten Straßen. Der Vergleich verhindert, dass alle historischen Aufstiegshilfen pauschal als gleiche Technik erscheinen.",
+          "tags": ["technik", "quer"]
+        },
+        {
+          "text": "LIVE: Betrieb, Wartung, Wartezeit, Tarif, Zugang zur Aussichtsplattform und mögliche Trennung von Aufzug- und Plattformticket aktuell bei Carris beziehungsweise der offiziellen Betreiberinformation prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        },
+        {
+          "text": "Quer: Oben liegt die erdbebengezeichnete Carmo-Ruine, unten das pombalinische Raster nahe Rossio. Vom Castelo oder vom Arco da Rua Augusta ergeben sich Gegenblicke, die den Elevador als vertikale Landmarke innerhalb der Baixa zeigen.",
+          "tags": ["quer"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "War Raoul Mesnier du Ponsard ein Schüler Eiffels?",
+          "a": "Dafür gibt es keinen belastbaren Nachweis. Gesichert ist Mesnier du Ponsard als Planer des 1902 eröffneten Aufzugs."
+        }
+      ]
+    },
+    {
+      "id": "lissabon_alfama",
+      "name": "Alfama",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Ältestes erhaltenes Stadtviertel Lissabons am Hang zwischen Castelo und Tejo. Enge Gassen, Treppen, Kirchen und Fado-Traditionen prägen das Gebiet, das 1755 vergleichsweise glimpflich davonkam.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Häuser stehen dicht am steilen Hang; schmale Gassen, Treppen, Bögen und kleine Plätze wechseln ohne regelmäßiges Raster. Zwischen Fassaden öffnen sich plötzlich Blicke zum Tejo. Wäsche, Azulejos und vorbeifahrende Straßenbahnen gehören zum heutigen Bild, sind aber keine zeitlosen Kulissen.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Alter Stadtkern: Alfama bewahrt Teile des ältesten kontinuierlich bewohnten Stadtgewebes Lissabons. Die Wege folgen Hang, Mauern und älteren Grundstücken statt dem rechtwinkligen Plan der Baixa. Dadurch lässt sich hier die organische Entwicklung der mittelalterlichen Stadt besonders deutlich erfahren.",
+          "tags": ["geschichte", "stadtentwicklung"]
+        },
+        {
+          "text": "Name: Der Name Alfama wird gewöhnlich vom arabischen al-hamma abgeleitet und mit warmen Quellen oder Bädern verbunden. Die islamische Vergangenheit ist in Topografie und Ortsname präsent, auch wenn die sichtbaren Häuser überwiegend aus viel späteren Zeiten stammen.",
+          "tags": ["geschichte", "name"]
+        },
+        {
+          "text": "Islamisches Lissabon: Unter muslimischer Herrschaft erstreckte sich die Stadt vom befestigten Höhenbereich zum Fluss. Alfama lag in diesem Gefüge aus Wohnvierteln, Wegen, Wasserstellen und Mauern. 1147 änderte die christliche Eroberung Herrschaft und religiöse Ordnung grundlegend.",
+          "tags": ["geschichte", "mittelalter"]
+        },
+        {
+          "text": "Nach 1147: Die Kathedrale entstand auf dem Standort der Hauptmoschee, und die Burg wurde königlicher Sitz. Alfama blieb dicht bewohnt und entwickelte eigene Pfarr- und Nachbarschaftsstrukturen. Die Geschichte ist deshalb nicht nur die der Monumente, sondern auch gewöhnlicher Wohn- und Arbeitsräume.",
+          "tags": ["geschichte", "stadtleben"]
+        },
+        {
+          "text": "Erdbeben 1755: Alfama überstand die Katastrophe vergleichsweise besser als die tiefer gelegene Baixa, obwohl es auch hier Schäden gab. Fester Untergrund und die Lage außerhalb der am stärksten zerstörten Zonen trugen dazu bei, dass das unregelmäßige ältere Straßennetz weitgehend erhalten blieb.",
+          "tags": ["geschichte", "erdbeben"]
+        },
+        {
+          "text": "Fado: Alfama ist eng mit der Geschichte und Aufführung des Fado verbunden. Tavernen, Vereine und Fado-Häuser pflegen das Genre; zugleich gehört Fado auch zu Mouraria und Bairro Alto. Das Viertel sollte daher nicht als alleinige oder eindeutig belegte Geburtsstätte vereinfacht werden.",
+          "tags": ["musik", "kultur"]
+        },
+        {
+          "text": "Festas de Lisboa: Die Volksfeste im Juni, besonders um Santo António, prägen Alfama mit geschmückten Straßen und Nachbarschaftsfeiern. Termin, Zugang und Programm sind ephemer; stabil ist die enge Verbindung des Viertels mit lokalen Marchas, Heiligenfesten und öffentlicher Straßenkultur.",
+          "tags": ["kultur", "stadtleben"]
+        },
+        {
+          "text": "Kirchen und Blickpunkte: Sé, São Miguel, Santo Estêvão und Santa Luzia strukturieren den Hang. Kuppeln und Türme helfen bei der Orientierung, die in den verschachtelten Gassen sonst schwerfällt. Miradouros öffnen die dichte Bebauung und zeigen das Verhältnis zum Tejo.",
+          "tags": ["architektur", "orientierung"]
+        },
+        {
+          "text": "Wasser und Hafen: Alfama liegt unterhalb der Burg und nahe dem historischen Ufer. Seeleute, Hafenarbeit und kleinteiliges Gewerbe prägten Teile des Viertels. Die heutige Uferlinie und große Verkehrsachsen unterscheiden sich jedoch von mittelalterlichen und frühneuzeitlichen Zuständen.",
+          "tags": ["geschichte", "tejo"]
+        },
+        {
+          "text": "Leben jetzt: Alfama ist Wohnviertel und kein Freilichtmuseum. Aussicht, Gastronomie und Fado ziehen viele Gäste an, während enge Gassen zugleich alltägliche Zugänge zu Wohnungen sind. Rücksicht auf Lärm, Privatsphäre und blockierte Durchgänge gehört zur sachgerechten Ortsbeschreibung.",
+          "tags": ["leben_jetzt", "respekt"]
+        },
+        {
+          "text": "Topografie: Wege verlaufen steil, Pflaster kann glatt sein, und Treppen unterbrechen direkte Routen. Die gelbe Straßenbahn erschließt Teile des Viertels, ersetzt aber nicht jeden Fußweg. Barrierearme Alternativen und aktuelle Verkehrslage müssen je nach Ziel LIVE geprüft werden.",
+          "tags": ["mobilitaet", "orientierung"]
+        },
+        {
+          "text": "Stadtvergleich: Vom Miradouro oder Castelo blickt man auf die unregelmäßigen Dächer Alfamas; westlich liegt die planmäßig erneuerte Baixa. Dieser Gegensatz ist kein einfacher Gegensatz von alt und neu, sondern Ergebnis unterschiedlicher Zerstörung, Geologie und politischer Stadtplanung.",
+          "tags": ["stadtentwicklung", "geschichte"]
+        },
+        {
+          "text": "LIVE: Fado-Programme, Gottesdienste, Festtermine, Straßenbahnverkehr, Zugang zu Kirchen und Aussichtspunkten sowie temporäre Straßensperren aktuell prüfen; keine festen Veranstaltungs- oder Öffnungsdaten im Pack speichern.",
+          "tags": ["live_hint", "ephemeral"]
+        },
+        {
+          "text": "Quer: Castelo erklärt die Herrschaft über dem Viertel, die Sé den religiösen Wandel ab 1147, Santa Luzia die Sicht auf Dächer und Kirchen. Santa Apolónia und Feira da Ladra erweitern den Weg nach Osten in Richtung Bahnhof und Campo de Santa Clara.",
+          "tags": ["quer"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Warum blieb Alfama nach 1755 anders als die Baixa?",
+          "a": "Das Viertel war weniger vollständig zerstört; deshalb blieb sein unregelmäßiges älteres Gassennetz weitgehend erhalten, während die Baixa planmäßig neu aufgebaut wurde."
+        }
+      ]
+    },
+    {
+      "id": "lissabon_padrao_dos_descobrimentos",
+      "name": "Padrão dos Descobrimentos",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Denkmal in Form eines Karavellenbugs am Tejo. Ein temporärer Bau von 1940 wurde 1960 dauerhaft neu errichtet; Cottinelli Telmo und Leopoldo de Almeida prägten Entwurf und Figuren.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Ein rund 52 bis 56 Meter hohes, helles Monument schiebt sich wie der Bug einer Karavelle zum Tejo. An beiden Flanken steigt eine Prozession steinerner Figuren hinter Heinrich dem Seefahrer auf; ein stilisiertes Schwert und straffe vertikale Flächen verstärken die monumentale Wirkung.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Vorläufer 1940: Das erste Padrão entstand als temporärer Bau für die Exposição do Mundo Português. Diese Ausstellung des autoritären Estado Novo inszenierte eine nationale Geschichtserzählung von Gründung, Expansion und Imperium. Das ursprüngliche Material war nicht für dauerhaften Bestand gedacht.",
+          "tags": ["geschichte", "estado_novo"]
+        },
+        {
+          "text": "Dauerbau 1960: Zum 500. Todestag Heinrichs des Seefahrers wurde das Monument in dauerhafter Form neu errichtet. Der Neubau übernahm die Grundidee des Ausstellungspavillons, vergrößerte und materialisierte sie aber als langfristigen staatlichen Erinnerungsort am Ufer von Belém.",
+          "tags": ["geschichte", "1960"]
+        },
+        {
+          "text": "Urheber: Der Architekt José Ângelo Cottinelli Telmo entwickelte den Entwurf; der Bildhauer Leopoldo de Almeida schuf das Figurenprogramm. Architektur und Skulptur sind untrennbar: Die Personen bilden keine frei stehende Gruppe, sondern steigen entlang der stilisierten Schiffsform auf.",
+          "tags": ["architektur", "personen"]
+        },
+        {
+          "text": "Figuren: Insgesamt sind 33 historische Persönlichkeiten dargestellt, darunter Seefahrer, Kartografen, Geistliche, Künstler und Angehörige des Hofes. Heinrich der Seefahrer steht an der Spitze. Die Auswahl ist eine kuratierte nationale Erzählung und kein vollständiges Bild der Expansion.",
+          "tags": ["kunst", "geschichte"]
+        },
+        {
+          "text": "Schiffsform: Der Bau erinnert an den Bug einer Karavelle und verbindet maritime Bewegung mit vertikaler Monumentalität. Seitliche Figurenreihen wirken wie eine Besatzung auf dem Weg nach vorn. Diese klare Symbolik macht das Denkmal leicht lesbar, aber auch politisch stark gelenkt.",
+          "tags": ["architektur", "symbolik"]
+        },
+        {
+          "text": "Heinrich der Seefahrer: Die Leitfigur hält ein kleines Schiff und steht für die frühe Organisation portugiesischer Atlantikfahrten. Er selbst war nicht der Reisende aller späteren Routen; seine Rolle liegt stärker in Patronage, Politik und der Förderung von Unternehmungen im 15. Jahrhundert.",
+          "tags": ["geschichte", "personen"]
+        },
+        {
+          "text": "Kompassrose: Auf dem Platz liegt eine große Wind- und Kompassrose mit Weltkarte, ein Geschenk Südafrikas. Sie visualisiert Routen und Daten portugiesischer Expansion. Als Bodengrafik ist sie besonders von oben lesbar und verbindet den Aussichtspunkt mit der Platzgestaltung.",
+          "tags": ["kunst", "kartografie"]
+        },
+        {
+          "text": "Aussicht: Im oberen Bereich befindet sich ein Aussichtspunkt. Von dort werden die Kompassrose, das Jerónimos-Kloster, der Torre de Belém und der Tejo als zusammenhängende Erinnerungslandschaft sichtbar. Der Blick macht zugleich die beträchtlichen Entfernungen zwischen den Ufermonumenten verständlich.",
+          "tags": ["aussicht", "orientierung"]
+        },
+        {
+          "text": "Historische Kritik: Das Denkmal entstand unter einer Diktatur, die koloniale Herrschaft positiv inszenierte. Eine heutige Einordnung muss Navigation, Austausch und Kunst ebenso benennen wie Eroberung, Versklavung und koloniale Gewalt, die im heroischen Figurenprogramm weitgehend fehlen.",
+          "tags": ["geschichte", "kontext"]
+        },
+        {
+          "text": "Material und Relief: Der dauerhafte Bau nutzt Stahlbeton mit heller Steinverkleidung; die Figuren wurden als monumentale Skulpturen ausgeführt. Glatte Großflächen kontrastieren mit den plastischen Personen. Anders als die Manuelinik der nahen UNESCO-Bauten ist dies bewusst moderne Monumentalsprache.",
+          "tags": ["architektur", "material"]
+        },
+        {
+          "text": "Leben jetzt: Außen lassen sich Form, Figuren und Kompassrose ohne Innenbesuch lesen. Im Inneren können Ausstellungs- und Aussichtsfunktionen liegen. Eine Ortsstory sollte klar trennen zwischen dargestelltem 15. und 16. Jahrhundert und der tatsächlichen Entstehungszeit 1940 beziehungsweise 1960.",
+          "tags": ["leben_jetzt", "orientierung"]
+        },
+        {
+          "text": "Belém-Kontext: Der Standort wurde gewählt, weil Belém eng mit königlichen Seereisen und dem Tejo verbunden ist. Dennoch liegt zwischen manuelinischem Klosterbau und Denkmal fast ein halbes Jahrtausend. Nähe im Raum darf nicht als Gleichzeitigkeit der Bauwerke erzählt werden.",
+          "tags": ["geschichte", "stadtentwicklung"]
+        },
+        {
+          "text": "LIVE: Innenausstellung, Aufzug, Aussichtsterrasse, Tickets, Wartung, Veranstaltungen und wetterbedingte Sperrungen aktuell auf der offiziellen Denkmal-Seite prüfen; Außenraum und Innenzugang getrennt behandeln.",
+          "tags": ["live_hint", "ephemeral"]
+        },
+        {
+          "text": "Quer: Torre und Jerónimos sind Originalbauten der Manuelzeit und seit 1983 UNESCO-Welterbe; das Padrão ist eine Erinnerungskonstruktion des 20. Jahrhunderts. Gerade dieser Gegensatz ermöglicht eine differenzierte Erzählung über Ereignis, Überlieferung und spätere politische Inszenierung.",
+          "tags": ["quer"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Stammt das Padrão aus dem Zeitalter der Entdeckungsfahrten?",
+          "a": "Nein. Der Vorläufer entstand 1940, der heutige dauerhafte Bau 1960; er erinnert rückblickend an Personen des 15. und 16. Jahrhunderts."
+        }
+      ]
+    },
+    {
+      "id": "lissabon_oceanario_de_lisboa",
+      "name": "Oceanário de Lisboa",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Für die Expo 98 als Ozeanpavillon eröffnetes Großaquarium im Parque das Nações. Peter Chermayeff und Cambridge Seven entwarfen das Gebäude um ein zentrales Becken mit etwa fünf Millionen Litern.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Das Oceanário steht wie ein großer, heller Baukörper im Wasserbecken des Parque das Nações und ist über einen Steg erreichbar. Die kompakte Form lenkt innen auf das zentrale Aquarium; außen erinnern Wasserlage und industrielle Hafenlandschaft an das Expo-Thema der Ozeane.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Expo 98: Das Gebäude wurde als Ozeanpavillon der Weltausstellung 1998 geschaffen. Die Expo stand im Zeichen der Meere und fiel in das Gedenkjahr der Reise Vasco da Gamas nach Indien. Nach Ende der Ausstellung blieb das Oceanário als dauerhafte Institution bestehen.",
+          "tags": ["geschichte", "expo98"]
+        },
+        {
+          "text": "Architektur: Peter Chermayeff und das Büro Cambridge Seven Associates entwickelten das Aquarium. Die Besucherführung ordnet unterschiedliche Lebensräume um einen gemeinsamen zentralen Wasserkörper. Architektur, Blickachsen und abgedunkelte Räume sollen die Verbindung der Meere räumlich erfahrbar machen.",
+          "tags": ["architektur", "personen"]
+        },
+        {
+          "text": "Zentralbecken: Das große Hauptaquarium fasst ungefähr 5.000 Kubikmeter beziehungsweise rund fünf Millionen Liter Wasser. Große Scheiben erlauben Blicke aus verschiedenen Ebenen und Richtungen. Tiere erscheinen dadurch in einem gemeinsamen Ozeanraum, obwohl ihre Haltung sorgfältig gesteuert wird.",
+          "tags": ["natur", "technik"]
+        },
+        {
+          "text": "Ein-Ozean-Idee: Das Ausstellungskonzept betont, dass Atlantik, Pazifik, Indischer Ozean und Polarmeere Teile eines verbundenen Weltozeans sind. Das zentrale Becken bildet diese Idee, während umliegende Bereiche charakteristische Küsten- und Klimahabitate differenzieren.",
+          "tags": ["natur", "konzept"]
+        },
+        {
+          "text": "Vier Habitate: Um das Hauptbecken liegen vier inszenierte Lebensräume mit Bezügen zu verschiedenen Meeresregionen. Übergänge zwischen Wasser, Felsküste, Vegetation und Vogelbereichen erweitern das klassische Aquarium. Die genaue Tierbesetzung kann sich aus Haltungs- und Schutzgründen ändern.",
+          "tags": ["natur", "ausstellung"]
+        },
+        {
+          "text": "Tierbeobachtung: Große Fische, Haie und Rochen teilen den zentralen Sichtbereich; getrennte technische und biologische Bedingungen sichern die Anlage. Welche Arten aktuell zu sehen sind, ist kein dauerhafter Pack-Fakt. Stabil ist die pädagogische Ausrichtung auf marine Ökosysteme und ihre Vernetzung.",
+          "tags": ["natur", "bildung"]
+        },
+        {
+          "text": "Parque das Nações: Das Oceanário gehört zur Umwandlung eines früher industriell geprägten östlichen Ufergebiets für die Expo 98. Gare do Oriente, Promenaden und weitere Expo-Bauten bilden eine moderne Stadtlandschaft, die sich deutlich von Belém und der historischen Baixa unterscheidet.",
+          "tags": ["stadtentwicklung", "expo98"]
+        },
+        {
+          "text": "Dauerbetrieb: Anders als viele temporäre Expo-Pavillons wurde das Oceanário nach 1998 weitergeführt. Damit ist es zugleich Ausstellungserbe und lebende zoologische Institution. Pflege, Forschung, Bildung und Artenschutz bestimmen den Betrieb stärker als eine unveränderte historische Präsentation.",
+          "tags": ["geschichte", "leben_jetzt"]
+        },
+        {
+          "text": "Besucherführung: Der Rundgang arbeitet mit wiederkehrenden Fenstern in das zentrale Becken. Dieselbe Wasserwelt erscheint aus wechselnden Tiefen und Blickwinkeln, während Nebenräume einzelne Lebensräume erklären. Diese Dramaturgie ist ein wesentlicher Teil der architektonischen Erfahrung.",
+          "tags": ["architektur", "orientierung"]
+        },
+        {
+          "text": "Ozeanbildung: Vermittlung behandelt Biodiversität, Nahrungsketten, Verschmutzung, Klimawandel und verantwortlichen Umgang mit Meeren. Konkrete Kampagnen und Sonderausstellungen wechseln, doch die Verbindung von Publikumsaquarium und Umweltbildung gehört dauerhaft zum Profil.",
+          "tags": ["bildung", "umwelt"]
+        },
+        {
+          "text": "Leben jetzt: Das Oceanário ist ein Aktivitätsort; die Hauptgeschichte sollte deshalb neben Expo-Historie vor allem erklären, wie Zentralbecken und Habitate funktionieren. Besuchsdauer, aktuelle Tiere, Veranstaltungen und Zugang gehören in LIVE-Recherche statt in den stabilen Erzählkern.",
+          "tags": ["leben_jetzt", "aktivitaet"]
+        },
+        {
+          "text": "Wasserarchitektur: Der Bau liegt nicht am offenen Atlantik, sondern in einem gestalteten Wasserbecken am Tejo-Ufer. Diese Inszenierung lässt ihn wie eine Insel wirken und trennt den Besuch räumlich vom umgebenden Expo-Gelände. Der Steg ist daher Teil der bewussten Annäherung.",
+          "tags": ["architektur", "visuell"]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Zeitfenster, aktuelle Ausstellungen, Tierbereiche, Fütterungen, Barrierefreiheit und temporäre Schließungen ausschließlich auf der offiziellen Oceanário-Seite prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        },
+        {
+          "text": "Quer: Gare do Oriente ist das markante Verkehrstor des Expo-Gebiets. Die Seilbahn und Uferpromenade erschließen weitere Perspektiven, ihr Betrieb ist LIVE. MAAT in Belém bietet als Museum für Kunst, Architektur und Technologie einen anderen Blick auf moderne Uferentwicklung.",
+          "tags": ["quer"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Warum wirkt das Hauptbecken wie ein einziger Ozean?",
+          "a": "Das Ausstellungskonzept ordnet vier umgebende Habitate um ein zentrales Becken und vermittelt so die Verbundenheit des Weltozeans."
+        }
+      ]
+    },
+    {
+      "id": "lissabon_bairro_alto",
+      "name": "Bairro Alto",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Historisches Oberstadtviertel mit regelmäßigeren Gassen, kleinen Läden, Bars und Fado-Häusern. Tagsüber Wohn- und Kreativquartier, abends ein Zentrum des Lissabonner Nachtlebens.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Das Viertel liegt oberhalb der Baixa und besteht aus schmalen, vergleichsweise geraden Gassen mit dicht gereihten Häusern. Schlichte Fassaden, Azulejos, kleine Läden und zahlreiche Erdgeschosslokale prägen den Eindruck; an den Rändern öffnen Miradouros den Blick über die Unterstadt.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Stadtentwicklung: Bairro Alto entstand außerhalb des älteren mittelalterlichen Kerns und besitzt ein geordneteres Straßennetz als Alfama. Seine Anlage zeigt eine frühe planmäßige Erweiterung Lissabons am westlichen Hügel, lange vor dem pombalinischen Raster der Baixa.",
+          "tags": ["geschichte", "stadtentwicklung"]
+        },
+        {
+          "text": "Fado: Seit dem 20. Jahrhundert wurden Fado-Häuser im Bairro Alto besonders wichtig; offizielle Lissabonner Kulturinformationen verweisen auf ihren starken Aufstieg seit den 1930er Jahren. Das Genre gehört jedoch ebenso zu Mouraria und Alfama und ist keine exklusive Tradition dieses Viertels.",
+          "tags": ["musik", "kultur"]
+        },
+        {
+          "text": "Tag und Nacht: Tagsüber sind alternative Geschäfte, Ateliers, Wohnen und Gastronomie sichtbar; abends füllen Bars und Musikorte viele Straßen. Der Wechsel ist eine reale Doppelnutzung, keine reine Touristenkulisse. Rücksicht auf die dichte Wohnbevölkerung bleibt wichtig.",
+          "tags": ["leben_jetzt", "stadtleben"]
+        },
+        {
+          "text": "Topografie: Zugänge führen vom Chiado, vom Largo de Camões oder über steile Verbindungen wie Bica hinauf. Westlich und südlich fällt das Gelände zu anderen Vierteln ab. Historische Aufstiegshilfen reagieren auf diese Höhenunterschiede, doch aktueller Betrieb muss LIVE geprüft werden.",
+          "tags": ["orientierung", "mobilitaet"]
+        },
+        {
+          "text": "Presse und Kultur: Das Viertel war über lange Zeit Standort von Zeitungsredaktionen, Druckereien und kulturellen Einrichtungen. Diese Geschichte ergänzt das heutige Bild aus Bars und Restaurants und erklärt, warum Bairro Alto auch mit urbaner Öffentlichkeit und Kreativmilieus verbunden ist.",
+          "tags": ["geschichte", "kultur"]
+        },
+        {
+          "text": "LIVE: Öffnung und Programm einzelner Fado-Häuser, Bars, Galerien und Läden, Nachtverkehr, Baustellen und Lärmschutzregeln aktuell prüfen; keine Lokalempfehlung oder Veranstaltungszeit dauerhaft im Pack festschreiben.",
+          "tags": ["live_hint", "ephemeral"]
+        },
+        {
+          "text": "Quer: Chiado und Largo de Camões verbinden das Viertel mit der Baixa; bergab folgt Cais do Sodré mit Mercado da Ribeira. Alfama bietet einen bewusst anderen Vergleich von unregelmäßigem mittelalterlichem Hanggefüge und westlicher Oberstadt.",
+          "tags": ["quer"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Ist Bairro Alto nur ein Ausgehviertel?",
+          "a": "Nein. Es ist ein historisches Wohn- und Kulturviertel mit Läden und Ateliers; das starke Nachtleben ist nur eine seiner Nutzungen."
+        }
+      ]
+    },
+    {
+      "id": "lissabon_miradouro_da_senhora_do_monte",
+      "name": "Miradouro da Senhora do Monte",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Ruhiger Aussichtspunkt auf dem Graça-Hügel bei einer Kapelle. Der Panoramablick reicht über Castelo, Baixa, Tejo und westliche Stadtteile.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Unter schattenspendenden Bäumen öffnet sich ein breites Panorama. Links liegen Graça-Kirche und Castelo, darunter staffeln sich Dächer zur Baixa; dahinter erscheinen Tejo, Carmo-Ruine und neuere Viertel. Die kleine Kapelle gibt dem Platz seinen Namen.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Kapelle: Die Ermida de Nossa Senhora do Monte steht am Aussichtspunkt; die Stiftung wird mit 1147 verbunden. Religiöser Ort und Aussicht sind daher historisch gekoppelt, auch wenn die heute sichtbare Bausubstanz spätere Veränderungen erfahren hat.",
+          "tags": ["geschichte", "religion"]
+        },
+        {
+          "text": "1147-Kontext: Offizielle Tourismusinformationen verbinden den Hügel mit der Aufstellung von Truppen Afonso Henriques' vor der Eroberung Lissabons. Der erhöhte Standort erklärt den strategischen Blick auf Burg und Stadt, ohne jede spätere Legende automatisch zum gesicherten Detail zu machen.",
+          "tags": ["geschichte", "aussicht"]
+        },
+        {
+          "text": "Orientierung: Der Blick trennt markante Stadtschichten: Castelo und Alfama am alten Hügel, das regelmäßige Zentrum der Baixa, Carmo auf der westlichen Höhe und den Tejo als breite Südgrenze. Damit eignet sich der Ort besonders für eine geografische Stadtübersicht.",
+          "tags": ["orientierung", "stadtentwicklung"]
+        },
+        {
+          "text": "Graça: Der Miradouro liegt im Bereich Graça oberhalb der bekannteren Terrassen näher am Kloster. Der Weg führt durch ein bewohntes Hügelviertel; die steile Annäherung ist Teil der Lage und sollte bei Mobilitätsplanung berücksichtigt werden.",
+          "tags": ["stadtleben", "mobilitaet"]
+        },
+        {
+          "text": "Leben jetzt: Der Platz ist vor allem Aussicht und ruhiger Aufenthalt, kein Monument mit langem Innenrundgang. Licht, Sichtweite und Andrang verändern die Erfahrung. Bäume und Sitzmöglichkeiten prägen die unmittelbare Atmosphäre stärker als große Architektur.",
+          "tags": ["leben_jetzt", "aussicht"]
+        },
+        {
+          "text": "LIVE: Zugang zur Kapelle, Gottesdienste, Veranstaltungen, Baustellen, Verkehr und mögliche Sichtbehinderungen durch Wetter aktuell prüfen; Sonnenuntergangszeit und Besucherauslastung nicht dauerhaft speichern.",
+          "tags": ["live_hint", "ephemeral"]
+        },
+        {
+          "text": "Quer: Vom Aussichtspunkt blickt man direkt zum Castelo und über die Baixa zur Carmo-Höhe. Santa Luzia liegt tiefer in Alfama und bietet einen näheren Blick auf Kirchenkuppeln und Tejo statt des großen Gesamtpanoramas.",
+          "tags": ["quer"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Was sieht man vom Miradouro da Senhora do Monte?",
+          "a": "Unter anderem Castelo, Graça, Baixa, Carmo, den Tejo und weite Teile der westlichen Stadt."
+        }
+      ]
+    },
+    {
+      "id": "lissabon_miradouro_de_santa_luzia",
+      "name": "Miradouro de Santa Luzia",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Terrassierter Aussichtspunkt bei der Kirche Santa Luzia über Alfama. Garten, Laube und Azulejo-Paneele verbinden Tejo-Panorama mit Bildern der Stadtgeschichte.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Eine begrünte Terrasse mit Laube, Bougainvillea, Wasserbecken und blau-weißen Azulejos öffnet sich über Alfamas Dächer. Im Blick liegen die Kuppel von Santa Engrácia, Santo Estêvão, die Türme von São Miguel und der Tejo.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Azulejos: Paneele von António Quaresma zeigen unter anderem die Praça do Comércio vor dem Erdbeben von 1755 und die Einnahme der Burg 1147. Sie sind keine zeitgenössischen Dokumente der Ereignisse, sondern spätere bildliche Erinnerungen an zentrale Stadtgeschichten.",
+          "tags": ["kunst", "geschichte"]
+        },
+        {
+          "text": "Kirche: Der Aussichtspunkt liegt an der Igreja de Santa Luzia. Ihre weiße Fassade und dekorative Fliesen bilden mit der Terrasse ein Ensemble. Kirchliche Nutzung und öffentlicher Miradouro sind räumlich nah, haben aber unterschiedliche Zugangsregeln.",
+          "tags": ["architektur", "religion"]
+        },
+        {
+          "text": "Orientierung: Die Kirchenkuppeln und Türme helfen, sich im Gassengeflecht Alfamas zurechtzufinden. Der Tejo liegt im Hintergrund, während Dächer und Terrassen den steilen Übergang vom Castelo-Hügel zum Ufer sichtbar machen.",
+          "tags": ["orientierung", "aussicht"]
+        },
+        {
+          "text": "Straßenbahn: Historische gelbe Wagen passieren den Bereich auf der engen Straße. Das Zusammenspiel aus Verkehr, Kirche, Terrasse und Aussicht ist charakteristisch, doch Linienführung und Betrieb sind ephemer und dürfen nur LIVE genannt werden.",
+          "tags": ["mobilitaet", "stadtleben"]
+        },
+        {
+          "text": "Leben jetzt: Santa Luzia ist gleichzeitig Garten, Aussicht und Durchgang auf dem Weg zwischen Sé, Portas do Sol und Castelo. Wegen des kompakten Raums kann es voll werden; der Blick und die Paneele lassen sich getrennt erschließen.",
+          "tags": ["leben_jetzt", "orientierung"]
+        },
+        {
+          "text": "LIVE: Kirchenöffnung, Straßenbahnbetrieb, Veranstaltungen, Restaurierungen der Fliesen und temporäre Absperrungen aktuell prüfen; Café- und Kioskbetrieb nicht als stabilen Fakt behandeln.",
+          "tags": ["live_hint", "ephemeral"]
+        },
+        {
+          "text": "Quer: Das Paneel zum alten Terreiro do Paço ergänzt die heutige Praça do Comércio. Das Bild der Burgnahme verbindet zum Castelo und zur Sé; wenige Schritte weiter bietet Portas do Sol einen anderen Blickwinkel über Alfama.",
+          "tags": ["quer"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Was zeigen die Azulejos am Aussichtspunkt?",
+          "a": "Unter anderem die Praça do Comércio vor 1755 und eine spätere Darstellung der Einnahme der Burg im Jahr 1147."
+        }
+      ]
+    },
+    {
+      "id": "lissabon_parque_eduardo_vii",
+      "name": "Parque Eduardo VII",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Großer Stadtpark nördlich des Marquês de Pombal. Seine lange Rasenachse steigt zu einem Aussichtspunkt an und eröffnet den Blick über Avenida da Liberdade, Baixa und Tejo.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Eine breite, ansteigende Rasenfläche wird von geometrisch geschnittenen Hecken und Baumreihen begleitet. Am oberen Ende öffnet sich die Achse über das Denkmal des Marquês de Pombal und die Avenida da Liberdade bis zum Tejo.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Name: Der Park erinnert an den britischen König Edward VII., der Lissabon zu Beginn des 20. Jahrhunderts besuchte. Die Benennung verweist auf die lange portugiesisch-britische Beziehung und gab der früher anders bezeichneten Grünanlage ihren heutigen Namen.",
+          "tags": ["geschichte", "name"]
+        },
+        {
+          "text": "Gestaltung: Der prägende Entwurf der heutigen Mittelachse wird mit dem portugiesischen Architekten Francisco Keil do Amaral und dem Jahr 1945 verbunden. Die streng geschnittenen Hecken rahmen die topografische Sichtlinie statt einen naturähnlichen Landschaftspark zu imitieren.",
+          "tags": ["architektur", "landschaft"]
+        },
+        {
+          "text": "Aussicht: Vom oberen Miradouro werden Park, Pombal-Denkmal, Avenida da Liberdade, Baixa und Tejo als zusammenhängende Nord-Süd-Achse lesbar. Bei klarer Sicht reicht der Blick über das Südufer hinaus in die weitere Landschaft.",
+          "tags": ["aussicht", "orientierung"]
+        },
+        {
+          "text": "Denkmäler: Am oberen Bereich liegt das Denkmal zum 25. April des Bildhauers João Cutileiro. Es erweitert den Park um die Erinnerung an die Nelkenrevolution und steht damit in deutlichem Kontrast zur älteren monarchischen Benennung.",
+          "tags": ["kunst", "geschichte"]
+        },
+        {
+          "text": "Leben jetzt: Wege, Rasenachsen, Aussicht und Gartenbereiche machen den Park zu einem Spazier- und Aufenthaltsraum. Wiederkehrende Großveranstaltungen wie die Buchmesse nutzen Flächen zeitweise, sind aber terminabhängig und gehören in LIVE-Recherche.",
+          "tags": ["leben_jetzt", "natur"]
+        },
+        {
+          "text": "LIVE: Veranstaltungen, Gartenbereiche, Baustellen, Beleuchtung, temporäre Sperrungen und Öffnung einzelner Anlagen aktuell bei Stadt und Betreibern prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        },
+        {
+          "text": "Quer: Die Sichtachse führt über Marquês de Pombal in die Avenida da Liberdade und weiter zur Baixa. Der Miradouro da Senhora do Monte zeigt dieselbe Stadt diagonal von einem historischen Osthügel statt entlang einer modernen Planungsachse.",
+          "tags": ["quer"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Warum eignet sich der Park zur Orientierung?",
+          "a": "Seine ansteigende Mittelachse zeigt in einer Linie Marquês de Pombal, Avenida da Liberdade, Baixa und den Tejo."
+        }
+      ]
+    },
+    {
+      "id": "lissabon_basilica_da_estrela",
+      "name": "Basílica da Estrela",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Monumentale spätbarocke und klassizistische Kirche des späten 18. Jahrhunderts, von Maria I. gestiftet. Weiße Kuppel, Doppeltürme, Marmorausstattung und königliches Grab prägen den Bau.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Eine helle, symmetrische Fassade mit zwei Glockentürmen steht vor einer hohen Kuppel. Skulpturen und korinthische Gliederung schmücken die Front; innen setzt sich die Wirkung in verschiedenfarbigem Marmor und einem großzügigen Kuppelraum fort.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Stiftung: Königin Maria I. ließ die Kirche aufgrund eines Gelübdes im Zusammenhang mit der Geburt eines Thronerben errichten. Der königliche Auftrag erklärt Dimension, reiche Ausstattung und die Verbindung von Frömmigkeit mit dynastischer Repräsentation.",
+          "tags": ["geschichte", "dynastie"]
+        },
+        {
+          "text": "Bau: Die Arbeiten begannen 1779 und wurden 1790 abgeschlossen. Mateus Vicente de Oliveira und nach dessen Tod Reinaldo Manuel dos Santos prägten den Entwurf. Spätbarocke Bewegung verbindet sich mit stärker klassizistischer Ordnung.",
+          "tags": ["architektur", "personen"]
+        },
+        {
+          "text": "Innenraum: Heller und farbiger Marmor bestimmt Wände, Pfeiler und Altäre. Die Kuppel bündelt den Raum, während Seitenkapellen und Skulpturen das zeremonielle Programm ergänzen. Der Bau zählt zu den großen Kirchenprojekten nach dem Erdbeben von 1755.",
+          "tags": ["architektur", "innenraum"]
+        },
+        {
+          "text": "Grab Maria I.: Die Königin ist in der Basílica da Estrela bestattet. Dadurch ist der Bau nicht nur Pfarr- und Klosterkirche, sondern königlicher Gedächtnisort. Ihre Regierungszeit und ihr späteres Leben verbinden Lissabonner und brasilianische Geschichte.",
+          "tags": ["geschichte", "memoria"]
+        },
+        {
+          "text": "Krippe: Eine große Weihnachtskrippe des Bildhauers Joaquim Machado de Castro gehört zu den bekannten Kunstwerken der Basilika. Ihre Zugänglichkeit kann beschränkt sein; stabil ist die Zuschreibung an einen der wichtigsten portugiesischen Bildhauer des 18. Jahrhunderts.",
+          "tags": ["kunst", "religion"]
+        },
+        {
+          "text": "LIVE: Gottesdienste, Kirchenöffnung, Zugang zu Kuppel, Dach oder Krippe, Eintritt und Restaurierungen aktuell prüfen; religiöse Nutzung und Ruhegebot respektieren.",
+          "tags": ["live_hint", "ephemeral"]
+        },
+        {
+          "text": "Quer: Gegenüber liegt der Jardim da Estrela als grüner Kontrast. Die Straßenbahn 28E bedient den Bereich je nach aktueller Linienführung; ihre Route ist LIVE. Machado de Castro schuf auch das Reiterstandbild auf der Praça do Comércio.",
+          "tags": ["quer"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Wer ließ die Basílica da Estrela bauen?",
+          "a": "Königin Maria I. stiftete sie aufgrund eines Gelübdes; gebaut wurde sie von 1779 bis 1790."
+        }
+      ]
+    },
+    {
+      "id": "lissabon_maat",
+      "name": "MAAT",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Museum für Kunst, Architektur und Technologie am Tejo. Seit 2016 verbindet es Amanda Levetes flache MAAT Gallery mit der historischen Central Tejo von 1908.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Die niedrige, geschwungene MAAT Gallery liegt wie eine begehbare Welle am Tejo. Ihre helle keramische Haut reflektiert wechselndes Licht; das Dach wird zur Aussichtsterrasse. Daneben steht die deutlich ältere Backsteinarchitektur der Central Tejo.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Eröffnung: MAAT wurde im Oktober 2016 eröffnet. Die Institution widmet sich dem Zusammenspiel von Kunst, Architektur und Technologie und will historische Gegenwart und Zukunftsfragen kritisch behandeln, statt nur eine einzelne Sammlungsgattung zu präsentieren.",
+          "tags": ["geschichte", "museum"]
+        },
+        {
+          "text": "Architektur: Die britische Architektin Amanda Levete und ihr Büro AL_A entwarfen die MAAT Gallery. Der flache Bau nimmt die Uferlinie auf, führt Besucher über das Dach und lenkt reflektiertes Tejo-Licht unter den auskragenden Rand.",
+          "tags": ["architektur", "personen"]
+        },
+        {
+          "text": "Central Tejo: Zum Ensemble gehört ein ehemaliges Kraftwerk, dessen Geschichte 1908 beginnt. Industriearchitektur, Kessel und Technik vermitteln die Elektrifizierung Lissabons. Der historische Bau bildet einen bewussten materiellen Gegenpol zur neuen Galerie.",
+          "tags": ["technik", "geschichte"]
+        },
+        {
+          "text": "Museumskonzept: Temporäre Ausstellungen und Programme untersuchen Kunst, gebaute Umwelt, Energie und technische Kultur. Welche Werke zu sehen sind, wechselt. Dauerhaft ist die Verbindung zweier Gebäude und die Auseinandersetzung mit der industriellen Vergangenheit des Standorts.",
+          "tags": ["kunst", "bildung"]
+        },
+        {
+          "text": "Uferentwicklung: MAAT liegt im historischen Belém, aber seine Architektur gehört zur jüngeren Umgestaltung der Tejo-Promenade. Der Park zwischen Gebäuden und Fluss macht das Museum auch ohne Innenbesuch als öffentlichen Stadtraum erfahrbar.",
+          "tags": ["stadtentwicklung", "leben_jetzt"]
+        },
+        {
+          "text": "LIVE: Ausstellungen, Öffnung beider Gebäude, Tickets, Dachzugang, Veranstaltungen und temporäre Schließungen auf maat.pt prüfen; Central und Gallery können unterschiedliche Programme oder Zugänge haben.",
+          "tags": ["live_hint", "ephemeral"]
+        },
+        {
+          "text": "Quer: Central Tejo erzählt Energie- und Industriegeschichte, während Jerónimos und Torre die manuelinische Epoche vertreten. Die Ponte 25 de Abril bildet flussabwärts eine weitere technische Großstruktur im selben Panorama.",
+          "tags": ["quer"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Besteht MAAT nur aus dem neuen weißen Gebäude?",
+          "a": "Nein. Zum Museum gehört auch die historische Central Tejo, ein ehemaliges Kraftwerk aus dem frühen 20. Jahrhundert."
+        }
+      ]
+    },
+    {
+      "id": "lissabon_museu_nacional_do_azulejo",
+      "name": "Museu Nacional do Azulejo",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Nationalmuseum zur portugiesischen Fliesenkunst im ehemaligen Convento da Madre de Deus, das Königin Leonor 1509 gründete. Sammlung und Klosterräume spannen mehrere Jahrhunderte.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Das Museum liegt in einem ehemaligen Klosterkomplex, dessen eher ruhiges Äußeres reich ausgestattete Innenräume verbirgt. Kreuzgang, Kapellen, vergoldete Holzschnitzerei und großflächige Azulejo-Zyklen verbinden Museumsobjekte mit historischer Architektur.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Kloster: Königin Leonor gründete das Convento da Madre de Deus 1509. Der Bau wurde in späteren Jahrhunderten erweitert und verändert. Das Museum nutzt damit selbst ein Denkmal, dessen Architektur die Entwicklung portugiesischer religiöser Kunst sichtbar macht.",
+          "tags": ["geschichte", "religion"]
+        },
+        {
+          "text": "Sammlung: Die Präsentation verfolgt die Geschichte der Azulejos in Portugal von frühen Beispielen bis zur Moderne. Sie erklärt Wandel von Technik, Farbe, Ornament und erzählenden Bildfeldern, statt Fliesen nur als dekorative Fassadenhaut zu behandeln.",
+          "tags": ["kunst", "museum"]
+        },
+        {
+          "text": "Kirche: Die Igreja da Madre de Deus besitzt eine besonders reiche barocke Ausstattung aus vergoldeter Talha, Malerei und Fliesen. Der Kontrast zwischen dichter Innenraumdekoration und klösterlicher Anlage gehört zu den stärksten Raumerfahrungen des Museums.",
+          "tags": ["architektur", "kunst"]
+        },
+        {
+          "text": "Großes Panorama: Ein langes Azulejo-Panorama zeigt Lissabon vor dem Erdbeben von 1755. Als historische Bildquelle vermittelt es Uferlinie, Bauwerke und Stadtsilhouette, muss aber wie jede Darstellung hinsichtlich Perspektive und künstlerischer Konstruktion gelesen werden.",
+          "tags": ["kunst", "stadtgeschichte"]
+        },
+        {
+          "text": "Azulejo-Kontext: Portugal übernahm und entwickelte keramische Fliesentraditionen aus unterschiedlichen mediterranen und europäischen Einflüssen. Blau-weiß ist berühmt, aber die Sammlung zeigt auch polychrome, geometrische, religiöse und moderne Arbeiten.",
+          "tags": ["kunst", "geschichte"]
+        },
+        {
+          "text": "LIVE: Öffnung, Tickets, zugängliche Klosterräume, Sonderausstellungen und Restaurierungen aktuell bei Museus e Monumentos de Portugal prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        },
+        {
+          "text": "Quer: Das Panorama ergänzt Santa Luzias Paneel und die heutige Praça do Comércio bei der Rekonstruktion des vorpombalinischen Lissabon. Fassaden in Alfama und Bairro Alto zeigen Azulejos anschließend im alltäglichen Stadtraum.",
+          "tags": ["quer"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Was ist das bekannteste Stadtbild im Museum?",
+          "a": "Ein großes Azulejo-Panorama zeigt Lissabon vor dem Erdbeben von 1755."
+        }
+      ]
+    },
+    {
+      "id": "lissabon_lx_factory",
+      "name": "LX Factory",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Umgenutztes Industrieareal in Alcântara unter der Ponte 25 de Abril. Eine Textilfabrik des 19. Jahrhunderts wurde ab 2008/2009 zum Kreativquartier mit Ateliers und Gastronomie.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Backstein, hohe Fabrikfenster, Schornsteine, Stahl und große Wandbilder prägen das kompakte Gelände. Über dem Areal spannt sich die Ponte 25 de Abril; Innenhöfe und frühere Produktionshallen wurden für neue Nutzungen geöffnet.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Industriegeschichte: 1846 nahm hier die Companhia de Fiação e Tecidos Lisbonense einen großen Textilkomplex in Betrieb. Die Fabrik gehört zur Industrialisierung Alcântaras, wo Nähe zu Hafen, Verkehrswegen und Arbeitskräften Produktion begünstigte.",
+          "tags": ["geschichte", "industrie"]
+        },
+        {
+          "text": "Wandel: Nach industriellen Nutzungen und Leerständen wurde der Komplex ab 2008 neu belebt; 2009 etablierte sich LX Factory als kreativer Standort. Die Umnutzung erhielt den rauen Fabrikcharakter, ersetzte Produktion aber weitgehend durch Dienstleistungen und Kultur.",
+          "tags": ["geschichte", "stadtentwicklung"]
+        },
+        {
+          "text": "Nutzungen: Ateliers, Büros, Buchhandel, Design, Ausstellungen, Gastronomie und Veranstaltungen liegen dicht nebeneinander. Einzelne Mieter wechseln; stabil ist das Modell eines privat entwickelten Kreativareals in erhaltenen Industriebauten.",
+          "tags": ["leben_jetzt", "kultur"]
+        },
+        {
+          "text": "Street Art: Wandbilder und wechselnde Interventionen nutzen Fassaden und Höfe als Ausstellungsflächen. Konkrete Motive können verschwinden oder übermalt werden und gehören daher in aktuelle visuelle Prüfung, nicht als dauerhafte Beschreibung.",
+          "tags": ["kunst", "leben_jetzt"]
+        },
+        {
+          "text": "Stadtkontext: LX Factory steht für die postindustrielle Umwertung Alcântaras. Die Nähe zur Brücke erzeugt eine spektakuläre Kulisse, bringt aber auch Verkehrsinfrastruktur unmittelbar über das historische Fabrikgelände.",
+          "tags": ["stadtentwicklung", "architektur"]
+        },
+        {
+          "text": "LIVE: Öffnung des Areals, Geschäfte, Märkte, Veranstaltungen, Gastronomie und aktuelle Kunstwerke direkt beim Betreiber prüfen; einzelne Angebote niemals dauerhaft als Pack-Fakt festschreiben.",
+          "tags": ["live_hint", "ephemeral"]
+        },
+        {
+          "text": "Quer: MAAT und Central Tejo zeigen eine museale Umnutzung von Industriearchitektur; LX Factory ist stärker gemischt-kommerziell. Die Ponte 25 de Abril ist vom Gelände aus als technische Großstruktur besonders präsent.",
+          "tags": ["quer"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Was war die LX Factory ursprünglich?",
+          "a": "Der Kern war ein 1846 gegründeter Textilfabrikkomplex in Alcântara."
+        }
+      ]
+    },
+    {
+      "id": "lissabon_time_out_market",
+      "name": "Time Out Market",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Seit 2014 betriebene Gastronomiehalle im historischen Mercado da Ribeira am Cais do Sodré. Sie teilt den Marktkomplex mit traditionellen Marktbereichen und liegt direkt am Verkehrsknoten.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Unter einer großen historischen Markthalle liegen Stände rings um gemeinschaftliche Tischreihen. Die klare Hallenstruktur und der lebhafte Innenraum unterscheiden sich vom benachbarten Bahnhofsumfeld am Cais do Sodré.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Mercado da Ribeira: Der Standort besitzt eine längere Geschichte als der Markenname Time Out Market. Der Markt am Ribeira-Ufer entwickelte sich als wichtiger Handelsplatz für Lebensmittel; die heutige Halle und ihre Nutzungen wurden mehrfach verändert.",
+          "tags": ["geschichte", "markt"]
+        },
+        {
+          "text": "Time Out seit 2014: Das von Time Out Portugal entwickelte Markthallenkonzept eröffnete 2014. Ausgewählte gastronomische Anbieter werden unter einem Dach präsentiert. Das Lissabonner Modell wurde später auf weitere Städte übertragen.",
+          "tags": ["geschichte", "gastronomie"]
+        },
+        {
+          "text": "Konzept: Bestellt wird an verschiedenen Ständen, gegessen überwiegend an gemeinsamen Tischen. Anbieter und Speisen wechseln; dauerhaft ist die kuratierte Verbindung von Markthalle, Gastronomie und Veranstaltungsflächen.",
+          "tags": ["leben_jetzt", "gastronomie"]
+        },
+        {
+          "text": "Cais do Sodré: Markt, Bahnhof, Metro, Fähren und Ufer liegen eng beieinander. Der Ort ist daher nicht nur Essensziel, sondern Teil eines historischen und heutigen Verkehrsknotens zwischen Zentrum, westlichem Ufer und Südufer.",
+          "tags": ["orientierung", "mobilitaet"]
+        },
+        {
+          "text": "Einordnung: Der Time Out Market ist ein kommerzielles Gastronomiekonzept in einer historischen Halle, kein unveränderter traditioneller Wochenmarkt. Diese Unterscheidung verhindert, dass Marke und lange Marktgeschichte miteinander gleichgesetzt werden.",
+          "tags": ["geschichte", "kontext"]
+        },
+        {
+          "text": "LIVE: Öffnung, Anbieter, Speisen, Preise, Reservierungsregeln, Veranstaltungen und Auslastung auf der offiziellen Marktseite prüfen; keine einzelnen Menüs dauerhaft speichern.",
+          "tags": ["live_hint", "ephemeral"]
+        },
+        {
+          "text": "Quer: Bairro Alto und Bica liegen den Hügel hinauf; Praça do Comércio folgt am Ufer ostwärts. Santa Apolónia ist der andere historische Fernbahnhof am Tejo, während Cais do Sodré stärker Fähren und westliche Vorortverbindungen bündelt.",
+          "tags": ["quer"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Ist Time Out Market dasselbe wie der historische Mercado da Ribeira?",
+          "a": "Der Time Out Market nutzt seit 2014 einen Teil des historischen Marktkomplexes; die Geschichte des Mercado da Ribeira ist deutlich älter."
+        }
+      ]
+    },
+    {
+      "id": "lissabon_rossio",
+      "name": "Rossio",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Zentraler Stadtplatz mit offiziellem Namen Praça Dom Pedro IV. Wellenpflaster, Brunnen, Pedro-Säule und das Teatro Nacional D. Maria II prägen den Übergang zwischen Baixa und nördlichem Zentrum.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Schwarz-weißes Wellenpflaster füllt den langgestreckten Platz. Zwei Brunnen und die hohe Säule Dom Pedros IV. gliedern die Mitte; an der Nordseite steht das klassizistische Teatro Nacional D. Maria II mit säulengeschmückter Front.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Name: Rossio ist der traditionelle Alltagsname; offiziell heißt der Platz Praça Dom Pedro IV. Pedro IV. von Portugal war zugleich Pedro I. von Brasilien. Die zentrale Säule erinnert an diese politisch verflochtene Monarchiegeschichte.",
+          "tags": ["geschichte", "name"]
+        },
+        {
+          "text": "Stadtbühne: Seit dem Mittelalter war Rossio Markt-, Fest-, Versammlungs- und Gerichtsraum. Seine Funktionen und Gebäude änderten sich wiederholt. Der Platz verbindet ältere Stadtgeschichte mit dem nördlichen Abschluss des nach 1755 erneuerten Baixa-Rasters.",
+          "tags": ["geschichte", "stadtleben"]
+        },
+        {
+          "text": "Erdbeben: Das Umfeld wurde 1755 stark zerstört und danach neu geordnet. Die heutige Platzfassung enthält spätere Bauten; sie ist daher kein unveränderter mittelalterlicher Rossio, sondern eine über Jahrhunderte neu komponierte zentrale Stadtfläche.",
+          "tags": ["geschichte", "erdbeben"]
+        },
+        {
+          "text": "Pflaster: Das bekannte Calçada-portuguesa-Muster erzeugt optische Wellen und wurde im 19. Jahrhundert angelegt. Es beeinflusste Promenadengestaltungen weit über Portugal hinaus. Bei Nässe kann der polierte Stein glatt sein.",
+          "tags": ["kunst", "mobilitaet"]
+        },
+        {
+          "text": "Bahnhof: Der nahe Bahnhof Rossio besitzt eine markante historistische Fassade und verbindet das Zentrum per Bahn Richtung Sintra. Fahrpläne und Betrieb sind LIVE; architektonisch ist der Bahnhof vom eigentlichen Platzensemble zu unterscheiden.",
+          "tags": ["architektur", "mobilitaet"]
+        },
+        {
+          "text": "LIVE: Theaterprogramm, Bahnhofsbetrieb, Veranstaltungen, Demonstrationen, Brunnenbetrieb und temporäre Sperrungen aktuell prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        },
+        {
+          "text": "Quer: Rua Augusta verbindet Rossio durch die Baixa mit der Praça do Comércio. Avenida da Liberdade beginnt jenseits der Praça dos Restauradores und führt die zentrale Achse nordwärts fort.",
+          "tags": ["quer"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Warum hat Rossio zwei Namen?",
+          "a": "Rossio ist der historische gebräuchliche Name; offiziell heißt der Platz Praça Dom Pedro IV."
+        }
+      ]
+    },
+    {
+      "id": "lissabon_avenida_da_liberdade",
+      "name": "Avenida da Liberdade",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Breiter Boulevard des späten 19. Jahrhunderts zwischen Restauradores und Marquês de Pombal. Baumreihen, Mosaikpflaster, Theater, Hotels und Geschäfte prägen die zentrale Achse.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Mehrere Fahrbahnen werden von breiten, baumbestandenen Gehwegen begleitet. Schwarz-weißes Mosaikpflaster, kleine Plätze, Denkmäler und repräsentative Fassaden erzeugen den Charakter eines großstädtischen Boulevards.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Entstehung: Die Avenida wurde im späten 19. Jahrhundert angelegt und 1886 eröffnet. Sie ersetzte beziehungsweise verlängerte die ältere öffentliche Promenade Passeio Público und öffnete die Stadtentwicklung vom historischen Zentrum nach Norden.",
+          "tags": ["geschichte", "stadtentwicklung"]
+        },
+        {
+          "text": "Vorbild: Breite europäische Boulevards, besonders das Paris des 19. Jahrhunderts, beeinflussten Maßstab und Gestaltung. Die Avenida ist dennoch ein Lissabonner Stadtraum mit portugiesischem Pflaster, lokaler Topografie und eigener Architekturgeschichte.",
+          "tags": ["architektur", "stadtplanung"]
+        },
+        {
+          "text": "Achse: Im Süden schließen Restauradores und Rossio an; im Norden liegt Marquês de Pombal und dahinter Parque Eduardo VII. Der Verlauf macht die Erweiterung vom dichten Zentrum in die Avenidas Novas geografisch nachvollziehbar.",
+          "tags": ["orientierung", "stadtentwicklung"]
+        },
+        {
+          "text": "Architekturwandel: Historistische Häuser, Theater und spätere Büro- oder Hotelbauten stehen nebeneinander. Abrisse und Neubauten veränderten das Bild im 20. Jahrhundert, sodass der Boulevard keine vollständig erhaltene einheitliche Epoche repräsentiert.",
+          "tags": ["architektur", "geschichte"]
+        },
+        {
+          "text": "Leben jetzt: Die Avenida ist Verkehrsachse, Geschäftsstraße und schattiger Fußweg. Luxusgeschäfte sind sichtbar, doch Denkmäler, Kioske und Pflaster machen den öffentlichen Raum ebenso wichtig wie kommerzielle Nutzungen.",
+          "tags": ["leben_jetzt", "stadtleben"]
+        },
+        {
+          "text": "LIVE: Geschäfte, Theaterprogramme, Verkehr, Demonstrationen, Baustellen und Veranstaltungen aktuell prüfen; einzelne Marken oder Öffnungszeiten nicht dauerhaft speichern.",
+          "tags": ["live_hint", "ephemeral"]
+        },
+        {
+          "text": "Quer: Rossio und Praça do Comércio setzen die zentrale Achse südwärts fort. Vom oberen Parque Eduardo VII lässt sich die Avenida als grüner Korridor bis zum Tejo überblicken.",
+          "tags": ["quer"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Wann entstand die Avenida da Liberdade?",
+          "a": "Sie wurde im späten 19. Jahrhundert angelegt und 1886 eröffnet."
+        }
+      ]
+    },
+    {
+      "id": "lissabon_ponte_25_de_abril",
+      "name": "Ponte 25 de Abril",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Rote Hängebrücke über den Tejo zwischen Lissabon und Almada. 1966 als Ponte Salazar eröffnet, nach der Nelkenrevolution 1974 in Ponte 25 de Abril umbenannt; später um ein Eisenbahndeck ergänzt.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Zwei hohe rote Stahltürme tragen die weit gespannte Hängebrücke über dem Tejo. Das Fahrdeck liegt hoch über dem Wasser; unterhalb verläuft ein später ergänztes Eisenbahndeck. Am Südufer erhebt sich die Statue Cristo Rei.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Eröffnung: Die Brücke wurde 1966 eröffnet und schuf eine feste Straßenverbindung zwischen Lissabon und Almada. Zuvor spielte der Fährverkehr für die Querung eine noch zentralere Rolle. Das Großprojekt veränderte Pendeln und Wachstum beider Ufer.",
+          "tags": ["geschichte", "technik"]
+        },
+        {
+          "text": "Alter Name: Unter der Diktatur hieß sie Ponte Salazar nach António de Oliveira Salazar. Nach der Nelkenrevolution wurde sie 1974 in Ponte 25 de Abril umbenannt. Der Name erinnert an den Tag des demokratischen Umsturzes.",
+          "tags": ["geschichte", "politik"]
+        },
+        {
+          "text": "Konstruktion: Als Hängebrücke nutzt sie Hauptkabel, senkrechte Hänger und ein versteiftes Deck. Ihre rote Stahlstruktur und die Dimensionen führen oft zu Vergleichen mit San Francisco, doch Planung, Standort und Nutzungsgeschichte sind eigenständig.",
+          "tags": ["technik", "architektur"]
+        },
+        {
+          "text": "Eisenbahn: Ein unteres Eisenbahndeck wurde 1999 in Betrieb genommen. Dadurch trägt die Brücke Straßen- und Schienenverkehr auf getrennten Ebenen. Die Erweiterung war bereits konstruktiv berücksichtigt und erhöhte die Bedeutung für den Regionalverkehr.",
+          "tags": ["technik", "mobilitaet"]
+        },
+        {
+          "text": "Stadtwirkung: Die Brücke überspannt nicht das offene Meer, sondern den breiten Tejo kurz vor seiner Atlantikmündung. Von Belém, Alcântara und Südufer erscheint sie als dominierende technische Horizontlinie.",
+          "tags": ["geografie", "stadtentwicklung"]
+        },
+        {
+          "text": "LIVE: Verkehrsstatus, Bahnverkehr, Aussichtszugänge, Veranstaltungen und mögliche Besichtigungsangebote aktuell prüfen; die Brücke ist keine gewöhnliche Fußgängerquerung.",
+          "tags": ["live_hint", "ephemeral"]
+        },
+        {
+          "text": "Quer: Von LX Factory ist das Tragwerk unmittelbar über dem Industrieareal sichtbar; bei MAAT erscheint die Brücke im Uferpanorama. Cristo Rei am Südufer bildet den markanten Gegenpunkt.",
+          "tags": ["quer"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Warum heißt die Brücke 25 de Abril?",
+          "a": "Sie wurde nach der Nelkenrevolution vom 25. April 1974 umbenannt; zuvor hieß sie Ponte Salazar."
+        }
+      ]
+    },
+    {
+      "id": "lissabon_eletrico_28",
+      "name": "Elétrico 28",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Historische Carris-Straßenbahnlinie durch steile und enge Viertel Lissabons. Klassische gelbe Remodelado-Wagen verbinden wichtige Stadträume; Route und Betrieb sind veränderlich.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Kleine gelbe Straßenbahnwagen fahren dicht an Häusern vorbei, bewältigen enge Kurven und starke Steigungen. Oberleitung, glänzende Schienen im Pflaster und das Läuten der Glocke machen die technische Anpassung an die Altstadt unmittelbar sichtbar.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Liniencharakter: Die 28E ist regulärer öffentlicher Verkehr von Carris und keine reine Touristenbahn. Ihre Bekanntheit entsteht, weil sie mehrere historische Viertel und Sehenswürdigkeiten auf einer topografisch anspruchsvollen Strecke verbindet.",
+          "tags": ["mobilitaet", "stadtleben"]
+        },
+        {
+          "text": "Wagen: Auf der Linie verkehren typischerweise klassische Remodelado-Fahrzeuge, deren kompakte Bauform zu engen Straßen und Kurven passt. Technische Modernisierungen verbinden historisches Erscheinungsbild mit Anforderungen des heutigen Betriebs.",
+          "tags": ["technik", "geschichte"]
+        },
+        {
+          "text": "Topografie: Abschnitte in Graça, Alfama, Baixa, Chiado und Richtung Estrela zeigen unterschiedliche Stadtformen. Die Fahrt verknüpft Höhen, aber der konkrete Linienweg kann wegen Bauarbeiten oder betrieblicher Anpassungen gekürzt werden.",
+          "tags": ["orientierung", "stadtentwicklung"]
+        },
+        {
+          "text": "Alltag: Für Anwohner ist die Linie Teil des Verkehrsnetzes. Große Besuchernachfrage kann Wagen stark füllen. Eine verantwortliche Empfehlung berücksichtigt andere Fahrgäste, Gedränge und die Tatsache, dass ein Spaziergang einzelne Abschnitte genauer erschließt.",
+          "tags": ["leben_jetzt", "respekt"]
+        },
+        {
+          "text": "Sicherheit: Enge Räume und touristischer Andrang verlangen Aufmerksamkeit auf persönliche Gegenstände. Beim Ein- und Aussteigen gelten aktuelle Carris-Regeln; keine pauschale Gefahrenbehauptung ersetzt normale Vorsicht.",
+          "tags": ["sicherheit", "mobilitaet"]
+        },
+        {
+          "text": "LIVE: Aktuelle Endpunkte, Haltestellen, Takt, Umleitungen, Kürzungen, Tarif, Barrierefreiheit und Auslastung ausschließlich bei Carris prüfen. Der Pack darf keine historische Streckenbeschreibung als heutigen Fahrplan ausgeben.",
+          "tags": ["live_hint", "ephemeral"]
+        },
+        {
+          "text": "Quer: Die Linie berührt je nach aktuellem Verlauf Sé, Santa Luzia, Graça, Chiado und Estrela. Santa Justa löst Höhenverkehr vertikal, während die 28E dem Straßennetz über Steigungen folgt.",
+          "tags": ["quer"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Ist die Straßenbahn 28 eine touristische Rundfahrt?",
+          "a": "Nein. Die 28E ist eine reguläre Carris-Linie, auch wenn ihre historische Strecke bei Besuchern sehr beliebt ist."
+        }
+      ]
+    },
+    {
+      "id": "lissabon_jardim_botanico_de_lisboa",
+      "name": "Jardim Botânico de Lisboa",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Historischer botanischer Garten bei der ehemaligen Escola Politécnica, im 19. Jahrhundert für Lehre und Forschung angelegt. Alte subtropische Gehölze und systematische Pflanzungen prägen ihn.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Hinter Mauern und Stadthäusern fällt ein dichter Gartenhang mit hohen Palmen, Farnen, alten Baumkronen und verschlungenen Wegen ab. Der überraschend waldartige Eindruck kontrastiert mit den Straßen von Príncipe Real.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Gründung: Der Garten wurde im 19. Jahrhundert für die Escola Politécnica angelegt und 1878 für das Publikum geöffnet. Er diente botanischer Lehre, Forschung und der systematischen Sammlung von Pflanzen aus unterschiedlichen Klimazonen.",
+          "tags": ["geschichte", "wissenschaft"]
+        },
+        {
+          "text": "Sammlungen: Lissabons mildes Klima ermöglicht zahlreiche subtropische Arten. Besonders Palmen, Palmfarne und andere aus verschiedenen Weltregionen eingeführte Gehölze prägen den Bestand. Herkunft und Sammlungsgeschichte sollten auch im Kontext globaler botanischer Netzwerke gelesen werden.",
+          "tags": ["natur", "wissenschaft"]
+        },
+        {
+          "text": "Gestaltung: Systematische Beete und landschaftlich wirkende Partien erfüllen verschiedene Aufgaben. Der Garten ist zugleich wissenschaftliche Sammlung und öffentlicher Erholungsraum, kein rein dekorativer Stadtpark.",
+          "tags": ["natur", "landschaft"]
+        },
+        {
+          "text": "Institution: Der Jardim Botânico gehört zum Nationalmuseum für Naturgeschichte und Wissenschaft der Universität Lissabon. Diese Verbindung erklärt Forschungs-, Bildungs- und Erhaltungsaufgaben neben dem Besucherbetrieb.",
+          "tags": ["wissenschaft", "bildung"]
+        },
+        {
+          "text": "Leben jetzt: Schattige Wege, Pflanzenetiketten und historische Gewächse ermöglichen langsame Beobachtung. Jahreszeit und Pflegezustand verändern Blüte und Sicht; einzelne Pflanzen dürfen nicht ohne aktuelle Beschilderung sicher bestimmt werden.",
+          "tags": ["leben_jetzt", "natur"]
+        },
+        {
+          "text": "LIVE: Öffnung, Eintritt, gesperrte Wege, Führungen, Veranstaltungen und saisonale Besonderheiten auf den offiziellen Museumsseiten prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        },
+        {
+          "text": "Quer: Príncipe Real und Avenida da Liberdade liegen nahe, wirken aber städtischer. Der Gulbenkian-Garten zeigt späteren portugiesischen Landschaftsmodernismus, während dieser Garten aus wissenschaftlicher Sammlungstradition entstand.",
+          "tags": ["quer"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Warum wurde der Jardim Botânico angelegt?",
+          "a": "Er entstand im 19. Jahrhundert für botanische Lehre und Forschung an der Escola Politécnica."
+        }
+      ]
+    },
+    {
+      "id": "lissabon_museu_calouste_gulbenkian",
+      "name": "Museu Calouste Gulbenkian",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "1969 eröffnetes Museum für die Privatsammlung Calouste Gulbenkians. Der modernistische Bau von Ruy d’Athouguia, Pedro Cid und Alberto Pessoa ist eng mit dem umgebenden Garten verbunden.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Niedrige horizontale Baukörper aus Beton und Granit liegen zwischen alten Bäumen und Wasserflächen. Große Fenster öffnen Ausstellungsräume zu zwei Gärten; Kunst, Architektur und Landschaft erscheinen als bewusst komponiertes Ensemble.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Sammler: Calouste Sarkis Gulbenkian baute eine bedeutende internationale Privatsammlung auf. Sie reicht von Antike und islamischer Kunst bis zu europäischen Gemälden, Skulpturen und dekorativer Kunst. Das Museum wurde eigens für diese Sammlung geplant.",
+          "tags": ["geschichte", "kunst"]
+        },
+        {
+          "text": "Architektur: Ruy Jervis d’Athouguia, Pedro Cid und Alberto Pessoa gewannen den Planungswettbewerb. Der Bau begann 1962; Stiftungssitz und Museum wurden am 2. Oktober 1969 eröffnet, zum hundertsten Geburtstag Gulbenkians.",
+          "tags": ["architektur", "personen"]
+        },
+        {
+          "text": "Garten: António Viana Barreto und Gonçalo Ribeiro Telles entwarfen die Landschaft. Wege, Wasser, Gelände und Vegetation brechen mit formalen Gartenmustern und schaffen einen kontinuierlichen Dialog zwischen Innenraum und portugiesisch geprägter Natur.",
+          "tags": ["landschaft", "architektur"]
+        },
+        {
+          "text": "Denkmalstatus: Das modernistische Ensemble erhielt 1975 den Valmor-Architekturpreis und wurde 2010 als Nationaldenkmal eingestuft. Damit wurde erstmals ein zeitgenössisches Werk Teil des portugiesischen nationalen Kulturerbes.",
+          "tags": ["denkmal", "geschichte"]
+        },
+        {
+          "text": "Sammlungslogik: Die Präsentation folgt Gulbenkians Sammlung und verbindet geografisch wie zeitlich weit auseinanderliegende Werke. Einzelne Meisterwerke können ausgeliehen oder restauriert sein; stabil ist die außergewöhnliche Breite der privaten Sammlung.",
+          "tags": ["kunst", "museum"]
+        },
+        {
+          "text": "LIVE: Das Museum kann wegen Renovierung ganz oder teilweise geschlossen sein. Wiedereröffnung, zugängliche Sammlungen, Tickets und Ausstellungen zwingend aktuell auf gulbenkian.pt prüfen; keine frühere Öffnung als gültig annehmen.",
+          "tags": ["live_hint", "ephemeral"]
+        },
+        {
+          "text": "Quer: Der Gulbenkian-Garten ergänzt den wissenschaftlichen Jardim Botânico durch Landschaftsarchitektur der 1960er Jahre. Das nahe CAM widmet sich moderner Kunst und besitzt eine eigene, erneuerte Architekturgeschichte.",
+          "tags": ["quer"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Ist das Gulbenkian-Museum ein historischer Palast?",
+          "a": "Nein. Es wurde als modernistischer Museumsbau eigens für die Sammlung geplant und 1969 eröffnet."
+        }
+      ]
+    },
+    {
+      "id": "lissabon_gare_do_oriente",
+      "name": "Gare do Oriente",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Multimodaler Verkehrsknoten von Santiago Calatrava im Parque das Nações, für die Expo 98 eröffnet. Bahnhof, Metro und Busanlagen liegen unter einem markanten Dach aus Stahl und Glas.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Über den Bahnsteigen spannt sich ein Wald aus weißen Stahlstützen und gläsernen, baumartig verzweigten Dächern. Darunter staffeln sich Bahn, Metro, Bus und Straßenebene zu einem großen vertikalen Verkehrsbau.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Expo 98: Gare do Oriente wurde im Zusammenhang mit der Weltausstellung 1998 eröffnet. Der Bahnhof erschloss das neu entwickelte östliche Ufer und wurde zusammen mit der roten Metrolinie zum öffentlichen Verkehrstor der Expo.",
+          "tags": ["geschichte", "expo98"]
+        },
+        {
+          "text": "Architekt: Santiago Calatrava entwarf den Komplex. Seine charakteristischen konstruktiven Formen verwandeln Tragwerk in ein ornamentales Dach. Die Architektur ist auf Fernwirkung und große Passagierströme ausgelegt.",
+          "tags": ["architektur", "personen"]
+        },
+        {
+          "text": "Verkehrsebenen: Fern- und Regionalzüge, Metro, Busse, Taxis und Fußwege sind räumlich übereinander beziehungsweise nebeneinander organisiert. Diese Multimodalität ist die Hauptfunktion; genaue Linien und Verbindungen bleiben LIVE.",
+          "tags": ["mobilitaet", "technik"]
+        },
+        {
+          "text": "Stadtentwicklung: Der Bahnhof steht für den Umbau eines früher industriell geprägten Gebiets zum Parque das Nações. Verkehrsinfrastruktur, Einkaufs- und Büroflächen, Wohnungen und Expo-Bauten schufen ein neues östliches Stadtzentrum.",
+          "tags": ["stadtentwicklung", "geschichte"]
+        },
+        {
+          "text": "Orientierung: Westlich liegt der Bahnhofseingang zur Stadt, östlich führen Wege zum Expo-Gelände und Tejo. Das Oceanário ist Teil dieses Quartiers, aber nicht unmittelbar im Bahnhof; Fußweg und aktuelle Verbindung sollten geprüft werden.",
+          "tags": ["orientierung", "leben_jetzt"]
+        },
+        {
+          "text": "LIVE: Zug-, Metro- und Busfahrpläne, Gleise, Ticketschalter, Aufzüge, Barrierefreiheit und Störungen bei CP, Metro Lisboa und jeweiligen Busbetreibern prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        },
+        {
+          "text": "Quer: Oceanário und weitere Expo-Bauten erklären, warum hier 1998 ein so großer Bahnhof entstand. Santa Apolónia ist der ältere Kopfbahnhof am historischen Tejo-Ufer und bietet einen starken Architektur- und Stadtvergleich.",
+          "tags": ["quer"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Warum ist Gare do Oriente architektonisch so auffällig?",
+          "a": "Santiago Calatrava gestaltete das Dach als baumartig verzweigtes Stahl-Glas-Tragwerk für den Expo-Verkehrsknoten."
+        }
+      ]
+    },
+    {
+      "id": "lissabon_feira_da_ladra",
+      "name": "Feira da Ladra",
+      "place_tier": 3,
+      "pack_role": "story",
+      "general_info": "Traditionsreicher Floh- und Trödelmarkt am Campo de Santa Clara nahe São Vicente und dem Panteão Nacional. Angebot und Marktbetrieb sind wechselnd.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Verkaufsdecken, Tische und Stände verteilen sich über den Campo de Santa Clara. Bücher, Keramik, Kleidung, alte Haushaltsgegenstände und Sammlerstücke ergeben kein einheitliches Sortiment.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Geschichte: Die Feira da Ladra gehört zu den traditionsreichen Märkten Lissabons und wechselte im Lauf ihrer Geschichte den Standort. Heute ist sie mit dem Campo de Santa Clara im östlichen historischen Zentrum verbunden.",
+          "tags": ["geschichte", "markt"]
+        },
+        {
+          "text": "Name: Der populäre Name wird häufig vorschnell als Markt der Diebinnen oder Diebe übersetzt. Seine genaue Herkunft ist nicht eindeutig; eine kriminelle Bedeutung darf daher nicht als gesicherte Erklärung behauptet werden.",
+          "tags": ["name", "mythencheck"]
+        },
+        {
+          "text": "LIVE: Markttage, Uhrzeiten, Ausfälle, Wetterlage und aktuelles Angebot bei der Stadt prüfen; keine festen Zeiten aus dem Pack vorlesen.",
+          "tags": ["live_hint", "ephemeral"]
+        },
+        {
+          "text": "Quer: Panteão Nacional und São Vicente de Fora rahmen den Bereich; Alfama liegt hangabwärts, Santa Apolónia weiter Richtung Tejo.",
+          "tags": ["quer"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Ist Feira da Ladra ein normaler Lebensmittelmarkt?",
+          "a": "Nein. Sie ist vor allem ein Floh-, Trödel- und Sammlermarkt mit wechselndem Angebot."
+        }
+      ]
+    },
+    {
+      "id": "lissabon_santa_apolonia",
+      "name": "Santa Apolónia",
+      "place_tier": 3,
+      "pack_role": "story",
+      "general_info": "Historischer Kopfbahnhof am Tejo, 1865 eröffnet. Die klassizistische Front bildet ein östliches Verkehrstor zur Altstadt; seit 2007 besteht Anschluss an die blaue Metrolinie.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Der langgestreckte Bahnhof steht parallel zum Tejo. Eine symmetrische helle Hauptfassade mit rundbogigen Öffnungen führt in die Kopfbahnsteige; dahinter treffen historische Bahnhofsarchitektur und moderne Verkehrsanlagen aufeinander.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Eröffnung: Santa Apolónia wurde 1865 eröffnet und entwickelte sich zum wichtigen Fernbahnhof Lissabons. Als Kopfbahnhof am östlichen Rand des historischen Zentrums verband er die Hauptstadt mit dem wachsenden portugiesischen Eisenbahnnetz.",
+          "tags": ["geschichte", "bahn"]
+        },
+        {
+          "text": "Stadtlage: Der Bahnhof liegt am Tejo unterhalb von Alfama und nahe dem früheren Hafen- und Industrieband. Seine Lage erklärt die gute Verbindung zum historischen Zentrum, aber auch die Trennung durch breite Verkehrsflächen.",
+          "tags": ["stadtentwicklung", "orientierung"]
+        },
+        {
+          "text": "Metro: Die Verlängerung der blauen Linie von Baixa-Chiado über Terreiro do Paço nach Santa Apolónia wurde im Dezember 2007 eröffnet. Damit erhielt der Fernbahnhof eine direkte Einbindung in das Metronetz.",
+          "tags": ["mobilitaet", "geschichte"]
+        },
+        {
+          "text": "LIVE: Fern- und Regionalzüge, Metro, Busse, Gleise, Ticketschalter, Gepäckangebote und Barrierefreiheit bei CP, Metro Lisboa und Carris prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        },
+        {
+          "text": "Quer: Gare do Oriente ist der große multimodale Expo-Bahnhof von 1998. Santa Apolónia bietet als Bahnhof des 19. Jahrhunderts den Gegenpol nahe Alfama, Feira da Ladra und Panteão Nacional.",
+          "tags": ["quer"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Hat Santa Apolónia einen Metroanschluss?",
+          "a": "Ja. Seit 2007 endet dort ein Abschnitt der blauen Metrolinie; den aktuellen Betrieb immer LIVE prüfen."
+        }
+      ]
+    }
+  ]
+}

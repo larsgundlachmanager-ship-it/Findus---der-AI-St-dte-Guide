@@ -5,6 +5,7 @@ export type AttentionCue = 'left' | 'right' | 'behind' | null;
 /** Realtime-GPS-Bewegungsmodus (nicht Onboarding-Präferenz). */
 export type TransportMode =
   | 'walk'
+  | 'jog'
   | 'bicycle'
   | 'transit_bus'
   | 'transit_train';
@@ -59,6 +60,14 @@ export type PendingNavOffer = {
   /** Optional: für Orte außerhalb der Pack-DB (Geocode). */
   lat?: number;
   lng?: number;
+  /** Fernziel gefunden, aber User hat die Stadt noch nicht bestätigt. */
+  awaitConfirm?: boolean;
+  /** Wegweiser-Preview: Fuß-Minuten (Route, nicht Luftlinie). */
+  etaMin?: number;
+  /** Vorberechnete Walk-Route — Karte, kein aktives Nav. */
+  previewRoute?: Array<{ lat: number; lng: number }>;
+  /** Herkunft für Preview-Cleanup. */
+  source?: 'wegweiser' | 'concierge' | 'event' | 'other';
 };
 
 /** Walk ↔ ÖPNV phase for seamless guidance switching. */
@@ -104,11 +113,11 @@ export const TURN_IMMINENT_M = 15;
 export const TURN_IMMINENT_DEG = 45;
 export const ATTENTION_CUE_MS = 1200;
 /**
- * Heading EMA base alpha (0–1).
- * Adaptive filter in HeadingLowPass snaps higher on large turns (~0.75–0.9)
- * and lightly damps micro-jitter — 0.55 keeps the needle snappy while walking.
+ * Heading filter standing baseline (0–1).
+ * Rate-aware HeadingLowPass raises alpha on fast turns (~0.8–0.94) and
+ * holds / damps L↔R magnetometer chatter while standing.
  */
-export const HEADING_LOWPASS_ALPHA = 0.55;
+export const HEADING_LOWPASS_ALPHA = 0.22;
 
 /** High-frequency GPS while navigating / free-roam. */
 export const GPS_REALTIME_INTERVAL_MS = 1000;

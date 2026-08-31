@@ -1,0 +1,1197 @@
+{
+  "generated_at": "2026-08-28T06:25:13.918Z",
+  "summary": {
+    "city_id": "tettnang",
+    "checked": 40,
+    "ok": 15,
+    "check": 17,
+    "bad": 8,
+    "errors": 0,
+    "max_delta_m": 180,
+    "city_halo_m": 28000,
+    "story_only": true
+  },
+  "rows": [
+    {
+      "id": "tettnang_st_gallus",
+      "name": "Pfarrkirche St. Gallus",
+      "category": "kirche",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 47.67358670588234,
+        "lng": 9.588971294117648
+      },
+      "query": "Pfarrkirche St. Gallus, Tettnang, Germany",
+      "osm": {
+        "lat": 47.7874104,
+        "lng": 9.8805974,
+        "display_name": "Pfarrkirche St. Gallus & Ulrich, Klosterhof, Kißlegg, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 25217,
+      "from_city_m": 634,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "tettnang_altstadt",
+      "name": "Tettnang Altstadt · Fußachsen",
+      "category": "altstadt",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 47.671890999999995,
+        "lng": 9.589036692307692
+      },
+      "query": "Tettnang Altstadt ·, Tettnang, Germany",
+      "osm": {
+        "lat": 47.6473654,
+        "lng": 9.6167734,
+        "display_name": "Tettnanger Wald, Tettnang, Deutschland",
+        "class": "landuse",
+        "type": "forest",
+        "provider": "photon"
+      },
+      "delta_m": 3428,
+      "from_city_m": 456,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "tettnang_naturdenkmal_allee",
+      "name": "Naturdenkmal Allee",
+      "category": "denkmal",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 47.6837015,
+        "lng": 9.5943723
+      },
+      "query": "Naturdenkmal Allee, Tettnang, Germany",
+      "osm": {
+        "lat": 47.6716558,
+        "lng": 9.5891158,
+        "display_name": "Tettnang, Bodenseekreis, Deutschland",
+        "class": "place",
+        "type": "town",
+        "provider": "photon"
+      },
+      "delta_m": 1396,
+      "from_city_m": 1739,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "tettnang_hopfenpfad",
+      "name": "Tettnanger Hopfenpfad",
+      "category": "wanderung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 47.67033116666667,
+        "lng": 9.586450333333334
+      },
+      "query": "Tettnanger Hopfenpfad, Tettnang, Germany",
+      "osm": {
+        "lat": 47.6744595,
+        "lng": 9.5908617,
+        "display_name": "Tettnanger Hopfenpfad, Kaltenberger Straße, BayWa, Bechlingen, Tettnang, VVG der Stadt Tettnang, Bodenseekreis, Baden-Württemberg, 88069, Deutschland",
+        "class": "information",
+        "type": "board",
+        "importance": 0.00005569161516742226,
+        "osm_type": "node",
+        "osm_id": 12434042784,
+        "provider": "nominatim"
+      },
+      "delta_m": 566,
+      "from_city_m": 454,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "tettnang_schlossgarten_schloss_tettnang",
+        "tettnang_altes_schloss",
+        "tettnang_schlossgarten_tettnang_open_airs"
+      ]
+    },
+    {
+      "id": "tettnang_wildpark_sonnenhalde",
+      "name": "Wildpark Sonnenhalde",
+      "category": "freizeitpark",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 47.65019196666666,
+        "lng": 9.677954049999999
+      },
+      "query": "Wildpark Sonnenhalde, Tettnang, Germany",
+      "osm": {
+        "lat": 47.6494845,
+        "lng": 9.684837,
+        "display_name": "Wildpark Sonnenhalde, Kreuzweiherstraße, Bernaumühle, Wildpoltsweiler, Neukirch, VVG der Stadt Tettnang, Bodenseekreis, Baden-Württemberg, 88099, Deutschland",
+        "class": "tourism",
+        "type": "zoo",
+        "importance": 0.00005071107042034054,
+        "osm_type": "way",
+        "osm_id": 136121388,
+        "provider": "nominatim"
+      },
+      "delta_m": 522,
+      "from_city_m": 6769,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "tettnang_heilig_kreuz_kapelle_tettnang_an_der_hochstr",
+      "name": "Heilig-Kreuz-Kapelle Tettnang, an der Hochstr.",
+      "category": "kirche",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 47.6718288,
+        "lng": 9.5942376
+      },
+      "query": "Heilig-Kreuz-Kapelle Tettnang, an der Hochstr., Tettnang, Germany",
+      "osm": {
+        "lat": 47.6719035,
+        "lng": 9.588709,
+        "display_name": "Heilig-Kreuz-Kapelle, Montfortstraße, Tettnang, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 414,
+      "from_city_m": 452,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "tettnang_tsv_vereinsheim_tettnang",
+      "name": "TSV-Vereinsheim Tettnang",
+      "category": "freizeit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 47.6684224,
+        "lng": 9.597738000000001
+      },
+      "query": "TSV-Vereinsheim Tettnang, Tettnang, Germany",
+      "osm": {
+        "lat": 47.6703601,
+        "lng": 9.6021756,
+        "display_name": "Vereinsheim Tennisclub Tettnang, Frohe Aussicht, Tettnang, Deutschland",
+        "class": "club",
+        "type": "sport",
+        "provider": "photon"
+      },
+      "delta_m": 396,
+      "from_city_m": 460,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "tettnang_schlosskapelle",
+      "name": "Schlosskapelle",
+      "category": "kirche",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 47.67073,
+        "lng": 9.586107444444444
+      },
+      "query": "Schlosskapelle, Tettnang, Germany",
+      "osm": {
+        "lat": 47.6716558,
+        "lng": 9.5891158,
+        "display_name": "Tettnang, Bodenseekreis, Deutschland",
+        "class": "place",
+        "type": "town",
+        "provider": "photon"
+      },
+      "delta_m": 248,
+      "from_city_m": 500,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "tettnang_st_georgs_kapelle"
+      ]
+    },
+    {
+      "id": "tettnang_altes_schloss",
+      "name": "Altes Schloss · Rathaus",
+      "category": "verwaltung",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 47.6703312,
+        "lng": 9.58645055
+      },
+      "query": "Altes Schloss · Rathaus, Tettnang, Germany",
+      "osm": {
+        "lat": 48.7770198,
+        "lng": 9.1797704,
+        "display_name": "Altes Schloss, Schillerplatz, Stuttgart, Deutschland",
+        "class": "building",
+        "type": "yes",
+        "provider": "photon"
+      },
+      "delta_m": 126692,
+      "from_city_m": 454,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city",
+        "duplicate_center"
+      ],
+      "twins": [
+        "tettnang_schlossgarten_schloss_tettnang",
+        "tettnang_schlossgarten_tettnang_open_airs",
+        "tettnang_hopfenpfad"
+      ]
+    },
+    {
+      "id": "tettnang_ehemalige_wasserversorgung",
+      "name": "Ehemalige Wasserversorgung",
+      "category": "denkmal",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 47.6369378,
+        "lng": 9.6289389
+      },
+      "query": "Ehemalige Wasserversorgung, Tettnang, Germany",
+      "osm": {
+        "lat": 48.3781636,
+        "lng": 10.0925564,
+        "display_name": "ehemalige Wasserversorgung von Neuhausen, Schloßbergweg, Holzheim, Deutschland",
+        "class": "building",
+        "type": "storage_tank",
+        "provider": "photon"
+      },
+      "delta_m": 89346,
+      "from_city_m": 4459,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "tettnang_dr_schon_kollegen",
+      "name": "Dr. Schön & Kollegen",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 47.670649600000004,
+        "lng": 9.590365
+      },
+      "query": "Dr. Schön, Tettnang, Germany",
+      "osm": {
+        "lat": 47.6691554,
+        "lng": 9.5904115,
+        "display_name": "Prof. Dr. Hermann Locher, Lindauer Straße, Tettnang, Deutschland",
+        "class": "amenity",
+        "type": "doctors",
+        "provider": "photon"
+      },
+      "delta_m": 166,
+      "from_city_m": 291,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "tettnang_osm_post_box_416096446"
+      ]
+    },
+    {
+      "id": "tettnang_schlossgarten_schloss_tettnang",
+      "name": "Schlossgarten Schloss Tettnang",
+      "category": "freizeit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 47.6703312,
+        "lng": 9.58645055
+      },
+      "query": "Schlossgarten Schloss Tettnang, Tettnang, Germany",
+      "osm": {
+        "lat": 47.6698605,
+        "lng": 9.5845236,
+        "display_name": "Neues Schloss, Montfortplatz, Tettnang, Deutschland",
+        "class": "tourism",
+        "type": "attraction",
+        "provider": "photon"
+      },
+      "delta_m": 153,
+      "from_city_m": 454,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "tettnang_altes_schloss",
+        "tettnang_schlossgarten_tettnang_open_airs",
+        "tettnang_hopfenpfad"
+      ]
+    },
+    {
+      "id": "tettnang_sail_more_erlebnis_bodensee",
+      "name": "sail & more Erlebnis Bodensee",
+      "category": "hafen",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 47.67167787499999,
+        "lng": 9.587193874999999
+      },
+      "query": "sail, Tettnang, Germany",
+      "osm": {
+        "lat": 47.6716558,
+        "lng": 9.5891158,
+        "display_name": "Tettnang, Bodenseekreis, Deutschland",
+        "class": "place",
+        "type": "town",
+        "provider": "photon"
+      },
+      "delta_m": 144,
+      "from_city_m": 511,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "tettnang_neues_schloss",
+      "name": "Neues Schloss Tettnang",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 47.67011394,
+        "lng": 9.58595992
+      },
+      "query": "Neues Schloss Tettnang, Tettnang, Germany",
+      "osm": {
+        "lat": 47.6698605,
+        "lng": 9.5845236,
+        "display_name": "Neues Schloss, 1, Montfortplatz, Bechlingen, Tettnang, VVG der Stadt Tettnang, Bodenseekreis, Baden-Württemberg, 88069, Deutschland",
+        "class": "tourism",
+        "type": "attraction",
+        "importance": 0.3035308770567123,
+        "osm_type": "relation",
+        "osm_id": 179755,
+        "provider": "nominatim"
+      },
+      "delta_m": 111,
+      "from_city_m": 475,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "tettnang_baerenplatz",
+      "name": "Bärenplatz · ZOB & Kronenbrauerei",
+      "category": "verwaltung",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 47.6714932,
+        "lng": 9.5888419
+      },
+      "query": "Bärenplatz · ZOB, Tettnang, Germany",
+      "osm": {
+        "lat": 47.6711939,
+        "lng": 9.5900492,
+        "display_name": "Tettnang, Bärenplatz, Lindauer Straße, Tettnang, Deutschland",
+        "class": "highway",
+        "type": "bus_stop",
+        "provider": "photon"
+      },
+      "delta_m": 96,
+      "from_city_m": 423,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "tettnang_freibad_ried",
+      "name": "Freibad Ried",
+      "category": "freizeit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 47.668523833333325,
+        "lng": 9.596867916666666
+      },
+      "query": "Freibad Ried, Tettnang, Germany",
+      "osm": {
+        "lat": 47.6690591,
+        "lng": 9.5962118,
+        "display_name": "Freibad Ried, 22, Riedstraße, Frohe Aussicht, Tettnang, VVG der Stadt Tettnang, Bodenseekreis, Baden-Württemberg, 88069, Deutschland",
+        "class": "leisure",
+        "type": "sports_centre",
+        "importance": 0.00005569161516742226,
+        "osm_type": "way",
+        "osm_id": 80978315,
+        "provider": "nominatim"
+      },
+      "delta_m": 77,
+      "from_city_m": 396,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "tettnang_freibad_obereisenbach",
+      "name": "Freibad Obereisenbach",
+      "category": "freizeit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 47.682679727272735,
+        "lng": 9.64091181818182
+      },
+      "query": "Freibad Obereisenbach, Tettnang, Germany",
+      "osm": {
+        "lat": 47.6831778,
+        "lng": 9.6413613,
+        "display_name": "Freibad Obereisenbach, 9, An der Schule, Herishäusern, Tannau, Tettnang, VVG der Stadt Tettnang, Bodenseekreis, Baden-Württemberg, 88069, Deutschland",
+        "class": "leisure",
+        "type": "sports_centre",
+        "importance": 0.00005569161516742226,
+        "osm_type": "way",
+        "osm_id": 126251012,
+        "provider": "nominatim"
+      },
+      "delta_m": 65,
+      "from_city_m": 4029,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "tettnang_hopfenmuseum_laden",
+      "name": "Hopfenmuseum (siehe Hopfengut N°20)",
+      "category": "museum",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 47.69043233333334,
+        "lng": 9.6164995
+      },
+      "query": "Hopfenmuseum, Tettnang, Germany",
+      "osm": {
+        "lat": 47.689938,
+        "lng": 9.6169093,
+        "display_name": "Hopfenmuseum, Hopfengut, Siggenweiler, Tannau, Tettnang, VVG der Stadt Tettnang, Bodenseekreis, Baden-Württemberg, 88069, Deutschland",
+        "class": "amenity",
+        "type": "parking",
+        "importance": 0.00005569161516742226,
+        "osm_type": "way",
+        "osm_id": 32764701,
+        "provider": "nominatim"
+      },
+      "delta_m": 63,
+      "from_city_m": 3098,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "tettnang_ifm_riedstadion",
+      "name": "ifm Riedstadion",
+      "category": "freizeit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 47.6685665,
+        "lng": 9.598842900000001
+      },
+      "query": "ifm Riedstadion, Tettnang, Germany",
+      "osm": {
+        "lat": 47.668106,
+        "lng": 9.5983608,
+        "display_name": "ifm Riedstadion, 30, Riedstraße, Frohe Aussicht, Tettnang, VVG der Stadt Tettnang, Bodenseekreis, Baden-Württemberg, 88069, Deutschland",
+        "class": "leisure",
+        "type": "stadium",
+        "importance": 0.00005569161516742226,
+        "osm_type": "way",
+        "osm_id": 80978311,
+        "provider": "nominatim"
+      },
+      "delta_m": 63,
+      "from_city_m": 544,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "tettnang_aussichtspunkt_am_hopfenpfad",
+      "name": "Aussicht Hopfenpfad · Brünnensweiler Höhe",
+      "category": "aussicht",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 47.6868041611111,
+        "lng": 9.606391544444445
+      },
+      "query": "Aussicht Hopfenpfad ·, Tettnang, Germany",
+      "osm": {
+        "lat": 47.6865625,
+        "lng": 9.6068178,
+        "display_name": "Aussichtspanorama am Hopfenpfad, Feurenmoos, Tettnang, Deutschland",
+        "class": "tourism",
+        "type": "viewpoint",
+        "provider": "photon"
+      },
+      "delta_m": 42,
+      "from_city_m": 2349,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "tettnang_kapelle_bruennensweiler"
+      ]
+    },
+    {
+      "id": "tettnang_elektronikmuseum_tettnang",
+      "name": "Elektronikmuseum Tettnang",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 47.67190399999999,
+        "lng": 9.588696272727272
+      },
+      "query": "Elektronikmuseum Tettnang, Tettnang, Germany",
+      "osm": {
+        "lat": 47.6719794,
+        "lng": 9.5885218,
+        "display_name": "Elektronikmuseum Tettnang, 41, Montfortstraße, Bechlingen, Tettnang, VVG der Stadt Tettnang, Bodenseekreis, Baden-Württemberg, 88069, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.00005569161516742226,
+        "osm_type": "node",
+        "osm_id": 1813001034,
+        "provider": "nominatim"
+      },
+      "delta_m": 16,
+      "from_city_m": 469,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "tettnang_torschloss"
+      ]
+    },
+    {
+      "id": "tettnang_rappertsweiler_gedenkstele",
+      "name": "Gedenkstele Rappertsweiler · Bauernkrieg 1525",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 47.64128652000001,
+        "lng": 9.66173248
+      },
+      "query": "Gedenkstele Rappertsweiler ·, Tettnang, Germany",
+      "osm": {
+        "lat": 47.6413379,
+        "lng": 9.6619095,
+        "display_name": "Gedenkstein für den Rappertsweiler Haufen, Rappertsweiler, Tettnang, Deutschland",
+        "class": "historic",
+        "type": "memorial",
+        "provider": "photon"
+      },
+      "delta_m": 14,
+      "from_city_m": 6044,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "tettnang_gedenkstein_fur_den_rappertsweiler_haufen"
+      ]
+    },
+    {
+      "id": "tettnang_st_georgs_kapelle",
+      "name": "St. Georgs-Kapelle",
+      "category": "kirche",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 47.67073,
+        "lng": 9.586107444444444
+      },
+      "query": "St. Georgs-Kapelle, Tettnang, Germany",
+      "osm": {
+        "lat": 47.670717,
+        "lng": 9.5861172,
+        "display_name": "St.-Georgs-Kapelle, 3, Montfortplatz, Bechlingen, Tettnang, VVG der Stadt Tettnang, Bodenseekreis, Baden-Württemberg, 88069, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.04539457909600718,
+        "osm_type": "way",
+        "osm_id": 122749238,
+        "provider": "nominatim"
+      },
+      "delta_m": 2,
+      "from_city_m": 500,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "tettnang_schlosskapelle"
+      ]
+    },
+    {
+      "id": "tettnang_torschloss",
+      "name": "Torschloss & Montfort-Museum",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 47.67182330000001,
+        "lng": 9.5886383
+      },
+      "query": "Torschloss, Tettnang, Germany",
+      "osm": {
+        "lat": 47.6718052,
+        "lng": 9.5886368,
+        "display_name": "Torschloss, Bärenplatz, Bechlingen, Tettnang, VVG der Stadt Tettnang, Bodenseekreis, Baden-Württemberg, 88069, Deutschland",
+        "class": "building",
+        "type": "yes",
+        "importance": 0.00005569161516742226,
+        "osm_type": "way",
+        "osm_id": 122749259,
+        "provider": "nominatim"
+      },
+      "delta_m": 2,
+      "from_city_m": 463,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "tettnang_elektronikmuseum_tettnang"
+      ]
+    },
+    {
+      "id": "tettnang_refill_station_brunnen_loretostrasse",
+      "name": "Refill-Station Brunnen Loretostraße",
+      "category": "denkmal",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 47.6645887,
+        "lng": 9.592289700000002
+      },
+      "query": "Refill-Station Brunnen Loretostraße, Tettnang",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 402,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "tettnang_hopfengut_no20",
+      "name": "Hopfengut N°20 · Hopfenmuseum",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 47.690395339999995,
+        "lng": 9.61619456
+      },
+      "query": "Hopfengut N°20 · Hopfenmuseum, Tettnang, Germany",
+      "osm": {
+        "lat": 47.6904183,
+        "lng": 9.616583,
+        "display_name": "Hopfengut No20, Hopfengut, Tettnang, Deutschland",
+        "class": "amenity",
+        "type": "restaurant",
+        "provider": "photon"
+      },
+      "delta_m": 29,
+      "from_city_m": 3082,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "tettnang_brunnen_grabenstrasse",
+      "name": "Brunnen Grabenstraße",
+      "category": "denkmal",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 47.6704274,
+        "lng": 9.5873866
+      },
+      "query": "Brunnen Grabenstraße, Tettnang, Germany",
+      "osm": {
+        "lat": 47.670294,
+        "lng": 9.5871079,
+        "display_name": "Grabenstraße, Tettnang, Deutschland",
+        "class": "highway",
+        "type": "residential",
+        "provider": "photon"
+      },
+      "delta_m": 26,
+      "from_city_m": 403,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "tettnang_dorfweiher_siggenweiler",
+      "name": "Dorfweiher Siggenweiler",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 47.6922,
+        "lng": 9.6183996
+      },
+      "query": "Dorfweiher Siggenweiler, Tettnang, Germany",
+      "osm": {
+        "lat": 47.6922803,
+        "lng": 9.618658,
+        "display_name": "Am Dorfweiher, Siggenweiler, Tannau, Tettnang, VVG der Stadt Tettnang, Bodenseekreis, Baden-Württemberg, 88069, Deutschland",
+        "class": "highway",
+        "type": "tertiary",
+        "importance": 0.053389024948500764,
+        "osm_type": "way",
+        "osm_id": 17763851,
+        "provider": "nominatim"
+      },
+      "delta_m": 21,
+      "from_city_m": 3341,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "tettnang_schlosspark_tettnang",
+      "name": "Schlosspark Tettnang",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 47.66932534,
+        "lng": 9.58553874
+      },
+      "query": "Schlosspark Tettnang, Tettnang, Germany",
+      "osm": {
+        "lat": 47.6692693,
+        "lng": 9.5853676,
+        "display_name": "Schlosspark, Moos, Tettnang, VVG der Stadt Tettnang, Bodenseekreis, Baden-Württemberg, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "importance": 0.08005569161516744,
+        "osm_type": "way",
+        "osm_id": 89220133,
+        "provider": "nominatim"
+      },
+      "delta_m": 14,
+      "from_city_m": 472,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "tettnang_waldspielplatz",
+      "name": "Waldspielplatz",
+      "category": "freizeit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 47.6525876,
+        "lng": 9.5885224
+      },
+      "query": "Waldspielplatz, Tettnang, Germany",
+      "osm": {
+        "lat": 47.6526354,
+        "lng": 9.588691,
+        "display_name": "Waldspielplatz Vogelherd, Schäferhofweg, Schäferhof, Tettnang, VVG der Stadt Tettnang, Bodenseekreis, Baden-Württemberg, 88069, Deutschland",
+        "class": "leisure",
+        "type": "playground",
+        "importance": 0.00005569161516742226,
+        "osm_type": "way",
+        "osm_id": 35096880,
+        "provider": "nominatim"
+      },
+      "delta_m": 14,
+      "from_city_m": 1748,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "tettnang_fliegerdenkmal",
+      "name": "Fliegerdenkmal Schäferhof / Loretowald",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": true,
+      "before": {
+        "lat": 47.660767681578946,
+        "lng": 9.588003578947369
+      },
+      "query": "Fliegerdenkmal Schäferhof /, Tettnang, Germany",
+      "osm": {
+        "lat": 47.6606609,
+        "lng": 9.5880802,
+        "display_name": "Flieger Denkmal, Domänenstraße, Schäferhof, Tettnang, VVG der Stadt Tettnang, Bodenseekreis, Baden-Württemberg, 88069, Deutschland",
+        "class": "historic",
+        "type": "memorial",
+        "importance": 0.00005569161516742226,
+        "osm_type": "node",
+        "osm_id": 390237943,
+        "provider": "nominatim"
+      },
+      "delta_m": 13,
+      "from_city_m": 866,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "tettnang_carl_guhrer_halle",
+      "name": "Carl-Gührer-Halle",
+      "category": "freizeit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 47.66295583333333,
+        "lng": 9.587628333333333
+      },
+      "query": "Carl-Gührer-Halle, Tettnang, Germany",
+      "osm": {
+        "lat": 47.6629074,
+        "lng": 9.5874695,
+        "display_name": "Carl-Gührer-Halle, 31, Manzenbergstraße, Schäferhof, Tettnang, VVG der Stadt Tettnang, Bodenseekreis, Baden-Württemberg, 88069, Deutschland",
+        "class": "leisure",
+        "type": "sports_centre",
+        "importance": 0.00005569161516742226,
+        "osm_type": "way",
+        "osm_id": 116955386,
+        "provider": "nominatim"
+      },
+      "delta_m": 13,
+      "from_city_m": 652,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "tettnang_aussichtspunkt_grafenholz",
+      "name": "Aussichtspunkt Grafenholz",
+      "category": "aussicht",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 47.6389997,
+        "lng": 9.6222438
+      },
+      "query": "Aussichtspunkt Grafenholz, Tettnang, Germany",
+      "osm": {
+        "lat": 47.6390689,
+        "lng": 9.6221822,
+        "display_name": "Grafenholz, Wiesachweg, Iglerberg, Tannau, Tettnang, VVG der Stadt Tettnang, Bodenseekreis, Baden-Württemberg, 88069, Deutschland",
+        "class": "tourism",
+        "type": "viewpoint",
+        "importance": 0.00005569161516742226,
+        "osm_type": "node",
+        "osm_id": 444815446,
+        "provider": "nominatim"
+      },
+      "delta_m": 9,
+      "from_city_m": 3974,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "tettnang_aussichtspunkt_liebenau",
+      "name": "Aussichtspunkt Liebenau",
+      "category": "aussicht",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 47.700056,
+        "lng": 9.6129418
+      },
+      "query": "Aussichtspunkt Liebenau, Tettnang, Germany",
+      "osm": {
+        "lat": 47.7000243,
+        "lng": 9.6129043,
+        "display_name": "Aussichtspunkt Liebenau, K 7719, Siggenweiler, Tannau, Tettnang, VVG der Stadt Tettnang, Bodenseekreis, Baden-Württemberg, 88069, Deutschland",
+        "class": "tourism",
+        "type": "viewpoint",
+        "importance": 0.00005569161516742226,
+        "osm_type": "node",
+        "osm_id": 373426156,
+        "provider": "nominatim"
+      },
+      "delta_m": 5,
+      "from_city_m": 3889,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "tettnang_schloss_apotheke",
+      "name": "schloss-apotheke",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 47.669861250000004,
+        "lng": 9.588178
+      },
+      "query": "schloss-apotheke, Tettnang, Germany",
+      "osm": {
+        "lat": 47.6698949,
+        "lng": 9.5881289,
+        "display_name": "Schloss Apotheke, 14, Karlstraße, Bechlingen, Tettnang, VVG der Stadt Tettnang, Bodenseekreis, Baden-Württemberg, 88069, Deutschland",
+        "class": "amenity",
+        "type": "pharmacy",
+        "importance": 0.00005569161516742226,
+        "osm_type": "node",
+        "osm_id": 366912780,
+        "provider": "nominatim"
+      },
+      "delta_m": 5,
+      "from_city_m": 318,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "tettnang_st_anna_kapelle",
+      "name": "St.-Anna-Kapelle",
+      "category": "kirche",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 47.66236866666666,
+        "lng": 9.592758666666665
+      },
+      "query": "St.-Anna-Kapelle, Tettnang, Germany",
+      "osm": {
+        "lat": 47.6623707,
+        "lng": 9.5927218,
+        "display_name": "Sankt-Anna-Kapelle, 9, St.-Anna-Straße, Neuhalden, Tettnang, VVG der Stadt Tettnang, Bodenseekreis, Baden-Württemberg, 88069, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.00005569161516742226,
+        "osm_type": "way",
+        "osm_id": 118230118,
+        "provider": "nominatim"
+      },
+      "delta_m": 3,
+      "from_city_m": 651,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "tettnang_loretokapelle",
+      "name": "Loretokapelle",
+      "category": "kirche",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 47.6674608,
+        "lng": 9.5882544
+      },
+      "query": "Loretokapelle, Tettnang, Germany",
+      "osm": {
+        "lat": 47.6674409,
+        "lng": 9.5882558,
+        "display_name": "Loretokapelle, 18, Loretostraße, Schäferhof, Tettnang, VVG der Stadt Tettnang, Bodenseekreis, Baden-Württemberg, 88069, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.09078915819201436,
+        "osm_type": "way",
+        "osm_id": 99462923,
+        "provider": "nominatim"
+      },
+      "delta_m": 2,
+      "from_city_m": 263,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "tettnang_baren_apotheke",
+      "name": "Bären Apotheke",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 47.67346428571428,
+        "lng": 9.590931285714287
+      },
+      "query": "Bären Apotheke, Tettnang, Germany",
+      "osm": {
+        "lat": 47.6734788,
+        "lng": 9.590927,
+        "display_name": "Bären Apotheke, 18, Bahnhofstraße, Bechlingen, Tettnang, VVG der Stadt Tettnang, Bodenseekreis, Baden-Württemberg, 88069, Deutschland",
+        "class": "amenity",
+        "type": "pharmacy",
+        "importance": 0.00005569161516742226,
+        "osm_type": "node",
+        "osm_id": 366906163,
+        "provider": "nominatim"
+      },
+      "delta_m": 2,
+      "from_city_m": 591,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "tettnang_ehemaliges_schiesshaus",
+      "name": "Ehemaliges Schießhaus",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 47.66882455555555,
+        "lng": 9.584243444444446
+      },
+      "query": "Ehemaliges Schießhaus, Tettnang, Germany",
+      "osm": {
+        "lat": 47.6688242,
+        "lng": 9.5842312,
+        "display_name": "Ehemaliges Schießhaus, 9, Schützenstraße, Bechlingen, Tettnang, VVG der Stadt Tettnang, Bodenseekreis, Baden-Württemberg, 88069, Deutschland",
+        "class": "building",
+        "type": "yes",
+        "importance": 0.00005569161516742226,
+        "osm_type": "way",
+        "osm_id": 39063290,
+        "provider": "nominatim"
+      },
+      "delta_m": 1,
+      "from_city_m": 556,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "tettnang_kronenbrunnen",
+      "name": "Kronenbrunnen",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 47.67167114,
+        "lng": 9.58900784
+      },
+      "query": "Kronenbrunnen, Tettnang, Germany",
+      "osm": {
+        "lat": 47.6716715,
+        "lng": 9.5890133,
+        "display_name": "Kronenbrunnen, Bärenplatz, Bechlingen, Tettnang, VVG der Stadt Tettnang, Bodenseekreis, Baden-Württemberg, 88069, Deutschland",
+        "class": "amenity",
+        "type": "fountain",
+        "importance": 0.00005569161516742226,
+        "osm_type": "way",
+        "osm_id": 319682529,
+        "provider": "nominatim"
+      },
+      "delta_m": 0,
+      "from_city_m": 435,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    }
+  ]
+}

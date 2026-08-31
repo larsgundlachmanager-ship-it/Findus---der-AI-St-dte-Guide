@@ -23,6 +23,10 @@ async function pullWeatherOnce(): Promise<void> {
         fetchedAtMs?: number;
         nextRainProb?: number | null;
         rainStartsInMin?: number | null;
+        nextRainAtMs?: number | null;
+        rainEndsAtMs?: number | null;
+        precipitationMm?: number | null;
+        rainWindows?: Array<{ startMs: number; endMs: number; pop?: number }> | null;
       } | null;
       getCachedWeatherSummary?: () => string | null;
     };
@@ -34,6 +38,32 @@ async function pullWeatherOnce(): Promise<void> {
       const tempC = tempMatch
         ? Number(tempMatch[1]!.replace(',', '.'))
         : null;
+      let rainRadarHint: string | null = null;
+      try {
+        const { formatRainHudLine } = require('../../services/weather/rainIncomingPolicy') as {
+          formatRainHudLine: (opts: {
+            currentPrecipMm?: number | null;
+            rainStartsInMin?: number | null;
+            nextRainAtMs?: number | null;
+            rainEndsAtMs?: number | null;
+            rainWindows?: Array<{ startMs: number; endMs: number; pop?: number }> | null;
+          }) => string | null;
+        };
+        rainRadarHint = formatRainHudLine({
+          currentPrecipMm: snap.precipitationMm,
+          nextRainAtMs: snap.nextRainAtMs,
+          rainStartsInMin: snap.rainStartsInMin,
+          rainEndsAtMs: snap.rainEndsAtMs,
+          rainWindows: snap.rainWindows,
+          weatherCode: snap.weatherCode,
+          isHeavyRain: snap.isHeavyRain,
+        });
+      } catch {
+        if (snap.nextRainAtMs != null) {
+          const mins = Math.round((snap.nextRainAtMs - Date.now()) / 60_000);
+          rainRadarHint = mins > 2 ? `Regen in etwa ${mins} Minuten` : null;
+        }
+      }
       useRucksackStore.getState().setWeather({
         updatedAtMs: snap.fetchedAtMs ?? Date.now(),
         tempC: Number.isFinite(tempC) ? tempC : null,
@@ -41,10 +71,7 @@ async function pullWeatherOnce(): Promise<void> {
         precipProbability:
           snap.nextRainProb != null ? snap.nextRainProb * 100 : null,
         summary,
-        rainRadarHint:
-          snap.rainStartsInMin != null
-            ? `Regen in etwa ${snap.rainStartsInMin} Minuten`
-            : null,
+        rainRadarHint,
       });
       return;
     }

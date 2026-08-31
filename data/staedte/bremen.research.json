@@ -1,0 +1,635 @@
+{
+  "notes": [
+    "Primärquellen: UNESCO-Welterbe Bremen, Senatskanzlei Bremen, Landesamt für Denkmalpflege Bremen, bremen.de und BSAG.",
+    "Museumsquellen: Kunsthalle Bremen, Übersee-Museum, Focke-Museum, Museen Böttcherstraße, Weserburg, Universum, botanika und Hafenmuseum.",
+    "Weitere Quellen: Bremer Dom, Kulturkirche St. Stephani, Die Glocke, Bürgerparkverein, Rhododendron-Park, Theater Bremen, Deutsche Bahn, Weserstadion und SV Werder Bremen.",
+    "Öffnungszeiten, Preise, Programme, Fahrpläne, Ausstellungen, Spiele und Zugänglichkeit stehen ausschließlich als LIVE-Hinweise."
+  ],
+  "city_history": "Bremen entstand an einer Weserfurt und wurde 787/788 Bischofssitz. Das Marktprivileg von 965 stärkte den Handel; im Mittelalter gewann die Bürgerschaft gegenüber dem Erzbischof Eigenständigkeit. Rathaus und Roland, 1404 bis 1408 errichtet, verkörpern diese städtische Autonomie und gehören seit 2004 zum UNESCO-Welterbe. Bremen war Mitglied der Hanse, blieb Freie Reichsstadt und entwickelte sich über Weserhandel, Schifffahrt und Kolonialwaren zu einer Hafen- und Kaufmannsstadt. Die Versandung der Weser führte im 19. Jahrhundert zum Bau neuer Häfen und 1827 zur Gründung Bremerhavens. Industrialisierung, Werften, Automobil- und Luftfahrtbau prägten die Moderne. Im Zweiten Weltkrieg wurden große Stadtteile zerstört. Seit 1947 bildet Bremen mit Bremerhaven das Land Freie Hansestadt Bremen. Heute verbinden sich historische Altstadt, Häfen, Wissenschaft, Kultur und industrielle Produktion.",
+  "spots": [
+    {
+      "id": "bremen_bremer_roland",
+      "name": "Bremer Roland",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Der 1404 errichtete steinerne Roland steht vor dem Rathaus für Marktgerechtigkeit und bürgerliche Freiheit. Zusammen mit dem Rathaus gehört er seit 2004 zum UNESCO-Welterbe.",
+      "deep_data_pool": [
+        {"text": "Der heutige Roland wurde 1404 aus Stein errichtet. Er ersetzte eine ältere hölzerne Figur, die nach der Überlieferung 1366 von Anhängern des Erzbischofs verbrannt worden war. Der Neubau setzte damit ein dauerhaftes, öffentlich sichtbares Zeichen der Stadtgemeinde gegenüber geistlicher Herrschaft.", "tags": ["geschichte", "stadtfreiheit"]},
+        {"text": "Die eigentliche Figur ist etwa 5,5 Meter hoch; mit Baldachin und Sockel erreicht das Denkmal deutlich mehr. Roland trägt Rüstung, Schwert und Schild. Das Schild zeigt den Reichsadler und verweist auf den Anspruch, städtische Rechte unter dem Schutz des Reiches auszuüben.", "tags": ["ikonografie", "architektur"]},
+        {"text": "Roland geht auf den sagenhaften Paladin Karls des Großen zurück. In mittelalterlichen Städten wurde diese Gestalt zum Sinnbild von Markt-, Gerichts- und Freiheitsrechten. Bremen besitzt eine der ältesten und repräsentativsten erhaltenen Rolandstatuen Mitteleuropas.", "tags": ["mittelalter", "recht"]},
+        {"text": "Seit Juli 2004 bilden Roland und Rathaus gemeinsam eine UNESCO-Welterbestätte. Gewürdigt wird nicht bloß ihr Alter, sondern ihre außergewöhnlich authentische Darstellung der Entwicklung bürgerlicher Autonomie und Marktrechte im europäischen Stadtwesen.", "tags": ["unesco", "bedeutung"]},
+        {"text": "Der Roland blickt zum Dom, während das Rathaus hinter ihm steht. Diese Stellung verdichtet Bremens historische Kräfteverhältnisse: Reich und Bürgerstadt, kirchlicher Herrschaftsanspruch, Rat, Markt und Kaufmannschaft begegnen sich auf wenigen Metern.", "tags": ["stadtraum", "quer"]},
+        {"text": "Unter seinen Füßen liegt eine kleine Figur, die häufig als Krüppel gedeutet wird; ihre genaue Bedeutung ist nicht abschließend geklärt. Legenden dürfen daher nicht als gesicherte Erklärung ausgegeben werden. Sicher ist die bewusste repräsentative Gesamtkomposition.", "tags": ["detail", "quellenkritik"]},
+        {"text": "Visuell: Die helle Steinfigur steht frei auf dem Marktplatz vor der reich geschmückten Rathausfassade. Erkennbar sind das aufrecht gehaltene Schwert, der Reichsadler auf dem Schild, die langen Haare, der Baldachin und das schmiedeeiserne Gitter.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Rathaus, Schütting, Dom und Liebfrauenkirche machen den Roland zum Mittelpunkt eines Ensembles aus Politik, Handel und Religion. Die Stadtmusikanten stehen dagegen versteckt an der Westseite des Rathauses und sind kein Teil der UNESCO-Einschreibung.", "tags": ["quer", "orientierung"]},
+        {"text": "LIVE: Baustellen, Einhausungen, Demonstrationen oder Veranstaltungen auf dem Marktplatz aktuell bei der Stadt Bremen prüfen. Das Denkmal ist im Außenraum sichtbar; freien Zugang unmittelbar an Sockel und Gitter nie pauschal versprechen.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": []
+    },
+    {
+      "id": "bremen_bremer_rathaus",
+      "name": "Bremer Rathaus",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Das 1405 bis 1408 gebaute Rathaus verbindet einen spätgotischen Hallenbau mit der Weser-Renaissance-Fassade von 1609 bis 1612. Es wird bis heute politisch genutzt.",
+      "deep_data_pool": [
+        {"text": "Im Mai 1405 wurde der Grundstein gelegt; bis 1408 entstand ein zweigeschossiger Saalbau. Der Rat stellte sein Haus unmittelbar neben den Dom und ungefähr in dessen Maßstab. Diese Lage war ein politisches Bekenntnis der Bürgerstadt gegenüber dem erzbischöflichen Landesherrn.", "tags": ["geschichte", "politik"]},
+        {"text": "Der mittelalterliche Kern besitzt eine Untere und eine Obere Halle. Die Obere Halle diente Beratung, Repräsentation und Festen; die Untere Halle hatte stärkere Markt- und Lagerfunktionen. Diese Verbindung von Regierung und Handel entspricht dem Selbstverständnis der Kaufmannsstadt.", "tags": ["innenraum", "nutzung"]},
+        {"text": "Lüder von Bentheim verwandelte 1609 bis 1612 die schlichte Marktfront in eine reich gegliederte Fassade der Weser-Renaissance. Giebel, Arkaden, Reliefs, Figuren und ornamentale Steinmetzarbeit verkünden Wohlstand und humanistisch geprägte Repräsentation.", "tags": ["weserrenaissance", "architektur"]},
+        {"text": "Die Figuren an der älteren Südseite zeigen Kaiser und Kurfürsten. Sie verweisen auf die Reichsordnung und Bremens Anspruch, seine Freiheit nicht vom Erzbischof, sondern vom Kaiser herzuleiten. Architektur wurde damit zu einem lesbaren politischen Programm.", "tags": ["ikonografie", "reich"]},
+        {"text": "Gabriel von Seidl entwarf den 1909 bis 1913 ausgeführten Erweiterungsbau. Obwohl dieser ein wesentlich größeres Volumen besitzt, ordnete er ihn gestalterisch dem historischen Hallenbau unter. Alt und Neu blieben als unterschiedliche Bauphasen erkennbar.", "tags": ["neues_rathaus", "stadtentwicklung"]},
+        {"text": "Das Rathaus überstand Krieg und Jahrhunderte ohne Zerstörung seines mittelalterlichen Kerns. Kontinuierliche Nutzung, Pflege und die erhaltene Baugeschichte begründen seine hohe Authentizität. Seit 2004 ist es gemeinsam mit dem Roland UNESCO-Welterbe.", "tags": ["unesco", "erhaltung"]},
+        {"text": "Zu den bekannten Innenräumen gehören Obere Halle, Güldenkammer und Festsaal. Der Ratskeller unter dem Gebäude besitzt eine lange Weinhandelstradition. Innenräume sind keine frei zugängliche Verlängerung des Marktplatzes, sondern von Betrieb und Führung abhängig.", "tags": ["innenraum", "ratskeller"]},
+        {"text": "Visuell: Zum Markt zeigt sich die helle, dicht geschmückte Renaissancefront mit Arkaden und hohen Giebeln. Am Domshof tritt der zurückhaltendere Erweiterungsbau hervor. Der Roland steht frei vor der Marktseite; die Stadtmusikanten befinden sich westlich am Gebäude.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Roland und Rathaus erzählen Bürgerfreiheit; der Schütting gegenüber steht für die Kaufmannschaft, der Dom für die ältere kirchliche Macht. Der Marktplatz macht diese Institutionen als räumliches Gegenüber unmittelbar lesbar.", "tags": ["quer", "stadtraum"]},
+        {"text": "LIVE: Führungen, Senatstermine, Sicherheitskontrollen, Ratskellerbetrieb und zugängliche Räume aktuell auf rathaus.bremen.de und welterbe.bremen.de prüfen. Politische Nutzung kann Besichtigungen kurzfristig einschränken.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": []
+    },
+    {
+      "id": "bremen_bremer_dom",
+      "name": "Bremer Dom",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "St. Petri geht auf den frühmittelalterlichen Bischofssitz zurück. Der heutige Bau vereint romanische, gotische und historistische Phasen und prägt mit seinen Westtürmen die Altstadt.",
+      "deep_data_pool": [
+        {"text": "Mit der Einrichtung des Bistums im späten 8. Jahrhundert begann die Kirchengeschichte am Ort. Frühere Dombauten gingen durch Brände und politische Konflikte verloren. Der heutige Bau entwickelte sich vor allem seit dem 11. Jahrhundert über viele Bauphasen.", "tags": ["fruehmittelalter", "kirchengeschichte"]},
+        {"text": "Unter Erzbischof Adalbrand begann ab 1041 ein großer romanischer Neubau, der sich am Kölner Dom der Zeit orientierte. Krypten, Pfeiler und Grundstruktur bewahren Teile dieser Epoche, obwohl spätere Umbauten das Erscheinungsbild stark veränderten.", "tags": ["romanik", "architektur"]},
+        {"text": "Im Mittelalter wurde die Basilika gotisch überformt und eingewölbt. Der Dom war Sitz des Erzbischofs und lag in einer eigenen Immunität. Direkt daneben entwickelte die Stadt mit Rathaus und Roland ihre konkurrierende bürgerliche Repräsentation.", "tags": ["gotik", "stadtpolitik"]},
+        {"text": "Nach der Reformation blieb der Dom zeitweise geschlossen und wechselte konfessionelle Prägungen. Seit dem 17. Jahrhundert ist er evangelisch-lutherisch, obwohl das städtische Bremen lange stark reformiert geprägt war. Diese Sonderstellung gehört zur Bremer Konfessionsgeschichte.", "tags": ["reformation", "religion"]},
+        {"text": "Im 19. Jahrhundert war die Bausubstanz gefährdet; eine umfassende Restaurierung von 1888 bis 1901 prägte die heutige historistische Westfassade und stellte beide hohen Türme her. Das sichtbare Mittelalter ist daher teilweise Ergebnis damaliger Rekonstruktion.", "tags": ["restaurierung", "historismus"]},
+        {"text": "Zur Anlage gehören Ost- und Westkrypta, Dom-Museum, der Bibelgarten und der sogenannte Bleikeller mit natürlich mumifizierten Toten. Diese Bereiche haben eigene Zugänge und Besuchsregeln und sind nicht automatisch mit dem Kirchenraum geöffnet.", "tags": ["krypta", "museum"]},
+        {"text": "Der Dom besitzt eine lange Musiktradition und mehrere Orgeln. Gottesdienst, Kirchenmusik und Denkmalpflege überlagern sich; der Bau ist weiterhin Kirche und kein rein museales Monument. Religiöse Nutzung hat bei Besuchen Vorrang.", "tags": ["musik", "gegenwart"]},
+        {"text": "Visuell: Zwei hohe, spitze Westtürme und die rosengeschmückte Fassade bestimmen die Domsheide. Am Markt erscheint der Dom hinter Rathaus und Roland. Sandstein, Backstein und verschiedene Fensterformen zeigen die lange Baugeschichte.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Rathaus und Roland markieren die Bürgerstadt, der Dom den erzbischöflichen Ursprung. Die Glocke schließt südlich an den Dombezirk an; Bleikeller und Dom-Museum vertiefen Bau-, Bestattungs- und Kirchengeschichte.", "tags": ["quer", "stadtraum"]},
+        {"text": "LIVE: Gottesdienste, Konzerte, Turmaufstieg, Dom-Museum, Bleikeller und Kryptenzugang aktuell beim St.-Petri-Dom prüfen. Öffnung und Eintritt einzelner Bereiche wechseln; während liturgischer Feiern touristische Hinweise zurückstellen.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": []
+    },
+    {
+      "id": "bremen_marktplatz_bremen",
+      "name": "Marktplatz Bremen",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Der Marktplatz entwickelte sich zwischen Domburg, Weser und Bürgerstadt. Sein dichtes Ensemble aus Rathaus, Roland, Schütting, Dom und Bürgerhäusern macht Bremens Machtgeschichte sichtbar.",
+      "deep_data_pool": [
+        {"text": "Der Platz entstand nicht nach einem einheitlichen Plan. Er entwickelte sich aus einem frühmittelalterlichen Handelsraum am Dünenhang zwischen Domburg, Liebfrauenkirchhof und dem früheren Weserarm Balge. Alte Verkehrswege münden bis heute an seinen Ecken.", "tags": ["mittelalter", "stadtgrundriss"]},
+        {"text": "Im 14. Jahrhundert erhielt der Markt ungefähr seine heutigen Grenzen. Zwischen kirchlicher Immunität und Bürgerstadt wurde er zum Ort des Warenaustauschs, politischer Versammlungen, öffentlicher Bekanntmachungen und städtischer Selbstdarstellung.", "tags": ["markt", "politik"]},
+        {"text": "Eine niedrige Mauer trennte früher inneren Markt und äußeren Ring. Nur Händler, deren Wagen durch einen der Durchlässe passten, sollten im Inneren verkaufen; die Regelung sollte das Gedränge begrenzen. Im frühen 19. Jahrhundert verschwand die Mauer.", "tags": ["alltag", "handel"]},
+        {"text": "1863 wurde ein steinernes Rad mit zehn Speichen in die Platzfläche gelegt; sein Zentrum bildet ein Hanseatenkreuz. Die Pflasterung ist ein bewusstes historisches Detail und darf nicht mit der mittelalterlichen Marktgestaltung verwechselt werden.", "tags": ["pflaster", "hanse"]},
+        {"text": "Rathaus und Roland bilden den UNESCO-Kern. Schütting, Dom, Liebfrauenkirche, Haus der Bürgerschaft und die historischen Fassaden ergänzen ein Ensemble von Politik, Handel, Religion und bürgerlicher Kultur aus sehr verschiedenen Jahrhunderten.", "tags": ["ensemble", "unesco"]},
+        {"text": "Der moderne Bau der Bremischen Bürgerschaft entstand nach dem Krieg an der Ostseite. Er zeigt, dass der Platz kein eingefrorenes Mittelalter ist, sondern weiterhin politisches Zentrum des Landes Bremen und Bühne öffentlicher Debatten bleibt.", "tags": ["parlament", "gegenwart"]},
+        {"text": "Visuell: Der längliche Platz wird von der reich ornamentierten Rathausfront, dem frei stehenden Roland, dem giebelreichen Schütting und dem Domraum gefasst. Das Hanseatenkreuz liegt im Pflaster; die Böttcherstraße beginnt südwestlich hinter dem Schütting.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Von hier führen kurze Wege zur Böttcherstraße und Weser, zum Schnoor, Domshof und Liebfrauenkirchhof. Der Platz eignet sich als geografischer Ausgangspunkt, doch einzelne Gebäude besitzen voneinander unabhängige Eingänge und Öffnungen.", "tags": ["quer", "orientierung"]},
+        {"text": "LIVE: Wochenmarkt, Weihnachtsmarkt, Kundgebungen, Bühnen, Absperrungen und Führungen aktuell bei Bremen und den Veranstaltern prüfen. Aus historischer Marktfunktion niemals auf ein täglich gleiches Angebot schließen.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": []
+    },
+    {
+      "id": "bremen_bottcherstrasse",
+      "name": "Böttcherstraße",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Die 108 Meter lange Böttcherstraße verbindet Marktplatz und Weser. Ludwig Roselius ließ sie von den 1920er Jahren bis 1931 als architektonisches Gesamtkunstwerk umformen.",
+      "deep_data_pool": [
+        {"text": "Die Straße war historisch ein Weg zwischen Markt und Weser, an dem Fassmacher und andere Gewerbe arbeiteten. Um 1900 galt ihre Bausubstanz als so schlecht, dass Abrisspläne bestanden. Der Kaffee-Unternehmer Ludwig Roselius erwarb schrittweise Grundstücke.", "tags": ["geschichte", "handel"]},
+        {"text": "Roselius hatte mit Kaffee HAG ein internationales Unternehmen aufgebaut. Er wollte moderne Architektur, norddeutsches Handwerk, Kunst und Handel zu einer eigenen kulturellen Aussage verbinden. Ab 1923 wurde die Straße systematisch gestaltet; 1931 galt das Ensemble als vollendet.", "tags": ["roselius", "stadtumbau"]},
+        {"text": "Bernhard Hoetger prägte die expressionistischen Hauptbauten, besonders das Paula-Becker-Modersohn-Haus und Haus Atlantis. Eduard Scotland und Alfred Runge entwarfen weitere Gebäude. Backstein, plastische Details, Höfe und enge Raumfolgen verbinden unterschiedliche Handschriften.", "tags": ["expressionismus", "architektur"]},
+        {"text": "Roselius verband das Projekt mit völkischen und nordischen Ideen. Die nationalsozialistische Führung stufte Teile der Architektur dennoch als entartet ein; 1937 wurde das Ensemble nach Intervention Roselius' unter Schutz gestellt. Diese widersprüchliche Ideologiegeschichte gehört zur Einordnung.", "tags": ["nationalsozialismus", "quellenkritik"]},
+        {"text": "Bomben zerstörten 1944 große Teile. Roselius' Tochter Hildegard und Kaffee HAG betrieben den Wiederaufbau; bis 1954 waren die Fassaden weitgehend rekonstruiert. Das heutige Erscheinungsbild verbindet Originalsubstanz, Nachkriegswiederaufbau und spätere Restaurierung.", "tags": ["krieg", "wiederaufbau"]},
+        {"text": "In der Straße liegen das Paula Modersohn-Becker Museum, Ludwig Roselius Museum, Haus Atlantis, Glockenspiel und mehrere Höfe. Sie bilden kein einziges Museum: Zugänge, Trägerschaften und aktuelle Nutzung müssen getrennt behandelt werden.", "tags": ["museen", "orientierung"]},
+        {"text": "Visuell: Vom Markt führt ein vergoldetes Relief in eine schmale Backsteingasse. Unregelmäßige Fassaden, Erker, Skulpturen, Tore und Höfe verdichten den Raum. Richtung Weser öffnet sich die Straße am Martinianleger.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Der Schütting steht am Markteingang; an der Weserseite schließen Schlachte und Martinikirche an. Die beiden Museen vertiefen Roselius' Sammeln und Hoetgers Architektur, während Haus Atlantis die ideologische Seite des Projekts sichtbar macht.", "tags": ["quer", "stadtraum"]},
+        {"text": "LIVE: Glockenspielzeiten, Museumsöffnungen, Kino, Geschäfte, Gastronomie, Baustellen und Veranstaltungen aktuell auf boettcherstrasse.de und bei den Einrichtungen prüfen. Frei zugängliche Straße nicht mit jederzeit offenen Innenhöfen gleichsetzen.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": []
+    },
+    {
+      "id": "bremen_schnoor",
+      "name": "Schnoor",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Der Schnoor ist Bremens ältestes erhaltenes Gängeviertel. Kleine Häuser, enge Wege und mittelalterliche Parzellen bewahren den Maßstab eines früheren Fischer- und Handwerkerviertels.",
+      "deep_data_pool": [
+        {"text": "Der Name Schnoor ist seit dem 13. Jahrhundert belegt. Er wird gewöhnlich mit dem niederdeutschen Wort für Schnur verbunden: Die kleinen Häuser stehen dicht wie Perlen auf einer Schnur. Eine benachbarte Gasse heißt entsprechend Wieren, Draht.", "tags": ["name", "niederdeutsch"]},
+        {"text": "Das Viertel lag nahe Weser und Balge. Flussfischer, Schiffer, Handwerker und kleine Gewerbe fanden hier kurze Wege zum Wasser. Der historische Zweck erklärt schmale Parzellen und geringe Hausgrößen besser als die heutige romantische Wirkung.", "tags": ["sozialgeschichte", "hafen"]},
+        {"text": "Die älteste erhaltene Bausubstanz reicht ins 14. Jahrhundert; viele sichtbare Häuser stammen aus dem 17. und 18. Jahrhundert. Mehr als hundert Wohn- und Handwerkerhäuser stehen unter Denkmalschutz, doch Alter und Rekonstruktionsgrad unterscheiden sich.", "tags": ["baugeschichte", "denkmal"]},
+        {"text": "Am Rand lag ein Franziskanerkloster; von ihm blieb die Kirche St. Johann erhalten. Das katholische Gotteshaus und weitere soziale Einrichtungen zeigen, dass der Schnoor mehr als eine Kulisse aus Kleinhäusern ist.", "tags": ["st_johann", "religion"]},
+        {"text": "Anfang des 20. Jahrhunderts galt der Schnoor wegen Enge, schlechter Wohnverhältnisse und fehlender Anpassung an den Autoverkehr als Armenviertel. Gerade diese wirtschaftliche Randlage bewahrte den historischen Grundriss vor großflächiger Modernisierung.", "tags": ["20_jahrhundert", "stadtplanung"]},
+        {"text": "Seit der zweiten Hälfte des 20. Jahrhunderts wurden Gebäude saniert und touristisch genutzt. Kunsthandwerk, kleine Läden, Gastronomie, Theater und Geschichtenhaus prägen die Gegenwart. Die Umwandlung brachte Erhalt, aber auch eine neue Nutzungsstruktur.", "tags": ["sanierung", "tourismus"]},
+        {"text": "Visuell: Kopfsteinpflaster, niedrige Giebelhäuser, Fachwerk, bunte Fassaden und extrem schmale Durchgänge kennzeichnen das Quartier. Der Katzengang ist besonders eng; Orientierung erfolgt besser über Schnoor, Stavendamm und die Kirche St. Johann als über Autostraßen.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Vom Marktplatz führt der Weg über Domsheide oder Balgebrückstraße. St. Johann erklärt die Klostergeschichte; Geschichtenhaus und Packhaustheater stehen für heutige Kultur. Die Weser liegt südlich, obwohl sie zwischen den Gassen kaum sichtbar ist.", "tags": ["quer", "orientierung"]},
+        {"text": "LIVE: Öffnungen von Läden, Theater, Geschichtenhaus, Gastronomie und einzelne Baustellen aktuell prüfen. Das Viertel ist grundsätzlich Fußraum; Barrierefreiheit variiert wegen Kopfsteinpflaster, Stufen und sehr schmaler Gassen.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": []
+    },
+    {
+      "id": "bremen_kunsthalle_bremen",
+      "name": "Kunsthalle Bremen",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Die Kunsthalle wird vom 1823 gegründeten Kunstverein in Bremen getragen. Ihr 1849 eröffnetes Haus bewahrt europäische Kunst vom Mittelalter bis zur Gegenwart und ein bedeutendes Kupferstichkabinett.",
+      "deep_data_pool": [
+        {"text": "Der Kunstverein in Bremen wurde 1823 von Bürgern gegründet. Er sammelte Kunst, organisierte Ausstellungen und trieb einen eigenen Museumsbau voran. Diese bis heute private Trägerschaft ist für ein Museum dieser Bedeutung in Deutschland außergewöhnlich.", "tags": ["kunstverein", "buergerkultur"]},
+        {"text": "Das Gebäude am Wall wurde 1849 eröffnet und später mehrfach erweitert. Der Standort an den Wallanlagen verband die neue bürgerliche Kunstinstitution mit dem grünen Ring der entfestigten Stadt. Historischer Mittelbau und moderne Ergänzungen bleiben ablesbar.", "tags": ["architektur", "stadtentwicklung"]},
+        {"text": "Die Sammlung reicht von europäischer Malerei und Skulptur des Mittelalters bis zur Gegenwart. Schwerpunkte umfassen französische und deutsche Kunst des 19. und frühen 20. Jahrhunderts, Worpsweder Künstler sowie internationale Moderne.", "tags": ["sammlung", "kunstgeschichte"]},
+        {"text": "Das Kupferstichkabinett gehört zu den bedeutenden grafischen Sammlungen. Arbeiten auf Papier sind lichtempfindlich und werden deshalb nur wechselnd gezeigt. Aus dem Sammlungsbestand darf nie auf aktuell ausgestellte Einzelwerke geschlossen werden.", "tags": ["grafik", "konservierung"]},
+        {"text": "1906 löste der Ankauf von Van Goghs Mohnfeld eine reichsweite Debatte über moderne Kunst und öffentliche Sammlungspolitik aus. Die Auseinandersetzung machte Bremen zu einem frühen Schauplatz des Konflikts zwischen konservativem Kanon und Moderne.", "tags": ["van_gogh", "museumsgeschichte"]},
+        {"text": "Direktor Gustav Pauli baute die moderne Sammlung aus; 1911 erwarb die Kunsthalle Paula Modersohn-Beckers Kinderakt mit Goldfischglas. Das Haus verbindet damit internationale Moderne und die Kunst der Region um Bremen und Worpswede.", "tags": ["moderne", "modersohn_becker"]},
+        {"text": "Im Zweiten Weltkrieg wurden Bestände ausgelagert; ein Teil ging verloren oder wurde verschleppt. Provenienzforschung und die Geschichte der sogenannten Baldin-Sammlung gehören deshalb zur institutionellen Erinnerung und zu laufender Forschung.", "tags": ["krieg", "provenienz"]},
+        {"text": "Visuell: Der historische Sandsteinbau steht direkt an den Wallanlagen; moderne Seitenflügel ergänzen ihn. Freitreppe, Skulpturen und die klare Museumsfront unterscheiden das Haus von den nahen Wohn- und Theaterbauten des Ostertors.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Das Viertel und Theater am Goetheplatz liegen östlich, Altstadt und Mühle am Wall westlich. Das Paula Modersohn-Becker Museum ergänzt die regionale Moderne, besitzt aber eine eigene Sammlung und ein expressionistisches Gebäude.", "tags": ["quer", "museumslandschaft"]},
+        {"text": "LIVE: Öffnungszeiten, Eintritt, Sonderausstellungen, tatsächlich gezeigte Werke, Führungen und Barrierefreiheit aktuell bei der Kunsthalle prüfen. Empfindliche Grafik und Leihgaben wechseln; keine Werkpräsenz aus dem Pack versprechen.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": []
+    },
+    {
+      "id": "bremen_universum_bremen",
+      "name": "Universum Bremen",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Das 2000 eröffnete Science Center nahe der Universität setzt auf eigenes Experimentieren. Sein mit Edelstahlschuppen verkleideter Bau von Thomas Klumpp erinnert an Wal, Muschel oder Raumschiff.",
+      "deep_data_pool": [
+        {"text": "Das Universum öffnete im September 2000 als privat betriebenes Science Center neben der Universität Bremen. Anders als ein klassisches Sammlungsmuseum stellt es das Ausprobieren physikalischer, biologischer und psychologischer Phänomene in den Mittelpunkt.", "tags": ["geschichte", "science_center"]},
+        {"text": "Die Dauerausstellung gliedert sich heute in die Themen Technik, Mensch und Natur. Hunderte interaktive Stationen verlangen eigenes Handeln; genaue Zahl, Zustand und Themen einzelner Exponate können sich durch Umbauten ändern.", "tags": ["ausstellung", "interaktiv"]},
+        {"text": "Der Bremer Architekt Thomas Klumpp entwarf den Hauptbau. Rund 40.000 Edelstahlschuppen überziehen die gekrümmte Hülle. Je nach Blickwinkel wird sie als Wal, Muschel oder futuristisches Schiff gelesen; keine dieser Deutungen ist allein verbindlich.", "tags": ["architektur", "wahrnehmung"]},
+        {"text": "2007 kamen ein Außenbereich und die SchauBox hinzu. Der Außenraum verbindet Landschaftselemente mit Experimenten; der Turm der Lüfte macht Wind und Höhe erfahrbar. Die kubische SchauBox bildet einen bewussten Kontrast zum silbrigen Hauptbau.", "tags": ["erweiterung", "aussenbereich"]},
+        {"text": "Die Nähe zur 1971 eröffneten Universität ist programmatisch. Bremen entwickelte in Horn-Lehe ein Wissenschaftsquartier; das Universum übersetzt Forschungsthemen in niedrigschwellige, körperlich erfahrbare Stationen für ein breites Publikum.", "tags": ["universitaet", "wissenschaft"]},
+        {"text": "Viele Stationen funktionieren nur durch Bewegung, Berührung oder Zusammenarbeit. Die Vermittlung folgt dem Science-Center-Prinzip: Beobachtung und eigenes Experiment stehen vor einer linearen Objektchronologie. Damit ist der Besuch stark aktivitätsorientiert.", "tags": ["vermittlung", "familie"]},
+        {"text": "Visuell: Der dunkle, tropfenförmige Körper mit silbriger Schuppenhaut liegt in einem Wasserbecken. Daneben steht die kantige rostrote SchauBox; im Außenbereich ist der hohe Turm der Lüfte eine weithin sichtbare Landmarke.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Universität und Technologiepark erklären den Wissenschaftsstandort; Rhododendron-Park und botanika setzen einige Kilometer östlich einen naturkundlichen Schwerpunkt. Das Übersee-Museum arbeitet dagegen stärker mit Sammlungsobjekten und historischen Beständen.", "tags": ["quer", "museumsvergleich"]},
+        {"text": "LIVE: Öffnungszeiten, Eintritt, verfügbare Exponate, Science Shows, Ferienprogramm, Außenbereich und eventuelle Wartungen aktuell beim Universum prüfen. Preise und Zahl betriebsbereiter Stationen nie dauerhaft aus dem Pack vorlesen.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": []
+    },
+    {
+      "id": "bremen_weserstadion",
+      "name": "Weserstadion",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Das Weserstadion liegt unmittelbar am Osterdeich und ist die Heimstätte des SV Werder Bremen. Der Sportplatz am Ort reicht bis 1909 zurück; Umbauten formten das heutige Fußballstadion.",
+      "deep_data_pool": [
+        {"text": "1909 entstand an diesem Ort ein Sportplatz mit Holztribüne. Der Standort lag auf dem Peterswerder, einer früheren Flussinsel beziehungsweise Werderfläche an der Weser. Aus der geografischen Bezeichnung leitet sich auch der Vereinsname Werder ab.", "tags": ["geschichte", "name"]},
+        {"text": "1926 wurde eine größere Anlage mit Tribüne gebaut; 1930 ist der Name Weserstadion belegt. Während der NS-Zeit hieß die Arena Bremer Kampfbahn und diente neben Sport auch politischen Massenveranstaltungen.", "tags": ["stadiongeschichte", "nationalsozialismus"]},
+        {"text": "Nach 1945 nutzten amerikanische Besatzungskräfte die Anlage zeitweise für Baseball und American Football; sie hieß IKE-Stadium. 1947 wurde sie wieder als gemeinsames Sportstadion geöffnet und erhielt erneut den Namen Weserstadion.", "tags": ["nachkrieg", "sport"]},
+        {"text": "Der SV Werder Bremen, 1899 gegründet, trägt hier seine Heimspiele aus. Der Verein gewann deutsche Meisterschaften und den Europapokal der Pokalsieger 1992. Aktuelle Liga, Trainer, Tabellenstand und Spieltermine sind jedoch LIVE-Daten.", "tags": ["werder", "vereinsgeschichte"]},
+        {"text": "Mehrere Umbauphasen machten aus der offenen Sportstätte ein reines Fußballstadion. Beim großen Umbau 2008 bis 2011 rückten Ost- und Westtribüne näher an das Spielfeld; Dach und Fassade erhielten umfangreiche Photovoltaikflächen.", "tags": ["umbau", "energie"]},
+        {"text": "Die Lage mitten im Wohnquartier und direkt am Fluss ist ungewöhnlich. Sie begrenzt Straßen- und Parkraum und prägt die Anreise. Das Stadion ist eng mit Osterdeich, Pauliner Marsch und dem Alltagsleben des Viertels verflochten.", "tags": ["stadtraum", "mobilitaet"]},
+        {"text": "Im Stadionkomplex befindet sich das WUSEUM zur Vereinsgeschichte. Fanszenen, Titel, Spieler und die grün-weiße Identität werden dort museal vermittelt. Zutritt und Angebot sind unabhängig von der Sichtbarkeit des Stadions von außen.", "tags": ["wuseum", "fankultur"]},
+        {"text": "Visuell: Die geschlossene, metallisch wirkende Fassade und vier hohe Flutlichtmasten stehen direkt hinter dem Osterdeich. Von der Weserseite erscheint das Stadion als großer Ring; grün-weiße Beschilderung weist auf Werder.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Der Osterdeich verbindet Stadion und Innenstadt am Wasser. Das Viertel beginnt westlich; Pauliner Marsch und Sportflächen schließen östlich an. Der Flussbezug erklärt den Namen und die besondere Lage besser als eine reine Arenaerzählung.", "tags": ["quer", "orientierung"]},
+        {"text": "LIVE: Spieltag, Anstoß, Tickets, Stadiontour, WUSEUM, Sicherheitszonen, Taschenregeln, ÖPNV-Sonderverkehr und Namenssponsoring aktuell bei Werder, Weserstadion, BSAG und DFL prüfen.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": []
+    },
+    {
+      "id": "bremen_die_bremer_stadtmusikanten",
+      "name": "Die Bremer Stadtmusikanten",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Gerhard Marcks' rund zwei Meter hohe Bronze von 1953 zeigt Esel, Hund, Katze und Hahn übereinander. Sie steht an der Westseite des Rathauses.",
+      "deep_data_pool": [
+        {"text": "Das Märchen erschien 1819 in der zweiten Auflage der Kinder- und Hausmärchen der Brüder Grimm. Vier alte Nutztiere fliehen vor ihren Besitzern und wollen in Bremen Stadtmusikanten werden. Die Erzählung ist älter als ihre gedruckte Grimm-Fassung.", "tags": ["maerchen", "brueder_grimm"]},
+        {"text": "Die Tiere erreichen Bremen in der Handlung nicht. Unterwegs vertreiben sie Räuber aus einem Haus und bleiben dort. Der Stadtname bezeichnet also das erhoffte Ziel und ein besseres Leben, nicht den Schauplatz des Märchenendes.", "tags": ["handlung", "quellenkritik"]},
+        {"text": "Der Bildhauer Gerhard Marcks schuf die Bronze; seit 1953 steht sie an der westlichen Rathauswand. Esel, Hund, Katze und Hahn bilden die bekannte senkrechte Pyramide. Die Skulptur ist etwa zwei Meter hoch.", "tags": ["kunst", "gerhard_marcks"]},
+        {"text": "Marcks reduzierte die Tiere auf klare, schlanke Formen. Die Bronze wirkt kleiner als viele Besucher erwarten, gerade weil sie neben dem großen Rathaus steht. Ihre Berühmtheit entstand aus Motiv, Standort und unzähligen Reproduktionen.", "tags": ["skulptur", "rezeption"]},
+        {"text": "Das gemeinsame Handeln der aussortierten Tiere wird als Bild für Mut, Zusammenhalt und Selbstbehauptung gelesen. Die Deutung passt zu Bremen als Auswanderungs- und Hafenstadt, ist aber eine moderne Rezeptionsschicht und kein historisches Stadtrechtszeichen wie der Roland.", "tags": ["bedeutung", "vergleich"]},
+        {"text": "Das Berühren der Vorderbeine des Esels soll Glück bringen; die blank polierte Bronze zeigt die Popularität dieses Brauchs. Es handelt sich um eine Besuchstradition, nicht um einen Bestandteil des Grimm-Märchens.", "tags": ["brauch", "detail"]},
+        {"text": "Visuell: Die Tierpyramide steht nicht auf dem offenen Markt, sondern links beziehungsweise westlich am Rathaus in der Nähe des Liebfrauenkirchhofs. Blank geriebene Vorderbeine des Esels und die schmale Silhouette helfen beim Erkennen.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Der Roland vor dem Rathaus ist mittelalterliches Freiheitsdenkmal und UNESCO-Bestandteil; Marcks' Stadtmusikanten sind ein Kunstwerk des 20. Jahrhunderts. Beide gelten als Wahrzeichen, dürfen historisch aber nicht vermischt werden.", "tags": ["quer", "roland"]},
+        {"text": "LIVE: Gerüste, Wartung, Besucherandrang oder temporäre Umsetzungen aktuell bei Stadt und Denkmalpflege prüfen. Die Skulptur ist außen sichtbar; ungehindertes Berühren bei Absperrungen nie versprechen.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": []
+    },
+    {
+      "id": "bremen_ubersee_museum_bremen",
+      "name": "Übersee-Museum Bremen",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Das 1896 eröffnete Museum am Hauptbahnhof verbindet Natur-, Kultur- und Handelskunde. Seine großen Sammlungen werden heute auch hinsichtlich kolonialer Erwerbungskontexte erforscht.",
+      "deep_data_pool": [
+        {"text": "Das Haus ging aus den Städtischen Sammlungen für Naturgeschichte und Ethnographie hervor. 1896 eröffnete es als Städtisches Museum für Natur-, Völker- und Handelskunde. Die Verbindung dieser drei Bereiche war programmatisch und prägte die Schausammlungen.", "tags": ["gruendung", "museumsgeschichte"]},
+        {"text": "Der Standort unmittelbar am Hauptbahnhof sollte das Wissen über überseeische Natur, Kulturen und Waren einem großen Publikum zugänglich machen. Die monumentale Backsteinarchitektur setzte der damals neuen Bahnhofsvorstadt einen repräsentativen Museumsbau entgegen.", "tags": ["architektur", "stadtentwicklung"]},
+        {"text": "Die Bestände umfassen rund 1,2 Millionen Objekte aus Naturkunde, Ethnologie und Handelskunde. Nur ein kleiner Teil kann ausgestellt werden. Sammlungsumfang und aktuelle Präsentation sind deshalb strikt zu unterscheiden.", "tags": ["sammlung", "depot"]},
+        {"text": "Historische Dioramen und inszenierte Lebensräume machten das Museum früh bekannt. Sie verbinden originale Objekte, Präparate, Modelle und Kulissen. Heute werden solche Darstellungen zugleich als Vermittlungsgeschichte und als zeitgebundene Perspektive kritisch gelesen.", "tags": ["diorama", "vermittlung"]},
+        {"text": "Bremens Überseehandel und deutsche Kolonialgeschichte beeinflussten Erwerbungen und Deutungen. Das Museum untersucht Provenienzen, kooperiert mit Herkunftsgesellschaften und behandelt Restitutionsfragen. Koloniale Begriffe früherer Museumsnamen sind historisch einzuordnen.", "tags": ["kolonialgeschichte", "provenienz"]},
+        {"text": "Ein Schaumagazin machte große Bestandsgruppen zugänglich und thematisiert Sammeln, Ordnen und Bewahren. Es zeigt, dass Museen nicht nur Ausstellungen sind, sondern Archive materieller Zeugnisse mit oft komplexen Erwerbungsgeschichten.", "tags": ["schaumagazin", "museumsarbeit"]},
+        {"text": "Die Ausstellungen ordnen Themen nach Weltregionen, Naturzusammenhängen und globalem Handel. Präsentationen werden erneuert; einzelne bekannte Objekte oder Bereiche dürfen daher nicht als dauerhaft sichtbar zugesagt werden.", "tags": ["ausstellung", "globalgeschichte"]},
+        {"text": "Visuell: Der große historistische Backsteinbau steht direkt gegenüber beziehungsweise neben dem Hauptbahnhof am Bahnhofsplatz. Rundbogenfenster, helle Gliederungen und das hohe Dach unterscheiden ihn von den modernen Geschäftsbauten.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Hauptbahnhof und Museum entstanden im Wachstum der Bahnhofsvorstadt. Focke-Museum erzählt stärker Bremer Kulturgeschichte; Hafenmuseum fokussiert lokale Hafenarbeit. Das Übersee-Museum verbindet Bremen mit globalen Natur- und Handelsbeziehungen.", "tags": ["quer", "museumsvergleich"]},
+        {"text": "LIVE: Öffnungszeiten, Eintritt, aktuelle Ausstellungen, sichtbare Sammlungsbereiche, Führungen und Restitutionsinformationen beim Übersee-Museum prüfen. Historische Ausstellungstitel und Objektzahlen nicht als aktuelles Programm behandeln.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": []
+    },
+    {
+      "id": "bremen_focke_museum_bremer_landesmuseum_fur_kunst_und_kulturgeschichte",
+      "name": "Focke-Museum, Bremer Landesmuseum für Kunst und Kulturgeschichte",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Das Bremer Landesmuseum entstand aus Historischem Museum und Gewerbemuseum. Es sammelt Stadtgeschichte, Archäologie, Kunst, angewandte Kunst, Fotografie, Spielzeug und Alltagskultur.",
+      "deep_data_pool": [
+        {"text": "Johann Focke, Senatssyndikus und Historiker, sammelte seit 1881 systematisch bremische Altertümer. 1900 entstand daraus das Historische Museum. Sein Name erinnert an den Anspruch, politische, soziale und alltägliche Zeugnisse der Stadt zu sichern.", "tags": ["johann_focke", "gruendung"]},
+        {"text": "Das Gewerbemuseum ging auf eine 1873 gegründete technische Anstalt mit Modell- und Mustersammlung zurück. Seine regionalhistorisch ausgerichtete Kunstgewerbesammlung ergänzte das Historische Museum; beide Institutionen wurden zum heutigen Landesmuseum zusammengeführt.", "tags": ["gewerbemuseum", "sammlung"]},
+        {"text": "Seit 1953 befindet sich das Museum auf dem Riensberger Gelände. Das 1964 eröffnete Haupthaus von Heinrich Bartmann und Reinhold Kargel gilt als bedeutender Museumsbau der Nachkriegsmoderne und steht in einem parkartigen Ensemble.", "tags": ["architektur", "nachkriegsmoderne"]},
+        {"text": "Zum Gelände gehören historische Gebäude wie Haus Riensberg, Eichenhof und Tarmstedter Scheune. Sie sind selbst Exponate regionaler Bau- und Wohnkultur und verteilen die Sammlung auf mehrere Häuser mit unterschiedlichen Zugängen.", "tags": ["ensemble", "baukultur"]},
+        {"text": "Die Sammlungen umfassen Vor- und Frühgeschichte, Bremer Silber, Glas, Möbel, Porzellan, Stadtansichten, Porträts, Skulptur, Fotografie, Spielzeug, Münzen und Medaillen. Objektgeschichten verbinden Kunst-, Wirtschafts- und Sozialgeschichte.", "tags": ["sammlung", "stadtgeschichte"]},
+        {"text": "Focke dokumentierte auch unmittelbare Gegenwart: Ein rotes Stoffbändchen der Revolution 1918/19 wurde als politische Quelle aufgenommen. Dieses Beispiel zeigt den weiten Geschichtsbegriff des Museums jenseits repräsentativer Prunkstücke.", "tags": ["revolution", "alltagsgeschichte"]},
+        {"text": "Die Landesarchäologie Bremen ist mit dem Museum verbunden. Funde von Steinzeit bis Mittelalter ergänzen die schriftliche Stadtgeschichte und zeigen Besiedlung, Wurten und Handel lange vor den bekannten Altstadtdenkmälern.", "tags": ["archaeologie", "landesmuseum"]},
+        {"text": "Visuell: Das flache, transparente Haupthaus liegt zurückgesetzt in einem grünen Park. Historische Landhäuser und Wirtschaftsgebäude stehen verteilt auf dem Gelände; der Museumskomplex ist kein einzelnes geschlossenes Altstadthaus.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Übersee-Museum sammelt global, Kunsthalle bildende Kunst, Focke-Museum Bremen und sein Umland. Stadtwaage, Rathaus, Hafen und Industriegeschichten erhalten hier ihren größeren kulturhistorischen Zusammenhang.", "tags": ["quer", "museumslandschaft"]},
+        {"text": "LIVE: Wegen Umbau und Neukonzeption sind Gebäude und Dauerausstellungen wechselnd zugänglich. Öffnungszeiten, Eintritt, aktuelle Häuser, Archäologie, Schaumagazin und Wiedereröffnung ausschließlich beim Focke-Museum prüfen.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": []
+    },
+    {
+      "id": "bremen_burgerpark_bremen",
+      "name": "Bürgerpark Bremen",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Der seit 1866 geschaffene Bürgerpark ist ein privat getragener öffentlicher Landschaftspark. Wiesen, Baumgruppen, Wasserzüge und Sichtachsen folgen vor allem Wilhelm Benques Planung.",
+      "deep_data_pool": [
+        {"text": "Nach dem Bundesschießen auf der Bürgerweide 1865 gründete sich der Verein für die Bewaldung der Bürgerweide. 1866 begannen Arbeiten nach einem Entwurf Wilhelm Benques. Bürgerliches Engagement schuf damit einen öffentlichen Park außerhalb kommunaler Regelträgerschaft.", "tags": ["gruendung", "buergerverein"]},
+        {"text": "Benque plante freie Wiesen, Solitärbäume, Baumgruppen, lange Sichtbahnen, Waldpartien und einen naturnah geschwungenen Wasserzug. Der Park sollte abwechslungsreiche Landschaftsbilder erzeugen und zugleich Erholung für unterschiedliche Bevölkerungsschichten bieten.", "tags": ["landschaftsarchitektur", "benque"]},
+        {"text": "Gustav Meyer leitete die Arbeiten 1871 bis 1876, anschließend kehrte Benque zurück. 1886 galt der Bürgerpark nach Ausbau der Umfahrungswege als abgeschlossen. Das heutige Bild ist Ergebnis mehrerer Planer und langer Pflege.", "tags": ["baugeschichte", "planung"]},
+        {"text": "1906 schenkte der Kaufmann Franz Ernst Schütte ein 66,5 Hektar großes Gelände. Darauf entstand nach Plänen Carl Orths der Stadtwald, der den Bürgerpark nach Norden erweitert und einen stärker waldartigen Charakter besitzt.", "tags": ["stadtwald", "stiftung"]},
+        {"text": "Der Bürgerparkverein finanziert Pflege traditionell wesentlich durch Spenden, Mitgliedschaften und die Bürgerpark-Tombola. Diese Organisationsform gehört zur Bremer Bürgerkultur und unterscheidet den Park von gewöhnlichen kommunalen Grünanlagen.", "tags": ["finanzierung", "stadtkultur"]},
+        {"text": "Hollersee, Emmasee, Meierei, Brücken, Plastiken und Tiergehege strukturieren die Anlage. Einzelne Bauten und Angebote stammen aus verschiedenen Zeiten; der Park ist kein unverändertes Gesamtwerk von 1866.", "tags": ["parkbauten", "nutzung"]},
+        {"text": "Benque hatte nach politischer Verfolgung in den USA gelebt und dort die moderne Stadtparkbewegung kennengelernt. Seine Bremer Gestaltung steht deshalb in einem internationalen Zusammenhang landschaftlicher Volksparks des 19. Jahrhunderts.", "tags": ["international", "parkgeschichte"]},
+        {"text": "Visuell: Südlich beginnt der Park hinter der Bürgerweide mit Hollersee und repräsentativer Achse; weiter nördlich wechseln offene Wiesen, alte Baumgruppen, geschwungene Wege und Wasserläufe. Der Stadtwald wirkt dichter und weniger formal.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Hauptbahnhof und Bürgerweide liegen südlich, Stadtwald und Universität nördlich. Rhododendron-Park ist eine eigenständige botanische Anlage im Osten und darf nicht mit dem Bürgerpark verwechselt werden.", "tags": ["quer", "orientierung"]},
+        {"text": "LIVE: Bootsverleih, Gastronomie, Tiergehege, Veranstaltungen, Wegearbeiten, Sturmfolgen und saisonale Regeln aktuell beim Bürgerparkverein prüfen. Freier Parkzugang bedeutet nicht, dass jedes Angebot geöffnet ist.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": []
+    },
+    {
+      "id": "bremen_schutting",
+      "name": "Schütting",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Der Schütting wurde 1537 bis 1538 als Haus der Bremer Kaufmannschaft errichtet. Seine Marktfront zeigt den wirtschaftlichen Gegenpol zum Rathaus.",
+      "deep_data_pool": [
+        {"text": "Der Antwerpener Baumeister Johann den Buschener errichtete den Schütting 1537 bis 1538. Der Name bezeichnete in norddeutschen Handelsstädten Versammlungs- und Gasthäuser von Kaufleuten.", "tags": ["geschichte", "kaufmannschaft"]},
+        {"text": "Die Kaufleute erhielten mit dem Gebäude einen Ort für Beratung, Interessenvertretung und gesellschaftliche Repräsentation. Aus ihrer Organisation entwickelte sich die heutige Handelskammer Bremen.", "tags": ["handel", "institution"]},
+        {"text": "Die Marktfront wurde in späteren Jahrhunderten verändert; ihre heutige Renaissancewirkung ist nicht vollständig Bauzustand von 1538. Der prächtige Giebel und figürliche Schmuck spiegeln den Anspruch der Kaufmannschaft.", "tags": ["architektur", "umbau"]},
+        {"text": "Über dem Portal steht der Wahlspruch buten un binnen, wagen un winnen. Er wurde 1899 angebracht und bedeutet sinngemäß draußen und drinnen wagen und gewinnen; er ist jünger als das Gebäude.", "tags": ["wahlspruch", "detail"]},
+        {"text": "1944 brannte der Schütting nach einem Luftangriff aus. Die Außenmauern blieben teilweise erhalten; der Wiederaufbau rekonstruierte die historische Erscheinung und schuf zugleich zeitgemäße Innenräume.", "tags": ["krieg", "wiederaufbau"]},
+        {"text": "Visuell: Der helle, giebelreiche Bau steht dem Rathaus direkt gegenüber. Das Portal mit niederdeutschem Wahlspruch und die symmetrische Marktfront unterscheiden ihn von den schmaleren Bürgerhäusern.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Rathaus und Roland stehen für Rat und Stadtrecht, der Schütting für Kaufmannschaft und Handel. Hinter dem Gebäude beginnt die Böttcherstraße als Verbindung zur Weser.", "tags": ["quer", "stadtraum"]},
+        {"text": "LIVE: Innenzugang, Veranstaltungen und Nutzung durch die Handelskammer aktuell prüfen. Der Schütting ist ein arbeitendes Institutionsgebäude und kein jederzeit frei zugängliches Museum.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": []
+    },
+    {
+      "id": "bremen_liebfrauenkirche",
+      "name": "Liebfrauenkirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Unser Lieben Frauen ist Bremens älteste Pfarrkirche. Romanische und gotische Bauteile, Krypta und moderne Glasfenster erzählen fast tausend Jahre Nutzung.",
+      "deep_data_pool": [
+        {"text": "Eine Vorgängerkirche ist seit dem 11. Jahrhundert belegt. Als Rats- und Marktkirche war Unser Lieben Frauen eng mit der Bürgerstadt verbunden, anders als der erzbischöfliche Dom.", "tags": ["mittelalter", "pfarrkirche"]},
+        {"text": "Der Bau besitzt romanische Kerne und gotische Erweiterungen. Die Krypta zählt zu den ältesten erhaltenen Innenräumen Bremens; unterschiedliche Mauer- und Gewölbeformen zeigen die Bauphasen.", "tags": ["romanik", "gotik"]},
+        {"text": "Die Kirche wurde in der Reformation evangelisch. Ihre Geschichte spiegelt Bremens konfessionelle Entwicklung und die enge Verbindung von Gemeinde, Rat und Markt.", "tags": ["reformation", "stadtgeschichte"]},
+        {"text": "Im Zweiten Weltkrieg erlitt das Gebäude Schäden. Beim Wiederaufbau und späteren Renovierungen wurden historische Substanz und moderne Gestaltung miteinander verbunden.", "tags": ["krieg", "wiederaufbau"]},
+        {"text": "Die farbintensiven Glasfenster schuf der französische Künstler Alfred Manessier im 20. Jahrhundert. Sie ersetzen keine mittelalterliche Verglasung, sondern setzen einen bewusst modernen Akzent.", "tags": ["glasfenster", "moderne"]},
+        {"text": "Visuell: Die Kirche steht nördlich des Marktplatzes am eigenen Kirchhof. Zwei ungleiche Türme, Backsteinmauerwerk und die Nähe zur westlichen Rathausseite helfen bei der Orientierung.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Die Stadtmusikanten stehen zwischen Kirche und Rathaus. Dom und Liebfrauenkirche sind getrennte Institutionen: hier bürgerliche Pfarrkirche, dort früherer Bischofssitz.", "tags": ["quer", "religion"]},
+        {"text": "LIVE: Gottesdienste, Kirchenmusik, Kryptenzugang, Führungen und Öffnung aktuell bei der Gemeinde prüfen. Liturgische Nutzung hat Vorrang; Innenbesichtigung nicht jederzeit voraussetzen.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": []
+    },
+    {
+      "id": "bremen_die_glocke",
+      "name": "Die Glocke",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Die Glocke ist Bremens traditionsreiches Konzerthaus am Dom. Der heutige Backsteinbau von 1928 verbindet Art-déco-Innenräume mit einem akustisch renommierten großen Saal.",
+      "deep_data_pool": [
+        {"text": "Der Name Glocke ist älter als das heutige Haus. Am Dombezirk bestanden seit dem Mittelalter Kapitelbauten; ein späterer Veranstaltungsbau wurde wegen seiner Form beziehungsweise Bezeichnung mit der Glocke verbunden.", "tags": ["name", "vorgeschichte"]},
+        {"text": "Nach dem Brand des Vorgängerbaus 1915 entstand der heutige Komplex nach Plänen Walter Görigs. Er wurde 1928 eröffnet und als Konzert- und Veranstaltungshaus in den Dombezirk eingefügt.", "tags": ["baugeschichte", "walter_goerig"]},
+        {"text": "Der große Saal wird wegen seiner klaren Akustik geschätzt. Die Glocke ist Spielstätte für Orchester, Solisten, Chöre, Lesungen und weitere Formate, besitzt aber kein dauerhaft gleiches Ensembleprogramm.", "tags": ["akustik", "musik"]},
+        {"text": "Innen prägen Art-déco-Elemente, Treppen, Leuchten und farbige Oberflächen die festliche Wirkung. Außen fügt sich der Backsteinbau wesentlich zurückhaltender in Domsheide und Dombezirk ein.", "tags": ["art_deco", "architektur"]},
+        {"text": "Das Haus überstand den Zweiten Weltkrieg vergleichsweise gut und wurde später mehrfach saniert. Historische Raumwirkung und moderne Bühnen-, Sicherheits- und Haustechnik mussten dabei verbunden werden.", "tags": ["erhaltung", "sanierung"]},
+        {"text": "Visuell: Der langgestreckte Backsteinbau liegt südlich des Doms an der Domsheide. Arkaden, hohe Fenster und der Schriftzug Die Glocke markieren den Eingang; die hohen Domtürme dominieren dennoch die Silhouette.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Der Dom liefert den historischen Ort, das Theater am Goetheplatz ergänzt die darstellenden Künste. Die Glocke ist primär Konzerthaus und nicht mit dem Glockenspiel der Böttcherstraße zu verwechseln.", "tags": ["quer", "abgrenzung"]},
+        {"text": "LIVE: Konzertprogramm, Karten, Einlass, Saalbelegung, Garderobe, Führungen und Barrierefreiheit aktuell bei der Glocke prüfen. Aus der historischen Akustik keine heutige Veranstaltung ableiten.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": []
+    },
+    {
+      "id": "bremen_bleikeller",
+      "name": "Bleikeller",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Der Bleikeller zeigt natürlich mumifizierte Tote aus dem Dombezirk. Der Name erinnert an ein früheres bleigedecktes Lager, nicht an eine Konservierung durch Blei.",
+      "deep_data_pool": [
+        {"text": "Bei Arbeiten am Dom wurden im 17. Jahrhundert ungewöhnlich gut erhaltene Leichname entdeckt. Trockene, gut belüftete Bedingungen führten zur natürlichen Mumifizierung.", "tags": ["entdeckung", "mumifizierung"]},
+        {"text": "Der Name Bleikeller entstand, weil in dem Raum Material für das Bleidach des Doms gelagert wurde. Blei war nicht die Ursache der Konservierung; diese verbreitete Fehlannahme ist ausdrücklich zu vermeiden.", "tags": ["name", "quellenkritik"]},
+        {"text": "Die Verstorbenen stammen aus verschiedenen Zeiten und sozialen Zusammenhängen. Historische Zuschreibungen einzelner Mumien wurden durch Forschung teilweise korrigiert oder bleiben unsicher.", "tags": ["bestattung", "forschung"]},
+        {"text": "Der Ausstellungsort wechselte innerhalb des Domkomplexes. Die Präsentation berührt Fragen von Pietät, Wissenschaft und dem historischen Umgang mit menschlichen Überresten.", "tags": ["museumsethik", "geschichte"]},
+        {"text": "Die Mumien sind keine mittelalterlichen Reliquien und kein Beweis für übernatürliche Vorgänge. Klima, Luftbewegung und trockene Lagerbedingungen erklären die Erhaltung.", "tags": ["naturwissenschaft", "einordnung"]},
+        {"text": "Visuell: Der Zugang liegt am Domkomplex und ist als eigener Museumsbereich ausgeschildert. Von außen ist der Bleikeller nicht an einer besonderen bleiernen Fassade zu erkennen.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Dom-Museum und Krypten erklären Bau- und Kirchengeschichte; der Bleikeller konzentriert sich auf Bestattung und Konservierung. Die Bereiche haben getrennte Zugänge.", "tags": ["quer", "dom"]},
+        {"text": "LIVE: Öffnung, Eintritt, Zugang, konservatorische Schließungen und Hinweise für sensible Besucher aktuell beim Bremer Dom prüfen. Keine jederzeitige Besichtigung versprechen.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": []
+    },
+    {
+      "id": "bremen_paula_modersohn_becker_museum",
+      "name": "Paula Modersohn-Becker Museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Das 1927 eröffnete Museum ist das weltweit erste eigens einer Malerin gewidmete Museum. Bernhard Hoetgers expressionistischer Bau bewahrt eine Hauptsammlung Paula Modersohn-Beckers.",
+      "deep_data_pool": [
+        {"text": "Ludwig Roselius stiftete das Haus zur Erinnerung an Paula Modersohn-Becker, die 1907 starb. 1927 wurde es eröffnet und gilt als erstes Museum weltweit, das dauerhaft einer Malerin gewidmet wurde.", "tags": ["gruendung", "kunstgeschichte"]},
+        {"text": "Bernhard Hoetger, mit der Künstlerin aus Worpswede und Paris verbunden, entwarf den expressionistischen Bau. Architektur, Skulptur und Innenhöfe bilden einen Teil des Gesamtkunstwerks Böttcherstraße.", "tags": ["hoetger", "expressionismus"]},
+        {"text": "Modersohn-Becker verband Worpsweder Motive mit Impulsen der französischen Moderne. Porträts, Kinderbilder, Landschaften und Selbstbildnisse zeigen ihre eigenständige, flächige Formensprache.", "tags": ["sammlung", "moderne"]},
+        {"text": "Die Künstlerin arbeitete wiederholt in Paris und setzte sich mit Cézanne, Gauguin und antiker Kunst auseinander. Ihre Bedeutung wurde erst nach ihrem frühen Tod umfassend anerkannt.", "tags": ["paris", "rezeption"]},
+        {"text": "Das Museum gehört zu den Museen Böttcherstraße und ist organisatorisch mit dem Ludwig Roselius Museum verbunden. Beide Häuser besitzen jedoch unterschiedliche Sammlungsprofile.", "tags": ["museumsverbund", "orientierung"]},
+        {"text": "Visuell: Organische Backsteinformen, Skulpturen, unregelmäßige Fenster und enge Höfe unterscheiden das Haus von klassischer Museumsarchitektur. Der Eingang liegt innerhalb der Böttcherstraße.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Kunsthalle Bremen ergänzt die regionale Moderne mit einer breiteren europäischen Sammlung. Das Roselius Museum zeigt ältere Kunst; Haus Atlantis vertieft Hoetgers Architektur und Roselius' Weltbild.", "tags": ["quer", "museumslandschaft"]},
+        {"text": "LIVE: Gezeigte Werke, Jubiläums- und Sonderausstellungen, Öffnungszeiten, Eintritt und Gebäudebereiche aktuell bei den Museen Böttcherstraße prüfen. Sammlungsbesitz garantiert keine dauernde Hängung.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": []
+    },
+    {
+      "id": "bremen_ludwig_roselius_museum",
+      "name": "Ludwig Roselius Museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Das 1928 eröffnete Sammlermuseum zeigt Kunst und Kunsthandwerk vom Mittelalter bis zum Barock im historischen Roselius-Haus, dem ältesten Kern der Böttcherstraße.",
+      "deep_data_pool": [
+        {"text": "Ludwig Roselius erwarb 1902 das Haus Böttcherstraße 6. Der Bau besitzt einen Kern aus dem 16. Jahrhundert und wurde zum Ausgangspunkt seiner schrittweisen Umgestaltung der Straße.", "tags": ["roselius", "baugeschichte"]},
+        {"text": "1928 eröffnete Roselius darin sein privates Sammlermuseum. Gemälde, Skulpturen, Reliefs, Möbel und Kunsthandwerk werden in historischen Stilräumen vom Mittelalter bis zum Barock präsentiert.", "tags": ["gruendung", "sammlung"]},
+        {"text": "Die Rauminszenierung folgt dem Geschmack und Bildungsideal eines frühen 20.-Jahrhundert-Sammlers. Sie ist selbst Teil der Museumsgeschichte und keine Rekonstruktion eines einzigen historischen Haushalts.", "tags": ["sammlungsgeschichte", "einordnung"]},
+        {"text": "Zu den bekannten Beständen gehören norddeutsche und niederländische Kunst sowie sakrale Werke. Einzelne Zuschreibungen und Präsentationen können sich durch Forschung und Leihverkehr ändern.", "tags": ["kunst", "forschung"]},
+        {"text": "Der Wiederaufbau der kriegsbeschädigten Böttcherstraße stellte auch das Roselius-Haus wieder her. Historische Substanz, rekonstruiertes Ensemble und museale Ausstattung greifen ineinander.", "tags": ["krieg", "wiederaufbau"]},
+        {"text": "Visuell: Das zurückhaltendere Giebelhaus liegt zwischen den expressiveren Bauten. Ein Hof und historische Raumfolgen vermitteln eher den Eindruck eines Sammlerhauses als eines großen Museums.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Das Paula Modersohn-Becker Museum zeigt Moderne, das Roselius Museum ältere Kunst. Beide erklären unterschiedliche Seiten von Roselius als Mäzen und Gestalter der Böttcherstraße.", "tags": ["quer", "museumsvergleich"]},
+        {"text": "LIVE: Öffnung, Eintritt, zugängliche Räume, Sonderausstellungen und tatsächlich präsentierte Werke bei den Museen Böttcherstraße prüfen. Historische Stilräume können konservatorisch eingeschränkt sein.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": []
+    },
+    {
+      "id": "bremen_haus_atlantis",
+      "name": "Haus Atlantis",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Bernhard Hoetger errichtete Haus Atlantis 1930/31 nach Vorstellungen Ludwig Roselius'. Treppenhaus und Himmelssaal bewahren die expressionistische Raumidee.",
+      "deep_data_pool": [
+        {"text": "Haus Atlantis entstand 1930 bis 1931 als später Hauptbau der Böttcherstraße. Bernhard Hoetger setzte Ludwig Roselius' spekulative Vorstellungen einer nordischen Atlantis-Kultur architektonisch um.", "tags": ["baugeschichte", "ideologie"]},
+        {"text": "Roselius' Atlantis-Ideen waren keine wissenschaftlich gesicherte Archäologie, sondern völkisch geprägte Weltdeutung. Das Gebäude muss deshalb zugleich als bedeutende Architektur und Zeugnis problematischer Ideologie gelesen werden.", "tags": ["quellenkritik", "erinnerungskultur"]},
+        {"text": "Die ursprüngliche Straßenfassade mit dem sogenannten Lebensbaum wurde im Krieg zerstört. Nach 1945 erhielt das Haus eine neue Backsteinfront; nicht alle heute sichtbaren Teile stammen von Hoetgers Original.", "tags": ["krieg", "fassade"]},
+        {"text": "Das spiralförmige Treppenhaus blieb weitgehend erhalten. Licht, farbige Materialien und geschwungene Linien führen zum Himmelssaal und erzeugen einen bewusst symbolischen Aufstieg.", "tags": ["treppenhaus", "architektur"]},
+        {"text": "Der Himmelssaal besitzt eine markante Glasdecke und zählt zu den wichtigsten erhaltenen Innenräumen des Ensembles. Seine Nutzung wechselte und ist nicht mit freiem Museumszugang gleichzusetzen.", "tags": ["himmelssaal", "innenraum"]},
+        {"text": "Visuell: Die heutige Backsteinfront ist zurückhaltender als historische Fotos der zerstörten Fassade. Im Inneren sind das organisch geschwungene Treppenhaus und der lichtdurchflutete Saal die Hauptmerkmale.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Paula-Becker-Modersohn-Haus zeigt Hoetgers Kunstarchitektur, Haus Atlantis stärker Roselius' Weltbild. Das Atlantis-Kino nutzt Teile des Komplexes, ist aber kein historischer Ausstellungsraum.", "tags": ["quer", "boettcherstrasse"]},
+        {"text": "LIVE: Zugang zu Treppenhaus, Himmelssaal, Kino und Veranstaltungen aktuell bei Böttcherstraße und Betreibern prüfen. Von außen sichtbares Gebäude bedeutet keinen freien Innenzugang.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": []
+    },
+    {
+      "id": "bremen_das_viertel",
+      "name": "Das Viertel",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Das Viertel umfasst vor allem Ostertor und Steintor östlich der Altstadt. Altbremer Häuser, Kulturorte, kleine Läden, Gastronomie und politische Bewegungen prägen das Quartier.",
+      "deep_data_pool": [
+        {"text": "Der gebräuchliche Name Viertel meint kein amtliches einzelnes Stadtviertel, sondern vor allem die Ortsteile Ostertor und Steintor. Die Grenze verläuft etwa zwischen Wallanlagen und St.-Jürgen-Straße.", "tags": ["name", "stadtgeografie"]},
+        {"text": "Nach Aufhebung der Torsperre und Entfestigung wuchs Bremen im 19. Jahrhundert nach Osten. Typische Altbremer Häuser mit Hochparterre, Souterrain und schmalem Garten prägen viele Straßen.", "tags": ["stadtentwicklung", "altbremer_haus"]},
+        {"text": "Der Ostertorsteinweg und die Vor dem Steintor bilden die zentrale Geschäfts- und Verkehrsachse. Straßenbahn, kleinteiliger Handel, Gastronomie und Wohnen liegen hier eng zusammen.", "tags": ["alltag", "verkehr"]},
+        {"text": "Theater am Goetheplatz, Gerhard-Marcks-Haus, Wilhelm-Wagenfeld-Haus und Kunsthalle markieren den kulturellen Übergang von Altstadt und Wallanlagen zum Quartier.", "tags": ["kultur", "museen"]},
+        {"text": "Seit den 1970er Jahren wurde das Viertel mit Hausbesetzungen, Bürgerinitiativen und alternativer Kultur verbunden. Konflikte um Sanierung, Verkehr und Mieten gehören zu seiner Sozialgeschichte.", "tags": ["1970er", "stadtkultur"]},
+        {"text": "Visuell: Geschlossene Reihen schmaler Altbremer Häuser, viele kleine Ladenfronten, Straßenbahngleise und dicht belegte Gehwege prägen die Hauptachse. Seitenstraßen wirken deutlich ruhiger.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Kunsthalle und Goetheplatz liegen am westlichen Eingang; das Weserstadion folgt südöstlich am Osterdeich. Der Schnoor gehört zur Altstadt und ist trotz ähnlicher kleinteiliger Wirkung ein anderes Quartier.", "tags": ["quer", "orientierung"]},
+        {"text": "LIVE: Gastronomie, Clubs, Kinos, Läden, Baustellen, Nachtverkehr und Veranstaltungen aktuell recherchieren. Das Viertel ist ein lebendiges Wohngebiet; keine einzelne Straße als jederzeitige Partymeile versprechen.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": []
+    },
+    {
+      "id": "bremen_uberseestadt",
+      "name": "Überseestadt",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Die Überseestadt wandelt seit Ende der 1990er Jahre ehemalige Hafen- und Industrieflächen zu einem gemischten Quartier um. Speicher, Becken und neue Bauten bleiben nebeneinander sichtbar.",
+      "deep_data_pool": [
+        {"text": "Bremens Freihäfen entstanden seit dem späten 19. Jahrhundert westlich der Altstadt, als größere Schiffe und moderne Umschlagtechnik neue Becken verlangten. Überseehafen und Europahafen wurden Zentren des Stückgutverkehrs.", "tags": ["hafen", "industrialisierung"]},
+        {"text": "Containerisierung und Strukturwandel verlagerten viele Funktionen nach Bremerhaven. 1998 begann mit Verfüllung eines Teils des Überseehafenbeckens die großräumige Neuordnung zur Überseestadt.", "tags": ["strukturwandel", "stadtplanung"]},
+        {"text": "Das Entwicklungsgebiet zählt zu den größten innerstädtischen Stadtentwicklungsprojekten Europas. Wohnen, Büros, Gewerbe, Kultur und weiterhin aktive Hafenbetriebe liegen nebeneinander.", "tags": ["gegenwart", "mischnutzung"]},
+        {"text": "Speicher XI, Schuppen, Gleisreste, Kaimauern und Hafenbecken bewahren die industrielle Struktur. Neue Hochpunkte und Wohnbauten setzen bewusste Kontraste, statt den Hafen vollständig zu musealisieren.", "tags": ["industriekultur", "architektur"]},
+        {"text": "Speicher XI beherbergt unter anderem Hafenmuseum und Hochschule für Künste. Das langgestreckte Gebäude zeigt, wie ehemalige Lagerarchitektur für Bildung und Kultur umgenutzt wurde.", "tags": ["speicher_xi", "umnutzung"]},
+        {"text": "Visuell: Breite Hafenbecken, lange Speicherfassaden, Kräne und neue Wohn- oder Bürobauten prägen ein großmaßstäbliches Gebiet. Distanzen sind erheblich größer als in der Altstadt.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Die Schlachte zeigt den alten Uferhafen, die Überseestadt den modernen Hafenumbau. Das Hafenmuseum erklärt Arbeit und Warenströme; die Innenstadt ist über Stephaniviertel angebunden.", "tags": ["quer", "hafenentwicklung"]},
+        {"text": "LIVE: Baustellen, neue Quartiere, Wege am Wasser, ÖPNV, Gastronomie und Zugänglichkeit von Kaiflächen aktuell prüfen. Aktive Hafen- und Gewerbeflächen niemals als frei betretbar behandeln.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": []
+    },
+    {
+      "id": "bremen_muhle_am_wall",
+      "name": "Mühle am Wall",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Die Herdentorswallmühle ist ein 1833 neu errichteter Galerieholländer in den Wallanlagen. Sie erinnert an die Mühlennutzung auf Bremens ehemaligen Befestigungen.",
+      "deep_data_pool": [
+        {"text": "Nach Entfestigung der Stadt wurden die Wälle als Grünanlage und für Mühlen genutzt. Am Herdentor stand zunächst eine ältere Mühle; nach einem Brand errichtete Berend Erling 1833 den heutigen Galerieholländer.", "tags": ["geschichte", "wallanlagen"]},
+        {"text": "Beim Galerieholländer kann die umlaufende Galerie zur Bedienung der hoch liegenden Flügel genutzt werden. Die drehbare Kappe richtet Flügel und Welle in den Wind.", "tags": ["technik", "muehlentyp"]},
+        {"text": "Seit 1889 gehört die Mühle der Stadt Bremen. Brände 1898 und Kriegsschäden 1950 machten Wiederherstellungen nötig; das Denkmal enthält daher mehrere Reparaturphasen.", "tags": ["erhaltung", "stadtbesitz"]},
+        {"text": "Sie wird oft als letzte der zwölf Wallmühlen bezeichnet. Das Landesamt weist genauer darauf hin, dass der heutige Bau nicht identisch mit den ursprünglich zwölf Mühlen auf den Bastionen ist.", "tags": ["quellenkritik", "einordnung"]},
+        {"text": "Die Flügel erreichen zusammen einen großen Durchmesser und prägen die Ansicht der Wallanlagen. Technik und Holzbauteile werden regelmäßig denkmalgerecht instand gesetzt.", "tags": ["technik", "denkmalpflege"]},
+        {"text": "Visuell: Der weiße Mühlenkörper mit schwarzer Kappe, Galerie und vier Flügeln steht erhöht über einem Wassergraben in den grünen Wallanlagen.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Die Wallanlagen zeichnen den früheren Festungsring nach. Kunsthalle liegt weiter östlich, Hauptbahnhof nördlich und Altstadt südlich; die Mühle markiert den Herdentorbereich.", "tags": ["quer", "orientierung"]},
+        {"text": "LIVE: Flügelbetrieb, Innenbesichtigung, Führungen, Gastronomie und Sanierungsarbeiten aktuell bei Immobilien Bremen und Betreiber prüfen. Außenansicht garantiert keinen Zugang zur Mühlentechnik.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": []
+    },
+    {
+      "id": "bremen_stadtwaage",
+      "name": "Stadtwaage",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Lüder von Bentheim errichtete die Stadtwaage 1587/88. Hier wurden Handelswaren gewogen, um Abgaben zu berechnen und Gewichte zu kontrollieren.",
+      "deep_data_pool": [
+        {"text": "Die Stadtwaage entstand 1587 bis 1588 an der damaligen Hauptgeschäftsstraße Langenstraße. Sie war Lüder von Bentheims erste große Bremer Bauaufgabe, lange vor seinem Rathausumbau.", "tags": ["geschichte", "lueder_von_bentheim"]},
+        {"text": "Durch zwei große Tore gelangten Wagen und Waren in die Halle. Waagen dienten der Steuerberechnung und der Kontrolle von Handelsgewichten; obere Geschosse nahmen Lagergut auf.", "tags": ["handel", "funktion"]},
+        {"text": "Die Giebelfassade verbindet roten Backstein mit grauem Obernkirchener Sandstein. Fensterpaare, Gesimse und Muschelbekrönungen machen sie zu einem Hauptwerk der Weser-Renaissance.", "tags": ["architektur", "weserrenaissance"]},
+        {"text": "1944 wurde das Gebäude schwer getroffen. Beim Wiederaufbau verwendete man erhaltene Steine und rekonstruierte die Marktseite; über die Gestaltung der zuvor schlichten Nordseite gab es heftige Debatten.", "tags": ["krieg", "wiederaufbau"]},
+        {"text": "1961 bezog die Sparkasse das wiederhergestellte Haus. Damit blieb das Denkmal erhalten, erhielt aber eine neue Nutzung jenseits des historischen Wiegens.", "tags": ["umnutzung", "erhaltung"]},
+        {"text": "Visuell: Der hohe, reich gestufte Giebel steht in der Langenstraße. Roter Ziegel, helle Sandsteingliederung und zwei breite Erdgeschossöffnungen verweisen auf Repräsentation und Warenverkehr.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Schütting und Rathaus zeigen politische und kaufmännische Repräsentation am Markt; die Stadtwaage dokumentiert die praktische Infrastruktur des Handels in der nahen Langenstraße.", "tags": ["quer", "handel"]},
+        {"text": "LIVE: Innenzugang, Veranstaltungen und aktuelle Nutzung beim Eigentümer beziehungsweise Veranstalter prüfen. Die historische Wiegeeinrichtung ist keine regulär betriebene öffentliche Waage.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": []
+    },
+    {
+      "id": "bremen_weserpromenade_bremen_schlachte",
+      "name": "Weserpromenade Bremen („Schlachte“)",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Die Schlachte war Bremens historischer Uferhafen. Ihr Name ist seit 1250 belegt und verweist auf pfahlartige Uferbefestigungen; heute ist sie Weserpromenade.",
+      "deep_data_pool": [
+        {"text": "Der Begriff Schlachte stammt vom niederdeutschen Slait für pfahlartige Uferbefestigungen. Er wurde 1250 erstmals urkundlich erwähnt und beschreibt ursprünglich die technische Sicherung der Weserkante.", "tags": ["name", "mittelalter"]},
+        {"text": "Um 1580 wurde die Schlachte zum wichtigen neuen Uferhafen ausgebaut. Schiffe legten an, Waren wurden umgeschlagen, und Packhäuser, Schankwirtschaften sowie Herbergen bedienten Handel und Hafenarbeit.", "tags": ["hafen", "handel"]},
+        {"text": "Die Versandung von Mittel- und Unterweser erschwerte im 19. Jahrhundert größeren Schiffen die Zufahrt. Neue Hafenbecken westlich der Altstadt und die Weserkorrektion verlagerten den Umschlag.", "tags": ["weserkorrektion", "strukturwandel"]},
+        {"text": "Nach dem Verlust der Hafenfunktion diente das Ufer anderen Verkehrs- und Gewerbezwecken. Zur Expo 2000 wurde die Schlachte umfassend als Promenade und Aufenthaltsraum neu gestaltet.", "tags": ["stadtumbau", "expo_2000"]},
+        {"text": "Historische und nachgebaute Schiffe, Anleger, Hochwasserschutz und Gastronomie prägen das heutige Bild. Einzelne Schiffe wechseln oder fahren; sie sind keine dauerhaft garantierten Denkmäler.", "tags": ["gegenwart", "schiffe"]},
+        {"text": "Visuell: Eine obere Promenade mit Häuserfront und Gastronomie sowie eine tiefere Uferkante begleiten die Weser. Gegenüber liegt der Teerhof; flussaufwärts führen Wege Richtung Osterdeich.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Böttcherstraße verbindet Markt und Schlachte. Weserburg liegt auf dem Teerhof, Überseestadt flussabwärts. Zusammen erzählen sie alten Uferhafen, moderne Kunst und Hafenumbau.", "tags": ["quer", "orientierung"]},
+        {"text": "LIVE: Schiffsanleger, Rundfahrten, Hochwasser, Gastronomie, Märkte, Veranstaltungen und Sperrungen aktuell prüfen. Aus einem liegenden Schiff keine heutige Abfahrt oder Besichtigungsmöglichkeit ableiten.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": []
+    },
+    {
+      "id": "bremen_bremen_hauptbahnhof",
+      "name": "Bremen Hauptbahnhof",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Der 1889 eröffnete Hauptbahnhof bündelt Fern-, Regional- und Stadtverkehr. Seine historistische Empfangshalle steht zwischen Innenstadt, Bahnhofsvorstadt und Bürgerweide.",
+      "deep_data_pool": [
+        {"text": "Der heutige Hauptbahnhof wurde 1889 eröffnet. Er ersetzte ältere, getrennte Bahnhöfe und bündelte wichtige Strecken in einem gemeinsamen Durchgangsbahnhof.", "tags": ["eisenbahn", "geschichte"]},
+        {"text": "Der repräsentative Bau entstand nach Plänen Hubert Stiers. Backstein, Rundbögen und die große Empfangshalle verbanden moderne Verkehrstechnik mit historistischer Stadtrepräsentation.", "tags": ["architektur", "hubert_stier"]},
+        {"text": "Bildschmuck an der Fassade verweist auf Eisenbahn, Handel und Städteverbindungen. Der Bahnhof war ein Tor der rasch wachsenden Hafen- und Industriestadt des späten 19. Jahrhunderts.", "tags": ["ikonografie", "stadtentwicklung"]},
+        {"text": "Vor dem Gebäude treffen Straßenbahn- und Buslinien der BSAG zusammen. Nördlich liegen Bürgerweide, Messe und Bürgerpark; südlich beginnt die Bahnhofsvorstadt Richtung Altstadt.", "tags": ["oepnv", "orientierung"]},
+        {"text": "Das Übersee-Museum steht unmittelbar am Bahnhofsplatz und entstand wenige Jahre später. Bahnhof und Museum spiegeln Bremens damalige globale Handels- und Wissensansprüche.", "tags": ["quer", "uebersee_museum"]},
+        {"text": "Visuell: Die lange rötliche Fassade mit zentralem Rundbogen und Türmen liegt hinter dem Bahnhofsvorplatz. Gleise verlaufen erhöht in Ost-West-Richtung; Stadtverkehr hält südlich davor.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Der Bahnhof wurde mehrfach modernisiert, ohne die denkmalgeschützte Haupthalle vollständig zu ersetzen. Historische Hülle und laufender Verkehrsbetrieb überlagern sich.", "tags": ["denkmal", "gegenwart"]},
+        {"text": "LIVE: Abfahrten, Gleise, Bauarbeiten, Aufzüge, Gepäckangebote, DB-Service und BSAG-Anschlüsse aktuell bei DB, VBN und BSAG prüfen. Historische Orientierung ersetzt keine Echtzeit-Fahrplanauskunft.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": []
+    },
+    {
+      "id": "bremen_kulturkirche_st_stephani",
+      "name": "Kulturkirche St. Stephani",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "St. Stephani ist eine mittelalterlich gegründete Kirche im Westen der Altstadt. Nach schwerer Kriegszerstörung wurde sie 1947 bis 1959 wiederaufgebaut und 2007 Kulturkirche.",
+      "deep_data_pool": [
+        {"text": "Die Stephanikirche geht auf eine Gründung des 11. Jahrhunderts zurück und wurde später romanisch und gotisch erweitert. Sie gab dem Stephaniviertel am westlichen Rand der Altstadt den Namen.", "tags": ["mittelalter", "kirchengeschichte"]},
+        {"text": "1944 wurde die Kirche bei Luftangriffen fast vollständig zerstört. Der Wiederaufbau von 1947 bis 1959 bewahrte Teile der historischen Struktur, vereinfachte aber auch Formen.", "tags": ["krieg", "wiederaufbau"]},
+        {"text": "Der zerstörte südliche Turm wurde nicht in alter Höhe rekonstruiert. Die asymmetrische Silhouette macht Kriegsverlust und Nachkriegsentscheidung am Außenbau sichtbar.", "tags": ["architektur", "erinnerung"]},
+        {"text": "Seit 2007 ist St. Stephani die erste Kulturkirche Bremens. Ausstellungen, Musik, Literatur und gesellschaftliche Debatten ergänzen die kirchliche Tradition.", "tags": ["kulturkirche", "gegenwart"]},
+        {"text": "Das Konzept nutzt den großen Kirchenraum als offenen Kulturort, ohne seine sakrale Geschichte zu leugnen. Programm und Rauminstallation wechseln und sind nicht dauerhaft im Pack abbildbar.", "tags": ["nutzung", "vermittlung"]},
+        {"text": "Visuell: Der hohe Nordturm und der deutlich niedrigere südliche Abschluss prägen die Backsteinkirche. Sie steht auf dem Stephanikirchhof westlich der klassischen Marktaltstadt.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Das Stephaniviertel verbindet Schlachte und Altstadt mit der Überseestadt. Stadtwaage und Langenstraße liegen östlich; Hafenumbau und Mediennutzung westlich.", "tags": ["quer", "stadtentwicklung"]},
+        {"text": "LIVE: Ausstellungen, Konzerte, Gottesdienste, Öffnung, Eintritt und barrierefreier Zugang aktuell bei der Kulturkirche prüfen. Keine laufende Ausstellung aus älteren Angaben versprechen.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": []
+    },
+    {
+      "id": "bremen_theater_am_goetheplatz",
+      "name": "Theater am Goetheplatz",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Das Theater am Goetheplatz ist die Hauptspielstätte des Theater Bremen für Oper, Schauspiel und Tanz. Der Bau markiert den kulturellen Übergang von Wallanlagen zum Ostertor.",
+      "deep_data_pool": [
+        {"text": "Das Haus wurde 1913 als Schauspielhaus eröffnet. Seine Lage am Goetheplatz schuf ein repräsentatives Kulturforum am östlichen Rand der Altstadt.", "tags": ["gruendung", "theatergeschichte"]},
+        {"text": "Der Bau wurde im Zweiten Weltkrieg schwer beschädigt und 1950 wiedereröffnet. Wiederaufbau und spätere Umbauten veränderten Innenräume und Bühnentechnik.", "tags": ["krieg", "wiederaufbau"]},
+        {"text": "Heute ist es die größte Spielstätte des Theater Bremen. Oper, Schauspiel, Tanz und Musiktheater arbeiten unter einem Mehrsparten-Dach; konkrete Produktionen wechseln saisonal.", "tags": ["sparten", "gegenwart"]},
+        {"text": "Weitere Spielorte des Theater Bremen ergänzen das Haus. Der Name Theater am Goetheplatz bezeichnet daher nicht das gesamte institutionelle Programm an nur einem Ort.", "tags": ["institution", "orientierung"]},
+        {"text": "Der Goetheplatz liegt an den Wallanlagen und am Beginn des Ostertorviertels. Kunsthalle und Gerhard-Marcks-Haus bilden ein dichtes Kulturband in unmittelbarer Nähe.", "tags": ["stadtraum", "kultur"]},
+        {"text": "Visuell: Die breite, helle Theaterfront mit Freitreppe und Schriftzug öffnet sich zum Goetheplatz. Straßenbahn und Ostertorsteinweg liegen direkt davor.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Die Glocke ist Bremens großes Konzerthaus; am Goetheplatz stehen szenische Künste im Vordergrund. Kunsthalle und Viertel schließen westlich beziehungsweise östlich an.", "tags": ["quer", "abgrenzung"]},
+        {"text": "LIVE: Spielplan, Besetzung, Karten, Einlass, Stückdauer, Übertitel, Barrierefreiheit und aktuelle Spielstätte beim Theater Bremen prüfen. Keine Saisonproduktion als dauerhaft behandeln.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": []
+    },
+    {
+      "id": "bremen_weserburg_museum_fur_moderne_kunst",
+      "name": "Weserburg Museum für moderne Kunst",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Die Weserburg eröffnete 1991 in umgebauten Speichergebäuden auf dem Teerhof. Das Museum für moderne Kunst arbeitet mit privaten Sammlungen und wechselnden Präsentationen.",
+      "deep_data_pool": [
+        {"text": "Auf dem Teerhof standen Speicher und Industriegebäude zwischen Weser und Kleiner Weser. Aus kriegsbeschädigten beziehungsweise umgebauten Speicherbauten entstand das Museum.", "tags": ["teerhof", "industriekultur"]},
+        {"text": "Die Weserburg eröffnete 1991 und galt als eines der ersten Sammlermuseen Europas. Private Sammlungen werden in museale Konzepte eingebunden, ohne vollständig in städtisches Eigentum überzugehen.", "tags": ["gruendung", "sammlermuseum"]},
+        {"text": "Das Profil umfasst internationale Kunst seit den 1960er Jahren bis zur Gegenwart. Wechselnde Kooperationen bedeuten, dass Künstler und Werke nicht dauerhaft garantiert werden können.", "tags": ["sammlung", "gegenwartskunst"]},
+        {"text": "Die Architektur bewahrt den großmaßstäblichen Speichercharakter und verbindet ihn mit modernen Ausstellungssälen. Der Flussstandort macht Bremens Handelsgeschichte als räumlichen Hintergrund sichtbar.", "tags": ["architektur", "hafen"]},
+        {"text": "Das Studienzentrum für Künstlerpublikationen gehört zu den besonderen Forschungsbereichen. Es sammelt Bücher, Schallplatten, Plakate und andere von Künstlern gestaltete Publikationsformen.", "tags": ["forschung", "kuenstlerpublikationen"]},
+        {"text": "Visuell: Der große Backsteinbau steht auf der Teerhofinsel direkt am Wasser. Brücken verbinden ihn mit Altstadt und Neustadt; Speicherform und Museumsbeschriftung sind gut erkennbar.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Gegenüber liegt die Schlachte als alter Uferhafen. Kunsthalle zeigt einen längeren kunsthistorischen Bogen; Weserburg konzentriert sich auf Moderne, Gegenwart und Sammlungskonzepte.", "tags": ["quer", "museumsvergleich"]},
+        {"text": "LIVE: Ausstellungen, beteiligte Sammlungen, Eintritt, Öffnung, Veranstaltungen und Gebäudebereiche aktuell bei der Weserburg prüfen. Keine private Sammlung als dauerhaft vollständig ausgestellt bezeichnen.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": []
+    },
+    {
+      "id": "bremen_rhododendron_park",
+      "name": "Rhododendron-Park",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Der ab 1933 angelegte Rhododendron-Park in Horn-Lehe bewahrt eine international bedeutende Sammlung von Rhododendren und Azaleen in weitläufigen Gartenräumen.",
+      "deep_data_pool": [
+        {"text": "Der Park wurde ab 1933 auf ehemaligem Acker- und Baumschulgelände angelegt. Ziel war eine systematische und zugleich landschaftlich wirkende Präsentation von Rhododendren.", "tags": ["gruendung", "gartengeschichte"]},
+        {"text": "Rhododendren gehören zur Familie der Heidekrautgewächse; Azaleen werden botanisch ebenfalls der Gattung Rhododendron zugerechnet. Arten und Sorten stammen aus verschiedenen Weltregionen.", "tags": ["botanik", "sammlung"]},
+        {"text": "Die Bremer Sammlung zählt zu den bedeutendsten weltweit. Freilandarten, Züchtungen und thematische Gartenbereiche dienen Erholung, Bildung, Erhaltung und wissenschaftlichem Austausch.", "tags": ["bedeutung", "pflanzensammlung"]},
+        {"text": "Blütezeiten unterscheiden sich nach Art, Sorte und Wetter. Der Park besitzt auch außerhalb der Hauptblüte wertvolle Gehölze und Gartenräume; ein exakter Blühstand ist immer LIVE.", "tags": ["jahreszeit", "quellenkritik"]},
+        {"text": "Die botanika liegt innerhalb beziehungsweise am Park und zeigt asiatische Landschaften und Tropenhäuser. Park und botanika sind organisatorisch und hinsichtlich Eintritt nicht identisch.", "tags": ["botanika", "orientierung"]},
+        {"text": "Visuell: Geschwungene Wege führen zwischen hohen, teils immergrünen Sträuchern, alten Bäumen, Wiesen und Wasserflächen. Während der Blüte bilden große farbige Rhododendrongruppen die Hauptwirkung.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Der Bürgerpark ist ein Landschaftspark des 19. Jahrhunderts; der Rhododendron-Park ist eine spezialisierte botanische Sammlung. Universität und Universum liegen westlich.", "tags": ["quer", "parkvergleich"]},
+        {"text": "LIVE: Blühstand, Parkzugänge, Führungen, Veranstaltungen, Baustellen und einzelne Gartenbereiche aktuell bei der Stiftung prüfen. Freier Außenpark und kostenpflichtige botanika getrennt behandeln.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": []
+    },
+    {
+      "id": "bremen_botanika",
+      "name": "botanika",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Die botanika ist Bremens Naturerlebniszentrum im Rhododendron-Park. Gewächshauslandschaften zeigen asiatische und tropische Pflanzenwelten und erklären Pflanzenbiologie interaktiv.",
+      "deep_data_pool": [
+        {"text": "Die botanika wurde 2003 eröffnet, um die Rhododendronsammlung wetterunabhängig zu ergänzen und Pflanzen, Landschaften und Kulturen Asiens erlebnisorientiert zu vermitteln.", "tags": ["gruendung", "naturvermittlung"]},
+        {"text": "Gewächshausbereiche inszenieren unter anderem Himalaya, Borneo und Japan. Klima, Gestein, Wasser und Pflanzen werden als zusammenhängende Lebensräume dargestellt.", "tags": ["gewaechshaus", "asien"]},
+        {"text": "Das Entdeckerzentrum erklärt Pflanzenphänomene durch Experimente. Bestäubung, Anpassung, Wachstum und Beziehungen zwischen Mensch und Pflanze stehen stärker im Mittelpunkt als reine Namenslisten.", "tags": ["wissenschaft", "interaktiv"]},
+        {"text": "Tropenbereiche beherbergen neben Pflanzen auch ausgewählte Tiere. Bestand, Tierzugang und Schmetterlingsbesatz ändern sich; konkrete Arten sind daher LIVE zu prüfen.", "tags": ["tiere", "ephemeral_context"]},
+        {"text": "Die klimatisch gesteuerten Häuser unterstützen den Erhalt empfindlicher Rhododendren und anderer Pflanzen. Gebäudetechnik ist damit Teil der Sammlungsarbeit, nicht nur Komfort.", "tags": ["erhaltung", "technik"]},
+        {"text": "Visuell: Moderne Gewächshauskörper und der Eingang liegen im Grün des Rhododendron-Parks am Deliusweg. Innen wechseln felsige Berglandschaften, Nebelwald und tropische Vegetation.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Der Außenpark zeigt winterharte Rhododendren, botanika klimatisierte Lebensräume. Universum vermittelt breit Natur, Mensch und Technik, botanika konzentriert sich auf Pflanzenwelten.", "tags": ["quer", "vergleich"]},
+        {"text": "LIVE: Öffnungszeiten, Eintritt, Tierbestand, Schmetterlinge, Blüte, Fütterungen, Sonderausstellungen und gesperrte Gewächshäuser aktuell bei botanika prüfen.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": []
+    },
+    {
+      "id": "bremen_hafenmuseum_bremen",
+      "name": "Hafenmuseum Bremen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Das Hafenmuseum im Speicher XI erzählt seit 2004 von Bremens Häfen, Waren, Schiffen und Hafenarbeit. Der historische Baumwollspeicher ist selbst das größte Exponat.",
+      "deep_data_pool": [
+        {"text": "Das Museum liegt im Speicher XI im ehemaligen Überseehafen. Der langgestreckte Backsteinbau entstand 1908 bis 1912 für die Lagerung von Baumwolle und anderen Stückgütern.", "tags": ["speicher_xi", "hafen"]},
+        {"text": "2004 eröffnete das Hafenmuseum im Zuge der Umnutzung des Speichers. Es dokumentiert den Wandel vom Weseruferhafen zu modernen Hafenbecken und zur heutigen Überseestadt.", "tags": ["gruendung", "stadtentwicklung"]},
+        {"text": "Themen sind Warenströme, Schiffe, Lagerung, Zoll, Arbeitsmigration, Technik und Alltag der Hafenarbeiter. Geschichte wird damit aus wirtschaftlicher und sozialer Perspektive erzählt.", "tags": ["ausstellung", "arbeitsgeschichte"]},
+        {"text": "Baumwolle, Kaffee, Tabak und andere Importwaren verbanden Bremen mit globalen Märkten. Diese Beziehungen schlossen koloniale Ausbeutung und ungleiche Handelsverhältnisse ein.", "tags": ["welthandel", "kolonialgeschichte"]},
+        {"text": "Containerisierung veränderte Umschlag und Hafenarbeit grundlegend und verlagerte große Teile nach Bremerhaven. Die Überseestadt entstand aus diesem Strukturwandel.", "tags": ["container", "strukturwandel"]},
+        {"text": "Visuell: Speicher XI ist ein extrem langer roter Backsteinbau mit regelmäßigen Fensterachsen und ehemaligen Ladetoren. Museum und Hochschule teilen den Komplex; der Eingang muss gezielt gesucht werden.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Die Schlachte zeigt den alten Uferhafen, Überseestadt den Flächenwandel, Hafenmuseum die Arbeits- und Warengeschichte. Übersee-Museum betrachtet globale Kulturen und Natur aus anderer Sammlungstradition.", "tags": ["quer", "museumsvergleich"]},
+        {"text": "LIVE: Öffnungszeiten, Eintritt, Sonderausstellungen, Führungen, Depotangebote und Veranstaltungen im Speicher XI aktuell beim Hafenmuseum prüfen. Aktive Hafenbereiche nicht als Museumsfläche behandeln.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": []
+    }
+  ],
+  "new_places": [],
+  "offline_qa": [
+    {"q": "Warum sind Roland und Rathaus UNESCO-Welterbe?", "a": "Seit 2004 würdigt die UNESCO beide als außergewöhnlich authentische Zeugnisse bürgerlicher Autonomie und europäischer Marktrechte.", "tags": ["unesco", "roland", "rathaus"]},
+    {"q": "Wie alt ist der Bremer Roland?", "a": "Die steinerne Figur wurde 1404 errichtet; sie ersetzte einen älteren hölzernen Roland.", "tags": ["roland", "geschichte"]},
+    {"q": "Sind die Stadtmusikanten wirklich in Bremen angekommen?", "a": "Nein. Im Grimm-Märchen vertreiben sie unterwegs Räuber aus einem Haus und bleiben dort; Bremen ist ihr geplantes Ziel.", "tags": ["stadtmusikanten", "maerchen"]},
+    {"q": "Wo steht die bekannte Stadtmusikanten-Statue?", "a": "Die Bronze von Gerhard Marcks steht seit 1953 an der westlichen Seite des Bremer Rathauses.", "tags": ["stadtmusikanten", "orientierung"]},
+    {"q": "Wer ließ die Böttcherstraße gestalten?", "a": "Der Kaffee-HAG-Unternehmer Ludwig Roselius erwarb Grundstücke und ließ das Ensemble vor allem in den 1920er Jahren bis 1931 ausbauen.", "tags": ["boettcherstrasse", "roselius"]},
+    {"q": "Was ist am Paula Modersohn-Becker Museum besonders?", "a": "Das 1927 eröffnete Haus gilt als weltweit erstes Museum, das dauerhaft einer Malerin gewidmet wurde.", "tags": ["museum", "modersohn_becker"]},
+    {"q": "Was bedeutet Schnoor?", "a": "Der Name wird mit dem niederdeutschen Wort für Schnur verbunden: Die kleinen Häuser stehen dicht wie Perlen auf einer Schnur.", "tags": ["schnoor", "niederdeutsch"]},
+    {"q": "Was war die Schlachte früher?", "a": "Sie war Bremens Uferhafen. Der seit 1250 belegte Name verweist auf pfahlartige Befestigungen des Weserufers.", "tags": ["schlachte", "hafen"]},
+    {"q": "Was ist die BSAG?", "a": "Die Bremer Straßenbahn AG betreibt den städtischen Straßenbahn- und Busverkehr. LIVE: Linien, Abfahrten und Störungen bei BSAG oder VBN prüfen.", "tags": ["bsag", "oepnv", "live_hint"]},
+    {"q": "Seit wann gibt es Straßenbahnen in Bremen?", "a": "1876 begann die Bremer Pferdebahn; 1890 wurde elektrischer Betrieb mit Oberleitung erprobt, 1892 startete eine reguläre elektrische Linie.", "tags": ["bsag", "verkehrsgeschichte"]},
+    {"q": "Wie komme ich mit dem ÖPNV zum Flughafen?", "a": "Die Straßenbahnlinie 6 verbindet Hauptbahnhof und Flughafen direkt. LIVE: Route, Takt und Störungen bei BSAG/VBN prüfen.", "tags": ["bsag", "flughafen", "live_hint"]},
+    {"q": "Wofür ist Werder Bremen bekannt?", "a": "Der 1899 gegründete Sportverein ist besonders durch seine Fußballmannschaft und das Weserstadion am Osterdeich bekannt.", "tags": ["werder", "sport"]},
+    {"q": "Warum heißt Werder Bremen so?", "a": "Werder bezeichnet eine Flussinsel beziehungsweise erhöhtes Land am Wasser; der Vereinsursprung liegt am Peterswerder.", "tags": ["werder", "name"]},
+    {"q": "Kann man das Weserstadion außerhalb von Spielen besuchen?", "a": "Stadiontour und WUSEUM sind vom aktuellen Betrieb abhängig. LIVE: Zeiten und Tickets direkt bei Werder beziehungsweise Weserstadion prüfen.", "tags": ["werder", "weserstadion", "live_hint"]},
+    {"q": "Was zeigt das Übersee-Museum?", "a": "Es verbindet Natur-, Kultur- und Handelskunde und besitzt große globale Sammlungen; aktuelle Ausstellungen sind LIVE zu prüfen.", "tags": ["uebersee_museum", "museum"]},
+    {"q": "Was zeigt das Focke-Museum?", "a": "Das Bremer Landesmuseum sammelt Stadtgeschichte, Archäologie, Kunst, angewandte Kunst und Alltagskultur. LIVE: wegen Umbauten offene Häuser prüfen.", "tags": ["focke_museum", "museum", "live_hint"]},
+    {"q": "Ist der Bürgerpark ein städtischer Park?", "a": "Er ist öffentlich zugänglich, wird aber traditionell vom Bürgerparkverein getragen und wesentlich durch bürgerschaftliche Finanzierung unterhalten.", "tags": ["buergerpark", "park"]},
+    {"q": "Wann blüht der Rhododendron-Park?", "a": "Die Hauptblüte liegt typischerweise im Frühjahr, variiert aber stark nach Art und Wetter. LIVE: aktuellen Blühstand beim Park prüfen.", "tags": ["rhododendron", "live_hint"]},
+    {"q": "Was ist die Überseestadt?", "a": "Ein großes Stadtentwicklungsgebiet auf ehemaligen Hafen- und Industrieflächen, in dem Speicher, aktive Betriebe und neue Quartiere nebeneinanderliegen.", "tags": ["ueberseestadt", "stadtentwicklung"]},
+    {"q": "Warum heißt der Bleikeller so?", "a": "Dort wurde einst Blei für das Domdach gelagert. Die Mumien wurden durch trockene Luft natürlich konserviert, nicht durch Blei.", "tags": ["bleikeller", "dom"]}
+  ],
+  "city_facts_non_place": [
+    "Bremen bildet zusammen mit Bremerhaven das Land Freie Hansestadt Bremen.",
+    "Die Weser verbindet Bremen mit der Nordsee und prägte Handel, Hafenbau und Stadtentwicklung.",
+    "Bremens Straßenbahn- und Busverkehr wird von der BSAG im Verkehrsverbund Bremen/Niedersachsen betrieben; Fahrpläne sind LIVE."
+  ]
+}

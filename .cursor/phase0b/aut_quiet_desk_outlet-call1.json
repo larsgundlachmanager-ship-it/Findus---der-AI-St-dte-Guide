@@ -1,0 +1,124 @@
+{
+  "scenarioId": "aut_quiet_desk_outlet",
+  "question": "Wir wollen was Ruhiges mit Wifi und Steckdose, nicht laut — zum Arbeiten eine Stunde.",
+  "at": "2026-08-29T00:16:35.638Z",
+  "model": "gemini-flash-lite-latest",
+  "bridge": "Ich suche dir gerne einen ruhigen Ort zum Arbeiten mit WLAN und Steckdose in deiner Nähe.",
+  "execution": "pitch_module",
+  "lane": "work",
+  "session": "new",
+  "intentSummary": "Suche nach ruhigem Arbeitsort mit WLAN und Steckdose für ca. 1 Stunde.",
+  "authorIntent": "Fokus auf ruhige Umgebung zum Arbeiten (Cafe, Co-Working oder Bibliothek) mit Strom und Internet.",
+  "call2Brief": "Präsentiere die 2 besten ruhigen Arbeitsorte in der Nähe, die WLAN und Steckdosen bieten. Keine erfundenen Preise oder Öffnungszeiten nennen.",
+  "mustHaves": [
+    "WLAN",
+    "Steckdose",
+    "ruhig"
+  ],
+  "criteria": [
+    {
+      "key": "wifi",
+      "role": "must",
+      "weight": 30
+    },
+    {
+      "key": "power_outlet",
+      "role": "must",
+      "weight": 30
+    },
+    {
+      "key": "quiet",
+      "role": "must",
+      "weight": 25
+    },
+    {
+      "key": "WLAN",
+      "role": "must",
+      "weight": 20
+    },
+    {
+      "key": "Steckdose",
+      "role": "must",
+      "weight": 20
+    },
+    {
+      "key": "ruhig",
+      "role": "must",
+      "weight": 20
+    }
+  ],
+  "when": [
+    {
+      "kind": "now",
+      "at": null,
+      "dateKey": null,
+      "label": "jetzt für eine Stunde"
+    }
+  ],
+  "destCity": null,
+  "work": [
+    {
+      "id": "pitch",
+      "worker": "pitch",
+      "brief": "Ort / Tour",
+      "destCity": null
+    }
+  ],
+  "needsResearch": true,
+  "pace": "fast",
+  "cityScope": "local",
+  "rawParsed": {
+    "bridge": "Ich suche dir gerne einen ruhigen Ort zum Arbeiten mit WLAN und Steckdose in deiner Nähe.",
+    "execution": "pitch_module",
+    "session": "new",
+    "lane": "work",
+    "intentSummary": "Suche nach ruhigem Arbeitsort mit WLAN und Steckdose für ca. 1 Stunde.",
+    "authorIntent": "Fokus auf ruhige Umgebung zum Arbeiten (Cafe, Co-Working oder Bibliothek) mit Strom und Internet.",
+    "call2Brief": "Präsentiere die 2 besten ruhigen Arbeitsorte in der Nähe, die WLAN und Steckdosen bieten. Keine erfundenen Preise oder Öffnungszeiten nennen.",
+    "mustHaves": [
+      "WLAN",
+      "Steckdose",
+      "ruhig"
+    ],
+    "criteria": [
+      {
+        "key": "wifi",
+        "role": "must",
+        "weight": 30
+      },
+      {
+        "key": "power_outlet",
+        "role": "must",
+        "weight": 30
+      },
+      {
+        "key": "quiet",
+        "role": "must",
+        "weight": 25
+      }
+    ],
+    "when": [
+      {
+        "kind": "now",
+        "at": null,
+        "dateKey": null,
+        "label": "jetzt für eine Stunde"
+      }
+    ],
+    "destCity": "Prisdorf",
+    "work": [
+      {
+        "id": "work_search_1",
+        "worker": "places_search",
+        "brief": "Finde ruhige Cafes, Bibliotheken oder Co-Working-Spaces in der Nähe von Prisdorf mit WLAN und Steckdosen.",
+        "mustHaves": [
+          "WLAN",
+          "Steckdose"
+        ]
+      }
+    ],
+    "needsResearch": true,
+    "pace": "fast",
+    "cityScope": "local"
+  }
+}

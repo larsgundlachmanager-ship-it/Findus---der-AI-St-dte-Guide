@@ -1,10 +1,20 @@
 /**
  * Handy laden — stadt-agnostisch: Powerbank-Automaten, Device-Ladestationen,
  * Cafés/Orte mit Steckdose (OSM + Google).
+ *
+ * Wichtig DE: Keyword „laden“ = Laden/Geschäft → Google liefert Heimat-/Touristen-
+ * Läden ohne Ladeoption. Nie solche Orte als Lade-Spot verkaufen.
  */
 
 import type { QuickAction } from '../../types/concierge';
 import { shortenActionLabel } from '../concierge/actionLabelShorten';
+import {
+  acceptChargePlace,
+  formatChargeBullet,
+  kindLabel,
+  kindSpeechHint,
+  type ChargeKind,
+} from './chargePlacePolicy';
 import {
   searchPlacesExpanding,
   PLACE_FAR_SPEECH_M,
@@ -12,42 +22,19 @@ import {
 import type { DiscoveredPlace } from './googleMapsNav';
 import type { DiscoveryCandidate, DiscoveryResult } from './contextualDiscovery';
 
-export type ChargeKind = 'powerbank' | 'device' | 'outlet' | 'cafe';
+export type { ChargeKind } from './chargePlacePolicy';
+export {
+  acceptChargePlace,
+  kindLabel,
+  looksLikeChargeJunk,
+  isPhoneChargeIntent,
+} from './chargePlacePolicy';
 
 type Ranked = DiscoveredPlace & { kind: ChargeKind; sortKey: number };
 
 function formatDist(m: number): string {
   if (m < 1000) return `${Math.max(50, Math.round(m / 50) * 50)} m`;
   return `${(m / 1000).toFixed(1)} km`;
-}
-
-function kindLabel(kind: ChargeKind): string {
-  if (kind === 'powerbank') return 'Powerbank';
-  if (kind === 'device') return 'Ladestation';
-  if (kind === 'outlet') return 'Steckdose';
-  return 'Café';
-}
-
-function inferKind(place: DiscoveredPlace, fromType: string): ChargeKind {
-  const blob = `${place.name} ${place.types.join(' ')}`.toLowerCase();
-  if (
-    fromType === 'powerbank' ||
-    /powerbank|power.?bank|voozaa|cheetah|batterybar|rechargy|chargery/.test(
-      blob,
-    )
-  ) {
-    return 'powerbank';
-  }
-  if (
-    fromType === 'phone_charge' ||
-    /device_charg|ladestation|charging.?station|usb.?charg/.test(blob)
-  ) {
-    return 'device';
-  }
-  if (fromType === 'outlet_cafe' || /socket|steckdose/.test(blob)) {
-    return 'outlet';
-  }
-  return 'cafe';
 }
 
 /** Powerbank vor Device vor Steckdose-Café vor generischem Café; dann Distanz. */
@@ -90,6 +77,7 @@ async function gatherChargePlaces(
       lng,
       placeType: 'powerbank',
       openNow: true,
+      strictOpenNow: true,
       minResults: 1,
       rings: [900, 2500, 6000, 12_000],
     }).catch(() => null),
@@ -98,6 +86,7 @@ async function gatherChargePlaces(
       lng,
       placeType: 'phone_charge',
       openNow: true,
+      strictOpenNow: true,
       minResults: 1,
       rings: [900, 2500, 6000, 12_000],
     }).catch(() => null),
@@ -106,15 +95,17 @@ async function gatherChargePlaces(
       lng,
       placeType: 'outlet_cafe',
       openNow: true,
+      strictOpenNow: true,
       minResults: 1,
       rings: [900, 2500, 6000],
     }).catch(() => null),
+    // Kein Keyword „steckdose“/„laden“ — Google matched sonst Souvenir-/Heimatläden.
     searchPlacesExpanding({
       lat,
       lng,
       placeType: 'cafe',
-      keyword: 'steckdose',
       openNow: true,
+      strictOpenNow: true,
       minResults: 1,
       rings: [900, 2500, 6000],
       fallbackTypes: ['library'],
@@ -123,25 +114,27 @@ async function gatherChargePlaces(
 
   const out: Ranked[] = [];
   for (const p of powerbanks?.places ?? []) {
-    dedupePush(out, p, inferKind(p, 'powerbank'));
+    const kind = acceptChargePlace(p, 'powerbank');
+    if (kind) dedupePush(out, p, kind);
   }
   for (const p of devices?.places ?? []) {
-    dedupePush(out, p, inferKind(p, 'phone_charge'));
+    const kind = acceptChargePlace(p, 'phone_charge');
+    if (kind) dedupePush(out, p, kind);
   }
   for (const p of outlets?.places ?? []) {
-    dedupePush(out, p, inferKind(p, 'outlet_cafe'));
+    const kind = acceptChargePlace(p, 'outlet_cafe');
+    if (kind) dedupePush(out, p, kind);
   }
   for (const p of cafes?.places ?? []) {
-    dedupePush(out, p, inferKind(p, 'cafe'));
+    const kind = acceptChargePlace(p, 'cafe');
+    if (kind) dedupePush(out, p, kind);
   }
-
   out.sort((a, b) => a.sortKey - b.sortKey);
-  return out.slice(0, 6);
+  return out.slice(0, 4);
 }
 
 function toCandidates(ranked: Ranked[]): DiscoveryCandidate[] {
   return ranked.map((p) => ({
-    placeId: p.placeId,
     name: p.name,
     lat: p.lat,
     lng: p.lng,
@@ -156,23 +149,17 @@ function toCandidates(ranked: Ranked[]): DiscoveryCandidate[] {
 }
 
 function toActions(ranked: Ranked[]): QuickAction[] {
-  return ranked.slice(0, 2).map((c, i) => {
-    const dist =
-      c.distanceM < 1000
-        ? `${Math.round(c.distanceM / 10) * 10} m`
-        : `${(c.distanceM / 1000).toFixed(1)} km`;
-    const prefix =
-      i === 0
-        ? kindLabel(c.kind)
-        : `Alt · ${kindLabel(c.kind)}`;
+  return ranked.slice(0, 2).map((c) => {
+    const short = c.name.replace(/\s+/g, ' ').trim().slice(0, 28);
     return {
       type: 'START_NAVIGATION' as const,
-      label: shortenActionLabel(`${prefix}: ${c.name} (${dist})`),
+      label: shortenActionLabel(`🚶 → ${short}`),
       payload: {
         destLat: c.lat,
         destLng: c.lng,
         destName: c.name,
         targetPoiId: `place:${c.placeId}`,
+        preferWalk: true,
       },
     };
   });
@@ -181,24 +168,125 @@ function toActions(ranked: Ranked[]): QuickAction[] {
 function buildSpeech(ranked: Ranked[]): string {
   if (!ranked.length) {
     return (
-      'In der Nähe finde ich gerade keinen klaren Powerbank-Automaten oder Steckdosen-Spot. ' +
-      'Versuch’s mit einem Café, Hotel-Lobby oder Bahnhof — oder sag „nochmal suchen“.'
+      'In der Nähe finde ich gerade keinen glaubwürdigen Powerbank-Automaten, ' +
+      'keine Ladestation und kein offenes Café zum Aufladen. ' +
+      'Kein Fake-Tipp — tipp „nochmal suchen“, oder sag Hotel/Bahnhof, wenn du da hinwillst.'
     );
   }
   const top = ranked[0]!;
   const far = top.distanceM >= PLACE_FAR_SPEECH_M;
-  const kind = kindLabel(top.kind);
   if (ranked.length === 1) {
+    const tip =
+      top.kind === 'cafe'
+        ? 'Steckdose oft da, aber nicht garantiert'
+        : kindSpeechHint(top.kind);
     return far
-      ? `Zum Laden: ${top.name} (${kind}) — ca. ${formatDist(top.distanceM)}. Passt das? Tippe die Route.`
-      : `Zum Laden: ${top.name} (${kind}), ca. ${formatDist(top.distanceM)}. Ich kann dich hinbringen.`;
+      ? `${top.name} wäre mein Tipp zum Laden — ${tip}, ca. ${formatDist(top.distanceM)}. Tippe die Route, wenn du willst.`
+      : `${top.name} liegt gut — ${tip}, ca. ${formatDist(top.distanceM)}. Route startest du mit dem Button.`;
   }
   const second = ranked[1]!;
+  const aTip =
+    top.kind === 'cafe'
+      ? 'Steckdose oft da, nicht garantiert'
+      : kindSpeechHint(top.kind);
+  const bTip =
+    second.kind === 'cafe'
+      ? 'Steckdose oft da, nicht garantiert'
+      : kindSpeechHint(second.kind);
   return (
-    `Zum Laden: ${top.name} (${kindLabel(top.kind)}, ca. ${formatDist(top.distanceM)}). ` +
-    `Alternative: ${second.name} (${kindLabel(second.kind)}, ca. ${formatDist(second.distanceM)}). ` +
-    `Wohin soll’s gehen?`
+    `Entweder ${top.name} — ${aTip}, ca. ${formatDist(top.distanceM)}. ` +
+    `Oder ${second.name} — ${bTip}, ca. ${formatDist(second.distanceM)}. ` +
+    `Was passt dir besser?`
   );
+}
+
+/** Stichpunkte 1:1 zu Speech (gleiche Orte, gleiches Kind, gleiche Distanz). */
+export function chargeVisualBullets(
+  ranked: Array<{ kind: ChargeKind; name: string; distanceM: number }>,
+): string[] {
+  return ranked.slice(0, 2).map((c) =>
+    formatChargeBullet({
+      kind: c.kind,
+      name: c.name,
+      distanceM: c.distanceM,
+    }),
+  );
+}
+
+function chargeOptionBullets(c: Ranked): string[] {
+  const dist = formatDist(c.distanceM);
+  const lines = [`${kindLabel(c.kind)} · ${dist}`];
+  if (c.kind === 'cafe') lines.push('Steckdose nicht garantiert');
+  else if (c.kind === 'outlet') lines.push('Steckdose belegt');
+  else if (c.kind === 'powerbank') lines.push('Powerbank-Automat');
+  else lines.push('Ladestation');
+  return lines.slice(0, 3);
+}
+
+/** Live Switch-Modul (A|B) für Lade-Optionen — gleiche UI wie Pitch. */
+export function publishChargePitchUi(ranked: Ranked[]): void {
+  if (!ranked.length) return;
+  try {
+    const { useLivePitchStore } = require('../../module2/pitch/publishPitchUi') as {
+      useLivePitchStore: {
+        getState: () => {
+          setPitch: (
+            r: import('../../module2/pitch/types').PitchResult,
+            headline?: string,
+            meta?: { pitchKind?: string | null; pitchContext?: string | null },
+          ) => void;
+        };
+      };
+    };
+    const top = ranked.slice(0, 2);
+    const options = top.map((c, i) => {
+      const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${c.lat},${c.lng}`;
+      return {
+        id: `charge_${i}_${c.placeId || c.name.slice(0, 12)}`,
+        name: c.name,
+        lat: c.lat,
+        lng: c.lng,
+        placeId: c.placeId ? String(c.placeId) : null,
+        role: (i === 0 ? 'favorite' : 'alternative') as
+          | 'favorite'
+          | 'alternative',
+        speechPitch:
+          c.kind === 'cafe'
+            ? `${c.name}: Café, Steckdose oft da, nicht garantiert.`
+            : `${c.name}: ${kindSpeechHint(c.kind)}.`,
+        bullets: chargeOptionBullets(c),
+        mapsUrl,
+        actions: [
+          {
+            type: 'START_NAVIGATION' as const,
+            label: shortenActionLabel(`🚶 → ${c.name.slice(0, 22)}`),
+            payload: {
+              destLat: c.lat,
+              destLng: c.lng,
+              destName: c.name,
+              targetPoiId: `place:${c.placeId}`,
+              preferWalk: true,
+            },
+          },
+        ],
+        showNavBeforeSelect: true,
+      };
+    });
+    useLivePitchStore.getState().setPitch(
+      {
+        requestId: `charge_${Date.now()}`,
+        softFail: false,
+        spokenText: buildSpeech(top),
+        summary: 'Handy laden',
+        options,
+        uiLayout: 'live_split',
+      },
+      'Zum Laden',
+      { pitchKind: 'generic', pitchContext: 'charge' },
+    );
+  } catch (err) {
+    console.warn('[charge] pitch ui failed', err);
+  }
 }
 
 /**
@@ -210,6 +298,7 @@ export async function runPhoneChargeDiscovery(opts: {
   const ranked = await gatherChargePlaces(opts.origin.lat, opts.origin.lng);
   const candidates = toCandidates(ranked);
   const speech = buildSpeech(ranked);
+  const visualBullets = chargeVisualBullets(ranked);
   const quickActions =
     ranked.length > 0
       ? toActions(ranked)
@@ -224,24 +313,16 @@ export async function runPhoneChargeDiscovery(opts: {
           },
         ];
 
+  if (ranked.length > 0) publishChargePitchUi(ranked);
+
   return {
     queryLabel: 'Handy laden',
     speech,
     candidates,
     quickActions,
-    needsConfirmation: ranked[0] != null && ranked[0].distanceM >= PLACE_FAR_SPEECH_M,
+    visualBullets,
+    needsConfirmation:
+      ranked[0] != null && ranked[0].distanceM >= PLACE_FAR_SPEECH_M,
     autoInserted: false,
   };
-}
-
-export function isPhoneChargeIntent(text: string): boolean {
-  const t = text.replace(/\s+/g, ' ').trim();
-  if (!t) return false;
-  return (
-    /\b(powerbank|power\s*bank|ladeautomat|ladestation)\b/iu.test(t) ||
-    /\b(steckdose|usb[-\s]?laden|handy\s*laden|smartphone\s*laden)\b/iu.test(t) ||
-    /\b(handyakku|akku\s*(leer|schwach|fast\s*leer)|akku\s*laden)\b/iu.test(t) ||
-    /\b(café|cafe).{0,24}steckdose|steckdose.{0,24}(café|cafe)\b/iu.test(t) ||
-    /\b(laden|aufladen).{0,20}(handy|smartphone|akku)\b/iu.test(t)
-  );
 }

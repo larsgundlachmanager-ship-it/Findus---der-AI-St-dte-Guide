@@ -77,6 +77,8 @@ export type DiscoveryResult = {
   speech: string;
   /** Fast-click chips for Concierge UI. */
   quickActions: QuickAction[];
+  /** Optional: 1:1 zu Speech (z. B. Handy-laden). Sonst aus candidates abgeleitet. */
+  visualBullets?: string[];
   /** When true, user must confirm (low rating or large detour). */
   needsConfirmation: boolean;
   /** Auto-inserted stop (detour ≤ 250 m) — already navigated. */
@@ -123,7 +125,7 @@ const PLACE_QUERY_MAP: Array<{ re: RegExp; type: string; label: string }> = [
 ];
 
 const FIND_POI_RE =
-  /\b(find(e|est)?|suche|wo\s+(gibt|ist|finde)|zeig\s+mir|brauch(e|st)?|benötige|ich\s+(brauch|will|möchte|muss)|navigier(?:e|en)?|führ\s+mich|fuehr\s+mich|bring\s+mich|geh(?:en)?\s+(?:wir\s+)?(?:zum|zur|zu)|durst|trinken|getränk)\b.{0,60}\b(bäck|baeck|café|cafe|kaffee|restaurant|apotheke|drogerie|dm|rossmann|toilette|klo|wc|supermarkt|geldautomat|atm|parkplatz|arzt|krankenhaus|wasser|trinken|getränk|kiosk|durst|wlan|wifi|powerbank|steckdose|akku|laden)\b/iu;
+  /\b(find(e|est)?|suche|wo\s+(gibt|ist|finde)|zeig\s+mir|brauch(e|st)?|benötige|ich\s+(brauch|will|möchte|muss)|navigier(?:e|en)?|führ\s+mich|fuehr\s+mich|bring\s+mich|geh(?:en)?\s+(?:wir\s+)?(?:zum|zur|zu)|durst|trinken|getränk)\b.{0,60}\b(bäck|baeck|café|cafe|kaffee|restaurant|apotheke|drogerie|dm|rossmann|toilette|klo|wc|supermarkt|geldautomat|atm|parkplatz|arzt|krankenhaus|wasser|trinken|getränk|kiosk|durst|wlan|wifi|powerbank|steckdose|akku|aufladen|ladestation)\b/iu;
 
 const EMERGENCY_RE =
   /\b(toilette|klo|wc|notfall|dringend|sofort|muss\s+(mal|auf\s+toilette)|pipi|akku\s*(leer|schwach|fast\s*leer)|handyakku)\b/iu;
@@ -315,7 +317,7 @@ function buildSpeech(
   }
   if (opts.drinkNeed) {
     return {
-      speech: `${top.name} ist ca. ${formatDist(top.distanceM)} entfernt — da kriegst du was zu trinken.${farHint} Soll ich die Route starten?`,
+      speech: `${top.name} ist ca. ${formatDist(top.distanceM)} entfernt — da kriegst du was zu trinken.${farHint}`,
       needsConfirmation: isFar,
     };
   }
@@ -436,6 +438,7 @@ export async function runContextualDiscovery(opts: {
       speech: charge.speech,
       candidates: charge.candidates,
       quickActions: charge.quickActions,
+      visualBullets: charge.visualBullets,
       needsConfirmation: charge.needsConfirmation,
       autoInserted: charge.autoInserted,
     };
@@ -698,11 +701,15 @@ export async function runContextualDiscovery(opts: {
  * Instantly abort TTS and start nav (or insert into multi-stop queue).
  */
 export async function interruptAndNavigateToDiscovery(
-  candidate: DiscoveryCandidate | { name: string; lat: number; lng: number },
+  candidate:
+    | DiscoveryCandidate
+    | { name: string; lat: number; lng: number; poiId?: number },
   opts?: {
     emergency?: boolean;
     keepFinal?: { name: string; lat: number; lng: number; poiId?: number } | null;
     skipClosingGate?: boolean;
+    /** Pin / „Ja, dorthin“ — kein Fernziel-Verify, kein Einweben in alte Tour */
+    skipDestVerify?: boolean;
   },
 ): Promise<boolean> {
   try {
@@ -747,6 +754,7 @@ export async function interruptAndNavigateToDiscovery(
               destLat: candidate.lat,
               destLng: candidate.lng,
               skipClosingGate: true,
+              skipDestVerify: opts?.skipDestVerify === true,
             },
           },
         ],
@@ -800,71 +808,119 @@ export async function interruptAndNavigateToDiscovery(
     }
   }
 
-  const keepFinal = opts?.keepFinal ?? getActiveNavDestination();
-  if (keepFinal) {
-    ensureTourFromActiveNav({
-      name: keepFinal.name,
-      lat: keepFinal.lat,
-      lng: keepFinal.lng,
-      poiId: 'poiId' in keepFinal ? keepFinal.poiId ?? -1 : -1,
-    });
-    const stop: TourStop = {
-      poiId: -1,
-      name: candidate.name,
-      lat: candidate.lat,
-      lng: candidate.lng,
-      done: false,
-      priority: opts?.emergency ? 'must' : 'high',
-      remindMinBefore: opts?.emergency ? 5 : null,
-    };
-    // Smart einweben (on-route vorher), nicht nur blind vorne — Tour bleibt
-    if (hasActiveTourQueue()) {
-      const woven = await weaveSpontaneousStop(stop, { startNow: true });
-      if (woven) {
-        try {
-          await speakAssistantText(woven.speechHint);
-        } catch {
-          /* soft */
+  // Karten-Pin / bestätigtes Ziel: frisch starten — nicht in stale Tour einweben
+  if (!opts?.skipDestVerify) {
+    const keepFinal = opts?.keepFinal ?? getActiveNavDestination();
+    if (keepFinal) {
+      const gps = useFinnusStore.getState();
+      const fromLat = gps.lastGpsLat;
+      const fromLng = gps.lastGpsLng;
+      const longWalk =
+        fromLat != null &&
+        fromLng != null &&
+        distanceMeters(fromLat, fromLng, candidate.lat, candidate.lng) / 80 >
+          20;
+
+      // Lange Ziele nicht in lokale Walk-Tour einweben — frische Route (Auto-ÖPNV)
+      if (longWalk) {
+        const tour = gps.multiStopTour;
+        const transitTour = tour?.stops?.some(
+          (s) =>
+            s.role === 'board' ||
+            s.role === 'alight' ||
+            s.role === 'transfer',
+        );
+        if (!transitTour) {
+          useFinnusStore.getState().setMultiStopTour(null);
         }
-        return true;
+        const poiIdLong =
+          'poiId' in candidate &&
+          typeof (candidate as { poiId?: number }).poiId === 'number'
+            ? (candidate as { poiId: number }).poiId
+            : -1;
+        return startNavigationToCoords({
+          name: candidate.name,
+          lat: candidate.lat,
+          lng: candidate.lng,
+          poiId: poiIdLong,
+          skipDestVerify: true,
+        });
       }
+
+      ensureTourFromActiveNav({
+        name: keepFinal.name,
+        lat: keepFinal.lat,
+        lng: keepFinal.lng,
+        poiId: 'poiId' in keepFinal ? keepFinal.poiId ?? -1 : -1,
+      });
+      const stop: TourStop = {
+        poiId: -1,
+        name: candidate.name,
+        lat: candidate.lat,
+        lng: candidate.lng,
+        done: false,
+        priority: opts?.emergency ? 'must' : 'high',
+        remindMinBefore: opts?.emergency ? 5 : null,
+      };
+      // Smart einweben (on-route vorher), nicht nur blind vorne — Tour bleibt
+      if (hasActiveTourQueue()) {
+        const woven = await weaveSpontaneousStop(stop, { startNow: true });
+        if (woven) {
+          try {
+            await speakAssistantText(woven.speechHint);
+          } catch {
+            /* soft */
+          }
+          return true;
+        }
+      }
+      await insertTourStop(stop, {
+        position: 'front',
+        startNow: true,
+      });
+      return true;
     }
-    await insertTourStop(stop, {
-      position: 'front',
-      startNow: true,
-    });
-    return true;
   }
 
+  const poiId =
+    'poiId' in candidate &&
+    typeof (candidate as { poiId?: number }).poiId === 'number'
+      ? (candidate as { poiId: number }).poiId
+      : -1;
   return startNavigationToCoords({
     name: candidate.name,
     lat: candidate.lat,
     lng: candidate.lng,
-    poiId: -1,
+    poiId,
+    skipDestVerify: opts?.skipDestVerify === true,
   });
 }
 
 /** Present discovery as Concierge card (speech + Fast-Click chips). */
 export function presentDiscoveryAsConcierge(result: DiscoveryResult): void {
+  const bullets =
+    result.visualBullets && result.visualBullets.length > 0
+      ? result.visualBullets.slice(0, 3)
+      : result.candidates.slice(0, 3).map((c) => {
+          const rating =
+            c.rating != null ? ` · ★${c.rating.toFixed(1)}` : '';
+          const detour =
+            c.detourM != null && c.detourM > 0
+              ? c.detourM <= AUTO_INSERT_DETOUR_M
+                ? ' · auf dem Weg'
+                : ' · kleiner Schlenker'
+              : '';
+          const dist =
+            c.aheadM < 1000
+              ? `${Math.round(c.aheadM / 10) * 10}m voraus`
+              : `${(c.aheadM / 1000).toFixed(1)} km voraus`;
+          return `${c.name} — ${dist}${rating}${detour}`;
+        });
   useFinnusStore.getState().setActiveConciergeCard({
     id: `discovery-${Date.now()}`,
     createdAtMs: Date.now(),
     speechText: result.speech,
-    visualBullets: result.candidates.slice(0, 3).map((c) => {
-      const rating =
-        c.rating != null ? ` · ★${c.rating.toFixed(1)}` : '';
-      const detour =
-        c.detourM != null && c.detourM > 0
-          ? c.detourM <= AUTO_INSERT_DETOUR_M
-            ? ' · auf dem Weg'
-            : ' · kleiner Schlenker'
-          : '';
-      const dist =
-        c.aheadM < 1000
-          ? `${Math.round(c.aheadM / 10) * 10}m voraus`
-          : `${(c.aheadM / 1000).toFixed(1)} km voraus`;
-      return `${c.name} — ${dist}${rating}${detour}`;
-    }),
+    visualBullets: bullets,
     quickActions: result.quickActions,
     cardTitle: result.queryLabel,
   });

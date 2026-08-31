@@ -1,0 +1,794 @@
+{
+  "city": "bad_saarow",
+  "apply": true,
+  "touched": 98,
+  "approachesFixed": 98,
+  "faqAdded": 0,
+  "data_version": 39,
+  "rows": [
+    {
+      "id": "bad_saarow_bad_saarow",
+      "name": "Bad Saarow",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_bad_saarow_klinikum",
+      "name": "Bad Saarow Klinikum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_pieskow",
+      "name": "Pieskow",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_bad_saarow_bahnhof",
+      "name": "Bad Saarow, Bahnhof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_bad_saarow_hafen",
+      "name": "Bad Saarow, Hafen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_bad_saarow_schifffahrts_gmbh",
+      "name": "Bad Saarow Schifffahrts GmbH",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_fontanepark",
+      "name": "Fontanepark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_marina_hafen_freilichtbuhne",
+      "name": "Marina Hafen Freilichtbühne",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_scharwenka_kulturforum",
+      "name": "Scharwenka Kulturforum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_saarowcentrum",
+      "name": "Saarowcentrum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_kinderkunst_galerie",
+      "name": "KinderKunst Galerie",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_evangelische_kirche",
+      "name": "Evangelische Kirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_dorfkirche_pieskow",
+      "name": "Dorfkirche Pieskow",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_denkmal_titel_unbekannt",
+      "name": "Denkmal (Titel unbekannt)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_steinbach_brunnen",
+      "name": "Steinbach-Brunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_skulptur_schwebender_findling",
+      "name": "Skulptur \"schwebender Findling\"",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_die_statue_von_johannes_r_becher",
+      "name": "Die Statue von Johannes R.Becher",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_bad_saarow_strand",
+      "name": "Bad Saarow Strand",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_badestelle_bad_saarow_pieskow",
+      "name": "Badestelle Bad Saarow Pieskow",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_kurpark",
+      "name": "Kurpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_park_kurpark_kolonnaden",
+      "name": "Park Kurpark Kolonnaden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_cecilienpark",
+      "name": "Cecilienpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_kleistpark",
+      "name": "Kleistpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_badestelle_westufer_scharmutzelsee",
+      "name": "Badestelle Westufer Scharmützelsee",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_schlosspark_bad_saarow",
+      "name": "Schlosspark Bad Saarow",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_regattaplatz",
+      "name": "Regattaplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_anlegestelle_bad_saarow_strand",
+      "name": "Anlegestelle Bad Saarow Strand",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_badestelle_diensdorf_radlow",
+      "name": "Badestelle Diensdorf-Radlow",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_markgrafenplatz",
+      "name": "Markgrafenplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_platz_am_stein",
+      "name": "Platz am Stein",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_freilich_am_see",
+      "name": "Freilich am See",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_scharmutzelseegebiet",
+      "name": "Scharmützelseegebiet",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_aussichtspunkt_scharmutzelsee",
+      "name": "Aussichtspunkt Scharmützelsee",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_wasserwerk_bad_saarow_gbr",
+      "name": "Wasserwerk Bad Saarow GbR",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_seebalkon_am_kurpark",
+      "name": "Seebalkon am Kurpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_golf_club_bad_saarow",
+      "name": "Golf Club Bad Saarow",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_stan_eby_golfplatz",
+      "name": "Stan Eby Golfplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_tennis_center_bad_saarow",
+      "name": "Tennis Center Bad Saarow",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_amt_scharmutzelsee",
+      "name": "Amt-Scharmützelsee",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_lieblingsblick_scharmutzelsee",
+      "name": "Lieblingsblick Scharmützelsee",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_theater_am_see_restaurant",
+      "name": "Theater am See | Restaurant",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_eibenhof_kultur_und_eventlocation",
+      "name": "Eibenhof - Kultur- und Eventlocation",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_cinema_by_velotel",
+      "name": "Cinema by Velotel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_as_am_see",
+      "name": "AS am See",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_hotel_esplanade_resort_spa",
+      "name": "Hotel Esplanade Resort & Spa",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_wierich_wiesen",
+      "name": "Wierich-Wiesen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_liegewiese",
+      "name": "Liegewiese",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_bank_mit_aussicht",
+      "name": "Bank mit Aussicht",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_fahrradverleih_ernest_scheffler_home_of_bikes",
+      "name": "Fahrradverleih Ernest Scheffler \"home of bikes\"",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_marchenwald_bad_saarow_pieskow",
+      "name": "Märchenwald Bad Saarow Pieskow",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_zur_alten_gartnerei",
+      "name": "zur Alten Gärtnerei",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_ferienhaus_direkt_am_scharmutzelsee_bad_saarow_halbinsel_alte_eichen",
+      "name": "Ferienhaus direkt am Scharmützelsee Bad-Saarow Halbinsel Alte Eichen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_scharmutzelsee",
+      "name": "Scharmützelsee",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_der_fitness_treff_hajo_schrobitz",
+      "name": "Der Fitness Treff, Hajo Schrobitz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_kletterwald_bad_saarow",
+      "name": "Kletterwald Bad Saarow",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_lounge_catwalk",
+      "name": "Lounge Catwalk",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_stolperstein_philippi",
+      "name": "Stolperstein Philippi",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_scharmutzelsee_umgebung",
+      "name": "Scharmützelsee & Umgebung",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_stolperstein_goldstein",
+      "name": "Stolperstein Goldstein",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_stolperstein_behrens",
+      "name": "Stolperstein Behrens",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_stolperstein_herrnstadt",
+      "name": "Stolperstein Herrnstadt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_bad_saarow_theresienhof",
+      "name": "Bad Saarow, Theresienhof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_bad_saarow_silberberg",
+      "name": "Bad Saarow, Silberberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_erich_weinert_platz",
+      "name": "Erich-Weinert-Platz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_bad_saarow_ferienhaus_am_hafen",
+      "name": "Bad Saarow Ferienhaus am Hafen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_spielplatz_klinikum_bad_saarow",
+      "name": "Spielplatz Klinikum Bad Saarow",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_waldfriedhof_bad_saarow",
+      "name": "Waldfriedhof Bad Saarow",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_aja_bad_saarow",
+      "name": "aja Bad Saarow",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_die_neue_buhne",
+      "name": "Die Neue Bühne",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_ulmenhaus",
+      "name": "Ulmenhaus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_surf_fun",
+      "name": "Surf & Fun",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_ahoi_mitsegeln_saarow_axel_henschke_ute_berger_gbr",
+      "name": "AHOI - Mitsegeln Saarow - Axel Henschke & Ute Berger GbR",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_wohlfuhlboot_hausboot_mieten_in_berlin_brandenburg_bad_saarow_am_scha",
+      "name": "Wohlfühlboot Hausboot mieten in Berlin & Brandenburg ( Bad Saarow am Scharmützelsee )",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_sonne3000_clubschiff3000",
+      "name": "Sonne3000 - Clubschiff3000",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_sonne3000_events_erlebnisse",
+      "name": "Sonne3000 - Events & Erlebnisse",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_kutsch_und_kremserfahrten_fred_peter",
+      "name": "Kutsch- und Kremserfahrten Fred Peter",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_traumzeitboot_hausboote_yachten",
+      "name": "Traumzeitboot Hausboote & Yachten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_boutique_vived",
+      "name": "Boutique Vived",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_einfach_tele_mobil_stefan_von_collrepp",
+      "name": "Einfach-Tele-Mobil Stefan von Collrepp",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_wriezener_backstube",
+      "name": "Wriezener Backstube",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_hofgemeinschaft_marienhohe_gbr",
+      "name": "Hofgemeinschaft Marienhöhe GbR",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_bunkermuseum_fuchsbau",
+      "name": "Bunkermuseum Fuchsbau",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "bad_saarow_zufahrt_zum_bunkermuseum_fuchsbau",
+      "name": "Zufahrt zum Bunkermuseum Fuchsbau",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "bad_saarow_burg_storkow",
+      "name": "Burg Storkow",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "bad_saarow_schloss_hubertushohe",
+      "name": "Schloss Hubertushöhe",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "bad_saarow_ferienhaus_am_see",
+      "name": "Ferienhaus am See",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "bad_saarow_aussichtsturm_rauener_berge",
+      "name": "Aussichtsturm Rauener Berge",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "bad_saarow_insekten_paradies_garten_der_burg_storkow",
+      "name": "Insekten Paradies Garten der Burg Storkow",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "bad_saarow_bad_saarow_classics",
+      "name": "BAD SAAROW CLASSICS",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "bad_saarow_andre_streine",
+      "name": "André Streine",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "bad_saarow_parkbuhne_furstenwalde",
+      "name": "Parkbühne Fürstenwalde",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "bad_saarow_hafen_wendisch_rietz",
+      "name": "Hafen Wendisch Rietz",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 2,
+      "had_approaches": 1
+    },
+    {
+      "id": "bad_saarow_yaas_yacht_akademie_axel_schmidt",
+      "name": "YAAS - Yacht Akademie Axel Schmidt",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "bad_saarow_thermomix_reprasentantin_dajana_steinert",
+      "name": "Thermomix-Repräsentantin Dajana Steinert",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "bad_saarow_markgrafensteine",
+      "name": "Markgrafensteine",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bad_saarow_wettermuseum_e_v",
+      "name": "Wettermuseum e.V.",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "bad_saarow_museum_furstenwalde",
+      "name": "Museum Fürstenwalde",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "bad_saarow_brauereimuseum",
+      "name": "Brauereimuseum",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    }
+  ]
+}

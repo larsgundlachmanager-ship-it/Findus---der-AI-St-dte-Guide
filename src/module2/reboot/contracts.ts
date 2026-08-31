@@ -116,12 +116,18 @@ export const FINDUS_REBOOT_MANAGER_THINK_AHEAD_BLOCK = `MANAGER MITDENKEN (SSOT 
 - Diet/Budget/Mobilität/Sight-Prefs aus Context-Rucksack sind Hard-Filter für Fact-Lane (kein Steakhaus für Vegetarier).
 - Kombi (gratis parken + Pizza TA + Förde) → ein combo-Cluster, nicht drei lose Antworten.
 - Speisekarte / Ticket / Stay22-Deep-Link: Fast-Antwort zuerst; Links dürfen als pending Actions nachpoppen (Slow-Lane).
+- Person/Künstler-Fakt („wer ist X / wie alt“): Antwort zuerst; wenn belegt Auftritt in aktueller Stadt/Nähe → kurz mitdenken + Interesse fragen (kein Fake-Termin).
+- Zeitgebundenes Phänomen (Finsternis o. Ä.): optional Erinnern / Wolken nur mit Beleg — über Blaupause, kein Extra-Vorcheck.
 - Bridge: höchstens eine pro neuem Topic. Follow-up im selben Topic: keine neue Bridge.
 - Name des Users: nicht in Bridge/Hauptantwort (außer echte Begrüßung nach langer Idle — Manager setzt nameAllowed).
 - 1 Amenity-Treffer im sinnvollen Radius → autoStartNav; 2+ → kurz wählen lassen.
 - Laufende Multi-Stop-Tour: Spontan-Ziel (Aldi/Durst) EINWEBEN, nie die ganze Queue löschen. On-route Stop vor Spontan, Rest bleibt. Harter Cut nur bei explizitem „Route löschen / andere Tour“.
 - Stop-Priorität: must → Reminder ~5 Min locker; high = jetzt oben; soft = Errand ohne Druck.
-- Thread: neuer Ort = new/parallel Topic. Alter Ort (Marinedenkmal) darf Schwimmbad-Follow-ups nicht überschreiben.`;
+- Thread: neuer Ort = new/parallel Topic. Alter Ort (Marinedenkmal) darf Schwimmbad-Follow-ups nicht überschreiben.
+- Sport-Trip: Match/Training als Hard-Anchor; Freigang nur in Lücken; Wecker rückwärts inkl. Frühstück wenn geplant.
+- Action-Board: Route nur bei explizitem Hin-Willen oder Leave ≤10 Min — sonst Maps/Speisekarte/Buchen.
+- Stille: kein ungefragtes Erkunden-/Dinner-Pitch; keine 15-Min-Smalltalk-Vorschläge während Planung.
+- Flug: zuerst Slots (Ziel, Tag, Uhr/Ident, Gepäck) + Live/Leave-by — fertig eintragen. E-SIM/Roaming erst DANACH als Weiterdenken, nie mitten in der Slot-Abfrage oder statt „wann geht der Flug?“. Nie „schau in der Airline-App“ statt selber Live zu holen.`;
 
 export function moduleForPrimaryJob(jobId: FindusJobId): ManagerModule {
   for (const [mod, cfg] of Object.entries(REBOOT_MANAGER_MODULES) as Array<

@@ -61,14 +61,37 @@ const ids = String(arg('ids') || 'hamburg,flensburg')
   .map((s) => s.trim())
   .filter(Boolean);
 
+/** pending-covers Ordner-Namen weichen teils vom Pack-ID ab */
+function pendingCoverDirs(id) {
+  const alts = {
+    'berlin-umland': ['berlin-umland', 'berlin_umland', 'berlin'],
+    berlin_umland: ['berlin-umland', 'berlin_umland', 'berlin'],
+    'berlin-zentral': ['berlin-zentral', 'berlin_zentral', 'berlin'],
+    frankfurt_am_main: ['frankfurt_am_main', 'frankfurt'],
+    hochheim_am_main: ['hochheim_am_main', 'hochheim'],
+  };
+  return alts[id] || [id];
+}
+
 for (const id of ids) {
+  const pendingFiles = [];
+  for (const dir of pendingCoverDirs(id)) {
+    pendingFiles.push(
+      path.join(ROOT, 'data', 'staedte', 'pending-covers', dir, 'stylized.png'),
+      path.join(ROOT, 'data', 'staedte', 'pending-covers', dir, 'source.png'),
+    );
+  }
+  // stylized/source zuerst — remote jpg oft schon bottom-cropped
   const candidates = [
-    path.join(ROOT, 'assets', 'onboarding', 'remote-covers', `${id}.jpg`),
+    ...pendingFiles,
+    path.join(ROOT, 'assets', 'onboarding', 'remote-covers', `${id}-src.jpg`),
+    path.join(ROOT, 'assets', 'onboarding', 'remote-covers', `${id}-src.png`),
     path.join(ROOT, 'assets', 'onboarding', `city-${id}-soft.png`),
     path.join(ROOT, 'assets', 'onboarding', `city-${id}-3.png`),
     path.join(ROOT, 'assets', 'onboarding', `city-${id}-2.png`),
-    path.join(ROOT, 'assets', 'onboarding', 'remote-covers', `${id}.png`),
     path.join(ROOT, 'assets', 'onboarding', `city-${id}.png`),
+    path.join(ROOT, 'assets', 'onboarding', 'remote-covers', `${id}.png`),
+    path.join(ROOT, 'assets', 'onboarding', 'remote-covers', `${id}.jpg`),
   ];
   const file = candidates.find((p) => fs.existsSync(p));
   if (!file) {
@@ -84,7 +107,8 @@ for (const id of ids) {
   const kbOut = Math.round(packed.bytesOut / 1024);
   console.log(
     `[cover] ${id} ${kbIn}KB → ${kbOut}KB` +
-      (packed.compressed ? ' (jpeg)' : ' (raw, install sharp for compression)'),
+      (packed.compressed ? ' (jpeg)' : ' (raw, install sharp for compression)') +
+      (packed.scrimStripped ? ' [bottom-scrim cropped]' : ''),
   );
 
   // Keep a compact local copy for re-uploads

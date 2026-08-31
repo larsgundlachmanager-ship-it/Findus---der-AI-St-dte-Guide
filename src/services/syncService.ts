@@ -1,4 +1,3 @@
-import * as Network from 'expo-network';
 import {
   getSupabase,
   isSupabaseConfigured,
@@ -6,7 +5,7 @@ import {
   type RemotePoi,
 } from './supabase';
 import { mapCityPackToRemote, type CityPack } from './cityPack';
-import { fetchCityPackById } from './cityCatalogService';
+import { loadCityPackCachedOrRemote } from './cityCatalogService';
 import { replacePoisAndFacts, getAllPois } from '../db/database';
 import { useFinnusStore } from '../store/useFinnusStore';
 import { env } from '../config/env';
@@ -15,6 +14,7 @@ import { parseAndCacheCityPronunciations } from './tts/cityPronunciationParser';
 import { scanCityDatasetSafe } from './scanner/cityScanner';
 import { scanPoiDatasetSafe } from './ai/poiDatasetScanner';
 import { syncDictionaryAfterCityDownload } from './sync/dictionarySyncService';
+import { isDeviceOffline } from './navigation/networkState';
 
 /** Verhindert parallele Syncs → SQLite „transaction within a transaction“. */
 let syncInFlight: Promise<{
@@ -57,19 +57,18 @@ async function runPoiSync(cityIdOverride?: string): Promise<{
   reason?: string;
 }> {
   console.log(
-    '[Findus Sync] URL vorhanden:',
+    '[Yorro Sync] URL vorhanden:',
     !!process.env.EXPO_PUBLIC_SUPABASE_URL,
   );
   if (!process.env.EXPO_PUBLIC_SUPABASE_URL && env.supabaseUrl()) {
-    console.log('[Findus Sync] URL via Constants.extra vorhanden');
+    console.log('[Yorro Sync] URL via Constants.extra vorhanden');
   }
 
   if (!isSupabaseConfigured()) {
     return { synced: false, poiCount: 0, reason: 'Supabase nicht konfiguriert' };
   }
 
-  const network = await Network.getNetworkStateAsync();
-  if (!network.isConnected || network.isInternetReachable === false) {
+  if (await isDeviceOffline()) {
     return { synced: false, poiCount: 0, reason: 'Offline' };
   }
 
@@ -82,7 +81,7 @@ async function runPoiSync(cityIdOverride?: string): Promise<{
   let packForPronunciation: CityPack | null = null;
 
   try {
-    const pack = await fetchCityPackById(cityId);
+    const pack = await loadCityPackCachedOrRemote(cityId);
     packForPronunciation = pack;
     const mapped = mapCityPackToRemote(pack);
     remotePois = mapped.pois;
@@ -103,6 +102,12 @@ async function runPoiSync(cityIdOverride?: string): Promise<{
   }
 
   await replacePoisAndFacts(remotePois, remoteFacts);
+  try {
+    const { reapplyLearnedPoisForCity } = await import('../db/learnedPoiOverlay');
+    await reapplyLearnedPoisForCity(cityId);
+  } catch {
+    /* soft */
+  }
 
   if (packForPronunciation) {
     try {
@@ -110,12 +115,14 @@ async function runPoiSync(cityIdOverride?: string): Promise<{
     } catch (err) {
       console.warn('[sync] Aussprache-Parser:', err);
     }
-    try {
-      await scanCityDatasetSafe(packForPronunciation);
-      await scanPoiDatasetSafe(packForPronunciation);
-    } catch (err) {
-      console.warn('[sync] Dictionary-Scanner:', err);
-    }
+    void (async () => {
+      try {
+        await scanCityDatasetSafe(packForPronunciation);
+        await scanPoiDatasetSafe(packForPronunciation);
+      } catch (err) {
+        console.warn('[sync] Dictionary-Scanner:', err);
+      }
+    })();
     // Hintergrund: Cloud→Local Safe Merge + Scan-Delta Upload
     void syncDictionaryAfterCityDownload().catch((err) => {
       console.warn('[sync] Dictionary Cloud-Merge:', err);
@@ -124,6 +131,9 @@ async function runPoiSync(cityIdOverride?: string): Promise<{
 
   const localPois = await getAllPois();
   useFinnusStore.getState().setPois(localPois);
+  void import('./homeMap/mapPinIndex')
+    .then((m) => m.writeMapPinIndex(cityId, localPois))
+    .catch(() => undefined);
 
   console.log(
     `[sync] ${remotePois.length} POIs, ${remoteFacts.length} Fakten → SQLite (${source}/${cityId})`,

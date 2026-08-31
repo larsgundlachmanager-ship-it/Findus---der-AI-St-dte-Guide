@@ -66,7 +66,7 @@ export function startAsyncAiCallReservation(opts: {
       if (__DEV__) console.warn('[asyncVapi]', err);
       if (opts.onFollowUp) {
         await opts.onFollowUp(
-          `Update: Der Anruf bei ${info.name} ist fehlgeschlagen. Soll ich die Nummer aufschalten?`,
+          `Update: Der Anruf bei ${info.name} ist fehlgeschlagen. Nummer zum Anrufen ist dabei.`,
         );
       }
     } finally {

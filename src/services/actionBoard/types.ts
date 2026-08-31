@@ -93,6 +93,13 @@ export type ActionBoardInput = {
   /** Card-ID für Deep-Patch */
   cardId?: string;
   maxActions?: number;
+  /**
+   * Wann der User am Ort sein will / Leave-by.
+   * Route-Buttons nur wenn ≤ ~10 Min oder expliziter Nav-Intent.
+   */
+  visitAtMs?: number | null;
+  /** true = User will jetzt hin (explizites Nav-Verb) */
+  forceNavActions?: boolean;
 };
 
 export type ActionBoardResult = {

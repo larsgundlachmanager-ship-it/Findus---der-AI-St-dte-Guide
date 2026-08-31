@@ -93,46 +93,10 @@ export function pinnedIdeaSoftTips(nowMs = Date.now()): SoftHudTip[] {
 }
 
 /** Erkundungs-Fragen — nur profilnah, ohne leere Kategorie-Listen. */
-export function exploreNudgeSoftTips(nowMs = Date.now()): SoftHudTip[] {
-  const profile = getCachedUserProfile();
-  const prefs = profile?.experiencePrefs ?? {};
-  const tips: SoftHudTip[] = [];
-  const wantBlob = (profile?.wantToExperience ?? '').toLowerCase();
-
-  // Keine Soft-Kategorie-Karten ohne Nearby-Treffer — konkrete Orte kommen
-  // aus Meal-/Amenity-Cache. Nur leichte Profil-Nudge wenn klar gewünscht.
-
-  if (
-    prefs.natur === 'yes' ||
-    prefs.wandern === 'yes' ||
-    /park|grün|natur|spazier/.test(wantBlob)
-  ) {
-    tips.push({
-      id: 'explore-park',
-      title: 'Kurz grün durchatmen?',
-      meta: fitHudMeta('Park oder Ufer in der Nähe — 10–20 Minuten Reset.'),
-      tellMorePrompt: `Park oder ruhiger Outdoor-Spot in der Nähe von mir — mit Fußweg und Route.`,
-      score: 53,
-      theme: 'soft_city',
-    });
-  }
-
-  if (prefs.aussichten === 'yes' || prefs.streetart === 'yes') {
-    tips.push({
-      id: 'explore-photo',
-      title: 'Foto-Spot um die Ecke?',
-      meta: fitHudMeta(
-        'Wenn die Lichtverhältnisse passen — ein Spot, kein Shooting-Plan.',
-      ),
-      tellMorePrompt: `Ein fotogener Spot in der Nähe — kurz warum und Route.`,
-      score: 51,
-      theme: 'user_relevant',
-    });
-  }
-
-  void cityLabel;
-  void h;
-  return tips;
+export function exploreNudgeSoftTips(_nowMs = Date.now()): SoftHudTip[] {
+  // Keine Soft-Karten „Park?“ / „Foto-Spot?“ ohne Nearby-Treffer.
+  // Konkrete Erholung/Blick kommen aus liveHudNearbyAmenities (Name + Min).
+  return [];
 }
 
 /** Stadt-Tipps — kurzweilig, konkret. */
@@ -201,18 +165,7 @@ export function citySoftTips(nowMs = Date.now()): SoftHudTip[] {
     });
   }
 
-  if (h >= 12 && h <= 15) {
-    tips.push({
-      id: 'tip-pause',
-      title: 'Kurze Pause einplanen?',
-      meta: fitHudMeta(
-        'Wasser, Schatten, Sitzbank — 10 Minuten Reset machen den Nachmittag entspannter.',
-      ),
-      tellMorePrompt: 'Wo in der Nähe kann ich kurz Pause machen — Café oder Park?',
-      score: 42,
-      theme: 'soft_city',
-    });
-  }
+  // Kein generisches „Pause?“ mittags — nur konkrete Amenity-Pitches mit Ort.
 
   return tips;
 }

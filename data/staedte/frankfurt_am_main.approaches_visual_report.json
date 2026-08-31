@@ -1,0 +1,2002 @@
+{
+  "city": "frankfurt_am_main",
+  "apply": true,
+  "touched": 249,
+  "approachesFixed": 249,
+  "faqAdded": 0,
+  "data_version": 24,
+  "rows": [
+    {
+      "id": "frankfurt_am_main_lokalbahnhof",
+      "name": "Lokalbahnhof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_haltepunkt_eiserner_steg_historische_eisenbahn_frankfurt",
+      "name": "Haltepunkt Eiserner Steg - Historische Eisenbahn Frankfurt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_frankfurt_main_sud",
+      "name": "Frankfurt (Main) Süd",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_hauptwache",
+      "name": "Hauptwache",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_ostendstrasse",
+      "name": "Ostendstraße",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_frankfurt_main_hauptbahnhof",
+      "name": "Frankfurt (Main) Hauptbahnhof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_ostbahnhof",
+      "name": "Ostbahnhof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_frankfurt_main_west",
+      "name": "Frankfurt (Main) West",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_frankfurt_main_taunusanlage",
+      "name": "Frankfurt (Main) Taunusanlage",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_bahnhof_frankfurt_main_konstablerwache",
+      "name": "Bahnhof Frankfurt (Main) Konstablerwache",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_bahnhof_frankfurt_louisa",
+      "name": "Bahnhof Frankfurt-Louisa",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_frankfurt_main_hauptbahnhof_tief",
+      "name": "Frankfurt (Main) Hauptbahnhof tief",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_osthafen",
+      "name": "Osthafen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_mainfahre_schwanheim_hochst",
+      "name": "Mainfähre Schwanheim-Höchst",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_hfm_managementgesellschaft_fur_hafen_und_markt_mbh",
+      "name": "HFM Managementgesellschaft für Hafen und Markt mbH",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_hafenbahn_frankfurt_am_main_hfm",
+      "name": "Hafenbahn Frankfurt am Main (HFM)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_hafenpark",
+      "name": "Hafenpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_marina_westhafen_kombuse",
+      "name": "Marina Westhafen & Kombüse",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_flohmarkt_osthafen",
+      "name": "Flohmarkt Osthafen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_walter_kolb_fahrrad_und_personenfahre",
+      "name": "\"Walter Kolb\", Fahrrad- und Personenfähre",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_bootshafen_mainkur",
+      "name": "Bootshafen Mainkur",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_westhafen_tower",
+      "name": "Westhafen Tower",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_hafenbecken_westhafen",
+      "name": "Hafenbecken Westhafen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_stadel_museum",
+      "name": "Städel Museum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_historisches_museum_frankfurt",
+      "name": "Historisches Museum Frankfurt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_judisches_museum_frankfurt",
+      "name": "Jüdisches Museum Frankfurt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_schirn_kunsthalle_frankfurt",
+      "name": "Schirn Kunsthalle Frankfurt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_senckenberg_naturmuseum",
+      "name": "Senckenberg Naturmuseum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_dommuseum_frankfurt",
+      "name": "Dommuseum Frankfurt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_museumsufer_frankfurt",
+      "name": "Museumsufer Frankfurt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_dialogmuseum",
+      "name": "DIALOGMUSEUM",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_deutsches_romantik_museum_drm",
+      "name": "Deutsches Romantik-Museum (DRM)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_deutsches_architekturmuseum_dam",
+      "name": "Deutsches Architekturmuseum (DAM)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_museum_fur_kommunikation_frankfurt",
+      "name": "Museum für Kommunikation Frankfurt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_liebieghaus_skulpturensammlung",
+      "name": "Liebieghaus Skulpturensammlung",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_caricatura_museum_frankfurt_museum_fur_komische_kunst",
+      "name": "Caricatura Museum Frankfurt - Museum für Komische Kunst",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_experiminta_sciencecenter",
+      "name": "EXPERIMINTA ScienceCenter",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_archaologisches_museum_frankfurt",
+      "name": "Archäologisches Museum Frankfurt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_museum_angewandte_kunst",
+      "name": "Museum Angewandte Kunst",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_struwwelpeter_museum",
+      "name": "Struwwelpeter Museum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_liebfrauenkirche",
+      "name": "Liebfrauenkirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_st_leonhard",
+      "name": "St. Leonhard",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_evangelische_st_katharinenkirche_frankfurt_evangelische_luther",
+      "name": "Evangelische St. Katharinenkirche Frankfurt - Evangelische-lutherische St. Katharinengemeinde Frankfurt/Main",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_herz_marien_kirche",
+      "name": "Herz-Marien-Kirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_allerheiligen",
+      "name": "Allerheiligen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_st_bernhard",
+      "name": "St. Bernhard",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_st_antonius",
+      "name": "St. Antonius",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_paulskirche",
+      "name": "Paulskirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_sankt_bonifatius_frankfurt",
+      "name": "Sankt Bonifatius Frankfurt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_heiliggeistkirche",
+      "name": "Heiliggeistkirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_dreikonigskirche",
+      "name": "Dreikönigskirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_st_ignatius",
+      "name": "St. Ignatius",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_frauenfriedenskirche",
+      "name": "Frauenfriedenskirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_okumenisches_zentrum_christuskirche_frankfurt_evangelische_per",
+      "name": "Ökumenisches Zentrum Christuskirche Frankfurt - Evangelische Personalkirchengemeinde Christus-Immanuel Frankfurt/Main",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_heilig_kreuz_zentrum_fur_christliche_meditation_und_spirituali",
+      "name": "Heilig Kreuz - Zentrum für christliche Meditation und Spiritualität",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_marchenbrunnen",
+      "name": "Märchenbrunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_justitia_brunnen",
+      "name": "Justitia-Brunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_frankfurter_grune_sosse_denkmal",
+      "name": "Frankfurter Grüne-Soße-Denkmal",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_marshall_brunnen",
+      "name": "Marshall-Brunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_goethe_denkmal",
+      "name": "Goethe-Denkmal",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_brunnen_am_kaiserplatz",
+      "name": "Brunnen am Kaiserplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_schneewitchen_denkmal_snow_white",
+      "name": "Schneewitchen-Denkmal (Snow White)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_brockhaus_brunnen_frankfurt_lutz_brockhaus_1984",
+      "name": "Brockhaus-Brunnen, Frankfurt - Lutz Brockhaus (1984)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_lucae_brunnen",
+      "name": "Lucae-Brunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_fressgass_brunnen",
+      "name": "Freßgass-Brunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_euro_skulptur_von_ottmar_horl",
+      "name": "\"Euro-Skulptur\" von Ottmar Hörl",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_opferdenkmal_den_opfern",
+      "name": "Opferdenkmal \"Den Opfern\"",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_merkur_brunnen",
+      "name": "Merkur-Brunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_st_georg_brunnen",
+      "name": "St. Georg Brunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_liegewiese_gruneburgpark",
+      "name": "Liegewiese Grüneburgpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_bethmannpark",
+      "name": "Bethmannpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_rennbahnpark",
+      "name": "Rennbahnpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_rothschildpark",
+      "name": "Rothschildpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_elli_lucht_park",
+      "name": "Elli-Lucht-Park",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_natur_ship_ms_heimliche_liebe",
+      "name": "Natur Ship MS Heimliche Liebe",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_gunthersburgpark",
+      "name": "Günthersburgpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_gruneburgpark",
+      "name": "Grüneburgpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_waldspielpark_louisa",
+      "name": "Waldspielpark Louisa",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_frankfurter_stadtwald",
+      "name": "Frankfurter Stadtwald",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_adolph_von_holzhausen_park",
+      "name": "Adolph-von-Holzhausen-Park",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_aquatorialsonnenuhr",
+      "name": "Äquatorialsonnenuhr",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_main_tower",
+      "name": "MAIN TOWER",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_goetheturm",
+      "name": "Goetheturm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_taunusturm",
+      "name": "Taunusturm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_neuer_henninger_turm",
+      "name": "Neuer Henninger-Turm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_aussichtsplattform_feuerloschboot",
+      "name": "Aussichtsplattform Feuerlöschboot",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_turm_der_alten_stadtmauer",
+      "name": "Turm der alten Stadtmauer",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_hamburger_am_turm_frankfurt_am_main",
+      "name": "Hamburger am Turm Frankfurt am Main",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_kuhhirtenturm",
+      "name": "Kuhhirtenturm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_messeturm_frankfurt",
+      "name": "Messeturm Frankfurt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_silberturm",
+      "name": "Silberturm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_bockenheimer_warte",
+      "name": "Bockenheimer Warte",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_turm_hotel_frankfurt",
+      "name": "Turm Hotel Frankfurt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_schwarzlicht_minigolf_frankfurt_am_main_golfzone",
+      "name": "Schwarzlicht Minigolf Frankfurt am Main | GolfZone",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_schwarzlichthelden_minigolf",
+      "name": "Schwarzlichthelden Minigolf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_sportpark_preungesheim",
+      "name": "Sportpark Preungesheim",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_freibad_stadion",
+      "name": "Freibad Stadion",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_textorbad",
+      "name": "Textorbad",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_freibad_hausen",
+      "name": "Freibad Hausen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_lasertag_frankfurt",
+      "name": "LaserTag Frankfurt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_sportplatz_mainwasen",
+      "name": "Sportplatz Mainwasen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_soccerbeat",
+      "name": "SOCCERBEAT",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_sportgarten_der_ftg_frankfurt",
+      "name": "Sportgarten der FTG Frankfurt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_stadt_frankfurt_am_main_zentrales_burgeramt",
+      "name": "Stadt Frankfurt am Main | Zentrales Bürgeramt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_magistrat_der_stadt_frankfurt_am_main",
+      "name": "Magistrat der Stadt Frankfurt am Main",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_fristenbriefkasten_der_stadtverwaltung_frankfurt_am_main",
+      "name": "Fristenbriefkasten der Stadtverwaltung Frankfurt am Main",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_roemer_city",
+      "name": "Roemer City",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_burgeramt_dornbusch",
+      "name": "Bürgeramt Dornbusch",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_stadt_frankfurt_am_main_burgeramt_nieder_eschbach",
+      "name": "Stadt Frankfurt am Main | Bürgeramt Nieder-Eschbach",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_stadt_frankfurt_am_main_burgeramt_nordwest",
+      "name": "Stadt Frankfurt am Main | Bürgeramt Nordwest",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_stadt_frankfurt_am_main_burgeramt_hochst",
+      "name": "Stadt Frankfurt am Main | Bürgeramt Höchst",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_stadt_frankfurt_am_main_burgeramt_bergen_enkheim",
+      "name": "Stadt Frankfurt am Main | Bürgeramt Bergen-Enkheim",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_stadt_frankfurt_am_main_burgeramt_aussenstelle_fechenheim",
+      "name": "Stadt Frankfurt am Main | Bürgeramt - Außenstelle Fechenheim",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_aussichtspunkt_startbahn_west",
+      "name": "Aussichtspunkt Startbahn West",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_aussichtspunkt_galeria_sky_lounge",
+      "name": "Aussichtspunkt Galeria Sky Lounge",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_aussichtspunkt_steinbach",
+      "name": "Aussichtspunkt Steinbach",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_mainblick",
+      "name": "Mainblick",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_karl_bieber_hohe_aussichtspunkt",
+      "name": "Karl-Bieber-Höhe Aussichtspunkt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_aussichtsplattform_zeppelinheim_planespotting",
+      "name": "Aussichtsplattform Zeppelinheim Planespotting",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_aussichtspunkt_ins_vogelschutzgebiet_mit_erklarungstafel",
+      "name": "Aussichtspunkt ins Vogelschutzgebiet mit Erklärungstafel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_maintor_panorama",
+      "name": "MainTor Panorama",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_viewpoint_europe",
+      "name": "Viewpoint Europe",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_main_aussicht",
+      "name": "Main-Aussicht",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_aussichtspunkt_staustufe_griesheim",
+      "name": "Aussichtspunkt Staustufe Griesheim",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_aussichtspunkt_skyline_fotomotive",
+      "name": "Aussichtspunkt Skyline Fotomotive",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_skyline_viewpoint",
+      "name": "Skyline Viewpoint",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_blick_auf_skyline_frankfurt",
+      "name": "Blick auf Skyline Frankfurt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_skyline_frankfurt_city",
+      "name": "Skyline Frankfurt City",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_oper_frankfurt",
+      "name": "Oper Frankfurt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_alte_oper",
+      "name": "Alte Oper",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_stadtwald_frankfurt_main",
+      "name": "Stadtwald Frankfurt/Main",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_allgemeiner_deutscher_fahrrad_club_frankfurt_am_main_e_v",
+      "name": "Allgemeiner Deutscher Fahrrad-Club Frankfurt am Main e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_cube_store_frankfurt_am_main",
+      "name": "CUBE Store Frankfurt am Main",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_fahrrad_bottgen_gmbh",
+      "name": "Fahrrad Böttgen GmbH",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_schraube_rad_meisterwerkstatt_fahrradwerkstatt",
+      "name": "Schraube & Rad Meisterwerkstatt Fahrradwerkstatt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_regionalverband_frankfurtrheinmain",
+      "name": "Regionalverband FrankfurtRheinMain",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_rad_touren_teufel",
+      "name": "Rad-Touren-Teufel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_waterbike_germany",
+      "name": "Waterbike-Germany",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_fahrrad_reparaturstation_frankfurt",
+      "name": "Fahrrad-Reparaturstation Frankfurt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_friedensbrucke",
+      "name": "Friedensbrücke",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_flaschenpost_frankfurt_am_main",
+      "name": "Flaschenpost Frankfurt am Main",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_b_o_c_bike_outdoor_company_gmbh_co_kg",
+      "name": "B.O.C. - BIKE & OUTDOOR COMPANY GmbH & Co. KG",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_zoo_frankfurt",
+      "name": "Zoo Frankfurt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_grzimekhaus",
+      "name": "Grzimekhaus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_streichelzoo",
+      "name": "Streichelzoo",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_trinkwasserspender_zoo",
+      "name": "Trinkwasserspender Zoo",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_katzendschungel",
+      "name": "Katzendschungel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_exotarium_zoo_frankfurt",
+      "name": "Exotarium Zoo Frankfurt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_hessen_shop_kleinmarkthalle",
+      "name": "Hessen Shop Kleinmarkthalle",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_thomas_pfeilschmidt_souvenirs",
+      "name": "Thomas Pfeilschmidt Souvenirs",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_elbenwald",
+      "name": "Elbenwald",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_hessen_shop_leipziger_strasse",
+      "name": "Hessen Shop Leipziger Straße",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_bembeltown_design_and_more_gbr_bembel_shop",
+      "name": "Bembeltown Design and more GbR Bembel Shop",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_palmengarten_shop_im_eingangsschauhaus",
+      "name": "Palmengarten-Shop im Eingangsschauhaus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_kaufhaus_hessen",
+      "name": "Kaufhaus Hessen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_australien_shop_frankfurt",
+      "name": "Australien Shop Frankfurt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_palmengarten_frankfurt",
+      "name": "Palmengarten Frankfurt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_eiserner_steg",
+      "name": "Eiserner Steg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_wasserfall",
+      "name": "Wasserfall",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_bester_skylineblick",
+      "name": "Bester Skylineblick",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_sitzender",
+      "name": "Sitzender",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_liegende",
+      "name": "Liegende",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_bethmann_fountain",
+      "name": "Bethmann Fountain",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_staufermauer",
+      "name": "Staufermauer",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_schiller_denkmal",
+      "name": "Schiller-Denkmal",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_schirn_kunsthalle_frankfurt_stammhaus_am_romer",
+      "name": "SCHIRN Kunsthalle Frankfurt - Stammhaus am Römer",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_portikus",
+      "name": "Portikus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_frankfurter_kunstverein",
+      "name": "Frankfurter Kunstverein",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_ausstellungshalle_1a",
+      "name": "AusstellungsHalle 1a",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_galerie_rothamel_frankfurt",
+      "name": "Galerie Rothamel Frankfurt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_galerie_das_bilderhaus",
+      "name": "Galerie DAS BILDERHAUS",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_galerie_maurer",
+      "name": "Galerie Maurer",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_timeride_frankfurt",
+      "name": "TimeRide Frankfurt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_galerie_muhlfeld_stohrer",
+      "name": "galerie . mühlfeld + stohrer",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_galerie_perpetuel",
+      "name": "Galerie Perpétuel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_kriminalmuseum_kriminaltechnische_lehrmittelsammlung_des_poliz",
+      "name": "Kriminalmuseum - Kriminaltechnische Lehrmittelsammlung des Polizeipräsidiums Frankfurt am Main",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_katholische_kirchengemeinde_dom_st_bartholomaus",
+      "name": "Katholische Kirchengemeinde Dom St. Bartholomäus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_georgioskirche",
+      "name": "Georgioskirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_altes_rathaus",
+      "name": "altes Rathaus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_rathaus",
+      "name": "Rathaus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_hochster_schloss_altes_schloss_ein_haus_der_deutschen_stiftung",
+      "name": "Höchster Schloss (Altes Schloss) - ein Haus der Deutschen Stiftung Denkmalschutz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_das_neue_schloss_hochst",
+      "name": "Das neue Schloss Höchst",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_burg_rodelheim",
+      "name": "Burg Rödelheim",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_histor_verwaltung_der_sammlung_burg_nesselburg",
+      "name": "Histor. Verwaltung der \"Sammlung Burg Nesselburg\"",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_schloss_isenburg",
+      "name": "Schloss Isenburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_burg_kronberg",
+      "name": "Burg Kronberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_schelmenburg",
+      "name": "Schelmenburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_schloss_hochst",
+      "name": "Schloss Höchst",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_frankfurt_main_eschenheimer_tor",
+      "name": "Frankfurt (Main) Eschenheimer Tor",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_aussichtspunkt_theodor_stern_kai_3",
+      "name": "Aussichtspunkt Theodor-Stern-Kai 3",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_viewpoint_spielplatz",
+      "name": "Viewpoint- Spielplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_flosserbrucke",
+      "name": "Flößerbrücke",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_botanischer_garten_frankfurt",
+      "name": "Botanischer Garten Frankfurt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_haus_leonhardsbrunn",
+      "name": "Haus Leonhardsbrunn",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_tropicarium",
+      "name": "Tropicarium",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_senckenbergischer_arzneipflanzengarten",
+      "name": "Senckenbergischer Arzneipflanzengarten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_europagarten",
+      "name": "Europagarten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_bluten_und_schmetterlingshaus",
+      "name": "Blüten- und Schmetterlingshaus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_frankfurt_main_botanischer_garten",
+      "name": "Frankfurt (Main) Botanischer Garten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_gallusgarten_gemeinschaftsgarten",
+      "name": "GallusGarten Gemeinschaftsgarten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_goetherad_fahrradverleih_am_goetheturm",
+      "name": "Goetherad - Fahrradverleih am Goetheturm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_schauspiel_frankfurt",
+      "name": "Schauspiel Frankfurt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_theaterhaus_kindertheater_jugendtheater",
+      "name": "Theaterhaus Kindertheater Jugendtheater",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_kellertheater_frankfurt",
+      "name": "Kellertheater Frankfurt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_papageno_musiktheater",
+      "name": "Papageno Musiktheater",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_galli_theater_frankfurt",
+      "name": "Galli Theater Frankfurt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_kulturhaus_frankfurt",
+      "name": "Kulturhaus Frankfurt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_gallus_theater",
+      "name": "Gallus Theater",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_the_english_theatre_frankfurt",
+      "name": "The English Theatre Frankfurt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_tigerpalast",
+      "name": "Tigerpalast",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_dramatische_buhne_frankfurt",
+      "name": "Dramatische Bühne Frankfurt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_theater_willy_praml",
+      "name": "Theater Willy Praml",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_bockenheimer_depot",
+      "name": "Bockenheimer Depot",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_theater_alte_brucke",
+      "name": "Theater Alte Brücke",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_marina_griesheim",
+      "name": "Marina, Griesheim",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_frankfurter_motorbootclub_e_v",
+      "name": "Frankfurter Motorbootclub e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_marina_beauty_frankfurt_am_main",
+      "name": "Marina Beauty / Frankfurt am Main",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_osthafenfestival",
+      "name": "Osthafenfestival",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_alter_hafenkran",
+      "name": "Alter Hafenkran",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_maya_marina_tattoo",
+      "name": "Maya Marina Tattoo",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_hafen_2",
+      "name": "Hafen 2",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_paarberatung_marina_vaupel_single_paar_familien_coaching",
+      "name": "Paarberatung - Marina Vaupel - Single-, Paar-, & Familien-Coaching",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_bootsverleih",
+      "name": "Bootsverleih",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_aqua_fun_bootsverleih_frankfurt_im_freigut",
+      "name": "Aqua Fun Bootsverleih Frankfurt im Freigut",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_italianflairboating_ug_partyboote",
+      "name": "ItalianFlairBoating UG Partyboote",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_morena_event_bootsverleih_frankfurt",
+      "name": "Morena Event - Bootsverleih Frankfurt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_mainhattan_cruises_frankfurt",
+      "name": "Mainhattan Cruises Frankfurt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_frankfurter_stadtevents",
+      "name": "Frankfurter Stadtevents",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_hop_on_hop_off_stop_main_tower_frankfurt_sightseeing",
+      "name": "Hop-On Hop-Off Stop: Main Tower (Frankfurt Sightseeing)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_nima_lieblingsstucke_fur_gross_und_klein",
+      "name": "Nima Lieblingsstücke für Groß und Klein",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_bitter_zart_chocolaterie_feine_sachen",
+      "name": "Bitter & Zart Chocolaterie & Feine Sachen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_hessen_shop_rodelheim",
+      "name": "Hessen Shop Rödelheim",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_frankfurter_fass_frankfurter_spezialitaten_spirituosen",
+      "name": "Frankfurter Fass - Frankfurter Spezialitäten & Spirituosen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_bauernmarkt_konstablerwache",
+      "name": "Bauernmarkt Konstablerwache",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_cinema_filmtheater",
+      "name": "Cinema Filmtheater",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_eldorado_filmtheater",
+      "name": "Eldorado Filmtheater",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_harmonie_filmtheater",
+      "name": "Harmonie Filmtheater",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_mal_seh_n_kino",
+      "name": "Mal Seh’n Kino",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_dav_kletterzentrum_frankfurt_main",
+      "name": "DAV Kletterzentrum Frankfurt / Main",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_dynochrom_boulderhalle_frankfurt",
+      "name": "Dynochrom Boulderhalle Frankfurt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_strba_rechtsanwalte_fachanwalte_arbeitsr_weg_und_mietr",
+      "name": "Strba Rechtsanwälte Fachanwälte ArbeitsR, WEG und MietR",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_mainova_trinkbrunnen_trinkwasserlehrpfad",
+      "name": "Mainova Trinkbrunnen Trinkwasserlehrpfad",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_deutsches_rotes_kreuz_bezirksverband_frankfurt_am_main_e_v",
+      "name": "Deutsches Rotes Kreuz Bezirksverband Frankfurt am Main e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_deutsches_rotes_kreuz_bezirksverband_frankfurt_e_v_ortsvereini",
+      "name": "Deutsches Rotes Kreuz Bezirksverband Frankfurt e.V. Ortsvereinigung Süd",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_schwesternschaft_vom_roten_kreuz_frankfurt_main_v_1866_e_v",
+      "name": "Schwesternschaft vom Roten Kreuz Frankfurt/Main v. 1866 e. V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_deutsches_rotes_kreuz_ortsverein_bornheim",
+      "name": "Deutsches Rotes Kreuz Ortsverein Bornheim",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_deutsches_rotes_kreuz_in_hessen_volunta_ggmbh_niederlassung_fr",
+      "name": "Deutsches Rotes Kreuz in Hessen Volunta gGmbH Niederlassung Frankfurt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "frankfurt_am_main_kunstler_innenhaus_mousonturm",
+      "name": "Künstler*innenhaus Mousonturm",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "frankfurt_am_main_goethe_haus",
+      "name": "Goethe-Haus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    }
+  ]
+}

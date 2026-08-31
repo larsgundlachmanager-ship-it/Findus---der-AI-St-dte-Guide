@@ -3,22 +3,25 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Findus — Gleicher Ort. Deine Geschichte.</title>
+    <title>Yorro — Kopfhörer rein. Die Stadt läuft mit.</title>
     <meta
       name="description"
-      content="Findus: Stadtguide mit Stimme — erzählt, navigiert, reserviert, regelt. Geplanter Release: 1. November 2026."
+      content="Hands-free Stadtguide für den Städtetrip: Yorro erkennt den Ort, erzählt was dich interessiert, und hilft bei Fragen, Weg, Essen und Hotel — dieselbe Stimme."
     />
-    <meta property="og:title" content="Findus — Gleicher Ort. Deine Geschichte." />
+    <meta
+      property="og:title"
+      content="Yorro — Kopfhörer rein. Die Stadt läuft mit."
+    />
     <meta
       property="og:description"
-      content="Kopfhörer rein. Stadt an. Findus erzählt, bringt dich hin und regelt den Rest."
+      content="Audio-Stadtguide für Städtetrips. Du läufst — er erzählt. Fragen, Weg, Essen, Hotel: dieselbe Stimme."
     />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://findus.app/" />
-    <meta property="og:image" content="https://findus.app/assets/logo.png" />
+    <meta property="og:url" content="https://yorro.de/" />
+    <meta property="og:image" content="https://yorro.de/assets/logo.png" />
     <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="assets/logo.png" />
-    <link rel="stylesheet" href="styles.css?v=7" />
+    <link rel="stylesheet" href="styles.css?v=10" />
   </head>
   <body>
     <a class="skip" href="#main">Zum Inhalt</a>
@@ -27,20 +30,41 @@
       <img src="assets/map-bg.png" alt="" />
     </div>
 
+    <nav class="site-nav" aria-label="Hauptnavigation">
+      <a href="#top">Yorro</a>
+      <div class="site-nav-links">
+        <a href="#was">Produkt</a>
+        <a href="#buchen">Buchen</a>
+        <a href="partner.html">Partner</a>
+        <a href="impressum.html">Impressum</a>
+      </div>
+    </nav>
+
     <main id="main">
       <section class="hero" id="top">
         <div class="hero-copy">
           <div class="brand-lockup">
             <img class="brand-logo" src="assets/logo.svg" alt="" width="72" height="84" />
-            <p class="brand-hero">Findus</p>
+            <p class="brand-hero">Yorro</p>
           </div>
-          <h1>Gleicher Ort.<br />Deine Geschichte.</h1>
-          <a
-            class="btn btn-partner btn-lg"
-            href="mailto:lars.gundlach.manager@gmail.com?subject=Partneranfrage%20Findus"
-            >Partner werden?</a
-          >
-          <p class="release">Geplanter Release · <strong>1. November 2026</strong></p>
+          <h1>Kopfhörer rein.<br />Die Stadt läuft mit.</h1>
+          <p class="hero-lead">
+            Hands-free Stadtguide für den Städtetrip. Du läufst — Yorro erkennt
+            den Ort und erzählt, was dich interessiert. Fragen, Weg, Essen,
+            Hotel: dieselbe Stimme. Kein App-Hopping.
+          </p>
+          <div class="hero-cta">
+            <a class="btn btn-partner btn-lg" href="partner.html">Für Partner</a>
+            <a
+              class="btn btn-ghost btn-lg"
+              href="mailto:lars.gundlach.manager@gmail.com?subject=Yorro"
+              >Kontakt</a
+            >
+          </div>
+          <p class="release">
+            Öffentlicher Launch · <strong>1. November 2026</strong>
+            · iOS TestFlight · Android intern
+          </p>
         </div>
         <div class="hero-visual">
           <div class="phone" aria-hidden="true">
@@ -48,7 +72,7 @@
               <div class="phone-screen">
                 <div class="app-top">
                   <span class="app-mark"></span>
-                  <span class="app-name">Findus</span>
+                  <span class="app-name">Yorro</span>
                 </div>
 
                 <div class="app-presence">
@@ -69,7 +93,7 @@
 
                 <div class="app-actions">
                   <span>Mehr Historie</span>
-                  <span>Weiterlaufen</span>
+                  <span>Teilen</span>
                 </div>
 
                 <div class="app-mic">
@@ -79,16 +103,15 @@
             </div>
           </div>
           <p class="hook">
-            Stadtguide? Ja!<br />
-            Aber der kann mehr<br />
-            als nur MP3s abspielen.
+            Du guckst dir eine Stadt an.<br />
+            Yorro läuft mit.
           </p>
         </div>
       </section>
 
       <section class="modules" id="was" aria-labelledby="was-title">
-        <p class="eyebrow">Was ist Findus</p>
-        <h2 id="was-title">Vier Module. Ein Begleiter.</h2>
+        <p class="eyebrow">So fühlt es sich an</p>
+        <h2 id="was-title">Ein Begleiter. Kein App-Hopping.</h2>
 
         <div class="module-grid">
           <article class="module">
@@ -99,10 +122,10 @@
                 <path d="M20 44h16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
               </svg>
             </div>
-            <h3>Auto-Story vor Ort</h3>
+            <h3>Am Ort erzählt er</h3>
             <p>
-              Laufe herum — sobald du an einer Sehenswürdigkeit bist, erzählt Findus
-              automatisch, was los ist.
+              Laufe weiter. Sobald du an einer Sehenswürdigkeit bist, startet
+              die Geschichte von selbst — passend zu dem, was dich interessiert.
             </p>
           </article>
 
@@ -114,10 +137,10 @@
                 <path d="M22 44h12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
               </svg>
             </div>
-            <h3>Nur Stimme. Echtes Ziel.</h3>
+            <h3>Nur Stimme. Blick frei.</h3>
             <p>
-              Kopfhörer rein — Navigation und Tipps per Stimme. Kein ständiges
-              Display-Starren. Kein App-Hopping.
+              Kopfhörer rein. Weg und Tipps kommen per Stimme. Du starrst nicht
+              dauernd aufs Display.
             </p>
           </article>
 
@@ -129,10 +152,10 @@
                 <circle cx="28" cy="31" r="4" fill="currentColor"/>
               </svg>
             </div>
-            <h3>Findus regelt</h3>
+            <h3>Fragen? Dieselbe Stimme.</h3>
             <p>
-              Taxi? Tickets? Tisch? Tour? Findus bereitet vor und sichert — oft mit
-              einem Klick. Du bestätigst und bezahlst.
+              Bestes Restaurant, der Weg dorthin, eine Hotelnacht: Yorro
+              recherchiert und navigiert — ohne fünf andere Apps.
             </p>
           </article>
 
@@ -144,10 +167,95 @@
                 <path d="M38 14c4 1 7 4 8 8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
               </svg>
             </div>
-            <h3>Echte Persönlichkeit</h3>
+            <h3>So, wie du’s magst</h3>
             <p>
-              Umfangreiche Einstellungen — Findus bekommt ein Bild von dir und redet
-              so, wie du’s magst.
+              Einmal Persönlichkeit wählen — Kumpel, Classic-Guide, Aristokrat
+              und mehr. Danach redet Yorro in deinem Ton.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="travel" id="trip" aria-labelledby="trip-title">
+        <p class="eyebrow">Für den Städtetrip</p>
+        <h2 id="trip-title">Nicht Alltag. Eine Stadt angucken.</h2>
+        <p class="travel-lead">
+          Yorro ist für den Moment, in dem du eine neue Stadt wirklich erleben
+          willst — Tagestrip, Wochenende, Städtetrip. Essen, Weg und Hotel sind
+          dieselbe Begleitung, nicht eine zweite App.
+        </p>
+
+        <div class="travel-grid">
+          <article class="travel-item">
+            <h3>Geschichten am Ort</h3>
+            <p>
+              Kein vorgefertigtes Hörbuch. GPS erkennt, wo du stehst — und Yorro
+              erzählt, was dazu gehört.
+            </p>
+          </article>
+          <article class="travel-item">
+            <h3>Essen &amp; Entscheidungen</h3>
+            <p>
+              „Wo essen wir?“ wird recherchiert und zu einem konkreten Ort —
+              plus Weg, wenn du loswillst.
+            </p>
+          </article>
+          <article class="travel-item">
+            <h3>Weg ohne Starren</h3>
+            <p>
+              Navigation spricht mit. Du behältst die Stadt im Blick, nicht die
+              Karte.
+            </p>
+          </article>
+          <article class="travel-item">
+            <h3>Wenn der Tag es braucht</h3>
+            <p>
+              Noch eine Nacht, ein Ticket, eine Fahrt: dieselbe Stimme,
+              ein klarer nächster Schritt — kein neues Tool.
+            </p>
+          </article>
+          <article class="travel-item">
+            <h3>Taxi &amp; Anreise</h3>
+            <p>
+              Zum Bahnhof, nach der Show, vom Flughafen in die Stadt:
+              Yorro öffnet den Buchungsweg nur, wenn wirklich eine Fahrt
+              gebraucht wird.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="how" id="buchen" aria-labelledby="buchen-title">
+        <p class="eyebrow">So entstehen Buchungen</p>
+        <h2 id="buchen-title">Bedarf erkennen. Einen Weg öffnen.</h2>
+        <p class="travel-lead">
+          Yorro ist kein Vergleichsportal. Die App begleitet den Städtetrip
+          und reicht an spezialisierte Partner weiter — mit Datum, Ort und
+          Intent, nicht mit einer leeren Startseite.
+        </p>
+        <div class="how-grid">
+          <article class="how-item">
+            <span class="step">01</span>
+            <h3>Moment</h3>
+            <p>
+              Nutzer fragt oder der Plan zeigt eine Lücke: Taxi, Hotel,
+              Ticket, Transfer.
+            </p>
+          </article>
+          <article class="how-item">
+            <span class="step">02</span>
+            <h3>Hilfe zuerst</h3>
+            <p>
+              Kurze, konkrete Empfehlung. Kein Pitch, keine Gutschein-Flut,
+              keine ungefragten Partner-Buttons.
+            </p>
+          </article>
+          <article class="how-item">
+            <span class="step">03</span>
+            <h3>Deep-Link</h3>
+            <p>
+              Ein Button öffnet den Partner mit den Daten, die schon klar
+              sind. Transparent, nachvollziehbar, provisionsfähig.
             </p>
           </article>
         </div>
@@ -155,32 +263,35 @@
 
       <section class="why">
         <p class="why-line">Reisen verdient mehr als einen Screen.</p>
-        <p class="why-sub">Findus hält den Blick frei — und den Plan fertig.</p>
+        <p class="why-sub">Kopfhörer rein. Die Stadt läuft mit.</p>
       </section>
 
       <section class="partner" id="partner">
         <div class="partner-card">
-          <p class="eyebrow">Partner &amp; Affiliates</p>
-          <h2>Vor dem Launch: so viele Partner wie möglich.</h2>
+          <p class="eyebrow">Partner</p>
+          <h2>Hilfe zuerst. Buchung nur wenn’s passt.</h2>
           <p>
-            Findus geht am <strong>1. November 2026</strong> live. Wir rüsten Gastro,
-            Erlebnisse, Unterkunft, Mobility und Buchung vor — damit Nutzer
-            Empfehlungen direkt in buchbare Momente verwandeln.
+            Yorro bleibt Stadtguide. Wenn unterwegs ein Hotel, ein Ticket, ein
+            Taxi oder ein Transfer wirklich gebraucht wird, öffnet er den Weg —
+            transparent, im passenden Moment. Für Advertiser und Netzwerke:
+            <a href="partner.html">Partnerprofil</a>.
           </p>
-          <a
-            class="btn btn-partner btn-lg"
-            href="mailto:lars.gundlach.manager@gmail.com?subject=Partneranfrage%20Findus"
-            >Partner werden?</a
-          >
+          <p class="affiliate-note">
+            Transparenz: Bei Buchungen über Partner-Links kann Yorro eine Provision
+            erhalten. Für dich ändert sich am Preis nichts.
+          </p>
+          <a class="btn btn-partner" href="partner.html">Für Partner</a>
         </div>
       </section>
     </main>
 
     <footer class="footer">
-      <span>© <span id="year"></span> Findus</span>
+      <span>© <span id="year"></span> Yorro</span>
       <nav class="footer-links" aria-label="Rechtliches">
         <a href="impressum.html">Impressum</a>
         <a href="datenschutz.html">Datenschutz</a>
+        <a href="agb.html">AGB</a>
+        <a href="partner.html">Partner</a>
         <a href="konto-loeschen.html">Konto löschen</a>
         <a href="mailto:lars.gundlach.manager@gmail.com">Kontakt</a>
       </nav>

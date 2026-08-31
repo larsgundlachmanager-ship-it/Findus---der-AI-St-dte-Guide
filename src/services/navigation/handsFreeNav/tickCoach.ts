@@ -8,7 +8,7 @@ import {
   getVoiceSettingsForTour,
 } from '../../ttsService';
 import { distanceAlongRouteToNextAudioTurnM } from '../exploreNavCoexistence';
-import { isTurnManeuver } from '../navPredictiveCue';
+import { isHandsFreeSpeakTurn } from '../navPredictiveCue';
 import type { NavigationTick, NavWaypoint } from '../navigationTypes';
 import { shouldPauseTurnByTurn } from '../boardingDetector';
 import { isTransitMode } from '../transportMode';
@@ -34,6 +34,7 @@ import {
   warmDistanceM,
   estimateSpeechSec,
   findNextTurnWaypoint,
+  buildFinalCueText,
 } from './cueScheduler';
 import { etaMinutesFromRoute } from './eta';
 
@@ -77,17 +78,6 @@ async function speak(text: string): Promise<void> {
   } catch (err) {
     console.warn('[handsFree-tick] speak failed', err);
   }
-}
-
-function turnWord(maneuver: string | null | undefined): string {
-  const m = (maneuver ?? '').toLowerCase();
-  if (m.includes('sharp-left') || m.includes('sharp_left')) return 'scharf links';
-  if (m.includes('sharp-right') || m.includes('sharp_right'))
-    return 'scharf rechts';
-  if (m.includes('left')) return 'links';
-  if (m.includes('right')) return 'rechts';
-  if (m.includes('uturn')) return 'umdrehen';
-  return 'geradeaus';
 }
 
 /**
@@ -164,13 +154,20 @@ export function onHandsFreeNavTick(
   const landmark =
     turnWp?.visibleLandmark?.trim() || turnWp?.landmark?.trim() || null;
   const draft = turnWp
-    ? buildPredictiveTurnCue({
-        turn: turnWord(turnWp.maneuver),
-        distanceM: distToTurnM ?? 20,
+    ? buildFinalCueText({
+        maneuver: turnWp.maneuver,
         landmark,
         roadName: turnWp.roadName ?? null,
+        distanceM: distToTurnM ?? 20,
+        isComplexTurn: turnWp.turnComplexity === 'complex',
       })
-    : 'Gleich abbiegen.';
+    : buildPredictiveTurnCue({
+        turn: 'links',
+        distanceM: 20,
+        landmark: null,
+        roadName: null,
+        visualKind: null,
+      });
   const speechSec = estimateSpeechSec(draft);
   const speakAtM = speakStartDistanceM({
     speechSec,
@@ -208,10 +205,15 @@ export function onHandsFreeNavTick(
   ) {
     session.arrivalSoonSpoken = true;
     session.lastSpokenAt = now;
+    const sign =
+      session.destinationName.trim().length >= 3
+        ? session.destinationName.trim()
+        : null;
     void speak(
       buildArrivalSoonCue(
         session.destinationName,
         relateFromRelativeBearing(tick.bearingRelDeg),
+        { visualSign: sign },
       ),
     );
     return;
@@ -227,14 +229,25 @@ export function onHandsFreeNavTick(
     turnWp &&
     distToTurnM != null &&
     distToTurnM <= speakAtM + 4 &&
-    distToTurnM >= 3 &&
-    isTurnManeuver(turnWp.maneuver);
+    distToTurnM >= 0 &&
+    isHandsFreeSpeakTurn({
+      maneuver: turnWp.maneuver,
+      roadName: turnWp.roadName,
+      turnComplexity: turnWp.turnComplexity,
+    });
 
   if (nearTurn && turnIdx >= 0 && session.lastSpokenTurnIdx !== turnIdx) {
     session.lastSpokenTurnIdx = turnIdx;
     session.lastSpokenAt = now;
     const key = turnPrefetchKey(turnIdx, turnWp!.cue ?? draft);
-    const cue = turnWp!.cue?.trim() || draft;
+    // Landmarken-Draft vor Straßen-Cue (Google-Instruktion oft voller Straßennamen)
+    const cueRaw = turnWp!.cue?.trim() || '';
+    const cueLooksStreet =
+      /\b(straße|strasse|weg|allee|gasse|platz|ring|damm)\b/iu.test(cueRaw);
+    const cue =
+      landmark && (cueLooksStreet || !cueRaw)
+        ? draft
+        : cueRaw || draft;
     void (async () => {
       const played = await playPrefetchedNavTurnIfReady(key);
       if (played) return;

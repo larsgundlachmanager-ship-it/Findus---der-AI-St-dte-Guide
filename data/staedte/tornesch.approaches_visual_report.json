@@ -1,0 +1,154 @@
+{
+  "city": "tornesch",
+  "apply": true,
+  "touched": 18,
+  "approachesFixed": 18,
+  "faqAdded": 0,
+  "data_version": 45,
+  "rows": [
+    {
+      "id": "tornesch_tornesch",
+      "name": "Tornesch Stadtgeschichte & Orientierung",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "tornesch_molln_hof",
+      "name": "Mölln Hof · Volkskundliches Museum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "tornesch_ev_kirche_tornesch_ev_luth_kirchengemeinde_tornesch",
+      "name": "Tornescher Kirche",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "tornesch_friedenskapelle",
+      "name": "Friedenskapelle & historischer Grabsteinwall",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "tornesch_dampfmuhlen_ruine",
+      "name": "Bi de Moehl · ehemalige Windmuehle",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "tornesch_de_danzenbarg",
+      "name": "De Danzenbarg · Grabhuegel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "tornesch_esinger_wohld",
+      "name": "Esinger Wohld · Staatsforst Rantzau",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "tornesch_rathaus_tornesch",
+      "name": "Rathaus Tornesch",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "tornesch_heimathaus_tornesch",
+      "name": "Heimathaus Ostermannscher Hof & Stadtarchiv",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 0,
+      "had_approaches": 3
+    },
+    {
+      "id": "tornesch_garten_des_sudens_arboretum_ellerhoop",
+      "name": "Garten des Südens - Arboretum Ellerhoop",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "tornesch_denkmal_opfer_der_nationalsozialisten",
+      "name": "Denkmal Opfer der Nationalsozialisten",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 2,
+      "had_approaches": 1
+    },
+    {
+      "id": "tornesch_weisser_garten_arboretum_ellerhoop",
+      "name": "Weißer Garten Arboretum Ellerhoop",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "tornesch_bahnhof",
+      "name": "Bahnhof Tornesch & Bahnhofsplatz",
+      "status": "HARDENED",
+      "approaches": 4,
+      "visual_bits": 0,
+      "had_approaches": 4
+    },
+    {
+      "id": "tornesch_alte_brennerei",
+      "name": "Alte Brennerei & Zwangsarbeiter-Gedenkstätte",
+      "status": "HARDENED",
+      "approaches": 4,
+      "visual_bits": 0,
+      "had_approaches": 4
+    },
+    {
+      "id": "tornesch_stolperstein_anna_billian",
+      "name": "Stolperstein Anna Billian",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "tornesch_gedenktafel_kg_lager",
+      "name": "Gedenktafel sowjetisches Kriegsgefangenenlager",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "tornesch_kirchensaal_esinger_schule",
+      "name": "Kirchensaal Esinger Schule",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "tornesch_villen_bahnhof",
+      "name": "Villen am Bahnhofsumfeld",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    }
+  ]
+}

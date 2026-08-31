@@ -5,7 +5,7 @@
  * - Immer mindestens 5 Min Puffer (allgemein)
  * - Insel-Flugplatz: ~15 Min
  * - Großflughafen: mind. 70 Min vor Abflug; mit Gepäckabgabe 90 Min
- * - User kann mehr/weniger wählen — Findus fragt nach
+ * - User kann mehr/weniger wählen — Yorro fragt nach
  */
 
 export type BufferImportance =

@@ -44,13 +44,14 @@ export type LogisticsCheckPoint = {
 /**
  * Progressive checkpoints vor dem Anker (Leave-by oder Wecker).
  *
- * Blaupause (universell):
- * - Alles VOR der Hauptwarnung = Mikro-Aufwachen: Standort, Verbindung, Ausfall?
- *   Passt alles → wieder schlafen (kein Spam). Passt nicht → sofort anpassen;
- *   akut → User bescheid + Trigger neu.
- * - Leave Prio 1–2: Hauptwarnung ~30 Min vor Losgehen (+ 5 Min).
- * - Leave ab Prio 3: nur ~5 Min vor Leave-by (kein 30-Min-„du musst los“).
- * - Wecker: Hauptwarnung ~35 Min vorher („rechtzeitig los“), Wecker selbst hard.
+ * Blaupause Leave / Flug / Parken (warnLead ≥ 30):
+ *   60 · 40 · 35 = Mikro (wo ist User? ETA? still)
+ *   30 = Ansage (warn)
+ *   15 · 7 = Mikro
+ *   5 = Ansage (warn)
+ *   0 = Hard (Aufbruch)
+ * Soft (warnLead ≤ 5, niedrige Prio): nur 5 + 0.
+ * Wecker: nur stille Mikro-Checks — nie Vorwarn-Speak.
  */
 export function buildCheckSchedule(
   anchorMs: number,
@@ -58,79 +59,122 @@ export function buildCheckSchedule(
   profile: CheckScheduleProfile = 'leave',
   opts?: { warnLeadMin?: number },
 ): LogisticsCheckPoint[] {
-  const defaultWarn = profile === 'wake' ? 35 : 30;
+  // Reiner Wecker: nur stille Checks — nie „rechtzeitig los“ / „gleich wecken“
+  if (profile === 'wake') {
+    const wakeOffsets: Array<{
+      kind: LogisticsCheckKind;
+      offsetMin: number;
+      label: string;
+      role: LogisticsCheckPoint['role'];
+    }> = [
+      {
+        kind: 'coarse',
+        offsetMin: 180,
+        label: 'Mikro-Check ÖPNV (~3 Std. vor Wecker)',
+        role: 'micro',
+      },
+      {
+        kind: 'prep',
+        offsetMin: 60,
+        label: 'Mikro-Check ÖPNV (~1 Std. vor Wecker)',
+        role: 'micro',
+      },
+      {
+        kind: 'safety',
+        offsetMin: 30,
+        label: 'Mikro-Check ÖPNV (~30 Min vor Wecker)',
+        role: 'micro',
+      },
+    ];
+    return materializePoints(anchorMs, nowMs, wakeOffsets);
+  }
+
   const warnMin = Math.max(
     5,
-    Math.min(120, opts?.warnLeadMin ?? defaultWarn),
+    Math.min(30, opts?.warnLeadMin ?? 30),
   );
-  const softOnly = profile === 'leave' && warnMin <= 5;
+  const softOnly = warnMin <= 5;
 
-  const offsets: Array<{
+  if (softOnly) {
+    return materializePoints(anchorMs, nowMs, [
+      {
+        kind: 'safety',
+        offsetMin: 5,
+        label: 'Gleich los (~5 Min vor Aufbruch)',
+        role: 'warn',
+      },
+      {
+        kind: 'leave',
+        offsetMin: 0,
+        label: 'Aufbruch-Push (vibrieren / sprechen)',
+        role: 'hard',
+      },
+    ]);
+  }
+
+  // Volle Blaupause: Live-Lage + zwei Ansagen (30 / 5), dazwischen stille Checks
+  return materializePoints(anchorMs, nowMs, [
+    {
+      kind: 'prep',
+      offsetMin: 60,
+      label: 'Mikro-Check (~1 Std.) — Lage / Wegzeit',
+      role: 'micro',
+    },
+    {
+      kind: 'prep',
+      offsetMin: 40,
+      label: 'Mikro-Check (~40 Min)',
+      role: 'micro',
+    },
+    {
+      kind: 'prep',
+      offsetMin: 35,
+      label: 'Mikro-Check (~35 Min)',
+      role: 'micro',
+    },
+    {
+      kind: 'safety',
+      offsetMin: 30,
+      label: 'Ansage (~30 Min vor Losgehen)',
+      role: 'warn',
+    },
+    {
+      kind: 'prep',
+      offsetMin: 15,
+      label: 'Mikro-Check (~15 Min)',
+      role: 'micro',
+    },
+    {
+      kind: 'prep',
+      offsetMin: 7,
+      label: 'Mikro-Check (~7 Min)',
+      role: 'micro',
+    },
+    {
+      kind: 'safety',
+      offsetMin: 5,
+      label: 'Ansage (~5 Min vor Aufbruch)',
+      role: 'warn',
+    },
+    {
+      kind: 'leave',
+      offsetMin: 0,
+      label: 'Aufbruch-Push (vibrieren / sprechen)',
+      role: 'hard',
+    },
+  ]);
+}
+
+function materializePoints(
+  anchorMs: number,
+  nowMs: number,
+  offsets: Array<{
     kind: LogisticsCheckKind;
     offsetMin: number;
     label: string;
     role: LogisticsCheckPoint['role'];
-  }> = softOnly
-    ? [
-        {
-          kind: 'safety',
-          offsetMin: 5,
-          label: 'Gleich los (~5 Min vor Aufbruch)',
-          role: 'warn',
-        },
-        {
-          kind: 'leave',
-          offsetMin: 0,
-          label: 'Aufbruch-Push (vibrieren / sprechen)',
-          role: 'hard',
-        },
-      ]
-    : [
-        {
-          kind: 'coarse',
-          offsetMin: 180,
-          label: 'Mikro-Check (~3 Std.)',
-          role: 'micro',
-        },
-        {
-          kind: 'prep',
-          offsetMin: 60,
-          label: 'Mikro-Check (~1 Std.)',
-          role: 'micro',
-        },
-        {
-          kind: 'safety',
-          offsetMin: warnMin,
-          label:
-            profile === 'wake'
-              ? `Vorwarnung (~${warnMin} Min vor Wecker) — rechtzeitig los`
-              : `Vorwarnung (~${warnMin} Min vor Losgehen)`,
-          role: 'warn',
-        },
-        ...(warnMin > 5
-          ? [
-              {
-                kind: 'prep' as const,
-                offsetMin: 5,
-                label:
-                  profile === 'wake'
-                    ? 'Kurz vor Wecker (~5 Min)'
-                    : 'Gleich los (~5 Min vor Aufbruch)',
-                role: 'warn' as const,
-              },
-            ]
-          : []),
-        {
-          kind: 'leave',
-          offsetMin: 0,
-          label:
-            profile === 'wake'
-              ? 'Wecker-Moment'
-              : 'Aufbruch-Push (vibrieren / sprechen)',
-          role: 'hard',
-        },
-      ];
-
+  }>,
+): LogisticsCheckPoint[] {
   const points: LogisticsCheckPoint[] = [];
   for (const o of offsets) {
     const atMs = anchorMs - o.offsetMin * 60_000;

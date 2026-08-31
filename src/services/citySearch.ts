@@ -4,6 +4,7 @@
 
 import type { CityCatalogItem } from '../services/cityCatalogService';
 import { citySearchMeta } from '../constants/cityCovers';
+import { sliceNearbyCities } from './nearbyCitySlice';
 
 function normalize(s: string): string {
   return s
@@ -112,7 +113,7 @@ export function filterCitiesBySearch(
 }
 
 /** Ohne Suche: nächste Städte (Distanz-Sortierung vorausgesetzt). Mit Suche: alle Treffer. */
-export const CITY_PICKER_NEARBY_LIMIT = 8;
+export { CITY_PICKER_NEARBY_LIMIT } from './nearbyCitySlice';
 
 export function citiesForPickerGrid(
   cities: CityCatalogItem[],
@@ -122,12 +123,13 @@ export function citiesForPickerGrid(
     limit?: number;
   } = {},
 ): CityCatalogItem[] {
-  const excludeId = opts.excludeId ?? null;
-  const limit = opts.limit ?? CITY_PICKER_NEARBY_LIMIT;
   const q = (opts.query ?? '').trim();
-  const pool = excludeId
-    ? cities.filter((c) => c.id !== excludeId)
-    : cities;
-  if (q) return filterCitiesBySearch(pool, q);
-  return pool.slice(0, limit);
+  if (q) {
+    const excludeId = opts.excludeId ?? null;
+    const pool = excludeId
+      ? cities.filter((c) => c.id !== excludeId)
+      : cities;
+    return filterCitiesBySearch(pool, q);
+  }
+  return sliceNearbyCities(cities, opts);
 }

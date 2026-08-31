@@ -1,5 +1,5 @@
 /**
- * Findus Audio-Guide Sprachsystem — verbindliche Generierungsrichtlinie.
+ * Yorro Audio-Guide Sprachsystem — verbindliche Generierungsrichtlinie.
  * Persönlicher Stadtführer im Ohr, fließender Sprechtext ohne Rubriken.
  */
 
@@ -52,7 +52,7 @@ export const AUDIO_GUIDE_GENERATION_INSTRUCTIONS = `{
 }`;
 
 /** Kurzer Prompt-Block für Story-Pipeline / System-Prompt. */
-export const AUDIO_GUIDE_SPEECH_RULES_DE = `## Findus Sprachsystem (eisern)
+export const AUDIO_GUIDE_SPEECH_RULES_DE = `## Yorro Sprachsystem (eisern)
 
 Du bist kein Textgenerator, sondern ein sympathischer, einheimischer Freund und Audioguide, der dem Nutzer direkt nebenher über die Schulter schaut.
 

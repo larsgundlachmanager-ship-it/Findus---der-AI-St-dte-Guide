@@ -7,14 +7,23 @@
  */
 
 import { generateGeminiText, hasGeminiApiKey } from '../geminiService';
-import { isDeviceOffline } from '../navigation/networkState';
 import {
   buildGetYourGuideSearchUrl,
   buildMusementSearchUrl,
   buildViatorSearchUrl,
   preferTicketSource,
+  preferTicketSourceQuoted,
 } from '../affiliate/affiliateService';
+import { pickAffiliateOffer } from '../affiliate/affiliatePickOffer';
+import { classifyTicketPartner } from '../affiliate/quoteCollector';
+import {
+  ticketIdentity,
+  ticketProductKey,
+  userWantsCheapest,
+} from '../affiliate/quoteIdentity';
+import { parseEurNumber } from '../affiliate/quotePriceParse';
 import { shortenActionLabel } from '../concierge/actionLabelShorten';
+import { canonicalizeEventInfoUrl } from './eventInfoUrl';
 import type { Module2ActionButton } from '../../module2/types';
 
 export type VenueOfferKind =
@@ -122,7 +131,7 @@ function extractJsonObject(raw: string): unknown | null {
   }
 }
 
-function asOffers(data: unknown): VenueOfferItem[] {
+function asOffers(data: unknown, city?: string | null): VenueOfferItem[] {
   if (!data || typeof data !== 'object') return [];
   const root = data as { offers?: unknown[] };
   if (!Array.isArray(root.offers)) return [];
@@ -132,16 +141,19 @@ function asOffers(data: unknown): VenueOfferItem[] {
     const e = row as Record<string, unknown>;
     const title = String(e.title ?? e.name ?? '').trim();
     if (title.length < 3) continue;
-    const infoUrl =
+    const rawInfo =
       typeof e.infoUrl === 'string' && /^https?:\/\//i.test(e.infoUrl)
         ? e.infoUrl
         : typeof e.url === 'string' && /^https?:\/\//i.test(e.url)
           ? e.url
           : null;
-    const ticketUrl =
+    const hints = { title, city: city ?? null };
+    const infoUrl = canonicalizeEventInfoUrl(rawInfo, hints);
+    const rawTicket =
       typeof e.ticketUrl === 'string' && /^https?:\/\//i.test(e.ticketUrl)
         ? e.ticketUrl
         : null;
+    const ticketUrl = canonicalizeEventInfoUrl(rawTicket, hints);
     out.push({
       type: String(e.type ?? 'other').toLowerCase().slice(0, 24),
       title: title.slice(0, 80),
@@ -201,6 +213,7 @@ export function buildVenueOfferButtons(opts: {
   kind: VenueOfferKind;
   offers: VenueOfferItem[];
   websiteUrl?: string | null;
+  userText?: string | null;
 }): Module2ActionButton[] {
   const { subject, city, kind, offers, websiteUrl } = opts;
   const buttons: Module2ActionButton[] = [];
@@ -227,9 +240,8 @@ export function buildVenueOfferButtons(opts: {
     });
   }
 
-  // Partner-Ticket-Suche immer als klarer Kauf-Pfad (weltweit)
+  // Ein Primär-Ticket: Produkt-URLs mit Preis → pickAffiliateOffer, sonst Suche.
   if (kind !== 'none' || offers.length > 0) {
-    const query = `${subject} ${qCity}`.trim();
     const hasBoat = offers.some(
       (o) =>
         o.type === 'boat' ||
@@ -245,6 +257,42 @@ export function buildVenueOfferButtons(opts: {
           ? `${subject} ${qCity} Konzert Tickets OR Führung`
           : `${subject} ${qCity} Tickets`;
 
+    const products = offers
+      .filter((o) => o.ticketUrl && /^https?:\/\//i.test(o.ticketUrl))
+      .map((o, i) => {
+        const url = o.ticketUrl!;
+        const meta = classifyTicketPartner(url);
+        return {
+          id: `${meta.id}:${i}`,
+          label: o.title,
+          url,
+          commissionScore: meta.commissionScore,
+          deepLinkLevel: (ticketProductKey(url) ? 'deep' : 'search') as const,
+          partnerPriceEur: parseEurNumber(o.summary),
+          identity:
+            ticketIdentity({ url }) ||
+            `venue:${o.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 40)}`,
+        };
+      })
+      .filter((c) => c.deepLinkLevel === 'deep');
+    const pick = products.length
+      ? pickAffiliateOffer(products, {
+          userWantsCheapest: userWantsCheapest(opts.userText),
+        })
+      : null;
+    const ticketUrl =
+      pick?.url ||
+      preferTicketSource({
+        kind: affiliateKindFor(kind === 'none' ? 'attraction_tour' : kind),
+        query: ticketQ.trim(),
+        priced: products.map((p) => ({
+          url: p.url,
+          priceEur: p.partnerPriceEur,
+        })),
+        userText: opts.userText ?? undefined,
+      }).url ||
+      ticketSearchUrl(ticketQ.trim(), kind === 'none' ? 'attraction_tour' : kind);
+
     buttons.push({
       id: 'venue_tickets_affiliate',
       label: shortenActionLabel(
@@ -252,18 +300,8 @@ export function buildVenueOfferButtons(opts: {
       ),
       payload: {
         kind: 'deep_link',
-        url: ticketSearchUrl(ticketQ.trim(), kind === 'none' ? 'attraction_tour' : kind),
+        url: ticketUrl,
       },
-    });
-  }
-
-  // Direkt-Ticket-URL eines Offers (wenn Recherche eine echte URL fand)
-  const direct = offers.find((o) => o.ticketUrl)?.ticketUrl;
-  if (direct && !buttons.some((b) => b.payload.kind === 'deep_link' && b.payload.url === direct)) {
-    buttons.push({
-      id: 'venue_ticket_direct',
-      label: shortenActionLabel('🎫 Ticket-Link'),
-      payload: { kind: 'deep_link', url: direct },
     });
   }
 
@@ -299,8 +337,7 @@ export async function discoverVenueOffers(opts: {
   if (!shouldDiscoverVenueOffers(subject, opts.userText ?? '')) return null;
 
   const kind = classifyVenueOfferKind(subject, opts.userText ?? '');
-  const offline = await isDeviceOffline();
-  if (offline || !hasGeminiApiKey()) {
+  if (!hasGeminiApiKey()) {
     // Offline: trotzdem Affiliate-Suche anbieten
     const buttons = buildVenueOfferButtons({
       subject,
@@ -308,6 +345,7 @@ export async function discoverVenueOffers(opts: {
       kind: kind === 'none' ? 'sightseeing' : kind,
       offers: [],
       websiteUrl: opts.websiteUrl,
+      userText: opts.userText,
     });
     return {
       kind,
@@ -342,6 +380,7 @@ export async function discoverVenueOffers(opts: {
     'AUFGABE mit Google Search:',
     '- Was kann man HIER konkret machen? (Programm HEUTE/MORGEN, Touren, Tickets, Rundfahrten, Führungen)',
     '- Nur BELEGTE Angebote. Keine erfundenen Preise, keine Fake-URLs.',
+    '- infoUrl = Detailseite des Angebots, nie nur die Stadt-Übersicht eines Kalenders.',
     '- Partner-Portale (GetYourGuide, Viator, Musement, offizielle Venue-Seite) als Quellen ok.',
     '- Wenn nichts Belegtes: offers=[] und notes ehrlich.',
     '',
@@ -366,7 +405,7 @@ export async function discoverVenueOffers(opts: {
 
   try {
     const raw = await generateGeminiText(prompt, {
-      task: 'generic',
+      task: 'research',
       enableGoogleSearch: true,
       maxTokens: 1100,
       temperature: 0.3,
@@ -374,7 +413,7 @@ export async function discoverVenueOffers(opts: {
       signal: opts.signal,
     });
     const parsed = extractJsonObject(raw);
-    const offers = asOffers(parsed);
+    const offers = asOffers(parsed, opts.city);
     const notes =
       parsed && typeof parsed === 'object' && 'notes' in parsed
         ? String((parsed as { notes?: string }).notes ?? '')
@@ -387,7 +426,28 @@ export async function discoverVenueOffers(opts: {
       kind: effectiveKind,
       offers,
       websiteUrl: opts.websiteUrl,
+      userText: opts.userText,
     });
+    const productTickets = offers
+      .filter((o) => o.ticketUrl && ticketProductKey(o.ticketUrl))
+      .map((o) => ({
+        url: o.ticketUrl!,
+        priceEur: parseEurNumber(o.summary),
+      }));
+    if (productTickets.length) {
+      try {
+        const quoted = await preferTicketSourceQuoted({
+          priced: productTickets,
+          userText: opts.userText,
+        });
+        const tix = buttons.find((b) => b.id === 'venue_tickets_affiliate');
+        if (tix && quoted.url && tix.payload.kind === 'deep_link') {
+          tix.payload.url = quoted.url;
+        }
+      } catch {
+        /* Timeout = Harvest-URL bleibt */
+      }
+    }
 
     const promptBlock = [
       '=== VENUE-OFFERS (LIVE, PFLICHT wenn belegt) ===',
@@ -426,6 +486,7 @@ export async function discoverVenueOffers(opts: {
       kind: kind === 'none' ? 'sightseeing' : kind,
       offers: [],
       websiteUrl: opts.websiteUrl,
+      userText: opts.userText,
     });
     return {
       kind,

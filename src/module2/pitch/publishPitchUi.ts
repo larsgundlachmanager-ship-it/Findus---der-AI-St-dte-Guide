@@ -26,7 +26,18 @@ export type LivePitchState = {
   /** Research läuft — UI-Shell statt leerem Unmount */
   loading: boolean;
   selectedOptionId: string | null;
-  setPitch: (r: PitchResult, headline?: string) => void;
+  visitAtMs: number | null;
+  pitchKind: import('./types').PitchKind | null;
+  pitchContext: string | null;
+  setPitch: (
+    r: PitchResult,
+    headline?: string,
+    meta?: {
+      visitAtMs?: number | null;
+      pitchKind?: import('./types').PitchKind | null;
+      pitchContext?: string | null;
+    },
+  ) => void;
   /** Vor Research: Karte bleibt sichtbar (Loading), kein Blank-Gap. */
   setLoading: (headline?: string) => void;
   selectOption: (optionId: string) => void;
@@ -34,7 +45,7 @@ export type LivePitchState = {
     optionId: string,
     patch: Partial<PitchOptionCard>,
   ) => void;
-  clear: () => void;
+  clear: (force?: boolean) => void;
 };
 
 export const useLivePitchStore = create<LivePitchState>((set, get) => ({
@@ -45,7 +56,18 @@ export const useLivePitchStore = create<LivePitchState>((set, get) => ({
   softFail: false,
   loading: false,
   selectedOptionId: null,
-  setPitch: (r, headline) =>
+  visitAtMs: null,
+  pitchKind: null,
+  pitchContext: null,
+  setPitch: (r, headline, meta) => {
+    const cur = get().requestId;
+    if (
+      cur &&
+      cur.startsWith('map_nav_mobility_') &&
+      !String(r.requestId || '').startsWith('map_nav_mobility_')
+    ) {
+      return;
+    }
     set({
       requestId: r.requestId,
       layout: r.uiLayout,
@@ -54,22 +76,169 @@ export const useLivePitchStore = create<LivePitchState>((set, get) => ({
       softFail: r.softFail,
       loading: false,
       selectedOptionId: null,
-    }),
-  setLoading: (headline) =>
+      visitAtMs: meta?.visitAtMs ?? null,
+      pitchKind: meta?.pitchKind ?? null,
+      pitchContext: meta?.pitchContext ?? null,
+    });
+  },
+  setLoading: (headline) => {
+    const cur = get().requestId;
+    if (cur && cur.startsWith('map_nav_mobility_')) return;
     set({
       requestId: get().requestId ?? `pitch_loading_${Date.now()}`,
       layout: 'live_split',
-      headline: (headline || get().headline || 'Zwei Optionen').slice(0, 48),
-      // Alte Optionen behalten bis neue da sind — kein Flackern/leere Buttons
+      headline: (headline || get().headline || 'Zwei Optionen').slice(0, 56),
       options: get().options,
       softFail: false,
       loading: true,
       selectedOptionId: null,
-    }),
+    });
+  },
   selectOption: (optionId) => {
     const id = get().requestId;
+    const layout = get().layout;
+    const chosen = get().options.find((o) => o.id === optionId);
     if (id) selectPitchOption(id, optionId);
-    set({ selectedOptionId: optionId });
+    if (
+      chosen &&
+      layout === 'live_split' &&
+      id &&
+      !id.startsWith('map_nav_mobility_')
+    ) {
+      try {
+        const { resolvePitchTimingMode, pitchTimingAskSpeech, pitchTimingAskActions, pitchTimingLaterSpeech, pitchTimingNowActions, pitchDiningForkSpeech, pitchDiningForkActions } =
+          require('./pitchTimingFork') as {
+            resolvePitchTimingMode: (o: {
+              visitAtMs?: number | null;
+              userText?: string | null;
+              pitchKind?: import('./types').PitchKind | null;
+            }) => 'now' | 'later' | 'ask' | 'dining_fork';
+            pitchTimingAskSpeech: () => string;
+            pitchTimingLaterSpeech: (n: string) => string;
+            pitchDiningForkSpeech: (n: string) => string;
+            pitchTimingAskActions: (o: PitchOptionCard) => import('../../types/concierge').QuickAction[];
+            pitchTimingNowActions: (o: PitchOptionCard) => import('../../types/concierge').QuickAction[];
+            pitchDiningForkActions: (o: PitchOptionCard) => import('../../types/concierge').QuickAction[];
+          };
+        const { enqueueSpeech } = require('../speech/speechQueue') as {
+          enqueueSpeech: (o: { kind: string; text: string; turnId: string }) => void;
+        };
+        const mode = resolvePitchTimingMode({
+          visitAtMs: get().visitAtMs,
+          userText: get().pitchContext,
+          pitchKind: get().pitchKind,
+        });
+        if (mode === 'dining_fork') {
+          const speech = pitchDiningForkSpeech(chosen.name);
+          enqueueSpeech({
+            kind: 'main',
+            text: speech,
+            turnId: `pitch_dining_${id}`,
+          });
+          set({
+            selectedOptionId: optionId,
+            options: [
+              {
+                ...chosen,
+                actions: pitchDiningForkActions(chosen),
+                speechPitch: speech,
+              },
+            ],
+            headline: `Gute Wahl — ${chosen.name}`.slice(0, 56),
+          });
+          return;
+        }
+        if (mode === 'ask') {
+          enqueueSpeech({
+            kind: 'main',
+            text: pitchTimingAskSpeech(),
+            turnId: `pitch_timing_${id}`,
+          });
+          set({
+            selectedOptionId: optionId,
+            options: [
+              {
+                ...chosen,
+                actions: pitchTimingAskActions(chosen),
+                speechPitch: pitchTimingAskSpeech(),
+              },
+            ],
+            headline: `Gute Wahl — ${chosen.name}`.slice(0, 56),
+          });
+          return;
+        }
+        if (mode === 'later') {
+          const { mirrorLivePitchChoiceToTimeline } = require('./mirrorLivePitchToTimeline') as {
+            mirrorLivePitchChoiceToTimeline: (o: {
+              requestId: string;
+              option: PitchOptionCard;
+              visitAtMs?: number | null;
+              pitchKind?: import('./types').PitchKind | null;
+              pitchContext?: string | null;
+            }) => void;
+          };
+          mirrorLivePitchChoiceToTimeline({
+            requestId: id,
+            option: chosen,
+            visitAtMs: get().visitAtMs,
+            pitchKind: get().pitchKind,
+            pitchContext: get().pitchContext,
+          });
+          enqueueSpeech({
+            kind: 'main',
+            text: pitchTimingLaterSpeech(chosen.name),
+            turnId: `pitch_later_${id}`,
+          });
+          set({
+            selectedOptionId: optionId,
+            options: [chosen],
+            headline: `Eingetragen — ${chosen.name}`.slice(0, 56),
+          });
+          return;
+        }
+        // now — Nav-Actions behalten / setzen
+        set({
+          selectedOptionId: optionId,
+          options: [
+            {
+              ...chosen,
+              actions: pitchTimingNowActions(chosen),
+            },
+          ],
+          headline: `Gute Wahl — ${chosen.name}`.slice(0, 56),
+        });
+        return;
+      } catch {
+        try {
+          const { mirrorLivePitchChoiceToTimeline } = require('./mirrorLivePitchToTimeline') as {
+            mirrorLivePitchChoiceToTimeline: (o: {
+              requestId: string;
+              option: PitchOptionCard;
+              visitAtMs?: number | null;
+              pitchKind?: import('./types').PitchKind | null;
+              pitchContext?: string | null;
+            }) => void;
+          };
+          mirrorLivePitchChoiceToTimeline({
+            requestId: id,
+            option: chosen,
+            visitAtMs: get().visitAtMs,
+            pitchKind: get().pitchKind,
+            pitchContext: get().pitchContext,
+          });
+        } catch {
+          /* soft */
+        }
+      }
+    }
+    const name = String(chosen?.name || '').trim();
+    set({
+      selectedOptionId: optionId,
+      options: chosen ? [chosen] : get().options.filter((o) => o.id === optionId),
+      headline: name
+        ? `Gute Wahl — ${name}`.slice(0, 56)
+        : get().headline,
+    });
   },
   patchOption: (optionId, patch) =>
     set((s) => ({
@@ -77,7 +246,9 @@ export const useLivePitchStore = create<LivePitchState>((set, get) => ({
         o.id === optionId ? { ...o, ...patch } : o,
       ),
     })),
-  clear: () =>
+  clear: (force?: boolean) => {
+    const cur = get().requestId;
+    if (!force && cur && cur.startsWith('map_nav_mobility_')) return;
     set({
       requestId: null,
       options: [],
@@ -85,7 +256,11 @@ export const useLivePitchStore = create<LivePitchState>((set, get) => ({
       loading: false,
       selectedOptionId: null,
       headline: '',
-    }),
+      visitAtMs: null,
+      pitchKind: null,
+      pitchContext: null,
+    });
+  },
 }));
 
 function toPlanCard(
@@ -236,17 +411,35 @@ export function publishPitchToTimeline(
 }
 
 /** Live M2: split store. */
-export function publishPitchToLive(result: PitchResult, headline?: string): void {
-  useLivePitchStore.getState().setPitch(result, headline);
+export function publishPitchToLive(
+  result: PitchResult,
+  headline?: string,
+  meta?: {
+    visitAtMs?: number | null;
+    pitchKind?: import('./types').PitchKind | null;
+    pitchContext?: string | null;
+  },
+): void {
+  useLivePitchStore.getState().setPitch(result, headline, meta);
 }
 
 export function publishPitchResult(
   result: PitchResult,
-  opts: { stepKey: string; headline: string; anchorTimeMs?: number | null },
+  opts: {
+    stepKey: string;
+    headline: string;
+    anchorTimeMs?: number | null;
+    pitchKind?: import('./types').PitchKind | null;
+    pitchContext?: string | null;
+  },
 ): void {
   if (result.uiLayout === 'timeline_stack') {
     publishPitchToTimeline(result, opts);
   } else {
-    publishPitchToLive(result, opts.headline);
+    publishPitchToLive(result, opts.headline, {
+      visitAtMs: opts.anchorTimeMs ?? null,
+      pitchKind: opts.pitchKind ?? null,
+      pitchContext: opts.pitchContext ?? null,
+    });
   }
 }

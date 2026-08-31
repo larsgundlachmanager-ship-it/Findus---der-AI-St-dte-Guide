@@ -12,6 +12,7 @@ import {
   requestNotificationPermission,
 } from './notificationService';
 import { getCachedUserProfile } from '../userProfileService';
+import { earliestProactiveRainWarnAtMs } from '../weather/rainWarnSessionGate';
 
 export const RAIN_ALERT_CHANNEL_ID = 'findus-rain-alerts';
 export const RAIN_ALERT_DATA_TYPE = 'rain_alert';
@@ -45,7 +46,14 @@ async function ensureRainChannel(): Promise<void> {
 }
 
 function remindersWanted(): boolean {
-  return getCachedUserProfile()?.notificationsEnabled !== false;
+  try {
+    const { isProactiveAlertEnabled } = require('./proactiveAlerts') as {
+      isProactiveAlertEnabled: (k: 'weather') => boolean;
+    };
+    return isProactiveAlertEnabled('weather');
+  } catch {
+    return getCachedUserProfile()?.notificationsEnabled !== false;
+  }
 }
 
 function channelId(): string {
@@ -97,8 +105,10 @@ async function scheduleAt(opts: {
   rainAtMs: number;
 }): Promise<boolean> {
   const now = Date.now();
-  // Mindestens ~2 s in der Zukunft (OS-Trigger)
-  const when = Math.max(opts.dateMs, now + 2_000);
+  const earliest = earliestProactiveRainWarnAtMs(now);
+  // Mindestens ~2 s in der Zukunft (OS-Trigger), nicht vor der Start-Ruhe
+  const when = Math.max(opts.dateMs, now + 2_000, earliest);
+  if (when >= opts.rainAtMs - 30_000) return false;
   if (when - now > 7 * 24 * 60 * 60_000) return false;
 
   const ch = channelId();
@@ -209,7 +219,7 @@ export async function syncRainAlertNotifications(opts: {
       const ok = await scheduleAt({
         identifier: ID_30,
         dateMs: fire30,
-        title: 'Findus — Regen',
+        title: 'Yorro — Regen',
         body: `Bald Regen (ab ca. ${clock}). Rein gehen oder draußen bleiben?`,
         kind: '30',
         rainAtMs: rainAt,
@@ -223,7 +233,7 @@ export async function syncRainAlertNotifications(opts: {
     const ok = await scheduleAt({
       identifier: ID_5,
       dateMs: fire5,
-      title: 'Findus — gleich Regen',
+      title: 'Yorro — gleich Regen',
       body: `In wenigen Minuten wird's nass (ab ca. ${clock}).`,
       kind: '5',
       rainAtMs: rainAt,

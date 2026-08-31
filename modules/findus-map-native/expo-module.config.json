@@ -1,0 +1,9 @@
+{
+  "platforms": ["ios", "android"],
+  "ios": {
+    "modules": ["FindusMapNativeModule"]
+  },
+  "android": {
+    "modules": ["expo.modules.findusmapnative.FindusMapNativeModule"]
+  }
+}

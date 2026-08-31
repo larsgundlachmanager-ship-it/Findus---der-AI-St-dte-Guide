@@ -92,12 +92,10 @@ const BASE_HOOKS: HookBank = {
     'Riechst du das? Genau vor dir backt jemand noch richtig handwerklich.',
   ],
   salon: [
-    'Na, ein neuer Haarschnitt nötig? Da vorne wartet ein Friseur auf dich.',
-    'Spieglein, Spieglein — Lust auf einen frischen Schnitt?',
+    'Da vorne ein Friseur — wenn Haare gerade Thema sind, lohnt der Blick auf den Spot.',
   ],
   florist: [
-    'Na, Blumen für jemanden — oder nur reinriechen? Der Laden liegt genau vor dir.',
-    'Duft von frischen Blumen voraus — Lust auf einen kurzen Blick an die Theke?',
+    'Blumen voraus — wenn du einen Anlass hast, ist der Laden greifbar nah.',
   ],
   church: [
     'Schau mal: vor dir steht die Kirche. Pst… Wenn diese alten Mauern sprechen könnten…',
@@ -136,8 +134,7 @@ const BASE_HOOKS: HookBank = {
     'Markt-Vibes vor dir! Hier läuft der Handel schon seit Generationen.',
   ],
   shop: [
-    'Da vorne liegt ein Laden, den die Einheimischen kennen — kurz reinschnuppern?',
-    'Shopping-Radar piept. Lust auf einen kurzen Abstecher?',
+    'Da vorne ein Laden — wenn Shopping gerade passt, kurz checken was drin steckt.',
   ],
   fire: [
     'Siehst du die Feuerwache? Hier hält die Freiwillige Feuerwehr den Laden am Laufen.',
@@ -254,6 +251,49 @@ function shortDest(dest: string): string {
 }
 
 /**
+ * Entdeckungs-Substanz aus Teaser/Fakten — warum dieser Spot erlebenswert ist.
+ * Leer = kein substanzloses Abstecher-Fluff feuern.
+ */
+function discoverySnippet(poi: PoiWithFacts): string | null {
+  const candidates: string[] = [];
+  for (const f of poi.facts ?? []) {
+    const t = cleanFactSnippet(f.fact_text ?? '');
+    if (t.length >= 24 && t.length <= 180 && !/^user-frage/i.test(t)) {
+      candidates.push(t);
+    }
+  }
+  if (poi.teaser_text) {
+    const t = cleanFactSnippet(poi.teaser_text);
+    if (t.length >= 24) candidates.push(t.slice(0, 180));
+  }
+  const raw =
+    candidates.find(
+      (t) =>
+        !/abstecher\s+lohnt|reinriechen\s+lohnt|lust auf einen kurzen abstecher|shopping-radar|einkaufs-radar/i.test(
+          t,
+        ),
+    ) ?? null;
+  if (!raw) return null;
+  return raw.length > 140
+    ? `${raw.slice(0, 137).replace(/\s+\S*$/, '')}…`
+    : raw;
+}
+
+function amenityDiscoveryHooks(
+  short: string,
+  discovery: string | null,
+): string[] {
+  if (discovery) {
+    return [
+      `Da vorne: ${short}. ${discovery}`,
+      `Schau mal Richtung ${short} — ${discovery}`,
+    ];
+  }
+  // Ohne Discovery: still — kein Name-Drop / Abstecher-Fluff
+  return [];
+}
+
+/**
  * Interaktiver Approach-Opener — spricht DEN USER an.
  * VERBOTEN: „Wegweiser“, Selbstgespräch („Was ist das? Ah…“), Meta-Regie.
  */
@@ -267,6 +307,7 @@ export function buildWegweiserHook(
   const short = shortDest(dest);
   const engine = resolvePersonaEngine(p);
   const prefs = p?.experiencePrefs ?? {};
+  const discovery = discoverySnippet(poi);
 
   // Interessen-Check: wenn User das Thema mag → stärkerer Pitch; wenn no → softer
   const likesChurches = engine.preferences.likesChurches && prefs.kirchen !== 'no';
@@ -338,24 +379,9 @@ export function buildWegweiserHook(
     `Riechst du das? ${short} — der Duft allein ist schon eine Einladung.`,
   ];
 
-  const salonHooks = [
-    `Na, ein neuer Haarschnitt nötig? Da vorne auf der rechten Seite liegt ${short}.`,
-    `Spieglein, Spieglein — Lust auf einen frischen Schnitt? ${short} wartet gleich vorne.`,
-    `Hey, da vorne ist ein Friseur: ${short}. Termin-Idee für später — oder nur vorbeischauen?`,
-    `Frische Frisur gefällig? Vorne rechts siehst du ${short} — soll ich dir kurz erzählen, was den Spot besonders macht?`,
-  ];
-
-  const floristHooks = [
-    `Na, Blumen für jemanden — oder nur reinriechen? Da vorne liegt ${short}.`,
-    `Duft von frischen Blumen voraus: ${short}. Lust auf einen kurzen Blick an die Theke?`,
-    `Hey, ${short} liegt gleich vor dir — Fest, Alltag oder Trauer, hier gibt’s den Strauß ohne Extra-Weg.`,
-    `Magst du kurz zur Floristik? ${short} sitzt praktisch mitten im Einkauf — reinriechen lohnt sich.`,
-  ];
-
-  const shopHooks = [
-    `Da vorne brummt ${short}. Lust auf einen kurzen Abstecher mit Insider-Tipp?`,
-    `Einkaufs-Radar piept: ${short}. Magst du wissen, warum die Locals hier landen?`,
-  ];
+  const salonHooks = amenityDiscoveryHooks(short, discovery);
+  const floristHooks = amenityDiscoveryHooks(short, discovery);
+  const shopHooks = amenityDiscoveryHooks(short, discovery);
 
   const fireHooks = [
     `Siehst du die Feuerwache? ${short} — hier halten Freiwillige den Laden am Laufen. Reinhören?`,
@@ -404,7 +430,13 @@ export function buildWegweiserHook(
     generic: genericHooks,
   };
 
-  let line = pick(bank[kind] ?? genericHooks);
+  let pool = bank[kind] ?? genericHooks;
+  if (!pool.length) {
+    // Salon/Florist/Shop ohne Discovery → still bleiben (kein Abstecher-Fluff)
+    if (kind === 'salon' || kind === 'florist' || kind === 'shop') return '';
+    pool = genericHooks;
+  }
+  let line = pick(pool);
   // Tippfehler-Schutz: hängendes Komma aus Template
   line = line.replace(/,\s*$/, '').replace(/\?\s*,/g, '?');
 
@@ -462,6 +494,13 @@ export function isBoringApproachTeaser(text: string): boolean {
   ) {
     return true;
   }
+  if (
+    /Haupteingang laut Google|geh auf den Eingang von|GPS-Eingang|Maps Pin/i.test(
+      t,
+    )
+  ) {
+    return true;
+  }
   return false;
 }
 
@@ -469,7 +508,6 @@ const VOICE_HOOKS: Partial<Record<VoiceId, Partial<HookBank>>> = {
   daniel: {
     cafe: ['Yo, schon Kaffee-Entzug? Der Spot hier rettet dich.'],
     bakery: ['Bro, Brötchen-Alert. Da duftet’s richtig.'],
-    salon: ['Na, Cut nötig? Der Friseur vorne rettet schlechte Haartage.'],
     golf: ['Ready für den Abschlag? Die Greens hier haben echten Vibe.'],
     station: ['Tüt-tüt, Einsteigen bitte! Bahnhof-Vibe, wir zoomen rein.'],
     water: ['Badehose checken — jetzt wird’s erfrischend!'],
@@ -481,7 +519,6 @@ const VOICE_HOOKS: Partial<Record<VoiceId, Partial<HookBank>>> = {
   varson: {
     cafe: ['Yo, schon Kaffee-Entzug? Der Spot hier rettet dich.'],
     bakery: ['Bro, Brötchen-Alert. Da duftet’s richtig.'],
-    salon: ['Na, Cut nötig? Der Friseur vorne rettet schlechte Haartage.'],
     golf: ['Ready für den Abschlag? Die Greens hier haben echten Vibe.'],
     station: ['Tüt-tüt, Einsteigen bitte! Bahnhof-Vibe, wir zoomen rein.'],
     water: ['Badehose checken — jetzt wird’s erfrischend!'],
@@ -492,7 +529,6 @@ const VOICE_HOOKS: Partial<Record<VoiceId, Partial<HookBank>>> = {
   },
   alina: {
     cafe: ['Welch warmer Duft! Ein Ort für eine kleine Pause.'],
-    salon: ['Vielleicht ein wenig Frische für die Haare? Der Salon wartet.'],
     church: ['Pst... Wenn diese alten Mauern sprechen könnten...'],
     golf: ['Bereit für den nächsten Abschlag auf diesen Greens?'],
     station: ['Tüt-tüt, Einsteigen bitte — der Bahnhof ruft.'],
@@ -501,7 +537,6 @@ const VOICE_HOOKS: Partial<Record<VoiceId, Partial<HookBank>>> = {
   },
   lukas: {
     cafe: ['Nahaufnahme: dampfender Kaffee. Die Szene beginnt.'],
-    salon: ['Schnitt! Die nächste Szene spielt im Salon vor dir.'],
     golf: ['Abschlag! Die Greens liegen vor uns wie eine Bühne.'],
     station: ['Tüt-tüt, Einsteigen bitte! Schauplatz Bahnhof — Tempo voraus.'],
     water: ['Wasser voraus — und die Geschichte nimmt Fahrt auf.'],
@@ -509,7 +544,6 @@ const VOICE_HOOKS: Partial<Record<VoiceId, Partial<HookBank>>> = {
   },
   sebastian: {
     cafe: ['Moin — Kaffee-Duft voraus. Kurz reinschauen?'],
-    salon: ['Frische Frisur gefällig? Der Salon liegt direkt vor dir.'],
     golf: ['Abschlag bereit? Die Greens hier haben Charakter.'],
     station: ['Tüt-tüt, Einsteigen bitte — Bahnhof voraus.'],
     water: ['Wasser voraus — Badehose parat?'],
@@ -649,8 +683,8 @@ function buildFactBasedHook(
 
     case 'station':
       variants.push(
-        `Tüt-tüt — hörst du die Schienen? Genau hier rollt Geschichte.`,
         `Spürst du den Bahnsteig unter den Füßen? Gleich erzähl ich, was hier los war.`,
+        `Gleich die Gleise — ich erzähl dir kurz, was an diesem Punkt wichtig war.`,
       );
       break;
 
@@ -666,13 +700,19 @@ function buildFactBasedHook(
     case 'castle':
     case 'historic':
       variants.push(
-        `Pst… nimm dir einen Moment — hier flüstert Geschichte.`,
         `Schau genau hin: Mauern und Details, die man leicht übersieht.`,
+        `Nimm dir einen kurzen Moment — ich zeig dir, was hier sichtbar ist.`,
       );
       break;
 
     case 'salon':
-      variants.push(`${m.title} — frischer Schnitt oder nur neugierig?`);
+    case 'florist':
+    case 'shop':
+      variants.push(
+        m.detail
+          ? `${m.title} — ${m.detail}`
+          : `${m.title} liegt vor dir.`,
+      );
       break;
 
     case 'bar':
@@ -686,7 +726,7 @@ function buildFactBasedHook(
       // VERBOTEN: „steckt mehr drin als der erste Blick“ (Cliché / Doppel-Intro)
       variants.push(
         `Nimm dir einen kurzen Moment — schau dich hier einmal richtig um.`,
-        `Du stehst mitten in einem Ort, der seine eigene Geschichte hat.`,
+        `Schau dich kurz um — ich erzähl dir, was an diesem Fleck wichtig ist.`,
       );
   }
 
@@ -824,13 +864,8 @@ function maybePersonalHook(
   const h = resolvePersonalEngagement(profile);
   const roll = Math.random();
 
-  if (kind === 'salon') {
-    return 'Na, ein neuer Haarschnitt nötig? Der Friseur liegt genau vor dir.';
-  }
-
-  if (kind === 'florist') {
-    return 'Na, Blumen für jemanden — oder nur reinriechen? Der Laden liegt genau vor dir.';
-  }
+  // Salon/Florist/Shop: kein generisches Abstecher-Fluff — Fakt-Hook übernimmt
+  if (kind === 'salon' || kind === 'florist' || kind === 'shop') return null;
 
   // Kein generisches Essens-Hook-Roulette — Opener kommt aus buildFactBasedHook
   if (kind === 'atm' || kind === 'service') return null;

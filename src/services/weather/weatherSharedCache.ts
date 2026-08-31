@@ -1,7 +1,7 @@
 /**
  * Client → Supabase Edge Function `weather-forecast`.
- * Shared 3h cache per city/geo-cell so N users at the same place
- * only trigger 1 Open-Meteo upstream call.
+ * Shared cache per city/Viertel (~5 km) or geo-cell so N users at the same
+ * place only trigger 1 OWM / Open-Meteo upstream call (adaptive TTL on edge).
  */
 
 import { env } from '../../config/env';
@@ -17,6 +17,8 @@ export type SharedWeatherResponse = {
   lng: number;
   cityHint: string | null;
   openMeteo: unknown;
+  /** OpenWeather One Call raw JSON when edge included it */
+  owm?: unknown | null;
 };
 
 const FETCH_MS = 8_000;
@@ -77,7 +79,10 @@ export async function fetchSharedWeather(opts: {
       return null;
     }
     const data = (await res.json()) as SharedWeatherResponse;
-    if (!data?.openMeteo || typeof data.fetchedAtMs !== 'number') {
+    if (typeof data?.fetchedAtMs !== 'number') {
+      return null;
+    }
+    if (data.openMeteo == null && data.owm == null) {
       return null;
     }
     return data;

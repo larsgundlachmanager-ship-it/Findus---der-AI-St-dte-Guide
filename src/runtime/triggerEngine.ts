@@ -5,7 +5,7 @@
  */
 
 import {
-  getAllPois,
+  getPoiById,
   haversineMeters,
   matchGeoTriggerCluster,
   type GeoMatch,
@@ -17,6 +17,7 @@ import {
   relativeBearingDeg,
 } from '../services/navigation/bearing';
 import { shouldSkipTriggerForSpeed } from './gpsPolicy';
+import { effectiveTriggerRadiusM } from '../services/geo/triggerRadius';
 import type { GpsSample } from './types';
 import {
   selectApproachBundle,
@@ -155,8 +156,7 @@ async function resolveHauptortTarget(poi: Poi): Promise<{
   if (kind !== 'approach' || poi.parent_poi_id == null) {
     return { lat: poi.lat, lng: poi.lng };
   }
-  const all = await getAllPois();
-  const parent = all.find((p) => p.id === poi.parent_poi_id);
+  const parent = await getPoiById(poi.parent_poi_id);
   if (!parent) return { lat: poi.lat, lng: poi.lng };
   return { lat: parent.lat, lng: parent.lng };
 }
@@ -323,7 +323,7 @@ export async function evaluateGpsTrigger(
   if (
     shouldSkipTriggerForSpeed({
       speedMs,
-      triggerRadiusM: Math.max(1, poi.radius_meters * (input.radiusScale ?? 1)),
+      triggerRadiusM: effectiveTriggerRadiusM(poi, input.radiusScale ?? 1),
       transportMode: input.transportMode ?? 'unknown',
     })
   ) {

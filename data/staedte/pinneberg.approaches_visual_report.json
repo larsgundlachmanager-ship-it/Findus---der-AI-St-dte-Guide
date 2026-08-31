@@ -1,0 +1,178 @@
+{
+  "city": "pinneberg",
+  "apply": true,
+  "touched": 21,
+  "approachesFixed": 21,
+  "faqAdded": 0,
+  "data_version": 59,
+  "rows": [
+    {
+      "id": "pinneberg_bahnhof_pr",
+      "name": "Bahnhof Pinneberg & P+R Anlage",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "pinneberg_die_drostei",
+      "name": "Die Drostei",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 1,
+      "had_approaches": 3
+    },
+    {
+      "id": "pinneberg_stadtmuseum",
+      "name": "Stadtmuseum Pinneberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "pinneberg_kriegerdenkmal_bahnhofvorplatz",
+      "name": "Kriegerdenkmal Bahnhofsvorplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "pinneberg_deutsches_baumschulmuseum",
+      "name": "Deutsches Baumschulmuseum (Ortsteil Thesdorf)",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "pinneberg_stadtgeschichte",
+      "name": "Pinneberg Stadtgeschichte & Orientierung",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "pinneberg_samlandmuseum",
+      "name": "Samlandmuseum",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "pinneberg_wasserturm_pinneberg",
+      "name": "Wasserturm Pinneberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "pinneberg_torhaus_ilo_park",
+      "name": "Torhaus ILO Park",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "pinneberg_drosteipark",
+      "name": "Drosteipark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "pinneberg_christuskirche_pinneberg",
+      "name": "Christuskirche Pinneberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "pinneberg_rathaus_pinneberg",
+      "name": "Rathaus Pinneberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "pinneberg_waldgebiet_fahlt",
+      "name": "Waldgebiet Fahlt",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "pinneberg_rosengarten_pinneberg",
+      "name": "Rosengarten Pinneberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "pinneberg_bahnhof_thesdorf",
+      "name": "S-Bahn Station Pinneberg-Thesdorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "pinneberg_pinneberg_pinnau_park",
+      "name": "Pinneberg Pinnau-Park",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "pinneberg_kreuzkirche_ev_luth_kreuz_kirchengemeinde_pinneberg",
+      "name": "Kreuzkirche - Ev.-Luth. Kreuz-Kirchengemeinde Pinneberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "pinneberg_arboretum_ellerhoop",
+      "name": "Arboretum Ellerhoop",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "pinneberg_herman_wupperman_denkmal",
+      "name": "Herman-Wupperman-Denkmal",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 2,
+      "had_approaches": 1
+    },
+    {
+      "id": "pinneberg_stolperstein_fur_heinrich_geick",
+      "name": "Stolperstein für Heinrich Geick",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "pinneberg_historische_wupperman_hallen",
+      "name": "Historische Wupperman Hallen",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    }
+  ]
+}

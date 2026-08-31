@@ -29,6 +29,5 @@ export {
   expectIntentForScenarioJob,
   intentForJob,
 } from './factLaneRegistry';
-export { runRebootPipeline } from './runRebootPipeline';
 export { synthesizeRebootTurn, scrubRebootSpeech } from './synthesizeReboot';
 export { buildRebootBoardHints } from './rebootActionHints';

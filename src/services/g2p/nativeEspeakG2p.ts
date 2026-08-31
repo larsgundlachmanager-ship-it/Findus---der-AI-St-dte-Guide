@@ -153,7 +153,7 @@ export function validateGermanIpaSample(ipa: string): {
   if (/\boe\b|\bue\b|oe|ue/.test(ipa) && !/[øœy]/.test(ipa)) {
     reasons.push('ASCII-Umlaut-Digraphen statt IPA');
   }
-  // Willkommen / Findus typische DE-Laute
+  // Willkommen / Yorro typische DE-Laute
   if (!/[ɪəʁʃçɔʊ]/.test(ipa) && !/[aɪaʊ]/.test(ipa)) {
     reasons.push('keine typischen DE-IPA-Zeichen');
   }

@@ -35,6 +35,18 @@ export function hasFlag(name) {
   return process.argv.includes(`--${name}`);
 }
 
+/**
+ * Pack-Build cost mode. Default = cheap:
+ * OSM for directory, one Google story-discovery, no classify re-search.
+ * FINDUS_PACK_COST=full or --full restores Places for directory + extra discovery.
+ */
+export function packCostIsCheap() {
+  if (hasFlag('full')) return false;
+  if (hasFlag('cheap')) return true;
+  const v = String(process.env.FINDUS_PACK_COST || 'cheap').toLowerCase().trim();
+  return v !== 'full' && v !== 'expensive';
+}
+
 export function slugify(s) {
   return String(s)
     .toLowerCase()
@@ -86,6 +98,30 @@ export function boxPolygon(lat, lng, halfM) {
   ];
 }
 
+/**
+ * Trigger-/Polygon-Halbmesser nach Kategorie.
+ * Campus/Park/Schule brauchen Fläche — nicht nur Pin-Box ~22 m.
+ */
+export function suggestedPolygonHalfM(category, name = '') {
+  const cat = String(category || '').toLowerCase();
+  const n = String(name || '').toLowerCase();
+  if (/bahnhof|hafen|airport|flug/.test(cat) || /bahnhof|hafen/.test(n)) {
+    return 55;
+  }
+  if (
+    /park|natur|strand|friedhof|garten|campus|sport|stadion|schule|kindergarten|kita|museum|schloss|kloster|burg|zoo|freizeit|strandbad|hafen/.test(
+      cat,
+    ) ||
+    /kindergarten|schule|kita|gemeindezentrum|sportplatz|park|priester|gelände|campus/.test(
+      n,
+    )
+  ) {
+    return 70;
+  }
+  if (/kirche|dom|markt|platz|denkmal/.test(cat)) return 35;
+  return 24;
+}
+
 export function centroid(poly) {
   if (!poly?.length) return null;
   return {
@@ -106,8 +142,21 @@ export function savePack(pack, { bumpVersion = true } = {}) {
     pack.data_version = Number(pack.data_version || 0) + 1;
   }
   const file = path.join(STAEDTE_DIR, `${pack.city_id}.json`);
-  fs.writeFileSync(file, JSON.stringify(pack, null, 2), 'utf8');
-  return file;
+  const body = JSON.stringify(pack, null, 2);
+  let lastErr;
+  for (let attempt = 0; attempt < 8; attempt++) {
+    try {
+      fs.writeFileSync(file, body, 'utf8');
+      return file;
+    } catch (err) {
+      lastErr = err;
+      const code = err && err.code;
+      if (code !== 'UNKNOWN' && code !== 'EBUSY' && code !== 'EPERM') throw err;
+      const waitMs = 150 * (attempt + 1);
+      Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, waitMs);
+    }
+  }
+  throw lastErr;
 }
 
 export function packPath(cityId) {
@@ -251,4 +300,55 @@ export function triggerForSpot(pack, spot) {
 export function generalInfoFor(pack, spot) {
   const t = triggerForSpot(pack, spot);
   return String(spot.general_info || t?.general_info || '').trim();
+}
+
+/** Nur echte Stadt-Packs, keine Reports (`prisdorf.gaps.json`). */
+export function listCityPackIds() {
+  const indexPath = path.join(STAEDTE_DIR, 'index.json');
+  try {
+    const index = JSON.parse(fs.readFileSync(indexPath, 'utf8'));
+    const ids = (index.available_cities || [])
+      .map((c) => c.id)
+      .filter(Boolean);
+    if (ids.length) return ids;
+  } catch {
+    /* fall through */
+  }
+  return fs
+    .readdirSync(STAEDTE_DIR)
+    .filter((f) => /^[a-z0-9_-]+\.json$/i.test(f) && f !== 'index.json')
+    .filter((f) => !f.slice(0, -'.json'.length).includes('.'))
+    .map((f) => f.replace(/\.json$/i, ''));
+}
+
+export function packCoverageBbox(pack, padM = 220) {
+  const c = pack._coverage;
+  if (
+    c &&
+    Number.isFinite(c.latMin) &&
+    Number.isFinite(c.latMax) &&
+    Number.isFinite(c.lngMin) &&
+    Number.isFinite(c.lngMax)
+  ) {
+    const midLat = (c.latMin + c.latMax) / 2;
+    const padLat = padM / 111_320;
+    const padLng = padM / (111_320 * Math.cos((midLat * Math.PI) / 180));
+    return {
+      south: c.latMin - padLat,
+      west: c.lngMin - padLng,
+      north: c.latMax + padLat,
+      east: c.lngMax + padLng,
+    };
+  }
+  const lat = Number(pack.lat);
+  const lng = Number(pack.lng);
+  const r = 2800;
+  const dLat = r / 111_320;
+  const dLng = r / (111_320 * Math.cos((lat * Math.PI) / 180));
+  return {
+    south: lat - dLat,
+    west: lng - dLng,
+    north: lat + dLat,
+    east: lng + dLng,
+  };
 }

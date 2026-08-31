@@ -1,0 +1,121 @@
+=== line 264 key=Wangerooge ===
+Tour-Handoff blockieren. Kein garantiertes „ich führe dich jetzt durch alle ungesehenen POIs“.
+
+### Wangerooge: Fähre vs. Flug, Preis, Ablauf
+
+**Teilweise, getrennt.** Inselflieger/Flug **und** Fähre-Tickets sind da — **kein** einheitlicher „Fähre vs. Flug im Vergleich“-Flow.
+
+### Mehrere Wissensfragen in **einem** Satz
+
+**Teilweise.** Einzeln gut; drei Fakten auf einmal ohne klare Aufteilung → Qualität schwankender.
+
+---
+
+## Eher nicht (oder nur generisch)
+
+| Frage | Stand |
+|---|---|
+| **„Steak von spezieller Kuh — welche Kuh?“** | Kein Breed/Provenance-Agent → generische Gastro-Recherche, wenn überhaupt. |
+| **„Restaurant, wo Essen auf Zügen geliefert wird“** | Kein spezieller Matcher (Speisewagen/Waggon-Lieferung). |
+| **Tickets/Flüge/Hotels „buchen“** | Deep-Links + Partner-URLs, **kein** nativer Checkout in der App. |
+| **„Wie heißt das Restaurant genau + wie teuer“** (sehr nischig) | Call 3 kann nachziehen, wenn URL/Preis irgendwo belegt ist — sonst ehrlich dünn. |
+
+---
+
+## Deine Kernfrage in einem Satz
+
+> „Läuft das alles reibungslos?“
+
+**Nein, noch nicht alles auf dem Level deiner Beispiele.**  
+**Ja** für: Navigation, Flug-Leave-by, Taxi-Links, einfache Hotels, Gastro-Pitch, Einzelfakten, Tap-Chips, Pipeline-Latenz.  
+**Teilweise** für: Compound-Tagespläne, Hotel-Filter-Wünsche, ungesehene Orte + Tour, Insel-Mobilität.  
+**Nein/schwach** für: Nischen-Gastro (Kuhrasse, Zug-Lieferung), echtes Buchen, Ferry-vs-Flight-Vergleich, „jeder Punkt im Kalender + geführter Rund
+
+=== line 269 key=Sprint 4 ===
+ve/Massage Hard-Match + Call-3 Preise
+Sprint 3 (Ort/Tour):  „Nicht gesehen“ → Auto-Tour + Nav-Kette
+Sprint 4 (Mobilität):  Wangerooge-Vergleich + Flug→Taxi-Kette + Multi-Stop-Nav cold
+```
+
+Parallel je Sprint: **Live-Replay-Cases** für deine exakten Sätze (`liveReplay.cases.ts` + `wiringBattery`).
+
+---
+
+## Bottom line
+
+| Bereich | Ohne weitere Arbeit | Nach P0–P1 |
+|---------|---------------------|------------|
+| Nav einzeln | ✅ | ✅ |
+| Flug Leave-by | ✅ | ✅ |
+| Taxi-Link | ✅ | ✅✅ (Kette) |
+| Hamburg-Monolog | 🟡 Speech | 🟢 Plan + Führung |
+| Hotel Wellness-Paket | 🟡 Pool/Sauna | 🟢 + AI/Massage |
+| Ungesehene Orte + Tour | 🟡 | 🟢 |
+| Wangerooge Fähre/Flug | 🟡 getrennt | 🟢 Vergleich |
+| Kuhrasse / Zug-Essen | 🔴 | 🟡 mit Recherche |
+
+**Die Pipeline allein reicht nicht** — als Nächstes lohnt sich **Sprint 1 (Compound → echter Plan + geführte Stopps)**. Das deckt den größten Teil deiner Hamburg-Szenarien ab.
+
+Soll ich mit Sprint 1 direkt anfangen?
+
+[REDACTED]
+
+=== line 311 key=Wangerooge ===
+| Hotel All-inclusive / Massage / Pool hard-match |
+| **3** | Unseen Places → Auto-Tour |
+| **4** | Wangerooge Fähre vs. Flug + Flug→Taxi-Kette |
+
+Soll ich mit **Sprint 2** (Hotel) oder zuerst **Phase 2** (Plan-Slots aus Fanout-Ergebnissen anreichern) weitermachen?
+
+[REDACTED]
+
+=== line 329 key=Wangerooge ===
+/ Pool hard-match
+- Nische Gastro (Rinderrasse, Zugrestaurant)
+- Unseen Places → Auto-Guided-Tour
+- Wangerooge Fähre vs. Flug Vergleich
+- In-App Ticket-/Hotel-Buchung (nur Deep Links)
+- Compound-Plan: kein vollautomatischer Step-by-Step-Loop (Wünsche im Kalender antippen)
+
+**Fazit:** Technisch und für Sprint 1 ist alles drin und getestet. Die komplexen Real-World-Szenarien aus der Roadmap brauchen noch Sprint 2–4 — soll ich mit **Hotel hard-match** oder **Auto-Tour** weitermachen?
+
+[REDACTED]
+
+=== line 345 key=Wangerooge ===
+ierten Gates für:
+- Hotel All-inclusive / Massage hard-match
+- Rinderrasse / Zugrestaurant-Gastro
+- Wangerooge Fähre vs. Flug
+- Unseen Places → Auto-Tour
+- Compound Step-by-Step-Loop
+
+### 5. CI vs. lokal
+GitHub `regression-gate.yml` läuft nur `test:regression-gate` (~7 Suites). **Nicht** in CI:
+- 152 Smokes, Lübeck 400, Pitch/Tour-Gate, Feld-Preflight, Live-Quality
+
+---
+
+## Empfohlene nächste Schritte (priorisiert)
+
+1. **APK neu bauen** → `test:luebeck-feld-preflight` wieder grün
+2. **Gerät:** Hamburg-Monolog + Flug-Chips + einfache Nav (3 Checks aus vorheriger Session)
+3. **Test-Lücke schließen:** Hamburg-Compound als `device_must` in `scenarios.v1.json` + optional E2E-Smoke für `ingestCompoundDayPlan` mit Mock-Fanout
+4. **Kino-Contract:** `showtimes_future` als Pflicht-Fakt → Score von 0.75 auf 1.0
+
+Soll ich als Nächstes **(A)** APK-Build anstoßen, **(B)** Hamburg-Compound ins Live-Quality-Playbook + Szenario packen, oder **(C)** Kino-Contract härten?
+
+[REDACTED]
+
+=== line 437 key=Sprint 4 ===
+icht gemacht)
+| Thema | Status |
+|--------|--------|
+| Sprint 3 — Unseen Places → Auto-Tour | ❌ |
+| Sprint 4 — Wangerooge Fähre vs. Flug + Flug→Taxi | ❌ |
+| Partner-Links stärker in Call-2 Help-First | ❌ (nur besprochen) |
+| Niche-Gastro (Rinderrasse, Zugrestaurant) | ❌ |
+| Compound Step-by-Step-Loop | ❌ |
+| Frische APK + Geräte-Playbook manuell | ⚠️ Warnung / manuell |
+
+**Fazit:** Pipeline + Sprint 1/2 + Phase 2 sind durch. Die nächsten großen Produktlücken sind Sprint 3/4 (und optional Partner in Call-2).
+

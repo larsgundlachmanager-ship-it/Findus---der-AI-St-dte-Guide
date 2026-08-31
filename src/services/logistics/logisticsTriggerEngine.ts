@@ -135,6 +135,21 @@ export async function tickLogisticsTriggerEngine(opts?: {
     console.warn('[logistics] guardian tick failed', err);
   }
 
+  // Live-Abfahrten pollen (Verspätung / Ausfall / Gleis)
+  try {
+    const { pollLiveDeparturesForWatches } = await import('./liveDeparturePoll');
+    await pollLiveDeparturesForWatches({ nowMs: now });
+  } catch (err) {
+    console.warn('[logistics] live departure poll failed', err);
+  }
+
+  try {
+    const { tickFlightWatch } = await import('../flights/flightWatchService');
+    await tickFlightWatch(now);
+  } catch (err) {
+    console.warn('[logistics] flight watch failed', err);
+  }
+
   let fired = 0;
   const liveStore = useLogisticsTriggerStore.getState();
 
@@ -231,6 +246,10 @@ export function registerDepartureWatch(input: {
   scheduleOsPush?: boolean;
   warnLeadMin?: number;
   planPriority?: number | null;
+  deadlineSoftness?: 'strict' | 'forgiving' | null;
+  stopId?: string | null;
+  directionHint?: string | null;
+  platform?: string | null;
 }): { leaveByMs: number } {
   const result = useLogisticsTriggerStore
     .getState()
@@ -286,11 +305,24 @@ export function registerTimeReminder(input: {
   eventId?: string;
 }): void {
   useLogisticsTriggerStore.getState().upsertTimeReminder(input);
+  const id = `task:${input.eventId ?? input.title}:${input.fireAtMs}`;
+  void import('../notifications/taskReminderNotifications')
+    .then(({ scheduleTaskReminderAt }) =>
+      scheduleTaskReminderAt({
+        id,
+        fireAtMs: input.fireAtMs,
+        task: input.title,
+        userText: input.detail ?? input.title,
+      }),
+    )
+    .catch(() => {
+      /* notifications optional in tests */
+    });
 }
 
 /**
- * Wecker-Rhythmus: Mikro-Checks → 35-Min-Vorwarnung → Wecker-Moment.
- * Native Alarm feuert hard; hier die progressive Logik drumherum.
+ * Wecker-Rhythmus: Mikro-Checks (stumm) — kein Vorwarn-Speak.
+ * Native Alarm feuert hard; hier nur progressive ÖPNV-Logik drumherum.
  */
 export function registerWakeRhythm(input: {
   wakeAtMs: number;

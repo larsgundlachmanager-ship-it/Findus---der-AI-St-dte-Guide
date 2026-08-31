@@ -1,6 +1,6 @@
 /**
  * Persistenter Cartesia-Cost-Tracker (Zeichen / € pro Kalendertag).
- * Rate: 0,009 € / 1.000 Zeichen.
+ * Rate: CARTESIA_EUR_PER_1K_CHARS (Pro-Overage SSOT).
  */
 
 import * as FileSystem from 'expo-file-system';

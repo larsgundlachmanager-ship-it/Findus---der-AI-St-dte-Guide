@@ -4,5 +4,3 @@
  */
 
 export { runConciergeTurn as runModule2Pipeline } from '../router/runConciergeTurn';
-/** @deprecated Alias — gleicher Manager-Pfad */
-export { runConciergeTurn as runRebootPipeline } from '../router/runConciergeTurn';

@@ -1,0 +1,2446 @@
+{
+  "generated_at": "2026-08-28T06:07:53.383Z",
+  "summary": {
+    "city_id": "rheinsberg",
+    "checked": 81,
+    "ok": 21,
+    "check": 24,
+    "bad": 36,
+    "errors": 0,
+    "max_delta_m": 180,
+    "city_halo_m": 12000,
+    "story_only": true
+  },
+  "rows": [
+    {
+      "id": "rheinsberg_gartenbau_hofladen_wimmer",
+      "name": "Gartenbau + Hofladen Wimmer",
+      "category": "markt",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.11009801428571,
+        "lng": 12.893760814285713
+      },
+      "query": "Gartenbau + Hofladen, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.1582121,
+        "lng": 12.7680832,
+        "display_name": "Bio-Hofladen, Am Markt, Rheinsberg, Deutschland",
+        "class": "shop",
+        "type": "greengrocer",
+        "provider": "photon"
+      },
+      "delta_m": 9946,
+      "from_city_m": 1328,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_dorfkirche_kagar",
+      "name": "Dorfkirche Kagar",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.12798666,
+        "lng": 12.80994546
+      },
+      "query": "Dorfkirche Kagar, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.0504992,
+        "lng": 12.8368328,
+        "display_name": "Dorfkirche, Rheinsberger Straße, Rheinsberg, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 8801,
+      "from_city_m": 6707,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "rheinsberg_schlabornbrucke_mauseloch"
+      ]
+    },
+    {
+      "id": "rheinsberg_steg",
+      "name": "Steg",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.10221372142856,
+        "lng": 12.890279610714286
+      },
+      "query": "Steg, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.1804767,
+        "lng": 12.8976357,
+        "display_name": "Service-Steg, Wolfsbruch, Schleuse Wolfsbruch, Kleinzerlang, Rheinsberg, Ostprignitz-Ruppin, Brandenburg, 16831, Deutschland",
+        "class": "man_made",
+        "type": "pier",
+        "importance": 0.00005398413061718192,
+        "osm_type": "way",
+        "osm_id": 148368460,
+        "provider": "nominatim"
+      },
+      "delta_m": 8716,
+      "from_city_m": 644,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_ehemalige_eremitage",
+      "name": "Ehemalige Eremitage",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.099612729411774,
+        "lng": 12.89272985882353
+      },
+      "query": "Ehemalige Eremitage, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.1470283,
+        "lng": 12.9901985,
+        "display_name": "ehemaliges Kernkraftwerk Rheinsberg, Rheinsberg, Deutschland",
+        "class": "landuse",
+        "type": "industrial",
+        "provider": "photon"
+      },
+      "delta_m": 8372,
+      "from_city_m": 346,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "rheinsberg_parasol",
+        "rheinsberg_uferpromenade",
+        "rheinsberg_badesee_sehr_schon"
+      ]
+    },
+    {
+      "id": "rheinsberg_denkmal_joppich",
+      "name": "Denkmal Joppich",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.12771084166667,
+        "lng": 12.986085133333333
+      },
+      "query": "Denkmal Joppich, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.1001691,
+        "lng": 12.8758687,
+        "display_name": "Denkmal für teure Verstorbene, Poetensteig, Rheinsberg, Deutschland",
+        "class": "building",
+        "type": "yes",
+        "provider": "photon"
+      },
+      "delta_m": 7968,
+      "from_city_m": 6754,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_fussgangerbrucke_marina",
+      "name": "Fußgängerbrücke Marina",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.11636338000001,
+        "lng": 12.886575259999997
+      },
+      "query": "Fußgängerbrücke Marina, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.1806169,
+        "lng": 12.8975251,
+        "display_name": "Tankstelle Marina Wolfsbruch, Rheinsberg, Deutschland",
+        "class": "waterway",
+        "type": "fuel",
+        "provider": "photon"
+      },
+      "delta_m": 7182,
+      "from_city_m": 2129,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_parkplatz_an_der_rhin_passage",
+      "name": "Parkplatz an der Rhin Passage",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.11562927948718,
+        "lng": 12.889659274358975
+      },
+      "query": "Parkplatz an der Rhin Passage, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.179881,
+        "lng": 12.9005685,
+        "display_name": "Parkplatz 3, Wolfsbruch, Rheinsberg, Deutschland",
+        "class": "amenity",
+        "type": "parking",
+        "provider": "photon"
+      },
+      "delta_m": 7181,
+      "from_city_m": 1989,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "rheinsberg_badestelle",
+        "rheinsberg_schlossgarten_rheinsberg_sphinxtreppe",
+        "rheinsberg_wittwesee",
+        "rheinsberg_ruppiner_wald_und_seengebiet",
+        "rheinsberg_rheinsberger_carneval_club_e_v",
+        "rheinsberg_bergertours_kanutouristik",
+        "rheinsberg_hausboot_rheinsberg_flossvermietung_mirko_fost",
+        "rheinsberg_precise_resort_hafendorf_rheinsberg",
+        "rheinsberg_sunday_resort_hafendorf_rheinsberg_hotel"
+      ]
+    },
+    {
+      "id": "rheinsberg_neuapostolische_kirche_rheinsberg",
+      "name": "Neuapostolische Kirche Rheinsberg",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.09907997142857,
+        "lng": 12.895252900000001
+      },
+      "query": "Neuapostolische Kirche Rheinsberg, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.1280021,
+        "lng": 12.8099477,
+        "display_name": "Kirche Kagar, Dorfstraße, Rheinsberg, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 6539,
+      "from_city_m": 169,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_schlabornbrucke_mauseloch",
+      "name": "Schlabornbrücke (Mauseloch)",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.12798666,
+        "lng": 12.80994546
+      },
+      "query": "Schlabornbrücke, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.0983176,
+        "lng": 12.8910116,
+        "display_name": "Rheinsberg, Ostprignitz-Ruppin, Deutschland",
+        "class": "place",
+        "type": "town",
+        "provider": "photon"
+      },
+      "delta_m": 6337,
+      "from_city_m": 6707,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "rheinsberg_dorfkirche_kagar"
+      ]
+    },
+    {
+      "id": "rheinsberg_naturpark_stechlin_ruppiner_land",
+      "name": "Naturpark Stechlin-Ruppiner Land",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.101157888888885,
+        "lng": 12.892593433333333
+      },
+      "query": "Naturpark Stechlin-Ruppiner Land, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.1394105,
+        "lng": 12.9331092,
+        "display_name": "Naturpark Stechlin-Ruppiner Land, Feldgriebener Weg, Wittwien, Rheinsberg, Ostprignitz-Ruppin, Brandenburg, 16831, Deutschland",
+        "class": "information",
+        "type": "board",
+        "importance": 0.00005398413061718192,
+        "osm_type": "node",
+        "osm_id": 8200061391,
+        "provider": "nominatim"
+      },
+      "delta_m": 5040,
+      "from_city_m": 450,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_bergertours_kanutouristik",
+      "name": "Bergertours Kanutouristik",
+      "category": "tour",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.115627022222235,
+        "lng": 12.889664819444445
+      },
+      "query": "Bergertours Kanutouristik, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.0818251,
+        "lng": 12.9043211,
+        "display_name": "BergerTours Kanutouristik, 2, Am Hellsee, Untermühle, Rheinsberg, Ostprignitz-Ruppin, Brandenburg, 16831, Deutschland",
+        "class": "amenity",
+        "type": "boat_rental",
+        "importance": 0.00005398413061718192,
+        "osm_type": "node",
+        "osm_id": 1723850457,
+        "provider": "nominatim"
+      },
+      "delta_m": 3884,
+      "from_city_m": 1989,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "rheinsberg_parkplatz_an_der_rhin_passage",
+        "rheinsberg_badestelle",
+        "rheinsberg_schlossgarten_rheinsberg_sphinxtreppe",
+        "rheinsberg_wittwesee",
+        "rheinsberg_ruppiner_wald_und_seengebiet",
+        "rheinsberg_rheinsberger_carneval_club_e_v",
+        "rheinsberg_hausboot_rheinsberg_flossvermietung_mirko_fost",
+        "rheinsberg_precise_resort_hafendorf_rheinsberg",
+        "rheinsberg_sunday_resort_hafendorf_rheinsberg_hotel"
+      ]
+    },
+    {
+      "id": "rheinsberg_badestelle",
+      "name": "Badestelle",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.115627022222235,
+        "lng": 12.889664819444445
+      },
+      "query": "Badestelle, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.1346125,
+        "lng": 12.9319344,
+        "display_name": "Badestelle, Beerenbusch, Rheinsberg, Ostprignitz-Ruppin, Brandenburg, Deutschland",
+        "class": "natural",
+        "type": "beach",
+        "importance": 0.10672065079728386,
+        "osm_type": "way",
+        "osm_id": 119486673,
+        "provider": "nominatim"
+      },
+      "delta_m": 3523,
+      "from_city_m": 1989,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "rheinsberg_parkplatz_an_der_rhin_passage",
+        "rheinsberg_schlossgarten_rheinsberg_sphinxtreppe",
+        "rheinsberg_wittwesee",
+        "rheinsberg_ruppiner_wald_und_seengebiet",
+        "rheinsberg_rheinsberger_carneval_club_e_v",
+        "rheinsberg_bergertours_kanutouristik",
+        "rheinsberg_hausboot_rheinsberg_flossvermietung_mirko_fost",
+        "rheinsberg_precise_resort_hafendorf_rheinsberg",
+        "rheinsberg_sunday_resort_hafendorf_rheinsberg_hotel"
+      ]
+    },
+    {
+      "id": "rheinsberg_prinzenstadt_rheinsberg",
+      "name": "Prinzenstadt Rheinsberg",
+      "category": "altstadt",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.09671996000001,
+        "lng": 12.896723210000001
+      },
+      "query": "Prinzenstadt Rheinsberg, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.1241462,
+        "lng": 12.8742578,
+        "display_name": "Rheinsberger See, Rheinsberg, Deutschland",
+        "class": "water",
+        "type": "lake",
+        "provider": "photon"
+      },
+      "delta_m": 3398,
+      "from_city_m": 190,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_schlossgarten_rheinsberg_gartenportal",
+      "name": "Schlossgarten Rheinsberg (Gartenportal)",
+      "category": "natur",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.095273840000004,
+        "lng": 12.888725159999998
+      },
+      "query": "Schlossgarten Rheinsberg, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.1241462,
+        "lng": 12.8742578,
+        "display_name": "Rheinsberger See, Rheinsberg, Deutschland",
+        "class": "water",
+        "type": "lake",
+        "provider": "photon"
+      },
+      "delta_m": 3353,
+      "from_city_m": 679,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_schlossgarten_rheinsberg_salon",
+      "name": "Schlossgarten Rheinsberg (Salon)",
+      "category": "freizeit",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.09649506666667,
+        "lng": 12.887156300000001
+      },
+      "query": "Schlossgarten Rheinsberg, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.1241462,
+        "lng": 12.8742578,
+        "display_name": "Rheinsberger See, Rheinsberg, Deutschland",
+        "class": "water",
+        "type": "lake",
+        "provider": "photon"
+      },
+      "delta_m": 3193,
+      "from_city_m": 721,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_wittwesee",
+      "name": "Wittwesee",
+      "category": "wanderung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.115627022222235,
+        "lng": 12.889664819444445
+      },
+      "query": "Wittwesee, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.124432,
+        "lng": 12.9344192,
+        "display_name": "Wittwesee, Rheinsberg, Ostprignitz-Ruppin, Brandenburg, Deutschland",
+        "class": "water",
+        "type": "lake",
+        "importance": 0.13338731746395055,
+        "osm_type": "way",
+        "osm_id": 14351167,
+        "provider": "nominatim"
+      },
+      "delta_m": 3143,
+      "from_city_m": 1989,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "rheinsberg_parkplatz_an_der_rhin_passage",
+        "rheinsberg_badestelle",
+        "rheinsberg_schlossgarten_rheinsberg_sphinxtreppe",
+        "rheinsberg_ruppiner_wald_und_seengebiet",
+        "rheinsberg_rheinsberger_carneval_club_e_v",
+        "rheinsberg_bergertours_kanutouristik",
+        "rheinsberg_hausboot_rheinsberg_flossvermietung_mirko_fost",
+        "rheinsberg_precise_resort_hafendorf_rheinsberg",
+        "rheinsberg_sunday_resort_hafendorf_rheinsberg_hotel"
+      ]
+    },
+    {
+      "id": "rheinsberg_rheinsberg_maisonette_mit_blick_auf_schloss_park_see_apartment_split_",
+      "name": "Rheinsberg Maisonette mit Blick auf Schloss-Park-See - Apartment - Split Level",
+      "category": "natur",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.0980633,
+        "lng": 12.891958449999999
+      },
+      "query": "Rheinsberg Maisonette, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.1241462,
+        "lng": 12.8742578,
+        "display_name": "Rheinsberger See, Rheinsberg, Deutschland",
+        "class": "water",
+        "type": "lake",
+        "provider": "photon"
+      },
+      "delta_m": 3132,
+      "from_city_m": 371,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_keramikmuseum_rheinsberg",
+      "name": "Keramikmuseum Rheinsberg",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.09941528,
+        "lng": 12.893060219999999
+      },
+      "query": "Keramikmuseum Rheinsberg, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.1241462,
+        "lng": 12.8742578,
+        "display_name": "Rheinsberger See, Rheinsberg, Deutschland",
+        "class": "water",
+        "type": "lake",
+        "provider": "photon"
+      },
+      "delta_m": 3023,
+      "from_city_m": 318,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_schlossgarten_rheinsberg_feldsteingrotte",
+      "name": "Schlossgarten Rheinsberg (Feldsteingrotte)",
+      "category": "natur",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.09787796666668,
+        "lng": 12.885156044444443
+      },
+      "query": "Schlossgarten Rheinsberg, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.1241462,
+        "lng": 12.8742578,
+        "display_name": "Rheinsberger See, Rheinsberg, Deutschland",
+        "class": "water",
+        "type": "lake",
+        "provider": "photon"
+      },
+      "delta_m": 3010,
+      "from_city_m": 825,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "rheinsberg_aussichtspunkt_schloss_rheinsberg"
+      ]
+    },
+    {
+      "id": "rheinsberg_stadtverwaltung_rheinsberg",
+      "name": "Stadtverwaltung Rheinsberg",
+      "category": "verwaltung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.100373850000004,
+        "lng": 12.88993038
+      },
+      "query": "Stadtverwaltung Rheinsberg, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.1241462,
+        "lng": 12.8742578,
+        "display_name": "Rheinsberger See, Rheinsberg, Deutschland",
+        "class": "water",
+        "type": "lake",
+        "provider": "photon"
+      },
+      "delta_m": 2843,
+      "from_city_m": 552,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_badebrunnen_rheinsberg_gunter_kaden_2001",
+      "name": "Badebrunnen, Rheinsberg - Günter Kaden (2001)",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.10065588571428,
+        "lng": 12.890937500000003
+      },
+      "query": "Badebrunnen, Rheinsberg, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.1241462,
+        "lng": 12.8742578,
+        "display_name": "Rheinsberger See, Rheinsberg, Deutschland",
+        "class": "water",
+        "type": "lake",
+        "provider": "photon"
+      },
+      "delta_m": 2839,
+      "from_city_m": 506,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "rheinsberg_schlosspark_rheinsberg"
+      ]
+    },
+    {
+      "id": "rheinsberg_rheinsberger_obelisk",
+      "name": "Rheinsberger Obelisk",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.09914705999999,
+        "lng": 12.88045538
+      },
+      "query": "Rheinsberger Obelisk, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.1241462,
+        "lng": 12.8742578,
+        "display_name": "Rheinsberger See, Rheinsberg, Deutschland",
+        "class": "water",
+        "type": "lake",
+        "provider": "photon"
+      },
+      "delta_m": 2810,
+      "from_city_m": 1140,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_fussballplatz",
+      "name": "Fußballplatz",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.11420136,
+        "lng": 12.889487339999999
+      },
+      "query": "Fußballplatz, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.0983176,
+        "lng": 12.8910116,
+        "display_name": "Rheinsberg, Ostprignitz-Ruppin, Deutschland",
+        "class": "place",
+        "type": "town",
+        "provider": "photon"
+      },
+      "delta_m": 1769,
+      "from_city_m": 1840,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_schlossgarten_rheinsberg_sphinxtreppe",
+      "name": "Schlossgarten Rheinsberg (Sphinxtreppe)",
+      "category": "natur",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.115627022222235,
+        "lng": 12.889664819444445
+      },
+      "query": "Schlossgarten Rheinsberg, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.1241462,
+        "lng": 12.8742578,
+        "display_name": "Rheinsberger See, Rheinsberg, Deutschland",
+        "class": "water",
+        "type": "lake",
+        "provider": "photon"
+      },
+      "delta_m": 1398,
+      "from_city_m": 1989,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "rheinsberg_parkplatz_an_der_rhin_passage",
+        "rheinsberg_badestelle",
+        "rheinsberg_wittwesee",
+        "rheinsberg_ruppiner_wald_und_seengebiet",
+        "rheinsberg_rheinsberger_carneval_club_e_v",
+        "rheinsberg_bergertours_kanutouristik",
+        "rheinsberg_hausboot_rheinsberg_flossvermietung_mirko_fost",
+        "rheinsberg_precise_resort_hafendorf_rheinsberg",
+        "rheinsberg_sunday_resort_hafendorf_rheinsberg_hotel"
+      ]
+    },
+    {
+      "id": "rheinsberg_hausboot_rheinsberg_flossvermietung_mirko_fost",
+      "name": "Hausboot Rheinsberg - Flossvermietung Mirko Föst",
+      "category": "tour",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.115627022222235,
+        "lng": 12.889664819444445
+      },
+      "query": "Hausboot Rheinsberg, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.1241462,
+        "lng": 12.8742578,
+        "display_name": "Rheinsberger See, Rheinsberg, Deutschland",
+        "class": "water",
+        "type": "lake",
+        "provider": "photon"
+      },
+      "delta_m": 1398,
+      "from_city_m": 1989,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "rheinsberg_parkplatz_an_der_rhin_passage",
+        "rheinsberg_badestelle",
+        "rheinsberg_schlossgarten_rheinsberg_sphinxtreppe",
+        "rheinsberg_wittwesee",
+        "rheinsberg_ruppiner_wald_und_seengebiet",
+        "rheinsberg_rheinsberger_carneval_club_e_v",
+        "rheinsberg_bergertours_kanutouristik",
+        "rheinsberg_precise_resort_hafendorf_rheinsberg",
+        "rheinsberg_sunday_resort_hafendorf_rheinsberg_hotel"
+      ]
+    },
+    {
+      "id": "rheinsberg_badestelle_wittwesee_feldgrieben",
+      "name": "Badestelle Wittwesee Feldgrieben",
+      "category": "wanderung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.12419912364863,
+        "lng": 12.940823607432433
+      },
+      "query": "Badestelle Wittwesee Feldgrieben, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.1325229,
+        "lng": 12.940139,
+        "display_name": "der Wittwesee, Feldgriebener Weg, Rheinsberg, Deutschland",
+        "class": "information",
+        "type": "board",
+        "provider": "photon"
+      },
+      "delta_m": 927,
+      "from_city_m": 4076,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_uferpromenade",
+      "name": "Uferpromenade",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.099612729411774,
+        "lng": 12.89272985882353
+      },
+      "query": "Uferpromenade, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.1045615,
+        "lng": 12.891649,
+        "display_name": "Uferpromenade, Rheinsberg, Ostprignitz-Ruppin, Brandenburg, 16831, Deutschland",
+        "class": "highway",
+        "type": "footway",
+        "importance": 0.04005398413061722,
+        "osm_type": "way",
+        "osm_id": 1525221827,
+        "provider": "nominatim"
+      },
+      "delta_m": 555,
+      "from_city_m": 346,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "rheinsberg_parasol",
+        "rheinsberg_ehemalige_eremitage",
+        "rheinsberg_badesee_sehr_schon"
+      ]
+    },
+    {
+      "id": "rheinsberg_schlosspark_rheinsberg",
+      "name": "Schlosspark Rheinsberg",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.10065588571428,
+        "lng": 12.890937500000003
+      },
+      "query": "Schlosspark Rheinsberg, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.0966879,
+        "lng": 12.8876907,
+        "display_name": "Schloßpark, Rheinsberg, Ostprignitz-Ruppin, Brandenburg, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "importance": 0.08005398413061719,
+        "osm_type": "way",
+        "osm_id": 132902908,
+        "provider": "nominatim"
+      },
+      "delta_m": 492,
+      "from_city_m": 506,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "rheinsberg_badebrunnen_rheinsberg_gunter_kaden_2001"
+      ]
+    },
+    {
+      "id": "rheinsberg_haus_bikowsee",
+      "name": "Haus Bikowsee",
+      "category": "radweg",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.14883409464288,
+        "lng": 12.891283947619044
+      },
+      "query": "Haus Bikowsee, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.1462293,
+        "lng": 12.8855128,
+        "display_name": "Haus Bikowsee, 1, An der Junkerheide, Zechlinerhütte, Rheinsberg, Ostprignitz-Ruppin, Brandenburg, 16831, Deutschland",
+        "class": "tourism",
+        "type": "guest_house",
+        "importance": 0.00005398413061718192,
+        "osm_type": "way",
+        "osm_id": 364646893,
+        "provider": "nominatim"
+      },
+      "delta_m": 482,
+      "from_city_m": 5627,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_musikbrennerei_konzerte_ausstellungen_kabarett_rheinsberg",
+      "name": "Musikbrennerei - Konzerte/ Ausstellungen/ Kabarett Rheinsberg",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.10231541,
+        "lng": 12.89228215
+      },
+      "query": "Musikbrennerei, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.0983176,
+        "lng": 12.8910116,
+        "display_name": "Rheinsberg, Ostprignitz-Ruppin, Deutschland",
+        "class": "place",
+        "type": "town",
+        "provider": "photon"
+      },
+      "delta_m": 453,
+      "from_city_m": 560,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_yachthafen_und_bootsverleih_rheinsberg",
+      "name": "Yachthafen und Bootsverleih Rheinsberg",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.10183260909091,
+        "lng": 12.889932063636365
+      },
+      "query": "Yachthafen, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.0983176,
+        "lng": 12.8910116,
+        "display_name": "Rheinsberg, Ostprignitz-Ruppin, Deutschland",
+        "class": "place",
+        "type": "town",
+        "provider": "photon"
+      },
+      "delta_m": 397,
+      "from_city_m": 635,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_rheinsberger_see",
+      "name": "Rheinsberger See",
+      "category": "wanderung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.12111631279464,
+        "lng": 12.875984183838387
+      },
+      "query": "Rheinsberger See, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.1241462,
+        "lng": 12.8742578,
+        "display_name": "Rheinsberger See, Rheinsberg, Ostprignitz-Ruppin, Brandenburg, Deutschland",
+        "class": "water",
+        "type": "lake",
+        "importance": 0.21337448257116948,
+        "osm_type": "relation",
+        "osm_id": 1785207,
+        "provider": "nominatim"
+      },
+      "delta_m": 356,
+      "from_city_m": 2908,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_eiskonigin",
+      "name": "Eiskönigin",
+      "category": "souvenir",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.09794972857143,
+        "lng": 12.896221871428569
+      },
+      "query": "Eiskönigin, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.0983176,
+        "lng": 12.8910116,
+        "display_name": "Rheinsberg, Ostprignitz-Ruppin, Deutschland",
+        "class": "place",
+        "type": "town",
+        "provider": "photon"
+      },
+      "delta_m": 350,
+      "from_city_m": 97,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_dorfkirche_zechlinerhutte",
+      "name": "Dorfkirche Zechlinerhütte",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.15701801111111,
+        "lng": 12.877226466666666
+      },
+      "query": "Dorfkirche Zechlinerhütte, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.1549842,
+        "lng": 12.873947,
+        "display_name": "Zechlinerhütte, Rheinsberg, Deutschland",
+        "class": "place",
+        "type": "village",
+        "provider": "photon"
+      },
+      "delta_m": 315,
+      "from_city_m": 6660,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_reederei_halbeck",
+      "name": "Reederei Halbeck",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.09979176666667,
+        "lng": 12.890344666666664
+      },
+      "query": "Reederei Halbeck, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.1025543,
+        "lng": 12.8894662,
+        "display_name": "Reederei Halbeck, Uferpromenade, Rheinsberg, Ostprignitz-Ruppin, Brandenburg, 16831, Deutschland",
+        "class": "amenity",
+        "type": "boat_rental",
+        "importance": 0.00005398413061718192,
+        "osm_type": "node",
+        "osm_id": 9061017181,
+        "provider": "nominatim"
+      },
+      "delta_m": 313,
+      "from_city_m": 502,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_parasol",
+      "name": "Parasol",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.09962097368422,
+        "lng": 12.892743626315792
+      },
+      "query": "Parasol, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.0983176,
+        "lng": 12.8910116,
+        "display_name": "Rheinsberg, Ostprignitz-Ruppin, Deutschland",
+        "class": "place",
+        "type": "town",
+        "provider": "photon"
+      },
+      "delta_m": 185,
+      "from_city_m": 346,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "rheinsberg_ehemalige_eremitage",
+        "rheinsberg_uferpromenade",
+        "rheinsberg_badesee_sehr_schon"
+      ]
+    },
+    {
+      "id": "rheinsberg_dit_atelier_kunsterbunt",
+      "name": "dit Atelier KUNSTerBUNT",
+      "category": "souvenir",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.09683768,
+        "lng": 12.893710200000001
+      },
+      "query": "dit Atelier KUNSTerBUNT, Rheinsberg",
+      "osm": {
+        "lat": 47.2116785,
+        "lng": 7.788911,
+        "display_name": "akubu Atelier Kunterbunt, Marktgasse, Langenthal, Schweiz",
+        "class": "shop",
+        "type": "fashion_accessories",
+        "provider": "photon"
+      },
+      "delta_m": 748226,
+      "from_city_m": 304,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_boat_city_hafendorf_rheinsberg_gmbh",
+      "name": "Boat-City Hafendorf Rheinsberg GmbH",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.115697780000005,
+        "lng": 12.88613036
+      },
+      "query": "Boat-City Hafendorf Rheinsberg GmbH, Rheinsberg, Germany",
+      "osm": {
+        "lat": 50.6145757,
+        "lng": 7.0644164,
+        "display_name": "Autohaus Wolter GmbH Citroen, Töpferstraße, Villiprott, Deutschland",
+        "class": "shop",
+        "type": "car",
+        "provider": "photon"
+      },
+      "delta_m": 486732,
+      "from_city_m": 2071,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_anlegestelle_fahrgastschifffahrt",
+      "name": "Anlegestelle Fahrgastschifffahrt",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.10050258,
+        "lng": 12.889206940000003
+      },
+      "query": "Anlegestelle Fahrgastschifffahrt, Rheinsberg, Germany",
+      "osm": {
+        "lat": 50.5460628,
+        "lng": 12.18062,
+        "display_name": "Anlegestelle Fahrgastschifffahrt, Hauptstraße, Jocketa, Deutschland",
+        "class": "amenity",
+        "type": "ferry_terminal",
+        "provider": "photon"
+      },
+      "delta_m": 288181,
+      "from_city_m": 602,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_vr_action",
+      "name": "VR-Action",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.096609,
+        "lng": 12.894711733333333
+      },
+      "query": "VR-Action, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.7046938,
+        "lng": 10.0076311,
+        "display_name": "Action Arena & VR Arena, Alter Kirchenweg, Norderstedt, Deutschland",
+        "class": "leisure",
+        "type": "indoor_play",
+        "provider": "photon"
+      },
+      "delta_m": 202977,
+      "from_city_m": 270,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_egeria_grotte",
+      "name": "Egeria-Grotte",
+      "category": "wanderung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.097014836363634,
+        "lng": 12.8817286
+      },
+      "query": "Egeria-Grotte, Rheinsberg, Germany",
+      "osm": {
+        "lat": 51.841705,
+        "lng": 12.4314425,
+        "display_name": "Grotte der Egeria, Zedernweg, Wörlitz, Deutschland",
+        "class": "tourism",
+        "type": "attraction",
+        "provider": "photon"
+      },
+      "delta_m": 142877,
+      "from_city_m": 1063,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_rheinsberger_carneval_club_e_v",
+      "name": "Rheinsberger Carneval Club e.V.",
+      "category": "wanderung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.115627022222235,
+        "lng": 12.889664819444445
+      },
+      "query": "Rheinsberger Carneval Club e.V., Rheinsberg, Germany",
+      "osm": {
+        "lat": 52.8334193,
+        "lng": 13.7575277,
+        "display_name": "Rheinsberger Straße, Eberswalde, Deutschland",
+        "class": "highway",
+        "type": "residential",
+        "provider": "photon"
+      },
+      "delta_m": 66041,
+      "from_city_m": 1989,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city",
+        "duplicate_center"
+      ],
+      "twins": [
+        "rheinsberg_parkplatz_an_der_rhin_passage",
+        "rheinsberg_badestelle",
+        "rheinsberg_schlossgarten_rheinsberg_sphinxtreppe",
+        "rheinsberg_wittwesee",
+        "rheinsberg_ruppiner_wald_und_seengebiet",
+        "rheinsberg_bergertours_kanutouristik",
+        "rheinsberg_hausboot_rheinsberg_flossvermietung_mirko_fost",
+        "rheinsberg_precise_resort_hafendorf_rheinsberg",
+        "rheinsberg_sunday_resort_hafendorf_rheinsberg_hotel"
+      ]
+    },
+    {
+      "id": "rheinsberg_evangelisches_pfarramt",
+      "name": "Evangelisches Pfarramt",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.10001086249999,
+        "lng": 12.893250362500002
+      },
+      "query": "Evangelisches Pfarramt, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.1441665,
+        "lng": 12.3587821,
+        "display_name": "Evangelisches Pfarramt Heiligengrabe, Wittstocker Straße, Heiligengrabe, Deutschland",
+        "class": "office",
+        "type": "parish",
+        "provider": "photon"
+      },
+      "delta_m": 36001,
+      "from_city_m": 337,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_sowjetischer_ehrenfriedhof",
+      "name": "Sowjetischer Ehrenfriedhof",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.10301562000001,
+        "lng": 12.89230756
+      },
+      "query": "Sowjetischer Ehrenfriedhof, Rheinsberg, Germany",
+      "osm": {
+        "lat": 52.9319605,
+        "lng": 12.8138603,
+        "display_name": "Sowjetischer Ehrenfriedhof, Neuruppin, Deutschland",
+        "class": "landuse",
+        "type": "cemetery",
+        "provider": "photon"
+      },
+      "delta_m": 19731,
+      "from_city_m": 622,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_ehem_schlossmauer",
+      "name": "Ehem. Schlossmauer",
+      "category": "natur",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.097498380000005,
+        "lng": 12.89178412
+      },
+      "query": "Ehem. Schlossmauer, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.1086458,
+        "lng": 12.6682965,
+        "display_name": "Kyritz-Ruppiner Heide, Rheinsberg, Deutschland",
+        "class": "military",
+        "type": "danger_area",
+        "provider": "photon"
+      },
+      "delta_m": 14971,
+      "from_city_m": 393,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_ruppiner_wald_und_seengebiet",
+      "name": "Ruppiner Wald- und Seengebiet",
+      "category": "wanderung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.115627022222235,
+        "lng": 12.889664819444445
+      },
+      "query": "Ruppiner Wald-, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.1086458,
+        "lng": 12.6682965,
+        "display_name": "Kyritz-Ruppiner Heide, Rheinsberg, Deutschland",
+        "class": "military",
+        "type": "danger_area",
+        "provider": "photon"
+      },
+      "delta_m": 14796,
+      "from_city_m": 1989,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city",
+        "duplicate_center"
+      ],
+      "twins": [
+        "rheinsberg_parkplatz_an_der_rhin_passage",
+        "rheinsberg_badestelle",
+        "rheinsberg_schlossgarten_rheinsberg_sphinxtreppe",
+        "rheinsberg_wittwesee",
+        "rheinsberg_rheinsberger_carneval_club_e_v",
+        "rheinsberg_bergertours_kanutouristik",
+        "rheinsberg_hausboot_rheinsberg_flossvermietung_mirko_fost",
+        "rheinsberg_precise_resort_hafendorf_rheinsberg",
+        "rheinsberg_sunday_resort_hafendorf_rheinsberg_hotel"
+      ]
+    },
+    {
+      "id": "rheinsberg_aussichtspunkt_schloss_rheinsberg",
+      "name": "Aussichtspunkt Schloss Rheinsberg",
+      "category": "aussicht",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.09787796666668,
+        "lng": 12.885156044444443
+      },
+      "query": "Aussichtspunkt Schloss Rheinsberg, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.0983619,
+        "lng": 12.8899343,
+        "display_name": "Schloss Rheinsberg, Markt, Rheinsberg, Deutschland",
+        "class": "building",
+        "type": "yes",
+        "provider": "photon"
+      },
+      "delta_m": 324,
+      "from_city_m": 825,
+      "status": "CHECK",
+      "flags": [
+        "house_like_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "rheinsberg_schlossgarten_rheinsberg_feldsteingrotte"
+      ]
+    },
+    {
+      "id": "rheinsberg_kriegerdenkmal_heinrichsdorf",
+      "name": "Kriegerdenkmal Heinrichsdorf",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.046442320000004,
+        "lng": 12.9576042
+      },
+      "query": "Kriegerdenkmal Heinrichsdorf, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.0458799,
+        "lng": 12.9553099,
+        "display_name": "Heinrichsdorf, Rheinsberg, Deutschland",
+        "class": "place",
+        "type": "hamlet",
+        "provider": "photon"
+      },
+      "delta_m": 166,
+      "from_city_m": 7033,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_hafendorf_rheinsberg",
+      "name": "Hafendorf Rheinsberg",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.115714128571426,
+        "lng": 12.888265500000001
+      },
+      "query": "Hafendorf Rheinsberg, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.1156195,
+        "lng": 12.8858851,
+        "display_name": "Hafendorf Rheinsberg, Rheinsberg, Ostprignitz-Ruppin, Brandenburg, 16831, Deutschland",
+        "class": "place",
+        "type": "hamlet",
+        "importance": 0.13338731746395055,
+        "osm_type": "node",
+        "osm_id": 293520715,
+        "provider": "nominatim"
+      },
+      "delta_m": 159,
+      "from_city_m": 2025,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_grienericksee",
+      "name": "Grienericksee",
+      "category": "radweg",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.1058168323077,
+        "lng": 12.886365090769239
+      },
+      "query": "Grienericksee, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.1047347,
+        "lng": 12.8870228,
+        "display_name": "Grienericksee, Rheinsberg, Ostprignitz-Ruppin, Brandenburg, Deutschland",
+        "class": "water",
+        "type": "lake",
+        "importance": 0.1679799034751623,
+        "osm_type": "relation",
+        "osm_id": 1781775,
+        "provider": "nominatim"
+      },
+      "delta_m": 128,
+      "from_city_m": 1112,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_kriegerdenkmal_braunsberg",
+      "name": "Kriegerdenkmal Braunsberg",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.05050658888888,
+        "lng": 12.836767799999999
+      },
+      "query": "Kriegerdenkmal Braunsberg, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.0497504,
+        "lng": 12.8374906,
+        "display_name": "Braunsberg, Rheinsberg, Deutschland",
+        "class": "place",
+        "type": "hamlet",
+        "provider": "photon"
+      },
+      "delta_m": 97,
+      "from_city_m": 6692,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_lustgarten_rheinsberg",
+      "name": "Lustgarten Rheinsberg",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.09590134,
+        "lng": 12.88770326
+      },
+      "query": "Lustgarten Rheinsberg, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.0966879,
+        "lng": 12.8876907,
+        "display_name": "Schloßpark, Rheinsberg, Ostprignitz-Ruppin, Brandenburg, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "importance": 0.08005398413061719,
+        "osm_type": "way",
+        "osm_id": 132902908,
+        "provider": "nominatim"
+      },
+      "delta_m": 87,
+      "from_city_m": 709,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_ferienhauser_hafendorf_rheinsberg",
+      "name": "Ferienhäuser Hafendorf Rheinsberg",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.115593860000004,
+        "lng": 12.887120640000001
+      },
+      "query": "Ferienhäuser Hafendorf Rheinsberg, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.1156195,
+        "lng": 12.8858851,
+        "display_name": "Hafendorf Rheinsberg, Rheinsberg, Deutschland",
+        "class": "place",
+        "type": "hamlet",
+        "provider": "photon"
+      },
+      "delta_m": 83,
+      "from_city_m": 2036,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_kasse_schloss",
+      "name": "Kasse Schloss",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.09830533636364,
+        "lng": 12.891045600000002
+      },
+      "query": "Kasse Schloss, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.0983619,
+        "lng": 12.8899343,
+        "display_name": "Schloss Rheinsberg, Markt, Rheinsberg, Deutschland",
+        "class": "building",
+        "type": "yes",
+        "provider": "photon"
+      },
+      "delta_m": 74,
+      "from_city_m": 430,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_badestelle_hafendorf_rheinsberg",
+      "name": "Badestelle Hafendorf Rheinsberg",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.116031221428564,
+        "lng": 12.886081657142856
+      },
+      "query": "Badestelle Hafendorf Rheinsberg, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.1156195,
+        "lng": 12.8858851,
+        "display_name": "Hafendorf Rheinsberg, Rheinsberg, Deutschland",
+        "class": "place",
+        "type": "hamlet",
+        "provider": "photon"
+      },
+      "delta_m": 48,
+      "from_city_m": 2106,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "rheinsberg_osm_transit_420152032"
+      ]
+    },
+    {
+      "id": "rheinsberg_rheinsberg",
+      "name": "Rheinsberg",
+      "category": "bahnhof",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.09306745833333,
+        "lng": 12.90006411666667
+      },
+      "query": "Rheinsberg, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.0927817,
+        "lng": 12.9002055,
+        "display_name": "Rheinsberg (Mark), Damaschkeweg, Rheinsberg, Ostprignitz-Ruppin, Brandenburg, 16831, Deutschland",
+        "class": "railway",
+        "type": "station",
+        "importance": 0.21822785325192331,
+        "osm_type": "node",
+        "osm_id": 3839714723,
+        "provider": "nominatim"
+      },
+      "delta_m": 33,
+      "from_city_m": 614,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "rheinsberg_osm_post_box_466413757"
+      ]
+    },
+    {
+      "id": "rheinsberg_rheinsberg_ddr_geschichte_brennelemente_transporter_kkw_rheinsber",
+      "name": "Rheinsberg DDR-Geschichte Brennelemente-Transporter KKW Rheinsber",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.09263281999999,
+        "lng": 12.89932808
+      },
+      "query": "Rheinsberg DDR-Geschichte Brennelemente-Transporter, Rheinsberg, Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 650,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_pater_wichmann_kapelle",
+      "name": "Pater Wichmann Kapelle",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.101615200000005,
+        "lng": 12.897017683333333
+      },
+      "query": "Pater Wichmann Kapelle, Rheinsberg",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 362,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_badesee_sehr_schon",
+      "name": "Badesee sehr schön",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.099612729411774,
+        "lng": 12.89272985882353
+      },
+      "query": "Badesee sehr schön, Rheinsberg",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 346,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "rheinsberg_parasol",
+        "rheinsberg_ehemalige_eremitage",
+        "rheinsberg_uferpromenade"
+      ]
+    },
+    {
+      "id": "rheinsberg_fitnessclub_bodyline_rheinsberg",
+      "name": "Fitnessclub Bodyline Rheinsberg",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.10323854000001,
+        "lng": 12.89402532
+      },
+      "query": "Fitnessclub Bodyline Rheinsberg, Rheinsberg",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 589,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_pension_hollander_muhle_rheinsberg",
+      "name": "Pension Holländer Mühle Rheinsberg",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.08955032,
+        "lng": 12.89099932
+      },
+      "query": "Pension Holländer Mühle Rheinsberg, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.0893232,
+        "lng": 12.89171,
+        "display_name": "Holländer Mühle, 1, Holländer Mühle, Untermühle, Rheinsberg, Ostprignitz-Ruppin, Brandenburg, 16831, Deutschland",
+        "class": "tourism",
+        "type": "guest_house",
+        "importance": 0.00005398413061718192,
+        "osm_type": "node",
+        "osm_id": 391530557,
+        "provider": "nominatim"
+      },
+      "delta_m": 54,
+      "from_city_m": 1072,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_arboretum",
+      "name": "Arboretum",
+      "category": "wanderung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.10565587999999,
+        "lng": 12.87542618
+      },
+      "query": "Arboretum, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.1057505,
+        "lng": 12.8748196,
+        "display_name": "Arboretum, Linow, Rheinsberg, Ostprignitz-Ruppin, Brandenburg, Deutschland",
+        "class": "landuse",
+        "type": "forest",
+        "importance": 0.08005398413061719,
+        "osm_type": "way",
+        "osm_id": 102694677,
+        "provider": "nominatim"
+      },
+      "delta_m": 42,
+      "from_city_m": 1681,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_rheinsberger_adventure_tours",
+      "name": "Rheinsberger Adventure Tours",
+      "category": "wanderung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.0962320875,
+        "lng": 12.892352537499999
+      },
+      "query": "Rheinsberger Adventure Tours, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.0965204,
+        "lng": 12.8924996,
+        "display_name": "R.A.T. Rheinsberger Adventure Tours, Parkstraße, Rheinsberg, Ostprignitz-Ruppin, Brandenburg, 16831, Deutschland",
+        "class": "amenity",
+        "type": "boat_rental",
+        "importance": 0.00005398413061718192,
+        "osm_type": "node",
+        "osm_id": 820637289,
+        "provider": "nominatim"
+      },
+      "delta_m": 34,
+      "from_city_m": 417,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_seebad_rheinsberg",
+      "name": "Seebad Rheinsberg",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.10923252941177,
+        "lng": 12.89294
+      },
+      "query": "Seebad Rheinsberg, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.1090798,
+        "lng": 12.8925148,
+        "display_name": "Seebad, Reuterpromenade, Hafendorf Rheinsberg, Rheinsberg, Ostprignitz-Ruppin, Brandenburg, 16831, Deutschland",
+        "class": "leisure",
+        "type": "water_park",
+        "importance": 0.00005398413061718192,
+        "osm_type": "node",
+        "osm_id": 391530297,
+        "provider": "nominatim"
+      },
+      "delta_m": 33,
+      "from_city_m": 1246,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_kurt_tucholsky_literaturmuseum",
+      "name": "Kurt Tucholsky Literaturmuseum",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.098503140000005,
+        "lng": 12.88945644
+      },
+      "query": "Kurt Tucholsky Literaturmuseum, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.0985688,
+        "lng": 12.8897635,
+        "display_name": "Kurt-Tucholsky-Literaturmuseum, 1, Mühlenstraße, Rheinsberg, Ostprignitz-Ruppin, Brandenburg, 16831, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.26704010519783294,
+        "osm_type": "node",
+        "osm_id": 4430783654,
+        "provider": "nominatim"
+      },
+      "delta_m": 22,
+      "from_city_m": 536,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_gast_und_logierhaus_am_rheinsberger_see",
+      "name": "Gast- und Logierhaus \"Am Rheinsberger See\"",
+      "category": "wanderung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.11565012999999,
+        "lng": 12.859644190000001
+      },
+      "query": "Gast-, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.1157845,
+        "lng": 12.8594577,
+        "display_name": "Gast-& Logierhaus Am Rheinsberger See, 7, Seestraße, Warenthin, Linow, Rheinsberg, Ostprignitz-Ruppin, Brandenburg, 16831, Deutschland",
+        "class": "amenity",
+        "type": "biergarten",
+        "importance": 0.00005398413061718192,
+        "osm_type": "way",
+        "osm_id": 178233685,
+        "provider": "nominatim"
+      },
+      "delta_m": 19,
+      "from_city_m": 3174,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_schlosstheater_rheinsberg",
+      "name": "Schlosstheater Rheinsberg",
+      "category": "theater",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.09920408000001,
+        "lng": 12.889290679999998
+      },
+      "query": "Schlosstheater Rheinsberg, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.0993351,
+        "lng": 12.8894239,
+        "display_name": "Schlosstheater Rheinsberg, 12, Markt, Rheinsberg, Ostprignitz-Ruppin, Brandenburg, 16831, Deutschland",
+        "class": "amenity",
+        "type": "theatre",
+        "importance": 0.00005398413061718192,
+        "osm_type": "node",
+        "osm_id": 337259943,
+        "provider": "nominatim"
+      },
+      "delta_m": 17,
+      "from_city_m": 555,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_angeln_jagen_wandern",
+      "name": "Angeln-Jagen-Wandern",
+      "category": "wanderung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.09865497999999,
+        "lng": 12.89334748
+      },
+      "query": "Angeln-Jagen-Wandern, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.0987753,
+        "lng": 12.8932145,
+        "display_name": "Angeln Jagen Wandern, Schloßstraße, Rheinsberg, Ostprignitz-Ruppin, Brandenburg, 16831, Deutschland",
+        "class": "shop",
+        "type": "hunting",
+        "importance": 0.00005398413061718192,
+        "osm_type": "node",
+        "osm_id": 13247597816,
+        "provider": "nominatim"
+      },
+      "delta_m": 16,
+      "from_city_m": 278,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_kirchlicher_friedhof_rheinsberg",
+      "name": "Kirchlicher Friedhof Rheinsberg",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.09935792,
+        "lng": 12.89652328
+      },
+      "query": "Kirchlicher Friedhof Rheinsberg, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.0994169,
+        "lng": 12.8967265,
+        "display_name": "kirchlicher Friedhof, Rheinsberg, Ostprignitz-Ruppin, Brandenburg, Deutschland",
+        "class": "landuse",
+        "type": "cemetery",
+        "importance": 0.08005398413061719,
+        "osm_type": "way",
+        "osm_id": 132834879,
+        "provider": "nominatim"
+      },
+      "delta_m": 15,
+      "from_city_m": 127,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_pension_am_rheinsberger_schlosspark",
+      "name": "Pension Am Rheinsberger Schlosspark",
+      "category": "natur",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.09458303,
+        "lng": 12.890106020000001
+      },
+      "query": "Pension Am Rheinsberger Schlosspark, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.0946471,
+        "lng": 12.8902712,
+        "display_name": "Pension Am Rheinsberger Schloßpark, 2, Fontaneplatz, Rheinsberg, Ostprignitz-Ruppin, Brandenburg, 16831, Deutschland",
+        "class": "tourism",
+        "type": "guest_house",
+        "importance": 0.00005398413061718192,
+        "osm_type": "node",
+        "osm_id": 1802909272,
+        "provider": "nominatim"
+      },
+      "delta_m": 13,
+      "from_city_m": 648,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_denkmal_kronprinz_friedrich",
+      "name": "Denkmal Kronprinz Friedrich",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.09902812,
+        "lng": 12.89098328
+      },
+      "query": "Denkmal Kronprinz Friedrich, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.0990899,
+        "lng": 12.8910826,
+        "display_name": "Kronprinz Friedrich, Markt, Rheinsberg, Deutschland",
+        "class": "historic",
+        "type": "memorial",
+        "provider": "photon"
+      },
+      "delta_m": 10,
+      "from_city_m": 440,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_eisenbahnmuseum",
+      "name": "Eisenbahnmuseum",
+      "category": "bahnhof",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.093378099999995,
+        "lng": 12.899035999999999
+      },
+      "query": "Eisenbahnmuseum, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.0933645,
+        "lng": 12.8991603,
+        "display_name": "Eisenbahnmuseum, Damaschkeweg, Rheinsberg, Ostprignitz-Ruppin, Brandenburg, 16831, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.00005398413061718192,
+        "osm_type": "node",
+        "osm_id": 4407703918,
+        "provider": "nominatim"
+      },
+      "delta_m": 8,
+      "from_city_m": 565,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_rheinsberger_preussenquelle_gmbh",
+      "name": "Rheinsberger Preussenquelle GmbH",
+      "category": "wanderung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.09066409090909,
+        "lng": 12.91154658181818
+      },
+      "query": "Rheinsberger Preussenquelle GmbH, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.0907091,
+        "lng": 12.9116194,
+        "display_name": "Rheinsberger Preussenquelle GmbH, 5, Zur Preußenquelle, Untermühle, Rheinsberg, Ostprignitz-Ruppin, Brandenburg, 16831, Deutschland",
+        "class": "shop",
+        "type": "beverages",
+        "importance": 0.00005398413061718192,
+        "osm_type": "way",
+        "osm_id": 217153337,
+        "provider": "nominatim"
+      },
+      "delta_m": 7,
+      "from_city_m": 1271,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_haus_der_stadtgeschichte",
+      "name": "Haus der Stadtgeschichte",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.10010344,
+        "lng": 12.89232398
+      },
+      "query": "Haus der Stadtgeschichte, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.1001103,
+        "lng": 12.8924001,
+        "display_name": "Haus der Stadtgeschichte, 22, Seestraße, Rheinsberg, Ostprignitz-Ruppin, Brandenburg, 16831, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.00005398413061718192,
+        "osm_type": "way",
+        "osm_id": 216451119,
+        "provider": "nominatim"
+      },
+      "delta_m": 5,
+      "from_city_m": 395,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_dorfkirche_linow",
+      "name": "Dorfkirche Linow",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.097759588888884,
+        "lng": 12.83060912222222
+      },
+      "query": "Dorfkirche Linow, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.0977285,
+        "lng": 12.8305631,
+        "display_name": "Dorfkirche Linow, Dorfstraße, Linow, Rheinsberg, Ostprignitz-Ruppin, Brandenburg, 16831, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.07194870560319186,
+        "osm_type": "way",
+        "osm_id": 321757800,
+        "provider": "nominatim"
+      },
+      "delta_m": 5,
+      "from_city_m": 4466,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_dorfkirche_zechow",
+      "name": "Dorfkirche Zechow",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.055018184615385,
+        "lng": 12.912379603846151
+      },
+      "query": "Dorfkirche Zechow, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.0550301,
+        "lng": 12.9124466,
+        "display_name": "Dorfkirche, Dorfstraße, Zechow, Rheinsberg, Ostprignitz-Ruppin, Brandenburg, 16831, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.09078915819201436,
+        "osm_type": "way",
+        "osm_id": 215931903,
+        "provider": "nominatim"
+      },
+      "delta_m": 5,
+      "from_city_m": 4922,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_konigreichssaal_jehovas_zeugen",
+      "name": "Königreichssaal Jehovas Zeugen",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.087212677777785,
+        "lng": 12.909811999999999
+      },
+      "query": "Königreichssaal Jehovas Zeugen, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.0872265,
+        "lng": 12.9097814,
+        "display_name": "Königreichssaal Jehovas Zeugen, 112, Berliner Straße, Untermühle, Rheinsberg, Ostprignitz-Ruppin, Brandenburg, 16831, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.00005398413061718192,
+        "osm_type": "way",
+        "osm_id": 217153350,
+        "provider": "nominatim"
+      },
+      "delta_m": 3,
+      "from_city_m": 1489,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_denkmal_fur_teure_verstorbene",
+      "name": "Denkmal für teure Verstorbene",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.100173059999996,
+        "lng": 12.875864340000001
+      },
+      "query": "Denkmal für teure Verstorbene, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.1001691,
+        "lng": 12.8758687,
+        "display_name": "Denkmal für teure Verstorbene, Poetensteig, Rheinsberg, Ostprignitz-Ruppin, Brandenburg, 16831, Deutschland",
+        "class": "building",
+        "type": "yes",
+        "importance": 0.00005398413061718192,
+        "osm_type": "way",
+        "osm_id": 842379854,
+        "provider": "nominatim"
+      },
+      "delta_m": 1,
+      "from_city_m": 1458,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_pension_zum_rheinsberger_leuchtturm",
+      "name": "Pension Zum Rheinsberger Leuchtturm",
+      "category": "aussicht",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.08562684285714,
+        "lng": 12.888693742857143
+      },
+      "query": "Pension Zum Rheinsberger Leuchtturm, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.0856178,
+        "lng": 12.8886936,
+        "display_name": "Pension Zum Rheinsberger Leuchtturm, 20, Schwanower Straße, Untermühle, Rheinsberg, Ostprignitz-Ruppin, Brandenburg, 16831, Deutschland",
+        "class": "amenity",
+        "type": "pub",
+        "importance": 0.00005398413061718192,
+        "osm_type": "way",
+        "osm_id": 50893574,
+        "provider": "nominatim"
+      },
+      "delta_m": 1,
+      "from_city_m": 1534,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_alte_meierei",
+      "name": "Alte Meierei",
+      "category": "altstadt",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.1018878,
+        "lng": 12.8840891
+      },
+      "query": "Alte Meierei, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.101892,
+        "lng": 12.884096,
+        "display_name": "Alte Meierei, Poetensteig, Rheinsberg, Ostprignitz-Ruppin, Brandenburg, 16831, Deutschland",
+        "class": "historic",
+        "type": "ruins",
+        "importance": 0.00005398413061718192,
+        "osm_type": "way",
+        "osm_id": 397624459,
+        "provider": "nominatim"
+      },
+      "delta_m": 1,
+      "from_city_m": 976,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "rheinsberg_wartturm",
+      "name": "Wartturm",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.0807065,
+        "lng": 12.88493317
+      },
+      "query": "Wartturm, Rheinsberg, Germany",
+      "osm": {
+        "lat": 53.0807049,
+        "lng": 12.8849338,
+        "display_name": "Leuchtturm, Braunsberger Straße, Rheinsberg, Ostprignitz-Ruppin, Brandenburg, 16831, Deutschland",
+        "class": "man_made",
+        "type": "tower",
+        "importance": 1e-10,
+        "osm_type": "way",
+        "osm_id": 397466018,
+        "provider": "nominatim"
+      },
+      "delta_m": 0,
+      "from_city_m": 2135,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    }
+  ]
+}

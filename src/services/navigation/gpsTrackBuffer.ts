@@ -1,6 +1,6 @@
 /**
  * Last-3 GPS ring buffer → movement vector + prompt context.
- * Persisted so crashes/hangs don't wipe Findus' sense of motion.
+ * Persisted so crashes/hangs don't wipe Yorro' sense of motion.
  */
 
 import * as FileSystem from 'expo-file-system';
@@ -113,7 +113,7 @@ function modeHint(speedMs: number | null): string {
 }
 
 /**
- * Inject into every Gemini answer turn so Findus can reason about motion.
+ * Inject into every Gemini answer turn so Yorro can reason about motion.
  */
 export function formatGpsTrackForPrompt(): string {
   if (fixes.length === 0) {

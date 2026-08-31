@@ -3,8 +3,6 @@
  * Layout: `SubtitlesSlot` (genau 1 Zeile).
  */
 
-import { isProtectedDot } from '../services/audio/punctuationChunker';
-
 export const DEFAULT_SUBTITLE_MAX_CHARS = 78;
 
 /** Rise: 5 Frames @24fps — nur innerhalb der Lane (kein 3-Zeilen-Artefakt). */
@@ -32,9 +30,10 @@ export const SUBTITLE_WORD_GAP = 7;
 export const SUBTITLE_WIDTH_SAFETY_PX = 10;
 
 /**
- * Untertitel bewusst vor der Stimme — Wörter wirkten sonst immer ~1 Tick zu spät.
+ * Mini-Lead, damit das Wort mit dem Einsatz kommt — nicht ½ s vor der Stimme.
+ * Große Leads + früher Volltext = Untertitel hetzen oder hängen.
  */
-export const SUBTITLE_LEAD_MS = 500;
+export const SUBTITLE_LEAD_MS = 80;
 
 export const FINDUS_KINETIC_SUBTITLE_PROMPT = `
 KINETISCHE UNTERTITEL — 1 ZEILE
@@ -42,8 +41,9 @@ Dies sind nur Regeln für Ablauf und Layout. Kein fester Wortlaut.
 
 1) Wort für Wort, 1:1 zur Stimme, linksbündig, fester gleicher Gap.
 2) Genau 1 Zeile — von links nach rechts.
-3) Passt das nächste Wort nicht / Satzende → Zeile ausfaden, neu von links.
-4) Nach 5s ohne neues Wort: langsam ausblenden/clear.
+3) Satzende knüpft in derselben Zeile an (keine neue Zeile).
+4) Passt das nächste Wort nicht → Zeile ausfaden, neu von links.
+5) Nach 5s ohne neues Wort: langsam ausblenden/clear.
 `.trim();
 
 export function isSubtitleSentenceEndWord(word: string): boolean {
@@ -64,6 +64,41 @@ export function isSubtitleSentenceEndWord(word: string): boolean {
   return true;
 }
 
+export function splitSubtitleWords(text: string): string[] {
+  return text.replace(/\s+/g, ' ').trim().split(/\s+/).filter(Boolean);
+}
+
+/** Buchstaben/Ziffern — lange Komposita bekommen mehr Sprechzeit. */
+export function subtitleWordWeight(word: string): number {
+  let n = 0;
+  for (const ch of word) {
+    if (/[\p{L}\p{N}]/u.test(ch)) n += 1;
+  }
+  return Math.max(1, n);
+}
+
+export function subtitleWordCountAtElapsed(
+  words: readonly string[],
+  elapsedMs: number,
+  durationMs: number,
+): number {
+  if (words.length === 0) return 0;
+  const dur = Math.max(400, durationMs);
+  const t = elapsedMs + SUBTITLE_LEAD_MS;
+  if (t >= dur * 0.995) return words.length;
+  const weights = words.map(subtitleWordWeight);
+  const total = weights.reduce((a, b) => a + b, 0);
+  const target = Math.max(0, (t / dur) * total);
+  let acc = 0;
+  let count = 0;
+  for (let i = 0; i < words.length; i++) {
+    if (target + 1e-9 < acc) break;
+    count = i + 1;
+    acc += weights[i]!;
+  }
+  return Math.min(words.length, Math.max(1, count));
+}
+
 export function subtitleWordCountAtProgress(
   wordCount: number,
   progress01: number,
@@ -72,12 +107,22 @@ export function subtitleWordCountAtProgress(
   if (wordCount <= 0) return 0;
   const p = Math.min(1, Math.max(0, progress01));
   if (p >= 0.995) return wordCount;
-  const safeDur = Math.max(400, durMs);
-  const lead01 =
-    SUBTITLE_LEAD_MS / safeDur +
-    Math.min(1 / Math.max(1, wordCount), SUBTITLE_RISE_MS / safeDur);
-  const displayP = Math.min(1, p + lead01);
-  return Math.min(wordCount, Math.max(1, Math.ceil(displayP * wordCount)));
+  const dummy = Array.from({ length: wordCount }, () => 'x');
+  return subtitleWordCountAtElapsed(dummy, p * Math.max(400, durMs), durMs);
+}
+
+/** Karaoke-Pace wenn der ganze Satz auf einmal ankommt. */
+export function subtitleWordRevealDelayMs(
+  word: string,
+  queuedBehind: number,
+  karaoke: boolean,
+): number {
+  const base = Math.min(280, Math.max(64, subtitleWordWeight(word) * 52));
+  if (queuedBehind >= 6) return 28;
+  if (karaoke) return base;
+  if (queuedBehind >= 3) return 40;
+  if (queuedBehind >= 1) return Math.min(80, Math.round(base / 2));
+  return 0;
 }
 
 export type LiveSubtitlePlan = {
@@ -97,14 +142,62 @@ export function estimateSpeechDurationMs(text: string): number {
 export function subtitleAtProgress(
   plan: LiveSubtitlePlan,
   progress01: number,
+  durationMs?: number,
 ): string | null {
   const { full } = plan;
   if (!full) return null;
-  const words = full.split(/\s+/).filter(Boolean);
+  const words = splitSubtitleWords(full);
   if (words.length === 0) return null;
-  const durMs = estimateSpeechDurationMs(full);
-  const count = subtitleWordCountAtProgress(words.length, progress01, durMs);
+  const durMs = Math.max(400, durationMs ?? estimateSpeechDurationMs(full));
+  const p = Math.min(1, Math.max(0, progress01));
+  const count = subtitleWordCountAtElapsed(words, p * durMs, durMs);
   return words.slice(0, count).join(' ');
+}
+
+/** Expo-Speech onBoundary: Wort erscheint, sobald die Stimme es anfasst. */
+export function subtitleUpToCharIndex(
+  text: string,
+  charIndex: number,
+): string | null {
+  const words = splitSubtitleWords(text);
+  if (words.length === 0) return null;
+  let pos = 0;
+  let count = 0;
+  for (const w of words) {
+    if (charIndex >= pos) count += 1;
+    else break;
+    pos += w.length + 1;
+  }
+  return words.slice(0, Math.max(1, count)).join(' ');
+}
+
+/**
+ * Slot vs. Store: Store ist der gesprochene Stand.
+ * - Weiter wachsen → nur neue Wörter.
+ * - 1–2 Wörter zurück → Jitter, ignorieren.
+ * - Sprung auf kurzen Prefix → neuer Turn, Zeile neu.
+ */
+export function subtitleFeedAdvance(
+  emitted: readonly string[],
+  feedWords: readonly string[],
+): { pending: string[]; reset: boolean } {
+  if (feedWords.length === 0) return { pending: [], reset: true };
+  if (emitted.length === 0) {
+    return { pending: [...feedWords], reset: false };
+  }
+  const grows =
+    feedWords.length >= emitted.length &&
+    emitted.every((w, i) => feedWords[i] === w);
+  if (grows) {
+    return { pending: feedWords.slice(emitted.length).map(String), reset: false };
+  }
+  const shrinkPrefix =
+    emitted.length > feedWords.length &&
+    feedWords.every((w, i) => emitted[i] === w);
+  if (shrinkPrefix && emitted.length - feedWords.length <= 2) {
+    return { pending: [], reset: false };
+  }
+  return { pending: [...feedWords], reset: true };
 }
 
 export function mergeSubtitleCarry(
@@ -122,13 +215,15 @@ export function mergeSubtitleCarry(
 export function createLiveSubtitleFeed(
   text: string,
   setSubtitle: (t: string | null) => void,
+  durationMs?: number,
 ): {
   plan: LiveSubtitlePlan;
-  updateProgress: (progress01: number) => void;
+  updateProgress: (progress01: number, actualDurationMs?: number) => void;
   showInitial: () => void;
   showFinal: () => void;
 } {
   const plan = buildLiveSubtitlePlan(text);
+  let dur = Math.max(400, durationMs ?? estimateSpeechDurationMs(plan.full));
   let last: string | null | undefined = undefined;
   const push = (t: string | null) => {
     if (t === last) return;
@@ -137,10 +232,12 @@ export function createLiveSubtitleFeed(
   };
   return {
     plan,
-    showInitial: () => push(subtitleAtProgress(plan, 0)),
-    updateProgress: (progress01: number) =>
-      push(subtitleAtProgress(plan, progress01)),
-    showFinal: () => push(subtitleAtProgress(plan, 1)),
+    showInitial: () => push(subtitleAtProgress(plan, 0, dur)),
+    updateProgress: (progress01: number, actualDurationMs?: number) => {
+      if (actualDurationMs && actualDurationMs > 0) dur = actualDurationMs;
+      push(subtitleAtProgress(plan, progress01, dur));
+    },
+    showFinal: () => push(subtitleAtProgress(plan, 1, dur)),
   };
 }
 
@@ -158,7 +255,7 @@ export async function runEstimatedLiveSubtitles(
     if (!isActive()) return;
     const p = (Date.now() - t0) / dur;
     feed.updateProgress(Math.min(1, Math.max(0, p)));
-  }, 70);
+  }, 50);
   try {
     await speak();
   } finally {

@@ -72,6 +72,9 @@ export async function presentToUi(
   buttons: Module2ActionButton[],
   userTextOrOpts?: string | PresentToUiOpts,
 ): Promise<PresentToUiResult> {
+  // Ein Tick Luft — Settings/Mic/Timeline nicht hinter großen Store-Writes
+  await new Promise<void>((r) => setTimeout(r, 0));
+
   const opts: PresentToUiOpts =
     typeof userTextOrOpts === 'string'
       ? { userText: userTextOrOpts }

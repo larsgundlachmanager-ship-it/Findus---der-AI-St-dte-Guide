@@ -13,7 +13,7 @@ import {
 import type { HotelLiveStay } from '../../services/concierge/hotelAvailabilityService';
 import {
   buildGetYourGuideSearchUrl,
-  preferTicketSource,
+  preferTicketSourceQuoted,
 } from '../../services/affiliate/affiliateService';
 import {
   classifyVenueOfferKind,
@@ -161,16 +161,21 @@ export async function runMapsPitchDeepResearch(
           input.userText + ' ' + (input.city ?? ''),
         );
         const ticketQ = `${v.name} ${input.city ?? ''} Tickets`.trim();
-        const url =
-          preferTicketSource({
-            kind:
-              offerKind === 'museum'
-                ? 'museum'
-                : offerKind === 'harbor' || offerKind === 'attraction_tour'
-                  ? 'tour'
-                  : 'attraction',
-            query: ticketQ,
-          }).url || buildGetYourGuideSearchUrl(ticketQ);
+        const picked = await preferTicketSourceQuoted({
+          kind:
+            offerKind === 'museum'
+              ? 'museum'
+              : offerKind === 'harbor' || offerKind === 'attraction_tour'
+                ? 'tour'
+                : 'attraction',
+          query: ticketQ,
+          userText: input.userText,
+          priced:
+            web && /^https?:\/\//i.test(web)
+              ? [{ url: web }]
+              : undefined,
+        });
+        const url = picked.url || buildGetYourGuideSearchUrl(ticketQ);
         buttons.push({
           id: `pitch_tickets_${i}`,
           label: shortenActionLabel(
@@ -183,12 +188,17 @@ export async function runMapsPitchDeepResearch(
         });
       } else if (shouldDiscoverVenueOffers(v.name, input.userText)) {
         const ticketQ = `${v.name} ${input.city ?? ''}`.trim();
+        const picked = await preferTicketSourceQuoted({
+          kind: 'generic',
+          query: ticketQ,
+          userText: input.userText,
+        });
         buttons.push({
           id: `pitch_tickets_${i}`,
           label: shortenActionLabel('🎟️ Tickets'),
           payload: {
             kind: 'deep_link',
-            url: preferTicketSource({ kind: 'generic', query: ticketQ }).url,
+            url: picked.url,
           },
         });
       }

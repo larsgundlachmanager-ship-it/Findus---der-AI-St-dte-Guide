@@ -1,5 +1,5 @@
 /**
- * Hotel-Buchungs-URL für Pitch-Karten (Expedia/Stay22).
+ * Hotel-Buchungs-URL für Pitch-Karten (Expedia Property / Stay22).
  */
 
 export function buildPitchHotelBookingUrl(
@@ -9,40 +9,38 @@ export function buildPitchHotelBookingUrl(
 ): string | null {
   try {
     const {
-      getExpediaAccommodationUrl,
-      getStay22AccommodationUrl,
-      getExpediaCamref,
-    } = require('../../services/affiliate/affiliateService') as {
-      getExpediaAccommodationUrl: (
-        d: string,
-        o?: { checkin?: string; checkout?: string; adults?: number },
-      ) => string;
-      getStay22AccommodationUrl: (
-        d: string,
-        o?: { checkin?: string; checkout?: string; adults?: number },
-      ) => string;
-      getExpediaCamref: () => string;
-    };
-    const {
-      parseHotelStayDates,
-      parseHotelAdults,
-    } = require('../../services/concierge/hotelAvailabilityService') as {
-      parseHotelStayDates: (t: string) => {
+      finalizeHotelBookAffiliateUrl,
+    } = require('../../services/affiliate/hotelPropertyDeepLink') as {
+      finalizeHotelBookAffiliateUrl: (o: {
+        hotelName: string;
+        city?: string | null;
+        bookUrl?: string | null;
         checkin: string;
         checkout: string;
-      };
+        adults?: number;
+      }) => string;
+    };
+    const { parseHotelAdults } = require('../../services/concierge/hotelAvailabilityService') as {
       parseHotelAdults: (t: string) => number;
     };
+    const { parseHotelStayDatesForPlan } = require('../planning/planStayDates') as {
+      parseHotelStayDatesForPlan: (
+        blob: string,
+        dayKey?: string | null,
+      ) => { checkin: string; checkout: string };
+    };
     const blob = `${hotelName} ${contextBlob} ${cityHint ?? ''}`;
-    const { checkin, checkout } = parseHotelStayDates(blob);
+    const { checkin, checkout } = parseHotelStayDatesForPlan(blob);
     const adults = parseHotelAdults(blob);
-    const dest =
-      hotelName.split(/[|,·•]/)[0]!.trim() ||
-      (cityHint || '').trim() ||
-      hotelName;
-    const url = getExpediaCamref()
-      ? getExpediaAccommodationUrl(dest, { checkin, checkout, adults })
-      : getStay22AccommodationUrl(dest, { checkin, checkout, adults });
+    const name =
+      hotelName.split(/[|,·•]/)[0]!.trim() || hotelName;
+    const url = finalizeHotelBookAffiliateUrl({
+      hotelName: name,
+      city: cityHint,
+      checkin,
+      checkout,
+      adults,
+    });
     return url && /^https?:\/\//i.test(url) ? url : null;
   } catch {
     return null;

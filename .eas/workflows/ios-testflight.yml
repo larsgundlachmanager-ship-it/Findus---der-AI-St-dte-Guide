@@ -1,0 +1,30 @@
+# Build iOS + Submit nach App Store Connect / TestFlight.
+#
+# Hinweis (Expo Free Plan): Der pre-packaged `testflight`-Job mit `build_id`
+# braucht einen Paid-Plan („TestFlight jobs that submit an EAS build require a paid plan“).
+# Deshalb: build → submit (IPA landet in ASC). Externe Gruppe „Tester“ danach
+# einmal in App Store Connect zuweisen / Beta Review — oder Expo upgraden und
+# den testflight-Job wieder aktivieren.
+#
+# Manuell: npm run release:ios:testflight
+
+name: iOS → App Store Connect
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  build_ios:
+    name: Build iOS (production)
+    type: build
+    params:
+      platform: ios
+      profile: production
+
+  submit_ios:
+    name: Submit to App Store Connect
+    type: submit
+    needs: [build_ios]
+    params:
+      build_id: ${{ needs.build_ios.outputs.build_id }}
+      profile: production

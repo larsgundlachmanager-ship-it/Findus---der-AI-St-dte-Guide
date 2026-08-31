@@ -1,0 +1,146 @@
+{
+  "city": "korbach",
+  "apply": true,
+  "touched": 17,
+  "approachesFixed": 17,
+  "faqAdded": 0,
+  "data_version": 32,
+  "rows": [
+    {
+      "id": "korbach_korbach_hauptbahnhof",
+      "name": "Korbach Hauptbahnhof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "korbach_kilianskirche",
+      "name": "Kilianskirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "korbach_st_nicolai",
+      "name": "St. Nicolai",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "korbach_kumpe_brunnen_am_alten_marktplatz",
+      "name": "Kümpe (Brunnen) am alten Marktplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "korbach_stadtpark_korbach",
+      "name": "Stadtpark Korbach",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "korbach_naherholungsgebiet_marbecktal",
+      "name": "Naherholungsgebiet \"Marbecktal\"",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "korbach_hexengarten",
+      "name": "Hexengarten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "korbach_schanzenberg_bei_korbach",
+      "name": "Schanzenberg bei Korbach",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "korbach_stadtpark_laaker_teich",
+      "name": "Stadtpark Laaker Teich",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "korbach_georg_viktor_turm",
+      "name": "Georg-Viktor-Turm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "korbach_korbacher_spalte",
+      "name": "Korbacher Spalte",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "korbach_freilichtbuhne_korbach",
+      "name": "Freilichtbühne Korbach",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "korbach_alte_landwehr_300_meter_langer_schutzwall_aus_dem_mittelalter",
+      "name": "Alte Landwehr. 300 Meter langer Schutzwall aus dem Mittelalter",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 3,
+      "had_approaches": 1
+    },
+    {
+      "id": "korbach_besucherbergwerk_korbach_goldhausen",
+      "name": "Besucherbergwerk Korbach-Goldhausen",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 4,
+      "had_approaches": 1
+    },
+    {
+      "id": "korbach_rathaus",
+      "name": "Rathaus Korbach",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "korbach_wolfgang_bonhage_museum",
+      "name": "Wolfgang-Bonhage-MUSEUM KORBACH",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "korbach_historische_altstadt",
+      "name": "Historische Altstadt Korbach",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    }
+  ]
+}

@@ -115,7 +115,7 @@ function expectedLane(jobId: FindusJobId, text: string): LaneExpect | 'any' {
       /\b(eine\s+stunde|noch\s+nicht\s+gesehen)\b/i.test(text)) &&
     /\b(stunde|gesehen|hafen)\b/i.test(text)
   ) {
-    // Live-Lane hour_tour — Gate zählt sie unter agent_fallback-Äquivalent „nicht Pack/Amenity“
+    // Tour-Fragen → Modul-2 Tour-Gate (nicht alte Fact-Lane)
     return 'any';
   }
   if (

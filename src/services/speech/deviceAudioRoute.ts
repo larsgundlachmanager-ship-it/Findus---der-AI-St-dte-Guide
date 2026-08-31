@@ -29,6 +29,23 @@ type NativeSpeechRoute = {
 
 const Native = NativeModules.FindusDeviceAudio as NativeSpeechRoute | undefined;
 
+export async function nudgeDeviceMediaVolume(
+  dir: 'up' | 'down' | 'max' | 'min',
+): Promise<boolean> {
+  const n = Native as
+    | (NativeSpeechRoute & {
+        adjustMediaVolume?: (d: string) => Promise<boolean>;
+      })
+    | undefined;
+  if (!n?.adjustMediaVolume) return false;
+  try {
+    await n.adjustMediaVolume(dir);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 export async function getSpeechRouteState(): Promise<SpeechRouteState> {
   if (Native?.getSpeechRouteState) {
     try {
@@ -56,12 +73,12 @@ export async function getSpeechRouteState(): Promise<SpeechRouteState> {
 }
 
 /**
- * May Findus speak aloud right now? (Modul 1 + Assistant, respektiert Pref)
+ * May Yorro speak aloud right now? (Modul 1 + Assistant, respektiert Pref)
  * - App offen + entsperrt → immer ja
  * - always → auch Hintergrund / Sperre
  * - headphones → Hintergrund/Sperre nur mit BT/Kabel
  * - app_open → nur Vordergrund, nie automatisch im Hintergrund
- * - Link-Background-Arm → ja (User hat Link aus Findus geöffnet)
+ * - Link-Background-Arm → ja (User hat Link aus Yorro geöffnet)
  */
 export async function canSpeakAloudNow(): Promise<boolean> {
   if (isLinkBackgroundSpeechArmed()) return true;

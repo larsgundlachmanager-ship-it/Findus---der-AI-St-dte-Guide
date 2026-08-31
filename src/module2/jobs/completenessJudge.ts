@@ -114,7 +114,9 @@ function hasFact(key: JobFactKey, input: CompletenessInput): boolean {
       return kinds.has('START_NAVIGATION') || /\b(minute|min\.|route|geh)\b/u.test(blob);
     case 'transit_connection':
       return (
-        /\b(linie|u\d|s\d|bus|bahn|abfahrt|gleis|umstieg)\b/u.test(blob) ||
+        /\b(linie|u\d|s\d|bus|bahn|abfahrt|gleis|umstieg|fähre|faehre|ferry|fährticket|verbindung|fahrplan|ticket|talstation|bergstation|auffahrt)\b/u.test(
+          blob,
+        ) ||
         Boolean(meta.transit)
       );
     case 'open_now_or_hours':
@@ -254,13 +256,39 @@ export function pendingButtonsFromReport(
         },
       });
     } else if (a === 'BOOK_STAY22') {
+      // Sofort echter Partner-Link — kein findus.local-Pending (sonst Tap-Fail)
+      let url = 'https://findus.local/pending';
+      let dest = 'Germany';
+      try {
+        const {
+          getCachedUserProfile,
+        } = require('../../services/userProfileService') as {
+          getCachedUserProfile: () => { cityName?: string } | null;
+        };
+        const {
+          getExpediaAccommodationUrl,
+          getStay22AccommodationUrl,
+          getExpediaCamref,
+        } = require('../../services/affiliate/affiliateService') as {
+          getExpediaAccommodationUrl: (d: string) => string;
+          getStay22AccommodationUrl: (d: string) => string;
+          getExpediaCamref: () => string;
+        };
+        dest =
+          getCachedUserProfile()?.cityName?.trim() || dest;
+        url = getExpediaCamref()
+          ? getExpediaAccommodationUrl(dest)
+          : getStay22AccommodationUrl(dest);
+      } catch {
+        /* soft */
+      }
       out.push({
         id: 'pending_stay',
-        label: '🏨 Buchung…',
+        label: '🏨 Buchen',
         payload: {
           kind: 'deep_link',
-          url: 'https://findus.local/pending',
-          destName: 'pending',
+          url,
+          destName: dest,
         },
       });
     }

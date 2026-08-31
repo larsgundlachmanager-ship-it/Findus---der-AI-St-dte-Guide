@@ -67,7 +67,7 @@ function formatLandmarkName(name: string): string {
     : t;
 }
 
-/** Indices where Findus should speak (turns, stations, pre-baked cues). */
+/** Indices where Yorro should speak (turns, stations, pre-baked cues). */
 export function listHybridSpeakPointIndices(
   waypoints: NavWaypoint[],
 ): number[] {

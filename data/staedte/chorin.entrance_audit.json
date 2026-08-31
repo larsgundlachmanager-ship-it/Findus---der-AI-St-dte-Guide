@@ -1,1015 +1,40 @@
 {
   "city_id": "chorin",
   "apply": true,
+  "storyOnly": true,
   "maxDelta": 80,
+  "country": "Germany",
   "summary": {
-    "ok": 55,
-    "check": 3,
-    "bad": 7,
+    "ok": 0,
+    "check": 4,
+    "bad": 1,
     "errors": 0,
-    "applied": 3
+    "applied": 4,
+    "skipped_directory": 63,
+    "skipped_cached_google": 27
   },
   "rows": [
     {
       "id": "chorin_chorin_bahnhof",
       "name": "Chorin Bahnhof",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.90344904,
-        "lng": 13.869643860000002
-      },
-      "google": {
-        "lat": 52.9035209,
-        "lng": 13.869763,
-        "place_id": "ChIJF74OLxPAqUcRUDPjxl47RE4",
-        "address": "Choriner Bahnhofstraße 2, 16230 Chorin"
-      },
-      "delta_m": 11,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.8933345,
+        "lng": 13.88384055263158
+      }
     },
     {
       "id": "chorin_kloster_chorin",
       "name": "Kloster Chorin",
       "before": {
-        "lat": 52.89296978,
-        "lng": 13.88360318
+        "lat": 52.8931315,
+        "lng": 13.884071299999999
       },
       "google": {
-        "lat": 52.8930093,
+        "lat": 52.893009299999996,
         "lng": 13.8836687,
         "place_id": "ChIJlS1J1ELAqUcRzY_HE5r3WMU",
-        "address": "Amt Chorin 11 a, 16230 Chorin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "chorin_touristinformation_kloster_chorin",
-      "name": "Touristinformation Kloster Chorin",
-      "before": {
-        "lat": 52.89192158000001,
-        "lng": 13.88359988
-      },
-      "google": {
-        "lat": 52.8919611,
-        "lng": 13.8836654,
-        "place_id": "ChIJ17noUQDBqUcRrETCDWR_W1Y",
-        "address": "Amt Chorin 11a, 16230 Chorin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "chorin_hotel_haus_chorin",
-      "name": "Hotel Haus Chorin",
-      "before": {
-        "lat": 52.89798358,
-        "lng": 13.883436979999999
-      },
-      "google": {
-        "lat": 52.8980231,
-        "lng": 13.8835025,
-        "place_id": "ChIJLcfTJBPAqUcRDiABv7WTowg",
-        "address": "Neue Klosterallee 10, 16230 Chorin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "chorin_choriner_dorfkirche",
-      "name": "Choriner Dorfkirche",
-      "before": {
-        "lat": 52.902509980000005,
-        "lng": 13.87191178
-      },
-      "google": {
-        "lat": 52.90254950000001,
-        "lng": 13.8719773,
-        "place_id": "ChIJg0wXqmzAqUcR-cOzFO-uHdE",
-        "address": "Mittelreihe 6, 16230 Chorin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "chorin_ehemalige_ragoser_muhle",
-      "name": "Ehemalige Ragöser Mühle",
-      "before": {
-        "lat": 52.87901708,
-        "lng": 13.859824499999998
-      },
-      "google": {
-        "lat": 52.8790566,
-        "lng": 13.85989,
-        "place_id": "ChIJr1ljqrnBqUcRc73bHF4fvp0",
-        "address": "16230 Chorin-Sandkrug"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "chorin_lehrpfad_chorin",
-      "name": "Lehrpfad Chorin",
-      "before": {
-        "lat": 52.892981680000005,
-        "lng": 13.88052878
-      },
-      "google": {
-        "lat": 52.8930212,
-        "lng": 13.8805943,
-        "place_id": "ChIJu0PSmvrBqUcRGLq7iUokffQ",
-        "address": "16230 Chorin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "chorin_privatparkplatz_kloster_chorin",
-      "name": "Privatparkplatz Kloster Chorin",
-      "before": {
-        "lat": 52.89061058,
-        "lng": 13.877839780000002
-      },
-      "google": {
-        "lat": 52.89065009999999,
-        "lng": 13.8779053,
-        "place_id": "ChIJ12iz6WHBqUcRuv1qkkB0O9s",
-        "address": "Amt Chorin, 16230 Chorin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "chorin_waldlehrgarten_weinberg",
-      "name": "Waldlehrgarten Weinberg",
-      "before": {
-        "lat": 52.89118788,
-        "lng": 13.88092768
-      },
-      "google": {
-        "lat": 52.8912274,
-        "lng": 13.8809932,
-        "place_id": "ChIJeUkvT0PAqUcRNmjEgKhNRJ8",
-        "address": "Amt Chorin 4, 16230 Chorin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "chorin_parkplatz_kloster_chorin",
-      "name": "Parkplatz Kloster Chorin",
-      "before": {
-        "lat": 52.892479279999996,
-        "lng": 13.885568379999999
-      },
-      "google": {
-        "lat": 52.8925188,
-        "lng": 13.8856339,
-        "place_id": "ChIJi2p2DwDBqUcR5Bxcc_YKBU4",
-        "address": "16230 Chorin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "chorin_amtssee",
-      "name": "Amtssee",
-      "before": {
-        "lat": 52.89549528,
-        "lng": 13.88731608
-      },
-      "google": {
-        "lat": 52.8951173,
-        "lng": 13.886882,
-        "place_id": "ChIJl86OLkTAqUcR1tBWtK11QWQ",
-        "address": "Amtssee, 16230 Chorin"
-      },
-      "delta_m": 51,
-      "status": "CHECK",
-      "streetview": "ZERO_RESULTS",
-      "applied": true
-    },
-    {
-      "id": "chorin_fettseemoor",
-      "name": "Fettseemoor",
-      "before": {
-        "lat": 52.870485880000004,
-        "lng": 13.860884219999999
-      },
-      "google": {
-        "lat": 52.8705254,
-        "lng": 13.8609497,
-        "place_id": "ChIJ____j5LAqUcRZ1ws-jN-odQ",
-        "address": "16230 Chorin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "chorin_listnride_fahrradverleih_in_chorin",
-      "name": "ListNRide - Fahrradverleih in Chorin",
-      "before": {
-        "lat": 52.90190448,
-        "lng": 13.871045479999998
-      },
-      "google": {
-        "lat": 52.901944,
-        "lng": 13.871111,
-        "place_id": "ChIJK7eyWb3BqUcR6NV2GFv3iBg",
-        "address": "Dorfplatz, 16230 Chorin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "chorin_sports_field",
-      "name": "Sports Field",
-      "before": {
-        "lat": 52.90274258000001,
-        "lng": 13.87336686
-      },
-      "google": {
-        "lat": 52.9027821,
-        "lng": 13.8734324,
-        "place_id": "ChIJVVWVrRTAqUcRYzgOakCht58",
-        "address": "Choriner Dorfstraße 17b, 16230 Chorin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "chorin_gleis_9_n_e_v",
-      "name": "Gleis 9 n.E.V.",
-      "before": {
-        "lat": 52.91794378000001,
-        "lng": 13.90083104
-      },
-      "google": {
-        "lat": 52.9179833,
-        "lng": 13.9008966,
-        "place_id": "ChIJVdcbawDBqUcRa46VTC9voBA",
-        "address": "Angermünder Ch 9, 16230 Chorin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "chorin_alpakas_vom_serwester_hof",
-      "name": "Alpakas vom Serwester Hof",
-      "before": {
-        "lat": 52.93000818,
-        "lng": 13.919284720000002
-      },
-      "google": {
-        "lat": 52.9300477,
-        "lng": 13.9193503,
-        "place_id": "ChIJvSjSoIjqqUcRXMJmkA-YFs8",
-        "address": "Serwester, Dorfstraße 2, 16230 Chorin-Serwest"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "chorin_ruine_der_klostermuhle_chorin",
-      "name": "Ruine der Klostermühle Chorin",
-      "before": {
-        "lat": 52.892355679999994,
-        "lng": 13.882392880000001
-      },
-      "google": {
-        "lat": 52.8923952,
-        "lng": 13.8824584,
-        "place_id": "ChIJn6ViZEPAqUcR6Dh6pPR1DYY",
-        "address": "Amt Chorin 11a, 16230 Chorin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "chorin_stele_senftenhutte",
-      "name": "Stele Senftenhütte",
-      "before": {
-        "lat": 52.937428780000005,
-        "lng": 13.857350019999998
-      },
-      "google": {
-        "lat": 52.93746830000001,
-        "lng": 13.8574156,
-        "place_id": "ChIJE0G05MyVqUcRYcGWn8jDA78",
-        "address": "Am Krausenberg 15, 16230 Chorin-Senftenhütte"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "chorin_kriegsgraberstatte_erster_und_zweiter_weltkrieg",
-      "name": "Kriegsgräberstätte Erster und Zweiter Weltkrieg",
-      "before": {
-        "lat": 52.88597238,
-        "lng": 13.879467300000002
-      },
-      "google": {
-        "lat": 52.8860119,
-        "lng": 13.8795328,
-        "place_id": "ChIJCb2-bH7BqUcRsqUHFQQx8Sg",
-        "address": "Angermünder Str. 1a, 16230 Chorin-Sandkrug"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "chorin_neuehutte_denkmal",
-      "name": "Neuehütte Denkmal",
-      "before": {
-        "lat": 52.867890380000006,
-        "lng": 13.85370052
-      },
-      "google": {
-        "lat": 52.8679299,
-        "lng": 13.853766,
-        "place_id": "ChIJo4mQ5CLBqUcRzXqM7Uj4VFs",
-        "address": "Waldstraße 27A, 16230 Chorin-Neuehütte"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "chorin_rapp_keramik_chorin",
-      "name": "RAPP KERAMIK CHORIN",
-      "before": {
-        "lat": 52.90627067999999,
-        "lng": 13.89051426
-      },
-      "google": {
-        "lat": 52.9063102,
-        "lng": 13.8905798,
-        "place_id": "ChIJiVdJ-TvAqUcRJ_LDycu0_z4",
-        "address": "Angermünder Ch 5, 16230 Chorin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "chorin_futterhandel_kornscheune_ronald_kuter",
-      "name": "Futterhandel Kornscheune Ronald Küter",
-      "before": {
-        "lat": 52.911686579999994,
-        "lng": 13.81143696
-      },
-      "google": {
-        "lat": 52.9117261,
-        "lng": 13.8115025,
-        "place_id": "ChIJN2riEMe_qUcRvGw-WjCm30A",
-        "address": "Bergstraße 1, 16230 Chorin-Kolonie Britz"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "chorin_hof_langanke",
-      "name": "Hof Langanke",
-      "before": {
-        "lat": 52.93321687999999,
-        "lng": 13.910754120000002
-      },
-      "google": {
-        "lat": 52.9329469,
-        "lng": 13.910783,
-        "place_id": "ChIJBxXb95nrqUcRLbJtW0vAokQ",
-        "address": "Buchholzer Str. 7, 16230 Chorin"
-      },
-      "delta_m": 30,
-      "status": "CHECK",
-      "streetview": "ZERO_RESULTS",
-      "applied": true
-    },
-    {
-      "id": "chorin_wild_hofladen_brodowin",
-      "name": "Wild Hofladen Brodowin",
-      "before": {
-        "lat": 52.90112406000001,
-        "lng": 13.95452254
-      },
-      "google": {
-        "lat": 52.9011528,
-        "lng": 13.9545702,
-        "place_id": "ChIJDwJtAO_BqUcRHjIhYVhash4",
-        "address": "Dorfstraße 40A, 16230 Chorin"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "chorin_netto_gunstig_besser_fur_dich",
-      "name": "Netto - Günstig. Besser. Für dich.",
-      "before": {
-        "lat": 52.85191426,
-        "lng": 13.826849399999997
-      },
-      "google": {
-        "lat": 52.972038,
-        "lng": 13.756248,
-        "place_id": "ChIJeya6YwyXqUcR9QzjkYYXiic",
-        "address": "Angermünder Str. 19, 16247 Joachimsthal"
-      },
-      "delta_m": 14171,
-      "status": "BAD",
-      "streetview": "OK"
-    },
-    {
-      "id": "chorin_okodorf_brodowin",
-      "name": "Ökodorf Brodowin",
-      "before": {
-        "lat": 52.91548556,
-        "lng": 13.95696642
-      },
-      "google": {
-        "lat": 52.9155143,
-        "lng": 13.9570141,
-        "place_id": "ChIJ_R6AsdjBqUcRPpbW5R9QMWw",
-        "address": "Dorfstraße 89, 16230 Chorin OT Brodowin-Brodowin"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "chorin_sonnen_apotheke",
-      "name": "Sonnen-Apotheke",
-      "before": {
-        "lat": 52.84003935999999,
-        "lng": 13.813805720000001
-      },
-      "google": {
-        "lat": 52.8400681,
-        "lng": 13.8138533,
-        "place_id": "ChIJGTnG9am4qUcRd0Nggur-A1w",
-        "address": "Georg-Friedrich-Hegel-Straße 20, 16225 Eberswalde"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "chorin_glg_martin_gropius_krankenhaus",
-      "name": "GLG Martin Gropius Krankenhaus",
-      "before": {
-        "lat": 52.845508759999994,
-        "lng": 13.830088900000002
-      },
-      "google": {
-        "lat": 52.8455375,
-        "lng": 13.8301365,
-        "place_id": "ChIJtSZuS7y4qUcR-7v2mqDDud4",
-        "address": "Oderberger Str. 8, 16225 Eberswalde"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "chorin_glg_martin_gropius_krankenhaus_abteilung_fur_neurologie",
-      "name": "GLG Martin Gropius Krankenhaus, Abteilung für Neurologie",
-      "before": {
-        "lat": 52.845411160000005,
-        "lng": 13.8268545
-      },
-      "google": {
-        "lat": 52.8454399,
-        "lng": 13.8269021,
-        "place_id": "ChIJtSZuS7y4qUcRzvRCMih3MYU",
-        "address": "Oderberger Str. 8, 16225 Eberswalde"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "chorin_offentlich_zuganglicher_defibrillator_aed_defi",
-      "name": "Öffentlich zugänglicher Defibrillator (AED, DEFI)",
-      "before": {
-        "lat": 52.87592205999999,
-        "lng": 13.82131388
-      },
-      "google": {
-        "lat": 52.8759508,
-        "lng": 13.8213615,
-        "place_id": "ChIJyUk-GAC_qUcRplVYeJzCiNc",
-        "address": "Eisenwerkstraße 11, 16230 Britz-Kolonie Britz"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "chorin_spielplatz",
-      "name": "Spielplatz",
-      "before": {
-        "lat": 52.88286665999999,
-        "lng": 13.87430876
-      },
-      "google": {
-        "lat": 52.8828954,
-        "lng": 13.8743564,
-        "place_id": "ChIJHfS4NbvBqUcRJpV3bHy21yY",
-        "address": "16230 Chorin-Sandkrug"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "chorin_brodowin",
-      "name": "Brodowin",
-      "before": {
-        "lat": 52.90998316,
-        "lng": 13.960164940000002
-      },
-      "google": {
-        "lat": 52.9074461,
-        "lng": 13.9697553,
-        "place_id": "ChIJN5y3huTBqUcRAJWB1kggIQo",
-        "address": "16230 Chorin-Brodowin"
-      },
-      "delta_m": 702,
-      "status": "BAD",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "chorin_forsthaus_kolli",
-      "name": "Forsthaus Kölli",
-      "before": {
-        "lat": 52.880050360000006,
-        "lng": 13.957935459999998
-      },
-      "google": {
-        "lat": 52.8800791,
-        "lng": 13.9579831,
-        "place_id": "ChIJi1V_HUfBqUcReq_LTaYVOug",
-        "address": "VXJ5+25, 16230 Chorin"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "chorin_spilwut",
-      "name": "Spilwut",
-      "before": {
-        "lat": 52.925593860000006,
-        "lng": 13.80558892
-      },
-      "google": {
-        "lat": 52.9256226,
-        "lng": 13.8056366,
-        "place_id": "ChIJ4ddWWdG_qUcRu5i1hYP-Zi0",
-        "address": "Schönhof 6, 16230 Chorin-Golzow"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "chorin_plagefenn",
-      "name": "Plagefenn",
-      "before": {
-        "lat": 52.87616276,
-        "lng": 13.933820980000002
-      },
-      "google": {
-        "lat": 52.8761915,
-        "lng": 13.9338686,
-        "place_id": "ChIJW7FXBpnBqUcR4gkyAZ2M0YY",
-        "address": "16230 Chorin"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "chorin_sportplatz_brodowin",
-      "name": "Sportplatz Brodowin",
-      "before": {
-        "lat": 52.90639926,
-        "lng": 13.957447339999998
-      },
-      "google": {
-        "lat": 52.90642800000001,
-        "lng": 13.957495,
-        "place_id": "ChIJb7E3AQDBqUcRfQLJQRFxGw8",
-        "address": "Dorfstraße 27, 16230 Chorin"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "chorin_sportplatz",
-      "name": "Sportplatz",
-      "before": {
-        "lat": 52.884481959999995,
-        "lng": 13.873262059999998
-      },
-      "google": {
-        "lat": 52.9027821,
-        "lng": 13.8734324,
-        "place_id": "ChIJVVWVrRTAqUcRYzgOakCht58",
-        "address": "Choriner Dorfstraße 17b, 16230 Chorin"
-      },
-      "delta_m": 2035,
-      "status": "BAD",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "chorin_seeblick_serwest_badewiese",
-      "name": "Seeblick, Serwest, Badewiese",
-      "before": {
-        "lat": 52.943675459999994,
-        "lng": 13.940992600000001
-      },
-      "google": {
-        "lat": 52.9437042,
-        "lng": 13.9410403,
-        "place_id": "ChIJ_____1vqqUcRyKAV3TqVhs0",
-        "address": "16230 Chorin-Serwest"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "chorin_hoyer_automatenstation",
-      "name": "Hoyer Automatenstation",
-      "before": {
-        "lat": 52.85066396,
-        "lng": 13.817020500000002
-      },
-      "google": {
-        "lat": 52.8506927,
-        "lng": 13.8170681,
-        "place_id": "ChIJVcuIiVa_qUcRj3j3P-Qn874",
-        "address": "Neue Str. 100, 16225 Eberswalde"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "chorin_backer_wiese_produktion_auf_dem_gelande_der_ehemaligen_eberswalder_wurst_",
-      "name": "Bäcker Wiese Produktion auf dem Gelände der ehemaligen Eberswalder Wurst Fabrik",
-      "before": {
-        "lat": 52.88842906,
-        "lng": 13.82316566
-      },
-      "google": {
-        "lat": 52.8884578,
-        "lng": 13.8232133,
-        "place_id": "ChIJgw_6a3a_qUcRWXhM1HettOc",
-        "address": "Joachimsthaler Str. 100, 16230 Britz"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "chorin_wc",
-      "name": "WC",
-      "before": {
-        "lat": 52.847899559999995,
-        "lng": 13.940799100000001
-      },
-      "google": {
-        "lat": 52.8930093,
-        "lng": 13.8836687,
-        "place_id": "ChIJlS1J1ELAqUcRzY_HE5r3WMU",
-        "address": "Amt Chorin 11 a, 16230 Chorin"
-      },
-      "delta_m": 6314,
-      "status": "BAD",
-      "streetview": "OK"
-    },
-    {
-      "id": "chorin_toilette",
-      "name": "Toilette",
-      "before": {
-        "lat": 52.96429396,
-        "lng": 13.805504680000002
-      },
-      "google": {
-        "lat": 52.8930093,
-        "lng": 13.8836687,
-        "place_id": "ChIJlS1J1ELAqUcRzY_HE5r3WMU",
-        "address": "Amt Chorin 11 a, 16230 Chorin"
-      },
-      "delta_m": 9502,
-      "status": "BAD",
-      "streetview": "OK"
-    },
-    {
-      "id": "chorin_restaurant_u_pension_seeterrasse",
-      "name": "Restaurant u. Pension Seeterrasse",
-      "before": {
-        "lat": 52.94576926,
-        "lng": 13.9397439
-      },
-      "google": {
-        "lat": 52.945798,
-        "lng": 13.9397916,
-        "place_id": "ChIJ5citde_BqUcRtjqMWx_89JU",
-        "address": "Dorfstraße 39 A, 16230 Chorin"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "chorin_seehotel_muhlenhaus",
-      "name": "Seehotel Mühlenhaus",
-      "before": {
-        "lat": 52.88089576,
-        "lng": 13.866373959999999
-      },
-      "google": {
-        "lat": 52.8809245,
-        "lng": 13.8664216,
-        "place_id": "ChIJT9P7pIrAqUcRhBS81vjYulE",
-        "address": "Ragöser Mühle 1, 16230 Chorin"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "chorin_imbisswagen_karlstrasse",
-      "name": "Imbisswagen Karlstraße",
-      "before": {
-        "lat": 52.879349860000005,
-        "lng": 13.866538060000002
-      },
-      "google": {
-        "lat": 52.8793786,
-        "lng": 13.8665857,
-        "place_id": "ChIJm5TidwDBqUcRpL8aN1KtttY",
-        "address": "Karlstraße 1, 16230 Chorin"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "chorin_restaurant_athos",
-      "name": "Restaurant Athos",
-      "before": {
-        "lat": 52.87385226,
-        "lng": 13.82064428
-      },
-      "google": {
-        "lat": 52.873881,
-        "lng": 13.8206919,
-        "place_id": "ChIJ6eS0esq_qUcRaiBCQMjHTdY",
-        "address": "Eberswalder Str. 40, 16230 Britz-Kolonie Britz"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "chorin_schwarzer_adler",
-      "name": "Schwarzer Adler",
-      "before": {
-        "lat": 52.911894159999996,
-        "lng": 13.96087814
-      },
-      "google": {
-        "lat": 52.9119229,
-        "lng": 13.9609258,
-        "place_id": "ChIJB4A--uLBqUcRkOrXhmUinP8",
-        "address": "Dorfstraße 80, 16230 Chorin"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "chorin_panoramarestaurant_carlsburg",
-      "name": "Panoramarestaurant Carlsburg",
-      "before": {
-        "lat": 52.802646360000004,
-        "lng": 13.95745196
-      },
-      "google": {
-        "lat": 52.80267509999999,
-        "lng": 13.9574995,
-        "place_id": "ChIJl_oKXEDEqUcRbKxlBBvyyLs",
-        "address": "Burgstraße 9, 16259 Falkenberg"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "chorin_kochkommode_lokal",
-      "name": "Kochkommode Lokal",
-      "before": {
-        "lat": 52.833994759999996,
-        "lng": 13.819953620000001
-      },
-      "google": {
-        "lat": 52.8340235,
-        "lng": 13.8200012,
-        "place_id": "ChIJkfv4CzrHqUcRb53-qV2SHAI",
-        "address": "An d. Friedensbrücke 23A, 16225 Eberswalde"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "chorin_seehotel_schorfheide_am_grimnitzsee",
-      "name": "Seehotel Schorfheide am Grimnitzsee",
-      "before": {
-        "lat": 52.96368326,
-        "lng": 13.79361988
-      },
-      "google": {
-        "lat": 52.963712,
-        "lng": 13.7936676,
-        "place_id": "ChIJ0YPU1ruVqUcRgkAjO-B8e0A",
-        "address": "Am Grimnitzsee 3, 16247 Althüttendorf"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "chorin_marina_park_eberswalde",
-      "name": "Marina Park Eberswalde",
-      "before": {
-        "lat": 52.83848326,
-        "lng": 13.831828419999999
-      },
-      "google": {
-        "lat": 52.83851199999999,
-        "lng": 13.831876,
-        "place_id": "ChIJpS3oh03HqUcRDYQvQpihmFI",
-        "address": "Am Kanal 36, 16225 Eberswalde"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "chorin_fontane_hotel",
-      "name": "Fontane Hotel",
-      "before": {
-        "lat": 52.91319556,
-        "lng": 13.708185839999999
-      },
-      "google": {
-        "lat": 52.9132243,
-        "lng": 13.7082335,
-        "place_id": "ChIJi2y_TLq9qUcRNrCJjRR7Phg",
-        "address": "am See 7, 16244 Schorfheide-Altenhof"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "chorin_pension_buntspecht",
-      "name": "Pension Buntspecht",
-      "before": {
-        "lat": 52.901272860000006,
-        "lng": 13.87049614
-      },
-      "google": {
-        "lat": 52.9013016,
-        "lng": 13.8705438,
-        "place_id": "ChIJq3pLlmzAqUcRgY4z4CAABcI",
-        "address": "Choriner Dorfstraße 8, 16230 Chorin"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "chorin_h24_hotel_apartments_eberswalde",
-      "name": "H24 Hotel Apartments Eberswalde",
-      "before": {
-        "lat": 52.83355706,
-        "lng": 13.81010642
-      },
-      "google": {
-        "lat": 52.83358579999999,
-        "lng": 13.810154,
-        "place_id": "ChIJ6xDyaMC5qUcR00avPESZN-o",
-        "address": "Eisenbahnstraße 20, 16225 Eberswalde"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "chorin_pension_markische_bauernstube",
-      "name": "Pension Märkische Bauernstube",
-      "before": {
-        "lat": 52.866082260000006,
-        "lng": 13.74930238
-      },
-      "google": {
-        "lat": 52.866111,
-        "lng": 13.74935,
-        "place_id": "ChIJSYkz6MS-qUcR22AngxQgr1s",
-        "address": "Eberswalder Str. 5, 16244 Schorfheide"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "chorin_hotel_restaurant_jagerheim_utzdorf_am_liepnitzsee",
-      "name": "Hotel & Restaurant Jägerheim Ützdorf am Liepnitzsee",
-      "before": {
-        "lat": 52.75664535999999,
-        "lng": 13.529276300000001
-      },
-      "google": {
-        "lat": 52.7566741,
-        "lng": 13.5293238,
-        "place_id": "ChIJnWYSkCiwqUcRwjK0hxUy4d4",
-        "address": "Wandlitzer Str. 12, 16348 Wandlitz-Lanke"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "chorin_hotel_garni_zur_muhle",
-      "name": "Hotel garni Zur Mühle",
-      "before": {
-        "lat": 52.979722759999994,
-        "lng": 13.96333876
-      },
-      "google": {
-        "lat": 52.97975150000001,
-        "lng": 13.9633865,
-        "place_id": "ChIJJ9TyhJjrqUcR1ZlbnkNnzSc",
-        "address": "Am Mühlenberg 3, 16278 Angermünde-Schmargendorf"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "chorin_planetenweg",
-      "name": "Planetenweg",
-      "before": {
-        "lat": 52.93881426,
-        "lng": 13.90539398
-      },
-      "google": {
-        "lat": 52.9388502,
-        "lng": 13.9054536,
-        "place_id": "ChIJ83y_YQDrqUcRbz6C4LZ_C-g",
-        "address": "Buchholzer Str. 17, 16230 Chorin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "chorin_kleiner_rummelsberg",
-      "name": "Kleiner Rummelsberg",
-      "before": {
-        "lat": 52.91277375999999,
-        "lng": 13.98194602
-      },
-      "google": {
-        "lat": 52.91249999999999,
-        "lng": 13.981944,
-        "place_id": "ChIJGeLZ6__pqUcRV55jHq7LTcU",
-        "address": "Kleiner Rummelsberg, 16230 Chorin"
+        "address": "Amt Chorin 11 a, 16230 Chorin, Germany"
       },
       "delta_m": 30,
       "status": "CHECK",
@@ -1017,106 +42,309 @@
       "applied": true
     },
     {
-      "id": "chorin_ragoser_schleuse",
-      "name": "Ragöser Schleuse",
+      "id": "chorin_touristinformation_kloster_chorin",
+      "name": "Touristinformation Kloster Chorin",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.84919855999999,
-        "lng": 13.8566865
+        "lat": 52.89240632727273,
+        "lng": 13.88246169090909
+      }
+    },
+    {
+      "id": "chorin_hotel_haus_chorin",
+      "name": "Hotel Haus Chorin",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 52.89803973000001,
+        "lng": 13.883335475
+      }
+    },
+    {
+      "id": "chorin_choriner_dorfkirche",
+      "name": "Choriner Dorfkirche",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 52.902534233333334,
+        "lng": 13.871929983333333
+      }
+    },
+    {
+      "id": "chorin_ehemalige_ragoser_muhle",
+      "name": "Ehemalige Ragöser Mühle",
+      "before": {
+        "lat": 52.879647687500004,
+        "lng": 13.8618044875
       },
       "google": {
-        "lat": 52.84923449999999,
-        "lng": 13.856746,
-        "place_id": "ChIJJaJOB4vBqUcR2GJ025DFqWU",
-        "address": "Ragöser Schleuse 1, 16225 Eberswalde"
+        "lat": 52.8790566,
+        "lng": 13.85989,
+        "place_id": "ChIJr1ljqrnBqUcRc73bHF4fvp0",
+        "address": "16230 Chorin-Sandkrug, Germany"
       },
-      "delta_m": 6,
-      "status": "OK",
+      "delta_m": 144,
+      "status": "BAD",
       "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "chorin_lehrpfad_chorin",
+      "name": "Lehrpfad Chorin",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 52.89314082,
+        "lng": 13.880325480000002
+      }
+    },
+    {
+      "id": "chorin_privatparkplatz_kloster_chorin",
+      "name": "Privatparkplatz Kloster Chorin",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 52.8933345,
+        "lng": 13.88384055263158
+      }
+    },
+    {
+      "id": "chorin_waldlehrgarten_weinberg",
+      "name": "Waldlehrgarten Weinberg",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 52.8933345,
+        "lng": 13.88384055263158
+      }
+    },
+    {
+      "id": "chorin_parkplatz_kloster_chorin",
+      "name": "Parkplatz Kloster Chorin",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 52.8933345,
+        "lng": 13.88384055263158
+      }
+    },
+    {
+      "id": "chorin_amtssee",
+      "name": "Amtssee",
+      "before": {
+        "lat": 52.89497361666667,
+        "lng": 13.886297066666666
+      },
+      "google": {
+        "lat": 52.895117299999995,
+        "lng": 13.886882,
+        "place_id": "ChIJl86OLkTAqUcR1tBWtK11QWQ",
+        "address": "Amtssee, 16230 Chorin, Germany"
+      },
+      "delta_m": 42,
+      "status": "CHECK",
+      "streetview": "ZERO_RESULTS",
+      "applied": true
+    },
+    {
+      "id": "chorin_fettseemoor",
+      "name": "Fettseemoor",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 52.8933345,
+        "lng": 13.88384055263158
+      }
+    },
+    {
+      "id": "chorin_listnride_fahrradverleih_in_chorin",
+      "name": "ListNRide - Fahrradverleih in Chorin",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 52.901944,
+        "lng": 13.871110999999999
+      }
+    },
+    {
+      "id": "chorin_sports_field",
+      "name": "Sports Field",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 52.902782099999996,
+        "lng": 13.873432399999999
+      }
+    },
+    {
+      "id": "chorin_gleis_9_n_e_v",
+      "name": "Gleis 9 n.E.V.",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 52.8933345,
+        "lng": 13.88384055263158
+      }
+    },
+    {
+      "id": "chorin_alpakas_vom_serwester_hof",
+      "name": "Alpakas vom Serwester Hof",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 52.93001255,
+        "lng": 13.919348824999998
+      }
+    },
+    {
+      "id": "chorin_ruine_der_klostermuhle_chorin",
+      "name": "Ruine der Klostermühle Chorin",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 52.89240632727273,
+        "lng": 13.88246169090909
+      }
+    },
+    {
+      "id": "chorin_stele_senftenhutte",
+      "name": "Stele Senftenhütte",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 52.8933345,
+        "lng": 13.88384055263158
+      }
+    },
+    {
+      "id": "chorin_kriegsgraberstatte_erster_und_zweiter_weltkrieg",
+      "name": "Kriegsgräberstätte Erster und Zweiter Weltkrieg",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 52.88603872,
+        "lng": 13.87919786
+      }
+    },
+    {
+      "id": "chorin_neuehutte_denkmal",
+      "name": "Neuehütte Denkmal",
+      "before": {
+        "lat": 52.86757804,
+        "lng": 13.85421458
+      },
+      "google": {
+        "lat": 52.8679299,
+        "lng": 13.853766,
+        "place_id": "ChIJo4mQ5CLBqUcRzXqM7Uj4VFs",
+        "address": "Waldstraße 27A, 16230 Chorin-Neuehütte, Germany"
+      },
+      "delta_m": 49,
+      "status": "CHECK",
+      "streetview": "ZERO_RESULTS",
+      "applied": true
+    },
+    {
+      "id": "chorin_rapp_keramik_chorin",
+      "name": "RAPP KERAMIK CHORIN",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 52.8933345,
+        "lng": 13.88384055263158
+      }
+    },
+    {
+      "id": "chorin_futterhandel_kornscheune_ronald_kuter",
+      "name": "Futterhandel Kornscheune Ronald Küter",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 52.8933345,
+        "lng": 13.88384055263158
+      }
+    },
+    {
+      "id": "chorin_hof_langanke",
+      "name": "Hof Langanke",
+      "before": {
+        "lat": 52.932820075,
+        "lng": 13.910383216666666
+      },
+      "google": {
+        "lat": 52.9329469,
+        "lng": 13.910783,
+        "place_id": "ChIJBxXb95nrqUcRLbJtW0vAokQ",
+        "address": "Buchholzer Str. 7, 16230 Chorin, Germany"
+      },
+      "delta_m": 30,
+      "status": "CHECK",
+      "streetview": "ZERO_RESULTS",
+      "applied": true
+    },
+    {
+      "id": "chorin_spilwut",
+      "name": "Spilwut",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 52.8933345,
+        "lng": 13.88384055263158
+      }
+    },
+    {
+      "id": "chorin_plagefenn",
+      "name": "Plagefenn",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 52.884729505228776,
+        "lng": 13.933979458823528
+      }
+    },
+    {
+      "id": "chorin_planetenweg",
+      "name": "Planetenweg",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 52.938877883333326,
+        "lng": 13.905450083333335
+      }
+    },
+    {
+      "id": "chorin_kleiner_rummelsberg",
+      "name": "Kleiner Rummelsberg",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 52.91282717777777,
+        "lng": 13.982062633333335
+      }
+    },
+    {
+      "id": "chorin_ragoser_schleuse",
+      "name": "Ragöser Schleuse",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 52.84973522,
+        "lng": 13.85665118
+      }
     },
     {
       "id": "chorin_aussichtspunkt",
       "name": "Aussichtspunkt",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.859606559999996,
-        "lng": 13.87013018
-      },
-      "google": {
         "lat": 52.8596425,
-        "lng": 13.8701897,
-        "place_id": "ChIJb4cc1N3BqUcRzZe7wSyQ6J4",
-        "address": "L291, 16230 Chorin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lng": 13.8701897
+      }
     },
     {
       "id": "chorin_besucher_und_informationszentrum_geopark_gross_ziethen",
       "name": "Besucher- und Informationszentrum Geopark Groß Ziethen",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.96263856,
-        "lng": 13.88997354
-      },
-      "google": {
-        "lat": 52.9626745,
-        "lng": 13.8900332,
-        "place_id": "ChIJebDp7dbqqUcR2Sh45E5Y-oA",
-        "address": "Zur Mühle 51, 16247 Ziethen-Groß-Ziethen"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.96266156923077,
+        "lng": 13.889949930769232
+      }
     },
     {
       "id": "chorin_britz_chorin_oderberg",
       "name": "Britz-Chorin-Oderberg",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.894626259999995,
-        "lng": 13.93938674
-      },
-      "google": {
-        "lat": 52.9038,
-        "lng": 13.87274,
-        "place_id": "ChIJQ3ERmRPAqUcRZWxSo5YsffQ",
-        "address": "Chorin"
-      },
-      "delta_m": 4585,
-      "status": "BAD",
-      "streetview": "OK"
+        "lat": 52.8946622,
+        "lng": 13.9394463
+      }
     },
     {
       "id": "chorin_okohof_engler",
       "name": "Ökohof Engler",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.92909396,
-        "lng": 13.925065499999999
-      },
-      "google": {
-        "lat": 52.9291299,
-        "lng": 13.9251251,
-        "place_id": "ChIJK42RVX3qqUcRzBF0MgfldOI",
-        "address": "Serwester Dorfstraße 72, 16230 Chorin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "chorin_toi_toi",
-      "name": "Toi toi",
-      "before": {
-        "lat": 52.85103203999999,
-        "lng": 13.812228339999999
-      },
-      "google": {
-        "lat": 52.84490700000001,
-        "lng": 13.8180147,
-        "place_id": "ChIJG2seUVS_qUcRjHmrzytwqps",
-        "address": "Poratzstraße 21, 16225 Eberswalde"
-      },
-      "delta_m": 784,
-      "status": "BAD",
-      "streetview": "OK"
+        "lat": 52.92926748,
+        "lng": 13.92501956
+      }
     }
   ]
 }

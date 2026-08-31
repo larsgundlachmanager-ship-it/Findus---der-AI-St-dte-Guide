@@ -13,12 +13,14 @@ import type { QuickAction } from '../../types/concierge';
 import { applyWalkEtaWeatherMultiplier } from '../weather/weatherRouting';
 import { resolveWeatherRouting } from '../weatherService';
 import { resolveDateTimeMs, isPostMidnightWindow } from '../time/temporalGerman';
+import { snapMsToQuarterHour } from '../../utils/dateKeys';
+import {
+  hasClockHint,
+  isWakeAlarmIntent as detectWakeAlarmIntent,
+} from './wakeIntentDetect';
 
 /** Zeit zum Fertigmachen (Dusche, Packen, Frühstück) vor dem Losgehen. */
 export const DEFAULT_MORNING_PREP_MIN = 50;
-
-const WAKE_INTENT =
-  /\b(wecker|aufstehen|weck\s+mich|stell(?:e)?\s+(?:mir\s+)?(?:einen\s+)?wecker|erinner\s+mich\s+(?:morgen\s+)?(?:früh|frueh|um\s+\d)|wann\s+muss\s+ich\s+(?:aufstehen|los)|weckerschalten|wecker\s+(?:auf|um))\b/iu;
 
 export type WakeAlarmProposal = {
   wakeAtMs: number;
@@ -50,8 +52,76 @@ export function setPendingWakeProposal(
   pendingProposal = proposal;
 }
 
+/** Re-export — SSOT in wakeIntentDetect.ts */
 export function isWakeAlarmIntent(text: string): boolean {
-  return WAKE_INTENT.test(text.replace(/\s+/g, ' ').trim());
+  return detectWakeAlarmIntent(text);
+}
+
+/**
+ * Nach erfolgreichem Stellen: Stichpunkte + optionale Just-Do-It-Buttons
+ * (früher / Plan-Hinweis) — Wortlaut der Speech bleibt knapper Confirm.
+ */
+export function buildWakeSuccessExtras(opts: {
+  wakeAtMs: number;
+  reasonLabel?: string;
+  planHintTitle?: string | null;
+  suggestedEarlierMs?: number | null;
+}): { bullets: string[]; quickActions: QuickAction[] } {
+  const wakeClock = formatClockDe(opts.wakeAtMs);
+  const day = new Date(opts.wakeAtMs);
+  const dayLabel = day.toLocaleDateString('de-DE', {
+    weekday: 'short',
+    day: 'numeric',
+    month: 'short',
+  });
+  const bullets = [
+    `⏰ ${wakeClock} · ${dayLabel}`,
+    'In Timeline + zeitlicher Trigger',
+  ];
+  if (opts.planHintTitle) {
+    bullets.push(`Plan-Anker: ${opts.planHintTitle}`);
+  }
+
+  const quickActions: QuickAction[] = [];
+  const earlier15 = opts.wakeAtMs - 15 * 60_000;
+  if (earlier15 > Date.now() + 60_000) {
+    const c = formatClockDe(earlier15);
+    quickActions.push({
+      type: 'SET_WAKE_ALARM',
+      label: `15 Min früher (${c})`,
+      payload: {
+        dateIso: new Date(earlier15).toISOString(),
+        timeLabel: c,
+        destName: opts.reasonLabel || 'Aufstehen',
+        wakeMode: 'replace',
+        replaceWakeAtMs: opts.wakeAtMs,
+      },
+    });
+  }
+  if (
+    opts.suggestedEarlierMs != null &&
+    opts.suggestedEarlierMs > Date.now() + 60_000 &&
+    opts.suggestedEarlierMs < opts.wakeAtMs - 5 * 60_000
+  ) {
+    const alt = formatClockDe(opts.suggestedEarlierMs);
+    quickActions.push({
+      type: 'SET_WAKE_ALARM',
+      label: `Früher ${alt}`,
+      payload: {
+        dateIso: new Date(opts.suggestedEarlierMs).toISOString(),
+        timeLabel: alt,
+        destName: opts.planHintTitle || opts.reasonLabel || 'Aufstehen',
+        wakeMode: 'replace',
+        replaceWakeAtMs: opts.wakeAtMs,
+      },
+    });
+  }
+  quickActions.push({
+    type: 'SHOW_MORE',
+    label: 'Wetter morgen',
+    payload: { textPrompt: 'Wie wird das Wetter morgen früh?' },
+  });
+  return { bullets: bullets.slice(0, 3), quickActions: quickActions.slice(0, 4) };
 }
 
 export function formatClockDe(ms: number): string {
@@ -63,16 +133,55 @@ export function formatClockDe(ms: number): string {
 
 function parseExplicitWakeMs(text: string): number | null {
   const t = text.replace(/\s+/g, ' ').trim();
+  // Transit-Abfahrt nie als Weckzeit (Compound läuft über timeCareExecute)
+  try {
+    const {
+      extractTransitDepartureMs,
+      extractWakeMsExcludingTransit,
+      classifyTimeCareIntent,
+    } = require('../concierge/timeCareIntent') as {
+      extractTransitDepartureMs: (s: string) => number | null;
+      extractWakeMsExcludingTransit: (s: string) => number | null;
+      classifyTimeCareIntent: (
+        s: string,
+      ) => { kind: string } | null;
+    };
+    const care = classifyTimeCareIntent(t);
+    if (
+      care?.kind === 'compound_wake_transit' ||
+      care?.kind === 'transit_leave'
+    ) {
+      return extractWakeMsExcludingTransit(t);
+    }
+    if (extractTransitDepartureMs(t) != null && !detectWakeAlarmIntent(t)) {
+      return null;
+    }
+  } catch {
+    /* soft */
+  }
+
   // Temporal SSOT: „morgen um 8“ / Post-Midnight
   const fromSsot = resolveDateTimeMs({ text: t, defaultHour: 8 });
-  if (fromSsot != null && (/\bum\b|\buhr\b|:\d{2}/i.test(t) || /\bmorgen\b/i.test(t))) {
+  if (
+    fromSsot != null &&
+    (hasClockHint(t) ||
+      /\bmorgen\b/i.test(t) ||
+      /\b(?:morgens|früh|frueh)\b/i.test(t))
+  ) {
     if (fromSsot >= Date.now() + 20_000) return fromSsot;
   }
 
-  const clock = t.match(/\b(?:um\s+)?(\d{1,2})(?::(\d{2}))?\s*(?:uhr)?\b/i);
+  const clock =
+    t.match(/\b(\d{1,2})[:.](\d{2})\b/) ||
+    t.match(/\b(?:um\s+)?(\d{1,2})(?::(\d{2}))?\s*(?:uhr)?\b/i);
   if (!clock) return null;
-  if (!/\bum\b|\buhr\b|\bauf\s+\d/i.test(t) && !/:\d{2}/.test(t)) {
-    if (!/\bwecker\b/i.test(t)) return null;
+  // Bei klarem Wake-Intent reicht die Zahl — sonst um/uhr/wecker
+  if (
+    !/\bum\b|\buhr\b|\bauf\s+\d/i.test(t) &&
+    !/:\d{2}|\.\d{2}/.test(t) &&
+    !detectWakeAlarmIntent(t)
+  ) {
+    if (!/\bwecker|alarm\b/i.test(t)) return null;
   }
   const h = Number(clock[1]);
   const m = Number(clock[2] ?? 0);
@@ -80,6 +189,14 @@ function parseExplicitWakeMs(text: string): number | null {
   const d = new Date();
   d.setSeconds(0, 0);
   d.setHours(h, m, 0, 0);
+  // „morgens“ / früh → wenn Stunde nachmittag-ähnlich und Kontext Morgen: 0–11
+  if (
+    /\b(?:morgens|früh|frueh)\b/i.test(t) &&
+    h >= 1 &&
+    h <= 11
+  ) {
+    /* keep morning hour */
+  }
   if (d.getTime() < Date.now() + 2 * 60_000) {
     // Post-midnight: „um 8“ ohne Tag → anbrechender Morgen (heute), nicht +1 blind
     if (isPostMidnightWindow() && h >= 5) {
@@ -113,17 +230,28 @@ export function buildWakeProposalFromLeaveBy(opts: {
   departureMs?: number | null;
   reasonLabel: string;
   prepMin?: number;
+  /** Extra Minuten wenn Frühstück vor dem Termin geplant ist */
+  breakfastMin?: number | null;
 }): WakeAlarmProposal | null {
-  const prep = opts.prepMin ?? DEFAULT_MORNING_PREP_MIN;
-  const wakeAtMs = opts.leaveByMs - prep * 60_000;
+  const breakfast = opts.breakfastMin != null && opts.breakfastMin > 0
+    ? Math.min(90, Math.max(20, Math.round(opts.breakfastMin)))
+    : 0;
+  const prep = (opts.prepMin ?? DEFAULT_MORNING_PREP_MIN) + breakfast;
+  const wakeAtMs = snapMsToQuarterHour(
+    opts.leaveByMs - prep * 60_000,
+    'down',
+  );
   if (wakeAtMs < Date.now() + 60_000) return null;
 
   const wakeClock = formatClockDe(wakeAtMs);
   const leaveClock = formatClockDe(opts.leaveByMs);
+  const breakfastBit = breakfast
+    ? ` inkl. ~${breakfast} Min Frühstück`
+    : '';
   const speech =
     `Für ${opts.reasonLabel} solltest du gegen ${leaveClock} los — ` +
-    `mit ${prep} Minuten Fertigmachen wäre Aufstehen um ${wakeClock} perfekt. ` +
-    `Soll ich den Wecker stellen?`;
+    `mit ${prep} Minuten Fertigmachen${breakfastBit} wäre Aufstehen um ${wakeClock} passend. ` +
+    `Wecker-Button ist dabei.`;
 
   const proposal: WakeAlarmProposal = {
     wakeAtMs,
@@ -135,7 +263,9 @@ export function buildWakeProposalFromLeaveBy(opts: {
     bullets: [
       `Aufstehen ${wakeClock}`,
       `Losgehen ${leaveClock}`,
-      `${prep} Min fertigmachen`,
+      breakfast
+        ? `${opts.prepMin ?? DEFAULT_MORNING_PREP_MIN} Min fertig + ~${breakfast} Min Frühstück`
+        : `${prep} Min fertigmachen`,
     ],
     quickActions: [
       {
@@ -156,6 +286,59 @@ export function buildWakeProposalFromLeaveBy(opts: {
     ],
   };
   return proposal;
+}
+
+/**
+ * Wenn Timeline ein Frühstück vor einem Morgen-Anker hat → Extra-Prep-Minuten.
+ * Blaupause: Match 10:00 + Frühstück → Wecker früher.
+ */
+export function inferBreakfastPrepMinFromPlan(anchorStartMs: number): number {
+  try {
+    const { useFuturePlanStore } = require('../../module2/timeline/futurePlanState') as {
+      useFuturePlanStore: {
+        getState: () => {
+          plan: {
+            stops: Array<{
+              title?: string;
+              notes?: string | null;
+              plannedStartMs?: number | null;
+              plannedEndMs?: number | null;
+              kind?: string;
+            }>;
+          };
+        };
+      };
+    };
+    const stops = useFuturePlanStore.getState().plan.stops ?? [];
+    const breakfast = stops.find((s) => {
+      const blob = `${s.title ?? ''} ${s.notes ?? ''}`;
+      if (!/\b(frühstück|fruehstueck|breakfast|brunch)\b/i.test(blob)) {
+        return false;
+      }
+      const t = s.plannedStartMs ?? s.plannedEndMs;
+      if (t == null) return true;
+      return t < anchorStartMs && t >= anchorStartMs - 4 * 60 * 60_000;
+    });
+    if (!breakfast) return 0;
+    if (
+      breakfast.plannedStartMs != null &&
+      breakfast.plannedEndMs != null &&
+      breakfast.plannedEndMs > breakfast.plannedStartMs
+    ) {
+      return Math.min(
+        75,
+        Math.max(
+          25,
+          Math.round(
+            (breakfast.plannedEndMs - breakfast.plannedStartMs) / 60_000,
+          ),
+        ),
+      );
+    }
+    return 40;
+  } catch {
+    return 0;
+  }
 }
 
 async function proposalFromFlightPlan(
@@ -248,7 +431,7 @@ export async function prepareWakeAlarmFollowUp(
       speech:
         result.message ||
         (result.ok
-          ? `Wecker auf ${wakeClock} gestellt — steht in der Timeline.`
+          ? `Ich habe deinen Wecker auf ${wakeClock} gestellt.`
           : `Wecker auf ${wakeClock} ging gerade nicht.`),
       bullets: result.ok ? [`⏰ ${wakeClock}`] : proposal.bullets,
       quickActions: result.ok
@@ -268,60 +451,10 @@ export async function prepareWakeAlarmFollowUp(
   }
 
   // 1) Explizite Uhrzeit → Just-Do-It (Android AlarmManager)
+  // User-Zeit hat Vorrang: zuerst stellen, Plan-Hinweis nur optional danach.
   const explicit = parseExplicitWakeMs(t);
   if (explicit != null) {
     const wakeClock = formatClockDe(explicit);
-
-    // Plan-Konflikt: gewünschter Wecker zu spät für ersten Leave/Transit
-    try {
-      const { useFuturePlanStore } = require('../../module2/timeline/futurePlanState') as {
-        useFuturePlanStore: {
-          getState: () => {
-            plan: {
-              stops: Array<{
-                kind?: string;
-                id: string;
-                title: string;
-                plannedStartMs?: number | null;
-                notes?: string;
-              }>;
-            };
-          };
-        };
-      };
-      const first = useFuturePlanStore
-        .getState()
-        .plan.stops.filter(
-          (s) =>
-            s.kind !== 'nav_leg' &&
-            !s.id.startsWith('choice_') &&
-            s.plannedStartMs != null,
-        )
-        .sort((a, b) => (a.plannedStartMs ?? 0) - (b.plannedStartMs ?? 0))[0];
-      if (first?.plannedStartMs != null) {
-        const leaveByMs = first.plannedStartMs - 20 * 60_000;
-        const neededWake = leaveByMs - prep * 60_000;
-        if (explicit > neededWake + 5 * 60_000) {
-          const alt = buildWakeProposalFromLeaveBy({
-            leaveByMs,
-            reasonLabel: first.title,
-            prepMin: prep,
-          });
-          if (alt) {
-            pendingProposal = alt;
-            return {
-              ...alt,
-              speech:
-                `Ah nee — für ${first.title} solltest du eher gegen ${formatClockDe(leaveByMs)} los. ` +
-                `Mit Fertigmachen wäre Aufstehen um ${formatClockDe(alt.wakeAtMs)} sinnvoller als ${wakeClock}. ` +
-                `Wollen wir den Wecker lieber auf ${formatClockDe(alt.wakeAtMs)} stellen?`,
-            };
-          }
-        }
-      }
-    } catch {
-      /* soft */
-    }
 
     const forceReplace =
       /\b(aktualisier|ersetz|änder|aender|verschieb)\b/i.test(t);
@@ -330,12 +463,69 @@ export async function prepareWakeAlarmFollowUp(
     const { setWakeAlarmWithBridge } = await import('./nativeAlarmBridge');
     const result = await setWakeAlarmWithBridge({
       wakeAtMs: explicit,
-      reasonLabel: 'Wecker',
+      reasonLabel: 'Aufstehen',
       reminderKey: `explicit:${explicit}`,
       preferNative: true,
       wakeMode: forceReplace ? 'replace' : forceAdd ? 'add' : undefined,
     });
     pendingProposal = null;
+
+    let planHint = '';
+    let extraActions: QuickAction[] = [];
+    try {
+      if (result.ok) {
+        const { useFuturePlanStore } = require('../../module2/timeline/futurePlanState') as {
+          useFuturePlanStore: {
+            getState: () => {
+              plan: {
+                stops: Array<{
+                  kind?: string;
+                  id: string;
+                  title: string;
+                  plannedStartMs?: number | null;
+                }>;
+              };
+            };
+          };
+        };
+        const morningStops = useFuturePlanStore
+          .getState()
+          .plan.stops.filter((s) => {
+            if (s.kind === 'nav_leg' || s.id.startsWith('choice_')) return false;
+            if (s.plannedStartMs == null) return false;
+            const h = new Date(s.plannedStartMs).getHours();
+            return h >= 5 && h < 12;
+          })
+          .sort((a, b) => (a.plannedStartMs ?? 0) - (b.plannedStartMs ?? 0));
+        const first = morningStops[0];
+        if (first?.plannedStartMs != null) {
+          const leaveByMs = first.plannedStartMs - 20 * 60_000;
+          const neededWake = leaveByMs - prep * 60_000;
+          if (
+            explicit > neededWake + 5 * 60_000 &&
+            neededWake > Date.now() + 60_000
+          ) {
+            const altClock = formatClockDe(neededWake);
+            planHint = ` Für ${first.title} wäre eher ${altClock} sinnvoll.`;
+            extraActions = [
+              {
+                type: 'SET_WAKE_ALARM',
+                label: `Früher ${altClock}`,
+                payload: {
+                  dateIso: new Date(neededWake).toISOString(),
+                  timeLabel: altClock,
+                  destName: first.title,
+                  wakeMode: 'replace',
+                  replaceWakeAtMs: explicit,
+                },
+              },
+            ];
+          }
+        }
+      }
+    } catch {
+      /* soft */
+    }
 
     if (result.needsChoice && result.existingWakeAtMs != null) {
       const oldClock = formatClockDe(result.existingWakeAtMs);
@@ -343,9 +533,8 @@ export async function prepareWakeAlarmFollowUp(
         wakeAtMs: explicit,
         leaveByMs: null,
         departureMs: null,
-        reasonLabel: 'Wecker',
+        reasonLabel: 'Aufstehen',
         prepMin: 0,
-        // Kein „Soll ich…?“ — Auswahl nur über Action-Buttons
         speech: `Schon ein Wecker um ${oldClock}. Neu wäre ${wakeClock}.`,
         bullets: [],
         quickActions: [
@@ -355,7 +544,7 @@ export async function prepareWakeAlarmFollowUp(
             payload: {
               dateIso: new Date(explicit).toISOString(),
               timeLabel: wakeClock,
-              destName: 'Wecker',
+              destName: 'Aufstehen',
               wakeMode: 'replace',
               replaceWakeAtMs: result.existingWakeAtMs,
             },
@@ -366,7 +555,7 @@ export async function prepareWakeAlarmFollowUp(
             payload: {
               dateIso: new Date(explicit).toISOString(),
               timeLabel: wakeClock,
-              destName: 'Wecker',
+              destName: 'Aufstehen',
               wakeMode: 'add',
             },
           },
@@ -379,7 +568,7 @@ export async function prepareWakeAlarmFollowUp(
         wakeAtMs: explicit,
         leaveByMs: null,
         departureMs: null,
-        reasonLabel: 'Wecker',
+        reasonLabel: 'Aufstehen',
         prepMin: 0,
         speech:
           result.message ||
@@ -392,21 +581,48 @@ export async function prepareWakeAlarmFollowUp(
             payload: {
               dateIso: new Date(explicit).toISOString(),
               timeLabel: wakeClock,
-              destName: 'Wecker',
+              destName: 'Aufstehen',
             },
           },
         ],
       };
     }
+
+    let suggestedEarlierMs: number | null = null;
+    let planHintTitle: string | null = null;
+    if (extraActions[0]?.payload?.dateIso) {
+      const ms = Date.parse(String(extraActions[0].payload.dateIso));
+      if (Number.isFinite(ms)) suggestedEarlierMs = ms;
+      planHintTitle =
+        typeof extraActions[0].payload.destName === 'string'
+          ? extraActions[0].payload.destName
+          : null;
+    }
+    const extras = buildWakeSuccessExtras({
+      wakeAtMs: explicit,
+      reasonLabel: 'Aufstehen',
+      planHintTitle,
+      suggestedEarlierMs,
+    });
+    // Plan-„Früher“ + 15-Min + Wetter — Dedup nach Label
+    const mergedActions = [...extras.quickActions];
+    for (const a of extraActions) {
+      if (!mergedActions.some((x) => x.label === a.label)) {
+        mergedActions.push(a);
+      }
+    }
+
     return {
       wakeAtMs: explicit,
       leaveByMs: null,
       departureMs: null,
-      reasonLabel: 'Wecker',
+      reasonLabel: 'Aufstehen',
       prepMin: 0,
-      speech: result.message || `Wecker auf ${wakeClock} gestellt.`,
-      bullets: [],
-      quickActions: [],
+      speech:
+        (result.message ||
+          `Ich habe deinen Wecker auf ${wakeClock} gestellt.`) + planHint,
+      bullets: extras.bullets,
+      quickActions: mergedActions.slice(0, 4),
     };
   }
 

@@ -208,21 +208,36 @@ function evaluateSpecializationGate(
   return 'allow';
 }
 
+function hasStoryOrMustHaveTags(schema: PoiSchema): boolean {
+  // Nur echte Landmark / Must-Have umgehen Amenity-Spam-Gate.
+  // Bloßes `story`/`story_enriched` reicht nicht (dünne Directory-Stories).
+  return schema.tags.some((t) =>
+    /^(must_have|must-see|must_see|landmark)$/i.test(String(t).trim()),
+  );
+}
+
 /**
- * Arztpraxis / Zahnarzt / random Café / Parkplatz: nur triggern wenn User-Kontext passt.
+ * Arztpraxis / Café / Parkplatz / Salon / Florist / Shop:
+ * nur proaktiv triggern wenn Pref/Story/must_have passt.
  * (Datenbank bleibt; On-Demand-Fragen finden sie trotzdem.)
  */
 function evaluateProactiveAmenitySkip(
-  poi: PoiSchema,
+  schema: PoiSchema,
   ctx: UserRelevanceContext,
   profile: UserProfile | null | undefined,
+  nameHint?: string | null,
 ): string | null {
-  const blob = `${poi.category} ${poi.tags.join(' ')}`.toLowerCase();
+  // Story / Landmark / must_have = echte Entdeckung → kein Amenity-Spam-Gate
+  if (hasStoryOrMustHaveTags(schema)) return null;
+
+  const blob =
+    `${nameHint ?? ''} ${schema.category} ${schema.tags.join(' ')}`.toLowerCase();
   const prefs = ctx.preferences;
   const yesish = (k: string) => {
     const v = prefs[k];
     return v === 'yes' || v === true || v === 'love' || v === 'prefer';
   };
+  const wantText = `${profile?.wantToExperience ?? ''} ${(profile?.learnedFacts ?? []).join(' ')}`.toLowerCase();
 
   const medical =
     /zahnarzt|zahnmedizin|arztpraxis|hausarzt|\bpraxis\b|klinik|hospital|doctors|dentist|orthopäd|radiolog/.test(
@@ -232,9 +247,7 @@ function evaluateProactiveAmenitySkip(
     const need =
       yesish('gesundheit') ||
       yesish('apotheke') ||
-      (profile?.learnedFacts ?? []).some((f) =>
-        /zahn|arzt|schmerz|gesundheit|medizin/i.test(f),
-      );
+      /zahn|arzt|schmerz|gesundheit|medizin/i.test(wantText);
     if (!need) return 'proactive_medical_skip';
   }
 
@@ -247,10 +260,10 @@ function evaluateProactiveAmenitySkip(
     const wantCoffee =
       yesish('cafe') ||
       yesish('café') ||
+      yesish('cafes') ||
       yesish('kaffee') ||
       yesish('gastronomie') ||
-      (profile?.wantToExperience ?? '').toLowerCase().includes('kaffee') ||
-      (profile?.learnedFacts ?? []).some((f) => /kaffee|café|cafe/i.test(f));
+      /kaffee|café|cafe/i.test(wantText);
     if (!wantCoffee) return 'proactive_cafe_skip';
   }
 
@@ -259,9 +272,57 @@ function evaluateProactiveAmenitySkip(
     !/museum|theater|denkmal|brücke|speicher/.test(blob);
   if (parking) {
     const wantPark =
-      yesish('parken') ||
-      (profile?.learnedFacts ?? []).some((f) => /parkplatz|auto|parken/i.test(f));
+      yesish('parken') || /parkplatz|auto|parken/i.test(wantText);
     if (!wantPark) return 'proactive_parking_skip';
+  }
+
+  const salon =
+    /\b(fris[oö]r|friseur|coiffeur|haarstudio|barber|haarschnitt|nagelsalon|nagelstudio|nagel\s*design|beauty\s*salon|hair\s*salon|barbershop|salon)\b/.test(
+      blob,
+    );
+  if (salon) {
+    const wantBeauty =
+      yesish('friseur') ||
+      yesish('haar') ||
+      yesish('beauty') ||
+      yesish('wellness') ||
+      yesish('nagel') ||
+      /frisur|friseur|haar\s*schnitt|nagel|beauty|coiffeur|barber/i.test(
+        wantText,
+      );
+    if (!wantBeauty) return 'proactive_salon_skip';
+  }
+
+  const florist =
+    /\b(blume|blumen|florist|floristik|blumenladen|strau[sß]|flower\s*shop)\b/.test(
+      blob,
+    );
+  if (florist) {
+    const wantFlowers =
+      yesish('blumen') ||
+      yesish('florist') ||
+      yesish('geschenk') ||
+      /blume|florist|strau[sß]|geschenk|geburtstag|hochzeit/i.test(wantText);
+    if (!wantFlowers) return 'proactive_florist_skip';
+  }
+
+  // Generische Läden — kein Abstecher-Spam; Shopping-Pref / Major Retail ok
+  const genericShop =
+    /\b(laden|shop|boutique|gesch[äa]ft|einzelhandel|kiosk|modehaus|juwelier|optiker|buchhandlung|schreibwaren|drogerie|supermarkt|einkauf(?:szentrum|center)?|shopping)\b/.test(
+      blob,
+    ) &&
+    !/\b(museum|theater|galerie|kirche|schloss|denkmal|park|strand|hafen|bahnhof|restaurant|café|cafe|bäck|baeck|marktplatz|wochenmarkt)\b/.test(
+      blob,
+    );
+  if (genericShop) {
+    const wantShop =
+      yesish('shopping') ||
+      yesish('einkaufen') ||
+      yesish('shoppingmall') ||
+      yesish('souvenir') ||
+      yesish('souvenirs') ||
+      /einkauf|shopping|souvenir|laden|boutique|geschenk/i.test(wantText);
+    if (!wantShop) return 'proactive_shop_skip';
   }
 
   return null;
@@ -304,8 +365,13 @@ export function evaluatePoiRelevance(
     };
   }
 
-  // Utility / Praxis / Café nur bei klarem User-Bedarf — sonst kein Wegweiser-Spam
-  const proactiveSkip = evaluateProactiveAmenitySkip(schema, ctx, profile);
+  // Utility / Praxis / Café / Salon / Shop nur bei klarem User-Bedarf — sonst kein Wegweiser-Spam
+  const proactiveSkip = evaluateProactiveAmenitySkip(
+    schema,
+    ctx,
+    profile,
+    poi.name,
+  );
   if (proactiveSkip) {
     return {
       verdict: 'skip',

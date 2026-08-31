@@ -98,11 +98,12 @@ export async function runJobDeepFill(
         return await fillFact(input, missing);
       case 'day_plan_budget':
         return await fillDayPlan(input, missing);
+      case 'taxi_rideshare':
+        return await fillTaxiRideshare(input);
       case 'shopping_errand':
       case 'luggage_practical':
       case 'mobility_rent':
       case 'parking_ev':
-      case 'taxi_rideshare':
       case 'nav_route':
         return await fillPlacesGeneric(input, missing, jobId);
       default:
@@ -261,7 +262,7 @@ async function fillStay(
   missing: Set<string>,
 ): Promise<DeepFillResult> {
   // Stay: Maps-Pitch / Stay22-Links nachschärfen wenn Venues da
-  const venues = (input.meta?.venues as Array<{
+  const rawVenues = (input.meta?.venues as Array<{
     name: string;
     placeId?: string | null;
     lat?: number | null;
@@ -269,7 +270,23 @@ async function fillStay(
     websiteUrl?: string | null;
     stay?: unknown;
     bookUrl?: string | null;
+    tags?: string[] | null;
+    summary?: string | null;
   }>) ?? [];
+  let venues = rawVenues;
+  try {
+    const { extractStayMustHaves, filterStayOptions } = require('../reboot/pipeline/stayMustHaves') as {
+      extractStayMustHaves: (s: string) => Array<'pool' | 'sauna' | 'view'>;
+      filterStayOptions: <T,>(v: T[], m: Array<'pool' | 'sauna' | 'view'>, n?: number) => T[];
+    };
+    venues = filterStayOptions(
+      rawVenues,
+      extractStayMustHaves(input.userText),
+      2,
+    );
+  } catch {
+    venues = rawVenues.slice(0, 2);
+  }
   if (!venues.length) {
     return {
       filled: false,
@@ -309,8 +326,160 @@ async function fillStay(
 
 async function fillTransit(
   input: DeepFillInput,
-  missing: Set<string>,
+  _missing: Set<string>,
 ): Promise<DeepFillResult> {
+  try {
+    const { wantsTransitTicketFare, researchTransitTicketFare } = await import(
+      '../../services/transit/transitTicketResearch'
+    );
+    if (wantsTransitTicketFare(input.userText)) {
+      const hit = await researchTransitTicketFare({
+        userText: input.userText,
+        lat: input.lat,
+        lng: input.lng,
+        cityHint: input.city,
+      });
+      const buttons: Module2ActionButton[] = hit.actions
+        .filter((a) => a.type === 'OPEN_URL' && a.payload.url)
+        .map((a, i) => ({
+          id: `oepnv_tix_${i}`,
+          label: a.label,
+          payload: { kind: 'deep_link' as const, url: a.payload.url! },
+        }));
+      return {
+        filled: true,
+        agentResult: {
+          agent: 'deep_research',
+          ok: true,
+          draftText: hit.speech,
+          bullets: hit.bullets,
+          buttons,
+          meta: {
+            transit: true,
+            priceEur: hit.price,
+            ticket_or_info_url: buttons.length > 0,
+            ticketUrl:
+              buttons[0]?.payload.kind === 'deep_link'
+                ? buttons[0].payload.url
+                : undefined,
+            hasTicketBtn: buttons.length > 0,
+            spokenExtra: hit.speech.slice(0, 400),
+            silent: false,
+          },
+        },
+      };
+    }
+  } catch {
+    /* fall through */
+  }
+  try {
+    const {
+      wantsFerryOperatorSite,
+      ferryTicketActionsFromResearch,
+    } = await import('../../services/transit/ferryTicketResearch');
+    if (wantsFerryOperatorSite(input.userText)) {
+      const { runWebResearch } = await import(
+        '../../services/research/webResearchService'
+      );
+      const web = await runWebResearch(input.userText, { force: true });
+      const ferryActs = web
+        ? ferryTicketActionsFromResearch({
+            query: input.userText,
+            sources: web.sources,
+            facts: web.facts,
+          })
+        : [];
+      const buttons: Module2ActionButton[] = ferryActs
+        .filter((a) => a.type === 'OPEN_URL' && a.payload.url)
+        .map((a, i) => ({
+          id: `ferry_tix_${i}`,
+          label: a.label,
+          payload: { kind: 'deep_link' as const, url: a.payload.url! },
+        }));
+      const spoken = (web?.speechHint || '').trim();
+      if (buttons.length || spoken || web?.facts?.length) {
+        return {
+          filled: true,
+          agentResult: {
+            agent: 'deep_research',
+            ok: true,
+            draftText: web?.promptBlock || spoken,
+            bullets: (web?.facts ?? [])
+              .slice(0, 3)
+              .map((f) => [f.label, f.value].filter(Boolean).join(': '))
+              .filter(Boolean),
+            buttons,
+            meta: {
+              transit: true,
+              ticket_or_info_url: buttons.length > 0,
+              ticketUrl:
+                buttons[0]?.payload.kind === 'deep_link'
+                  ? buttons[0].payload.url
+                  : undefined,
+              spokenExtra: spoken.slice(0, 400) || undefined,
+              silent: !spoken,
+            },
+          },
+        };
+      }
+    }
+  } catch {
+    /* fall through */
+  }
+  try {
+    const { looksLikeTicketedPlaceAccess } = await import('./jobAnalogy');
+    if (looksLikeTicketedPlaceAccess(input.userText)) {
+      const { ticketedAccessActionsFromResearch } = await import(
+        '../../services/transit/ticketedAccessResearch'
+      );
+      const { runWebResearch } = await import(
+        '../../services/research/webResearchService'
+      );
+      const web = await runWebResearch(input.userText, { force: true });
+      const accessActs = web
+        ? ticketedAccessActionsFromResearch({
+            query: input.userText,
+            sources: web.sources,
+            facts: web.facts,
+          })
+        : [];
+      const accessButtons: Module2ActionButton[] = accessActs
+        .filter((a) => a.type === 'OPEN_URL' && a.payload.url)
+        .map((a, i) => ({
+          id: `access_tix_${i}`,
+          label: a.label,
+          payload: { kind: 'deep_link' as const, url: a.payload.url! },
+        }));
+      const accessSpoken = (web?.speechHint || '').trim();
+      if (accessButtons.length || accessSpoken || web?.facts?.length) {
+        return {
+          filled: true,
+          agentResult: {
+            agent: 'deep_research',
+            ok: true,
+            draftText: web?.promptBlock || accessSpoken,
+            bullets: (web?.facts ?? [])
+              .slice(0, 3)
+              .map((f) => [f.label, f.value].filter(Boolean).join(': '))
+              .filter(Boolean),
+            buttons: accessButtons,
+            meta: {
+              transit: true,
+              ticket_or_info_url: accessButtons.length > 0,
+              ticketUrl:
+                accessButtons[0]?.payload.kind === 'deep_link'
+                  ? accessButtons[0].payload.url
+                  : undefined,
+              spokenExtra: accessSpoken.slice(0, 400) || undefined,
+              silent: !accessSpoken,
+            },
+          },
+        };
+      }
+    }
+  } catch {
+    /* fall through to disruption */
+  }
   const { researchTransitDisruption } = await import(
     '../../services/research/transitDisruptionResearch'
   );
@@ -464,9 +633,113 @@ async function fillKnowledgePitch(
 
 async function fillNightlife(
   input: DeepFillInput,
-  missing: Set<string>,
+  _missing: Set<string>,
 ): Promise<DeepFillResult> {
-  return fillKnowledgePitch(input, missing);
+  try {
+    const {
+      isEventResearchQuery,
+      researchTodaysEvents,
+      synthesizeEventSpeech,
+      eventResearchToActions,
+    } = await import('../../services/concierge/eventResearchService');
+    if (!isEventResearchQuery(input.userText)) {
+      return fillKnowledgePitch(input, _missing);
+    }
+    const research = await researchTodaysEvents(input.userText);
+    if (!research) {
+      const city = (() => {
+        try {
+          const {
+            resolveEventResearchCity,
+          } = require('../../services/concierge/eventResearchService') as {
+            resolveEventResearchCity: (t: string) => string;
+          };
+          return resolveEventResearchCity(input.userText);
+        } catch {
+          return 'der Umgebung';
+        }
+      })();
+      const speech = `Die Live-Event-Suche für ${city} hakt gerade. Sag mir gern Live-Musik, Bar/Club oder Konzert — dann versuche ich es gezielter.`;
+      return {
+        filled: true,
+        agentResult: {
+          agent: 'deep_research',
+          ok: true,
+          draftText: speech,
+          bullets: [],
+          buttons: [],
+          meta: { nightlife: true, silent: false, eventResearchFailed: true },
+        },
+      };
+    }
+    const speech = synthesizeEventSpeech(research);
+    const qas = eventResearchToActions(research);
+    const buttons: Module2ActionButton[] = [];
+    for (let i = 0; i < qas.length && buttons.length < 4; i++) {
+      const a = qas[i]!;
+      if (
+        a.type === 'START_NAVIGATION' &&
+        typeof a.payload.destLat === 'number' &&
+        typeof a.payload.destLng === 'number'
+      ) {
+        buttons.push({
+          id: `nl_nav_${i}`,
+          label: shortenActionLabel(a.label),
+          payload: {
+            kind: 'navigate',
+            lat: a.payload.destLat,
+            lng: a.payload.destLng,
+            label: a.payload.destName || a.label,
+          },
+        });
+      } else if (a.type === 'OPEN_URL' && a.payload.url) {
+        buttons.push({
+          id: `nl_url_${i}`,
+          label: shortenActionLabel(a.label),
+          payload: { kind: 'deep_link', url: a.payload.url },
+        });
+      }
+    }
+    if (!buttons.some((b) => b.payload.kind === 'deep_link' || b.payload.kind === 'navigate')) {
+      /* Kein Maps-Namenssuche-Fallback */
+    }
+    // Card patchen falls Speech schon lief
+    try {
+      const { useFinnusStore } = await import('../../store/useFinnusStore');
+      const card = useFinnusStore.getState().activeConciergeCard;
+      if (card && buttons.length) {
+        const { presentToUi } = await import('../pipeline/presentToUi');
+        await presentToUi(speech || card.speechText, [
+          ...(card.visualBullets ?? []),
+          ...research.events.slice(0, 2).map((e) => `${e.title} @ ${e.venue}`),
+        ], buttons, { userText: input.userText });
+      }
+    } catch {
+      /* soft */
+    }
+    return {
+      filled: Boolean(speech || buttons.length),
+      agentResult: {
+        agent: 'deep_research',
+        ok: true,
+        draftText: speech,
+        bullets: research.events.slice(0, 3).map((e) => {
+          const t = e.startTime ? `${e.startTime} · ` : '';
+          return `${t}${e.title} @ ${e.venue}`;
+        }),
+        buttons,
+        meta: {
+          nightlife: true,
+          venue_options: research.events.length > 0,
+          ticket_or_info_url: buttons.some((b) => b.payload.kind === 'deep_link'),
+          spokenExtra: speech.slice(0, 400) || undefined,
+          silent: !speech,
+        },
+      },
+    };
+  } catch {
+    return fillKnowledgePitch(input, _missing);
+  }
 }
 
 async function fillWeather(
@@ -484,6 +757,17 @@ async function fillWeather(
           w.tempC != null ? ` · ${Math.round(w.tempC)}°` : ''
         }`
       : '';
+    let rainVsOutdoor: 'indoor' | 'outdoor' | 'unknown' = 'unknown';
+    try {
+      const { rainVsOutdoorFromWeather } = require('../reboot/pipeline/thinkAheadCode') as {
+        rainVsOutdoorFromWeather: (
+          s: string | null | undefined,
+        ) => 'indoor' | 'outdoor' | 'unknown';
+      };
+      rainVsOutdoor = rainVsOutdoorFromWeather(w?.summary);
+    } catch {
+      rainVsOutdoor = 'unknown';
+    }
     return {
       filled: Boolean(line),
       agentResult: {
@@ -493,6 +777,7 @@ async function fillWeather(
         bullets: line ? [line.slice(0, 80)] : [],
         meta: {
           weather_or_outfit: true,
+          rain_vs_outdoor: rainVsOutdoor,
           spokenExtra: line || undefined,
           silent: !line,
         },
@@ -515,6 +800,79 @@ async function fillEmergency(
   input: DeepFillInput,
   _missing: Set<string>,
 ): Promise<DeepFillResult> {
+  try {
+    const { isPhoneChargeIntent, runPhoneChargeDiscovery } = await import(
+      '../../services/navigation/phoneChargeDiscovery'
+    );
+    if (isPhoneChargeIntent(input.userText)) {
+      try {
+        const charge = await runPhoneChargeDiscovery({
+          origin: { lat: input.lat, lng: input.lng },
+        });
+        const buttons: Module2ActionButton[] = charge.quickActions
+          .slice(0, 2)
+          .map((qa, i) => {
+            if (
+              qa.type === 'START_NAVIGATION' &&
+              qa.payload.destLat != null &&
+              qa.payload.destLng != null
+            ) {
+              return {
+                id: `charge_nav_${i}`,
+                label: qa.label,
+                payload: {
+                  kind: 'navigate' as const,
+                  lat: qa.payload.destLat,
+                  lng: qa.payload.destLng,
+                  label: qa.payload.destName ?? qa.label,
+                  keepCard: true,
+                },
+              };
+            }
+            return {
+              id: `charge_${i}`,
+              label: qa.label,
+              payload: {
+                kind: 'deep_link' as const,
+                url: qa.payload.url ?? 'https://findus.local/pending',
+              },
+            };
+          });
+        return {
+          filled: true,
+          agentResult: {
+            agent: 'deep_research',
+            ok: true,
+            draftText: charge.speech,
+            bullets: (charge.visualBullets ?? []).slice(0, 2),
+            buttons,
+            meta: {
+              emergencyHandled: true,
+              chargeSurvival: true,
+              spokenExtra: charge.speech.slice(0, 500),
+              silent: false,
+            },
+          },
+        };
+      } catch {
+        return {
+          filled: true,
+          agentResult: {
+            agent: 'deep_research',
+            ok: true,
+            draftText:
+              'Gerade kein glaubwürdiger Powerbank-Automat oder offenes Café zum Laden — kein Fake-Tipp. Tipp nochmal suchen, wenn GPS klar ist.',
+            bullets: ['Kein belegter Lade-Spot'],
+            buttons: [],
+            meta: { emergencyHandled: true, chargeSurvival: true, silent: false },
+          },
+        };
+      }
+    }
+  } catch {
+    /* fall through to medical emergency */
+  }
+
   const { handleEmergencyConcierge } = await import(
     '../../services/concierge/emergencyConcierge'
   );
@@ -592,20 +950,74 @@ async function fillDayPlan(
   return fillKnowledgePitch(input, missing);
 }
 
+async function fillTaxiRideshare(
+  input: DeepFillInput,
+): Promise<DeepFillResult> {
+  const { runTaxiRideshare } = await import('../agents/taxiRideshare');
+  const result = await runTaxiRideshare({
+    task: {
+      id: 'taxi_fill',
+      rawText: input.userText,
+      rewrittenText: input.userText,
+      intent: 'mobility',
+      priority: 1,
+      jobId: 'taxi_rideshare',
+      city: input.city,
+    },
+    rucksack: input.rucksack,
+  });
+  if (!result?.ok) {
+    return {
+      filled: false,
+      agentResult: {
+        agent: 'deep_research',
+        ok: true,
+        draftText: '',
+      },
+    };
+  }
+  return { filled: true, agentResult: result };
+}
+
 async function fillPlacesGeneric(
   input: DeepFillInput,
   _missing: Set<string>,
   jobId: FindusJobId,
 ): Promise<DeepFillResult> {
+  if (jobId === 'shopping_errand') {
+    const { looksLikeMediaCatalogRequest, mediaCatalogSearchUrl } = await import(
+      './jobAnalogy'
+    );
+    if (looksLikeMediaCatalogRequest(input.userText)) {
+      const url = mediaCatalogSearchUrl(input.userText);
+      return {
+        filled: true,
+        agentResult: {
+          agent: 'deep_research',
+          ok: true,
+          draftText: '',
+          buttons: [
+            {
+              id: 'media_catalog',
+              label: shortenActionLabel('🎵 Playlist'),
+              payload: { kind: 'deep_link', url },
+            },
+          ],
+          meta: {
+            ticket_or_info_url: true,
+            silent: false,
+          },
+        },
+      };
+    }
+  }
   const { searchPlacesByText } = await import(
     '../../services/navigation/googleMapsNav'
   );
   const query =
     jobId === 'parking_ev'
       ? 'Parkplatz Ladestation'
-      : jobId === 'taxi_rideshare'
-        ? 'Taxi'
-        : jobId === 'mobility_rent'
+      : jobId === 'mobility_rent'
           ? 'E-Scooter Verleih'
           : jobId === 'luggage_practical'
             ? 'Schließfach Gepäck'

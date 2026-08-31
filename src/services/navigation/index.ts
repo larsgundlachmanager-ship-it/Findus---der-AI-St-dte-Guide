@@ -26,6 +26,7 @@ export {
   noteFreeRoamGpsFix,
   setSimulatedNavCoords,
   getActiveNavDestination,
+  setActiveNavStations,
   getNavigationRoutePlan,
   isNavigatingToPoi,
   getCurrentTransportMode,
@@ -35,7 +36,20 @@ export {
   notifyDestinationAudioEnded,
   onSpokenTextForAttention,
   shouldPauseExploreStoryForNavTurn,
+  restorePreviousNavRoute,
+  SHORT_ROUTE_AUTO_ETA_MIN,
 } from './navigationService';
+export {
+  hasNavRouteSnapshot,
+  clearNavRouteSnapshot,
+} from './navRouteSnapshot';
+export {
+  REROUTE_LONGER_ETA_MIN,
+  buildLongerRerouteCue,
+  buildDeadEndCue,
+  RESTORE_PREV_NAV_ROUTE_PROMPT,
+} from './rerouteAnnounce';
+export { probeDeadEndAhead } from './deadEndProbe';
 export {
   EXPLORE_NAV_TURN_PRIORITY_M,
   isRelevantAudioTurnWaypoint,
@@ -49,13 +63,12 @@ export {
 } from './chainedNavIntent';
 export type { ChainedNavIntent } from './chainedNavIntent';
 export {
-  detectMultiStopIntent,
-  planMultiStopTour,
   startMultiStopTour,
   advanceMultiStopTour,
   clearMultiStopTour,
   formatTourStopsHeader,
   insertTourStop,
+  addOptimizedTourStop,
   weaveSpontaneousStop,
   hasActiveTourQueue,
   softStopReminderLine,
@@ -63,7 +76,8 @@ export {
   reorderTourStops,
   navigateToTourStopAt,
   ensureTourFromActiveNav,
-  CIRCUIT_PROMPT,
+  tourNeedsProLlm,
+  formatTourReply,
 } from './multiStopTour';
 export type {
   MultiStopTour,
@@ -83,6 +97,8 @@ export type { DiscoveryCandidate, DiscoveryResult } from './contextualDiscovery'
 export {
   runPhoneChargeDiscovery,
   isPhoneChargeIntent,
+  acceptChargePlace,
+  kindLabel,
 } from './phoneChargeDiscovery';
 export type { ChargeKind } from './phoneChargeDiscovery';
 export {
@@ -132,6 +148,8 @@ export {
   tickWrongWayMonitor,
   resetWrongWayMonitor,
   markRerouteFired,
+  markRerouteAttemptFailed,
+  markRerouteAttemptStarted,
   canSilentReroute,
   REROUTE_COOLDOWN_MS,
   WRONG_WAY_REROUTE_AFTER_WARN_MS,
@@ -169,6 +187,8 @@ export {
   predictiveSpeakDistanceM,
   predictiveWarmDistanceM,
   isTurnManeuver,
+  isHandsFreeSpeakTurn,
+  isAlleyRoadName,
   PREDICT_WALK_SPEAK_M,
   PREDICT_BIKE_SPEAK_MIN_M,
   PREDICT_BIKE_SPEAK_MAX_M,
@@ -184,6 +204,13 @@ export {
   startNavigationFromOffer,
   normalizeNavActionsAndOffer,
   resolveExistingPoiId,
+  maybeParkFarDestConfirm,
+  parkFarDestConfirmOffer,
+  looksLikeStreetAddress,
+  streetAddressGeocodeCandidates,
+  expandStreetAddressGeocodeQueries,
+  peekLastStreetNavQuery,
+  rememberStreetNavQuery,
 } from './resolveNavTarget';
 export {
   upsertCachedDestination,
@@ -204,6 +231,12 @@ export {
   detectHardNavOverride,
   isClearRouteIntent,
 } from './hardNavOverride';
+export {
+  resolveNavDestCorrection,
+  looksLikeSpokenCityCorrection,
+  extractCorrectedCityName,
+  streetCoreFromDestLabel,
+} from './navDestCityCorrection';
 export {
   setNavWaypointsForSpot,
   getNavWaypointsForSpot,
@@ -242,6 +275,10 @@ export type {
   RouteObstacleSummary,
 } from './routeObstaclePolicy';
 export { scanRouteObstacles, scanRouteObstaclesWithFallback } from './routeObstacleScan';
+export {
+  isPedestrianBridgeTags,
+  bridgeLabelFromTags,
+} from './routeObstacleScan';
 export {
   setActiveRouteObstacles,
   getActiveRouteObstacles,

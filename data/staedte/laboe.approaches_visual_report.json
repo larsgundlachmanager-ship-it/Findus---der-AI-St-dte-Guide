@@ -1,0 +1,242 @@
+{
+  "city": "laboe",
+  "apply": true,
+  "touched": 29,
+  "approachesFixed": 29,
+  "faqAdded": 0,
+  "data_version": 44,
+  "rows": [
+    {
+      "id": "laboe_dgzrs_die_seenotretter_station_laboe",
+      "name": "DGzRS - Die Seenotretter (Station Laboe)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "laboe_meeresbiologische_station_laboe",
+      "name": "Meeresbiologische Station Laboe",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "laboe_laboe_baltic_bay_hafen",
+      "name": "Baltic Bay Hafen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "laboe_technisches_museum_u_995",
+      "name": "U-Boot U 995",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "laboe_marine_ehrenmal",
+      "name": "Marine-Ehrenmal Laboe",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "laboe_anker_gottes_kirche_ev_luth_anker_gottes_kirchengemeinde_laboe",
+      "name": "Anker-Gottes-Kirche Laboe",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "laboe_moltenort_u_boat_memorial",
+      "name": "U-Boot-Ehrenmal Möltenort",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "laboe_naturerlebnisraum_dunenlandschaft_laboe",
+      "name": "Naturerlebnisraum \"Dünenlandschaft Laboe\"",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "laboe_hundestrand_laboe",
+      "name": "Hundestrand Laboe",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "laboe_kurpark_laboe",
+      "name": "Kurpark Laboe",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "laboe_strandpromenade",
+      "name": "Strandpromenade",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "laboe_ostseestrand",
+      "name": "Ostseestrand",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "laboe_gedenkstatte_im_laboer_kurpark",
+      "name": "Gedenkstätte im Laboer Kurpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "laboe_fordepanorama_uber_kieler_bucht",
+      "name": "Fördepanorama über Kieler Bucht",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "laboe_minigolf_laboe_getranke_snacks_und_grillmoglichkeit",
+      "name": "Minigolf Laboe",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "laboe_vfr_laboe",
+      "name": "VfR Laboe",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "laboe_spielplatz_laboe",
+      "name": "Spielplatz Laboe",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "laboe_beachvolleyballfelder_strand_laboe",
+      "name": "Beachvolleyballfelder Strand Laboe",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "laboe_stoschplatz",
+      "name": "Stoschplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "laboe_fordewanderweg_laboe",
+      "name": "Fördewanderweg Laboe",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "laboe_naturerlebnisraum_kinderabenteuerland",
+      "name": "Abenteuerspaziergang Strandpromenade",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "laboe_schiffsschraube_d_stentrans",
+      "name": "Schiffsschraube Stentrans",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "laboe_museumshafen_probstei_e_v",
+      "name": "Museumshafen Probstei",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "laboe_yacht_und_gewerbehafen_ostseebad_laboe",
+      "name": "Yacht- und Gewerbehafen Ostseebad Laboe",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "laboe_naturschutzgebiet_bottsand",
+      "name": "Naturschutzgebiet Bottsand",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "laboe_alte_ausgebrannte_eiche",
+      "name": "Alte ausgebrannte Eiche",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "laboe_freya_frahm_haus",
+      "name": "Freya-Frahm-Haus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "laboe_lachmoewen_theater",
+      "name": "Lachmöwen-Theater",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "laboe_windmuehle",
+      "name": "Windmühle Laboe",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    }
+  ]
+}

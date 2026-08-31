@@ -1,0 +1,1039 @@
+{
+  "notes": [
+    "Verifizierte Tiefenwelle C für Lissabon.",
+    "Öffnungszeiten, Preise, Programme, Fahrpläne und Zugänglichkeit nur LIVE prüfen.",
+    "Jardim da Estrela, Jardim Guerra Junqueiro und der Spielbereich liegen in derselben Parkanlage."
+  ],
+  "spots": [
+    {
+      "id": "lissabon_jardim_da_estrela",
+      "name": "Jardim da Estrela",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Der Jardim da Estrela ist der geläufige Name des Jardim Guerra Junqueiro, eines im 19. Jahrhundert angelegten öffentlichen Gartens gegenüber der Basílica da Estrela. Sein romantisch-naturalistisches Wegenetz, alte Bäume, Wasserbecken und historische Parkbauten machen ihn zu einem wichtigen grünen Aufenthaltsort im Viertel Estrela.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Hinter den Einfriedungen öffnet sich kein streng geometrischer Garten, sondern eine Folge geschwungener Wege, dichter Baumgruppen, heller Rasenflächen und kleiner Wasserbereiche. Zwischen dem Laub erscheinen ein Musikpavillon, Skulpturen und historische Gartenarchitektur; die große weiße Kuppel der Basílica da Estrela bleibt außerhalb des Parks ein guter Orientierungspunkt.",
+          "tags": ["visuell", "wegweiser", "orientierung"]
+        },
+        {
+          "text": "Geschichte: Die Stadt Lissabon nennt 1842 als Beginn der Anlage und Bernardo da Costa Cabral, den späteren Marquês de Tomar, als Initiator. Der Garten entstand damit in einer Phase, in der öffentliche Grünanlagen als Orte der Erholung und gesellschaftlichen Begegnung an Bedeutung gewannen.",
+          "tags": ["geschichte", "stadt_lissabon"]
+        },
+        {
+          "text": "Name: Der amtliche Name lautet Jardim Guerra Junqueiro und erinnert an den portugiesischen Dichter Abílio Manuel Guerra Junqueiro. Im Alltag ist jedoch Jardim da Estrela gebräuchlich. Beide Bezeichnungen meinen dieselbe Anlage und dürfen nicht als zwei verschiedene Parks erzählt werden.",
+          "tags": ["name", "identitaet", "mythencheck"]
+        },
+        {
+          "text": "Gestaltung: Der Garten folgt einer romantisch-naturalistischen Idee. Kurvige Wege, wechselnde Blickachsen, Baumkulissen und offene Partien erzeugen den Eindruck einer idealisierten Landschaft. Das unterscheidet ihn von den strengeren Achsen und geschnittenen Formen formaler Stadtgärten.",
+          "tags": ["landschaft", "architektur"]
+        },
+        {
+          "text": "Casa do Jardim: Im Park steht die ehemalige Escola Froebel beziehungsweise Creche do Jardim da Estrela. Das 1882 von José Luís Monteiro entworfene Gebäude wurde saniert und 2023 als kommunaler Kulturort Casa do Jardim da Estrela wiedereröffnet; dazu gehören unter anderem Bibliotheks-, Ausstellungs- und Veranstaltungsangebote.",
+          "tags": ["architektur", "kultur", "stadt_lissabon"]
+        },
+        {
+          "text": "Leben heute: Die Anlage dient vor allem als wohnungsnaher Park für Spaziergänge, Pausen und Familienzeit. Welche Kulturtermine in der Casa do Jardim, welche Angebote am Musikpavillon oder welche Bereiche nach Pflegearbeiten nutzbar sind, verändert sich und gehört nicht als feste Zusage in eine Offline-Erzählung.",
+          "tags": ["leben_jetzt", "familie"]
+        },
+        {
+          "text": "Quer: Direkt gegenüber steht die Basílica da Estrela, deren monumentale Kuppel den Park räumlich prägt. Der Garten ist außerdem ein sinnvoller Ruhepunkt zwischen dem Viertel Estrela, Campo de Ourique und den westlich gelegenen Wohnquartieren.",
+          "tags": ["quer", "orientierung"]
+        },
+        {
+          "text": "LIVE: Aktuelle Öffnungszeiten, gesperrte Wege, Gartenpflege, Veranstaltungen, Gastronomie, Toiletten und Zugänglichkeit bei der Câmara Municipal de Lisboa beziehungsweise der Casa do Jardim prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Sind Jardim da Estrela und Jardim Guerra Junqueiro zwei Parks?",
+          "a": "Nein. Jardim Guerra Junqueiro ist der formale Name; Jardim da Estrela ist die geläufige Bezeichnung derselben historischen Parkanlage."
+        }
+      ]
+    },
+    {
+      "id": "lissabon_jardim_da_estrela_playground",
+      "name": "Spielbereich im Jardim da Estrela",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Dieser Ort bezeichnet den familienorientierten Spielbereich innerhalb des Jardim da Estrela, nicht einen eigenständigen Park. Er verbindet Spielmöglichkeiten mit Schatten, Wegen und Grünflächen der historischen Anlage; Ausstattung, Zugang und Zustand müssen jeweils aktuell geprüft werden.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Der Spielbereich liegt als klar erkennbare Familienzone zwischen dem gewachsenen Baumbestand und den geschwungenen Parkwegen. Zäune, Spielgeräte und Sitzmöglichkeiten unterscheiden die Ecke von den offenen Rasen- und Spazierbereichen; genaue Geräte können sich durch Erneuerung ändern.",
+          "tags": ["visuell", "wegweiser", "familie"]
+        },
+        {
+          "text": "Einordnung: Der Spielplatz gehört vollständig zum Jardim da Estrela beziehungsweise Jardim Guerra Junqueiro. Er darf weder als separate Grünanlage noch als zweiter gleichnamiger Park behandelt werden. Für Navigation ist der konkrete Zugang zur Spielecke nützlich, für die Geschichte bleibt der Gesamtpark der Parent-Ort.",
+          "tags": ["identitaet", "orientierung", "mythencheck"]
+        },
+        {
+          "text": "Parkgeschichte: Die kommunale Geschichtsdarstellung datiert den Garten auf 1842 und nennt Bernardo da Costa Cabral, den späteren Marquês de Tomar, als Initiator. Die heutige Familiennutzung ist eine spätere Schicht innerhalb dieses romantisch-naturalistisch gestalteten Stadtgartens.",
+          "tags": ["geschichte", "stadt_lissabon"]
+        },
+        {
+          "text": "Umgebung: Alte Bäume und die verschlungenen Wege des Parks schaffen eine andere Atmosphäre als ein isolierter Quartiersspielplatz. Begleitpersonen können die historische Gartenlandschaft wahrnehmen, während Kinder in einem dafür vorgesehenen Bereich spielen.",
+          "tags": ["landschaft", "familie", "leben_jetzt"]
+        },
+        {
+          "text": "Nahe Kultur: Die 1882 von José Luís Monteiro entworfene frühere Escola Froebel wurde zur Casa do Jardim da Estrela umgebaut. Das kommunale Haus verbindet Kultur, Umweltbildung und Nachbarschaftsangebote; das konkrete Programm ist nicht dauerhaft.",
+          "tags": ["kultur", "architektur", "quer"]
+        },
+        {
+          "text": "Praktische Einordnung: Der Park ist kein ebener, vollständig überschaubarer Spielhof, sondern eine größere historische Anlage mit mehreren Wegen und Ausgängen. Treffpunkt, Aufsicht und der passende Ausgang sollten deshalb anhand der tatsächlichen Position gewählt werden.",
+          "tags": ["orientierung", "familie"]
+        },
+        {
+          "text": "Quer: Gegenüber dem Park liegt die Basílica da Estrela. Für eine familiengerechte Pause lässt sich die Spielecke mit einem kurzen Parkrundgang verbinden, ohne daraus eine eigene historische Sehenswürdigkeit zu konstruieren.",
+          "tags": ["quer", "familie"]
+        },
+        {
+          "text": "LIVE: Öffnung des Parks, aktuelle Spielgeräte, Wartung, temporäre Sperrungen, Toiletten, Trinkwasserstellen, Barrierefreiheit und Veranstaltungen bei der Stadt Lissabon prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Ist der Spielbereich ein eigener Jardim da Estrela?",
+          "a": "Nein. Er ist eine Ecke innerhalb des historischen Jardim da Estrela beziehungsweise Jardim Guerra Junqueiro."
+        }
+      ]
+    },
+    {
+      "id": "lissabon_jardim_guerra_junqueiro",
+      "name": "Jardim Guerra Junqueiro",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Jardim Guerra Junqueiro ist der formale Name des weithin als Jardim da Estrela bekannten Gartens. Die Bezeichnung ehrt den portugiesischen Dichter Guerra Junqueiro; historisch und räumlich handelt es sich um dieselbe im 19. Jahrhundert geschaffene Parkanlage gegenüber der Basílica da Estrela.",
+      "deep_data_pool": [
+        {
+          "text": "Identität: Auf Karten und offiziellen Seiten kann Jardim Guerra Junqueiro stehen, während Einheimische und Reiseführer meist Jardim da Estrela verwenden. Das sind keine benachbarten Konkurrenzgärten. Bei Ortsbezug, Erinnerung und Trigger-Deduplizierung müssen beide Namen als dieselbe Anlage verknüpft bleiben.",
+          "tags": ["identitaet", "name", "mythencheck"]
+        },
+        {
+          "text": "Namensgeber: Abílio Manuel Guerra Junqueiro war ein portugiesischer Dichter und politischer Autor des 19. und frühen 20. Jahrhunderts. Der amtliche Gartenname bewahrt diese Erinnerung, obwohl die Lagebezeichnung Estrela im alltäglichen Sprachgebrauch deutlich stärker ist.",
+          "tags": ["geschichte", "literatur"]
+        },
+        {
+          "text": "Entstehung: Nach Angaben der Câmara Municipal de Lisboa wurde der Garten 1842 auf Initiative des Staatsmanns Bernardo da Costa Cabral, Marquês de Tomar, angelegt. Seine Geschichte gehört zur Entwicklung öffentlicher Gärten im liberalen Portugal des 19. Jahrhunderts.",
+          "tags": ["geschichte", "stadt_lissabon"]
+        },
+        {
+          "text": "Visuell: Charakteristisch sind geschwungene Wege, alte und teils exotisch wirkende Gehölze, Wasserflächen, Rasenstücke und verstreute Parkarchitektur. Diese romantisch-naturalistische Komposition setzt auf wechselnde Szenen und Schatten statt auf eine einzige monumentale Mittelachse.",
+          "tags": ["visuell", "wegweiser", "landschaft"]
+        },
+        {
+          "text": "Historisches Gebäude: Die ehemalige Escola Froebel beziehungsweise Creche von 1882 stammt von José Luís Monteiro. Seit der Sanierung dient sie als Casa do Jardim da Estrela, ein kommunaler Ort für Kultur, Bibliothek, Ausstellungen und Umweltbildung.",
+          "tags": ["architektur", "kultur"]
+        },
+        {
+          "text": "Stadtraum: Der Garten liegt unmittelbar an der Basílica da Estrela. Die Beziehung zwischen dichtem Grün und der hellen, weithin sichtbaren Kirchenkuppel macht den Ort zugleich zu einer Parklandschaft und zu einem Gegenraum der monumentalen Architektur.",
+          "tags": ["stadtraum", "quer"]
+        },
+        {
+          "text": "Leben heute: Spazieren, Sitzen, Spielen und nachbarschaftliche Nutzung prägen den Garten. Einzelne Kulturangebote oder saisonale Veranstaltungen sind Zusatzschichten, aber keine dauerhaften Parkeigenschaften und müssen aktuell recherchiert werden.",
+          "tags": ["leben_jetzt", "familie"]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eingänge, Sanierungsbereiche, Veranstaltungen der Casa do Jardim, Gastronomie, Toiletten und konkrete Barrierefreiheit bei den kommunalen Stellen prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Warum steht auf manchen Karten Guerra Junqueiro statt Estrela?",
+          "a": "Guerra Junqueiro ist der offizielle Name des Parks; Jardim da Estrela ist seine verbreitete Alltagsbezeichnung."
+        }
+      ]
+    },
+    {
+      "id": "lissabon_cinemateca_portuguesa_museu_do_cinema",
+      "name": "Cinemateca Portuguesa – Museu do Cinema",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Die Cinemateca Portuguesa ist Portugals nationales Archiv und Museum für Filmkultur. Ihre Zentrale sitzt in einer Stadtvilla des späten 19. Jahrhunderts an der Rua Barata Salgueiro; Filmvorführungen, Archive, Ausstellungen, Bibliothek und Publikationen verbinden Bewahrung mit öffentlicher Vermittlung.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Zwischen größeren Innenstadtbauten fällt eine erhaltene Stadtvilla mit historischer Fassade und zurückhaltendem Eingang auf. Hinter dem älteren Haus liegen moderne beziehungsweise unterirdische Kinoräume; die Cinemateca ist daher äußerlich weniger monumental, als ihr institutioneller Rang vermuten lässt.",
+          "tags": ["visuell", "wegweiser", "architektur"]
+        },
+        {
+          "text": "Institution: Die Cinemateca Nacional wurde 1948 gesetzlich geschaffen. Manuel Félix Ribeiro prägte ihren Aufbau; 1980 erhielt die nun Cinemateca Portuguesa genannte Institution administrative und finanzielle Autonomie. Seit 1956 gehört sie der internationalen Föderation der Filmarchive FIAF an.",
+          "tags": ["geschichte", "film", "cinemateca_offiziell"]
+        },
+        {
+          "text": "Gebäude: Das Grundstück Rua Barata Salgueiro 39 gehörte von 1887 bis 1979 der Familie Morais Carvalho. Der portugiesische Staat erwarb das Haus 1979 für die Cinemateca; 1980 begann dort der Kinobetrieb, 1981 zogen Dienste und Personal ein.",
+          "tags": ["geschichte", "architektur", "cinemateca_offiziell"]
+        },
+        {
+          "text": "Museumsstatus: Ein Gesetz von 1997 verankerte die Bezeichnung Cinemateca Portuguesa – Museu do Cinema. Damit wird deutlich, dass es nicht nur um ein Repertoirekino geht, sondern um Sammlung, Konservierung, Forschung und Vermittlung des portugiesischen und internationalen Filmerbes.",
+          "tags": ["museum", "film", "geschichte"]
+        },
+        {
+          "text": "Umbau 2003: Nach einer tiefgreifenden Erneuerung wurde die Zentrale 2003 wiedereröffnet. Hinzu kamen die Säle M. Félix Ribeiro und Luís de Pina, museale Räume, erweiterte Buch- und Fotoarchive, eine Buchhandlung und Gastronomie; die historische Gestalt der Villa blieb ein wichtiger Teil des Ensembles.",
+          "tags": ["architektur", "museum", "cinemateca_offiziell"]
+        },
+        {
+          "text": "Bewahrung: Das moderne Konservierungszentrum ANIM außerhalb der Innenstadt bündelt seit den 1990er Jahren zentrale Aufgaben der Filmkonservierung und technischen Forschung. Die Zentrale an der Barata Salgueiro ist vor allem das öffentliche Gesicht mit Vorführungen, Dokumentation und Begegnung.",
+          "tags": ["film", "sammlung", "konservierung"]
+        },
+        {
+          "text": "Leben heute: Charakteristisch sind kuratierte Filmreihen, historische Kopien, Einführungstexte, Ausstellungen und Publikationen. Das konkrete Tagesprogramm ist bewusst wechselnd; ein bestimmter Film oder eine Ausstellung darf nie offline versprochen werden.",
+          "tags": ["leben_jetzt", "kultur"]
+        },
+        {
+          "text": "LIVE: Programm, Vorführformat, Sprache und Untertitel, Tickets, Ausstellungen, Bibliothekszugang, Barrierefreiheit sowie Öffnung von Buchhandlung und Gastronomie direkt bei der Cinemateca prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Ist die Cinemateca nur ein Kino?",
+          "a": "Nein. Sie ist das nationale Filmarchiv und Filmmuseum Portugals und verbindet Bewahrung, Forschung, Sammlung, Ausstellungen und Vorführungen."
+        }
+      ]
+    },
+    {
+      "id": "lissabon_estadio_da_luz",
+      "name": "Estádio da Luz",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Das offiziell Estádio do Sport Lisboa e Benfica genannte Stadion ist seit 2003 die Heimstätte von Benfica. Es ersetzte das alte Stadion gleichen Spitznamens und wurde für die Europameisterschaft 2004 gebaut. Vier große Stahlbögen und ein lichtdurchlässiges Dach prägen seine Silhouette.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Vier hohe rote Stahlbögen tragen über Zugbändern das Dach und markieren das Stadion schon aus der Entfernung. Die dreigeschossige, geschlossene Schüssel ist auf Licht und Transparenz angelegt; Rot und Weiß verweisen auf die Vereinsfarben von Sport Lisboa e Benfica.",
+          "tags": ["visuell", "wegweiser", "architektur"]
+        },
+        {
+          "text": "Neubau: Das heutige Stadion wurde am 25. Oktober 2003 mit einem Spiel gegen Nacional aus Montevideo eröffnet. Es entstand neben beziehungsweise auf dem Areal des früheren Estádio da Luz und war ein Schlüsselbau für die UEFA EURO 2004.",
+          "tags": ["geschichte", "fussball", "benfica", "uefa"]
+        },
+        {
+          "text": "Architektur: Damon Lavelle von HOK Sport, dem späteren Populous, entwarf den Bau. Das Polycarbonatdach lässt Tageslicht ein und wird von vier etwa 43 Meter hohen Bögen getragen. Die Konstruktion gab dem Thema Licht nicht nur einen Namen, sondern eine sichtbare bauliche Form.",
+          "tags": ["architektur", "technik", "uefa"]
+        },
+        {
+          "text": "Vorgänger: Das alte Estádio da Luz war 1954 eröffnet worden und wuchs zeitweise zu einer der größten Arenen Europas. Der Neubau übernahm den populären Namen und die Rolle als Heimstätte, ist aber ein eigenständiges Stadion des 21. Jahrhunderts.",
+          "tags": ["geschichte", "verein"]
+        },
+        {
+          "text": "Turniere: 2004 fand hier das EM-Finale Portugal gegen Griechenland statt. Später war die Arena auch Austragungsort von Endspielen der UEFA Champions League. Welche Wettbewerbe oder Spiele gerade stattfinden, ist dagegen vollständig LIVE.",
+          "tags": ["sportgeschichte", "uefa"]
+        },
+        {
+          "text": "Vereinsort: Zum Komplex gehören Einrichtungen von Benfica, darunter das Vereinsmuseum Museu Benfica – Cosme Damião. Stadion und Museum erzählen verschiedene Ebenen: das Stadion ist Spielstätte, das Museum ordnet Trophäen, Personen und Vereinsgeschichte ein.",
+          "tags": ["museum", "verein", "leben_jetzt"]
+        },
+        {
+          "text": "Kapazität: Sitzplatzangaben können sich durch Umbauten, Sicherheitskonfigurationen und Veranstaltungslayouts ändern. Ältere offizielle und UEFA-Seiten nennen deshalb andere Werte als neuere Quellen; eine konkrete aktuelle Zahl gehört in die Live-Recherche.",
+          "tags": ["mythencheck", "live_context"]
+        },
+        {
+          "text": "LIVE: Spiele, Stadiontouren, Museum, Kapazität, Einlassregeln, Taschen, Tickets, Sicherheitszonen, Anreise und Barrierefreiheit auf den offiziellen Seiten von Benfica und beim jeweiligen Veranstalter prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Ist das heutige Estádio da Luz das Stadion von 1954?",
+          "a": "Nein. Der heutige Bau wurde 2003 eröffnet und ersetzte das ältere Stadion, dessen populären Namen er übernahm."
+        }
+      ]
+    },
+    {
+      "id": "lissabon_estadio_jose_alvalade_xxi",
+      "name": "Estádio José Alvalade",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Das Estádio José Alvalade ist seit 2003 die Heimstätte von Sporting Clube de Portugal. Der von Tomás Taveira entworfene Neubau gehört zum Komplex Alvalade XXI, wurde für die Europameisterschaft 2004 errichtet und trägt den Namen des Sporting-Gründers José Alvalade.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Die große Stadionhülle liegt am Verkehrsknoten Campo Grande. Der Bau von Tomás Taveira war ursprünglich durch kräftige, vielfarbige Fassaden- und Sitzmuster geprägt; spätere Umbauten stärkten das Grün als Vereinsfarbe. Form und Erscheinung können daher auf älteren Fotos deutlich bunter wirken.",
+          "tags": ["visuell", "wegweiser", "architektur"]
+        },
+        {
+          "text": "Baugeschichte: Die Arbeiten begannen am 15. Januar 2001. Am 6. August 2003 eröffnete Sporting die Arena mit einem Freundschaftsspiel gegen Manchester United. Das Stadion entstand neben dem älteren Sporting-Stadion, das später abgebrochen wurde.",
+          "tags": ["geschichte", "sporting_offiziell", "fussball"]
+        },
+        {
+          "text": "Namensgebung: Laut Sporting ist dies das siebte Stadion der Vereinsgeschichte, das José Alvalade heißt. Die Vereinssatzung hält damit die Erinnerung an den Gründer wach; der Zusatz Alvalade XXI bezeichnete den größeren Entwicklungs- und Immobilienkomplex.",
+          "tags": ["name", "verein", "sporting_offiziell"]
+        },
+        {
+          "text": "Architektur: Der portugiesische Architekt Tomás Taveira entwarf eine moderne, geschlossene Fußballarena mit überdachten Rängen. Die markante Farbigkeit war keine zufällige Dekoration, sondern Teil seiner expressiven Architektursprache und der ursprünglichen Identität des Neubaus.",
+          "tags": ["architektur", "design"]
+        },
+        {
+          "text": "EURO 2004: Das Stadion war Austragungsort mehrerer Spiele der Europameisterschaft 2004. 2005 fand hier außerdem das Endspiel des UEFA-Pokals statt. Diese Turniergeschichte ist stabil; aktuelle Spiele und Wettbewerbe bleiben live.",
+          "tags": ["sportgeschichte", "uefa"]
+        },
+        {
+          "text": "Eröffnungsabend: Sporting besiegte Manchester United bei der Eröffnung. Der damals 18-jährige Cristiano Ronaldo spielte für Sporting; sein Auftritt wurde zu einer oft erzählten Episode vor seinem kurz darauf folgenden Wechsel nach Manchester.",
+          "tags": ["sportgeschichte", "cristiano_ronaldo"]
+        },
+        {
+          "text": "Kapazität und Umbau: Die offizielle historische Stadionseite nennt 50.095 Plätze zur Eröffnung. Neuere Kapazitätswerte können nach Entfernung des Spielfeldgrabens und weiteren Arbeiten höher liegen; deshalb keine einzelne Zahl ohne Datumsbezug als dauerhaft behandeln.",
+          "tags": ["mythencheck", "live_context"]
+        },
+        {
+          "text": "LIVE: Spiele, Touren, Museu Sporting, aktuelle Kapazität, Tickets, Einlass, Taschenregeln, Sicherheitsführung, Gastronomie, Anreise über Campo Grande und Barrierefreiheit bei Sporting und dem Veranstalter prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Warum heißt der Komplex Alvalade XXI?",
+          "a": "Der Ausdruck bezeichnete das moderne Entwicklungsprojekt; das Stadion selbst ehrt wie frühere Sporting-Spielstätten den Vereinsgründer José Alvalade."
+        }
+      ]
+    },
+    {
+      "id": "lissabon_jardim_do_torel",
+      "name": "Jardim do Torel",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Der Jardim do Torel ist ein kleiner historischer Garten und Aussichtspunkt am Hang oberhalb der Avenida da Liberdade. Er ging aus einem privaten Anwesen hervor, wurde 1928 der Stadt überlassen und um 1930 als öffentlicher Garten gestaltet.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Von der oberen Terrasse öffnet sich der Blick über das Tal der Avenida da Liberdade zur gegenüberliegenden São-Roque-Höhe. Der Garten liegt gestuft am Hang; Palmen, schattige Bäume, Sitzplätze und ein Wasserbecken bilden eine ruhige, fast versteckte Alternative zu großen Aussichtsterrassen.",
+          "tags": ["visuell", "wegweiser", "aussicht"]
+        },
+        {
+          "text": "Ursprung: Die Câmara Municipal de Lisboa führt den Ort auf eine Quinta des frühen 18. Jahrhunderts zurück. Der Name leitet sich vom Richter Cunha Thorel ab, der als besonders wohlhabender Eigentümer der Gegend beschrieben wird.",
+          "tags": ["geschichte", "name", "stadt_lissabon"]
+        },
+        {
+          "text": "Vom Privatgarten zum Stadtraum: Im Januar 1928 wurde das Gelände des Palastes an die Stadt Lissabon übertragen. Sie schuf daraus den Garten und Miradouro; die lokale Denkmalbeschreibung nennt 1930 als Jahr der Anlage.",
+          "tags": ["geschichte", "stadtentwicklung"]
+        },
+        {
+          "text": "Umgebung: Rund um den Garten stehen mehrere herrschaftliche Wohnhäuser des 18. und 19. Jahrhunderts. Sie erinnern daran, dass der Hang vor seiner dichten Urbanisierung von Quintas, Gärten und repräsentativen Häusern geprägt war.",
+          "tags": ["architektur", "stadtraum"]
+        },
+        {
+          "text": "Blickbezüge: Besonders klar liegt die Avenida da Liberdade im Tal; auf der Gegenseite erkennt man die São-Roque-Höhe und den Bereich des Miradouro de São Pedro de Alcântara. Je nach Vegetation und Wetter sind auch weitere Teile der westlichen Stadt sichtbar.",
+          "tags": ["orientierung", "aussicht"]
+        },
+        {
+          "text": "Erschließung: Der Garten hat Zugänge auf unterschiedlichen Höhenniveaus. In der Nähe liegt der Elevador do Lavra, der den starken Höhenunterschied des Viertels verdeutlicht. Treppen, Steigungen und der tatsächlich offene Eingang müssen bei barrierearmer Planung geprüft werden.",
+          "tags": ["mobilitaet", "orientierung"]
+        },
+        {
+          "text": "Erneuerung: 2008 wurde der Garten restauriert und unter anderem mit neuer Präsenz- und Dekorationsbeleuchtung ausgestattet. Saisonale Nutzungen des Wasserbeckens sind kommunale Programme, keine dauerhaft garantierte Badefunktion.",
+          "tags": ["geschichte", "mythencheck", "leben_jetzt"]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eingänge, Wasserbecken-Nutzung, Veranstaltungen, Beleuchtung, Hunde- und Fitnessbereiche, Toiletten sowie barrierearme Wege bei der Stadt Lissabon prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "War der Jardim do Torel immer öffentlich?",
+          "a": "Nein. Er ging aus einem privaten Anwesen hervor; das Gelände kam 1928 an die Stadt und wurde um 1930 zum öffentlichen Garten und Aussichtspunkt."
+        }
+      ]
+    },
+    {
+      "id": "lissabon_reservatorio_da_mae_d_agua_das_amoreiras",
+      "name": "Reservatório da Mãe d'Água das Amoreiras",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Das monumentale Reservoir Mãe d'Água bildet den historischen Endpunkt des Aqueduto das Águas Livres in Lissabon. Der 1746 begonnene und 1834 vollendete Bau nahm Quellwasser auf und verteilte es weiter zu Brunnen, Gewerben, Klöstern und Häusern.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Der Innenraum wirkt eher wie eine steinerne Hallenkirche als wie ein technischer Behälter. Ein großes Wasserbecken, vier massive quadratische Pfeiler und Kreuzgratgewölbe bestimmen den Raum; Wasser fällt aus einem als Delfin gestalteten Auslass über eine steinerne Kaskade.",
+          "tags": ["visuell", "wegweiser", "architektur"]
+        },
+        {
+          "text": "Aquädukt-Endpunkt: Der große Bogen an der Rua das Amoreiras führt das Wasser des Aqueduto das Águas Livres in den Reservoirkomplex. Das Hauptsystem begann bei Belas nordwestlich von Lissabon und arbeitete weitgehend mit natürlichem Gefälle.",
+          "tags": ["technik", "wasser", "epal_offiziell"]
+        },
+        {
+          "text": "Baugeschichte: Carlos Mardel begann das Reservoir 1746. Nach seinem Tod 1763 blieb es unvollendet; Reinaldo Manuel dos Santos nahm die Arbeiten 1771 wieder auf und veränderte unter anderem Dach, Kaskade und Stützen. Letzte Arbeiten an Dach und Details endeten 1834 unter Maria II.",
+          "tags": ["geschichte", "architektur", "epal_offiziell"]
+        },
+        {
+          "text": "Dimension: EPAL beschreibt einen 7,5 Meter tiefen Tank mit 5.500 Kubikmetern Fassungsvermögen. Die vier aus dem Becken aufsteigenden Pfeiler tragen das Gewölbedach und darüber eine Terrasse mit Blick über Lissabon.",
+          "tags": ["technik", "architektur", "epal_offiziell"]
+        },
+        {
+          "text": "Verteilung: An der Westseite liegt die Casa do Registo. Dort wurden die Wassermengen kontrolliert, die zu öffentlichen Brunnen, Fabriken, Klöstern und Adelshäusern weiterliefen. Das Reservoir war deshalb Speicher und Schaltstelle des städtischen Versorgungssystems.",
+          "tags": ["stadtgeschichte", "wasser", "technik"]
+        },
+        {
+          "text": "Größerer Zusammenhang: Das zwischen 1731 und 1799 geschaffene Águas-Livres-System sammelte Wasser vieler Quellen. Eine Verbrauchsabgabe auf Grundnahrungsmittel finanzierte den Bau; das System überstand das Erdbeben von 1755 und steht seit 1910 als Nationalmonument unter Schutz.",
+          "tags": ["geschichte", "aquedukt", "epal_offiziell"]
+        },
+        {
+          "text": "Leben heute: Das Reservoir gehört zum Museu da Água und dient der Vermittlung von Wasser-, Technik- und Stadtgeschichte. Seine besondere Akustik und Raumwirkung machen es außerdem für Kulturformate interessant, doch konkrete Installationen oder Veranstaltungen sind wechselnd.",
+          "tags": ["museum", "leben_jetzt", "kultur"]
+        },
+        {
+          "text": "LIVE: Besichtigungszeiten, Führung, Terrasse, Wasserstand, Ausstellungen, Veranstaltungen, Tickets und Barrierefreiheit direkt beim Museu da Água beziehungsweise EPAL prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Wozu diente Mãe d'Água?",
+          "a": "Das Reservoir nahm am Ende des Águas-Livres-Aquädukts Wasser auf und regelte dessen Weitergabe in das städtische Versorgungsnetz."
+        }
+      ]
+    },
+    {
+      "id": "lissabon_aussichtspunkt_park_eduardo_vii",
+      "name": "Aussichtspunkt im Parque Eduardo VII",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Am oberen Ende des Parque Eduardo VII liegt eine breite Aussicht über die geometrisch gegliederte Parkachse, den Marquês de Pombal und die Avenida da Liberdade bis zur tieferen Innenstadt und zum Tejo. Der Blick erklärt Lissabons nördliche Stadterweiterung besonders anschaulich.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Vom erhöhten Nordende zieht eine lange grüne Mittelachse bergab. Symmetrische Heckenmuster rahmen den Blick zum Kreisverkehr Marquês de Pombal; dahinter setzt die Avenida da Liberdade die Achse in Richtung Baixa fort. Der Tejo erscheint bei klarer Sicht als heller Abschluss.",
+          "tags": ["visuell", "wegweiser", "aussicht"]
+        },
+        {
+          "text": "Stadtachse: Die Aussicht ist weniger ein einzelnes Panoramaobjekt als eine Lesebrille für den Stadtgrundriss. Park, Rotunda und Avenida verbinden die höher gelegenen Erweiterungsviertel mit dem historischen Zentrum. Topografie und planmäßige Stadtentwicklung werden in einer Blicklinie sichtbar.",
+          "tags": ["stadtentwicklung", "orientierung"]
+        },
+        {
+          "text": "Name: Der Park trägt den Namen des britischen Königs Edward VII., der Portugal 1903 besuchte. Ältere Bezeichnungen und Pläne stehen mit der Avenida da Liberdade und der nördlichen Erweiterung Lissabons in Verbindung.",
+          "tags": ["geschichte", "name"]
+        },
+        {
+          "text": "Gestaltung: Der heutige Parkcharakter wurde im 20. Jahrhundert entscheidend geprägt. Keil do Amaral arbeitete in den 1940er Jahren an der Neuordnung des Parque Eduardo VII und zugleich an Bauten der tiefer im Park gelegenen Estufa Fria.",
+          "tags": ["architektur", "landschaft", "geschichte"]
+        },
+        {
+          "text": "Estufa Fria: Die botanische Anlage nutzt eine ehemalige Basaltgrube mit Wasserquellen. Aus einem Schutzbereich für empfindliche Pflanzen entwickelte sich ein öffentlicher Garten; später kamen Estufa Quente und Estufa Doce für tropische beziehungsweise trockenheitsangepasste Pflanzen hinzu.",
+          "tags": ["botanik", "quer", "geschichte"]
+        },
+        {
+          "text": "Monument am oberen Ende: Das Monumento ao 25 de Abril von João Cutileiro erinnert an die Nelkenrevolution und die demokratische Umwälzung von 1974. Die steinerne Komposition und Wasserführung geben dem Aussichtspunkt neben der Stadtachse eine politische Erinnerungsebene.",
+          "tags": ["denkmal", "zeitgeschichte"]
+        },
+        {
+          "text": "Leben heute: Die großen Rasen- und Wegeflächen dienen Spaziergängen und gelegentlich Großveranstaltungen. Temporäre Messen, Bühnen oder Absperrungen können die freie Sicht und Wegeführung verändern und dürfen nicht als dauerhafte Ausstattung beschrieben werden.",
+          "tags": ["leben_jetzt", "mythencheck"]
+        },
+        {
+          "text": "LIVE: Wetter und Sicht, Veranstaltungen, Sperrungen, Estufa-Fria-Besuch, Toiletten, Beleuchtung und barrierearme Wege bei der Stadt Lissabon prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Was erklärt die Aussicht besonders gut?",
+          "a": "Sie zeigt die durchgehende Stadtachse vom oberen Park über Marquês de Pombal und Avenida da Liberdade in Richtung Baixa und Tejo."
+        }
+      ]
+    },
+    {
+      "id": "lissabon_jardim_da_fundacao_calouste_gulbenkian",
+      "name": "Jardim da Fundação Calouste Gulbenkian",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Der Gulbenkian-Garten ist ein Schlüsselwerk moderner portugiesischer Landschaftsarchitektur. António Viana Barreto und Gonçalo Ribeiro Telles entwickelten ihn in den 1960er Jahren als organische Verbindung von Museums- und Stiftungsbauten, Relief, Wasser, Waldsaum und Lichtungen.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Flache Wasserläufe, ein See, unregelmäßige Steinplatten, dicht bepflanzte Ränder und offene Lichtungen bilden keine klassische Vorderseite. Die Wege führen in wechselnden Höhen und Blickwinkeln zwischen Vegetation und den niedrigen modernistischen Gebäuden hindurch.",
+          "tags": ["visuell", "wegweiser", "landschaft"]
+        },
+        {
+          "text": "Vorgeschichte: Die Fundação Calouste Gulbenkian erwarb 1957 den früheren Parque de Santa Gertrudes. Bereits vorhandene Bäume wurden untersucht und soweit möglich in die neue Anlage einbezogen; der Garten begann also nicht auf einer völlig leeren Fläche.",
+          "tags": ["geschichte", "gulbenkian_offiziell"]
+        },
+        {
+          "text": "Autoren: Die Landschaftsarchitekten António Viana Barreto und Gonçalo Ribeiro Telles entwickelten 1961 den Vorentwurf und lieferten 1963 die Ausführungsplanung. Die Bauphase gehörte zum großen Stiftungsensemble, das 1969 eröffnet wurde.",
+          "tags": ["geschichte", "landschaftsarchitektur", "gulbenkian_offiziell"]
+        },
+        {
+          "text": "Gestaltungsprinzip: Der Plan arbeitete mit Archetypen portugiesischer Landschaft: Mata, Orla und Clareira, also Wald, Saum und Lichtung. Licht und Schatten, Geländeform, Wasser und Vegetation erzeugen Räume, ohne sie durch starre symmetrische Achsen festzulegen.",
+          "tags": ["design", "landschaft", "gulbenkian_offiziell"]
+        },
+        {
+          "text": "Architekturbezug: Ruy Athouguia, Alberto Pessoa und Pedro Cid entwarfen Hauptsitz und Museum. Garten und Gebäude wurden als zusammenhängendes modernes Ensemble gedacht; Glasflächen, überdeckte Passagen und Ausblicke lassen Innen- und Außenraum ineinandergreifen.",
+          "tags": ["architektur", "moderne"]
+        },
+        {
+          "text": "Wandel: Ein lebender Garten verändert sich. Nach Schäden und Pflanzenkrankheiten wurde er mehrfach gepflegt und erneuert. Ab 2002 setzte eine langfristige Rehabilitierung unter Gonçalo Ribeiro Telles auf kontrolliertes Altern und auf Qualitäten, die durch das Pflanzenwachstum neu entstanden waren.",
+          "tags": ["landschaft", "geschichte", "pflege"]
+        },
+        {
+          "text": "Leben heute: Der Garten ist eigenständiger Aufenthaltsraum und zugleich Zugang zu Museen, Musik und Stiftung. Das Freiluft-Amphitheater und andere Bereiche können Kulturprogramme aufnehmen; konkrete Ausstellungen und Konzerte sind wechselnd.",
+          "tags": ["leben_jetzt", "kultur"]
+        },
+        {
+          "text": "LIVE: Baustellen und Zugänge des Gulbenkian-Komplexes, Gartenbereiche, Museumsöffnung, Veranstaltungen, Gastronomie, Toiletten und Barrierefreiheit direkt bei der Fundação Calouste Gulbenkian prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Warum wirkt der Gulbenkian-Garten so natürlich?",
+          "a": "Sein moderner Entwurf arbeitet bewusst mit Gelände, Wasser, altem Baumbestand sowie den Landschaftstypen Wald, Saum und Lichtung statt mit strenger Symmetrie."
+        }
+      ]
+    },
+    {
+      "id": "lissabon_igreja_de_santo_antonio",
+      "name": "Igreja de Santo António de Lisboa",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Die Kirche Santo António steht neben der Sé an dem Ort, an dem der Überlieferung zufolge 1195 Fernando de Bulhões, der spätere heilige Antonius, geboren wurde. Der heutige Bau entstand nach dem Erdbeben von 1755 überwiegend zwischen 1767 und dem frühen 19. Jahrhundert.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Die helle, kompakte Fassade steht dicht an der Straße unterhalb der Kathedrale. Barocke und Rokoko-Elemente verbinden sich mit der nüchternen Ordnung des Wiederaufbaus; im einschiffigen Inneren fallen Marmor, Seitenkapellen und die Verehrung des Heiligen auf.",
+          "tags": ["visuell", "wegweiser", "architektur"]
+        },
+        {
+          "text": "Geburtsort-Tradition: Die Kirche bezeichnet sich als Heiligtum am Geburtsort des 1195 als Fernando de Bulhões geborenen Antonius. Er wurde Franziskaner, wirkte außerhalb Portugals und starb 1231 bei Padua; deshalb ist er international als Antonius von Padua und in Lissabon als Santo António de Lisboa bekannt.",
+          "tags": ["religion", "geschichte", "kirche_offiziell"]
+        },
+        {
+          "text": "Frühe Kapelle: Schriftliche Nachrichten zu einer Kapelle reichen in das frühe 15. Jahrhundert. Das benachbarte Haus war bereits seit 1326 mit der Stadtverwaltung verbunden. König João II. ordnete 1495 eine Vergrößerung des Gotteshauses an, die unter Manuel I. fortgeführt wurde.",
+          "tags": ["geschichte", "stadtgeschichte"]
+        },
+        {
+          "text": "Erdbeben und Neubau: 1755 wurde die damalige Kirche zerstört; nur der Hauptkapellenbereich überstand die Katastrophe. Der Neubau nach Plänen von Mateus Vicente de Oliveira begann 1767 und zog sich bis 1812. Die Bevölkerung unterstützte die Finanzierung durch Spenden.",
+          "tags": ["geschichte", "erdbeben", "architektur"]
+        },
+        {
+          "text": "Architektur: Die staatliche Denkmaldatenbank beschreibt einen nach dem Erdbeben entstandenen Bau mit einschiffigem, tonnengewölbtem Raum, reicher Marmorverwendung, Gemälden von Pedro Alexandrino und einem südlichen Fassadenteil mit Rokoko-Kartusche.",
+          "tags": ["architektur", "kunst", "nationalmonument"]
+        },
+        {
+          "text": "Stadt und Heiliger: Santo António ist eng mit den Lissabonner Stadtfesten und der lokalen Identität verbunden. Diese lebendige Verehrung erklärt, warum der Geburtsort trotz seines kleinen Maßstabs eine größere Bedeutung hat als viele monumentalere Kirchen.",
+          "tags": ["kultur", "religion", "stadtidentitaet"]
+        },
+        {
+          "text": "Quer: Die Sé liegt nur wenige Schritte bergauf. Zusammen zeigen beide Kirchen unterschiedliche Schichten: die Kathedrale steht für die mittelalterliche Bischofsstadt, Santo António für Geburtsort-Erinnerung und den Wiederaufbau nach 1755.",
+          "tags": ["quer", "orientierung"]
+        },
+        {
+          "text": "LIVE: Gottesdienste, Zugang zur Krypta beziehungsweise Geburtsortkapelle, Museum, Feiertage, Prozessionen, Öffnungszeiten, Eintritt und Barrierefreiheit bei der Kirche prüfen; religiöse Handlungen respektieren.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Warum heißt er in Italien Antonius von Padua?",
+          "a": "Er wurde in Lissabon geboren, wirkte später in Italien und starb bei Padua; beide Ortsbezeichnungen beziehen sich auf denselben Heiligen."
+        }
+      ]
+    },
+    {
+      "id": "lissabon_igreja_de_sao_domingos",
+      "name": "Igreja de São Domingos",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Die Igreja de São Domingos nahe Rossio ist eine der geschichtsträchtigsten Kirchen Lissabons. Mittelalterliche Gründung, Erdbeben, Inquisition, das Massaker von 1506 und ein Großbrand von 1959 überlagern sich in einem Innenraum, dessen Brandspuren bewusst sichtbar blieben.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Hinter der barocken Fassade überrascht ein dunkler, rötlich-brauner Innenraum. Säulen und Steinflächen zeigen Risse, Verfärbungen und abgeplatzte Partien vom Brand; restaurierte Altäre stehen neben bewusst nicht geglätteten Verletzungen.",
+          "tags": ["visuell", "wegweiser", "architektur"]
+        },
+        {
+          "text": "Mittelalter: Die Dominikanerkirche wurde im 13. Jahrhundert gegründet und 1241 geweiht. Sie gehörte zeitweise zu den größten und wichtigsten Kirchen der Stadt und war mit königlichen Zeremonien und Hochzeiten verbunden.",
+          "tags": ["geschichte", "mittelalter"]
+        },
+        {
+          "text": "Gewaltgeschichte: 1506 begann im Umfeld der Kirche das Massaker von Lissabon, bei dem eine christliche Menge zahlreiche sogenannte Neuchristen, also zwangsgetaufte Juden und ihre Nachkommen, ermordete. Diese Geschichte verlangt eine sachliche, nicht folklorisierende Darstellung.",
+          "tags": ["geschichte", "erinnerung", "juedische_geschichte"]
+        },
+        {
+          "text": "Inquisition: São Domingos war eng mit der portugiesischen Inquisition verbunden. Diese institutionelle Vergangenheit macht den Ort zu einem Zeugnis religiöser Macht und Verfolgung, nicht nur zu einer Kulisse königlicher Feste.",
+          "tags": ["geschichte", "religion", "erinnerung"]
+        },
+        {
+          "text": "Erdbeben: Die Kirche wurde bereits 1531 beschädigt und 1755 fast vollständig zerstört. Der Wiederaufbau nutzte unter anderem das barocke Portal der zerstörten königlichen Kapelle des Paço da Ribeira und war erst im frühen 19. Jahrhundert abgeschlossen.",
+          "tags": ["geschichte", "erdbeben", "architektur"]
+        },
+        {
+          "text": "Brand 1959: Ein schweres Feuer verwüstete den Innenraum und zerstörte zahlreiche Kunstwerke; zwei Feuerwehrleute kamen ums Leben. Bei der späteren Wiederherstellung wurden Brandspuren erhalten. Die heutige Wirkung ist daher historisches Dokument und keine künstlich gealterte Gestaltung.",
+          "tags": ["geschichte", "brand", "mythencheck"]
+        },
+        {
+          "text": "Stadtraum: Die Kirche liegt am Largo de São Domingos unmittelbar nördlich des Rossio. Der kleine Platz verbindet religiöse Geschichte, Alltagsstadt und die Erinnerung an Gewalt im Herzen der Baixa.",
+          "tags": ["stadtraum", "quer"]
+        },
+        {
+          "text": "LIVE: Gottesdienste, Gedenkveranstaltungen, Öffnungszeiten, Zugangseinschränkungen und Barrierefreiheit vor Ort prüfen; während liturgischer Feiern ist touristische Nutzung nachrangig.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Warum wurden die Brandspuren nicht vollständig beseitigt?",
+          "a": "Bei der Wiederherstellung blieben sichtbare Schäden des Feuers von 1959 als Teil der Bau- und Erinnerungsgeschichte erhalten."
+        }
+      ]
+    },
+    {
+      "id": "lissabon_miradouro_da_graca",
+      "name": "Miradouro da Graça",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Der offiziell Miradouro Sophia de Mello Breyner Andresen genannte Aussichtspunkt liegt bei Kirche und Kloster Graça. Von der Terrasse öffnet sich ein weiter Blick über Mouraria und Baixa zum Castelo de São Jorge, zur gegenüberliegenden westlichen Stadt und zum Tejo.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Eine baumbeschattete Terrasse mit Sitzmauer liegt vor dem Graça-Komplex. Über den Dächern von Mouraria und Baixa staffeln sich die Hügel; das Castelo de São Jorge steht seitlich auf seiner Höhe, während der Tejo den tiefen Hintergrund bildet.",
+          "tags": ["visuell", "wegweiser", "aussicht"]
+        },
+        {
+          "text": "Name: Der Aussichtspunkt ist traditionell als Miradouro da Graça bekannt. Sein offizieller Name ehrt die portugiesische Dichterin Sophia de Mello Breyner Andresen. Beide Bezeichnungen beziehen sich auf dieselbe Terrasse.",
+          "tags": ["name", "literatur", "identitaet"]
+        },
+        {
+          "text": "Klosterbezug: Die Aussicht liegt am Convento da Graça, dessen Ursprünge in das 13. Jahrhundert zurückreichen. Der Komplex wurde nach dem Erdbeben von 1755 stark erneuert; Garten, Vorplatz und Kirchenbau bilden heute den historischen Rahmen des Miradouro.",
+          "tags": ["geschichte", "religion", "architektur"]
+        },
+        {
+          "text": "Topografie: Graça liegt auf einer der hohen östlichen Lissabonner Anhöhen. Der Blick zeigt, wie Mouraria in engen Straßen zum Zentrum abfällt und wie sich die Baixa als flacheres, regelmäßigeres Raster davon unterscheidet.",
+          "tags": ["orientierung", "stadtstruktur"]
+        },
+        {
+          "text": "Blick zum Castelo: Das Castelo de São Jorge liegt nicht direkt unterhalb, sondern auf der benachbarten befestigten Höhe. Gerade diese seitliche Perspektive erklärt die Stellung der Burg über der mittelalterlichen Stadt besser als ein Blick vom Burghügel selbst.",
+          "tags": ["aussicht", "quer", "orientierung"]
+        },
+        {
+          "text": "Dichterin: Sophia de Mello Breyner Andresen lebte im 20. Jahrhundert und zählt zu den bedeutenden portugiesischen Lyrikerinnen. Die Benennung verbindet den öffentlichen Aussichtsort mit Literatur, ohne dass der Platz als biografisches Wohnhaus missverstanden werden darf.",
+          "tags": ["literatur", "mythencheck"]
+        },
+        {
+          "text": "Leben heute: Die Terrasse ist frei zugänglicher Stadtraum und häufig stark besucht. Cafébetrieb, Straßenmusik oder einzelne Verkaufsangebote sind wechselnde Nutzungen; die stabile Qualität ist der Blick und die Lage am historischen Graça-Ensemble.",
+          "tags": ["leben_jetzt", "stadtraum"]
+        },
+        {
+          "text": "LIVE: Wetter, Sicht, Baustellen, Gedränge, Gastronomie, Kirchenzugang, ÖPNV und barrierearme Route prüfen. Die historischen Straßen nach Graça sind steil und nicht jede Verbindung ist stufenfrei.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Ist der Miradouro Sophia de Mello Breyner Andresen ein anderer Ort?",
+          "a": "Nein. Das ist der offizielle Name des allgemein Miradouro da Graça genannten Aussichtspunkts."
+        }
+      ]
+    },
+    {
+      "id": "lissabon_miradouro_das_portas_do_sol",
+      "name": "Miradouro das Portas do Sol",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Portas do Sol ist eine große Aussichtsterrasse am oberen Rand der Alfama. Der Blick fällt über das Häusergewirr zum Tejo und hebt die Türme von São Vicente de Fora sowie die Kuppel des Panteão Nacional hervor. Der Name bewahrt die Erinnerung an ein Tor der mittelalterlichen Stadtbefestigung.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Unter der offenen Terrasse fällt Alfama in roten Ziegeldächern, hellen Fassaden und engen Gassen zum Fluss ab. São Vicente de Fora steht mit Doppeltürmen im Mittelgrund, weiter rechts erscheint die helle Kuppel des Panteão Nacional; am Ufer liegen Bahn- und Hafenanlagen.",
+          "tags": ["visuell", "wegweiser", "aussicht"]
+        },
+        {
+          "text": "Name und Mauer: Portas do Sol erinnert an ein östliches Tor der alten Stadtmauer. Die häufige Deutung als zur aufgehenden Sonne gerichtetes Sonnentor ist plausibel, sollte aber nicht als vollständig dokumentierte Etymologie ausgegeben werden.",
+          "tags": ["geschichte", "name", "mythencheck"]
+        },
+        {
+          "text": "Stadtstruktur: Von hier lässt sich Alfama als Hangviertel lesen. Die unregelmäßigen Gassen folgen Gelände und älteren Parzellen, während unten am Wasser neuere Verkehrs- und Hafenstrukturen eine deutlich geradere Kante bilden.",
+          "tags": ["stadtstruktur", "orientierung"]
+        },
+        {
+          "text": "São Vicente: Auf der Terrasse steht eine Statue des heiligen Vinzenz, des Schutzpatrons von Lissabon, mit dem Schiff und den Raben aus der städtischen Überlieferung. Dieses Motiv erscheint auch im Wappen der Stadt.",
+          "tags": ["kunst", "stadtidentitaet", "religion"]
+        },
+        {
+          "text": "Blickbezüge: São Vicente de Fora und Panteão Nacional wirken vom Miradouro nah beieinander, liegen aber an getrennten Orten weiter östlich. Die Perspektive komprimiert Entfernungen; die steilen Fußwege durch Alfama benötigen mehr Zeit, als der Blick vermuten lässt.",
+          "tags": ["orientierung", "quer"]
+        },
+        {
+          "text": "Nachbarschaft: Nur wenige Schritte entfernt liegt der kleinere Miradouro de Santa Luzia mit Azulejos und Pergola. Portas do Sol ist die offenere große Terrasse; beide Aussichtspunkte dürfen trotz ihrer Nähe nicht als derselbe Ort zusammengelegt werden.",
+          "tags": ["quer", "identitaet"]
+        },
+        {
+          "text": "Leben heute: Die Terrasse ist ein stark frequentierter öffentlicher Aussichtsort und wichtiger Durchgangspunkt zwischen Sé, Castelo und Alfama. Verkehr, Straßenbahn, Gastronomie und Besuchergruppen teilen sich einen begrenzten Raum.",
+          "tags": ["leben_jetzt", "stadtraum"]
+        },
+        {
+          "text": "LIVE: Sicht, Baustellen, Straßenbahn- und Busbetrieb, Gedränge, Gastronomie und barrierearme Route prüfen. Die Linie 28 nicht als garantierte Anreise mit festen Zeiten nennen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Sind Portas do Sol und Santa Luzia derselbe Aussichtspunkt?",
+          "a": "Nein. Sie liegen sehr nah beieinander, sind aber zwei getrennte Terrassen mit unterschiedlicher Gestaltung."
+        }
+      ]
+    },
+    {
+      "id": "lissabon_rua_augusta",
+      "name": "Rua Augusta",
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Die Rua Augusta ist die zentrale Nord-Süd-Achse der Baixa Pombalina. Sie verbindet Rossio und Praça do Comércio, führt durch den Arco da Rua Augusta und zeigt das regelmäßige, nach dem Erdbeben von 1755 entwickelte Geschäfts- und Wohnraster der Unterstadt.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Eine breite Fußgängerachse läuft zwischen rhythmisch gegliederten, hellen Fassaden gerade auf den Triumphbogen zu. Erdgeschosse öffnen sich als Läden und Gastronomie, darüber wiederholen sich Fenster und Balkone; schwarz-weiße Calçada-Pflasterung betont die Länge.",
+          "tags": ["visuell", "wegweiser", "architektur"]
+        },
+        {
+          "text": "Wiederaufbau: Nach Erdbeben, Feuer und Flut von 1755 wurde die Baixa nach einem neuen Plan geordnet. Manuel da Maia, Eugénio dos Santos und Carlos Mardel gehören zu den prägenden Planern. Rua Augusta wurde zur zentralen Achse dieses systematischen Rasters.",
+          "tags": ["geschichte", "erdbeben", "stadtplanung"]
+        },
+        {
+          "text": "Pombalinische Typologie: Die Baixa erhielt standardisierte Gebäude mit hierarchisch geordneten Fassaden, Gewerbe im Erdgeschoss und Wohnungen darüber. Im Inneren kam die sogenannte gaiola pombalina als hölzerne, auf Erdbebenwirkung reagierende Tragstruktur zum Einsatz.",
+          "tags": ["architektur", "technik", "baixa_pombalina"]
+        },
+        {
+          "text": "Name: Augusta bedeutet erhaben oder majestätisch und gehört zu einem Netz programmatisch benannter Straßen der rekonstruierten Baixa. Andere Straßen erinnern etwa an traditionelle Gewerbe. Die Benennung unterstützte die neue Ordnung des Quartiers.",
+          "tags": ["name", "stadtgeschichte"]
+        },
+        {
+          "text": "Arco da Rua Augusta: Der monumentale Bogen am Südende schließt die Straße zur Praça do Comércio ab. Er wurde erst im 19. Jahrhundert in seiner heutigen Form vollendet und ist deshalb keine unveränderte Originalkomponente unmittelbar aus den ersten Jahren nach 1755.",
+          "tags": ["architektur", "quer", "mythencheck"]
+        },
+        {
+          "text": "Handelsachse: Die Erdgeschosse waren von Beginn an für Handel, Handwerk und Dienste gedacht. Die heutige touristische Einkaufs- und Gastronomienutzung setzt diese kommerzielle Funktion fort, auch wenn einzelne Geschäfte und Marken ständig wechseln.",
+          "tags": ["leben_jetzt", "wirtschaft"]
+        },
+        {
+          "text": "Historische Beleuchtung: Rua Augusta gehörte 1780 zu den Hauptstraßen, die bei einem frühen städtischen Beleuchtungsversuch mit Öllampen ausgestattet wurden. Hohe Kosten und Vandalismus führten 1792 zur weitgehenden Einstellung dieses Systems.",
+          "tags": ["stadtgeschichte", "alltag"]
+        },
+        {
+          "text": "LIVE: Geschäfte, Gastronomie, Straßenveranstaltungen, Baugerüste, Zugang zum Triumphbogen, Menschenandrang und temporäre Sperrungen aktuell prüfen; die Fußgängerfunktion kann bei Veranstaltungen lokal verändert sein.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Warum wirken die Häuser entlang der Rua Augusta so einheitlich?",
+          "a": "Sie gehören zum planmäßigen Wiederaufbau der Baixa nach 1755, bei dem Gebäudehöhen, Fassadenrhythmus und Nutzungen systematisch geordnet wurden."
+        }
+      ]
+    },
+    {
+      "id": "lissabon_feira_da_ladra",
+      "name": "Feira da Ladra",
+      "place_tier": 3,
+      "pack_role": "story",
+      "general_info": "Die Feira da Ladra ist Lissabons traditionsreicher Floh- und Trödelmarkt am Campo de Santa Clara. Verkaufsdecken und Stände mit wechselnden gebrauchten Dingen prägen den Ort; der Markt wechselte historisch mehrfach seinen Standort, bevor er sich hier etablierte.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: An Markttagen verteilen sich Decken, Tische und provisorische Stände über den langgezogenen Campo de Santa Clara. Bücher, Keramik, Kleidung, Schallplatten, Werkzeug, Haushaltsobjekte und Sammlerstücke ergeben bewusst kein einheitliches Sortiment.",
+          "tags": ["visuell", "wegweiser", "markt"]
+        },
+        {
+          "text": "Geschichte: Die Feira da Ladra gehört zu den ältesten Markttraditionen Lissabons und ist über Jahrhunderte an verschiedenen Orten belegt. Seit dem späten 19. Jahrhundert ist Campo de Santa Clara ihr fester Bezugspunkt.",
+          "tags": ["geschichte", "markt"]
+        },
+        {
+          "text": "Name: Die wörtliche Verbindung von ladra mit Diebin führt leicht zur Behauptung eines Diebesmarkts. Die Herkunft des Namens ist jedoch nicht sicher geklärt; eine kriminelle Etymologie darf nicht als erwiesene Tatsache erzählt werden.",
+          "tags": ["name", "mythencheck"]
+        },
+        {
+          "text": "Stadtraum: Panteão Nacional und São Vicente de Fora rahmen die Umgebung, Alfama fällt hangabwärts zum Tejo. Damit verbindet der Markt Alltags- und Gebrauchskultur mit einer besonders dichten Zone historischer Monumente.",
+          "tags": ["quer", "orientierung"]
+        },
+        {
+          "text": "Leben heute: Das Angebot hängt vollständig von den jeweiligen Händlerinnen und Händlern ab. Einzelne Antiquitäten, Qualität, Herkunft oder Verfügbarkeit lassen sich nicht offline versprechen; bei wertvollen Gegenständen ist eigene Prüfung nötig.",
+          "tags": ["leben_jetzt", "markt"]
+        },
+        {
+          "text": "LIVE: Markttage, Uhrzeiten, wetterbedingte Ausfälle, Regeln, aktuelles Angebot, Zahlungen und Verkehr bei der Stadt Lissabon prüfen; keine festen Termine aus dem Pack vorlesen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Bedeutet der Name, dass hier Diebesgut verkauft wird?",
+          "a": "Nein, das ist keine gesicherte Erklärung. Die genaue Herkunft des populären Namens ist umstritten."
+        }
+      ]
+    },
+    {
+      "id": "lissabon_casino_lisboa",
+      "name": "Casino Lisboa",
+      "place_tier": 3,
+      "pack_role": "story",
+      "general_info": "Das Casino Lisboa befindet sich im Parque das Nações im ehemaligen Pavilhão do Futuro der Expo 98. Der stark umgebaute Stahl-Glas-Bau öffnete 2006 und verbindet Glücksspiel mit Auditorium, Gastronomie, Ausstellungen und wechselnden Unterhaltungsformaten.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Eine große, kantige Hülle aus Stahl und Glas steht nahe dem Zentrum des ehemaligen Expo-Geländes. Die transparente und beleuchtete Fassade verweist auf den Umbau zum Unterhaltungsbau; sie unterscheidet sich deutlich von einer historistischen Spielbank.",
+          "tags": ["visuell", "wegweiser", "architektur"]
+        },
+        {
+          "text": "Expo-Erbe: Das Gebäude war ursprünglich der Pavilhão do Futuro der Weltausstellung Expo 98. Seine Umnutzung zeigt, wie das Ausstellungsgelände nach 1998 nicht abgebaut, sondern schrittweise zum Stadtteil Parque das Nações weiterentwickelt wurde.",
+          "tags": ["geschichte", "expo98", "stadtentwicklung"]
+        },
+        {
+          "text": "Umbau und Öffnung: Für den Casino-Betrieb wurde der Pavillon nach einem Projekt von Fernando Jorge Correia tiefgreifend verändert. Das Casino öffnete am 19. April 2006; Stahl, Glas, Licht und offene Innenräume prägen die neue Nutzung.",
+          "tags": ["geschichte", "architektur"]
+        },
+        {
+          "text": "Mehrfachnutzung: Neben Spielbereichen gehören ein Auditorium, Gastronomie und Kultur- beziehungsweise Ausstellungsflächen zum Konzept. Ein konkretes Konzert, Restaurant oder Spielangebot ist jedoch veränderlich und kein stabiler Pack-Fakt.",
+          "tags": ["leben_jetzt", "kultur"]
+        },
+        {
+          "text": "Quer: Oceanário, Gare do Oriente, Centro Vasco da Gama und weitere Expo-Bauten liegen im selben modernen Stadtquartier. Das Casino ist daher vor allem als umgenutztes Expo-Gebäude interessant, nicht als Teil des historischen Zentrums.",
+          "tags": ["quer", "orientierung"]
+        },
+        {
+          "text": "LIVE: Mindestalter, Ausweispflicht, verantwortungsvolles Spielen, Öffnungszeiten, Kleider- und Einlassregeln, Spielangebot, Shows, Tickets, Gastronomie und Barrierefreiheit beim Casino prüfen.",
+          "tags": ["live_hint", "ephemeral", "responsible_gambling"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Wurde das Gebäude ursprünglich als Casino gebaut?",
+          "a": "Nein. Es war der Pavilhão do Futuro der Expo 98 und wurde für die 2006 eröffnete Casinonutzung stark umgebaut."
+        }
+      ]
+    },
+    {
+      "id": "lissabon_centro_vasco_da_gama",
+      "name": "Centro Vasco da Gama",
+      "place_tier": 3,
+      "pack_role": "story",
+      "general_info": "Das 1999 eröffnete Centro Vasco da Gama liegt direkt gegenüber der Gare do Oriente im Parque das Nações. José Quintelas Architektur greift das Ozean-Thema der Expo 98 auf und gestaltet den langgestreckten Innenraum als Anspielung auf ein großes Schiff.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Vom Bahnhof führt der Weg direkt in einen hellen, langgestreckten Innenraum mit hoher zentraler Öffnung. Glas, Metall, Wasser- und Schiffsassoziationen erinnern an die maritime Themenwelt des benachbarten ehemaligen Expo-Geländes.",
+          "tags": ["visuell", "wegweiser", "architektur"]
+        },
+        {
+          "text": "Eröffnung: Das Zentrum öffnete offiziell am 21. April 1999, kurz nach dem Ende der Expo 98. Es steht am Bereich des früheren Haupteingangs und gehört zur dauerhaften Nachnutzung des Ausstellungsgeländes.",
+          "tags": ["geschichte", "expo98"]
+        },
+        {
+          "text": "Architektur: José Quintela entwarf das Einkaufszentrum mit der Idee eines großen Schiffes. Der offene Zentralraum, natürliche Lichteinfall und maritime Formen setzen das Expo-Motto der Ozeane in einer kommerziellen Nutzung fort.",
+          "tags": ["architektur", "design"]
+        },
+        {
+          "text": "Stadtverbindung: Das Gebäude liegt zwischen Gare do Oriente und dem Uferquartier. Es funktioniert deshalb nicht nur als Einkaufsort, sondern auch als stark frequentierte Passage vom regionalen Verkehrsknoten zu den Expo-Bauten.",
+          "tags": ["stadtentwicklung", "orientierung"]
+        },
+        {
+          "text": "Name: Vasco da Gama verweist auf den portugiesischen Seefahrer und passt zur maritimen Benennung vieler Orte im Parque das Nações. Die Gestaltung ist eine moderne Themenarchitektur und kein historisches Schiff.",
+          "tags": ["name", "mythencheck"]
+        },
+        {
+          "text": "LIVE: Läden, Gastronomie, Kino, Services, Öffnungszeiten, Parken, Veranstaltungen und Barrierefreiheit direkt beim Centro Vasco da Gama prüfen; Marken und Angebote ändern sich.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Warum erinnert das Innere an ein Schiff?",
+          "a": "Der Architekt José Quintela griff bewusst das Ozean-Thema der Expo 98 auf und inszenierte den Bau als großen maritimen Innenraum."
+        }
+      ]
+    },
+    {
+      "id": "lissabon_casa_museu_anastacio_goncalves",
+      "name": "Casa-Museu Dr. Anastácio Gonçalves",
+      "place_tier": 3,
+      "pack_role": "story",
+      "general_info": "Die Casa-Museu zeigt die Sammlung des Arztes António Anastácio Gonçalves in der ehemaligen Casa-Malhoa. Norte Júnior entwarf das preisgekrönte Haus 1904/05 als Wohnhaus und Atelier für den Maler José Malhoa; 1932 wurde es zum Sammlerhaus.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Das freistehende Stadthaus verbindet dekorative Stein- und Putzflächen, große Atelierfenster und eine asymmetrische, frühmoderne Komposition. Seine Wohnräume schaffen einen intimeren Maßstab als ein klassischer Museumsbau.",
+          "tags": ["visuell", "wegweiser", "architektur"]
+        },
+        {
+          "text": "Casa-Malhoa: Der Architekt Norte Júnior plante das Gebäude 1904/05 für José Malhoa als Wohnung und Arbeitsatelier. Es gilt als erstes eigens errichtetes Künstlerhaus der Hauptstadt und erhielt 1905 den Prémio Valmor.",
+          "tags": ["geschichte", "architektur", "museum_offiziell"]
+        },
+        {
+          "text": "Sammler: Der Augenarzt António Anastácio Gonçalves kaufte das Haus 1932, lebte dort und ordnete seine Kunstsammlung in den Räumen. Auf seinen ausdrücklichen Wunsch ging das Gebäude 1969 an den portugiesischen Staat; 1980 öffnete das Museum.",
+          "tags": ["geschichte", "sammlung"]
+        },
+        {
+          "text": "Bestände: Die rund 3.000 Werke konzentrieren sich auf portugiesische Malerei des 19. und 20. Jahrhunderts, chinesisches Porzellan sowie portugiesische und ausländische Möbel. Hinzu kommen Schmuck, europäische Kunst, Textilien, Uhren und Materialien aus dem Nachlass Silva Portos.",
+          "tags": ["sammlung", "kunst", "museum_offiziell"]
+        },
+        {
+          "text": "Erweiterung: 1996 wurde das benachbarte, ebenfalls von Norte Júnior entworfene Haus nach Plänen von Frederico und Pedro George einbezogen. Seit der Wiedereröffnung 1997 bietet der Komplex mehr Empfangs- und Ausstellungsraum.",
+          "tags": ["architektur", "geschichte"]
+        },
+        {
+          "text": "LIVE: Aktueller Öffnungsstatus, Ausstellungen, Führungen, Tickets, konservatorisch bedingte Raumschließungen und Barrierefreiheit bei Museus e Monumentos de Portugal prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Für wen wurde das Haus ursprünglich gebaut?",
+          "a": "Für den Maler José Malhoa als Wohnhaus und Atelier; erst später wurde es Wohn- und Sammlungshaus von Anastácio Gonçalves."
+        }
+      ]
+    },
+    {
+      "id": "lissabon_igreja_da_memoria",
+      "name": "Igreja da Memória",
+      "place_tier": 3,
+      "pack_role": "story",
+      "general_info": "Die Igreja da Memória erinnert an den überlebten Anschlag auf König José I. von 1758. Giovanni Carlo Bibiena begann den Bau 1760, Mateus Vicente de Oliveira führte ihn fort. Seit 1923 befindet sich hier das Grab des Marquês de Pombal.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Die freistehende Kirche besitzt eine ausgewogene helle Fassade, eine markante Kuppel und einen relativ kompakten Grundriss. Im Inneren verbinden sich Marmor, Altargemälde und italienisch geprägte spätbarocke beziehungsweise frühklassizistische Formen.",
+          "tags": ["visuell", "wegweiser", "architektur"]
+        },
+        {
+          "text": "Anlass: Am 3. September 1758 wurde König José I. in seiner Kutsche bei einem Anschlag verletzt. Zwei Jahre später legte er an diesem Ort den Grundstein einer Kirche, die seinen als göttliche Rettung verstandenen Fortbestand erinnern sollte.",
+          "tags": ["geschichte", "koenigshaus"]
+        },
+        {
+          "text": "Architekten: Der Bologneser Architekt und Bühnenbildner Giovanni Carlo Bibiena entwarf das Projekt, starb aber noch 1760. Mateus Vicente de Oliveira übernahm später die Arbeiten, vereinfachte das ursprünglich größere Konzept und verwendete Lösungen, die auch zur Basílica da Estrela führen.",
+          "tags": ["architektur", "geschichte"]
+        },
+        {
+          "text": "Bauverlauf: Finanzielle und politische Umstände verzögerten die Vollendung über Jahrzehnte. Maria I. trieb die Fertigstellung zwischen 1780 und 1782 voran. Der Bau ist dadurch zugleich Denkmal eines königlichen Rettungsnarrativs und Produkt eines langen Planwandels.",
+          "tags": ["geschichte", "baugeschichte"]
+        },
+        {
+          "text": "Pombal: 1923 wurden die sterblichen Überreste Sebastião José de Carvalho e Melos, des Marquês de Pombal, hierher übertragen. Der mächtige Minister prägte Wiederaufbau und Politik nach 1755 und spielte auch im Verfahren gegen die Távoras nach dem Anschlag eine zentrale Rolle.",
+          "tags": ["geschichte", "grab", "pombal"]
+        },
+        {
+          "text": "LIVE: Gottesdienste, Zugang zum Grab, Öffnungszeiten, Restaurierung, religiöse Veranstaltungen und Barrierefreiheit bei der zuständigen Kirche prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erinnert der Name Memória?",
+          "a": "Die Kirche wurde zur Erinnerung an das Überleben König Josés I. bei einem Anschlag im Jahr 1758 gestiftet."
+        }
+      ]
+    },
+    {
+      "id": "lissabon_forte_do_bom_sucesso",
+      "name": "Forte do Bom Sucesso",
+      "place_tier": 3,
+      "pack_role": "story",
+      "general_info": "Das Forte do Bom Sucesso ist eine polygonale Befestigung am Tejo westlich des Torre de Belém. Ab 1780 zur Verstärkung der Flussverteidigung gebaut und im 19. Jahrhundert modernisiert, beherbergt es heute das Museu do Combatente und einen militärischen Erinnerungsort.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Niedrige Mauern, Geschützstellungen und militärische Funktionsbauten liegen unmittelbar am breiten Tejo. Vor dem Fort steht das moderne Monumento aos Combatentes do Ultramar mit Namenswänden; historische Festung und jüngere Erinnerung sind getrennte, aber verbundene Schichten.",
+          "tags": ["visuell", "wegweiser", "militaergeschichte"]
+        },
+        {
+          "text": "Bau: Unter General Guilherme de Vallerée begann 1780 zwischen Bom Sucesso und Pedrouços der Bau zur Ergänzung der Verteidigungslinie von Belém. Die offizielle portugiesische Militärtourismus-Seite nennt 1782 als Abschluss der ersten Bauphase.",
+          "tags": ["geschichte", "festung", "offizielle_quelle"]
+        },
+        {
+          "text": "Ausbau: Während der französischen Besetzung 1808 wurde das Fort durch eine durchgehende Batterie mit dem Torre de Belém verbunden. Im späteren 19. Jahrhundert folgten Wiederaufbau, neue Geschützplattformen und die Umwandlung zur Küstenbatterie.",
+          "tags": ["geschichte", "technik"]
+        },
+        {
+          "text": "Museum: 1999 ging das Fort offiziell an die Liga dos Combatentes; 2003 wurde es öffentlich zugänglich. Das Museu do Combatente behandelt unter anderem Ersten Weltkrieg, Kolonial- beziehungsweise Überseekriege und Friedensmissionen.",
+          "tags": ["museum", "geschichte", "erinnerung"]
+        },
+        {
+          "text": "Denkmal: Das 1993 eingerichtete Monumento aos Combatentes do Ultramar erinnert mit Tausenden Namen an Tote der portugiesischen Kolonialkriege und späterer Missionen. Die historische Bezeichnung Ultramar ist Teil des Denkmalkontexts und sollte kritisch eingeordnet werden.",
+          "tags": ["denkmal", "erinnerung", "zeitgeschichte"]
+        },
+        {
+          "text": "LIVE: Museum, Führungen, Zeremonien, Außenbereiche, Tickets, militärische Sicherheitsregeln und Barrierefreiheit bei der Liga dos Combatentes beziehungsweise offiziellen Tourismusseiten prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Ist das Denkmal so alt wie das Fort?",
+          "a": "Nein. Das Fort entstand ab 1780; das heutige Monumento aos Combatentes do Ultramar wurde erst 1993 eingerichtet."
+        }
+      ]
+    },
+    {
+      "id": "lissabon_instituto_superior_tecnico",
+      "name": "Instituto Superior Técnico – Campus Alameda",
+      "place_tier": 3,
+      "pack_role": "story",
+      "general_info": "Das Instituto Superior Técnico wurde 1911 gegründet. Sein 1937 vollendeter Campus Alameda von Porfírio Pardal Monteiro gilt als erster autonom geplanter Campus des portugiesischen Universitätssystems und als wichtiges Ensemble moderner Bildungsarchitektur.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Das Hauptgebäude steht erhöht am Ende der Alameda und ordnet mehrere Institutsbauten um eine klare, monumentale Campusachse. Heller Stein, breite Treppen, streng gegliederte Fassaden und technisch-nüchterne Nebenbauten vermitteln staatlichen Modernisierungsanspruch.",
+          "tags": ["visuell", "wegweiser", "architektur"]
+        },
+        {
+          "text": "Gründung: Das Instituto Superior Técnico entstand 1911 aus der Teilung des Instituto Industrial e Comercial de Lisboa. Der erste Direktor Alfredo Bensaude erneuerte die Ingenieurausbildung und etablierte Studiengänge unter anderem für Bergbau, Bau, Maschinenbau, Elektro- und Chemieingenieurwesen.",
+          "tags": ["geschichte", "bildung", "tecnico_offiziell"]
+        },
+        {
+          "text": "Campus: Unter Direktor Duarte Pacheco wurde der neue Standort vorangetrieben. Porfírio Pardal Monteiro plante das Ensemble; 1937 war der Alameda-Campus vollendet. Técnico bezeichnet ihn als ersten autonomen Campus im portugiesischen Universitätssystem.",
+          "tags": ["architektur", "geschichte", "tecnico_offiziell"]
+        },
+        {
+          "text": "Planungsidee: Die Gebäude wurden nicht als einzelner Palast, sondern als erweiterbares wissenschaftliches System organisiert. Das entsprach einer modernen Hochschule für angewandte Naturwissenschaften und ermöglichte spätere Ergänzungen, ohne die Grundordnung völlig aufzugeben.",
+          "tags": ["stadtplanung", "bildung", "architektur"]
+        },
+        {
+          "text": "Duarte Pacheco: Der Ingenieur leitete Técnico von 1927 bis 1932 und wurde später als Minister und Bürgermeister eine prägende Figur des portugiesischen Infrastruktur- und Städtebaus. Der Campus verbindet seine institutionelle Vision mit Pardal Monteiros Architektur.",
+          "tags": ["biografie", "stadtgeschichte"]
+        },
+        {
+          "text": "LIVE: Öffentliche Zugänglichkeit, Lehrbetrieb, Veranstaltungen, Führungen, Sicherheitsbereiche, Bibliotheken, Ausstellungen und barrierefreie Eingänge direkt beim Técnico prüfen; der Campus ist in erster Linie Arbeits- und Studienort.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Was ist architekturgeschichtlich besonders?",
+          "a": "Der 1937 vollendete Alameda-Campus gilt als erster autonom geplanter Universitätscampus Portugals."
+        }
+      ]
+    }
+  ],
+  "offline_qa": [
+    {
+      "q": "Wie nutze ich Metro und Carris in Lissabon?",
+      "a": "Metro Lisboa betreibt die U-Bahn; Carris betreibt unter anderem viele Busse, Straßenbahnen und Standseilbahnen im Stadtgebiet. LIVE: Netz, Tarif, Ticketmedium, Entwertung, Betriebszeit, Störung und die Gültigkeit eines Passes immer bei den offiziellen Betreibern prüfen.",
+      "tags": ["mobilitaet", "metro", "carris", "live"]
+    },
+    {
+      "q": "Ist die Straßenbahn 28 eine verlässliche Stadtrundfahrt?",
+      "a": "Sie ist regulärer ÖPNV und fährt durch mehrere historische Viertel, kann aber voll sein, umgeleitet werden oder ausfallen. LIVE bei Carris prüfen. Für den Einstieg Wertsachen sichern, Fahrgäste aussteigen lassen und keine festen Takte aus Offline-Daten versprechen.",
+      "tags": ["mobilitaet", "tram_28", "live", "sicherheit"]
+    },
+    {
+      "q": "Was ist ein sinnvoller Belém-Tag?",
+      "a": "Räumlich gut kombinierbar sind Jerónimos-Kloster, Praça do Império, Centro Cultural de Belém, Ufer, Padrão dos Descobrimentos und Torre de Belém. LIVE: Öffnung, Tickets, Baustellen und Warteschlangen prüfen; nicht jedes Monument ist jederzeit zugänglich.",
+      "tags": ["belem", "tagesplan", "live"]
+    },
+    {
+      "q": "Wie anstrengend sind Alfamas Wege?",
+      "a": "Alfama liegt am Hang und hat steile, unregelmäßige Gassen, Treppen und glattes Calçada-Pflaster. Gute Schuhe, Wasser und eine bergab geplante Route helfen. Für stufenarme Wege Navigation und Aufzüge LIVE prüfen, weil Baustellen und Ausfälle die Route verändern können.",
+      "tags": ["alfama", "zu_fuss", "barrierefreiheit"]
+    },
+    {
+      "q": "Welche Notrufnummer gilt in Lissabon?",
+      "a": "112 ist die einheitliche europäische Notrufnummer für Polizei, Feuerwehr und medizinische Notfälle. Standort, Art des Notfalls und Zahl der Betroffenen klar nennen; bei akuter Gefahr nicht auf App-Recherche warten.",
+      "tags": ["notfall", "112", "sicherheit"]
+    },
+    {
+      "q": "Liegt Cristo Rei in Lissabon?",
+      "a": "Das Santuário de Cristo Rei steht gegenüber von Lissabon am Südufer des Tejo in Almada. Die Anreise erfordert eine Fluss- oder Brückenquerung; Fähren, Busse, Öffnung und Aussichtszugang LIVE prüfen.",
+      "tags": ["cristo_rei", "almada", "orientierung", "live"]
+    },
+    {
+      "q": "Wie komme ich vom Flughafen ins Zentrum?",
+      "a": "Der Flughafen hat Metro-, Bus- und Straßenanbindungen. Welche Verbindung am besten ist, hängt von Ziel, Uhrzeit, Gepäck, Betriebsstörungen und Barrierefreiheit ab. LIVE bei Metro Lisboa, Carris und dem Flughafen prüfen; keine feste Fahrzeit garantieren.",
+      "tags": ["flughafen", "mobilitaet", "live"]
+    },
+    {
+      "q": "Sind Lissabons gelbe Aufzüge normale Verkehrsmittel?",
+      "a": "Glória, Bica und Lavra sind historische Standseilbahnen im Carris-Netz; Santa Justa ist ein senkrechter Aufzug. Sie verbinden starke Höhenunterschiede, sind aber zugleich stark besucht. Betrieb, Tarif und Wartung LIVE prüfen.",
+      "tags": ["carris", "elevadores", "mobilitaet", "live"]
+    },
+    {
+      "q": "Worauf muss ich beim Calçada-Pflaster achten?",
+      "a": "Das traditionelle portugiesische Kleinsteinpflaster kann an Hängen, bei Regen und durch polierte Steine rutschig sein. Schuhe mit Profil tragen, an steilen Stellen langsam gehen und für Rollstuhl oder Kinderwagen möglichst glattere Alternativwege wählen.",
+      "tags": ["zu_fuss", "sicherheit", "barrierefreiheit"]
+    },
+    {
+      "q": "Wie plane ich Aussichtspunkte ohne unnötige Anstiege?",
+      "a": "Lissabon liegt auf mehreren Hügeln. Aussichtspunkte nach Höhenlage bündeln, wenn möglich oben beginnen und bergab weitergehen. Aufzüge, Standseilbahnen, Busse und Straßenbahnen können helfen, müssen wegen Wartung und Störungen aber LIVE geprüft werden.",
+      "tags": ["aussicht", "zu_fuss", "mobilitaet", "live"]
+    }
+  ]
+}

@@ -22,11 +22,8 @@ import { lookupCachedDestinationByName } from '../services/navigation/offlineNav
 import { isDeviceOffline } from '../services/navigation/networkState';
 import {
   resolveExistingPoiId,
-  type NavStartResult,
   type NavTargetInput,
 } from '../services/navigation/resolveNavTarget';
-import { commitHandsFreeNavStart } from '../services/navigation/handsFreeNav';
-import { stopNavigation } from '../services/navigation/navigationService';
 import {
   advanceMultiStopTour,
   navigateToTourStopAt,
@@ -87,7 +84,9 @@ export async function resolveDestination(
     };
   }
 
-  const poiId = await resolveExistingPoiId(input.poiId ?? undefined);
+  const poiId =
+    (await resolveExistingPoiId(input.poiId ?? undefined)) ??
+    (name.length >= 2 ? await resolveExistingPoiId(name) : null);
   if (poiId != null) {
     const { getPoiWithFacts } = await import('../db/database');
     const poi = await getPoiWithFacts(poiId);
@@ -122,7 +121,55 @@ export async function resolveDestination(
           source: 'offline_cache',
         };
       }
+      // Offline: gecachtes Stadt-Pack (z. B. Hamburg Elphi bei aktiver Prisdorf)
+      try {
+        const { resolvePlacePackOsmGoogle } = await import(
+          '../services/navigation/packPlaceResolve'
+        );
+        const packHit = await resolvePlacePackOsmGoogle({
+          query: name,
+          biasLat: biasFromStore().biasLat,
+          biasLng: biasFromStore().biasLng,
+        });
+        if (
+          packHit &&
+          (packHit.source === 'cached_pack' ||
+            packHit.source === 'active_sqlite')
+        ) {
+          return {
+            lat: packHit.lat,
+            lng: packHit.lng,
+            label: packHit.label,
+            source: 'local_poi',
+          };
+        }
+      } catch {
+        /* soft */
+      }
       return null;
+    }
+
+    try {
+      const { resolvePlacePackOsmGoogle } = await import(
+        '../services/navigation/packPlaceResolve'
+      );
+      const packHit = await resolvePlacePackOsmGoogle({
+        query: name,
+        cityHint: biasFromStore().cityHint,
+        biasLat: biasFromStore().biasLat,
+        biasLng: biasFromStore().biasLng,
+      });
+      if (packHit) {
+        return {
+          lat: packHit.lat,
+          lng: packHit.lng,
+          label: packHit.label,
+          source:
+            packHit.source === 'osm_or_google' ? 'osm' : 'local_poi',
+        };
+      }
+    } catch {
+      /* soft → Nominatim/Google unten */
     }
 
     const geo = await geocodePlaceNameOsmFirst(name, biasFromStore());
@@ -174,18 +221,6 @@ export async function resolveStreetViewForHeading(
   headingDeg: number,
 ): Promise<string | null> {
   return fetchStreetViewImageBase64(lat, lng, headingDeg);
-}
-
-/** Unified nav start — Hands-Free commit path. */
-export async function startNavCore(
-  input: NavTargetInput,
-  opts?: { skipClosingGate?: boolean; offlineOnly?: boolean },
-): Promise<NavStartResult> {
-  return commitHandsFreeNavStart(input, opts);
-}
-
-export async function stopNavCore(opts?: { silent?: boolean }): Promise<void> {
-  await stopNavigation(opts);
 }
 
 /** Multi-stop: reorder with immediate nav restart when active stop moved. */

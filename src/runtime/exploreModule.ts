@@ -4,6 +4,7 @@
  */
 
 import { getPoiWithFacts, haversineMeters } from '../db/database';
+import { effectiveTriggerRadiusM } from '../services/geo/triggerRadius';
 import { useFinnusStore } from '../store/useFinnusStore';
 import { getCachedUserProfile } from '../services/userProfileService';
 import { getTideState } from '../services/geo/tideService';
@@ -18,13 +19,13 @@ import {
   tickNavigation,
   isNavigatingToPoi,
   shouldPauseExploreStoryForNavTurn,
+  getDeviceHeadingDeg,
 } from '../services/navigation';
 import { thresholdsForMode } from '../services/navigation/transportMode';
 import {
   isActiveBicycleMode,
   isDriveByTransitMode,
 } from '../services/navigation/contextPitches';
-import { maybeSpeakFirstCityWelcome } from '../services/cityWelcomeService';
 import {
   clearApproachSpokenMemory,
   clearInterestWatch,
@@ -57,6 +58,7 @@ import {
   runAwaitInterestNarration,
   runDriveByNarration,
   runTeaserWithInterestWatch,
+  speakTeaserOnly,
 } from './narrationPipeline';
 import { resolveExploreDepth } from './exploreTriggerPolicy';
 import {
@@ -66,6 +68,20 @@ import {
 import { tickMobilityOnGps } from './mobilityModule';
 import { tickGrowthOnGps } from './growthModule';
 
+/**
+ * Ambient „was heute geht“ (10 Min App offen + 60 s Stille → Events ~5 km;
+ * max. 1 Ansage / 8 h).
+ */
+async function tickTemporaryLiveSpots(lat: number, lng: number): Promise<void> {
+  try {
+    const { tickAmbientEventPitch } = await import(
+      '../services/research/ambientEventPitch'
+    );
+    await tickAmbientEventPitch(lat, lng);
+  } catch (err) {
+    if (__DEV__) console.warn('[explore] ambient event pitch', err);
+  }
+}
 export { isNarrationBusy };
 
 registerExploreDeferHandler((poiId) => {
@@ -92,6 +108,8 @@ export async function triggerPoiArrival(
   opts?: {
     force?: boolean;
     interestDeepDive?: boolean;
+    /** Nav-Arrival: kein Wegweiser, direkt Modul-1 Story */
+    skipWegweiser?: boolean;
     /** Weitere Orte im 50-m-Bundle (max 1 Peer → 2 Audio total). */
     bundlePeerPois?: import('../db/types').Poi[];
     silentBundlePois?: import('../db/types').Poi[];
@@ -140,6 +158,29 @@ export async function triggerPoiArrival(
   const poi = loaded;
 
   const kind = poi.kind ?? 'legacy';
+
+  // Nav zu diesem Ort / Parent: Approach-Wegweiser unterdrücken (geotrigger)
+  if (
+    kind === 'approach' &&
+    !opts?.force &&
+    !opts?.interestDeepDive
+  ) {
+    try {
+      const parentId = poi.parent_poi_id;
+      if (
+        (parentId != null && isNavigatingToPoi(parentId)) ||
+        isNavigatingToPoi(poiId)
+      ) {
+        if (__DEV__) {
+          console.log(`[geofence] skip approach #${poiId} — nav destination`);
+        }
+        return;
+      }
+    } catch {
+      /* soft */
+    }
+  }
+
   const profile = getCachedUserProfile();
   if (!opts?.force && profile?.notificationsEnabled === false) {
     if (__DEV__) {
@@ -160,7 +201,10 @@ export async function triggerPoiArrival(
       hasVisitedSpot(`${poi.spot_key}__approach`));
 
   const trig = getTriggerSession();
-  const plan = await planFindusTrigger({
+  const skipWeg = Boolean(opts?.skipWegweiser) || (
+    Boolean(opts?.force) && isNavigatingToPoi(poiId)
+  );
+  let plan = await planFindusTrigger({
     poi,
     profile,
     spokenAreaIds: trig.spokenAreaIds,
@@ -169,7 +213,7 @@ export async function triggerPoiArrival(
     userLat: trig.lastLat,
     userLng: trig.lastLng,
     force: opts?.force,
-    approachAlreadyHeard: heardApproach,
+    approachAlreadyHeard: heardApproach || skipWeg,
     policyCtx: {
       profile,
       lastMealHintAtMs: store.lastMealHintAtMs,
@@ -178,6 +222,21 @@ export async function triggerPoiArrival(
       tide,
     },
   });
+  // Nav-Arrival: flüssig Welcome → Modul-1 Story (kein Wegweiser)
+  if (
+    skipWeg &&
+    (plan.action === 'approach_hook' || kind === 'approach')
+  ) {
+    if (kind === 'approach' && poi.parent_poi_id != null) {
+      await triggerPoiArrival(poi.parent_poi_id, {
+        ...opts,
+        force: true,
+        skipWegweiser: true,
+      });
+      return;
+    }
+    plan = { action: 'full_story', reason: 'nav_arrival_skip_wegweiser' };
+  }
 
   if (plan.action === 'redirect_sub') {
     if (__DEV__) {
@@ -193,7 +252,11 @@ export async function triggerPoiArrival(
     if (__DEV__) {
       console.log(`[geofence] skip ${poi.name} (${plan.reason})`);
     }
-    if (plan.reason !== 'tide_not_low' && plan.reason !== 'already_spoken') {
+    const transient =
+      /tide_not_low|already_spoken|cooldown|defer|neutral_cooldown|moving_away|sibling_approach_soft_lock/.test(
+        plan.reason,
+      );
+    if (!transient) {
       markTriggerSpoken(poiId, kind);
     }
     return;
@@ -217,7 +280,7 @@ export async function triggerPoiArrival(
         poiId,
         lat: poi.lat,
         lng: poi.lng,
-        radiusM: Math.max(poi.radius_meters ?? 40, 40),
+        radiusM: effectiveTriggerRadiusM(poi),
         cooldownRemainingMs: gate.remainingMs ?? 10_000,
         reason: gate.reason ?? 'cooldown',
       });
@@ -241,7 +304,7 @@ export async function triggerPoiArrival(
     const facing = resolveFacingBearingDeg({
       speedMs: getSmoothedSpeedMs(),
       movementBearingDeg: getTrackMovementBearingDeg(),
-      deviceHeadingDeg: null,
+      deviceHeadingDeg: getDeviceHeadingDeg(),
     });
     if (
       !isAheadOfMovement(
@@ -290,6 +353,7 @@ export async function triggerPoiArrival(
     interestDeepDive: opts?.interestDeepDive,
     navExploreMode: profile?.navExploreMode ?? 'quiet',
     isNavDestination: navigatingHere,
+    spotKey: poi.spot_key,
   });
 
   if (depthResult.depth === 'skip') {
@@ -384,6 +448,25 @@ export async function handleLocationUpdate(
   lng: number,
   opts?: { speedMs?: number | null; headingDeg?: number | null },
 ): Promise<void> {
+  try {
+    const { isExploreHeld } = require('./exploreHold') as {
+      isExploreHeld: () => boolean;
+    };
+    if (isExploreHeld()) {
+      const storeEarly = useFinnusStore.getState();
+      if (storeEarly.navActive) {
+        tickNavigation(
+          lat,
+          lng,
+          typeof opts?.headingDeg === 'number' ? opts.headingDeg : undefined,
+          opts?.speedMs ?? null,
+        );
+      }
+      return;
+    }
+  } catch {
+    /* soft */
+  }
   const motionMode = tickFreeRoamMotion(opts?.speedMs ?? null);
   const radiusScale = thresholdsForMode(motionMode).geofenceRadiusScale;
 
@@ -406,7 +489,7 @@ export async function handleLocationUpdate(
   void tickGrowthOnGps(lat, lng, {
     headingDeg: opts?.headingDeg ?? null,
   });
-  void maybeSpeakFirstCityWelcome(lat, lng);
+  void tickTemporaryLiveSpots(lat, lng);
 
   void tickDwellTracking(lat, lng).catch((err) =>
     console.warn('[dwell] tick failed:', err),
@@ -455,6 +538,20 @@ export async function handleLocationUpdate(
     return;
   }
 
+  // Modul 1 / auto-triggers: only active selected (or in-focus) pack via SQLite.
+  // Other downloaded cities stay on disk for Q&A but never fire geofence stories here.
+  try {
+    const { isPackSpeechAllowed } = require('../services/softWorkingCity') as {
+      isPackSpeechAllowed: () => boolean;
+    };
+    if (!isPackSpeechAllowed()) {
+      noteUserPosition(lat, lng);
+      return;
+    }
+  } catch {
+    /* soft */
+  }
+
   const engineResult = await evaluateGpsTrigger({
     lat,
     lng,
@@ -464,7 +561,7 @@ export async function handleLocationUpdate(
     transportMode:
       motionMode === 'bicycle'
         ? 'bicycle'
-        : motionMode === 'walk'
+        : motionMode === 'walk' || motionMode === 'jog'
           ? 'walk'
           : motionMode === 'transit_bus' || motionMode === 'transit_train'
             ? 'transit'
@@ -510,12 +607,26 @@ export async function handleLocationUpdate(
 
   if (decision.action === 'queue_gps_trigger') {
     if (__DEV__) {
-      console.log(`[geofence] queued POI #${decision.poiId} (Findus spricht)`);
+      console.log(`[geofence] queued POI #${decision.poiId} (Yorro spricht)`);
     }
     return;
   }
 
   if (decision.action === 'skip_gps_trigger') {
+    if (
+      decision.reason === 'after_poi_complete' ||
+      decision.reason === 'after_user_question' ||
+      decision.reason === 'during_navigation'
+    ) {
+      scheduleExploreDefer({
+        poiId: match.poi.id,
+        lat: match.poi.lat,
+        lng: match.poi.lng,
+        radiusM: effectiveTriggerRadiusM(match.poi),
+        cooldownRemainingMs: decision.remainingMs ?? 10_000,
+        reason: decision.reason,
+      });
+    }
     if (__DEV__) {
       console.log(
         `[geofence] skip ${match.poi.name} (runtime: ${decision.reason})`,

@@ -1,11 +1,11 @@
 /**
- * Stadtauswahl: gewählte Stadt oben (Hero + Stats) → Suche → 2er-Raster.
+ * Stadtauswahl: Suche oben (über der Tastatur), Hero nur ohne Tastatur.
  * Katalog/GPS werden früher gewärmt, damit kein sichtbarer Resort-Sprung entsteht.
  */
 
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import {
-  Pressable,
+  Keyboard,
   ScrollView,
   StyleSheet,
   Text,
@@ -19,6 +19,7 @@ import {
   StepTitle,
 } from './OnboardingUI';
 import { colors, spacing } from '../constants/theme';
+import { useKeyboardInset } from '../hooks/useKeyboardInset';
 import { CityCatalogCard } from '../components/CityCatalogCard';
 import { t, type AppLanguage } from '../i18n';
 import {
@@ -49,8 +50,11 @@ export function CityStep({ lang, selectedId, onSelect, onNext }: Props) {
   const [loadError, setLoadError] = useState<string | null>(null);
   const [reloadToken, setReloadToken] = useState(0);
   const [query, setQuery] = useState('');
+  const [searchFocused, setSearchFocused] = useState(false);
+  const kbInset = useKeyboardInset();
   const nearestAutoPicked = useRef(!!selectedId);
   const scrollRef = useRef<ScrollView>(null);
+  const keyboardUp = kbInset > 80 || searchFocused;
 
   useEffect(() => {
     let cancelled = false;
@@ -136,14 +140,17 @@ export function CityStep({ lang, selectedId, onSelect, onNext }: Props) {
   const gridCities = useMemo(
     () =>
       citiesForPickerGrid(cities, {
-        excludeId: featured?.id ?? null,
+        excludeId: searching ? null : featured?.id ?? null,
         query,
       }),
-    [cities, featured?.id, query],
+    [cities, featured?.id, query, searching],
   );
 
   const pickCity = (id: string, name: string) => {
     onSelect(id, name);
+    setQuery('');
+    setSearchFocused(false);
+    Keyboard.dismiss();
     requestAnimationFrame(() => {
       scrollRef.current?.scrollTo({ y: 0, animated: true });
     });
@@ -152,7 +159,7 @@ export function CityStep({ lang, selectedId, onSelect, onNext }: Props) {
   const handleContinue = async () => {
     if (!selected) return;
     onSelect(selected.id, selected.name);
-    void installCityPack(selected.id)
+    void installCityPack(selected.id, { checkRemote: true, reason: 'install' })
       .then((result) => {
         if (__DEV__) {
           console.log(
@@ -169,8 +176,10 @@ export function CityStep({ lang, selectedId, onSelect, onNext }: Props) {
     });
   };
 
+  const showHero = !!(featured && !searching && !keyboardUp);
+
   return (
-    <OnboardingShell>
+    <OnboardingShell style={keyboardUp ? styles.shellKb : undefined}>
       <StepTitle>{t(lang, 'cityTitle')}</StepTitle>
       {!loading ? (
         <Text style={styles.gpsStatus}>
@@ -196,81 +205,92 @@ export function CityStep({ lang, selectedId, onSelect, onNext }: Props) {
           />
         </View>
       ) : (
-        <ScrollView
-          ref={scrollRef}
-          style={styles.scroll}
-          keyboardShouldPersistTaps="handled"
-          contentContainerStyle={styles.scrollPad}
-        >
-          {featured ? (
-            <>
-              <Text style={styles.sectionLabel}>
-                {selected && !featuredIsNearest
-                  ? 'Ausgewählt'
-                  : t(lang, 'nearby')}
-              </Text>
-              <CityCatalogCard
-                city={featured}
-                lang={lang}
-                selected={selectedId === featured.id}
-                variant="hero"
-                onPress={() => pickCity(featured.id, featured.name)}
-              />
-            </>
-          ) : null}
-
+        <>
           <Text style={styles.sectionLabel}>{t(lang, 'citySearchTitle')}</Text>
           <TextInput
             style={styles.search}
             value={query}
             onChangeText={setQuery}
+            onFocus={() => setSearchFocused(true)}
+            onBlur={() => setSearchFocused(false)}
             placeholder={t(lang, 'citySearchPlaceholder')}
             placeholderTextColor={colors.textMuted}
             autoCapitalize="none"
             autoCorrect={false}
             clearButtonMode="while-editing"
+            returnKeyType="search"
+            blurOnSubmit
           />
 
-          {searching ? (
-            <Text style={styles.sectionLabel}>
-              {gridCities.length > 0
-                ? `${gridCities.length} ${t(lang, 'citySearchHits')}`
-                : t(lang, 'citySearchNoHits')}
-            </Text>
-          ) : (
-            <Text style={styles.sectionLabel}>{t(lang, 'otherCities')}</Text>
-          )}
-
-          <View style={styles.grid}>
-            {gridCities.map((c) => (
-              <View key={c.id} style={styles.gridItem}>
+          <ScrollView
+            ref={scrollRef}
+            style={styles.scroll}
+            keyboardShouldPersistTaps="handled"
+            keyboardDismissMode="on-drag"
+            contentContainerStyle={[
+              styles.scrollPad,
+              kbInset > 0 && { paddingBottom: kbInset + spacing.md },
+            ]}
+          >
+            {featured && showHero ? (
+              <>
+                <Text style={styles.sectionLabel}>
+                  {selected && !featuredIsNearest
+                    ? 'Ausgewählt'
+                    : t(lang, 'nearby')}
+                </Text>
                 <CityCatalogCard
-                  city={c}
+                  city={featured}
                   lang={lang}
-                  selected={selectedId === c.id}
-                  variant="grid"
-                  onPress={() => pickCity(c.id, c.name)}
+                  selected={selectedId === featured.id}
+                  variant="hero"
+                  onPress={() => pickCity(featured.id, featured.name)}
                 />
-              </View>
-            ))}
-          </View>
-        </ScrollView>
+              </>
+            ) : null}
+
+            <Text style={styles.sectionLabel}>
+              {searching
+                ? gridCities.length > 0
+                  ? `${gridCities.length} ${t(lang, 'citySearchHits')}`
+                  : t(lang, 'citySearchNoHits')
+                : t(lang, 'otherCities')}
+            </Text>
+
+            <View style={styles.grid}>
+              {gridCities.map((c) => (
+                <View key={c.id} style={styles.gridItem}>
+                  <CityCatalogCard
+                    city={c}
+                    lang={lang}
+                    selected={selectedId === c.id}
+                    variant="grid"
+                    onPress={() => pickCity(c.id, c.name)}
+                  />
+                </View>
+              ))}
+            </View>
+          </ScrollView>
+        </>
       )}
 
-      <PrimaryButton
-        label={
-          selected
-            ? `${t(lang, 'continueWith')} ${selected.name}`.trim()
-            : 'Stadt wählen'
-        }
-        onPress={() => void handleContinue()}
-        disabled={!selected}
-      />
+      {keyboardUp ? null : (
+        <PrimaryButton
+          label={
+            selected
+              ? `${t(lang, 'continueWith')} ${selected.name}`.trim()
+              : 'Stadt wählen'
+          }
+          onPress={() => void handleContinue()}
+          disabled={!selected}
+        />
+      )}
     </OnboardingShell>
   );
 }
 
 const styles = StyleSheet.create({
+  shellKb: { paddingBottom: spacing.sm },
   scroll: { flex: 1 },
   scrollPad: { paddingBottom: spacing.md, gap: spacing.sm },
   gpsStatus: {

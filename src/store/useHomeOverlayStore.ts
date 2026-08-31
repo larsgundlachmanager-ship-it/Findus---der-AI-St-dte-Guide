@@ -75,6 +75,24 @@ function holdOverlayBusy(): void {
   }
 }
 
+function dismissPlacePopupForChrome(): void {
+  try {
+    const { useHomeMapUiStore } = require('./useHomeMapUiStore') as {
+      useHomeMapUiStore: {
+        getState: () => {
+          placePopup: unknown;
+          setPlacePopup: (p: null) => void;
+        };
+      };
+    };
+    if (useHomeMapUiStore.getState().placePopup) {
+      useHomeMapUiStore.getState().setPlacePopup(null);
+    }
+  } catch {
+    /* soft */
+  }
+}
+
 export const useHomeOverlayStore = create<HomeOverlayState>((set, get) => ({
   settingsVisible: false,
   settingsMounted: false,
@@ -85,7 +103,18 @@ export const useHomeOverlayStore = create<HomeOverlayState>((set, get) => ({
   questionVisible: false,
   questionSubtitle: HOME_QUESTION_DEFAULT_SUBTITLE,
   openSettings: () => {
+    dismissPlacePopupForChrome();
     holdOverlayBusy();
+    try {
+      const {
+        noteUiTap,
+      } = require('../services/diagnostics/interactionDelay') as {
+        noteUiTap: (label: string) => void;
+      };
+      noteUiTap('settings');
+    } catch {
+      /* soft */
+    }
     set({ settingsVisible: true, settingsMounted: true });
   },
   closeSettings: () => {
@@ -97,6 +126,7 @@ export const useHomeOverlayStore = create<HomeOverlayState>((set, get) => ({
     });
   },
   openSeek: () => {
+    dismissPlacePopupForChrome();
     holdOverlayBusy();
     set({ seekVisible: true, seekMounted: true });
   },

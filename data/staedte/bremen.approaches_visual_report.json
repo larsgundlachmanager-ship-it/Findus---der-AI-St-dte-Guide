@@ -1,0 +1,282 @@
+{
+  "city": "bremen",
+  "apply": true,
+  "touched": 34,
+  "approachesFixed": 34,
+  "faqAdded": 34,
+  "data_version": 13,
+  "rows": [
+    {
+      "id": "bremen_bremen_hauptbahnhof",
+      "name": "Bremen Hauptbahnhof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "bremen_ubersee_museum_bremen",
+      "name": "Übersee-Museum Bremen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "bremen_kunsthalle_bremen",
+      "name": "Kunsthalle Bremen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "bremen_universum_bremen",
+      "name": "Universum Bremen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "bremen_weserburg_museum_fur_moderne_kunst",
+      "name": "Weserburg Museum für moderne Kunst",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "bremen_paula_modersohn_becker_museum",
+      "name": "Paula Modersohn-Becker Museum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "bremen_hafenmuseum_bremen",
+      "name": "Hafenmuseum Bremen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "bremen_focke_museum_bremer_landesmuseum_fur_kunst_und_kulturgeschichte",
+      "name": "Focke-Museum, Bremer Landesmuseum für Kunst und Kulturgeschichte",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "bremen_dom_museum",
+      "name": "Dom-Museum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "bremen_die_bremer_stadtmusikanten",
+      "name": "Die Bremer Stadtmusikanten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "bremen_kulturkirche_st_stephani",
+      "name": "Kulturkirche St. Stephani",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "bremen_rhododendron_park",
+      "name": "Rhododendron-Park",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "bremen_burgerpark_bremen",
+      "name": "Bürgerpark Bremen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "bremen_theater_am_goetheplatz",
+      "name": "Theater am Goetheplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "bremen_weserpromenade_bremen_schlachte",
+      "name": "Weserpromenade Bremen („Schlachte“)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "bremen_botanika",
+      "name": "botanika",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "bremen_bremer_roland",
+      "name": "Bremer Roland",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "bremen_bremer_rathaus",
+      "name": "Bremer Rathaus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "bremen_bremer_dom",
+      "name": "Bremer Dom",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "bremen_marktplatz_bremen",
+      "name": "Marktplatz Bremen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "bremen_bottcherstrasse",
+      "name": "Böttcherstraße",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "bremen_schnoor",
+      "name": "Schnoor",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "bremen_die_glocke",
+      "name": "Die Glocke",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "bremen_liebfrauenkirche",
+      "name": "Liebfrauenkirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "bremen_schutting",
+      "name": "Schütting",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "bremen_weserstadion",
+      "name": "Weserstadion",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "bremen_universitat_bremen",
+      "name": "Universität Bremen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "bremen_bleikeller",
+      "name": "Bleikeller",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bremen_ludwig_roselius_museum",
+      "name": "Ludwig Roselius Museum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "bremen_haus_atlantis",
+      "name": "Haus Atlantis",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "bremen_das_viertel",
+      "name": "Das Viertel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "bremen_uberseestadt",
+      "name": "Überseestadt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "bremen_stadtwaage",
+      "name": "Stadtwaage",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bremen_muhle_am_wall",
+      "name": "Mühle am Wall",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    }
+  ]
+}

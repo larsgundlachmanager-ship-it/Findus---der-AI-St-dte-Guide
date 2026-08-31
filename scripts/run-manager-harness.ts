@@ -24,8 +24,10 @@ function testPace() {
   const instant = resolvePaceBudget({ pace: 'instant' });
   assert.equal(instant.fastDeadlineMs, 1500);
   assert.ok(instant.bridgeMaxWords <= 10);
-  const cover = resolvePaceBudget({ pace: 'cover', fastDeadlineMs: 9000 });
-  assert.ok(cover.fastDeadlineMs <= 5000);
+  const standard = resolvePaceBudget({ pace: 'standard' });
+  assert.equal(standard.fastDeadlineMs, 1500);
+  const cover = resolvePaceBudget({ pace: 'cover', fastDeadlineMs: 6000 });
+  assert.ok(cover.fastDeadlineMs <= 6000);
   const clipped = clipBridgeToWordLimit(
     'Eins zwei drei vier fünf sechs sieben acht neun zehn elf zwölf',
     8,
@@ -41,7 +43,11 @@ function testBlueprints() {
   const g = composeBlueprintOnMiss({
     userText: 'Wir wollen grillen im Park',
   });
-  assert.equal(g.id, 'compound_evening_goal');
+  assert.ok(g && g.id === 'compound_evening_goal');
+  const miss = composeBlueprintOnMiss({
+    userText: 'Was bedeutet Quantenphysik eigentlich?',
+  });
+  assert.equal(miss, null);
   console.log('ok blueprints');
 }
 

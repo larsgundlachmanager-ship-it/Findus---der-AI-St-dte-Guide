@@ -1,0 +1,666 @@
+{
+  "city": "rheinsberg",
+  "apply": true,
+  "touched": 82,
+  "approachesFixed": 82,
+  "faqAdded": 0,
+  "data_version": 27,
+  "rows": [
+    {
+      "id": "rheinsberg_rheinsberg",
+      "name": "Rheinsberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_eisenbahnmuseum",
+      "name": "Eisenbahnmuseum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_yachthafen_und_bootsverleih_rheinsberg",
+      "name": "Yachthafen und Bootsverleih Rheinsberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_anlegestelle_fahrgastschifffahrt",
+      "name": "Anlegestelle Fahrgastschifffahrt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_boat_city_hafendorf_rheinsberg_gmbh",
+      "name": "Boat-City Hafendorf Rheinsberg GmbH",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_fussgangerbrucke_marina",
+      "name": "Fußgängerbrücke Marina",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_reederei_halbeck",
+      "name": "Reederei Halbeck",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_ferienhauser_hafendorf_rheinsberg",
+      "name": "Ferienhäuser Hafendorf Rheinsberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_kurt_tucholsky_literaturmuseum",
+      "name": "Kurt Tucholsky Literaturmuseum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_keramikmuseum_rheinsberg",
+      "name": "Keramikmuseum Rheinsberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_haus_der_stadtgeschichte",
+      "name": "Haus der Stadtgeschichte",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_kasse_schloss",
+      "name": "Kasse Schloss",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_musikbrennerei_konzerte_ausstellungen_kabarett_rheinsberg",
+      "name": "Musikbrennerei - Konzerte/ Ausstellungen/ Kabarett Rheinsberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_schlosspark_rheinsberg",
+      "name": "Schlosspark Rheinsberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_rheinsberg_ddr_geschichte_brennelemente_transporter_kkw_rheinsber",
+      "name": "Rheinsberg DDR-Geschichte Brennelemente-Transporter KKW Rheinsber",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_neuapostolische_kirche_rheinsberg",
+      "name": "Neuapostolische Kirche Rheinsberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_pater_wichmann_kapelle",
+      "name": "Pater Wichmann Kapelle",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_kirchlicher_friedhof_rheinsberg",
+      "name": "Kirchlicher Friedhof Rheinsberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_evangelisches_pfarramt",
+      "name": "Evangelisches Pfarramt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_denkmal_kronprinz_friedrich",
+      "name": "Denkmal Kronprinz Friedrich",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_rheinsberger_obelisk",
+      "name": "Rheinsberger Obelisk",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_badebrunnen_rheinsberg_gunter_kaden_2001",
+      "name": "Badebrunnen, Rheinsberg - Günter Kaden (2001)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_denkmal_fur_teure_verstorbene",
+      "name": "Denkmal für teure Verstorbene",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_sowjetischer_ehrenfriedhof",
+      "name": "Sowjetischer Ehrenfriedhof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_parasol",
+      "name": "Parasol",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_ehemalige_eremitage",
+      "name": "Ehemalige Eremitage",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_uferpromenade",
+      "name": "Uferpromenade",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_lustgarten_rheinsberg",
+      "name": "Lustgarten Rheinsberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_hafendorf_rheinsberg",
+      "name": "Hafendorf Rheinsberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_badesee_sehr_schon",
+      "name": "Badesee sehr schön",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_parkplatz_an_der_rhin_passage",
+      "name": "Parkplatz an der Rhin Passage",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_schlossgarten_rheinsberg_gartenportal",
+      "name": "Schlossgarten Rheinsberg (Gartenportal)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_badestelle",
+      "name": "Badestelle",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_naturpark_stechlin_ruppiner_land",
+      "name": "Naturpark Stechlin-Ruppiner Land",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_steg",
+      "name": "Steg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_schlossgarten_rheinsberg_feldsteingrotte",
+      "name": "Schlossgarten Rheinsberg (Feldsteingrotte)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_rheinsberg_maisonette_mit_blick_auf_schloss_park_see_apartment_split_",
+      "name": "Rheinsberg Maisonette mit Blick auf Schloss-Park-See - Apartment - Split Level",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_ehem_schlossmauer",
+      "name": "Ehem. Schlossmauer",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_pension_am_rheinsberger_schlosspark",
+      "name": "Pension Am Rheinsberger Schlosspark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_schlossgarten_rheinsberg_sphinxtreppe",
+      "name": "Schlossgarten Rheinsberg (Sphinxtreppe)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_wartturm",
+      "name": "Wartturm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_pension_zum_rheinsberger_leuchtturm",
+      "name": "Pension Zum Rheinsberger Leuchtturm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_seebad_rheinsberg",
+      "name": "Seebad Rheinsberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_badestelle_hafendorf_rheinsberg",
+      "name": "Badestelle Hafendorf Rheinsberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_pension_hollander_muhle_rheinsberg",
+      "name": "Pension Holländer Mühle Rheinsberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_fitnessclub_bodyline_rheinsberg",
+      "name": "Fitnessclub Bodyline Rheinsberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_vr_action",
+      "name": "VR-Action",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_schlossgarten_rheinsberg_salon",
+      "name": "Schlossgarten Rheinsberg (Salon)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_fussballplatz",
+      "name": "Fußballplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_stadtverwaltung_rheinsberg",
+      "name": "Stadtverwaltung Rheinsberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_alte_meierei",
+      "name": "Alte Meierei",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_prinzenstadt_rheinsberg",
+      "name": "Prinzenstadt Rheinsberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_aussichtspunkt_schloss_rheinsberg",
+      "name": "Aussichtspunkt Schloss Rheinsberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_schlosstheater_rheinsberg",
+      "name": "Schlosstheater Rheinsberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_angeln_jagen_wandern",
+      "name": "Angeln-Jagen-Wandern",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_arboretum",
+      "name": "Arboretum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_wittwesee",
+      "name": "Wittwesee",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_ruppiner_wald_und_seengebiet",
+      "name": "Ruppiner Wald- und Seengebiet",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_egeria_grotte",
+      "name": "Egeria-Grotte",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_rheinsberger_adventure_tours",
+      "name": "Rheinsberger Adventure Tours",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_rheinsberger_see",
+      "name": "Rheinsberger See",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_grienericksee",
+      "name": "Grienericksee",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_konigreichssaal_jehovas_zeugen",
+      "name": "Königreichssaal Jehovas Zeugen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_gast_und_logierhaus_am_rheinsberger_see",
+      "name": "Gast- und Logierhaus \"Am Rheinsberger See\"",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_rheinsberger_carneval_club_e_v",
+      "name": "Rheinsberger Carneval Club e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_rheinsberger_preussenquelle_gmbh",
+      "name": "Rheinsberger Preussenquelle GmbH",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_bergertours_kanutouristik",
+      "name": "Bergertours Kanutouristik",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_hausboot_rheinsberg_flossvermietung_mirko_fost",
+      "name": "Hausboot Rheinsberg - Flossvermietung Mirko Föst",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_dit_atelier_kunsterbunt",
+      "name": "dit Atelier KUNSTerBUNT",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_eiskonigin",
+      "name": "Eiskönigin",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_gartenbau_hofladen_wimmer",
+      "name": "Gartenbau + Hofladen Wimmer",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_naturdenkmal_alte_eiche_naturschutzeule",
+      "name": "Naturdenkmal alte Eiche (Naturschutzeule)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "rheinsberg_schlabornbrucke_mauseloch",
+      "name": "Schlabornbrücke (Mauseloch)",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "rheinsberg_kriegerdenkmal_heinrichsdorf",
+      "name": "Kriegerdenkmal Heinrichsdorf",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "rheinsberg_kriegerdenkmal_braunsberg",
+      "name": "Kriegerdenkmal Braunsberg",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "rheinsberg_denkmal_joppich",
+      "name": "Denkmal Joppich",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 2,
+      "had_approaches": 1
+    },
+    {
+      "id": "rheinsberg_dorfkirche_zechlinerhutte",
+      "name": "Dorfkirche Zechlinerhütte",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "rheinsberg_dorfkirche_linow",
+      "name": "Dorfkirche Linow",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "rheinsberg_dorfkirche_zechow",
+      "name": "Dorfkirche Zechow",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "rheinsberg_dorfkirche_kagar",
+      "name": "Dorfkirche Kagar",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "rheinsberg_badestelle_wittwesee_feldgrieben",
+      "name": "Badestelle Wittwesee Feldgrieben",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "rheinsberg_haus_bikowsee",
+      "name": "Haus Bikowsee",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    }
+  ]
+}

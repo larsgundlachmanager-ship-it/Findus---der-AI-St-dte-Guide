@@ -4,6 +4,7 @@ import type {
   FeedbackTelemetrySnapshot,
   LocalFeedbackEntry,
 } from '../types/feedback';
+import { runExclusiveDbWrite } from './dbWriteLock';
 
 export async function ensureFeedbackEntriesTable(
   db: SQLiteDatabase,
@@ -70,17 +71,19 @@ export async function insertFeedbackEntry(
     telemetryJson: JSON.stringify(input.telemetry),
     uploaded: 0,
   };
-  await db.runAsync(
-    `INSERT INTO feedback_entries
-      (feedback_id, timestamp, user_name, issue_description, desired_behavior, telemetry_json, uploaded)
-     VALUES (?, ?, ?, ?, ?, ?, 0)`,
-    entry.feedbackId,
-    entry.timestamp,
-    entry.userName,
-    entry.issueDescription,
-    entry.desiredBehavior,
-    entry.telemetryJson,
-  );
+  await runExclusiveDbWrite(async () => {
+    await db.runAsync(
+      `INSERT INTO feedback_entries
+        (feedback_id, timestamp, user_name, issue_description, desired_behavior, telemetry_json, uploaded)
+       VALUES (?, ?, ?, ?, ?, ?, 0)`,
+      entry.feedbackId,
+      entry.timestamp,
+      entry.userName,
+      entry.issueDescription,
+      entry.desiredBehavior,
+      entry.telemetryJson,
+    );
+  });
   return entry;
 }
 
@@ -122,10 +125,12 @@ export async function purgeFeedbackEntries(
   if (feedbackIds.length === 0) return;
   await ensureFeedbackEntriesTable(db);
   const placeholders = feedbackIds.map(() => '?').join(', ');
-  await db.runAsync(
-    `DELETE FROM feedback_entries WHERE feedback_id IN (${placeholders})`,
-    ...feedbackIds,
-  );
+  await runExclusiveDbWrite(async () => {
+    await db.runAsync(
+      `DELETE FROM feedback_entries WHERE feedback_id IN (${placeholders})`,
+      ...feedbackIds,
+    );
+  });
 }
 
 export function localEntryToRecord(entry: LocalFeedbackEntry): FeedbackRecord {

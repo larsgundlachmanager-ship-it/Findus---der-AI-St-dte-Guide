@@ -1,0 +1,7 @@
+on stamp/visit-log completeness, not pack visit graph alone.
+
+### 5. Wangerooge ferry vs flight — price / how it works
+**PARTIAL** — Two **separate** paths, not one comparison flow: island **flight** via `inselfliegerAdvisor.ts` (slots, tariffs, Frisonaut book links) routed from `flightTripAdvisor.ts`; **ferry** via `ferryTicketResearch.ts` + `transit_live`/`runChatLane` (operator OPEN_URL). Smoke case `j23` covers ferry tickets. **Gap:** no unified “Fähre vs Flug — Preis und Ablauf” comparator; user gets mode-specific research, not side-by-side decision support.
+
+### 6. Chat lane: Pope age, Hamburg population, London population
+**PARTIAL** — Single world-fact turns are wired: `fact_number` + `worldFactGuard.ts` (Pope, `einwohner`), smoke cases in `liveReplay.cases.ts` / `hamburgCompound.smoke.test.ts`, answer via reboot (`runFactLanes` → `synthesizeRebootTurn`) or `r

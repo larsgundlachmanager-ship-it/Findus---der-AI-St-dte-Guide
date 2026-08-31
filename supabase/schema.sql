@@ -27,13 +27,14 @@ create policy "Public read facts"
   on public.facts for select
   using (true);
 
--- Shared Open-Meteo cache: 1 fetch / city-or-geo-cell / ~3h (Edge Function only)
+-- Shared weather cache: 1 fetch / city-Viertel (~5 km) or geo-cell (Edge Function only)
 create table if not exists public.weather_cache (
   cache_key text primary key,
   lat double precision not null,
   lng double precision not null,
   city_hint text,
   open_meteo jsonb not null,
+  owm jsonb,
   fetched_at timestamptz not null default now(),
   expires_at timestamptz not null
 );

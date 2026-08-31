@@ -1,0 +1,934 @@
+{
+  "notes": [
+    "Deep Research B für Amsterdam, Niederlande, Stand 21.08.2026. Alle 18 angeforderten Orte sind im bestehenden Pack als Tier 2 klassifiziert; ihre Textpools überschreiten jeweils 1200 Zeichen und enthalten mindestens acht eigenständige Deep-Einträge.",
+    "Stabile Fakten wurden vor allem mit offiziellen Seiten der jeweiligen Institutionen, dem Joods Cultureel Kwartier, Amsterdamer Denkmal- und Architekturquellen, UNESCO, Stadt- und Parkquellen sowie ergänzend mit quellenbelegten Enzyklopädieeinträgen abgeglichen.",
+    "Öffnungszeiten, Eintritt, aktuelle Ausstellungen, Programme, Märkte, Führungen, Baustellen und konkrete Nutzbarkeit stehen ausschließlich in LIVE-Einträgen und müssen zur Laufzeit neu geprüft werden.",
+    "Keine Dialoge und keine festen Vorleseskripte. Visuelle Hinweise, Geschichte und Querverbindungen bilden einen Faktenpool für dynamische deutsche Ausgaben."
+  ],
+  "sources": [
+    "https://www.concertgebouw.nl/en/our-history/history",
+    "https://www.concertgebouw.nl/ontdek/facts-figures",
+    "https://www.operaballet.nl/stopera-amsterdam",
+    "https://www.esnoga.com/en/history-of-the-community/",
+    "https://jck.nl/en/location/portuguese-synagogue",
+    "https://jck.nl/verhalen-en-verdieping/amsterdam-hoogduits-synagogencomplex",
+    "https://jck.nl/verhalen-en-verdieping/geschiedenis-joods-museum",
+    "https://www.amsterdam.nl/kunst-cultuur/markten/",
+    "https://www.amsterdam-monumentenstad.nl/database/grachtenboek_objecten.php?id=5488",
+    "https://www.amsterdam-monumentenstad.nl/database/grachtenboek_objecten.php?id=5391",
+    "https://www.artis.nl/en/over-artis/history-of-artis",
+    "https://www.artis.nl/en/artis-zoo/aquarium/the-history-of-the-artis-aquarium",
+    "https://www.dehortus.nl/en/garden-and-greenhouses/medicinal-garden/",
+    "https://www.dehortus.nl/en/garden-and-greenhouses/palmhouse/",
+    "https://www.monumenten.nl/monument/526987",
+    "https://mocomuseum.com/info/about-moco-amsterdam",
+    "https://www.ndsm.nl/en/over",
+    "https://westergas.nl/en/history/",
+    "https://arcam.nl/architectuur-gids/oosterpark/",
+    "https://erfgoedregister.amsterdam.nl/monument/bd6d5348-2d0a-4e7f-a17a-0877d73793e0/",
+    "https://whc.unesco.org/en/list/1349/",
+    "https://whc.unesco.org/en/urban-heritage-atlas/Amsterdam/"
+  ],
+  "spots": [
+    {
+      "id": "amsterdam_concertgebouw",
+      "name": "Concertgebouw",
+      "general_info": "Das 1888 eröffnete Concertgebouw entstand aus einer privaten Amsterdamer Initiative für einen zeitgemäßen Konzertsaal. Grote Zaal und Kleine Zaal sind bis heute für ihre unterschiedlichen akustischen Qualitäten bekannt.",
+      "deep_data_pool": [
+        {
+          "text": "1881 stießen sechs prominente Amsterdamer den Bau eines neuen Konzertsaals an, weil bestehende Räume als zu klein oder akustisch unzureichend galten. 1882 wurde dafür die Aktiengesellschaft N.V. Het Concertgebouw gegründet; Bürger und Geldgeber trugen das Projekt privat.",
+          "tags": ["geschichte", "musik", "stadtgesellschaft"]
+        },
+        {
+          "text": "Adolf Leonard van Gendt entwarf das Gebäude. Der Bau begann 1883 auf damals noch außerhalb der Amsterdamer Stadtgrenze gelegenen Wiesen von Nieuwer-Amstel. 2186 Holzpfähle, jeweils etwa zwölf bis dreizehn Meter lang, trugen den Bau im weichen Untergrund.",
+          "tags": ["architektur", "baugeschichte", "wasserstadt"]
+        },
+        {
+          "text": "Obwohl das Haus Ende 1886 fertig war, verzögerten ungeklärte Zufahrten, Straßenbeleuchtung und das Zuschütten eines Grabens die Nutzung. Das festliche Eröffnungskonzert fand am 11. April 1888 mit großem Orchester und Chor statt.",
+          "tags": ["eroeffnung", "stadtentwicklung"]
+        },
+        {
+          "text": "Die rechteckige Grote Zaal orientierte sich am damals neuen Leipziger Gewandhaus. Sie besitzt 1974 Plätze und gilt besonders für spätromantisches Orchesterrepertoire als akustisch herausragend. Die ovale Kleine Zaal mit 437 Plätzen folgt dem Vorbild von Felix Meritis und eignet sich für Kammermusik und Lied.",
+          "tags": ["akustik", "saele", "architektur"]
+        },
+        {
+          "text": "An der oberen Wand der Grote Zaal stehen vergoldete Komponistennamen in Kartuschen. 28 Namen gehörten zur ursprünglichen Ausstattung; Mahler erhielt 1920 anlässlich des Mahler-Festes eine eigene Kartusche. Weitere Namen kamen später an der Balkonbrüstung hinzu.",
+          "tags": ["visuell", "musikgeschichte", "detail"]
+        },
+        {
+          "text": "Die Orgel der Grote Zaal baute Michaël Maarschalkerweerd 1890. Bei der großen Restaurierung durch Flentrop bis 1993 wuchs sie von ursprünglich 2496 auf 3952 Pfeifen. In den 1980er Jahren wurde zugleich die bedrohte Gründung des gesamten Hauses grundlegend erneuert.",
+          "tags": ["orgel", "technik", "denkmalpflege"]
+        },
+        {
+          "text": "Visuell: Der helle, symmetrische Bau am Museumplein ist an seinem vorspringenden Mittelteil, den Rundbogenfenstern und dem Schriftzug Concertgebouw zu erkennen. Der gläserne Seitenflügel stammt aus der großen Renovierungsphase; seit 2023 ist auch der historische Zugang zum Museumplein wieder präsent.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "LIVE: Konzertprogramm, Saalbelegung, Einlass, Führungen, Kartenpreise, Barrierefreiheit und kurzfristige Änderungen ausschließlich auf concertgebouw.nl prüfen. Die Größe und Bekanntheit der Säle ersetzen keine aktuelle Aussage darüber, welches Ensemble oder Werk heute tatsächlich zu hören ist.",
+          "tags": ["live_hint", "ephemeral", "programm"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Warum steht das Concertgebouw auf so vielen Holzpfählen?",
+          "a": "Der weiche, wasserreiche Untergrund erforderte eine tiefe Pfahlgründung; beim Bau wurden 2186 lange Holzpfähle gesetzt."
+        },
+        {
+          "q": "Sind Grote Zaal und Kleine Zaal gleich gebaut?",
+          "a": "Nein. Die Grote Zaal ist ein großer rechteckiger Orchesterraum, die Kleine Zaal ein ovaler, intimer Raum für Kammermusik und Lied."
+        }
+      ]
+    },
+    {
+      "id": "amsterdam_het_muziektheater",
+      "name": "Het Muziektheater",
+      "general_info": "Das frühere Het Muziektheater ist der Theaterteil des 1986 eröffneten Rathaus- und Opernkomplexes an Amstel und Waterlooplein. Heute tritt das Haus als Nationale Opera & Ballet auf.",
+      "deep_data_pool": [
+        {
+          "text": "Pläne für ein neues Amsterdamer Rathaus und ein eigenes Opernhaus reichen bis ins frühe 20. Jahrhundert zurück. Erst 1979 wurden die beiden lange getrennt verfolgten Vorhaben zu einem gemeinsamen Komplex verbunden; der Stadtrat billigte den kombinierten Entwurf 1980.",
+          "tags": ["planung", "stadtgeschichte", "kultur"]
+        },
+        {
+          "text": "Der österreichische Architekt Wilhelm Holzbauer war für den Rathausentwurf maßgeblich, Cees Dam für den Theaterteil. Beide mussten Verwaltung und Bühnenhaus in einer zusammenhängenden Anlage verbinden, ohne dass die sehr unterschiedlichen Funktionen ihre Eigenständigkeit verloren.",
+          "tags": ["architektur", "planung"]
+        },
+        {
+          "text": "Der Bau begann am 5. Juli 1982. Das Muziektheater wurde am 23. September 1986 offiziell eröffnet; die Amsterdamer Stadtverwaltung bezog den Rathausbereich 1988. Oper und Nationalballett hatten ihre Arbeit im neuen Haus bereits 1986 aufgenommen.",
+          "tags": ["baugeschichte", "eroeffnung"]
+        },
+        {
+          "text": "Die volkstümliche Bezeichnung Stopera setzt sich aus stadhuis und opera zusammen. Sie erhielt während der heftigen Proteste gegen Kosten, Größe und Standort eine zweite Bedeutung durch den Slogan Stop Opera. Nationale Opera & Ballet selbst verwendet den Namen nur ungern.",
+          "tags": ["name", "protest", "stadtpolitik"]
+        },
+        {
+          "text": "Der Standort liegt auf Vlooienburg im früheren jüdischen Viertel. Nach der deutschen Besatzung war die Gegend schwer verwüstet und entvölkert; verbliebene Bauten wurden für die Nachkriegsplanung weitgehend beseitigt. Diese Vorgeschichte gehört zur kritischen Einordnung des modernen Komplexes.",
+          "tags": ["stadtraum", "juedische_geschichte", "erinnerung"]
+        },
+        {
+          "text": "Visuell: Zur Amstel zeigt der Theaterteil eine lange, gebogene helle Fassade mit großen Glasflächen. Die Kurve folgt dem Wasser und unterscheidet den Bühnenbau von den kantigeren Verwaltungsflügeln; gedeckte Passagen im Erdgeschoss binden Waterlooplein und Ufer an.",
+          "tags": ["visuell", "wegweiser", "architektur"]
+        },
+        {
+          "text": "Quer: Wenige Schritte entfernt liegen Waterlooplein, Joods Museum und Portugiesische Synagoge. Das Gebäude steht damit zwischen heutiger Stadtverwaltung, darstellender Kunst und einem Stadtgebiet, dessen jüdische Vorkriegsgeschichte durch Krieg und Nachkriegsabriss tief verändert wurde.",
+          "tags": ["quer", "stadtraum"]
+        },
+        {
+          "text": "LIVE: Opern-, Ballett- und Talentprogramm, Besetzungen, Anfangszeiten, Restkarten, Führungen, Einführungen und Zugänglichkeit ausschließlich über operaballet.nl prüfen. Der historische Name Het Muziektheater bezeichnet den Ort, nicht zwingend die aktuelle Außendarstellung oder heutige Produktion.",
+          "tags": ["live_hint", "ephemeral", "programm"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Warum heißt der Komplex Stopera?",
+          "a": "Der Volksname verbindet stadhuis und opera; durch Proteste unter dem Motto Stop Opera bekam er zusätzlich eine politische Doppeldeutigkeit."
+        }
+      ]
+    },
+    {
+      "id": "amsterdam_portugese_synagoge",
+      "name": "Portugese Synagoge",
+      "general_info": "Die 1675 eröffnete Portugiesische Synagoge, auch Esnoga oder Snoge, ist das monumentale Gotteshaus der sephardischen Gemeinde Amsterdams und wird weiterhin religiös genutzt.",
+      "deep_data_pool": [
+        {
+          "text": "Sephardische Juden, deren Familien vor der Inquisition aus Spanien und Portugal geflohen waren, gründeten in Amsterdam mehrere Gemeinden. Diese vereinigten sich 1639 zur Gemeinde Talmud Tora. Ihr wirtschaftliches und kulturelles Gewicht ermöglichte später den Bau der großen Esnoga.",
+          "tags": ["juedische_geschichte", "sephardim", "migration"]
+        },
+        {
+          "text": "Die Gemeinde erwarb das Grundstück 1670. Unter dem Architekten Elias Bouman begann der Bau 1671; am 2. August 1675 wurde die Synagoge feierlich eingeweiht. Bei ihrer Errichtung galt sie als größte Synagoge der Welt und wurde zu einem sichtbaren Zeichen sephardischen Selbstbewusstseins.",
+          "tags": ["baugeschichte", "religion"]
+        },
+        {
+          "text": "Esnoga ist ein sephardischer Ausdruck für Synagoge. Der mächtige, frei stehende Backsteinbau folgt niederländisch-klassizistischen Vorstellungen. Nebengebäude umschließen einen Hof und enthalten Funktionsräume sowie die Schatzkammern der Gemeinde.",
+          "tags": ["name", "architektur", "hof"]
+        },
+        {
+          "text": "Der große Innenraum besitzt bis heute keine elektrische Grundbeleuchtung. Hunderte Kerzen in Messingleuchtern prägen Gottesdienste und besondere Öffnungen. Der Boden ist traditionell mit Sand bestreut, der Schmutz bindet, Schritte dämpft und an ältere sephardische Synagogenbräuche erinnert.",
+          "tags": ["innenraum", "tradition", "visuell"]
+        },
+        {
+          "text": "Der monumentale hölzerne Hechal bewahrt die Torarollen und steht an der nach Jerusalem gerichteten Wand. Bima, umlaufende Emporen, dunkle Holzbänke und hohe Rundbogenfenster ordnen den weiten Raum; die klare Geometrie lässt seine außergewöhnliche Größe unmittelbar erkennen.",
+          "tags": ["religion", "ausstattung", "architektur"]
+        },
+        {
+          "text": "Zum Ensemble gehört Ets Haim-Livraria Montezinos. Die 1616 begründete Bibliothek bewahrt Handschriften und Drucke von internationaler Bedeutung und zählt zu den ältesten noch bestehenden jüdischen Bibliotheken. Ihr Bestand wurde in das UNESCO-Register Memory of the World aufgenommen.",
+          "tags": ["bibliothek", "unesco", "wissen"]
+        },
+        {
+          "text": "Visuell: Der freistehende rechteckige Backsteinbau erhebt sich hinter einem ummauerten Vorhof gegenüber dem aschkenasischen Synagogenkomplex. Schlichte Fassaden, hohe Rundbogenfenster und das steile Dach kontrastieren mit dem reicheren, kerzenbeleuchteten Holz- und Messinginterieur.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "LIVE: Gottesdienste haben Vorrang; Schabbat, jüdische Feiertage, Restaurierungen und Veranstaltungen verändern Besucherzeiten. Öffnung, Eintritt, zugängliche Schatzkammern, Bibliotheksbesuch und Kerzenabende ausschließlich beim Joods Cultureel Kwartier und der Gemeinde aktuell prüfen.",
+          "tags": ["live_hint", "ephemeral", "religion"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Ist die Portugiesische Synagoge noch ein Gotteshaus?",
+          "a": "Ja. Sie wird weiterhin von der portugiesisch-israelitischen Gemeinde genutzt; Besuche richten sich daher nach Gottesdiensten und Feiertagen."
+        },
+        {
+          "q": "Warum ist Sand auf dem Boden?",
+          "a": "Der historische Brauch bindet Schmutz und dämpft Schritte; er gehört zur überlieferten sephardischen Nutzung des Raumes."
+        }
+      ]
+    },
+    {
+      "id": "amsterdam_joods_historisch_museum",
+      "name": "Joods Historisch Museum",
+      "general_info": "Das heutige Joods Museum vermittelt jüdische Religion, Kultur und Geschichte in vier ehemaligen aschkenasischen Synagogen. Der Gebäudekomplex selbst ist ein zentrales Exponat.",
+      "deep_data_pool": [
+        {
+          "text": "Das Museum wurde 1932 in der Waag eröffnet. Unter der deutschen Besatzung musste es 1940 schließen; große Teile seiner Sammlung gingen verloren. 1955 öffnete es erneut, bevor es 1987 in das ehemalige hochdeutsche Synagogenensemble am Jonas Daniël Meijerplein umzog.",
+          "tags": ["museumsgeschichte", "verfolgung", "sammlung"]
+        },
+        {
+          "text": "Das Ensemble umfasst vier aschkenasische Synagogen: die Grote Sjoel von 1671, die Obbene Sjoel von 1686 bis 1688, die Dritt Sjoel von 1700 und die 1752 neu errichtete Neie Sjoel. Gemeinsam bilden sie den größten historischen Synagogenkomplex Europas.",
+          "tags": ["architektur", "juedische_geschichte"]
+        },
+        {
+          "text": "Die Grote Sjoel wurde von den Stadtbaumeistern Elias Bouman und Daniël Stalpaert auf kreuzförmigem Grundriss entworfen. Wegen des Wachstums der aus Mittel- und Osteuropa stammenden Gemeinde entstanden in kurzer Folge weitere Gebetsräume auf demselben Areal.",
+          "tags": ["baugeschichte", "aschkenasim"]
+        },
+        {
+          "text": "1943 fand in der Grote Sjoel der letzte Gottesdienst statt; anschließend wurde der Komplex geplündert. Nach dem Krieg kehrte er nicht zur Synagogennutzung zurück. Die Stadt erwarb die vernachlässigten Gebäude 1954, das Museum kaufte sie 1974 symbolisch für einen Gulden.",
+          "tags": ["schoah", "nachkrieg", "erinnerung"]
+        },
+        {
+          "text": "Für die Museumseröffnung 1987 wurden die vier zuvor getrennten Häuser verbunden. Die frühere Sjoelgas wurde überdacht und dient als Eingang und Verteiler. Moderne Verbindungselemente sollten den Bruch zwischen religiöser Nutzung, Verfolgung und Museumszukunft sichtbar lassen.",
+          "tags": ["museum", "architektur", "denkmalpflege"]
+        },
+        {
+          "text": "Die Sammlung umfasst Kunst, Zeremonialobjekte, Fotografien und historische Zeugnisse jüdischen Lebens. Nur ein kleiner Teil kann gleichzeitig gezeigt werden. Präsentationen behandeln religiöse Praxis ebenso wie Alltag, Emanzipation, Verfolgung und jüdisches Leben in Gegenwart und Zukunft.",
+          "tags": ["sammlung", "religion", "gesellschaft"]
+        },
+        {
+          "text": "Visuell: Der Zugang liegt zwischen vier Backsteinbauten gegenüber der Portugiesischen Synagoge. Im Inneren bleiben hohe Synagogenräume, Emporen, Säulen und die unterschiedliche Baugeschichte erkennbar; die Architektur soll nicht als neutrale Museumshülle gelesen werden.",
+          "tags": ["visuell", "wegweiser", "erinnerungsort"]
+        },
+        {
+          "text": "LIVE: Aktuelle Ausstellungen, Junior-Angebote, Sammlungspräsentationen, Führungen, Eintritt, Sicherheitsregeln und Öffnungszeiten auf jck.nl prüfen. Seit 2021 lautet der offizielle Name Joods Museum; ältere Karten und Quellen können weiterhin Joods Historisch Museum verwenden.",
+          "tags": ["live_hint", "ephemeral", "museum"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Warum besteht das Museum aus mehreren Gebäuden?",
+          "a": "Es nutzt vier ehemalige aschkenasische Synagogen, die zwischen 1671 und 1752 für die wachsende Gemeinde entstanden."
+        }
+      ]
+    },
+    {
+      "id": "amsterdam_bloemenmarkt",
+      "name": "Bloemenmarkt",
+      "general_info": "Der seit 1862 am Singel bestehende Bloemenmarkt ist ein Markt auf fest vertäuten Kähnen zwischen Koningsplein und Muntplein. Seine heutige Warenmischung ist stark touristisch geprägt.",
+      "deep_data_pool": [
+        {
+          "text": "Der Blumenmarkt zog 1862 an den heutigen Abschnitt des Singel. Zuvor wurden Blumen und Pflanzen an der Sint-Luciënwal gehandelt. Gärtner aus dem Umland brachten ihre Ware über Amstel und Grachten direkt per Boot in die wachsende Stadt.",
+          "tags": ["geschichte", "handel", "wasserwege"]
+        },
+        {
+          "text": "Im 19. und frühen 20. Jahrhundert war der Markt ein Umschlagplatz für Schnittblumen, Pflanzen, Bäume und Sträucher. Die Lage am Wasser war praktische Logistik, nicht bloß Kulisse: Produzenten konnten mit ihren beladenen Booten unmittelbar an den Verkaufsplatz fahren.",
+          "tags": ["marktgeschichte", "logistik", "gartenbau"]
+        },
+        {
+          "text": "Mit dem Übergang zu Straßenverkehr und zentralisiertem Großhandel wurden aus den ankommenden Verkaufsbooten dauerhaft vertäute Kähne. Darauf stehen heute geschlossene, überdachte Verkaufsstände; vom Land aus wirken sie eher wie eine zusammenhängende Ladenzeile am Kanal.",
+          "tags": ["wandel", "architektur", "wasser"]
+        },
+        {
+          "text": "Der Markt erstreckt sich am südlichen Rand des Grachtengürtels entlang des Singel zwischen Muntplein und Koningsplein. Die Verkaufsfront liegt an der Straße, während Rückseiten und Unterbauten über dem Wasser stehen. Diese Konstruktion begründet die Bezeichnung schwimmender Blumenmarkt.",
+          "tags": ["lage", "visuell", "wegweiser"]
+        },
+        {
+          "text": "Die heutige Mischung umfasst Blumenzwiebeln, Pflanzen, Schnittblumen und zahlreiche Amsterdam-Souvenirs. Der historische Name garantiert daher weder ein reines Blumenangebot noch lokale Herkunft. Aussagen über Sortiment oder Qualität müssen sich auf einen konkreten Stand und Zeitpunkt beziehen.",
+          "tags": ["gegenwart", "quellenkritik", "handel"]
+        },
+        {
+          "text": "Untersuchungen niederländischer Verbraucherschützer berichteten bei touristisch angebotenen Tulpenzwiebeln über schlechte Blühergebnisse und irreführende Verpackungen. Der stabile historische Fakt ist der Marktstandort; Kaufqualität, Exportregeln und Pflanzfähigkeit sind stets aktuell zu prüfen.",
+          "tags": ["verbraucherschutz", "live_hint", "quellenkritik"]
+        },
+        {
+          "text": "Quer: Der Markt erzählt denselben Zusammenhang wie der Grachtengürtel insgesamt: Wasser war Verkehrsweg, Lagerraumkante und Infrastruktur. Er unterscheidet sich vom Albert-Cuyp-Markt, der als langer Straßenmarkt vor allem eine breite Mischung aus Lebensmitteln und Alltagswaren anbietet.",
+          "tags": ["quer", "grachten", "markt"]
+        },
+        {
+          "text": "LIVE: Markttage, Standöffnungen, tatsächliches Blumenangebot, saisonale Zwiebeln, Pflanzhinweise und Einfuhrbestimmungen des Ziellandes aktuell prüfen. Keine konkreten Sorten, Preise oder Blühversprechen aus dem Pack ableiten; einzelne Stände können geschlossen oder anders genutzt sein.",
+          "tags": ["live_hint", "ephemeral", "markt"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Schwimmt der Bloemenmarkt wirklich?",
+          "a": "Die Stände stehen auf dauerhaft vertäuten Kähnen im Singel; sie fahren nicht als Marktboote umher."
+        }
+      ]
+    },
+    {
+      "id": "amsterdam_albert_cuyp_markt",
+      "name": "Albert Cuyp Markt",
+      "general_info": "Der Albert-Cuyp-Markt ist ein traditionsreicher Straßenmarkt in De Pijp. Er entwickelte sich aus ungeordnetem Straßenhandel und wird seit 1905 kommunal organisiert.",
+      "deep_data_pool": [
+        {
+          "text": "Um 1900 sammelten sich Händler mit Wagen und Ständen ungeordnet in der Albert Cuypstraat. Um das wachsende Geschehen zu ordnen, richtete die Stadt 1905 einen offiziellen Markt ein, zunächst nur an Samstagabenden.",
+          "tags": ["geschichte", "markt", "stadtverwaltung"]
+        },
+        {
+          "text": "1912 wurde daraus ein tagsüber stattfindender Markt an sechs Wochentagen. Die Marktstraße liegt zwischen Ferdinand Bolstraat und Van Woustraat und wird während des Betriebs für den normalen Fahrzeugverkehr gesperrt.",
+          "tags": ["stadtentwicklung", "strassenraum"]
+        },
+        {
+          "text": "Straße und Markt tragen den Namen Albert Cuyp, eines niederländischen Landschaftsmalers des 17. Jahrhunderts. Der Namensbezug ist kunsthistorisch, nicht biografisch: Cuyp lebte in Dordrecht und hatte keinen Marktstand an diesem Ort.",
+          "tags": ["name", "kunstgeschichte"]
+        },
+        {
+          "text": "Der Markt wuchs mit De Pijp, einem dicht bebauten Viertel der Stadterweiterung des späten 19. Jahrhunderts. Er versorgte die Bevölkerung mit Obst, Gemüse, Fisch, Kleidung und Haushaltswaren und wurde zugleich ein sozialer Treffpunkt des Quartiers.",
+          "tags": ["alltag", "de_pijp", "stadtgeschichte"]
+        },
+        {
+          "text": "Die lange, beidseitige Folge mobiler Stände macht den Charakter aus. Hinter Planen und Marktbuden bleiben die Fassaden der schmalen Wohn- und Geschäftshäuser sichtbar; nach Marktschluss verwandelt sich die Verkaufsachse wieder in eine gewöhnliche Stadtstraße.",
+          "tags": ["visuell", "wegweiser", "stadtraum"]
+        },
+        {
+          "text": "Das Angebot ist traditionell breit und nicht auf touristische Produkte beschränkt. Frische Lebensmittel, Textilien, Blumen und zubereitete Speisen können nebeneinander stehen. Welche Händler tatsächlich anwesend sind, schwankt nach Wochentag, Saison und Vergabe.",
+          "tags": ["marktleben", "handel"]
+        },
+        {
+          "text": "Quer: Der Sarphatipark liegt nur wenige Straßen entfernt und bietet den grünen Gegenpol zur dichten Marktachse. Der Bloemenmarkt am Singel besitzt dagegen dauerhaft vertäute Kähne und eine heute deutlich stärker auf Blumenmitbringsel und Souvenirs ausgerichtete Struktur.",
+          "tags": ["quer", "sarphatipark", "bloemenmarkt"]
+        },
+        {
+          "text": "LIVE: Markttage, Betriebszeiten, Zahl und Position der Stände, konkrete Speisen, Preise und Kartenzahlung aktuell über Stadt und Markt prüfen. Frisch zubereitete Stroopwafeln sind häufig, aber weder jeder Stand noch jede Tageszeit darf als garantiert beschrieben werden.",
+          "tags": ["live_hint", "ephemeral", "markt"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Seit wann ist der Albert-Cuyp-Markt offiziell organisiert?",
+          "a": "Seit 1905; seit 1912 entwickelte er sich zum tagsüber stattfindenden Markt an sechs Wochentagen."
+        }
+      ]
+    },
+    {
+      "id": "amsterdam_de_waag",
+      "name": "De Waag",
+      "general_info": "Die Waag am Nieuwmarkt war ursprünglich das mittelalterliche Sint Antoniespoort. Nach dem Verlust der Wehrfunktion wurde das Stadttor 1617 zur öffentlichen Waage und später zum Sitz mehrerer Zünfte.",
+      "deep_data_pool": [
+        {
+          "text": "Das Sint Antoniespoort entstand als Teil der zwischen 1481 und 1494 errichteten steinernen Stadtbefestigung. Es kontrollierte den östlichen Zugang nach Amsterdam und bestand aus einem Haupttor mit vier Türmen sowie einem vorgelagerten Torbereich.",
+          "tags": ["mittelalter", "stadtmauer", "baugeschichte"]
+        },
+        {
+          "text": "Die Mauern der Türme sind stellenweise fast zwei Meter stark. Feldseitige Rundtürme, stadtseitige Baukörper und der kontrollierte Durchgang machten das Ensemble zu Wehrbau, Verkehrsfilter und sichtbarer Grenze der spätmittelalterlichen Stadt.",
+          "tags": ["architektur", "verteidigung"]
+        },
+        {
+          "text": "Mit den großen Stadterweiterungen des 16. und 17. Jahrhunderts lag das Tor nicht mehr am äußeren Rand. Der davorliegende Bereich wurde zum Nieuwmarkt aufgeschüttet; 1617 erhielt das Gebäude die Funktion einer Waage, weil die ältere Waage am Dam dem Handelsvolumen nicht mehr genügte.",
+          "tags": ["stadtentwicklung", "handel", "waage"]
+        },
+        {
+          "text": "In der Waag wurden Waren amtlich gewogen und Zölle beziehungsweise Gebühren kontrolliert. Obergeschosse dienten Zünften, darunter Schmiede, Maurer, Maler und Chirurgen. Eigene Zugänge und Turmräume spiegelten die korporative Ordnung der frühneuzeitlichen Stadt.",
+          "tags": ["zuenfte", "wirtschaft", "stadtgesellschaft"]
+        },
+        {
+          "text": "Die Chirurgengilde nutzte einen Raum als anatomisches Theater für öffentliche Sektionen und Unterricht. Rembrandts Gemälde Die Anatomie des Dr. Tulp von 1632 ist mit dieser Amsterdamer Gildenkultur verbunden, auch wenn sein heutiger Bildraum nicht einfach als fotografisch genaue Waag-Ansicht zu lesen ist.",
+          "tags": ["medizin", "kunst", "rembrandt"]
+        },
+        {
+          "text": "Später diente der Bau unter anderem als Museum, Feuerwache und Archiv. Die wechselnden Nutzungen zeigen, wie ein Tor nach Verlust seiner ursprünglichen Funktion immer wieder an städtische Bedürfnisse angepasst wurde, ohne seine turmreiche Silhouette zu verlieren.",
+          "tags": ["nutzungsgeschichte", "denkmal"]
+        },
+        {
+          "text": "Visuell: Die freistehende, burgartige Backsteinmasse beherrscht den Nieuwmarkt. Mehrere unterschiedlich geformte Türme, steile Dächer, Natursteindetails und ehemalige Toröffnungen verraten den Wehrbau; der offene Platz entspricht nicht der engen Situation vor der Aufschüttung.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "LIVE: Heutige Gastronomie, öffentliche Zugänglichkeit, Ausstellungen, Veranstaltungen und mögliche Restaurierungen aktuell prüfen. Stabile Kernaussagen sind Ursprung als Sint Antoniespoort, Umnutzung 1617 zur Waage und die spätere Nutzung durch Zünfte.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "War die Waag immer ein Wiegehaus?",
+          "a": "Nein. Sie wurde als Sint Antoniespoort der mittelalterlichen Stadtbefestigung gebaut und erst 1617 zur Waage umgenutzt."
+        }
+      ]
+    },
+    {
+      "id": "amsterdam_schreierstoren",
+      "name": "Schreierstoren",
+      "general_info": "Der Schreierstoren ist ein erhaltener Wehrturm der spätmittelalterlichen Stadtbefestigung am früheren IJ-Ufer. Seine populäre Abschiedslegende ist jünger und sprachgeschichtlich unsicher.",
+      "deep_data_pool": [
+        {
+          "text": "Der Turm entstand im Zusammenhang mit der ab 1481 gebauten spätmittelalterlichen Stadtmauer und wird meist um 1487 beziehungsweise ans Ende des 15. Jahrhunderts datiert. Er sicherte die nordöstliche Ecke der befestigten Stadt nahe dem damaligen offenen IJ.",
+          "tags": ["mittelalter", "stadtmauer", "hafen"]
+        },
+        {
+          "text": "Feldseitig ist der Mauerzug halbrund, stadtseitig flach. Diese Form erlaubt Verteidigung nach außen und eine Einbindung in die Stadtmauer. Der Schreierstoren ist der einzige weitgehend erhaltene eigentliche Wehrturm dieser Befestigungsphase.",
+          "tags": ["architektur", "verteidigung"]
+        },
+        {
+          "text": "Anders als Montelbaanstoren und Munttoren erhielt er im 17. Jahrhundert keine repräsentative Renaissancebekrönung von Hendrick de Keyser. Seine heutige Spitze und der obere Abschluss sind dennoch nicht vollständig mittelalterlich; Umbauten veränderten das Erscheinungsbild.",
+          "tags": ["baugeschichte", "denkmalpflege"]
+        },
+        {
+          "text": "Stadtbaumeister Abraham van der Hart leitete 1779 eine Reparatur. Aus dieser Phase stammt die heutige Bekrönung ohne die früheren Zinnen. Auch der seitliche Anbau ist später, weshalb der Turm nicht als unverändertes Bauwerk des 15. Jahrhunderts beschrieben werden darf.",
+          "tags": ["restaurierung", "quellenkritik"]
+        },
+        {
+          "text": "Der Name wird häufig mit schreienden oder weinenden Frauen erklärt, die Seeleute verabschiedet hätten. Wahrscheinlicher ist eine ältere Beziehung zur scharfen Ecke beziehungsweise zur Lage am Mauerknick. Die romantische Abschiedsgeschichte ist als Legende, nicht als gesicherte Namensherkunft zu behandeln.",
+          "tags": ["name", "legende", "quellenkritik"]
+        },
+        {
+          "text": "Von diesem Hafenrand brachen in der Frühen Neuzeit Schiffe und Seeleute zu Fernreisen auf. Eine Gedenktafel erinnert an Henry Hudsons Fahrt von 1609, die im Dienst der VOC nach einer nordöstlichen Route suchte und schließlich zur Erkundung der nordamerikanischen Küste führte.",
+          "tags": ["seefahrt", "hudson", "voc"]
+        },
+        {
+          "text": "Visuell: An der Prins Hendrikkade steht ein gedrungener Backsteinturm mit halbrunder Wasserseite, heller Steinbekrönung und spitzem Dach. Die heutige Straße trennt ihn stärker vom Wasser als die historische Uferlage; der Hauptbahnhof liegt in Sichtweite.",
+          "tags": ["visuell", "wegweiser", "stadtraum"]
+        },
+        {
+          "text": "LIVE: Gastronomische Nutzung, Innenzugang, Öffnung und Veranstaltungen aktuell prüfen. Von außen bleiben Form, Lage und Mauerbezug ablesbar; die Abschiedslegende nie als belegten historischen Vorgang oder sichere Etymologie ausgeben.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Kommt der Name sicher von weinenden Seemannsfrauen?",
+          "a": "Nein. Das ist eine verbreitete Legende; eine sprachliche Beziehung zur scharfen Mauerecke gilt als plausibler."
+        }
+      ]
+    },
+    {
+      "id": "amsterdam_montelbaanstoren",
+      "name": "Montelbaanstoren",
+      "general_info": "Der Montelbaanstoren entstand um 1516 zur Sicherung der östlichen Werftzone. Hendrick de Keyser verwandelte den niedrigen Wehrturm 1606 durch eine hohe Renaissancebekrönung in einen markanten Stadtturm.",
+      "deep_data_pool": [
+        {
+          "text": "Nach einem Angriff geldrischer Truppen auf die ungeschützte Werftzone Lastage im Jahr 1512 verstärkte Amsterdam seine Ostseite. Beim Ausbau der heutigen Oudeschans entstand um 1516 ein runder Wach- und Wehrturm, der die Schiffbauplätze außerhalb der älteren Mauer schützen sollte.",
+          "tags": ["verteidigung", "werften", "stadtgeschichte"]
+        },
+        {
+          "text": "Der Name Montelbaanstoren ist bereits 1537 belegt. Seine genaue Herkunft bleibt umstritten; populäre Deutungen dürfen deshalb nicht als sicherer Fakt gelten. Nach der Stadterweiterung von 1592 verlor der Turm seine militärische Randlage.",
+          "tags": ["name", "quellenkritik", "stadtentwicklung"]
+        },
+        {
+          "text": "1605 beschloss der Stadtrat, den Bau zu erhöhen und mit Uhr und Glocken auszustatten. 1606 entstand unter maßgeblicher Beteiligung Hendrick de Keysers eine achteckige Backsteinzone mit hölzerner, bleiverkleideter Spitze. Der Turm erreichte etwa 48 Meter Höhe.",
+          "tags": ["architektur", "hendrick_de_keyser", "uhrturm"]
+        },
+        {
+          "text": "Schon 1610 begann der erhöhte Turm gefährlich zu kippen. Rund um den Bestand wurden neue Pfähle gesetzt und ein massiver gemauerter Fuß angelegt, der den älteren Rundturm wie eine Stützhülle umgab. Die Geschichte macht Amsterdams schwierigen Baugrund unmittelbar sichtbar.",
+          "tags": ["fundament", "wasserstadt", "technik"]
+        },
+        {
+          "text": "Der Beiname Malle Jaap, verrückter Jaap, bezieht sich auf eine Phase, in der Uhr oder Schlagwerk unzuverlässig und zu falschen Zeiten erklangen. Er ist Teil der lokalen Überlieferung, nicht der ursprüngliche Name des Wehrturms.",
+          "tags": ["beiname", "uhr", "stadtlegende"]
+        },
+        {
+          "text": "Rembrandt zeichnete den Turm und seine Umgebung mehrfach. Die Oudeschans mit Lastage und nahen Speicher- und Werftquartieren verband Verteidigung, Hafenarbeit und rasches Wachstum der Stadt im frühen 17. Jahrhundert.",
+          "tags": ["rembrandt", "kunst", "hafen"]
+        },
+        {
+          "text": "Visuell: Über einem schweren runden Backsteinsockel erhebt sich ein schlankes achteckiges Geschoss mit Rundbogennischen, Uhrflächen und einer vielgliedrigen bleigedeckten Holzspitze. Gerade der Kontrast zwischen gedrungenem Wehrkern und eleganter Renaissancekrone kennzeichnet den Turm.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "LIVE: Der Turm wird nicht als frei zugänglicher Aussichtsturm vorausgesetzt. Innenzugang, heutige Büronutzung, Führungen, Glockenbetrieb und Restaurierungsmaßnahmen aktuell prüfen; Außenansicht und Uferperspektive an der Oudeschans bleiben die verlässliche Orientierung.",
+          "tags": ["live_hint", "ephemeral", "zugang"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Warum sieht der Turm unten und oben so verschieden aus?",
+          "a": "Der runde Unterbau ist der Wehrturm des frühen 16. Jahrhunderts; die hohe achteckige Renaissancebekrönung kam 1606 hinzu."
+        }
+      ]
+    },
+    {
+      "id": "amsterdam_zuiderkerk",
+      "name": "Zuiderkerk",
+      "general_info": "Die zwischen 1603 und 1611 errichtete Zuiderkerk war Amsterdams erste eigens für den protestantischen Gottesdienst gebaute Kirche. Ihr 1614 vollendeter Turm prägt die ehemalige Lastage.",
+      "deep_data_pool": [
+        {
+          "text": "Nach der Reformation nutzten Protestanten zunächst übernommene mittelalterliche Kirchen. Die Zuiderkerk war dagegen der erste Amsterdamer Neubau, der ausdrücklich für reformierte Gottesdienste geplant wurde. Der Bau begann 1603 und wurde 1611 in Gebrauch genommen.",
+          "tags": ["religion", "reformation", "baugeschichte"]
+        },
+        {
+          "text": "Hendrick de Keyser entwarf eine langgestreckte Pseudobasilika: ein hohes Mittelschiff, niedrigere Seitenschiffe, toskanische Säulen und hölzerne Tonnengewölbe verbinden gotische Raumform mit Elementen der Amsterdamer Renaissance.",
+          "tags": ["architektur", "hendrick_de_keyser"]
+        },
+        {
+          "text": "Der Turm wurde 1614 fertig. Auf einem quadratischen Steinunterbau sitzt ein achteckiges Sandsteingeschoss mit freistehenden Säulen, darüber eine hölzerne, bleigedeckte Spitze. Das Glockenspiel erhielt 1656 Glocken der berühmten Brüder François und Pieter Hemony.",
+          "tags": ["turm", "glocken", "architektur"]
+        },
+        {
+          "text": "Hendrick de Keyser wurde 1621 in der Kirche bestattet; 1921 erhielt sein Grab eine Gedenkplatte. Der Bau ist daher zugleich Werk und Erinnerungsort des Bildhauers und Stadtarchitekten, der Amsterdams Renaissance-Silhouette entscheidend prägte.",
+          "tags": ["grab", "architekt", "erinnerung"]
+        },
+        {
+          "text": "Rembrandt lebte in der Nachbarschaft. Mehrere seiner Kinder wurden in der Zuiderkerk bestattet. Während einer Pestepidemie 1602 bis 1603 konnte die Kirche noch nicht dienen; später wurde der Kirchhof ein wichtiger Begräbnisort des Viertels.",
+          "tags": ["rembrandt", "stadtgesellschaft", "bestattung"]
+        },
+        {
+          "text": "Claude Monet malte 1874 die Zuiderkerk über den Groenburgwal. Der Turm steht im Bild über der schmalen Gracht und den Häuserzeilen; diese Blickachse verbindet die gebaute Stadt mit der impressionistischen Wahrnehmung von Wasser, Licht und Spiegelung.",
+          "tags": ["kunst", "monet", "quer"]
+        },
+        {
+          "text": "Visuell: Von den umliegenden Grachten ist zuerst der hohe, gestufte Turm mit seiner offenen Renaissancezone sichtbar. Das Kirchenschiff ist schlichter, aus Backstein mit hohen Rundbogenfenstern. Besonders klar erscheint die klassische Ansicht vom Groenburgwal.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "LIVE: Die Zuiderkerk dient nicht regulär als Gemeindekirche. Ausstellungen, Veranstaltungen, Turmbesteigung, Glockenspieltermine, Innenzugang und Barrierefreiheit aktuell bei Stadt beziehungsweise Betreiber prüfen; eine jederzeit offene Kirche darf nicht versprochen werden.",
+          "tags": ["live_hint", "ephemeral", "zugang"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Was war an der Zuiderkerk neu?",
+          "a": "Sie war Amsterdams erster Kirchenneubau, der von Anfang an für reformierte Gottesdienste entworfen wurde."
+        }
+      ]
+    },
+    {
+      "id": "amsterdam_artis_royal_zoo",
+      "name": "ARTIS Amsterdam Royal Zoo",
+      "general_info": "ARTIS wurde 1838 als Natura Artis Magistra gegründet und ist der älteste Zoo der Niederlande. Historische Tierhäuser, Gartenkunst, Museen und Wissenschaft bilden ein ungewöhnlich dichtes Ensemble.",
+      "deep_data_pool": [
+        {
+          "text": "G.F. Westerman, J.W.H. Werlemann und J.J. Wijsmuller gründeten 1838 die zoologische Gesellschaft Natura Artis Magistra. Der lateinische Name bedeutet, dass die Natur Lehrmeisterin von Kunst und Wissenschaft sei; im Alltag verkürzte er sich bald zu ARTIS.",
+          "tags": ["gruendung", "wissenschaft", "name"]
+        },
+        {
+          "text": "Anfangs war der Garten eine Mitgliederinstitution. Durch den Erwerb einer reisenden Menagerie kamen früh spektakuläre Tiere hinzu. In den ersten vier Jahrzehnten wuchs das Gelände in der Plantage zu einem landschaftlichen Park mit geschwungenen Wegen, Sammlungen und Tierhäusern.",
+          "tags": ["zoogeschichte", "gesellschaft", "park"]
+        },
+        {
+          "text": "ARTIS gilt als erster öffentlicher Zoo der Niederlande und als einer der fünf ältesten noch bestehenden Zoos der Welt. Die Anlage bewahrt mehr als zwei Dutzend denkmalgeschützte Gebäude, Brücken und Teiche, von denen viele weiterhin genutzt werden.",
+          "tags": ["denkmal", "zoo", "stadtgeschichte"]
+        },
+        {
+          "text": "Das Aquarium wurde 1882 eröffnet. Gerlof Salm entwarf den tempelartigen Bau auf 1740 Holzpfählen. Mehr als eine Million Liter Wasser und William Alford Lloyds Filtersystem machten ihn zu einem technischen Vorbild; ein Teil der historischen Wassertechnik blieb als Industriekultur erhalten.",
+          "tags": ["aquarium", "technik", "architektur"]
+        },
+        {
+          "text": "Zum 150-jährigen Bestehen eröffnete 1988 das Planetarium. 2014 folgte Micropia als weltweit erstes Museum, das vollständig Mikroorganismen gewidmet ist. Das Groote Museum wurde 2022 nach 75 Jahren wieder öffentlich und behandelt Zusammenhänge zwischen Mensch und übriger Natur.",
+          "tags": ["museum", "planetarium", "mikroben"]
+        },
+        {
+          "text": "ARTIS vereint Zoo und botanischen Garten. Alte Bäume, Pflanzensammlungen und historische Architektur sind daher nicht bloße Dekoration zwischen Gehegen. Die Entwicklung vom Schausammeln des 19. Jahrhunderts zu Bildung, Forschung und Naturschutz muss kritisch und zeitlich differenziert erzählt werden.",
+          "tags": ["botanik", "bildung", "einordnung"]
+        },
+        {
+          "text": "Visuell: Der historische Haupteingang an der Plantage Kerklaan trägt den Namen Natura Artis Magistra. Dahinter folgen alte Backstein- und Putzbauten in einem dicht bepflanzten Park; Aquarium, Groote Museum und moderne Wissenschaftsangebote bilden eigene markante Teilorte.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "LIVE: Tierbestand, Fütterungen, Aquariumstatus, Planetariumsprogramm, Micropia- und Museumstickets, Bauarbeiten, Öffnungszeiten und einzelne geschlossene Wege immer auf artis.nl prüfen. Keine aktuelle Tierart oder öffentliche Präsentation allein aus historischen Sammlungsangaben versprechen.",
+          "tags": ["live_hint", "ephemeral", "tiere"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Ist ARTIS nur ein Zoo?",
+          "a": "Nein. Zum Ensemble gehören botanische Anlagen, historische Gebäude, Aquarium, Planetarium, Micropia und das Groote Museum."
+        }
+      ]
+    },
+    {
+      "id": "amsterdam_hortus_botanicus_amsterdam",
+      "name": "Hortus Botanicus Amsterdam",
+      "general_info": "Der 1638 gegründete Hortus begann als medizinischer Lehrgarten für Ärzte und Apotheker. Historische Pflanzenlisten, monumentale Gewächshäuser und moderne Klimavermittlung verbinden Forschung und Gartenkultur.",
+      "deep_data_pool": [
+        {
+          "text": "Der Amsterdamer Stadtrat gründete 1638 den Hortus Medicus als Garten für Heilpflanzen. Ärzte und Apotheker sollten Pflanzen sicher erkennen und ihre pharmazeutische Verwendung studieren; Apotheker legten hier auch Prüfungen ab.",
+          "tags": ["gruendung", "medizin", "bildung"]
+        },
+        {
+          "text": "Johannes Snippendaal wurde 1646 Präfekt und erstellte den ersten vollständigen Katalog. Er verzeichnete 796 Arten, überwiegend Heil-, aber auch Zierpflanzen. Der heutige Snippendaal-Garten zeigt ausschließlich Arten dieser historischen Liste in moderner, an formale Beete erinnernder Gestaltung.",
+          "tags": ["snippendaal", "sammlung", "quellen"]
+        },
+        {
+          "text": "Der Garten profitierte von Amsterdams globalen Handelsnetzen, über die Pflanzen und Samen aus Übersee eintrafen. Diese botanische Wissensgeschichte ist mit Kolonialhandel und Machtverhältnissen verflochten und darf nicht nur als neutrale Geschichte exotischer Schönheit erzählt werden.",
+          "tags": ["kolonialgeschichte", "botanik", "einordnung"]
+        },
+        {
+          "text": "Der sechseckige Pavillon stammt aus dem späten 17. Jahrhundert, das repräsentative Eingangstor aus dem frühen 18. Jahrhundert und die Orangerie von 1875. Dadurch lässt sich die Entwicklung vom städtischen Heilpflanzengarten zur wissenschaftlichen und öffentlichen Institution baulich verfolgen.",
+          "tags": ["architektur", "garten"]
+        },
+        {
+          "text": "Hugo de Vries leitete den Hortus von 1885 bis 1918 und verschaffte ihm als Pflanzenphysiologe internationale Aufmerksamkeit. Um ihn zu halten, ließ der Vorstand unter anderem Palmenhaus und Labor planen; das Palmenhaus entwarf Johan Melchior van der Mey 1911.",
+          "tags": ["wissenschaft", "hugo_de_vries", "architektur"]
+        },
+        {
+          "text": "Das monumentale Palmenhaus verbindet Stahl, Stein und Glas. Es beherbergt Palmen, Palmfarne und Kübelpflanzen; besonders alt ist ein Exemplar von Encephalartos altensteinii. Manche Großpflanzen bleiben ganzjährig im Haus, andere stehen im Sommer im Freien.",
+          "tags": ["palmenhaus", "pflanzen", "visuell"]
+        },
+        {
+          "text": "Visuell: Hinter dem historischen Tor öffnet sich ein kleinteiliges Gartengefüge aus Wasser, alten Bäumen, Beeten und Gewächshäusern. Das Palmenhaus zeigt eine hohe gläserne Kuppel mit industriellem Tragwerk; das moderne Klimahaus kontrastiert als größere transparente Struktur.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "LIVE: Öffnung, Eintritt, Pflanzenschauen, Blütezeiten, Schmetterlingshaus, Veranstaltungen und Zugänglichkeit prüfen. Das 1993 errichtete Drei-Klima-Gewächshaus wurde grundlegend erneuert und 2025 als gasfreies Klimahaus wiedereröffnet; aktuelle Bereiche können dennoch zeitweise gesperrt sein.",
+          "tags": ["live_hint", "ephemeral", "klimahaus"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Warum wurde der Hortus gegründet?",
+          "a": "Als medizinischer Pflanzengarten, in dem Ärzte und Apotheker Heilpflanzen studierten und Apotheker Prüfungen ablegten."
+        }
+      ]
+    },
+    {
+      "id": "amsterdam_wereldmuseum_amsterdam",
+      "name": "Wereldmuseum Amsterdam",
+      "general_info": "Das frühere Tropenmuseum heißt seit 2023 Wereldmuseum Amsterdam. Seine Sammlung und sein monumentales Haus gingen aus dem niederländischen Kolonialmuseum und Kolonialinstitut hervor.",
+      "deep_data_pool": [
+        {
+          "text": "Frederick van Eeden gründete 1864 in Haarlem das Koloniaal Museum; 1871 öffnete es öffentlich. Es sammelte Produkte, Objekte und Wissen aus niederländischen Kolonien und sollte ausdrücklich auch Handel, Rohstoffnutzung und wirtschaftliche Erträge fördern.",
+          "tags": ["gruendung", "kolonialgeschichte", "museum"]
+        },
+        {
+          "text": "1910 entstand die Vereeniging Koloniaal Instituut mit dem Ziel, Museum, Forschung und Wissensvermittlung in Amsterdam zusammenzuführen. Der institutionelle Ursprung war eng mit Kolonialverwaltung, Unternehmen und ökonomischen Interessen verbunden.",
+          "tags": ["institut", "wirtschaft", "kolonialismus"]
+        },
+        {
+          "text": "Johannes Jacobus van Nieukerken entwickelte den historisierenden Entwurf; nach seinem Tod führten seine Söhne Johan und Marie Adrianus ihn aus. Der Bau begann 1915 und verzögerte sich durch Weltkrieg, Arbeitskämpfe und Finanzierung bis zur Eröffnung 1926 durch Königin Wilhelmina.",
+          "tags": ["architektur", "baugeschichte"]
+        },
+        {
+          "text": "Das Ensemble in niederländischer Neorenaissance umfasst Instituts- und Museumsflügel. Ein großer Lichthof mit umlaufenden Galerien organisiert das Museum. Fassaden und Innenräume tragen umfangreiche Skulpturen und Symbolprogramme, die koloniale Vorstellungen ihrer Entstehungszeit sichtbar machen.",
+          "tags": ["architektur", "symbolik", "quellenkritik"]
+        },
+        {
+          "text": "Nach dem Ende des formalen Kolonialreichs wandelte sich die Institution. Unter dem Namen Tropenmuseum rückten Kulturen, globale Verflechtungen und Entwicklungsfragen stärker in den Mittelpunkt; heutige Arbeit befasst sich auch kritisch mit Kolonialismus, Herkunft von Sammlungen und Rückgabe.",
+          "tags": ["dekolonisierung", "museumsgeschichte"]
+        },
+        {
+          "text": "Seit 2014 arbeitet das Haus im Verbund des National Museum of World Cultures. 2023 vereinigten sich die Standorte in Amsterdam, Leiden und Rotterdam unter dem gemeinsamen Namen Wereldmuseum. Der Namenswechsel markiert einen Perspektivwechsel, löscht aber den kolonialen Ursprung nicht.",
+          "tags": ["name", "gegenwart", "einordnung"]
+        },
+        {
+          "text": "Visuell: Der monumentale Backsteinbau bildet eine lange Front an Mauritskade und Oosterpark. Türme, Giebel, Arkaden, Naturstein und reicher Figurenschmuck erzeugen eine palastartige Silhouette; der innere Lichthof ist das räumliche Zentrum des Museumsflügels.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "LIVE: Aktuelle Ausstellungen, Restitutionshinweise, geöffnete Galerien, Eintritt, Veranstaltungen und Kinderprogramme über wereldmuseum.nl prüfen. Historische Sammlungszahlen oder frühere Dauerausstellungen nicht als heutige Präsentation ausgeben; nur ein Teil der Bestände ist jeweils sichtbar.",
+          "tags": ["live_hint", "ephemeral", "ausstellung"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Warum hieß das Museum früher Tropenmuseum?",
+          "a": "Der Name gehörte zu einer Nachkriegsphase der aus dem Kolonialmuseum hervorgegangenen Institution; seit 2023 heißt der Standort Wereldmuseum Amsterdam."
+        }
+      ]
+    },
+    {
+      "id": "amsterdam_moco_museum_amsterdam",
+      "name": "Moco Museum Amsterdam",
+      "general_info": "Das 2016 eröffnete private Moco Museum nutzt Villa Alsberg am Museumplein für moderne, zeitgenössische und digitale Kunst. Die 1904 errichtete Villa besitzt eine eigene wechselvolle Geschichte.",
+      "deep_data_pool": [
+        {
+          "text": "Der Architekt Eduard Cuypers entwarf Villa Alsberg 1904 für den aus Kassel stammenden Bankier Siegmund Alsberg. Eduard war ein Neffe von Pierre Cuypers, dem Architekten des gegenüberliegenden Rijksmuseums, entwickelte jedoch eine deutlich eigene Formensprache.",
+          "tags": ["architektur", "eduard_cuypers", "museumplein"]
+        },
+        {
+          "text": "Die Villa orientiert sich am englischen Landhausstil und gehörte zu den frühen privaten Wohnhäusern unmittelbar am Museumplein. Unregelmäßige Baukörper, Ziegel, Natursteinsockel, Giebel und wohnliche Maßstäbe unterscheiden sie von den großen öffentlichen Museen der Umgebung.",
+          "tags": ["villa", "architektur", "visuell"]
+        },
+        {
+          "text": "Nach Alsbergs Tod 1915 wechselten Eigentümer und Bewohner. Bis 1939 blieb das Gebäude Wohnhaus. Seine Biografie zeigt, dass der Museumplein nicht von Anfang an ausschließlich aus Kulturinstitutionen bestand, sondern auch repräsentatives großbürgerliches Wohnen einschloss.",
+          "tags": ["wohnkultur", "stadtgeschichte"]
+        },
+        {
+          "text": "Während der deutschen Besatzung wurde die Villa enteignet und der nationalsozialistischen Nederlandse Volksdienst zugewiesen. Nach der Befreiung nutzten militärische Dienststellen das Haus; ab 1955 wohnten dort zeitweise Ordenspriester und später auch Ordensschwestern.",
+          "tags": ["besatzung", "nutzungsgeschichte"]
+        },
+        {
+          "text": "Nach weiterer Büronutzung und Leerstand wurde die Villa sorgfältig renoviert. Kim und Lionel Logchies eröffneten 2016 darin das unabhängige Moco Museum. Der Name leitet sich aus modern und contemporary ab.",
+          "tags": ["museumsgeschichte", "name"]
+        },
+        {
+          "text": "Das Museum positioniert sich mit leicht zugänglicher moderner und zeitgenössischer Kunst, Street Art und immersiven digitalen Arbeiten. Bekannte Künstlernamen gehören oft zu wechselnden Ausstellungen; sie sind deshalb nicht als dauerhaft sichtbarer Bestand zu garantieren.",
+          "tags": ["kunst", "street_art", "quellenkritik"]
+        },
+        {
+          "text": "Visuell: Die kompakte, malerische Villa steht an der Ecke Honthorststraat und Museumplein zwischen größeren Museumsbauten. Ein kräftiger Sockel, rotes Mauerwerk, asymmetrische Giebel und steile Dächer geben ihr eher den Charakter eines vornehmen Wohnhauses als eines klassischen Museums.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "LIVE: Ausstellungen, tatsächlich gezeigte Werke, immersive Installationen, Eintritt, Zeitfenster, Gartenkunst und Barrierefreiheit nur über mocomuseum.com prüfen. Besonders Künstler wie Banksy, Warhol oder digitale Kollektive nie ohne aktuellen Programmbeleg als heute sichtbar versprechen.",
+          "tags": ["live_hint", "ephemeral", "ausstellung"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "War Villa Alsberg als Museum gebaut?",
+          "a": "Nein. Eduard Cuypers entwarf sie 1904 als privates Wohnhaus für den Bankier Siegmund Alsberg."
+        }
+      ]
+    },
+    {
+      "id": "amsterdam_ndsm_werf",
+      "name": "NDSM-Werf",
+      "general_info": "Die NDSM-Werf in Amsterdam-Noord wandelte sich von einem der größten niederländischen Schiffbaustandorte zu einem offenen Stadtgebiet für Ateliers, Kultur, Unternehmen und neue Bebauung.",
+      "deep_data_pool": [
+        {
+          "text": "Die industrielle Vorgeschichte reicht ins späte 19. Jahrhundert. Nederlandse Scheepsbouw Maatschappij und Nederlandse Dok Maatschappij betrieben Schiffbau und Reparatur in Amsterdam-Noord; 1946 schlossen sie sich zur Nederlandsche Dok en Scheepsbouw Maatschappij, NDSM, zusammen.",
+          "tags": ["industriegeschichte", "schiffbau", "name"]
+        },
+        {
+          "text": "Während der deutschen Besatzung mussten die Werften auch für deutsche Marine und Handelsschifffahrt arbeiten. 1944 wurde der Standort großenteils zerstört. Nach dem Wiederaufbau lief 1947 wieder ein Frachtschiff vom Stapel; Tanker, Frachter und Marineschiffe folgten.",
+          "tags": ["zweiter_weltkrieg", "wiederaufbau", "werft"]
+        },
+        {
+          "text": "Die NDSM gehörte zu den größten niederländischen Werften und unterhielt eine eigene Ausbildung für Schweißer, Metallarbeiter, Modellbauer und weitere Berufe. Große Hallen, Hellinge und Kräne waren auf immer größere Schiffe und industrielle Serienabläufe ausgerichtet.",
+          "tags": ["arbeit", "technik", "ausbildung"]
+        },
+        {
+          "text": "Seit den späten 1960er Jahren verschärften internationale Konkurrenz, Ölkrise und Standortgrenzen die Krise. Sehr große Tanker passten nicht mehr durch die Schleusen zum Amsterdamer Hafen. Nach Konzernumbauten endete der große Schiffbau; 1984 scheiterte ein letzter Neustart.",
+          "tags": ["strukturwandel", "wirtschaft"]
+        },
+        {
+          "text": "Auf dem verlassenen Gelände eigneten sich Hausbesetzer, Künstler und Handwerker Räume an. Die Stiftung Kinetisch Noord erhielt 2001 Unterstützung für ein offizielles broedplaats-Modell, das die rebellische Zwischennutzung mit Ateliers, Werkstätten und Kulturproduktion verstetigte.",
+          "tags": ["subkultur", "kunst", "umbruch"]
+        },
+        {
+          "text": "Erhaltene Hallen, Hellinge, Kräne und weite Kaiflächen bilden das industrielle Gerüst. Neue Wohnungen, Büros und Veranstaltungsorte verändern den Bezirk zugleich stark. NDSM ist daher weder stillgelegtes Freilichtmuseum noch unveränderte autonome Künstlerkolonie.",
+          "tags": ["industriekultur", "stadtentwicklung", "einordnung"]
+        },
+        {
+          "text": "Visuell: Vom IJ aus fallen die riesige NDSM-Loods, hohe Kräne, Rampen, bemalte Wände und große Freiflächen auf. Die Dimensionen erklären sich aus dem Bau von Seeschiffen; Street Art und provisorisch wirkende Kulturarchitektur legen eine zweite Zeitschicht darüber.",
+          "tags": ["visuell", "wegweiser", "street_art"]
+        },
+        {
+          "text": "LIVE: Fähren, Märkte in den IJ-Hallen, Festivals, frei zugängliche Kunst, Baustellen, Ateliers, Gastronomie und Ausstellungen aktuell prüfen. Das Gelände bleibt öffentlich und dynamisch, doch einzelne Hallen, Kunstwerke oder Wege können belegt, versetzt oder gesperrt sein.",
+          "tags": ["live_hint", "ephemeral", "veranstaltungen"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Wofür steht NDSM?",
+          "a": "Für Nederlandsche Dok en Scheepsbouw Maatschappij, den 1946 gebildeten großen Schiffbau- und Reparaturbetrieb."
+        }
+      ]
+    },
+    {
+      "id": "amsterdam_westerpark",
+      "name": "Westerpark",
+      "general_info": "Westerpark verbindet einen Stadtpark des 19. Jahrhunderts mit dem sanierten Industrieensemble der Westergasfabriek. Grünraum und Kulturstandort sind zwei historisch verschiedene, heute zusammenhängende Schichten.",
+      "deep_data_pool": [
+        {
+          "text": "1845 entstand westlich der damaligen Stadt das Westerplantsoen, Amsterdams erster kommunaler Park. Es sollte Bewohnern eines wachsenden Arbeiterquartiers Erholung von dichter Bebauung und industrieller Luft bieten.",
+          "tags": ["parkgeschichte", "stadtplanung", "gesundheit"]
+        },
+        {
+          "text": "Für die Verlegung des Westerkanaals wurde der frühe Park 1891 weitgehend beseitigt. Der heutige ältere Westerpark entstand daneben neu. Seine Geschichte beginnt deshalb nicht einfach mit der Gasfabrik, sondern mit wechselnden Infrastruktur- und Grünplanungen.",
+          "tags": ["stadtentwicklung", "wasserbau", "park"]
+        },
+        {
+          "text": "Die Imperial Continental Gas Association erhielt 1883 den Auftrag für zwei Amsterdamer Gaswerke. Die 1885 fertiggestellte Westergasfabriek erzeugte aus Kohle Stadtgas, zunächst vor allem für Straßenbeleuchtung. Wasserweg und Eisenbahn erleichterten die Kohlezufuhr.",
+          "tags": ["industriegeschichte", "gas", "infrastruktur"]
+        },
+        {
+          "text": "Isaac Gosschalk entwarf die Fabrikbauten in niederländischer Neorenaissance. Die Stadt übernahm das Werk 1898 und erweiterte es. Mit der Umstellung auf anderes Gas und schließlich Erdgas endete die Produktion 1967; Boden und Gebäude blieben industriell belastet.",
+          "tags": ["architektur", "industrie", "umwelt"]
+        },
+        {
+          "text": "Nach langen Debatten wurden Altlasten saniert und die erhaltenen Bauten für Kultur und Gewerbe umgenutzt. Landschaftsarchitektin Kathryn Gustafson gestaltete die Erweiterung als zeitgenössischen Park; 2003 öffnete das erneuerte Gelände.",
+          "tags": ["sanierung", "landschaftsarchitektur", "umnutzung"]
+        },
+        {
+          "text": "Das Ensemble bewahrt unter anderem Gasbehälter, Maschinen- und Transformatorbauten. Ihre Backsteinarchitektur erzählt von Energieversorgung und kommunaler Industrialisierung; neue Kulturfunktionen nutzen große Spannweiten und robuste Innenräume, ohne die frühere Produktion fortzusetzen.",
+          "tags": ["industriekultur", "denkmal", "architektur"]
+        },
+        {
+          "text": "Visuell: Wiesen, Wasserflächen und Baumreihen gehen in rote Backsteinhallen, Schornstein- und Gasbehälterformen über. Der historische Park wirkt landschaftlich, das frühere Gaswerk industriell; zusammen entsteht kein einheitlicher Entwurf, sondern ein bewusst lesbarer Zeitschnitt.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "LIVE: Festivals, Ausstellungen, Kino, Gastronomie, Märkte, Spiel- und Wasserflächen sowie Gebäudeeinlass aktuell prüfen. Westergas bezeichnet heute das Kulturareal; einzelne Veranstaltungsorte können privat belegt sein, während der umgebende Park öffentlich bleibt.",
+          "tags": ["live_hint", "ephemeral", "kultur"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "War Westerpark früher eine Gasfabrik?",
+          "a": "Nur ein Teil: Der heutige Park verbindet einen älteren kommunalen Grünraum mit dem später umgenutzten Gelände der Westergasfabriek."
+        }
+      ]
+    },
+    {
+      "id": "amsterdam_oosterpark",
+      "name": "Oosterpark",
+      "general_info": "Der 1894 vollendete Oosterpark war der erste große Park, den Amsterdam selbst anlegte. Leonard Springer verband englische Landschaftsformen mit sozialem Stadtgrün; Denkmäler erweitern den Park zum Erinnerungsraum.",
+      "deep_data_pool": [
+        {
+          "text": "Im Erweiterungsplan von Jan Kalff war 1876 bereits ein Park auf dem Gelände des Oosterbegraafplaats vorgesehen. Die Stadt kaufte Flächen und verlegte den Friedhof in die Watergraafsmeer; gegen diese Aufgabe des alten Begräbnisorts gab es Protest.",
+          "tags": ["stadtplanung", "friedhof", "parkgeschichte"]
+        },
+        {
+          "text": "Leonard A. Springer gewann 1890 einen beschränkten Entwurfswettbewerb. Ab 1892 wurden Boden aufgeschüttet, Teiche gegraben und Wege angelegt; im Juni 1894 war der Park fertig. Er war der erste große Park, den die Stadt Amsterdam selbst realisierte.",
+          "tags": ["landschaftsarchitektur", "baugeschichte"]
+        },
+        {
+          "text": "Springer gestaltete im englischen Landschaftsstil: geschwungene Wege, freie Wiesen, Baumgruppen, ein langer Teich und kleine Brücken sollten natürlich wirken. Der große Teich war auch für winterliches Schlittschuhlaufen gedacht, eine Wiese ursprünglich als Cricketfeld.",
+          "tags": ["gestaltung", "alltag", "wasser"]
+        },
+        {
+          "text": "Eine Holzbrücke über den Teich entwarf P.L. Kramer 1929. Musikpavillon, Brücken, Kunstwerke und Randbauten ergänzten den Park in verschiedenen Phasen; spätere Umgestaltungen öffneten angrenzende Flächen stärker zur öffentlichen Grünanlage.",
+          "tags": ["architektur", "amsterdamse_school", "park"]
+        },
+        {
+          "text": "Das Nationaal Monument Slavernijverleden von Erwin de Vries wurde am 1. Juli 2002 enthüllt. Es erinnert an Versklavung im niederländischen Kolonialreich und deren Nachwirkungen. Am 1. Juli bildet der Park einen zentralen Ort des Keti-Koti-Gedenkens.",
+          "tags": ["sklaverei", "denkmal", "erinnerung"]
+        },
+        {
+          "text": "Weitere Kunst setzt politische Akzente. De Schreeuw von Jeroen Henneman erinnert seit 2007 an den 2004 ermordeten Filmemacher Theo van Gogh. Literaturbezogene Werke und eine offene Redetradition machen den Park zu einem Ort öffentlicher Auseinandersetzung.",
+          "tags": ["kunst", "meinungsfreiheit", "erinnerung"]
+        },
+        {
+          "text": "Visuell: Ein langgezogener Teich, geschwungene Ufer, alte Baumgruppen und offene Wiesen bestimmen die Mitte. Am Rand ragt der monumentale Bau des Wereldmuseums auf; das Sklavereidenkmal steht im südwestlichen Parkteil.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "LIVE: Veranstaltungen, Keti-Koti-Programm, Musik, Baustellen, Beleuchtung, Sport- und Gastronomieangebote aktuell prüfen. Den Parkzugang nicht mit jederzeit zugänglichen Denkmaldetails oder einem garantierten Veranstaltungsbetrieb gleichsetzen.",
+          "tags": ["live_hint", "ephemeral", "park"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Was macht den Oosterpark stadtgeschichtlich besonders?",
+          "a": "Er war der erste große Park, den Amsterdam als Kommune selbst anlegen ließ."
+        }
+      ]
+    },
+    {
+      "id": "amsterdam_sarphatipark",
+      "name": "Sarphatipark",
+      "general_info": "Der zwischen 1881 und 1886 angelegte Sarphatipark ist ein kleiner Landschaftspark in De Pijp. Er erinnert an den Arzt und Sozialreformer Samuel Sarphati und besitzt ein weiterhin wichtiges Pumpwerk.",
+      "deep_data_pool": [
+        {
+          "text": "Stadtingenieur Jacobus Gerhardus van Niftrik entwarf den Park im englischen Landschaftsstil; gebaut wurde von 1881 bis 1886. Er sollte dem dicht entstehenden Viertel De Pijp einen grünen Erholungsraum geben. Jan David Zocher, der mit dem Vondelpark verbunden ist, war nicht der Planer.",
+          "tags": ["parkgeschichte", "van_niftrik", "quellenkritik"]
+        },
+        {
+          "text": "Namensgeber Samuel Sarphati lebte von 1813 bis 1866. Als jüdischer Arzt erlebte er Armut und schlechte Hygiene in Amsterdam und initiierte Projekte für Abfallbeseitigung, preiswertes gutes Brot, Bildung, Industrie und repräsentative Stadtentwicklung.",
+          "tags": ["samuel_sarphati", "sozialgeschichte", "gesundheit"]
+        },
+        {
+          "text": "Der Park sollte zunächst Prins Hendrikpark heißen. Eine Amsterdamer Bürgerinitiative setzte die Benennung nach Sarphati durch. Das 1886 errichtete Denkmal von J.R. Kruyff macht den Geehrten im Zentrum der Anlage sichtbar.",
+          "tags": ["name", "denkmal", "buergerinitiative"]
+        },
+        {
+          "text": "Während der deutschen Besatzung wurde der jüdische Namensgeber getilgt: 1942 hieß die Anlage Bollandpark, Sarphatis Büste wurde entfernt. Nach der Befreiung erhielt der Park 1945 seinen Namen zurück; die Umbenennung ist Teil der lokalen Verfolgungsgeschichte.",
+          "tags": ["besatzung", "antisemitismus", "erinnerung"]
+        },
+        {
+          "text": "Die Maler Else Berg und Mommie Schwarz wohnten ab 1927 am Park und hielten ihn in Bildern fest. Beide wurden 1942 deportiert und in Auschwitz ermordet. Ihre Parkansichten verbinden das alltägliche Grün mit der zerstörten jüdischen Kunstszene Amsterdams.",
+          "tags": ["kunst", "schoah", "stadtgesellschaft"]
+        },
+        {
+          "text": "Ein Pumpwerk im Chaletstil reguliert weiterhin den Wasserstand. Ursprünglich trieben Dampfmaschine und Kessel die Anlage; seit 1909 arbeitet ein Elektromotor. Das Wasser wird vom tiefsten Parkteil zur ehemaligen Poldervorflut an der Singelgracht gepumpt.",
+          "tags": ["wasserbau", "technik", "polder"]
+        },
+        {
+          "text": "Visuell: Der rechteckige Park wirkt innen durch geschwungene Wege, Teiche, Brücken und Baumgruppen weniger geometrisch. Das Sarphati-Denkmal bildet einen formalen Akzent; das kleine Pumpwerk ist an seiner malerischen Chaletarchitektur zu erkennen.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "LIVE: Zustand von Wegen, Spiel- und Hundebereichen, Veranstaltungen, Pflegearbeiten und Wasseranlagen aktuell prüfen. Der Park ist öffentlicher Grünraum; einzelne Bereiche können temporär gesperrt sein. Öffnungszeiten oder heutige Ausstattung nicht aus älteren Parkführern übernehmen.",
+          "tags": ["live_hint", "ephemeral", "park"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Wer entwarf den Sarphatipark?",
+          "a": "Stadtingenieur J.G. van Niftrik; die häufige Zuordnung zu Jan David Zocher ist falsch."
+        },
+        {
+          "q": "Wozu dient das Pumpwerk?",
+          "a": "Es hält den Wasserstand des tief liegenden Parks unter Kontrolle und leitet Wasser zur Vorflut an der Singelgracht."
+        }
+      ]
+    }
+  ],
+  "new_places": [],
+  "offline_qa": [
+    {
+      "q": "Welche Grachten gehören zum berühmten Grachtengürtel?",
+      "a": "Vor allem Herengracht, Keizersgracht und Prinsengracht bilden die konzentrischen Hauptbögen. Der Singel ist älter; die Singelgracht markierte die äußere Befestigungs- und Wasserlinie der Erweiterung.",
+      "tags": ["grachten", "orientierung", "unesco"]
+    },
+    {
+      "q": "Ist der gesamte Amsterdamer Grachtengürtel UNESCO-Welterbe?",
+      "a": "UNESCO schützt seit 2010 das genau abgegrenzte Gebiet des Grachtengürtels des 17. Jahrhunderts innerhalb der Singelgracht, nicht pauschal jede Gracht im heutigen Stadtgebiet.",
+      "tags": ["unesco", "grachten"]
+    },
+    {
+      "q": "Warum wurden die Grachten angelegt?",
+      "a": "Sie schufen und entwässerten Bauland im feuchten Torfgebiet, regelten Wasser, ermöglichten Transport und Hafenarbeit und ordneten die große Stadterweiterung des 17. Jahrhunderts.",
+      "tags": ["wasserbau", "stadtplanung"]
+    },
+    {
+      "q": "Worin unterscheiden sich Singel und Singelgracht?",
+      "a": "Der Singel ist die ältere innere Gracht um den mittelalterlichen Kern. Die Singelgracht liegt weiter außen und gehörte zur Befestigungs- und Wasserstruktur der großen Erweiterung.",
+      "tags": ["orientierung", "grachten"]
+    },
+    {
+      "q": "Kann man historische Türme immer besteigen?",
+      "a": "Nein. Montelbaanstoren und Schreierstoren sind vor allem von außen erlebbar; auch bei Kirchtürmen hängt ein Zugang von aktuellen Führungen, Nutzung und Sicherheitslage ab.",
+      "tags": ["zugang", "live_hint", "tuerme"]
+    },
+    {
+      "q": "Sind alle schwimmenden Marktstände am Bloemenmarkt Boote?",
+      "a": "Die Verkaufsbauten stehen auf dauerhaft vertäuten Kähnen im Singel. Es handelt sich nicht um fahrende Marktboote, die täglich an- und ablegen.",
+      "tags": ["bloemenmarkt", "markt", "wasser"]
+    },
+    {
+      "q": "Welcher Markt eignet sich eher für Alltagswaren und Lebensmittel?",
+      "a": "Der Albert-Cuyp-Markt besitzt traditionell eine breite Mischung aus Lebensmitteln, Kleidung und Haushaltswaren. Konkrete Händler und Öffnung müssen live geprüft werden.",
+      "tags": ["markt", "albert_cuyp", "live_hint"]
+    },
+    {
+      "q": "Was umfasst das Joods Cultureel Kwartier?",
+      "a": "Zum eng beieinanderliegenden Verbund gehören Joods Museum mit Junior-Angebot, Portugiesische Synagoge, Nationaal Holocaustmuseum und Hollandsche Schouwburg.",
+      "tags": ["juedische_geschichte", "museum", "orientierung"]
+    },
+    {
+      "q": "Ist NDSM ein erhaltenes Schiffbaumuseum?",
+      "a": "Nein. Es ist ein gemischt genutztes Stadt- und Kulturareal mit erhaltenen Werfthallen, Kränen und Hellingen, Ateliers, Veranstaltungen, Unternehmen und neuer Bebauung.",
+      "tags": ["ndsm", "industriekultur"]
+    },
+    {
+      "q": "Was verbindet Westerpark und Westergas?",
+      "a": "Westerpark ist der öffentliche Grünraum; Westergas bezeichnet das umgenutzte ehemalige Gaswerksensemble. Beide Bereiche gehen räumlich ineinander über, haben aber unterschiedliche Ursprünge.",
+      "tags": ["westerpark", "industriekultur", "orientierung"]
+    },
+    {
+      "q": "Wo steht das nationale Denkmal zur Sklavereigeschichte?",
+      "a": "Im südwestlichen Teil des Oosterparks. Das Werk von Erwin de Vries wurde 2002 enthüllt; aktuelle Gedenkveranstaltungen rund um den 1. Juli müssen live geprüft werden.",
+      "tags": ["oosterpark", "sklaverei", "denkmal"]
+    },
+    {
+      "q": "Warum stehen viele Amsterdamer Großbauten auf Holzpfählen?",
+      "a": "Weiche Torf- und Tonschichten tragen schwere Bauten schlecht. Lange Pfähle leiteten Lasten in tragfähigere Sandschichten; Concertgebouw und ARTIS-Aquarium dokumentieren diese Bauweise.",
+      "tags": ["baugrund", "wasserstadt", "technik"]
+    },
+    {
+      "q": "Sind Museumsnamen im Pack immer die aktuellen Namen?",
+      "a": "Nicht zwingend: Das Joods Historisch Museum heißt heute Joods Museum, das Tropenmuseum seit 2023 Wereldmuseum Amsterdam und Het Muziektheater tritt als Nationale Opera & Ballet auf.",
+      "tags": ["namen", "orientierung", "museum"]
+    }
+  ],
+  "city_facts_non_place": [
+    "Der Amsterdamer Grachtengürtel des 17. Jahrhunderts innerhalb der Singelgracht wurde im August 2010 UNESCO-Welterbe. UNESCO würdigt ihn als großmaßstäbliches, zusammenhängendes Werk aus Städtebau, Wasserbau und bürgerlicher Architektur.",
+    "Die konzentrischen Grachten schufen auf feuchtem Torfboden neues Bauland. Aushub aus den Kanälen half beim Aufhöhen der Bauflächen; Grachten, Schleusen und Entwässerung verbanden Landgewinnung, Wasserstandsregelung, Verkehr und Hafenwirtschaft.",
+    "Das Welterbe-Management beschreibt das historische Kanalsystem mit ungefähr 14 Kilometern Länge und rund 80 Brücken innerhalb des Schutzgebiets. Stadtweite Zahlen zu Kanälen, Brücken oder Fahrrädern hängen dagegen von Definition und Erhebungsjahr ab und gehören als LIVE-Recherche behandelt.",
+    "Amsterdam liegt in einer künstlich entwässerten Delta- und Polderlandschaft. Deiche schützen nicht allein gegen offenes Meer, sondern begrenzen auch Flüsse, Seen und Polder; Pumpwerke und Schleusen halten unterschiedliche Wasserstände auseinander.",
+    "Fahrräder sind ein zentraler Teil des Amsterdamer Alltagsverkehrs. Konkrete Bestandszahlen, Modalanteile, Abstellregeln und Baustellen ändern sich; sie müssen über die Stadt Amsterdam live geprüft werden statt als dauerhafte Zahl im Pack zu stehen.",
+    "Die VOC wurde am 20. März 1602 durch die Generalstaaten aus konkurrierenden Vorkompanien gebildet und erhielt ein Handelsmonopol für große Teile des Asienhandels. Sie bestand aus sechs Kammern; Amsterdam stellte den größten Anteil in der Leitung.",
+    "Die Amsterdamer VOC-Kammer saß im Oost-Indisch Huis an der Kloveniersburgwal. Der wirtschaftliche Aufstieg war mit bewaffneter Expansion, Kolonialherrschaft, Zwang, Versklavung und extremer Gewalt verbunden; die VOC darf nicht nur als Erfolgsgeschichte von Handel und Schifffahrt erzählt werden.",
+    "Amsterdams Wasserwege waren lange Verkehrs- und Güterachsen. Mit Eisenbahn, Straßenbahn, Fahrrad und motorisiertem Verkehr änderte sich diese Rolle, doch die Grachten blieben Teil der Wasserwirtschaft und des historischen Stadtgrundrisses."
+  ]
+}

@@ -1,0 +1,960 @@
+{
+  "city_id": "london",
+  "apply": true,
+  "storyOnly": true,
+  "maxDelta": 80,
+  "country": "Germany",
+  "summary": {
+    "ok": 23,
+    "check": 6,
+    "bad": 9,
+    "errors": 0,
+    "applied": 8,
+    "skipped_directory": 450,
+    "skipped_cached_google": 32
+  },
+  "rows": [
+    {
+      "id": "london_st_pancras_international",
+      "name": "St Pancras International",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.53206665102043,
+        "lng": -0.12660402857142863
+      }
+    },
+    {
+      "id": "london_covent_garden",
+      "name": "Covent Garden",
+      "before": {
+        "lat": 51.51145485882354,
+        "lng": -0.12221602941176472
+      },
+      "google": {
+        "lat": 51.512045,
+        "lng": -0.12282539999999999,
+        "place_id": "ChIJQR9pg8sEdkgRKeWNNYlDdPU",
+        "address": "41 The Piazza, London WC2E 8RF, UK"
+      },
+      "delta_m": 78,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "london_leicester_square",
+      "name": "Leicester Square",
+      "before": {
+        "lat": 51.51054504,
+        "lng": -0.12894269
+      },
+      "google": {
+        "lat": 51.510359,
+        "lng": -0.1300625,
+        "place_id": "ChIJVX1-GtIEdkgR1n_gGjHQZpI",
+        "address": "Leicester Square, London WC2H 7LU, UK"
+      },
+      "delta_m": 80,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "london_piccadilly_circus",
+      "name": "Piccadilly Circus",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.50872317500001,
+        "lng": -0.1343681666666667
+      }
+    },
+    {
+      "id": "london_national_gallery",
+      "name": "National Gallery",
+      "before": {
+        "lat": 51.50932814749999,
+        "lng": -0.12805881749999998
+      },
+      "google": {
+        "lat": 51.508928999999995,
+        "lng": -0.128299,
+        "place_id": "ChIJeclqF84EdkgRtKAjTmWFr0I",
+        "address": "Trafalgar Square, London WC2N 5DN, UK"
+      },
+      "delta_m": 47,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "london_natural_history_museum",
+      "name": "Natural History Museum",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.49729443272727,
+        "lng": -0.17597500181818185
+      }
+    },
+    {
+      "id": "london_victoria_and_albert_museum",
+      "name": "Victoria and Albert Museum",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.496984447826094,
+        "lng": -0.17252649275362317
+      }
+    },
+    {
+      "id": "london_british_museum",
+      "name": "British Museum",
+      "before": {
+        "lat": 51.51802120999999,
+        "lng": -0.12736193
+      },
+      "google": {
+        "lat": 51.5194133,
+        "lng": -0.1269566,
+        "place_id": "ChIJB9OTMDIbdkgRp0JWbQGZsS8",
+        "address": "Great Russell St, London WC1B 3DG, UK"
+      },
+      "delta_m": 157,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "london_imperial_war_museum",
+      "name": "Imperial War Museum",
+      "before": {
+        "lat": 51.49582920263159,
+        "lng": -0.10864215263157892
+      },
+      "google": {
+        "lat": 51.4958366,
+        "lng": -0.10865839999999999,
+        "place_id": "ChIJ0-48HywBdkgRh7MH0Igd1f4",
+        "address": "Lambeth Rd, London SE1 6HZ, UK"
+      },
+      "delta_m": 1,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "london_british_library",
+      "name": "British Library",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.53021851276596,
+        "lng": -0.127626314893617
+      }
+    },
+    {
+      "id": "london_horse_guards",
+      "name": "Horse Guards Parade",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.50476419,
+        "lng": -0.1270583042857143
+      }
+    },
+    {
+      "id": "london_somerset_house",
+      "name": "Somerset House",
+      "before": {
+        "lat": 51.510850371969696,
+        "lng": -0.11757281439393934
+      },
+      "google": {
+        "lat": 51.511058999999996,
+        "lng": -0.11714799999999997,
+        "place_id": "ChIJcWfE87UEdkgRoYClOMTsOQQ",
+        "address": "Strand, London WC2R 1LA, UK"
+      },
+      "delta_m": 37,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "london_westminster_cathedral",
+      "name": "Westminster Cathedral",
+      "before": {
+        "lat": 51.49569799756097,
+        "lng": -0.1392755853658537
+      },
+      "google": {
+        "lat": 51.495808999999994,
+        "lng": -0.13943999999999998,
+        "place_id": "ChIJQc8Gx98EdkgR5QHuYQVkxwI",
+        "address": "Victoria St, London SW1P 1LT, UK"
+      },
+      "delta_m": 17,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "london_temple_church",
+      "name": "Temple Church",
+      "before": {
+        "lat": 51.51324834999999,
+        "lng": -0.110326325
+      },
+      "google": {
+        "lat": 51.513263699999996,
+        "lng": -0.1102647,
+        "place_id": "ChIJRfyrbbMEdkgR79OO2x9D8is",
+        "address": "Temple, Temple, London EC4Y 7BB, UK"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "london_westminster_abbey",
+      "name": "Westminster Abbey",
+      "before": {
+        "lat": 51.499392140000005,
+        "lng": -0.12742965897435893
+      },
+      "google": {
+        "lat": 51.4993695,
+        "lng": -0.1272993,
+        "place_id": "ChIJLzVDusQEdkgRelObBaL_jto",
+        "address": "Dean's Yard, London SW1P 3PA, UK"
+      },
+      "delta_m": 9,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "london_sky_garden",
+      "name": "Sky Garden",
+      "before": {
+        "lat": 51.511265367741935,
+        "lng": -0.08352804193548385
+      },
+      "google": {
+        "lat": 51.5112422,
+        "lng": -0.08354929999999999,
+        "place_id": "ChIJgaI8bFIDdkgRhJJqLMxsFdU",
+        "address": "1, Sky Garden Walk, London EC3M 8AF, UK"
+      },
+      "delta_m": 3,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "london_hampstead_heath",
+      "name": "Hampstead Heath",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.56439469732941,
+        "lng": -0.16525361572700306
+      }
+    },
+    {
+      "id": "london_primrose_hill",
+      "name": "Primrose Hill",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.53885484444447,
+        "lng": -0.16114128395061733
+      }
+    },
+    {
+      "id": "london_greenwich_park",
+      "name": "Greenwich Park",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.476843522222225,
+        "lng": -0.0005381407407407407
+      }
+    },
+    {
+      "id": "london_hyde_park",
+      "name": "Hyde Park",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.50602686181817,
+        "lng": -0.16464560727272715
+      }
+    },
+    {
+      "id": "london_tower_of_london",
+      "name": "Tower of London",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.5086579111111,
+        "lng": -0.0750160111111111
+      }
+    },
+    {
+      "id": "london_palace_of_westminster",
+      "name": "Palace of Westminster",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.49934424651156,
+        "lng": -0.12455717004103958
+      }
+    },
+    {
+      "id": "london_buckingham_palace",
+      "name": "Buckingham Palace",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.50087723983743,
+        "lng": -0.14250130487804874
+      }
+    },
+    {
+      "id": "london_big_ben",
+      "name": "Big Ben / Elizabeth Tower",
+      "before": {
+        "lat": 51.500700035,
+        "lng": -0.12457658499999998
+      },
+      "google": {
+        "lat": 51.500729199999995,
+        "lng": -0.12462540000000001,
+        "place_id": "ChIJ2dGMjMMEdkgRqVqkuXQkj7c",
+        "address": "London SW1A 0AA, UK"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "london_trafalgar_square",
+      "name": "Trafalgar Square",
+      "before": {
+        "lat": 51.5084356361111,
+        "lng": -0.12832726111111112
+      },
+      "google": {
+        "lat": 51.508039,
+        "lng": -0.128069,
+        "place_id": "ChIJH-tBOc4EdkgRJ8aJ8P1CUxo",
+        "address": "Trafalgar Sq, London WC2N 5DS, UK"
+      },
+      "delta_m": 48,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "london_kensington_palace",
+      "name": "Kensington Palace",
+      "before": {
+        "lat": 51.50515256341463,
+        "lng": -0.18809540487804874
+      },
+      "google": {
+        "lat": 51.504975699999996,
+        "lng": -0.187681,
+        "place_id": "ChIJ7w-V58oNdkgRhz8svCpc5ok",
+        "address": "Kensington Gardens, London W8 4PX, UK"
+      },
+      "delta_m": 35,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "london_wallace_collection",
+      "name": "Wallace Collection",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.5173834,
+        "lng": -0.15300887272727273
+      }
+    },
+    {
+      "id": "london_southwark_cathedral",
+      "name": "Southwark Cathedral",
+      "before": {
+        "lat": 51.50612597384616,
+        "lng": -0.08964002153846153
+      },
+      "google": {
+        "lat": 51.5061009,
+        "lng": -0.08959579999999999,
+        "place_id": "ChIJ1aSDEVcDdkgRcnd_8l9Qbh4",
+        "address": "London Brg, London SE1 9DA, UK"
+      },
+      "delta_m": 4,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "london_st_katharine_docks",
+      "name": "St Katharine Docks",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.50638858999999,
+        "lng": -0.07184135999999999
+      }
+    },
+    {
+      "id": "london_borough_market",
+      "name": "Borough Market",
+      "before": {
+        "lat": 51.50563233684212,
+        "lng": -0.09050297894736845
+      },
+      "google": {
+        "lat": 51.505582600000004,
+        "lng": -0.09048080000000001,
+        "place_id": "ChIJD2bPdVcDdkgRuUSgnOXnKDE",
+        "address": "London SE1 9AH, UK"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "london_portobello_road_market",
+      "name": "Portobello Road Market",
+      "before": {
+        "lat": 51.51698904,
+        "lng": -0.20569462
+      },
+      "google": {
+        "lat": 51.5170002,
+        "lng": -0.205847,
+        "place_id": "ChIJG1YB2m4RdkgRsetv9D40NGY",
+        "address": "London W11 1LJ, UK"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "london_leadenhall_market",
+      "name": "Leadenhall Market",
+      "before": {
+        "lat": 51.512756434693884,
+        "lng": -0.08358199183673468
+      },
+      "google": {
+        "lat": 51.512766,
+        "lng": -0.0835289,
+        "place_id": "ChIJURt2jFIDdkgRsxERfqYhtSo",
+        "address": "Gracechurch St, London EC3V 1LT, UK"
+      },
+      "delta_m": 4,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "london_spitalfields_market",
+      "name": "Spitalfields Market",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.519581111666675,
+        "lng": -0.07635934333333336
+      }
+    },
+    {
+      "id": "london_tower_bridge",
+      "name": "Tower Bridge",
+      "before": {
+        "lat": 51.505584356,
+        "lng": -0.07528638799999998
+      },
+      "google": {
+        "lat": 51.5054564,
+        "lng": -0.07535649999999999,
+        "place_id": "ChIJSdtli0MDdkgRLW9aCBpCeJ4",
+        "address": "Tower Bridge Rd, London SE1 2UP, UK"
+      },
+      "delta_m": 15,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "london_tate_modern",
+      "name": "Tate Modern",
+      "before": {
+        "lat": 51.50755059411764,
+        "lng": -0.09970635
+      },
+      "google": {
+        "lat": 51.507595300000006,
+        "lng": -0.0993564,
+        "place_id": "ChIJlRl2MakEdkgR55tr4CNv_B8",
+        "address": "Bankside, London SE1 9TG, UK"
+      },
+      "delta_m": 25,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "london_camden_market",
+      "name": "Camden Market",
+      "before": {
+        "lat": 51.54135574444444,
+        "lng": -0.14648042222222224
+      },
+      "google": {
+        "lat": 51.5414026,
+        "lng": -0.14650839999999998,
+        "place_id": "ChIJSfFEEuQadkgRCO-FF_-eZUc",
+        "address": "54-56 Camden Lock Pl, London NW1 8AF, UK"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "london_downing_street",
+      "name": "Downing Street",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.50337723,
+        "lng": -0.12783505999999997
+      }
+    },
+    {
+      "id": "london_cutty_sark",
+      "name": "Cutty Sark",
+      "before": {
+        "lat": 51.48284822222222,
+        "lng": -0.009570694444444444
+      },
+      "google": {
+        "lat": 51.4828646,
+        "lng": -0.0095917,
+        "place_id": "ChIJAVlhMIUCdkgRCJEgHVbITq4",
+        "address": "King William Walk, London SE10 9HT, UK"
+      },
+      "delta_m": 2,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "london_royal_observatory_greenwich",
+      "name": "Royal Observatory Greenwich",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.476843522222225,
+        "lng": -0.0005381407407407407
+      }
+    },
+    {
+      "id": "london_national_maritime_museum",
+      "name": "National Maritime Museum",
+      "before": {
+        "lat": 51.48083205254236,
+        "lng": -0.005288798305084745
+      },
+      "google": {
+        "lat": 51.4810058,
+        "lng": -0.005226199999999999,
+        "place_id": "ChIJs_wmr0cWa0gRHr60qjwn1Mo",
+        "address": "Romney Rd, London SE10 9NF, UK"
+      },
+      "delta_m": 20,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "london_guildhall",
+      "name": "Guildhall",
+      "before": {
+        "lat": 51.51584575454546,
+        "lng": -0.09196110000000002
+      },
+      "google": {
+        "lat": 51.5159202,
+        "lng": -0.09198959999999999,
+        "place_id": "ChIJH08KIlUbdkgRsAqh3GUSyT4",
+        "address": "71 Basinghall St, London EC2V 7HH, UK"
+      },
+      "delta_m": 9,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "london_hampton_court_palace",
+      "name": "Hampton Court Palace",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.403591899999995,
+        "lng": -0.33787863333333334
+      }
+    },
+    {
+      "id": "london_kew_gardens",
+      "name": "Kew Gardens",
+      "before": {
+        "lat": 51.483298649999995,
+        "lng": -0.2931198375
+      },
+      "google": {
+        "lat": 51.4787438,
+        "lng": -0.295573,
+        "place_id": "ChIJQzRbYMUNdkgRfvuRYk-Rb9E",
+        "address": "Richmond, UK"
+      },
+      "delta_m": 534,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "london_abbey_road_crossing",
+      "name": "Abbey Road Crossing",
+      "before": {
+        "lat": 51.53301117647058,
+        "lng": -0.17786421764705881
+      },
+      "google": {
+        "lat": 51.5320512,
+        "lng": -0.1773325,
+        "place_id": "ChIJ1_kq6mAbdkgRwTPygwvBmdI",
+        "address": "Abbey Rd., London NW8 9DD, UK"
+      },
+      "delta_m": 113,
+      "status": "BAD",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "london_royal_albert_hall",
+      "name": "Royal Albert Hall",
+      "before": {
+        "lat": 51.501014630851074,
+        "lng": -0.17740394787234048
+      },
+      "google": {
+        "lat": 51.5009088,
+        "lng": -0.177366,
+        "place_id": "ChIJ0XqGIVsFdkgR2S_aNe6c_l4",
+        "address": "Kensington Gore, South Kensington, London SW7 2AP, UK"
+      },
+      "delta_m": 12,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "london_harrods",
+      "name": "Harrods",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.49906594333334,
+        "lng": -0.1627236133333333
+      }
+    },
+    {
+      "id": "london_wembley_stadium",
+      "name": "Wembley Stadium",
+      "before": {
+        "lat": 51.55602476,
+        "lng": -0.27973108
+      },
+      "google": {
+        "lat": 51.556024699999995,
+        "lng": -0.27961769999999997,
+        "place_id": "ChIJbYd61YERdkgRl-DoXRifT6Y",
+        "address": "Wembley HA9 0WS, UK"
+      },
+      "delta_m": 8,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "london_southbank_centre",
+      "name": "Southbank Centre",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.50581000666667,
+        "lng": -0.11703593333333331
+      }
+    },
+    {
+      "id": "london_tate_britain",
+      "name": "Tate Britain",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.491047724137935,
+        "lng": -0.1273452068965517
+      }
+    },
+    {
+      "id": "london_hms_belfast",
+      "name": "HMS Belfast",
+      "before": {
+        "lat": 51.506534857575744,
+        "lng": -0.0810687242424242
+      },
+      "google": {
+        "lat": 51.506579,
+        "lng": -0.081389,
+        "place_id": "ChIJ53DRz08DdkgRrg8CSNPPXws",
+        "address": "The Queen's Walk, Tooley St, London SE1 2JH, UK"
+      },
+      "delta_m": 23,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "london_st_pauls_cathedral",
+      "name": "St Paul's Cathedral",
+      "before": {
+        "lat": 51.51378115655739,
+        "lng": -0.09840282786885252
+      },
+      "google": {
+        "lat": 51.5138453,
+        "lng": -0.0983506,
+        "place_id": "ChIJh7wHoqwEdkgR3l-vqQE1HTo",
+        "address": "St. Paul's Churchyard, London EC4M 8AD, UK"
+      },
+      "delta_m": 8,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "london_london_eye",
+      "name": "London Eye",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.50331438709678,
+        "lng": -0.11964279032258061
+      }
+    },
+    {
+      "id": "london_shakespeares_globe",
+      "name": "Shakespeare's Globe",
+      "before": {
+        "lat": 51.50812781212119,
+        "lng": -0.09708270606060607
+      },
+      "google": {
+        "lat": 51.508075999999996,
+        "lng": -0.09719399999999999,
+        "place_id": "ChIJIRauBakEdkgRjoeyuI53AOc",
+        "address": "21 New Globe Walk, London SE1 9DT, UK"
+      },
+      "delta_m": 10,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "london_science_museum",
+      "name": "Science Museum",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.49729443272727,
+        "lng": -0.17597500181818185
+      }
+    },
+    {
+      "id": "london_churchill_war_rooms",
+      "name": "Churchill War Rooms",
+      "before": {
+        "lat": 51.50221151666667,
+        "lng": -0.12924626666666666
+      },
+      "google": {
+        "lat": 51.5021585,
+        "lng": -0.1293572,
+        "place_id": "ChIJq4lX1doEdkgR5JXPstgQjc0",
+        "address": "King Charles St, London SW1A 2AQ, UK"
+      },
+      "delta_m": 10,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "london_queens_house",
+      "name": "Queen's House",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.48125720833333,
+        "lng": -0.003829536111111111
+      }
+    },
+    {
+      "id": "london_millennium_bridge",
+      "name": "Millennium Bridge",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.50899025294119,
+        "lng": -0.09856633529411765
+      }
+    },
+    {
+      "id": "london_the_shard",
+      "name": "The Shard",
+      "before": {
+        "lat": 51.50437932380952,
+        "lng": -0.0863741476190476
+      },
+      "google": {
+        "lat": 51.5045,
+        "lng": -0.0865,
+        "place_id": "ChIJ03GSCloDdkgRe_s-p2vyvQA",
+        "address": "32 London Bridge St, London SE1 9SG, UK"
+      },
+      "delta_m": 16,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "london_the_monument",
+      "name": "The Monument",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.51013773999999,
+        "lng": -0.08596468
+      }
+    },
+    {
+      "id": "london_brick_lane",
+      "name": "Brick Lane",
+      "before": {
+        "lat": 51.5219333,
+        "lng": -0.07187506000000002
+      },
+      "google": {
+        "lat": 51.165691,
+        "lng": 10.451526,
+        "place_id": "ChIJa76xwh5ymkcRW-WRjmtd6HU",
+        "address": "Deutschland"
+      },
+      "delta_m": 731368,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "london_regents_park",
+      "name": "Regent's Park",
+      "before": {
+        "lat": 51.53006404390244,
+        "lng": -0.1586955375609756
+      },
+      "google": {
+        "lat": 51.533313,
+        "lng": -0.1557646,
+        "place_id": "ChIJB76zsMMadkgRvhhquw8-mAg",
+        "address": "London, UK"
+      },
+      "delta_m": 414,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "london_zsl_london_zoo",
+      "name": "ZSL London Zoo",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.536127141935495,
+        "lng": -0.15600944516129028
+      }
+    },
+    {
+      "id": "london_madame_tussauds",
+      "name": "Madame Tussauds",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.52319766999999,
+        "lng": -0.153967965
+      }
+    },
+    {
+      "id": "london_notting_hill",
+      "name": "Notting Hill",
+      "before": {
+        "lat": 51.51698904,
+        "lng": -0.20569462
+      },
+      "google": {
+        "lat": 51.516012499999995,
+        "lng": -0.2090148,
+        "place_id": "ChIJoaPN0OIPdkgRSuo08uDmIJA",
+        "address": "Notting Hill, London, UK"
+      },
+      "delta_m": 254,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "london_soho",
+      "name": "Soho",
+      "before": {
+        "lat": 51.51382897777778,
+        "lng": -0.14000384444444444
+      },
+      "google": {
+        "lat": 51.510868200000004,
+        "lng": -0.1336596,
+        "place_id": "ChIJu4pi3MMFdkgRoVfNtgknHMM",
+        "address": "20-24 Shaftesbury Ave, London W1D 7EU, UK"
+      },
+      "delta_m": 549,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "london_st_james_park",
+      "name": "St James's Park",
+      "before": {
+        "lat": 51.502718732038836,
+        "lng": -0.13550823203883497
+      },
+      "google": {
+        "lat": 51.502967,
+        "lng": -0.1339534,
+        "place_id": "ChIJG-CxwNoEdkgRXx26gHZwVf8",
+        "address": "London SW1A 2BJ, UK"
+      },
+      "delta_m": 111,
+      "status": "BAD",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "london_kings_cross_station",
+      "name": "King's Cross Station",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.53180526756757,
+        "lng": -0.12404331756756752
+      }
+    },
+    {
+      "id": "london_platform_nine_three_quarters",
+      "name": "Platform 9¾",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.53180526756757,
+        "lng": -0.12404331756756752
+      }
+    },
+    {
+      "id": "london_canary_wharf",
+      "name": "Canary Wharf",
+      "before": {
+        "lat": 51.504937911111114,
+        "lng": -0.01951174444444445
+      },
+      "google": {
+        "lat": 51.5073055,
+        "lng": -0.0231969,
+        "place_id": "ChIJb-xjx_IDdkgRKm7A-7jYcZA",
+        "address": "West India Quay, 12 Hertsmere Rd, London E14 4AE, UK"
+      },
+      "delta_m": 367,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "london_barbican_centre",
+      "name": "Barbican Centre",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.52008941612904,
+        "lng": -0.09375716451612906
+      }
+    }
+  ]
+}

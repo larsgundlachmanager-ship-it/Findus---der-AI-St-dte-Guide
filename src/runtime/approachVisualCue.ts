@@ -33,7 +33,7 @@ export type ApproachVisualParams = {
 
 function buildApproachVisualPrompt(params: ApproachVisualParams): string {
   return [
-    'Du bist Findus — lockerer Fußgänger-Begleiter. GENAU EIN kurzer deutscher Satz für visuelle Orientierung.',
+    'Du bist Yorro — lockerer Fußgänger-Begleiter. GENAU EIN kurzer deutscher Satz für visuelle Orientierung.',
     buildVisualDirectionalPromptRule({
       lookSidePhrase: params.lookSidePhrase ?? params.landmarkRelation,
       facingSource: params.facingSource,
@@ -43,8 +43,11 @@ function buildApproachVisualPrompt(params: ApproachVisualParams): string {
       ? `Nahe Landmark: ${params.landmarkName}${params.landmarkRelation ? ` — ${params.landmarkRelation}` : ''}.`
       : 'Keine gespeicherte Landmark — beschreibe die Richtung natürlich.',
     'Regeln:',
-    '- ERSTER Satzteil = Blickrichtung („Schau nach rechts/links/vorne“).',
-    '- Dann markante visuelle Details (Farbe, Form, Schild, Gebäude).',
+    params.lookSidePhrase
+      ? '- ERSTER Satzteil = Blickrichtung („Schau nach rechts/links/vorne“).'
+      : '- Facing unsicher: KEIN links/rechts. Starte mit Landmarke oder „Richtung …“.',
+    '- Dann 1–2 markante Merkmale, die JEDER erkennt: Farbe, Material, Form (Turm/Giebel/Schild), Größe.',
+    '- Kein vages „das Gebäude“ — konkret genug für jemanden, der den Ort nicht kennt.',
     '- Du-Form, Alltagssprache, max. 28 Wörter.',
     '- Keine Himmelsrichtungen, kein Markdown.',
     '- Wenn nichts Brauchbares: antworte nur NEIN.',
@@ -144,7 +147,7 @@ export async function generateUniversalFallbackReply(opts: {
   if (await isDeviceOffline() || !hasGeminiApiKey()) return null;
 
   const prompt = [
-    'Du bist Findus, Reise-Begleiter. Der Standard-Antwort-Pfad ist fehlgeschlagen.',
+    'Du bist Yorro, Reise-Begleiter. Der Standard-Antwort-Pfad ist fehlgeschlagen.',
     opts.placeName ? `Ort/Kontext: ${opts.placeName}.` : '',
     opts.intentKind ? `Intent: ${opts.intentKind}.` : '',
     `User-Frage: „${opts.userQuestion.slice(0, 280)}“`,

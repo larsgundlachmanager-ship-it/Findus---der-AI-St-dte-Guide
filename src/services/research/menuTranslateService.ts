@@ -9,7 +9,6 @@ import { useGpsStore } from '../../store/useGpsStore';
 import type { QuickAction } from '../../types/concierge';
 import { generateGeminiText, hasGeminiApiKey } from '../geminiService';
 import { fetchPublicDocument, extractLinksFromHtml } from './webFetch';
-import { isDeviceOffline } from '../navigation/networkState';
 import {
   getShortTerm,
   setLastPlaceName,
@@ -188,7 +187,11 @@ async function harvestMenuCandidateUrls(
   };
   push(baseUrl);
   for (const l of links ?? []) {
-    if (/menu|speise|karte|pdf|menucat|essen|food/i.test(`${l.href} ${l.label}`)) {
+    if (
+      /menu|speise|karte|pdf|menucat|essen|food|ugd|_files\/ugd/i.test(
+        `${l.href} ${l.label}`,
+      )
+    ) {
       push(l.href);
     }
   }
@@ -429,7 +432,7 @@ async function buildDishAdviceSpeech(opts: {
   let raw = '';
   try {
     raw = await generateGeminiText(
-      `Du bist Findus. Der User hat Restaurant „${opts.placeName ?? 'dieses Restaurant'}“ schon gewählt und will GERICHTE von der Speisekarte — keine anderen Restaurants, keine Stadtplan-Orte, keine Atmosphäre-Floskeln.\n` +
+      `Du bist Yorro. Der User hat Restaurant „${opts.placeName ?? 'dieses Restaurant'}“ schon gewählt und will GERICHTE von der Speisekarte — keine anderen Restaurants, keine Stadtplan-Orte, keine Atmosphäre-Floskeln.\n` +
         `Präferenzen: ${prefsLine}\n\n` +
         `SPEISEKARTEN-TEXT (nur daraus empfehlen; Nummern/Namen exakt übernehmen wenn vorhanden):\n${excerpt}\n\n` +
         `Antwort auf Deutsch, gesprochen, max ~90 Wörter:\n` +
@@ -476,14 +479,6 @@ export async function adviseMenuDishes(
   text: string,
 ): Promise<MenuAdvisorResult> {
   const prefs = extractMenuPrefs(text);
-  const offline = await isDeviceOffline();
-  if (offline) {
-    const speech =
-      'Offline — Speisekarte kann ich gerade nicht laden. Wenn du die Website-URL hast, schick sie mir später.';
-    presentMenuCard({ speech, bullets: ['Offline'], actions: [] });
-    return { handled: true, reply: speech, bullets: ['Offline'], actions: [] };
-  }
-
   const resolved = await resolveMenuTarget(text);
   const placeName = resolved.placeName;
   if (placeName) setLastPlaceName(placeName);

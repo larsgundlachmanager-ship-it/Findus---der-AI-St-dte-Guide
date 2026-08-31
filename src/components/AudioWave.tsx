@@ -1,15 +1,13 @@
 import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 import { Animated, Easing, Pressable, StyleSheet, Text, View } from 'react-native';
-import Reanimated, {
-  useAnimatedStyle,
-  useSharedValue,
-  withTiming,
-} from 'react-native-reanimated';
-import { colors, spacing } from '../constants/theme';
+import { colors, presenceIdleColor, spacing } from '../constants/theme';
 import { UI_LAYER } from '../constants/uiLayers';
-import { useFinnusStore } from '../store/useFinnusStore';
+import { CompassArrow } from './CompassArrow';
+import {
+  selectNavRouteLoading,
+  useFinnusStore,
+} from '../store/useFinnusStore';
 import type { FindusPresence } from '../store/useFinnusStore';
-import { fadeAndStopNavigation } from '../services/navigation/navigationService';
 import {
   formatNavHudTitle,
   formatRemainingStations,
@@ -54,58 +52,9 @@ function formatNavProgress(
   return formatDistance(distanceM);
 }
 
-function unwrapToward(current: number, target: number): number {
-  const delta = ((((target - current) % 360) + 540) % 360) - 180;
-  return current + delta;
-}
-
 function presenceAccent(presence: FindusPresence): string {
-  if (presence === 'ok') return colors.online;
-  if (presence === 'degraded') return colors.offline;
-  return colors.offlineGray;
+  return presenceIdleColor(presence);
 }
-
-const CompassArrow = React.memo(function CompassArrow() {
-  const navBearingRel = useFinnusStore((s) => s.navBearingRel);
-  const attentionCue = useFinnusStore((s) => s.attentionCue);
-
-  const rotation = useSharedValue(0);
-  const rotationAbsRef = useRef(0);
-
-  useEffect(() => {
-    let deg = navBearingRel ?? 0;
-    if (attentionCue === 'left') deg = -90;
-    else if (attentionCue === 'right') deg = 90;
-    else if (attentionCue === 'behind') deg = 180;
-    const unwrapped = unwrapToward(rotationAbsRef.current, deg);
-    rotationAbsRef.current = unwrapped;
-    // Short blend — keep under ~50ms so EMA + filter don't stack into sticky lag.
-    rotation.value = withTiming(unwrapped, { duration: 48 });
-  }, [navBearingRel, attentionCue, rotation]);
-
-  const arrowStyle = useAnimatedStyle(() => ({
-    transform: [{ rotate: `${rotation.value}deg` }],
-  }));
-
-  return (
-    <Pressable
-      onLongPress={() => {
-        void import('../services/onboarding/uiCoachMarks').then((m) =>
-          m.onUserCancelledNavLongPress(),
-        );
-        void fadeAndStopNavigation();
-      }}
-      delayLongPress={3000}
-      style={StyleSheet.absoluteFill}
-    >
-      <Reanimated.View
-        style={[styles.arrowWrap, arrowStyle, StyleSheet.absoluteFill]}
-      >
-        <Text style={styles.arrowGlyph}>↑</Text>
-      </Reanimated.View>
-    </Pressable>
-  );
-});
 
 const NavStatusLine = React.memo(function NavStatusLine() {
   const line = useFinnusStore((s) => {
@@ -137,10 +86,12 @@ const NavStatusLine = React.memo(function NavStatusLine() {
 export const AudioWave = React.memo(function AudioWave({
   mood,
   compact,
+  overlay,
   onAbortBusy,
 }: {
   mood: FindusMood;
   compact?: boolean;
+  overlay?: boolean;
   /** Doppel-Tipp während Denken/Sprechen → Abbruch */
   onAbortBusy?: () => void;
 }) {
@@ -148,6 +99,7 @@ export const AudioWave = React.memo(function AudioWave({
     <LivingPresence
       mood={mood}
       compact={compact}
+      overlay={overlay}
       onAbortBusy={onAbortBusy}
     />
   );
@@ -156,16 +108,18 @@ export const AudioWave = React.memo(function AudioWave({
 function LivingPresence({
   mood,
   compact,
+  overlay,
   onAbortBusy,
 }: {
   mood: FindusMood;
   compact?: boolean;
+  overlay?: boolean;
   onAbortBusy?: () => void;
 }) {
   const navActive = useFinnusStore((s) => s.navActive);
   const navVisible = useFinnusStore((s) => s.navVisible);
   const findusPresence = useFinnusStore((s) => s.findusPresence);
-  const navRouteLoading = useFinnusStore((s) => s.navRouteLoading);
+  const navRouteLoading = useFinnusStore(selectNavRouteLoading);
   const navigating = navActive && navVisible;
 
   const float = useRef(new Animated.Value(0)).current;
@@ -177,7 +131,7 @@ function LivingPresence({
   const ringB = useRef(new Animated.Value(0)).current;
 
   const speaking = mood === 'speaking';
-  const thinking = mood === 'thinking' || navRouteLoading;
+  const thinking = mood === 'thinking';
   const listening = mood === 'listening';
   const standby = !speaking && !thinking && !listening;
   const offlineStill = findusPresence === 'offline' && standby;
@@ -409,7 +363,7 @@ function LivingPresence({
   const mouthOpacity = speaking
     ? talk.interpolate({
         inputRange: [0, 0.2, 1],
-        outputRange: [0.25, 0.55, 0.85],
+        outputRange: [0.45, 0.75, 1],
       })
     : 0;
 
@@ -453,12 +407,12 @@ function LivingPresence({
   });
 
   const statusLine = useMemo(() => {
-    if (navigating && navRouteLoading) return 'Route wird gesucht…';
+    if (navRouteLoading) return 'Route wird gesucht — kurz warten…';
     if (listening) return MOOD_LINE.listening;
-    if (thinking) return MOOD_LINE.thinking;
+    if (thinking) return 'Ich schau kurz nach — einen Moment…';
     if (speaking) return MOOD_LINE.speaking;
     return PRESENCE_LINE[findusPresence];
-  }, [findusPresence, listening, navRouteLoading, navigating, speaking, thinking]);
+  }, [findusPresence, listening, navRouteLoading, speaking, thinking]);
 
   const canTapHealth =
     standby &&
@@ -491,9 +445,13 @@ function LivingPresence({
         canTapHealth || canAbortBusy ? handlePresencePress : undefined
       }
       disabled={!canTapHealth && !canAbortBusy}
-      style={[styles.wrap, compact ? styles.wrapCompact : null]}
+      style={[
+        styles.wrap,
+        compact ? styles.wrapCompact : null,
+        overlay ? styles.wrapOverlay : null,
+      ]}
       accessibilityLabel={
-        navigating ? 'Kompass – Navigation aktiv' : `Findus – ${statusLine}`
+        navigating ? 'Kompass – Navigation aktiv' : `Yorro – ${statusLine}`
       }
       accessibilityHint={
         canAbortBusy
@@ -507,7 +465,13 @@ function LivingPresence({
       <Animated.View
         style={[styles.presenceBlock, { transform: [{ translateY }] }]}
       >
-        <View style={[styles.stage, compact ? styles.stageCompact : null]}>
+        <View
+          style={[
+            styles.stage,
+            compact ? styles.stageCompact : null,
+            overlay ? styles.stageOverlay : null,
+          ]}
+        >
           {speaking ? (
             <>
               <Animated.View
@@ -549,6 +513,7 @@ function LivingPresence({
           <Animated.View
             style={[
               styles.halo,
+              overlay ? styles.haloOverlay : null,
               {
                 backgroundColor: accent,
                 opacity: haloOpacity,
@@ -560,21 +525,25 @@ function LivingPresence({
           <Animated.View
             style={[
               styles.core,
-              navigating && styles.coreCompass,
+              navigating && !speaking && styles.coreCompass,
+              overlay && navigating && !speaking
+                ? styles.coreCompassOverlay
+                : null,
               {
                 backgroundColor: accent,
                 shadowColor: accent,
-                transform: navigating
-                  ? [{ scale: speaking ? coreScale : 1.06 }]
-                  : [
-                      { scale: coreScale },
-                      { scaleX: coreSquashX },
-                      { scaleY: coreSquashY },
-                    ],
+                transform:
+                  navigating && !speaking
+                    ? [{ scale: 1.06 }]
+                    : [
+                        { scale: coreScale },
+                        { scaleX: coreSquashX },
+                        { scaleY: coreSquashY },
+                      ],
               },
             ]}
           >
-            {navigating ? (
+            {navigating && !speaking ? (
               <CompassArrow />
             ) : (
               <>
@@ -595,16 +564,22 @@ function LivingPresence({
           </Animated.View>
         </View>
 
-        <Text style={styles.name}>{navigating ? 'Kompass' : 'Findus'}</Text>
-        <View style={styles.statusSlot}>
-          {navigating && !navRouteLoading && !speaking && !thinking ? (
-            <NavStatusLine />
-          ) : (
-            <Text style={styles.moodLine} numberOfLines={1}>
-              {statusLine}
+        {overlay ? null : (
+          <>
+            <Text style={styles.name}>
+              {navigating && !speaking ? 'Kompass' : 'Yorro'}
             </Text>
-          )}
-        </View>
+            <View style={styles.statusSlot}>
+              {navigating && !navRouteLoading && !speaking && !thinking ? (
+                <NavStatusLine />
+              ) : (
+                <Text style={styles.moodLine} numberOfLines={1}>
+                  {statusLine}
+                </Text>
+              )}
+            </View>
+          </>
+        )}
       </Animated.View>
     </Pressable>
   );
@@ -622,6 +597,11 @@ const styles = StyleSheet.create({
     // Visuell kleiner — Layout-Höhe bleibt flex:1 in der Presence-Pane
     justifyContent: 'center',
   },
+  wrapOverlay: {
+    flex: 0,
+    width: 'auto',
+    height: 'auto',
+  },
   presenceBlock: {
     alignItems: 'center',
   },
@@ -636,11 +616,23 @@ const styles = StyleSheet.create({
     width: 168,
     height: 168,
     marginBottom: spacing.sm,
-  },  halo: {
+  },
+  stageOverlay: {
+    width: 96,
+    height: 96,
+    marginBottom: 0,
+    overflow: 'hidden',
+  },
+  halo: {
     position: 'absolute',
     width: 150,
     height: 150,
     borderRadius: 75,
+  },
+  haloOverlay: {
+    width: 78,
+    height: 78,
+    borderRadius: 39,
   },
   speechRing: {
     position: 'absolute',
@@ -678,15 +670,10 @@ const styles = StyleSheet.create({
     height: 88,
     borderRadius: 44,
   },
-  arrowWrap: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  arrowGlyph: {
-    fontSize: 44,
-    fontWeight: '700',
-    color: colors.bg,
-    marginTop: -4,
+  coreCompassOverlay: {
+    width: 56,
+    height: 56,
+    borderRadius: 28,
   },
   coreHighlight: {
     width: 22,
@@ -696,10 +683,10 @@ const styles = StyleSheet.create({
   },
   mouth: {
     marginTop: 10,
-    width: 18,
-    height: 10,
-    borderRadius: 9,
-    backgroundColor: 'rgba(8, 18, 14, 0.55)',
+    width: 22,
+    height: 12,
+    borderRadius: 10,
+    backgroundColor: 'rgba(8, 18, 14, 0.72)',
   },
   name: {
     color: colors.text,

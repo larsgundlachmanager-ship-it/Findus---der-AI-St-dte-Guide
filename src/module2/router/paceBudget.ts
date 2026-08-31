@@ -9,8 +9,10 @@ export const PACE_TABLE: Record<
   { bridgeMaxWords: number; fastDeadlineMs: number; synthBudgetMs: number }
 > = {
   instant: { bridgeMaxWords: 10, fastDeadlineMs: 1500, synthBudgetMs: 1000 },
-  standard: { bridgeMaxWords: 14, fastDeadlineMs: 2500, synthBudgetMs: 1400 },
-  cover: { bridgeMaxWords: 20, fastDeadlineMs: 4500, synthBudgetMs: 1600 },
+  /** Chat-first: Bridge spätestens ~1,5 s */
+  standard: { bridgeMaxWords: 14, fastDeadlineMs: 1500, synthBudgetMs: 1400 },
+  /** 2–3 Sätze (~14s bei 2.5 wps) — Recherche parallel, Haupt-Speech hängt an. */
+  cover: { bridgeMaxWords: 36, fastDeadlineMs: 8000, synthBudgetMs: 1600 },
 };
 
 /** Default DE TTS estimate; device calibration may override. */
@@ -50,19 +52,19 @@ export function resolvePaceBudget(opts: {
   const base = PACE_TABLE[pace];
   let bridgeMaxWords = base.bridgeMaxWords;
   if (typeof opts.bridgeMaxWords === 'number' && Number.isFinite(opts.bridgeMaxWords)) {
-    bridgeMaxWords = Math.min(22, Math.max(6, Math.round(opts.bridgeMaxWords)));
+    bridgeMaxWords = Math.min(42, Math.max(6, Math.round(opts.bridgeMaxWords)));
   }
   let fastDeadlineMs = base.fastDeadlineMs;
   if (typeof opts.fastDeadlineMs === 'number' && Number.isFinite(opts.fastDeadlineMs)) {
     // Whitelist clamp — never wild 30s in fast
-    const allowed = [1000, 1200, 1500, 2000, 2500, 3500, 4500, 5000];
+    const allowed = [1000, 1200, 1500, 2000, 2500, 3500, 4500, 5000, 6000, 8000];
     const want = Math.round(opts.fastDeadlineMs);
     fastDeadlineMs = allowed.reduce((best, n) =>
       Math.abs(n - want) < Math.abs(best - want) ? n : best,
     );
-    // Pace cover may use higher; instant capped
+    // Pace cover may use higher; instant/standard capped at 1.5s bridge deadline
     if (pace === 'instant') fastDeadlineMs = Math.min(fastDeadlineMs, 1500);
-    if (pace === 'standard') fastDeadlineMs = Math.min(fastDeadlineMs, 2500);
+    if (pace === 'standard') fastDeadlineMs = Math.min(fastDeadlineMs, 1500);
   }
   return {
     pace,
@@ -76,6 +78,7 @@ export function clipBridgeToWordLimit(
   text: string | null | undefined,
   maxWords: number,
 ): string | null {
+  if (!(maxWords > 0)) return null;
   const t = (text || '').replace(/\s+/g, ' ').trim();
   if (!t) return null;
   const words = t.split(/\s+/);

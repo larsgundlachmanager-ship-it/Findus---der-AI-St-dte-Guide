@@ -47,7 +47,7 @@ export function MicConsentBlock({
         </Text>
       ) : (
         <Text style={styles.prose}>
-          Wähle sichtbar, wie du mit Findus sprechen willst — und bestätige
+          Wähle sichtbar, wie du mit Yorro sprechen willst — und bestätige
           danach getrennt den Datenschutz.
         </Text>
       )}

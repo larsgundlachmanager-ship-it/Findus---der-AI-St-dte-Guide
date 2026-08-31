@@ -1,0 +1,6 @@
+08-22 23:48:58.856     0     0 W [    C1] [rt_task_fixup][725]: RT task was runnable for more than 200000 ns on CPU 1, moved it to CPU 4 (kgsl_hwsched-1128)
+08-22 23:48:59.184     0     0 W [    C3] [rt_task_fixup][725]: RT task was runnable for more than 200000 ns on CPU 3, moved it to CPU 2 (binder:2319_1-2457)
+08-22 23:48:59.184     0     0 W [    C2] [rt_task_fixup][725]: RT task was runnable for more than 200000 ns on CPU 2, moved it to CPU 3 (binder:2319_1-2457)
+08-22 23:48:59.652     0     0 W [    C1] [rt_task_fixup][725]: RT task was runnable for more than 200000 ns on CPU 1, moved it to CPU 3 (rcuog/4-50)
+08-22 23:48:59.732     0     0 W [    C0] [rt_task_fixup][725]: RT task was runnable for more than 200000 ns on CPU 0, moved it to CPU 2 (binder:2319_1-2457)
+08-22 23:49:00.387  7437  7437 D FindusCompass: deg=345.70991862998983 acc=-1

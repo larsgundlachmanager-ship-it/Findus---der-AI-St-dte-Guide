@@ -41,7 +41,7 @@ export type SessionPlan = {
   deadlineFired: boolean;
   /**
    * Planung für später: gesamte Tour speichern, noch nicht aktiv steuern.
-   * activateAtMs = wann Findus den Plan wieder aufgreifen soll.
+   * activateAtMs = wann Yorro den Plan wieder aufgreifen soll.
    */
   savedForLater?: boolean;
   activateAtMs?: number | null;

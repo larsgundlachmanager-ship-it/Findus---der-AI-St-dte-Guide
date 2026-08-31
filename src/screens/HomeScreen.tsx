@@ -1,25 +1,36 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import {
-  BackHandler,
   Pressable,
   StyleSheet,
   Text,
   View,
 } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { useSystemSafePad } from '../hooks/useSystemSafePad';
 import { Header, type PassportTab } from '../components/Header';
-import { LiveStage } from '../components/liveStage';
+import {
+  LiveStage,
+  HOME_DOCK_BAR_H,
+  HOME_MIC_DOCK_GAP,
+  HOME_MIC_HINT_RESERVE,
+} from '../components/liveStage';
+import { HomePresenceMap } from '../components/homeMap/HomePresenceMap';
+import { HomeDockBar } from '../components/HomeDockBar';
 import { GetYourGuideWidget } from '../components/GetYourGuideWidget';
-import { CityMapModal } from '../components/CityMapModal';
+import { InAppBrowserSheet } from '../components/InAppBrowserSheet';
 import { MicButton } from '../components/MicButton';
 import { SimulationPicker } from '../components/SimulationPicker';
 import { RuntimeDevBoard } from '../components/RuntimeDevBoard';
-import { QuestionModal } from '../components/QuestionModal';
-import { VisitPassportModal } from '../components/VisitPassportModal';
-import { PlanCalendarModal } from '../components/PlanCalendarModal';
-import { SettingsScreen } from './SettingsScreen';
+import { HomeOverlayHost } from './HomeOverlayHost';
+import {
+  HOME_QUESTION_DEFAULT_SUBTITLE,
+  useHomeOverlayStore,
+} from '../store/useHomeOverlayStore';
 import { colors, spacing } from '../constants/theme';
-import { useFinnusStore } from '../store/useFinnusStore';
+import { UI_LAYER } from '../constants/uiLayers';
+import {
+  selectNavRouteLoading,
+  useFinnusStore,
+} from '../store/useFinnusStore';
 import { usePlanCalendarUiStore } from '../module2/timeline/planCalendarUiStore';
 import {
   startTourWithLocationPermission,
@@ -40,14 +51,16 @@ import {
 import { markFeatureTipCompleted } from '../services/ai/featureTips';
 import { useUserMemoryStore } from '../store/useUserMemoryStore';
 import { derivePhinnosMood } from '../utils/phinnosMood';
+import { inspectConciergeCard } from '../components/liveStage/inspectConciergeCard';
+import { useLivePitchStore } from '../module2/pitch/publishPitchUi';
 
-const TYPING_SUBTITLE = 'Schreib deine Frage an Findus.';
+/** Nur exakte Chrome-Höhe — kein Extra-Abstand; Soft-Fade sitzt in der Karte. */
 
 const FALLBACK_SUBTITLES: Record<VoiceFallbackReason, string> = {
   unavailable:
     'Spracherkennung ist auf diesem Gerät nicht verfügbar – tippe deine Frage. (Google App / Speech Services prüfen, App neu bauen.)',
   permission:
-    'Mikrofon ist aus oder nicht erlaubt – tippe deine Frage, oder aktiviere Spracheingabe unter Einstellungen → Einrichtung → Datenschutz & Mikrofon.',
+    'Mikrofon ist aus oder nicht erlaubt – tippe deine Frage, oder aktiviere „Sprache an“ unter Einstellungen → Allgemeine Einstellungen → Audio & Sparmodus.',
   error: 'Spracherkennung hat gerade nicht geklappt – tippe deine Frage.',
 };
 
@@ -57,37 +70,263 @@ type Props = {
   onResetSetup: () => void;
 };
 
+type HomeLiveLayerProps = {
+  hudHeight: number;
+  onHudHeight: (h: number) => void;
+  mapBottomChrome: number;
+  safePadTop: number;
+  isListening: boolean;
+  isMicLocked: boolean;
+  isFinalizing: boolean;
+  isGenerating: boolean;
+  onAbortBusy: () => void;
+  onFollowUp: (prompt: string) => void;
+  onOpenPlanCalendar: () => void;
+  onOpenPassport: (opts?: { tab?: PassportTab }) => void;
+  onTellMore: (prompt: string) => void;
+  onStartTour: () => void | Promise<void>;
+  tourStarting: boolean;
+  onCloseGyg: () => void;
+  onCloseInAppBrowser: () => void;
+};
+
+type HomeChromeLayerProps = {
+  safePadBottom: number;
+  isListening: boolean;
+  isMicLocked: boolean;
+  isFinalizing: boolean;
+  isGenerating: boolean;
+  partialText: string;
+  onPressIn: () => void;
+  onPressOut: () => void;
+  onSwipeLock: () => void;
+  onSwipeLiveChat: () => void;
+  onAbortBusy: () => void;
+  onOpenPlanCalendar: () => void;
+  onPlaces: () => void;
+  onSettings: () => void;
+};
+
+/** Karte + Live-Stage. Mic/Dock liegen in HomeChromeLayer (eigene Store-Abos). */
+const HomeLiveLayer = React.memo(function HomeLiveLayer({
+  hudHeight,
+  onHudHeight,
+  mapBottomChrome,
+  safePadTop,
+  isListening,
+  isMicLocked,
+  isFinalizing,
+  isGenerating,
+  onAbortBusy,
+  onFollowUp,
+  onOpenPlanCalendar,
+  onOpenPassport,
+  onTellMore,
+  onStartTour,
+  tourStarting,
+  onCloseGyg,
+  onCloseInAppBrowser,
+}: HomeLiveLayerProps) {
+  const isPlayingAudio = useFinnusStore((s) => s.isPlayingAudio);
+  const isAudiblySpeaking = useFinnusStore((s) => s.isAudiblySpeaking);
+  const subtitleText = useFinnusStore((s) => s.subtitleText);
+  const navRouteLoading = useFinnusStore(selectNavRouteLoading);
+  const navActive = useFinnusStore((s) => s.navActive);
+  const activeConciergeCard = useFinnusStore((s) => s.activeConciergeCard);
+  const gygWidget = useFinnusStore((s) => s.gygWidget);
+  const inAppBrowser = useFinnusStore((s) => s.inAppBrowser);
+  const isSimulationMode = useFinnusStore((s) => s.isSimulationMode);
+  const ttsStatusMessage = useFinnusStore((s) => s.ttsStatusMessage);
+  const needsTourStart = useFinnusStore((s) => s.needsTourStart);
+  const hasPitch = useLivePitchStore((s) =>
+    Boolean(s.requestId && (s.options.length > 0 || s.loading)),
+  );
+  const { hasBullets, hasActions } = inspectConciergeCard(activeConciergeCard);
+  const mapChromeDim = hasPitch || hasBullets || hasActions;
+
+  const phinnosMood = derivePhinnosMood({
+    isListening,
+    isFinalizing,
+    isGenerating,
+    isPlayingAudio,
+    isAudiblySpeaking,
+    navRouteLoading,
+    navActive,
+  });
+
+  return (
+    <>
+      <HomePresenceMap
+        hudHeight={hudHeight}
+        bottomChrome={mapBottomChrome}
+        chromeDim={mapChromeDim}
+      />
+
+      <LiveStage
+        mood={phinnosMood}
+        card={activeConciergeCard}
+        subtitleText={subtitleText}
+        isPlayingAudio={isAudiblySpeaking}
+        onFollowUp={onFollowUp}
+        onAbortBusy={onAbortBusy}
+      />
+
+      {ttsStatusMessage ? (
+        <View style={[styles.statusBanner, { top: hudHeight + 4 }]}>
+          <Text style={styles.statusText}>{ttsStatusMessage}</Text>
+        </View>
+      ) : null}
+
+      {needsTourStart && !isSimulationMode ? (
+        <Pressable
+          onPress={() => void onStartTour()}
+          disabled={tourStarting}
+          style={[styles.tourStartCard, { top: hudHeight + 8 }]}
+          accessibilityRole="button"
+          accessibilityLabel="Tour starten"
+        >
+          <Text style={styles.tourStartTitle}>
+            {tourStarting ? 'Berechtigung…' : 'Tour starten'}
+          </Text>
+          <Text style={styles.tourStartBody}>
+            Standort freigeben, damit Yorro an den richtigen Orten automatisch
+            Audio-Hinweise abspielt — auch bei gesperrtem Display.
+          </Text>
+        </Pressable>
+      ) : null}
+
+      <RuntimeDevBoard />
+
+      <GetYourGuideWidget
+        visible={gygWidget != null}
+        options={gygWidget ?? undefined}
+        onClose={onCloseGyg}
+      />
+
+      <InAppBrowserSheet
+        visible={inAppBrowser != null}
+        url={inAppBrowser?.url ?? ''}
+        title={inAppBrowser?.title}
+        onClose={onCloseInAppBrowser}
+      />
+
+      <View
+        style={[styles.hudOverlay, { paddingTop: safePadTop }]}
+        pointerEvents="box-none"
+        onLayout={(e) => {
+          const h = Math.round(e.nativeEvent.layout.height);
+          if (h > 40 && Math.abs(h - hudHeight) >= 2) onHudHeight(h);
+        }}
+      >
+        <Header
+          overlay
+          hideTools
+          fullBleedLive
+          onOpenPlanCalendar={onOpenPlanCalendar}
+          onOpenPassport={onOpenPassport}
+          onTellMore={onTellMore}
+        />
+      </View>
+    </>
+  );
+});
+
+/** Mic + Dock — nur Voice-/Nav-Mood, kein POI/Card-Churn der Karte. */
+const HomeChromeLayer = React.memo(function HomeChromeLayer({
+  safePadBottom,
+  isListening,
+  isMicLocked,
+  isFinalizing,
+  isGenerating,
+  partialText,
+  onPressIn,
+  onPressOut,
+  onSwipeLock,
+  onSwipeLiveChat,
+  onAbortBusy,
+  onOpenPlanCalendar,
+  onPlaces,
+  onSettings,
+}: HomeChromeLayerProps) {
+  const isPlayingAudio = useFinnusStore((s) => s.isPlayingAudio);
+  const isAudiblySpeaking = useFinnusStore((s) => s.isAudiblySpeaking);
+  const navRouteLoading = useFinnusStore(selectNavRouteLoading);
+  const navActive = useFinnusStore((s) => s.navActive);
+  const isSimulationMode = useFinnusStore((s) => s.isSimulationMode);
+  const pois = useFinnusStore((s) => (s.isSimulationMode ? s.pois : EMPTY_POIS));
+
+  const phinnosMood = derivePhinnosMood({
+    isListening,
+    isFinalizing,
+    isGenerating,
+    isPlayingAudio,
+    isAudiblySpeaking,
+    navRouteLoading,
+    navActive,
+  });
+
+  return (
+    <>
+      <View
+        style={[
+          styles.micFloat,
+          {
+            bottom:
+              HOME_DOCK_BAR_H +
+              safePadBottom +
+              HOME_MIC_DOCK_GAP +
+              HOME_MIC_HINT_RESERVE,
+          },
+        ]}
+        pointerEvents="box-none"
+      >
+        <View style={styles.micCenter} pointerEvents="auto">
+          <MicButton
+            onPressIn={onPressIn}
+            onPressOut={onPressOut}
+            onSwipeLock={onSwipeLock}
+            onSwipeLiveChat={onSwipeLiveChat}
+            isListening={isListening}
+            isMicLocked={isMicLocked}
+            isFinalizing={isFinalizing}
+            isGenerating={isGenerating}
+            isSpeaking={isAudiblySpeaking}
+            mood={phinnosMood}
+            onAbortBusy={onAbortBusy}
+            partialText={partialText}
+          />
+        </View>
+        {isSimulationMode ? (
+          <View style={styles.micSideLeft} pointerEvents="box-none">
+            <SimulationPicker pois={pois} visible layout="micFab" />
+          </View>
+        ) : null}
+      </View>
+
+      <View style={styles.dockWrap} pointerEvents="box-none">
+        <HomeDockBar
+          onTimeline={onOpenPlanCalendar}
+          onPlaces={onPlaces}
+          onSettings={onSettings}
+        />
+      </View>
+    </>
+  );
+});
+
+const EMPTY_POIS: never[] = [];
+
 export function HomeScreen({
   profile,
   onProfileChange,
   onResetSetup,
 }: Props) {
-  const [showQuestionModal, setShowQuestionModal] = useState(false);
-  const [modalSubtitle, setModalSubtitle] = useState(TYPING_SUBTITLE);
-  const [showSettings, setShowSettings] = useState(false);
-  const [showPassport, setShowPassport] = useState(false);
-  const [showPlanCalendar, setShowPlanCalendar] = useState(false);
-  const [passportTab, setPassportTab] = useState<PassportTab>('discover');
-  const planOpenRequestAtMs = usePlanCalendarUiStore((s) => s.openRequestAtMs);
-  const planCloseRequestAtMs = usePlanCalendarUiStore((s) => s.closeRequestAtMs);
-
-  const isPlayingAudio = useFinnusStore((s) => s.isPlayingAudio);
+  /** Gemessene Header-Höhe — Fade deckt die Live-Anzeige ab, Karte liegt nicht darunter. */
+  const [hudHeight, setHudHeight] = useState(96);
+  const safePad = useSystemSafePad();
   const isAudiblySpeaking = useFinnusStore((s) => s.isAudiblySpeaking);
-  const subtitleText = useFinnusStore((s) => s.subtitleText);
-  const navRouteLoading = useFinnusStore((s) => s.navRouteLoading);
-  const activeConciergeCard = useFinnusStore((s) => s.activeConciergeCard);
-  const gygWidget = useFinnusStore((s) => s.gygWidget);
-  const cityMap = useFinnusStore((s) => s.cityMap);
-  const isSimulationMode = useFinnusStore((s) => s.isSimulationMode);
-  const pois = useFinnusStore((s) => s.pois);
-  const ttsStatusMessage = useFinnusStore((s) => s.ttsStatusMessage);
-  const settingsOpenRequestAtMs = useFinnusStore(
-    (s) => s.settingsOpenRequestAtMs,
-  );
-  const settingsOpenFocus = useFinnusStore((s) => s.settingsOpenFocus);
 
   useGeofencing();
-  const needsTourStart = useFinnusStore((s) => s.needsTourStart);
   const [tourStarting, setTourStarting] = useState(false);
 
   const onStartTour = useCallback(async () => {
@@ -102,49 +341,19 @@ export function HomeScreen({
 
 
   useEffect(() => {
-    if (settingsOpenRequestAtMs == null) return;
-    void markFeatureTipCompleted('tune_profile');
-    setShowSettings(true);
-  }, [settingsOpenRequestAtMs]);
+    void import('../services/timeline/visitLog')
+      .then((m) => m.hydrateVisitLog())
+      .catch(() => undefined);
+  }, []);
 
+  // Offene Wünsche nach 30 Min Kalender zu → aufräumen
   useEffect(() => {
-    if (planOpenRequestAtMs == null) return;
-    usePlanCalendarUiStore.getState().setCalendarVisible(true);
-    setShowPlanCalendar(true);
-    usePlanCalendarUiStore.getState().clearOpenRequest();
-  }, [planOpenRequestAtMs]);
-
-  useEffect(() => {
-    if (planCloseRequestAtMs == null) return;
-    usePlanCalendarUiStore.getState().setCalendarVisible(false);
-    setShowPlanCalendar(false);
-    usePlanCalendarUiStore.getState().clearCloseRequest();
-    void import('../module2/planning/runPlanningModule').then((m) =>
-      m.onPlanningModuleClosed(),
-    );
-  }, [planCloseRequestAtMs]);
-
-  /**
-   * Fallback System-Zurück für Karten/Widget/Concierge/Tippen.
-   * Einmalig registriert — Settings/Stempel/Timeline hängen sich später ein
-   * und gewinnen (eine Ebene zurück).
-   */
-  useEffect(() => {
-    const sub = BackHandler.addEventListener('hardwareBackPress', () => {
-      const s = useFinnusStore.getState();
-      if (s.cityMap) {
-        s.setCityMap(null);
-        return true;
-      }
-      if (s.gygWidget) {
-        s.setGygWidget(null);
-        return true;
-      }
-      // Concierge-/Modul-1-Karte bleibt nach Maps/Browser-Zurück —
-      // nur per ✕ / dismissConciergeCard schließen.
-      return false;
-    });
-    return () => sub.remove();
+    const id = setInterval(() => {
+      void import('../module2/planning/purgeStaleOpenPlans').then((m) => {
+        m.maybePurgeStalePlansWhileHidden();
+      });
+    }, 60_000);
+    return () => clearInterval(id);
   }, []);
 
   // Dauer-Standby-Reconciler: unabhängig von Flags — wenn kein Audio, idle.
@@ -191,10 +400,10 @@ export function HomeScreen({
     };
   }, []);
 
-  // Speech-Watchdog (Sessions killen) — nur aktiv während Audio/Speaking
+  // Speech-Watchdog — ohne Render-Abo auf Audio-Flags (Settings/Timeline bleiben flüssig)
   useEffect(() => {
-    if (!isPlayingAudio && !isAudiblySpeaking) return;
     let cancelled = false;
+    let timer: ReturnType<typeof setInterval> | null = null;
     let deadSessionSince: number | null = null;
     let audioMod: typeof import('../services/AudioVoiceService') | null = null;
     let speechQueueBusy: (() => boolean) | null = null;
@@ -208,7 +417,14 @@ export function HomeScreen({
       return audioMod;
     };
 
-    const timer = setInterval(() => {
+    const stop = () => {
+      if (timer) {
+        clearInterval(timer);
+        timer = null;
+      }
+    };
+
+    const tick = () => {
       const s = useFinnusStore.getState();
       if (s.isListening || s.isGenerating) {
         deadSessionSince = null;
@@ -238,38 +454,87 @@ export function HomeScreen({
         }
         deadSessionSince = null;
       });
-    }, 700);
+    };
+
+    const sync = () => {
+      const s = useFinnusStore.getState();
+      if (s.isPlayingAudio || s.isAudiblySpeaking) {
+        if (!timer) timer = setInterval(tick, 700);
+        return;
+      }
+      stop();
+    };
+
+    sync();
+    const unsub = useFinnusStore.subscribe(sync);
     return () => {
       cancelled = true;
-      clearInterval(timer);
+      unsub();
+      stop();
     };
-  }, [isPlayingAudio, isAudiblySpeaking]);
+  }, []);
 
   useEffect(() => {
     registerCityProximityHandlers({
       onCitySwitched: async (result: CitySwitchResult) => {
         // Masterbook Location Isolation — never navigate to hotel coords from another city
         useUserMemoryStore.getState().clearHotelsOutsideCity(result.cityId);
+        try {
+          const { clearShortTermOnCitySwitch } = require('../module2/context/shortTermContext') as {
+            clearShortTermOnCitySwitch: () => void;
+          };
+          clearShortTermOnCitySwitch();
+        } catch {
+          /* soft */
+        }
+        try {
+          const { parkForegroundOnCitySwitch } = require('../services/memory/conversationThreads') as {
+            parkForegroundOnCitySwitch: (cityHint: string) => void;
+          };
+          parkForegroundOnCitySwitch(result.cityName);
+        } catch {
+          /* soft */
+        }
+        try {
+          const { parkPlanSessionOnCitySwitch } = require('../module2/planning/planSessionState') as {
+            parkPlanSessionOnCitySwitch: (cityName: string) => void;
+          };
+          parkPlanSessionOnCitySwitch(result.cityName);
+        } catch {
+          /* soft */
+        }
         const next = {
           ...profile,
           cityId: result.cityId,
           cityName: result.cityName,
         };
-        await saveUserProfile(next);
         onProfileChange(next);
+        void saveUserProfile(next);
+        void import('../services/memory/travelPrefsReview')
+          .then((m) => m.maybeOfferTravelPrefsAfterCity(result.cityId))
+          .catch(() => undefined);
       },
     });
     return () => registerCityProximityHandlers(null);
   }, [onProfileChange, profile]);
 
+  useEffect(() => {
+    void import('../services/memory/travelPrefsReview')
+      .then((m) => m.maybeOfferTravelPrefsAfterIdle())
+      .catch(() => undefined);
+    void import('../services/ui/idlePrefetch').then((m) =>
+      m.scheduleIdleUiPrefetch(),
+    );
+  }, []);
+
   const openTextInput = useCallback(() => {
-    setModalSubtitle(TYPING_SUBTITLE);
-    setShowQuestionModal(true);
+    useHomeOverlayStore
+      .getState()
+      .openQuestion(HOME_QUESTION_DEFAULT_SUBTITLE);
   }, []);
 
   const openTextFallback = useCallback((reason: VoiceFallbackReason) => {
-    setModalSubtitle(FALLBACK_SUBTITLES[reason]);
-    setShowQuestionModal(true);
+    useHomeOverlayStore.getState().openQuestion(FALLBACK_SUBTITLES[reason]);
   }, []);
 
   const {
@@ -285,11 +550,11 @@ export function HomeScreen({
     submitUserQuestion,
     cancelFindusBusy,
   } = useVoiceInput({
-    // Timeline: Kurz-Tipp bleibt stumm (kein Tippfeld); Hold startet Voice —
-    // Early-Release nach Aufnahme-Start wird in useVoiceInput finalisiert.
-    onShortPress: showPlanCalendar ? undefined : openTextInput,
+    // Kurz-Tipp öffnet das Tippfeld (Home + Timeline); Hold startet Voice.
+    onShortPress: openTextInput,
     onNeedTextFallback: openTextFallback,
   });
+  const navRouteLoading = useFinnusStore(selectNavRouteLoading);
 
   // Nach Erklärung: Hilfe-Chip (z. B. Restaurant-Tipp) → echte Recherche
   useEffect(() => {
@@ -310,18 +575,35 @@ export function HomeScreen({
     };
   }, [submitUserQuestion]);
 
-  const phinnosMood = derivePhinnosMood({
-    isListening,
-    isFinalizing,
-    isGenerating,
-    isPlayingAudio,
-    isAudiblySpeaking,
-    navRouteLoading,
-  });
+  // Sticky „Überlegen“-Spinner: Flug-Recherche darf länger als 12s brauchen.
+  useEffect(() => {
+    if (!isGenerating && !selectNavRouteLoading(useFinnusStore.getState())) return;
+    const thinkT = setTimeout(() => {
+      const s = useFinnusStore.getState();
+      if (
+        s.isGenerating &&
+        !s.isListening &&
+        !isFinalizing &&
+        !s.isAudiblySpeaking &&
+        !s.isPlayingAudio
+      ) {
+        s.setIsGenerating(false);
+      }
+    }, 45_000);
+    const navT = setTimeout(() => {
+      const s = useFinnusStore.getState();
+      if (selectNavRouteLoading(s)) {
+        s.setNavRouteLoading(false);
+      }
+    }, 12_000);
+    return () => {
+      clearTimeout(thinkT);
+      clearTimeout(navT);
+    };
+  }, [isGenerating, isListening, isFinalizing, navRouteLoading]);
 
   const openPassport = useCallback((opts?: { tab?: PassportTab }) => {
-    setPassportTab(opts?.tab ?? 'discover');
-    setShowPassport(true);
+    useHomeOverlayStore.getState().openPassport(opts?.tab);
   }, []);
 
   const onHudTellMore = useCallback(
@@ -338,40 +620,42 @@ export function HomeScreen({
   );
 
   const openSettings = useCallback(() => {
+    useHomeOverlayStore.getState().openSettings();
+    void import('../services/diagnostics/interactionDelay').then((m) =>
+      m.noteUiTap('settings'),
+    );
     void markFeatureTipCompleted('tune_profile');
     void import('../services/onboarding/uiCoachMarks').then((m) =>
       m.onUserOpenedSettings(),
     );
-    setShowSettings(true);
   }, []);
   const openPlanCalendar = useCallback(() => {
+    void import('../services/diagnostics/interactionDelay').then((m) =>
+      m.noteUiTap('timeline'),
+    );
+    usePlanCalendarUiStore.getState().setCalendarVisible(true);
     void import('../services/onboarding/uiCoachMarks').then((m) =>
       m.onUserOpenedPlanCalendar(),
     );
-    usePlanCalendarUiStore.getState().setCalendarVisible(true);
-    setShowPlanCalendar(true);
   }, []);
-  const closePlanCalendar = useCallback(() => {
-    usePlanCalendarUiStore.getState().setCalendarVisible(false);
-    setShowPlanCalendar(false);
-    void import('../module2/planning/runPlanningModule').then((m) =>
-      m.onPlanningModuleClosed(),
+  const openPlaceSeek = useCallback(() => {
+    void import('../services/diagnostics/interactionDelay').then((m) =>
+      m.noteUiTap('places'),
     );
+    useHomeOverlayStore.getState().openSeek();
   }, []);
-  const closeSettings = useCallback(() => {
-    setShowSettings(false);
-    useFinnusStore.setState({ settingsOpenFocus: null });
-  }, []);
-  const closePassport = useCallback(() => setShowPassport(false), []);
-  const closeQuestion = useCallback(() => setShowQuestionModal(false), []);
   const closeGyg = useCallback(
     () => useFinnusStore.getState().setGygWidget(null),
     [],
   );
-  const closeCityMap = useCallback(
-    () => useFinnusStore.getState().setCityMap(null),
+  const closeInAppBrowser = useCallback(
+    () => useFinnusStore.getState().setInAppBrowser(null),
     [],
   );
+
+  const onAbortBusy = useCallback(() => {
+    void cancelFindusBusy();
+  }, [cancelFindusBusy]);
 
   const onConciergeFollowUp = useCallback(
     (prompt: string) => {
@@ -380,135 +664,55 @@ export function HomeScreen({
     [submitUserQuestion],
   );
 
-  const onPassportQuickNav = useCallback(
-    (prompt: string) => {
-      setShowPassport(false);
-      void submitUserQuestion(prompt);
-    },
-    [submitUserQuestion],
-  );
-
-  const onSettingsSaved = useCallback(
-    async (next: UserProfile) => {
-      await saveUserProfile(next);
-      onProfileChange(next);
-    },
-    [onProfileChange],
-  );
+  const mapBottomChrome = HOME_DOCK_BAR_H + safePad.bottom;
+  const onHudHeight = useCallback((h: number) => {
+    setHudHeight(h);
+  }, []);
 
   return (
-    <SafeAreaView style={styles.safe} edges={['top', 'bottom']}>
-      <Header
-        onOpenSettings={openSettings}
+    <View style={styles.root}>
+      <HomeLiveLayer
+        hudHeight={hudHeight}
+        onHudHeight={onHudHeight}
+        mapBottomChrome={mapBottomChrome}
+        safePadTop={safePad.top}
+        isListening={isListening}
+        isMicLocked={isMicLocked}
+        isFinalizing={isFinalizing}
+        isGenerating={isGenerating}
+        onAbortBusy={onAbortBusy}
+        onFollowUp={onConciergeFollowUp}
         onOpenPlanCalendar={openPlanCalendar}
         onOpenPassport={openPassport}
         onTellMore={onHudTellMore}
+        onStartTour={onStartTour}
+        tourStarting={tourStarting}
+        onCloseGyg={closeGyg}
+        onCloseInAppBrowser={closeInAppBrowser}
       />
 
-      <RuntimeDevBoard />
-
-      {ttsStatusMessage ? (
-        <View style={styles.statusBanner}>
-          <Text style={styles.statusText}>{ttsStatusMessage}</Text>
-        </View>
-      ) : null}
-
-      {/*
-        LiveStage: Presence oben | Bottom-Dock fix (Bullets → Actions → Subtitles)
-        MicButton fest darunter — kein Hoch/Runter-Springen bei Thinking.
-      */}
-
-      {needsTourStart && !isSimulationMode ? (
-        <Pressable
-          onPress={() => void onStartTour()}
-          disabled={tourStarting}
-          style={styles.tourStartCard}
-          accessibilityRole="button"
-          accessibilityLabel="Tour starten"
-        >
-          <Text style={styles.tourStartTitle}>
-            {tourStarting ? 'Berechtigung…' : 'Tour starten'}
-          </Text>
-          <Text style={styles.tourStartBody}>
-            Standort freigeben, damit Findus an den richtigen Orten automatisch
-            Audio-Hinweise abspielt — auch bei gesperrtem Display.
-          </Text>
-        </Pressable>
-      ) : null}
-
-      <LiveStage
-        mood={phinnosMood}
-        card={activeConciergeCard}
-        subtitleText={subtitleText}
-        isPlayingAudio={isAudiblySpeaking}
-        onFollowUp={onConciergeFollowUp}
-        onAbortBusy={() => {
-          void cancelFindusBusy();
-        }}
+      <HomeChromeLayer
+        safePadBottom={safePad.bottom}
+        isListening={isListening}
+        isMicLocked={isMicLocked}
+        isFinalizing={isFinalizing}
+        isGenerating={isGenerating}
+        partialText={partialText}
+        onPressIn={onPressIn}
+        onPressOut={onPressOut}
+        onSwipeLock={onSwipeLock}
+        onSwipeLiveChat={onSwipeLiveChat}
+        onAbortBusy={onAbortBusy}
+        onOpenPlanCalendar={openPlanCalendar}
+        onPlaces={openPlaceSeek}
+        onSettings={openSettings}
       />
 
-      <GetYourGuideWidget
-        visible={gygWidget != null}
-        options={gygWidget ?? undefined}
-        onClose={closeGyg}
-      />
-
-      <CityMapModal
-        visible={cityMap != null}
-        url={cityMap?.url}
-        title={cityMap?.title}
-        onClose={closeCityMap}
-      />
-
-      <View style={styles.micRow}>
-        {isSimulationMode ? (
-          <SimulationPicker pois={pois} visible layout="micFab" />
-        ) : (
-          <View style={styles.micSideSpacer} />
-        )}
-        <MicButton
-          onPressIn={onPressIn}
-          onPressOut={onPressOut}
-          onSwipeLock={onSwipeLock}
-          onSwipeLiveChat={onSwipeLiveChat}
-          isListening={isListening}
-          isMicLocked={isMicLocked}
-          isFinalizing={isFinalizing}
-          isGenerating={isGenerating}
-          isSpeaking={isAudiblySpeaking}
-          partialText={partialText}
-        />
-        <View style={styles.micSideSpacer} />
-      </View>
-
-      <QuestionModal
-        visible={showQuestionModal}
-        onClose={closeQuestion}
-        onSubmit={submitUserQuestion}
-        subtitle={modalSubtitle}
-      />
-
-      {showSettings ? (
-        <SettingsScreen
-          visible
-          profile={profile}
-          onClose={closeSettings}
-          onSaved={onSettingsSaved}
-          onReset={onResetSetup}
-          initialFocus={settingsOpenFocus}
-        />
-      ) : null}
-
-      <VisitPassportModal
-        visible={showPassport}
-        initialTab={passportTab}
-        onClose={closePassport}
-        onQuickNavAdd={onPassportQuickNav}
-      />
-
-      <PlanCalendarModal
-        visible={showPlanCalendar}
-        onClose={closePlanCalendar}
+      <HomeOverlayHost
+        profile={profile}
+        onProfileChange={onProfileChange}
+        onResetSetup={onResetSetup}
+        submitUserQuestion={submitUserQuestion}
         onPressIn={onPressIn}
         onPressOut={onPressOut}
         onSwipeLock={onSwipeLock}
@@ -518,26 +722,55 @@ export function HomeScreen({
         isFinalizing={isFinalizing}
         isGenerating={isGenerating}
         isAudiblySpeaking={isAudiblySpeaking}
-        onShortAnswerPrompt={(prompt) => {
-          void import('../module2/planning/runPlanningModule').then((m) =>
-            m.runPlanningModule({ userText: prompt }),
-          );
-        }}
       />
-    </SafeAreaView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  safe: {
+  root: {
     flex: 1,
     backgroundColor: colors.bg,
-    position: 'relative',
-    overflow: 'visible',
+  },
+  hudOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    alignItems: 'stretch',
+    zIndex: UI_LAYER.hud,
+    elevation: UI_LAYER.hud,
+  },
+  micFloat: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    zIndex: UI_LAYER.sheet - 1,
+    elevation: UI_LAYER.sheet - 1,
+  },
+  /** True horizontal center — independent of left/right side content. */
+  micCenter: {
+    alignItems: 'center',
+  },
+  /** Simulation FAB overlays left; does not participate in mic centering. */
+  micSideLeft: {
+    position: 'absolute',
+    left: spacing.md,
+    bottom: 0,
+  },
+  dockWrap: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    zIndex: UI_LAYER.hud,
+    elevation: UI_LAYER.hud,
   },
   tourStartCard: {
-    marginHorizontal: spacing.md,
-    marginBottom: spacing.sm,
+    position: 'absolute',
+    left: spacing.md,
+    right: spacing.md,
+    zIndex: UI_LAYER.hud,
     paddingHorizontal: spacing.md,
     paddingVertical: spacing.md,
     borderRadius: 14,
@@ -557,8 +790,10 @@ const styles = StyleSheet.create({
     lineHeight: 18,
   },
   statusBanner: {
-    marginHorizontal: spacing.md,
-    marginBottom: spacing.sm,
+    position: 'absolute',
+    left: spacing.md,
+    right: spacing.md,
+    zIndex: UI_LAYER.hud,
     paddingHorizontal: spacing.md,
     paddingVertical: spacing.sm,
     borderRadius: 10,
@@ -570,20 +805,5 @@ const styles = StyleSheet.create({
     color: colors.textMuted,
     fontSize: 13,
     textAlign: 'center',
-  },
-  micRow: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    justifyContent: 'center',
-    paddingHorizontal: spacing.md,
-    gap: spacing.sm,
-    /** Feste Mindesthöhe — Hint-Text darf LiveStage nicht zusammenschieben. */
-    minHeight: 84 + spacing.sm + spacing.lg + 20,
-  },
-  /** Gleichbreite wie Ort-FAB → Mic bleibt mittig. */
-  micSideSpacer: {
-    width: 64,
-    // Vertikal an Mic-Kreis (84) ausrichten: sm + (84-56)/2
-    paddingTop: spacing.sm + 14,
   },
 });

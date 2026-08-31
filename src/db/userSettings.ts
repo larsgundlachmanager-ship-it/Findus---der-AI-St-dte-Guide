@@ -1,5 +1,6 @@
 import type { SQLiteDatabase } from 'expo-sqlite';
 import { normalizeVoiceId, type VoiceId } from '../types/userProfile';
+import { runExclusiveDbWrite } from './dbWriteLock';
 
 export type UserVoiceSettings = {
   voiceId: VoiceId;
@@ -29,7 +30,6 @@ export async function saveUserVoiceSettings(
     voiceProfile?: string;
   },
 ): Promise<UserVoiceSettings> {
-  await ensureUserSettingsTable(db);
   const voiceId = normalizeVoiceId(settings.voiceId);
   const row: UserVoiceSettings = {
     voiceId,
@@ -37,19 +37,22 @@ export async function saveUserVoiceSettings(
     speechRate: settings.speechRate,
     updatedAt: new Date().toISOString(),
   };
-  await db.runAsync(
-    `INSERT INTO user_settings (id, voice_id, voice_profile, speech_rate, updated_at)
-     VALUES (1, ?, ?, ?, ?)
-     ON CONFLICT(id) DO UPDATE SET
-       voice_id = excluded.voice_id,
-       voice_profile = excluded.voice_profile,
-       speech_rate = excluded.speech_rate,
-       updated_at = excluded.updated_at`,
-    row.voiceId,
-    row.voiceProfile,
-    row.speechRate,
-    row.updatedAt,
-  );
+  await runExclusiveDbWrite(async () => {
+    await ensureUserSettingsTable(db);
+    await db.runAsync(
+      `INSERT INTO user_settings (id, voice_id, voice_profile, speech_rate, updated_at)
+       VALUES (1, ?, ?, ?, ?)
+       ON CONFLICT(id) DO UPDATE SET
+         voice_id = excluded.voice_id,
+         voice_profile = excluded.voice_profile,
+         speech_rate = excluded.speech_rate,
+         updated_at = excluded.updated_at`,
+      row.voiceId,
+      row.voiceProfile,
+      row.speechRate,
+      row.updatedAt,
+    );
+  });
   return row;
 }
 

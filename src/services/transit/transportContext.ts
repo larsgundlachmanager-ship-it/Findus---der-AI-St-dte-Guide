@@ -20,7 +20,7 @@ const RAIL_HINT =
   /\b(bahn|zug|bus|s-bahn|sbahn|regionalbahn|rb\d+|re\d+|ice|ec|ic|inselbahn)\b/iu;
 
 const FERRY_HINT =
-  /\b(fähre|faehre|ferry|harlesiel|fähranleger|faehranleger|fährhafen|faehrhafen|anleger|watt\s*sprinter|insel\s*fähre|überfahrt|ueberfahrt)\b/iu;
+  /fähr(?:e|anleger|hafen|ticket)|faehr(?:e|anleger|hafen|ticket)|ferry|harlesiel|watt\s*sprinter|insel\s*fähre|überfahrt|ueberfahrt/iu;
 
 export function scoreFerryPoi(poi: Poi): number {
   if (poi.kind === 'approach') return -1;

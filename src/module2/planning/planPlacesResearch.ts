@@ -16,8 +16,10 @@ import {
 } from '../timeline/planCalendarUiStore';
 import { useFuturePlanStore } from '../timeline/futurePlanState';
 import { applyGapFillTravelLegs } from '../timeline/gapFillTravel';
+import { usePlanSessionStore } from './planSessionState';
 import { getPlanWalkMPerMin } from '../../services/mobility/paceProfile';
 import type { QuickAction } from '../../types/concierge';
+import { weaveDualOptionSpoken } from '../../services/concierge/dualOptionPolicy';
 import type {
   DeepResearchPitchResult,
   DeepResearchUiCard,
@@ -63,13 +65,19 @@ function mapsUrlFor(
   placeId?: string | null,
 ): string {
   if (placeId) {
-    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-      name,
-    )}&query_place_id=${encodeURIComponent(placeId)}`;
+    try {
+      const { mapsUrlForGooglePlace } = require('../../services/research/eventInfoUrl') as {
+        mapsUrlForGooglePlace: (o: {
+          placeName?: string | null;
+          placeId?: string | null;
+        }) => string | null;
+      };
+      return mapsUrlForGooglePlace({ placeName: name, placeId }) || '';
+    } catch {
+      return '';
+    }
   }
-  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-    `${name}@${lat},${lng}`,
-  )}`;
+  return '';
 }
 
 function parseTimeToMs(dayKey: string, time: string | null | undefined): number | null {
@@ -210,7 +218,7 @@ async function discoverCandidates(
     });
   };
 
-  if (localOnly || walk || explore) {
+  if ((localOnly || walk || explore) && !opts?.cityName) {
     try {
       const pois = await getAllPois();
       const trailFirst =
@@ -412,7 +420,7 @@ function nearnessHint(
   return null;
 }
 
-function isHotelWishText(blob: string): boolean {
+export function isHotelWishText(blob: string): boolean {
   return /\b(hotel|übernacht|uebernacht|unterkunft|zimmer|hostel|airbnb|pension)\b/i.test(
     blob,
   );
@@ -428,7 +436,6 @@ async function pitchHotelWishFromStay22(
       parseHotelStayDates,
       parseHotelAdults,
       searchStay22HotelsInCity,
-      hasExplicitStayDates,
     } = await import('../../services/concierge/hotelAvailabilityService');
     const {
       parseHotelAmenityNeeds,
@@ -439,11 +446,11 @@ async function pitchHotelWishFromStay22(
       mergeAmenityEvidence,
     } = await import('../../services/concierge/hotelHardMatch');
     const blob = `${wish.title} ${wish.context}`;
-    if (!hasExplicitStayDates(blob) && !wish.estimatedTime) {
-      // Zeitraum unklar → normaler Places-Pfad / Confirm-Flow
-      return null;
-    }
-    const { checkin, checkout } = parseHotelStayDates(blob);
+    const { parseHotelStayDatesForPlan } = await import('./planStayDates');
+    const dayKeyHint =
+      usePlanCalendarUiStore.getState().requestedDayKey ??
+      useFuturePlanStore.getState().plan.dayKey;
+    const { checkin, checkout } = parseHotelStayDatesForPlan(blob, dayKeyHint);
     const adults = parseHotelAdults(blob);
     const nights = nightsBetween(checkin, checkout);
     const amenityNeeds = parseHotelAmenityNeeds(blob);
@@ -452,7 +459,11 @@ async function pitchHotelWishFromStay22(
       extractCityFromText(blob) ||
       extractExploreCityHint(wish) ||
       String(bag.cityHint ?? '').trim() ||
-      'Germany';
+      '';
+    // Ohne Stadtkein Blind-Search am GPS-Heimatort
+    if (!city || /^germany$/i.test(city)) {
+      return null;
+    }
     const wantCheap =
       /\b(günstig|guenstig|billig|preiswert|günstigste|guenstigste)\b/i.test(
         blob,
@@ -511,7 +522,7 @@ async function pitchHotelWishFromStay22(
       return null;
     }
     const pool = amenityNeeds.length > 0 ? filtered.matched : stays;
-    const picks = pickTwoHotelStays(pool, {
+    let picks = pickTwoHotelStays(pool, {
       wantCheap,
       wantQuality: false,
     });
@@ -521,11 +532,17 @@ async function pitchHotelWishFromStay22(
     let prev = resolveDistanceRef(wish);
     try {
       const nearHint = (() => {
-        if (/\btennis/i.test(blob)) return `Tennisplatz ${city}`;
-        const m = blob.match(
-          /\b(?:nahe|nähe|neben|in\s+der\s+nähe\s+(?:von|vom|der|des))\s+([A-Za-zÄÖÜäöüß0-9\s-]{3,40})/i,
+        // Nur geocode wenn konkreter Club/Ort — nie blind „Tennisplatz Stadt“
+        const named = blob.match(
+          /\b(?:nahe|nähe|neben|bei|am)\s+(?:dem\s+|der\s+|des\s+)?([A-Za-zÄÖÜäöüß0-9][A-Za-zÄÖÜäöüß0-9\s-]{2,40}(?:club|tc|tennis)?)/i,
         );
-        if (m?.[1]) return `${m[1].trim()} ${city}`;
+        if (named?.[1] && !/^tennis(?:platz|club)?$/i.test(named[1].trim())) {
+          return `${named[1].trim()} ${city}`;
+        }
+        const club = blob.match(
+          /\btennisclub:\s*([^|]+)/i,
+        ) || blob.match(/\b(phoenix(?:\s+club)?|tc\s+[A-Za-zÄÖÜäöüß]+)/i);
+        if (club?.[1]) return `${club[1].trim()} ${city}`;
         return city;
       })();
       const geo = await geocodePlaceName(nearHint, { cityHint: city });
@@ -540,10 +557,10 @@ async function pitchHotelWishFromStay22(
       /* soft */
     }
 
-    // Bei „nahe X“: näher zum Anker bevorzugen
+    // Bei „nahe X“: näher zum Anker bevorzugen — bei „günstig“: nah + günstig als Trade-off
     let ordered = picks;
     if (/\b(nahe|nähe|tennis)\b/i.test(blob)) {
-      ordered = [...picks].sort((a, b) => {
+      const byDist = [...pool].sort((a, b) => {
         const da =
           a.lat != null && a.lng != null
             ? haversineMeters(prev.lat, prev.lng, a.lat, a.lng)
@@ -554,10 +571,34 @@ async function pitchHotelWishFromStay22(
             : 99_000;
         return da - db;
       });
+      const nearest = byDist[0];
+      const cheapest = [...pool].sort(
+        (x, y) => (x.priceTotal ?? 1e9) - (y.priceTotal ?? 1e9),
+      )[0];
+      if (wantCheap && nearest && cheapest && nearest.id !== cheapest.id) {
+        ordered = [nearest, cheapest];
+      } else {
+        ordered = [...picks].sort((a, b) => {
+          const da =
+            a.lat != null && a.lng != null
+              ? haversineMeters(prev.lat, prev.lng, a.lat, a.lng)
+              : 99_000;
+          const db =
+            b.lat != null && b.lng != null
+              ? haversineMeters(prev.lat, prev.lng, b.lat, b.lng)
+              : 99_000;
+          return da - db;
+        });
+      }
     }
 
     const needLabel = amenityNeeds.map((n) => n.label).join(' + ');
-    const uiCards: DeepResearchUiCard[] = ordered.slice(0, 2).map((s, i) => {
+    const { resolveHotelPropertyAffiliateUrl } = await import(
+      '../../services/affiliate/hotelPropertyDeepLink'
+    );
+    const uiCards: DeepResearchUiCard[] = [];
+    for (let i = 0; i < ordered.slice(0, 2).length; i++) {
+      const s = ordered[i]!;
       const dist =
         s.lat != null && s.lng != null
           ? formatDistFromPrev(s.lat, s.lng, prev)
@@ -579,20 +620,35 @@ async function pitchHotelWishFromStay22(
         .join(', ');
       const speechPitch = sanitizePlanSpeech(
         [
-          i === 0 ? 'Erstens' : 'Oder',
           s.name,
           price,
           am || null,
           s.stars != null ? `${s.stars} Sterne` : null,
           dist,
-          wantCheap && i === 0 ? 'günstigste passende Live-Option' : null,
+          wantCheap && i === 0 && ordered[0]?.id !== ordered[1]?.id
+            ? 'nächste Option'
+            : wantCheap && i === 1
+              ? 'günstigste Option (evtl. weiter weg)'
+              : wantCheap && i === 0
+                ? 'günstigste passende Live-Option'
+                : null,
         ]
           .filter(Boolean)
-          .join(' — '),
+          .join(', '),
       ).slice(0, 700);
       const lat = s.lat ?? prev.lat;
       const lng = s.lng ?? prev.lng;
-      return {
+      // Property-Deep-Link (Zimmer wählen) — nicht Stadt-Suche
+      const bookUrl = await resolveHotelPropertyAffiliateUrl({
+        hotelName: s.name,
+        city,
+        bookUrl: s.bookUrl,
+        checkin,
+        checkout,
+        adults,
+        expediaPropertyId: s.expediaPropertyId,
+      });
+      uiCards.push({
         name: s.name,
         lat,
         lng,
@@ -606,6 +662,7 @@ async function pitchHotelWishFromStay22(
             price,
             am || null,
             s.stars != null ? `${s.stars}★` : null,
+            `${checkin.slice(8)}.${checkin.slice(5, 7)}.–${checkout.slice(8)}.${checkout.slice(5, 7)}.`,
           ].filter(Boolean) as string[],
           speechPitch,
           walk: false,
@@ -614,10 +671,10 @@ async function pitchHotelWishFromStay22(
           mapsUrl: mapsUrlFor(s.name, lat, lng, null),
           menuStatus: 'NONE' as const,
           menuUrl: null,
-          ticketUrl: s.bookUrl,
+          ticketUrl: bookUrl,
         },
-      };
-    });
+      });
+    }
 
     const result: DeepResearchPitchResult = {
       summary: wantCheap
@@ -627,7 +684,7 @@ async function pitchHotelWishFromStay22(
           : 'Zwei Hotels live',
       uiCards,
     };
-    publishChoiceUi(wish, result);
+    await publishChoiceUi(wish, result);
     return {
       ...result,
       spokenText: combineSpeech(result.uiCards, result.summary, wish),
@@ -657,44 +714,18 @@ function combineSpeech(
     .trim();
   const a = cards[0];
   const b = cards[1];
-  if (hotel) {
-    // Kurz: Name + ein Vorteil — nicht den Pitch doppelt vorlesen
-    const line = (c: DeepResearchUiCard | undefined, n: number) => {
-      if (!c) return '';
-      const tip = sanitizePlanSpeech(
-        stripLeadingPlaceName(c.speechPitch || '', c.name),
-      )
-        .split(/[.!?]/)[0]
-        ?.trim()
-        .slice(0, 90);
-      return `${n === 1 ? 'Erstens' : 'Oder'} ${c.name}${tip ? ` — ${tip}` : ''}.`;
-    };
-    return sanitizePlanSpeech(
-      [
-        cleanIntro || 'Zwei Hotels in der Nähe:',
-        line(a, 1),
-        line(b, 2),
-        'Was ist dein Favorit? Tippe oben — dann bereite ich die Buchung vor.',
-      ]
-        .filter(Boolean)
-        .join(' '),
-    ).slice(0, 420);
+  if (!a || !b) {
+    return sanitizePlanSpeech(cleanIntro || a?.speechPitch || '').slice(0, 700);
   }
-  const pitchA = a
-    ? sanitizePlanSpeech(
-        `Erstens ${a.name}: ${stripLeadingPlaceName(a.speechPitch || '', a.name)}`,
-      ).slice(0, 300)
-    : '';
-  const pitchB = b
-    ? sanitizePlanSpeech(
-        `Oder dort: ${stripLeadingPlaceName(b.speechPitch || '', b.name)}`,
-      ).slice(0, 300)
-    : '';
   return sanitizePlanSpeech(
-    [cleanIntro || 'Zwei Optionen:', pitchA, pitchB, 'Was ist dein Favorit?']
-      .filter(Boolean)
-      .join(' … '),
-  ).slice(0, 700);
+    weaveDualOptionSpoken({
+      intro: cleanIntro || null,
+      aName: a.name,
+      aPitch: stripLeadingPlaceName(a.speechPitch || '', a.name),
+      bName: b.name,
+      bPitch: stripLeadingPlaceName(b.speechPitch || '', b.name),
+    }),
+  ).slice(0, hotel ? 1200 : 700);
 }
 
 function stripLeadingPlaceName(pitch: string, name: string): string {
@@ -728,8 +759,50 @@ function resolveDistanceRef(wish: IngestOpenWish): {
   lng: number;
   title: string;
 } {
+  const blob = `${wish.title} ${wish.context}`;
   const bag = readRucksackSync();
   const gps = anchorCoords(bag);
+
+  const tennisStop = useFuturePlanStore
+    .getState()
+    .plan.stops.find(
+      (s) =>
+        typeof s.lat === 'number' &&
+        typeof s.lng === 'number' &&
+        /\b(tennis|turnier|match|phoenix|tc\b|fecht)/i.test(
+          `${s.title} ${s.notes ?? ''}`,
+        ),
+    );
+  if (tennisStop?.lat != null && tennisStop.lng != null) {
+    return {
+      lat: tennisStop.lat,
+      lng: tennisStop.lng,
+      title: tennisStop.title.replace(/^[📌📍✨🏁🔔🥇🥈]\s*/u, '').slice(0, 28),
+    };
+  }
+
+  // Session-Fix (noch nicht als Timeline-Stop) — z. B. nach Club-Geocode
+  try {
+    const session = usePlanSessionStore.getState().plan;
+    const node = session?.fixedNodes?.find(
+      (n) =>
+        typeof n.lat === 'number' &&
+        typeof n.lng === 'number' &&
+        /\b(tennis|turnier|match|phoenix|tc\b|fecht)/i.test(
+          `${n.title} ${n.location ?? ''} ${n.address ?? ''}`,
+        ),
+    );
+    if (node && typeof node.lat === 'number' && typeof node.lng === 'number') {
+      return {
+        lat: node.lat,
+        lng: node.lng,
+        title: (node.location || node.title).slice(0, 28),
+      };
+    }
+  } catch {
+    /* soft */
+  }
+
   const prev = resolvePreviousPlanStop(wish);
   if (
     prev &&
@@ -916,56 +989,66 @@ function resolveOfferAction(
   const blob = `${wish.title} ${wish.context} ${card.name}`;
   if (isHotelWishText(blob)) {
     try {
-      // Live Stay22 Deep-Link am Card (ticketUrl) hat Vorrang vor Stadt-Suche
+      const {
+        finalizeHotelBookAffiliateUrl,
+        isHotelRoomSelectUrl,
+        isExpediaHotelSearchUrl,
+      } = require('../../services/affiliate/hotelPropertyDeepLink') as {
+        finalizeHotelBookAffiliateUrl: (o: {
+          hotelName: string;
+          city?: string | null;
+          bookUrl?: string | null;
+          checkin: string;
+          checkout: string;
+          adults?: number;
+        }) => string;
+        isHotelRoomSelectUrl: (u: string) => boolean;
+        isExpediaHotelSearchUrl: (u: string) => boolean;
+      };
+      const { parseHotelStayDatesForPlan } = require('./planStayDates') as {
+        parseHotelStayDatesForPlan: (
+          blob: string,
+          dayKey?: string | null,
+        ) => { checkin: string; checkout: string };
+      };
+      const dayKey =
+        usePlanCalendarUiStore.getState().requestedDayKey ??
+        useFuturePlanStore.getState().plan.dayKey;
+      const { checkin, checkout } = parseHotelStayDatesForPlan(blob, dayKey);
+      const { parseHotelAdults } = require('../../services/concierge/hotelAvailabilityService') as {
+        parseHotelAdults: (t: string) => number;
+      };
+      const adults = parseHotelAdults(blob);
+      const hotelName = card.name.split(/[|,]/)[0]!.trim() || card.name;
+      const city =
+        extractCityFromText(blob) ||
+        extractExploreCityHint(wish) ||
+        null;
+      // Live Stay22/Expedia Property-Link am Card hat Vorrang
       const liveBook =
         card.actions.ticketUrl &&
         /^https?:\/\//i.test(card.actions.ticketUrl) &&
         !/google\.[^/]+\/search/i.test(card.actions.ticketUrl)
           ? card.actions.ticketUrl
           : null;
-      if (liveBook) {
-        return {
-          id: 'hotel_book',
-          label: '🏨 Zimmer buchen',
-          shortLabel: 'Buchen',
-          url: liveBook,
-        };
-      }
-      const {
-        getExpediaAccommodationUrl,
-        getStay22AccommodationUrl,
-        getExpediaCamref,
-      } = require('../../services/affiliate/affiliateService') as {
-        getExpediaAccommodationUrl: (
-          d: string,
-          o?: { checkin?: string; checkout?: string; adults?: number },
-        ) => string;
-        getStay22AccommodationUrl: (
-          d: string,
-          o?: { checkin?: string; checkout?: string; adults?: number },
-        ) => string;
-        getExpediaCamref: () => string;
-      };
-      const {
-        parseHotelStayDates,
-        parseHotelAdults,
-      } = require('../../services/concierge/hotelAvailabilityService') as {
-        parseHotelStayDates: (t: string) => {
-          checkin: string;
-          checkout: string;
-        };
-        parseHotelAdults: (t: string) => number;
-      };
-      const { checkin, checkout } = parseHotelStayDates(blob);
-      const adults = parseHotelAdults(blob);
-      const dest = card.name.split(/[|,]/)[0]!.trim() || card.name;
-      const url = getExpediaCamref()
-        ? getExpediaAccommodationUrl(dest, { checkin, checkout, adults })
-        : getStay22AccommodationUrl(dest, { checkin, checkout, adults });
+      const url = finalizeHotelBookAffiliateUrl({
+        hotelName,
+        city,
+        bookUrl: liveBook,
+        checkin,
+        checkout,
+        adults,
+      });
+      const roomReady = isHotelRoomSelectUrl(url);
+      const searchOnly = isExpediaHotelSearchUrl(url);
       return {
         id: 'hotel_book',
-        label: '🏨 Zimmer buchen',
-        shortLabel: 'Buchen',
+        label: roomReady
+          ? '🏨 Zimmer buchen'
+          : searchOnly
+            ? '🏨 Hotels ansehen'
+            : '🏨 Zimmer buchen',
+        shortLabel: roomReady ? 'Buchen' : searchOnly ? 'Hotels' : 'Buchen',
         url,
       };
     } catch {
@@ -976,13 +1059,19 @@ function resolveOfferAction(
   if (kind === 'ticket') {
     try {
       const q = `${card.name} Tickets`.trim();
-      const url =
-        (card.actions.ticketUrl &&
+      const direct =
+        card.actions.ticketUrl &&
         /^https?:\/\//i.test(card.actions.ticketUrl) &&
         !/google\.[^/]+\/search/i.test(card.actions.ticketUrl)
           ? card.actions.ticketUrl
-          : null) ||
-        preferTicketSource({ kind: 'attraction', query: q }).url ||
+          : null;
+      const url =
+        preferTicketSource({
+          kind: 'attraction',
+          query: q,
+          priced: direct ? [{ url: direct }] : undefined,
+        }).url ||
+        direct ||
         buildGetYourGuideSearchUrl(q);
       if (url) {
         return {
@@ -1017,10 +1106,10 @@ function resolveOfferAction(
  * Upsert 🥇/🥈 als choice_* FuturePlanStops (pending_change).
  * Auswahl nur per Timeline-Tap; Short-Answer = „Neu suchen“.
  */
-function publishChoiceUi(
+async function publishChoiceUi(
   wish: IngestOpenWish,
   result: DeepResearchPitchResult,
-): void {
+): Promise<void> {
   // Exakt 2 unterschiedliche Karten — nie 1 doppelte, nie 4; nie schon in Timeline
   const booked = timelineBookedPlaces();
   const unique: DeepResearchUiCard[] = [];
@@ -1066,16 +1155,53 @@ function publishChoiceUi(
     /* soft */
   }
   const stepKey = wish.id ?? wish.title;
+  const dayStops = useFuturePlanStore.getState().getPlanForDay(dayKey).stops;
   let startMs = parseTimeToMs(dayKey, wish.estimatedTime ?? null);
-  // Hotel ohne Slot → Check-in-Band, sonst unsichtbar / nur Basis
-  if (
-    startMs == null &&
-    isHotelWishText(`${wish.title} ${wish.context}`)
-  ) {
-    startMs = parseTimeToMs(dayKey, '15:00');
+  const hotelWish = isHotelWishText(`${wish.title} ${wish.context}`);
+  if (startMs == null && hotelWish) {
+    const { hotelCheckInMs } = require('./planHotelTiming') as {
+      hotelCheckInMs: (
+        w: IngestOpenWish,
+        dk: string,
+        stops: typeof dayStops,
+      ) => number | null;
+    };
+    startMs = hotelCheckInMs(wish, dayKey, dayStops);
   }
   const nowMs = Date.now();
-  if (dayKey === todayDateKey() && startMs != null && isPastMs(startMs, nowMs)) {
+  // Soft-Wünsche: nie feste Termine überdecken; Soft darf clampen, Hard nicht
+  if (!hotelWish) {
+    try {
+      const {
+        dayBoundsMs,
+        findFreeSlotStartMs,
+        hardIntervalsFromStops,
+      } = require('./planHardLock') as typeof import('./planHardLock');
+      const bounds = dayBoundsMs(dayKey);
+      const free = findFreeSlotStartMs({
+        preferredStartMs: startMs,
+        durationMs: 45 * 60_000,
+        hardIntervals: hardIntervalsFromStops(dayStops),
+        dayStartMs: bounds.start,
+        dayEndMs: bounds.end,
+        nowFloorMs:
+          dayKey === todayDateKey() ? nowMs + 15 * 60_000 : bounds.start,
+      });
+      if (free != null) startMs = free;
+    } catch {
+      if (
+        dayKey === todayDateKey() &&
+        startMs != null &&
+        isPastMs(startMs, nowMs)
+      ) {
+        startMs = clampToFutureMs(startMs, { nowMs, minAheadMs: 25 * 60_000 });
+      }
+    }
+  } else if (
+    dayKey === todayDateKey() &&
+    startMs != null &&
+    isPastMs(startMs, nowMs)
+  ) {
     startMs = clampToFutureMs(startMs, { nowMs, minAheadMs: 25 * 60_000 });
   }
   // Abend-/Spazier-Wunsch mit Mittags-Slot → 19:00 (wenn noch Zukunft)
@@ -1101,7 +1227,6 @@ function publishChoiceUi(
 
   const a = unique[0]!;
   const b = unique[1] ?? unique[0]!;
-  const hotelWish = isHotelWishText(`${wish.title} ${wish.context}`);
   // Hotels: immer 2 Karten wenn 2 Unique da — nie auf 1 kürzen
   // Andere Wünsche: bei nur 1 Unique lieber 1 sauber als Fake-Doppel
   const sides: Array<{
@@ -1159,6 +1284,9 @@ function publishChoiceUi(
   for (const { card, side, medal, role } of sides) {
     const id = `choice_${stepKey}_${side}`;
     const noteLines = normalizePlanBullets([...(card.bulletPoints ?? [])], 3);
+    const pitchLine = sanitizePlanSpeech(
+      stripLeadingPlaceName(card.speechPitch || '', card.name),
+    ).slice(0, 320);
     const offer = resolveOfferAction(wish, card);
     useFuturePlanStore.getState().upsertStopOnDay(dayKey, {
       id,
@@ -1166,7 +1294,7 @@ function publishChoiceUi(
       lat: card.lat,
       lng: card.lng,
       plannedStartMs: startMs,
-      plannedEndMs: startMs != null ? startMs + 60 * 60_000 : null,
+      plannedEndMs: hotelWish || startMs == null ? null : startMs + 60 * 60_000,
       bufferMin: 10,
       transport: 'walk',
       kind: 'stop',
@@ -1175,12 +1303,12 @@ function publishChoiceUi(
       choiceSide: side,
       choiceGroupId: stepKey,
       planTaskId: stepKey,
-      notes: noteLines.join('\n'),
+      notes: [...noteLines, pitchLine].filter(Boolean).join('\n'),
       mapsUrl: card.actions.mapsUrl,
       menuUrl: offer?.url ?? null,
       reserveUrl: card.actions.reserveUrl ?? null,
       emoji: medal,
-      userFixedTime: Boolean(wish.estimatedTime),
+      userFixedTime: wish.priority <= 2 && Boolean(wish.estimatedTime),
     });
     void role;
   }
@@ -1242,72 +1370,116 @@ function publishChoiceUi(
         payload: { url: mapsUrl },
       });
     }
+    if (isHotelWishText(`${wish.title} ${card.name}`)) {
+      try {
+        const { resolveHotelPropertyAffiliateUrl, isHotelRoomSelectUrl } =
+          await import('../../services/affiliate/hotelPropertyDeepLink');
+        const { parseHotelStayDatesForPlan } = await import('./planStayDates');
+        const { parseHotelAdults } = await import(
+          '../../services/concierge/hotelAvailabilityService'
+        );
+        const blob = `${wish.title} ${wish.context} ${card.name}`;
+        const dayKeyH =
+          usePlanCalendarUiStore.getState().requestedDayKey ??
+          useFuturePlanStore.getState().plan.dayKey;
+        const { checkin, checkout } = parseHotelStayDatesForPlan(blob, dayKeyH);
+        const adults = parseHotelAdults(blob);
+        const hotelName = card.name.split(/[|,]/)[0]!.trim() || card.name;
+        const liveBook =
+          card.actions.ticketUrl &&
+          /^https?:\/\//i.test(card.actions.ticketUrl) &&
+          !/google\.[^/]+\/search/i.test(card.actions.ticketUrl)
+            ? card.actions.ticketUrl
+            : null;
+        const url = await resolveHotelPropertyAffiliateUrl({
+          hotelName,
+          city: extractCityFromText(blob) || extractExploreCityHint(wish),
+          bookUrl: liveBook,
+          checkin,
+          checkout,
+          adults,
+        });
+        if (url && !seenUrls.has(url)) {
+          seenUrls.add(url);
+          const city =
+            extractCityFromText(blob) || extractExploreCityHint(wish);
+          mirrored.push({
+            type: 'OPEN_URL',
+            label: isHotelRoomSelectUrl(url)
+              ? `${medal} Zimmer buchen`
+              : `${medal} Hotels ansehen`,
+            payload: {
+              url,
+              destName: hotelName,
+              destination: city || hotelName,
+              checkin,
+              checkout,
+              adults,
+            },
+          });
+        }
+      } catch {
+        /* soft */
+      }
+      continue;
+    }
     const offer = resolveOfferAction(wish, card);
     if (offer && !seenUrls.has(offer.url)) {
       seenUrls.add(offer.url);
       mirrored.push({
         type: 'OPEN_URL',
-        label: isHotelWishText(`${wish.title} ${card.name}`)
-          ? `${medal} Zimmer buchen`
-          : `${medal} ${offer.shortLabel}`,
+        label: `${medal} ${offer.shortLabel}`,
         payload: { url: offer.url },
       });
     }
   }
-  // Hotel: zusätzlich Expedia/Stay22-Suche Stadtweit (Partner-Vergleich)
-  if (isHotelWishText(`${wish.title} ${wish.context}`)) {
+  // Hotel: kein zusätzlicher Stadt-Suche-Link — Zimmer-buchen ist schon Property-Deep-Link
+  if (
+    isHotelWishText(`${wish.title} ${wish.context}`) &&
+    !mirrored.some((a) => /zimmer\s*buch|hotels\s*anseh/i.test(a.label))
+  ) {
     try {
-      const {
-        buildExpediaAccommodationAction,
-        buildStay22AccommodationAction,
-        getExpediaCamref,
-      } = require('../../services/affiliate/affiliateService') as {
-        buildExpediaAccommodationAction: (
-          d: string,
-          o?: { checkin?: string; checkout?: string; adults?: number },
-        ) => QuickAction;
-        buildStay22AccommodationAction: (d: string) => QuickAction;
-        getExpediaCamref: () => string;
-      };
-      const {
-        parseHotelStayDates,
-        parseHotelAdults,
-      } = require('../../services/concierge/hotelAvailabilityService') as {
-        parseHotelStayDates: (t: string) => {
-          checkin: string;
-          checkout: string;
-        };
-        parseHotelAdults: (t: string) => number;
-      };
+      const { resolveHotelPropertyAffiliateUrl, isHotelRoomSelectUrl } =
+        await import('../../services/affiliate/hotelPropertyDeepLink');
+      const { parseHotelStayDatesForPlan } = await import('./planStayDates');
+      const { parseHotelAdults } = await import(
+        '../../services/concierge/hotelAvailabilityService'
+      );
       const blob = `${wish.title} ${wish.context}`;
-      const { checkin, checkout } = parseHotelStayDates(blob);
+      const dayKey =
+        usePlanCalendarUiStore.getState().requestedDayKey ??
+        useFuturePlanStore.getState().plan.dayKey;
+      const { checkin, checkout } = parseHotelStayDatesForPlan(blob, dayKey);
       const adults = parseHotelAdults(blob);
-      const dest =
-        unique[0]?.name.split(/[|,]/)[0]?.trim() ||
-        wish.context ||
-        wish.title;
-      if (getExpediaCamref() && mirrored.length < 6) {
-        const ex = buildExpediaAccommodationAction(dest, {
-          checkin,
-          checkout,
-          adults,
+      const hotelName =
+        unique[0]?.name.split(/[|,]/)[0]?.trim() || wish.title;
+      const url = await resolveHotelPropertyAffiliateUrl({
+        hotelName,
+        city: extractCityFromText(blob) || extractExploreCityHint(wish),
+        bookUrl: unique[0]?.actions.ticketUrl ?? null,
+        checkin,
+        checkout,
+        adults,
+      });
+      if (!seenUrls.has(url) && mirrored.length < 6) {
+        seenUrls.add(url);
+        mirrored.push({
+          type: 'OPEN_URL',
+          label: isHotelRoomSelectUrl(url)
+            ? '🏨 Zimmer buchen'
+            : '🏨 Hotels ansehen',
+          payload: {
+            url,
+            destName: hotelName,
+            destination:
+              extractCityFromText(blob) ||
+              extractExploreCityHint(wish) ||
+              hotelName,
+            checkin,
+            checkout,
+            adults,
+          },
         });
-        if (!seenUrls.has(ex.payload.url!)) {
-          seenUrls.add(ex.payload.url!);
-          mirrored.push({
-            ...ex,
-            label: '🏨 Expedia Preise',
-          });
-        }
-      } else if (mirrored.length < 6) {
-        const st = buildStay22AccommodationAction(dest);
-        if (st.payload.url && !seenUrls.has(st.payload.url)) {
-          mirrored.push({
-            type: 'BOOK_STAY22',
-            label: '🏨 Stay22 Preise',
-            payload: st.payload,
-          });
-        }
       }
     } catch {
       /* soft */
@@ -1354,7 +1526,7 @@ export async function executeDeepResearchAndPitch(
 ): Promise<DeepResearchPitchResult & { spokenText: string }> {
   if (isHotelWishText(`${wish.title} ${wish.context}`)) {
     const hotelPitch = await pitchHotelWishFromStay22(wish, opts);
-    if (hotelPitch && hotelPitch.uiCards.length >= 2) {
+    if (hotelPitch && hotelPitch.uiCards.length >= 1) {
       return hotelPitch;
     }
   }
@@ -1365,18 +1537,9 @@ export async function executeDeepResearchAndPitch(
     signal: opts?.signal,
     uiLayout: 'timeline_stack',
   });
-  if (bridge) {
-    try {
-      const { enqueueSpeech } = await import('../speech/speechQueue');
-      enqueueSpeech({
-        kind: 'bridging',
-        text: bridge,
-        turnId: `pitch_bridge_${request.requestId}`,
-      });
-    } catch {
-      /* soft */
-    }
-  }
+  // Planung: kein Bridge-TTS — User hat schon genug Rede; Choice-Speech kommt explizit
+  void bridge;
+  // nur bei Live-Split (nicht Timeline) würde Parent bridge sprechen
 
   try {
     const result = await runPitchModule(request);
@@ -1399,10 +1562,21 @@ export async function executeDeepResearchAndPitch(
         reserveUrl: null as string | null,
       },
     }));
+    // Timeline-Stack: Choices auch ohne Stay22 sichtbar machen
+    if (uiCards.length && request.uiLayout === 'timeline_stack') {
+      await publishChoiceUi(wish, {
+        summary: result.summary,
+        uiCards,
+      });
+    }
+    const spokenText =
+      uiCards.length >= 1
+        ? result.spokenText
+        : 'Für den Slot finde ich gerade keine passenden Adressen — sag mir Stadt, Küche oder Gegend nochmal genauer.';
     return {
       summary: result.summary,
       uiCards,
-      spokenText: result.spokenText,
+      spokenText,
     };
   } catch (err) {
     console.warn('[module5] pitch module failed', err);
@@ -1415,7 +1589,223 @@ export async function executeDeepResearchAndPitch(
 /** Prefetch ohne UI-Publish (fire-and-forget). */
 export function triggerAsyncDeepResearch(wish: IngestOpenWish | undefined): void {
   if (!wish) return;
-  void discoverCandidates(wish, resolveResearchAnchor()).catch(() => undefined);
+  void (async () => {
+    let anchor = resolveResearchAnchor();
+    let cityName: string | null = extractExploreCityHint(wish);
+    try {
+      const { usePlanSessionStore } = await import('./planSessionState');
+      cityName =
+        usePlanSessionStore.getState().plan?.destinationCity ||
+        usePlanSessionStore.getState().cityHint ||
+        cityName;
+      if (cityName && !/\bhier\b/i.test(cityName)) {
+        const geo = await geocodePlaceName(cityName, { cityHint: cityName });
+        if (geo) {
+          anchor = { lat: geo.lat, lng: geo.lng, hint: cityName };
+        }
+      }
+    } catch {
+      /* soft */
+    }
+    await discoverCandidates(
+      wish,
+      { lat: anchor.lat, lng: anchor.lng },
+      { cityName },
+    );
+  })().catch(() => undefined);
+}
+
+/**
+ * Frühstück / Abendessen / Hotel / Landmarke+Ticket → Pitch-Modul.
+ * Tour/Anreise bleiben Explore — nicht in denselben 2er-Gastro-Pitch.
+ */
+export function isPlanPitchWish(wish: IngestOpenWish): boolean {
+  const t = `${wish.title} ${wish.context}`;
+  if (
+    /\b(anreise|aufbruch|hinfahrt|abfahrt|bahn\s+nach|zug\s+nach)\b/i.test(t) &&
+    !/\b(frühstück|fruehstueck|restaurant|essen|hotel|michel|museum|turm)\b/i.test(
+      t,
+    )
+  ) {
+    return false;
+  }
+  // Schon gewählte Landmarke + Fragen → Q&A, kein Top-2-Pitch
+  try {
+    const { looksLikeLandmarkQaText } = require('./planWalkOrder') as {
+      looksLikeLandmarkQaText: (s: string) => boolean;
+    };
+    if (looksLikeLandmarkQaText(t)) return false;
+  } catch {
+    /* soft */
+  }
+  if (/\b(frühstück(?:en)?|fruehstueck(?:en)?|breakfast)\b/i.test(t)) return true;
+  try {
+    const { looksLikeLandmarkPitchText } = require('./planWalkOrder') as {
+      looksLikeLandmarkPitchText: (s: string) => boolean;
+    };
+    if (looksLikeLandmarkPitchText(t)) return true;
+  } catch {
+    if (/\b(michel|museum|kirche|dom|turm|eintritt|raufgeh)\b/i.test(t)) {
+      return true;
+    }
+  }
+  if (isHotelWishText(t)) return true;
+  if (
+    /\b(restaurant|abendessen|mittagessen|dinner|lunch|café|cafe|bistro|imbiss|italiener|grieche|sushi|pizza|trattoria|osteria|brasserie|pannfisch|essen\s+gehen)\b/i.test(
+      t,
+    )
+  ) {
+    return true;
+  }
+  const hm = wish.estimatedTime;
+  if (
+    hm &&
+    hm >= '17:30' &&
+    hm <= '21:45' &&
+    /\b(essen|fisch|blick|sonnenuntergang|sunset)\b/i.test(t)
+  ) {
+    return true;
+  }
+  return false;
+}
+
+/** Landmarke Q&A (Michel etc.) — eigener Walk-Schritt, kein Pitch. */
+export function isPlanLandmarkQaWish(wish: IngestOpenWish): boolean {
+  try {
+    const { looksLikeLandmarkQaText } = require('./planWalkOrder') as {
+      looksLikeLandmarkQaText: (s: string) => boolean;
+    };
+    return looksLikeLandmarkQaText(`${wish.title} ${wish.context}`);
+  } catch {
+    return /\bmichel\b/i.test(`${wish.title} ${wish.context}`);
+  }
+}
+
+/**
+ * Fakten + Ticket-Link für schon gewählte Landmarke (kein Top-2).
+ * Pack der Zielstadt zuerst; wenn dünn → Research-Hinweis.
+ */
+export async function executeLandmarkQaBrief(
+  wish: IngestOpenWish,
+): Promise<{
+  spokenText: string;
+  ticketUrl: string | null;
+  bullets: string[];
+}> {
+  const name = (wish.title || 'der Ort').trim();
+  let cityHint: string | null = null;
+  try {
+    const { usePlanSessionStore } = await import('./planSessionState');
+    cityHint =
+      usePlanSessionStore.getState().plan?.destinationCity ||
+      usePlanSessionStore.getState().cityHint ||
+      null;
+  } catch {
+    cityHint = null;
+  }
+
+  const packFacts: string[] = [];
+  try {
+    const { lookupPackFactsForSubject } = await import(
+      '../agents/packFactLookup'
+    );
+    const hit = await lookupPackFactsForSubject({
+      subject: name,
+      cityHint,
+      limitFacts: 8,
+    });
+    if (hit?.facts?.length) {
+      packFacts.push(...hit.facts.map((f) => String(f).trim()).filter(Boolean));
+    }
+    if (hit?.liveHints?.length) {
+      packFacts.push(
+        ...hit.liveHints.map((f) => String(f).trim()).filter(Boolean).slice(0, 2),
+      );
+    }
+  } catch {
+    /* soft */
+  }
+
+  const ctxNotes = (wish.context || '')
+    .split(/[|·]/)
+    .map((s) => s.trim())
+    .filter(
+      (s) =>
+        s.length >= 8 &&
+        !/Sunset-Wetter|ÖPNV ≈|Ankunft nach/i.test(s),
+    )
+    .slice(0, 3);
+
+  const facts = [...packFacts, ...ctxNotes]
+    .map((s) => s.replace(/\s+/g, ' ').trim().slice(0, 160))
+    .filter(Boolean);
+  const unique: string[] = [];
+  const seen = new Set<string>();
+  for (const f of facts) {
+    const k = f.toLowerCase().slice(0, 40);
+    if (seen.has(k)) continue;
+    seen.add(k);
+    unique.push(f);
+  }
+
+  let ticketUrl: string | null = null;
+  try {
+    const q = encodeURIComponent(
+      `${name}${cityHint ? ` ${cityHint}` : ''} Tickets Eintritt`,
+    );
+    ticketUrl = `https://www.google.com/search?q=${q}`;
+  } catch {
+    ticketUrl = null;
+  }
+
+  const thin = unique.length < 2;
+  if (thin) {
+    try {
+      // Dünn → leichte Live-Recherche (nicht blockierend lang)
+      const { generateGeminiText } = await import('../../services/geminiService');
+      const raw = await generateGeminiText(
+        `Kurzfakten nur belegt zu ${name}${cityHint ? ` in ${cityHint}` : ''}: Höhe/Aussicht, Eintrittspreis, Dauer Besuch. Max 3 Stichpunkte, keine Erfindung. Stadt-agnostisch ehrlich wenn unbekannt.`,
+        { useFindusSystem: false, maxOutputTokens: 220 },
+      );
+      const lines = String(raw || '')
+        .split(/[\n•\-]+/)
+        .map((s) => s.replace(/\s+/g, ' ').trim())
+        .filter((s) => s.length >= 12 && s.length < 140)
+        .slice(0, 3);
+      for (const l of lines) {
+        if (!unique.some((u) => u.toLowerCase().includes(l.slice(0, 20).toLowerCase()))) {
+          unique.push(l);
+        }
+      }
+    } catch {
+      /* soft */
+    }
+  }
+
+  const factBits = unique.length
+    ? unique.slice(0, 4).join(' ')
+    : `Zu ${name} habe ich im Pack noch wenig — Eintritt und Aussicht hole ich live nach.`;
+  const spokenText = `${name}: ${factBits} Ticket-Link liegt bereit — wenn du gebucht hast oder eine Uhrzeit hast, sag Bescheid, dann trage ich ihn fest ein.`.slice(
+    0,
+    900,
+  );
+
+  try {
+    const { setOpenLandmarkTicket } = await import('./planLandmarkOpen');
+    setOpenLandmarkTicket(name);
+  } catch {
+    /* soft */
+  }
+
+  return {
+    spokenText,
+    ticketUrl,
+    bullets: [
+      name,
+      ...unique.slice(0, 2),
+      ticketUrl ? 'Ticket-Link bereit' : 'Eintritt nachschauen',
+    ].slice(0, 3),
+  };
 }
 
 export function isExploreWish(wish: IngestOpenWish): boolean {
@@ -1509,25 +1899,7 @@ function extractExploreCityHint(wish: IngestOpenWish): string | null {
 
   // Fremde Stadt nur wenn explizit und ≠ Profil
   if (known) {
-    const local = (profileCity || bagCity || '').toLowerCase();
-    if (
-      !local ||
-      known.toLowerCase() === local ||
-      local.includes(known.toLowerCase()) ||
-      known.toLowerCase().includes(local)
-    ) {
-      return known;
-    }
-    // Explizit andere Stadt (z. B. „Hamburg erkunden“) — erlauben
-    if (
-      /\b(?:in|nach|für|fuer)\s+/i.test(blob) ||
-      new RegExp(
-        `^${known.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\$&')}\\s+(?:erkunden|highlights?)`,
-        'i',
-      ).test(blob)
-    ) {
-      return known;
-    }
+    return known;
   }
 
   if (wantsLocalCityStay(blob) || isWalkWish(wish) || isExploreWish(wish)) {
@@ -1592,6 +1964,115 @@ export async function executeExploreWishInsert(
   request.softDurationMin = forceDurationMin;
   const ref = resolveDistanceRef(wish);
   request.anchor = { lat: ref.lat, lng: ref.lng };
+  request.planDayKey = dayKey;
+  request.preferStartMs = (() => {
+    const hm = wish.estimatedTime;
+    if (!hm) {
+      // Geplanter Tag (morgen/Montag) nie auf Jetzt — ~09:30 auf dem Plan-Tag.
+      try {
+        const { todayDateKey } = require('../../utils/dateKeys') as {
+          todayDateKey: () => string;
+        };
+        if (dayKey !== todayDateKey()) {
+          const [y, mo, d] = dayKey.split('-').map(Number);
+          return new Date(y!, mo! - 1, d!, 9, 30, 0, 0).getTime();
+        }
+      } catch {
+        /* soft */
+      }
+      // Morgen / Vormittag → ~09:30
+      if (/\b(morgen(?:s)?|vormittag|früh|frueh)\b/i.test(`${wish.title} ${wish.context}`)) {
+        const [y, mo, d] = dayKey.split('-').map(Number);
+        return new Date(y!, mo! - 1, d!, 9, 30, 0, 0).getTime();
+      }
+      return null;
+    }
+    const m = hm.match(/^(\d{1,2}):(\d{2})$/);
+    if (!m) return null;
+    const [y, mo, d] = dayKey.split('-').map(Number);
+    return new Date(
+      y!,
+      mo! - 1,
+      d!,
+      Number(m[1]),
+      Number(m[2]),
+      0,
+      0,
+    ).getTime();
+  })();
+  // Hard-Ende: nächster Fix-Termin nach Tour-Start
+  try {
+    const {
+      hardIntervalsFromStops,
+    } = require('./planHardLock') as typeof import('./planHardLock');
+    const stops = useFuturePlanStore.getState().getPlanForDay(dayKey).stops;
+    const hard = hardIntervalsFromStops(stops);
+    const start =
+      request.preferStartMs ??
+      (() => {
+        try {
+          const { todayDateKey } = require('../../utils/dateKeys') as {
+            todayDateKey: () => string;
+          };
+          if (dayKey !== todayDateKey()) {
+            const [y, mo, d] = dayKey.split('-').map(Number);
+            return new Date(y!, mo! - 1, d!, 9, 30, 0, 0).getTime();
+          }
+        } catch {
+          /* soft */
+        }
+        return Date.now();
+      })();
+    const next = hard.find((h) => h.start > start + 5 * 60_000);
+    if (next) {
+      request.hardArriveByMs = next.start;
+      const maxMin = Math.max(
+        25,
+        Math.round((next.start - start) / 60_000) - 10,
+      );
+      if (forceDurationMin > maxMin) {
+        request.timeBudgetMin = maxMin;
+        request.softDurationMin = maxMin;
+      }
+    }
+  } catch {
+    /* soft */
+  }
+  request.uiLayout = 'timeline_stack';
+
+  // Gebiet aus Wunsch geocoden (nicht GPS-Heimatpack)
+  try {
+    const areaHint =
+      wish.address ||
+      extractCityFromText(`${wish.title} ${wish.context}`) ||
+      usePlanSessionStore.getState().plan?.destinationCity?.trim() ||
+      (() => {
+        const blob = `${wish.title} ${wish.context}`;
+        const inM = blob.match(
+          /\b(?:in|im|nach)\s+([A-ZÄÖÜ][\wÄÖÜäöüß-]{2,40}(?:\s+[A-ZÄÖÜ][\wÄÖÜäöüß-]{2,40})?)/,
+        );
+        if (inM?.[1]) return inM[1].trim();
+        const lead = blob.match(
+          /^([A-ZÄÖÜ][\wÄÖÜäöüß-]{2,40})\s+(?:erkunden|entdecken|bummel|highlight)/i,
+        );
+        return lead?.[1]?.trim() ?? null;
+      })();
+    if (areaHint) {
+      request.areaHint = areaHint;
+      request.cityHint = areaHint;
+      const { geocodePlaceName } = await import(
+        '../../services/navigation/googleMapsNav'
+      );
+      const geo = await geocodePlaceName(areaHint, {
+        cityHint: areaHint,
+      });
+      if (geo && Number.isFinite(geo.lat) && Number.isFinite(geo.lng)) {
+        request.anchor = { lat: geo.lat, lng: geo.lng };
+      }
+    }
+  } catch {
+    /* soft */
+  }
 
   if (bridge) {
     try {
@@ -1608,26 +2089,8 @@ export async function executeExploreWishInsert(
   }
 
   const result = await runTourModule(request);
-  let inserted = 0;
-  const now = Date.now();
-  let t = now + 5 * 60_000;
-  for (const s of result.stops) {
-    useFuturePlanStore.getState().upsertStop({
-      id: `tour_${result.requestId}_${s.poiId}`,
-      title: s.name,
-      lat: s.lat,
-      lng: s.lng,
-      plannedStartMs: t,
-      plannedEndMs: t + Math.max(1, s.dwellMin) * 60_000,
-      kind: 'stop',
-      bufferMin: 10,
-      transport: request.mobility === 'bike' ? 'bike' : 'walk',
-      status: 'planned',
-      planPriority: 6,
-    });
-    t += (s.dwellMin + 8) * 60_000;
-    inserted += 1;
-  }
+  // publishTourResult (in runTourModule) spiegelt bereits auf planDayKey
+  const inserted = result.softFail ? 0 : result.stops.length;
 
   try {
     applyGapFillTravelLegs();
@@ -1643,12 +2106,12 @@ export async function executeExploreWishInsert(
     /* soft */
   }
 
-  const mirrored: QuickAction[] = result.actions.slice(0, 4);
   usePlanCalendarUiStore.getState().clearPendingChoice();
-  usePlanCalendarUiStore.getState().setMirroredActions(mirrored);
+  // Planung: keine Route-Action-Buttons
+  usePlanCalendarUiStore.getState().setMirroredActions([]);
 
   return {
-    spokenText: sanitizePlanSpeech(result.spokenText).slice(0, 420),
+    spokenText: sanitizePlanSpeech(result.spokenText).slice(0, 1200),
     inserted,
   };
 }

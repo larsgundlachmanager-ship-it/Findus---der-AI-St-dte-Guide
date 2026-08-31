@@ -1,0 +1,390 @@
+{
+  "notes": [
+    "Wikipedia DE 2026-08-13, nur belegte Fakten. LIVE ohne Preise.",
+    "IDs first — keine kurzen Stadtnamen-Matches."
+  ],
+  "spots": [
+    {
+      "id": "luebeck_museum_holstentor",
+      "name": "Holstentor",
+      "general_info": "Westliches Stadttor der Altstadt, Wahrzeichen Lübecks, 1478 fertiggestellt. Spätgotische Zwillingsürme mit Kegeldächern; seit 1950 Stadtgeschichtliches Museum. LIVE Öffnung und Tickets prüfen.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Südturm, Nordturm und Mittelbau. Von der Stadtseite eine gerade Front; zur Feldseite (Westen) stehen die Türme halbrund vor. Kegeldächer, Giebel am Mittelbau, Terrakottabänder rundum.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Historie: Das heutige Holstentor war das Mittlere von vier Holstentoren. Die anderen wurden im 19. Jahrhundert abgerissen. Neben dem Burgtor ist es das einzige erhaltene Lübecker Stadttor.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Historie: Fertigstellung 1478. Inschriften von 1871: feldseitig CONCORDIA DOMI FORIS PAX (Eintracht innen, draußen Friede); stadtseitig S.P.Q.L. mit den Jahreszahlen 1477 und 1871 — das Baudatum 1477 auf der Inschrift ist ungenau.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Architektur: Feldseite wehrhaft — wenige kleine Fenster, Schießscharten, Mauern bis 3,5 m dick; Stadtseite unter 1 m und fensterreich. Der Bau ist im Boden eingesunken; Geschützkammern im Erdgeschoss liegen heute unter dem Fußboden.",
+          "tags": ["architektur", "geschichte"]
+        },
+        {
+          "text": "Leben jetzt: Im Tor das Museum zur Stadtgeschichte (Themenräume zu Handel, Wehr, Schifffahrt, lübischem Recht). Eingang über die Holzpforte an der Stadtseite, Wendeltreppe zwischen den Stockwerken. LIVE Zeiten und Tickets.",
+          "tags": ["heute", "museum"]
+        },
+        {
+          "text": "Quer: Direkt an der Holstenbrücke die Salzspeicher — Salz über Alte Salzstraße und Stecknitz-Kanal, Grundlage des Heringshandels. Achse Hauptbahnhof — Puppenbrücke — Holstenbrücke — Holstenstraße ins Zentrum.",
+          "tags": ["quer"]
+        },
+        {
+          "text": "Fun Fact: Im Museum steht das älteste eindeutig datierte Buddelschiff der Welt, 1784 von Georg Biondi, Kriegsschiff in einer eiförmigen Flasche mit Öffnung nach unten.",
+          "tags": ["funfact", "geschichte"]
+        },
+        {
+          "text": "Visuell Platz: Am Holstentorplatz Grünanlage von Harry Maasz mit zwei Eisenguss-Löwen (1823, Christian Daniel Rauch zugeschrieben) — einer schläft, einer wacht.",
+          "tags": ["visuell", "quer"]
+        },
+        {
+          "text": "LIVE: Museum, Tourist-Info Holstentorplatz und aktuelle Sanierungen vor Ort oder auf der offiziellen Seite prüfen — Pack enthält keine Preise.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich das Holstentor?",
+          "a": "Zwei massive Backsteintürme mit spitzen Kegeldächern westlich der Altstadt, vor der Trave; daneben die Staffelgiebel der Salzspeicher, nicht das Tor selbst."
+        },
+        {
+          "q": "Kann man ins Holstentor?",
+          "a": "Ja, Stadtgeschichtliches Museum in den Türmen und im Mittelbau. LIVE Öffnung und Tickets prüfen."
+        }
+      ]
+    },
+    {
+      "id": "luebeck_ev_luth_kirchengemeinde_st_marien_zu_lubeck",
+      "name": "St. Marien zu Lübeck",
+      "general_info": "Markt- und Ratskirche auf dem höchsten Punkt der Altstadtinsel, 1265–1351, Mutterkirche der Backsteingotik. Höchstes Backsteingewölbe der Welt (38,5 m). LIVE Gottesdienst und Turm/Öffnung prüfen.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Dreischiffige Basilika, Doppelturmfassade rund 125 m hoch, Backstein mit Granit-Eckquadern und Kalksteingesimsen. Neben Rathaus und Markt, im Kaufmannsviertel.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Historie: Nach 1160 zuerst Holzkirche, 1170 mit St. Petri als Marktkirche genannt, dann romanischer Backsteinbau. Um 1251 gotischer Neubau; ab etwa 1265 Basilika mit Umgangschor statt Hallenkirche. Türme 1304–1351.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Historie: Vorbild für rund 70 Kirchen im Ostseeraum. Der Rat wollte die bürgerliche Macht gegenüber dem vom Löwen gestifteten Dom sichtbar machen — größer, höher, näher an Markt und Rathaus.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Zerstörung: In der Nacht zum Palmsonntag 28./29. März 1942 brannte St. Marien bis auf die Mauern aus. Totentanzorgel (Buxtehude, sehr wahrscheinlich Bach), Totentanz und viele Kunstwerke gingen verloren. Wiederaufbau ab 1947, Turmhelme in Leichtbeton unter Kupfer.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Leben jetzt: Gedenkkapelle im Südturm mit den 1942 herabgestürzten Glocken. Bronzenes Taufbecken von Hans Apengeter 1337. Briefkapelle oft Winterkirche Januar–März. Antwerpener Altar 1518 in der Marientidenkapelle.",
+          "tags": ["heute", "geschichte"]
+        },
+        {
+          "text": "Quer: Im Chorumgang Sandsteinreliefs Heinrich Brabender 1515 — am Abendmahl eine kleine Maus am Rosenstock, Lübecker Wahrzeichen (Sage: wer sie berührt, kommt wieder).",
+          "tags": ["quer", "funfact"]
+        },
+        {
+          "text": "Maße (belegt): Gesamtlänge 102 m, Mittelschiff 70 m, Gewölbe 38,5 m, Türme mit Wetterhahn rund 125 m, bebaute Fläche ca. 4400 m².",
+          "tags": ["architektur"]
+        },
+        {
+          "text": "LIVE: Öffnung, Turmaufstieg, Konzerte und Gottesdienste aktuell prüfen — Pack enthält keine Preise.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich St. Marien?",
+          "a": "Zwei fast gleich hohe Backsteintürme direkt neben dem Rathaus, auf dem höchsten Punkt der Insel — nicht der Dom am Südende."
+        }
+      ]
+    },
+    {
+      "id": "luebeck_st_petri_zu_lubeck",
+      "name": "Petrikirche Lübeck",
+      "general_info": "Kultur- und Hochschulkirche, erstmals 1170 genannt, fünfschiffige gotische Hallenkirche. Weißer Innenraum, Aussichtsturm mit Aufzug. LIVE Plattform und Ausstellungen prüfen.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Ein Turm auf breitem Unterbau (einst Doppelturm geplant), fünf Schiffe, drei Apsiden im Osten. Weiß getünchter, fast leerer Innenraum — Altar, Taufe, Kreuz, Orgel.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Historie: 1170 mit Marien genannt. 15. Jahrhundert Ausbau zur fünfschiffigen Halle — eine der wenigen solchen Kirchen. Palmsonntag 1942 Totalbrand; Wiedereröffnung 1987 als Kirche für die ganze Stadt ohne eigene Gemeinde.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Leben jetzt: Kunst- und Kulturkirche, Hochschulkirche der Universität, TH und Musikhochschule. Aussichtsplattform in 50 m Höhe, Turm 108 m, Aufzug. Petri-Café. Neon-Schrift am Eingang: Yes, it is a church! (Christian Jankowski).",
+          "tags": ["heute"]
+        },
+        {
+          "text": "Quer: Vom Turm Blick über die sieben Türme der Altstadtinsel bis zur Lübecker Bucht. Lage am Malerwinkel / Obertrave, nicht mit Mariens Doppeltürmen verwechseln.",
+          "tags": ["quer", "visuell"]
+        },
+        {
+          "text": "LIVE: Turmaufzug, Café, aktuelle Ausstellungen und Gottesdienste prüfen — Pack enthält keine Preise.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich St. Petri?",
+          "a": "Ein einzelner hoher Turm westlich der Marienkirche, nah an der Obertrave; innen sehr hell und fast leer, nicht voller Altäre wie der Dom."
+        },
+        {
+          "q": "Kann man auf den Turm?",
+          "a": "Ja, Plattform in 50 m, Aufzug. LIVE Betrieb prüfen."
+        }
+      ]
+    },
+    {
+      "id": "luebeck_lubecker_dom",
+      "name": "Lübecker Dom",
+      "general_info": "Erster großer Backsteinkirchbau an der Ostsee, 1173 von Heinrich dem Löwen begründet, 1247 geweiht, rund 132 m lang. Romanik plus gotischer Chor. LIVE Öffnung prüfen.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Zwei romanische Türme am Südende der Altstadtinsel zwischen Obertrave und Mühlenteich. Innen Übergang: massive rechteckige Pfeiler (Romanik) zu schlanken runden Säulen (gotischer Chor), nach dem Krieg durch Glaswand markiert.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Historie: Löwendom wie Ratzeburg, Schwerin, Braunschweig. Bistum 1160–63 von Oldenburg hierher. Romanische Basilika 1247 geweiht; ab 1266 Hallenumformung; gotischer Chor unter Bischof Heinrich II. Bochholt, 1341 fertig.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Zerstörung: Palmsonntag 1942 — Brand vom benachbarten Dommuseum, Turmhelme stürzten, Schnitger-Prospekt/Walcker-Orgel verloren. Triumphkreuz Bernt Notke 1477 und die meisten mittelalterlichen Flügelaltäre gerettet. Wiederaufbau bis 1982 (Paradies-Vorhalle zuletzt).",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Leben jetzt: 17 m hohes Triumphkreuz von Bernt Notke (Stiftung Bischof Albert Krummendiek, 1477) beherrscht das Schiff. Kreuzgang verbindet zum Museum für Natur und Umwelt und Stadtarchiv. Türme knapp 115 m.",
+          "tags": ["heute", "geschichte"]
+        },
+        {
+          "text": "Quer: Der Rat baute St. Marien bewusst größer als den bischöflichen Dom. Lage frei am Wasser — historisch sturmanfällig.",
+          "tags": ["quer"]
+        },
+        {
+          "text": "LIVE: Öffnung, Führungen und Turmsanierung (mehrjährige Arbeiten ab 2024 angekündigt) aktuell prüfen — Pack enthält keine Preise.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich den Dom?",
+          "a": "Zwei Türme ganz im Süden der Insel, nicht neben dem Markt — Marien steht oben am Rathaus, der Dom unten am Mühlenteich."
+        }
+      ]
+    },
+    {
+      "id": "luebeck_europaisches_hansemuseum",
+      "name": "Europäisches Hansemuseum",
+      "general_info": "Museum zur Hanse an der Untertrave 1, eröffnet Mai 2015, Architekt Andreas Heller, neben Burgkloster und Burgtor. Begehbare Grabung plus Inszenierungen der Kontore. LIVE Tickets prüfen.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Neubau am Hang zwischen Untertrave und Burgkloster. Eingangshalle in der Treppe von An der Untertrave hinauf zum Klosterniveau. Weitere Zugänge Hinter der Burg und Große Burgstraße.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Historie: Bürgerschaftsbeschluss 2010, Abriss 2012 (Bunker und Seemannsheim), Eröffnung 27. Mai 2015 durch Bundeskanzlerin Angela Merkel, Betrieb ab 30. Mai. Wissenschaftliche Konzeption Rolf Hammel-Kiesow.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Leben jetzt: Rundgang beginnt bei freigelegten Fundamenten — etwa 1200 Jahre Stadtgeschichte anhand der Grabung. Großdioramen: Nowgorod (Peterhof), Lübeck im 13. Jahrhundert, Brügge, Londoner Stalhof, Bergen/Tyske Brygge, Hansetag 1518.",
+          "tags": ["heute", "museum"]
+        },
+        {
+          "text": "Quer: Zweiter Ausstellungsteil im Burgkloster (u. a. Bergen/Stockfisch). Nachbarschaft Marstall und Burgtor. Lübisches Recht ist eigener Schwerpunkt.",
+          "tags": ["quer"]
+        },
+        {
+          "text": "LIVE: Tickets, Öffnung und Sonderausstellungen auf der Museumseite prüfen — Pack enthält keine Preise.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich das Hansemuseum?",
+          "a": "Am Nordrand der Altstadt an der Untertrave, Treppe den Hang hinauf, direkt am Burgkloster — nicht das Holstentor-Museum."
+        }
+      ]
+    },
+    {
+      "id": "luebeck_historische_altstadt_lubeck",
+      "name": "Lübecker Altstadt · UNESCO",
+      "general_info": "Erstes deutsches UNESCO-Flächendenkmal (1987): rund 115 ha innerhalb der alten Mauer, etwa 75 % mit Vorkriegsbebauung und den mittelalterlichen Backsteinkirchen. Sieben Türme, Gänge und Höfe.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Inselhügel Bucu zwischen Trave, Kanal-Trave, Krähen- und Mühlenteich. Skyline der fünf Hauptkirchen (sieben Türme). Giebelhäuser, dahinter Gänge und Höfe. Erhaltene Tore: Burgtor und Holstentor.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Historie: Neugründung nach 1143, nach Brand 1159 unter Heinrich dem Löwen. Planung: Nord-Süd vom Burgtor, Plätze Koberg und Klingenberg, parallel Königstraße und Breite Straße, Rippenstraßen nach Ost und West.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Historie: 1896–1900 Elbe-Lübeck-Kanal macht den Hügel zur Insel; Wakenitz wird aufgestaut. Entfestigung ab 19. Jahrhundert für Hafen und Bahn. Palmsonntag 1942 zerstörte rund ein Fünftel der Innenstadt — dieser Teil ist vom Welterbe ausgeklammert.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Leben jetzt: Stadtteil Innenstadt, über 14.000 Einwohner. Drei Welterbe-Teilbereiche zusammen 81 ha plus Pufferzone. Über tausend Profanbauten einzeln unter Denkmalschutz.",
+          "tags": ["heute"]
+        },
+        {
+          "text": "Quer: Bereich 3 des Welterbes bündelt Rathaus, Marienkirche und obere Mengstraße mit Buddenbrookhaus — der Kern der klassischen Altstadt-Tour.",
+          "tags": ["quer"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich, dass ich in der Welterbe-Altstadt bin?",
+          "a": "Insel zwischen Trave und Kanal, Skyline der sieben Kirchtürme, Holstentor oder Burgtor als Tore — nicht Travemünde und nicht die Vorstädte hinter den Wallanlagen."
+        }
+      ]
+    },
+    {
+      "id": "luebeck_rathaus",
+      "name": "Rathaus Lübeck",
+      "general_info": "Eines der größten mittelalterlichen Rathäuser Deutschlands, Backsteingotik am Markt neben St. Marien. Bis heute Sitz von Bürgermeister und Bürgerschaft. Haupteingang Breite Straße.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Schildwände mit Blendmaßwerk, drei Türmchen zur Marktseite, Renaissancelaube mit Granitsäulen und Sandsteingiebeln (Hans Fleminck, Hercules Midow, 1570–72). Runde Löcher in der Markt-Ziermauer brechen den Wind.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Historie: Um 1240 romanischer Gruppenbau, nach Brand 1251 frühgotische Schildwände. Langes Haus nach 1298, Hansesaal hinter der Fassade zur Breiten Straße um 1350. Neues Gemach um 1435 (Ratsbaumeister Peck).",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Historie: Tagungsort der Hanse; Oberhof Lübeck war bis 1820 Appellationsgericht für Städte lübischen Rechts. Kriegsstube (Tönnies Evers d. J.) 1942 zerstört. Hansesaal 1818 in Büros aufgeteilt.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Leben jetzt: Bürgermeister und Bürgerschaft tagen hier. Ratskeller unter der Renaissancelaube (Marktseite). Audienzsaal mit Renaissanceportal 1574 (Tore unterschiedlich hoch: Freispruch hohe Tür, Verurteilte rückwärts durch die niedrige).",
+          "tags": ["heute", "funfact"]
+        },
+        {
+          "text": "Quer: Nordseite zum Marienkirchhof; Kanzleigebäude nördlich an der Breiten Straße (Backsteinrenaissance, ab 1483).",
+          "tags": ["quer"]
+        },
+        {
+          "text": "LIVE: Führungen und Ratskeller-Öffnung aktuell prüfen — Pack enthält keine Speisekartenpreise.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich das Rathaus?",
+          "a": "Am Markt, direkt an St. Marien: dunkler Backstein, Türmchen, helle Renaissance-Laube — nicht die Kirche daneben."
+        }
+      ]
+    },
+    {
+      "id": "luebeck_heiligen_geist",
+      "name": "Heiligen-Geist-Hospital",
+      "general_info": "Am Koberg, Stiftung 1227, Bau vollendet 1286: eine der ältesten bestehenden Sozialeinrichtungen und ein Hauptwerk der Backsteingotik. Kabäuschen im Langhaus. LIVE Öffnung prüfen.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Drei schlanke Ziertürmchen und Zickzack-Giebel wie am Rathaus, Langhaus als Halle. Innen hölzerne Kabäuschen (ab 1820, je etwa vier Quadratmeter), nach oben offen, zwei Längsgänge.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Historie: 1227 Stiftung, Verlegung vom Klingenberg zum Koberg nach 1360. Kaufmann Bertram Morneweg Mitbegründer und erster Vorsteher. Einkünfte aus Hospitaldörfern finanzierten Arme und Kranke.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Historie: In der Reformation weltliches Altenheim. Kammern bis 1970 bewohnt. Stiftung öffentlichen Rechts, treuhänderisch von der Hansestadt verwaltet; Güter u. a. nach ökologischem Landbau (Bürgerschaftsbeschluss 1986).",
+          "tags": ["geschichte", "heute"]
+        },
+        {
+          "text": "Leben jetzt: Teile weiter Alten- und Pflegeheim; historische Räume und Gastronomie an der Südseite, Weg in die Bürgergärten Richtung Behnhaus. Ganzjährig Besichtigung möglich. Advents-Weihnachtsmarkt (Frau und Kultur, seit 1958) in Vorhalle, Kabäuschen und Gewölbe.",
+          "tags": ["heute"]
+        },
+        {
+          "text": "Quer: Nordwand der Kirche: großformatige Malereien um 1320–25 (salomonischer Thron; Maiestas Domini mit Stiftermedaillons). Elisabeth-Zyklus am Lettner, 15. Jh.",
+          "tags": ["quer", "geschichte"]
+        },
+        {
+          "text": "LIVE: Besichtigung, Heim-Betrieb und Adventsmarkt saisonal prüfen — Pack enthält keine Preise.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich das Heiligen-Geist-Hospital?",
+          "a": "Am Koberg, Kirche mit drei schlanken Giebeltürmchen — innen die berühmten holzverschlagenen Mini-Kammern, nicht ein normales Kirchenschiff."
+        }
+      ]
+    },
+    {
+      "id": "luebeck_buddenbrookhaus",
+      "name": "Buddenbrookhaus",
+      "general_info": "Mengstraße 4, weiße Barockfassade vis-à-vis St. Marien. Schauplatz von Thomas Manns Buddenbrooks. Heinrich-und-Thomas-Mann-Zentrum. Haus für Umbau geschlossen; Teile im Behnhaus. LIVE Status prüfen.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Weiße Fassade, Portalinschrift Dominus providebit und Jahreszahl 1758. Figuren unter dem Giebel: Zeit und Wohlstand. Blickachse direkt auf St. Marien.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Historie: Neubau 1758 für Nowgorodfahrer Johann Michael Croll. 1842 Kauf durch Johann Siegmund Mann jr. Großelternhaus von Heinrich und Thomas Mann; Firma später Beckergrube 52. 1942 blieb nach dem Luftangriff nur Fassade und barocker Gewölbekeller.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Historie: Wiederaufbau 1957/58, Fassade originalgetreu (Ludwig Schirrmeister). 1993 Heinrich-und-Thomas-Mann-Zentrum, Festakt mit Bundespräsident von Weizsäcker zum 850-Stadtjubiläum, 90 Jahre nach Erscheinen der Buddenbrooks.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Leben jetzt: Träger Kulturstiftung Hansestadt Lübeck. Dauerausstellungen waren „Die Buddenbrooks – Ein Jahrhundertroman“ und „Die Manns – eine Schriftstellerfamilie“ (Museumspreis des Europarates 2002). Ende 2019 Schließung für Erweiterung/Umbau bis 2029; Teile im Behnhaus Drägerhaus.",
+          "tags": ["heute", "museum"]
+        },
+        {
+          "text": "Quer: Welterbe-Bereich 3 verknüpft Rathaus, Marien und obere Mengstraße. Stolperstein und Mühsam-Dokumentation im Gewölbekeller.",
+          "tags": ["quer"]
+        },
+        {
+          "text": "LIVE: Ob das Haus offen ist oder die Ausstellung im Behnhaus läuft, aktuell prüfen — Pack enthält keine Preise.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich das Buddenbrookhaus?",
+          "a": "Weißes Barockhaus Mengstraße 4, Portal 1758, direkt gegenüber den Marien-Türmen — nicht das Behnhaus am Koberg."
+        }
+      ]
+    },
+    {
+      "id": "luebeck_salzspeicher",
+      "name": "Salzspeicher am Holstentor",
+      "general_info": "Sechs Speicher an der Obertrave direkt neben dem Holstentor, Backsteinrenaissance und -barock, 1579–1745. Salz aus Lüneburg und Oldesloe für den Heringshandel. LIVE Nutzung prüfen.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Staffelgiebel-Reihe am Traveufer westlich der Holstenbrücke, unmittelbar neben dem Holstentor — sechs Einzelhäuser, nicht ein Tor.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Historie: Speicher 1: 1579, 2: 1599, 3: kurz nach 1600, 4: 1594, 5 und 6: 1743–1745. Klinkerrelief am holstentornahen Speicher: Eigentum der Saline Oldesloe bis 1839.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Historie: Salz über Alte Salzstraße und später Stecknitz-Kanal aus Lüneburg, plus Oldesloe auf der Trave. Export nach Skandinavien; Hering als Fastenspeise. Holstenbrücke markierte die Grenze Seehafen / Binnenhafen.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Leben jetzt: Später auch Tuch, Korn, Holz. Seit 1942 Nutzung durch ein Textilkaufhaus (Ausweichquartier nach Bombenschäden, dort geblieben). Kulturdenkmale 1088–1093 der Hansestadt.",
+          "tags": ["heute"]
+        },
+        {
+          "text": "Quer: Drehort für Murnaus Nosferatu (1922) und Herzogs Nosferatu (1979) — Kulisse des Hauses, das der Vampir in Wisborg mietet.",
+          "tags": ["quer", "funfact"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich die Salzspeicher?",
+          "a": "Die Giebelzeile am Wasser direkt neben dem Holstentor, nicht die Türme des Tors selbst."
+        }
+      ]
+    }
+  ]
+}

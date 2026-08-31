@@ -144,8 +144,24 @@ export const usePlanCalendarUiStore = create<Store>((set) => ({
   requestedDayAtMs: 0,
   focusedStopId: null as string | null,
   routeComputingIds: {},
-  requestOpen: () =>
-    set({ openRequestAtMs: Date.now(), closeRequestAtMs: null }),
+  requestOpen: () => {
+    try {
+      const { useHomeMapUiStore } = require('../../store/useHomeMapUiStore') as {
+        useHomeMapUiStore: {
+          getState: () => {
+            placePopup: unknown;
+            setPlacePopup: (p: null) => void;
+          };
+        };
+      };
+      if (useHomeMapUiStore.getState().placePopup) {
+        useHomeMapUiStore.getState().setPlacePopup(null);
+      }
+    } catch {
+      /* soft */
+    }
+    set({ openRequestAtMs: Date.now(), closeRequestAtMs: null });
+  },
   requestClose: () => set({ closeRequestAtMs: Date.now() }),
   clearOpenRequest: () => set({ openRequestAtMs: null }),
   clearCloseRequest: () => set({ closeRequestAtMs: null }),
@@ -157,6 +173,23 @@ export const usePlanCalendarUiStore = create<Store>((set) => ({
         noteOverlayBusy: (busy: boolean) => void;
       };
       if (calendarVisible) {
+        try {
+          const {
+            useHomeMapUiStore,
+          } = require('../../store/useHomeMapUiStore') as {
+            useHomeMapUiStore: {
+              getState: () => {
+                placePopup: unknown;
+                setPlacePopup: (p: null) => void;
+              };
+            };
+          };
+          if (useHomeMapUiStore.getState().placePopup) {
+            useHomeMapUiStore.getState().setPlacePopup(null);
+          }
+        } catch {
+          /* soft */
+        }
         noteOverlayBusy(true);
       } else {
         // Settings kann parallel offen sein

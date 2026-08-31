@@ -14,10 +14,31 @@ const INITIAL_BEFORE_DOT = /(?:^|[\s(„"'])[A-ZÄÖÜ]\s*$/;
 
 /** Mindestlänge vor Komma-Split (außer allererster Hook). */
 const MIN_COMMA_LEN = 12;
-/** Erster Hook: maximal kurz halten (Time-to-First-Audio). */
-export const FIRST_HOOK_MAX_CHARS = 72;
-/** Folge-Chunks: ~2 Untertitel-Zeilen — jedes Wort sichtbar, fließender Wechsel. */
-export const FOLLOW_CHUNK_TARGET = 90;
+/** Erster Hook: am ersten Satzzeichen, Cap gegen Endlos-Token. TTS_SENTENCE_PIPELINE_LOCK */
+export const FIRST_HOOK_MAX_CHARS = 100;
+/** Folge-Sätze: hart schneiden wenn ein Satz extrem lang ist. */
+export const FOLLOW_SENTENCE_MAX = 220;
+
+/** Letztes Wortende vor `max` — für Hard-Cap ohne Satzzeichen. */
+function forceSplitAtWord(text: string, max: number): number {
+  const limit = Math.min(text.length, Math.max(8, max));
+  let cut = limit;
+  // Nicht mitten in der PLZ / Hausnummer schneiden
+  if (cut < text.length && /\d/.test(text[cut]!) && /\d/.test(text[cut - 1] ?? '')) {
+    let end = cut;
+    while (end < text.length && /\d/.test(text[end]!)) end += 1;
+    if (end - cut <= 5) cut = end;
+    else {
+      let start = cut;
+      while (start > 0 && /\d/.test(text[start - 1]!)) start -= 1;
+      if (start >= 8) cut = start;
+    }
+  }
+  const slice = text.slice(0, cut);
+  const sp = slice.lastIndexOf(' ');
+  if (sp >= 6) return sp; // vor dem Leerzeichen schneiden → Wort bleibt im Rest
+  return Math.max(7, cut - 1);
+}
 
 export function isProtectedDot(text: string, dotIndex: number): boolean {
   const before = text.slice(0, dotIndex);
@@ -49,6 +70,16 @@ function isProtectedComma(text: string, commaIndex: number): boolean {
   const after = text.slice(commaIndex + 1);
   // 1,5 / 12,000
   if (/\d$/.test(before) && /^\d/.test(after.trimStart())) return true;
+  // Adresse: „Ulmenallee 23, 25421 Pinneberg“
+  if (/^\s*\d{4,5}\b/.test(after)) return true;
+  // „Pinneberg, Deutschland“
+  if (
+    /^\s*(Deutschland|Germany|Österreich|Schweiz|Niederlande|Frankreich|Italien|Polen|Dänemark|Belgien|Tschechien)\b/i.test(
+      after,
+    )
+  ) {
+    return true;
+  }
   return false;
 }
 
@@ -76,11 +107,11 @@ function canSplitAt(
   if (SOFT_SPLIT.test(ch)) {
     if (ch === ',' && isProtectedComma(text, i)) return false;
     if (ch === ':' && isProtectedColon(text, i)) return false;
-    // Titel-Doppelpunkt („Spider-Man:“ / „Spielzeiten:“) nicht als erster Hook
+    // Folge-Clips = ganze Sätze; Komma nur für den Fast-Hook
+    if (!isFirstChunk) return false;
     if (ch === ':' && isFirstChunk) return false;
     const len = i + 1 - start;
-    // Erster Hook: schon ab kurzer Phrase splitten
-    if (isFirstChunk && len >= 6) return true;
+    if (isFirstChunk && len >= 4) return true;
     if (len >= MIN_COMMA_LEN) return true;
     return false;
   }
@@ -100,16 +131,34 @@ export function extractStreamingChunks(
 
   while (rest.length > 0) {
     let splitAt = -1;
-    const target = isFirst ? FIRST_HOOK_MAX_CHARS : FOLLOW_CHUNK_TARGET;
+    const target = isFirst ? FIRST_HOOK_MAX_CHARS : FOLLOW_SENTENCE_MAX;
 
     for (let i = 0; i < rest.length; i++) {
-      if (!canSplitAt(rest, i, 0, isFirst)) continue;
+      if (!canSplitAt(rest, i, 0, isFirst)) {
+        if (isFirst && i + 1 >= FIRST_HOOK_MAX_CHARS) {
+          splitAt = forceSplitAtWord(rest, FIRST_HOOK_MAX_CHARS);
+          break;
+        }
+        if (!isFirst && i + 1 >= FOLLOW_SENTENCE_MAX) {
+          splitAt = forceSplitAtWord(rest, FOLLOW_SENTENCE_MAX);
+          break;
+        }
+        continue;
+      }
       splitAt = i;
-      // Erster Hook: sofort am ersten gültigen Satzzeichen
-      if (isFirst) break;
-      // Folge: bis Target wachsen, aber bei !/?/. hart schneiden
+      if (isFirst) {
+        if (splitAt + 1 > FIRST_HOOK_MAX_CHARS) {
+          splitAt = forceSplitAtWord(rest, FIRST_HOOK_MAX_CHARS);
+        }
+        break;
+      }
       const ch = rest[i]!;
       if (SENTENCE_END.test(ch) || i + 1 >= target) break;
+    }
+
+    // Volltext-Pfad: Puffer schon länger als Cap, aber kein Split gefunden
+    if (splitAt < 0 && isFirst && rest.length >= FIRST_HOOK_MAX_CHARS) {
+      splitAt = forceSplitAtWord(rest, FIRST_HOOK_MAX_CHARS);
     }
 
     if (splitAt < 0) break;

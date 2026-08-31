@@ -1,0 +1,426 @@
+{
+  "city": "hechingen",
+  "apply": true,
+  "touched": 52,
+  "approachesFixed": 52,
+  "faqAdded": 0,
+  "data_version": 40,
+  "rows": [
+    {
+      "id": "hechingen_bahnhof_hechingen",
+      "name": "Bahnhof Hechingen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hechingen_juedischer_friedhof",
+      "name": "Jüdischer Friedhof Hechingen",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 0,
+      "had_approaches": 3
+    },
+    {
+      "id": "hechingen_burg_hohenzollern",
+      "name": "Burg Hohenzollern · Besucherstart P1",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 0,
+      "had_approaches": 3
+    },
+    {
+      "id": "hechingen_hohenzollerisches_landesmuseum",
+      "name": "Altes Schloss / Hohenzollerisches Landesmuseum",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 2,
+      "had_approaches": 3
+    },
+    {
+      "id": "hechingen_roemisches_freilichtmuseum",
+      "name": "Römisches Freilichtmuseum (Villa Rustica)",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 0,
+      "had_approaches": 3
+    },
+    {
+      "id": "hechingen_unterer_turm",
+      "name": "Unterer Turm",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 3,
+      "had_approaches": 3
+    },
+    {
+      "id": "hechingen_stiftskirche_st_jakobus",
+      "name": "Stiftskirche St. Jakobus",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 0,
+      "had_approaches": 3
+    },
+    {
+      "id": "hechingen_klosterkirche_st_luzen",
+      "name": "Klosterkirche St. Luzen",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 2,
+      "had_approaches": 3
+    },
+    {
+      "id": "hechingen_kloster_stetten",
+      "name": "Ehemaliges Dominikanerinnenkloster Stetten",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 3,
+      "had_approaches": 3
+    },
+    {
+      "id": "hechingen_furstengarten",
+      "name": "Fürstengarten & Villa Eugenia",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "hechingen_obertorplatz_schaukelweg",
+      "name": "Obertorplatz & Schaukelweg häppy",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 0,
+      "had_approaches": 3
+    },
+    {
+      "id": "hechingen_stadtgeschichte",
+      "name": "Geschichte von Zollernstadt Hechingen",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "hechingen_alte_synagoge",
+      "name": "Alte Synagoge Hechingen",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 0,
+      "had_approaches": 3
+    },
+    {
+      "id": "hechingen_barfusspark_hechingen",
+      "name": "Barfußpark Hechingen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "hechingen_erleb_dich_pfad_hechingen",
+      "name": "erleb-dich-pfad Hechingen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "hechingen_hofgut_domane",
+      "name": "Hofgut Domäne",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 1,
+      "had_approaches": 3
+    },
+    {
+      "id": "hechingen_oldtimermuseum_zollernalb",
+      "name": "Oldtimermuseum Zollernalb & Kalendermuseum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "hechingen_marktplatz_brunnen",
+      "name": "Marktplatz Brunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "hechingen_krieger_denkmal",
+      "name": "Krieger Denkmal",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "hechingen_aussichtspunkt_hohenzollernblick",
+      "name": "Zeller Horn · Postkartenblick Burg",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 0,
+      "had_approaches": 3
+    },
+    {
+      "id": "hechingen_starzelpark",
+      "name": "Starzelpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "hechingen_aussichtspunkt_beurener_heide",
+      "name": "Aussichtspunkt Beurener Heide",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "hechingen_aussichtspunkt_burg_hohenzollern_bei_boll",
+      "name": "Aussichtspunkt Burg Hohenzollern bei Boll",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "hechingen_burgerburo",
+      "name": "Bürgerbüro",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "hechingen_rathaus_hechingen",
+      "name": "Rathaus Hechingen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "hechingen_schloss_lindich",
+      "name": "Schloss Lindich",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "hechingen_maerchenpfad",
+      "name": "Märchenpfad Hechingen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "hechingen_johanneskirche",
+      "name": "Evangelische Johanneskirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "hechingen_medical_valley_bentley",
+      "name": "Medical Valley · Bentley Lotzenäcker",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 0,
+      "had_approaches": 3
+    },
+    {
+      "id": "hechingen_neues_schloss_sparkasse",
+      "name": "Neues Schloss · Sparkasse ATM",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "hechingen_wallfahrtskirche_maria_zell",
+      "name": "Wallfahrtskirche Maria Zell",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 2,
+      "had_approaches": 3
+    },
+    {
+      "id": "hechingen_dreifuerstenstein",
+      "name": "Dreifürstenstein",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "hechingen_panoramabad",
+      "name": "Panoramabad Hechingen (Hallen-/Freibad)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "hechingen_burgtheater_kino",
+      "name": "Burgtheater · Hechinger Kinos",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "hechingen_heiligkreuzkapelle_friedhof",
+      "name": "Heiligkreuzkapelle (Gottesackerkirche)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "hechingen_buergergarde_gardeheim",
+      "name": "Historische Bürgergarde · Gardeheim",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "hechingen_wasserturm_sickingen",
+      "name": "Wasserturm Sickingen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "hechingen_waldy_walderlebnisweg_hechingen",
+      "name": "Waldy Walderlebnisweg Hechingen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hechingen_feldkreuz",
+      "name": "Feldkreuz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "hechingen_feldkreuz_brachwiesle",
+      "name": "Feldkreuz Brachwiesle",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "hechingen_naturschutzgebiet_mittleres_starzeltal",
+      "name": "Naturschutzgebiet Mittleres Starzeltal",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "hechingen_wasserfall_hechingen",
+      "name": "Wasserfall Hechingen",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "hechingen_martinsquelle",
+      "name": "Martinsquelle",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "hechingen_aussichtspunkt_auf_die_burg_hohenzollern",
+      "name": "Aussichtspunkt auf die Burg Hohenzollern",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "hechingen_hangender_stein",
+      "name": "Hangender Stein",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "hechingen_weisses_hausle_billardhauschen",
+      "name": "Weißes Häusle / Billardhäuschen",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "hechingen_aussichtspunkt_jokenplatz",
+      "name": "Aussichtspunkt Jokenplatz",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "hechingen_aussichtspunkt_bismarckstein",
+      "name": "Aussichtspunkt Bismarckstein",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "hechingen_aussichtspunkt",
+      "name": "Aussichtspunkt",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "hechingen_zollernalb_kinos",
+      "name": "Zollernalb Kinos",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "hechingen_hohenzollernhalle_bisingen",
+      "name": "Hohenzollernhalle Bisingen",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "hechingen_streichelzoo_hofgut_domane",
+      "name": "Streichelzoo Hofgut Domäne",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 /**
- * Findus Runtime Orchestrator (Phase 1).
+ * Yorro Runtime Orchestrator (Phase 1).
  * SSOT: active module, GPS queue vs user interrupt, cooldowns.
  */
 
@@ -25,6 +25,11 @@ let ctx: RuntimeContext = createInitialRuntimeContext();
 
 export function getRuntimeContext(): Readonly<RuntimeContext> {
   return ctx;
+}
+
+/** Nur Cooldown refreshen (ohne erneutes TTS-Interrupt) — z. B. Concierge-Turn. */
+export function bumpAfterUserQuestionCooldown(): void {
+  ctx = setCooldown(ctx, 'after_user_question');
 }
 
 export function resetRuntimeContext(
@@ -92,7 +97,7 @@ export async function onUserInputStart(
 }
 
 /**
- * User question handled — keep 30s GPS cooldown (already set).
+ * User question handled — keep 60s GPS cooldown (already set).
  */
 export function onUserInputEnd(): void {
   ctx = {
@@ -100,7 +105,7 @@ export function onUserInputEnd(): void {
     isListening: false,
     isGenerating: false,
   };
-  // Nach Frage: Modul freigeben — 30s-Cooldown bleibt aktiv
+  // Nach Frage: Modul freigeben — 60s-Cooldown bleibt aktiv
   if (ctx.module === 'questions') {
     ctx = transitionModule(ctx, ctx.navActive ? 'navigation' : 'explore');
   }
@@ -123,7 +128,11 @@ export function onGpsPoiCandidate(poiId: number): OrchestratorDecision {
 
   const gate = canFireGpsTrigger(ctx);
   if (!gate.ok) {
-    return { action: 'skip_gps_trigger', reason: gate.reason ?? 'blocked' };
+    return {
+      action: 'skip_gps_trigger',
+      reason: gate.reason ?? 'blocked',
+      remainingMs: gate.remainingMs,
+    };
   }
 
   return { action: 'run_gps_trigger', poiId };

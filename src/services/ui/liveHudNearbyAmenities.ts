@@ -1,6 +1,7 @@
 /**
  * Live-HUD Nearby-Amenities — locker, nur wenn wirklich nah.
- * Toilette · Trinkwasser · Eis · Museum · Supermarkt abends (kein Dauer-Spam).
+ * Toilette · Trinkwasser · Eis · Museum · Supermarkt · Erholung (Park) · Fotospot.
+ * Keine Kategorie-Fragen ohne Treffer („Pause / Park?“).
  */
 
 import { useFinnusStore } from '../../store/useFinnusStore';
@@ -8,9 +9,21 @@ import { searchOpenPlacesAhead } from '../navigation/googleMapsNav';
 import { walkMinutesForDistanceM } from '../navigation/travelEta';
 import { getCachedWeatherSnapshot } from '../weatherService';
 import { fitHudMeta } from './hudTextFit';
+import {
+  buildParkRestHudCard as pitchPark,
+  buildPhotoSpotHudCard as pitchPhoto,
+  isVagueRestOrPhotoName,
+} from './liveHudAmenityPitch';
 import { isActivitySuggestionWindow } from './nachtruhePolicy';
 
-export type NearbyAmenityKind = 'toilet' | 'drinking_water' | 'ice_cream' | 'museum' | 'supermarket';
+export type NearbyAmenityKind =
+  | 'toilet'
+  | 'drinking_water'
+  | 'ice_cream'
+  | 'museum'
+  | 'supermarket'
+  | 'park_rest'
+  | 'photo_spot';
 
 export type NearbyAmenityHit = {
   kind: NearbyAmenityKind;
@@ -49,6 +62,8 @@ const MAX_M: Record<NearbyAmenityKind, number> = {
   ice_cream: 900,
   museum: 1600,
   supermarket: 1200,
+  park_rest: 900,
+  photo_spot: 1100,
 };
 
 let cache: Cache | null = null;
@@ -95,10 +110,30 @@ export function inferHotWeather(nowMs = Date.now()): boolean {
   }
   if (/heiß|hitze|schwül|sehr warm|knackig warm/.test(line)) return true;
   if (/sonnig|klar/.test(line) && h >= 12 && h <= 17) {
-    // sonnig mittags → weiche Hitze-Annahme nur wenn nicht „kühl“
     return !/kühl|kalt|frisch|windig kühl/.test(line);
   }
   return false;
+}
+
+/** Re-export für Aufrufer / Tests. */
+export {
+  buildParkRestHudCard,
+  buildPhotoSpotHudCard,
+} from './liveHudAmenityPitch';
+
+function wrapPitch(
+  pitch: ReturnType<typeof pitchPark>,
+  kind: 'park_rest' | 'photo_spot',
+): NearbyAmenityHudCard {
+  return {
+    id: pitch.id,
+    kind,
+    title: pitch.title,
+    meta: fitHudMeta(pitch.meta),
+    tellMorePrompt: pitch.tellMorePrompt,
+    score: pitch.score,
+    navDest: pitch.navDest,
+  };
 }
 
 function cardFor(hit: NearbyAmenityHit): NearbyAmenityHudCard {
@@ -156,6 +191,14 @@ function cardFor(hit: NearbyAmenityHit): NearbyAmenityHudCard {
     };
   }
 
+  if (hit.kind === 'park_rest') {
+    return wrapPitch(pitchPark(hit), 'park_rest');
+  }
+
+  if (hit.kind === 'photo_spot') {
+    return wrapPitch(pitchPhoto(hit), 'photo_spot');
+  }
+
   return {
     id: `amenity-ice-${Math.round(hit.distanceM)}`,
     kind: 'ice_cream',
@@ -182,6 +225,14 @@ function navFromHit(
   return { name: hit.name, lat: hit.lat, lng: hit.lng };
 }
 
+/** Gattungs-/Platzhalter-Namen — kein HUD-Pitch. */
+function isVagueAmenityName(name: string, kind: NearbyAmenityKind): boolean {
+  if (kind === 'park_rest' || kind === 'photo_spot') {
+    return isVagueRestOrPhotoName(name, kind);
+  }
+  return false;
+}
+
 export function getNearbyAmenityHudCards(nowMs = Date.now()): NearbyAmenityHudCard[] {
   if (!isActivitySuggestionWindow(nowMs)) return [];
   if (!cache) return [];
@@ -204,7 +255,11 @@ async function searchKind(
           ? 'museum'
           : kind === 'supermarket'
             ? 'supermarket'
-            : 'toilet';
+            : kind === 'park_rest'
+              ? 'park'
+              : kind === 'photo_spot'
+                ? 'tourist_attraction'
+                : 'toilet';
   const openNow =
     kind === 'ice_cream' ||
     kind === 'museum' ||
@@ -212,12 +267,18 @@ async function searchKind(
       ? true
       : false;
 
+  const keyword =
+    kind === 'photo_spot'
+      ? 'Aussichtspunkt OR viewpoint OR Aussicht'
+      : undefined;
+
   const hits = await searchOpenPlacesAhead({
     lat,
     lng,
     placeType,
     radiusM: radius,
     openNow,
+    ...(keyword ? { keyword } : {}),
   }).catch(() => []);
 
   const best = hits
@@ -235,7 +296,13 @@ async function searchKind(
           ? 'Museum'
           : kind === 'supermarket'
             ? 'Supermarkt'
-            : 'Eisdiele');
+            : kind === 'park_rest'
+              ? 'Park'
+              : kind === 'photo_spot'
+                ? 'Aussicht'
+                : 'Eisdiele');
+
+  if (isVagueAmenityName(name, kind)) return null;
 
   return {
     kind,
@@ -279,14 +346,19 @@ export async function ensureNearbyAmenityHudFresh(opts?: {
   }
 
   const wantIce = inferHotWeather(nowMs);
+  const hour = new Date(nowMs).getHours();
 
   inFlight = (async () => {
     try {
       const kinds: NearbyAmenityKind[] = ['toilet', 'drinking_water'];
       if (wantIce) kinds.push('ice_cream');
-      const hour = new Date(nowMs).getHours();
       // Ab Nachmittag: konkreter Supermarkt-Pitch statt leerem „Supermarkt“
       if (hour >= 16 && hour <= 21) kinds.push('supermarket');
+      // Erholung / Blick — nur suchen; ohne Treffer keine Karte (z. B. Priesterweg)
+      if (hour >= 9 && hour <= 20) {
+        kinds.push('park_rest');
+        kinds.push('photo_spot');
+      }
       try {
         const { getCachedUserProfile } = require('../userProfileService') as {
           getCachedUserProfile: () => {
@@ -299,6 +371,11 @@ export async function ensureNearbyAmenityHudFresh(opts?: {
         const prefs = profile?.experiencePrefs ?? {};
         if (prefs.museen === 'yes' || /museum|kunst|dinosaur/.test(want)) {
           kinds.push('museum');
+        }
+        // Natur explizit „nein“ → keinen Park-Pitch erzwingen
+        if (prefs.natur === 'no') {
+          const i = kinds.indexOf('park_rest');
+          if (i >= 0) kinds.splice(i, 1);
         }
       } catch {
         /* soft */

@@ -70,6 +70,8 @@ export type GuardianVerdict = {
 
 const WALK_DRIFT_RESCHEDULE_MIN = 3;
 const TIGHT_BUFFER_MIN = 4;
+/** Parkticket: ~10 Min drüber noch ok — nicht sofort „knapp“. */
+const TIGHT_BUFFER_PARKING_MIN = -8;
 let lastGuardianPresentMs = 0;
 const GUARDIAN_PRESENT_GAP_MS = 45_000;
 
@@ -302,6 +304,10 @@ export function assessLogisticsHelp(opts: {
   const nav = buildNavAction(dest);
   const taxiBtn = buildTaxiAction(dest);
   const actions: QuickAction[] = [];
+  const forgiving =
+    metaStr(event.meta, 'deadlineSoftness') === 'forgiving' ||
+    metaStr(event.meta, 'mode') === 'car';
+  const tightLimit = forgiving ? TIGHT_BUFFER_PARKING_MIN : TIGHT_BUFFER_MIN;
 
   // --- Taxi cancelled: highest urgency help ---
   if (taxi === 'cancelled') {
@@ -350,7 +356,7 @@ export function assessLogisticsHelp(opts: {
       cardTitle: 'Verbindung ausgefallen',
       speech:
         `Hey — deine Verbindung „${event.title}“ fällt aus bzw. ist weg. ` +
-        `${earlyLeave} Soll ich dir ein Taxi rufen, oder suchen wir die nächste Bahn/Bus?`,
+        `${earlyLeave} Taxi oder nächste Bahn/Bus — Buttons.`,
       bullets: [
         'Verbindung ausgefallen / verpasst',
         `Geplant war ${formatClockMs(plan.effectiveDepartureMs)}`,
@@ -390,7 +396,7 @@ export function assessLogisticsHelp(opts: {
   }
 
   // --- Tight: barely make it ---
-  if (minsUntilLeave <= TIGHT_BUFFER_MIN && minsUntilLeave >= -2) {
+  if (minsUntilLeave <= tightLimit && minsUntilLeave >= (forgiving ? -15 : -2)) {
     if (nav) actions.push(nav);
     if (taxiBtn) actions.push({ ...taxiBtn, label: 'Taxi — sicherer' });
     return {
@@ -398,7 +404,7 @@ export function assessLogisticsHelp(opts: {
       cardTitle: 'Knapp — jetzt handeln',
       speech:
         `Achtung: Es wird knapp für „${event.title}“. ` +
-        `Fußweg ca. ${walk} Minuten. Soll ich die Route starten — oder lieber ein Taxi, damit du sicher ankommst?`,
+        `Fußweg ca. ${walk} Minuten. Route oder Taxi — beides als Button.`,
       bullets: [
         `Noch ~${Math.max(0, minsUntilLeave)} Min bis Leave-by`,
         `Fußweg ~${walk} Min`,
@@ -611,6 +617,41 @@ export async function presentCheckpointHelp(
     .events.find((e) => e.id === trigger.eventId);
   if (!event || event.status !== 'active') return;
 
+  // Reiner Wecker: ÖPNV-Lage am verknüpften Leave-Event prüfen — kein „losgehen“-Speech
+  if (event.kind === 'alarm') {
+    const leaveBy = metaNum(event.meta, 'leaveByMs');
+    if (leaveBy == null) return; // reiner Aufsteh-Wecker: nur native Alarm
+    const linked = useLogisticsTriggerStore
+      .getState()
+      .events.find(
+        (e) =>
+          e.id !== event.id &&
+          e.status === 'active' &&
+          metaNum(e.meta, 'linkedWakeAtMs') != null &&
+          (e.id === metaStr(event.meta, 'linkedEventId') ||
+            Math.abs((metaNum(e.meta, 'leaveByMs') ?? 0) - leaveBy) < 120_000),
+      );
+    if (!linked) return;
+    const conn = connectionStatusOf(linked);
+    if (conn === 'cancelled' || conn === 'missed' || conn === 'delayed') {
+      const verdict = assessLogisticsHelp({ event: linked, trigger });
+      if (
+        verdict.situation === 'cancelled' ||
+        verdict.situation === 'delayed' ||
+        verdict.situation === 'tight'
+      ) {
+        const hour = new Date().getHours();
+        if (hour >= 6 && hour < 22) {
+          await presentVerdict(verdict);
+        }
+        if (conn === 'cancelled' || conn === 'missed') {
+          void probeAlternativeIfNeeded(linked.id);
+        }
+      }
+    }
+    return;
+  }
+
   const liveWalk = await currentWalkEtaMin(event);
   const storedWalk = metaNum(event.meta, 'walkEtaMin') ?? trigger.walkEtaMin;
   let rescheduleWalk: number | undefined;
@@ -646,6 +687,7 @@ export async function presentCheckpointHelp(
   }
 
   // Mikro-Check: alles ok → still wieder „schlafen“, kein Spam
+  // Auch situation „prep“/„safety“ bei micro: NIE sprechen (Leak: 1h-vor-Wecker)
   const isMicro =
     trigger.alertLevel === 'silent' ||
     trigger.kind === 'coarse' ||
@@ -658,13 +700,8 @@ export async function presentCheckpointHelp(
     verdict.situation === 'user_drifted' ||
     verdict.situation === 'leave_now';
 
-  if (isMicro && !acute && verdict.situation === 'on_track') {
-    return; // passt — wieder schlafen
-  }
-
-  // Vorwarnung / Hard immer; Mikro nur bei Problem
-  if (isMicro && !acute && verdict.situation === 'coarse') {
-    return;
+  if (isMicro && !acute) {
+    return; // passt — wieder schlafen (kein „in einer Stunde musst du los“)
   }
 
   await presentVerdict(verdict);
@@ -736,48 +773,12 @@ function applyWalkDriftReschedule(
   void leaveByMs;
 
   // Verknüpften Wecker-Rhythmus mitziehen (Prep vor Leave-by)
-  const linkedWake = metaNum(event.meta, 'linkedWakeAtMs');
-  const oldLeave = metaNum(event.meta, 'leaveByMs');
-  if (
-    linkedWake != null &&
-    oldLeave != null &&
-    Number.isFinite(linkedWake) &&
-    Number.isFinite(leaveByMs)
-  ) {
-    const prepMs = Math.max(5 * 60_000, oldLeave - linkedWake);
-    const newWake = leaveByMs - prepMs;
-    if (newWake > Date.now() + 60_000) {
-      void (async () => {
-        try {
-          const { setWakeAlarmWithBridge } = await import(
-            '../alarms/nativeAlarmBridge'
-          );
-          await setWakeAlarmWithBridge({
-            wakeAtMs: newWake,
-            reasonLabel:
-              metaStr(event.meta, 'wakeReason') ||
-              `Aufstehen für ${event.title}`,
-            leaveByMs,
-            reminderKey: `wake_linked:${event.id}`,
-            preferNative: true,
-            wakeMode: 'replace',
-          });
-          const { registerWakeRhythm } = await import(
-            './logisticsTriggerEngine'
-          );
-          registerWakeRhythm({
-            wakeAtMs: newWake,
-            reasonLabel:
-              metaStr(event.meta, 'wakeReason') || event.title,
-            leaveByMs,
-            linkedEventId: event.id,
-          });
-        } catch {
-          /* soft */
-        }
-      })();
-    }
-  }
+  void import('./linkedWakeSync').then(({ syncLinkedWakeToLeaveBy }) =>
+    syncLinkedWakeToLeaveBy({
+      eventId: event.id,
+      newLeaveByMs: leaveByMs,
+    }),
+  );
 }
 
 /**
@@ -846,13 +847,94 @@ export async function tickLogisticsGuardian(opts?: {
             `Du bist weiter vom Ziel entfernt — Fußweg jetzt ca. ${liveWalk} Minuten. ` +
             `Ich habe den Trigger nach vorne gesetzt. Leave-by: ${formatClockMs(
               leaveBy,
-            )}. Soll ich die Route starten oder ein Taxi rufen?`;
+            )}. Route oder Taxi — beides als Button.`;
           verdict.actions = [
             buildNavAction(dest),
             buildTaxiAction(dest),
           ].filter(Boolean) as QuickAction[];
           await presentVerdict(verdict);
           alerts += 1;
+        }
+      }
+    }
+
+    // Trödel-Nudge: Leave-by bald, Fußweg knapper als Restzeit → automatisch Bescheid
+    {
+      const leaveBy = metaNum(event.meta, 'leaveByMs');
+      const walk = liveWalk ?? storedWalk;
+      const lastDawdle = metaNum(event.meta, 'lastDawdleAlertAtMs') ?? 0;
+      const forgiving =
+        metaStr(event.meta, 'deadlineSoftness') === 'forgiving' ||
+        metaStr(event.meta, 'mode') === 'car';
+      // Parken: seltener nachhaken; Bahn: enger
+      const dawdleCooldown = forgiving ? 18 * 60_000 : 8 * 60_000;
+      const dawdleWindowMax = forgiving ? 14 : 22;
+      // Slack: Parken erst wenn schon ~8 Min „zu spät“ zur Walk-Zeit; Bahn bei ≤3 Min
+      const slackLimit = forgiving ? -8 : 3;
+      if (
+        leaveBy != null &&
+        walk != null &&
+        walk > 0 &&
+        now - lastDawdle > dawdleCooldown
+      ) {
+        const untilLeaveMin = (leaveBy - now) / 60_000;
+        const slack = untilLeaveMin - walk;
+        if (
+          untilLeaveMin > (forgiving ? -12 : 0) &&
+          untilLeaveMin <= dawdleWindowMax &&
+          slack <= slackLimit
+        ) {
+          const refreshed = useLogisticsTriggerStore
+            .getState()
+            .events.find((e) => e.id === event.id);
+          if (refreshed) {
+            useLogisticsTriggerStore.getState().upsertEvent({
+              id: refreshed.id,
+              kind: refreshed.kind,
+              title: refreshed.title,
+              detail: refreshed.detail,
+              atMs: refreshed.atMs,
+              lat: refreshed.lat,
+              lng: refreshed.lng,
+              status: 'active',
+              externalId: refreshed.externalId,
+              meta: {
+                ...(refreshed.meta ?? {}),
+                lastDawdleAlertAtMs: now,
+              },
+            });
+            const dest = destOf(refreshed);
+            const plat = metaStr(refreshed.meta, 'platform');
+            const verdict = assessLogisticsHelp({
+              event: refreshed,
+              walkEtaMin: walk,
+              nowMs: now,
+            });
+            verdict.situation = 'leave_now';
+            verdict.cardTitle = forgiving
+              ? 'Richtung Auto'
+              : 'Zeit zum Losgehen';
+            verdict.speech = forgiving
+              ? `Kurz zum Parken: Fußweg zurück ca. ${Math.round(
+                  walk,
+                )} Minuten — Ticket-Zeit wird eng, aber ein paar Minuten Spielraum sind ok. Wenn du willst, starte ich die Route.`
+              : `Hey — für ${refreshed.title} wird's eng: noch ca. ${Math.max(
+                  0,
+                  Math.round(untilLeaveMin),
+                )} Minuten bis Aufbruch, Fußweg ~${Math.round(walk)} Minuten.` +
+                (plat ? ` Aktuell Gleis ${plat}.` : '') +
+                ` Am besten jetzt los.`;
+            if (dest) {
+              verdict.actions = forgiving
+                ? ([buildNavAction(dest)].filter(Boolean) as QuickAction[])
+                : ([
+                    buildNavAction(dest),
+                    buildTaxiAction(dest),
+                  ].filter(Boolean) as QuickAction[]);
+            }
+            await presentVerdict(verdict);
+            alerts += 1;
+          }
         }
       }
     }
@@ -906,19 +988,57 @@ export function reportConnectionDisruption(input: {
       input.delayMin ?? metaNum(event.meta, 'delayMin') ?? 0,
       metaNum(event.meta, 'walkEtaMin') ?? undefined,
     );
+    const refreshed = useLogisticsTriggerStore
+      .getState()
+      .events.find((e) => e.id === input.eventId);
+    const newLeave = metaNum(refreshed?.meta, 'leaveByMs');
+    if (newLeave != null) {
+      void import('./linkedWakeSync').then(({ syncLinkedWakeToLeaveBy }) =>
+        syncLinkedWakeToLeaveBy({
+          eventId: input.eventId,
+          newLeaveByMs: newLeave,
+        }),
+      );
+    }
   }
 
   if (input.status === 'cancelled' || input.status === 'missed') {
-    const refreshed = store.events.find((e) => e.id === input.eventId);
+    const refreshed = useLogisticsTriggerStore
+      .getState()
+      .events.find((e) => e.id === input.eventId);
     if (refreshed) {
-      void presentVerdict(assessLogisticsHelp({ event: refreshed }));
-      void probeAlternativeIfNeeded(input.eventId);
+      const leaveBy = metaNum(refreshed.meta, 'leaveByMs') ?? refreshed.atMs ?? Date.now();
+      void import('./linkedWakeSync').then(
+        async ({ hasHardAppointmentAfter }) => {
+          const hard = hasHardAppointmentAfter(leaveBy);
+          // Nachts / ohne festen Termin: still umbuchen, erst morgens erklären
+          const hour = new Date().getHours();
+          const quietNight = hour < 6 || hour >= 22;
+          if (!hard && quietNight) {
+            void probeAlternativeIfNeeded(input.eventId);
+            return;
+          }
+          void presentVerdict(assessLogisticsHelp({ event: refreshed }));
+          void probeAlternativeIfNeeded(input.eventId);
+        },
+      );
     }
   } else if (input.status === 'delayed') {
-    const refreshed = store.events.find((e) => e.id === input.eventId);
-    if (refreshed) {
-      void presentVerdict(assessLogisticsHelp({ event: refreshed }));
+    const refreshed = useLogisticsTriggerStore
+      .getState()
+      .events.find((e) => e.id === input.eventId);
+    if (!refreshed) return;
+    const hour = new Date().getHours();
+    const quietNight = hour < 6 || hour >= 22;
+    const leaveBy = metaNum(refreshed.meta, 'leaveByMs') ?? refreshed.atMs ?? 0;
+    // Nachts + Wecker verknüpft: still länger schlafen lassen, kein Speech
+    if (quietNight && metaNum(refreshed.meta, 'linkedWakeAtMs') != null) {
+      return;
     }
+    void import('./linkedWakeSync').then(({ hasHardAppointmentAfter }) => {
+      if (quietNight && !hasHardAppointmentAfter(leaveBy)) return;
+      void presentVerdict(assessLogisticsHelp({ event: refreshed }));
+    });
   }
 }
 
@@ -1035,7 +1155,7 @@ export async function probeAlternativeIfNeeded(
 
     // Silent rebook: UI + optional short ping, no Plan-B interrogation
     if (pick.mode === 'silent_same_line') {
-      useLogisticsTriggerStore.getState().upsertDepartureWatch({
+      const { leaveByMs } = useLogisticsTriggerStore.getState().upsertDepartureWatch({
         eventId: event.id,
         title: event.title,
         departureMs: nextDep.getTime(),
@@ -1055,7 +1175,28 @@ export async function probeAlternativeIfNeeded(
         connectionStatus: 'ok',
         detail: formatMissedSilentHud(pick),
         delayMin: 0,
+        warnLeadMin:
+          typeof event.meta?.warnLeadMin === 'number'
+            ? event.meta.warnLeadMin
+            : undefined,
+        planPriority:
+          typeof event.meta?.planPriority === 'number'
+            ? event.meta.planPriority
+            : null,
       });
+      const clock = formatClockMs(nextDep.getTime());
+      const hour = new Date().getHours();
+      const quietNight = hour < 6 || hour >= 22;
+      const morningNote = quietNight
+        ? `Deine Bahn ist ausgefallen. Nächste sinnvolle Verbindung um ${clock} — deshalb hast du länger geschlafen.`
+        : null;
+      void import('./linkedWakeSync').then(({ syncLinkedWakeToLeaveBy }) =>
+        syncLinkedWakeToLeaveBy({
+          eventId: event.id,
+          newLeaveByMs: leaveByMs,
+          morningNote,
+        }),
+      );
       return;
     }
 
@@ -1097,7 +1238,7 @@ export async function probeAlternativeIfNeeded(
         pick.promptSpeech ||
         `Die ursprüngliche Verbindung fällt aus. Nächste Option: ` +
           `${next.firstTransitLine || 'ÖPNV'} um ${leaveHint}. ` +
-          `Soll ich die Route starten — oder lieber ein Taxi?`,
+          `Route oder Taxi — beides als Button.`,
       bullets: [
         `Nächste: ${next.firstTransitLine || 'ÖPNV'} ${leaveHint} (Wartezeit ~${pick.waitMinForPrimary} Min)`,
         pick.fastestAlternate

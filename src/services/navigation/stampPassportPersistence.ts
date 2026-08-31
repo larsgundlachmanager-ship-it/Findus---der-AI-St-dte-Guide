@@ -28,6 +28,7 @@ function coerceEntry(raw: unknown): VisitedPlaceMemory | null {
     typeof e.onTimeline === 'boolean' ? e.onTimeline : undefined;
   const lat = Number(e.lat);
   const lng = Number(e.lng);
+  const cityRaw = typeof e.cityId === 'string' ? e.cityId.trim().toLowerCase() : '';
   return {
     poiId,
     name,
@@ -37,6 +38,7 @@ function coerceEntry(raw: unknown): VisitedPlaceMemory | null {
     onTimeline,
     lat: Number.isFinite(lat) ? lat : null,
     lng: Number.isFinite(lng) ? lng : null,
+    cityId: cityRaw || null,
   };
 }
 

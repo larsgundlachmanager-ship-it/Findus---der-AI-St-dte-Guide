@@ -1,0 +1,155 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "yorro://schemas/turn-rucksack-v1",
+  "title": "Yorro Turn Rucksack",
+  "description": "Version 1.0.0 — Phase 0, eine Zeile RUCKSACK an Call 1 + Call 2.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "turnId",
+    "gps",
+    "researchCity",
+    "packInstalled",
+    "persona",
+    "ui",
+    "sessionFlags"
+  ],
+  "properties": {
+    "turnId": { "type": "string", "maxLength": 64 },
+    "gps": {
+      "type": "object",
+      "required": ["lat", "lng", "cityLabel"],
+      "properties": {
+        "lat": { "type": ["number", "null"] },
+        "lng": { "type": ["number", "null"] },
+        "cityLabel": { "type": ["string", "null"], "maxLength": 64 },
+        "speedKmh": { "type": ["number", "null"] },
+        "accuracyM": { "type": ["number", "null"] }
+      }
+    },
+    "selectedCityId": {
+      "type": ["string", "null"],
+      "description": "UI-Auswahl — NUR Modul-1-Geofence. Nicht Recherche-Gate."
+    },
+    "researchCity": {
+      "type": ["string", "null"],
+      "maxLength": 64
+    },
+    "packInstalled": {
+      "type": "object",
+      "required": ["forResearchCity"],
+      "properties": {
+        "forResearchCity": { "type": "boolean" },
+        "catalogHasPack": { "type": "boolean" },
+        "cityId": { "type": ["string", "null"] }
+      }
+    },
+    "persona": {
+      "type": "object",
+      "required": ["coreRole", "vibeTone", "knowledgeStyle", "addressForm", "bridgeToneHint"],
+      "properties": {
+        "coreRole": {
+          "type": "string",
+          "enum": [
+            "classic_guide",
+            "buddy",
+            "historian",
+            "aristocrat",
+            "nerd",
+            "kid_guide"
+          ]
+        },
+        "vibeTone": { "type": "string" },
+        "knowledgeStyle": { "type": "string" },
+        "spleens": {
+          "type": "array",
+          "items": { "type": "string" },
+          "maxItems": 2
+        },
+        "addressForm": { "type": "string", "enum": ["du", "sie"] },
+        "bridgeToneHint": {
+          "type": "string",
+          "maxLength": 120,
+          "description": "Für Call-1-Bridge: gleicher Charakter, kürzer (z.B. Opa-Historiker, warm, bildhaft)."
+        }
+      }
+    },
+    "ui": {
+      "type": "object",
+      "required": ["bulletMaxChars", "bulletLines", "bulletCount"],
+      "properties": {
+        "bulletMaxChars": { "type": "integer", "minimum": 22, "maximum": 120 },
+        "bulletLines": { "type": "integer", "const": 2 },
+        "bulletCount": { "type": "integer", "const": 3 },
+        "measuredAt": { "type": "string", "format": "date-time" },
+        "screenWidthPx": { "type": "integer" }
+      }
+    },
+    "sessionFlags": {
+      "type": "object",
+      "properties": {
+        "navActive": { "type": "boolean" },
+        "calendarOpen": { "type": "boolean" },
+        "liveChatActive": { "type": "boolean" },
+        "planModuleActive": { "type": "boolean" }
+      }
+    },
+    "shortIntent": {
+      "type": "object",
+      "properties": {
+        "lastJobId": { "type": ["string", "null"] },
+        "lastSubject": { "type": ["string", "null"] },
+        "lastPlace": { "type": ["string", "null"] },
+        "liveInventoryKind": {
+          "type": ["string", "null"],
+          "description": "hotel | events | pitch_choice — für Follow-up-Erbe."
+        }
+      }
+    },
+    "dietary": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Nur wenn lane dining/grocery/meal."
+    },
+    "accessibility": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Nur wenn nav/plan/pitch."
+    },
+    "learnedRules": {
+      "type": "array",
+      "maxItems": 8,
+      "description": "Profil-Korrekturen (correctionLearning) — Struktur-Hints für Call 2.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "intentFamily": { "type": "string" },
+          "expect": { "type": "array", "items": { "type": "string" } },
+          "avoid": { "type": "array", "items": { "type": "string" } },
+          "summary": { "type": "string", "maxLength": 200 }
+        }
+      }
+    },
+    "ownerGoldHint": {
+      "type": ["object", "null"],
+      "description": "Aus ownerGold.pack.json via intentFamily — expect/avoid für Call 2.",
+      "properties": {
+        "intentFamily": { "type": "string" },
+        "expect": { "type": "array", "items": { "type": "string" } },
+        "avoid": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "retrievedMemory": {
+      "type": "array",
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "properties": {
+          "subject": { "type": "string" },
+          "facts": { "type": "array", "items": { "type": "string" } },
+          "cityKey": { "type": ["string", "null"] }
+        }
+      }
+    }
+  }
+}

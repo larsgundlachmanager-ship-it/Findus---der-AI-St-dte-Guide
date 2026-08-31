@@ -263,7 +263,7 @@ export function formatPlaceOffersForPrompt(offers: PlaceOffer[]): string {
     return `- (${o.kind}) ${o.text}${flag}`;
   });
   return `## Ort-Angebote / Events (NUR diese — nichts erfinden)
-Pflicht: Belegte Aktivitäten/Events/Preise/Dauer/Mitbringen → im Audio natürlich einbauen, Schwerpunkt gegen Ende (LEBEN JETZT + Motivation).
+Pflicht: Belegte Aktivitäten/Events/Preise/Dauer/Mitbringen → im Audio als PAYOFF der Historie (Leben jetzt), nicht als Broschüre. Uhrzeit/Preis/Titel aussprechen wenn belegt.
 Profil-Matches mit Flag haben Vorrang.
 Abschluss: Charakter-angepasste Einladung zum Mitmachen (Energie wie „Bock?“), OHNE Meta-Frage und OHNE erfundene Preise.
 ${lines.join('\n')}`;

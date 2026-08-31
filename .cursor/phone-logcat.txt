@@ -1,0 +1,994 @@
+--------- beginning of main
+08-22 02:22:03.576 W/ReactNativeJS(12133): '[nav] reject car-like detour', { routeM: 442, airM: 120, source: 'osrm' }
+08-22 02:22:04.984 W/ReactNativeJS(12133): '[nav] reject car-like detour', { routeM: 443, airM: 120, source: 'google' }
+08-22 02:22:05.103 W/ReactNativeJS(12133): '[nav] reject car-like detour', { routeM: 447, airM: 120, source: 'osrm' }
+08-22 02:22:14.588 W/ReactNativeJS(12133): '[nav] reject car-like detour', { routeM: 442, airM: 119, source: 'osrm' }
+08-22 02:22:15.837 W/ReactNativeJS(12133): '[nav] reject car-like detour', { routeM: 442, airM: 120, source: 'osrm' }
+08-22 02:22:17.054 W/ReactNativeJS(12133): '[nav] reject car-like detour', { routeM: 444, airM: 119, source: 'google' }
+08-22 02:22:17.156 W/ReactNativeJS(12133): '[nav] reject car-like detour', { routeM: 447, airM: 119, source: 'osrm' }
+08-22 02:22:20.887 W/ReactNativeJS(12133): '[nav] reject car-like detour', { routeM: 443, airM: 120, source: 'google' }
+08-22 02:22:20.996 W/ReactNativeJS(12133): '[nav] reject car-like detour', { routeM: 447, airM: 120, source: 'osrm' }
+08-22 02:22:41.760 W/ReactNativeJS(12133): '[nav] reject car-like detour', { routeM: 442, airM: 119, source: 'osrm' }
+08-22 02:24:47.081 W/ReactNativeJS(12133): '[nav] reject car-like detour', { routeM: 444, airM: 119, source: 'google' }
+08-22 02:24:47.162 W/ReactNativeJS(12133): '[nav] reject car-like detour', { routeM: 447, airM: 119, source: 'osrm' }
+08-22 02:25:03.131 W/ReactNativeJS(12133): '[nav] reject car-like detour', { routeM: 443, airM: 118, source: 'osrm' }
+08-22 02:25:06.506 W/ReactNativeJS(12133): '[nav] reject car-like detour', { routeM: 444, airM: 118, source: 'google' }
+08-22 02:25:06.594 W/ReactNativeJS(12133): '[nav] reject car-like detour', { routeM: 447, airM: 118, source: 'osrm' }
+08-22 02:27:04.972 I/ReactNativeJS(12133): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 02:27:04.975 I/ReactNativeJS(12133): '[stt] isRecognitionAvailable:', true
+08-22 02:27:04.977 I/ReactNativeJS(12133): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 02:27:04.977 I/ReactNativeJS(12133):   'com.google.android.tts',
+08-22 02:27:04.977 I/ReactNativeJS(12133):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 02:27:04.977 I/ReactNativeJS(12133): '[stt] android default service:', 'com.google.android.tts'
+08-22 02:27:05.046 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 02:27:05.428 I/ReactNativeJS(12133): [stt] recognition started
+08-22 02:27:05.470 W/ReactNativeJS(12133): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=-2.0', 'partial=false', 'svc=com.google.android.tts'
+08-22 02:33:02.960 I/ReactNativeJS(12133): '[module5] ingest', { dest: 'Hamburg',
+08-22 02:33:02.960 I/ReactNativeJS(12133):   gps: null,
+08-22 02:33:02.960 I/ReactNativeJS(12133):   wishes: 
+08-22 02:33:02.960 I/ReactNativeJS(12133):    [ 'Speicherstadt in Hamburg',
+08-22 02:33:02.960 I/ReactNativeJS(12133):      'Elbphilharmonie in Hamburg',
+08-22 02:33:02.960 I/ReactNativeJS(12133):      'Abendessen in Hamburg',
+08-22 02:33:02.960 I/ReactNativeJS(12133):      'Hamburg erkunden' ],
+08-22 02:33:02.960 I/ReactNativeJS(12133):   fixed: [] }
+08-22 02:33:27.626 I/ReactNativeJS(12133): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 02:33:27.627 I/ReactNativeJS(12133): '[stt] isRecognitionAvailable:', true
+08-22 02:33:27.628 I/ReactNativeJS(12133): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 02:33:27.628 I/ReactNativeJS(12133):   'com.google.android.tts',
+08-22 02:33:27.628 I/ReactNativeJS(12133):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 02:33:27.628 I/ReactNativeJS(12133): '[stt] android default service:', 'com.google.android.tts'
+08-22 02:33:27.632 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 02:33:27.786 I/ReactNativeJS(12133): [stt] recognition started
+08-22 02:33:30.621 W/ReactNativeJS(12133): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=0.2', 'partial=false', 'svc=com.google.android.tts'
+08-22 02:33:30.866 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.qualcomm.qti.voiceai.speech'
+08-22 02:33:30.866 I/ReactNativeJS(12133): [stt] keep-alive restart (error:no-speech, try 1)
+08-22 02:33:30.981 W/ReactNativeJS(12133): '[stt] error:', 'network', 'Server sent error status.', 'vol=0.2', 'partial=false', 'svc=com.qualcomm.qti.voiceai.speech'
+08-22 02:35:07.009 I/ReactNativeJS(12133): '[places] new-text', 'Restaurant Hamburg', 12
+08-22 02:35:07.023 I/ReactNativeJS(12133): '[places] new-text', 'Abendessen in Hamburg Gemütliches Abende', 12
+08-22 02:38:07.475 I/ReactNativeJS(12133): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 02:38:07.476 I/ReactNativeJS(12133): '[stt] isRecognitionAvailable:', true
+08-22 02:38:07.477 I/ReactNativeJS(12133): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 02:38:07.477 I/ReactNativeJS(12133):   'com.google.android.tts',
+08-22 02:38:07.477 I/ReactNativeJS(12133):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 02:38:07.477 I/ReactNativeJS(12133): '[stt] android default service:', 'com.google.android.tts'
+08-22 02:38:07.482 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 02:38:10.001 I/ReactNativeJS(12133): [stt] recognition started
+08-22 02:38:14.764 W/ReactNativeJS(12133): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=0.4', 'partial=false', 'svc=com.google.android.tts'
+08-22 02:38:15.149 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.qualcomm.qti.voiceai.speech'
+08-22 02:38:15.149 I/ReactNativeJS(12133): [stt] keep-alive restart (error:no-speech, try 1)
+08-22 02:38:16.375 W/ReactNativeJS(12133): '[stt] error:', 'network', 'Server sent error status.', 'vol=0.4', 'partial=false', 'svc=com.qualcomm.qti.voiceai.speech'
+08-22 02:39:32.203 W/ReactNativeJS(12133): '[nav] reject car-like detour', { routeM: 464, airM: 153, source: 'osrm' }
+08-22 02:39:32.330 W/ReactNativeJS(12133): '[nav] reject car-like detour', { routeM: 464, airM: 153, source: 'osrm' }
+08-22 02:39:32.332 W/ReactNativeJS(12133): '[nav] reject car-like detour', { routeM: 504, airM: 120, source: 'osrm' }
+08-22 02:39:33.536 W/ReactNativeJS(12133): '[nav] reject car-like detour', { routeM: 463, airM: 153, source: 'google' }
+08-22 02:39:33.639 W/ReactNativeJS(12133): '[nav] reject car-like detour', { routeM: 503, airM: 120, source: 'google' }
+08-22 02:39:33.754 W/ReactNativeJS(12133): '[nav] reject car-like detour', { routeM: 447, airM: 120, source: 'osrm' }
+08-22 02:39:33.766 W/ReactNativeJS(12133): '[nav] reject car-like detour', { routeM: 463, airM: 153, source: 'google' }
+08-22 02:39:48.333 W/ReactNativeJS(12133): '[nav] reject car-like detour', { routeM: 442, airM: 120, source: 'osrm' }
+08-22 02:40:00.020 W/ReactNativeJS(12133): '[nav] reject car-like detour', { routeM: 442, airM: 120, source: 'osrm' }
+08-22 02:40:08.320 W/ReactNativeJS(12133): '[nav] reject car-like detour', { routeM: 444, airM: 120, source: 'google' }
+08-22 02:40:08.403 W/ReactNativeJS(12133): '[nav] reject car-like detour', { routeM: 447, airM: 120, source: 'osrm' }
+08-22 02:40:19.020 W/ReactNativeJS(12133): '[nav] reject car-like detour', { routeM: 444, airM: 120, source: 'google' }
+08-22 02:40:19.109 W/ReactNativeJS(12133): '[nav] reject car-like detour', { routeM: 447, airM: 120, source: 'osrm' }
+08-22 02:42:56.684 W/ReactNativeJS(12133): '[nav-queue] flush failed:', [Error: speech_interrupted]
+08-22 02:44:48.654 I/ReactNativeJS(12133): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 02:44:48.655 I/ReactNativeJS(12133): '[stt] isRecognitionAvailable:', true
+08-22 02:44:48.656 I/ReactNativeJS(12133): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 02:44:48.656 I/ReactNativeJS(12133):   'com.google.android.tts',
+08-22 02:44:48.656 I/ReactNativeJS(12133):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 02:44:48.656 I/ReactNativeJS(12133): '[stt] android default service:', 'com.google.android.tts'
+08-22 02:44:48.686 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 02:44:48.820 I/ReactNativeJS(12133): [stt] recognition started
+08-22 02:44:48.886 W/ReactNativeJS(12133): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=-2.0', 'partial=false', 'svc=com.google.android.tts'
+08-22 02:48:20.490 W/ReactNativeJS(12133): '[nav-queue] flush failed:', [Error: speech_interrupted]
+08-22 02:48:20.493 W/ReactNativeJS(12133): '[geofence] POI not found:', -1
+08-22 02:51:15.764 I/ReactNativeJS(12133): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 02:51:15.765 I/ReactNativeJS(12133): '[stt] isRecognitionAvailable:', true
+08-22 02:51:15.766 I/ReactNativeJS(12133): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 02:51:15.766 I/ReactNativeJS(12133):   'com.google.android.tts',
+08-22 02:51:15.766 I/ReactNativeJS(12133):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 02:51:15.766 I/ReactNativeJS(12133): '[stt] android default service:', 'com.google.android.tts'
+08-22 02:51:15.806 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 02:51:15.997 I/ReactNativeJS(12133): [stt] recognition started
+08-22 02:51:17.338 W/ReactNativeJS(12133): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=-2.0', 'partial=false', 'svc=com.google.android.tts'
+08-22 02:51:20.386 I/ReactNativeJS(12133): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 02:51:20.387 I/ReactNativeJS(12133): '[stt] isRecognitionAvailable:', true
+08-22 02:51:20.388 I/ReactNativeJS(12133): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 02:51:20.388 I/ReactNativeJS(12133):   'com.google.android.tts',
+08-22 02:51:20.388 I/ReactNativeJS(12133):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 02:51:20.388 I/ReactNativeJS(12133): '[stt] android default service:', 'com.google.android.tts'
+08-22 02:51:20.392 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 02:51:20.441 I/ReactNativeJS(12133): [stt] recognition started
+08-22 02:51:23.294 W/ReactNativeJS(12133): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=0.0', 'partial=false', 'svc=com.google.android.tts'
+08-22 02:51:23.322 I/ReactNativeJS(12133): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 02:51:23.322 I/ReactNativeJS(12133): '[stt] isRecognitionAvailable:', true
+08-22 02:51:23.323 I/ReactNativeJS(12133): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 02:51:23.323 I/ReactNativeJS(12133):   'com.google.android.tts',
+08-22 02:51:23.323 I/ReactNativeJS(12133):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 02:51:23.323 I/ReactNativeJS(12133): '[stt] android default service:', 'com.google.android.tts'
+08-22 02:51:23.326 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 02:51:23.370 I/ReactNativeJS(12133): [stt] recognition started
+08-22 02:51:26.238 W/ReactNativeJS(12133): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=-0.2', 'partial=false', 'svc=com.google.android.tts'
+08-22 02:51:26.466 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.qualcomm.qti.voiceai.speech'
+08-22 02:51:26.468 I/ReactNativeJS(12133): [stt] keep-alive restart (error:no-speech, try 1)
+08-22 02:51:26.503 W/ReactNativeJS(12133): '[stt] error:', 'network', 'Server sent error status.', 'vol=-0.2', 'partial=false', 'svc=com.qualcomm.qti.voiceai.speech'
+08-22 02:51:28.343 I/ReactNativeJS(12133): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 02:51:28.346 I/ReactNativeJS(12133): '[stt] isRecognitionAvailable:', true
+08-22 02:51:28.348 I/ReactNativeJS(12133): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 02:51:28.348 I/ReactNativeJS(12133):   'com.google.android.tts',
+08-22 02:51:28.348 I/ReactNativeJS(12133):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 02:51:28.348 I/ReactNativeJS(12133): '[stt] android default service:', 'com.google.android.tts'
+08-22 02:51:28.356 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 02:51:28.406 I/ReactNativeJS(12133): [stt] recognition started
+08-22 02:51:31.329 W/ReactNativeJS(12133): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=0.3', 'partial=false', 'svc=com.google.android.tts'
+08-22 02:51:31.566 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.qualcomm.qti.voiceai.speech'
+08-22 02:51:31.569 I/ReactNativeJS(12133): [stt] keep-alive restart (error:no-speech, try 1)
+08-22 02:51:31.591 W/ReactNativeJS(12133): '[stt] error:', 'network', 'Server sent error status.', 'vol=0.3', 'partial=false', 'svc=com.qualcomm.qti.voiceai.speech'
+08-22 02:51:33.357 I/ReactNativeJS(12133): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 02:51:33.361 I/ReactNativeJS(12133): '[stt] isRecognitionAvailable:', true
+08-22 02:51:33.365 I/ReactNativeJS(12133): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 02:51:33.365 I/ReactNativeJS(12133):   'com.google.android.tts',
+08-22 02:51:33.365 I/ReactNativeJS(12133):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 02:51:33.365 I/ReactNativeJS(12133): '[stt] android default service:', 'com.google.android.tts'
+08-22 02:51:33.373 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 02:51:33.430 I/ReactNativeJS(12133): [stt] recognition started
+08-22 02:51:36.270 W/ReactNativeJS(12133): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=0.4', 'partial=false', 'svc=com.google.android.tts'
+08-22 02:51:36.500 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.qualcomm.qti.voiceai.speech'
+08-22 02:51:36.502 I/ReactNativeJS(12133): [stt] keep-alive restart (error:no-speech, try 1)
+08-22 02:51:36.522 W/ReactNativeJS(12133): '[stt] error:', 'network', 'Server sent error status.', 'vol=0.4', 'partial=false', 'svc=com.qualcomm.qti.voiceai.speech'
+08-22 02:51:38.376 I/ReactNativeJS(12133): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 02:51:38.379 I/ReactNativeJS(12133): '[stt] isRecognitionAvailable:', true
+08-22 02:51:38.382 I/ReactNativeJS(12133): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 02:51:38.382 I/ReactNativeJS(12133):   'com.google.android.tts',
+08-22 02:51:38.382 I/ReactNativeJS(12133):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 02:51:38.382 I/ReactNativeJS(12133): '[stt] android default service:', 'com.google.android.tts'
+08-22 02:51:38.390 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 02:51:38.444 I/ReactNativeJS(12133): [stt] recognition started
+08-22 02:51:41.415 W/ReactNativeJS(12133): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=0.6', 'partial=false', 'svc=com.google.android.tts'
+08-22 02:51:41.650 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.qualcomm.qti.voiceai.speech'
+08-22 02:51:41.652 I/ReactNativeJS(12133): [stt] keep-alive restart (error:no-speech, try 1)
+08-22 02:51:41.674 W/ReactNativeJS(12133): '[stt] error:', 'network', 'Server sent error status.', 'vol=0.6', 'partial=false', 'svc=com.qualcomm.qti.voiceai.speech'
+08-22 02:51:43.391 I/ReactNativeJS(12133): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 02:51:43.395 I/ReactNativeJS(12133): '[stt] isRecognitionAvailable:', true
+08-22 02:51:43.399 I/ReactNativeJS(12133): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 02:51:43.399 I/ReactNativeJS(12133):   'com.google.android.tts',
+08-22 02:51:43.399 I/ReactNativeJS(12133):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 02:51:43.399 I/ReactNativeJS(12133): '[stt] android default service:', 'com.google.android.tts'
+08-22 02:51:43.408 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 02:51:43.461 I/ReactNativeJS(12133): [stt] recognition started
+08-22 02:51:46.371 W/ReactNativeJS(12133): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=0.2', 'partial=false', 'svc=com.google.android.tts'
+08-22 02:51:46.599 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.qualcomm.qti.voiceai.speech'
+08-22 02:51:46.600 I/ReactNativeJS(12133): [stt] keep-alive restart (error:no-speech, try 1)
+08-22 02:51:46.617 W/ReactNativeJS(12133): '[stt] error:', 'network', 'Server sent error status.', 'vol=0.2', 'partial=false', 'svc=com.qualcomm.qti.voiceai.speech'
+08-22 02:51:48.407 I/ReactNativeJS(12133): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 02:51:48.409 I/ReactNativeJS(12133): '[stt] isRecognitionAvailable:', true
+08-22 02:51:48.411 I/ReactNativeJS(12133): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 02:51:48.411 I/ReactNativeJS(12133):   'com.google.android.tts',
+08-22 02:51:48.411 I/ReactNativeJS(12133):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 02:51:48.412 I/ReactNativeJS(12133): '[stt] android default service:', 'com.google.android.tts'
+08-22 02:51:48.417 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 02:51:48.463 I/ReactNativeJS(12133): [stt] recognition started
+08-22 02:51:51.404 W/ReactNativeJS(12133): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=-0.1', 'partial=false', 'svc=com.google.android.tts'
+08-22 02:51:51.632 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.qualcomm.qti.voiceai.speech'
+08-22 02:51:51.634 I/ReactNativeJS(12133): [stt] keep-alive restart (error:no-speech, try 1)
+08-22 02:51:51.649 W/ReactNativeJS(12133): '[stt] error:', 'network', 'Server sent error status.', 'vol=-0.1', 'partial=false', 'svc=com.qualcomm.qti.voiceai.speech'
+08-22 02:51:53.425 I/ReactNativeJS(12133): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 02:51:53.429 I/ReactNativeJS(12133): '[stt] isRecognitionAvailable:', true
+08-22 02:51:53.432 I/ReactNativeJS(12133): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 02:51:53.432 I/ReactNativeJS(12133):   'com.google.android.tts',
+08-22 02:51:53.432 I/ReactNativeJS(12133):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 02:51:53.432 I/ReactNativeJS(12133): '[stt] android default service:', 'com.google.android.tts'
+08-22 02:51:53.442 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 02:51:53.492 I/ReactNativeJS(12133): [stt] recognition started
+08-22 02:51:56.340 W/ReactNativeJS(12133): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=-0.2', 'partial=false', 'svc=com.google.android.tts'
+08-22 02:51:56.574 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.qualcomm.qti.voiceai.speech'
+08-22 02:51:56.576 I/ReactNativeJS(12133): [stt] keep-alive restart (error:no-speech, try 1)
+08-22 02:51:56.592 W/ReactNativeJS(12133): '[stt] error:', 'network', 'Server sent error status.', 'vol=-0.2', 'partial=false', 'svc=com.qualcomm.qti.voiceai.speech'
+08-22 02:51:58.442 I/ReactNativeJS(12133): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 02:51:58.446 I/ReactNativeJS(12133): '[stt] isRecognitionAvailable:', true
+08-22 02:51:58.450 I/ReactNativeJS(12133): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 02:51:58.450 I/ReactNativeJS(12133):   'com.google.android.tts',
+08-22 02:51:58.450 I/ReactNativeJS(12133):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 02:51:58.450 I/ReactNativeJS(12133): '[stt] android default service:', 'com.google.android.tts'
+08-22 02:51:58.458 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 02:51:58.511 I/ReactNativeJS(12133): [stt] recognition started
+08-22 02:52:01.353 W/ReactNativeJS(12133): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=-0.3', 'partial=false', 'svc=com.google.android.tts'
+08-22 02:52:01.584 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.qualcomm.qti.voiceai.speech'
+08-22 02:52:01.586 I/ReactNativeJS(12133): [stt] keep-alive restart (error:no-speech, try 1)
+08-22 02:52:01.608 W/ReactNativeJS(12133): '[stt] error:', 'network', 'Server sent error status.', 'vol=-0.3', 'partial=false', 'svc=com.qualcomm.qti.voiceai.speech'
+08-22 02:52:03.488 I/ReactNativeJS(12133): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 02:52:03.490 I/ReactNativeJS(12133): '[stt] isRecognitionAvailable:', true
+08-22 02:52:03.491 I/ReactNativeJS(12133): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 02:52:03.491 I/ReactNativeJS(12133):   'com.google.android.tts',
+08-22 02:52:03.491 I/ReactNativeJS(12133):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 02:52:03.491 I/ReactNativeJS(12133): '[stt] android default service:', 'com.google.android.tts'
+08-22 02:52:03.501 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 02:52:03.554 I/ReactNativeJS(12133): [stt] recognition started
+08-22 02:52:06.442 W/ReactNativeJS(12133): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=-0.3', 'partial=false', 'svc=com.google.android.tts'
+08-22 02:52:06.674 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.qualcomm.qti.voiceai.speech'
+08-22 02:52:06.676 I/ReactNativeJS(12133): [stt] keep-alive restart (error:no-speech, try 1)
+08-22 02:52:06.693 W/ReactNativeJS(12133): '[stt] error:', 'network', 'Server sent error status.', 'vol=-0.3', 'partial=false', 'svc=com.qualcomm.qti.voiceai.speech'
+08-22 02:52:08.475 I/ReactNativeJS(12133): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 02:52:08.480 I/ReactNativeJS(12133): '[stt] isRecognitionAvailable:', true
+08-22 02:52:08.483 I/ReactNativeJS(12133): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 02:52:08.483 I/ReactNativeJS(12133):   'com.google.android.tts',
+08-22 02:52:08.483 I/ReactNativeJS(12133):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 02:52:08.483 I/ReactNativeJS(12133): '[stt] android default service:', 'com.google.android.tts'
+08-22 02:52:08.493 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 02:52:08.548 I/ReactNativeJS(12133): [stt] recognition started
+08-22 02:52:11.413 W/ReactNativeJS(12133): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=0.4', 'partial=false', 'svc=com.google.android.tts'
+08-22 02:52:11.641 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.qualcomm.qti.voiceai.speech'
+08-22 02:52:11.642 I/ReactNativeJS(12133): [stt] keep-alive restart (error:no-speech, try 1)
+08-22 02:52:11.662 W/ReactNativeJS(12133): '[stt] error:', 'network', 'Server sent error status.', 'vol=0.4', 'partial=false', 'svc=com.qualcomm.qti.voiceai.speech'
+08-22 02:52:13.491 I/ReactNativeJS(12133): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 02:52:13.496 I/ReactNativeJS(12133): '[stt] isRecognitionAvailable:', true
+08-22 02:52:13.499 I/ReactNativeJS(12133): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 02:52:13.499 I/ReactNativeJS(12133):   'com.google.android.tts',
+08-22 02:52:13.499 I/ReactNativeJS(12133):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 02:52:13.499 I/ReactNativeJS(12133): '[stt] android default service:', 'com.google.android.tts'
+08-22 02:52:13.508 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 02:52:13.563 I/ReactNativeJS(12133): [stt] recognition started
+08-22 02:52:16.400 W/ReactNativeJS(12133): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=1.8', 'partial=false', 'svc=com.google.android.tts'
+08-22 02:52:16.633 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.qualcomm.qti.voiceai.speech'
+08-22 02:52:16.634 I/ReactNativeJS(12133): [stt] keep-alive restart (error:no-speech, try 1)
+08-22 02:52:16.652 W/ReactNativeJS(12133): '[stt] error:', 'network', 'Server sent error status.', 'vol=1.8', 'partial=false', 'svc=com.qualcomm.qti.voiceai.speech'
+08-22 02:52:18.508 I/ReactNativeJS(12133): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 02:52:18.512 I/ReactNativeJS(12133): '[stt] isRecognitionAvailable:', true
+08-22 02:52:18.518 I/ReactNativeJS(12133): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 02:52:18.518 I/ReactNativeJS(12133):   'com.google.android.tts',
+08-22 02:52:18.518 I/ReactNativeJS(12133):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 02:52:18.518 I/ReactNativeJS(12133): '[stt] android default service:', 'com.google.android.tts'
+08-22 02:52:18.530 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 02:52:18.585 I/ReactNativeJS(12133): [stt] recognition started
+08-22 02:52:21.474 W/ReactNativeJS(12133): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=-0.4', 'partial=false', 'svc=com.google.android.tts'
+08-22 02:52:21.708 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.qualcomm.qti.voiceai.speech'
+08-22 02:52:21.710 I/ReactNativeJS(12133): [stt] keep-alive restart (error:no-speech, try 1)
+08-22 02:52:21.727 W/ReactNativeJS(12133): '[stt] error:', 'network', 'Server sent error status.', 'vol=-0.4', 'partial=false', 'svc=com.qualcomm.qti.voiceai.speech'
+08-22 02:52:23.530 I/ReactNativeJS(12133): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 02:52:23.531 I/ReactNativeJS(12133): '[stt] isRecognitionAvailable:', true
+08-22 02:52:23.533 I/ReactNativeJS(12133): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 02:52:23.533 I/ReactNativeJS(12133):   'com.google.android.tts',
+08-22 02:52:23.533 I/ReactNativeJS(12133):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 02:52:23.533 I/ReactNativeJS(12133): '[stt] android default service:', 'com.google.android.tts'
+08-22 02:52:23.539 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 02:52:23.593 I/ReactNativeJS(12133): [stt] recognition started
+08-22 02:52:26.451 W/ReactNativeJS(12133): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=-0.1', 'partial=false', 'svc=com.google.android.tts'
+08-22 02:52:26.683 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.qualcomm.qti.voiceai.speech'
+08-22 02:52:26.684 I/ReactNativeJS(12133): [stt] keep-alive restart (error:no-speech, try 1)
+08-22 02:52:26.707 W/ReactNativeJS(12133): '[stt] error:', 'network', 'Server sent error status.', 'vol=-0.1', 'partial=false', 'svc=com.qualcomm.qti.voiceai.speech'
+08-22 02:52:28.541 I/ReactNativeJS(12133): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 02:52:28.543 I/ReactNativeJS(12133): '[stt] isRecognitionAvailable:', true
+08-22 02:52:28.547 I/ReactNativeJS(12133): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 02:52:28.547 I/ReactNativeJS(12133):   'com.google.android.tts',
+08-22 02:52:28.547 I/ReactNativeJS(12133):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 02:52:28.547 I/ReactNativeJS(12133): '[stt] android default service:', 'com.google.android.tts'
+08-22 02:52:28.557 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 02:52:28.613 I/ReactNativeJS(12133): [stt] recognition started
+08-22 02:52:31.474 W/ReactNativeJS(12133): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=0.2', 'partial=false', 'svc=com.google.android.tts'
+08-22 03:08:29.081 I/ReactNativeJS(12133): '[places] new-text', 'Hamburg-Ausflug Hamburg', 1
+08-22 03:08:29.089 I/ReactNativeJS(12133): '[places] new-text', 'Hamburg-Ausflug Hamburg', 1
+08-22 03:22:15.871 W/ReactNativeJS(12133): [location] GPS Timeout
+08-22 03:25:54.757 I/ReactNativeJS(12133): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 03:25:54.760 I/ReactNativeJS(12133): '[stt] isRecognitionAvailable:', true
+08-22 03:25:54.765 I/ReactNativeJS(12133): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 03:25:54.765 I/ReactNativeJS(12133):   'com.google.android.tts',
+08-22 03:25:54.765 I/ReactNativeJS(12133):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 03:25:54.765 I/ReactNativeJS(12133): '[stt] android default service:', 'com.google.android.tts'
+08-22 03:25:54.774 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 03:25:55.421 I/ReactNativeJS(12133): [stt] recognition started
+08-22 03:26:00.208 W/ReactNativeJS(12133): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=-2.0', 'partial=false', 'svc=com.google.android.tts'
+08-22 03:26:23.583 I/ReactNativeJS(12133): '[places] new-text', 'fuer 2', 0
+08-22 03:31:52.154 I/ReactNativeJS(12133): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 03:31:52.155 I/ReactNativeJS(12133): '[stt] isRecognitionAvailable:', true
+08-22 03:31:52.156 I/ReactNativeJS(12133): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 03:31:52.156 I/ReactNativeJS(12133):   'com.google.android.tts',
+08-22 03:31:52.156 I/ReactNativeJS(12133):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 03:31:52.156 I/ReactNativeJS(12133): '[stt] android default service:', 'com.google.android.tts'
+08-22 03:31:52.168 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 03:31:53.455 I/ReactNativeJS(12133): [stt] recognition started
+08-22 03:31:53.593 W/ReactNativeJS(12133): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=-0.3', 'partial=false', 'svc=com.google.android.tts'
+08-22 03:34:19.416 I/ReactNativeJS(12133): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 03:34:19.422 I/ReactNativeJS(12133): '[stt] isRecognitionAvailable:', true
+08-22 03:34:19.424 I/ReactNativeJS(12133): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 03:34:19.424 I/ReactNativeJS(12133):   'com.google.android.tts',
+08-22 03:34:19.424 I/ReactNativeJS(12133):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 03:34:19.425 I/ReactNativeJS(12133): '[stt] android default service:', 'com.google.android.tts'
+08-22 03:34:19.509 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 03:34:19.955 I/ReactNativeJS(12133): [stt] recognition started
+08-22 03:34:19.988 W/ReactNativeJS(12133): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=-2.0', 'partial=false', 'svc=com.google.android.tts'
+08-22 03:35:39.603 I/ReactNativeJS(12133): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 03:35:39.604 I/ReactNativeJS(12133): '[stt] isRecognitionAvailable:', true
+08-22 03:35:39.605 I/ReactNativeJS(12133): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 03:35:39.605 I/ReactNativeJS(12133):   'com.google.android.tts',
+08-22 03:35:39.605 I/ReactNativeJS(12133):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 03:35:39.605 I/ReactNativeJS(12133): '[stt] android default service:', 'com.google.android.tts'
+08-22 03:35:39.651 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 03:35:39.992 I/ReactNativeJS(12133): [stt] recognition started
+08-22 03:35:40.143 W/ReactNativeJS(12133): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=-2.0', 'partial=false', 'svc=com.google.android.tts'
+08-22 03:37:44.262 I/ReactNativeJS(12133): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 03:37:44.263 I/ReactNativeJS(12133): '[stt] isRecognitionAvailable:', true
+08-22 03:37:44.264 I/ReactNativeJS(12133): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 03:37:44.264 I/ReactNativeJS(12133):   'com.google.android.tts',
+08-22 03:37:44.264 I/ReactNativeJS(12133):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 03:37:44.264 I/ReactNativeJS(12133): '[stt] android default service:', 'com.google.android.tts'
+08-22 03:37:44.317 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 03:37:44.758 I/ReactNativeJS(12133): [stt] recognition started
+08-22 03:37:45.210 W/ReactNativeJS(12133): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=-2.0', 'partial=false', 'svc=com.google.android.tts'
+08-22 03:38:37.844 I/ReactNativeJS(12133): '[places] new-text', 'Flug Hamburg München Freitag Muenchen', 12
+08-22 03:38:37.848 I/ReactNativeJS(12133): '[places] new-text', 'Flug Hamburg München Freitag Muenchen', 12
+08-22 03:42:37.667 I/ReactNativeJS(12133): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 03:42:37.667 I/ReactNativeJS(12133): '[stt] isRecognitionAvailable:', true
+08-22 03:42:37.668 I/ReactNativeJS(12133): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 03:42:37.668 I/ReactNativeJS(12133):   'com.google.android.tts',
+08-22 03:42:37.668 I/ReactNativeJS(12133):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 03:42:37.668 I/ReactNativeJS(12133): '[stt] android default service:', 'com.google.android.tts'
+08-22 03:42:37.747 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 03:42:37.974 I/ReactNativeJS(12133): [stt] recognition started
+08-22 03:42:38.006 W/ReactNativeJS(12133): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=-2.0', 'partial=false', 'svc=com.google.android.tts'
+08-22 03:48:58.278 W/ReactNativeJS(12133): '[fallback] Gemini-Pro', 'Flash überfordert (generic)'
+08-22 03:48:58.434 W/ReactNativeJS(12133): [gemini] gemini-2.5-pro nicht verfügbar, nächstes Modell…
+08-22 03:48:59.912 W/ReactNativeJS(12133): [gemini] finishReason=MAX_TOKENS — Antwort evtl. abgeschnitten
+08-22 03:49:00.012 W/ReactNativeJS(12133): [gemini] gemini-2.5-flash nicht verfügbar, nächstes Modell…
+08-22 03:52:48.964 I/ReactNativeJS(12133): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 03:52:48.965 I/ReactNativeJS(12133): '[stt] isRecognitionAvailable:', true
+08-22 03:52:48.966 I/ReactNativeJS(12133): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 03:52:48.966 I/ReactNativeJS(12133):   'com.google.android.tts',
+08-22 03:52:48.966 I/ReactNativeJS(12133):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 03:52:48.966 I/ReactNativeJS(12133): '[stt] android default service:', 'com.google.android.tts'
+08-22 03:52:49.024 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 03:52:49.170 I/ReactNativeJS(12133): [stt] recognition started
+08-22 03:52:50.507 W/ReactNativeJS(12133): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=-2.0', 'partial=false', 'svc=com.google.android.tts'
+08-22 03:52:53.541 I/ReactNativeJS(12133): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 03:52:53.542 I/ReactNativeJS(12133): '[stt] isRecognitionAvailable:', true
+08-22 03:52:53.543 I/ReactNativeJS(12133): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 03:52:53.543 I/ReactNativeJS(12133):   'com.google.android.tts',
+08-22 03:52:53.543 I/ReactNativeJS(12133):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 03:52:53.543 I/ReactNativeJS(12133): '[stt] android default service:', 'com.google.android.tts'
+08-22 03:52:53.546 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 03:52:53.593 I/ReactNativeJS(12133): [stt] recognition started
+08-22 03:52:56.446 W/ReactNativeJS(12133): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=0.0', 'partial=false', 'svc=com.google.android.tts'
+08-22 03:52:56.551 I/ReactNativeJS(12133): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 03:52:56.553 I/ReactNativeJS(12133): '[stt] isRecognitionAvailable:', true
+08-22 03:52:56.555 I/ReactNativeJS(12133): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 03:52:56.555 I/ReactNativeJS(12133):   'com.google.android.tts',
+08-22 03:52:56.555 I/ReactNativeJS(12133):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 03:52:56.555 I/ReactNativeJS(12133): '[stt] android default service:', 'com.google.android.tts'
+08-22 03:52:56.562 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 03:52:56.607 I/ReactNativeJS(12133): [stt] recognition started
+08-22 03:52:59.448 W/ReactNativeJS(12133): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=-2.0', 'partial=false', 'svc=com.google.android.tts'
+08-22 03:52:59.676 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.qualcomm.qti.voiceai.speech'
+08-22 03:52:59.677 I/ReactNativeJS(12133): [stt] keep-alive restart (error:no-speech, try 1)
+08-22 03:52:59.775 W/ReactNativeJS(12133): '[stt] error:', 'network', 'Server sent error status.', 'vol=-2.0', 'partial=false', 'svc=com.qualcomm.qti.voiceai.speech'
+08-22 03:53:01.567 I/ReactNativeJS(12133): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 03:53:01.569 I/ReactNativeJS(12133): '[stt] isRecognitionAvailable:', true
+08-22 03:53:01.572 I/ReactNativeJS(12133): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 03:53:01.572 I/ReactNativeJS(12133):   'com.google.android.tts',
+08-22 03:53:01.572 I/ReactNativeJS(12133):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 03:53:01.572 I/ReactNativeJS(12133): '[stt] android default service:', 'com.google.android.tts'
+08-22 03:53:01.580 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 03:53:01.625 I/ReactNativeJS(12133): [stt] recognition started
+08-22 03:53:04.499 W/ReactNativeJS(12133): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=0.5', 'partial=false', 'svc=com.google.android.tts'
+08-22 03:53:04.728 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.qualcomm.qti.voiceai.speech'
+08-22 03:53:04.729 I/ReactNativeJS(12133): [stt] keep-alive restart (error:no-speech, try 1)
+08-22 03:53:04.745 W/ReactNativeJS(12133): '[stt] error:', 'network', 'Server sent error status.', 'vol=0.5', 'partial=false', 'svc=com.qualcomm.qti.voiceai.speech'
+08-22 03:53:06.586 I/ReactNativeJS(12133): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 03:53:06.588 I/ReactNativeJS(12133): '[stt] isRecognitionAvailable:', true
+08-22 03:53:06.591 I/ReactNativeJS(12133): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 03:53:06.591 I/ReactNativeJS(12133):   'com.google.android.tts',
+08-22 03:53:06.591 I/ReactNativeJS(12133):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 03:53:06.591 I/ReactNativeJS(12133): '[stt] android default service:', 'com.google.android.tts'
+08-22 03:53:06.602 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 03:53:06.654 I/ReactNativeJS(12133): [stt] recognition started
+08-22 03:53:09.547 W/ReactNativeJS(12133): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=0.8', 'partial=false', 'svc=com.google.android.tts'
+08-22 03:53:09.775 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.qualcomm.qti.voiceai.speech'
+08-22 03:53:09.776 I/ReactNativeJS(12133): [stt] keep-alive restart (error:no-speech, try 1)
+08-22 03:53:09.796 W/ReactNativeJS(12133): '[stt] error:', 'network', 'Server sent error status.', 'vol=0.8', 'partial=false', 'svc=com.qualcomm.qti.voiceai.speech'
+08-22 03:53:11.603 I/ReactNativeJS(12133): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 03:53:11.605 I/ReactNativeJS(12133): '[stt] isRecognitionAvailable:', true
+08-22 03:53:11.608 I/ReactNativeJS(12133): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 03:53:11.608 I/ReactNativeJS(12133):   'com.google.android.tts',
+08-22 03:53:11.608 I/ReactNativeJS(12133):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 03:53:11.608 I/ReactNativeJS(12133): '[stt] android default service:', 'com.google.android.tts'
+08-22 03:53:11.616 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 03:53:11.671 I/ReactNativeJS(12133): [stt] recognition started
+08-22 03:53:14.509 W/ReactNativeJS(12133): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=-0.2', 'partial=false', 'svc=com.google.android.tts'
+08-22 03:53:14.744 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.qualcomm.qti.voiceai.speech'
+08-22 03:53:14.746 I/ReactNativeJS(12133): [stt] keep-alive restart (error:no-speech, try 1)
+08-22 03:53:14.767 W/ReactNativeJS(12133): '[stt] error:', 'network', 'Server sent error status.', 'vol=-0.2', 'partial=false', 'svc=com.qualcomm.qti.voiceai.speech'
+08-22 03:53:16.619 I/ReactNativeJS(12133): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 03:53:16.623 I/ReactNativeJS(12133): '[stt] isRecognitionAvailable:', true
+08-22 03:53:16.626 I/ReactNativeJS(12133): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 03:53:16.626 I/ReactNativeJS(12133):   'com.google.android.tts',
+08-22 03:53:16.626 I/ReactNativeJS(12133):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 03:53:16.626 I/ReactNativeJS(12133): '[stt] android default service:', 'com.google.android.tts'
+08-22 03:53:16.636 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 03:53:16.690 I/ReactNativeJS(12133): [stt] recognition started
+08-22 03:53:19.544 W/ReactNativeJS(12133): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=0.3', 'partial=false', 'svc=com.google.android.tts'
+08-22 03:53:19.778 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.qualcomm.qti.voiceai.speech'
+08-22 03:53:19.779 I/ReactNativeJS(12133): [stt] keep-alive restart (error:no-speech, try 1)
+08-22 03:53:19.798 W/ReactNativeJS(12133): '[stt] error:', 'network', 'Server sent error status.', 'vol=0.3', 'partial=false', 'svc=com.qualcomm.qti.voiceai.speech'
+08-22 03:53:21.633 I/ReactNativeJS(12133): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 03:53:21.634 I/ReactNativeJS(12133): '[stt] isRecognitionAvailable:', true
+08-22 03:53:21.635 I/ReactNativeJS(12133): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 03:53:21.635 I/ReactNativeJS(12133):   'com.google.android.tts',
+08-22 03:53:21.635 I/ReactNativeJS(12133):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 03:53:21.635 I/ReactNativeJS(12133): '[stt] android default service:', 'com.google.android.tts'
+08-22 03:53:21.638 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 03:53:21.686 I/ReactNativeJS(12133): [stt] recognition started
+08-22 03:53:24.527 W/ReactNativeJS(12133): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=-0.3', 'partial=false', 'svc=com.google.android.tts'
+08-22 03:53:24.761 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.qualcomm.qti.voiceai.speech'
+08-22 03:53:24.762 I/ReactNativeJS(12133): [stt] keep-alive restart (error:no-speech, try 1)
+08-22 03:53:24.782 W/ReactNativeJS(12133): '[stt] error:', 'network', 'Server sent error status.', 'vol=-0.3', 'partial=false', 'svc=com.qualcomm.qti.voiceai.speech'
+08-22 03:53:26.654 I/ReactNativeJS(12133): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 03:53:26.656 I/ReactNativeJS(12133): '[stt] isRecognitionAvailable:', true
+08-22 03:53:26.660 I/ReactNativeJS(12133): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 03:53:26.660 I/ReactNativeJS(12133):   'com.google.android.tts',
+08-22 03:53:26.660 I/ReactNativeJS(12133):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 03:53:26.660 I/ReactNativeJS(12133): '[stt] android default service:', 'com.google.android.tts'
+08-22 03:53:26.670 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 03:53:26.721 I/ReactNativeJS(12133): [stt] recognition started
+08-22 03:53:29.559 W/ReactNativeJS(12133): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=-0.6', 'partial=false', 'svc=com.google.android.tts'
+08-22 03:53:29.793 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.qualcomm.qti.voiceai.speech'
+08-22 03:53:29.794 I/ReactNativeJS(12133): [stt] keep-alive restart (error:no-speech, try 1)
+08-22 03:53:29.847 W/ReactNativeJS(12133): '[stt] error:', 'network', 'Server sent error status.', 'vol=-0.6', 'partial=false', 'svc=com.qualcomm.qti.voiceai.speech'
+08-22 03:53:31.670 I/ReactNativeJS(12133): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 03:53:31.673 I/ReactNativeJS(12133): '[stt] isRecognitionAvailable:', true
+08-22 03:53:31.677 I/ReactNativeJS(12133): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 03:53:31.677 I/ReactNativeJS(12133):   'com.google.android.tts',
+08-22 03:53:31.677 I/ReactNativeJS(12133):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 03:53:31.677 I/ReactNativeJS(12133): '[stt] android default service:', 'com.google.android.tts'
+08-22 03:53:31.684 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 03:53:31.741 I/ReactNativeJS(12133): [stt] recognition started
+08-22 03:53:34.643 W/ReactNativeJS(12133): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=0.5', 'partial=false', 'svc=com.google.android.tts'
+08-22 03:53:34.867 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.qualcomm.qti.voiceai.speech'
+08-22 03:53:34.867 I/ReactNativeJS(12133): [stt] keep-alive restart (error:no-speech, try 1)
+08-22 03:53:34.888 W/ReactNativeJS(12133): '[stt] error:', 'network', 'Server sent error status.', 'vol=0.5', 'partial=false', 'svc=com.qualcomm.qti.voiceai.speech'
+08-22 03:53:36.686 I/ReactNativeJS(12133): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 03:53:36.689 I/ReactNativeJS(12133): '[stt] isRecognitionAvailable:', true
+08-22 03:53:36.695 I/ReactNativeJS(12133): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 03:53:36.695 I/ReactNativeJS(12133):   'com.google.android.tts',
+08-22 03:53:36.695 I/ReactNativeJS(12133):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 03:53:36.696 I/ReactNativeJS(12133): '[stt] android default service:', 'com.google.android.tts'
+08-22 03:53:36.706 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 03:53:36.760 I/ReactNativeJS(12133): [stt] recognition started
+08-22 03:53:39.614 W/ReactNativeJS(12133): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=0.2', 'partial=false', 'svc=com.google.android.tts'
+08-22 03:53:39.844 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.qualcomm.qti.voiceai.speech'
+08-22 03:53:39.846 I/ReactNativeJS(12133): [stt] keep-alive restart (error:no-speech, try 1)
+08-22 03:53:39.864 W/ReactNativeJS(12133): '[stt] error:', 'network', 'Server sent error status.', 'vol=0.2', 'partial=false', 'svc=com.qualcomm.qti.voiceai.speech'
+08-22 03:53:41.704 I/ReactNativeJS(12133): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 03:53:41.706 I/ReactNativeJS(12133): '[stt] isRecognitionAvailable:', true
+08-22 03:53:41.710 I/ReactNativeJS(12133): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 03:53:41.710 I/ReactNativeJS(12133):   'com.google.android.tts',
+08-22 03:53:41.710 I/ReactNativeJS(12133):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 03:53:41.710 I/ReactNativeJS(12133): '[stt] android default service:', 'com.google.android.tts'
+08-22 03:53:41.717 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 03:53:41.766 I/ReactNativeJS(12133): [stt] recognition started
+08-22 03:53:44.719 W/ReactNativeJS(12133): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=0.0', 'partial=false', 'svc=com.google.android.tts'
+08-22 03:53:44.951 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.qualcomm.qti.voiceai.speech'
+08-22 03:53:44.952 I/ReactNativeJS(12133): [stt] keep-alive restart (error:no-speech, try 1)
+08-22 03:53:44.969 W/ReactNativeJS(12133): '[stt] error:', 'network', 'Server sent error status.', 'vol=0.0', 'partial=false', 'svc=com.qualcomm.qti.voiceai.speech'
+08-22 03:53:46.720 I/ReactNativeJS(12133): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 03:53:46.723 I/ReactNativeJS(12133): '[stt] isRecognitionAvailable:', true
+08-22 03:53:46.727 I/ReactNativeJS(12133): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 03:53:46.727 I/ReactNativeJS(12133):   'com.google.android.tts',
+08-22 03:53:46.727 I/ReactNativeJS(12133):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 03:53:46.727 I/ReactNativeJS(12133): '[stt] android default service:', 'com.google.android.tts'
+08-22 03:53:46.736 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 03:53:46.789 I/ReactNativeJS(12133): [stt] recognition started
+08-22 03:53:49.653 W/ReactNativeJS(12133): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=-0.1', 'partial=false', 'svc=com.google.android.tts'
+08-22 03:53:49.884 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.qualcomm.qti.voiceai.speech'
+08-22 03:53:49.885 I/ReactNativeJS(12133): [stt] keep-alive restart (error:no-speech, try 1)
+08-22 03:53:49.903 W/ReactNativeJS(12133): '[stt] error:', 'network', 'Server sent error status.', 'vol=-0.1', 'partial=false', 'svc=com.qualcomm.qti.voiceai.speech'
+08-22 03:53:51.738 I/ReactNativeJS(12133): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 03:53:51.740 I/ReactNativeJS(12133): '[stt] isRecognitionAvailable:', true
+08-22 03:53:51.744 I/ReactNativeJS(12133): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 03:53:51.744 I/ReactNativeJS(12133):   'com.google.android.tts',
+08-22 03:53:51.744 I/ReactNativeJS(12133):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 03:53:51.744 I/ReactNativeJS(12133): '[stt] android default service:', 'com.google.android.tts'
+08-22 03:53:51.754 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 03:53:51.803 I/ReactNativeJS(12133): [stt] recognition started
+08-22 03:53:54.739 W/ReactNativeJS(12133): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=-0.2', 'partial=false', 'svc=com.google.android.tts'
+08-22 03:53:54.968 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.qualcomm.qti.voiceai.speech'
+08-22 03:53:54.969 I/ReactNativeJS(12133): [stt] keep-alive restart (error:no-speech, try 1)
+08-22 03:53:54.988 W/ReactNativeJS(12133): '[stt] error:', 'network', 'Server sent error status.', 'vol=-0.2', 'partial=false', 'svc=com.qualcomm.qti.voiceai.speech'
+08-22 03:53:56.753 I/ReactNativeJS(12133): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 03:53:56.755 I/ReactNativeJS(12133): '[stt] isRecognitionAvailable:', true
+08-22 03:53:56.760 I/ReactNativeJS(12133): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 03:53:56.760 I/ReactNativeJS(12133):   'com.google.android.tts',
+08-22 03:53:56.760 I/ReactNativeJS(12133):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 03:53:56.760 I/ReactNativeJS(12133): '[stt] android default service:', 'com.google.android.tts'
+08-22 03:53:56.768 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 03:53:56.818 I/ReactNativeJS(12133): [stt] recognition started
+08-22 03:53:59.648 W/ReactNativeJS(12133): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=-0.2', 'partial=false', 'svc=com.google.android.tts'
+08-22 03:53:59.877 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.qualcomm.qti.voiceai.speech'
+08-22 03:53:59.879 I/ReactNativeJS(12133): [stt] keep-alive restart (error:no-speech, try 1)
+08-22 03:53:59.898 W/ReactNativeJS(12133): '[stt] error:', 'network', 'Server sent error status.', 'vol=-0.2', 'partial=false', 'svc=com.qualcomm.qti.voiceai.speech'
+08-22 03:54:01.768 I/ReactNativeJS(12133): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 03:54:01.771 I/ReactNativeJS(12133): '[stt] isRecognitionAvailable:', true
+08-22 03:54:01.775 I/ReactNativeJS(12133): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 03:54:01.775 I/ReactNativeJS(12133):   'com.google.android.tts',
+08-22 03:54:01.775 I/ReactNativeJS(12133):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 03:54:01.775 I/ReactNativeJS(12133): '[stt] android default service:', 'com.google.android.tts'
+08-22 03:54:01.784 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 03:54:01.838 I/ReactNativeJS(12133): [stt] recognition started
+08-22 03:54:04.811 W/ReactNativeJS(12133): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=-0.6', 'partial=false', 'svc=com.google.android.tts'
+08-22 03:54:05.045 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.qualcomm.qti.voiceai.speech'
+08-22 03:54:05.047 I/ReactNativeJS(12133): [stt] keep-alive restart (error:no-speech, try 1)
+08-22 03:54:05.066 W/ReactNativeJS(12133): '[stt] error:', 'network', 'Server sent error status.', 'vol=-0.6', 'partial=false', 'svc=com.qualcomm.qti.voiceai.speech'
+08-22 03:54:06.788 I/ReactNativeJS(12133): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 03:54:06.791 I/ReactNativeJS(12133): '[stt] isRecognitionAvailable:', true
+08-22 03:54:06.794 I/ReactNativeJS(12133): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 03:54:06.794 I/ReactNativeJS(12133):   'com.google.android.tts',
+08-22 03:54:06.794 I/ReactNativeJS(12133):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 03:54:06.794 I/ReactNativeJS(12133): '[stt] android default service:', 'com.google.android.tts'
+08-22 03:54:06.803 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 03:54:06.867 I/ReactNativeJS(12133): [stt] recognition started
+08-22 03:54:09.726 W/ReactNativeJS(12133): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=0.2', 'partial=false', 'svc=com.google.android.tts'
+08-22 03:54:09.954 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.qualcomm.qti.voiceai.speech'
+08-22 03:54:09.956 I/ReactNativeJS(12133): [stt] keep-alive restart (error:no-speech, try 1)
+08-22 03:54:09.976 W/ReactNativeJS(12133): '[stt] error:', 'network', 'Server sent error status.', 'vol=0.2', 'partial=false', 'svc=com.qualcomm.qti.voiceai.speech'
+08-22 03:54:11.803 I/ReactNativeJS(12133): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 03:54:11.805 I/ReactNativeJS(12133): '[stt] isRecognitionAvailable:', true
+08-22 03:54:11.809 I/ReactNativeJS(12133): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 03:54:11.809 I/ReactNativeJS(12133):   'com.google.android.tts',
+08-22 03:54:11.809 I/ReactNativeJS(12133):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 03:54:11.809 I/ReactNativeJS(12133): '[stt] android default service:', 'com.google.android.tts'
+08-22 03:54:11.819 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 03:54:11.879 I/ReactNativeJS(12133): [stt] recognition started
+08-22 03:54:14.725 W/ReactNativeJS(12133): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=-0.3', 'partial=false', 'svc=com.google.android.tts'
+08-22 03:54:14.951 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.qualcomm.qti.voiceai.speech'
+08-22 03:54:14.952 I/ReactNativeJS(12133): [stt] keep-alive restart (error:no-speech, try 1)
+08-22 03:54:14.999 W/ReactNativeJS(12133): '[stt] error:', 'network', 'Server sent error status.', 'vol=-0.3', 'partial=false', 'svc=com.qualcomm.qti.voiceai.speech'
+08-22 04:13:03.492 I/ReactNativeJS(12133): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 04:13:03.492 I/ReactNativeJS(12133): '[stt] isRecognitionAvailable:', true
+08-22 04:13:03.496 I/ReactNativeJS(12133): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 04:13:03.496 I/ReactNativeJS(12133):   'com.google.android.tts',
+08-22 04:13:03.496 I/ReactNativeJS(12133):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 04:13:03.496 I/ReactNativeJS(12133): '[stt] android default service:', 'com.google.android.tts'
+08-22 04:13:03.565 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 04:13:04.132 I/ReactNativeJS(12133): [stt] recognition started
+08-22 04:13:04.219 W/ReactNativeJS(12133): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=-2.0', 'partial=false', 'svc=com.google.android.tts'
+08-22 04:18:35.883 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 04:18:36.103 I/ReactNativeJS(12133): [stt] recognition started
+08-22 04:18:38.962 W/ReactNativeJS(12133): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=-0.2', 'partial=false', 'svc=com.google.android.tts'
+08-22 04:18:39.203 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.qualcomm.qti.voiceai.speech'
+08-22 04:18:39.203 I/ReactNativeJS(12133): [stt] keep-alive restart (error:no-speech, try 1)
+08-22 04:18:39.277 W/ReactNativeJS(12133): '[stt] error:', 'network', 'Server sent error status.', 'vol=-0.2', 'partial=false', 'svc=com.qualcomm.qti.voiceai.speech'
+08-22 04:20:02.536 I/ReactNativeJS(12133): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 04:20:02.536 I/ReactNativeJS(12133): '[stt] isRecognitionAvailable:', true
+08-22 04:20:02.537 I/ReactNativeJS(12133): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 04:20:02.537 I/ReactNativeJS(12133):   'com.google.android.tts',
+08-22 04:20:02.537 I/ReactNativeJS(12133):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 04:20:02.537 I/ReactNativeJS(12133): '[stt] android default service:', 'com.google.android.tts'
+08-22 04:20:02.552 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 04:20:02.732 I/ReactNativeJS(12133): [stt] recognition started
+08-22 04:20:02.909 W/ReactNativeJS(12133): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=-2.0', 'partial=false', 'svc=com.google.android.tts'
+08-22 04:21:53.474 I/ReactNativeJS(12133): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 04:21:53.475 I/ReactNativeJS(12133): '[stt] isRecognitionAvailable:', true
+08-22 04:21:53.477 I/ReactNativeJS(12133): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 04:21:53.477 I/ReactNativeJS(12133):   'com.google.android.tts',
+08-22 04:21:53.477 I/ReactNativeJS(12133):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 04:21:53.478 I/ReactNativeJS(12133): '[stt] android default service:', 'com.google.android.tts'
+08-22 04:21:53.544 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 04:21:55.456 I/ReactNativeJS(12133): [stt] recognition started
+08-22 04:21:55.458 W/ReactNativeJS(12133): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=-2.0', 'partial=false', 'svc=com.google.android.tts'
+08-22 07:52:02.151 I/ReactNativeJS(12133): '[places] new-text', 'Coiffeur C. Jensen Prisdorf', 1
+08-22 08:00:36.694 I/ReactNativeJS(12133): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 08:00:36.697 I/ReactNativeJS(12133): '[stt] isRecognitionAvailable:', true
+08-22 08:00:36.698 I/ReactNativeJS(12133): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 08:00:36.698 I/ReactNativeJS(12133):   'com.google.android.tts',
+08-22 08:00:36.698 I/ReactNativeJS(12133):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 08:00:36.698 I/ReactNativeJS(12133): '[stt] android default service:', 'com.google.android.tts'
+08-22 08:00:36.812 W/ReactNativeJS(12133): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 08:00:38.265 I/ReactNativeJS(12133): [stt] recognition started
+08-22 08:00:38.522 W/ReactNativeJS(12133): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=-2.0', 'partial=false', 'svc=com.google.android.tts'
+08-22 08:26:44.928 I/ReactNativeJS(17636): Bridgeless mode is enabled
+08-22 08:26:45.201 I/ReactNativeJS(17636): Running "main"
+08-22 08:26:45.211 I/ReactNativeJS(17636): '[boot] phase=', 'booting', '__DEV__=', false, 'setup=', false
+08-22 08:26:45.324 I/ReactNativeJS(17636): [tts] Cartesia sonic-3.5 — Offline-Fallback: expo-speech
+08-22 08:26:45.478 I/ReactNativeJS(17636): '[boot] phase=', 'booting', '__DEV__=', false, 'setup=', true
+08-22 08:26:45.553 I/ReactNativeJS(17636): '[Yorro Sync] URL vorhanden:', true
+08-22 08:26:45.827 I/ReactNativeJS(17636): [tts] Cartesia sonic-3.5 — Offline-Fallback: expo-speech
+08-22 08:26:48.564 W/ReactNativeJS(17636): '[homeMap] mapError', 'layers.extract-housenumbers.layout.text-field: use of "text-field" requires a style "glyphs" property'
+08-22 08:26:48.565 W/ReactNativeJS(17636): '[homeMap] mapError', 'layers.places-label.layout.text-field: use of "text-field" requires a style "glyphs" property'
+08-22 08:26:48.713 W/ReactNativeJS(17636): '[homeMap] mapError', 'layers.extract-housenumbers.layout.text-field: use of "text-field" requires a style "glyphs" property'
+08-22 08:26:48.713 W/ReactNativeJS(17636): '[homeMap] mapError', 'layers.places-label.layout.text-field: use of "text-field" requires a style "glyphs" property'
+08-22 08:26:53.538 I/ReactNativeJS(17636): '[boot] phase=', 'ready', '__DEV__=', false, 'setup=', true
+08-22 08:26:56.375 W/ReactNativeJS(17636): `new NativeEventEmitter()` was called with a non-null argument without the required `addListener` method.
+08-22 08:26:56.375 W/ReactNativeJS(17636): `new NativeEventEmitter()` was called with a non-null argument without the required `removeListeners` method.
+08-22 08:27:17.683 I/ReactNativeJS(17636): [cityPronunciation] prisdorf: 17 Einträge gecacht (3041 Textquellen)
+08-22 08:27:18.194 I/ReactNativeJS(17636): [cityScanner] prisdorf: 469 Anomalien, 0 neue Mappings → Master (3041 Textquellen)
+08-22 08:27:19.009 I/ReactNativeJS(17636): [poiDatasetScanner] prisdorf: 113 Fremdwörter, 0 neu, 0 aktualisiert (3041 Textquellen)
+08-22 08:27:26.499 I/ReactNativeJS(17636): [sync] 419 POIs, 6869 Fakten → SQLite (storage/prisdorf)
+08-22 08:30:43.560 W/ReactNativeJS(17636): '[homeMap] mapError', 'layers.extract-housenumbers.layout.text-field: use of "text-field" requires a style "glyphs" property'
+08-22 08:30:43.560 W/ReactNativeJS(17636): '[homeMap] mapError', 'layers.places-label.layout.text-field: use of "text-field" requires a style "glyphs" property'
+08-22 08:30:47.304 W/ReactNativeJS(17636): '[homeMap] mapError', 'layers.extract-housenumbers.layout.text-field: use of "text-field" requires a style "glyphs" property'
+08-22 08:30:47.304 W/ReactNativeJS(17636): '[homeMap] mapError', 'layers.places-label.layout.text-field: use of "text-field" requires a style "glyphs" property'
+08-22 08:33:48.864 I/ReactNativeJS(17636): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 08:33:48.865 I/ReactNativeJS(17636): '[stt] isRecognitionAvailable:', true
+08-22 08:33:48.868 I/ReactNativeJS(17636): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 08:33:48.868 I/ReactNativeJS(17636):   'com.google.android.tts',
+08-22 08:33:48.868 I/ReactNativeJS(17636):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 08:33:48.868 I/ReactNativeJS(17636): '[stt] android default service:', 'com.google.android.tts'
+08-22 08:33:48.885 W/ReactNativeJS(17636): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 08:33:50.188 I/ReactNativeJS(17636): [stt] recognition started
+08-22 08:33:54.463 I/ReactNativeJS(17636): '[voice] submit (main):', 'nach Antennen wann muss ich am Flughafen sein'
+08-22 08:34:05.019 I/ReactNativeJS(17636): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 08:34:05.020 I/ReactNativeJS(17636): '[stt] isRecognitionAvailable:', true
+08-22 08:34:05.022 I/ReactNativeJS(17636): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 08:34:05.022 I/ReactNativeJS(17636):   'com.google.android.tts',
+08-22 08:34:05.022 I/ReactNativeJS(17636):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 08:34:05.023 I/ReactNativeJS(17636): '[stt] android default service:', 'com.google.android.tts'
+08-22 08:34:05.031 W/ReactNativeJS(17636): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 08:34:05.168 I/ReactNativeJS(17636): [stt] recognition started
+08-22 08:34:12.567 W/ReactNativeJS(17636): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=1.0', 'partial=false', 'svc=com.google.android.tts'
+08-22 08:34:12.852 W/ReactNativeJS(17636): '[stt] androidRecognitionServicePackage:', 'com.qualcomm.qti.voiceai.speech'
+08-22 08:34:12.854 I/ReactNativeJS(17636): [stt] keep-alive restart (error:no-speech, try 1)
+08-22 08:34:13.036 W/ReactNativeJS(17636): '[stt] error:', 'network', 'Server sent error status.', 'vol=1.0', 'partial=false', 'svc=com.qualcomm.qti.voiceai.speech'
+08-22 08:34:31.517 I/ReactNativeJS(17636): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 08:34:31.518 I/ReactNativeJS(17636): '[stt] isRecognitionAvailable:', true
+08-22 08:34:31.519 I/ReactNativeJS(17636): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 08:34:31.519 I/ReactNativeJS(17636):   'com.google.android.tts',
+08-22 08:34:31.519 I/ReactNativeJS(17636):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 08:34:31.519 I/ReactNativeJS(17636): '[stt] android default service:', 'com.google.android.tts'
+08-22 08:34:31.526 W/ReactNativeJS(17636): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 08:34:31.673 I/ReactNativeJS(17636): [stt] recognition started
+08-22 08:34:38.259 I/ReactNativeJS(17636): '[voice] submit (main):', 'ich fliege am Sonntag nach Athen wann muss ich am Flughafen sein'
+08-22 08:34:56.783 I/ReactNativeJS(17636): '[places] new-text', 'Flug nach Athen am Sonntag Prisdorf', 0
+08-22 08:34:56.811 I/ReactNativeJS(17636): '[places] new-text', 'Flug nach Athen am Sonntag Prisdorf', 0
+08-22 08:35:58.590 W/ReactNativeJS(17636): '[homeMap] mapError', 'layers.extract-housenumbers.layout.text-field: use of "text-field" requires a style "glyphs" property'
+08-22 08:35:58.590 W/ReactNativeJS(17636): '[homeMap] mapError', 'layers.places-label.layout.text-field: use of "text-field" requires a style "glyphs" property'
+08-22 08:36:02.408 W/ReactNativeJS(17636): '[homeMap] mapError', 'layers.extract-housenumbers.layout.text-field: use of "text-field" requires a style "glyphs" property'
+08-22 08:36:02.408 W/ReactNativeJS(17636): '[homeMap] mapError', 'layers.places-label.layout.text-field: use of "text-field" requires a style "glyphs" property'
+08-22 08:36:04.887 W/ReactNativeJS(17636): '[homeMap] mapError', 'layers.extract-housenumbers.layout.text-field: use of "text-field" requires a style "glyphs" property'
+08-22 08:36:04.887 W/ReactNativeJS(17636): '[homeMap] mapError', 'layers.places-label.layout.text-field: use of "text-field" requires a style "glyphs" property'
+08-22 08:39:09.679 W/ReactNativeJS(17636): '[homeMap] mapError', 'layers.extract-housenumbers.layout.text-field: use of "text-field" requires a style "glyphs" property'
+08-22 08:39:09.680 W/ReactNativeJS(17636): '[homeMap] mapError', 'layers.places-label.layout.text-field: use of "text-field" requires a style "glyphs" property'
+08-22 08:39:13.502 W/ReactNativeJS(17636): '[homeMap] mapError', 'layers.extract-housenumbers.layout.text-field: use of "text-field" requires a style "glyphs" property'
+08-22 08:39:13.502 W/ReactNativeJS(17636): '[homeMap] mapError', 'layers.places-label.layout.text-field: use of "text-field" requires a style "glyphs" property'
+08-22 08:39:24.665 W/ReactNativeJS(17636): '[homeMap] mapError', 'layers.extract-housenumbers.layout.text-field: use of "text-field" requires a style "glyphs" property'
+08-22 08:39:24.666 W/ReactNativeJS(17636): '[homeMap] mapError', 'layers.places-label.layout.text-field: use of "text-field" requires a style "glyphs" property'
+08-22 08:39:25.055 W/ReactNativeJS(17636): '[homeMap] mapError', 'layers.extract-housenumbers.layout.text-field: use of "text-field" requires a style "glyphs" property'
+08-22 08:39:25.057 W/ReactNativeJS(17636): '[homeMap] mapError', 'layers.places-label.layout.text-field: use of "text-field" requires a style "glyphs" property'
+08-22 08:39:28.349 W/ReactNativeJS(17636): '[homeMap] mapError', 'layers.extract-housenumbers.layout.text-field: use of "text-field" requires a style "glyphs" property'
+08-22 08:39:28.349 W/ReactNativeJS(17636): '[homeMap] mapError', 'layers.places-label.layout.text-field: use of "text-field" requires a style "glyphs" property'
+08-22 08:39:29.094 W/ReactNativeJS(17636): '[homeMap] mapError', 'layers.extract-housenumbers.layout.text-field: use of "text-field" requires a style "glyphs" property'
+08-22 08:39:29.097 W/ReactNativeJS(17636): '[homeMap] mapError', 'layers.places-label.layout.text-field: use of "text-field" requires a style "glyphs" property'
+08-22 08:39:30.057 W/ReactNativeJS(17636): '[homeMap] mapError', 'layers.extract-housenumbers.layout.text-field: use of "text-field" requires a style "glyphs" property'
+08-22 08:39:30.059 W/ReactNativeJS(17636): '[homeMap] mapError', 'layers.places-label.layout.text-field: use of "text-field" requires a style "glyphs" property'
+08-22 08:39:46.394 W/ReactNativeJS(17636): '[homeMap] mapError', 'layers.extract-housenumbers.layout.text-field: use of "text-field" requires a style "glyphs" property'
+08-22 08:39:46.395 W/ReactNativeJS(17636): '[homeMap] mapError', 'layers.places-label.layout.text-field: use of "text-field" requires a style "glyphs" property'
+08-22 08:39:47.485 W/ReactNativeJS(17636): '[homeMap] mapError', 'layers.extract-housenumbers.layout.text-field: use of "text-field" requires a style "glyphs" property'
+08-22 08:39:47.488 W/ReactNativeJS(17636): '[homeMap] mapError', 'layers.places-label.layout.text-field: use of "text-field" requires a style "glyphs" property'
+08-22 08:39:52.475 W/ReactNativeJS(17636): '[homeMap] mapError', 'layers.extract-housenumbers.layout.text-field: use of "text-field" requires a style "glyphs" property'
+08-22 08:39:52.476 W/ReactNativeJS(17636): '[homeMap] mapError', 'layers.places-label.layout.text-field: use of "text-field" requires a style "glyphs" property'
+08-22 08:39:52.476 W/ReactNativeJS(17636): '[homeMap] mapError', 'layers.extract-housenumbers.layout.text-field: use of "text-field" requires a style "glyphs" property'
+08-22 08:39:52.476 W/ReactNativeJS(17636): '[homeMap] mapError', 'layers.places-label.layout.text-field: use of "text-field" requires a style "glyphs" property'
+08-22 08:39:53.357 W/ReactNativeJS(17636): '[homeMap] mapError', 'layers.extract-housenumbers.layout.text-field: use of "text-field" requires a style "glyphs" property'
+08-22 08:39:53.359 W/ReactNativeJS(17636): '[homeMap] mapError', 'layers.places-label.layout.text-field: use of "text-field" requires a style "glyphs" property'
+08-22 08:39:54.386 W/ReactNativeJS(17636): '[homeMap] mapError', 'layers.extract-housenumbers.layout.text-field: use of "text-field" requires a style "glyphs" property'
+08-22 08:39:54.389 W/ReactNativeJS(17636): '[homeMap] mapError', 'layers.places-label.layout.text-field: use of "text-field" requires a style "glyphs" property'
+08-22 08:41:44.931 W/ReactNativeJS(17636): '[homeMap] mapError', 'layers.extract-housenumbers.layout.text-field: use of "text-field" requires a style "glyphs" property'
+08-22 08:41:44.931 W/ReactNativeJS(17636): '[homeMap] mapError', 'layers.places-label.layout.text-field: use of "text-field" requires a style "glyphs" property'
+08-22 08:41:53.594 W/ReactNativeJS(17636): '[homeMap] mapError', 'layers.extract-housenumbers.layout.text-field: use of "text-field" requires a style "glyphs" property'
+08-22 08:41:53.594 W/ReactNativeJS(17636): '[homeMap] mapError', 'layers.places-label.layout.text-field: use of "text-field" requires a style "glyphs" property'
+08-22 08:45:47.220 W/ReactNativeJS(17636): '[homeMap] mapError', 'layers.extract-housenumbers.layout.text-field: use of "text-field" requires a style "glyphs" property'
+08-22 08:45:47.220 W/ReactNativeJS(17636): '[homeMap] mapError', 'layers.places-label.layout.text-field: use of "text-field" requires a style "glyphs" property'
+08-22 08:45:51.481 W/ReactNativeJS(17636): '[homeMap] mapError', 'layers.extract-housenumbers.layout.text-field: use of "text-field" requires a style "glyphs" property'
+08-22 08:45:51.481 W/ReactNativeJS(17636): '[homeMap] mapError', 'layers.places-label.layout.text-field: use of "text-field" requires a style "glyphs" property'
+08-22 08:46:24.787 I/ReactNativeJS(17475): Bridgeless mode is enabled
+08-22 08:46:25.030 I/ReactNativeJS(17475): Running "main"
+08-22 08:46:25.041 I/ReactNativeJS(17475): '[boot] phase=', 'booting', '__DEV__=', false, 'setup=', false
+08-22 08:46:25.165 I/ReactNativeJS(17475): [tts] Cartesia sonic-3.5 — Offline-Fallback: expo-speech
+08-22 08:46:25.266 I/ReactNativeJS(17475): '[boot] phase=', 'booting', '__DEV__=', false, 'setup=', true
+08-22 08:46:25.348 I/ReactNativeJS(17475): '[Yorro Sync] URL vorhanden:', true
+08-22 08:46:25.532 I/ReactNativeJS(17475): [tts] Cartesia sonic-3.5 — Offline-Fallback: expo-speech
+08-22 08:46:35.179 I/ReactNativeJS(17475): '[boot] phase=', 'ready', '__DEV__=', false, 'setup=', true
+08-22 08:46:40.642 W/ReactNativeJS(17475): `new NativeEventEmitter()` was called with a non-null argument without the required `addListener` method.
+08-22 08:46:40.642 W/ReactNativeJS(17475): `new NativeEventEmitter()` was called with a non-null argument without the required `removeListeners` method.
+08-22 08:46:57.857 I/ReactNativeJS(17475): [cityPronunciation] prisdorf: 17 Einträge gecacht (3041 Textquellen)
+08-22 08:46:58.455 I/ReactNativeJS(17475): [cityScanner] prisdorf: 469 Anomalien, 0 neue Mappings → Master (3041 Textquellen)
+08-22 08:46:59.404 I/ReactNativeJS(17475): [poiDatasetScanner] prisdorf: 113 Fremdwörter, 0 neu, 0 aktualisiert (3041 Textquellen)
+08-22 08:46:59.702 I/ReactNativeJS(17475): [sync] 419 POIs, 6869 Fakten → SQLite (storage/prisdorf)
+08-22 09:01:20.597 I/ReactNativeJS(31049): Bridgeless mode is enabled
+08-22 09:01:20.829 I/ReactNativeJS(31049): Running "main"
+08-22 09:01:20.841 I/ReactNativeJS(31049): '[boot] phase=', 'booting', '__DEV__=', false, 'setup=', false
+08-22 09:01:21.043 I/ReactNativeJS(31049): [tts] Cartesia sonic-3.5 — Offline-Fallback: expo-speech
+08-22 09:01:21.155 I/ReactNativeJS(31049): '[boot] phase=', 'booting', '__DEV__=', false, 'setup=', true
+08-22 09:01:21.227 I/ReactNativeJS(31049): '[Yorro Sync] URL vorhanden:', true
+08-22 09:01:21.482 I/ReactNativeJS(31049): [tts] Cartesia sonic-3.5 — Offline-Fallback: expo-speech
+08-22 09:01:29.456 I/ReactNativeJS(31049): '[boot] phase=', 'ready', '__DEV__=', false, 'setup=', true
+08-22 09:01:30.687 W/ReactNativeJS(31049): `new NativeEventEmitter()` was called with a non-null argument without the required `addListener` method.
+08-22 09:01:30.687 W/ReactNativeJS(31049): `new NativeEventEmitter()` was called with a non-null argument without the required `removeListeners` method.
+08-22 09:01:53.393 I/ReactNativeJS(31049): [cityPronunciation] prisdorf: 17 Einträge gecacht (3041 Textquellen)
+08-22 09:01:54.036 I/ReactNativeJS(31049): [cityScanner] prisdorf: 469 Anomalien, 0 neue Mappings → Master (3041 Textquellen)
+08-22 09:01:54.968 I/ReactNativeJS(31049): [poiDatasetScanner] prisdorf: 113 Fremdwörter, 0 neu, 0 aktualisiert (3041 Textquellen)
+08-22 09:02:02.966 I/ReactNativeJS(31049): [sync] 419 POIs, 6869 Fakten → SQLite (storage/prisdorf)
+08-22 09:03:13.835 I/ReactNativeJS(32572): Bridgeless mode is enabled
+08-22 09:03:14.031 I/ReactNativeJS(32572): Running "main"
+08-22 09:03:14.042 I/ReactNativeJS(32572): '[boot] phase=', 'booting', '__DEV__=', false, 'setup=', false
+08-22 09:03:14.197 I/ReactNativeJS(32572): [tts] Cartesia sonic-3.5 — Offline-Fallback: expo-speech
+08-22 09:03:14.268 I/ReactNativeJS(32572): '[boot] phase=', 'booting', '__DEV__=', false, 'setup=', true
+08-22 09:03:14.309 I/ReactNativeJS(32572): '[Yorro Sync] URL vorhanden:', true
+08-22 09:03:14.489 I/ReactNativeJS(32572): [tts] Cartesia sonic-3.5 — Offline-Fallback: expo-speech
+08-22 09:03:28.387 I/ReactNativeJS(32572): '[boot] phase=', 'ready', '__DEV__=', false, 'setup=', true
+08-22 09:03:31.054 W/ReactNativeJS(32572): `new NativeEventEmitter()` was called with a non-null argument without the required `addListener` method.
+08-22 09:03:31.054 W/ReactNativeJS(32572): `new NativeEventEmitter()` was called with a non-null argument without the required `removeListeners` method.
+08-22 09:03:51.588 I/ReactNativeJS(  728): Bridgeless mode is enabled
+08-22 09:03:51.848 I/ReactNativeJS(  728): Running "main"
+08-22 09:03:51.859 I/ReactNativeJS(  728): '[boot] phase=', 'booting', '__DEV__=', false, 'setup=', false
+08-22 09:03:51.972 I/ReactNativeJS(  728): [tts] Cartesia sonic-3.5 — Offline-Fallback: expo-speech
+08-22 09:03:52.003 I/ReactNativeJS(  728): '[boot] phase=', 'booting', '__DEV__=', false, 'setup=', true
+08-22 09:03:52.083 I/ReactNativeJS(  728): '[Yorro Sync] URL vorhanden:', true
+08-22 09:03:52.654 I/ReactNativeJS(  728): [tts] Cartesia sonic-3.5 — Offline-Fallback: expo-speech
+08-22 09:04:01.690 I/ReactNativeJS(  728): '[boot] phase=', 'ready', '__DEV__=', false, 'setup=', true
+08-22 09:04:04.277 W/ReactNativeJS(  728): `new NativeEventEmitter()` was called with a non-null argument without the required `addListener` method.
+08-22 09:04:04.277 W/ReactNativeJS(  728): `new NativeEventEmitter()` was called with a non-null argument without the required `removeListeners` method.
+08-22 09:04:22.682 I/ReactNativeJS(  728): [cityPronunciation] prisdorf: 17 Einträge gecacht (3041 Textquellen)
+08-22 09:04:23.241 I/ReactNativeJS(  728): [cityScanner] prisdorf: 469 Anomalien, 0 neue Mappings → Master (3041 Textquellen)
+08-22 09:04:24.125 I/ReactNativeJS(  728): [poiDatasetScanner] prisdorf: 113 Fremdwörter, 0 neu, 0 aktualisiert (3041 Textquellen)
+08-22 09:04:24.402 I/ReactNativeJS(  728): [sync] 419 POIs, 6869 Fakten → SQLite (storage/prisdorf)
+08-22 09:05:55.066 I/ReactNativeJS( 4454): Bridgeless mode is enabled
+08-22 09:05:55.321 I/ReactNativeJS( 4454): Running "main"
+08-22 09:05:55.331 I/ReactNativeJS( 4454): '[boot] phase=', 'booting', '__DEV__=', false, 'setup=', false
+08-22 09:05:55.406 I/ReactNativeJS( 4454): [tts] Cartesia sonic-3.5 — Offline-Fallback: expo-speech
+08-22 09:05:55.611 I/ReactNativeJS( 4454): '[boot] phase=', 'booting', '__DEV__=', false, 'setup=', true
+08-22 09:05:55.706 I/ReactNativeJS( 4454): '[Yorro Sync] URL vorhanden:', true
+08-22 09:05:56.023 I/ReactNativeJS( 4454): [tts] Cartesia sonic-3.5 — Offline-Fallback: expo-speech
+08-22 09:06:02.514 I/ReactNativeJS( 4454): '[boot] phase=', 'ready', '__DEV__=', false, 'setup=', true
+08-22 09:06:05.101 W/ReactNativeJS( 4454): `new NativeEventEmitter()` was called with a non-null argument without the required `addListener` method.
+08-22 09:06:05.101 W/ReactNativeJS( 4454): `new NativeEventEmitter()` was called with a non-null argument without the required `removeListeners` method.
+08-22 09:10:11.930 I/ReactNativeJS( 4454): '[module5] ingest', { dest: 'Hamburg',
+08-22 09:10:11.930 I/ReactNativeJS( 4454):   gps: null,
+08-22 09:10:11.930 I/ReactNativeJS( 4454):   wishes: 
+08-22 09:10:11.930 I/ReactNativeJS( 4454):    [ 'Anreise Hamburg',
+08-22 09:10:11.930 I/ReactNativeJS( 4454):      'Frühstück in Hamburg',
+08-22 09:10:11.930 I/ReactNativeJS( 4454):      'St. Michaelis Kirche (Michel)',
+08-22 09:10:11.930 I/ReactNativeJS( 4454):      'Pannfisch & Sunset in Hamburg',
+08-22 09:10:11.930 I/ReactNativeJS( 4454):      'Plane mir Tour durch in Hamburg',
+08-22 09:10:11.930 I/ReactNativeJS( 4454):      'Hamburg erkunden' ],
+08-22 09:10:11.930 I/ReactNativeJS( 4454):   fixed: [] }
+08-22 09:10:33.304 I/ReactNativeJS( 4454): [cityPronunciation] prisdorf: 17 Einträge gecacht (3041 Textquellen)
+08-22 09:10:33.925 I/ReactNativeJS( 4454): [cityScanner] prisdorf: 469 Anomalien, 0 neue Mappings → Master (3041 Textquellen)
+08-22 09:10:34.956 I/ReactNativeJS( 4454): [poiDatasetScanner] prisdorf: 113 Fremdwörter, 0 neu, 0 aktualisiert (3041 Textquellen)
+08-22 09:10:39.017 I/ReactNativeJS( 4454): [sync] 419 POIs, 6869 Fakten → SQLite (storage/prisdorf)
+08-22 09:12:43.281 I/ReactNativeJS( 4454): '[places] new-text', 'Pannfisch & Sunset in Hamburg Abendessen', 12
+08-22 09:12:43.618 I/ReactNativeJS( 4454): '[places] new-text', 'Frühstück in Hamburg Frühstück nach Anku', 12
+08-22 09:12:43.630 I/ReactNativeJS( 4454): '[places] new-text', 'Frühstück in Hamburg Frühstück nach Anku', 12
+08-22 09:12:43.643 I/ReactNativeJS( 4454): '[places] new-text', 'Sehenswürdigkeit Aussicht Hamburg', 12
+08-22 09:12:44.301 I/ReactNativeJS( 4454): '[places] new-text', 'Bischofsburg Speersort', 1
+08-22 09:12:44.302 I/ReactNativeJS( 4454): '[places] new-text', 'Alter Elbtunnel', 3
+08-22 09:18:03.816 I/ReactNativeJS( 4454): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 09:18:03.819 I/ReactNativeJS( 4454): '[stt] isRecognitionAvailable:', true
+08-22 09:18:03.835 I/ReactNativeJS( 4454): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 09:18:03.835 I/ReactNativeJS( 4454):   'com.google.android.tts',
+08-22 09:18:03.835 I/ReactNativeJS( 4454):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 09:18:03.835 I/ReactNativeJS( 4454): '[stt] android default service:', 'com.google.android.tts'
+08-22 09:18:20.239 W/ReactNativeJS( 4454): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 09:18:43.829 I/ReactNativeJS( 4454): [stt] recognition started
+08-22 09:18:44.024 W/ReactNativeJS( 4454): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=-2.0', 'partial=false', 'svc=com.google.android.tts'
+08-22 09:18:57.093 W/ReactNativeJS( 4454): '[stt] androidRecognitionServicePackage:', 'com.qualcomm.qti.voiceai.speech'
+08-22 09:18:57.093 I/ReactNativeJS( 4454): [stt] keep-alive restart (error:no-speech, try 1)
+08-22 09:19:13.191 W/ReactNativeJS( 4454): '[stt] error:', 'network', 'Server sent error status.', 'vol=-2.0', 'partial=false', 'svc=com.qualcomm.qti.voiceai.speech'
+08-22 09:29:49.300 I/ReactNativeJS( 4454): [stt] max hold 10 min reached — stop accepting new audio
+08-22 09:37:42.593 I/ReactNativeJS( 4454): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 09:37:42.595 I/ReactNativeJS( 4454): '[stt] isRecognitionAvailable:', true
+08-22 09:37:42.596 I/ReactNativeJS( 4454): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 09:37:42.596 I/ReactNativeJS( 4454):   'com.google.android.tts',
+08-22 09:37:42.596 I/ReactNativeJS( 4454):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 09:37:42.596 I/ReactNativeJS( 4454): '[stt] android default service:', 'com.google.android.tts'
+08-22 09:38:01.765 W/ReactNativeJS( 4454): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 09:38:02.927 I/ReactNativeJS( 4454): [stt] recognition started
+08-22 09:38:03.015 W/ReactNativeJS( 4454): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=-2.0', 'partial=false', 'svc=com.google.android.tts'
+08-22 09:39:54.390 I/ReactNativeJS( 4454): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 09:39:54.391 I/ReactNativeJS( 4454): '[stt] isRecognitionAvailable:', true
+08-22 09:39:54.393 I/ReactNativeJS( 4454): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 09:39:54.393 I/ReactNativeJS( 4454):   'com.google.android.tts',
+08-22 09:39:54.393 I/ReactNativeJS( 4454):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 09:39:54.393 I/ReactNativeJS( 4454): '[stt] android default service:', 'com.google.android.tts'
+08-22 09:39:54.397 I/ReactNativeJS( 4454): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 09:39:54.398 I/ReactNativeJS( 4454): '[stt] isRecognitionAvailable:', true
+08-22 09:39:54.399 I/ReactNativeJS( 4454): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 09:39:54.399 I/ReactNativeJS( 4454):   'com.google.android.tts',
+08-22 09:39:54.399 I/ReactNativeJS( 4454):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 09:39:54.399 I/ReactNativeJS( 4454): '[stt] android default service:', 'com.google.android.tts'
+08-22 09:39:54.403 I/ReactNativeJS( 4454): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 09:39:54.408 I/ReactNativeJS( 4454): '[stt] isRecognitionAvailable:', true
+08-22 09:39:54.409 I/ReactNativeJS( 4454): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 09:39:54.409 I/ReactNativeJS( 4454):   'com.google.android.tts',
+08-22 09:39:54.409 I/ReactNativeJS( 4454):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 09:39:54.409 I/ReactNativeJS( 4454): '[stt] android default service:', 'com.google.android.tts'
+08-22 09:39:54.415 I/ReactNativeJS( 4454): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 09:39:54.416 I/ReactNativeJS( 4454): '[stt] isRecognitionAvailable:', true
+08-22 09:39:54.417 I/ReactNativeJS( 4454): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 09:39:54.417 I/ReactNativeJS( 4454):   'com.google.android.tts',
+08-22 09:39:54.417 I/ReactNativeJS( 4454):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 09:39:54.417 I/ReactNativeJS( 4454): '[stt] android default service:', 'com.google.android.tts'
+08-22 09:39:54.420 I/ReactNativeJS( 4454): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 09:39:54.421 I/ReactNativeJS( 4454): '[stt] isRecognitionAvailable:', true
+08-22 09:39:54.422 I/ReactNativeJS( 4454): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 09:39:54.422 I/ReactNativeJS( 4454):   'com.google.android.tts',
+08-22 09:39:54.422 I/ReactNativeJS( 4454):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 09:39:54.422 I/ReactNativeJS( 4454): '[stt] android default service:', 'com.google.android.tts'
+08-22 09:39:54.425 I/ReactNativeJS( 4454): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 09:39:54.426 I/ReactNativeJS( 4454): '[stt] isRecognitionAvailable:', true
+08-22 09:39:54.428 I/ReactNativeJS( 4454): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 09:39:54.428 I/ReactNativeJS( 4454):   'com.google.android.tts',
+08-22 09:39:54.428 I/ReactNativeJS( 4454):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 09:39:54.428 I/ReactNativeJS( 4454): '[stt] android default service:', 'com.google.android.tts'
+08-22 09:39:54.432 I/ReactNativeJS( 4454): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 09:39:54.433 I/ReactNativeJS( 4454): '[stt] isRecognitionAvailable:', true
+08-22 09:39:54.434 I/ReactNativeJS( 4454): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 09:39:54.434 I/ReactNativeJS( 4454):   'com.google.android.tts',
+08-22 09:39:54.434 I/ReactNativeJS( 4454):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 09:39:54.434 I/ReactNativeJS( 4454): '[stt] android default service:', 'com.google.android.tts'
+08-22 09:39:54.437 I/ReactNativeJS( 4454): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 09:39:54.438 I/ReactNativeJS( 4454): '[stt] isRecognitionAvailable:', true
+08-22 09:39:54.441 I/ReactNativeJS( 4454): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 09:39:54.441 I/ReactNativeJS( 4454):   'com.google.android.tts',
+08-22 09:39:54.441 I/ReactNativeJS( 4454):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 09:39:54.441 I/ReactNativeJS( 4454): '[stt] android default service:', 'com.google.android.tts'
+08-22 09:39:54.443 I/ReactNativeJS( 4454): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 09:39:54.444 I/ReactNativeJS( 4454): '[stt] isRecognitionAvailable:', true
+08-22 09:39:54.445 I/ReactNativeJS( 4454): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 09:39:54.445 I/ReactNativeJS( 4454):   'com.google.android.tts',
+08-22 09:39:54.445 I/ReactNativeJS( 4454):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 09:39:54.446 I/ReactNativeJS( 4454): '[stt] android default service:', 'com.google.android.tts'
+08-22 09:39:54.448 I/ReactNativeJS( 4454): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 09:39:54.449 I/ReactNativeJS( 4454): '[stt] isRecognitionAvailable:', true
+08-22 09:39:54.450 I/ReactNativeJS( 4454): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 09:39:54.450 I/ReactNativeJS( 4454):   'com.google.android.tts',
+08-22 09:39:54.450 I/ReactNativeJS( 4454):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 09:39:54.450 I/ReactNativeJS( 4454): '[stt] android default service:', 'com.google.android.tts'
+08-22 09:39:54.452 I/ReactNativeJS( 4454): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 09:39:54.453 I/ReactNativeJS( 4454): '[stt] isRecognitionAvailable:', true
+08-22 09:39:54.454 I/ReactNativeJS( 4454): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 09:39:54.454 I/ReactNativeJS( 4454):   'com.google.android.tts',
+08-22 09:39:54.454 I/ReactNativeJS( 4454):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 09:39:54.454 I/ReactNativeJS( 4454): '[stt] android default service:', 'com.google.android.tts'
+08-22 09:39:59.986 I/ReactNativeJS( 4454): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 09:39:59.987 I/ReactNativeJS( 4454): '[stt] isRecognitionAvailable:', true
+08-22 09:39:59.988 I/ReactNativeJS( 4454): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 09:39:59.988 I/ReactNativeJS( 4454):   'com.google.android.tts',
+08-22 09:39:59.988 I/ReactNativeJS( 4454):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 09:39:59.989 I/ReactNativeJS( 4454): '[stt] android default service:', 'com.google.android.tts'
+08-22 09:39:59.992 I/ReactNativeJS( 4454): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 09:39:59.993 I/ReactNativeJS( 4454): '[stt] isRecognitionAvailable:', true
+08-22 09:39:59.994 I/ReactNativeJS( 4454): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 09:39:59.994 I/ReactNativeJS( 4454):   'com.google.android.tts',
+08-22 09:39:59.994 I/ReactNativeJS( 4454):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 09:39:59.994 I/ReactNativeJS( 4454): '[stt] android default service:', 'com.google.android.tts'
+08-22 09:39:59.996 I/ReactNativeJS( 4454): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 09:39:59.997 I/ReactNativeJS( 4454): '[stt] isRecognitionAvailable:', true
+08-22 09:39:59.999 I/ReactNativeJS( 4454): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 09:39:59.999 I/ReactNativeJS( 4454):   'com.google.android.tts',
+08-22 09:39:59.999 I/ReactNativeJS( 4454):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 09:39:59.999 I/ReactNativeJS( 4454): '[stt] android default service:', 'com.google.android.tts'
+08-22 09:40:00.004 W/ReactNativeJS( 4454): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 09:40:00.007 W/ReactNativeJS( 4454): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 09:40:00.014 W/ReactNativeJS( 4454): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 09:40:00.018 W/ReactNativeJS( 4454): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 09:40:00.023 W/ReactNativeJS( 4454): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 09:40:00.029 W/ReactNativeJS( 4454): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 09:40:00.034 W/ReactNativeJS( 4454): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 09:40:00.044 W/ReactNativeJS( 4454): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 09:40:00.048 W/ReactNativeJS( 4454): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 09:40:00.052 W/ReactNativeJS( 4454): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 09:40:00.055 W/ReactNativeJS( 4454): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 09:40:00.606 W/ReactNativeJS( 4454): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 09:40:00.618 W/ReactNativeJS( 4454): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 09:40:00.629 W/ReactNativeJS( 4454): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 09:40:13.518 I/ReactNativeJS( 4454): [stt] recognition started
+08-22 09:40:13.930 W/ReactNativeJS( 4454): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=8.8', 'partial=false', 'svc=com.google.android.tts'
+08-22 09:40:16.603 I/ReactNativeJS( 4454): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 09:40:16.605 I/ReactNativeJS( 4454): '[stt] isRecognitionAvailable:', true
+08-22 09:40:16.606 I/ReactNativeJS( 4454): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 09:40:16.606 I/ReactNativeJS( 4454):   'com.google.android.tts',
+08-22 09:40:16.606 I/ReactNativeJS( 4454):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 09:40:16.606 I/ReactNativeJS( 4454): '[stt] android default service:', 'com.google.android.tts'
+08-22 09:40:16.609 I/ReactNativeJS( 4454): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 09:40:16.610 I/ReactNativeJS( 4454): '[stt] isRecognitionAvailable:', true
+08-22 09:40:16.611 I/ReactNativeJS( 4454): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 09:40:16.611 I/ReactNativeJS( 4454):   'com.google.android.tts',
+08-22 09:40:16.611 I/ReactNativeJS( 4454):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 09:40:16.611 I/ReactNativeJS( 4454): '[stt] android default service:', 'com.google.android.tts'
+08-22 09:40:17.540 W/ReactNativeJS( 4454): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 09:40:17.543 W/ReactNativeJS( 4454): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 09:40:17.936 I/ReactNativeJS( 4454): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 09:40:17.939 I/ReactNativeJS( 4454): '[stt] isRecognitionAvailable:', true
+08-22 09:40:17.968 I/ReactNativeJS( 4454): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 09:40:17.968 I/ReactNativeJS( 4454):   'com.google.android.tts',
+08-22 09:40:17.968 I/ReactNativeJS( 4454):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 09:40:17.968 I/ReactNativeJS( 4454): '[stt] android default service:', 'com.google.android.tts'
+08-22 09:40:18.067 I/ReactNativeJS( 4454): [stt] recognition started
+08-22 09:40:18.111 W/ReactNativeJS( 4454): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=-2.0', 'partial=false', 'svc=com.google.android.tts'
+08-22 09:40:30.248 W/ReactNativeJS( 4454): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 09:40:36.247 I/ReactNativeJS( 4454): [stt] recognition started
+08-22 09:40:36.267 W/ReactNativeJS( 4454): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=2.9', 'partial=false', 'svc=com.google.android.tts'
+08-22 09:40:36.403 I/ReactNativeJS( 4454): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 09:40:36.404 I/ReactNativeJS( 4454): '[stt] isRecognitionAvailable:', true
+08-22 09:40:36.405 I/ReactNativeJS( 4454): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 09:40:36.405 I/ReactNativeJS( 4454):   'com.google.android.tts',
+08-22 09:40:36.405 I/ReactNativeJS( 4454):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 09:40:36.405 I/ReactNativeJS( 4454): '[stt] android default service:', 'com.google.android.tts'
+08-22 09:40:36.678 W/ReactNativeJS( 4454): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 09:41:18.034 I/ReactNativeJS( 4454): [stt] recognition started
+08-22 09:41:18.109 W/ReactNativeJS( 4454): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=-1.6', 'partial=false', 'svc=com.google.android.tts'
+08-22 09:41:18.907 I/ReactNativeJS( 4454): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 09:41:18.908 I/ReactNativeJS( 4454): '[stt] isRecognitionAvailable:', true
+08-22 09:41:18.911 I/ReactNativeJS( 4454): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 09:41:18.911 I/ReactNativeJS( 4454):   'com.google.android.tts',
+08-22 09:41:18.911 I/ReactNativeJS( 4454):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 09:41:18.911 I/ReactNativeJS( 4454): '[stt] android default service:', 'com.google.android.tts'
+08-22 09:41:18.913 I/ReactNativeJS( 4454): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 09:41:18.914 I/ReactNativeJS( 4454): '[stt] isRecognitionAvailable:', true
+08-22 09:41:18.915 I/ReactNativeJS( 4454): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 09:41:18.915 I/ReactNativeJS( 4454):   'com.google.android.tts',
+08-22 09:41:18.915 I/ReactNativeJS( 4454):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 09:41:18.915 I/ReactNativeJS( 4454): '[stt] android default service:', 'com.google.android.tts'
+08-22 09:41:18.918 I/ReactNativeJS( 4454): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 09:41:18.919 I/ReactNativeJS( 4454): '[stt] isRecognitionAvailable:', true
+08-22 09:41:18.920 I/ReactNativeJS( 4454): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 09:41:18.920 I/ReactNativeJS( 4454):   'com.google.android.tts',
+08-22 09:41:18.920 I/ReactNativeJS( 4454):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 09:41:18.920 I/ReactNativeJS( 4454): '[stt] android default service:', 'com.google.android.tts'
+08-22 09:41:18.924 I/ReactNativeJS( 4454): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 09:41:18.925 I/ReactNativeJS( 4454): '[stt] isRecognitionAvailable:', true
+08-22 09:41:18.926 I/ReactNativeJS( 4454): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 09:41:18.926 I/ReactNativeJS( 4454):   'com.google.android.tts',
+08-22 09:41:18.926 I/ReactNativeJS( 4454):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 09:41:18.926 I/ReactNativeJS( 4454): '[stt] android default service:', 'com.google.android.tts'
+08-22 09:41:18.929 I/ReactNativeJS( 4454): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 09:41:18.932 I/ReactNativeJS( 4454): '[stt] isRecognitionAvailable:', true
+08-22 09:41:18.934 I/ReactNativeJS( 4454): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 09:41:18.934 I/ReactNativeJS( 4454):   'com.google.android.tts',
+08-22 09:41:18.934 I/ReactNativeJS( 4454):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 09:41:18.934 I/ReactNativeJS( 4454): '[stt] android default service:', 'com.google.android.tts'
+08-22 09:41:18.936 I/ReactNativeJS( 4454): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 09:41:18.941 I/ReactNativeJS( 4454): '[stt] isRecognitionAvailable:', true
+08-22 09:41:18.943 I/ReactNativeJS( 4454): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 09:41:18.943 I/ReactNativeJS( 4454):   'com.google.android.tts',
+08-22 09:41:18.943 I/ReactNativeJS( 4454):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 09:41:18.943 I/ReactNativeJS( 4454): '[stt] android default service:', 'com.google.android.tts'
+08-22 09:41:18.946 I/ReactNativeJS( 4454): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 09:41:18.953 I/ReactNativeJS( 4454): '[stt] isRecognitionAvailable:', true
+08-22 09:41:18.955 I/ReactNativeJS( 4454): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 09:41:18.955 I/ReactNativeJS( 4454):   'com.google.android.tts',
+08-22 09:41:18.955 I/ReactNativeJS( 4454):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 09:41:18.955 I/ReactNativeJS( 4454): '[stt] android default service:', 'com.google.android.tts'
+08-22 09:41:18.957 I/ReactNativeJS( 4454): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 09:41:18.957 I/ReactNativeJS( 4454): '[stt] isRecognitionAvailable:', true
+08-22 09:41:18.959 I/ReactNativeJS( 4454): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 09:41:18.959 I/ReactNativeJS( 4454):   'com.google.android.tts',
+08-22 09:41:18.959 I/ReactNativeJS( 4454):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 09:41:18.959 I/ReactNativeJS( 4454): '[stt] android default service:', 'com.google.android.tts'
+08-22 09:41:18.962 I/ReactNativeJS( 4454): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 09:41:18.967 I/ReactNativeJS( 4454): '[stt] isRecognitionAvailable:', true
+08-22 09:41:18.971 I/ReactNativeJS( 4454): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 09:41:18.971 I/ReactNativeJS( 4454):   'com.google.android.tts',
+08-22 09:41:18.971 I/ReactNativeJS( 4454):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 09:41:18.972 I/ReactNativeJS( 4454): '[stt] android default service:', 'com.google.android.tts'
+08-22 09:41:18.975 I/ReactNativeJS( 4454): '[stt] permissions status:', { granted: true, status: 'granted', canAskAgain: true }
+08-22 09:41:18.977 I/ReactNativeJS( 4454): '[stt] isRecognitionAvailable:', true
+08-22 09:41:18.978 I/ReactNativeJS( 4454): '[stt] android speech services:', [ 'com.google.android.as',
+08-22 09:41:18.978 I/ReactNativeJS( 4454):   'com.google.android.tts',
+08-22 09:41:18.978 I/ReactNativeJS( 4454):   'com.qualcomm.qti.voiceai.speech' ]
+08-22 09:41:18.978 I/ReactNativeJS( 4454): '[stt] android default service:', 'com.google.android.tts'
+08-22 09:41:19.240 W/ReactNativeJS( 4454): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 09:41:19.509 W/ReactNativeJS( 4454): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 09:41:19.518 W/ReactNativeJS( 4454): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 09:41:19.520 W/ReactNativeJS( 4454): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 09:41:19.601 W/ReactNativeJS( 4454): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 09:41:19.620 W/ReactNativeJS( 4454): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 09:41:19.629 W/ReactNativeJS( 4454): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 09:41:19.656 W/ReactNativeJS( 4454): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 09:41:19.667 W/ReactNativeJS( 4454): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 09:41:19.674 W/ReactNativeJS( 4454): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 09:41:20.588 W/ReactNativeJS( 4454): '[stt] error:', 'network', 'Server disconnected.', 'vol=-99.0', 'partial=false', 'svc=com.google.android.tts'
+08-22 09:41:20.829 W/ReactNativeJS( 4454): '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+08-22 09:41:20.830 I/ReactNativeJS( 4454): [stt] keep-alive restart (error:network, try 1)
+08-22 09:41:21.233 I/ReactNativeJS( 4454): [stt] recognition started
+08-22 09:41:41.460 W/ReactNativeJS( 4454): '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=1.6', 'partial=false', 'svc=com.google.android.tts'
+08-22 09:41:41.968 W/ReactNativeJS( 4454): '[stt] androidRecognitionServicePackage:', 'com.qualcomm.qti.voiceai.speech'
+08-22 09:41:41.969 I/ReactNativeJS( 4454): [stt] keep-alive restart (error:no-speech, try 1)
+08-22 09:41:42.990 W/ReactNativeJS( 4454): '[stt] error:', 'network', 'Server sent error status.', 'vol=1.6', 'partial=false', 'svc=com.qualcomm.qti.voiceai.speech'

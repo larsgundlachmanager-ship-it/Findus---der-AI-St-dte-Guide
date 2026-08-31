@@ -15,6 +15,9 @@ import {
   extractThemeFilters,
   needsDurationAsk,
   parseDistanceKm,
+  wantsCityExplore,
+  wantsUnseenTour,
+  defaultUnseenTourDurationMin,
   parseDurationMin,
   parseHardArriveByMs,
   resolveMobility,
@@ -41,7 +44,10 @@ export function buildTourRequestFromText(opts: {
   const text = opts.text.replace(/\s+/g, ' ').trim();
   const mode = detectTourMode(text) ?? 'stop_tour';
   const durationMin =
-    opts.forceDurationMin ?? parseDurationMin(text);
+    opts.forceDurationMin ??
+    parseDurationMin(text) ??
+    (wantsCityExplore(text) && !wantsUnseenTour(text) ? 90 : null) ??
+    defaultUnseenTourDurationMin(text);
   const distanceKm = parseDistanceKm(text);
   const hardArriveByMs = parseHardArriveByMs(text);
   const ask = needsDurationAsk({
@@ -54,9 +60,11 @@ export function buildTourRequestFromText(opts: {
   const prefs = buildTourPrefSlice(text);
   const pathSpec = mode === 'path_tour' ? buildPathSpec(text) : null;
   const startMode = resolveStartMode(text);
+  const unseenAuto =
+    wantsUnseenTour(text) && startMode === 'now' && !calendarOpen;
   const uiLayout: TourUiLayout =
     opts.uiLayout ??
-    (startMode === 'now' && !calendarOpen
+    (unseenAuto || (startMode === 'now' && !calendarOpen)
       ? 'start_nav_now'
       : calendarOpen
         ? 'timeline_stack'
@@ -74,7 +82,7 @@ export function buildTourRequestFromText(opts: {
     hardArriveByMs,
     anchor: { lat: anchor.lat, lng: anchor.lng },
     endAnchor: opts.endAnchor ?? null,
-    radiusM: mode === 'path_tour' ? null : distanceKm != null ? distanceKm * 1000 : 3000,
+    radiusM: mode === 'path_tour' ? null : distanceKm != null ? distanceKm * 1000 : 8000,
     areaHint: extractAreaHint(text),
     themeFilters: themes,
     categoryMust: themes,

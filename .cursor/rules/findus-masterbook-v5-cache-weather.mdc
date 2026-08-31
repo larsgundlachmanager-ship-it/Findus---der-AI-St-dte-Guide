@@ -30,8 +30,18 @@ Unmapped area → live fetch → lokal speichern → **sofort** in Community-DB 
 ## Smart Weather Engine (OpenWeather One Call 3.0 + Modul 4)
 
 - App-Start: einmal Tageslage prüfen.
-- Stabil trocken → nächster Check nach **6 h**.
-- Regen geplant → ab **2 h** vorher watchen, dann alle **30 Min**.
+- **Kosten-Leiter (pro Gerät, nicht pauschal jede Minute):**
+  - Trocken / kein Regen → alle **~60 Min**
+  - Regen in 60 Min–2 h → alle **~30 Min**
+  - Regen in 15–60 Min → alle **~10 Min**
+  - Regen in 5–15 Min → alle **~5 Min**
+  - Regen ≤5 Min → alle **~1 Min**
+  - Regnet schon → alle **~5 Min** (Ende „bis …“ nachziehen)
+- Zwischen den API-Calls: HUD-Countdown tickt lokal aus `nextRainAtMs` (kostenlos).
 - Warnungen: **30 Min** vorher (Café/Indoor-Wahl) + **5 Min** vorher.
-- HUD oben links: Regen-Countdown („Regen in X Min“).
+- HUD: live Countdown („Regen in X Min“); bei Regen-Code/Minutely-jetzt „Regen jetzt bis …“ — nie „in 25 Min“ während es schon nass ist.
+- Wetter pro Stadt/Viertel (~5 km) via Supabase `weather-forecast` + `weather_cache`; Clients lesen Cache; Upstream (OWM/Open-Meteo) 1× pro Zelle mit adaptivem TTL.
+- **GPS-Nowcast:** Wenn das Viertel Regen ≤ **~15 Min** (oder schon nass) meldet → einmal Open-Meteo `minutely_15` an **exakter** lat/lng (DE: DWD ICON-D2). Davor reicht Shared-Viertel-Cache — spart Calls.
+- **Live-Fetch-Gate:** Shared/OWM nur wenn App-Session ≥ **30 Min** und GPS in einer bekannten Stadt — kurzes Öffnen / außerhalb spart Upstream.
+- Open-Meteo: Shared Server-Cache pro Geo-Zelle (viele User = 1 Upstream); Direct-Fallback bleibt `forecast_days=3`.
 - Modul 4 spricht Warnungen direkt (Café/Indoor-Vorschlag) — kein Tagesplan-Umbau.

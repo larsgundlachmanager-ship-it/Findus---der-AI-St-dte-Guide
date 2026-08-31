@@ -1,0 +1,752 @@
+{
+  "notes": [
+    "Deep Research B für Halle (Saale), Stand 20.08.2026. Ausschließlich stabile, belegte Inhalte; Öffnungszeiten, Eintritt, Führungen, Veranstaltungen und Zugänglichkeit sind als LIVE-Hinweise markiert.",
+    "Primärquellen: Stiftung Händel-Haus, Stadt Halle, Halloren Schokoladenfabrik, Beatles Museum, Stadtmuseum Halle, Stiftung Gedenkstätten Sachsen-Anhalt, Martin-Luther-Universität Halle-Wittenberg, Stadtwerke Halle, DB Museum, Hallesche Straßenbahnfreunde.",
+    "Ergänzende Quellen: Bundeszentrale für politische Bildung, Museumsverband Sachsen-Anhalt, Universitätssammlungen in Deutschland, Deutschlandfunk Kultur, Industriekultur Sachsen-Anhalt und heise online.",
+    "Keine Dialog- oder Vorleseskripte. Texte sind Faktenpools für eine dynamische, kontextabhängige Erzählung.",
+    "T1-Textpools umfassen mindestens 2200 Zeichen, T2-Textpools mindestens 1200 Zeichen; jeder Spot besitzt mindestens acht eigenständige Deep-Einträge."
+  ],
+  "spots": [
+    {
+      "id": "halle_saale_handel_haus_halle",
+      "name": "Händel-Haus",
+      "general_info": "Georg Friedrich Händels Geburtshaus „Zum gelben Hirschen“ ist heute Musikmuseum und internationales Zentrum der Händel-Pflege. Das Haus verbindet die Biografie des Komponisten mit historischen Instrumenten, Halles Musikgeschichte und der lebendigen Festspieltradition.",
+      "deep_data_pool": [
+        {
+          "text": "Das repräsentative Eckhaus an Großer Nikolaistraße und Kleiner Ulrichstraße trug den Namen „Zum gelben Hirschen“. Georg Händel, Leibchirurg des Administrators des Erzstifts Magdeburg, kaufte das bereits ältere Gebäude 1666. Sein Sohn Georg Friedrich Händel wurde hier am 23. Februar 1685 geboren und am folgenden Tag in der Marktkirche getauft.",
+          "tags": ["geschichte", "haendel", "geburtshaus"]
+        },
+        {
+          "text": "Händel verbrachte Kindheit und Jugend in Halle. Unterricht erhielt er beim Marktkirchenorganisten Friedrich Wilhelm Zachow, der ihn mit mitteldeutscher Kantorentradition und verschiedenen europäischen Nationalstilen vertraut machte. 1702 begann Händel an der jungen halleschen Universität zu studieren und war probeweise Organist am reformierten Dom.",
+          "tags": ["biografie", "musikgeschichte"]
+        },
+        {
+          "text": "Im Frühjahr 1703 verließ Händel Halle in Richtung Hamburg. Nach Stationen in Italien und Hannover machte er in London Karriere und wurde britischer Staatsbürger. Den Kontakt zu seiner Familie und Geburtsstadt hielt er dennoch aufrecht. Er starb 1759 in London und wurde auf eigenen Wunsch in der Westminster Abbey beigesetzt.",
+          "tags": ["biografie", "europa", "quer"]
+        },
+        {
+          "text": "Das Innere und die Fassade des Hauses wurden über Jahrhunderte mehrfach verändert. Ladeneinbauten beeinträchtigten später das historische Erscheinungsbild; Freitreppe und Toreinfahrt verschwanden. Das heutige Museum macht deshalb transparent, dass sich Händels Wohnwelt nur teilweise aus Baugeschichte, Quellen und erhaltenen Spuren erschließen lässt.",
+          "tags": ["baugeschichte", "quellenkritik"]
+        },
+        {
+          "text": "Die Stadt Halle erwarb das Gebäude 1937 mit dem Ziel, ein Musikmuseum einzurichten. Kriegsbedingt kam es erst 1948 zur Eröffnung. Diese fiel mit festlichen Händeltagen zusammen; daraus entwickelte sich ein wichtiger Baustein der modernen Händel-Pflege in Halle. Regelmäßige Händel-Festspiele finden seit 1952 statt.",
+          "tags": ["museumsgeschichte", "festspiele"]
+        },
+        {
+          "text": "Die Dauerausstellung „Händel – der Europäer“ wurde zum 250. Todestag des Komponisten am 14. April 2009 eröffnet. Auf rund 550 Quadratmetern und zwei Ebenen zeigt sie etwa 160 Exponate, darunter originale Gemälde, Stiche und Musikinstrumente. Das Dachgeschoss behandelt die halleschen Jahre 1685 bis 1703, das erste Obergeschoss die europäische Karriere bis 1759.",
+          "tags": ["ausstellung", "sammlung"]
+        },
+        {
+          "text": "In der sogenannten Schatzkammer werden besonders wertvolle Zeugnisse der Musikgeschichte in gesicherten Vitrinen präsentiert. Die Ausstellung verbindet Originalobjekte mit Hör- und Medienstationen. Ein begehbarer Stadtplan verknüpft das Geburtshaus mit Marktkirche, Dom und weiteren Orten, an denen Händels frühe musikalische Entwicklung greifbar wird.",
+          "tags": ["ausstellung", "musik", "stadtbezug"]
+        },
+        {
+          "text": "Zum Profil des Hauses gehört eine Sammlung historischer Musikinstrumente. Sie erweitert den Blick über Händels Biografie hinaus auf Klang, Spielpraxis und Instrumentenbau. Das Händel-Haus ist daher nicht nur Erinnerungsort, sondern Musikmuseum, Forschungsstätte, Bibliothek, Restaurierungsort und Veranstaltungszentrum.",
+          "tags": ["sammlung", "instrumente", "forschung"]
+        },
+        {
+          "text": "Für das Händel-Jubiläum 1985 wurde das Museum durch das östlich angrenzende Grundstück erweitert. Dort entstanden bessere Bedingungen für Ausstellung, Bibliothek, Restaurierungswerkstatt und Veranstaltungen. Ein Kammermusiksaal zog aus dem Dachbereich ins Erdgeschoss des Erweiterungsbaus; seit 1989 kam im Obergeschoss ein Überblick über Halles Musikgeschichte hinzu.",
+          "tags": ["museumsgeschichte", "architektur"]
+        },
+        {
+          "text": "Visuell: Das Händel-Haus ist ein stattliches, verputztes Eckgebäude in der Altstadt. Der historische Name und die Lage an der Ecke helfen bei der Orientierung; der Zugang liegt an der Großen Nikolaistraße. Die heutige Fassade ist Ergebnis späterer Umbauten und darf nicht als unveränderte Ansicht aus Händels Kindheit verstanden werden.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Quer: Die Marktkirche ist Händels Taufkirche und Wirkungsort seines Lehrers Zachow; am Dom war der junge Händel Organist. Das Denkmal auf dem Marktplatz blickt symbolisch nach England. Zusammen bilden Geburtshaus, Kirchen und Denkmal ein dichtes Netz zwischen Halles lokaler Musiktradition und Händels späterer europäischer Laufbahn.",
+          "tags": ["quer", "stadtraum"]
+        },
+        {
+          "text": "Halles Händel-Tradition reicht weit zurück: Schon um 1780 wurde erwogen, im Geburtshaus eine Gedenkstätte einzurichten. Im 19. Jahrhundert gab es Händel-Feste, 1922 wurden bei Halleschen Händelfesten Opern wiederentdeckt. Das 1948 eröffnete Museum und die seit 1952 regelmäßig veranstalteten Festspiele verstetigten diese Pflege institutionell.",
+          "tags": ["rezeption", "festspiele"]
+        },
+        {
+          "text": "Die Stiftung Händel-Haus betreibt neben dem Museum auch wissenschaftliche und musikalische Arbeit. Der Ort vermittelt deshalb nicht bloß ein berühmtes Geburtsdatum, sondern zeigt, wie eine Stadt das Werk eines ausgewanderten Komponisten über Sammlungen, Forschung, Aufführungspraxis und internationale Festspiele immer wieder neu erschließt.",
+          "tags": ["einordnung", "kultur"]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, aktuelle Sonderausstellungen, Konzerte, Führungen, Barrierefreiheit und das jeweilige Programm der Händel-Festspiele ausschließlich über haendelhaus.de aktuell prüfen. Diese Angaben ändern sich und gehören nicht als dauerhafte Fakten in die gesprochene Geschichte.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Ist das wirklich Händels Geburtshaus?",
+          "a": "Ja. Georg Friedrich Händel wurde am 23. Februar 1685 im damaligen Haus „Zum gelben Hirschen“ geboren; sein Vater hatte das Anwesen 1666 gekauft."
+        },
+        {
+          "q": "Was zeigt das Museum außer Händels Biografie?",
+          "a": "Historische Musikinstrumente, originale Bild- und Druckzeugnisse, Hörangebote sowie Aspekte der halleschen Musikgeschichte und europäischen Aufführungskultur."
+        },
+        {
+          "q": "Ist das Gebäude innen noch unverändert?",
+          "a": "Nein. Das Haus wurde über Jahrhunderte stark umgebaut; das Museum erläutert die erhaltene Baugeschichte und vermeidet den Eindruck einer vollständig originalen Wohnwelt."
+        }
+      ]
+    },
+    {
+      "id": "halle_saale_georg_friedrich_handel_denkmal",
+      "name": "Georg-Friedrich-Händel-Denkmal",
+      "general_info": "Das 1859 eingeweihte Händel-Denkmal auf dem Marktplatz ist Halles zentrales Monument für den in der Stadt geborenen Komponisten. Hermann Rudolf Heidel zeigt Händel mit Taktstock am Notenpult; die Blickrichtung verweist auf seine zweite Heimat England.",
+      "deep_data_pool": [
+        {
+          "text": "Das Denkmal wurde am 1. Juli 1859 zum 100. Todestag Georg Friedrich Händels auf dem halleschen Marktplatz eingeweiht. Kunstfreunde aus Deutschland und England stifteten das Monument. Damit wurde Händels Bedeutung zugleich als Sohn Halles und als in London wirkender europäischer Komponist sichtbar gemacht.",
+          "tags": ["geschichte", "denkmal"]
+        },
+        {
+          "text": "Schöpfer war der Berliner Bildhauer Hermann Rudolf Heidel, ein Schüler Ludwig von Schwanthalers an der Münchner Kunstakademie. Die Händel-Figur blieb sein einziges großes Monumentalwerk und wurde sein bekanntestes Werk. Einen Tag nach der Einweihung schlug der Oberbürgermeister vor, Heidel zum Ehrenbürger Halles zu ernennen.",
+          "tags": ["kunstler", "stadtgeschichte"]
+        },
+        {
+          "text": "Das 3,20 Meter hohe Bronzestandbild zeigt Händel in einer Tracht des 18. Jahrhunderts. In der rechten Hand hält er den Taktstock und stützt sich auf ein Dirigentenpult. Auf dem Pult liegen aufgeschlagene Notenblätter des Oratoriums „Messias“, eines seiner bis heute bekanntesten Werke.",
+          "tags": ["visuell", "ikonografie"]
+        },
+        {
+          "text": "Die Figur blickt nach Westen in Richtung England. Dort verbrachte Händel den entscheidenden Teil seiner Karriere, wurde britischer Staatsbürger und fand nach seinem Tod 1759 in der Westminster Abbey seine Grabstätte. Die Ausrichtung übersetzt diese Biografie in den Stadtraum.",
+          "tags": ["symbolik", "biografie"]
+        },
+        {
+          "text": "Seit 1859 steht das Denkmal raumgreifend im Zentrum des Marktes zwischen Marktkirche, Rotem Turm und den umgebenden Bürgerhäusern. Der offene Platz macht die Figur aus vielen Richtungen sichtbar. Der Marmorsockel und die erhöhte Stufenanlage geben der Bronze Distanz gegenüber dem alltäglichen Marktgeschehen.",
+          "tags": ["stadtraum", "wegweiser"]
+        },
+        {
+          "text": "Ab 1860 besaß das Denkmal nacheinander zwei dem jeweiligen Zeitgeschmack entsprechende Umfassungen. Die letzte wurde 1926 bei einer Umgestaltung des Marktplatzes entfernt. Spätere Debatten um eine neue „ehrende Distanz“ und Beleuchtung zeigen, wie sich Vorstellungen vom angemessenen Umgang mit Monumenten verändern.",
+          "tags": ["denkmalpflege", "rezeption"]
+        },
+        {
+          "text": "Visuell: Zu erkennen ist Händel an Perücke, langem historischen Rock, Taktstock und Notenpult. Die aufgeschlagene Partitur und die Richtung seines Blicks sind die wichtigsten erzählbaren Details. Der große freie Marktplatz und die vier Türme der Marktkirche bilden die markante Umgebung.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Quer: Nur wenige Gehminuten entfernt liegt das Händel-Haus, sein Geburtshaus. In der Marktkirche wurde Händel getauft und von Friedrich Wilhelm Zachow musikalisch geprägt. Das Denkmal verbindet diese realen Lebensorte mit der späteren Londoner Karriere und Halles langfristiger Festspieltradition.",
+          "tags": ["quer", "haendel"]
+        },
+        {
+          "text": "LIVE: Temporäre Einzäunungen, Reinigungs- oder Restaurierungsarbeiten und Veranstaltungen auf dem Marktplatz aktuell über halle.de prüfen. Der Standort, die Einweihung 1859, Künstler, Material, Darstellung und Blickrichtung sind stabile Fakten.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Warum blickt Händel in diese Richtung?",
+          "a": "Die Figur blickt symbolisch nach England, wo Händel den größten Teil seiner Karriere verbrachte und in Westminster Abbey bestattet wurde."
+        },
+        {
+          "q": "Was liegt auf dem Notenpult?",
+          "a": "Aufgeschlagene Notenblätter des Oratoriums „Messias“."
+        }
+      ]
+    },
+    {
+      "id": "halle_saale_halloren_schokoladenerlebniswelt",
+      "name": "Halloren Schokoladenerlebniswelt",
+      "general_info": "Die Erlebniswelt am Stammsitz der Halloren Schokoladenfabrik erzählt von einer halleschen Unternehmensgeschichte seit 1804 und führt vom Kakaorohstoff bis zur fertigen Schokolade. Markante Stücke sind das Schokoladenzimmer und die größte Halloren Kugel der Welt.",
+      "deep_data_pool": [
+        {
+          "text": "Die Halloren-Unternehmensgeschichte beginnt 1804, als der Konditor und Pfefferküchler Friedrich August Miethe in Halle ein Geschäft eröffnete. Halloren bezeichnet sich als älteste bis heute produzierende Schokoladenfabrik Deutschlands. Die Erlebniswelt verbindet diese lange Firmenbiografie mit Herstellung, Produktgeschichte und Schokoladenkunst.",
+          "tags": ["geschichte", "industrie"]
+        },
+        {
+          "text": "Das Schokoladenmuseum am Fabrikstandort wurde 2002 eröffnet, nachdem Renovierungen am alten Fabrikgebäude abgeschlossen waren. Die museale Präsentation entstand nicht an einem neutralen Ausstellungsort, sondern direkt im Umfeld eines weiter produzierenden Unternehmens; dadurch stehen Industriegeschichte und gegenwärtige Fertigung nebeneinander.",
+          "tags": ["museumsgeschichte", "fabrik"]
+        },
+        {
+          "text": "Die bekannte Original Halloren Kugel erhielt Namen und Form nach den kugelförmigen Silberknöpfen an den Festtrachten der Halloren, der traditionsreichen Salzwirker-Brüderschaft Halles. Das Produkt schlägt so eine Brücke zwischen Schokoladenindustrie und der viel älteren Salzgeschichte, aus der Halle wirtschaftlich und sprachlich hervorging.",
+          "tags": ["produktgeschichte", "salz", "quer"]
+        },
+        {
+          "text": "Eine Bean-to-bar-Anlage zeigt den Weg von der Kakaobohne zur flüssigen Schokolade. Anders als eine reine Vitrinenschau macht sie Prozessschritte der Verarbeitung sichtbar. Welche Produktionsbereiche tatsächlich einsehbar oder in Betrieb sind, kann vom aktuellen Betriebsablauf abhängen und muss vor einem Besuch geprüft werden.",
+          "tags": ["herstellung", "technik"]
+        },
+        {
+          "text": "Das Schokoladenzimmer wurde 2004 erstmals öffentlich gezeigt. Es ist rund 17 Quadratmeter groß und mit Möbeln, Figuren und Accessoires aus Schokolade ausgestattet. Für die ursprüngliche Fertigstellung arbeiteten der österreichische Schokoladenkünstler Gerhard Petzl und Halloren-Chocolatiers etwa 5.000 Stunden und verwendeten rund 1,5 Tonnen Schokolade.",
+          "tags": ["schokoladenkunst", "rekord"]
+        },
+        {
+          "text": "Das Zimmer greift den Biedermeierstil auf und verweist damit auf die Gründungsphase des Unternehmens im frühen 19. Jahrhundert. Die Objekte werden immer wieder überarbeitet, weil Schokolade als Material empfindlich ist. Das Ensemble ist damit zugleich Kunstinstallation, handwerkliche Leistung und konservatorische Herausforderung.",
+          "tags": ["kunst", "biedermeier", "handwerk"]
+        },
+        {
+          "text": "Ein weiteres Schlüsselobjekt ist die größte Halloren Kugel der Welt. Sie wiegt nach Herstellerangaben 200 Kilogramm: 160 Kilogramm Sahne-Cacao-Creme und 40 Kilogramm Zartbitterschokolade. Ein Konditormeister und drei Konditoren arbeiteten sechs Monate daran. Das Ausstellungsstück ist nicht zum Verzehr bestimmt.",
+          "tags": ["rekord", "exponat"]
+        },
+        {
+          "text": "Der gläserne Schaugang wurde im Zusammenhang mit der erweiterten Halloren Confiserie eingerichtet. Er ermöglicht Einblicke in Produktionsbereiche, ohne den hygienisch getrennten Fertigungsraum zu betreten. Sichtbare Abläufe können je nach Produktionstag variieren; die grundsätzliche Verbindung von Museum und Fabrik bleibt jedoch charakteristisch.",
+          "tags": ["produktion", "architektur"]
+        },
+        {
+          "text": "In der Schokoladenwerkstatt können Besuchende unter Anleitung eigene Pralinen oder Tafeln gestalten. Dieses Angebot übersetzt industrielle Herstellung in ein handwerkliches Lernformat. Reservierung, Umfang, Altersregeln und Kosten sind veränderlich und müssen als LIVE-Information behandelt werden.",
+          "tags": ["aktivitat", "live_hint"]
+        },
+        {
+          "text": "Visuell: Der Standort liegt an der Delitzscher Straße im Osten Halles und ist als Halloren-Fabrik- und Erlebniswelt erkennbar. Im Inneren sind das vollständig aus Schokolade gestaltete Zimmer, die überdimensionale Kugel und die sichtbare Verarbeitung die stärksten Orientierungspunkte.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Quer: Die Bezeichnung Halloren ist nicht bloß ein Markenname. Sie verweist auf die Salzwirker, deren Festkleidung die Form der Kugeln inspirierte. Für die Stadtgeschichte verbindet das Museum damit zwei prägende Wirtschaftszweige: Halles jahrhundertealte Salzgewinnung und die seit dem frühen 19. Jahrhundert entwickelte Süßwarenproduktion.",
+          "tags": ["quer", "stadtgeschichte"]
+        },
+        {
+          "text": "Die Erlebniswelt erzählt außerdem, wie sich ein traditionsreiches Unternehmen wiederholt wandelte: aus einem Konditoreibetrieb entstand industrielle Fertigung, das historische Fabrikgebäude wurde renoviert, neue Produktions- und Logistikbereiche kamen hinzu, und seit 2002 macht ein Museum diese Entwicklung öffentlich nachvollziehbar.",
+          "tags": ["industriegeschichte", "wandel"]
+        },
+        {
+          "text": "Der Fabrikverkauf ergänzt das Museum, ist aber kein historischer Beleg an sich. Sortiment, Verkostungen, Caféangebot und verfügbare Produkte ändern sich. Dauerhaft relevant sind die Firmenwurzeln von 1804, die Eröffnung des Museums 2002, die Verbindung zum Produktionsstandort und die hervorgehobenen Schokoladenkunstwerke.",
+          "tags": ["einordnung", "stabil"]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, öffentliche Führungen, Werkstatttermine, Produktionssichtbarkeit, Fabrikverkauf und Sonderaktionen ausschließlich auf halloren.de aktuell prüfen. Saisonale Schließtage und kurzfristige Änderungen dürfen nicht aus dem Pack vorgelesen werden.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Warum heißen die Halloren Kugeln so?",
+          "a": "Name und Form beziehen sich auf die runden Silberknöpfe der Festtracht der Halloren, der halleschen Salzwirker."
+        },
+        {
+          "q": "Ist das Schokoladenzimmer wirklich aus Schokolade?",
+          "a": "Ja. Möbel, Figuren und Accessoires wurden aus Schokolade gestaltet; für die erste Fassung wurden rund 1,5 Tonnen verarbeitet."
+        },
+        {
+          "q": "Kann man die größte Halloren Kugel essen?",
+          "a": "Nein. Das 200 Kilogramm schwere Stück ist ein dauerhaftes Museumsobjekt."
+        }
+      ]
+    },
+    {
+      "id": "halle_saale_beatles_museum",
+      "name": "Beatles Museum",
+      "general_info": "Das private Beatles Museum im Barockhaus Alter Markt 12 dokumentiert Bandgeschichte und Solokarrieren auf mehreren Etagen. Seine Wurzeln reichen in eine seit 1964 aufgebaute Sammlung und eine ab 1975 international gezeigte Wanderausstellung zurück.",
+      "deep_data_pool": [
+        {
+          "text": "Museumsgründer Rainer Moers begann 1964, Material über die Beatles zu sammeln. Ab 1975 wurde der Bestand als Wanderausstellung in rund 25 Städten im In- und Ausland gezeigt. Damit ist die Sammlungsgeschichte selbst ein Stück Rezeptionsgeschichte: Sie begann noch während der unmittelbaren Erinnerung an die Bandzeit.",
+          "tags": ["sammlungsgeschichte", "beatles"]
+        },
+        {
+          "text": "1982 war die Ausstellung im Budapester Népstadion zu sehen und zog mehr als 20.000 Besucher an, darunter viele aus der DDR. Ab 1989 bestand in Köln auf knapp 60 Quadratmetern ein fester Standort. Dieser schloss am 31. Juli 1999; anschließend wechselte das Museum nach Halle.",
+          "tags": ["museumsgeschichte", "ddr", "quer"]
+        },
+        {
+          "text": "Am 8. April 2000 öffnete das Museum im zuvor sanierten Haus Alter Markt 12. Zu den Gründern des halleschen Standorts gehörten Rainer Moers und Matthias Bühring. Die Ausstellung startete dort mit rund 350 Quadratmetern, wuchs später auf knapp 600 Quadratmeter und erstreckt sich seit 2007 über drei Etagen.",
+          "tags": ["museumsgeschichte", "halle"]
+        },
+        {
+          "text": "Das Gebäude am Alten Markt wurde 1708 errichtet und ist ein Barockhaus. Der historische Bau bildet einen bewussten Kontrast zur Popkultur des 20. Jahrhunderts. Seine zentrale Lage in der Altstadt macht das Museum von außen eher als Bürgerhaus denn als moderne Ausstellungshalle erkennbar.",
+          "tags": ["architektur", "visuell"]
+        },
+        {
+          "text": "Inhaltlich verfolgt die Ausstellung die Geschichte der Beatles von der Gründung 1960 bis zur Auflösung 1970. Danach geht sie auf die Solokarrieren von John Lennon, Paul McCartney, George Harrison und Ringo Starr ein. Gezeigt werden Raritäten, Kuriositäten und bekannte Zeugnisse aus unterschiedlichen Phasen.",
+          "tags": ["ausstellung", "musikgeschichte"]
+        },
+        {
+          "text": "Die Sammlung ist kein staatliches Überblicksmuseum der Popgeschichte, sondern eine spezialisierte, über Jahrzehnte gewachsene Privatsammlung. Ihr besonderer Wert liegt in der Dichte des Materials und in der Perspektive der Fankultur: Tonträger, Drucksachen, Merchandising und Erinnerungsobjekte dokumentieren auch die weltweite Vermarktung der Band.",
+          "tags": ["einordnung", "fankultur"]
+        },
+        {
+          "text": "Das Museum bezeichnet sich als weltweit älteste, größte und umfangreichste öffentliche Einrichtung zum Thema Beatles. Sicher belegt sind die lange Sammlungsgeschichte, die öffentliche Wanderausstellung ab 1975 und die große hallesche Präsentation. Superlative sollten stets als Selbsteinordnung des Museums kenntlich bleiben.",
+          "tags": ["quellenkritik", "profil"]
+        },
+        {
+          "text": "Visuell: Das Museum liegt im mehrgeschossigen Barockhaus am Alten Markt 12. Der Eingang fügt sich in die historische Platzbebauung ein; Beschilderung und Schaufenster weisen auf die Beatles-Sammlung hin. Im Inneren führt der Rundgang etagenweise durch Bandjahre und spätere Soloprojekte.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, einzelne Ausstellungsbereiche, Veranstaltungen, Café- und Shopbetrieb sowie Barrierefreiheit auf beatlesmuseum.net aktuell prüfen. Die Geschichte der Sammlung, der Umzug nach Halle im Jahr 2000 und das Barockhaus von 1708 sind stabile Inhalte.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Wie kam das Beatles Museum nach Halle?",
+          "a": "Die seit 1964 aufgebaute Sammlung war zunächst Wanderausstellung und später in Köln; nach dessen Schließung zog sie 2000 in das sanierte Barockhaus am Alten Markt."
+        },
+        {
+          "q": "Geht es nur um die Bandjahre?",
+          "a": "Nein. Der Rundgang behandelt die Beatles bis 1970 und anschließend die Solokarrieren der vier Mitglieder."
+        }
+      ]
+    },
+    {
+      "id": "halle_saale_stadtmuseum_christian_wolff_haus",
+      "name": "Stadtmuseum im Christian-Wolff-Haus",
+      "general_info": "Im ockergelben Professorenhaus lebte und lehrte der Frühaufklärer Christian Wolff von 1741 bis 1754. Heute verbindet das Stadtmuseum originale barocke Räume mit einer multimedialen Schau zu mehr als 1.200 Jahren Stadtgeschichte im ehemaligen Druckereibau.",
+      "deep_data_pool": [
+        {
+          "text": "Christian Wolff, Philosoph und Mathematiker der Frühaufklärung, bezog das Haus 1741 nach seiner triumphalen Rückkehr nach Halle. 1723 hatte er die Stadt bei Androhung der Todesstrafe verlassen müssen. Bis zu seinem Tod 1754 lebte er hier mit Familie und studentischen Anhängern und machte das Gebäude zu einem Zentrum von Philosophie und Wissenschaft.",
+          "tags": ["geschichte", "aufklarung"]
+        },
+        {
+          "text": "Das Vorderhaus bewahrt ein prunkvolles Empfangszimmer, eine barocke Treppe und einen privaten Vorlesungssaal im Dachgeschoss. Familienleben und akademischer Unterricht fanden unter einem Dach statt. Wolff hielt Vorlesungen auf Deutsch, was in einer Zeit lateinisch geprägter Universitätslehre eine bemerkenswerte Neuerung war.",
+          "tags": ["architektur", "universitat"]
+        },
+        {
+          "text": "Acht Jahre nach Wolffs Tod erwarb Johann Justinus Gebauer das Anwesen und richtete eine Druck- und Verlagsanstalt ein. Die Nachfahren führten sie als „Gebauer und Schwetschke“ weiter. Bis 1992 arbeiteten auf dem Grundstück Druckmaschinen, zuletzt in einem 1915 errichteten Industriebau im Hof.",
+          "tags": ["druckgeschichte", "industrie"]
+        },
+        {
+          "text": "1954 zog das Heimatmuseum der Stadt in das Vorderhaus, während im Hof noch gedruckt wurde. Seit 1991 besteht das Stadtmuseum Halle aus zusammengeführten Vorgängereinrichtungen. Heute ist das Vorderhaus Wolff und der Aufklärung gewidmet; der Industriebau beherbergt die stadtgeschichtliche Dauerausstellung.",
+          "tags": ["museumsgeschichte", "nutzung"]
+        },
+        {
+          "text": "Die Ausstellung „Geselligkeit und die Freyheit zu philosophieren“ behandelt Wolffs Gedankenwelt und das gesellschaftliche Leben des 18. Jahrhunderts. Über 250 Objekte erzählen von Lesegesellschaften, Salonkultur und Freimaurerlogen. Ein Wolff zugeschriebener barocker Schreibtisch steht im historischen Empfangszimmer.",
+          "tags": ["ausstellung", "aufklarung"]
+        },
+        {
+          "text": "„Entdecke Halle!“ zeigt auf rund 900 Quadratmetern in neun Themenbereichen Ausschnitte aus mehr als 1.200 Jahren Stadtgeschichte. Objekte, Gerüche, Hör- und Tastangebote reichen von frühen Siedlungsspuren über Wirtschaft und Politik bis in die jüngere Alltagsgeschichte der DDR.",
+          "tags": ["stadtgeschichte", "ausstellung"]
+        },
+        {
+          "text": "Visuell: Das kräftig ockergelbe Haus fällt durch Renaissancegiebel und große Toreinfahrt auf. Es steht an der Ecke Große Märkerstraße/Kleiner Berlin, nur wenige Schritte vom Markt. Der historische Hof führt zum deutlich jüngeren Industriebau der ehemaligen Druckerei.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Quer: Die Große Märkerstraße war eine Professorenstraße der halleschen Universität. Das Christian-Wolff-Haus ist dort das einzige Gebäude, in dem diese akademische Wohn- und Arbeitswelt des 18. Jahrhunderts noch unmittelbar räumlich erfahrbar ist.",
+          "tags": ["quer", "universitatsgeschichte"]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Sonderausstellungen, Führungen und tatsächlich zugängliche Räume über stadtmuseumhalle.de prüfen. Die historischen Nutzungsphasen als Professorenhaus, Druckerei und Museum sind stabil.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Was macht das Haus selbst zum Ausstellungsstück?",
+          "a": "Erhaltene barocke Einbauten, Empfangszimmer, Treppe und privater Hörsaal zeigen, wie Wohnen und Lehren in einem Professorenhaus zusammenkamen."
+        },
+        {
+          "q": "Wo ist die allgemeine Stadtgeschichte zu sehen?",
+          "a": "Im ehemaligen Druckereibau im Hof; das Vorderhaus konzentriert sich auf Christian Wolff und die Frühaufklärung."
+        }
+      ]
+    },
+    {
+      "id": "halle_saale_gedenkstatte_roter_ochse_halle_saale",
+      "name": "Gedenkstätte Roter Ochse Halle (Saale)",
+      "general_info": "Die Gedenkstätte in einem ehemaligen Hinrichtungs- und Vernehmergebäude dokumentiert politische Justiz und Verfolgung unter Nationalsozialismus, sowjetischer Besatzungsmacht und SED-Diktatur. Der historische Ort gehört weiterhin zu einer Justizvollzugsanlage.",
+      "deep_data_pool": [
+        {
+          "text": "Die königlich-preußische Straf-, Lern- und Besserungsanstalt wurde 1842 eröffnet. Bereits nach der Revolution von 1848/49 kamen politische Gefangene hierher. Der Beiname „Roter Ochse“ wird vermutlich mit roten Ziegeln und Porphyr sowie Ochsenfuhrwerken beim Material- und Gefangenentransport in Verbindung gebracht.",
+          "tags": ["geschichte", "preussen"]
+        },
+        {
+          "text": "Nach 1933 wurde die Haftanstalt Teil der politischen NS-Justiz und zeitweise als provisorisches Schutzhaftlager genutzt. Ab Mitte der 1930er Jahre war sie Zuchthaus. Neben deutschen politischen Gefangenen waren während des Krieges zunehmend Kriegsgefangene und Zwangsarbeiter aus zahlreichen Ländern inhaftiert.",
+          "tags": ["ns", "verfolgung"]
+        },
+        {
+          "text": "Von Herbst 1942 bis April 1945 diente ein Gebäudeteil als Hinrichtungsstätte der NS-Justiz. Dort wurden Todesurteile an insgesamt 549 Menschen aus 15 europäischen Ländern und Tunesien vollstreckt. Diese Zahl und die internationale Herkunft der Opfer machen die Dimension des Ortes deutlich.",
+          "tags": ["ns", "hinrichtungsstatte", "opfer"]
+        },
+        {
+          "text": "Amerikanische Truppen befreiten die Insassen im April 1945. Ab Sommer 1945 nutzte die sowjetische Besatzungsmacht die Anstalt als Untersuchungs- und Durchgangsgefängnis. Sowjetische Militärtribunale verhängten in Schnellverfahren Haft-, Lager- und Todesstrafen; viele Verurteilte wurden in Speziallager deportiert.",
+          "tags": ["sowjetische_besatzung", "verfolgung"]
+        },
+        {
+          "text": "Von 1950 bis 1989 nutzte das Ministerium für Staatssicherheit einen Teil der Anlage als Untersuchungshaftanstalt. Andere Bereiche unterstanden dem DDR-Strafvollzug, seit 1954 insbesondere als Einrichtung für Frauen. Politisch Verfolgte waren damit in unterschiedlichen Haftsystemen am selben Ort betroffen.",
+          "tags": ["ddr", "stasi", "haft"]
+        },
+        {
+          "text": "Das ehemalige NS-Hinrichtungsgebäude wurde vom MfS zum Vernehmergebäude umgebaut. Gerade diese Doppelnutzung prägt die Gedenkstätte: In denselben Räumen überlagern sich Spuren zweier Diktaturen. Denkmalpflege und Ausstellung müssen beide Zeitschichten sichtbar machen, ohne sie gleichzusetzen.",
+          "tags": ["erinnerungskultur", "architektur"]
+        },
+        {
+          "text": "Die Gedenkstätte eröffnete 1996. Seit 2006 informieren zwei Dauerausstellungen über politische Justiz von 1933 bis 1945 sowie von 1945 bis 1989. Forschung, pädagogische Projekte, individuelle Trauer und Gedenken gehören ausdrücklich zum Auftrag des Hauses.",
+          "tags": ["gedenkstatte", "bildung"]
+        },
+        {
+          "text": "Visuell: Der Erinnerungsort ist Teil eines massiven historischen Gefängniskomplexes. Der Gedenkstättenzugang muss vom weiterhin genutzten Justizvollzugsbereich unterschieden werden. Zur Orientierung sind offizielle Beschilderung und die Besucherhinweise der Stiftung maßgeblich.",
+          "tags": ["visuell", "wegweiser", "sensibel"]
+        },
+        {
+          "text": "LIVE: Öffnungstage, Sicherheitsregeln, Gruppenanmeldung, pädagogische Angebote und Zugänglichkeit auf der Seite der Stiftung Gedenkstätten Sachsen-Anhalt prüfen. Am Ort ist eine sachliche, opferzentrierte Vermittlung ohne Dramatisierung oder Unterhaltungston erforderlich.",
+          "tags": ["live_hint", "ephemeral", "sensibel"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Warum ist der Ort für mehrere Diktaturgeschichten wichtig?",
+          "a": "Die Anlage diente der NS-Justiz als Zuchthaus und Hinrichtungsstätte, danach sowjetischen Behörden und von 1950 bis 1989 teilweise dem MfS als Untersuchungshaftanstalt."
+        },
+        {
+          "q": "Ist das ganze Gefängnis ein Museum?",
+          "a": "Nein. Die Gedenkstätte befindet sich in einem historischen Teilkomplex; andere Bereiche gehören weiterhin zur Justizvollzugsanstalt."
+        }
+      ]
+    },
+    {
+      "id": "halle_saale_archaologisches_museum",
+      "name": "Archäologisches Museum der Martin-Luther-Universität",
+      "general_info": "Das Archäologische Museum im Robertinum ist seit dem 19. Jahrhundert zugleich universitäre Lehrsammlung und öffentliches Museum. Originale antiker Kleinkunst, Münzen, Papyri und Gipsabgüsse vermitteln Kulturen Griechenlands, Roms und Ägyptens.",
+      "deep_data_pool": [
+        {
+          "text": "Mit der Einrichtung des Lehrstuhls für Klassische Archäologie 1845 begann der kontinuierliche Aufbau einer Abguss- und Antikensammlung. Professoren wie Ludwig Ross, Alexander Conze und Heinrich Heydemann erweiterten den Bestand durch Ankäufe und Schenkungen. Von Anfang an diente er sowohl dem Studium als auch der Öffentlichkeit.",
+          "tags": ["geschichte", "universitat"]
+        },
+        {
+          "text": "Anfangs war die Sammlung im Erdgeschoss der damaligen Universitätsbibliothek am heutigen Friedemann-Bach-Platz untergebracht. Die Räume galten als eng, dunkel und ungeeignet. Nach langen Planungen entstand zwischen 1889 und 1891 am Universitätsplatz ein eigenes repräsentatives Museumsgebäude.",
+          "tags": ["baugeschichte", "museum"]
+        },
+        {
+          "text": "Der Bau wurde am 9. Dezember 1891 eröffnet. Er nahm neben den archäologischen Sammlungen, Handbibliothek und Auditorium auch das Kunsthistorische Institut mit Kupferstichkabinett auf. Nach dem Tod des langjährigen Direktors Carl Robert erhielt das Gebäude 1922 zu seinen Ehren den Namen Robertinum.",
+          "tags": ["architektur", "carl_robert"]
+        },
+        {
+          "text": "Die Bestände gliedern sich in vier Bereiche: antike Originale, Münzen, Gipsabgüsse und Nachbildungen sowie Papyri und andere Schriftzeugnisse. Die Ausstellung kombiniert Vasen, Terrakotten, Kleinbronzen, Fragmente von Grab- und Votivplastik, Fresken und Mosaiken mit großformatigen Reproduktionen.",
+          "tags": ["sammlung", "antike"]
+        },
+        {
+          "text": "Gipsabgüsse bedeutender Skulpturen waren im 19. Jahrhundert zentrale Lehrmittel. Sie erlaubten Studierenden, räumliche Form, Proportion und Stil berühmter Werke zu vergleichen, ohne zu den Originalen reisen zu müssen. Im Museum stehen Kopie und Original deshalb nicht gegeneinander, sondern erfüllen unterschiedliche Forschungs- und Vermittlungsaufgaben.",
+          "tags": ["lehre", "abguss"]
+        },
+        {
+          "text": "Aquarellreproduktionen pompejanischer Wandgemälde und galvanoplastische Nachbildungen von Münzen und Goldgefäßen ergänzen die Originale. Solche historischen Reproduktionstechniken zeigen zugleich, wie Archäologie vor digitaler Fotografie Wissen dokumentierte und in Seminaren verfügbar machte.",
+          "tags": ["methoden", "reproduktion"]
+        },
+        {
+          "text": "Carl Robert leitete das Museum in einer wichtigen Wachstumsphase und gewann kunstsinnige Förderer, darunter den Bankier Heinrich Lehmann. Seine Verdienste lagen nicht nur im Sammeln, sondern auch darin, das Haus als Forschungs- und Lehrmuseum dauerhaft in den Universitätsbetrieb einzubinden.",
+          "tags": ["museumsgeschichte", "forschung"]
+        },
+        {
+          "text": "Visuell: Das Robertinum steht am Universitätsplatz 12. Der helle, repräsentative Bau besitzt eine Freitreppe, einen betonten Mittelteil mit hohen Fenstern und ein klassisch wirkendes Giebelfeld. Im Inneren prägen die dicht aufgestellten hellen Gipsabgüsse den unmittelbaren Raumeindruck.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "LIVE: Die regulären Besuchszeiten sind eingeschränkt und können sich mit Lehrbetrieb, Semester und Sonderausstellungen ändern. Öffnung und Führungen deshalb stets über archaeologischesmuseum.uni-halle.de oder den Museumsverband Sachsen-Anhalt aktuell prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Warum stehen dort so viele Gipsabgüsse?",
+          "a": "Sie wurden als dreidimensionale Lehrmittel angeschafft, damit Studierende bedeutende antike Skulpturen direkt vergleichen konnten."
+        },
+        {
+          "q": "Ist das Museum nur für Studierende?",
+          "a": "Nein. Es ist in den Lehrbetrieb integriert, besitzt aber seit seiner Gründung zugleich den Charakter eines öffentlichen Museums."
+        }
+      ]
+    },
+    {
+      "id": "halle_saale_rechenwerk_computer_technikmuseum_halle",
+      "name": "Rechenwerk Computer- & Technikmuseum Halle",
+      "general_info": "Das ehrenamtlich geführte Rechenwerk bewahrt Rechen-, Automatisierungs- und Elektroniktechnik mit Schwerpunkt DDR. In einer ehemaligen Kaufhalle stehen mechanische Maschinen, Großrechner, Fernschreiber, Automaten und restaurierte Geräte dicht nebeneinander.",
+      "deep_data_pool": [
+        {
+          "text": "Die Sammlung geht auf die Digital Computer- und Elektronik Arbeitsgemeinschaft Halle zurück, die seit 1996 historische DDR-Computertechnik sammelt und erforscht. Aus einzelnen Geräten und Dokumentationen entwickelte sich ein Bestand, der bald mehr als nur einen Raum benötigte.",
+          "tags": ["sammlungsgeschichte", "ddr"]
+        },
+        {
+          "text": "Ab 2005 arbeitete die Gruppe mit dem Deutschen Chemiemuseum Merseburg zusammen und nutzte dort Räume. Als deren Zukunft unsicher wurde und ein Magazinbau vom Abriss bedroht war, suchten die Beteiligten ab 2012 einen neuen Standort im Raum Halle/Leipzig.",
+          "tags": ["museumsgeschichte", "merseburg"]
+        },
+        {
+          "text": "2013 fand die Gruppe eine ehemalige Kaufhalle beziehungsweise einen früheren Getränkemarkt in Halle. Der ebenerdige Boden und ein Rolltor waren für schwere Großrechnerkomponenten entscheidend. 2014 wurden Geräte transportiert, Elektrik und Räume angepasst und ein historischer Rechenzentrums-Doppelboden rekonstruiert.",
+          "tags": ["architektur", "technik"]
+        },
+        {
+          "text": "Die offizielle Einweihung fand am 1. November 2014 statt. Das private Museum wird ehrenamtlich getragen. Seine Aufgabe ist nicht nur Aufbewahrung: Geräte werden dokumentiert, repariert und soweit möglich funktionsfähig gehalten, damit technische Abläufe nachvollziehbar bleiben.",
+          "tags": ["museum", "ehrenamt"]
+        },
+        {
+          "text": "Die Sammlung umfasst nach Berichten mehr als 2.000 Objekte. Dazu gehören Schreib- und Rechenmaschinen, mechanische Rechengeräte, Großrechner, Taschenrechner, Spielautomaten, Fernschreiber, Telefone, Buchungs- und Abrechnungsautomaten sowie Module und Fragmente industrieller Anlagen.",
+          "tags": ["sammlung", "computer"]
+        },
+        {
+          "text": "Der zeitliche Schwerpunkt liegt auf ostdeutscher Technik bis etwa 1990, doch ältere mechanische Geräte reichen bis ins frühe 20. Jahrhundert. Westliche Heimcomputer können als Vergleich dienen. Dadurch erzählt das Museum nicht nur Modellgeschichte, sondern unterschiedliche Bedingungen von Produktion, Import, Nutzung und Improvisation.",
+          "tags": ["technikgeschichte", "vergleich"]
+        },
+        {
+          "text": "Zu den restaurierten Geräten zählt der DDR-Spielautomat Poly-Play. Seine Wiederinbetriebnahme zeigt exemplarisch, wie zeitaufwendig Ersatzteilfertigung, Fehlersuche und Softwarekenntnis bei historischer Elektronik sind. Funktionsvorführungen hängen vom Erhaltungszustand und anwesenden Fachleuten ab.",
+          "tags": ["restaurierung", "spielautomat"]
+        },
+        {
+          "text": "Visuell: Das Museum liegt in einem flachen ehemaligen Verkaufsgebäude in der Saalfelder Straße. Innen erinnert die dichte Aufstellung schwerer Schränke, Bedienpulte und Maschinen eher an Werkstatt, Depot und Rechenzentrum als an eine klassisch inszenierte Museumsgalerie.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "LIVE: Besuchszeiten, Führungen, Vorführungen und Kontakt vorab über die Digital AG beziehungsweise die aktuelle Museumspräsenz prüfen. Ehrenamtlicher Betrieb und Restaurierungsarbeit führen dazu, dass nicht jedes Gerät jederzeit zugänglich oder betriebsbereit ist.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Was ist der Schwerpunkt des Rechenwerks?",
+          "a": "Rechen-, Automatisierungs- und Elektroniktechnik der DDR, ergänzt um ältere mechanische Geräte und Vergleichsstücke."
+        },
+        {
+          "q": "Funktionieren die alten Computer noch?",
+          "a": "Ein Teil wird ehrenamtlich restauriert und vorführbar gehalten; welche Geräte aktuell laufen, muss live erfragt werden."
+        }
+      ]
+    },
+    {
+      "id": "halle_saale_historisches_technikzentrum_der_stadtwerke_halle",
+      "name": "Historisches Technikzentrum der Stadtwerke Halle",
+      "general_info": "Im denkmalgeschützten Umspannwerk Turmstraße von 1928 zeigt das Technikzentrum, wie Halle mit Strom, Gas, Wasser, Abwasser und Nahverkehr versorgt wurde. Historische Geräte treffen auf Entdeckerstation, Wasserwerkstatt und Messlabor.",
+      "deep_data_pool": [
+        {
+          "text": "Das Gebäude wurde 1928 als Umspann- und Umformwerk errichtet. Planung und Projektierung lagen beim halleschen Stadtbaurat Wilhelm Jost. Es war neben Anlagen am Stadtpark und in der Klosterstraße die dritte Einrichtung dieser Art in Halle.",
+          "tags": ["baugeschichte", "energie"]
+        },
+        {
+          "text": "Der langgestreckte Bau ist etwa 40 Meter lang und 13 Meter breit und gliedert sich in Teilkomplexe mit jeweils drei Ebenen. Backstein, technische Tore und die klare Zweckarchitektur machen die frühere Funktion als Teil der kommunalen Strominfrastruktur ablesbar.",
+          "tags": ["architektur", "visuell"]
+        },
+        {
+          "text": "Parallel zum Bau des Kraftwerks Dieselstraße wurde das Schalthaus Turmstraße Anfang der 1970er Jahre modernisiert. Mit der Umgestaltung des Mittelspannungsnetzes wurden die technischen Anlagen 2010 außer Betrieb genommen. Seit 2012 beherbergt das denkmalgeschützte Gebäude die historische Ausstellung.",
+          "tags": ["technikgeschichte", "umnutzung"]
+        },
+        {
+          "text": "Die Ausstellung erklärt die kommunale Versorgung der vergangenen Jahrzehnte. Zu sehen sind elektrische Mess- und Prüfgeräte, Wechselstrom- und Münzgaszähler sowie Objekte aus Wasser, Abwasser, Entsorgung und Nahverkehr. Der Blick gilt den technischen Hilfsmitteln hinter alltäglichen Dienstleistungen.",
+          "tags": ["ausstellung", "stadtwerke"]
+        },
+        {
+          "text": "Die beteiligten Stadtwerke-Sparten erzählen eigene Geschichten: Die EVH steht für Energie und Messung, die HAVAG für Nahverkehr und Durchsagen, die Wasser- und Stadtwirtschaft für Kanalreinigung und Versorgung. Auch Halles frühere und heutige Schwimm- und Freibäder werden gegenübergestellt.",
+          "tags": ["stadtgeschichte", "infrastruktur"]
+        },
+        {
+          "text": "Zwölf Mitmachstationen übersetzen abstrakte Energiefragen in körperliche Erfahrung, etwa wenn Muskelkraft Licht erzeugt oder eine Handkurbel ein Gerät lädt. Die Wasserwerkstatt behandelt Trinkwasser, Härte, Geschmack, Förderung und Geräusche; das Messlabor widmet sich Größen wie Länge, Gewicht, Wärme, Bewegung, Licht und Druck.",
+          "tags": ["bildung", "interaktiv"]
+        },
+        {
+          "text": "Das Zentrum ist vor allem außerschulischer Lernort. Historische Ausstellung und Experimente verbinden Technikgeschichte mit heutiger Energie-, Umwelt-, Mobilitäts- und Wasserbildung. Das Gebäude selbst ist dabei das größte Exponat, weil seine frühere Netzfunktion räumlich erhalten bleibt.",
+          "tags": ["bildung", "denkmal"]
+        },
+        {
+          "text": "Visuell: Der Zugang liegt an der Lauchstädter Straße 14 c/d über die Turmstraße am Lutherplatz. Der kompakte Industriekomplex aus Backstein mit großen grünen Toren unterscheidet sich deutlich von Wohnbebauung und modernen Schulungsräumen.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "LIVE: Das Zentrum ist kein täglich geöffnetes Museum. Schulklassen buchen Module, die Öffentlichkeit erhält Zugang bei ausgewählten Terminen. Anmeldung, Öffnung, Altersvorgaben, verfügbare Stationen und Veranstaltungen stets über swh.de aktuell prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Was war das Gebäude ursprünglich?",
+          "a": "Ein 1928 erbautes Umspann- und Umformwerk für die hallesche Stromversorgung."
+        },
+        {
+          "q": "Kann man das Technikzentrum jederzeit besuchen?",
+          "a": "Nein. Es ist vor allem ein buchbarer Lernort und öffnet öffentlich zu ausgewählten Terminen; aktuelle Angaben müssen live geprüft werden."
+        }
+      ]
+    },
+    {
+      "id": "halle_saale_db_museum_halle_saale",
+      "name": "DB Museum Halle (Saale)",
+      "general_info": "Der Außenstandort des DB Museums zeigt im historischen Ringlokschuppen IV vor allem Lokomotiven der Deutschen Reichsbahn. Bahnbetriebswerk, Drehscheibe und die frühere Lokversuchsanstalt machen den Standort selbst zum zentralen Exponat.",
+      "deep_data_pool": [
+        {
+          "text": "Das Museum ist seit 2003 Außenstandort des DB Museums. Es befindet sich im Lokschuppen IV des ehemaligen Bahnbetriebswerks Halle P. Erste Anlagen des Bahnbetriebswerks entstanden 1863; der heute museal genutzte Ringlokschuppen wurde ab 1895 errichtet.",
+          "tags": ["geschichte", "eisenbahn"]
+        },
+        {
+          "text": "Der Schuppen besaß zunächst neun Lokstände. 1908 kamen acht längere Stände mit Arbeitsgruben hinzu, weil Lokomotiven größer wurden. So konnten auch Maschinen wie die preußische P 10, später Baureihe 39, eingestellt und gewartet werden.",
+          "tags": ["architektur", "bahnbetrieb"]
+        },
+        {
+          "text": "Zu den historisch hier stationierten Baureihen gehörten 01, 03 und 39 sowie ab Ende der 1930er Jahre Stromlinienlokomotiven der Baureihe 01.10. Später prägten Diesellokomotiven das Bild. Der Ringlokschuppen dokumentiert damit mehrere technische Epochen der Traktion.",
+          "tags": ["lokomotiven", "technikgeschichte"]
+        },
+        {
+          "text": "1951 übernahm die Lokversuchsanstalt Halle, VES-M, das Gelände und erprobte neue Lokomotivtechnik. Zu den am Standort getesteten Fahrzeugen gehörten die Elektrolokomotive E 18 31 und die sowjetische Großdiesellok 130 101; beide befinden sich im Bestand des DB Museums.",
+          "tags": ["forschung", "ves_m"]
+        },
+        {
+          "text": "Die Dauerausstellung konzentriert sich auf Baureihen der Deutschen Reichsbahn in der DDR sowie regionale Eisenbahngeschichte. Neben rund 15 Originallokomotiven gehören Signal- und Fahrzeugtechnik, Bedienelemente, Relais und weitere Objekte zur technischen Erzählung.",
+          "tags": ["sammlung", "ddr"]
+        },
+        {
+          "text": "Die historische Drehscheibe verbindet die radialen Gleise des Ringlokschuppens. Ihre Brücke wurde 1929 von der Maschinenfabrik Windhoff gebaut und 1987 rekonstruiert; sie ist 23 Meter lang. Drehscheibe und Schuppen erklären unmittelbar die Arbeitslogik eines Bahnbetriebswerks.",
+          "tags": ["drehscheibe", "architektur"]
+        },
+        {
+          "text": "Ende 2025 war zunächst eine Umwandlung in ein nicht öffentliches Depot vorgesehen. Nach Gesprächen wurde der Museumsbetrieb am 18. April 2026 wieder aufgenommen. Dieser aktuelle Status ist belegt, bleibt für spätere Pack-Nutzung aber veränderlich und gehört deshalb in die LIVE-Prüfung.",
+          "tags": ["museumsgeschichte", "live_hint"]
+        },
+        {
+          "text": "Visuell: Der Besuchszugang liegt an der Berliner Straße 241. Charakteristisch sind der halbkreisförmige Ringlokschuppen, die fächerförmig zulaufenden Gleise und die zentrale Drehscheibe. Die großen Fahrzeuge stehen in ihrem historischen Funktionsraum statt in einer neutralen Halle.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "LIVE: Öffnungssaison, Besuchstage, Eintritt, Fahrzeugliste, zugängliche Führerstände und Modellbahnbetrieb über dbmuseum.de/halle prüfen. Der Standort war zuletzt samstags geöffnet, doch solche Angaben dürfen nicht dauerhaft gespeichert vorgelesen werden.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Warum steht das Museum in einem Ringlokschuppen?",
+          "a": "Der Schuppen gehörte zum Bahnbetriebswerk Halle P; über die zentrale Drehscheibe wurden Lokomotiven auf die radialen Wartungsstände verteilt."
+        },
+        {
+          "q": "Was ist der Sammlungsschwerpunkt?",
+          "a": "Lokomotiven und Technik der Deutschen Reichsbahn in der DDR sowie regionale Eisenbahngeschichte und die Lokversuchsanstalt Halle."
+        }
+      ]
+    },
+    {
+      "id": "halle_saale_historisches_strassenbahndepot_hallesche_strassenbahnfreunde_e_v",
+      "name": "Historisches Straßenbahndepot",
+      "general_info": "Im 1899 eröffneten Betriebshof bewahren die Halleschen Straßenbahnfreunde historische Triebwagen, Busse und Arbeitsfahrzeuge aus Halle und Umgebung. Die neungleisige Wagenhalle ist eines der wichtigsten erhaltenen Zeugnisse der frühen elektrischen Straßenbahn.",
+      "deep_data_pool": [
+        {
+          "text": "Das Depot in der Seebener Straße wurde 1899 eingeweiht, nachdem Halles Straßenbahnnetz ab 1891 elektrifiziert worden war. Die Wagenhalle entstand zunächst mit sechs Gleisen und wurde später um drei Gleise erweitert. Gelbe und rote Ziegel prägen die gründerzeitliche Zweckarchitektur.",
+          "tags": ["geschichte", "architektur"]
+        },
+        {
+          "text": "1902 umfasste der Wagenpark der halleschen Straßenbahn bereits 34 Triebwagen und 19 Beiwagen. Mit dem wachsenden Netz entstand 1928 ein größerer Betriebshof in der Freiimfelder Straße. Das Depot Seebener Straße blieb jedoch bis etwa 1968 als Abstellanlage in Nutzung.",
+          "tags": ["nahverkehr", "betriebshof"]
+        },
+        {
+          "text": "Nach dem regulären Betrieb wurden ältere Fahrzeuge in der Seebener Straße untergestellt. 1974 retteten fünf Enthusiasten den Triebwagen 78 der Merseburger Überlandbahnen AG von 1912 vor der Verschrottung. Diese Rettungsaktion wurde zum Ausgangspunkt der organisierten Sammlung.",
+          "tags": ["sammlungsgeschichte", "ehrenamt"]
+        },
+        {
+          "text": "1977 entstand im Modelleisenbahnverband der DDR die Arbeitsgemeinschaft „Historische Straßenbahnen“. 1979 bezog sie Räume im Depot. 1990 ging daraus der Verein Hallesche Straßenbahnfreunde hervor; 1996 öffnete das Depot offiziell als Straßenbahnmuseum.",
+          "tags": ["verein", "ddr", "museum"]
+        },
+        {
+          "text": "Die Sammlung umfasst über 40 Straßen- und andere Fahrzeuge, darunter Trieb- und Beiwagen, Omnibusse, Lastkraftwagen und Arbeitsfahrzeuge. Ein Teil ist betriebsfähig oder wurde wieder fahrfähig gemacht. Hinzu kommen Fotos, Pläne, Zeichnungen, Dokumente und Gegenstände des städtischen Nahverkehrs.",
+          "tags": ["sammlung", "fahrzeuge"]
+        },
+        {
+          "text": "Das Vereinsziel reicht über Halle hinaus in den Raum Merseburg und Bad Dürrenberg. Die Überlandbahn und Fahrzeuge benachbarter Betriebe zeigen, dass Nahverkehrsgeschichte nicht an heutigen Stadtgrenzen endet, sondern Arbeitswege, Industrieorte und regionale Netze verbindet.",
+          "tags": ["region", "quer"]
+        },
+        {
+          "text": "Visuell: Das Museum liegt in der Seebener Straße 191 nahe der Burg Giebichenstein. Die langgestreckte neungleisige Backsteinhalle, große Einfahrtstore und im Pflaster sichtbare Gleise kennzeichnen den historischen Betriebshof. Der Zugang befindet sich im weiterhin werkstattartig wirkenden Depotensemble.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Historische Sonderfahrten machen erhaltene Fahrzeuge außerhalb des Depots im heutigen Stadtraum erlebbar. Ob und welche Wagen verkehren, hängt von Terminen, Wartung und Personal ab. Gerade die ehrenamtliche Instandsetzung ist ein wesentlicher Teil des Museums, nicht nur Arbeit hinter den Kulissen.",
+          "tags": ["aktivitat", "restaurierung"]
+        },
+        {
+          "text": "LIVE: Saison, Öffnungstage, Eintritt, Führungen, Rundfahrten und Fahrzeugvermietung ausschließlich über hsf-ev.de beziehungsweise HAVAG aktuell prüfen. Das Museum ist nicht täglich geöffnet; Sonderfahrten können ausgebucht sein oder technisch geändert werden.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Seit wann gibt es das Depot?",
+          "a": "Es wurde 1899 als Betriebshof eröffnet und 1996 offiziell zum Straßenbahnmuseum."
+        },
+        {
+          "q": "Fahren einige Museumsbahnen noch?",
+          "a": "Ja, ein Teil ist betriebsfähig und wird bei Sonderfahrten eingesetzt; aktuelle Termine und Fahrzeuge müssen live geprüft werden."
+        }
+      ]
+    },
+    {
+      "id": "halle_saale_museum_fur_haustierkunde_julius_kuhn",
+      "name": "Museum für Haustierkunde Julius Kühn",
+      "general_info": "Das Universitätsmuseum geht auf Julius Kühns Haustiergarten und die Anfänge des akademischen Landwirtschaftsstudiums in Halle zurück. Skelette, Präparate, Modelle und historische Fotografien dokumentieren Züchtung, Nutztiervielfalt und verlorene Rassen.",
+      "deep_data_pool": [
+        {
+          "text": "Julius Kühn wurde 1862 als erster Professor für Landwirtschaft in Deutschland nach Halle berufen und begründete ein Landwirtschaftliches Institut. Der ab 1864 aufgebaute Haustiergarten war eine frühe öffentliche Lehr- und Versuchsstätte für systematische tierzüchterische Forschung.",
+          "tags": ["geschichte", "landwirtschaft"]
+        },
+        {
+          "text": "Im Haustiergarten wurden Nutztiere und ihre wilden Verwandten gehalten, erforscht, beschrieben, gemalt und fotografiert. Viele Tiere blieben nach ihrem Tod als Skelette oder Präparate erhalten. So entstand aus laufender Lehre und Forschung eine außergewöhnliche Langzeitdokumentation der Haustierzucht.",
+          "tags": ["forschung", "sammlung"]
+        },
+        {
+          "text": "1939 wurde ein Haustiermuseum öffentlich zugänglich, 1953 jedoch geschlossen. Das heutige Museum eröffnete 1988 in einem ehemaligen Stallgebäude. Der denkmalgeschützte Bau auf dem heutigen Steintor-Campus erinnert räumlich an den Gründungsstandort der halleschen Landwirtschaftswissenschaft.",
+          "tags": ["museumsgeschichte", "architektur"]
+        },
+        {
+          "text": "Die Forschungssammlung gilt in ihrem Themenfeld als weltweit einzigartig. Genannt werden mehr als 2.000 Schafe, 800 Rinder und 400 Schweine innerhalb der umfangreichen Skelettbestände. Nur ein kleiner Teil ist im Museum ausgestellt; große Bereiche werden wissenschaftlich magaziniert.",
+          "tags": ["sammlung", "biodiversitat"]
+        },
+        {
+          "text": "Ein Fotoarchiv mit rund 12.000 historischen Fotoglasplatten und Großdias dokumentiert Versuchstiere teils über mehrere Generationen. Diese Serien machen Veränderungen durch Züchtung nachvollziehbar und sind deshalb mehr als Illustrationen: Sie bilden Forschungsdaten aus der Frühzeit systematischer Tierzucht.",
+          "tags": ["fotografie", "forschung"]
+        },
+        {
+          "text": "Zu den besonderen Objekten gehört ein anatomisches Pferdemodell aus Pappmaché des französischen Modellbauers Louis Auzoux. Zusammen mit den historischen Fotoglasplatten wurde es als national wertvolles Kulturgut eingetragen. Das Modell diente der anschaulichen anatomischen Lehre.",
+          "tags": ["exponat", "kulturgut"]
+        },
+        {
+          "text": "Die Bestände bewahren Nachweise ausgestorbener oder gefährdeter Zuchtrassen, darunter Rotes Höhenvieh, Angler Rind, Leine- und Karakulschafe sowie mehrere historische Schweinerassen. Damit dokumentiert die Sammlung, wie stark menschliche Auswahl die Biodiversität von Haustieren formte.",
+          "tags": ["zuchtung", "biodiversitat"]
+        },
+        {
+          "text": "Seit 2009 betreut das Zentralmagazin Naturwissenschaftlicher Sammlungen den großen Forschungsbestand in Kooperation mit dem Fachinstitut. Die Sammlung wird weiterhin von Forschenden genutzt und verbindet Wissenschaftsgeschichte mit heutigen Fragen zu Genetik, Archäozoologie und Erhalt alter Rassen.",
+          "tags": ["forschung", "universitat"]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Führungen und aktuell zugängliche Ausstellungsteile über die Martin-Luther-Universität prüfen. Museum und wissenschaftliches Magazin sind nicht identisch; große Sammlungsteile sind nicht regulär öffentlich zugänglich.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Warum sammelt ein Museum so viele Haustierskelette?",
+          "a": "Sie dokumentieren Körperbau, Zuchtreihen und Veränderungen über Generationen und dienen bis heute wissenschaftlichen Vergleichen."
+        },
+        {
+          "q": "Ist die gesamte Sammlung ausgestellt?",
+          "a": "Nein. Das Museum zeigt nur einen kleinen Ausschnitt; der größte Teil wird als universitäre Forschungssammlung magaziniert."
+        }
+      ]
+    },
+    {
+      "id": "halle_saale_stadtgottesacker",
+      "name": "Stadtgottesacker",
+      "general_info": "Der ab 1557 gestaltete Stadtgottesacker ist eine außergewöhnliche Renaissance-Friedhofsanlage nach dem Vorbild italienischer Camposanti. 94 mit Reliefs und Inschriften geschmückte Schwibbögen umschließen einen stillen Innenraum vor der früheren Stadtmauer.",
+      "deep_data_pool": [
+        {
+          "text": "Das Gelände auf dem Martinsberg wurde schon seit dem 14. Jahrhundert bei Pestepidemien für Massenbestattungen genutzt. Auf Veranlassung Kardinal Albrechts sollten innerstädtische Begräbnisplätze aufgegeben werden. Der neue Gottesacker außerhalb der damaligen Mauern wurde 1529 geweiht.",
+          "tags": ["geschichte", "friedhof"]
+        },
+        {
+          "text": "Ab 1557 entwarf und leitete Ratsbaumeister und Steinmetz Nickel Hoffmann die architektonische Gestaltung. In mehr als drei Jahrzehnten entstanden 94 nach innen geöffnete Schwibbögen. Die Anlage orientiert sich an italienischen Camposanto-Vorbildern und gilt als Meisterwerk der Renaissance nördlich der Alpen.",
+          "tags": ["renaissance", "architektur"]
+        },
+        {
+          "text": "Die Arkaden bildeten tiefe Grabnischen und Grüfte. Särge standen ursprünglich sichtbar hinter kunstvoll geschmiedeten Eisen- oder Holzgittern. Ab 1862 wurden viele Grüfte aus hygienischen Gründen mit Erde verfüllt. Reliefs, Ranken, Putten, Bibelzitate und Wappen machen die Bögen zu steinernen Geschichtsquellen.",
+          "tags": ["bestattungskultur", "kunst"]
+        },
+        {
+          "text": "Der Stadtgottesacker bildet ein unregelmäßiges Viereck und wird von fünf bis sechs Meter hohen Mauern umschlossen. Von außen wirkt er mit Bastionen und Schießscharten fast wie ein Kastell, weil die Anlage zugleich in die Stadtverteidigung einbezogen war. Innen öffnet sich überraschend ein weiter, ruhiger Raum.",
+          "tags": ["architektur", "visuell"]
+        },
+        {
+          "text": "Der westliche Zugang erhielt 1590 einen Torturm. Über dem inneren Torbogen befindet sich heute eine Kopie des Reliefporträts von Nickel Hoffmann; das Original wird im Stadtmuseum bewahrt. Dieser direkte Bezug macht den Baumeister am eigenen Werk sichtbar.",
+          "tags": ["torturm", "nickel_hoffmann"]
+        },
+        {
+          "text": "Der Friedhof wurde besonders für Halles städtische Oberschicht zum bevorzugten Begräbnisort. Hier ruhen unter anderem die Eltern Georg Friedrich Händels, der Pietist August Hermann Francke, Wissenschaftler, Professoren, Industrielle, Beamte und Offiziere. Die Gräber lesen sich wie ein Archiv der Stadtgesellschaft.",
+          "tags": ["personlichkeiten", "stadtgeschichte"]
+        },
+        {
+          "text": "Luftangriffe 1945 beschädigten die Anlage schwer; in der DDR setzte sich der Verfall fort. Eine Bürgerinitiative engagierte sich ab 1985 für den Erhalt, seit 1990 trieb die Bauhütte Stadtgottesacker mit Spenden die Wiederherstellung voran. Fehlende Bögen wurden in zeitgenössischer Form neu geschaffen.",
+          "tags": ["zerstorung", "rekonstruktion"]
+        },
+        {
+          "text": "Visuell: Der Haupteingang liegt am Torturm. Außen dominieren hohe Mauern, rote Dächer und wehrhafte Details; innen ziehen sich helle Sandsteinarkaden mit Gittern und Inschriften um die große Grünfläche. Die Spannung zwischen abweisender Hülle und offenem Innenhof ist das stärkste räumliche Merkmal.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "LIVE: Zugangszeiten, aktuelle Beisetzungen, Führungen, gesperrte Bereiche und denkmalpflegerische Arbeiten über die Stadt Halle prüfen. Der Stadtgottesacker ist weiterhin ein Friedhof; ruhiges, respektvolles Verhalten hat Vorrang vor touristischer Inszenierung.",
+          "tags": ["live_hint", "ephemeral", "sensibel"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Warum sieht der Friedhof von außen wie eine Festung aus?",
+          "a": "Die hohen Mauern, Bastionen und Schießscharten banden die außerhalb der alten Stadt gelegene Anlage auch in die Verteidigung ein."
+        },
+        {
+          "q": "Was sind die 94 Schwibbögen?",
+          "a": "Renaissance-Arkaden mit tiefen Grabnischen und Grüften, reich geschmückt mit Reliefs, Inschriften und Gittern."
+        },
+        {
+          "q": "Ist der Stadtgottesacker nur ein Denkmal?",
+          "a": "Nein. Er ist ein historischer und weiterhin genutzter Friedhof; aktuelle Zugangs- und Nutzungsregeln müssen live geprüft werden."
+        }
+      ]
+    }
+  ]
+}

@@ -3,7 +3,7 @@
  */
 
 import type { PoiHookKind } from './fastHook';
-import { useSessionPlanStore } from '../../store/useSessionPlanStore';
+import { useFuturePlanStore } from '../../module2/timeline/futurePlanState';
 import { useShoppingTaskStore } from '../../store/useShoppingTaskStore';
 
 export type VisitedPlaceMemory = {
@@ -20,6 +20,11 @@ export type VisitedPlaceMemory = {
   /** Gespeicherte Position — Stempel bleiben sichtbar auch wenn Pack-POI-IDs wechseln. */
   lat?: number | null;
   lng?: number | null;
+  /**
+   * Stadt beim Stempel (profile.cityId) — Explore-Progress & Passport
+   * bleiben beim Stadtwechsel getrennt und restaurierbar.
+   */
+  cityId?: string | null;
 };
 
 export type SessionMemory = {
@@ -72,36 +77,24 @@ function formatClockLocal(ms: number): string {
 }
 
 /**
- * Holistic day context for every Gemini turn: open deadlines + errands.
- * Chat history is passed separately as message list (full session).
+ * Holistic day context for every Gemini turn: Timeline + offene Tasks.
+ * Gelöschtes/Erledigtes gehört nicht hierher — sonst belebt die KI Ghosts.
  */
 export function formatHolisticDayContextForPrompt(): string {
-  const plan =
-    useSessionPlanStore.getState().getActivePlan() ??
-    useSessionPlanStore.getState().plan;
+  const future = useFuturePlanStore.getState().plan;
   const tasks = useShoppingTaskStore.getState().getOpenTasks();
 
   const lines: string[] = [];
 
-  if (plan?.active) {
-    if (plan.leaveByMs != null) {
-      lines.push(
-        `- Leave-by / Puffer: spätestens ${formatClockLocal(plan.leaveByMs)} los (Buffer ${plan.bufferMinutes} Min)`,
-      );
-    }
-    for (const stop of plan.stops.filter((s) => !s.done)) {
+  if (future?.stops?.length) {
+    for (const stop of future.stops.filter(
+      (s) => s.status !== 'done' && s.kind !== 'nav_leg',
+    )) {
       const when =
-        stop.arriveByMs != null
-          ? ` bis ${formatClockLocal(stop.arriveByMs)}`
+        stop.plannedStartMs != null
+          ? ` bis ${formatClockLocal(stop.plannedStartMs)}`
           : '';
-      const items =
-        stop.items.length > 0 ? ` · Items: ${stop.items.join(', ')}` : '';
-      lines.push(`- Stop „${stop.label}“ (${stop.kind})${when}${items}`);
-    }
-    if (plan.boostPlaceTypes.length) {
-      lines.push(
-        `- Free-Roam Boost-Kategorien: ${plan.boostPlaceTypes.slice(0, 8).join(', ')}`,
-      );
+      lines.push(`- Timeline „${stop.title}“ (${stop.kind ?? 'stop'})${when}`);
     }
   }
 
@@ -115,11 +108,11 @@ export function formatHolisticDayContextForPrompt(): string {
   }
 
   if (!lines.length) {
-    return 'Keine offenen Deadlines oder Tasks in dieser Session.';
+    return 'Keine offenen Deadlines oder Tasks. Gelöschte Timeline-Punkte, erledigte Einkäufe und alte Fäden NICHT wieder aufgreifen.';
   }
 
-  return `Offene Deadlines, Stops und Tasks (IMMER im Blick behalten — wie ein menschlicher Begleiter):
+  return `Offene Deadlines, Stops und Tasks (nur was JETZT auf der Timeline / Taskliste steht):
 ${lines.join('\n')}
 
-Wenn der User abends nach Zielen fragt: Zusammenhänge zu morgens besprochenen Themen und Terminen selbst herstellen.`;
+Regel: Was nicht in dieser Liste steht, ist tot — gelöschte Timeline-Punkte, erledigte Einkäufe, gestrichene Bahn/Flug und alte Fäden nicht wieder aufgreifen.`;
 }

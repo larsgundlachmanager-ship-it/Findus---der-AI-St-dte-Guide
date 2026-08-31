@@ -1,0 +1,34 @@
+name: Turn Kernel Gate
+
+on:
+  push:
+    paths:
+      - 'src/module2/kernel/**'
+      - 'src/module2/router/**'
+      - 'src/services/speech/contextualBridge.ts'
+      - 'src/services/memory/conversationThreads.ts'
+      - 'src/services/concierge/findusResponsePolicy.ts'
+      - 'scripts/qa-overnight-gates.ts'
+      - 'package.json'
+  pull_request:
+    paths:
+      - 'src/module2/kernel/**'
+      - 'src/module2/router/**'
+      - 'src/services/speech/contextualBridge.ts'
+      - 'src/services/memory/conversationThreads.ts'
+      - 'src/services/concierge/findusResponsePolicy.ts'
+      - 'scripts/qa-overnight-gates.ts'
+      - 'package.json'
+
+jobs:
+  turn-kernel:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run test:turn-kernel
+      - run: npm run test:overnight-gates

@@ -1,0 +1,93 @@
+{
+  "city_id": "lissabon",
+  "source": "C:\\Users\\larsf\\Findus 2.0\\data\\staedte\\lissabon.cristo-rei.json",
+  "updated": [
+    "lissabon_cristo_rei"
+  ],
+  "created": 0,
+  "unmatched": [],
+  "links": 0,
+  "gate": {
+    "ok": true,
+    "errors": [],
+    "warnings": [
+      "centers almost identical: lissabon_jardim_guerra_junqueiro & lissabon_jardim_da_estrela",
+      "centers almost identical: lissabon_green_street & lissabon_elevador_da_bica"
+    ],
+    "stats": {
+      "spots": 354,
+      "storySpots": 93,
+      "directorySpots": 261,
+      "triggers": 354,
+      "missingTrigger": 0,
+      "missingNarration": 0,
+      "missingApproach": 0,
+      "missingPoly": 0,
+      "thinDeep": 0,
+      "orphanTriggers": 0,
+      "categories": [
+        "activity",
+        "altstadt",
+        "apotheke",
+        "aussicht",
+        "bahnhof",
+        "bakerei",
+        "cafe",
+        "denkmal",
+        "einkaufen",
+        "freizeit",
+        "freizeitpark",
+        "gepaeck",
+        "geschichte",
+        "gesundheit",
+        "golf",
+        "hafen",
+        "hotel",
+        "kino",
+        "kirche",
+        "markt",
+        "museum",
+        "natur",
+        "radweg",
+        "restaurant",
+        "service",
+        "souvenir",
+        "spielplatz",
+        "sport",
+        "supermarket",
+        "tankstelle",
+        "theater",
+        "toilette",
+        "tour",
+        "tourist_info",
+        "wanderung",
+        "wasser"
+      ],
+      "missingMustHave": [],
+      "nicePresent": [
+        "cafe",
+        "restaurant",
+        "hotel",
+        "einkaufen",
+        "service",
+        "gesundheit",
+        "sport",
+        "hafen",
+        "bahnhof"
+      ],
+      "liveResearch": 4,
+      "offlineQa": 223,
+      "hasCoverage": true,
+      "hasTransit": false,
+      "hasMobility": false,
+      "links": 0
+    },
+    "gaps": {
+      "needsNarration": [],
+      "needsPolygon": [],
+      "needsApproach": [],
+      "needsDeep": [],
+      "missingCategories": []
+    }
+  }
+}

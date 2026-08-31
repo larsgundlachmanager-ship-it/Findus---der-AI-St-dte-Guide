@@ -4,7 +4,6 @@
  */
 
 import { generateGeminiText, hasGeminiApiKey } from '../geminiService';
-import { isDeviceOffline } from '../navigation/networkState';
 import { planJourney } from '../transit/journeyPlanner';
 import { formatJourneyForConcierge } from '../transit/formatJourneyCard';
 import { shortenActionLabel } from '../concierge/actionLabelShorten';
@@ -36,9 +35,6 @@ async function webDisruptionHint(opts: {
 }): Promise<{ disrupted: boolean; note: string; altHint: string | null }> {
   if (!hasGeminiApiKey()) {
     return { disrupted: false, note: 'no_gemini', altHint: null };
-  }
-  if (await isDeviceOffline()) {
-    return { disrupted: false, note: 'offline', altHint: null };
   }
   const prompt = [
     'Du prüfst aktuelle ÖPNV-/Bahn-Störungen oder Bauarbeiten (Google Search).',

@@ -20,6 +20,15 @@ export type PitchWish = {
   hardness: PitchWishHardness;
   /** z. B. cuisine / dish / amenity / vibe */
   kind?: string;
+  /** Call-1 Ranking-Gewicht 1–30 — wenn gesetzt, steuert candidateRank */
+  weight?: number;
+};
+
+/** Call-1 Such-Kriterium (kein Venue-Score). */
+export type PitchCall1Criterion = {
+  key: string;
+  role: 'must' | 'nice' | 'soft';
+  weight: number;
 };
 
 export type PitchLatLng = { lat: number; lng: number };
@@ -77,7 +86,17 @@ export type PitchRequest = {
   uiLayout: 'timeline_stack' | 'live_split';
   /** Parent hat Bridge schon gesprochen / startet parallel */
   bridgeAlreadySpoken?: boolean;
+  /** Gesprochene Einleitung — Pitch setzt flüssig an, kein zweites Intro */
+  continueFromBridge?: string | null;
   signal?: AbortSignal;
+  /** Call-1: was der User JETZT will — Speech/Call-2 folgt dem */
+  authorIntent?: string | null;
+  /** Call-1 Must-Haves (Hard-Filter-Labels) */
+  call1MustHaves?: string[];
+  /** Call-1 Kriterien + Gewichte für Ranking (keine Ortsnamen) */
+  call1Criteria?: PitchCall1Criterion[];
+  /** Backend Shortlist vor Speak (Default 5) */
+  shortlistSize?: number;
 };
 
 export type PitchCandidate = {
@@ -92,9 +111,22 @@ export type PitchCandidate = {
   openNow?: boolean | null;
   opensAtMin?: number | null;
   closesAtMin?: number | null;
+  /** Kein Period für den Besuchstag (z. B. Sommerpause laut Maps) */
+  closedOnVisitDay?: boolean | null;
   /** Soft dish / pack hints */
   softTags?: string[];
-  source: 'pack' | 'places';
+  /** Kurze Insider-Hooks aus Website/Places (für Pitch) */
+  hookNotes?: string[];
+  hardEvidence?: string[];
+  /** Konkreter Preis-Hinweis zum Wunschgericht (Menue-Beleg) */
+  dishPriceHint?: string | null;
+  source: 'pack' | 'places' | 'osm' | 'stay22';
+  /** Stay22 live total for the stay window */
+  priceTotalEur?: number | null;
+  pricePerNightEur?: number | null;
+  nights?: number | null;
+  checkin?: string | null;
+  checkout?: string | null;
   detourPrio?: number;
   detourMinApprox?: number;
   sideM?: number;
@@ -121,6 +153,8 @@ export type PitchOptionCard = {
   websiteUrl?: string | null;
   rating?: number | null;
   actions: QuickAction[];
+  /** Benannter Laden: Route schon vor der Kartenwahl zeigen */
+  showNavBeforeSelect?: boolean;
 };
 
 export type PitchResult = {

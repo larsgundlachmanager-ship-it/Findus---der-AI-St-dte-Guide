@@ -1,7 +1,7 @@
 /**
  * Multimodales A→B Routing mit Failover:
- * 1. Transitous (MOTIS) — EU + Live GTFS-RT
- * 2. Google Directions transit/walk/bike — weltweiter Fallback
+ * 1. DB + Transitous parallel — sobald eine Seite liefert, kurz auf die andere warten
+ * 2. Google Directions nur wenn beide leer (weltweiter Fallback)
  */
 
 import {
@@ -16,6 +16,9 @@ import {
   placeTuple,
   transitousFetchJson,
 } from './adapters/transitousClient';
+import { encodedPathFromMotisLeg } from './journeyPath';
+import { pickSoonestCatchable } from './pickSoonestJourney';
+import { collectUntilUseful } from './collectUntilUseful';
 
 export type JourneyLegMode =
   | 'WALK'
@@ -27,6 +30,14 @@ export type JourneyLegMode =
   | 'FERRY'
   | 'TRANSIT'
   | 'OTHER';
+
+export type JourneyStop = {
+  name: string;
+  lat: number | null;
+  lng: number | null;
+  arrival: Date | null;
+  departure: Date | null;
+};
 
 export type JourneyLeg = {
   mode: JourneyLegMode;
@@ -41,11 +52,23 @@ export type JourneyLeg = {
   distanceM: number | null;
   line: string | null;
   headsign: string | null;
+  /** Gleis am Einstieg, wenn der Feed es liefert. */
+  fromPlatform?: string | null;
+  /** Gleis am Ausstieg. */
+  toPlatform?: string | null;
   realTime: boolean;
   fromLat?: number | null;
   fromLng?: number | null;
   toLat?: number | null;
   toLng?: number | null;
+  /** Zwischenhalte bis Ausstieg (ohne Einstieg, mit Ausstieg als Ziel separat). */
+  intermediateStops?: JourneyStop[];
+  /** Stationen bis Ausstieg inkl. Zielhalt (für Countdown). */
+  stationCount?: number | null;
+  pathEncoded?: string | null;
+  /** MOTIS EncodedPolyline.precision — 6 für /v2+/v5, sonst Google 5. */
+  pathPrecision?: number | null;
+  path?: Array<{ lat: number; lng: number }>;
 };
 
 export type JourneyItinerary = {
@@ -65,6 +88,8 @@ export type JourneyItinerary = {
 export type JourneyPlanResult = {
   itineraries: JourneyItinerary[];
   source: 'transitous' | 'google' | 'db_rest' | 'none';
+  /** true: nächste Bahn ist knapper als Fußweg + Bahnhofspuffer. */
+  tight?: boolean;
 };
 
 function mapMotisMode(raw: string | undefined): JourneyLegMode {
@@ -99,6 +124,8 @@ type MotisLeg = {
     lat?: number;
     lon?: number;
     lng?: number;
+    track?: string;
+    scheduledTrack?: string;
   };
   to?: {
     name?: string;
@@ -107,6 +134,8 @@ type MotisLeg = {
     lat?: number;
     lon?: number;
     lng?: number;
+    track?: string;
+    scheduledTrack?: string;
   };
   startTime?: string;
   endTime?: string;
@@ -118,6 +147,19 @@ type MotisLeg = {
   headsign?: string;
   routeShortName?: string;
   displayName?: string;
+  intermediateStops?: Array<{
+    name?: string;
+    lat?: number;
+    lon?: number;
+    lng?: number;
+    arrival?: string;
+    departure?: string;
+    scheduledArrival?: string;
+    scheduledDeparture?: string;
+  }>;
+  legGeometry?: { points?: string; precision?: number };
+  polyline?: string;
+  steps?: Array<{ polyline?: { points?: string } | string }>;
 };
 
 type MotisItinerary = {
@@ -148,8 +190,29 @@ function mapMotisItinerary(it: MotisItinerary): JourneyItinerary | null {
     const scheduledEnd =
       parseIsoDate(leg.scheduledEndTime) ??
       parseIsoDate(leg.to?.scheduledArrival);
+    const mode = mapMotisMode(leg.mode);
+    const intermediateStops: JourneyStop[] = [];
+    for (const s of leg.intermediateStops ?? []) {
+      const name = s.name?.trim();
+      if (!name) continue;
+      intermediateStops.push({
+        name,
+        lat: typeof s.lat === 'number' ? s.lat : null,
+        lng:
+          typeof s.lon === 'number'
+            ? s.lon
+            : typeof s.lng === 'number'
+              ? s.lng
+              : null,
+        arrival: parseIsoDate(s.arrival) ?? parseIsoDate(s.scheduledArrival),
+        departure:
+          parseIsoDate(s.departure) ?? parseIsoDate(s.scheduledDeparture),
+      });
+    }
+    const isTransit = mode !== 'WALK' && mode !== 'BIKE';
+    const geom = encodedPathFromMotisLeg(leg);
     legs.push({
-      mode: mapMotisMode(leg.mode),
+      mode,
       fromName: leg.from?.name?.trim() || 'Start',
       toName: leg.to?.name?.trim() || 'Ziel',
       startTime: s,
@@ -165,6 +228,8 @@ function mapMotisItinerary(it: MotisItinerary): JourneyItinerary | null {
         typeof leg.distance === 'number' ? Math.round(leg.distance) : null,
       line: leg.routeShortName || leg.displayName || null,
       headsign: leg.headsign || null,
+      fromPlatform: leg.from?.track || leg.from?.scheduledTrack || null,
+      toPlatform: leg.to?.track || leg.to?.scheduledTrack || null,
       realTime: leg.realTime === true,
       fromLat: typeof leg.from?.lat === 'number' ? leg.from.lat : null,
       fromLng:
@@ -180,6 +245,15 @@ function mapMotisItinerary(it: MotisItinerary): JourneyItinerary | null {
           : typeof leg.to?.lng === 'number'
             ? leg.to.lng
             : null,
+      intermediateStops: intermediateStops.length
+        ? intermediateStops
+        : undefined,
+      // Zwischenhalte + Ausstieg
+      stationCount: isTransit
+        ? intermediateStops.length + 1
+        : null,
+      pathEncoded: geom?.points ?? null,
+      pathPrecision: geom?.precision ?? null,
     });
   }
   if (!legs.length) return null;
@@ -217,6 +291,8 @@ async function planViaTransitous(opts: {
   params.set('fromPlace', placeTuple(opts.from.lat, opts.from.lng));
   params.set('toPlace', placeTuple(opts.to.lat, opts.to.lng));
   params.set('numItineraries', String(opts.numItineraries ?? 3));
+  params.set('detailedLegs', 'true');
+  params.set('detailedTransfers', 'true');
   if (opts.arriveBy) {
     params.set('arriveBy', 'true');
     params.set('time', opts.arriveBy.toISOString());
@@ -236,27 +312,110 @@ async function planViaTransitous(opts: {
   return out;
 }
 
+function googleStationPairs(
+  stations: RouteDirectionsResult['stations'],
+): Array<{
+    line: string | null;
+    fromName: string;
+    toName: string;
+    fromLat: number;
+    fromLng: number;
+    toLat: number;
+    toLng: number;
+  }> {
+  const pairs: Array<{
+    line: string | null;
+    fromName: string;
+    toName: string;
+    fromLat: number;
+    fromLng: number;
+    toLat: number;
+    toLng: number;
+  }> = [];
+  for (let i = 0; i < stations.length; i++) {
+    const dep = stations[i]!;
+    if (dep.role !== 'departure') continue;
+    const arr = stations.slice(i + 1).find((s) => s.role === 'arrival');
+    if (!arr) continue;
+    pairs.push({
+      line: dep.line ?? arr.line ?? null,
+      fromName: dep.name,
+      toName: arr.name,
+      fromLat: dep.lat,
+      fromLng: dep.lng,
+      toLat: arr.lat,
+      toLng: arr.lng,
+    });
+  }
+  return pairs;
+}
+
 function googleResultToItinerary(
   result: RouteDirectionsResult,
+  opts?: { arriveByMs?: number; departAtMs?: number },
 ): JourneyItinerary | null {
   if (!result.steps.length) return null;
-  const now = new Date();
-  let cursor = now.getTime();
-  const legs: JourneyLeg[] = [];
-
-  for (const step of result.steps) {
-    const durationSec = Math.max(
+  const pairs = googleStationPairs(result.stations);
+  let prevTo: string | null = null;
+  const stepSecs = result.steps.map((step) => {
+    if (typeof step.durationSec === 'number' && step.durationSec > 0) {
+      return step.durationSec;
+    }
+    const isTransit = (step.travelMode || '').toUpperCase() === 'TRANSIT';
+    return Math.max(
       30,
-      Math.round((step.distanceM || 80) / (step.travelMode === 'TRANSIT' ? 8 : 1.3)),
+      Math.round((step.distanceM || 80) / (isTransit ? 8 : 1.3)),
+    );
+  });
+  const rawSum = stepSecs.reduce((n, s) => n + s, 0);
+  const totalSec =
+    result.durationSec && result.durationSec > 0
+      ? result.durationSec
+      : Math.max(60, rawSum);
+  let cursor =
+    opts?.arriveByMs && opts.arriveByMs > Date.now() + 60_000
+      ? opts.arriveByMs - totalSec * 1000
+      : opts?.departAtMs && opts.departAtMs > Date.now()
+        ? opts.departAtMs
+        : Date.now();
+  const legs: JourneyLeg[] = [];
+  let pairIdx = 0;
+
+  for (let i = 0; i < result.steps.length; i++) {
+    const step = result.steps[i]!;
+    const durationSec = Math.max(
+      20,
+      Math.round(totalSec * (stepSecs[i]! / Math.max(1, rawSum))),
     );
     const start = new Date(cursor);
     const end = new Date(cursor + durationSec * 1000);
     cursor = end.getTime();
     const isTransit = (step.travelMode || '').toUpperCase() === 'TRANSIT';
+    const pair = isTransit ? pairs[pairIdx++] : null;
+    const nextPair = isTransit ? null : pairs[pairIdx];
+    const lastArr = [...result.stations]
+      .reverse()
+      .find((s) => s.role === 'arrival');
+    const tidy = (raw: string | null | undefined): string | null => {
+      const s = (raw || '').replace(/\s+/g, ' ').trim();
+      if (!s || /^(weiter|zwischenstopp|ziel|continue)$/i.test(s)) return null;
+      return s;
+    };
+    const toName = isTransit
+      ? tidy(pair?.toName) || 'Haltestelle'
+      : tidy(nextPair?.fromName) || tidy(lastArr?.name) || 'Ziel';
+    const fromName = isTransit
+      ? tidy(pair?.fromName) || 'Halt'
+      : tidy(prevTo) || tidy(nextPair?.fromName) || 'Start';
+    prevTo = toName;
     legs.push({
-      mode: isTransit ? 'TRANSIT' : result.travelMode === 'bicycling' ? 'BIKE' : 'WALK',
-      fromName: step.instruction?.slice(0, 40) || 'Zwischenstopp',
-      toName: step.roadName || 'Weiter',
+      mode: isTransit
+        ? 'TRANSIT'
+        : result.travelMode === 'bicycling'
+          ? 'BIKE'
+          : 'WALK',
+      fromName,
+      toName,
       startTime: start,
       endTime: end,
       scheduledStart: null,
@@ -264,24 +423,38 @@ function googleResultToItinerary(
       delaySec: null,
       durationSec,
       distanceM: step.distanceM,
-      line: null,
+      line: pair?.line ?? (isTransit ? result.stations[0]?.line ?? null : null),
       headsign: null,
+      fromPlatform: null,
       realTime: false,
+      fromLat: pair?.fromLat ?? step.lat,
+      fromLng: pair?.fromLng ?? step.lng,
+      toLat: pair?.toLat ?? null,
+      toLng: pair?.toLng ?? null,
+      pathEncoded: isTransit ? result.overviewPolyline : null,
+      path:
+        isTransit && result.pathPoints && result.pathPoints.length >= 2
+          ? result.pathPoints
+          : undefined,
     });
   }
 
-  const startTime = legs[0].startTime;
-  const endTime = legs[legs.length - 1].endTime;
+  const startTime = legs[0]!.startTime;
+  const endTime = legs[legs.length - 1]!.endTime;
   const firstTransit = legs.find((l) => l.mode === 'TRANSIT');
   return {
     source: 'google',
     startTime,
     endTime,
     durationSec: Math.round((endTime.getTime() - startTime.getTime()) / 1000),
-    transfers: Math.max(0, result.stations.filter((s) => s.role === 'departure').length - 1),
+    transfers: Math.max(
+      0,
+      result.stations.filter((s) => s.role === 'departure').length - 1,
+    ),
     legs,
     firstTransitDeparture: firstTransit?.startTime ?? null,
-    firstTransitLine: result.stations[0]?.line ?? null,
+    firstTransitLine:
+      firstTransit?.line ?? result.stations[0]?.line ?? null,
     firstTransitDelaySec: null,
     walkToStopSec: legs[0]?.mode === 'WALK' ? legs[0].durationSec : null,
   };
@@ -291,16 +464,23 @@ async function planViaGoogle(opts: {
   from: { lat: number; lng: number };
   to: { lat: number; lng: number };
   mode: PedestrianTravelMode;
+  arriveBy?: Date | null;
 }): Promise<JourneyItinerary[]> {
   if (!hasGoogleMapsNavKey()) return [];
-  const result = await fetchRouteDirectionsResult(opts.from, opts.to, opts.mode);
+  const arriveByMs = opts.arriveBy?.getTime();
+  const result = await fetchRouteDirectionsResult(
+    opts.from,
+    opts.to,
+    opts.mode,
+    arriveByMs ? { arriveByMs } : undefined,
+  );
   if (!result) return [];
-  const mapped = googleResultToItinerary(result);
+  const mapped = googleResultToItinerary(result, { arriveByMs });
   return mapped ? [mapped] : [];
 }
 
 /**
- * Primär DB transport.rest (DE), dann Transitous, Fallback Google Directions.
+ * Primär DB + Transitous, Google nur als Fallback wenn beide leer.
  */
 export async function planJourney(opts: {
   from: { lat: number; lng: number };
@@ -318,37 +498,40 @@ export async function planJourney(opts: {
         ? 'walking'
         : 'transit';
 
-  // DB / HAFAS live zuerst für ÖPNV
   if (opts.travelMode !== 'foot' && opts.travelMode !== 'bike') {
-    try {
+    const dbJob = (async () => {
       const { planDbJourneys } = await import('./dbRestJourneys');
-      const db = await planDbJourneys({
+      return planDbJourneys({
         from: opts.from,
         to: opts.to,
         arriveBy: opts.arriveBy,
         departAt: opts.departAt,
         results: opts.numItineraries ?? 5,
       });
-      if (db.length) {
-        return { itineraries: db, source: 'db_rest' };
-      }
-    } catch {
-      /* Transitous unten */
-    }
-
-    try {
-      const transitous = await planViaTransitous({
-        from: opts.from,
-        to: opts.to,
-        arriveBy: opts.arriveBy,
-        departAt: opts.departAt,
-        numItineraries: opts.numItineraries,
+    })();
+    const motisJob = planViaTransitous({
+      from: opts.from,
+      to: opts.to,
+      arriveBy: opts.arriveBy,
+      departAt: opts.departAt,
+      numItineraries: opts.numItineraries,
+    });
+    const merged = (
+      await collectUntilUseful([dbJob, motisJob], {
+        graceMs: 1_200,
+        hardMs: 6_500,
+      })
+    ).filter((it) => it.durationSec > 0 && it.durationSec <= 4 * 3600);
+    if (merged.length) {
+      const ranked = pickSoonestCatchable(merged, Date.now(), {
+        aroundMs: opts.departAt?.getTime() ?? null,
       });
-      if (transitous.length) {
-        return { itineraries: transitous, source: 'transitous' };
-      }
-    } catch {
-      // Fallback unten
+      const top = ranked.ordered.slice(0, opts.numItineraries ?? 5);
+      return {
+        itineraries: top,
+        source: top[0]!.source,
+        tight: ranked.tight,
+      };
     }
   }
 
@@ -356,6 +539,7 @@ export async function planJourney(opts: {
     from: opts.from,
     to: opts.to,
     mode: googleMode,
+    arriveBy: opts.arriveBy,
   });
   if (google.length) {
     return { itineraries: google, source: 'google' };

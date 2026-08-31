@@ -97,7 +97,7 @@ export function pickMissedConnection(opts: {
     sameLineFound: false,
     toastOrPing: 'Keine passende Folgeverbindung gefunden.',
     promptSpeech:
-      'Die geplante Bahn ist weg. Soll ich nach einer Alternative suchen?',
+      'Die geplante Bahn ist weg — keine passende Folgeverbindung gefunden.',
   };
   if (!list.length) return empty;
 

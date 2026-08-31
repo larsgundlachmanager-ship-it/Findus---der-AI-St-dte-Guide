@@ -110,7 +110,14 @@ export type MicListenMode = 'hear' | 'dont_hear';
 export type TravelParty = 'solo' | 'couple' | 'date' | 'family' | 'friends';
 
 /** Energielevel / Tagesrhythmus. */
-export type EnergyLevel = 'low' | 'medium' | 'high';
+export type EnergyLevel = 'low' | 'medium' | 'high' | 'extreme';
+
+/** Tourlänge in Stops (Concierge / Planung). */
+export type TourLengthPref =
+  | 'fewer_stops'
+  | 'balanced'
+  | 'more_stops'
+  | 'max_stops';
 
 /** Antwortlänge der KI. */
 export type AnswerStyle = 'short' | 'detailed';
@@ -121,8 +128,23 @@ export type AnswerStyle = 'short' | 'detailed';
  */
 export type NavExploreMode = 'quiet' | 'mute_until_dest' | 'full';
 
+/**
+ * Modul-1 Ankunfts-Detail:
+ * full = immersive Hauptstory (Default, bis ~1000).
+ * brief = Kurzantwort Name + Zusammenfassung (opt-in, max 400).
+ */
+export type Module1StoryMode = 'brief' | 'full';
+
 /** Geschlecht — für Ansprache / Reservierungen (optional). */
 export type UserGender = 'female' | 'male' | 'diverse' | 'unspecified';
+
+export type ProactiveAlertKind =
+  | 'weather'
+  | 'parking'
+  | 'transit'
+  | 'ambientEvents'
+  | 'cityWelcome'
+  | 'welcomeBack';
 
 /**
  * Audio-Ausgabe:
@@ -133,7 +155,7 @@ export type UserGender = 'female' | 'male' | 'diverse' | 'unspecified';
 export type AudioOutputMode = 'normal' | 'mute' | 'text_only';
 
 /**
- * Die 4 Säulen des Findus-Profils — konsolidiert für jeden Gemini-Request.
+ * Die 4 Säulen des Yorro-Profils — konsolidiert für jeden Gemini-Request.
  * (Onboarding-Felder auf UserProfile werden via resolvePersonaEngine hierher gemappt.)
  */
 export interface PersonaEngineProfile {
@@ -267,6 +289,17 @@ export interface UserProfile {
   /** Cloud vs. lokale TTS — Default Cartesia, Systemstimme nur Fallback/Dev. */
   ttsProvider?: TtsProvider;
   firstName: string;
+  /**
+   * Optional: deutsche Buchstaben-Umschreibung nur für TTS
+   * (Anzeige/Reservierung bleiben `firstName`).
+   * Greift nur bei `firstNameSpeechHintEnabled === true`.
+   */
+  firstNameSpeechHint?: string;
+  /**
+   * Manuell: angepasste Aussprache in der Stimme nutzen.
+   * Default aus — sonst bleibt die geschriebene Form.
+   */
+  firstNameSpeechHintEnabled?: boolean;
   lastName: string;
   email: string;
   /**
@@ -372,8 +405,26 @@ export interface UserProfile {
    * full = keine Nav-Kürzung.
    */
   navExploreMode?: NavExploreMode;
+  /**
+   * Modul-1 Ankunft: full = immersive Story (Default, ~1000);
+   * brief = Kurzantwort Name + Zusammenfassung (Settings opt-in, max 400).
+   */
+  module1StoryMode?: Module1StoryMode;
   /** POI-/Tour-Hinweise erwünscht. */
   notificationsEnabled?: boolean;
+  /**
+   * Granulare Auto-Hinweise (Push + ungefragtes Sprechen).
+   * Master: notificationsEnabled === false schaltet alles aus.
+   * Fehlende Keys = an (Default).
+   */
+  proactiveAlerts?: {
+    weather?: boolean;
+    parking?: boolean;
+    transit?: boolean;
+    ambientEvents?: boolean;
+    cityWelcome?: boolean;
+    welcomeBack?: boolean;
+  };
   /** Daten sparsam (kürzere Antworten, weniger Prefetch). */
   dataSaverMode?: boolean;
   /**
@@ -407,7 +458,7 @@ export interface UserProfile {
   /** Detaillierte Mobilitäts-Prefs (Onboarding Erleben). */
   mobilityPrefs?: MobilityPrefs;
   /** Tourlänge: Stops, nicht Gehgeschwindigkeit. */
-  tourLengthPref?: 'more_stops' | 'balanced' | 'fewer_stops' | null;
+  tourLengthPref?: TourLengthPref | null;
   /** Restaurant-Niveau. */
   diningLevel?: 'fast_cheap' | 'decent' | 'highlights' | null;
   /** Accessibility-Detail gewünscht (öffnet Accessibility-Chips). */
@@ -457,6 +508,14 @@ export function getReservationContact(
   };
 }
 
+/** Einrichtung + Erklärung schon einmal durch — nach Re-Login nicht nochmal. */
+export function profileHasFinishedSetup(
+  p: UserProfile | null | undefined,
+): boolean {
+  if (!p) return false;
+  return !!(p.setupComplete || p.firstMapWelcomeDone || p.completedAt);
+}
+
 export function createDefaultProfile(): UserProfile {
   return {
     version: 1,
@@ -466,6 +525,8 @@ export function createDefaultProfile(): UserProfile {
     speechRate: 1,
     ttsProvider: 'cartesia',
     firstName: '',
+    firstNameSpeechHint: '',
+    firstNameSpeechHintEnabled: false,
     lastName: '',
     email: '',
     aboutMe: '',
@@ -510,7 +571,9 @@ export function createDefaultProfile(): UserProfile {
     touristMode: null,
     mustHaveStyles: [],
     navExploreMode: 'quiet',
+    module1StoryMode: 'full',
     notificationsEnabled: true,
+    proactiveAlerts: {},
     dataSaverMode: false,
     audioOutputMode: 'normal',
     isPremiumSubscriber: false,

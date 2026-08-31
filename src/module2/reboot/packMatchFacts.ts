@@ -20,6 +20,7 @@ export function isMoreHistoryUtterance(text: string): boolean {
   if (/\berzähl\s+mir\s+noch\s+mehr\s+zu\b/iu.test(t)) return true;
   if (/\bmehr\s+(zur\s+)?(historie|geschichte)\b/iu.test(t)) return true;
   if (/\bnoch\s+mehr\s+(dazu|über|ueber|zu)\b/iu.test(t)) return true;
+  if (/\bmehr\s+historie\s+(zum|zur|zu|über|ueber)\b/iu.test(t)) return true;
   return false;
 }
 
@@ -119,11 +120,11 @@ export async function researchPackMatchStory(opts: {
   const draftParts = [
     lead,
     deep
-      ? 'MEHR HISTORIE am SELBEN Ort: nur noch nicht Gesagtes. Max ~1200 Zeichen Speech. Keine Timeline, keine fremden Museen, kein Explore-Drift. Nichts erfinden.'
+      ? 'MEHR HISTORIE am SELBEN Ort: nur noch nicht Gesagtes. Max ~2000 Zeichen Speech. Keine Timeline, keine fremden Museen, kein Explore-Drift. Nichts erfinden.'
       : followUp
-        ? 'Beantworte die Rückfrage zuerst mit noch nicht Gesagtem aus den Fakten.'
+        ? 'Beantworte die Rückfrage zuerst mit noch nicht Gesagtem aus den Fakten. Max ~500 Zeichen.'
         : deictic
-          ? 'Erkläre was das ist — visuell kurz, dann Historie aus den Fakten. Nichts erfinden. Max ~1200 Zeichen.'
+          ? 'Erkläre was das ist — visuell kurz, dann Historie aus den Fakten. Nichts erfinden. Max ~1000 Zeichen.'
           : 'Beantworte die User-Frage nur aus den Fakten.',
     block,
   ];
@@ -138,7 +139,7 @@ export async function researchPackMatchStory(opts: {
     );
   }
 
-  const showMoreBtn = !deep;
+  const showMoreBtn = !deep && facts.length >= 3;
 
   return {
     agent: 'knowledge',

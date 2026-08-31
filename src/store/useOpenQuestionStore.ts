@@ -1,6 +1,6 @@
 /**
  * Offene Teilfragen & User-Fakten aus Multi-Intent-Turns.
- * Findus merkt sich Rückfragen und deferred Parts für Follow-ups.
+ * Yorro merkt sich Rückfragen und deferred Parts für Follow-ups.
  */
 
 import { create } from 'zustand';

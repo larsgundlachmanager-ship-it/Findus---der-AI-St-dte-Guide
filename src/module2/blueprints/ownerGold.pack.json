@@ -708,7 +708,7 @@
         "permission_questions",
         "meta_app_pitch"
       ],
-      "summary": "Live-Anzeige oben: konkrete Orte/Events mit Distanz, Uhrzeit, Preis/ETA nur belegt — nie Gattungs-Pins („Hochhäuser“, „Museen“). Kategorie-Frage → konkreter Ort + „Navigation zu …?“ + grobe Ankunft/ÖPNV; Topic/Stadt weg (z. B. Athen) → Pin weg. Nie Dauer-Tippen-Erklärungen (Coach max. 1×). Tap = Vertiefung/Route."
+      "summary": "Live-Anzeige oben: konkrete Orte mit Distanz/Minuten, Uhr, Preis/ETA nur belegt — nie Gattungs-Fragen („Pause/Park?“, „Foto-Spot?“, „Hochhäuser“). Erholung = menschlicher Opener + Parkname + Gehzeit nur wenn Treffer in der Nähe; Fotospot = Einladung zum Hingucken + Name + Distanz, sonst stumm. Tap = Vertiefung/Route."
     }
   ]
 }

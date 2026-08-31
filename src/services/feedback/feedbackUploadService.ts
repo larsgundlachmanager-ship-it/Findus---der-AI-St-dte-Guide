@@ -5,6 +5,7 @@
  * Purges local cache only after confirmed HTTP 200 success.
  */
 
+import * as FileSystem from 'expo-file-system';
 import { env } from '../../config/env';
 import { getDatabase } from '../../db/database';
 import {
@@ -14,7 +15,10 @@ import {
 } from '../../db/feedbackEntries';
 import type { FeedbackRecord } from '../../types/feedback';
 import { readResponseAsText } from '../../utils/readBodyAsText';
+import { shouldAutoUploadFeedback } from './feedbackNightWindow';
 import { clearTelemetryBuffer } from './telemetryBuffer';
+
+const AUTO_META_PATH = `${FileSystem.documentDirectory}findus-feedback-auto-upload.json`;
 
 const FEEDBACK_BUCKET = 'feedback';
 const MASTER_FEEDBACK_PATH = 'master_feedback.json';
@@ -167,10 +171,35 @@ export type FeedbackUploadResult = {
   totalInCloud: number;
 };
 
+async function readLastAutoUploadAtMs(): Promise<number> {
+  try {
+    const info = await FileSystem.getInfoAsync(AUTO_META_PATH);
+    if (!info.exists) return 0;
+    const raw = await FileSystem.readAsStringAsync(AUTO_META_PATH);
+    const parsed = JSON.parse(raw) as { lastUploadAtMs?: number };
+    return Number(parsed.lastUploadAtMs) || 0;
+  } catch {
+    return 0;
+  }
+}
+
+async function writeLastAutoUploadAtMs(ms: number): Promise<void> {
+  try {
+    await FileSystem.writeAsStringAsync(
+      AUTO_META_PATH,
+      JSON.stringify({ lastUploadAtMs: ms }),
+    );
+  } catch {
+    /* ignore */
+  }
+}
+
 /**
  * Fetches unsent local entries, appends to master_feedback.json, purges on success.
  */
-export async function uploadPendingFeedback(): Promise<FeedbackUploadResult> {
+export async function uploadPendingFeedback(opts?: {
+  allowEmpty?: boolean;
+}): Promise<FeedbackUploadResult> {
   const cfg = resolveSupabaseRestConfig();
   if (!cfg) {
     throw new Error(
@@ -181,6 +210,9 @@ export async function uploadPendingFeedback(): Promise<FeedbackUploadResult> {
   const db = await getDatabase();
   const pending = await listUnsentFeedbackEntries(db);
   if (pending.length === 0) {
+    if (opts?.allowEmpty) {
+      return { uploadedCount: 0, totalInCloud: 0 };
+    }
     throw new Error('Kein ausstehendes Feedback zum Upload.');
   }
 
@@ -204,4 +236,29 @@ export async function getPendingFeedbackCount(): Promise<number> {
   const db = await getDatabase();
   const pending = await listUnsentFeedbackEntries(db);
   return pending.length;
+}
+
+/**
+ * Stiller Abend-/Nacht-Upload. Kein Alert, kein Throw bei leerer Queue.
+ */
+export async function tryAutoUploadPendingFeedback(): Promise<FeedbackUploadResult | null> {
+  try {
+    const pending = await getPendingFeedbackCount();
+    if (pending <= 0) return null;
+    const last = await readLastAutoUploadAtMs();
+    if (!shouldAutoUploadFeedback(last)) return null;
+    const result = await uploadPendingFeedback({ allowEmpty: true });
+    if (result.uploadedCount > 0) {
+      await writeLastAutoUploadAtMs(Date.now());
+      if (__DEV__) {
+        console.log(
+          `[feedback] auto-upload ${result.uploadedCount} → cloud total ${result.totalInCloud}`,
+        );
+      }
+    }
+    return result;
+  } catch (err) {
+    if (__DEV__) console.warn('[feedback] auto-upload failed:', err);
+    return null;
+  }
 }

@@ -1,0 +1,858 @@
+{
+  "city": "hamburg",
+  "apply": true,
+  "touched": 106,
+  "approachesFixed": 106,
+  "faqAdded": 0,
+  "data_version": 72,
+  "rows": [
+    {
+      "id": "hamburg_hamburg_hauptbahnhof",
+      "name": "Hamburg Hauptbahnhof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_jungfernstieg",
+      "name": "Jungfernstieg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_dammtor",
+      "name": "Dammtor",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_rathaus",
+      "name": "Rathaus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_elbphilharmonie",
+      "name": "Elbphilharmonie",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_neumuhlen_ovelgonne_fahre",
+      "name": "Neumühlen/Övelgönne (Fähre)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_kehrwiederspitze",
+      "name": "Kehrwiederspitze",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_miniatur_wunderland",
+      "name": "Miniatur Wunderland",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_internationales_maritimes_museum_hamburg",
+      "name": "Internationales Maritimes Museum Hamburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_museum_fur_kunst_und_gewerbe_hamburg_mk_g",
+      "name": "Museum für Kunst und Gewerbe Hamburg (MK&G)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_u_bootmuseum_hamburg_gmbh",
+      "name": "U-Bootmuseum Hamburg GmbH",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_deichtorhallen_hamburg",
+      "name": "Deichtorhallen Hamburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_hamburger_kunsthalle",
+      "name": "Hamburger Kunsthalle",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_speicherstadtmuseum",
+      "name": "Speicherstadtmuseum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_chocoversum_hamburgs_schokoladenmuseum",
+      "name": "CHOCOVERSUM - Hamburgs Schokoladenmuseum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_ballinstadt_auswanderermuseum_hamburg",
+      "name": "BallinStadt - Auswanderermuseum Hamburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_panoptikum",
+      "name": "Panoptikum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_automuseum_prototyp",
+      "name": "Automuseum Prototyp",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_museum_der_natur_hamburg_zoologie",
+      "name": "Museum der Natur Hamburg - Zoologie",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_deutsches_zollmuseum",
+      "name": "Deutsches Zollmuseum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_markk_museum_am_rothenbaum",
+      "name": "MARKK Museum am Rothenbaum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_hauptkirche_st_michaelis",
+      "name": "Hauptkirche St. Michaelis",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_hauptkirche_st_katharinen_hauptkirche_st_katharinen",
+      "name": "Hauptkirche St. Katharinen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_flussschifferkirche_hamburg",
+      "name": "Flussschifferkirche Hamburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_mahnmal_st_nikolai",
+      "name": "Mahnmal St. Nikolai",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_hauptkirche_st_jacobi_hauptkirche_st_jacobi",
+      "name": "Hauptkirche St. Jacobi",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_hauptkirche_st_petri_hauptkirche_st_petri",
+      "name": "Hauptkirche St. Petri",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_st_ansgar_kapelle",
+      "name": "St. Ansgar-Kapelle",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_englische_kirche_anglican_church_of_st_thomas_becket",
+      "name": "Englische Kirche / Anglican Church of St Thomas Becket",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_schwedische_gustaf_adolfs_kirche",
+      "name": "Schwedische Gustaf-Adolfs-Kirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_hl_dreieinigkeits_kirche_st_georg",
+      "name": "Hl. Dreieinigkeits-Kirche St. Georg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_st_marien_dom",
+      "name": "St. Marien-Dom",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_norwegische_seemannskirche",
+      "name": "Norwegische Seemannskirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_russische_orthodoxe_kirche_des_hl_johannes_von_kronstadt",
+      "name": "Russische Orthodoxe Kirche des Hl. Johannes von Kronstadt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_heinrich_heine_denkmal",
+      "name": "Heinrich-Heine-Denkmal",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_bismarck_denkmal",
+      "name": "Bismarck-Denkmal",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_kriegerdenkmal_am_dammtordamm",
+      "name": "Kriegerdenkmal am Dammtordamm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_boberger_niederung",
+      "name": "Boberger Niederung",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_boberger_dunenhaus",
+      "name": "Boberger Dünenhaus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_elbstrand",
+      "name": "Elbstrand",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_baakenpark",
+      "name": "Baakenpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_boberger_strand",
+      "name": "Boberger Strand",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_sandtorpark",
+      "name": "Sandtorpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_alsterpark",
+      "name": "Alsterpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_leuchtturm_blankenese",
+      "name": "Leuchtturm Blankenese",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_heinrich_hertz_turm",
+      "name": "Heinrich-Hertz-Turm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_domplatz",
+      "name": "Hammaburg-Platz (Domplatz)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_hamburgische_staatsoper",
+      "name": "Hamburgische Staatsoper",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_harburger_berge",
+      "name": "Harburger Berge",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_fischbeker_heide",
+      "name": "Fischbeker Heide",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_tierpark_hagenbeck",
+      "name": "Tierpark Hagenbeck",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_speicherstadt",
+      "name": "Speicherstadt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_st_pauli_landungsbrucken",
+      "name": "St. Pauli Landungsbrücken",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_planten_un_blomen",
+      "name": "Planten un Blomen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_hamburg_bunker",
+      "name": "Hamburg BUNKER",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_binnenalster",
+      "name": "Binnenalster",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_altonaer_balkon",
+      "name": "Altonaer Balkon",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_elbphilharmonie_hamburg",
+      "name": "Elbphilharmonie Hamburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_alsterfontane",
+      "name": "Alsterfontäne",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_evangelisch_reformierte_kirche_in_hamburg",
+      "name": "Evangelisch-reformierte Kirche in Hamburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_hamburger_rathaus",
+      "name": "Hamburger Rathaus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_berliner_tor",
+      "name": "Berliner Tor",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_wasserschloss_speicherstadt",
+      "name": "Wasserschloss Speicherstadt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_alter_botanischer_garten",
+      "name": "Alter Botanischer Garten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_botanischer_garten_der_universitat_hamburg_loki_schmidt_garten",
+      "name": "Botanischer Garten der Universität Hamburg - Loki-Schmidt-Garten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_grosse_wallanlagen",
+      "name": "Große Wallanlagen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_ohnsorg_theater_hamburg",
+      "name": "Ohnsorg-Theater Hamburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_allee_theater_hamburg",
+      "name": "Allee Theater Hamburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_thalia_theater",
+      "name": "Thalia Theater",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_deutsches_schauspielhaus_hamburg",
+      "name": "Deutsches SchauSpielHaus Hamburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_theaterschiff_hamburg",
+      "name": "Theaterschiff Hamburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_altonaer_theater",
+      "name": "Altonaer Theater",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_opera_stabile_werk_wirkbuhne_der_staatsoper",
+      "name": "Opera Stabile Werk/Wirkbühne der Staatsoper",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_hamburger_kammerspiele",
+      "name": "Hamburger Kammerspiele",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_lieger_besucher_und_informationszentrum_museumshafen_oevelgonne_e_v",
+      "name": "Museumshafen Övelgönne",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_tropen_aquarium_beim_tierpark_hagenbeck",
+      "name": "Tropen-Aquarium beim Tierpark Hagenbeck",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_isemarkt",
+      "name": "Isemarkt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_savoy_filmtheater",
+      "name": "Savoy Filmtheater",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_nsg_eppendorfer_moor",
+      "name": "NSG Eppendorfer Moor",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_st_annenhof",
+      "name": "St.Annenhof",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 4,
+      "had_approaches": 1
+    },
+    {
+      "id": "hamburg_bergedorf_museum",
+      "name": "Bergedorf Museum",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 4,
+      "had_approaches": 1
+    },
+    {
+      "id": "hamburg_leuchtturm_rissen_oberfeuer",
+      "name": "Leuchtturm Rissen (Oberfeuer)",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 4,
+      "had_approaches": 1
+    },
+    {
+      "id": "hamburg_the_english_theatre_of_hamburg_e_v",
+      "name": "The English Theatre of Hamburg e.V.",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 4,
+      "had_approaches": 1
+    },
+    {
+      "id": "hamburg_cap_san_diego",
+      "name": "Cap San Diego",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 4,
+      "had_approaches": 1
+    },
+    {
+      "id": "hamburg_deichstrasse_ursprung_grosser_brand_1842",
+      "name": "Deichstraße (Ursprung Großer Brand 1842)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_alsterhaus",
+      "name": "Alsterhaus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_davidwache",
+      "name": "Davidwache",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_chilehaus",
+      "name": "Chilehaus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_altonaer_fischmarkt",
+      "name": "Altonaer Fischmarkt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_alter_elbtunnel",
+      "name": "Alter Elbtunnel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_bischofsburg_speersort",
+      "name": "Bischofsburg Speersort",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_museum_fur_hamburgische_geschichte",
+      "name": "Museum für Hamburgische Geschichte",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_laeiszhalle",
+      "name": "Laeiszhalle",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_planetarium_hamburg",
+      "name": "Planetarium Hamburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_sullberg",
+      "name": "Süllberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_denkmal_opfer_der_sturmflut_1962",
+      "name": "Denkmal Opfer der Sturmflut 1962",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_mahnmal_sturmflut_finkenwerder_suderdeich",
+      "name": "Mahnmal Sturmflut Finkenwerder Süderdeich",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_blankenese_treppenviertel",
+      "name": "Blankenese Treppenviertel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_hafencity_uberblick",
+      "name": "HafenCity Überblick",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_sprinkenhof",
+      "name": "Sprinkenhof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_spielbudenplatz",
+      "name": "Spielbudenplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_stadtpark_hamburg",
+      "name": "Stadtpark Hamburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_markthalle_hamburg",
+      "name": "Markthalle Hamburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_messberghof",
+      "name": "Meßberghof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_dockland",
+      "name": "Dockland",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "hamburg_traditionsschiffhafen_hafencity",
+      "name": "Traditionsschiffhafen HafenCity",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    }
+  ]
+}

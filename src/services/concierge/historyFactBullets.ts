@@ -1,5 +1,5 @@
 /**
- * Geschichts-Stichpunkte: 3 Fakten mit Jahreszahlen — keine Meta-Chips („Lebendig“).
+ * Geschichts-Stichpunkte: harte Jahres-Fakten — keine abgeschnittenen Satzfetzen.
  */
 
 const YEAR_RE = /\b(1[0-9]{3}|20[0-2][0-9])\b/;
@@ -12,30 +12,83 @@ function cleanChunk(raw: string): string {
     .trim();
 }
 
+/** Nie enden mit Präposition/Artikel/Konjunktion — sonst „fiel hier“ / „das alte“. */
+function looksIncomplete(rest: string): boolean {
+  const t = rest.trim();
+  if (t.length < 6) return true;
+  if (
+    /\b(und|oder|dass|weil|der|die|das|den|dem|des|ein|eine|einen|einem|einer|zum|zur|zu|von|mit|für|fuer|am|im|ab|als|nach|vor|über|ueber|unter|durch|ohne|bei|gegen|sowie|bzw)\s*$/iu.test(
+      t,
+    )
+  ) {
+    return true;
+  }
+  if (/\b(fiel|kommt|wurde|waren|ist|sind|hat|haben)\s+(hier|dort)?\s*$/iu.test(t)) {
+    return true;
+  }
+  return false;
+}
+
+function truncateComplete(rest: string, maxChars: number): string | null {
+  let t = rest.trim();
+  if (t.length <= maxChars) {
+    return looksIncomplete(t) ? null : t;
+  }
+  // An Satzzeichen / Komma / „und“ vor Limit schneiden
+  const slice = t.slice(0, maxChars);
+  const cut =
+    slice.match(/^(.+?)(?:[,:;]| — | – |\s+und\s+|\s+sowie\s+)[^.]*$/iu)?.[1] ??
+    slice.replace(/\s+\S*$/u, '').trim();
+  if (cut.length < 6 || looksIncomplete(cut)) return null;
+  return cut;
+}
+
 function formatBullet(chunk: string): string | null {
   const t = cleanChunk(chunk);
   if (t.length < 12) return null;
   const ym = t.match(YEAR_RE);
   if (!ym) return null;
-  const year = ym[1];
+  const year = ym[1]!;
+  // Schuljahr 2013/2014 o.ä. → kompaktes Label
+  const schoolYear = t.match(
+    /\bSchuljahr\s+(20\d{2})\s*[\/–-]\s*(20\d{2}|\d{2})\b/iu,
+  );
+  if (schoolYear) {
+    const a = schoolYear[1]!;
+    const b = schoolYear[2]!;
+    const label =
+      /\b(start|neubau|eröffnet|eroeffnet|betrieb|schule)\b/iu.test(t)
+        ? 'Neubau / Schulstart'
+        : 'Schuljahr';
+    return `${a}/${b.length === 2 ? a.slice(0, 2) + b : b} · ${label}`;
+  }
+
   let rest = t
     .replace(new RegExp(`\\bseit\\s+${year}\\b`, 'iu'), ' ')
     .replace(new RegExp(`\\bim\\s+Jahr\\s+${year}\\b`, 'iu'), ' ')
+    .replace(new RegExp(`\\bab\\s+${year}\\b`, 'iu'), ' ')
     .replace(new RegExp(`\\b${year}\\b`, 'gu'), ' ')
     .replace(/\s+/g, ' ')
     .replace(/^[,:;.\-–—]\s*/u, '')
     .replace(/[,:;.\-–—]\s*$/u, '')
     .replace(/\b(von|seit|im|am|ab|um|bis|aus|nach)\s*$/iu, '')
     .trim();
-  if (rest.length < 4) return `${year} · Meilenstein`;
-  if (rest.length > 42) {
-    rest = `${rest.slice(0, 40).replace(/\s+\S*$/u, '').trim()}…`;
-  }
-  return `${year} · ${rest}`;
+
+  // Nominalisieren typischer Fließtext-Anfänge
+  rest = rest
+    .replace(/^(wurde|wurden|ist|sind|wurde\s+die|wurde\s+der)\s+/iu, '')
+    .replace(/^(zum|zur)\s+/iu, '')
+    .trim();
+
+  if (rest.length < 4) return `${year} · belegt`;
+  const compact = truncateComplete(rest, 72);
+  if (!compact) return null;
+  return `${year} · ${compact}`;
 }
 
 /**
  * Extrahiert bis zu `max` Jahres-Fakten aus Speech + Pack/Web-Block.
+ * Nur vollständige Sätze/Klauseln — kein Zeichenfenster mitten im Satz.
  */
 export function extractHistoryFactBullets(
   speech: string,
@@ -48,30 +101,15 @@ export function extractHistoryFactBullets(
   const candidates: Array<{ year: number; bullet: string }> = [];
   const seenYears = new Set<number>();
 
-  // Sätze / Bullet-Zeilen mit Jahreszahl
   const parts = pool.split(/(?:[.!?]\s+|\n+|➔\s*)/u);
   for (const part of parts) {
     if (!YEAR_RE.test(part)) continue;
     const bullet = formatBullet(part);
     if (!bullet) continue;
-    const year = Number(bullet.slice(0, 4));
+    const year = Number(bullet.match(YEAR_RE)?.[1]);
     if (!Number.isFinite(year) || seenYears.has(year)) continue;
     seenYears.add(year);
     candidates.push({ year, bullet });
-  }
-
-  // Fallback: Jahr + ± Fenster aus dem Fließtext
-  if (candidates.length < max) {
-    const re = /(.{0,36}\b(1[0-9]{3}|20[0-2][0-9])\b.{0,48})/gu;
-    let m: RegExpExecArray | null;
-    while ((m = re.exec(pool)) && candidates.length < max + 2) {
-      const year = Number(m[2]);
-      if (seenYears.has(year)) continue;
-      const bullet = formatBullet(m[1]);
-      if (!bullet) continue;
-      seenYears.add(year);
-      candidates.push({ year, bullet });
-    }
   }
 
   candidates.sort((a, b) => a.year - b.year);

@@ -1,0 +1,646 @@
+{
+  "city_id": "hechingen",
+  "apply": true,
+  "storyOnly": true,
+  "maxDelta": 80,
+  "country": "Germany",
+  "summary": {
+    "ok": 9,
+    "check": 6,
+    "bad": 4,
+    "errors": 0,
+    "applied": 8,
+    "skipped_directory": 180,
+    "skipped_cached_google": 33
+  },
+  "rows": [
+    {
+      "id": "hechingen_bahnhof_hechingen",
+      "name": "Bahnhof Hechingen",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 48.35706014,
+        "lng": 8.96325632
+      }
+    },
+    {
+      "id": "hechingen_juedischer_friedhof",
+      "name": "Jüdischer Friedhof Hechingen",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 48.37255675714285,
+        "lng": 8.964298171428572
+      }
+    },
+    {
+      "id": "hechingen_burg_hohenzollern",
+      "name": "Burg Hohenzollern · Besucherstart P1",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 48.32557192,
+        "lng": 8.96365169
+      }
+    },
+    {
+      "id": "hechingen_hohenzollerisches_landesmuseum",
+      "name": "Altes Schloss / Hohenzollerisches Landesmuseum",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 48.35344285714285,
+        "lng": 8.964109857142857
+      }
+    },
+    {
+      "id": "hechingen_roemisches_freilichtmuseum",
+      "name": "Römisches Freilichtmuseum (Villa Rustica)",
+      "before": {
+        "lat": 48.37596449999999,
+        "lng": 8.934154470833334
+      },
+      "google": {
+        "lat": 48.376327499999995,
+        "lng": 8.933699599999999,
+        "place_id": "ChIJfacWL1b_mUcRo_Nli8MFoNs",
+        "address": "Landstraße 2, 72379 Hechingen-Stein, Germany"
+      },
+      "delta_m": 53,
+      "status": "CHECK",
+      "streetview": "ZERO_RESULTS",
+      "applied": true
+    },
+    {
+      "id": "hechingen_unterer_turm",
+      "name": "Unterer Turm",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 48.353617142857146,
+        "lng": 8.964619142857144
+      }
+    },
+    {
+      "id": "hechingen_stiftskirche_st_jakobus",
+      "name": "Stiftskirche St. Jakobus",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 48.3516322962963,
+        "lng": 8.963742851851851
+      }
+    },
+    {
+      "id": "hechingen_klosterkirche_st_luzen",
+      "name": "Klosterkirche St. Luzen",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 48.35809414285715,
+        "lng": 8.971133857142856
+      }
+    },
+    {
+      "id": "hechingen_kloster_stetten",
+      "name": "Ehemaliges Dominikanerinnenkloster Stetten",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 48.35706020000001,
+        "lng": 8.963256199999998
+      }
+    },
+    {
+      "id": "hechingen_furstengarten",
+      "name": "Fürstengarten & Villa Eugenia",
+      "before": {
+        "lat": 48.34826173749999,
+        "lng": 8.961363931249998
+      },
+      "google": {
+        "lat": 48.347744399999996,
+        "lng": 8.9614461,
+        "place_id": "ChIJcSoTNaEDmkcRrnXut8EDdIU",
+        "address": "Zollernstraße 10, 72379 Hechingen, Germany"
+      },
+      "delta_m": 58,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "hechingen_obertorplatz_schaukelweg",
+      "name": "Obertorplatz & Schaukelweg häppy",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 48.350638000000004,
+        "lng": 8.963238999999998
+      }
+    },
+    {
+      "id": "hechingen_stadtgeschichte",
+      "name": "Geschichte von Zollernstadt Hechingen",
+      "before": {
+        "lat": 48.35371271428571,
+        "lng": 8.961108785714286
+      },
+      "google": {
+        "lat": 48.352643199999996,
+        "lng": 8.964172999999999,
+        "place_id": "ChIJ9bWUHG0DmkcREui0pid06iY",
+        "address": "72379 Hechingen, Germany"
+      },
+      "delta_m": 256,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "hechingen_alte_synagoge",
+      "name": "Alte Synagoge Hechingen",
+      "before": {
+        "lat": 48.35185388888888,
+        "lng": 8.965496777777778
+      },
+      "google": {
+        "lat": 48.3518821,
+        "lng": 8.9654604,
+        "place_id": "ChIJ8w6KshUCmkcRiSfjZJMEWIc",
+        "address": "Goldschmiedstraße 20, 72379 Hechingen, Germany"
+      },
+      "delta_m": 4,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "hechingen_barfusspark_hechingen",
+      "name": "Barfußpark Hechingen",
+      "before": {
+        "lat": 48.348557410000005,
+        "lng": 8.956782530000002
+      },
+      "google": {
+        "lat": 48.3478279,
+        "lng": 8.9576525,
+        "place_id": "ChIJ4fW18zwCmkcR20cZBtd3A70",
+        "address": "72379 Hechingen, Germany"
+      },
+      "delta_m": 104,
+      "status": "BAD",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "hechingen_erleb_dich_pfad_hechingen",
+      "name": "erleb-dich-pfad Hechingen",
+      "before": {
+        "lat": 48.34412952,
+        "lng": 8.95757558
+      },
+      "google": {
+        "lat": 48.344957,
+        "lng": 8.9572243,
+        "place_id": "ChIJhbByfDsCmkcR_7Circ3ZI9o",
+        "address": "Feilbachtal, 72379 Hechingen, Germany"
+      },
+      "delta_m": 96,
+      "status": "BAD",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "hechingen_hofgut_domane",
+      "name": "Hofgut Domäne",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 48.35706020000001,
+        "lng": 8.963256199999998
+      }
+    },
+    {
+      "id": "hechingen_oldtimermuseum_zollernalb",
+      "name": "Oldtimermuseum Zollernalb & Kalendermuseum",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 48.353945580645174,
+        "lng": 8.965389838709674
+      }
+    },
+    {
+      "id": "hechingen_marktplatz_brunnen",
+      "name": "Marktplatz Brunnen",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 48.35098800000001,
+        "lng": 8.9627408
+      }
+    },
+    {
+      "id": "hechingen_krieger_denkmal",
+      "name": "Krieger Denkmal",
+      "before": {
+        "lat": 48.35155544444444,
+        "lng": 8.964686555555554
+      },
+      "google": {
+        "lat": 48.3513806,
+        "lng": 8.9649805,
+        "place_id": "ChIJB_gHMQADmkcRXvyKcSdi5N0",
+        "address": "Goldschmiedstraße 12, 72379 Hechingen, Germany"
+      },
+      "delta_m": 29,
+      "status": "CHECK",
+      "streetview": "ZERO_RESULTS",
+      "applied": true
+    },
+    {
+      "id": "hechingen_aussichtspunkt_hohenzollernblick",
+      "name": "Zeller Horn · Postkartenblick Burg",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 48.3124871,
+        "lng": 8.980073173333333
+      }
+    },
+    {
+      "id": "hechingen_starzelpark",
+      "name": "Starzelpark",
+      "before": {
+        "lat": 48.35522,
+        "lng": 8.9634501
+      },
+      "google": {
+        "lat": 48.3554429,
+        "lng": 8.963729599999999,
+        "place_id": "ChIJF0wG_RMCmkcRW5jmCoPclY4",
+        "address": "Ecke Neustraße, Ob. Mühlstraße 17, 72379 Hechingen, Germany"
+      },
+      "delta_m": 32,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "hechingen_aussichtspunkt_beurener_heide",
+      "name": "Aussichtspunkt Beurener Heide",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 48.35706020000001,
+        "lng": 8.963256199999998
+      }
+    },
+    {
+      "id": "hechingen_aussichtspunkt_burg_hohenzollern_bei_boll",
+      "name": "Aussichtspunkt Burg Hohenzollern bei Boll",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 48.326438683333336,
+        "lng": 9.008505152777778
+      }
+    },
+    {
+      "id": "hechingen_burgerburo",
+      "name": "Bürgerbüro",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 48.3524898,
+        "lng": 8.9637308
+      }
+    },
+    {
+      "id": "hechingen_rathaus_hechingen",
+      "name": "Rathaus Hechingen",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 48.352923800000006,
+        "lng": 8.9643783
+      }
+    },
+    {
+      "id": "hechingen_schloss_lindich",
+      "name": "Schloss Lindich",
+      "before": {
+        "lat": 48.36348872727273,
+        "lng": 8.921636090909091
+      },
+      "google": {
+        "lat": 48.3634306,
+        "lng": 8.921625299999999,
+        "place_id": "ChIJV7s4Tt0BmkcRpPQbVlKLS9I",
+        "address": "Lindichstraße 4, 72379 Hechingen, Germany"
+      },
+      "delta_m": 7,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "hechingen_maerchenpfad",
+      "name": "Märchenpfad Hechingen",
+      "before": {
+        "lat": 48.36259763636363,
+        "lng": 8.947764472727272
+      },
+      "google": {
+        "lat": 48.3625027,
+        "lng": 8.9479736,
+        "place_id": "ChIJa6gvdvgBmkcRccuiKCgwDhU",
+        "address": "Niederhechinger Str., 72379 Hechingen, Germany"
+      },
+      "delta_m": 19,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "hechingen_johanneskirche",
+      "name": "Evangelische Johanneskirche",
+      "before": {
+        "lat": 48.349245894736846,
+        "lng": 8.962873578947368
+      },
+      "google": {
+        "lat": 48.3492422,
+        "lng": 8.9628582,
+        "place_id": "ChIJ-1DQydoDmkcRXqyuj-90jfE",
+        "address": "Zollernstraße 5, 72379 Hechingen, Germany"
+      },
+      "delta_m": 1,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "hechingen_medical_valley_bentley",
+      "name": "Medical Valley · Bentley Lotzenäcker",
+      "before": {
+        "lat": 48.37307238461539,
+        "lng": 8.95852376923077
+      },
+      "google": {
+        "lat": 48.3732816,
+        "lng": 8.958395399999999,
+        "place_id": "ChIJt7IKEan4mUcR03HcjtRfshA",
+        "address": "Lotzenäcker 3, 72379 Hechingen, Germany"
+      },
+      "delta_m": 25,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "hechingen_neues_schloss_sparkasse",
+      "name": "Neues Schloss · Sparkasse ATM",
+      "before": {
+        "lat": 48.353845322580646,
+        "lng": 8.963100225806452
+      },
+      "google": {
+        "lat": 48.3540466,
+        "lng": 8.9629362,
+        "place_id": "ChIJsySamBYCmkcRWMxcV9ARUXc",
+        "address": "Schloßpl. 1, 72379 Hechingen, Germany"
+      },
+      "delta_m": 25,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "hechingen_wallfahrtskirche_maria_zell",
+      "name": "Wallfahrtskirche Maria Zell",
+      "before": {
+        "lat": 48.31752576875,
+        "lng": 8.98035595625
+      },
+      "google": {
+        "lat": 48.3175257,
+        "lng": 8.9803416,
+        "place_id": "ChIJ5apUM6YDmkcRzwwm8OualSE",
+        "address": "Unnamed Road, 72379 Hechingen, Germany"
+      },
+      "delta_m": 1,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "hechingen_dreifuerstenstein",
+      "name": "Dreifürstenstein",
+      "before": {
+        "lat": 48.35706020000001,
+        "lng": 8.963256199999998
+      },
+      "google": {
+        "lat": 48.372873999999996,
+        "lng": 9.0439823,
+        "place_id": "ChIJlSTz_Ej5mUcRInSGoIuo_x8",
+        "address": "92FV+4H, 72393 Hechingen, Germany"
+      },
+      "delta_m": 6218,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "hechingen_panoramabad",
+      "name": "Panoramabad Hechingen (Hallen-/Freibad)",
+      "before": {
+        "lat": 48.361522484615385,
+        "lng": 8.956289476923079
+      },
+      "google": {
+        "lat": 48.3614106,
+        "lng": 8.956691200000002,
+        "place_id": "ChIJi_FXIAUCmkcROMLC19SYwNY",
+        "address": "Badstraße 14, 72379 Hechingen, Germany"
+      },
+      "delta_m": 32,
+      "status": "CHECK",
+      "streetview": "ZERO_RESULTS",
+      "applied": true
+    },
+    {
+      "id": "hechingen_burgtheater_kino",
+      "name": "Burgtheater · Hechinger Kinos",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 48.34994488888889,
+        "lng": 8.963684222222222
+      }
+    },
+    {
+      "id": "hechingen_heiligkreuzkapelle_friedhof",
+      "name": "Heiligkreuzkapelle (Gottesackerkirche)",
+      "before": {
+        "lat": 48.33944645454546,
+        "lng": 8.969881090909091
+      },
+      "google": {
+        "lat": 48.3394597,
+        "lng": 8.9698156,
+        "place_id": "ChIJT3WVprYDmkcRJZ67rLvt4W4",
+        "address": "Zollerstraße, 72379 Hechingen, Germany"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "hechingen_buergergarde_gardeheim",
+      "name": "Historische Bürgergarde · Gardeheim",
+      "before": {
+        "lat": 48.358048857142855,
+        "lng": 8.96139157142857
+      },
+      "google": {
+        "lat": 48.3580371,
+        "lng": 8.9613663,
+        "place_id": "ChIJlZEZyvEDmkcRHQ9Kopc0zTQ",
+        "address": "Niederhechinger Str. 15, 72379 Hechingen, Germany"
+      },
+      "delta_m": 2,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "hechingen_wasserturm_sickingen",
+      "name": "Wasserturm Sickingen",
+      "before": {
+        "lat": 48.379148199999996,
+        "lng": 8.972748999999999
+      },
+      "google": {
+        "lat": 48.379146,
+        "lng": 8.973110499999999,
+        "place_id": "ChIJmwk0tbz4mUcRxuUBzN8WDDY",
+        "address": "Achalmstraße 66/1, 72379 Hechingen-Sickingen, Germany"
+      },
+      "delta_m": 27,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "hechingen_waldy_walderlebnisweg_hechingen",
+      "name": "Waldy Walderlebnisweg Hechingen",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 48.352393185714284,
+        "lng": 8.939812585714288
+      }
+    },
+    {
+      "id": "hechingen_feldkreuz",
+      "name": "Feldkreuz",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 48.34685176666667,
+        "lng": 8.921167411111112
+      }
+    },
+    {
+      "id": "hechingen_feldkreuz_brachwiesle",
+      "name": "Feldkreuz Brachwiesle",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 48.35706020000001,
+        "lng": 8.963256199999998
+      }
+    },
+    {
+      "id": "hechingen_naturschutzgebiet_mittleres_starzeltal",
+      "name": "Naturschutzgebiet Mittleres Starzeltal",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 48.35706020000001,
+        "lng": 8.963256199999998
+      }
+    },
+    {
+      "id": "hechingen_wasserfall_hechingen",
+      "name": "Wasserfall Hechingen",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 48.352806,
+        "lng": 8.973945625
+      }
+    },
+    {
+      "id": "hechingen_martinsquelle",
+      "name": "Martinsquelle",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 48.36027585555556,
+        "lng": 8.943199622222222
+      }
+    },
+    {
+      "id": "hechingen_aussichtspunkt_auf_die_burg_hohenzollern",
+      "name": "Aussichtspunkt auf die Burg Hohenzollern",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 48.35706020000001,
+        "lng": 8.963256199999998
+      }
+    },
+    {
+      "id": "hechingen_hangender_stein",
+      "name": "Hangender Stein",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 48.30623782222223,
+        "lng": 9.000343322222221
+      }
+    },
+    {
+      "id": "hechingen_weisses_hausle_billardhauschen",
+      "name": "Weißes Häusle / Billardhäuschen",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 48.3475776,
+        "lng": 8.961985799999999
+      }
+    },
+    {
+      "id": "hechingen_aussichtspunkt_jokenplatz",
+      "name": "Aussichtspunkt Jokenplatz",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 48.36572383999999,
+        "lng": 9.041458534285711
+      }
+    },
+    {
+      "id": "hechingen_aussichtspunkt_bismarckstein",
+      "name": "Aussichtspunkt Bismarckstein",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 48.35997099999999,
+        "lng": 9.02805
+      }
+    },
+    {
+      "id": "hechingen_aussichtspunkt",
+      "name": "Aussichtspunkt",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 48.34690465999999,
+        "lng": 8.9590279
+      }
+    },
+    {
+      "id": "hechingen_zollernalb_kinos",
+      "name": "Zollernalb Kinos",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 48.346515307692314,
+        "lng": 8.962239692307692
+      }
+    },
+    {
+      "id": "hechingen_hohenzollernhalle_bisingen",
+      "name": "Hohenzollernhalle Bisingen",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 48.309771821428576,
+        "lng": 8.917570939285714
+      }
+    },
+    {
+      "id": "hechingen_streichelzoo_hofgut_domane",
+      "name": "Streichelzoo Hofgut Domäne",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 48.3370082,
+        "lng": 8.950005
+      }
+    }
+  ]
+}

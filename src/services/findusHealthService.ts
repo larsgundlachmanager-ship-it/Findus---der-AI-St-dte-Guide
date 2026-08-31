@@ -1,11 +1,11 @@
 /**
- * Findus-Präsenz & Diagnose: online/grün vs. offline/orange,
+ * Yorro-Präsenz & Diagnose: online/grün vs. offline/orange,
  * plus erklärbare Issues für „Was funktioniert nicht?“.
  */
 
-import * as Network from 'expo-network';
 import { env } from '../config/env';
 import { useFinnusStore } from '../store/useFinnusStore';
+import { isDeviceOffline } from './navigation/networkState';
 import { hasGeminiApiKey } from './geminiService';
 import { hasCartesiaTtsKey } from './cartesiaTtsService';
 
@@ -49,12 +49,9 @@ export function reportApiSuccess(): void {
 
 export async function refreshNetworkStatus(): Promise<boolean> {
   try {
-    const state = await Network.getNetworkStateAsync();
-    networkOk = !!(
-      state.isConnected && state.isInternetReachable !== false
-    );
+    networkOk = !(await isDeviceOffline());
   } catch {
-    networkOk = false;
+    networkOk = true;
   }
   pushPresenceFromHealth();
   return networkOk;
@@ -76,7 +73,7 @@ export function evaluateFindusHealth(): FindusHealth {
     issues.push({
       id: 'gps_denied',
       title: 'GPS-Berechtigung fehlt',
-      fix: 'In den System-Einstellungen Standortzugriff für Findus erlauben.',
+      fix: 'In den System-Einstellungen Standortzugriff für Yorro erlauben.',
     });
   } else if (store.gpsServicesEnabled === false) {
     issues.push({
@@ -122,7 +119,7 @@ export function evaluateFindusHealth(): FindusHealth {
       id: 'api',
       title: 'KI-Antwort zuletzt fehlgeschlagen',
       fix: hasKey
-        ? `Netz prüfen und nochmal fragen${lastApiFailureMsg ? ` (${lastApiFailureMsg})` : ''}.`
+        ? `KI-Dienst hat nicht geantwortet — nochmal fragen${lastApiFailureMsg ? ` (${lastApiFailureMsg})` : ''}.`
         : 'API-Key in .env setzen (Gemini/OpenAI), sonst nur Offline-Antworten.',
     });
   }
@@ -164,7 +161,7 @@ export function buildHealthStatusReply(health?: FindusHealth): string {
   );
   const tone =
     h.presence === 'offline'
-      ? 'Ich bin gerade offline (grau).'
+      ? 'Ich bin gerade offline (orange).'
       : 'Ich bin online, aber etwas hakt (orange).';
   return `${tone} Das ist aktuell kaputt bzw. zu prüfen:\n${lines.join('\n')}`;
 }

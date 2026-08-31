@@ -1,0 +1,933 @@
+{
+  "generated_at": "2026-08-28T03:33:44.930Z",
+  "summary": {
+    "city_id": "chorin",
+    "checked": 30,
+    "ok": 8,
+    "check": 14,
+    "bad": 8,
+    "errors": 0,
+    "max_delta_m": 180,
+    "city_halo_m": 12000,
+    "story_only": true
+  },
+  "rows": [
+    {
+      "id": "chorin_britz_chorin_oderberg",
+      "name": "Britz-Chorin-Oderberg",
+      "category": "geschichte",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.8946622,
+        "lng": 13.9394463
+      },
+      "query": "Britz-Chorin-Oderberg, Chorin, Germany",
+      "osm": {
+        "lat": 52.8759127,
+        "lng": 13.8215323,
+        "display_name": "Amt Britz-Chorin-Oderberg, 11, Eisenwerkstraße, Kolonie Britz, Britz, Britz-Chorin-Oderberg, Barnim, Brandenburg, 16230, Deutschland",
+        "class": "office",
+        "type": "government",
+        "importance": 0.000047514305332982645,
+        "osm_type": "relation",
+        "osm_id": 3750158,
+        "provider": "nominatim"
+      },
+      "delta_m": 8182,
+      "from_city_m": 4588,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "chorin_gleis_9_n_e_v",
+      "name": "Gleis 9 n.E.V.",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.8933345,
+        "lng": 13.88384055263158
+      },
+      "query": "Gleis 9 n.E.V., Chorin, Germany",
+      "osm": {
+        "lat": 52.9123233,
+        "lng": 14.0011736,
+        "display_name": "Naturfreunde-Campinggemeinschaft Pehlitzwerder e.V., Am Pehlitzwerder, Chorin, Deutschland",
+        "class": "information",
+        "type": "map",
+        "provider": "photon"
+      },
+      "delta_m": 8148,
+      "from_city_m": 1382,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "chorin_chorin_bahnhof",
+        "chorin_privatparkplatz_kloster_chorin",
+        "chorin_waldlehrgarten_weinberg",
+        "chorin_parkplatz_kloster_chorin",
+        "chorin_fettseemoor",
+        "chorin_stele_senftenhutte",
+        "chorin_rapp_keramik_chorin",
+        "chorin_futterhandel_kornscheune_ronald_kuter",
+        "chorin_spilwut"
+      ]
+    },
+    {
+      "id": "chorin_besucher_und_informationszentrum_geopark_gross_ziethen",
+      "name": "Besucher- und Informationszentrum Geopark Groß Ziethen",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.96266156923077,
+        "lng": 13.889949930769232
+      },
+      "query": "Besucher-, Chorin, Germany",
+      "osm": {
+        "lat": 52.9036603,
+        "lng": 13.8724943,
+        "display_name": "Chorin, Barnim, Deutschland",
+        "class": "place",
+        "type": "village",
+        "provider": "photon"
+      },
+      "delta_m": 6664,
+      "from_city_m": 6646,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "chorin_aussichtspunkt",
+      "name": "Aussichtspunkt",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.8596425,
+        "lng": 13.8701897
+      },
+      "query": "Aussichtspunkt, Chorin, Germany",
+      "osm": {
+        "lat": 52.9036603,
+        "lng": 13.8724943,
+        "display_name": "Chorin, Barnim, Deutschland",
+        "class": "place",
+        "type": "village",
+        "provider": "photon"
+      },
+      "delta_m": 4897,
+      "from_city_m": 4913,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "chorin_chorin_bahnhof",
+      "name": "Chorin Bahnhof",
+      "category": "bahnhof",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.8933345,
+        "lng": 13.88384055263158
+      },
+      "query": "Chorin Bahnhof, Chorin, Germany",
+      "osm": {
+        "lat": 52.9036675,
+        "lng": 13.8702117,
+        "display_name": "Historischer Bahnhof Chorin, Choriner Bahnhofstraße, Chorin, Britz-Chorin-Oderberg, Barnim, Brandenburg, 16230, Deutschland",
+        "class": "information",
+        "type": "office",
+        "importance": 0.00004340810254058164,
+        "osm_type": "node",
+        "osm_id": 4158785284,
+        "provider": "nominatim"
+      },
+      "delta_m": 1468,
+      "from_city_m": 1382,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "chorin_privatparkplatz_kloster_chorin",
+        "chorin_waldlehrgarten_weinberg",
+        "chorin_parkplatz_kloster_chorin",
+        "chorin_fettseemoor",
+        "chorin_gleis_9_n_e_v",
+        "chorin_stele_senftenhutte",
+        "chorin_rapp_keramik_chorin",
+        "chorin_futterhandel_kornscheune_ronald_kuter",
+        "chorin_spilwut"
+      ]
+    },
+    {
+      "id": "chorin_ragoser_schleuse",
+      "name": "Ragöser Schleuse",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.84973522,
+        "lng": 13.85665118
+      },
+      "query": "Ragöser Schleuse, Chorin, Germany",
+      "osm": {
+        "lat": 52.8504236,
+        "lng": 13.8510326,
+        "display_name": "Ragöser Schleuse, Eberswalde, Deutschland",
+        "class": "highway",
+        "type": "residential",
+        "provider": "photon"
+      },
+      "delta_m": 385,
+      "from_city_m": 6108,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "chorin_listnride_fahrradverleih_in_chorin",
+      "name": "ListNRide - Fahrradverleih in Chorin",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.901944,
+        "lng": 13.871110999999999
+      },
+      "query": "ListNRide, Chorin, Germany",
+      "osm": {
+        "lat": 52.9036603,
+        "lng": 13.8724943,
+        "display_name": "Chorin, Barnim, Deutschland",
+        "class": "place",
+        "type": "village",
+        "provider": "photon"
+      },
+      "delta_m": 212,
+      "from_city_m": 234,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "chorin_waldlehrgarten_weinberg",
+      "name": "Waldlehrgarten Weinberg",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.8933345,
+        "lng": 13.88384055263158
+      },
+      "query": "Waldlehrgarten Weinberg, Chorin, Germany",
+      "osm": {
+        "lat": 52.8918646,
+        "lng": 13.8851215,
+        "display_name": "Naturlehrpfad Weinberg, Lieper Amtsweg, Chorin, Deutschland",
+        "class": "information",
+        "type": "map",
+        "provider": "photon"
+      },
+      "delta_m": 185,
+      "from_city_m": 1382,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "chorin_chorin_bahnhof",
+        "chorin_privatparkplatz_kloster_chorin",
+        "chorin_parkplatz_kloster_chorin",
+        "chorin_fettseemoor",
+        "chorin_gleis_9_n_e_v",
+        "chorin_stele_senftenhutte",
+        "chorin_rapp_keramik_chorin",
+        "chorin_futterhandel_kornscheune_ronald_kuter",
+        "chorin_spilwut"
+      ]
+    },
+    {
+      "id": "chorin_rapp_keramik_chorin",
+      "name": "RAPP KERAMIK CHORIN",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.8933345,
+        "lng": 13.88384055263158
+      },
+      "query": "RAPP KERAMIK CHORIN, Chorin",
+      "osm": {
+        "lat": 48.0816992,
+        "lng": 7.4013271,
+        "display_name": "Rue Chopin, Horburg-Weier, Frankreich",
+        "class": "highway",
+        "type": "residential",
+        "provider": "photon"
+      },
+      "delta_m": 704121,
+      "from_city_m": 1382,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city",
+        "duplicate_center"
+      ],
+      "twins": [
+        "chorin_chorin_bahnhof",
+        "chorin_privatparkplatz_kloster_chorin",
+        "chorin_waldlehrgarten_weinberg",
+        "chorin_parkplatz_kloster_chorin",
+        "chorin_fettseemoor",
+        "chorin_gleis_9_n_e_v",
+        "chorin_stele_senftenhutte",
+        "chorin_futterhandel_kornscheune_ronald_kuter",
+        "chorin_spilwut"
+      ]
+    },
+    {
+      "id": "chorin_kriegsgraberstatte_erster_und_zweiter_weltkrieg",
+      "name": "Kriegsgräberstätte Erster und Zweiter Weltkrieg",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.88603872,
+        "lng": 13.87919786
+      },
+      "query": "Kriegsgräberstätte Erster, Chorin, Germany",
+      "osm": {
+        "lat": 51.8607959,
+        "lng": 10.102918,
+        "display_name": "Kriegsgräberstätte Erster und Zweiter Weltkrieg, Dannhäuser Methe, Bad Gandersheim, Deutschland",
+        "class": "historic",
+        "type": "tomb",
+        "provider": "photon"
+      },
+      "delta_m": 280516,
+      "from_city_m": 2022,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "chorin_sports_field",
+      "name": "Sports Field",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.902782099999996,
+        "lng": 13.873432399999999
+      },
+      "query": "Sports Field, Chorin, Germany",
+      "osm": {
+        "lat": 52.4301495,
+        "lng": 13.3158934,
+        "display_name": "Defender Sports Field, Goethestraße, Berlin, Deutschland",
+        "class": "leisure",
+        "type": "sports_centre",
+        "provider": "photon"
+      },
+      "delta_m": 64618,
+      "from_city_m": 122,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "chorin_okohof_engler",
+      "name": "Ökohof Engler",
+      "category": "souvenir",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.92926748,
+        "lng": 13.92501956
+      },
+      "query": "Ökohof Engler, Chorin, Germany",
+      "osm": {
+        "lat": 52.8773281,
+        "lng": 14.0573178,
+        "display_name": "Ökohof Brodowin (Standort Oderberg), Oderberg, Deutschland",
+        "class": "landuse",
+        "type": "farmyard",
+        "provider": "photon"
+      },
+      "delta_m": 10587,
+      "from_city_m": 4506,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "chorin_amtssee",
+      "name": "Amtssee",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.89499154,
+        "lng": 13.88667354
+      },
+      "query": "Amtssee, Chorin, Germany",
+      "osm": {
+        "lat": 52.8949035,
+        "lng": 13.8888743,
+        "display_name": "Amtssee, Kloster Chorin, Chorin, Britz-Chorin-Oderberg, Barnim, Brandenburg, Deutschland",
+        "class": "natural",
+        "type": "water",
+        "importance": 0.16273786379520622,
+        "osm_type": "relation",
+        "osm_id": 1622604,
+        "provider": "nominatim"
+      },
+      "delta_m": 148,
+      "from_city_m": 1354,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "chorin_touristinformation_kloster_chorin",
+      "name": "Touristinformation Kloster Chorin",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.89240632727273,
+        "lng": 13.88246169090909
+      },
+      "query": "Touristinformation Kloster Chorin, Chorin, Germany",
+      "osm": {
+        "lat": 52.8929529,
+        "lng": 13.8839455,
+        "display_name": "Kloster Chorin, Amt Chorin, Chorin, Deutschland",
+        "class": "tourism",
+        "type": "attraction",
+        "provider": "photon"
+      },
+      "delta_m": 117,
+      "from_city_m": 1425,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "chorin_ruine_der_klostermuhle_chorin"
+      ]
+    },
+    {
+      "id": "chorin_privatparkplatz_kloster_chorin",
+      "name": "Privatparkplatz Kloster Chorin",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.8933345,
+        "lng": 13.88384055263158
+      },
+      "query": "Privatparkplatz Kloster Chorin, Chorin, Germany",
+      "osm": {
+        "lat": 52.8929529,
+        "lng": 13.8839455,
+        "display_name": "Kloster Chorin, Amt Chorin, Chorin, Deutschland",
+        "class": "tourism",
+        "type": "attraction",
+        "provider": "photon"
+      },
+      "delta_m": 43,
+      "from_city_m": 1382,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "chorin_chorin_bahnhof",
+        "chorin_waldlehrgarten_weinberg",
+        "chorin_parkplatz_kloster_chorin",
+        "chorin_fettseemoor",
+        "chorin_gleis_9_n_e_v",
+        "chorin_stele_senftenhutte",
+        "chorin_rapp_keramik_chorin",
+        "chorin_futterhandel_kornscheune_ronald_kuter",
+        "chorin_spilwut"
+      ]
+    },
+    {
+      "id": "chorin_parkplatz_kloster_chorin",
+      "name": "Parkplatz Kloster Chorin",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.8933345,
+        "lng": 13.88384055263158
+      },
+      "query": "Parkplatz Kloster Chorin, Chorin, Germany",
+      "osm": {
+        "lat": 52.8929529,
+        "lng": 13.8839455,
+        "display_name": "Kloster Chorin, Amt Chorin, Chorin, Deutschland",
+        "class": "tourism",
+        "type": "attraction",
+        "provider": "photon"
+      },
+      "delta_m": 43,
+      "from_city_m": 1382,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "chorin_chorin_bahnhof",
+        "chorin_privatparkplatz_kloster_chorin",
+        "chorin_waldlehrgarten_weinberg",
+        "chorin_fettseemoor",
+        "chorin_gleis_9_n_e_v",
+        "chorin_stele_senftenhutte",
+        "chorin_rapp_keramik_chorin",
+        "chorin_futterhandel_kornscheune_ronald_kuter",
+        "chorin_spilwut"
+      ]
+    },
+    {
+      "id": "chorin_ruine_der_klostermuhle_chorin",
+      "name": "Ruine der Klostermühle Chorin",
+      "category": "altstadt",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.89240632727273,
+        "lng": 13.88246169090909
+      },
+      "query": "Ruine der Klostermühle Chorin, Chorin, Germany",
+      "osm": {
+        "lat": 52.8923511,
+        "lng": 13.8826713,
+        "display_name": "Die Klostermühle in Chorin, Amt Chorin, Chorin, Deutschland",
+        "class": "information",
+        "type": "board",
+        "provider": "photon"
+      },
+      "delta_m": 15,
+      "from_city_m": 1425,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "chorin_touristinformation_kloster_chorin"
+      ]
+    },
+    {
+      "id": "chorin_fettseemoor",
+      "name": "Fettseemoor",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.8933345,
+        "lng": 13.88384055263158
+      },
+      "query": "Fettseemoor, Chorin",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 1382,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "chorin_chorin_bahnhof",
+        "chorin_privatparkplatz_kloster_chorin",
+        "chorin_waldlehrgarten_weinberg",
+        "chorin_parkplatz_kloster_chorin",
+        "chorin_gleis_9_n_e_v",
+        "chorin_stele_senftenhutte",
+        "chorin_rapp_keramik_chorin",
+        "chorin_futterhandel_kornscheune_ronald_kuter",
+        "chorin_spilwut"
+      ]
+    },
+    {
+      "id": "chorin_alpakas_vom_serwester_hof",
+      "name": "Alpakas vom Serwester Hof",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.93001255,
+        "lng": 13.919348824999998
+      },
+      "query": "Alpakas vom Serwester, Chorin, Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 4273,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "chorin_stele_senftenhutte",
+      "name": "Stele Senftenhütte",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.8933345,
+        "lng": 13.88384055263158
+      },
+      "query": "Stele Senftenhütte, Chorin",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 1382,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "chorin_chorin_bahnhof",
+        "chorin_privatparkplatz_kloster_chorin",
+        "chorin_waldlehrgarten_weinberg",
+        "chorin_parkplatz_kloster_chorin",
+        "chorin_fettseemoor",
+        "chorin_gleis_9_n_e_v",
+        "chorin_rapp_keramik_chorin",
+        "chorin_futterhandel_kornscheune_ronald_kuter",
+        "chorin_spilwut"
+      ]
+    },
+    {
+      "id": "chorin_neuehutte_denkmal",
+      "name": "Neuehütte Denkmal",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.867867020000006,
+        "lng": 13.853661840000001
+      },
+      "query": "Neuehütte Denkmal, Chorin",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 4196,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "chorin_futterhandel_kornscheune_ronald_kuter",
+      "name": "Futterhandel Kornscheune Ronald Küter",
+      "category": "souvenir",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.8933345,
+        "lng": 13.88384055263158
+      },
+      "query": "Futterhandel Kornscheune Ronald, Chorin, Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 1382,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "chorin_chorin_bahnhof",
+        "chorin_privatparkplatz_kloster_chorin",
+        "chorin_waldlehrgarten_weinberg",
+        "chorin_parkplatz_kloster_chorin",
+        "chorin_fettseemoor",
+        "chorin_gleis_9_n_e_v",
+        "chorin_stele_senftenhutte",
+        "chorin_rapp_keramik_chorin",
+        "chorin_spilwut"
+      ]
+    },
+    {
+      "id": "chorin_ehemalige_ragoser_muhle",
+      "name": "Ehemalige Ragöser Mühle",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.879647687500004,
+        "lng": 13.8618044875
+      },
+      "query": "Ehemalige Ragöser Mühle, Chorin, Germany",
+      "osm": {
+        "lat": 52.8793875,
+        "lng": 13.8622844,
+        "display_name": "Ragöser Mühle, Chorin, Deutschland",
+        "class": "place",
+        "type": "hamlet",
+        "provider": "photon"
+      },
+      "delta_m": 43,
+      "from_city_m": 2784,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "chorin_lehrpfad_chorin",
+      "name": "Lehrpfad Chorin",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.89314082,
+        "lng": 13.880325480000002
+      },
+      "query": "Lehrpfad Chorin, Chorin, Germany",
+      "osm": {
+        "lat": 52.8930698,
+        "lng": 13.8797861,
+        "display_name": "Lehrpfad, Kloster Chorin, Chorin, Britz-Chorin-Oderberg, Barnim, Brandenburg, 16230, Deutschland",
+        "class": "highway",
+        "type": "path",
+        "importance": 0.04004340810254062,
+        "osm_type": "way",
+        "osm_id": 865177686,
+        "provider": "nominatim"
+      },
+      "delta_m": 37,
+      "from_city_m": 1290,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "chorin_hof_langanke",
+      "name": "Hof Langanke",
+      "category": "souvenir",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.932903780000004,
+        "lng": 13.910711459999998
+      },
+      "query": "Hof Langanke, Chorin, Germany",
+      "osm": {
+        "lat": 52.9327054,
+        "lng": 13.9103522,
+        "display_name": "Hof Langanke, 7, Buchholz, Serwest, Chorin, Britz-Chorin-Oderberg, Barnim, Brandenburg, 16230, Deutschland",
+        "class": "landuse",
+        "type": "farmyard",
+        "importance": 0.0800434081025406,
+        "osm_type": "way",
+        "osm_id": 718463630,
+        "provider": "nominatim"
+      },
+      "delta_m": 33,
+      "from_city_m": 4118,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "chorin_kloster_chorin",
+      "name": "Kloster Chorin",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.89291048,
+        "lng": 13.883504920000002
+      },
+      "query": "Kloster Chorin, Chorin, Germany",
+      "osm": {
+        "lat": 52.8929529,
+        "lng": 13.8839455,
+        "display_name": "Kloster Chorin, Amt Chorin, Chorin, Britz-Chorin-Oderberg, Barnim, Brandenburg, 16230, Deutschland",
+        "class": "tourism",
+        "type": "attraction",
+        "importance": 0.35614271866453184,
+        "osm_type": "way",
+        "osm_id": 53093748,
+        "provider": "nominatim"
+      },
+      "delta_m": 30,
+      "from_city_m": 1410,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "chorin_kleiner_rummelsberg",
+      "name": "Kleiner Rummelsberg",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.91282717777777,
+        "lng": 13.982062633333335
+      },
+      "query": "Kleiner Rummelsberg, Chorin, Germany",
+      "osm": {
+        "lat": 52.9127921,
+        "lng": 13.982018,
+        "display_name": "Kleiner Rummelsberg, Chorin, Britz-Chorin-Oderberg, Barnim, Brandenburg, 16230, Deutschland",
+        "class": "natural",
+        "type": "peak",
+        "importance": 0.11734328469919902,
+        "osm_type": "node",
+        "osm_id": 672436643,
+        "provider": "nominatim"
+      },
+      "delta_m": 5,
+      "from_city_m": 7400,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "chorin_choriner_dorfkirche",
+      "name": "Choriner Dorfkirche",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.902534233333334,
+        "lng": 13.871929983333333
+      },
+      "query": "Choriner Dorfkirche, Chorin, Germany",
+      "osm": {
+        "lat": 52.9025576,
+        "lng": 13.871965,
+        "display_name": "Dorfkirche Chorin, Choriner Dorfstraße, Chorin, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 4,
+      "from_city_m": 151,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "chorin_hotel_haus_chorin",
+      "name": "Hotel Haus Chorin",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.89803973000001,
+        "lng": 13.883335475
+      },
+      "query": "Hotel Haus Chorin, Chorin, Germany",
+      "osm": {
+        "lat": 52.8980601,
+        "lng": 13.8833552,
+        "display_name": "Hotel Haus Chorin, 10, Neue Klosterallee, Kloster Chorin, Chorin, Britz-Chorin-Oderberg, Barnim, Brandenburg, 16230, Deutschland",
+        "class": "tourism",
+        "type": "hotel",
+        "importance": 0.00004340810254058164,
+        "osm_type": "way",
+        "osm_id": 32572142,
+        "provider": "nominatim"
+      },
+      "delta_m": 3,
+      "from_city_m": 957,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "chorin_planetenweg",
+      "name": "Planetenweg",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.938877883333326,
+        "lng": 13.905450083333335
+      },
+      "query": "Planetenweg, Chorin, Germany",
+      "osm": {
+        "lat": 52.9388769,
+        "lng": 13.9054634,
+        "display_name": "Planetenweg, Buchholzer Straße, Buchholz, Serwest, Chorin, Britz-Chorin-Oderberg, Barnim, Brandenburg, 16230, Deutschland",
+        "class": "information",
+        "type": "board",
+        "importance": 0.00004340810254058164,
+        "osm_type": "node",
+        "osm_id": 6916788270,
+        "provider": "nominatim"
+      },
+      "delta_m": 1,
+      "from_city_m": 4475,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    }
+  ]
+}

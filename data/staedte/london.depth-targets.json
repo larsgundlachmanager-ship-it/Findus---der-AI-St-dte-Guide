@@ -1,0 +1,566 @@
+{
+  "story": 71,
+  "need": 70,
+  "spots": [
+    {
+      "id": "london_covent_garden",
+      "name": "Covent Garden",
+      "tier": 1,
+      "chars": 183,
+      "lat": 51.512273699999994,
+      "lng": -0.1234492
+    },
+    {
+      "id": "london_national_gallery",
+      "name": "National Gallery",
+      "tier": 1,
+      "chars": 279,
+      "lat": 51.508928999999995,
+      "lng": -0.128299
+    },
+    {
+      "id": "london_natural_history_museum",
+      "name": "Natural History Museum",
+      "tier": 1,
+      "chars": 291,
+      "lat": 51.496714999999995,
+      "lng": -0.17636720000000003
+    },
+    {
+      "id": "london_victoria_and_albert_museum",
+      "name": "Victoria and Albert Museum",
+      "tier": 1,
+      "chars": 299,
+      "lat": 51.4966392,
+      "lng": -0.17218
+    },
+    {
+      "id": "london_british_museum",
+      "name": "British Museum",
+      "tier": 1,
+      "chars": 275,
+      "lat": 51.5194133,
+      "lng": -0.1269566
+    },
+    {
+      "id": "london_westminster_abbey",
+      "name": "Westminster Abbey",
+      "tier": 1,
+      "chars": 272,
+      "lat": 51.4993695,
+      "lng": -0.1272993
+    },
+    {
+      "id": "london_hyde_park",
+      "name": "Hyde Park",
+      "tier": 1,
+      "chars": 175,
+      "lat": 51.5073638,
+      "lng": -0.1641135
+    },
+    {
+      "id": "london_tower_of_london",
+      "name": "Tower of London",
+      "tier": 1,
+      "chars": 187,
+      "lat": 51.508112399999995,
+      "lng": -0.0759493
+    },
+    {
+      "id": "london_palace_of_westminster",
+      "name": "Palace of Westminster",
+      "tier": 1,
+      "chars": 199,
+      "lat": 51.4994794,
+      "lng": -0.1248092
+    },
+    {
+      "id": "london_buckingham_palace",
+      "name": "Buckingham Palace",
+      "tier": 1,
+      "chars": 191,
+      "lat": 51.501363999999995,
+      "lng": -0.14189
+    },
+    {
+      "id": "london_big_ben",
+      "name": "Big Ben / Elizabeth Tower",
+      "tier": 1,
+      "chars": 171,
+      "lat": 51.500729199999995,
+      "lng": -0.12462540000000001
+    },
+    {
+      "id": "london_trafalgar_square",
+      "name": "Trafalgar Square",
+      "tier": 1,
+      "chars": 189,
+      "lat": 51.508039,
+      "lng": -0.128069
+    },
+    {
+      "id": "london_kensington_palace",
+      "name": "Kensington Palace",
+      "tier": 1,
+      "chars": 191,
+      "lat": 51.504975699999996,
+      "lng": -0.187681
+    },
+    {
+      "id": "london_borough_market",
+      "name": "Borough Market",
+      "tier": 1,
+      "chars": 185,
+      "lat": 51.505582600000004,
+      "lng": -0.09048080000000001
+    },
+    {
+      "id": "london_tower_bridge",
+      "name": "Tower Bridge",
+      "tier": 1,
+      "chars": 0,
+      "lat": 51.5054564,
+      "lng": -0.07535649999999999
+    },
+    {
+      "id": "london_tate_modern",
+      "name": "Tate Modern",
+      "tier": 1,
+      "chars": 0,
+      "lat": 51.507595300000006,
+      "lng": -0.0993564
+    },
+    {
+      "id": "london_cutty_sark",
+      "name": "Cutty Sark",
+      "tier": 1,
+      "chars": 0,
+      "lat": 51.4828646,
+      "lng": -0.0095917
+    },
+    {
+      "id": "london_royal_observatory_greenwich",
+      "name": "Royal Observatory Greenwich",
+      "tier": 1,
+      "chars": 0,
+      "lat": 51.476853,
+      "lng": -0.0005002
+    },
+    {
+      "id": "london_hampton_court_palace",
+      "name": "Hampton Court Palace",
+      "tier": 1,
+      "chars": 0,
+      "lat": 51.4036128,
+      "lng": -0.33776229999999996
+    },
+    {
+      "id": "london_kew_gardens",
+      "name": "Kew Gardens",
+      "tier": 1,
+      "chars": 0,
+      "lat": 51.4787438,
+      "lng": -0.295573
+    },
+    {
+      "id": "london_hms_belfast",
+      "name": "HMS Belfast",
+      "tier": 1,
+      "chars": 0,
+      "lat": 51.506579,
+      "lng": -0.081389
+    },
+    {
+      "id": "london_st_pauls_cathedral",
+      "name": "St Paul's Cathedral",
+      "tier": 1,
+      "chars": 0,
+      "lat": 51.5138453,
+      "lng": -0.0983506
+    },
+    {
+      "id": "london_london_eye",
+      "name": "London Eye",
+      "tier": 1,
+      "chars": 0,
+      "lat": 51.5031864,
+      "lng": -0.11951919999999999
+    },
+    {
+      "id": "london_shakespeares_globe",
+      "name": "Shakespeare's Globe",
+      "tier": 1,
+      "chars": 0,
+      "lat": 51.508075999999996,
+      "lng": -0.09719399999999999
+    },
+    {
+      "id": "london_science_museum",
+      "name": "Science Museum",
+      "tier": 1,
+      "chars": 0,
+      "lat": 51.4972216,
+      "lng": -0.1767283
+    },
+    {
+      "id": "london_churchill_war_rooms",
+      "name": "Churchill War Rooms",
+      "tier": 1,
+      "chars": 0,
+      "lat": 51.5021585,
+      "lng": -0.1293572
+    },
+    {
+      "id": "london_the_shard",
+      "name": "The Shard",
+      "tier": 1,
+      "chars": 0,
+      "lat": 51.5045,
+      "lng": -0.0865
+    },
+    {
+      "id": "london_zsl_london_zoo",
+      "name": "ZSL London Zoo",
+      "tier": 1,
+      "chars": 0,
+      "lat": 51.535287499999995,
+      "lng": -0.1534303
+    },
+    {
+      "id": "london_st_pancras_international",
+      "name": "St Pancras International",
+      "tier": 2,
+      "chars": 684,
+      "lat": 51.5311162,
+      "lng": -0.1258659
+    },
+    {
+      "id": "london_leicester_square",
+      "name": "Leicester Square",
+      "tier": 2,
+      "chars": 193,
+      "lat": 51.510359,
+      "lng": -0.1300625
+    },
+    {
+      "id": "london_piccadilly_circus",
+      "name": "Piccadilly Circus",
+      "tier": 2,
+      "chars": 191,
+      "lat": 51.5098597,
+      "lng": -0.1342809
+    },
+    {
+      "id": "london_imperial_war_museum",
+      "name": "Imperial War Museum",
+      "tier": 2,
+      "chars": 285,
+      "lat": 51.4958366,
+      "lng": -0.10865839999999999
+    },
+    {
+      "id": "london_british_library",
+      "name": "British Library",
+      "tier": 2,
+      "chars": 277,
+      "lat": 51.5299717,
+      "lng": -0.12767589999999998
+    },
+    {
+      "id": "london_horse_guards",
+      "name": "Horse Guards Parade",
+      "tier": 2,
+      "chars": 271,
+      "lat": 51.5047752,
+      "lng": -0.12723579999999998
+    },
+    {
+      "id": "london_somerset_house",
+      "name": "Somerset House",
+      "tier": 2,
+      "chars": 275,
+      "lat": 51.511058999999996,
+      "lng": -0.11714799999999997
+    },
+    {
+      "id": "london_westminster_cathedral",
+      "name": "Westminster Cathedral",
+      "tier": 2,
+      "chars": 280,
+      "lat": 51.495808999999994,
+      "lng": -0.13943999999999998
+    },
+    {
+      "id": "london_temple_church",
+      "name": "Temple Church",
+      "tier": 2,
+      "chars": 264,
+      "lat": 51.513263699999996,
+      "lng": -0.1102647
+    },
+    {
+      "id": "london_sky_garden",
+      "name": "Sky Garden",
+      "tier": 2,
+      "chars": 177,
+      "lat": 51.5112422,
+      "lng": -0.08354929999999999
+    },
+    {
+      "id": "london_hampstead_heath",
+      "name": "Hampstead Heath",
+      "tier": 2,
+      "chars": 83,
+      "lat": 51.560829399999996,
+      "lng": -0.1629416
+    },
+    {
+      "id": "london_primrose_hill",
+      "name": "Primrose Hill",
+      "tier": 2,
+      "chars": 183,
+      "lat": 51.5412572,
+      "lng": -0.1533169
+    },
+    {
+      "id": "london_greenwich_park",
+      "name": "Greenwich Park",
+      "tier": 2,
+      "chars": 82,
+      "lat": 51.4769095,
+      "lng": 0.0014643
+    },
+    {
+      "id": "london_wallace_collection",
+      "name": "Wallace Collection",
+      "tier": 2,
+      "chars": 283,
+      "lat": 51.517323000000005,
+      "lng": -0.1530885
+    },
+    {
+      "id": "london_southwark_cathedral",
+      "name": "Southwark Cathedral",
+      "tier": 2,
+      "chars": 276,
+      "lat": 51.5061106,
+      "lng": -0.08958429999999999
+    },
+    {
+      "id": "london_st_katharine_docks",
+      "name": "St Katharine Docks",
+      "tier": 2,
+      "chars": 193,
+      "lat": 51.5064168,
+      "lng": -0.0718167
+    },
+    {
+      "id": "london_portobello_road_market",
+      "name": "Portobello Road Market",
+      "tier": 2,
+      "chars": 83,
+      "lat": 51.5170002,
+      "lng": -0.205847
+    },
+    {
+      "id": "london_leadenhall_market",
+      "name": "Leadenhall Market",
+      "tier": 2,
+      "chars": 191,
+      "lat": 51.512766,
+      "lng": -0.0835289
+    },
+    {
+      "id": "london_spitalfields_market",
+      "name": "Spitalfields Market",
+      "tier": 2,
+      "chars": 195,
+      "lat": 51.5196569,
+      "lng": -0.0755469
+    },
+    {
+      "id": "london_camden_market",
+      "name": "Camden Market",
+      "tier": 2,
+      "chars": 0,
+      "lat": 51.5390261,
+      "lng": -0.1425516
+    },
+    {
+      "id": "london_downing_street",
+      "name": "Downing Street",
+      "tier": 2,
+      "chars": 0,
+      "lat": 51.503338899999996,
+      "lng": -0.12748669999999998
+    },
+    {
+      "id": "london_national_maritime_museum",
+      "name": "National Maritime Museum",
+      "tier": 2,
+      "chars": 0,
+      "lat": 51.4810058,
+      "lng": -0.005226199999999999
+    },
+    {
+      "id": "london_guildhall",
+      "name": "Guildhall",
+      "tier": 2,
+      "chars": 0,
+      "lat": 51.5159202,
+      "lng": -0.09198959999999999
+    },
+    {
+      "id": "london_abbey_road_crossing",
+      "name": "Abbey Road Crossing",
+      "tier": 2,
+      "chars": 0,
+      "lat": 51.5370935,
+      "lng": -0.1833841
+    },
+    {
+      "id": "london_royal_albert_hall",
+      "name": "Royal Albert Hall",
+      "tier": 2,
+      "chars": 0,
+      "lat": 51.5009088,
+      "lng": -0.177366
+    },
+    {
+      "id": "london_harrods",
+      "name": "Harrods",
+      "tier": 2,
+      "chars": 0,
+      "lat": 51.499405499999995,
+      "lng": -0.1632344
+    },
+    {
+      "id": "london_wembley_stadium",
+      "name": "Wembley Stadium",
+      "tier": 2,
+      "chars": 0,
+      "lat": 51.556024699999995,
+      "lng": -0.27961769999999997
+    },
+    {
+      "id": "london_southbank_centre",
+      "name": "Southbank Centre",
+      "tier": 2,
+      "chars": 0,
+      "lat": 51.50602,
+      "lng": -0.1164148
+    },
+    {
+      "id": "london_tate_britain",
+      "name": "Tate Britain",
+      "tier": 2,
+      "chars": 0,
+      "lat": 51.4910621,
+      "lng": -0.1277886
+    },
+    {
+      "id": "london_queens_house",
+      "name": "Queen's House",
+      "tier": 2,
+      "chars": 0,
+      "lat": 51.4811073,
+      "lng": -0.0037013
+    },
+    {
+      "id": "london_millennium_bridge",
+      "name": "Millennium Bridge",
+      "tier": 2,
+      "chars": 0,
+      "lat": 51.509529099999995,
+      "lng": -0.0985425
+    },
+    {
+      "id": "london_the_monument",
+      "name": "The Monument",
+      "tier": 2,
+      "chars": 0,
+      "lat": 51.510143,
+      "lng": -0.08594199999999999
+    },
+    {
+      "id": "london_brick_lane",
+      "name": "Brick Lane",
+      "tier": 2,
+      "chars": 0,
+      "lat": 51.5219999,
+      "lng": -0.0716915
+    },
+    {
+      "id": "london_regents_park",
+      "name": "Regent's Park",
+      "tier": 2,
+      "chars": 0,
+      "lat": 51.533313,
+      "lng": -0.1557646
+    },
+    {
+      "id": "london_madame_tussauds",
+      "name": "Madame Tussauds",
+      "tier": 2,
+      "chars": 0,
+      "lat": 51.5230052,
+      "lng": -0.1544133
+    },
+    {
+      "id": "london_notting_hill",
+      "name": "Notting Hill",
+      "tier": 2,
+      "chars": 0,
+      "lat": 51.516012499999995,
+      "lng": -0.2090148
+    },
+    {
+      "id": "london_soho",
+      "name": "Soho",
+      "tier": 2,
+      "chars": 0,
+      "lat": 51.5136143,
+      "lng": -0.1365486
+    },
+    {
+      "id": "london_st_james_park",
+      "name": "St James's Park",
+      "tier": 2,
+      "chars": 0,
+      "lat": 51.502967,
+      "lng": -0.1339534
+    },
+    {
+      "id": "london_kings_cross_station",
+      "name": "King's Cross Station",
+      "tier": 2,
+      "chars": 0,
+      "lat": 51.532066699999994,
+      "lng": -0.1240756
+    },
+    {
+      "id": "london_platform_nine_three_quarters",
+      "name": "Platform 9¾",
+      "tier": 2,
+      "chars": 0,
+      "lat": 51.532066699999994,
+      "lng": -0.1240756
+    },
+    {
+      "id": "london_canary_wharf",
+      "name": "Canary Wharf",
+      "tier": 2,
+      "chars": 0,
+      "lat": 51.5056221,
+      "lng": -0.0264128
+    },
+    {
+      "id": "london_barbican_centre",
+      "name": "Barbican Centre",
+      "tier": 2,
+      "chars": 0,
+      "lat": 51.5202077,
+      "lng": -0.09378639999999999
+    }
+  ]
+}

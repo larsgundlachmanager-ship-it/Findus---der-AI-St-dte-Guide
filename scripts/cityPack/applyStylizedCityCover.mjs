@@ -41,7 +41,8 @@ function ensureFocusEntry(src, cityId, focus) {
   const re =
     /(const\s+COVER_FOCUS\s*:\s*Record<[^>]+>\s*=\s*\{)([\s\S]*?)(\n\};)/;
   const m = src.match(re);
-  if (!m) throw new Error('Could not find COVER_FOCUS in cityCovers.ts');
+  // Cover-Fokus-Map optional (1:1-Anzeige) — Search-Meta reicht.
+  if (!m) return src;
   const line = `  ${cityId}: { scale: ${focus.scale}, translateY: ${focus.translateY}, translateX: ${focus.translateX} },`;
   const body = m[2];
   if (new RegExp(`^\\s*${cityId}\\s*:`, 'm').test(body)) {

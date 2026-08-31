@@ -1,0 +1,508 @@
+{
+  "city_id": "halle_saale",
+  "apply": true,
+  "storyOnly": true,
+  "maxDelta": 80,
+  "country": "Germany",
+  "summary": {
+    "ok": 5,
+    "check": 1,
+    "bad": 0,
+    "errors": 0,
+    "applied": 1,
+    "skipped_directory": 666,
+    "skipped_cached_google": 43
+  },
+  "rows": [
+    {
+      "id": "halle_saale_halle_saale_hauptbahnhof",
+      "name": "Halle (Saale) Hauptbahnhof",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.47741085,
+        "lng": 11.987769949999999
+      }
+    },
+    {
+      "id": "halle_saale_landesmuseum_fur_vorgeschichte_halle_saale",
+      "name": "Landesmuseum für Vorgeschichte Halle (Saale)",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.49818041250002,
+        "lng": 11.962445365625
+      }
+    },
+    {
+      "id": "halle_saale_kunstmuseum_moritzburg_halle_saale",
+      "name": "Kunstmuseum Moritzburg Halle (Saale)",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.48657198260871,
+        "lng": 11.963050647826087
+      }
+    },
+    {
+      "id": "halle_saale_archaologisches_museum",
+      "name": "Archäologisches Museum",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.48627409090909,
+        "lng": 11.970002863636363
+      }
+    },
+    {
+      "id": "halle_saale_db_museum_halle_saale",
+      "name": "DB Museum Halle (Saale)",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.489256092063485,
+        "lng": 11.986049123809524
+      }
+    },
+    {
+      "id": "halle_saale_neue_residenz",
+      "name": "Neue Residenz",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.48413785384616,
+        "lng": 11.964927223076923
+      }
+    },
+    {
+      "id": "halle_saale_stadtmuseum_christian_wolff_haus",
+      "name": "Stadtmuseum Christian-Wolff-Haus",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.48059636999999,
+        "lng": 11.97158836
+      }
+    },
+    {
+      "id": "halle_saale_beatles_museum",
+      "name": "Beatles Museum",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.480231188888894,
+        "lng": 11.9684211
+      }
+    },
+    {
+      "id": "halle_saale_handel_haus_halle",
+      "name": "Händel-Haus Halle",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.4840405875,
+        "lng": 11.966592175000002
+      }
+    },
+    {
+      "id": "halle_saale_halloren_schokoladenerlebniswelt",
+      "name": "Halloren Schokoladenerlebniswelt",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.47805319090908,
+        "lng": 12.008939218181816
+      }
+    },
+    {
+      "id": "halle_saale_gedenkstatte_roter_ochse_halle_saale",
+      "name": "Gedenkstätte ROTER OCHSE Halle (Saale)",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.49178053333334,
+        "lng": 11.959633777777778
+      }
+    },
+    {
+      "id": "halle_saale_oberburg_giebichenstein",
+      "name": "Oberburg Giebichenstein",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.50356347777779,
+        "lng": 11.954693100000002
+      }
+    },
+    {
+      "id": "halle_saale_historisches_strassenbahndepot_hallesche_strassenbahnfreunde_e_v",
+      "name": "Historisches Straßenbahndepot (Hallesche Straßenbahnfreunde e.V.)",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.502713925,
+        "lng": 11.9578836
+      }
+    },
+    {
+      "id": "halle_saale_historisches_technikzentrum_der_stadtwerke_halle",
+      "name": "Historisches Technikzentrum der Stadtwerke Halle",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.46557086,
+        "lng": 11.976747979999999
+      }
+    },
+    {
+      "id": "halle_saale_museum_fur_haustierkunde_julius_kuhn",
+      "name": "Museum für Haustierkunde \"Julius Kühn\"",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.4891181,
+        "lng": 11.974088063636362
+      }
+    },
+    {
+      "id": "halle_saale_rechenwerk_computer_technikmuseum_halle",
+      "name": "Rechenwerk Computer- & Technikmuseum Halle",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.490417683333334,
+        "lng": 12.0000467
+      }
+    },
+    {
+      "id": "halle_saale_marktkirche_st_marien_unser_lieben_frauen_zu_halle_saale",
+      "name": "Marktkirche St. Marien Unser Lieben Frauen zu Halle (Saale)",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.48254276428573,
+        "lng": 11.968271814285712
+      }
+    },
+    {
+      "id": "halle_saale_pauluskirche",
+      "name": "Pauluskirche",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.49568885348838,
+        "lng": 11.97380803255814
+      }
+    },
+    {
+      "id": "halle_saale_katholische_propsteikirche_st_franziskus_und_st_elisabeth",
+      "name": "Katholische Propsteikirche St. Franziskus und St. Elisabeth",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.47828106,
+        "lng": 11.967091087999997
+      }
+    },
+    {
+      "id": "halle_saale_moritzkirche",
+      "name": "Moritzkirche",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.48021011724139,
+        "lng": 11.966406232758624
+      }
+    },
+    {
+      "id": "halle_saale_eselsbrunnen",
+      "name": "Eselsbrunnen",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.480278633333334,
+        "lng": 11.969415199999998
+      }
+    },
+    {
+      "id": "halle_saale_gobelbrunnen",
+      "name": "Göbelbrunnen",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.4817486,
+        "lng": 11.9664674625
+      }
+    },
+    {
+      "id": "halle_saale_georg_friedrich_handel_denkmal",
+      "name": "Georg-Friedrich-Händel-Denkmal",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.482887166666664,
+        "lng": 11.969300066666666
+      }
+    },
+    {
+      "id": "halle_saale_goldsolebrunnen",
+      "name": "Goldsolebrunnen",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.48235633749999,
+        "lng": 11.9687801125
+      }
+    },
+    {
+      "id": "halle_saale_park_an_der_saline",
+      "name": "Park an der Saline",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.483932700000004,
+        "lng": 11.957820768000001
+      }
+    },
+    {
+      "id": "halle_saale_peissnitz",
+      "name": "Peißnitz",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.49309886346866,
+        "lng": 11.948730050922507
+      }
+    },
+    {
+      "id": "halle_saale_reichardts_garten",
+      "name": "Reichardts Garten",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.50292183461538,
+        "lng": 11.95941786153846
+      }
+    },
+    {
+      "id": "halle_saale_klausberge",
+      "name": "Klausberge",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.50647074,
+        "lng": 11.95985476
+      }
+    },
+    {
+      "id": "halle_saale_amtsgarten",
+      "name": "Amtsgarten",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.503636094444445,
+        "lng": 11.956253722222222
+      }
+    },
+    {
+      "id": "halle_saale_leipziger_turm",
+      "name": "Leipziger Turm",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.480232390909094,
+        "lng": 11.976403954545454
+      }
+    },
+    {
+      "id": "halle_saale_wasserturm_sud",
+      "name": "Wasserturm Süd",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.46616183333333,
+        "lng": 11.97712307777778
+      }
+    },
+    {
+      "id": "halle_saale_altstadt",
+      "name": "Altstadt",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.48208087692308,
+        "lng": 11.970603869230773
+      }
+    },
+    {
+      "id": "halle_saale_stadtgottesacker",
+      "name": "Stadtgottesacker",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.482468286666666,
+        "lng": 11.976909166666665
+      }
+    },
+    {
+      "id": "halle_saale_peissnitzhaus",
+      "name": "Peißnitzhaus",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.49404733,
+        "lng": 11.94763997
+      }
+    },
+    {
+      "id": "halle_saale_dolauer_heide",
+      "name": "Dölauer Heide",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.49546885679998,
+        "lng": 11.887496129600004
+      }
+    },
+    {
+      "id": "halle_saale_zoologischer_garten_halle_bergzoo",
+      "name": "Zoologischer Garten Halle (Bergzoo)",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.50685915,
+        "lng": 11.9647781375
+      }
+    },
+    {
+      "id": "halle_saale_botanischer_garten",
+      "name": "Botanischer Garten",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.48919216744188,
+        "lng": 11.960089230232558
+      }
+    },
+    {
+      "id": "halle_saale_riveufer_saalepromenade",
+      "name": "Riveufer Saalepromenade",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.499268119999996,
+        "lng": 11.94981034
+      }
+    },
+    {
+      "id": "halle_saale_passendorfer_schlosschen",
+      "name": "Passendorfer Schlößchen",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.473244820000005,
+        "lng": 11.929451180000001
+      }
+    },
+    {
+      "id": "halle_saale_giebichensteinbrucke",
+      "name": "Giebichensteinbrücke",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.503978499999995,
+        "lng": 11.9522603
+      }
+    },
+    {
+      "id": "halle_saale_neues_theater",
+      "name": "Neues Theater",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.48557494166665,
+        "lng": 11.968503566666667
+      }
+    },
+    {
+      "id": "halle_saale_kammeroper_halle",
+      "name": "Kammeroper Halle",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.43513889999999,
+        "lng": 11.981841800000002
+      }
+    },
+    {
+      "id": "halle_saale_freilichtbuhne_peissnitz",
+      "name": "Freilichtbühne Peißnitz",
+      "before": {
+        "lat": 51.49192459615384,
+        "lng": 11.947855611538461
+      },
+      "google": {
+        "lat": 51.4919185,
+        "lng": 11.9478343,
+        "place_id": "ChIJUybwwRNlpkcRmxAeV3Dy-Ek",
+        "address": "06108 Halle (Saale), Germany"
+      },
+      "delta_m": 2,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "halle_saale_roter_turm",
+      "name": "Roter Turm",
+      "before": {
+        "lat": 51.482887166666664,
+        "lng": 11.969300066666666
+      },
+      "google": {
+        "lat": 51.4829783,
+        "lng": 11.9693282,
+        "place_id": "ChIJEdfpHSdjpkcRb3ogT8Cdt4g",
+        "address": "Altstadt, 06108 Halle (Saale), Germany"
+      },
+      "delta_m": 10,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "halle_saale_franckesche_stiftungen",
+      "name": "Franckesche Stiftungen",
+      "before": {
+        "lat": 51.47733128,
+        "lng": 11.97172862
+      },
+      "google": {
+        "lat": 51.4773244,
+        "lng": 11.9717661,
+        "place_id": "ChIJsUOF00hjpkcRA4pbSaV8EB0",
+        "address": "Franckeplatz 1/Haus 37 (Geschäftsstelle, 06110 Halle (Saale), Germany"
+      },
+      "delta_m": 3,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "halle_saale_hallescher_dom",
+      "name": "Hallescher Dom",
+      "before": {
+        "lat": 51.484267115517234,
+        "lng": 11.964638912068965
+      },
+      "google": {
+        "lat": 51.4843043,
+        "lng": 11.964573699999999,
+        "place_id": "ChIJm_DYmlJjpkcRBm4ThLAJxOc",
+        "address": "Domstraße 3, 06108 Halle (Saale), Germany"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "halle_saale_marktplatz_halle",
+      "name": "Marktplatz Halle",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.48206012352941,
+        "lng": 11.969750482352941
+      }
+    },
+    {
+      "id": "halle_saale_rathaus_halle",
+      "name": "Rathaus Halle",
+      "before": {
+        "lat": 51.482572054545464,
+        "lng": 11.971934690909093
+      },
+      "google": {
+        "lat": 51.482446499999995,
+        "lng": 11.9714631,
+        "place_id": "ChIJUUSP-0V7pkcRAI5xZBBBSVg",
+        "address": "Marktpl. 1, 06108 Halle (Saale), Germany"
+      },
+      "delta_m": 36,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "halle_saale_ulrichskirche",
+      "name": "Ulrichskirche",
+      "before": {
+        "lat": 51.481329529545455,
+        "lng": 11.972765149999999
+      },
+      "google": {
+        "lat": 51.4812453,
+        "lng": 11.972805399999999,
+        "place_id": "ChIJa5GaDE9jpkcRMTmdcQPv3jY",
+        "address": "Christian-Wolff-Straße 2, 06108 Halle (Saale), Germany"
+      },
+      "delta_m": 10,
+      "status": "OK",
+      "streetview": "OK"
+    }
+  ]
+}

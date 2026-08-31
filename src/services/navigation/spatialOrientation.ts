@@ -1,6 +1,6 @@
 /**
  * Human Co-Pilot voice: casual German, landmark-first, no robotic nav jargon.
- * Findus speaks like a friend walking next to you — never "in X Metern links".
+ * Yorro speaks like a friend walking next to you — never "in X Metern links".
  */
 
 import { relativeBearingDeg, shortestAngleDelta } from './bearing';
@@ -123,6 +123,7 @@ export function buildLandmarkFirstCue(opts: {
   turn?: string | null;
   roadName?: string | null;
   justPassed?: string | null;
+  visualKind?: 'fork' | 'alley' | 'complex' | null;
 }): string {
   const land = opts.landmark.trim();
   if (opts.justPassed) {
@@ -135,6 +136,8 @@ export function buildLandmarkFirstCue(opts: {
 
   const turn = (opts.turn ?? '').trim();
   const isTurn = turn && turn !== 'geradeaus';
+  // Landmarke schlägt Straße — Parameter bleibt für Call-Sites, wird nicht vorgelesen
+  void opts.roadName;
 
   if (opts.relation.side === 'behind') {
     return scrubRoboticNavSpeak(
@@ -143,11 +146,20 @@ export function buildLandmarkFirstCue(opts: {
   }
 
   if (isTurn) {
-    // "Hinter der Sparkasse biegen wir gleich rechts ab…"
-    const alley = opts.roadName
-      ? ` Da geht's in die ${opts.roadName}.`
-      : turn.includes('links') || turn.includes('rechts')
-        ? ` Da ist so eine Abzweigung — da musst du ${turn} durch.`
+    const kind = opts.visualKind;
+    if (kind === 'fork') {
+      return scrubRoboticNavSpeak(
+        `An ${land} teilt sich der Weg — nimm ${turn}.`,
+      );
+    }
+    if (kind === 'alley') {
+      return scrubRoboticNavSpeak(
+        `Hinter ${land} durch die schmale Gasse ${turn}.`,
+      );
+    }
+    const alley =
+      turn.includes('links') || turn.includes('rechts')
+        ? ` Da musst du ${turn} durch.`
         : '';
     return scrubRoboticNavSpeak(
       `Hinter ${land} biegen wir gleich ${turn} ab.${alley}`,
@@ -166,56 +178,27 @@ export function buildLandmarkFirstCue(opts: {
   );
 }
 
-/** Course correction — genau eine klare Ansage wohin; nie abgebrochenes „geh…“. */
+/** Course correction — genau eine Ansage; danach stiller Auto-Reroute (kein Zurücklaufen-Skript). */
 export function buildWrongWayCue(opts: {
   landmark: string | null;
   relation?: SpatialRelation | null;
   backtrackM?: number | null;
 }): string {
+  // Struktur: kurz anerkennen → neue Route kommt. Kein „lauf zurück“-Befehl.
   const land = opts.landmark?.trim() || null;
-  const rel = opts.relation ?? null;
-  const meters =
-    typeof opts.backtrackM === 'number' && opts.backtrackM >= 8
-      ? Math.round(opts.backtrackM / 5) * 5
-      : null;
-  const meterBit = meters != null ? `etwa ${meters} Meter ` : '';
+  void opts.relation;
+  void opts.backtrackM;
 
-  let text: string;
-  if (land && rel) {
-    if (rel.side === 'behind') {
-      text =
-        `Oh, da bist du knapp vorbeigelaufen — dreh dich um und geh ${meterBit}` +
-        `zurück zu ${land}, der liegt hinter dir.`;
-    } else if (rel.side === 'left') {
-      text =
-        `Oh, da bist du knapp vorbeigelaufen — geh ${meterBit}` +
-        `zurück und dann links zu ${land}. Da bist du wieder auf der Route.`;
-    } else if (rel.side === 'right') {
-      text =
-        `Oh, da bist du knapp vorbeigelaufen — geh ${meterBit}` +
-        `zurück und dann rechts zu ${land}. Da bist du wieder auf der Route.`;
-    } else {
-      text =
-        `Oh, da bist du knapp vorbeigelaufen — geh ${meterBit}` +
-        `zurück Richtung ${land}, der liegt vor dir. Da wieder rein auf die Route.`;
-    }
-  } else if (land) {
-    text =
-      `Oh, da bist du knapp vorbeigelaufen — dreh dich um und geh ${meterBit}` +
-      `zurück zu ${land}.`;
-  } else {
-    text =
-      `Oh, da bist du knapp vorbeigelaufen — dreh dich um und geh ${meterBit}` +
-      `denselben Weg zurück, bis wir wieder auf der Route sind.`;
-  }
+  const text = land
+    ? `Kurz falsch — ich berechne eine neue Route von hier, Richtung ${land}.`
+    : `Kurz falsch — ich berechne jetzt eine neue Route von hier.`;
 
-  // Kein scrubRoboticNavSpeak hier — der frisst sonst Meter-/Richtungs-Infos
   return text.replace(/\s{2,}/g, ' ').trim();
 }
 
 /**
- * Predictive turn-by-turn: distance + direction + optional visual anchor.
- * Keeps meter counts intentionally (unlike scrubRoboticNavSpeak).
+ * Predictive turn-by-turn. Landmark-Zeilen bleiben live (OSM-Namen).
+ * Ohne Landmark: geschlossenes Vokabular ohne Meterzahl → Cartesia-Cache.
  */
 export function buildPredictiveTurnCue(opts: {
   turn: string;
@@ -223,71 +206,151 @@ export function buildPredictiveTurnCue(opts: {
   landmark?: string | null;
   roadName?: string | null;
   lookSide?: string | null;
+  visualKind?: 'fork' | 'alley' | 'complex' | null;
 }): string {
-  const dist = Math.max(5, Math.round(opts.distanceM / 5) * 5);
+  void opts.distanceM;
   const turn = opts.turn.trim() || 'geradeaus';
   const look = (opts.lookSide ?? '').trim();
   const land = opts.landmark?.trim();
-  const road = opts.roadName?.trim();
+  void opts.roadName;
+  const kind = opts.visualKind ?? null;
 
-  const open = look
-    ? `Schau nach ${look}. `
-    : turn.includes('links')
-      ? 'Schau nach links. '
-      : turn.includes('rechts')
-        ? 'Schau nach rechts. '
-        : 'Schau nach vorne. ';
-
-  if (land && turn !== 'geradeaus') {
-    return `${open}In ${dist} Metern an ${land} ${turn} abbiegen.`.replace(
-      /\s{2,}/g,
-      ' ',
+  if (kind === 'fork' && turn !== 'geradeaus') {
+    if (land) {
+      return scrubRoboticNavSpeak(
+        `Gabelung an ${land} — nimm ${turn}.`,
+      );
+    }
+    return scrubRoboticNavSpeak(
+      `Gleich teilt sich der Weg — nimm ${turn}.`,
     );
   }
-  if (road && turn !== 'geradeaus') {
-    return `${open}In ${dist} Metern ${turn} abbiegen — Richtung ${road}.`;
+  if (kind === 'alley' && turn !== 'geradeaus') {
+    return scrubRoboticNavSpeak(
+      land
+        ? `Durch die schmale Gasse ${turn}, an ${land}.`
+        : `Gleich durch die schmale Gasse ${turn}.`,
+    );
   }
-  if (turn !== 'geradeaus') {
-    return `${open}In ${dist} Metern ${turn} abbiegen.`;
+  if (kind === 'complex' && turn !== 'geradeaus' && !land) {
+    return scrubRoboticNavSpeak(
+      `Unübersichtliche Kreuzung — ${turn} halten.`,
+    );
+  }
+
+  if (land && turn !== 'geradeaus') {
+    const open = look
+      ? `Schau nach ${look}. `
+      : turn.includes('links')
+        ? 'Schau nach links. '
+        : turn.includes('rechts')
+          ? 'Schau nach rechts. '
+          : 'Schau nach vorne. ';
+    return scrubRoboticNavSpeak(
+      `${open}An ${land} ${turn} abbiegen.`.replace(/\s+/g, ' ').trim(),
+    );
   }
   if (land) {
-    return `${open}Weiter geradeaus — halte ${land} im Blick.`;
+    return scrubRoboticNavSpeak(
+      `Weiter geradeaus — halte ${land} im Blick.`,
+    );
   }
-  return `${open}Weiter geradeaus — du bist richtig.`;
+  try {
+    const { navTurnPhrase } = require('../tts/offlinePhraseBank') as {
+      navTurnPhrase: (t: string, look?: string | null) => string;
+    };
+    return scrubRoboticNavSpeak(navTurnPhrase(turn, look || null));
+  } catch {
+    const open = look
+      ? `Schau nach ${look}. `
+      : turn.includes('links')
+        ? 'Schau nach links. '
+        : turn.includes('rechts')
+          ? 'Schau nach rechts. '
+          : 'Schau nach vorne. ';
+    if (turn !== 'geradeaus') {
+      return scrubRoboticNavSpeak(`${open}Gleich ${turn} abbiegen.`);
+    }
+    return scrubRoboticNavSpeak(`${open}Weiter geradeaus — du bist richtig.`);
+  }
 }
 
-/** Start of route — friend walking next to you. */
+/** Start of route — friend walking next to you (Struktur → navStartSpeech). */
 export function buildInitialOrientationCue(opts: {
   landmark: string | null;
   relation: SpatialRelation | null;
   destinationName: string;
   contextHint?: string | null;
+  etaMin?: number | null;
+  firstVisual?: string | null;
+  pathHint?: string | null;
 }): string {
-  const dest = opts.destinationName.trim();
-  if (opts.landmark && opts.relation) {
-    const land = opts.landmark.trim();
-    if (opts.relation.side === 'left' || opts.relation.side === 'right') {
+  // destinationName bleibt für Call-Sites; Opener dump’t ihn bewusst nicht.
+  void opts.destinationName;
+  void opts.contextHint;
+  try {
+    const { buildNavStartSpeech, buildFirstVisualDirection } = require('./navStartSpeech') as {
+      buildNavStartSpeech: (o: {
+        firstVisual: string | null;
+        relation?: SpatialRelation | null;
+        etaMin: number | null;
+        pathHint?: string | null;
+      }) => string;
+      buildFirstVisualDirection: (o: {
+        turn: string | null;
+        landmark: string | null;
+        roadName: string | null;
+        relation?: SpatialRelation | null;
+      }) => string | null;
+    };
+    const firstVisual =
+      (opts.firstVisual ?? '').trim() ||
+      buildFirstVisualDirection({
+        turn: null,
+        landmark: opts.landmark,
+        roadName: null,
+        relation: opts.relation,
+      });
+    return buildNavStartSpeech({
+      firstVisual,
+      relation: opts.relation,
+      etaMin: opts.etaMin ?? null,
+      pathHint: opts.pathHint ?? null,
+    });
+  } catch {
+    const land = opts.landmark?.trim();
+    const rel = opts.relation;
+    if (land && rel) {
       return scrubRoboticNavSpeak(
-        `Alles klar, wir laufen jetzt los Richtung ${dest}. ` +
-          `Dreh dich mal kurz nach ${opts.relation.shortPhrase} — siehst du ${land}? Genau in die Richtung gehen wir.`,
+        `Alles klar, lass uns losgehen. Siehst du ${land} ${rel.sidePhrase}? Genau dahin.`,
       );
     }
     return scrubRoboticNavSpeak(
-      `Alles klar, wir laufen jetzt los. Siehst du ${land} ${opts.relation.sidePhrase}? Genau dahin — zu ${dest}.`,
+      'Alles klar, lass uns losgehen. Schau kurz, wohin der Weg vor dir führt.',
     );
   }
-  return scrubRoboticNavSpeak(
-    `Alles klar, wir laufen jetzt los zu ${dest}. Schau dich kurz um, ich sag dir gleich wo's langgeht.`,
-  );
 }
 
-/** Near destination. */
+/** Near destination — visuelle Anker bevorzugen, wenn belegt. */
 export function buildArrivalSoonCue(
   destinationName: string,
   relation: SpatialRelation,
+  opts?: { visualSign?: string | null },
 ): string {
+  const sign = (opts?.visualSign ?? '').trim();
+  if (sign) {
+    return scrubRoboticNavSpeak(
+      `Gleich da — ${relation.shortPhrase} großes Schild mit Aufschrift „${sign}".`,
+    );
+  }
+  const dest = destinationName.trim();
+  if (dest) {
+    return scrubRoboticNavSpeak(
+      `Gleich bist du da — ${dest} liegt ${relation.sidePhrase}.`,
+    );
+  }
   return scrubRoboticNavSpeak(
-    `Gleich bist du da — ${destinationName} liegt ${relation.sidePhrase}.`,
+    `Gleich bist du da — Ziel liegt ${relation.sidePhrase}.`,
   );
 }
 
@@ -298,15 +361,17 @@ export function buildArrivedCue(destinationName: string): string {
   );
 }
 
-/** ETA pacing — human, not "ETA 4 minutes". */
+/** ETA pacing — gerundete Buckets, damit Cartesia denselben WAV trifft. */
 export function buildPacingCue(etaMin: number): string {
-  if (etaMin <= 3) {
-    return 'Gleich da — noch ein kurzes Stück.';
+  try {
+    const { pacingPhrase } = require('../tts/offlinePhraseBank') as {
+      pacingPhrase: (m: number) => string;
+    };
+    return scrubRoboticNavSpeak(pacingPhrase(etaMin));
+  } catch {
+    if (etaMin <= 3) return 'Gleich da — noch ein kurzes Stück.';
+    return `Noch so ca. ${Math.round(etaMin)} Minuten.`;
   }
-  if (etaMin <= 8) {
-    return `Du kannst ganz entspannt machen — noch so ca. ${etaMin} Minuten.`;
-  }
-  return `Noch etwa ${etaMin} Minuten, alles easy.`;
 }
 
 /** Straight-on confirmation without landmark. */
@@ -314,16 +379,12 @@ export function buildStraightCue(): string {
   return 'Weiter geradeaus — du bist genau richtig.';
 }
 
-/** Turn without landmark — still visual, never meter counts. */
+/** Turn without landmark — visual only, no street names (Feedback: zu viele Straßen). */
 export function buildTurnWithoutLandmark(
   turn: string,
-  roadName: string | null,
+  _roadName?: string | null,
 ): string {
-  if (roadName) {
-    return scrubRoboticNavSpeak(
-      `Gleich ${turn} — schau nach der Einmündung zur ${roadName}.`,
-    );
-  }
+  void _roadName;
   return scrubRoboticNavSpeak(
     `Gleich ${turn} halten — schau nach einer klaren Abzweigung oder Gasse.`,
   );

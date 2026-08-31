@@ -13,6 +13,10 @@ import { haversineMeters } from '../../db/database';
 import type { GpsPoint } from '../types';
 import { placeFitsPlanVisit } from './placeHoursFit';
 import { searchPackDining } from './packDiningSearch';
+import {
+  isGroceryOrMarketCounterVenue,
+  isParkingOrForestLotVenue,
+} from '../pitch/nonFoodVenueGate';
 
 export type MealSlot =
   | 'breakfast'
@@ -73,13 +77,12 @@ export type DiningPick = {
 /** Sterne nur ab so vielen Google-Bewertungen erwähnen. */
 export const MIN_RATING_COUNT_FOR_SPEECH = 20;
 
-
 import { mapsGpsUrl } from '../timeline/planTravelHelpers';
 
 const MEDALS = ['🥇', '🥈', '🥉'] as const;
 
-function mapsPlaceUrl(name: string, city: string): string {
-  return mapsGpsUrl(`${name} ${city}`.trim(), NaN, NaN, null);
+function mapsPlaceUrl(_name: string, _city: string): string {
+  return '';
 }
 
 const CITY_CENTER: Record<string, GpsPoint> = {
@@ -176,7 +179,7 @@ export function detectMealSlot(query: string, now = new Date()): MealSlot {
   if (/abendessen|dinner|abend\s*essen|heute\s*abend.*essen/.test(q)) {
     return 'dinner';
   }
-  if (/pizza|burger|nudeln|pasta|döner|doener|sushi/.test(q)) {
+  if (/pizza|burger|nudeln|pasta|döner|doener|sushi|steak|vegan|vegetar|asia|asiatisch/.test(q)) {
     const h = now.getHours();
     if (h < 11) return 'breakfast';
     if (h < 15) return 'lunch';
@@ -255,10 +258,22 @@ const FOOD_PLACE_TYPES_RE =
   /\b(bakery|cafe|café|coffee_shop|restaurant|meal_takeaway|meal_delivery|food|bar|pub|biergarten|ice_cream)\b/i;
 
 const NON_FOOD_PLACE_TYPES_RE =
-  /\b(amusement_center|amusement_park|aquarium|bowling_alley|casino|movie_theater|museum|park|zoo|tourist_attraction|gym|spa|school|church|lodging|stadium|night_club)\b/i;
+  /\b(amusement_center|amusement_park|aquarium|bowling_alley|casino|movie_theater|museum|parking|parking_space|park_and_ride|park|zoo|tourist_attraction|gym|spa|school|church|lodging|stadium|night_club|supermarket|grocery_store|convenience_store|hypermarket|discount_store|shopping_mall)\b/i;
 
 const NON_FOOD_NAME_RE =
-  /\b(spielstadt|spielplatz|indoorspiel|indoor\s*play|freizeitpark|trampolin|bowling|kino|museum|galerie|kirche|zoo|schwimmbad|fitnessstudio|kletterhalle|laser\s*tag|kartbahn|escape\s*room)\b/i;
+  /\b(spielstadt|spielplatz|indoorspiel|indoor\s*play|freizeitpark|trampolin|bowling|kino|museum|galerie|kirche|zoo|schwimmbad|fitnessstudio|kletterhalle|laser\s*tag|kartbahn|escape\s*room|waldparkplatz|wanderparkplatz|parkplatz|parkhaus)\b/i;
+
+/** Produktion/Verwaltung ohne Theke — kein Brötchen-Kauf. */
+export function isProductionOnlyBakery(
+  name: string,
+  tags?: string | null,
+): boolean {
+  const blob = `${name} ${tags ?? ''}`.toLowerCase();
+  if (!/bäck|baeck|bakery|backstube|backhaus|konditor/.test(blob)) return false;
+  return /\b(zentralwerkstatt|zentralbackstube|produktion|verwaltung|grossbaeckerei|großbäckerei|backstube\s+gmbh)\b/.test(
+    blob,
+  );
+}
 
 export function isFoodDiningPlace(
   name: string,
@@ -266,7 +281,14 @@ export function isFoodDiningPlace(
 ): boolean {
   const nameBlob = (name ?? '').toLowerCase();
   const typeBlob = (types ?? []).join(' ').toLowerCase();
+  if (isParkingOrForestLotVenue(name, types)) return false;
+  if (
+    isGroceryOrMarketCounterVenue(name, types ?? [])
+  ) {
+    return false;
+  }
   if (NON_FOOD_NAME_RE.test(nameBlob)) return false;
+  if (isProductionOnlyBakery(nameBlob, typeBlob)) return false;
   // Café/Kaffee im Namen einer Spielstadt reicht nicht
   if (NON_FOOD_PLACE_TYPES_RE.test(typeBlob)) return false;
   if (typeBlob.trim()) {
@@ -295,6 +317,16 @@ function mealFitsVenue(
   }
   if (slot === 'breakfast') {
     if (/steakhouse|nachtclub|disco|\bbar\b(?!ista)/.test(n)) return false;
+    if (
+      /\b(hotel|lodging|pension)\b/.test(
+        `${n} ${(types ?? []).join(' ').toLowerCase()}`,
+      ) &&
+      kind !== 'restaurant' &&
+      kind !== 'cafe' &&
+      !/frühstück|fruehstueck|restaurant|bistro/.test(n)
+    ) {
+      return false;
+    }
     return kind === 'bakery' || kind === 'cafe' || kind === 'restaurant';
   }
   if (slot === 'coffee') {
@@ -388,9 +420,12 @@ async function collectHits(opts: {
     /* soft */
   }
 
-  const packEnough = dedupe().length >= 2;
+  const packEnough =
+    dedupe().length >= 2 &&
+    !wantsLiveDiningResearch(opts.query) &&
+    !/\bhamburg\b/i.test(opts.query ?? '');
   if (packEnough) {
-    // Genug Offline-Treffer → kein Places Text/Nearby
+    // Nur Allerwelts-Essen: Pack reicht. Spezialwunsch → immer Live nachziehen.
     return dedupe();
   }
 
@@ -436,7 +471,7 @@ async function collectHits(opts: {
     }
   } else {
     const cuisine =
-      /pizza|burger|sushi|pasta|nudeln|döner|doener|fisch/.exec(
+      /pizza|burger|sushi|pasta|nudeln|döner|doener|fisch|steak|vegan|vegetarisch|asiatisch|asian/.exec(
         opts.query.toLowerCase(),
       )?.[0] ?? null;
     try {
@@ -470,13 +505,13 @@ async function collectHits(opts: {
     }
   }
 
-  if (dedupe().length >= 2) {
+  if (dedupe().length >= 2 && !wantsLiveDiningResearch(opts.query)) {
     return dedupe();
   }
 
   // 3) Places Text nur bei echter Lücke (teuer)
   const cuisine =
-    /pizza|burger|sushi|pasta|nudeln|döner|doener|fisch/.exec(
+    /pizza|burger|sushi|pasta|nudeln|döner|doener|fisch|steak|vegan|vegetarisch|asiatisch|asian/.exec(
       opts.query.toLowerCase(),
     )?.[0] ?? null;
   const textQ =
@@ -558,10 +593,49 @@ export async function findDiningPicks(opts: {
 }> {
   const slot = detectMealSlot(opts.query);
   const stayMin = stayMinForMeal(slot);
-  const city = opts.city?.trim() || null;
-  const placeLabel = city || 'hier';
   const localTypical = wantsLocalTypicalFood(opts.query);
-  const hardNeeds = parseDiningHardNeeds(opts.query);
+  const profileDiet = (() => {
+    try {
+      const { getCachedUserProfile } = require('../../services/userProfileService') as {
+        getCachedUserProfile: () => Record<string, unknown> | null;
+      };
+      const { dietLabelsFromProfile } = require('../pitch/parentBrief') as {
+        dietLabelsFromProfile: (p: Record<string, unknown> | null) => string[];
+      };
+      return dietLabelsFromProfile(getCachedUserProfile());
+    } catch {
+      return [] as string[];
+    }
+  })();
+  const hardNeeds = parseDiningHardNeeds(opts.query, profileDiet);
+  const namedCity = (() => {
+    try {
+      const { extractCityFromText } = require('../context/shortTermContext') as {
+        extractCityFromText: (s: string) => string | null;
+      };
+      return extractCityFromText(opts.query);
+    } catch {
+      return null;
+    }
+  })();
+  const metroCity = (() => {
+    if (namedCity) return null;
+    if (!hardNeeds.length && !localTypical) return null;
+    if (!hardNeeds.length && slot === 'breakfast') return null;
+    try {
+      const { nearestCommercialAirport } = require('../../services/flights/airportIata') as {
+        nearestCommercialAirport: (
+          lat: number,
+          lng: number,
+        ) => { city: string } | null;
+      };
+      return nearestCommercialAirport(opts.anchor.lat, opts.anchor.lng)?.city ?? null;
+    } catch {
+      return null;
+    }
+  })();
+  const city = namedCity?.trim() || metroCity || opts.city?.trim() || null;
+  const placeLabel = city || 'hier';
   const hardBoost = hardNeeds.map((n) => n.searchBoost).join(' ');
   const searchQuery = [
     opts.query,
@@ -579,7 +653,10 @@ export async function findDiningPicks(opts: {
   const resolved = await resolveDiningSearchAnchor({
     city,
     userAnchor: opts.anchor,
-    preferCityCenter: opts.preferCityCenter === true || hardNeeds.length > 0,
+    preferCityCenter:
+      opts.preferCityCenter === true ||
+      hardNeeds.length > 0 ||
+      Boolean(namedCity),
   });
   const searchAt = resolved.anchor;
   const suggestOvernight = resolved.distanceFromUserKm >= 100;
@@ -610,64 +687,55 @@ export async function findDiningPicks(opts: {
       )
       .filter(({ p, walkMin }) => diningFitsArrival(p, walkMin, stayMin));
 
-    // Hard-Match: Name/Typen zuerst; Pack-Hits ohne Places Details (€0)
+    // Hard-Match: Pack-Tags/Name sind Vorfilter; Live-Reviews zusätzlich (Maps-Stil).
     if (hardNeeds.length && ranked.length) {
       const nameHits = ranked.filter(({ p }) =>
         hitMatchesDiningNeeds(p, hardNeeds),
       );
-      if (nameHits.length >= 1) {
+      try {
+        const { fetchPlacePitchDetails } = await import(
+          '../../services/navigation/placePitchDetails'
+        );
+        const sample = ranked.slice(0, 6);
+        const verified: typeof ranked = [];
+        const seen = new Set<string>();
+        const push = (row: (typeof ranked)[number]) => {
+          const key = `${row.p.name}|${row.p.lat.toFixed(4)}|${row.p.lng.toFixed(4)}`;
+          if (seen.has(key)) return;
+          seen.add(key);
+          verified.push(row);
+        };
+        for (const row of nameHits) push(row);
+        await Promise.all(
+          sample.map(async (row) => {
+            try {
+              const details = await fetchPlacePitchDetails({
+                placeId: String(row.p.placeId || '').startsWith('pack:')
+                  ? undefined
+                  : row.p.placeId,
+                query: `${row.p.name} ${city ?? ''}`.trim(),
+                lat: row.p.lat,
+                lng: row.p.lng,
+                includeAtmosphere: true,
+              });
+              const evidence = [
+                details?.editorialSummary,
+                details?.generativeSummary,
+                ...(details?.reviews ?? []).map((r) => r.text),
+                details?.name,
+                (row.p.types ?? []).join(' '),
+              ]
+                .filter(Boolean)
+                .join('\n');
+              if (hitMatchesDiningNeeds(row.p, hardNeeds, evidence)) push(row);
+            } catch {
+              /* soft */
+            }
+          }),
+        );
+        ranked = verified.length ? verified : [];
+      } catch {
         ranked = nameHits;
-      } else {
-        const packRows = ranked.filter((r) =>
-          String(r.p.placeId || '').startsWith('pack:'),
-        );
-        const liveRows = ranked.filter(
-          (r) => !String(r.p.placeId || '').startsWith('pack:'),
-        );
-        // Pack: nur Name/Typen — keine Atmosphere-API
-        if (packRows.length && !liveRows.length) {
-          ranked = []; // ehrlich: kein Tag-Match → nächster Radius / OSM
-        } else {
-          try {
-            const { fetchPlacePitchDetails } = await import(
-              '../../services/navigation/placePitchDetails'
-            );
-            const sample = liveRows.slice(0, 4);
-            const verified: typeof ranked = [];
-            await Promise.all(
-              sample.map(async (row) => {
-                try {
-                  const details = await fetchPlacePitchDetails({
-                    placeId: row.p.placeId,
-                    query: `${row.p.name} ${city ?? ''}`.trim(),
-                    lat: row.p.lat,
-                    lng: row.p.lng,
-                    includeAtmosphere: true,
-                  });
-                  const evidence = [
-                    details?.editorialSummary,
-                    details?.generativeSummary,
-                    ...(details?.reviews ?? []).map((r) => r.text),
-                    details?.name,
-                  ]
-                    .filter(Boolean)
-                    .join('\n');
-                  if (hitMatchesDiningNeeds(row.p, hardNeeds, evidence)) {
-                    verified.push(row);
-                  }
-                } catch {
-                  /* soft */
-                }
-              }),
-            );
-            if (verified.length) ranked = verified;
-            else ranked = []; // ehrlich: kein Beleg → äußere Schleife / Fallback
-          } catch {
-            ranked = ranked.filter(({ p }) =>
-              hitMatchesDiningNeeds(p, hardNeeds),
-            );
-          }
-        }
       }
     }
 
@@ -849,8 +917,12 @@ function toPick(
   const dishes = dishesFromName(p.name, slot, kind);
   const websiteUrl = p.websiteUri?.trim() || null;
   const menuUrl =
-    websiteUrl ||
-    `https://www.google.com/search?q=${encodeURIComponent(`${p.name} Speisekarte`)}`;
+    websiteUrl &&
+    /speisekarte|speisen|menue?|menu|karte|\.pdf|\/ugd\/|_files\/ugd/i.test(
+      websiteUrl,
+    )
+      ? websiteUrl
+      : null;
 
   return {
     name: p.name,
@@ -958,7 +1030,7 @@ export function isDiningChainName(name: string): boolean {
 }
 
 export function wantsLocalTypicalFood(query: string): boolean {
-  return /\b(typisch|original|lokal|heimat|regional|hamburgerisch|hamburgisch|pannfisch|fischbrötchen|fischbroetchen|labskaus|franzbrötchen)\b/i.test(
+  return /\b(typisch|original|lokal|heimat|regional|hamburgerisch|hamburgisch|pannfisch|pannenfisch|pfannfisch|pannisch|fischbrötchen|fischbroetchen|labskaus|franzbrötchen)\b/i.test(
     query,
   );
 }
@@ -972,15 +1044,18 @@ export type DiningHardNeed = {
   evidence: RegExp;
 };
 
-export function parseDiningHardNeeds(query: string): DiningHardNeed[] {
+export function parseDiningHardNeeds(
+  query: string,
+  diet?: string[] | null,
+): DiningHardNeed[] {
   const q = query || '';
   const out: DiningHardNeed[] = [];
-  if (/\bpannfisch\b/i.test(q)) {
+  if (/\b(pannfisch|pannisch|pannenfisch|pfannfisch|pfannenfisch)\b/i.test(q)) {
     out.push({
       id: 'pannfisch',
       label: 'Pannfisch',
       searchBoost: 'Pannfisch Fischrestaurant',
-      evidence: /\bpannfisch\b/i,
+      evidence: /\bp(?:f)?ann(?:en)?fisch|pannisch\b/i,
     });
   }
   if (/\b(labskaus)\b/i.test(q)) {
@@ -1012,6 +1087,46 @@ export function parseDiningHardNeeds(query: string): DiningHardNeed[] {
         /\b(elbblick|elb\s*blick|wasserblick|hafenblic|alsterblick|view\s+of\s+the\s+(elbe|harbor|harbour)|river\s*view)\b/i,
     });
   }
+  if (/\bsteak\b/i.test(q)) {
+    out.push({
+      id: 'steak',
+      label: 'Steak',
+      searchBoost: 'Steak Steakhouse Grill Restaurant',
+      evidence: /\b(steak|steakhouse|ribeye|rumpsteak|hüftsteak|hueftsteak|filetsteak|entrecote|entrecôte|rinderfilet|filet.{0,16}gegrillt)\b/i,
+    });
+  }
+  if (/\bvegan/i.test(q)) {
+    out.push({
+      id: 'vegan',
+      label: 'vegan',
+      searchBoost: 'vegan Restaurant',
+      evidence: /\bvegan/i,
+    });
+  }
+  if (/\bvegetar/i.test(q)) {
+    out.push({
+      id: 'vegetarian',
+      label: 'vegetarisch',
+      searchBoost: 'vegetarisch vegetarian Restaurant',
+      evidence: /vegetar|vegetarian|\bveggie\b|\bvegan/i,
+    });
+  }
+  if (/\b(sushi)\b/i.test(q)) {
+    out.push({
+      id: 'sushi',
+      label: 'Sushi',
+      searchBoost: 'Sushi Restaurant',
+      evidence: /sushi|sashimi|maki|japan/i,
+    });
+  }
+  if (/\b(asiatisch|asian)\b/i.test(q) && !/\bsushi\b/i.test(q)) {
+    out.push({
+      id: 'asian',
+      label: 'asiatisch',
+      searchBoost: 'asiatisch asian thai Restaurant',
+      evidence: /asia|asiatisch|thai|vietnam|china|chinesisch|japan|sushi|pho|ramen|korean/i,
+    });
+  }
   if (
     /\b(draußen|draussen|terrasse|outdoor|außenbereich|aussenbereich|garten|biergarten)\b/i.test(
       q,
@@ -1025,7 +1140,49 @@ export function parseDiningHardNeeds(query: string): DiningHardNeed[] {
         /\b(terrasse|outdoor|biergarten|außenbereich|aussenbereich|gartenwirtschaft|patio|terrace)\b/i,
     });
   }
+  const dietBlob = (diet ?? []).join(' ').toLowerCase();
+  const spokenMeat =
+    /\b(steak|rumpsteak|ribeye|entrecôte|entrecote|schnitzel|burger|döner|doener|kebab|wurst|steakhouse|pannfisch|pannenfisch|pfannfisch|fisch)\b/i.test(
+      q,
+    );
+  if (!spokenMeat && /vegan/.test(dietBlob) && !out.some((n) => n.id === 'vegan')) {
+    out.push({
+      id: 'vegan',
+      label: 'vegan',
+      searchBoost: 'vegan Restaurant',
+      evidence: /\bvegan/i,
+    });
+  } else if (
+    !spokenMeat &&
+    /vegetar/.test(dietBlob) &&
+    !out.some((n) => n.id === 'vegan' || n.id === 'vegetarian')
+  ) {
+    out.push({
+      id: 'vegetarian',
+      label: 'vegetarisch',
+      searchBoost: 'vegetarisch vegetarian Restaurant',
+      evidence: /vegetar|vegetarian|\bveggie\b|\bvegan/i,
+    });
+  }
   return out;
+}
+
+/** Spezialwunsch → Pack reicht nicht; Places + Reviews nachziehen. */
+export function wantsLiveDiningResearch(
+  query: string,
+  diet?: string[] | null,
+): boolean {
+  if (parseDiningHardNeeds(query, diet).length > 0) return true;
+  try {
+    const { queryNeedsLiveFoodResearch } = require('../pitch/specializedFoodMatch') as {
+      queryNeedsLiveFoodResearch: (q: string) => boolean;
+    };
+    return queryNeedsLiveFoodResearch(query);
+  } catch {
+    return /\b(pizza|burger|sushi|pasta|schnitzel|döner|doener|kebab|terrasse|biergarten)\b/i.test(
+      query,
+    );
+  }
 }
 
 function hitMatchesDiningNeeds(
@@ -1046,6 +1203,15 @@ export function extractNamedVenueMealIntent(
   query: string,
   lastPlaceName?: string | null,
 ): string | null {
+  try {
+    const { extractNamedRestaurantWish } = require('../pitch/namedVenueIntent') as {
+      extractNamedRestaurantWish: (s: string) => string | null;
+    };
+    const named = extractNamedRestaurantWish(query);
+    if (named) return named;
+  } catch {
+    /* soft */
+  }
   const q = query.trim();
   const meal =
     /frühstück|fruehstueck|breakfast|brunch|essen|mittag|abendessen|hingehen|reservier|anrufen|speisekarte|menü|menu|karte\s+empfehl|was\s+nehmen|auswahl/i.test(

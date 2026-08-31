@@ -7,7 +7,6 @@
  */
 
 import { generateGeminiText, hasGeminiApiKey } from '../../geminiService';
-import { isDeviceOffline } from '../../navigation/networkState';
 import { getCachedUserProfile } from '../../userProfileService';
 import { useFinnusStore } from '../../../store/useFinnusStore';
 import type { QuickAction } from '../../../types/concierge';
@@ -48,17 +47,34 @@ const MAX_FOLLOW = 3;
 export function webAgentIsNeeded(text: string): boolean {
   const t = text.replace(/\s+/g, ' ').trim();
   if (t.length < 6) return false;
+  try {
+    const { shouldSkipHtmlWebResearch } = require('../htmlResearchGate') as {
+      shouldSkipHtmlWebResearch: (s: string) => boolean;
+    };
+    if (shouldSkipHtmlWebResearch(t)) return false;
+  } catch {
+    /* soft */
+  }
+  // Quick-Lookup: flache Search in webResearchService — Agent unnötig
+  try {
+    const { isQuickLookupQuery } = require('../../concierge/celestialSkyQuery') as {
+      isQuickLookupQuery: (s: string) => boolean;
+    };
+    if (isQuickLookupQuery(t)) return false;
+  } catch {
+    /* soft */
+  }
   if (/https?:\/\//i.test(t)) return true;
   if (NOTICE_PATTERNS.test(t)) return true;
   if (
-    /\b(webseite|website|homepage|online|google|recherch|nachschau|guck\s+mal|pdf|flyer|ticket|tickets|fahrplan|öffnung|oeffnung|preis|wie\s+teuer|buch(?:en|ung)|formular|anmeld|abfahrt|bergbahn|seilbahn|flug|fähre|faehre|speisekarte|menü|menu|check[- ]?out|frühstück|fruehstueck|verfügbar|verfuegbar|termin|öffnungzeit|sauna|wellness|prospekt|gezeiten|tide|kurkarte|notdienst|apotheke)\b/iu.test(
+    /\b(webseite|website|homepage|online|google|recherch|nachschau|guck\s+mal|pdf|flyer|ticket|tickets|fahrplan|öffnung|oeffnung|preis|wie\s+teuer|buch(?:en|ung)|formular|anmeld|abfahrt|bergbahn|seilbahn|flug|fähre|faehre|speisekarte|menü|menu|check[- ]?out|frühstückszeiten|verfügbar|verfuegbar|termin|öffnungzeit|sauna|wellness|prospekt|gezeiten|tide|kurkarte|notdienst|apotheke)\b/iu.test(
       t,
     )
   ) {
     return true;
   }
   if (
-    /\b(wann|wie\s+viel|gibt\s+es|wo\s+(kann|gibt)|öffnungszeit|oeffnungszeit|gesperrt|ausfall)\b/iu.test(
+    /\b(wie\s+viel|gibt\s+es|wo\s+(kann|gibt)|öffnungszeit|oeffnungszeit|gesperrt|ausfall)\b/iu.test(
       t,
     )
   ) {
@@ -73,6 +89,15 @@ export function webAgentIsNeeded(text: string): boolean {
 }
 
 function cityHint(): string {
+  try {
+    const { getWorkingCityName } = require('../../softWorkingCity') as {
+      getWorkingCityName: () => string | null;
+    };
+    const soft = getWorkingCityName()?.trim();
+    if (soft) return soft;
+  } catch {
+    /* soft */
+  }
   return (
     getCachedUserProfile()?.cityName?.trim() ||
     useFinnusStore.getState().currentLocationName?.trim() ||
@@ -205,14 +230,16 @@ async function discoverSeedUrls(
     `Ziel: „${userText.slice(0, 300)}“`,
     domain,
     'Self-Prompt: Das ist eine lokale Friction-Frage. Scanne PDFs, Unterseiten, Banner und Hinweise — mit Datumsprüfung.',
-    'Priorisiere: offizielle Betreiber, Ticket-Shop, Fahrplan, programm_*.pdf / prospekt_*.pdf / speisekarte_*.pdf, Alert-Banner-Seiten.',
+    /\b(günstig|guenstig|billigflug|google\s*flights|skyscanner)\b/iu.test(userText)
+      ? 'Flugpreise: Google Flights + Skyscanner zuerst (günstigster Tag, Airline, Uhr). Dann Airline-Seite zum selben Tag. Nichts erfinden. JS-Kalender oft nicht lesbar — Search-Grounding nutzen.'
+      : 'Priorisiere: offizielle Betreiber, Ticket-Shop, Fahrplan, programm_*.pdf / prospekt_*.pdf / speisekarte_*.pdf, Alert-Banner-Seiten.',
     'Keine Login-only als „fertig“. Max 5 https-URLs.',
     'Keine erfundenen Rabatte/Öffnungszeiten.',
     'JSON: {"notes":"…","urls":["https://…"],"failures":["…"]}',
   ].join('\n');
 
   const raw = await generateGeminiText(prompt, {
-    task: 'generic',
+    task: 'research',
     enableGoogleSearch: true,
     maxTokens: 900,
     temperature: 0.2,
@@ -365,21 +392,6 @@ export async function runOpenWebAgent(
   const visited = new Set<string>();
   const docs: FetchedDoc[] = [];
 
-  if (await isDeviceOffline()) {
-    return {
-      query: userText,
-      city,
-      facts: [],
-      sources: [],
-      formPrefill: null,
-      failures: ['Offline — Web-Agent pausiert'],
-      researchNotes: 'offline',
-      promptBlock:
-        '=== OPEN WEB-AGENT ===\nOffline. Ehrlich sagen, nichts erfinden.',
-      speechHint:
-        'Gerade bin ich offline — Webseiten kann ich so nicht durchstöbern.',
-    };
-  }
   if (!hasGeminiApiKey()) {
     return {
       query: userText,
@@ -534,18 +546,21 @@ export async function runOpenWebAgent(
 
   const conjunctive = buildConjunctiveSpeechHint(validated, droppedOutdated);
   const speechHint = conjunctive
-    ? `Ich hab online nachgeschaut: ${conjunctive}${
+    ? `${conjunctive}${
         formPrefill
           ? ' Ein Formular hab ich vorausgefüllt — du bestätigst nur noch.'
           : ''
       }${
         uniqueFails.some((f) => /Login|JS|JavaScript/i.test(f))
-          ? ' Ein paar Schritte waren blockiert (Login/JS) — ich sag dir ehrlich Bescheid.'
+          ? ' Ein paar Schritte waren blockiert (Login/JS).'
           : ''
       }`
-    : uniqueFails.length
-      ? `Ich war auf den Websites unterwegs, komme aber nicht an alle Details ran: ${uniqueFails[0]}. Soll ich dir die Seite trotzdem öffnen?`
-      : 'Online nichts Verlässliches gefunden — ohne zu raten.';
+    : uniqueFails.length &&
+        !/js[-\s]?only|seiten?\s*leer|javascript/iu.test(uniqueFails[0] || '')
+      ? `Dazu komme ich online nicht an alle Details ran: ${uniqueFails[0]}.`
+      : uniqueFails.length
+        ? ''
+        : 'Dazu nichts Verlässliches gefunden — ohne zu raten.';
 
   const promptBlock = [
     '=== OPEN WEB-AGENT (beliebige Websites) ===',
@@ -622,19 +637,46 @@ export function webAgentToActions(result: WebResearchResult): QuickAction[] {
       payload: { url: result.formPrefill.actionUrl },
     });
   }
-  for (const s of result.sources.slice(0, 3)) {
-    if (!/^https?:\/\//i.test(s.url)) continue;
-    if (actions.some((a) => a.payload.url === s.url)) continue;
-    actions.push({
-      type: 'OPEN_URL',
-      label:
-        s.kind === 'pdf'
-          ? '📄 PDF'
-          : /ticket|buch|shop/i.test(s.url)
-            ? '🎫 Tickets'
-            : websiteActionLabel(s.title, s.url),
-      payload: { url: s.url },
-    });
+  try {
+    const { pickRankedSourceUrls } = require('../liveDeepLink') as {
+      pickRankedSourceUrls: (
+        sources: Array<{ url: string; title?: string | null; kind?: string }>,
+        query: string,
+        max?: number,
+      ) => Array<{ url: string; intent: string }>;
+    };
+    const ranked = pickRankedSourceUrls(result.sources, result.query, 3);
+    for (const s of ranked) {
+      if (actions.some((a) => a.payload.url === s.url)) continue;
+      const src = result.sources.find((x) => x.url === s.url);
+      actions.push({
+        type: 'OPEN_URL',
+        label:
+          src?.kind === 'pdf' || s.intent === 'program'
+            ? '📄 PDF'
+            : s.intent === 'ticket' || s.intent === 'booking'
+              ? '🎫 Tickets'
+              : s.intent === 'menu'
+                ? '🍽 Karte'
+                : websiteActionLabel(src?.title, s.url),
+        payload: { url: s.url },
+      });
+    }
+  } catch {
+    for (const s of result.sources.slice(0, 3)) {
+      if (!/^https?:\/\//i.test(s.url)) continue;
+      if (actions.some((a) => a.payload.url === s.url)) continue;
+      actions.push({
+        type: 'OPEN_URL',
+        label:
+          s.kind === 'pdf'
+            ? '📄 PDF'
+            : /ticket|buch|shop/i.test(s.url)
+              ? '🎫 Tickets'
+              : websiteActionLabel(s.title, s.url),
+        payload: { url: s.url },
+      });
+    }
   }
   return actions.slice(0, 4);
 }

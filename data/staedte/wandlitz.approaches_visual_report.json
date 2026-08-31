@@ -1,0 +1,626 @@
+{
+  "city": "wandlitz",
+  "apply": true,
+  "touched": 77,
+  "approachesFixed": 77,
+  "faqAdded": 0,
+  "data_version": 28,
+  "rows": [
+    {
+      "id": "wandlitz_wandlitz",
+      "name": "Wandlitz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_wandlitzsee",
+      "name": "Wandlitzsee",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_wandlitz_wandlitzsee_bhf",
+      "name": "Wandlitz, Wandlitzsee Bhf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_wandlitz_bahnhof",
+      "name": "Wandlitz, Bahnhof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_klosterfelde",
+      "name": "Klosterfelde",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_fahre_liepnitzsee_nord",
+      "name": "Fähre Liepnitzsee Nord",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_fahre_liepnitzsee_sudufer",
+      "name": "Fähre Liepnitzsee Südufer",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_barnim_panorama_naturparkzentrum_agrarmuseum_wandlitz",
+      "name": "BARNIM PANORAMA Naturparkzentrum - Agrarmuseum Wandlitz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_dorfkirche_wandlitz",
+      "name": "Dorfkirche Wandlitz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_st_konrad",
+      "name": "St. Konrad",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_dorfkirche_basdorf_wandlitz",
+      "name": "Dorfkirche Basdorf (Wandlitz)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_dorfkirche_stolzenhagen_wandlitz",
+      "name": "Dorfkirche Stolzenhagen (Wandlitz)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_kantorei_wandlitz_e_v",
+      "name": "KANTOREI WANDLITZ e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_cafe_stall",
+      "name": "Café Stall",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_kirche_klosterfelde_pfarrsprengel_klosterfelde",
+      "name": "Kirche Klosterfelde - Pfarrsprengel Klosterfelde",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_stolzenhagen_bei_wandlitz_kirche",
+      "name": "Stolzenhagen (bei Wandlitz), Kirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_fischerbrunnen",
+      "name": "Fischerbrunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_see_wandlitz",
+      "name": "See Wandlitz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_naturpark_barnim",
+      "name": "Naturpark Barnim",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_strandbad_stolzenhagen_parkplatz_und_eingang",
+      "name": "Strandbad Stolzenhagen, Parkplatz und Eingang",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_waldspielplatz_wandlitz",
+      "name": "Waldspielplatz Wandlitz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_parkplatz_zweijahreszeiten",
+      "name": "Parkplatz Zweijahreszeiten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_strandbad_stolzenhagen",
+      "name": "Strandbad Stolzenhagen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_neuart",
+      "name": "NEUART",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_forsthaus_am_liepnitzsee",
+      "name": "Forsthaus am Liepnitzsee",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_offentliche_badestelle_wandlitzsee",
+      "name": "Öffentliche Badestelle Wandlitzsee",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_parkplatz_prenzlauer_chaussee_179_16348_wandlitz",
+      "name": "Parkplatz Prenzlauer Chaussee 179, 16348 Wandlitz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_kunstrasenplatz_wandlitz",
+      "name": "Kunstrasenplatz Wandlitz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_minigolf_rahmersee_uwe_daul",
+      "name": "Minigolf Rahmersee - Uwe Daul",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_1_fv_eintracht_wandlitz_e_v",
+      "name": "1. FV Eintracht Wandlitz e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_badestelle_mit_sand",
+      "name": "Badestelle mit Sand",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_liepnitzsee",
+      "name": "Liepnitzsee",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_whirlpool_living_gmbh_wandlitz_bei_berlin",
+      "name": "Whirlpool & Living GmbH Wandlitz bei Berlin",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_kinderspielplatz_wandlitzsee",
+      "name": "Kinderspielplatz Wandlitzsee",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_rathaus_gemeinde_wandlitz",
+      "name": "Rathaus gemeinde Wandlitz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_haus_von_erich_honecker",
+      "name": "Haus von Erich Honecker",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_wanderweg_am_liepnitzsee",
+      "name": "Wanderweg am Liepnitzsee",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_la_finca_de_don_quijote",
+      "name": "La Finca de Don Quijote",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_fischerstube_stolzenhagen",
+      "name": "Fischerstube Stolzenhagen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_kulturbuhne_goldener_lowe",
+      "name": "Kulturbühne \"Goldener Löwe\"",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_wandlitzer_see",
+      "name": "Wandlitzer See",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_zweijahreszeiten",
+      "name": "Zweijahreszeiten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_pura_natura",
+      "name": "pura natura",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_",
+      "name": "Остров Штельмака",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_ruheplatz_am_liepnitzsee",
+      "name": "Ruheplatz am Liepnitzsee",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_kleiner_bach",
+      "name": "Kleiner Bach",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_gefallenendenkmal_1_und_2_weltkrieg_klosterfelde",
+      "name": "Gefallenendenkmal 1. und 2. Weltkrieg Klosterfelde",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_waldhof_am_bogensee",
+      "name": "Waldhof am Bogensee",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_ingo_struntz",
+      "name": "Ingo Struntz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_studio_wandlitz",
+      "name": "STUDIO WANDLITZ",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_ferienhaus_am_waldrand_von_wandlitz",
+      "name": "Ferienhaus am Waldrand von Wandlitz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_evangel_pfarramt",
+      "name": "Evangel. Pfarramt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_tor13",
+      "name": "Tor13",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_bootsverleih_strandbad_liepnitzsee",
+      "name": "Bootsverleih Strandbad Liepnitzsee",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_geschenkideen",
+      "name": "Geschenkideen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_heidekrautbahnmuseum_basdorf",
+      "name": "Heidekrautbahnmuseum Basdorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "wandlitz_schlosspark_lanke_lenne_park",
+      "name": "Schlosspark Lanke (Lenne Park)",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "wandlitz_biesenthaler_becken",
+      "name": "Biesenthaler Becken",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "wandlitz_holzpagode",
+      "name": "Holzpagode",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "wandlitz_bunkeranlage_qualle",
+      "name": "Bunkeranlage Qualle",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "wandlitz_aussichtsplattform",
+      "name": "Aussichtsplattform",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "wandlitz_alte_fremd_und_zwangsarbeiterlager_h_bauten",
+      "name": "Alte Fremd-und Zwangsarbeiterlager H-Bauten",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "wandlitz_alte_eiche",
+      "name": "Alte Eiche",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "wandlitz_kriegerdenkmal_zerpenschleuse",
+      "name": "Kriegerdenkmal Zerpenschleuse",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "wandlitz_kriegerdenkmal",
+      "name": "Kriegerdenkmal",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "wandlitz_der_prinzenstein_im_lanker_forst",
+      "name": "Der Prinzenstein im Lanker Forst",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "wandlitz_gedenksaule",
+      "name": "Gedenksäule",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "wandlitz_denkmal_fur_die_opfer_der_hexenverfolgung",
+      "name": "Denkmal für die Opfer der Hexenverfolgung",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 2,
+      "had_approaches": 1
+    },
+    {
+      "id": "wandlitz_dorfkirche_schonerlinde",
+      "name": "Dorfkirche Schönerlinde",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "wandlitz_fachwerkkirche_prenden_mit_heimatmuseum",
+      "name": "Fachwerkkirche Prenden mit Heimatmuseum",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "wandlitz_dorfkirche_schonwalde_barnim",
+      "name": "Dorfkirche Schönwalde (Barnim)",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "wandlitz_dorfkirche_lanke",
+      "name": "Dorfkirche Lanke",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "wandlitz_schloss_dammsmuhle",
+      "name": "Schloss Dammsmühle",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "wandlitz_grosses_schloss_lanke",
+      "name": "Großes Schloss Lanke",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "wandlitz_kleines_schloss_lanke",
+      "name": "Kleines Schloß Lanke",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "wandlitz_privathafen_zerpenschleuse",
+      "name": "Privathafen Zerpenschleuse",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "wandlitz_waldsiedlung_wandlitz",
+      "name": "Waldsiedlung Wandlitz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    }
+  ]
+}

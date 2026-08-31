@@ -15,6 +15,11 @@ import type { VoiceId } from '../types/userProfile';
 import { trackCartesiaChars } from './cartesiaCostTracker';
 import { trackTtsUsage } from './llm/apiUsageTracker';
 import { trackDataBytes } from './diagnostics/resourceUsageTracker';
+import {
+  rememberWavDurationFromFileSize,
+  rememberWavDurationMs,
+  wavDurationMsFromBytes,
+} from '../utils/wavDurationMs';
 
 const AUDIO_CACHE_DIR = `${FileSystem.cacheDirectory ?? FileSystem.documentDirectory}tts-cartesia/`;
 
@@ -82,11 +87,11 @@ function sanitizeGenerationConfig(
   if (typeof cfg.volume === 'number' && Number.isFinite(cfg.volume)) {
     out.volume = Math.min(2.0, Math.max(0.5, cfg.volume));
   }
-  const emotion = typeof cfg.emotion === 'string' ? cfg.emotion.trim() : '';
-  if (emotion) out.emotion = emotion;
-  return out.speed != null || out.volume != null || out.emotion
-    ? out
-    : undefined;
+  // Kein emotion: Cartesia-Emotion-Tags sind EN-trainiert (Leo/Maya/…).
+  // Auf de-DE-Stimmen (Alina/Sebastian) erzeugen sie den US-Akzent.
+  // Hörproben senden bewusst kein emotion — Live muss das matchen.
+  // Dynamik kommt aus deutschem Text + Interpunktion (Cartesia-Default).
+  return out.speed != null || out.volume != null ? out : undefined;
 }
 
 async function fetchWavBuffer(
@@ -177,6 +182,8 @@ async function fetchWavBuffer(
         sample_rate: 44100,
       },
     };
+    const dictId = env.cartesiaPronunciationDictId();
+    if (dictId) payload.pronunciation_dict_id = dictId;
     const gen = sanitizeGenerationConfig(generationConfig);
     if (gen) payload.generation_config = gen;
 
@@ -228,6 +235,7 @@ export async function synthesizeCartesiaSpeechWav(
   try {
     const info = await FileSystem.getInfoAsync(cacheUri);
     if (info.exists && (info.size ?? 0) > 44) {
+      rememberWavDurationFromFileSize(cacheUri, Number(info.size) || 0);
       return cacheUri;
     }
   } catch {
@@ -252,6 +260,7 @@ export async function synthesizeCartesiaSpeechWav(
   await FileSystem.writeAsStringAsync(cacheUri, uint8ToBase64(bytes), {
     encoding: FileSystem.EncodingType.Base64,
   });
+  rememberWavDurationMs(cacheUri, wavDurationMsFromBytes(bytes));
   return cacheUri;
 }
 

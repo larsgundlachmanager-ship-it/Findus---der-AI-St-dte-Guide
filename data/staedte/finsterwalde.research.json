@@ -1,0 +1,497 @@
+{
+  "notes": [
+    "Quellenbasis: Stadt Finsterwalde (Stadtrundgang, Stadtgeschichte, Tierpark, Kirchen, Kulturweberei, Kino), Sänger- und Kaufmannsmuseum/Museumsverbund Elbe-Elster, Wikipedia DE, brandenburgikon, KuLaDig, Reiseland Brandenburg und Betreiberseiten.",
+    "Öffnungszeiten, Eintritt, Programme, Gottesdienste, Flug- und Badebetrieb sind veränderlich und deshalb ausschließlich als LIVE-Hinweise formuliert.",
+    "Beim Google-Ortsnamen „Gläserne Sänger“ ist die Zuordnung zur seit Juli 2020 am nördlichen Innenstadtzugang stehenden Sänger-Figurengruppe plausibel; eine offizielle Erklärung dieses Namens ist nicht belegt."
+  ],
+  "city_history": "Finsterwalde wurde 1282 erstmals mit Heinemanus de Vynsterwalde erwähnt und 1336 eindeutig als Stadt bezeichnet. Unter den Herren von Dieskau erhielten Schloss und Trinitatiskirche im 16. Jahrhundert ihre Renaissanceprägung. Brände und Kriegsplünderungen trafen die Stadt im 17. Jahrhundert schwer. Seit dem 19. Jahrhundert bestimmten Tuchfabriken, später Metall- und Elektroindustrie, das Wachstum; 1871 kam der Eisenbahnanschluss. Das 1899 uraufgeführte Couplet „Wir sind die Sänger von Finsterwalde“ wurde vom Spottlied zum Identitätszeichen. Seit 1954 wird das Sängerfest gefeiert, seit 2013 führt die Stadt offiziell den Zusatz Sängerstadt. Die Finsterwalder Sangestradition gehört seit 2024 zum Immateriellen Kulturerbe Deutschlands.",
+  "spots": [
+    {
+      "id": "finsterwalde_finsterwalde",
+      "name": "Bahnhof Finsterwalde (Niederlausitz)",
+      "general_info": "Der Bahnhof ist Finsterwaldes historischer Stadtanker nördlich der Altstadt. Sein denkmalgeschütztes Empfangsgebäude entstand 1871–1872 mit der Strecke Halle–Sorau; erhalten sind auch Bahnsteigüberdachung, Stellwerke und ein bahnseitiger Wasserturm.",
+      "deep_data_pool": [
+        {"text":"Der Eisenbahnanschluss von 1871 beschleunigte Finsterwaldes Entwicklung zur Industrie- und Tuchmacherstadt und verband die Fabriken mit überregionalen Absatzmärkten.","tags":["geschichte","bahn"]},
+        {"text":"Das Empfangsgebäude wurde 1871–1872 als Ziegelbau errichtet. Es gehört mit Bahnsteig, Überdachung, zwei Stellwerksgebäuden und Bahnwasserturm zum geschützten Ensemble.","tags":["architektur","denkmal"]},
+        {"text":"Die 1871 eröffnete Verbindung gehörte zur Strecke Halle–Sorau. 1887 folgte die Bahn nach Schipkau, 1911 die Verbindung Finsterwalde–Luckau.","tags":["geschichte","verkehr"]},
+        {"text":"Der Bahnhof liegt fußläufig zur Innenstadt; die Bahnlinie teilt das nördliche und südliche Stadtgebiet, die Straßenverbindungen führen durch Unterführungen und über die B 96.","tags":["orientierung"]},
+        {"text":"Die Stadt bewertet den Bahnhof als wichtigen regionalen Umsteigepunkt zwischen Bahn und Bus und plant die weitere Entwicklung als multimodale Schnittstelle.","tags":["verkehr","stadtentwicklung"]},
+        {"text":"Mit dem Bahnanschluss wuchs die Stadt über den mittelalterlichen Kern hinaus. Wohn- und Gewerbegebiete legten sich im späten 19. Jahrhundert um die Altstadt.","tags":["stadtgeschichte"]},
+        {"text":"Der Bahnhof steht für den Übergang von der handwerklichen Tuchmacherei zur industriellen Produktion: 1862 gab es bereits 14 Dampf-Tuchfabriken und 140 Tuchmachermeister.","tags":["industrie","textil"]},
+        {"text":"LIVE: Abfahrten, Gleise, Ersatzverkehr und aktuelle Zugziele unmittelbar bei der Deutschen Bahn beziehungsweise dem Verkehrsverbund Berlin-Brandenburg prüfen.","tags":["live_hint","ephemeral","verkehr"]}
+      ],
+      "faqs": [{"q":"Woran erkenne ich den historischen Bahnhof?","a":"Am langgestreckten Ziegel-Empfangsgebäude und der erhaltenen Bahnsteigüberdachung; zum Denkmalensemble gehören außerdem Stellwerke und ein Wasserturm jenseits der Gleise."}]
+    },
+    {
+      "id": "finsterwalde_marktplatz_finsterwalde",
+      "name": "Marktplatz Finsterwalde",
+      "general_info": "Der große rechteckige Markt ist das Zentrum der planmäßig angelegten ostelbischen Kolonistenstadt. Rathaus, Sängerbrunnen und Fassaden vom 16. Jahrhundert bis zum Jugendstil machen hier Stadtgeschichte und Sängerstadt-Identität unmittelbar sichtbar.",
+      "deep_data_pool": [
+        {"text":"Rechtwinklig aufeinandertreffende Straßen und viereckige Quartiere gruppieren sich um den Markt; eine steinerne Stadtmauer gab es nicht, wohl aber Palisaden, Graben und Tore.","tags":["stadtgrundriss","geschichte"]},
+        {"text":"Das Rathaus beherrscht den Platz. Eine Ratsstube ist 1492 belegt; nach Einsturz und Brand entstand 1739 der bis heute prägende schlichte Barockbau.","tags":["rathaus","geschichte"]},
+        {"text":"Am Markt 26 trägt das Portal der Ratsklause die Jahreszahl 1564. Das Haus zählt zu den ältesten erhaltenen Wohnbauten Finsterwaldes.","tags":["architektur"]},
+        {"text":"Markt 24 war seit 1806 Standort einer Apotheke; das klassizistische Gebäude wurde 1850 umgebaut und ergänzt die ungewöhnliche Stilvielfalt des Platzes.","tags":["architektur","handel"]},
+        {"text":"Der Sängerbrunnen wurde 2004 nach Vorlagen Eckhard Böttgers von Schmiedemeister Bernhard Körner in Metall ausgeführt und spielt humorvoll mit den Sängerfiguren.","tags":["kunst","saengerstadt"]},
+        {"text":"Das Sängerfest nutzt Markt und Innenstadt als zentrale Bühne. Seit 1954 wird es alle zwei Jahre gefeiert und zählt zu den größten Volksfesten Brandenburgs.","tags":["saengerfest","kultur"]},
+        {"text":"Der historische Markt, Schloss, Trinitatiskirche und die mittelalterliche Stadtanlage bilden gemeinsam einen denkmalgeschützten Kernbereich.","tags":["denkmal","quer"]},
+        {"text":"Das früheste sichere Stadtdokument von 1336 nennt Finsterwalde „wybilde unde hust tzu Duisterenwalde“. Der Markt war Mittelpunkt dieser Stadtanlage nördlich der Burg.","tags":["mittelalter","stadtgeschichte"]},
+        {"text":"Die historische Siedlungsfläche umfasste ungefähr elf Hektar. Der vergleichsweise große Markt erklärt sich aus seiner Funktion für Handel und öffentliches Leben.","tags":["stadtgrundriss","handel"]},
+        {"text":"Im alten Rathaus lagen Amtsräume ursprünglich nur oben. Unten befanden sich Schenkstube sowie Verkaufsflächen für Bäcker und Fleischer – Verwaltung und Markt waren eng verbunden.","tags":["alltagsgeschichte","rathaus"]},
+        {"text":"Eine eiserne Elle an der westlichen Rathauswand diente Tuchhändlern als Maß. Sie verweist unmittelbar auf das Gewerbe, das Finsterwaldes Wirtschaft über Jahrhunderte prägte.","tags":["textil","handel"]},
+        {"text":"Die heutige Fassadenfolge dokumentiert keinen einheitlichen Altstadtstil: Häuser des 16. und 17. Jahrhunderts stehen neben klassizistischen, gründerzeitlichen und Jugendstilfassaden.","tags":["architektur"]},
+        {"text":"Das Couplet „Wir sind die Sänger von Finsterwalde“ eröffnet bis heute das Sängerfest. Wenn der Markt Festbühne ist, wird die vom Lied geprägte Stadtidentität am historischen Zentrum öffentlich sichtbar.","tags":["saengerfest","saengerstadt"]},
+        {"text":"LIVE: Wochenmarkt, Sängerfest, Bühnen, Sperrungen und Veranstaltungen ändern sich; Termine im städtischen Veranstaltungskalender prüfen.","tags":["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q":"Woran erkenne ich den Marktplatz?","a":"An der großen rechteckigen Platzfläche, dem barocken Rathaus und dem metallenen Sängerbrunnen zwischen stilistisch sehr unterschiedlichen historischen Fassaden."}]
+    },
+    {
+      "id": "finsterwalde_sanger_und_kaufmannsmuseum_finsterwalde",
+      "name": "Sänger- und Kaufmannsmuseum",
+      "general_info": "Das Museum verbindet zwei authentische Finsterwalder Geschichten: den Gassenhauer und die Kultur des Gemeinschaftsgesangs mit dem original erhaltenen Laden der Kaufmannsfamilie Wittke, der hier von 1850 bis 1974 über drei Generationen betrieben wurde.",
+      "deep_data_pool": [
+        {"text":"Gottfried Wittke eröffnete im November 1850 einen Materialwarenladen. Sohn Johannes führte ihn ab 1898 als Kolonialwarenhandlung, später blieb er bis 1974 Familiengeschäft.","tags":["handel","geschichte"]},
+        {"text":"Weil einschneidende Modernisierungen ausblieben, blieben Gründerzeitmobiliar, Warenbehälter, Verpackungen, Büchsen, Werbung und historische Verkaufstechnik erhalten.","tags":["sammlung","alltag"]},
+        {"text":"Der authentische Ladenfundus gab den Anstoß zur Museumseröffnung 1981. Finsterwalde bezeichnet das Haus als einziges Kaufmannsmuseum Deutschlands.","tags":["museumsgeschichte"]},
+        {"text":"Zum Kaufmannsteil kamen eine mit DDR-Produkten bestückte Drogerie, Warenautomaten, Kaffee- und Teeverkaufsgeräte, Spielzeugläden und Kunst zum Thema Handel.","tags":["ausstellung"]},
+        {"text":"Die Sängerausstellung erklärt, wie Wilhelm Wolffs Burleske von 1899 und ihr Couplet vom zunächst abgelehnten Provinzspott zum Identitätszeichen der Stadt wurden.","tags":["saengerstadt","geschichte"]},
+        {"text":"Der sogenannte Chorwurm führt anhand von Objekten durch rund neun Jahrhunderte gemeinsamen Singens und fragt nach dessen sozialer Funktion in unterschiedlichen Zeiten.","tags":["chorgeschichte"]},
+        {"text":"Die Ausstellung arbeitet mit Originalobjekten, Klangbeispielen und Filmsequenzen. Sie behandelt regionale Chorgeschichte ebenso wie die deutschlandweite Wirkung des Liedes.","tags":["ausstellung","musik"]},
+        {"text":"Seit 2010 liegt ein Schwerpunkt auf Chormusik; vier Finsterwalder Chöre proben im Haus, der überdachte Museumshof dient wegen seiner Akustik auch als Konzertort.","tags":["gegenwart","musik"]},
+        {"text":"Die Trinitatis-Kantorei wurde 1565 gegründet und gehört zu den traditionsreichsten Chören der Niederlausitz; ihre Geschichte ist Teil des lokalen Gesangskontexts.","tags":["chor","reformation"]},
+        {"text":"1901 bekannte sich die Liedertafel auf einer Spreewaldfahrt mit Banner und Lied zu den „Sängern von Finsterwalde“; im selben Jahr erschien die Bezeichnung Sängerstadt.","tags":["identitaet","geschichte"]},
+        {"text":"Seit 2024 steht die Finsterwalder Sangestradition im Bundesweiten Verzeichnis des Immateriellen Kulturerbes; gewürdigt werden Praxis, Weitergabe und Beteiligung.","tags":["immaterielles_kulturerbe"]},
+        {"text":"Wilhelm Wolff brauchte 1899 für seine Berliner Burleske einen vermeintlich abgelegenen Provinzort. Die Bühnenfiguren Pampel, Knarrig und Strippe machten den Stadtnamen dennoch deutschlandweit bekannt.","tags":["liedgeschichte","theater"]},
+        {"text":"Die anfängliche Ablehnung gehört wesentlich zur Wirkungsgeschichte: Erst durch aktive Aneignung verwandelten die Bürger die von außen zugeschriebene Provinzkomik in eine selbstbewusste Kulturmarke.","tags":["rezeption","identitaet"]},
+        {"text":"LIVE: Öffnungszeiten, Eintritt, Sonderausstellungen, Führungen und Konzerte auf der aktuellen Seite des Museumsverbunds Elbe-Elster prüfen.","tags":["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q":"Woran erkenne ich das Sänger- und Kaufmannsmuseum?","a":"Am Museumsstandort Lange Straße 6/8; im Inneren ist der original erhaltene historische Kaufmannsladen das prägende Erkennungsmerkmal."}]
+    },
+    {
+      "id": "finsterwalde_stadtpfarrkirche_st_trinitatis",
+      "name": "Stadtpfarrkirche St. Trinitatis",
+      "general_info": "St. Trinitatis ist eine 1585 vollendete, dreischiffige Reformationskirche am historischen Zentrum. Renaissancegiebel, Netzrippengewölbe, dreiseitig geschlossener Chor und der quadratische, zum Achteck übergehende Westturm prägen den Bau.",
+      "deep_data_pool": [
+        {"text":"Der Neubau wurde 1585 vollendet; der nördliche Anbau mit Renaissancegiebel und hohem Ziegeldach entstand bereits 1581/82.","tags":["baugeschichte","renaissance"]},
+        {"text":"Die Kirche ist eine außen verputzte, dreischiffige Hallenkirche mit Netzrippengewölbe und dreiseitig geschlossenem Chor im Osten.","tags":["architektur"]},
+        {"text":"Der Westturm besitzt einen quadratischen Grundriss, geht in halber Höhe in ein Achteck über und trägt eine charakteristische welsche Haube.","tags":["architektur","visuell"]},
+        {"text":"Der Renaissancealtar wurde 1594 eingebaut und markiert den Abschluss des Neubaus; der Innenausbau zog sich bis kurz vor den Dreißigjährigen Krieg.","tags":["ausstattung","geschichte"]},
+        {"text":"Die steinerne Kanzel mit hölzerner Überdachung entstand 1671. Eine Orgel von 1881 besitzt ein auffälliges neobarockes Prospekt.","tags":["ausstattung"]},
+        {"text":"Mitglieder der Schlossherrenfamilie von Dieskau wurden in der Kirche beigesetzt; mehrere Epitaphien bewahren diesen Zusammenhang von Schloss und Kirche.","tags":["dieskau","grabkultur"]},
+        {"text":"Die Netzrippen zeigen die zeitliche Nähe des Kirchenumbaus zum Ausbau des Renaissanceschlosses unter den von Dieskau im späten 16. Jahrhundert.","tags":["quer","renaissance"]},
+        {"text":"Die Trinitatis-Kantorei wurde 1565 gegründet und gilt als ältester Chor der Stadt sowie als einer der traditionsreichsten Chöre der Niederlausitz.","tags":["musik","chor"]},
+        {"text":"Kirche, Rathaus, Markt und Schloss bilden den denkmalgeschützten historischen Kern der Stadt und lassen Reformation, Adel und Bürgerschaft räumlich zusammenlesen.","tags":["stadtgeschichte","quer"]},
+        {"text":"Die Kirchengemeinde nutzt St. Trinitatis für Gottesdienste und musikalische Angebote verschiedener Generationen; Musik bleibt damit lebendige Nutzung des Baudenkmals.","tags":["gegenwart","musik"]},
+        {"text":"Die Vollendung fiel in die Zeit, als Finsterwalde unter den von Dieskau seine stärkste Renaissanceprägung erhielt; Schloss und Kirche sind die wichtigsten Zeugnisse.","tags":["epochenkontext"]},
+        {"text":"Die Bezeichnung Reformationskirche verweist nicht nur auf das Baualter: Architektur und Ausstattung entstanden in einer Epoche, in der sich die konfessionelle Ordnung der Niederlausitz dauerhaft veränderte.","tags":["reformation","regionalgeschichte"]},
+        {"text":"Das Netzrippengewölbe überspannt die drei Schiffe als zusammenhängenden Hallenraum. Dadurch unterscheidet sich der Innenraum deutlich von einer Basilika mit erhöhtem Mittelschiff.","tags":["architektur","innenraum"]},
+        {"text":"Der dreiseitige Ostschluss fasst den Chor, während der Turm den westlichen Gegenpol bildet. Nordseitig setzt der Renaissancegiebel einen eigenständigen Akzent.","tags":["architektur","visuell"]},
+        {"text":"Altar, Kanzel, Epitaphien und Orgel stammen aus verschiedenen Jahrhunderten. Der Innenraum ist deshalb kein unverändertes Renaissanceensemble, sondern ein gewachsener Erinnerungsraum.","tags":["ausstattung","denkmalpflege"]},
+        {"text":"LIVE: Zugänglichkeit, Gottesdienste, Konzerte und Führungen bei der evangelischen Kirchengemeinde Finsterwalde prüfen.","tags":["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q":"Woran erkenne ich St. Trinitatis?","a":"Am Renaissancegiebel des nördlichen Anbaus, dem hohen Ziegeldach und dem Westturm, der vom quadratischen Unterbau in ein Achteck mit welscher Haube übergeht."}]
+    },
+    {
+      "id": "finsterwalde_kath_pfarramt_st_maria_mater_dolorosa",
+      "name": "St. Maria Mater Dolorosa",
+      "general_info": "Die katholische Pfarrkirche ist ein 1906 geweihter massiver Saalbau mit Satteldach am Wasserturm. Sie entstand, als mit Arbeitskräften des Lausitzer Kohlebergbaus wieder eine größere katholische Gemeinde in der evangelisch geprägten Region wuchs.",
+      "deep_data_pool": [
+        {"text":"Die Kirche wurde von der Firma Hubert & Ullrich gebaut und 1906 eingeweiht; das Ensemble aus Kirche, Pfarrhaus, Nebengebäude und Einfriedung steht unter Denkmalschutz.","tags":["baugeschichte","denkmal"]},
+        {"text":"Der Bau ist ein massiver Saalbau mit Satteldach. Seine Lage am Wasserturm verbindet zwei Zeugnisse des starken Stadtwachstums vor dem Ersten Weltkrieg.","tags":["architektur","quer"]},
+        {"text":"Nach der Reformation war die Region überwiegend evangelisch. Die Zuwanderung polnischer Arbeiter für den Kohlebergbau ließ eine katholische Glaubensgemeinschaft entstehen.","tags":["sozialgeschichte","religion"]},
+        {"text":"Georg Kammel trat 1904 als erster katholischer Seelsorger Finsterwaldes sein Amt an und wirkte bis 1949.","tags":["kirchengeschichte"]},
+        {"text":"1910 wurde Finsterwalde zur katholischen Pfarrei erhoben, vier Jahre nach der Einweihung des Kirchengebäudes.","tags":["kirchengeschichte"]},
+        {"text":"1925 kamen Gläubige aus der Niederlausitz zum fünften Niederlausitzer Katholikentag nach Finsterwalde und wurden von Erzpriester Kammel begrüßt.","tags":["religion","regionalgeschichte"]},
+        {"text":"1989 erhielt der Turm ein goldenes Kreuz; Finanzierung und Umsetzung wurden von Kirchenvorstand, Gemeinde, ehrenamtlicher Arbeit und Spenden getragen.","tags":["ausstattung","gemeinde"]},
+        {"text":"Von 1988 bis 1994 wurden Kirche und Innenraum saniert und umgebaut; die Altarkonsekration und erneute Einweihung fanden am 28. Januar 1995 statt.","tags":["sanierung"]},
+        {"text":"Die katholische Gemeinde nutzt Kirche und Gemeindehaus für Gottesdienste, Religionsunterricht und musikalische Angebote.","tags":["gegenwart"]},
+        {"text":"LIVE: Gottesdienstzeiten, offene Kirche und Gemeindeveranstaltungen direkt bei der katholischen Pfarrei prüfen.","tags":["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q":"Woran erkenne ich St. Maria Mater Dolorosa?","a":"Am massiven Saalbau mit Satteldach im kirchlichen Ensemble Am Wasserturm 3; der nahe 54 Meter hohe Wasserturm ist die weithin sichtbare Orientierung."}]
+    },
+    {
+      "id": "finsterwalde_katharinenkirche",
+      "name": "St.-Katharinen-Kirche Nehesdorf",
+      "general_info": "Die lokale Katharinenkirche steht im Finsterwalder Stadtteil Nehesdorf, nicht in Oppenheim. Der Feldsteinbau aus der zweiten Hälfte des 13. Jahrhunderts ist das älteste erhaltene Gebäude im Stadtgebiet und wird von einem Friedhof umgeben.",
+      "deep_data_pool": [
+        {"text":"Die Kirche entstand in der zweiten Hälfte des 13. Jahrhunderts als rechteckiger Feldsteinsaal mit Satteldach und kurzem Schiff.","tags":["mittelalter","architektur"]},
+        {"text":"Sie besitzt einen eingezogenen Rechteckchor und einen westlichen Querturm; der verbretterte Turmaufsatz mit Dachreiter kam im 18. Jahrhundert hinzu.","tags":["architektur"]},
+        {"text":"Der Dachreiter trägt eine Pyramidenspitze mit Wetterfahne. Eine zweite Wetterfahne am Ostende des Schiffs zeigt die Jahreszahl 1635.","tags":["visuell","ausstattung"]},
+        {"text":"Bauhistorische Untersuchungen datieren wesentliche Holzteile um 1630; möglicherweise war zuvor ein Brand oder eine starke Schädigung eingetreten.","tags":["bauforschung"]},
+        {"text":"Um 1630 wurde der ursprünglich höhere Turm zurückgebaut, die Chorwände wurden angehoben und die Fenster vergrößert.","tags":["bauphasen"]},
+        {"text":"Eine Glocke wird um 1500 datiert, eine Minuskelschrift im Chor in das späte 15. Jahrhundert; Empore und Altarretabel entstanden um 1700.","tags":["ausstattung"]},
+        {"text":"2004 wurden Turm, Fußboden, Fenster, Elektrik und Heizung bearbeitet; dabei legte man am Turm ein frühgotisches Portal wieder frei.","tags":["sanierung"]},
+        {"text":"Die im 19. Jahrhundert errichtete westliche Fachwerkvorhalle verschwand bei der Rekonstruktion von 2004.","tags":["baugeschichte"]},
+        {"text":"Nehesdorf wurde 1928 nach Finsterwalde eingemeindet; die Dorfkirche bewahrt eine deutlich ältere Siedlungsschicht als die städtische Renaissancearchitektur.","tags":["stadtgeschichte","quer"]},
+        {"text":"LIVE: Zugang, Gottesdienste, Führungen und Friedhofsregeln bei der Katharinenkirchengemeinde Finsterwalde und Umland prüfen.","tags":["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q":"Woran erkenne ich die Finsterwalder Katharinenkirche?","a":"Am kleinen mittelalterlichen Feldsteinsaal, dem eingezogenen Rechteckchor und dem westlichen Querturm mit verbrettertem Aufsatz und Dachreiter."}]
+    },
+    {
+      "id": "finsterwalde_ehrenmal_finsterwalde",
+      "name": "Mahnmal für die Opfer von Gewaltherrschaft und Diktatur",
+      "general_info": "An der Kreuzung Langer Damm und Geschwister-Scholl-Straße verbindet das 1996 übergebene Mahnmal eine erhaltene 14 Meter lange Mauer des Ehrenhains von 1949 mit rostenden Stahlfiguren und einer Arche als Zeichen von Schutz und Übergang.",
+      "deep_data_pool": [
+        {"text":"1949 wurde hier ein Ehrenhain für Menschen aus Finsterwalde angelegt, die vom nationalsozialistischen Regime ermordet worden waren.","tags":["erinnerung","ns_zeit"]},
+        {"text":"Nach 1990 wurde die ältere Anlage auf Beschluss der Stadt beseitigt; ihre Inschriftentafeln wurden eingelagert.","tags":["denkmalgeschichte"]},
+        {"text":"1993 vergab die Stadt den Auftrag für ein neues Denkmal für alle Opfer von Gewaltherrschaft und Diktatur sowie für Freiheit, Demokratie und Gerechtigkeit.","tags":["geschichte"]},
+        {"text":"Der Finsterwalder Künstler Eckhard Böttger entwarf die Neugestaltung, die 1996 der Öffentlichkeit übergeben wurde.","tags":["kunst","kuenstler"]},
+        {"text":"Böttger integrierte die erhaltene, 14 Meter lange Mauer des früheren Ehrenhains in die neue Komposition.","tags":["architektur","kontinuitaet"]},
+        {"text":"Links lösen schattenrissartige Figuren aus rostendem Stahl Assoziationen an Bedrohung und Gewalt aus.","tags":["kunst","visuell"]},
+        {"text":"Im rechten Bereich erscheinen weitere Figuren und eine Arche, die Überfahrt, Verbindung und Geborgenheit symbolisiert.","tags":["symbolik"]},
+        {"text":"Das Mahnmal verzichtet bewusst auf Inschriften und Erklärtafeln; seine Aussage entsteht aus Material, Figuren und räumlicher Gegenüberstellung.","tags":["gestaltung"]},
+        {"text":"Seit 2014 steht links daneben ein Baumdenkmal für die Deutsche Einheit, gepflanzt zum 24. Jahrestag der Wiedervereinigung.","tags":["quer","deutsche_einheit"]},
+        {"text":"Der Ort erinnert zugleich daran, dass Finsterwalde mehrere weitere Kriegs- und Zwangsarbeitergedenkstätten auf dem städtischen Friedhof besitzt.","tags":["quer","erinnerung"]}
+      ],
+      "faqs": [{"q":"Woran erkenne ich das Ehrenmal?","a":"An der langen Mauer mit schattenrissartigen Figuren aus rostendem Stahl und der als Arche gestalteten Form an der Kreuzung Langer Damm/Geschwister-Scholl-Straße."}]
+    },
+    {
+      "id": "finsterwalde_sangerdenkmal",
+      "name": "Sängerdenkmal",
+      "general_info": "Das 2002 eingeweihte Sängerdenkmal der aus Finsterwalde stammenden Bildhauerin Evelyn Hartnick zeigt drei musizierende Menschen verschiedener sozialer Stellung: einen Geiger im Gehrock, einen Flötisten und einen barfüßigen singenden Knaben.",
+      "deep_data_pool": [
+        {"text":"Evelyn Hartnick schuf zunächst ein Gipsmodell; gegossen wurde die Figurengruppe in der Kunstgießerei von Horst Borchardt auf Charlottenhöhe in Schönermark.","tags":["kunst","entstehung"]},
+        {"text":"Die bronzene Gruppe wurde am 15. Mai 2002 eingeweiht und den Finsterwalder Sängern sowie ihrem Lied gewidmet.","tags":["geschichte","saengerstadt"]},
+        {"text":"Der Mann im langen Gehrock trägt eine Geige, ein einfacher gekleideter Mann spielt Flöte, der barfüßige Knabe singt ohne Instrument.","tags":["visuell"]},
+        {"text":"Die unterschiedlichen Stände der Figuren sollen ausdrücken, dass gemeinsames Singen in Finsterwalde Bevölkerungsschichten verbindet.","tags":["symbolik"]},
+        {"text":"Bereits 1911 gab es Pläne für einen Sängerbrunnen; gesammelte Spenden flossen später in eine Gedenkhalle für Gefallene des Ersten Weltkriegs.","tags":["denkmalgeschichte"]},
+        {"text":"2004 entstand zusätzlich der metallene Sängerbrunnen nach Vorlagen Eckhard Böttgers; Denkmal und Brunnen sind verschiedene Kunstwerke.","tags":["abgrenzung","quer"]},
+        {"text":"Das Motiv bezieht sich auf das 1899 uraufgeführte Lied, dessen Bühnenfiguren ursprünglich Pampel, Knarrig und Strippe hießen.","tags":["liedgeschichte"]},
+        {"text":"Die echten Finsterwalder Sänger treten heute vierstimmig auf; die dreifigurige Skulptur ist daher keine wörtliche Porträtgruppe der heutigen Formation.","tags":["einordnung"]},
+        {"text":"Seit 2013 ist Sängerstadt die amtlich genehmigte Zusatzbezeichnung Finsterwaldes, seit 2024 ist die Sangestradition Immaterielles Kulturerbe.","tags":["stadtidentitaet"]},
+        {"text":"LIVE: Führungen und Veranstaltungen am Denkmal beziehungsweise im Stadtzentrum über Touristinformation und Veranstaltungskalender prüfen.","tags":["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q":"Woran erkenne ich das Sängerdenkmal?","a":"An den drei bronzenen Figuren: Geiger im langen Gehrock, Flötist und barfüßiger singender Knabe ohne Instrument."}]
+    },
+    {
+      "id": "finsterwalde_schloss_park_finsterwalde",
+      "name": "Schlosspark Finsterwalde",
+      "general_info": "Der öffentliche Park rahmt das Renaissanceschloss und bewahrt zugleich historische Spuren der früheren Anlage. Von 2005 bis 2007 wurde er auf etwa das Dreifache erweitert und mit moderner Landschaftsarchitektur sowie einem neu interpretierten Schlossgraben gestaltet.",
+      "deep_data_pool": [
+        {"text":"Die städtische Planung nennt eine Parkanlage am Schloss bereits für das 15. Jahrhundert; sie gehört zum geschützten historischen Kern.","tags":["geschichte","denkmal"]},
+        {"text":"Vor der Neugestaltung war der Schlossgarten klein, dicht bepflanzt und dunkel; die neue Anlage vergrößerte seine Fläche auf das Dreifache.","tags":["landschaftsarchitektur"]},
+        {"text":"Der Umbau erfolgte 2005 bis 2007 nach einem Entwurf von Thomanek Duquesnoy Boemans Landschaftsarchitektur aus Berlin.","tags":["planung"]},
+        {"text":"Die Gestaltung setzt auf räumliche Weite und zurückhaltende zeitgenössische Details statt auf eine vermeintlich historische Rekonstruktion.","tags":["gestaltung"]},
+        {"text":"Ein historisch belegter Schlossgraben wurde neu angelegt, ohne Form und Material des früheren Grabens nachzuahmen.","tags":["geschichte","gestaltung"]},
+        {"text":"Die Jury des Deutschen Landschaftsarchitektur-Preises 2009 würdigte das Zusammenspiel zeitgenössischer Gestaltung und historischer Erinnerung.","tags":["auszeichnung"]},
+        {"text":"Der Park verbindet das Schloss mit dem südlichen Altstadtring und dem Grünzug in Richtung Kulturweberei.","tags":["orientierung","quer"]},
+        {"text":"Das Schloss gliedert sich in Vorder- und Hinterschloss; der dreigeschossige Torturm vermittelt zwischen beiden Bereichen.","tags":["schloss","quer"]},
+        {"text":"Die Anlage ist ein frei zugänglicher Stadtraum, während Innenräume des als Verwaltung genutzten Schlosses nur eingeschränkt zugänglich sind.","tags":["nutzung"]},
+        {"text":"LIVE: Baustellen, Veranstaltungen und temporär gesperrte Wege bei der Stadt Finsterwalde prüfen.","tags":["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q":"Woran erkenne ich den Schlosspark?","a":"An den offenen Grünflächen direkt am Renaissance-Schloss und dem modern interpretierten, historisch belegten Schlossgraben."}]
+    },
+    {
+      "id": "finsterwalde_burgerheide",
+      "name": "Bürgerheide",
+      "general_info": "Die Bürgerheide ist Finsterwaldes großes Naherholungsgebiet im Westen: zunächst parkartig, dann in Bürgerwald übergehend. Tierpark, Festwiese, Spiel- und Sportangebote sowie Lauf- und Spazierwege liegen in einem Areal, das seit 1929 planmäßig entwickelt wurde.",
+      "deep_data_pool": [
+        {"text":"1929 beschloss die Stadt einen Bürger- und Volkspark namens Friedenshain mit großer Bürgerwiese zwischen Wald und damaliger Bebauungsgrenze.","tags":["geschichte"]},
+        {"text":"Auf der Waldwiese des heutigen Tierparks entstand zugleich ein zweiter Waldspielplatz für sommerliche Ferienspiele.","tags":["freizeitgeschichte"]},
+        {"text":"Während der Weltwirtschaftskrise fanden bei den Arbeiten etwa 150 Arbeitslose zeitweise Beschäftigung als sogenannte Notstandsarbeiter.","tags":["sozialgeschichte"]},
+        {"text":"Das Parkensemble hieß ab 1933 Heldenhain, ab 1959 Leninhain und nach 1990 Bürgerheide; die Namen spiegeln politische Brüche des 20. Jahrhunderts.","tags":["erinnerung","geschichte"]},
+        {"text":"Die Bürgerheide geht vom Stadtpark in Wald über und wird zum Spazieren, Wandern und Joggen genutzt.","tags":["natur","sport"]},
+        {"text":"Der städtische Sportpark grenzt an: Schwimmhalle, Turnhalle, Stadion, Kunstrasenplatz, Tennisanlage und Laufstrecken bilden ein Freizeitcluster.","tags":["sport","quer"]},
+        {"text":"Der Tierpark liegt auf rund fünf Hektar innerhalb der Bürgerheide und entstand ab 1969 durch Initiative, Betriebsleistungen und zahlreiche Mitmachaktionen.","tags":["tierpark","quer"]},
+        {"text":"Eine lokale Überlieferung erzählt, Bürgermeister Abraham Koswig habe das Waldgebiet 1661 durch eine Bierwette für die Stadt gewonnen; dies ist ausdrücklich Sage, kein gesicherter Erwerbsakt.","tags":["sage","einordnung"]},
+        {"text":"Festwiese, Spielbereiche und Discgolf ergänzen das Naherholungsgebiet; die Bürgerheide ist daher kein einzelner Parkpunkt, sondern ein ausgedehntes Ensemble.","tags":["orientierung"]},
+        {"text":"LIVE: Waldarbeiten, Veranstaltungen, Tierparkbetrieb und Sportangebote aktuell bei der Stadt prüfen.","tags":["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q":"Woran erkenne ich die Bürgerheide?","a":"Am Übergang vom gestalteten Erholungspark in den Bürgerwald; Tierpark, Festwiese, Spielbereiche und Sportanlagen liegen als markante Teilbereiche darin."}]
+    },
+    {
+      "id": "finsterwalde_ascheberg_finsterwalde",
+      "name": "Ascheberg",
+      "general_info": "Der Ascheberg ist eine 117,5 Meter über NHN hohe Erhebung auf Finsterwalder Stadtgebiet, rund 670 Meter östlich des Stadtzentrums. Verifiziert sind Lage und Höhe; eine historische Aussichtsanlage oder besondere Entstehungsgeschichte ist nicht belegt.",
+      "deep_data_pool": [
+        {"text":"Die amtlich kartierte Höhe beträgt 117,5 Meter über Normalhöhennull.","tags":["geografie"]},
+        {"text":"Die Erhebung liegt ungefähr 670 Meter östlich des Finsterwalder Stadtzentrums.","tags":["orientierung"]},
+        {"text":"Der Ascheberg gehört zur Gemarkung der Stadt Finsterwalde im Landkreis Elbe-Elster.","tags":["verwaltung","geografie"]},
+        {"text":"Er ist ein landschaftlicher Geländepunkt und kein nachweislich ausgestatteter Aussichtsturm oder historischer Monumentalbau.","tags":["einordnung"]},
+        {"text":"Die Bezeichnung ist in Karten und in der deutschsprachigen Wikipedia dokumentiert; weitergehende belastbare Ortsgeschichte liegt in den geprüften Quellen nicht vor.","tags":["quellenlage"]},
+        {"text":"Der nahe Stadtkern entwickelte sich nördlich der mittelalterlichen Burg als rechtwinklig gegliederte Kolonistenstadt.","tags":["stadtgeschichte","kontext"]},
+        {"text":"Finsterwalde liegt im Süden Brandenburgs und ist größte Stadt des Landkreises Elbe-Elster; der Ascheberg ist Teil dieser flachwelligen Stadtlandschaft.","tags":["regionalgeografie"]},
+        {"text":"Weder der Name noch die Erhebung dürfen mit dem westlich gelegenen Naherholungsgebiet Bürgerheide gleichgesetzt werden.","tags":["abgrenzung"]},
+        {"text":"Für eine Erzählung eignen sich die gesicherte Höhen- und Lageangabe sowie der Kontrast zum nahen historischen Stadtkern; unbelegte Aussichtsbeschreibungen sind zu vermeiden.","tags":["redaktion"]},
+        {"text":"LIVE: Wegzustand, Zugänglichkeit und aktuelle Vegetation vor Ort beziehungsweise in aktuellen Karten prüfen.","tags":["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q":"Woran erkenne ich den Ascheberg?","a":"Als Geländeerhebung östlich des Zentrums; ein eigener Aussichtsturm oder ein eindeutig belegtes historisches Bauwerk gehört nicht dazu."}]
+    },
+    {
+      "id": "finsterwalde_stadtpark",
+      "name": "Stadtpark Finsterwalde",
+      "general_info": "Der Stadtpark ist eine innerstädtische Grünanlage und Teil der aufgewerteten Freiraumfolge zwischen Altstadt, Schlosspark und weiteren Grünzügen. Belastbare Quellen beschreiben vor allem seine Rolle in der Stadterneuerung, nicht eine eigenständige historische Parkgründung.",
+      "deep_data_pool": [
+        {"text":"Die Stadt nennt den Stadtpark neben Schlosspark und Grünzug zur Kulturweberei als umgesetzte Grünmaßnahme der Innenstadterneuerung.","tags":["stadtentwicklung"]},
+        {"text":"Die Freiraumaufwertung gehörte zu umfangreichen Maßnahmen, mit denen Straßen, Plätze, private Gebäude und öffentliche Räume der Innenstadt erneuert wurden.","tags":["sanierung"]},
+        {"text":"Der Park liegt im Umfeld des denkmalgeschützten Stadtkerns mit Markt, Rathaus, Trinitatiskirche und Schloss.","tags":["orientierung","quer"]},
+        {"text":"Anders als die Bürgerheide ist der Stadtpark eine kompakte innerstädtische Anlage und kein in Wald übergehendes Naherholungsgebiet.","tags":["abgrenzung"]},
+        {"text":"Anders als der Schlosspark ist der Stadtpark nicht unmittelbar als historische Schlossanlage zu erklären; beide sind getrennte Grünräume.","tags":["abgrenzung"]},
+        {"text":"Die Stadterneuerung verknüpft historische Architektur mit zeitgemäßen Grün- und Wegeverbindungen, statt die Innenstadt als reines Freilichtdenkmal zu behandeln.","tags":["stadtplanung"]},
+        {"text":"Die nahezu sanierte Innenstadt vereint Renaissance, Barock, Gründerzeit und Jugendstil; der Park bietet einen ruhigen Zugang zu diesem Architekturensemble.","tags":["architektur","kontext"]},
+        {"text":"Finsterwaldes historische Kernstadt ist zu Fuß überschaubar; vom Park sind Markt, Schloss und Kulturangebote in der Innenstadt erreichbar.","tags":["orientierung"]},
+        {"text":"Für den Park sind keine gesicherten historischen Einzelobjekte in den geprüften Primärquellen dokumentiert; solche Zuschreibungen sollten unterbleiben.","tags":["quellenlage"]},
+        {"text":"LIVE: Pflegearbeiten, Veranstaltungen und temporäre Wegsperrungen über die Stadt Finsterwalde prüfen.","tags":["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q":"Woran erkenne ich den Stadtpark?","a":"Als kompakte öffentliche Grünanlage im Innenstadtbereich; nicht mit dem Schlosspark direkt am Schloss oder der weitläufigen Bürgerheide im Westen verwechseln."}]
+    },
+    {
+      "id": "finsterwalde_schloss_finsterwalde",
+      "name": "Schloss Finsterwalde",
+      "general_info": "Das Schloss ist eine weitläufige Renaissanceanlage aus Vorder- und Hinterschloss. Ein dreigeschossiger Torturm verbindet beide Höfe; Arkaden am Hinterschloss verweisen auf den Ausbau unter den Herren von Dieskau. Heute sitzt hier die Stadtverwaltung.",
+      "deep_data_pool": [
+        {"text":"1282 erscheint mit Dominus Heinemanus de Vynsterwalde der erste urkundlich nachweisbare Burgherr zugleich in der frühesten Nennung Finsterwaldes.","tags":["mittelalter","urkunde"]},
+        {"text":"Im 14. und frühen 15. Jahrhundert soll die Burg Sitz des Raubritters von Gorenzen gewesen sein, der Reisende auf Handelswegen überfiel.","tags":["burg","geschichte"]},
+        {"text":"Die mittelalterliche Befestigung bestand vermutlich aus Holz, Stein, Palisaden, Wassergraben und Erdwällen; sichtbare Reste dieser frühen Anlage fehlen am heutigen Bau.","tags":["baugeschichte"]},
+        {"text":"Heinrich von Maltitz wird die Einrichtung des Schlosses im 15. Jahrhundert zugeschrieben; später folgten die Familien von Minckwitz und von Dieskau.","tags":["adelsgeschichte"]},
+        {"text":"1533 kam die Anlage an die von Dieskau. Besonders Bergrat Otto von Dieskau ließ zwischen 1553 und 1597 umfangreich bauen.","tags":["dieskau","renaissance"]},
+        {"text":"Die Umbauten des 16. Jahrhunderts prägen vor allem Hinterschloss und Teile des Vorderschlosses; die architekturprägende Renaissancephase wird um 1572 angesetzt.","tags":["renaissance","architektur"]},
+        {"text":"Das dreigeschossige Torhaus verbindet Vorder- und Hinterschloss. Die Arkaden des Hinterschlosses sind das deutlichste Renaissance-Motiv.","tags":["visuell","architektur"]},
+        {"text":"Im 19. Jahrhundert arbeiteten zwei Tuchfabriken im Vorderschloss, während Fabrikantenfamilien das Hinterschloss als Wohnhaus nutzten.","tags":["industriegeschichte"]},
+        {"text":"1885 zog die Stadtverwaltung in das Vorderschloss; 1919 erwarb die Stadt auch das Hinterschloss und richtete einen Stadtverordnetensaal ein.","tags":["verwaltung","geschichte"]},
+        {"text":"1925 entstand im Vorderschloss an Stelle einer Tuchfabrik ein Feuerwehrdepot; die Sammlung zog später in die Haberland-Villa um.","tags":["feuerwehr","quer"]},
+        {"text":"Seit den 1990er Jahren wurde die Anlage mit Städtebaufördermitteln umfassend saniert und als Verwaltungssitz hergerichtet.","tags":["sanierung"]},
+        {"text":"Der benachbarte Schlosspark wurde 2005–2007 zeitgenössisch neugestaltet und greift mit einem neu angelegten Graben historische Spuren auf.","tags":["schlosspark","quer"]},
+        {"text":"Schloss und Trinitatiskirche wurden in derselben Renaissanceepoche unter den von Dieskau ausgebaut; Netzrippen und Arkaden machen diese Verbindung sichtbar.","tags":["quer","renaissance"]},
+        {"text":"Die heutige Grundfläche der Schlossanlage wird mit rund 3.500 Quadratmetern angegeben. Ihre Ausdehnung erklärt, warum sie als Vorder- und Hinterschloss und nicht als einzelner Baukörper wahrgenommen wird.","tags":["anlage","architektur"]},
+        {"text":"Die Umwandlung vom Adelssitz über Fabrik- und Wohnstandort zum Rathauskomplex bündelt mehrere Hauptphasen der Stadtgeschichte an einem Ort.","tags":["nutzungsgeschichte"]},
+        {"text":"LIVE: Innenzugang richtet sich nach Verwaltungsbetrieb; Turmbesteigung, Führungen und Hofzugang aktuell bei der Stadt prüfen.","tags":["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q":"Woran erkenne ich Schloss Finsterwalde?","a":"An der Teilung in Vorder- und Hinterschloss, dem dreigeschossigen Torturm zwischen beiden Bereichen und den Renaissance-Arkaden des Hinterschlosses."}]
+    },
+    {
+      "id": "finsterwalde_tierpark_finsterwalde",
+      "name": "Tierpark Finsterwalde",
+      "general_info": "Der etwa fünf Hektar große Tierpark liegt mitten in der Bürgerheide. Mit rund 250 Tieren in mehr als 55 Arten und Rassen ist er laut Stadt der größte Tierpark im Landkreis Elbe-Elster; seine Entstehung ist eng mit lokaler Eigeninitiative verbunden.",
+      "deep_data_pool": [
+        {"text":"Das Gelände war seit 1929 Waldspielplatz und Teil des als Friedenshain angelegten Bürger- und Volksparks.","tags":["vorgeschichte"]},
+        {"text":"1969 entwickelten die Hobby-Ornithologen Alfred Zeisbrich und Rolf Bellisch die Idee eines Heimattierparks im Naherholungszentrum.","tags":["gruendung"]},
+        {"text":"Eine Arbeitsgruppe koordinierte den Aufbau; örtliche Betriebe lieferten Material, Gehege und Arbeitsleistungen und wirkten bis 1989/90 als Patenbetriebe.","tags":["stadtgesellschaft"]},
+        {"text":"Der VEB Mansfeld Schweißtechnik errichtete für 23.000 Mark eine Exotenvoliere als erstes Gehege der künftigen Anlage.","tags":["ddr_geschichte"]},
+        {"text":"In zahlreichen „Mach mit!“-Aktionen wurden Gelände, Zäune und Gehege vorbereitet; der Tierpark entstand damit wesentlich durch Gemeinschaftsarbeit.","tags":["ehrenamt","geschichte"]},
+        {"text":"Im August 1970 zogen erste Sittiche, afrikanische Zwergziegen und eine griechische Landschildkröte ein.","tags":["tiere","geschichte"]},
+        {"text":"Heute nennt die Stadt etwa 250 Tiere in über 55 Arten und Rassen aus unterschiedlichen Weltregionen.","tags":["bestand"]},
+        {"text":"Der Park liegt am Stadtrand in der Bürgerheide; Stellplätze werden am Bahndamm in der Forststraße ausgewiesen.","tags":["orientierung"]},
+        {"text":"Das Café am Schwanenteich gehört zum Besucherangebot; Öffnung und Gastronomie sind keine stabilen Pack-Fakten.","tags":["service"]},
+        {"text":"2013 gründete sich der Förderverein Freunde und Förderer des Tierparks Finsterwalde zur materiellen, finanziellen und ehrenamtlichen Unterstützung.","tags":["verein"]},
+        {"text":"Tierpatenschaften unterstützen laut Stadt die Lebensqualität der Tiere; Patinnen und Paten werden mit einem Schild am Gehege kenntlich gemacht.","tags":["engagement"]},
+        {"text":"Der Förderverein verbindet Tierparkentwicklung mit Öffentlichkeitsarbeit sowie Umwelt-, Tier- und Naturschutz.","tags":["naturschutz"]},
+        {"text":"Tierpark, Festwiese, Spielbereiche und Discgolf machen die Bürgerheide zu einem zusammenhängenden Freizeitgebiet.","tags":["quer","freizeit"]},
+        {"text":"Die Anlage war zunächst ausdrücklich als Heimattierpark gedacht. Der heutige Bestand umfasst neben heimischen Arten auch Tiere aus anderen Weltregionen und dokumentiert damit eine erweiterte Ausrichtung.","tags":["entwicklung","tiere"]},
+        {"text":"Der Standort blieb über politische Systemwechsel hinweg Teil eines öffentlichen Erholungsensembles: Friedenshain, Heldenhain, Leninhain und Bürgerheide rahmen die Tierparkgeschichte.","tags":["erinnerung","parkgeschichte"]},
+        {"text":"Die Beteiligung volkseigener Betriebe war für den Aufbau entscheidend. Sachleistungen, Patenbetriebe und freiwillige Arbeit ersetzten in den frühen Jahren eine vollständig professionelle Bauorganisation.","tags":["ddr_geschichte","stadtgesellschaft"]},
+        {"text":"Der Förderverein setzt die bürgerschaftliche Tradition seit 2013 in anderer Form fort und unterstützt Erhalt, Ausbau, Öffentlichkeitsarbeit und Naturschutzgedanken.","tags":["verein","kontinuitaet"]},
+        {"text":"LIVE: Öffnungszeiten, Eintritt, Tierbestand, Fütterungen, Patenschaftspreise und Cafébetrieb auf der städtischen Tierparkseite prüfen.","tags":["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q":"Woran erkenne ich den Tierpark?","a":"Am ausgeschilderten Eingang in der Bürgerheide und den Gehegen rund um das parkartige, etwa fünf Hektar große Gelände; der Schwanenteich ist ein weiterer Anhaltspunkt."}]
+    },
+    {
+      "id": "finsterwalde_wasserturm",
+      "name": "Wasserturm Finsterwalde",
+      "general_info": "Der 54 Meter hohe Wasserturm wurde 1909–1910 nach Plänen des Stadtbaumeisters Paul Droste gebaut. Sein achteckiger, ziegelsichtiger Schaft mit weißen Putzpartien, Laterne und kupfergedecktem Helm ist ein weithin sichtbares technisches Wahrzeichen.",
+      "deep_data_pool": [
+        {"text":"Der Turm entstand 1909–1910 zur Druckerhöhung des Leitungswassers und als Reinwasservorlage für die wachsende Stadt.","tags":["technik","baugeschichte"]},
+        {"text":"Stadtbaumeister Paul Droste entwarf den 54 Meter hohen Bau; auch das 1905–1908 errichtete Krankenhaus geht auf ihn zurück.","tags":["architekt"]},
+        {"text":"Der Grundriss ist oktogonal. Der Schaft bleibt ziegelsichtig, während Sockelgeschoss und oberster Turmbereich weiß verputzt sind.","tags":["architektur","visuell"]},
+        {"text":"Eine Laterne bekrönt den Turmkopf; darüber sitzt ein Helm mit Kupferscharendeckung.","tags":["architektur"]},
+        {"text":"Bis März 2019 stand eine kupferne Nixe auf der Spitze. Nach Sturmschäden musste sie demontiert werden.","tags":["ausstattung","geschichte"]},
+        {"text":"Der Wasserturm entstand in einer Phase starken Wachstums: Finsterwalde stieg von etwa 1.600 Einwohnern 1800 auf 10.726 im Jahr 1900.","tags":["stadtgeschichte"]},
+        {"text":"Mit Kirche, Krankenhaus, Schulen und Post gehört er zu den kommunalen Großbauten, die bis zum Ersten Weltkrieg den neuen Stadtgürtel prägten.","tags":["stadtentwicklung"]},
+        {"text":"Das technische Denkmal wurde auch im 21. Jahrhundert noch als Wasserspeicher genutzt; städtische Planungen behandeln Erhalt und Nachnutzung.","tags":["denkmal","nutzung"]},
+        {"text":"Die katholische Kirche St. Maria Mater Dolorosa von 1906 steht in unmittelbarer Nähe und gehört zur selben Wachstumsphase.","tags":["quer"]},
+        {"text":"Der Turm ist nicht mit dem kleineren bahnseitigen Wasserturm des denkmalgeschützten Bahnhofsensembles zu verwechseln.","tags":["abgrenzung"]},
+        {"text":"Seine Höhe und der polygonale Ziegelschaft machen ihn zu einem der zuverlässigsten Orientierungspunkte außerhalb der Altstadt.","tags":["orientierung"]},
+        {"text":"LIVE: Innenzugang, Führungen, Sanierungsstand und eine mögliche Nachnutzung bei Stadtwerken beziehungsweise Stadt prüfen.","tags":["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q":"Woran erkenne ich den Wasserturm?","a":"Am 54 Meter hohen achteckigen Ziegelschaft mit weiß verputztem Sockel und Turmkopf sowie der Laterne unter dem kupfergedeckten Helm."}]
+    },
+    {
+      "id": "finsterwalde_freibad_schwimmstadion_der_freundschaft_finsterwalde",
+      "name": "Freibad – Schwimmstadion der Freundschaft",
+      "general_info": "Das 1954 eröffnete Freibad im Norden der Stadt entstand in zweijähriger gemeinschaftlicher Bauarbeit. Das weitläufige Schwimmstadion wurde Schauplatz von Meisterschaften und ist besonders durch seine bis zu zehn Meter hohe Sprunganlage bekannt.",
+      "deep_data_pool": [
+        {"text":"Am 24. August 1954 wurde das von Finsterwalder Bürgern in umfangreicher Eigenleistung errichtete Bad während des ersten Sängerfestes eingeweiht.","tags":["geschichte","stadtgesellschaft"]},
+        {"text":"Die Bauzeit betrug zwei Jahre; das Schwimmstadion verbindet damit Freizeitgeschichte und die frühe Nachkriegstradition des Sängerfestes.","tags":["geschichte","quer"]},
+        {"text":"Die Sprunganlage ermöglicht Sprünge aus mehreren Höhen bis zehn Meter und ist das markanteste bauliche Merkmal des Freibads.","tags":["sport","visuell"]},
+        {"text":"In der Vergangenheit fanden hier deutsche beziehungsweise DDR-Meisterschaften und internationale Wettkämpfe statt.","tags":["sportgeschichte"]},
+        {"text":"Der mehrfache Olympiasieger und Weltrekordler Roland Matthes gewann in diesem Becken Medaillen.","tags":["sportgeschichte"]},
+        {"text":"Zur Anlage gehören Schwimmer- und Nichtschwimmerbereich, Startblöcke, Großrutsche, Liegewiese, schattenspendende Bäume und Volleyballfelder.","tags":["angebot"]},
+        {"text":"Eine Großrutsche gehört seit 1992 zum Bad; spätere Quellen nennen eine Länge von rund 60 Metern.","tags":["ausstattung"]},
+        {"text":"2008 wurde das Freibad vorläufig geschlossen, 2009 stand ein Abriss zur Diskussion; nach lokalem Engagement konnte es 2011 wieder öffnen.","tags":["geschichte","engagement"]},
+        {"text":"Freiwillige Arbeit blieb Teil der Badkultur, etwa durch gemeinschaftliche Frühjahrsputzaktionen.","tags":["stadtgesellschaft"]},
+        {"text":"Das Bad liegt am Ponnsdorfer Weg im Norden der Stadt und ist nicht mit der ganzjährig orientierten Schwimmhalle im Sportpark zu verwechseln.","tags":["orientierung","abgrenzung"]},
+        {"text":"Die historische Anlage ist zugleich Sportstätte und sommerlicher Treffpunkt; ihr Bestand wurde wiederholt durch lokale Verbundenheit gesichert.","tags":["bedeutung"]},
+        {"text":"LIVE: Saison, Wetteröffnung, Eintritt, nutzbare Sprunghöhen, Rutsche und aktuelle Sanierung unmittelbar beim Betreiber prüfen.","tags":["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q":"Woran erkenne ich das Schwimmstadion der Freundschaft?","a":"Am historischen Freibadportal, der weiten grünen Anlage und vor allem am weithin sichtbaren Sprungturm mit Plattformen bis zehn Meter."}]
+    },
+    {
+      "id": "finsterwalde_rathaus",
+      "name": "Altes Rathaus Finsterwalde",
+      "general_info": "Das Rathaus am Markt ist ein schlichter Barockbau von 1739 auf älteren Fundamenten. Eine Ratsstube ist schon 1492 belegt; Einsturz, Stadtbrand und jahrzehntelange Not prägten den Bau, der heute als Touristinformation und historischer Mittelpunkt dient.",
+      "deep_data_pool": [
+        {"text":"Die älteste Nachricht berichtet 1492 vom Bau einer neuen Ratsstube; ob dieser Bau 1651 noch stand, ist nicht gesichert.","tags":["mittelalter","geschichte"]},
+        {"text":"Am 19. März 1651 stürzte das Rathaus samt Turm ein. Der Turm trug damals bereits einen als „Stadt-Sieger“ bezeichneten Schmuck.","tags":["baugeschichte"]},
+        {"text":"Ein schwerer Stadtbrand von 1675 vernichtete Rathaus und Stadtarchiv und erschwerte die genaue Rekonstruktion der älteren Stadtgeschichte.","tags":["brand","archiv"]},
+        {"text":"Aus Geldmangel gelang zunächst nur ein Teilaufbau; 1690 wurde der Turm mit Brettern vernagelt und blieb fast fünf Jahrzehnte in diesem Zustand.","tags":["baugeschichte"]},
+        {"text":"1739 begann mit königlicher Unterstützung eine grundlegende Instandsetzung. Der daraus hervorgegangene schlichte Barockbau prägt den Markt bis heute.","tags":["barock","geschichte"]},
+        {"text":"Im Obergeschoss lagen Amtsräume; im Erdgeschoss befanden sich eine Schenkstube sowie Verkaufsräume für Bäcker und Fleischer.","tags":["alltagsgeschichte"]},
+        {"text":"In die westliche Außenwand war eine eiserne Elle eingelassen, an der Tuchhändler ihre Ware messen konnten.","tags":["textil","handel"]},
+        {"text":"Das Äußere blieb bis 1927 weitgehend unverändert; 1927/28 beziehungsweise 1928/29 wurde der Bau umgebaut und restauriert.","tags":["sanierung"]},
+        {"text":"Die kommunale Hauptverwaltung sitzt heute im Schloss; das Alte Rathaus am Markt dient unter anderem als Touristinformation.","tags":["nutzung","abgrenzung"]},
+        {"text":"Rathaus, Markt, Trinitatiskirche und Schloss bilden gemeinsam den denkmalgeschützten Kern der historischen Stadtanlage.","tags":["quer","denkmal"]},
+        {"text":"Vor dem Rathaus beziehungsweise auf dem Markt macht der Sängerbrunnen die jüngere Identität als Sängerstadt sichtbar.","tags":["saengerstadt","quer"]},
+        {"text":"Die wiederholten Zerstörungen des 17. Jahrhunderts erklären, warum der heutige Bau trotz mittelalterlicher Rathausgeschichte überwiegend barock erscheint.","tags":["baugeschichte","einordnung"]},
+        {"text":"Der Brand von 1675 vernichtete nicht nur das Gebäude, sondern auch das Stadtarchiv. Dadurch fehlen Primärquellen, die manche ältere Bau- und Stadtfrage eindeutig klären könnten.","tags":["archivgeschichte","quellenlage"]},
+        {"text":"Die frühere Schenkstube und die Verkaufsräume zeigen, dass ein Rathaus der frühen Neuzeit zugleich politischer, wirtschaftlicher und geselliger Mittelpunkt war.","tags":["alltagsgeschichte"]},
+        {"text":"Die eiserne Elle an der Außenwand war ein öffentlich kontrollierbares Längenmaß für Tuch. Sie verbindet das Rathaus direkt mit Finsterwaldes wichtigstem historischen Gewerbe.","tags":["textil","handel"]},
+        {"text":"Beim Umbau der späten 1920er Jahre wurde das Gebäude an moderne Nutzungen angepasst, ohne seine barocke Wirkung als Solitär am Markt aufzugeben.","tags":["sanierung","architektur"]},
+        {"text":"LIVE: Öffnung der Touristinformation, Führungen und Verwaltungsangebote aktuell bei der Stadt prüfen.","tags":["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q":"Woran erkenne ich das Alte Rathaus?","a":"Am repräsentativen, aber schlicht gegliederten Barockbau direkt auf dem Marktplatz; die Touristinformation nutzt heute das historische Gebäude."}]
+    },
+    {
+      "id": "finsterwalde_marchenhaus_finsterwalde",
+      "name": "Märchenhaus Finsterwalde",
+      "general_info": "Das Märchenhaus ist ein 1928 errichtetes kommunales Wohngebäude in der Friedrich-Hebbel-Straße. Seine straßenseitige Fassade trägt 27 kunstvolle Reliefs aus Klinkerformsteinen mit Szenen aus Märchen der Brüder Grimm.",
+      "deep_data_pool": [
+        {"text":"Stadtbaurat Dassel entwarf das Wohnhaus 1928 als Teil des kommunalen Bestrebens, modernen Wohnraum zu schaffen.","tags":["architektur","wohnen"]},
+        {"text":"Die Fassade besitzt 27 Reliefs aus eigens geformten Klinkern; dargestellt sind bekannte Märchenszenen der Brüder Grimm.","tags":["kunst","visuell"]},
+        {"text":"Die Dresdner Bildhauer J. E. Born, Paul Wachs und Paul Lindau gestalteten die Reliefs.","tags":["kuenstler"]},
+        {"text":"Gebrannt wurden die Formsteine in der Schacksdorfer Brennerei; örtliche Firmen führten die handwerklichen Arbeiten aus.","tags":["handwerk","regionalgeschichte"]},
+        {"text":"Die Brandenburgische Architektenkammer würdigte das Märchenhaus als einzigartiges Gebäude seiner Art in Deutschland.","tags":["bedeutung"]},
+        {"text":"Das Haus blieb Wohngebäude; die Kunst ist an der Außenfassade ablesbar und kein frei zugängliches Märchenmuseum im Inneren.","tags":["einordnung"]},
+        {"text":"Die Reliefs prägten über Generationen die Kindheitserinnerungen vieler Finsterwalder und wurden Teil lokaler Hausgeschichte.","tags":["stadtgesellschaft"]},
+        {"text":"Witterung und Frost verursachten Risse und Fugenschäden, durch die Feuchtigkeit in das Mauerwerk eindringen konnte.","tags":["denkmalpflege"]},
+        {"text":"Um 2020 wurden Risse und Fugen restauriert, farblich angepasster Mörtel verwendet und die Fassade zum Feuchteschutz hydrophobiert.","tags":["sanierung"]},
+        {"text":"Die Wohnungsgesellschaft der Stadt Finsterwalde ist Eigentümerin und ließ die denkmalgerechte Fassadensanierung ausführen.","tags":["traeger"]},
+        {"text":"Das Gebäude zeigt, dass Finsterwaldes Denkmalbestand neben Renaissance und Industriearchitektur auch qualitätvollen kommunalen Wohnungsbau umfasst.","tags":["architekturgeschichte","quer"]},
+        {"text":"LIVE: Das Haus ist bewohnt; Privatsphäre respektieren und eventuelle Baustellen oder Führungsangebote aktuell prüfen.","tags":["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q":"Woran erkenne ich das Märchenhaus?","a":"An der verklinkerten Straßenfassade mit 27 plastischen Märchenszenen; das Gebäude ist ein bewohntes Haus, keine Kulisse oder frei zugängliche Innenausstellung."}]
+    },
+    {
+      "id": "finsterwalde_kulturweberei_finsterwalde",
+      "name": "Kulturweberei Finsterwalde",
+      "general_info": "Die Kulturweberei ist eine multifunktionale Stadthalle in Teilen der denkmalgeschützten früheren Tuchfabrik Carl Schäfer. Erhaltene Produktionsbauten, Shedhalle und Heizhaus-Schornstein verbinden Finsterwaldes Textilindustrie mit heutiger Kultur.",
+      "deep_data_pool": [
+        {"text":"Carl Schäfer gründete die Tuchfabrik 1878/79; Spinnerei und Weberei stammen im Kern aus den späten 1880er Jahren.","tags":["industrie","geschichte"]},
+        {"text":"Das Webereigebäude entstand 1890 und wurde nach einem Brand 1936 aufgestockt.","tags":["baugeschichte"]},
+        {"text":"Denkmalgeschützt sind unter anderem Weberei, Spinnerei, Heizhaus mit Schornstein, Textilmaschinen, Hofpflaster und Einfriedung.","tags":["denkmal","industriearchitektur"]},
+        {"text":"1950 wurde der Betrieb enteignet und als VEB Tuchfabrik Finsterwalde weitergeführt; später ging er im VEB Feintuch auf.","tags":["ddr_geschichte"]},
+        {"text":"In den 1970er und 1980er Jahren diente der Standort unter anderem der Lehrlingsausbildung.","tags":["arbeitsgeschichte"]},
+        {"text":"Die Produktion der Finsterwalder Feintuch GmbH wurde 1992 durch die Treuhandanstalt stillgelegt.","tags":["strukturwandel"]},
+        {"text":"Die neue Stadthalle entstand aus erhaltenen Produktionsgebäuden, der alten Shedhalle und dem Schornstein des Heizhauses.","tags":["umnutzung","architektur"]},
+        {"text":"Die Kulturweberei ist für Tanz, Lesung, Theater, Konzert, Seminar und Tagung ausgelegt und damit bewusst multifunktional.","tags":["kultur","nutzung"]},
+        {"text":"2023 erhielt das Projekt den Brandenburgischen Baukulturpreis; die Umnutzung wurde auch überregional in der Architekturdebatte wahrgenommen.","tags":["auszeichnung"]},
+        {"text":"Die benachbarte Alte Weberei soll als Kreativ- und Kulturcampus weiterentwickelt werden und das Veranstaltungszentrum ergänzen.","tags":["stadtentwicklung","quer"]},
+        {"text":"Finsterwaldes Tuchgeschichte reicht bis ins Mittelalter; 1862 gab es 14 Dampf-Tuchfabriken und 140 Tuchmachermeister in der Stadt.","tags":["textilgeschichte"]},
+        {"text":"LIVE: Programm, Tickets, Saalbelegung, Führungen und Zugang zur Alten Weberei im aktuellen Kalender der Kulturweberei prüfen.","tags":["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q":"Woran erkenne ich die Kulturweberei?","a":"An der Verbindung aus umgebauten historischen Fabrikhallen, Shed-Dach-Strukturen und dem erhaltenen hohen Schornstein des Heizhauses."}]
+    },
+    {
+      "id": "finsterwalde_weltspiegel_kino",
+      "name": "Kino Weltspiegel",
+      "general_info": "Der Weltspiegel ist ein 1912 errichteter Kinozweckbau und eines der wenigen familiengeführten Kinos Deutschlands. Die Familie Siegert pflegt hier eine lange Kinotradition und ergänzt aktuelle Filme durch die Reihe „Der besondere Film“.",
+      "deep_data_pool": [
+        {"text":"Seit 1912 wird am Standort Kino betrieben; der Bau entstand von Anfang an für Filmvorführungen und nicht erst durch Umnutzung eines Saals.","tags":["kinogeschichte","architektur"]},
+        {"text":"Der Weltspiegel besitzt einen kleinen Saal und einen großen Saal mit getrenntem Parkett- und Logenbereich.","tags":["architektur"]},
+        {"text":"Zum historischen Kino kamen moderne Vorführangebote wie 3-D-Technik, ohne die familiengeführte Struktur aufzugeben.","tags":["technik","gegenwart"]},
+        {"text":"Die Stadt nennt den Weltspiegel als eines der wenigen familiengeführten Kinos in Deutschland; Betreiberfamilie Siegert steht für die Kontinuität.","tags":["familienbetrieb"]},
+        {"text":"Neben Publikumsfilmen zeigt die Programmreihe „Der besondere Film“ anspruchsvollere Produktionen abseits großer Kassenschlager.","tags":["programm"]},
+        {"text":"Im Sommer veranstaltet das Kino Freiluftvorführungen im Finsterwalder Freibad; Kino- und Badgeschichte werden dabei verbunden.","tags":["quer","kultur"]},
+        {"text":"Der Bau gehört zu den stadtbildprägenden Einrichtungen, die während Finsterwaldes starkem Wachstum vor dem Ersten Weltkrieg entstanden.","tags":["stadtgeschichte"]},
+        {"text":"1912 lag die Filmkunst noch in ihrer frühen kommerziellen Phase; ein erhaltener Zweckbau dieser Zeit ist daher ein wichtiges Medienzeugnis.","tags":["mediengeschichte"]},
+        {"text":"Der Weltspiegel ergänzt Museum, Kulturweberei und Sängertradition um eine kontinuierliche lokale Filmkultur.","tags":["kultur","quer"]},
+        {"text":"LIVE: Filmprogramm, Spielzeiten, Tickets, Saal, Barrierefreiheit und Freiluftkino-Termine direkt beim Weltspiegel prüfen.","tags":["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q":"Woran erkenne ich den Weltspiegel?","a":"Am historischen Kinozweckbau in der Karl-Marx-Straße 8; seine Nutzung als Lichtspielhaus besteht seit 1912."}]
+    },
+    {
+      "id": "finsterwalde_glaserne_sanger",
+      "name": "Gläserne Sänger",
+      "general_info": "Der Google-Ortsname wird der zeitgenössischen Sänger-Figurengruppe am nördlichen Innenstadtzugang zugeordnet, die seit Juli 2020 die Sangesfreude ohne nostalgische Frack-und-Zylinder-Attribute darstellt. Die offizielle Namensherkunft ist nicht dokumentiert.",
+      "deep_data_pool": [
+        {"text":"Die Figurengruppe wurde im Juli 2020 am nördlichen Eingang zur Finsterwalder Innenstadt aufgestellt.","tags":["kunst","geschichte"]},
+        {"text":"Entworfen wurde sie von den in der Region beheimateten Künstlern Aram und Ararat Haydeyan.","tags":["kuenstler"]},
+        {"text":"Die Gestaltung stellt Sangesfreude als zeitloses Merkmal der Stadt dar und verzichtet bewusst auf nostalgische Sängerattribute.","tags":["gestaltung","symbolik"]},
+        {"text":"Damit unterscheidet sie sich vom Sängerdenkmal Evelyn Hartnicks von 2002, das drei bronzene musizierende Personen verschiedener Stände zeigt.","tags":["abgrenzung"]},
+        {"text":"Sie unterscheidet sich auch vom Sängerbrunnen von 2004, dessen humorvolle Metallfiguren mit Zylindern und Sprühwasser spielen.","tags":["abgrenzung"]},
+        {"text":"Die Gruppe gehört zu einer Folge öffentlicher Kunstwerke, mit denen Finsterwalde seine Sängeridentität im Stadtraum sichtbar macht.","tags":["stadtidentitaet"]},
+        {"text":"Seit Mai 2013 führt Finsterwalde die amtlich genehmigte Zusatzbezeichnung Sängerstadt auf den Ortseingangsschildern.","tags":["saengerstadt"]},
+        {"text":"Die Sängeridentität geht auf Wilhelm Wolffs 1899 in Berlin uraufgeführte Burleske und das darin enthaltene Couplet zurück.","tags":["liedgeschichte"]},
+        {"text":"Seit März 2024 gehört die lebendige Finsterwalder Sangestradition zum Immateriellen Kulturerbe Deutschlands.","tags":["immaterielles_kulturerbe"]},
+        {"text":"Die Bezeichnung „Gläserne Sänger“ ist in den geprüften offiziellen Darstellungen nicht erläutert; Materialdeutungen oder Künstlerabsichten dürfen daher nicht ergänzt werden.","tags":["quellenlage"]},
+        {"text":"Der nördliche Innenstadtzugang verweist räumlich weiter zum historischen Markt mit Sängerbrunnen, Museum und Sängerdenkmal.","tags":["orientierung","quer"]},
+        {"text":"LIVE: Zustand, Beleuchtung und eventuelle Kunstführungen bei Stadt oder Touristinformation prüfen.","tags":["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q":"Woran erkenne ich die „Gläsernen Sänger“?","a":"Als moderne Sänger-Figurengruppe am nördlichen Innenstadtzugang; nicht mit der bronzenen Dreiergruppe von 2002 oder dem Sängerbrunnen von 2004 verwechseln."}]
+    },
+    {
+      "id": "finsterwalde_feuerwehrmuseum_finsterwalde",
+      "name": "Feuerwehrmuseum Finsterwalde",
+      "general_info": "Das Feuerwehrmuseum zeigt auf rund 350 Quadratmetern die Entwicklung des Feuerlöschwesens in Finsterwalde und Umgebung seit der Gründung der örtlichen Feuerwehr im Juni 1872. Es liegt in der Remise der denkmalgeschützten Haberland-Villa.",
+      "deep_data_pool": [
+        {"text":"Die Ausstellung behandelt regionale Löschtechnik, Geräte und Verfahren von der Feuerwehrgründung im Juni 1872 bis zur Gegenwart.","tags":["feuerwehrgeschichte"]},
+        {"text":"Der heutige Standort ist die Remise der ehemaligen Haberland’schen Fabrikantenvilla in der Geschwister-Scholl-Straße 2.","tags":["standort","architektur"]},
+        {"text":"Villa und Remise gehören zu einem denkmalgeschützten Ensemble aus dem 19. Jahrhundert.","tags":["denkmal"]},
+        {"text":"Kommerzienrat Benno Richard Haberland, ein Finsterwalder Tuchfabrikant, ließ die Gebäude vor 1870 errichten.","tags":["textilgeschichte","bauherr"]},
+        {"text":"1898 wurden Villa und angrenzendes Firmengelände an den Tuchfabrikanten Koswig verkauft.","tags":["industriegeschichte"]},
+        {"text":"Das Ensemble gehört zu einer Gruppe großzügiger Unternehmeranwesen am damaligen Kurzen Damm und dokumentiert den Wohlstand der Industriestadt.","tags":["stadtgeschichte"]},
+        {"text":"Zuvor war die Feuerwehrausstellung im Schloss untergebracht, in Räumen einer ehemaligen Tuchfabrik, die 1925 zum Feuerwehrhaus umgebaut worden waren.","tags":["museumsgeschichte","quer"]},
+        {"text":"Mit dem Umbau des Schlossbereichs zum Bürgerservice erhielt das Museum einen neuen Standort in Villa und Remise.","tags":["umnutzung"]},
+        {"text":"Zum 140-jährigen Jubiläum der Feuerwehr wurden die Museumsgebäude am 16. Juni 2012 an den Feuerwehrverein übergeben.","tags":["geschichte"]},
+        {"text":"Die neue Einrichtung wurde am 20. Januar 2013 eingeweiht; Originalfahrzeuge und Geräte veranschaulichen technische Entwicklung.","tags":["sammlung"]},
+        {"text":"Feuerwehr-, Tuch- und Schlossgeschichte kreuzen sich hier mehrfach: Unternehmeranwesen, Fabrikräume und Feuerwehrdepot wurden nacheinander neu genutzt.","tags":["quer"]},
+        {"text":"LIVE: Öffnung, Eintritt, Gruppenführungen und Aktionstage beim Feuerwehrmuseum beziehungsweise Feuerwehrverein prüfen.","tags":["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q":"Woran erkenne ich das Feuerwehrmuseum?","a":"An der Remise im denkmalgeschützten Ensemble der Haberland-Villa, Geschwister-Scholl-Straße 2; es ist nicht mehr im Schloss untergebracht."}]
+    },
+    {
+      "id": "finsterwalde_flugplatz_finsterwalde_heinrichsruh",
+      "name": "Flugplatz Finsterwalde-Heinrichsruh",
+      "general_info": "Der 1932 eingeweihte Heideflugplatz ist Heimat der Flugsportvereinigung Otto Lilienthal. Seine Geschichte reicht von frühen Segelfliegern über Kriegs- und DDR-Einschränkungen bis zur Wiedereröffnung 1990; historische Flugzeuge werden bis heute bewahrt.",
+      "deep_data_pool": [
+        {"text":"Finsterwalder Flugenthusiasten und Stadtvertreter weihten den Platz am 3. August 1932 als „Flughafen“ ein.","tags":["gruendung","luftfahrt"]},
+        {"text":"Schon 1910 versuchten Holl und Häusler mit dem selbstgebauten Motorflugzeug HH I abzuheben; der Versuch blieb ohne erfolgreichen Flug.","tags":["pioniergeschichte"]},
+        {"text":"1912 sahen etwa 3.000 Zuschauer bei einem Flugtag nahe dem heutigen Gelände unter anderem einen Schüler des Flugpioniers Hans Grade.","tags":["luftfahrtgeschichte"]},
+        {"text":"Seit 1929 organisierten sich Finsterwalder Flieger im Verein Sturmvogel; 1931 präsentierten sie den selbstgebauten Segler „Zögling“.","tags":["vereinsgeschichte"]},
+        {"text":"Im Zweiten Weltkrieg diente der Platz als Ausbildungsstätte der Luftwaffe; Bombentreffer zerstörten die Flugzeughalle.","tags":["zweiter_weltkrieg"]},
+        {"text":"Nach dem Krieg war Flugbetrieb zunächst verboten. In den 1950er Jahren wurde Segelflug wieder aufgenommen und brachte sportliche Erfolge.","tags":["nachkrieg"]},
+        {"text":"Nach dem Mauerbau 1961 unterlag der Betrieb strengen Kontrollen; Flugzeuge wurden gegen mögliche Republikflucht gesichert.","tags":["ddr_geschichte"]},
+        {"text":"1979 wurde der Flugplatz geschlossen. Engagierte Flieger hielten Heidefläche und Gebäude dennoch von Bewuchs und Verfall frei.","tags":["erhalt"]},
+        {"text":"1987 entstand ein provisorisches Museum mit historischer Flugtechnik und mehreren Segelflugzeugen, um den Platz zu sichern.","tags":["museumsgeschichte"]},
+        {"text":"Am 30. März 1990 gründete sich die Flugsportvereinigung Otto Lilienthal neu und nahm den aktiven Flugbetrieb wieder auf.","tags":["wiedervereinigung","verein"]},
+        {"text":"Der Verein pflegt auf dem etwa 70 Hektar großen Gelände zugleich ein Heidebiotop und historische Segelflugzeuge, ohne offizielles Museum zu sein.","tags":["natur","technikdenkmal"]},
+        {"text":"Der Segler FES 530/II „Lehrmeister II“ von 1960 wurde als technisches Denkmal mit vielen ehrenamtlichen Arbeitsstunden restauriert.","tags":["flugzeug","denkmal"]},
+        {"text":"Der Sonderlandeplatz ist für verschiedene leichte Luftfahrzeuge zugelassen; konkrete Betriebsgrenzen und Flugbewegungen sind veränderlich.","tags":["betrieb"]},
+        {"text":"LIVE: Flugbetrieb, Veranstaltungen, Rundflüge, Zutritt und Sicherheitsbereiche direkt beim FSV Otto Lilienthal prüfen.","tags":["live_hint","ephemeral"]}
+      ],
+      "faqs": [{"q":"Woran erkenne ich den Flugplatz Heinrichsruh?","a":"An der offenen Heidefläche, den Segelflughallen und dem aktiven Vereinsgelände; historische Flugzeuge werden bewahrt, doch der Platz ist kein reguläres Museum."}]
+    }
+  ],
+  "offline_qa": [
+    {"q":"Warum heißt Finsterwalde Sängerstadt?","a":"Das 1899 in Berlin uraufgeführte Couplet „Wir sind die Sänger von Finsterwalde“ wurde vom zunächst abgelehnten Spott zum lokalen Identitätszeichen. 1901 erschien die Bezeichnung Sängerstadt erstmals; seit 2013 ist sie amtlicher Zusatz.","tags":["saengerstadt","geschichte"]},
+    {"q":"Ist die Sangestradition Immaterielles Kulturerbe?","a":"Ja. Die Finsterwalder Sangestradition wurde im März 2024 in das Bundesweite Verzeichnis des Immateriellen Kulturerbes aufgenommen.","tags":["immaterielles_kulturerbe"]},
+    {"q":"Wann entstand das Sängerfest?","a":"Das erste Sängerfest wurde 1954 gefeiert. Es findet grundsätzlich alle zwei Jahre statt und zählt zu den größten Volksfesten Brandenburgs; konkrete Termine sind LIVE zu prüfen.","tags":["saengerfest","live_hint"]},
+    {"q":"Welche Rolle spielte die Tuchindustrie?","a":"Woll- und Leinenweberei sind seit dem Mittelalter belegt. Im 19. Jahrhundert entstanden leistungsfähige Dampftuchfabriken; 1862 zählte die Stadt 14 Dampf-Tuchfabriken und 140 Tuchmachermeister.","tags":["textil","industrie"]},
+    {"q":"Wann wurde Finsterwalde erstmals erwähnt?","a":"1282 unterschrieb Heinemanus de Vynsterwalde eine Urkunde. 1336 ist Finsterwalde in einem Lehnsdokument eindeutig als Stadt bezeichnet.","tags":["stadtgeschichte"]},
+    {"q":"Wo beginnt ein historischer Rundgang?","a":"Am Markt liegen Rathaus und Sängerbrunnen; Trinitatiskirche, Schloss, Schlosspark und Sänger- und Kaufmannsmuseum sind von dort eng miteinander verbunden.","tags":["orientierung","altstadt"]},
+    {"q":"Welche Informationen müssen aktuell recherchiert werden?","a":"Öffnungszeiten, Eintrittspreise, Veranstaltungen, Gottesdienste, Bahnverkehr, Tierbestand, Bade- und Flugbetrieb sind veränderlich und müssen LIVE geprüft werden.","tags":["live_hint","ephemeral"]},
+    {"q":"Ist die Katharinenkirche in Finsterwalde mittelalterlich?","a":"Ja. Die St.-Katharinen-Kirche im Stadtteil Nehesdorf stammt aus der zweiten Hälfte des 13. Jahrhunderts und ist das älteste erhaltene Gebäude im Stadtgebiet.","tags":["kirche","mittelalter"]}
+  ],
+  "city_facts_non_place": [
+    "Finsterwalde liegt im Süden Brandenburgs und ist die größte Stadt im Landkreis Elbe-Elster.",
+    "Die Stadt wurde 1282 erstmals erwähnt und 1336 eindeutig als Stadt bezeichnet.",
+    "Finsterwalde gehörte ab 1815 infolge des Wiener Kongresses zum Königreich Preußen.",
+    "Die Tuchproduktion prägte den industriellen Aufstieg des 19. Jahrhunderts; später kamen Metall-, Holz-, Glas-, Tabak-, Chemie- und Elektromaschinenindustrie hinzu.",
+    "Der Eisenbahnanschluss erfolgte 1871 mit der Strecke Halle–Sorau.",
+    "Wilhelm Wolffs Burleske mit dem Couplet „Wir sind die Sänger von Finsterwalde“ wurde 1899 in Berlin uraufgeführt.",
+    "Seit 1954 wird das Finsterwalder Sängerfest gefeiert.",
+    "Seit 16. Mai 2013 führt Finsterwalde offiziell die Zusatzbezeichnung Sängerstadt.",
+    "Die Finsterwalder Sangestradition wurde 2024 in das Bundesweite Verzeichnis des Immateriellen Kulturerbes aufgenommen.",
+    "Die heutige Sängerformation ist vierstimmig besetzt, während die ursprüngliche Burleske drei Sängerfiguren kannte.",
+    "Die Trinitatis-Kantorei wurde 1565 gegründet und ist der älteste Chor der Stadt.",
+    "Die historische Innenstadt verbindet Renaissance, Barock, Gründerzeit und Jugendstil."
+  ]
+}

@@ -16,7 +16,6 @@ import {
 } from '../ai/featureTips';
 import { resetRouteObstacleAudio } from './routeObstacleAudio';
 import {
-  buildInitialOrientationCue,
   buildWrongWayCue,
   relateToHeading,
   scrubRoboticNavSpeak,
@@ -36,9 +35,18 @@ type CoachSession = {
   destLat: number;
   destLng: number;
   openingSpoken: boolean;
+  /** Opening darf erst nach committed Route (kein Luftlinien-ETA). */
+  routeReady: boolean;
   enrichEpoch: number;
   lastWrongWayAt: number;
   startLandmark: string | null;
+  firstTurn: {
+    turn: string;
+    landmark: string | null;
+    roadName: string | null;
+    distanceM: number | null;
+  } | null;
+  etaMin: number | null;
 };
 
 let session: CoachSession | null = null;
@@ -55,12 +63,34 @@ export function beginLandmarkNavCoach(opts: {
     destLat: opts.destLat,
     destLng: opts.destLng,
     openingSpoken: false,
+    routeReady: false,
     enrichEpoch: myEpoch,
     lastWrongWayAt: 0,
     startLandmark: null,
+    firstTurn: null,
+    etaMin: null,
   };
   beginHandsFreeTickCoach(opts.destinationName);
   resetCueScheduler();
+}
+
+/** Nach OSRM/Enrich: Route ist die „beste“ — erst dann Opening. */
+export function markNavRouteReady(opts?: {
+  etaMin?: number | null;
+  startLandmark?: string | null;
+  firstTurn?: CoachSession['firstTurn'];
+}): void {
+  if (!session) return;
+  session.routeReady = true;
+  if (opts?.etaMin != null && Number.isFinite(opts.etaMin)) {
+    session.etaMin = Math.max(1, Math.round(opts.etaMin));
+  }
+  if (opts?.startLandmark) session.startLandmark = opts.startLandmark;
+  if (opts?.firstTurn) session.firstTurn = opts.firstTurn;
+}
+
+export function isNavRouteReadyForSpeech(): boolean {
+  return Boolean(session?.routeReady);
 }
 
 export type EnrichedNavRoute = {
@@ -68,6 +98,7 @@ export type EnrichedNavRoute = {
   stations: NavWaypoint[];
   travelMode: PedestrianTravelMode;
   walkingDistanceM: number;
+  etaMin?: number;
 };
 
 /** Hands-Free progressive enrich (SSOT). */
@@ -100,11 +131,73 @@ export async function enrichNavigationRouteFull(opts: {
   }
   resetLookAheadBuffer();
 
+  // First turn for opening visual cue
+  let firstTurn: CoachSession['firstTurn'] = null;
+  try {
+    const { findNextTurnWaypoint } = require('./handsFreeNav/cueScheduler') as {
+      findNextTurnWaypoint: (o: {
+        waypoints: typeof result.waypoints;
+        fromIndex: number;
+      }) => { index: number; wp: (typeof result.waypoints)[0] } | null;
+    };
+    const { isTurnManeuver } = require('./navPredictiveCue') as {
+      isTurnManeuver: (m: string | null | undefined) => boolean;
+    };
+    const next = findNextTurnWaypoint({
+      waypoints: result.waypoints,
+      fromIndex: 0,
+    });
+    if (next && isTurnManeuver(next.wp.maneuver)) {
+      const m = (next.wp.maneuver ?? '').toLowerCase();
+      let turn = 'geradeaus';
+      if (m.includes('uturn') || m.includes('u-turn')) turn = 'umdrehen';
+      else if (m.includes('left')) turn = m.includes('sharp') ? 'scharf links' : m.includes('slight') ? 'leicht links' : 'links';
+      else if (m.includes('right')) turn = m.includes('sharp') ? 'scharf rechts' : m.includes('slight') ? 'leicht rechts' : 'rechts';
+      let distM: number | null = null;
+      if (result.waypoints.length > 1) {
+        const { distanceMeters } = require('./bearing') as {
+          distanceMeters: (
+            a: number,
+            b: number,
+            c: number,
+            d: number,
+          ) => number;
+        };
+        distM = Math.round(
+          distanceMeters(
+            opts.originLat,
+            opts.originLng,
+            next.wp.lat,
+            next.wp.lng,
+          ),
+        );
+      }
+      firstTurn = {
+        turn,
+        landmark:
+          next.wp.visibleLandmark?.trim() ||
+          next.wp.landmark?.trim() ||
+          null,
+        roadName: next.wp.roadName ?? null,
+        distanceM: distM,
+      };
+    }
+  } catch {
+    /* soft */
+  }
+
+  markNavRouteReady({
+    etaMin: result.etaMin,
+    startLandmark: session?.startLandmark ?? result.waypoints[0]?.landmark ?? null,
+    firstTurn,
+  });
+
   return {
     waypoints: result.waypoints,
     stations: result.stations,
     travelMode: result.travelMode,
     walkingDistanceM: result.walkingDistanceM,
+    etaMin: result.etaMin,
   };
 }
 
@@ -149,44 +242,125 @@ export async function speakNavOpeningIfNeeded(
   destinationName: string,
 ): Promise<void> {
   if (!session || session.openingSpoken) return;
+  // Kritisch: nie vor committed Route sprechen (kein Luftlinien-ETA)
+  if (!session.routeReady) return;
+
   session.openingSpoken = true;
 
   const explain = await shouldExplainHandsFreeNav();
-  const landmark = session.startLandmark;
-
   if (explain) {
     await markHandsFreeNavExplained();
-    const orient = buildInitialOrientationCue({
-      landmark,
-      relation: landmark
-        ? {
-            side: 'front',
-            bearingRelDeg: 0,
-            sidePhrase: 'voraus',
-            shortPhrase: 'vor dir',
-          }
-        : null,
-      destinationName,
-    });
-    await speakNav(orient);
-  } else if (landmark) {
-    await speakNav(
-      buildInitialOrientationCue({
-        landmark,
-        relation: {
-          side: 'front',
-          bearingRelDeg: 0,
-          sidePhrase: 'voraus',
-          shortPhrase: 'vor dir',
-        },
-        destinationName,
-      }),
-    );
-  } else {
-    await speakNav(
-      `Alles klar, wir laufen jetzt los zu ${destinationName}. Ich sag dir gleich wo's langgeht.`,
-    );
   }
+
+  let etaMin = session.etaMin;
+  let phraseEta: number | null = null;
+  try {
+    const { getCommittedRoutePhrase } = require('./navSpeechDistance') as {
+      getCommittedRoutePhrase: () => { etaMin: number | null } | null;
+    };
+    const phrase = getCommittedRoutePhrase();
+    if (phrase?.etaMin != null) {
+      phraseEta = phrase.etaMin;
+      etaMin = phrase.etaMin;
+    }
+  } catch {
+    /* soft */
+  }
+  let storeEta: number | null = null;
+  try {
+    const { useFinnusStore } = require('../../store/useFinnusStore') as {
+      useFinnusStore: { getState: () => { navEtaMin?: number | null } };
+    };
+    const raw = useFinnusStore.getState().navEtaMin;
+    storeEta =
+      raw != null && Number.isFinite(raw) ? Math.max(1, Math.round(raw)) : null;
+  } catch {
+    /* soft */
+  }
+
+  let relation: import('./spatialOrientation').SpatialRelation | null = null;
+  try {
+    const { getLiveDeviceHeadingDeg } = require('./liveDeviceHeading') as {
+      getLiveDeviceHeadingDeg: () => number | null;
+    };
+    const { bearingDegrees } = require('./bearing') as {
+      bearingDegrees: (a: number, b: number, c: number, d: number) => number;
+    };
+    const { relateToHeading } = require('./spatialOrientation') as {
+      relateToHeading: (
+        h: number,
+        t: number,
+      ) => import('./spatialOrientation').SpatialRelation;
+    };
+    const { useFinnusStore } = require('../../store/useFinnusStore') as {
+      useFinnusStore: {
+        getState: () => { lastGpsLat?: number | null; lastGpsLng?: number | null };
+      };
+    };
+    const st = useFinnusStore.getState();
+    const hdg = getLiveDeviceHeadingDeg();
+    if (
+      hdg != null &&
+      st.lastGpsLat != null &&
+      st.lastGpsLng != null &&
+      session
+    ) {
+      const target =
+        session.firstTurn != null
+          ? // facing toward first meters of path ≈ dest if no turn geo
+            bearingDegrees(
+              st.lastGpsLat,
+              st.lastGpsLng,
+              session.destLat,
+              session.destLng,
+            )
+          : bearingDegrees(
+              st.lastGpsLat,
+              st.lastGpsLng,
+              session.destLat,
+              session.destLng,
+            );
+      relation = relateToHeading(hdg, target);
+    }
+  } catch {
+    /* soft */
+  }
+
+  const { buildFirstVisualDirection, buildNavStartSpeech } = require('./navStartSpeech') as {
+    buildFirstVisualDirection: (o: {
+      turn: string | null;
+      landmark: string | null;
+      roadName: string | null;
+      relation?: import('./spatialOrientation').SpatialRelation | null;
+      distanceToFirstTurnM?: number | null;
+    }) => string | null;
+    buildNavStartSpeech: (o: {
+      firstVisual: string | null;
+      relation?: import('./spatialOrientation').SpatialRelation | null;
+      etaMin: number | null;
+      pathHint?: string | null;
+    }) => string;
+  };
+
+  const ft = session.firstTurn;
+  const firstVisual = buildFirstVisualDirection({
+    turn: ft?.turn ?? null,
+    landmark: ft?.landmark || session.startLandmark,
+    roadName: null,
+    relation,
+    distanceToFirstTurnM: ft?.distanceM ?? null,
+  });
+
+  void destinationName; // Ziel liegt in HUD — Opener dump’t Namen nicht
+  await speakNav(
+    buildNavStartSpeech({
+      firstVisual,
+      relation,
+      etaMin,
+      // Keine Straßennamen in der Start-Ansage
+      pathHint: null,
+    }),
+  );
 }
 
 export function markNavOpeningSpoken(): void {
@@ -201,7 +375,8 @@ export function speakWrongWayInterrupt(opts: {
 }): void {
   if (!session) return;
   const now = Date.now();
-  if (now - session.lastWrongWayAt < 20_000) return;
+  // Pro Nav-Session höchstens alle 45 s — Monitor sorgt schon für 1× pro Episode
+  if (now - session.lastWrongWayAt < 45_000) return;
   session.lastWrongWayAt = now;
   const relation = relateToHeading(
     opts.headingDeg,

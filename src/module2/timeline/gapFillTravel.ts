@@ -1,7 +1,6 @@
 /**
  * Gap-Fill: Nav-Legs zwischen FuturePlan-Stops mit Koordinaten.
- * Planungszeit: ÖPNV als EIN kollabierter Leg (Umstiege nur in der Notiz).
- * Live-Einzelschritte: erst bei Nav-Start (`startJourneyNavigation`).
+ * ÖPNV wird wie Live-Nav als aufklappbare Bein-Gruppe gelegt (zu Fuß → Bahn → Fuß).
  */
 
 import { haversineMeters } from '../../db/database';
@@ -11,6 +10,7 @@ import {
   type FuturePlanStop,
   type FuturePlanTransport,
 } from './futurePlanState';
+import { isLiveNavLegId } from './syncLiveNavToPlan';
 import {
   buildNavLegNotes,
   haversineWalkMin,
@@ -18,6 +18,7 @@ import {
   roundUpMinutesTo5,
   scheduleRefineNavLegRoute,
 } from './planTravelHelpers';
+import { cleanPlanDestTitle, plannedJourneyGroupExists } from './plannedJourneyGroup';
 
 function speedMPerMin(transport: FuturePlanTransport): number {
   switch (transport) {
@@ -35,25 +36,39 @@ function speedMPerMin(transport: FuturePlanTransport): number {
   }
 }
 
+import {
+  pickPlanMobilityMode,
+} from '../planning/planMobilityPolicy';
+import {
+  resolveActiveTravelMode,
+  travelModeNavPrefs,
+} from '../../services/navigation/travelModeContext';
+
+function preferBikeNow(): boolean {
+  try {
+    const active = resolveActiveTravelMode();
+    if (active.mode === 'bike') return true;
+    return travelModeNavPrefs(active.mode).preferBike;
+  } catch {
+    return false;
+  }
+}
+
 function pickLegTransport(
   preferred: FuturePlanTransport,
   walkMin: number,
 ): FuturePlanTransport {
-  if (preferred === 'taxi' || preferred === 'car') {
-    return preferred;
-  }
-  if (preferred === 'bike') {
-    // Rad aus Profil/Default — bei sehr langen Legs → ÖPNV
-    const bikeMin = Math.max(3, Math.round(walkMin * 0.4));
-    if (bikeMin > 45 || walkMin > 100) return 'transit';
-    return 'bike';
-  }
-  if (preferred === 'transit') return 'transit';
-  // Fußweg über 20 Min → ÖPNV (Produktregel)
-  if ((preferred === 'walk' || preferred === 'unknown') && walkMin > 20) {
-    return 'transit';
-  }
-  return preferred === 'unknown' ? 'walk' : preferred;
+  const bikeMin = Math.max(3, Math.round(walkMin * 0.4));
+  // Grobe ÖPNV-Schätzung: ~55% der Fußzeit (Haversine), Floor 8
+  const transitMin = Math.max(8, Math.round(walkMin * 0.55));
+  return pickPlanMobilityMode({
+    walkMin,
+    bikeMin,
+    transitMin,
+    preferBike: preferBikeNow() || preferred === 'bike',
+    preferred,
+    forceTaxiOrCar: preferred === 'taxi' || preferred === 'car',
+  });
 }
 
 function travelMinutes(
@@ -65,15 +80,25 @@ function travelMinutes(
   return Math.max(3, Math.ceil(dist / speedMPerMin(transport)));
 }
 
+function isTravelPlaceholderTitle(title: string): boolean {
+  return /\b(anreise|aufbruch|öpnv\s+(zu|nach)|bahn\s+nach|zug\s+nach)\b/i.test(
+    title,
+  );
+}
+
 function sortedRealStops(): FuturePlanStop[] {
   return useFuturePlanStore
     .getState()
     .plan.stops.filter(
       (s) =>
         s.kind !== 'nav_leg' &&
+        !isLiveNavLegId(s.id) &&
         !s.id.startsWith('choice_') &&
-        !s.id.startsWith('wish_') &&
-        s.choiceSide == null,
+        !s.id.startsWith('ft:') &&
+        s.choiceSide == null &&
+        !isTravelPlaceholderTitle(s.title) &&
+        typeof s.lat === 'number' &&
+        typeof s.lng === 'number',
     )
     .slice()
     .sort((a, b) => {
@@ -96,14 +121,19 @@ function pushOriginToFirstStopLeg(
       (s.plannedStartMs == null || s.plannedStartMs >= now - 5 * 60_000),
   );
   if (!first?.lat || !first.lng) return;
-  const hasPrior = realStops.some(
+
+  // Nur Stops MIT Koordinaten zählen als „Prior“ — sonst fehlt die
+  // Route Basis→Ziel (z. B. Adresse nachgereicht, früherer Wunsch ohne GPS).
+  const hasPriorWithCoords = realStops.some(
     (s) =>
       s.id !== first.id &&
+      s.lat != null &&
+      s.lng != null &&
       s.plannedStartMs != null &&
       first.plannedStartMs != null &&
       s.plannedStartMs < first.plannedStartMs,
   );
-  if (hasPrior) return;
+  if (hasPriorWithCoords) return;
 
   const origin = resolveTravelOrigin({
     beforeMs: first.plannedStartMs ?? null,
@@ -132,6 +162,7 @@ function pushOriginToFirstStopLeg(
       : now + 5 * 60_000;
   const arriveMs = leaveMs + mins * 60_000;
   const navId = `nav_here_${first.id}`;
+  if (plannedJourneyGroupExists(navId)) return;
   legs.push({
     id: navId,
     title:
@@ -184,12 +215,16 @@ export function applyGapFillTravelLegs(): {
   for (let i = 0; i < realStops.length - 1; i++) {
     const a = realStops[i]!;
     const b = realStops[i + 1]!;
+    if (a.id.startsWith('ft:') || b.id.startsWith('ft:')) continue;
     if (
       a.lat == null ||
       a.lng == null ||
       b.lat == null ||
       b.lng == null
     ) {
+      continue;
+    }
+    if (haversineMeters(a.lat, a.lng, b.lat, b.lng) < 120) {
       continue;
     }
     const hv = haversineWalkMin(
@@ -223,12 +258,30 @@ export function applyGapFillTravelLegs(): {
     }
 
     const navId = `nav_${a.id}_${b.id}`;
+    if (plannedJourneyGroupExists(navId)) continue;
+    const destTitle = cleanPlanDestTitle(b.title);
+    if (!destTitle) continue;
+    const title =
+      legTransport === 'transit'
+        ? `ÖPNV nach ${destTitle}`
+        : legTransport === 'bike'
+          ? `Rad nach ${destTitle}`
+          : legTransport === 'taxi' || legTransport === 'car'
+            ? `Fahrt nach ${destTitle}`
+            : `Fußweg nach ${destTitle}`;
+    const emoji =
+      legTransport === 'transit'
+        ? '🚌'
+        : legTransport === 'bike'
+          ? '🚲'
+          : legTransport === 'taxi'
+            ? '🚕'
+            : legTransport === 'car'
+              ? '🚗'
+              : '🚶';
     legs.push({
       id: navId,
-      title:
-        legTransport === 'transit'
-          ? `ÖPNV nach ${b.title}`
-          : `Fußweg nach ${b.title}`,
+      title,
       lat: b.lat,
       lng: b.lng,
       plannedStartMs: startMs,
@@ -245,7 +298,7 @@ export function applyGapFillTravelLegs(): {
         arriveMs: endMs,
         estimate: 'fallback',
       }),
-      emoji: legTransport === 'transit' ? '🚌' : '🚶',
+      emoji,
       routeEstimate: 'fallback',
     });
 
@@ -269,12 +322,21 @@ export function applyGapFillTravelLegs(): {
     }
   }
 
-  const refreshed = useFuturePlanStore
-    .getState()
-    .plan.stops.filter((s) => s.kind !== 'nav_leg');
+  const current = useFuturePlanStore.getState().plan;
+  const liveNav = current.stops.filter((s) => isLiveNavLegId(s.id));
+  const plannedGroups = current.stops.filter(
+    (s) =>
+      s.kind === 'nav_leg' &&
+      Boolean(s.groupId) &&
+      !isLiveNavLegId(s.id) &&
+      plannedJourneyGroupExists(s.groupId!),
+  );
+  const refreshed = current.stops.filter(
+    (s) => s.kind !== 'nav_leg' && !isLiveNavLegId(s.id),
+  );
   useFuturePlanStore.getState().setPlan({
-    ...useFuturePlanStore.getState().plan,
-    stops: [...refreshed, ...legs],
+    ...current,
+    stops: [...refreshed, ...liveNav, ...plannedGroups, ...legs],
   });
 
   const speech =

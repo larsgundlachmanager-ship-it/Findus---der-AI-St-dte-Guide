@@ -56,7 +56,7 @@ const INTENT_PATTERNS: Array<{ kind: SmartIntentKind; re: RegExp }> = [
   },
   {
     kind: 'nav',
-    re: /\b(navigier|führ\s+mich|fuehr\s+mich|bring\s+mich|route\s+zu|kompass|geh(?:en)?\s+(?:wir\s+)?zu)\b/iu,
+    re: /\b(navigier|führ\s+mich|fuehr\s+mich|bring\s+mich|route\s+zu|kompass|geh(?:en)?\s+(?:wir\s+)?zu|wie\s+weit|wie\s+lange|minuten\s+(?:zu\s+fu[sß]|mit\s+dem\s+rad)|zu\s+fu[sß]\s+(?:nach|zum|zur|zu))\b/iu,
   },
   {
     kind: 'transit',
@@ -134,6 +134,17 @@ export function countWords(text: string): number {
 
 export function detectSmartIntents(userText: string): SmartIntentKind[] {
   const t = userText.replace(/\s+/g, ' ').trim();
+  try {
+    const { isCelestialOrSkyQuery, isQuickLookupQuery } = require('../concierge/celestialSkyQuery') as {
+      isCelestialOrSkyQuery: (s: string) => boolean;
+      isQuickLookupQuery: (s: string) => boolean;
+    };
+    if (isCelestialOrSkyQuery(t) || isQuickLookupQuery(t)) {
+      return ['knowledge'];
+    }
+  } catch {
+    /* soft */
+  }
   const found: SmartIntentKind[] = [];
   for (const { kind, re } of INTENT_PATTERNS) {
     if (re.test(t) && !found.includes(kind)) found.push(kind);

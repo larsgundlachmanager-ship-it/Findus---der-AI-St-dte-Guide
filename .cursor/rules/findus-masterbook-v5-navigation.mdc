@@ -6,6 +6,19 @@ SSOT Code: `src/services/navigation/handsFreeNav/`
 
 Pocket-first: User kommt an, ohne aufs Handy zu schauen. Kompass ist Support. Google nur Notfall-Fallback.
 
+## Kurzstrecke (≤ 10 Min)
+
+Neue Fuß-/Radroute unter **10 Minuten** → sofort berechnen und starten (Just-Do-It).
+Auto-Umweg (Car-OSRM) mit kurzer echter ETA → still neu routen und übernehmen.
+Reine Dauer-Fragen („wie lange…“) starten nicht automatisch.
+
+## Auto Fuß ↔ Rad
+
+GPS ≥ **~10 km/h** für **30 s** sticky → Radmodus; Route neu über FOSSGIS `routed-bike` (Radwege).
+Wieder langsamer → Fuß + `routed-foot`. Kurze Ansage; Session-Pref soft setzen.
+Nicht während ÖPNV `in_transit` / Anfahrt zur Haltestelle mit Transit-Legs.
+Voice „Ich bin mit dem Fahrrad“ bleibt Override + 10-Min-Recheck (`travelModeContext`).
+
 ## Progressive Route
 
 1. OSRM fertig → sofort **Routen-km + ETA** (nie Luftlinie).
@@ -33,7 +46,7 @@ Pocket-first: User kommt an, ohne aufs Handy zu schauen. Kompass ist Support. Go
 - Micro-WPs ~20 m; dichter vor Turns (~8 m).
 - Arrow-Ziel auf **User-Seite / Gehweg** offsetten wenn GPS gut.
 - Adaptives Heading (schnelle Drehung = snappy); Pocket / HUD aus → Heading sparsam.
-- Prod-OSRM: `EXPO_PUBLIC_OSRM_BASE` (eigene URL); Public nur Dev.
+- Prod-OSRM: `EXPO_PUBLIC_OSRM_BASE` (eigene URL mit foot/bike). Leer → FOSSGIS `routed-foot|bike`. Nie `project-osrm.org` für Fuß/Rad (nur Auto-Graph → Umwege, keine Fußgängerbrücken).
 
 ## Beruhigung
 
@@ -41,7 +54,10 @@ Lange Gerade + Stille + on-route → „Alles gut, noch …“ (dynamisch, nicht
 
 ## ÖPNV
 
-`planJourney`: Transitous → db_rest → Google nur Notfall. Door-to-door: `startTransitHandsFree` / `startJourneyNavigation`.
+`planJourney`: Transitous + db_rest parallel (Live), Google Notfall.
+Door-to-door in einem Rutsch: Fuß → Halt → Live-Fahrt (Stationen/Ausstieg) → Umstieg → Fuß zum Ziel.
+`start_journey_nav` / „ÖPNV starten“ → `startJourneyNavigation` (nicht SHOW_MORE).
+Zwischenhalte aus MOTIS/`stopovers` → Stations-Countdown + Ansage.
 
 ## Street View
 
@@ -59,3 +75,24 @@ Named go-to = ein Ziel SSOT für Speech + Button + Auto-Start (`commitHandsFreeN
 ## Visuelles Verankern
 
 Blickrichtung → Visuell → Name/Aktion. Bewegung = GPS-Vektor; Stillstand = Compass.
+
+## Kurze Nav-Sprache
+
+Opening = **ein** visueller Hieb (geradeaus / auf die Allee zu) — kein Itinerar („erst … dann rechts … noch acht Minuten“).
+Nahe Abbiegung (< ~45 m) darf „gleich links/rechts“.
+Kurze ETA (< 5 Min) nicht extra ansagen. Beruhigung selten, ohne nächste Kreuzung vorwegzunehmen.
+Nach stiller Neuberechnung: **keine** zweite Start-Ansprache.
+
+## Polyline nach Reroute
+
+Neue OSRM-Waypoints → Karte **sofort** neu zeichnen (`navRouteRev`). Alte blaue Linie darf nicht stehen bleiben.
+
+## Tour / zweites Ziel
+
+Während Nav läuft und ein **anderes** Ziel kommt: Buttons **Route neu** vs **Stopp hinzufügen** (User-Wunsch, Ausnahme von Just-Do-It).
+Stopp hinzufügen = alle offenen Wegpunkte **effizient neu ordnen** (nicht hinten anhängen).
+Karte: helleres Blau = aktuelles Bein, dunkleres Blau = weitere Beine; Pins 1 / 2 / 3.
+
+## Timeline
+
+Live-Nav schreibt den **Ort** als geplanten Stopp plus den Fuß-/Radweg dorthin — nicht nur „Fußweg nach …“.

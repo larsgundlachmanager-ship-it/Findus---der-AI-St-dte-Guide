@@ -23,14 +23,15 @@ export const LOCATION_DISCLOSURE_COPY = {
   foreground: {
     title: 'Standort für die Tour',
     body:
-      'Um dir an den richtigen Orten automatisch die passenden Audio-Spuren abzuspielen, erfasst Findus deinen Standort.\n\n' +
-      'Findus nutzt den Standort auch im Hintergrund — auch wenn die App geschlossen ist oder nicht genutzt wird —, damit Hinweise weiterlaufen, wenn das Display gesperrt ist.',
+      'Um dir an den richtigen Orten automatisch die passenden Audio-Spuren abzuspielen, erfasst Yorro deinen Standort.\n\n' +
+      'Solange die App läuft oder im Hintergrund ist (auch bei gesperrtem Display), bleibt der Standort aktiv. Wenn du die App beendest, stoppt der Standortzugriff.',
   },
   background: {
     title: 'Standort im Hintergrund',
     body:
-      'Findus erfasst deine Standortdaten im Hintergrund, um automatische Audio-Hinweise entlang der Route abzuspielen, auch wenn die App geschlossen ist oder nicht genutzt wird.\n\n' +
-      'Bitte wähle als Nächstes „Immer zulassen“, damit Navigation und Orts-Audio bei gesperrtem Bildschirm weiterlaufen.',
+      'Yorro erfasst deinen Standort im Hintergrund und bei gesperrtem Bildschirm, solange die App noch läuft — für Navigation und Orts-Audio unterwegs.\n\n' +
+      'Beendest du die App (aus den letzten Apps wischen), wird der Standortzugriff gestoppt.\n\n' +
+      'Bitte wähle als Nächstes „Immer zulassen“, damit das bei gesperrtem Display weiterlaufen kann.',
   },
 } as const;
 

@@ -97,13 +97,13 @@ function failMessage(reason?: string, detail?: string): string {
     case 'permission':
       return 'Ich brauche Mitteilungen- und Alarm-Erlaubnis, sonst kann ich dich nicht wecken.';
     case 'disabled':
-      return 'Mitteilungen sind in Findus aus — deshalb kann ich keinen Wecker stellen.';
+      return 'Mitteilungen sind in Yorro aus — deshalb kann ich keinen Wecker stellen.';
     case 'too_soon':
       return 'Das ist zu knapp — nimm eine etwas spätere Zeit.';
     case 'ios_unsupported':
-      return 'Auf dem iPhone nur Findus-Mitteilung — Mitteilungen bitte erlauben.';
+      return 'Auf dem iPhone nur Yorro-Mitteilung — Mitteilungen bitte erlauben.';
     case 'no_handler':
-      return 'Wecker ging nicht — erlaube unter Einstellungen → Apps → Findus → Alarme & Erinnerungen.';
+      return 'Wecker ging nicht — erlaube unter Einstellungen → Apps → Yorro → Alarme & Erinnerungen.';
     case 'bad_time':
       return 'Die Uhrzeit ist ungültig.';
     case 'error':
@@ -118,17 +118,10 @@ function failMessage(reason?: string, detail?: string): string {
 }
 
 function speechForNativeStatus(
-  status: string | undefined,
+  _status: string | undefined,
   clock: string,
 ): string {
-  switch (status) {
-    case 'set_silent':
-      return `Wecker auf ${clock} gestellt.`;
-    case 'alarm_manager':
-      return `Wecker auf ${clock} gestellt.`;
-    default:
-      return `Wecker auf ${clock} gestellt.`;
-  }
+  return `Ich habe deinen Wecker auf ${clock} gestellt.`;
 }
 
 export function recordWakeOnTimeline(opts: {
@@ -140,9 +133,28 @@ export function recordWakeOnTimeline(opts: {
 }): void {
   const dayKey = dateKeyFromMs(opts.wakeAtMs);
   const stopId = `wake_${opts.wakeAtMs}`;
+  const store = useFuturePlanStore.getState();
+  try {
+    store.ensureDay(dayKey);
+  } catch {
+    /* soft */
+  }
   if (opts.replaceStopId) {
-    useFuturePlanStore.getState().ensureDay(dayKey);
-    useFuturePlanStore.getState().removeStop(opts.replaceStopId);
+    try {
+      store.removeStop(opts.replaceStopId);
+    } catch {
+      /* soft */
+    }
+  }
+  // Doppelte Wecker-Stops am selben Tag vermeiden (andere IDs)
+  try {
+    for (const s of listWakeStopsForDay(dayKey)) {
+      if (s.id !== stopId) {
+        useFuturePlanStore.getState().removeStop(s.id);
+      }
+    }
+  } catch {
+    /* soft */
   }
   const stop: FuturePlanStop = {
     id: stopId,
@@ -153,28 +165,31 @@ export function recordWakeOnTimeline(opts: {
     transport: 'unknown',
     hardAnchor: true,
     kind: 'stop',
-    status: 'trigger_active',
+    status: 'planned',
     emoji: '⏰',
     notes:
       opts.channel === 'native'
-        ? 'Android-Systemwecker · in Timeline'
-        : 'Findus-Mitteilung · in Timeline',
+        ? 'Android-Systemwecker · zeitlicher Trigger'
+        : 'Yorro-Mitteilung · zeitlicher Trigger',
     planPriority: 2,
+    userFixedTime: true,
   };
-  // Sicherstellen: Stop landet auf dem Wecker-Tag und UI zeigt denselben Tag
-  useFuturePlanStore.getState().ensureDay(dayKey);
-  useFuturePlanStore.getState().upsertStop(stop);
+  // Auf dem Wecker-Tag speichern — ohne den aktiven Plan-Tag zu zerstören
+  useFuturePlanStore.getState().upsertStopOnDay(dayKey, stop);
   try {
     const {
       requestOpenPlanCalendar,
       requestPlanScroll,
+      requestDayKey,
     } = require('../../module2/timeline/planCalendarUiStore') as {
       requestOpenPlanCalendar: () => void;
       requestPlanScroll: (t: { kind: 'stop'; stopId: string }) => void;
+      requestDayKey: (dayKey: string) => void;
     };
     const { markFresh } = require('../../module2/timeline/planLiveEdits') as {
       markFresh: (ids: string[]) => void;
     };
+    requestDayKey(dayKey);
     requestOpenPlanCalendar();
     markFresh([stopId]);
     requestPlanScroll({ kind: 'stop', stopId });
@@ -216,7 +231,7 @@ export async function openNativeAlarmClock(opts: {
   const result = await setNativeAlarm({
     wakeAtMs: opts.wakeAtMs,
     time: `${d.getHours()}:${d.getMinutes().toString().padStart(2, '0')}`,
-    label: (opts.message || 'Findus').slice(0, 60),
+    label: (opts.message || 'Yorro').slice(0, 60),
   });
 
   if (result.ok && result.tier !== 'notification') {
@@ -292,11 +307,23 @@ export async function setWakeAlarmWithBridge(opts: {
   }
 
   if (sameTime && existing) {
+    // Idempotent: Timeline + Trigger trotzdem sichern (falls nur Speech vorher log)
+    recordWakeOnTimeline({
+      wakeAtMs: opts.wakeAtMs,
+      reasonLabel: label,
+      channel: 'native',
+      replaceStopId: existing.id,
+    });
+    wireWakeRhythm({
+      wakeAtMs: opts.wakeAtMs,
+      reasonLabel: label,
+      leaveByMs: opts.leaveByMs,
+    });
     return {
       ok: true,
       channel: 'native',
       wakeAtMs: opts.wakeAtMs,
-      message: `Wecker auf ${clock} steht schon.`,
+      message: `Ich habe deinen Wecker auf ${clock} gestellt.`,
     };
   }
 
@@ -321,7 +348,7 @@ export async function setWakeAlarmWithBridge(opts: {
     const native = await setNativeAlarm({
       wakeAtMs: opts.wakeAtMs,
       time: `${d.getHours()}:${d.getMinutes().toString().padStart(2, '0')}`,
-      label: `Findus — ${label}`,
+      label: `Yorro — ${label}`,
     });
 
     if (native.ok) {
@@ -345,7 +372,7 @@ export async function setWakeAlarmWithBridge(opts: {
         message:
           native.speech ||
           (channel === 'notification'
-            ? `Wecker auf ${clock} gestellt (Findus-Mitteilung).`
+            ? `Ich habe deinen Wecker auf ${clock} gestellt.`
             : speechForNativeStatus(
                 native.tier === 'intent_launcher'
                   ? 'set_silent'
@@ -368,6 +395,7 @@ export async function setWakeAlarmWithBridge(opts: {
     reasonLabel: label,
     leaveByMs: opts.leaveByMs ?? null,
     reminderKey: opts.reminderKey,
+    force: true,
   });
 
   if (!notif.ok) {
@@ -397,33 +425,14 @@ export async function setWakeAlarmWithBridge(opts: {
     wakeAtMs: opts.wakeAtMs,
     message:
       Platform.OS === 'ios'
-        ? `Wecker auf ${clock} gestellt (Mitteilung).`
-        : `Wecker auf ${clock} gestellt.`,
+        ? `Ich habe deinen Wecker auf ${clock} gestellt.`
+        : `Ich habe deinen Wecker auf ${clock} gestellt.`,
   };
 }
 
-/** Offenen Wecker löschen (Timeline + Native + Notification + Logistics). */
-export async function cancelWakeAlarmWithBridge(opts: {
-  wakeAtMs: number;
-}): Promise<NativeAlarmResult> {
-  const wakeAtMs = opts.wakeAtMs;
-  if (!Number.isFinite(wakeAtMs)) {
-    return {
-      ok: false,
-      channel: 'failed',
-      reason: 'too_soon',
-      message: 'Welchen Wecker soll ich löschen?',
-    };
-  }
-  const clock = formatClock(wakeAtMs);
-  const dayKey = dateKeyFromMs(wakeAtMs);
-  const stop =
-    listWakeStopsForDay(dayKey).find(
-      (s) =>
-        s.plannedStartMs != null &&
-        Math.abs(s.plannedStartMs - wakeAtMs) < 2 * 60_000,
-    ) ?? findExistingWakeSameDay(wakeAtMs);
-
+/** Native + Push + Logistics — ohne Timeline (Caller hat den Stop ggf. schon weg). */
+export async function silenceWakeSideEffects(wakeAtMs: number): Promise<void> {
+  if (!Number.isFinite(wakeAtMs)) return;
   await cancelNativeWakeAt(wakeAtMs);
   try {
     const { cancelReminderById } = await import(
@@ -455,6 +464,31 @@ export async function cancelWakeAlarmWithBridge(opts: {
   } catch {
     /* soft */
   }
+}
+
+/** Offenen Wecker löschen (Timeline + Native + Notification + Logistics). */
+export async function cancelWakeAlarmWithBridge(opts: {
+  wakeAtMs: number;
+}): Promise<NativeAlarmResult> {
+  const wakeAtMs = opts.wakeAtMs;
+  if (!Number.isFinite(wakeAtMs)) {
+    return {
+      ok: false,
+      channel: 'failed',
+      reason: 'too_soon',
+      message: 'Welchen Wecker soll ich löschen?',
+    };
+  }
+  const clock = formatClock(wakeAtMs);
+  const dayKey = dateKeyFromMs(wakeAtMs);
+  const stop =
+    listWakeStopsForDay(dayKey).find(
+      (s) =>
+        s.plannedStartMs != null &&
+        Math.abs(s.plannedStartMs - wakeAtMs) < 2 * 60_000,
+    ) ?? findExistingWakeSameDay(wakeAtMs);
+
+  await silenceWakeSideEffects(wakeAtMs);
   if (stop) {
     try {
       useFuturePlanStore.getState().removeStop(stop.id);

@@ -15,7 +15,7 @@ export type HandsFreePrefs = {
   preferAsDigitalAssistant: boolean;
   /** „Sprechen“ startet Live-Chat statt Einmal-Mikro */
   liveChatOnHandsFree: boolean;
-  /** Idle ohne Findus-Adresse → Mikro aus */
+  /** Idle ohne Yorro-Adresse → Mikro aus */
   liveChatIdleSeconds: LiveChatIdleSeconds;
   /**
    * false (Default): nach Start/Antwort freie Follow-ups ohne Keyword
@@ -28,12 +28,13 @@ export type HandsFreePrefs = {
   askBeforeDeepResearch: boolean;
   /**
    * In-Ear: aus | einmal Mikro | Live-Chat
-   * (wenn Findus die MediaSession hält — nicht während Spotify).
+   * (wenn Yorro die MediaSession hält — nicht während Spotify).
    */
   headsetButtonMode: HeadsetButtonMode;
 };
 
 const PATH = `${FileSystem.documentDirectory}findus-handsfree.json`;
+const PREFS_REV = 2;
 const DEFAULTS: HandsFreePrefs = {
   stickyListenNotification: true,
   micStartCue: true,
@@ -42,7 +43,7 @@ const DEFAULTS: HandsFreePrefs = {
   liveChatIdleSeconds: 30,
   requireKeywordEveryTurn: false,
   humanConversationTone: true,
-  askBeforeDeepResearch: true,
+  askBeforeDeepResearch: false,
   headsetButtonMode: 'livechat',
 };
 
@@ -69,15 +70,22 @@ function clampHeadsetMode(
 
 async function persist(p: HandsFreePrefs): Promise<void> {
   try {
-    await FileSystem.writeAsStringAsync(PATH, JSON.stringify(p));
+    await FileSystem.writeAsStringAsync(
+      PATH,
+      JSON.stringify({ ...p, prefsRev: PREFS_REV }),
+    );
   } catch {
     /* soft */
   }
 }
 
 function normalize(
-  parsed: Partial<HandsFreePrefs> & { headsetButtonActivates?: boolean },
+  parsed: Partial<HandsFreePrefs> & {
+    headsetButtonActivates?: boolean;
+    prefsRev?: number;
+  },
 ): HandsFreePrefs {
+  const rev = typeof parsed.prefsRev === 'number' ? parsed.prefsRev : 0;
   return {
     stickyListenNotification: parsed.stickyListenNotification !== false,
     micStartCue: parsed.micStartCue !== false,
@@ -86,7 +94,9 @@ function normalize(
     liveChatIdleSeconds: clampIdle(parsed.liveChatIdleSeconds),
     requireKeywordEveryTurn: parsed.requireKeywordEveryTurn === true,
     humanConversationTone: parsed.humanConversationTone !== false,
-    askBeforeDeepResearch: parsed.askBeforeDeepResearch !== false,
+    // Rev 2: altes Default „nachfragen“ → Just-Do-It, außer User hat Rev≥2 gespeichert
+    askBeforeDeepResearch:
+      rev >= PREFS_REV ? parsed.askBeforeDeepResearch === true : false,
     headsetButtonMode: clampHeadsetMode(parsed),
   };
 }
@@ -98,11 +108,14 @@ export async function loadHandsFreePrefs(): Promise<HandsFreePrefs> {
     const info = await FileSystem.getInfoAsync(PATH);
     if (info.exists) {
       const raw = await FileSystem.readAsStringAsync(PATH);
-      cache = normalize(
-        JSON.parse(raw) as Partial<HandsFreePrefs> & {
-          headsetButtonActivates?: boolean;
-        },
-      );
+      const parsed = JSON.parse(raw) as Partial<HandsFreePrefs> & {
+        headsetButtonActivates?: boolean;
+        prefsRev?: number;
+      };
+      cache = normalize(parsed);
+      if (parsed.prefsRev !== PREFS_REV) {
+        await persist(cache);
+      }
       return cache;
     }
   } catch {

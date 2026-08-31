@@ -1,0 +1,3125 @@
+{
+  "generated_at": "2026-08-28T02:56:27.857Z",
+  "summary": {
+    "city_id": "beelitz",
+    "checked": 85,
+    "ok": 10,
+    "check": 32,
+    "bad": 43,
+    "errors": 0,
+    "max_delta_m": 180,
+    "city_halo_m": 28000,
+    "story_only": true
+  },
+  "rows": [
+    {
+      "id": "beelitz_beobachtungsturm_ungeheuerwiesen",
+      "name": "Beobachtungsturm Ungeheuerwiesen",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.31276992000001,
+        "lng": 12.932885160000001
+      },
+      "query": "Beobachtungsturm Ungeheuerwiesen, Beelitz, Germany",
+      "osm": {
+        "lat": 52.2209985,
+        "lng": 13.0945307,
+        "display_name": "Beobachtungsturm, Dorfstraße, Zauchwitz, Deutschland",
+        "class": "leisure",
+        "type": "bird_hide",
+        "provider": "photon"
+      },
+      "delta_m": 15004,
+      "from_city_m": 9153,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_barfusspark_beelitz",
+        "beelitz_beelitz_heilstatten_natur_park",
+        "beelitz_der_bootsverleih_wohlfuhlen_am_seddiner_see",
+        "beelitz_bootsverleih_burgemeister",
+        "beelitz_irene_krause"
+      ]
+    },
+    {
+      "id": "beelitz_cafe_backerei_konditorei_neuendorff_patrick_kasten",
+      "name": "Café-Bäckerei-Konditorei Neuendorff Patrick Kasten",
+      "category": "souvenir",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.23294340740741,
+        "lng": 12.97731577777778
+      },
+      "query": "Café-Bäckerei-Konditorei Neuendorff Patrick, Beelitz, Germany",
+      "osm": {
+        "lat": 52.2828574,
+        "lng": 12.8881256,
+        "display_name": "Bäckerei & Eiscafé Neuendorff, Berliner Allee, Beelitz, Deutschland",
+        "class": "shop",
+        "type": "bakery",
+        "provider": "photon"
+      },
+      "delta_m": 8225,
+      "from_city_m": 277,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_beelitz_stadt",
+        "beelitz_beelitz_zum_bahnhof",
+        "beelitz_stadtpfarrkirche_st_marien_st_nikolai_zu_beelitz",
+        "beelitz_grabhalle_friedhof_der_ev_kirchengemeinde_st_marien_st_nikolai_zu_beelit",
+        "beelitz_parkplatz_freibad_beelitz",
+        "beelitz_spielplatz_beelitz",
+        "beelitz_neues_lichtspielhaus_beelitz",
+        "beelitz_alpakahof_elsholz",
+        "beelitz_jakobs_hof_beelitz",
+        "beelitz_bockwindmuhle_beelitz",
+        "beelitz_fontane_im_ehemaligen_klarbecken",
+        "beelitz_wasserkanal_laga_beelitz",
+        "beelitz_kga_an_der_nieplitz_e_v",
+        "beelitz_ballonfahrten_schafer_brandenburg",
+        "beelitz_malraus_das_reiseburo_dippe",
+        "beelitz_lotto_toto_ina_muller_jahn",
+        "beelitz_nah_gut_piesik",
+        "beelitz_beelitzer_kaninchenspezialitaten_gmbh",
+        "beelitz_kollektiv_lost",
+        "beelitz_fsh_landmarkt_geratetechnik",
+        "beelitz_a_kamphenkel_getrankefachgrosshandel_west_gmbh"
+      ]
+    },
+    {
+      "id": "beelitz_spielplatz_beelitz",
+      "name": "Spielplatz Beelitz",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.23294340740741,
+        "lng": 12.97731577777778
+      },
+      "query": "Spielplatz Beelitz, Beelitz, Germany",
+      "osm": {
+        "lat": 52.2798547,
+        "lng": 12.8840171,
+        "display_name": "Spielplatz, Fichtenwalde, Beelitz, Potsdam-Mittelmark, Brandenburg, Deutschland",
+        "class": "landuse",
+        "type": "residential",
+        "importance": 0.08005387579156173,
+        "osm_type": "way",
+        "osm_id": 1317542164,
+        "provider": "nominatim"
+      },
+      "delta_m": 8218,
+      "from_city_m": 277,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_beelitz_stadt",
+        "beelitz_beelitz_zum_bahnhof",
+        "beelitz_stadtpfarrkirche_st_marien_st_nikolai_zu_beelitz",
+        "beelitz_grabhalle_friedhof_der_ev_kirchengemeinde_st_marien_st_nikolai_zu_beelit",
+        "beelitz_parkplatz_freibad_beelitz",
+        "beelitz_neues_lichtspielhaus_beelitz",
+        "beelitz_alpakahof_elsholz",
+        "beelitz_jakobs_hof_beelitz",
+        "beelitz_bockwindmuhle_beelitz",
+        "beelitz_fontane_im_ehemaligen_klarbecken",
+        "beelitz_wasserkanal_laga_beelitz",
+        "beelitz_kga_an_der_nieplitz_e_v",
+        "beelitz_ballonfahrten_schafer_brandenburg",
+        "beelitz_malraus_das_reiseburo_dippe",
+        "beelitz_lotto_toto_ina_muller_jahn",
+        "beelitz_nah_gut_piesik",
+        "beelitz_beelitzer_kaninchenspezialitaten_gmbh",
+        "beelitz_kollektiv_lost",
+        "beelitz_cafe_backerei_konditorei_neuendorff_patrick_kasten",
+        "beelitz_fsh_landmarkt_geratetechnik",
+        "beelitz_a_kamphenkel_getrankefachgrosshandel_west_gmbh"
+      ]
+    },
+    {
+      "id": "beelitz_barfusspark_beelitz",
+      "name": "Barfußpark Beelitz",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.31276992000001,
+        "lng": 12.932885160000001
+      },
+      "query": "Barfußpark Beelitz, Beelitz, Germany",
+      "osm": {
+        "lat": 52.263616,
+        "lng": 12.9164827,
+        "display_name": "Barfußpark Beelitz-Heilstätten, Barfußpfad, Beelitz-Heilstätten, Beelitz, Potsdam-Mittelmark, Brandenburg, 14547, Deutschland",
+        "class": "tourism",
+        "type": "theme_park",
+        "importance": 0.00005387579156171538,
+        "osm_type": "node",
+        "osm_id": 5908916498,
+        "provider": "nominatim"
+      },
+      "delta_m": 5578,
+      "from_city_m": 9153,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_beobachtungsturm_ungeheuerwiesen",
+        "beelitz_beelitz_heilstatten_natur_park",
+        "beelitz_der_bootsverleih_wohlfuhlen_am_seddiner_see",
+        "beelitz_bootsverleih_burgemeister",
+        "beelitz_irene_krause"
+      ]
+    },
+    {
+      "id": "beelitz_aussichtsturm_wietkiekenberg",
+      "name": "Aussichtsturm Wietkiekenberg",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.263688075,
+        "lng": 12.917788625
+      },
+      "query": "Aussichtsturm Wietkiekenberg, Beelitz, Germany",
+      "osm": {
+        "lat": 52.3074936,
+        "lng": 12.9500973,
+        "display_name": "Aussichtsturm Wietkiekenberg, Lienewitzweg, Schwielowsee, Deutschland",
+        "class": "tourism",
+        "type": "viewpoint",
+        "provider": "photon"
+      },
+      "delta_m": 5344,
+      "from_city_m": 5197,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "beelitz_freibad_beelitz_eingang",
+      "name": "Freibad Beelitz Eingang",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.23408883333334,
+        "lng": 12.977874
+      },
+      "query": "Freibad Beelitz Eingang, Beelitz, Germany",
+      "osm": {
+        "lat": 52.2660348,
+        "lng": 12.9201648,
+        "display_name": "Baum & Zeit - Kasse/Eingang, Straße nach Fichtenwalde, Beelitz, Deutschland",
+        "class": "shop",
+        "type": "ticket",
+        "provider": "photon"
+      },
+      "delta_m": 5296,
+      "from_city_m": 144,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_laga_beelitz",
+        "beelitz_vogelbeobachtungsturm_bei_beelitz",
+        "beelitz_parkplatz_stadtpark_und_freilichtbuhne_beelitz",
+        "beelitz_hotel_stadt_beelitz"
+      ]
+    },
+    {
+      "id": "beelitz_beelitz_heilstatten_natur_park",
+      "name": "Beelitz Heilstätten Natur Park",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.31276992000001,
+        "lng": 12.932885160000001
+      },
+      "query": "Beelitz Heilstätten Natur Park, Beelitz, Germany",
+      "osm": {
+        "lat": 52.2672581,
+        "lng": 12.9247168,
+        "display_name": "Neurologische Rehabilitationsklinik Beelitz-Heilstätten, Paracelsusring, Beelitz, Deutschland",
+        "class": "amenity",
+        "type": "hospital",
+        "provider": "photon"
+      },
+      "delta_m": 5091,
+      "from_city_m": 9153,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_beobachtungsturm_ungeheuerwiesen",
+        "beelitz_barfusspark_beelitz",
+        "beelitz_der_bootsverleih_wohlfuhlen_am_seddiner_see",
+        "beelitz_bootsverleih_burgemeister",
+        "beelitz_irene_krause"
+      ]
+    },
+    {
+      "id": "beelitz_laga_beelitz_parkplatz",
+      "name": "Laga Beelitz Parkplatz",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.23450234444445,
+        "lng": 12.985144522222221
+      },
+      "query": "Laga Beelitz Parkplatz, Beelitz, Germany",
+      "osm": {
+        "lat": 52.2623213,
+        "lng": 12.9267213,
+        "display_name": "Parkplatz am Bahnhof, Straße am Bahnhof, Beelitz, Deutschland",
+        "class": "amenity",
+        "type": "parking",
+        "provider": "photon"
+      },
+      "delta_m": 5039,
+      "from_city_m": 463,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "beelitz_bockwindmuhle_beelitz",
+      "name": "Bockwindmühle Beelitz",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.23294340740741,
+        "lng": 12.97731577777778
+      },
+      "query": "Bockwindmühle Beelitz, Beelitz, Germany",
+      "osm": {
+        "lat": 52.2618758,
+        "lng": 12.9245909,
+        "display_name": "Beelitz-Heilstätten, Beelitz, Deutschland",
+        "class": "place",
+        "type": "suburb",
+        "provider": "photon"
+      },
+      "delta_m": 4820,
+      "from_city_m": 277,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_beelitz_stadt",
+        "beelitz_beelitz_zum_bahnhof",
+        "beelitz_stadtpfarrkirche_st_marien_st_nikolai_zu_beelitz",
+        "beelitz_grabhalle_friedhof_der_ev_kirchengemeinde_st_marien_st_nikolai_zu_beelit",
+        "beelitz_parkplatz_freibad_beelitz",
+        "beelitz_spielplatz_beelitz",
+        "beelitz_neues_lichtspielhaus_beelitz",
+        "beelitz_alpakahof_elsholz",
+        "beelitz_jakobs_hof_beelitz",
+        "beelitz_fontane_im_ehemaligen_klarbecken",
+        "beelitz_wasserkanal_laga_beelitz",
+        "beelitz_kga_an_der_nieplitz_e_v",
+        "beelitz_ballonfahrten_schafer_brandenburg",
+        "beelitz_malraus_das_reiseburo_dippe",
+        "beelitz_lotto_toto_ina_muller_jahn",
+        "beelitz_nah_gut_piesik",
+        "beelitz_beelitzer_kaninchenspezialitaten_gmbh",
+        "beelitz_kollektiv_lost",
+        "beelitz_cafe_backerei_konditorei_neuendorff_patrick_kasten",
+        "beelitz_fsh_landmarkt_geratetechnik",
+        "beelitz_a_kamphenkel_getrankefachgrosshandel_west_gmbh"
+      ]
+    },
+    {
+      "id": "beelitz_vogelbeobachtungsturm_bei_beelitz",
+      "name": "Vogelbeobachtungsturm bei Beelitz",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.23408883333334,
+        "lng": 12.977874
+      },
+      "query": "Vogelbeobachtungsturm bei Beelitz, Beelitz, Germany",
+      "osm": {
+        "lat": 52.2618758,
+        "lng": 12.9245909,
+        "display_name": "Beelitz-Heilstätten, Beelitz, Deutschland",
+        "class": "place",
+        "type": "suburb",
+        "provider": "photon"
+      },
+      "delta_m": 4765,
+      "from_city_m": 144,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_laga_beelitz",
+        "beelitz_freibad_beelitz_eingang",
+        "beelitz_parkplatz_stadtpark_und_freilichtbuhne_beelitz",
+        "beelitz_hotel_stadt_beelitz"
+      ]
+    },
+    {
+      "id": "beelitz_laga_beelitz",
+      "name": "LAGA Beelitz",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.234071562500006,
+        "lng": 12.977840037499998
+      },
+      "query": "LAGA Beelitz, Beelitz, Germany",
+      "osm": {
+        "lat": 52.2618758,
+        "lng": 12.9245909,
+        "display_name": "Beelitz-Heilstätten, Beelitz, Deutschland",
+        "class": "place",
+        "type": "suburb",
+        "provider": "photon"
+      },
+      "delta_m": 4764,
+      "from_city_m": 146,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_vogelbeobachtungsturm_bei_beelitz",
+        "beelitz_freibad_beelitz_eingang",
+        "beelitz_parkplatz_stadtpark_und_freilichtbuhne_beelitz",
+        "beelitz_hotel_stadt_beelitz"
+      ]
+    },
+    {
+      "id": "beelitz_parkplatz_freibad_beelitz",
+      "name": "Parkplatz Freibad Beelitz",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.23294340740741,
+        "lng": 12.97731577777778
+      },
+      "query": "Parkplatz Freibad Beelitz, Beelitz, Germany",
+      "osm": {
+        "lat": 52.2623213,
+        "lng": 12.9267213,
+        "display_name": "Parkplatz am Bahnhof, Straße am Bahnhof, Beelitz, Deutschland",
+        "class": "amenity",
+        "type": "parking",
+        "provider": "photon"
+      },
+      "delta_m": 4747,
+      "from_city_m": 277,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_beelitz_stadt",
+        "beelitz_beelitz_zum_bahnhof",
+        "beelitz_stadtpfarrkirche_st_marien_st_nikolai_zu_beelitz",
+        "beelitz_grabhalle_friedhof_der_ev_kirchengemeinde_st_marien_st_nikolai_zu_beelit",
+        "beelitz_spielplatz_beelitz",
+        "beelitz_neues_lichtspielhaus_beelitz",
+        "beelitz_alpakahof_elsholz",
+        "beelitz_jakobs_hof_beelitz",
+        "beelitz_bockwindmuhle_beelitz",
+        "beelitz_fontane_im_ehemaligen_klarbecken",
+        "beelitz_wasserkanal_laga_beelitz",
+        "beelitz_kga_an_der_nieplitz_e_v",
+        "beelitz_ballonfahrten_schafer_brandenburg",
+        "beelitz_malraus_das_reiseburo_dippe",
+        "beelitz_lotto_toto_ina_muller_jahn",
+        "beelitz_nah_gut_piesik",
+        "beelitz_beelitzer_kaninchenspezialitaten_gmbh",
+        "beelitz_kollektiv_lost",
+        "beelitz_cafe_backerei_konditorei_neuendorff_patrick_kasten",
+        "beelitz_fsh_landmarkt_geratetechnik",
+        "beelitz_a_kamphenkel_getrankefachgrosshandel_west_gmbh"
+      ]
+    },
+    {
+      "id": "beelitz_spielplatz_an_der_marina",
+      "name": "Spielplatz an der Marina",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.31267002,
+        "lng": 12.932595880000003
+      },
+      "query": "Spielplatz an der Marina, Beelitz, Germany",
+      "osm": {
+        "lat": 52.2808069,
+        "lng": 12.8911081,
+        "display_name": "Sport- und Spielplatz, geplante Anbindung Friedrich-Engels-Straße, Beelitz, Deutschland",
+        "class": "leisure",
+        "type": "pitch",
+        "provider": "photon"
+      },
+      "delta_m": 4529,
+      "from_city_m": 9149,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "beelitz_sportplatz_beelitz",
+      "name": "Sportplatz Beelitz",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.239950199999996,
+        "lng": 12.9646038
+      },
+      "query": "Sportplatz Beelitz, Beelitz, Germany",
+      "osm": {
+        "lat": 52.2011007,
+        "lng": 12.9601187,
+        "display_name": "Sportplatz, Bahnhofsweg, Elsholz, Beelitz, Potsdam-Mittelmark, Brandenburg, 14547, Deutschland",
+        "class": "leisure",
+        "type": "pitch",
+        "importance": 0.00005387579156171538,
+        "osm_type": "way",
+        "osm_id": 1085111556,
+        "provider": "nominatim"
+      },
+      "delta_m": 4331,
+      "from_city_m": 1075,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_teufelsee_feuchtgebietskette_ffh",
+        "beelitz_wasserturm_sternwarte",
+        "beelitz_baum_in_tur",
+        "beelitz_freibad_im_wasserturmpark_beelitz",
+        "beelitz_stadion_des_friedens",
+        "beelitz_spielgarten_abenteuerland",
+        "beelitz_sportplatz_bundeswehr",
+        "beelitz_tvg_sally_bein_beelitz_e_v"
+      ]
+    },
+    {
+      "id": "beelitz_muhlenteich_mit_fontane",
+      "name": "Mühlenteich mit Fontäne",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.25891768852459,
+        "lng": 12.930088967213111
+      },
+      "query": "Mühlenteich, Beelitz, Germany",
+      "osm": {
+        "lat": 52.2309135,
+        "lng": 12.9736823,
+        "display_name": "Mühlenteich, Beelitz, Potsdam-Mittelmark, Brandenburg, 14547, Deutschland",
+        "class": "water",
+        "type": "pond",
+        "importance": 0.08005387579156173,
+        "osm_type": "way",
+        "osm_id": 979576080,
+        "provider": "nominatim"
+      },
+      "delta_m": 4302,
+      "from_city_m": 4211,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_carl_friedrich_wilhelm_herrmann_denkmal",
+        "beelitz_die_drehende_kugel",
+        "beelitz_grosse_liegewiese",
+        "beelitz_gelande_der_brandenburgischen_landesgartenschau_2022"
+      ]
+    },
+    {
+      "id": "beelitz_alpakahof_elsholz",
+      "name": "Alpakahof Elsholz",
+      "category": "freizeitpark",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.23294340740741,
+        "lng": 12.97731577777778
+      },
+      "query": "Alpakahof Elsholz, Beelitz, Germany",
+      "osm": {
+        "lat": 52.2001903,
+        "lng": 12.9631069,
+        "display_name": "Freiwillige Feuerwehr Beelitz, Ortsfeuerwehr Elsholz, Am Dorfplatz, Elsholz, Deutschland",
+        "class": "amenity",
+        "type": "fire_station",
+        "provider": "photon"
+      },
+      "delta_m": 3768,
+      "from_city_m": 277,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_beelitz_stadt",
+        "beelitz_beelitz_zum_bahnhof",
+        "beelitz_stadtpfarrkirche_st_marien_st_nikolai_zu_beelitz",
+        "beelitz_grabhalle_friedhof_der_ev_kirchengemeinde_st_marien_st_nikolai_zu_beelit",
+        "beelitz_parkplatz_freibad_beelitz",
+        "beelitz_spielplatz_beelitz",
+        "beelitz_neues_lichtspielhaus_beelitz",
+        "beelitz_jakobs_hof_beelitz",
+        "beelitz_bockwindmuhle_beelitz",
+        "beelitz_fontane_im_ehemaligen_klarbecken",
+        "beelitz_wasserkanal_laga_beelitz",
+        "beelitz_kga_an_der_nieplitz_e_v",
+        "beelitz_ballonfahrten_schafer_brandenburg",
+        "beelitz_malraus_das_reiseburo_dippe",
+        "beelitz_lotto_toto_ina_muller_jahn",
+        "beelitz_nah_gut_piesik",
+        "beelitz_beelitzer_kaninchenspezialitaten_gmbh",
+        "beelitz_kollektiv_lost",
+        "beelitz_cafe_backerei_konditorei_neuendorff_patrick_kasten",
+        "beelitz_fsh_landmarkt_geratetechnik",
+        "beelitz_a_kamphenkel_getrankefachgrosshandel_west_gmbh"
+      ]
+    },
+    {
+      "id": "beelitz_ballonfahrten_schafer_brandenburg",
+      "name": "Ballonfahrten Schäfer BRANDENBURG",
+      "category": "tour",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.23294340740741,
+        "lng": 12.97731577777778
+      },
+      "query": "Ballonfahrten Schäfer BRANDENBURG, Beelitz, Germany",
+      "osm": {
+        "lat": 52.209846,
+        "lng": 12.9626605,
+        "display_name": "Ballonreisen Schäfer, Treuenbrietzener Straße, Elsholz, Deutschland",
+        "class": "building",
+        "type": "yes",
+        "provider": "photon"
+      },
+      "delta_m": 2756,
+      "from_city_m": 277,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_beelitz_stadt",
+        "beelitz_beelitz_zum_bahnhof",
+        "beelitz_stadtpfarrkirche_st_marien_st_nikolai_zu_beelitz",
+        "beelitz_grabhalle_friedhof_der_ev_kirchengemeinde_st_marien_st_nikolai_zu_beelit",
+        "beelitz_parkplatz_freibad_beelitz",
+        "beelitz_spielplatz_beelitz",
+        "beelitz_neues_lichtspielhaus_beelitz",
+        "beelitz_alpakahof_elsholz",
+        "beelitz_jakobs_hof_beelitz",
+        "beelitz_bockwindmuhle_beelitz",
+        "beelitz_fontane_im_ehemaligen_klarbecken",
+        "beelitz_wasserkanal_laga_beelitz",
+        "beelitz_kga_an_der_nieplitz_e_v",
+        "beelitz_malraus_das_reiseburo_dippe",
+        "beelitz_lotto_toto_ina_muller_jahn",
+        "beelitz_nah_gut_piesik",
+        "beelitz_beelitzer_kaninchenspezialitaten_gmbh",
+        "beelitz_kollektiv_lost",
+        "beelitz_cafe_backerei_konditorei_neuendorff_patrick_kasten",
+        "beelitz_fsh_landmarkt_geratetechnik",
+        "beelitz_a_kamphenkel_getrankefachgrosshandel_west_gmbh"
+      ]
+    },
+    {
+      "id": "beelitz_kirchenpavillon",
+      "name": "Kirchenpavillon",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.22131157142858,
+        "lng": 13.001759714285715
+      },
+      "query": "Kirchenpavillon, Beelitz, Germany",
+      "osm": {
+        "lat": 52.2363582,
+        "lng": 12.9700041,
+        "display_name": "Beelitz, Potsdam-Mittelmark, Deutschland",
+        "class": "place",
+        "type": "town",
+        "provider": "photon"
+      },
+      "delta_m": 2734,
+      "from_city_m": 2223,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_feldsteinkirche_schonefeld"
+      ]
+    },
+    {
+      "id": "beelitz_jakobs_hof_beelitz",
+      "name": "Jakobs-Hof Beelitz",
+      "category": "freizeitpark",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.23294340740741,
+        "lng": 12.97731577777778
+      },
+      "query": "Jakobs-Hof Beelitz, Beelitz, Germany",
+      "osm": {
+        "lat": 52.2524907,
+        "lng": 12.9878171,
+        "display_name": "Jakobs-Hof Beelitz, 1a, Kähnsdorfer Weg, Jakobs-Hof, Beelitz, Potsdam-Mittelmark, Brandenburg, 14547, Deutschland",
+        "class": "amenity",
+        "type": "restaurant",
+        "importance": 0.00005387579156171538,
+        "osm_type": "node",
+        "osm_id": 2646258168,
+        "provider": "nominatim"
+      },
+      "delta_m": 2288,
+      "from_city_m": 277,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_beelitz_stadt",
+        "beelitz_beelitz_zum_bahnhof",
+        "beelitz_stadtpfarrkirche_st_marien_st_nikolai_zu_beelitz",
+        "beelitz_grabhalle_friedhof_der_ev_kirchengemeinde_st_marien_st_nikolai_zu_beelit",
+        "beelitz_parkplatz_freibad_beelitz",
+        "beelitz_spielplatz_beelitz",
+        "beelitz_neues_lichtspielhaus_beelitz",
+        "beelitz_alpakahof_elsholz",
+        "beelitz_bockwindmuhle_beelitz",
+        "beelitz_fontane_im_ehemaligen_klarbecken",
+        "beelitz_wasserkanal_laga_beelitz",
+        "beelitz_kga_an_der_nieplitz_e_v",
+        "beelitz_ballonfahrten_schafer_brandenburg",
+        "beelitz_malraus_das_reiseburo_dippe",
+        "beelitz_lotto_toto_ina_muller_jahn",
+        "beelitz_nah_gut_piesik",
+        "beelitz_beelitzer_kaninchenspezialitaten_gmbh",
+        "beelitz_kollektiv_lost",
+        "beelitz_cafe_backerei_konditorei_neuendorff_patrick_kasten",
+        "beelitz_fsh_landmarkt_geratetechnik",
+        "beelitz_a_kamphenkel_getrankefachgrosshandel_west_gmbh"
+      ]
+    },
+    {
+      "id": "beelitz_groschen_markt",
+      "name": "Groschen-Markt",
+      "category": "souvenir",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.23819983333333,
+        "lng": 12.97265575
+      },
+      "query": "Groschen-Markt, Beelitz, Germany",
+      "osm": {
+        "lat": 52.2200148,
+        "lng": 12.9639951,
+        "display_name": "Groschen-Markt, 17, Treuenbrietzener Straße, Beelitz, Potsdam-Mittelmark, Brandenburg, 14547, Deutschland",
+        "class": "building",
+        "type": "commercial",
+        "importance": 0.00005387579156171538,
+        "osm_type": "way",
+        "osm_id": 289899157,
+        "provider": "nominatim"
+      },
+      "delta_m": 2106,
+      "from_city_m": 509,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "beelitz_nah_gut_piesik",
+      "name": "nah & gut Piesik",
+      "category": "souvenir",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.23294340740741,
+        "lng": 12.97731577777778
+      },
+      "query": "nah, Beelitz, Germany",
+      "osm": {
+        "lat": 52.2394485,
+        "lng": 12.9599108,
+        "display_name": "nah und gut, 4, Karl-Marx-Straße, Beelitz, Potsdam-Mittelmark, Brandenburg, 14547, Deutschland",
+        "class": "shop",
+        "type": "supermarket",
+        "importance": 0.00005387579156171538,
+        "osm_type": "way",
+        "osm_id": 561873807,
+        "provider": "nominatim"
+      },
+      "delta_m": 1389,
+      "from_city_m": 277,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_beelitz_stadt",
+        "beelitz_beelitz_zum_bahnhof",
+        "beelitz_stadtpfarrkirche_st_marien_st_nikolai_zu_beelitz",
+        "beelitz_grabhalle_friedhof_der_ev_kirchengemeinde_st_marien_st_nikolai_zu_beelit",
+        "beelitz_parkplatz_freibad_beelitz",
+        "beelitz_spielplatz_beelitz",
+        "beelitz_neues_lichtspielhaus_beelitz",
+        "beelitz_alpakahof_elsholz",
+        "beelitz_jakobs_hof_beelitz",
+        "beelitz_bockwindmuhle_beelitz",
+        "beelitz_fontane_im_ehemaligen_klarbecken",
+        "beelitz_wasserkanal_laga_beelitz",
+        "beelitz_kga_an_der_nieplitz_e_v",
+        "beelitz_ballonfahrten_schafer_brandenburg",
+        "beelitz_malraus_das_reiseburo_dippe",
+        "beelitz_lotto_toto_ina_muller_jahn",
+        "beelitz_beelitzer_kaninchenspezialitaten_gmbh",
+        "beelitz_kollektiv_lost",
+        "beelitz_cafe_backerei_konditorei_neuendorff_patrick_kasten",
+        "beelitz_fsh_landmarkt_geratetechnik",
+        "beelitz_a_kamphenkel_getrankefachgrosshandel_west_gmbh"
+      ]
+    },
+    {
+      "id": "beelitz_beelitz_stadt",
+      "name": "Beelitz Stadt",
+      "category": "bahnhof",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.23294088255814,
+        "lng": 12.977370088372085
+      },
+      "query": "Beelitz Stadt, Beelitz, Germany",
+      "osm": {
+        "lat": 52.239551,
+        "lng": 12.9667899,
+        "display_name": "Beelitz Stadt, Zum Bahnhof, Mein Beelitz, Beelitz, Potsdam-Mittelmark, Brandenburg, 14547, Deutschland",
+        "class": "railway",
+        "type": "station",
+        "importance": 0.17283327415591612,
+        "osm_type": "node",
+        "osm_id": 2941789294,
+        "provider": "nominatim"
+      },
+      "delta_m": 1029,
+      "from_city_m": 276,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_beelitz_zum_bahnhof",
+        "beelitz_stadtpfarrkirche_st_marien_st_nikolai_zu_beelitz",
+        "beelitz_grabhalle_friedhof_der_ev_kirchengemeinde_st_marien_st_nikolai_zu_beelit",
+        "beelitz_parkplatz_freibad_beelitz",
+        "beelitz_spielplatz_beelitz",
+        "beelitz_neues_lichtspielhaus_beelitz",
+        "beelitz_alpakahof_elsholz",
+        "beelitz_jakobs_hof_beelitz",
+        "beelitz_bockwindmuhle_beelitz",
+        "beelitz_fontane_im_ehemaligen_klarbecken",
+        "beelitz_wasserkanal_laga_beelitz",
+        "beelitz_kga_an_der_nieplitz_e_v",
+        "beelitz_ballonfahrten_schafer_brandenburg",
+        "beelitz_malraus_das_reiseburo_dippe",
+        "beelitz_lotto_toto_ina_muller_jahn",
+        "beelitz_nah_gut_piesik",
+        "beelitz_beelitzer_kaninchenspezialitaten_gmbh",
+        "beelitz_kollektiv_lost",
+        "beelitz_cafe_backerei_konditorei_neuendorff_patrick_kasten",
+        "beelitz_fsh_landmarkt_geratetechnik",
+        "beelitz_a_kamphenkel_getrankefachgrosshandel_west_gmbh"
+      ]
+    },
+    {
+      "id": "beelitz_beelitz_zum_bahnhof",
+      "name": "Beelitz, Zum Bahnhof",
+      "category": "bahnhof",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.23294340740741,
+        "lng": 12.97731577777778
+      },
+      "query": "Beelitz, Zum Bahnhof, Beelitz, Germany",
+      "osm": {
+        "lat": 52.239551,
+        "lng": 12.9667899,
+        "display_name": "Beelitz Stadt, Zum Bahnhof, Mein Beelitz, Beelitz, Potsdam-Mittelmark, Brandenburg, 14547, Deutschland",
+        "class": "railway",
+        "type": "station",
+        "importance": 0.17283327415591612,
+        "osm_type": "node",
+        "osm_id": 2941789294,
+        "provider": "nominatim"
+      },
+      "delta_m": 1026,
+      "from_city_m": 277,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_beelitz_stadt",
+        "beelitz_stadtpfarrkirche_st_marien_st_nikolai_zu_beelitz",
+        "beelitz_grabhalle_friedhof_der_ev_kirchengemeinde_st_marien_st_nikolai_zu_beelit",
+        "beelitz_parkplatz_freibad_beelitz",
+        "beelitz_spielplatz_beelitz",
+        "beelitz_neues_lichtspielhaus_beelitz",
+        "beelitz_alpakahof_elsholz",
+        "beelitz_jakobs_hof_beelitz",
+        "beelitz_bockwindmuhle_beelitz",
+        "beelitz_fontane_im_ehemaligen_klarbecken",
+        "beelitz_wasserkanal_laga_beelitz",
+        "beelitz_kga_an_der_nieplitz_e_v",
+        "beelitz_ballonfahrten_schafer_brandenburg",
+        "beelitz_malraus_das_reiseburo_dippe",
+        "beelitz_lotto_toto_ina_muller_jahn",
+        "beelitz_nah_gut_piesik",
+        "beelitz_beelitzer_kaninchenspezialitaten_gmbh",
+        "beelitz_kollektiv_lost",
+        "beelitz_cafe_backerei_konditorei_neuendorff_patrick_kasten",
+        "beelitz_fsh_landmarkt_geratetechnik",
+        "beelitz_a_kamphenkel_getrankefachgrosshandel_west_gmbh"
+      ]
+    },
+    {
+      "id": "beelitz_spielgarten_abenteuerland",
+      "name": "Spielgarten AbenteuerLand",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.239950199999996,
+        "lng": 12.9646038
+      },
+      "query": "Spielgarten AbenteuerLand, Beelitz, Germany",
+      "osm": {
+        "lat": 52.2355328,
+        "lng": 12.9778402,
+        "display_name": "Jürgen Albers Schreib- und Spielwaren, Clara-Zetkin-Straße, Beelitz, Deutschland",
+        "class": "shop",
+        "type": "stationery",
+        "provider": "photon"
+      },
+      "delta_m": 1026,
+      "from_city_m": 1075,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_teufelsee_feuchtgebietskette_ffh",
+        "beelitz_wasserturm_sternwarte",
+        "beelitz_baum_in_tur",
+        "beelitz_freibad_im_wasserturmpark_beelitz",
+        "beelitz_stadion_des_friedens",
+        "beelitz_sportplatz_beelitz",
+        "beelitz_sportplatz_bundeswehr",
+        "beelitz_tvg_sally_bein_beelitz_e_v"
+      ]
+    },
+    {
+      "id": "beelitz_beelitzer_kaninchenspezialitaten_gmbh",
+      "name": "Beelitzer Kaninchenspezialitäten GmbH",
+      "category": "souvenir",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.23294340740741,
+        "lng": 12.97731577777778
+      },
+      "query": "Beelitzer Kaninchenspezialitäten GmbH, Beelitz, Germany",
+      "osm": {
+        "lat": 52.2248326,
+        "lng": 12.9709112,
+        "display_name": "BMK - Logistik und Dienstleistung Beelitz GmbH, Am Zollhaus, Beelitz, Deutschland",
+        "class": "office",
+        "type": "company",
+        "provider": "photon"
+      },
+      "delta_m": 1002,
+      "from_city_m": 277,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_beelitz_stadt",
+        "beelitz_beelitz_zum_bahnhof",
+        "beelitz_stadtpfarrkirche_st_marien_st_nikolai_zu_beelitz",
+        "beelitz_grabhalle_friedhof_der_ev_kirchengemeinde_st_marien_st_nikolai_zu_beelit",
+        "beelitz_parkplatz_freibad_beelitz",
+        "beelitz_spielplatz_beelitz",
+        "beelitz_neues_lichtspielhaus_beelitz",
+        "beelitz_alpakahof_elsholz",
+        "beelitz_jakobs_hof_beelitz",
+        "beelitz_bockwindmuhle_beelitz",
+        "beelitz_fontane_im_ehemaligen_klarbecken",
+        "beelitz_wasserkanal_laga_beelitz",
+        "beelitz_kga_an_der_nieplitz_e_v",
+        "beelitz_ballonfahrten_schafer_brandenburg",
+        "beelitz_malraus_das_reiseburo_dippe",
+        "beelitz_lotto_toto_ina_muller_jahn",
+        "beelitz_nah_gut_piesik",
+        "beelitz_kollektiv_lost",
+        "beelitz_cafe_backerei_konditorei_neuendorff_patrick_kasten",
+        "beelitz_fsh_landmarkt_geratetechnik",
+        "beelitz_a_kamphenkel_getrankefachgrosshandel_west_gmbh"
+      ]
+    },
+    {
+      "id": "beelitz_dorfkirche_wittbrietzen",
+      "name": "Dorfkirche Wittbrietzen",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.178643120000004,
+        "lng": 12.97346398
+      },
+      "query": "Dorfkirche Wittbrietzen, Beelitz, Germany",
+      "osm": {
+        "lat": 52.1828799,
+        "lng": 12.9859588,
+        "display_name": "Wittbrietzener Upstallgraben, Wittbrietzen, Deutschland",
+        "class": "waterway",
+        "type": "ditch",
+        "provider": "photon"
+      },
+      "delta_m": 974,
+      "from_city_m": 6312,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "beelitz_tvg_sally_bein_beelitz_e_v",
+      "name": "TVG „Sally Bein“ Beelitz e.V.",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.239950199999996,
+        "lng": 12.9646038
+      },
+      "query": "TVG „Sally Bein“ Beelitz e.V., Beelitz, Germany",
+      "osm": {
+        "lat": 52.2469607,
+        "lng": 12.9675244,
+        "display_name": "TVG „Sally Bein“ Beelitz e. V., Karl-Liebknecht-Straße, Mein Beelitz, Beelitz, Potsdam-Mittelmark, Brandenburg, 14547, Deutschland",
+        "class": "club",
+        "type": "sport",
+        "importance": 0.00005387579156171538,
+        "osm_type": "node",
+        "osm_id": 9735181689,
+        "provider": "nominatim"
+      },
+      "delta_m": 804,
+      "from_city_m": 1075,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_teufelsee_feuchtgebietskette_ffh",
+        "beelitz_wasserturm_sternwarte",
+        "beelitz_baum_in_tur",
+        "beelitz_freibad_im_wasserturmpark_beelitz",
+        "beelitz_stadion_des_friedens",
+        "beelitz_spielgarten_abenteuerland",
+        "beelitz_sportplatz_beelitz",
+        "beelitz_sportplatz_bundeswehr"
+      ]
+    },
+    {
+      "id": "beelitz_beelitz_heilstatten",
+      "name": "Beelitz Heilstätten",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.2655777,
+        "lng": 12.9147241
+      },
+      "query": "Beelitz Heilstätten, Beelitz, Germany",
+      "osm": {
+        "lat": 52.2618758,
+        "lng": 12.9245909,
+        "display_name": "Beelitz-Heilstätten, Beelitz, Potsdam-Mittelmark, Brandenburg, 14547, Deutschland",
+        "class": "place",
+        "type": "suburb",
+        "importance": 0.29754280206928735,
+        "osm_type": "node",
+        "osm_id": 4446306043,
+        "provider": "nominatim"
+      },
+      "delta_m": 788,
+      "from_city_m": 5491,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "beelitz_malraus_das_reiseburo_dippe",
+      "name": "malraus - Das Reisebüro Dippe",
+      "category": "tour",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.23294340740741,
+        "lng": 12.97731577777778
+      },
+      "query": "malraus, Beelitz, Germany",
+      "osm": {
+        "lat": 52.238055,
+        "lng": 12.9704363,
+        "display_name": "malraus - Das Reisebüro Dippe, 35, Clara-Zetkin-Straße, Beelitz, Potsdam-Mittelmark, Brandenburg, 14547, Deutschland",
+        "class": "shop",
+        "type": "travel_agency",
+        "importance": 0.00005387579156171538,
+        "osm_type": "node",
+        "osm_id": 4415009912,
+        "provider": "nominatim"
+      },
+      "delta_m": 737,
+      "from_city_m": 277,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_beelitz_stadt",
+        "beelitz_beelitz_zum_bahnhof",
+        "beelitz_stadtpfarrkirche_st_marien_st_nikolai_zu_beelitz",
+        "beelitz_grabhalle_friedhof_der_ev_kirchengemeinde_st_marien_st_nikolai_zu_beelit",
+        "beelitz_parkplatz_freibad_beelitz",
+        "beelitz_spielplatz_beelitz",
+        "beelitz_neues_lichtspielhaus_beelitz",
+        "beelitz_alpakahof_elsholz",
+        "beelitz_jakobs_hof_beelitz",
+        "beelitz_bockwindmuhle_beelitz",
+        "beelitz_fontane_im_ehemaligen_klarbecken",
+        "beelitz_wasserkanal_laga_beelitz",
+        "beelitz_kga_an_der_nieplitz_e_v",
+        "beelitz_ballonfahrten_schafer_brandenburg",
+        "beelitz_lotto_toto_ina_muller_jahn",
+        "beelitz_nah_gut_piesik",
+        "beelitz_beelitzer_kaninchenspezialitaten_gmbh",
+        "beelitz_kollektiv_lost",
+        "beelitz_cafe_backerei_konditorei_neuendorff_patrick_kasten",
+        "beelitz_fsh_landmarkt_geratetechnik",
+        "beelitz_a_kamphenkel_getrankefachgrosshandel_west_gmbh"
+      ]
+    },
+    {
+      "id": "beelitz_baumkronenpfad_beelitz",
+      "name": "Baumkronenpfad Beelitz",
+      "category": "natur",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.25910005882353,
+        "lng": 12.924094411764704
+      },
+      "query": "Baumkronenpfad Beelitz, Beelitz, Germany",
+      "osm": {
+        "lat": 52.2638007,
+        "lng": 12.9176786,
+        "display_name": "Baumkronenpfad, Beelitz-Heilstätten, Beelitz, Potsdam-Mittelmark, Brandenburg, 14547, Deutschland",
+        "class": "highway",
+        "type": "footway",
+        "importance": 0.04005387579156175,
+        "osm_type": "way",
+        "osm_id": 371872962,
+        "provider": "nominatim"
+      },
+      "delta_m": 681,
+      "from_city_m": 4549,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_snackstation_24_7_beelitz_snacks_getranke_zigaretten"
+      ]
+    },
+    {
+      "id": "beelitz_a_kamphenkel_getrankefachgrosshandel_west_gmbh",
+      "name": "A. Kamphenkel - Getränkefachgroßhandel West GmbH",
+      "category": "souvenir",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.23294340740741,
+        "lng": 12.97731577777778
+      },
+      "query": "A. Kamphenkel, Beelitz, Germany",
+      "osm": {
+        "lat": 52.2363582,
+        "lng": 12.9700041,
+        "display_name": "Beelitz, Potsdam-Mittelmark, Deutschland",
+        "class": "place",
+        "type": "town",
+        "provider": "photon"
+      },
+      "delta_m": 626,
+      "from_city_m": 277,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_beelitz_stadt",
+        "beelitz_beelitz_zum_bahnhof",
+        "beelitz_stadtpfarrkirche_st_marien_st_nikolai_zu_beelitz",
+        "beelitz_grabhalle_friedhof_der_ev_kirchengemeinde_st_marien_st_nikolai_zu_beelit",
+        "beelitz_parkplatz_freibad_beelitz",
+        "beelitz_spielplatz_beelitz",
+        "beelitz_neues_lichtspielhaus_beelitz",
+        "beelitz_alpakahof_elsholz",
+        "beelitz_jakobs_hof_beelitz",
+        "beelitz_bockwindmuhle_beelitz",
+        "beelitz_fontane_im_ehemaligen_klarbecken",
+        "beelitz_wasserkanal_laga_beelitz",
+        "beelitz_kga_an_der_nieplitz_e_v",
+        "beelitz_ballonfahrten_schafer_brandenburg",
+        "beelitz_malraus_das_reiseburo_dippe",
+        "beelitz_lotto_toto_ina_muller_jahn",
+        "beelitz_nah_gut_piesik",
+        "beelitz_beelitzer_kaninchenspezialitaten_gmbh",
+        "beelitz_kollektiv_lost",
+        "beelitz_cafe_backerei_konditorei_neuendorff_patrick_kasten",
+        "beelitz_fsh_landmarkt_geratetechnik"
+      ]
+    },
+    {
+      "id": "beelitz_fasziation_beelitz_heilstatten",
+      "name": "Fasziation Beelitz-Heilstätten",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.26722390410959,
+        "lng": 12.924534428767124
+      },
+      "query": "Fasziation Beelitz-Heilstätten, Beelitz, Germany",
+      "osm": {
+        "lat": 52.2618758,
+        "lng": 12.9245909,
+        "display_name": "Beelitz-Heilstätten, Beelitz, Deutschland",
+        "class": "place",
+        "type": "suburb",
+        "provider": "photon"
+      },
+      "delta_m": 595,
+      "from_city_m": 5105,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_kliniken_beelitz_gmbh",
+        "beelitz_neurokliniken_beelitz_klinik_fur_neurologische_fruhrehabilitation_klinik"
+      ]
+    },
+    {
+      "id": "beelitz_beelitzer_heilstatten",
+      "name": "Beelitzer Heilstätten",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.26560980000001,
+        "lng": 12.920631655
+      },
+      "query": "Beelitzer Heilstätten, Beelitz, Germany",
+      "osm": {
+        "lat": 52.2618758,
+        "lng": 12.9245909,
+        "display_name": "Beelitz-Heilstätten, Beelitz, Deutschland",
+        "class": "place",
+        "type": "suburb",
+        "provider": "photon"
+      },
+      "delta_m": 495,
+      "from_city_m": 5181,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_beelitz_heilstatten_reha_kliniken",
+        "beelitz_beelitz_heilstatten_kochkuche"
+      ]
+    },
+    {
+      "id": "beelitz_beelitz_heilstatten_kochkuche",
+      "name": "Beelitz-Heilstätten - Kochküche",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.26560980000001,
+        "lng": 12.920631655
+      },
+      "query": "Beelitz-Heilstätten, Beelitz, Germany",
+      "osm": {
+        "lat": 52.2618758,
+        "lng": 12.9245909,
+        "display_name": "Beelitz-Heilstätten, Beelitz, Potsdam-Mittelmark, Brandenburg, 14547, Deutschland",
+        "class": "place",
+        "type": "suburb",
+        "importance": 0.29754280206928735,
+        "osm_type": "node",
+        "osm_id": 4446306043,
+        "provider": "nominatim"
+      },
+      "delta_m": 495,
+      "from_city_m": 5181,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_beelitz_heilstatten_reha_kliniken",
+        "beelitz_beelitzer_heilstatten"
+      ]
+    },
+    {
+      "id": "beelitz_beelitz_heilstatten_labor",
+      "name": "Beelitz-Heilstätten - Labor",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.26495488297873,
+        "lng": 12.91982151276596
+      },
+      "query": "Beelitz-Heilstätten, Beelitz, Germany",
+      "osm": {
+        "lat": 52.2618758,
+        "lng": 12.9245909,
+        "display_name": "Beelitz-Heilstätten, Beelitz, Potsdam-Mittelmark, Brandenburg, 14547, Deutschland",
+        "class": "place",
+        "type": "suburb",
+        "importance": 0.29754280206928735,
+        "osm_type": "node",
+        "osm_id": 4446306043,
+        "provider": "nominatim"
+      },
+      "delta_m": 472,
+      "from_city_m": 5177,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_beelitz_heilstatten_frauenpavillon"
+      ]
+    },
+    {
+      "id": "beelitz_beelitz_heilstatten_frauenpavillon",
+      "name": "Beelitz-Heilstätten - Frauenpavillon",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.26495488297873,
+        "lng": 12.91982151276596
+      },
+      "query": "Beelitz-Heilstätten, Beelitz, Germany",
+      "osm": {
+        "lat": 52.2618758,
+        "lng": 12.9245909,
+        "display_name": "Beelitz-Heilstätten, Beelitz, Potsdam-Mittelmark, Brandenburg, 14547, Deutschland",
+        "class": "place",
+        "type": "suburb",
+        "importance": 0.29754280206928735,
+        "osm_type": "node",
+        "osm_id": 4446306043,
+        "provider": "nominatim"
+      },
+      "delta_m": 472,
+      "from_city_m": 5177,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_beelitz_heilstatten_labor"
+      ]
+    },
+    {
+      "id": "beelitz_schloss_blankensee",
+      "name": "Schloss Blankensee",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.240055662500005,
+        "lng": 13.128922600000001
+      },
+      "query": "Schloss Blankensee, Beelitz, Germany",
+      "osm": {
+        "lat": 52.2384093,
+        "lng": 13.1347123,
+        "display_name": "Blankensee, Zum Schloss, Trebbin, Deutschland",
+        "class": "information",
+        "type": "map",
+        "provider": "photon"
+      },
+      "delta_m": 435,
+      "from_city_m": 10258,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "beelitz_neues_lichtspielhaus_beelitz",
+      "name": "Neues Lichtspielhaus Beelitz",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.23294340740741,
+        "lng": 12.97731577777778
+      },
+      "query": "Neues Lichtspielhaus Beelitz, Beelitz, Germany",
+      "osm": {
+        "lat": 52.2360921,
+        "lng": 12.973806,
+        "display_name": "Neues Lichtspielhaus Beelitz, 194, Clara-Zetkin-Straße, Beelitz, Potsdam-Mittelmark, Brandenburg, 14547, Deutschland",
+        "class": "amenity",
+        "type": "cinema",
+        "importance": 0.00005387579156171538,
+        "osm_type": "node",
+        "osm_id": 11300467992,
+        "provider": "nominatim"
+      },
+      "delta_m": 424,
+      "from_city_m": 277,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_beelitz_stadt",
+        "beelitz_beelitz_zum_bahnhof",
+        "beelitz_stadtpfarrkirche_st_marien_st_nikolai_zu_beelitz",
+        "beelitz_grabhalle_friedhof_der_ev_kirchengemeinde_st_marien_st_nikolai_zu_beelit",
+        "beelitz_parkplatz_freibad_beelitz",
+        "beelitz_spielplatz_beelitz",
+        "beelitz_alpakahof_elsholz",
+        "beelitz_jakobs_hof_beelitz",
+        "beelitz_bockwindmuhle_beelitz",
+        "beelitz_fontane_im_ehemaligen_klarbecken",
+        "beelitz_wasserkanal_laga_beelitz",
+        "beelitz_kga_an_der_nieplitz_e_v",
+        "beelitz_ballonfahrten_schafer_brandenburg",
+        "beelitz_malraus_das_reiseburo_dippe",
+        "beelitz_lotto_toto_ina_muller_jahn",
+        "beelitz_nah_gut_piesik",
+        "beelitz_beelitzer_kaninchenspezialitaten_gmbh",
+        "beelitz_kollektiv_lost",
+        "beelitz_cafe_backerei_konditorei_neuendorff_patrick_kasten",
+        "beelitz_fsh_landmarkt_geratetechnik",
+        "beelitz_a_kamphenkel_getrankefachgrosshandel_west_gmbh"
+      ]
+    },
+    {
+      "id": "beelitz_parkplatz_stadtpark_und_freilichtbuhne_beelitz",
+      "name": "Parkplatz Stadtpark und Freilichtbühne Beelitz",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.23408883333334,
+        "lng": 12.977874
+      },
+      "query": "Parkplatz Stadtpark, Beelitz, Germany",
+      "osm": {
+        "lat": 52.2303954,
+        "lng": 12.9764449,
+        "display_name": "Stadtpark Beelitz, Beelitz, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "provider": "photon"
+      },
+      "delta_m": 422,
+      "from_city_m": 144,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_laga_beelitz",
+        "beelitz_vogelbeobachtungsturm_bei_beelitz",
+        "beelitz_freibad_beelitz_eingang",
+        "beelitz_hotel_stadt_beelitz"
+      ]
+    },
+    {
+      "id": "beelitz_mannersanatorium_beelitz_heilstatten",
+      "name": "Männersanatorium Beelitz-Heilstätten",
+      "category": "altstadt",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.2589512,
+        "lng": 12.9274944
+      },
+      "query": "Männersanatorium Beelitz-Heilstätten, Beelitz, Germany",
+      "osm": {
+        "lat": 52.2618758,
+        "lng": 12.9245909,
+        "display_name": "Beelitz-Heilstätten, Beelitz, Deutschland",
+        "class": "place",
+        "type": "suburb",
+        "provider": "photon"
+      },
+      "delta_m": 381,
+      "from_city_m": 4353,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "beelitz_dorfkirche_salzbrunn",
+      "name": "Dorfkirche Salzbrunn",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.18479996,
+        "lng": 12.926036479999999
+      },
+      "query": "Dorfkirche Salzbrunn, Beelitz, Germany",
+      "osm": {
+        "lat": 52.1852284,
+        "lng": 12.9303158,
+        "display_name": "Am Salzbrunnen, Salzbrunn, Deutschland",
+        "class": "highway",
+        "type": "residential",
+        "provider": "photon"
+      },
+      "delta_m": 296,
+      "from_city_m": 6659,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "beelitz_stadtpark_beelitz",
+      "name": "Stadtpark Beelitz",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.23057300000001,
+        "lng": 12.979442800000001
+      },
+      "query": "Stadtpark Beelitz, Beelitz, Germany",
+      "osm": {
+        "lat": 52.2303954,
+        "lng": 12.9764449,
+        "display_name": "Stadtpark Beelitz, Beelitz, Potsdam-Mittelmark, Brandenburg, 14547, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "importance": 0.08005387579156173,
+        "osm_type": "way",
+        "osm_id": 164096967,
+        "provider": "nominatim"
+      },
+      "delta_m": 205,
+      "from_city_m": 533,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_reisemobilstellplatz_am_stadtpark_beelitz"
+      ]
+    },
+    {
+      "id": "beelitz_dorfkirche_elsholz",
+      "name": "Dorfkirche Elsholz",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.19855808333333,
+        "lng": 12.96340715
+      },
+      "query": "Dorfkirche Elsholz, Beelitz, Germany",
+      "osm": {
+        "lat": 52.2001903,
+        "lng": 12.9631069,
+        "display_name": "Freiwillige Feuerwehr Beelitz, Ortsfeuerwehr Elsholz, Am Dorfplatz, Elsholz, Deutschland",
+        "class": "amenity",
+        "type": "fire_station",
+        "provider": "photon"
+      },
+      "delta_m": 183,
+      "from_city_m": 4216,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "beelitz_fsh_landmarkt_geratetechnik",
+      "name": "FSH Landmarkt & Gerätetechnik",
+      "category": "souvenir",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.23294340740741,
+        "lng": 12.97731577777778
+      },
+      "query": "FSH Landmarkt, Beelitz",
+      "osm": {
+        "lat": 32.9490152,
+        "lng": -96.8253875,
+        "display_name": "Quorum @ Landmark - N - FS, Quorum Drive, Addison, Vereinigte Staaten von Amerika",
+        "class": "highway",
+        "type": "bus_stop",
+        "provider": "photon"
+      },
+      "delta_m": 8359285,
+      "from_city_m": 277,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_beelitz_stadt",
+        "beelitz_beelitz_zum_bahnhof",
+        "beelitz_stadtpfarrkirche_st_marien_st_nikolai_zu_beelitz",
+        "beelitz_grabhalle_friedhof_der_ev_kirchengemeinde_st_marien_st_nikolai_zu_beelit",
+        "beelitz_parkplatz_freibad_beelitz",
+        "beelitz_spielplatz_beelitz",
+        "beelitz_neues_lichtspielhaus_beelitz",
+        "beelitz_alpakahof_elsholz",
+        "beelitz_jakobs_hof_beelitz",
+        "beelitz_bockwindmuhle_beelitz",
+        "beelitz_fontane_im_ehemaligen_klarbecken",
+        "beelitz_wasserkanal_laga_beelitz",
+        "beelitz_kga_an_der_nieplitz_e_v",
+        "beelitz_ballonfahrten_schafer_brandenburg",
+        "beelitz_malraus_das_reiseburo_dippe",
+        "beelitz_lotto_toto_ina_muller_jahn",
+        "beelitz_nah_gut_piesik",
+        "beelitz_beelitzer_kaninchenspezialitaten_gmbh",
+        "beelitz_kollektiv_lost",
+        "beelitz_cafe_backerei_konditorei_neuendorff_patrick_kasten",
+        "beelitz_a_kamphenkel_getrankefachgrosshandel_west_gmbh"
+      ]
+    },
+    {
+      "id": "beelitz_snackstation_24_7_beelitz_snacks_getranke_zigaretten",
+      "name": "SnackStation 24/7 Beelitz – Snacks, Getränke & Zigaretten",
+      "category": "souvenir",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.25910005882353,
+        "lng": 12.924094411764704
+      },
+      "query": "SnackStation 24/7 Beelitz, Beelitz",
+      "osm": {
+        "lat": 45.38475474096144,
+        "lng": -73.50910575257846,
+        "display_name": "Place Berlioz, Candiac, Kanada",
+        "class": "place",
+        "type": "house_number",
+        "provider": "photon"
+      },
+      "delta_m": 5989766,
+      "from_city_m": 4549,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_baumkronenpfad_beelitz"
+      ]
+    },
+    {
+      "id": "beelitz_irene_krause",
+      "name": "Irene Krause",
+      "category": "tour",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.31276992000001,
+        "lng": 12.932885160000001
+      },
+      "query": "Irene Krause, Beelitz",
+      "osm": {
+        "lat": 40.9091931,
+        "lng": 14.8010138,
+        "display_name": "Via Ireneo Vinciguerra, Avellino, Italien",
+        "class": "highway",
+        "type": "pedestrian",
+        "provider": "photon"
+      },
+      "delta_m": 1275908,
+      "from_city_m": 9153,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_beobachtungsturm_ungeheuerwiesen",
+        "beelitz_barfusspark_beelitz",
+        "beelitz_beelitz_heilstatten_natur_park",
+        "beelitz_der_bootsverleih_wohlfuhlen_am_seddiner_see",
+        "beelitz_bootsverleih_burgemeister"
+      ]
+    },
+    {
+      "id": "beelitz_reisemobilstellplatz_am_stadtpark_beelitz",
+      "name": "Reisemobilstellplatz am Stadtpark Beelitz",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.23057300000001,
+        "lng": 12.979442800000001
+      },
+      "query": "Reisemobilstellplatz am Stadtpark, Beelitz, Germany",
+      "osm": {
+        "lat": 48.0901009,
+        "lng": 7.9578354,
+        "display_name": "Reisemobilstellplatz \"Am Stadtpark\", Am Stadtrain, Waldkirch, Deutschland",
+        "class": "tourism",
+        "type": "caravan_site",
+        "provider": "photon"
+      },
+      "delta_m": 582741,
+      "from_city_m": 533,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_stadtpark_beelitz"
+      ]
+    },
+    {
+      "id": "beelitz_wasserturm_sternwarte",
+      "name": "Wasserturm / Sternwarte",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.239950199999996,
+        "lng": 12.9646038
+      },
+      "query": "Wasserturm / Sternwarte, Beelitz, Germany",
+      "osm": {
+        "lat": 48.288078,
+        "lng": 8.6778905,
+        "display_name": "Sternwarte Zollernalb, Am Wasserturm, Rosenfeld, Deutschland",
+        "class": "building",
+        "type": "yes",
+        "provider": "photon"
+      },
+      "delta_m": 534528,
+      "from_city_m": 1075,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_teufelsee_feuchtgebietskette_ffh",
+        "beelitz_baum_in_tur",
+        "beelitz_freibad_im_wasserturmpark_beelitz",
+        "beelitz_stadion_des_friedens",
+        "beelitz_spielgarten_abenteuerland",
+        "beelitz_sportplatz_beelitz",
+        "beelitz_sportplatz_bundeswehr",
+        "beelitz_tvg_sally_bein_beelitz_e_v"
+      ]
+    },
+    {
+      "id": "beelitz_wasserkanal_laga_beelitz",
+      "name": "Wasserkanal Laga Beelitz",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.23294340740741,
+        "lng": 12.97731577777778
+      },
+      "query": "Wasserkanal Laga Beelitz, Beelitz",
+      "osm": {
+        "lat": 50.461399,
+        "lng": 6.2061433,
+        "display_name": "Elsenborn Begleitzentrum, Lagerstraße, Bütgenbach, Belgien",
+        "class": "highway",
+        "type": "bus_stop",
+        "provider": "photon"
+      },
+      "delta_m": 509612,
+      "from_city_m": 277,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_beelitz_stadt",
+        "beelitz_beelitz_zum_bahnhof",
+        "beelitz_stadtpfarrkirche_st_marien_st_nikolai_zu_beelitz",
+        "beelitz_grabhalle_friedhof_der_ev_kirchengemeinde_st_marien_st_nikolai_zu_beelit",
+        "beelitz_parkplatz_freibad_beelitz",
+        "beelitz_spielplatz_beelitz",
+        "beelitz_neues_lichtspielhaus_beelitz",
+        "beelitz_alpakahof_elsholz",
+        "beelitz_jakobs_hof_beelitz",
+        "beelitz_bockwindmuhle_beelitz",
+        "beelitz_fontane_im_ehemaligen_klarbecken",
+        "beelitz_kga_an_der_nieplitz_e_v",
+        "beelitz_ballonfahrten_schafer_brandenburg",
+        "beelitz_malraus_das_reiseburo_dippe",
+        "beelitz_lotto_toto_ina_muller_jahn",
+        "beelitz_nah_gut_piesik",
+        "beelitz_beelitzer_kaninchenspezialitaten_gmbh",
+        "beelitz_kollektiv_lost",
+        "beelitz_cafe_backerei_konditorei_neuendorff_patrick_kasten",
+        "beelitz_fsh_landmarkt_geratetechnik",
+        "beelitz_a_kamphenkel_getrankefachgrosshandel_west_gmbh"
+      ]
+    },
+    {
+      "id": "beelitz_baum_in_tur",
+      "name": "Baum in Tür",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.239950199999996,
+        "lng": 12.9646038
+      },
+      "query": "Baum in Tür, Beelitz, Germany",
+      "osm": {
+        "lat": 48.0606731,
+        "lng": 11.4469449,
+        "display_name": "Türkische Gemeinde in Bayern Baumpaten, Max-Josef-Geräumt, Forstenrieder Park, Deutschland",
+        "class": "tourism",
+        "type": "information",
+        "provider": "photon"
+      },
+      "delta_m": 477100,
+      "from_city_m": 1075,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_teufelsee_feuchtgebietskette_ffh",
+        "beelitz_wasserturm_sternwarte",
+        "beelitz_freibad_im_wasserturmpark_beelitz",
+        "beelitz_stadion_des_friedens",
+        "beelitz_spielgarten_abenteuerland",
+        "beelitz_sportplatz_beelitz",
+        "beelitz_sportplatz_bundeswehr",
+        "beelitz_tvg_sally_bein_beelitz_e_v"
+      ]
+    },
+    {
+      "id": "beelitz_sportplatz_bundeswehr",
+      "name": "Sportplatz Bundeswehr",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.239950199999996,
+        "lng": 12.9646038
+      },
+      "query": "Sportplatz Bundeswehr, Beelitz, Germany",
+      "osm": {
+        "lat": 50.8206165,
+        "lng": 9.0334083,
+        "display_name": "Bundeswehr-Sportplatz, Artilleriestraße, Stadtallendorf, Deutschland",
+        "class": "military",
+        "type": "training_area",
+        "provider": "photon"
+      },
+      "delta_m": 314355,
+      "from_city_m": 1075,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_teufelsee_feuchtgebietskette_ffh",
+        "beelitz_wasserturm_sternwarte",
+        "beelitz_baum_in_tur",
+        "beelitz_freibad_im_wasserturmpark_beelitz",
+        "beelitz_stadion_des_friedens",
+        "beelitz_spielgarten_abenteuerland",
+        "beelitz_sportplatz_beelitz",
+        "beelitz_tvg_sally_bein_beelitz_e_v"
+      ]
+    },
+    {
+      "id": "beelitz_grosse_liegewiese",
+      "name": "Große Liegewiese",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.25891768852459,
+        "lng": 12.930088967213111
+      },
+      "query": "Große Liegewiese, Beelitz, Germany",
+      "osm": {
+        "lat": 50.6142922,
+        "lng": 11.5499908,
+        "display_name": "Große Liegewiese, Wilhelmsdorf, Deutschland",
+        "class": "landuse",
+        "type": "meadow",
+        "provider": "photon"
+      },
+      "delta_m": 206375,
+      "from_city_m": 4211,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_carl_friedrich_wilhelm_herrmann_denkmal",
+        "beelitz_die_drehende_kugel",
+        "beelitz_gelande_der_brandenburgischen_landesgartenschau_2022",
+        "beelitz_muhlenteich_mit_fontane"
+      ]
+    },
+    {
+      "id": "beelitz_kollektiv_lost",
+      "name": "KOLLEKTIV LOST",
+      "category": "souvenir",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.23294340740741,
+        "lng": 12.97731577777778
+      },
+      "query": "KOLLEKTIV LOST, Beelitz, Germany",
+      "osm": {
+        "lat": 51.0125198,
+        "lng": 13.8734695,
+        "display_name": "Beleites, Lohmener Straße, Dresden, Deutschland",
+        "class": "amenity",
+        "type": "doctors",
+        "provider": "photon"
+      },
+      "delta_m": 149138,
+      "from_city_m": 277,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_beelitz_stadt",
+        "beelitz_beelitz_zum_bahnhof",
+        "beelitz_stadtpfarrkirche_st_marien_st_nikolai_zu_beelitz",
+        "beelitz_grabhalle_friedhof_der_ev_kirchengemeinde_st_marien_st_nikolai_zu_beelit",
+        "beelitz_parkplatz_freibad_beelitz",
+        "beelitz_spielplatz_beelitz",
+        "beelitz_neues_lichtspielhaus_beelitz",
+        "beelitz_alpakahof_elsholz",
+        "beelitz_jakobs_hof_beelitz",
+        "beelitz_bockwindmuhle_beelitz",
+        "beelitz_fontane_im_ehemaligen_klarbecken",
+        "beelitz_wasserkanal_laga_beelitz",
+        "beelitz_kga_an_der_nieplitz_e_v",
+        "beelitz_ballonfahrten_schafer_brandenburg",
+        "beelitz_malraus_das_reiseburo_dippe",
+        "beelitz_lotto_toto_ina_muller_jahn",
+        "beelitz_nah_gut_piesik",
+        "beelitz_beelitzer_kaninchenspezialitaten_gmbh",
+        "beelitz_cafe_backerei_konditorei_neuendorff_patrick_kasten",
+        "beelitz_fsh_landmarkt_geratetechnik",
+        "beelitz_a_kamphenkel_getrankefachgrosshandel_west_gmbh"
+      ]
+    },
+    {
+      "id": "beelitz_stadion_des_friedens",
+      "name": "Stadion des Friedens",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.239950199999996,
+        "lng": 12.9646038
+      },
+      "query": "Stadion des Friedens, Beelitz, Germany",
+      "osm": {
+        "lat": 51.3782621,
+        "lng": 12.3728583,
+        "display_name": "Stadion des Friedens, Max-Liebermann-Straße, Leipzig, Deutschland",
+        "class": "leisure",
+        "type": "sports_centre",
+        "provider": "photon"
+      },
+      "delta_m": 104093,
+      "from_city_m": 1075,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_teufelsee_feuchtgebietskette_ffh",
+        "beelitz_wasserturm_sternwarte",
+        "beelitz_baum_in_tur",
+        "beelitz_freibad_im_wasserturmpark_beelitz",
+        "beelitz_spielgarten_abenteuerland",
+        "beelitz_sportplatz_beelitz",
+        "beelitz_sportplatz_bundeswehr",
+        "beelitz_tvg_sally_bein_beelitz_e_v"
+      ]
+    },
+    {
+      "id": "beelitz_grabhalle_friedhof_der_ev_kirchengemeinde_st_marien_st_nikolai_zu_beelit",
+      "name": "Grabhalle /Friedhof der Ev. Kirchengemeinde St. Marien - St. Nikolai zu Beelitz",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.23294340740741,
+        "lng": 12.97731577777778
+      },
+      "query": "Grabhalle /Friedhof der Ev. Kirchengemeinde, Beelitz, Germany",
+      "osm": {
+        "lat": 52.5129836,
+        "lng": 13.7477395,
+        "display_name": "Friedhof der ev. Kirchengemeinde Fredersdorf Süd, Vogelsdorf, Deutschland",
+        "class": "landuse",
+        "type": "cemetery",
+        "provider": "photon"
+      },
+      "delta_m": 60869,
+      "from_city_m": 277,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_beelitz_stadt",
+        "beelitz_beelitz_zum_bahnhof",
+        "beelitz_stadtpfarrkirche_st_marien_st_nikolai_zu_beelitz",
+        "beelitz_parkplatz_freibad_beelitz",
+        "beelitz_spielplatz_beelitz",
+        "beelitz_neues_lichtspielhaus_beelitz",
+        "beelitz_alpakahof_elsholz",
+        "beelitz_jakobs_hof_beelitz",
+        "beelitz_bockwindmuhle_beelitz",
+        "beelitz_fontane_im_ehemaligen_klarbecken",
+        "beelitz_wasserkanal_laga_beelitz",
+        "beelitz_kga_an_der_nieplitz_e_v",
+        "beelitz_ballonfahrten_schafer_brandenburg",
+        "beelitz_malraus_das_reiseburo_dippe",
+        "beelitz_lotto_toto_ina_muller_jahn",
+        "beelitz_nah_gut_piesik",
+        "beelitz_beelitzer_kaninchenspezialitaten_gmbh",
+        "beelitz_kollektiv_lost",
+        "beelitz_cafe_backerei_konditorei_neuendorff_patrick_kasten",
+        "beelitz_fsh_landmarkt_geratetechnik",
+        "beelitz_a_kamphenkel_getrankefachgrosshandel_west_gmbh"
+      ]
+    },
+    {
+      "id": "beelitz_denkmal_der_sowjetischen_sanitater",
+      "name": "Denkmal der sowjetischen Sanitäter",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.2588747,
+        "lng": 12.9288086
+      },
+      "query": "Denkmal der sowjetischen, Beelitz, Germany",
+      "osm": {
+        "lat": 51.8826313,
+        "lng": 12.4711914,
+        "display_name": "Denkmal für die Sowjetischen Frauen vom WASAG-Explosionsunglück 1944, Wittenberger Straße, Coswig (Anhalt), Deutschland",
+        "class": "historic",
+        "type": "memorial",
+        "provider": "photon"
+      },
+      "delta_m": 52236,
+      "from_city_m": 4277,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "beelitz_kga_an_der_nieplitz_e_v",
+      "name": "KGA ,,An der Nieplitz\" e.V.",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.23294340740741,
+        "lng": 12.97731577777778
+      },
+      "query": "KGA ,,An der Nieplitz\" e.V., Beelitz, Germany",
+      "osm": {
+        "lat": 52.5941968,
+        "lng": 13.3862326,
+        "display_name": "KGA Tiefland e.V., An der Priesterkoppel, Berlin, Deutschland",
+        "class": "landuse",
+        "type": "allotments",
+        "provider": "photon"
+      },
+      "delta_m": 48814,
+      "from_city_m": 277,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_beelitz_stadt",
+        "beelitz_beelitz_zum_bahnhof",
+        "beelitz_stadtpfarrkirche_st_marien_st_nikolai_zu_beelitz",
+        "beelitz_grabhalle_friedhof_der_ev_kirchengemeinde_st_marien_st_nikolai_zu_beelit",
+        "beelitz_parkplatz_freibad_beelitz",
+        "beelitz_spielplatz_beelitz",
+        "beelitz_neues_lichtspielhaus_beelitz",
+        "beelitz_alpakahof_elsholz",
+        "beelitz_jakobs_hof_beelitz",
+        "beelitz_bockwindmuhle_beelitz",
+        "beelitz_fontane_im_ehemaligen_klarbecken",
+        "beelitz_wasserkanal_laga_beelitz",
+        "beelitz_ballonfahrten_schafer_brandenburg",
+        "beelitz_malraus_das_reiseburo_dippe",
+        "beelitz_lotto_toto_ina_muller_jahn",
+        "beelitz_nah_gut_piesik",
+        "beelitz_beelitzer_kaninchenspezialitaten_gmbh",
+        "beelitz_kollektiv_lost",
+        "beelitz_cafe_backerei_konditorei_neuendorff_patrick_kasten",
+        "beelitz_fsh_landmarkt_geratetechnik",
+        "beelitz_a_kamphenkel_getrankefachgrosshandel_west_gmbh"
+      ]
+    },
+    {
+      "id": "beelitz_carl_friedrich_wilhelm_herrmann_denkmal",
+      "name": "Carl Friedrich Wilhelm Herrmann-Denkmal",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.25891783695653,
+        "lng": 12.930155785869568
+      },
+      "query": "Carl Friedrich Wilhelm, Beelitz, Germany",
+      "osm": {
+        "lat": 52.4781981,
+        "lng": 13.3287949,
+        "display_name": "Gedenktafel Carl Friedrich Wilhelm Diercke, Bundesplatz, Berlin, Deutschland",
+        "class": "historic",
+        "type": "memorial",
+        "provider": "photon"
+      },
+      "delta_m": 36428,
+      "from_city_m": 4207,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_die_drehende_kugel",
+        "beelitz_grosse_liegewiese",
+        "beelitz_gelande_der_brandenburgischen_landesgartenschau_2022",
+        "beelitz_muhlenteich_mit_fontane"
+      ]
+    },
+    {
+      "id": "beelitz_der_bootsverleih_wohlfuhlen_am_seddiner_see",
+      "name": "Der Bootsverleih - Wohlfühlen am Seddiner See",
+      "category": "tour",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.31276992000001,
+        "lng": 12.932885160000001
+      },
+      "query": "Der Bootsverleih, Beelitz, Germany",
+      "osm": {
+        "lat": 52.4108891,
+        "lng": 12.5670531,
+        "display_name": "Bootsverleih am Pfaffe-Kai, Neustädtische Wassertorstraße, Brandenburg an der Havel, Deutschland",
+        "class": "amenity",
+        "type": "boat_rental",
+        "provider": "photon"
+      },
+      "delta_m": 27132,
+      "from_city_m": 9153,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_beobachtungsturm_ungeheuerwiesen",
+        "beelitz_barfusspark_beelitz",
+        "beelitz_beelitz_heilstatten_natur_park",
+        "beelitz_bootsverleih_burgemeister",
+        "beelitz_irene_krause"
+      ]
+    },
+    {
+      "id": "beelitz_bohlensteg_blankensee",
+      "name": "Bohlensteg Blankensee",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.22937861862068,
+        "lng": 13.122292043034498
+      },
+      "query": "Bohlensteg Blankensee, Beelitz, Germany",
+      "osm": {
+        "lat": 52.3490189,
+        "lng": 13.39926,
+        "display_name": "Berliozstraße, Mahlow, Deutschland",
+        "class": "highway",
+        "type": "living_street",
+        "provider": "photon"
+      },
+      "delta_m": 23062,
+      "from_city_m": 9816,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "beelitz_feldsteinkirche_schonefeld",
+      "name": "Feldsteinkirche Schönefeld",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.22131157142858,
+        "lng": 13.001759714285715
+      },
+      "query": "Feldsteinkirche Schönefeld, Beelitz, Germany",
+      "osm": {
+        "lat": 52.2218484,
+        "lng": 13.0051759,
+        "display_name": "STS Beelitz-Schönefeld, Schönefelder Dorfstraße, Schönefeld, Deutschland",
+        "class": "building",
+        "type": "service",
+        "provider": "photon"
+      },
+      "delta_m": 240,
+      "from_city_m": 2223,
+      "status": "CHECK",
+      "flags": [
+        "house_like_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_kirchenpavillon"
+      ]
+    },
+    {
+      "id": "beelitz_forderverein_stadtpfarrkirche_beelitz_e_v",
+      "name": "Förderverein Stadtpfarrkirche Beelitz e.V.",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.231974571428566,
+        "lng": 12.975600857142854
+      },
+      "query": "Förderverein Stadtpfarrkirche Beelitz e.V., Beelitz, Germany",
+      "osm": {
+        "lat": 52.2329398,
+        "lng": 12.977243,
+        "display_name": "Evangelische Stadtpfarrkirche St. Marien – St. Nikolai, Kirchplatz, Beelitz, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 155,
+      "from_city_m": 421,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "beelitz_marina_ferch",
+      "name": "Marina Ferch",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.3136,
+        "lng": 12.93212
+      },
+      "query": "Marina Ferch, Beelitz, Germany",
+      "osm": {
+        "lat": 52.3146287,
+        "lng": 12.9323601,
+        "display_name": "Marina Ferch, Seeweg, Schwielowsee, Deutschland",
+        "class": "leisure",
+        "type": "marina",
+        "provider": "photon"
+      },
+      "delta_m": 116,
+      "from_city_m": 9257,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "beelitz_freibad_im_wasserturmpark_beelitz",
+      "name": "Freibad im Wasserturmpark Beelitz",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.239950199999996,
+        "lng": 12.9646038
+      },
+      "query": "Freibad im Wasserturmpark Beelitz, Beelitz, Germany",
+      "osm": {
+        "lat": 52.2392081,
+        "lng": 12.965752,
+        "display_name": "Freibad Wasserturmpark, Brücker Straße, Beelitz, Deutschland",
+        "class": "leisure",
+        "type": "water_park",
+        "provider": "photon"
+      },
+      "delta_m": 114,
+      "from_city_m": 1075,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_teufelsee_feuchtgebietskette_ffh",
+        "beelitz_wasserturm_sternwarte",
+        "beelitz_baum_in_tur",
+        "beelitz_stadion_des_friedens",
+        "beelitz_spielgarten_abenteuerland",
+        "beelitz_sportplatz_beelitz",
+        "beelitz_sportplatz_bundeswehr",
+        "beelitz_tvg_sally_bein_beelitz_e_v"
+      ]
+    },
+    {
+      "id": "beelitz_stadtpfarrkirche_st_marien_st_nikolai_zu_beelitz",
+      "name": "Stadtpfarrkirche St. Marien - St. Nikolai zu Beelitz",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.23294340740741,
+        "lng": 12.97731577777778
+      },
+      "query": "Stadtpfarrkirche St. Marien, Beelitz, Germany",
+      "osm": {
+        "lat": 52.2329398,
+        "lng": 12.977243,
+        "display_name": "Evangelische Stadtpfarrkirche St. Marien – St. Nikolai, Kirchplatz, Beelitz, Potsdam-Mittelmark, Brandenburg, 14547, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.16273786379520622,
+        "osm_type": "way",
+        "osm_id": 314098390,
+        "provider": "nominatim"
+      },
+      "delta_m": 5,
+      "from_city_m": 277,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_beelitz_stadt",
+        "beelitz_beelitz_zum_bahnhof",
+        "beelitz_grabhalle_friedhof_der_ev_kirchengemeinde_st_marien_st_nikolai_zu_beelit",
+        "beelitz_parkplatz_freibad_beelitz",
+        "beelitz_spielplatz_beelitz",
+        "beelitz_neues_lichtspielhaus_beelitz",
+        "beelitz_alpakahof_elsholz",
+        "beelitz_jakobs_hof_beelitz",
+        "beelitz_bockwindmuhle_beelitz",
+        "beelitz_fontane_im_ehemaligen_klarbecken",
+        "beelitz_wasserkanal_laga_beelitz",
+        "beelitz_kga_an_der_nieplitz_e_v",
+        "beelitz_ballonfahrten_schafer_brandenburg",
+        "beelitz_malraus_das_reiseburo_dippe",
+        "beelitz_lotto_toto_ina_muller_jahn",
+        "beelitz_nah_gut_piesik",
+        "beelitz_beelitzer_kaninchenspezialitaten_gmbh",
+        "beelitz_kollektiv_lost",
+        "beelitz_cafe_backerei_konditorei_neuendorff_patrick_kasten",
+        "beelitz_fsh_landmarkt_geratetechnik",
+        "beelitz_a_kamphenkel_getrankefachgrosshandel_west_gmbh"
+      ]
+    },
+    {
+      "id": "beelitz_family_moden",
+      "name": "Family Moden",
+      "category": "souvenir",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.232917875,
+        "lng": 12.978096500000001
+      },
+      "query": "Family Moden, Beelitz, Germany",
+      "osm": {
+        "lat": 52.2329314,
+        "lng": 12.9780553,
+        "display_name": "family moden, 4, Berliner Straße, Beelitz, Potsdam-Mittelmark, Brandenburg, 14547, Deutschland",
+        "class": "shop",
+        "type": "clothes",
+        "importance": 0.00005387579156171538,
+        "osm_type": "node",
+        "osm_id": 13236003978,
+        "provider": "nominatim"
+      },
+      "delta_m": 3,
+      "from_city_m": 269,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_osm_transit_1477926251"
+      ]
+    },
+    {
+      "id": "beelitz_wassermuhle_ernst_vogel",
+      "name": "Wassermühle Ernst Vogel",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.23150144444444,
+        "lng": 12.974706222222222
+      },
+      "query": "Wassermühle Ernst Vogel, Beelitz",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 497,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "beelitz_die_drehende_kugel",
+      "name": "Die drehende Kugel",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.25891768852459,
+        "lng": 12.930088967213111
+      },
+      "query": "Die drehende Kugel, Beelitz",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 4211,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_carl_friedrich_wilhelm_herrmann_denkmal",
+        "beelitz_grosse_liegewiese",
+        "beelitz_gelande_der_brandenburgischen_landesgartenschau_2022",
+        "beelitz_muhlenteich_mit_fontane"
+      ]
+    },
+    {
+      "id": "beelitz_gelande_der_brandenburgischen_landesgartenschau_2022",
+      "name": "Gelände der Brandenburgischen Landesgartenschau 2022",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.25891768852459,
+        "lng": 12.930088967213111
+      },
+      "query": "Gelände der Brandenburgischen, Beelitz, Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 4211,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_carl_friedrich_wilhelm_herrmann_denkmal",
+        "beelitz_die_drehende_kugel",
+        "beelitz_grosse_liegewiese",
+        "beelitz_muhlenteich_mit_fontane"
+      ]
+    },
+    {
+      "id": "beelitz_teufelsee_feuchtgebietskette_ffh",
+      "name": "Teufelsee-Feuchtgebietskette (FFH)",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.239950199999996,
+        "lng": 12.96460406
+      },
+      "query": "Teufelsee-Feuchtgebietskette, Beelitz",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 1075,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_wasserturm_sternwarte",
+        "beelitz_baum_in_tur",
+        "beelitz_freibad_im_wasserturmpark_beelitz",
+        "beelitz_stadion_des_friedens",
+        "beelitz_spielgarten_abenteuerland",
+        "beelitz_sportplatz_beelitz",
+        "beelitz_sportplatz_bundeswehr",
+        "beelitz_tvg_sally_bein_beelitz_e_v"
+      ]
+    },
+    {
+      "id": "beelitz_skatepark_trendsportanlage_beelitz",
+      "name": "Skatepark Trendsportanlage Beelitz",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.24083209375,
+        "lng": 12.965454418750001
+      },
+      "query": "Skatepark Trendsportanlage Beelitz, Beelitz",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 1077,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "beelitz_fontane_im_ehemaligen_klarbecken",
+      "name": "Fontäne im ehemaligen Klärbecken",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.23294340740741,
+        "lng": 12.97731577777778
+      },
+      "query": "Fontäne im ehemaligen, Beelitz, Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 277,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_beelitz_stadt",
+        "beelitz_beelitz_zum_bahnhof",
+        "beelitz_stadtpfarrkirche_st_marien_st_nikolai_zu_beelitz",
+        "beelitz_grabhalle_friedhof_der_ev_kirchengemeinde_st_marien_st_nikolai_zu_beelit",
+        "beelitz_parkplatz_freibad_beelitz",
+        "beelitz_spielplatz_beelitz",
+        "beelitz_neues_lichtspielhaus_beelitz",
+        "beelitz_alpakahof_elsholz",
+        "beelitz_jakobs_hof_beelitz",
+        "beelitz_bockwindmuhle_beelitz",
+        "beelitz_wasserkanal_laga_beelitz",
+        "beelitz_kga_an_der_nieplitz_e_v",
+        "beelitz_ballonfahrten_schafer_brandenburg",
+        "beelitz_malraus_das_reiseburo_dippe",
+        "beelitz_lotto_toto_ina_muller_jahn",
+        "beelitz_nah_gut_piesik",
+        "beelitz_beelitzer_kaninchenspezialitaten_gmbh",
+        "beelitz_kollektiv_lost",
+        "beelitz_cafe_backerei_konditorei_neuendorff_patrick_kasten",
+        "beelitz_fsh_landmarkt_geratetechnik",
+        "beelitz_a_kamphenkel_getrankefachgrosshandel_west_gmbh"
+      ]
+    },
+    {
+      "id": "beelitz_lotto_toto_ina_muller_jahn",
+      "name": "Lotto-Toto Ina Müller-Jahn",
+      "category": "souvenir",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.23294340740741,
+        "lng": 12.97731577777778
+      },
+      "query": "Lotto-Toto Ina Müller-Jahn, Beelitz",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 277,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_beelitz_stadt",
+        "beelitz_beelitz_zum_bahnhof",
+        "beelitz_stadtpfarrkirche_st_marien_st_nikolai_zu_beelitz",
+        "beelitz_grabhalle_friedhof_der_ev_kirchengemeinde_st_marien_st_nikolai_zu_beelit",
+        "beelitz_parkplatz_freibad_beelitz",
+        "beelitz_spielplatz_beelitz",
+        "beelitz_neues_lichtspielhaus_beelitz",
+        "beelitz_alpakahof_elsholz",
+        "beelitz_jakobs_hof_beelitz",
+        "beelitz_bockwindmuhle_beelitz",
+        "beelitz_fontane_im_ehemaligen_klarbecken",
+        "beelitz_wasserkanal_laga_beelitz",
+        "beelitz_kga_an_der_nieplitz_e_v",
+        "beelitz_ballonfahrten_schafer_brandenburg",
+        "beelitz_malraus_das_reiseburo_dippe",
+        "beelitz_nah_gut_piesik",
+        "beelitz_beelitzer_kaninchenspezialitaten_gmbh",
+        "beelitz_kollektiv_lost",
+        "beelitz_cafe_backerei_konditorei_neuendorff_patrick_kasten",
+        "beelitz_fsh_landmarkt_geratetechnik",
+        "beelitz_a_kamphenkel_getrankefachgrosshandel_west_gmbh"
+      ]
+    },
+    {
+      "id": "beelitz_findlingsgarten_am_seddiner_see",
+      "name": "Findlingsgarten am Seddiner See",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.26764150625001,
+        "lng": 13.038080481249999
+      },
+      "query": "Findlingsgarten am Seddiner, Beelitz, Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 5419,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "beelitz_bootsverleih_burgemeister",
+      "name": "Bootsverleih Burgemeister",
+      "category": "tour",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.31276992000001,
+        "lng": 12.932885160000001
+      },
+      "query": "Bootsverleih Burgemeister, Beelitz",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 9153,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "beelitz_beobachtungsturm_ungeheuerwiesen",
+        "beelitz_barfusspark_beelitz",
+        "beelitz_beelitz_heilstatten_natur_park",
+        "beelitz_der_bootsverleih_wohlfuhlen_am_seddiner_see",
+        "beelitz_irene_krause"
+      ]
+    },
+    {
+      "id": "beelitz_wasserspiel_auf_dem_spargelhof_klaistow",
+      "name": "Wasserspiel auf dem Spargelhof Klaistow",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.29689414285714,
+        "lng": 12.860276057142856
+      },
+      "query": "Wasserspiel auf dem Spargelhof Klaistow, Beelitz, Germany",
+      "osm": {
+        "lat": 52.2964575,
+        "lng": 12.8604473,
+        "display_name": "Hofrestaurant Spargelhof Klaistow, Glindower Straße, Busendorf, Deutschland",
+        "class": "amenity",
+        "type": "restaurant",
+        "provider": "photon"
+      },
+      "delta_m": 50,
+      "from_city_m": 10562,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "beelitz_beelitz_heilstatten_das_alpenhaus",
+      "name": "Beelitz Heilstätten „Das Alpenhaus“",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.26305401707316,
+        "lng": 12.919845892682925
+      },
+      "query": "Beelitz Heilstätten „Das Alpenhaus“, Beelitz, Germany",
+      "osm": {
+        "lat": 52.2627555,
+        "lng": 12.9193092,
+        "display_name": "Warum ist das Alpenhaus eine Ruine?, Baumkronenpfad, Beelitz, Deutschland",
+        "class": "information",
+        "type": "board",
+        "provider": "photon"
+      },
+      "delta_m": 49,
+      "from_city_m": 5043,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "beelitz_alte_posthalterei_beelitz",
+      "name": "Alte Posthalterei Beelitz",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.232173777777774,
+        "lng": 12.977816888888889
+      },
+      "query": "Alte Posthalterei Beelitz, Beelitz, Germany",
+      "osm": {
+        "lat": 52.232079,
+        "lng": 12.9775012,
+        "display_name": "\"Alte Posthalterei\" - Heimatmuseum Beelitz, Poststraße, Beelitz, Potsdam-Mittelmark, Brandenburg, 14547, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.00005387579156171538,
+        "osm_type": "node",
+        "osm_id": 313101957,
+        "provider": "nominatim"
+      },
+      "delta_m": 24,
+      "from_city_m": 354,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "beelitz_obstplantage",
+      "name": "Obstplantage",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.261104599999996,
+        "lng": 12.930742599999999
+      },
+      "query": "Obstplantage, Beelitz, Germany",
+      "osm": {
+        "lat": 52.2610563,
+        "lng": 12.9305864,
+        "display_name": "Obstplantage, Beelitz-Heilstätten, Beelitz, Potsdam-Mittelmark, Brandenburg, 14547, Deutschland",
+        "class": "highway",
+        "type": "residential",
+        "importance": 0.05338720912489506,
+        "osm_type": "way",
+        "osm_id": 1196382510,
+        "provider": "nominatim"
+      },
+      "delta_m": 12,
+      "from_city_m": 4333,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "beelitz_einwohnermeldeamt_beelitz",
+      "name": "Einwohnermeldeamt Beelitz",
+      "category": "verwaltung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.232067857142866,
+        "lng": 12.976544714285712
+      },
+      "query": "Einwohnermeldeamt Beelitz, Beelitz, Germany",
+      "osm": {
+        "lat": 52.2321447,
+        "lng": 12.9765605,
+        "display_name": "Einwohnermeldeamt Stadt Beelitz, 10, 11, Poststraße, Beelitz, Potsdam-Mittelmark, Brandenburg, 14547, Deutschland",
+        "class": "office",
+        "type": "government",
+        "importance": 0.00005387579156171538,
+        "osm_type": "node",
+        "osm_id": 13136827901,
+        "provider": "nominatim"
+      },
+      "delta_m": 9,
+      "from_city_m": 386,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "beelitz_waldspielplatz_beelitz",
+      "name": "Waldspielplatz Beelitz",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.2439902875,
+        "lng": 12.940257362499999
+      },
+      "query": "Waldspielplatz Beelitz, Beelitz, Germany",
+      "osm": {
+        "lat": 52.2439872,
+        "lng": 12.9403362,
+        "display_name": "Waldspielplatz, Siebenbrüderweg, Beelitz, Potsdam-Mittelmark, Brandenburg, 14547, Deutschland",
+        "class": "leisure",
+        "type": "playground",
+        "importance": 0.00005387579156171538,
+        "osm_type": "way",
+        "osm_id": 1478523741,
+        "provider": "nominatim"
+      },
+      "delta_m": 5,
+      "from_city_m": 2775,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "beelitz_regionales_spezialitaten",
+      "name": "Regionales & Spezialitäten",
+      "category": "souvenir",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.2334605,
+        "lng": 12.977692875
+      },
+      "query": "Regionales, Beelitz, Germany",
+      "osm": {
+        "lat": 52.2334482,
+        "lng": 12.9777476,
+        "display_name": "Regionales&Spezialitäten, Berliner Straße, Beelitz, Potsdam-Mittelmark, Brandenburg, 14547, Deutschland",
+        "class": "shop",
+        "type": "deli",
+        "importance": 0.00005387579156171538,
+        "osm_type": "node",
+        "osm_id": 9861026007,
+        "provider": "nominatim"
+      },
+      "delta_m": 4,
+      "from_city_m": 215,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "beelitz_dorfkirche_schlunkendorf",
+      "name": "Dorfkirche Schlunkendorf",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.24269416666666,
+        "lng": 13.018051499999999
+      },
+      "query": "Dorfkirche Schlunkendorf, Beelitz, Germany",
+      "osm": {
+        "lat": 52.2427053,
+        "lng": 13.018083,
+        "display_name": "Dorfkirche Schlunkendorf, 18, Schlunkendorfer Dorfstraße, Schlunkendorf, Beelitz, Potsdam-Mittelmark, Brandenburg, 14547, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.07194870560319186,
+        "osm_type": "way",
+        "osm_id": 28440518,
+        "provider": "nominatim"
+      },
+      "delta_m": 2,
+      "from_city_m": 2816,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "beelitz_dorfkirche_schape",
+      "name": "Dorfkirche Schäpe",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.20987232,
+        "lng": 12.89941862
+      },
+      "query": "Dorfkirche Schäpe, Beelitz, Germany",
+      "osm": {
+        "lat": 52.2098894,
+        "lng": 12.8994297,
+        "display_name": "Dorfkirche Schäpe, Schäpe, Beelitz, Potsdam-Mittelmark, Brandenburg, 14547, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.09078915819201436,
+        "osm_type": "way",
+        "osm_id": 310712303,
+        "provider": "nominatim"
+      },
+      "delta_m": 2,
+      "from_city_m": 6084,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "beelitz_dorfkirche_reesdorf",
+      "name": "Dorfkirche Reesdorf",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.21977173076924,
+        "lng": 12.921675684615384
+      },
+      "query": "Dorfkirche Reesdorf, Beelitz, Germany",
+      "osm": {
+        "lat": 52.2197712,
+        "lng": 12.9216875,
+        "display_name": "Dorfkirche Reesdorf, Reesdorfer Dorfstraße, Reesdorf, Beelitz, Potsdam-Mittelmark, Brandenburg, 14547, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.10540294855860563,
+        "osm_type": "way",
+        "osm_id": 292370450,
+        "provider": "nominatim"
+      },
+      "delta_m": 1,
+      "from_city_m": 4238,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    }
+  ]
+}

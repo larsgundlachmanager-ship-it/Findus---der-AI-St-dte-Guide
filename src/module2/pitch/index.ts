@@ -21,6 +21,8 @@ export {
   resolveVisitAtMs,
   buildPrefSliceForPitch,
   parseWishesFromText,
+  mergeProfileDietIntoWishes,
+  dietLabelsFromProfile,
   buildPitchParentBridge,
   clampBridgeWords,
 } from './parentBrief';
@@ -43,10 +45,21 @@ export {
   clearPitchSession,
 } from './pitchDeepAppend';
 export { buildPitchActions } from './pitchActions';
-export { filterAndRank } from './wishFilterRank';
+export { filterAndRank, filterAndRankPool } from './wishFilterRank';
 export { shouldHandoffToPitchModule } from './shouldHandoffPitch';
+export {
+  looksLikePicnicQuery,
+  isPicnicUnsuitableVenue,
+} from './picnicIntent';
 export { researchPitchAsAgentResult } from './pitchFactLane';
 export {
   buildPitchRequestFromText,
   buildPitchRequestFromWish,
 } from './buildPitchRequest';
+export {
+  parseCall1Criteria,
+  mergeCall1Criteria,
+  formatCall1CriteriaForPrompt,
+  visitAtMsFromCall1When,
+} from './call1Criteria';
+export type { Call1Criterion, Call1CriterionRole } from './call1Criteria';

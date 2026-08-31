@@ -40,6 +40,122 @@ export function isTrivialExpandQuery(userText: string): boolean {
   return false;
 }
 
+/** SHOW_MORE-Buttons die „Noch mehr / Mehr Historie“ meinen (nicht Reservieren/Timer). */
+export function isExpandShowMoreAction(a: {
+  label?: string;
+  payload?: {
+    module1DeepDive?: boolean;
+    expandKind?: string;
+    textPrompt?: string;
+  };
+}): boolean {
+  if (a.payload?.module1DeepDive || a.payload?.expandKind) return true;
+  const label = a.label ?? '';
+  const prompt = a.payload?.textPrompt ?? '';
+  if (
+    /\b(noch\s+mehr|mehr\s+historie|mehr\s+dazu|mehr\s+zum)\b/iu.test(label)
+  ) {
+    return true;
+  }
+  if (
+    /\b(erzähl\s+mir\s+noch\s+mehr|mehr\s+zur\s+geschichte|mehr\s+historie|max\s*3000)\b/iu.test(
+      prompt,
+    )
+  ) {
+    return true;
+  }
+  return false;
+}
+
+/**
+ * „Noch mehr“ nur wenn wirklich noch Substanz möglich ist.
+ * - Modul 1 (POI-Story): ja
+ * - Geschichte / Kultur / Sight: ja
+ * - Nav (M3), Planung (M5), Pitch/Entscheidung, Einkauf, Uhr: nein
+ * Suppress-Regeln am User-Text; Speech allein öffnet keinen Expand.
+ */
+export function shouldOfferExpandMore(opts: {
+  userText?: string;
+  speechText?: string;
+  module1?: boolean | { activity?: boolean; hotel?: boolean };
+  /** Deep-Dive schon gelaufen */
+  deepAlready?: boolean;
+  /** Kultur-/Sight-Kontext (z. B. Museum-Subject im Knowledge-Agent) */
+  culturePlace?: boolean;
+}): boolean {
+  if (opts.deepAlready) return false;
+  const user = (opts.userText ?? '').replace(/\s+/g, ' ').trim();
+  const speech = (opts.speechText ?? '').replace(/\s+/g, ' ').trim();
+  const blob = `${user} ${speech}`;
+
+  // Modul-1 Arrival / Activity-Story → „Mehr Historie“ / „Mehr dazu“
+  // (vor Trivial-Check: Karte oft ohne User-Utterance)
+  if (opts.module1) return true;
+
+  if (isTrivialExpandQuery(user || speech)) return false;
+
+  // Suppress: User-Intent (nicht Speech — sonst blockiert Plan-Wort in der Antwort fälschlich)
+  if (
+    /\b(bring\s+mich|navigier|navi(?:gation)?\s+(?:zu|nach|zum|zur)|führ\s+mich|fuehr\s+mich|route\s+(?:zu|nach|zum|zur)|stopp\s+nav|navigation\s+stopp)\b/iu.test(
+      user,
+    )
+  ) {
+    return false;
+  }
+
+  if (
+    /\b(plane?\s+mir|planen|planung|tagesplan|timeline|kalender|einplanen|durchplanen|termin\s+(?:um|ein|machen|für|fuer)|wecker\b|timer\b|erinner\s+mich|leave[\s-]?by|abreisen)\b/iu.test(
+      user,
+    )
+  ) {
+    return false;
+  }
+
+  if (
+    /\b(welche[srn]?\s+(?:pizza|burger|sushi|restaurant|hotel|option|ist|wäre|waere)|was\s+empfiehl|zwei\s+option|option\s+[ab]|🥇|🥈)\b/iu.test(
+      user,
+    ) ||
+    (/\b(pizza|burger|sushi)\b/iu.test(user) &&
+      /\b(empfehl|beste|oder|welche)\b/iu.test(user) &&
+      !/\b(geschichte|historie|museum)\b/iu.test(user))
+  ) {
+    return false;
+  }
+
+  if (
+    /\b(zahnbürste|zahnbuerste|kaufen|besorgen|einkauf|rossmann|\bdm\b|gutschein|wie\s+spät|wie\s+spaet|uhrzeit|wetter\s+heute|guten\s+(morgen|tag|abend))\b/iu.test(
+      user,
+    )
+  ) {
+    return false;
+  }
+
+  // Kultur-Ort / Sight vom Agenten
+  if (opts.culturePlace) return true;
+
+  // Echte Tiefenfrage / Ortsgeschichte
+  if (
+    /\b(mehr\s+(?:dazu|historie|geschichte)|erzähl\s+mehr|erzaehl\s+mehr|vertief|geschichte|historie|wie\s+alt\b|wer\s+(?:hat|war)\b|was\s+ist\s+das|warum\s+steht)\b/iu.test(
+      user,
+    )
+  ) {
+    return true;
+  }
+
+  // „Erzähl mir von X“ nur mit Kultur-/Geschichts-Anker
+  if (
+    /\b(erzähl|erzaehl|was\s+ist|wer\s+ist)\b/iu.test(user) &&
+    /\b(museum|denkmal|kirche|schloss|turm|dom|galerie|ausstellung|geschichte|historie|sehenswürdig)\b/iu.test(
+      blob,
+    )
+  ) {
+    return true;
+  }
+
+  // Alltag / Concierge-Default: kein Placebo-„Noch mehr“
+  return false;
+}
+
 export function scanOpportunities(opts: {
   speechText: string;
   userText?: string;
@@ -90,8 +206,21 @@ export function scanOpportunities(opts: {
     /\b(museum|ticket|eintritt|ausstellung|führung|fuehrung|theater|konzert)\b/iu.test(
       blob,
     );
+
+  // Reine Nav/ETA-Turns: kein WLAN-/Mehr-Spam
+  const navOnlyTurn =
+    wantsNav &&
+    !foodish &&
+    !hotelish &&
+    !culture &&
+    !opts.module1 &&
+    !/\b(speise|menü|menu|ticket|eintritt|zimmer|hotel|erzähl|geschichte)\b/iu.test(
+      blob,
+    );
+
   const netBad =
-    /\b(netz|wlan|wifi|roaming|offline|kein\s+empfang|schlechtes?\s+netz|daten)\b/iu.test(
+    !navOnlyTurn &&
+    /\b(wlan|wifi|wi-?fi|roaming|kein\s+empfang|schlechtes?\s+netz|kein\s+netz|offline\s+modus)\b/iu.test(
       blob,
     );
   const abroad =
@@ -104,11 +233,16 @@ export function scanOpportunities(opts: {
     ) && !foodish;
 
   // Route / Maps für genannte Orte — bei Hotel mit Book-URL nicht (Buchen ist Produkt)
+  // Modul-1 Arrival: User steht schon am Ort — kein Self-Route / Self-Maps
   for (const ent of opts.entities) {
     if (hotelish && (ent.bookUrl || looksHotelUrl(ent.websiteUrl))) {
       continue;
     }
-    if (wantsNav || foodish || hotelish || culture || opts.module1) {
+    if (opts.module1) {
+      // Arrival-Karte: keine Navigation zum eigenen POI
+      continue;
+    }
+    if (wantsNav || foodish || hotelish || culture) {
       push(
         out,
         'route',
@@ -183,23 +317,28 @@ export function scanOpportunities(opts: {
     push(out, 'weather', 70, 'Wetter', primary);
   }
 
-  // Noch mehr — nicht bei Trivialfragen
-  if (!isTrivialExpandQuery(user || speech)) {
-    const expandScore =
-      opts.module1 || knowledge || culture || foodish || hotelish ? 75 : 58;
-    if (expandScore >= OPPORTUNITY_SCORE_MIN) {
-      push(
-        out,
-        'expand',
-        expandScore,
-        opts.module1?.activity
-          ? 'Mehr zum Aktivitäts-Ort'
+  // Noch mehr — nur Modul-1 / echte Tiefenfrage (nie Nav/Plan/Pitch-Spam)
+  if (
+    shouldOfferExpandMore({
+      userText: user,
+      speechText: speech,
+      module1: opts.module1,
+    })
+  ) {
+    const expandScore = opts.module1 ? 88 : culture || knowledge ? 78 : 70;
+    push(
+      out,
+      'expand',
+      expandScore,
+      opts.module1?.activity
+        ? 'Mehr zum Aktivitäts-Ort'
+        : opts.module1
+          ? 'Mehr Historie am Ort'
           : knowledge
             ? 'Tiefere Antwort'
             : 'Mehr Historie / Tiefe',
-        primary,
-      );
-    }
+      primary,
+    );
   }
 
   // Dedup kind+entity

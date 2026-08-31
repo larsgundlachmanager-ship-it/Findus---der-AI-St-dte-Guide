@@ -1,0 +1,246 @@
+{
+  "city_id": "tettnang",
+  "apply": true,
+  "storyOnly": true,
+  "maxDelta": 80,
+  "country": "Germany",
+  "summary": {
+    "ok": 4,
+    "check": 3,
+    "bad": 2,
+    "errors": 0,
+    "applied": 3,
+    "skipped_directory": 265,
+    "skipped_cached_google": 8
+  },
+  "rows": [
+    {
+      "id": "tettnang_elektronikmuseum_tettnang",
+      "name": "Elektronikmuseum Tettnang",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 47.67190399999999,
+        "lng": 9.588696272727272
+      }
+    },
+    {
+      "id": "tettnang_st_gallus",
+      "name": "Pfarrkirche St. Gallus",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 47.67358670588234,
+        "lng": 9.588971294117648
+      }
+    },
+    {
+      "id": "tettnang_kronenbrunnen",
+      "name": "Kronenbrunnen",
+      "before": {
+        "lat": 47.67167114,
+        "lng": 9.58900784
+      },
+      "google": {
+        "lat": 47.671679399999995,
+        "lng": 9.5890273,
+        "place_id": "ChIJETT9bWsHm0cR1NQ-U1aFBM8",
+        "address": "Kirchstraße 1, 88069 Tettnang, Germany"
+      },
+      "delta_m": 2,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "tettnang_fliegerdenkmal",
+      "name": "Fliegerdenkmal Schäferhof / Loretowald",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 47.660767681578946,
+        "lng": 9.588003578947369
+      }
+    },
+    {
+      "id": "tettnang_schlosspark_tettnang",
+      "name": "Schlosspark Tettnang",
+      "before": {
+        "lat": 47.66937679375001,
+        "lng": 9.585274718749998
+      },
+      "google": {
+        "lat": 47.669451099999996,
+        "lng": 9.585725499999999,
+        "place_id": "ChIJ-5yKbggHm0cRIrFcFCxu-1I",
+        "address": "Schützenstraße 5, 88069 Tettnang, Germany"
+      },
+      "delta_m": 35,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "tettnang_neues_schloss",
+      "name": "Neues Schloss Tettnang",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 47.67011394,
+        "lng": 9.58595992
+      }
+    },
+    {
+      "id": "tettnang_altes_schloss",
+      "name": "Altes Schloss · Rathaus",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 47.6703312,
+        "lng": 9.58645055
+      }
+    },
+    {
+      "id": "tettnang_torschloss",
+      "name": "Torschloss & Montfort-Museum",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 47.67182330000001,
+        "lng": 9.5886383
+      }
+    },
+    {
+      "id": "tettnang_hopfengut_no20",
+      "name": "Hopfengut N°20 · Hopfenmuseum",
+      "before": {
+        "lat": 47.690085181818176,
+        "lng": 9.61612418181818
+      },
+      "google": {
+        "lat": 47.6905211,
+        "lng": 9.6163814,
+        "place_id": "ChIJhcYkDxGom0cRkDeq6UftzoY",
+        "address": "Hopfengut 20, 88069 Tettnang-Siggenweiler, Germany"
+      },
+      "delta_m": 52,
+      "status": "CHECK",
+      "streetview": "ZERO_RESULTS",
+      "applied": true
+    },
+    {
+      "id": "tettnang_baerenplatz",
+      "name": "Bärenplatz · ZOB & Kronenbrauerei",
+      "before": {
+        "lat": 47.6714932,
+        "lng": 9.5888419
+      },
+      "google": {
+        "lat": 47.671561,
+        "lng": 9.588956,
+        "place_id": "ChIJhz_rg48Hm0cRfjNZMpGlHlU",
+        "address": "Bärenpl. 7, 88069 Tettnang, Germany"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "tettnang_altstadt",
+      "name": "Tettnang Altstadt · Fußachsen",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 47.671890999999995,
+        "lng": 9.589036692307692
+      }
+    },
+    {
+      "id": "tettnang_ehemaliges_schiesshaus",
+      "name": "Ehemaliges Schießhaus",
+      "before": {
+        "lat": 47.66882455555555,
+        "lng": 9.584243444444446
+      },
+      "google": {
+        "lat": 47.6688221,
+        "lng": 9.5842486,
+        "place_id": "ChIJ01Jw-M8Hm0cR0O6jGVVyt3s",
+        "address": "88069 Tettnang, Germany"
+      },
+      "delta_m": 0,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "tettnang_hopfenpfad",
+      "name": "Tettnanger Hopfenpfad",
+      "before": {
+        "lat": 47.67033116666667,
+        "lng": 9.586450333333334
+      },
+      "google": {
+        "lat": 47.689665999999995,
+        "lng": 9.6163937,
+        "place_id": "ChIJBVI4PYkHm0cRbpsxsrtAMFQ",
+        "address": "Meistersteig 30, 88069 Tettnang, Germany"
+      },
+      "delta_m": 3106,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "tettnang_dorfweiher_siggenweiler",
+      "name": "Dorfweiher Siggenweiler",
+      "before": {
+        "lat": 47.6922,
+        "lng": 9.6183996
+      },
+      "google": {
+        "lat": 47.6921805,
+        "lng": 9.6187248,
+        "place_id": "EjBBbSBEb3Jmd2VpaGVyLCA4OCBUZXR0bmFuZy1TaWdnZW53ZWlsZXIsIEdlcm1hbnkiLiosChQKEgl7h30IE6ibRxGcKKEVEj6B_BIUChIJBWtI4RGom0cRs9C1uiZKsrs",
+        "address": "Am Dorfweiher, Tettnang-Siggenweiler, Germany"
+      },
+      "delta_m": 24,
+      "status": "OK",
+      "streetview": "ZERO_RESULTS"
+    },
+    {
+      "id": "tettnang_wildpark_sonnenhalde",
+      "name": "Wildpark Sonnenhalde",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 47.65019196666666,
+        "lng": 9.677954049999999
+      }
+    },
+    {
+      "id": "tettnang_rappertsweiler_gedenkstele",
+      "name": "Gedenkstele Rappertsweiler · Bauernkrieg 1525",
+      "before": {
+        "lat": 47.64083094,
+        "lng": 9.66141146
+      },
+      "google": {
+        "lat": 47.641349399999996,
+        "lng": 9.6618258,
+        "place_id": "ChIJhdlTTOkJm0cRIvBRQtnG5cY",
+        "address": "88069 Tettnang, Germany"
+      },
+      "delta_m": 65,
+      "status": "CHECK",
+      "streetview": "ZERO_RESULTS",
+      "applied": true
+    },
+    {
+      "id": "tettnang_kapelle_bruennensweiler",
+      "name": "Kapelle Maria Königin des Friedens · Brünnensweiler",
+      "before": {
+        "lat": 47.6868041611111,
+        "lng": 9.606391544444445
+      },
+      "google": {
+        "lat": 47.6831641,
+        "lng": 9.609787299999999,
+        "place_id": "ChIJ5dMGd_2pm0cRJ99nAYMtv-Y",
+        "address": "Brünnensweiler 9, 88069 Tettnang, Germany"
+      },
+      "delta_m": 478,
+      "status": "BAD",
+      "streetview": "OK"
+    }
+  ]
+}

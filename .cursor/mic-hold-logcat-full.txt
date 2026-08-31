@@ -1,0 +1,419 @@
+﻿--------- beginning of main
+08-30 22:35:03.625   369   611 D CCodecConfig: no c2 equivalents for durationUs
+08-30 22:35:03.625   369   611 D CCodecConfig: no c2 equivalents for track-id
+08-30 22:35:03.625   369   611 D CCodecConfig: no c2 equivalents for language
+08-30 22:35:03.625   369   611 D CCodecConfig: no c2 equivalents for encoder-delay
+08-30 22:35:03.625   369   611 D CCodecConfig: no c2 equivalents for encoder-padding
+08-30 22:35:03.625   369   611 D CCodecConfig: no c2 equivalents for file-format
+08-30 22:35:03.625   369   611 D CCodecConfig: no c2 equivalents for flags
+08-30 22:35:03.626  2705  7989 E Codec2-ComponentInterface: We have a failed config
+08-30 22:35:03.626   369   611 D CCodecConfig: config failed => CORRUPTED
+08-30 22:35:03.626   369   611 D CCodecConfig: c2 config diff is   c2::u32 coded.bitrate.value = 320000
+08-30 22:35:03.626   608   608 I cr_ChildProcessService: Creating new ChildProcessService pid=608
+08-30 22:35:03.627   369   611 W Codec2Client: query -- param skipped: index = 1107298332.
+08-30 22:35:03.627   369   611 D CCodec  : client requested max input size 3000, which is smaller than what component recommended (8192); overriding with component recommendation.
+08-30 22:35:03.627   369   611 W CCodec  : This behavior is subject to change. It is recommended that app developers double check whether the requested max input size is in reasonable range.
+08-30 22:35:03.627   369   611 D CCodec  : encoding statistics level = 0
+08-30 22:35:03.627   369   611 D CCodec  : setup formats input: AMessage(what = 0x00000000) = {
+08-30 22:35:03.627   369   611 D CCodec  :   int32_t bitrate = 320000
+08-30 22:35:03.627   369   611 D CCodec  :   int32_t channel-count = 2
+08-30 22:35:03.627   369   611 D CCodec  :   int32_t max-input-size = 8192
+08-30 22:35:03.627   369   611 D CCodec  :   string mime = "audio/mpeg"
+08-30 22:35:03.627   369   611 D CCodec  :   int32_t sample-rate = 44100
+08-30 22:35:03.627   369   611 D CCodec  : }
+08-30 22:35:03.627   369   611 D CCodec  : setup formats output: AMessage(what = 0x00000000) = {
+08-30 22:35:03.627   369   611 D CCodec  :   int32_t buffer-batch-max-output-size = 0
+08-30 22:35:03.627   369   611 D CCodec  :   int32_t buffer-batch-threshold-output-size = 0
+08-30 22:35:03.627   369   611 D CCodec  :   int32_t channel-count = 2
+08-30 22:35:03.627   369   611 D CCodec  :   string mime = "audio/raw"
+08-30 22:35:03.627   369   611 D CCodec  :   int32_t sample-rate = 44100
+08-30 22:35:03.627   369   611 D CCodec  :   int32_t encoder-delay = 576
+08-30 22:35:03.627   369   611 D CCodec  :   int32_t encoder-padding = 1474
+08-30 22:35:03.627   369   611 D CCodec  :   int32_t android._config-pcm-encoding = 2
+08-30 22:35:03.627   369   611 D CCodec  : }
+08-30 22:35:03.627   369   611 I CCodecConfig: query failed after returning 8 values (BAD_INDEX)
+08-30 22:35:03.627   369   611 E m.spotify.music: Failed to query component interface for required system resources: 6
+08-30 22:35:03.628   369   611 W Codec2Client: query -- param skipped: index = 1342179345.
+08-30 22:35:03.628   369   611 W Codec2Client: query -- param skipped: index = 2415921170.
+08-30 22:35:03.629   369   611 D CCodecBufferChannel: [c2.android.mp3.decoder#685] Created input block pool with allocatorID 16 => poolID 18 - OK (0)
+08-30 22:35:03.631   369   611 I CCodecBufferChannel: [c2.android.mp3.decoder#685] Created output block pool with allocatorID 16 => poolID 7889 - OK
+08-30 22:35:03.631   369   611 D CCodecBufferChannel: [c2.android.mp3.decoder#685] Configured output block pool ids 7889 => OK
+08-30 22:35:03.631  2705 23378 E Codec2-ComponentInterface: We have a failed config
+08-30 22:35:03.632   369   611 D CCodecBufferChannel: [c2.android.mp3.decoder#685] start: updating output delay 0
+08-30 22:35:03.633  2705   631 D SimpleC2Component: Using output block pool with poolID 7889 => got 7889 - 0
+08-30 22:35:03.641  2705   631 I C2SoftMp3Dec: Reconfiguring decoder: 0->44100 Hz, 0->2 channels
+08-30 22:35:03.679  3070  4413 D ConnectivityService: requestNetwork for uid/pid:10383/369 activeRequest: null callbackRequest: 78023 [NetworkRequest [ REQUEST id=78024, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED&NOT_BANDWIDTH_CONSTRAINED Uid: 10383 RequestorUid: 10383 RequestorPkg: com.spotify.music UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647 isUidTracked: false declaredMethods: AVAIL|LOST|NC|BLK
+08-30 22:35:03.682   369   610 D CCodecBufferChannel: [c2.android.mp3.decoder#4] MediaCodec discarded an unknown buffer
+08-30 22:35:03.682   369   610 D CCodecBufferChannel: [c2.android.mp3.decoder#4] MediaCodec discarded an unknown buffer
+08-30 22:35:03.683  3070  4166 D WifiNetworkFactory: got request NetworkRequest [ REQUEST id=78024, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED&NOT_BANDWIDTH_CONSTRAINED Uid: 10383 RequestorUid: 10383 RequestorPkg: com.spotify.music UnderlyingNetworks: Null] ]
+08-30 22:35:03.683  3070  4166 D UntrustedWifiNetworkFactory: got request NetworkRequest [ REQUEST id=78024, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED&NOT_BANDWIDTH_CONSTRAINED Uid: 10383 RequestorUid: 10383 RequestorPkg: com.spotify.music UnderlyingNetworks: Null] ]
+08-30 22:35:03.684  3070  4166 D OemPaidWifiNetworkFactory: got request NetworkRequest [ REQUEST id=78024, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED&NOT_BANDWIDTH_CONSTRAINED Uid: 10383 RequestorUid: 10383 RequestorPkg: com.spotify.music UnderlyingNetworks: Null] ]
+08-30 22:35:03.684  3070  4166 D MultiInternetWifiNetworkFactory: got request NetworkRequest [ REQUEST id=78024, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED&NOT_BANDWIDTH_CONSTRAINED Uid: 10383 RequestorUid: 10383 RequestorPkg: com.spotify.music UnderlyingNetworks: Null] ]
+08-30 22:35:03.684  3070  4173 D ConnectivityService: NetReassign [78024 : null ÔåÆ 320] [c 2] [a 1] [i 2]
+08-30 22:35:03.689  2554  4990 D StNfcHal: (#028EE) Rx 6f 02 0f (hidden)
+08-30 22:35:03.689  2554  4989 D StNfcHal: HalStopTimer 
+08-30 22:35:03.689   369   391 W AudioCapabilities: Unsupported mediaType audio/alac
+08-30 22:35:03.691   369   391 W AudioCapabilities: Unsupported mediaType audio/x-ape
+08-30 22:35:03.692   369   391 W AudioCapabilities: Unsupported mediaType audio/dsd
+08-30 22:35:03.693   369   635 I hw-BpHwBinder: onLastStrongRef automatically unlinking death recipients
+08-30 22:35:03.693  2705 23378 I hw-BpHwBinder: onLastStrongRef automatically unlinking death recipients
+08-30 22:35:03.693  2705 23378 D BufferPoolAccessor2.0: Destruction - bufferpool2 0xb4000075714344c8 cached: 0/0M, 0/0% in use; allocs: 0, 0% recycled; transfers: 0, 0% unfetched
+08-30 22:35:03.694   369   391 W AudioCapabilities: Unsupported mediaType audio/amr-wb-plus
+08-30 22:35:03.694   369   391 W AudioCapabilities: Unsupported mediaType audio/amr-wb+
+08-30 22:35:03.694  2108  3617 D vendor.qti.bluetooth@1.1-wake_lock: Release wakelock is released 
+08-30 22:35:03.694   369   391 W AudioCapabilities: Unsupported mediaType audio/x-ms-wma
+08-30 22:35:03.694   369   391 W AudioCapabilities: Unsupported mediaType audio/alac
+08-30 22:35:03.695   369   391 W AudioCapabilities: Unsupported mediaType audio/x-ape
+08-30 22:35:03.702   369   369 I cr_CombinedPProvider: #linkNativeInternal() 1
+08-30 22:35:03.711   369   369 I cr_AppResProvider: #getApplicationRestrictionsFromUserManager() Bundle[EMPTY_PARCEL]
+08-30 22:35:03.711   369   369 I cr_PolicyProvider: #notifySettingsAvailable() 0
+08-30 22:35:03.711   369   369 I cr_CombinedPProvider: #onSettingsAvailable() 0
+08-30 22:35:03.711   369   369 I cr_CombinedPProvider: #flushPolicies()
+08-30 22:35:03.734   369   391 W VideoCapabilities: Unrecognized profile 8 for video/hevc
+08-30 22:35:03.741   369   391 W VideoCapabilities: Unrecognized profile 8 for video/hevc
+08-30 22:35:03.748   369   391 W VideoCapabilities: Unrecognized profile 8 for video/hevc
+08-30 22:35:03.754  2136  4253 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0xE6360D325B2 hal_ts 823954277319609 lux=9.785 Channel0-5=159.0,99.0,18.0,88.0,0.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+08-30 22:35:03.756   369   391 W VideoCapabilities: Unrecognized profile 8 for video/hevc
+08-30 22:35:03.769   369   611 D CCodecBufferChannel: [c2.android.mp3.decoder#685] MediaCodec discarded an unknown buffer
+08-30 22:35:03.769   369   611 D CCodecBufferChannel: [c2.android.mp3.decoder#685] MediaCodec discarded an unknown buffer
+08-30 22:35:03.769   369   611 D CCodecBufferChannel: [c2.android.mp3.decoder#685] MediaCodec discarded an unknown buffer
+08-30 22:35:03.769   369   391 W VideoCapabilities: Unrecognized profile 8 for video/hevc
+08-30 22:35:03.771   369   391 W VideoCapabilities: Unrecognized profile 8 for video/hevc
+08-30 22:35:03.773   369   391 W VideoCapabilities: Unsupported mime image/vnd.android.heic
+08-30 22:35:03.777   369   644 I hw-BpHwBinder: onLastStrongRef automatically unlinking death recipients
+08-30 22:35:03.777  2705  7989 I hw-BpHwBinder: onLastStrongRef automatically unlinking death recipients
+08-30 22:35:03.777  2705  7989 I hw-BpHwBinder: onLastStrongRef automatically unlinking death recipients
+08-30 22:35:03.777  2705  7989 D BufferPoolAccessor2.0: Destruction - bufferpool2 0xb400007571440268 cached: 0/0M, 0/0% in use; allocs: 0, 0% recycled; transfers: 0, 0% unfetched
+08-30 22:35:03.801   369   391 W AudioCapabilities: Unsupported mime audio/alac
+08-30 22:35:03.803   369   391 W AudioCapabilities: Unsupported mime audio/x-ape
+08-30 22:35:03.803   369   391 W AudioCapabilities: Unsupported mime audio/dsd
+08-30 22:35:03.803   369   391 W AudioCapabilities: Unsupported mime audio/amr-wb-plus
+08-30 22:35:03.803   369   391 W AudioCapabilities: Unsupported mime audio/amr-wb+
+08-30 22:35:03.803   369   391 W AudioCapabilities: Unsupported mime audio/x-ms-wma
+08-30 22:35:03.804   369   391 W AudioCapabilities: Unsupported mime audio/alac
+08-30 22:35:03.804   369   391 W AudioCapabilities: Unsupported mime audio/x-ape
+08-30 22:35:03.814   369   391 W VideoCapabilities: Unrecognized profile 8 for video/hevc
+08-30 22:35:03.814   369   391 W VideoCapabilities: Unrecognized profile 8 for video/hevc
+08-30 22:35:03.814   369   391 W VideoCapabilities: Unrecognized profile 8 for video/hevc
+08-30 22:35:03.815   369   391 W VideoCapabilities: Unrecognized profile 8 for video/hevc
+08-30 22:35:03.815   369   391 W VideoCapabilities: Unrecognized profile 8 for video/hevc
+08-30 22:35:03.815   369   391 W VideoCapabilities: Unrecognized profile 8 for video/hevc
+08-30 22:35:03.818   369   391 W VideoCapabilities: Unrecognized profile 8 for video/hevc
+08-30 22:35:03.819   369   391 W VideoCapabilities: Unrecognized profile 8 for video/hevc
+08-30 22:35:03.819   369   391 W VideoCapabilities: Unrecognized profile 8 for video/hevc
+08-30 22:35:03.819   369   391 W VideoCapabilities: Unrecognized profile 8 for video/hevc
+08-30 22:35:03.819   369   391 W VideoCapabilities: Unrecognized profile 8 for video/hevc
+08-30 22:35:03.821   369   391 W VideoCapabilities: Unsupported mime image/vnd.android.heic
+08-30 22:35:03.823   369   391 W VideoCapabilities: Unsupported mime image/vnd.android.heic
+08-30 22:35:03.831  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: bindService is called for service : com.google.android.gms/.chimera.PersistentDirectBootAwareApiService and for client com.spotify.music
+08-30 22:35:03.831  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: total connections for service : com.google.android.gms/.chimera.PersistentDirectBootAwareApiServiceare :85
+08-30 22:35:03.831  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: total connections for client : com.spotify.musicare :7
+08-30 22:35:03.854 13456 14044 I eufe    : (REDACTED) HDM. appOpsListener %s %s
+08-30 22:35:03.854 13456 14044 I eufe    : (REDACTED) HDM. Ignoring irrelevant audio permission changes for package %s
+08-30 22:35:03.864  2136  4253 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0xE6360F35FE5 hal_ts 823954387322265 lux=9.785 Channel0-5=159.0,99.0,18.0,88.0,0.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+08-30 22:35:03.875   369   369 W MR2     : registerTransferCallback: Ignoring the same callback
+08-30 22:35:03.875   369   369 W MR2     : registerControllerCallback: Ignoring the same callback
+--------- beginning of system
+08-30 22:35:03.877  3070  3184 W ProcessStats: Tracking association SourceState{ad4539c com.spotify.music/10383 ImpBg #2358984} whose proc state 6 is better than process ProcessState{cc5edf6 com.google.android.projection.gearhead:provider/10136 pkg=com.google.android.projection.gearhead} proc state 15 (0 skipped)
+08-30 22:35:03.889  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: bindService is called for service : com.google.android.gms/.cast.media.CastMediaRoute2ProviderService_Persistent and for client com.spotify.music
+08-30 22:35:03.889  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: total connections for service : com.google.android.gms/.cast.media.CastMediaRoute2ProviderService_Persistentare :1
+08-30 22:35:03.889  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: total connections for client : com.spotify.musicare :8
+08-30 22:35:03.889  3070  4216 D BackgroundInstallControlService: Package event received: 0
+08-30 22:35:03.901   369   396 I NtAudioManager: getStreamVolume streamType :3, pkg :com.spotify.music, index :8
+--------- beginning of kernel
+08-30 22:34:59.979  2943  2943 I [schedu][0xe636121051a][20:35:03.928973] qca6750: [2943:I:OSIF] vdev 0, scan id 44583 type COMPLETED(1) reason COMPLETED(1) scan found 14 bss
+08-30 22:35:03.929  2886 16618 I LOWI-9.0.1.80.b: [LOWI-Scan] lowi_close_record:Scan done in 823900539ms, 15 APs in scan results
+08-30 22:35:03.930  2886  2976 I LOWI-9.0.1.80.b: [LOWIUtils] responseToOutPostcard - TO: FreeWifiScanObserver, FROM:   LOWI-SERVER, RESP:  LOWI_ASYNC_DISCOVERY_SCAN_RESULTS
+08-30 22:35:03.932  3070  4406 D WifiNl80211Manager: Scan result ready event
+08-30 22:35:03.932  3070  4406 D WifiNative: Scan result ready event
+08-30 22:35:03.934  3070  4170 D WificondScannerImpl: Filtering out 1 scan results.
+08-30 22:35:03.934   369   605 W chromium: [WARNING:android_webview/browser/cookie_manager.cc:372] Transferring cookies from provisional CookieManager to network service. For issues with the provisional CookieManager, see crbug.com/478873476.
+08-30 22:35:03.938 18165   368 I FrewleTileCacheManagerV: (REDACTED) Fetched %d AP models from cache
+08-30 22:34:59.995  6923  6923 I [binder][0xe6361258ceb][20:35:03.944437] qca6750: [6923:I:HDD] __wlan_hdd_cfg80211_get_logger_supp_feature: Ring buffer disable
+08-30 22:35:03.945  3070  4166 I HalDevMgr: bestIfaceCreationProposal is null, requestIface=STA, existingIface=[name=wlan0 type=STA]
+08-30 22:35:03.947   369   375 I BpBinder: onLastStrongRef automatically unlinking death recipients: 
+08-30 22:35:03.952   369   376 W System  : A resource failed to call AbstractCursor.close. 
+08-30 22:35:03.952   369   376 W System  : A resource failed to call CursorWrapperInner.close. 
+08-30 22:35:03.956 18165 18198 I FusedLocation: (REDACTED) location delivery to %s blocked - too fast
+08-30 22:35:03.956 18165 18198 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+08-30 22:35:03.956 18165 18198 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+08-30 22:35:03.957 18165 18198 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+08-30 22:35:03.957  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: bindService is called for service : com.google.android.gms/.chimera.GmsBoundBrokerService and for client com.spotify.music
+08-30 22:35:03.957  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: total connections for service : com.google.android.gms/.chimera.GmsBoundBrokerServiceare :1
+08-30 22:35:03.957  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: total connections for client : com.spotify.musicare :9
+08-30 22:35:03.957 18165 18198 I FusedLocation: (REDACTED) location delivery to %s blocked - too fast
+08-30 22:35:03.958  2554  4990 D StNfcHal: (#028EF) Rx 6f 02 27 (hidden)
+08-30 22:35:03.958  2554  4989 D StNfcHal: HalStopTimer 
+08-30 22:35:03.958  3070  4216 D BackgroundInstallControlService: Package event received: 0
+08-30 22:35:03.958 18165 18198 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+08-30 22:35:03.958 18165 18198 I FusedLocation: (REDACTED) location delivery to %s blocked - too fast
+08-30 22:35:03.959 18165 18198 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+08-30 22:35:03.959 18165 18198 I FusedLocation: (REDACTED) location delivery to %s blocked - too fast
+08-30 22:35:03.959 18165 18198 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+08-30 22:35:03.959 18165 18198 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+08-30 22:35:03.959 30571 30571 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.safetynet.service.START xflg=0x4 pkg=com.google.android.gms }
+08-30 22:35:03.960 30571 30571 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.safetynet.service.START xflg=0x4 pkg=com.google.android.gms }
+08-30 22:35:03.961 18165 18198 I heub    : Received empty WiFi-RTT scan. [CONTEXT service_id=6 ]
+08-30 22:35:03.974  2136  4253 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0xE63611399BB hal_ts 823954497320078 lux=9.785 Channel0-5=159.0,99.0,18.0,88.0,0.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+08-30 22:35:03.975  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: bindService is called for service : com.google.android.gms/.chimera.GmsBoundBrokerService and for client com.spotify.music
+08-30 22:35:03.975  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: total connections for service : com.google.android.gms/.chimera.GmsBoundBrokerServiceare :1
+08-30 22:35:03.975  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: total connections for client : com.spotify.musicare :9
+08-30 22:35:03.976  2136   625 I sensors-hal: qsh_conn_event_cb:771, SCHED_FIFO(10) for qmi_cbk
+08-30 22:35:03.978 30571 30571 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.safebrowsing.SafeBrowsingService.START dat=chimera-action:/... xflg=0x4 cmp=com.google.android.gms/.chimera.GmsBoundBrokerService }
+08-30 22:35:03.978 30571 30571 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.safebrowsing.SafeBrowsingService.START dat=chimera-action:/... xflg=0x4 cmp=com.google.android.gms/.chimera.GmsBoundBrokerService }
+08-30 22:35:03.981 18165 18173 W WearableService: onGetService: Wear is not available on this device. Calling package: com.spotify.music
+08-30 22:35:03.983  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: bindService is called for service : com.google.android.gms/.chimera.PersistentDirectBootAwareApiService and for client com.spotify.music
+08-30 22:35:03.983  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: total connections for service : com.google.android.gms/.chimera.PersistentDirectBootAwareApiServiceare :85
+08-30 22:35:03.983  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: total connections for client : com.spotify.musicare :9
+08-30 22:35:03.989   369   369 I cr_AppResProvider: #getApplicationRestrictionsFromUserManager() Bundle[EMPTY_PARCEL]
+08-30 22:35:03.989   369   369 I cr_PolicyProvider: #notifySettingsAvailable() 0
+08-30 22:35:03.989   369   369 I cr_CombinedPProvider: #onSettingsAvailable() 0
+08-30 22:35:03.989   369   369 I cr_CombinedPProvider: #flushPolicies()
+08-30 22:35:04.004 18165 18173 W WearableService: onGetService: Wear is not available on this device. Calling package: com.spotify.music
+08-30 22:35:04.007   369   659 I CameraManagerGlobal: Connecting to camera service
+08-30 22:35:04.015  5184  5184 W dataInfoSend: type=1400 audit(0.0:1080127000): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+08-30 22:35:04.015  5184  5184 W dataInfoSend: type=1400 audit(0.0:1080127001): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+08-30 22:35:04.015  5184  5184 W dataInfoSend: type=1400 audit(0.0:1080127002): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+08-30 22:35:04.015  5184  5184 W dataInfoSend: type=1400 audit(0.0:1080127003): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+08-30 22:35:04.015  5184  5184 W dataInfoSend: type=1400 audit(0.0:1080127004): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+08-30 22:35:04.019  2332  2498 I AttributionAndPermissionUtils: checkPermission (forDataDelivery 0 startDataDelivery 0): Permission hard denied for client attribution [uid 10383, pid 369, packageName "<unknown>"]
+08-30 22:35:00.068 16695 16695 W audit   : audit_lost=1078263306 audit_rate_limit=5 audit_backlog_limit=64
+08-30 22:35:00.068 16695 16695 E audit   : rate limit exceeded
+08-30 22:35:04.020 18165 18173 W WearableService: onGetService: Wear is not available on this device. Calling package: com.spotify.music
+08-30 22:35:04.020   369   659 W libc    : Access denied finding property "vendor.camera.aux.packagelist"
+08-30 22:35:04.020   369   659 W libc    : Access denied finding property "vendor.camera.aux.packagelist"
+08-30 22:35:04.020   369   659 W libc    : Access denied finding property "vendor.camera.aux.packagelist"
+08-30 22:35:04.020   369   659 W CameraManagerGlobal: [soar.cts] ignore the status update of camera: 2
+08-30 22:35:04.020   369   659 W libc    : Access denied finding property "vendor.camera.aux.packagelist"
+08-30 22:35:04.020   369   659 W CameraManagerGlobal: [soar.cts] ignore the status update of camera: 3
+08-30 22:35:04.020   369   659 W libc    : Access denied finding property "vendor.camera.aux.packagelist"
+08-30 22:35:04.020   369   659 W CameraManagerGlobal: [soar.cts] ignore the status update of camera: 4
+08-30 22:35:04.023   369   645 W libc    : Access denied finding property "vendor.camera.aux.packagelist"
+08-30 22:35:04.024   369   645 W libc    : Access denied finding property "vendor.camera.aux.packagelist"
+08-30 22:35:04.024   369   645 W CameraManagerGlobal: ignore the torch status update of camera: 2
+08-30 22:35:04.024   369   645 W libc    : Access denied finding property "vendor.camera.aux.packagelist"
+08-30 22:35:04.024   369   645 W CameraManagerGlobal: ignore the torch status update of camera: 3
+08-30 22:35:04.024   369   645 W libc    : Access denied finding property "vendor.camera.aux.packagelist"
+08-30 22:35:04.024   369   645 W CameraManagerGlobal: ignore the torch status update of camera: 4
+08-30 22:35:04.028  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: bindService is called for service : com.google.android.adservices.api/com.android.adservices.measurement.MeasurementService and for client com.spotify.music
+08-30 22:35:04.028  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: total connections for service : com.google.android.adservices.api/com.android.adservices.measurement.MeasurementServiceare :3
+08-30 22:35:04.028  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: total connections for client : com.spotify.musicare :10
+08-30 22:35:04.038  6976 32666 W adservices: Skip logging because Cobalt is disabled.
+08-30 22:35:04.038  6976 32665 W adservices: Skip logging because Cobalt logger is null
+08-30 22:35:04.040  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: bindService is called for service : com.google.android.gms/.ads.identifier.service.AdvertisingIdService and for client com.spotify.music
+08-30 22:35:04.040  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: total connections for service : com.google.android.gms/.ads.identifier.service.AdvertisingIdServiceare :2
+08-30 22:35:04.040  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: total connections for client : com.spotify.musicare :11
+08-30 22:35:04.042  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: bindService is called for service : com.google.android.gms/.ads.identifier.service.AdvertisingIdService and for client com.spotify.music
+08-30 22:35:04.042  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: total connections for service : com.google.android.gms/.ads.identifier.service.AdvertisingIdServiceare :2
+08-30 22:35:04.042  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: total connections for client : com.spotify.musicare :11
+08-30 22:35:04.058 18165   368 I DiscoveryManager: Discovery state (DiscoveryState{filterCriteria=[CC32E753, CC1AD845], categoryToCriteria={com.google.android.gms.cast.CATEGORY_CAST/CC32E753///ALLOW_IPV6=[CC32E753], android.media.intent.category.REMOTE_PLAYBACK=[CC1AD845]}, activeScan=false, activeScanWithScreenOff=false, discoveryRequestSupportsDynamicSession=false, eventFlowId=120})
+08-30 22:35:04.059 18165   368 W DatabaseProcessor: processLocalDevices: failed to get the network info with non-null networkId.
+08-30 22:35:04.059 18165 18165 I CastMediaRouteProvider: Published 0 routes
+08-30 22:35:04.065  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: bindService is called for service : com.google.android.gms/.chimera.PersistentApiService and for client com.google.android.gms.persistent
+08-30 22:35:04.065  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: total connections for service : com.google.android.gms/.chimera.PersistentApiServiceare :107
+08-30 22:35:04.065  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: total connections for client : com.google.android.gms.persistentare :6
+08-30 22:35:04.068  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: destroyService is called for service : com.google.android.gms/.cast.service.CastSocketMultiplexerLifeCycleService_Persistent
+08-30 22:35:04.070  3070  4411 D MediaSessionService: onSessionPlaybackStateChanged: record=com.spotify.music/spotify-media-session/550 (userId=0) playbackState=PlaybackState {state=PAUSED(2), position=138214, buffered position=0, speed=0.0, updated=823954683, actions=3025844, custom actions=[Action:mName='Shuffle aktivieren/deaktivieren, mIcon=2131233570, mExtras=Bundle[mParcelledData.dataSize=144], Action:mName='Zu Sammlung hinzuf├╝gen, mIcon=2131233564, mExtras=Bundle[mParcelledData.dataSize=144], Action:mName='Radio starten, mIcon=2131233578, mExtras=Bundle[mParcelledData.dataSize=144], Action:mName='ÔÇ×Alle Songs wiederholenÔÇ£ aktivieren, mIcon=2131233566, mExtras=Bundle[mParcelledData.dataSize=144]], active item id=1, error=null}
+08-30 22:35:04.072  3070  4439 I WifiService: acquireMulticastLock uid=10146 lockTag=MdnsServiceBrowserImpl
+08-30 22:35:04.072  3070  4216 D BackgroundInstallControlService: Package event received: 0
+08-30 22:35:04.074  4617 17915 D IpClient.wlan0: set max DTIM multiplier to 1
+08-30 22:35:04.074   369   665 D nativeloader: Load /data/app/~~P1QPulATOyzFfvHnduJBDw==/com.spotify.music-muz7eurPjA4j9u5iI9S98A==/split_config.arm64_v8a.apk!/lib/arm64-v8a/libcomScore.so using class loader ns clns-9 (caller=/data/app/~~P1QPulATOyzFfvHnduJBDw==/com.spotify.music-muz7eurPjA4j9u5iI9S98A==/base.apk): ok
+08-30 22:35:04.074  3070  4435 D MediaSessionService: onSessionPlaybackStateChanged: record=com.spotify.music/spotify-media-session/550 (userId=0) playbackState=PlaybackState {state=PAUSED(2), position=138214, buffered position=0, speed=0.0, updated=823954688, actions=3025844, custom actions=[Action:mName='Shuffle aktivieren/deaktivieren, mIcon=2131233570, mExtras=Bundle[mParcelledData.dataSize=144], Action:mName='Zu Sammlung hinzuf├╝gen, mIcon=2131233564, mExtras=Bundle[mParcelledData.dataSize=144], Action:mName='Radio starten, mIcon=2131233578, mExtras=Bundle[mParcelledData.dataSize=144], Action:mName='ÔÇ×Alle Songs wiederholenÔÇ£ aktivieren, mIcon=2131233566, mExtras=Bundle[mParcelledData.dataSize=144]], active item id=1, error=null}
+08-30 22:35:04.075 18165 18181 I MdnsServiceBrowser: (REDACTED) registering %s
+08-30 22:35:04.075  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: unbindService is called for service : com.google.android.gms/.ads.identifier.service.AdvertisingIdService and for client com.spotify.music
+08-30 22:35:04.078  3070  4176 I serviceDiscovery: [MdnsSocketProvider] Start monitoring sockets.
+08-30 22:35:00.131  6923  6923 E [binder][0xe63614d6273][20:35:04.080405] qca6750: [6923:E:HDD] hdd_config_power: power attr and opm attr is null
+08-30 22:35:04.079  3070  4176 I TetheringManager: registerTetheringEventCallback caller:android
+08-30 22:35:04.080  2161  6923 D WifiHAL : wifi_set_dtim_config: multiplier:1
+08-30 22:35:04.080  3070  4176 I serviceDiscovery: [MdnsDiscoveryManager] Registering listener for serviceType: _googlecast._tcp.local
+08-30 22:35:04.083  3070  4173 D ConnectivityService: NetReassign [no changes] [c 0] [a 2] [i 1]
+08-30 22:35:04.084  3070  4176 I serviceDiscovery: [MdnsDiscoveryManager] Registering listener for serviceType: _googlecast._tcp.local
+08-30 22:35:04.084  2136  4253 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0xE636133D3BA hal_ts 823954607320025 lux=9.797 Channel0-5=160.0,99.0,18.0,88.0,0.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+08-30 22:35:04.085  3070  4176 I serviceDiscovery: [MdnsDiscoveryManager] Registering listener for serviceType: _googlecast._tcp.local
+08-30 22:35:04.092  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: unbindService is called for service : com.google.android.gms/.ads.identifier.service.AdvertisingIdService and for client com.spotify.music
+08-30 22:35:04.092  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: size of service connections for service: com.google.android.gms/.ads.identifier.service.AdvertisingIdServiceafter removal is 1
+08-30 22:35:04.092  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: size of client connections for client: com.spotify.musicafter removal is 10
+08-30 22:35:04.096  3070  4176 I WifiService: acquireMulticastLock uid=1000 lockTag=NsdService
+08-30 22:35:04.101 15870 15948 I PhenotypeProcessReaper: Memory state is: 200
+08-30 22:35:04.108 18165 18173 W WearableService: onGetService: Wear is not available on this device. Calling package: com.spotify.music
+08-30 22:35:04.141  3070  4176 I serviceDiscovery: [MdnsDiscoveryManager] Registering listener for serviceType: _googlecast._tcp.local
+08-30 22:35:04.143 18165   368 I DeviceScanner: [MDNS] Received response from "K2o" (3758c74b368611d6706bc19ef766a0d2) [cast connect] with result "1 New device"
+08-30 22:35:04.143 18165   368 W DatabaseProcessor: processLocalDevices: failed to get the network info with non-null networkId.
+08-30 22:35:04.147  3070  4176 I serviceDiscovery: [MdnsDiscoveryManager] Registering listener for serviceType: _googlecast._tcp.local
+08-30 22:35:04.148  3070  4176 I serviceDiscovery: [MdnsDiscoveryManager] Registering listener for serviceType: _googlecast._tcp.local
+08-30 22:35:04.149 18165   368 I DeviceScanner: [MDNS] Received response from "W8r" (8b52932fa7ddd49cdc59bc58db85d704)  with result "1 New device"
+08-30 22:35:04.149 18165   368 I DeviceScanner: [MDNS] Received response from "K2o" (0b021bf9-ded4-47aa-ae34-d71b6c21dc6b) [static group] with result "1 New device"
+08-30 22:35:04.150 18165   368 W DatabaseProcessor: processLocalDevices: failed to get the network info with non-null networkId.
+08-30 22:35:04.150 18165   368 W DatabaseProcessor: processLocalDevices: failed to get the network info with non-null networkId.
+08-30 22:35:04.155  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: bindService is called for service : com.google.android.gms/.auth.account.authenticator.GoogleAccountAuthenticatorService and for client system
+08-30 22:35:04.155  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: total connections for service : com.google.android.gms/.auth.account.authenticator.GoogleAccountAuthenticatorServiceare :1
+08-30 22:35:04.155  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: total connections for client : systemare :25
+08-30 22:35:04.159  3070  4412 D MediaSessionService: onSessionPlaybackStateChanged: record=com.spotify.music/spotify-media-session/550 (userId=0) playbackState=PlaybackState {state=PAUSED(2), position=138214, buffered position=0, speed=0.0, updated=823954773, actions=3025844, custom actions=[Action:mName='Shuffle aktivieren/deaktivieren, mIcon=2131233570, mExtras=Bundle[mParcelledData.dataSize=144], Action:mName='Zu Sammlung hinzuf├╝gen, mIcon=2131233564, mExtras=Bundle[mParcelledData.dataSize=144], Action:mName='Radio starten, mIcon=2131233578, mExtras=Bundle[mParcelledData.dataSize=144], Action:mName='ÔÇ×Alle Songs wiederholenÔÇ£ aktivieren, mIcon=2131233566, mExtras=Bundle[mParcelledData.dataSize=144]], active item id=1, error=null}
+08-30 22:35:04.159  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: unbindService is called for service : com.google.android.gms/.auth.account.authenticator.GoogleAccountAuthenticatorService and for client system
+08-30 22:35:04.159  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: size of client connections for client: systemafter removal is 24
+08-30 22:35:04.160 18165 18165 I CastMediaRouteProvider: Published 4 routes
+08-30 22:35:04.161  3070  4435 D MediaSessionService: onSessionPlaybackStateChanged: record=com.spotify.music/spotify-media-session/550 (userId=0) playbackState=PlaybackState {state=PAUSED(2), position=138214, buffered position=0, speed=0.0, updated=823954775, actions=3025844, custom actions=[Action:mName='Shuffle aktivieren/deaktivieren, mIcon=2131233570, mExtras=Bundle[mParcelledData.dataSize=144], Action:mName='Zu Sammlung hinzuf├╝gen, mIcon=2131233564, mExtras=Bundle[mParcelledData.dataSize=144], Action:mName='Radio starten, mIcon=2131233578, mExtras=Bundle[mParcelledData.dataSize=144], Action:mName='ÔÇ×Alle Songs wiederholenÔÇ£ aktivieren, mIcon=2131233566, mExtras=Bundle[mParcelledData.dataSize=144]], active item id=1, error=null}
+08-30 22:35:04.169  3070  4412 D MediaSessionService: onSessionPlaybackStateChanged: record=com.spotify.music/spotify-media-session/550 (userId=0) playbackState=PlaybackState {state=PAUSED(2), position=138214, buffered position=0, speed=0.0, updated=823954782, actions=3025844, custom actions=[Action:mName='Shuffle aktivieren/deaktivieren, mIcon=2131233570, mExtras=Bundle[mParcelledData.dataSize=144], Action:mName='Zu Sammlung hinzuf├╝gen, mIcon=2131233564, mExtras=Bundle[mParcelledData.dataSize=144], Action:mName='Radio starten, mIcon=2131233578, mExtras=Bundle[mParcelledData.dataSize=144], Action:mName='ÔÇ×Alle Songs wiederholenÔÇ£ aktivieren, mIcon=2131233566, mExtras=Bundle[mParcelledData.dataSize=144]], active item id=1, error=null}
+08-30 22:35:04.185  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: bindService is called for service : com.android.vending/com.google.android.finsky.appcontentservice.engage.AppEngageServiceV2 and for client com.spotify.music
+08-30 22:35:04.185  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: total connections for service : com.android.vending/com.google.android.finsky.appcontentservice.engage.AppEngageServiceV2are :1
+08-30 22:35:04.185  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: total connections for client : com.spotify.musicare :11
+08-30 22:35:04.185 18165 32221 I DeviceScanner: [MDNS] Received response from "K2o" (3758c74b368611d6706bc19ef766a0d2) [cast connect] with result "2 Updated device"
+08-30 22:35:04.186 18165 32221 I DeviceScanner: [MDNS] Received response from "K2o" (0b021bf9-ded4-47aa-ae34-d71b6c21dc6b) [static group] with result "2 Updated device"
+08-30 22:35:04.186 18165 32221 W DatabaseProcessor: processLocalDevices: failed to get the network info with non-null networkId.
+08-30 22:35:04.187 18165 32221 W DatabaseProcessor: processLocalDevices: failed to get the network info with non-null networkId.
+08-30 22:35:04.187  3070  4216 D BackgroundInstallControlService: Package event received: 0
+08-30 22:35:04.188  3070  4176 I serviceDiscovery: [MdnsDiscoveryManager] Registering listener for serviceType: _googlecast._tcp.local
+08-30 22:35:04.189 18165 32221 W DatabaseProcessor: processLocalDevices: failed to get the network info with non-null networkId.
+08-30 22:35:04.189 18165 32221 W DatabaseProcessor: processLocalDevices: failed to get the network info with non-null networkId.
+08-30 22:35:04.190 18165 32221 I DeviceScanner: [MDNS] Received response from "K2o" (3758c74b368611d6706bc19ef766a0d2) [cast connect] with result "2 Updated device"
+08-30 22:35:04.191 18165 32221 I DeviceScanner: [MDNS] Received response from "K2o" (0b021bf9-ded4-47aa-ae34-d71b6c21dc6b) [static group] with result "2 Updated device"
+08-30 22:35:04.191 13456 14044 I eufe    : (REDACTED) HDM. appOpsListener %s %s
+08-30 22:35:04.191 18165 32221 I DeviceScanner: [MDNS] Received response from "K3e" (e719d8690c0ab2fd6267529c47245023)  with result "1 New device"
+08-30 22:35:04.191 13456 14044 I eufe    : (REDACTED) HDM. Ignoring irrelevant audio permission changes for package %s
+08-30 22:35:04.192 18165 32221 W DatabaseProcessor: processLocalDevices: failed to get the network info with non-null networkId.
+08-30 22:35:04.193 18165 32221 W DatabaseProcessor: processLocalDevices: failed to get the network info with non-null networkId.
+08-30 22:35:04.193 18165 32221 W DatabaseProcessor: processLocalDevices: failed to get the network info with non-null networkId.
+08-30 22:35:04.193 18165 32221 W DatabaseProcessor: processLocalDevices: failed to get the network info with non-null networkId.
+08-30 22:35:04.194 18165 32221 W DatabaseProcessor: processLocalDevices: failed to get the network info with non-null networkId.
+08-30 22:35:04.194 18165 32221 W DatabaseProcessor: processLocalDevices: failed to get the network info with non-null networkId.
+08-30 22:35:04.194 18165 32221 W DatabaseProcessor: processLocalDevices: failed to get the network info with non-null networkId.
+08-30 22:35:04.195  2136  4253 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0xE6361540D9F hal_ts 823954717318619 lux=9.797 Channel0-5=160.0,99.0,18.0,88.0,0.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+08-30 22:35:04.199 32431 32439 I Finsky:background: [1701] AppEngageService isServiceAvailable() API is called.
+08-30 22:35:04.199 32431 32439 I Finsky:background: [1701] AppEngageService isServiceAvailable() API is called.
+08-30 22:35:04.200 32431 32452 I Finsky:background: [1713] Surface GOOGLE_TV is not enabled on this device.
+08-30 22:35:04.200 32431 32439 I Finsky:background: [1701] AppEngageService isServiceAvailable() API is called.
+08-30 22:35:04.200 32431 32452 I Finsky:background: [1713] Configured Surface is not enabled on this device for package com.spotify.music.
+08-30 22:35:04.202 32431 32455 I Finsky:background: [1716] Surface GOOGLE_TV is not enabled on this device.
+08-30 22:35:04.202 32431 32462 I Finsky:background: [1723] Surface GOOGLE_TV is not enabled on this device.
+08-30 22:35:04.202 32431 32439 I Finsky:background: [1701] AppEngageService isServiceAvailable() API is called.
+08-30 22:35:04.202 32431 32462 I Finsky:background: [1723] Configured Surface is not enabled on this device for package com.spotify.music.
+08-30 22:35:04.203 32431 32452 I Finsky:background: [1713] Surface GOOGLE_TV is not enabled on this device.
+08-30 22:35:04.203 32431 32452 I Finsky:background: [1713] Configured Surface is not enabled on this device for package com.spotify.music.
+08-30 22:35:04.205 32431 32455 I Finsky:background: [1716] Configured Surface is not enabled on this device for package com.spotify.music.
+08-30 22:35:04.212 32431 32439 I Finsky:background: [1701] AppEngageService isServiceAvailable() API is called.
+08-30 22:35:04.217 32431 32453 I Finsky:background: [1714] Surface GOOGLE_TV is not enabled on this device.
+08-30 22:35:04.217 32431 32453 I Finsky:background: [1714] Configured Surface is not enabled on this device for package com.spotify.music.
+08-30 22:35:04.218  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: unbindService is called for service : com.spotify.music/androidx.work.impl.background.systemjob.SystemJobService and for client system
+08-30 22:35:04.218  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: size of service connections for service: com.spotify.music/androidx.work.impl.background.systemjob.SystemJobServiceafter removal is 0
+08-30 22:35:04.218  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: size of client connections for client: systemafter removal is 23
+08-30 22:35:04.218  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: destroyService is called for service : com.spotify.music/androidx.work.impl.background.systemjob.SystemJobService
+08-30 22:35:04.221 18165   367 W DatabaseProcessor: processLocalDevices: failed to get the network info with non-null networkId.
+08-30 22:35:04.223  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: unbindService is called for service : com.android.vending/com.google.android.finsky.appcontentservice.engage.AppEngageServiceV2 and for client com.spotify.music
+08-30 22:35:04.223  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: size of service connections for service: com.android.vending/com.google.android.finsky.appcontentservice.engage.AppEngageServiceV2after removal is 0
+08-30 22:35:04.223  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: size of client connections for client: com.spotify.musicafter removal is 10
+08-30 22:35:04.223  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: destroyService is called for service : com.android.vending/com.google.android.finsky.appcontentservice.engage.AppEngageServiceV2
+08-30 22:35:04.227  3070  4439 I ActivityManager: Killing 24995:com.nothing.logkit/1000 (adj 985): empty #31
+08-30 22:35:04.227 32431 32431 I Finsky:background: [2] Memory trim requested to level 40
+08-30 22:35:04.239   369   433 D BluetoothGattServer: registerCallback()
+08-30 22:35:04.239   369   433 D BluetoothGattServer: registerCallback() - UUID=485e7ba6-a10f-4546-88a0-6fe03dc08847
+08-30 22:35:04.251  3213  3605 I bluetooth: system/bta/gatt/bta_gatts_act.cc:193 bta_gatts_register: register application first_unuse rcb_idx=3
+08-30 22:35:04.255  3213  3605 I gatt_api: system/stack/gatt/gatt_api.cc:1279 GATT_Register: Allocated name:GattServer uuid:485e7ba6-a10f-4546-88a0-6fe03dc08847 gatt_if:223 eatt_support:false
+08-30 22:35:04.256  3213  3605 I gatt_api: system/stack/gatt/gatt_api.cc:1395 GATT_StartIf: GATT interface 223 already has connected device xx:xx:xx:xx:23:aa
+08-30 22:35:04.256  3213  3605 I gatt_api: system/stack/gatt/gatt_api.cc:1398 GATT_StartIf: Invoking callback with connection id 223
+08-30 22:35:00.308 31258 31258 I binder  : undelivered transaction 245712236, process died.
+08-30 22:35:04.258  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: killProcess is called for pid : 24995
+08-30 22:35:04.258  3070  3189 I libprocessgroup: Removed cgroup /sys/fs/cgroup/system/uid_1000/pid_24995
+08-30 22:35:04.258  2011  2011 I Zygote  : Process 24995 exited due to signal 9 (Killed)
+08-30 22:35:04.260 18165 18165 I CastMediaRouteProvider: Published 5 routes
+08-30 22:35:04.266   369   645 D BluetoothGattServer: onServerRegistered() - status=0 serverIf=223
+08-30 22:35:04.266   369   433 D BluetoothGattServer: addService() - service: 3e1d50cd-7e3e-427d-8e1c-b78aa87fe624
+08-30 22:35:04.269 18165 32602 W DatabaseProcessor: processLocalDevices: failed to get the network info with non-null networkId.
+08-30 22:35:04.284  2554  4990 D StNfcHal: (#028F0) Rx 6f 02 0f (hidden)
+08-30 22:35:04.284  2554  4989 D StNfcHal: HalStopTimer 
+08-30 22:35:04.298   369   645 D BluetoothGattServer: onServerConnectionState() - status=0 serverIf=223 connected=true device=XX:XX:XX:XX:23:AA
+08-30 22:35:04.300   369   433 D AdvertiseSettings: setTxPowerLevel: 1
+08-30 22:35:04.301   369   433 D BluetoothAdapter: isLeEnabled(): ON
+08-30 22:35:04.301   369   433 D BluetoothLeAdvertiser:  Total bytes: size:21
+08-30 22:35:04.303  3213  3605 I bluetooth: system/bta/gatt/bta_gatts_api.cc:127 bta_gatts_add_service_impl: rcb_idx=3
+08-30 22:35:04.303  3213  3605 I gatt_api: system/stack/gatt/gatt_api.cc:200 GATTS_AddService: 
+08-30 22:35:04.303   369   433 D BluetoothLeAdvertiser: TxPower == ADVERTISE_TX_POWER_LOW
+08-30 22:35:04.303  3213  3605 I gatt_api: system/stack/gatt/gatt_api.cc:320 GATTS_AddService: service parsed correctly, now starting
+08-30 22:35:04.304   369   433 D BluetoothAdapter: isLeEnabled(): ON
+08-30 22:35:04.304   369   433 D BluetoothLeAdvertiser:  Total bytes: size:21
+08-30 22:35:04.304  2136  4253 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0xE63617447A3 hal_ts 823954827318828 lux=9.797 Channel0-5=160.0,99.0,18.0,88.0,0.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+08-30 22:35:04.309  3213  3605 I bluetooth: system/stack/gatt/gatt_sr_hash.cc:126 gatts_calculate_database_hash: hash=4564AD575DDFFA23FD42CB2DC964806B
+08-30 22:35:04.314 18165 32602 W DatabaseProcessor: processLocalDevices: failed to get the network info with non-null networkId.
+08-30 22:35:04.318  3213  3760 I bluetooth_core::gatt::ffi: successfully registered service for server ServerId(223) with handle AttHandle(147) (service=GattServiceWithHandle { handle: AttHandle(147), type_: Uuid([62, 29, 80, 205, 126, 62, 66, 125, 142, 28, 183, 138, 168, 127, 230, 36]), characteristics: [GattCharacteristicWithHandle { handle: AttHandle(149), type_: Uuid([25, 103, 113, 54, 143, 234, 71, 39, 141, 123, 233, 42, 207, 233, 212, 60]), permissions: AttPermissions(WRITABLE_WITH_RESPONSE), descriptors: [] }, GattCharacteristicWithHandle { handle: AttHandle(151), type_: Uuid([106, 164, 74, 157, 118, 90, 74, 164, 170, 128, 95, 45, 102, 92, 28, 183]), permissions: AttPermissions(WRITABLE_WITH_RESPONSE), descriptors: [] }, GattCharacteristicWithHandle { handle: AttHandle(153), type_: Uuid([35, 51, 82, 230, 141, 198, 75, 87, 184, 137, 175, 111, 23, 35, 208, 146]), permissions: AttPermissions(WRITABLE_WITH_RESPONSE), descriptors: [] }, GattCharacteristicWithHandle { handle: AttHandle(155), type_: Uuid([35, 51, 82, 230, 141, 198, 75, 87, 184, 137, 175, 111, 23, 35, 208, 146]), permissions: AttPermissions(WRITABLE_WITH_RESPONSE), descriptors: [] }, GattCharacteristicWithHandle { handle: AttHandle(157), type_: Uuid([172, 79, 121, 127, 202, 52, 73, 208, 157, 132, 245, 196, 176, 201, 167, 86]), permissions: AttPermissions(READABLE), descriptors: [] }] })
+08-30 22:35:04.323  3213  3744 I bt_shim_advertiser: system/main/shim/le_advertising_manager.cc:197 StartAdvertisingSet: in shim layer
+08-30 22:35:04.329   369   645 D BluetoothGattServer: onServiceAdded() - handle=147 uuid=3e1d50cd-7e3e-427d-8e1c-b78aa87fe624 status=0
+08-30 22:35:04.329  3213  3744 I bt_shim_advertiser: system/main/shim/le_advertising_manager.cc:223 StartAdvertisingSet: create advertising set, client_id:255, reg_id:-62
+08-30 22:35:04.330  2263  2263 I vendor.qti.hardware.servicetrackeraidl-service: destroyService is called for service : com.google.android.gms/.cast.service.CastSocketMultiplexerLifeCycleService_Persistent
+08-30 22:35:04.331 18165 32501 I CastSocketMultiplexer: Stopping multiplexer...
+08-30 22:35:04.332  2108  2108 D vendor.qti.bluetooth@1.1-ibs_handler: SerialClockVote: vote for UART CLK ON
+08-30 22:35:04.333  2108  2108 D vendor.qti.bluetooth@1.1-wake_lock: Acquire wakelock is acquired 
+08-30 22:35:04.333  2108  2108 I vendor.qti.bluetooth@1.1-ibs_handler: DeviceWakeUp: Writing IBS_WAKE_IND
+08-30 22:35:04.339  2108  3693 I vendor.qti.bluetooth@1.1-ibs_handler: ProcessIbsCmd: Received IBS_WAKE_ACK: 0xFC
+08-30 22:35:04.339  2108  3693 I vendor.qti.bluetooth@1.1-ibs_handler: ProcessIbsCmd: Signal wack_cond_
+08-30 22:35:04.340  2108  2108 D vendor.qti.bluetooth@1.1-ibs_handler: DeviceWakeUp: Unblocked from waiting for FC, pthread_cond_timedwait ret = 0
+08-30 22:35:04.348  3213  3613 I bluetooth: system/gd/hci/le_advertising_manager.cc:736 create_extended_advertiser_with_id: Scheduling address rotation for advertiser_id=0
+08-30 22:35:04.348  3213  3613 I bluetooth: system/gd/hci/le_address_manager.cc:578 GetNextPrivateAddressIntervalRange: client=advertising_set_0, nonwake=7m0s, wake=13m42s
+08-30 22:35:04.348  3213  3613 I bluetooth: system/gd/hci/le_advertising_manager.cc:1688 set_enc_data: Scan Response Data
+08-30 22:35:04.348  3213  3613 I bluetooth: system/gd/hci/le_advertising_manager.cc:1688 set_enc_data: Advertising Data
+08-30 22:35:04.348  3213  3613 I bluetooth: Data: 24E67FA88AB71C8E7D423E7ECD501D3E Data Type:  Size: 16
+08-30 22:35:04.348  3213  3613 I bluetooth: system/gd/hci/le_address_manager.cc:265 register_client: Client registered
+08-30 22:35:04.351  2108  3693 I vendor.qti.bluetooth@1.1-ibs_handler: ProcessIbsCmd: Received IBS_WAKE_IND: 0xFD
+08-30 22:35:04.351  2108  3693 I vendor.qti.bluetooth@1.1-ibs_handler: ProcessIbsCmd: Writing IBS_WAKE_ACK
+08-30 22:35:04.353  3213  3613 I bluetooth: system/gd/hci/le_advertising_manager.cc:2525 on_set_advertising_set_random_address_complete: update random address for advertising set 0 : xx:xx:xx:xx:cb:cc
+08-30 22:35:04.396  2108  3693 I vendor.qti.bluetooth@1.1-ibs_handler: ProcessIbsCmd: Received IBS_SLEEP_IND: 0xFE
+08-30 22:35:04.414  2136  4253 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0xE63619481B6 hal_ts 823954937319817 lux=9.311 Channel0-5=156.0,98.0,17.0,86.0,0.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+08-30 22:35:04.415  3070  4435 D MediaSessionService: onSessionPlaybackStateChanged: record=com.spotify.music/spotify-media-session/550 (userId=0) playbackState=PlaybackState {state=PAUSED(2), position=138214, buffered position=0, speed=0.0, updated=823955029, actions=3025844, custom actions=[Action:mName='Shuffle aktivieren/deaktivieren, mIcon=2131233570, mExtras=Bundle[mParcelledData.dataSize=144], Action:mName='Zu Sammlung hinzuf├╝gen, mIcon=2131233564, mExtras=Bundle[mParcelledData.dataSize=144], Action:mName='Radio starten, mIcon=2131233578, mExtras=Bundle[mParcelledData.dataSize=144], Action:mName='ÔÇ×Alle Songs wiederholenÔÇ£ aktivieren, mIcon=2131233566, mExtras=Bundle[mParcelledData.dataSize=144]], active item id=1, error=null}
+08-30 22:35:04.417  3070  4435 D MediaSessionService: onSessionPlaybackStateChanged: record=com.spotify.music/spotify-media-session/550 (userId=0) playbackState=PlaybackState {state=PAUSED(2), position=138214, buffered position=0, speed=0.0, updated=823955031, actions=3025844, custom actions=[Action:mName='Shuffle aktivieren/deaktivieren, mIcon=2131233570, mExtras=Bundle[mParcelledData.dataSize=144], Action:mName='Zu Sammlung hinzuf├╝gen, mIcon=2131233564, mExtras=Bundle[mParcelledData.dataSize=144], Action:mName='Radio starten, mIcon=2131233578, mExtras=Bundle[mParcelledData.dataSize=144], Action:mName='ÔÇ×Alle Songs wiederholenÔÇ£ aktivieren, mIcon=2131233566, mExtras=Bundle[mParcelledData.dataSize=144]], active item id=1, error=null}
+08-30 22:35:04.419  3070  4435 D MediaSessionService: onSessionPlaybackStateChanged: record=com.spotify.music/spotify-media-session/550 (userId=0) playbackState=PlaybackState {state=PAUSED(2), position=138214, buffered position=0, speed=0.0, updated=823955033, actions=3025844, custom actions=[Action:mName='Shuffle aktivieren/deaktivieren, mIcon=2131233570, mExtras=Bundle[mParcelledData.dataSize=144], Action:mName='Zu Sammlung hinzuf├╝gen, mIcon=2131233564, mExtras=Bundle[mParcelledData.dataSize=144], Action:mName='Radio starten, mIcon=2131233578, mExtras=Bundle[mParcelledData.dataSize=144], Action:mName='ÔÇ×Alle Songs wiederholenÔÇ£ aktivieren, mIcon=2131233566, mExtras=Bundle[mParcelledData.dataSize=144]], active item id=1, error=null}
+08-30 22:35:04.421  3070  4435 D MediaSessionService: onSessionPlaybackStateChanged: record=com.spotify.music/spotify-media-session/550 (userId=0) playbackState=PlaybackState {state=PAUSED(2), position=138214, buffered position=0, speed=0.0, updated=823955035, actions=3025844, custom actions=[Action:mName='Shuffle aktivieren/deaktivieren, mIcon=2131233570, mExtras=Bundle[mParcelledData.dataSize=144], Action:mName='Zu Sammlung hinzuf├╝gen, mIcon=2131233564, mExtras=Bundle[mParcelledData.dataSize=144], Action:mName='Radio starten, mIcon=2131233578, mExtras=Bundle[mParcelledData.dataSize=144], Action:mName='ÔÇ×Alle Songs wiederholenÔÇ£ aktivieren, mIcon=2131233566, mExtras=Bundle[mParcelledData.dataSize=144]], active item id=1, error=null}
+08-30 22:35:04.426  3070  4435 D MediaSessionService: onSessionPlaybackStateChanged: record=com.spotify.music/spotify-media-session/550 (userId=0) playbackState=PlaybackState {state=PAUSED(2), position=138214, buffered position=0, speed=0.0, updated=823955040, actions=3025844, custom actions=[Action:mName='Shuffle aktivieren/deaktivieren, mIcon=2131233570, mExtras=Bundle[mParcelledData.dataSize=144], Action:mName='Zu Sammlung hinzuf├╝gen, mIcon=2131233564, mExtras=Bundle[mParcelledData.dataSize=144], Action:mName='Radio starten, mIcon=2131233578, mExtras=Bundle[mParcelledData.dataSize=144], Action:mName='ÔÇ×Alle Songs wiederholenÔÇ£ aktivieren, mIcon=2131233566, mExtras=Bundle[mParcelledData.dataSize=144]], active item id=1, error=null}
+08-30 22:35:04.429  3070  4439 D MediaSessionService: onSessionPlaybackStateChanged: record=com.spotify.music/spotify-media-session/550 (userId=0) playbackState=PlaybackState {state=PAUSED(2), position=138214, buffered position=0, speed=0.0, updated=823955043, actions=3025844, custom actions=[Action:mName='Shuffle aktivieren/deaktivieren, mIcon=2131233570, mExtras=Bundle[mParcelledData.dataSize=144], Action:mName='Zu Sammlung hinzuf├╝gen, mIcon=2131233564, mExtras=Bundle[mParcelledData.dataSize=144], Action:mName='Radio starten, mIcon=2131233578, mExtras=Bundle[mParcelledData.dataSize=144], Action:mName='ÔÇ×Alle Songs wiederholenÔÇ£ aktivieren, mIcon=2131233566, mExtras=Bundle[mParcelledData.dataSize=144]], active item id=1, error=null}
+08-30 22:35:04.430  2108  3693 I vendor.qti.bluetooth@1.1-ibs_handler: ProcessIbsCmd: Received IBS_WAKE_IND: 0xFD
+08-30 22:35:04.430  2108  3693 I vendor.qti.bluetooth@1.1-ibs_handler: ProcessIbsCmd: Writing IBS_WAKE_ACK
+08-30 22:35:04.463  3070  4439 D MediaSessionService: onSessionPlaybackStateChanged: record=com.spotify.music/spotify-media-session/550 (userId=0) playbackState=PlaybackState {state=PAUSED(2), position=138214, buffered position=0, speed=0.0, updated=823955077, actions=3025844, custom actions=[Action:mName='Shuffle aktivieren/deaktivieren, mIcon=2131233570, mExtras=Bundle[mParcelledData.dataSize=144], Action:mName='Zu Sammlung hinzuf├╝gen, mIcon=2131233564, mExtras=Bundle[mParcelledData.dataSize=144], Action:mName='Radio starten, mIcon=2131233578, mExtras=Bundle[mParcelledData.dataSize=144], Action:mName='ÔÇ×Alle Songs wiederholenÔÇ£ aktivieren, mIcon=2131233566, mExtras=Bundle[mParcelledData.dataSize=144]], active item id=1, error=null}
+08-30 22:35:04.465   369   408 I NtAudioManager: getStreamVolume streamType :3, pkg :com.spotify.music, index :8
+08-30 22:35:04.467  3070  4439 D MediaSessionService: onSessionPlaybackStateChanged: record=com.spotify.music/spotify-media-session/550 (userId=0) playbackState=PlaybackState {state=PAUSED(2), position=138214, buffered position=0, speed=0.0, updated=823955081, actions=3025844, custom actions=[Action:mName='Shuffle aktivieren/deaktivieren, mIcon=2131233570, mExtras=Bundle[mParcelledData.dataSize=144], Action:mName='Zu Sammlung hinzuf├╝gen, mIcon=2131233564, mExtras=Bundle[mParcelledData.dataSize=144], Action:mName='Radio starten, mIcon=2131233578, mExtras=Bundle[mParcelledData.dataSize=144], Action:mName='ÔÇ×Alle Songs wiederholenÔÇ£ aktivieren, mIcon=2131233566, mExtras=Bundle[mParcelledData.dataSize=144]], active item id=1, error=null}
+08-30 22:35:04.469  3070  4413 D MediaSessionService: onSessionPlaybackStateChanged: record=com.spotify.music/spotify-media-session/550 (userId=0) playbackState=PlaybackState {state=PAUSED(2), position=138214, buffered position=0, speed=0.0, updated=823955083, actions=3025844, custom actions=[Action:mName='Shuffle aktivieren/deaktivieren, mIcon=2131233570, mExtras=Bundle[mParcelledData.dataSize=144], Action:mName='Zu Sammlung hinzuf├╝gen, mIcon=2131233564, mExtras=Bundle[mParcelledData.dataSize=144], Action:mName='Radio starten, mIcon=2131233578, mExtras=Bundle[mParcelledData.dataSize=144], Action:mName='ÔÇ×Alle Songs wiederholenÔÇ£ aktivieren, mIcon=2131233566, mExtras=Bundle[mParcelledData.dataSize=144]], active item id=1, error=null}
+08-30 22:35:04.489  3070  4413 D NtGnssRecord: MaxCN0:32
+08-30 22:35:04.494 18165 18198 I FusedLocation: (REDACTED) location delivery to %s blocked - too fast
+08-30 22:35:04.494 18165 18198 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+08-30 22:35:04.494 18165 18198 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+08-30 22:35:04.494 18165 18198 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+08-30 22:35:04.495 18165 18198 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+08-30 22:35:04.495 18165 18198 I FusedLocation: (REDACTED) location delivery to %s blocked - too fast
+08-30 22:35:04.495 18165 18198 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+08-30 22:35:04.495 18165 18198 I FusedLocation: (REDACTED) location delivery to %s blocked - too fast
+08-30 22:35:04.495 18165 18198 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+08-30 22:35:04.495 18165 18198 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+08-30 22:35:04.501  2108  3693 I vendor.qti.bluetooth@1.1-ibs_handler: ProcessIbsCmd: Received IBS_SLEEP_IND: 0xFE
+08-30 22:35:04.527  2136  4253 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0xE6361B4BBA1 hal_ts 823955047318648 lux=9.760 Channel0-5=157.0,98.0,18.0,87.0,0.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+08-30 22:35:04.550  2554  4990 D StNfcHal: (#028F1) Rx 6f 02 27 (hidden)
+08-30 22:35:04.551  2554  4989 D StNfcHal: HalStopTimer 
+08-30 22:35:04.634  2136  4253 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0xE6361D4F5EE hal_ts 823955157322659 lux=9.324 Channel0-5=157.0,98.0,17.0,87.0,0.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+08-30 22:35:04.687  3070  4166 I HalDevMgr: bestIfaceCreationProposal is null, requestIface=STA, existingIface=[name=wlan0 type=STA]
+08-30 22:35:00.737  6923  6923 I [binder][0xe6361fee897][20:35:04.686353] qca6750: [6923:I:HDD] __wlan_hdd_cfg80211_get_logger_supp_feature: Ring buffer disable
+08-30 22:35:04.687  3070  5946 D NtSmartWifiMonitor: get rssi = -58, frequecy=5180, datastall=0, current state=6
+08-30 22:35:04.687  3070  5946 D NtSmartWifiMonitor: 5G Wifi rssi queue: sufficient rssi=-70[-59, -58]
+08-30 22:35:04.744  2136  4253 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0xE6361F52FA3 hal_ts 823955267318753 lux=9.348 Channel0-5=159.0,100.0,17.0,88.0,0.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+08-30 22:35:04.855  2136  4253 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0xE6362156998 hal_ts 823955377318180 lux=9.772 Channel0-5=158.0,98.0,18.0,88.0,0.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+08-30 22:35:04.875  2554  4990 D StNfcHal: (#028F2) Rx 6f 02 0f (hidden)
+08-30 22:35:04.875  2554  4989 D StNfcHal: HalStopTimer 
+08-30 22:35:04.964  2136  4253 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0xE636235A3C2 hal_ts 823955487320367 lux=9.348 Channel0-5=159.0,99.0,17.0,88.0,0.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+08-30 22:35:04.989  2108  3693 I vendor.qti.bluetooth@1.1-ibs_handler: ProcessIbsCmd: Received IBS_WAKE_IND: 0xFD
+08-30 22:35:04.989  2108  3693 I vendor.qti.bluetooth@1.1-ibs_handler: ProcessIbsCmd: Writing IBS_WAKE_ACK
+08-30 22:35:05.019  5184  5184 W dataInfoSend: type=1400 audit(0.0:1080129817): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+08-30 22:35:05.019  5184  5184 W dataInfoSend: type=1400 audit(0.0:1080129818): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+08-30 22:35:05.019  5184  5184 W dataInfoSend: type=1400 audit(0.0:1080129819): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+08-30 22:35:01.074 16695 16695 W audit   : audit_lost=1078266118 audit_rate_limit=5 audit_backlog_limit=64
+08-30 22:35:05.019  5184  5184 W dataInfoSend: type=1400 audit(0.0:1080129820): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+08-30 22:35:01.074 16695 16695 E audit   : rate limit exceeded
+08-30 22:35:05.019  5184  5184 W dataInfoSend: type=1400 audit(0.0:1080129821): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+08-30 22:35:05.030  2108  3693 I vendor.qti.bluetooth@1.1-ibs_handler: ProcessIbsCmd: Received IBS_SLEEP_IND: 0xFE
+08-30 22:35:05.074  2136  4253 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0xE636255DDBD hal_ts 823955597320107 lux=9.785 Channel0-5=159.0,99.0,18.0,88.0,0.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+08-30 22:35:05.112  2947  2947 I adbd    : adbd service requested 'shell,v2,TERM=dumb:export ANDROID_LOG_TAGS=''; exec logcat '-d' '-t' '400''
+08-30 22:35:01.179  1011  1011 I logd    : logdr: UID=2000 GID=2000 PID=699 n tail=400 logMask=99 pid=0 start=0ns deadline=0ns
+08-30 22:35:05.144  2554  4990 D StNfcHal: (#028F3) Rx 6f 02 27 (hidden)
+08-30 22:35:05.144  2554  4989 D StNfcHal: HalStopTimer 
+08-30 22:35:05.184  2136  4253 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0xE63627617BF hal_ts 823955707320211 lux=9.833 Channel0-5=163.0,100.0,18.0,89.0,0.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+08-30 22:35:05.224 13456 14044 I eufe    : (REDACTED) HDM. appOpsListener %s %s
+08-30 22:35:05.224 13456 14044 I eufe    : (REDACTED) HDM. Ignoring irrelevant audio permission changes for package %s
+08-30 22:35:05.224 13456 14044 I eufe    : (REDACTED) HDM. appOpsListener %s %s
+08-30 22:35:05.224 13456 14044 I eufe    : (REDACTED) HDM. Ignoring irrelevant audio permission changes for package %s
+08-30 22:35:05.294  2136  4253 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0xE6362965251 hal_ts 823955817327815 lux=9.821 Channel0-5=162.0,100.0,18.0,88.0,0.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+08-30 22:35:05.355  2108  3696 I vendor.qti.bluetooth@1.1-ibs_handler: DeviceSleep: TX Awake, Sending SLEEP_IND
+08-30 22:35:05.356  2108  3696 D vendor.qti.bluetooth@1.1-ibs_handler: SerialClockVote: vote for UART CLK OFF
+08-30 22:35:05.378  2947  2947 I adbd    : adbd service requested 'shell,v2,TERM=dumb:export ANDROID_LOG_TAGS=''; exec logcat '-d' '-t' '400''

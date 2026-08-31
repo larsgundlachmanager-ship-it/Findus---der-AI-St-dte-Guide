@@ -1,0 +1,3396 @@
+{
+  "generated_at": "2026-08-28T04:18:12.713Z",
+  "summary": {
+    "city_id": "flensburg",
+    "checked": 117,
+    "ok": 31,
+    "check": 36,
+    "bad": 50,
+    "errors": 0,
+    "max_delta_m": 180,
+    "city_halo_m": 28000,
+    "story_only": true
+  },
+  "rows": [
+    {
+      "id": "flensburg_yachtcharter_flensburg",
+      "name": "Yachtcharter Flensburg",
+      "category": "tour",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.79884002499999,
+        "lng": 9.428325
+      },
+      "query": "Yachtcharter Flensburg, Flensburg, Germany",
+      "osm": {
+        "lat": 54.8294033,
+        "lng": 9.8038687,
+        "display_name": "Flensburger Förde, Kreis Schleswig-Flensburg, Deutschland",
+        "class": "natural",
+        "type": "bay",
+        "provider": "photon"
+      },
+      "delta_m": 24301,
+      "from_city_m": 1324,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_citygames_flensburg",
+      "name": "CityGames Flensburg",
+      "category": "tour",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.808392025,
+        "lng": 9.4551132875
+      },
+      "query": "CityGames Flensburg, Flensburg, Germany",
+      "osm": {
+        "lat": 54.8294033,
+        "lng": 9.8038687,
+        "display_name": "Flensburger Förde, Kreis Schleswig-Flensburg, Deutschland",
+        "class": "natural",
+        "type": "bay",
+        "provider": "photon"
+      },
+      "delta_m": 22465,
+      "from_city_m": 1710,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_bierbike_flensburg",
+      "name": "BierBike Flensburg",
+      "category": "tour",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.81225835,
+        "lng": 9.473924816666667
+      },
+      "query": "BierBike Flensburg, Flensburg, Germany",
+      "osm": {
+        "lat": 54.8294033,
+        "lng": 9.8038687,
+        "display_name": "Flensburger Förde, Kreis Schleswig-Flensburg, Deutschland",
+        "class": "natural",
+        "type": "bay",
+        "provider": "photon"
+      },
+      "delta_m": 21223,
+      "from_city_m": 2687,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_evangelisch_freikirchliche_gemeinde_flensburg_baptisten_kdor",
+      "name": "Evangelisch-Freikirchliche Gemeinde Flensburg (Baptisten) KdöR",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.79211328571428,
+        "lng": 9.448840285714287
+      },
+      "query": "Evangelisch-Freikirchliche Gemeinde Flensburg KdöR, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7283923,
+        "lng": 9.7414879,
+        "display_name": "Evangelisch-Freikirchliche Gemeinde, Schulstraße, Sterup, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 20068,
+      "from_city_m": 216,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_blutenwiese_flensburg_bluht",
+      "name": "Blütenwiese Flensburg blüht",
+      "category": "natur",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.77779339999999,
+        "lng": 9.4593124
+      },
+      "query": "Blütenwiese Flensburg blüht, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7654406,
+        "lng": 9.1688324,
+        "display_name": "Rastplatz \"Schafflund blüht auf\", Medelbyer Straße, Schafflund, Deutschland",
+        "class": "information",
+        "type": "board",
+        "provider": "photon"
+      },
+      "delta_m": 18682,
+      "from_city_m": 1941,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_st_jurgen_kirche_flensburg_ev_luth_kirchengemeinde_flensburg_st_jurgen",
+      "name": "St. Jürgen Kirche Flensburg - Ev.-Luth. Kirchengemeinde Flensburg-St. Jürgen",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.79108007692308,
+        "lng": 9.441552769230771
+      },
+      "query": "St. Jürgen Kirche Flensburg, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7338687,
+        "lng": 9.1692008,
+        "display_name": "Sankt-Jürgen-Kirche, Ortsstraße, Nordhackstedt, Schafflund, Kreis Schleswig-Flensburg, Schleswig-Holstein, 24980, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.1507975276546128,
+        "osm_type": "way",
+        "osm_id": 231819611,
+        "provider": "nominatim"
+      },
+      "delta_m": 18595,
+      "from_city_m": 458,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_st_petri_kirche_flensburg_ev_luth_st_petrigemeinde_in_flensburg",
+      "name": "St. Petri Kirche Flensburg - Ev.-Luth. St. Petrigemeinde in Flensburg",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.80075013999999,
+        "lng": 9.421493475
+      },
+      "query": "St. Petri Kirche Flensburg, Flensburg, Germany",
+      "osm": {
+        "lat": 54.6431289,
+        "lng": 9.4826977,
+        "display_name": "Sankt Petri, Kirchenweg, Sieverstedt, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 17962,
+      "from_city_m": 1811,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_schloss_glucksburg",
+      "name": "Schloss Glücksburg",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.831969882500005,
+        "lng": 9.54349218
+      },
+      "query": "Schloss Glücksburg, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7184687,
+        "lng": 9.3993589,
+        "display_name": "Schloß Glücksburg, A 7, Barderup-Ost, Barderup, Oeversee, Kreis Schleswig-Flensburg, Schleswig-Holstein, 24988, Deutschland",
+        "class": "information",
+        "type": "board",
+        "importance": 0.00004675593194471683,
+        "osm_type": "node",
+        "osm_id": 13988504758,
+        "provider": "nominatim"
+      },
+      "delta_m": 15644,
+      "from_city_m": 7503,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_evangelisch_lutherische_diakonissenanstalt_zu_flensburg",
+      "name": "Evangelisch-lutherische Diakonissenanstalt zu Flensburg",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.79035866666667,
+        "lng": 9.424143833333334
+      },
+      "query": "Evangelisch-lutherische Diakonissenanstalt zu Flensburg, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7689754,
+        "lng": 9.5781815,
+        "display_name": "Evangelischer Kindergarten Husby, Zum Dorfteich, Husby, Deutschland",
+        "class": "amenity",
+        "type": "kindergarten",
+        "provider": "photon"
+      },
+      "delta_m": 10160,
+      "from_city_m": 1513,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_gartenkolonie_112",
+      "name": "Gartenkolonie 112",
+      "category": "natur",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.768083083333345,
+        "lng": 9.428137833333333
+      },
+      "query": "Gartenkolonie 112, Flensburg, Germany",
+      "osm": {
+        "lat": 54.8093128,
+        "lng": 9.4680596,
+        "display_name": "Kolonie 119 Osbek, Osbek, Mürwik, Flensburg, Schleswig-Holstein, Deutschland",
+        "class": "landuse",
+        "type": "allotments",
+        "importance": 0.08006650568398563,
+        "osm_type": "way",
+        "osm_id": 35471937,
+        "provider": "nominatim"
+      },
+      "delta_m": 5251,
+      "from_city_m": 3099,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_eiszeit_haus",
+      "name": "Eiszeit Haus",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.785890800000004,
+        "lng": 9.4260196
+      },
+      "query": "Eiszeit Haus, Flensburg, Germany",
+      "osm": {
+        "lat": 54.8161203,
+        "lng": 9.4747378,
+        "display_name": "Eiszeit, Kleine Lücke, Flensburg, Deutschland",
+        "class": "amenity",
+        "type": "cafe",
+        "provider": "photon"
+      },
+      "delta_m": 4588,
+      "from_city_m": 1603,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_funk_und_telegraphenhaus_flensburg_murwik",
+      "name": "Funk- und Telegraphenhaus (Flensburg-Mürwik)",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.80789982222222,
+        "lng": 9.457724288888889
+      },
+      "query": "Funk-, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7702959,
+        "lng": 9.4359891,
+        "display_name": "Physiotherapie Funk, 2, Eckernförder Landstraße, Rude, Peelwatt, Südstadt, Flensburg, Schleswig-Holstein, 24941, Deutschland",
+        "class": "office",
+        "type": "therapist",
+        "importance": 0.000066505683985611,
+        "osm_type": "node",
+        "osm_id": 5373601257,
+        "provider": "nominatim"
+      },
+      "delta_m": 4407,
+      "from_city_m": 1718,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_russisch_deutsche_buhne",
+      "name": "Russisch-Deutsche Bühne",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.81411367142857,
+        "lng": 9.478253142857143
+      },
+      "query": "Russisch-Deutsche Bühne, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7857119,
+        "lng": 9.4404011,
+        "display_name": "Niederdeutsche Bühne, Augustastraße, Flensburg, Deutschland",
+        "class": "amenity",
+        "type": "theatre",
+        "provider": "photon"
+      },
+      "delta_m": 3982,
+      "from_city_m": 3024,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_hermanns_schrebergarten",
+      "name": "Hermanns Schrebergarten",
+      "category": "natur",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.7707191,
+        "lng": 9.4508839
+      },
+      "query": "Hermanns Schrebergarten, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7990513,
+        "lng": 9.4188952,
+        "display_name": "Arnold Hermannsen, Harrisleer Straße, Flensburg, Deutschland",
+        "class": "historic",
+        "type": "memorial",
+        "provider": "photon"
+      },
+      "delta_m": 3759,
+      "from_city_m": 2572,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_broschmann_finke_theater_company",
+      "name": "Broschmann & Finke Theater Company",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.800211985714284,
+        "lng": 9.390791785714287
+      },
+      "query": "Broschmann, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7833021,
+        "lng": 9.4333264,
+        "display_name": "Flensburg, Deutschland",
+        "class": "place",
+        "type": "city",
+        "provider": "photon"
+      },
+      "delta_m": 3312,
+      "from_city_m": 3674,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_katholische_kirche_st_ansgar",
+      "name": "Katholische Kirche St Ansgar",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.80587853571428,
+        "lng": 9.465086992857142
+      },
+      "query": "Katholische Kirche St Ansgar, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7872943,
+        "lng": 9.4314598,
+        "display_name": "Katholische Kirche, Nordergraben, Flensburg, Deutschland",
+        "class": "highway",
+        "type": "bus_stop",
+        "provider": "photon"
+      },
+      "delta_m": 2986,
+      "from_city_m": 1779,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_alive_bucher_geschenke_mehr",
+      "name": "Alive - Bücher, Geschenke & Mehr",
+      "category": "souvenir",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.770021833333324,
+        "lng": 9.396825166666666
+      },
+      "query": "Alive, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7833021,
+        "lng": 9.4333264,
+        "display_name": "Flensburg, Deutschland",
+        "class": "place",
+        "type": "city",
+        "provider": "photon"
+      },
+      "delta_m": 2768,
+      "from_city_m": 4160,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_canvero_shop_flensburg",
+      "name": "Canvero Shop Flensburg",
+      "category": "souvenir",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.78530066666667,
+        "lng": 9.435463166666667
+      },
+      "query": "Canvero Shop Flensburg, Flensburg, Germany",
+      "osm": {
+        "lat": 54.8081497,
+        "lng": 9.4330028,
+        "display_name": "FSG Shipyard, Flensburg, Deutschland",
+        "class": "landuse",
+        "type": "industrial",
+        "provider": "photon"
+      },
+      "delta_m": 2546,
+      "from_city_m": 1195,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_forum_theater_flensburg",
+      "name": "Forum Theater Flensburg",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.80455175,
+        "lng": 9.420074333333334
+      },
+      "query": "Forum Theater Flensburg, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7910393,
+        "lng": 9.4481347,
+        "display_name": "Theaterschule Flensburg, Adelbyer Kirchenweg, Flensburg, Deutschland",
+        "class": "building",
+        "type": "civic",
+        "provider": "photon"
+      },
+      "delta_m": 2344,
+      "from_city_m": 2103,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_sonwik_yachthafen",
+      "name": "Sonwik Yachthafen",
+      "category": "hafen",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.79554673333333,
+        "lng": 9.430206583333332
+      },
+      "query": "Sonwik Yachthafen, Flensburg, Germany",
+      "osm": {
+        "lat": 54.8105135,
+        "lng": 9.4535411,
+        "display_name": "Sonwik Yachthafen, Fördepromenade, Sonwik, Stützpunkt Flensburg-Mürwik, Mürwik, Flensburg, Schleswig-Holstein, 24944, Deutschland",
+        "class": "leisure",
+        "type": "marina",
+        "importance": 0.000066505683985611,
+        "osm_type": "way",
+        "osm_id": 112557220,
+        "provider": "nominatim"
+      },
+      "delta_m": 2237,
+      "from_city_m": 1095,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "flensburg_phanomenta",
+        "flensburg_nsg_twedter_feld",
+        "flensburg_nordertor"
+      ]
+    },
+    {
+      "id": "flensburg_ehrenhain",
+      "name": "Ehrenhain",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.800152716666666,
+        "lng": 9.448218133333334
+      },
+      "query": "Ehrenhain, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7833021,
+        "lng": 9.4333264,
+        "display_name": "Flensburg, Deutschland",
+        "class": "place",
+        "type": "city",
+        "provider": "photon"
+      },
+      "delta_m": 2103,
+      "from_city_m": 717,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_equippers_flensburg_e_v",
+      "name": "Equippers Flensburg e.V. ⛪",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.77182883333333,
+        "lng": 9.428018083333333
+      },
+      "query": "Equippers Flensburg e.V. ⛪, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7883304,
+        "lng": 9.4331841,
+        "display_name": "Equippers Flensburg, Speicherlinie, Flensburg, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 1865,
+      "from_city_m": 2724,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_gallery4",
+      "name": "Gallery4",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.79992805714286,
+        "lng": 9.437099128571429
+      },
+      "query": "Gallery4, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7833021,
+        "lng": 9.4333264,
+        "display_name": "Flensburg, Deutschland",
+        "class": "place",
+        "type": "city",
+        "provider": "photon"
+      },
+      "delta_m": 1864,
+      "from_city_m": 936,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_krautergarten_mit_farberpflanzen_und_wildgarten",
+      "name": "Kräutergarten mit Färberpflanzen und Wildgarten",
+      "category": "natur",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.7753998,
+        "lng": 9.4587273
+      },
+      "query": "Kräutergarten, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7833021,
+        "lng": 9.4333264,
+        "display_name": "Flensburg, Deutschland",
+        "class": "place",
+        "type": "city",
+        "provider": "photon"
+      },
+      "delta_m": 1851,
+      "from_city_m": 2174,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_cambio_carsharing_station_schloss",
+      "name": "cambio CarSharing - Station Schloss",
+      "category": "denkmal",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.7940095,
+        "lng": 9.427394114285715
+      },
+      "query": "cambio CarSharing, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7824731,
+        "lng": 9.4419984,
+        "display_name": "CarSharing Station Heinrich / IHK, Heinrichstraße, St. Johannis, Jürgensby, Flensburg, Schleswig-Holstein, 24937, Deutschland",
+        "class": "amenity",
+        "type": "car_sharing",
+        "importance": 0.000066505683985611,
+        "osm_type": "node",
+        "osm_id": 3583698353,
+        "provider": "nominatim"
+      },
+      "delta_m": 1588,
+      "from_city_m": 1257,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_wulf_f_m_jansen_facharzt_fur_allgemein_medizin",
+      "name": "Wulf F.M. Jansen Facharzt für allgemein Medizin",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.79779674,
+        "lng": 9.452843859999998
+      },
+      "query": "Wulf F.M. Jansen Facharzt für, Flensburg, Germany",
+      "osm": {
+        "lat": 54.790754,
+        "lng": 9.4321749,
+        "display_name": "Gutachtenpraxis Dr. med. Karl-Uwe Bäcker | Facharzt für Orthopädie, Traumatologie, Sportmedizin & Chiropraktik, Neue Straße, Flensburg, Deutschland",
+        "class": "office",
+        "type": "surveyor",
+        "provider": "photon"
+      },
+      "delta_m": 1539,
+      "from_city_m": 586,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_wochenmarkt_auf_dem_sudermarkt",
+      "name": "Wochenmarkt auf dem Südermarkt",
+      "category": "markt",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.783063142857145,
+        "lng": 9.436216857142856
+      },
+      "query": "Wochenmarkt auf dem, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7758529,
+        "lng": 9.4552279,
+        "display_name": "Zentrale Hochschulbibliothek Flensburg, Auf dem Campus, Flensburg, Deutschland",
+        "class": "amenity",
+        "type": "library",
+        "provider": "photon"
+      },
+      "delta_m": 1459,
+      "from_city_m": 1374,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_gertruds_krautergarten_heilkrautergarten",
+      "name": "Gertruds Kräutergarten (Heilkräutergarten)",
+      "category": "natur",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.784788,
+        "lng": 9.395356999999999
+      },
+      "query": "Gertruds Kräutergarten, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7943052,
+        "lng": 9.4091597,
+        "display_name": "Flensburg-Duburg, Flensburg, Deutschland",
+        "class": "highway",
+        "type": "motorway_junction",
+        "provider": "photon"
+      },
+      "delta_m": 1380,
+      "from_city_m": 3457,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_st_johannis_kirche_zu_flensburg_der_ev_luth_kirchengemeinde_adelby_eng",
+      "name": "St. Johannis Kirche zu Flensburg der Ev.-Luth. Kirchengemeinde Adelby-Engelsby",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.784092799999996,
+        "lng": 9.466367400000001
+      },
+      "query": "St. Johannis Kirche zu Flensburg der Ev.-Luth. Kirchengemeinde Adelby-Engelsby, Flensburg",
+      "osm": {
+        "lat": 54.7774696,
+        "lng": 9.4485706,
+        "display_name": "Kleingartenkoppel „Kanzleistraße Ost” der EV.-Luth. Kirchengemeinde St. Johannis, Flensburg, Deutschland",
+        "class": "landuse",
+        "type": "allotments",
+        "provider": "photon"
+      },
+      "delta_m": 1358,
+      "from_city_m": 1641,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "flensburg_osm_transit_3143511204"
+      ]
+    },
+    {
+      "id": "flensburg_museumshafen_flensburg_e_v",
+      "name": "Museumshafen Flensburg e. V.",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.7926104,
+        "lng": 9.4324242
+      },
+      "query": "Museumshafen Flensburg e. V., Flensburg, Germany",
+      "osm": {
+        "lat": 54.7922018,
+        "lng": 9.4115133,
+        "display_name": "Flensburger Tennisclub an der Marienhölzung e. V., Marienhölzungsweg, Flensburg, Deutschland",
+        "class": "landuse",
+        "type": "recreation_ground",
+        "provider": "photon"
+      },
+      "delta_m": 1341,
+      "from_city_m": 943,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_hausarzte_friesische_strasse",
+      "name": "Hausärzte Friesische Straße",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.782337500000004,
+        "lng": 9.435158666666668
+      },
+      "query": "Hausärzte Friesische Straße, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7787502,
+        "lng": 9.4167242,
+        "display_name": "Flensburger Tanzclub e.V., Friesische Straße, Flensburg, Deutschland",
+        "class": "leisure",
+        "type": "dance",
+        "provider": "photon"
+      },
+      "delta_m": 1248,
+      "from_city_m": 1478,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_st_michael_kirche_flensburg_ev_luth_kirchengemeinde_st_michael_in_flen",
+      "name": "St. Michael Kirche Flensburg - Ev.-Luth. Kirchengemeinde St. Michael in Flensburg",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.78201576923076,
+        "lng": 9.419125846153843
+      },
+      "query": "St. Michael Kirche Flensburg, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7831589,
+        "lng": 9.4356556,
+        "display_name": "Sankt Nikolai, Nikolaikirchhof, Flensburg, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 1068,
+      "from_city_m": 2212,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_pauluskirche_zu_flensburg_der_ev_luth_paulus_kirchengemeinde_flensburg",
+      "name": "Pauluskirche zu Flensburg der Ev.-Luth. Paulus-Kirchengemeinde Flensburg",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.77392653333333,
+        "lng": 9.433282666666667
+      },
+      "query": "Pauluskirche zu Flensburg der Ev.-Luth., Flensburg, Germany",
+      "osm": {
+        "lat": 54.7772849,
+        "lng": 9.445081,
+        "display_name": "Kleingartenkoppel „Kanzleistraße West” der EV.-Luth. Kirchengemeinde St. Johannis, Flensburg, Deutschland",
+        "class": "landuse",
+        "type": "allotments",
+        "provider": "photon"
+      },
+      "delta_m": 844,
+      "from_city_m": 2372,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_st_johannis_kirche_flensburg_ev_luth_kirchengemeinde_flensburg_st_joha",
+      "name": "St. Johannis Kirche Flensburg - Ev.-Luth. Kirchengemeinde Flensburg-St. Johannis",
+      "category": "kirche",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.78354466666668,
+        "lng": 9.44080975
+      },
+      "query": "St. Johannis Kirche Flensburg, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7774696,
+        "lng": 9.4485706,
+        "display_name": "Kleingartenkoppel „Kanzleistraße Ost” der EV.-Luth. Kirchengemeinde St. Johannis, Flensburg, Deutschland",
+        "class": "landuse",
+        "type": "allotments",
+        "provider": "photon"
+      },
+      "delta_m": 839,
+      "from_city_m": 1201,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_flensburger_hafen",
+      "name": "Flensburger-Hafen",
+      "category": "hafen",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.78327119999999,
+        "lng": 9.4334114
+      },
+      "query": "Flensburger-Hafen, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7907558,
+        "lng": 9.4319648,
+        "display_name": "Kiosk Flensburger Hafen, 3, Neue Straße, Nordertor, Altstadt, Flensburg, Schleswig-Holstein, 24939, Deutschland",
+        "class": "shop",
+        "type": "kiosk",
+        "importance": 0.000066505683985611,
+        "osm_type": "node",
+        "osm_id": 4398831967,
+        "provider": "nominatim"
+      },
+      "delta_m": 837,
+      "from_city_m": 1454,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_tsb_flensburg_sportanlage",
+      "name": "TSB Flensburg Sportanlage",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.788904714285714,
+        "lng": 9.41804957142857
+      },
+      "query": "TSB Flensburg Sportanlage, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7954367,
+        "lng": 9.4219391,
+        "display_name": "TSB Flensburg, Eckenerstraße, Flensburg, Deutschland",
+        "class": "landuse",
+        "type": "recreation_ground",
+        "provider": "photon"
+      },
+      "delta_m": 768,
+      "from_city_m": 1932,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_braasch_rum_rum_manufaktur_museum",
+      "name": "Braasch Rum & Rum Manufaktur Museum",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.7813634,
+        "lng": 9.435348199999998
+      },
+      "query": "Braasch Rum, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7875391,
+        "lng": 9.433078,
+        "display_name": "Braasch Rum, 26, Große Straße, Altstadt, St. Marien, Altstadt, Flensburg, Schleswig-Holstein, 24937, Deutschland",
+        "class": "shop",
+        "type": "alcohol",
+        "importance": 0.000066505683985611,
+        "osm_type": "node",
+        "osm_id": 3462048809,
+        "provider": "nominatim"
+      },
+      "delta_m": 702,
+      "from_city_m": 1566,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_st_gertrud_kirche_flensburg_ev_luth_kirchengemeinde_st_gertrud_zu_flen",
+      "name": "St. Gertrud Kirche Flensburg - Ev.-Luth. Kirchengemeinde St. Gertrud zu Flensburg",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.79120342857143,
+        "lng": 9.416837285714285
+      },
+      "query": "St. Gertrud Kirche Flensburg, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7943052,
+        "lng": 9.4091597,
+        "display_name": "Flensburg-Duburg, Flensburg, Deutschland",
+        "class": "highway",
+        "type": "motorway_junction",
+        "provider": "photon"
+      },
+      "delta_m": 601,
+      "from_city_m": 1954,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_salondampfer_alexandra",
+      "name": "Salondampfer Alexandra",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.79258660000001,
+        "lng": 9.4332844
+      },
+      "query": "Salondampfer Alexandra, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7881722,
+        "lng": 9.4365386,
+        "display_name": "Salondampfer \"Alexandra\" 1908, Norderhofenden, St. Jürgen, Jürgensby, Flensburg, Schleswig-Holstein, 24937, Deutschland",
+        "class": "historic",
+        "type": "memorial",
+        "importance": 0.000066505683985611,
+        "osm_type": "node",
+        "osm_id": 3892528436,
+        "provider": "nominatim"
+      },
+      "delta_m": 533,
+      "from_city_m": 888,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "flensburg_schiffbruecke"
+      ]
+    },
+    {
+      "id": "flensburg_bierbike_hof",
+      "name": "BierBike Hof",
+      "category": "tour",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.779045142857136,
+        "lng": 9.438884714285715
+      },
+      "query": "BierBike Hof, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7836194,
+        "lng": 9.4374351,
+        "display_name": "Hotel Flensburger Hof, Süderhofenden, Flensburg, Deutschland",
+        "class": "tourism",
+        "type": "hotel",
+        "provider": "photon"
+      },
+      "delta_m": 517,
+      "from_city_m": 1715,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_kleine_buhne",
+      "name": "Kleine Bühne",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.7866,
+        "lng": 9.432693333333333
+      },
+      "query": "Kleine Bühne, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7857119,
+        "lng": 9.4404011,
+        "display_name": "Niederdeutsche Bühne, Augustastraße, Flensburg, Deutschland",
+        "class": "amenity",
+        "type": "theatre",
+        "provider": "photon"
+      },
+      "delta_m": 504,
+      "from_city_m": 1213,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_stadtwerke_flensburg_ladestation",
+      "name": "Stadtwerke Flensburg-Ladestation",
+      "category": "bahnhof",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.78093461538462,
+        "lng": 9.438383846153846
+      },
+      "query": "Stadtwerke Flensburg-Ladestation, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7847818,
+        "lng": 9.4359885,
+        "display_name": "Stadtwerke Flensburg, Nikolaistraße, Flensburg, Deutschland",
+        "class": "office",
+        "type": "company",
+        "provider": "photon"
+      },
+      "delta_m": 455,
+      "from_city_m": 1528,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "flensburg_osm_transit_1125751826"
+      ]
+    },
+    {
+      "id": "flensburg_hausarztpraxis_sonwik",
+      "name": "HAUSARZTPRAXIS SONWIK",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.8067317,
+        "lng": 9.4526579
+      },
+      "query": "HAUSARZTPRAXIS SONWIK, Flensburg, Germany",
+      "osm": {
+        "lat": 54.8092976,
+        "lng": 9.4551322,
+        "display_name": "Sonwik, Flensburg, Deutschland",
+        "class": "place",
+        "type": "neighbourhood",
+        "provider": "photon"
+      },
+      "delta_m": 326,
+      "from_city_m": 1489,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_malteser_fordeklinikum_st_katharina_standort_waldstrasse",
+      "name": "Malteser Fördeklinikum St. Katharina Standort Waldstraße",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.791947,
+        "lng": 9.421304857142857
+      },
+      "query": "Malteser Fördeklinikum St. Katharina Standort, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7901483,
+        "lng": 9.4253104,
+        "display_name": "Malteser Fördeklinikum St. Katharina, Standort Knuthstraße, 1, Knuthstraße, Duburg, Stadtpark, Westliche Höhe, Flensburg, Schleswig-Holstein, 24939, Deutschland",
+        "class": "emergency",
+        "type": "ambulance_station",
+        "importance": 0.23992860907835414,
+        "osm_type": "way",
+        "osm_id": 27110659,
+        "provider": "nominatim"
+      },
+      "delta_m": 325,
+      "from_city_m": 1659,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_zob_flensburg",
+      "name": "ZOB Flensburg",
+      "category": "bahnhof",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.78317166666667,
+        "lng": 9.435661499999998
+      },
+      "query": "ZOB Flensburg, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7858269,
+        "lng": 9.4375074,
+        "display_name": "ZOB Flensburg, Süderhofenden, St. Nikolai, Altstadt, Flensburg, Schleswig-Holstein, 24937, Deutschland",
+        "class": "amenity",
+        "type": "bus_station",
+        "importance": 0.000066505683985611,
+        "osm_type": "way",
+        "osm_id": 25091502,
+        "provider": "nominatim"
+      },
+      "delta_m": 318,
+      "from_city_m": 1382,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "flensburg_st_nikolai_kirche_zu_flensburg_der_ev_luth_st_nikolai_kirchengemeinde_"
+      ]
+    },
+    {
+      "id": "flensburg_ggw_arena",
+      "name": "GGW Arena",
+      "category": "freizeit",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.775711625,
+        "lng": 9.455076250000001
+      },
+      "query": "GGW Arena, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7734782,
+        "lng": 9.4527215,
+        "display_name": "GP JOULE Arena, Campusallee, Flensburg, Deutschland",
+        "class": "leisure",
+        "type": "sports_centre",
+        "provider": "photon"
+      },
+      "delta_m": 291,
+      "from_city_m": 2071,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_ballettschule_flensburg",
+      "name": "Ballettschule Flensburg",
+      "category": "theater",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.788470000000004,
+        "lng": 9.431918571428572
+      },
+      "query": "Ballettschule Flensburg, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7861443,
+        "lng": 9.4335022,
+        "display_name": "Ballettschule am Theater, 20, Rathausstraße, Altstadt, St. Marien, Altstadt, Flensburg, Schleswig-Holstein, 24937, Deutschland",
+        "class": "leisure",
+        "type": "dance",
+        "importance": 0.000066505683985611,
+        "osm_type": "node",
+        "osm_id": 3215449043,
+        "provider": "nominatim"
+      },
+      "delta_m": 278,
+      "from_city_m": 1131,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_schiffbruecke",
+      "name": "Schiffbrücke",
+      "category": "hafen",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.79258660000001,
+        "lng": 9.4332844
+      },
+      "query": "Schiffbrücke, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7948801,
+        "lng": 9.4326128,
+        "display_name": "Schiffbrücke, Nordertor, Altstadt, Flensburg, Schleswig-Holstein, 24939, Deutschland",
+        "class": "highway",
+        "type": "secondary",
+        "importance": 0.053399839017318956,
+        "osm_type": "way",
+        "osm_id": 129021407,
+        "provider": "nominatim"
+      },
+      "delta_m": 259,
+      "from_city_m": 888,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "flensburg_salondampfer_alexandra"
+      ]
+    },
+    {
+      "id": "flensburg_aussichtsplattform_am_volkspark",
+      "name": "Aussichtsplattform am Volkspark",
+      "category": "aussicht",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.798215035714264,
+        "lng": 9.446968765306128
+      },
+      "query": "Aussichtsplattform am Volkspark, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7961409,
+        "lng": 9.4465556,
+        "display_name": "Wasserturm Flensburg-Mürwik, Am Volkspark, Flensburg, Deutschland",
+        "class": "man_made",
+        "type": "water_tower",
+        "provider": "photon"
+      },
+      "delta_m": 232,
+      "from_city_m": 497,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "flensburg_volkspark",
+        "flensburg_marchenskulpturen_im_volkspark"
+      ]
+    },
+    {
+      "id": "flensburg_christiansenpark",
+      "name": "Christiansenpark",
+      "category": "natur",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.7841546,
+        "lng": 9.424464
+      },
+      "query": "Christiansenpark, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7851333,
+        "lng": 9.4275539,
+        "display_name": "Christiansenpark, Stadtpark, Westliche Höhe, Flensburg, Schleswig-Holstein, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "importance": 0.18157831638402872,
+        "osm_type": "way",
+        "osm_id": 25830307,
+        "provider": "nominatim"
+      },
+      "delta_m": 226,
+      "from_city_m": 1795,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_ehemaliges_disc_golf_auf_dem_campus",
+      "name": "Ehemaliges Disc Golf auf dem Campus",
+      "category": "freizeit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.7736661,
+        "lng": 9.4549038
+      },
+      "query": "Ehemaliges Disc Golf auf dem, Flensburg, Germany",
+      "osm": {
+        "lat": 51.6902767,
+        "lng": 8.5000311,
+        "display_name": "Disc Golf Parcours Verlar, Auf dem Howe, Salzkotten, Deutschland",
+        "class": "leisure",
+        "type": "pitch",
+        "provider": "photon"
+      },
+      "delta_m": 348689,
+      "from_city_m": 2289,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_citti_ticketcenter",
+      "name": "CITTI Ticketcenter",
+      "category": "theater",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.77377532258066,
+        "lng": 9.397450651612903
+      },
+      "query": "CITTI Ticketcenter, Flensburg, Germany",
+      "osm": {
+        "lat": 54.3129159,
+        "lng": 10.0983243,
+        "display_name": "CITTI Ticketcenter, Mühlendamm, Kiel, Deutschland",
+        "class": "shop",
+        "type": "ticket",
+        "provider": "photon"
+      },
+      "delta_m": 68336,
+      "from_city_m": 3876,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city",
+        "duplicate_center"
+      ],
+      "twins": [
+        "flensburg_leder_freytag_citti_park",
+        "flensburg_osm_post_office_6461030760",
+        "flensburg_osm_transit_9149621763"
+      ]
+    },
+    {
+      "id": "flensburg_e_fun_holler",
+      "name": "E-Fun Höller",
+      "category": "freizeitpark",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.7739996,
+        "lng": 9.318624999999999
+      },
+      "query": "E-Fun Höller, Flensburg, Germany",
+      "osm": {
+        "lat": 54.6522864,
+        "lng": 9.9508679,
+        "display_name": "4 Fun Fitness, Bernard-Liening-Straße, Kappeln, Deutschland",
+        "class": "leisure",
+        "type": "fitness_centre",
+        "provider": "photon"
+      },
+      "delta_m": 42807,
+      "from_city_m": 8519,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_schiffahrtsmuseum_flensburg",
+      "name": "Schiffahrtsmuseum - Flensburg",
+      "category": "bahnhof",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.79283714285715,
+        "lng": 9.433102285714286
+      },
+      "query": "Schiffahrtsmuseum, Flensburg, Germany",
+      "osm": {
+        "lat": 54.4896555,
+        "lng": 9.08094,
+        "display_name": "Schiffahrtsmuseum, Flensburger Chaussee, Husum, Deutschland",
+        "class": "tourism",
+        "type": "artwork",
+        "provider": "photon"
+      },
+      "delta_m": 40620,
+      "from_city_m": 896,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_frau_dr_med_iwona_michaelsen",
+      "name": "Frau Dr. med. Iwona Michaelsen",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.80133151538462,
+        "lng": 9.45351026153846
+      },
+      "query": "Frau Dr. med. Iwona Michaelsen, Flensburg, Germany",
+      "osm": {
+        "lat": 54.5061153,
+        "lng": 9.6031083,
+        "display_name": "Dr. med. Frauke Apel, Schleiweg, Fahrdorf, Deutschland",
+        "class": "amenity",
+        "type": "doctors",
+        "provider": "photon"
+      },
+      "delta_m": 34208,
+      "from_city_m": 941,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city",
+        "duplicate_center"
+      ],
+      "twins": [
+        "flensburg_osm_post_office_1086069108"
+      ]
+    },
+    {
+      "id": "flensburg_1_klasse_yachtcharter",
+      "name": "1. Klasse Yachtcharter",
+      "category": "tour",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.81003639999999,
+        "lng": 9.4544683
+      },
+      "query": "1. Klasse Yachtcharter, Flensburg, Germany",
+      "osm": {
+        "lat": 54.5116641,
+        "lng": 9.5418417,
+        "display_name": "Galerie der klassischen Moderne, Schlossallee, Schleswig, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 33650,
+      "from_city_m": 1874,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_galerie_der_miezen_katzenkunst_norderstrasse_flensburg",
+      "name": "Galerie der Miezen - Katzenkunst Norderstraße Flensburg",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.79251250000001,
+        "lng": 9.431128166666667
+      },
+      "query": "Galerie der Miezen, Flensburg, Germany",
+      "osm": {
+        "lat": 54.5116641,
+        "lng": 9.5418417,
+        "display_name": "Galerie der klassischen Moderne, Schlossallee, Schleswig, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 32031,
+      "from_city_m": 1026,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_flensburg_bahnhof",
+      "name": "Flensburg Hauptbahnhof",
+      "category": "bahnhof",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.774634799999994,
+        "lng": 9.436751439999998
+      },
+      "query": "Flensburg Hauptbahnhof, Flensburg, Germany",
+      "osm": {
+        "lat": 54.5000778,
+        "lng": 9.5378837,
+        "display_name": "Schleswig Hauptbahnhof, Bahnhofstraße, Schleswig, Deutschland",
+        "class": "building",
+        "type": "train_station",
+        "provider": "photon"
+      },
+      "delta_m": 31215,
+      "from_city_m": 2224,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city",
+        "duplicate_center"
+      ],
+      "twins": [
+        "flensburg_flensburg",
+        "flensburg_osm_post_box_2087896362",
+        "flensburg_osm_transit_5344447658"
+      ]
+    },
+    {
+      "id": "flensburg_volkspark",
+      "name": "Volkspark",
+      "category": "natur",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.798215035714264,
+        "lng": 9.446968765306128
+      },
+      "query": "Volkspark, Flensburg, Germany",
+      "osm": {
+        "lat": 54.799533,
+        "lng": 9.4462373,
+        "display_name": "Volkspark, Blasberg, Fruerlund, Flensburg, Schleswig-Holstein, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "importance": 0.26244239079806453,
+        "osm_type": "way",
+        "osm_id": 295226541,
+        "provider": "nominatim"
+      },
+      "delta_m": 154,
+      "from_city_m": 497,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "flensburg_aussichtsplattform_am_volkspark",
+        "flensburg_marchenskulpturen_im_volkspark"
+      ]
+    },
+    {
+      "id": "flensburg_flensburger_stadion",
+      "name": "Flensburger Stadion",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.8032207,
+        "lng": 9.45081076
+      },
+      "query": "Flensburger Stadion, Flensburg, Germany",
+      "osm": {
+        "lat": 54.8021366,
+        "lng": 9.4507486,
+        "display_name": "Flensburger Stadion, Fichtestraße, Blasberg, Fruerlund, Flensburg, Schleswig-Holstein, 24943, Deutschland",
+        "class": "leisure",
+        "type": "stadium",
+        "importance": 0.18929199030239088,
+        "osm_type": "way",
+        "osm_id": 821328494,
+        "provider": "nominatim"
+      },
+      "delta_m": 121,
+      "from_city_m": 1082,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "flensburg_tragerverein_flensburg_stadion_e_v"
+      ]
+    },
+    {
+      "id": "flensburg_flensburg_hafen",
+      "name": "Flensburg Hafen",
+      "category": "hafen",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.79336020000001,
+        "lng": 9.433913800000001
+      },
+      "query": "Flensburg Hafen, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7924009,
+        "lng": 9.4333009,
+        "display_name": "Hotel Hafen Flensburg, 33, Schiffbrücke, Nordertor, Altstadt, Flensburg, Schleswig-Holstein, 24939, Deutschland",
+        "class": "tourism",
+        "type": "hotel",
+        "importance": 0.1507975276546128,
+        "osm_type": "node",
+        "osm_id": 880711996,
+        "provider": "nominatim"
+      },
+      "delta_m": 114,
+      "from_city_m": 840,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_stadttheater_flensburg",
+      "name": "Stadttheater - Flensburg",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.78638961538461,
+        "lng": 9.432984923076923
+      },
+      "query": "Stadttheater, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7862911,
+        "lng": 9.434546,
+        "display_name": "Stadttheater, Rathausstraße, Altstadt, St. Marien, Altstadt, Flensburg, Schleswig-Holstein, 24937, Deutschland",
+        "class": "highway",
+        "type": "bus_stop",
+        "importance": 0.000066505683985611,
+        "osm_type": "node",
+        "osm_id": 2927531174,
+        "provider": "nominatim"
+      },
+      "delta_m": 101,
+      "from_city_m": 1215,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_rathausplatz",
+      "name": "Rathausplatz",
+      "category": "geschichte",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.78055733333334,
+        "lng": 9.433277
+      },
+      "query": "Rathausplatz, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7808664,
+        "lng": 9.4346229,
+        "display_name": "Rathausplatz, St. Nikolai, Altstadt, Flensburg, Schleswig-Holstein, 24937, Deutschland",
+        "class": "highway",
+        "type": "path",
+        "importance": 0.04006650568398565,
+        "osm_type": "way",
+        "osm_id": 25344082,
+        "provider": "nominatim"
+      },
+      "delta_m": 93,
+      "from_city_m": 1710,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_rathaus_flensburg",
+      "name": "Rathaus - Flensburg",
+      "category": "geschichte",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.78119806666666,
+        "lng": 9.433968466666666
+      },
+      "query": "Rathaus, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7819058,
+        "lng": 9.4335794,
+        "display_name": "Rathaus, Friesische Straße, St. Nikolai, Altstadt, Flensburg, Schleswig-Holstein, 24937, Deutschland",
+        "class": "highway",
+        "type": "bus_stop",
+        "importance": 0.000066505683985611,
+        "osm_type": "node",
+        "osm_id": 6110415367,
+        "provider": "nominatim"
+      },
+      "delta_m": 83,
+      "from_city_m": 1626,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "flensburg_stadt_flensburg"
+      ]
+    },
+    {
+      "id": "flensburg_marineschule_murwik",
+      "name": "Marineschule Mürwik",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.81519227972972,
+        "lng": 9.459624786486485
+      },
+      "query": "Marineschule Mürwik, Flensburg, Germany",
+      "osm": {
+        "lat": 54.8152516,
+        "lng": 9.460712,
+        "display_name": "Marineschule Mürwik, Fördestraße, Stützpunkt Flensburg-Mürwik, Mürwik, Flensburg, Schleswig-Holstein, 24944, Deutschland",
+        "class": "military",
+        "type": "barracks",
+        "importance": 0.4491022588632987,
+        "osm_type": "relation",
+        "osm_id": 12889968,
+        "provider": "nominatim"
+      },
+      "delta_m": 70,
+      "from_city_m": 2519,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_idstedtlowe",
+      "name": "Idstedtlöwe",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.78467965000001,
+        "lng": 9.429580762499999
+      },
+      "query": "Idstedtlöwe, Flensburg, Germany",
+      "osm": {
+        "lat": 54.785276,
+        "lng": 9.4298007,
+        "display_name": "Idstedt-Löwe, Kanonenberg, Flensburg, Deutschland",
+        "class": "historic",
+        "type": "memorial",
+        "provider": "photon"
+      },
+      "delta_m": 68,
+      "from_city_m": 1504,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_flensburg",
+      "name": "Flensburg",
+      "category": "bahnhof",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.774634799999994,
+        "lng": 9.436751439999998
+      },
+      "query": "Flensburg, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7741124,
+        "lng": 9.4365273,
+        "display_name": "Flensburg / Flensborg, 5, Am Bundesbahnhof, Martinsberg, Südstadt, Flensburg, Schleswig-Holstein, 24937, Deutschland",
+        "class": "railway",
+        "type": "station",
+        "importance": 0.3498723237425788,
+        "osm_type": "node",
+        "osm_id": 4189000814,
+        "provider": "nominatim"
+      },
+      "delta_m": 60,
+      "from_city_m": 2224,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "flensburg_flensburg_bahnhof",
+        "flensburg_osm_post_box_2087896362",
+        "flensburg_osm_transit_5344447658"
+      ]
+    },
+    {
+      "id": "flensburg_bahnhof_serpentine_flensburg",
+      "name": "Bahnhof/Serpentine - Flensburg",
+      "category": "bahnhof",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.77520225000001,
+        "lng": 9.434949999999999
+      },
+      "query": "Bahnhof/Serpentine, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7750597,
+        "lng": 9.4353411,
+        "display_name": "Flensburg, Bahnhof/Serpentine, Serpentine, Martinsberg, Südstadt, Flensburg, Schleswig-Holstein, 24941, Deutschland",
+        "class": "highway",
+        "type": "bus_stop",
+        "importance": 0.000066505683985611,
+        "osm_type": "node",
+        "osm_id": 2344518521,
+        "provider": "nominatim"
+      },
+      "delta_m": 30,
+      "from_city_m": 2202,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "flensburg_osm_transit_2344518521"
+      ]
+    },
+    {
+      "id": "flensburg_hafenspitze",
+      "name": "Hafenspitze",
+      "category": "hafen",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.78805820454545,
+        "lng": 9.43698320909091
+      },
+      "query": "Hafenspitze, Flensburg, Germany",
+      "osm": {
+        "lat": 54.787827,
+        "lng": 9.4371533,
+        "display_name": "Hafenspitze, St. Jürgen, Jürgensby, Flensburg, Schleswig-Holstein, Deutschland",
+        "class": "place",
+        "type": "square",
+        "importance": 0.16273786379520622,
+        "osm_type": "way",
+        "osm_id": 25684482,
+        "provider": "nominatim"
+      },
+      "delta_m": 28,
+      "from_city_m": 901,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "flensburg_fahrradfahre_flensburger_forde_hafen_flensburg"
+      ]
+    },
+    {
+      "id": "flensburg_phanomenta",
+      "name": "Phänomenta",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.79554673333333,
+        "lng": 9.430206583333332
+      },
+      "query": "Phänomenta, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7953852,
+        "lng": 9.4301531,
+        "display_name": "Phänomenta, 157-163, Norderstraße, Nordertor, Altstadt, Flensburg, Schleswig-Holstein, 24939, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.2024340213354661,
+        "osm_type": "node",
+        "osm_id": 3710190918,
+        "provider": "nominatim"
+      },
+      "delta_m": 18,
+      "from_city_m": 1095,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "flensburg_sonwik_yachthafen",
+        "flensburg_nsg_twedter_feld",
+        "flensburg_nordertor"
+      ]
+    },
+    {
+      "id": "flensburg_lowen_apotheke",
+      "name": "Löwen-Apotheke",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.76041615185186,
+        "lng": 9.431868774074076
+      },
+      "query": "Löwen-Apotheke, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7603238,
+        "lng": 9.4320002,
+        "display_name": "Löwen-Apotheke, 130, Schleswiger Straße, Südstadt, Peelwatt, Südstadt, Flensburg, Schleswig-Holstein, 24941, Deutschland",
+        "class": "amenity",
+        "type": "pharmacy",
+        "importance": 0.000066505683985611,
+        "osm_type": "node",
+        "osm_id": 793241039,
+        "provider": "nominatim"
+      },
+      "delta_m": 13,
+      "from_city_m": 3831,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "flensburg_kaufland_flensburg",
+        "flensburg_osm_post_box_989125544"
+      ]
+    },
+    {
+      "id": "flensburg_easyapotheke_flensburg_galerie",
+      "name": "easyApotheke Flensburg Galerie",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.783198259259244,
+        "lng": 9.437940851851854
+      },
+      "query": "easyApotheke Flensburg Galerie, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7832841,
+        "lng": 9.4378336,
+        "display_name": "Flensburg Galerie, Holm, Flensburg, Deutschland",
+        "class": "shop",
+        "type": "mall",
+        "provider": "photon"
+      },
+      "delta_m": 12,
+      "from_city_m": 1308,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "flensburg_flensburg_galerie"
+      ]
+    },
+    {
+      "id": "flensburg_flensburg_galerie",
+      "name": "Flensburg Galerie",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.783198259259244,
+        "lng": 9.437940851851854
+      },
+      "query": "Flensburg Galerie, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7832841,
+        "lng": 9.4378336,
+        "display_name": "Flensburg Galerie, 57-61, Holm, St. Nikolai, Altstadt, Flensburg, Schleswig-Holstein, 24937, Deutschland",
+        "class": "shop",
+        "type": "mall",
+        "importance": 0.11734328469919902,
+        "osm_type": "way",
+        "osm_id": 28876190,
+        "provider": "nominatim"
+      },
+      "delta_m": 12,
+      "from_city_m": 1308,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "flensburg_easyapotheke_flensburg_galerie"
+      ]
+    },
+    {
+      "id": "flensburg_campelle_esg_flensburg",
+      "name": "Campelle ESG Flensburg",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.776054666666674,
+        "lng": 9.4522635
+      },
+      "query": "Campelle ESG Flensburg, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7760798,
+        "lng": 9.4522538,
+        "display_name": "Campelle, Thomas-Fincke-Straße, Flensburg, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 3,
+      "from_city_m": 1996,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "flensburg_osm_parcel_locker_11139195261"
+      ]
+    },
+    {
+      "id": "flensburg_st_nikolai_kirche_zu_flensburg_der_ev_luth_st_nikolai_kirchengemeinde_",
+      "name": "St. Nikolai-Kirche",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.78317166666667,
+        "lng": 9.435661499999998
+      },
+      "query": "St. Nikolai-Kirche, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7831589,
+        "lng": 9.4356556,
+        "display_name": "Sankt Nikolai, 8, Nikolaikirchhof, St. Nikolai, Altstadt, Flensburg, Schleswig-Holstein, 24937, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.311877314681546,
+        "osm_type": "way",
+        "osm_id": 87700216,
+        "provider": "nominatim"
+      },
+      "delta_m": 1,
+      "from_city_m": 1382,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "flensburg_zob_flensburg"
+      ]
+    },
+    {
+      "id": "flensburg_wasserturm_fruerlund",
+      "name": "Wasserturm Flensburg-Mürwik",
+      "category": "aussicht",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.79614257058823,
+        "lng": 9.44656334705882
+      },
+      "query": "Wasserturm Flensburg-Mürwik, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7961409,
+        "lng": 9.4465556,
+        "display_name": "Wasserturm Flensburg-Mürwik, Am Volkspark, Kolonie 82, Blasberg, Fruerlund, Flensburg, Schleswig-Holstein, 24943, Deutschland",
+        "class": "tourism",
+        "type": "viewpoint",
+        "importance": 0.21337448257116948,
+        "osm_type": "way",
+        "osm_id": 173053981,
+        "provider": "nominatim"
+      },
+      "delta_m": 1,
+      "from_city_m": 268,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "flensburg_kolonie_81a_am_wasserturm_verein_der_gartenfreunde_flensburg_e_v"
+      ]
+    },
+    {
+      "id": "flensburg_kolonie_81a_am_wasserturm_verein_der_gartenfreunde_flensburg_e_v",
+      "name": "Kolonie 81a, Am Wasserturm, Verein der Gartenfreunde Flensburg e.V.",
+      "category": "natur",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.79614257058823,
+        "lng": 9.44656334705882
+      },
+      "query": "Kolonie 81a, Am Wasserturm, Verein, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7961409,
+        "lng": 9.4465556,
+        "display_name": "Wasserturm Flensburg-Mürwik, Am Volkspark, Flensburg, Deutschland",
+        "class": "tourism",
+        "type": "viewpoint",
+        "provider": "photon"
+      },
+      "delta_m": 1,
+      "from_city_m": 268,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "flensburg_wasserturm_fruerlund"
+      ]
+    },
+    {
+      "id": "flensburg_solitude",
+      "name": "Solitüde",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.823191311538444,
+        "lng": 9.490114019230768
+      },
+      "query": "Solitüde, Flensburg",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 4285,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_plop_shop_vor_der_flensburger_brauerei",
+      "name": "Plop-Shop vor der Flensburger Brauerei",
+      "category": "souvenir",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.778948625,
+        "lng": 9.43582625
+      },
+      "query": "Plop-Shop vor der, Flensburg, Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 1794,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_blasberg_apotheke_dr_matthias_grundmann_e_k",
+      "name": "Blasberg-Apotheke Dr. Matthias Grundmann e.K.",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.80095517272727,
+        "lng": 9.454201118181816
+      },
+      "query": "Blasberg-Apotheke Dr. Matthias, Flensburg, Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 925,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_nord_apotheke_inh_joachim_kempa",
+      "name": "Nord-Apotheke Inh. Joachim Kempa",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.800131737499996,
+        "lng": 9.423277875
+      },
+      "query": "Nord-Apotheke Inh. Joachim, Flensburg, Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 1678,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_duburg",
+      "name": "Duburg",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.792617199999995,
+        "lng": 9.4283106
+      },
+      "query": "Duburg, Flensburg",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 1204,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_blutenwiese_am_trogelsbyhof",
+      "name": "Blütenwiese am Trögelsbyhof",
+      "category": "natur",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.7917927,
+        "lng": 9.499881799999999
+      },
+      "query": "Blütenwiese am Trögelsbyhof, Flensburg",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 3397,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_wassersportschule_nord_ostsee_kanal_sportbootfuhrerschein_flensburg",
+      "name": "Wassersportschule Nord-Ostsee-Kanal | Sportbootführerschein Flensburg",
+      "category": "tour",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.8034344611111,
+        "lng": 9.451948744444444
+      },
+      "query": "Wassersportschule Nord-Ostsee-Kanal, Flensburg",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 1123,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_nordertor",
+      "name": "Nordertor",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.795543983333324,
+        "lng": 9.430164033333334
+      },
+      "query": "Nordertor, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7955406,
+        "lng": 9.4301682,
+        "display_name": "Nordertor, Norderstraße, Nordertor, Altstadt, Flensburg, Schleswig-Holstein, 24939, Deutschland",
+        "class": "tourism",
+        "type": "attraction",
+        "importance": 0.28008114849440524,
+        "osm_type": "way",
+        "osm_id": 165397270,
+        "provider": "nominatim"
+      },
+      "delta_m": 0,
+      "from_city_m": 1097,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "flensburg_phanomenta",
+        "flensburg_sonwik_yachthafen",
+        "flensburg_nsg_twedter_feld"
+      ]
+    },
+    {
+      "id": "flensburg_johannisviertel",
+      "name": "Johannisviertel",
+      "category": "altstadt",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.7883826,
+        "lng": 9.440147
+      },
+      "query": "Johannisviertel, Flensburg",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 740,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "flensburg_malteser_fordeklinikum_st_katharina_standort_knuthstrasse",
+      "name": "Malteser Fördeklinikum St. Katharina Standort Knuthstraße",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.79035184615385,
+        "lng": 9.426154
+      },
+      "query": "Malteser Fördeklinikum St. Katharina Standort, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7901483,
+        "lng": 9.4253104,
+        "display_name": "Malteser Fördeklinikum St. Katharina, Standort Knuthstraße, 1, Knuthstraße, Duburg, Stadtpark, Westliche Höhe, Flensburg, Schleswig-Holstein, 24939, Deutschland",
+        "class": "emergency",
+        "type": "ambulance_station",
+        "importance": 0.23992860907835414,
+        "osm_type": "way",
+        "osm_id": 27110659,
+        "provider": "nominatim"
+      },
+      "delta_m": 59,
+      "from_city_m": 1388,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "flensburg_weiche_bahnhof_flensburg",
+      "name": "Weiche Bahnhof - Flensburg",
+      "category": "bahnhof",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.75788,
+        "lng": 9.39903
+      },
+      "query": "Weiche Bahnhof, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7576099,
+        "lng": 9.3998089,
+        "display_name": "Bahnhof Weiche, Ochsenweg, Sophienhof, Weiche, Flensburg, Schleswig-Holstein, 24941, Deutschland",
+        "class": "highway",
+        "type": "bus_stop",
+        "importance": 0.000066505683985611,
+        "osm_type": "node",
+        "osm_id": 2356677786,
+        "provider": "nominatim"
+      },
+      "delta_m": 58,
+      "from_city_m": 5036,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "flensburg_flensburg_bahnhof_tegelbarg",
+      "name": "Flensburg Bahnhof/Tegelbarg",
+      "category": "bahnhof",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.77355188888888,
+        "lng": 9.434505666666666
+      },
+      "query": "Flensburg Bahnhof/Tegelbarg, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7739809,
+        "lng": 9.4344314,
+        "display_name": "Bahnhof/Tegelbarg, Tegelbarg, Flensburg, Deutschland",
+        "class": "highway",
+        "type": "bus_stop",
+        "provider": "photon"
+      },
+      "delta_m": 48,
+      "from_city_m": 2384,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "flensburg_sudermarkt",
+      "name": "Südermarkt",
+      "category": "bahnhof",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.782539285714286,
+        "lng": 9.435762285714286
+      },
+      "query": "Südermarkt, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7828293,
+        "lng": 9.4362939,
+        "display_name": "Südermarkt, St. Nikolai, Altstadt, Flensburg, Schleswig-Holstein, Deutschland",
+        "class": "place",
+        "type": "square",
+        "importance": 0.27438272693865795,
+        "osm_type": "way",
+        "osm_id": 27083464,
+        "provider": "nominatim"
+      },
+      "delta_m": 47,
+      "from_city_m": 1439,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "flensburg_flensburger_hafen_gmbh",
+      "name": "Flensburger Hafen GmbH",
+      "category": "hafen",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.8011116,
+        "lng": 9.4377708
+      },
+      "query": "Flensburger Hafen GmbH, Flensburg, Germany",
+      "osm": {
+        "lat": 54.800768,
+        "lng": 9.4379988,
+        "display_name": "Flensburger Hafen GmbH, Harniskai, Blasberg, Fruerlund, Flensburg, Schleswig-Holstein, 24937, Deutschland",
+        "class": "office",
+        "type": "company",
+        "importance": 0.000066505683985611,
+        "osm_type": "node",
+        "osm_id": 12103934747,
+        "provider": "nominatim"
+      },
+      "delta_m": 41,
+      "from_city_m": 1010,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "flensburg_st_marien_kirche_flensburg",
+      "name": "St. Marien Kirche Flensburg",
+      "category": "kirche",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.78989278947368,
+        "lng": 9.43208442105263
+      },
+      "query": "St. Marien Kirche Flensburg, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7895489,
+        "lng": 9.4322664,
+        "display_name": "St. Marien Kirche, Marienkirchhof, Altstadt, St. Marien, Altstadt, Flensburg, Schleswig-Holstein, 24937, Deutschland",
+        "class": "information",
+        "type": "board",
+        "importance": 0.000066505683985611,
+        "osm_type": "node",
+        "osm_id": 13099150575,
+        "provider": "nominatim"
+      },
+      "delta_m": 40,
+      "from_city_m": 1047,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "flensburg_ostseebad_flensburg",
+      "name": "Ostseebad Flensburg",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.81247536078431,
+        "lng": 9.430249617647059
+      },
+      "query": "Ostseebad Flensburg, Flensburg, Germany",
+      "osm": {
+        "lat": 54.8123144,
+        "lng": 9.4308141,
+        "display_name": "Ostseebad, Klues, Nordstadt, Flensburg, Schleswig-Holstein, Deutschland",
+        "class": "natural",
+        "type": "beach",
+        "importance": 0.2836220396951343,
+        "osm_type": "way",
+        "osm_id": 25031188,
+        "provider": "nominatim"
+      },
+      "delta_m": 40,
+      "from_city_m": 2343,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "flensburg_ansgar_kirke_flensborg_nord",
+      "name": "Ansgar Kirke Flensborg Nord",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.80267868571428,
+        "lng": 9.423651757142858
+      },
+      "query": "Ansgar Kirke Flensborg Nord, Flensburg, Germany",
+      "osm": {
+        "lat": 54.8024082,
+        "lng": 9.4239127,
+        "display_name": "Ansgar Kirke, Apenrader Straße, Flensburg, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 34,
+      "from_city_m": 1796,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "flensburg_ehemaliges_freilandlabor",
+      "name": "Ehemaliges Freilandlabor",
+      "category": "wanderung",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.77316159999999,
+        "lng": 9.4455653
+      },
+      "query": "Ehemaliges Freilandlabor, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7729407,
+        "lng": 9.4452088,
+        "display_name": "Freilandlabor, Flensburg, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "provider": "photon"
+      },
+      "delta_m": 34,
+      "from_city_m": 2290,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "flensburg_neubauer_reisen_ihr_regionaler_reiseveranstalter",
+      "name": "Neubauer Reisen - Ihr regionaler Reiseveranstalter",
+      "category": "tour",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.7624381,
+        "lng": 9.4513065
+      },
+      "query": "Neubauer Reisen, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7622403,
+        "lng": 9.4509094,
+        "display_name": "Neubauer Touristik GmbH, Marie-Curie-Ring, Flensburg, Deutschland",
+        "class": "office",
+        "type": "company",
+        "provider": "photon"
+      },
+      "delta_m": 34,
+      "from_city_m": 3492,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "flensburg_katholische_kirche_st_marien",
+      "name": "Katholische Kirche St. Marien",
+      "category": "kirche",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.787578583333335,
+        "lng": 9.431322916666668
+      },
+      "query": "Katholische Kirche St. Marien, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7872943,
+        "lng": 9.4314598,
+        "display_name": "Katholische Kirche, Nordergraben, Altstadt, St. Marien, Altstadt, Flensburg, Schleswig-Holstein, 24937, Deutschland",
+        "class": "highway",
+        "type": "bus_stop",
+        "importance": 0.000066505683985611,
+        "osm_type": "node",
+        "osm_id": 2450679403,
+        "provider": "nominatim"
+      },
+      "delta_m": 33,
+      "from_city_m": 1216,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "flensburg_tauchermuseum_flensburg",
+      "name": "Tauchermuseum Flensburg",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.80766968571429,
+        "lng": 9.428925885714284
+      },
+      "query": "Tauchermuseum Flensburg, Flensburg, Germany",
+      "osm": {
+        "lat": 54.8077104,
+        "lng": 9.4294009,
+        "display_name": "Tauchermuseum Flensburg, 63, Batteriestraße, Nordstadt, Galwik, Nordstadt, Flensburg, Schleswig-Holstein, 24939, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.000066505683985611,
+        "osm_type": "node",
+        "osm_id": 6024823430,
+        "provider": "nominatim"
+      },
+      "delta_m": 31,
+      "from_city_m": 1934,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "flensburg_flensboat_de",
+      "name": "Flensboat.de",
+      "category": "tour",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.79370777777777,
+        "lng": 9.43771611111111
+      },
+      "query": "Flensboat.de, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7938534,
+        "lng": 9.4373283,
+        "display_name": "Flensboat, Ballastkai, Blasberg, Fruerlund, Flensburg, Schleswig-Holstein, 24937, Deutschland",
+        "class": "amenity",
+        "type": "boat_rental",
+        "importance": 0.000066505683985611,
+        "osm_type": "way",
+        "osm_id": 1392851876,
+        "provider": "nominatim"
+      },
+      "delta_m": 30,
+      "from_city_m": 595,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "flensburg_rote_strasse",
+      "name": "Rote Straße",
+      "category": "altstadt",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.78142555555556,
+        "lng": 9.435590111111113
+      },
+      "query": "Rote Straße, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7815937,
+        "lng": 9.4358468,
+        "display_name": "Rote Straße, St. Nikolai, Altstadt, Flensburg, Schleswig-Holstein, 24937, Deutschland",
+        "class": "highway",
+        "type": "pedestrian",
+        "importance": 0.053399839017318956,
+        "osm_type": "way",
+        "osm_id": 25028212,
+        "provider": "nominatim"
+      },
+      "delta_m": 25,
+      "from_city_m": 1553,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "flensburg_det_lille_teater_flensborg",
+      "name": "Det lille Teater Flensborg",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.78974016666666,
+        "lng": 9.429872166666668
+      },
+      "query": "Det lille Teater Flensborg, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7898409,
+        "lng": 9.4301001,
+        "display_name": "Det lille Teater, 20, Marienstraße, Altstadt, St. Marien, Altstadt, Flensburg, Schleswig-Holstein, 24937, Deutschland",
+        "class": "amenity",
+        "type": "theatre",
+        "importance": 0.1507975276546128,
+        "osm_type": "node",
+        "osm_id": 469397466,
+        "provider": "nominatim"
+      },
+      "delta_m": 18,
+      "from_city_m": 1185,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "flensburg_deko_simmo",
+      "name": "Deko Simmo",
+      "category": "souvenir",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.79945761666665,
+        "lng": 9.423133266666666
+      },
+      "query": "Deko Simmo, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7994109,
+        "lng": 9.4233479,
+        "display_name": "Simmo, Neustadt, Flensburg, Deutschland",
+        "class": "shop",
+        "type": "gift",
+        "provider": "photon"
+      },
+      "delta_m": 15,
+      "from_city_m": 1656,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "flensburg_katholische_ordensschwestern_dienerinnen_vom_heiligen_blut",
+      "name": "Katholische Ordensschwestern \"Dienerinnen vom Heiligen Blut\"",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.782509600000004,
+        "lng": 9.3906184
+      },
+      "query": "Katholische Ordensschwestern \"Dienerinnen vom Heiligen, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7826332,
+        "lng": 9.3906962,
+        "display_name": "Dienerinnen vom Heiligen Blut, Am Magdalenenhof, Flensburg, Deutschland",
+        "class": "amenity",
+        "type": "monastery",
+        "provider": "photon"
+      },
+      "delta_m": 15,
+      "from_city_m": 3824,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "flensburg_restaurant_galerie",
+      "name": "Restaurant Galerie",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.784009375000004,
+        "lng": 9.435462375
+      },
+      "query": "Restaurant Galerie, Flensburg, Germany",
+      "osm": {
+        "lat": 54.783929,
+        "lng": 9.4353172,
+        "display_name": "Galerie, 66, Holm, St. Nikolai, Altstadt, Flensburg, Schleswig-Holstein, 24937, Deutschland",
+        "class": "amenity",
+        "type": "restaurant",
+        "importance": 0.10540294855860563,
+        "osm_type": "node",
+        "osm_id": 533703461,
+        "provider": "nominatim"
+      },
+      "delta_m": 13,
+      "from_city_m": 1311,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "flensburg_gemeinschaftspraxis_am_sudermarkt_dr_med_wolfram_gitter_dr_frank_eberh",
+      "name": "Gemeinschaftspraxis am Südermarkt - Dr. med. Wolfram Gitter & Dr. Frank-Eberhard Aust",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.7822802,
+        "lng": 9.4361796
+      },
+      "query": "Gemeinschaftspraxis am Südermarkt, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7823595,
+        "lng": 9.4361469,
+        "display_name": "Gemeinschaftspraxis am Südermarkt, 9, Südermarkt, St. Nikolai, Altstadt, Flensburg, Schleswig-Holstein, 24937, Deutschland",
+        "class": "amenity",
+        "type": "doctors",
+        "importance": 0.000066505683985611,
+        "osm_type": "node",
+        "osm_id": 9817376203,
+        "provider": "nominatim"
+      },
+      "delta_m": 9,
+      "from_city_m": 1451,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "flensburg_museumsberg_flensburg_hans_christiansen_haus",
+      "name": "Museumsberg Flensburg, Hans-Christiansen-Haus",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.78649935714286,
+        "lng": 9.430917285714285
+      },
+      "query": "Museumsberg Flensburg, Hans-Christiansen-Haus, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7865312,
+        "lng": 9.4310226,
+        "display_name": "Hans-Christiansen-Haus, Christiansensgang, Flensburg, Deutschland",
+        "class": "building",
+        "type": "government",
+        "provider": "photon"
+      },
+      "delta_m": 8,
+      "from_city_m": 1308,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "flensburg_haptik_galerie_fur_gebrauchskunst",
+      "name": "haptik - Galerie für Gebrauchskunst",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.7884316,
+        "lng": 9.433148900000003
+      },
+      "query": "haptik, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7885036,
+        "lng": 9.4331282,
+        "display_name": "Haptik, 42-44, Große Straße, Altstadt, St. Marien, Altstadt, Flensburg, Schleswig-Holstein, 24937, Deutschland",
+        "class": "shop",
+        "type": "art",
+        "importance": 0.000066505683985611,
+        "osm_type": "node",
+        "osm_id": 6110478090,
+        "provider": "nominatim"
+      },
+      "delta_m": 8,
+      "from_city_m": 1066,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "flensburg_kompagnietor",
+      "name": "Kompagnietor",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.79019755555556,
+        "lng": 9.43355688888889
+      },
+      "query": "Kompagnietor, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7902532,
+        "lng": 9.4335552,
+        "display_name": "Kompagnietor, 12, Schiffbrücke, Altstadt, St. Marien, Altstadt, Flensburg, Schleswig-Holstein, 24939, Deutschland",
+        "class": "tourism",
+        "type": "attraction",
+        "importance": 0.19283288150311992,
+        "osm_type": "way",
+        "osm_id": 162814722,
+        "provider": "nominatim"
+      },
+      "delta_m": 6,
+      "from_city_m": 948,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "flensburg_art_creativ_flensburg_ihr_ideenreich",
+      "name": "ART Creativ Flensburg – Ihr Ideenreich",
+      "category": "souvenir",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.7633815,
+        "lng": 9.434882625000002
+      },
+      "query": "ART Creativ Flensburg, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7633348,
+        "lng": 9.4348926,
+        "display_name": "ArtCreativ, Schleswiger Straße, Flensburg, Deutschland",
+        "class": "shop",
+        "type": "interior_decoration",
+        "provider": "photon"
+      },
+      "delta_m": 5,
+      "from_city_m": 3464,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "flensburg_helligandskirken_dansk",
+      "name": "Helligåndskirken - dansk",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.78771116666667,
+        "lng": 9.432496333333333
+      },
+      "query": "Helligåndskirken, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7876887,
+        "lng": 9.4324438,
+        "display_name": "Heiliggeistkirche, 43, Große Straße, Altstadt, St. Marien, Altstadt, Flensburg, Schleswig-Holstein, 24937, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.23648094285300414,
+        "osm_type": "way",
+        "osm_id": 170587196,
+        "provider": "nominatim"
+      },
+      "delta_m": 4,
+      "from_city_m": 1146,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "flensburg_christuskirche_zu_flensburg_murwik_der_ev_luth_kirchengemeinde_murwik",
+      "name": "Christuskirche zu Flensburg Mürwik der Ev.-Luth. Kirchengemeinde Mürwik",
+      "category": "kirche",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.811540750000006,
+        "lng": 9.46343608
+      },
+      "query": "Christuskirche zu Flensburg Mürwik der, Flensburg, Germany",
+      "osm": {
+        "lat": 54.8115706,
+        "lng": 9.4634027,
+        "display_name": "Christuskirche, Fördestraße, Flensburg, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 4,
+      "from_city_m": 2242,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "flensburg_museumsberg_flensburg",
+      "name": "Museumsberg Flensburg",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.78573013333334,
+        "lng": 9.431722599999999
+      },
+      "query": "Museumsberg Flensburg, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7857506,
+        "lng": 9.4317528,
+        "display_name": "Museumsberg Flensburg, 1, Museumsberg, Friesischer Berg, Flensburg, Schleswig-Holstein, 24937, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.3761123463663757,
+        "osm_type": "node",
+        "osm_id": 2737307660,
+        "provider": "nominatim"
+      },
+      "delta_m": 3,
+      "from_city_m": 1324,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "flensburg_niederdeutsche_buhne_flensburg_gemeinnutzige_gmbh",
+      "name": "Niederdeutsche Bühne Flensburg gemeinnützige GmbH",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.7856888,
+        "lng": 9.4403842
+      },
+      "query": "Niederdeutsche Bühne Flensburg gemeinnützige GmbH, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7857119,
+        "lng": 9.4404011,
+        "display_name": "Niederdeutsche Bühne, Augustastraße, Flensburg, Deutschland",
+        "class": "amenity",
+        "type": "theatre",
+        "provider": "photon"
+      },
+      "delta_m": 3,
+      "from_city_m": 991,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "flensburg_theaterschule_flensburg_ggmbh",
+      "name": "Theaterschule Flensburg gGmbH",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.7910418,
+        "lng": 9.4481821
+      },
+      "query": "Theaterschule Flensburg gGmbH, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7910393,
+        "lng": 9.4481347,
+        "display_name": "Theaterschule Flensburg, Adelbyer Kirchenweg, Flensburg, Deutschland",
+        "class": "building",
+        "type": "civic",
+        "provider": "photon"
+      },
+      "delta_m": 3,
+      "from_city_m": 310,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "flensburg_kulturwerkstatt_kuhlhaus",
+      "name": "Kulturwerkstatt Kühlhaus",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.77450166666667,
+        "lng": 9.440725166666667
+      },
+      "query": "Kulturwerkstatt Kühlhaus, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7745299,
+        "lng": 9.4407141,
+        "display_name": "Kulturwerkstatt Kühlhaus e. V., 25, Mühlendamm, Achter de Möhl, Sandberg, Flensburg, Schleswig-Holstein, 24937, Deutschland",
+        "class": "amenity",
+        "type": "events_venue",
+        "importance": 0.000066505683985611,
+        "osm_type": "node",
+        "osm_id": 7263030232,
+        "provider": "nominatim"
+      },
+      "delta_m": 3,
+      "from_city_m": 2177,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "flensburg_neuapostolische_kirche_flensburg",
+      "name": "Neuapostolische Kirche Flensburg",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.78119514285715,
+        "lng": 9.432297
+      },
+      "query": "Neuapostolische Kirche Flensburg, Flensburg, Germany",
+      "osm": {
+        "lat": 54.781184,
+        "lng": 9.4323236,
+        "display_name": "Neuapostolische Kirche, 8, Am Pferdewasser, Exe, Friesischer Berg, Flensburg, Schleswig-Holstein, 24937, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.000066505683985611,
+        "osm_type": "way",
+        "osm_id": 167978586,
+        "provider": "nominatim"
+      },
+      "delta_m": 2,
+      "from_city_m": 1684,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "flensburg_bundsenkapelle",
+      "name": "Bundsenkapelle",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.78707599999999,
+        "lng": 9.428402777777778
+      },
+      "query": "Bundsenkapelle, Flensburg, Germany",
+      "osm": {
+        "lat": 54.7870851,
+        "lng": 9.4284156,
+        "display_name": "Bundsen-Kapelle, Selckstraße, Flensburg, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 1,
+      "from_city_m": 1404,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    }
+  ]
+}

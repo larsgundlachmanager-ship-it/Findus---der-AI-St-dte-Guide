@@ -20,7 +20,6 @@ import {
 } from '../tts/dictionaryEngine';
 import { suggestDictionaryEntries } from '../sync/dictionarySyncService';
 
-
 /** Alias laut Spezifikation. */
 export type CityPackage = CityPack;
 

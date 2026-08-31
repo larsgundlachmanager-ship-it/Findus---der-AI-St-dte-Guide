@@ -7,6 +7,7 @@ import type { AgentResult, Module2ActionButton } from '../types';
 import { generateGeminiText, hasGeminiApiKey } from '../../services/geminiService';
 import {
   extractLinksFromHtml,
+  extractMenuAndPdfUrls,
   fetchPublicDocument,
 } from '../../services/research/webFetch';
 import { shortenActionLabel } from '../../services/concierge/actionLabelShorten';
@@ -16,12 +17,15 @@ import {
   parseTimeHm,
   parseDateIso,
   parseReservationOccasion,
+  withReservationPrefill,
 } from '../../services/reservation/reservationPrefill';
 import { getCachedUserProfile } from '../../services/userProfileService';
 import { getReservationContact } from '../../types/userProfile';
 import {
   detectOfferKind,
   isSafeOfferUrl,
+  isBareSiteUrl,
+  isMenuAssetUrl,
   offerLabel,
 } from '../planning/offerActionUtils';
 
@@ -45,9 +49,11 @@ type MenuLink = {
 function dishInterest(userText: string): string | null {
   const t = userText.toLowerCase();
   const m = t.match(
-    /\b(zander|burger|pizza|pasta|sushi|steak|schnitzel|döner|doener|pommes|salat|frühstück|fruehstueck|brunch|fisch|ramen|bowl)\b/i,
+    /\b(p(?:f)?ann(?:en)?fisch|zander|burger|pizza|pasta|sushi|steak|schnitzel|döner|doener|pommes|salat|frühstück|fruehstueck|brunch|fisch|ramen|bowl|vegan|asia|asiatisch|thai|indisch)\b/i,
   );
-  return m?.[1]?.toLowerCase() ?? null;
+  const raw = m?.[1]?.toLowerCase() ?? null;
+  if (!raw) return null;
+  return /p(?:f)?ann(?:en)?fisch/.test(raw) ? 'pannfisch' : raw;
 }
 
 function parseJson(raw: string): Record<string, unknown> | null {
@@ -64,6 +70,10 @@ function parseJson(raw: string): Record<string, unknown> | null {
 
 function classifyLink(href: string, label: string): MenuLink['kind'] {
   const blob = `${href} ${label}`.toLowerCase();
+  if (isBareSiteUrl(href) && !/\.pdf/i.test(href)) {
+    if (/^mailto:/i.test(href)) return 'mailto';
+    return 'other';
+  }
   if (/^mailto:/i.test(href) || /reserv|platz|tisch|anfrage/.test(blob) && /mailto/.test(blob)) {
     return 'mailto';
   }
@@ -78,12 +88,12 @@ function classifyLink(href: string, label: string): MenuLink['kind'] {
     return 'drinks';
   }
   if (
-    /speisekarte|speisen|food\s*menu|menükarte|menuekarte|\.pdf|karte/.test(blob) &&
+    /speisekarte|speisen|food\s*menu|menükarte|menuekarte|\.pdf|\/ugd\//.test(blob) &&
     !/getränk|getraenk|drink/.test(blob)
   ) {
     return 'food';
   }
-  if (/speise|menu|karte|\.pdf/.test(blob)) return 'menu';
+  if (/speisekarte|speisen|\/(menu|menue|karte)(\/|\.pdf|$)|\/ugd\/|\.pdf/.test(blob)) return 'menu';
   return 'other';
 }
 
@@ -101,6 +111,9 @@ function harvestLinks(html: string, baseUrl: string): MenuLink[] {
   for (const l of extractLinksFromHtml(html, baseUrl)) {
     push(l.href, l.label);
   }
+  for (const href of extractMenuAndPdfUrls(html, baseUrl)) {
+    push(href, /pdf|ugd/i.test(href) ? 'Speisekarte' : 'Karte');
+  }
 
   // mailto:
   const mailRe = /href\s*=\s*["'](mailto:[^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi;
@@ -117,7 +130,7 @@ function harvestLinks(html: string, baseUrl: string): MenuLink[] {
     push(pm[0].replace(/[),.;]+$/, ''), 'PDF');
   }
 
-  // Label-nahe hrefs: „Speisekarte“ Text in 200 chars vor href
+  // Label-nahe hrefs: „Speisekarte“ Text in 200 chars vor/nach href
   const nearRe =
     /(speisekarte|getränkekarte|getraenkekarte|plätze\s*reservieren|plaetze\s*reservieren|reservieren)[\s\S]{0,220}?href\s*=\s*["']([^"']+)["']/gi;
   let nm: RegExpExecArray | null;
@@ -135,8 +148,86 @@ function harvestLinks(html: string, baseUrl: string): MenuLink[] {
     }
     push(href, label);
   }
+  const nearReRev =
+    /href\s*=\s*["']([^"']+)["'][\s\S]{0,220}?(speisekarte|getränkekarte|getraenkekarte|menü|menue|menu)/gi;
+  while ((nm = nearReRev.exec(html))) {
+    let href = nm[1].trim();
+    const label = nm[2];
+    if (/^mailto:/i.test(href)) continue;
+    try {
+      href = new URL(href, baseUrl).toString();
+    } catch {
+      continue;
+    }
+    push(href, label);
+  }
 
   return out;
+}
+
+
+async function discoverMenuPdfBySearch(opts: {
+  name: string;
+  siteUrl?: string | null;
+  signal?: AbortSignal;
+}): Promise<string | null> {
+  if (!hasGeminiApiKey()) return null;
+  let host = '';
+  try {
+    host = opts.siteUrl
+      ? new URL(opts.siteUrl).hostname.replace(/^www\./i, '')
+      : '';
+  } catch {
+    host = '';
+  }
+  try {
+    const raw = await generateGeminiText(
+      `Finde die öffentliche Speisekarte als PDF oder Menü-Seite von „${opts.name}“` +
+        (host ? ` (Domain ${host})` : '') +
+        `. Bevorzuge https-PDFs auf derselben Domain (auch /_files/ugd/). Auch Tageskarte, Mittagskarte, Dessertkarte, Specialkarte — das zählt als Speisekarte. Nur echte URLs, nichts erfinden.\n` +
+        `Liste bis 5 https-URLs, eine pro Zeile.`,
+      {
+        enableGoogleSearch: true,
+        useFindusSystem: false,
+        maxTokens: 500,
+        temperature: 0,
+        signal: opts.signal,
+        allowProEscalate: false,
+        task: 'research',
+      },
+    );
+    const urls = [...String(raw).matchAll(/https?:\/\/[^\s"'<>]+/gi)]
+      .map((m) => m[0].replace(/[),.;]+$/, ''))
+      .filter((u) => isSafeOfferUrl(u));
+    const score = (u: string) => {
+      let s = 0;
+      if (isMenuAssetUrl(u)) s += 10;
+      if (/tageskarte|mittagskarte|dessertkarte/i.test(u)) s += 6;
+      if (/\.pdf/i.test(u)) s += 8;
+      if (host && u.toLowerCase().includes(host.toLowerCase())) s += 12;
+      if (/\/ugd\/|_files\/ugd/i.test(u)) s += 6;
+      return s;
+    };
+    const ranked = [...urls].sort((a, b) => score(b) - score(a));
+    for (const u of ranked.slice(0, 4)) {
+      if (!isMenuAssetUrl(u)) continue;
+      try {
+        const { probeUrlAlive } = require('../../services/research/liveDeepLink') as {
+          probeUrlAlive: (
+            url: string,
+            t?: number,
+          ) => Promise<{ ok: boolean; finalUrl?: string }>;
+        };
+        const probe = await probeUrlAlive(u, 8000);
+        if (probe.ok) return probe.finalUrl || u;
+      } catch {
+        return u;
+      }
+    }
+    return ranked.find((u) => isMenuAssetUrl(u)) ?? null;
+  } catch {
+    return null;
+  }
 }
 
 async function scrapeVenueAssets(opts: {
@@ -153,8 +244,36 @@ async function scrapeVenueAssets(opts: {
   dishPrices: Array<{ dish: string; priceEur: number }>;
   note: string | null;
 }> {
+  let deepFood: string | null = null;
+  try {
+    const { findDeepestMenuLink } = await import(
+      '../../services/actionBoard/menuDeepLink'
+    );
+    const deep = await findDeepestMenuLink({
+      websiteUrl: opts.url,
+      kind: 'food',
+      signal: opts.signal,
+    });
+    if (deep?.url && isSafeOfferUrl(deep.url) && isMenuAssetUrl(deep.url)) {
+      deepFood = deep.url;
+    }
+  } catch {
+    /* harvest below */
+  }
+
   const doc = await fetchPublicDocument(opts.url);
   if (!doc.ok || (!doc.text && !doc.links?.length)) {
+    if (deepFood) {
+      return {
+        foodUrl: deepFood,
+        drinksUrl: null,
+        menuUrl: deepFood,
+        bookingUrl: null,
+        mailto: null,
+        dishPrices: [],
+        note: null,
+      };
+    }
     return {
       foodUrl: null,
       drinksUrl: null,
@@ -183,6 +302,9 @@ async function scrapeVenueAssets(opts: {
   const all = [...fromLinks, ...harvested];
 
   const food =
+    (deepFood
+      ? { url: deepFood, label: 'Speisekarte', kind: 'food' as const }
+      : null) ??
     all.find((l) => l.kind === 'food') ??
     all.find((l) => l.kind === 'menu' && /\.pdf/i.test(l.url));
   const drinks = all.find((l) => l.kind === 'drinks');
@@ -274,23 +396,48 @@ async function scrapeVenueAssets(opts: {
   }
 
   const merged = [...fromLinks, ...harvested];
+  const pickKind = (
+    kinds: MenuLink['kind'][],
+    intent: 'menu' | 'booking',
+    fallback?: MenuLink,
+  ): MenuLink | undefined => {
+    const pool = merged.filter((l) => kinds.includes(l.kind));
+    const urls = pool.map((l) => l.url);
+    try {
+      const { pickBestScoredUrl } = require('../../services/research/liveDeepLink') as {
+        pickBestScoredUrl: (
+          u: string[],
+          o: { intent: 'menu' | 'booking' },
+        ) => string | null;
+      };
+      const bestUrl = pickBestScoredUrl(urls, { intent });
+      if (bestUrl) return pool.find((l) => l.url === bestUrl) ?? fallback;
+    } catch {
+      /* first match */
+    }
+    return pool[0] ?? fallback;
+  };
   const food2 =
-    merged.find((l) => l.kind === 'food') ??
-    food ??
+    pickKind(['food', 'menu'], 'menu', food) ??
     merged.find((l) => l.kind === 'menu');
-  const drinks2 = merged.find((l) => l.kind === 'drinks') ?? drinks;
-  const booking2 = merged.find((l) => l.kind === 'booking') ?? booking;
+  const drinks2 = pickKind(['drinks'], 'menu', drinks);
+  const booking2 = pickKind(['booking'], 'booking', booking);
   const mailto2 =
     merged.find((l) => l.kind === 'mailto' || /^mailto:/i.test(l.url)) ??
     mailto;
 
   return {
-    foodUrl: food2?.url && isSafeOfferUrl(food2.url) ? food2.url : null,
+    foodUrl:
+      food2?.url && isSafeOfferUrl(food2.url) && isMenuAssetUrl(food2.url)
+        ? food2.url
+        : null,
     drinksUrl: drinks2?.url && isSafeOfferUrl(drinks2.url) ? drinks2.url : null,
     menuUrl:
       (food2?.url && isSafeOfferUrl(food2.url) ? food2.url : null) ||
       (drinks2?.url && isSafeOfferUrl(drinks2.url) ? drinks2.url : null) ||
-      (opts.url && isSafeOfferUrl(opts.url) ? opts.url : null),
+      (opts.url && isSafeOfferUrl(opts.url) && isMenuAssetUrl(opts.url)
+        ? opts.url
+        : null),
     bookingUrl:
       booking2?.url && isSafeOfferUrl(booking2.url) ? booking2.url : null,
     mailto: mailto2?.url ?? null,
@@ -353,21 +500,39 @@ export async function runGastroMenuDeepResearch(
       }
     }
 
+    if (!best?.foodUrl) {
+      const found = await discoverMenuPdfBySearch({
+        name: v.name,
+        siteUrl: v.websiteUrl ?? candidates[0] ?? null,
+        signal: input.signal,
+      });
+      if (found) {
+        best = best ?? {
+          foodUrl: found,
+          drinksUrl: null,
+          menuUrl: found,
+          bookingUrl: null,
+          mailto: null,
+          dishPrices: [],
+          note: null,
+        };
+        best.foodUrl = found;
+        best.menuUrl = best.menuUrl || found;
+      }
+    }
+
     const venueKind = detectOfferKind(`${input.userText} ${v.name}`);
-    const primaryLabel = offerLabel(
-      venueKind === 'drinks' ? 'drinks' : venueKind === 'web' ? 'web' : 'menu',
-    );
 
     if (!best) {
-      // Keine Fake-Google-/Account-Links — nur echte Venue-URLs
       const fallback = candidates.find((u) => isSafeOfferUrl(u));
-      if (fallback) {
+      if (fallback && isMenuAssetUrl(fallback)) {
         buttons.push({
           id: `menu_site_${buttons.length}`,
-          label: shortenActionLabel(primaryLabel.label),
+          label: shortenActionLabel(offerLabel('menu').label),
           payload: {
             kind: 'deep_link',
             url: fallback,
+            destName: v.name,
           },
         });
         anyNew = true;
@@ -410,7 +575,7 @@ export async function runGastroMenuDeepResearch(
         buttons.push({
           id: `menu_drinks_${buttons.length}`,
           label: shortenActionLabel(offerLabel('drinks').label),
-          payload: { kind: 'deep_link', url: drinksUrl },
+          payload: { kind: 'deep_link', url: drinksUrl, destName: v.name },
         });
         seenBtnUrls.add(drinksUrl);
         anyNew = true;
@@ -423,7 +588,7 @@ export async function runGastroMenuDeepResearch(
         buttons.push({
           id: `menu_food_${buttons.length}`,
           label: shortenActionLabel(offerLabel('menu').label),
-          payload: { kind: 'deep_link', url: foodUrl },
+          payload: { kind: 'deep_link', url: foodUrl, destName: v.name },
         });
         seenBtnUrls.add(foodUrl);
         anyNew = true;
@@ -438,7 +603,7 @@ export async function runGastroMenuDeepResearch(
         buttons.push({
           id: `menu_web_${buttons.length}`,
           label: shortenActionLabel(offerLabel('web').label),
-          payload: { kind: 'deep_link', url: site },
+          payload: { kind: 'deep_link', url: site, destName: v.name },
         });
         seenBtnUrls.add(site);
         anyNew = true;
@@ -469,12 +634,21 @@ export async function runGastroMenuDeepResearch(
     }
 
     if (best.bookingUrl) {
+      const bookUrl = withReservationPrefill(best.bookingUrl, {
+        partySize: party,
+        dateIso,
+        timeHm,
+        guestName: contact.fullName || null,
+        guestEmail: contact.email || null,
+        guestPhone: contact.phoneNumber || null,
+        notes: occasion,
+      });
       buttons.push({
         id: `book_deep_${buttons.length}`,
         label: shortenActionLabel('🌐 Tisch online'),
         payload: {
           kind: 'deep_link',
-          url: best.bookingUrl,
+          url: bookUrl,
           destName: v.name,
         },
       });
@@ -496,7 +670,7 @@ export async function runGastroMenuDeepResearch(
       buttons.push({
         id: `mail_deep_${buttons.length}`,
         label: shortenActionLabel('✉️ Mail-Entwurf'),
-        payload: { kind: 'deep_link', url: draft },
+        payload: { kind: 'deep_link', url: draft, destName: v.name },
       });
       anyNew = true;
     }

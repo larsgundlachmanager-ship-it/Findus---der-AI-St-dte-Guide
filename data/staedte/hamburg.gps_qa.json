@@ -1,0 +1,4285 @@
+{
+  "generated_at": "2026-08-28T04:39:22.245Z",
+  "summary": {
+    "city_id": "hamburg",
+    "checked": 124,
+    "ok": 42,
+    "check": 25,
+    "bad": 57,
+    "errors": 0,
+    "max_delta_m": 180,
+    "city_halo_m": 28000,
+    "story_only": true
+  },
+  "rows": [
+    {
+      "id": "hamburg_bergedorf_museum",
+      "name": "Bergedorf Museum",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.54364925714286,
+        "lng": 9.914775628571428
+      },
+      "query": "Bergedorf Museum, Hamburg, Germany",
+      "osm": {
+        "lat": 53.4896496,
+        "lng": 10.2123887,
+        "display_name": "Museum für Bergedorf und die Vierlande, Hochzeits-Brücke, Bergedorf, Hamburg, 21029, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.00008255359731436664,
+        "osm_type": "node",
+        "osm_id": 1667590185,
+        "provider": "nominatim"
+      },
+      "delta_m": 20573,
+      "from_city_m": 4818,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hamburg_f_feuer_hamburg",
+      "name": "F-Feuer Hamburg",
+      "category": "freizeitpark",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.58459879999999,
+        "lng": 10.1763308
+      },
+      "query": "F-Feuer Hamburg, Hamburg, Germany",
+      "osm": {
+        "lat": 53.6310933,
+        "lng": 9.9292153,
+        "display_name": "Feuer- und Rettungswache Schnelsen, Hamburg, Deutschland",
+        "class": "landuse",
+        "type": "construction",
+        "provider": "photon"
+      },
+      "delta_m": 17103,
+      "from_city_m": 13110,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hamburg_fischbeker_heide",
+      "name": "Fischbeker Heide",
+      "category": "wanderung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.55413053750001,
+        "lng": 9.9920431125
+      },
+      "query": "Fischbeker Heide, Hamburg, Germany",
+      "osm": {
+        "lat": 53.4498093,
+        "lng": 9.8482948,
+        "display_name": "Fischbeker Heide, Hamburg, Landkreis Harburg, Niedersachsen, 21629, Deutschland",
+        "class": "leisure",
+        "type": "nature_reserve",
+        "importance": 0.2827546027204031,
+        "osm_type": "way",
+        "osm_id": 995355716,
+        "provider": "nominatim"
+      },
+      "delta_m": 14998,
+      "from_city_m": 672,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_jungfernstieg",
+        "hamburg_harburger_berge",
+        "hamburg_tierpark_hagenbeck",
+        "hamburg_speicherstadt",
+        "hamburg_altonaer_balkon",
+        "hamburg_alsterfontane"
+      ]
+    },
+    {
+      "id": "hamburg_harburger_berge",
+      "name": "Harburger Berge",
+      "category": "wanderung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.55413053750001,
+        "lng": 9.9920431125
+      },
+      "query": "Harburger Berge, Hamburg, Germany",
+      "osm": {
+        "lat": 53.4240768,
+        "lng": 9.963253,
+        "display_name": "Harburger Berge, A 7, Sinstorf, Harburg, Hamburg, Seevetal, Landkreis Harburg, Niedersachsen, 21077, Deutschland",
+        "class": "amenity",
+        "type": "fast_food",
+        "importance": 0.000052708476386618105,
+        "osm_type": "node",
+        "osm_id": 2272451628,
+        "provider": "nominatim"
+      },
+      "delta_m": 14586,
+      "from_city_m": 672,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_jungfernstieg",
+        "hamburg_fischbeker_heide",
+        "hamburg_tierpark_hagenbeck",
+        "hamburg_speicherstadt",
+        "hamburg_altonaer_balkon",
+        "hamburg_alsterfontane"
+      ]
+    },
+    {
+      "id": "hamburg_sullberg",
+      "name": "Süllberg",
+      "category": "aussicht",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.550352240833334,
+        "lng": 9.996736900000005
+      },
+      "query": "Süllberg, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5593859,
+        "lng": 9.8011863,
+        "display_name": "Süllberg, Hamburg, 22587, Deutschland",
+        "class": "natural",
+        "type": "peak",
+        "importance": 0.22489365626900393,
+        "osm_type": "node",
+        "osm_id": 249657347,
+        "provider": "nominatim"
+      },
+      "delta_m": 12956,
+      "from_city_m": 654,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_mahnmal_st_nikolai",
+        "hamburg_hauptkirche_st_petri_hauptkirche_st_petri",
+        "hamburg_st_ansgar_kapelle",
+        "hamburg_bismarck_denkmal",
+        "hamburg_kriegerdenkmal_am_dammtordamm",
+        "hamburg_boberger_niederung",
+        "hamburg_elbstrand",
+        "hamburg_boberger_strand",
+        "hamburg_alsterpark",
+        "hamburg_leuchtturm_blankenese",
+        "hamburg_petri_apotheke_hamburg",
+        "hamburg_deichstrasse_ursprung_grosser_brand_1842",
+        "hamburg_chilehaus",
+        "hamburg_altonaer_fischmarkt",
+        "hamburg_alter_elbtunnel",
+        "hamburg_planetarium_hamburg",
+        "hamburg_denkmal_opfer_der_sturmflut_1962"
+      ]
+    },
+    {
+      "id": "hamburg_leuchtturm_blankenese",
+      "name": "Leuchtturm Blankenese",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.550352240833334,
+        "lng": 9.996736900000005
+      },
+      "query": "Leuchtturm Blankenese, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5575,
+        "lng": 9.80306,
+        "display_name": "Blankenese, Hamburg, Deutschland",
+        "class": "place",
+        "type": "suburb",
+        "provider": "photon"
+      },
+      "delta_m": 12818,
+      "from_city_m": 654,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_mahnmal_st_nikolai",
+        "hamburg_hauptkirche_st_petri_hauptkirche_st_petri",
+        "hamburg_st_ansgar_kapelle",
+        "hamburg_bismarck_denkmal",
+        "hamburg_kriegerdenkmal_am_dammtordamm",
+        "hamburg_boberger_niederung",
+        "hamburg_elbstrand",
+        "hamburg_boberger_strand",
+        "hamburg_alsterpark",
+        "hamburg_petri_apotheke_hamburg",
+        "hamburg_deichstrasse_ursprung_grosser_brand_1842",
+        "hamburg_chilehaus",
+        "hamburg_altonaer_fischmarkt",
+        "hamburg_alter_elbtunnel",
+        "hamburg_planetarium_hamburg",
+        "hamburg_sullberg",
+        "hamburg_denkmal_opfer_der_sturmflut_1962"
+      ]
+    },
+    {
+      "id": "hamburg_boberger_niederung",
+      "name": "Boberger Niederung",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.550352240833334,
+        "lng": 9.996736900000005
+      },
+      "query": "Boberger Niederung, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5143212,
+        "lng": 10.1423533,
+        "display_name": "Boberger Niederung, Hamburg, Deutschland",
+        "class": "leisure",
+        "type": "nature_reserve",
+        "importance": 0.2713361062662927,
+        "osm_type": "relation",
+        "osm_id": 1547728,
+        "provider": "nominatim"
+      },
+      "delta_m": 10425,
+      "from_city_m": 654,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_mahnmal_st_nikolai",
+        "hamburg_hauptkirche_st_petri_hauptkirche_st_petri",
+        "hamburg_st_ansgar_kapelle",
+        "hamburg_bismarck_denkmal",
+        "hamburg_kriegerdenkmal_am_dammtordamm",
+        "hamburg_elbstrand",
+        "hamburg_boberger_strand",
+        "hamburg_alsterpark",
+        "hamburg_leuchtturm_blankenese",
+        "hamburg_petri_apotheke_hamburg",
+        "hamburg_deichstrasse_ursprung_grosser_brand_1842",
+        "hamburg_chilehaus",
+        "hamburg_altonaer_fischmarkt",
+        "hamburg_alter_elbtunnel",
+        "hamburg_planetarium_hamburg",
+        "hamburg_sullberg",
+        "hamburg_denkmal_opfer_der_sturmflut_1962"
+      ]
+    },
+    {
+      "id": "hamburg_boberger_strand",
+      "name": "Boberger Strand",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.550352240833334,
+        "lng": 9.996736900000005
+      },
+      "query": "Boberger Strand, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5151298,
+        "lng": 10.1377879,
+        "display_name": "Boberger Strand, Lohbrügge, Bergedorf, Hamburg, Deutschland",
+        "class": "natural",
+        "type": "beach",
+        "importance": 0.10674922026398105,
+        "osm_type": "way",
+        "osm_id": 24017388,
+        "provider": "nominatim"
+      },
+      "delta_m": 10111,
+      "from_city_m": 654,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_mahnmal_st_nikolai",
+        "hamburg_hauptkirche_st_petri_hauptkirche_st_petri",
+        "hamburg_st_ansgar_kapelle",
+        "hamburg_bismarck_denkmal",
+        "hamburg_kriegerdenkmal_am_dammtordamm",
+        "hamburg_boberger_niederung",
+        "hamburg_elbstrand",
+        "hamburg_alsterpark",
+        "hamburg_leuchtturm_blankenese",
+        "hamburg_petri_apotheke_hamburg",
+        "hamburg_deichstrasse_ursprung_grosser_brand_1842",
+        "hamburg_chilehaus",
+        "hamburg_altonaer_fischmarkt",
+        "hamburg_alter_elbtunnel",
+        "hamburg_planetarium_hamburg",
+        "hamburg_sullberg",
+        "hamburg_denkmal_opfer_der_sturmflut_1962"
+      ]
+    },
+    {
+      "id": "hamburg_frau_dr_med_ulrike_niehaus",
+      "name": "Frau Dr. med. Ulrike Niehaus",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.5510114,
+        "lng": 9.9802027
+      },
+      "query": "Frau Dr. med. Ulrike Niehaus, Hamburg, Germany",
+      "osm": {
+        "lat": 53.6209039,
+        "lng": 9.9516694,
+        "display_name": "Dr. med. dent. Ulrike Starke, Tibarg, Hamburg, Deutschland",
+        "class": "amenity",
+        "type": "dentist",
+        "provider": "photon"
+      },
+      "delta_m": 7997,
+      "from_city_m": 520,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hamburg_hamburg_bunker",
+      "name": "Hamburg BUNKER",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.556437063953496,
+        "lng": 9.969994038372093
+      },
+      "query": "Hamburg BUNKER, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5412931,
+        "lng": 9.8544782,
+        "display_name": "U-Boot-Bunker Fink II, Rüschweg, Hamburg, Deutschland",
+        "class": "historic",
+        "type": "ruins",
+        "provider": "photon"
+      },
+      "delta_m": 7815,
+      "from_city_m": 1415,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hamburg_tierpark_hagenbeck",
+      "name": "Tierpark Hagenbeck",
+      "category": "zoo",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.55413053750001,
+        "lng": 9.9920431125
+      },
+      "query": "Tierpark Hagenbeck, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5968151,
+        "lng": 9.9381411,
+        "display_name": "Tierpark Hagenbeck, 2, Lokstedter Grenzstraße, Lokstedt, Eimsbüttel, Hamburg, 22527, Deutschland",
+        "class": "tourism",
+        "type": "zoo",
+        "importance": 0.41264182722604775,
+        "osm_type": "way",
+        "osm_id": 148874791,
+        "provider": "nominatim"
+      },
+      "delta_m": 5932,
+      "from_city_m": 672,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_jungfernstieg",
+        "hamburg_harburger_berge",
+        "hamburg_fischbeker_heide",
+        "hamburg_speicherstadt",
+        "hamburg_altonaer_balkon",
+        "hamburg_alsterfontane"
+      ]
+    },
+    {
+      "id": "hamburg_elbstrand",
+      "name": "Elbstrand",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.550352240833334,
+        "lng": 9.996736900000005
+      },
+      "query": "Elbstrand, Hamburg, Germany",
+      "osm": {
+        "lat": 53.544272,
+        "lng": 9.9102101,
+        "display_name": "Övelgönne, Othmarschen, Altona, Hamburg, Deutschland",
+        "class": "natural",
+        "type": "beach",
+        "importance": 0.2636224323479305,
+        "osm_type": "way",
+        "osm_id": 25635563,
+        "provider": "nominatim"
+      },
+      "delta_m": 5756,
+      "from_city_m": 654,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_mahnmal_st_nikolai",
+        "hamburg_hauptkirche_st_petri_hauptkirche_st_petri",
+        "hamburg_st_ansgar_kapelle",
+        "hamburg_bismarck_denkmal",
+        "hamburg_kriegerdenkmal_am_dammtordamm",
+        "hamburg_boberger_niederung",
+        "hamburg_boberger_strand",
+        "hamburg_alsterpark",
+        "hamburg_leuchtturm_blankenese",
+        "hamburg_petri_apotheke_hamburg",
+        "hamburg_deichstrasse_ursprung_grosser_brand_1842",
+        "hamburg_chilehaus",
+        "hamburg_altonaer_fischmarkt",
+        "hamburg_alter_elbtunnel",
+        "hamburg_planetarium_hamburg",
+        "hamburg_sullberg",
+        "hamburg_denkmal_opfer_der_sturmflut_1962"
+      ]
+    },
+    {
+      "id": "hamburg_kriegerdenkmal_am_dammtordamm",
+      "name": "Kriegerdenkmal am Dammtordamm",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.550352240833334,
+        "lng": 9.996736900000005
+      },
+      "query": "Kriegerdenkmal am Dammtordamm, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5641745,
+        "lng": 10.0740042,
+        "display_name": "Kriegerdenkmal 1914-19, Am Husarendenkmal, Hamburg, Deutschland",
+        "class": "historic",
+        "type": "memorial",
+        "provider": "photon"
+      },
+      "delta_m": 5330,
+      "from_city_m": 654,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_mahnmal_st_nikolai",
+        "hamburg_hauptkirche_st_petri_hauptkirche_st_petri",
+        "hamburg_st_ansgar_kapelle",
+        "hamburg_bismarck_denkmal",
+        "hamburg_boberger_niederung",
+        "hamburg_elbstrand",
+        "hamburg_boberger_strand",
+        "hamburg_alsterpark",
+        "hamburg_leuchtturm_blankenese",
+        "hamburg_petri_apotheke_hamburg",
+        "hamburg_deichstrasse_ursprung_grosser_brand_1842",
+        "hamburg_chilehaus",
+        "hamburg_altonaer_fischmarkt",
+        "hamburg_alter_elbtunnel",
+        "hamburg_planetarium_hamburg",
+        "hamburg_sullberg",
+        "hamburg_denkmal_opfer_der_sturmflut_1962"
+      ]
+    },
+    {
+      "id": "hamburg_planetarium_hamburg",
+      "name": "Planetarium Hamburg",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.550352240833334,
+        "lng": 9.996736900000005
+      },
+      "query": "Planetarium Hamburg, Hamburg, Germany",
+      "osm": {
+        "lat": 53.597313,
+        "lng": 10.0089113,
+        "display_name": "Planetarium, 1, Linnering, Winterhude, Hamburg-Nord, Hamburg, 22299, Deutschland",
+        "class": "amenity",
+        "type": "planetarium",
+        "importance": 0.29322317952748045,
+        "osm_type": "way",
+        "osm_id": 316456276,
+        "provider": "nominatim"
+      },
+      "delta_m": 5283,
+      "from_city_m": 654,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_mahnmal_st_nikolai",
+        "hamburg_hauptkirche_st_petri_hauptkirche_st_petri",
+        "hamburg_st_ansgar_kapelle",
+        "hamburg_bismarck_denkmal",
+        "hamburg_kriegerdenkmal_am_dammtordamm",
+        "hamburg_boberger_niederung",
+        "hamburg_elbstrand",
+        "hamburg_boberger_strand",
+        "hamburg_alsterpark",
+        "hamburg_leuchtturm_blankenese",
+        "hamburg_petri_apotheke_hamburg",
+        "hamburg_deichstrasse_ursprung_grosser_brand_1842",
+        "hamburg_chilehaus",
+        "hamburg_altonaer_fischmarkt",
+        "hamburg_alter_elbtunnel",
+        "hamburg_sullberg",
+        "hamburg_denkmal_opfer_der_sturmflut_1962"
+      ]
+    },
+    {
+      "id": "hamburg_marienkrankenhaus_hamburg_zentrale_notaufnahme_integriertes_notfallzentr",
+      "name": "Marienkrankenhaus Hamburg Zentrale Notaufnahme / Integriertes Notfallzentrum",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.5599508,
+        "lng": 10.0335323
+      },
+      "query": "Marienkrankenhaus Hamburg Zentrale Notaufnahme /, Hamburg, Germany",
+      "osm": {
+        "lat": 53.6062018,
+        "lng": 10.0359944,
+        "display_name": "Zentrale Notaufnahme, Rübenkamp, Hamburg, Deutschland",
+        "class": "emergency",
+        "type": "emergency_ward_entrance",
+        "provider": "photon"
+      },
+      "delta_m": 5145,
+      "from_city_m": 3303,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hamburg_stadtpark_hamburg",
+      "name": "Stadtpark Hamburg",
+      "category": "park",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.549737160465135,
+        "lng": 10.008301709302325
+      },
+      "query": "Stadtpark Hamburg, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5956195,
+        "lng": 10.0176691,
+        "display_name": "Hamburger Stadtpark, Hamburg-Nord, Hamburg, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "importance": 0.351725953161806,
+        "osm_type": "way",
+        "osm_id": 23734712,
+        "provider": "nominatim"
+      },
+      "delta_m": 5139,
+      "from_city_m": 1400,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_mahnmal_sturmflut_finkenwerder_suderdeich",
+        "hamburg_sprinkenhof",
+        "hamburg_spielbudenplatz",
+        "hamburg_dockland",
+        "hamburg_traditionsschiffhafen_hafencity"
+      ]
+    },
+    {
+      "id": "hamburg_dockland",
+      "name": "Dockland",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.549737160465135,
+        "lng": 10.008301709302325
+      },
+      "query": "Dockland, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5433444,
+        "lng": 9.9340878,
+        "display_name": "Dockland, 9, Van-der-Smissen-Straße, Altona, Altona-Altstadt, Altona, Hamburg, 22767, Deutschland",
+        "class": "tourism",
+        "type": "viewpoint",
+        "importance": 0.00008255359731436664,
+        "osm_type": "node",
+        "osm_id": 681318675,
+        "provider": "nominatim"
+      },
+      "delta_m": 4954,
+      "from_city_m": 1400,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_mahnmal_sturmflut_finkenwerder_suderdeich",
+        "hamburg_sprinkenhof",
+        "hamburg_spielbudenplatz",
+        "hamburg_stadtpark_hamburg",
+        "hamburg_traditionsschiffhafen_hafencity"
+      ]
+    },
+    {
+      "id": "hamburg_rosengarten",
+      "name": "Rosengarten",
+      "category": "natur",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.5630587,
+        "lng": 9.9834743
+      },
+      "query": "Rosengarten, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5452592,
+        "lng": 9.9184108,
+        "display_name": "Rosengarten, Ottensen, Altona, Hamburg, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "importance": 0.08008255359731438,
+        "osm_type": "relation",
+        "osm_id": 1874176,
+        "provider": "nominatim"
+      },
+      "delta_m": 4732,
+      "from_city_m": 1601,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hamburg_allee_theater_hamburg",
+      "name": "Allee Theater Hamburg",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.554813615,
+        "lng": 10.00862153
+      },
+      "query": "Allee Theater Hamburg, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5546954,
+        "lng": 9.9420946,
+        "display_name": "Allee Theater, 76, Max-Brauer-Allee, Altona, Altona-Altstadt, Altona, Hamburg, 22765, Deutschland",
+        "class": "amenity",
+        "type": "theatre",
+        "importance": 0.00008255359731436664,
+        "osm_type": "node",
+        "osm_id": 2788197448,
+        "provider": "nominatim"
+      },
+      "delta_m": 4395,
+      "from_city_m": 1566,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_botanischer_garten_der_universitat_hamburg_loki_schmidt_garten",
+        "hamburg_grosse_wallanlagen",
+        "hamburg_ohnsorg_theater_hamburg"
+      ]
+    },
+    {
+      "id": "hamburg_dres_andreae_neumann",
+      "name": "Dres. Andreae & Neumann",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.5511292,
+        "lng": 9.9897013
+      },
+      "query": "Dres. Andreae, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5854826,
+        "lng": 10.0071168,
+        "display_name": "beomed MVZ Dres. Gruhn und Fritz GbR, Poßmoorweg, Hamburg, Deutschland",
+        "class": "healthcare",
+        "type": "physiotherapist",
+        "provider": "photon"
+      },
+      "delta_m": 3989,
+      "from_city_m": 306,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hamburg_isemarkt",
+      "name": "Isemarkt",
+      "category": "markt",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.54600940425532,
+        "lng": 9.994432823404255
+      },
+      "query": "Isemarkt, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5806125,
+        "lng": 9.9806424,
+        "display_name": "Isemarkt, Isestraße, Harvestehude, Eimsbüttel, Hamburg, 20144, Deutschland",
+        "class": "amenity",
+        "type": "marketplace",
+        "importance": 0.00008255359731436664,
+        "osm_type": "way",
+        "osm_id": 961333761,
+        "provider": "nominatim"
+      },
+      "delta_m": 3954,
+      "from_city_m": 573,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_hauptkirche_st_katharinen_hauptkirche_st_katharinen",
+        "hamburg_tropen_aquarium_beim_tierpark_hagenbeck",
+        "hamburg_savoy_filmtheater",
+        "hamburg_nsg_eppendorfer_moor",
+        "hamburg_leuchtturm_rissen_oberfeuer",
+        "hamburg_the_english_theatre_of_hamburg_e_v",
+        "hamburg_cap_san_diego"
+      ]
+    },
+    {
+      "id": "hamburg_altonaer_fischmarkt",
+      "name": "Altonaer Fischmarkt",
+      "category": "markt",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.550352240833334,
+        "lng": 9.996736900000005
+      },
+      "query": "Altonaer Fischmarkt, Hamburg, Germany",
+      "osm": {
+        "lat": 53.544465,
+        "lng": 9.9383595,
+        "display_name": "Fischmarkt Hamburg Altona, Große Elbstraße, Hamburg, Deutschland",
+        "class": "shop",
+        "type": "seafood",
+        "provider": "photon"
+      },
+      "delta_m": 3912,
+      "from_city_m": 654,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_mahnmal_st_nikolai",
+        "hamburg_hauptkirche_st_petri_hauptkirche_st_petri",
+        "hamburg_st_ansgar_kapelle",
+        "hamburg_bismarck_denkmal",
+        "hamburg_kriegerdenkmal_am_dammtordamm",
+        "hamburg_boberger_niederung",
+        "hamburg_elbstrand",
+        "hamburg_boberger_strand",
+        "hamburg_alsterpark",
+        "hamburg_leuchtturm_blankenese",
+        "hamburg_petri_apotheke_hamburg",
+        "hamburg_deichstrasse_ursprung_grosser_brand_1842",
+        "hamburg_chilehaus",
+        "hamburg_alter_elbtunnel",
+        "hamburg_planetarium_hamburg",
+        "hamburg_sullberg",
+        "hamburg_denkmal_opfer_der_sturmflut_1962"
+      ]
+    },
+    {
+      "id": "hamburg_evangelisch_reformierte_kirche_in_hamburg",
+      "name": "Evangelisch-reformierte Kirche in Hamburg",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.55407753125,
+        "lng": 10.0004509625
+      },
+      "query": "Evangelisch-reformierte Kirche in Hamburg, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5465895,
+        "lng": 9.9449696,
+        "display_name": "Evangelisch-Reformierte Kirche in Hamburg, 2-6, Palmaille, Altona, Altona-Altstadt, Altona, Hamburg, 22767, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.00008255359731436664,
+        "osm_type": "way",
+        "osm_id": 137931543,
+        "provider": "nominatim"
+      },
+      "delta_m": 3759,
+      "from_city_m": 1054,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hamburg_denkmal_opfer_der_sturmflut_1962",
+      "name": "Denkmal Opfer der Sturmflut 1962",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.550352240833334,
+        "lng": 9.996736900000005
+      },
+      "query": "Denkmal Opfer der Sturmflut 1962, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5191201,
+        "lng": 9.9814279,
+        "display_name": "Den Opfern der Sturmflut, Vogelhüttendeich, Hamburg, Deutschland",
+        "class": "historic",
+        "type": "memorial",
+        "provider": "photon"
+      },
+      "delta_m": 3617,
+      "from_city_m": 654,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_mahnmal_st_nikolai",
+        "hamburg_hauptkirche_st_petri_hauptkirche_st_petri",
+        "hamburg_st_ansgar_kapelle",
+        "hamburg_bismarck_denkmal",
+        "hamburg_kriegerdenkmal_am_dammtordamm",
+        "hamburg_boberger_niederung",
+        "hamburg_elbstrand",
+        "hamburg_boberger_strand",
+        "hamburg_alsterpark",
+        "hamburg_leuchtturm_blankenese",
+        "hamburg_petri_apotheke_hamburg",
+        "hamburg_deichstrasse_ursprung_grosser_brand_1842",
+        "hamburg_chilehaus",
+        "hamburg_altonaer_fischmarkt",
+        "hamburg_alter_elbtunnel",
+        "hamburg_planetarium_hamburg",
+        "hamburg_sullberg"
+      ]
+    },
+    {
+      "id": "hamburg_altonaer_balkon",
+      "name": "Altonaer Balkon",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.55413053750001,
+        "lng": 9.9920431125
+      },
+      "query": "Altonaer Balkon, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5454907,
+        "lng": 9.9411598,
+        "display_name": "Altonaer Balkon, Altona-Altstadt, Altona, Hamburg, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "importance": 0.2713361062662927,
+        "osm_type": "relation",
+        "osm_id": 1860037,
+        "provider": "nominatim"
+      },
+      "delta_m": 3496,
+      "from_city_m": 672,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_jungfernstieg",
+        "hamburg_harburger_berge",
+        "hamburg_fischbeker_heide",
+        "hamburg_tierpark_hagenbeck",
+        "hamburg_speicherstadt",
+        "hamburg_alsterfontane"
+      ]
+    },
+    {
+      "id": "hamburg_the_english_theatre_of_hamburg_e_v",
+      "name": "The English Theatre of Hamburg e.V.",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.54600940425532,
+        "lng": 9.994432823404255
+      },
+      "query": "The English Theatre of Hamburg, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5694504,
+        "lng": 10.0288753,
+        "display_name": "The English Theatre of Hamburg, 14, Lerchenfeld, Uhlenhorst, Hamburg-Nord, Hamburg, 22081, Deutschland",
+        "class": "amenity",
+        "type": "theatre",
+        "importance": 0.2853231881743613,
+        "osm_type": "node",
+        "osm_id": 371128072,
+        "provider": "nominatim"
+      },
+      "delta_m": 3460,
+      "from_city_m": 573,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_hauptkirche_st_katharinen_hauptkirche_st_katharinen",
+        "hamburg_tropen_aquarium_beim_tierpark_hagenbeck",
+        "hamburg_isemarkt",
+        "hamburg_savoy_filmtheater",
+        "hamburg_nsg_eppendorfer_moor",
+        "hamburg_leuchtturm_rissen_oberfeuer",
+        "hamburg_cap_san_diego"
+      ]
+    },
+    {
+      "id": "hamburg_herr_dr_med_markus_flotho",
+      "name": "Herr Dr. med. Markus Flotho",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.54834529999999,
+        "lng": 9.984780599999999
+      },
+      "query": "Herr Dr. med. Markus Flotho, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5705534,
+        "lng": 10.0171664,
+        "display_name": "Herr Dr. med. Bahram Tehrani, Hofweg, Hamburg, Deutschland",
+        "class": "amenity",
+        "type": "doctors",
+        "provider": "photon"
+      },
+      "delta_m": 3267,
+      "from_city_m": 167,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hamburg_spielbudenplatz",
+      "name": "Spielbudenplatz",
+      "category": "platz",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.549737160465135,
+        "lng": 10.008301709302325
+      },
+      "query": "Spielbudenplatz, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5493359,
+        "lng": 9.9638133,
+        "display_name": "Spielbudenplatz, St. Pauli, Hamburg-Mitte, Hamburg, 20359, Deutschland",
+        "class": "highway",
+        "type": "residential",
+        "importance": 0.05341588693064771,
+        "osm_type": "way",
+        "osm_id": 143065639,
+        "provider": "nominatim"
+      },
+      "delta_m": 2939,
+      "from_city_m": 1400,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_mahnmal_sturmflut_finkenwerder_suderdeich",
+        "hamburg_sprinkenhof",
+        "hamburg_stadtpark_hamburg",
+        "hamburg_dockland",
+        "hamburg_traditionsschiffhafen_hafencity"
+      ]
+    },
+    {
+      "id": "hamburg_alsterpark",
+      "name": "Alsterpark",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.550352240833334,
+        "lng": 9.996736900000005
+      },
+      "query": "Alsterpark, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5752602,
+        "lng": 10.0067897,
+        "display_name": "Alsterpark, Uhlenhorst, Hamburg-Nord, Hamburg, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "importance": 0.08008255359731438,
+        "osm_type": "way",
+        "osm_id": 27449444,
+        "provider": "nominatim"
+      },
+      "delta_m": 2848,
+      "from_city_m": 654,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_mahnmal_st_nikolai",
+        "hamburg_hauptkirche_st_petri_hauptkirche_st_petri",
+        "hamburg_st_ansgar_kapelle",
+        "hamburg_bismarck_denkmal",
+        "hamburg_kriegerdenkmal_am_dammtordamm",
+        "hamburg_boberger_niederung",
+        "hamburg_elbstrand",
+        "hamburg_boberger_strand",
+        "hamburg_leuchtturm_blankenese",
+        "hamburg_petri_apotheke_hamburg",
+        "hamburg_deichstrasse_ursprung_grosser_brand_1842",
+        "hamburg_chilehaus",
+        "hamburg_altonaer_fischmarkt",
+        "hamburg_alter_elbtunnel",
+        "hamburg_planetarium_hamburg",
+        "hamburg_sullberg",
+        "hamburg_denkmal_opfer_der_sturmflut_1962"
+      ]
+    },
+    {
+      "id": "hamburg_grosse_wallanlagen",
+      "name": "Große Wallanlagen",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.554813615,
+        "lng": 10.00862153
+      },
+      "query": "Große Wallanlagen, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5529219,
+        "lng": 9.9741044,
+        "display_name": "Große Wallanlagen, Neustadt, Hamburg-Mitte, Hamburg, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "importance": 0.3411720307708333,
+        "osm_type": "relation",
+        "osm_id": 168566,
+        "provider": "nominatim"
+      },
+      "delta_m": 2290,
+      "from_city_m": 1566,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_botanischer_garten_der_universitat_hamburg_loki_schmidt_garten",
+        "hamburg_ohnsorg_theater_hamburg",
+        "hamburg_allee_theater_hamburg"
+      ]
+    },
+    {
+      "id": "hamburg_alter_elbtunnel",
+      "name": "Alter Elbtunnel",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.550352240833334,
+        "lng": 9.996736900000005
+      },
+      "query": "Alter Elbtunnel, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5458701,
+        "lng": 9.9666001,
+        "display_name": "St. Pauli-Elbtunnel, Bei den St. Pauli-Landungsbrücken, St. Pauli, Hamburg-Mitte, Hamburg, 20359, Deutschland",
+        "class": "building",
+        "type": "transportation",
+        "importance": 0.3090170114439377,
+        "osm_type": "way",
+        "osm_id": 48361392,
+        "provider": "nominatim"
+      },
+      "delta_m": 2052,
+      "from_city_m": 654,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_mahnmal_st_nikolai",
+        "hamburg_hauptkirche_st_petri_hauptkirche_st_petri",
+        "hamburg_st_ansgar_kapelle",
+        "hamburg_bismarck_denkmal",
+        "hamburg_kriegerdenkmal_am_dammtordamm",
+        "hamburg_boberger_niederung",
+        "hamburg_elbstrand",
+        "hamburg_boberger_strand",
+        "hamburg_alsterpark",
+        "hamburg_leuchtturm_blankenese",
+        "hamburg_petri_apotheke_hamburg",
+        "hamburg_deichstrasse_ursprung_grosser_brand_1842",
+        "hamburg_chilehaus",
+        "hamburg_altonaer_fischmarkt",
+        "hamburg_planetarium_hamburg",
+        "hamburg_sullberg",
+        "hamburg_denkmal_opfer_der_sturmflut_1962"
+      ]
+    },
+    {
+      "id": "hamburg_kehrwiederspitze",
+      "name": "Kehrwiederspitze",
+      "category": "aussicht",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.55132155901639,
+        "lng": 10.009268324590167
+      },
+      "query": "Kehrwiederspitze, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5428671,
+        "lng": 9.9823228,
+        "display_name": "Kehrwiederspitze, Quartier Am Sandtorkai, HafenCity, Hamburg-Mitte, Hamburg, 20457, Deutschland",
+        "class": "place",
+        "type": "locality",
+        "importance": 0.2574973608523206,
+        "osm_type": "node",
+        "osm_id": 298543870,
+        "provider": "nominatim"
+      },
+      "delta_m": 2013,
+      "from_city_m": 1486,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_dammtor",
+        "hamburg_miniatur_wunderland"
+      ]
+    },
+    {
+      "id": "hamburg_traditionsschiffhafen_hafencity",
+      "name": "Traditionsschiffhafen HafenCity",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.549737160465135,
+        "lng": 10.008301709302325
+      },
+      "query": "Traditionsschiffhafen HafenCity, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5419426,
+        "lng": 9.9856429,
+        "display_name": "Sandtorhafen / Traditionsschiffhafen, HafenCity, Hamburg-Mitte, Hamburg, Deutschland",
+        "class": "waterway",
+        "type": "canal",
+        "importance": 0.13341588693064774,
+        "osm_type": "way",
+        "osm_id": 25400775,
+        "provider": "nominatim"
+      },
+      "delta_m": 1730,
+      "from_city_m": 1400,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_mahnmal_sturmflut_finkenwerder_suderdeich",
+        "hamburg_sprinkenhof",
+        "hamburg_spielbudenplatz",
+        "hamburg_stadtpark_hamburg",
+        "hamburg_dockland"
+      ]
+    },
+    {
+      "id": "hamburg_dammtor",
+      "name": "Dammtor",
+      "category": "bahnhof",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.55132155901639,
+        "lng": 10.009268324590167
+      },
+      "query": "Dammtor, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5611713,
+        "lng": 9.9893205,
+        "display_name": "Dammtor (Messe/CCH), Theodor-Heuss-Platz, Rotherbaum, Eimsbüttel, Hamburg, 20354, Deutschland",
+        "class": "railway",
+        "type": "platform",
+        "importance": 0.00008255359731436664,
+        "osm_type": "relation",
+        "osm_id": 6005178,
+        "provider": "nominatim"
+      },
+      "delta_m": 1713,
+      "from_city_m": 1486,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_kehrwiederspitze",
+        "hamburg_miniatur_wunderland"
+      ]
+    },
+    {
+      "id": "hamburg_bismarck_denkmal",
+      "name": "Bismarck-Denkmal",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.550352240833334,
+        "lng": 9.996736900000005
+      },
+      "query": "Bismarck-Denkmal, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5487061,
+        "lng": 9.9720432,
+        "display_name": "Bismarck-Denkmal, Am Elbpavillon, Portugiesenviertel, Neustadt, Hamburg-Mitte, Hamburg, 20459, Deutschland",
+        "class": "historic",
+        "type": "monument",
+        "importance": 0.3140788844789178,
+        "osm_type": "way",
+        "osm_id": 45017024,
+        "provider": "nominatim"
+      },
+      "delta_m": 1642,
+      "from_city_m": 654,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_mahnmal_st_nikolai",
+        "hamburg_hauptkirche_st_petri_hauptkirche_st_petri",
+        "hamburg_st_ansgar_kapelle",
+        "hamburg_kriegerdenkmal_am_dammtordamm",
+        "hamburg_boberger_niederung",
+        "hamburg_elbstrand",
+        "hamburg_boberger_strand",
+        "hamburg_alsterpark",
+        "hamburg_leuchtturm_blankenese",
+        "hamburg_petri_apotheke_hamburg",
+        "hamburg_deichstrasse_ursprung_grosser_brand_1842",
+        "hamburg_chilehaus",
+        "hamburg_altonaer_fischmarkt",
+        "hamburg_alter_elbtunnel",
+        "hamburg_planetarium_hamburg",
+        "hamburg_sullberg",
+        "hamburg_denkmal_opfer_der_sturmflut_1962"
+      ]
+    },
+    {
+      "id": "hamburg_miniatur_wunderland",
+      "name": "Miniatur Wunderland",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.55132155901639,
+        "lng": 10.009268324590167
+      },
+      "query": "Miniatur Wunderland, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5438229,
+        "lng": 9.9889448,
+        "display_name": "Miniatur Wunderland, 2-4, Kehrwieder, Quartier Am Sandtorkai, HafenCity, Hamburg-Mitte, Hamburg, 20457, Deutschland",
+        "class": "tourism",
+        "type": "attraction",
+        "importance": 0.3767390548248983,
+        "osm_type": "node",
+        "osm_id": 10946039386,
+        "provider": "nominatim"
+      },
+      "delta_m": 1581,
+      "from_city_m": 1486,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_dammtor",
+        "hamburg_kehrwiederspitze"
+      ]
+    },
+    {
+      "id": "hamburg_botanischer_garten_der_universitat_hamburg_loki_schmidt_garten",
+      "name": "Botanischer Garten der Universität Hamburg - Loki-Schmidt-Garten",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.554813615,
+        "lng": 10.00862153
+      },
+      "query": "Botanischer Garten der Universität Hamburg, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5593499,
+        "lng": 9.9864616,
+        "display_name": "Alter Botanischer Garten, Hamburg, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "provider": "photon"
+      },
+      "delta_m": 1548,
+      "from_city_m": 1566,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_grosse_wallanlagen",
+        "hamburg_ohnsorg_theater_hamburg",
+        "hamburg_allee_theater_hamburg"
+      ]
+    },
+    {
+      "id": "hamburg_st_ansgar_kapelle",
+      "name": "St. Ansgar-Kapelle",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.550352240833334,
+        "lng": 9.996736900000005
+      },
+      "query": "St. Ansgar-Kapelle, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5574991,
+        "lng": 10.0147619,
+        "display_name": "Sankt-Ansgar-Kapelle, Am Mariendom, St. Georg, Hamburg-Mitte, Hamburg, 20099, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.00008255359731436664,
+        "osm_type": "way",
+        "osm_id": 1174230709,
+        "provider": "nominatim"
+      },
+      "delta_m": 1432,
+      "from_city_m": 654,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_mahnmal_st_nikolai",
+        "hamburg_hauptkirche_st_petri_hauptkirche_st_petri",
+        "hamburg_bismarck_denkmal",
+        "hamburg_kriegerdenkmal_am_dammtordamm",
+        "hamburg_boberger_niederung",
+        "hamburg_elbstrand",
+        "hamburg_boberger_strand",
+        "hamburg_alsterpark",
+        "hamburg_leuchtturm_blankenese",
+        "hamburg_petri_apotheke_hamburg",
+        "hamburg_deichstrasse_ursprung_grosser_brand_1842",
+        "hamburg_chilehaus",
+        "hamburg_altonaer_fischmarkt",
+        "hamburg_alter_elbtunnel",
+        "hamburg_planetarium_hamburg",
+        "hamburg_sullberg",
+        "hamburg_denkmal_opfer_der_sturmflut_1962"
+      ]
+    },
+    {
+      "id": "hamburg_hamburger_hafen",
+      "name": "Hamburger Hafen",
+      "category": "hafen",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.5425322,
+        "lng": 9.9774806
+      },
+      "query": "Hamburger Hafen, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5450233,
+        "lng": 9.9976646,
+        "display_name": "Hauptverwaltung Hamburger Hafen und Logistik, 1, Bei St. Annen, Quartier Überseequartier, HafenCity, Hamburg-Mitte, Hamburg, 20457, Deutschland",
+        "class": "office",
+        "type": "logistics",
+        "importance": 0.00008255359731436664,
+        "osm_type": "node",
+        "osm_id": 3417602101,
+        "provider": "nominatim"
+      },
+      "delta_m": 1362,
+      "from_city_m": 949,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hamburg_panoptikum",
+      "name": "Panoptikum",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.54459642,
+        "lng": 9.985254679999999
+      },
+      "query": "Panoptikum, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5494328,
+        "lng": 9.9665514,
+        "display_name": "Panoptikum, 3, Spielbudenplatz, St. Pauli, Hamburg-Mitte, Hamburg, 20359, Deutschland",
+        "class": "tourism",
+        "type": "attraction",
+        "importance": 0.21080589711721126,
+        "osm_type": "node",
+        "osm_id": 443383971,
+        "provider": "nominatim"
+      },
+      "delta_m": 1348,
+      "from_city_m": 487,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_speicherstadtmuseum",
+        "hamburg_chocoversum_hamburgs_schokoladenmuseum",
+        "hamburg_automuseum_prototyp",
+        "hamburg_museum_der_natur_hamburg_zoologie",
+        "hamburg_deutsches_zollmuseum",
+        "hamburg_flussschifferkirche_hamburg"
+      ]
+    },
+    {
+      "id": "hamburg_schwedische_gustaf_adolfs_kirche",
+      "name": "Schwedische Gustaf-Adolfs-Kirche",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.557584250724645,
+        "lng": 9.976093801449275
+      },
+      "query": "Schwedische Gustaf-Adolfs-Kirche, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5457011,
+        "lng": 9.9733177,
+        "display_name": "Gustaf-Adolfs-Kirche, Ditmar-Koel-Straße, Hamburg, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 1334,
+      "from_city_m": 1218,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_russische_orthodoxe_kirche_des_hl_johannes_von_kronstadt"
+      ]
+    },
+    {
+      "id": "hamburg_cap_san_diego",
+      "name": "Cap San Diego",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.54600940425532,
+        "lng": 9.994432823404255
+      },
+      "query": "Cap San Diego, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5431425,
+        "lng": 9.9763862,
+        "display_name": "Cap San Diego, Überseebrücke, Portugiesenviertel, Neustadt, Hamburg-Mitte, Hamburg, 20459, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.00008255359731436664,
+        "osm_type": "way",
+        "osm_id": 137318607,
+        "provider": "nominatim"
+      },
+      "delta_m": 1234,
+      "from_city_m": 573,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_hauptkirche_st_katharinen_hauptkirche_st_katharinen",
+        "hamburg_tropen_aquarium_beim_tierpark_hagenbeck",
+        "hamburg_isemarkt",
+        "hamburg_savoy_filmtheater",
+        "hamburg_nsg_eppendorfer_moor",
+        "hamburg_leuchtturm_rissen_oberfeuer",
+        "hamburg_the_english_theatre_of_hamburg_e_v"
+      ]
+    },
+    {
+      "id": "hamburg_chocoversum_hamburgs_schokoladenmuseum",
+      "name": "CHOCOVERSUM - Hamburgs Schokoladenmuseum",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.54459642,
+        "lng": 9.985254679999999
+      },
+      "query": "CHOCOVERSUM, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5479534,
+        "lng": 10.0025351,
+        "display_name": "Chocoversum, 1, Meßberg, Altstadt, Hamburg-Mitte, Hamburg, 20095, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.00008255359731436664,
+        "osm_type": "node",
+        "osm_id": 3714346724,
+        "provider": "nominatim"
+      },
+      "delta_m": 1201,
+      "from_city_m": 487,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_speicherstadtmuseum",
+        "hamburg_panoptikum",
+        "hamburg_automuseum_prototyp",
+        "hamburg_museum_der_natur_hamburg_zoologie",
+        "hamburg_deutsches_zollmuseum",
+        "hamburg_flussschifferkirche_hamburg"
+      ]
+    },
+    {
+      "id": "hamburg_speicherstadt",
+      "name": "Speicherstadt",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.55413053750001,
+        "lng": 9.9920431125
+      },
+      "query": "Speicherstadt, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5440149,
+        "lng": 9.9869792,
+        "display_name": "Speicherstadt, Kehrwieder, Hanseatic Trade Center, HafenCity, Hamburg-Mitte, Hamburg, 20457, Deutschland",
+        "class": "tourism",
+        "type": "attraction",
+        "importance": 0.5001349749767685,
+        "osm_type": "node",
+        "osm_id": 4417808181,
+        "provider": "nominatim"
+      },
+      "delta_m": 1174,
+      "from_city_m": 672,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_jungfernstieg",
+        "hamburg_harburger_berge",
+        "hamburg_fischbeker_heide",
+        "hamburg_tierpark_hagenbeck",
+        "hamburg_altonaer_balkon",
+        "hamburg_alsterfontane"
+      ]
+    },
+    {
+      "id": "hamburg_automuseum_prototyp",
+      "name": "Automuseum Prototyp",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.54459642,
+        "lng": 9.985254679999999
+      },
+      "query": "Automuseum Prototyp, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5433626,
+        "lng": 10.0025079,
+        "display_name": "PROTOTYP -Das Automuseum, 7, Shanghaiallee, Quartier Elbtorquartier, HafenCity, Hamburg-Mitte, Hamburg, 20457, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.16273786379520622,
+        "osm_type": "node",
+        "osm_id": 1650071826,
+        "provider": "nominatim"
+      },
+      "delta_m": 1148,
+      "from_city_m": 487,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_speicherstadtmuseum",
+        "hamburg_chocoversum_hamburgs_schokoladenmuseum",
+        "hamburg_panoptikum",
+        "hamburg_museum_der_natur_hamburg_zoologie",
+        "hamburg_deutsches_zollmuseum",
+        "hamburg_flussschifferkirche_hamburg"
+      ]
+    },
+    {
+      "id": "hamburg_planten_un_blomen",
+      "name": "Planten un Blomen",
+      "category": "park",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.55317088473282,
+        "lng": 9.974565802290076
+      },
+      "query": "Planten un Blomen, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5619584,
+        "lng": 9.9813309,
+        "display_name": "Planten un Blomen, St. Pauli, Hamburg-Mitte, Hamburg, 20355, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "importance": 0.36640063663752165,
+        "osm_type": "relation",
+        "osm_id": 8103463,
+        "provider": "nominatim"
+      },
+      "delta_m": 1074,
+      "from_city_m": 963,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_park_cafe_planten_un_blomen"
+      ]
+    },
+    {
+      "id": "hamburg_deutsches_zollmuseum",
+      "name": "Deutsches Zollmuseum",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.54459642,
+        "lng": 9.985254679999999
+      },
+      "query": "Deutsches Zollmuseum, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5459413,
+        "lng": 9.9980125,
+        "display_name": "Deutsches Zollmuseum, 15-16, Alter Wandrahm, Quartier Brooktorkai/Ericus, HafenCity, Hamburg-Mitte, Hamburg, 20457, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.23648094285300414,
+        "osm_type": "node",
+        "osm_id": 277296724,
+        "provider": "nominatim"
+      },
+      "delta_m": 856,
+      "from_city_m": 487,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_speicherstadtmuseum",
+        "hamburg_chocoversum_hamburgs_schokoladenmuseum",
+        "hamburg_panoptikum",
+        "hamburg_automuseum_prototyp",
+        "hamburg_museum_der_natur_hamburg_zoologie",
+        "hamburg_flussschifferkirche_hamburg"
+      ]
+    },
+    {
+      "id": "hamburg_deichstrasse_ursprung_grosser_brand_1842",
+      "name": "Deichstraße (Ursprung Großer Brand 1842)",
+      "category": "geschichte",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.550352240833334,
+        "lng": 9.996736900000005
+      },
+      "query": "Deichstraße, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5457109,
+        "lng": 9.9870196,
+        "display_name": "Deichstraße, Altstadt, Hamburg-Mitte, Hamburg, 20459, Deutschland",
+        "class": "highway",
+        "type": "pedestrian",
+        "importance": 0.2432038182346074,
+        "osm_type": "way",
+        "osm_id": 656331532,
+        "provider": "nominatim"
+      },
+      "delta_m": 824,
+      "from_city_m": 654,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_mahnmal_st_nikolai",
+        "hamburg_hauptkirche_st_petri_hauptkirche_st_petri",
+        "hamburg_st_ansgar_kapelle",
+        "hamburg_bismarck_denkmal",
+        "hamburg_kriegerdenkmal_am_dammtordamm",
+        "hamburg_boberger_niederung",
+        "hamburg_elbstrand",
+        "hamburg_boberger_strand",
+        "hamburg_alsterpark",
+        "hamburg_leuchtturm_blankenese",
+        "hamburg_petri_apotheke_hamburg",
+        "hamburg_chilehaus",
+        "hamburg_altonaer_fischmarkt",
+        "hamburg_alter_elbtunnel",
+        "hamburg_planetarium_hamburg",
+        "hamburg_sullberg",
+        "hamburg_denkmal_opfer_der_sturmflut_1962"
+      ]
+    },
+    {
+      "id": "hamburg_mahnmal_st_nikolai",
+      "name": "Mahnmal St. Nikolai",
+      "category": "kirche",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.550352240833334,
+        "lng": 9.996736900000005
+      },
+      "query": "Mahnmal St. Nikolai, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5474813,
+        "lng": 9.9906758,
+        "display_name": "Mahnmal St. Nikolai, Wölberstieg, Altstadt, Hamburg-Mitte, Hamburg, 20457, Deutschland",
+        "class": "man_made",
+        "type": "tower",
+        "importance": 0.00008255359731436664,
+        "osm_type": "way",
+        "osm_id": 110332499,
+        "provider": "nominatim"
+      },
+      "delta_m": 512,
+      "from_city_m": 654,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_hauptkirche_st_petri_hauptkirche_st_petri",
+        "hamburg_st_ansgar_kapelle",
+        "hamburg_bismarck_denkmal",
+        "hamburg_kriegerdenkmal_am_dammtordamm",
+        "hamburg_boberger_niederung",
+        "hamburg_elbstrand",
+        "hamburg_boberger_strand",
+        "hamburg_alsterpark",
+        "hamburg_leuchtturm_blankenese",
+        "hamburg_petri_apotheke_hamburg",
+        "hamburg_deichstrasse_ursprung_grosser_brand_1842",
+        "hamburg_chilehaus",
+        "hamburg_altonaer_fischmarkt",
+        "hamburg_alter_elbtunnel",
+        "hamburg_planetarium_hamburg",
+        "hamburg_sullberg",
+        "hamburg_denkmal_opfer_der_sturmflut_1962"
+      ]
+    },
+    {
+      "id": "hamburg_dammtorpark_planten_un_blomen",
+      "name": "Dammtorpark, Planten un Blomen",
+      "category": "natur",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.5592951,
+        "lng": 9.987522799999999
+      },
+      "query": "Dammtorpark, Planten un Blomen, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5619584,
+        "lng": 9.9813309,
+        "display_name": "Planten un Blomen, Hamburg, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "provider": "photon"
+      },
+      "delta_m": 505,
+      "from_city_m": 1164,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hamburg_chilehaus",
+      "name": "Chilehaus",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.550352240833334,
+        "lng": 9.996736900000005
+      },
+      "query": "Chilehaus, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5482691,
+        "lng": 10.0019088,
+        "display_name": "Chilehaus, 1, Fischertwiete, Altstadt, Hamburg-Mitte, Hamburg, 20095, Deutschland",
+        "class": "place",
+        "type": "house",
+        "importance": 0.00008255359731436664,
+        "osm_type": "node",
+        "osm_id": 1091293000,
+        "provider": "nominatim"
+      },
+      "delta_m": 413,
+      "from_city_m": 654,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_mahnmal_st_nikolai",
+        "hamburg_hauptkirche_st_petri_hauptkirche_st_petri",
+        "hamburg_st_ansgar_kapelle",
+        "hamburg_bismarck_denkmal",
+        "hamburg_kriegerdenkmal_am_dammtordamm",
+        "hamburg_boberger_niederung",
+        "hamburg_elbstrand",
+        "hamburg_boberger_strand",
+        "hamburg_alsterpark",
+        "hamburg_leuchtturm_blankenese",
+        "hamburg_petri_apotheke_hamburg",
+        "hamburg_deichstrasse_ursprung_grosser_brand_1842",
+        "hamburg_altonaer_fischmarkt",
+        "hamburg_alter_elbtunnel",
+        "hamburg_planetarium_hamburg",
+        "hamburg_sullberg",
+        "hamburg_denkmal_opfer_der_sturmflut_1962"
+      ]
+    },
+    {
+      "id": "hamburg_sprinkenhof",
+      "name": "Sprinkenhof",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.549737160465135,
+        "lng": 10.008301709302325
+      },
+      "query": "Sprinkenhof, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5486202,
+        "lng": 10.0032809,
+        "display_name": "Im Sprinkenhof, 8, Burchardstraße, Altstadt, Hamburg-Mitte, Hamburg, 20095, Deutschland",
+        "class": "amenity",
+        "type": "restaurant",
+        "importance": 0.00008255359731436664,
+        "osm_type": "node",
+        "osm_id": 3032052910,
+        "provider": "nominatim"
+      },
+      "delta_m": 354,
+      "from_city_m": 1400,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_mahnmal_sturmflut_finkenwerder_suderdeich",
+        "hamburg_spielbudenplatz",
+        "hamburg_stadtpark_hamburg",
+        "hamburg_dockland",
+        "hamburg_traditionsschiffhafen_hafencity"
+      ]
+    },
+    {
+      "id": "hamburg_alsterfontane",
+      "name": "Alsterfontäne",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.55413053750001,
+        "lng": 9.9920431125
+      },
+      "query": "Alsterfontäne, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5550686,
+        "lng": 9.9957819,
+        "display_name": "Alsterfontäne, Ballindamm, Altstadt, Hamburg-Mitte, Hamburg, 20095, Deutschland",
+        "class": "amenity",
+        "type": "fountain",
+        "importance": 0.16273786379520622,
+        "osm_type": "node",
+        "osm_id": 568490944,
+        "provider": "nominatim"
+      },
+      "delta_m": 268,
+      "from_city_m": 672,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_jungfernstieg",
+        "hamburg_harburger_berge",
+        "hamburg_fischbeker_heide",
+        "hamburg_tierpark_hagenbeck",
+        "hamburg_speicherstadt",
+        "hamburg_altonaer_balkon"
+      ]
+    },
+    {
+      "id": "hamburg_jungfernstieg",
+      "name": "Jungfernstieg",
+      "category": "bahnhof",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.55413053750001,
+        "lng": 9.9920431125
+      },
+      "query": "Jungfernstieg, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5520952,
+        "lng": 9.9933974,
+        "display_name": "Jungfernstieg, 12, Jungfernstieg, Neustadt, Hamburg-Mitte, Hamburg, 20095, Deutschland",
+        "class": "railway",
+        "type": "halt",
+        "importance": 0.4086789983126955,
+        "osm_type": "node",
+        "osm_id": 3376281838,
+        "provider": "nominatim"
+      },
+      "delta_m": 243,
+      "from_city_m": 672,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_harburger_berge",
+        "hamburg_fischbeker_heide",
+        "hamburg_tierpark_hagenbeck",
+        "hamburg_speicherstadt",
+        "hamburg_altonaer_balkon",
+        "hamburg_alsterfontane"
+      ]
+    },
+    {
+      "id": "hamburg_speicherstadtmuseum",
+      "name": "Speicherstadtmuseum",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.54459642,
+        "lng": 9.985254679999999
+      },
+      "query": "Speicherstadtmuseum, Hamburg, Germany",
+      "osm": {
+        "lat": 53.543075,
+        "lng": 9.9875264,
+        "display_name": "Speicherstadtmuseum, 36, Am Sandtorkai, Quartier Am Sandtorkai, HafenCity, Hamburg-Mitte, Hamburg, 20457, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.18157831638402872,
+        "osm_type": "node",
+        "osm_id": 302710293,
+        "provider": "nominatim"
+      },
+      "delta_m": 226,
+      "from_city_m": 487,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_chocoversum_hamburgs_schokoladenmuseum",
+        "hamburg_panoptikum",
+        "hamburg_automuseum_prototyp",
+        "hamburg_museum_der_natur_hamburg_zoologie",
+        "hamburg_deutsches_zollmuseum",
+        "hamburg_flussschifferkirche_hamburg"
+      ]
+    },
+    {
+      "id": "hamburg_st_pauli_landungsbrucken",
+      "name": "St. Pauli Landungsbrücken",
+      "category": "hafen",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.54528595185185,
+        "lng": 9.967026822222223
+      },
+      "query": "St. Pauli Landungsbrücken, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5455518,
+        "lng": 9.9703693,
+        "display_name": "St. Pauli - Landungsbrücken, Bei den St. Pauli-Landungsbrücken, St. Pauli, Hamburg-Mitte, Hamburg, 20359, Deutschland",
+        "class": "information",
+        "type": "map",
+        "importance": 0.00008255359731436664,
+        "osm_type": "node",
+        "osm_id": 1071465777,
+        "provider": "nominatim"
+      },
+      "delta_m": 223,
+      "from_city_m": 1388,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hamburg_berliner_tor",
+      "name": "Berliner Tor",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.552807166666675,
+        "lng": 10.024098614814815
+      },
+      "query": "Berliner Tor, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5545393,
+        "lng": 10.023638,
+        "display_name": "Berliner Tor, St. Georg, Hamburg-Mitte, Hamburg, 20099, Deutschland",
+        "class": "highway",
+        "type": "unclassified",
+        "importance": 0.05341588693064771,
+        "osm_type": "way",
+        "osm_id": 35576861,
+        "provider": "nominatim"
+      },
+      "delta_m": 195,
+      "from_city_m": 2479,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hamburg_russische_orthodoxe_kirche_des_hl_johannes_von_kronstadt",
+      "name": "Russische Orthodoxe Kirche des Hl. Johannes von Kronstadt",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.557584250724645,
+        "lng": 9.976093801449275
+      },
+      "query": "Russische Orthodoxe Kirche des Hl., Hamburg, Germany",
+      "osm": {
+        "lat": 52.5398343,
+        "lng": 13.5630302,
+        "display_name": "Russische Orthodoxe Kirche Hl.-Wladimir, Allee der Kosmonauten, Berlin, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 265088,
+      "from_city_m": 1218,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_schwedische_gustaf_adolfs_kirche"
+      ]
+    },
+    {
+      "id": "hamburg_leuchtturm_rissen_oberfeuer",
+      "name": "Leuchtturm Rissen (Oberfeuer)",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.54600940425532,
+        "lng": 9.994432823404255
+      },
+      "query": "Leuchtturm Rissen, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5683308,
+        "lng": 9.7405362,
+        "display_name": "Am Leuchtturm, Rissen, Altona, Hamburg, 22559, Deutschland",
+        "class": "highway",
+        "type": "residential",
+        "importance": 0.05341588693064771,
+        "osm_type": "way",
+        "osm_id": 495940609,
+        "provider": "nominatim"
+      },
+      "delta_m": 16953,
+      "from_city_m": 573,
+      "status": "CHECK",
+      "flags": [
+        "house_like_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_hauptkirche_st_katharinen_hauptkirche_st_katharinen",
+        "hamburg_tropen_aquarium_beim_tierpark_hagenbeck",
+        "hamburg_isemarkt",
+        "hamburg_savoy_filmtheater",
+        "hamburg_nsg_eppendorfer_moor",
+        "hamburg_the_english_theatre_of_hamburg_e_v",
+        "hamburg_cap_san_diego"
+      ]
+    },
+    {
+      "id": "hamburg_museum_der_natur_hamburg_zoologie",
+      "name": "Museum der Natur Hamburg - Zoologie",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.54459642,
+        "lng": 9.985254679999999
+      },
+      "query": "Museum der Natur Hamburg, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5510825,
+        "lng": 9.9732584,
+        "display_name": "Museum für Hamburgische Geschichte, Holstenwall, Hamburg, Deutschland",
+        "class": "building",
+        "type": "yes",
+        "provider": "photon"
+      },
+      "delta_m": 1072,
+      "from_city_m": 487,
+      "status": "CHECK",
+      "flags": [
+        "house_like_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_speicherstadtmuseum",
+        "hamburg_chocoversum_hamburgs_schokoladenmuseum",
+        "hamburg_panoptikum",
+        "hamburg_automuseum_prototyp",
+        "hamburg_deutsches_zollmuseum",
+        "hamburg_flussschifferkirche_hamburg"
+      ]
+    },
+    {
+      "id": "hamburg_petri_apotheke_hamburg",
+      "name": "PETRI-APOTHEKE - Hamburg",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.55035152166666,
+        "lng": 9.996736748333339
+      },
+      "query": "PETRI-APOTHEKE, Hamburg, Germany",
+      "osm": {
+        "lat": 53.550072,
+        "lng": 9.9987618,
+        "display_name": "Petri-Apotheke, 4, Speersort, Altstadt, Hamburg-Mitte, Hamburg, 20095, Deutschland",
+        "class": "amenity",
+        "type": "pharmacy",
+        "importance": 0.00008255359731436664,
+        "osm_type": "node",
+        "osm_id": 278268553,
+        "provider": "nominatim"
+      },
+      "delta_m": 137,
+      "from_city_m": 654,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_mahnmal_st_nikolai",
+        "hamburg_hauptkirche_st_petri_hauptkirche_st_petri",
+        "hamburg_st_ansgar_kapelle",
+        "hamburg_bismarck_denkmal",
+        "hamburg_kriegerdenkmal_am_dammtordamm",
+        "hamburg_boberger_niederung",
+        "hamburg_elbstrand",
+        "hamburg_boberger_strand",
+        "hamburg_alsterpark",
+        "hamburg_leuchtturm_blankenese",
+        "hamburg_deichstrasse_ursprung_grosser_brand_1842",
+        "hamburg_chilehaus",
+        "hamburg_altonaer_fischmarkt",
+        "hamburg_alter_elbtunnel",
+        "hamburg_planetarium_hamburg",
+        "hamburg_sullberg",
+        "hamburg_denkmal_opfer_der_sturmflut_1962"
+      ]
+    },
+    {
+      "id": "hamburg_hafencity_uberblick",
+      "name": "HafenCity Überblick",
+      "category": "geschichte",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.54193848888889,
+        "lng": 9.994650977777777
+      },
+      "query": "HafenCity Überblick, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5429127,
+        "lng": 9.9958346,
+        "display_name": "HafenCity, Hamburg, Deutschland",
+        "class": "place",
+        "type": "suburb",
+        "provider": "photon"
+      },
+      "delta_m": 134,
+      "from_city_m": 912,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_panda_locker_hamburg_gepackaufbewahrung_offen_24_7_hafencity"
+      ]
+    },
+    {
+      "id": "hamburg_hamburg_landungsbrucken",
+      "name": "Hamburg Landungsbrücken",
+      "category": "hafen",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.54545049999999,
+        "lng": 9.969907599999999
+      },
+      "query": "Hamburg Landungsbrücken, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5462334,
+        "lng": 9.9711435,
+        "display_name": "Landungsbrücken, Bei den St. Pauli-Landungsbrücken, St. Pauli, Hamburg-Mitte, Hamburg, 20359, Deutschland",
+        "class": "railway",
+        "type": "station",
+        "importance": 0.00008255359731436664,
+        "osm_type": "node",
+        "osm_id": 52144713,
+        "provider": "nominatim"
+      },
+      "delta_m": 119,
+      "from_city_m": 1201,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hamburg_binnenalster",
+      "name": "Binnenalster",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.555769615,
+        "lng": 9.995902251000002
+      },
+      "query": "Binnenalster, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5548058,
+        "lng": 9.99527,
+        "display_name": "Binnenalster, Neustadt, Hamburg-Mitte, Hamburg, Deutschland",
+        "class": "water",
+        "type": "reservoir",
+        "importance": 0.4698263622952075,
+        "osm_type": "relation",
+        "osm_id": 6693624,
+        "provider": "nominatim"
+      },
+      "delta_m": 115,
+      "from_city_m": 964,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hamburg_ohnsorg_theater_hamburg",
+      "name": "Ohnsorg-Theater Hamburg",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.554813615,
+        "lng": 10.00862153
+      },
+      "query": "Ohnsorg-Theater Hamburg, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5545023,
+        "lng": 10.0070813,
+        "display_name": "Ohnsorg Theater, 1, Heidi-Kabel-Platz, St. Georg, Hamburg-Mitte, Hamburg, 20099, Deutschland",
+        "class": "amenity",
+        "type": "theatre",
+        "importance": 0.4039139493366902,
+        "osm_type": "node",
+        "osm_id": 278220478,
+        "provider": "nominatim"
+      },
+      "delta_m": 107,
+      "from_city_m": 1566,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_botanischer_garten_der_universitat_hamburg_loki_schmidt_garten",
+        "hamburg_grosse_wallanlagen",
+        "hamburg_allee_theater_hamburg"
+      ]
+    },
+    {
+      "id": "hamburg_asklepios_klinik_altona",
+      "name": "Asklepios Klinik Altona",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.5542481,
+        "lng": 9.901221399999999
+      },
+      "query": "Asklepios Klinik Altona, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5549245,
+        "lng": 9.9023394,
+        "display_name": "Asklepios Klinik Altona, 1, Paul-Ehrlich-Straße, Othmarschen, Altona, Hamburg, 22763, Deutschland",
+        "class": "amenity",
+        "type": "hospital",
+        "importance": 0.26001653813030656,
+        "osm_type": "way",
+        "osm_id": 266443172,
+        "provider": "nominatim"
+      },
+      "delta_m": 105,
+      "from_city_m": 5710,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hamburg_hamburger_rathaus",
+      "name": "Hamburger Rathaus",
+      "category": "geschichte",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.5503639847826,
+        "lng": 9.992346232608694
+      },
+      "query": "Hamburger Rathaus, Hamburg, Germany",
+      "osm": {
+        "lat": 53.549907,
+        "lng": 9.993648,
+        "display_name": "Hamburger Sparkasse, Rathausstraße, Altstadt, Hamburg-Mitte, Hamburg, 20095, Deutschland",
+        "class": "amenity",
+        "type": "atm",
+        "importance": 0.00008255359731436664,
+        "osm_type": "node",
+        "osm_id": 276071364,
+        "provider": "nominatim"
+      },
+      "delta_m": 100,
+      "from_city_m": 382,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_rathaus",
+        "hamburg_rathaus_apotheke",
+        "hamburg_rathauspassage_hamburg"
+      ]
+    },
+    {
+      "id": "hamburg_blankenese_treppenviertel",
+      "name": "Blankenese Treppenviertel",
+      "category": "aussicht",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.55776368888889,
+        "lng": 9.80717851111111
+      },
+      "query": "Blankenese Treppenviertel, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5573224,
+        "lng": 9.8080187,
+        "display_name": "Treppenviertel, Paarmanns Weg, Hamburg, Deutschland",
+        "class": "tourism",
+        "type": "attraction",
+        "provider": "photon"
+      },
+      "delta_m": 74,
+      "from_city_m": 11931,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hamburg_hauptbahnhof_apotheke_wandelhalle",
+      "name": "Hauptbahnhof Apotheke Wandelhalle",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.5535004,
+        "lng": 10.0060357
+      },
+      "query": "Hauptbahnhof Apotheke Wandelhalle, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5534584,
+        "lng": 10.0070936,
+        "display_name": "Touristinformation Hauptbahnhof, Wandelhalle, Hamburg, Deutschland",
+        "class": "shop",
+        "type": "ticket",
+        "provider": "photon"
+      },
+      "delta_m": 70,
+      "from_city_m": 1350,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hamburg_helios_endo_klinik_hamburg",
+      "name": "Helios ENDO-Klinik Hamburg",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.5510733,
+        "lng": 9.955188399999999
+      },
+      "query": "Helios ENDO-Klinik Hamburg, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5508292,
+        "lng": 9.9542356,
+        "display_name": "Helios ENDO-Klinik Hamburg, 2, Holstenstraße, Altona, Altona-Altstadt, Altona, Hamburg, 22767, Deutschland",
+        "class": "amenity",
+        "type": "clinic",
+        "importance": 0.1507975276546128,
+        "osm_type": "way",
+        "osm_id": 24733419,
+        "provider": "nominatim"
+      },
+      "delta_m": 69,
+      "from_city_m": 2128,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hamburg_lieger_besucher_und_informationszentrum_museumshafen_oevelgonne_e_v",
+      "name": "Museumshafen Övelgönne",
+      "category": "hafen",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.543735579999996,
+        "lng": 9.914202470000003
+      },
+      "query": "Museumshafen Övelgönne, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5441638,
+        "lng": 9.9144601,
+        "display_name": "Museumshafen Övelgönne, Neumühlen, Ottensen, Altona, Hamburg, 22763, Deutschland",
+        "class": "information",
+        "type": "board",
+        "importance": 0.00008255359731436664,
+        "osm_type": "node",
+        "osm_id": 10903399889,
+        "provider": "nominatim"
+      },
+      "delta_m": 51,
+      "from_city_m": 4854,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_neumuhlen_ovelgonne_fahre"
+      ]
+    },
+    {
+      "id": "hamburg_elbphilharmonie",
+      "name": "Elbphilharmonie",
+      "category": "hafen",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.541441629999994,
+        "lng": 9.984237109999999
+      },
+      "query": "Elbphilharmonie, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5412917,
+        "lng": 9.9842058,
+        "display_name": "Elbphilharmonie, 1, Platz der Deutschen Einheit, Quartier Am Sandtorkai, HafenCity, Hamburg-Mitte, Hamburg, 20457, Deutschland",
+        "class": "amenity",
+        "type": "theatre",
+        "importance": 0.46476807375622703,
+        "osm_type": "way",
+        "osm_id": 24981342,
+        "provider": "nominatim"
+      },
+      "delta_m": 17,
+      "from_city_m": 844,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_viewpoint_auf_die_elbphilharmonie",
+        "hamburg_elbphilharmonie_hamburg"
+      ]
+    },
+    {
+      "id": "hamburg_elbphilharmonie_hamburg",
+      "name": "Elbphilharmonie Hamburg",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.541441629999994,
+        "lng": 9.984237109999999
+      },
+      "query": "Elbphilharmonie Hamburg, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5412917,
+        "lng": 9.9842058,
+        "display_name": "Elbphilharmonie, 1, Platz der Deutschen Einheit, Quartier Am Sandtorkai, HafenCity, Hamburg-Mitte, Hamburg, 20457, Deutschland",
+        "class": "amenity",
+        "type": "theatre",
+        "importance": 0.46476807375622703,
+        "osm_type": "way",
+        "osm_id": 24981342,
+        "provider": "nominatim"
+      },
+      "delta_m": 17,
+      "from_city_m": 844,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_elbphilharmonie",
+        "hamburg_viewpoint_auf_die_elbphilharmonie"
+      ]
+    },
+    {
+      "id": "hamburg_rathaus",
+      "name": "Rathaus",
+      "category": "bahnhof",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.5503639847826,
+        "lng": 9.992346232608694
+      },
+      "query": "Rathaus, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5503287,
+        "lng": 9.9925658,
+        "display_name": "Rathaus, 1, Rathausmarkt, Altstadt, Hamburg-Mitte, Hamburg, 20095, Deutschland",
+        "class": "amenity",
+        "type": "townhall",
+        "importance": 0.40125193550449295,
+        "osm_type": "way",
+        "osm_id": 142944431,
+        "provider": "nominatim"
+      },
+      "delta_m": 15,
+      "from_city_m": 382,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_rathaus_apotheke",
+        "hamburg_hamburger_rathaus",
+        "hamburg_rathauspassage_hamburg"
+      ]
+    },
+    {
+      "id": "hamburg_internationales_maritimes_museum_hamburg",
+      "name": "Internationales Maritimes Museum Hamburg",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.543341766666664,
+        "lng": 9.999708444444444
+      },
+      "query": "Internationales Maritimes Museum Hamburg, Hamburg, Germany",
+      "osm": {
+        "lat": 53.543353,
+        "lng": 9.9998236,
+        "display_name": "Internationales Maritimes Museum Hamburg, 1, Koreastraße, Quartier Brooktorkai/Ericus, HafenCity, Hamburg-Mitte, Hamburg, 20457, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.3202715765630289,
+        "osm_type": "way",
+        "osm_id": 25337154,
+        "provider": "nominatim"
+      },
+      "delta_m": 8,
+      "from_city_m": 1029,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_fahranleger_maritimes_museum"
+      ]
+    },
+    {
+      "id": "hamburg_hauptkirche_st_katharinen_hauptkirche_st_katharinen",
+      "name": "Hauptkirche St. Katharinen",
+      "category": "kirche",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.54600940425532,
+        "lng": 9.994432823404255
+      },
+      "query": "Hauptkirche St. Katharinen, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5459592,
+        "lng": 9.9944498,
+        "display_name": "Hauptkirche St. Katharinen, 1, Katharinenkirchhof, Altstadt, Hamburg-Mitte, Hamburg, 20457, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.3694915076724792,
+        "osm_type": "way",
+        "osm_id": 363239302,
+        "provider": "nominatim"
+      },
+      "delta_m": 6,
+      "from_city_m": 573,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_tropen_aquarium_beim_tierpark_hagenbeck",
+        "hamburg_isemarkt",
+        "hamburg_savoy_filmtheater",
+        "hamburg_nsg_eppendorfer_moor",
+        "hamburg_leuchtturm_rissen_oberfeuer",
+        "hamburg_the_english_theatre_of_hamburg_e_v",
+        "hamburg_cap_san_diego"
+      ]
+    },
+    {
+      "id": "hamburg_hamburgische_staatsoper",
+      "name": "Hamburgische Staatsoper",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.55663921499998,
+        "lng": 9.98894154
+      },
+      "query": "Hamburgische Staatsoper, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5566745,
+        "lng": 9.9889303,
+        "display_name": "Hamburgische Staatsoper, 25, Große Theaterstraße, Neustadt, Hamburg-Mitte, Hamburg, 20354, Deutschland",
+        "class": "amenity",
+        "type": "theatre",
+        "importance": 0.5142349622076043,
+        "osm_type": "way",
+        "osm_id": 25112661,
+        "provider": "nominatim"
+      },
+      "delta_m": 4,
+      "from_city_m": 876,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_opera_stabile_werk_wirkbuhne_der_staatsoper"
+      ]
+    },
+    {
+      "id": "hamburg_hauptkirche_st_petri_hauptkirche_st_petri",
+      "name": "Hauptkirche St. Petri",
+      "category": "kirche",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.55035152166666,
+        "lng": 9.996736748333339
+      },
+      "query": "Hauptkirche St. Petri, Hamburg, Germany",
+      "osm": {
+        "lat": 53.550343,
+        "lng": 9.9967304,
+        "display_name": "Hauptkirche St. Petri, 2, Bei der Petrikirche, Altstadt, Hamburg-Mitte, Hamburg, 20095, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.36366628930239936,
+        "osm_type": "way",
+        "osm_id": 34322749,
+        "provider": "nominatim"
+      },
+      "delta_m": 1,
+      "from_city_m": 654,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_mahnmal_st_nikolai",
+        "hamburg_st_ansgar_kapelle",
+        "hamburg_bismarck_denkmal",
+        "hamburg_kriegerdenkmal_am_dammtordamm",
+        "hamburg_boberger_niederung",
+        "hamburg_elbstrand",
+        "hamburg_boberger_strand",
+        "hamburg_alsterpark",
+        "hamburg_leuchtturm_blankenese",
+        "hamburg_petri_apotheke_hamburg",
+        "hamburg_deichstrasse_ursprung_grosser_brand_1842",
+        "hamburg_chilehaus",
+        "hamburg_altonaer_fischmarkt",
+        "hamburg_alter_elbtunnel",
+        "hamburg_planetarium_hamburg",
+        "hamburg_sullberg",
+        "hamburg_denkmal_opfer_der_sturmflut_1962"
+      ]
+    },
+    {
+      "id": "hamburg_flussschifferkirche_hamburg",
+      "name": "Flussschifferkirche Hamburg",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.544593126666676,
+        "lng": 9.98525182
+      },
+      "query": "Flussschifferkirche Hamburg, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5445908,
+        "lng": 9.9852551,
+        "display_name": "Flussschifferkirche, Otto-Sill-Brücke, Altstadt, Hamburg-Mitte, Hamburg, 20459, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.19619210675062,
+        "osm_type": "way",
+        "osm_id": 166390033,
+        "provider": "nominatim"
+      },
+      "delta_m": 0,
+      "from_city_m": 488,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_speicherstadtmuseum",
+        "hamburg_chocoversum_hamburgs_schokoladenmuseum",
+        "hamburg_panoptikum",
+        "hamburg_automuseum_prototyp",
+        "hamburg_museum_der_natur_hamburg_zoologie",
+        "hamburg_deutsches_zollmuseum"
+      ]
+    },
+    {
+      "id": "hamburg_opera_stabile_werk_wirkbuhne_der_staatsoper",
+      "name": "Opera Stabile Werk/Wirkbühne der Staatsoper",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.55663921499998,
+        "lng": 9.98894154
+      },
+      "query": "Opera Stabile Werk/Wirkbühne, Hamburg, Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 876,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_hamburgische_staatsoper"
+      ]
+    },
+    {
+      "id": "hamburg_tropen_aquarium_beim_tierpark_hagenbeck",
+      "name": "Tropen-Aquarium beim Tierpark Hagenbeck",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.54600940425532,
+        "lng": 9.994432823404255
+      },
+      "query": "Tropen-Aquarium beim Tierpark, Hamburg, Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 573,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_hauptkirche_st_katharinen_hauptkirche_st_katharinen",
+        "hamburg_isemarkt",
+        "hamburg_savoy_filmtheater",
+        "hamburg_nsg_eppendorfer_moor",
+        "hamburg_leuchtturm_rissen_oberfeuer",
+        "hamburg_the_english_theatre_of_hamburg_e_v",
+        "hamburg_cap_san_diego"
+      ]
+    },
+    {
+      "id": "hamburg_mahnmal_sturmflut_finkenwerder_suderdeich",
+      "name": "Mahnmal Sturmflut Finkenwerder Süderdeich",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.549737160465135,
+        "lng": 10.008301709302325
+      },
+      "query": "Mahnmal Sturmflut Finkenwerder, Hamburg, Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 1400,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hamburg_sprinkenhof",
+        "hamburg_spielbudenplatz",
+        "hamburg_stadtpark_hamburg",
+        "hamburg_dockland",
+        "hamburg_traditionsschiffhafen_hafencity"
+      ]
+    },
+    {
+      "id": "hamburg_bundeswehrkrankenhaus_hamburg",
+      "name": "Bundeswehrkrankenhaus Hamburg",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.595024,
+        "lng": 10.0775891
+      },
+      "query": "Bundeswehrkrankenhaus Hamburg, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5952689,
+        "lng": 10.0782912,
+        "display_name": "Bundeswehrkrankenhaus Hamburg, 180, Lesserstraße, Wandsbek, Hamburg, 22049, Deutschland",
+        "class": "amenity",
+        "type": "hospital",
+        "importance": 0.2791651820367976,
+        "osm_type": "relation",
+        "osm_id": 8765716,
+        "provider": "nominatim"
+      },
+      "delta_m": 54,
+      "from_city_m": 7876,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hamburg_bischofsburg_speersort",
+      "name": "Bischofsburg Speersort",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.5501449,
+        "lng": 9.9979772
+      },
+      "query": "Bischofsburg Speersort, Hamburg, Germany",
+      "osm": {
+        "lat": 53.550119,
+        "lng": 9.9987231,
+        "display_name": "Speersorthaus, Speersort, Hamburg, Deutschland",
+        "class": "building",
+        "type": "office",
+        "provider": "photon"
+      },
+      "delta_m": 49,
+      "from_city_m": 729,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hamburg_bahnhof_hamburg_landungsbrucken",
+      "name": "Bahnhof Hamburg Landungsbrücken",
+      "category": "bahnhof",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.54597700000001,
+        "lng": 9.9706256
+      },
+      "query": "Bahnhof Hamburg Landungsbrücken, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5462334,
+        "lng": 9.9711435,
+        "display_name": "Landungsbrücken, Bei den St. Pauli-Landungsbrücken, St. Pauli, Hamburg-Mitte, Hamburg, 20359, Deutschland",
+        "class": "railway",
+        "type": "station",
+        "importance": 0.00008255359731436664,
+        "osm_type": "node",
+        "osm_id": 52144713,
+        "provider": "nominatim"
+      },
+      "delta_m": 45,
+      "from_city_m": 1138,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hamburg_asklepios_klinik_barmbek",
+      "name": "Asklepios Klinik Barmbek",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.60618969999999,
+        "lng": 10.0360762
+      },
+      "query": "Asklepios Klinik Barmbek, Hamburg, Germany",
+      "osm": {
+        "lat": 53.6064338,
+        "lng": 10.0364354,
+        "display_name": "Asklepios Klinik Barmbek, 220, Rübenkamp, Barmbek-Nord, Hamburg-Nord, Hamburg, 22307, Deutschland",
+        "class": "amenity",
+        "type": "hospital",
+        "importance": 0.2809844805284867,
+        "osm_type": "way",
+        "osm_id": 32803835,
+        "provider": "nominatim"
+      },
+      "delta_m": 36,
+      "from_city_m": 7149,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hamburg_museum_fur_kunst_und_gewerbe_hamburg_mk_g",
+      "name": "Museum für Kunst und Gewerbe Hamburg (MK&G)",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.5512167,
+        "lng": 10.0097694
+      },
+      "query": "Museum für Kunst, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5512856,
+        "lng": 10.0093311,
+        "display_name": "Museum für Kunst und Gewerbe Hamburg, 1, Steintorplatz, St. Georg, Hamburg-Mitte, Hamburg, 20099, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.43843044507974105,
+        "osm_type": "way",
+        "osm_id": 42864381,
+        "provider": "nominatim"
+      },
+      "delta_m": 30,
+      "from_city_m": 1516,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hamburg_hamburger_kunsthalle",
+      "name": "Hamburger Kunsthalle",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.555079785714284,
+        "lng": 10.003220076190475
+      },
+      "query": "Hamburger Kunsthalle, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5552936,
+        "lng": 10.0030011,
+        "display_name": "Hamburger Kunsthalle, 5, Glockengießerwall, Altstadt, Hamburg-Mitte, Hamburg, 20095, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.5220758763722189,
+        "osm_type": "way",
+        "osm_id": 142944355,
+        "provider": "nominatim"
+      },
+      "delta_m": 28,
+      "from_city_m": 1268,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hamburg_alter_botanischer_garten",
+      "name": "Alter Botanischer Garten",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.55913796933333,
+        "lng": 9.986355518666665
+      },
+      "query": "Alter Botanischer Garten, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5593499,
+        "lng": 9.9864616,
+        "display_name": "Alter Botanischer Garten, Neustadt, Hamburg-Mitte, Hamburg, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "importance": 0.3492426022163027,
+        "osm_type": "way",
+        "osm_id": 31053577,
+        "provider": "nominatim"
+      },
+      "delta_m": 25,
+      "from_city_m": 1148,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hamburg_baakenpark",
+      "name": "Baakenpark",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.53814416610169,
+        "lng": 10.014969328813562
+      },
+      "query": "Baakenpark, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5380134,
+        "lng": 10.0147368,
+        "display_name": "Baakenpark, HafenCity, Hamburg-Mitte, Hamburg, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "importance": 0.21337448257116948,
+        "osm_type": "way",
+        "osm_id": 204552618,
+        "provider": "nominatim"
+      },
+      "delta_m": 21,
+      "from_city_m": 2187,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hamburg_markk_museum_am_rothenbaum",
+      "name": "MARKK Museum am Rothenbaum",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.5684834676923,
+        "lng": 9.989223949230771
+      },
+      "query": "MARKK Museum am Rothenbaum, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5686209,
+        "lng": 9.9891728,
+        "display_name": "Museum am Rothenbaum – Kulturen und Künste der Welt, Rothenbaumchaussee, Hamburg, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 16,
+      "from_city_m": 2190,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hamburg_hamburg_hauptbahnhof",
+      "name": "Hamburg Hauptbahnhof",
+      "category": "bahnhof",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.553119260504154,
+        "lng": 10.00672564033613
+      },
+      "query": "Hamburg Hauptbahnhof, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5529844,
+        "lng": 10.0067569,
+        "display_name": "Hamburg Hauptbahnhof, Steintordamm, St. Georg, Hamburg-Mitte, Hamburg, 20099, Deutschland",
+        "class": "historic",
+        "type": "heritage",
+        "importance": 0.5053551395128999,
+        "osm_type": "way",
+        "osm_id": 137538320,
+        "provider": "nominatim"
+      },
+      "delta_m": 15,
+      "from_city_m": 1377,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hamburg_museum_fur_hamburgische_geschichte",
+      "name": "Museum für Hamburgische Geschichte",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.551147902564104,
+        "lng": 9.973418266666666
+      },
+      "query": "Museum für Hamburgische Geschichte, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5510825,
+        "lng": 9.9732584,
+        "display_name": "Museum für Hamburgische Geschichte, 24, Holstenwall, Neustadt, Hamburg-Mitte, Hamburg, 20355, Deutschland",
+        "class": "historic",
+        "type": "heritage",
+        "importance": 0.39862612808608605,
+        "osm_type": "way",
+        "osm_id": 34766557,
+        "provider": "nominatim"
+      },
+      "delta_m": 13,
+      "from_city_m": 944,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hamburg_davidwache",
+      "name": "Davidwache",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.548817895238095,
+        "lng": 9.962784114285714
+      },
+      "query": "Davidwache, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5489226,
+        "lng": 9.9627335,
+        "display_name": "Davidwache, 31, Spielbudenplatz, St. Pauli, Hamburg-Mitte, Hamburg, 20359, Deutschland",
+        "class": "amenity",
+        "type": "police",
+        "importance": 0.27236747457604304,
+        "osm_type": "way",
+        "osm_id": 973035313,
+        "provider": "nominatim"
+      },
+      "delta_m": 12,
+      "from_city_m": 1611,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hamburg_markthalle_hamburg",
+      "name": "Markthalle Hamburg",
+      "category": "kultur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.54893867166667,
+        "lng": 10.006716069999998
+      },
+      "query": "Markthalle Hamburg, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5490102,
+        "lng": 10.0068122,
+        "display_name": "Markthalle Hamburg, Klosterwall, Hammerbrook, Hamburg-Mitte, Hamburg, 20095, Deutschland",
+        "class": "historic",
+        "type": "heritage",
+        "importance": 0.351725953161806,
+        "osm_type": "way",
+        "osm_id": 33041700,
+        "provider": "nominatim"
+      },
+      "delta_m": 10,
+      "from_city_m": 1291,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hamburg_hl_dreieinigkeits_kirche_st_georg",
+      "name": "Hl. Dreieinigkeits-Kirche St. Georg",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.55644935714287,
+        "lng": 10.007918434285717
+      },
+      "query": "Hl. Dreieinigkeits-Kirche St. Georg, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5565026,
+        "lng": 10.0080006,
+        "display_name": "Heilige-Dreieinigkeits-Kirche, Koppel, St. Georg, Hamburg-Mitte, Hamburg, 20099, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.22052600253021823,
+        "osm_type": "way",
+        "osm_id": 362705817,
+        "provider": "nominatim"
+      },
+      "delta_m": 8,
+      "from_city_m": 1611,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hamburg_domplatz",
+      "name": "Hammaburg-Platz (Domplatz)",
+      "category": "altstadt",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.549351171999994,
+        "lng": 9.997337756
+      },
+      "query": "Hammaburg-Platz, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5493008,
+        "lng": 9.9974326,
+        "display_name": "Hammaburg-Platz, Altstadt, Hamburg-Mitte, Hamburg, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "importance": 0.24930035976498935,
+        "osm_type": "way",
+        "osm_id": 27471068,
+        "provider": "nominatim"
+      },
+      "delta_m": 8,
+      "from_city_m": 674,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hamburg_central_apotheke",
+      "name": "Central-Apotheke",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.5484379,
+        "lng": 9.9875525
+      },
+      "query": "Central-Apotheke, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5484782,
+        "lng": 9.9876437,
+        "display_name": "Central-Apotheke, 1, Rödingsmarkt, Altstadt, Hamburg-Mitte, Hamburg, 20459, Deutschland",
+        "class": "amenity",
+        "type": "pharmacy",
+        "importance": 0.00008255359731436664,
+        "osm_type": "node",
+        "osm_id": 274338982,
+        "provider": "nominatim"
+      },
+      "delta_m": 8,
+      "from_city_m": 50,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hamburg_messberghof",
+      "name": "Meßberghof",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.54777758979592,
+        "lng": 10.002482340816325
+      },
+      "query": "Meßberghof, Hamburg, Germany",
+      "osm": {
+        "lat": 53.547829,
+        "lng": 10.0023993,
+        "display_name": "Meßberghof, Pumpen, Altstadt, Hamburg-Mitte, Hamburg, 20095, Deutschland",
+        "class": "building",
+        "type": "yes",
+        "importance": 0.00008255359731436664,
+        "osm_type": "way",
+        "osm_id": 59504509,
+        "provider": "nominatim"
+      },
+      "delta_m": 8,
+      "from_city_m": 1018,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hamburg_sandtorpark",
+      "name": "Sandtorpark",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.54251002151898,
+        "lng": 9.994336205063297
+      },
+      "query": "Sandtorpark, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5425145,
+        "lng": 9.9942355,
+        "display_name": "Sandtorpark, HafenCity, Hamburg-Mitte, Hamburg, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "importance": 0.21337448257116948,
+        "osm_type": "way",
+        "osm_id": 316374178,
+        "provider": "nominatim"
+      },
+      "delta_m": 7,
+      "from_city_m": 847,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hamburg_thalia_theater",
+      "name": "Thalia Theater",
+      "category": "theater",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.55216781714287,
+        "lng": 9.998576805714288
+      },
+      "query": "Thalia Theater, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5521382,
+        "lng": 9.9986683,
+        "display_name": "Thalia Theater, 67, Raboisen, Altstadt, Hamburg-Mitte, Hamburg, 20095, Deutschland",
+        "class": "amenity",
+        "type": "theatre",
+        "importance": 0.4909597724754424,
+        "osm_type": "way",
+        "osm_id": 27326725,
+        "provider": "nominatim"
+      },
+      "delta_m": 7,
+      "from_city_m": 840,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hamburg_pelikan_apotheke",
+      "name": "Pelikan Apotheke",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.5501732,
+        "lng": 9.9794512
+      },
+      "query": "Pelikan Apotheke, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5501699,
+        "lng": 9.979542,
+        "display_name": "Pelikan-Apotheke, 37, Großneumarkt, Portugiesenviertel, Neustadt, Hamburg-Mitte, Hamburg, 20459, Deutschland",
+        "class": "amenity",
+        "type": "pharmacy",
+        "importance": 0.00008255359731436664,
+        "osm_type": "node",
+        "osm_id": 274924441,
+        "provider": "nominatim"
+      },
+      "delta_m": 6,
+      "from_city_m": 531,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hamburg_an_der_alster_apotheke",
+      "name": "An der Alster Apotheke",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.551861,
+        "lng": 9.995339399999999
+      },
+      "query": "An der Alster Apotheke, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5518781,
+        "lng": 9.9952529,
+        "display_name": "An der Alster Apotheke, 40, Ballindamm, Altstadt, Hamburg-Mitte, Hamburg, 20095, Deutschland",
+        "class": "amenity",
+        "type": "pharmacy",
+        "importance": 0.00008255359731436664,
+        "osm_type": "node",
+        "osm_id": 11054593235,
+        "provider": "nominatim"
+      },
+      "delta_m": 6,
+      "from_city_m": 636,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hamburg_frau_dr_med_anett_wywiol_arztpraxis_hamburg_innenstadt",
+      "name": "Frau Dr. med. Anett Wywiol - Arztpraxis Hamburg Innenstadt",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.554637,
+        "lng": 9.989810600000002
+      },
+      "query": "Frau Dr. med. Anett Wywiol, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5546594,
+        "lng": 9.9898834,
+        "display_name": "Dr. med. Anett Wywiol, Jungfernstieg, Hamburg, Deutschland",
+        "class": "amenity",
+        "type": "doctors",
+        "provider": "photon"
+      },
+      "delta_m": 5,
+      "from_city_m": 669,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hamburg_altonaer_theater",
+      "name": "Altonaer Theater",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.548459006250006,
+        "lng": 9.934331531250002
+      },
+      "query": "Altonaer Theater, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5484766,
+        "lng": 9.9342629,
+        "display_name": "Altonaer Theater, 17, Museumstraße, Altona, Altona-Altstadt, Altona, Hamburg, 22765, Deutschland",
+        "class": "amenity",
+        "type": "theatre",
+        "importance": 0.3771535532601069,
+        "osm_type": "way",
+        "osm_id": 32949884,
+        "provider": "nominatim"
+      },
+      "delta_m": 5,
+      "from_city_m": 3491,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hamburg_st_annenhof",
+      "name": "St.Annenhof",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.54600608571428,
+        "lng": 9.992884928571428
+      },
+      "query": "St.Annenhof, Hamburg, Germany",
+      "osm": {
+        "lat": 53.546044,
+        "lng": 9.9929289,
+        "display_name": "St. Annenhof, 1, Katharinenbrücke, Altstadt, Hamburg-Mitte, Hamburg, 20457, Deutschland",
+        "class": "building",
+        "type": "office",
+        "importance": 0.00008255359731436664,
+        "osm_type": "way",
+        "osm_id": 58599900,
+        "provider": "nominatim"
+      },
+      "delta_m": 5,
+      "from_city_m": 491,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hamburg_deichtorhallen_hamburg",
+      "name": "Deichtorhallen Hamburg",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.5472077611111,
+        "lng": 10.006713777777778
+      },
+      "query": "Deichtorhallen Hamburg, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5472358,
+        "lng": 10.0067574,
+        "display_name": "Deichtorhallen, 1, Deichtorstraße, Altstadt, Hamburg-Mitte, Hamburg, 20095, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.3984771165675444,
+        "osm_type": "way",
+        "osm_id": 23191265,
+        "provider": "nominatim"
+      },
+      "delta_m": 4,
+      "from_city_m": 1304,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hamburg_englische_kirche_anglican_church_of_st_thomas_becket",
+      "name": "Englische Kirche / Anglican Church of St Thomas Becket",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.54875696666667,
+        "lng": 9.974588644444445
+      },
+      "query": "Englische Kirche / Anglican Church, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5487245,
+        "lng": 9.974613,
+        "display_name": "Englische Kirche, Zeughausmarkt, Hamburg, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 4,
+      "from_city_m": 831,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hamburg_st_marien_dom",
+      "name": "St. Marien-Dom",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.557613627848106,
+        "lng": 10.013624132911389
+      },
+      "query": "St. Marien-Dom, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5575913,
+        "lng": 10.0135842,
+        "display_name": "Domkirche Sankt Marien, Am Mariendom, Hamburg, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 4,
+      "from_city_m": 2002,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hamburg_norwegische_seemannskirche",
+      "name": "Norwegische Seemannskirche",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.54658483333333,
+        "lng": 9.977075653333335
+      },
+      "query": "Norwegische Seemannskirche, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5465592,
+        "lng": 9.9771164,
+        "display_name": "Norwegische Seemannskirche, 4, Ditmar-Koel-Straße, Portugiesenviertel, Neustadt, Hamburg-Mitte, Hamburg, 20459, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.22274623325780465,
+        "osm_type": "way",
+        "osm_id": 45030987,
+        "provider": "nominatim"
+      },
+      "delta_m": 4,
+      "from_city_m": 712,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hamburg_deutsches_schauspielhaus_hamburg",
+      "name": "Deutsches SchauSpielHaus Hamburg",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.554459116129046,
+        "lng": 10.008946674193549
+      },
+      "query": "Deutsches SchauSpielHaus Hamburg, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5544967,
+        "lng": 10.0089362,
+        "display_name": "Deutsches Schauspielhaus, 39, Kirchenallee, St. Georg, Hamburg-Mitte, Hamburg, 20099, Deutschland",
+        "class": "amenity",
+        "type": "theatre",
+        "importance": 0.48597767618085386,
+        "osm_type": "way",
+        "osm_id": 27302907,
+        "provider": "nominatim"
+      },
+      "delta_m": 4,
+      "from_city_m": 1569,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hamburg_laeiszhalle",
+      "name": "Laeiszhalle",
+      "category": "theater",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.5560739478873,
+        "lng": 9.981020823943663
+      },
+      "query": "Laeiszhalle, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5560966,
+        "lng": 9.9810766,
+        "display_name": "Laeiszhalle Musikhalle Hamburg, Gorch-Fock-Wall, Neustadt, Hamburg-Mitte, Hamburg, 20355, Deutschland",
+        "class": "amenity",
+        "type": "arts_centre",
+        "importance": 0.4067355164056416,
+        "osm_type": "way",
+        "osm_id": 257675372,
+        "provider": "nominatim"
+      },
+      "delta_m": 4,
+      "from_city_m": 902,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hamburg_u_bootmuseum_hamburg_gmbh",
+      "name": "U-Bootmuseum Hamburg GmbH",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.54519298571428,
+        "lng": 9.955342700000001
+      },
+      "query": "U-Bootmuseum Hamburg GmbH, Hamburg, Germany",
+      "osm": {
+        "lat": 53.545194,
+        "lng": 9.9553942,
+        "display_name": "U-Bootmuseum, St. Pauli Fischmarkt, Hamburg, Deutschland",
+        "class": "shop",
+        "type": "gift",
+        "provider": "photon"
+      },
+      "delta_m": 3,
+      "from_city_m": 2141,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hamburg_boberger_dunenhaus",
+      "name": "Boberger Dünenhaus",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.50771305,
+        "lng": 10.161661383333334
+      },
+      "query": "Boberger Dünenhaus, Hamburg, Germany",
+      "osm": {
+        "lat": 53.50771,
+        "lng": 10.1617119,
+        "display_name": "Boberger Dünenhaus, 50, Boberger Furt, Lohbrügge, Bergedorf, Hamburg, 21033, Deutschland",
+        "class": "information",
+        "type": "office",
+        "importance": 0.00008255359731436664,
+        "osm_type": "way",
+        "osm_id": 242944797,
+        "provider": "nominatim"
+      },
+      "delta_m": 3,
+      "from_city_m": 12406,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hamburg_apotheke_am_paulinenplatz",
+      "name": "Apotheke am Paulinenplatz",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.5539699,
+        "lng": 9.962288599999999
+      },
+      "query": "Apotheke am Paulinenplatz, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5539901,
+        "lng": 9.9623097,
+        "display_name": "Apotheke am Paulinenplatz, 1, Paulinenplatz, St. Pauli, Hamburg-Mitte, Hamburg, 20359, Deutschland",
+        "class": "amenity",
+        "type": "pharmacy",
+        "importance": 0.00008255359731436664,
+        "osm_type": "node",
+        "osm_id": 290081134,
+        "provider": "nominatim"
+      },
+      "delta_m": 3,
+      "from_city_m": 1740,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hamburg_hamburger_kammerspiele",
+      "name": "Hamburger Kammerspiele",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.56990999999999,
+        "lng": 9.985403817391303
+      },
+      "query": "Hamburger Kammerspiele, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5699341,
+        "lng": 9.9854033,
+        "display_name": "Hamburger Kammerspiele, 9 - 11, Hartungstraße, Rotherbaum, Eimsbüttel, Hamburg, 20146, Deutschland",
+        "class": "amenity",
+        "type": "theatre",
+        "importance": 0.4280914242677236,
+        "osm_type": "way",
+        "osm_id": 26769216,
+        "provider": "nominatim"
+      },
+      "delta_m": 3,
+      "from_city_m": 2347,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hamburg_ballinstadt_auswanderermuseum_hamburg",
+      "name": "BallinStadt - Auswanderermuseum Hamburg",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.520414249999995,
+        "lng": 10.01693105
+      },
+      "query": "BallinStadt, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5204147,
+        "lng": 10.0169574,
+        "display_name": "BallinStadt, Veddeler Straße, Veddel, Hamburg-Mitte, Hamburg, 20539, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.25352702198722055,
+        "osm_type": "way",
+        "osm_id": 1171550683,
+        "provider": "nominatim"
+      },
+      "delta_m": 2,
+      "from_city_m": 3722,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hamburg_hauptkirche_st_michaelis",
+      "name": "Hauptkirche St. Michaelis",
+      "category": "kirche",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.54841584873419,
+        "lng": 9.97890390253164
+      },
+      "query": "Hauptkirche St. Michaelis, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5484278,
+        "lng": 9.9788894,
+        "display_name": "Hauptkirche St. Michaelis, 1A, Englische Planke, Portugiesenviertel, Neustadt, Hamburg-Mitte, Hamburg, 20459, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.3771535532601069,
+        "osm_type": "way",
+        "osm_id": 22731336,
+        "provider": "nominatim"
+      },
+      "delta_m": 2,
+      "from_city_m": 548,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hamburg_hauptkirche_st_jacobi_hauptkirche_st_jacobi",
+      "name": "Hauptkirche St. Jacobi",
+      "category": "kirche",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.55033661679996,
+        "lng": 10.000739953599991
+      },
+      "query": "Hauptkirche St. Jacobi, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5503571,
+        "lng": 10.0007413,
+        "display_name": "Evangelisch-lutherische Hauptkirche St. Jacobi, 22, Jakobikirchhof, Altstadt, Hamburg-Mitte, Hamburg, 20095, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.3629003094109262,
+        "osm_type": "way",
+        "osm_id": 142944360,
+        "provider": "nominatim"
+      },
+      "delta_m": 2,
+      "from_city_m": 912,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hamburg_europa_apotheke",
+      "name": "Europa Apotheke",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.5509029,
+        "lng": 9.9957652
+      },
+      "query": "Europa Apotheke, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5508934,
+        "lng": 9.9957464,
+        "display_name": "Europa-Apotheke, 14, Bergstraße, Altstadt, Hamburg-Mitte, Hamburg, 20095, Deutschland",
+        "class": "amenity",
+        "type": "pharmacy",
+        "importance": 0.00008255359731436664,
+        "osm_type": "node",
+        "osm_id": 277824103,
+        "provider": "nominatim"
+      },
+      "delta_m": 2,
+      "from_city_m": 613,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hamburg_alsterhaus",
+      "name": "Alsterhaus",
+      "category": "geschichte",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.553041012499996,
+        "lng": 9.99124543125
+      },
+      "query": "Alsterhaus, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5530353,
+        "lng": 9.9912795,
+        "display_name": "Alsterhaus, 16-20, Jungfernstieg, Neustadt, Hamburg-Mitte, Hamburg, 20354, Deutschland",
+        "class": "shop",
+        "type": "department_store",
+        "importance": 0.2507397701059262,
+        "osm_type": "way",
+        "osm_id": 39878608,
+        "provider": "nominatim"
+      },
+      "delta_m": 2,
+      "from_city_m": 540,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hamburg_heinrich_heine_denkmal",
+      "name": "Heinrich-Heine-Denkmal",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.5504612,
+        "lng": 9.9936483
+      },
+      "query": "Heinrich-Heine-Denkmal, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5504559,
+        "lng": 9.9936461,
+        "display_name": "Heinrich-Heine-Denkmal, Rathausmarkt, Altstadt, Hamburg-Mitte, Hamburg, 20095, Deutschland",
+        "class": "historic",
+        "type": "memorial",
+        "importance": 0.00008255359731436664,
+        "osm_type": "node",
+        "osm_id": 370519718,
+        "provider": "nominatim"
+      },
+      "delta_m": 1,
+      "from_city_m": 465,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hamburg_heinrich_hertz_turm",
+      "name": "Heinrich-Hertz-Turm",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.563130475757575,
+        "lng": 9.975813106060606
+      },
+      "query": "Heinrich-Hertz-Turm, Hamburg, Germany",
+      "osm": {
+        "lat": 53.563139,
+        "lng": 9.9758125,
+        "display_name": "Heinrich-Hertz-Turm, Messeplatz, Karolinenviertel, St. Pauli, Hamburg-Mitte, Hamburg, 20357, Deutschland",
+        "class": "tourism",
+        "type": "attraction",
+        "importance": 0.3629003094109262,
+        "osm_type": "way",
+        "osm_id": 32783586,
+        "provider": "nominatim"
+      },
+      "delta_m": 1,
+      "from_city_m": 1758,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hamburg_theaterschiff_hamburg",
+      "name": "Theaterschiff Hamburg",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.54667619285714,
+        "lng": 9.989955514285711
+      },
+      "query": "Theaterschiff Hamburg, Hamburg, Germany",
+      "osm": {
+        "lat": 53.5466734,
+        "lng": 9.9899492,
+        "display_name": "Theaterschiff, Willy-Brandt-Straße, Altstadt, Hamburg-Mitte, Hamburg, 20457, Deutschland",
+        "class": "amenity",
+        "type": "theatre",
+        "importance": 0.00008255359731436664,
+        "osm_type": "way",
+        "osm_id": 371258648,
+        "provider": "nominatim"
+      },
+      "delta_m": 1,
+      "from_city_m": 302,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    }
+  ]
+}

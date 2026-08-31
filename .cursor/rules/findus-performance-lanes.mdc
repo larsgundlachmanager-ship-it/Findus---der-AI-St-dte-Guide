@@ -1,0 +1,46 @@
+---
+description: Drei Performance-Lanes — Chrome/Mic nie von Karte oder Modul-2 aushungern
+alwaysApply: true
+---
+
+# Findus — Performance Lanes LOCK
+
+App bleibt flüssig, egal was danach gebaut wird. Vertrag: `npx tsx src/services/ui/uiInstant.smoke.test.ts`.
+
+## Drei Lanes
+
+| Lane | Inhalt | Priorität |
+|---|---|---|
+| **C Chrome** | Settings, Timeline, Dock, Tippfeld | Sofort (≤1 Frame) — nie hinter Map/M2 |
+| **B Modul 2** | Mic → STT → Concierge → TTS | Höchste bei Voice; Ambient pausiert |
+| **A Karte** | GPS, Straßen, Gebäude, Icons, Route | Eigenes Budget; darf C/B nicht blockieren |
+
+SSOT-Gate: `src/services/boot/interactiveBootGate.ts` (`mic > overlays > mapCore > mapPolish > hydrate`).
+
+## Pflicht
+
+- Settings/Timeline: Place-Popup **sofort schließen**; Chrome-zIndex **über** Map-Popup.
+- Mic: `setIsListening(true)` sync im Press-In; Map-Polish/Hydrate erst danach.
+- Ambient/Live-Research: bei `isGenerating` / Mic / Speaking **keine** neue Recherche.
+- Map-Extract-Clip: chunked + Yields — nie 10k Buildings sync auf dem JS-Thread.
+- Route: FOSSGIS-Geometrie committen sobald da; Landmark/Polish async; Requests dedupen.
+- Chrome (`HomeChromeLayer`, Overlay-Host) von Map-Re-Renders isolieren.
+
+## Verboten
+
+- Sync Mega-JSON-Clip / volles Stadt-Extract im Tap-Hot-Path.
+- Settings/Timeline hinter `InteractionManager.runAfterInteractions` der Karte.
+- Place-Popup über Settings (zIndex).
+- Ambient-Research während Modul-2-Turn.
+- Zweites Map-System oder TTS-Pipeline-Umbau als „Performance-Fix“.
+- Kernel als Latenz-Werkzeug missbrauchen.
+
+## Datei-Besitz
+
+- Gate / Lanes: `interactiveBootGate.ts`
+- Chrome overlays: `useHomeOverlayStore.ts`, `HomeOverlayHost.tsx`, `uiLayers.ts`
+- Mic: `useVoiceInput.ts`, `MicButton.tsx`
+- Karte: `cityMapExtract.ts`, `mapExtractLoader.ts`, `NativeHomeMapView.tsx`, `HomePresenceMap.tsx`
+- Route: `handsFreeNav/routeEngine.ts`, `googleMapsNav.ts`, `navigationService.ts`
+- Ambient: `ambientEventPitch.ts`
+- Smoke: `uiInstant.smoke.test.ts`

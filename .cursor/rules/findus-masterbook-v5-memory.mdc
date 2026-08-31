@@ -34,8 +34,10 @@ Wortlaut frei. SSOT: `morningBriefingContext.ts` · `FINDUS_MORNING_BRIEFING_BLO
 
 ## City Welcome
 
-- **Erster Besuch** (App-Registrierung, Ortswechsel, erstes Betreten): Willkommen in der Stadt → narrative Historie (max. **500 Zeichen**) → was heute abgeht / was man erkunden kann.
-- **Wiederkehr** frühestens nach **150 h**: keine Historie; „cool, dass du wieder da bist“; Datensatz-Änderungen / neue Orte; dann Vorschläge (offene Wünsche, nicht geschafft, oder 3 Favoriten aus Restaurant / Museum / Park / Shopping — nie Verkehr / Unterkunft).
+- **Erster Besuch** (kein Stempel/Visit/Welcome-Record): Willkommen → narrative Historie (max. **500 Zeichen**) → was heute abgeht.
+- **Schon mal da** (Stempel, Visit-Log oder früheres Welcome): **kein** volles Programm — kurze Rückkehr (max. ~40 Wörter), max. **ein** Vorschlag.
+- Wiederkehr-Speech frühestens nach **150 h** erneut; dazwischen still.
+- SSOT: `cityWelcomeService.ts` (`hasPriorCityVisit`, `CITY_RETURN_WELCOME_MS`).
 
 ## Contextual Recall
 

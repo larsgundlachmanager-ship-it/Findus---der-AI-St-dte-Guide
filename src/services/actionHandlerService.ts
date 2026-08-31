@@ -35,8 +35,14 @@ import {
 import { confirmAffiliateRedirectIfNeeded } from './affiliate/affiliateDisclosure';
 import { isPartnerAffiliateAction } from '../constants/legal';
 import { isCityMapUrl, openCityMap } from './cityMapService';
+import { keepFoundEventUrl } from './research/eventInfoUrl';
+import {
+  encodeUriBrackets,
+  roundClockHmmDownTo5,
+} from './affiliate/partnerDeepPrefill';
 import { resolveExistingPoiId } from './navigation/resolveNavTarget';
 import { useShoppingTaskStore } from '../store/useShoppingTaskStore';
+import { useLogisticsTriggerStore } from '../store/useLogisticsTriggerStore';
 import { setWakeAlarmWithBridge } from './alarms/nativeAlarmBridge';
 import { armLinkBackgroundSpeech } from './speech/backgroundSpeechPolicy';
 
@@ -49,6 +55,7 @@ async function openExternalUrl(
   await Linking.openURL(url);
 }
 import { isKnownEmergencyShort } from './concierge/emergencyNumbersByCountry';
+import { compactPlaceForAction } from './concierge/actionLabelShorten';
 import {
   formatClockDe,
   getPendingWakeProposal,
@@ -63,11 +70,13 @@ export type ActionHandlerResult = {
   /** Optional: Follow-up-Frage an Voice-Pipeline */
   followUpPrompt?: string;
   message?: string;
+  /** Concierge-Karte nach Tap behalten (z. B. Route-neu vs. Stopp). */
+  keepCard?: boolean;
 };
 
-/** Feste Ansagen beim Öffnen von Maps / Speisekarte (SSOT). */
-export const OPEN_GOOGLE_MAPS_SPEECH = 'Google Maps wird geöffnet.';
-export const OPEN_SPEISEKARTE_SPEECH = 'Die hier ist die Speisekarte.';
+/** Legacy-Konstanten — Feedback: Link-Open ohne Audio-Ansage. */
+export const OPEN_GOOGLE_MAPS_SPEECH: string | null = null;
+export const OPEN_SPEISEKARTE_SPEECH: string | null = null;
 
 function isGoogleMapsOpenUrl(url: string): boolean {
   return /google\.[^/]*\/maps|maps\.google|maps\.app\.goo\.gl|goo\.gl\/maps|^geo:/i.test(
@@ -75,20 +84,95 @@ function isGoogleMapsOpenUrl(url: string): boolean {
   );
 }
 
-function isSpeisekarteOpenUrl(url: string, label: string): boolean {
-  const blob = `${url} ${label}`;
-  if (/🍽|\bspeisekarte\b/i.test(label)) return true;
-  if (/google\.[^/]+\/search/i.test(url) && /speisekarte/i.test(url)) {
+function looksLikeHotelBookAction(action: QuickAction): boolean {
+  if (action.payload.affiliateMarked === true) return true;
+  if (String(action.payload.actionBoardId ?? '').startsWith('hotel:')) {
     return true;
   }
-  return /speisekarte|speise-?karte|food[\-_]?menu|menükarte|menuekarte|menukarte|\/menu\b|\/menue\b|\/menü|speisen\.pdf/i.test(
-    blob,
+  return /\b(buch|hotel|zimmer|stay22|expedia|unterkunft|ferienwohnung|airbnb|booking)\b/iu.test(
+    `${action.label} ${action.payload.url ?? ''}`,
   );
 }
 
-function speechForOpenUrl(url: string, label: string): string | null {
-  if (isGoogleMapsOpenUrl(url)) return OPEN_GOOGLE_MAPS_SPEECH;
-  if (isSpeisekarteOpenUrl(url, label)) return OPEN_SPEISEKARTE_SPEECH;
+/** Pending/leer → klickfertigen Hotel-Partner-Link aus Ziel bauen. */
+function recoverHotelBookUrl(action: QuickAction): string | null {
+  if (!looksLikeHotelBookAction(action)) {
+    return null;
+  }
+  const dest =
+    action.payload.destination?.trim() ||
+    action.payload.destName?.trim() ||
+    action.payload.entityName?.trim() ||
+    getCachedUserProfile()?.cityName?.trim() ||
+    '';
+  if (!dest || /^pending$/i.test(dest)) return null;
+  try {
+    const {
+      buildPitchHotelBookingUrl,
+    } = require('../module2/pitch/pitchBookingUrl') as {
+      buildPitchHotelBookingUrl: (
+        hotelName: string,
+        contextBlob: string,
+        cityHint?: string | null,
+      ) => string | null;
+    };
+    const city = getCachedUserProfile()?.cityName?.trim() || null;
+    const built = buildPitchHotelBookingUrl(
+      dest,
+      [action.payload.checkin, action.payload.checkout, action.label]
+        .filter(Boolean)
+        .join(' '),
+      city,
+    );
+    if (built) return built;
+  } catch {
+    /* soft */
+  }
+  try {
+    const {
+      getExpediaAccommodationUrl,
+      getStay22AccommodationUrl,
+      getExpediaCamref,
+    } = require('./affiliate/affiliateService') as {
+      getExpediaAccommodationUrl: (
+        d: string,
+        o?: { checkin?: string; checkout?: string; adults?: number },
+      ) => string;
+      getStay22AccommodationUrl: (
+        d: string,
+        o?: { checkin?: string; checkout?: string; adults?: number },
+      ) => string;
+      getExpediaCamref: () => string;
+    };
+    const opts = {
+      checkin: action.payload.checkin,
+      checkout: action.payload.checkout,
+      adults: action.payload.adults,
+    };
+    return getExpediaCamref()
+      ? getExpediaAccommodationUrl(dest, opts)
+      : getStay22AccommodationUrl(dest, opts);
+  } catch {
+    return null;
+  }
+}
+
+/** Ansage beim Maps-Öffnen: nur kurzer Ortsname (z. B. „TC Prisdorf“). */
+export function speechForGoogleMapsOpen(opts?: {
+  destName?: string | null;
+  label?: string | null;
+}): string | null {
+  // Feedback: Link-Open stumm — keine Maps-Ansage mehr.
+  void opts;
+  return null;
+}
+
+function speechForOpenUrl(
+  _url: string,
+  _label: string,
+  _destName?: string | null,
+): string | null {
+  // Feedback: Link öffnen → keine Audio-Ansage.
   return null;
 }
 
@@ -318,9 +402,17 @@ export async function handleQuickAction(
     const { stopVoiceOnUserTap, isSpeechActive } = await import(
       '../module2/speech/speechQueue'
     );
+    const {
+      shouldKeepTalkingOnAction,
+      armLinkBackgroundSpeech,
+    } = require('./speech/backgroundSpeechPolicy') as {
+      shouldKeepTalkingOnAction: (t: string) => boolean;
+      armLinkBackgroundSpeech: (o?: { reason?: string }) => void;
+    };
     speechWasActive = isSpeechActive();
-    // Maps/Speisekarte während Pitch: Speech weiterlaufen lassen
-    if (!isOpenUrl) {
+    if (shouldKeepTalkingOnAction(action.type)) {
+      armLinkBackgroundSpeech({ reason: action.type });
+    } else if (!isOpenUrl) {
       await stopVoiceOnUserTap();
     }
   } catch {
@@ -337,6 +429,62 @@ export async function handleQuickAction(
 
   switch (action.type) {
     case 'START_NAVIGATION': {
+      // Say–Do: Laden sofort sichtbar, Thinking/Mic-Textfeld weg
+      try {
+        useFinnusStore.getState().setNavRouteLoading(true);
+        useFinnusStore.getState().setIsGenerating(false);
+        if (
+          action.payload.replaceRoute === true ||
+          action.payload.addStop === true ||
+          action.payload.preferWalk === true ||
+          action.payload.preferTransit === true ||
+          action.payload.preferBike === true
+        ) {
+          useFinnusStore.getState().setActiveConciergeCard(null);
+        }
+      } catch {
+        /* soft */
+      }
+      if (action.payload.preferWalk === true) {
+        try {
+          const { armSkipMobilityChoiceOnce } = require('./navigation/navLeaveByFollowUp') as {
+            armSkipMobilityChoiceOnce: () => void;
+          };
+          armSkipMobilityChoiceOnce();
+        } catch {
+          /* soft */
+        }
+      }
+
+      if (
+        !action.payload.replaceRoute &&
+        !action.payload.addStop &&
+        !(action.payload.multiStop && action.payload.multiStop.length >= 2)
+      ) {
+        const { shouldOfferNavRetarget, presentNavRetargetChoice } = await import(
+          './navigation/navRetargetChoice'
+        );
+        const destName = (
+          action.payload.destName ||
+          action.label ||
+          ''
+        ).trim();
+        if (
+          shouldOfferNavRetarget({
+            name: destName,
+            lat: action.payload.destLat,
+            lng: action.payload.destLng,
+            poiId: action.payload.targetPoiId,
+          })
+        ) {
+          presentNavRetargetChoice(
+            { ...action.payload, destName: destName || action.payload.destName },
+            { speak: true },
+          );
+          return { ok: true, keepCard: true };
+        }
+      }
+
       const legs = action.payload.multiStop;
       if (legs && legs.length >= 2) {
         const { startMultiStopTour } = await import('./navigation/multiStopTour');
@@ -355,7 +503,35 @@ export async function handleQuickAction(
           estimatedDistanceM: 0,
           stops,
           currentIndex: 0,
+          liveMeta: {
+            requestId: `action_${Date.now()}`,
+            hardArriveByMs: null,
+            softDurationMin: null,
+            bufferMin: 10,
+            plannedArriveByMs: Date.now() + stops.length * 12 * 60_000,
+            startedAtMs: Date.now(),
+            denserStops: false,
+            mobility: 'transit_ok',
+          },
         });
+        if (result.ok) {
+          try {
+            const { startTourLiveSupervisor } = await import(
+              '../module2/tour/tourLiveSupervisor'
+            );
+            const { takeRestPool } = await import('../module2/tour/restPool');
+            const { useLiveTourStore } = await import('../module2/tour/tourSpeech');
+            const rid = useLiveTourStore.getState().requestId;
+            const stashed = rid ? takeRestPool(rid) : null;
+            startTourLiveSupervisor({
+              requestId: rid ?? `action_${Date.now()}`,
+              restPool: stashed?.rest ?? [],
+              denserStops: stashed?.denserStops === true,
+            });
+          } catch {
+            /* soft */
+          }
+        }
         useFinnusStore.getState().setActiveConciergeCard(null);
         try {
           const { requestClosePlanCalendar } = require('../module2/timeline/planCalendarUiStore') as {
@@ -386,6 +562,28 @@ export async function handleQuickAction(
         action.label ||
         ''
       ).trim();
+      if (
+        (action.payload.preferWalk === true ||
+          action.payload.preferTransit === true ||
+          action.payload.preferBike === true) &&
+        typeof action.payload.destLat === 'number' &&
+        typeof action.payload.destLng === 'number' &&
+        Number.isFinite(action.payload.destLat) &&
+        Number.isFinite(action.payload.destLng)
+      ) {
+        const { startPitchNavigation, pitchNavIntentFromPayload } = await import(
+          '../module2/pitch/pitchStartNav'
+        );
+        const chosen = await startPitchNavigation(
+          {
+            name: payloadName || 'Ort',
+            lat: action.payload.destLat,
+            lng: action.payload.destLng,
+          },
+          pitchNavIntentFromPayload(action.payload),
+        );
+        return { ok: chosen.ok, message: chosen.message };
+      }
       const wakeLike = /^wecker\b|aufstehen/i.test(payloadName);
       const hasPayloadCoords =
         typeof action.payload.destLat === 'number' &&
@@ -413,8 +611,12 @@ export async function handleQuickAction(
               ? offer?.lng ?? null
               : null,
         },
-        { skipClosingGate: action.payload.skipClosingGate === true,
+        {
+          skipClosingGate: action.payload.skipClosingGate === true,
           offlineOnly: action.payload.offlineOnly === true,
+          skipDestVerify: action.payload.skipDestVerify === true,
+          replaceRoute: action.payload.replaceRoute === true,
+          addStop: action.payload.addStop === true,
         },
       );
       
@@ -496,17 +698,34 @@ export async function handleQuickAction(
 
     case 'OPEN_URL': {
       if (action.payload.pending) {
-        return {
-          ok: false,
-          message: 'Link wird noch gesucht — einen Moment…',
-        };
+        const recoveredPending = recoverHotelBookUrl(action);
+        if (recoveredPending) {
+          action = {
+            ...action,
+            payload: {
+              ...action.payload,
+              url: recoveredPending,
+              pending: false,
+            },
+          };
+        } else {
+          return {
+            ok: false,
+            message: 'Link wird noch gesucht — einen Moment…',
+          };
+        }
       }
       let url = (action.payload.url ?? '').trim();
       if (/findus\.local\/pending/i.test(url)) {
-        return {
-          ok: false,
-          message: 'Link wird noch gesucht — einen Moment…',
-        };
+        const recovered = recoverHotelBookUrl(action);
+        if (recovered) {
+          url = recovered;
+        } else {
+          return {
+            ok: false,
+            message: 'Link wird noch gesucht — einen Moment…',
+          };
+        }
       }
       // GetYourGuide-Slugs ohne volle URL
       if (
@@ -519,11 +738,48 @@ export async function handleQuickAction(
         );
       }
       if (!url) {
-        // Reservieren ohne URL → Deep-Research-Flow statt stillem Fail
-        if (/\b(tisch|reserv)/i.test(action.label)) {
+        const recoveredEmpty = recoverHotelBookUrl(action);
+        if (recoveredEmpty) {
+          url = recoveredEmpty;
+        } else if (/\b(tisch|reserv)/i.test(action.label)) {
+          // Reservieren ohne URL → Deep-Research-Flow statt stillem Fail
           return handleTableReservationTap(action, action.label);
+        } else {
+          return { ok: false, message: 'Kein Link hinterlegt.' };
         }
-        return { ok: false, message: 'Kein Link hinterlegt.' };
+      }
+      if (/m\.uber\.com|uber\.com\/ul/i.test(url)) {
+        url = encodeUriBrackets(url);
+      }
+      // Letzte Verteidigung: nie leere Partner-Portale als „Buchen“ öffnen
+      try {
+        const {
+          isHollowPartnerUrl,
+          looksLikePartnerBookClaim,
+        } = require('./affiliate/hollowPartnerUrl') as {
+          isHollowPartnerUrl: (u: string) => boolean;
+          looksLikePartnerBookClaim: (l: string) => boolean;
+        };
+        if (
+          looksLikePartnerBookClaim(action.label) &&
+          isHollowPartnerUrl(url)
+        ) {
+          const recoveredHollow = recoverHotelBookUrl(action);
+          if (
+            recoveredHollow &&
+            !isHollowPartnerUrl(recoveredHollow)
+          ) {
+            url = recoveredHollow;
+          } else {
+            return {
+              ok: false,
+              message:
+                'Dafür habe ich gerade keinen direkten Buchungslink beim Partner — nutz Route/Infos, oder nenn mir die genaue Ticket-Seite.',
+            };
+          }
+        }
+      } catch {
+        /* soft */
       }
       // Nach dem Öffnen: echten Buchungs-Button nachreichen (kein zweites openURL)
       if (/\b(tisch|reserv)/i.test(action.label)) {
@@ -567,6 +823,27 @@ export async function handleQuickAction(
         }
       }
       url = normalizeAffiliateUrl(url);
+      const keptPage = keepFoundEventUrl(url);
+      if (keptPage) url = keptPage;
+      try {
+        const { resolveTapOpenUrl } = require('./research/liveDeepLink') as {
+          resolveTapOpenUrl: (o: {
+            url: string;
+            label: string;
+            destName?: string | null;
+            entityName?: string | null;
+          }) => Promise<string>;
+        };
+        url = await resolveTapOpenUrl({
+          url,
+          label: action.label,
+          destName: action.payload.destName,
+          entityName: action.payload.entityName,
+          payload: action.payload,
+        });
+      } catch {
+        /* soft — lieber öffnen als blocken */
+      }
       if (isCityMapUrl(url)) {
         const ok = await openCityMap({
           id: 'map',
@@ -581,9 +858,31 @@ export async function handleQuickAction(
       // Google Maps: geo:-Intent zuerst (App-Pin), sonst https dir-Link
       const isMaps = isGoogleMapsOpenUrl(url);
       if (isMaps) {
+        try {
+          const {
+            rewriteGoogleMapsOpenUrl,
+          } = require('./research/eventInfoUrl') as {
+            rewriteGoogleMapsOpenUrl: (o: {
+              url: string;
+              destName?: string | null;
+              entityName?: string | null;
+            }) => string;
+          };
+          url = rewriteGoogleMapsOpenUrl({
+            url,
+            destName: action.payload.destName,
+            entityName: action.payload.entityName,
+          });
+        } catch {
+          /* soft */
+        }
+        const mapsSpeech = speechForGoogleMapsOpen({
+          destName: action.payload.destName || action.payload.entityName,
+          label: action.label,
+        });
         // Nur ansagen wenn gerade nichts gesprochen wird
-        if (!speechWasActive) {
-          announceOpenUrlSpeech(OPEN_GOOGLE_MAPS_SPEECH);
+        if (mapsSpeech && !speechWasActive) {
+          announceOpenUrlSpeech(mapsSpeech);
         }
         const dest =
           url.match(/[?&]destination=([-.\d]+),([-.\d]+)/i) ||
@@ -597,17 +896,20 @@ export async function handleQuickAction(
           const label = decodeURIComponent(
             (labelMatch?.[1] || labelMatch?.[2] || 'Ziel').replace(/\+/g, ' '),
           );
-          const geo = `geo:${lat},${lng}?q=${lat},${lng}(${encodeURIComponent(label.slice(0, 60))})`;
+          const spokenName =
+            (action.payload.destName || action.payload.entityName || '')
+              .trim() || label.slice(0, 60);
+          const geo = `geo:${lat},${lng}?q=${lat},${lng}(${encodeURIComponent(spokenName.slice(0, 60))})`;
           try {
             await openExternalUrl(geo);
-            return { ok: true, message: OPEN_GOOGLE_MAPS_SPEECH };
+            return { ok: true, message: mapsSpeech ?? undefined };
           } catch {
             /* https fallback */
           }
         }
         try {
           await openExternalUrl(url);
-          return { ok: true, message: OPEN_GOOGLE_MAPS_SPEECH };
+          return { ok: true, message: mapsSpeech ?? undefined };
         } catch {
           return {
             ok: false,
@@ -622,15 +924,21 @@ export async function handleQuickAction(
           ? `https://open.spotify.com/search/${encodeURIComponent(decodeURIComponent(q))}`
           : 'https://open.spotify.com/search/playlist';
       }
+      // Speisekarte / OPEN_URL: immer System-Browser (kein In-App-WebView).
       try {
-        const openSpeech = speechForOpenUrl(url, action.label);
+        const openSpeech = speechForOpenUrl(
+          url,
+          action.label,
+          action.payload.destName || action.payload.entityName,
+        );
         if (openSpeech && !speechWasActive) {
           announceOpenUrlSpeech(openSpeech);
         }
         await openExternalUrl(url);
         return {
           ok: true,
-          message: openSpeech ?? 'Ich öffne den Link.',
+          // Stumm — kein Chat-/TTS-Hinweis beim Link-Open
+          message: openSpeech ?? undefined,
         };
       } catch {
         // canOpenURL ist auf Android oft falsch-negativ — trotzdem öffnen versucht
@@ -668,6 +976,12 @@ export async function handleQuickAction(
       let lat = action.payload.destLat;
       let lng = action.payload.destLng;
       let name = (action.payload.destName || '').trim();
+      const dropAddr =
+        (action.payload.dropoffFormattedAddress || name || '').trim();
+      const pickupTimeRaw = (action.payload.pickupTimeLabel || '').trim();
+      const pickupTimeLabel = pickupTimeRaw
+        ? roundClockHmmDownTo5(pickupTimeRaw)
+        : '';
 
       if (
         (lat == null || lng == null || !Number.isFinite(lat) || !Number.isFinite(lng)) &&
@@ -689,6 +1003,26 @@ export async function handleQuickAction(
         }
       }
 
+      // Adresse ohne Koordinaten → Geocode (Pickup = aktuelle Position)
+      if (
+        (lat == null || lng == null || !Number.isFinite(lat) || !Number.isFinite(lng)) &&
+        (dropAddr || name)
+      ) {
+        try {
+          const { geocodePlaceName } = await import(
+            './navigation/googleMapsNav'
+          );
+          const hit = await geocodePlaceName(dropAddr || name);
+          if (hit && Number.isFinite(hit.lat) && Number.isFinite(hit.lng)) {
+            lat = hit.lat;
+            lng = hit.lng;
+            if (!name) name = dropAddr || 'Ziel';
+          }
+        } catch {
+          /* soft */
+        }
+      }
+
       if (
         lat == null ||
         lng == null ||
@@ -697,11 +1031,27 @@ export async function handleQuickAction(
       ) {
         return {
           ok: false,
-          message: 'Für Uber brauche ich noch die Ziel-Koordinaten.',
+          message: 'Für Uber brauche ich noch die Zieladresse oder Koordinaten.',
         };
       }
 
-      const ok = await openUberRide(lat, lng, name || 'Ziel');
+      const ok = await (async () => {
+        const direct = action.payload.url?.trim();
+        if (direct && /uber\.com/i.test(direct)) {
+          try {
+            // canOpenURL auf Android oft falsch-negativ bei dropoff[latitude]
+            await openExternalUrl(encodeUriBrackets(direct));
+            return true;
+          } catch {
+            /* fall through */
+          }
+        }
+        return openUberRide(lat, lng, name || 'Ziel', null, {
+          dropoffFormattedAddress: dropAddr || name || 'Ziel',
+          pickupTimeLabel: pickupTimeLabel || null,
+          pickupDateIso: action.payload.dateIso || null,
+        });
+      })();
       if (ok) {
         try {
           const { useLogisticsTriggerStore } = await import(
@@ -734,13 +1084,49 @@ export async function handleQuickAction(
       return {
         ok,
         message: ok
-          ? undefined
+          ? pickupTimeLabel
+            ? `Uber ist vorbereitet (Ziel + dein Standort). Uhrzeit ${pickupTimeLabel} bitte in der App noch prüfen — Uber-Links können die Uhrzeit nicht fest setzen.`
+            : undefined
           : 'Uber lässt sich gerade nicht öffnen — versuch den Link gleich nochmal.',
       };
     }
 
     case 'BOOK_CAR_RENTAL': {
-      const ok = await openCarRental();
+      const direct = action.payload.url?.trim();
+      if (direct) {
+        const tracked = normalizeAffiliateUrl(direct);
+        try {
+          await openExternalUrl(tracked);
+          return { ok: true };
+        } catch {
+          return {
+            ok: false,
+            message:
+              'Mietwagen-Buchung lässt sich gerade nicht öffnen — versuch es gleich nochmal.',
+          };
+        }
+      }
+      let fromFlight: Parameters<typeof getCarRentalUrl>[0];
+      try {
+        const { getLastFlightCommit } = require('./flights/flightTripSession') as {
+          getLastFlightCommit: () => {
+            destIata?: string;
+            destCity?: string;
+            dateKey?: string;
+          } | null;
+        };
+        const snap = getLastFlightCommit();
+        if (snap?.destIata && snap.dateKey) {
+          fromFlight = {
+            pickupIata: snap.destIata,
+            pickupLocation: snap.destCity || snap.destIata,
+            pickupDate: snap.dateKey,
+          };
+        }
+      } catch {
+        fromFlight = undefined;
+      }
+      const ok = await openCarRental(fromFlight);
       return {
         ok,
         message: ok
@@ -766,12 +1152,63 @@ export async function handleQuickAction(
         getCachedUserProfile()?.cityName?.trim() ||
         '';
       const directUrl = action.payload.url?.trim();
-      const ok = await openStay22Accommodation(dest, {
-        url: directUrl,
+      let bookUrl = directUrl || '';
+      try {
+        const { upgradeHotelUrlOnTap } = require('./affiliate/openUrlBookingPrefill') as {
+          upgradeHotelUrlOnTap: (o: {
+            url: string;
+            label?: string;
+            destName?: string | null;
+            destination?: string | null;
+            checkin?: string;
+            checkout?: string;
+            adults?: number;
+          }) => Promise<string>;
+        };
+        bookUrl = await upgradeHotelUrlOnTap({
+          url: directUrl || 'https://www.stay22.com/',
+          label: action.label,
+          destName: action.payload.destName,
+          destination:
+            action.payload.destination?.trim() ||
+            dest,
+          checkin: action.payload.checkin,
+          checkout: action.payload.checkout,
+          adults: action.payload.adults,
+        });
+      } catch {
+        /* soft */
+      }
+      let ok = await openStay22Accommodation(dest, {
+        url: bookUrl || directUrl,
         checkin: action.payload.checkin,
         checkout: action.payload.checkout,
         adults: action.payload.adults,
       });
+      if (!ok) {
+        try {
+          const {
+            openExpediaAccommodation,
+          } = require('./affiliate/affiliateService') as {
+            openExpediaAccommodation: (
+              d: string,
+              o?: {
+                checkin?: string;
+                checkout?: string;
+                adults?: number;
+                url?: string;
+              },
+            ) => Promise<boolean>;
+          };
+          ok = await openExpediaAccommodation(dest || 'Germany', {
+            checkin: action.payload.checkin,
+            checkout: action.payload.checkout,
+            adults: action.payload.adults,
+          });
+        } catch {
+          /* soft */
+        }
+      }
       return {
         ok,
         message: ok
@@ -866,6 +1303,28 @@ export async function handleQuickAction(
     }
 
     case 'SHOW_MORE': {
+      if (action.payload.choiceTap) {
+        const ct = action.payload.choiceTap;
+        useFinnusStore.getState().setActiveConciergeCard(null);
+        try {
+          const { continueTurnFromChoice } = await import(
+            '../module2/router/continueTurnFromChoice'
+          );
+          await continueTurnFromChoice({
+            parentTurnId: ct.parentTurnId,
+            choiceId: ct.choiceId,
+            label: ct.label,
+            slotKey: ct.slotKey,
+          });
+          return { ok: true };
+        } catch (err) {
+          console.warn('[action] choice tap failed:', err);
+          return {
+            ok: false,
+            message: 'Die Auswahl konnte gerade nicht verarbeitet werden.',
+          };
+        }
+      }
       const legs = action.payload.multiStop;
       if (legs && legs.length >= 2) {
         const { startMultiStopTour } = await import('./navigation/multiStopTour');
@@ -884,7 +1343,31 @@ export async function handleQuickAction(
           estimatedDistanceM: 0,
           stops,
           currentIndex: 0,
+          liveMeta: {
+            requestId: `showmore_${Date.now()}`,
+            hardArriveByMs: null,
+            softDurationMin: null,
+            bufferMin: 10,
+            plannedArriveByMs: Date.now() + stops.length * 12 * 60_000,
+            startedAtMs: Date.now(),
+            denserStops: false,
+            mobility: 'transit_ok',
+          },
         });
+        if (result.ok) {
+          try {
+            const { startTourLiveSupervisor } = await import(
+              '../module2/tour/tourLiveSupervisor'
+            );
+            startTourLiveSupervisor({
+              requestId: `showmore_${Date.now()}`,
+              restPool: [],
+              denserStops: false,
+            });
+          } catch {
+            /* soft */
+          }
+        }
         useFinnusStore.getState().setActiveConciergeCard(null);
         return {
           ok: result.ok,
@@ -894,6 +1377,91 @@ export async function handleQuickAction(
       const prompt =
         action.payload.textPrompt?.trim() ||
         'Erzähl mir bitte etwas mehr dazu.';
+
+      if (
+        prompt === '__SHOW_PLAN_DAY__' ||
+        prompt.startsWith('__SHOW_PLAN_DAY__:')
+      ) {
+        const dayKey = prompt.includes(':')
+          ? prompt.split(':').slice(1).join(':').trim()
+          : null;
+        useFinnusStore.getState().setActiveConciergeCard(null);
+        try {
+          const { revealPlanCalendarNow } = await import(
+            '../module2/timeline/planCalendarUiStore'
+          );
+          await revealPlanCalendarNow(dayKey || null);
+        } catch {
+          /* soft */
+        }
+        return { ok: true };
+      }
+
+      if (prompt === '__START_PLAN_STEP_LOOP__') {
+        useFinnusStore.getState().setActiveConciergeCard(null);
+        try {
+          const { runPlanningModule } = await import(
+            '../module2/planning/runPlanningModule'
+          );
+          await runPlanningModule({
+            userText: '__START_PLAN_STEP_LOOP__',
+          });
+        } catch (err) {
+          console.warn('[action] start plan step loop failed', err);
+        }
+        return { ok: true };
+      }
+
+      try {
+        const {
+          resolveChoiceSlotFromPrompt,
+          getLastParentTurnId,
+        } = await import('../module2/router/choiceTurnContext');
+        const resolved = resolveChoiceSlotFromPrompt(prompt, action.label);
+        if (resolved) {
+          useFinnusStore.getState().setActiveConciergeCard(null);
+          const { continueTurnFromChoice } = await import(
+            '../module2/router/continueTurnFromChoice'
+          );
+          const parentTurnId =
+            getLastParentTurnId() || `tap_${Date.now()}`;
+          await continueTurnFromChoice({
+            parentTurnId,
+            choiceId: resolved.choiceId,
+            label: resolved.label,
+            slotKey: resolved.slotKey,
+            inventoryPatch: resolved.inventoryPatch,
+          });
+          return { ok: true };
+        }
+      } catch (err) {
+        console.warn('[action] choice slot resolve failed:', err);
+      }
+
+      try {
+        const { isRainDontCareUtterance } = await import(
+          './weather/rainIncomingPolicy'
+        );
+        if (isRainDontCareUtterance(prompt)) {
+          useFinnusStore.getState().setActiveConciergeCard(null);
+          const ack = 'Alles klar — dann bleiben wir beim Plan.';
+          try {
+            const { speakAssistantText, getVoiceSettingsForTour } = await import(
+              './ttsService'
+            );
+            const voice = await getVoiceSettingsForTour();
+            await speakAssistantText(ack, {
+              voiceId: voice.voiceId,
+              speechRate: voice.speechRate,
+            });
+          } catch {
+            /* soft */
+          }
+          return { ok: true, message: ack };
+        }
+      } catch {
+        /* soft */
+      }
 
       try {
         const { tryHandleNarrationResumePrompt } = await import(
@@ -920,6 +1488,19 @@ export async function handleQuickAction(
         useFinnusStore.getState().setActiveConciergeCard(null);
         return { ok: true };
       }
+      if (prompt === '__RESTORE_PREV_NAV_ROUTE__') {
+        const { restorePreviousNavRoute } = await import(
+          './navigation/navigationService'
+        );
+        const ok = restorePreviousNavRoute();
+        useFinnusStore.getState().setActiveConciergeCard(null);
+        return {
+          ok,
+          message: ok
+            ? 'Alte Route wieder aktiv.'
+            : 'Alte Route nicht mehr verfügbar.',
+        };
+      }
       if (/kein\s+wecker|lieber\s+nicht|ohne\s+wecker/i.test(prompt)) {
         setPendingWakeProposal(null);
         useFinnusStore.getState().setActiveConciergeCard(null);
@@ -933,6 +1514,39 @@ export async function handleQuickAction(
           /* ignore */
         }
         return { ok: true };
+      }
+
+      // Akku / Powerbank / Steckdose → Discovery-SSOT (nie LLM-Heimatläden)
+      try {
+        const { isPhoneChargeIntent, runPhoneChargeDiscovery } = await import(
+          './navigation/phoneChargeDiscovery'
+        );
+        if (isPhoneChargeIntent(prompt)) {
+          const store = useFinnusStore.getState();
+          const lat = store.lastGpsLat;
+          const lng = store.lastGpsLng;
+          if (lat != null && lng != null) {
+            const charge = await runPhoneChargeDiscovery({
+              origin: { lat, lng },
+            });
+            presentDiscoveryAsConcierge({
+              ...charge,
+              queryLabel: 'Akku · Handy laden',
+            });
+            try {
+              const voice = await getVoiceSettingsForTour();
+              await speakAssistantText(charge.speech, {
+                voiceId: voice.voiceId,
+                speechRate: voice.speechRate,
+              });
+            } catch {
+              /* soft */
+            }
+            return { ok: true, message: charge.speech };
+          }
+        }
+      } catch {
+        /* soft — fall through to concierge */
       }
 
       // Modul-1 Mehr Historie → Deep-Dive am Ort (nie Planung/Timeline)
@@ -988,6 +1602,14 @@ export async function handleQuickAction(
       useShoppingTaskStore.getState().completeTask(taskId);
       useFinnusStore.getState().setActiveConciergeCard(null);
       const item = task?.itemLabel ?? 'das';
+      try {
+        const { retireCommitmentsForHint } = require('../module2/timeline/retireTimelineCommitments') as {
+          retireCommitmentsForHint: (hint: string) => unknown;
+        };
+        if (task?.itemLabel) retireCommitmentsForHint(task.itemLabel);
+      } catch {
+        /* soft */
+      }
       try {
         const voice = await getVoiceSettingsForTour();
         void speakAssistantText(`Super — ${item} ist erledigt.`, {
@@ -1095,6 +1717,27 @@ export async function handleQuickAction(
       }
 
       if (!Number.isFinite(wakeAtMs) || wakeAtMs < Date.now() + 20_000) {
+        const prompt = action.payload.textPrompt?.trim();
+        if (prompt) {
+          const { prepareWakeAlarmFollowUp } = await import(
+            './alarms/wakeAlarmAdvisor'
+          );
+          const wake = await prepareWakeAlarmFollowUp(prompt);
+          useFinnusStore.getState().setActiveConciergeCard(null);
+          const speech =
+            wake?.speech ||
+            'Die Wecker-Zeit liegt zu nah oder fehlt — sag mir z. B. „Wecker um 7“.';
+          try {
+            const voice = await getVoiceSettingsForTour();
+            void speakAssistantText(speech, {
+              voiceId: voice.voiceId,
+              speechRate: voice.speechRate,
+            });
+          } catch {
+            /* ignore */
+          }
+          return { ok: Boolean(wake?.wakeAtMs), message: speech };
+        }
         const msg =
           'Die Wecker-Zeit liegt zu nah oder fehlt — sag mir z. B. „Wecker um 7“.';
         try {
@@ -1127,7 +1770,7 @@ export async function handleQuickAction(
       const speech =
         result.message ||
         (result.ok
-          ? `Wecker auf ${formatClockDe(wakeAtMs)} gestellt.`
+          ? `Ich habe deinen Wecker auf ${formatClockDe(wakeAtMs)} gestellt.`
           : 'Wecker lässt sich gerade nicht stellen.');
       try {
         const voice = await getVoiceSettingsForTour();
@@ -1153,49 +1796,208 @@ export async function handleQuickAction(
         return { ok: false, message: 'Kein Ort für Street View.' };
       }
       try {
-        const { fetchStreetViewImageBase64 } = await import(
-          './navigation/googleMapsNav'
-        );
         const heading =
           typeof action.payload.headingDeg === 'number' &&
           Number.isFinite(action.payload.headingDeg)
             ? action.payload.headingDeg
             : 0;
-        // Lazy: Bild erst jetzt laden (kein Prefetch)
-        const b64 = await fetchStreetViewImageBase64(lat, lng, heading);
-        if (b64) {
-          useFinnusStore.getState().setCityMap({
-            url: `data:image/jpeg;base64,${b64}`,
-            title: action.payload.destName?.trim() || 'Street View',
-          });
-          return { ok: true };
-        }
+        const url =
+          `https://www.google.com/maps/@?api=1&map_action=pano` +
+          `&viewpoint=${lat},${lng}&heading=${heading}`;
         const { Linking } = await import('react-native');
-        announceOpenUrlSpeech(OPEN_GOOGLE_MAPS_SPEECH);
-        await openExternalUrl(
-          `https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${lat},${lng}`,
-        );
-        return { ok: true, message: OPEN_GOOGLE_MAPS_SPEECH };
+        await Linking.openURL(url);
+        return { ok: true };
       } catch (err) {
         console.warn('[action] street view failed', err);
-        return { ok: false, message: 'Street View ließ sich nicht laden.' };
+        return { ok: false, message: 'Street View ließ sich nicht öffnen.' };
       }
     }
 
     case 'SET_DEPARTURE_REMINDER': {
+      // Pitch „Später einplanen“: still Timeline + Speech
+      if ((action.payload as { pitchTiming?: string }).pitchTiming === 'later') {
+        try {
+          const { useLivePitchStore } = require('../module2/pitch/publishPitchUi') as {
+            useLivePitchStore: {
+              getState: () => {
+                requestId: string | null;
+                options: Array<{
+                  id: string;
+                  name: string;
+                  lat: number;
+                  lng: number;
+                  mapsUrl?: string;
+                  menuUrl?: string | null;
+                  actions?: unknown[];
+                }>;
+                selectedOptionId: string | null;
+                visitAtMs: number | null;
+                pitchKind: string | null;
+                pitchContext: string | null;
+              };
+            };
+          };
+          const live = useLivePitchStore.getState();
+          const opt =
+            live.options.find((o) => o.id === live.selectedOptionId) ||
+            live.options[0];
+          if (opt && live.requestId) {
+            const { mirrorLivePitchChoiceToTimeline } = require('../module2/pitch/mirrorLivePitchToTimeline') as {
+              mirrorLivePitchChoiceToTimeline: (o: unknown) => void;
+            };
+            mirrorLivePitchChoiceToTimeline({
+              requestId: live.requestId,
+              option: opt,
+              visitAtMs: live.visitAtMs,
+              pitchKind: live.pitchKind,
+              pitchContext: live.pitchContext,
+            });
+          }
+          const { pitchTimingLaterSpeech } = require('../module2/pitch/pitchTimingFork') as {
+            pitchTimingLaterSpeech: (n: string) => string;
+          };
+          const { enqueueSpeech } = require('../module2/speech/speechQueue') as {
+            enqueueSpeech: (o: { kind: string; text: string; turnId: string }) => void;
+          };
+          const name =
+            action.payload.destName?.trim() || opt?.name || 'den Ort';
+          enqueueSpeech({
+            kind: 'main',
+            text: pitchTimingLaterSpeech(name),
+            turnId: `pitch_later_${Date.now()}`,
+          });
+          return { ok: true, keepCard: true };
+        } catch {
+          /* fall through to normal reminder */
+        }
+      }
       const leaveByMs = action.payload.dateIso
         ? Date.parse(action.payload.dateIso)
         : NaN;
-      if (!Number.isFinite(leaveByMs) || leaveByMs < Date.now() + 20_000) {
-        return {
-          ok: false,
-          message: 'Die Erinnerungs-Zeit liegt zu nah oder fehlt.',
-        };
-      }
       const label =
         action.payload.destName?.trim() ||
         action.payload.textPrompt?.trim() ||
         'dein Termin';
+      const hasTime =
+        Number.isFinite(leaveByMs) && leaveByMs >= Date.now() + 20_000;
+
+      // Nur Ort, keine Uhrzeit → Geo-Erinnerung (am Ort erinnern)
+      if (!hasTime) {
+        const destName = action.payload.destName?.trim();
+        if (!destName) {
+          return {
+            ok: false,
+            message:
+              'Dafür brauche ich noch eine Uhrzeit oder einen konkreten Ort.',
+          };
+        }
+        let lat =
+          typeof action.payload.destLat === 'number'
+            ? action.payload.destLat
+            : null;
+        let lng =
+          typeof action.payload.destLng === 'number'
+            ? action.payload.destLng
+            : null;
+        if (
+          lat == null ||
+          lng == null ||
+          !Number.isFinite(lat) ||
+          !Number.isFinite(lng)
+        ) {
+          try {
+            const { geocodePlaceNameOsmFirst } = await import(
+              './navigation/googleMapsNav'
+            );
+            const profile = getCachedUserProfile();
+            const gps = useFinnusStore.getState();
+            const g = await geocodePlaceNameOsmFirst(destName, {
+              cityHint: profile?.cityName ?? null,
+              biasLat:
+                typeof gps.lastGpsLat === 'number' ? gps.lastGpsLat : undefined,
+              biasLng:
+                typeof gps.lastGpsLng === 'number' ? gps.lastGpsLng : undefined,
+            });
+            if (g && Number.isFinite(g.lat) && Number.isFinite(g.lng)) {
+              lat = g.lat;
+              lng = g.lng;
+            }
+          } catch {
+            /* soft */
+          }
+        }
+        if (
+          lat == null ||
+          lng == null ||
+          !Number.isFinite(lat) ||
+          !Number.isFinite(lng)
+        ) {
+          return {
+            ok: false,
+            message: `Den Ort „${destName}“ finde ich gerade nicht zum Erinnern.`,
+          };
+        }
+        useLogisticsTriggerStore.getState().upsertGeoTrigger({
+          title: `Erinnerung: ${destName}`,
+          detail: action.payload.textPrompt ?? undefined,
+          lat,
+          lng,
+          radiusM: 120,
+        });
+        useFinnusStore.getState().setActiveConciergeCard(null);
+        try {
+          const voice = await getVoiceSettingsForTour();
+          void speakAssistantText(
+            `Alles klar — sobald du bei ${destName} bist, erinnere ich dich.`,
+            { voiceId: voice.voiceId, speechRate: voice.speechRate },
+          );
+        } catch {
+          /* soft */
+        }
+        return { ok: true, message: `Geo-Erinnerung: ${destName}` };
+      }
+
+      const hasCoords =
+        typeof action.payload.destLat === 'number' &&
+        typeof action.payload.destLng === 'number' &&
+        Number.isFinite(action.payload.destLat) &&
+        Number.isFinite(action.payload.destLng);
+      const { shouldUseTaskReminderPush, extractTaskReminderPhrase } =
+        await import('./notifications/taskReminderCopy');
+      const userBlob =
+        action.payload.textPrompt?.trim() ||
+        action.payload.destName?.trim() ||
+        '';
+      if (
+        shouldUseTaskReminderPush({
+          userText: userBlob,
+          destName: action.payload.destName,
+          hasCoords,
+        })
+      ) {
+        const task = extractTaskReminderPhrase(userBlob, label);
+        const { registerTimeReminder } = await import(
+          './logistics/logisticsTriggerEngine'
+        );
+        registerTimeReminder({
+          title: task,
+          fireAtMs: leaveByMs,
+          detail: userBlob.slice(0, 180),
+          eventId: `task-${leaveByMs}`,
+        });
+        useFinnusStore.getState().setActiveConciergeCard(null);
+        try {
+          const voice = await getVoiceSettingsForTour();
+          void speakAssistantText(
+            `Alles klar — um ${formatClockDe(leaveByMs)} erinnere ich dich: ${task}.`,
+            { voiceId: voice.voiceId, speechRate: voice.speechRate },
+          );
+        } catch {
+          /* ignore */
+        }
+        return { ok: true, message: `Erinnerung ${formatClockDe(leaveByMs)}: ${task}` };
+      }
+
       const walkGuess = Math.max(
         5,
         Math.round((leaveByMs - Date.now()) / 60_000) > 0 ? 15 : 15,
@@ -1204,17 +2006,20 @@ export async function handleQuickAction(
       const { registerDepartureWatch } = await import(
         './logistics/logisticsTriggerEngine'
       );
-      registerDepartureWatch({
-        eventId: `depart-${leaveByMs}`,
-        title: label,
-        departureMs,
-        walkEtaMin: walkGuess,
-        mode: 'walk',
-        destName: action.payload.destName ?? label,
-        destLat: action.payload.destLat ?? null,
-        destLng: action.payload.destLng ?? null,
-        scheduleOsPush: true,
-      });
+  registerDepartureWatch({
+    eventId: `depart-${leaveByMs}`,
+    title: label,
+    departureMs,
+    walkEtaMin: walkGuess,
+    mode: 'walk',
+    destName: action.payload.destName ?? label,
+    destLat: action.payload.destLat ?? null,
+    destLng: action.payload.destLng ?? null,
+    scheduleOsPush: true,
+    // Explizite User-Erinnerung = hohe Prio
+    warnLeadMin: 30,
+    planPriority: 2,
+  });
       // OS-Push kommt aus registerDepartureWatch (modusgerecht, kein Flug-Text)
       useFinnusStore.getState().setActiveConciergeCard(null);
       try {
@@ -1254,5 +2059,5 @@ export function dismissConciergeCard(): void {
 }
 
 export function alertActionError(message: string): void {
-  Alert.alert('Findus', message);
+  Alert.alert('Yorro', message);
 }

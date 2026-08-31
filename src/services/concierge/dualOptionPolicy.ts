@@ -81,10 +81,53 @@ export function buildDualOptionActions(
   return actions.slice(0, DUAL_OPTION_MAX);
 }
 
+export function stripLeadingPlaceName(pitch: string, name: string): string {
+  let p = (pitch ?? '').replace(/\s+/g, ' ').trim();
+  const n = (name ?? '').trim();
+  if (!p || !n) return p;
+  if (p.toLowerCase().startsWith(n.toLowerCase())) {
+    p = p.slice(n.length).replace(/^[\s:,.\-–—]+/u, '').trim();
+  }
+  return p;
+}
+
+function ensureSpokenSentence(s: string): string {
+  const t = (s || '').replace(/\s+/g, ' ').trim();
+  if (!t) return '';
+  if (/[.!?…]$/u.test(t)) return t;
+  return `${t}.`;
+}
+
+/**
+ * Zwei Orte als ein mündlicher Fließtext — Struktur, kein Script.
+ * LLM-Pitches werden hier nur zusammengeführt; Wortlaut der Pitches bleibt.
+ */
+export function weaveDualOptionSpoken(opts: {
+  intro?: string | null;
+  continueFromBridge?: boolean;
+  aName: string;
+  aPitch: string;
+  bName: string;
+  bPitch: string;
+  ask?: string | null;
+}): string {
+  const aFacts = ensureSpokenSentence(stripLeadingPlaceName(opts.aPitch, opts.aName));
+  const bFacts = ensureSpokenSentence(stripLeadingPlaceName(opts.bPitch, opts.bName));
+  const lead = opts.continueFromBridge ? '' : (opts.intro || '').trim();
+  const ask = (opts.ask || 'Was hört sich für dich besser an?').trim();
+  const aBit = aFacts ? `${opts.aName} — ${aFacts}` : `${opts.aName}.`;
+  const bBit = bFacts ? `${opts.bName} — ${bFacts}` : `${opts.bName}.`;
+  const body = `Entweder ${aBit} Oder ${bBit} ${ask}`;
+  return [lead, body].filter(Boolean).join(' ').replace(/\s+/g, ' ').trim();
+}
+
 /** Prompt-Block — Auswahl-Pitch ist Modul-SSOT, nicht LLM-Dual-Inventur. */
 export const FINDUS_DUAL_OPTION_BLOCK = `AUSWAHL / DUAL-OPTION (SSOT):
-- Offene 2er-Auswahl (Essen, Bar, Kino, Sight, Hotel-Choice) kommt NUR vom Auswahl-Pitch-Modul — niemals selbst zwei Orte erfinden oder Medaillen-Ranking im Speech improvisieren.
+- Offene 2er-Auswahl (Essen, Bar, Kino, Sight, Hotel-Choice, Events/Festivals) kommt NUR vom Auswahl-Pitch-Modul — niemals selbst zwei Orte erfinden oder Medaillen-Ranking im Speech improvisieren.
 - Infra/Toilette/ATM: weiterhin kurz 2 konkrete Optionen + START_NAVIGATION mit Differenzgrund (näher/sauberer) — ohne „Favorit“/„Alternative“-Wortlaut.
-- Nach Pitch: User wählt in der UI (A|B oder Timeline). Speisekarte/Deep erst nach Wahl oder als Pitch-Append.
-- Labels max 30 Zeichen. Bindendes (Tisch/Buchung/Nav-Start) nur mit Confirm — nie vortäuschen.
-- Nav jetzt vs. später: Zukunftstermine → Leave-by-Reminder, nicht sofort Navigation.`;
+- Nach Pitch: User wählt in der UI (A|B oder Timeline). Speisekarte/Deep/Tickets erst nach Wahl oder als Pitch-Append.
+- Tap auf Option: kurz bestätigen + Buttons „buchen/Ticket“ (falls Link) und „Navigation starten“ zeigen — nicht stumm sofort navigieren.
+- Labels klar (Maps / Web / Ticket / Route), max ~22–28 Zeichen. Bindendes (Tisch/Buchung/Nav-Start) nur mit Confirm — nie vortäuschen.
+- Nav jetzt vs. später: Zukunftstermine → Leave-by-Reminder, nicht sofort Navigation. Bei Nav-Start und >~20 Min Fuß: ÖPNV automatisch starten wenn schneller (+ Timeline), keine Wahl-Nachfrage.
+- Speech = ein Fließtext: nach der Bridge (Wetter/Wunsch schon gesagt) sofort Entweder Ort A mit gepackten Fakten — Oder Ort B ebenso — dann kurze Wahlfrage. Kein Katalog, kein „Erstens / Und falls der nicht sitzt“.
+Dies sind nur abstrakte Beispiele für den logischen Ablauf. Übernimm niemals den genauen Wortlaut. Passe deine Antwort immer dynamisch und organisch an den aktuellen Kontext und die aktuelle Stadt an.`;

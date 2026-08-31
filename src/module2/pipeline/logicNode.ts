@@ -76,25 +76,35 @@ export function runLogicNode(opts: {
   }
 
   const collision = detectCollision(opts.futurePlan);
-  if (collision) {
+  const skipPlanHints = opts.results.some(
+    (r) =>
+      r.meta?.amenityNav === true ||
+      r.meta?.autoStartNav === true ||
+      r.meta?.forceAutoNav === true ||
+      r.meta?.route_or_nav === true ||
+      typeof r.meta?.destLat === 'number',
+  );
+  if (collision && !skipPlanHints) {
     warnings.push('plan_collision');
     parts.push(collision);
   }
 
-  // Gap-Filler hint bei >45 Min Lücke (soft)
-  const timed = opts.futurePlan.stops
-    .filter((s) => s.plannedEndMs != null)
-    .sort((a, b) => (a.plannedEndMs ?? 0) - (b.plannedEndMs ?? 0));
-  for (let i = 1; i < timed.length; i++) {
-    const gapMin =
-      ((timed[i]!.plannedStartMs ?? 0) - (timed[i - 1]!.plannedEndMs ?? 0)) /
-      60000;
-    if (gapMin > 45) {
-      warnings.push('gap_over_45');
-      parts.push(
-        `Zwischen ${timed[i - 1]!.title} und ${timed[i]!.title} sind über fünfundvierzig Minuten frei — ich kann etwas Sinnvolles einfügen.`,
-      );
-      break;
+  // Gap-Filler hint bei >45 Min Lücke (soft) — nie bei expliziter Nav/Amenity
+  if (!skipPlanHints) {
+    const timed = opts.futurePlan.stops
+      .filter((s) => s.plannedEndMs != null)
+      .sort((a, b) => (a.plannedEndMs ?? 0) - (b.plannedEndMs ?? 0));
+    for (let i = 1; i < timed.length; i++) {
+      const gapMin =
+        ((timed[i]!.plannedStartMs ?? 0) - (timed[i - 1]!.plannedEndMs ?? 0)) /
+        60000;
+      if (gapMin > 45) {
+        warnings.push('gap_over_45');
+        parts.push(
+          `Zwischen ${timed[i - 1]!.title} und ${timed[i]!.title} sind über fünfundvierzig Minuten frei — ich kann etwas Sinnvolles einfügen.`,
+        );
+        break;
+      }
     }
   }
 

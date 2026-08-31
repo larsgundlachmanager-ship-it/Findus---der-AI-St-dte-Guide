@@ -1,13 +1,17 @@
 /**
- * Multistopp-Touren: Joggen, Erkunden, Frühstück/Essen + On-the-fly Stops.
- * Findus wählt passende POIs und führt stop für stop.
+ * Multi-Stop Runtime — Queue / Advance / Weave.
+ * Tour-Planung (Stopps wählen, Zeitbudget, Path) lebt nur in `src/module2/tour/`.
  */
 
-import { getAllPois, haversineMeters } from '../../db/database';
-import type { Poi } from '../../db/types';
+import { haversineMeters } from '../../db/database';
 import { useFinnusStore } from '../../store/useFinnusStore';
-import { parseTagsJson } from '../geo/triggerPolicy';
-import { startNavigation, startNavigationToCoords } from './navigationService';
+import {
+  getActiveNavDestination,
+  startNavigation,
+  startNavigationToCoords,
+} from './navigationService';
+import { notifyNavRouteGeometryChanged } from './navRouteRev';
+import { isHotelTourEnd, orderStopsEfficiently } from './tourOrder';
 import { markNavOpeningSpoken } from './landmarkNavCoach';
 import { stopSpeaking } from '../ttsService';
 import {
@@ -20,6 +24,13 @@ export type TourKind = 'jog' | 'explore' | 'meal' | 'custom';
 /** soft = Errand unterwegs; high = spontan jetzt; must = Termin / harte Deadline */
 export type StopPriority = 'soft' | 'high' | 'must';
 
+export type TourStopRole =
+  | 'walk'
+  | 'board'
+  | 'alight'
+  | 'transfer'
+  | 'dest';
+
 export type TourStop = {
   poiId: number;
   name: string;
@@ -29,6 +40,31 @@ export type TourStop = {
   priority?: StopPriority;
   /** Minuten vorher erinnern — null/undefined = keine Reminder-Ansage */
   remindMinBefore?: number | null;
+  /** ÖPNV-Phase für Door-to-door */
+  role?: TourStopRole;
+  line?: string | null;
+  /** Stationskette für Countdown (bei alight / ride) */
+  stations?: import('./navigationTypes').NavWaypoint[];
+  stationCount?: number | null;
+  speakOnStart?: string | null;
+  /** Bahn-/Bus-Geometrie (Gleise/Stationen), nicht Fuß-Luftlinie. */
+  path?: Array<{ lat: number; lng: number }> | null;
+  startMs?: number | null;
+  endMs?: number | null;
+  durationSec?: number | null;
+  distanceM?: number | null;
+  headsign?: string | null;
+  platform?: string | null;
+  delaySec?: number | null;
+  /** RAIL/BUS/… — steuert Gleis vs. Straßen-Geometrie. */
+  vehicleMode?: string | null;
+  /** Abfahrt des nächsten Fahrzeugs an diesem Halt (Warten + Chip). */
+  vehicleStartMs?: number | null;
+  notes?: string | null;
+  mapsUrl?: string | null;
+  menuUrl?: string | null;
+  reserveUrl?: string | null;
+  websiteUrl?: string | null;
 };
 
 export type MultiStopTour = {
@@ -41,17 +77,19 @@ export type MultiStopTour = {
   estimatedDistanceM: number;
   stops: TourStop[];
   currentIndex: number;
-};
-
-export type MultiStopIntent = {
-  kind: TourKind;
-  /** Nur bei Joggen. */
-  distanceKm: number | null;
-  /** Dauer in Minuten, falls genannt. */
-  durationMin: number | null;
-  mealHint: string | null;
-  /** Parameter fehlen → proaktive Nachfrage. */
-  needsParams: boolean;
+  /** Tour-Modul Live-Meta (Supervisor) */
+  liveMeta?: {
+    requestId: string;
+    hardArriveByMs: number | null;
+    softDurationMin: number | null;
+    bufferMin: number;
+    plannedArriveByMs: number | null;
+    startedAtMs: number;
+    denserStops: boolean;
+    mobility: 'walk' | 'bike' | 'transit_ok';
+    leaveByMs?: number | null;
+    firstTransitMs?: number | null;
+  } | null;
 };
 
 /** Complex itinerary (>5 stops) → Gemini Pro via modelRouter. */
@@ -59,76 +97,40 @@ export function tourNeedsProLlm(stopCount: number): boolean {
   return stopCount > 5;
 }
 
-const JOG_RE =
-  /\b(joggen|jogging|laufen\s+gehen|laufstrecke|runde\s+laufen|spazieren\s+\d|\d+[.,]?\d*\s*km\s*(joggen|laufen|runde)|ich\s+(möchte|will|würde)\s+.{0,40}\d+[.,]?\d*\s*km)\b/iu;
-
-const EXPLORE_RE =
-  /\b(erkunden|führ\s+mich\s+herum|fuehr\s+mich\s+herum|zeig\s+mir\s+(die\s+stadt|den\s+ort|was\s+es\s+gibt)|stadtführung|stadtfuehrung|rundgang|tour\s+(machen|planen)|beste\s+orte|was\s+sich\s+lohnt|herumnavig|führ\s+mich\s+durch|fuehr\s+mich\s+durch)\b/iu;
-
-const MEAL_RE =
-  /\b(frühstück|fruehstueck|breakfast|brunch|mittagessen|abendessen|was\s+essen|wo\s+essen|hunger|café|cafe|bäckerei|baeckerei|restaurant\s+route|essensroute)\b/iu;
-
-const CIRCUIT_SOFT_RE =
-  /\b(schöne\s+runde|einfach\s+(mal\s+)?(laufen|spazieren)|runde\s+drehen|etwas\s+bewegung)\b/iu;
-
-export const CIRCUIT_PROMPT =
-  'Möchtest du irgendwo einen Kaffee trinken, zu Abend essen oder einfach eine schöne Runde laufen?';
-
 export function formatTourReply(tour: MultiStopTour): string {
-  const km = (tour.estimatedDistanceM / 1000).toFixed(1);
-  if (tour.kind === 'jog') {
-    return `Jo, hab ich gemacht — etwa ${km} km. Laufschuhe an und los geht’s.`;
+  const n = tour.stops.length;
+  if (tour.kind === 'jog' && tour.estimatedDistanceM > 0) {
+    const km = (tour.estimatedDistanceM / 1000).toFixed(1);
+    return `Passt — etwa ${km} km, wir starten.`;
   }
-  if (tour.kind === 'meal') {
-    return `Passt — ${tour.title} steht. Los geht’s zum ersten Stop.`;
-  }
-  if (tour.kind === 'custom') {
-    return `Alles klar — ${tour.stops.length} Stopps, wir starten.`;
-  }
-  return `Alles klar — kurze Runde mit ${tour.stops.length} Stopps. Wir starten.`;
+  return `Alles klar — ${n} Stopps, wir starten.`;
 }
 
-function cleanName(name: string): string {
-  return name.replace(/\s*[·•|]\s*Wegweiser\s*$/i, '').trim();
-}
-
-function isAreaPoi(p: Poi): boolean {
-  return p.kind === 'area' || p.kind === 'legacy' || !p.kind;
-}
-
-function scoreExplore(p: Poi): number {
-  const tags = parseTagsJson(p.tags_json).join(' ').toLowerCase();
-  const cat = (p.category ?? '').toLowerCase();
-  const name = p.name.toLowerCase();
-  const blob = `${name} ${cat} ${tags}`;
-  let s = 1;
-  if (/denkmal|museum|kirche|schloss|rathaus|platz|markt|histor|wartehäuschen|bahnhof/.test(blob))
-    s += 8;
-  if (/park|natur|brücke|teich|see|aussicht/.test(blob)) s += 5;
-  if (/sport|tennis|golf|schule|kindergarten|feuerwehr|gewerbe/.test(blob))
-    s -= 2;
-  if (p.kind === 'sub') s -= 4;
-  return s;
-}
-
-function scoreMeal(p: Poi, hint: string | null): number {
-  const tags = parseTagsJson(p.tags_json).join(' ').toLowerCase();
-  const cat = (p.category ?? '').toLowerCase();
-  const name = p.name.toLowerCase();
-  const blob = `${name} ${cat} ${tags}`;
-  if (
-    /spielstadt|spielplatz|indoor.?play|trampoline|bowling|kino|museum|kirche|denkmal|parkhaus|tankstelle|büro|buero|gewerbe/.test(
-      blob,
-    )
-  ) {
-    return 0;
+function isPinnedTourEnd(stop: TourStop): boolean {
+  if (isHotelTourEnd(stop)) return true;
+  try {
+    const { useUserMemoryStore } = require('../../store/useUserMemoryStore') as {
+      useUserMemoryStore: {
+        getState: () => {
+          getConfirmedHotel: () =>
+            | { lat?: number | null; lng?: number | null }
+            | undefined;
+        };
+      };
+    };
+    const hotel = useUserMemoryStore.getState().getConfirmedHotel();
+    if (
+      hotel &&
+      typeof hotel.lat === 'number' &&
+      typeof hotel.lng === 'number' &&
+      haversineMeters(stop.lat, stop.lng, hotel.lat, hotel.lng) < 90
+    ) {
+      return true;
+    }
+  } catch {
+    /* soft */
   }
-  let s = -5;
-  if (/frühstück|fruehstueck|breakfast|brunch|café|cafe|bäck|baeck|bistro|restaurant|essen|food|imbiss|markt/.test(blob))
-    s += 12;
-  if (hint && blob.includes(hint.toLowerCase())) s += 8;
-  if (/hotel|unterkunft/.test(blob)) s += 2;
-  return s;
+  return false;
 }
 
 function pathLengthM(origin: { lat: number; lng: number }, stops: TourStop[]): number {
@@ -141,7 +143,6 @@ function pathLengthM(origin: { lat: number; lng: number }, stops: TourStop[]): n
   return Math.round(total);
 }
 
-/** Summe echter Fuß-Routen (Directions) — nicht Luftlinie. */
 async function pathLengthRoutedM(
   origin: { lat: number; lng: number },
   stops: TourStop[],
@@ -190,332 +191,55 @@ function scheduleTourDistanceEnrich(tour: MultiStopTour): void {
   });
 }
 
-function offsetMeters(
-  lat: number,
-  lng: number,
-  northM: number,
-  eastM: number,
-): { lat: number; lng: number } {
-  const dLat = northM / 111_320;
-  const cos = Math.cos((lat * Math.PI) / 180);
-  const dLng = eastM / (111_320 * Math.max(0.2, cos));
-  return { lat: lat + dLat, lng: lng + dLng };
-}
-
-/**
- * Jogging-Runde ≈ targetM als geometrischer Kreis.
- * POIs nur snappen wenn sie nah am Idealpunkt liegen — sonst kollabiert
- * die Runde in kleinen Orten (Prisdorf) auf ~400 m trotz 9 Stopps.
- */
-function buildJogLoopStops(
-  origin: { lat: number; lng: number },
-  targetM: number,
-  pois: Poi[],
-): TourStop[] {
-  const nSeg = Math.max(6, Math.min(10, Math.round(targetM / 500)));
-  let bestStops: TourStop[] = [];
-  let bestDiff = Number.POSITIVE_INFINITY;
-
-  const buildAtScale = (scale: number, allowSnap: boolean): TourStop[] => {
-    const r = (targetM * scale) / (2 * Math.PI);
-    const used = new Set<number>();
-    const stops: TourStop[] = [];
-
-    for (let i = 1; i <= nSeg; i++) {
-      const angle = (2 * Math.PI * i) / nSeg - Math.PI / 2;
-      const radiusFactor = i === nSeg ? 0.4 : 1;
-      const ideal = offsetMeters(
-        origin.lat,
-        origin.lng,
-        Math.cos(angle) * r * radiusFactor,
-        Math.sin(angle) * r * radiusFactor,
-      );
-
-      let snapped: Poi | null = null;
-      if (allowSnap) {
-        let snapD = 120;
-        for (const p of pois) {
-          if (used.has(p.id)) continue;
-          const d = haversineMeters(ideal.lat, ideal.lng, p.lat, p.lng);
-          if (d < snapD) {
-            snapD = d;
-            snapped = p;
-          }
-        }
-      }
-
-      if (snapped) {
-        used.add(snapped.id);
-        stops.push({
-          poiId: snapped.id,
-          name: cleanName(snapped.name),
-          lat: snapped.lat,
-          lng: snapped.lng,
-          done: false,
-        });
-      } else {
-        stops.push({
-          poiId: -3000 - i,
-          name: `Wegpunkt ${i}`,
-          lat: ideal.lat,
-          lng: ideal.lng,
-          done: false,
-        });
-      }
-    }
-    return stops;
-  };
-
-  for (const scale of [0.95, 1.0, 1.08, 1.18, 0.88]) {
-    for (const allowSnap of [true, false]) {
-      let stops = buildAtScale(scale, allowSnap);
-      let len = pathLengthM(origin, stops);
-
-      if (len < targetM * 0.8) {
-        stops = buildAtScale(scale * (targetM / Math.max(len, 1)), false);
-        len = pathLengthM(origin, stops);
-      }
-      if (len < targetM * 0.85) {
-        const need = targetM - len;
-        const extraR = Math.max(500, need / 3.5);
-        const extra = [
-          offsetMeters(origin.lat, origin.lng, extraR, 0),
-          offsetMeters(origin.lat, origin.lng, extraR * 0.55, extraR * 0.85),
-          offsetMeters(origin.lat, origin.lng, -extraR * 0.2, extraR),
-        ];
-        for (let j = 0; j < extra.length; j++) {
-          const pt = extra[j];
-          stops.push({
-            poiId: -4000 - j,
-            name: `Jog-Punkt ${stops.length + 1}`,
-            lat: pt.lat,
-            lng: pt.lng,
-            done: false,
-          });
-        }
-        len = pathLengthM(origin, stops);
-      }
-
-      const diff = Math.abs(len - targetM);
-      if (diff < bestDiff && stops.length >= 3) {
-        bestDiff = diff;
-        bestStops = stops;
-      }
-    }
-  }
-
-  return bestStops;
-}
-
-function orderNearestNeighbor(
-  origin: { lat: number; lng: number },
-  candidates: Poi[],
-  maxStops: number,
-): TourStop[] {
-  const remaining = [...candidates];
-  const out: TourStop[] = [];
-  let cur = origin;
-  while (remaining.length && out.length < maxStops) {
-    remaining.sort(
-      (a, b) =>
-        haversineMeters(cur.lat, cur.lng, a.lat, a.lng) -
-        haversineMeters(cur.lat, cur.lng, b.lat, b.lng),
-    );
-    const next = remaining.shift()!;
-    out.push({
-      poiId: next.id,
-      name: cleanName(next.name),
-      lat: next.lat,
-      lng: next.lng,
-      done: false,
-    });
-    cur = { lat: next.lat, lng: next.lng };
-  }
-  return out;
-}
-
-function parseDurationMin(text: string): number | null {
-  const m = text.match(/(\d+)\s*(min|minute|minuten)/iu);
-  if (!m) return null;
-  const n = Number(m[1]);
-  return Number.isFinite(n) && n > 0 ? Math.min(180, n) : null;
-}
-
-export function detectMultiStopIntent(text: string): MultiStopIntent | null {
-  const t = text.replace(/\s+/g, ' ').trim();
-  if (!t) return null;
-
-  const durationMin = parseDurationMin(t);
-
-  if (
-    JOG_RE.test(t) ||
-    (/\b\d+[.,]?\d*\s*km\b/iu.test(t) && /\b(joggen|laufen|runde)\b/iu.test(t))
-  ) {
-    const m = t.match(/(\d+[.,]?\d*)\s*km/iu);
-    const hasKm = Boolean(m);
-    const km = m
-      ? Number(m[1].replace(',', '.'))
-      : durationMin
-        ? Math.max(1, Math.round(((durationMin * 60 * 1.35) / 1000) * 10) / 10)
-        : null;
-    return {
-      kind: 'jog',
-      distanceKm:
-        km != null && Number.isFinite(km) && km > 0
-          ? Math.min(20, Math.max(1, km))
-          : null,
-      durationMin,
-      mealHint: null,
-      needsParams: !hasKm && durationMin == null,
-    };
-  }
-
-  if (CIRCUIT_SOFT_RE.test(t) && !MEAL_RE.test(t)) {
-    return {
-      kind: 'jog',
-      distanceKm: null,
-      durationMin,
-      mealHint: null,
-      needsParams: true,
-    };
-  }
-
-  if (MEAL_RE.test(t)) {
-    let mealHint: string | null = null;
-    if (/frühstück|fruehstueck|breakfast|brunch/i.test(t)) mealHint = 'frühstück';
-    else if (/mittag/i.test(t)) mealHint = 'mittag';
-    else if (/abend/i.test(t)) mealHint = 'abend';
-    return {
-      kind: 'meal',
-      distanceKm: null,
-      durationMin,
-      mealHint,
-      needsParams: false,
-    };
-  }
-
-  if (EXPLORE_RE.test(t)) {
-    return {
-      kind: 'explore',
-      distanceKm: null,
-      durationMin,
-      mealHint: null,
-      needsParams: false,
-    };
-  }
-
-  return null;
-}
-
-export async function planMultiStopTour(
-  intent: MultiStopIntent,
-  origin: { lat: number; lng: number },
-): Promise<MultiStopTour | null> {
-  if (intent.needsParams && intent.kind === 'jog' && intent.distanceKm == null) {
-    return null;
-  }
-
-  const all = (await getAllPois()).filter(
-    (p) =>
-      isAreaPoi(p) &&
-      Number.isFinite(p.lat) &&
-      Number.isFinite(p.lng) &&
-      haversineMeters(origin.lat, origin.lng, p.lat, p.lng) < 12_000,
-  );
-  if (!all.length && intent.kind !== 'jog') return null;
-
-  if (intent.kind === 'jog') {
-    const targetM = Math.round((intent.distanceKm ?? 4) * 1000);
-    const kmLabel = (intent.distanceKm ?? 4).toFixed(
-      Number.isInteger(intent.distanceKm ?? 4) ? 0 : 1,
-    );
-    const stops = buildJogLoopStops(origin, targetM, all);
-    if (!stops.length) return null;
-    const estimatedDistanceM = pathLengthM(origin, stops);
-    return {
-      kind: 'jog',
-      title: `Joggen · ~${kmLabel} km`,
-      targetDistanceM: targetM,
-      targetDurationMin: intent.durationMin,
-      estimatedDistanceM,
-      stops,
-      currentIndex: 0,
-    };
-  }
-
-  if (intent.kind === 'meal') {
-    const ranked = all
-      .map((p) => ({ p, s: scoreMeal(p, intent.mealHint) }))
-      .filter((x) => x.s > 0)
-      .sort((a, b) => {
-        if (b.s !== a.s) return b.s - a.s;
-        return (
-          haversineMeters(origin.lat, origin.lng, a.p.lat, a.p.lng) -
-          haversineMeters(origin.lat, origin.lng, b.p.lat, b.p.lng)
-        );
-      })
-      .slice(0, 4)
-      .map((x) => x.p);
-    const picks =
-      ranked.length > 0
-        ? ranked
-        : []; // Kein Fallback auf beliebige POIs (sonst Spielstadt o. Ä.)
-    if (!picks.length) return null;
-    const stops = orderNearestNeighbor(origin, picks, Math.min(3, picks.length));
-    if (!stops.length) return null;
-    const label =
-      intent.mealHint === 'frühstück'
-        ? 'Frühstücks-Route'
-        : intent.mealHint === 'mittag'
-          ? 'Mittagessen-Route'
-          : intent.mealHint === 'abend'
-            ? 'Abendessen-Route'
-            : 'Essens-Route';
-    return {
-      kind: 'meal',
-      title: label,
-      targetDistanceM: null,
-      targetDurationMin: intent.durationMin,
-      estimatedDistanceM: pathLengthM(origin, stops),
-      stops,
-      currentIndex: 0,
-    };
-  }
-
-  const ranked = all
-    .map((p) => ({ p, s: scoreExplore(p) }))
-    .filter((x) => x.s >= 3)
-    .sort((a, b) => b.s - a.s)
-    .slice(0, 8)
-    .map((x) => x.p);
-  const picks =
-    ranked.length >= 3
-      ? ranked
-      : all.sort((a, b) => scoreExplore(b) - scoreExplore(a)).slice(0, 5);
-  const stops = orderNearestNeighbor(origin, picks, Math.min(5, picks.length));
-  if (!stops.length) return null;
-  return {
-    kind: 'explore',
-    title: 'Erkunden',
-    targetDistanceM: null,
-    targetDurationMin: intent.durationMin,
-    estimatedDistanceM: pathLengthM(origin, stops),
-    stops,
-    currentIndex: 0,
-  };
-}
-
 async function navigateToTourStop(stop: TourStop): Promise<boolean> {
   if (stop.poiId >= 0) {
     const ok = await startNavigation(stop.poiId);
-    if (ok) return true;
+    if (ok) {
+      await applyTourStopRuntime(stop);
+      return true;
+    }
   }
-  return startNavigationToCoords({
+  const ok = await startNavigationToCoords({
     name: stop.name,
     lat: stop.lat,
     lng: stop.lng,
     poiId: stop.poiId >= 0 ? stop.poiId : -1,
+    stations: stop.stations,
+    transitRide: stop.role === 'alight',
   });
+  if (ok) await applyTourStopRuntime(stop);
+  return ok;
+}
+
+async function applyTourStopRuntime(stop: TourStop): Promise<void> {
+  try {
+    const { setActiveNavStations } = await import('./navigationService');
+    if (stop.stations?.length) {
+      setActiveNavStations(stop.stations);
+    } else if (stop.role === 'walk' || stop.role === 'dest') {
+      setActiveNavStations(null);
+    }
+  } catch {
+    /* soft */
+  }
+  const cue = stop.speakOnStart?.trim();
+  if (!cue) return;
+  if (stop.role === 'alight') return;
+  try {
+    const { wasTransitGuideSpoken, noteTransitGuideSpoken } = await import(
+      './transitGuideCoach'
+    );
+    if (stop.role === 'dest' && wasTransitGuideSpoken('lastwalk')) return;
+    if (stop.role === 'transfer' && wasTransitGuideSpoken('transfer')) return;
+    if (stop.role === 'dest') noteTransitGuideSpoken('lastwalk');
+    if (stop.role === 'transfer') noteTransitGuideSpoken('transfer');
+    const { speakAssistantText } = await import('../ttsService');
+    setTimeout(() => {
+      void speakAssistantText(cue).catch(() => {});
+    }, 900);
+  } catch {
+    /* soft */
+  }
 }
 
 function recomputeTourDistance(tour: MultiStopTour): number {
@@ -530,6 +254,7 @@ function recomputeTourDistance(tour: MultiStopTour): number {
 
 export async function startMultiStopTour(
   tour: MultiStopTour,
+  opts?: { startNav?: boolean },
 ): Promise<{ ok: boolean; reply: string }> {
   useFinnusStore.getState().setMultiStopTour(tour);
   scheduleTourDistanceEnrich(tour);
@@ -537,6 +262,10 @@ export async function startMultiStopTour(
   if (!stop) {
     useFinnusStore.getState().setMultiStopTour(null);
     return { ok: false, reply: 'Ich konnte keine sinnvolle Route finden.' };
+  }
+  if (opts?.startNav === false) {
+    notifyNavRouteGeometryChanged();
+    return { ok: true, reply: formatTourReply(tour) };
   }
   const ok = await navigateToTourStop(stop);
   if (!ok) {
@@ -575,7 +304,7 @@ export async function advanceMultiStopTour(): Promise<boolean> {
     return false;
   }
 
-  const next = stops[nextIndex];
+  const next = stops[nextIndex]!;
   const nextTour = {
     ...tour,
     stops,
@@ -593,6 +322,14 @@ export async function advanceMultiStopTour(): Promise<boolean> {
 }
 
 export function clearMultiStopTour(): void {
+  try {
+    const { stopTourLiveSupervisor } = require('../../module2/tour/tourLiveSupervisor') as {
+      stopTourLiveSupervisor: () => void;
+    };
+    stopTourLiveSupervisor();
+  } catch {
+    /* soft */
+  }
   useFinnusStore.getState().setMultiStopTour(null);
 }
 
@@ -635,6 +372,128 @@ export function ensureTourFromActiveNav(final: {
   };
   useFinnusStore.getState().setMultiStopTour(tour);
   return tour;
+}
+
+/**
+ * Neuen Stopp in die offene Tour einsortieren — kürzester Weg vom Standort,
+ * nicht hinten anhängen.
+ */
+export async function addOptimizedTourStop(
+  stop: TourStop,
+  opts?: { startNow?: boolean },
+): Promise<{ tour: MultiStopTour; speechHint: string } | null> {
+  const store = useFinnusStore.getState();
+  const dest = getActiveNavDestination();
+  let tour = store.multiStopTour;
+  if (!tour?.stops?.length && dest) {
+    tour = ensureTourFromActiveNav({
+      name: dest.name,
+      lat: dest.lat,
+      lng: dest.lng,
+      poiId: dest.poiId,
+    });
+  }
+  if (!tour) {
+    tour = {
+      kind: 'custom',
+      title: 'Route',
+      targetDistanceM: null,
+      targetDurationMin: null,
+      estimatedDistanceM: 0,
+      stops: [],
+      currentIndex: 0,
+    };
+  }
+
+  const incoming: TourStop = { ...stop, done: false };
+  const donePart = tour.stops
+    .slice(0, tour.currentIndex)
+    .map((s) => ({ ...s, done: true as const }));
+  const upcoming = tour.stops
+    .slice(tour.currentIndex)
+    .filter((s) => !s.done)
+    .filter((s) => !sameStop(s, incoming));
+
+  const origin = {
+    lat: store.lastGpsLat ?? dest?.lat ?? incoming.lat,
+    lng: store.lastGpsLng ?? dest?.lng ?? incoming.lng,
+  };
+  const ordered = orderStopsEfficiently(origin, [...upcoming, incoming], {
+    pinLast: isPinnedTourEnd,
+  });
+  const currentIndex = donePart.length;
+  const next: MultiStopTour = {
+    ...tour,
+    kind:
+      tour.kind === 'jog' || tour.kind === 'explore' || tour.kind === 'meal'
+        ? tour.kind
+        : 'custom',
+    title: tour.stops.length <= 1 ? 'Tour' : tour.title,
+    stops: [...donePart, ...ordered],
+    currentIndex,
+    estimatedDistanceM: recomputeTourDistance({
+      ...tour,
+      stops: [...donePart, ...ordered],
+      currentIndex,
+    }),
+  };
+  store.setMultiStopTour(next);
+  store.setStopQueueVisible(true);
+  notifyNavRouteGeometryChanged();
+  try {
+    const { ensureTourAheadRoutes } = require('./tourAheadRouteCache') as {
+      ensureTourAheadRoutes: (
+        s: Array<{ lat: number; lng: number; role?: string | null }>,
+      ) => void;
+    };
+    const originPt = {
+      lat: origin.lat,
+      lng: origin.lng,
+      role: 'walk' as const,
+    };
+    ensureTourAheadRoutes([
+      originPt,
+      ...ordered.map((s) => ({ lat: s.lat, lng: s.lng, role: s.role ?? 'walk' })),
+    ]);
+  } catch {
+    /* soft */
+  }
+
+  const focus = ordered[0];
+  const startNow = opts?.startNow !== false;
+  const destChanged =
+    focus &&
+    dest &&
+    !sameStop(
+      {
+        poiId: dest.poiId,
+        name: dest.name,
+        lat: dest.lat,
+        lng: dest.lng,
+        done: false,
+      },
+      focus,
+    );
+  if (startNow && focus && (!dest || destChanged)) {
+    await navigateToTourStop(focus);
+    markNavOpeningSpoken();
+  } else {
+    // Gleicher erster Stopp: Tour/Ahead trotzdem neu auf die Karte.
+    notifyNavRouteGeometryChanged();
+  }
+
+  try {
+    useFinnusStore.getState().setNavRouteLoading(false);
+    useFinnusStore.getState().setIsGenerating(false);
+  } catch {
+    /* soft */
+  }
+
+  const speechHint =
+    ordered.length <= 1
+      ? `${incoming.name} ist jetzt mit auf der Route.`
+      : `${incoming.name} ist einsortiert — ${ordered.length} Stopps in der besten Reihenfolge.`;
+  return { tour: next, speechHint };
 }
 
 export async function insertTourStop(
@@ -682,7 +541,7 @@ export async function insertTourStop(
   store.setMultiStopTour(next);
 
   if (opts?.startNow !== false && position === 'front') {
-    await navigateToTourStop(stops[currentIndex]);
+    await navigateToTourStop(stops[currentIndex]!);
     markNavOpeningSpoken();
   }
   return next;
@@ -717,14 +576,12 @@ function isOnWayTo(
   if (detour > Math.max(ON_ROUTE_DETOUR_M, direct * ON_ROUTE_DETOUR_FRAC)) {
     return false;
   }
-  // Via sollte nicht klar hinter dem Spontan-Ziel liegen
   const toVia = haversineMeters(user.lat, user.lng, via.lat, via.lng);
   return toVia <= direct + 40;
 }
 
 /**
- * Spontan-Ziel (Aldi/Durst) in laufende Tour einweben — Rest bleibt.
- * On-route Stops vor dem Spontan-Ziel; sonst Spontan oben (high), dann bisherige Queue.
+ * Spontan-Ziel in laufende Tour einweben — Rest bleibt.
  */
 export async function weaveSpontaneousStop(
   stop: TourStop,
@@ -742,7 +599,6 @@ export async function weaveSpontaneousStop(
     !Number.isFinite(userLat) ||
     !Number.isFinite(userLng)
   ) {
-    // Ohne GPS: klassisch vorne einschieben
     const inserted = await insertTourStop(
       { ...stop, priority: stop.priority ?? 'high', done: false },
       { position: 'front', startNow: opts?.startNow !== false },
@@ -813,12 +669,26 @@ export async function weaveSpontaneousStop(
   }
 
   let speechHint: string;
-  if (onRoute.length > 0) {
+  let underway = false;
+  try {
+    const { getSmoothedSpeedMs } = require('./transportMode') as {
+      getSmoothedSpeedMs: () => number | null;
+    };
+    const speedMs = getSmoothedSpeedMs();
+    underway =
+      typeof speedMs === 'number' && Number.isFinite(speedMs) && speedMs >= 0.45;
+  } catch {
+    underway = false;
+  }
+  if (onRoute.length > 0 && underway) {
     const viaNames = onRoute.map((s) => s.name).slice(0, 2).join(' und ');
     speechHint =
       onRoute.length === 1
         ? `${viaNames} liegt auf dem Weg — den haken wir kurz ab, dann ${spontaneous.name}. Tour bleibt.`
         : `Auf dem Weg liegen noch ${viaNames} — danach ${spontaneous.name}. Der Rest der Tour bleibt.`;
+  } else if (onRoute.length > 0) {
+    // Noch nicht losgelaufen: Queue umsortieren, aber nicht „auf dem Weg“ labern
+    speechHint = `${spontaneous.name} ist als Nächstes geplant. Die Tour bleibt — unterwegs sag ich Bescheid, was dazwischen liegt.`;
   } else {
     const p = spontaneous.priority ?? 'high';
     speechHint =
@@ -830,14 +700,12 @@ export async function weaveSpontaneousStop(
   return { tour: next, speechHint };
 }
 
-/** Ob eine laufende Tour Spontan-Ziele einweben soll (statt alles zu löschen). */
 export function hasActiveTourQueue(): boolean {
   const tour = useFinnusStore.getState().multiStopTour;
   if (!tour?.stops?.length) return false;
   return tour.stops.slice(tour.currentIndex).some((s) => !s.done);
 }
 
-/** Lockerer Reminder-Text wenn Stop bald dran / leave-by nah. */
 export function softStopReminderLine(stop: TourStop): string | null {
   const mins = stop.remindMinBefore;
   if (mins == null || mins <= 0) return null;
@@ -880,6 +748,55 @@ export function removeTourStopAt(index: number): MultiStopTour | null {
   return next;
 }
 
+/**
+ * Offenen Tour-Stop streichen. War es das aktuelle Ziel, sofort zum Nächsten
+ * navigieren und die Rest-Route neu berechnen — Tour bleibt.
+ */
+export async function skipUpcomingTourStop(opts: {
+  upcomingIndex: number;
+}): Promise<{ ok: boolean; cleared: boolean; nextName?: string }> {
+  const store = useFinnusStore.getState();
+  const tour = store.multiStopTour;
+  if (!tour?.stops.length) return { ok: false, cleared: false };
+
+  const upcomingAbs: number[] = [];
+  tour.stops.forEach((s, i) => {
+    if (i >= tour.currentIndex && !s.done) upcomingAbs.push(i);
+  });
+  const abs = upcomingAbs[opts.upcomingIndex];
+  if (abs == null) return { ok: false, cleared: false };
+
+  const wasCurrent = abs === tour.currentIndex;
+  const next = removeTourStopAt(abs);
+  if (!next?.stops.length) {
+    return { ok: true, cleared: true };
+  }
+  const remaining = next.stops
+    .slice(next.currentIndex)
+    .filter((s) => !s.done);
+  if (!remaining.length) {
+    store.setMultiStopTour(null);
+    return { ok: true, cleared: true };
+  }
+
+  notifyNavRouteGeometryChanged();
+  scheduleTourDistanceEnrich(next);
+  try {
+    const { ensureTourAheadRoutes } = require('./tourAheadRouteCache') as {
+      ensureTourAheadRoutes: (s: Array<{ lat: number; lng: number }>) => void;
+    };
+    ensureTourAheadRoutes(remaining.map((s) => ({ lat: s.lat, lng: s.lng })));
+  } catch {
+    /* soft */
+  }
+
+  if (wasCurrent) {
+    await navigateToTourStop(remaining[0]!);
+    markNavOpeningSpoken();
+  }
+  return { ok: true, cleared: false, nextName: remaining[0]?.name };
+}
+
 export function reorderTourStops(
   fromIndex: number,
   toIndex: number,
@@ -899,7 +816,7 @@ export function reorderTourStops(
 
   const stops = [...tour.stops];
   const [moved] = stops.splice(fromIndex, 1);
-  stops.splice(toIndex, 0, moved);
+  stops.splice(toIndex, 0, moved!);
 
   const wasActive = tour.stops[tour.currentIndex];
   let currentIndex = stops.findIndex(
@@ -924,14 +841,26 @@ export function reorderTourStops(
     }),
   };
   store.setMultiStopTour(next);
+  notifyNavRouteGeometryChanged();
   return next;
+}
+
+/** Offene Tour-Stopps (ab currentIndex) per Drag umsortieren. */
+export function reorderUpcomingTourStops(
+  fromUpcoming: number,
+  toUpcoming: number,
+): MultiStopTour | null {
+  const tour = useFinnusStore.getState().multiStopTour;
+  if (!tour) return null;
+  const base = tour.currentIndex;
+  return reorderTourStops(base + fromUpcoming, base + toUpcoming);
 }
 
 export async function navigateToTourStopAt(index: number): Promise<boolean> {
   const store = useFinnusStore.getState();
   const tour = store.multiStopTour;
   if (!tour || index < 0 || index >= tour.stops.length) return false;
-  const stop = tour.stops[index];
+  const stop = tour.stops[index]!;
   if (stop.done) return false;
   store.setMultiStopTour({ ...tour, currentIndex: index });
   return navigateToTourStop(stop);

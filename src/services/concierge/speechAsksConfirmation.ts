@@ -1,5 +1,5 @@
 /**
- * Erkennt, ob Findus um Zustimmung bittet (→ „Ja“-Button).
+ * Erkennt, ob Yorro um Zustimmung bittet (→ „Ja“-Button).
  */
 
 import { isPlaylistQuickAction } from '../playlistService';
@@ -66,5 +66,22 @@ export function shouldShowConfirmationButton(
   ) {
     return false;
   }
+  // Kein totes „Ja, bitte“ ohne ausführbares Ziel (sonst leerer Chip)
+  const hasActionable =
+    actions.some(
+      (a) =>
+        a.type === 'START_NAVIGATION' ||
+        a.type === 'SET_WAKE_ALARM' ||
+        a.type === 'SET_TIMER' ||
+        a.type === 'DIAL_PHONE' ||
+        a.type === 'BOOK_STAY22' ||
+        a.type === 'BOOK_UBER' ||
+        a.type === 'OPEN_GYG_WIDGET' ||
+        a.type === 'CONFIRM_API_RESERVATION' ||
+        a.type === 'SEND_RESERVATION_EMAIL' ||
+        a.type === 'TRIGGER_AI_CALL' ||
+        (a.type === 'OPEN_URL' && Boolean(a.payload.url?.trim())),
+    );
+  if (!hasActionable) return false;
   return true;
 }

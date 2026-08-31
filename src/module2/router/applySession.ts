@@ -17,11 +17,13 @@ export function applyManagerSession(opts: {
   userText: string;
   intent?: string | null;
   cityHint?: string | null;
+  cityKey?: string | null;
 }): TopicRouteDecision {
   return routeConversationTopic({
     userText: opts.userText,
     intent: opts.intent ?? opts.analysis.jobHint,
     subject: opts.analysis.subject,
     cityHint: opts.cityHint,
+    cityKey: opts.cityKey,
   });
 }

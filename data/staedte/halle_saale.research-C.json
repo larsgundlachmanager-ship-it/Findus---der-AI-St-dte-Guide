@@ -1,0 +1,1344 @@
+{
+  "city_history_addons": [
+    "Halle ist 806 als „Halla“ chronistisch belegt. Salz aus natürlichen Solequellen prägte Wirtschaft, Recht, Handwerk und Stadtgestalt über Jahrhunderte; die Stadt verweist auf mehr als 5.000 Jahre nachweisbarer Salzgewinnung.",
+    "Die Saale teilt sich im Stadtgebiet in mehrere Arme und bildet eine breite Auenlandschaft mit Inseln. Peißnitz, Salineinsel, Riveufer und das Durchbruchstal bei Giebichenstein machen den Fluss zu einem zentralen Landschafts- und Geschichtsraum.",
+    "Die historische Altstadt blieb im Zweiten Weltkrieg fast unversehrt. Ihr mittelalterlicher Straßengrundriss und mehr als 500 Baudenkmale bilden einen der größten Denkmalbereiche Deutschlands."
+  ],
+  "notes": [
+    "Nur verifizierte Fakten; Sagen sind ausdrücklich als Sage markiert.",
+    "Öffnungszeiten, Eintritt, Führungen, Spielpläne, Zugverkehr, saisonale Angebote und aktuelle Baustellen ausschließlich LIVE prüfen.",
+    "Keine Dialogskripte. Orientierungstexte beschreiben sichtbare Merkmale und räumliche Zusammenhänge.",
+    "Primärquellen: halle.de, Stadtmuseum Halle, Martin-Luther-Universität Halle-Wittenberg, Landesamt für Denkmalpflege und Archäologie Sachsen-Anhalt, Bühnen Halle, Bergzoo Halle und Betreiberseiten."
+  ],
+  "spots": [
+    {
+      "id": "halle_saale_oberburg_giebichenstein",
+      "name": "Oberburg Giebichenstein",
+      "lat": 51.5035431,
+      "lng": 11.9537469,
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Ruine einer im 12. und 13. Jahrhundert ausgebauten erzbischöflichen Höhenburg auf dem Porphyrfelsen über der Saale. Giebichenstein ist 961 erstmals urkundlich genannt; die Oberburg gehört zur Straße der Romanik.",
+      "deep_data_pool": [
+        {
+          "text": "Historie: König Otto I. übertrug 961 den Gau Neletici mit dem Burgort Giebichenstein an das Magdeburger Moritzkloster. Die frühe Burg lag wahrscheinlich im Bereich des heutigen Amtsgartens; von ihr sind keine aufgehenden Reste erhalten.",
+          "tags": ["geschichte", "mittelalter", "quelle_stadtmuseum"]
+        },
+        {
+          "text": "Die heute sichtbare Oberburg entstand als repräsentativer Palast der Magdeburger Erzbischöfe im 12. und 13. Jahrhundert. Auf dem engen Plateau standen Torbau, Wohnturm, Burgkirche, Palas und weitere Gebäude; ein klassischer Bergfried fehlte.",
+          "tags": ["architektur", "geschichte", "quelle_lda"]
+        },
+        {
+          "text": "Seit 1382 war Giebichenstein Hauptresidenz der Magdeburger Erzbischöfe. Mit dem Bau der Moritzburg innerhalb der Stadtmauern verlor die Höhenburg ihre Residenzfunktion; die Unterburg blieb Wirtschafts-, Zoll- und Verwaltungssitz.",
+          "tags": ["geschichte", "erzbistum"]
+        },
+        {
+          "text": "1636 zerstörte ein Brand, der im Malzhaus der Unterburg ausbrach, die Gebäude der Oberburg. Nach dem Dreißigjährigen Krieg verwendeten Bewohner Steine der Ruine zum Wiederaufbau ihrer Häuser, wodurch große Teile der aufgehenden Bauten verschwanden.",
+          "tags": ["geschichte", "dreissigjaehriger_krieg"]
+        },
+        {
+          "text": "Archäologie: Für Halles damalige Tausendjahrfeier wurden 1961 die Grundmauern der Oberburg umfassend freigelegt. Die Grabungen machten den Grundriss der mittelalterlichen Anlage lesbar; anschließend entstand ein Freilichtmuseum.",
+          "tags": ["archaeologie", "stadtmuseum"]
+        },
+        {
+          "text": "Visuell: Die Ruine sitzt auf einem steil zur Saale abfallenden Porphyrsporn. Erkennbar sind Mauerzüge, Torbereiche und freigelegte Fundamente; vom Plateau öffnet sich der Blick auf Saale, Kröllwitz, Giebichensteinbrücke und das bewaldete Ufer.",
+          "tags": ["visuell", "wegweiser", "aussicht"]
+        },
+        {
+          "text": "Sage: Ludwig der Springer soll aus Kerkerhaft durch einen Sprung in die Saale entkommen sein. Die Erzählung gehört fest zur lokalen Überlieferung, doch für eine Haft Ludwigs auf Giebichenstein und den Sprung gibt es keine historischen Belege.",
+          "tags": ["sage", "faktencheck"]
+        },
+        {
+          "text": "Giebichenstein diente im Hochmittelalter tatsächlich als Haftort für hochrangige Adlige. Belegt genannt werden unter anderem Heinrich von Schweinfurt, Ezzo beziehungsweise Ezelin von Este, Ernst von Schwaben und Gottfried von Lothringen.",
+          "tags": ["geschichte", "staatsgefaengnis"]
+        },
+        {
+          "text": "Romantik: Burgruine, Felsen und Saaletal wurden im 18. und 19. Jahrhundert zu einer idealen romantischen Landschaft. Joseph von Eichendorff verewigte den Giebichenstein im 1840 entstandenen Gedicht „Bei Halle“.",
+          "tags": ["romantik", "literatur", "quer"]
+        },
+        {
+          "text": "Quer: Amtsgarten, Reichardts Garten, Klausberge, Giebichensteinbrücke und Riveufer bilden unmittelbar um die Burg ein zusammenhängendes Kultur- und Landschaftsensemble des Giebichensteiner Dichterparadieses.",
+          "tags": ["quer", "umgebung"]
+        },
+        {
+          "text": "Die Stadt Halle erwarb Oberburg und Amtsgarten 1906 von der preußischen Domänenverwaltung und öffnete das Gelände für die Öffentlichkeit. Heute betreut das Stadtmuseum Halle die Oberburg als musealen Standort und Veranstaltungsort.",
+          "tags": ["geschichte", "heute", "stadtmuseum"]
+        },
+        {
+          "text": "LIVE: Saisonöffnung, Eintritt, Führungen, Veranstaltungen und mögliche Sperrungen auf der Website des Stadtmuseums Halle prüfen. Die Ruine ist kein jederzeit frei zugänglicher Aussichtspunkt.",
+          "tags": ["live_hint", "ephemeral", "oeffnung"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Ist Ludwig der Springer wirklich von der Burg in die Saale gesprungen?",
+          "a": "Das ist eine berühmte Sage. Historische Belege für seine Haft auf Giebichenstein oder den Sprung fehlen."
+        },
+        {
+          "q": "Woran erkenne ich die Oberburg?",
+          "a": "An den freigelegten Mauerzügen auf dem steilen Porphyrfelsen direkt über Saale und Giebichensteinbrücke."
+        }
+      ]
+    },
+    {
+      "id": "halle_saale_giebichensteinbrucke",
+      "name": "Giebichensteinbrücke",
+      "lat": 51.5040594,
+      "lng": 11.9522576,
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "1926 bis 1928 errichtete Stahlbetonbogenbrücke zwischen Giebichenstein und Kröllwitz. Kuh und Pferd von Gerhard Marcks markieren den Hauptbogen und verbinden Kunst, Technik und Stadtgeschichte.",
+      "deep_data_pool": [
+        {
+          "text": "Die heutige Giebichensteinbrücke entstand 1926 bis 1928 und wurde zu Pfingsten 1928 eingeweiht. Die 261 Meter lange Konstruktion folgte den Prinzipien des Neuen Bauens: Beton, sachliche Formen und Einfügung in das Saaletal.",
+          "tags": ["geschichte", "architektur", "neues_bauen"]
+        },
+        {
+          "text": "Die massive Stahlbetonbrücke besitzt vier unterschiedlich große Segmentbögen. Der Hauptbogen überspannt bei normalen Wasserständen mit 60 Metern lichter Weite allein die Saale.",
+          "tags": ["technik", "architektur"]
+        },
+        {
+          "text": "Paul Thiersch, Architekt und Direktor der Städtischen Kunstgewerbeschule, prägte die Gestaltung. Der Bildhauer und spätere Burg-Direktor Gerhard Marcks entwarf die monumentalen Tierplastiken an den Enden des Hauptbogens.",
+          "tags": ["kunst", "personen", "burg_giebichenstein"]
+        },
+        {
+          "text": "Das Pferd blickt zur Stadtseite und steht für das industrielle, moderne Halle. Die Kuh wendet sich nach Kröllwitz und verweist auf dessen damaligen ländlich-agrarischen Charakter. Beide Figuren dienen zugleich als Eisbrecher.",
+          "tags": ["kunst", "symbolik", "visuell"]
+        },
+        {
+          "text": "Visuell: Der flache große Betonbogen liegt unmittelbar unter der Oberburg. Auf den kräftigen Pfeilersockeln stehen die gedrungenen Betontiere; ihre zum jeweiligen Ufer geneigten Köpfe machen die Zuordnung von Stadt und Land ablesbar.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Am 14. April 1945 wurde die Giebichensteinbrücke zusammen mit acht weiteren halleschen Saalebrücken von der Wehrmacht gesprengt. Der Wiederaufbau gehört zur Nachkriegsgeschichte der städtischen Flussquerungen.",
+          "tags": ["geschichte", "zweiter_weltkrieg"]
+        },
+        {
+          "text": "Die Brücke verbindet Kröllwitz am Westufer mit Giebichenstein am Ostufer. Sie trägt Straßenbahn-, Straßen-, Rad- und Fußverkehr und ist eine der leistungsfähigsten Saalequerungen im Norden Halles.",
+          "tags": ["verkehr", "orientierung"]
+        },
+        {
+          "text": "Quer: Direkt östlich steigen Felsen, Oberburg und Amtsgarten auf; südlich beginnt das Riveufer. Die Brücke ist daher ein guter Lesepunkt für Halles Wechsel zwischen Flusslandschaft, Romantik und moderner Infrastruktur.",
+          "tags": ["quer", "landschaft"]
+        },
+        {
+          "text": "LIVE: Verkehrsführung, Baustellen, Straßenbahnlinien und mögliche Sperrungen aktuell bei Stadt und HAVAG prüfen. Historische Fakten zur Brücke bleiben davon unberührt.",
+          "tags": ["live_hint", "ephemeral", "verkehr"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Warum stehen Kuh und Pferd auf der Brücke?",
+          "a": "Gerhard Marcks symbolisierte damit das städtisch-industrielle Halle und das damals ländliche Kröllwitz; zugleich wirken die Sockel als Eisbrecher."
+        }
+      ]
+    },
+    {
+      "id": "halle_saale_zoologischer_garten_halle_bergzoo",
+      "name": "Zoologischer Garten Halle (Bergzoo)",
+      "lat": 51.5068203,
+      "lng": 11.9651291,
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "1901 eröffneter Zoo auf dem Reilsberg. Die Hanglage, historische Bergtiergehege, Freiflugvoliere und Aussichtspunkte verbinden Tierhaltung mit einem älteren Landschaftspark.",
+      "deep_data_pool": [
+        {
+          "text": "Der Zoologische Garten Halle öffnete am 23. Mai 1901 auf dem Reilsberg. Bei der Eröffnung wurden 196 Tiere in 94 Arten gezeigt; die besondere Topografie führte zum bis heute gebräuchlichen Namen Bergzoo.",
+          "tags": ["geschichte", "gruendung"]
+        },
+        {
+          "text": "Initiator Eduard Keerl schlug dem Zoologen Gustav Brandes den Reilsberg als Zoogelände vor. 1900 entstand der Verein „Thiergarten“, 1901 folgte eine Aktiengesellschaft, die Grundstücke erwarb und den Zoo in kurzer Bauzeit eröffnete.",
+          "tags": ["geschichte", "personen"]
+        },
+        {
+          "text": "Der Reilsberg war schon vor dem Zoo gestaltet. Der Mediziner Johann Christian Reil ließ das Gelände Anfang des 19. Jahrhunderts als klassizistischen Landschaftspark nach Wörlitzer Vorbild entwickeln; seine Grabstätte liegt nahe dem Aussichtsturm.",
+          "tags": ["geschichte", "landschaftspark", "reil"]
+        },
+        {
+          "text": "Die Anlage umschließt den rund 130 Meter hohen Berg in mehreren Ebenen. Serpentinen verbinden Gehege, historische Bauten und Aussichtspunkte; dadurch wirkt das vergleichsweise kompakte Areal räumlich vielfältig.",
+          "tags": ["topografie", "orientierung", "visuell"]
+        },
+        {
+          "text": "Einige Bergtiergehege gehen auf die Gründerzeit zurück. Aus den 1920er und 1930er Jahren sind unter anderem das frühere Antilopenhaus und das sogenannte Rinderdreieck in weitgehend ursprünglicher Form erhalten.",
+          "tags": ["architektur", "zoogeschichte"]
+        },
+        {
+          "text": "Die 1963 errichtete Freiflugvoliere auf der Bergspitze ist etwa 24 Meter hoch und bildet zusammen mit dem Aussichtsturm ein weithin sichtbares Wahrzeichen des Zoos.",
+          "tags": ["architektur", "visuell", "wahrzeichen"]
+        },
+        {
+          "text": "Die historische Bezeichnung Bergzoo bezieht sich nicht nur auf die Lage. Ältere Zoo-Konzepte setzten einen Schwerpunkt bei Gebirgstieren; heutige Bestände und Schwerpunkte können sich durch zoologische Planung verändern.",
+          "tags": ["zoologie", "faktencheck"]
+        },
+        {
+          "text": "Visuell: Der Eingang an der Reilstraße führt in ein ansteigendes, baumreiches Gelände. Oben markieren Aussichtsturm und große Netzvoliere die Silhouette; zwischen den Ebenen öffnen sich Blicke über Halle und das Saaletal.",
+          "tags": ["visuell", "wegweiser", "aussicht"]
+        },
+        {
+          "text": "Die Zooanlage steht als Sachgesamtheit unter Denkmalschutz. Ihr Wert beruht auf dem Zusammenspiel von Landschaftsgestaltung, historischen Tieranlagen, Bauten und der besonderen Lage auf dem Reilsberg.",
+          "tags": ["denkmal", "landschaft"]
+        },
+        {
+          "text": "Quer: Unterhalb des Reilsbergs liegen Giebichenstein, Reichardts Garten und das Saaledurchbruchstal. Der Bergzoo gehört damit zu einem größeren nördlichen Ausflugs- und Landschaftsraum.",
+          "tags": ["quer", "umgebung"]
+        },
+        {
+          "text": "Aktuelle Tierzahlen, Artenlisten und Gehegebelegung sind nicht dauerhaft. Sie dürfen nur aus der tagesaktuellen Zooinformation übernommen werden, nicht als unveränderliche Pack-Fakten.",
+          "tags": ["live_hint", "ephemeral", "tierbestand"]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Tierhäuser, Fütterungen, Veranstaltungen, barrierearme Wege und mögliche Baustellen direkt beim Bergzoo Halle prüfen.",
+          "tags": ["live_hint", "ephemeral", "oeffnung"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Warum heißt der Zoo Bergzoo?",
+          "a": "Er liegt rund um den Reilsberg und wurde historisch auch mit einem Schwerpunkt auf Gebirgstieren entwickelt."
+        },
+        {
+          "q": "Woran erkenne ich den höchsten Bereich?",
+          "a": "An Aussichtsturm und großer Freiflugvoliere auf der Bergspitze."
+        }
+      ]
+    },
+    {
+      "id": "halle_saale_botanischer_garten",
+      "name": "Botanischer Garten",
+      "lat": 51.4888057,
+      "lng": 11.9611736,
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "1698 gegründeter Botanischer Garten der Martin-Luther-Universität, erster Medizinalpflanzengarten Preußens und bis heute am Gründungsort. Historische Sternwarte, Freilandanlagen und Gewächshäuser prägen das Ensemble.",
+      "deep_data_pool": [
+        {
+          "text": "Kurfürst Friedrich III. schenkte der 1694 gegründeten halleschen Universität 1698 einen Teil seines Kräutergartens. Die Medizinische Fakultät richtete dort einen Hortus medicus für Heilpflanzen und die Ausbildung von Medizinstudenten ein.",
+          "tags": ["geschichte", "universitaet", "medizin"]
+        },
+        {
+          "text": "Der Garten gilt als erster Medizinalpflanzengarten Preußens und befindet sich, anders als viele andere botanische Gärten, noch am ursprünglichen Gründungsort.",
+          "tags": ["geschichte", "besonderheit"]
+        },
+        {
+          "text": "1787 erweiterte Universitätskanzler Karl Christoph von Hoffmann die Anlage auf ihre heutige Größenordnung und verband wissenschaftliche Pflanzensammlungen mit Gestaltungsideen des englischen Landschaftsgartens.",
+          "tags": ["geschichte", "gartenkunst"]
+        },
+        {
+          "text": "Die klassizistische Sternwarte wurde 1788 nach Entwürfen Carl Gotthard Langhans' errichtet. Ihre vier Balkone sind nach den Himmelsrichtungen orientiert; der Bau ist heute ein Wahrzeichen des Gartens.",
+          "tags": ["architektur", "astronomie", "langhans"]
+        },
+        {
+          "text": "Um 1800 wurden bereits rund 3.000 Pflanzenarten kultiviert. Unter Kurt Sprengel und Dietrich von Schlechtendal stärkten wissenschaftliche Publikationen und internationaler Samentausch die Bedeutung der Sammlung.",
+          "tags": ["wissenschaft", "botanik", "geschichte"]
+        },
+        {
+          "text": "Freiland und Gewächshäuser dienen Forschung, Lehre und öffentlicher Bildung. Die Sammlungen sind systematisch, ökologisch und pflanzengeografisch gegliedert; konkrete Bestandszahlen können sich verändern.",
+          "tags": ["wissenschaft", "heute"]
+        },
+        {
+          "text": "Visuell: Hinter Mauern und Toren liegen systematische Beete, alte Gehölze und Gewächshausgruppen. Die oktogonale Sternwarte mit klassizistischem Portal setzt einen klaren architektonischen Akzent.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Zu den überlieferten Glashausbereichen zählen Tropen-, Wasserpflanzen-, Sukkulenten- und weitere Spezialsammlungen. Welche Häuser geöffnet und welche Pflanzen aktuell zu sehen sind, ist saison- und betriebsabhängig.",
+          "tags": ["sammlung", "live_hint"]
+        },
+        {
+          "text": "Quer: Der Garten gehört wie Amtsgarten und Reichardts Garten zum Netzwerk „Gartenträume – Historische Parks in Sachsen-Anhalt“ und verbindet universitäre Wissenschaft mit hallescher Gartenkultur.",
+          "tags": ["quer", "gartentraeume"]
+        },
+        {
+          "text": "LIVE: Saisonzeiten, Eintritt, geöffnete Gewächshäuser, Führungen, Blühhöhepunkte und kurzfristige Schließungen auf der Website der Universität prüfen.",
+          "tags": ["live_hint", "ephemeral", "oeffnung"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Wie alt ist der Botanische Garten?",
+          "a": "Er wurde 1698 als Medizinalpflanzengarten der halleschen Universität gegründet."
+        }
+      ]
+    },
+    {
+      "id": "halle_saale_peissnitz",
+      "name": "Peißnitz",
+      "lat": 51.4896668,
+      "lng": 11.9499451,
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Große Saaleinsel und traditionsreiches Naherholungsgebiet. Landwirtschaft, Landschaftspark, Peißnitzhaus, Parkeisenbahn und Auenräume erzählen von fünf Jahrhunderten städtischer Nutzung.",
+      "deep_data_pool": [
+        {
+          "text": "Die Peißnitz ist eine Flussinsel zwischen schiffbarer Saale und Wilder Saale. Ihr Name wird wahrscheinlich vom slawischen „pusteniza“ für Einöde oder Wildnis abgeleitet.",
+          "tags": ["geografie", "name"]
+        },
+        {
+          "text": "Im Mittelalter gehörte die Insel zum Kloster Neuwerk. Mit der Reformation gelangte sie 1540 zusammen mit dem Gut Gimritz an die Stadt Halle und wurde zunächst vor allem landwirtschaftlich genutzt.",
+          "tags": ["geschichte", "mittelalter"]
+        },
+        {
+          "text": "1821 kaufte Amtmann Ludwig Barthels die Peißnitz und ließ den südlichen Teil parkartig gestalten. An der Stelle des späteren Peißnitzhauses entstand ein Jagd- beziehungsweise Aufseherhof.",
+          "tags": ["geschichte", "landschaftspark"]
+        },
+        {
+          "text": "Die Stadt kaufte die Insel im späten 19. Jahrhundert zurück und baute sie zum Erholungsgebiet für die wachsende Industriestadt aus. 1893 entstand das Peißnitzhaus, 1899 verbesserte die Peißnitzbrücke den Zugang.",
+          "tags": ["geschichte", "industrialisierung"]
+        },
+        {
+          "text": "Die Parkeisenbahn wurde am 12. Juni 1960 als achte Pioniereisenbahn der DDR eröffnet. Der rund zwei Kilometer lange Rundkurs wird heute unter dem Namen Peißnitzexpress betrieben.",
+          "tags": ["geschichte", "parkeisenbahn"]
+        },
+        {
+          "text": "Visuell: Breite Wiesen, alte Baumgruppen, Flussarme und Brücken prägen die Insel. Peißnitzhaus, Parkeisenbahn und Freilichtbühne sind gebaute Orientierungspunkte innerhalb des großflächigen Grünraums.",
+          "tags": ["visuell", "wegweiser", "landschaft"]
+        },
+        {
+          "text": "Die Insel liegt in der Saaleaue und ist hochwassergeprägt. Historische und moderne Bauten mussten sich wiederholt mit Überflutungen auseinandersetzen; die Nordspitze besitzt besonderen Naturwert.",
+          "tags": ["natur", "hochwasser"]
+        },
+        {
+          "text": "Quer: Über Brücken besteht Verbindung zur Ziegelwiese, zum Weinbergcampus, zum Riveufer und zur Salineinsel. Die Peißnitz ist deshalb zugleich Inselpark und Bindeglied zwischen Altstadt, Universität und Neustadt.",
+          "tags": ["quer", "orientierung"]
+        },
+        {
+          "text": "LIVE: Fahrzeiten der Parkeisenbahn, Veranstaltungen, Hochwasserlagen, gesperrte Wege und saisonale Angebote aktuell prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Ist die Peißnitz eine echte Insel?",
+          "a": "Ja. Sie liegt zwischen der schiffbaren Saale und der Wilden Saale."
+        }
+      ]
+    },
+    {
+      "id": "halle_saale_peissnitzhaus",
+      "name": "Peißnitzhaus",
+      "lat": 51.4939774,
+      "lng": 11.9477024,
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "1893 eröffnetes, denkmalgeschütztes Gesellschafts- und Ausflugshaus auf der Peißnitzinsel. Ziegelgliederung, große Veranden, Aussichtsturm und hochwasserangepasste Fundamente prägen den Bau.",
+      "deep_data_pool": [
+        {
+          "text": "Nach dem städtischen Rückkauf der Peißnitz sollte ein repräsentatives Ausflugslokal entstehen. Das 1893 vollendete Gesellschaftshaus mit Kaffeegarten wurde am Osterwochenende eröffnet und zog sofort große Besuchermengen an.",
+          "tags": ["geschichte", "ausflugskultur"]
+        },
+        {
+          "text": "Die Quellen nennen im Planungszusammenhang Anton Kreke; das Denkmalverzeichnis beziehungsweise städtische Unterlagen führen den Entwurf Otto Rückert zu. Diese abweichende Zuschreibung sollte in einer Detailrecherche quellenkritisch behandelt werden.",
+          "tags": ["architektur", "quellenkritik"]
+        },
+        {
+          "text": "Visuell: Der mehrgeschossige Bau ist durch reiche Ziegelgliederungen, breite Veranden und einen markanten Aussichtsturm mit hohem Spitzhelm gekennzeichnet. Er steht frei in der Flusslandschaft.",
+          "tags": ["visuell", "wegweiser", "architektur"]
+        },
+        {
+          "text": "Das Haus wurde auf durchlässigen Gewölbefundamenten errichtet, weil Hochwasser auf der Insel erwartet wurde. Diese Konstruktion erlaubte Wasser zeitweise unter beziehungsweise durch den Sockelbereich zu strömen.",
+          "tags": ["technik", "hochwasser"]
+        },
+        {
+          "text": "Das schwere Saalehochwasser 2013 überflutete das Gebäude bis etwa zwei Meter Höhe und verursachte erhebliche bauliche und technische Schäden. Danach wurden umfangreiche Sicherungs- und Sanierungsarbeiten notwendig.",
+          "tags": ["geschichte", "hochwasser_2013"]
+        },
+        {
+          "text": "Zu DDR-Zeiten war das Haus als Pionierhaus ein wichtiger Freizeit- und Bildungsort. Die wechselnden Nutzungen spiegeln den Wandel der Peißnitz vom bürgerlichen Ausflugspark zum öffentlichen Freizeitareal.",
+          "tags": ["geschichte", "ddr"]
+        },
+        {
+          "text": "Quer: Rund 100 Meter nordöstlich stand ab 1978 das Raumflugplanetarium „Sigmund Jähn“. Nach den Hochwasserschäden 2013 wurde dieser Standort aufgegeben; das neue Planetarium entstand im Gasometer am Holzplatz.",
+          "tags": ["quer", "planetarium", "hochwasser"]
+        },
+        {
+          "text": "Das Peißnitzhaus ist ein Identifikationsbau der halleschen Saaleaue. Seine Rettung und schrittweise Wiederbelebung wurden maßgeblich durch bürgerschaftliches Engagement getragen.",
+          "tags": ["denkmal", "buergerengagement"]
+        },
+        {
+          "text": "LIVE: Gastronomie, Veranstaltungen, nutzbare Gebäudeteile, Führungen und der aktuelle Sanierungsstand direkt beim Peißnitzhaus prüfen.",
+          "tags": ["live_hint", "ephemeral", "oeffnung"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Warum steht das Peißnitzhaus auf besonderen Fundamenten?",
+          "a": "Der Bauplatz liegt im Überflutungsgebiet; durchlässige Gewölbefundamente sollten Hochwasser weniger Widerstand bieten."
+        }
+      ]
+    },
+    {
+      "id": "halle_saale_freilichtbuhne_peissnitz",
+      "name": "Freilichtbühne Peißnitz",
+      "lat": 51.4918216,
+      "lng": 11.9475692,
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Große Open-Air-Bühne auf der Peißnitzinsel. Ihre Geschichte reicht in die 1950er Jahre; 1993 wurde sie neu errichtet und entwickelte sich zu einem wichtigen Konzertort Mitteldeutschlands.",
+      "deep_data_pool": [
+        {
+          "text": "Die Betreiberchronik führt die Ursprünge der Freilichtbühne in die 1950er Jahre zurück. Eine weitere Quelle nennt eine Eröffnung durch den VEB Naherholung 1972; gesichert ist der Neubau der heutigen Anlage im Jahr 1993.",
+          "tags": ["geschichte", "quellenkritik"]
+        },
+        {
+          "text": "In den 1990er Jahren und bis Anfang der 2000er gehörte die Bühne zu den stark bespielten Open-Air-Orten Ostdeutschlands. Auftritte internationaler und deutscher Künstler begründeten ihren überregionalen Ruf.",
+          "tags": ["musikgeschichte", "veranstaltungsort"]
+        },
+        {
+          "text": "Die Lage mitten auf der Flussinsel schafft eine besondere Verbindung von Großveranstaltung und Auenlandschaft. Zugleich macht die Nähe zur Saale die Anlage hochwassergefährdet.",
+          "tags": ["landschaft", "hochwasser"]
+        },
+        {
+          "text": "Mehrere Hochwasser und dadurch ausgelöste Schäden führten zu längeren Ruhe- und Sanierungsphasen. Nach Sanierung und Ausschreibung übergab die Stadt die Bühne im August 2016 an eine Betreibergesellschaft.",
+          "tags": ["geschichte", "sanierung"]
+        },
+        {
+          "text": "Visuell: Ein weit ausgreifendes, markantes Bühnendach steht einer großen offenen Zuschauerfläche gegenüber. Umgeben ist das Areal von Wiesen und altem Baumbestand der Peißnitz.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Die Bühne ist kein dauerhaft laufendes Theaterhaus, sondern ein saisonal und veranstaltungsbezogen genutzter Open-Air-Ort. Künstlerlisten und Kapazitäten sind daher als Veranstaltungsdaten zu behandeln.",
+          "tags": ["faktencheck", "nutzung"]
+        },
+        {
+          "text": "Quer: Peißnitzhaus, Parkeisenbahn und Inselpark liegen in kurzer Distanz. Bei Veranstaltungen sind Brücken und Wege über die Insel Teil der Besucherlenkung.",
+          "tags": ["quer", "orientierung"]
+        },
+        {
+          "text": "LIVE: Spielplan, Tickets, Einlass, Altersregeln, Anreise, Sicherheitsvorgaben, Wetteränderungen und tatsächliche Kapazität ausschließlich über Veranstalter und Betreiber prüfen.",
+          "tags": ["live_hint", "ephemeral", "veranstaltung"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Ist die Freilichtbühne täglich zugänglich?",
+          "a": "Der Veranstaltungsbetrieb ist saison- und terminabhängig; Zugang und Einlass müssen LIVE geprüft werden."
+        }
+      ]
+    },
+    {
+      "id": "halle_saale_dolauer_heide",
+      "name": "Dölauer Heide",
+      "lat": 51.498851,
+      "lng": 11.8991903,
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Großer hallescher Stadtwald mit Naturlehrpfaden und einem außergewöhnlichen Ensemble jungsteinzeitlicher Siedlungen, Wälle, Gräben und Grabhügel.",
+      "deep_data_pool": [
+        {
+          "text": "Die Dölauer Heide umfasst ungefähr 700 Hektar Wald westlich der Stadt. Sie ist Naherholungsraum, Landschaftsschutzgebiet und zugleich ein großflächiges archäologisches Denkmalensemble.",
+          "tags": ["natur", "geografie"]
+        },
+        {
+          "text": "Auf Bischofswiese und Langem Berg sind Wälle und Gräben einer etwa 5.600 Jahre alten, rund 20 Hektar großen befestigten Siedlung der Baalberger Kultur im Gelände erhalten.",
+          "tags": ["archaeologie", "jungsteinzeit", "quelle_lda"]
+        },
+        {
+          "text": "Briquetagereste belegen frühe Salzverarbeitung. Nach Auswertung des Landesamts wurde Sole vermutlich von den Giebichensteiner Quellen in die Heide transportiert und auf dem Langen Berg versotten.",
+          "tags": ["archaeologie", "salz", "stadtgeschichte"]
+        },
+        {
+          "text": "Spätere Gemeinschaften der Bernburger Kultur nutzten den nördlichen Plateaubereich. Menschen der Schnurkeramikkultur errichteten anschließend zahlreiche Grabhügel, teilweise mit Steinkisten und Steinpackungen.",
+          "tags": ["archaeologie", "grabkultur"]
+        },
+        {
+          "text": "Die archäologischen Denkmale sind in einen ausgeschilderten Wanderweg eingebunden. Einige ausgegrabene Steinkisten und Steinkreise sind vor Ort erkennbar; bedeutende Funde befinden sich im Landesmuseum für Vorgeschichte.",
+          "tags": ["archaeologie", "wanderweg", "quer"]
+        },
+        {
+          "text": "Seit dem Mittelalter lieferte der Wald Holz, unter anderem als Brennmaterial für die hallesche Salzgewinnung. Später prägten auch Bergbau und forstwirtschaftliche Nutzung Teile der Heide.",
+          "tags": ["geschichte", "forst", "salz"]
+        },
+        {
+          "text": "Der Heidefriedhof wurde im 19. Jahrhundert für namenlose Tote angelegt, die in der Heide gefunden wurden. Nachdem die Stadt 1929 Eigentümerin des Waldes geworden war, verlor er seine ursprüngliche Funktion.",
+          "tags": ["geschichte", "gedenkort"]
+        },
+        {
+          "text": "Visuell: Breite Waldwege wechseln mit schmalen Pfaden, Plateaukanten und unscheinbaren Geländewellen. Archäologische Wälle und Gräben sind am besten mit Beschilderung und geschultem Blick zu erkennen.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "LIVE: Waldsperrungen, Sturm- und Brandschutzwarnungen, Wegebaustellen und aktuelle Zugänglichkeit des archäologischen Wanderwegs bei Stadt und Forst prüfen.",
+          "tags": ["live_hint", "ephemeral", "sicherheit"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Was ist archäologisch in der Dölauer Heide zu sehen?",
+          "a": "Erhalten sind unter anderem Wälle, Gräben und Grabhügel jungsteinzeitlicher Kulturen; ein Wanderweg erschließt die Denkmale."
+        }
+      ]
+    },
+    {
+      "id": "halle_saale_reichardts_garten",
+      "name": "Reichardts Garten",
+      "lat": 51.5035591,
+      "lng": 11.9592998,
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Englischer Landschaftsgarten des Komponisten Johann Friedrich Reichardt. Um 1800 wurde das Anwesen als „Herberge der Romantik“ zum Treffpunkt von Dichtern, Musikern und Gelehrten.",
+      "deep_data_pool": [
+        {
+          "text": "Johann Friedrich Reichardt ließ sich ab 1791/92 in Giebichenstein nieder und gestaltete das Gut, das er 1794 erwarb, als englischen Landschaftsgarten nach dem Vorbild des Gartenreichs Wörlitz.",
+          "tags": ["geschichte", "gartenkunst", "reichardt"]
+        },
+        {
+          "text": "Reichardt war Komponist, Publizist und preußischer Hofkapellmeister. Nach seiner Entlassung 1794 wurde er 1796 Salinendirektor in Halle und verband Musikleben, Gartenkultur und städtische Salzgeschichte.",
+          "tags": ["personen", "musik", "salz"]
+        },
+        {
+          "text": "Das Anwesen entwickelte sich um 1800 zu einem Treffpunkt von Literaten, Künstlern und Wissenschaftlern. Zu den Gästen zählten Goethe, Novalis, Tieck, Schlegel, Schleiermacher, Arnim und Brentano.",
+          "tags": ["romantik", "literatur", "gaeste"]
+        },
+        {
+          "text": "Die Bezeichnungen „Herberge der Romantik“ und „Giebichensteiner Dichterparadies“ fassen diese kurze, aber wirkmächtige Blütezeit zwangloser Gespräche, Konzerte und Naturerfahrung zusammen.",
+          "tags": ["romantik", "kulturgeschichte"]
+        },
+        {
+          "text": "Visuell: Verschlungene Wege und Treppen führen durch Hangbereiche, offene Wiesen und alten Gehölzbestand. Denkmäler und eine Reichardt-Büste erinnern an den Hausherrn und seine Gäste.",
+          "tags": ["visuell", "wegweiser", "gartenkunst"]
+        },
+        {
+          "text": "Das frühere Wohnhaus Reichardts an der Seebener Straße ist nicht erhalten; es musste 1903 dem Straßenausbau weichen. Der Garten bewahrt daher vor allem Landschaftsstruktur und Erinnerungsorte.",
+          "tags": ["geschichte", "verlust"]
+        },
+        {
+          "text": "In den Befreiungskriegen wurde das Anwesen in Abwesenheit der Familie von napoleonischen Soldaten verwüstet und später notdürftig wiederhergestellt.",
+          "tags": ["geschichte", "napoleonische_zeit"]
+        },
+        {
+          "text": "Quer: Amtsgarten, Klausberge, Oberburg und Saaleufer liegen unmittelbar benachbart. Gemeinsam machen sie die romantische Wahrnehmung des Giebichensteiner Landschaftsraums verständlich.",
+          "tags": ["quer", "romantik"]
+        },
+        {
+          "text": "LIVE: Pflegearbeiten, vorübergehende Wegsperrungen und aktuelle Veranstaltungen prüfen; der historische Inhalt ist nicht von saisonalen Nutzungsangaben abhängig.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Warum heißt der Garten „Herberge der Romantik“?",
+          "a": "Weil Reichardts Anwesen um 1800 ein Treffpunkt bedeutender Dichter, Künstler und Gelehrter der Romantik war."
+        }
+      ]
+    },
+    {
+      "id": "halle_saale_klausberge",
+      "name": "Klausberge",
+      "lat": 51.5067529,
+      "lng": 11.9588673,
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Porphyrhöhen am Saaledurchbruch nördlich der Burg Giebichenstein. Aussicht, Felslandschaft und Eichendorffbank verbinden Naturraum mit der Erinnerung an die hallesche Romantik.",
+      "deep_data_pool": [
+        {
+          "text": "Die Klausberge bilden eine Porphyrkuppe am Durchbruchstal der Saale. Stadtplanerische Quellen bewerten sie ökologisch, landschaftlich und kulturhistorisch als wichtigen Baustein des Freiraumsystems am Fluss.",
+          "tags": ["landschaft", "geologie", "natur"]
+        },
+        {
+          "text": "Der Name wird mit einer Kapelle beziehungsweise den Klausbrüdern in Verbindung gebracht, die im 13. Jahrhundert an diesem Ort ansässig gewesen sein sollen.",
+          "tags": ["name", "mittelalter"]
+        },
+        {
+          "text": "In der Romantik wurden die Klausberge wegen ihrer Felsen, Aussicht auf Saale und Burg sowie der Nähe zu Reichardts Garten und Amtsgarten besonders geschätzt.",
+          "tags": ["romantik", "landschaft"]
+        },
+        {
+          "text": "Joseph von Eichendorff studierte 1805/06 in Halle und wanderte im Saaletal. Sein Gedicht „Bei Halle“ entstand nachweislich erst 1840, greift aber Burg, Saale und Giebichenstein als romantische Erinnerungslandschaft auf.",
+          "tags": ["literatur", "faktencheck", "eichendorff"]
+        },
+        {
+          "text": "Der Hallische Verschönerungsverein setzte 1879 einen ersten Gedenkstein für Eichendorff. Die heutige halbrunde Steinbank mit Obelisk erhielt 1899 ihre Gestalt.",
+          "tags": ["denkmal", "geschichte"]
+        },
+        {
+          "text": "Seit 2005 steht gegenüber der Bank eine Stele mit dem vollständigen Gedicht „Bei Halle“. Die Bank wurde mehrfach restauriert, zuletzt 2020/21.",
+          "tags": ["denkmal", "literatur"]
+        },
+        {
+          "text": "Visuell: Waldige Höhenwege führen zu felsigen Kanten und Blickfenstern über die Saale. Die steinerne Eichendorffbank mit mittigem Obelisken ist der markanteste Erinnerungsort.",
+          "tags": ["visuell", "wegweiser", "aussicht"]
+        },
+        {
+          "text": "Quer: Unterhalb schließt die Saalepromenade an; südlich liegen Burg und Amtsgarten, östlich Reichardts Garten. Der Blick macht den Begriff Giebichensteiner Dichterparadies räumlich nachvollziehbar.",
+          "tags": ["quer", "orientierung"]
+        },
+        {
+          "text": "LIVE: Zustand steiler Wege, Treppen, Aussichtspunkte und mögliche naturschutz- oder wetterbedingte Sperrungen aktuell prüfen.",
+          "tags": ["live_hint", "ephemeral", "sicherheit"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Entstand Eichendorffs Gedicht hier?",
+          "a": "Die Klausberge inspirierten seine Halle-Erinnerung, doch die handschriftliche Urform von „Bei Halle“ stammt erst von 1840."
+        }
+      ]
+    },
+    {
+      "id": "halle_saale_amtsgarten",
+      "name": "Amtsgarten",
+      "lat": 51.50361,
+      "lng": 11.9560925,
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Historische Parkanlage an der Burg Giebichenstein. Aus erzbischöflichem Nutzgarten, barocker Anlage und Landschaftsgarten entstand 1907 bis 1909 ein öffentlicher Stadtpark.",
+      "deep_data_pool": [
+        {
+          "text": "Der Amtsgarten geht auf Obst- und Ziergärten der Magdeburger Erzbischöfe an der Burg Giebichenstein zurück. Im Parkbereich wird auch der Standort der älteren, 961 genannten Burg vermutet.",
+          "tags": ["geschichte", "mittelalter", "burg"]
+        },
+        {
+          "text": "Nach 1740 ließ Amtmann Johann Christoph Ochs von Ochsenstein eine barocke Anlage mit rechtwinkligen Achsen, Alleen, Springbrunnen sowie Nutz- und Zierbereichen schaffen.",
+          "tags": ["geschichte", "barock", "gartenkunst"]
+        },
+        {
+          "text": "Ab 1773 wurde der formale Garten unter Amtmann Heinrich Barthels in Richtung eines Landschaftsgartens mit geschwungenen Wegen, Teichen, Plätzen und inszenierten Blicken umgestaltet.",
+          "tags": ["geschichte", "landschaftsgarten"]
+        },
+        {
+          "text": "1906 erwarb die Stadt Halle Garten und Burg. Stadtgartendirektor Emil Berckling gestaltete 1907 bis 1909 die Grundlage des heutigen öffentlichen Parks mit neuen Wegen, Treppen und Terrassen.",
+          "tags": ["geschichte", "stadtpark"]
+        },
+        {
+          "text": "Bei der Umgestaltung wurde die Römerbergkuppe verändert, der frühere Schwanenteich verfüllt und als Amtswiese begrünt. Am terrassierten Südhang entstanden Bereiche für Rhododendren, Rosen und Zierpflanzen.",
+          "tags": ["gartenkunst", "topografie"]
+        },
+        {
+          "text": "Visuell: Der Park steigt zwischen Seebener Straße, Burgfelsen und Saale in Terrassen an. Treppen, Wiesen, alte Einzelbäume und bewaldete Hänge wechseln auf engem Raum.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Der Amtsgarten ist seit 1994 geschützter Landschaftsbestandteil und gehört zum Netzwerk „Gartenträume – Historische Parks in Sachsen-Anhalt“.",
+          "tags": ["schutz", "gartentraeume"]
+        },
+        {
+          "text": "Quer: Oberburg, Giebichensteinbrücke, Riveufer und Reichardts Garten grenzen unmittelbar an. Der Amtsgarten vermittelt zwischen Burgarchäologie, Gartenkunst und Saalelandschaft.",
+          "tags": ["quer", "orientierung"]
+        },
+        {
+          "text": "LIVE: Pflegebedingte Sperrungen, Zustand der Treppen und aktuelle Zugänge prüfen. Bei Nässe können steile Parkwege rutschig sein.",
+          "tags": ["live_hint", "ephemeral", "sicherheit"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "War der Amtsgarten immer ein Landschaftspark?",
+          "a": "Nein. Er entwickelte sich vom erzbischöflichen Nutzgarten über eine barocke Anlage zum Landschafts- und Stadtpark."
+        }
+      ]
+    },
+    {
+      "id": "halle_saale_riveufer_saalepromenade",
+      "name": "Riveufer Saalepromenade",
+      "lat": 51.4992704,
+      "lng": 11.9495146,
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Denkmalgeschützte Uferstraße und Lindenpromenade, um 1913/14 zusammen mit einem Hauptabwassersammler angelegt. Ufermauer, Bootshäuser, Felsen und Villen prägen den Saaleraum.",
+      "deep_data_pool": [
+        {
+          "text": "Uferstraße und Promenade entstanden um 1913/14 im Zuge des Baus eines Hauptabwassersammlers entlang der Saale. Später wurden sie nach Oberbürgermeister Richard Robert Rive benannt.",
+          "tags": ["geschichte", "stadttechnik", "rive"]
+        },
+        {
+          "text": "Richard Robert Rive amtierte von 1906 bis 1933 als Oberbürgermeister von Halle und wurde für seine Verdienste zum Ehrenbürger ernannt.",
+          "tags": ["personen", "stadtgeschichte"]
+        },
+        {
+          "text": "Die denkmalgeschützte Promenade folgt dem gewundenen Flusslauf. Eine doppelreihige Lindenallee begleitet den Weg; Felswände, alter Baumbestand und repräsentative Villen rahmen ihn landseitig.",
+          "tags": ["denkmal", "landschaft", "visuell"]
+        },
+        {
+          "text": "Die steinerne Uferstützwand ist rund 670 Meter lang. In sie sind fünf turmartige Bootshäuser auf Porphyrsockeln integriert; Doppeltreppen führen von dort direkt zum Wasser.",
+          "tags": ["architektur", "wasserbau"]
+        },
+        {
+          "text": "Das Riveufer verbindet Fahrgastschifffahrt, Bootsnutzung und Promenade. Saale-Radwanderweg und Himmelsscheibenweg führen durch diesen Abschnitt.",
+          "tags": ["nutzung", "radweg", "schifffahrt"]
+        },
+        {
+          "text": "Das Hochwasser 2013 beschädigte Straße, Promenade und Ufermauer erheblich. Wiederherstellung und denkmalgerechte Sanierung mussten Hochwasserschutz, Baumerhalt und historische Materialien zusammenführen.",
+          "tags": ["hochwasser_2013", "sanierung"]
+        },
+        {
+          "text": "Visuell: Zwischen Fluss und Straße verläuft die Lindenpromenade oberhalb der massiven Ufermauer. Die kleinen Bootshäuser und Treppen gliedern die lange Kante; gegenüber liegen grüne Saaleinseln.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Quer: Nach Norden führt die Promenade zur Giebichensteinbrücke und Burg, nach Süden in Richtung Ziegelwiese und Altstadt. Sie ist ein zentraler Abschnitt der zusammenhängenden Saalelandschaft.",
+          "tags": ["quer", "orientierung"]
+        },
+        {
+          "text": "LIVE: Schiffsabfahrten, Bootsverleih, Veranstaltungen, Hochwasserwege und Baustellen tagesaktuell prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Was ist am Riveufer denkmalgeschützt?",
+          "a": "Die Uferstraße mit Lindenpromenade, steinerner Ufermauer und fünf integrierten Bootshäusern bildet ein geschütztes Ensemble."
+        }
+      ]
+    },
+    {
+      "id": "halle_saale_park_an_der_saline",
+      "name": "Park an der Saline",
+      "lat": 51.4844233,
+      "lng": 11.959564,
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Grünraum auf der Salineinsel neben dem historischen Saline-Ensemble. Flussarme, Industriegeschichte, Hallorentradition und Kunst im öffentlichen Raum greifen hier ineinander.",
+      "deep_data_pool": [
+        {
+          "text": "Die Salineinsel gehört zu den kulturhistorisch wichtigsten Räumen Halles. 1721 nahm hier die Königlich-Preußische Saline den Betrieb auf; sie produzierte moderner und kostengünstiger als die ältere Thalsaline am Hallmarkt.",
+          "tags": ["geschichte", "salz", "industrie"]
+        },
+        {
+          "text": "Der Standort an der Saale erleichterte den Transport von Brennstoffen und Salz. Historische Siede- und Speicherbauten des Saline-Ensembles machen die Produktionslogik bis heute ablesbar.",
+          "tags": ["industriegeschichte", "verkehr"]
+        },
+        {
+          "text": "Die Salzproduktion endete 1964. 1969 eröffnete in Teilen des Ensembles ein technisches Museum mit Siedepfanne; die Halloren pflegen dort die Tradition des Schausiedens.",
+          "tags": ["geschichte", "museum", "halloren"]
+        },
+        {
+          "text": "Visuell: Der Park liegt zwischen Salinebauten, Schwimmhalle und Saalearmen. Von der Halbinselspitze öffnen sich Blicke auf Kotgraben, Sophienhafen, Schleuse und Würfelwiese.",
+          "tags": ["visuell", "wegweiser", "aussicht"]
+        },
+        {
+          "text": "Die Bronzeplastik „Hallorenbrautpaar“ von Gerhard Geyer wurde 1982 in der Grünanlage aufgestellt. Kleidung, Schuhe und Kugelknöpfe greifen Details der traditionellen Hallorentracht auf.",
+          "tags": ["kunst", "halloren", "visuell"]
+        },
+        {
+          "text": "Die Salineinsel ist stark vom Wandel industrieller Nutzungen geprägt. Auf dem benachbarten Holzplatz lagen Brennholzlager und später ein Gaswerk; brachgefallene Flächen wurden schrittweise zu Bildungs-, Kultur- und Freiräumen entwickelt.",
+          "tags": ["strukturwandel", "industriegeschichte"]
+        },
+        {
+          "text": "Quer: Das Planetarium im umgebauten Gasometer, der Park des Hoffens, Erinnerns und Dankens, Hafenbahntrasse und Sophienhafen erweitern den Geschichtsraum über den eigentlichen Salinepark hinaus.",
+          "tags": ["quer", "umgebung"]
+        },
+        {
+          "text": "LIVE: Öffnung und Sanierungsstand des Salinemuseums, Schausieden, Führungen, Hochwasserlagen und Veranstaltungen direkt bei Museum und Stadt prüfen.",
+          "tags": ["live_hint", "ephemeral", "museum"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Was verbindet den Park mit Halles Salzgeschichte?",
+          "a": "Er liegt direkt am Ensemble der 1721 gegründeten Königlich-Preußischen Saline, wo die Hallorentradition weiter gepflegt wird."
+        }
+      ]
+    },
+    {
+      "id": "halle_saale_neues_theater",
+      "name": "Neues Theater",
+      "lat": 51.4853895,
+      "lng": 11.9685034,
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "1981 eröffnetes Schauspielhaus und Ursprung der Kulturinsel Halle. Peter Sodann und das Ensemble bauten ein ehemaliges Kino in Eigenarbeit zu einer wandelbaren Bühne um.",
+      "deep_data_pool": [
+        {
+          "text": "Ende der 1970er Jahre suchte Schauspieldirektor Peter Sodann eine eigene Spielstätte, weil Schauspiel, Oper, Orchester und Ballett das damalige Landestheater gemeinsam nutzten und Probenraum knapp war.",
+          "tags": ["geschichte", "theater"]
+        },
+        {
+          "text": "Die Stadt überließ dem Ensemble das frühere Kino der Deutsch-Sowjetischen Freundschaft in der Großen Ulrichstraße. Sodann, Schauspielerinnen und Schauspieler beteiligten sich selbst an Maurer-, Putz- und Ausbauarbeiten.",
+          "tags": ["geschichte", "buergerengagement", "ddr"]
+        },
+        {
+          "text": "Am 8. April 1981 eröffnete das neue theater mit der Revue „Was das für Zeiten waren“. Der große Saal erhielt flexible Zuschauertraversen und wandelbare Bühnenräume.",
+          "tags": ["geschichte", "eroeffnung"]
+        },
+        {
+          "text": "Der Ausbau endete nicht mit der Eröffnung. Über rund zwei Jahrzehnte kamen Hoftheater, kleinere Spielstätten, Werkstätten, Büros, Puppentheater, Galerie und Gastronomie hinzu.",
+          "tags": ["architektur", "kulturinsel"]
+        },
+        {
+          "text": "2002 galt die Kulturinsel als baulich vollendet. Der innerstädtische Komplex aus mehreren Gebäuden bündelt Schauspiel, Puppentheater und weitere Kulturangebote auf engem Raum.",
+          "tags": ["kulturinsel", "stadtentwicklung"]
+        },
+        {
+          "text": "Visuell: Der Theaterkomplex fügt sich in die dichte Altstadtbebauung zwischen Großer Ulrichstraße und Universitätsplatz ein. Höfe, Durchgänge und verschiedene Hauskörper verraten den schrittweisen Umbau.",
+          "tags": ["visuell", "wegweiser", "architektur"]
+        },
+        {
+          "text": "Seit 2009 ist das neue theater zusammen mit Oper, Staatskapelle, Puppen- und Thalia Theater in der Theater, Oper und Orchester GmbH Halle organisiert und gehört zu den Bühnen Halle.",
+          "tags": ["organisation", "heute"]
+        },
+        {
+          "text": "LIVE: Spielplan, Spielstätte innerhalb der Kulturinsel, Tickets, Einlass, Barrierefreiheit und Vorstellungsänderungen bei den Bühnen Halle prüfen.",
+          "tags": ["live_hint", "ephemeral", "spielplan"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Was war vor dem neuen theater in dem Gebäude?",
+          "a": "Der Kernbau war das frühere Kino der Deutsch-Sowjetischen Freundschaft."
+        }
+      ]
+    },
+    {
+      "id": "halle_saale_kammeroper_halle",
+      "name": "Kammeroper Halle",
+      "lat": 51.4349124,
+      "lng": 11.9816673,
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Kleiner, bürgerschaftlich getragener Musikort in Halle-Ammendorf. Das 2014 eröffnete Projekt setzt lokale Musikkultur fort und fördert junge Künstlerinnen und Künstler.",
+      "deep_data_pool": [
+        {
+          "text": "Die Kammeroper Halle ist nicht mit der Oper Halle am Universitätsring gleichzusetzen. Sie ist ein eigenständiger Verein und Veranstaltungsort im südlichen Stadtteil Ammendorf.",
+          "tags": ["faktencheck", "organisation"]
+        },
+        {
+          "text": "Die freischaffenden Musiker Ira Jung und Markus Fischer eröffneten das Projekt im Herbst 2014 in einem früheren Bürogebäude in der Straße der Waggonbauer.",
+          "tags": ["geschichte", "personen"]
+        },
+        {
+          "text": "Der Verein versteht seine Arbeit als Fortsetzung der Ammendorfer Tradition der Musikhäuser und als kulturelles Angebot für Stadtteile abseits des Zentrums.",
+          "tags": ["kulturgeschichte", "stadtteil"]
+        },
+        {
+          "text": "Ein Schwerpunkt liegt auf Ausbildung und Förderung junger Künstler. Konzerte und kleinere Musiktheaterformate schaffen Auftrittsmöglichkeiten in einem überschaubaren Raum.",
+          "tags": ["musik", "bildung"]
+        },
+        {
+          "text": "Die lokale Wirkung reicht über Ammendorf nach Beesen, Silberhöhe und weitere Stadtteile. Nachbarschaftliche Hilfe und ehrenamtliches Engagement gehören zur Entstehungsgeschichte des Hauses.",
+          "tags": ["buergerengagement", "stadtgesellschaft"]
+        },
+        {
+          "text": "Visuell: Der Ort liegt in einem langgestreckten, äußerlich zurückhaltenden früheren Bürogebäude. Innen wurde ein kleiner Aufführungsraum mit Bühne und flexibler Bestuhlung eingerichtet.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Die Bezeichnung Kammeroper beschreibt hier den Namen des Vereins und Ortes; sie darf nicht pauschal auf mobile Kammeroper-Produktionen der professionellen Bühnen Halle übertragen werden.",
+          "tags": ["faktencheck", "begriff"]
+        },
+        {
+          "text": "LIVE: Aktuelle Existenz, Programm, Reservierung, Eintritt, Veranstaltungsrhythmus und Zugänglichkeit direkt beim Verein beziehungsweise in aktuellen Kulturkalendern prüfen.",
+          "tags": ["live_hint", "ephemeral", "spielplan"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Gehört die Kammeroper zur Oper Halle?",
+          "a": "Nein. Die Kammeroper Halle ist ein eigenständiger Verein und kleiner Veranstaltungsort in Ammendorf."
+        }
+      ]
+    },
+    {
+      "id": "halle_saale_eselsbrunnen",
+      "name": "Eselsbrunnen",
+      "lat": 51.4804653,
+      "lng": 11.9696503,
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Jugendstilbrunnen am Alten Markt, 1906 begonnen und 1913 mit der Bronzegruppe von Heinrich Keiling vollendet. Er zeigt Halles populäre Sage vom Esel, der auf Rosen geht.",
+      "deep_data_pool": [
+        {
+          "text": "Am Standort des Eselsbrunnens ist bereits seit 1480 ein Brunnen belegt. Ein älterer Zinkbrunnen wurde durch die neue Anlage ersetzt.",
+          "tags": ["geschichte", "stadtarchiv"]
+        },
+        {
+          "text": "Der Möbelkaufmann Albert Martick stiftete 1905 3.500 Mark für den Neubau. 1906 wurde die Schale aus Stampfbeton mit Jugendstilelementen fertiggestellt.",
+          "tags": ["geschichte", "stiftung", "architektur"]
+        },
+        {
+          "text": "Masken in Form von Frosch- und Fischköpfen dienen als Wasserspeier. Aus der Beckenschale steigt eine Säule auf, die die Bronzegruppe trägt.",
+          "tags": ["visuell", "architektur"]
+        },
+        {
+          "text": "Der hallesche Bildhauer Heinrich Keiling schuf Esel und Müllerburschen nach einem Wettbewerb. Als Modell für den Jungen diente der etwa dreizehnjährige Walther Hoffmann.",
+          "tags": ["kunst", "personen"]
+        },
+        {
+          "text": "1913 wurde die Figurengruppe aufgestellt und der Brunnen vollendet. Die 92 Zentimeter hohe Bronze wurde später mehrfach restauriert.",
+          "tags": ["geschichte", "kunst"]
+        },
+        {
+          "text": "Sage: Rosen waren für den Einzug Kaiser Ottos I. gestreut worden. Wegen Hochwassers änderte der Kaiser seine Route; stattdessen liefen ein Müllerbursche und sein Esel über den Rosenteppich. Der Stoff ist lokale Überlieferung, kein belegtes Ereignis.",
+          "tags": ["sage", "faktencheck", "otto_i"]
+        },
+        {
+          "text": "Das Motiv ist älter als der Brunnen. Bereits 1583 wurde der Esel auf Rosen in einem Relief an der Marktkirche dargestellt, dort mit deutlicherem Bezug zur halleschen Salztradition.",
+          "tags": ["kunstgeschichte", "quer"]
+        },
+        {
+          "text": "Visuell: Auf dem Alten Markt steht ein rundes Betonbecken; darüber balanciert die kleine Bronzegruppe aus Esel und Begleiter auf einer hohen Mittelsäule.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "LIVE: Wasserbetrieb und saisonale Brunnenschaltung bei der Stadt Halle prüfen. Außerhalb der Saison bleibt das Kunstwerk sichtbar.",
+          "tags": ["live_hint", "ephemeral", "brunnensaison"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Ist die Geschichte vom Esel auf Rosen wahr?",
+          "a": "Sie ist eine beliebte hallesche Sage, kein historisch belegtes Ereignis."
+        }
+      ]
+    },
+    {
+      "id": "halle_saale_gobelbrunnen",
+      "name": "Göbelbrunnen",
+      "lat": 51.4820686,
+      "lng": 11.9663449,
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "1998 eingeweihter Stadtgeschichtsbrunnen von Bernd Göbel auf dem Hallmarkt. Figuren, Reliefs und Bodenplatten erzählen Halles Geschichte bewusst nicht lückenlos, sondern pointiert und kritisch.",
+      "deep_data_pool": [
+        {
+          "text": "Der Bildhauer Bernd Göbel entwickelte den Brunnen über viele Jahre; die Werkdatenbank datiert Entwurf und Ausführung von 1976 bis 1997. Aufgestellt und eingeweiht wurde er 1998.",
+          "tags": ["kunst", "geschichte"]
+        },
+        {
+          "text": "Gemeinsam mit Stadtarchivar Werner Piechocki wählte Göbel Sagen, Legenden und historische Ereignisse aus. Der Brunnen ist keine chronologische Gesamtdarstellung, sondern ein kommentierender Blick auf Stadtgeschichte und Macht.",
+          "tags": ["kunstkonzept", "stadtgeschichte"]
+        },
+        {
+          "text": "Vier Figurengruppen, Einzelfiguren, Kleinplastiken und Reliefs liegen in und um ein steinernes, erweitertes Vierpassbecken. Eine pilzförmige Pyramide mit Wasserspeiern bildet das Zentrum.",
+          "tags": ["architektur", "visuell"]
+        },
+        {
+          "text": "Themen sind unter anderem Salzgewinnung und Stadtentstehung, Ludwig der Springer, Kardinal Albrecht, Saalesagen und politische beziehungsweise kulturelle Episoden bis in die jüngere Geschichte.",
+          "tags": ["stadtgeschichte", "symbolik"]
+        },
+        {
+          "text": "Die Darstellung Kardinal Albrechts löste vor der Aufstellung heftige Kontroversen aus. Göbel entfernte schließlich die Mitra und ersetzte sie durch aufstehendes Haar, nachdem ihm künstlerische Freiheit zugesichert worden war.",
+          "tags": ["kunstdebatte", "geschichte"]
+        },
+        {
+          "text": "Der Hallmarkt war der Raum der historischen Thalsaline. Damit steht der Stadtgeschichtsbrunnen genau an einem Ort, an dem Solebrunnen und Siedekote Halles Wohlstand begründeten.",
+          "tags": ["salz", "ortsgeschichte", "quer"]
+        },
+        {
+          "text": "Visuell: Zahlreiche lebensnahe Bronzen sitzen auf Beckenrändern, Sockeln und Bodenplatten. Kleine Details, ironische Gesten und unterschiedliche Blickrichtungen verlangen einen Rundgang um das gesamte Werk.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Der Hallmarkt wurde 1998 neu gestaltet. Brunnen und Platz bilden heute einen zentralen Veranstaltungs- und Aufenthaltsraum unterhalb der Marktkirche.",
+          "tags": ["stadtentwicklung", "platz"]
+        },
+        {
+          "text": "LIVE: Wasserbetrieb, Veranstaltungen und mögliche Absperrungen auf dem Hallmarkt aktuell prüfen.",
+          "tags": ["live_hint", "ephemeral", "brunnensaison"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Erzählt der Brunnen Halles Geschichte chronologisch?",
+          "a": "Nein. Bernd Göbel verband ausgewählte Fakten, Sagen und Kommentare zu einer bewusst pointierten Stadtgeschichte."
+        }
+      ]
+    },
+    {
+      "id": "halle_saale_goldsolebrunnen",
+      "name": "Goldsolebrunnen",
+      "lat": 51.4825252,
+      "lng": 11.9692308,
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "2006 fertiggestellter, bodengleicher Marktbrunnen des Büros Rehwaldt. Bronzeplatten, goldfarbene Schlitze und Wasser beziehen sich auf Solequellen und den Salzreichtum Halles.",
+      "deep_data_pool": [
+        {
+          "text": "Die Gold-Sole entstand als Teil der 2003 europaweit ausgeschriebenen Neugestaltung des Marktplatzes und wurde zum Stadtjubiläum 2006 fertiggestellt.",
+          "tags": ["geschichte", "stadtentwicklung"]
+        },
+        {
+          "text": "Mit dem Entwurf wurde das Dresdner Landschaftsarchitekturbüro Rehwaldt beauftragt. Der Brunnen ist kein Werk der Künstlerin Dagmar Schmidt; diese Zuordnung wäre falsch.",
+          "tags": ["urheber", "faktencheck"]
+        },
+        {
+          "text": "Sechs bodengleiche Bronzeplatten bilden die Grundfläche. 78 schlitzförmige Öffnungen symbolisieren die im Stadtgebiet verteilten historischen Salzquellen.",
+          "tags": ["architektur", "symbolik"]
+        },
+        {
+          "text": "Goldfarbene Schalen unter den Schlitzen erzeugen den namensgebenden Schimmer. Zwanzig Wasserdüsen lassen Wasser analog zu aufsteigenden Solequellen an die Oberfläche treten.",
+          "tags": ["visuell", "technik", "symbolik"]
+        },
+        {
+          "text": "Der Entwurf greift Verwerfung, Salz, Handel, Kunst und Roten Turm als prägende Marktthemen auf. Die Hallesche Marktplatzverwerfung erklärt geologisch das Aufsteigen natürlicher Sole.",
+          "tags": ["geologie", "salz", "stadtgeschichte"]
+        },
+        {
+          "text": "Visuell: Der Brunnen liegt nahezu bündig im Pflaster und wirkt eher wie eine eingeschnittene Wasserfläche als wie ein klassisches Becken. Seitliche Blöcke aus Quarzdiorit fassen den Bereich.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Quer: Das benachbarte Geoskop gehört ebenfalls zur Marktplatzneugestaltung. Marktkirche, Roter Turm und Händeldenkmal stellen den modernen Brunnen in die historische Marktmitte.",
+          "tags": ["quer", "marktplatz"]
+        },
+        {
+          "text": "LIVE: Wasserbetrieb, Umbau- oder Erweiterungsmaßnahmen, Sicherheitsabsperrungen und Brunnensaison bei der Stadt Halle prüfen; Planungen können den aktuellen Zustand verändern.",
+          "tags": ["live_hint", "ephemeral", "brunnensaison"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Was bedeuten die goldenen Schlitze?",
+          "a": "Sie symbolisieren Solequellen und den Wohlstand, den Halles Salzgewinnung hervorbrachte."
+        }
+      ]
+    },
+    {
+      "id": "halle_saale_leipziger_turm",
+      "name": "Leipziger Turm",
+      "lat": 51.4802623,
+      "lng": 11.9763982,
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Um 1450 am Galgtor errichteter Wachturm der mittelalterlichen Stadtbefestigung. Gotischer Bruchsteinbau und Renaissancehaube machen ihn zu einem markanten Altstadtrest.",
+      "deep_data_pool": [
+        {
+          "text": "Der Leipziger Turm wurde 1450 als frei stehender Beobachtungs- und Wachturm am damaligen Galgtor errichtet. Er ist eines der markantesten erhaltenen Teile der halleschen Stadtbefestigung.",
+          "tags": ["geschichte", "mittelalter", "stadtmauer"]
+        },
+        {
+          "text": "Vom Turm ließen sich der Galgberg, heute Riebeckplatz, und die östliche Zufahrt überwachen. Wächter sollten vor heranrückenden Gefahren und vor Feuer innerhalb der Stadt warnen.",
+          "tags": ["funktion", "stadtgeschichte"]
+        },
+        {
+          "text": "Der runde Bruchsteinbau ist 44 Meter hoch. Im unteren Bereich erreichen die Mauern etwa 2,80 Meter Stärke; gotische Spitzbogenöffnungen sind erhalten.",
+          "tags": ["architektur", "technik"]
+        },
+        {
+          "text": "1573 erhielt der Turm eine welsche Renaissancehaube mit vier Lukarnen und kupferner Laterne. Zugleich wurde ein Uhrwerk mit Zifferblättern eingebaut.",
+          "tags": ["architektur", "renaissance"]
+        },
+        {
+          "text": "Das mehrteilige Galgtor wurde 1819 abgerissen, als die mittelalterliche Befestigung der Stadterweiterung wich. Der Turm blieb als Solitär am Altstadtring stehen.",
+          "tags": ["geschichte", "stadtentwicklung"]
+        },
+        {
+          "text": "Visuell: Ein hoher runder Bruchsteinschaft steht unmittelbar am verkehrsreichen Ring. Spitzbogenfenster und die geschwungene dunkle Haube mit Laterne machen ihn leicht erkennbar.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Im Inneren zeigt das Stadtmuseum eine Ausstellung zur Baugeschichte sowie zu Handwerk und Zünften des Mittelalters. Der enge historische Turm ist nur im Rahmen geregelter Zugänge zu besichtigen.",
+          "tags": ["museum", "handwerk"]
+        },
+        {
+          "text": "Quer: Die Leipziger Straße verbindet den Turm westwärts mit Marktplatz und ostwärts mit Hauptbahnhof. Der Turm markiert dabei annähernd die ehemalige Grenze der mittelalterlichen Stadt.",
+          "tags": ["quer", "orientierung"]
+        },
+        {
+          "text": "LIVE: Führungszeiten, Tickets, Treffpunkt, Alters- oder Sicherheitsregeln und tatsächliche Turmöffnung beim Stadtmuseum Halle prüfen.",
+          "tags": ["live_hint", "ephemeral", "fuehrung"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Warum hieß der Leipziger Turm früher Galgtorturm?",
+          "a": "Er stand direkt am Galgtor, das bis 1819 den östlichen Stadtzugang sicherte."
+        }
+      ]
+    },
+    {
+      "id": "halle_saale_wasserturm_sud",
+      "name": "Wasserturm Süd",
+      "lat": 51.4662677,
+      "lng": 11.9771512,
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "1927/28 errichteter Wasserturm am Lutherplatz. Das Klinkerensemble von Wilhelm Jost verbindet expressive Architektur mit bis heute genutzter Trinkwassertechnik.",
+      "deep_data_pool": [
+        {
+          "text": "Starkes Bevölkerungswachstum und neue Wohn- und Industriebauten im Süden Halles machten einen leistungsfähigeren Wasserturm erforderlich. Der ältere neugotische Turm von 1867/68 reichte nicht mehr aus.",
+          "tags": ["geschichte", "wasserversorgung"]
+        },
+        {
+          "text": "Der Neubau entstand 1927/28. Stadtbaurat Wilhelm Jost und seine Mitarbeiter entwarfen die Architektur; Ingenieur Oskar Muy von Wayss & Freytag verantwortete die technische Konstruktion.",
+          "tags": ["architektur", "personen", "technik"]
+        },
+        {
+          "text": "Turm, Umspannwerk, Werkstätten und Wasserreservoir wurden als städtebauliches Klinkerensemble am Lutherplatz zusammengefasst. Wasser- und Stromversorgung erhielten damit eine gemeinsame architektonische Fassung.",
+          "tags": ["stadttechnik", "ensemble"]
+        },
+        {
+          "text": "Der Turm ist etwa 46 Meter hoch. Im Inneren sitzt ein Wasserbehälter mit 2.000 Kubikmetern Fassungsvermögen nach dem Konstruktionsprinzip Intze I.",
+          "tags": ["technik", "daten"]
+        },
+        {
+          "text": "Die zehneckige Stahlbetonkonstruktion ist blau-rot verklinkert. Schmale vertikale Fenster, gestufte Baukörper und die verborgene Behälterform kennzeichnen die funktional-expressive Architektur der 1920er Jahre.",
+          "tags": ["architektur", "visuell"]
+        },
+        {
+          "text": "Der Wasserturm dient weiterhin als trinkwassertechnische Anlage. Sein Behälter stabilisiert den Druck im halleschen Versorgungsnetz; er ist daher nicht nur Denkmal, sondern Infrastruktur.",
+          "tags": ["heute", "technik", "faktencheck"]
+        },
+        {
+          "text": "Visuell: Der hohe, kantige Klinkerturm dominiert den Lutherplatz. Das niedrigere Umspannwerk und weitere Backsteinbauten schließen direkt an und machen den technischen Komplex lesbar.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "LIVE: Öffentliche Besichtigungen, Führungen, Aussichtszugang und technische Sperrungen beim Wasserturmverein beziehungsweise den Stadtwerken prüfen. Ein regulär freier Aufstieg ist nicht anzunehmen.",
+          "tags": ["live_hint", "ephemeral", "fuehrung"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Ist der Wasserturm noch in Betrieb?",
+          "a": "Ja. Er wird weiterhin für die stabile Trinkwasserversorgung und den Druckausgleich genutzt."
+        }
+      ]
+    },
+    {
+      "id": "halle_saale_altstadt",
+      "name": "Altstadt",
+      "lat": 51.4821661,
+      "lng": 11.9706409,
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Historischer Stadtkern östlich der Saale mit weitgehend erhaltenem mittelalterlichem Grundriss und mehr als 500 Baudenkmalen. Salz, Residenz, Universität und Handel überlagern sich im Stadtbild.",
+      "deep_data_pool": [
+        {
+          "text": "Die Altstadt wird im Wesentlichen von Ringstraßen auf dem Verlauf der früheren mittelalterlichen Befestigung begrenzt. Ihr Straßennetz bewahrt große Teile des historischen Grundrisses.",
+          "tags": ["stadtgrundriss", "mittelalter"]
+        },
+        {
+          "text": "Halle wurde im Zweiten Weltkrieg nicht flächendeckend zerstört; der historische Kern blieb fast unversehrt. Heute umfasst der Denkmalbereich mehr als 500 Baudenkmale.",
+          "tags": ["denkmal", "zweiter_weltkrieg"]
+        },
+        {
+          "text": "Die erste chronistische Erwähnung Halles als „Halla“ stammt aus dem Jahr 806. Salzquellen und Fernhandel prägten die Entwicklung der Siedlung und späteren Stadt.",
+          "tags": ["geschichte", "salz"]
+        },
+        {
+          "text": "Der Hallmarkt war Standort der Thalsaline mit Solebrunnen und Siedekoten. Der Marktplatz darüber entwickelte sich zum Handels- und Repräsentationszentrum mit Marktkirche, Rotem Turm und Händeldenkmal.",
+          "tags": ["salz", "markt", "stadtgeschichte"]
+        },
+        {
+          "text": "Im 16. Jahrhundert erlebte Halle als Residenz Kardinal Albrechts von Brandenburg eine kulturelle Blüte. Moritzburg, Neue Residenz und Dom prägen bis heute die westliche historische Stadtkante.",
+          "tags": ["renaissance", "residenz"]
+        },
+        {
+          "text": "Die 1694 gegründete Friedrichs-Universität stärkte Halle als Wissenschaftsstadt. Universitätsgebäude, Höfe und der heutige Universitätsplatz liegen mitten im historischen Zentrum.",
+          "tags": ["universitaet", "wissenschaft"]
+        },
+        {
+          "text": "Nach 1989 war viel Altbausubstanz akut gefährdet. Seit 1995 wurden im Sanierungsgebiet Historischer Altstadtkern zahlreiche Gebäude, Straßen und Plätze instandgesetzt.",
+          "tags": ["stadtentwicklung", "sanierung"]
+        },
+        {
+          "text": "Visuell: Enge und gekrümmte Straßen wechseln mit großen Markt- und Universitätsplätzen. Mittelalterliche Kirchen, Renaissancebauten, barocke Bürgerhäuser und spätere Ergänzungen stehen dicht nebeneinander.",
+          "tags": ["visuell", "wegweiser", "architektur"]
+        },
+        {
+          "text": "Quer: Leipziger Turm markiert den früheren Ostrand, Saale und Moritzburg den Westen. Marktplatz, Hallmarkt und Universitätsplatz bilden die wichtigsten inneren Orientierungspunkte.",
+          "tags": ["quer", "orientierung"]
+        },
+        {
+          "text": "LIVE: Veranstaltungen, Baustellen, Fußgängerführungen, geöffnete Türme und Kirchen sowie aktuelle Verkehrsregeln separat prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Warum ist Halles Altstadt so geschlossen erhalten?",
+          "a": "Sie blieb im Zweiten Weltkrieg weitgehend von flächendeckender Zerstörung verschont und wurde seit 1995 umfangreich saniert."
+        }
+      ]
+    },
+    {
+      "id": "halle_saale_passendorfer_schlosschen",
+      "name": "Passendorfer Schlößchen",
+      "lat": 51.4731256,
+      "lng": 11.9297681,
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "Denkmalgeschütztes Gutshaus von 1898 und letzter markanter Rest des Ritterguts Passendorf. Es erinnert an das alte Dorf, das beim Bau Halle-Neustadts weitgehend verschwand.",
+      "deep_data_pool": [
+        {
+          "text": "Der Vorläufer des Ritterguts war ein Wirtschaftshof des Deutschen Ordens, der um 1291 als „Mönchehof“ bezeichnet wurde. Anfang des 16. Jahrhunderts entstand ein freier Rittersitz.",
+          "tags": ["geschichte", "mittelalter", "deutscher_orden"]
+        },
+        {
+          "text": "Nach Aufhebung des Klosters Neuwerk gelangte das Gut in erzbischöflichen Besitz. Kardinal Albrecht überließ es 1531 seinem Kanzler Albrecht Christoph Cruschwitz, genannt Türck.",
+          "tags": ["geschichte", "renaissance"]
+        },
+        {
+          "text": "Das frühere Gutshaus von etwa 1808 wurde abgebrochen. 1898 entstand das heutige Schlösschen im Stil des Historismus beziehungsweise Eklektizismus.",
+          "tags": ["architektur", "geschichte"]
+        },
+        {
+          "text": "Das äußere Erscheinungsbild und Teile repräsentativer Innenräume blieben erhalten. Gutshaus, Park, Remise, Mauern und weitere Wirtschaftsgebäude bildeten eine denkmalgeschützte Gesamtanlage.",
+          "tags": ["denkmal", "architektur"]
+        },
+        {
+          "text": "Beim Aufbau Halle-Neustadts ab 1964 wurden große Teile des alten Dorfs Passendorf abgerissen. Schlösschen, Kirche und wenige Häuser am Schulplatz blieben als seltene historische Inseln bestehen.",
+          "tags": ["stadtentwicklung", "halle_neustadt"]
+        },
+        {
+          "text": "Zu DDR-Zeiten diente das Haus als Klubhaus „Johannes R. Becher“. Es beherbergte unter anderem kulturelle Gruppen, eine Außenstelle des Konservatoriums, Gastronomie und Veranstaltungsräume.",
+          "tags": ["ddr", "kulturgeschichte"]
+        },
+        {
+          "text": "Die Stadt verkaufte Gut und Schlösschen im September 2008 im Rahmen einer Grundstücksauktion. Der Denkmalschutz verpflichtet Eigentümer unabhängig von zusätzlichen Kaufvertragsklauseln zum Erhalt.",
+          "tags": ["geschichte", "denkmalrecht"]
+        },
+        {
+          "text": "Visuell: Das historistische Gutshaus steht nahe Schulplatz und Passendorfer Kirche in einem Rest des alten Dorfkerns. Park, Mauern und Wirtschaftsgebäude machen den früheren Gutszusammenhang teilweise lesbar.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "LIVE: Eigentumszugang, Sanierungsstand, Nutzung und öffentliche Besichtigungsmöglichkeiten aktuell prüfen. Das Denkmal ist nicht automatisch frei zugänglich.",
+          "tags": ["live_hint", "ephemeral", "zugang"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Warum ist das Schlösschen für Halle-Neustadt wichtig?",
+          "a": "Es gehört zu den wenigen erhaltenen Resten des alten Passendorf, das beim Bau der Neustadt weitgehend abgetragen wurde."
+        }
+      ]
+    },
+    {
+      "id": "halle_saale_halle_saale_hauptbahnhof",
+      "name": "Halle (Saale) Hauptbahnhof",
+      "lat": 51.4772434,
+      "lng": 11.9883542,
+      "place_tier": 2,
+      "pack_role": "story",
+      "general_info": "1890 eröffneter zentraler Personenbahnhof im Stil der Neurenaissance. Als Inselbahnhof bündelte er zuvor getrennte Bahnverbindungen und wurde zum wichtigen mitteldeutschen Eisenbahnknoten.",
+      "deep_data_pool": [
+        {
+          "text": "Bereits 1840 erreichte die Magdeburg-Leipziger Eisenbahn Halle. Weitere Strecken machten die frühen Anlagen rasch zu klein; unterschiedliche Bahngesellschaften erschwerten lange eine gemeinsame Lösung.",
+          "tags": ["geschichte", "eisenbahn"]
+        },
+        {
+          "text": "Nach Verstaatlichung und mehrjähriger Bauzeit wurde der neue zentrale Personenbahnhof am 8. Oktober 1890 eröffnet. Er ersetzte die Situation, in der Reisende je nach Ziel verschiedene Bahnhöfe nutzen mussten.",
+          "tags": ["geschichte", "eroeffnung"]
+        },
+        {
+          "text": "Das Empfangsgebäude wurde als repräsentativer Neurenaissancebau mit zentraler Kuppelhalle gestaltet. Als Inselbahnhof liegt es zwischen den Gleisgruppen und wird über Personentunnel erreicht.",
+          "tags": ["architektur", "bahnhofstyp"]
+        },
+        {
+          "text": "Der Bahnhof trennte Personen- und Güterverkehr bereits weit vor dem Empfangsgebäude. Zeitgenössische Fachleute anderer Städte besichtigten die Anlage als Vorbild für eigene Bahnhofsprojekte.",
+          "tags": ["technik", "verkehrsgeschichte"]
+        },
+        {
+          "text": "Im Zweiten Weltkrieg erlitt die Anlage Schäden. 1967/68 erhielt die Halle eine moderne Aluminium-Vorhangfassade, die 1984 wieder entfernt wurde; historische Räume wurden anschließend saniert.",
+          "tags": ["geschichte", "ddr", "sanierung"]
+        },
+        {
+          "text": "2002 wurde das Empfangsgebäude umfassend erneuert und mit Handelsflächen verbunden. Seit 2014 modernisierte die Deutsche Bahn den gesamten Bahnknoten mit Gleisen, Bahnsteigen, Technik und Hallendächern.",
+          "tags": ["sanierung", "verkehr"]
+        },
+        {
+          "text": "Visuell: Vom Hans-Dietrich-Genscher-Platz führt die symmetrische Hauptfassade in die Kuppelhalle. Dahinter verteilen Tunnel die Reisenden zu den beidseits liegenden Bahnsteigen.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Quer: Die Leipziger Straße verbindet den Bahnhof direkt mit Leipziger Turm, Altstadt und Marktplatz. Straßenbahn- und Busanschlüsse machen den Vorplatz zum östlichen Stadttor.",
+          "tags": ["quer", "orientierung", "oepnv"]
+        },
+        {
+          "text": "LIVE: Abfahrten, Gleise, Baustellen, Aufzüge, Ersatzverkehr, Serviceöffnungszeiten und Barrierefreiheit immer über Deutsche Bahn, Verkehrsverbund und HAVAG prüfen.",
+          "tags": ["live_hint", "ephemeral", "verkehr"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Was bedeutet Inselbahnhof?",
+          "a": "Das Empfangsgebäude liegt zwischen den Gleisgruppen statt seitlich außerhalb der Bahnsteige."
+        }
+      ]
+    }
+  ],
+  "offline_qa": [
+    {
+      "q": "Warum nennt sich Halle Salzstadt?",
+      "a": "Natürliche Solequellen an der Halleschen Marktplatzverwerfung ermöglichten mehr als 5.000 Jahre Salzgewinnung. Im Mittelalter wurde Salz zur Grundlage von Wohlstand, Recht und Handwerk.",
+      "tags": ["salz", "stadtgeschichte"]
+    },
+    {
+      "q": "Wer sind die Halloren?",
+      "a": "Halloren sind Mitglieder der Salzwirker-Brüderschaft im Thale zu Halle. Die Salzarbeiter organisierten sich spätestens 1524 als Brüderschaft und pflegen ihre Tradition bis heute.",
+      "tags": ["halloren", "salz"]
+    },
+    {
+      "q": "Was ist der Unterschied zwischen Halloren und Hallensern?",
+      "a": "Hallenser bezeichnet allgemein Einwohner Halles. Halloren sind Mitglieder beziehungsweise Nachkommen der traditionsgebundenen Salzwirker-Brüderschaft.",
+      "tags": ["halloren", "begriff"]
+    },
+    {
+      "q": "Wo wurde früher in Halle Salz gewonnen?",
+      "a": "Historischer Kern war die Thalsaline am heutigen Hallmarkt. Ab 1721 arbeitete zusätzlich die Königlich-Preußische Saline auf der Salineinsel; dort endete die Produktion 1964.",
+      "tags": ["salz", "hallmarkt", "saline"]
+    },
+    {
+      "q": "Welche Verbindung hat Händel zu Halle?",
+      "a": "Georg Friedrich Händel wurde am 23. Februar 1685 im Haus „Zum gelben Hirschen“ geboren, am Folgetag in der Marktkirche getauft und erhielt Unterricht beim Organisten Friedrich Wilhelm Zachow.",
+      "tags": ["haendel", "musik"]
+    },
+    {
+      "q": "Wie lange lebte Händel in Halle?",
+      "a": "Er verbrachte Kindheit und Jugend, ungefähr seine ersten 18 Lebensjahre, in Halle und ging 1703 nach Hamburg.",
+      "tags": ["haendel", "biografie"]
+    },
+    {
+      "q": "Warum prägt die Saale Halle so stark?",
+      "a": "Der Fluss teilt sich im Stadtgebiet in mehrere Arme und bildet eine breite Aue mit Inseln. Peißnitz, Salineinsel, Uferpromenaden, Brücken und Hochwasser gehören deshalb eng zur Stadtentwicklung.",
+      "tags": ["saale", "geografie"]
+    },
+    {
+      "q": "Wann wurde die hallesche Universität gegründet?",
+      "a": "Die Friedrichs-Universität Halle wurde 1694 gegründet. 1817 vereinigte sie sich mit der 1502 gegründeten Universität Wittenberg.",
+      "tags": ["mlu", "universitaet"]
+    },
+    {
+      "q": "Warum heißt sie Martin-Luther-Universität Halle-Wittenberg?",
+      "a": "Sie entstand 1817 aus den Universitäten Halle und Wittenberg. Den heutigen Namen Martin-Luther-Universität erhielt sie 1933.",
+      "tags": ["mlu", "universitaet", "name"]
+    },
+    {
+      "q": "Ist Halles Altstadt im Zweiten Weltkrieg zerstört worden?",
+      "a": "Sie blieb weitgehend von flächendeckender Zerstörung verschont. Deshalb sind mittelalterlicher Grundriss und mehr als 500 Baudenkmale in ungewöhnlicher Dichte erhalten.",
+      "tags": ["altstadt", "zweiter_weltkrieg"]
+    },
+    {
+      "q": "Was verbindet Giebichenstein mit der Romantik?",
+      "a": "Burgruine, Porphyrfelsen, Saale, Reichardts Garten, Amtsgarten und Klausberge bildeten eine stark rezipierte Landschaft. Dichter und Künstler machten sie zum Giebichensteiner Dichterparadies.",
+      "tags": ["romantik", "giebichenstein"]
+    },
+    {
+      "q": "Sind Öffnungszeiten und Preise offline verlässlich?",
+      "a": "Nein. Öffnung, Eintritt, Führungen, Spielpläne, Zugverkehr und saisonale Angebote müssen immer LIVE bei den jeweiligen Betreibern geprüft werden.",
+      "tags": ["live_hint", "ephemeral"]
+    }
+  ],
+  "city_facts_non_place": [
+    "Halle verdankt Entstehung und wirtschaftliche Entwicklung wesentlich natürlichen Solequellen an der Halleschen Marktplatzverwerfung; archäologische Nachweise reichen mehr als 5.000 Jahre zurück.",
+    "Die Salzwirker-Brüderschaft im Thale zu Halle organisierte sich 1524; ihre Mitglieder heißen Halloren. Der Begriff bezeichnet nicht allgemein alle Einwohner der Stadt.",
+    "Die traditionelle Hallorentracht besitzt 18 silberne Kugelknöpfe. Form und Name der 1952 erfundenen Halloren-Kugeln wurden davon abgeleitet.",
+    "Georg Friedrich Händel wurde am 23. Februar 1685 in Halle geboren, am folgenden Tag in der Marktkirche getauft und von Friedrich Wilhelm Zachow musikalisch ausgebildet.",
+    "Händel lebte ungefähr bis zu seinem 18. Lebensjahr in Halle, studierte 1702 kurz an der jungen Universität und war probeweise Organist am Dom, bevor er 1703 nach Hamburg ging.",
+    "Die Saale bildet in Halle eine breite Aue mit mehreren Armen und Flussinseln. Diese Geografie erklärt die Vielzahl von Brücken, Parks, Uferwegen und wiederkehrenden Hochwasserschäden.",
+    "Die Martin-Luther-Universität entstand 1817 aus der 1502 gegründeten Universität Wittenberg und der 1694 gegründeten Friedrichs-Universität Halle; den heutigen Namen trägt sie seit 1933.",
+    "Der Botanische Garten von 1698 ist ein frühes Zeugnis der halleschen Universität und gilt als erster Medizinalpflanzengarten Preußens.",
+    "Halle wurde 806 als „Halla“ chronistisch erwähnt. Giebichenstein ist 961 in einer Urkunde Ottos I. belegt.",
+    "Die historische Altstadt blieb im Zweiten Weltkrieg fast unversehrt und bewahrt einen weitgehend mittelalterlichen Straßengrundriss mit mehr als 500 Baudenkmalen."
+  ],
+  "sources": [
+    "https://halle.de/kultur-tourismus/stadtgeschichte/salzstadt",
+    "https://halle.de/kultur-tourismus/stadtgeschichte/chronik",
+    "https://halle.de/leben-in-halle/stadtentwicklung/stadterneuerung/informationen-zum-sanierungsgebiet",
+    "https://stadtmuseumhalle.de/standorte/oberburg-giebichenstein",
+    "https://stadtmuseumhalle.de/standorte/leipziger-turm",
+    "https://www.lda-lsa.de/denkmalpflege/denkmal-des-monats/2022/februar-2022",
+    "https://www.lda-lsa.de/denkmalpflege/denkmal-des-monats/2019/juni-2019",
+    "https://www.lda-lsa.de/archaeologie/routen-der-archaeologie",
+    "https://www.kustodie.uni-halle.de/wissenschaftliche_sammlungen/",
+    "https://www.uni-halle.de/universitaet/geschichte/?lang=de",
+    "https://haendelhaus.de/hh/museum/biografie-von-g-f-haendel",
+    "https://www.buehnen-halle.de/de/neues-theater",
+    "https://zoo-halle.de/der-berg-ruft/",
+    "https://peissnitzhaus.de/home/das-haus/geschichte",
+    "https://www.peissnitzinsel.com/historie",
+    "https://www.hallore.de/halloren/geschichte/",
+    "https://salinemuseumhalle.de/saline-ensemble/",
+    "https://halle.de/kultur-tourismus/kunst-und-kultur/museen/brunnen/kunstbrunnen"
+  ]
+}

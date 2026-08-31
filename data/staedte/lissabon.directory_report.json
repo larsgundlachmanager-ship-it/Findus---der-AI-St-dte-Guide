@@ -1,0 +1,89 @@
+{
+  "stats": {
+    "added": 172,
+    "skippedNear": 39,
+    "skippedDup": 8,
+    "extras": 0
+  },
+  "pack_index": {
+    "total": 201,
+    "story": 28,
+    "directory": 173,
+    "offline_qa": 213,
+    "note": "UI: Gesamtzahl zeigen; Trigger nur Story Tier 1–2 (+ selektiv 3)."
+  },
+  "gate": {
+    "ok": true,
+    "errors": [],
+    "warnings": [],
+    "stats": {
+      "spots": 201,
+      "storySpots": 28,
+      "directorySpots": 173,
+      "triggers": 201,
+      "missingTrigger": 0,
+      "missingNarration": 0,
+      "missingApproach": 0,
+      "missingPoly": 0,
+      "thinDeep": 0,
+      "orphanTriggers": 0,
+      "categories": [
+        "activity",
+        "altstadt",
+        "apotheke",
+        "aussicht",
+        "bahnhof",
+        "cafe",
+        "denkmal",
+        "einkaufen",
+        "freizeit",
+        "freizeitpark",
+        "gepaeck",
+        "geschichte",
+        "gesundheit",
+        "golf",
+        "hotel",
+        "kino",
+        "kirche",
+        "markt",
+        "museum",
+        "natur",
+        "restaurant",
+        "service",
+        "souvenir",
+        "spielplatz",
+        "sport",
+        "supermarket",
+        "tankstelle",
+        "toilette",
+        "tour",
+        "tourist_info",
+        "wasser"
+      ],
+      "missingMustHave": [],
+      "nicePresent": [
+        "cafe",
+        "restaurant",
+        "hotel",
+        "einkaufen",
+        "service",
+        "gesundheit",
+        "sport",
+        "bahnhof"
+      ],
+      "liveResearch": 4,
+      "offlineQa": 213,
+      "hasCoverage": true,
+      "hasTransit": false,
+      "hasMobility": false,
+      "links": 0
+    },
+    "gaps": {
+      "needsNarration": [],
+      "needsPolygon": [],
+      "needsApproach": [],
+      "needsDeep": [],
+      "missingCategories": []
+    }
+  }
+}

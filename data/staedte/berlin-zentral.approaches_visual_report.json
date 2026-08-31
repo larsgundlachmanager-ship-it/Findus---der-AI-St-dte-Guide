@@ -1,0 +1,1106 @@
+{
+  "city": "berlin-zentral",
+  "apply": true,
+  "touched": 137,
+  "approachesFixed": 137,
+  "faqAdded": 0,
+  "data_version": 17,
+  "rows": [
+    {
+      "id": "berlin_museumsinsel",
+      "name": "Museumsinsel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_alexanderplatz",
+      "name": "Alexanderplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_hackescher_markt",
+      "name": "Hackescher Markt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_rotes_rathaus",
+      "name": "Rotes Rathaus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_brandenburger_tor",
+      "name": "Brandenburger Tor",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_unter_den_linden",
+      "name": "Unter den Linden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_alte_nationalgalerie",
+      "name": "Alte Nationalgalerie",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_deutsches_historisches_museum",
+      "name": "Deutsches Historisches Museum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_neues_museum",
+      "name": "Neues Museum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_korperwelten_museum_berlin_am_fernsehturm_alexanderplatz_dauerausstellung",
+      "name": "KÖRPERWELTEN Museum Berlin | Am Fernsehturm / Alexanderplatz | Dauerausstellung",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_deja_vu_museum",
+      "name": "DeJa Vu Museum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_altes_museum",
+      "name": "Altes Museum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_illuseum_berlin",
+      "name": "Illuseum Berlin",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_pergamonmuseum_das_panorama",
+      "name": "Pergamonmuseum. Das Panorama",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_ddr_museum",
+      "name": "DDR Museum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_bode_museum",
+      "name": "Bode-Museum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_ikono_berlin",
+      "name": "IKONO Berlin",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_berlin_global",
+      "name": "BERLIN GLOBAL",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_samurai_museum_berlin",
+      "name": "Samurai Museum Berlin",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_anne_frank_zentrum",
+      "name": "Anne Frank Zentrum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_museum_fur_naturkunde",
+      "name": "Museum für Naturkunde",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_futurium",
+      "name": "Futurium",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_lustgarten",
+      "name": "Lustgarten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_st_marienkirche",
+      "name": "St. Marienkirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_kapelle_der_versohnung",
+      "name": "Kapelle der Versöhnung",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_heilig_geist_kapelle",
+      "name": "Heilig-Geist-Kapelle",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_friedrichswerdersche_kirche",
+      "name": "Friedrichswerdersche Kirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_kaiser_wilhelm_gedachtniskirche",
+      "name": "Kaiser-Wilhelm-Gedächtniskirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_sophienkirche",
+      "name": "Sophienkirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_st_clemens_kirche",
+      "name": "St.-Clemens-Kirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_hauskapelle_st_michael",
+      "name": "Hauskapelle St. Michael",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_heilig_kreuz_kirche_berlin_kreuzberg",
+      "name": "Heilig-Kreuz-Kirche Berlin-Kreuzberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_st_simeon_kirche_ev_kirchenkreis_berlin_stadtmitte",
+      "name": "St.-Simeon-Kirche - Ev. Kirchenkreis Berlin Stadtmitte",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_st_marienkapelle_alexianer_st_hedwig_krankenhaus",
+      "name": "St. Marienkapelle (Alexianer St. Hedwig-Krankenhaus)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_franzosische_kirche_zu_berlin_hugenottenkirche",
+      "name": "Französische Kirche zu Berlin (Hugenottenkirche)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_st_thomas_kirche_st_thomas_kirchengemeinde",
+      "name": "St.-Thomas-Kirche - St.-Thomas-Kirchengemeinde",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_zionskirche",
+      "name": "Zionskirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_katholische_pfarrei_herz_jesu",
+      "name": "Katholische Pfarrei Herz Jesu",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_st_matthaus_kirche",
+      "name": "St. Matthäus-Kirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_every_nation_kirche_berlin",
+      "name": "Every Nation Kirche Berlin",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_brunnen_der_volkerfreundschaft",
+      "name": "Brunnen der Völkerfreundschaft",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_neptunbrunnen",
+      "name": "Neptunbrunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_grundungsbrunnen",
+      "name": "Gründungsbrunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_lutherdenkmal",
+      "name": "Lutherdenkmal",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_indischer_brunnen",
+      "name": "Indischer Brunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_molecule_men",
+      "name": "Molecule Men",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_berlin_brigitte_und_martin_matschinsky_denninghoff",
+      "name": "Berlin\" (Brigitte und Martin Matschinsky-Denninghoff)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_geldzahlerbrunnen",
+      "name": "Geldzählerbrunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_monbijou_brunnen",
+      "name": "Monbijou Brunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_bulowdenkmal",
+      "name": "Bülowdenkmal",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_die_bogenspannerin",
+      "name": "Die Bogenspannerin",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_marchenbrunnen",
+      "name": "Märchenbrunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_denkmal_rosenstrasse",
+      "name": "Denkmal Rosenstraße",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_weltkugelbrunnen_wasserklops",
+      "name": "Weltkugelbrunnen Wasserklops",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_luisen_denkmal",
+      "name": "Luisen-Denkmal",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_uber_brunnen",
+      "name": "Uber Brunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_grosser_tiergarten",
+      "name": "Großer Tiergarten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_stadtplatz_marie",
+      "name": "Stadtplatz Marie",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_mauerpark",
+      "name": "Mauerpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_wittenbergplatz_nordpark",
+      "name": "Wittenbergplatz Nordpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_berliner_fernsehturm",
+      "name": "Berliner Fernsehturm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_aussichtsturm_gedenkstatte_berliner_mauer",
+      "name": "Aussichtsturm Gedenkstätte Berliner Mauer",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_lilli_henoch_sportplatz",
+      "name": "Lilli-Henoch-Sportplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_gunter_konig_sportplatz_blucherstrasse",
+      "name": "Günter-König-Sportplatz (Blücherstraße)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_sportplatz_workoutplatz_fussballplatz",
+      "name": "Sportplatz, Workoutplatz, Fußballplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_ruine_der_franziskaner_klosterkirche",
+      "name": "Ruine der Franziskaner-Klosterkirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_nikolaiviertel",
+      "name": "Nikolaiviertel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_die_mauer_the_wall_asisi_panorama_berlin",
+      "name": "DIE MAUER / THE WALL - asisi Panorama Berlin",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_deutsche_oper_berlin",
+      "name": "Deutsche Oper Berlin",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_komische_oper_berlin_schillertheater",
+      "name": "Komische Oper Berlin @Schillertheater",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_konzerthaus_berlin",
+      "name": "Konzerthaus Berlin",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_opernkasse_komische_oper_berlin",
+      "name": "Opernkasse Komische Oper Berlin",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_insel_rundweg_mierendorffinsel",
+      "name": "Insel-Rundweg Mierendorffinsel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_gamestate_zoo_berlin",
+      "name": "Gamestate Zoo Berlin",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_zoologischer_garten_berlin",
+      "name": "Zoologischer Garten Berlin",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_streichelzoo",
+      "name": "Streichelzoo",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_ticketpoint_zoo_berlin",
+      "name": "Ticketpoint Zoo Berlin",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_east_side_gallery",
+      "name": "East Side Gallery",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_berliner_dom",
+      "name": "Berliner Dom",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_siegessaule",
+      "name": "Siegessäule",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_wasserfall_viktoriapark",
+      "name": "Wasserfall Viktoriapark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_denkmal_fur_die_ermordeten_juden_europas",
+      "name": "Denkmal für die ermordeten Juden Europas",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_reichstagsgebaude",
+      "name": "Reichstagsgebäude",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_die_farnmauer",
+      "name": "Die Farnmauer",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_schillerdenkmal",
+      "name": "Schillerdenkmal",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_drei_madchen_und_ein_knabe",
+      "name": "Drei Mädchen und ein Knabe",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_richard_wagner_denkmal",
+      "name": "Richard-Wagner-Denkmal",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_tritonbrunnen",
+      "name": "Tritonbrunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_berlinische_galerie",
+      "name": "Berlinische Galerie",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_neue_nationalgalerie",
+      "name": "Neue Nationalgalerie",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_galerie_art_cru_berlin",
+      "name": "Galerie ART CRU Berlin",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_gemaldegalerie",
+      "name": "Gemäldegalerie",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_konrad_fischer_galerie_berlin",
+      "name": "Konrad Fischer Galerie Berlin",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_fotografiska_berlin",
+      "name": "Fotografiska Berlin",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_ak_galerie",
+      "name": "AK Galerie",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_palaispopulaire",
+      "name": "PalaisPopulaire",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_kunstgewerbemuseum",
+      "name": "Kunstgewerbemuseum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_anoha_die_kinderwelt_des_judischen_museums_berlin",
+      "name": "ANOHA – Die Kinderwelt des Jüdischen Museums Berlin",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_galerie_eigen_art_gmbh_co_kg",
+      "name": "Galerie EIGEN + ART GmbH & Co. KG",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_galerie_neu",
+      "name": "Galerie Neu",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_direktorenhaus_museum_fur_kunst_handwerk_und_design",
+      "name": "Direktorenhaus - Museum für Kunst, Handwerk und Design.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_deutscher_dom",
+      "name": "Deutscher Dom",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_dominikanerkloster_sankt_paulus",
+      "name": "Dominikanerkloster Sankt Paulus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_stadtkloster_segen",
+      "name": "Stadtkloster Segen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_evangelisches_kirchenforum",
+      "name": "Evangelisches Kirchenforum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_rathauspassagen",
+      "name": "Rathauspassagen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_rathaus_schoneberg",
+      "name": "Rathaus Schöneberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_rathaus_kreuzberg",
+      "name": "Rathaus Kreuzberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_rathausbrucke",
+      "name": "Rathausbrücke",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_wc_center_rathausstrasse",
+      "name": "WC-Center Rathausstraße",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_u_rotes_rathaus_berlin",
+      "name": "U Rotes Rathaus (Berlin)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_schloss_charlottenburg",
+      "name": "Schloss Charlottenburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_schlossbrucke",
+      "name": "Schlossbrücke",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_schloss_charlottenburg_neuer_flugel",
+      "name": "Schloss Charlottenburg – Neuer Flügel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_berliner_schloss",
+      "name": "Berliner Schloss",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_burg_schild_japanese_denim_heritage_clothing",
+      "name": "Burg & Schild | Japanese Denim & Heritage Clothing",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_rosengarten_im_grossen_tiergarten",
+      "name": "Rosengarten im Großen Tiergarten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_schlossgarten_charlottenburg",
+      "name": "Schlossgarten Charlottenburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_wochenmarkt_am_kollwitzplatz",
+      "name": "Wochenmarkt am Kollwitzplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_wochenmarkt_arkonaplatz",
+      "name": "Wochenmarkt Arkonaplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_wochenmarkt_boxhagener_platz",
+      "name": "Wochenmarkt Boxhagener Platz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_wochenmarkt_karl_august_platz",
+      "name": "Wochenmarkt Karl-August-Platz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_okomarkt_am_kollwitzplatz",
+      "name": "Ökomarkt am Kollwitzplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_wochenmarkt_helmholtzplatz",
+      "name": "Wochenmarkt Helmholtzplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_wochenmarkt_winterfeldtplatz",
+      "name": "Wochenmarkt Winterfeldtplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_okomarkt_chamissoplatz",
+      "name": "Ökomarkt Chamissoplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_sportplatz_waldeckpark",
+      "name": "Sportplatz Waldeckpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_trinkbrunnen_leipziger_platz",
+      "name": "Trinkbrunnen Leipziger Platz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_deutsches_rotes_kreuz_kreisverband_berlin_zentrum_e_v_bereitschaften_mitt",
+      "name": "Deutsches Rotes Kreuz Kreisverband Berlin-Zentrum e.V. - Bereitschaften Mitte & Tiergarten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_gedenkort_weisse_kreuze",
+      "name": "Gedenkort Weiße Kreuze",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_checkpoint_charlie",
+      "name": "Checkpoint Charlie",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 2,
+      "had_approaches": 1
+    },
+    {
+      "id": "berlin_topographie_des_terrors",
+      "name": "Topographie des Terrors",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 3,
+      "had_approaches": 1
+    },
+    {
+      "id": "berlin_humboldt_forum",
+      "name": "Humboldt Forum",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 4,
+      "had_approaches": 1
+    },
+    {
+      "id": "berlin_potsdamer_platz",
+      "name": "Potsdamer Platz",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 3,
+      "had_approaches": 1
+    },
+    {
+      "id": "berlin_neue_synagoge",
+      "name": "Neue Synagoge",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 4,
+      "had_approaches": 1
+    },
+    {
+      "id": "berlin_juedisches_museum_berlin",
+      "name": "Jüdisches Museum Berlin",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 4,
+      "had_approaches": 1
+    },
+    {
+      "id": "berlin_hackesche_hoefe",
+      "name": "Hackesche Höfe",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 4,
+      "had_approaches": 1
+    }
+  ]
+}

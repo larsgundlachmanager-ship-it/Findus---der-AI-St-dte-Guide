@@ -12,6 +12,13 @@ import {
   parseHotelStayDates,
   type HotelAvailabilityResult,
 } from './hotelAvailabilityService';
+import {
+  finalizeHotelBookAffiliateUrl,
+  hotelBookOpenUrlPayload,
+  resolveHotelBookTarget,
+} from '../affiliate/hotelPropertyDeepLink';
+import { pickAffiliateOffer } from '../affiliate/affiliatePickOffer';
+import { hotelIdentity, userWantsCheapest } from '../affiliate/quoteIdentity';
 
 export type HotelBookingPack = {
   speechExtra: string;
@@ -25,9 +32,23 @@ export async function buildHotelBookingPack(
   offer: PendingNavOffer,
   opts?: { userText?: string; suggestWhy?: boolean },
 ): Promise<HotelBookingPack> {
+  const namedCity = (() => {
+    try {
+      const { extractCityFromText } = require('../../module2/context/shortTermContext') as {
+        extractCityFromText: (t: string) => string | null;
+      };
+      return extractCityFromText(opts?.userText || '') || null;
+    } catch {
+      return null;
+    }
+  })();
+  const target = resolveHotelBookTarget({
+    hotelName: offer.name,
+    destination: namedCity,
+  });
   const city =
+    target.city ||
     getCachedUserProfile()?.cityName?.trim() ||
-    offer.name.replace(/^hotel\s+/i, '').trim() ||
     'Germany';
   const { checkin, checkout } = parseHotelStayDates(opts?.userText);
 
@@ -61,6 +82,46 @@ export async function buildHotelBookingPack(
     };
   }
 
+  const cheapestAsk = userWantsCheapest(opts?.userText);
+  const adults = 2;
+
+  const bookStayUrl = (stay: {
+    name: string;
+    bookUrl: string;
+    priceTotal: number | null;
+    expediaPropertyId?: string | null;
+  }) => {
+    const identity = hotelIdentity({
+      propertyId: stay.expediaPropertyId,
+      name: stay.name,
+      city,
+      checkin,
+      checkout,
+      adults,
+    });
+    const stay22 = {
+      id: 'stay22',
+      label: stay.name,
+      url: stay.bookUrl,
+      commissionScore: 68,
+      deepLinkLevel: 'deep' as const,
+      partnerPriceEur: stay.priceTotal,
+      identity,
+    };
+    const picked = pickAffiliateOffer([stay22], {
+      userWantsCheapest: cheapestAsk,
+    });
+    return finalizeHotelBookAffiliateUrl({
+      hotelName: stay.name || offer.name,
+      city,
+      bookUrl: picked?.url || stay.bookUrl,
+      checkin,
+      checkout,
+      adults,
+      expediaPropertyId: stay.expediaPropertyId,
+    });
+  };
+
   const actions: QuickAction[] = [];
   let speechExtra = '';
 
@@ -79,10 +140,21 @@ export async function buildHotelBookingPack(
       .filter(Boolean)
       .join(' ');
 
+    const bookUrl = bookStayUrl(m);
     actions.push({
       type: 'OPEN_URL',
       label: `🏨 Zimmer ab ${Math.round(m.priceTotal ?? 0)} ${m.currency}`,
-      payload: { url: m.bookUrl, targetPoiId: offer.poiId },
+      payload: {
+        ...hotelBookOpenUrlPayload({
+          url: bookUrl,
+          hotelName: m.name || offer.name,
+          city,
+          checkin,
+          checkout,
+          adults,
+        }),
+        targetPoiId: offer.poiId,
+      },
     });
 
     return {
@@ -98,22 +170,34 @@ export async function buildHotelBookingPack(
     ? `${availability.matchedUnpricedName} ist für ${checkin} → ${checkout} online nicht buchbar (kein Live-Preis / vermutlich ausgebucht).`
     : `${offer.name} kann ich für ${checkin} → ${checkout} nicht als frei bestätigen.`;
 
-  const alts = availability.alternatives;
+  const alts = cheapestAsk
+    ? [...availability.alternatives].sort(
+        (a, b) => (a.priceTotal ?? 1e9) - (b.priceTotal ?? 1e9),
+      )
+    : availability.alternatives;
+  const showAlts = cheapestAsk ? alts.slice(0, 1) : alts.slice(0, 2);
   if (alts.length) {
-    speechExtra = `${soldHint} Stattdessen frei: ${alts
-      .slice(0, 2)
+    speechExtra = `${soldHint} Stattdessen frei: ${showAlts
       .map(
         (a) =>
           `${a.name} ab ${Math.round(a.priceTotal ?? 0)} ${a.currency}`,
       )
       .join('; ')}.`;
-    for (const a of alts.slice(0, 2)) {
+    for (const a of showAlts) {
+      const bookUrl = bookStayUrl(a);
       actions.push({
         type: 'OPEN_URL',
         label: shortenActionLabel(
           `🏨 ${a.name.split(/[|,]/)[0]!.trim()} · ${Math.round(a.priceTotal ?? 0)}€`,
         ),
-        payload: { url: a.bookUrl },
+        payload: hotelBookOpenUrlPayload({
+          url: bookUrl,
+          hotelName: a.name,
+          city,
+          checkin,
+          checkout,
+          adults,
+        }),
       });
     }
   } else {

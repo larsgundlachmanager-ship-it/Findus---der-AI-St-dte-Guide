@@ -1,0 +1,146 @@
+{
+  "city": "tettnang",
+  "apply": true,
+  "touched": 17,
+  "approachesFixed": 17,
+  "faqAdded": 0,
+  "data_version": 36,
+  "rows": [
+    {
+      "id": "tettnang_elektronikmuseum_tettnang",
+      "name": "Elektronikmuseum Tettnang",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "tettnang_st_gallus",
+      "name": "Pfarrkirche St. Gallus",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 1,
+      "had_approaches": 3
+    },
+    {
+      "id": "tettnang_kronenbrunnen",
+      "name": "Kronenbrunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "tettnang_fliegerdenkmal",
+      "name": "Fliegerdenkmal Schäferhof / Loretowald",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "tettnang_schlosspark_tettnang",
+      "name": "Schlosspark Tettnang",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "tettnang_neues_schloss",
+      "name": "Neues Schloss Tettnang",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 1,
+      "had_approaches": 3
+    },
+    {
+      "id": "tettnang_altes_schloss",
+      "name": "Altes Schloss · Rathaus",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "tettnang_torschloss",
+      "name": "Torschloss & Montfort-Museum",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 1,
+      "had_approaches": 3
+    },
+    {
+      "id": "tettnang_hopfengut_no20",
+      "name": "Hopfengut N°20 · Hopfenmuseum",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 1,
+      "had_approaches": 3
+    },
+    {
+      "id": "tettnang_baerenplatz",
+      "name": "Bärenplatz · ZOB & Kronenbrauerei",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 0,
+      "had_approaches": 3
+    },
+    {
+      "id": "tettnang_altstadt",
+      "name": "Tettnang Altstadt · Fußachsen",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 0,
+      "had_approaches": 3
+    },
+    {
+      "id": "tettnang_ehemaliges_schiesshaus",
+      "name": "Ehemaliges Schießhaus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "tettnang_hopfenpfad",
+      "name": "Tettnanger Hopfenpfad",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "tettnang_dorfweiher_siggenweiler",
+      "name": "Dorfweiher Siggenweiler",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "tettnang_wildpark_sonnenhalde",
+      "name": "Wildpark Sonnenhalde",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "tettnang_rappertsweiler_gedenkstele",
+      "name": "Gedenkstele Rappertsweiler · Bauernkrieg 1525",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "tettnang_kapelle_bruennensweiler",
+      "name": "Kapelle Maria Königin des Friedens · Brünnensweiler",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    }
+  ]
+}

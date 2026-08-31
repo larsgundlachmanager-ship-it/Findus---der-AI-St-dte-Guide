@@ -1,0 +1,154 @@
+{
+  "city": "wangerooge",
+  "apply": true,
+  "touched": 18,
+  "approachesFixed": 18,
+  "faqAdded": 0,
+  "data_version": 58,
+  "rows": [
+    {
+      "id": "wangerooge_cafe_pudding",
+      "name": "Café Pudding",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 0,
+      "had_approaches": 3
+    },
+    {
+      "id": "wangerooge_db_bahnhof_wangerooge",
+      "name": "Inselbahnhof Wangerooge",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "wangerooge_inselmuseum_alter_leuchtturm",
+      "name": "Alter Leuchtturm · Inselmuseum & Standesamt",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 0,
+      "had_approaches": 3
+    },
+    {
+      "id": "wangerooge_westturm",
+      "name": "Neuer Westturm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "wangerooge_fahranleger_wangerooge",
+      "name": "Fähranleger Wangerooge",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "wangerooge_nationalpark_haus_wangerooge",
+      "name": "Nationalpark-Haus „Rosenhaus“",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "wangerooge_neuer_leuchtturm_wangerooge",
+      "name": "Neuer Leuchtturm Wangerooge",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "wangerooge_nikolai_kirche_evangelisch_lutherische_kirchenge",
+      "name": "Kirche am Meer · Ev.-luth. Gemeinde",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "wangerooge_dorfplatz",
+      "name": "Dorfplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "wangerooge_obere_strandpromenade",
+      "name": "Obere Strandpromenade",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "wangerooge_lazarettbunker_wangerooge",
+      "name": "Lazarettbunker Wangerooge",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "wangerooge_hauptstrand",
+      "name": "Hauptstrand Wangerooge",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "wangerooge_hartmannstand_gedenken",
+      "name": "Mahnmal Bunker Hartmannsstand",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "wangerooge_st_willehad",
+      "name": "St. Willehad",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "wangerooge_fundamente_alter_westturm",
+      "name": "Fundamente Alter Westturm (Ebbe)",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "harlesiel_faehrhafen",
+      "name": "Fährhafen Harlesiel (Gepäck- & Logistik-Terminal)",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 1,
+      "had_approaches": 3
+    },
+    {
+      "id": "wangerooge_dunenlandschaft_seelen_pfad",
+      "name": "Dünenlandschaft / Seelen-Pfad",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "wangerooge_historische_uhr_pudding_uhr",
+      "name": "Historische Uhr / Pudding-Uhr",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    }
+  ]
+}

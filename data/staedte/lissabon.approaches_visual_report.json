@@ -1,0 +1,762 @@
+{
+  "city": "lissabon",
+  "apply": true,
+  "touched": 94,
+  "approachesFixed": 94,
+  "faqAdded": 0,
+  "data_version": 56,
+  "rows": [
+    {
+      "id": "lissabon_torre_de_belem",
+      "name": "Torre de Belém",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "lissabon_mosteiro_dos_jeronimos",
+      "name": "Mosteiro dos Jerónimos",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "lissabon_castelo_de_sao_jorge",
+      "name": "Castelo de São Jorge",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "lissabon_praca_do_comercio",
+      "name": "Praça do Comércio",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "lissabon_se_catedral_de_lisboa",
+      "name": "Sé Catedral de Lisboa",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "lissabon_elevador_de_santa_justa",
+      "name": "Elevador de Santa Justa",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "lissabon_alfama",
+      "name": "Alfama",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "lissabon_bairro_alto",
+      "name": "Bairro Alto",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "lissabon_miradouro_da_senhora_do_monte",
+      "name": "Miradouro da Senhora do Monte",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "lissabon_miradouro_de_santa_luzia",
+      "name": "Miradouro de Santa Luzia",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "lissabon_parque_eduardo_vii",
+      "name": "Parque Eduardo VII",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "lissabon_basilica_da_estrela",
+      "name": "Basílica da Estrela",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "lissabon_padrao_dos_descobrimentos",
+      "name": "Padrão dos Descobrimentos",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "lissabon_oceanario_de_lisboa",
+      "name": "Oceanário de Lisboa",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "lissabon_maat",
+      "name": "MAAT",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "lissabon_museu_nacional_do_azulejo",
+      "name": "Museu Nacional do Azulejo",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "lissabon_lx_factory",
+      "name": "LX Factory",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "lissabon_time_out_market",
+      "name": "Time Out Market",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "lissabon_rossio",
+      "name": "Rossio",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "lissabon_avenida_da_liberdade",
+      "name": "Avenida da Liberdade",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "lissabon_ponte_25_de_abril",
+      "name": "Ponte 25 de Abril",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "lissabon_eletrico_28",
+      "name": "Elétrico 28",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "lissabon_feira_da_ladra",
+      "name": "Feira da Ladra",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "lissabon_jardim_botanico_de_lisboa",
+      "name": "Jardim Botânico de Lisboa",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "lissabon_museu_calouste_gulbenkian",
+      "name": "Museu Calouste Gulbenkian",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "lissabon_gare_do_oriente",
+      "name": "Gare do Oriente",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "lissabon_santa_apolonia",
+      "name": "Santa Apolónia",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "lissabon_stadtgeschichte",
+      "name": "Geschichte von Lissabon",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "lissabon_cinemateca_portuguesa_museu_do_cinema",
+      "name": "Cinemateca Portuguesa - Museu do Cinema",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 1,
+      "had_approaches": 3
+    },
+    {
+      "id": "lissabon_estadio_da_luz",
+      "name": "Estádio da Luz",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 1,
+      "had_approaches": 3
+    },
+    {
+      "id": "lissabon_estadio_jose_alvalade_xxi",
+      "name": "Estádio José Alvalade XXI",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 1,
+      "had_approaches": 3
+    },
+    {
+      "id": "lissabon_jardim_do_torel",
+      "name": "Jardim do Torel",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 1,
+      "had_approaches": 3
+    },
+    {
+      "id": "lissabon_reservatorio_da_mae_d_agua_das_amoreiras",
+      "name": "Reservatório da Mãe d'Água das Amoreiras",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 1,
+      "had_approaches": 3
+    },
+    {
+      "id": "lissabon_cristo_rei",
+      "name": "Cristo Rei",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "lissabon_bounce_luggage_storage_baixa_chiado",
+      "name": "Chiado",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 1,
+      "had_approaches": 3
+    },
+    {
+      "id": "lissabon_mercado_de_campo_de_ourique",
+      "name": "Mercado de Campo de Ourique",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 1,
+      "had_approaches": 3
+    },
+    {
+      "id": "lissabon_miradouro_de_sao_pedro_de_alcantara",
+      "name": "Miradouro de São Pedro de Alcântara",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "lissabon_aqueduto_das_aguas_livres",
+      "name": "Aqueduto das Águas Livres",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "lissabon_parque_das_nacoes",
+      "name": "Parque das Nações",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "lissabon_palacio_nacional_da_ajuda",
+      "name": "Palácio Nacional da Ajuda",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "lissabon_marques_de_pombal",
+      "name": "Praça Marquês de Pombal",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 3,
+      "had_approaches": 1
+    },
+    {
+      "id": "lissabon_igreja_de_sao_roque",
+      "name": "Igreja de São Roque",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "lissabon_amoreiras_360_panoramic_view",
+      "name": "Amoreiras 360",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "lissabon_jardim_botanico_tropical",
+      "name": "Jardim Botânico Tropical",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "lissabon_jardim_da_fundacao_calouste_gulbenkian",
+      "name": "Jardim da Fundação Calouste Gulbenkian",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "lissabon_mosteiro_de_sao_vicente_de_fora",
+      "name": "Mosteiro de São Vicente de Fora",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 4,
+      "had_approaches": 1
+    },
+    {
+      "id": "lissabon_teatro_nacional_d_maria_ii",
+      "name": "Teatro Nacional D. Maria II",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "lissabon_doca_de_santo_amaro",
+      "name": "Doca de Santo Amaro",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 3,
+      "had_approaches": 1
+    },
+    {
+      "id": "lissabon_zoo_lissabon",
+      "name": "Zoo Lissabon",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "lissabon_museu_nacional_de_arte_antiga",
+      "name": "Museu Nacional de Arte Antiga",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 0,
+      "had_approaches": 3
+    },
+    {
+      "id": "lissabon_museu_nacional_dos_coches",
+      "name": "Museu Nacional dos Coches",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 0,
+      "had_approaches": 3
+    },
+    {
+      "id": "lissabon_centro_cultural_de_belem",
+      "name": "Centro Cultural de Belém",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 2,
+      "had_approaches": 3
+    },
+    {
+      "id": "lissabon_pasteis_de_belem",
+      "name": "Pastéis de Belém",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 1,
+      "had_approaches": 3
+    },
+    {
+      "id": "lissabon_museu_colecao_berardo",
+      "name": "Museu Coleção Berardo",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 2,
+      "had_approaches": 3
+    },
+    {
+      "id": "lissabon_palacio_de_belem",
+      "name": "Palácio de Belém",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 2,
+      "had_approaches": 3
+    },
+    {
+      "id": "lissabon_panteao_nacional",
+      "name": "Panteão Nacional",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 3,
+      "had_approaches": 3
+    },
+    {
+      "id": "lissabon_arco_da_rua_augusta",
+      "name": "Arco da Rua Augusta",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 0,
+      "had_approaches": 3
+    },
+    {
+      "id": "lissabon_elevador_da_gloria",
+      "name": "Elevador da Glória",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 0,
+      "had_approaches": 3
+    },
+    {
+      "id": "lissabon_casa_fernando_pessoa",
+      "name": "Casa Fernando Pessoa",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 1,
+      "had_approaches": 3
+    },
+    {
+      "id": "lissabon_museu_da_marioneta",
+      "name": "Museu da Marioneta",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 2,
+      "had_approaches": 3
+    },
+    {
+      "id": "lissabon_museu_do_oriente",
+      "name": "Museu do Oriente",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 0,
+      "had_approaches": 3
+    },
+    {
+      "id": "lissabon_pink_street",
+      "name": "Pink Street",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 1,
+      "had_approaches": 3
+    },
+    {
+      "id": "lissabon_torre_vasco_da_gama",
+      "name": "Torre Vasco da Gama",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 2,
+      "had_approaches": 3
+    },
+    {
+      "id": "lissabon_telecabine_lisboa",
+      "name": "Telecabine Lisboa",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 2,
+      "had_approaches": 3
+    },
+    {
+      "id": "lissabon_pavilhao_do_conhecimento",
+      "name": "Pavilhão do Conhecimento",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 2,
+      "had_approaches": 3
+    },
+    {
+      "id": "lissabon_casino_lisboa",
+      "name": "Casino Lisboa",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 1,
+      "had_approaches": 3
+    },
+    {
+      "id": "lissabon_centro_vasco_da_gama",
+      "name": "Centro Vasco da Gama",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 1,
+      "had_approaches": 3
+    },
+    {
+      "id": "lissabon_palacio_dos_marqueses_de_fronteira",
+      "name": "Palácio dos Marqueses de Fronteira",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 0,
+      "had_approaches": 3
+    },
+    {
+      "id": "lissabon_casa_museu_anastacio_goncalves",
+      "name": "Casa-Museu Anastácio Gonçalves",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 1,
+      "had_approaches": 3
+    },
+    {
+      "id": "lissabon_igreja_da_memoria",
+      "name": "Igreja da Memória",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 2,
+      "had_approaches": 3
+    },
+    {
+      "id": "lissabon_forte_do_bom_sucesso",
+      "name": "Forte do Bom Sucesso",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 1,
+      "had_approaches": 3
+    },
+    {
+      "id": "lissabon_praca_do_imperio",
+      "name": "Praça do Império",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 1,
+      "had_approaches": 3
+    },
+    {
+      "id": "lissabon_museu_militar_de_lisboa",
+      "name": "Museu Militar de Lisboa",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 1,
+      "had_approaches": 3
+    },
+    {
+      "id": "lissabon_campo_pequeno",
+      "name": "Campo Pequeno",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 2,
+      "had_approaches": 3
+    },
+    {
+      "id": "lissabon_instituto_superior_tecnico",
+      "name": "Instituto Superior Técnico",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 1,
+      "had_approaches": 3
+    },
+    {
+      "id": "lissabon_assembleia_da_republica",
+      "name": "Assembleia da República",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 2,
+      "had_approaches": 3
+    },
+    {
+      "id": "lissabon_convento_do_carmo",
+      "name": "Convento do Carmo",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "lissabon_museu_do_fado",
+      "name": "Museu do Fado",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "lissabon_casa_dos_bicos",
+      "name": "Casa dos Bicos",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "lissabon_igreja_da_graca",
+      "name": "Igreja da Graça",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "lissabon_mouraria",
+      "name": "Mouraria",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "lissabon_praca_dos_restauradores",
+      "name": "Praça dos Restauradores",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "lissabon_elevador_do_lavra",
+      "name": "Elevador do Lavra",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "lissabon_cais_do_sodre",
+      "name": "Cais do Sodré",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "lissabon_pilar_7_bridge_experience",
+      "name": "Pilar 7 Bridge Experience",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "lissabon_livraria_bertrand",
+      "name": "Livraria Bertrand",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "lissabon_elevador_da_bica",
+      "name": "Elevador da Bica",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "lissabon_igreja_de_santo_antonio",
+      "name": "Igreja de Santo António",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "lissabon_igreja_de_sao_domingos",
+      "name": "Igreja de São Domingos",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "lissabon_miradouro_da_graca",
+      "name": "Miradouro da Graça",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "lissabon_miradouro_das_portas_do_sol",
+      "name": "Miradouro das Portas do Sol",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "lissabon_chiado",
+      "name": "Chiado",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "lissabon_rua_augusta",
+      "name": "Rua Augusta",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "lissabon_jardim_da_estrela",
+      "name": "Jardim da Estrela",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    }
+  ]
+}

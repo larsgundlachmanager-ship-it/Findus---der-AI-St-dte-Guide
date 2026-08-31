@@ -1,0 +1,1961 @@
+{
+  "generated_at": "2026-08-28T07:03:07.738Z",
+  "summary": {
+    "city_id": "halle_saale",
+    "checked": 67,
+    "ok": 39,
+    "check": 12,
+    "bad": 16,
+    "errors": 0,
+    "max_delta_m": 180,
+    "city_halo_m": 28000,
+    "story_only": true
+  },
+  "rows": [
+    {
+      "id": "halle_saale_park_an_der_saline",
+      "name": "Park an der Saline",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.483932700000004,
+        "lng": 11.957820768000001
+      },
+      "query": "Park an der Saline, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.4885683,
+        "lng": 12.0783506,
+        "display_name": "Industriegebiet Halle-Saalkreis an der A14 - Star Park Halle, Halle (Saale), Deutschland",
+        "class": "landuse",
+        "type": "industrial",
+        "provider": "photon"
+      },
+      "delta_m": 8362,
+      "from_city_m": 1398,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_kammeroper_halle",
+      "name": "Kammeroper Halle",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.43513889999999,
+        "lng": 11.981841800000002
+      },
+      "query": "Kammeroper Halle, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.4824354,
+        "lng": 11.9712985,
+        "display_name": "Halle (Saale), Deutschland",
+        "class": "place",
+        "type": "city",
+        "provider": "photon"
+      },
+      "delta_m": 5310,
+      "from_city_m": 6783,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_saale_apotheke_halle",
+      "name": "Saale - Apotheke Halle",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.519953449999996,
+        "lng": 11.956533757142859
+      },
+      "query": "Saale, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.4794761,
+        "lng": 11.9540058,
+        "display_name": "Elisabeth-Saale, Saaleaue, Halle (Saale), Sachsen-Anhalt, Deutschland",
+        "class": "waterway",
+        "type": "river",
+        "importance": 0.5605527600280393,
+        "osm_type": "way",
+        "osm_id": 48460992,
+        "provider": "nominatim"
+      },
+      "delta_m": 4504,
+      "from_city_m": 2816,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_halloren_schokoladenerlebniswelt",
+      "name": "Halloren Schokoladenerlebniswelt",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.47805319090908,
+        "lng": 12.008939218181816
+      },
+      "query": "Halloren Schokoladenerlebniswelt, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.4821737,
+        "lng": 11.9596326,
+        "display_name": "Halloren- und Salinemuseum, Mansfelder Straße, Halle (Saale), Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 3445,
+      "from_city_m": 3528,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_klausberge",
+      "name": "Klausberge",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.50647074,
+        "lng": 11.95985476
+      },
+      "query": "Klausberge, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.4824354,
+        "lng": 11.9712985,
+        "display_name": "Halle (Saale), Deutschland",
+        "class": "place",
+        "type": "city",
+        "provider": "photon"
+      },
+      "delta_m": 2788,
+      "from_city_m": 1312,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_dolauer_heide",
+      "name": "Dölauer Heide",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.49546885679998,
+        "lng": 11.887496129600004
+      },
+      "query": "Dölauer Heide, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.5020437,
+        "lng": 11.9069481,
+        "display_name": "Dölauer Heide, Halle (Saale), Deutschland",
+        "class": "place",
+        "type": "suburb",
+        "provider": "photon"
+      },
+      "delta_m": 1532,
+      "from_city_m": 5451,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_historisches_technikzentrum_der_stadtwerke_halle",
+      "name": "Historisches Technikzentrum der Stadtwerke Halle",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.46557086,
+        "lng": 11.976747979999999
+      },
+      "query": "Historisches Technikzentrum der Stadtwerke Halle, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.4777636,
+        "lng": 11.9726594,
+        "display_name": "Museumspädagogik in der historischen Druckerei, Franckeplatz, Halle (Saale), Deutschland",
+        "class": "building",
+        "type": "office",
+        "provider": "photon"
+      },
+      "delta_m": 1385,
+      "from_city_m": 3391,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_georg_friedrich_handel_denkmal",
+      "name": "Georg-Friedrich-Händel-Denkmal",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.482887166666664,
+        "lng": 11.969300066666666
+      },
+      "query": "Georg-Friedrich-Händel-Denkmal, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.4922746,
+        "lng": 11.9782295,
+        "display_name": "Konservatorium Georg Friedrich Händel, Lessingstraße, Halle (Saale), Deutschland",
+        "class": "amenity",
+        "type": "school",
+        "provider": "photon"
+      },
+      "delta_m": 1213,
+      "from_city_m": 1403,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "halle_saale_roter_turm"
+      ]
+    },
+    {
+      "id": "halle_saale_viktoria_apotheke",
+      "name": "Viktoria Apotheke",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.48723216666667,
+        "lng": 11.975534622222222
+      },
+      "query": "Viktoria Apotheke, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.478487,
+        "lng": 11.9663149,
+        "display_name": "Apotheke an der Saale-Klinik, Steg, Halle (Saale), Deutschland",
+        "class": "amenity",
+        "type": "pharmacy",
+        "provider": "photon"
+      },
+      "delta_m": 1163,
+      "from_city_m": 1109,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_archaologisches_museum",
+      "name": "Archäologisches Museum",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.48627409090909,
+        "lng": 11.970002863636363
+      },
+      "query": "Archäologisches Museum, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.4890523,
+        "lng": 11.9859914,
+        "display_name": "DB Museum Halle (Saale), Volkmannstraße, Halle (Saale), Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 1149,
+      "from_city_m": 1043,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_riveufer_saalepromenade",
+      "name": "Riveufer Saalepromenade",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.499268119999996,
+        "lng": 11.94981034
+      },
+      "query": "Riveufer Saalepromenade, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.506736,
+        "lng": 11.9575634,
+        "display_name": "Saalepromenade, Halle (Saale), Deutschland",
+        "class": "highway",
+        "type": "track",
+        "provider": "photon"
+      },
+      "delta_m": 989,
+      "from_city_m": 1217,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_adventuregolf_hufeisensee",
+      "name": "Adventuregolf Hufeisensee",
+      "category": "natur",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.4710635,
+        "lng": 12.015762299999999
+      },
+      "query": "Adventuregolf Hufeisensee, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.4662459,
+        "lng": 12.0275294,
+        "display_name": "Hufeisensee, Halle (Saale), Deutschland",
+        "class": "water",
+        "type": "lake",
+        "provider": "photon"
+      },
+      "delta_m": 975,
+      "from_city_m": 4366,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_paulus_apotheke",
+      "name": "Paulus-Apotheke",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.49340025000001,
+        "lng": 11.974997025
+      },
+      "query": "Paulus-Apotheke, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.4953875,
+        "lng": 11.9665821,
+        "display_name": "Mohren-Apotheke, Reilstraße, Halle (Saale), Deutschland",
+        "class": "amenity",
+        "type": "pharmacy",
+        "provider": "photon"
+      },
+      "delta_m": 623,
+      "from_city_m": 644,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_golfpark_hufeisensee",
+      "name": "Golfpark Hufeisensee",
+      "category": "natur",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.468255,
+        "lng": 12.0137617
+      },
+      "query": "Golfpark Hufeisensee, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.4645673,
+        "lng": 12.0075074,
+        "display_name": "Golfpark Hufeisensee, Nussweg, Leuchtturmsiedlung, Dieselstraße, Halle (Saale), Sachsen-Anhalt, 06112, Deutschland",
+        "class": "leisure",
+        "type": "golf_course",
+        "importance": 0.000071281757839277,
+        "osm_type": "way",
+        "osm_id": 182170465,
+        "provider": "nominatim"
+      },
+      "delta_m": 597,
+      "from_city_m": 4462,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_zoologischer_garten_halle_bergzoo",
+      "name": "Zoologischer Garten Halle (Bergzoo)",
+      "category": "freizeit",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.50685915,
+        "lng": 11.9647781375
+      },
+      "query": "Zoologischer Garten Halle, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.5057356,
+        "lng": 11.9623076,
+        "display_name": "Zoologischer Garten, 5a, Fasanenstraße, Giebichenstein, Halle (Saale), Sachsen-Anhalt, 06114, Deutschland",
+        "class": "tourism",
+        "type": "zoo",
+        "importance": 0.2507397701059262,
+        "osm_type": "way",
+        "osm_id": 14101822,
+        "provider": "nominatim"
+      },
+      "delta_m": 212,
+      "from_city_m": 1283,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "halle_saale_osm_post_box_11093657489"
+      ]
+    },
+    {
+      "id": "halle_saale_hauptbahnhof",
+      "name": "Hauptbahnhof",
+      "category": "bahnhof",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.4783654125,
+        "lng": 11.9858753875
+      },
+      "query": "Hauptbahnhof, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.477129,
+        "lng": 11.9876105,
+        "display_name": "Hauptbahnhof, 1, Hans-Dietrich-Genscher-Platz, Freiimfelde/Kanenaer Weg, Halle (Saale), Sachsen-Anhalt, 06112, Deutschland",
+        "class": "building",
+        "type": "train_station",
+        "importance": 0.437614861262228,
+        "osm_type": "way",
+        "osm_id": 23148539,
+        "provider": "nominatim"
+      },
+      "delta_m": 183,
+      "from_city_m": 2328,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_goldsolebrunnen",
+      "name": "Goldsolebrunnen",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.48235633749999,
+        "lng": 11.9687801125
+      },
+      "query": "Goldsolebrunnen, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.4824354,
+        "lng": 11.9712985,
+        "display_name": "Halle (Saale), Deutschland",
+        "class": "place",
+        "type": "city",
+        "provider": "photon"
+      },
+      "delta_m": 175,
+      "from_city_m": 1456,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_am_leipziger_turm",
+      "name": "Am Leipziger Turm",
+      "category": "aussicht",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.4783911625,
+        "lng": 11.976686675
+      },
+      "query": "Am Leipziger Turm, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.4799062,
+        "lng": 11.9762131,
+        "display_name": "Am Leipziger Turm, Charlottenviertel, Nördliche Innenstadt, Halle (Saale), Sachsen-Anhalt, 06108, Deutschland",
+        "class": "highway",
+        "type": "tertiary",
+        "importance": 0.05340461509117262,
+        "osm_type": "way",
+        "osm_id": 12694826,
+        "provider": "nominatim"
+      },
+      "delta_m": 172,
+      "from_city_m": 2020,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_rathaus_halle",
+      "name": "Rathaus Halle",
+      "category": "verwaltung",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.48240338000001,
+        "lng": 11.971393860000001
+      },
+      "query": "Rathaus Halle, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.4829058,
+        "lng": 11.9734639,
+        "display_name": "Rathausstraße, Altstadt, Halle (Saale), Sachsen-Anhalt, 06108, Deutschland",
+        "class": "highway",
+        "type": "residential",
+        "importance": 0.05340461509117262,
+        "osm_type": "way",
+        "osm_id": 12082791,
+        "provider": "nominatim"
+      },
+      "delta_m": 154,
+      "from_city_m": 1484,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_spielplatz_im_bergzoo",
+      "name": "Spielplatz im Bergzoo",
+      "category": "freizeit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.50629393333333,
+        "lng": 11.964117250000001
+      },
+      "query": "Spielplatz im Bergzoo, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.5051998,
+        "lng": 11.9628703,
+        "display_name": "Kurallee, Giebichenstein, Halle (Saale), Sachsen-Anhalt, 06114, Deutschland",
+        "class": "leisure",
+        "type": "playground",
+        "importance": -0.0007769896588766768,
+        "osm_type": "way",
+        "osm_id": 394253798,
+        "provider": "nominatim"
+      },
+      "delta_m": 149,
+      "from_city_m": 1225,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_stadtmuseum_christian_wolff_haus",
+      "name": "Stadtmuseum Christian-Wolff-Haus",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.48059636999999,
+        "lng": 11.97158836
+      },
+      "query": "Stadtmuseum Christian-Wolff-Haus, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.4811935,
+        "lng": 11.9732832,
+        "display_name": "Christian-Wolff-Straße, Halle (Saale), Deutschland",
+        "class": "highway",
+        "type": "pedestrian",
+        "provider": "photon"
+      },
+      "delta_m": 135,
+      "from_city_m": 1683,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_franckesche_stiftungen",
+      "name": "Franckesche Stiftungen",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.47733128,
+        "lng": 11.97172862
+      },
+      "query": "Franckesche Stiftungen, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.47642,
+        "lng": 11.9729649,
+        "display_name": "Franckesche Stiftungen zu Halle, 1, Franckeplatz, Altstadt, Halle (Saale), Sachsen-Anhalt, 06110, Deutschland",
+        "class": "tourism",
+        "type": "attraction",
+        "importance": 0.4575539692664271,
+        "osm_type": "way",
+        "osm_id": 190384576,
+        "provider": "nominatim"
+      },
+      "delta_m": 133,
+      "from_city_m": 2040,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_oberburg_giebichenstein",
+      "name": "Oberburg Giebichenstein",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.50356347777779,
+        "lng": 11.954693100000002
+      },
+      "query": "Oberburg Giebichenstein, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.5025675,
+        "lng": 11.9556374,
+        "display_name": "Oberburg Giebichenstein, Seebener Straße, Giebichenstein, Halle (Saale), Sachsen-Anhalt, 06114, Deutschland",
+        "class": "information",
+        "type": "board",
+        "importance": 0.000071281757839277,
+        "osm_type": "node",
+        "osm_id": 12595567699,
+        "provider": "nominatim"
+      },
+      "delta_m": 129,
+      "from_city_m": 1213,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_neue_residenz",
+      "name": "Neue Residenz",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.48413785384616,
+        "lng": 11.964927223076923
+      },
+      "query": "Neue Residenz, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.4835595,
+        "lng": 11.9641247,
+        "display_name": "Neue Residenz, 5, Domstraße, Altstadt, Halle (Saale), Sachsen-Anhalt, 06108, Deutschland",
+        "class": "tourism",
+        "type": "attraction",
+        "importance": 0.000071281757839277,
+        "osm_type": "relation",
+        "osm_id": 5172317,
+        "provider": "nominatim"
+      },
+      "delta_m": 85,
+      "from_city_m": 1251,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_peissnitz",
+      "name": "Peißnitz",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.49309886346866,
+        "lng": 11.948730050922507
+      },
+      "query": "Peißnitz, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.4926039,
+        "lng": 11.9479479,
+        "display_name": "Peißnitz, Saaleaue, Halle (Saale), Sachsen-Anhalt, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "importance": 0.0800712817578393,
+        "osm_type": "way",
+        "osm_id": 305779487,
+        "provider": "nominatim"
+      },
+      "delta_m": 77,
+      "from_city_m": 1238,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_marktplatz_halle",
+      "name": "Marktplatz Halle",
+      "category": "altstadt",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.48206012352941,
+        "lng": 11.969750482352941
+      },
+      "query": "Marktplatz Halle, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.482527,
+        "lng": 11.9695136,
+        "display_name": "Marktplatz Halle, Marktplatz, Altstadt, Halle (Saale), Sachsen-Anhalt, 06108, Deutschland",
+        "class": "amenity",
+        "type": "marketplace",
+        "importance": 0.000071281757839277,
+        "osm_type": "node",
+        "osm_id": 1284502212,
+        "provider": "nominatim"
+      },
+      "delta_m": 54,
+      "from_city_m": 1498,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "halle_saale_tk_maxx"
+      ]
+    },
+    {
+      "id": "halle_saale_ulrichskirche",
+      "name": "Ulrichskirche",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.481329529545455,
+        "lng": 11.972765149999999
+      },
+      "query": "Ulrichskirche, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.4813125,
+        "lng": 11.9727861,
+        "display_name": "Konzerthalle Ulrichskirche, 2, Christian-Wolff-Straße, Altstadt, Halle (Saale), Sachsen-Anhalt, 06108, Deutschland",
+        "class": "amenity",
+        "type": "events_venue",
+        "importance": 0.2853231881743613,
+        "osm_type": "way",
+        "osm_id": 28201866,
+        "provider": "nominatim"
+      },
+      "delta_m": 2,
+      "from_city_m": 1624,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "halle_saale_ulrichsbrunnen"
+      ]
+    },
+    {
+      "id": "halle_saale_roter_turm",
+      "name": "Roter Turm",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.482887166666664,
+        "lng": 11.969300066666666
+      },
+      "query": "Roter Turm, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.4828823,
+        "lng": 11.9693155,
+        "display_name": "Roter Turm, Marktplatz, Altstadt, Halle (Saale), Sachsen-Anhalt, 06108, Deutschland",
+        "class": "man_made",
+        "type": "tower",
+        "importance": 0.205345191009919,
+        "osm_type": "way",
+        "osm_id": 24810310,
+        "provider": "nominatim"
+      },
+      "delta_m": 1,
+      "from_city_m": 1403,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "halle_saale_georg_friedrich_handel_denkmal"
+      ]
+    },
+    {
+      "id": "halle_saale_reichardts_garten",
+      "name": "Reichardts Garten",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.50292183461538,
+        "lng": 11.95941786153846
+      },
+      "query": "Reichardts Garten, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.5031003,
+        "lng": 11.9602308,
+        "display_name": "Reichardts Garten, Giebichenstein, Halle (Saale), Sachsen-Anhalt, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "importance": 0.0800712817578393,
+        "osm_type": "way",
+        "osm_id": 14124546,
+        "provider": "nominatim"
+      },
+      "delta_m": 60,
+      "from_city_m": 965,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_altstadt",
+      "name": "Altstadt",
+      "category": "altstadt",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.48208087692308,
+        "lng": 11.970603869230773
+      },
+      "query": "Altstadt, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.4823204,
+        "lng": 11.9711943,
+        "display_name": "Altstadt, Halle (Saale), Deutschland",
+        "class": "place",
+        "type": "suburb",
+        "provider": "photon"
+      },
+      "delta_m": 49,
+      "from_city_m": 1507,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_apotheke_im_saale_center_halle",
+      "name": "Apotheke im Saale-Center | Halle",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.48059593939396,
+        "lng": 11.941758845454546
+      },
+      "query": "Apotheke im Saale-Center, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.4805738,
+        "lng": 11.941162,
+        "display_name": "Apotheke im Saale-Center, 9, Rennbahnring, Pferdeviertel, Neustadt, Halle (Saale), Sachsen-Anhalt, 06124, Deutschland",
+        "class": "amenity",
+        "type": "pharmacy",
+        "importance": 0.000071281757839277,
+        "osm_type": "node",
+        "osm_id": 393681862,
+        "provider": "nominatim"
+      },
+      "delta_m": 41,
+      "from_city_m": 2359,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_handel_haus_halle",
+      "name": "Händel-Haus Halle",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.4840405875,
+        "lng": 11.966592175000002
+      },
+      "query": "Händel-Haus Halle, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.4841796,
+        "lng": 11.9671125,
+        "display_name": "Händel-Haus, 5, Große Nikolaistraße, Altstadt, Halle (Saale), Sachsen-Anhalt, 06108, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.37858398060478177,
+        "osm_type": "relation",
+        "osm_id": 5195627,
+        "provider": "nominatim"
+      },
+      "delta_m": 39,
+      "from_city_m": 1259,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_stadtgottesacker",
+      "name": "Stadtgottesacker",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.482468286666666,
+        "lng": 11.976909166666665
+      },
+      "query": "Stadtgottesacker, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.4824766,
+        "lng": 11.9774728,
+        "display_name": "Stadtgottesacker, Nördliche Innenstadt, Halle (Saale), Sachsen-Anhalt, Deutschland",
+        "class": "landuse",
+        "type": "cemetery",
+        "importance": 0.34328481186948456,
+        "osm_type": "way",
+        "osm_id": 14477105,
+        "provider": "nominatim"
+      },
+      "delta_m": 39,
+      "from_city_m": 1612,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_gobelbrunnen",
+      "name": "Göbelbrunnen",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.4817486,
+        "lng": 11.9664674625
+      },
+      "query": "Göbelbrunnen, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.4820815,
+        "lng": 11.9663454,
+        "display_name": "Göbelbrunnen, Hallmarkt, Altstadt, Halle (Saale), Sachsen-Anhalt, 06108, Deutschland",
+        "class": "amenity",
+        "type": "fountain",
+        "importance": 0.000071281757839277,
+        "osm_type": "way",
+        "osm_id": 170715897,
+        "provider": "nominatim"
+      },
+      "delta_m": 38,
+      "from_city_m": 1513,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_reil_apotheke",
+      "name": "Reil-Apotheke",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.49670376875,
+        "lng": 11.967008775
+      },
+      "query": "Reil-Apotheke, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.496521,
+        "lng": 11.9665786,
+        "display_name": "Reil-Apotheke, 129a, Reilstraße, Paulusviertel, Halle (Saale), Sachsen-Anhalt, 06114, Deutschland",
+        "class": "amenity",
+        "type": "pharmacy",
+        "importance": 0.000071281757839277,
+        "osm_type": "node",
+        "osm_id": 282460077,
+        "provider": "nominatim"
+      },
+      "delta_m": 36,
+      "from_city_m": 159,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_halle_saale_hauptbahnhof",
+      "name": "Halle (Saale) Hauptbahnhof",
+      "category": "bahnhof",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.47741085,
+        "lng": 11.987769949999999
+      },
+      "query": "Halle Hauptbahnhof, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.4774872,
+        "lng": 11.9872964,
+        "display_name": "Halle (Saale) Hauptbahnhof, 1, Hans-Dietrich-Genscher-Platz, Freiimfelde/Kanenaer Weg, Halle (Saale), Sachsen-Anhalt, 06112, Deutschland",
+        "class": "railway",
+        "type": "station",
+        "importance": 0.437614861262228,
+        "osm_type": "node",
+        "osm_id": 250082941,
+        "provider": "nominatim"
+      },
+      "delta_m": 34,
+      "from_city_m": 2491,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_diakoniekrankenhaus_halle",
+      "name": "Diakoniekrankenhaus Halle",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.493815157142855,
+        "lng": 11.959600257142856
+      },
+      "query": "Diakoniekrankenhaus Halle, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.4941073,
+        "lng": 11.9595406,
+        "display_name": "Diakoniekrankenhaus Halle (Saale), 7, Mühlweg, Mühlwegviertel, Giebichenstein, Halle (Saale), Sachsen-Anhalt, 06114, Deutschland",
+        "class": "amenity",
+        "type": "hospital",
+        "importance": 0.000071281757839277,
+        "osm_type": "way",
+        "osm_id": 28975167,
+        "provider": "nominatim"
+      },
+      "delta_m": 33,
+      "from_city_m": 490,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_neues_theater",
+      "name": "Neues Theater",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.48557494166665,
+        "lng": 11.968503566666667
+      },
+      "query": "Neues Theater, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.4856786,
+        "lng": 11.9689484,
+        "display_name": "Neues Theater, 51, Große Ulrichstraße, Altstadt, Halle (Saale), Sachsen-Anhalt, 06108, Deutschland",
+        "class": "amenity",
+        "type": "theatre",
+        "importance": 0.34081317763107843,
+        "osm_type": "way",
+        "osm_id": 1000827869,
+        "provider": "nominatim"
+      },
+      "delta_m": 33,
+      "from_city_m": 1099,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_botanischer_garten",
+      "name": "Botanischer Garten",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.48919216744188,
+        "lng": 11.960089230232558
+      },
+      "query": "Botanischer Garten, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.4890357,
+        "lng": 11.960423,
+        "display_name": "Botanischer Garten, 3, Nördliche Innenstadt, Halle (Saale), Sachsen-Anhalt, 06108, Deutschland",
+        "class": "leisure",
+        "type": "garden",
+        "importance": 0.06673794842450599,
+        "osm_type": "way",
+        "osm_id": 12696113,
+        "provider": "nominatim"
+      },
+      "delta_m": 29,
+      "from_city_m": 807,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_historisches_strassenbahndepot_hallesche_strassenbahnfreunde_e_v",
+      "name": "Historisches Straßenbahndepot (Hallesche Straßenbahnfreunde e.V.)",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.502713925,
+        "lng": 11.9578836
+      },
+      "query": "Historisches Straßenbahndepot, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.5025554,
+        "lng": 11.9581835,
+        "display_name": "Historisches Straßenbahndepot, 191, Seebener Straße, Giebichenstein, Halle (Saale), Sachsen-Anhalt, 06114, Deutschland",
+        "class": "railway",
+        "type": "service_station",
+        "importance": 0.244781979759108,
+        "osm_type": "way",
+        "osm_id": 180694943,
+        "provider": "nominatim"
+      },
+      "delta_m": 27,
+      "from_city_m": 1002,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_eselsbrunnen",
+      "name": "Eselsbrunnen",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.480278633333334,
+        "lng": 11.969415199999998
+      },
+      "query": "Eselsbrunnen, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.4804609,
+        "lng": 11.9696433,
+        "display_name": "Eselsbrunnen, Alter Markt, Altstadt, Halle (Saale), Sachsen-Anhalt, 06108, Deutschland",
+        "class": "amenity",
+        "type": "fountain",
+        "importance": 0.16273786379520622,
+        "osm_type": "way",
+        "osm_id": 170715083,
+        "provider": "nominatim"
+      },
+      "delta_m": 26,
+      "from_city_m": 1691,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_apotheke_an_der_saaleklinik_zweigniederlassung",
+      "name": "Apotheke an der Saaleklinik Zweigniederlassung",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.47847255294117,
+        "lng": 11.965942876470585
+      },
+      "query": "Apotheke an der Saaleklinik Zweigniederlassung, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.478487,
+        "lng": 11.9663149,
+        "display_name": "Apotheke an der Saale-Klinik, Steg, Halle (Saale), Deutschland",
+        "class": "amenity",
+        "type": "pharmacy",
+        "provider": "photon"
+      },
+      "delta_m": 26,
+      "from_city_m": 1878,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_gedenkstatte_roter_ochse_halle_saale",
+      "name": "Gedenkstätte ROTER OCHSE Halle (Saale)",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.49178053333334,
+        "lng": 11.959633777777778
+      },
+      "query": "Gedenkstätte ROTER OCHSE Halle, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.4917523,
+        "lng": 11.9599726,
+        "display_name": "Gedenkstätte „Roter Ochse“, 20b, Am Kirchtor, Neumarktviertel, Nördliche Innenstadt, Halle (Saale), Sachsen-Anhalt, 06108, Deutschland",
+        "class": "tourism",
+        "type": "attraction",
+        "importance": 0.000071281757839277,
+        "osm_type": "way",
+        "osm_id": 61093653,
+        "provider": "nominatim"
+      },
+      "delta_m": 24,
+      "from_city_m": 606,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_db_museum_halle_saale",
+      "name": "DB Museum Halle (Saale)",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.489256092063485,
+        "lng": 11.986049123809524
+      },
+      "query": "DB Museum Halle, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.4890523,
+        "lng": 11.9859914,
+        "display_name": "DB Museum Halle (Saale), 39, Volkmannstraße, Freiimfelde/Kanenaer Weg, Halle (Saale), Sachsen-Anhalt, 06112, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.2574973608523206,
+        "osm_type": "way",
+        "osm_id": 1093774302,
+        "provider": "nominatim"
+      },
+      "delta_m": 23,
+      "from_city_m": 1530,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_kunstmuseum_moritzburg_halle_saale",
+      "name": "Kunstmuseum Moritzburg Halle (Saale)",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.48657198260871,
+        "lng": 11.963050647826087
+      },
+      "query": "Kunstmuseum Moritzburg Halle, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.4864135,
+        "lng": 11.9632095,
+        "display_name": "Kunstmuseum Moritzburg, 5, Friedemann-Bach-Platz, Altstadt, Halle (Saale), Sachsen-Anhalt, 06108, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.359473463574925,
+        "osm_type": "way",
+        "osm_id": 364152366,
+        "provider": "nominatim"
+      },
+      "delta_m": 21,
+      "from_city_m": 1001,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_lilien_apotheke",
+      "name": "Lilien-Apotheke",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.49237216,
+        "lng": 11.96641215
+      },
+      "query": "Lilien-Apotheke, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.4923756,
+        "lng": 11.9662068,
+        "display_name": "Lilien Apotheke, 28, Bernburger Straße, Neumarktviertel, Nördliche Innenstadt, Halle (Saale), Sachsen-Anhalt, 06108, Deutschland",
+        "class": "amenity",
+        "type": "pharmacy",
+        "importance": 0.000071281757839277,
+        "osm_type": "node",
+        "osm_id": 1818135945,
+        "provider": "nominatim"
+      },
+      "delta_m": 14,
+      "from_city_m": 332,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_landesmuseum_fur_vorgeschichte_halle_saale",
+      "name": "Landesmuseum für Vorgeschichte Halle (Saale)",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.49818041250002,
+        "lng": 11.962445365625
+      },
+      "query": "Landesmuseum für Vorgeschichte Halle, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.4982677,
+        "lng": 11.9623378,
+        "display_name": "Landesmuseum für Vorgeschichte, 9, Richard-Wagner-Straße, Mühlwegviertel, Giebichenstein, Halle (Saale), Sachsen-Anhalt, 06114, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.32771111640952466,
+        "osm_type": "way",
+        "osm_id": 164759915,
+        "provider": "nominatim"
+      },
+      "delta_m": 12,
+      "from_city_m": 409,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_richard_wagner_apotheke_halle_saale",
+      "name": "Richard-Wagner-Apotheke | Halle (Saale)",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.49936979,
+        "lng": 11.96280113
+      },
+      "query": "Richard-Wagner-Apotheke, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.4994204,
+        "lng": 11.9626429,
+        "display_name": "Richard-Wagner-Apotheke, 44, Richard-Wagner-Straße, Giebichenstein, Halle (Saale), Sachsen-Anhalt, 06114, Deutschland",
+        "class": "amenity",
+        "type": "pharmacy",
+        "importance": 0.000071281757839277,
+        "osm_type": "node",
+        "osm_id": 349178507,
+        "provider": "nominatim"
+      },
+      "delta_m": 12,
+      "from_city_m": 506,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_hallescher_dom",
+      "name": "Hallescher Dom",
+      "category": "kirche",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.484267115517234,
+        "lng": 11.964638912068965
+      },
+      "query": "Hallescher Dom, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.4842817,
+        "lng": 11.9644849,
+        "display_name": "Hallescher Dom, Domplatz, Altstadt, Halle (Saale), Sachsen-Anhalt, 06108, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.32547572759041243,
+        "osm_type": "way",
+        "osm_id": 27177219,
+        "provider": "nominatim"
+      },
+      "delta_m": 11,
+      "from_city_m": 1238,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_sankt_georg_apotheke",
+      "name": "Sankt Georg Apotheke",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.49840085555556,
+        "lng": 11.9659996
+      },
+      "query": "Sankt Georg Apotheke, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.4983369,
+        "lng": 11.9660995,
+        "display_name": "St. Georg Apotheke, Kohlschütterstraße, Halle (Saale), Deutschland",
+        "class": "amenity",
+        "type": "pharmacy",
+        "provider": "photon"
+      },
+      "delta_m": 10,
+      "from_city_m": 339,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_adler_apotheke_andreas_reichert_e_k",
+      "name": "Adler Apotheke Andreas Reichert e.K.",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.48916800909092,
+        "lng": 11.965583263636363
+      },
+      "query": "Adler Apotheke Andreas, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.4891316,
+        "lng": 11.9656787,
+        "display_name": "Adler-Apotheke, Geiststraße, Halle (Saale), Deutschland",
+        "class": "amenity",
+        "type": "pharmacy",
+        "provider": "photon"
+      },
+      "delta_m": 8,
+      "from_city_m": 690,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_vital_apotheke_am_reileck",
+      "name": "Vital-Apotheke am Reileck",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.4956972,
+        "lng": 11.965470871428574
+      },
+      "query": "Vital-Apotheke am Reileck, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.4956594,
+        "lng": 11.9655772,
+        "display_name": "Vital-Apotheke, Richard-Wagner-Straße, Halle (Saale), Deutschland",
+        "class": "amenity",
+        "type": "pharmacy",
+        "provider": "photon"
+      },
+      "delta_m": 8,
+      "from_city_m": 65,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_marktkirche_st_marien_unser_lieben_frauen_zu_halle_saale",
+      "name": "Marktkirche St. Marien Unser Lieben Frauen zu Halle (Saale)",
+      "category": "kirche",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.48254276428573,
+        "lng": 11.968271814285712
+      },
+      "query": "Marktkirche St. Marien Unser Lieben, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.4825426,
+        "lng": 11.968169,
+        "display_name": "Marktkirche Unser Lieben Frauen, An der Marienkirche, Halle (Saale), Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 7,
+      "from_city_m": 1432,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_neue_apotheke",
+      "name": "Neue Apotheke",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.49122025,
+        "lng": 11.9743647875
+      },
+      "query": "Neue Apotheke, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.4912757,
+        "lng": 11.9744012,
+        "display_name": "Neue Apotheke, 10, Ludwig-Wucherer-Straße, Steintorviertel, Nördliche Innenstadt, Halle (Saale), Sachsen-Anhalt, 06108, Deutschland",
+        "class": "amenity",
+        "type": "pharmacy",
+        "importance": 0.000071281757839277,
+        "osm_type": "way",
+        "osm_id": 179679853,
+        "provider": "nominatim"
+      },
+      "delta_m": 7,
+      "from_city_m": 727,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_giebichensteinbrucke",
+      "name": "Giebichensteinbrücke",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.503978499999995,
+        "lng": 11.9522603
+      },
+      "query": "Giebichensteinbrücke, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.5040377,
+        "lng": 11.9522442,
+        "display_name": "Giebichensteinbrücke, Giebichenstein, Halle (Saale), Sachsen-Anhalt, 06120, Deutschland",
+        "class": "highway",
+        "type": "secondary",
+        "importance": 0.18929199030239088,
+        "osm_type": "way",
+        "osm_id": 14124547,
+        "provider": "nominatim"
+      },
+      "delta_m": 7,
+      "from_city_m": 1362,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_rechenwerk_computer_technikmuseum_halle",
+      "name": "Rechenwerk Computer- & Technikmuseum Halle",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.490417683333334,
+        "lng": 12.0000467
+      },
+      "query": "Rechenwerk Computer-, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.4904692,
+        "lng": 12.0000799,
+        "display_name": "RECHENWERK, Saalfelder Straße, Halle (Saale), Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 6,
+      "from_city_m": 2404,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_wasserturm_sud",
+      "name": "Wasserturm Süd",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.46616183333333,
+        "lng": 11.97712307777778
+      },
+      "query": "Wasserturm Süd, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.4661078,
+        "lng": 11.9771458,
+        "display_name": "Wasserturm Süd, 131, Liebenauer Straße, Lutherviertel, Lutherplatz/Thüringer Bahnhof, Halle (Saale), Sachsen-Anhalt, 06110, Deutschland",
+        "class": "man_made",
+        "type": "water_tower",
+        "importance": 0.18554865524912875,
+        "osm_type": "way",
+        "osm_id": 173924478,
+        "provider": "nominatim"
+      },
+      "delta_m": 6,
+      "from_city_m": 3333,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_amtsgarten",
+      "name": "Amtsgarten",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.503636094444445,
+        "lng": 11.956253722222222
+      },
+      "query": "Amtsgarten, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.5036686,
+        "lng": 11.9562031,
+        "display_name": "Amtsgarten, Giebichenstein, Halle (Saale), Sachsen-Anhalt, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "importance": 0.12743869505990896,
+        "osm_type": "way",
+        "osm_id": 14124550,
+        "provider": "nominatim"
+      },
+      "delta_m": 5,
+      "from_city_m": 1151,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_passendorfer_schlosschen",
+      "name": "Passendorfer Schlößchen",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.473244820000005,
+        "lng": 11.929451180000001
+      },
+      "query": "Passendorfer Schlößchen, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.4732089,
+        "lng": 11.9294859,
+        "display_name": "Passendorfer Schlösschen, Schulplatz, Passendorf, Neustadt, Halle (Saale), Sachsen-Anhalt, 06124, Deutschland",
+        "class": "building",
+        "type": "yes",
+        "importance": 0.000071281757839277,
+        "osm_type": "way",
+        "osm_id": 186739265,
+        "provider": "nominatim"
+      },
+      "delta_m": 5,
+      "from_city_m": 3540,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_museum_fur_haustierkunde_julius_kuhn",
+      "name": "Museum für Haustierkunde \"Julius Kühn\"",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.4891181,
+        "lng": 11.974088063636362
+      },
+      "query": "Museum für Haustierkunde \"Julius Kühn\", Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.4890872,
+        "lng": 11.9740589,
+        "display_name": "Museum für Haustierkunde „Julius Kühn“, 35, Adam-Kuckhoff-Straße, Steintorviertel, Nördliche Innenstadt, Halle (Saale), Sachsen-Anhalt, 06108, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.21337448257116948,
+        "osm_type": "way",
+        "osm_id": 380066071,
+        "provider": "nominatim"
+      },
+      "delta_m": 4,
+      "from_city_m": 881,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_pauluskirche",
+      "name": "Pauluskirche",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.49568885348838,
+        "lng": 11.97380803255814
+      },
+      "query": "Pauluskirche, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.4956974,
+        "lng": 11.9738481,
+        "display_name": "Pauluskirche, 22, Rathenauplatz, Paulusviertel, Halle (Saale), Sachsen-Anhalt, 06114, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.22274623325780465,
+        "osm_type": "way",
+        "osm_id": 31765328,
+        "provider": "nominatim"
+      },
+      "delta_m": 3,
+      "from_city_m": 525,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_moritzkirche",
+      "name": "Moritzkirche",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.48021011724139,
+        "lng": 11.966406232758624
+      },
+      "query": "Moritzkirche, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.4801968,
+        "lng": 11.9663672,
+        "display_name": "Moritzkirche, An der Moritzkirche, Altstadt, Halle (Saale), Sachsen-Anhalt, 06108, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.2909516038077344,
+        "osm_type": "way",
+        "osm_id": 99191602,
+        "provider": "nominatim"
+      },
+      "delta_m": 3,
+      "from_city_m": 1684,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_katholische_propsteikirche_st_franziskus_und_st_elisabeth",
+      "name": "Katholische Propsteikirche St. Franziskus und St. Elisabeth",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.47828106,
+        "lng": 11.967091087999997
+      },
+      "query": "Katholische Propsteikirche St. Franziskus, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.4782886,
+        "lng": 11.967058,
+        "display_name": "Propsteikirche St. Franziskus und St. Elisabeth, Mauerstraße, Halle (Saale), Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 2,
+      "from_city_m": 1900,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_peissnitzhaus",
+      "name": "Peißnitzhaus",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.49404733,
+        "lng": 11.94763997
+      },
+      "query": "Peißnitzhaus, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.4940648,
+        "lng": 11.9476397,
+        "display_name": "Peißnitzhaus, 4, Peißnitzinsel, Saaleaue, Halle (Saale), Sachsen-Anhalt, 06108, Deutschland",
+        "class": "building",
+        "type": "yes",
+        "importance": 0.000071281757839277,
+        "osm_type": "way",
+        "osm_id": 61561595,
+        "provider": "nominatim"
+      },
+      "delta_m": 2,
+      "from_city_m": 1296,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_mohren_apotheke",
+      "name": "Mohren Apotheke",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 51.495377872727275,
+        "lng": 11.966561127272728
+      },
+      "query": "Mohren Apotheke, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.4953875,
+        "lng": 11.9665821,
+        "display_name": "Mohren-Apotheke, 134, Reilstraße, Paulusviertel, Halle (Saale), Sachsen-Anhalt, 06114, Deutschland",
+        "class": "amenity",
+        "type": "pharmacy",
+        "importance": 0.000071281757839277,
+        "osm_type": "way",
+        "osm_id": 998016107,
+        "provider": "nominatim"
+      },
+      "delta_m": 2,
+      "from_city_m": 23,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_beatles_museum",
+      "name": "Beatles Museum",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.480231188888894,
+        "lng": 11.9684211
+      },
+      "query": "Beatles Museum, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.4802389,
+        "lng": 11.9684037,
+        "display_name": "Beatles Museum, 12, Alter Markt, Altstadt, Halle (Saale), Sachsen-Anhalt, 06108, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.3367302927095036,
+        "osm_type": "node",
+        "osm_id": 12917566690,
+        "provider": "nominatim"
+      },
+      "delta_m": 1,
+      "from_city_m": 1689,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "halle_saale_leipziger_turm",
+      "name": "Leipziger Turm",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.480232390909094,
+        "lng": 11.976403954545454
+      },
+      "query": "Leipziger Turm, Halle (Saale), Germany",
+      "osm": {
+        "lat": 51.4802294,
+        "lng": 11.976409,
+        "display_name": "Leipziger Turm, Leipziger Straße, Charlottenviertel, Nördliche Innenstadt, Halle (Saale), Sachsen-Anhalt, 06108, Deutschland",
+        "class": "man_made",
+        "type": "tower",
+        "importance": 0.18157831638402872,
+        "osm_type": "way",
+        "osm_id": 53378481,
+        "provider": "nominatim"
+      },
+      "delta_m": 0,
+      "from_city_m": 1823,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    }
+  ]
+}

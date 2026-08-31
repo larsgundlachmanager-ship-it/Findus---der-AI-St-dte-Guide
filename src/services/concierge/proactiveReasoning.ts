@@ -11,7 +11,7 @@ import {
 } from '../affiliate/helpFirstMonetization';
 
 const CHECKOUT_RE =
-  /\b(auscheck|check[- ]?out|zimmer\s+abgeb|hotel\s+verlass|bis\s+\d{1,2}\s*uhr\s+raus)\b/iu;
+  /\b(auschecken|auscheckt|auscheck|check[- ]?out|zimmer\s+abgeb|hotel\s+verlass|bis\s+\d{1,2}\s*uhr\s+raus)\b/iu;
 const STAY_EVENT_RE =
   /\b(tennis|turnier|match|spiel(?:en)?|donnerstag|mittwoch|übermorgen|uebermorgen|noch\s+mal\s+spiel|wenn\s+ich\s+gewinn)\b/iu;
 const WIN_CHAIN_RE =

@@ -12,6 +12,18 @@ const spokenKeys = new Set<string>();
 
 let summary: RouteObstacleSummary | null = null;
 
+function wheelchairRequired(): boolean {
+  try {
+    const { getCachedUserProfile } = require('../userProfileService') as {
+      getCachedUserProfile: () => { accessibility?: string[] } | null;
+    };
+    const access = getCachedUserProfile()?.accessibility ?? [];
+    return access.includes('rollstuhl') || access.includes('kinderwagen');
+  } catch {
+    return false;
+  }
+}
+
 export function setActiveRouteObstacles(
   next: RouteObstacleSummary | null,
 ): void {
@@ -42,7 +54,7 @@ export function maybeRouteObstacleCue(opts: {
   speakStairs?: boolean;
 }): string | null {
   if (!summary?.hits.length) return null;
-  const speakStairs = opts.speakStairs !== false;
+  const speakStairs = opts.speakStairs !== false && !wheelchairRequired();
 
   for (const h of summary.hits) {
     if (h.lat === 0 && h.lng === 0) continue; // instruction-only
@@ -55,13 +67,14 @@ export function maybeRouteObstacleCue(opts: {
     spokenKeys.add(k);
 
     if (h.kind === 'bridge') {
-      return 'Gleich über die Brücke — bleib auf dem Weg, du bist richtig.';
+      const label = (h.label || 'Brücke').trim() || 'Brücke';
+      return `Jetzt über die ${label} — dann bist du auf der richtigen Strecke.`;
     }
     if (h.kind === 'stairs') {
-      return 'Gleich Treppen — kurz schieben oder tragen, dann geht’s weiter.';
+      return 'Jetzt die Treppe — dann bleibst du auf der Route.';
     }
     if (h.kind === 'crossing') {
-      return 'Gleich Bahnübergang — wenn die Schranke zu ist, kurz warten, ich hab Puffer eingeplant.';
+      return 'Jetzt über den Bahnübergang — dann bist du richtig.';
     }
   }
   return null;

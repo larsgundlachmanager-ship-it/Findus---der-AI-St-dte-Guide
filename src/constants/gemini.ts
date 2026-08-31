@@ -1,5 +1,5 @@
 /**
- * Gemini Text-Engine — Findus Audioguide.
+ * Gemini Text-Engine — Yorro Audioguide.
  * Cost Control SSOT: Flash-Lite ~98%, Pro nur gated.
  * Master-Prompt: buildMasterSystemInstruction (personaEngine).
  */
@@ -53,4 +53,4 @@ export const GEMINI_API_BASE =
  * Minimaler Boot-Fallback — Live-Pfad nutzt immer buildMasterSystemInstruction.
  * @deprecated Nicht erweitern; Master-Prompt ist SSOT.
  */
-export const FINDUS_GEMINI_SYSTEM_INSTRUCTION = `Du BIST Findus — ein lebendiger Kumpel neben dem Nutzer, kein Roboter und kein Textbuch. Sprich umgangssprachlich, spontan und menschlich.`;
+export const FINDUS_GEMINI_SYSTEM_INSTRUCTION = `Du BIST Yorro — ein lebendiger Kumpel neben dem Nutzer, kein Roboter und kein Textbuch. Sprich umgangssprachlich, spontan und menschlich.`;

@@ -18,8 +18,10 @@ export function buildTourSpeech(opts: {
   if (opts.needsDurationAsk) {
     return 'Wie lange soll die Tour ungefähr dauern — eher eine halbe Stunde, eine Stunde oder länger?';
   }
-  if (opts.softFail || !opts.stops.length) {
-    return 'Ich finde gerade zu wenig passende Stopps für eine Tour. Sag ein Gebiet oder ein Thema — dann versuche ich es nochmal.';
+  if (!opts.stops.length) {
+    return opts.softFail
+      ? 'Für eine Tour finde ich gerade keine passenden Stopps im Pack. Sag mir ein Viertel oder ein Wahrzeichen — oder lass uns erst Parken bzw. ein Café pitchen.'
+      : 'Ich habe noch keine Tour-Stopps — nenn mir Dauer oder ein Viertel, dann lege ich echte Orte in die Timeline.';
   }
   const names = opts.stops
     .filter((s) => !s.waypoint)
@@ -122,7 +124,12 @@ export function publishTourResult(result: TourResult, req: TourRequest): void {
 
   // Immer Timeline spiegeln (auch bei Live-Nav) — Überblick + Route nachvollziehbar
   try {
-    mirrorTourToTimeline(result, req);
+    mirrorTourToTimeline(
+      result,
+      req,
+      req.planDayKey ?? undefined,
+      req.preferStartMs,
+    );
   } catch (err) {
     console.warn('[tour] mirrorTourToTimeline failed', err);
   }

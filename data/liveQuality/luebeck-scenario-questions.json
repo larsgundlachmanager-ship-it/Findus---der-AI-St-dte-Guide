@@ -1,0 +1,4137 @@
+[
+  {
+    "id": "din_now_0",
+    "q": "Wo gibt es gutes Italiener in Lübeck?",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_1",
+    "q": "Wo gibt es gutes Fisch in Lübeck?",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_2",
+    "q": "Wo gibt es gutes Marzipan-Café in Lübeck?",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_3",
+    "q": "Wo gibt es gutes Burger in Lübeck?",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_4",
+    "q": "Wo gibt es gutes vegetarisch in Lübeck?",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_5",
+    "q": "Wo gibt es gutes glutenfrei in Lübeck?",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_6",
+    "q": "Wo gibt es gutes günstig in Lübeck?",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_7",
+    "q": "Wo gibt es gutes mit Aussicht in Lübeck?",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_8",
+    "q": "Ich hab Hunger — Frühstück in Lübeck",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_9",
+    "q": "Ich hab Hunger — Mittagessen in Lübeck",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_10",
+    "q": "Ich hab Hunger — Abendessen in Lübeck",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_11",
+    "q": "Ich hab Hunger — Snack in Lübeck",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_12",
+    "q": "Ich hab Hunger — Kaffee in Lübeck",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_13",
+    "q": "Restaurant für Frühstück jetzt",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_14",
+    "q": "Restaurant für Frühstück in 10 Minuten",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_15",
+    "q": "Restaurant für Frühstück um 12 Uhr",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_16",
+    "q": "Restaurant für Frühstück um 17 Uhr",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_17",
+    "q": "Restaurant für Frühstück um 19:30",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_18",
+    "q": "Restaurant für Frühstück morgen früh",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_19",
+    "q": "Restaurant für Frühstück heute Abend",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_20",
+    "q": "Restaurant für Mittagessen jetzt",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_21",
+    "q": "Restaurant für Mittagessen in 10 Minuten",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_22",
+    "q": "Restaurant für Mittagessen um 12 Uhr",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_23",
+    "q": "Restaurant für Mittagessen um 17 Uhr",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_24",
+    "q": "Restaurant für Mittagessen um 19:30",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_25",
+    "q": "Finde mir ein Italiener Restaurant in der Altstadt",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_26",
+    "q": "Finde mir ein Fisch Restaurant in der Altstadt",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_27",
+    "q": "Finde mir ein Marzipan-Café Restaurant in der Altstadt",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_28",
+    "q": "Finde mir ein Burger Restaurant in der Altstadt",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_29",
+    "q": "Finde mir ein vegetarisch Restaurant in der Altstadt",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_30",
+    "q": "Finde mir ein glutenfrei Restaurant in der Altstadt",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_31",
+    "q": "Finde mir ein günstig Restaurant in der Altstadt",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_32",
+    "q": "Finde mir ein mit Aussicht Restaurant in der Altstadt",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_33",
+    "q": "Speisekarte von dem Restaurant bitte",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_plan_34",
+    "q": "Abendessen um 19 Uhr in Lübeck planen",
+    "cat": "dining_plan",
+    "expect": {
+      "family": "plan_day",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "din_plan_35",
+    "q": "Reservierung Italiener heute Abend",
+    "cat": "dining_plan",
+    "expect": {
+      "family": "plan_day",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "din_plan_36",
+    "q": "Reservierung Fisch heute Abend",
+    "cat": "dining_plan",
+    "expect": {
+      "family": "plan_day",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "din_plan_37",
+    "q": "Reservierung Marzipan-Café heute Abend",
+    "cat": "dining_plan",
+    "expect": {
+      "family": "plan_day",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "din_plan_38",
+    "q": "Reservierung Burger heute Abend",
+    "cat": "dining_plan",
+    "expect": {
+      "family": "plan_day",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "din_plan_39",
+    "q": "Reservierung vegetarisch heute Abend",
+    "cat": "dining_plan",
+    "expect": {
+      "family": "plan_day",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "din_plan_40",
+    "q": "Reservierung glutenfrei heute Abend",
+    "cat": "dining_plan",
+    "expect": {
+      "family": "plan_day",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "din_plan_41",
+    "q": "Reservierung günstig heute Abend",
+    "cat": "dining_plan",
+    "expect": {
+      "family": "plan_day",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "din_plan_42",
+    "q": "Reservierung mit Aussicht heute Abend",
+    "cat": "dining_plan",
+    "expect": {
+      "family": "plan_day",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "din_plan_43",
+    "q": "Zwischen den Matches kurz Frühstück",
+    "cat": "dining_plan",
+    "expect": {
+      "family": "plan_day",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "din_plan_44",
+    "q": "Zwischen den Matches kurz Mittagessen",
+    "cat": "dining_plan",
+    "expect": {
+      "family": "plan_day",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "din_plan_45",
+    "q": "Zwischen den Matches kurz Abendessen",
+    "cat": "dining_plan",
+    "expect": {
+      "family": "plan_day",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "din_plan_46",
+    "q": "Zwischen den Matches kurz Snack",
+    "cat": "dining_plan",
+    "expect": {
+      "family": "plan_day",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "din_plan_47",
+    "q": "Zwischen den Matches kurz Kaffee",
+    "cat": "dining_plan",
+    "expect": {
+      "family": "plan_day",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "hotel_48",
+    "q": "Hotel in Lübeck von Donnerstag bis Samstag günstig",
+    "cat": "hotel",
+    "expect": {
+      "family": "hotel",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "hotel_49",
+    "q": "Hotel in Lübeck von Donnerstag bis Samstag nahe Tennis",
+    "cat": "hotel",
+    "expect": {
+      "family": "hotel",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "hotel_50",
+    "q": "Hotel in Lübeck von Donnerstag bis Samstag mit Frühstück",
+    "cat": "hotel",
+    "expect": {
+      "family": "hotel",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "hotel_51",
+    "q": "Hotel in Lübeck von Donnerstag bis Samstag Parkplatz",
+    "cat": "hotel",
+    "expect": {
+      "family": "hotel",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "hotel_52",
+    "q": "Hotel in Lübeck von Donnerstag bis Samstag ruhig",
+    "cat": "hotel",
+    "expect": {
+      "family": "hotel",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "hotel_53",
+    "q": "Hotel in Lübeck von Donnerstag bis Samstag Altstadt",
+    "cat": "hotel",
+    "expect": {
+      "family": "hotel",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "hotel_54",
+    "q": "Günstigstes Hotel in Lübeck günstig",
+    "cat": "hotel",
+    "expect": {
+      "family": "hotel",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "hotel_55",
+    "q": "Günstigstes Hotel in Lübeck nahe Tennis",
+    "cat": "hotel",
+    "expect": {
+      "family": "hotel",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "hotel_56",
+    "q": "Günstigstes Hotel in Lübeck mit Frühstück",
+    "cat": "hotel",
+    "expect": {
+      "family": "hotel",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "hotel_57",
+    "q": "Günstigstes Hotel in Lübeck Parkplatz",
+    "cat": "hotel",
+    "expect": {
+      "family": "hotel",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "hotel_58",
+    "q": "Günstigstes Hotel in Lübeck ruhig",
+    "cat": "hotel",
+    "expect": {
+      "family": "hotel",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "hotel_59",
+    "q": "Günstigstes Hotel in Lübeck Altstadt",
+    "cat": "hotel",
+    "expect": {
+      "family": "hotel",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "hotel_60",
+    "q": "Unterkunft in Lübeck fürs Wochenende",
+    "cat": "hotel",
+    "expect": {
+      "family": "hotel",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "hotel_tennis_61",
+    "q": "Hotel nahe den Tennisplätzen in Lübeck",
+    "cat": "hotel",
+    "expect": {
+      "family": "hotel",
+      "city": "Lübeck",
+      "mustClarifyVenue": true,
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "hotel_tennis_62",
+    "q": "Günstigstes Hotel nahe Tennis in Lübeck",
+    "cat": "hotel",
+    "expect": {
+      "family": "hotel",
+      "city": "Lübeck",
+      "mustClarifyVenue": true,
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "hotel_tennis_63",
+    "q": "Unterkunft bei den Tennisplätzen",
+    "cat": "hotel",
+    "expect": {
+      "family": "hotel",
+      "city": "Lübeck",
+      "mustClarifyVenue": true,
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sport_64",
+    "q": "Morgen um 10 Uhr Tennis-Match in Lübeck",
+    "cat": "sport",
+    "expect": {
+      "family": "sport_anchor",
+      "city": "Lübeck",
+      "thinkAheadWakeBreakfast": true,
+      "noInventedExplore": true,
+      "mustClarifyVenue": true
+    }
+  },
+  {
+    "id": "sport_65",
+    "q": "Morgen um 10 Uhr Training in Lübeck",
+    "cat": "sport",
+    "expect": {
+      "family": "sport_anchor",
+      "city": "Lübeck",
+      "thinkAheadWakeBreakfast": true,
+      "noInventedExplore": true,
+      "mustClarifyVenue": true
+    }
+  },
+  {
+    "id": "sport_66",
+    "q": "Morgen um 10 Uhr Doppel in Lübeck",
+    "cat": "sport",
+    "expect": {
+      "family": "sport_anchor",
+      "city": "Lübeck",
+      "thinkAheadWakeBreakfast": true,
+      "noInventedExplore": true,
+      "mustClarifyVenue": true
+    }
+  },
+  {
+    "id": "sport_67",
+    "q": "Morgen um 10 Uhr Turnier in Lübeck",
+    "cat": "sport",
+    "expect": {
+      "family": "sport_anchor",
+      "city": "Lübeck",
+      "thinkAheadWakeBreakfast": true,
+      "noInventedExplore": true,
+      "mustClarifyVenue": true
+    }
+  },
+  {
+    "id": "sport_68",
+    "q": "Morgen um 10 Uhr Phoenix Club in Lübeck",
+    "cat": "sport",
+    "expect": {
+      "family": "sport_anchor",
+      "city": "Lübeck",
+      "thinkAheadWakeBreakfast": true,
+      "noInventedExplore": true,
+      "mustClarifyVenue": true
+    }
+  },
+  {
+    "id": "sport_69",
+    "q": "Wir müssen um 10 am Tennisplatz sein",
+    "cat": "sport",
+    "expect": {
+      "family": "sport_anchor",
+      "city": "Lübeck",
+      "thinkAheadWakeBreakfast": true,
+      "noInventedExplore": true,
+      "mustClarifyVenue": true
+    }
+  },
+  {
+    "id": "sport_70",
+    "q": "Match um 14 Uhr, davor noch Freigang",
+    "cat": "sport",
+    "expect": {
+      "family": "sport_anchor",
+      "city": "Lübeck",
+      "thinkAheadWakeBreakfast": true,
+      "noInventedExplore": true,
+      "mustClarifyVenue": true
+    }
+  },
+  {
+    "id": "sport_71",
+    "q": "Training 10–12, danach Stadt angucken",
+    "cat": "sport",
+    "expect": {
+      "family": "sport_anchor",
+      "city": "Lübeck",
+      "thinkAheadWakeBreakfast": true,
+      "noInventedExplore": true,
+      "mustClarifyVenue": true
+    }
+  },
+  {
+    "id": "wake_72",
+    "q": "Stell einen Wecker fürs Match um 10",
+    "cat": "wake",
+    "expect": {
+      "family": "wake",
+      "thinkAheadWakeBreakfast": true,
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "wake_73",
+    "q": "Wann muss ich aufstehen wenn wir um 10 spielen?",
+    "cat": "wake",
+    "expect": {
+      "family": "wake",
+      "thinkAheadWakeBreakfast": true,
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "wake_74",
+    "q": "Wecker stellen, wir wollen vorher frühstücken",
+    "cat": "wake",
+    "expect": {
+      "family": "wake",
+      "thinkAheadWakeBreakfast": true,
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "wake_75",
+    "q": "Morgen Match 10 Uhr — Wecker und Frühstück mitdenken",
+    "cat": "wake",
+    "expect": {
+      "family": "wake",
+      "thinkAheadWakeBreakfast": true,
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "tour_76",
+    "q": "2 Stunden Lübeck Altstadt erkunden",
+    "cat": "tour",
+    "expect": {
+      "family": "tour",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "tour_77",
+    "q": "Zehl mir die Highlights in Lübeck",
+    "cat": "tour",
+    "expect": {
+      "family": "tour",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "tour_78",
+    "q": "Tour zum Holstentor",
+    "cat": "tour",
+    "expect": {
+      "family": "tour",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "tour_79",
+    "q": "Tour zum Marienkirche",
+    "cat": "tour",
+    "expect": {
+      "family": "tour",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "tour_80",
+    "q": "Tour zum Altstadt",
+    "cat": "tour",
+    "expect": {
+      "family": "tour",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "tour_81",
+    "q": "Tour zum Buddenbrookhaus",
+    "cat": "tour",
+    "expect": {
+      "family": "tour",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "tour_82",
+    "q": "Tour zum Museumshafen",
+    "cat": "tour",
+    "expect": {
+      "family": "tour",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "tour_83",
+    "q": "Tour zum Petrikirche",
+    "cat": "tour",
+    "expect": {
+      "family": "tour",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "tour_84",
+    "q": "Tour zum Salzspeicher",
+    "cat": "tour",
+    "expect": {
+      "family": "tour",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "tour_85",
+    "q": "Tour zum Travemünde",
+    "cat": "tour",
+    "expect": {
+      "family": "tour",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "tour_86",
+    "q": "Was muss man in Lübeck gesehen haben?",
+    "cat": "tour",
+    "expect": {
+      "family": "tour",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_87",
+    "q": "Erzähl mir was zum Holstentor",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_88",
+    "q": "Erzähl mir was zum Marienkirche",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_89",
+    "q": "Erzähl mir was zum Altstadt",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_90",
+    "q": "Erzähl mir was zum Buddenbrookhaus",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_91",
+    "q": "Erzähl mir was zum Museumshafen",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_92",
+    "q": "Erzähl mir was zum Petrikirche",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_93",
+    "q": "Erzähl mir was zum Salzspeicher",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_94",
+    "q": "Erzähl mir was zum Travemünde",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_95",
+    "q": "Öffnungszeiten Holstentor",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_96",
+    "q": "Öffnungszeiten Marienkirche",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_97",
+    "q": "Öffnungszeiten Altstadt",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_98",
+    "q": "Öffnungszeiten Buddenbrookhaus",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_99",
+    "q": "Öffnungszeiten Museumshafen",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_100",
+    "q": "Öffnungszeiten Petrikirche",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_101",
+    "q": "Öffnungszeiten Salzspeicher",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_102",
+    "q": "Öffnungszeiten Travemünde",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_103",
+    "q": "Tickets für Holstentor",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_104",
+    "q": "Tickets für Marienkirche",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_105",
+    "q": "Tickets für Altstadt",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_106",
+    "q": "Tickets für Buddenbrookhaus",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_107",
+    "q": "Tickets für Museumshafen",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_108",
+    "q": "Tickets für Petrikirche",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_109",
+    "q": "Tickets für Salzspeicher",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_110",
+    "q": "Tickets für Travemünde",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_111",
+    "q": "Bring mich zum Holstentor",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_112",
+    "q": "Bring mich zum Marienkirche",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_113",
+    "q": "Bring mich zum Altstadt",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_114",
+    "q": "Bring mich zum Buddenbrookhaus",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_115",
+    "q": "Bring mich zum Museumshafen",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_116",
+    "q": "Bring mich zum Petrikirche",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_117",
+    "q": "Bring mich zum Salzspeicher",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_118",
+    "q": "Bring mich zum Travemünde",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "outfit_119",
+    "q": "Was soll ich heute Nachmittag anziehen?",
+    "cat": "outfit",
+    "expect": {
+      "family": "outfit",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "outfit_120",
+    "q": "Outfit fürs Match und danach Stadt",
+    "cat": "outfit",
+    "expect": {
+      "family": "outfit",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "outfit_121",
+    "q": "Wird es um 17 Uhr kalt in Lübeck?",
+    "cat": "outfit",
+    "expect": {
+      "family": "outfit",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "transit_122",
+    "q": "Wie lange zum Holstentor zu Fuß?",
+    "cat": "transit",
+    "expect": {
+      "family": "transit",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": false
+    }
+  },
+  {
+    "id": "transit_123",
+    "q": "Wie lange zum Marienkirche zu Fuß?",
+    "cat": "transit",
+    "expect": {
+      "family": "transit",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": false
+    }
+  },
+  {
+    "id": "transit_124",
+    "q": "Wie lange zum Altstadt zu Fuß?",
+    "cat": "transit",
+    "expect": {
+      "family": "transit",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": false
+    }
+  },
+  {
+    "id": "transit_125",
+    "q": "Wie lange zum Buddenbrookhaus zu Fuß?",
+    "cat": "transit",
+    "expect": {
+      "family": "transit",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": false
+    }
+  },
+  {
+    "id": "transit_126",
+    "q": "Wie lange zum Museumshafen zu Fuß?",
+    "cat": "transit",
+    "expect": {
+      "family": "transit",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": false
+    }
+  },
+  {
+    "id": "transit_127",
+    "q": "Wie lange zum Petrikirche zu Fuß?",
+    "cat": "transit",
+    "expect": {
+      "family": "transit",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": false
+    }
+  },
+  {
+    "id": "transit_128",
+    "q": "Wie lange zum Salzspeicher zu Fuß?",
+    "cat": "transit",
+    "expect": {
+      "family": "transit",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": false
+    }
+  },
+  {
+    "id": "transit_129",
+    "q": "Wie lange zum Travemünde zu Fuß?",
+    "cat": "transit",
+    "expect": {
+      "family": "transit",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": false
+    }
+  },
+  {
+    "id": "transit_130",
+    "q": "ÖPNV vom Hotel zum Tennisplatz",
+    "cat": "transit",
+    "expect": {
+      "family": "transit",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": false
+    }
+  },
+  {
+    "id": "transit_131",
+    "q": "Wann müssen wir los zum Match um 10?",
+    "cat": "transit",
+    "expect": {
+      "family": "transit",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": false
+    }
+  },
+  {
+    "id": "transit_132",
+    "q": "Route vom Holstentor zum Phoenix Club",
+    "cat": "transit",
+    "expect": {
+      "family": "transit",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": false
+    }
+  },
+  {
+    "id": "nav_explicit_133",
+    "q": "Bring mich zum Holstentor",
+    "cat": "transit",
+    "expect": {
+      "family": "transit",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": false,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "nav_explicit_134",
+    "q": "Führ mich zur Marienkirche",
+    "cat": "transit",
+    "expect": {
+      "family": "transit",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": false,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "nav_explicit_135",
+    "q": "Navigiere mich zum Tennisclub Phoenix in Lübeck",
+    "cat": "transit",
+    "expect": {
+      "family": "transit",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": false,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "nav_explicit_136",
+    "q": "Bring mich zu Holstentor",
+    "cat": "transit",
+    "expect": {
+      "family": "transit",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": false,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "nav_explicit_137",
+    "q": "Bring mich zu Marienkirche",
+    "cat": "transit",
+    "expect": {
+      "family": "transit",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": false,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "nav_explicit_138",
+    "q": "Bring mich zu Altstadt",
+    "cat": "transit",
+    "expect": {
+      "family": "transit",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": false,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "nav_explicit_139",
+    "q": "Bring mich zu Buddenbrookhaus",
+    "cat": "transit",
+    "expect": {
+      "family": "transit",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": false,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "nav_explicit_140",
+    "q": "Bring mich zu Museumshafen",
+    "cat": "transit",
+    "expect": {
+      "family": "transit",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": false,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "nav_explicit_141",
+    "q": "Bring mich zu Petrikirche",
+    "cat": "transit",
+    "expect": {
+      "family": "transit",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": false,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "nav_explicit_142",
+    "q": "Bring mich zu Salzspeicher",
+    "cat": "transit",
+    "expect": {
+      "family": "transit",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": false,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "nav_explicit_143",
+    "q": "Bring mich zu Travemünde",
+    "cat": "transit",
+    "expect": {
+      "family": "transit",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": false,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "nav_explicit_144",
+    "q": "Fußweg zum Bahnhof Lübeck, und wenn es länger als 20 Minuten ist ÖPNV",
+    "cat": "transit",
+    "expect": {
+      "family": "transit",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": false,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "multi_ramble_145",
+    "q": "Also wir haben Hunger und danach will ich noch die Altstadt sehen und irgendwann zurück zum Hotel",
+    "cat": "cross_chat",
+    "expect": {
+      "family": "cross_chat",
+      "city": "Lübeck",
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "multi_ramble_146",
+    "q": "Parkplatz suchen und dann 2 Stunden Lübeck erkunden",
+    "cat": "cross_chat",
+    "expect": {
+      "family": "cross_chat",
+      "city": "Lübeck",
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "multi_ramble_147",
+    "q": "Günstiges Hotel und dann Abendessen und wenn Zeit ist noch ein Museum",
+    "cat": "cross_chat",
+    "expect": {
+      "family": "cross_chat",
+      "city": "Lübeck",
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "cross_148",
+    "q": "Und die Speisekarte von dem Restaurant vorhin?",
+    "cat": "cross_chat",
+    "expect": {
+      "family": "cross_chat",
+      "resumeThread": true,
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "cross_149",
+    "q": "Nochmal wegen dem Hotel — günstiger?",
+    "cat": "cross_chat",
+    "expect": {
+      "family": "cross_chat",
+      "resumeThread": true,
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "cross_150",
+    "q": "Das Match — wann Leave-by nochmal?",
+    "cat": "cross_chat",
+    "expect": {
+      "family": "cross_chat",
+      "resumeThread": true,
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "cross_151",
+    "q": "Kurz was ganz anderes: Toilette in der Nähe",
+    "cat": "cross_chat",
+    "expect": {
+      "family": "cross_chat",
+      "resumeThread": true,
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "cross_152",
+    "q": "Zurück zum Abendessen — vegetarisch bitte",
+    "cat": "cross_chat",
+    "expect": {
+      "family": "cross_chat",
+      "resumeThread": true,
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "pack_153",
+    "q": "Lade den Lübeck Datensatz",
+    "cat": "pack",
+    "expect": {
+      "family": "pack",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "pack_154",
+    "q": "Ich bin in Lübeck, hast du die Stadt?",
+    "cat": "pack",
+    "expect": {
+      "family": "pack",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "pack_155",
+    "q": "Möchtest du Lübeck herunterladen für bessere Infos",
+    "cat": "pack",
+    "expect": {
+      "family": "pack",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "gap_156",
+    "q": "Zwischen 12 und 14 haben wir Freigang — was essen?",
+    "cat": "freigang",
+    "expect": {
+      "family": "plan_day",
+      "city": "Lübeck",
+      "noInventedExplore": true,
+      "noRouteUnlessSoon": true,
+      "thinkAheadWakeBreakfast": false
+    }
+  },
+  {
+    "id": "gap_157",
+    "q": "Nach dem Match bis 17 Uhr Stadt",
+    "cat": "freigang",
+    "expect": {
+      "family": "plan_day",
+      "city": "Lübeck",
+      "noInventedExplore": true,
+      "noRouteUnlessSoon": true,
+      "thinkAheadWakeBreakfast": false
+    }
+  },
+  {
+    "id": "gap_158",
+    "q": "Kurzer Spaziergang in der Pause, pünktlich zurück",
+    "cat": "freigang",
+    "expect": {
+      "family": "plan_day",
+      "city": "Lübeck",
+      "noInventedExplore": true,
+      "noRouteUnlessSoon": true,
+      "thinkAheadWakeBreakfast": false
+    }
+  },
+  {
+    "id": "din_now_0_pfx_159",
+    "q": "Hey Yorro, wo gibt es gutes Italiener in Lübeck?",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_1_pfx_160",
+    "q": "Hey Yorro, wo gibt es gutes Fisch in Lübeck?",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_2_pfx_161",
+    "q": "Hey Yorro, wo gibt es gutes Marzipan-Café in Lübeck?",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_3_pfx_162",
+    "q": "Hey Yorro, wo gibt es gutes Burger in Lübeck?",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_4_pfx_163",
+    "q": "Hey Yorro, wo gibt es gutes vegetarisch in Lübeck?",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_5_pfx_164",
+    "q": "Hey Yorro, wo gibt es gutes glutenfrei in Lübeck?",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_6_pfx_165",
+    "q": "Hey Yorro, wo gibt es gutes günstig in Lübeck?",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_7_pfx_166",
+    "q": "Hey Yorro, wo gibt es gutes mit Aussicht in Lübeck?",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_8_pfx_167",
+    "q": "Hey Yorro, ich hab Hunger — Frühstück in Lübeck",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_9_pfx_168",
+    "q": "Hey Yorro, ich hab Hunger — Mittagessen in Lübeck",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_10_pfx_169",
+    "q": "Hey Yorro, ich hab Hunger — Abendessen in Lübeck",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_11_pfx_170",
+    "q": "Hey Yorro, ich hab Hunger — Snack in Lübeck",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_12_pfx_171",
+    "q": "Hey Yorro, ich hab Hunger — Kaffee in Lübeck",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_13_pfx_172",
+    "q": "Hey Yorro, restaurant für Frühstück jetzt",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_14_pfx_173",
+    "q": "Hey Yorro, restaurant für Frühstück in 10 Minuten",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_15_pfx_174",
+    "q": "Hey Yorro, restaurant für Frühstück um 12 Uhr",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_16_pfx_175",
+    "q": "Hey Yorro, restaurant für Frühstück um 17 Uhr",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_17_pfx_176",
+    "q": "Hey Yorro, restaurant für Frühstück um 19:30",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_18_pfx_177",
+    "q": "Hey Yorro, restaurant für Frühstück morgen früh",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_19_pfx_178",
+    "q": "Hey Yorro, restaurant für Frühstück heute Abend",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_20_pfx_179",
+    "q": "Hey Yorro, restaurant für Mittagessen jetzt",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_21_pfx_180",
+    "q": "Hey Yorro, restaurant für Mittagessen in 10 Minuten",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_22_pfx_181",
+    "q": "Hey Yorro, restaurant für Mittagessen um 12 Uhr",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_23_pfx_182",
+    "q": "Hey Yorro, restaurant für Mittagessen um 17 Uhr",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_24_pfx_183",
+    "q": "Hey Yorro, restaurant für Mittagessen um 19:30",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_25_pfx_184",
+    "q": "Hey Yorro, finde mir ein Italiener Restaurant in der Altstadt",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_26_pfx_185",
+    "q": "Hey Yorro, finde mir ein Fisch Restaurant in der Altstadt",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_27_pfx_186",
+    "q": "Hey Yorro, finde mir ein Marzipan-Café Restaurant in der Altstadt",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_28_pfx_187",
+    "q": "Hey Yorro, finde mir ein Burger Restaurant in der Altstadt",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_29_pfx_188",
+    "q": "Hey Yorro, finde mir ein vegetarisch Restaurant in der Altstadt",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_30_pfx_189",
+    "q": "Hey Yorro, finde mir ein glutenfrei Restaurant in der Altstadt",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_31_pfx_190",
+    "q": "Hey Yorro, finde mir ein günstig Restaurant in der Altstadt",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_32_pfx_191",
+    "q": "Hey Yorro, finde mir ein mit Aussicht Restaurant in der Altstadt",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_33_pfx_192",
+    "q": "Hey Yorro, speisekarte von dem Restaurant bitte",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_plan_34_pfx_193",
+    "q": "Hey Yorro, abendessen um 19 Uhr in Lübeck planen",
+    "cat": "dining_plan",
+    "expect": {
+      "family": "plan_day",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "din_plan_35_pfx_194",
+    "q": "Hey Yorro, reservierung Italiener heute Abend",
+    "cat": "dining_plan",
+    "expect": {
+      "family": "plan_day",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "din_plan_36_pfx_195",
+    "q": "Hey Yorro, reservierung Fisch heute Abend",
+    "cat": "dining_plan",
+    "expect": {
+      "family": "plan_day",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "din_plan_37_pfx_196",
+    "q": "Hey Yorro, reservierung Marzipan-Café heute Abend",
+    "cat": "dining_plan",
+    "expect": {
+      "family": "plan_day",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "din_plan_38_pfx_197",
+    "q": "Hey Yorro, reservierung Burger heute Abend",
+    "cat": "dining_plan",
+    "expect": {
+      "family": "plan_day",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "din_plan_39_pfx_198",
+    "q": "Hey Yorro, reservierung vegetarisch heute Abend",
+    "cat": "dining_plan",
+    "expect": {
+      "family": "plan_day",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "din_plan_40_pfx_199",
+    "q": "Hey Yorro, reservierung glutenfrei heute Abend",
+    "cat": "dining_plan",
+    "expect": {
+      "family": "plan_day",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "din_plan_41_pfx_200",
+    "q": "Hey Yorro, reservierung günstig heute Abend",
+    "cat": "dining_plan",
+    "expect": {
+      "family": "plan_day",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "din_plan_42_pfx_201",
+    "q": "Hey Yorro, reservierung mit Aussicht heute Abend",
+    "cat": "dining_plan",
+    "expect": {
+      "family": "plan_day",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "din_plan_43_pfx_202",
+    "q": "Hey Yorro, zwischen den Matches kurz Frühstück",
+    "cat": "dining_plan",
+    "expect": {
+      "family": "plan_day",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "din_plan_44_pfx_203",
+    "q": "Hey Yorro, zwischen den Matches kurz Mittagessen",
+    "cat": "dining_plan",
+    "expect": {
+      "family": "plan_day",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "din_plan_45_pfx_204",
+    "q": "Hey Yorro, zwischen den Matches kurz Abendessen",
+    "cat": "dining_plan",
+    "expect": {
+      "family": "plan_day",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "din_plan_46_pfx_205",
+    "q": "Hey Yorro, zwischen den Matches kurz Snack",
+    "cat": "dining_plan",
+    "expect": {
+      "family": "plan_day",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "din_plan_47_pfx_206",
+    "q": "Hey Yorro, zwischen den Matches kurz Kaffee",
+    "cat": "dining_plan",
+    "expect": {
+      "family": "plan_day",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "hotel_48_pfx_207",
+    "q": "Hey Yorro, hotel in Lübeck von Donnerstag bis Samstag günstig",
+    "cat": "hotel",
+    "expect": {
+      "family": "hotel",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "hotel_49_pfx_208",
+    "q": "Hey Yorro, hotel in Lübeck von Donnerstag bis Samstag nahe Tennis",
+    "cat": "hotel",
+    "expect": {
+      "family": "hotel",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "hotel_50_pfx_209",
+    "q": "Hey Yorro, hotel in Lübeck von Donnerstag bis Samstag mit Frühstück",
+    "cat": "hotel",
+    "expect": {
+      "family": "hotel",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "hotel_51_pfx_210",
+    "q": "Hey Yorro, hotel in Lübeck von Donnerstag bis Samstag Parkplatz",
+    "cat": "hotel",
+    "expect": {
+      "family": "hotel",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "hotel_52_pfx_211",
+    "q": "Hey Yorro, hotel in Lübeck von Donnerstag bis Samstag ruhig",
+    "cat": "hotel",
+    "expect": {
+      "family": "hotel",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "hotel_53_pfx_212",
+    "q": "Hey Yorro, hotel in Lübeck von Donnerstag bis Samstag Altstadt",
+    "cat": "hotel",
+    "expect": {
+      "family": "hotel",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "hotel_54_pfx_213",
+    "q": "Hey Yorro, günstigstes Hotel in Lübeck günstig",
+    "cat": "hotel",
+    "expect": {
+      "family": "hotel",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "hotel_55_pfx_214",
+    "q": "Hey Yorro, günstigstes Hotel in Lübeck nahe Tennis",
+    "cat": "hotel",
+    "expect": {
+      "family": "hotel",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "hotel_56_pfx_215",
+    "q": "Hey Yorro, günstigstes Hotel in Lübeck mit Frühstück",
+    "cat": "hotel",
+    "expect": {
+      "family": "hotel",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "hotel_57_pfx_216",
+    "q": "Hey Yorro, günstigstes Hotel in Lübeck Parkplatz",
+    "cat": "hotel",
+    "expect": {
+      "family": "hotel",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "hotel_58_pfx_217",
+    "q": "Hey Yorro, günstigstes Hotel in Lübeck ruhig",
+    "cat": "hotel",
+    "expect": {
+      "family": "hotel",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "hotel_59_pfx_218",
+    "q": "Hey Yorro, günstigstes Hotel in Lübeck Altstadt",
+    "cat": "hotel",
+    "expect": {
+      "family": "hotel",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "hotel_60_pfx_219",
+    "q": "Hey Yorro, unterkunft in Lübeck fürs Wochenende",
+    "cat": "hotel",
+    "expect": {
+      "family": "hotel",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "hotel_tennis_61_pfx_220",
+    "q": "Hey Yorro, hotel nahe den Tennisplätzen in Lübeck",
+    "cat": "hotel",
+    "expect": {
+      "family": "hotel",
+      "city": "Lübeck",
+      "mustClarifyVenue": true,
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "hotel_tennis_62_pfx_221",
+    "q": "Hey Yorro, günstigstes Hotel nahe Tennis in Lübeck",
+    "cat": "hotel",
+    "expect": {
+      "family": "hotel",
+      "city": "Lübeck",
+      "mustClarifyVenue": true,
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "hotel_tennis_63_pfx_222",
+    "q": "Hey Yorro, unterkunft bei den Tennisplätzen",
+    "cat": "hotel",
+    "expect": {
+      "family": "hotel",
+      "city": "Lübeck",
+      "mustClarifyVenue": true,
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sport_64_pfx_223",
+    "q": "Hey Yorro, morgen um 10 Uhr Tennis-Match in Lübeck",
+    "cat": "sport",
+    "expect": {
+      "family": "sport_anchor",
+      "city": "Lübeck",
+      "thinkAheadWakeBreakfast": true,
+      "noInventedExplore": true,
+      "mustClarifyVenue": true
+    }
+  },
+  {
+    "id": "sport_65_pfx_224",
+    "q": "Hey Yorro, morgen um 10 Uhr Training in Lübeck",
+    "cat": "sport",
+    "expect": {
+      "family": "sport_anchor",
+      "city": "Lübeck",
+      "thinkAheadWakeBreakfast": true,
+      "noInventedExplore": true,
+      "mustClarifyVenue": true
+    }
+  },
+  {
+    "id": "sport_66_pfx_225",
+    "q": "Hey Yorro, morgen um 10 Uhr Doppel in Lübeck",
+    "cat": "sport",
+    "expect": {
+      "family": "sport_anchor",
+      "city": "Lübeck",
+      "thinkAheadWakeBreakfast": true,
+      "noInventedExplore": true,
+      "mustClarifyVenue": true
+    }
+  },
+  {
+    "id": "sport_67_pfx_226",
+    "q": "Hey Yorro, morgen um 10 Uhr Turnier in Lübeck",
+    "cat": "sport",
+    "expect": {
+      "family": "sport_anchor",
+      "city": "Lübeck",
+      "thinkAheadWakeBreakfast": true,
+      "noInventedExplore": true,
+      "mustClarifyVenue": true
+    }
+  },
+  {
+    "id": "sport_68_pfx_227",
+    "q": "Hey Yorro, morgen um 10 Uhr Phoenix Club in Lübeck",
+    "cat": "sport",
+    "expect": {
+      "family": "sport_anchor",
+      "city": "Lübeck",
+      "thinkAheadWakeBreakfast": true,
+      "noInventedExplore": true,
+      "mustClarifyVenue": true
+    }
+  },
+  {
+    "id": "sport_69_pfx_228",
+    "q": "Hey Yorro, wir müssen um 10 am Tennisplatz sein",
+    "cat": "sport",
+    "expect": {
+      "family": "sport_anchor",
+      "city": "Lübeck",
+      "thinkAheadWakeBreakfast": true,
+      "noInventedExplore": true,
+      "mustClarifyVenue": true
+    }
+  },
+  {
+    "id": "sport_70_pfx_229",
+    "q": "Hey Yorro, match um 14 Uhr, davor noch Freigang",
+    "cat": "sport",
+    "expect": {
+      "family": "sport_anchor",
+      "city": "Lübeck",
+      "thinkAheadWakeBreakfast": true,
+      "noInventedExplore": true,
+      "mustClarifyVenue": true
+    }
+  },
+  {
+    "id": "sport_71_pfx_230",
+    "q": "Hey Yorro, training 10–12, danach Stadt angucken",
+    "cat": "sport",
+    "expect": {
+      "family": "sport_anchor",
+      "city": "Lübeck",
+      "thinkAheadWakeBreakfast": true,
+      "noInventedExplore": true,
+      "mustClarifyVenue": true
+    }
+  },
+  {
+    "id": "wake_72_pfx_231",
+    "q": "Hey Yorro, stell einen Wecker fürs Match um 10",
+    "cat": "wake",
+    "expect": {
+      "family": "wake",
+      "thinkAheadWakeBreakfast": true,
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "wake_73_pfx_232",
+    "q": "Hey Yorro, wann muss ich aufstehen wenn wir um 10 spielen?",
+    "cat": "wake",
+    "expect": {
+      "family": "wake",
+      "thinkAheadWakeBreakfast": true,
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "wake_74_pfx_233",
+    "q": "Hey Yorro, wecker stellen, wir wollen vorher frühstücken",
+    "cat": "wake",
+    "expect": {
+      "family": "wake",
+      "thinkAheadWakeBreakfast": true,
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "wake_75_pfx_234",
+    "q": "Hey Yorro, morgen Match 10 Uhr — Wecker und Frühstück mitdenken",
+    "cat": "wake",
+    "expect": {
+      "family": "wake",
+      "thinkAheadWakeBreakfast": true,
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "tour_76_pfx_235",
+    "q": "Hey Yorro, 2 Stunden Lübeck Altstadt erkunden",
+    "cat": "tour",
+    "expect": {
+      "family": "tour",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "tour_77_pfx_236",
+    "q": "Hey Yorro, zehl mir die Highlights in Lübeck",
+    "cat": "tour",
+    "expect": {
+      "family": "tour",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "tour_78_pfx_237",
+    "q": "Hey Yorro, tour zum Holstentor",
+    "cat": "tour",
+    "expect": {
+      "family": "tour",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "tour_79_pfx_238",
+    "q": "Hey Yorro, tour zum Marienkirche",
+    "cat": "tour",
+    "expect": {
+      "family": "tour",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "tour_80_pfx_239",
+    "q": "Hey Yorro, tour zum Altstadt",
+    "cat": "tour",
+    "expect": {
+      "family": "tour",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "tour_81_pfx_240",
+    "q": "Hey Yorro, tour zum Buddenbrookhaus",
+    "cat": "tour",
+    "expect": {
+      "family": "tour",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "tour_82_pfx_241",
+    "q": "Hey Yorro, tour zum Museumshafen",
+    "cat": "tour",
+    "expect": {
+      "family": "tour",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "tour_83_pfx_242",
+    "q": "Hey Yorro, tour zum Petrikirche",
+    "cat": "tour",
+    "expect": {
+      "family": "tour",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "tour_84_pfx_243",
+    "q": "Hey Yorro, tour zum Salzspeicher",
+    "cat": "tour",
+    "expect": {
+      "family": "tour",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "tour_85_pfx_244",
+    "q": "Hey Yorro, tour zum Travemünde",
+    "cat": "tour",
+    "expect": {
+      "family": "tour",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "tour_86_pfx_245",
+    "q": "Hey Yorro, was muss man in Lübeck gesehen haben?",
+    "cat": "tour",
+    "expect": {
+      "family": "tour",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_87_pfx_246",
+    "q": "Hey Yorro, erzähl mir was zum Holstentor",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_88_pfx_247",
+    "q": "Hey Yorro, erzähl mir was zum Marienkirche",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_89_pfx_248",
+    "q": "Hey Yorro, erzähl mir was zum Altstadt",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_90_pfx_249",
+    "q": "Hey Yorro, erzähl mir was zum Buddenbrookhaus",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_91_pfx_250",
+    "q": "Hey Yorro, erzähl mir was zum Museumshafen",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_92_pfx_251",
+    "q": "Hey Yorro, erzähl mir was zum Petrikirche",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_93_pfx_252",
+    "q": "Hey Yorro, erzähl mir was zum Salzspeicher",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_94_pfx_253",
+    "q": "Hey Yorro, erzähl mir was zum Travemünde",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_95_pfx_254",
+    "q": "Hey Yorro, öffnungszeiten Holstentor",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_96_pfx_255",
+    "q": "Hey Yorro, öffnungszeiten Marienkirche",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_97_pfx_256",
+    "q": "Hey Yorro, öffnungszeiten Altstadt",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_98_pfx_257",
+    "q": "Hey Yorro, öffnungszeiten Buddenbrookhaus",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_99_pfx_258",
+    "q": "Hey Yorro, öffnungszeiten Museumshafen",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_100_pfx_259",
+    "q": "Hey Yorro, öffnungszeiten Petrikirche",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_101_pfx_260",
+    "q": "Hey Yorro, öffnungszeiten Salzspeicher",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_102_pfx_261",
+    "q": "Hey Yorro, öffnungszeiten Travemünde",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_103_pfx_262",
+    "q": "Hey Yorro, tickets für Holstentor",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_104_pfx_263",
+    "q": "Hey Yorro, tickets für Marienkirche",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_105_pfx_264",
+    "q": "Hey Yorro, tickets für Altstadt",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_106_pfx_265",
+    "q": "Hey Yorro, tickets für Buddenbrookhaus",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_107_pfx_266",
+    "q": "Hey Yorro, tickets für Museumshafen",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_108_pfx_267",
+    "q": "Hey Yorro, tickets für Petrikirche",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_109_pfx_268",
+    "q": "Hey Yorro, tickets für Salzspeicher",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_110_pfx_269",
+    "q": "Hey Yorro, tickets für Travemünde",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_111_pfx_270",
+    "q": "Hey Yorro, bring mich zum Holstentor",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_112_pfx_271",
+    "q": "Hey Yorro, bring mich zum Marienkirche",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_113_pfx_272",
+    "q": "Hey Yorro, bring mich zum Altstadt",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_114_pfx_273",
+    "q": "Hey Yorro, bring mich zum Buddenbrookhaus",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_115_pfx_274",
+    "q": "Hey Yorro, bring mich zum Museumshafen",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_116_pfx_275",
+    "q": "Hey Yorro, bring mich zum Petrikirche",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_117_pfx_276",
+    "q": "Hey Yorro, bring mich zum Salzspeicher",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sight_118_pfx_277",
+    "q": "Hey Yorro, bring mich zum Travemünde",
+    "cat": "sight",
+    "expect": {
+      "family": "sight",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "outfit_119_pfx_278",
+    "q": "Hey Yorro, was soll ich heute Nachmittag anziehen?",
+    "cat": "outfit",
+    "expect": {
+      "family": "outfit",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "outfit_120_pfx_279",
+    "q": "Hey Yorro, outfit fürs Match und danach Stadt",
+    "cat": "outfit",
+    "expect": {
+      "family": "outfit",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "outfit_121_pfx_280",
+    "q": "Hey Yorro, wird es um 17 Uhr kalt in Lübeck?",
+    "cat": "outfit",
+    "expect": {
+      "family": "outfit",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "transit_122_pfx_281",
+    "q": "Hey Yorro, wie lange zum Holstentor zu Fuß?",
+    "cat": "transit",
+    "expect": {
+      "family": "transit",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": false
+    }
+  },
+  {
+    "id": "transit_123_pfx_282",
+    "q": "Hey Yorro, wie lange zum Marienkirche zu Fuß?",
+    "cat": "transit",
+    "expect": {
+      "family": "transit",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": false
+    }
+  },
+  {
+    "id": "transit_124_pfx_283",
+    "q": "Hey Yorro, wie lange zum Altstadt zu Fuß?",
+    "cat": "transit",
+    "expect": {
+      "family": "transit",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": false
+    }
+  },
+  {
+    "id": "transit_125_pfx_284",
+    "q": "Hey Yorro, wie lange zum Buddenbrookhaus zu Fuß?",
+    "cat": "transit",
+    "expect": {
+      "family": "transit",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": false
+    }
+  },
+  {
+    "id": "transit_126_pfx_285",
+    "q": "Hey Yorro, wie lange zum Museumshafen zu Fuß?",
+    "cat": "transit",
+    "expect": {
+      "family": "transit",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": false
+    }
+  },
+  {
+    "id": "transit_127_pfx_286",
+    "q": "Hey Yorro, wie lange zum Petrikirche zu Fuß?",
+    "cat": "transit",
+    "expect": {
+      "family": "transit",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": false
+    }
+  },
+  {
+    "id": "transit_128_pfx_287",
+    "q": "Hey Yorro, wie lange zum Salzspeicher zu Fuß?",
+    "cat": "transit",
+    "expect": {
+      "family": "transit",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": false
+    }
+  },
+  {
+    "id": "transit_129_pfx_288",
+    "q": "Hey Yorro, wie lange zum Travemünde zu Fuß?",
+    "cat": "transit",
+    "expect": {
+      "family": "transit",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": false
+    }
+  },
+  {
+    "id": "transit_130_pfx_289",
+    "q": "Hey Yorro, öPNV vom Hotel zum Tennisplatz",
+    "cat": "transit",
+    "expect": {
+      "family": "transit",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": false
+    }
+  },
+  {
+    "id": "transit_131_pfx_290",
+    "q": "Hey Yorro, wann müssen wir los zum Match um 10?",
+    "cat": "transit",
+    "expect": {
+      "family": "transit",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": false
+    }
+  },
+  {
+    "id": "transit_132_pfx_291",
+    "q": "Hey Yorro, route vom Holstentor zum Phoenix Club",
+    "cat": "transit",
+    "expect": {
+      "family": "transit",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": false
+    }
+  },
+  {
+    "id": "nav_explicit_133_pfx_292",
+    "q": "Hey Yorro, bring mich zum Holstentor",
+    "cat": "transit",
+    "expect": {
+      "family": "transit",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": false,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "nav_explicit_134_pfx_293",
+    "q": "Hey Yorro, führ mich zur Marienkirche",
+    "cat": "transit",
+    "expect": {
+      "family": "transit",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": false,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "nav_explicit_135_pfx_294",
+    "q": "Hey Yorro, navigiere mich zum Tennisclub Phoenix in Lübeck",
+    "cat": "transit",
+    "expect": {
+      "family": "transit",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": false,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "nav_explicit_136_pfx_295",
+    "q": "Hey Yorro, bring mich zu Holstentor",
+    "cat": "transit",
+    "expect": {
+      "family": "transit",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": false,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "nav_explicit_137_pfx_296",
+    "q": "Hey Yorro, bring mich zu Marienkirche",
+    "cat": "transit",
+    "expect": {
+      "family": "transit",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": false,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "nav_explicit_138_pfx_297",
+    "q": "Hey Yorro, bring mich zu Altstadt",
+    "cat": "transit",
+    "expect": {
+      "family": "transit",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": false,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "nav_explicit_139_pfx_298",
+    "q": "Hey Yorro, bring mich zu Buddenbrookhaus",
+    "cat": "transit",
+    "expect": {
+      "family": "transit",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": false,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "nav_explicit_140_pfx_299",
+    "q": "Hey Yorro, bring mich zu Museumshafen",
+    "cat": "transit",
+    "expect": {
+      "family": "transit",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": false,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "nav_explicit_141_pfx_300",
+    "q": "Hey Yorro, bring mich zu Petrikirche",
+    "cat": "transit",
+    "expect": {
+      "family": "transit",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": false,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "nav_explicit_142_pfx_301",
+    "q": "Hey Yorro, bring mich zu Salzspeicher",
+    "cat": "transit",
+    "expect": {
+      "family": "transit",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": false,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "nav_explicit_143_pfx_302",
+    "q": "Hey Yorro, bring mich zu Travemünde",
+    "cat": "transit",
+    "expect": {
+      "family": "transit",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": false,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "nav_explicit_144_pfx_303",
+    "q": "Hey Yorro, fußweg zum Bahnhof Lübeck, und wenn es länger als 20 Minuten ist ÖPNV",
+    "cat": "transit",
+    "expect": {
+      "family": "transit",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": false,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "multi_ramble_145_pfx_304",
+    "q": "Hey Yorro, also wir haben Hunger und danach will ich noch die Altstadt sehen und irgendwann zurück zum Hotel",
+    "cat": "cross_chat",
+    "expect": {
+      "family": "cross_chat",
+      "city": "Lübeck",
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "multi_ramble_146_pfx_305",
+    "q": "Hey Yorro, parkplatz suchen und dann 2 Stunden Lübeck erkunden",
+    "cat": "cross_chat",
+    "expect": {
+      "family": "cross_chat",
+      "city": "Lübeck",
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "multi_ramble_147_pfx_306",
+    "q": "Hey Yorro, günstiges Hotel und dann Abendessen und wenn Zeit ist noch ein Museum",
+    "cat": "cross_chat",
+    "expect": {
+      "family": "cross_chat",
+      "city": "Lübeck",
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "cross_148_pfx_307",
+    "q": "Hey Yorro, und die Speisekarte von dem Restaurant vorhin?",
+    "cat": "cross_chat",
+    "expect": {
+      "family": "cross_chat",
+      "resumeThread": true,
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "cross_149_pfx_308",
+    "q": "Hey Yorro, nochmal wegen dem Hotel — günstiger?",
+    "cat": "cross_chat",
+    "expect": {
+      "family": "cross_chat",
+      "resumeThread": true,
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "cross_150_pfx_309",
+    "q": "Hey Yorro, das Match — wann Leave-by nochmal?",
+    "cat": "cross_chat",
+    "expect": {
+      "family": "cross_chat",
+      "resumeThread": true,
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "cross_151_pfx_310",
+    "q": "Hey Yorro, kurz was ganz anderes: Toilette in der Nähe",
+    "cat": "cross_chat",
+    "expect": {
+      "family": "cross_chat",
+      "resumeThread": true,
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "cross_152_pfx_311",
+    "q": "Hey Yorro, zurück zum Abendessen — vegetarisch bitte",
+    "cat": "cross_chat",
+    "expect": {
+      "family": "cross_chat",
+      "resumeThread": true,
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "pack_153_pfx_312",
+    "q": "Hey Yorro, lade den Lübeck Datensatz",
+    "cat": "pack",
+    "expect": {
+      "family": "pack",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "pack_154_pfx_313",
+    "q": "Hey Yorro, ich bin in Lübeck, hast du die Stadt?",
+    "cat": "pack",
+    "expect": {
+      "family": "pack",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "pack_155_pfx_314",
+    "q": "Hey Yorro, möchtest du Lübeck herunterladen für bessere Infos",
+    "cat": "pack",
+    "expect": {
+      "family": "pack",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "gap_156_pfx_315",
+    "q": "Hey Yorro, zwischen 12 und 14 haben wir Freigang — was essen?",
+    "cat": "freigang",
+    "expect": {
+      "family": "plan_day",
+      "city": "Lübeck",
+      "noInventedExplore": true,
+      "noRouteUnlessSoon": true,
+      "thinkAheadWakeBreakfast": false
+    }
+  },
+  {
+    "id": "gap_157_pfx_316",
+    "q": "Hey Yorro, nach dem Match bis 17 Uhr Stadt",
+    "cat": "freigang",
+    "expect": {
+      "family": "plan_day",
+      "city": "Lübeck",
+      "noInventedExplore": true,
+      "noRouteUnlessSoon": true,
+      "thinkAheadWakeBreakfast": false
+    }
+  },
+  {
+    "id": "gap_158_pfx_317",
+    "q": "Hey Yorro, kurzer Spaziergang in der Pause, pünktlich zurück",
+    "cat": "freigang",
+    "expect": {
+      "family": "plan_day",
+      "city": "Lübeck",
+      "noInventedExplore": true,
+      "noRouteUnlessSoon": true,
+      "thinkAheadWakeBreakfast": false
+    }
+  },
+  {
+    "id": "din_now_0_pfx_318",
+    "q": "Kurz: wo gibt es gutes Italiener in Lübeck?",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_1_pfx_319",
+    "q": "Kurz: wo gibt es gutes Fisch in Lübeck?",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_2_pfx_320",
+    "q": "Kurz: wo gibt es gutes Marzipan-Café in Lübeck?",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_3_pfx_321",
+    "q": "Kurz: wo gibt es gutes Burger in Lübeck?",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_4_pfx_322",
+    "q": "Kurz: wo gibt es gutes vegetarisch in Lübeck?",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_5_pfx_323",
+    "q": "Kurz: wo gibt es gutes glutenfrei in Lübeck?",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_6_pfx_324",
+    "q": "Kurz: wo gibt es gutes günstig in Lübeck?",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_7_pfx_325",
+    "q": "Kurz: wo gibt es gutes mit Aussicht in Lübeck?",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_8_pfx_326",
+    "q": "Kurz: ich hab Hunger — Frühstück in Lübeck",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_9_pfx_327",
+    "q": "Kurz: ich hab Hunger — Mittagessen in Lübeck",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_10_pfx_328",
+    "q": "Kurz: ich hab Hunger — Abendessen in Lübeck",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_11_pfx_329",
+    "q": "Kurz: ich hab Hunger — Snack in Lübeck",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_12_pfx_330",
+    "q": "Kurz: ich hab Hunger — Kaffee in Lübeck",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_13_pfx_331",
+    "q": "Kurz: restaurant für Frühstück jetzt",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_14_pfx_332",
+    "q": "Kurz: restaurant für Frühstück in 10 Minuten",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_15_pfx_333",
+    "q": "Kurz: restaurant für Frühstück um 12 Uhr",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_16_pfx_334",
+    "q": "Kurz: restaurant für Frühstück um 17 Uhr",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_17_pfx_335",
+    "q": "Kurz: restaurant für Frühstück um 19:30",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_18_pfx_336",
+    "q": "Kurz: restaurant für Frühstück morgen früh",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_19_pfx_337",
+    "q": "Kurz: restaurant für Frühstück heute Abend",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_20_pfx_338",
+    "q": "Kurz: restaurant für Mittagessen jetzt",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_21_pfx_339",
+    "q": "Kurz: restaurant für Mittagessen in 10 Minuten",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_22_pfx_340",
+    "q": "Kurz: restaurant für Mittagessen um 12 Uhr",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_23_pfx_341",
+    "q": "Kurz: restaurant für Mittagessen um 17 Uhr",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_24_pfx_342",
+    "q": "Kurz: restaurant für Mittagessen um 19:30",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_25_pfx_343",
+    "q": "Kurz: finde mir ein Italiener Restaurant in der Altstadt",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_26_pfx_344",
+    "q": "Kurz: finde mir ein Fisch Restaurant in der Altstadt",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_27_pfx_345",
+    "q": "Kurz: finde mir ein Marzipan-Café Restaurant in der Altstadt",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_28_pfx_346",
+    "q": "Kurz: finde mir ein Burger Restaurant in der Altstadt",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_29_pfx_347",
+    "q": "Kurz: finde mir ein vegetarisch Restaurant in der Altstadt",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_30_pfx_348",
+    "q": "Kurz: finde mir ein glutenfrei Restaurant in der Altstadt",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_31_pfx_349",
+    "q": "Kurz: finde mir ein günstig Restaurant in der Altstadt",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_32_pfx_350",
+    "q": "Kurz: finde mir ein mit Aussicht Restaurant in der Altstadt",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_now_33_pfx_351",
+    "q": "Kurz: speisekarte von dem Restaurant bitte",
+    "cat": "dining",
+    "expect": {
+      "family": "dining",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "din_plan_34_pfx_352",
+    "q": "Kurz: abendessen um 19 Uhr in Lübeck planen",
+    "cat": "dining_plan",
+    "expect": {
+      "family": "plan_day",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "din_plan_35_pfx_353",
+    "q": "Kurz: reservierung Italiener heute Abend",
+    "cat": "dining_plan",
+    "expect": {
+      "family": "plan_day",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "din_plan_36_pfx_354",
+    "q": "Kurz: reservierung Fisch heute Abend",
+    "cat": "dining_plan",
+    "expect": {
+      "family": "plan_day",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "din_plan_37_pfx_355",
+    "q": "Kurz: reservierung Marzipan-Café heute Abend",
+    "cat": "dining_plan",
+    "expect": {
+      "family": "plan_day",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "din_plan_38_pfx_356",
+    "q": "Kurz: reservierung Burger heute Abend",
+    "cat": "dining_plan",
+    "expect": {
+      "family": "plan_day",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "din_plan_39_pfx_357",
+    "q": "Kurz: reservierung vegetarisch heute Abend",
+    "cat": "dining_plan",
+    "expect": {
+      "family": "plan_day",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "din_plan_40_pfx_358",
+    "q": "Kurz: reservierung glutenfrei heute Abend",
+    "cat": "dining_plan",
+    "expect": {
+      "family": "plan_day",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "din_plan_41_pfx_359",
+    "q": "Kurz: reservierung günstig heute Abend",
+    "cat": "dining_plan",
+    "expect": {
+      "family": "plan_day",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "din_plan_42_pfx_360",
+    "q": "Kurz: reservierung mit Aussicht heute Abend",
+    "cat": "dining_plan",
+    "expect": {
+      "family": "plan_day",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "din_plan_43_pfx_361",
+    "q": "Kurz: zwischen den Matches kurz Frühstück",
+    "cat": "dining_plan",
+    "expect": {
+      "family": "plan_day",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "din_plan_44_pfx_362",
+    "q": "Kurz: zwischen den Matches kurz Mittagessen",
+    "cat": "dining_plan",
+    "expect": {
+      "family": "plan_day",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "din_plan_45_pfx_363",
+    "q": "Kurz: zwischen den Matches kurz Abendessen",
+    "cat": "dining_plan",
+    "expect": {
+      "family": "plan_day",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "din_plan_46_pfx_364",
+    "q": "Kurz: zwischen den Matches kurz Snack",
+    "cat": "dining_plan",
+    "expect": {
+      "family": "plan_day",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "din_plan_47_pfx_365",
+    "q": "Kurz: zwischen den Matches kurz Kaffee",
+    "cat": "dining_plan",
+    "expect": {
+      "family": "plan_day",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true,
+      "noInventedExplore": true
+    }
+  },
+  {
+    "id": "hotel_48_pfx_366",
+    "q": "Kurz: hotel in Lübeck von Donnerstag bis Samstag günstig",
+    "cat": "hotel",
+    "expect": {
+      "family": "hotel",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "hotel_49_pfx_367",
+    "q": "Kurz: hotel in Lübeck von Donnerstag bis Samstag nahe Tennis",
+    "cat": "hotel",
+    "expect": {
+      "family": "hotel",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "hotel_50_pfx_368",
+    "q": "Kurz: hotel in Lübeck von Donnerstag bis Samstag mit Frühstück",
+    "cat": "hotel",
+    "expect": {
+      "family": "hotel",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "hotel_51_pfx_369",
+    "q": "Kurz: hotel in Lübeck von Donnerstag bis Samstag Parkplatz",
+    "cat": "hotel",
+    "expect": {
+      "family": "hotel",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "hotel_52_pfx_370",
+    "q": "Kurz: hotel in Lübeck von Donnerstag bis Samstag ruhig",
+    "cat": "hotel",
+    "expect": {
+      "family": "hotel",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "hotel_53_pfx_371",
+    "q": "Kurz: hotel in Lübeck von Donnerstag bis Samstag Altstadt",
+    "cat": "hotel",
+    "expect": {
+      "family": "hotel",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "hotel_54_pfx_372",
+    "q": "Kurz: günstigstes Hotel in Lübeck günstig",
+    "cat": "hotel",
+    "expect": {
+      "family": "hotel",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "hotel_55_pfx_373",
+    "q": "Kurz: günstigstes Hotel in Lübeck nahe Tennis",
+    "cat": "hotel",
+    "expect": {
+      "family": "hotel",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "hotel_56_pfx_374",
+    "q": "Kurz: günstigstes Hotel in Lübeck mit Frühstück",
+    "cat": "hotel",
+    "expect": {
+      "family": "hotel",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "hotel_57_pfx_375",
+    "q": "Kurz: günstigstes Hotel in Lübeck Parkplatz",
+    "cat": "hotel",
+    "expect": {
+      "family": "hotel",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "hotel_58_pfx_376",
+    "q": "Kurz: günstigstes Hotel in Lübeck ruhig",
+    "cat": "hotel",
+    "expect": {
+      "family": "hotel",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "hotel_59_pfx_377",
+    "q": "Kurz: günstigstes Hotel in Lübeck Altstadt",
+    "cat": "hotel",
+    "expect": {
+      "family": "hotel",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "hotel_60_pfx_378",
+    "q": "Kurz: unterkunft in Lübeck fürs Wochenende",
+    "cat": "hotel",
+    "expect": {
+      "family": "hotel",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "hotel_tennis_61_pfx_379",
+    "q": "Kurz: hotel nahe den Tennisplätzen in Lübeck",
+    "cat": "hotel",
+    "expect": {
+      "family": "hotel",
+      "city": "Lübeck",
+      "mustClarifyVenue": true,
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "hotel_tennis_62_pfx_380",
+    "q": "Kurz: günstigstes Hotel nahe Tennis in Lübeck",
+    "cat": "hotel",
+    "expect": {
+      "family": "hotel",
+      "city": "Lübeck",
+      "mustClarifyVenue": true,
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "hotel_tennis_63_pfx_381",
+    "q": "Kurz: unterkunft bei den Tennisplätzen",
+    "cat": "hotel",
+    "expect": {
+      "family": "hotel",
+      "city": "Lübeck",
+      "mustClarifyVenue": true,
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "sport_64_pfx_382",
+    "q": "Kurz: morgen um 10 Uhr Tennis-Match in Lübeck",
+    "cat": "sport",
+    "expect": {
+      "family": "sport_anchor",
+      "city": "Lübeck",
+      "thinkAheadWakeBreakfast": true,
+      "noInventedExplore": true,
+      "mustClarifyVenue": true
+    }
+  },
+  {
+    "id": "sport_65_pfx_383",
+    "q": "Kurz: morgen um 10 Uhr Training in Lübeck",
+    "cat": "sport",
+    "expect": {
+      "family": "sport_anchor",
+      "city": "Lübeck",
+      "thinkAheadWakeBreakfast": true,
+      "noInventedExplore": true,
+      "mustClarifyVenue": true
+    }
+  },
+  {
+    "id": "sport_66_pfx_384",
+    "q": "Kurz: morgen um 10 Uhr Doppel in Lübeck",
+    "cat": "sport",
+    "expect": {
+      "family": "sport_anchor",
+      "city": "Lübeck",
+      "thinkAheadWakeBreakfast": true,
+      "noInventedExplore": true,
+      "mustClarifyVenue": true
+    }
+  },
+  {
+    "id": "sport_67_pfx_385",
+    "q": "Kurz: morgen um 10 Uhr Turnier in Lübeck",
+    "cat": "sport",
+    "expect": {
+      "family": "sport_anchor",
+      "city": "Lübeck",
+      "thinkAheadWakeBreakfast": true,
+      "noInventedExplore": true,
+      "mustClarifyVenue": true
+    }
+  },
+  {
+    "id": "sport_68_pfx_386",
+    "q": "Kurz: morgen um 10 Uhr Phoenix Club in Lübeck",
+    "cat": "sport",
+    "expect": {
+      "family": "sport_anchor",
+      "city": "Lübeck",
+      "thinkAheadWakeBreakfast": true,
+      "noInventedExplore": true,
+      "mustClarifyVenue": true
+    }
+  },
+  {
+    "id": "sport_69_pfx_387",
+    "q": "Kurz: wir müssen um 10 am Tennisplatz sein",
+    "cat": "sport",
+    "expect": {
+      "family": "sport_anchor",
+      "city": "Lübeck",
+      "thinkAheadWakeBreakfast": true,
+      "noInventedExplore": true,
+      "mustClarifyVenue": true
+    }
+  },
+  {
+    "id": "sport_70_pfx_388",
+    "q": "Kurz: match um 14 Uhr, davor noch Freigang",
+    "cat": "sport",
+    "expect": {
+      "family": "sport_anchor",
+      "city": "Lübeck",
+      "thinkAheadWakeBreakfast": true,
+      "noInventedExplore": true,
+      "mustClarifyVenue": true
+    }
+  },
+  {
+    "id": "sport_71_pfx_389",
+    "q": "Kurz: training 10–12, danach Stadt angucken",
+    "cat": "sport",
+    "expect": {
+      "family": "sport_anchor",
+      "city": "Lübeck",
+      "thinkAheadWakeBreakfast": true,
+      "noInventedExplore": true,
+      "mustClarifyVenue": true
+    }
+  },
+  {
+    "id": "wake_72_pfx_390",
+    "q": "Kurz: stell einen Wecker fürs Match um 10",
+    "cat": "wake",
+    "expect": {
+      "family": "wake",
+      "thinkAheadWakeBreakfast": true,
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "wake_73_pfx_391",
+    "q": "Kurz: wann muss ich aufstehen wenn wir um 10 spielen?",
+    "cat": "wake",
+    "expect": {
+      "family": "wake",
+      "thinkAheadWakeBreakfast": true,
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "wake_74_pfx_392",
+    "q": "Kurz: wecker stellen, wir wollen vorher frühstücken",
+    "cat": "wake",
+    "expect": {
+      "family": "wake",
+      "thinkAheadWakeBreakfast": true,
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "wake_75_pfx_393",
+    "q": "Kurz: morgen Match 10 Uhr — Wecker und Frühstück mitdenken",
+    "cat": "wake",
+    "expect": {
+      "family": "wake",
+      "thinkAheadWakeBreakfast": true,
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "tour_76_pfx_394",
+    "q": "Kurz: 2 Stunden Lübeck Altstadt erkunden",
+    "cat": "tour",
+    "expect": {
+      "family": "tour",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "tour_77_pfx_395",
+    "q": "Kurz: zehl mir die Highlights in Lübeck",
+    "cat": "tour",
+    "expect": {
+      "family": "tour",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "tour_78_pfx_396",
+    "q": "Kurz: tour zum Holstentor",
+    "cat": "tour",
+    "expect": {
+      "family": "tour",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "tour_79_pfx_397",
+    "q": "Kurz: tour zum Marienkirche",
+    "cat": "tour",
+    "expect": {
+      "family": "tour",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "tour_80_pfx_398",
+    "q": "Kurz: tour zum Altstadt",
+    "cat": "tour",
+    "expect": {
+      "family": "tour",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  },
+  {
+    "id": "tour_81_pfx_399",
+    "q": "Kurz: tour zum Buddenbrookhaus",
+    "cat": "tour",
+    "expect": {
+      "family": "tour",
+      "city": "Lübeck",
+      "noRouteUnlessSoon": true
+    }
+  }
+]

@@ -21,6 +21,7 @@ import {
 import { useUiScaleStore } from '../../services/ui/uiScale';
 import {
   MAPS_ACTION_EMOJI,
+  shortenActionLabel,
   stripMapsActionPrefix,
 } from '../../services/concierge/actionLabelShorten';
 
@@ -73,6 +74,7 @@ export const ActionsSlot = React.memo(function ActionsSlot({
     >
       {showDismiss ? (
         <View style={styles.dismissRow}>
+          <View />
           <Pressable
             onPress={dismissConciergeCard}
             hitSlop={10}
@@ -121,7 +123,9 @@ export const ActionsSlot = React.memo(function ActionsSlot({
           {otherActions.map((action, i) => {
             const key = `${action.type}:${i}:${action.payload?.destName ?? action.payload?.url ?? action.label}`;
             const busy = busyKey === key;
-            const pending = action.payload?.pending === true;
+            const pending =
+              action.payload?.pending === true ||
+              /findus\.local\/pending/i.test(action.payload?.url ?? '');
             const isAd =
               partnerActionShowsAnzeige(action) ||
               action.payload?.affiliateMarked === true;
@@ -179,14 +183,22 @@ export const ActionsSlot = React.memo(function ActionsSlot({
                     <Text
                       style={[styles.actionLabel, { fontSize: labelFs }]}
                       numberOfLines={1}
+                      ellipsizeMode="clip"
                     >
                       {action.type === 'OPEN_URL' &&
                       isGoogleMapsActionUrl(action.payload?.url)
-                        ? stripMapsActionPrefix(action.label)
-                        : action.label}
+                        ? stripMapsActionPrefix(
+                            shortenActionLabel(action.label),
+                          )
+                        : shortenActionLabel(action.label)}
                     </Text>
                     {isAd ? (
-                      <Text style={styles.anzeigeMark}>Anzeige</Text>
+                      <Text
+                        style={styles.anzeigeMark}
+                        accessibilityLabel="Partnerlink"
+                      >
+                        *
+                      </Text>
                     ) : null}
                   </View>
                 )}
@@ -208,8 +220,17 @@ const styles = StyleSheet.create({
     marginBottom: spacing.sm,
   },
   dismissRow: {
-    alignItems: 'flex-end',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     marginBottom: spacing.xs,
+  },
+  shareBtn: {
+    color: colors.accent,
+    fontSize: 13,
+    fontWeight: '700',
+    letterSpacing: 0.2,
+    paddingHorizontal: 4,
   },
   close: {
     color: colors.textMuted,
@@ -270,9 +291,8 @@ const styles = StyleSheet.create({
   },
   anzeigeMark: {
     color: colors.textMuted,
-    fontSize: 9,
-    fontWeight: '600',
-    letterSpacing: 0.3,
-    textTransform: 'uppercase',
+    fontSize: 11,
+    fontWeight: '700',
+    marginLeft: 1,
   },
 });

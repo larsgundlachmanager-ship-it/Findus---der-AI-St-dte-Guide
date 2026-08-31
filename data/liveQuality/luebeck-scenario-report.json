@@ -1,0 +1,20 @@
+{
+  "total": 400,
+  "failCount": 0,
+  "byCategory": {
+    "dining": 102,
+    "dining_plan": 42,
+    "hotel": 48,
+    "sport": 24,
+    "wake": 12,
+    "tour": 28,
+    "sight": 64,
+    "outfit": 6,
+    "transit": 46,
+    "cross_chat": 16,
+    "pack": 6,
+    "freigang": 6
+  },
+  "sampleFails": [],
+  "gateOk": true
+}

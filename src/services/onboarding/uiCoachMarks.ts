@@ -117,8 +117,7 @@ export async function markUiCoachDone(id: UiCoachMarkId): Promise<void> {
 
 /** Sichtbarkeit der Homescreen-Hints (kombiniert alte Prefs + Coach-Marks). */
 export function shouldShowCoachMic(): boolean {
-  if (isUiCoachMarkDone('mic')) return false;
-  return shouldShowMicHint();
+  return false;
 }
 
 export function shouldShowCoachPlanCalendar(): boolean {

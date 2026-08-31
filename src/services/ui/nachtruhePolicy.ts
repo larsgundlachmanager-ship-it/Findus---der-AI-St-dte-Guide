@@ -1,21 +1,22 @@
 /**
  * Nachtruhe-Policy (SSOT)
  *
- * Aktiv-Fenster 10:30–19:30: nur Vorschläge „was man machen könnte“.
- * Außerhalb: Nachtruhe — keine proaktiven Tips/Reminder (User-Initiiertes bleibt).
+ * Aktiv-Fenster 9:00–21:30: nur Vorschläge „was man machen könnte“.
+ * Außerhalb (21:30–9:00): Nachtruhe — keine proaktiven Tips/Reminder
+ * (User-Initiiertes bleibt, z. B. Wetter tippen → nur Wetter, kein Plan-Pitch).
  */
 
 /** Start inklusiv (Minuten seit Mitternacht). */
-export const NACHTRUHE_ACTIVE_START_MIN = 10 * 60 + 30; // 10:30
-/** Ende exklusiv. */
-export const NACHTRUHE_ACTIVE_END_MIN = 19 * 60 + 30; // 19:30
+export const NACHTRUHE_ACTIVE_START_MIN = 9 * 60; // 9:00
+/** Ende exklusiv — Nachtruhe ab 21:30. */
+export const NACHTRUHE_ACTIVE_END_MIN = 21 * 60 + 30; // 21:30
 
 export function minutesOfLocalDay(nowMs = Date.now()): number {
   const d = new Date(nowMs);
   return d.getHours() * 60 + d.getMinutes();
 }
 
-/** Außerhalb 10:30–19:30 → Nachtruhe. */
+/** Außerhalb 9:00–21:30 → Nachtruhe. */
 export function isNachtruhe(nowMs = Date.now()): boolean {
   const m = minutesOfLocalDay(nowMs);
   return m < NACHTRUHE_ACTIVE_START_MIN || m >= NACHTRUHE_ACTIVE_END_MIN;
@@ -33,6 +34,12 @@ export function isActivitySuggestionWindow(nowMs = Date.now()): boolean {
 export const ACTIVITY_HUD_TIP_KINDS = new Set([
   'hotel_breakfast',
   'weather_summary',
+  'weather_heat',
+  'luggage_drop',
+  'umbrella_day',
+  'sunset_tip',
+  'free_slot',
+  'nice_tip',
   'open_task',
   'generic',
   'weather_rain',
@@ -86,6 +93,8 @@ export function allowProactiveHudTip(opts: {
   nowMs?: number;
 }): boolean {
   const now = opts.nowMs ?? Date.now();
+  // Linienflug: keine Nachtruhe — Gate/Verspätung immer durchlassen
+  if (opts.kind === 'flight' || opts.kind === 'flight_watch') return true;
   if (isNachtruhe(now)) {
     // Nur harte Deadlines / Check-in kurz vorher
     if (!NACHTRUHE_CRITICAL_HUD_KINDS.has(opts.kind)) return false;
@@ -119,6 +128,7 @@ export function allowCriticalProactiveVoice(opts: {
   score: number;
   nowMs?: number;
 }): boolean {
+  if (opts.kind === 'flight' || opts.kind === 'flight_watch') return true;
   if (allowProactiveVoice(opts.nowMs)) return true;
   if (!NACHTRUHE_CRITICAL_HUD_KINDS.has(opts.kind)) return false;
   return opts.score >= 88;

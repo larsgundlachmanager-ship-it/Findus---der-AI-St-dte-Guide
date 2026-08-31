@@ -38,7 +38,7 @@ export type CatchMyBusReminder = {
 };
 
 const REMINDER_QUERY =
-  /\b(wann\s+muss\s+ich\s+los|erinner(?:e|ung)?\s+mich|weck\s+mich|sag\s+bescheid|catch[\s-]?my[\s-]?bus|zum\s+bus\s+muss|losgehen|aufbrechen)\b/iu;
+  /\b(wann\s+muss\s+ich\s+los|erinner(?:e|ung)?\s+mich|weck\s+mich|sag\s+bescheid|catch[\s-]?my[\s-]?bus|zum\s+(?:bus|zug|bahn)\s+muss|zur\s+bahn|losgehen|aufbrechen|leave[-\s]?by|nicht\s+(?:den\s+)?(?:zug|bus|bahn)\s+verpassen)\b/iu;
 
 let activeReminder: CatchMyBusReminder | null = null;
 
@@ -135,6 +135,8 @@ export function scheduleCatchMyBusReminder(opts: {
   stationName?: string | null;
   destLat?: number | null;
   destLng?: number | null;
+  /** IBNR / Stop für Live-Verspätungs-Poll */
+  stopId?: string | null;
 }): { reminder: CatchMyBusReminder; confirmSpeech: string } {
   clearCatchMyBusReminder();
 
@@ -199,11 +201,16 @@ export function scheduleCatchMyBusReminder(opts: {
     destLat: opts.destLat ?? null,
     destLng: opts.destLng ?? null,
     destName: opts.stationName ?? opts.destinationHint ?? null,
+    stopId: opts.stopId ?? null,
+    directionHint: opts.destinationHint ?? opts.departure.direction ?? null,
+    platform: opts.departure.platform ?? null,
     connectionStatus: opts.departure.cancelled
       ? 'cancelled'
       : opts.departure.delaySec != null && opts.departure.delaySec >= 180
         ? 'delayed'
         : 'ok',
+    warnLeadMin: 30,
+    planPriority: 1,
   });
 
   // Foreground TTS fallback (when app process is alive)

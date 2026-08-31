@@ -1,5 +1,5 @@
 /**
- * Findus Reboot v1 — Verträge für dünnen Manager → Fact-Lane → Synthese.
+ * Yorro Reboot v1 — Verträge für dünnen Manager → Fact-Lane → Synthese.
  * Keine Scripts: Struktur + Pflichtfelder. Wortlaut bleibt der Synthese.
  */
 

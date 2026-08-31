@@ -14,19 +14,46 @@
 
 ## Strict LiveStage Layering
 
-1. PresenceCluster (Avatar) — obere Pane, `overflow:hidden`; Mood ändert nur Inhalt, nicht den Dock  
-2. Bottom-Dock **fix** am unteren Stage-Rand:  
-   - BulletsSlot (max 3 Stichpunkte)  
-   - ActionsSlot (Quick Actions)  
+1. Presence-Pane: Homescreen-Karte **dauerhaft** sichtbar. Bei Stichpunkten, Action-Buttons oder Auswahl (Pitch) Karte **50 % dunkler** — Chrome hat Vorrang, Karte bleibt darunter.  
+2. PresenceCluster (Avatar) — Idle+Karte: Mini-Overlay; sonst volle Pane (`overflow:hidden`); Mood ändert nur Inhalt, nicht den Dock  
+3. Bottom-Dock **fix** am unteren Stage-Rand:  
+   - PitchChoiceSlot (falls Auswahl)  
+   - BulletsSlot (max 3 Stichpunkte) — **immer** mit Actions, nie XOR  
+   - ActionsSlot (Quick Actions) — **immer** mit Stichpunkten, nie XOR  
    - SubtitlesSlot (genau 1 Zeile)  
-3. MicButton (fixer Anker unter der Stage, feste Hint-Slot-Höhe)
+4. MicButton (fixer Anker unter der Stage, feste Hint-Slot-Höhe)
+
+Offene Orte auf der Homescreen-Karte → **Kurzpreview** (Name + Kategorie + 2 Stichpunkte + Navigation + Webseite falls URL). Stichpunkte: **1. Was ist der Ort?** (kurz, max. ~2 Zeilen) · **2. Warum hingehen?** (Hook, den man vor Ort sieht/tun kann — keine Erkennungs-FAQ, keine Straße, kein generisches Denkmal-Label). Navigation: Rad unterwegs → sofort Radroute. Sonst Fuß sofort wenn ≤20 Min. Darüber Live-Guard (Fuß vs ÖPNV mit Zeiten) — Wahl startet sofort (blaue Linie / Journey). Hands-Free unverändert. Modul-1-Trigger über Footprint ±15 m. Karte bleibt während Modul-1-Story sichtbar (kein Concierge-Dock).
+
+### Karten-Layer (Homescreen Presence)
+
+- App-Hintergrund `#0F2C24`, gelbe Wege + Gebäude aus **OpenFreeMap-Vector-Tiles** (nur sichtbarer Ausschnitt, weltweit). Kein Mega-GeoJSON der ganzen Stadt in die WebView.
+- Schicht: Vector-Basiskarte → Fog (ungesehen **20 %** dunkler; vereinigte Erkundungsfläche, kein `fill-rule`) → Stadtflächen → blaue Nav-Linie → GPS + Nadel → **Pack-Orte ganz oben** (Gebäude **oder** Punkt, nie beides; nur im Viewport). Street-Zoom: keine Kreise auf/in einer Pack-Gebäudefläche.
+- OSM-Alltag (Briefkasten, Packstation, Halt) liegt **im Pack**, klickbar wie Story-Orte — keine Liberty-POI-Doppelung.
+- Gebäudeumriss nur wenn OSM eine Fläche hat — dann **kein** Extra-Punkt. Sonst Punkt (Denkmal, Briefkasten-Node).
+- **Grün** — Ort gesehen / gehört (≥10 Min oder Modul 1 / „Wo bin ich?“).
+- **Violett** — Modul 1 würde auslösen (Prefs + Story).
+- **Rot** — Story ohne Auto-Trigger.
+- **Blau** — nur Orte, die wirklich in der Timeline geplant sind (nicht die Nachbarschaft).
+- **Ruhiges Gelb** — existiert ohne Story (Supermarkt, Apotheke, Kita, Park…) — nicht aggressiv. Nur sichtbar mit Filter Alltag/Alles.
+- Typ-Filter (ÖPNV, Restaurant, Café, Museum, Kultur, Hotel, Einkaufen, Freizeit, Natur, Aktivitäten): eigene gedämpfte Farbe; Rest-Gelb dann aus.
+- Unten **Orte**: erste Reihe Besucht / Geplant / Auslösen / Story. Buttons **Alles** / **Nichts** / **Standard** (erste Reihe). Standard ist Default. Suche: Adresse, Hotel, Angebot — Tastatur schiebt das Feld hoch. Karte bleibt im Hintergrund **beweglich** (GL/GPS laufen weiter), analog Timeline.
+- Fog 50 m Radius (100 m Durchmesser) als **eine Fläche**, nicht GPS-Stempel. Lücken bis **20 m** zwischen zwei Bändern schließen. GPS-Lücke (z. B. 200 m nach 3 Min) bleibt ein Band, **nur wenn die Punkte ≤ 5 Min auseinander** liegen. Ungesehen **20 %** dunkler; bei Ort-Popup / Stichpunkten / Auswahl die **ganze** Karte zusätzlich **50 %** dunkler (Chrome-Dim). **Kein** überlappendes Loch (sonst schwarze Balken). Kante **glatt** (Kreis für kompakte Blasen, sonst Chaikin), **keine** weiße Umrandung. Sichtbar ab Zoom **12,5**. **Nur** in Fog-Löchern: Boden = Mikrofon-Mint (`colors.online`), unter Straßen/Gebäuden. Restlicher Kartengrund bleibt App-Grün. SSOT `fogCoverage.ts` + `homeMapStyle.ts`.
+- HUD: `X von Y Orten · Z % erkundet` — **Z = Flächen-Fog**.
+- Settings / Timeline: **Chrome sofort** (Accordion-Titel / Top-Bar). Bodies und Kataloge erst wenn offen oder nach dem ersten Paint. Vorausschauend **Aktuelle Reise** + **Allgemeine Einstellungen**; Tipp auf eine andere Sektion bricht die Vorladung ab. Stadtauswahl: Cache + GPS-Nähe zuerst, nicht den ganzen Bucket.
+- Zoom-out: OSM-Basiskarte bleibt sichtbar. Ortspunkte schrumpfen mit dem Zoom und blenden unter ~11 aus.
+  **Rubbelkarte (Pack-Städte):** Grün ≥30 Min · Blau geplant · Rot Pack ohne Besuch/Plan.
+  Füllung nach Zoom: ≥13,3 keine Fläche · 12 → 60 % · 10 → 70 % · 8,5 → 80 % · ≤5,7 → 90 %. Fog ab Zoom **12,5**. Street-Zoom (≥14): Gebäude/Orte.
+  **Basiskarte-LOD:** Wälder/Parks/Landuse-Flecken ab Zoom 10 dünner, ab 8,5 fast weg, **ab 7 und weiter raus komplett weg**. Nebenstraßen ab 11,2 · weniger Straßen ab 9,7 · nur noch Autobahn unter ~8,2 · Autobahn+große Flüsse ab Zoom 3. **Ländergrenzen** (`boundary_2`) klar, keine OSM-Kreis/Landes-Admin-Linien.
+- GPS + Kompass immer sichtbar; Nadel folgt der Kartendrehung (N oben = Pfeil nach vorn). Blickrichtung als **ein Puck** (blauer Kreis + Chevron, ein Sprite). Android: **TYPE_ROTATION_VECTOR** nativ (wie Google Maps: Display-Remap + True-North), Nadel weich interpoliert. Ohne Kompass nur der blaue Punkt. Kompass-Button: **1. Tipp Norden oben · 2. Tipp Karte folgt Handy-Ausrichtung**. Nadel = geografisch Norden (rot). Unkalibriert → Hinweis (Lang-Tipp: Acht schwenken). Recenter-Button; Orte einmal injizieren (kein Nachladen beim Pan).
+- Navigation: blaue Linie; Fuß/Rad in der Stadt auch offline (Stadt-Graph).
 
 Kein Layout-Spring zwischen Presence und Dock — Untertitel/Stichpunkte springen nicht mit Thinking/Speaking.
 
 ## Live-Untertitel (SSOT: `subtitleWholeWords` + `SubtitlesSlot`)
 
 - Wort für Wort, linksbündig, fester Gap, immer vom linken Rand.
-- **Genau 1 Zeile** — voll oder Satzende → ausfaden, neu von links.
+- **Genau 1 Zeile** — voll → ausfaden, neu von links; Satzende knüpft an.
 - Nach **5s** ohne neues Wort: langsam ausblenden.
 
 ## Action Buttons & Audio Multitasking
@@ -47,9 +74,10 @@ Kein Layout-Spring zwischen Presence und Dock — Untertitel/Stichpunkte springe
 
 ## Nachtruhe (SSOT: `nachtruhePolicy.ts`)
 
-- **10:30–19:30:** proaktiv nur Vorschläge „was man machen könnte“ (HUD Soft-Tips, Presence, Activity-Trigger).
-- **Außerhalb:** Nachtruhe — keine Soft-Tips / keine Presence / keine proaktive Stimme.
+- **9:00–21:30:** proaktiv nur Vorschläge „was man machen könnte“ (HUD Soft-Tips, Presence, Activity-Trigger).
+- **Außerhalb (21:30–9:00):** Nachtruhe — keine Soft-Tips / keine Presence / keine proaktive Stimme.
 - Ausnahmen: User-Initiiertes, Wecker-Nudge, Bus-Leave-imminent, kritische Deadlines (Score ≥ 88).
+- Wetter-HUD in Nachtruhe: nur Wetter vorlesen (Spitze + Regenstärke), **kein** „Lust auf was / Plan machen“.
 
 ## Speech — nie gleichzeitig
 

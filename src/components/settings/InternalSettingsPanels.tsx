@@ -182,7 +182,7 @@ export function LearnedProfilePanel({
   return (
     <View style={styles.stack}>
       <SectionHint>
-        Alles, was Findus über dich lernt — Charakter-Hinweise, Interessen,
+        Alles, was Yorro über dich lernt — Charakter-Hinweise, Interessen,
         Ernährung, Orte. Einrichtung bleibt für bewusste Einstellungen; hier
         siehst du das gelernte Gedächtnis.
       </SectionHint>
@@ -308,7 +308,7 @@ export function LogisticsPanel() {
     <View style={styles.stack}>
       <SectionHint>
         Flüge, Züge, Ziele, To-dos, Erinnerungen und Wecker — alles Logistische,
-        das Findus im Blick behält.
+        das Yorro im Blick behält.
       </SectionHint>
 
       {muteLine !== 'Nicht stumm' && (
@@ -424,7 +424,7 @@ export function LogisticsPanel() {
         tasks.length === 0 &&
         events.length === 0 &&
         transitEntities.length === 0 && (
-          <EmptyLine text="Keine offene Logistik — Flüge, Züge und To-dos erscheinen hier, sobald Findus sie notiert." />
+          <EmptyLine text="Keine offene Logistik — Flüge, Züge und To-dos erscheinen hier, sobald Yorro sie notiert." />
         )}
     </View>
   );
@@ -466,7 +466,7 @@ export function PushTriggersPanel() {
   return (
     <View style={styles.stack}>
       <SectionHint>
-        Zeit- und Orts-Trigger, die Findus selbst plant und aktiv überwacht:
+        Zeit- und Orts-Trigger, die Yorro selbst plant und aktiv überwacht:
         Grob-Check, Vorbereitung, Sicherheitscheck, Aufbruch-Push. Bei Push:
         Route starten oder Taxi. Bei Ausfall/Verspätung/Taxi-Storno: Plan B.
         Wenn du weiter wegläufst, rückt Leave-by automatisch nach vorne.

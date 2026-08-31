@@ -83,6 +83,8 @@ module.exports = () => {
           'https://go.bounce.com/FINDUS64751223710664',
         EXPO_PUBLIC_STAY22_AFFILIATE_ID:
           process.env.EXPO_PUBLIC_STAY22_AFFILIATE_ID ?? 'findus',
+        EXPO_PUBLIC_STAY22_API_KEY:
+          process.env.EXPO_PUBLIC_STAY22_API_KEY ?? '',
         EXPO_PUBLIC_RESERVATION_EMAIL_ENDPOINT:
           process.env.EXPO_PUBLIC_RESERVATION_EMAIL_ENDPOINT ?? '',
         EXPO_PUBLIC_RESERVATION_AI_CALL_WEBHOOK:

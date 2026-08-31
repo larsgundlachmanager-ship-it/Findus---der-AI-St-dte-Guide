@@ -1,5 +1,5 @@
 /**
- * Findus Runtime — shared types (Phase 0).
+ * Yorro Runtime — shared types (Phase 0).
  * SSOT for module state, interruption policy, cooldowns.
  */
 
@@ -28,14 +28,14 @@ export type CooldownKey =
   | 'after_speech';
 
 /** Cooldown durations (ms).
- * after_user_question = 30s → keine Modul-1/GPS-Spam während/nach Fragen.
- * after_poi_complete = 30s Pause nach Hauptpunkt.
- * after_speech = 8s Mindestpause (Wegweiser→Hauptpunkt enger separat via Policy).
+ * after_user_question = 60s → Modul 1 pausiert, während der User eine Frage stellt/beantwortet bekommt.
+ * after_poi_complete = 10s Pause nach Hauptpunkt (Masterbook: Stille nach M1).
+ * after_speech = Buchhaltung nach TTS; GPS-Gate nutzt das nicht (Wegweiser→Haupt via Policy).
  */
 export const RUNTIME_COOLDOWNS_MS: Record<CooldownKey, number> = {
-  after_user_question: 30_000,
+  after_user_question: 60_000,
   during_navigation: 5_000,
-  after_poi_complete: 30_000,
+  after_poi_complete: 10_000,
   after_speech: 8_000,
 };
 
@@ -100,7 +100,7 @@ export type RelevanceResult = {
 export type OrchestratorDecision =
   | { action: 'run_gps_trigger'; poiId: number }
   | { action: 'queue_gps_trigger'; poiId: number }
-  | { action: 'skip_gps_trigger'; reason: string }
+  | { action: 'skip_gps_trigger'; reason: string; remainingMs?: number }
   | { action: 'interrupt_for_user' }
   | { action: 'noop'; reason: string };
 

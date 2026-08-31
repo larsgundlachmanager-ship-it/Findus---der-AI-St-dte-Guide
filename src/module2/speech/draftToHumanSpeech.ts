@@ -49,6 +49,7 @@ function isInstructionOrMeta(text: string): boolean {
   const t = text.trim();
   if (!t) return true;
   if (/^FLOW\b/i.test(t)) return true;
+  if (/L[ÜU]CKEN\s*\(Timeout\)|nicht erfinden/i.test(t)) return true;
   if (META_LINE.test(t)) return true;
   if (INSTRUCTION_LINE.test(t)) return true;
   if (PROCESS_SPEECH.test(t) && t.length < 80) return true;
@@ -92,6 +93,23 @@ function extractHumanFromLine(line: string): string | null {
   if (/^FLOW\b/i.test(l)) return null;
   if (/Disclaimer|FEW.SHOT|FINDUS_|PHASE\s*\d|STRUKTUR-BLAUPAUSE/i.test(l)) {
     return null;
+  }
+
+  // Manager-Markdown „### taskId (lane) Text…“ → nur den Menschen-Teil
+  if (/^#{1,3}\s+\S/.test(l)) {
+    if (/L[ÜU]CKEN|Timeout|nicht erfinden/i.test(l)) return null;
+    const stripped = l
+      .replace(
+        /^#{1,3}\s+[a-z0-9_\-]+(?:\s*\([^)]*\))?\s*/i,
+        '',
+      )
+      .replace(/^#{1,3}\s+/, '')
+      .trim();
+    if (!stripped || stripped.length < 12) return null;
+    if (isInstructionOrMeta(stripped)) return null;
+    if (/L[ÜU]CKEN|Timeout|nicht erfinden/i.test(stripped)) return null;
+    const cleaned = cleanInline(stripped);
+    return cleaned.length >= 12 ? cleaned : null;
   }
 
   const opt = l.match(/^Option\s*\d+\s*(?:\(Favorit\))?:\s*(.+)$/i);
@@ -181,7 +199,9 @@ export function humanizeAgentDraft(
   const maxChars = opts?.maxChars ?? 1400;
   const maxParts = opts?.maxParts ?? (managerMode ? 8 : 10);
   const raw = (draft || '').replace(/\r/g, '').trim();
-  if (!raw) return '';
+  if (!raw) {
+    return 'Dazu hab ich gerade nichts Greifbares. Sag nochmal, worum es geht.';
+  }
 
   // Auch „FAKTEN: x. FLOW: y“ ohne Newline auftrennen
   const normalized = raw
@@ -216,12 +236,25 @@ export function humanizeAgentDraft(
     '$1',
   );
 
+  // Abgehakte Listen / Prozess-Meta → flüssiger Text
+  out = out
+    .replace(/(?:^|\s)[([]?\d{1,2}[)\].:]\s+/g, ' ')
+    .replace(/\s*[•·]\s*/g, ' — ')
+    .replace(
+      /\b(wähle|tippe|klicke)\b[^.!?]{0,80}\b(navigation|route|button)\b[^.!?]*[.!?]?/giu,
+      '',
+    );
+
   // Safety: nie FLOW/FAKTEN-Labels im Endtext
   out = out
     .replace(/\bFAKTEN(?:\s+[A-Za-zÄÖÜäöü\-]+)?\s*:\s*/gi, '')
     .replace(/\bFLOW\s*:\s*/gi, '')
     .replace(/\s{2,}/g, ' ')
     .trim();
+
+  if (!out) {
+    return 'Dazu hab ich gerade nichts Greifbares. Sag nochmal, worum es geht.';
+  }
 
   if (out.length > maxChars) {
     const cut = out.slice(0, maxChars - 1);

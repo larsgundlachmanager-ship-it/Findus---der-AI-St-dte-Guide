@@ -1,0 +1,738 @@
+{
+  "city": "luebeck",
+  "apply": true,
+  "touched": 91,
+  "approachesFixed": 91,
+  "faqAdded": 0,
+  "data_version": 47,
+  "rows": [
+    {
+      "id": "luebeck_lubeck_hauptbahnhof",
+      "name": "Lübeck Hauptbahnhof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "luebeck_europaisches_hansemuseum",
+      "name": "Europäisches Hansemuseum & Burgkloster",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 1,
+      "had_approaches": 3
+    },
+    {
+      "id": "luebeck_museumsquartier",
+      "name": "Museumsquartier St. Annen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "luebeck_museum_behnhaus_dragerhaus",
+      "name": "Museum Behnhaus Drägerhaus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "luebeck_museum_holstentor",
+      "name": "Holstentor",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "luebeck_museum_fur_natur_und_umwelt",
+      "name": "Museum für Natur und Umwelt",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 2,
+      "had_approaches": 1
+    },
+    {
+      "id": "luebeck_museumshafen_lubeck",
+      "name": "Museumshafen Lübeck",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "luebeck_willy_brandt_haus_lubeck",
+      "name": "Willy-Brandt-Haus Lübeck",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "luebeck_ev_luth_kirchengemeinde_st_marien_zu_lubeck",
+      "name": "St. Marien zu Lübeck",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 3,
+      "had_approaches": 3
+    },
+    {
+      "id": "luebeck_st_petri_zu_lubeck",
+      "name": "Petrikirche Lübeck",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "luebeck_st_aegidien_kirche_lubeck_ev_luth_kirchengemeinde_st_aegidien_zu_lubeck",
+      "name": "St. Aegidien zu Lübeck",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "luebeck_st_jakobi_kirche_lubeck_ev_luth_kirchengemeinde_st_jakobi_lubeck",
+      "name": "St. Jakobi zu Lübeck",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "luebeck_propsteikirche_herz_jesu_lubeck",
+      "name": "Propsteikirche Herz Jesu, Lübeck",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "luebeck_ev_luth_laurentius_kirchengemeinde_lubeck_st_lorenz_kirche",
+      "name": "Ev.-Luth. Laurentius-Kirchengemeinde Lübeck / St. Lorenz-Kirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "luebeck_kaiser_wilhelm_i_denkmal",
+      "name": "Kaiser-Wilhelm I.-Denkmal",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "luebeck_johannes_brahms_statue",
+      "name": "Johannes Brahms Statue",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "luebeck_brunnen_sod",
+      "name": "Brunnen Sod",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "luebeck_heinrich_der_lowe_denkmal",
+      "name": "Heinrich-der-Löwe-Denkmal",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "luebeck_stadtpark",
+      "name": "Stadtpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "luebeck_burgerpark",
+      "name": "Bürgerpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "luebeck_wiese_an_der_wallstreet",
+      "name": "Wiese an der 'Wallstreet'",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "luebeck_muhlenteich",
+      "name": "Mühlenteich",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "luebeck_historische_altstadt_lubeck",
+      "name": "Lübecker Altstadt · UNESCO",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "luebeck_panoramagang",
+      "name": "Panoramagang",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "luebeck_theater_lubeck",
+      "name": "Theater Lübeck",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "luebeck_theater_combinale_lubeck",
+      "name": "Theater Combinale Lübeck",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "luebeck_theaterschiff_lubeck",
+      "name": "Theaterschiff Lübeck",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "luebeck_zaubertheater_lubeck",
+      "name": "Zaubertheater Lübeck",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "luebeck_hoftheater_lubeck",
+      "name": "Hoftheater Lübeck",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "luebeck_wanderweg_an_der_trave",
+      "name": "Wanderweg an der Trave",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "luebeck_wanderweg_dragerweg",
+      "name": "Wanderweg Drägerweg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "luebeck_wakenitzufer",
+      "name": "Wakenitzufer",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "luebeck_lunapark",
+      "name": "Lunapark (Hanseplatz)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "luebeck_filmhaus",
+      "name": "Filmhaus",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "luebeck_kommunales_kino_lubeck",
+      "name": "Kommunales Kino Lübeck",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "luebeck_kolosseum_festsaal",
+      "name": "Kolosseum Festsaal",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "luebeck_musik_und_kongresshalle_lubeck",
+      "name": "Musik- und Kongresshalle Lübeck",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "luebeck_naturschutzgebiet_schellbruch",
+      "name": "Naturschutzgebiet Schellbruch",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "luebeck_naturschutzgebiet_wakenitz_muggenbusch",
+      "name": "Naturschutzgebiet Wakenitz/Müggenbusch",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "luebeck_naturschutzgebiet_wakenitz_gartnergasse",
+      "name": "Naturschutzgebiet Wakenitz/Gärtnergasse",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "luebeck_wakenitz",
+      "name": "Wakenitz",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "luebeck_kleverschusskreuz",
+      "name": "Kleverschusskreuz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "luebeck_ev_luth_kirchengemeinde_in_st_jurgen_kreuzkirche",
+      "name": "Ev.-luth. Kirchengemeinde in St. Jürgen / Kreuzkirche",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 3,
+      "had_approaches": 1
+    },
+    {
+      "id": "luebeck_lubecker_dom",
+      "name": "Lübecker Dom",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 4,
+      "had_approaches": 1
+    },
+    {
+      "id": "luebeck_thorweg",
+      "name": "Thorweg",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "luebeck_thomas_mann_stein",
+      "name": "Thomas-Mann-Stein",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 2,
+      "had_approaches": 1
+    },
+    {
+      "id": "luebeck_burgergarten",
+      "name": "Bürgergärten",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "luebeck_wesloer_wald_see",
+      "name": "Wesloer Wald See",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "luebeck_wesloer_wald",
+      "name": "Wesloer Wald",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "luebeck_stadtgeschichte",
+      "name": "Lübeck Stadtgeschichte & Orientierung",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "luebeck_buddenbrookhaus",
+      "name": "Buddenbrookhaus & Gründungsviertel",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 1,
+      "had_approaches": 3
+    },
+    {
+      "id": "luebeck_heiligen_geist",
+      "name": "Heiligen-Geist-Hospital & Koberg",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 0,
+      "had_approaches": 3
+    },
+    {
+      "id": "luebeck_burgtor",
+      "name": "Burgtor Lübeck",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "luebeck_rathaus",
+      "name": "Rathaus Lübeck",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "luebeck_salzspeicher",
+      "name": "Salzspeicher am Holstentor",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 0,
+      "had_approaches": 3
+    },
+    {
+      "id": "luebeck_niederegger",
+      "name": "Niederegger Marzipan-Museum & Stammhaus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "luebeck_passat",
+      "name": "Viermastbark Passat",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "luebeck_draegerpark",
+      "name": "Drägerpark & Wakenitzufer",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 0,
+      "had_approaches": 3
+    },
+    {
+      "id": "luebeck_lohmuehle",
+      "name": "Stadion an der Lohmühle",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "luebeck_alter_leuchtturm_travemuende",
+      "name": "Alter Leuchtturm Travemünde",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "luebeck_kolk17_figurentheater",
+      "name": "KOLK 17 Figurentheater & Museum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "luebeck_guenter_grass_haus",
+      "name": "Günter-Grass-Haus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "luebeck_schiffergesellschaft",
+      "name": "Schiffergesellschaft",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "luebeck_st_katharinen",
+      "name": "St. Katharinen zu Lübeck",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "luebeck_rathaustreppe",
+      "name": "Rathaustreppe am Markt",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "luebeck_industriemuseum_herrenwyk",
+      "name": "Industriemuseum Herrenwyk",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "luebeck_ganghaus_museum_fur_magische_mechanik",
+      "name": "Ganghaus-Museum für magische Mechanik",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "luebeck_holstentorplatz",
+      "name": "Holstentorplatz",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "luebeck_an_der_obertrave",
+      "name": "An der Obertrave",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "luebeck_wasserkunst",
+      "name": "Wasserkunst",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "luebeck_fritz_reuter_denkmal",
+      "name": "Fritz Reuter Denkmal",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 4,
+      "had_approaches": 1
+    },
+    {
+      "id": "luebeck_850_jahre_lubeck_gedenkstein",
+      "name": "850 Jahre Lübeck - Gedenkstein",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "luebeck_kath_kirche_st_vicelin",
+      "name": "Kath. Kirche St. Vicelin",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 2,
+      "had_approaches": 1
+    },
+    {
+      "id": "luebeck_st_matthai_gemeinde_lubeck",
+      "name": "St.Matthäi Gemeinde Lübeck",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 2,
+      "had_approaches": 1
+    },
+    {
+      "id": "luebeck_st_gertrud_kirche_lubeck_ev_luth_kirchengemeinde_st_gertrud_lubeck",
+      "name": "St.-Gertrud-Kirche Lübeck - Ev.-Luth. Kirchengemeinde St. Gertrud Lübeck",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 3,
+      "had_approaches": 1
+    },
+    {
+      "id": "luebeck_palais_rantzau_ein_haus_der_deutschen_stiftung_denkmalschutz",
+      "name": "Palais Rantzau - ein Haus der Deutschen Stiftung Denkmalschutz",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "luebeck_lubecker_lowen",
+      "name": "Lübecker Löwen",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "luebeck_aussichtspunkt",
+      "name": "Aussichtspunkt",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "luebeck_wanderweg",
+      "name": "Wanderweg",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "luebeck_kultourpunkt_treidelpfad_stecknitz",
+      "name": "Kultourpunkt Treidelpfad Stecknitz",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "luebeck_ein_archaologisch_naturkundlicher_wanderweg_im_waldhusener_forst",
+      "name": "Ein Archäologisch - Naturkundlicher Wanderweg im Waldhusener Forst",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "luebeck_alter_hafen_gothmund",
+      "name": "Alter Hafen Gothmund",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 2,
+      "had_approaches": 1
+    },
+    {
+      "id": "luebeck_ganghaeuser",
+      "name": "Lübecker Gänge & Höfe",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "luebeck_travemunde_strand",
+      "name": "Travemünde Strand",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "luebeck_travemunde_strandpromenade",
+      "name": "Travemünde Strandpromenade",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "luebeck_nordermole_travemunde",
+      "name": "Nordermole Travemünde",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "luebeck_casino_travemunde",
+      "name": "Casino Travemünde",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "luebeck_promenadensteg_travemunde",
+      "name": "Promenadensteg Travemünde",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "luebeck_priwall_strand",
+      "name": "Priwall Strand",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "luebeck_klingenbergplatz",
+      "name": "Klingenbergplatz",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "luebeck_promenade_an_der_obertrave",
+      "name": "Promenade an der Obertrave",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    }
+  ]
+}

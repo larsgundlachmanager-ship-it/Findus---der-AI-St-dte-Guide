@@ -4,7 +4,6 @@
  */
 
 import { generateGeminiText, hasGeminiApiKey } from '../geminiService';
-import { isDeviceOffline } from '../navigation/networkState';
 import { searchPlacesExpanding } from '../navigation/expandingPlaceSearch';
 import {
   searchPlacesByText,
@@ -13,6 +12,8 @@ import {
 import { shortenActionLabel } from '../concierge/actionLabelShorten';
 import type { Module2ActionButton } from '../../module2/types';
 import { FINDUS_FEW_SHOT_DISCLAIMER } from '../concierge/findusResponsePolicy';
+import { pickAffiliateOffer } from '../affiliate/affiliatePickOffer';
+import { classifyTicketPartner } from '../affiliate/quoteCollector';
 
 export type CinemaVenue = {
   name: string;
@@ -38,6 +39,44 @@ export type CinemaShowtimeHit = {
   /** Snack/Popcorn-Preis wenn Crowd proaktiv will + Quelle belegt */
   snackPriceHint?: string | null;
 };
+
+function primaryCinemaTicketHits(showtimes: CinemaShowtimeHit[]): CinemaShowtimeHit[] {
+  const withTix = showtimes.filter((s) => s.ticketUrl);
+  if (withTix.length <= 1) return withTix;
+  const byKey = new Map<string, CinemaShowtimeHit[]>();
+  for (const s of withTix) {
+    const k = `${s.filmTitle}|${s.cinemaName}`.toLowerCase();
+    const list = byKey.get(k) ?? [];
+    list.push(s);
+    byKey.set(k, list);
+  }
+  const out: CinemaShowtimeHit[] = [];
+  for (const group of byKey.values()) {
+    if (group.length === 1) {
+      out.push(group[0]!);
+      continue;
+    }
+    const identity = `cinema:${group[0]!.filmTitle}:${group[0]!.cinemaName}:${group[0]!.whenLabel}`
+      .toLowerCase()
+      .slice(0, 80);
+    const cands = group.map((s, i) => {
+      const url = s.ticketUrl!;
+      const meta = classifyTicketPartner(url);
+      return {
+        id: `${meta.id}:${i}`,
+        label: s.cinemaName,
+        url,
+        commissionScore: meta.commissionScore,
+        deepLinkLevel: 'deep' as const,
+        partnerPriceEur: s.priceEur,
+        identity,
+      };
+    });
+    const pick = pickAffiliateOffer(cands);
+    out.push(group.find((s) => s.ticketUrl === pick?.url) ?? group[0]!);
+  }
+  return out;
+}
 
 /** Orient-Turn: Film-/Genre-Picks ohne Uhrzeiten-Salve */
 export type CinemaFilmPick = {
@@ -94,8 +133,9 @@ export function isCinemaMovieQuery(text: string): boolean {
 export function detectCinemaPhase(text: string): CinemaPhase {
   const t = (text ?? '').replace(/\s+/g, ' ').trim();
   if (!t) return 'orient';
+  // Konkrete Zeiten/Tickets — nicht „Programm“ allein (das ist Orient-Vorschau)
   if (
-    /\b(wann|um\s+wie\s*viel|uhrzeit(?:en)?|spielzeit(?:en)?|vorstellung(?:en)?|ticket(?:s)?\s+(?:für|zu)|karten\s+für|welche\s+uhr)\b/iu.test(
+    /\b(wann|um\s+wie\s*viel|uhrzeit(?:en)?|spielzeit(?:en)?|ticket(?:s)?\s+(?:für|zu)|karten\s+für|welche\s+uhr|welche\s+zeiten)\b/iu.test(
       t,
     )
   ) {
@@ -103,11 +143,11 @@ export function detectCinemaPhase(text: string): CinemaPhase {
   }
   const { filmHint } = extractCinemaHints(t);
   if (
-    /\b(welche\s+filme|was\s+(?:kannst|läuf|läuft|empfehl)|empfehlen|ins\s+kino|kino\s+gehen|kinobesuch|kinoabend)\b/iu.test(
+    /\b(welche\s+filme|was\s+(?:kannst|läuf|läuft|empfehl)|empfehlen|ins\s+kino|kino\s+gehen|kinobesuch|kinoabend|kinoprogramm|was\s+läuft|aktuell(?:es)?\s+programm|programm(?:vorschau)?)\b/iu.test(
       t,
     )
   ) {
-    // „Welche Filme …“ bleibt Orient, auch wenn ein Genre genannt ist
+    // „Welche Filme / Programm …“ bleibt Orient, auch wenn ein Genre genannt ist
     if (!filmHint) return 'orient';
     // Genre-Wörter sind keine Film-Titel
     if (
@@ -395,6 +435,43 @@ function keepFutureShowtimes(
   return out;
 }
 
+function namesLooseMatch(a: string, b: string): boolean {
+  const na = a.toLowerCase().replace(/[^a-z0-9äöüß]+/giu, '');
+  const nb = b.toLowerCase().replace(/[^a-z0-9äöüß]+/giu, '');
+  if (!na || !nb) return false;
+  return na.includes(nb) || nb.includes(na);
+}
+
+/** Zukunft + Fuß-ETA: 17:30 raus wenn Ankunft erst 18:00. */
+export function keepReachableShowtimes(
+  rows: CinemaShowtimeHit[],
+  venues: CinemaVenue[],
+  now: Date = new Date(),
+): CinemaShowtimeHit[] {
+  const future = keepFutureShowtimes(rows, now);
+  try {
+    const { isShowtimeReachable, walkEtaMinFromMeters } = require('../../module2/kernel/turnKernel') as {
+      isShowtimeReachable: (o: {
+        whenLabel: string;
+        now: Date;
+        walkEtaMin: number;
+      }) => boolean;
+      walkEtaMinFromMeters: (m: number) => number;
+    };
+    return future.filter((s) => {
+      const v = venues.find((x) => namesLooseMatch(x.name, s.cinemaName));
+      const walk = v ? walkEtaMinFromMeters(v.distanceM) : 0;
+      return isShowtimeReachable({
+        whenLabel: s.whenLabel,
+        now,
+        walkEtaMin: walk,
+      });
+    });
+  } catch {
+    return future;
+  }
+}
+
 async function researchShowtimesWeb(opts: {
   userText: string;
   filmHint: string | null;
@@ -403,8 +480,6 @@ async function researchShowtimesWeb(opts: {
   signal?: AbortSignal;
 }): Promise<{ showtimes: CinemaShowtimeHit[]; notes: string }> {
   if (!hasGeminiApiKey()) return { showtimes: [], notes: 'no_gemini' };
-  const offline = await isDeviceOffline();
-  if (offline) return { showtimes: [], notes: 'offline' };
 
   const now = new Date();
   const today = now.toLocaleDateString('de-DE', {
@@ -491,7 +566,7 @@ async function researchShowtimesWeb(opts: {
 
   try {
     const raw = await generateGeminiText(prompt, {
-      task: 'generic',
+      task: 'research',
       enableGoogleSearch: true,
       maxTokens: 900,
       temperature: 0.2,
@@ -556,7 +631,7 @@ async function researchShowtimesWeb(opts: {
       });
     }
     return {
-      showtimes: keepFutureShowtimes(showtimes, now).slice(0, 4),
+      showtimes: keepReachableShowtimes(showtimes, opts.venues, now).slice(0, 4),
       notes,
     };
   } catch {
@@ -571,8 +646,6 @@ async function researchCinemaProgramWeb(opts: {
   signal?: AbortSignal;
 }): Promise<{ filmPicks: CinemaFilmPick[]; notes: string }> {
   if (!hasGeminiApiKey()) return { filmPicks: [], notes: 'no_gemini' };
-  const offline = await isDeviceOffline();
-  if (offline) return { filmPicks: [], notes: 'offline' };
 
   const now = new Date();
   const today = now.toLocaleDateString('de-DE', {
@@ -619,7 +692,7 @@ async function researchCinemaProgramWeb(opts: {
 
   try {
     const raw = await generateGeminiText(prompt, {
-      task: 'generic',
+      task: 'research',
       enableGoogleSearch: true,
       maxTokens: 900,
       temperature: 0.25,
@@ -756,7 +829,7 @@ export async function researchCinemaAndShowtimes(opts: {
         ),
       ]);
       if (raced.ok) {
-        showtimes = keepFutureShowtimes(raced.w.showtimes);
+        showtimes = keepReachableShowtimes(raced.w.showtimes, venues);
         notes = raced.w.notes;
       } else {
         showtimesPending = true;
@@ -768,13 +841,19 @@ export async function researchCinemaAndShowtimes(opts: {
 
   const deferredButtons: Module2ActionButton[] = [];
   if (phase === 'showtimes') {
-    for (let i = 0; i < showtimes.length && deferredButtons.length < 4; i++) {
-      const s = showtimes[i]!;
+    const ticketHits = primaryCinemaTicketHits(showtimes);
+    for (let i = 0; i < ticketHits.length && deferredButtons.length < 4; i++) {
+      const s = ticketHits[i]!;
       if (s.ticketUrl) {
         deferredButtons.push(
           urlButton(`cinema_tix_${i}`, `🎫 ${s.cinemaName}`, s.ticketUrl),
         );
-      } else if (s.infoUrl) {
+      }
+    }
+    for (let i = 0; i < showtimes.length && deferredButtons.length < 4; i++) {
+      const s = showtimes[i]!;
+      if (s.ticketUrl) continue;
+      if (s.infoUrl) {
         deferredButtons.push(
           urlButton(`cinema_prog_${i}`, `🎬 Programm`, s.infoUrl),
         );

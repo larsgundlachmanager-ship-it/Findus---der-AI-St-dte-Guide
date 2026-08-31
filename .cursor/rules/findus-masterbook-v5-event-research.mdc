@@ -7,14 +7,27 @@ alwaysApply: true
 
 ## Tagesaktuelle Events
 
-- „Was geht heute Abend?“ / Events → echte heutige Programme recherchieren (Kalender, Flyer, PDF, Venue-Sites).
+- Ambient „was heute geht“ (App offen ~10 Min + Stille): max. **1 Ansage / 8 h** (`ambientEventPitch` / `lastPitchAtMs`). **Tagesfeste** (Straßenfest, Weinfest, Hafengeburtstag, Umzug, Markt, Kinderprogramm) dürfen schon laufen → **„läuft noch bis …“** nur mit belegtem Ende. **Zeitgenaue Starts** (Kino, Konzert, Auftritt, Vorstellung, Sonnenfinsternis): nur wenn der Start noch kommt — schon begonnen → **Stille**, kein „läuft noch“. Ende vorbei → Stille. Nichts Passendes → nichts sagen. Nachtruhe (außerhalb 9:00–21:30): kein Ambient-Event-Pitch. Welcome-Event zählt als Pitch (nicht nochmal Ambient).
+- „Was geht heute Abend?“ / Events / Festivals → echte heutige Programme recherchieren (Kalender, Flyer, PDF, Venue-Sites).
 - Keine generischen Platzhalter (Kulturverwaltung, Tourist-Info ohne Programm).
-- Extra-Mile: PDF/Wochenprogramm parsen → Uhrzeit, was passiert, Eintritt.
+- Extra-Mile: PDF/Wochenprogramm parsen → Uhrzeit, was passiert, Eintritt, Stände, Acts, Preise, Buchbares.
+- Fest≠Laden: Weinfest-Frage → keine Weinhandlung/Bar als „Fest“.
+- Fest-Typ-Hard-Match: Weinfest ≠ Straßenfest/Stadtfest — angefragten Typ nicht ersetzen; ohne Treffer ehrlich.
+- Zeit-Priorität: aktuell / heute / nächstes Datum — nicht „meist im Mai“ als Hauptantwort.
+- Schon gestartet: bei Tagesfesten „läuft noch bis …“ (Ende nur belegt), nicht nur „ab 11 Uhr“ wiederholen. Kino/Konzert/Auftritt/Finsternis nach Start weglassen.
+- Follow-up („wann geht’s los?“, „läuft das jetzt?“, „erzähl mehr“) → denselben Fest-Typ vertiefen oder aktuell neu recherchieren, kein Drift zu anderem Fest.
+- Mehrere Treffer → Top-2-Pitch; genanntes Fest / Vertiefung → Briefing bis ~1200 Zeichen (SSOT `FINDUS_EVENT_FESTIVAL_BRIEFING_BLOCK`) — nie dünnes „ja läuft“ und Stopp.
+- Keine Adressen in Speech/Stichpunkten — außer User fragt **explizit** danach.
+- Speech: Fahrzeit flüssig einweben (Ankunftsuhr + Modus, kein „Anreise:“-Label) **nur wenn das Event jetzt läuft oder Start ≤ ~45 Min**. Später (heute Abend): Zeit + Ort + Was in 1–2 knackigen Sätzen, kein Los-jetzt-Ton; Nähe höchstens nebenbei; Einladung ob einplanen. Speech-Modus = Route-Modus. Immer Fließtext.
+- Ungefragte Ambient-Pitches (`ambientEventPitch`): kurzer menschlicher Opener → Hiebsatz mit Uhr/Ort/Was → weiche Einladung. SSOT `FINDUS_WOVEN_PITCH_SPEECH_BLOCK`.
 
 ## Action-Button Sync
 
-- Buttons müssen 1:1 zu gesprochenen Orten/Links passen.
-- Event-Turns: bis 3–4 Buttons (Route(n) + PDF/Flyer + Tickets).
+- Buttons müssen 1:1 zu gesprochenen Orten/Links passen und klar heißen (Navigation starten / Programm / Maps / Ticket / Probe).
+- Event-Turns: bis 4–5 Buttons; bei Einzelfest/Follow-up sofort Navigation + Programm (nicht erst nach 5 Nachfragen).
+- Mehrfach-Pitch: Maps/Web/Tickets in der Auswahl — Route nach Wahl (ÖPNV wenn Speech ÖPNV sagte).
+- Nach Option-Tap: andere Optionen weg; Ack (gute Wahl + nächster Schritt) + Route starten (blauer Ladebalken) + Buchungs-/Nav-/Programm-Buttons.
+- Maps/Programm bleiben während Nav-Planung tippbar (nicht global sperren).
 - Vor dem Client-Payload: Relevance + Button-Sync + Extra-Mile Reflection.
 
 ## Just-Do-It (keine Permission-Fragen)

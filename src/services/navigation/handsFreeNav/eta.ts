@@ -136,12 +136,51 @@ export function etaMinutesFromRoute(opts: {
   return { etaMin, paceSource: source, mPerMin };
 }
 
-/** Initial ETA right after OSRM (profile pace). */
+/** Initial ETA right after OSRM/Google (provider duration preferred). */
 export function initialEtaFromRoutedDistanceM(
   distanceM: number,
-  opts?: { isBike?: boolean; lightBufferMin?: number },
+  opts?: {
+    isBike?: boolean;
+    lightBufferMin?: number;
+    /** Google/OSRM duration — Maps-Baseline bevor Pace greift */
+    providerDurationSec?: number | null;
+  },
 ): number {
-  const mPerMin = opts?.isBike ? getPlanBikeMPerMin() : getPlanWalkMPerMin();
   const lights = Math.max(0, opts?.lightBufferMin ?? 0);
+  const providerSec =
+    typeof opts?.providerDurationSec === 'number' &&
+    Number.isFinite(opts.providerDurationSec) &&
+    opts.providerDurationSec > 0
+      ? opts.providerDurationSec
+      : null;
+
+  if (providerSec != null && !opts?.isBike) {
+    let baseMin = Math.max(1, Math.ceil(providerSec / 60));
+    try {
+      const {
+        hasLearnedPace,
+        getPlanWalkKmhForSpeech,
+      } = require('../../mobility/paceProfile') as {
+        hasLearnedPace: (m?: 'walk' | 'bike') => boolean;
+        getPlanWalkKmhForSpeech: () => number;
+      };
+      if (hasLearnedPace('walk') && distanceM > 40) {
+        const impliedKmh = distanceM / 1000 / (providerSec / 3600);
+        const userKmh = getPlanWalkKmhForSpeech();
+        if (impliedKmh > 0.8 && userKmh > 0.8) {
+          const ratio = impliedKmh / userKmh;
+          // Nur langsamer als Maps — nie unter Provider-Minuten drücken
+          if (ratio > 1.08) {
+            baseMin = Math.max(1, Math.ceil(baseMin * ratio));
+          }
+        }
+      }
+    } catch {
+      /* soft */
+    }
+    return Math.max(1, baseMin + lights);
+  }
+
+  const mPerMin = opts?.isBike ? getPlanBikeMPerMin() : getPlanWalkMPerMin();
   return Math.max(1, Math.ceil(distanceM / Math.max(20, mPerMin) + lights));
 }

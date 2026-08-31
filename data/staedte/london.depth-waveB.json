@@ -1,0 +1,877 @@
+{
+  "notes": [
+    "London Depth Wave B: 14 Tier-1-Kernorte mit jeweils mindestens zwölf quellengebundenen Vertiefungseinträgen und mindestens 3000 Zeichen Textpool.",
+    "Quellenbasis sind vorrangig offizielle Betreiber-, Museums-, Royal-Parks-, Historic-Royal-Palaces-, IWM-, RMG-, Kew-, ZSL- und Marktseiten. Öffnungszeiten, Preise, Programme, Ausstellungen, Tierbestände und Zugänge bleiben LIVE.",
+    "Deutsche Sachtexte ohne Dialogskripte; dauerhafte Geschichte und Architektur sind von ephemeren Besucherinformationen getrennt."
+  ],
+  "spots": [
+    {
+      "id": "london_science_museum",
+      "name": "Science Museum",
+      "lat": 51.4972216,
+      "lng": -0.1767283,
+      "place_tier": 1,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Das Science Museum entstand aus den wissenschaftlich-technischen Sammlungen, die nach der Great Exhibition von 1851 in South Kensington aufgebaut wurden. Zunächst gehörten Kunst, Industrie und Technik institutionell zusammen; daraus entwickelten sich später das V&A und das eigenständige Science Museum.",
+          "tags": ["geschichte", "einordnung"]
+        },
+        {
+          "text": "Der Name Science Museum war seit den 1880er Jahren informell gebräuchlich und wurde 1909 offiziell, als die Wissenschafts- und Ingenieursammlungen administrativ vom Victoria and Albert Museum getrennt wurden. Norman Lockyer und der Beamte Robert Morant trieben diese Verselbstständigung maßgeblich voran.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Der heutige Museumsbau an der Exhibition Road wurde in Etappen entwickelt. Die langgestreckten Galerien und großen Hallen sind darauf ausgelegt, sehr unterschiedliche Maßstäbe aufzunehmen: von Uhren und medizinischen Instrumenten bis zu Lokomotiven, Flugzeugen und Raumkapseln.",
+          "tags": ["architektur", "visuell"]
+        },
+        {
+          "text": "Die Sammlung des Science Museum Group umfasst Millionen Objekte, Fotografien und Archivalien aus Wissenschaft, Technik, Ingenieurwesen, Medizin, Transport und Medien. Nur ein Teil kann in London gezeigt werden; Hunderttausende Datensätze sind über die gemeinsame Online-Sammlung recherchierbar.",
+          "tags": ["sammlung", "einordnung"]
+        },
+        {
+          "text": "Ein Schlüsselobjekt ist die Apollo-10-Kommandokapsel Charlie Brown. Die Mission von 1969 erprobte den vollständigen Ablauf einer Mondlandung, ohne selbst zu landen. Die Kapsel kehrte mit knapp 39.900 Kilometern pro Stunde in die Atmosphäre zurück; ihre Besatzung hält damit den Geschwindigkeitsrekord für Menschen.",
+          "tags": ["raumfahrt", "objektgeschichte"]
+        },
+        {
+          "text": "Die Space-Galerie stellt Apollo 10 der Sojus-Kapsel TMA-19M gegenüber, mit der der britische ESA-Astronaut Tim Peake 2015 zur Internationalen Raumstation flog. Dieser direkte Vergleich macht unterschiedliche Epochen, Einsatzprofile, Materialien und Raumfahrttraditionen an real geflogenen Fahrzeugen sichtbar.",
+          "tags": ["raumfahrt", "leben_jetzt"]
+        },
+        {
+          "text": "Charles Babbages Difference Engine No. 2 wurde zu seinen Lebzeiten nicht gebaut. Das Museum setzte seine erhaltenen Pläne und sein Archiv in ein funktionsfähiges Rechenwerk um: 1991 war der Rechenteil fertig, 2002 kam der Druckmechanismus hinzu. Angetrieben wird die Maschine mit einer Handkurbel.",
+          "tags": ["computer", "objektgeschichte"]
+        },
+        {
+          "text": "Stephensons Rocket gewann 1829 die Rainhill Trials und verband mehrere technische Lösungen, die für spätere Dampflokomotiven prägend wurden. Das erhaltene Fahrzeug ist über vier Meter lang und etwa drei Tonnen schwer; die Museumsgruppe dokumentierte es mit Laserscans und Tausenden Detailaufnahmen.",
+          "tags": ["technik", "verkehr"]
+        },
+        {
+          "text": "Die Galerie Making the Modern World ordnet Schlüsselobjekte nicht nur nach Erfindern, sondern in Industrialisierung, Arbeit, Kommunikation und Alltag ein. Das entspricht dem Gründungsauftrag: Technik als Ergebnis gesellschaftlicher Entscheidungen und als Kraft zu zeigen, die Lebenswelten verändert.",
+          "tags": ["einordnung", "wissen"]
+        },
+        {
+          "text": "Während des Zweiten Weltkriegs wurden die Galerien geschlossen und große Teile der Sammlung aus London ausgelagert; die Bibliothek blieb in Gebrauch. Erst um 1950 war der reguläre Museumsbetrieb wieder stabil. Diese Evakuierung erklärt, warum Sammlungspflege und externe Depots bis heute wichtig sind.",
+          "tags": ["geschichte", "sammlung"]
+        },
+        {
+          "text": "Visuell erkennbar ist das Museum an der monumentalen Steinfront an der Exhibition Road im Museumsviertel von South Kensington. Im Inneren wechseln historische Hallen, dicht bestückte Objektgalerien und moderne Einbauten; der Haupteingang liegt gegenüber dem Umfeld von V&A und Natural History Museum.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Quellenbasis: offizielle Geschichte und Sammlungsseiten von sciencemuseum.org.uk, group.sciencemuseum.org.uk und collection.sciencemuseum.org.uk. Belegt sind dort die institutionelle Trennung 1909, Sammlungsumfang, Babbage-Projekt, Rocket-Dokumentation sowie die ausgestellten Raumfahrzeuge.",
+          "tags": ["quelle", "verifiziert"]
+        },
+        {
+          "text": "LIVE: Vor dem Besuch auf sciencemuseum.org.uk prüfen, welche Galerien und Objekte tatsächlich zugänglich sind, ob Zeitfenster reserviert werden müssen und welche Sonderausstellungen, Vorführungen oder Bauarbeiten laufen. Preise, Öffnungszeiten und aktuelle Platzierungen nicht aus diesem Pack ableiten.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ]
+    },
+    {
+      "id": "london_victoria_and_albert_museum",
+      "name": "Victoria and Albert Museum",
+      "lat": 51.4966392,
+      "lng": -0.17218,
+      "place_tier": 1,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Das V&A wurde 1852 als Museum of Manufactures gegründet. Sein Ursprung liegt in der Great Exhibition von 1851 und in Prinz Alberts Idee, deren Ertrag für ein Bildungsviertel in South Kensington zu nutzen. Kunst und Gestaltung sollten die Qualität britischer Industrieprodukte verbessern.",
+          "tags": ["geschichte", "einordnung"]
+        },
+        {
+          "text": "Das Museum begann in Marlborough House und zog 1857 an die Exhibition Road. Mehr als vier Jahrzehnte hieß es South Kensington Museum. 1899 legte Königin Victoria den Grundstein für den neuen Frontbau; der Name Victoria and Albert Museum erinnerte fortan an sie und Prinz Albert.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Gründungsdirektor Henry Cole verstand das Haus als „schoolroom for everyone“. Nicht nur Einzelobjekte, auch Räume, Beschriftung und Dekoration sollten Anschauungsunterricht geben. Dieser Bildungsauftrag erklärt die ungewöhnliche Verbindung aus Kunstmuseum, Designarchiv, Materialkunde und Vorbildersammlung.",
+          "tags": ["einordnung", "museumsgeschichte"]
+        },
+        {
+          "text": "Die Anlage ist selbst ein Lehrbuch viktorianischer Museumsarchitektur. Höfe, Keramik- und Mosaikschmuck, historistische Galerien und Aston Webbs monumentale Cromwell-Road-Fassade entstanden über Jahrzehnte. Der Gebäudekomplex wurde 1909, mehr als fünfzig Jahre nach Beginn der Arbeiten, formal vollendet.",
+          "tags": ["architektur"]
+        },
+        {
+          "text": "Die nationale Sammlung umfasst nach Museumsangaben mehr als 2,8 Millionen Objekte und erzählt rund 5.000 Jahre menschlicher Kreativität. Vertreten sind unter anderem Mode, Textilien, Möbel, Keramik, Glas, Metall, Skulptur, Fotografie, Grafik, Architektur und digitale Gestaltung.",
+          "tags": ["sammlung", "einordnung"]
+        },
+        {
+          "text": "Die 1873 eröffneten Cast Courts verkörpern den viktorianischen Anspruch, Weltkunst durch Reproduktionen zugänglich zu machen. Zu sehen sind monumentale Abgüsse wie Michelangelos David, die in zwei Teilen aufgestellte Trajanssäule und Ghibertis Paradiestüren – eine begehbare Enzyklopädie vor dem Massentourismus.",
+          "tags": ["sammlung", "architektur"]
+        },
+        {
+          "text": "Die sieben Raphael Cartoons sind großformatige Entwürfe für Tapisserien der Sixtinischen Kapelle. Papst Leo X. gab sie 1515 in Auftrag; seit 1865 sind sie als königliche Leihgabe im Museum. Hochauflösende Farb-, 3D- und Infrarotaufnahmen erschließen Pinselspuren, Oberfläche und Unterzeichnung.",
+          "tags": ["kunst", "objektgeschichte"]
+        },
+        {
+          "text": "Die Sammlungsordnung nach Materialien war bewusst gewählt: Holz, Metall, Keramik oder Textilien sollten vergleichbar werden, damit Gestalter Herstellungsweisen und Qualitätsunterschiede studieren konnten. Obwohl heutige Galerien vielfältiger erzählen, bleibt diese Verbindung von Form und Technik prägend.",
+          "tags": ["design", "wissen"]
+        },
+        {
+          "text": "Das Museum bewahrt nicht nur Meisterwerke, sondern auch Alltags- und Industrieprodukte. Dadurch lassen sich Stilgeschichte und soziale Geschichte miteinander lesen: Ein Kleid, ein Stuhl oder ein Plakat dokumentiert Material, Produktion, Handel, Körperbilder und die Zielgruppen seiner Zeit.",
+          "tags": ["einordnung", "sammlung"]
+        },
+        {
+          "text": "Der Innenhof mit seinem flachen Wasserbecken liegt im Zentrum der weitläufigen Anlage. Von dort sind die verschieden alten Flügel besonders gut ablesbar. Die Cast Courts erkennt man innen an ihrer außergewöhnlichen Höhe und an den riesigen Architekturabgüssen, die mehrere Geschosse füllen.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Das V&A bildet mit Science Museum und Natural History Museum das aus der Great Exhibition hervorgegangene Bildungsensemble von South Kensington. Die Nähe ist historisch kein Zufall: Kunst, Naturwissenschaft und Technik waren Teil desselben Reformprojekts für öffentliche Bildung und industrielle Wettbewerbsfähigkeit.",
+          "tags": ["quer", "stadtgeschichte"]
+        },
+        {
+          "text": "Quellenbasis: offizielle V&A-Seiten „The V&A Story“, „Building the Museum“, „About us“, die Cast-Collection und die Raphael-Cartoons. Dort sind Gründung, Namenswechsel, Baugeschichte, Sammlungsumfang und die genannten Hauptwerke institutionell dokumentiert.",
+          "tags": ["quelle", "verifiziert"]
+        },
+        {
+          "text": "LIVE: Auf vam.ac.uk aktuelle Öffnungszeiten, Zugänge, Raum- und Galerieschließungen, Sonderausstellungen, Reservierungen und Eintrittsregeln prüfen. Ob einzelne Werke ausgestellt oder ausgeliehen sind, ist ephemer; auch aktuelle Wege durch den großen Gebäudekomplex nicht dauerhaft festschreiben.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ]
+    },
+    {
+      "id": "london_hyde_park",
+      "name": "Hyde Park",
+      "lat": 51.5073638,
+      "lng": -0.1641135,
+      "place_tier": 1,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Heinrich VIII. erwarb das Gelände 1536 von den Mönchen der Westminster Abbey und nutzte es als königliches Jagdrevier. Damit begann Hyde Park nicht als öffentlicher Stadtpark, sondern als eingezäunte Landschaft für Hof und Wild – eine Herkunft, die viele Royal Parks teilen.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Jakob I. erlaubte ab 1603 nur ausgewählten Höflingen Zugang. Karl I. öffnete den Park 1637 der Allgemeinheit. Aus exklusivem Jagdland wurde damit ein öffentlicher Raum, in dem sich Erholung, Repräsentation, Protest und große nationale Ereignisse überlagerten.",
+          "tags": ["geschichte", "einordnung"]
+        },
+        {
+          "text": "Während der Großen Pest 1665 schlugen Menschen, die aus dicht bebauten Stadtteilen flohen, zeitweise Lager im Park auf. Die offene Fläche war damit nicht nur Vergnügungsort, sondern in einer Gesundheitskatastrophe auch ein improvisierter Zufluchtsraum.",
+          "tags": ["stadtgeschichte", "alltag"]
+        },
+        {
+          "text": "Königin Caroline ließ in den 1730er Jahren den Westbourne stauen und schuf den Serpentine. Seine geschwungene, natürlich wirkende Form war damals ungewöhnlich und wurde zum Vorbild für Landschaftsgärten. Gleichzeitig trennte Caroline Kensington Gardens durch einen langen Ha-ha von Hyde Park.",
+          "tags": ["landschaft", "architektur"]
+        },
+        {
+          "text": "1851 stand im Hyde Park Joseph Paxtons Crystal Palace für die Great Exhibition. Mehr als sechs Millionen Besuche machten die Ausstellung zu einem globalen Schaufenster von Industrie, Technik und Kultur. Das Gebäude wurde später nach Sydenham versetzt; die offene Parkfläche blieb zurück.",
+          "tags": ["geschichte", "welt Ausstellung"]
+        },
+        {
+          "text": "Speaker’s Corner liegt am nordöstlichen Rand bei Marble Arch. Nach Protesten der Reform League und eingerissenen Parkgittern 1866 regelte der Parks Regulation Act von 1872 öffentliche Versammlungen und Reden. Der Ort wurde ein internationales Symbol legaler, öffentlicher Debatte.",
+          "tags": ["demokratie", "geschichte"]
+        },
+        {
+          "text": "Zu den bekannten Stimmen an Speaker’s Corner zählen William Morris und politische Bewegungen unterschiedlichster Richtung. Besonders die Suffragetten nutzten Hyde Park im frühen 20. Jahrhundert für große Versammlungen. Entscheidend ist weniger ein einzelner Redner als die fortdauernde Praxis öffentlicher Gegenrede.",
+          "tags": ["gesellschaft", "einordnung"]
+        },
+        {
+          "text": "Außerhalb des Parks stand bis 1783 der Tyburn-Galgen. Verurteilte konnten dort eine letzte Rede halten. Die Royal Parks verknüpfen diese ältere Redetradition mit der späteren Kultur des Speaker’s Corner, ohne beide Orte gleichzusetzen.",
+          "tags": ["geschichte", "wissen"]
+        },
+        {
+          "text": "Der Park ist eine große offene Landschaft mit dem Serpentine als innerer Orientierungslinie. Baumgruppen, Wiesen, Reitwege, Wege am Wasser und die breiten Kanten entlang Park Lane und Knightsbridge erzeugen sehr unterschiedliche Räume statt eines einzigen formalen Gartens.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Hyde Park und Kensington Gardens wirken vor Ort fast wie eine zusammenhängende Grünfläche, sind historisch und verwaltungstechnisch aber getrennte Parks. Der Long Water geht östlich in den Serpentine über; Kensington Palace liegt westlich in Kensington Gardens, nicht im Hyde Park selbst.",
+          "tags": ["orientierung", "quer"]
+        },
+        {
+          "text": "Großveranstaltungen gehören seit dem 19. Jahrhundert zur Parkgeschichte: Feierlichkeiten nach den Napoleonischen Kriegen, Ausstellungen, Demonstrationen, Konzerte und Gedenkereignisse nutzten die offene Fläche. Welche Veranstaltung heute stattfindet und welche Bereiche gesperrt sind, ist jedoch nicht stabil.",
+          "tags": ["leben_jetzt", "einordnung"]
+        },
+        {
+          "text": "Quellenbasis: offizielle Geschichts-, FAQ- und Speaker’s-Corner-Seiten von The Royal Parks. Belegt sind Erwerb 1536, öffentliche Öffnung 1637, Pestlager, Serpentine, Great Exhibition sowie die Proteste von 1866 und die gesetzliche Regelung von 1872.",
+          "tags": ["quelle", "verifiziert"]
+        },
+        {
+          "text": "LIVE: Auf royalparks.org.uk aktuelle Wege-, Veranstaltungs- und Bereichssperrungen, Bade- und Bootsangebote, Sportanlagen, Verkehrseinschränkungen und Sicherheitsregeln prüfen. Saisonzeiten, Gebühren, Wasserzugang und angekündigte Programme sind ephemer und gehören nicht als Hartfakten in den Pack.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ]
+    },
+    {
+      "id": "london_kensington_palace",
+      "name": "Kensington Palace",
+      "lat": 51.5049757,
+      "lng": -0.187681,
+      "place_tier": 1,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Kensington Palace begann als Nottingham House, eine vergleichsweise bescheidene Villa außerhalb des damaligen Zentrums. Wilhelm III. und Maria II. kauften das Haus 1689, weil sie eine gesündere, weniger rauchige Residenz als Whitehall mit guter Verbindung zum Parlament suchten.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Sir Christopher Wren lieferte Pläne für den schnellen Ausbau; Maria II. griff selbst intensiv in das Projekt ein. Bereits an Heiligabend 1689 zog das Königspaar ein. Der ältere Hauskern wurde nicht ausgelöscht, sondern durch Flügel, Galerien und repräsentative Räume zum Palast erweitert.",
+          "tags": ["architektur", "geschichte"]
+        },
+        {
+          "text": "Maria II. starb 1694 im Palast an Pocken. Wilhelm III. starb 1702 dort, nachdem ein Reitunfall in Hampton Court seine Gesundheit schwer beeinträchtigt hatte. Solche Ereignisse machen Kensington zu einem Wohn- und Sterbeort der Monarchie, nicht bloß zu einer Kulisse für Staatszeremoniell.",
+          "tags": ["geschichte", "biografie"]
+        },
+        {
+          "text": "Unter Königin Anne wurden Gärten verbessert und die Orangery errichtet. Im georgianischen Ausbau gestaltete William Kent Innenräume und die King’s Grand Staircase. Die State Apartments zeigen deshalb keine einheitliche Bauphase, sondern Schichten der Stuart- und Georgianischen Hofkultur.",
+          "tags": ["architektur", "kunst"]
+        },
+        {
+          "text": "Alexandrina Victoria wurde 1819 im Kensington Palace geboren und wuchs dort unter dem strengen sogenannten Kensington System auf. 1837 erfuhr sie im Palast von ihrer Thronbesteigung. Räume und persönliche Objekte verbinden den späteren imperialen Mythos mit einer kontrollierten Kindheit im Familienappartement.",
+          "tags": ["geschichte", "biografie"]
+        },
+        {
+          "text": "Die King’s State Apartments bilden eine Folge zunehmend repräsentativer Räume. Ihre Anordnung war Teil höfischer Hierarchie: Zugang und Nähe zum Monarchen waren politisches Kapital. Treppen, Galerien, Audienz- und Gesellschaftsräume strukturierten, wer wie weit in den königlichen Bereich gelangen durfte.",
+          "tags": ["architektur", "einordnung"]
+        },
+        {
+          "text": "Der Palast blieb nach dem Ende seiner Rolle als wichtigste Hofresidenz bewohnt und wurde in Wohnungen für Mitglieder der königlichen Familie gegliedert. Diese Doppelfunktion gilt weiter: Historische Staatsräume sind museal zugänglich, andere Teile dienen als private königliche Residenzen.",
+          "tags": ["leben_jetzt", "einordnung"]
+        },
+        {
+          "text": "Diana, Princess of Wales, lebte im Kensington Palace; nach ihrem Tod 1997 wurde das Tor zu einem zentralen Ort öffentlicher Trauer. Diese jüngere Erinnerungsschicht ergänzt die Geschichten von Wilhelm, Maria, Anne und Victoria um moderne Medienöffentlichkeit und persönliche Identifikation.",
+          "tags": ["geschichte", "gesellschaft"]
+        },
+        {
+          "text": "Die Anlage wurde im Ersten Weltkrieg teilweise von Wohlfahrtsorganisationen als Büro genutzt. Bombenschäden im Zweiten Weltkrieg trafen die State Apartments, besonders die Queen’s Apartments. Die heutigen Räume sind daher Ergebnis von Erhaltung, Reparatur und kuratorischer Rekonstruktion.",
+          "tags": ["geschichte", "denkmalpflege"]
+        },
+        {
+          "text": "Visuell wirkt der Palast von Kensington Gardens niedriger und wohnlicher als Buckingham Palace. Rote Backsteinpartien, helle Steinrahmungen, lange Flügel, der Vorplatz und die Gärten markieren den Übergang von Parklandschaft zu Residenz; der öffentliche Zugang ist vom privaten Wohnbereich getrennt.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Kensington Palace und Hampton Court sind historisch eng verbunden: Wilhelm III. und Maria II. ließen beide Residenzen ausbauen, Wren arbeitete an beiden, und Wilhelms tödlichem Ende ging ein Reitunfall in Hampton Court voraus. Dennoch hatten Stadtpalast und große Hofanlage unterschiedliche Funktionen.",
+          "tags": ["quer", "einordnung"]
+        },
+        {
+          "text": "Quellenbasis: offizielle Historic-Royal-Palaces-Seiten zur Palastgeschichte, zu Queen Victoria und zur Bauchronik. Dort sind Nottingham House, Kauf und Umbau 1689, dynastische Bewohner, Victoria-Bezug, Kriegsschäden und die fortdauernde Residenzfunktion dokumentiert.",
+          "tags": ["quelle", "verifiziert"]
+        },
+        {
+          "text": "LIVE: Auf hrp.org.uk prüfen, welche Apartments, Ausstellungen und Gartenbereiche geöffnet sind. Bewohnerbedingte, konservatorische oder bauliche Schließungen, Zeitfenster, Eintritt, Führungen und ausgestellte persönliche Objekte können sich ändern und dürfen nur mit aktueller Recherche genannt werden.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ]
+    },
+    {
+      "id": "london_covent_garden",
+      "name": "Covent Garden",
+      "lat": 51.5122737,
+      "lng": -0.1234492,
+      "place_tier": 1,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Der Name Covent Garden geht auf den Garten des Konvents von Westminster Abbey zurück. Das Gebiet wurde nach der Auflösung der Klöster unter Heinrich VIII. eingezogen und gelangte später an die Familie Russell, Earls und Dukes of Bedford.",
+          "tags": ["geschichte", "namensgeschichte"]
+        },
+        {
+          "text": "Francis Russell, der 4. Earl of Bedford, beauftragte Inigo Jones mit der städtebaulichen Entwicklung. Um 1630 entstand eine italienisch inspirierte Piazza – ein für London neuartiger, planvoll gefasster Platz. St Paul’s Church bildete die westliche Platzkante.",
+          "tags": ["architektur", "stadtgeschichte"]
+        },
+        {
+          "text": "Die elegante Platzidee wurde rasch vom Handel überformt. Die erste schriftliche Erwähnung eines „new market in Covent Garden“ stammt von 1654. Obst- und Gemüsestände breiteten sich auf der Piazza aus; 1670 sicherte eine königliche Konzession den Markt rechtlich ab.",
+          "tags": ["marktgeschichte", "geschichte"]
+        },
+        {
+          "text": "Der heutige zentrale Market Building ist nicht von Inigo Jones. Charles Fowler entwarf den funktionalen, klassizistischen Bau, der 1830 eröffnete. Er ersetzte das unübersichtliche Geflecht aus Ständen und Schuppen durch eine regulierte, dauerhaft überdachte Marktstruktur.",
+          "tags": ["architektur", "wissen"]
+        },
+        {
+          "text": "Im 19. Jahrhundert kamen weitere Hallen hinzu, darunter Blumenmarkt- und Jubilee-Market-Strukturen. Der Komplex wurde zu einem dicht arbeitenden Großmarkt, dessen Fuhrwerke, Kisten, Abfälle und Nachtbetrieb das elegante Platzensemble ebenso prägten wie seine Architektur.",
+          "tags": ["alltag", "marktgeschichte"]
+        },
+        {
+          "text": "Bis 1974 blieb Covent Garden Londons zentraler Obst-, Gemüse- und Blumenmarkt. Verkehrsprobleme und Platzmangel führten zum Umzug nach Nine Elms. Damit verlor das Viertel seine ursprüngliche Handelsfunktion, entging aber durch Proteste einer großflächigen Neubebauung.",
+          "tags": ["geschichte", "stadtplanung"]
+        },
+        {
+          "text": "Eine engagierte Bewohnerkampagne trug dazu bei, dass zahlreiche Gebäude unter Denkmalschutz gestellt und Abrisspläne gestoppt wurden. Nach Umbau und Restaurierung eröffnete der zentrale Marktbau 1980 als spezialisiertes Einkaufszentrum – ein frühes Beispiel kommerzieller Umnutzung historischer Markthallen.",
+          "tags": ["denkmalpflege", "geschichte"]
+        },
+        {
+          "text": "Die heutige Piazza lebt von der Spannung zwischen formalem Platzraum und wechselnder Nutzung. Arkaden, Steinpflaster, Marktstände, Gastronomie und Straßenkunst besetzen eine Struktur, die ursprünglich aristokratische Stadtplanung war und später jahrhundertelang vom Lebensmittelhandel geprägt wurde.",
+          "tags": ["leben_jetzt", "einordnung"]
+        },
+        {
+          "text": "St Paul’s Church wird wegen ihrer Verbindung zum umliegenden Theaterquartier auch Actors’ Church genannt. Royal Ballet and Opera, Theatre Royal Drury Lane und weitere Bühnen liegen in der Nachbarschaft; Marktgeschichte und West-End-Theater überlagern sich hier räumlich.",
+          "tags": ["quer", "kultur"]
+        },
+        {
+          "text": "Visuell ist das Zentrum an Fowlers niedriger klassizistischer Halle mit Kolonnaden und an der offenen Piazza zu erkennen. Nicht mit dem U-Bahnhofseingang an Long Acre verwechseln: Der historische Ort ist das Markt- und Platzensemble westlich davon.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Borough Market besitzt heute einen versetzten Portikus der ehemaligen Floral Hall von Covent Garden. Das Bauteil wurde beim Umbau des Royal Opera House gerettet und 2003 in Southwark eingebaut – eine materielle Verbindung zwischen zwei sehr unterschiedlichen Londoner Marktgeschichten.",
+          "tags": ["quer", "architektur"]
+        },
+        {
+          "text": "Quellenbasis: offizielle Geschichtsseiten von coventgarden.london, ergänzt durch etablierte Denkmaldokumentation. Belegt sind mittelalterliche Namensherkunft, Jones’ Piazza, Marktbeleg 1654, Fowlers Halle, Umzug 1974, Bürgerkampagne und Wiedereröffnung 1980.",
+          "tags": ["quelle", "verifiziert"]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten einzelner Märkte und Läden, Standbelegung, Straßenkunst, Veranstaltungen, Baustellen und Zugänge auf den offiziellen Seiten prüfen. Aktuelle Händler, Gastronomie, Programme und Aufführungen sind ephemer; keine heutigen Angebote als dauerhafte Markttradition ausgeben.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ]
+    },
+    {
+      "id": "london_borough_market",
+      "name": "Borough Market",
+      "lat": 51.5055826,
+      "lng": -0.0904808,
+      "place_tier": 1,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Borough Market hat einen starken Anspruch, Londons ältester fortbestehender Lebensmittelmarkt zu sein. Bereits 1014 ist Handel mit Getreide, Fisch, Gemüse und Vieh in Southwark belegt. Der Markt wuchs am südlichen Ende der einzigen mittelalterlichen London Bridge.",
+          "tags": ["geschichte", "marktgeschichte"]
+        },
+        {
+          "text": "Die Brücke machte Southwark zum Engpass für Menschen und Waren aus dem Süden. Marktstände profitierten vom Verkehr, blockierten ihn aber zugleich. Diese Spannung zwischen Versorgung und Stau führte Mitte des 18. Jahrhunderts zur Schließung des alten Straßenmarkts.",
+          "tags": ["stadtgeschichte", "einordnung"]
+        },
+        {
+          "text": "1754 beschloss das Parlament, den Handel auf der Hauptstraße zu beenden. Einwohner der Gemeinde St Saviour’s sammelten Geld, kauften das Gelände „The Triangle“ westlich der High Street und eröffneten 1756 einen neuen Markt am heutigen Standort.",
+          "tags": ["geschichte", "gesellschaft"]
+        },
+        {
+          "text": "Das Gesetz bestimmte, dass der Markt zum Nutzen der Gemeinde auf Dauer erhalten bleiben sollte. Daraus entwickelte sich die ungewöhnliche Eigentumsstruktur: Borough Market wird als gemeinnütziger Trust geführt, dessen ehrenamtliche Trustees den öffentlichen und gemeinschaftlichen Zweck sichern.",
+          "tags": ["einordnung", "verwaltung"]
+        },
+        {
+          "text": "Im 19. Jahrhundert machte die Urbanisierung Südlondons den Markt zu einem bedeutenden Obst- und Gemüse-Großhandelsplatz. Händler erweiterten das Gelände, Lager und Marktgebäude; die Nähe zu London Bridge verband Straßen-, Fluss- und später Eisenbahnlogistik.",
+          "tags": ["wirtschaftsgeschichte", "alltag"]
+        },
+        {
+          "text": "1862 schnitt ein Viadukt der South Eastern Railway mitten durch den Markt. Die Bahn brachte Lärm, Ruß und räumliche Brüche, verbesserte aber zugleich den Warentransport. 1897 kostete eine Streckenverbreiterung dem Markt sein damaliges Glas-und-Eisen-Kuppeldach.",
+          "tags": ["architektur", "verkehr"]
+        },
+        {
+          "text": "Die heutige Architektur ist deshalb kein einheitlicher Hallenbau. Eisenbahnviadukte, viktorianische Metallkonstruktionen, Höfe, Straßenfronten und jüngere Einbauten bilden ein gewachsenes Gefüge. Gerade diese räumliche Unordnung erzählt die Anpassungen eines arbeitenden Markts.",
+          "tags": ["architektur", "visuell"]
+        },
+        {
+          "text": "Der Großhandel verlor im späten 20. Jahrhundert an Bedeutung. Der Markt wandelte sich zu einem Ort für Lebensmittelhandwerk, Erzeuger, Einzelhandel und Gastronomie. Seine dauerhafte Identität liegt nicht in einem festen Sortiment, sondern im Lebensmittelhandel und im Nutzen für die Gemeinschaft.",
+          "tags": ["leben_jetzt", "einordnung"]
+        },
+        {
+          "text": "Der Floral-Hall-Portikus stammt ursprünglich aus Covent Garden. Beim Umbau des Royal Opera House gerettet, wurde er 2003 am Borough Market eingebaut. Das scheinbar historische Zentrum ist damit selbst ein Beispiel dafür, wie London Architektur versetzt und neu deutet.",
+          "tags": ["architektur", "quer"]
+        },
+        {
+          "text": "Visuell erkennt man den Markt an den Ständen und Hallen unter und neben den Eisenbahntrassen westlich von Borough High Street, unmittelbar bei Southwark Cathedral und London Bridge. Three Crown Square, Green Market und umliegende Läden bilden mehrere Teilräume statt einer einzigen Halle.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Southwark Cathedral, das ehemalige St Thomas’ Hospital und die Brückengeschichte bilden den historischen Kontext. Der Markt war Teil eines südlichen Vorstadtgebiets mit Herbergen, Gewerben und Vergnügungen außerhalb der unmittelbaren Kontrolle der City of London.",
+          "tags": ["quer", "stadtgeschichte"]
+        },
+        {
+          "text": "Quellenbasis: offizielle Marktseiten „Our story“, „Borough Market began with a bridge“, Trust-Informationen und der London-Museum-Beitrag. Belegt sind frühe Handelsnachweise, Parlamentakte, Standort 1756, Trust-Struktur, Eisenbahnumbauten und Floral-Hall-Portikus.",
+          "tags": ["quelle", "verifiziert"]
+        },
+        {
+          "text": "LIVE: Auf boroughmarket.org.uk aktuelle Markttage, Öffnungszeiten, Händler, Angebote, Veranstaltungen, Bauarbeiten und Zugänge prüfen. Einzelne Stände, Speisen, Preise und die tatsächliche Belegung der Teilmärkte ändern sich und dürfen nicht aus dem Offline-Pack versprochen werden.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ]
+    },
+    {
+      "id": "london_churchill_war_rooms",
+      "name": "Churchill War Rooms",
+      "lat": 51.5021585,
+      "lng": -0.1293572,
+      "place_tier": 1,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Die Cabinet War Rooms entstanden aus der Erwartung, dass London in einem neuen Krieg aus der Luft angegriffen würde. 1938 wählte die Regierung den Keller der New Public Offices in Whitehall: nahe Parlament und Downing Street, mit starkem Stahlrahmen und großem Untergeschoss.",
+          "tags": ["geschichte", "architektur"]
+        },
+        {
+          "text": "Der Komplex wurde am 27. August 1939 vollständig einsatzbereit, eine Woche vor der britischen Kriegserklärung. Er sollte Kabinett, militärische Führung und Informationsdienste auch während Luftangriffen arbeitsfähig halten und wurde zum geheimen Nervenzentrum der Regierung.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Die Bezeichnung „unterirdisch“ darf nicht mit einem tiefen Bunker verwechselt werden: Die Räume liegen im Keller eines Regierungsgebäudes. Zusätzliche Verstärkungen sollten Bombenwirkung mindern, boten aber keinen absoluten Schutz gegen einen Volltreffer.",
+          "tags": ["architektur", "einordnung"]
+        },
+        {
+          "text": "Im Cabinet Room tagte Churchills Kriegskabinett während des Zweiten Weltkriegs 115-mal, besonders im Blitz und während der V-Waffen-Angriffe. Sitzordnung, Karten, Telefone und Dokumente zeigen, wie politische und militärische Entscheidungen in einem engen Raum zusammenliefen.",
+          "tags": ["geschichte", "politik"]
+        },
+        {
+          "text": "Der Map Room war rund um die Uhr besetzt. Hier wurden Meldungen zu Fronten, Schiffsbewegungen und Operationen gesammelt, geprüft und für König, Premierminister und Streitkräfte aufbereitet. Churchill verbrachte dort den gesamten D-Day und verfolgte den Verlauf der Landungen.",
+          "tags": ["alltag", "militärgeschichte"]
+        },
+        {
+          "text": "Hunderte Männer und Frauen arbeiteten zwischen 1940 und 1945 Tausende Stunden im Komplex. Schlafräume, Küchen, Schreibbüros, Schaltstellen und enge Korridore zeigen eine dauerhafte Arbeitswelt unter künstlichem Licht – nicht nur eine Folge berühmter Kabinettssitzungen.",
+          "tags": ["alltag", "gesellschaft"]
+        },
+        {
+          "text": "Ein als private Toilette getarnter Raum beherbergte Technik für sichere transatlantische Telefonate. Das geheime SIGSALY-System verschlüsselte Gespräche zwischen Churchill und US-Präsident Franklin D. Roosevelt; die technische Infrastruktur reichte weit über den sichtbaren kleinen Raum hinaus.",
+          "tags": ["technik", "geschichte"]
+        },
+        {
+          "text": "Nach der Kapitulation Japans wurden am 16. August 1945 die Lichter im Map Room ausgeschaltet und die Türen geschlossen. Das Parlament sicherte 1948 die Erhaltung. Weil Zugang und Wissen lange stark begrenzt blieben, bewahrten viele Räume ungewöhnlich viel historische Substanz.",
+          "tags": ["denkmalpflege", "geschichte"]
+        },
+        {
+          "text": "Das Imperial War Museum begann Ende der 1970er Jahre mit Erhaltung und Erschließung; 1984 öffneten die Haupträume. 2003 kamen Courtyard Rooms hinzu, in denen Beschäftigte arbeiteten, aßen und schliefen. 2005 ergänzte ein biografisches Churchill Museum den historischen Komplex.",
+          "tags": ["museumsgeschichte", "einordnung"]
+        },
+        {
+          "text": "Visuell ist außen kaum ein Bunker zu erkennen: Der Zugang liegt an King Charles Street bei Whitehall. Innen führen niedrige Korridore an verglasten historischen Räumen vorbei; Kartenwände, Telefone, Schreibtische und Schlafplätze tragen stärker zur Orientierung bei als eine große zentrale Halle.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Die War Rooms erzählen institutionelle Führung und Alltagsarbeit, während HMS Belfast denselben Krieg aus Sicht einer schwimmenden Gemeinschaft zeigt. Beide gehören zum Imperial War Museums, dürfen aber nicht zu einer einzigen Churchill-Erzählung verkürzt werden.",
+          "tags": ["quer", "einordnung"]
+        },
+        {
+          "text": "Quellenbasis: offizielle IWM-Geschichte der Cabinet War Rooms, Map-Room-Dokumentation und Besucherinformationen. Belegt sind Standortwahl 1938, Betriebsbeginn 1939, 115 Kabinettssitzungen, Rund-um-die-Uhr-Arbeit, Schließung 1945 und Museumsöffnungen ab 1984.",
+          "tags": ["quelle", "verifiziert"]
+        },
+        {
+          "text": "LIVE: Auf iwm.org.uk Zeitfenster, Eintritt, Öffnungszeiten, aktuelle Raumzugänge, Ausstellungen, Führungen und Sicherheitsvorgaben prüfen. Die historischen Räume sind dauerhaft, doch Besucherführung, Objektplatzierung, Wartung und Verfügbarkeit einzelner Bereiche sind ephemer.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ]
+    },
+    {
+      "id": "london_cutty_sark",
+      "name": "Cutty Sark",
+      "lat": 51.4828646,
+      "lng": -0.0095917,
+      "place_tier": 1,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Die Cutty Sark wurde 1869 in Dumbarton in Schottland für Reeder John „Jock“ Willis gebaut. Entwerfer Hercules Linton kombinierte einen eisernen Rahmen mit hölzerner Außenhaut. Der schnelle Klipper war ausdrücklich für den China-Teehandel bestimmt.",
+          "tags": ["geschichte", "technik"]
+        },
+        {
+          "text": "Im Teehandel brachte Geschwindigkeit wirtschaftlichen Vorteil: Die erste neue Ernte erzielte in London hohe Preise. Der 1869 eröffnete Suezkanal begünstigte jedoch Dampfschiffe, die den Kanal unabhängig vom Wind nutzen konnten; Segelklipper verloren diesen Wettbewerb.",
+          "tags": ["wirtschaftsgeschichte", "einordnung"]
+        },
+        {
+          "text": "Ab 1883 fand die Cutty Sark im australischen Wollhandel ihre erfolgreichste Rolle. Unter Kapitän Richard Woodget erzielte sie außergewöhnlich schnelle Heimreisen und erreichte den Ärmelkanal teils in siebzig Tagen oder weniger. Sie transportierte während ihrer Laufbahn mehr als 45.000 Wollballen.",
+          "tags": ["geschichte", "seefahrt"]
+        },
+        {
+          "text": "Der Name stammt aus Robert Burns’ Gedicht „Tam o’ Shanter“. „Cutty sark“ bezeichnet dort Nannies kurzes Hemd. Die Galionsfigur zeigt die Hexe mit ausgestrecktem Arm und einem Pferdeschwanz – im Gedicht reißt sie dem fliehenden Pferd den Schweif ab.",
+          "tags": ["namensgeschichte", "kunst"]
+        },
+        {
+          "text": "Die heutige Nannie ist eine 2021 eingesetzte Neuschnitzung von Andy Peters nach Zeichnungen Hercules Lintons. Das Original ging im späten 19. Jahrhundert durch Sturmschäden verloren; auch die 1957 gefertigte Replik musste wegen Fäulnis und Wasserschäden ersetzt werden.",
+          "tags": ["denkmalpflege", "objektgeschichte"]
+        },
+        {
+          "text": "Nach britischer Zeit fuhr das Schiff unter portugiesischer Flagge als Ferreira und später Maria do Amparo. 1922 brachte Kapitän Wilfred Dowman es nach Großbritannien zurück. Später diente es der nautischen Ausbildung, bevor eine Erhaltungskampagne einsetzte.",
+          "tags": ["geschichte", "seefahrt"]
+        },
+        {
+          "text": "Die Cutty Sark Preservation Society sammelte mit Unterstützung des Duke of Edinburgh öffentliche Mittel. 1954 wurde das Schiff bei Hochwasser in ein eigens gebautes Trockendock in Greenwich gebracht und 1957 nach Restaurierung für das Publikum geöffnet.",
+          "tags": ["denkmalpflege", "geschichte"]
+        },
+        {
+          "text": "Ein Brand zerstörte 2007 während Restaurierungsarbeiten Teile der Decks. Viele originale Bauteile waren bereits ausgelagert. Nach erneuter Konservierung öffnete das Schiff 2012; die heutige Präsentation hebt den Rumpf an, sodass seine Linien auch von unten sichtbar werden.",
+          "tags": ["denkmalpflege", "architektur"]
+        },
+        {
+          "text": "Der erhaltene Klipper macht Arbeitsteilung auf einem Frachtschiff ablesbar: Laderäume, Mannschaftsbereiche, Deck, Takelage und Kapitänsräume gehören zu einem System, das Ladung schnell über Ozeane bewegen sollte. Die romantische Segelform war harte kommerzielle Infrastruktur.",
+          "tags": ["alltag", "einordnung"]
+        },
+        {
+          "text": "Visuell ist die Cutty Sark am schwarzen Rumpf, weißen Aufbauten, drei Masten und der weit ausgreifenden Takelage zu erkennen. Sie steht nicht im Wasser, sondern in einem Trockendock nahe Greenwich Pier; die moderne Glasüberdachung lässt den kupferfarbenen Unterwasserrumpf sichtbar.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Der Standort ist historisch passend: In ihrer aktiven Laufbahn löschte die Cutty Sark Ladungen in Londons East India Docks. Heute verbindet sie Greenwichs maritime Museen mit der tatsächlichen Handelsgeschichte der Themse, bleibt aber ein versetztes Museumsschiff.",
+          "tags": ["quer", "stadtgeschichte"]
+        },
+        {
+          "text": "Quellenbasis: offizielle Geschichte und Objektseiten von Royal Museums Greenwich. Belegt sind Bau 1869, Tee- und Wollhandel, Name und Figur, Greenwich-Transfer 1954, Öffnungen 1957 und 2012 sowie die erhaltene und erneuerte Bausubstanz.",
+          "tags": ["quelle", "verifiziert"]
+        },
+        {
+          "text": "LIVE: Auf rmg.co.uk Öffnungszeiten, Tickets, Deck- und Raumzugänge, Veranstaltungen, Restaurierungsarbeiten und Kombiangebote prüfen. Welche Segel gesetzt, welche Bereiche begehbar und welche Objekte ausgestellt sind, kann sich ändern und wird nicht dauerhaft zugesichert.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ]
+    },
+    {
+      "id": "london_royal_observatory_greenwich",
+      "name": "Royal Observatory Greenwich",
+      "lat": 51.476853,
+      "lng": -0.0005002,
+      "place_tier": 1,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Karl II. gründete das Royal Observatory 1675, um Astronomie und Navigation zu verbessern. Er ernannte John Flamsteed zum ersten Astronomer Royal und ordnete den Bau auf dem höchsten Gelände des Greenwich Park an. Es ist Großbritanniens älteste eigens errichtete wissenschaftliche Institution.",
+          "tags": ["geschichte", "wissenschaft"]
+        },
+        {
+          "text": "Flamsteed legte am 10. August 1675 den Grundstein und zog 1676 ein. Das nach ihm benannte Flamsteed House entwarf Christopher Wren mit Robert Hooke. Es verband Beobachtungsräume mit einem Haushalt, denn Astronomen lebten und arbeiteten mit Familien und Bediensteten am Ort.",
+          "tags": ["architektur", "alltag"]
+        },
+        {
+          "text": "Ein Hauptauftrag war, Sternpositionen präzise zu bestimmen, damit Seefahrer ihre Länge berechnen konnten. Breite ließ sich astronomisch leichter ermitteln; die Ost-West-Position erforderte einen Vergleich zwischen Ortszeit und einer verlässlichen Referenzzeit.",
+          "tags": ["wissenschaft", "einordnung"]
+        },
+        {
+          "text": "John Harrisons Marinechronometer H1 bis H4 zeigen einen technischen Lösungsweg für das Längenproblem. Sie hielten Zeit trotz Schiffsbewegung und Temperaturschwankung ausreichend genau. H4 war der entscheidende Durchbruch; alle vier Zeitmesser werden in Greenwich bewahrt.",
+          "tags": ["technik", "objektgeschichte"]
+        },
+        {
+          "text": "Der Greenwich-Meridian wurde 1884 auf der International Meridian Conference als internationaler Nullmeridian empfohlen. Ausschlaggebend war auch, dass viele Seekarten Greenwich bereits nutzten. Der historische Messingstreifen markiert diese konventionelle Referenz, keine physische Naht der Erde.",
+          "tags": ["wissenschaft", "einordnung"]
+        },
+        {
+          "text": "Greenwich Mean Time wurde 1880 gesetzlicher Zeitstandard Großbritanniens. Zeitverteilung war praktische Infrastruktur: Die 1833 installierte rote Time Ball fiel täglich als sichtbares Signal für Schiffe, später verbreiteten Eisenbahn, Telegraf und Rundfunk Greenwich-Zeit weit über den Hügel.",
+          "tags": ["zeit", "stadtgeschichte"]
+        },
+        {
+          "text": "Das Great Equatorial Telescope ist ein 28-Zoll-Refraktor von Grubb, installiert 1893. Es diente besonders der Beobachtung und Vermessung von Doppelsternen. Die charakteristische Zwiebeldachkuppel macht den Bau weithin sichtbar; das Instrument ist parallel zur Erdachse montiert.",
+          "tags": ["technik", "architektur"]
+        },
+        {
+          "text": "Wachsende Licht- und Luftverschmutzung verschlechterte die Beobachtungsbedingungen in London. Der Forschungsbetrieb zog schließlich nach Herstmonceux; 1958 endete der Umzug. Der Greenwich-Standort ging 1953 an das National Maritime Museum und öffnete ab 1960 museal.",
+          "tags": ["geschichte", "museumsgeschichte"]
+        },
+        {
+          "text": "Das Observatorium ist Teil des UNESCO-Welterbes Maritime Greenwich. Seine Lage über Queen’s House, National Maritime Museum und Themse macht die historische Verbindung sichtbar: Astronomie, Kartografie, Zeitmessung, Flotte, Handel und imperiale Navigation waren miteinander verflochten.",
+          "tags": ["quer", "einordnung"]
+        },
+        {
+          "text": "Visuell liegt die Anlage oben auf dem steilen Hügel im Greenwich Park. Flamsteed House, rote Time Ball, Meridian Courtyard und die grüne Zwiebeldachkuppel des Teleskops sind die wichtigsten Erkennungsmerkmale; der Aufstieg beginnt südlich des National Maritime Museum.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Die heutige internationale Referenzgeodäsie verwendet präzisere, erdzentrierte Systeme, deren Null-Längengrad geringfügig vom historischen Greenwich-Streifen abweicht. Das mindert dessen Bedeutung nicht: Er dokumentiert den astronomisch bestimmten Meridian und die Standardisierung des 19. Jahrhunderts.",
+          "tags": ["wissen", "einordnung"]
+        },
+        {
+          "text": "Quellenbasis: offizielle Geschichts- und Attraktionsseiten von Royal Museums Greenwich zu Gründung, Meridian, GMT, Harrison-Uhren, Time Ball und Great Equatorial Telescope. Institutionelle Daten belegen auch Forschungsumzug und museale Öffnung.",
+          "tags": ["quelle", "verifiziert"]
+        },
+        {
+          "text": "LIVE: Auf rmg.co.uk aktuelle Tickets, Öffnungszeiten, Zugang zum Meridianhof, Planetariumsprogramm, Teleskoptermine, Time-Ball-Betrieb und wetter- oder wartungsbedingte Einschränkungen prüfen. Beobachtungen und Vorführungen niemals aus dem Offline-Pack versprechen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ]
+    },
+    {
+      "id": "london_the_shard",
+      "name": "The Shard",
+      "lat": 51.5045,
+      "lng": -0.0865,
+      "place_tier": 1,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Der Immobilienentwickler Irvine Sellar erwarb 1998 die Southwark Towers bei London Bridge. Eine britische Planungspolitik, die höhere Dichte an großen Verkehrsknoten unterstützte, bildete den Rahmen für den Ersatzbau. 2000 skizzierte Renzo Piano die Grundidee bei einem Treffen in Berlin.",
+          "tags": ["geschichte", "stadtplanung"]
+        },
+        {
+          "text": "Renzo Piano bezog sich auf Londoner Kirchtürme und auf Schiffsmasten in Gemälden Canalettos. Statt einer geschlossenen Festung entwarf er eine schlanke, unvollständig wirkende Spitze. Acht geneigte Glasfassaden – die „shards“ – stehen leicht gegeneinander versetzt und lösen den Umriss auf.",
+          "tags": ["architektur", "kunst"]
+        },
+        {
+          "text": "The Shard ist 309,6 Meter hoch und besitzt 95 Geschosse, von denen Ebene 72 die höchste regulär nutzbare ist. Der Betreiber bezeichnet ihn als höchsten Bau Westeuropas. Die genaue Rangordnung kann sich durch Neubauten ändern; die Höhe selbst ist das stabile Bauwerksmerkmal.",
+          "tags": ["architektur", "einordnung"]
+        },
+        {
+          "text": "Das Konzept einer „vertical city“ mischt Funktionen: Büros liegen in den breiteren unteren Ebenen, darüber folgen Gastronomie, Hotel und Wohnungen; oben befinden sich öffentliche Aussichtsebenen. Die abnehmenden Grundrisse reagieren auf die unterschiedlichen Raumtiefen dieser Nutzungen.",
+          "tags": ["architektur", "stadtplanung"]
+        },
+        {
+          "text": "Die Nähe zu London Bridge Station war Teil des Konzepts. Hohe Dichte sollte an einem Ort entstehen, der bereits durch Bahn, Underground und Busse erschlossen ist. Der Turm ist damit auch ein Produkt der Stadterneuerung rund um einen Verkehrsknoten, nicht nur ein freistehendes Wahrzeichen.",
+          "tags": ["verkehr", "einordnung"]
+        },
+        {
+          "text": "Beim Bau kam in Großbritannien erstmals in diesem Maßstab ein Top-down-Verfahren zum Einsatz: Während Fundamente tiefer ausgegraben wurden, wuchs der Kern bereits nach oben. Für die Bodenplatte wurden in einer 36-stündigen Aktion 5.400 Kubikmeter Beton eingebracht.",
+          "tags": ["technik", "baugeschichte"]
+        },
+        {
+          "text": "Die Außenhaut besteht nach Betreiberangaben aus rund 11.000 Glaspaneelen. Besonders helles Glas und die gegeneinander gestellten Flächen reflektieren Himmel und Wetter unterschiedlich. Öffnungen in den Fugen ermöglichen natürliche Belüftung einzelner Wintergärten.",
+          "tags": ["technik", "visuell"]
+        },
+        {
+          "text": "Der Turm wurde 2012 fertiggestellt und im Juli mit einer Lichtinszenierung eingeweiht. Die öffentliche Aussicht eröffnete 2013. Diese Daten trennen Bauvollendung, Einweihung und schrittweise Inbetriebnahme – Ereignisse, die bei Großprojekten oft fälschlich zu einem einzigen Eröffnungstag verschmelzen.",
+          "tags": ["geschichte", "wissen"]
+        },
+        {
+          "text": "The View from The Shard nutzt die Ebenen 68, 69 und 72. Ebene 69 ist ein geschlossener Aussichtspunkt, Ebene 72 teilweise offen. Die Blickweite hängt von Wetter und Sicht ab; sie ist keine garantierte Eigenschaft, auch wenn der Betreiber bei klaren Bedingungen weite Panoramen angibt.",
+          "tags": ["leben_jetzt", "einordnung"]
+        },
+        {
+          "text": "Visuell steigt der Turm unmittelbar südlich der Themse über London Bridge Station auf. Seine spitz zulaufenden, gegeneinander verschobenen Glasflächen wirken je nach Wetter blau, grau oder nahezu durchsichtig; die Spitze endet absichtlich nicht in einer geschlossenen, symmetrischen Kappe.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Vom Turm lassen sich historische Schichten Southwarks lesen: Borough Market und Southwark Cathedral liegen direkt westlich, HMS Belfast und Tower Bridge östlich. Der radikal moderne Bau steht damit in einem Viertel, das Markt-, Bahn-, Hafen- und Kirchengeschichte verdichtet.",
+          "tags": ["quer", "stadtgeschichte"]
+        },
+        {
+          "text": "Quellenbasis: offizielle Seiten the-shard.com zu Geschichte, Vision, Architektur und Viewing Gallery. Belegt sind Sellars Projektbeginn, Pianos Entwurf, Höhe, Funktionsmischung, Fassadenprinzip, Bauverfahren, Fertigstellung und Lage der Aussichtsebenen.",
+          "tags": ["quelle", "verifiziert"]
+        },
+        {
+          "text": "LIVE: Auf the-shard.com aktuelle Öffnung, Tickets, Sicherheitskontrollen, Zugänge, Sichtbedingungen, Gastronomie und Veranstaltungslage prüfen. Aussicht, einzelne Ebenen, Mieter und Angebote sind ephemer; Fernsicht oder Zugang zur offenen Ebene niemals ohne aktuelle Bestätigung versprechen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ]
+    },
+    {
+      "id": "london_hampton_court_palace",
+      "name": "Hampton Court Palace",
+      "lat": 51.4036128,
+      "lng": -0.3377623,
+      "place_tier": 1,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Kardinal Thomas Wolsey begann im frühen 16. Jahrhundert, ein vorhandenes Landhaus zu einem außergewöhnlich großen Palast auszubauen. Als seine politische Stellung zerbrach, gelangte Hampton Court an Heinrich VIII.; königliche Baumeister führten die Arbeiten ab 1529 weiter.",
+          "tags": ["geschichte"]
+        },
+        {
+          "text": "Unter Heinrich VIII. war Hampton Court zugleich Residenz, Verwaltungszentrum, Herberge, Bühne und Freizeitort. Alle sechs Ehefrauen des Königs waren hier. Höfe, Torhäuser, Kapelle, Great Hall und Küchen mussten einen wandernden Hofstaat von enormer Größe aufnehmen.",
+          "tags": ["geschichte", "einordnung"]
+        },
+        {
+          "text": "Die Great Hall liegt im Herzen des Tudorpalasts und demonstrierte königliche Macht. Im Alltag aßen dort niedriger rangierende Angehörige des Haushalts und Bedienstete. Das Gebäude war also zugleich politisches Bild, Speisesaal und logistischer Endpunkt der nahen Großküchen.",
+          "tags": ["architektur", "alltag"]
+        },
+        {
+          "text": "Heinrichs Küchen bildeten eine arbeitsteilige Lebensmittelmaschine. Rund 200 Beschäftigte konnten nach Betreiberangaben mehr als 800 Mahlzeiten täglich herstellen. Boiling House, Fish Court, sechs große Feuerstellen, Serving Place und Keller trennten Warenannahme, Vorbereitung, Garen und Ausgabe.",
+          "tags": ["alltag", "architektur"]
+        },
+        {
+          "text": "Wilhelm III. und Maria II. beauftragten nach 1689 Christopher Wren mit einem neuen barocken Palast. Der zunächst erwogene vollständige Abriss des Tudorbaus unterblieb; stattdessen entstand um Fountain Court eine repräsentative Barockanlage. Der sichtbare Stilbruch ist historisch beabsichtigte Modernisierung.",
+          "tags": ["architektur", "geschichte"]
+        },
+        {
+          "text": "Nach 1737 nutzte der Hof Hampton Court nicht mehr als reguläre königliche Residenz. Teile wurden als „grace and favour“-Wohnungen vergeben. 1838 ließ Königin Victoria den Palast für ihre Untertanen öffnen; aus aufgegebener Hofresidenz wurde ein frühes öffentliches Geschichtsmonument.",
+          "tags": ["geschichte", "museumsgeschichte"]
+        },
+        {
+          "text": "Das Heckenlabyrinth wurde um 1700 für Wilhelm III. angelegt und gilt als ältestes erhaltenes Heckenlabyrinth Großbritanniens. Es ist trapezförmig und multicursal, bietet also echte Wegalternativen und Sackgassen. Ursprüngliche Hainbuchen wurden später durch Eiben ersetzt.",
+          "tags": ["garten", "wissen"]
+        },
+        {
+          "text": "Die Great Vine ist eine Rebe der Sorte Schiava Grossa, 1768 gepflanzt, als Capability Brown die Gärten leitete. Sie wuchs über mehrere Generationen von Gewächshäusern hinweg. Ihre Erhaltung zeigt, dass lebende Pflanzen ebenso Teil des Denkmals sein können wie Mauerwerk.",
+          "tags": ["garten", "objektgeschichte"]
+        },
+        {
+          "text": "Die Gärten verbinden formale Achsen, Wasserbecken, Wilderness, Nutzgarten und spätere Landschaftsschichten. Sie waren Versorgungssystem, höfische Bühne und Rückzugsraum. Das Labyrinth und die Great Vine sind nur zwei erhaltene Elemente einer über Jahrhunderte veränderten Gesamtanlage.",
+          "tags": ["garten", "einordnung"]
+        },
+        {
+          "text": "Visuell ist Hampton Court an roten Tudor-Backsteinfronten, Zinnen, Schornsteinen und Torhöfen sowie an helleren barocken Fassaden um Fountain Court zu erkennen. Die beiden Architekturwelten treffen innerhalb derselben Anlage direkt aufeinander und machen den dynastischen Wechsel räumlich lesbar.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Kensington Palace ist der engste Londoner Vergleich: Wilhelm und Maria ließen beide Häuser ausbauen, Wren arbeitete an beiden. Hampton Court blieb jedoch eine weitläufige Hof- und Gartenanlage an der Themse, Kensington die kompaktere Residenz nahe Parlament und Stadt.",
+          "tags": ["quer", "einordnung"]
+        },
+        {
+          "text": "Quellenbasis: offizielle Historic-Royal-Palaces-Seiten zur Gesamtgeschichte, Great Hall, Tudor Kitchens, Maze und Great Vine. Belegt sind Wolsey- und Heinrich-Ausbau, Wren-Barock, Öffnung 1838, Küchenorganisation, Labyrinth und Pflanzung der Rebe.",
+          "tags": ["quelle", "verifiziert"]
+        },
+        {
+          "text": "LIVE: Auf hrp.org.uk prüfen, welche Apartments, Kapellen-, Küchen- und Gartenbereiche geöffnet sind, ob Maze und Great Vine zugänglich sind und welche Tickets oder Zeitfenster gelten. Vorführungen, Veranstaltungen, Ernte, Restaurierungen und Wegeführung sind ephemer.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ]
+    },
+    {
+      "id": "london_kew_gardens",
+      "name": "Kew Gardens",
+      "lat": 51.4787438,
+      "lng": -0.295573,
+      "place_tier": 1,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Kews Gärten entwickelten sich im frühen 18. Jahrhundert aus königlichen Anwesen. Prinzessin Augusta, Mutter Georgs III., ließ ab 1759 einen botanischen Garten ausbauen. Exotische Pflanzen, Gartenkunst und Hofrepräsentation waren zunächst eng miteinander verbunden.",
+          "tags": ["geschichte", "garten"]
+        },
+        {
+          "text": "William Chambers entwarf für Augusta mehrere Staffagebauten. Die zehnstöckige Great Pagoda wurde 1762 vollendet. Ihre 80 Dach-Drachen verschwanden später; bei der Restaurierung 2018 wurden sie nach Forschung neu geschaffen. Das Gebäude zeigt europäische Vorstellungen ostasiatischer Architektur im 18. Jahrhundert.",
+          "tags": ["architektur", "einordnung"]
+        },
+        {
+          "text": "1840 gingen die Gärten von der Krone an den Staat; William Hooker wurde Direktor und Kew öffnete öffentlich. Unter ihm und Joseph Hooker entwickelte sich der Ort zu einer zentralen botanischen Forschungsinstitution mit weltweiten Sammel-, Austausch- und Klassifikationsnetzen.",
+          "tags": ["geschichte", "wissenschaft"]
+        },
+        {
+          "text": "Das Palm House wurde nach Entwürfen Decimus Burtons von Richard Turner gebaut und 1848 vollendet. Schiffbautechniken ermöglichten die gebogenen Eisen- und Glasflächen; deshalb erinnert der Bau an einen umgedrehten Rumpf. Er war das erste Gewächshaus dieser Größe.",
+          "tags": ["architektur", "technik"]
+        },
+        {
+          "text": "Das Temperate House, ebenfalls von Burton entworfen, öffnete teilweise 1863 und wurde 1899 vollendet. Es gilt als größte erhaltene viktorianische Glaskonstruktion. Bei der Restaurierung 2013 bis 2018 wurden unter anderem rund 15.000 Glasscheiben ersetzt.",
+          "tags": ["architektur", "denkmalpflege"]
+        },
+        {
+          "text": "Kew Gardens wurde 2003 UNESCO-Welterbe. Gewürdigt werden nicht nur Pflanzen, sondern die Verbindung aus historischer Landschaft, Architektur, botanischen Sammlungen, Forschung und Bildung. Das Welterbe ist daher ein lebendes wissenschaftliches System, kein unveränderter Ziergarten.",
+          "tags": ["welterbe", "einordnung"]
+        },
+        {
+          "text": "Die Living Collections von Kew und Wakehurst umfassen mehr als 68.000 Akzessionen von über 27.000 Taxa. Eine Akzession bezeichnet Pflanzenmaterial aus derselben dokumentierten Herkunft. Dieser Nachweis macht eine Pflanze wissenschaftlich auswertbar, nicht nur dekorativ.",
+          "tags": ["wissenschaft", "sammlung"]
+        },
+        {
+          "text": "Das Herbarium bewahrt rund sieben Millionen getrocknete Gefäßpflanzenbelege. Es wurde 1852 institutionell begründet, enthält aber älteres Material. Solche Belege dokumentieren Namen, Verbreitung, Merkmale und Sammelgeschichte und bilden eine Referenz für heutige Forschung.",
+          "tags": ["sammlung", "wissenschaft"]
+        },
+        {
+          "text": "Kews botanische Geschichte ist mit dem Britischen Empire verflochten. Pflanzen wurden weltweit gesammelt, klassifiziert und wirtschaftlich genutzt; Wissen und Material zirkulierten nicht unter gleichen Machtbedingungen. Die wissenschaftliche Bedeutung und der koloniale Kontext müssen gemeinsam erzählt werden.",
+          "tags": ["einordnung", "kolonialgeschichte"]
+        },
+        {
+          "text": "Visuell ist die Anlage nicht auf ein Gebäude reduzierbar. Palm House am Teich, das langgestreckte Temperate House und die hohe achteckige Pagoda sind starke Fixpunkte in einer weitläufigen Landschaft aus Baumgruppen, Rasen, Spezialgärten und Forschungsbereichen.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Kew Palace erinnert an den königlichen Ursprung, während Gewächshäuser und Herbarium die staatlich-wissenschaftliche Phase zeigen. Der Ort verbindet dadurch Hofgarten, öffentliche Parklandschaft, Museum, lebende Sammlung und aktives Forschungszentrum in einem einzigen Gelände.",
+          "tags": ["quer", "einordnung"]
+        },
+        {
+          "text": "Quellenbasis: offizielle Kew-Seiten zur Geschichte, Living Collections, Herbarium, Palm House, Temperate House und Great Pagoda sowie die UNESCO-Begründung. Belegt sind institutionelle Daten, Sammlungszahlen, Bauphasen und Restaurierungen.",
+          "tags": ["quelle", "verifiziert"]
+        },
+        {
+          "text": "LIVE: Auf kew.org aktuelle Öffnungszeiten, Eintritt, saisonale Pflanzenhöhepunkte, Gewächshaus- und Pagodenzugänge, Wege-, Wetter- und Restaurierungssperrungen prüfen. Blüte, Pflanzenstandorte, Ausstellungen und begehbare Bereiche verändern sich und werden nicht garantiert.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ]
+    },
+    {
+      "id": "london_hms_belfast",
+      "name": "HMS Belfast",
+      "lat": 51.506579,
+      "lng": -0.081389,
+      "place_tier": 1,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "HMS Belfast wurde bei Harland & Wolff in Belfast gebaut, 1938 am St Patrick’s Day vom Stapel gelassen und am 5. August 1939 in Dienst gestellt. Yard Number 1000 unterstrich ihre Bedeutung; sie war das erste Royal-Navy-Schiff mit dem Namen der Stadt Belfast.",
+          "tags": ["geschichte", "technik"]
+        },
+        {
+          "text": "Schon am 21. November 1939 traf der Kreuzer eine deutsche Magnetmine. Der schwere Schaden setzte ihn lange außer Gefecht. Bei Reparatur und Modernisierung erhielt HMS Belfast unter anderem verbesserte Radar- und Schutzsysteme und kehrte Ende 1942 zur Flotte zurück.",
+          "tags": ["kriegsgeschichte", "technik"]
+        },
+        {
+          "text": "Achtzehn Monate unterstützte das Schiff arktische Konvois, die Versorgungsgüter in die Sowjetunion brachten. Besatzungen arbeiteten in Sturm, Vereisung, sommerlichem Dauerlicht und winterlicher Dunkelheit; lange monotone Wachzeiten wechselten mit akuter Gefahr durch U-Boote, Flugzeuge und Überwasserschiffe.",
+          "tags": ["alltag", "kriegsgeschichte"]
+        },
+        {
+          "text": "In der Schlacht am Nordkap am 26. Dezember 1943 ortete Belfast das deutsche Schlachtschiff Scharnhorst mit Radar und hielt Kontakt. Britische Kreuzer und die Duke of York stellten den Gegner; die Scharnhorst sank, nur 36 ihrer 1.963 Besatzungsmitglieder überlebten.",
+          "tags": ["kriegsgeschichte"]
+        },
+        {
+          "text": "Am D-Day 1944 führte HMS Belfast einen Teil des Eröffnungsbombardements für Operation Overlord. Das Schiff lag vor der Normandieküste und beschoss deutsche Stellungen, während Landungsverbände vorbeifuhren. Es blieb fünf Wochen zur Unterstützung der Operation im Einsatz.",
+          "tags": ["kriegsgeschichte"]
+        },
+        {
+          "text": "Nach dem Zweiten Weltkrieg wurde Belfast weiter modernisiert und diente 1950 bis 1952 im Koreakrieg. Ihre aktive Laufbahn endete 1963. Das Museumsschiff erzählt daher nicht nur 1939 bis 1945, sondern auch Nachkriegsmarine, technische Umbauten und Kalten Krieg.",
+          "tags": ["geschichte", "einordnung"]
+        },
+        {
+          "text": "Das Schiff besitzt neun zugängliche Decksebenen und war für eine Gemeinschaft von bis zu etwa 950 Menschen ausgelegt. Geschütztürme, Brücke, Funk- und Operationsräume stehen Küchen, Krankenstation, Schlafplätzen und Maschinenräumen gegenüber – Kampfmittel und schwimmende Stadt zugleich.",
+          "tags": ["alltag", "technik"]
+        },
+        {
+          "text": "Die Hauptmaschinen konnten den Kreuzer auf ungefähr 32,5 Knoten bringen. Der Weg tief in Kessel- und Maschinenräume macht die räumliche Trennung zwischen Entscheidung an Brücke und Operationszentrale und körperlicher Arbeit unter Hitze, Lärm und beengten Bedingungen sichtbar.",
+          "tags": ["technik", "alltag"]
+        },
+        {
+          "text": "Ab 1967 prüfte das Imperial War Museum die Erhaltung eines ganzen Kreuzers. Nach einer Kampagne des HMS Belfast Trust kam das Schiff nach London und öffnete am Trafalgar Day, 21. Oktober 1971. 1978 wurde es als eigene Außenstelle in das Imperial War Museum integriert.",
+          "tags": ["museumsgeschichte", "denkmalpflege"]
+        },
+        {
+          "text": "Visuell liegt der graue Kreuzer zwischen London Bridge und Tower Bridge fest an der Themse. Drei große Drillingstürme, Masten und hoher Aufbau prägen die Silhouette. Der Zugang erfolgt über einen Landungssteg vom Queen’s Walk; das Schiff ist nicht am Ufer aufgestellt.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Churchill War Rooms und HMS Belfast gehören beide zum IWM, zeigen Krieg aber aus gegensätzlichen Räumen: dort Regierungsarbeit im Keller, hier eine militärische Gemeinschaft auf See. Churchill plante zeitweise, D-Day vom Schiff aus zu beobachten, fuhr letztlich aber nicht mit.",
+          "tags": ["quer", "einordnung"]
+        },
+        {
+          "text": "Quellenbasis: offizielle IWM-Geschichte, HMS-Belfast-Zeitleiste und Seiten zu Arctic Convoys, North Cape und D-Day. Belegt sind Bau, Minenschaden, Einsätze, Koreakrieg, Außerdienststellung, Erhaltung und Museumsöffnung.",
+          "tags": ["quelle", "verifiziert"]
+        },
+        {
+          "text": "LIVE: Auf iwm.org.uk Öffnungszeiten, Tickets, Deckzugänge, Wartung, Veranstaltungen und Barrierehinweise prüfen. Steile Leitern, enge Räume, Gangways und tatsächlich geöffnete Bereiche können sich ändern; Waffenbedienung, Vorführungen oder bestimmte Räume nie ohne Live-Bestätigung versprechen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ]
+    },
+    {
+      "id": "london_zsl_london_zoo",
+      "name": "ZSL London Zoo",
+      "lat": 51.5352875,
+      "lng": -0.1534303,
+      "place_tier": 1,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Die Zoological Society of London wurde 1826 gegründet; ihr Garten in Regent’s Park öffnete 1828 als weltweit erster wissenschaftlicher Zoo. Anfangs war er nur Fellows der Gesellschaft zugänglich. Erst 1847 wurde der allgemeine öffentliche Besuch zugelassen.",
+          "tags": ["geschichte", "wissenschaft"]
+        },
+        {
+          "text": "Der Standort in einem von John Nash für den Prince Regent gestalteten Royal Park verband zoologische Forschung mit repräsentativer Stadtplanung. Tiere wurden gesammelt, beschrieben und verglichen; zugleich entwickelte sich der Garten zu einem populären Ausflugsziel.",
+          "tags": ["einordnung", "stadtgeschichte"]
+        },
+        {
+          "text": "1850 kam das Nilpferd Obaysch nach London, das erste lebende Flusspferd in Europa seit der Antike. Seine Ankunft löste „Hippomania“ aus. Der ägyptische Tierpfleger Hamet Safi Cannana begleitete und betreute es – ein wichtiger Teil der Geschichte hinter der berühmten Tiersensation.",
+          "tags": ["tiergeschichte", "kolonialgeschichte"]
+        },
+        {
+          "text": "Jumbo, 1865 aus Paris angekommen, wurde zu einem der berühmtesten Elefanten des 19. Jahrhunderts. Sein Name ging im Englischen in die Bedeutung „sehr groß“ ein. Der Verkauf an P. T. Barnum 1882 löste starken Protest aus und zeigt frühe emotionale Bindung an einzelne Zootiere.",
+          "tags": ["tiergeschichte", "gesellschaft"]
+        },
+        {
+          "text": "1853 eröffnete im Zoo das erste öffentliche Aquarium, zunächst Fish House genannt. Philip Henry Gosse prägte dafür die Kurzform „aquarium“ aus „aquatic vivarium“. Damit beeinflusste der Ort nicht nur Tierhaltung, sondern auch eine bis heute weltweit gebräuchliche Bezeichnung.",
+          "tags": ["geschichte", "wissen"]
+        },
+        {
+          "text": "London Zoo besitzt eine außergewöhnliche Sammlung moderner Tierhausarchitektur. Berthold Lubetkins 1934 eröffneter Penguin Pool mit ineinander verschlungenen Betonrampen ist denkmalgeschützt. Die Pinguine leben heute anderswo; erhalten bleibt das Bauwerk als Dokument einer früheren Haltungsidee.",
+          "tags": ["architektur", "einordnung"]
+        },
+        {
+          "text": "Die Snowdon Aviary eröffnete 1965 als erste begehbare Voliere Großbritanniens. Lord Snowdon, Architekt Cedric Price und Ingenieur Frank Newby entwickelten eine leichte Struktur aus Aluminium, Spannung und Netz. Nach Restaurierung wurde sie als Monkey Valley für Colobusaffen umgenutzt.",
+          "tags": ["architektur", "denkmalpflege"]
+        },
+        {
+          "text": "Joan Procter, ab 1924 Kuratorin für Reptilien und Amphibien, prägte das historische Reptile House. Sie plante Funktionsabläufe, Felslandschaften und technische Details einschließlich UV-durchlässigem Glas. Ihre Arbeit verbindet Tierpflege, Ausstellungsgestaltung und die Geschichte von Frauen in der Wissenschaft.",
+          "tags": ["wissenschaft", "biografie"]
+        },
+        {
+          "text": "Die Geschichte zoologischer Gärten umfasst Forschung und Artenschutz, aber auch koloniale Sammelnetze, enge historische Gehege und Tiere als Spektakel. Die erhaltenen Bauten machen sichtbar, wie sich Vorstellungen von Tierwohl, Verhalten, Publikum und Naturschutz verändert haben.",
+          "tags": ["einordnung", "ethik"]
+        },
+        {
+          "text": "Visuell liegt der Zoo am nördlichen Rand von Regent’s Park entlang des Regent’s Canal. Historische Backsteinbauten, moderne Gehege, die geometrische ehemalige Pinguinanlage und die hoch gespannte Snowdon-Struktur sind stärkere Orientierungspunkte als ein einziges monumentales Hauptgebäude.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Der Regent’s Canal trennt und verbindet Teile des Geländes; Regent’s Park und Primrose Hill liegen direkt daneben. Der Zoo ist deshalb sowohl wissenschaftliche Institution als auch Teil einer geplanten Park- und Wohnlandschaft des frühen 19. Jahrhunderts.",
+          "tags": ["quer", "stadtgeschichte"]
+        },
+        {
+          "text": "Quellenbasis: offizielle ZSL-Geschichte, Jubiläumszeitleiste und Fachseiten zu Obaysch, Reptile House, Lubetkin Penguin Pool und Snowdon Aviary. Belegt sind Gründung, öffentliche Öffnung, Aquarium, bekannte Tiere sowie Architektur- und Restaurierungsdaten.",
+          "tags": ["quelle", "verifiziert"]
+        },
+        {
+          "text": "LIVE: Auf londonzoo.org beziehungsweise zsl.org aktuelle Öffnungszeiten, Tickets, Tierbestand, Gehegezugänge, Fütterungen, Programme und Bauarbeiten prüfen. Tiere können zurückgezogen, umgesetzt oder nicht sichtbar sein; keine Begegnung, Aktivität oder Vorführung dauerhaft versprechen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,733 @@
+{
+  "generated_at": "2026-08-28T06:04:28.015Z",
+  "summary": {
+    "city_id": "prisdorf",
+    "checked": 29,
+    "ok": 3,
+    "check": 23,
+    "bad": 3,
+    "errors": 0,
+    "max_delta_m": 180,
+    "city_halo_m": 12000,
+    "story_only": true
+  },
+  "rows": [
+    {
+      "id": "prisdorf_tavsmoor_haselauer_moor",
+      "name": "Tävsmoor / Haselauer Moor",
+      "category": "wanderung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.6408297,
+        "lng": 9.706679699999999
+      },
+      "query": "Tävsmoor / Haselauer Moor, Prisdorf, Germany",
+      "osm": {
+        "lat": 53.6530533,
+        "lng": 9.7288086,
+        "display_name": "Tävsmoor / Haselauer Moor, Hauptstraße, Appen, Deutschland",
+        "class": "information",
+        "type": "board",
+        "provider": "photon"
+      },
+      "delta_m": 1994,
+      "from_city_m": 5625,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "prisdorf_naturlehrpfad_liether_moor",
+      "name": "Naturlehrpfad Liether Moor",
+      "category": "wanderung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.7230095,
+        "lng": 9.6968327
+      },
+      "query": "Naturlehrpfad Liether Moor, Prisdorf, Germany",
+      "osm": {
+        "lat": 53.7185142,
+        "lng": 9.6916832,
+        "display_name": "Naturlehrpfad Liether Moor, Heideweg, Klein Nordende, Deutschland",
+        "class": "information",
+        "type": "board",
+        "provider": "photon"
+      },
+      "delta_m": 604,
+      "from_city_m": 6368,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "prisdorf_kitz_jungtierrettung",
+      "name": "Kitz- und Jungtierrettung Prisdorf e.V.",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.66690912,
+        "lng": 9.772556860000002
+      },
+      "query": "Peiner Hof, Prisdorf, Germany",
+      "osm": {
+        "lat": 53.6716422,
+        "lng": 9.7733332,
+        "display_name": "Edeka Meyer´s Frischecenter Prisdorf, Peiner Hag, Prisdorf, Deutschland",
+        "class": "shop",
+        "type": "supermarket",
+        "provider": "photon"
+      },
+      "delta_m": 529,
+      "from_city_m": 1652,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "prisdorf_florentina_theater",
+      "name": "Florentina-Theater",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.68754815999999,
+        "lng": 9.67603288
+      },
+      "query": "Florentina-Theater, Prisdorf",
+      "osm": {
+        "lat": -37.8117868,
+        "lng": 144.9708939,
+        "display_name": "Grossi Florentino, Bourke Street, Melbourne, Australien",
+        "class": "amenity",
+        "type": "restaurant",
+        "provider": "photon"
+      },
+      "delta_m": 16205943,
+      "from_city_m": 5638,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "prisdorf_kriegerehrenmal_bilsbek",
+      "name": "Kriegerehrenmal an der Bilsbekbrücke",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.679919659999996,
+        "lng": 9.7569954
+      },
+      "query": "Kriegerehrenmal an der, Prisdorf, Germany",
+      "osm": {
+        "lat": 51.4906586,
+        "lng": 7.4255374,
+        "display_name": "Kriegerehrenmal 1864/1866, 1870/1871, 1914/1918, An der Palmweide, Dortmund, Deutschland",
+        "class": "historic",
+        "type": "memorial",
+        "provider": "photon"
+      },
+      "delta_m": 289914,
+      "from_city_m": 244,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "prisdorf_sav_angelteich",
+      "name": "SAV Angelteich Prisdorf",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.67925504,
+        "lng": 9.74859412
+      },
+      "query": "SAV Angelteich Prisdorf, Prisdorf, Germany",
+      "osm": {
+        "lat": 51.652286,
+        "lng": 12.0585513,
+        "display_name": "Priesdorfer Straße, Zörbig, Deutschland",
+        "class": "highway",
+        "type": "tertiary",
+        "provider": "photon"
+      },
+      "delta_m": 273948,
+      "from_city_m": 801,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "prisdorf_bilsbek_fluss",
+      "name": "Bilsbek durch Prisdorf",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.680017140000004,
+        "lng": 9.75642266
+      },
+      "query": "Bilsbek durch Prisdorf, Prisdorf, Germany",
+      "osm": {
+        "lat": 53.6751579,
+        "lng": 9.7527043,
+        "display_name": "Zum Bilsbek, Prisdorf, Deutschland",
+        "class": "highway",
+        "type": "residential",
+        "provider": "photon"
+      },
+      "delta_m": 593,
+      "from_city_m": 281,
+      "status": "CHECK",
+      "flags": [
+        "house_like_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "prisdorf_tcp_tennis",
+      "name": "Tennis-Club Prisdorf TCP",
+      "category": "sport",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.682797140000005,
+        "lng": 9.751310560000002
+      },
+      "query": "Ahrenloher Weg 5, Prisdorf, Germany",
+      "osm": {
+        "lat": 53.6856547,
+        "lng": 9.7507012,
+        "display_name": "Ahrenloher Weg, Prisdorf, Pinnau, Kreis Pinneberg, Schleswig-Holstein, 25497, Deutschland",
+        "class": "highway",
+        "type": "residential",
+        "importance": 0.053390538643472915,
+        "osm_type": "way",
+        "osm_id": 24219265,
+        "provider": "nominatim"
+      },
+      "delta_m": 320,
+      "from_city_m": 692,
+      "status": "CHECK",
+      "flags": [
+        "house_like_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "prisdorf_bahnhof_wartehäuschen",
+      "name": "Bahnhof Prisdorf",
+      "category": "bahnhof",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.67542788000001,
+        "lng": 9.75971248
+      },
+      "query": "Bahnhof Prisdorf, Prisdorf, Germany",
+      "osm": {
+        "lat": 53.6768527,
+        "lng": 9.7608239,
+        "display_name": "Bahnhofstraße, Prisdorf, Pinnau, Kreis Pinneberg, Schleswig-Holstein, 25497, Deutschland",
+        "class": "highway",
+        "type": "residential",
+        "importance": 0.053390538643472915,
+        "osm_type": "way",
+        "osm_id": 24268097,
+        "provider": "nominatim"
+      },
+      "delta_m": 175,
+      "from_city_m": 512,
+      "status": "CHECK",
+      "flags": [
+        "house_like_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "prisdorf_bahnwartehaeuschen",
+      "name": "Historisches Bahnwartehäuschen",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.675142640000004,
+        "lng": 9.76031818
+      },
+      "query": "Historisches Bahnwartehäuschen, Prisdorf",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 540,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "prisdorf_pinnau_ufer",
+      "name": "Pinnau-Niederung an der südlichen Gemeindegrenze",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.66674518,
+        "lng": 9.76651222
+      },
+      "query": "Pinnau-Niederung, Prisdorf, Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 1523,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "prisdorf_eisenbahnbrücke_hudenbarg",
+      "name": "Eisenbahnbrücke am Hudenbarg",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.677097939999996,
+        "lng": 9.756224360000001
+      },
+      "query": "Eisenbahnbrücke am Hudenbarg, Prisdorf",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 437,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "prisdorf_feuerlöschteich_gemeindeteich",
+      "name": "Feuerlöschteich und Gemeindeteich",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.679456259999995,
+        "lng": 9.75662184
+      },
+      "query": "Feuerlöschteich, Prisdorf",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 275,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "prisdorf_heimatverein",
+      "name": "Heimatverein für Dorfgemeinschaft Prisdorf von 1967",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.67783357999999,
+        "lng": 9.76340984
+      },
+      "query": "Heimatverein für Dorfgemeinschaft, Prisdorf, Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 300,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "prisdorf_stadtgeschichte_gesamt",
+      "name": "Prisdorf übergreifende Dorfgeschichte und Orientierung",
+      "category": "geschichte",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.67761347857142,
+        "lng": 9.757236757142858
+      },
+      "query": "Prisdorf übergreifende Dorfgeschichte, Prisdorf",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 350,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "prisdorf_freiwillige_feuerwehr",
+        "prisdorf_pmv_veranstaltungen",
+        "prisdorf_bilsbekraum",
+        "prisdorf_prisdorf_net",
+        "prisdorf_strassen_gestern_heute",
+        "prisdorf_strassenverzeichnis"
+      ]
+    },
+    {
+      "id": "prisdorf_kirche_kummerfeld",
+      "name": "Kirchengemeinde Kummerfeld für Prisdorf",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.69403676470589,
+        "lng": 9.794147594117646
+      },
+      "query": "Kirchengemeinde Kummerfeld für, Prisdorf, Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 2700,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "prisdorf_wald_hauen",
+      "name": "Wald Naherholung Hauen",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.681861960000006,
+        "lng": 9.7689317
+      },
+      "query": "Wald Naherholung Hauen, Prisdorf",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 581,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "prisdorf_jagdgemeinschaft",
+      "name": "Jagdgemeinschaft Prisdorf",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.68551004,
+        "lng": 9.75046734
+      },
+      "query": "Jagdgemeinschaft Prisdorf, Prisdorf",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 911,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "prisdorf_strassen_gestern_heute",
+      "name": "Heimatverein Broschüre Straßen gestern und heute",
+      "category": "geschichte",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.67761347857142,
+        "lng": 9.757236757142858
+      },
+      "query": "Heimatverein Broschüre Straßen, Prisdorf, Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 350,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "prisdorf_freiwillige_feuerwehr",
+        "prisdorf_stadtgeschichte_gesamt",
+        "prisdorf_pmv_veranstaltungen",
+        "prisdorf_bilsbekraum",
+        "prisdorf_prisdorf_net",
+        "prisdorf_strassenverzeichnis"
+      ]
+    },
+    {
+      "id": "prisdorf_strassenverzeichnis",
+      "name": "Prisdorfer Straßenverzeichnis 25497",
+      "category": "geschichte",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.67761347857142,
+        "lng": 9.757236757142858
+      },
+      "query": "Prisdorfer Straßenverzeichnis 25497, Prisdorf",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 350,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "prisdorf_freiwillige_feuerwehr",
+        "prisdorf_stadtgeschichte_gesamt",
+        "prisdorf_pmv_veranstaltungen",
+        "prisdorf_bilsbekraum",
+        "prisdorf_prisdorf_net",
+        "prisdorf_strassen_gestern_heute"
+      ]
+    },
+    {
+      "id": "prisdorfer_feldmark",
+      "name": "Prisdorfer Feldmark Zonenweg",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.6775717,
+        "lng": 9.76333564
+      },
+      "query": "Prisdorfer Feldmark Zonenweg, Prisdorf",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 321,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "prisdorf_kriegerdenkmal",
+      "name": "Kriegerdenkmal",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.648816002500006,
+        "lng": 9.829285260000004
+      },
+      "query": "Kriegerdenkmal, Prisdorf",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 5696,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "prisdorf_aussichtspunkt_tavsmoor_appen_heist",
+      "name": "Aussichtspunkt Tävsmoor Appen/Heist",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.6486582,
+        "lng": 9.716770700000001
+      },
+      "query": "Aussichtspunkt Tävsmoor Appen/Heist, Prisdorf",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 4530,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "prisdorf_norddeutsche_gartenschau",
+      "name": "Norddeutsche Gartenschau",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.717381,
+        "lng": 9.77569132
+      },
+      "query": "Norddeutsche Gartenschau, Prisdorf",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 4272,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "prisdorf_pinneberg_pinnau_park",
+      "name": "Pinneberg Pinnau-Park",
+      "category": "wanderung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.67336465999999,
+        "lng": 9.81887952
+      },
+      "query": "Pinneberg, Prisdorf, Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 3903,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "prisdorf_johannes_schneider_halle",
+      "name": "Johannes Schneider Halle",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.690839419999996,
+        "lng": 9.813649700000001
+      },
+      "query": "Johannes Schneider Halle, Prisdorf",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 3690,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "prisdorf_baumpark_pinneberg",
+      "name": "Baumpark Pinneberg",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.640841175,
+        "lng": 9.7798439375
+      },
+      "query": "Baumpark Pinneberg, Prisdorf, Germany",
+      "osm": {
+        "lat": 53.6406249,
+        "lng": 9.7798624,
+        "display_name": "Baumpark Pinneberg, Pinneberg, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "provider": "photon"
+      },
+      "delta_m": 24,
+      "from_city_m": 4533,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "prisdorf_arboretum_ellerhoop",
+      "name": "Arboretum Ellerhoop",
+      "category": "natur",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.71654724,
+        "lng": 9.776308779999999
+      },
+      "query": "Arboretum Ellerhoop, Prisdorf, Germany",
+      "osm": {
+        "lat": 53.7164712,
+        "lng": 9.7765581,
+        "display_name": "Arboretum Ellerhoop, Ellerhoop, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "provider": "photon"
+      },
+      "delta_m": 18,
+      "from_city_m": 4192,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "prisdorf_alte_schule_lütte_prisdörper",
+      "name": "Alte Schule & Kindergarten Lütte Prisdörper",
+      "category": "geschichte",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.67734779999999,
+        "lng": 9.75787769
+      },
+      "query": "Kindergarten L, Prisdorf, Germany",
+      "osm": {
+        "lat": 53.677349,
+        "lng": 9.7576873,
+        "display_name": "Lütte Prisdörper, Hudenbarg, Prisdorf, Deutschland",
+        "class": "building",
+        "type": "kindergarten",
+        "provider": "photon"
+      },
+      "delta_m": 13,
+      "from_city_m": 348,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    }
+  ]
+}

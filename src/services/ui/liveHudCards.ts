@@ -712,7 +712,7 @@ function buildLiveHudCardsInner(
     if (cards.length >= MAX_IDLE_CARDS) break;
   }
 
-  // Nearby: Klo / Trinkwasser / Eis / Museum — nur wenn Treffer in Cache
+  // Nearby: Klo / Wasser / Eis / Museum / Erholung / Fotospot — nur mit Treffer
   if (allowActivitySoftTips(nowMs)) {
     const amenityCards = getNearbyAmenityHudCards(nowMs).sort(
       (a, b) => b.score - a.score,

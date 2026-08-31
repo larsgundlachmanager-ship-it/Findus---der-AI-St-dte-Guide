@@ -193,10 +193,11 @@ export async function polishAllTurnsOsmFirst(opts: {
                   shortPhrase: 'vor dir',
                 },
                 turn,
-                roadName: wp.roadName ?? null,
+                // Landmarke da → keine Straße vorlesen
+                roadName: null,
               }),
             )
-          : buildTurnWithoutLandmark(turn, wp.roadName ?? null);
+          : buildTurnWithoutLandmark(turn, null);
       dense[bestIdx] = {
         ...dense[bestIdx],
         landmark,

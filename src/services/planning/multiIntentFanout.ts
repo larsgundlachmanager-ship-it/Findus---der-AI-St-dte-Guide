@@ -33,12 +33,19 @@ function classifyClause(text: string): IntentClauseKind {
   ) {
     return 'preference';
   }
-  if (
-    /\b(?:wecker|aufstehen|weck\s+mich|stell(?:e)?\s+(?:mir\s+)?(?:einen\s+)?wecker)\b/iu.test(
-      t,
-    )
-  ) {
-    return 'wake';
+  try {
+    const { isWakeAlarmIntent } = require('../alarms/wakeIntentDetect') as {
+      isWakeAlarmIntent: (s: string) => boolean;
+    };
+    if (isWakeAlarmIntent(t)) return 'wake';
+  } catch {
+    if (
+      /\b(?:wecker|aufstehen|auf\s*stehen|weck\s+mich|geweckt|stell(?:e)?\s+(?:mir\s+)?(?:einen\s+)?wecker)\b/iu.test(
+        t,
+      )
+    ) {
+      return 'wake';
+    }
   }
   if (
     /\b(?:kauf|hol|besorg|einkauf|zahnbürste|zahnbuerste|dm\b|rossmann|erinner\s+mich)\b/iu.test(

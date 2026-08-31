@@ -5,12 +5,12 @@
  */
 
 import { generateGeminiText, hasGeminiApiKey } from '../geminiService';
-import { isDeviceOffline } from '../navigation/networkState';
 import { getCachedUserProfile } from '../userProfileService';
 import { useFinnusStore } from '../../store/useFinnusStore';
 import { useUserMemoryStore } from '../../store/useUserMemoryStore';
 import type { QuickAction } from '../../types/concierge';
 import { fetchPublicDocument } from './webFetch';
+import { isCelestialOrSkyQuery, isQuickLookupQuery } from '../concierge/celestialSkyQuery';
 import { isEventResearchQuery } from '../concierge/eventResearchService';
 import {
   buildConjunctiveSpeechHint,
@@ -95,11 +95,11 @@ function putCachedResearch(key: string, result: WebResearchResult): void {
 }
 
 const RESEARCH_RE =
-  /\b(recherch|nachschau|guck\s+(?:mal\s+)?(?:online|nach)|schau\s+(?:mal\s+)?(?:online|nach)|google|webseite|website|homepage|pdf|flyer|programm|öffnungszeit|oeffnungszeit|frühstückszeit|fruehstueckszeit|check[- ]?out|auscheck|turnierplan|spielplan|ansetzung|fahrplan|fahrzeiten|abfahrtszeit|speisekarte|menü|menu|preis|wie\s+teuer|ticket|tickets|eintritt|verlänger|verlaenger|nacht\s+(?:dazu|verläng)|formular|anmeld|buch(?:en|ung)|historie|geschichte|eröffnungsdatum|eroeffnungsdatum|wann\s+wurde|jahreszahl|fahrrad(?:verleih|mieten)?|radverleih|e-?bike|miet\s*-?\s*rad|verleih|mieten)\b/iu;
+  /\b(recherch|nachschau|guck\s+(?:mal\s+)?(?:online|nach)|schau\s+(?:mal\s+)?(?:online|nach)|google|webseite|website|homepage|pdf|flyer|programm|öffnungszeit|oeffnungszeit|frühstückszeit|fruehstueckszeit|check[- ]?out|auscheck|turnierplan|spielplan|ansetzung|fahrplan|fahrzeiten|abfahrtszeit|speisekarte|menü|menu|preis|wie\s+teuer|ticket|tickets|eintritt|verlänger|verlaenger|nacht\s+(?:dazu|verläng)|formular|anmeld|buch(?:en|ung)|historie|geschichte|eröffnungsdatum|eroeffnungsdatum|wann\s+wurde|jahreszahl|fahrrad(?:verleih|mieten)?|radverleih|e-?bike|miet\s*-?\s*rad|verleih|mieten|sonnenfinsternis|mondfinsternis|sternschnuppe|meteor|perseiden|nordlicht|polarlicht|aurora|vollmond|supermond|komet|eclipse)\b/iu;
 
-/** Bergbahn / Seilbahn / eigene Betreiber-Websites mit Ticket & Fahrplan */
+/** Bergbahn / Seilbahn / Fähre — eigene Betreiber-Websites mit Ticket & Fahrplan */
 const OPERATOR_SITE_RE =
-  /\b(bergbahn|seilbahn|zahnradbahn|standseilbahn|gondel|kabinenbahn|schwebebahn|sessellift|bergbahn\s*ticket|online\s*ticket|fahrplan|abfahrt(?:en|szeiten)?|takt(?:ung)?)\b/iu;
+  /\b(bergbahn|seilbahn|zahnradbahn|standseilbahn|gondel|kabinenbahn|schwebebahn|sessellift|bergbahn\s*ticket|online\s*ticket|fahrplan|abfahrt(?:en|szeiten)?|takt(?:ung)?|fähre|faehre|ferry|fährtickets?|faehrtickets?|überfahrt|ueberfahrt|reederei)\b/iu;
 
 const URL_IN_TEXT = /https?:\/\/[^\s<>"']+/gi;
 
@@ -111,6 +111,8 @@ export function isWebResearchQuery(text: string): boolean {
   const t = text.replace(/\s+/g, ' ').trim();
   if (t.length < 8) return false;
   if (URL_IN_TEXT.test(t)) return true;
+  // Himmel/Astronomie: immer Web — auch wenn „heute Abend“ vorkommt
+  if (isCelestialOrSkyQuery(t)) return true;
   if (isEventResearchQuery(t)) return false; // events have own pipeline
   if (isOperatorScheduleQuery(t)) return true;
   if (RESEARCH_RE.test(t)) return true;
@@ -141,10 +143,19 @@ function extractJsonObject(raw: string): unknown | null {
 }
 
 function cityHint(): string {
+  try {
+    const { getWorkingCityName } = require('../softWorkingCity') as {
+      getWorkingCityName: () => string | null;
+    };
+    const soft = getWorkingCityName()?.trim();
+    if (soft) return soft;
+  } catch {
+    /* soft */
+  }
   return (
     getCachedUserProfile()?.cityName?.trim() ||
     useFinnusStore.getState().currentLocationName?.trim() ||
-    'Wangerooge'
+    'hier'
   );
 }
 
@@ -162,20 +173,31 @@ async function discoverSourcesWithSearch(
   failures: string[];
 }> {
   const operator = isOperatorScheduleQuery(userText);
+  const celestial = isCelestialOrSkyQuery(userText);
   const prompt = [
-    `Du bist Findus Web-Researcher für ${city}.`,
+    `Du bist Yorro Web-Researcher für ${city}.`,
     `User: „${userText.slice(0, 280)}“`,
     '',
     'Nutze Google Search. Finde ÖFFENTLICHE Quellen (HTML/PDF) — keine Login-only Portale als „gefunden“ verkaufen.',
-    operator
+    celestial
       ? [
-          'FOKUS BETREIBER-WEBSITE (Bergbahn/Seilbahn/ähnliches):',
-          '- Offizielle Betreiber-Domain priorisieren (nicht nur Wikipedia/TripAdvisor).',
-          '- Extrahiere: Fahrplan/Abfahrten, Betriebszeiten, Ticketpreise (€), Ticket-Shop-URL.',
-          '- Wenn Fahrplan nur hinter Buchungs-Widget/Login: facts mit bekannten Preisen/Zeiten, failures ehrlich, Shop-URL trotzdem liefern.',
-          '- Labels klar: „Abfahrt“, „Preis Erwachsener“, „Ticket-Shop“, „Betriebszeit“.',
+          'FOKUS HIMMEL/ASTRONOMIE (global, kein Veranstaltungskalender der Stadt):',
+          '- Was passiert (Finsternis / Meteorstrom inkl. Name wenn belegt, Nordlicht…), Wirkung vor Ort wenn belegt.',
+          '- Wann: Start, Maximum/Höhepunkt, Ende — lokale Uhrzeiten priorisieren; Bezug Sonnenuntergang nur wenn belegt.',
+          '- Sichtbarkeit von Deutschland/der Region; Stadt nur für Zeitzone/Bedingungen — keine Clubs/Partys.',
+          '- Bei Sonnenfinsternis: Sicherheits-Hinweis (echte SoFi-/Eclipse-Brille) als Fakt label „Sicherheit“ wenn relevant.',
+          '- Labels klar: „Ereignis“, „Start“, „Maximum“, „Ende“, „Name“, „Sichtbarkeit“, „Sicherheit“.',
         ].join('\n')
-      : 'Extrahiere wenn möglich: Datum, Uhrzeit, Ort, Öffnungs-/Frühstücks-/Checkout-Zeiten, Preise.',
+      : operator
+        ? [
+            'FOKUS BETREIBER-WEBSITE (Bergbahn/Seilbahn/Fähre/Reederei):',
+            '- Offizielle Betreiber-Domain priorisieren (nicht Wikipedia/TripAdvisor, nicht bahn.de-Tafeln wenn Fähre gemeint).',
+            '- Fähre: Reederei-Ticketshop / Fahrplan-URL in urls — OPEN_URL sobald https belegt.',
+            '- Extrahiere: Fahrplan/Abfahrten, Betriebszeiten, Ticketpreise (€), Ticket-Shop-URL.',
+            '- Wenn Fahrplan nur hinter Buchungs-Widget/Login: facts mit bekannten Preisen/Zeiten, failures ehrlich, Shop-URL trotzdem liefern.',
+            '- Labels klar: „Abfahrt“, „Preis Erwachsener“, „Ticket-Shop“, „Betriebszeit“.',
+          ].join('\n')
+        : 'Extrahiere wenn möglich: Datum, Uhrzeit, Ort, Öffnungs-/Frühstücks-/Checkout-Zeiten, Preise.',
     'Wenn Login/Paywall nötig: klar in failures nennen.',
     frictionDomainHint(userText),
     dateValidationPromptBlock(),
@@ -188,10 +210,13 @@ async function discoverSourcesWithSearch(
     '  "failures": ["string"]',
     '}',
     'Max 5 urls, max 8 facts. Nur Belege — nichts erfinden (keine Rabatte/Zeiten ohne Quelltext).',
+    celestial
+      ? 'Bei Himmel: bis 8 Fakten (Ereignis, Start, Maximum, Ende, Sichtbarkeit, Sicherheit) — detailliert, nicht knapp.'
+      : '',
   ].join('\n');
 
   const raw = await generateGeminiText(prompt, {
-    task: 'generic',
+    task: 'research',
     enableGoogleSearch: true,
     maxTokens: 1400,
     temperature: 0.2,
@@ -426,7 +451,10 @@ function buildFormPrefill(
   return null;
 }
 
-function synthesizeSpeech(result: Omit<WebResearchResult, 'speechHint' | 'promptBlock'>): string {
+function synthesizeSpeech(
+  result: Omit<WebResearchResult, 'speechHint' | 'promptBlock'>,
+  opts?: { celestial?: boolean },
+): string {
   if (result.facts.length) {
     const ranked = [...result.facts]
       .map((f) => {
@@ -447,7 +475,32 @@ function synthesizeSpeech(result: Omit<WebResearchResult, 'speechHint' | 'prompt
       })
       .sort((a, b) => b.trust - a.trust);
 
-    const top = ranked.slice(0, 3).map(({ f, trust }) => {
+    if (opts?.celestial) {
+      // Nur Fakten-Rohstoff für die Synthese — Speech soll umgangssprachlich vom LLM kommen.
+      // Fallback: flüssiger Mini-Absatz, keine „Start:/Maximum:“-Labels.
+      const pick = (...labels: RegExp[]) =>
+        ranked.find(({ f }) => labels.some((re) => re.test(f.label)))?.f;
+      const event =
+        pick(/ereignis|was|phänomen|phaenomen|finsternis|meteor|strom/i) ??
+        ranked[0]?.f;
+      const start = pick(/start|beginn|anfang/i);
+      const peak = pick(/maximum|höhepunkt|hoehepunkt|peak|mitte/i);
+      const end = pick(/ende|schluss/i);
+      const safety = pick(/sicherheit|brille|schutz|sofi|eclipse/i);
+      const parts: string[] = [];
+      if (event?.value) parts.push(event.value);
+      const when: string[] = [];
+      if (start) when.push(`ab ${start.time || start.value}`);
+      if (peak) when.push(`Höhepunkt so gegen ${peak.time || peak.value}`);
+      if (end) when.push(`Ende ${end.time || end.value}`);
+      if (when.length) parts.push(when.join(', '));
+      if (safety?.value) parts.push(safety.value);
+      let s = parts.filter(Boolean).join('. ');
+      if (!s.endsWith('.')) s += '.';
+      return s;
+    }
+
+    const top = ranked.slice(0, 5).map(({ f, trust }) => {
       const bits = [f.value];
       if (f.time) bits.push(f.time);
       if (f.place) bits.push(f.place);
@@ -457,22 +510,33 @@ function synthesizeSpeech(result: Omit<WebResearchResult, 'speechHint' | 'prompt
         trust,
       });
     });
-    let s = `Kurz recherchiert: ${top.join('. ')}.`;
+    // Kein Meta-Prefix — Antwort-First
+    let s = `${top.join('. ')}.`;
     if (result.formPrefill) {
       s += ` Ich hab dir ${result.formPrefill.purpose} vorbereitet — du musst nur noch bestätigen.`;
     }
     if (result.failures.length) {
-      s += ` Ein paar Quellen waren nicht voll lesbar — sag Bescheid, wenn ich tiefer graben soll.`;
+      s += ` Ein paar Quellen waren nicht voll lesbar.`;
     }
     return s;
   }
   if (result.failures.length) {
+    try {
+      const { isHtmlScrapeFailureSpeech } = require('./htmlResearchGate') as {
+        isHtmlScrapeFailureSpeech: (s: string) => boolean;
+      };
+      const fail = String(result.failures[0] || '');
+      if (isHtmlScrapeFailureSpeech(fail) || /js[-\s]?only|seiten?\s*leer/iu.test(fail)) {
+        return '';
+      }
+    } catch {
+      /* soft */
+    }
     return (
-      `Ich hab online geguckt, komme aber nicht an die Details ran: ${result.failures[0]}. ` +
-      `Oft hängt das hinter Login oder am schwarzen Brett vor Ort. Soll ich dir die öffentliche Seite trotzdem öffnen?`
+      `Dazu komme ich online gerade nicht an die Details ran: ${result.failures[0]}.`
     );
   }
-  return 'Online hab ich dazu gerade nichts Verlässliches gefunden — ohne zu raten.';
+  return 'Dazu hab ich gerade nichts Verlässliches gefunden — ohne zu raten.';
 }
 
 /**
@@ -484,6 +548,16 @@ export async function runWebResearch(
   opts?: { force?: boolean },
 ): Promise<WebResearchResult | null> {
   const t = userText.replace(/\s+/g, ' ').trim();
+  try {
+    const { shouldSkipHtmlWebResearch } = require('./htmlResearchGate') as {
+      shouldSkipHtmlWebResearch: (s: string) => boolean;
+    };
+    if (shouldSkipHtmlWebResearch(t) && urlsInText(t).length === 0) {
+      return null;
+    }
+  } catch {
+    /* soft */
+  }
   if (
     !opts?.force &&
     !isWebResearchQuery(t) &&
@@ -498,47 +572,36 @@ export async function runWebResearch(
     if (cached) return cached;
   }
 
-  // Primär: offener Multi-Step-Agent (alle Websites)
-  try {
-    const { runOpenWebAgent } = await import('./webAgent/runOpenWebAgent');
-    const agent = await runOpenWebAgent(t);
-    if (agent) {
-      putCachedResearch(cacheKey, agent);
-      try {
-        const { contributePlacesFromResearchResult } = await import(
-          '../memory/collectiveLearning'
-        );
-        contributePlacesFromResearchResult({
-          query: t,
-          city: agent.city || cityHint(),
-          facts: agent.facts,
-          sources: agent.sources,
-        });
-      } catch {
-        /* soft */
+  // Primär: offener Multi-Step-Agent — außer Quick-Lookup (flach = schneller + direkter)
+  const quickLookup = isQuickLookupQuery(t);
+  if (!quickLookup) {
+    try {
+      const { runOpenWebAgent } = await import('./webAgent/runOpenWebAgent');
+      const agent = await runOpenWebAgent(t);
+      if (agent) {
+        putCachedResearch(cacheKey, agent);
+        try {
+          const { contributePlacesFromResearchResult } = await import(
+            '../memory/collectiveLearning'
+          );
+          contributePlacesFromResearchResult({
+            query: t,
+            city: agent.city || cityHint(),
+            facts: agent.facts,
+            sources: agent.sources,
+          });
+        } catch {
+          /* soft */
+        }
+        return agent;
       }
-      return agent;
+    } catch (err) {
+      if (__DEV__) console.warn('[webResearch] open agent failed', err);
     }
-  } catch (err) {
-    if (__DEV__) console.warn('[webResearch] open agent failed', err);
+  } else if (__DEV__) {
+    console.log('[webResearch] quick-lookup → flat search', t.slice(0, 60));
   }
 
-  const offline = await isDeviceOffline();
-  if (offline) {
-    return {
-      query: t,
-      city: cityHint(),
-      facts: [],
-      sources: [],
-      formPrefill: null,
-      failures: ['Offline — Web-Recherche nicht möglich'],
-      researchNotes: 'Gerät offline',
-      promptBlock:
-        '=== WEB-RECHERCHE ===\nOffline. Ehrlich sagen, kein Fake.',
-      speechHint:
-        'Gerade bin ich offline — Webseiten und PDFs kann ich so nicht checken.',
-    };
-  }
   if (!hasGeminiApiKey()) {
     return {
       query: t,
@@ -631,6 +694,33 @@ export async function runWebResearch(
   ].slice(0, 8);
   const formPrefill = buildFormPrefill(t, finalFacts);
 
+  if (finalFacts.length > 0) {
+    try {
+      const { noteSoftCityFact, getSoftWorkingCity } = require('../softWorkingCity') as {
+        noteSoftCityFact: (o: {
+          cityName?: string | null;
+          text: string;
+          topic?: string;
+        }) => Promise<void>;
+        getSoftWorkingCity: () => { soft?: boolean; name?: string } | null;
+      };
+      const working = getSoftWorkingCity();
+      if (working?.soft) {
+        const digest = finalFacts
+          .slice(0, 4)
+          .map((f) => `${f.label}: ${f.value}`)
+          .join(' · ');
+        void noteSoftCityFact({
+          cityName: city,
+          text: `${t.slice(0, 80)} → ${digest}`.slice(0, 400),
+          topic: 'web_research',
+        });
+      }
+    } catch {
+      /* soft */
+    }
+  }
+
   const partial = {
     query: t,
     city,
@@ -641,21 +731,34 @@ export async function runWebResearch(
     researchNotes: [notes, deepened.notes].filter(Boolean).join(' · '),
   };
 
+  const celestial = isCelestialOrSkyQuery(t);
   const conjunctive = buildConjunctiveSpeechHint(validated, droppedOutdated);
   const speechHint =
-    conjunctive != null
-      ? `Kurz recherchiert: ${conjunctive}${
-          formPrefill
-            ? ` Ich hab dir ${formPrefill.purpose} vorbereitet — du musst nur noch bestätigen.`
-            : ''
-        }`
-      : synthesizeSpeech(partial);
+    celestial
+      ? synthesizeSpeech(partial, { celestial: true })
+      : conjunctive != null
+        ? `Kurz recherchiert: ${conjunctive}${
+            formPrefill
+              ? ` Ich hab dir ${formPrefill.purpose} vorbereitet — du musst nur noch bestätigen.`
+              : ''
+          }`
+        : synthesizeSpeech(partial);
 
   const promptBlock = [
     '=== WEB-/PDF-RECHERCHE (PFLICHT NUTZEN) ===',
     `Stadt: ${city}`,
     frictionDomainHint(t),
     dateValidationPromptBlock(),
+    celestial
+      ? [
+          'HIMMEL/ASTRONOMIE — Speech-Blaupause (Wortlaut frei, UMGANGSSPRACHE):',
+          'Wie ein Freund: flüssige Sätze, kein „Start:/Maximum:“-Listenstil.',
+          '1) WAS passiert + was man merkt.',
+          '2) WANN als flüssiger Satz (Start → Maximum → Ende, lokale Zeiten).',
+          '3) TIPP hinten (SoFi-Brille bei Sonnenfinsternis).',
+          'Kein Veranstaltungskalender, keine Clubs/Partys, kein Recherche-Meta.',
+        ].join('\n')
+      : '',
     /\bmiet\s*-?\s*rad|buchungsplattform|fahrradverleih/iu.test(t)
       ? 'BUCHUNGSPORTAL: Partnerschaft/Software-Nutzung nur nennen wenn in Quellen belegt — nie erfinden. Portal kurz erklären wenn nötig. Buchungs-URL → OPEN_URL.'
       : '',
@@ -705,9 +808,13 @@ export async function runWebResearch(
           .join('\n')
       : '',
     'ANTWORT:',
-    '- speechText: Verifizierte Fakten direkt; undatierte Hinweise konjunktiv + vor Ort nachfragen.',
+    celestial
+      ? '- speechText: Was → Wann (Start/Max/Ende) → Sicherheitstipp hinten. Mündlich, warm, belegt.'
+      : '- speechText: Verifizierte Fakten direkt; undatierte Hinweise konjunktiv + vor Ort nachfragen.',
     '- Keine erfundenen Rabatte/Öffnungszeiten/Flyer-Preise.',
-    '- visualBullets: Datum/Uhrzeit/Ort/Bonus-Infos aus Fakten.',
+    celestial
+      ? '- visualBullets: Ereignis, Zeiten, Sicherheit — aus speechText.'
+      : '- visualBullets: Datum/Uhrzeit/Ort/Bonus-Infos aus Fakten.',
     '- quickActions: nur echte https/mailto URLs — ZERO-FAKE.',
   ]
     .filter(Boolean)
@@ -739,6 +846,30 @@ export async function runWebResearch(
 export function webResearchToActions(
   research: WebResearchResult,
 ): QuickAction[] {
+  try {
+    const {
+      wantsFerryOperatorSite,
+      ferryTicketActionsFromResearch,
+    } = require('../transit/ferryTicketResearch') as {
+      wantsFerryOperatorSite: (s: string) => boolean;
+      ferryTicketActionsFromResearch: (o: {
+        query: string;
+        sources?: Array<{ url: string; title?: string | null }>;
+        facts?: Array<{ sourceUrl?: string | null }>;
+      }) => QuickAction[];
+    };
+    if (wantsFerryOperatorSite(research.query)) {
+      const ferry = ferryTicketActionsFromResearch({
+        query: research.query,
+        sources: research.sources,
+        facts: research.facts,
+      });
+      if (ferry.length) return ferry.slice(0, 2);
+    }
+  } catch {
+    /* fall through */
+  }
+
   try {
     // Prefer open-agent labels when present
     const { webAgentToActions } = require('./webAgent/runOpenWebAgent') as {
@@ -778,23 +909,52 @@ export function webResearchToActions(
     });
   }
 
-  for (const s of research.sources.slice(0, 2)) {
-    if (!/^https?:\/\//i.test(s.url)) continue;
-    if (actions.some((a) => a.payload.url === s.url)) continue;
-    const ticketish =
-      /ticket|buch|shop|kaufen|online/i.test(s.url) ||
-      /ticket|shop|buch/i.test(s.title ?? '');
-    actions.push({
-      type: 'OPEN_URL',
-      label: shortenActionLabel(
-        s.kind === 'pdf'
-          ? '📄 PDF'
-          : ticketish
-            ? '🎫 Tickets'
-            : websiteActionLabel(s.title, s.url),
-      ),
-      payload: { url: s.url },
-    });
+  try {
+    const { pickRankedSourceUrls } = require('./liveDeepLink') as {
+      pickRankedSourceUrls: (
+        sources: Array<{ url: string; title?: string | null; kind?: string }>,
+        query: string,
+        max?: number,
+      ) => Array<{ url: string; intent: string }>;
+    };
+    const ranked = pickRankedSourceUrls(research.sources, research.query, 2);
+    for (const s of ranked) {
+      if (actions.some((a) => a.payload.url === s.url)) continue;
+      const src = research.sources.find((x) => x.url === s.url);
+      const ticketish = s.intent === 'ticket' || s.intent === 'booking';
+      actions.push({
+        type: 'OPEN_URL',
+        label: shortenActionLabel(
+          src?.kind === 'pdf' || s.intent === 'program'
+            ? '📄 PDF'
+            : ticketish
+              ? '🎫 Tickets'
+              : s.intent === 'menu'
+                ? '🍽 Karte'
+                : websiteActionLabel(src?.title, s.url),
+        ),
+        payload: { url: s.url },
+      });
+    }
+  } catch {
+    for (const s of research.sources.slice(0, 2)) {
+      if (!/^https?:\/\//i.test(s.url)) continue;
+      if (actions.some((a) => a.payload.url === s.url)) continue;
+      const ticketish =
+        /ticket|buch|shop|kaufen|online/i.test(s.url) ||
+        /ticket|shop|buch/i.test(s.title ?? '');
+      actions.push({
+        type: 'OPEN_URL',
+        label: shortenActionLabel(
+          s.kind === 'pdf'
+            ? '📄 PDF'
+            : ticketish
+              ? '🎫 Tickets'
+              : websiteActionLabel(s.title, s.url),
+        ),
+        payload: { url: s.url },
+      });
+    }
   }
 
   const place = research.facts.find((f) => f.place)?.place;

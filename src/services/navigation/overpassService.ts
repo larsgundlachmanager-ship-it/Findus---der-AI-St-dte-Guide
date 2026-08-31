@@ -29,6 +29,15 @@ const PLACE_TYPE_FILTERS: Record<string, string[]> = {
   toilet: ['["amenity"="toilets"]'],
   toilets: ['["amenity"="toilets"]'],
   park: ['["leisure"="park"]', '["leisure"="garden"]'],
+  viewpoint: [
+    '["tourism"="viewpoint"]',
+    '["natural"="peak"]',
+    '["natural"="cliff"]',
+    '["natural"="beach"]',
+    '["natural"="coastline"]',
+    '["man_made"="pier"]',
+    '["leisure"="marina"]',
+  ],
   bank: ['["amenity"="bank"]', '["amenity"="atm"]'],
   pharmacy: ['["amenity"="pharmacy"]'],
   hospital: [
@@ -79,16 +88,17 @@ const PLACE_TYPE_FILTERS: Record<string, string[]> = {
     '["amenity"="rental_machine"]["rental:powerbank"]',
     '["brand"~"^(voozaa|Batterybar|Cheetah|Rechargy|Chargery)$",i]',
   ],
-  /** Cafés/Bibliotheken mit belegter Steckdose (OSM socket=*) */
+  /** Cafés/Bibliotheken mit belegter Steckdose (OSM socket=*) — kein Tourist-Info/Heimat. */
   outlet_cafe: [
     '["amenity"="cafe"]["socket"]',
     '["amenity"="cafe"]["socket:usb"]',
     '["amenity"="cafe"]["socket:power"]',
     '["amenity"="fast_food"]["socket"]',
     '["amenity"="library"]["socket"]',
-    '["tourism"="information"]["socket"]',
   ],
   post_office: ['["amenity"="post_office"]'],
+  post_box: ['["amenity"="post_box"]', '["amenity"="mailbox"]'],
+  parcel_locker: ['["amenity"="parcel_locker"]'],
   parking: ['["amenity"="parking"]'],
   museum: ['["tourism"="museum"]'],
   church: ['["amenity"="place_of_worship"]'],
@@ -127,6 +137,17 @@ function osmTypesForPlaceType(placeType: string): string[] {
   const t = placeType.toLowerCase();
   if (t === 'toilet' || t === 'toilets') return ['toilet', 'point_of_interest'];
   if (t === 'park') return ['park', 'point_of_interest'];
+  if (t === 'viewpoint') {
+    return [
+      'viewpoint',
+      'peak',
+      'cliff',
+      'beach',
+      'pier',
+      'marina',
+      'point_of_interest',
+    ];
+  }
   if (t === 'bakery') return ['bakery', 'store', 'point_of_interest'];
   if (t === 'cafe') return ['cafe', 'food', 'point_of_interest'];
   if (t === 'bank' || t === 'atm') return ['bank', 'finance', 'point_of_interest'];
@@ -146,9 +167,9 @@ function osmTypesForPlaceType(placeType: string): string[] {
   if (t === 'drugstore') {
     return ['drugstore', 'store', 'chemist', 'point_of_interest'];
   }
-  if (t === 'phone_charge' || t === 'powerbank' || t === 'outlet_cafe') {
-    return [t, 'point_of_interest', 'cafe'];
-  }
+  if (t === 'phone_charge') return ['phone_charge', 'point_of_interest'];
+  if (t === 'powerbank') return ['powerbank', 'point_of_interest'];
+  if (t === 'outlet_cafe') return ['outlet_cafe', 'point_of_interest'];
   return [t, 'point_of_interest'];
 }
 
@@ -230,6 +251,26 @@ function openNowFromOsmTags(tags: Record<string, string>): boolean {
   return true;
 }
 
+function osmTypesForCharge(
+  placeType: string,
+  tags: Record<string, string>,
+): string[] {
+  const amenity = (tags.amenity ?? '').toLowerCase();
+  const types = [placeType, 'point_of_interest'];
+  if (
+    amenity === 'cafe' ||
+    amenity === 'fast_food' ||
+    amenity === 'coffee_shop'
+  ) {
+    types.push('cafe');
+  }
+  if (amenity === 'library') types.push('library');
+  if (amenity === 'bakery') types.push('bakery');
+  if (amenity === 'restaurant') types.push('restaurant');
+  if (amenity === 'bar' || amenity === 'pub') types.push('bar');
+  return types;
+}
+
 function elementToPlace(
   el: OverpassElement,
   originLat: number,
@@ -241,18 +282,45 @@ function elementToPlace(
   const lng = el.lon ?? el.center?.lon;
   if (lat == null || lng == null) return null;
   const tags = el.tags ?? {};
+  const chargeType = /^(phone_charge|powerbank|outlet_cafe)$/i.test(placeType);
+  if (chargeType) {
+    if ((tags.tourism ?? '').toLowerCase() === 'information') return null;
+    if (/heimat|broschüre|broschuere|spielstadt/i.test(tags.name ?? '')) {
+      return null;
+    }
+  }
   let name = (tags.name ?? tags.brand ?? tags.operator ?? '').trim();
   if (!name || name.length < 2) {
-    const chargeType = /^(phone_charge|powerbank|outlet_cafe)$/i.test(placeType);
-    if (!chargeType) return null;
-    name =
-      tags.brand ||
-      tags.operator ||
-      (placeType === 'powerbank'
-        ? 'Powerbank-Automat'
-        : placeType === 'outlet_cafe'
-          ? 'Ort mit Steckdose'
-          : 'Handy-Ladestation');
+    const tourism = (tags.tourism ?? '').toLowerCase();
+    const natural = (tags.natural ?? '').toLowerCase();
+    const manMade = (tags.man_made ?? '').toLowerCase();
+    const leisure = (tags.leisure ?? '').toLowerCase();
+    if (natural === 'coastline') return null;
+    if (tourism === 'viewpoint') name = 'Aussichtspunkt';
+    else if (natural === 'peak') name = 'Gipfel';
+    else if (natural === 'cliff') name = 'Steilhang';
+    else if (natural === 'beach') name = 'Strand';
+    else if (manMade === 'pier') name = 'Steg';
+    else if (leisure === 'marina') name = 'Hafen';
+    if (!name || name.length < 2) {
+      if (!chargeType) return null;
+      const amenity = (tags.amenity ?? '').toLowerCase();
+      if (amenity === 'vending_machine' || placeType === 'powerbank') {
+        name = tags.brand || tags.operator || 'Powerbank-Automat';
+      } else {
+        return null;
+      }
+    }
+  }
+  if (chargeType && /^ort mit steckdose$/i.test(name)) return null;
+  const amenity = (tags.amenity ?? '').toLowerCase();
+  if (
+    chargeType &&
+    /^(cafe|fast_food|library|coffee_shop)$/.test(amenity) &&
+    !(tags.opening_hours ?? '').trim()
+  ) {
+    // Unbekannte Öffnung = nachts oft zu. Google-opennow übernimmt Café-Fallback.
+    return null;
   }
   const kw = (keyword ?? '').trim().toLowerCase();
   if (kw) {
@@ -264,7 +332,9 @@ function elementToPlace(
   return {
     placeId,
     name,
-    types: osmTypesForPlaceType(placeType),
+    types: chargeType
+      ? osmTypesForCharge(placeType, tags)
+      : osmTypesForPlaceType(placeType),
     lat,
     lng,
     distanceM,

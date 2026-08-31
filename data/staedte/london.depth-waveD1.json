@@ -1,0 +1,742 @@
+{
+  "notes": [
+    "Wave D1 vertieft ausschließlich die 13 angeforderten bestehenden IDs; die Texte ergänzen Wave C um Architektur-, Gründungs-, Sammlungs-, Landschafts- und Orientierungskontext.",
+    "Stabile Fakten wurden gegen offizielle Seiten von British Library, IWM, Somerset House, Westminster Cathedral, Temple Church, Sky Garden, City of London und The Royal Parks sowie gegen Historic England und Survey of London geprüft.",
+    "Öffnungszeiten, Preise, Tickets, Programme, Zugänge, Zeremonien, Aussichtsbedingungen und Verkehrsdaten stehen ausschließlich in ausdrücklich als LIVE markierten Einträgen."
+  ],
+  "spots": [
+    {
+      "id": "london_st_pancras_international",
+      "name": "St Pancras International",
+      "general_info": "Der 1868 eröffnete Kopfbahnhof verbindet Barlows damals außergewöhnlich weit gespannte Eisenhalle mit George Gilbert Scotts neugotischer Hotelfront. Restaurierung und Erweiterung machten ihn 2007 zum Londoner Endpunkt von High Speed 1.",
+      "deep_data_pool": [
+        {
+          "text": "Die Midland Railway wollte einen eigenen Londoner Endbahnhof, weil sie zuvor auf fremde Strecken angewiesen war. Der Neubau sollte ihre Verbindung zu den Midlands und nach Nordengland sichtbar repräsentieren und entstand gemeinsam mit einem Güter- und Hotelkomplex.",
+          "tags": ["geschichte", "eisenbahn"]
+        },
+        {
+          "text": "William Henry Barlows Bahnsteighalle wurde zwischen 1865 und 1868 errichtet. Ihr einzelner Bogen überspannte rund 73 Meter ohne innere Stützen; diese freie Weite galt bei der Fertigstellung als technische Spitzenleistung des Eisenbaus.",
+          "tags": ["architektur", "ingenieurwesen"]
+        },
+        {
+          "text": "Die Halle steht auf einem erhöhten Deck, weil die Zufahrtsgleise den Regent's Canal überqueren mussten. Im gemauerten Unterbau entstanden regelmäßig angeordnete Gewölbe, deren Raster auf Fässer aus dem Brauereizentrum Burton upon Trent abgestimmt war.",
+          "tags": ["industriegeschichte", "architektur"]
+        },
+        {
+          "text": "George Gilbert Scott gewann den Wettbewerb für das Midland Grand Hotel mit einem reich gegliederten neugotischen Entwurf. Das 1873 eröffnete Haus besaß Türme, Maßwerk, farbigen Backstein und aufwendige Innenräume; als Hotel schloss es 1935.",
+          "tags": ["architektur", "geschichte"]
+        },
+        {
+          "text": "Die Bahnhofshalle und der ehemalige Hotelbau sind Grade I geschützt. Beim Umbau für High Speed 1 wurde Barlows Halle restauriert und nach Norden verlängert, während große Öffnungen im historischen Deck den vormals verborgenen Unterbau als Passagierbereich erschlossen.",
+          "tags": ["denkmalschutz", "stadtentwicklung"]
+        },
+        {
+          "text": "Die 2007 abgeschlossene Neuordnung trennt internationale Abfertigung, nationale Fernzüge und regionale Verbindungen räumlich. Die verlängerten Bahnsteige nehmen internationale Hochgeschwindigkeitszüge auf; die neue nördliche Halle setzt sich gestalterisch vom historischen Bogen ab.",
+          "tags": ["transport", "architektur"]
+        },
+        {
+          "text": "Visuell: An der Euston Road zuerst die burgartig gestaffelte rote Hotelfassade suchen. Die eigentliche Eisenhalle liegt dahinter; im Inneren führen die blau gestrichenen Bogenrippen, die lange Hallenuhr und das Glasdach entlang der Hauptachse.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Der Dichter und Denkmalpfleger John Betjeman wurde zum öffentlichen Gesicht der Kampagne gegen den in den 1960er Jahren drohenden Abriss. Martin Jennings zeigt ihn heute als nach oben blickende Bronzefigur in der Halle, mit flachem Hut und Mantel.",
+          "tags": ["denkmalschutz", "kunst"]
+        },
+        {
+          "text": "Quer: Unmittelbar östlich steht Lewis Cubitts King's Cross von 1852 mit nüchterner Doppelfassade. Der kurze Weg über Pancras Road stellt zwei gegensätzliche Eisenbahnarchitekturen und zwei weiterhin eigenständige Bahnhofsbetriebe nebeneinander.",
+          "tags": ["quer", "architektur", "orientierung"]
+        },
+        {
+          "text": "LIVE: Abfahrtsbahnhof, Betreiber, Bahnsteig, internationale Vorlaufzeit, Grenz- und Sicherheitskontrollen, Gepäckregeln sowie mögliche Einschränkungen der Bahnhofshalle bei Eurostar, National Rail und dem jeweiligen Zugunternehmen prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich St Pancras International?",
+          "a": "An der monumentalen roten neugotischen Hotelfassade an der Euston Road und dahinter an Barlows riesigem einbogigem Hallendach. King's Cross daneben besitzt dagegen zwei schlichtere große Rundbögen."
+        }
+      ]
+    },
+    {
+      "id": "london_leicester_square",
+      "name": "Leicester Square",
+      "general_info": "Der Platz entstand im 17. Jahrhundert auf dem Anwesen Robert Sidneys, des zweiten Earl of Leicester. Aus einem aristokratischen Wohnquartier wurde ein dichtes West-End-Zentrum, dessen Garten, Theater- und Kinofassaden mehrere Umbauphasen zeigen.",
+      "deep_data_pool": [
+        {
+          "text": "Robert Sidney kaufte ab 1630 Land im damaligen St Martin's Field und ließ Leicester House an der Nordseite errichten. Nach einem Streit über zuvor gemeinschaftlich genutztes Gelände musste ein Teil der Fläche für die Anwohner offenbleiben.",
+          "tags": ["geschichte", "stadtentwicklung"]
+        },
+        {
+          "text": "Die umgebenden Straßen und Häuser wurden in den 1670er Jahren planmäßig angelegt. Leicester Fields war zunächst von vornehmen Stadthäusern geprägt; im 18. Jahrhundert wohnten zeitweise Mitglieder des hannoverschen Königshauses in Leicester House.",
+          "tags": ["geschichte", "stadtplanung"]
+        },
+        {
+          "text": "Leicester House wurde 1791 abgerissen und sein Gelände parzelliert. Der Platz verlor im 19. Jahrhundert viel von seinem exklusiven Wohncharakter, während Museen, Schaustellungen, Hotels und Vergnügungsangebote in die Umgebung einzogen.",
+          "tags": ["stadtentwicklung", "kulturgeschichte"]
+        },
+        {
+          "text": "Der zentrale Garten ging 1874 nach einer Sanierung in öffentliche Nutzung über. Albert Grants Stiftung finanzierte die Anlage; Giovanni Fontanas Shakespeare-Denkmal bildet die Mitte und orientiert sich an der Figur auf dem Dichterdenkmal in Westminster Abbey.",
+          "tags": ["geschichte", "kunst"]
+        },
+        {
+          "text": "An den Ecken des Gartens stehen Büsten historischer Bewohner oder mit dem Viertel verbundener Persönlichkeiten, darunter Isaac Newton, Joshua Reynolds, John Hunter und William Hogarth. Sie machen den Platz zugleich zu einem kleinen Erinnerungsgarten.",
+          "tags": ["kunst", "biografie"]
+        },
+        {
+          "text": "Die Kinokonzentration entwickelte sich im 20. Jahrhundert. Großsäle wie Empire und Odeon wurden mehrfach umgebaut; ihre Fassaden und Leuchtschriften markieren bis heute die Rolle des Platzes für Premieren, obwohl Innenaufteilungen nicht historisch konstant blieben.",
+          "tags": ["film", "architektur"]
+        },
+        {
+          "text": "Visuell: Der kleine, eingezäunte Garten mit der weißen Shakespeare-Figur ist der feste Mittelpunkt. Ringsum stehen hohe Kino-, Theater- und Gastronomiefassaden; Chinatown beginnt durch kurze Passagen und Straßen unmittelbar nördlich.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Die heutige Platzoberfläche und die breiten Fußgängerbereiche stammen aus jüngeren Erneuerungen. Granitbänder, Sitzkanten und wenige kontrollierte Zugänge zum Garten ordnen den Besucherstrom, ohne den historischen rechteckigen Grundriss aufzulösen.",
+          "tags": ["stadtplanung", "orientierung"]
+        },
+        {
+          "text": "Quer: Coventry Street verbindet direkt mit Piccadilly Circus; südlich führen Orange Street und Whitcomb Street Richtung Trafalgar Square, östlich liegt Charing Cross Road. Der Platz ist daher Scharnier zwischen Kino, Theater, Chinatown und Soho.",
+          "tags": ["quer", "orientierung"]
+        },
+        {
+          "text": "LIVE: Filmpremieren, rote Teppiche, Gartenöffnungen, temporäre Figuren, Bühnenprogramme, Baustellen und Zugangssperren bei Westminster City Council, den Kinos und offiziellen Veranstaltern aktuell prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich Leicester Square?",
+          "a": "Am rechteckigen Garten mit Shakespeare-Statue in der Mitte und den großen Kinofassaden ringsum. Der Platz liegt zwischen Chinatown, Charing Cross Road und der direkten Achse nach Piccadilly Circus."
+        }
+      ]
+    },
+    {
+      "id": "london_piccadilly_circus",
+      "name": "Piccadilly Circus",
+      "general_info": "Der 1819 im Zuge von John Nashs Regent-Street-Plan angelegte Knoten verbindet wichtige Achsen des West End. Seine heutige unregelmäßige Form, der Shaftesbury-Brunnen und die Werbeflächen erzählen von Straßenumbau, Unterhaltung und Massenmedien.",
+      "deep_data_pool": [
+        {
+          "text": "John Nash plante den Circus als Gelenk zwischen dem geradlinigen unteren und dem geschwungenen oberen Teil der Regent Street. Die Anlage gehörte zur repräsentativen Verbindung vom Carlton House in Richtung Regent's Park.",
+          "tags": ["geschichte", "stadtplanung"]
+        },
+        {
+          "text": "Der Bau der Shaftesbury Avenue in den 1880er Jahren schnitt in den älteren Platz ein und veränderte seinen Kreisgrundriss dauerhaft. Auch spätere Verkehrsführungen verschoben Inseln, Brunnen und Fußwege, sodass der Name Circus heute eher die Herkunft als die Form beschreibt.",
+          "tags": ["stadtentwicklung", "orientierung"]
+        },
+        {
+          "text": "Alfred Gilbert schuf den Shaftesbury Memorial Fountain zu Ehren des Sozialreformers Anthony Ashley-Cooper. Die 1893 enthüllte geflügelte Figur ist Anteros, Sinnbild selbstloser erwiderter Liebe, nicht der populär so bezeichnete Eros.",
+          "tags": ["kunst", "geschichte"]
+        },
+        {
+          "text": "Die Figur wurde aus Aluminium gegossen, damals ein ungewöhnliches Material für ein öffentliches Denkmal. Ihr Bogen richtet sich nicht als Wegweiser auf ein bestimmtes Ziel; Sockel, Becken und Standort wurden im Lauf der Platzumbauten verändert.",
+          "tags": ["kunst", "material"]
+        },
+        {
+          "text": "Das heutige London Pavilion geht auf einen Neubau von 1885 zurück, nachdem Shaftesbury Avenue den Standort des älteren Music-Hall-Gebäudes berührt hatte. Die Fassade wurde später stark kommerziell überformt und trägt einen Teil der berühmten Bildschirmkulisse.",
+          "tags": ["architektur", "theatergeschichte"]
+        },
+        {
+          "text": "Das Criterion Theatre liegt vollständig unter Straßenniveau hinter einer Fassade zum Circus. Thomas Verity entwarf den Theaterkomplex in den 1870er Jahren; die unterirdische Lage macht seinen Zuschauerraum von außen kaum ablesbar.",
+          "tags": ["architektur", "theater"]
+        },
+        {
+          "text": "Elektrische Werbung erschien hier ab dem frühen 20. Jahrhundert. Aus einzelnen Leuchtschriften wurden zusammenhängende elektronische Bildflächen; Technik, Marken und Ausdehnung wechselten, während die Nordseite als Werbestandort erhalten blieb.",
+          "tags": ["mediengeschichte", "stadtbild"]
+        },
+        {
+          "text": "Visuell: Die konkave Bildschirmfront liegt nördlich, der dunkle Bronzeflügel des Brunnens auf einer erhöhten Fußgängerinsel südöstlich davon. Regent Street öffnet sich als breite, geschwungene Fassadenachse nach Nordwesten.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Quer: Coventry Street führt ohne großen Richtungswechsel nach Leicester Square, Shaftesbury Avenue zu Theatern und Chinatown, Piccadilly westwärts zu St James's. Die Tube-Station liegt direkt unter dem Knoten, ihre Zugänge stehen an mehreren Platzkanten.",
+          "tags": ["quer", "orientierung"]
+        },
+        {
+          "text": "LIVE: Aktuelle Bildschirmbespielung, Demonstrationen, Events, Verkehrsführung, Bauarbeiten, Tube-Zugänge und Nachtverbindungen bei Westminster City Council und TfL prüfen; temporäre Inszenierungen sind keine stabilen Ortsmerkmale.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich Piccadilly Circus?",
+          "a": "An der gebogenen großen Bildschirmfront und der geflügelten Aluminiumfigur des Shaftesbury Memorials. Die Figur heißt korrekt Anteros; mehrere breite West-End-Straßen laufen hier zusammen."
+        }
+      ]
+    },
+    {
+      "id": "london_imperial_war_museum",
+      "name": "Imperial War Museum London",
+      "general_info": "IWM London dokumentiert Kriegserfahrungen seit 1914 in einem umgebauten Teil des früheren Bethlem Royal Hospital. Der klassizistische Bau, Sidney Smirkes Kuppel und moderne Atriumeingriffe verbinden Medizin-, Museums- und Konfliktgeschichte.",
+      "deep_data_pool": [
+        {
+          "text": "Das britische Kriegskabinett billigte am 5. März 1917 Sir Alfred Monds Vorschlag für ein National War Museum. Die Beteiligung der Dominions führte noch während des Ersten Weltkriegs zum Namen Imperial War Museum; ein Parlamentsgesetz verankerte es 1920.",
+          "tags": ["geschichte", "museum"]
+        },
+        {
+          "text": "König George V eröffnete das Museum am 9. Juni 1920 im Crystal Palace. Von 1924 bis 1935 nutzte es Galerien neben dem Imperial Institute in South Kensington, bevor es 1936 nach Lambeth umzog.",
+          "tags": ["geschichte", "stadtentwicklung"]
+        },
+        {
+          "text": "Der Kernbau war Teil des Bethlem Royal Hospital, das Anfang des 19. Jahrhunderts nach Entwürfen von James Lewis entstand. Das Hospital zog 1930 nach Beckenham; Seitenflügel wurden später abgebrochen, während der zentrale klassizistische Block erhalten blieb.",
+          "tags": ["architektur", "medizingeschichte"]
+        },
+        {
+          "text": "Sidney Smirke ergänzte Mitte des 19. Jahrhunderts die markante Kuppel über der damaligen Krankenhauskapelle. Ihr Tambour und die ionische Vorhalle geben dem langen, hell verputzten Bau einen repräsentativen Mittelpunkt.",
+          "tags": ["architektur", "geschichte"]
+        },
+        {
+          "text": "Lord Rothermeres Unterstützung half, den Standort für das Museum zu sichern. Zeitgenössisch wurde besonders die bedeutende Sammlung offizieller Kriegskunst als Argument für ein größeres, dauerhaftes Haus hervorgehoben.",
+          "tags": ["sammlung", "geschichte"]
+        },
+        {
+          "text": "Während des Zweiten Weltkriegs war das Museum von September 1940 bis November 1946 geschlossen, gefährdete Bestände wurden ausgelagert. Ein Bombentreffer im Januar 1941 zerstörte unter anderem ein historisches Short-Wasserflugzeug und beschädigte Schiffsmodelle.",
+          "tags": ["geschichte", "sammlung"]
+        },
+        {
+          "text": "Die Sammlungskompetenz wurde 1939 auf beide Weltkriege und 1953 auf britische beziehungsweise Commonwealth-Militäroperationen seit August 1914 erweitert. Das Haus sammelt persönliche Zeugnisse, Kunst, Film, Fotografie, Dokumente und technische Objekte.",
+          "tags": ["sammlung", "museum"]
+        },
+        {
+          "text": "Foster + Partners ordneten das zentrale Atrium neu; große Objekte hängen über mehreren Ebenen, während neue Galerien in den Altbau greifen. Die Eingriffe machen Maßstab und Material von Flugzeugen, Fahrzeugen und Waffen räumlich vergleichbar.",
+          "tags": ["architektur", "museumsdesign"]
+        },
+        {
+          "text": "Visuell: Die lange helle Front mit ionischem Säulenportikus und zentraler Kuppel steht zurückgesetzt im Geraldine Mary Harmsworth Park. Zwei große Marinegeschütze flankieren den Weg und markieren den Museumseingang schon aus der Grünfläche.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Quer: Der Park bewahrt die offene Umgebung des ehemaligen Hospitals; Lambeth North liegt nordwestlich, Elephant and Castle östlich. Churchill War Rooms, HMS Belfast und IWM Duxford gehören zur selben Museumsgruppe, sind aber eigenständige Standorte.",
+          "tags": ["quer", "orientierung"]
+        },
+        {
+          "text": "LIVE: Öffnung, reservierte Zeitfenster, Sonderausstellungen, Galerieschließungen, sensible Inhaltswarnungen, Führungen und aktuelle Zugangsregeln direkt bei Imperial War Museums prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich das Imperial War Museum London?",
+          "a": "An der langen hellen klassizistischen Fassade, dem ionischen Mittelportikus, der Kuppel und zwei großen Marinegeschützen vor dem Eingang im Geraldine Mary Harmsworth Park."
+        }
+      ]
+    },
+    {
+      "id": "london_british_library",
+      "name": "British Library",
+      "general_info": "Die 1973 gegründete Nationalbibliothek erhielt in St Pancras einen von Colin St John Wilson und MJ Long entwickelten, 1997 geöffneten Hauptbau. Roter Backstein, gestufte Räume und tiefe Magazine übersetzen Sammlungsschutz in Architektur.",
+      "deep_data_pool": [
+        {
+          "text": "Der British Library Act von 1972 schuf die Institution zum 1. Juli 1973. Zusammengeführt wurden unter anderem die Bibliothek des British Museum, die National Lending Library for Science and Technology und das National Sound Archive.",
+          "tags": ["geschichte", "bibliothek"]
+        },
+        {
+          "text": "Vor dem Neubau lagen wichtige Bestände und Arbeitsstellen über mehrere Orte verteilt. Der St-Pancras-Bau sollte Lesesäle, öffentliche Bereiche, Verwaltung und einen großen Teil der Magazine funktional zusammenführen.",
+          "tags": ["geschichte", "nutzung"]
+        },
+        {
+          "text": "Colin St John Wilson entwickelte das Projekt über Jahrzehnte gemeinsam mit der Architektin MJ Long. Der Entwurf wurde von innen nach außen geplant: Leserplätze, Wege der Bücher, kontrolliertes Licht und dauerhafte Materialien bestimmten die Form.",
+          "tags": ["architektur", "planung"]
+        },
+        {
+          "text": "Die Bauarbeiten am Standort begannen 1984. Das Haus öffnete im November 1997 für die Öffentlichkeit und wurde im Juni 1998 offiziell eröffnet; 2015 erhielt es als außergewöhnlich junges Gebäude den Schutzstatus Grade I.",
+          "tags": ["geschichte", "denkmalschutz"]
+        },
+        {
+          "text": "Rund zehn Millionen handgefertigte Ziegel wurden verwendet. Farbe und Mauerwerk antworten auf St Pancras, ohne Scotts Neugotik zu kopieren; gestaffelte Baukörper und ein großer zurückgesetzter Vorplatz halten Abstand zur Euston Road.",
+          "tags": ["architektur", "material"]
+        },
+        {
+          "text": "Wilson hatte als Marineoffizier gedient; Schiffsassoziationen erscheinen in Gebäudekontur, Geländern, runden Fenstern und Details. Der Uhrturm nimmt zugleich Anregungen von Willem Dudoks Rathaus in Hilversum auf.",
+          "tags": ["architektur", "visuell"]
+        },
+        {
+          "text": "Fünf unterirdische Magazinlevels reichen etwa 24 Meter tief und liegen in der Nähe der Victoria Line. Die Tiefe reduziert den oberirdischen Baukörper; konservatorische Technik schützt Bestände vor Feuer, Wasser und ungeeignetem Klima.",
+          "tags": ["ingenieurwesen", "sammlung"]
+        },
+        {
+          "text": "Der sechsgeschossige King's Library Tower bewahrt die Büchersammlung Georgs III. sichtbar und separat. George IV hatte bei der Übergabe verlangt, sie vollständig zusammen und in einem eigens bestimmten Raum zu erhalten.",
+          "tags": ["sammlung", "geschichte"]
+        },
+        {
+          "text": "Visuell: Vom roten Vorplatz führen breite Stufen unter ein tiefes Portikus. Eduardo Paolozzis bronzener Newton beugt sich mit Zirkel über geometrische Arbeit; innen steigt der gläserne, dicht mit alten Buchrücken gefüllte King's Library Tower auf.",
+          "tags": ["visuell", "wegweiser", "kunst"]
+        },
+        {
+          "text": "Quer: St Pancras liegt direkt östlich, King's Cross dahinter und Euston westlich. Diese Lage bindet die Bibliothek an nationale und internationale Bahnwege; der zurückgesetzte Hof bildet zugleich einen ruhigeren Übergang von der Euston Road.",
+          "tags": ["quer", "orientierung"]
+        },
+        {
+          "text": "LIVE: Öffnung öffentlicher Bereiche, aktuelle Ausstellung, rotierende Originale, Leserausweis- und Lesesaalregeln, Führungen sowie Sicherheits- oder Bauhinweise direkt bei der British Library prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich die British Library?",
+          "a": "Am großen zurückgesetzten roten Backsteinbau gegenüber St Pancras, dem weiten Vorplatz und Paolozzis sitzendem Newton. Innen ist der gläserne King's Library Tower das stärkste Erkennungsmerkmal."
+        }
+      ]
+    },
+    {
+      "id": "london_horse_guards",
+      "name": "Horse Guards",
+      "general_info": "Horse Guards ist ein zwischen 1750 und 1759 errichteter palladianischer Militärbau zwischen Whitehall und der Paradefläche. William Kents Entwurf verbindet einen zeremoniellen Tordurchgang mit Büros, Wachhöfen und einem barocken Uhrturm.",
+      "deep_data_pool": [
+        {
+          "text": "Ein roter Backsteinbau von 1663 war der unmittelbare Vorgänger. Er diente Kavalleriewachen und Armeeverwaltung an der Route zwischen Whitehall und dem königlichen Park, wurde aber im 18. Jahrhundert zu klein und baulich schadhaft.",
+          "tags": ["geschichte", "militaer"]
+        },
+        {
+          "text": "George II beauftragte William Kent 1745 mit einem Neubau. Kent starb 1748 vor Baubeginn; sein Assistent John Vardy und William Robinson vom Office of Works führten den palladianischen Entwurf zwischen 1750 und 1759 aus.",
+          "tags": ["architektur", "geschichte"]
+        },
+        {
+          "text": "Kent behielt auf dem engen Grundstück die Grundidee aus Mittelblock, Seitenflügeln und Höfen bei, verdoppelte jedoch den Innenraum. Zwei zusätzliche Geschosse über den niedrigen Verbindungsflügeln wurden erst 1803 bis 1805 ergänzt.",
+          "tags": ["architektur", "baugeschichte"]
+        },
+        {
+          "text": "Portlandstein, symmetrische Pavillons, venezianische Fenster, Balustraden und der königliche Wappengiebel kennzeichnen den Grade-I-Bau. Der aufgesetzte barocke Uhrturm bildet einen bewussten stilistischen Kontrast zur palladianischen Komposition.",
+          "tags": ["architektur", "denkmalschutz"]
+        },
+        {
+          "text": "Die Uhr wurde 1756 von Thwaites gefertigt und 1815 bis 1816 von Benjamin Lewis Vulliamy neu aufgebaut. Zwei Zifferblätter weisen nach Whitehall und zur Parade; vor Big Ben war sie eine zentrale öffentliche Uhr Westminsters.",
+          "tags": ["technikgeschichte", "visuell"]
+        },
+        {
+          "text": "Der mittlere Durchgang besitzt eine breite gewölbte Fahröffnung und seitliche Fußwege. Er ist Teil des zeremoniellen Landwegs von Whitehall über St James's Park in Richtung Buckingham Palace und zugleich ein kontrollierter Militärzugang.",
+          "tags": ["architektur", "orientierung"]
+        },
+        {
+          "text": "Horse Guards war bis 1904 Sitz des Oberbefehlshabers der britischen Armee. Heute bleibt der Komplex militärisch genutzt; die Household Cavalry verbindet dort repräsentativen Wachdienst mit der Geschichte ihrer operativen Regimenter.",
+          "tags": ["militaer", "geschichte"]
+        },
+        {
+          "text": "Visuell: Von Whitehall rahmen zwei steinerne Wachhäuser den zurückgesetzten Mittelbau. Die Kuppeluhr sitzt exakt über dem dunklen Bogen; berittene Posten stehen vor den Seiten des Vorhofs, während die große Kiesfläche auf der Rückseite liegt.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Quer: Horse Guards Parade war Teil des Whitehall-Palastgeländes und dient großen Staats- und Militärzeremonien. Durch den Bogen erreicht man St James's Park; nördlich schließen Admiralty Buildings und The Mall an.",
+          "tags": ["quer", "zeremoniell"]
+        },
+        {
+          "text": "Die Pferde und Soldaten versehen regulären Dienst. Absperrungen, Warnschilder und Durchgänge sind Sicherheitsinfrastruktur; Abstand zu Kopf und Hinterhand der Tiere sowie freie Marsch- und Torwege sind unabhängig vom Besucherandrang erforderlich.",
+          "tags": ["sicherheit", "nutzung"]
+        },
+        {
+          "text": "LIVE: Wachablösung, Inspektionen, Dismount Parade, Trooping-the-Colour-Proben, Museumszugang und Sperrungen bei Household Division, Household Cavalry Museum und Metropolitan Police prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich Horse Guards?",
+          "a": "An dem hellen palladianischen Bau mit Kuppeluhr über dem mittleren Torbogen und den steinernen Wachhäusern an Whitehall. Hinter dem Durchgang öffnet sich die große Horse Guards Parade."
+        }
+      ]
+    },
+    {
+      "id": "london_somerset_house",
+      "name": "Somerset House",
+      "general_info": "Der ab 1776 von Sir William Chambers entworfene klassizistische Behördenkomplex ersetzte einen Tudor-Palast. Hof, Flussfront und spezialisierte Amtsräume zeigen den Versuch, Kunst, Wissenschaft, Steuern und Marineverwaltung monumental zu bündeln.",
+      "deep_data_pool": [
+        {
+          "text": "Edward Seymour, Duke of Somerset und Lord Protector unter Edward VI, begann 1547 an dieser Stelle einen Renaissancepalast. Nach seinem Sturz wurde das Haus Kroneigentum und diente mehreren Königinnen als Residenz.",
+          "tags": ["geschichte", "tudor"]
+        },
+        {
+          "text": "Der alte Palast verfiel im 18. Jahrhundert. Ein Parlamentsgesetz von 1775 erlaubte den Abriss und einen großen Neubau für öffentliche Ämter; Sir William Chambers begann 1776 mit dem heutigen Somerset House.",
+          "tags": ["geschichte", "stadtentwicklung"]
+        },
+        {
+          "text": "Chambers ordnete vier Flügel um einen monumentalen Hof. Unterschiedlich behandelte Rustika, korinthische Ordnungen, Arkaden und streng gereihte Fenster geben Behörden und gelehrten Gesellschaften ein gemeinsames klassizistisches Erscheinungsbild.",
+          "tags": ["architektur", "stadtplanung"]
+        },
+        {
+          "text": "Die Royal Academy bezog Räume im North Wing und zeigte dort ihre erste Jahresausstellung. Auch Royal Society und Society of Antiquaries waren ansässig; damit war der Bau früh ein Zentrum institutionalisierter Kunst und Wissenschaft.",
+          "tags": ["kunst", "wissenschaftsgeschichte"]
+        },
+        {
+          "text": "Der Navy Board belegte schließlich einen großen Teil des South Wing. Dort wurden globale Marineangelegenheiten verwaltet; erhaltene beziehungsweise rekonstruierte Raumfolgen, Marmorkamine und die Nelson Stair erinnern an diese Amtsnutzung.",
+          "tags": ["marinegeschichte", "innenraum"]
+        },
+        {
+          "text": "Auch Steuerbehörden prägten das Haus. Das Stamp Office erhob Abgaben auf Zeitungen und Dokumente; im 19. und 20. Jahrhundert waren in Somerset House lange staatliche Register- und Finanzfunktionen untergebracht.",
+          "tags": ["verwaltung", "sozialgeschichte"]
+        },
+        {
+          "text": "Die ursprüngliche Südfront stand unmittelbar am Fluss und besaß Wasserzugänge. Erst der Bau des Victoria Embankment in den 1860er und 1870er Jahren gewann Land für Straße, Kanalisation und Promenade und rückte die Themse optisch weiter weg.",
+          "tags": ["stadtentwicklung", "ingenieurwesen"]
+        },
+        {
+          "text": "Der New Wing an der Westseite wurde im 19. Jahrhundert nach Entwürfen von James Pennethorne ergänzt. Dadurch wuchs der Komplex über Chambers' ursprüngliche Anlage hinaus, blieb aber in Material und Maßstab an den älteren Bestand gebunden.",
+          "tags": ["architektur", "baugeschichte"]
+        },
+        {
+          "text": "Visuell: Vom Strand führen drei dunkle Torbögen in den hellen, fast quadratischen Fountain Court. Die streng symmetrischen Steinfronten wirken vom Hof geschlossen; zur Themse öffnet die River Terrace den Blick über das Embankment.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Quer: Die Courtauld Gallery liegt im North Wing, ist aber ein eigener Ausstellungsbetrieb. Waterloo Bridge beginnt östlich, Temple liegt westlich und Covent Garden nördlich; die Flussfront vermittelt direkt zur South Bank.",
+          "tags": ["quer", "orientierung"]
+        },
+        {
+          "text": "LIVE: Öffentlicher Hof- und Terrassenzugang, Fontänenbetrieb, Ausstellungen, Courtauld-Eintritt, Führungen, Studios, Veranstaltungen und saisonale Installationen direkt bei Somerset House und Courtauld prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich Somerset House?",
+          "a": "Am monumentalen klassizistischen Steinbau mit drei Torbögen vom Strand und dem großen symmetrischen Innenhof. Auf der Südseite liegt die River Terrace über dem Victoria Embankment."
+        }
+      ]
+    },
+    {
+      "id": "london_westminster_cathedral",
+      "name": "Westminster Cathedral",
+      "general_info": "Die katholische Westminster Cathedral wurde 1895 bis 1903 nach John Francis Bentleys eigenständigem neo-byzantinischem Entwurf gebaut. Gestreifter Backstein, Kuppelgewölbe, Campanile und über Generationen ergänzte Mosaiken prägen den Bau.",
+      "deep_data_pool": [
+        {
+          "text": "Die Erzdiözese kaufte das Gelände 1885. Es hatte zum Areal des Tothill Fields Bridewell gehört; Fundamente der früheren Strafanstalt wurden beim Kathedralbau teilweise weiterverwendet und erklären den vergleichsweise kleinen Kryptabereich.",
+          "tags": ["geschichte", "stadtentwicklung"]
+        },
+        {
+          "text": "Nach zwei nicht ausgeführten Vorprojekten erhielt John Francis Bentley unter Kardinal Herbert Vaughan den Auftrag. Bentley studierte frühchristliche und byzantinische Kirchen und entschied sich bewusst gegen eine in England erwartbare neugotische Kathedrale.",
+          "tags": ["architektur", "geschichte"]
+        },
+        {
+          "text": "Der Grundstein wurde 1895 gelegt, der formale Entwurf 1896 gebilligt und der Bau 1903 abgeschlossen. Mehr als zwölf Millionen Ziegel kamen zum Einsatz; die schnelle Backsteinbauweise half, den großen Kirchenraum in acht Jahren zu errichten.",
+          "tags": ["baugeschichte", "material"]
+        },
+        {
+          "text": "Roter Ziegel und Bänder aus Portlandstein nehmen zugleich byzantinische Vorbilder und benachbarte Mansion Blocks auf. Die Fassade besitzt einen tiefen Mittelbogen, kleinere Tribünen und Treppentürme statt der typischen Doppeltürme gotischer Kathedralen.",
+          "tags": ["architektur", "stadtbild"]
+        },
+        {
+          "text": "Bentley plante ein breites, ununterbrochenes Langhaus mit domartigen Betongewölben. Er vermied tragendes Eisen; die massiven Ziegelwände und Pfeiler tragen die Konstruktion und erzeugen einen ungewöhnlich offenen Blick bis zum Sanktuarium.",
+          "tags": ["ingenieurwesen", "architektur"]
+        },
+        {
+          "text": "Der asymmetrische Campanile erreicht rund 87 Meter. Kardinal Vaughan lehnte Bentleys ersten Vorschlag mit zwei Glockentürmen ab; der einzelne Turm wurde dadurch zum eigenständigen vertikalen Zeichen über Victoria.",
+          "tags": ["architektur", "geschichte"]
+        },
+        {
+          "text": "Über hundert Marmorsorten verkleiden untere Wandpartien und Kapellen. Darüber bleiben große Ziegelflächen sichtbar, weil das Mosaikprogramm nicht als einmalige Ausstattung, sondern schrittweise über Jahrzehnte verwirklicht wurde.",
+          "tags": ["kunst", "innenraum"]
+        },
+        {
+          "text": "Die Mosaiken stammen deshalb aus verschiedenen Perioden und Stilauffassungen. Die vierzehn Kreuzwegstationen von Eric Gill bilden eine geschlossenere Werkgruppe; Liturgie, Grabmäler und Kapellen ergänzen den kunsthistorischen Rundgang.",
+          "tags": ["kunst", "religion"]
+        },
+        {
+          "text": "Visuell: Die rot-weiß gestreifte Fassade steht an einer freien Piazza nahe Victoria Street. Links erhebt sich der schlanke quadratische Campanile; innen fallen zuerst die dunkle Ziegelwölbung und die farbig glänzenden Marmorkapellen auf.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Quer: Westminster Abbey liegt weiter östlich und ist anglikanische Krönungskirche, nicht diese Kathedrale. Victoria Station befindet sich südwestlich; Victoria Street bildet die direkte städtebauliche Verbindung Richtung Parliament Square.",
+          "tags": ["quer", "orientierung"]
+        },
+        {
+          "text": "LIVE: Gottesdienste, Chor- und Musiktermine, Campanile-Aufzug, Beicht- und Besuchszeiten, liturgische Sperrungen, Gruppenregeln und mögliche Spenden- oder Zugangshinweise auf der offiziellen Kathedralenseite prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich Westminster Cathedral?",
+          "a": "An den waagerechten roten und weißen Backsteinstreifen, dem tiefen Eingangsbogen und dem einzelnen hohen Campanile an der Piazza nahe Victoria Station. Sie ist nicht Westminster Abbey."
+        }
+      ]
+    },
+    {
+      "id": "london_temple_church",
+      "name": "Temple Church",
+      "general_info": "Die Temple Church entstand als Londoner Kirche der Tempelritter: Der 1185 geweihte Rundbau und der 1240 geweihte rechteckige Chor verbinden normannische und frühgotische Formen. Heute gehört sie Inner und Middle Temple.",
+      "deep_data_pool": [
+        {
+          "text": "Die Tempelritter verlegten ihr Londoner Zentrum im 12. Jahrhundert an den heutigen Standort zwischen Fleet Street und Themse. Kirche, Wohn- und Wirtschaftsgebäude bildeten den englischen Hauptsitz des international organisierten Ordens.",
+          "tags": ["geschichte", "religion"]
+        },
+        {
+          "text": "Patriarch Heraclius von Jerusalem weihte die Round Church 1185 in Gegenwart Heinrichs II. Die kreisförmige Anlage erinnerte an die Grabeskirche in Jerusalem und übertrug deren religiöse Bedeutung symbolisch nach London.",
+          "tags": ["geschichte", "architektur"]
+        },
+        {
+          "text": "Der Rundbau besitzt einen inneren Arkadenring, umlaufendes Seitenschiff und einen westlichen normannischen Portalzugang. Rundbögen und frühe Spitzbogenformen dokumentieren den Übergang von normannischer Romanik zur englischen Gotik.",
+          "tags": ["architektur", "kunstgeschichte"]
+        },
+        {
+          "text": "Der größere rechteckige Chor wurde 1240 geweiht. Drei gleich hohe Schiffe, schlanke Purbeck-Marmorsäulen und spitzbogige Gewölbe erzeugen einen hallenartigen Raum, der sich deutlich vom zentralisierten Rundbau unterscheidet.",
+          "tags": ["architektur", "baugeschichte"]
+        },
+        {
+          "text": "William Marshal, erster Earl of Pembroke, liegt im Rundbau als steinernes Ritterbild. Er vermittelte im Konflikt um Magna Carta und regierte nach König Johns Tod als Regent für den jungen Heinrich III.",
+          "tags": ["geschichte", "biografie"]
+        },
+        {
+          "text": "Nach der Aufhebung des Templerordens 1312 gelangte das Areal zunächst an die Johanniter und später an die Krone. James I überließ Inner Temple und Middle Temple 1608 die Anlage unter der Bedingung, Kirche und Geistlichen zu unterhalten.",
+          "tags": ["recht", "geschichte"]
+        },
+        {
+          "text": "Eine Restaurierung im 19. Jahrhundert griff stark in Ausstattung und Erscheinung ein. Beim Luftangriff im Mai 1941 brannte die Kirche aus; Hitze beschädigte Säulen und Ritterfiguren, während die Nachkriegsarbeiten den Bau erneut grundlegend ordneten.",
+          "tags": ["baugeschichte", "kriegsschaden"]
+        },
+        {
+          "text": "Walter Godfrey leitete den Wiederaufbau nach dem Zweiten Weltkrieg. Verlorene Holzteile, Dach und Orgel wurden ersetzt; für beschädigte Marshal-Figuren liefern vor dem Krieg gefertigte Abgüsse wichtige Vergleichsbilder.",
+          "tags": ["restaurierung", "denkmalschutz"]
+        },
+        {
+          "text": "Visuell: In den Höfen des Temple ist zuerst der niedrige runde Westkörper mit kegelförmigem Dach zu suchen. Daran schließt nach Osten der längere rechteckige Chor; der reich profilierte Westzugang liegt geschützt zwischen juristischen Gebäuden.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Quer: Inner Temple und Middle Temple sind historische Inns of Court mit Kanzleien, Hallen und Gärten. Die verschachtelten Durchgänge von Fleet Street und Victoria Embankment können unabhängig von der Kirche kontrolliert oder geschlossen sein.",
+          "tags": ["quer", "orientierung", "recht"]
+        },
+        {
+          "text": "LIVE: Öffnung der Außentore, Kirchenzugang, Restaurierungsphasen, Gottesdienste, Chor- und Orgelkonzerte, Eintritt sowie fotografische Einschränkungen bei Temple Church und den beiden Inns of Court prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich Temple Church?",
+          "a": "Am niedrigen steinernen Rundbau mit kegelförmigem Dach, an den ein längerer gotischer Chor anschließt. Die Kirche liegt versteckt in den Höfen von Inner und Middle Temple."
+        }
+      ]
+    },
+    {
+      "id": "london_sky_garden",
+      "name": "Sky Garden",
+      "general_info": "Sky Garden belegt die obersten drei Ebenen des 160 Meter hohen 20 Fenchurch Street. Rafael Viñolys nach oben breiter werdender Büroturm verbindet eine öffentliche Aussichtsanlage mit bepflanzten Innenhängen und einer Außenterrasse.",
+      "deep_data_pool": [
+        {
+          "text": "Rafael Viñoly Architects entwickelten den Entwurf ab 2004 für einen kompakten Block am Rand des östlichen Hochhausclusters der City. Die umgekehrte Volumenlogik vergrößert die wertvollen oberen Büroetagen statt der Basis.",
+          "tags": ["architektur", "stadtplanung"]
+        },
+        {
+          "text": "Die gekrümmten Fassaden weiten sich nach oben aus und gaben dem Bau den Spitznamen Walkie Talkie. Die Höhe von 160 Metern bleibt unter mehreren Nachbartürmen, doch die breite Krone macht ihn in der Skyline besonders dominant.",
+          "tags": ["architektur", "visuell"]
+        },
+        {
+          "text": "Der Turm enthält 32 Büroebenen, eine zweigeschossige Lobby und den dreigeschossigen öffentlichen Bereich an der Spitze. Das Konzept verband zusätzliche Bürofläche mit einem Aussichtsort, der ein wesentlicher Teil der städtebaulichen Genehmigung war.",
+          "tags": ["nutzung", "stadtplanung"]
+        },
+        {
+          "text": "Gillespies entwarfen die Landschaft im Sky Garden. Die Pflanzung nutzt gestaffelte Terrassen und trockenheitsverträgliche Arten aus mediterranen und südafrikanischen Regionen, darunter Agapanthus, Kniphofia, Strelitzia und Lavendel.",
+          "tags": ["landschaftsarchitektur", "botanik"]
+        },
+        {
+          "text": "Der Innenraum erstreckt sich über die Ebenen 35 bis 37. Zwei bepflanzte Hänge steigen seitlich der zentralen Nutzungsbereiche an; breite Glasflächen rahmen die Stadt, während eine offene Terrasse zur Themse orientiert ist.",
+          "tags": ["architektur", "innenraum"]
+        },
+        {
+          "text": "Die verglaste, konkave Südfassade konzentrierte nach Fertigstellung Sonnenlicht auf Straßenbereiche und beschädigte unter anderem Fahrzeugteile. Ein dauerhaftes horizontales Sonnenschutzsystem wurde ergänzt, um die Reflexionen zu reduzieren.",
+          "tags": ["ingenieurwesen", "baugeschichte"]
+        },
+        {
+          "text": "Am Boden schafft die schmalere Turmbasis öffentliche Passagen, Plätze und einen kleinen Park zwischen Rood Lane und Philpot Lane. Ein separates niedrigeres Nebengebäude fasst den Block nach Süden.",
+          "tags": ["stadtplanung", "orientierung"]
+        },
+        {
+          "text": "Visuell: Vom Süden wirkt der gläserne Turm oben breiter als unten; waagerechte Lamellen bedecken die konkave Fassade. Der separate Besuchereingang liegt an der Südwestseite bei Philpot Lane und ist nicht mit der Bürolobby gleichzusetzen.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Die Aussicht erklärt Londons Schichten: Monument und mittelalterliches Straßennetz liegen nah unter dem Gebäude, Tower und Tower Bridge weiter östlich, St Paul's westlich und The Shard jenseits der Themse südlich.",
+          "tags": ["orientierung", "aussicht"]
+        },
+        {
+          "text": "Quer: 20 Fenchurch Street steht zwischen Fenchurch Street, Eastcheap, Rood Lane und Philpot Lane. Monument Station und der namensgebende Brand-Gedenkturm liegen westlich; Leadenhall Market und Lloyd's Building erreicht man nördlich.",
+          "tags": ["quer", "orientierung"]
+        },
+        {
+          "text": "LIVE: Kostenlose Besuchsfenster, spontane Verfügbarkeit, Aufenthaltsdauer, Ausweis- und Sicherheitsregeln, Öffnung der Außenterrasse, Restaurantzugang und wetterbedingte Einschränkungen ausschließlich bei Sky Garden prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich den Sky Garden?",
+          "a": "Er liegt in der breiten gläsernen Krone des nach oben ausladenden Walkie-Talkie-Turms. Der Besuchereingang befindet sich separat an der Südwestseite bei Philpot Lane."
+        }
+      ]
+    },
+    {
+      "id": "london_hampstead_heath",
+      "name": "Hampstead Heath",
+      "general_info": "Hampstead Heath ist eine über Jahrhunderte gewachsene, heute von der City of London betreute Hügellandschaft aus Wald, Wiesen, Restheide und mehr als vierzig Gewässern. Schutzkämpfe bewahrten sie vor dichter Bebauung.",
+      "deep_data_pool": [
+        {
+          "text": "Frühe Urkunden und Grenzmerkmale belegen eine lange Nutzungsgeschichte der Hochfläche zwischen Hampstead und Highgate. Alte Gräben, Grenzsteine, Wege und Baumreihen sind keine einheitliche Parkgestaltung, sondern Spuren verschiedener Eigentums- und Wirtschaftsphasen.",
+          "tags": ["geschichte", "landschaft"]
+        },
+        {
+          "text": "Die Geologie prägt den Wechsel von trockenen Höhen und feuchten Tälern: sandige Kuppen liegen über London Clay, Quellen speisen Senken und Bäche. Höhenunterschiede und Böden erklären die kleinteilige Mischung aus Heide, Wald, Gras und Wasser.",
+          "tags": ["geologie", "natur"]
+        },
+        {
+          "text": "Das Hampstead Heath Act von 1871 sicherte zentrale Flächen öffentlich und verpflichtete zur Bewahrung ihres offenen, natürlichen Charakters. Spätere Erwerbungen, darunter Parliament Hill, Kenwood und Erweiterungsflächen, formten erst schrittweise den heutigen Zusammenhang.",
+          "tags": ["geschichte", "denkmalschutz"]
+        },
+        {
+          "text": "Die City of London Corporation übernahm 1989 nach dem Ende des Greater London Council die Verantwortung. Sie verwaltet rund 275 Hektar Kernfläche als gemeinnützigen Freiraum mit Naturschutz-, Erholungs- und Kulturerbeauftrag.",
+          "tags": ["verwaltung", "landschaft"]
+        },
+        {
+          "text": "Mehr als vierzig Teiche und Wasserflächen werden erfasst. Viele entstanden als Trinkwasserreservoirs in den Tälern des Hampstead Brook und Highgate; Dämme, Überläufe und Feuchtgebiete erfüllen heute zugleich Hochwasser- und Naturschutzfunktionen.",
+          "tags": ["wasserbau", "natur"]
+        },
+        {
+          "text": "Die Männer-, Frauen- und gemischten Badeteiche sind historisch gewachsene Freiwasseranlagen, nicht identisch mit dem Parliament Hill Lido von 1938. Nutzung, Aufsicht und Wasserqualitätskontrollen unterscheiden sich je Standort.",
+          "tags": ["sozialgeschichte", "aktivitaet"]
+        },
+        {
+          "text": "Parliament Hill wurde 1888 Teil der Heath. Seine weite Sicht auf St Paul's, die City und Canary Wharf ist planerisch geschützt; der Blick verbindet eine scheinbar ländliche Vordergrundlandschaft mit der mehrere Kilometer entfernten Skyline.",
+          "tags": ["aussicht", "stadtplanung"]
+        },
+        {
+          "text": "Kenwood House am Nordrand gehört zum landschaftlichen Zusammenhang, wird jedoch von English Heritage betreut. Robert Adams klassizistische Umbauten, formale Rasenflächen und Kunstsammlung bilden einen bewussten Kontrast zu wilderen Bereichen.",
+          "tags": ["quer", "architektur"]
+        },
+        {
+          "text": "Visuell: Es gibt kein einzelnes Haupttor. Parliament Hill erkennt man an offenen Sportflächen und der steigenden Wiese; die Teichkette liegt auf der Highgate-Seite, Kenwoods weiße Villa am Nordrand und die Pergola im westlichen Hill Garden.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Die Größe macht den Ausgang entscheidend: Gospel Oak erschließt Parliament Hill, Hampstead die südwestlichen Höhen und Highgate beziehungsweise Golders Green andere Ränder. Ein Queren kann über unbefestigte, steile und nach Regen schlammige Wege führen.",
+          "tags": ["orientierung", "sicherheit"]
+        },
+        {
+          "text": "LIVE: Badezugang, Tickets, Wasserqualität, Lido-Betrieb, Weg- und Dammsperrungen, Veranstaltungen, Beleuchtung, Kenwood-Öffnung und wetterbedingte Risiken bei City of London und English Heritage prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich Hampstead Heath?",
+          "a": "Die Heath hat kein einzelnes Eingangsbauwerk. Typisch sind hügelige offene Wiesen, alte Waldstücke und Teichketten; für die Skyline-Aussicht gezielt Parliament Hill statt nur Hampstead Heath ansteuern."
+        }
+      ]
+    },
+    {
+      "id": "london_primrose_hill",
+      "name": "Primrose Hill",
+      "general_info": "Primrose Hill ist eine fast 63 Meter hohe, offene Parkkuppe nördlich von Regent's Park. Seit dem 19. Jahrhundert öffentlich gesichert, bewahrt sie einen rechtlich geschützten Panoramablick über Park, Westminster und die Londoner Skyline.",
+      "deep_data_pool": [
+        {
+          "text": "Der Hügel gehörte zum historischen königlichen Jagdgebiet nördlich Londons. Anders als die streng komponierten Bereiche von Regent's Park behielt er einen einfacheren, halbnatürlichen Charakter mit offenen Hängen und einer breiten Graskuppe.",
+          "tags": ["geschichte", "landschaft"]
+        },
+        {
+          "text": "Ein Parlamentsgesetz von 1842 sicherte das Gelände als öffentlichen Freiraum und verhinderte seine Bebauung. Der Erwerb reagierte auf das Wachstum der umliegenden Stadt und die Bedeutung der Anhöhe als Aussichtsort.",
+          "tags": ["geschichte", "denkmalschutz"]
+        },
+        {
+          "text": "Primrose Hill ist als Grade-II-Parklandschaft registriert, während Regent's Park Grade I besitzt. Die gemeinsame Verwaltung durch The Royal Parks darf daher nicht darüber hinwegtäuschen, dass beide Flächen unterschiedliche Entstehung und Gestaltung haben.",
+          "tags": ["denkmalschutz", "stadtwissen"]
+        },
+        {
+          "text": "Die Kuppe gehört zu sechs geschützten Londoner Aussichtspunkten. Planungsregeln bewerten Neubauten in Vorder-, Mittel- und Hintergrund, damit die Komposition des Panoramas und wichtige Landmarken lesbar bleiben.",
+          "tags": ["stadtplanung", "aussicht"]
+        },
+        {
+          "text": "Zwei besonders definierte Sichtkorridore zielen auf den Palace of Westminster und St Paul's Cathedral. Gehölzpflege am Gipfel hält die Hauptsicht frei; das geschützte Panorama ist daher auch Ergebnis fortlaufender Landschaftspflege.",
+          "tags": ["aussicht", "landschaftspflege"]
+        },
+        {
+          "text": "Der Blick öffnet sich vor allem nach Süden und Südosten. Regent's Park bildet den grünen Vordergrund; BT Tower, West-End-Bauten, Westminster, City-Hochhäuser und weiter östlich Canary Wharf staffeln sich je nach Sichtweite.",
+          "tags": ["orientierung", "aussicht"]
+        },
+        {
+          "text": "Auf der Gipfelkante steht eine Steinplatte mit einem Zitat nach William Blake, das auf eine visionäre Begegnung mit der Sonne anspielt. Weitere Tafeln helfen, Landmarken und die öffentliche Sicherung des Hügels einzuordnen.",
+          "tags": ["literatur", "erinnerungskultur"]
+        },
+        {
+          "text": "Visuell: Die baumfreie, langgezogene Graskuppe trägt keine Aussichtsplattform und kein Geländer. Eine gepflasterte Wegschleife und niedrige Steine markieren den höchsten Bereich; die Skyline erscheint über den südlichen Hängen.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Quer: Südlich schließen Regent's Park und London Zoo an, getrennt durch Straßen und den Regent's Canal. Nördlich bezeichnet Primrose Hill zugleich ein Wohnviertel mit viktorianischen Terrassen; Parkkuppe und Quartier sind nicht dasselbe Ziel.",
+          "tags": ["quer", "orientierung"]
+        },
+        {
+          "text": "Der Anstieg ist von allen Seiten spürbar, aber kurz. Bei Nässe sind Grasflanken rutschiger als befestigte Wege; Wind und fehlender Schatten wirken auf der offenen Kuppe stärker als in den tieferen Parkbereichen.",
+          "tags": ["sicherheit", "natur"]
+        },
+        {
+          "text": "LIVE: Tor- und Nachtzugang, temporäre Wochenendsperrungen, Veranstaltungen, Wegepflege, Wetter, Sichtweite und aktuelle Parkregeln bei The Royal Parks prüfen; Sonnenuntergang allein garantiert keinen geöffneten Gipfel.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich Primrose Hill?",
+          "a": "An der offenen, fast baumfreien Graskuppe ohne Aussichtsplattform. Oben markieren eine gepflasterte Wegkante und Steintafeln den Panoramapunkt; die Skyline liegt südlich."
+        }
+      ]
+    },
+    {
+      "id": "london_greenwich_park",
+      "name": "Greenwich Park",
+      "general_info": "Greenwich Park überlagert römische, angelsächsische und königliche Landschaftsgeschichte. Archäologische Monumente, die barocken Achsen aus der Zeit Charles' II. und das Royal Observatory formen einen steilen Park zwischen Blackheath und Themse.",
+      "deep_data_pool": [
+        {
+          "text": "Im südlichen Park lag ein romano-keltischer Tempel, der ungefähr vom späten 1. bis ins 4. Jahrhundert genutzt wurde. Archäologische Untersuchungen fanden Gebäudereste und Kultmaterial; eine mögliche römische Straße verlief in der Nähe.",
+          "tags": ["archaeologie", "geschichte"]
+        },
+        {
+          "text": "Westlich des Hauptwegs sind 31 angelsächsische Grabhügel erhalten, ursprünglich waren es vermutlich mehr als vierzig. Die etwa 1.500 Jahre alten Barrows bilden ein national geschütztes Bodendenkmal und erscheinen heute als niedrige runde Erhebungen.",
+          "tags": ["archaeologie", "visuell"]
+        },
+        {
+          "text": "Humphrey, Duke of Gloucester, erbte das Gelände 1427, umschloss den Park 1433 und errichtete auf dem Hügel einen Turm. Dessen Standort wurde später für das Royal Observatory genutzt; Greenwich entwickelte sich eng mit dem königlichen Palast an der Themse.",
+          "tags": ["geschichte", "koenigshaus"]
+        },
+        {
+          "text": "James I ersetzte im frühen 17. Jahrhundert ältere Einfriedungen durch eine hohe Ziegelmauer, von der große Teile erhalten sind. Die Mauer macht den Park trotz seiner inneren Weite als klar begrenztes königliches Gelände lesbar.",
+          "tags": ["architektur", "landschaft"]
+        },
+        {
+          "text": "Charles II beauftragte in den 1660er Jahren André Le Nôtre, den Gartenarchitekten Ludwigs XIV., mit einem formalen Plan. Symmetrische Alleen und modellierte Böschungen rahmten die zentrale Sichtachse zwischen Queen's House und Hügel.",
+          "tags": ["landschaftsarchitektur", "geschichte"]
+        },
+        {
+          "text": "Le Nôtres gezeichnetes Parterre wurde nicht vollständig ausgeführt, doch seine seitlichen Parterre-Böschungen blieben im Relief erhalten. Der sogenannte Grand Ascent bestand aus in den Hang geschnittenen Terrassen, deren Kontur später stark erodierte.",
+          "tags": ["landschaftsarchitektur", "baugeschichte"]
+        },
+        {
+          "text": "Charles II beauftragte Christopher Wren 1675 mit dem Royal Observatory. Flamsteed House steht auf älteren Burgfundamenten und wurde für den ersten Astronomer Royal, John Flamsteed, gebaut; Wissenschaft erhielt damit einen festen Platz in der königlichen Achse.",
+          "tags": ["wissenschaftsgeschichte", "architektur"]
+        },
+        {
+          "text": "Die nördliche Sichtachse läuft über Queen's House und zwischen den Flügeln des Old Royal Naval College zur Themse. Canary Wharf bildet heute den modernen Hintergrund; die historische Freihaltung erklärt die ungewöhnlich klare Staffelung.",
+          "tags": ["stadtplanung", "aussicht"]
+        },
+        {
+          "text": "Die ursprünglichen Ulmenalleen gingen durch die Ulmenkrankheit verloren. In den 1970er Jahren gepflanzte Zerreichen erwiesen sich teilweise als geschädigt; aktuelle Restaurierung ersetzt problematische Bäume phasenweise durch widerstandsfähigere Linden und Ulmen.",
+          "tags": ["natur", "landschaftspflege"]
+        },
+        {
+          "text": "Visuell: Vom Nordtor steigt eine breite Rasenachse steil zum Observatory hinauf. Queen's House liegt als heller würfelförmiger Bau am unteren Ende; auf dem Kamm markieren Flamsteed House, Zeitball und General-Wolfe-Statue den Aussichtspunkt.",
+          "tags": ["visuell", "wegweiser"]
+        },
+        {
+          "text": "Quer: Blackheath schließt südlich jenseits der Mauer an; National Maritime Museum und Queen's House liegen am Nordrand, Cutty Sark näher an der Themse. Für weniger steile Zugänge müssen längere seitliche Wege statt der direkten Hauptachse gewählt werden.",
+          "tags": ["quer", "orientierung"]
+        },
+        {
+          "text": "LIVE: Torzeiten, Landschaftsrestaurierung, gesperrte Alleen, Sport- und Veranstaltungsflächen, barriereärmere Routen sowie Zugang zu Observatory und Meridian bei The Royal Parks und Royal Museums Greenwich prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich Greenwich Park?",
+          "a": "An der steilen zentralen Rasenachse: unten das weiße Queen's House, oben Royal Observatory und Wolfe-Statue. Die Aussicht läuft weiter über das Old Royal Naval College zur Themse und nach Canary Wharf."
+        }
+      ]
+    }
+  ]
+}

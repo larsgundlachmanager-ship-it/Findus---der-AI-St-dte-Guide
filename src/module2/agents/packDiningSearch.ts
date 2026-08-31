@@ -6,6 +6,8 @@
 import { getAllPois, getFactsForPoi, haversineMeters } from '../../db/database';
 import type { Poi } from '../../db/types';
 import { parseTagsJson } from '../../services/geo/triggerPolicy';
+import { isParkingOrForestLotVenue } from '../pitch/nonFoodVenueGate';
+import { inferGastroFacetTags } from '../pitch/gastroFacetTags';
 
 export type PackDiningHit = {
   name: string;
@@ -41,7 +43,7 @@ const FOOD_CATEGORIES = new Set([
 ]);
 
 const FOOD_TAG_HINTS =
-  /\b(restaurant|cafe|café|bakery|bäckerei|baeckerei|imbiss|gastro|kulinarik|essen|food|gasthof|bistro|pizzeria|trattoria|meal_takeaway|directory|offline_lookup)\b/i;
+  /\b(restaurant|cafe|café|bakery|bäckerei|baeckerei|imbiss|gastro|kulinarik|essen|food|gasthof|bistro|pizzeria|trattoria|meal_takeaway)\b/i;
 
 /** Küche / Intent → Match-Tokens gegen Name+Tags+Facts */
 const CUISINE_TOKENS: Array<{ re: RegExp; tokens: string[] }> = [
@@ -57,11 +59,12 @@ const CUISINE_TOKENS: Array<{ re: RegExp; tokens: string[] }> = [
     re: /\b(italien|pasta|nudeln|trattoria|mediterran)\b/i,
     tokens: ['italien', 'pasta', 'pizza', 'mediterran', 'südländ', 'suedlaend'],
   },
-  { re: /\b(steak|grill|fleisch)\b/i, tokens: ['steak', 'grill', 'fleisch'] },
+  { re: /\b(steak|grill|fleisch|schnitzel)\b/i, tokens: ['steak', 'grill', 'fleisch', 'schnitzel', 'rinderfilet'] },
   { re: /\bvegan\b/i, tokens: ['vegan', 'vegetar'] },
+  { re: /\b(terrasse|biergarten)\b/i, tokens: ['terrasse', 'biergarten'] },
   { re: /\b(indisch|curry)\b/i, tokens: ['indisch', 'curry', 'india'] },
   { re: /\b(chinesisch|asia|thai|vietnam)\b/i, tokens: ['asia', 'china', 'thai', 'vietnam'] },
-  { re: /\b(frühstück|fruehstueck|breakfast|brunch)\b/i, tokens: ['frühstück', 'breakfast', 'brunch', 'cafe', 'bäck'] },
+  { re: /frühstück(?:en)?|fruehstueck(?:en)?|breakfast|brunch/i, tokens: ['frühstück', 'breakfast', 'brunch', 'cafe', 'bäck'] },
   { re: /\b(kaffee|café|cafe|coffee)\b/i, tokens: ['cafe', 'café', 'kaffee', 'coffee'] },
   { re: /\b(bäckerei|baeckerei|bäcker|bakery)\b/i, tokens: ['bäck', 'baeck', 'bakery', 'brot'] },
   { re: /\b(hafen|waterfront|aussicht|sunset|sonnenuntergang)\b/i, tokens: ['hafen', 'aussicht', 'ufer', 'see', 'strand'] },
@@ -69,6 +72,14 @@ const CUISINE_TOKENS: Array<{ re: RegExp; tokens: string[] }> = [
 
 function isFoodPoi(p: Poi): boolean {
   if (p.kind === 'approach' || p.kind === 'sub') return false;
+  if (isParkingOrForestLotVenue(p.name, `${p.category || ''} ${p.tags_json || ''}`)) return false;
+  const blob = `${p.name} ${p.category || ''} ${p.tags_json || ''}`.toLowerCase();
+  if (
+    /\b(verein|museum|kirche|denkmal|schule|rathaus)\b/.test(blob) &&
+    !FOOD_CATEGORIES.has((p.category || '').toLowerCase())
+  ) {
+    return false;
+  }
   const cat = (p.category || '').toLowerCase();
   if (FOOD_CATEGORIES.has(cat)) return true;
   const tags = parseTagsJson(p.tags_json);
@@ -88,6 +99,7 @@ function typesForPoi(p: Poi): string[] {
       out.add(t === 'café' ? 'cafe' : t);
     }
   }
+  for (const f of inferGastroFacetTags(p.name, tags)) out.add(f);
   if (!out.size) out.add('restaurant');
   return [...out];
 }

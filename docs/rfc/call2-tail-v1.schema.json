@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "yorro://schemas/call2-tail-v1",
+  "title": "Yorro Call-2 Tail (post-speech)",
+  "description": "Version 1.0.0 — nach Plain-Speech-Stream (Variante B). Modell: Gemini Lite.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["bullets"],
+  "properties": {
+    "bullets": {
+      "type": "array",
+      "items": { "type": "string", "maxLength": 80 },
+      "minItems": 0,
+      "maxItems": 3,
+      "description": "Primär-Autor für UI. Je max rucksack.ui.bulletMaxChars. Nur Fakten aus Speech."
+    },
+    "memory_extract": {
+      "type": "array",
+      "items": { "type": "string", "maxLength": 120 },
+      "maxItems": 8,
+      "description": "LTM v1 lokal — nur belegte Fakten."
+    },
+    "shortAnswers": {
+      "type": "array",
+      "items": { "type": "string", "maxLength": 32 },
+      "maxItems": 4,
+      "description": "Tap-Chips. SSOT Labels für UI. Echte Gabeln, keine Permission-Fragen."
+    },
+    "followUp": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["needed"],
+      "properties": {
+        "needed": { "type": "boolean" },
+        "reason": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "menu_prices",
+            "speisekarte_url",
+            "live_taxi_fare",
+            "event_program_detail",
+            "hotel_live_price",
+            "security_wait_time",
+            "booking_deeplink",
+            "other"
+          ]
+        },
+        "delegateTo": {
+          "type": "string",
+          "enum": ["call3", "none"],
+          "default": "none"
+        },
+        "promptSeed": {
+          "type": ["string", "null"],
+          "maxLength": 500,
+          "description": "Interner Auftrag für Call 3 — nicht UI-sichtbar."
+        }
+      }
+    },
+    "uiHints": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "cardTitle": { "type": "string", "maxLength": 40 },
+        "shortLabel": { "type": "string", "maxLength": 28 }
+      }
+    },
+    "background_tasks": {
+      "type": "array",
+      "maxItems": 4,
+      "description": "Wecker/Timer/Erinnerung — nur wenn Code bestätigt Ausführung.",
+      "items": {
+        "type": "object",
+        "required": ["type"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "SET_NATIVE_ALARM",
+              "SET_TIMER",
+              "SET_DEPARTURE_REMINDER",
+              "SET_WAKE_ALARM"
+            ]
+          },
+          "time": { "type": "string", "description": "HH:mm wenn relevant" },
+          "label": { "type": "string", "maxLength": 80 },
+          "dateIso": { "type": "string" },
+          "destName": { "type": "string" },
+          "destLat": { "type": "number" },
+          "destLng": { "type": "number" }
+        }
+      }
+    }
+  }
+}

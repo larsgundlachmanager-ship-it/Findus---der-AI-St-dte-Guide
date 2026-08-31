@@ -1,0 +1,11 @@
+ tour queue already exists.
+
+### 8. Taxi booking; flight “fly Berlin tonight” + leave-by; ticket booking
+**PARTIAL** — **Taxi:** `taxi_rideshare` job → `taxiRideshare.ts` + `wiringBattery` j25/j26: ETA, Uber deep link, `DIAL_PHONE` fallback — organizes ride, doesn’t book in-app. **Flight:** strong path — `shouldEnterFlightAdvisor` / `prepareFlightTripFollowUp` in `flightTripAdvisor.ts` with extensive `flightTripIntent.smoke.ts` (leave-by, wake, Berlin/London). **Tickets:** partner OPEN_URL / affiliate chips, not native checkout. Wangerooge island flights delegate to `inselfliegerAdvisor`, not generic flight board.
+
+---
+
+### Call-1–2–3 pipeline: what it actually added
+| Layer | Delivers | Doesn’t deliver alone |
+|---|---|---|
+| **Call-1** (`orchestrateSlots`, `dispatchJobs`) | Slot split, parallel job IDs, compound turn ownership, think-ahead hints | Calendar ingest, t

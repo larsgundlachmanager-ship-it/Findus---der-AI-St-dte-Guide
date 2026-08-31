@@ -1,0 +1,2253 @@
+{
+  "generated_at": "2026-08-28T07:10:50.020Z",
+  "summary": {
+    "city_id": "kiel",
+    "checked": 75,
+    "ok": 25,
+    "check": 21,
+    "bad": 29,
+    "errors": 0,
+    "max_delta_m": 180,
+    "city_halo_m": 28000,
+    "story_only": true
+  },
+  "rows": [
+    {
+      "id": "kiel_nikolaikirche",
+      "name": "Nikolaikirche",
+      "category": "kirche",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.32280236,
+        "lng": 10.140262131999998
+      },
+      "query": "Nikolaikirche, Kiel, Germany",
+      "osm": {
+        "lat": 54.1579714,
+        "lng": 10.4172496,
+        "display_name": "Nikolaikirche, Markt, Plön, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 25688,
+      "from_city_m": 1136,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "kiel_offene_kirche_st_nikolai_in_kiel_ev_luth_kirchengemeinde_st_nikolai_zu_kiel"
+      ]
+    },
+    {
+      "id": "kiel_lotsenstation_kiel_holtenau",
+      "name": "Lotsenstation Kiel-Holtenau",
+      "category": "hafen",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.3687628,
+        "lng": 10.140168000000001
+      },
+      "query": "Lotsenstation Kiel-Holtenau, Kiel, Germany",
+      "osm": {
+        "lat": 54.4994109,
+        "lng": 10.2737008,
+        "display_name": "Lotsenstation, Deutschland",
+        "class": "man_made",
+        "type": "pier",
+        "provider": "photon"
+      },
+      "delta_m": 16901,
+      "from_city_m": 5180,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "kiel_marine_ehrenmal_laboe",
+      "name": "Marine-Ehrenmal Laboe",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.412171006250006,
+        "lng": 10.230763643749999
+      },
+      "query": "Marine-Ehrenmal Laboe, Kiel, Germany",
+      "osm": {
+        "lat": 54.3150602,
+        "lng": 10.0991902,
+        "display_name": "Marine-Ehrenmal in Laboe, A 215, Südfriedhof, Kiel, Schleswig-Holstein, 24114, Deutschland",
+        "class": "information",
+        "type": "board",
+        "importance": 0.00007370031280990338,
+        "osm_type": "node",
+        "osm_id": 9910122831,
+        "provider": "nominatim"
+      },
+      "delta_m": 13757,
+      "from_city_m": 12109,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "kiel_kiel_norwegenkai",
+      "name": "Kiel (Norwegenkai)",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.3160177923077,
+        "lng": 10.13898146923077
+      },
+      "query": "Kiel, Kiel, Germany",
+      "osm": {
+        "lat": 54.3458218,
+        "lng": 10.113073,
+        "display_name": "Christian-Albrechts-Universität zu Kiel, Kronshagener Weg, Französisches Viertel, Schreventeich, Kiel, Schleswig-Holstein, 24116, Deutschland",
+        "class": "amenity",
+        "type": "university",
+        "importance": 0.5972578877744925,
+        "osm_type": "relation",
+        "osm_id": 1664397,
+        "provider": "nominatim"
+      },
+      "delta_m": 3715,
+      "from_city_m": 1327,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "kiel_color_line_i_kiel"
+      ]
+    },
+    {
+      "id": "kiel_stadt_und_schifffahrtsmuseum",
+      "name": "Stadt- und Schifffahrtsmuseum",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.32427531999999,
+        "lng": 10.140764299999999
+      },
+      "query": "Stadt-, Kiel, Germany",
+      "osm": {
+        "lat": 54.3349785,
+        "lng": 10.1927025,
+        "display_name": "Erziehungsberatung Stadt Kiel, Gießkannenweg, Neumühlen-Dietrichsdorf, Kiel, Schleswig-Holstein, 24149, Deutschland",
+        "class": "amenity",
+        "type": "social_facility",
+        "importance": 0.00007370031280990338,
+        "osm_type": "node",
+        "osm_id": 413964182,
+        "provider": "nominatim"
+      },
+      "delta_m": 3572,
+      "from_city_m": 1172,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "kiel_museumshafen_kiel_e_v",
+      "name": "Museumshafen Kiel e.V.",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.31473646190476,
+        "lng": 10.13811697142857
+      },
+      "query": "Museumshafen Kiel e.V., Kiel, Germany",
+      "osm": {
+        "lat": 54.2981682,
+        "lng": 10.0963617,
+        "display_name": "KGV Kiel-Hassee e.V. Anlage Drachensee, Kiel, Deutschland",
+        "class": "landuse",
+        "type": "allotments",
+        "provider": "photon"
+      },
+      "delta_m": 3276,
+      "from_city_m": 1377,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "kiel_nord_ostsee_kanal",
+      "name": "Nord-Ostsee-Kanal",
+      "category": "hafen",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.3701186,
+        "lng": 10.114140800000001
+      },
+      "query": "Nord-Ostsee-Kanal, Kiel, Germany",
+      "osm": {
+        "lat": 54.3631034,
+        "lng": 10.1583082,
+        "display_name": "Nord-Ostsee-Kanal, Holtenau, Kiel, Schleswig-Holstein, Deutschland",
+        "class": "waterway",
+        "type": "canal",
+        "importance": 0.13337396429388873,
+        "osm_type": "way",
+        "osm_id": 1460296571,
+        "provider": "nominatim"
+      },
+      "delta_m": 2966,
+      "from_city_m": 5237,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "kiel_theater_kiel_junges_theater",
+      "name": "Theater Kiel | Junges Theater",
+      "category": "theater",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.314073175000004,
+        "lng": 10.1559980125
+      },
+      "query": "Theater Kiel, Kiel, Germany",
+      "osm": {
+        "lat": 54.3265025,
+        "lng": 10.1286919,
+        "display_name": "Theater Die Komödianten, 43, Wilhelminenstraße, Brunswik, Damperhof, Kiel, Schleswig-Holstein, 24103, Deutschland",
+        "class": "amenity",
+        "type": "theatre",
+        "importance": 0.12743869505990896,
+        "osm_type": "node",
+        "osm_id": 2717412823,
+        "provider": "nominatim"
+      },
+      "delta_m": 2246,
+      "from_city_m": 2387,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "kiel_cau_kiel_sportzentrum",
+      "name": "CAU Kiel | Sportzentrum",
+      "category": "denkmal",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.343578680769234,
+        "lng": 10.11255906923077
+      },
+      "query": "CAU Kiel, Kiel, Germany",
+      "osm": {
+        "lat": 54.3302335,
+        "lng": 10.1377379,
+        "display_name": "Universitätsbibliothek der CAU Kiel - Medizinische Abteilung, Breiter Weg, Brunswik, Kiel, Schleswig-Holstein, 24105, Deutschland",
+        "class": "amenity",
+        "type": "library",
+        "importance": 0.00007370031280990338,
+        "osm_type": "node",
+        "osm_id": 2414191634,
+        "provider": "nominatim"
+      },
+      "delta_m": 2206,
+      "from_city_m": 2351,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "kiel_uni_schwimmhalle",
+        "kiel_christian_albrechts_universitat"
+      ]
+    },
+    {
+      "id": "kiel_personenfahre_kiel_holtenau",
+      "name": "Personenfähre Kiel-Holtenau",
+      "category": "hafen",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.3675764,
+        "lng": 10.1330902
+      },
+      "query": "Personenfähre Kiel-Holtenau, Kiel, Germany",
+      "osm": {
+        "lat": 54.3796321,
+        "lng": 10.1447445,
+        "display_name": "Flughafen Kiel-Holtenau, Westenhofstraße, Kiel, Deutschland",
+        "class": "aeroway",
+        "type": "aerodrome",
+        "provider": "photon"
+      },
+      "delta_m": 1538,
+      "from_city_m": 4969,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "kiel_landeshauptstadt_kiel_rathaus_hopfenstrasse",
+      "name": "Landeshauptstadt Kiel | Rathaus Hopfenstraße",
+      "category": "denkmal",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.3155405,
+        "lng": 10.1289242
+      },
+      "query": "Landeshauptstadt Kiel, Kiel, Germany",
+      "osm": {
+        "lat": 54.3291847,
+        "lng": 10.1283684,
+        "display_name": "Landeshauptstadt Kiel Tiefbauamt Abteilung Stadtentwässerung, 99-105, Knooper Weg, Brunswik, Schreventeich, Kiel, Schleswig-Holstein, 24116, Deutschland",
+        "class": "office",
+        "type": "government",
+        "importance": 0.00007370031280990338,
+        "osm_type": "node",
+        "osm_id": 8388138796,
+        "provider": "nominatim"
+      },
+      "delta_m": 1518,
+      "from_city_m": 950,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "kiel_dres_lennart_u_janna_kloster_ursula_osterkamp_internisten_hausarzte_kiel",
+      "name": "Dres. Lennart u. Janna Kloster Ursula Osterkamp Internisten-Hausärzte Kiel",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.316727285714286,
+        "lng": 10.132849114285715
+      },
+      "query": "Dres. Lennart u., Kiel, Germany",
+      "osm": {
+        "lat": 54.3288058,
+        "lng": 10.1346279,
+        "display_name": "m.a.n.d.u., Dreiecksplatz, Kiel, Deutschland",
+        "class": "leisure",
+        "type": "fitness_centre",
+        "provider": "photon"
+      },
+      "delta_m": 1348,
+      "from_city_m": 980,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "kiel_leuchtturm_kiel_holtenau",
+      "name": "Leuchtturm Kiel-Holtenau",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.36923806666666,
+        "lng": 10.153934549999997
+      },
+      "query": "Leuchtturm Kiel-Holtenau, Kiel, Germany",
+      "osm": {
+        "lat": 54.3796321,
+        "lng": 10.1447445,
+        "display_name": "Flughafen Kiel-Holtenau, Westenhofstraße, Kiel, Deutschland",
+        "class": "aeroway",
+        "type": "aerodrome",
+        "provider": "photon"
+      },
+      "delta_m": 1300,
+      "from_city_m": 5494,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "kiel_kieler_forde",
+      "name": "Kieler Förde",
+      "category": "hafen",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.37305975742572,
+        "lng": 10.17767040052418
+      },
+      "query": "Kieler Förde, Kiel, Germany",
+      "osm": {
+        "lat": 54.3834191,
+        "lng": 10.1849922,
+        "display_name": "Kieler Förde, Heikendorf, Schrevenborn, Kreis Plön, Schleswig-Holstein, 24226, Deutschland",
+        "class": "natural",
+        "type": "bay",
+        "importance": 0.4238774159986079,
+        "osm_type": "relation",
+        "osm_id": 19039474,
+        "provider": "nominatim"
+      },
+      "delta_m": 1246,
+      "from_city_m": 6579,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "kiel_theater_kiel_schauspielhaus",
+      "name": "Theater Kiel | Schauspielhaus",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.336964058333336,
+        "lng": 10.132924375000002
+      },
+      "query": "Theater Kiel, Kiel, Germany",
+      "osm": {
+        "lat": 54.3265025,
+        "lng": 10.1286919,
+        "display_name": "Theater Die Komödianten, 43, Wilhelminenstraße, Brunswik, Damperhof, Kiel, Schleswig-Holstein, 24103, Deutschland",
+        "class": "amenity",
+        "type": "theatre",
+        "importance": 0.12743869505990896,
+        "osm_type": "node",
+        "osm_id": 2717412823,
+        "provider": "nominatim"
+      },
+      "delta_m": 1195,
+      "from_city_m": 1657,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "kiel_theater_kiel_konzerthaus_am_schloss",
+      "name": "Theater Kiel | Konzerthaus am Schloss",
+      "category": "theater",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.323746963636374,
+        "lng": 10.142959568181816
+      },
+      "query": "Theater Kiel, Kiel, Germany",
+      "osm": {
+        "lat": 54.3265025,
+        "lng": 10.1286919,
+        "display_name": "Theater Die Komödianten, 43, Wilhelminenstraße, Brunswik, Damperhof, Kiel, Schleswig-Holstein, 24103, Deutschland",
+        "class": "amenity",
+        "type": "theatre",
+        "importance": 0.12743869505990896,
+        "osm_type": "node",
+        "osm_id": 2717412823,
+        "provider": "nominatim"
+      },
+      "delta_m": 975,
+      "from_city_m": 1311,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "kiel_seegarten",
+        "kiel_kieler_schloss"
+      ]
+    },
+    {
+      "id": "kiel_strand_falckenstein",
+      "name": "Strand Falckenstein",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.40523634,
+        "lng": 10.18911712
+      },
+      "query": "Strand Falckenstein, Kiel, Germany",
+      "osm": {
+        "lat": 54.413686,
+        "lng": 10.185978,
+        "display_name": "FKK Strand Falckenstein, Schilksee, Dorf Pries, Kiel, Schleswig-Holstein, 24159, Deutschland",
+        "class": "natural",
+        "type": "beach",
+        "importance": 0.10674036697947659,
+        "osm_type": "node",
+        "osm_id": 3012372661,
+        "provider": "nominatim"
+      },
+      "delta_m": 961,
+      "from_city_m": 10075,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "kiel_wochenmarkt_holtenau",
+      "name": "Wochenmarkt Holtenau",
+      "category": "hafen",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.3730847,
+        "lng": 10.1370539
+      },
+      "query": "Wochenmarkt Holtenau, Kiel, Germany",
+      "osm": {
+        "lat": 54.3796321,
+        "lng": 10.1447445,
+        "display_name": "Flughafen Kiel-Holtenau, Westenhofstraße, Kiel, Deutschland",
+        "class": "aeroway",
+        "type": "aerodrome",
+        "provider": "photon"
+      },
+      "delta_m": 882,
+      "from_city_m": 5614,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "kiel_kieler_leuchtturm_evangelische_freikirche",
+      "name": "Kieler Leuchtturm - Evangelische Freikirche",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.32833399,
+        "lng": 10.13294095
+      },
+      "query": "Kieler Leuchtturm, Kiel, Germany",
+      "osm": {
+        "lat": 54.325792,
+        "lng": 10.1202253,
+        "display_name": "„Kieler Leuchtturm“ Gemeinde, 63, Eckernförder Straße, Französisches Viertel, Schreventeich, Kiel, Schleswig-Holstein, 24116, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.00007370031280990338,
+        "osm_type": "node",
+        "osm_id": 7453011625,
+        "provider": "nominatim"
+      },
+      "delta_m": 872,
+      "from_city_m": 866,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "kiel_badestelle_kiellinie",
+      "name": "Badestelle Kiellinie",
+      "category": "hafen",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.3322657,
+        "lng": 10.1519663
+      },
+      "query": "Badestelle Kiellinie, Kiel, Germany",
+      "osm": {
+        "lat": 54.3377285,
+        "lng": 10.1572701,
+        "display_name": "Kiellinie, Kiel, Deutschland",
+        "class": "highway",
+        "type": "pedestrian",
+        "provider": "photon"
+      },
+      "delta_m": 698,
+      "from_city_m": 2140,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "kiel_sportboothafen_seefischmarkt",
+      "name": "Sportboothafen-Seefischmarkt",
+      "category": "markt",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.329537099999996,
+        "lng": 10.173811599999999
+      },
+      "query": "Sportboothafen-Seefischmarkt, Kiel, Germany",
+      "osm": {
+        "lat": 54.3254038,
+        "lng": 10.1787871,
+        "display_name": "Seefischmarkt, Schönberger Straße, Kiel, Deutschland",
+        "class": "highway",
+        "type": "bus_stop",
+        "provider": "photon"
+      },
+      "delta_m": 562,
+      "from_city_m": 3382,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "kiel_cau_kiel_medizin_und_pharmaziehistorische_sammlung",
+      "name": "CAU Kiel | Medizin- und Pharmaziehistorische Sammlung",
+      "category": "museum",
+      "place_tier": 3,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.3276901,
+        "lng": 10.143822500000002
+      },
+      "query": "CAU Kiel, Kiel, Germany",
+      "osm": {
+        "lat": 54.3302335,
+        "lng": 10.1377379,
+        "display_name": "Universitätsbibliothek der CAU Kiel - Medizinische Abteilung, Breiter Weg, Brunswik, Kiel, Schleswig-Holstein, 24105, Deutschland",
+        "class": "amenity",
+        "type": "library",
+        "importance": 0.00007370031280990338,
+        "osm_type": "node",
+        "osm_id": 2414191634,
+        "provider": "nominatim"
+      },
+      "delta_m": 485,
+      "from_city_m": 1450,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "kiel_schleusen_holtenau",
+      "name": "Schleusen Holtenau",
+      "category": "hafen",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.36684078,
+        "lng": 10.14089098
+      },
+      "query": "Schleusen Holtenau, Kiel, Germany",
+      "osm": {
+        "lat": 54.3700311,
+        "lng": 10.1402483,
+        "display_name": "Schleusenwiese, Holtenau, Kiel, Schleswig-Holstein, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "importance": 0.08007370031280991,
+        "osm_type": "way",
+        "osm_id": 4045583,
+        "provider": "nominatim"
+      },
+      "delta_m": 357,
+      "from_city_m": 4983,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "kiel_kiel_hbf",
+      "name": "Kiel Hbf",
+      "category": "bahnhof",
+      "place_tier": 1,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.31658746097561,
+        "lng": 10.130899453658536
+      },
+      "query": "Kiel Hbf, Kiel, Germany",
+      "osm": {
+        "lat": 54.3134725,
+        "lng": 10.130965,
+        "display_name": "Kiel Hauptbahnhof, 25-27, Sophienblatt, Südfriedhof, Kiel, Schleswig-Holstein, 24114, Deutschland",
+        "class": "railway",
+        "type": "station",
+        "importance": 0.4025263861160931,
+        "osm_type": "node",
+        "osm_id": 4257641280,
+        "provider": "nominatim"
+      },
+      "delta_m": 346,
+      "from_city_m": 913,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "kiel_sports_club_kiel"
+      ]
+    },
+    {
+      "id": "kiel_christian_albrechts_universitat",
+      "name": "Christian-Albrechts-Universität",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.343578680769234,
+        "lng": 10.11255906923077
+      },
+      "query": "Christian-Albrechts-Universität, Kiel, Germany",
+      "osm": {
+        "lat": 54.3458218,
+        "lng": 10.113073,
+        "display_name": "Christian-Albrechts-Universität zu Kiel, Langenbeckstraße, Philosophenviertel, Schreventeich, Kiel, Schleswig-Holstein, 24116, Deutschland",
+        "class": "amenity",
+        "type": "university",
+        "importance": 0.5972578877744925,
+        "osm_type": "relation",
+        "osm_id": 1664397,
+        "provider": "nominatim"
+      },
+      "delta_m": 252,
+      "from_city_m": 2351,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "kiel_cau_kiel_sportzentrum",
+        "kiel_uni_schwimmhalle"
+      ]
+    },
+    {
+      "id": "kiel_botanischer_garten",
+      "name": "Botanischer Garten",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.347162319999995,
+        "lng": 10.11340768
+      },
+      "query": "Botanischer Garten, Kiel, Germany",
+      "osm": {
+        "lat": 54.3474631,
+        "lng": 10.11719,
+        "display_name": "Botanischer Garten, Ravensberg, Kiel, Schleswig-Holstein, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "importance": 0.2574973608523206,
+        "osm_type": "way",
+        "osm_id": 12829697,
+        "provider": "nominatim"
+      },
+      "delta_m": 247,
+      "from_city_m": 2723,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "kiel_kiel_hauptbahnhof",
+      "name": "Kiel Hauptbahnhof",
+      "category": "bahnhof",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.315364951351356,
+        "lng": 10.132080005405406
+      },
+      "query": "Kiel Hauptbahnhof, Kiel, Germany",
+      "osm": {
+        "lat": 54.3134725,
+        "lng": 10.130965,
+        "display_name": "Kiel Hauptbahnhof, 25-27, Sophienblatt, Südfriedhof, Kiel, Schleswig-Holstein, 24114, Deutschland",
+        "class": "railway",
+        "type": "station",
+        "importance": 0.4025263861160931,
+        "osm_type": "node",
+        "osm_id": 4257641280,
+        "provider": "nominatim"
+      },
+      "delta_m": 223,
+      "from_city_m": 1069,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "kiel_parkplatz_am_bahnhof",
+        "kiel_platz_der_kieler_matrosen"
+      ]
+    },
+    {
+      "id": "kiel_olympiazentrum_schilksee",
+      "name": "Olympiazentrum Schilksee",
+      "category": "sport",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.42767937333333,
+        "lng": 10.16939058
+      },
+      "query": "Olympiazentrum Schilksee, Kiel, Germany",
+      "osm": {
+        "lat": 54.4259413,
+        "lng": 10.1680525,
+        "display_name": "Schilksee, Olympiazentrum, Tempest, Hof Heisch, Schilksee, Kiel, Schleswig-Holstein, 24159, Deutschland",
+        "class": "highway",
+        "type": "bus_stop",
+        "importance": 0.00007370031280990338,
+        "osm_type": "node",
+        "osm_id": 471227388,
+        "provider": "nominatim"
+      },
+      "delta_m": 212,
+      "from_city_m": 11994,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "kiel_aussichtsplattform_schleuse",
+      "name": "Aussichtsplattform Schleuse",
+      "category": "hafen",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.3652014,
+        "lng": 10.1391447
+      },
+      "query": "Aussichtsplattform Schleuse, Kiel, Germany",
+      "osm": {
+        "lat": 54.3655443,
+        "lng": 10.141877,
+        "display_name": "neue Schleuse Kiel-Holtenau, Maklerstraße, Kiel, Deutschland",
+        "class": "lock",
+        "type": "yes",
+        "provider": "photon"
+      },
+      "delta_m": 181,
+      "from_city_m": 4779,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "kiel_kieler_schifffahrtsmuseum_fischhalle",
+      "name": "Kieler Schifffahrtsmuseum Fischhalle",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.32276023125,
+        "lng": 10.14363145625
+      },
+      "query": "Kieler Schifffahrtsmuseum Fischhalle, Kiel",
+      "osm": {
+        "lat": 47.2618346,
+        "lng": 11.3796226,
+        "display_name": "Tierarztpraxis für Zahnheilkunde und Kieferchirurgie Dr. Nina Spyra, Fischnalerstraße, Innsbruck, Österreich",
+        "class": "amenity",
+        "type": "veterinary",
+        "provider": "photon"
+      },
+      "delta_m": 789898,
+      "from_city_m": 1354,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "kiel_park_klinik_gmbh",
+      "name": "Park-Klinik GmbH",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.32668542222222,
+        "lng": 10.125796066666666
+      },
+      "query": "Park-Klinik GmbH, Kiel, Germany",
+      "osm": {
+        "lat": 47.9207251,
+        "lng": 7.688364,
+        "display_name": "Packi Klinik Biokinematik GmbH, Herbert-Hellmann-Allee, Bad Krozingen, Deutschland",
+        "class": "building",
+        "type": "yes",
+        "provider": "photon"
+      },
+      "delta_m": 732223,
+      "from_city_m": 425,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "kiel_skulptur_werftarbeiter_von_walter_rossler_1959",
+      "name": "Skulptur \"Werftarbeiter\" von Walter Rössler (1959)",
+      "category": "hafen",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.324720019999994,
+        "lng": 10.14268504
+      },
+      "query": "Skulptur \"Werftarbeiter\" von, Kiel, Germany",
+      "osm": {
+        "lat": 51.5421821,
+        "lng": 7.3331497,
+        "display_name": "Skulptur \"Kreisel\" von Rolf Kiefer, Frohlinder Straße, Castrop-Rauxel, Deutschland",
+        "class": "tourism",
+        "type": "artwork",
+        "provider": "photon"
+      },
+      "delta_m": 362132,
+      "from_city_m": 1301,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city",
+        "duplicate_center"
+      ],
+      "twins": [
+        "kiel_skulptur_zar_peter_iii"
+      ]
+    },
+    {
+      "id": "kiel_heiligengeistkirche",
+      "name": "Heiligengeistkirche",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.33558707333334,
+        "lng": 10.132881986666666
+      },
+      "query": "Heiligengeistkirche, Kiel, Germany",
+      "osm": {
+        "lat": 53.5832935,
+        "lng": 10.0410977,
+        "display_name": "Heiligengeistkirche, Brucknerstraße, Hamburg, Deutschland",
+        "class": "building",
+        "type": "apartments",
+        "provider": "photon"
+      },
+      "delta_m": 83866,
+      "from_city_m": 1516,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city",
+        "duplicate_center"
+      ],
+      "twins": [
+        "kiel_ansgarkirche",
+        "kiel_anscharkirche"
+      ]
+    },
+    {
+      "id": "kiel_offene_kirche_st_nikolai_in_kiel_ev_luth_kirchengemeinde_st_nikolai_zu_kiel",
+      "name": "Offene Kirche St. Nikolai in Kiel - Ev.-Luth. Kirchengemeinde St. Nikolai zu Kiel",
+      "category": "kirche",
+      "place_tier": 1,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.32280236,
+        "lng": 10.140262131999998
+      },
+      "query": "Offene Kirche St. Nikolai in, Kiel, Germany",
+      "osm": {
+        "lat": 54.7829865,
+        "lng": 9.4355124,
+        "display_name": "Informationstafel der Kirche St. Nikolai, Nikolaikirchhof, Flensburg, Deutschland",
+        "class": "information",
+        "type": "board",
+        "provider": "photon"
+      },
+      "delta_m": 68438,
+      "from_city_m": 1136,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city",
+        "duplicate_center"
+      ],
+      "twins": [
+        "kiel_nikolaikirche"
+      ]
+    },
+    {
+      "id": "kiel_sankt_elisabeth_krankenhaus",
+      "name": "Sankt Elisabeth Krankenhaus",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.31698928947368,
+        "lng": 10.127108557894735
+      },
+      "query": "Sankt Elisabeth Krankenhaus, Kiel, Germany",
+      "osm": {
+        "lat": 54.1384268,
+        "lng": 10.6106838,
+        "display_name": "Sankt Elisabeth Krankenhaus, Plöner Straße, Eutin, Deutschland",
+        "class": "amenity",
+        "type": "hospital",
+        "provider": "photon"
+      },
+      "delta_m": 37178,
+      "from_city_m": 755,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "kiel_anscharkirche",
+      "name": "Anscharkirche",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.33558707333334,
+        "lng": 10.132881986666666
+      },
+      "query": "Anscharkirche, Kiel, Germany",
+      "osm": {
+        "lat": 54.075643,
+        "lng": 9.9853351,
+        "display_name": "Anscharkirche, Am Alten Kirchhof, Neumünster, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 30456,
+      "from_city_m": 1516,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city",
+        "duplicate_center"
+      ],
+      "twins": [
+        "kiel_ansgarkirche",
+        "kiel_heiligengeistkirche"
+      ]
+    },
+    {
+      "id": "kiel_fordeblick_park_an_der_kiellinie_b1",
+      "name": "Fördeblick Park an der Kiellinie B1",
+      "category": "hafen",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.33085926666667,
+        "lng": 10.150391916666667
+      },
+      "query": "Fördeblick Park an der Kiellinie, Kiel, Germany",
+      "osm": {
+        "lat": 54.3320819,
+        "lng": 10.1519278,
+        "display_name": "Badesteg Kiellinie, Kiellinie, Kiel, Deutschland",
+        "class": "leisure",
+        "type": "swimming_area",
+        "provider": "photon"
+      },
+      "delta_m": 169,
+      "from_city_m": 1979,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "kiel_fordeblick_aussichtsplattform_mit_sitzflachen"
+      ]
+    },
+    {
+      "id": "kiel_universitatsklinikum_schleswig_holstein_campus_kiel",
+      "name": "Universitätsklinikum Schleswig-Holstein, Campus Kiel",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.330294200000004,
+        "lng": 10.140588560000001
+      },
+      "query": "Universitätsklinikum Schleswig-Holstein, Campus Kiel, Kiel, Germany",
+      "osm": {
+        "lat": 54.33049,
+        "lng": 10.1428842,
+        "display_name": "Universitätsklinikum Schleswig-Holstein - Campus Kiel, Arnold-Heller-Straße, Kiel, Deutschland",
+        "class": "amenity",
+        "type": "hospital",
+        "provider": "photon"
+      },
+      "delta_m": 150,
+      "from_city_m": 1394,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "kiel_moorteichwiese",
+      "name": "Moorteichwiese",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.308599040000004,
+        "lng": 10.11930714
+      },
+      "query": "Moorteichwiese, Kiel, Germany",
+      "osm": {
+        "lat": 54.3096848,
+        "lng": 10.1205561,
+        "display_name": "Moorteichwiese, Südfriedhof, Kiel, Schleswig-Holstein, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "importance": 0.1507975276546128,
+        "osm_type": "way",
+        "osm_id": 28739316,
+        "provider": "nominatim"
+      },
+      "delta_m": 145,
+      "from_city_m": 1649,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "kiel_stadtischen_krankenhaus_kiel_babyklappe",
+      "name": "Städtischen Krankenhaus Kiel: Babyklappe",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.32239813333334,
+        "lng": 10.11442455
+      },
+      "query": "Städtischen Krankenhaus Kiel: Babyklappe, Kiel, Germany",
+      "osm": {
+        "lat": 54.3228203,
+        "lng": 10.1163371,
+        "display_name": "Städtisches Krankenhaus Kiel, Chemnitzstraße, Kiel, Deutschland",
+        "class": "amenity",
+        "type": "hospital",
+        "provider": "photon"
+      },
+      "delta_m": 133,
+      "from_city_m": 550,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "kiel_dusternbrooker_geholz",
+      "name": "Düsternbrooker Gehölz",
+      "category": "aussicht",
+      "place_tier": 1,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.342126099999994,
+        "lng": 10.1521295
+      },
+      "query": "Düsternbrooker Gehölz, Kiel, Germany",
+      "osm": {
+        "lat": 54.3411056,
+        "lng": 10.1514729,
+        "display_name": "Düsternbrooker Gehölz, Düsternbrook, Kiel, Schleswig-Holstein, Deutschland",
+        "class": "natural",
+        "type": "wood",
+        "importance": 0.16273786379520622,
+        "osm_type": "relation",
+        "osm_id": 5604964,
+        "provider": "nominatim"
+      },
+      "delta_m": 121,
+      "from_city_m": 2830,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "kiel_werftpark",
+      "name": "Werftpark",
+      "category": "hafen",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.3141022,
+        "lng": 10.1578568
+      },
+      "query": "Werftpark, Kiel, Germany",
+      "osm": {
+        "lat": 54.3149951,
+        "lng": 10.1570192,
+        "display_name": "Werftpark, Ellerbek, Kiel, Schleswig-Holstein, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "importance": 0.13618373728802152,
+        "osm_type": "way",
+        "osm_id": 24300751,
+        "provider": "nominatim"
+      },
+      "delta_m": 113,
+      "from_city_m": 2495,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "kiel_schlossgarten",
+      "name": "Schlossgarten",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.32636444,
+        "lng": 10.14348154
+      },
+      "query": "Schlossgarten, Kiel, Germany",
+      "osm": {
+        "lat": 54.3269276,
+        "lng": 10.1446475,
+        "display_name": "Schlossgarten, Düsternbrook, Kiel, Schleswig-Holstein, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "importance": 0.1507975276546128,
+        "osm_type": "way",
+        "osm_id": 28081091,
+        "provider": "nominatim"
+      },
+      "delta_m": 98,
+      "from_city_m": 1386,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "kiel_hno_klinik_flechsig",
+      "name": "HNO Klinik Flechsig",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.32364105714286,
+        "lng": 10.116993628571427
+      },
+      "query": "HNO Klinik Flechsig, Kiel, Germany",
+      "osm": {
+        "lat": 54.322823,
+        "lng": 10.1167557,
+        "display_name": "Flechsig Klinik für HNO-Heilkunde, Hasseldieksdammer Weg, Dichterviertel, Schreventeich, Kiel, Schleswig-Holstein, 24116, Deutschland",
+        "class": "amenity",
+        "type": "clinic",
+        "importance": 0.00007370031280990338,
+        "osm_type": "node",
+        "osm_id": 8402254945,
+        "provider": "nominatim"
+      },
+      "delta_m": 92,
+      "from_city_m": 376,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "kiel_forstbaumschule",
+      "name": "Forstbaumschule",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.34666437837835,
+        "lng": 10.142421541891888
+      },
+      "query": "Forstbaumschule, Kiel, Germany",
+      "osm": {
+        "lat": 54.3474068,
+        "lng": 10.1425789,
+        "display_name": "Forstbaumschule, Düsternbrook, Kiel, Schleswig-Holstein, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "importance": 0.1679799034751623,
+        "osm_type": "way",
+        "osm_id": 12140838,
+        "provider": "nominatim"
+      },
+      "delta_m": 83,
+      "from_city_m": 2894,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "kiel_kreuzfahrtterminal_ostseekai",
+      "name": "Kreuzfahrtterminal Ostseekai",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.325143044444445,
+        "lng": 10.14567825
+      },
+      "query": "Kreuzfahrtterminal Ostseekai, Kiel, Germany",
+      "osm": {
+        "lat": 54.3257197,
+        "lng": 10.1464776,
+        "display_name": "Ostseekai, Düsternbrooker Weg, Kiel, Deutschland",
+        "class": "amenity",
+        "type": "ferry_terminal",
+        "provider": "photon"
+      },
+      "delta_m": 82,
+      "from_city_m": 1500,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "kiel_seegarten",
+      "name": "Seegarten",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.32375813076924,
+        "lng": 10.142931446153844
+      },
+      "query": "Seegarten, Kiel, Germany",
+      "osm": {
+        "lat": 54.3235156,
+        "lng": 10.143832,
+        "display_name": "Seegarten, Ostseekai, Wall, Altstadt, Kiel, Schleswig-Holstein, 24103, Deutschland",
+        "class": "highway",
+        "type": "bus_stop",
+        "importance": 0.00007370031280990338,
+        "osm_type": "node",
+        "osm_id": 480500263,
+        "provider": "nominatim"
+      },
+      "delta_m": 64,
+      "from_city_m": 1309,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "kiel_theater_kiel_konzerthaus_am_schloss",
+        "kiel_kieler_schloss"
+      ]
+    },
+    {
+      "id": "kiel_hornbrucke",
+      "name": "Hörnbrücke",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.31507192,
+        "lng": 10.1351342
+      },
+      "query": "Hörnbrücke, Kiel, Germany",
+      "osm": {
+        "lat": 54.3148789,
+        "lng": 10.1360284,
+        "display_name": "Hörnbrücke, Gaarden-Ost, Kiel, Schleswig-Holstein, 24143, Deutschland",
+        "class": "highway",
+        "type": "footway",
+        "importance": 0.23992860907835414,
+        "osm_type": "way",
+        "osm_id": 78257868,
+        "provider": "nominatim"
+      },
+      "delta_m": 62,
+      "from_city_m": 1216,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "kiel_kieler_schloss",
+      "name": "Kieler Schloss",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.323752669230785,
+        "lng": 10.142911426923076
+      },
+      "query": "Kieler Schloss, Kiel, Germany",
+      "osm": {
+        "lat": 54.3236928,
+        "lng": 10.1431343,
+        "display_name": "Konzerthalle am Kieler Schloss, 5, Burgstraße, Altstadt, Kiel, Schleswig-Holstein, 24103, Deutschland",
+        "class": "building",
+        "type": "public",
+        "importance": 0.00007370031280990338,
+        "osm_type": "way",
+        "osm_id": 150282539,
+        "provider": "nominatim"
+      },
+      "delta_m": 16,
+      "from_city_m": 1307,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "kiel_seegarten",
+        "kiel_theater_kiel_konzerthaus_am_schloss"
+      ]
+    },
+    {
+      "id": "kiel_rathausturm_kiel",
+      "name": "Rathausturm Kiel",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.32244247999999,
+        "lng": 10.1324083
+      },
+      "query": "Rathausturm Kiel, Kiel, Germany",
+      "osm": {
+        "lat": 54.3224418,
+        "lng": 10.1324411,
+        "display_name": "Rathausturm, Rathausplatz, Vorstadt, Kiel, Schleswig-Holstein, 24103, Deutschland",
+        "class": "man_made",
+        "type": "tower",
+        "importance": 0.2548773901198179,
+        "osm_type": "way",
+        "osm_id": 217355655,
+        "provider": "nominatim"
+      },
+      "delta_m": 2,
+      "from_city_m": 632,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "kiel_parkplatz_rathaus_kiel"
+      ]
+    },
+    {
+      "id": "kiel_reventloubrucke",
+      "name": "Reventloubrücke",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.333574022222216,
+        "lng": 10.152249233333334
+      },
+      "query": "Reventloubrücke, Kiel, Germany",
+      "osm": {
+        "lat": 54.3337471,
+        "lng": 10.1514514,
+        "display_name": "Reventloubrücke, Reventlouallee, Düsternbrook, Kiel, Schleswig-Holstein, 24105, Deutschland",
+        "class": "highway",
+        "type": "bus_stop",
+        "importance": 0.00007370031280990338,
+        "osm_type": "node",
+        "osm_id": 411810933,
+        "provider": "nominatim"
+      },
+      "delta_m": 55,
+      "from_city_m": 2228,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "kiel_schwedenkai",
+      "name": "Schwedenkai",
+      "category": "hafen",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.319029580000006,
+        "lng": 10.13737458
+      },
+      "query": "Schwedenkai, Kiel, Germany",
+      "osm": {
+        "lat": 54.3185528,
+        "lng": 10.1372251,
+        "display_name": "Schwedenkai, Vorstadt, Kiel, Schleswig-Holstein, Deutschland",
+        "class": "landuse",
+        "type": "industrial",
+        "importance": 0.16273786379520622,
+        "osm_type": "way",
+        "osm_id": 77950458,
+        "provider": "nominatim"
+      },
+      "delta_m": 54,
+      "from_city_m": 1059,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "kiel_stadtisches_krankenhaus_kiel",
+      "name": "Städtisches Krankenhaus Kiel",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.32266090714285,
+        "lng": 10.115615160714286
+      },
+      "query": "Städtisches Krankenhaus Kiel, Kiel, Germany",
+      "osm": {
+        "lat": 54.3228203,
+        "lng": 10.1163371,
+        "display_name": "Städtisches Krankenhaus Kiel, 33, Chemnitzstraße, Dichterviertel, Schreventeich, Kiel, Schleswig-Holstein, 24116, Deutschland",
+        "class": "amenity",
+        "type": "hospital",
+        "importance": 0.1507975276546128,
+        "osm_type": "way",
+        "osm_id": 13640801,
+        "provider": "nominatim"
+      },
+      "delta_m": 50,
+      "from_city_m": 469,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "kiel_stadtisches_krankenhaus_kiel_notfallpraxis_notaufnahme",
+      "name": "Städtisches Krankenhaus Kiel: Notfallpraxis & Notaufnahme",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.32291248571429,
+        "lng": 10.117055628571427
+      },
+      "query": "Städtisches Krankenhaus Kiel: Notfallpraxis, Kiel, Germany",
+      "osm": {
+        "lat": 54.3228203,
+        "lng": 10.1163371,
+        "display_name": "Städtisches Krankenhaus Kiel, Chemnitzstraße, Kiel, Deutschland",
+        "class": "amenity",
+        "type": "hospital",
+        "provider": "photon"
+      },
+      "delta_m": 48,
+      "from_city_m": 373,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "kiel_wunderino_arena",
+      "name": "Wunderino Arena",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.32077098,
+        "lng": 10.131138479999999
+      },
+      "query": "Wunderino Arena, Kiel, Germany",
+      "osm": {
+        "lat": 54.3206989,
+        "lng": 10.1306156,
+        "display_name": "Merkur Ostseehalle, Europaplatz, Kiel, Deutschland",
+        "class": "leisure",
+        "type": "stadium",
+        "provider": "photon"
+      },
+      "delta_m": 35,
+      "from_city_m": 611,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "kiel_botanischer_garten_der_universitat_kiel",
+      "name": "Botanischer Garten der Universität Kiel",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.347580699999995,
+        "lng": 10.1167231
+      },
+      "query": "Botanischer Garten der Universität Kiel, Kiel, Germany",
+      "osm": {
+        "lat": 54.3474631,
+        "lng": 10.11719,
+        "display_name": "Botanischer Garten, Kiel, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "provider": "photon"
+      },
+      "delta_m": 33,
+      "from_city_m": 2729,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "kiel_aquarium_geomar",
+      "name": "Aquarium GEOMAR",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.33000072413794,
+        "lng": 10.148428382758619
+      },
+      "query": "Aquarium GEOMAR, Kiel, Germany",
+      "osm": {
+        "lat": 54.3300018,
+        "lng": 10.1489172,
+        "display_name": "Aquarium GEOMAR, 20, Düsternbrooker Weg, Düsternbrook, Kiel, Schleswig-Holstein, 24105, Deutschland",
+        "class": "tourism",
+        "type": "aquarium",
+        "importance": 0.00007370031280990338,
+        "osm_type": "node",
+        "osm_id": 295094665,
+        "provider": "nominatim"
+      },
+      "delta_m": 32,
+      "from_city_m": 1824,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "kiel_bootshafen",
+      "name": "Bootshafen",
+      "category": "hafen",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.32129375714285,
+        "lng": 10.138620428571427
+      },
+      "query": "Bootshafen, Kiel, Germany",
+      "osm": {
+        "lat": 54.3210064,
+        "lng": 10.1386213,
+        "display_name": "Bootshafen, Altstadt, Kiel, Schleswig-Holstein, Deutschland",
+        "class": "water",
+        "type": "pond",
+        "importance": 0.12743869505990896,
+        "osm_type": "way",
+        "osm_id": 172090929,
+        "provider": "nominatim"
+      },
+      "delta_m": 32,
+      "from_city_m": 1052,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "kiel_blucherbrucke",
+      "name": "Blücherbrücke",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.336403022727275,
+        "lng": 10.15745329090909
+      },
+      "query": "Blücherbrücke, Kiel, Germany",
+      "osm": {
+        "lat": 54.3361662,
+        "lng": 10.157473,
+        "display_name": "Blücherbrücke, Brunswik, Kiel, Schleswig-Holstein, Deutschland",
+        "class": "highway",
+        "type": "footway",
+        "importance": 0.04007370031280994,
+        "osm_type": "way",
+        "osm_id": 314082417,
+        "provider": "nominatim"
+      },
+      "delta_m": 26,
+      "from_city_m": 2680,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "kiel_alter_botanischer_garten",
+      "name": "Alter Botanischer Garten",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.33040708709677,
+        "lng": 10.146904077419356
+      },
+      "query": "Alter Botanischer Garten, Kiel, Germany",
+      "osm": {
+        "lat": 54.3306152,
+        "lng": 10.1469675,
+        "display_name": "Alter Botanischer Garten, Düsternbrook, Kiel, Schleswig-Holstein, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "importance": 0.21584611680957558,
+        "osm_type": "way",
+        "osm_id": 25838125,
+        "provider": "nominatim"
+      },
+      "delta_m": 24,
+      "from_city_m": 1754,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "kiel_alter_markt",
+      "name": "Alter Markt",
+      "category": "altstadt",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.323134374999995,
+        "lng": 10.139140274999999
+      },
+      "query": "Alter Markt, Kiel, Germany",
+      "osm": {
+        "lat": 54.323254,
+        "lng": 10.1394052,
+        "display_name": "Alter Markt, Altstadt, Kiel, Schleswig-Holstein, Deutschland",
+        "class": "place",
+        "type": "square",
+        "importance": 0.19619210675062,
+        "osm_type": "way",
+        "osm_id": 9354155,
+        "provider": "nominatim"
+      },
+      "delta_m": 22,
+      "from_city_m": 1062,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "kiel_medica_apotheke",
+      "name": "Medica Apotheke",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.32004069499999,
+        "lng": 10.126691735
+      },
+      "query": "Medica Apotheke, Kiel, Germany",
+      "osm": {
+        "lat": 54.3201098,
+        "lng": 10.1263831,
+        "display_name": "Medica-Apotheke, 15, Prüner Gang, Exerzierplatz, Kiel, Schleswig-Holstein, 24103, Deutschland",
+        "class": "amenity",
+        "type": "pharmacy",
+        "importance": 0.00007370031280990338,
+        "osm_type": "node",
+        "osm_id": 291686373,
+        "provider": "nominatim"
+      },
+      "delta_m": 21,
+      "from_city_m": 442,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "kiel_schrevenpark",
+      "name": "Schrevenpark",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.32819844489796,
+        "lng": 10.123626924489797
+      },
+      "query": "Schrevenpark, Kiel, Germany",
+      "osm": {
+        "lat": 54.3282423,
+        "lng": 10.1238398,
+        "display_name": "Schrevenpark, Schreventeich, Kiel, Schleswig-Holstein, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "importance": 0.12743869505990896,
+        "osm_type": "way",
+        "osm_id": 12310641,
+        "provider": "nominatim"
+      },
+      "delta_m": 15,
+      "from_city_m": 548,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "kiel_u_boot_u_995_laboe",
+      "name": "U-Boot U-995 Laboe",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.41245712142858,
+        "lng": 10.228894457142857
+      },
+      "query": "U-Boot U-995 Laboe, Kiel, Germany",
+      "osm": {
+        "lat": 54.4123425,
+        "lng": 10.2289344,
+        "display_name": "U-Boot U 995, Strandstraße, Laboe, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 13,
+      "from_city_m": 12065,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "kiel_zoologisches_museum_kiel",
+      "name": "Zoologisches Museum Kiel",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.32825466666666,
+        "lng": 10.144216933333333
+      },
+      "query": "Zoologisches Museum Kiel, Kiel, Germany",
+      "osm": {
+        "lat": 54.3281857,
+        "lng": 10.1443516,
+        "display_name": "Zoologisches Museum, 3, Hegewischstraße, Düsternbrook, Kiel, Schleswig-Holstein, 24105, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.244781979759108,
+        "osm_type": "node",
+        "osm_id": 295094141,
+        "provider": "nominatim"
+      },
+      "delta_m": 12,
+      "from_city_m": 1496,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "kiel_adler_apotheke",
+      "name": "Adler-Apotheke",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.32476716363637,
+        "lng": 10.121873536363635
+      },
+      "query": "Adler-Apotheke, Kiel, Germany",
+      "osm": {
+        "lat": 54.3248283,
+        "lng": 10.1217444,
+        "display_name": "Adler-Apotheke, 37, Jungfernstieg, Dichterviertel, Schreventeich, Kiel, Schleswig-Holstein, 24116, Deutschland",
+        "class": "amenity",
+        "type": "pharmacy",
+        "importance": 0.00007370031280990338,
+        "osm_type": "node",
+        "osm_id": 291580066,
+        "provider": "nominatim"
+      },
+      "delta_m": 11,
+      "from_city_m": 174,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "kiel_aesculap_apotheke",
+      "name": "aesculap apotheke",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.320304699999994,
+        "lng": 10.134537259999998
+      },
+      "query": "aesculap apotheke, Kiel, Germany",
+      "osm": {
+        "lat": 54.3203843,
+        "lng": 10.1345854,
+        "display_name": "aesculap apotheke, 75, Holstenstraße, Vorstadt, Kiel, Schleswig-Holstein, 24103, Deutschland",
+        "class": "amenity",
+        "type": "pharmacy",
+        "importance": 0.00007370031280990338,
+        "osm_type": "node",
+        "osm_id": 432827424,
+        "provider": "nominatim"
+      },
+      "delta_m": 9,
+      "from_city_m": 833,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "kiel_turm_der_klosterkirche",
+      "name": "Turm der Klosterkirche",
+      "category": "kirche",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.32431448181817,
+        "lng": 10.139284454545454
+      },
+      "query": "Turm der Klosterkirche, Kiel, Germany",
+      "osm": {
+        "lat": 54.324376,
+        "lng": 10.1393448,
+        "display_name": "Der Schmerzensmann, Klosterkirchhof, Kiel, Deutschland",
+        "class": "tourism",
+        "type": "artwork",
+        "provider": "photon"
+      },
+      "delta_m": 8,
+      "from_city_m": 1077,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "kiel_west_apotheke",
+      "name": "West Apotheke",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.3177012375,
+        "lng": 10.124098012500001
+      },
+      "query": "West Apotheke, Kiel, Germany",
+      "osm": {
+        "lat": 54.3176373,
+        "lng": 10.124059,
+        "display_name": "West-Apotheke, Kirchhofallee, Exerzierplatz, Kiel, Schleswig-Holstein, 24103, Deutschland",
+        "class": "amenity",
+        "type": "pharmacy",
+        "importance": 0.00007370031280990338,
+        "osm_type": "node",
+        "osm_id": 1366811146,
+        "provider": "nominatim"
+      },
+      "delta_m": 8,
+      "from_city_m": 628,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "kiel_opernhaus_kiel_theater_kiel",
+      "name": "Opernhaus Kiel (Theater Kiel)",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.323080534999995,
+        "lng": 10.133232135
+      },
+      "query": "Opernhaus Kiel, Kiel, Germany",
+      "osm": {
+        "lat": 54.3231035,
+        "lng": 10.1331424,
+        "display_name": "Opernhaus, 4, Rathausplatz, Vorstadt, Kiel, Schleswig-Holstein, 24103, Deutschland",
+        "class": "amenity",
+        "type": "theatre",
+        "importance": 0.3367302927095036,
+        "osm_type": "way",
+        "osm_id": 18921257,
+        "provider": "nominatim"
+      },
+      "delta_m": 6,
+      "from_city_m": 679,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "kiel_kunsthalle_zu_kiel",
+      "name": "Kunsthalle zu Kiel",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.32854987199998,
+        "lng": 10.14599912
+      },
+      "query": "Kunsthalle zu Kiel, Kiel, Germany",
+      "osm": {
+        "lat": 54.3285399,
+        "lng": 10.1459206,
+        "display_name": "Kunsthalle, Düsternbrooker Weg, Kiel, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 5,
+      "from_city_m": 1616,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "kiel_stadtmuseum_warleberger_hof",
+      "name": "Stadtmuseum Warleberger Hof",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.324417371428574,
+        "lng": 10.141115271428573
+      },
+      "query": "Stadtmuseum Warleberger Hof, Kiel, Germany",
+      "osm": {
+        "lat": 54.324386,
+        "lng": 10.1411042,
+        "display_name": "Warleberger Hof, Dänische Straße, Kiel, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 4,
+      "from_city_m": 1197,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "kiel_holstenstrasse",
+      "name": "Holstenstraße",
+      "category": "altstadt",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 54.32111308000001,
+        "lng": 10.13509438
+      },
+      "query": "Holstenstraße, Kiel, Germany",
+      "osm": {
+        "lat": 54.3211069,
+        "lng": 10.1351627,
+        "display_name": "Holstenstraße, Vorstadt, Kiel, Schleswig-Holstein, 24103, Deutschland",
+        "class": "highway",
+        "type": "pedestrian",
+        "importance": 0.21337448257116948,
+        "osm_type": "way",
+        "osm_id": 709551790,
+        "provider": "nominatim"
+      },
+      "delta_m": 4,
+      "from_city_m": 835,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "kiel_dreiecksplatz_park",
+      "name": "Dreiecksplatz Park",
+      "category": "altstadt",
+      "place_tier": 3,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.32991695238096,
+        "lng": 10.134203090476191
+      },
+      "query": "Dreiecksplatz Park, Kiel, Germany",
+      "osm": {
+        "lat": 54.3298966,
+        "lng": 10.1341934,
+        "display_name": "Parkhaus Dreiecksplatz, Preußerstraße, Kiel, Deutschland",
+        "class": "amenity",
+        "type": "parking",
+        "provider": "photon"
+      },
+      "delta_m": 2,
+      "from_city_m": 1045,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "kiel_kriegerdenkmal",
+      "name": "Kriegerdenkmal",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 54.325836100000004,
+        "lng": 10.144208200000001
+      },
+      "query": "Kriegerdenkmal, Kiel, Germany",
+      "osm": {
+        "lat": 54.3258302,
+        "lng": 10.1442099,
+        "display_name": "Kieler Kriegerdenkmal 1870/71, Prinzengarten, Düsternbrook, Kiel, Schleswig-Holstein, 24105, Deutschland",
+        "class": "tourism",
+        "type": "artwork",
+        "importance": 0.00007370031280990338,
+        "osm_type": "node",
+        "osm_id": 1110690724,
+        "provider": "nominatim"
+      },
+      "delta_m": 1,
+      "from_city_m": 1419,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    }
+  ]
+}

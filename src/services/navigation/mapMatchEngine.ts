@@ -97,6 +97,17 @@ export function tickMapMatch(opts: {
     }
   }
 
+  // Abkürzung: Breadcrumb an Projection-Along koppeln (nie hinter dem User)
+  if (projection && waypoints.length > 0) {
+    const along = projection.alongM;
+    while (wpIndex < waypoints.length - 1) {
+      const nextAlong = waypoints[wpIndex + 1]?.splineAlongM;
+      if (typeof nextAlong !== 'number' || nextAlong > along + 10) break;
+      wpIndex += 1;
+      prevDistToCurrentWpM = null;
+    }
+  }
+
   return {
     projection,
     waypointIndex: wpIndex,

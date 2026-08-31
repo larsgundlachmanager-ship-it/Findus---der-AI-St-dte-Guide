@@ -4,6 +4,7 @@
  */
 
 import { getDatabase } from '../../db/database';
+import { runExclusiveDbWrite } from '../../db/dbWriteLock';
 import { getCachedUserProfile } from '../userProfileService';
 import type { NavWaypoint } from './navigationTypes';
 import type { PedestrianTravelMode } from './googleMapsNav';
@@ -153,51 +154,53 @@ export async function upsertCachedDestination(input: {
   const aliasesJson = aliases.length ? JSON.stringify(aliases) : null;
   const searchQuery = input.searchQuery?.trim() || null;
 
-  const existing = await db.getFirstAsync<{ id: number }>(
-    `SELECT id FROM cached_destinations
-     WHERE ABS(lat - ?) < 0.00005 AND ABS(lng - ?) < 0.00005
-     ORDER BY updated_at_ms DESC LIMIT 1`,
-    input.lat,
-    input.lng,
-  );
+  await runExclusiveDbWrite(async () => {
+    const existing = await db.getFirstAsync<{ id: number }>(
+      `SELECT id FROM cached_destinations
+       WHERE ABS(lat - ?) < 0.00005 AND ABS(lng - ?) < 0.00005
+       ORDER BY updated_at_ms DESC LIMIT 1`,
+      input.lat,
+      input.lng,
+    );
 
-  if (existing?.id != null) {
+    if (existing?.id != null) {
+      await db.runAsync(
+        `UPDATE cached_destinations SET
+           name = ?, name_norm = ?, poi_id = COALESCE(?, poi_id),
+           source = ?, aliases_json = COALESCE(?, aliases_json),
+           search_query = COALESCE(?, search_query),
+           city_id = COALESCE(?, city_id),
+           updated_at_ms = ?
+         WHERE id = ?`,
+        name,
+        nameNorm,
+        input.poiId ?? null,
+        input.source,
+        aliasesJson,
+        searchQuery,
+        cityId,
+        now,
+        existing.id,
+      );
+      return;
+    }
+
     await db.runAsync(
-      `UPDATE cached_destinations SET
-         name = ?, name_norm = ?, poi_id = COALESCE(?, poi_id),
-         source = ?, aliases_json = COALESCE(?, aliases_json),
-         search_query = COALESCE(?, search_query),
-         city_id = COALESCE(?, city_id),
-         updated_at_ms = ?
-       WHERE id = ?`,
+      `INSERT INTO cached_destinations
+        (name, name_norm, lat, lng, poi_id, source, aliases_json, search_query, city_id, updated_at_ms)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       name,
       nameNorm,
+      input.lat,
+      input.lng,
       input.poiId ?? null,
       input.source,
       aliasesJson,
       searchQuery,
       cityId,
       now,
-      existing.id,
     );
-    return;
-  }
-
-  await db.runAsync(
-    `INSERT INTO cached_destinations
-      (name, name_norm, lat, lng, poi_id, source, aliases_json, search_query, city_id, updated_at_ms)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-    name,
-    nameNorm,
-    input.lat,
-    input.lng,
-    input.poiId ?? null,
-    input.source,
-    aliasesJson,
-    searchQuery,
-    cityId,
-    now,
-  );
+  });
 }
 
 function scoreNameMatch(queryNorm: string, row: DestRow): number {
@@ -317,31 +320,33 @@ export async function putCachedRoute(input: {
   const db = await getDatabase();
   const now = Date.now();
   const key = destinationKey(input.destLat, input.destLng);
-  await db.runAsync(
-    `INSERT INTO cached_routes
-      (dest_key, dest_name, dest_lat, dest_lng, waypoints_json, stations_json,
-       travel_mode, walking_distance_m, created_at_ms, updated_at_ms)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-     ON CONFLICT(dest_key) DO UPDATE SET
-       dest_name = excluded.dest_name,
-       dest_lat = excluded.dest_lat,
-       dest_lng = excluded.dest_lng,
-       waypoints_json = excluded.waypoints_json,
-       stations_json = excluded.stations_json,
-       travel_mode = excluded.travel_mode,
-       walking_distance_m = excluded.walking_distance_m,
-       updated_at_ms = excluded.updated_at_ms`,
-    key,
-    input.destName.trim(),
-    input.destLat,
-    input.destLng,
-    JSON.stringify(input.waypoints),
-    input.stations?.length ? JSON.stringify(input.stations) : null,
-    input.travelMode ?? null,
-    input.walkingDistanceM != null ? Math.round(input.walkingDistanceM) : null,
-    now,
-    now,
-  );
+  await runExclusiveDbWrite(async () => {
+    await db.runAsync(
+      `INSERT INTO cached_routes
+        (dest_key, dest_name, dest_lat, dest_lng, waypoints_json, stations_json,
+         travel_mode, walking_distance_m, created_at_ms, updated_at_ms)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+       ON CONFLICT(dest_key) DO UPDATE SET
+         dest_name = excluded.dest_name,
+         dest_lat = excluded.dest_lat,
+         dest_lng = excluded.dest_lng,
+         waypoints_json = excluded.waypoints_json,
+         stations_json = excluded.stations_json,
+         travel_mode = excluded.travel_mode,
+         walking_distance_m = excluded.walking_distance_m,
+         updated_at_ms = excluded.updated_at_ms`,
+      key,
+      input.destName.trim(),
+      input.destLat,
+      input.destLng,
+      JSON.stringify(input.waypoints),
+      input.stations?.length ? JSON.stringify(input.stations) : null,
+      input.travelMode ?? null,
+      input.walkingDistanceM != null ? Math.round(input.walkingDistanceM) : null,
+      now,
+      now,
+    );
+  });
 }
 
 export async function getCachedRoute(

@@ -1,0 +1,32 @@
+---
+description: Test-Feedback → Lernen (Blaupause), nicht Kernel/Architektur umbauen
+alwaysApply: true
+---
+
+# Findus — Test-Feedback lernen, Aufbau lassen
+
+Live-Tests sollen Yorro **besser antworten lassen**, ohne Modul-2/Kernel jedes Mal umzubauen.
+
+## Drei Schichten (in dieser Reihenfolge)
+
+1. **Am Gerät korrigieren** — User sagt zu Yorro z. B. „Nee, Preise und Speisekarte, nicht die lange Historie.“ → `correctionLearning` speichert eine `LearnedRule` sofort (dieses Profil). Ähnliche nächste Fragen folgen der Struktur.
+2. **In Cursor: Owner-Gold** — Founder-Feedback hier = abstrakte Situation-Blaupause in `src/module2/blueprints/ownerGold.pack.json`, dann `npm run gold:publish`. Gilt für alle ähnlichen Intents (dining/events/…), stadt-agnostisch. Kernel unberührt.
+3. **Crowd** — 3 User dieselbe Korrektur → `collectiveLearning` / Beta-Situations auto-promote. Nicht warten, wenn der Founder schon Gold gesetzt hat.
+
+## Agent-Triage bei Testfeedback
+
+| Was der User meint | Wohin | Nicht |
+|---|---|---|
+| So soll die **Antwort aufgebaut** sein (Preise vorne, keine Historie, Button, kürzer…) | Owner-Gold / LearnedRule / Policy-SSOT-Constraint | Kernel, Router, neue Prompt-Verfassung |
+| **Slot fehlt** (Popcorn-Preis, Öffnung, Speisekarte) | `autoLearn` Slot + Brief | Pflicht-Sätze, Orts-Hardcodes |
+| **Echter Bug** (Crash, Isolation-Leak, falsche Lane, TTS-Pipeline) | Datei-Besitz laut Kernel-Protokoll | „Findus neu verdrahten“ |
+| Fester Wortlaut / Stadt X | Ablehnen, Struktur ableiten | Scripts in Prompts |
+
+## Owner-Gold schreiben
+
+- Nur `intentFamily`, `expect[]`, `avoid[]`, `summary` (ein Satz Struktur, **kein** Dialog).
+- Keine Ortsnamen, keine „Sag genau …“.
+- Danach: `npm run gold:publish` (Supabase, Live-APK holt beim nächsten App-Öffnen).
+- Dev-Reload reicht fürs Bundle; APK ohne Rebuild braucht Publish + App in den Vordergrund.
+
+SSOT: `ownerGold.ts` · `correctionLearning.ts` · `collectiveLearning.ts` · Doktrin.

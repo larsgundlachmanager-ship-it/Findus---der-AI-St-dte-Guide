@@ -16,6 +16,11 @@ import {
 import { useFinnusStore } from '../store/useFinnusStore';
 import { parseTagsJson } from './geo/triggerPolicy';
 import { getTrackSpeedMs } from './navigation/gpsTrackBuffer';
+import { getCachedUserProfile } from './userProfileService';
+
+function activeStampCityId(): string | null {
+  return (getCachedUserProfile()?.cityId ?? '').trim().toLowerCase() || null;
+}
 
 /** Unter dieser Geschwindigkeit gilt User als stehend (Explore Flow B). */
 const STATIONARY_SPEED_MS = 0.45;
@@ -409,6 +414,7 @@ async function putDwellOnZeitachse(s: DwellSession): Promise<void> {
       onTimeline: true,
       lat: s.anchorLat,
       lng: s.anchorLng,
+      cityId: activeStampCityId(),
     });
   } else if (existing.onTimeline !== true) {
     store.addVisitedPlace({
@@ -420,6 +426,7 @@ async function putDwellOnZeitachse(s: DwellSession): Promise<void> {
       onTimeline: true,
       lat: existing.lat ?? s.anchorLat,
       lng: existing.lng ?? s.anchorLng,
+      cityId: existing.cityId ?? activeStampCityId(),
     });
   }
 
@@ -488,6 +495,7 @@ async function stampDwellOnPassport(s: DwellSession): Promise<void> {
     onTimeline: true,
     lat: s.anchorLat,
     lng: s.anchorLng,
+    cityId: activeStampCityId(),
   });
 
   if (__DEV__) {

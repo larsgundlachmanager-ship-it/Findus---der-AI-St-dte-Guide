@@ -7,6 +7,7 @@ import {
   type StyleProp,
   type ViewStyle,
 } from 'react-native';
+import { claimAndroidBackStep } from '../services/ui/androidBackStep';
 
 /** Linke Kante, in der die Zurück-Geste greift (px). */
 const EDGE_WIDTH = 28;
@@ -18,6 +19,11 @@ const VX_THRESHOLD = 0.45;
 type Props = {
   /** false = Geste und System-Zurück deaktiviert (z. B. erster Screen). */
   enabled?: boolean;
+  /**
+   * Android hardwareBackPress / System-Zurück-Geste.
+   * Default false — HomeScreen/Onboarding steuern den Stack (sonst Doppel-Pop → App zu).
+   */
+  captureHardwareBack?: boolean;
   onBack: () => void;
   children: React.ReactNode;
   style?: StyleProp<ViewStyle>;
@@ -30,10 +36,11 @@ type Props = {
 
 /**
  * Seiten-Zurück per Geste: von der linken Kante nach rechts wischen.
- * Zusätzlich Android-System-Zurück (kein sichtbarer Zurück-Button).
+ * Optional Android-System-Zurück (meist vom Parent).
  */
 export function SwipeBackView({
   enabled = true,
+  captureHardwareBack = false,
   onBack,
   children,
   style,
@@ -44,14 +51,22 @@ export function SwipeBackView({
   const enabledRef = useRef(enabled);
   enabledRef.current = enabled;
 
+  const runBack = () => {
+    if (!enabledRef.current) return;
+    if (!claimAndroidBackStep()) return;
+    onBackRef.current();
+  };
+
   useEffect(() => {
-    if (!enabled) return;
+    if (!enabled || !captureHardwareBack) return;
     const sub = BackHandler.addEventListener('hardwareBackPress', () => {
+      if (!enabledRef.current) return false;
+      if (!claimAndroidBackStep()) return true; // Event verbrauchen, nicht App schließen
       onBackRef.current();
       return true;
     });
     return () => sub.remove();
-  }, [enabled]);
+  }, [enabled, captureHardwareBack]);
 
   const pan = useMemo(
     () =>
@@ -69,7 +84,7 @@ export function SwipeBackView({
         onPanResponderRelease: (_e, g) => {
           if (!enabledRef.current) return;
           if (g.dx >= DX_THRESHOLD || g.vx >= VX_THRESHOLD) {
-            onBackRef.current();
+            runBack();
           }
         },
       }),

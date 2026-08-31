@@ -1,0 +1,612 @@
+{
+  "spots": [
+    {
+      "id": "london_camden_market",
+      "deep_data_pool": [
+        {"text": "Camden Market ist kein einzelner Hallenmarkt, sondern ein Verbund mehrerer Marktbereiche rund um Camden Lock und die ehemaligen Stallungen nördlich des Regent's Canal.","tags": ["geschichte","markt"]},
+        {"text": "Der Camden Lock Market begann 1974 als kleiner Kunsthandwerksmarkt; aus dem Wochenendprojekt entwickelte sich ein dauerhaftes Handels- und Ausgehviertel.","tags": ["geschichte"]},
+        {"text": "Die Stables Market genannten Höfe erinnern an Pferdeställe und das Pickfords-Transportdepot, das in der Zeit vor motorisierten Lieferwagen eine wichtige Rolle spielte.","tags": ["industriegeschichte"]},
+        {"text": "Am Wasser treffen Schleusen, Backsteinbauten, Brücken und schmale Wege auf dicht gedrängte Verkaufsstände; die Kanalebene liegt deutlich unter der Camden High Street.","tags": ["visuell","architektur"]},
+        {"text": "Camdens Marktidentität verbindet alternative Mode, Kunsthandwerk, Musik- und Subkulturen mit internationalem Streetfood; einzelne Händler und Sortimente wechseln häufig.","tags": ["kultur","markt"]},
+        {"text": "Der Regent's Canal bildet die ruhige räumliche Gegenachse zum Markttrubel. Von Camden Lock führen seine Treidelpfade unter anderem Richtung Regent's Park und King's Cross.","tags": ["quer","orientierung"]},
+        {"text": "Die großen Pferdeskulpturen in den Stables und die Backsteinbögen sind Erinnerungen an die frühere Nutzung und zugleich markante Orientierungspunkte im verwinkelten Gelände.","tags": ["visuell","wegweiser"]},
+        {"text": "LIVE: Öffnungszeiten, Marktbereiche, Veranstaltungen und verfügbare Händler vor dem Besuch auf der offiziellen Camden-Market-Seite prüfen; besonders an Wochenenden kann es sehr voll werden.","tags": ["live_hint","ephemeral"]}
+      ]
+    },
+    {
+      "id": "london_british_library",
+      "deep_data_pool": [
+        {"text": "Die British Library ist die Nationalbibliothek des Vereinigten Königreichs. Sie entstand 1973 als Institution und vereinte Bestände mehrerer älterer Sammlungen.","tags": ["geschichte","bibliothek"]},
+        {"text": "Das Gebäude in St Pancras wurde von Colin St John Wilson entworfen und 1998 offiziell eröffnet; sein roter Backstein nimmt Bezug auf den benachbarten Bahnhof.","tags": ["architektur","geschichte"]},
+        {"text": "Herzstück der Eingangshalle ist der gläserne King's Library Tower mit der Büchersammlung König Georgs III.; die Bände bleiben als geschlossene historische Sammlung erhalten.","tags": ["visuell","sammlung"]},
+        {"text": "Zu den berühmten Beständen gehören Magna-Carta-Exemplare, das Lindisfarne-Evangeliar, Shakespeare-Drucke, Musikmanuskripte und handschriftliche Beatles-Texte.","tags": ["sammlung","kultur"]},
+        {"text": "Als Pflichtexemplarbibliothek erhält die British Library Veröffentlichungen aus dem Vereinigten Königreich und Irland nach den gesetzlichen Regeln zur Ablieferung.","tags": ["wissen","bibliothek"]},
+        {"text": "Der große Vorplatz mit der Skulptur Newton von Eduardo Paolozzi öffnet sich zur Euston Road; die Figur basiert auf William Blakes Darstellung des messenden Newton.","tags": ["kunst","visuell"]},
+        {"text": "Lesesäle dienen registrierten Forschenden, während Eingangshalle, permanente Schatzgalerie und wechselnde Ausstellungen ein breiteres Publikum ansprechen.","tags": ["nutzung","orientierung"]},
+        {"text": "LIVE: Aktuelle Öffnung, freie Zeitfenster, Ausstellungen, Lesesaal-Zugang und mögliche Schließungen stets bei der British Library prüfen; einzelne Originale rotieren aus konservatorischen Gründen.","tags": ["live_hint","ephemeral"]}
+      ]
+    },
+    {
+      "id": "london_horse_guards",
+      "deep_data_pool": [
+        {"text": "Horse Guards entstand im 18. Jahrhundert nach Plänen William Kents und ersetzte ein älteres Wachgebäude; der Uhrturm markiert die Mitte der symmetrischen Fassade.","tags": ["geschichte","architektur"]},
+        {"text": "Der Durchgang unter dem Uhrturm verbindet Whitehall mit Horse Guards Parade. Er liegt auf der zeremoniellen Route zwischen Westminster und St James's Palace.","tags": ["orientierung","architektur"]},
+        {"text": "Berittene Soldaten der Household Cavalry bewachen den Whitehall-Eingang. Die Wache ist militärischer Dienst und kein bloß für Besucher inszeniertes Schauspiel.","tags": ["militaer","kultur"]},
+        {"text": "Horse Guards Parade war einst Turnierplatz des Palace of Whitehall und wurde später als Parade- und Exerzierfläche genutzt; heute rahmen Regierungsbauten die weite Kiesfläche.","tags": ["geschichte","visuell"]},
+        {"text": "Das jährliche Trooping the Colour nutzt die Paradefläche für die offizielle Geburtstagsparade des britischen Monarchen; Proben und Zeremonien verändern zeitweise den Zugang.","tags": ["zeremoniell","quer"]},
+        {"text": "Auf dem Platz stehen Denkmäler, darunter die Guards Memorial und Reiterstatuen. Von hier sind St James's Park und die Rückseite von Downing Street nah.","tags": ["visuell","quer"]},
+        {"text": "Bei den Pferden gelten Absperrungen und Warnschilder: Die Tiere sind im Dienst, können ausschlagen oder beißen und brauchen Abstand, auch wenn Besucher fotografieren.","tags": ["sicherheit","besuch"]},
+        {"text": "LIVE: Zeiten und Ablauf von Wachwechsel, Dismount Parade, Trooping-the-Colour-Terminen sowie Zugangssperren bei Household Division und Metropolitan Police aktuell prüfen.","tags": ["live_hint","ephemeral"]}
+      ]
+    },
+    {
+      "id": "london_downing_street",
+      "deep_data_pool": [
+        {"text": "Downing Street wurde im späten 17. Jahrhundert von Sir George Downing angelegt. Die Häuser entstanden auf einem Gelände nahe dem früheren Palace of Whitehall.","tags": ["geschichte","stadtentwicklung"]},
+        {"text": "Number 10 ist Amtssitz und Arbeitsort des britischen Premierministers; Number 11 ist traditionell dem Chancellor of the Exchequer zugeordnet.","tags": ["politik","geschichte"]},
+        {"text": "Die bekannte schwarze Tür von Number 10 ist Teil einer georgianisch wirkenden Fassade, hinter der mehrere ältere Häuser baulich miteinander verbunden wurden.","tags": ["architektur","visuell"]},
+        {"text": "Der erste Lord of the Treasury nahm das Haus 1735 an; Robert Walpole akzeptierte es für das Amt, nicht als persönliches Geschenk. Daher blieb es institutionell gebunden.","tags": ["geschichte","politik"]},
+        {"text": "Sicherheitsgitter sperren den Straßenzugang von Whitehall seit 1989 dauerhaft. Ohne Berechtigung sieht man die Haustür deshalb nur aus Distanz durch die bewachte Zufahrt.","tags": ["orientierung","sicherheit"]},
+        {"text": "Die Straße ist Schauplatz von Regierungsbildung, Kabinettssitzungen und Presseauftritten; viele Innenräume liegen hinter der schmalen Front und sind nicht öffentlich zugänglich.","tags": ["politik","nutzung"]},
+        {"text": "Gegenüber der Zufahrt liegt Whitehall mit dem Cenotaph; Horse Guards und die Cabinet War Rooms zeigen, wie eng Regierung, Zeremoniell und Kriegsgeschichte hier beieinanderliegen.","tags": ["quer","orientierung"]},
+        {"text": "LIVE: Sichtachsen, Absperrungen und Verkehr können sich wegen Sicherheitslagen, Staatsbesuchen oder Demonstrationen kurzfristig ändern; Anweisungen der Polizei vor Ort beachten.","tags": ["live_hint","ephemeral"]}
+      ]
+    },
+    {
+      "id": "london_imperial_war_museum",
+      "deep_data_pool": [
+        {"text": "Das Imperial War Museum wurde 1917 während des Ersten Weltkriegs gegründet, um Erfahrungen und Beiträge des britischen Empire im Krieg zu dokumentieren.","tags": ["geschichte","museum"]},
+        {"text": "Seit 1936 nutzt das Museum das ehemalige Bethlem Royal Hospital in Lambeth. Die Kuppel und der klassizistische Mittelbau stammen aus der früheren Krankenhausanlage.","tags": ["architektur","geschichte"]},
+        {"text": "Vor dem Eingang stehen zwei große Marinegeschütze aus britischen Schlachtschiffen. Sie machen den Maßstab industrieller Kriegsführung schon außerhalb des Gebäudes sichtbar.","tags": ["visuell","militaer"]},
+        {"text": "Die Sammlungen behandeln Konflikte seit 1914 anhand von Objekten, Bildern, Tonaufnahmen, Dokumenten und persönlichen Zeugnissen, nicht nur anhand von Waffen und Fahrzeugen.","tags": ["sammlung","museum"]},
+        {"text": "Die Holocaust Galleries ordnen Verfolgung und Massenmord in die Geschichte des Nationalsozialismus und des Zweiten Weltkriegs ein; die Inhalte können belastend sein.","tags": ["geschichte","sensibel"]},
+        {"text": "Das Museum gehört zu einer Gruppe mit weiteren Standorten, darunter Churchill War Rooms, HMS Belfast und IWM Duxford; jedes Haus setzt einen anderen räumlichen Schwerpunkt.","tags": ["quer","museum"]},
+        {"text": "Der Geraldine Mary Harmsworth Park umgibt das Gebäude. Die offene Grünfläche kontrastiert bewusst nicht, ist aber ein ruhiger Übergang aus den intensiven Galerien.","tags": ["umgebung","orientierung"]},
+        {"text": "LIVE: Freier Grundeintritt, Öffnungszeiten, Zeitfenster, Sonderausstellungen und aktuelle Galerieschließungen direkt beim IWM prüfen; Programme und zugängliche Bereiche wechseln.","tags": ["live_hint","ephemeral"]}
+      ]
+    },
+    {
+      "id": "london_greenwich_park",
+      "deep_data_pool": [
+        {"text": "Greenwich Park ist einer der Royal Parks und war einst Teil eines königlichen Jagdgebiets. Seine formalen Achsen treffen auf ältere Baumgruppen und offene Wiesen.","tags": ["geschichte","park"]},
+        {"text": "Vom Hügel beim Royal Observatory öffnet sich eine berühmte Sicht über Queen's House, National Maritime Museum, die Themse und die Hochhäuser von Canary Wharf.","tags": ["aussicht","visuell"]},
+        {"text": "Die landschaftliche Komposition nutzt Queen's House als Mittelpunkt: Die beiden Flügel des späteren Old Royal Naval College lassen bewusst eine Sichtachse zum Haus frei.","tags": ["architektur","quer"]},
+        {"text": "Der Park enthält Überreste einer römisch-britischen Tempelanlage und einen angelsächsischen Grabhügelbereich; die sichtbare Landschaft bewahrt damit mehrere Zeitschichten.","tags": ["archaeologie","geschichte"]},
+        {"text": "Im oberen Park liegen das Royal Observatory und die Meridiananlage, während am unteren Rand Queen's House und das National Maritime Museum anschließen.","tags": ["orientierung","quer"]},
+        {"text": "Alte Kastanienalleen, geometrische Gartenräume und weite Rasenflächen zeigen den Wechsel zwischen formaler Gestaltung und einem später natürlicher inszenierten Landschaftspark.","tags": ["natur","visuell"]},
+        {"text": "Der steile Hauptanstieg vom Maritime Museum zum Observatory ist kurz, aber deutlich. Barriereärmere Wege führen weniger direkt durch den Park und sollten vorab geplant werden.","tags": ["zugang","orientierung"]},
+        {"text": "LIVE: Torzeiten, Wegsperrungen, Veranstaltungen, Sportflächen und Zugänge zu Meridian und Observatory bei Royal Parks beziehungsweise Royal Museums Greenwich prüfen.","tags": ["live_hint","ephemeral"]}
+      ]
+    },
+    {
+      "id": "london_queens_house",
+      "deep_data_pool": [
+        {"text": "Queen's House wurde von Inigo Jones für Anne of Denmark begonnen und für Henrietta Maria vollendet. Es gilt als Schlüsselwerk des englischen Klassizismus.","tags": ["geschichte","architektur"]},
+        {"text": "Der streng proportionierte, helle Bau unterschied sich radikal von der englischen Backsteinarchitektur seiner Zeit und vermittelte Ideen der italienischen Renaissance.","tags": ["architektur","kunstgeschichte"]},
+        {"text": "Die Tulip Stairs bilden eine elegante selbsttragende Wendeltreppe mit blauem Metallgeländer. Ihr Name bezieht sich wahrscheinlich auf stilisierte Lilien, nicht sicher auf Tulpen.","tags": ["visuell","architektur"]},
+        {"text": "Die Great Hall ist ein würfelförmiger Zentralraum mit schwarz-weißem Marmorboden. Geometrie, Galerien und Oberlicht machen die Architektur selbst zum Hauptobjekt.","tags": ["visuell","innenraum"]},
+        {"text": "Heute zeigt das Haus Kunst aus der maritimen Sammlung, darunter Porträts und Seestücke. Die Hängung verbindet höfische Repräsentation mit britischer Seefahrtsgeschichte.","tags": ["sammlung","kunst"]},
+        {"text": "Das Gebäude steht exakt in der historischen Achse zwischen Greenwich Park und der Themse. Spätere Flügel wurden so gebaut, dass die Sichtlinie erhalten blieb.","tags": ["orientierung","quer"]},
+        {"text": "Queen's House gehört mit dem Royal Observatory, Cutty Sark und National Maritime Museum zu Royal Museums Greenwich und lässt sich in einem Rundgang verbinden.","tags": ["quer","museum"]},
+        {"text": "LIVE: Öffnung, freier Zugang, reservierungspflichtige Zeiten, Ausstellungen und mögliche Sperrung der Tulip Stairs bei Royal Museums Greenwich aktuell prüfen.","tags": ["live_hint","ephemeral"]}
+      ]
+    },
+    {
+      "id": "london_national_maritime_museum",
+      "deep_data_pool": [
+        {"text": "Das National Maritime Museum öffnete 1937 und bewahrt eine der weltweit bedeutenden Sammlungen zur britischen und globalen Seefahrtsgeschichte.","tags": ["geschichte","museum"]},
+        {"text": "Die Galerien behandeln Navigation, Handel, Entdeckungsreisen, Seekrieg, Migration und die Verbindungen zwischen maritimer Expansion, Empire und Versklavung.","tags": ["geschichte","sammlung"]},
+        {"text": "Zu bekannten Objekten gehören Admiral Nelsons Uniform von Trafalgar, Schiffsmodelle, Karten, Navigationsinstrumente und Kunstwerke mit maritimem Bezug.","tags": ["sammlung","militaer"]},
+        {"text": "Das Museum nutzt ehemalige Gebäude der Royal Hospital School. Die langen klassizistischen Fassaden rahmen einen Hof direkt unterhalb von Queen's House.","tags": ["architektur","geschichte"]},
+        {"text": "Die Great Map im zentralen Bereich übersetzt Weltmeere und Routen in einen großen begehbaren Raum und eignet sich als Ausgangspunkt für die thematischen Galerien.","tags": ["visuell","orientierung"]},
+        {"text": "Sammlungsobjekte zeigen, dass Navigation nicht nur technische Präzision bedeutete, sondern auch Macht, Handel, Kartierung und Kontrolle von Seewegen ermöglichte.","tags": ["kontext","geschichte"]},
+        {"text": "Direkt angrenzend liegen Queen's House und Greenwich Park; oberhalb erklärt das Royal Observatory Zeitmessung und Längengrad, die für Navigation entscheidend waren.","tags": ["quer","orientierung"]},
+        {"text": "LIVE: Öffnungszeiten, Eintrittsregelung, Familienangebote, Sonderausstellungen und vorübergehend nicht gezeigte Objekte bei Royal Museums Greenwich prüfen.","tags": ["live_hint","ephemeral"]}
+      ]
+    },
+    {
+      "id": "london_st_katharine_docks",
+      "deep_data_pool": [
+        {"text": "St Katharine Docks wurden 1828 eröffnet und nach Plänen des Ingenieurs Thomas Telford gebaut. Für das Hafenbecken wurde ein dicht bewohntes Viertel abgerissen.","tags": ["geschichte","hafen"]},
+        {"text": "Die Docks lagen unmittelbar östlich des Tower of London und konnten Waren nahe der City umschlagen, waren für immer größere Schiffe jedoch bald zu klein.","tags": ["industriegeschichte","orientierung"]},
+        {"text": "Lagerhäuser standen direkt an den Becken, sodass Ladung über Kräne ohne langen Landtransport bewegt werden konnte. Nur ein Teil der historischen Bausubstanz blieb erhalten.","tags": ["architektur","geschichte"]},
+        {"text": "Im Zweiten Weltkrieg erlitt das Hafengebiet schwere Bombenschäden. Der kommerzielle Dockbetrieb endete 1968; anschließend wurde das Areal neu entwickelt.","tags": ["geschichte","stadtentwicklung"]},
+        {"text": "Heute bilden drei verbundene Becken eine Marina. Masten, Stege, Backstein und moderne Wohn- und Geschäftsbauten erzeugen einen ungewöhnlich geschützten Raum neben der Themse.","tags": ["visuell","hafen"]},
+        {"text": "Das große Ivory House an der Ostseite ist ein erhaltenes Lagerhaus aus der Dockzeit; sein Name verweist auf Waren, die hier einst gelagert wurden.","tags": ["architektur","kolonialgeschichte"]},
+        {"text": "Über die Fußwege erreicht man Tower Bridge, Tower of London und die Themsepromenade in wenigen Minuten; die Becken selbst sind aber keine öffentliche Schifffahrtsroute.","tags": ["quer","orientierung"]},
+        {"text": "LIVE: Zugängliche Stege, Marina-Veranstaltungen, Gastronomie, Bootsbetrieb und Baustellen ändern sich; aktuelle Informationen bei St Katharine Docks prüfen.","tags": ["live_hint","ephemeral"]}
+      ]
+    },
+    {
+      "id": "london_millennium_bridge",
+      "deep_data_pool": [
+        {"text": "Die Millennium Bridge ist eine reine Fußgängerbrücke zwischen St Paul's Cathedral und Tate Modern. Sie wurde von Foster and Partners, Arup und Anthony Caro entworfen.","tags": ["architektur","bruecke"]},
+        {"text": "Bei der Eröffnung im Juni 2000 geriet die Brücke durch seitliche, von Fußgängern verstärkte Schwingungen in Bewegung und erhielt den Spitznamen Wobbly Bridge.","tags": ["geschichte","ingenieurwesen"]},
+        {"text": "Nach der kurzfristigen Schließung wurden Dämpfer nachgerüstet. Die Brücke öffnete 2002 wieder; der Vorfall wurde zu einem wichtigen Fallbeispiel für Fußgängerbrücken.","tags": ["ingenieurwesen","geschichte"]},
+        {"text": "Die niedrige Konstruktion hält den Blick auf St Paul's weitgehend frei. Vom Südufer erscheint die Kathedralenkuppel genau in der Achse der Brücke und Peter's Hill.","tags": ["visuell","orientierung"]},
+        {"text": "Am Südufer liegen Tate Modern und Shakespeare's Globe, am Nordufer führen Stufen und Rampe in Richtung City und St Paul's Cathedral.","tags": ["quer","orientierung"]},
+        {"text": "Kaugummiflecken auf dem Belag wurden vom Künstler Ben Wilson in zahlreiche Miniaturbilder verwandelt; die winzigen Werke erschließen sich erst beim Blick nach unten.","tags": ["kunst","detail"]},
+        {"text": "Die Brücke liegt über dem gezeitenabhängigen Teil der Themse. Wasserstand, Strömung und freigelegte Uferzonen verändern das Bild unter der schlanken Stahlkonstruktion.","tags": ["natur","visuell"]},
+        {"text": "LIVE: Vorübergehende Sperrungen wegen Wartung, Großveranstaltungen, Sicherheitslagen oder starkem Wetter bei City of London beziehungsweise TfL prüfen.","tags": ["live_hint","ephemeral"]}
+      ]
+    },
+    {
+      "id": "london_sky_garden",
+      "deep_data_pool": [
+        {"text": "Sky Garden liegt in den obersten Ebenen von 20 Fenchurch Street, einem von Rafael Viñoly entworfenen Hochhaus, das wegen seiner Form Walkie Talkie genannt wird.","tags": ["architektur","aussicht"]},
+        {"text": "Der öffentlich zugängliche Aussichtsgarten war Teil der Planungsgenehmigung und verbindet Aussichtsebenen, bepflanzte Terrassen und gastronomische Bereiche.","tags": ["stadtplanung","nutzung"]},
+        {"text": "Die große Glasfront öffnet den Blick über Themse, Tower Bridge und Shard; auf anderen Seiten liegen Monument, St Paul's und das Hochhauscluster der City.","tags": ["aussicht","orientierung"]},
+        {"text": "Die Bepflanzung ist ein gestalteter Innenraum unter Glas, kein botanischer Garten im wissenschaftlichen Sinn. Temperatur, Licht und Pflege bestimmen das Erscheinungsbild.","tags": ["visuell","natur"]},
+        {"text": "Die konkave Südfassade des Gebäudes bündelte nach der Fertigstellung Sonnenlicht und verursachte starke Hitze auf Straßenniveau; später wurden Sonnenschutzlamellen ergänzt.","tags": ["architektur","ingenieurwesen"]},
+        {"text": "Der separate Besuchereingang liegt an der Südseite des Gebäudes. Sicherheitskontrolle und Aufzug trennen die Aussichtsebene klar vom Bürozugang.","tags": ["orientierung","zugang"]},
+        {"text": "The Monument steht fast direkt westlich, während Leadenhall Market und Lloyd's Building nördlich liegen; die Höhe macht die dichte mittelalterliche Straßenstruktur sichtbar.","tags": ["quer","aussicht"]},
+        {"text": "LIVE: Kostenlose Besuchsfenster, spontane Plätze, Ausweisanforderungen, Öffnungszeiten, Terrassenzugang und Restaurantregeln ausschließlich auf der offiziellen Sky-Garden-Seite prüfen.","tags": ["live_hint","ephemeral"]}
+      ]
+    },
+    {
+      "id": "london_the_monument",
+      "deep_data_pool": [
+        {"text": "The Monument erinnert an den Großen Brand von London 1666. Sir Christopher Wren und Robert Hooke entwarfen die dorische Steinsäule, die 1677 vollendet wurde.","tags": ["geschichte","denkmal"]},
+        {"text": "Die Säule ist 202 Fuß hoch und steht 202 Fuß vom Ort in Pudding Lane entfernt, an dem das Feuer in der Bäckerei von Thomas Farriner begann.","tags": ["architektur","geschichte"]},
+        {"text": "Eine vergoldete Flammenurne krönt den Schaft. Relief und Inschriften am Sockel deuten Brand und Wiederaufbau aus der politischen Perspektive ihrer Entstehungszeit.","tags": ["kunst","visuell"]},
+        {"text": "Im Inneren führt eine enge Wendeltreppe mit 311 Stufen zur Aussichtsplattform. Die historische Konstruktion besitzt keinen Besucheraufzug.","tags": ["architektur","zugang"]},
+        {"text": "Wren und Hooke planten die Säule auch als mögliches wissenschaftliches Instrument für Pendel- und astronomische Experimente, doch praktische Störungen begrenzten die Nutzung.","tags": ["wissenschaft","geschichte"]},
+        {"text": "Die ursprüngliche Inschrift beschuldigte Katholiken fälschlich der Brandstiftung; der entsprechende Text wurde im 19. Jahrhundert entfernt.","tags": ["geschichte","erinnerungskultur"]},
+        {"text": "Von der Plattform erkennt man Tower Bridge, die Themse und das Hochhauszentrum. Straßenlücken und Neubauten verändern die Aussicht stärker als die Säule selbst.","tags": ["aussicht","orientierung"]},
+        {"text": "LIVE: Öffnung, Eintritt, letzte Besteigung und kurzfristige Schließungen der Plattform auf der offiziellen Monument-Seite prüfen; Wetter kann den Zugang beeinflussen.","tags": ["live_hint","ephemeral"]}
+      ]
+    },
+    {
+      "id": "london_guildhall",
+      "deep_data_pool": [
+        {"text": "Guildhall ist seit dem Mittelalter das zeremonielle und administrative Zentrum der City of London. Die große Halle wurde im frühen 15. Jahrhundert errichtet.","tags": ["geschichte","politik"]},
+        {"text": "Die mittelalterliche Great Hall überstand den Großen Brand von 1666 und Bombenschäden im Zweiten Weltkrieg, verlor jedoch mehrfach ihr Dach und wurde wiederhergestellt.","tags": ["geschichte","architektur"]},
+        {"text": "In der Halle stehen die riesigen Figuren Gog und Magog als legendäre Wächter Londons. Die heutigen Statuen ersetzen im Blitz zerstörte Vorgänger.","tags": ["legende","visuell"]},
+        {"text": "Unter dem Platz liegen Reste eines römischen Amphitheaters, die 1988 beim Bau der Guildhall Art Gallery entdeckt wurden; eine Linie im Pflaster zeichnet seine Form nach.","tags": ["archaeologie","visuell"]},
+        {"text": "Die City of London Corporation verwaltet von hier den historischen Square Mile. Sie ist nicht mit der Verwaltung des gesamten Großraums London gleichzusetzen.","tags": ["politik","stadtwissen"]},
+        {"text": "Guildhall Yard öffnet den Blick auf die gotische Hallenfront, die moderne West Wing und die Guildhall Art Gallery; Baustile mehrerer Jahrhunderte stehen unmittelbar nebeneinander.","tags": ["architektur","orientierung"]},
+        {"text": "Staatsbankette, Preisverleihungen und städtische Zeremonien nutzen die Halle. Der Lord Mayor of London hat eine andere Funktion als der Mayor of London.","tags": ["zeremoniell","stadtwissen"]},
+        {"text": "LIVE: Öffentlicher Zugang zur Great Hall, Gallery, Amphitheaterresten und Veranstaltungen variiert; aktuelle Hinweise der City of London prüfen.","tags": ["live_hint","ephemeral"]}
+      ]
+    },
+    {
+      "id": "london_leadenhall_market",
+      "deep_data_pool": [
+        {"text": "Am Ort von Leadenhall Market wurde schon im 14. Jahrhundert Handel betrieben. Der Name verweist auf ein Herrenhaus mit bleigedecktem Dach, Leaden Hall.","tags": ["geschichte","markt"]},
+        {"text": "Der heutige überdachte Markt entstand 1881 nach Entwürfen von Horace Jones, der auch an Smithfield und mehreren Londoner Marktbauten arbeitete.","tags": ["architektur","geschichte"]},
+        {"text": "Rot, Creme und Grün prägen Eisenkonstruktion, Ladenfronten und reich verzierte Dächer. Das zentrale Kreuz der Passagen ist der stärkste Blickpunkt.","tags": ["visuell","architektur"]},
+        {"text": "Historisch wurden hier Fleisch, Geflügel und Lebensmittel gehandelt. Heute dominieren Gastronomie, Läden und Büros im Umfeld des Versicherungsviertels.","tags": ["markt","stadtentwicklung"]},
+        {"text": "Die schmalen Zugänge führen überraschend aus modernen City-Straßen in einen viktorianischen Innenraum; besonders die Passage von Gracechurch Street ist leicht zu übersehen.","tags": ["orientierung","wegweiser"]},
+        {"text": "Leadenhall diente als Filmkulisse, unter anderem für die magische Einkaufswelt in einem frühen Harry-Potter-Film; reale Ladenfassaden wurden dafür umgedeutet.","tags": ["film","kultur"]},
+        {"text": "Direkt nördlich stehen Lloyd's Building und das Hochhaus 122 Leadenhall Street. Der Kontrast macht den Maßstab der viktorianischen Passage besonders sichtbar.","tags": ["quer","architektur"]},
+        {"text": "LIVE: Laden- und Gastronomiezeiten, Veranstaltungen, Dreharbeiten und Passage-Sperrungen bei City of London beziehungsweise Leadenhall Market aktuell prüfen.","tags": ["live_hint","ephemeral"]}
+      ]
+    },
+    {
+      "id": "london_spitalfields_market",
+      "deep_data_pool": [
+        {"text": "Ein Markt in Spitalfields erhielt 1682 eine königliche Genehmigung. Der Name des Viertels geht auf ein mittelalterliches Hospital und Priorat St Mary Spital zurück.","tags": ["geschichte","markt"]},
+        {"text": "Die erhaltene Marktstruktur aus dem späten 19. Jahrhundert verbindet eiserne Hallenelemente mit späteren Ergänzungen; der Großhandel zog 1991 nach Leyton um.","tags": ["architektur","geschichte"]},
+        {"text": "Old Spitalfields Market beherbergt heute wechselnde Stände, unabhängige Händler, Gastronomie und Veranstaltungen. Sortiment und Belegung sind nicht an jedem Tag gleich.","tags": ["markt","nutzung"]},
+        {"text": "Das Viertel wurde stark von Hugenotten geprägt, die seit dem späten 17. Jahrhundert als Glaubensflüchtlinge kamen und besonders mit Seidenweberei verbunden waren.","tags": ["migration","geschichte"]},
+        {"text": "Spätere jüdische und bangladeschische Gemeinschaften prägten Handel, Religion und Esskultur. Die nahe Brick Lane erzählt diese Schichten in wenigen Straßenzügen.","tags": ["migration","quer"]},
+        {"text": "Die große überdachte Halle ist von Backsteinbauten und modernen Büroflächen eingefasst. Entrances liegen unter anderem an Brushfield Street und Commercial Street.","tags": ["visuell","orientierung"]},
+        {"text": "Christ Church Spitalfields von Nicholas Hawksmoor erhebt sich westlich des Marktes; ihre helle Barockfassade bildet einen markanten Gegenpol zur niedrigen Markthalle.","tags": ["quer","architektur"]},
+        {"text": "LIVE: Markttage, Themenmärkte, Händlerlisten, Öffnungszeiten und Veranstaltungen auf der offiziellen Old-Spitalfields-Market-Seite prüfen.","tags": ["live_hint","ephemeral"]}
+      ]
+    },
+    {
+      "id": "london_brick_lane",
+      "deep_data_pool": [
+        {"text": "Brick Lane erhielt ihren Namen von Ziegeleien, die seit dem 15. Jahrhundert den lokalen Lehm nutzten. Die Straße verbindet Spitalfields mit Bethnal Green.","tags": ["geschichte","stadtentwicklung"]},
+        {"text": "Hugenottische Seidenweber, jüdische Einwanderer aus Osteuropa und später bangladeschische Gemeinschaften prägten nacheinander Wirtschaft und Alltagskultur des Viertels.","tags": ["migration","geschichte"]},
+        {"text": "Das Gebäude der Brick Lane Jamme Masjid war zuerst protestantische Kirche, dann methodistische Kapelle, Synagoge und schließlich Moschee; seine Nutzungen spiegeln Migration.","tags": ["religion","geschichte"]},
+        {"text": "Die Truman Brewery geht auf eine große Brauerei zurück. Nach dem Ende der Produktion wurden Teile des Industrieareals für Märkte, Kreativwirtschaft und Veranstaltungen genutzt.","tags": ["industriegeschichte","stadtentwicklung"]},
+        {"text": "Street Art konzentriert sich nicht nur an Brick Lane selbst, sondern auch in Seitenstraßen und Höfen. Werke sind vergänglich und können rasch übermalt werden.","tags": ["kunst","visuell"]},
+        {"text": "Die Straße ist für bangladeschische Restaurants sowie traditionsreiche jüdische Bagel-Bäckereien bekannt; einzelne Betriebe, Angebote und Warteschlangen sind zeitabhängig.","tags": ["kultur","essen"]},
+        {"text": "Nördlich schließen Bethnal Green und Shoreditch an, südlich Spitalfields. Die Overground-Station Shoreditch High Street liegt näher als viele Tube-Stationen.","tags": ["orientierung","quer"]},
+        {"text": "LIVE: Märkte, Street-Art-Werke, Ausstellungen, Gastronomie und Wochenendverkehr aktuell recherchieren; keine Öffnungszeiten oder konkreten Wandbilder dauerhaft aus dem Pack vorlesen.","tags": ["live_hint","ephemeral"]}
+      ]
+    },
+    {
+      "id": "london_regents_park",
+      "deep_data_pool": [
+        {"text": "Regent's Park entstand im frühen 19. Jahrhundert als Teil eines großen Plans von John Nash für den Prince Regent und verband Landschaft, Villen und repräsentative Stadträume.","tags": ["geschichte","park"]},
+        {"text": "Der nahezu kreisförmige Park wird von Outer Circle und Inner Circle gegliedert. Terrassen mit Stuckfassaden bilden außerhalb des Grüns monumentale Stadtkanten.","tags": ["stadtplanung","architektur"]},
+        {"text": "Queen Mary's Gardens sind für formale Beete und eine große Rosensammlung bekannt. Bepflanzung und Blüte ändern sich saisonal und werden laufend gepflegt.","tags": ["natur","visuell"]},
+        {"text": "Der See, offene Sportflächen, Alleen und Gärten schaffen sehr unterschiedliche Räume. London Zoo nimmt einen Teil des nördlichen Parkbereichs ein.","tags": ["natur","orientierung"]},
+        {"text": "Der Regent's Canal verläuft am Nordrand. Von dort steigt das Gelände zum Primrose Hill an, dessen Aussicht räumlich eng mit dem Park verbunden ist.","tags": ["quer","orientierung"]},
+        {"text": "Das Open Air Theatre liegt in einer dicht begrünten Senke und gehört seit 1932 zur Parkgeschichte; sein Spielbetrieb ist saisonal und wetterabhängig.","tags": ["theater","geschichte"]},
+        {"text": "Nashs ursprüngliche Planung sah einen königlichen Palast und zahlreiche Villen vor. Der Palast entstand nicht, und nur ein Teil der Villen wurde realisiert.","tags": ["geschichte","stadtplanung"]},
+        {"text": "LIVE: Parktore, Rosengarten, Sportflächen, Bootsverleih, Zoo und Open-Air-Programm bei Royal Parks beziehungsweise den Betreibern aktuell prüfen.","tags": ["live_hint","ephemeral"]}
+      ]
+    },
+    {
+      "id": "london_madame_tussauds",
+      "deep_data_pool": [
+        {"text": "Marie Tussaud lernte in Frankreich bei Philippe Curtius die Modellierung in Wachs und fertigte während der Französischen Revolution Totenmasken prominenter Opfer an.","tags": ["geschichte","biografie"]},
+        {"text": "Nach Tourneen durch Großbritannien etablierte ihre Sammlung 1835 einen festen Standort in London. Seit 1884 befindet sich die Ausstellung an der Marylebone Road.","tags": ["geschichte","museum"]},
+        {"text": "Die markante Kuppel des Gebäudes gehörte zum früheren London Planetarium. Der Komplex liegt unmittelbar neben der Tube-Station Baker Street.","tags": ["architektur","orientierung"]},
+        {"text": "Wachsfiguren entstehen aus vielen Messungen, Fotografien und Modellierschritten. Haare werden einzeln eingesetzt; Kleidung und Inszenierung tragen stark zur Ähnlichkeit bei.","tags": ["handwerk","wissen"]},
+        {"text": "Die Sammlung verbindet historische Persönlichkeiten, Politik, Film, Musik und Sport. Figuren werden ergänzt, umgestaltet oder entfernt, wenn Themen und Prominenz wechseln.","tags": ["sammlung","kultur"]},
+        {"text": "Die Chamber-of-Horrors-Tradition geht auf Tussauds Darstellungen von Verbrechen und Revolution zurück; heutige Inhalte und Alterswarnungen können sich verändern.","tags": ["geschichte","sensibel"]},
+        {"text": "Anders als ein klassisches Sammlungsmuseum ist das Haus stark als begehbare Inszenierung aufgebaut, bei der Nähe, Foto-Situationen und Themenräume zentral sind.","tags": ["nutzung","museum"]},
+        {"text": "LIVE: Eintritt, Zeitfenster, aktuelle Figuren, gesperrte Bereiche, Alters- und Barrierehinweise ausschließlich beim offiziellen Anbieter prüfen.","tags": ["live_hint","ephemeral"]}
+      ]
+    },
+    {
+      "id": "london_notting_hill",
+      "deep_data_pool": [
+        {"text": "Notting Hill entwickelte sich im 19. Jahrhundert am westlichen Stadtrand. Stuckterrassen, private Gartenplätze und mews prägen große Teile des Viertels.","tags": ["geschichte","architektur"]},
+        {"text": "Nach dem Zweiten Weltkrieg waren viele Häuser in überbelegte Mieträume geteilt. Wohnungsnot, Ausbeutung und rassistische Spannungen prägten die Sozialgeschichte.","tags": ["sozialgeschichte","migration"]},
+        {"text": "Menschen aus der Karibik veränderten Kultur und Gemeinschaft des Viertels nachhaltig. Der Notting Hill Carnival wuchs aus Initiativen gegen Rassismus und für kulturelle Sichtbarkeit.","tags": ["migration","kultur"]},
+        {"text": "Die rassistischen Angriffe von 1958 gehören zur Geschichte des Viertels. Claudia Jones organisierte 1959 ein karibisches Indoor-Fest, einen wichtigen Vorläufer des Carnival.","tags": ["geschichte","erinnerungskultur"]},
+        {"text": "Portobello Road durchzieht Notting Hill von Süden nach Norden. Markt, Antiquitätenhandel, farbige Häuser und Läden bilden nur einen Teil des größeren Wohnviertels.","tags": ["orientierung","quer"]},
+        {"text": "Die pastellfarbenen Fassaden sind am stärksten in bestimmten Straßen konzentriert; viele Gebäude sind private Wohnhäuser und keine frei nutzbaren Fotokulissen.","tags": ["visuell","respekt"]},
+        {"text": "Der Film Notting Hill machte einzelne Orte weltweit bekannt, doch das heutige Viertel ist zugleich von teurem Wohnen und starker Gentrifizierung geprägt.","tags": ["film","stadtentwicklung"]},
+        {"text": "LIVE: Carnival-Routen, Straßensperrungen, Marktzeiten, Veranstaltungen und Verkehr immer aktuell prüfen; an Carnival-Tagen gelten großräumige Sonderregelungen.","tags": ["live_hint","ephemeral"]}
+      ]
+    },
+    {
+      "id": "london_portobello_road_market",
+      "deep_data_pool": [
+        {"text": "Portobello Road trägt den Namen der 1739 im Krieg eroberten Stadt Puerto Bello. Aus einer ländlichen Verbindung entwickelte sich eine dichte Marktstraße.","tags": ["geschichte","markt"]},
+        {"text": "Der Markt begann vor allem als Lebensmittelmarkt für das wachsende Viertel. Antiquitätenhändler wurden besonders im 20. Jahrhundert zum international bekannten Profil.","tags": ["geschichte","handel"]},
+        {"text": "Die Straße besitzt mehrere Marktabschnitte: Antiquitäten, Lebensmittel, neue Waren, Mode und Secondhand liegen nicht zu jeder Zeit in gleicher Dichte nebeneinander.","tags": ["markt","orientierung"]},
+        {"text": "Bunte Ladenfronten, viktorianische Terrassen, Stände und die erhöhte Westway-Trasse verändern den Charakter auf dem langen Weg nach Norden deutlich.","tags": ["visuell","stadtbild"]},
+        {"text": "Die südlichen Antiquitätenbereiche liegen näher an Notting Hill Gate; Richtung Golborne Road wird die Straße lokaler und spiegelt portugiesische und nordafrikanische Einflüsse.","tags": ["orientierung","migration"]},
+        {"text": "Der Markt ist eine öffentliche Straße, kein abgeschlossenes Gelände. Verkehr, Lieferungen, Anwohner und Besucher teilen sich den Raum je nach Tagesabschnitt.","tags": ["nutzung","respekt"]},
+        {"text": "Im Umfeld liegen Drehorte des Films Notting Hill, doch viele häufig fotografierte Türen und Häuser sind privat oder wurden seit den Dreharbeiten verändert.","tags": ["film","quer"]},
+        {"text": "LIVE: Welche Marktsparten an welchem Wochentag aktiv sind, Händlerzeiten und Straßensperrungen auf den offiziellen Marktseiten von Kensington and Chelsea prüfen.","tags": ["live_hint","ephemeral"]}
+      ]
+    },
+    {
+      "id": "london_abbey_road_crossing",
+      "deep_data_pool": [
+        {"text": "Der Zebrastreifen wurde durch das Cover des Beatles-Albums Abbey Road von 1969 weltberühmt. Fotograf Iain Macmillan nahm die Serie in wenigen Minuten auf.","tags": ["musik","geschichte"]},
+        {"text": "Auf dem ausgewählten Bild gehen John Lennon, Ringo Starr, Paul McCartney und George Harrison in dieser Reihenfolge vom Studio weg über die Straße.","tags": ["musik","visuell"]},
+        {"text": "Abbey Road Studios liegen direkt südwestlich der Kreuzung. Das Gebäude war ursprünglich ein Wohnhaus und wurde 1931 als EMI-Aufnahmestudio eröffnet.","tags": ["musik","geschichte"]},
+        {"text": "Der heutige Übergang liegt am historischen Ort, wurde aber im Lauf der Straßenarbeiten leicht verändert. Er ist weiterhin ein aktiver öffentlicher Zebrastreifen.","tags": ["orientierung","stadtwissen"]},
+        {"text": "Seit 2010 steht der Übergang unter Denkmalschutz. Ungewöhnlich ist, dass nicht nur ein Bauwerk, sondern eine funktionierende Straßenmarkierung geschützt wurde.","tags": ["denkmalschutz","geschichte"]},
+        {"text": "Die Studios sind mit Aufnahmen der Beatles, klassischer Musik und Filmmusik verbunden. Das Innere ist normalerweise kein frei zugängliches Besuchermuseum.","tags": ["musik","nutzung"]},
+        {"text": "Für Fotos niemals Fahrbahn blockieren oder unberechenbar zurücklaufen: Autos und Busse nutzen Abbey Road weiter, und Anwohner brauchen freien Zugang.","tags": ["sicherheit","respekt"]},
+        {"text": "LIVE: Verkehrslage, mögliche Bauarbeiten und offizielle Studio-Angebote aktuell prüfen; der Livestream der Abbey Road Studios kann die Kreuzung aus fester Perspektive zeigen.","tags": ["live_hint","ephemeral"]}
+      ]
+    },
+    {
+      "id": "london_piccadilly_circus",
+      "deep_data_pool": [
+        {"text": "Piccadilly Circus wurde 1819 als Verbindung zwischen Regent Street und Piccadilly angelegt. John Nashs ursprünglicher Stadtraum war regelmäßiger als der heutige Verkehrsknoten.","tags": ["geschichte","stadtplanung"]},
+        {"text": "Die großen Leuchtreklamen an der Nordseite erschienen seit Beginn des 20. Jahrhunderts und wurden zum Symbol des kommerziellen West End.","tags": ["mediengeschichte","visuell"]},
+        {"text": "Der Shaftesbury Memorial Fountain von 1893 erinnert an den Philanthropen Lord Shaftesbury. Die geflügelte Figur stellt Anteros dar, wird aber meist Eros genannt.","tags": ["kunst","geschichte"]},
+        {"text": "Die Figur besteht aus Aluminium und war für die Zeit technisch ungewöhnlich. Brunnen und Statue wurden mehrfach versetzt und stehen heute auf einer erhöhten Insel.","tags": ["kunst","visuell"]},
+        {"text": "Von hier führen Sicht- und Laufachsen nach Regent Street, Shaftesbury Avenue, Coventry Street und Piccadilly; Soho und Leicester Square liegen nah.","tags": ["orientierung","quer"]},
+        {"text": "Das London Pavilion an der Nordostseite begann als Music Hall und wurde mehrfach umgebaut. Seine heutige Fassade gehört zum Ensemble unter den Bildschirmen.","tags": ["architektur","geschichte"]},
+        {"text": "Circus bedeutet hier einen kreisförmigen Straßenplatz, nicht Zirkusvorstellung. Der heutige Raum ist wegen späterer Straßenführungen nur noch unvollständig rund.","tags": ["stadtwissen","orientierung"]},
+        {"text": "LIVE: Bildschirmkampagnen, Veranstaltungen, Demonstrationen, Bauarbeiten und nächtliche Tube-Verbindungen ändern sich; TfL und lokale Hinweise aktuell prüfen.","tags": ["live_hint","ephemeral"]}
+      ]
+    },
+    {
+      "id": "london_leicester_square",
+      "deep_data_pool": [
+        {"text": "Leicester Square entstand im 17. Jahrhundert als vornehmer Wohnplatz rund um Leicester House. Im 19. Jahrhundert wandelte sich die Umgebung zum Vergnügungsviertel.","tags": ["geschichte","stadtentwicklung"]},
+        {"text": "Der zentrale Garten wurde 1874 neu gestaltet. In seiner Mitte steht eine Statue William Shakespeares, umgeben von Büsten weiterer historischer Persönlichkeiten.","tags": ["kunst","visuell"]},
+        {"text": "Große Kinos rund um den Platz machen Leicester Square zum Zentrum vieler britischer Filmpremieren; roter Teppich und Absperrungen sind jedoch ereignisabhängig.","tags": ["film","kultur"]},
+        {"text": "Das Viertel gehört zum West End und liegt zwischen Chinatown, Soho, Covent Garden und Trafalgar Square. Fast jede Platzkante führt in einen anderen Kulturraum.","tags": ["orientierung","quer"]},
+        {"text": "Die Bronze-Filmfiguren des Scenes-in-the-Square-Rundgangs beziehen sich auf Kino- und Fernsehgeschichte; Bestand und Standorte können sich durch Programme ändern.","tags": ["film","kunst"]},
+        {"text": "Der Platz war zeitweise vernachlässigt und wurde wiederholt umgebaut. Die heutige Granitgestaltung organisiert dichte Besucherströme um den geschützten Garten.","tags": ["stadtplanung","geschichte"]},
+        {"text": "Unter dem Platz liegt eine stark frequentierte Tube-Station an Northern und Piccadilly Line; die Eingänge verteilen sich in angrenzenden Straßen.","tags": ["transport","orientierung"]},
+        {"text": "LIVE: Premieren, rote Teppiche, Gartenveranstaltungen, Kinoprogramm, Statue-Installationen und Zugangssperren über offizielle Veranstalter und Westminster prüfen.","tags": ["live_hint","ephemeral"]}
+      ]
+    },
+    {
+      "id": "london_soho",
+      "deep_data_pool": [
+        {"text": "Soho wurde im späten 17. Jahrhundert urbanisiert. Der Name wird häufig mit einem alten Jagdruf verbunden und ist älter als das gleichnamige Viertel in New York.","tags": ["geschichte","stadtwissen"]},
+        {"text": "Einwanderung prägte Soho stark: französische Hugenotten, Italiener, Griechen, Chinesen und andere Gemeinschaften hinterließen religiöse, gastronomische und gewerbliche Spuren.","tags": ["migration","geschichte"]},
+        {"text": "Soho war über lange Zeit mit Theater, Musikclubs, Nachtleben und Sexindustrie verbunden. Aufwertung und steigende Mieten veränderten diese Mischung erheblich.","tags": ["sozialgeschichte","stadtentwicklung"]},
+        {"text": "Carnaby Street wurde in den 1960er Jahren zum Symbol der Swinging-London-Mode, während Denmark Street als Tin Pan Alley mit Musikverlagen und Instrumentenhandel verbunden ist.","tags": ["musik","mode"]},
+        {"text": "Soho Square bewahrt einen kleinen grünen Mittelpunkt. Die engen Straßen drumherum folgen keinem einfachen Raster und wechseln schnell zwischen Wohn- und Ausgehbereichen.","tags": ["orientierung","visuell"]},
+        {"text": "Die Broad-Street-Cholerakrise von 1854 wurde durch John Snows Kartierung einer Wasserpumpe untersucht; eine Pumpe und ein Pub erinnern nahe Broadwick Street daran.","tags": ["medizin","geschichte"]},
+        {"text": "Das Viertel grenzt an Oxford Street, Regent Street, Chinatown und Shaftesbury Avenue. Seine Grenzen sind kulturell wahrnehmbar, aber nicht durch Tore markiert.","tags": ["orientierung","quer"]},
+        {"text": "LIVE: Clubs, Bühnen, queere Veranstaltungsorte, Gastronomie und Nachtverkehr wechseln häufig; Programme und sichere Heimfahrt stets aktuell recherchieren.","tags": ["live_hint","ephemeral"]}
+      ]
+    },
+    {
+      "id": "london_royal_albert_hall",
+      "deep_data_pool": [
+        {"text": "Die Royal Albert Hall wurde 1871 eröffnet und nach Prince Albert benannt. Sie gehörte zur Vision eines Kultur- und Wissenschaftsviertels in South Kensington, das Ausstellungen, Bildung, Kunst und Forschung räumlich miteinander verbinden sollte.","tags": ["geschichte","kultur"]},
+        {"text": "Captain Francis Fowke und Henry Darracott Scott entwarfen den elliptischen Bau aus rotem Backstein und Terrakotta mit einer großen Eisen-Glas-Kuppel.","tags": ["architektur","geschichte"]},
+        {"text": "Ein Mosaikfries umzieht das Gebäude und stellt den Triumph von Kunst und Wissenschaft dar. Seine Figuren sind bereits vom äußeren Rundweg gut lesbar.","tags": ["kunst","visuell"]},
+        {"text": "Die Hall war für starken Nachhall berüchtigt. Schallreflektoren unter der Kuppel, umgangssprachlich mushrooms genannt, verbesserten seit den 1960er Jahren die Akustik.","tags": ["musik","ingenieurwesen"]},
+        {"text": "Seit 1941 finden hier die BBC Proms statt, deren Saison viele Konzerte und die Last Night umfasst. Das Haus dient zugleich Rock, Film, Sport und Zeremonien.","tags": ["musik","geschichte"]},
+        {"text": "Ein Teil der Sitzplätze gehört weiterhin privaten Seat-Haltern, ein Überbleibsel des Finanzierungsmodells beim Bau der Halle.","tags": ["geschichte","nutzung"]},
+        {"text": "Gegenüber steht das Albert Memorial im Kensington Gardens. Hall und Denkmal bilden ein bewusstes Erinnerungsensemble für Prince Albert.","tags": ["quer","orientierung"]},
+        {"text": "LIVE: Heutiges Programm, Einlass, Führungen, Ticketregeln, Altersgrenzen und angebotene Sitzbereiche ausschließlich bei der Royal Albert Hall prüfen.","tags": ["live_hint","ephemeral"]}
+      ]
+    },
+    {
+      "id": "london_harrods",
+      "deep_data_pool": [
+        {"text": "Harrods begann 1849 als Lebensmittelgeschäft von Charles Henry Harrod in Knightsbridge und wuchs im späten 19. Jahrhundert zu einem großen Warenhaus.","tags": ["geschichte","handel"]},
+        {"text": "Nach einem Brand 1883 wurde das Geschäft rasch wieder aufgebaut. Die heutige Terrakottafassade mit Kuppeln und Erkern entstand überwiegend in späteren Ausbauphasen.","tags": ["architektur","geschichte"]},
+        {"text": "Die abendliche Fassadenbeleuchtung betont die lange Front an Brompton Road. Grüne Markisen und goldfarbene Beschriftung gehören zur wiedererkennbaren Außengestaltung.","tags": ["visuell","wegweiser"]},
+        {"text": "Die Egyptian Escalator von William Mitchell ist eine bewusst theatralische Innenraumgestaltung aus den 1990er Jahren und keine historische ägyptische Architektur.","tags": ["architektur","kontext"]},
+        {"text": "Harrods ist mit Luxuswaren, Food Halls und aufwendiger Warenpräsentation verbunden. Abteilungen, Marken und gastronomische Angebote wechseln kontinuierlich.","tags": ["handel","kultur"]},
+        {"text": "Das Warenhaus war von 1985 bis 2010 im Besitz der Familie Al-Fayed; anschließend wurde es an Qatar Holding verkauft.","tags": ["wirtschaft","geschichte"]},
+        {"text": "Knightsbridge Station liegt unmittelbar am Gebäude. Victoria and Albert Museum und Hyde Park sind zu Fuß erreichbar, gehören aber zu unterschiedlichen Stadträumen.","tags": ["orientierung","quer"]},
+        {"text": "LIVE: Öffnungszeiten, Dresscode-Hinweise, Abteilungen, Food-Hall-Angebot, Services und Sicherheitsregeln direkt bei Harrods prüfen; keine Preise dauerhaft speichern.","tags": ["live_hint","ephemeral"]}
+      ]
+    },
+    {
+      "id": "london_st_james_park",
+      "deep_data_pool": [
+        {"text": "St James's Park ist der älteste der Londoner Royal Parks. Heinrich VIII. erwarb das sumpfige Gelände im 16. Jahrhundert und ließ es als Wildpark nutzen; seine Nähe zu den königlichen Residenzen bestimmte die weitere Entwicklung.","tags": ["geschichte","park"]},
+        {"text": "John Nash gestaltete den Park im frühen 19. Jahrhundert landschaftlich um. Aus einem formalen Kanal entstand der weich geschwungene heutige See.","tags": ["geschichte","landschaft"]},
+        {"text": "Von der Blue Bridge reicht der Blick in einer Richtung zum Buckingham Palace und in der anderen zu Whitehall und dem London Eye hinter den Bäumen.","tags": ["aussicht","orientierung"]},
+        {"text": "Pelikane leben seit 1664 im Park, nachdem ein russischer Botschafter dem König Tiere schenkte. Die heutige Gruppe wird von Parkpersonal betreut.","tags": ["tiere","geschichte"]},
+        {"text": "Der Park liegt zwischen Buckingham Palace, The Mall, Horse Guards Parade und Birdcage Walk und bildet eine grüne Mitte des zeremoniellen London.","tags": ["orientierung","quer"]},
+        {"text": "Duck Island am Ostende dient als geschützter Bereich für Wasservögel. Der See ist Lebensraum, keine frei zugängliche Bade- oder Bootsfläche.","tags": ["natur","respekt"]},
+        {"text": "The Mall entlang der Nordseite wird bei Staatszeremonien zur Prozessionsroute. Absperrungen können dann Wege und Sichtachsen im gesamten Park verändern.","tags": ["zeremoniell","stadtwissen"]},
+        {"text": "LIVE: Torzeiten, Pelikanfütterung, Veranstaltungen, Zeremonialproben und Sperrungen auf den Seiten der Royal Parks und zuständigen Behörden prüfen.","tags": ["live_hint","ephemeral"]}
+      ]
+    },
+    {
+      "id": "london_hampstead_heath",
+      "deep_data_pool": [
+        {"text": "Hampstead Heath ist eine weitläufige historische Heidelandschaft mit Wiesen, Wald, Teichen und Höhenzügen. Sie wirkt deutlich weniger formal als Londons Royal Parks.","tags": ["natur","landschaft"]},
+        {"text": "Parliament Hill bietet eine geschützte Aussicht auf die Skyline. Die City, St Paul's und Canary Wharf erscheinen aus großer Distanz über dem Häusermeer.","tags": ["aussicht","visuell"]},
+        {"text": "Die Heath bewahrt Spuren alter Feldgrenzen, Sandgruben und ländlicher Wege. Bürgerinitiativen verhinderten im 19. Jahrhundert umfangreiche Bebauung.","tags": ["geschichte","landschaft"]},
+        {"text": "Kenwood House am Nordrand ist eine klassizistische Villa, die Robert Adam umgestaltete. Haus, Kunstsammlung und formale Gartenansicht ergänzen die wilde Landschaft.","tags": ["architektur","quer"]},
+        {"text": "Mehrere historische Badeteiche und das Parliament Hill Lido dienen dem Schwimmen. Zugang, Trennung, Wasserqualität und Regeln unterscheiden sich je nach Anlage.","tags": ["aktivitaet","stadtwissen"]},
+        {"text": "Das Gelände ist hügelig, Wege können nach Regen schlammig sein und große Teile sind nachts wenig beleuchtet. Feste Schuhe und eine klare Rückroute sind sinnvoll.","tags": ["orientierung","sicherheit"]},
+        {"text": "Highgate und Hampstead liegen an verschiedenen Rändern. Wegen der Größe ist ein konkret gewählter Eingang wichtiger als nur das Ziel Hampstead Heath.","tags": ["orientierung","transport"]},
+        {"text": "LIVE: Schwimmzeiten, Tickets, Wasserqualität, Wegsperrungen, Veranstaltungen und Kenwood-Öffnung bei City of London und English Heritage prüfen.","tags": ["live_hint","ephemeral"]}
+      ]
+    },
+    {
+      "id": "london_primrose_hill",
+      "deep_data_pool": [
+        {"text": "Primrose Hill ist ein 64 Meter hoher Hügel nördlich von Regent's Park. Die freie Kuppe bietet eine der bekanntesten bodennahen Skyline-Aussichten Londons.","tags": ["aussicht","natur"]},
+        {"text": "Das Gelände gehörte einst zum königlichen Jagdgebiet und wurde 1842 für die Öffentlichkeit gesichert, um eine Bebauung der Aussichtshöhe zu verhindern.","tags": ["geschichte","landschaft"]},
+        {"text": "Auf dem Gipfel nennt eine Inschrift William Blake und die Formulierung von Gesprächen mit Sonne und Geist; weitere Tafeln markieren Aussicht und Geschichte.","tags": ["literatur","visuell"]},
+        {"text": "Die Skyline liegt südöstlich: Regent's Park füllt den Vordergrund, dahinter erscheinen West End, BT Tower, City und in der Ferne Canary Wharf.","tags": ["aussicht","orientierung"]},
+        {"text": "Der Name bezeichnet sowohl den Hügel als auch das wohlhabende Wohnviertel nördlich davon, dessen pastellfarbene Terrassen und Dorfstraße ein eigenes Ziel bilden.","tags": ["stadtwissen","architektur"]},
+        {"text": "Vom Regent's Canal und London Zoo führen Wege bergauf. Der letzte Anstieg über Gras oder gepflasterte Wege ist deutlich, aber wesentlich kürzer als auf Hampstead Heath.","tags": ["orientierung","quer"]},
+        {"text": "Die Kuppe ist offene Parkfläche ohne hohe Schutzbarriere. Dämmerung, Wind und nasser Rasen verändern Komfort und Trittsicherheit stärker als unten im Park.","tags": ["sicherheit","natur"]},
+        {"text": "LIVE: Parkregeln, Nachtzugang, Veranstaltungen, Wetter und mögliche temporäre Schutzmaßnahmen bei Royal Parks prüfen; Aussicht hängt stark von Sichtweite ab.","tags": ["live_hint","ephemeral"]}
+      ]
+    },
+    {
+      "id": "london_kings_cross_station",
+      "deep_data_pool": [
+        {"text": "King's Cross Station wurde 1852 als Londoner Endbahnhof der Great Northern Railway eröffnet. Lewis Cubitts Fassade zeigt zwei große Rundbogenhallen.","tags": ["geschichte","architektur"]},
+        {"text": "Der Bahnhof wurde auf dem Gelände eines früheren Fieber- und Pockenkrankenhauses errichtet. Der Name stammt vom nahen, längst entfernten Denkmal für König Georg IV.","tags": ["geschichte","stadtwissen"]},
+        {"text": "Die restaurierte historische Fassade ist heute wieder sichtbar, nachdem ein Vorbau aus dem 20. Jahrhundert entfernt und ein großer Vorplatz geschaffen wurde.","tags": ["architektur","stadtentwicklung"]},
+        {"text": "Die westliche Bahnhofshalle von John McAslan besitzt ein halbkreisförmiges Gitterdach, das sich wie ein weißer Fächer von einer zentralen Stütze ausbreitet.","tags": ["visuell","architektur"]},
+        {"text": "Fernzüge verbinden King's Cross traditionell mit Ostengland, Yorkshire und Schottland. St Pancras International steht direkt westlich, ist aber ein eigener Bahnhof.","tags": ["transport","orientierung"]},
+        {"text": "Der Brand in der Underground-Station von 1987 tötete 31 Menschen und führte zu tiefgreifenden Änderungen des Brandschutzes im Londoner Nahverkehr.","tags": ["geschichte","sicherheit"]},
+        {"text": "Nördlich entstand rund um Granary Square und Coal Drops Yard ein neues Stadtviertel auf ehemaligen Bahn- und Industrieflächen am Regent's Canal.","tags": ["quer","stadtentwicklung"]},
+        {"text": "LIVE: Abfahrten, Gleise, Sperrungen, Tube-Umstiege und Zugang zu Plattformen immer bei National Rail und TfL prüfen; niemals historische Gleisangaben verwenden.","tags": ["live_hint","ephemeral"]}
+      ]
+    },
+    {
+      "id": "london_st_pancras_international",
+      "deep_data_pool": [
+        {"text": "St Pancras eröffnete 1868 als Londoner Bahnhof der Midland Railway. William Henry Barlows riesige einbogige Eisenhalle überspannte die Bahnsteige ohne Zwischenstützen.","tags": ["geschichte","ingenieurwesen"]},
+        {"text": "Vor der Halle steht George Gilbert Scotts neugotisches Midland Grand Hotel, heute wieder als Hotel genutzt. Türme, Backstein und Maßwerk verdecken den Ingenieurbau dahinter.","tags": ["architektur","visuell"]},
+        {"text": "Der Bahnhof lag erhöht, weil die Gleise den Regent's Canal überqueren mussten. Die Räume unter den Bahnsteigen dienten unter anderem dem Biertransport aus Burton upon Trent.","tags": ["industriegeschichte","architektur"]},
+        {"text": "In den 1960er Jahren war der Komplex vom Abriss bedroht. Eine Kampagne, mit der besonders John Betjeman verbunden ist, trug zum Erhalt des Bahnhofs bei.","tags": ["denkmalschutz","geschichte"]},
+        {"text": "Nach umfassendem Umbau wurde St Pancras 2007 Londoner Terminal für Eurostar. Internationale und nationale Verkehre nutzen getrennte Bereiche.","tags": ["transport","geschichte"]},
+        {"text": "Paul Days große Bronzeskulptur The Meeting Place steht unter der Hallenuhr; nahebei erinnert Martin Jennings' Statue an den Dichter John Betjeman.","tags": ["kunst","visuell"]},
+        {"text": "King's Cross liegt direkt östlich auf der anderen Seite der Pancras Road. Trotz gemeinsamer Tube-Station müssen Reisende zwischen zwei Hauptbahnhöfen wechseln.","tags": ["orientierung","quer"]},
+        {"text": "LIVE: Internationale Check-in-Zeiten, Grenzkontrollen, Abfahrten, Bahnsteige und Betreiberregeln aktuell prüfen; für Eurostar gilt nicht einfach die übliche nationale Vorlaufzeit.","tags": ["live_hint","ephemeral"]}
+      ]
+    },
+    {
+      "id": "london_platform_nine_three_quarters",
+      "deep_data_pool": [
+        {"text": "Platform 9¾ ist ein fiktionaler Bahnsteig aus J. K. Rowlings Harry-Potter-Romanen, von dem der Hogwarts Express in der Geschichte abfährt.","tags": ["literatur","film"]},
+        {"text": "Die heutige Fotoinszenierung mit Gepäckwagen befindet sich in der öffentlichen Halle von King's Cross, nicht zwischen den realen Bahnsteigen 9 und 10.","tags": ["orientierung","stadtwissen"]},
+        {"text": "Die realen Gleise 9 und 10 liegen nebeneinander und werden nicht durch eine massive Wand getrennt. Die Buchvorstellung folgt daher nicht exakt der Bahnhofstopografie.","tags": ["literatur","orientierung"]},
+        {"text": "Für die ersten Filme dienten andere Bereiche von King's Cross sowie die neugotische Außenansicht von St Pancras als visuelle Kulisse für die magische Reise.","tags": ["film","architektur"]},
+        {"text": "Die Installation wurde wegen Bahnhofsumbaus mehrfach versetzt. Ihr heutiger Standort ist bewusst ohne Bahnsteigticket erreichbar und liegt bei einem Themenladen.","tags": ["geschichte","nutzung"]},
+        {"text": "Ein halber Wagen verschwindet scheinbar in der Wand; Schals und professionelle Fotos sind kommerzielle Ergänzungen, das eigene Fotografieren bleibt vom aktuellen Ablauf abhängig.","tags": ["visuell","kultur"]},
+        {"text": "Die Attraktion liegt im laufenden Bahnhof. Fluchtwege, Reisende und Durchgänge müssen frei bleiben, auch wenn sich für ein Foto eine Schlange bildet.","tags": ["sicherheit","respekt"]},
+        {"text": "LIVE: Standort, Warteschlange, Shop-Zeiten, Fotoangebot und eventuelle Zugangsbeschränkungen direkt bei King's Cross und dem offiziellen Shop prüfen.","tags": ["live_hint","ephemeral"]}
+      ]
+    },
+    {
+      "id": "london_southwark_cathedral",
+      "deep_data_pool": [
+        {"text": "Southwark Cathedral steht an einem sehr alten christlichen Ort nahe der London Bridge. Der mittelalterliche Bau war als Priory Church of St Mary Overie bekannt.","tags": ["geschichte","religion"]},
+        {"text": "Nach der Reformation wurde die Kirche Pfarrkirche St Saviour. Erst 1905 erhielt sie mit der Gründung der anglikanischen Diözese Southwark den Kathedralstatus.","tags": ["geschichte","religion"]},
+        {"text": "Chor und Retrochor bewahren bedeutende mittelalterliche Substanz, während das Langhaus im 19. Jahrhundert nach Abriss des Vorgängerbaus neu errichtet wurde.","tags": ["architektur","geschichte"]},
+        {"text": "William Shakespeare lebte und arbeitete im nahen Bankside-Viertel. Ein Denkmal und ein farbiges Fenster erinnern in der Kathedrale an diese Verbindung.","tags": ["literatur","quer"]},
+        {"text": "John Harvard, später Namensgeber der Harvard University, wurde 1607 in dieser Kirche getauft. Eine Kapelle erinnert an ihn und die transatlantische Verbindung.","tags": ["geschichte","biografie"]},
+        {"text": "Der Kirchhof liegt direkt neben Borough Market und Bahnviadukten. Sakralraum, Marktgeräusche und Eisenbahn zeigen die dichte Überlagerung von Southwark.","tags": ["visuell","orientierung"]},
+        {"text": "Die Kathedrale ist ein aktiver anglikanischer Gottesdienstort, kein reines Museum. Während Gebet und Liturgie gelten Ruhe und Einschränkungen für Besichtigungen.","tags": ["nutzung","respekt"]},
+        {"text": "LIVE: Gottesdienste, Besuchszeiten, Musikprogramm, Führungen und zugängliche Bereiche auf der offiziellen Kathedralenseite prüfen.","tags": ["live_hint","ephemeral"]}
+      ]
+    },
+    {
+      "id": "london_tate_britain",
+      "deep_data_pool": [
+        {"text": "Tate Britain eröffnete 1897 als National Gallery of British Art. Der Zuckerunternehmer Henry Tate finanzierte das Gebäude und stiftete Werke seiner Sammlung.","tags": ["geschichte","museum"]},
+        {"text": "Der klassizistische Bau von Sidney R. J. Smith steht auf dem Gelände des früheren Millbank Prison; die zentrale Kuppel markiert den Eingang an der Themse.","tags": ["architektur","geschichte"]},
+        {"text": "Das Museum zeigt britische Kunst vom 16. Jahrhundert bis in die Gegenwart. Die Präsentation ordnet bekannte Werke in wechselnde historische und gesellschaftliche Zusammenhänge.","tags": ["sammlung","kunst"]},
+        {"text": "Eine besonders große Werkgruppe von J. M. W. Turner gehört zum Haus. Turner vermachte der Nation zahlreiche Arbeiten, deren Präsentation mehrfach neu geordnet wurde.","tags": ["kunst","sammlung"]},
+        {"text": "Der Turner Prize ist eng mit Tate verbunden, wird aber nicht dauerhaft jedes Jahr in demselben Gebäude gezeigt; Austragungsort und Ausstellung sind zeitabhängig.","tags": ["kunst","stadtwissen"]},
+        {"text": "Die Rotunde, breite Treppen und Duveen Galleries schaffen eine monumentale Innenachse. Zeitgenössische Installationen reagieren oft direkt auf diese Architektur.","tags": ["visuell","architektur"]},
+        {"text": "Tate Modern liegt weiter flussabwärts. Eine Bootslinie kann beide Häuser verbinden, ist jedoch ein externer, kostenpflichtiger Verkehrsservice.","tags": ["quer","transport"]},
+        {"text": "LIVE: Freier Zugang zur Sammlung, Sonderausstellungen, aktuelle Hängung, Bootsverbindung und Galerieschließungen bei Tate und TfL prüfen.","tags": ["live_hint","ephemeral"]}
+      ]
+    },
+    {
+      "id": "london_somerset_house",
+      "deep_data_pool": [
+        {"text": "Somerset House steht am Ort eines Tudor-Palastes des Duke of Somerset. Der heutige große klassizistische Komplex entstand ab 1776 nach Plänen William Chambers'.","tags": ["geschichte","architektur"]},
+        {"text": "Das Gebäude sollte mehrere staatliche Institutionen bündeln. Zu seinen historischen Nutzern gehörten Royal Academy, Royal Society und Behörden der Marine.","tags": ["geschichte","nutzung"]},
+        {"text": "Der weite Edmond J. Safra Fountain Court bildet das Zentrum. Strenge Steinfronten, Arkaden und der Durchblick zur Themse bestimmen den Raumeindruck.","tags": ["visuell","architektur"]},
+        {"text": "Die River Terrace blickt heute über Victoria Embankment zur Themse. Beim Bau reichte das Ufer näher an das Gebäude; die Straße entstand erst im 19. Jahrhundert.","tags": ["stadtentwicklung","orientierung"]},
+        {"text": "Die Courtauld Gallery belegt den North Wing und besitzt eine bedeutende Kunstsammlung, ist organisatorisch und beim Eintritt jedoch vom frei zugänglichen Hof zu unterscheiden.","tags": ["kunst","quer"]},
+        {"text": "Somerset House entwickelte sich zu einem Kulturzentrum mit Ausstellungen, Studios, Aufführungen und saisonalen Installationen. Inhalte wechseln regelmäßig.","tags": ["kultur","nutzung"]},
+        {"text": "Von Strand führen monumentale Torbögen in den Hof; die Waterloo Bridge liegt östlich, Covent Garden nördlich und Southbank gegenüber auf der anderen Flussseite.","tags": ["orientierung","quer"]},
+        {"text": "LIVE: Hofzugang, Fontänenbetrieb, Ausstellungen, Courtauld-Tickets, Veranstaltungen und saisonale Eisbahn ausschließlich aktuell prüfen.","tags": ["live_hint","ephemeral"]}
+      ]
+    },
+    {
+      "id": "london_wallace_collection",
+      "deep_data_pool": [
+        {"text": "Die Wallace Collection befindet sich in Hertford House am Manchester Square und entstand aus den Sammlungen der Marquesses of Hertford und Sir Richard Wallace.","tags": ["geschichte","sammlung"]},
+        {"text": "Lady Wallace vermachte Haus und Sammlung 1897 der britischen Nation. Die Stiftungsbedingungen bewahrten den Bestand lange als geschlossenes Ensemble.","tags": ["geschichte","museum"]},
+        {"text": "Das Museum ist besonders für französische Kunst und Kunsthandwerk des 18. Jahrhunderts, alte Meister, Möbel, Porzellan, Waffen und Rüstungen bekannt.","tags": ["kunst","sammlung"]},
+        {"text": "Frans Hals' Gemälde The Laughing Cavalier gehört zu den bekanntesten Werken. Der englische Titel ist populär, obwohl die Identität des Dargestellten nicht gesichert ist.","tags": ["kunst","wissen"]},
+        {"text": "Die historischen Raumfolgen mit Seidenfarben, Kronleuchtern und dichter Hängung zeigen den Charakter einer aristokratischen Sammlung statt eines neutralen White Cube.","tags": ["visuell","innenraum"]},
+        {"text": "Die Rüstkammern verbinden europäische und außereuropäische Waffen. Ihre Präsentation erlaubt Vergleiche von Technik, Dekor und höfischer Repräsentation.","tags": ["sammlung","handwerk"]},
+        {"text": "Hertford House liegt in einem ruhigen Gartenplatz wenige Straßen nördlich der Oxford Street; der zurückgesetzte Eingang wirkt eher wie ein Stadtpalais als ein Großmuseum.","tags": ["orientierung","architektur"]},
+        {"text": "LIVE: Öffnung, freier Eintritt, Sonderausstellungen, Führungen und temporär ausgeliehene oder konservierte Werke bei der Wallace Collection prüfen.","tags": ["live_hint","ephemeral"]}
+      ]
+    },
+    {
+      "id": "london_canary_wharf",
+      "deep_data_pool": [
+        {"text": "Canary Wharf entstand auf dem Gelände der West India Docks, die ab 1802 Waren aus dem britischen Kolonialhandel umschlugen. Der Hafenbetrieb prägte die Isle of Dogs.","tags": ["geschichte","hafen"]},
+        {"text": "Der Name Canary Wharf geht auf einen Kai zurück, der Handel mit den Kanarischen Inseln diente. Mit dem Niedergang der London Docks verlor das Gebiet viele Arbeitsplätze.","tags": ["geschichte","stadtwissen"]},
+        {"text": "Seit den 1980er Jahren wurde das Areal zum Bürozentrum entwickelt. One Canada Square von César Pelli war lange das höchste Gebäude Großbritanniens.","tags": ["stadtentwicklung","architektur"]},
+        {"text": "Wasserbecken, alte Dockkanten, Kräne und Lagerhausreste bleiben zwischen Glas- und Stahlhochhäusern sichtbar und zeigen, dass der Stadtgrundriss vom Hafen stammt.","tags": ["visuell","industriegeschichte"]},
+        {"text": "Die Jubilee Line Station von Foster and Partners liegt wie ein großer Einschnitt im Boden; darüber bildet ein Parkdach einen grünen Kontrast zum Finanzviertel.","tags": ["architektur","transport"]},
+        {"text": "Crossrail Place mit Dachgarten markiert den Elizabeth-Line-Bahnhof. Pflanzen sind nach geografischen Herkünften entlang historischer Seehandelsrouten gruppiert.","tags": ["natur","architektur"]},
+        {"text": "DLR, Jubilee Line, Elizabeth Line und Themseboote erschließen das Viertel unterschiedlich. Viele unterirdische Passagen verbinden Malls und Bürotürme.","tags": ["orientierung","transport"]},
+        {"text": "LIVE: Dachgärten, Kunstrundgänge, Veranstaltungen, Bootsverkehr, Baustellen und Wochenendöffnungen aktuell bei Canary Wharf Group und TfL prüfen.","tags": ["live_hint","ephemeral"]}
+      ]
+    },
+    {
+      "id": "london_wembley_stadium",
+      "deep_data_pool": [
+        {"text": "Das heutige Wembley Stadium eröffnete 2007 am Ort des alten Stadions von 1923. Es ist Nationalstadion des englischen Fußballs und Austragungsort großer Konzerte.","tags": ["geschichte","sport"]},
+        {"text": "Der 133 Meter hohe Wembley Arch überspannt das Stadion und trägt einen großen Teil der Dachlast. Er ersetzte die Twin Towers als weithin sichtbares Wahrzeichen.","tags": ["architektur","ingenieurwesen"]},
+        {"text": "Das alte Wembley war für das White Horse Final von 1923, das WM-Finale 1966 und Live Aid 1985 bekannt; es wurde zwischen 2002 und 2003 abgerissen.","tags": ["sport","geschichte"]},
+        {"text": "Die Schalenform fasst rund 90.000 Plätze. Ein teilweise bewegliches Dach schützt Zuschauerränge, schließt den Innenraum aber nicht vollständig wie eine Halle.","tags": ["architektur","stadtwissen"]},
+        {"text": "Die englische Nationalmannschaft, FA Cup Finals und weitere Endspiele sind eng mit Wembley verbunden. Vereine nutzen das Stadion nur bei bestimmten Anlässen.","tags": ["sport","kultur"]},
+        {"text": "Wembley Park Station führt über Olympic Way direkt auf den Bogen zu. Wembley Stadium Station und Wembley Central sind alternative, aber anders angebundene Bahnhöfe.","tags": ["orientierung","transport"]},
+        {"text": "Bei Großveranstaltungen werden Wege in Einbahnströme, Sicherheitszonen und Ticketbereiche geteilt. Die sichtbare Nähe unterschätzt oft die kontrollierte Laufroute.","tags": ["sicherheit","orientierung"]},
+        {"text": "LIVE: Event, Kick-off, Tickets, Taschenregeln, Einlass, Verkehr und letzte Verbindungen ausschließlich bei Wembley, Veranstalter, National Rail und TfL prüfen.","tags": ["live_hint","ephemeral"]}
+      ]
+    },
+    {
+      "id": "london_barbican_centre",
+      "deep_data_pool": [
+        {"text": "Das Barbican Centre eröffnete 1982 innerhalb des Barbican Estate, das auf einem im Zweiten Weltkrieg stark zerstörten Teil der City errichtet wurde.","tags": ["geschichte","kultur"]},
+        {"text": "Chamberlin, Powell and Bon entwarfen das Ensemble im brutalistischen Stil. Sichtbeton, erhöhte Fußwege, Wohntürme, Wasserbecken und Gärten greifen ineinander.","tags": ["architektur","visuell"]},
+        {"text": "Das Zentrum vereint Konzertsaal, Theater, Kinos, Galerien, Bibliothek und Veranstaltungsräume. Es ist Heimat des London Symphony Orchestra.","tags": ["kultur","musik"]},
+        {"text": "Die Orientierung ist bewusst mehrstufig: Straßen, Podiumsebene und Highwalks liegen übereinander. Farbcodierte Linien und Beschilderung helfen innerhalb des Komplexes.","tags": ["orientierung","architektur"]},
+        {"text": "Das Barbican Estate ersetzte nicht nur Ruinen, sondern schuf eine dichte Wohnvision innerhalb der City. Die Anlage steht als Gesamtwerk unter Denkmalschutz.","tags": ["stadtplanung","geschichte"]},
+        {"text": "In der Anlage liegen Reste der römischen und mittelalterlichen London Wall sowie St Giles-without-Cripplegate, die nach Kriegszerstörung wiederaufgebaut wurde.","tags": ["quer","geschichte"]},
+        {"text": "Das Conservatory ist ein gläserner Innengarten mit tropischen Pflanzen und Wasserbecken, aber nicht täglich frei geöffnet; er liegt über Teilen des Theaterbereichs.","tags": ["natur","architektur"]},
+        {"text": "LIVE: Programm, kostenlose Ausstellungen, Conservatory-Termine, Highwalk-Sperrungen und konkrete Eingänge auf der offiziellen Barbican-Seite prüfen.","tags": ["live_hint","ephemeral"]}
+      ]
+    },
+    {
+      "id": "london_temple_church",
+      "deep_data_pool": [
+        {"text": "Temple Church wurde im 12. Jahrhundert von den Tempelrittern errichtet. Der runde Westteil orientiert sich symbolisch an der Grabeskirche in Jerusalem.","tags": ["geschichte","religion"]},
+        {"text": "Die längliche Chancel wurde im 13. Jahrhundert ergänzt. Rundkirche und gotischer Chor machen den Bau zu einer klar lesbaren Verbindung zweier Bauphasen.","tags": ["architektur","geschichte"]},
+        {"text": "Im Rundbau liegen steinerne Ritterfiguren, darunter das Grabdenkmal William Marshals, eines einflussreichen Adligen und Regenten des frühen 13. Jahrhunderts.","tags": ["geschichte","visuell"]},
+        {"text": "Nach Auflösung des Templerordens ging die Kirche an die Krone und wurde später den Juristengemeinschaften Inner Temple und Middle Temple zur Nutzung überlassen.","tags": ["recht","geschichte"]},
+        {"text": "Die Kirche erlitt 1941 schwere Bombenschäden. Dach, Innenraum und Orgel wurden nach dem Krieg restauriert, wobei erhaltene mittelalterliche Substanz bewahrt wurde.","tags": ["geschichte","architektur"]},
+        {"text": "Temple ist ein verwinkelter Komplex aus Höfen, Gärten und Kanzleigebäuden zwischen Fleet Street und Themse; Tore können außerhalb bestimmter Zeiten geschlossen sein.","tags": ["orientierung","stadtbild"]},
+        {"text": "Die Kirche ist aktiver anglikanischer Gottesdienstort der beiden Inns of Court und zugleich Konzertort, besonders wegen ihrer Chor- und Orgeltradition.","tags": ["musik","nutzung"]},
+        {"text": "LIVE: Torzugänge zum Temple, Kirchenöffnung, Gottesdienste, Konzerte und Eintrittshinweise direkt bei Temple Church beziehungsweise den Inns prüfen.","tags": ["live_hint","ephemeral"]}
+      ]
+    },
+    {
+      "id": "london_westminster_cathedral",
+      "deep_data_pool": [
+        {"text": "Westminster Cathedral ist die Mutterkirche der römisch-katholischen Kirche in England und Wales. Sie wurde ab 1895 nach Plänen John Francis Bentleys gebaut.","tags": ["geschichte","religion"]},
+        {"text": "Die Kathedrale ist nicht Westminster Abbey: Sie steht nahe Victoria Station, gehört zur katholischen Kirche und besitzt eine byzantinisch inspirierte Architektur.","tags": ["orientierung","stadtwissen"]},
+        {"text": "Roter Backstein und weißer Portlandstein bilden außen Streifen, Bögen und einen frei stehenden Campanile. Kuppeln prägen die Silhouette über Victoria.","tags": ["architektur","visuell"]},
+        {"text": "Das Innere besitzt ein riesiges unverkleidetes Ziegelgewölbe. Mosaiken schmücken zahlreiche Kapellen, doch das ursprünglich geplante Gesamtprogramm blieb unvollendet.","tags": ["kunst","innenraum"]},
+        {"text": "Die Kathedrale wurde 1903 eröffnet und 1910 konsekriert, nachdem die Baukosten nach damaliger kirchlicher Regelung beglichen waren.","tags": ["geschichte","religion"]},
+        {"text": "Ihre Chortradition ist für gregorianischen Gesang und polyphone Kirchenmusik bekannt. Liturgie und Musik sind gelebte Nutzung, keine reine Konzertinszenierung.","tags": ["musik","religion"]},
+        {"text": "Der Campanile bietet eine erhöhte Aussicht, wenn der Zugang geöffnet ist. Die Victoria Street führt von hier Richtung Westminster Abbey und Parliament.","tags": ["aussicht","orientierung"]},
+        {"text": "LIVE: Gottesdienste, Chorzeiten, Campanile-Zugang, Besuchsregeln und mögliche liturgische Sperrungen auf der offiziellen Kathedralenseite prüfen.","tags": ["live_hint","ephemeral"]}
+      ]
+    },
+    {
+      "id": "london_southbank_centre",
+      "deep_data_pool": [
+        {"text": "Das Southbank Centre wuchs aus dem Festival of Britain von 1951. Die Royal Festival Hall ist das wichtigste erhaltene Gebäude dieses optimistischen Nachkriegsprojekts.","tags": ["geschichte","kultur"]},
+        {"text": "Zur Anlage gehören Royal Festival Hall, Queen Elizabeth Hall, Purcell Room und Hayward Gallery. Die Gebäude entstanden in unterschiedlichen Nachkriegsphasen.","tags": ["architektur","kultur"]},
+        {"text": "Die Royal Festival Hall wurde akustisch als egg in a box konzipiert: Der Konzertsaal liegt konstruktiv vom äußeren Gebäude und Verkehrslärm getrennt.","tags": ["architektur","musik"]},
+        {"text": "Queen Elizabeth Hall und Hayward Gallery zeigen mit rauem Beton, Terrassen und skulpturalen Treppen den britischen Brutalismus der 1960er Jahre.","tags": ["architektur","visuell"]},
+        {"text": "Die Flussterrassen öffnen sich zur Themse mit Blick auf Hungerford Bridge und Westminster. Unter den Gebäuden bleiben Verkehrs- und Serviceebenen sichtbar.","tags": ["aussicht","orientierung"]},
+        {"text": "Der Skatebereich unter der Queen Elizabeth Hall ist seit Jahrzehnten ein wichtiger Ort britischer Skateboard- und Graffitikultur und wurde gegen Umbaupläne verteidigt.","tags": ["subkultur","geschichte"]},
+        {"text": "National Theatre, BFI Southbank und London Eye liegen entlang der Uferpromenade, gehören aber nicht alle zum Southbank Centre.","tags": ["quer","stadtwissen"]},
+        {"text": "LIVE: Konzerte, Ausstellungen, kostenlose Foyerangebote, Zugang zu Terrassen, Baustellen und Einlassregeln direkt beim Southbank Centre prüfen.","tags": ["live_hint","ephemeral"]}
+      ]
+    }
+  ],
+  "offline_qa": [
+    {
+      "q": "Wie bezahle ich Tube, Bus und viele andere TfL-Verbindungen?",
+      "a": "Am einfachsten mit derselben kontaktlosen Bankkarte oder demselben Gerät bei jeder Fahrt ein- und, wo nötig, auschecken. Alternativ funktioniert Oyster. Karte und Smartphone zählen als unterschiedliche Zahlungsmittel und dürfen innerhalb einer Reise nicht gemischt werden. LIVE: Gültigkeit, Caps und Tarifzonen bei TfL prüfen.",
+      "tags": ["transport","oyster","contactless","live_hint","ephemeral"]
+    },
+    {
+      "q": "Muss ich im Londoner Bus beim Aussteigen erneut tappen?",
+      "a": "Bei TfL-Bussen wird normalerweise nur beim Einsteigen am gelben Leser getappt, nicht beim Aussteigen. Bei Bahn, Tube, DLR und Elizabeth Line ist korrektes Ein- und Auschecken wichtig. LIVE: Sonderregeln und aktuelle Zahlungsweise bei TfL prüfen.",
+      "tags": ["transport","bus","oyster","live_hint","ephemeral"]
+    },
+    {
+      "q": "Ist Oyster oder Contactless günstiger?",
+      "a": "Beide nutzen auf vielen TfL-Fahrten vergleichbare Pay-as-you-go-Tarife und Deckelungen, aber ausländische Karten können Gebühren verursachen und nicht jede Rabattberechtigung lässt sich auf Contactless laden. LIVE: Persönlichen Fall, Caps und Zuschläge bei TfL und Bank prüfen.",
+      "tags": ["transport","oyster","contactless","live_hint","ephemeral"]
+    },
+    {
+      "q": "Fährt die Tube die ganze Nacht?",
+      "a": "Nicht generell. Night Tube fährt nur auf bestimmten Linien und Abschnitten in ausgewählten Nächten; außerdem gibt es Night Buses. LIVE: Für die konkrete Nacht TfL Journey Planner, letzte Abfahrt, Bauarbeiten und Streiks prüfen.",
+      "tags": ["transport","tube","night","live_hint","ephemeral"]
+    },
+    {
+      "q": "Kann ich mit dem Boot auf der Themse fahren?",
+      "a": "Ja, es gibt Linienverkehr wie Uber Boat by Thames Clippers und touristische Rundfahrten. Haltestellen, Tarifintegration und Fahrpläne unterscheiden sich. LIVE: Route, Pier, Abfahrt, Ticket und Betriebsstatus beim Betreiber und TfL prüfen.",
+      "tags": ["transport","thames","boat","live_hint","ephemeral"]
+    },
+    {
+      "q": "Wie plane ich einen Greenwich-Tag?",
+      "a": "Gut kombinierbar sind Cutty Sark, National Maritime Museum, Queen's House, Greenwich Park und Royal Observatory. Der Anstieg zum Observatory ist steil. LIVE: Zeitfenster, Öffnung und Anreise per DLR, Bahn oder Boot prüfen; lieber nicht alle Innenräume erzwingen.",
+      "tags": ["greenwich","planung","live_hint","ephemeral"]
+    },
+    {
+      "q": "Eignet sich Kew Gardens als Tagesausflug?",
+      "a": "Ja. Die botanische Anlage ist groß genug für mehrere Stunden und liegt außerhalb des Zentrums. Bequeme Schuhe und ein klarer Rückweg helfen. LIVE: Eintritt, reservierte Zeiten, Gewächshausschließungen und konkrete Verbindung bei Kew und TfL prüfen.",
+      "tags": ["day_trip","kew","live_hint","ephemeral"]
+    },
+    {
+      "q": "Eignet sich Hampton Court Palace als Tagesausflug?",
+      "a": "Ja. Palast, Höfe und Gärten benötigen meist einen erheblichen Teil des Tages; der Ort liegt südwestlich von Central London. LIVE: Öffnung, Tickets, Gartenbereiche und Zugverbindung ab Waterloo bei Historic Royal Palaces und National Rail prüfen.",
+      "tags": ["day_trip","hampton_court","live_hint","ephemeral"]
+    },
+    {
+      "q": "Welche Notrufnummer gilt in London?",
+      "a": "Für akute Notfälle funktionieren 999 und 112 für Polizei, Feuerwehr oder Rettungsdienst. Nur bei unmittelbarer Gefahr oder dringender Hilfe anrufen; Standort, Art des Notfalls und Rückrufnummer klar nennen.",
+      "tags": ["notfall","sicherheit"]
+    },
+    {
+      "q": "Sind Londons große Museen kostenlos?",
+      "a": "Viele nationale Museen verlangen für ihre Dauersammlungen häufig keinen Grundeintritt, Sonderausstellungen können jedoch kostenpflichtig sein und Zeitfenster erfordern. LIVE: Beim jeweiligen Museum Öffnung, Reservierung, Spendenhinweis und Ausstellungspreis prüfen.",
+      "tags": ["museum","kostenlos","live_hint","ephemeral"]
+    },
+    {
+      "q": "Wie ist die Trinkgeldkultur in London?",
+      "a": "Trinkgeld ist eine freiwillige Anerkennung, kein fixer Aufschlag. Restaurants setzen häufig bereits eine discretionary service charge auf die Rechnung; vor zusätzlichem Trinkgeld erst prüfen. In Pubs ohne Tischservice und bei Take-away ist Trinkgeld weniger üblich. Keine starre Prozentzahl annehmen.",
+      "tags": ["alltag","trinkgeld","kultur"]
+    },
+    {
+      "q": "Kann eine Person mit einer Contactless-Karte für mehrere Reisende tappen?",
+      "a": "Jede reisende Person braucht für TfL Pay as you go grundsätzlich ein eigenes Zahlungsmittel oder eine eigene Oyster, damit Ein- und Ausstieg sowie Caps korrekt zugeordnet werden. LIVE: Regeln für Kinder, Gruppen und Ermäßigungen bei TfL prüfen.",
+      "tags": ["transport","contactless","gruppe","live_hint","ephemeral"]
+    }
+  ]
+}

@@ -67,6 +67,7 @@ export {
   commitHandsFreeNavStart,
   progressiveEnrichRoute,
   getLastProgressiveStartMeta,
+  bumpProgressiveEnrichEpoch,
 } from './startNav';
 
 export {

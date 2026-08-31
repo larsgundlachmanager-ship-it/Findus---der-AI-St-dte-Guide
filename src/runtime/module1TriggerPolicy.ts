@@ -13,34 +13,82 @@ import {
   getLastModule1EventAtMs,
   noteModule1Event,
 } from '../services/navigation/modulePriorityPolicy';
-import { promptWeightForInterest } from '../interests/interestTaxonomy';
+import {
+  matchingDimensions,
+  promptWeightForInterest,
+} from '../interests/interestTaxonomy';
 
 export const MODULE1_NEUTRAL_COOLDOWN_MS = 3 * 60_000;
 export const MODULE1_HARD_SKIP_SPEED_KMH = 50;
 export const MODULE1_HARD_SKIP_SPEED_MS = MODULE1_HARD_SKIP_SPEED_KMH / 3.6;
 
-/** Kategorie → experiencePrefs key (erweitert um gängige Tags). */
+/** Legacy-Keys → neue Pref-Keys (Settings/Onboarding-Migration). */
+const LEGACY_PREF_ALIASES: Record<string, string[]> = {
+  theater_kultur: ['theater', 'kino', 'konzert_musical'],
+  denkmäler: ['denkmaeler'],
+  parks: ['natur'],
+  schlösser: ['architektur'],
+};
+
+/** Kategorie → experiencePrefs key (Fallback wenn Taxonomy nicht trifft). */
 const CATEGORY_PREF_KEYS: Record<string, string> = {
+  theater: 'theater',
+  theater_kultur: 'theater',
+  kino: 'kino',
+  cinema: 'kino',
+  konzert: 'konzert_musical',
+  musical: 'konzert_musical',
   kirche: 'kirchen',
   kirchen: 'kirchen',
   church: 'kirchen',
   museum: 'museen',
   museen: 'museen',
-  denkmal: 'denkmäler',
-  denkmaeler: 'denkmäler',
-  park: 'parks',
-  parks: 'parks',
+  denkmal: 'denkmaeler',
+  denkmaeler: 'denkmaeler',
+  cafe: 'cafes',
+  café: 'cafes',
+  park: 'natur',
+  parks: 'natur',
   aussicht: 'aussichten',
   aussichten: 'aussichten',
   strand: 'strand',
   beach: 'strand',
-  schloss: 'schlösser',
-  schloesser: 'schlösser',
+  sport: 'sport',
+  freizeit: 'aktivitaeten',
+  freizeitpark: 'aktivitaeten',
+  schloss: 'architektur',
+  schloesser: 'architektur',
   leuchtturm: 'aussichten',
   landmark: 'aussichten',
 };
 
 export type PrefStrength = 'must_have' | 'yes' | 'neutral' | 'no';
+
+function readPref(
+  prefs: Record<string, string | undefined> | undefined,
+  key: string,
+): 'yes' | 'no' | 'neutral' | null {
+  if (!prefs) return null;
+  const raw = prefs[key];
+  if (raw === 'yes' || raw === 'no') return raw;
+  if (raw === 'neutral') return 'neutral';
+  // Legacy: theater_kultur deckt Theater/Kino/Konzert ab
+  if (
+    key === 'theater' ||
+    key === 'kino' ||
+    key === 'konzert_musical'
+  ) {
+    const legacy = prefs.theater_kultur;
+    if (legacy === 'yes' || legacy === 'no') return legacy;
+  }
+  for (const [legacy, targets] of Object.entries(LEGACY_PREF_ALIASES)) {
+    if (targets.includes(key)) {
+      const v = prefs[legacy];
+      if (v === 'yes' || v === 'no') return v;
+    }
+  }
+  return null;
+}
 
 export function resolvePoiPrefStrength(
   poi: Poi,
@@ -53,8 +101,15 @@ export function resolvePoiPrefStrength(
   const cat = (poi.category ?? '').trim().toLowerCase();
   const blob = `${cat} ${tags.join(' ')}`.toLowerCase();
 
+  const dims = matchingDimensions(tags, cat);
   let prefKey: string | null =
-    CATEGORY_PREF_KEYS[cat] ?? (cat && cat.length > 2 ? cat : null);
+    dims.sort(
+      (a, b) => promptWeightForInterest(b.prefKey) - promptWeightForInterest(a.prefKey),
+    )[0]?.prefKey ?? null;
+
+  if (!prefKey) {
+    prefKey = CATEGORY_PREF_KEYS[cat] ?? null;
+  }
   if (!prefKey) {
     for (const [k, v] of Object.entries(CATEGORY_PREF_KEYS)) {
       if (blob.includes(k)) {
@@ -67,7 +122,7 @@ export function resolvePoiPrefStrength(
   if (!prefKey || !profile?.experiencePrefs) {
     return { strength: 'neutral', prefKey };
   }
-  const raw = profile.experiencePrefs[prefKey];
+  const raw = readPref(profile.experiencePrefs as Record<string, string>, prefKey);
   if (raw === 'no') return { strength: 'no', prefKey };
   if (raw === 'yes') return { strength: 'yes', prefKey };
   return { strength: 'neutral', prefKey };
@@ -92,42 +147,28 @@ export function evaluateModule1PrefGate(input: {
   if (input.force) {
     return { ok: true, strength: 'yes', reason: 'force' };
   }
-  const { strength } = resolvePoiPrefStrength(input.poi, input.profile);
+  const { strength, prefKey } = resolvePoiPrefStrength(input.poi, input.profile);
   if (strength === 'must_have') {
     return { ok: true, strength, reason: 'must_have' };
   }
   if (strength === 'yes') {
-    return { ok: true, strength, reason: 'pref_yes' };
+    return { ok: true, strength, reason: `pref_yes:${prefKey ?? 'x'}` };
   }
   if (strength === 'no') {
-    return { ok: false, strength, reason: 'pref_no' };
+    return { ok: false, strength, reason: `pref_no:${prefKey ?? 'x'}` };
   }
-
   const now = input.nowMs ?? Date.now();
   const last = getLastModule1EventAtMs();
   if (last != null && now - last < MODULE1_NEUTRAL_COOLDOWN_MS) {
     return {
       ok: false,
       strength: 'neutral',
-      reason: 'neutral_cooldown_3m',
+      reason: 'neutral_cooldown',
     };
   }
   return { ok: true, strength: 'neutral', reason: 'neutral_ok' };
 }
 
-export function shouldHardSkipForSpeedKmh(speedMs: number | null | undefined): boolean {
-  if (typeof speedMs !== 'number' || !Number.isFinite(speedMs)) return false;
-  return speedMs >= MODULE1_HARD_SKIP_SPEED_MS;
-}
-
-/** Re-export für Explore nach Fire. */
-export { noteModule1Event };
-
-/** Debug: Pref-Gewicht für Interessen (Story-Brief). */
-export function debugPrefWeight(prefKey: string): number {
-  try {
-    return promptWeightForInterest(prefKey);
-  } catch {
-    return 1;
-  }
+export function noteModule1PrefFired(): void {
+  noteModule1Event();
 }

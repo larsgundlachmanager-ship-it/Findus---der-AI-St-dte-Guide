@@ -18,7 +18,7 @@ async function ensureCameraPermission(): Promise<boolean> {
       PermissionsAndroid.PERMISSIONS.CAMERA,
       {
         title: 'Taschenlampe',
-        message: 'Findus braucht kurz die Kamera-Berechtigung für die Taschenlampe.',
+        message: 'Yorro braucht kurz die Kamera-Berechtigung für die Taschenlampe.',
         buttonPositive: 'Erlauben',
         buttonNegative: 'Nicht jetzt',
       },

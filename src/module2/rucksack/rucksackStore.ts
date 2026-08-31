@@ -10,11 +10,43 @@ import type {
   MotionVector,
   WeatherSnapshot,
 } from '../types';
-import { PRISDORF_FALLBACK } from '../types';
 import {
   readFuturePlanSnapshot,
   type FuturePlanState,
 } from '../timeline/futurePlanState';
+
+/** Live-GPS bevorzugen — Rucksack-History kann noch Fallback sein. */
+function liveGpsPoint(): GpsPoint | null {
+  try {
+    const { useGpsStore } = require('../../store/useGpsStore') as {
+      useGpsStore: {
+        getState: () => {
+          lat: number | null;
+          lng: number | null;
+          atMs?: number | null;
+          accuracyM?: number | null;
+        };
+      };
+    };
+    const g = useGpsStore.getState();
+    if (
+      g.lat == null ||
+      g.lng == null ||
+      !Number.isFinite(g.lat) ||
+      !Number.isFinite(g.lng)
+    ) {
+      return null;
+    }
+    return {
+      lat: g.lat,
+      lng: g.lng,
+      atMs: g.atMs ?? Date.now(),
+      accuracyM: g.accuracyM ?? null,
+    };
+  } catch {
+    return null;
+  }
+}
 
 export type RucksackState = {
   gpsHistory: GpsPoint[];
@@ -93,11 +125,10 @@ function clockFields(): Pick<RucksackState, 'nowMs' | 'isoTime'> {
   return { nowMs, isoTime: new Date(nowMs).toISOString() };
 }
 
-const initialBag = { ...PRISDORF_FALLBACK, atMs: Date.now() };
-
 export const useRucksackStore = create<Store>((set, get) => ({
   bag: {
-    gpsHistory: [initialBag],
+    // Leer bis echter Fix — kein Fake-Prisdorf als GPS (sonst ETA-Muell)
+    gpsHistory: [],
     vector: { bearingDeg: null, speedMps: null, label: 'unknown' },
     weather: null,
     ...clockFields(),
@@ -163,6 +194,92 @@ export function readRucksackSync(): RucksackState {
 }
 
 export function anchorCoords(bag: RucksackState): GpsPoint {
+  const live = liveGpsPoint();
+  if (live) return live;
   const last = bag.gpsHistory[bag.gpsHistory.length - 1];
-  return last ?? { ...PRISDORF_FALLBACK, atMs: Date.now() };
+  if (last && last.atMs > 0) return last;
+  try {
+    const { peekLastMapGps } = require('../../services/location/lastKnownMapGps') as {
+      peekLastMapGps: () => {
+        lat: number;
+        lng: number;
+        atMs: number;
+        accuracyM: number | null;
+      } | null;
+    };
+    const disk = peekLastMapGps();
+    if (
+      disk &&
+      Number.isFinite(disk.lat) &&
+      Number.isFinite(disk.lng)
+    ) {
+      return {
+        lat: disk.lat,
+        lng: disk.lng,
+        atMs: disk.atMs,
+        accuracyM: disk.accuracyM,
+      };
+    }
+  } catch {
+    /* soft */
+  }
+  try {
+    const { useFinnusStore } = require('../../store/useFinnusStore') as {
+      useFinnusStore: {
+        getState: () => {
+          lastGpsLat: number | null;
+          lastGpsLng: number | null;
+          lastGpsAtMs: number | null;
+          gpsAccuracyM: number | null;
+        };
+      };
+    };
+    const st = useFinnusStore.getState();
+    if (
+      st.lastGpsLat != null &&
+      st.lastGpsLng != null &&
+      Number.isFinite(st.lastGpsLat) &&
+      Number.isFinite(st.lastGpsLng)
+    ) {
+      return {
+        lat: st.lastGpsLat,
+        lng: st.lastGpsLng,
+        atMs: st.lastGpsAtMs || 0,
+        accuracyM: st.gpsAccuracyM,
+      };
+    }
+  } catch {
+    /* soft */
+  }
+  try {
+    const { getCachedUserProfile } = require('../../services/userProfileService') as {
+      getCachedUserProfile: () => { cityId?: string | null } | null;
+    };
+    const { resolveCityCoverageBoundsSync } = require('../../services/discovery/cityCoverageBounds') as {
+      resolveCityCoverageBoundsSync: (id: string) => {
+        latMin: number;
+        latMax: number;
+        lngMin: number;
+        lngMax: number;
+      } | null;
+    };
+    const id = (getCachedUserProfile()?.cityId || '').trim().toLowerCase();
+    const b = id ? resolveCityCoverageBoundsSync(id) : null;
+    if (b) {
+      return {
+        lat: (b.latMin + b.latMax) / 2,
+        lng: (b.lngMin + b.lngMax) / 2,
+        atMs: 0,
+        accuracyM: null,
+      };
+    }
+  } catch {
+    /* soft */
+  }
+  return { lat: 0, lng: 0, atMs: 0, accuracyM: null };
+}
+
+/** True = kein echter Fix, nur Stadt-Fallback. */
+export function isFallbackAnchor(point: GpsPoint): boolean {
+  return !point.atMs || point.atMs <= 0;
 }

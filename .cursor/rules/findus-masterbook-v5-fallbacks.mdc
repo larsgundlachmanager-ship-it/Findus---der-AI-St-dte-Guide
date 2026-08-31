@@ -7,19 +7,22 @@ alwaysApply: true
 
 ## Survival Mode (Battery)
 
-Akku unter 15%: proaktiv Audio-first + **konkrete** Ladeoptionen suchen (stadt-agnostisch):
+Akku unter 20%: proaktiv Audio-first + **konkrete** Ladeoptionen suchen (stadt-agnostisch):
 
-1. Powerbank-Automat / Sharing (OSM + Nearby)
-2. Handy-Ladestation
-3. Café / Ort mit Steckdose
+1. Powerbank-Automat / Sharing (OSM + Nearby) — nur mit Evidenz (Name/Brand/OSM-Tag)
+2. Handy-Ladestation — nur mit Evidenz
+3. Café / Ort mit Steckdose — OSM `socket=*` oder ehrlich als „Café, Steckdose oft da“
 
-Just-Do-It: Route-Buttons mitliefern — nicht nur „Brauchst du ein Café?“ fragen.
+**Nie:** Heimatmuseum / Tourist-Info / Broschürenladen / Spielstadt als Lade-Spot — auch nicht „besser als nichts“.
+DE-Keyword „laden“ = Geschäft → in Places-Suche **vermeiden**.
+Speech · Stichpunkte · Route-Buttons = **dieselben** 1–2 Orte (Just-Do-It).
 SSOT: `survivalMode.ts` · `phoneChargeDiscovery.ts`
 
 ## Manual Mode Override & Auto-Recheck
 
 - Explizit „Ich bin mit dem Fahrrad“ → Bike Mode erzwingen.
-- Nach 10 Min GPS-Speed neu bewerten (Walk vs. Bike).
+- Ohne Voice: GPS ≥ ~10 km/h für **30 s** → automatisch Rad + Route auf Radwegen neu (`navigationService` / FOSSGIS bike).
+- Nach 10 Min GPS-Speed neu bewerten (Walk vs. Bike) bei Voice-Force.
 
 ## Transparent Troubleshooting
 

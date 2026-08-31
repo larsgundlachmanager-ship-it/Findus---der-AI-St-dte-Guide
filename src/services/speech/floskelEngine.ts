@@ -38,7 +38,7 @@ let lastAckLine = '';
 const GLOBAL_ACK_GAP_MS = 2_500;
 
 const QUICK_LOCAL_RE =
-  /\b(wie\s+spät|uhrzeit|stopp|halt|lauter|leiser|danke|ok\b|okay|ja\b|nein\b)\b/iu;
+  /\b(wie\s+spät|uhrzeit|stopp|halt|lauter|leiser|danke|ok\b|okay|ja\b|nein\b|wie\s+lange|wieviel\s+zeit|mit\s+dem\s+(?:fahrrad|rad)|zu\s+fu[sß]|eta|beende?\s+(?:die\s+)?(?:navi|navigation)|navigation\s+beenden|street\s*view|straßenansicht|strassenansicht)\b/iu;
 
 const INTENT_TO_CATEGORY: Record<SmartIntentKind, string> = {
   weather: 'weather',
@@ -61,6 +61,31 @@ const INTENT_TO_CATEGORY: Record<SmartIntentKind, string> = {
 /** Text-Heuristik → Kategorie (feinere Mapping als SmartIntent allein) */
 function detectFloskelCategory(userText: string): string {
   const t = userText.toLowerCase();
+
+  // Genannter Spielplan VOR generic/events — Cover-Ton, kein „Gute Richtung“-Pitch
+  try {
+    const { looksLikeNamedScheduleQuery } = require('../concierge/sportsScheduleQuery') as {
+      looksLikeNamedScheduleQuery: (s: string) => boolean;
+    };
+    if (looksLikeNamedScheduleQuery(userText)) {
+      return 'named_schedule';
+    }
+  } catch {
+    /* soft */
+  }
+
+  // Himmel/Quick-Lookup VOR events („heute Abend“ + Sternschnuppen)
+  try {
+    const { isCelestialOrSkyQuery, isQuickLookupQuery } = require('../concierge/celestialSkyQuery') as {
+      isCelestialOrSkyQuery: (s: string) => boolean;
+      isQuickLookupQuery: (s: string) => boolean;
+    };
+    if (isCelestialOrSkyQuery(userText) || isQuickLookupQuery(userText)) {
+      return 'knowledge';
+    }
+  } catch {
+    /* soft */
+  }
 
   if (
     /\b(to\s*go|mitnehm|takeaway)\b/u.test(t) &&
@@ -95,7 +120,7 @@ function detectFloskelCategory(userText: string): string {
   ) {
     return 'activity_sport';
   }
-  if (/\b(was\s+geht|events?|veranstaltung|heute\s+abend|konzert)\b/u.test(t)) {
+  if (/\b(was\s+geht|was\s+heute\b[\s\S]{0,48}?\bgeht|events?|veranstaltung|heute\s+abend|konzert)\b/u.test(t)) {
     return 'events';
   }
   if (/\b(kino|film|vorstellung)\b/u.test(t)) return 'cinema';
@@ -119,6 +144,7 @@ function detectFloskelCategory(userText: string): string {
   if (/\b(hotel|unterkunft|übernacht|uebernacht)\b/u.test(t)) {
     return 'accommodation_search';
   }
+  if (/\b(eis|gelato|ice\s*cream|kugel\s+eis|eisdiele)\b/u.test(t)) return 'cafe';
   if (/\b(café|cafe|kaffee|cappuccino)\b/u.test(t)) return 'cafe';
   if (/\b(vegetar|vegan|allerg|gluten|laktos)\b/u.test(t)) return 'food_allergy';
   if (
@@ -236,6 +262,36 @@ export function expectsSlowResponse(
   userText: string,
   decision?: SmartRouteDecision,
 ): boolean {
+  const t = userText.toLowerCase().replace(/\s+/g, ' ').trim();
+  // Schnelle Follow-ups / aktive Nav-ETA — keine Bridge
+  if (QUICK_LOCAL_RE.test(t) && t.split(/\s+/).length <= 14) {
+    return false;
+  }
+  // Quick-Lookup / Himmel: Claude-artig — kein Ack-Zeremoniell
+  try {
+    const { isQuickLookupQuery } = require('../concierge/celestialSkyQuery') as {
+      isQuickLookupQuery: (s: string) => boolean;
+    };
+    if (isQuickLookupQuery(userText)) return false;
+  } catch {
+    /* soft */
+  }
+  try {
+    const { useFinnusStore } = require('../../store/useFinnusStore') as {
+      useFinnusStore: { getState: () => { navActive?: boolean } };
+    };
+    if (
+      useFinnusStore.getState().navActive &&
+      /\b(wie\s+lange|wie\s+weit|minuten|eta|fahrrad|rad|zu\s+fu[sß]|noch\s+wie)\b/u.test(
+        t,
+      )
+    ) {
+      return false;
+    }
+  } catch {
+    /* soft */
+  }
+
   const d = decision ?? analyzeSmartRoute(userText);
   if (d.mode === 'deep') return true;
   if (d.intentDensity >= 2) return true;
@@ -251,18 +307,30 @@ export function expectsSlowResponse(
     'flight',
     'plan',
     'transit',
+    'nav',
   ];
+  // Reine ETA: „nav“-Intent allein ≠ langsam
+  if (
+    d.intents.length === 1 &&
+    d.intents[0] === 'nav' &&
+    /\b(wie\s+lange|wie\s+weit|eta|minuten)\b/u.test(t) &&
+    !/\b(führ\s+mich|fuehr\s+mich|navigier|bring\s+mich|recherch)\b/u.test(t)
+  ) {
+    return false;
+  }
+  // knowledge-only: kein Latency-Ack
+  if (d.intents.length === 1 && d.intents[0] === 'knowledge') {
+    return false;
+  }
   if (d.intents.some((i) => slowIntents.includes(i))) return true;
 
-  const t = userText.toLowerCase();
   if (
-    /\b(recherch|öffnungs|speisekarte|veranstaltung|was\s+geht|webseite|pdf|ticket|reserv|kino|film|vorstellung|bahn|zug|öpnv|verbindung|fahrplan|abfahrt)\b/u.test(
+    /\b(recherch|öffnungs|speisekarte|veranstaltung|was\s+geht|webseite|pdf|ticket|reserv|kino|film|vorstellung|bahn|zug|öpnv|verbindung|fahrplan|abfahrt|führ\s+mich|fuehr\s+mich|bring\s+mich|route\s+zu)\b/u.test(
       t,
     )
   ) {
     return true;
   }
-  // Lange Frage auch ohne Multi-Intent-Match
   if (d.wordCount > 12) return true;
 
   return false;
@@ -270,6 +338,11 @@ export function expectsSlowResponse(
 
 export function hadRecentLatencyAck(withinMs = 10_000): boolean {
   return Date.now() - lastAckAtMs < withinMs;
+}
+
+/** Markiert, dass ein Wait-Ack schon hörbar war — zweite „kurz Geduld“ unterdrücken. */
+export function noteLatencyAck(phrase?: string | null): void {
+  markSpoken((phrase || lastAckLine || 'ack').replace(/\s+/g, ' ').trim());
 }
 
 export function shouldSpeakLatencyFloskel(
@@ -307,13 +380,45 @@ async function speakLine(line: string): Promise<void> {
 }
 
 /**
- * Zero-Latency Ack — DEAKTIVIERT (Manager-Bridge SSOT).
+ * Prefetch: Voice-Cache warmhalten + typische Ack-Phrasen vorbereiten (kein SQLite vor TTS).
+ */
+export function prefetchCommonLatencyAcks(): void {
+  try {
+    void getVoiceSettingsForTour();
+  } catch {
+    /* soft */
+  }
+  try {
+    // Phrasen nur „touch“ — pickFloskel hält Engine warm
+    for (const sample of [
+      'Was geht heute Abend?',
+      'Bring mich zum Lidl',
+      'Hotel mit Pool und Sauna',
+      'Plane mir den Tag',
+    ]) {
+      pickFloskelForUserText(sample);
+    }
+  } catch {
+    /* soft */
+  }
+}
+
+/**
+ * Zero-Latency Ack — DEAKTIVIERT.
+ * Beat 1 kommt nur noch aus dem Manager-Call, sonst schluckt hadRecentLatencyAck die echte Bridge.
  */
 export function speakLatencyFloskelFireAndForget(
   _userText: string,
   _decision?: SmartRouteDecision,
 ): void {
-  /* no-op — Concierge-Manager owns the only bridge */
+  /* no-op — Manager schreibt die Bridge */
+}
+
+/**
+ * Live-Chat: kein Extra-Ack vor dem Manager.
+ */
+export function speakLiveChatInstantAck(_userText: string): void {
+  /* no-op — gleicher Faden wie speakLatencyFloskelFireAndForget */
 }
 
 /**

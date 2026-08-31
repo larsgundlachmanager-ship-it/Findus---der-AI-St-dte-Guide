@@ -6,10 +6,12 @@ import React from 'react';
 import {
   Modal,
   Pressable,
+  ScrollView,
   StyleSheet,
   Text,
   View,
 } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors, spacing } from '../constants/theme';
 
 type Props = {
@@ -25,6 +27,8 @@ export function OnboardingInfoSheet({
   body,
   onClose,
 }: Props) {
+  const insets = useSafeAreaInsets();
+
   return (
     <Modal
       visible={visible}
@@ -34,11 +38,24 @@ export function OnboardingInfoSheet({
       statusBarTranslucent
     >
       <Pressable style={styles.backdrop} onPress={onClose}>
-        <Pressable style={styles.sheet} onPress={(e) => e.stopPropagation()}>
+        <Pressable
+          style={[
+            styles.sheet,
+            { marginBottom: Math.max(insets.bottom, spacing.xl) },
+          ]}
+          onPress={(e) => e.stopPropagation()}
+        >
           <View style={styles.handle} />
           <Text style={styles.kicker}>Info</Text>
           <Text style={styles.title}>{title}</Text>
-          <Text style={styles.body}>{body}</Text>
+          <ScrollView
+            style={styles.bodyScroll}
+            contentContainerStyle={styles.bodyScrollContent}
+            bounces={false}
+            showsVerticalScrollIndicator={false}
+          >
+            <Text style={styles.body}>{body}</Text>
+          </ScrollView>
           <Pressable style={styles.btn} onPress={onClose}>
             <Text style={styles.btnLabel}>Verstanden</Text>
           </Pressable>
@@ -57,6 +74,7 @@ const styles = StyleSheet.create({
   sheet: {
     marginHorizontal: spacing.md,
     marginBottom: spacing.xl,
+    maxHeight: '78%',
     borderRadius: 24,
     paddingHorizontal: spacing.lg,
     paddingTop: spacing.sm,
@@ -92,11 +110,18 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     marginBottom: spacing.sm,
   },
+  bodyScroll: {
+    flexGrow: 0,
+    maxHeight: 320,
+    marginBottom: spacing.lg,
+  },
+  bodyScrollContent: {
+    flexGrow: 0,
+  },
   body: {
     color: 'rgba(255,255,255,0.78)',
     fontSize: 15,
     lineHeight: 22,
-    marginBottom: spacing.lg,
   },
   btn: {
     alignSelf: 'stretch',

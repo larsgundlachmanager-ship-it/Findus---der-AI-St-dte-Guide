@@ -24,6 +24,7 @@ export type ProgressiveStartMeta = {
 
 let lastProgressiveMeta: ProgressiveStartMeta | null = null;
 let polishEpoch = 0;
+let polishDestKey = '';
 
 export function getLastProgressiveStartMeta(): ProgressiveStartMeta | null {
   return lastProgressiveMeta;
@@ -32,12 +33,41 @@ export function getLastProgressiveStartMeta(): ProgressiveStartMeta | null {
 /** One commit auto-start path for explicit nav intents. */
 export async function commitHandsFreeNavStart(
   input: NavTargetInput,
-  opts?: { skipClosingGate?: boolean; offlineOnly?: boolean },
+  opts?: {
+    skipClosingGate?: boolean;
+    offlineOnly?: boolean;
+    skipDestVerify?: boolean;
+    replaceRoute?: boolean;
+    addStop?: boolean;
+  },
 ): Promise<NavStartResult> {
-  resetCueScheduler();
-  resetHandsFreeCompass();
-  resetHandsFreeEta('walk');
-  return resolveAndStartNavigation(input, opts);
+  if (!opts?.addStop) {
+    resetCueScheduler();
+    resetHandsFreeCompass();
+    resetHandsFreeEta('walk');
+  }
+  try {
+    useFinnusStore.getState().setNavRouteLoading(true);
+    useFinnusStore.getState().setIsGenerating(true);
+  } catch {
+    useFinnusStore.setState({ navRouteLoading: true, isGenerating: true });
+  }
+  try {
+    const res = await resolveAndStartNavigation(input, opts);
+    return res;
+  } finally {
+    try {
+      useFinnusStore.getState().setIsGenerating(false);
+      const st = useFinnusStore.getState();
+      if (!st.navActive) st.setNavRouteLoading(false);
+    } catch {
+      useFinnusStore.setState({ isGenerating: false });
+      const st = useFinnusStore.getState();
+      if (!st.navActive) {
+        useFinnusStore.setState({ navRouteLoading: false });
+      }
+    }
+  }
 }
 
 /**
@@ -57,7 +87,13 @@ export async function progressiveEnrichRoute(opts: {
   walkingDistanceM: number;
   etaMin: number;
 } | null> {
-  const myEpoch = ++polishEpoch;
+  // Gleiches Ziel: Epoch nicht erhöhen — sonst killt Background-Retry den laufenden FOSSGIS-Call.
+  const destKey = `${opts.destLat.toFixed(5)},${opts.destLng.toFixed(5)}`;
+  if (destKey !== polishDestKey) {
+    polishDestKey = destKey;
+    polishEpoch += 1;
+  }
+  const myEpoch = polishEpoch;
 
   const progressive = await fetchProgressiveRoute({
     originLat: opts.originLat,
@@ -71,28 +107,36 @@ export async function progressiveEnrichRoute(opts: {
 
   resetHandsFreeEta(progressive.travelMode === 'bicycling' ? 'bike' : 'walk');
 
-  const startLandmark = await resolveStartLandmark({
-    lat: opts.originLat,
-    lng: opts.originLng,
-  });
-  if (startLandmark && progressive.waypoints[0]) {
-    progressive.waypoints[0] = {
-      ...progressive.waypoints[0],
-      landmark: startLandmark,
-      visibleLandmark: startLandmark,
-    };
-  }
-
+  // Landmark / POI-DB nie auf dem kritischen Pfad — Straße + km/ETA sofort.
   lastProgressiveMeta = {
     distanceM: progressive.distanceM,
     etaMin: progressive.etaMin,
-    startLandmark,
+    startLandmark: null,
   };
 
   useFinnusStore.setState({
     navTotalDistanceM: progressive.distanceM,
     navDistanceM: progressive.distanceM,
     navEtaMin: progressive.etaMin,
+  });
+
+  void resolveStartLandmark({
+    lat: opts.originLat,
+    lng: opts.originLng,
+  }).then((startLandmark) => {
+    if (myEpoch !== polishEpoch || !startLandmark) return;
+    if (progressive.waypoints[0]) {
+      progressive.waypoints[0] = {
+        ...progressive.waypoints[0],
+        landmark: startLandmark,
+        visibleLandmark: startLandmark,
+      };
+    }
+    lastProgressiveMeta = {
+      distanceM: progressive.distanceM,
+      etaMin: lastProgressiveMeta?.etaMin ?? progressive.etaMin,
+      startLandmark,
+    };
   });
 
   void (async () => {
@@ -115,7 +159,7 @@ export async function progressiveEnrichRoute(opts: {
         lastProgressiveMeta = {
           distanceM: progressive.distanceM,
           etaMin,
-          startLandmark,
+          startLandmark: lastProgressiveMeta?.startLandmark ?? null,
         };
         useFinnusStore.setState({ navEtaMin: etaMin });
       }
@@ -131,4 +175,10 @@ export async function progressiveEnrichRoute(opts: {
     walkingDistanceM: progressive.distanceM,
     etaMin: progressive.etaMin,
   };
+}
+
+/** Invalidiert laufendes Fuß/Rad-Enrich (z. B. wenn ÖPNV übernimmt). */
+export function bumpProgressiveEnrichEpoch(): void {
+  polishEpoch += 1;
+  polishDestKey = '';
 }

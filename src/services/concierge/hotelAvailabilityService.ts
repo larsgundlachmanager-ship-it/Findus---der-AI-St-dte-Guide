@@ -26,6 +26,8 @@ export type HotelLiveStay = {
   lng?: number;
   amenities?: string[];
   supplier?: string | null;
+  /** Expedia Property-ID für /go/hotel/info/… (Zimmerwahl) */
+  expediaPropertyId?: string | null;
 };
 
 export type HotelAvailabilityResult = {
@@ -42,7 +44,10 @@ export type HotelAvailabilityResult = {
 };
 
 function ymd(d: Date): string {
-  return d.toISOString().slice(0, 10);
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${y}-${m}-${day}`;
 }
 
 function addDays(iso: string, n: number): string {
@@ -85,13 +90,55 @@ function nextWeekdayIso(from: Date, weekday: number): string {
   return ymd(d);
 }
 
+const MONTHS_DE: Record<string, number> = {
+  januar: 1,
+  february: 2,
+  februar: 2,
+  märz: 3,
+  maerz: 3,
+  april: 4,
+  mai: 5,
+  juni: 6,
+  juli: 7,
+  august: 8,
+  september: 9,
+  oktober: 10,
+  november: 11,
+  dezember: 12,
+};
+
+function monthNum(name: string): number | null {
+  const n = MONTHS_DE[name.toLowerCase()];
+  return n ?? null;
+}
+
+function isoFromParts(year: number, month: number, day: number): string {
+  return `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+}
+
+/** Wenn Check-in in der Vergangenheit liegt → Jahr +1 (nächste Saison). */
+function rollForwardIfPast(checkin: string, checkout: string): {
+  checkin: string;
+  checkout: string;
+} {
+  const today = ymd(new Date());
+  if (checkin >= today) return { checkin, checkout };
+  const cin = new Date(checkin + 'T12:00:00');
+  const cout = new Date(checkout + 'T12:00:00');
+  cin.setFullYear(cin.getFullYear() + 1);
+  cout.setFullYear(cout.getFullYear() + 1);
+  return { checkin: ymd(cin), checkout: ymd(cout) };
+}
+
 /** True wenn User einen Zeitraum nennt (nicht „irgendwann“). */
 export function hasExplicitStayDates(text: string | undefined | null): boolean {
   if (!text) return false;
   const t = text.toLowerCase();
   if (
     /\b(irgendwann|spaeter|später|mal\s+schauen|offen|egal\s+wann)\b/.test(t) &&
-    !/\b(heute|morgen|übermorgen|uebermorgen|\d{1,2}\.\d{1,2})\b/.test(t)
+    !/\b(heute|morgen|übermorgen|uebermorgen|\d{1,2}\.\d{1,2}|\d{1,2}\.?\s*(januar|februar|märz|maerz|april|mai|juni|juli|august|september|oktober|november|dezember))\b/.test(
+      t,
+    )
   ) {
     return false;
   }
@@ -104,6 +151,28 @@ export function hasExplicitStayDates(text: string | undefined | null): boolean {
   }
   if (
     /\b(\d{1,2})\.(\d{1,2})(?:\.(\d{2,4}))?\s*[-–bis]+\s*(\d{1,2})\.(\d{1,2})/.test(
+      t,
+    )
+  ) {
+    return true;
+  }
+  // „20. bis 22. August“ / „vom 20. August bis 22.“
+  if (
+    /\b(?:vom?\s+)?\d{1,2}\.?\s*(?:bis|[-–])\s*\d{1,2}\.?\s*(januar|februar|märz|maerz|april|mai|juni|juli|august|september|oktober|november|dezember)\b/.test(
+      t,
+    )
+  ) {
+    return true;
+  }
+  if (
+    /\b(?:vom?\s+)?\d{1,2}\.?\s*(januar|februar|märz|maerz|april|mai|juni|juli|august|september|oktober|november|dezember)\s*(?:bis|[-–])\s*\d{1,2}/.test(
+      t,
+    )
+  ) {
+    return true;
+  }
+  if (
+    /\b\d{1,2}\.?\s*(januar|februar|märz|maerz|april|mai|juni|juli|august|september|oktober|november|dezember)\b/.test(
       t,
     )
   ) {
@@ -180,6 +249,10 @@ export function parseHotelStayDates(text: string | undefined | null): {
     const checkin = addDays(base.checkin, 2);
     return { checkin, checkout: addDays(checkin, 1) };
   }
+  // „heute bis/auf morgen“ = 1 Nacht ab heute — VOR einzelnem „morgen“
+  if (/\bheute\b[\s\w]{0,24}\b(bis|auf)\s+morgen\b/.test(t)) {
+    return base;
+  }
   if (/\bmorgen(\s*früh|\s*frueh|\s*nacht)?\b/.test(t)) {
     const checkin = addDays(base.checkin, 1);
     return { checkin, checkout: addDays(checkin, 1) };
@@ -192,6 +265,65 @@ export function parseHotelStayDates(text: string | undefined | null): {
     return base;
   }
 
+  // „vom 20. bis 22. August“ / „20.–22. August 2026“
+  const monthSpan = t.match(
+    /\b(?:vom?\s+)?(\d{1,2})\.?\s*(?:bis|[-–])\s*(\d{1,2})\.?\s*(januar|februar|märz|maerz|april|mai|juni|juli|august|september|oktober|november|dezember)(?:\s+(\d{4}))?\b/,
+  );
+  if (monthSpan) {
+    const mon = monthNum(monthSpan[3]!);
+    if (mon != null) {
+      const y = monthSpan[4]
+        ? Number(monthSpan[4])
+        : new Date().getFullYear();
+      const d1 = Number(monthSpan[1]);
+      const d2 = Number(monthSpan[2]);
+      if (d1 >= 1 && d1 <= 31 && d2 >= 1 && d2 <= 31) {
+        let checkin = isoFromParts(y, mon, d1);
+        let checkout = isoFromParts(y, mon, d2);
+        if (checkout <= checkin) checkout = addDays(checkin, 1);
+        return rollForwardIfPast(checkin, checkout);
+      }
+    }
+  }
+
+  // „vom 20. August bis 22. August“ / „20. August bis 3. September“
+  const twoNamed = t.match(
+    /\b(?:vom?\s+)?(\d{1,2})\.?\s*(januar|februar|märz|maerz|april|mai|juni|juli|august|september|oktober|november|dezember)\s*(?:bis|[-–])\s*(\d{1,2})\.?\s*(januar|februar|märz|maerz|april|mai|juni|juli|august|september|oktober|november|dezember)?(?:\s+(\d{4}))?\b/,
+  );
+  if (twoNamed) {
+    const m1 = monthNum(twoNamed[2]!);
+    const m2 = twoNamed[4] ? monthNum(twoNamed[4]) : m1;
+    if (m1 != null && m2 != null) {
+      const y = twoNamed[5] ? Number(twoNamed[5]) : new Date().getFullYear();
+      const d1 = Number(twoNamed[1]);
+      const d2 = Number(twoNamed[3]);
+      if (d1 >= 1 && d1 <= 31 && d2 >= 1 && d2 <= 31) {
+        let y2 = y;
+        if (m2 < m1 || (m2 === m1 && d2 < d1)) y2 = y + 1;
+        let checkin = isoFromParts(y, m1, d1);
+        let checkout = isoFromParts(y2, m2, d2);
+        if (checkout <= checkin) checkout = addDays(checkin, 1);
+        return rollForwardIfPast(checkin, checkout);
+      }
+    }
+  }
+
+  // Einzelner Monatstag „am 20. August“ → 1 Nacht
+  const oneNamed = t.match(
+    /\b(?:am\s+)?(\d{1,2})\.?\s*(januar|februar|märz|maerz|april|mai|juni|juli|august|september|oktober|november|dezember)(?:\s+(\d{4}))?\b/,
+  );
+  if (oneNamed) {
+    const mon = monthNum(oneNamed[2]!);
+    if (mon != null) {
+      const y = oneNamed[3] ? Number(oneNamed[3]) : new Date().getFullYear();
+      const d = Number(oneNamed[1]);
+      if (d >= 1 && d <= 31) {
+        const checkin = isoFromParts(y, mon, d);
+        return rollForwardIfPast(checkin, addDays(checkin, 1));
+      }
+    }
+  }
+
   const range = t.match(
     /\b(\d{1,2})\.(\d{1,2})(?:\.(\d{2,4}))?\s*[-–bis]+\s*(\d{1,2})\.(\d{1,2})(?:\.(\d{2,4}))?/,
   );
@@ -201,7 +333,7 @@ export function parseHotelStayDates(text: string | undefined | null): {
     const y2 = range[6] ? Number(range[6]) : y1;
     const cIn = `${y1 < 100 ? 2000 + y1 : y1}-${String(Number(range[2])).padStart(2, '0')}-${String(Number(range[1])).padStart(2, '0')}`;
     const cOut = `${y2 < 100 ? 2000 + y2 : y2}-${String(Number(range[5])).padStart(2, '0')}-${String(Number(range[4])).padStart(2, '0')}`;
-    return { checkin: cIn, checkout: cOut };
+    return rollForwardIfPast(cIn, cOut <= cIn ? addDays(cIn, 1) : cOut);
   }
 
   const wd = t.match(
@@ -247,6 +379,28 @@ export function parseHotelStayDates(text: string | undefined | null): {
   return base;
 }
 
+/** Hotel vs. Apartment/Ferienwohnung vs. breite Unterkunftssuche. */
+export function parseLodgingTypePreference(
+  text: string | undefined | null,
+): 'hotel' | 'apartment' | 'any' {
+  const t = (text || '').toLowerCase();
+  if (
+    /\b(airbnb|ferienwohnung|ferienhaus|apartment|appartement|fewo|ferienhaus|chalet|villa)\b/.test(
+      t,
+    )
+  ) {
+    return 'apartment';
+  }
+  if (
+    /\b(unterkunft|unterkünfte|unterkuenfte|übernacht|uebernacht|schlafen|wo\s+übernacht)\b/.test(
+      t,
+    )
+  ) {
+    return 'any';
+  }
+  return 'hotel';
+}
+
 function withFindusAid(url: string): string {
   const aid = getStay22AffiliateId();
   try {
@@ -279,9 +433,20 @@ function nameScore(query: string, candidate: string): number {
   return qt.length ? Math.round((hit / qt.length) * 60) : 0;
 }
 
+function readPriceTotal(raw: unknown): number | null {
+  if (raw == null) return null;
+  if (typeof raw === 'object' && raw && 'total' in raw) {
+    const n = Number((raw as { total?: unknown }).total);
+    return Number.isFinite(n) && n > 0 ? n : null;
+  }
+  const n = Number(raw);
+  return Number.isFinite(n) && n > 0 ? n : null;
+}
+
 function mapStay(
   raw: Record<string, unknown>,
   currency: string,
+  stayDates?: { checkin: string; checkout: string; adults?: number },
 ): HotelLiveStay | null {
   const name = String(raw.name ?? '').trim();
   if (!name) return null;
@@ -291,26 +456,89 @@ function mapStay(
   >;
   let priceTotal: number | null = null;
   let bookUrl = typeof raw.url === 'string' ? raw.url : '';
+  let expediaLink: string | null = null;
   let supplier: string | null = null;
-  for (const key of ['booking', 'expedia', 'hotels', 'vrbo']) {
+  for (const key of ['booking', 'expedia', 'hotelscom', 'hotels', 'vrbo']) {
     const s = suppliers[key];
-    if (s?.price?.total != null && Number.isFinite(s.price.total)) {
-      priceTotal = Number(s.price.total);
-      if (typeof s.link === 'string' && s.link) bookUrl = s.link;
+    if (typeof s?.link === 'string' && s.link && key === 'expedia') {
+      expediaLink = s.link;
+    }
+    const quoted = readPriceTotal(s?.price);
+    if (quoted != null) {
+      priceTotal = quoted;
+      if (typeof s?.link === 'string' && s.link) bookUrl = s.link;
       supplier = key;
       break;
     }
   }
   // Prefer cheapest supplier link if multiple priced
   for (const [key, s] of Object.entries(suppliers)) {
-    if (s?.price?.total == null || !Number.isFinite(s.price.total)) continue;
-    const p = Number(s.price.total);
-    if (priceTotal == null || p < priceTotal) {
-      priceTotal = p;
-      if (typeof s.link === 'string' && s.link) bookUrl = s.link;
+    if (typeof s?.link === 'string' && s.link && /expedia/i.test(key)) {
+      expediaLink = s.link;
+    }
+    const quoted = readPriceTotal(s?.price);
+    if (quoted == null) continue;
+    if (priceTotal == null || quoted < priceTotal) {
+      priceTotal = quoted;
+      if (typeof s?.link === 'string' && s.link) bookUrl = s.link;
       supplier = key;
     }
   }
+  // Buchungs-Button: Expedia-Property-Link bevorzugen (Zimmer + Preise), Preis bleibt günstigster
+  if (expediaLink) {
+    bookUrl = expediaLink;
+    supplier = supplier || 'expedia';
+  }
+
+  // Property-ID aus Links / Stay22-ID ziehen
+  let expediaPropertyId: string | null = null;
+  try {
+    const {
+      extractExpediaPropertyId,
+      buildExpediaHotelPropertyDeepLink,
+    } = require('../affiliate/hotelPropertyDeepLink') as {
+      extractExpediaPropertyId: (u: string) => string | null;
+      buildExpediaHotelPropertyDeepLink: (
+        id: string,
+        o: { checkin: string; checkout: string; adults?: number },
+      ) => string;
+    };
+    const candidates = [
+      expediaLink,
+      bookUrl,
+      typeof raw.url === 'string' ? raw.url : null,
+      ...Object.values(suppliers).map((s) =>
+        typeof s?.link === 'string' ? s.link : null,
+      ),
+    ].filter(Boolean) as string[];
+    for (const c of candidates) {
+      const pid = extractExpediaPropertyId(c);
+      if (pid) {
+        expediaPropertyId = pid;
+        break;
+      }
+    }
+    const rawId = String(raw.id ?? raw.hotelId ?? raw.expediaId ?? '').trim();
+    if (!expediaPropertyId && /^\d{5,}$/.test(rawId)) {
+      expediaPropertyId = rawId;
+    }
+    // Sofort Zimmerwahl-URL bauen wenn Daten + ID da sind
+    if (
+      expediaPropertyId &&
+      stayDates?.checkin &&
+      stayDates?.checkout
+    ) {
+      bookUrl = buildExpediaHotelPropertyDeepLink(expediaPropertyId, {
+        checkin: stayDates.checkin,
+        checkout: stayDates.checkout,
+        adults: stayDates.adults,
+      });
+      supplier = supplier || 'expedia';
+    }
+  } catch {
+    /* soft */
+  }
+
   const loc = raw.location as
     | { address?: string; coordinates?: { lat?: number; lng?: number } }
     | undefined;
@@ -342,19 +570,24 @@ function mapStay(
     lng: loc?.coordinates?.lng,
     amenities,
     supplier,
+    expediaPropertyId,
   };
 }
 
 async function stay22Search(params: {
-  address: string;
+  address?: string;
+  lat?: number;
+  lng?: number;
+  radiusM?: number;
   hotelname?: string;
   checkin: string;
   checkout: string;
   adults?: number;
   pageSize?: number;
+  /** Stay22 type filter — ohne `hotel` oft 0 Treffer. */
+  lodgingType?: 'hotel' | 'apartment' | 'any' | null;
 }): Promise<{ stays: HotelLiveStay[]; currency: string; error?: string }> {
   const q = new URLSearchParams({
-    address: params.address,
     checkin: params.checkin,
     checkout: params.checkout,
     adults: String(params.adults ?? 2),
@@ -362,9 +595,34 @@ async function stay22Search(params: {
     rooms: '1',
     currency: 'EUR',
     pageSize: String(params.pageSize ?? 20),
-    lang: 'de',
+    // API unterstützt aktuell nur en — `de` kommt als leere results[] zurück
+    lang: 'en',
   });
-  if (params.hotelname) q.set('hotelname', params.hotelname);
+  const aid = getStay22AffiliateId();
+  if (aid) q.set('aid', aid);
+
+  const hasCoords =
+    params.lat != null &&
+    params.lng != null &&
+    Number.isFinite(params.lat) &&
+    Number.isFinite(params.lng);
+  const address = (params.address || '').trim();
+  if (address && !/^-?\d+\.\d+\s*,\s*-?\d+\.\d+$/.test(address)) {
+    q.set('address', address);
+  } else if (hasCoords) {
+    q.set('lat', String(params.lat));
+    q.set('lng', String(params.lng));
+    q.set('radius', String(Math.max(2000, Math.min(params.radiusM ?? 12_000, 40_000))));
+  } else if (address) {
+    q.set('address', address);
+  }
+
+  if (params.lodgingType === 'apartment') {
+    q.set('type', 'rental');
+  } else if (params.lodgingType !== 'any') {
+    q.set('type', 'hotel');
+  }
+  if (params.hotelname) q.set('hotelsearch', params.hotelname.slice(0, 100));
 
   const headers: Record<string, string> = {
     Accept: 'application/json',
@@ -387,8 +645,13 @@ async function stay22Search(params: {
       results?: Array<Record<string, unknown>>;
     };
     const currency = data.meta?.currency ?? 'EUR';
+    const stayDates = {
+      checkin: params.checkin,
+      checkout: params.checkout,
+      adults: params.adults,
+    };
     const stays = (data.results ?? [])
-      .map((r) => mapStay(r, currency))
+      .map((r) => mapStay(r, currency, stayDates))
       .filter((s): s is HotelLiveStay => s != null);
     return { stays, currency };
   } catch (err) {
@@ -402,60 +665,74 @@ async function stay22Search(params: {
 
 /**
  * City / area search — hotels & Ferienwohnungen with live prices (Stay22).
+ * lodgingType: hotel | apartment (Fewo/Airbnb-ähnlich) | any (beide scannen, nach Preis mergen).
  */
 export async function searchStay22HotelsInCity(opts: {
   city: string;
   checkin: string;
   checkout: string;
   adults?: number;
-  /** z. B. „pool sauna“ — erweitert die Adress-Suche, filtert nicht allein */
+  /** z. B. „pool sauna“ — Client-Filter, nicht in die Stay22-Adresse */
   amenityHint?: string | null;
+  lodgingType?: 'hotel' | 'apartment' | 'any' | null;
   pageSize?: number;
+  lat?: number | null;
+  lng?: number | null;
 }): Promise<{
   stays: HotelLiveStay[];
   checkin: string;
   checkout: string;
   error?: string;
 }> {
-  const city = (opts.city || '').trim() || 'Germany';
-  const hint = (opts.amenityHint || '').trim();
-  const address = hint ? `${city} hotel ${hint}` : city;
-  const pageSize = opts.pageSize ?? (hint ? 40 : 24);
-  const result = await stay22Search({
-    address,
-    checkin: opts.checkin,
-    checkout: opts.checkout,
-    adults: opts.adults ?? 1,
-    pageSize,
-  });
-  let bookable = result.stays.filter(
-    (s) => s.priceTotal != null && s.priceTotal > 0 && !!s.bookUrl,
-  );
-  // Zweite Runde ohne Hint, falls Hint die Treffer zu stark verengt hat
-  if (hint && bookable.length < 4) {
-    const plain = await stay22Search({
-      address: city,
+  const city = (opts.city || '').trim();
+  const lodging = opts.lodgingType ?? 'hotel';
+  const pageSize = opts.pageSize ?? 24;
+  const lat = opts.lat ?? undefined;
+  const lng = opts.lng ?? undefined;
+
+  const mergeBookable = async (
+    address?: string,
+  ): Promise<{ stays: HotelLiveStay[]; error?: string }> => {
+    const result = await stay22Search({
+      address,
+      lat,
+      lng,
       checkin: opts.checkin,
       checkout: opts.checkout,
       adults: opts.adults ?? 1,
       pageSize,
+      lodgingType: lodging,
     });
-    const seen = new Set(bookable.map((s) => s.id));
-    for (const s of plain.stays) {
-      if (s.priceTotal == null || s.priceTotal <= 0 || !s.bookUrl) continue;
-      if (seen.has(s.id)) continue;
-      bookable.push(s);
-      seen.add(s.id);
-    }
-    if (!result.error && plain.error) {
-      /* keep first error soft */
-    }
+    const out = result.stays.filter(
+      (s) => s.priceTotal != null && s.priceTotal > 0 && s.bookUrl,
+    );
+    return { stays: out, error: result.error };
+  };
+
+  const { stays: bookable, error } = await mergeBookable(
+    city && !/^-?\d+\.\d+\s*,\s*-?\d+\.\d+$/.test(city) ? city : undefined,
+  );
+
+  if (lodging === 'apartment' || lodging === 'any') {
+    bookable.sort((a, b) => {
+      const score = (s: HotelLiveStay) => {
+        const blob = `${s.name} ${s.supplier ?? ''}`.toLowerCase();
+        let n = 0;
+        if (/vrbo|apartment|ferien|appart|airbnb|fewo|suite/.test(blob)) n += 2;
+        if (s.supplier === 'vrbo') n += 2;
+        return n;
+      };
+      const d = score(b) - score(a);
+      if (d !== 0) return d;
+      return (a.priceTotal ?? 9e9) - (b.priceTotal ?? 9e9);
+    });
   }
+
   return {
     stays: bookable,
     checkin: opts.checkin,
     checkout: opts.checkout,
-    error: result.error,
+    error,
   };
 }
 
@@ -481,6 +758,9 @@ export async function lookupHotelAvailability(opts: {
     checkin: opts.checkin,
     checkout: opts.checkout,
     adults: opts.adults,
+    lodgingType: 'hotel',
+    lat: opts.lat ?? undefined,
+    lng: opts.lng ?? undefined,
   });
 
   if (primary.error && primary.stays.length === 0) {
@@ -520,6 +800,9 @@ export async function lookupHotelAvailability(opts: {
     checkin: opts.checkin,
     checkout: opts.checkout,
     adults: opts.adults,
+    lodgingType: 'hotel',
+    lat: opts.lat ?? undefined,
+    lng: opts.lng ?? undefined,
   });
 
   const alternatives = citySearch.stays

@@ -37,24 +37,24 @@ export function buildHudTipPushTeaser(opts: {
     case 'weather_rain':
       if (mins != null && mins <= 8) {
         return {
-          title: 'Findus',
+          title: 'Yorro',
           body: "Hey — gleich wird's nass. Hast du's auf dem Schirm?",
         };
       }
       if (mins != null && mins <= 35) {
         return {
-          title: 'Findus',
+          title: 'Yorro',
           body: 'Bald Regen — sollen wir kurz irgendwo reingehen?',
         };
       }
       return {
-        title: 'Findus',
+        title: 'Yorro',
         body: 'Wetter-Hinweis: Bald könnte es regnen. Tippen für Details.',
       };
 
     case 'weather_summary':
       return {
-        title: 'Findus',
+        title: 'Yorro',
         body: clip(
           opts.text.length > 12
             ? `Kurzer Wetter-Check: ${opts.text.replace(/^🌧\s*/u, '')}`
@@ -64,7 +64,7 @@ export function buildHudTipPushTeaser(opts: {
 
     case 'session_deadline':
       return {
-        title: 'Findus',
+        title: 'Yorro',
         body: clip(
           /losgeh|losgehen|leave/i.test(opts.text)
             ? `Zeit zum Losgehen: ${opts.text.replace(/^→\s*/u, '')}`
@@ -74,31 +74,75 @@ export function buildHudTipPushTeaser(opts: {
 
     case 'shopping_closing':
       return {
-        title: 'Findus',
+        title: 'Yorro',
         body: 'Supermärkte machen bald zu — noch was holen?',
       };
 
     case 'hotel_checkin':
       return {
-        title: 'Findus',
+        title: 'Yorro',
         body: 'Check-in naht — tippen, wenn du den Hinweis brauchst.',
       };
 
     case 'hotel_breakfast':
       return {
-        title: 'Findus',
-        body: 'Frühstückszeit? Kurzer Reminder von Findus.',
+        title: 'Yorro',
+        body: 'Frühstückszeit? Kurzer Reminder von Yorro.',
+      };
+
+    case 'weather_heat':
+      return {
+        title: 'Yorro',
+        body: clip(
+          opts.text.length > 8
+            ? opts.text
+            : 'Heiß draußen — Sonnencreme / Wasser im Blick?',
+        ),
+      };
+
+    case 'luggage_drop':
+      return {
+        title: 'Yorro · Gepäck',
+        body: clip(
+          opts.meta
+            ? `${opts.text.replace(/^🧳\s*/u, '')} · ${opts.meta}`
+            : opts.text || 'Gepäck vor dem Flug klären?',
+        ),
+      };
+
+    case 'umbrella_day':
+      return {
+        title: 'Yorro',
+        body: clip(opts.text || 'Später Regen — Schirm einpacken?'),
+      };
+
+    case 'sunset_tip':
+      return {
+        title: 'Yorro',
+        body: clip(opts.text || 'Sonnenuntergang bald — schöner Spot?'),
+      };
+
+    case 'free_slot':
+      return {
+        title: 'Yorro',
+        body: clip(opts.text || 'Zeitlücke — Vorschlag tippen.'),
+      };
+
+    case 'nice_tip':
+      return {
+        title: 'Yorro',
+        body: clip(opts.text || 'Kurzer Tipp — tippen für mehr.'),
       };
 
     case 'open_task':
       return {
-        title: 'Findus',
+        title: 'Yorro',
         body: clip(`Offene Sache: ${opts.text}`),
       };
 
     default:
       return {
-        title: 'Findus',
+        title: 'Yorro',
         body: clip(opts.text || 'Kurzer Hinweis — tippen für mehr.'),
       };
   }
@@ -122,19 +166,19 @@ export function buildSpeechPushTeaser(
     const mins = rainMinutesFrom(clean);
     if (mins != null && mins <= 8) {
       return {
-        title: 'Findus · Wetter',
+        title: 'Yorro · Wetter',
         body: "Hey — gleich wird's nass. Hast du's auf dem Schirm?",
       };
     }
     return {
-      title: 'Findus · Wetter',
+      title: 'Yorro · Wetter',
       body: 'Bald Regen — tippen, dann sag ich dir den Plan.',
     };
   }
 
   if (kind === 'nav' || /navig|abbiegen|links|rechts|meter/.test(lower)) {
     return {
-      title: 'Findus · Navigation',
+      title: 'Yorro · Navigation',
       body: 'Kurzer Navi-Hinweis — tippen zum Anhören.',
     };
   }
@@ -144,23 +188,56 @@ export function buildSpeechPushTeaser(
     /aufbruch|losgeh|flug|bahn|bus|check-?in|timer|wecker/.test(lower)
   ) {
     return {
-      title: 'Findus · Erinnerung',
+      title: 'Yorro · Erinnerung',
       body: clip(
         clean.length > 40
           ? 'Erinnerung wartet — tippen, dann hörst du den Rest.'
-          : clean || 'Erinnerung von Findus — tippen zum Anhören.',
+          : clean || 'Erinnerung von Yorro — tippen zum Anhören.',
       ),
     };
   }
 
   return {
-    title: 'Findus möchte dir etwas sagen',
+    title: 'Yorro möchte dir etwas sagen',
     body: clip(
       clean.length > 50
         ? 'Kurzer Hinweis — tippen, dann erzähl ich’s dir.'
         : clean || 'Tipp zum Anhören — tippen.',
     ),
   };
+}
+
+export type TravelPushKind =
+  | 'delay'
+  | 'gate'
+  | 'boarding'
+  | 'cancel'
+  | 'train'
+  | 'flight';
+
+/** Lockscreen: fact first (airport glance), tap speaks the rest. */
+export function buildTravelPushTeaser(opts: {
+  kind: TravelPushKind;
+  title: string;
+  body: string;
+}): PushTeaser {
+  const title = clip(opts.title.replace(/\s+/g, ' ').trim() || 'Yorro · Reise', 42);
+  const body = clip(opts.body.replace(/\s+/g, ' ').trim(), 96);
+  if (body) return { title, body };
+  switch (opts.kind) {
+    case 'delay':
+      return { title, body: 'Verspätung — tippen zum Anhören.' };
+    case 'gate':
+      return { title, body: 'Gate-Wechsel — tippen zum Anhören.' };
+    case 'boarding':
+      return { title, body: 'Boarding — tippen zum Anhören.' };
+    case 'cancel':
+      return { title, body: 'Flug fällt aus — tippen zum Anhören.' };
+    case 'train':
+      return { title, body: 'Zug gleich da — tippen zum Anhören.' };
+    default:
+      return { title, body: 'Reise-Hinweis — tippen zum Anhören.' };
+  }
 }
 
 /** Full line for after tap / in-app (HUD tip → spoken). */

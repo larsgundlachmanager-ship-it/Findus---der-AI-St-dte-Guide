@@ -1,5 +1,5 @@
 /**
- * Findus Persönlichkeits-Matrix — 4 Kategorien + Ausschlüsse + Golden Combos.
+ * Yorro Persönlichkeits-Matrix — 4 Kategorien + Ausschlüsse + Golden Combos.
  * SSOT für Onboarding „Wie soll ich sein?“ / Express / Settings.
  */
 
@@ -72,7 +72,7 @@ export const CORE_ROLES: PersonalityOption<CoreRoleId>[] = [
     id: 'aristocrat',
     emoji: '🎩',
     labelDe: 'Aristokrat',
-    infoDe: 'Siezt konsequent, gepflegt, edel, leicht veraltete Sprache.',
+    infoDe: 'Immer Du — gepflegt, edel, leicht veraltete Sprache; nie Siezen.',
   },
   {
     id: 'nerd',
@@ -179,7 +179,8 @@ export const SPLEENS: PersonalityOption<SpleenId>[] = [
     id: 'giggler',
     emoji: '😆',
     labelDe: 'Der Kicherer',
-    infoDe: 'Lacht hörbar über eigene Witze oder kichert spontan.',
+    infoDe:
+      'Humorvoll und verspielt — das Lächeln sitzt in der Wortwahl, nie als vorgelesenes „kichern“.',
   },
   {
     id: 'drama',

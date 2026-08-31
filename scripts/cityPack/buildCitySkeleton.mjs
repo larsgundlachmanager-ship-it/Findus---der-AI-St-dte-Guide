@@ -330,7 +330,7 @@ async function main() {
     console.log('[build] gate errors (non-fatal for skeleton):', gate.errors.slice(0, 12));
   }
   console.log(
-    '[build] Next: paste Deep Research → mergeDeepResearch → auditEntrances → qualityGate --strict → upload',
+    '[build] Next: paste Deep Research → mergeDeepResearch → gpsWegweiserLoop → qualityGate --strict → upload',
   );
 
   // Cover für Stadtauswahl (Wikipedia) — nicht fatal

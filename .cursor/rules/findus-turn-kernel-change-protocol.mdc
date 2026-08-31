@@ -1,0 +1,30 @@
+---
+description: Turn-Kernel Change-Protokoll — Familie erweitern, Kernel nur mit Batterie
+alwaysApply: true
+---
+
+# Findus — Turn-Kernel Change-Protokoll
+
+Kernel (`src/module2/kernel/turnKernel.ts`) ist der Takt: Split, Topic-Cut, Isolation tot, eine Bridge, Pace. Kein zweites Gehirn.
+
+## Datei-Besitz
+
+- Pitch-Bug → Pitch/Blaupause (`src/module2/pitch`, `src/module2/blueprints`).
+- Nav-ETA/Geocode → Navigation (`presentConcierge`, `handsFreeNav`, `landmarkNavCoach`).
+- M1-Story/Rückfrage → Modul 1 (`module1PoiChat`, `handoffs`, `packFactLookup`).
+- Plan/Timeline/Multi-Speech → Plan (`planSpeechSanitize`, `planSessionOrchestrator`).
+- Flug/Bahn → `flightTripAdvisor` / `earlyJustDoIt` (toter Flug nicht Nav-Bridge).
+- Lernen (Popcorn, Antwort-Stil, Testfeedback) → `autoLearn` + `collectiveLearning` + Owner-Gold, nicht Kernel-Prompt.
+
+## Kernel anfassen
+
+Nur mit voller Batterie: `npm run test:turn-kernel` muss grün bleiben (CI: `.github/workflows/turn-kernel-gate.yml`).
+
+Isolation = **toter Thread raus**. Aktueller Satz (Amsterdam-Flug) **darf** die Stadt nennen.
+
+## Nicht
+
+- Modul 2 von null umbauen.
+- Pflicht-Sätze / Orts-Hardcodes.
+- Isolation als „Stadt verboten“.
+- Familie-Fixes in Shared Prompts (`analyzeTurn`, `cityChatRegelwerk`, `contextualBridge`) ohne Batterie.

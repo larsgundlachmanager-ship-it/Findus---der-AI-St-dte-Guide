@@ -13,7 +13,9 @@ import {
   type FuturePlanStop,
   type FuturePlanTransport,
 } from './futurePlanState';
-import { resolveDateKeyFromUserText, todayDateKey } from '../../utils/dateKeys';
+import { resolveTravelOrigin, scheduleRefineNavLegRoute } from './planTravelHelpers';
+import { resolveDateKeyFromUserText, todayDateKey, dateKeyFromMs } from '../../utils/dateKeys';
+import { isPastMs } from './planNowGuard';
 import {
   describeExistingStop,
   detectExistingPlanEditIntent,
@@ -21,6 +23,9 @@ import {
   resolveExistingPlanReference,
   resolvePlanStopsFromUtterance,
 } from './planStopResolve';
+import { isLiveNavLegId } from './liveTourSchedule';
+import { retireCommitmentsForStop } from './retireTimelineCommitments';
+import { looksLikeClearDayPlan } from '../planning/planEditDetect';
 
 const FRESH_MS = 12_000;
 let clearTimer: ReturnType<typeof setTimeout> | null = null;
@@ -56,17 +61,21 @@ export function clearFreshHighlights(): void {
   for (const s of plan.stops) {
     if (s.status !== 'pending_change') continue;
     if (s.id.startsWith('choice_')) continue;
+    if (s.id.startsWith('ft:')) continue;
     setStopStatus(s.id, 'planned');
   }
 }
 
-export function markFresh(ids: string[]): void {
+export function markFresh(
+  ids: string[],
+  opts?: { openCalendar?: boolean },
+): void {
   const { setStopStatus } = useFuturePlanStore.getState();
   for (const id of ids) {
     setStopStatus(id, 'pending_change');
   }
   scheduleClearFresh();
-  openLive();
+  if (opts?.openCalendar) openLive();
 }
 
 export function addPlanStop(input: {
@@ -82,6 +91,17 @@ export function addPlanStop(input: {
   id?: string;
   bufferMin?: number;
   emoji?: string;
+  /** Default false — Timeline eintragen ohne Kalender aufzuklappen */
+  openCalendar?: boolean;
+  journeyDetail?: string | null;
+  userFixedTime?: boolean;
+  planPriority?: FuturePlanStop['planPriority'];
+  groupId?: string | null;
+  groupLabel?: string | null;
+  mapsUrl?: string | null;
+  menuUrl?: string | null;
+  reserveUrl?: string | null;
+  websiteUrl?: string | null;
 }): FuturePlanStop {
   const store = useFuturePlanStore.getState();
   const id = input.id ?? `stop_${Date.now()}`;
@@ -92,17 +112,34 @@ export function addPlanStop(input: {
     lng: input.lng,
     plannedStartMs: input.plannedStartMs ?? null,
     plannedEndMs: input.plannedEndMs ?? null,
-    bufferMin: input.bufferMin ?? 12,
+    bufferMin:
+      input.bufferMin ?? (id.startsWith('ft:') ? 0 : 12),
     transport: input.transport ?? store.plan.transportDefault,
     hardAnchor: input.hardAnchor,
     notes: input.notes,
     kind: input.kind ?? 'stop',
     status: 'pending_change',
     emoji: input.emoji,
+    journeyDetail: input.journeyDetail,
+    userFixedTime: input.userFixedTime,
+    planPriority: input.planPriority,
+    groupId: input.groupId,
+    groupLabel: input.groupLabel,
+    mapsUrl: input.mapsUrl,
+    menuUrl: input.menuUrl,
+    reserveUrl: input.reserveUrl,
+    websiteUrl: input.websiteUrl,
   };
-  store.upsertStop(stop);
+  if (isPastMs(stop.plannedStartMs)) {
+    return stop;
+  }
+  const dayKey =
+    stop.plannedStartMs != null
+      ? dateKeyFromMs(stop.plannedStartMs)
+      : store.plan.dayKey;
+  store.upsertStopOnDay(dayKey, stop);
   scheduleClearFresh();
-  openLive();
+  if (input.openCalendar) openLive();
   return stop;
 }
 
@@ -111,9 +148,18 @@ export function removePlanStop(
   opts?: { gapFill?: boolean },
 ): boolean {
   const store = useFuturePlanStore.getState();
-  const stop = store.plan.stops.find((s) => s.id === id);
+  const stop =
+    store.plan.stops.find((s) => s.id === id) ??
+    Object.values(store.plansByDay)
+      .flatMap((p) => p.stops)
+      .find((s) => s.id === id);
   if (!stop) return false;
   store.removeStop(id);
+  try {
+    retireCommitmentsForStop(stop);
+  } catch {
+    /* soft */
+  }
 
   // Zugehörige Reminder / „Los zu …“-Nav mitlöschen (kein Ghost-Leave-By)
   const leftover = useFuturePlanStore.getState().plan.stops;
@@ -200,6 +246,76 @@ export function removePlanStop(
     .map((s) => s.id);
   if (remaining.length) markFresh(remaining);
   else openLive();
+  if (isLiveNavLegId(id) || stop.groupId === 'live_journey') {
+    const leftover = useFuturePlanStore
+      .getState()
+      .plan.stops.some(
+        (s) => isLiveNavLegId(s.id) || s.groupId === 'live_journey',
+      );
+    if (!leftover) {
+      try {
+        const { clearLiveNavFromPlan } = require('./syncLiveNavToPlan') as {
+          clearLiveNavFromPlan: (opts?: { abandon?: boolean }) => void;
+        };
+        clearLiveNavFromPlan({ abandon: true });
+      } catch {
+        /* soft */
+      }
+      try {
+        const { clearMultiStopTour } = require('../../services/navigation/multiStopTour') as {
+          clearMultiStopTour: () => void;
+        };
+        clearMultiStopTour();
+      } catch {
+        /* soft */
+      }
+    }
+  }
+  return true;
+}
+
+function canReorderPlanStop(s: {
+  id: string;
+  kind?: string;
+  plannedStartMs?: number | null;
+}): boolean {
+  if (s.kind === 'nav_leg') return false;
+  if (s.id === 'nav_live_active') return false;
+  if (s.id.startsWith('choice_')) return false;
+  return true;
+}
+
+/** Drag in der Timeline: Zeiten der verschobenen Stopps tauschen. */
+export function reorderTimedPlanStops(fromId: string, toIndex: number): boolean {
+  const store = useFuturePlanStore.getState();
+  const movable = store.plan.stops.filter(canReorderPlanStop);
+  const from = movable.findIndex((s) => s.id === fromId);
+  if (from < 0) return false;
+  const to = Math.max(0, Math.min(movable.length - 1, toIndex));
+  if (from === to) return false;
+  const next = [...movable];
+  const [moved] = next.splice(from, 1);
+  if (!moved) return false;
+  next.splice(to, 0, moved);
+  const slots = movable.map((s) => ({
+    start: s.plannedStartMs,
+    end: s.plannedEndMs,
+  }));
+  for (let i = 0; i < next.length; i++) {
+    const s = next[i]!;
+    const slot = slots[i]!;
+    store.upsertStop({
+      ...s,
+      plannedStartMs: slot.start,
+      plannedEndMs: slot.end,
+      status: 'pending_change',
+    });
+  }
+  try {
+    applyGapFillTravelLegs();
+  } catch {
+    /* soft */
+  }
   return true;
 }
 
@@ -207,11 +323,42 @@ export function removePlanStop(
 export function clearDayPlan(dayKey?: string): PlanEditResult {
   const dk = dayKey ?? useFuturePlanStore.getState().plan.dayKey ?? todayDateKey();
   useFuturePlanStore.getState().ensureDay(dk);
+  const snapshot = [...useFuturePlanStore.getState().getPlanForDay(dk).stops];
   useFuturePlanStore.getState().clearDay(dk);
   try {
-    usePlanCalendarUiStore.getState().clearPendingChoice();
-    usePlanCalendarUiStore.getState().clearShortAnswers();
-    usePlanCalendarUiStore.getState().clearMirroredActions();
+    for (const s of snapshot) retireCommitmentsForStop(s);
+  } catch {
+    /* soft */
+  }
+  try {
+    const { clearLiveNavFromPlan } = require('./syncLiveNavToPlan') as {
+      clearLiveNavFromPlan: (opts?: { abandon?: boolean }) => void;
+    };
+    clearLiveNavFromPlan({ abandon: true });
+  } catch {
+    /* soft */
+  }
+  try {
+    const ui = usePlanCalendarUiStore.getState();
+    ui.clearPendingChoice();
+    ui.clearShortAnswers();
+    ui.clearMirroredActions();
+  } catch {
+    /* soft */
+  }
+  try {
+    const { usePlanSessionStore } = require('../planning/planSessionState') as {
+      usePlanSessionStore: { getState: () => { reset: () => void } };
+    };
+    usePlanSessionStore.getState().reset();
+  } catch {
+    /* soft */
+  }
+  try {
+    const { useLivePitchStore } = require('../pitch/publishPitchUi') as {
+      useLivePitchStore: { getState: () => { clear: (force?: boolean) => void } };
+    };
+    useLivePitchStore.getState().clear(true);
   } catch {
     /* soft */
   }
@@ -302,11 +449,25 @@ export function reschedulePlanStop(
     plannedStartMs?: number | null;
     plannedEndMs?: number | null;
     deltaMin?: number;
+    /** Nur wenn User diesen Fix-Termin explizit neu ansetzt */
+    allowHardMove?: boolean;
   },
 ): boolean {
   const store = useFuturePlanStore.getState();
   const stop = store.plan.stops.find((s) => s.id === id);
   if (!stop || stop.kind === 'nav_leg') return false;
+
+  try {
+    const { isHardFixedStop } = require('../planning/planHardLock') as {
+      isHardFixedStop: (s: typeof stop) => boolean;
+    };
+    if (isHardFixedStop(stop) && !opts.allowHardMove) {
+      console.warn('[timeline] reschedule blocked — hard fixed', id);
+      return false;
+    }
+  } catch {
+    /* soft */
+  }
 
   try {
     const { isRealityLockedStop, clampToFutureMs } = require('./planNowGuard') as {
@@ -320,7 +481,7 @@ export function reschedulePlanStop(
       console.warn('[timeline-now] reschedule blocked — reality locked', id);
       return false;
     }
-    if (opts.plannedStartMs != null) {
+    if (opts.plannedStartMs != null && !opts.allowHardMove) {
       opts = {
         ...opts,
         plannedStartMs: clampToFutureMs(opts.plannedStartMs),
@@ -354,7 +515,7 @@ export function reschedulePlanStop(
   } catch {
     /* soft */
   }
-  markFresh([id]);
+  markFresh([id], { openCalendar: true });
   return true;
 }
 
@@ -377,10 +538,44 @@ export function setStopTransport(
             : stop.kind === 'nav_leg'
               ? '🚶'
               : stop.emoji;
+
+  // Nav-Leg: nur diesen Weg umstellen + schnell neu rechnen — kein Full-Gap-Fill
+  // (sonst überschreibt transportDefault die Wahl wieder)
+  if (stop.kind === 'nav_leg') {
+    const titleBase =
+      stop.title.replace(/^(ÖPNV|Rad|Fußweg|Fahrt|Los)\s+(nach|zu)\s+/i, '') ||
+      stop.title;
+    const title =
+      transport === 'transit'
+        ? `ÖPNV nach ${titleBase}`
+        : transport === 'bike'
+          ? `Rad nach ${titleBase}`
+          : transport === 'taxi' || transport === 'car'
+            ? `Fahrt nach ${titleBase}`
+            : `Fußweg nach ${titleBase}`;
+    store.upsertStop({
+      ...stop,
+      transport,
+      emoji,
+      title,
+      notes: undefined,
+      journeyDetail: null,
+      routeEstimate: 'fallback',
+      status: 'pending_change',
+    });
+    try {
+      usePlanCalendarUiStore.getState().markRouteComputing(id, true);
+    } catch {
+      /* soft */
+    }
+    void refineSingleNavLeg(id, transport);
+    markFresh([id], { openCalendar: true });
+    return true;
+  }
+
   store.upsertStop({
     ...stop,
     transport,
-    emoji: stop.kind === 'nav_leg' ? emoji : stop.emoji,
     status: 'pending_change',
   });
   try {
@@ -388,8 +583,100 @@ export function setStopTransport(
   } catch {
     /* soft */
   }
-  markFresh([id]);
+  markFresh([id], { openCalendar: true });
   return true;
+}
+
+async function refineSingleNavLeg(
+  navId: string,
+  transport: FuturePlanTransport,
+): Promise<void> {
+  const clearComputing = () => {
+    try {
+      usePlanCalendarUiStore.getState().markRouteComputing(navId, false);
+    } catch {
+      /* soft */
+    }
+  };
+  try {
+    const store = useFuturePlanStore.getState();
+    const leg = store.plan.stops.find((s) => s.id === navId);
+    if (!leg || leg.kind !== 'nav_leg') {
+      clearComputing();
+      return;
+    }
+
+    let from: { lat: number; lng: number } | null = null;
+    let to: { lat: number; lng: number } | null =
+      leg.lat != null && leg.lng != null
+        ? { lat: leg.lat, lng: leg.lng }
+        : null;
+    let arriveAtMs: number | null = null;
+    let prepBufferMin = 0;
+
+    if (navId.startsWith('nav_here_')) {
+      const toId = navId.slice('nav_here_'.length);
+      const b = store.plan.stops.find((s) => s.id === toId);
+      if (b?.lat != null && b.lng != null) {
+        to = { lat: b.lat, lng: b.lng };
+        arriveAtMs = b.plannedStartMs ?? null;
+        prepBufferMin = b.bufferMin || 0;
+      }
+      const origin = resolveTravelOrigin({
+        beforeMs: arriveAtMs ?? leg.plannedStartMs ?? null,
+      });
+      if (origin) from = { lat: origin.lat, lng: origin.lng };
+    } else {
+      const m = navId.match(/^nav_(.+)_([^_]+(?:_.+)?)$/);
+      // Prefer last underscore split: nav_{fromId}_{toId}
+      const parts = navId.startsWith('nav_')
+        ? navId.slice(4).split('_')
+        : [];
+      // ids can contain underscores — match known stop ids
+      if (parts.length >= 2) {
+        for (let split = 1; split < parts.length; split++) {
+          const fromId = parts.slice(0, split).join('_');
+          const toId = parts.slice(split).join('_');
+          const a = store.plan.stops.find((s) => s.id === fromId);
+          const b = store.plan.stops.find((s) => s.id === toId);
+          if (
+            a?.lat != null &&
+            a.lng != null &&
+            b?.lat != null &&
+            b.lng != null
+          ) {
+            from = { lat: a.lat, lng: a.lng };
+            to = { lat: b.lat, lng: b.lng };
+            arriveAtMs = b.plannedStartMs ?? null;
+            prepBufferMin = b.bufferMin || 0;
+            break;
+          }
+        }
+      }
+      void m;
+    }
+    if (!from) {
+      const origin = resolveTravelOrigin({
+        beforeMs: leg.plannedStartMs ?? null,
+      });
+      if (origin) from = { lat: origin.lat, lng: origin.lng };
+    }
+    if (!from || !to) {
+      clearComputing();
+      return;
+    }
+
+    scheduleRefineNavLegRoute({
+      navId,
+      from,
+      to,
+      arriveAtMs,
+      prepBufferMin,
+      transport,
+    });
+  } catch {
+    clearComputing();
+  }
 }
 
 export function cycleStopTransport(id: string): FuturePlanTransport | null {
@@ -417,11 +704,39 @@ export function setPlanTransportDefault(
     .getState()
     .plan.stops.filter((s) => s.kind !== 'nav_leg')
     .map((s) => s.id);
-  markFresh(ids);
+  markFresh(ids, { openCalendar: true });
 }
 
 function parseClockToMs(utterance: string, dayBaseMs: number): number | null {
-  const m = utterance.match(/\b(?:um\s+)?(\d{1,2})(?:[:.](\d{2}))?\s*uhr\b/i);
+  const u = utterance.replace(/\s+/g, ' ').trim();
+  // „von 14 auf 16“ / „von 14 Uhr auf 16 Uhr“ → Zielzeit
+  const vonAuf = u.match(
+    /\bvon\s+(\d{1,2})(?:[:.](\d{2}))?\s*(?:uhr\s*)?(?:auf|um)\s+(\d{1,2})(?:[:.](\d{2}))?\s*(?:uhr)?\b/i,
+  );
+  if (vonAuf) {
+    const h = Number(vonAuf[3]);
+    const min = vonAuf[4] != null ? Number(vonAuf[4]) : 0;
+    if (Number.isFinite(h) && h >= 0 && h <= 23 && min >= 0 && min <= 59) {
+      const d = new Date(dayBaseMs);
+      d.setHours(h, min, 0, 0);
+      return d.getTime();
+    }
+  }
+  // „auf 16 Uhr“ / „um 16 Uhr“ — letzte klare Zielzeit bevorzugen
+  const targets = [
+    ...u.matchAll(/\b(?:auf|um)\s+(\d{1,2})(?:[:.](\d{2}))?\s*uhr\b/gi),
+  ];
+  if (targets.length) {
+    const last = targets[targets.length - 1]!;
+    const h = Number(last[1]);
+    const min = last[2] != null ? Number(last[2]) : 0;
+    if (Number.isFinite(h) && h >= 0 && h <= 23 && min >= 0 && min <= 59) {
+      const d = new Date(dayBaseMs);
+      d.setHours(h, min, 0, 0);
+      return d.getTime();
+    }
+  }
+  const m = u.match(/\b(?:um\s+)?(\d{1,2})(?:[:.](\d{2}))?\s*uhr\b/i);
   if (!m) return null;
   const h = Number(m[1]);
   const min = m[2] != null ? Number(m[2]) : 0;
@@ -429,6 +744,61 @@ function parseClockToMs(utterance: string, dayBaseMs: number): number | null {
   const d = new Date(dayBaseMs);
   d.setHours(h, min, 0, 0);
   return d.getTime();
+}
+
+/** Sichtbarer / angeforderter Plan-Tag — nicht still auf heute springen. */
+function lockPlanEditDay(preferred?: string | null): string {
+  const req = usePlanCalendarUiStore.getState().requestedDayKey;
+  const active = useFuturePlanStore.getState().plan.dayKey;
+  const dk =
+    (preferred && /^\d{4}-\d{2}-\d{2}$/.test(preferred) && preferred) ||
+    (req && /^\d{4}-\d{2}-\d{2}$/.test(req) && req) ||
+    (active && /^\d{4}-\d{2}-\d{2}$/.test(active) && active) ||
+    todayDateKey();
+  useFuturePlanStore.getState().ensureDay(dk);
+  usePlanCalendarUiStore.getState().requestDayKey(dk);
+  return dk;
+}
+
+/** Stop auf aktivem Tag oder in anderen Plan-Tagen finden und dorthin wechseln. */
+function findEditableStopForUtterance(utterance: string): FuturePlanStop | null {
+  const resolved = resolveExistingPlanReference(utterance);
+  if (resolved.kind === 'match') return resolved.primary;
+  const hintMatch = resolvePlanStopsFromUtterance(utterance, {
+    minScore: 28,
+    limit: 1,
+  })[0]?.stop;
+  if (hintMatch) return hintMatch;
+
+  const store = useFuturePlanStore.getState();
+  const activeKey = store.plan.dayKey;
+  const dayKeys = Array.from(
+    new Set([activeKey, ...Object.keys(store.plansByDay || {})]),
+  );
+  for (const dk of dayKeys) {
+    if (dk === activeKey) continue;
+    const dayStops = (store.plansByDay[dk]?.stops ?? []).filter(
+      (s) =>
+        s.kind !== 'nav_leg' &&
+        !s.id.startsWith('choice_') &&
+        !s.id.startsWith('nav_remind_') &&
+        !s.id.startsWith('leave_'),
+    );
+    if (!dayStops.length) continue;
+    // Temporär Tag aktivieren für Scoring
+    store.ensureDay(dk);
+    const hit =
+      resolvePlanStopsFromUtterance(utterance, { minScore: 28, limit: 1 })[0]
+        ?.stop ?? null;
+    if (hit) {
+      usePlanCalendarUiStore.getState().requestDayKey(dk);
+      return hit;
+    }
+  }
+  // Zurück auf vorherigen Tag wenn nichts
+  store.ensureDay(activeKey);
+  usePlanCalendarUiStore.getState().requestDayKey(activeKey);
+  return null;
 }
 
 function parseTransport(utterance: string): FuturePlanTransport | null {
@@ -446,11 +816,17 @@ export function applyPlanEditFromUtterance(utterance: string): PlanEditResult {
   const u = utterance.trim();
   if (!u) return { handled: false, speech: '' };
   const lower = u.toLowerCase();
+  // Immer auf dem sichtbaren Plan-Tag bleiben (außer User nennt klar einen anderen)
+  const lockedDay = lockPlanEditDay(null);
   const plan = useFuturePlanStore.getState().plan;
   const hasStops = plan.stops.some((s) => s.kind !== 'nav_leg');
   const dayBase =
     plan.stops.find((s) => s.plannedStartMs != null)?.plannedStartMs ??
-    Date.now();
+    (() => {
+      const [y, m, d] = lockedDay.split('-').map(Number);
+      if (y && m && d) return new Date(y, m - 1, d, 12, 0, 0, 0).getTime();
+      return Date.now();
+    })();
 
   const softEdit = detectExistingPlanEditIntent(u);
   const wantsDelete =
@@ -458,11 +834,7 @@ export function applyPlanEditFromUtterance(utterance: string): PlanEditResult {
     /lösch|loesch|entfernen|streich|raus\s+damit|\bcancel\b|über\s+den\s+haufen|ueber\s+den\s+haufen/.test(
       lower,
     );
-  const wantsClearAll =
-    wantsDelete &&
-    /\b(alles|komplette?n?|ganzen?\s+plan|ganze\s+planung|alle\s+(termine|einträge|eintraege|stopps|orte)|neu\s+starten|über\s+den\s+haufen|ueber\s+den\s+haufen)\b/.test(
-      lower,
-    );
+  const wantsClearAll = looksLikeClearDayPlan(u);
   const dayShiftKey = (() => {
     if (/\bguten\s+morgen\b|\bheut(?:e)?\s+morgen\b/.test(lower)) return null;
     if (/\b(übermorgen|uebermorgen)\b/.test(lower)) {
@@ -479,14 +851,16 @@ export function applyPlanEditFromUtterance(utterance: string): PlanEditResult {
     /verschieb|leg\s+.+?\s+(auf|um)|später\s+legen|spaeter\s+legen|früher\s+legen|frueher\s+legen|\+\s*15|\-\s*15/.test(
       lower,
     ) ||
+    (/\b(änder|aender|ändern|aendern|setz|stell)\w*\b/.test(lower) &&
+      /\b(auf|um|von)\s+\d{1,2}(?::\d{2})?\b/.test(lower)) ||
     (/(\bauf\s+\d{1,2}|\bum\s+\d{1,2}).*uhr/.test(lower) &&
-      /verschieb|leg|setz/.test(lower)) ||
+      /verschieb|leg|setz|änder|aender/.test(lower)) ||
     (dayShiftKey != null &&
       /\b(verschieb|leg|setz|termin|stopp|eintrag|einkauf|museum|essen)\b/.test(
         lower,
       ));
   const wantsAdd =
-    /hinzu(?:fügen|fuegen)?|ergänz\w*|ergaenz\w*|neuen?\s+stopp|pack\s+.+\s+dazu|füge?\s+.+\s+hinzu|fuege?\s+.+\s+hinzu|noch\s+mit\s+in|in\s+(?:mein(?:en?)?\s+)?(?:navi|plan|route)|danach\s+(?:noch\s+)?(?:zum|zur)/.test(
+    /hinzu(?:fügen|fuegen)?|ergänz\w*|ergaenz\w*|neuen?\s+stopp|pack\s+.+\s+dazu|füge?\s+.+\s+hinzu|fuege?\s+.+\s+hinzu|noch\s+mit\s+in|noch\s+dazu|dazu\s+noch|auch\s+noch|in\s+(?:mein(?:en?)?\s+)?(?:navi|plan|route)|danach\s+(?:noch\s+)?(?:zum|zur)/.test(
       lower,
     );
   const wantsTransport =
@@ -522,12 +896,14 @@ export function applyPlanEditFromUtterance(utterance: string): PlanEditResult {
     const stop = findStopByTitleHint(titleHint);
     if (stop) {
       setStopTransport(stop.id, t);
+      lockPlanEditDay(lockedDay);
       return {
         handled: true,
         speech: `„${stop.title}“ läuft jetzt per ${t}.`,
       };
     }
     setPlanTransportDefault(t);
+    lockPlanEditDay(lockedDay);
     return {
       handled: true,
       speech: `Fortbewegung auf ${t} umgestellt.`,
@@ -675,16 +1051,17 @@ export function applyPlanEditFromUtterance(utterance: string): PlanEditResult {
     }
     const titleHint =
       u.match(
-        /(?:verschieb|leg)\w*\s+(?:den\s+|die\s+|das\s+)?(.+?)(?:\s+(?:auf|um|nach|früher|frueher|später|spaeter|morgen|heute)\b)/i,
+        /(?:verschieb|leg|änder|aender)\w*\s+(?:den\s+|die\s+|das\s+)?(?:termine?\s+(?:des\s+|der\s+|vom\s+)?)?(.+?)(?:\s+(?:auf|um|nach|von|früher|frueher|später|spaeter|morgen|heute)\b)/i,
       )?.[1] ??
       u.match(
-        /(?:den\s+|die\s+|das\s+)?(?:termin|stopp|eintrag|punkt)\s+(?:mit\s+(?:dem\s+|der\s+|dem\s+)?)?(.+?)(?:\s+(?:später|spaeter|früher|frueher|auf|um|morgen|heute)\b)/i,
+        /(?:den\s+|die\s+|das\s+)?(?:termin|stopp|eintrag|punkt|turnier)\s+(?:mit\s+(?:dem\s+|der\s+|dem\s+)?)?(.+?)(?:\s+(?:später|spaeter|früher|frueher|auf|um|von|morgen|heute)\b)/i,
       )?.[1] ??
       '';
     const resolved = resolveExistingPlanReference(u);
     const stop =
       (titleHint ? findStopByTitleHint(titleHint) : null) ??
       (resolved.kind === 'match' ? resolved.primary : null) ??
+      findEditableStopForUtterance(u) ??
       resolvePlanStopsFromUtterance(u, { minScore: 30, limit: 1 })[0]?.stop ??
       null;
     if (!stop) {
@@ -693,23 +1070,71 @@ export function applyPlanEditFromUtterance(utterance: string): PlanEditResult {
           .slice(0, 3)
           .map((s) => describeExistingStop(s))
           .join(' oder ');
+        lockPlanEditDay(lockedDay);
         return {
           handled: true,
           speech: `Welchen meinst du — ${labels}?`,
         };
       }
+      lockPlanEditDay(lockedDay);
       return {
         handled: true,
         speech: 'Welchen Stopp soll ich verschieben?',
       };
     }
     if (clock != null) {
-      reschedulePlanStop(stop.id, { plannedStartMs: clock });
+      const hard = (() => {
+        try {
+          const { isHardFixedStop } = require('../planning/planHardLock') as {
+            isHardFixedStop: (s: typeof stop) => boolean;
+          };
+          return isHardFixedStop(stop);
+        } catch {
+          return false;
+        }
+      })();
+      const ok = reschedulePlanStop(stop.id, {
+        plannedStartMs: clock,
+        allowHardMove: true,
+      });
+      lockPlanEditDay(dayShiftKey || lockedDay);
+      if (!ok && hard) {
+        return {
+          handled: true,
+          speech: `„${stop.title}“ ist ein fester Termin — sag mir die neue Uhrzeit klar, dann setz ich ihn um.`,
+        };
+      }
+      const hm = `${String(new Date(clock).getHours()).padStart(2, '0')}:${String(new Date(clock).getMinutes()).padStart(2, '0')}`;
+      return {
+        handled: true,
+        speech: `„${stop.title}“ steht jetzt auf ${hm}.`,
+      };
     } else if (dayShiftKey && stop.plannedStartMs != null) {
       const prev = new Date(stop.plannedStartMs);
       const [y, m, d] = dayShiftKey.split('-').map((x) => Number(x));
       const next = new Date(y!, m! - 1, d!, prev.getHours(), prev.getMinutes(), 0, 0);
-      reschedulePlanStop(stop.id, { plannedStartMs: next.getTime() });
+      const hard = (() => {
+        try {
+          const { isHardFixedStop } = require('../planning/planHardLock') as {
+            isHardFixedStop: (s: typeof stop) => boolean;
+          };
+          return isHardFixedStop(stop);
+        } catch {
+          return false;
+        }
+      })();
+      const ok = reschedulePlanStop(stop.id, {
+        plannedStartMs: next.getTime(),
+        allowHardMove: hard,
+      });
+      if (!ok) {
+        return {
+          handled: true,
+          speech: hard
+            ? `„${stop.title}“ bleibt fest — den Tag wechsle ich nur, wenn du das klar so willst.`
+            : `Konnte „${stop.title}“ nicht verschieben.`,
+        };
+      }
       try {
         useFuturePlanStore.getState().ensureDay(dayShiftKey);
         usePlanCalendarUiStore.getState().requestDayKey(dayShiftKey);
@@ -717,8 +1142,40 @@ export function applyPlanEditFromUtterance(utterance: string): PlanEditResult {
         /* soft */
       }
     } else if (deltaMin != null) {
+      const hard = (() => {
+        try {
+          const { isHardFixedStop } = require('../planning/planHardLock') as {
+            isHardFixedStop: (s: typeof stop) => boolean;
+          };
+          return isHardFixedStop(stop);
+        } catch {
+          return false;
+        }
+      })();
+      if (hard) {
+        return {
+          handled: true,
+          speech: `„${stop.title}“ ist fest — den schieb ich nicht von allein. Sag eine konkrete neue Uhrzeit.`,
+        };
+      }
       reschedulePlanStop(stop.id, { deltaMin });
     } else {
+      const hard = (() => {
+        try {
+          const { isHardFixedStop } = require('../planning/planHardLock') as {
+            isHardFixedStop: (s: typeof stop) => boolean;
+          };
+          return isHardFixedStop(stop);
+        } catch {
+          return false;
+        }
+      })();
+      if (hard) {
+        return {
+          handled: true,
+          speech: `„${stop.title}“ ist ein fester Termin — wann soll er stattdessen sein?`,
+        };
+      }
       reschedulePlanStop(stop.id, { deltaMin: 15 });
     }
     if (t) setStopTransport(stop.id, t);

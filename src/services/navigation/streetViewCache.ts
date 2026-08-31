@@ -5,6 +5,7 @@
 
 import * as FileSystem from 'expo-file-system';
 import { getDatabase } from '../../db/database';
+import { runExclusiveDbWrite } from '../../db/dbWriteLock';
 
 const SV_TTL_MS = 180 * 24 * 60 * 60 * 1000; // 6 months
 const CACHE_DIR = `${FileSystem.documentDirectory}streetview-cache/`;
@@ -154,19 +155,21 @@ export async function putCachedStreetView(opts: {
     }
   }
 
-  await db.runAsync(
-    `INSERT OR REPLACE INTO street_view_cache
-      (cache_key, lat, lng, heading_bucket, file_uri, base64_preview, available, fetched_at_ms)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-    key,
-    opts.lat,
-    opts.lng,
-    heading,
-    fileUri,
-    preview,
-    opts.available ? 1 : 0,
-    Date.now(),
-  );
+  await runExclusiveDbWrite(async () => {
+    await db.runAsync(
+      `INSERT OR REPLACE INTO street_view_cache
+        (cache_key, lat, lng, heading_bucket, file_uri, base64_preview, available, fetched_at_ms)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+      key,
+      opts.lat,
+      opts.lng,
+      heading,
+      fileUri,
+      preview,
+      opts.available ? 1 : 0,
+      Date.now(),
+    );
+  });
 }
 
 /** Rows newer than sinceMs for nightly community sync. */

@@ -795,6 +795,8 @@ const produceContextMatrix: TipProducer = () => {
       return false;
     // Generisches „Supermarkt“ ohne Nearby-Treffer nicht zeigen
     if (t.id === 'supermarket_evening') return false;
+    // Kein „Pause / Park?“ / „Foto-Spot?“ ohne konkreten Nearby-Treffer
+    if (t.id === 'park_pause' || t.id === 'photo_spots') return false;
     // Sunset-Karte aus liveHudCards ist SSOT (Uhr + Wetter)
     if (t.id === 'sunset_spot') return false;
     if (t.id === 'lunch_nearby' || t.id === 'dinner_reservation') return false;

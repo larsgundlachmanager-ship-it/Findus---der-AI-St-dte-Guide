@@ -21,7 +21,7 @@ extensions.configure(com.facebook.react.ReactSettingsExtension) { ex ->
   }
 }
 
-rootProject.name = 'Findus'
+rootProject.name = 'Yorro'
 
 dependencyResolutionManagement {
   versionCatalogs {

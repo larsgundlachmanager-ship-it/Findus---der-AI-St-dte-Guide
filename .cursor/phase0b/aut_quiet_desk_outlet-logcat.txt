@@ -1,0 +1,4 @@
+08-29 02:19:49.718  3070  5946 D NtSmartWifiMonitor: get rssi = -64, frequecy=5180, datastall=0, current state=6
+08-29 02:19:49.718  3070  5946 D NtSmartWifiMonitor: 5G Wifi rssi queue: sufficient rssi=-70[-64, -64, -64]
+08-29 02:19:49.718  3070  5412 D NtSmartWifi: handleMessage EVENT_LINK_QUALITY_CHANGED ...
+08-29 02:19:49.718  3070  5412 D NtSmartWifi: enableSufficientCheckWhenScreenOn, true,  mSmartWifiEnabled=true, screenOn= true

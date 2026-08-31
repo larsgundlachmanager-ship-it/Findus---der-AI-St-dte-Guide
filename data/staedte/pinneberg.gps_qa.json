@@ -1,0 +1,612 @@
+{
+  "generated_at": "2026-08-28T05:47:21.644Z",
+  "summary": {
+    "city_id": "pinneberg",
+    "checked": 20,
+    "ok": 7,
+    "check": 9,
+    "bad": 4,
+    "errors": 0,
+    "max_delta_m": 180,
+    "city_halo_m": 28000,
+    "story_only": true
+  },
+  "rows": [
+    {
+      "id": "pinneberg_bahnhof_thesdorf",
+      "name": "S-Bahn Station Pinneberg-Thesdorf",
+      "category": "bahnhof",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.660962375,
+        "lng": 9.7960745
+      },
+      "query": "S-Bahn Station Pinneberg-Thesdorf, Pinneberg, Germany",
+      "osm": {
+        "lat": 53.6445487,
+        "lng": 9.8125697,
+        "display_name": "S-Bahn Station Thesdorf, Thesdorfer Weg, Pinneberg, Deutschland",
+        "class": "amenity",
+        "type": "taxi",
+        "provider": "photon"
+      },
+      "delta_m": 2124,
+      "from_city_m": 35,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "pinneberg_stadtmuseum",
+        "pinneberg_stadtgeschichte",
+        "pinneberg_pinneberg_pinnau_park",
+        "pinneberg_historische_wupperman_hallen"
+      ]
+    },
+    {
+      "id": "pinneberg_samlandmuseum",
+      "name": "Samlandmuseum",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.659381440000004,
+        "lng": 9.80301358
+      },
+      "query": "Samlandmuseum, Pinneberg, Germany",
+      "osm": {
+        "lat": 53.6682478,
+        "lng": 9.7951446,
+        "display_name": "Pinneberg-Nord, Pinneberg, Deutschland",
+        "class": "place",
+        "type": "suburb",
+        "provider": "photon"
+      },
+      "delta_m": 1114,
+      "from_city_m": 459,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "pinneberg_stadtgeschichte",
+      "name": "Pinneberg Stadtgeschichte & Orientierung",
+      "category": "geschichte",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.660962375,
+        "lng": 9.7960745
+      },
+      "query": "Pinneberg Stadtgeschichte, Pinneberg, Germany",
+      "osm": {
+        "lat": 53.6682478,
+        "lng": 9.7951446,
+        "display_name": "Pinneberg-Nord, Pinneberg, Deutschland",
+        "class": "place",
+        "type": "suburb",
+        "provider": "photon"
+      },
+      "delta_m": 812,
+      "from_city_m": 35,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "pinneberg_stadtmuseum",
+        "pinneberg_bahnhof_thesdorf",
+        "pinneberg_pinneberg_pinnau_park",
+        "pinneberg_historische_wupperman_hallen"
+      ]
+    },
+    {
+      "id": "pinneberg_torhaus_ilo_park",
+      "name": "Torhaus ILO Park",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.654775111111114,
+        "lng": 9.796781000000001
+      },
+      "query": "Torhaus ILO Park, Pinneberg, Germany",
+      "osm": {
+        "lat": 53.6557226,
+        "lng": 9.7937704,
+        "display_name": "Neubaugebiet ILO-Park, Pinneberg, Deutschland",
+        "class": "landuse",
+        "type": "construction",
+        "provider": "photon"
+      },
+      "delta_m": 225,
+      "from_city_m": 692,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "pinneberg_stolperstein_fur_heinrich_geick",
+      "name": "Stolperstein für Heinrich Geick",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.6672498,
+        "lng": 9.7960982
+      },
+      "query": "Stolperstein für Heinrich, Pinneberg, Germany",
+      "osm": {
+        "lat": 52.3445609,
+        "lng": 14.5502385,
+        "display_name": "Stolperstein für Heinrich Miedzwinski, Wollenweberstraße, Frankfurt (Oder), Deutschland",
+        "class": "historic",
+        "type": "memorial",
+        "provider": "photon"
+      },
+      "delta_m": 350360,
+      "from_city_m": 696,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "pinneberg_kriegerdenkmal_bahnhofvorplatz",
+      "name": "Kriegerdenkmal Bahnhofsvorplatz",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.6558369,
+        "lng": 9.797842000000001
+      },
+      "query": "Kriegerdenkmal Bahnhofsvorplatz, Pinneberg, Germany",
+      "osm": {
+        "lat": 54.1828616,
+        "lng": 7.8845461,
+        "display_name": "Kriegerdenkmal, Von-Aschen-Straße, Helgoland, Deutschland",
+        "class": "historic",
+        "type": "memorial",
+        "provider": "photon"
+      },
+      "delta_m": 138314,
+      "from_city_m": 580,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "pinneberg_wasserturm_pinneberg",
+      "name": "Wasserturm Pinneberg",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.66457912,
+        "lng": 9.78426218
+      },
+      "query": "Wasserturm Pinneberg, Pinneberg, Germany",
+      "osm": {
+        "lat": 53.6636673,
+        "lng": 9.7856534,
+        "display_name": "Wasserturm, Am Hafen, Pinneberg-Nord, Pinneberg, Kreis Pinneberg, Schleswig-Holstein, 25421, Deutschland",
+        "class": "man_made",
+        "type": "water_tower",
+        "importance": 0.00005720531013957454,
+        "osm_type": "node",
+        "osm_id": 11237004399,
+        "provider": "nominatim"
+      },
+      "delta_m": 137,
+      "from_city_m": 905,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "pinneberg_drosteipark",
+      "name": "Drosteipark",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.6598242,
+        "lng": 9.7973896
+      },
+      "query": "Drosteipark, Pinneberg, Germany",
+      "osm": {
+        "lat": 53.6598094,
+        "lng": 9.7959067,
+        "display_name": "Drosteipark, Pinneberg-Nord, Pinneberg, Kreis Pinneberg, Schleswig-Holstein, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "importance": 0.08005720531013959,
+        "osm_type": "way",
+        "osm_id": 22830406,
+        "provider": "nominatim"
+      },
+      "delta_m": 98,
+      "from_city_m": 141,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "pinneberg_bahnhof_pr",
+      "name": "Bahnhof Pinneberg & P+R Anlage",
+      "category": "bahnhof",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.65480228,
+        "lng": 9.798750459999999
+      },
+      "query": "Bahnhof Pinneberg, Pinneberg, Germany",
+      "osm": {
+        "lat": 53.6553596,
+        "lng": 9.797679,
+        "display_name": "Bahnhof Pinneberg, Rockvillestraße, Quellental, Pinneberg, Kreis Pinneberg, Schleswig-Holstein, 25421, Deutschland",
+        "class": "building",
+        "type": "construction",
+        "importance": 0.00005720531013957454,
+        "osm_type": "way",
+        "osm_id": 22494929,
+        "provider": "nominatim"
+      },
+      "delta_m": 94,
+      "from_city_m": 704,
+      "status": "CHECK",
+      "flags": [
+        "house_like_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "pinneberg_herman_wupperman_denkmal",
+      "name": "Herman-Wupperman-Denkmal",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.663983099999996,
+        "lng": 9.789321659999999
+      },
+      "query": "Herman-Wupperman-Denkmal, Pinneberg, Germany",
+      "osm": {
+        "lat": 53.6637551,
+        "lng": 9.7882749,
+        "display_name": "Herman Wupperman, Hermanstraße, Pinneberg, Deutschland",
+        "class": "historic",
+        "type": "memorial",
+        "provider": "photon"
+      },
+      "delta_m": 73,
+      "from_city_m": 583,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "pinneberg_rathaus_pinneberg",
+      "name": "Rathaus Pinneberg",
+      "category": "verwaltung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.66232343181819,
+        "lng": 9.797984704545456
+      },
+      "query": "Rathaus Pinneberg, Pinneberg, Germany",
+      "osm": {
+        "lat": 53.6620373,
+        "lng": 9.7972028,
+        "display_name": "Rathaus Pinneberg, 8, Bismarckstraße, Pinneberg-Mitte, Pinneberg-Nord, Pinneberg, Kreis Pinneberg, Schleswig-Holstein, 25421, Deutschland",
+        "class": "amenity",
+        "type": "townhall",
+        "importance": 0.00005720531013957454,
+        "osm_type": "way",
+        "osm_id": 1058390200,
+        "provider": "nominatim"
+      },
+      "delta_m": 61,
+      "from_city_m": 173,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "pinneberg_rathauspassage",
+        "pinneberg_parkhaus_rathauspassage",
+        "pinneberg_wochenmarkt_rathausvorplatz"
+      ]
+    },
+    {
+      "id": "pinneberg_stadtmuseum",
+      "name": "Stadtmuseum Pinneberg",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.6609623625,
+        "lng": 9.7960745875
+      },
+      "query": "Stadtmuseum Pinneberg, Pinneberg, Germany",
+      "osm": {
+        "lat": 53.6609671,
+        "lng": 9.7960788,
+        "display_name": "Stadtmuseum Pinneberg, 25, Dingstätte, Pinneberg-Mitte, Pinneberg-Nord, Pinneberg, Kreis Pinneberg, Schleswig-Holstein, 25421, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.00005720531013957454,
+        "osm_type": "way",
+        "osm_id": 25408268,
+        "provider": "nominatim"
+      },
+      "delta_m": 1,
+      "from_city_m": 35,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "pinneberg_stadtgeschichte",
+        "pinneberg_bahnhof_thesdorf",
+        "pinneberg_pinneberg_pinnau_park",
+        "pinneberg_historische_wupperman_hallen"
+      ]
+    },
+    {
+      "id": "pinneberg_historische_wupperman_hallen",
+      "name": "Historische Wupperman Hallen",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.660962375,
+        "lng": 9.7960745
+      },
+      "query": "Historische Wupperman Hallen, Pinneberg",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 35,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "pinneberg_stadtmuseum",
+        "pinneberg_stadtgeschichte",
+        "pinneberg_bahnhof_thesdorf",
+        "pinneberg_pinneberg_pinnau_park"
+      ]
+    },
+    {
+      "id": "pinneberg_rosengarten_pinneberg",
+      "name": "Rosengarten Pinneberg",
+      "category": "natur",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.65244163125001,
+        "lng": 9.807137174999998
+      },
+      "query": "Rosengarten Pinneberg, Pinneberg, Germany",
+      "osm": {
+        "lat": 53.6521737,
+        "lng": 9.8065381,
+        "display_name": "Rosengarten, Thesdorf, Pinneberg, Kreis Pinneberg, Schleswig-Holstein, Deutschland",
+        "class": "leisure",
+        "type": "garden",
+        "importance": 0.06672387197680628,
+        "osm_type": "way",
+        "osm_id": 82121406,
+        "provider": "nominatim"
+      },
+      "delta_m": 49,
+      "from_city_m": 1178,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "pinneberg_waldgebiet_fahlt",
+      "name": "Waldgebiet Fahlt",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.654597945614036,
+        "lng": 9.804757263157896
+      },
+      "query": "Waldgebiet Fahlt, Pinneberg, Germany",
+      "osm": {
+        "lat": 53.6543167,
+        "lng": 9.8051614,
+        "display_name": "Fahlt, Pinneberg, Deutschland",
+        "class": "landuse",
+        "type": "forest",
+        "provider": "photon"
+      },
+      "delta_m": 41,
+      "from_city_m": 892,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "pinneberg_arboretum_ellerhoop",
+      "name": "Arboretum Ellerhoop",
+      "category": "natur",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.71654724,
+        "lng": 9.776308779999999
+      },
+      "query": "Arboretum Ellerhoop, Pinneberg, Germany",
+      "osm": {
+        "lat": 53.7164712,
+        "lng": 9.7765581,
+        "display_name": "Arboretum Ellerhoop, Ellerhoop, Rantzau, Kreis Pinneberg, Schleswig-Holstein, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "importance": 0.08005720531013959,
+        "osm_type": "way",
+        "osm_id": 23054263,
+        "provider": "nominatim"
+      },
+      "delta_m": 18,
+      "from_city_m": 6319,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "pinneberg_hotel_cap_polonio",
+      "name": "Hotel Cap Polonio",
+      "category": "hotel",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.657763615384624,
+        "lng": 9.806637076923078
+      },
+      "query": "Hotel Cap Polonio, Pinneberg, Germany",
+      "osm": {
+        "lat": 53.6578358,
+        "lng": 9.8067985,
+        "display_name": "Hotel Cap Polonio, 48, Fahltskamp, Pinneberg-Mitte, Pinneberg-Nord, Pinneberg, Kreis Pinneberg, Schleswig-Holstein, 25421, Deutschland",
+        "class": "tourism",
+        "type": "hotel",
+        "importance": 0.00005720531013957454,
+        "osm_type": "node",
+        "osm_id": 1201130624,
+        "provider": "nominatim"
+      },
+      "delta_m": 13,
+      "from_city_m": 753,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "pinneberg_deutsches_baumschulmuseum",
+      "name": "Deutsches Baumschulmuseum (Ortsteil Thesdorf)",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.6416524,
+        "lng": 9.8206126
+      },
+      "query": "Deutsches Baumschulmuseum, Pinneberg, Germany",
+      "osm": {
+        "lat": 53.641625,
+        "lng": 9.8206547,
+        "display_name": "Deutsches Baumschulmuseum, 29, Halstenbeker Straße, Thesdorf, Pinneberg, Kreis Pinneberg, Schleswig-Holstein, 25421, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.10540294855860563,
+        "osm_type": "way",
+        "osm_id": 27003784,
+        "provider": "nominatim"
+      },
+      "delta_m": 4,
+      "from_city_m": 2671,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "pinneberg_die_drostei",
+      "name": "Die Drostei",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.66092833333334,
+        "lng": 9.796642833333333
+      },
+      "query": "Die Drostei, Pinneberg, Germany",
+      "osm": {
+        "lat": 53.6609057,
+        "lng": 9.796676,
+        "display_name": "Drostei, Dingstätte, Pinneberg, Deutschland",
+        "class": "tourism",
+        "type": "attraction",
+        "provider": "photon"
+      },
+      "delta_m": 3,
+      "from_city_m": 8,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "pinneberg_christuskirche_pinneberg",
+      "name": "Christuskirche Pinneberg",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.65733910526316,
+        "lng": 9.799439263157893
+      },
+      "query": "Christuskirche Pinneberg, Pinneberg, Germany",
+      "osm": {
+        "lat": 53.6573415,
+        "lng": 9.7994007,
+        "display_name": "Christuskirche, Bahnhofstraße, Pinneberg-Mitte, Pinneberg-Nord, Pinneberg, Kreis Pinneberg, Schleswig-Holstein, 25421, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.12743869505990896,
+        "osm_type": "way",
+        "osm_id": 220268234,
+        "provider": "nominatim"
+      },
+      "delta_m": 3,
+      "from_city_m": 448,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    }
+  ]
+}

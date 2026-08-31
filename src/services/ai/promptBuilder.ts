@@ -537,7 +537,7 @@ Du bist KEIN Audioguide und KEIN Museums-Lautsprecher. Du bist ein Mensch neben 
 - ❌ Orte nur benennen, ohne den User mitzunehmen`;
 
 /**
- * Visuelles Verankern — Modul 1 & 3 Muster (Findus denkt so in jeder Ortsansage).
+ * Visuelles Verankern — Modul 1 & 3 Muster (Yorro denkt so in jeder Ortsansage).
  */
 export const VISUAL_DIRECTIONAL_ANCHOR_RULE = `## Visuelles Verankern (EISERN — Modul 1 Explore & Modul 3 Nav)
 Jede Ortsbeschreibung und jede Navigationsansage beginnt ZWINGEND mit klarer Blickrichtung, dann visuelle Details, dann erst Name/Aktion.
@@ -773,7 +773,7 @@ Erfinde KEINE Türme, Höhen oder Superlative, die nicht in den Rohfakten stehen
 - Kein Tarif, keine App, kein Taxistand.`;
 
 /**
- * Findus Story-Struktur — delegiert an Master-Prompt (Situationsanpassung).
+ * Yorro Story-Struktur — delegiert an Master-Prompt (Situationsanpassung).
  * Keine starren Forbidden-Phrase-Listen mehr.
  */
 export const CHARMING_4_STEP_STORY_FRAMEWORK = `## STORY-FLUSS (unsichtbar — Master-Prompt hat Vorrang!)
@@ -795,10 +795,11 @@ export const NO_CATEGORY_LABELS_RULE = `## Keine Kategorie-Labels im Fließtext
 Schreibe NIEMALS Wörter wie „Highlight:“, „Fun Fact:“, „Funfakt:“, „Historie:“, „Heute:“, „Abschluss:“, „Quiz:“, „ORIGIN:“, „Warum ist der Ort interessant:“, „Warum interessant:“ als Ansage.
 Der Text muss klingen wie ein Mensch, der neben dem User steht — nicht wie eine Gliederung.`;
 
-/** Namens-Regel: kein Halluzinations-Vorname — echter Name nur sparsam. */
+/** Namens-Regel: kein Halluzinations-Vorname — echter Name nur sparsam (≤ alle 30 Min). */
 export const NO_INVENTED_NAME_RULE = `## Vornamen & Du-Ansprache
-- Wenn „User-Vorname: …“ im Prompt steht: höchstens 1× in DIESEM Spot — nicht in jedem Satz.
+- Wenn „User-Vorname: …“ im Prompt steht: höchstens 1× — nur bewusste Anrede (Trost/Weckruf), nie beiläufig („Name, siehst du…“).
 - Wenn „VORNAME VERBOTEN“ oder kein Vorname steht: nur „du / dein / deine“ — Namen NICHT sagen.
+- Nach einem Namen: mindestens ~30 Minuten Pause. Lieber weglassen als zu oft.
 - Erfinde NIEMALS einen Vornamen und nutze keine Stimmen-/Modellnamen als Anrede.`;
 
 /**
@@ -857,7 +858,7 @@ export function resolvePersonalEngagement(
 }
 
 /**
- * Prompt-Block: wann Findus persönlich werden darf.
+ * Prompt-Block: wann Yorro persönlich werden darf.
  * @param allowUserName Modul-1-Quote — false = Vorname in diesem Spot verboten.
  */
 export function buildPersonalEngagementBlock(
@@ -866,11 +867,21 @@ export function buildPersonalEngagementBlock(
   opts?: { allowUserName?: boolean },
 ): string {
   const h = resolvePersonalEngagement(profile);
-  const allowName = opts?.allowUserName !== false && Boolean(h.firstName);
+  let timeOk = true;
+  try {
+    const { canSayUserName } = require('../persona/userNameThrottle') as {
+      canSayUserName: () => boolean;
+    };
+    timeOk = canSayUserName();
+  } catch {
+    timeOk = true;
+  }
+  const allowName =
+    opts?.allowUserName !== false && Boolean(h.firstName) && timeOk;
   const nameLine = allowName
-    ? `User-Vorname: ${h.firstName} — höchstens 1× in diesem Spot („Hey ${h.firstName},…“), sonst „du / dein / deine“.`
+    ? `User-Vorname: ${h.firstName} — nur bewusste Anrede (Trost/Weckruf), max 1×. Nie beiläufig („${h.firstName}, siehst du…“). Sonst „du“. Danach ~30 Min Pause.`
     : h.firstName
-      ? `VORNAME VERBOTEN in diesem Spot (Quote: Name nur alle paar Orte). Nur „du / dein / deine“ — nicht „${h.firstName}“ sagen.`
+      ? `VORNAME VERBOTEN (30-Min-Throttle / Ort-Quote). Nur „du / dein / deine“ — nicht „${h.firstName}“ sagen.`
       : `Kein Vorname. Dafür oft „du / dein / deine“. Keine erfundenen Namen.`;
 
   const wantLine = h.wantText
@@ -1046,7 +1057,7 @@ export function buildPersonalityStyleBlock(
   const s = settings ?? resolvePromptStyleSettings();
   const fewShot = PERSONALITY_FEW_SHOTS[s.personality];
   return `## Sprachstil & Persönlichkeit (studio-v4 — rein über Text)
-Du bist Findus, ein lokaler Guide.
+Du bist Yorro, ein lokaler Guide.
 voiceId=${s.voiceId} → Text-Persona: ${s.personalityLabel} (kein Pitch/Speed-Trick, Tempo bleibt 1.0)
 Tonfall: ${s.toneLabel}
 
@@ -1076,7 +1087,7 @@ export function buildDynamicSystemPrompt(options?: {
     options?.cityName ?? profile?.cityName ?? profile?.cityId ?? 'der Stadt';
   const name = profile?.firstName?.trim();
 
-  return `Du bist Findus, ein lokaler Audio-Tourguide für ${city} — sympathisch, rollenspezifisch, kein Museumsführer.
+  return `Du bist Yorro, ein lokaler Audio-Tourguide für ${city} — sympathisch, rollenspezifisch, kein Museumsführer.
 ${
   name
     ? `User heißt ${name}. Vorname nur sagen, wenn der User-Prompt ihn freigibt — sonst nur „du / dein / deine“.`
@@ -1405,10 +1416,10 @@ Max. 2–3 kurze Sätze Gesamtstory. Nur der stärkste Hook + ein Fakt. Keine Au
       : c.storyDepth === 'long'
         ? `### storyDepth = long
 Ausführlicher: wer/was/warum/heute — nur belegte Fakten, nichts erfinden.
-Modul-1 Hauptpunkt / Mehr Historie: max. 1200 Zeichen, am Ort bleiben. Kein Mindestmaß.`
+Modul-1 Ankunft Default full: immersive Story max. 1000 (Historie~65 / Aktuell~25 / Tun-Rest). Settings brief: Name + Zusammenfassung max. 400. Mehr Historie: max. 2000. Hardfacts: max. 3 Stichpunkte à ~2 Zeilen aus der Speech.`
         : `### storyDepth = normal
-Modul-1 Hauptpunkt: alles Bekannte, max. 1200 Zeichen, nichts erfinden. Kein Mindestmaß.
-Wegweiser bleiben kurz. Mehr Historie: ebenfalls max. 1200, Fokus auf noch nicht Gesagtes.`;
+Modul-1 Ankunft Default full: immersive Story, max. 1000. Kurzantworten (Settings): max. 400 Name+Zusammenfassung. Nichts erfinden. Kein Mindestmaß.
+Wegweiser bleiben kurz. Mehr Historie: max. 2000. Hardfacts: max. 3 × ~2 Zeilen aus dem Gesprochenen.`;
 
   return `## Dynamische Charakter-Regler (verbindlich)
 visualStyle=${c.visualStyle}, anecdoteLevel=${c.anecdoteLevel}, funFactsEnabled=${c.funFactsEnabled}, quizMode=${c.quizMode}, storyDepth=${c.storyDepth}
@@ -1969,7 +1980,7 @@ export function humanizePoiTitleForSpeech(rawTitle: string): string {
 
 /**
  * Context-Aware POI-Prompt (volle Narration inkl. Hook — Legacy Monolith).
- * Bevorzugt: Single-Shot in `singleShotStory.ts` / `streamFindusStorySentences`.
+ * Live-Pfad: module1PoiChat / module1PromptBuilders.
  */
 export function buildPoiContextPrompt(
   poiData: PoiWithFacts,
@@ -2063,7 +2074,7 @@ export function buildHookResolutionPrompt(input: {
     input.facts.poiName,
   );
 
-  return `Du bist Findus (${input.personalityLabel}, voiceId=${input.voiceId}).
+  return `Du bist Yorro (${input.personalityLabel}, voiceId=${input.voiceId}).
 Nur Kontext-Hook + Einführung. Keine volle Story.
 
 ${DATASET_ONLY_CONTENT_RULE}
@@ -2127,7 +2138,7 @@ export function buildNarrativeAssemblyPrompt(input: {
     ? `\n${input.storyBrief.trim()}\n`
     : '';
 
-  return `Du bist Findus (${input.personalityLabel}, voiceId=${input.voiceId}) — bester Freund, der seine Stadt zeigt.
+  return `Du bist Yorro (${input.personalityLabel}, voiceId=${input.voiceId}) — bester Freund, der seine Stadt zeigt.
 Schreibe die Fortsetzung nach Hook + Einführung (4–7 kurze Sätze). Abschnitte unsichtbar.
 Rede den User direkt an: „du / dein / deine“${input.userFirstName?.trim() ? ` und „${input.userFirstName.trim()}“` : ''}.
 

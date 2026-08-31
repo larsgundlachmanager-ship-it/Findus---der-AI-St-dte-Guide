@@ -106,18 +106,36 @@ export function haversineWalkMin(
 
 export function formatPlanTravelMin(mins: number): string {
   if (!Number.isFinite(mins) || mins <= 0) return '';
-  const m = Math.round(mins);
-  if (m < 60) return `${m} Minuten`;
-  const h = Math.floor(m / 60);
-  const rest = m % 60;
-  if (rest === 0) return h === 1 ? '1 Stunde' : `${h} Stunden`;
-  const hLabel = h === 1 ? '1 Stunde' : `${h} Stunden`;
-  return `${hLabel} ${rest} Minuten`;
+  try {
+    const { formatDurationMinutesDe } = require('../../services/navigation/travelEta') as {
+      formatDurationMinutesDe: (m: number, s?: 'short' | 'speech') => string;
+    };
+    return formatDurationMinutesDe(mins, 'short').replace(/^ca\.\s+/i, '');
+  } catch {
+    const m = Math.round(mins);
+    if (m < 60) return `${m} Minuten`;
+    const h = Math.floor(m / 60);
+    const rest = m % 60;
+    if (rest === 0) return `${h}h`;
+    return `${h}h ${rest} min`;
+  }
 }
 
-function formatClockMs(ms: number): string {
+function startOfLocalDayMs(ms: number): number {
   const d = new Date(ms);
-  return `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
+  return new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime();
+}
+
+function formatClockMs(ms: number, refMs?: number | null): string {
+  const d = new Date(ms);
+  const base = `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
+  if (refMs == null || !Number.isFinite(refMs)) return base;
+  const dayDiff = Math.round(
+    (startOfLocalDayMs(ms) - startOfLocalDayMs(refMs)) / 86_400_000,
+  );
+  if (dayDiff > 0) return `${base} (+${dayDiff})`;
+  if (dayDiff < 0) return `${base} (${dayDiff})`;
+  return base;
 }
 
 export function buildNavLegNotes(opts: {
@@ -154,10 +172,11 @@ export function buildNavLegNotes(opts: {
       : null;
   const clockBit =
     opts.leaveMs != null && opts.arriveMs != null
-      ? ` · ${formatClockMs(opts.leaveMs)} → ${formatClockMs(opts.arriveMs)}`
+      ? ` · ${formatClockMs(opts.leaveMs)} → ${formatClockMs(opts.arriveMs, opts.leaveMs)}`
       : opts.leaveMs != null
         ? ` · Los ${formatClockMs(opts.leaveMs)}`
         : '';
+  // Nur echte Fallback-Luftlinie als Schätzung — geroutete Legs nicht.
   const est = opts.estimate === 'fallback' ? ' · Schätzung' : '';
   return dist
     ? `${emoji} ${mode} · ${dist} · ${formatPlanTravelMin(opts.walkMin)}${clockBit}${est}`
@@ -251,6 +270,30 @@ export function resolveTravelOrigin(opts?: {
     };
   }
 
+  // Plan-Tag-Basis (Hotel/Zuhause) — Zukunftstage haben oft keinen Anker-Stop
+  try {
+    const dayPlan = useFuturePlanStore.getState().plan;
+    const dayBase = dayPlan.base ?? dayPlan.originBase ?? null;
+    // Explizite Tages-Basis immer nutzen (auch Fallback-GPS) — sonst
+    // fehlt nach Adress-Clarify oft die Route Basis→erster Stop.
+    if (
+      dayBase &&
+      typeof dayBase.lat === 'number' &&
+      typeof dayBase.lng === 'number' &&
+      Number.isFinite(dayBase.lat) &&
+      Number.isFinite(dayBase.lng)
+    ) {
+      return {
+        lat: dayBase.lat,
+        lng: dayBase.lng,
+        source: dayBase.kind === 'hotel' ? 'hotel' : 'plan',
+        title: dayBase.label?.trim() || 'Basis',
+      };
+    }
+  } catch {
+    /* soft */
+  }
+
   try {
     const { useUserMemoryStore } = require('../../store/useUserMemoryStore') as {
       useUserMemoryStore: {
@@ -307,21 +350,33 @@ export function mapsGpsUrl(
   placeId?: string | null,
 ): string {
   const label = (name || '').trim() || 'Ziel';
-  const id =
-    placeId && !placeId.startsWith('text:') && !placeId.startsWith('new:')
-      ? placeId.replace(/^places\//, '')
-      : null;
-  if (Number.isFinite(lat) && Number.isFinite(lng)) {
-    const dest = `${lat},${lng}`;
-    if (id) {
-      return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(label)}&destination_place_id=${encodeURIComponent(id)}`;
+  let id: string | null = null;
+  try {
+    const { looksLikeGooglePlaceId } = require('../../services/research/eventInfoUrl') as {
+      looksLikeGooglePlaceId: (s: string | null | undefined) => boolean;
+    };
+    if (looksLikeGooglePlaceId(placeId)) {
+      id = String(placeId).trim().replace(/^places\//, '');
     }
-    return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(dest)}`;
+  } catch {
+    const raw = (placeId || '').trim();
+    if (
+      raw &&
+      !raw.startsWith('text:') &&
+      !raw.startsWith('new:') &&
+      !raw.startsWith('pack:') &&
+      !raw.startsWith('osm:')
+    ) {
+      id = raw.replace(/^places\//, '');
+    }
   }
   if (id) {
-    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(label)}&query_place_id=${encodeURIComponent(id)}`;
+    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+      label,
+    )}&query_place_id=${encodeURIComponent(id)}`;
   }
-  return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(label)}`;
+  // Kein Google-Place → kein Maps-Deeplink (OSM-Pin / Namenssuche irreführend)
+  return '';
 }
 
 /** Soft background refine — echte Route nachziehen, UI sofort mit Fallback. */
@@ -333,52 +388,220 @@ export function scheduleRefineNavLegRoute(opts: {
   prepBufferMin?: number;
   transport?: string;
 }): void {
+  try {
+    const { usePlanCalendarUiStore } = require('./planCalendarUiStore') as {
+      usePlanCalendarUiStore: {
+        getState: () => {
+          calendarVisible?: boolean;
+          markRouteComputing: (id: string, on: boolean) => void;
+        };
+      };
+    };
+    const ui = usePlanCalendarUiStore.getState();
+    // Geschlossen: kein OSRM-Sturm — ÖPNV trotzdem auflösen (Akkordeon).
+    if (ui.calendarVisible === false && opts.transport !== 'transit') return;
+    ui.markRouteComputing(opts.navId, true);
+  } catch {
+    /* soft — refine trotzdem */
+  }
   void (async () => {
+    const clearComputing = () => {
+      try {
+        const { usePlanCalendarUiStore } = require('./planCalendarUiStore') as {
+          usePlanCalendarUiStore: {
+            getState: () => {
+              markRouteComputing: (id: string, on: boolean) => void;
+            };
+          };
+        };
+        usePlanCalendarUiStore.getState().markRouteComputing(opts.navId, false);
+      } catch {
+        /* soft */
+      }
+    };
+    const applyLeg = (args: {
+      mins: number;
+      distanceM: number | null;
+      estimate: 'fallback' | 'routed';
+      leaveMs?: number | null;
+      arriveMs?: number | null;
+      journeyDetail?: string | null;
+    }) => {
+      try {
+        const store = useFuturePlanStore.getState();
+        const leg = store.plan.stops.find((s) => s.id === opts.navId);
+        if (!leg) return;
+        const mins = Math.max(1, Math.round(args.mins));
+        const leaveMs =
+          args.leaveMs != null
+            ? args.leaveMs
+            : opts.arriveAtMs != null
+              ? opts.arriveAtMs -
+                mins * 60_000 -
+                (opts.prepBufferMin || 0) * 60_000
+              : leg.plannedStartMs;
+        const arriveMs =
+          args.arriveMs != null
+            ? args.arriveMs
+            : leaveMs != null
+              ? leaveMs + mins * 60_000
+              : leg.plannedEndMs;
+        const transport = opts.transport || 'walk';
+        const notes = buildNavLegNotes({
+          transport,
+          walkMin: mins,
+          distanceM: args.distanceM,
+          leaveMs: leaveMs ?? null,
+          arriveMs: arriveMs ?? null,
+          estimate: args.estimate,
+        });
+        store.upsertStop({
+          ...leg,
+          plannedStartMs: leaveMs,
+          plannedEndMs: arriveMs,
+          notes,
+          journeyDetail: args.journeyDetail ?? null,
+          routeEstimate: args.estimate === 'routed' ? 'routed' : 'fallback',
+          // Spinner endet auch bei Fallback — sonst hängt die UI
+          status: 'planned',
+        });
+      } catch {
+        /* soft */
+      }
+    };
+
+    const airMin = (() => {
+      try {
+        const { haversineMeters } = require('../../db/database') as {
+          haversineMeters: (
+            a: number,
+            b: number,
+            c: number,
+            d: number,
+          ) => number;
+        };
+        const m = haversineMeters(
+          opts.from.lat,
+          opts.from.lng,
+          opts.to.lat,
+          opts.to.lng,
+        );
+        const speed =
+          opts.transport === 'bike'
+            ? 250
+            : opts.transport === 'transit'
+              ? 350
+              : 80;
+        return {
+          mins: Math.max(2, Math.round(m / speed)),
+          distanceM: m,
+        };
+      } catch {
+        return { mins: 12, distanceM: null as number | null };
+      }
+    })();
+
     try {
+      // ÖPNV: echte Journey (DB/Transitous/Google) — nie Fuß-ETA als „ÖPNV“
+      if (opts.transport === 'transit') {
+        const { planJourney } = await import(
+          '../../services/transit/journeyPlanner'
+        );
+        const arriveBy =
+          opts.arriveAtMs != null ? new Date(opts.arriveAtMs) : null;
+        const result = await Promise.race([
+          planJourney({
+            from: opts.from,
+            to: opts.to,
+            travelMode: 'transit',
+            arriveBy,
+            numItineraries: 1,
+          }),
+          new Promise<null>((r) => setTimeout(() => r(null), 8_000)),
+        ]);
+        const best = result?.itineraries?.[0] ?? null;
+        if (best) {
+          try {
+            const { replaceNavLegWithJourneyGroup } = await import(
+              './plannedJourneyGroup'
+            );
+            if (
+              replaceNavLegWithJourneyGroup({
+                navId: opts.navId,
+                itinerary: best,
+              })
+            ) {
+              return;
+            }
+          } catch {
+            /* eine Zeile mit Detailtext */
+          }
+          const mins = Math.max(1, Math.round(best.durationSec / 60));
+          let journeyDetail: string | null = null;
+          try {
+            const { formatJourneyForConcierge } = await import(
+              '../../services/transit/formatJourneyCard'
+            );
+            const card = formatJourneyForConcierge(best, 'Ziel');
+            journeyDetail = card.bullets.filter(Boolean).join('\n');
+          } catch {
+            journeyDetail = null;
+          }
+          applyLeg({
+            mins,
+            distanceM: airMin.distanceM,
+            estimate: 'routed',
+            leaveMs: best.startTime?.getTime?.() ?? null,
+            arriveMs: best.endTime?.getTime?.() ?? null,
+            journeyDetail,
+          });
+          return;
+        }
+        applyLeg({
+          mins: airMin.mins,
+          distanceM: airMin.distanceM,
+          estimate: 'fallback',
+          journeyDetail: null,
+        });
+        return;
+      }
+
       const { estimateTravelEtaRouted } = await import(
         '../../services/navigation/travelEta'
       );
-      const mode =
-        opts.transport === 'bike'
-          ? 'bicycling'
-          : opts.transport === 'transit'
-            ? 'walking'
-            : 'walking';
       const eta = await Promise.race([
         estimateTravelEtaRouted({
           userLat: opts.from.lat,
           userLng: opts.from.lng,
           destLat: opts.to.lat,
           destLng: opts.to.lng,
-          mode: mode === 'bicycling' ? 'bicycling' : 'walking',
+          mode: opts.transport === 'bike' ? 'bicycling' : 'walking',
         }),
-        new Promise<null>((r) => setTimeout(() => r(null), 4000)),
+        new Promise<null>((r) => setTimeout(() => r(null), 2200)),
       ]);
-      if (!eta) return;
+      if (!eta) {
+        applyLeg({
+          mins: airMin.mins,
+          distanceM: airMin.distanceM,
+          estimate: 'fallback',
+        });
+        return;
+      }
       const mins =
-        opts.transport === 'bike'
-          ? eta.bikeMinutes
-          : eta.directWalkMinutes;
-      const store = useFuturePlanStore.getState();
-      const leg = store.plan.stops.find((s) => s.id === opts.navId);
-      if (!leg) return;
-      const leaveMs =
-        opts.arriveAtMs != null
-          ? opts.arriveAtMs -
-            mins * 60_000 -
-            (opts.prepBufferMin || 0) * 60_000
-          : leg.plannedStartMs;
-      store.upsertStop({
-        ...leg,
-        plannedStartMs: leaveMs,
-        plannedEndMs:
-          leaveMs != null ? leaveMs + mins * 60_000 : leg.plannedEndMs,
-        notes: `${mins} Min (Route)`,
-        routeEstimate: 'routed',
-        status: 'planned',
+        opts.transport === 'bike' ? eta.bikeMinutes : eta.directWalkMinutes;
+      applyLeg({
+        mins,
+        distanceM: eta.distanceM ?? airMin.distanceM,
+        estimate: 'routed',
       });
     } catch {
-      /* soft */
+      applyLeg({
+        mins: airMin.mins,
+        distanceM: airMin.distanceM,
+        estimate: 'fallback',
+      });
+    } finally {
+      clearComputing();
     }
   })();
 }

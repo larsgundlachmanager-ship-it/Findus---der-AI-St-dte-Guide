@@ -43,6 +43,64 @@ export function todayDateKey(): string {
   return planDayKeyFromMs(Date.now());
 }
 
+/** 2026-08-18 → 18.08.2026 (UI, nie TTS) */
+export function formatDateKeyDe(dateKey: string): string {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(dateKey.trim());
+  if (!m) return dateKey;
+  return `${m[3]}.${m[2]}.${m[1]}`;
+}
+
+const MONTHS_DE = [
+  'Januar',
+  'Februar',
+  'März',
+  'April',
+  'Mai',
+  'Juni',
+  'Juli',
+  'August',
+  'September',
+  'Oktober',
+  'November',
+  'Dezember',
+];
+
+/** TTS-tauglich: morgen / 18. August — nie 18.08.2026 */
+export function formatDateKeySpokenDe(dateKey: string, nowMs = Date.now()): string {
+  if (dateKey === dateKeyFromMs(nowMs)) return 'heute';
+  if (dateKey === offsetDateKey(1, nowMs)) return 'morgen';
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(dateKey.trim());
+  if (!m) return formatDateKeyDe(dateKey);
+  const year = Number(m[1]);
+  const month = MONTHS_DE[Number(m[2]) - 1];
+  const day = Number(m[3]);
+  if (!month || !day) return formatDateKeyDe(dateKey);
+  const thisYear = new Date(nowMs).getFullYear();
+  return year === thisYear ? `${day}. ${month}` : `${day}. ${month} ${year}`;
+}
+
+/** Wecker/Losfahren: 15-Minuten-Takt (8:09 → 8:00 bei down). */
+export function snapMsToQuarterHour(
+  ms: number,
+  dir: 'down' | 'nearest' | 'up' = 'nearest',
+): number {
+  const d = new Date(ms);
+  d.setSeconds(0, 0);
+  const min = d.getMinutes();
+  let snapped =
+    dir === 'down'
+      ? Math.floor(min / 15) * 15
+      : dir === 'up'
+        ? Math.ceil(min / 15) * 15
+        : Math.round(min / 15) * 15;
+  if (snapped === 60) {
+    d.setHours(d.getHours() + 1);
+    snapped = 0;
+  }
+  d.setMinutes(snapped);
+  return d.getTime();
+}
+
 export function localTimeZone(): string {
   try {
     return Intl.DateTimeFormat().resolvedOptions().timeZone || 'Europe/Berlin';
@@ -209,6 +267,70 @@ export function clockLabel(ms: number | null | undefined): string {
   return new Date(ms).toLocaleTimeString('de-DE', {
     hour: '2-digit',
     minute: '2-digit',
+  });
+}
+
+/**
+ * Datum für Speech: „heute“ / „morgen“ / „dieses Wochenende“ wenn möglich,
+ * sonst kurzes deutsches Datum — nie unnötig „Samstag, 15. August 2026“.
+ */
+export function formatSpeechRelativeDate(
+  input: string | number | Date | null | undefined,
+  nowMs = Date.now(),
+): string {
+  if (input == null || input === '') return 'heute';
+
+  let targetMs: number | null = null;
+  if (typeof input === 'number' && Number.isFinite(input)) {
+    targetMs = input;
+  } else if (input instanceof Date && Number.isFinite(input.getTime())) {
+    targetMs = input.getTime();
+  } else if (typeof input === 'string') {
+    const t = input.trim();
+    if (/^heute\b/iu.test(t)) return 'heute';
+    if (/^morgen\b/iu.test(t)) return 'morgen';
+    if (/wochenende/iu.test(t)) return 'dieses Wochenende';
+    const key = /^\d{4}-\d{2}-\d{2}/.test(t)
+      ? t.slice(0, 10)
+      : tryResolveDateKeyFromUserText(t, nowMs);
+    if (key) {
+      const [y, m, d] = key.split('-').map(Number);
+      if (y && m && d) targetMs = new Date(y, m - 1, d, 12, 0, 0).getTime();
+    }
+    if (targetMs == null) {
+      const parsed = Date.parse(t);
+      if (Number.isFinite(parsed)) targetMs = parsed;
+    }
+  }
+  if (targetMs == null || !Number.isFinite(targetMs)) return 'heute';
+
+  const todayKey = dateKeyFromMs(nowMs);
+  const targetKey = dateKeyFromMs(targetMs);
+  if (targetKey === todayKey) return 'heute';
+  if (targetKey === offsetDateKey(1, nowMs)) return 'morgen';
+  if (targetKey === offsetDateKey(2, nowMs)) return 'übermorgen';
+
+  const now = new Date(nowMs);
+  const tgt = new Date(targetMs);
+  const dow = tgt.getDay(); // 0 So … 6 Sa
+  const daysAhead = Math.round(
+    (new Date(targetKey + 'T12:00:00').getTime() -
+      new Date(todayKey + 'T12:00:00').getTime()) /
+      86_400_000,
+  );
+  // Sa/So innerhalb der nächsten ~6 Tage → „dieses Wochenende“
+  if (
+    (dow === 0 || dow === 6) &&
+    daysAhead >= 0 &&
+    daysAhead <= 6
+  ) {
+    return 'dieses Wochenende';
+  }
+  void now;
+  return tgt.toLocaleDateString('de-DE', {
+    weekday: 'short',
+    day: 'numeric',
+    month: 'short',
   });
 }
 

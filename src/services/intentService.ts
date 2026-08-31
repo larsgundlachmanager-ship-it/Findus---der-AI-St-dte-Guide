@@ -19,11 +19,7 @@ import { useUserProfileStore } from '../store/useUserProfileStore';
 import { parseTagsJson } from './geo/triggerPolicy';
 import { isNavAffirmation } from './navigation/pendingOffer';
 import {
-  detectMultiStopIntent,
-  planMultiStopTour,
-  startMultiStopTour,
   clearMultiStopTour,
-  CIRCUIT_PROMPT,
 } from './navigation/multiStopTour';
 import {
   detectDiscoveryIntent,
@@ -56,20 +52,16 @@ import {
   detectHotelTaskIntent,
   detectShoppingTaskDoneIntent,
   detectShoppingTaskIntent,
+  detectVenueVoucherIntent,
 } from './shopping/shoppingTaskIntent';
+import { detectRetireTopicIntent } from '../module2/timeline/retireTopicIntent';
 import { useShoppingTaskStore } from '../store/useShoppingTaskStore';
+import { useOpenQuestionStore } from '../store/useOpenQuestionStore';
 import {
   getDeviceHeadingDeg,
   getMovementBearingDeg,
 } from './navigation/navigationService';
 import { useFinnusStore } from '../store/useFinnusStore';
-import {
-  parseCompoundPlanWithGemini,
-} from './planning/compoundPlanParser';
-import { activateCompoundSessionPlan } from './planning/activateSessionPlan';
-import { routeUserUtteranceWithLlm } from './planning/llmIntentRouter';
-import { hasGeminiApiKey } from './geminiService';
-import { isDeviceOffline } from './navigation/networkState';
 import type { GeminiConciergeResponse } from '../types/concierge';
 import {
   detectEmergencyIntent,
@@ -670,6 +662,44 @@ export async function handleMemoryIntent(
     };
   }
 
+  // Street / city dest first — not „nein ich meinte Frage“ abort
+  const hardDestEarly = infoOnly
+    ? null
+    : detectHardNavOverride(text, {
+        currentDestName: store.navTargetName,
+        lastStreetQuery: (() => {
+          try {
+            const { peekLastStreetNavQuery } = require('./navigation/streetAddressQuery') as {
+              peekLastStreetNavQuery: () => string | null;
+            };
+            return peekLastStreetNavQuery();
+          } catch {
+            return null;
+          }
+        })(),
+      });
+  if (hardDestEarly && (store.navActive || store.multiStopTour)) {
+    const result = await hardOverrideNavigationTo(hardDestEarly);
+    return {
+      handled: true,
+      startedNav: result.ok,
+      reply: result.reply,
+    };
+  }
+  if (hardDestEarly && !detectChainedNavIntent(text)) {
+    const gastroNamed =
+      /\b(restaurant|café|cafe|bistro|imbiss)\b/iu.test(text) ||
+      /\b(tisch|reservier|speisekarte)\b/iu.test(text);
+    if (!gastroNamed) {
+      const result = await hardOverrideNavigationTo(hardDestEarly);
+      return {
+        handled: true,
+        startedNav: result.ok,
+        reply: result.reply,
+      };
+    }
+  }
+
   // Nav-correction: „Nein, ich meinte wann das Frühstück ist“ — abort nav, fall through to answer
   if (
     isNavCorrectionIntent(text) &&
@@ -718,51 +748,21 @@ export async function handleMemoryIntent(
     }
   }
 
-  // ── LLM ROUTER — übersprungen für Manager-Blaupausen (Kino/Grill/Essen/POI) ──
+  // ── Legacy Intent-LLM / Compound-SessionPlan: AUS ──
+  // Tagespläne & Multi-Stops gehören dem Concierge-Manager → Modul 5.
+  // Kein routeUserUtteranceWithLlm / activateCompoundSessionPlan mehr hier.
   {
     try {
-      const { shouldSkipLegacyIntentSteal } = require('../module2/router/hotPathGuard') as {
-        shouldSkipLegacyIntentSteal: (t: string) => boolean;
+      const {
+        looksLikeModul5PlanUtterance,
+      } = require('../module2/planning/planUtteranceGate') as {
+        looksLikeModul5PlanUtterance: (t: string) => boolean;
       };
-      if (shouldSkipLegacyIntentSteal(text)) {
+      if (looksLikeModul5PlanUtterance(text)) {
         return { handled: false };
       }
     } catch {
       /* soft */
-    }
-    let online = true;
-    try {
-      online = !(await isDeviceOffline());
-    } catch {
-      online = true;
-    }
-    if (online && hasGeminiApiKey() && text.length >= 4) {
-      const routed = await routeUserUtteranceWithLlm(text);
-      if (routed?.handled && routed.reply) {
-        return {
-          handled: true,
-          reply: routed.reply,
-          startedNav: routed.startedNav,
-          concierge: routed.concierge,
-        };
-      }
-      // question / clarify → Concierge (named go-to gets confirm + Route starten there)
-      if (routed?.fallThroughQuestion) {
-        return { handled: false };
-      } else if (routed == null && looksLikeMultiGoalSpeech(text)) {
-        // Retry compound parser directly once
-        const parsed = await parseCompoundPlanWithGemini(text, {
-          placeHint: store.currentLocationName ?? null,
-        });
-        if (parsed?.isCompound) {
-          const activated = activateCompoundSessionPlan(parsed);
-          if (activated) {
-            return { handled: true, reply: activated.reply };
-          }
-        }
-        // Do NOT fall into restaurant-keyword discovery
-        return { handled: false };
-      }
     }
   }
 
@@ -824,21 +824,62 @@ export async function handleMemoryIntent(
     return { handled: true, reply: shopIntent.reply };
   }
 
+  // Verzehrgutschein / Wertgutschein an genanntem Ort
+  const voucher = detectVenueVoucherIntent(text);
+  if (voucher) {
+    try {
+      useOpenQuestionStore.getState().mergeFromPass1({
+        subQuestions: [],
+        facts: [
+          {
+            key: 'verzehrgutschein',
+            value: voucher.amountLabel
+              ? `${voucher.amountLabel} bei ${voucher.placeHint}`
+              : `bei ${voucher.placeHint}`,
+          },
+        ],
+        sourceTurn: text.slice(0, 120),
+        anticipatedFollowUps: [
+          `Verzehrgutschein bei ${voucher.placeHint} einlösen`,
+        ],
+      });
+    } catch {
+      /* soft */
+    }
+    useShoppingTaskStore.getState().addTask({
+      itemLabel: voucher.amountLabel
+        ? `Gutschein ${voucher.amountLabel} (${voucher.placeHint})`
+        : `Gutschein (${voucher.placeHint})`,
+      placeTypes: ['convenience_store', 'supermarket'],
+      anchor: 'store',
+      dueAtMs: null,
+    });
+    return { handled: true, reply: voucher.reply };
+  }
+
   // Shopping done: „Hab die Zahnbürste gekauft“ / „erledigt“
   const shopDone = detectShoppingTaskDoneIntent(text);
   if (shopDone) {
     const open = useShoppingTaskStore.getState().getOpenTasks();
     if (open.length > 0) {
-      let match = open[0];
+      let match = shopDone.itemHint ? null : open[0];
       if (shopDone.itemHint) {
         const hint = shopDone.itemHint.toLowerCase();
         match =
           open.find((t) => t.itemLabel.toLowerCase().includes(hint)) ??
           open.find((t) => hint.includes(t.itemLabel.toLowerCase())) ??
-          match;
+          null;
       }
       if (match) {
         useShoppingTaskStore.getState().completeTask(match.id);
+        try {
+          const { retireCommitmentsForHint } = require('../module2/timeline/retireTimelineCommitments') as {
+            retireCommitmentsForHint: (hint: string) => unknown;
+          };
+          retireCommitmentsForHint(match.itemLabel);
+        } catch {
+          /* task already complete */
+        }
         useFinnusStore.getState().setActiveConciergeCard(null);
         return {
           handled: true,
@@ -846,6 +887,27 @@ export async function handleMemoryIntent(
         };
       }
     }
+  }
+
+  const retireTopic = detectRetireTopicIntent(text);
+  if (retireTopic) {
+    try {
+      const {
+        retireCommitmentsForHint,
+        retireForegroundTopic,
+      } = require('../module2/timeline/retireTimelineCommitments') as {
+        retireCommitmentsForHint: (hint: string) => unknown;
+        retireForegroundTopic: () => boolean;
+      };
+      if (retireTopic.hint) retireCommitmentsForHint(retireTopic.hint);
+      if (retireTopic.closeForeground) retireForegroundTopic();
+    } catch {
+      /* soft */
+    }
+    return {
+      handled: true,
+      reply: 'Alles klar — das ist vom Tisch, ich fasel da nicht mehr rum.',
+    };
   }
 
   // Hard override: explicit new destination wipes queue
@@ -912,39 +974,7 @@ export async function handleMemoryIntent(
     };
   }
 
-  // Multistopp: Joggen / Erkunden / Frühstück-Route
-  const multiIntent = infoOnly ? null : detectMultiStopIntent(text);
-  if (multiIntent) {
-    if (lat == null || lng == null) {
-      return {
-        handled: true,
-        reply:
-          'Ich brauche kurz deinen Standort — GPS an, dann plane ich die Route.',
-      };
-    }
-    if (multiIntent.needsParams) {
-      return {
-        handled: true,
-        reply: CIRCUIT_PROMPT,
-      };
-    }
-    const tour = await planMultiStopTour(multiIntent, { lat, lng });
-    if (!tour) {
-      return {
-        handled: true,
-        reply:
-          'Ich finde gerade zu wenig passende Orte für so eine Tour. Versuch’s mit „Ort erkunden“ oder einem konkreten Ziel.',
-      };
-    }
-    const started = await startMultiStopTour(tour);
-    return {
-      handled: true,
-      startedNav: started.ok,
-      reply: started.reply,
-    };
-  }
-
-  // Tour abbrechen
+  // Tour abbrechen (Multi-Stop Runtime)
   if (
     /\b(tour\s+(abbrechen|stopp|beenden)|stopp\s+die\s+tour|keine\s+tour\s+mehr)\b/iu.test(
       text,
@@ -953,7 +983,7 @@ export async function handleMemoryIntent(
     clearMultiStopTour();
     return {
       handled: true,
-      reply: 'Alles klar — Multistopp-Tour ist beendet.',
+      reply: 'Alles klar — Tour ist beendet.',
     };
   }
 

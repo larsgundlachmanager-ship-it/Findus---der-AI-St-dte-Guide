@@ -21,13 +21,26 @@ function offsetMeters(
   return { lat: lat + dLat, lng: lng + dLng };
 }
 
+/** Dauer → Distanz: gelerntes Tempo sobald Segmente da, sonst Profile-Default. */
+function pathPaceMPerMin(mobility: TourRequest['mobility']): number {
+  try {
+    const pace = require('../../services/mobility/paceProfile') as {
+      getPlanWalkMPerMin: () => number;
+      getPlanBikeMPerMin: () => number;
+    };
+    if (mobility === 'bike') return pace.getPlanBikeMPerMin();
+    return pace.getPlanWalkMPerMin();
+  } catch {
+    return mobility === 'bike' ? 250 : 80;
+  }
+}
+
 function targetDistanceM(req: TourRequest): number {
   if (req.pathSpec?.distanceKm != null) {
     return Math.round(req.pathSpec.distanceKm * 1000);
   }
   const min = req.pathSpec?.durationMin ?? req.timeBudgetMin ?? 60;
-  const mPerMin = req.mobility === 'bike' ? 250 : 80;
-  return Math.round(min * mPerMin);
+  return Math.round(min * pathPaceMPerMin(req.mobility));
 }
 
 /** Idealpunkte auf einem Loop; optional nahe Sight snappen. */

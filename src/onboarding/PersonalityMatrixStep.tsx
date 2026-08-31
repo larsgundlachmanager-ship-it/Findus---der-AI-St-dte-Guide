@@ -35,6 +35,8 @@ import {
   type SpleenId,
 } from '../constants/personalityMatrix';
 
+export type PersonalityMatrixSections = 'all' | 'core' | 'detail';
+
 type Props = {
   coreRole: CoreRoleId | null;
   vibeTone: VibeToneId | null;
@@ -53,6 +55,13 @@ type Props = {
   embed?: boolean;
   /** Golden-Match-Banner/Rahmen — nur Express, nicht im Standard-Matrix. */
   showGoldenMatch?: boolean;
+  /** Schnellprofile — nur Express. */
+  showQuickPresets?: boolean;
+  /**
+   * Settings: core = nur Kernrolle; detail = Tonalität/Wissen/Spleens;
+   * all = alles (Onboarding-Default).
+   */
+  sections?: PersonalityMatrixSections;
 };
 
 export function PersonalityMatrixStep({
@@ -66,12 +75,14 @@ export function PersonalityMatrixStep({
   hideContinue,
   embed,
   showGoldenMatch = false,
+  showQuickPresets = false,
+  sections = 'all',
 }: Props) {
   const selected = { coreRole, vibeTone, knowledgeStyle, spleens };
   const golden = showGoldenMatch ? matchGoldenCombo(selected) : null;
   const matchedPreset = matchGoldenCombo(selected);
   const valid = !!coreRole && !!vibeTone && !!knowledgeStyle;
-  const quickPresets = expressGoldenCombos();
+  const quickPresets = showQuickPresets ? expressGoldenCombos() : [];
   const [info, setInfo] = useState<{ title: string; body: string } | null>(
     null,
   );
@@ -105,9 +116,7 @@ export function PersonalityMatrixStep({
             Spleens optional, maximal zwei. Tippe auf (i) für Details.
           </StepSubtitle>
         </>
-      ) : (
-        <Text style={styles.sectionTitle}>Wie soll ich sein?</Text>
-      )}
+      ) : null}
       {showGoldenMatch && golden ? (
         <View style={styles.goldenBanner}>
           <Text style={styles.goldenText}>
@@ -116,9 +125,10 @@ export function PersonalityMatrixStep({
         </View>
       ) : null}
       <ScrollView style={styles.scroll} contentContainerStyle={styles.pad}>
-        <Section title="Schnellprofile (optional)">
+      {sections === 'all' && showQuickPresets && quickPresets.length > 0 ? (
+        <Section title="Schnellprofile">
           <Text style={styles.quickHint}>
-            Fertige Combos — danach feinjustieren.
+            Fertige Combos — Tonalität, Wissen und Spleens setze ich passend mit.
           </Text>
           <View style={styles.quickGrid}>
             {quickPresets.map((combo) => {
@@ -150,7 +160,9 @@ export function PersonalityMatrixStep({
             })}
           </View>
         </Section>
-        <Section title="1 · Kern-Rolle">
+      ) : null}
+        {sections === 'all' || sections === 'core' ? (
+        <Section title={sections === 'core' ? 'Kernrolle' : '1 · Kern-Rolle'}>
           <View style={styles.row}>
             {CORE_ROLES.map((o) => {
               const blocked = isOptionExcluded(o.id, {
@@ -180,7 +192,16 @@ export function PersonalityMatrixStep({
             })}
           </View>
         </Section>
-        <Section title="2 · Tonalität & Stimmung">
+        ) : null}
+        {sections === 'all' || sections === 'detail' ? (
+        <>
+        <Section
+          title={
+            sections === 'detail'
+              ? 'Tonalität & Stimmung'
+              : '2 · Tonalität & Stimmung'
+          }
+        >
           <View style={styles.stack}>
             {VIBE_TONES.map((o) => {
               const blocked = isOptionExcluded(o.id, {
@@ -209,7 +230,11 @@ export function PersonalityMatrixStep({
             })}
           </View>
         </Section>
-        <Section title="3 · Wissensvermittlung">
+        <Section
+          title={
+            sections === 'detail' ? 'Wissensvermittlung' : '3 · Wissensvermittlung'
+          }
+        >
           <View style={styles.stack}>
             {KNOWLEDGE_STYLES.map((o) => {
               const blocked = isOptionExcluded(o.id, {
@@ -238,7 +263,13 @@ export function PersonalityMatrixStep({
             })}
           </View>
         </Section>
-        <Section title="4 · Spleens (max. 2, optional)">
+        <Section
+          title={
+            sections === 'detail'
+              ? 'Spleens (max. 2, optional)'
+              : '4 · Spleens (max. 2, optional)'
+          }
+        >
           <View style={styles.stack}>
             {SPLEENS.map((o) => {
               const blocked = isOptionExcluded(o.id, selected);
@@ -260,6 +291,8 @@ export function PersonalityMatrixStep({
             })}
           </View>
         </Section>
+        </>
+        ) : null}
       </ScrollView>
       {!hideContinue ? (
         <PrimaryButton

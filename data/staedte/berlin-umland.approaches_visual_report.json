@@ -1,0 +1,242 @@
+{
+  "city": "berlin-umland",
+  "apply": true,
+  "touched": 29,
+  "approachesFixed": 29,
+  "faqAdded": 0,
+  "data_version": 31,
+  "rows": [
+    {
+      "id": "berlin_berlin_treptower_park",
+      "name": "Berlin Treptower Park",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_grunewaldturm",
+      "name": "Grunewaldturm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_wolkenhain_auf_dem_kienberg",
+      "name": "Wolkenhain auf dem Kienberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_aussichtsturm_am_vogelschutz_reservat",
+      "name": "Aussichtsturm am Vogelschutz-Reservat",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_kleiner_aussichtsturm_altes_schachklubhaus",
+      "name": "Kleiner Aussichtsturm \"Altes Schachklubhaus\"",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_altstadt_spandau",
+      "name": "Altstadt Spandau",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_altstadt_kopenick",
+      "name": "Altstadt Köpenick",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_behnitz_kolk_alteste_siedlungsgebiet_innerhalb_der_altstadt_spandau",
+      "name": "Behnitz / Kolk älteste Siedlungsgebiet innerhalb der Altstadt Spandau",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_aussichtspunkt_drachenberg",
+      "name": "Aussichtspunkt Drachenberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_aussichtspunkt_am_koppchensee",
+      "name": "Aussichtspunkt am Köppchensee",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_drachenberg",
+      "name": "Drachenberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_berliner_panorama",
+      "name": "Berliner-Panorama",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_neukollner_oper_e_v",
+      "name": "Neuköllner Oper e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_berliner_mauerweg",
+      "name": "Berliner Mauerweg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_fahrradweg_am_mauerweg_und_kanal",
+      "name": "Fahrradweg am Mauerweg und Kanal",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_tierpark_berlin",
+      "name": "Tierpark Berlin",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_kunsthalle_am_hamburger_platz",
+      "name": "KUNSTHALLE AM HAMBURGER PLATZ",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_schloss_schonhausen",
+      "name": "Schloss Schönhausen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_jagdschloss_grunewald",
+      "name": "Jagdschloss Grunewald",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_schloss_kopenick",
+      "name": "Schloss Köpenick",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_botanischer_garten_und_botanisches_museum",
+      "name": "Botanischer Garten und Botanisches Museum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_gewachshauser_botanischer_garten_berlin",
+      "name": "Gewächshäuser Botanischer Garten Berlin",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_unter_den_eichen_botanischer_garten",
+      "name": "Unter den Eichen/Botanischer Garten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_britzer_garten",
+      "name": "Britzer Garten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_botanischer_garten",
+      "name": "Botanischer Garten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_garten_der_welt",
+      "name": "Gärten der Welt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_berta_block",
+      "name": "Berta Block",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "berlin_tempelhofer_feld",
+      "name": "Tempelhofer Feld",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 2,
+      "had_approaches": 1
+    },
+    {
+      "id": "berlin_olympiastadion_berlin",
+      "name": "Olympiastadion Berlin",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 3,
+      "had_approaches": 1
+    }
+  ]
+}

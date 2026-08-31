@@ -1,0 +1,225 @@
+{
+  "city_id": "finsterwalde",
+  "apply": true,
+  "storyOnly": true,
+  "maxDelta": 80,
+  "country": "Germany",
+  "summary": {
+    "ok": 0,
+    "check": 0,
+    "bad": 0,
+    "errors": 0,
+    "applied": 0,
+    "skipped_directory": 174,
+    "skipped_cached_google": 23
+  },
+  "rows": [
+    {
+      "id": "finsterwalde_finsterwalde",
+      "name": "Finsterwalde",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.63687364,
+        "lng": 13.710445340000001
+      }
+    },
+    {
+      "id": "finsterwalde_marktplatz_finsterwalde",
+      "name": "Marktplatz Finsterwalde",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.6305127,
+        "lng": 13.708463619999998
+      }
+    },
+    {
+      "id": "finsterwalde_sanger_und_kaufmannsmuseum_finsterwalde",
+      "name": "Sänger- und Kaufmannsmuseum Finsterwalde",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.62988716666666,
+        "lng": 13.709810583333335
+      }
+    },
+    {
+      "id": "finsterwalde_stadtpfarrkirche_st_trinitatis",
+      "name": "Stadtpfarrkirche St. Trinitatis",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.629184092857145,
+        "lng": 13.708883928571428
+      }
+    },
+    {
+      "id": "finsterwalde_kath_pfarramt_st_maria_mater_dolorosa",
+      "name": "Kath. Pfarramt St. Maria Mater Dolorosa",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.63423956923077,
+        "lng": 13.712108900000002
+      }
+    },
+    {
+      "id": "finsterwalde_katharinenkirche",
+      "name": "Katharinenkirche",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.611707214285715,
+        "lng": 13.713928642857141
+      }
+    },
+    {
+      "id": "finsterwalde_ehrenmal_finsterwalde",
+      "name": "Ehrenmal, Finsterwalde",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.625419,
+        "lng": 13.71495078
+      }
+    },
+    {
+      "id": "finsterwalde_sangerdenkmal",
+      "name": "Sängerdenkmal",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.63171297142857,
+        "lng": 13.708153157142856
+      }
+    },
+    {
+      "id": "finsterwalde_schloss_park_finsterwalde",
+      "name": "Schloß Park Finsterwalde",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.62765327222221,
+        "lng": 13.710407305555556
+      }
+    },
+    {
+      "id": "finsterwalde_burgerheide",
+      "name": "Bürgerheide",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.63246202222222,
+        "lng": 13.693456011111111
+      }
+    },
+    {
+      "id": "finsterwalde_ascheberg_finsterwalde",
+      "name": "Ascheberg Finsterwalde",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.629596400000004,
+        "lng": 13.719361249999999
+      }
+    },
+    {
+      "id": "finsterwalde_stadtpark",
+      "name": "Stadtpark",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.632654554545454,
+        "lng": 13.706832436363635
+      }
+    },
+    {
+      "id": "finsterwalde_schloss_finsterwalde",
+      "name": "Schloss Finsterwalde",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.62765327222221,
+        "lng": 13.710407305555556
+      }
+    },
+    {
+      "id": "finsterwalde_tierpark_finsterwalde",
+      "name": "Tierpark Finsterwalde",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.62963442857142,
+        "lng": 13.688884128571429
+      }
+    },
+    {
+      "id": "finsterwalde_wasserturm",
+      "name": "Wasserturm",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.63385560500001,
+        "lng": 13.714127225000002
+      }
+    },
+    {
+      "id": "finsterwalde_freibad_schwimmstadion_der_freundschaft_finsterwalde",
+      "name": "Freibad Schwimmstadion der Freundschaft Finsterwalde",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.64450051875,
+        "lng": 13.69962888125
+      }
+    },
+    {
+      "id": "finsterwalde_rathaus",
+      "name": "Rathaus",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.62981361999999,
+        "lng": 13.7085893
+      }
+    },
+    {
+      "id": "finsterwalde_marchenhaus_finsterwalde",
+      "name": "Märchenhaus Finsterwalde",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.637391042857146,
+        "lng": 13.700016357142857
+      }
+    },
+    {
+      "id": "finsterwalde_kulturweberei_finsterwalde",
+      "name": "Kulturweberei Finsterwalde",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.62813648333333,
+        "lng": 13.705978750000002
+      }
+    },
+    {
+      "id": "finsterwalde_weltspiegel_kino",
+      "name": "Weltspiegel Kino",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.63404173333334,
+        "lng": 13.709480716666668
+      }
+    },
+    {
+      "id": "finsterwalde_glaserne_sanger",
+      "name": "Gläserne Sänger",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.635300380000004,
+        "lng": 13.707791480000001
+      }
+    },
+    {
+      "id": "finsterwalde_feuerwehrmuseum_finsterwalde",
+      "name": "Feuerwehrmuseum Finsterwalde",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.627690339999994,
+        "lng": 13.712839740000001
+      }
+    },
+    {
+      "id": "finsterwalde_flugplatz_finsterwalde_heinrichsruh",
+      "name": "Flugplatz Finsterwalde-Heinrichsruh",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 51.635561575000004,
+        "lng": 13.6805374125
+      }
+    }
+  ]
+}

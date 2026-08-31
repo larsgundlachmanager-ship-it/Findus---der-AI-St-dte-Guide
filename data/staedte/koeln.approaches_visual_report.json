@@ -1,0 +1,2458 @@
+{
+  "city": "koeln",
+  "apply": true,
+  "touched": 306,
+  "approachesFixed": 306,
+  "faqAdded": 0,
+  "data_version": 30,
+  "rows": [
+    {
+      "id": "koeln_koln_hauptbahnhof",
+      "name": "Köln Hauptbahnhof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_koln_dom_hauptbahnhof",
+      "name": "Köln Dom/Hauptbahnhof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_heumarkt",
+      "name": "Heumarkt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_hansaring",
+      "name": "Hansaring",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_breslauer_platz_hauptbahnhof",
+      "name": "Breslauer Platz/Hauptbahnhof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_severinstrasse",
+      "name": "Severinstraße",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_deutz_lanxess_arena",
+      "name": "Deutz/Lanxess Arena",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_koln_sud",
+      "name": "Köln Süd",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_koln_nippes_s_bahn",
+      "name": "Köln Nippes S-Bahn",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_bahnhofsvorplatz_koln",
+      "name": "Bahnhofsvorplatz Köln",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_koln_messe_deutz",
+      "name": "Köln Messe/Deutz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_messe_deutz_bahnhof_koln",
+      "name": "Messe/Deutz Bahnhof, Köln",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_trimbornstr",
+      "name": "Trimbornstr",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_breslauer_platz_hbf_bussteig_c",
+      "name": "Breslauer Platz/Hbf Bussteig C",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_contipark_tiefgarage_hauptbahnhof",
+      "name": "CONTIPARK Tiefgarage Hauptbahnhof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_ehrenfeld",
+      "name": "Ehrenfeld",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_kd_anleger_nr_5",
+      "name": "KD Anleger Nr. 5",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_kd_anleger_koln",
+      "name": "KD Anleger Köln",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_kd_anleger_nr_2",
+      "name": "KD Anleger Nr. 2",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_kd_anleger_nr_1",
+      "name": "KD-Anleger Nr. 1",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_strolch_personenfahre_anlegesteg_9_koln_dom_seite_weisbarth_fahrgastschiff",
+      "name": "STROLCH Personenfähre - Anlegesteg 9, Köln „Dom-Seite“ - WEISBARTH Fahrgastschiff",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_koln_anleger_6",
+      "name": "Köln, Anleger 6",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_schiffsanlegestelle_rhein_river_company",
+      "name": "Schiffsanlegestelle Rhein River Company",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_kd_anleger_3",
+      "name": "KD Anleger 3",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_koln_anleger_7",
+      "name": "Köln, Anleger 7",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_koln_feenstra_rijn_lijn_anleger",
+      "name": "Köln \"feenstra rijn lijn\" Anleger",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_viking_river_cruises_anleger_deutz",
+      "name": "Viking River Cruises Anleger Deutz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_kolntourist_anleger_13_bastei",
+      "name": "KölnTourist Anleger 13, Bastei",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_schiffsanlegestelle_deutzer_vorhafen",
+      "name": "Schiffsanlegestelle Deutzer Vorhafen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_rheincargo_5_landebrucke",
+      "name": "RheinCargo 5 Landebrücke",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_rhein_cargo_liegeplatz_adenauer_9",
+      "name": "Rhein Cargo Liegeplatz Adenauer 9",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_bastei_koln",
+      "name": "Bastei Köln",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_museum_ludwig",
+      "name": "Museum Ludwig",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_schokoladenmuseum_koln",
+      "name": "Schokoladenmuseum Köln",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_rautenstrauch_joest_museum",
+      "name": "Rautenstrauch-Joest-Museum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_kolumba",
+      "name": "Kolumba",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_das_museum_des_schmerzes_und_der_liebe",
+      "name": "Das Museum des Schmerzes und der Liebe",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_museum_fur_angewandte_kunst_koln",
+      "name": "Museum für Angewandte Kunst Köln",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_kollwitz_museum_koln",
+      "name": "Kollwitz Museum Köln",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_farina_duftmuseum",
+      "name": "Farina Duftmuseum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_deutsches_sport_olympia_museum",
+      "name": "Deutsches Sport & Olympia Museum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_museum_fur_ostasiatische_kunst",
+      "name": "Museum für Ostasiatische Kunst",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_supercandy_pop_up_museum",
+      "name": "Supercandy Pop-Up Museum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_romisch_germanisches_museum_im_belgischen_haus",
+      "name": "Römisch-Germanisches Museum im Belgischen Haus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_nationalsozialismus_dokumentationszentrum_der_stadt_koln_im_el_de_haus",
+      "name": "Nationalsozialismus-Dokumentationszentrum der Stadt Köln - im EL-DE-Haus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_serienkiller_die_true_crime_ausstellung",
+      "name": "SERIENKILLER – Die True Crime Ausstellung",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_romisch_germanisches_museum",
+      "name": "Römisch-Germanisches-Museum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_artothek_koln",
+      "name": "artothek Köln",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_alter_markt",
+      "name": "Alter Markt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_basilika_st_maria_im_kapitol",
+      "name": "Basilika St. Maria im Kapitol",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_st_peter",
+      "name": "St. Peter",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_wallfahrtskirche_st_maria_in_der_kupfergasse",
+      "name": "Wallfahrtskirche St. Maria in der Kupfergasse",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_st_pantaleon",
+      "name": "St. Pantaleon",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_st_maria_in_lyskirchen",
+      "name": "St. Maria in Lyskirchen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_kapelle_hll_drei_konige",
+      "name": "Kapelle Hll. Drei Könige",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_gross_st_martin",
+      "name": "Groß St. Martin",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_minoritenkirche_st_maria_empfangnis",
+      "name": "Minoritenkirche St. Mariä Empfängnis",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_st_maria_himmelfahrt",
+      "name": "St. Mariä Himmelfahrt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_antoniterkirche",
+      "name": "Antoniterkirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_marktkapelle_st_maria_himmelfahrt",
+      "name": "Marktkapelle St. Mariä Himmelfahrt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_basilika_st_aposteln",
+      "name": "Basilika St. Aposteln",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_kalk_kapelle",
+      "name": "Kalk Kapelle",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_dominikanerkirche_st_andreas",
+      "name": "Dominikanerkirche St. Andreas",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_kapelle_st_maria_und_maternus",
+      "name": "Kapelle St. Maria und Maternus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_kapelle_st_maria_ad_ortum",
+      "name": "Kapelle St. Maria ad Ortum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_basilika_st_ursula",
+      "name": "Basilika St. Ursula",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_generalvikariat_erzbistum_koln",
+      "name": "Generalvikariat Erzbistum Köln",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_heinzelmannchenbrunnen",
+      "name": "Heinzelmännchenbrunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_karl_berbuer_brunnen_bonifatius_stirnberg_1987",
+      "name": "Karl-Berbuer-Brunnen (Bonifatius Stirnberg, 1987)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_dionysos_brunnen_karl_burgeff_1973",
+      "name": "Dionysos-Brunnen (Karl Burgeff, 1973)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_ostermannbrunnen_willi_klein_1938",
+      "name": "Ostermannbrunnen (Willi Klein 1938)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_theo_burauen_brunnen_klaus_albert_1971",
+      "name": "Theo-Burauen-Brunnen, Klaus Albert (1971)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_romerbrunnen_franz_brantzky_1914_15",
+      "name": "Römerbrunnen (Franz Brantzky, 1914–15)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_willy_millowitsch_denkmal",
+      "name": "Willy-Millowitsch-Denkmal",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_petrusbrunnen_richard_voigtel_1870",
+      "name": "Petrusbrunnen (Richard Voigtel, 1870)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_dumont_brunnen_koln_theo_heiermann_1986",
+      "name": "DuMont-Brunnen, Köln - Theo Heiermann (1986)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_brunnen_marsplatz",
+      "name": "Brunnen Marsplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_brunnen_kaiser_wilhelm_ring_koln",
+      "name": "Brunnen, Kaiser-Wilhelm-Ring, Köln",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_taubenbrunnen_ewald_matare_1952",
+      "name": "Taubenbrunnen, Ewald Mataré (1952)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_brunnentempel_koln_fritz_encke_ca_1920",
+      "name": "Brunnentempel, Köln - Fritz Encke (ca. 1920)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_bierbrunnen",
+      "name": "Bierbrunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_edith_stein_denkmal",
+      "name": "Edith-Stein-Denkmal",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_der_strand_im_rheinpark",
+      "name": "Der Strand im Rheinpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_niehler_strand",
+      "name": "Niehler Strand",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_rheingarten_koln",
+      "name": "Rheingarten Köln",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_rheinpark",
+      "name": "Rheinpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_stadtpark_in_deutz",
+      "name": "Stadtpark in Deutz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_strand_am_von_diergardt_see",
+      "name": "Strand am von-Diergardt-See",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_theodor_heuss_park",
+      "name": "Theodor-Heuss-Park",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_max_dietlein_park",
+      "name": "Max-Dietlein-Park",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_pionierpark",
+      "name": "Pionierpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_humboldtpark",
+      "name": "Humboldtpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_klingelputzpark",
+      "name": "Klingelpützpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_kalscheurer_weiher",
+      "name": "Kalscheurer Weiher",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_lohsepark",
+      "name": "Lohsepark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_stadtgarten",
+      "name": "Stadtgarten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_von_stein_park",
+      "name": "Von-Stein-Park",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_blumenhof_im_rheinpark",
+      "name": "Blumenhof im Rheinpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_sonnenscheinetage_die_hochste_beachbar_kolns",
+      "name": "SonnenscheinEtage – Die höchste Beachbar Kölns",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_im_leuchtturm",
+      "name": "Im Leuchtturm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_kolntriangle_hochhaus",
+      "name": "KölnTriangle - Hochhaus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_helios_leuchtturm_ehrenfeld",
+      "name": "Helios Leuchtturm Ehrenfeld",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_malakoffturm",
+      "name": "Malakoffturm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_der_leuchtturm",
+      "name": "\"Der Leuchtturm\"",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_alter_messeturm",
+      "name": "Alter Messeturm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_blaue_funken_turm_sachsenturm_eventlocation",
+      "name": "Blaue-Funken-Turm (Sachsenturm); Eventlocation",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_blau_gold_turm",
+      "name": "Blau-Gold-Turm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_helenenturm",
+      "name": "Helenenturm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_zwei_pferdekopfe_am_turm_des_richmodis_hauses",
+      "name": "Zwei Pferdeköpfe am Turm des Richmodis-Hauses",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_turm_der_prinzen_garde",
+      "name": "Turm der Prinzen Garde",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_kunibertsturm",
+      "name": "Kunibertsturm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_kolnturm",
+      "name": "Kölnturm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_belvedere_blickfang",
+      "name": "Belvedere Blickfang",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_belvedere_felderblick",
+      "name": "Belvedere Felderblick",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_bismarckturm_koln",
+      "name": "Bismarckturm Köln",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_aussichtsturm",
+      "name": "Aussichtsturm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_cologne_sportspark",
+      "name": "Cologne Sportspark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_agrippabad",
+      "name": "Agrippabad",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_lentpark_hallenbad",
+      "name": "Lentpark - Hallenbad",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_3d_schwarzlicht_minigolf_koln",
+      "name": "3D Schwarzlicht Minigolf Köln",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_kmc_e_v_minigolfanlage_am_fernsehturm",
+      "name": "KMC e.V. - Minigolfanlage am Fernsehturm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_golf_house_filiale_koln",
+      "name": "Golf House Filiale Köln",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_fun_sport_arena_koln",
+      "name": "Fun+Sport Arena Köln",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_schwimmbad_rhein_sommergarten_gbr",
+      "name": "Schwimmbad Rhein-Sommergarten GbR",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_holmes_place_koln_am_gurzenich",
+      "name": "Holmes Place Köln - Am Gürzenich",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_marienburger_golf_club_e_v",
+      "name": "Marienburger Golf-Club e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_aussichtspunkt_hohenzollernbrucke",
+      "name": "Aussichtspunkt Hohenzollernbrücke",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_aussichtspunkt_pionierbecken_2",
+      "name": "Aussichtspunkt Pionierbecken 2",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_panoramabanke",
+      "name": "Panoramabänke",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_rhine_river_viewpoint_rheinpark",
+      "name": "Rhine River Viewpoint – Rheinpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_city_panorama",
+      "name": "City Panorama",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_mission_360_und_3d_panorama_tours_koln",
+      "name": "Mission 360 und 3D Panorama Tours Köln",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_oper_koln",
+      "name": "Oper Köln",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_kolnpfad_etappe_01",
+      "name": "Kölnpfad - Etappe 01",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_kolnpfad_etappe_02",
+      "name": "Kölnpfad - Etappe 02",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_kolnpfad_etappe_06",
+      "name": "Kölnpfad - Etappe 06",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_waldlehrpfad_im_stadtwald",
+      "name": "Waldlehrpfad im Stadtwald",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_wandern_mit_diabetes",
+      "name": "Wandern mit Diabetes",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_erker_muhlen_weiher",
+      "name": "Erker Mühlen Weiher",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_harry_ufer",
+      "name": "Harry Ufer",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_adfc_koln_e_v",
+      "name": "ADFC Köln e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_schaltwerk_koeln",
+      "name": "Schaltwerk-Koeln",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_radfieber_fahrrad_meisterwerkstatt",
+      "name": "Radfieber Fahrrad-Meisterwerkstatt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_schneider_radsport_koln_fahrradwerkstatt",
+      "name": "Schneider Radsport Köln Fahrradwerkstatt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_classica_colonia_fahrrad_und_roller_reparatur_werkstatt_handel_koln",
+      "name": "Classica Colonia Fahrrad und Roller Reparatur, Werkstatt & Handel Köln",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_b_o_c_bike_outdoor_company_gmbh_co_kg",
+      "name": "B.O.C. - BIKE & OUTDOOR COMPANY GmbH & Co. KG",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_geobikes_gmbh",
+      "name": "Geobikes GmbH",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_stadtrad_werkstatt",
+      "name": "Stadtrad Werkstatt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_rad_garage_koln_sulz",
+      "name": "Rad-Garage Köln-Sülz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_bikestation_koln_sulz",
+      "name": "Bikestation Köln-Sülz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_bobikes_gmbh_fahrradgeschaft_fahrradwerkstatt",
+      "name": "BOBIKES GmbH - Fahrradgeschäft & Fahrradwerkstatt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_colonia_aktiv_bike_tours",
+      "name": "Colonia Aktiv Bike Tours",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_radfieber_fahrradgeschaft",
+      "name": "Radfieber Fahrradgeschäft",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_velokuche_werkstatt_verkauf",
+      "name": "Veloküche Werkstatt & Verkauf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_7th_space_koln_virtual_reality_more",
+      "name": "7th Space Köln - Virtual Reality & more!",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_lindenthaler_tierpark",
+      "name": "Lindenthaler Tierpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_kolner_zoo",
+      "name": "Kölner Zoo",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_urwaldhaus",
+      "name": "Urwaldhaus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_elefantenpark",
+      "name": "Elefantenpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_erdmannchen_co",
+      "name": "Erdmännchen & Co.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_pavianfelsen",
+      "name": "Pavianfelsen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_skatepark_unter_der_zoobrucke",
+      "name": "Skatepark unter der Zoobrücke",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_souvenir_point_luggage_storage",
+      "name": "Souvenir Point - Luggage Storage",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_linke_souvenirs",
+      "name": "Linke Souvenirs",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_sumerica_socks_souvenirs_koln",
+      "name": "Sumerica Socks Souvenirs Köln",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_kolsche_geschenkartikel_elke_kruse",
+      "name": "Kölsche Geschenkartikel - Elke Kruse",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_4koln_gmbh_co_kg",
+      "name": "4Köln GmbH & Co. KG",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_pylones",
+      "name": "Pylones",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_kolnknipse_schone_fotos_im_quadrat",
+      "name": "kölnknipse - schöne fotos im quadrat",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_postkartenladen",
+      "name": "Postkartenladen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_rheinboulevard",
+      "name": "Rheinboulevard",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_der_pegelturm",
+      "name": "Der Pegelturm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_rheinauhafen",
+      "name": "Rheinauhafen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_flora_und_botanischer_garten",
+      "name": "Flora und Botanischer Garten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_kolner_kulturkapelle",
+      "name": "Kölner Kulturkapelle",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_freitreppe_an_domplatte",
+      "name": "Freitreppe an Domplatte",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_kaskaden",
+      "name": "Kaskaden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_hahnentor",
+      "name": "Hahnentor",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_die_maus_statue",
+      "name": "Die Maus (Statue)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_reiterdenkmal_fur_konig_friedrich_wilhelm_iii_von_preussen",
+      "name": "Reiterdenkmal für König Friedrich Wilhelm III von Preußen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_kunsthalle_lindenthal",
+      "name": "Kunsthalle Lindenthal",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_art_galerie_7",
+      "name": "Art Galerie 7",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_iliev_galerie_art_in_cologne",
+      "name": "Iliev Galerie-ART IN COLOGNE",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_galerie_karsten_greve",
+      "name": "Galerie Karsten Greve",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_kolnischer_kunstverein",
+      "name": "Kölnischer Kunstverein",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_30works_galerie",
+      "name": "30works Galerie",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_galerie_anja_knoess",
+      "name": "GALERIE ANJA KNOESS",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_contipark_tiefgarage_am_dom",
+      "name": "CONTIPARK Tiefgarage Am Dom",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_kundenzentrum_innenstadt_stadt_koln",
+      "name": "Kundenzentrum Innenstadt - Stadt Köln",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_burgeramt_innenstadt_stadt_koln",
+      "name": "Bürgeramt Innenstadt - Stadt Köln",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_spanischer_bau",
+      "name": "Spanischer Bau",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_kolner_festungsmuseum",
+      "name": "Kölner Festungsmuseum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_fort_x",
+      "name": "Fort X",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_severinstorburg",
+      "name": "Severinstorburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_eigelsteintorburg",
+      "name": "Eigelsteintorburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_herler_burg",
+      "name": "Herler Burg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_schlosser_bruhl_unesco_welterbe_schloss_augustusburg_und_falkenlust",
+      "name": "Schlösser Brühl - UNESCO-Welterbe Schloss Augustusburg und Falkenlust",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_kapelle_burg_rath",
+      "name": "Kapelle Burg Rath",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_schlosspark_stammheim",
+      "name": "Schlosspark Stammheim",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_tag_der_forts",
+      "name": "Tag der Forts",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_weisshaus_wasserschloss",
+      "name": "Weißhaus (Wasserschloss)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_tor_28",
+      "name": "Tor 28",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_luchbaum",
+      "name": "Lüchbaum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_turoffnung_schlusseldienst_in_koln_24h_profinotdienst",
+      "name": "Türöffnung & Schlüsseldienst in Köln 24H | ProfiNotdienst",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_fort_v_des_ehemaligen_inneren_festungsgurtels",
+      "name": "Fort V des ehemaligen inneren Festungsgürtels",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_romische_stadtmauer",
+      "name": "Römische Stadtmauer",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_aussichtspunkt_pulheimer_see",
+      "name": "Aussichtspunkt Pulheimer See",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_kolner_baumwipfelpfad",
+      "name": "Kölner Baumwipfelpfad",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_aussichtspunkt_pionierbecken_3",
+      "name": "Aussichtspunkt Pionierbecken 3",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_aussichtspunkt_rheinhalbinsel",
+      "name": "Aussichtspunkt Rheinhalbinsel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_flora_koln_palais_im_park",
+      "name": "Flora Köln - Palais im Park",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_subtropenhaus_mit_kamelienschau",
+      "name": "Subtropenhaus mit Kamelienschau",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_volksgarten",
+      "name": "Volksgarten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_mulheimer_stadtgarten",
+      "name": "Mülheimer Stadtgarten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_innerer_grungurtel",
+      "name": "Innerer Grüngürtel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_skulpturenpark_koln",
+      "name": "Skulpturenpark Köln",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_stadtgarten_kalk",
+      "name": "Stadtgarten Kalk",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_japanischer_garten_im_rheinpark",
+      "name": "Japanischer Garten im Rheinpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_parkplatz_flora_koln",
+      "name": "Parkplatz Flora Köln",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_brunnengarten",
+      "name": "Brunnengarten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_frauenrosenhof_grune_schule_flora",
+      "name": "Frauenrosenhof, Grüne Schule Flora",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_13_bensberger_schlossweg",
+      "name": "13 Bensberger Schlossweg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_cycle_werx_ohg",
+      "name": "Cycle WERX oHG",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_cube_store_koln_sud",
+      "name": "CUBE Store Köln Süd",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_figurentheater_koln_puppentheater_puppenbuhne_nur_tournee_theater",
+      "name": "Figurentheater Köln Puppentheater Puppenbühne nur Tournee Theater",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_theater_am_dom",
+      "name": "Theater am Dom",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_schauspiel_koln",
+      "name": "Schauspiel Köln",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_hanneschen_theater",
+      "name": "Hänneschen Theater",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_kkt_kolner_kunstler_innen_theater",
+      "name": "KKT. Kölner Künstler:innen Theater",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_metropol_theater_koeln",
+      "name": "metropol Theater Koeln",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_theater_im_bauturm_freies_schauspiel_koln_e_v",
+      "name": "Theater im Bauturm - Freies Schauspiel Köln e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_studiobuhne_koln",
+      "name": "Studiobühne Köln",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_theater_in_koln_spielplan",
+      "name": "Theater in Köln | Spielplan",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_senftopfchen_theater",
+      "name": "Senftöpfchen-Theater",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_horizont_theater",
+      "name": "Horizont Theater",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_no_theater",
+      "name": "nö theater",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_theater_tiefrot",
+      "name": "Theater Tiefrot",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_latibul_theaterhaus_theater_zirkuspadagogisches_zentrum_koln",
+      "name": "LATIBUL Theaterhaus - Theater- & Zirkuspädagogisches Zentrum Köln",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_comedia_theater",
+      "name": "COMEDIA Theater",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_kammeroper_koln",
+      "name": "Kammeroper Köln",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_theatergemeinde_koln",
+      "name": "Theatergemeinde KÖLN",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_rheinau_sporthafen_koln",
+      "name": "Rheinau-Sporthafen Köln",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_kolner_autbord_und_motoryacht_club_e_v",
+      "name": "Kölner Autbord- und Motoryacht-Club e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_rheinau_hafen",
+      "name": "Rheinau- hafen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_musiker_hafen_koln_proberaum_tonstudio_vermietung",
+      "name": "Musiker Hafen Köln (Proberaum&Tonstudio Vermietung)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_marina_leva_pianistin_sangerin_koln_musik_fur_event_messe_prasentation_geb",
+      "name": "Marina Leva - Pianistin Sängerin Köln - Musik für Event, Messe, Präsentation - Geburtstag - Hochzeit",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_quartier_am_hafen_q18",
+      "name": "Quartier am Hafen Q18",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_ameisenbaren",
+      "name": "Ameisenbären",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_hop_on_hop_off_sightseeing",
+      "name": "Hop on Hop off Sightseeing",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_liebe_deine_stadt_touren",
+      "name": "Liebe Deine Stadt - Touren",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_bootsverleih_am_kahnweiher",
+      "name": "Bootsverleih am Kahnweiher",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_roxyboot_koln_dein_bootscharter",
+      "name": "ROXYBOOT Köln | Dein Bootscharter",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_hvt_boating_everything_is_better_on_water",
+      "name": "HVT Boating - everything is better on water",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_ming_rikscha_koln",
+      "name": "Ming Rikscha Köln",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_kahnstation_decksteiner_weiher_bootsverleih",
+      "name": "Kahnstation Decksteiner Weiher - Bootsverleih",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_kolngefluster_stadtfuhrungen_und_brauhaustouren_fur_business_privat",
+      "name": "Kölngeflüster - Stadtführungen und Brauhaustouren für Business & Privat",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_nautigo_bootsschule_boots_jetskiverleih_koln",
+      "name": "Nautigo Bootsschule & Boots-/Jetskiverleih Köln",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_rikscha_4u",
+      "name": "Rikscha 4U",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_kolner_schatzkastchen_mehr_als_geschenke",
+      "name": "Kölner Schatzkästchen Mehr als Geschenke",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_konditorei_kluppelberg_tortchen",
+      "name": "Konditorei Klüppelberg (Törtchen)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_schee_koln",
+      "name": "SCHEE Köln",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_uniqz_personalisierte_geschenke",
+      "name": "Uniqz® personalisierte Geschenke",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_wochenmarkt_sudermanplatz",
+      "name": "Wochenmarkt Sudermanplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_bio_wochenmarkt_sudstadt",
+      "name": "Bio-Wochenmarkt - Südstadt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_wochenmarkt_im_stadtwald",
+      "name": "Wochenmarkt im Stadtwald",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_okomarkt_agnesviertel_bio_wochenmarkt",
+      "name": "Ökomarkt Agnesviertel - Bio Wochenmarkt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_wochenmarkt_klettenberg",
+      "name": "Wochenmarkt Klettenberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_marktschwarmer_koln_sudstadt",
+      "name": "Marktschwärmer Köln Südstadt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_wochenmarkt_koln_ehrenfeld_neptunplatz",
+      "name": "Wochenmarkt Köln Ehrenfeld - Neptunplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_wochenmarkt_auerbachplatz",
+      "name": "Wochenmarkt Auerbachplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_wochenmarkt_koln_buchforst",
+      "name": "Wochenmarkt Köln Buchforst",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_wochenmarkt_koln_niehl",
+      "name": "Wochenmarkt Köln Niehl",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_wochenmarkt_bickendorf",
+      "name": "Wochenmarkt Bickendorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_wiener_platz",
+      "name": "Wiener Platz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_wochenmarkt_koln_poll",
+      "name": "Wochenmarkt Köln-Poll",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_wochenmarkt_mulheim_berliner_strasse",
+      "name": "Wochenmarkt, Mülheim Berliner Strasse",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_wochenmarkt_kalk",
+      "name": "Wochenmarkt Kalk",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_wasserspielplatz_in_der_altstadt",
+      "name": "Wasserspielplatz in der Altstadt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_cinedom",
+      "name": "Cinedom",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "koeln_rex_am_ring",
+      "name": "Rex am Ring",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "koeln_filmhaus_koln",
+      "name": "Filmhaus Köln",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_odeon_lichtspieltheater_gmbh",
+      "name": "ODEON-Lichtspieltheater GmbH",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_metropolis_lichtspieltheater_gmbh",
+      "name": "Metropolis Lichtspieltheater GmbH",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_off_broadway_kino",
+      "name": "OFF Broadway Kino",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_cinenova",
+      "name": "CINENOVA",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "koeln_kletterfabrik_koln",
+      "name": "Kletterfabrik Köln",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_k11_bouldern_in_der_sudstadt",
+      "name": "K11 | Bouldern in der Südstadt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_stuntwerk_koln_zollstock",
+      "name": "Stuntwerk Köln Zollstock",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_boulderhalle_einstein",
+      "name": "Boulderhalle einstein",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_stuntwerk_koln_mulheim",
+      "name": "Stuntwerk Köln Mülheim",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_naturschutzgebiet_am_ginsterpfad",
+      "name": "Naturschutzgebiet Am Ginsterpfad",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_altes_wegkreuz",
+      "name": "Altes Wegkreuz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_wegekreuz_anno_1862",
+      "name": "Wegekreuz (anno 1862)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_bildstock",
+      "name": "Bildstock",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_blau_gelbes_kreuz_e_v_spendenlager",
+      "name": "Blau-Gelbes Kreuz e.V. - Spendenlager",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_bildstock_4",
+      "name": "Bildstock 4",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_deutsches_rotes_kreuz_kreisverband_koln_e_v",
+      "name": "Deutsches Rotes Kreuz Kreisverband Köln e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_bildstock_3",
+      "name": "Bildstock 3",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_bildstock_6",
+      "name": "Bildstock 6",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_tagediebe_rockel_wemmer_gbr",
+      "name": "Tagediebe Rockel & Wemmer GbR",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "koeln_bf_deutz_messeplatz",
+      "name": "Bf Deutz/Messeplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_hiroshima_nagasaki_park",
+      "name": "Hiroshima-Nagasaki-Park",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_trude_herr_park",
+      "name": "Trude-Herr-Park",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "koeln_gazelle_store_cologne",
+      "name": "Gazelle Store Cologne",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "koeln_jb_cycles_cologne",
+      "name": "JB Cycles Cologne",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "koeln_koelner_dom",
+      "name": "Kölner Dom",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    }
+  ]
+}

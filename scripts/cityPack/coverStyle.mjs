@@ -14,6 +14,8 @@ STYLE (mandatory, same for every Findus city cover):
 - Natural photo texture in sky, water, architecture, vegetation
 - NO people portraits / NO faces as main subject (tiny distant silhouettes OK)
 - NO text, logos, watermarks, UI chrome
+- NO bottom gradient / dark fade bar / letterbox / vignette strip at the bottom edge
+- Full-bleed photo to all four edges — no semi-transparent black overlay
 - Landmark/place must stay recognizable as that city, but composition must NOT be a 1:1 copy of the source photo
 `.trim();
 

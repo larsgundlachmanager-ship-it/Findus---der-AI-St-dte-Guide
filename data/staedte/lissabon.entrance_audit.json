@@ -1,0 +1,1353 @@
+{
+  "city_id": "lissabon",
+  "apply": true,
+  "storyOnly": true,
+  "maxDelta": 80,
+  "country": "Portugal",
+  "summary": {
+    "ok": 31,
+    "check": 15,
+    "bad": 13,
+    "errors": 0,
+    "applied": 17,
+    "skipped_directory": 258,
+    "skipped_cached_google": 35
+  },
+  "rows": [
+    {
+      "id": "lissabon_torre_de_belem",
+      "name": "Torre de Belém",
+      "before": {
+        "lat": 38.691677494736844,
+        "lng": -9.215883784210526
+      },
+      "google": {
+        "lat": 38.691583699999995,
+        "lng": -9.215977299999999,
+        "place_id": "ChIJS5zCw0LLHg0RP1FSz63cAjA",
+        "address": "Av. Brasília, 1400-038 Lisboa, Portugal"
+      },
+      "delta_m": 13,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "lissabon_mosteiro_dos_jeronimos",
+      "name": "Mosteiro dos Jerónimos",
+      "before": {
+        "lat": 38.697701589230775,
+        "lng": -9.20651776153846
+      },
+      "google": {
+        "lat": 38.6978909,
+        "lng": -9.206703899999999,
+        "place_id": "ChIJS5zCw0LLHg0R7euWjjRddYc",
+        "address": "Praça do Império 1400-206 Lisboa, 1400-206 Lisboa, Portugal"
+      },
+      "delta_m": 27,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "lissabon_castelo_de_sao_jorge",
+      "name": "Castelo de São Jorge",
+      "before": {
+        "lat": 38.71403958,
+        "lng": -9.13349774
+      },
+      "google": {
+        "lat": 38.713909199999996,
+        "lng": -9.1334762,
+        "place_id": "ChIJm8MOtHc0GQ0R1zPkmUFwwLQ",
+        "address": "R. de Santa Cruz do Castelo, 1100-129 Lisboa, Portugal"
+      },
+      "delta_m": 15,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "lissabon_praca_do_comercio",
+      "name": "Praça do Comércio",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 38.707521625,
+        "lng": -9.13646325
+      }
+    },
+    {
+      "id": "lissabon_se_catedral_de_lisboa",
+      "name": "Sé Catedral de Lisboa",
+      "before": {
+        "lat": 38.70915663636364,
+        "lng": -9.131752454545456
+      },
+      "google": {
+        "lat": 38.7098339,
+        "lng": -9.1329535,
+        "place_id": "ChIJm9xRPnc0GQ0RGWK34RwdbpI",
+        "address": "Largo da Sé 1, 1100-585 Lisboa, Portugal"
+      },
+      "delta_m": 129,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "lissabon_elevador_de_santa_justa",
+      "name": "Elevador de Santa Justa",
+      "before": {
+        "lat": 38.71211653333333,
+        "lng": -9.1394052
+      },
+      "google": {
+        "lat": 38.712130099999996,
+        "lng": -9.139429699999999,
+        "place_id": "ChIJL42Kt3g0GQ0RfGlw4GJ8FOE",
+        "address": "R. de Santa Justa, 1150-060 Lisboa, Portugal"
+      },
+      "delta_m": 3,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "lissabon_alfama",
+      "name": "Alfama",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 38.71334862,
+        "lng": -9.13010976
+      }
+    },
+    {
+      "id": "lissabon_bairro_alto",
+      "name": "Bairro Alto",
+      "before": {
+        "lat": 38.71230816250001,
+        "lng": -9.1458738625
+      },
+      "google": {
+        "lat": 38.7128331,
+        "lng": -9.1450582,
+        "place_id": "ChIJ-6uzAoA0GQ0R8dBgojsq_ro",
+        "address": "Bairro Alto, Margueira, Lisbon, Portugal"
+      },
+      "delta_m": 92,
+      "status": "BAD",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "lissabon_miradouro_da_senhora_do_monte",
+      "name": "Miradouro da Senhora do Monte",
+      "before": {
+        "lat": 38.7192778,
+        "lng": -9.13291622
+      },
+      "google": {
+        "lat": 38.7192091,
+        "lng": -9.1327772,
+        "place_id": "ChIJV32DNI8zGQ0R9GqiWeuNH2E",
+        "address": "LG do Monte, 1170-253 Lisboa, Portugal"
+      },
+      "delta_m": 14,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "lissabon_miradouro_de_santa_luzia",
+      "name": "Miradouro de Santa Luzia",
+      "before": {
+        "lat": 38.711862,
+        "lng": -9.1303408
+      },
+      "google": {
+        "lat": 38.7116956,
+        "lng": -9.1301972,
+        "place_id": "ChIJx-Rwl4QzGQ0RaSfN7SE7IEE",
+        "address": "Largo de Santa Luzia, 1100-487 Lisboa, Portugal"
+      },
+      "delta_m": 22,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "lissabon_parque_eduardo_vii",
+      "name": "Parque Eduardo VII",
+      "before": {
+        "lat": 38.72832658000001,
+        "lng": -9.152772086666666
+      },
+      "google": {
+        "lat": 38.7283001,
+        "lng": -9.1526828,
+        "place_id": "ChIJ9QG0S3EzGQ0RwqIa7mEIsKk",
+        "address": "1070-051 Lisbon, Portugal"
+      },
+      "delta_m": 8,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "lissabon_basilica_da_estrela",
+      "name": "Basílica da Estrela",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 38.71321647619047,
+        "lng": -9.160530047619048
+      }
+    },
+    {
+      "id": "lissabon_padrao_dos_descobrimentos",
+      "name": "Padrão dos Descobrimentos",
+      "before": {
+        "lat": 38.693652021428576,
+        "lng": -9.205718292857146
+      },
+      "google": {
+        "lat": 38.6935973,
+        "lng": -9.2057115,
+        "place_id": "ChIJScpeDUTLHg0RGeb5iw7wSH8",
+        "address": "Av. Brasília, 1400-038 Lisboa, Portugal"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "lissabon_oceanario_de_lisboa",
+      "name": "Oceanário de Lisboa",
+      "before": {
+        "lat": 38.763514107692316,
+        "lng": -9.093728746153845
+      },
+      "google": {
+        "lat": 38.7635435,
+        "lng": -9.0937415,
+        "place_id": "ChIJCVgOdYMxGQ0RMOFiOmcuP5g",
+        "address": "Esplanada Dom Carlos I s/nº, 1990-005 Lisboa, Portugal"
+      },
+      "delta_m": 3,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "lissabon_maat",
+      "name": "MAAT",
+      "before": {
+        "lat": 38.69592008260869,
+        "lng": -9.19347689347826
+      },
+      "google": {
+        "lat": 38.6958561,
+        "lng": -9.193311999999999,
+        "place_id": "ChIJkfTl003LHg0RxFtZGUxQE8s",
+        "address": "Av. Brasília, 1300-598 Lisboa, Portugal"
+      },
+      "delta_m": 16,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "lissabon_museu_nacional_do_azulejo",
+      "name": "Museu Nacional do Azulejo",
+      "before": {
+        "lat": 38.72469143529412,
+        "lng": -9.114004399999999
+      },
+      "google": {
+        "lat": 38.7250559,
+        "lng": -9.113539,
+        "place_id": "ChIJX6FT2ugzGQ0RKLxFhkpvHbM",
+        "address": "R. Me. Deus 4, 1900-312 Lisboa, Portugal"
+      },
+      "delta_m": 57,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "lissabon_lx_factory",
+      "name": "LX Factory",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 38.70336283333334,
+        "lng": -9.178688166666666
+      }
+    },
+    {
+      "id": "lissabon_time_out_market",
+      "name": "Time Out Market",
+      "before": {
+        "lat": 38.70701650000001,
+        "lng": -9.145623285714285
+      },
+      "google": {
+        "lat": 38.7070608,
+        "lng": -9.1456691,
+        "place_id": "ChIJdWBeWYc0GQ0RktxySU7hjxM",
+        "address": "Mercado da Ribeira, Av. 24 de Julho, 1200-479 Lisboa, Portugal"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "lissabon_rossio",
+      "name": "Rossio",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 38.714060499999995,
+        "lng": -9.138775166666667
+      }
+    },
+    {
+      "id": "lissabon_avenida_da_liberdade",
+      "name": "Avenida da Liberdade",
+      "before": {
+        "lat": 38.720070444444445,
+        "lng": -9.146199000000001
+      },
+      "google": {
+        "lat": 38.7205373,
+        "lng": -9.1459023,
+        "place_id": "ChIJCWYLEIIzGQ0Rx1_bDsr2_cg",
+        "address": "Av. da Liberdade, Lisboa, Portugal"
+      },
+      "delta_m": 58,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "lissabon_ponte_25_de_abril",
+      "name": "Ponte 25 de Abril",
+      "before": {
+        "lat": 38.702828555555556,
+        "lng": -9.180222111111112
+      },
+      "google": {
+        "lat": 38.69419630000001,
+        "lng": -9.1781773,
+        "place_id": "ChIJX7XiBbA0GQ0RnfxJdAxrNSs",
+        "address": "Lisbon, Portugal"
+      },
+      "delta_m": 976,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "lissabon_eletrico_28",
+      "name": "Elétrico 28",
+      "before": {
+        "lat": 38.71497263636364,
+        "lng": -9.135958909090908
+      },
+      "google": {
+        "lat": 38.7152423,
+        "lng": -9.136078399999999,
+        "place_id": "ChIJb9ykN0QzGQ0RVCVqd9U3kpI",
+        "address": "Praça Martim Moniz 577, 1100-341 Lisboa, Portugal"
+      },
+      "delta_m": 32,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "lissabon_feira_da_ladra",
+      "name": "Feira da Ladra",
+      "before": {
+        "lat": 38.71507482857144,
+        "lng": -9.126320142857143
+      },
+      "google": {
+        "lat": 38.715247999999995,
+        "lng": -9.1262075,
+        "place_id": "ChIJbyCqvM8zGQ0R8NBAZs_9Fcw",
+        "address": "Campo de Santa Clara, 1100-472 Lisboa, Portugal"
+      },
+      "delta_m": 22,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "lissabon_jardim_botanico_de_lisboa",
+      "name": "Jardim Botânico de Lisboa",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 38.719524142857146,
+        "lng": -9.14928357142857
+      }
+    },
+    {
+      "id": "lissabon_museu_calouste_gulbenkian",
+      "name": "Museu Calouste Gulbenkian",
+      "before": {
+        "lat": 38.71222636363636,
+        "lng": -9.13931518181818
+      },
+      "google": {
+        "lat": 38.737812399999996,
+        "lng": -9.153545500000002,
+        "place_id": "ChIJNTZ10A0zGQ0ROwhyCh2mkwg",
+        "address": "Av. de Berna 45A, 1067-001 Lisboa, Portugal"
+      },
+      "delta_m": 3101,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "lissabon_gare_do_oriente",
+      "name": "Gare do Oriente",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 38.76786772370821,
+        "lng": -9.099937267173246
+      }
+    },
+    {
+      "id": "lissabon_santa_apolonia",
+      "name": "Santa Apolónia",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 38.71401782142857,
+        "lng": -9.1227465
+      }
+    },
+    {
+      "id": "lissabon_stadtgeschichte",
+      "name": "Geschichte von Lissabon",
+      "before": {
+        "lat": 38.7224955,
+        "lng": -9.139126333333333
+      },
+      "google": {
+        "lat": 38.722252399999995,
+        "lng": -9.1393366,
+        "place_id": "ChIJO_PkYRozGQ0R0DaQ5L3rAAQ",
+        "address": "Lisbon, Portugal"
+      },
+      "delta_m": 33,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "lissabon_cinemateca_portuguesa_museu_do_cinema",
+      "name": "Cinemateca Portuguesa - Museu do Cinema",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 38.72084314285714,
+        "lng": -9.148755714285715
+      }
+    },
+    {
+      "id": "lissabon_estadio_da_luz",
+      "name": "Estádio da Luz",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 38.75269566734694,
+        "lng": -9.184666569387753
+      }
+    },
+    {
+      "id": "lissabon_estadio_jose_alvalade_xxi",
+      "name": "Estádio José Alvalade XXI",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 38.761170532876726,
+        "lng": -9.160916847945208
+      }
+    },
+    {
+      "id": "lissabon_jardim_do_torel",
+      "name": "Jardim do Torel",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 38.719396687234045,
+        "lng": -9.141583793617018
+      }
+    },
+    {
+      "id": "lissabon_reservatorio_da_mae_d_agua_das_amoreiras",
+      "name": "Reservatório da Mãe d'Água das Amoreiras",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 38.72121058333334,
+        "lng": -9.155658916666669
+      }
+    },
+    {
+      "id": "lissabon_cristo_rei",
+      "name": "Cristo Rei",
+      "before": {
+        "lat": 38.67861513333333,
+        "lng": -9.171353322222222
+      },
+      "google": {
+        "lat": 38.6786319,
+        "lng": -9.1713326,
+        "place_id": "ChIJPcfcnuc0GQ0Rgerp5o_yC2Q",
+        "address": "Av. do Cristo Rei, 2800-058 Almada, Portugal"
+      },
+      "delta_m": 3,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "lissabon_bounce_luggage_storage_baixa_chiado",
+      "name": "Chiado",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 38.710845125,
+        "lng": -9.142182125
+      }
+    },
+    {
+      "id": "lissabon_mercado_de_campo_de_ourique",
+      "name": "Mercado de Campo de Ourique",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 38.71610283333333,
+        "lng": -9.166772
+      }
+    },
+    {
+      "id": "lissabon_miradouro_de_sao_pedro_de_alcantara",
+      "name": "Miradouro de São Pedro de Alcântara",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 38.7152324,
+        "lng": -9.144376342857143
+      }
+    },
+    {
+      "id": "lissabon_aqueduto_das_aguas_livres",
+      "name": "Aqueduto das Águas Livres",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 38.72663,
+        "lng": -9.1660432
+      }
+    },
+    {
+      "id": "lissabon_parque_das_nacoes",
+      "name": "Parque das Nações",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 38.768454289795926,
+        "lng": -9.093940475
+      }
+    },
+    {
+      "id": "lissabon_palacio_nacional_da_ajuda",
+      "name": "Palácio Nacional da Ajuda",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 38.707573628,
+        "lng": -9.19879436
+      }
+    },
+    {
+      "id": "lissabon_marques_de_pombal",
+      "name": "Praça Marquês de Pombal",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 38.72525420750001,
+        "lng": -9.149999657499999
+      }
+    },
+    {
+      "id": "lissabon_igreja_de_sao_roque",
+      "name": "Igreja de São Roque",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 38.713653,
+        "lng": -9.14320677777778
+      }
+    },
+    {
+      "id": "lissabon_amoreiras_360_panoramic_view",
+      "name": "Amoreiras 360",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 38.72373725,
+        "lng": -9.16132875
+      }
+    },
+    {
+      "id": "lissabon_jardim_botanico_tropical",
+      "name": "Jardim Botânico Tropical",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 38.71222636363636,
+        "lng": -9.13931518181818
+      }
+    },
+    {
+      "id": "lissabon_jardim_da_fundacao_calouste_gulbenkian",
+      "name": "Jardim da Fundação Calouste Gulbenkian",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 38.73708560909091,
+        "lng": -9.154442490909092
+      }
+    },
+    {
+      "id": "lissabon_mosteiro_de_sao_vicente_de_fora",
+      "name": "Mosteiro de São Vicente de Fora",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 38.714509,
+        "lng": -9.128396166666667
+      }
+    },
+    {
+      "id": "lissabon_teatro_nacional_d_maria_ii",
+      "name": "Teatro Nacional D. Maria II",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 38.71475936363636,
+        "lng": -9.139796545454546
+      }
+    },
+    {
+      "id": "lissabon_doca_de_santo_amaro",
+      "name": "Doca de Santo Amaro",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 38.700381666666665,
+        "lng": -9.176740666666667
+      }
+    },
+    {
+      "id": "lissabon_zoo_lissabon",
+      "name": "Zoo Lissabon",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 38.74317410952381,
+        "lng": -9.169200652380955
+      }
+    },
+    {
+      "id": "lissabon_museu_nacional_de_arte_antiga",
+      "name": "Museu Nacional de Arte Antiga",
+      "before": {
+        "lat": 38.70474166666666,
+        "lng": -9.16154095238095
+      },
+      "google": {
+        "lat": 38.7048412,
+        "lng": -9.1614643,
+        "place_id": "ChIJGXuOYpk0GQ0RJCutP__xMsk",
+        "address": "R. das Janelas Verdes, 1249-017 Lisboa, Portugal"
+      },
+      "delta_m": 13,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "lissabon_museu_nacional_dos_coches",
+      "name": "Museu Nacional dos Coches",
+      "before": {
+        "lat": 38.69629138333333,
+        "lng": -9.19729705
+      },
+      "google": {
+        "lat": 38.6965545,
+        "lng": -9.197485,
+        "place_id": "ChIJT2UiYkXLHg0RvagnSnJttwE",
+        "address": "Av. da Índia 136, 1300-300 Lisboa, Portugal"
+      },
+      "delta_m": 33,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "lissabon_centro_cultural_de_belem",
+      "name": "Centro Cultural de Belém",
+      "before": {
+        "lat": 38.71222636363636,
+        "lng": -9.13931518181818
+      },
+      "google": {
+        "lat": 38.6955029,
+        "lng": -9.208354199999999,
+        "place_id": "ChIJW51RQkPLHg0RNpVMhpDspDY",
+        "address": "Praça do Império, 1449-003 Lisboa, Portugal"
+      },
+      "delta_m": 6273,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "lissabon_pasteis_de_belem",
+      "name": "Pastéis de Belém",
+      "before": {
+        "lat": 38.69751621428572,
+        "lng": -9.203266999999999
+      },
+      "google": {
+        "lat": 38.6975105,
+        "lng": -9.203227600000002,
+        "place_id": "ChIJW3H9LkXLHg0RZZZttMb27_8",
+        "address": "R. de Belém 84 92, 1300-085 Lisboa, Portugal"
+      },
+      "delta_m": 3,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "lissabon_museu_colecao_berardo",
+      "name": "Museu Coleção Berardo",
+      "before": {
+        "lat": 38.71222636363636,
+        "lng": -9.13931518181818
+      },
+      "google": {
+        "lat": 38.6958741,
+        "lng": -9.2090914,
+        "place_id": "ChIJW51RQkPLHg0RudqetTf2TKQ",
+        "address": "Praça do Império, 1449-003 Lisboa, Portugal"
+      },
+      "delta_m": 6322,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "lissabon_palacio_de_belem",
+      "name": "Palácio de Belém",
+      "before": {
+        "lat": 38.697678088,
+        "lng": -9.201297159999998
+      },
+      "google": {
+        "lat": 38.697990499999996,
+        "lng": -9.200549299999999,
+        "place_id": "ChIJY_eFwk_LHg0RLzD1N-8r3Fg",
+        "address": "Praça Afonso de Albuquerque, 1300-004 Lisboa, Portugal"
+      },
+      "delta_m": 74,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "lissabon_panteao_nacional",
+      "name": "Panteão Nacional",
+      "before": {
+        "lat": 38.71497418867926,
+        "lng": -9.124687943396228
+      },
+      "google": {
+        "lat": 38.714994399999995,
+        "lng": -9.1246835,
+        "place_id": "ChIJfZ_qo4ozGQ0RN07tPE-K274",
+        "address": "Campo de Santa Clara, 1100-471 Lisboa, Portugal"
+      },
+      "delta_m": 2,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "lissabon_arco_da_rua_augusta",
+      "name": "Arco da Rua Augusta",
+      "before": {
+        "lat": 38.7084405,
+        "lng": -9.1368143125
+      },
+      "google": {
+        "lat": 38.7084447,
+        "lng": -9.136824299999999,
+        "place_id": "ChIJ5fcMh3k0GQ0RsEli_Fck5sQ",
+        "address": "R. Augusta 2, 1100-053 Lisboa, Portugal"
+      },
+      "delta_m": 1,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "lissabon_elevador_da_gloria",
+      "name": "Elevador da Glória",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 38.7162326,
+        "lng": -9.142846299999999
+      }
+    },
+    {
+      "id": "lissabon_casa_fernando_pessoa",
+      "name": "Casa Fernando Pessoa",
+      "before": {
+        "lat": 38.71222636363636,
+        "lng": -9.13931518181818
+      },
+      "google": {
+        "lat": 38.7167116,
+        "lng": -9.162497,
+        "place_id": "ChIJ7wPpVGEzGQ0Rpt1XNNNvVrk",
+        "address": "R. Coelho da Rocha 16 18, 1250-088 Lisboa, Portugal"
+      },
+      "delta_m": 2072,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "lissabon_museu_da_marioneta",
+      "name": "Museu da Marioneta",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 38.7078285,
+        "lng": -9.155695833333333
+      }
+    },
+    {
+      "id": "lissabon_museu_do_oriente",
+      "name": "Museu do Oriente",
+      "before": {
+        "lat": 38.70293728571429,
+        "lng": -9.170469
+      },
+      "google": {
+        "lat": 38.7028828,
+        "lng": -9.1705943,
+        "place_id": "ChIJEZ47qKM0GQ0RKDX2uFZS2BM",
+        "address": "Doca de Alcantara, Norte, Av. Brasília, 1350-352 Lisboa, Portugal"
+      },
+      "delta_m": 12,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "lissabon_pink_street",
+      "name": "Pink Street",
+      "before": {
+        "lat": 38.707161799999994,
+        "lng": -9.143863
+      },
+      "google": {
+        "lat": 38.707246399999995,
+        "lng": -9.1437847,
+        "place_id": "ChIJgfPj-i41GQ0RHqt7A8M62Jg",
+        "address": "R. Nova do Carvalho 21 23, 1200-291 Lisboa, Portugal"
+      },
+      "delta_m": 12,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "lissabon_torre_vasco_da_gama",
+      "name": "Torre Vasco da Gama",
+      "before": {
+        "lat": 38.77474285238096,
+        "lng": -9.091283714285714
+      },
+      "google": {
+        "lat": 38.774940699999995,
+        "lng": -9.0914524,
+        "place_id": "ChIJR3lB3Y0xGQ0R2xzPBwc2pFc",
+        "address": "R. Cais das Naus 2 21.01, 1990-173 Lisboa, Portugal"
+      },
+      "delta_m": 26,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "lissabon_telecabine_lisboa",
+      "name": "Telecabine Lisboa",
+      "before": {
+        "lat": 38.7623986,
+        "lng": -9.092304200000001
+      },
+      "google": {
+        "lat": 38.7734836,
+        "lng": -9.0913837,
+        "place_id": "ChIJ_____zoyGQ0RNz3CeIlda7U",
+        "address": "Estação Norte, Passeio das Tágides, 1990-280 Lisboa, Portugal"
+      },
+      "delta_m": 1235,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "lissabon_pavilhao_do_conhecimento",
+      "name": "Pavilhão do Conhecimento",
+      "before": {
+        "lat": 38.761594445,
+        "lng": -9.09584636
+      },
+      "google": {
+        "lat": 38.7622587,
+        "lng": -9.095872,
+        "place_id": "ChIJrdyrGYkxGQ0RyGeLfnIBiRY",
+        "address": "Largo José Mariano Gago nº1, 1990-073 Lisboa, Portugal"
+      },
+      "delta_m": 74,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "lissabon_casino_lisboa",
+      "name": "Casino Lisboa",
+      "before": {
+        "lat": 38.76477743181818,
+        "lng": -9.09643380909091
+      },
+      "google": {
+        "lat": 38.7646407,
+        "lng": -9.0966028,
+        "place_id": "ChIJ8SDZi4wxGQ0RoDZJ5_249Ck",
+        "address": "Alameda dos Oceanos 45, 1990-204 Lisboa, Portugal"
+      },
+      "delta_m": 21,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "lissabon_centro_vasco_da_gama",
+      "name": "Centro Vasco da Gama",
+      "before": {
+        "lat": 38.767563942307696,
+        "lng": -9.09678383846154
+      },
+      "google": {
+        "lat": 38.7685108,
+        "lng": -9.0971266,
+        "place_id": "ChIJ3a1nPIYxGQ0RtYXRrXTtQ-s",
+        "address": "Av. Dom João II 40, 1990-094 Lisboa, Portugal"
+      },
+      "delta_m": 109,
+      "status": "BAD",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "lissabon_palacio_dos_marqueses_de_fronteira",
+      "name": "Palácio dos Marqueses de Fronteira",
+      "before": {
+        "lat": 38.74001134000001,
+        "lng": -9.180460203333332
+      },
+      "google": {
+        "lat": 38.7401303,
+        "lng": -9.1803574,
+        "place_id": "ChIJH9k_PDAzGQ0RSDwJi-cEgMQ",
+        "address": "Largo São Domingos de Benfica 01, 1500-554 Lisboa, Portugal"
+      },
+      "delta_m": 16,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "lissabon_casa_museu_anastacio_goncalves",
+      "name": "Casa-Museu Anastácio Gonçalves",
+      "before": {
+        "lat": 38.71222636363636,
+        "lng": -9.13931518181818
+      },
+      "google": {
+        "lat": 38.732515899999996,
+        "lng": -9.1464418,
+        "place_id": "ChIJJwJ4Q3UzGQ0RadObZV0hQXI",
+        "address": "Avenida 5 de Outubro 6 e 8, 1050-055 Lisboa, Portugal"
+      },
+      "delta_m": 2339,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "lissabon_igreja_da_memoria",
+      "name": "Igreja da Memória",
+      "before": {
+        "lat": 38.70298713809524,
+        "lng": -9.201987480952381
+      },
+      "google": {
+        "lat": 38.7030176,
+        "lng": -9.2020613,
+        "place_id": "ChIJKfnrHlrLHg0RbB7-ruxfckw",
+        "address": "Largo da Memória, 1300-399 Lisboa, Portugal"
+      },
+      "delta_m": 7,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "lissabon_forte_do_bom_sucesso",
+      "name": "Forte do Bom Sucesso",
+      "before": {
+        "lat": 38.69213255000001,
+        "lng": -9.217248059999998
+      },
+      "google": {
+        "lat": 38.6921973,
+        "lng": -9.2170886,
+        "place_id": "ChIJmzCZJIA0GQ0RO7UUqH4XocM",
+        "address": "Av. Brasília S/N, 1400-038 Lisboa, Portugal"
+      },
+      "delta_m": 16,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "lissabon_praca_do_imperio",
+      "name": "Praça do Império",
+      "before": {
+        "lat": 38.69722294285714,
+        "lng": -9.206131771428572
+      },
+      "google": {
+        "lat": 38.6971694,
+        "lng": -9.2063788,
+        "place_id": "ChIJs5HEV0PLHg0RlS1C-XSH7rY",
+        "address": "Praça do Império, Restelo, 1400-206 Lisboa, Portugal"
+      },
+      "delta_m": 22,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "lissabon_museu_militar_de_lisboa",
+      "name": "Museu Militar de Lisboa",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 38.71301079999999,
+        "lng": -9.124346074999997
+      }
+    },
+    {
+      "id": "lissabon_campo_pequeno",
+      "name": "Campo Pequeno",
+      "before": {
+        "lat": 38.71222636363636,
+        "lng": -9.13931518181818
+      },
+      "google": {
+        "lat": 38.7416308,
+        "lng": -9.145067,
+        "place_id": "ChIJp-STi6czGQ0RwHCv1j-8wgs",
+        "address": "Campo Pequeno, Lisboa, Portugal"
+      },
+      "delta_m": 3307,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "lissabon_instituto_superior_tecnico",
+      "name": "Instituto Superior Técnico",
+      "before": {
+        "lat": 38.73736930625001,
+        "lng": -9.13862633125
+      },
+      "google": {
+        "lat": 38.7368192,
+        "lng": -9.138705,
+        "place_id": "ChIJFx-oSqIzGQ0RI0SlMcfHgAg",
+        "address": "Av. Rovisco Pais 1, 1049-001 Lisboa, Portugal"
+      },
+      "delta_m": 62,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "lissabon_assembleia_da_republica",
+      "name": "Assembleia da República",
+      "before": {
+        "lat": 38.70887944444445,
+        "lng": -9.134184
+      },
+      "google": {
+        "lat": 38.7125529,
+        "lng": -9.1538565,
+        "place_id": "ChIJkeoDQ30zGQ0RqAnlCU5I1Zs",
+        "address": "Praça da Constituição de 1976, 1249-068 Lisboa, Portugal"
+      },
+      "delta_m": 1755,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "lissabon_convento_do_carmo",
+      "name": "Convento do Carmo",
+      "before": {
+        "lat": 38.712182527397246,
+        "lng": -9.14010013561644
+      },
+      "google": {
+        "lat": 38.712038299999996,
+        "lng": -9.140612899999999,
+        "place_id": "ChIJP8YuN380GQ0R7yzgkmX11zI",
+        "address": "Largo do Carmo, 1200-092 Lisboa, Portugal"
+      },
+      "delta_m": 47,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "lissabon_museu_do_fado",
+      "name": "Museu do Fado",
+      "before": {
+        "lat": 38.71092542857143,
+        "lng": -9.127566571428572
+      },
+      "google": {
+        "lat": 38.7111258,
+        "lng": -9.127616000000002,
+        "place_id": "ChIJeZYlNnQ0GQ0RU4WDGSc3yDg",
+        "address": "Alfama, Largo do Chafariz de Dentro 1, 1100-139 Lisboa, Portugal"
+      },
+      "delta_m": 23,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "lissabon_casa_dos_bicos",
+      "name": "Casa dos Bicos",
+      "before": {
+        "lat": 38.7091415,
+        "lng": -9.132640833333333
+      },
+      "google": {
+        "lat": 38.7090442,
+        "lng": -9.1326694,
+        "place_id": "ChIJJSrMLXc0GQ0R_LoCvxsENks",
+        "address": "R. dos Bacalhoeiros 10, 1100-135 Lisboa, Portugal"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "lissabon_igreja_da_graca",
+      "name": "Igreja da Graça",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 38.7164183,
+        "lng": -9.130828087500001
+      }
+    },
+    {
+      "id": "lissabon_mouraria",
+      "name": "Mouraria",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 38.71639694736842,
+        "lng": -9.135396947368418
+      }
+    },
+    {
+      "id": "lissabon_praca_dos_restauradores",
+      "name": "Praça dos Restauradores",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 38.7157732,
+        "lng": -9.140964199999999
+      }
+    },
+    {
+      "id": "lissabon_elevador_do_lavra",
+      "name": "Elevador do Lavra",
+      "before": {
+        "lat": 38.71803671428571,
+        "lng": -9.141786714285713
+      },
+      "google": {
+        "lat": 38.717835699999995,
+        "lng": -9.141782700000002,
+        "place_id": "ChIJhbJ90VYzGQ0RKnWJ7OvbF1o",
+        "address": "1150-122 Lisbon, Portugal"
+      },
+      "delta_m": 22,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "lissabon_cais_do_sodre",
+      "name": "Cais do Sodré",
+      "before": {
+        "lat": 38.7061256,
+        "lng": -9.1430094
+      },
+      "google": {
+        "lat": 38.7066011,
+        "lng": -9.143523499999999,
+        "place_id": "ChIJW1nv-n00GQ0R8S9HJ4O-jJY",
+        "address": "Cais do Sodre, Lisboa, Portugal"
+      },
+      "delta_m": 69,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "lissabon_pilar_7_bridge_experience",
+      "name": "Pilar 7 Bridge Experience",
+      "before": {
+        "lat": 38.700374499999995,
+        "lng": -9.17887625
+      },
+      "google": {
+        "lat": 38.700403099999996,
+        "lng": -9.1788387,
+        "place_id": "ChIJWUCxFGE1GQ0RNLxJu2LgUNg",
+        "address": "Av. da Índia 52, 1300-299 Lisboa, Portugal"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "lissabon_livraria_bertrand",
+      "name": "Livraria Bertrand",
+      "before": {
+        "lat": 38.71063083333333,
+        "lng": -9.141094
+      },
+      "google": {
+        "lat": 38.7106505,
+        "lng": -9.141135499999999,
+        "place_id": "ChIJl-2tIH80GQ0R8n_4uOyrVzc",
+        "address": "R. Garrett 73 75, 1200-203 Lisboa, Portugal"
+      },
+      "delta_m": 4,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "lissabon_elevador_da_bica",
+      "name": "Elevador da Bica",
+      "before": {
+        "lat": 38.708857125,
+        "lng": -9.151512375
+      },
+      "google": {
+        "lat": 38.7086003,
+        "lng": -9.1468816,
+        "place_id": "ChIJgTRnkIA0GQ0RLLGmTI2TEEI",
+        "address": "Rua de S. Paulo 234, 1200-109 Lisboa, Portugal"
+      },
+      "delta_m": 403,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "lissabon_igreja_de_santo_antonio",
+      "name": "Igreja de Santo António",
+      "before": {
+        "lat": 38.70998578947368,
+        "lng": -9.133683999999999
+      },
+      "google": {
+        "lat": 38.709972199999996,
+        "lng": -9.1338289,
+        "place_id": "ChIJ95WuEMHZHg0R11WIKUcaTZE",
+        "address": "LG de Santo António da Sé, 1100-499 Lisboa, Portugal"
+      },
+      "delta_m": 13,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "lissabon_igreja_de_sao_domingos",
+      "name": "Igreja de São Domingos",
+      "before": {
+        "lat": 38.71471337931034,
+        "lng": -9.138061310344828
+      },
+      "google": {
+        "lat": 38.7147083,
+        "lng": -9.1387518,
+        "place_id": "ChIJ3SKOPoczGQ0Ri0_5zRMKC6Y",
+        "address": "Largo São Domingos, 1150-320 Lisboa, Portugal"
+      },
+      "delta_m": 60,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "lissabon_miradouro_da_graca",
+      "name": "Miradouro da Graça",
+      "before": {
+        "lat": 38.716438294444444,
+        "lng": -9.130836700000001
+      },
+      "google": {
+        "lat": 38.7164509,
+        "lng": -9.1315937,
+        "place_id": "ChIJYzmNq4kzGQ0R8PmcMe8PyEY",
+        "address": "Calçada da Graça, 1100-265 Lisboa, Portugal"
+      },
+      "delta_m": 66,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "lissabon_miradouro_das_portas_do_sol",
+      "name": "Miradouro das Portas do Sol",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 38.711862,
+        "lng": -9.1303408
+      }
+    },
+    {
+      "id": "lissabon_chiado",
+      "name": "Chiado",
+      "before": {
+        "lat": 38.710845125,
+        "lng": -9.142182125
+      },
+      "google": {
+        "lat": 38.7105423,
+        "lng": -9.1422039,
+        "place_id": "ChIJDzmmAn80GQ0Rlx7cb1YcBeA",
+        "address": "Chiado, 1200-445 Lisboa, Portugal"
+      },
+      "delta_m": 34,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "lissabon_rua_augusta",
+      "name": "Rua Augusta",
+      "before": {
+        "lat": 38.7106041,
+        "lng": -9.1377959
+      },
+      "google": {
+        "lat": 38.7106557,
+        "lng": -9.1376722,
+        "place_id": "ChIJ6R7LA3k0GQ0Rk00Z1v-rLT8",
+        "address": "R. Augusta, Lisboa, Portugal"
+      },
+      "delta_m": 12,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "lissabon_jardim_da_estrela",
+      "name": "Jardim da Estrela",
+      "before": {
+        "lat": 38.714624285714294,
+        "lng": -9.159241
+      },
+      "google": {
+        "lat": 38.714765,
+        "lng": -9.159257499999999,
+        "place_id": "ChIJqzZCU2MzGQ0RkegDvwGR1ys",
+        "address": "Praça da Estrela, 1200-667 Lisboa, Portugal"
+      },
+      "delta_m": 16,
+      "status": "OK",
+      "streetview": "OK"
+    }
+  ]
+}

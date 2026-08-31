@@ -27,7 +27,9 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
+import { spawnSync } from 'node:child_process';
 import {
+  ROOT,
   STAEDTE_DIR,
   arg,
   boxPolygon,
@@ -189,7 +191,17 @@ function applySpotPayload(pack, payload, stats) {
   if (payload.category) spot.category = payload.category;
   if (payload.place_tier != null) spot.place_tier = payload.place_tier;
   if (payload.pack_role) spot.pack_role = payload.pack_role;
-  spot.tags = [...new Set([...(spot.tags || []), 'deep_research_merged'])];
+  const extraTags = [
+    'deep_research_merged',
+    ...(Array.isArray(payload.tags) ? payload.tags : []),
+  ]
+    .map((t) => String(t || '').toLowerCase().trim())
+    .filter(Boolean);
+  spot.tags = [...new Set([...(spot.tags || []), ...extraTags])];
+  if (extraTags.length) {
+    spot.facts = spot.facts || {};
+    spot.facts.tags = [...new Set([...(spot.facts.tags || []), ...extraTags])];
+  }
 }
 
 function parseMarkdown(text) {
@@ -328,7 +340,49 @@ function main() {
   }
 
   const out = savePack(pack, { bumpVersion: true });
-  const gate = runQualityGate(pack, { strict: false });
+  const wiki = spawnSync(
+    process.execPath,
+    [
+      path.join(ROOT, 'scripts', 'cityPack', 'expandStoryWiki.mjs'),
+      '--city',
+      cityId,
+    ],
+    { cwd: ROOT, stdio: 'inherit', env: process.env },
+  );
+  if (wiki.status !== 0) {
+    console.warn(
+      `[merge] wiki-depth failed (exit ${wiki.status}) — Pack bleibt gemerged`,
+    );
+  }
+  const loop = spawnSync(
+    process.execPath,
+    [
+      path.join(ROOT, 'scripts', 'cityPack', 'gpsWegweiserLoop.mjs'),
+      '--city',
+      cityId,
+    ],
+    { cwd: ROOT, stdio: 'inherit', env: process.env },
+  );
+  if (loop.status !== 0) {
+    console.warn(
+      `[merge] gps-wegweiser loop failed (exit ${loop.status}) — Pack bleibt gemerged`,
+    );
+  }
+  const facets = spawnSync(
+    process.execPath,
+    [
+      path.join(ROOT, 'scripts', 'cityPack', 'enrichReviewFacets.mjs'),
+      '--city',
+      cityId,
+    ],
+    { cwd: ROOT, stdio: 'inherit', env: process.env },
+  );
+  if (facets.status !== 0) {
+    console.warn(
+      `[merge] review-facets failed (exit ${facets.status}) — Pack bleibt gemerged`,
+    );
+  }
+  const gate = runQualityGate(loadPack(cityId) || pack, { strict: false });
   const report = {
     city_id: cityId,
     source: abs,

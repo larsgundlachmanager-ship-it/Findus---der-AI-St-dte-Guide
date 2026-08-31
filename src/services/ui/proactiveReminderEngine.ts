@@ -47,6 +47,18 @@ const HUD_ONLY_KINDS = new Set<HudTipKind>([
   'generic',
   'weather_rain',
   'hotel_breakfast',
+  'wake_alarm',
+]);
+
+/** Soft channel — Hitze, Gepäck, Sunset, Schirm, Zeitlücke, Outfit-Tipps */
+const NICE_PUSH_KINDS = new Set<HudTipKind>([
+  'weather_heat',
+  'weather_summary',
+  'luggage_drop',
+  'umbrella_day',
+  'sunset_tip',
+  'free_slot',
+  'nice_tip',
 ]);
 
 let lastTickMs = 0;
@@ -58,6 +70,8 @@ let pendingPushFullText: string | null = null;
 function classifyChannel(tip: HudTipCandidate): ReminderChannel {
   if (tip.score >= 88 && VOICE_KINDS.has(tip.kind)) return 'voice';
   if (tip.score >= 82 && tip.kind === 'session_deadline') return 'voice';
+  // Nice-to-know: Push ohne Vibration-Spam (Hitze / Tipps)
+  if (NICE_PUSH_KINDS.has(tip.kind) && tip.score >= 60) return 'push';
   if (HUD_ONLY_KINDS.has(tip.kind) && tip.score < 75) return 'hud';
   if (tip.score >= 90) return 'push';
   return 'hud';
@@ -142,6 +156,20 @@ async function pushReminder(tip: HudTipCandidate): Promise<void> {
   lastPushTipId = tip.id;
   bootstrapReminderPushTapHandler();
   try {
+    // Nice-to-know (Hitze etc.) → sanfter Channel, kein Vibrieren
+    if (NICE_PUSH_KINDS.has(tip.kind)) {
+      const { scheduleNiceInfoPush } = await import(
+        '../notifications/niceInfoNotifications'
+      );
+      const teaser = buildHudTipPushTeaser(tip);
+      await scheduleNiceInfoPush({
+        title: teaser.title,
+        body: teaser.body,
+        dataKey: tip.id,
+      });
+      return;
+    }
+
     await configureNotificationHandler();
     const perm = await requestNotificationPermission();
     if (!perm.granted) return;
@@ -179,6 +207,23 @@ async function voiceReminder(tip: HudTipCandidate): Promise<void> {
   const store = useFinnusStore.getState();
   if (store.isPlayingAudio || store.isListening || store.isGenerating) return;
   if (store.activeConciergeCard) return;
+  // Planung/Kalender aktiv → kein Random-Speak
+  try {
+    const { isPlanningModuleActive } = require('../../module2/planning/planSessionState') as {
+      isPlanningModuleActive: () => boolean;
+    };
+    const { usePlanCalendarUiStore } = require('../../module2/timeline/planCalendarUiStore') as {
+      usePlanCalendarUiStore: { getState: () => { calendarVisible: boolean } };
+    };
+    if (
+      isPlanningModuleActive() ||
+      usePlanCalendarUiStore.getState().calendarVisible
+    ) {
+      return;
+    }
+  } catch {
+    /* soft */
+  }
 
   lastVoiceTipId = tip.id;
   const line = buildHudTipFullLine(tip);
@@ -220,6 +265,18 @@ export async function tickProactiveReminderEngine(opts?: {
 
   // Progressive logistics checkpoints (ICE/Bus/Flug/Zeit/Geo)
   void tickLogisticsTriggerEngine({ force: opts?.force, nowMs: now });
+
+  // Nice-Info-Szenarien (Gepäck-Morgen, Schirm, Sunset, …) — soft Push, Dedup intern
+  try {
+    const { tickNiceInfoScenarios } = require('./niceInfoScenarios') as {
+      tickNiceInfoScenarios: (opts?: {
+        nowMs?: number;
+      }) => Promise<{ pushed: number }>;
+    };
+    void tickNiceInfoScenarios({ nowMs: now });
+  } catch {
+    /* soft */
+  }
 
   const store = useFinnusStore.getState();
   const tips = collectHudTipCandidates({

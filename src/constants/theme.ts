@@ -8,16 +8,23 @@ export const colors = {
   textMuted: '#A8B5AE',
   danger: '#D96B5C',
   wave: '#7EC8A3',
-  /** Findus online & bereit */
+  /** Yorro online & bereit */
   online: '#3DCF7A',
-  /** Findus offline / Diagnose nötig */
+  /** Yorro offline / Diagnose nötig */
   offline: '#E8913A',
-  /** Findus „Denken“ (nach User spricht) */
+  /** Yorro „Denken“ (nach User spricht) */
   thinking: '#3D7CFF',
-  /** Findus wirklich offline (kein Internetzugang) */
+  /** Yorro wirklich offline (kein Internetzugang) */
   offlineGray: '#6F7A7A',
   border: 'rgba(244, 239, 230, 0.12)',
 };
+
+/** Idle-Licht (Mikro + Presence): grün nur wenn wirklich ok, sonst orange. */
+export function presenceIdleColor(
+  presence: 'ok' | 'degraded' | 'offline',
+): string {
+  return presence === 'ok' ? colors.online : colors.offline;
+}
 
 export const spacing = {
   xs: 4,

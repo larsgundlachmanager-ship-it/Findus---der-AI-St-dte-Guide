@@ -8,6 +8,11 @@ import * as FileSystem from 'expo-file-system';
 const PATH = `${FileSystem.documentDirectory}findus-gemini-billing.json`;
 /** Don't spam the user more often than this. */
 const WARN_COOLDOWN_MS = 20 * 60_000;
+/** Nach Aufladen: Gemini nach so lange nochmal versuchen. */
+const RETRY_AFTER_MS = 60_000;
+
+export const GEMINI_CREDITS_EMPTY_SPEECH =
+  'Mein Gemini-Guthaben ist leer und muss wieder aufgeladen werden. Bis das wieder da ist, nehme ich den Reserve-Kanal.';
 
 type BillingState = {
   exhausted: boolean;
@@ -109,14 +114,22 @@ export async function consumeGeminiCreditsWarning(): Promise<string | null> {
   if (!newFailSinceWarn && !cooledDown) return null;
   memory.lastWarnedAtMs = now;
   await persist();
-  return [
-    'Kurzer Hinweis: Mein Online-KI-Guthaben bei Gemini ist leer.',
-    'Bitte lade in Google AI Studio Credits nach — sonst kann ich komplexe Fragen gerade nicht richtig beantworten.',
-  ].join(' ');
+  return GEMINI_CREDITS_EMPTY_SPEECH;
+}
+
+/** Nach einer Minute nochmal Gemini — z. B. wenn du gerade aufgeladen hast. */
+export function shouldRetryGeminiAfterExhaustion(now = Date.now()): boolean {
+  if (!memory.exhausted) return false;
+  return now - (memory.lastErrorAtMs || 0) >= RETRY_AFTER_MS;
 }
 
 /** Peek without consuming cooldown (for UI badges). */
 export async function peekGeminiCreditsExhausted(): Promise<boolean> {
   await hydrate();
   return memory.exhausted;
+}
+
+/** Sync: nach dem ersten 429, ohne await — Skip-Gemini / OpenAI-Pfad. */
+export function isGeminiCreditsExhaustedSync(): boolean {
+  return memory.exhausted === true;
 }

@@ -1,0 +1,702 @@
+{
+  "generated_at": "2026-08-28T06:33:05.502Z",
+  "summary": {
+    "city_id": "wangerooge",
+    "checked": 24,
+    "ok": 8,
+    "check": 11,
+    "bad": 5,
+    "errors": 0,
+    "max_delta_m": 180,
+    "city_halo_m": 12000,
+    "story_only": true
+  },
+  "rows": [
+    {
+      "id": "wangerooge_fahranleger_wangerooge",
+      "name": "Fähranleger Wangerooge",
+      "category": "transit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.78471,
+        "lng": 7.8575255
+      },
+      "query": "Fähranleger Wangerooge, Wangerooge, Germany",
+      "osm": {
+        "lat": 53.783225,
+        "lng": 7.9438049,
+        "display_name": "Alte Fähranleger, Straße zum Osten, Wangerooge, Landkreis Friesland, Niedersachsen, 26486, Deutschland",
+        "class": "historic",
+        "type": "railway",
+        "importance": 0.00005432745860985759,
+        "osm_type": "way",
+        "osm_id": 171929493,
+        "provider": "nominatim"
+      },
+      "delta_m": 5671,
+      "from_city_m": 2824,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "wangerooge_westturm",
+        "harlesiel_faehrhafen",
+        "wangerooge_dunenlandschaft_seelen_pfad"
+      ]
+    },
+    {
+      "id": "wangerooge_historische_uhr_pudding_uhr",
+      "name": "Historische Uhr / Pudding-Uhr",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.79299308666667,
+        "lng": 7.899008646666666
+      },
+      "query": "Historische Uhr /, Wangerooge, Germany",
+      "osm": {
+        "lat": 53.7748481,
+        "lng": 7.9703227,
+        "display_name": "Historischer Ostanleger, Straße zum Osten, Wangerooge, Deutschland",
+        "class": "historic",
+        "type": "railway_station",
+        "provider": "photon"
+      },
+      "delta_m": 5101,
+      "from_city_m": 312,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "wangerooge_jever_aussichtsplattform",
+      "name": "Jever-Aussichtsplattform",
+      "category": "aussicht",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.78391,
+        "lng": 7.945729999999999
+      },
+      "query": "Jever-Aussichtsplattform, Wangerooge, Germany",
+      "osm": {
+        "lat": 53.7913867,
+        "lng": 7.8995006,
+        "display_name": "Volksbank Jever eG, Geschäftsstelle Wangerooge, Zedeliusstraße, Wangerooge, Deutschland",
+        "class": "amenity",
+        "type": "bank",
+        "provider": "photon"
+      },
+      "delta_m": 3149,
+      "from_city_m": 3116,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "wangerooge_wangerooger_tennis_club_e_v",
+      "name": "Wangerooger Tennis Club e. V.",
+      "category": "sport",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.791876,
+        "lng": 7.893583
+      },
+      "query": "Wangerooger Tennis Club e. V., Wangerooge, Germany",
+      "osm": {
+        "lat": 53.7885051,
+        "lng": 7.8510033,
+        "display_name": "Wangerooger Yachtclub e.V. Lagerplatz, Im Westen, Wangerooge, Deutschland",
+        "class": "amenity",
+        "type": "boat_storage",
+        "provider": "photon"
+      },
+      "delta_m": 2822,
+      "from_city_m": 431,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "wangerooge_flugplatz_wangerooge_edwg",
+      "name": "Flugplatz Wangerooge (EDWG)",
+      "category": "transport",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.78829618181819,
+        "lng": 7.908975272727273
+      },
+      "query": "Flugplatz Wangerooge, Wangerooge, Germany",
+      "osm": {
+        "lat": 53.7856636,
+        "lng": 7.9110563,
+        "display_name": "Flugplatz Wangerooge, Siedlerstraße, Wangerooge, Landkreis Friesland, Niedersachsen, 26486, Deutschland",
+        "class": "aeroway",
+        "type": "aerodrome",
+        "importance": 0.3754795826599041,
+        "osm_type": "way",
+        "osm_id": 157820401,
+        "provider": "nominatim"
+      },
+      "delta_m": 323,
+      "from_city_m": 657,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "wangerooge_nikolai_kirche_evangelisch_lutherische_kirchenge",
+      "name": "Kirche am Meer · Ev.-luth. Gemeinde",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.788790588235294,
+        "lng": 7.900310352941178
+      },
+      "query": "Kirche am Meer · Ev.-luth., Wangerooge, Germany",
+      "osm": {
+        "lat": 53.5969236,
+        "lng": 7.2034548,
+        "display_name": "Superintendentur (ev.-luth. Kirche), Am Markt, Norden, Deutschland",
+        "class": "building",
+        "type": "religious",
+        "provider": "photon"
+      },
+      "delta_m": 50598,
+      "from_city_m": 166,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "wangerooge_deckwerk_wangerooge",
+      "name": "Deckwerk Wangerooge",
+      "category": "natur",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.7863368,
+        "lng": 7.849093099999999
+      },
+      "query": "Deckwerk Wangerooge, Wangerooge, Germany",
+      "osm": {
+        "lat": 53.792943,
+        "lng": 7.9002852,
+        "display_name": "wangeroogehaus.de, Zedeliusstraße, Wangerooge, Deutschland",
+        "class": "office",
+        "type": "property_management",
+        "provider": "photon"
+      },
+      "delta_m": 3442,
+      "from_city_m": 3339,
+      "status": "CHECK",
+      "flags": [
+        "house_like_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "wangerooge_westlagune_wangerooge",
+      "name": "Westlagune Wangerooge",
+      "category": "natur",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.7881666,
+        "lng": 7.870482699999998
+      },
+      "query": "Westlagune Wangerooge, Wangerooge, Germany",
+      "osm": {
+        "lat": 53.792943,
+        "lng": 7.9002852,
+        "display_name": "wangeroogehaus.de, Zedeliusstraße, Wangerooge, Deutschland",
+        "class": "office",
+        "type": "property_management",
+        "provider": "photon"
+      },
+      "delta_m": 2028,
+      "from_city_m": 1919,
+      "status": "CHECK",
+      "flags": [
+        "house_like_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "wangerooge_aussichtsplatz_wangerooge",
+      "name": "Aussichtsplatz Wangerooge",
+      "category": "aussicht",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.7936618,
+        "lng": 7.889993699999999
+      },
+      "query": "Aussichtsplatz Wangerooge, Wangerooge, Germany",
+      "osm": {
+        "lat": 53.792943,
+        "lng": 7.9002852,
+        "display_name": "wangeroogehaus.de, Zedeliusstraße, Wangerooge, Deutschland",
+        "class": "office",
+        "type": "property_management",
+        "provider": "photon"
+      },
+      "delta_m": 681,
+      "from_city_m": 734,
+      "status": "CHECK",
+      "flags": [
+        "house_like_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "wangerooge_obere_strandpromenade",
+      "name": "Obere Strandpromenade",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.79304633333334,
+        "lng": 7.9007006666666655
+      },
+      "query": "Obere Strandpromenade, Wangerooge, Germany",
+      "osm": {
+        "lat": 53.7931956,
+        "lng": 7.9023116,
+        "display_name": "Obere Strandpromenade, Wangerooge, Landkreis Friesland, Niedersachsen, 26486, Deutschland",
+        "class": "highway",
+        "type": "pedestrian",
+        "importance": 0.053383334859235486,
+        "osm_type": "way",
+        "osm_id": 1255727961,
+        "provider": "nominatim"
+      },
+      "delta_m": 107,
+      "from_city_m": 326,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "wangerooge_strandhotel_gerken",
+        "wangerooge_fischerstube",
+        "wangerooge_der_kuchenladen"
+      ]
+    },
+    {
+      "id": "wangerooge_hauptstrand",
+      "name": "Hauptstrand Wangerooge",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.793075041666675,
+        "lng": 7.899321499999999
+      },
+      "query": "Hauptstrand Wangerooge, Wangerooge, Germany",
+      "osm": {
+        "lat": 53.792943,
+        "lng": 7.9002852,
+        "display_name": "wangeroogehaus.de, Zedeliusstraße, Wangerooge, Deutschland",
+        "class": "office",
+        "type": "property_management",
+        "provider": "photon"
+      },
+      "delta_m": 65,
+      "from_city_m": 320,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "wangerooge_bistro_am_strand_wangerooge"
+      ]
+    },
+    {
+      "id": "wangerooge_westturm",
+      "name": "Neuer Westturm",
+      "category": "aussicht",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.78471003333333,
+        "lng": 7.857525133333334
+      },
+      "query": "Neuer Westturm, Wangerooge, Germany",
+      "osm": {
+        "lat": 53.7846792,
+        "lng": 7.8575318,
+        "display_name": "Westturm, Im Westen, Wangerooge, Deutschland",
+        "class": "building",
+        "type": "residential",
+        "provider": "photon"
+      },
+      "delta_m": 3,
+      "from_city_m": 2824,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "wangerooge_fahranleger_wangerooge",
+        "harlesiel_faehrhafen",
+        "wangerooge_dunenlandschaft_seelen_pfad"
+      ]
+    },
+    {
+      "id": "wangerooge_hartmannstand_gedenken",
+      "name": "Mahnmal Bunker Hartmannsstand",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.793377475,
+        "lng": 7.8930080249999985
+      },
+      "query": "Mahnmal Bunker Hartmannsstand, Wangerooge",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 554,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "wangerooge_modular_pumptrack_skateanlage"
+      ]
+    },
+    {
+      "id": "wangerooge_fundamente_alter_westturm",
+      "name": "Fundamente Alter Westturm (Ebbe)",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.7905675,
+        "lng": 7.85047313076923
+      },
+      "query": "Fundamente Alter Westturm, Wangerooge",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 3221,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "harlesiel_faehrhafen",
+      "name": "Fährhafen Harlesiel (Gepäck- & Logistik-Terminal)",
+      "category": "transport",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.78471,
+        "lng": 7.8575255
+      },
+      "query": "Fährhafen Harlesiel (Gepäck-, Wangerooge",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 2824,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "wangerooge_westturm",
+        "wangerooge_fahranleger_wangerooge",
+        "wangerooge_dunenlandschaft_seelen_pfad"
+      ]
+    },
+    {
+      "id": "wangerooge_dunenlandschaft_seelen_pfad",
+      "name": "Dünenlandschaft / Seelen-Pfad",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.78471,
+        "lng": 7.8575255
+      },
+      "query": "Dünenlandschaft / Seelen-Pfad, Wangerooge",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 2824,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "wangerooge_westturm",
+        "wangerooge_fahranleger_wangerooge",
+        "harlesiel_faehrhafen"
+      ]
+    },
+    {
+      "id": "wangerooge_db_bahnhof_wangerooge",
+      "name": "Inselbahnhof Wangerooge",
+      "category": "bahnhof",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.78788085714285,
+        "lng": 7.899347857142857
+      },
+      "query": "Inselbahnhof Wangerooge, Wangerooge, Germany",
+      "osm": {
+        "lat": 53.7879227,
+        "lng": 7.8989215,
+        "display_name": "Inselbahnhof, 6, Bahnhofstraße, Wangerooge, Landkreis Friesland, Niedersachsen, 26486, Deutschland",
+        "class": "building",
+        "type": "train_station",
+        "importance": 0.00005432745860985759,
+        "osm_type": "way",
+        "osm_id": 42701591,
+        "provider": "nominatim"
+      },
+      "delta_m": 28,
+      "from_city_m": 258,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "wangerooge_djh_bistro_westturm",
+      "name": "DJH-Bistro Westturm",
+      "category": "restaurant",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.7846094,
+        "lng": 7.858042200000001
+      },
+      "query": "DJH-Bistro Westturm, Wangerooge, Germany",
+      "osm": {
+        "lat": 53.784454,
+        "lng": 7.8577537,
+        "display_name": "DJH Bistro, Im Westen, Wangerooge, Deutschland",
+        "class": "amenity",
+        "type": "cafe",
+        "provider": "photon"
+      },
+      "delta_m": 26,
+      "from_city_m": 2793,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "wangerooge_nationalpark_haus_wangerooge",
+      "name": "Nationalpark-Haus „Rosenhaus“",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.79066499999999,
+        "lng": 7.901545666666667
+      },
+      "query": "Nationalpark-Haus „Rosenhaus“, Wangerooge, Germany",
+      "osm": {
+        "lat": 53.7906429,
+        "lng": 7.9015872,
+        "display_name": "Nationalpark-Haus Wangerooge (Rosenhaus), 18, Friedrich-August-Straße, Wangerooge, Landkreis Friesland, Niedersachsen, 26486, Deutschland",
+        "class": "building",
+        "type": "civic",
+        "importance": 0.00005000152590214416,
+        "osm_type": "way",
+        "osm_id": 42428558,
+        "provider": "nominatim"
+      },
+      "delta_m": 4,
+      "from_city_m": 144,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "wangerooge_haus_am_alten_leuchtturm",
+      "name": "Haus Am Alten Leuchtturm",
+      "category": "museum",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.78916011111111,
+        "lng": 7.897848888888889
+      },
+      "query": "Haus Am Alten Leuchtturm, Wangerooge, Germany",
+      "osm": {
+        "lat": 53.7891541,
+        "lng": 7.8977842,
+        "display_name": "Haus Am Alten Leuchtturm, Schulstraße, Wangerooge, Landkreis Friesland, Niedersachsen, 26486, Deutschland",
+        "class": "building",
+        "type": "apartments",
+        "importance": 0.00005000152590214416,
+        "osm_type": "way",
+        "osm_id": 139550388,
+        "provider": "nominatim"
+      },
+      "delta_m": 4,
+      "from_city_m": 159,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "wangerooge_cafe_pudding",
+      "name": "Café Pudding",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.793186789473694,
+        "lng": 7.900048842105264
+      },
+      "query": "Café Pudding, Wangerooge, Germany",
+      "osm": {
+        "lat": 53.7932014,
+        "lng": 7.9000568,
+        "display_name": "Cafe Pudding, 49, Zedeliusstraße, Wangerooge, Landkreis Friesland, Niedersachsen, 26486, Deutschland",
+        "class": "amenity",
+        "type": "restaurant",
+        "importance": 0.10540294855860563,
+        "osm_type": "way",
+        "osm_id": 29241362,
+        "provider": "nominatim"
+      },
+      "delta_m": 2,
+      "from_city_m": 334,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "wangerooge_neuer_leuchtturm_wangerooge",
+      "name": "Neuer Leuchtturm Wangerooge",
+      "category": "aussicht",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.79008866666667,
+        "lng": 7.8571670000000005
+      },
+      "query": "Neuer Leuchtturm Wangerooge, Wangerooge, Germany",
+      "osm": {
+        "lat": 53.7901049,
+        "lng": 7.8571617,
+        "display_name": "Neuer Leuchtturm, Straße zum Westen, Wangerooge, Landkreis Friesland, Niedersachsen, 26486, Deutschland",
+        "class": "man_made",
+        "type": "lighthouse",
+        "importance": 0.18157831638402872,
+        "osm_type": "way",
+        "osm_id": 165518794,
+        "provider": "nominatim"
+      },
+      "delta_m": 2,
+      "from_city_m": 2781,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "wangerooge_lazarettbunker_wangerooge",
+      "name": "Lazarettbunker Wangerooge",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.79184814285714,
+        "lng": 7.905950857142857
+      },
+      "query": "Lazarettbunker Wangerooge, Wangerooge, Germany",
+      "osm": {
+        "lat": 53.7918539,
+        "lng": 7.9059829,
+        "display_name": "Lazarettbunker, Jadestraße, Wangerooge, Landkreis Friesland, Niedersachsen, 26486, Deutschland",
+        "class": "military",
+        "type": "bunker",
+        "importance": 0.00005000152590214416,
+        "osm_type": "way",
+        "osm_id": 367808521,
+        "provider": "nominatim"
+      },
+      "delta_m": 2,
+      "from_city_m": 462,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "wangerooge_inselmuseum_alter_leuchtturm",
+      "name": "Alter Leuchtturm · Inselmuseum & Standesamt",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.78879533333333,
+        "lng": 7.899213111111111
+      },
+      "query": "Alter Leuchtturm · Inselmuseum, Wangerooge, Germany",
+      "osm": {
+        "lat": 53.7887971,
+        "lng": 7.8992234,
+        "display_name": "Inselmuseum \"Alter Leuchtturm\", 3, Zedeliusstraße, Wangerooge, Landkreis Friesland, Niedersachsen, 26486, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.1679799034751623,
+        "osm_type": "way",
+        "osm_id": 135321794,
+        "provider": "nominatim"
+      },
+      "delta_m": 1,
+      "from_city_m": 157,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    }
+  ]
+}

@@ -1,0 +1,2231 @@
+{
+  "generated_at": "2026-08-28T03:01:50.275Z",
+  "summary": {
+    "city_id": "berlin-umland",
+    "checked": 80,
+    "ok": 16,
+    "check": 35,
+    "bad": 29,
+    "errors": 0,
+    "max_delta_m": 180,
+    "city_halo_m": 28000,
+    "story_only": true
+  },
+  "rows": [
+    {
+      "id": "berlin_altstadt_kopenick",
+      "name": "Altstadt Köpenick",
+      "category": "altstadt",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.5383472142857,
+        "lng": 13.205404964285714
+      },
+      "query": "Altstadt Köpenick, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.4466938,
+        "lng": 13.5769665,
+        "display_name": "Altstadt Köpenick, Berlin, Deutschland",
+        "class": "place",
+        "type": "neighbourhood",
+        "provider": "photon"
+      },
+      "delta_m": 27142,
+      "from_city_m": 13655,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "berlin_berlin_treptower_park",
+        "berlin_aussichtsturm_am_vogelschutz_reservat",
+        "berlin_kleiner_aussichtsturm_altes_schachklubhaus",
+        "berlin_altstadt_spandau",
+        "berlin_aussichtspunkt_drachenberg",
+        "berlin_aussichtspunkt_am_koppchensee",
+        "berlin_drachenberg",
+        "berlin_berliner_panorama"
+      ]
+    },
+    {
+      "id": "berlin_berliner_mauerweg",
+      "name": "Berliner Mauerweg",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.4435317891892,
+        "lng": 13.573882605405407
+      },
+      "query": "Berliner Mauerweg, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.5825996,
+        "lng": 13.3616229,
+        "display_name": "Berliner Mauerweg, Berlin, Deutschland",
+        "class": "highway",
+        "type": "path",
+        "provider": "photon"
+      },
+      "delta_m": 21106,
+      "from_city_m": 14251,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "berlin_fahrradweg_am_mauerweg_und_kanal",
+        "berlin_botanischer_garten_und_botanisches_museum",
+        "berlin_unter_den_eichen_botanischer_garten",
+        "berlin_britzer_garten"
+      ]
+    },
+    {
+      "id": "berlin_berlin_treptower_park",
+      "name": "Berlin Treptower Park",
+      "category": "natur",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.53834845890411,
+        "lng": 13.205419147945204
+      },
+      "query": "Berlin Treptower Park, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.4884438,
+        "lng": 13.4703145,
+        "display_name": "Treptower Park, Berlin, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "provider": "photon"
+      },
+      "delta_m": 18765,
+      "from_city_m": 13654,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "berlin_aussichtsturm_am_vogelschutz_reservat",
+        "berlin_kleiner_aussichtsturm_altes_schachklubhaus",
+        "berlin_altstadt_spandau",
+        "berlin_altstadt_kopenick",
+        "berlin_aussichtspunkt_drachenberg",
+        "berlin_aussichtspunkt_am_koppchensee",
+        "berlin_drachenberg",
+        "berlin_berliner_panorama"
+      ]
+    },
+    {
+      "id": "berlin_uferweg",
+      "name": "Uferweg",
+      "category": "wanderung",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.4517562,
+        "lng": 13.5751048
+      },
+      "query": "Uferweg, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.4244405,
+        "lng": 13.306792,
+        "display_name": "Uferweg, Berlin, Deutschland",
+        "class": "highway",
+        "type": "track",
+        "provider": "photon"
+      },
+      "delta_m": 18440,
+      "from_city_m": 13793,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "berlin_botanischer_garten_und_botanisches_museum",
+      "name": "Botanischer Garten und Botanisches Museum",
+      "category": "natur",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.44355940000001,
+        "lng": 13.573899200000005
+      },
+      "query": "Botanischer Garten, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.4543967,
+        "lng": 13.3041225,
+        "display_name": "Botanischer Garten, Berlin, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "provider": "photon"
+      },
+      "delta_m": 18322,
+      "from_city_m": 14250,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "berlin_berliner_mauerweg",
+        "berlin_fahrradweg_am_mauerweg_und_kanal",
+        "berlin_unter_den_eichen_botanischer_garten",
+        "berlin_britzer_garten"
+      ]
+    },
+    {
+      "id": "berlin_unter_den_eichen_botanischer_garten",
+      "name": "Unter den Eichen/Botanischer Garten",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.44355940000001,
+        "lng": 13.573899200000005
+      },
+      "query": "Unter den Eichen/Botanischer Garten, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.4516802,
+        "lng": 13.3100458,
+        "display_name": "Unter den Eichen/Botanischer Garten, Unter den Eichen, Berlin, Deutschland",
+        "class": "highway",
+        "type": "platform",
+        "provider": "photon"
+      },
+      "delta_m": 17905,
+      "from_city_m": 14250,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "berlin_berliner_mauerweg",
+        "berlin_fahrradweg_am_mauerweg_und_kanal",
+        "berlin_botanischer_garten_und_botanisches_museum",
+        "berlin_britzer_garten"
+      ]
+    },
+    {
+      "id": "berlin_botanischer_garten",
+      "name": "Botanischer Garten",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.56414183333334,
+        "lng": 13.410919
+      },
+      "query": "Botanischer Garten, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.4543967,
+        "lng": 13.3041225,
+        "display_name": "Botanischer Garten, Berlin, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "provider": "photon"
+      },
+      "delta_m": 14183,
+      "from_city_m": 4925,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "berlin_garten_der_welt",
+        "berlin_tempelhofer_feld",
+        "berlin_olympiastadion_berlin"
+      ]
+    },
+    {
+      "id": "berlin_olympiastadion_berlin",
+      "name": "Olympiastadion Berlin",
+      "category": "sport",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.56414166666667,
+        "lng": 13.410919
+      },
+      "query": "Olympiastadion Berlin, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.5145846,
+        "lng": 13.2398144,
+        "display_name": "Olympiastadion Berlin, Olympischer Platz, Berlin, Deutschland",
+        "class": "leisure",
+        "type": "stadium",
+        "provider": "photon"
+      },
+      "delta_m": 12817,
+      "from_city_m": 4925,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "berlin_botanischer_garten",
+        "berlin_garten_der_welt",
+        "berlin_tempelhofer_feld"
+      ]
+    },
+    {
+      "id": "berlin_garten_der_welt",
+      "name": "Gärten der Welt",
+      "category": "natur",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.56414166666667,
+        "lng": 13.410919
+      },
+      "query": "Gärten der Welt, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.5372553,
+        "lng": 13.5749239,
+        "display_name": "Gärten der Welt, Gottfried-Funeck-Weg, Berlin, Deutschland",
+        "class": "tourism",
+        "type": "theme_park",
+        "provider": "photon"
+      },
+      "delta_m": 11485,
+      "from_city_m": 4925,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "berlin_botanischer_garten",
+        "berlin_tempelhofer_feld",
+        "berlin_olympiastadion_berlin"
+      ]
+    },
+    {
+      "id": "berlin_britzer_garten",
+      "name": "Britzer Garten",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.44355940000001,
+        "lng": 13.573899200000005
+      },
+      "query": "Britzer Garten, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.4337812,
+        "lng": 13.4172828,
+        "display_name": "Britzer Garten, Walnussweg, Berlin, Deutschland",
+        "class": "tourism",
+        "type": "theme_park",
+        "provider": "photon"
+      },
+      "delta_m": 10672,
+      "from_city_m": 14250,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "berlin_berliner_mauerweg",
+        "berlin_fahrradweg_am_mauerweg_und_kanal",
+        "berlin_botanischer_garten_und_botanisches_museum",
+        "berlin_unter_den_eichen_botanischer_garten"
+      ]
+    },
+    {
+      "id": "berlin_neukollner_oper_e_v",
+      "name": "Neuköllner Oper e.V.",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.47756832,
+        "lng": 13.439327259999999
+      },
+      "query": "Neuköllner Oper e.V., Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.5135366,
+        "lng": 13.2932009,
+        "display_name": "Open Source Ecology Germany e.V., Knobelsdorffstraße, Berlin, Deutschland",
+        "class": "office",
+        "type": "association",
+        "provider": "photon"
+      },
+      "delta_m": 10670,
+      "from_city_m": 5259,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "berlin_tempelhofer_feld",
+      "name": "Tempelhofer Feld",
+      "category": "natur",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.56414166666667,
+        "lng": 13.410919
+      },
+      "query": "Tempelhofer Feld, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.4744192,
+        "lng": 13.4026007,
+        "display_name": "Tempelhofer Feld, Berlin, Deutschland",
+        "class": "landuse",
+        "type": "recreation_ground",
+        "provider": "photon"
+      },
+      "delta_m": 9993,
+      "from_city_m": 4925,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "berlin_botanischer_garten",
+        "berlin_garten_der_welt",
+        "berlin_olympiastadion_berlin"
+      ]
+    },
+    {
+      "id": "berlin_paintball_shop_berlin_paintattack",
+      "name": "Paintball Shop Berlin - Paintattack",
+      "category": "freizeitpark",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.606574,
+        "lng": 13.324521857142857
+      },
+      "query": "Paintball Shop Berlin, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.5652032,
+        "lng": 13.4456346,
+        "display_name": "ID-Paintball Shop, Berlin, Deutschland",
+        "class": "landuse",
+        "type": "retail",
+        "provider": "photon"
+      },
+      "delta_m": 9387,
+      "from_city_m": 11057,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "berlin_giraffenpfad",
+      "name": "Giraffenpfad",
+      "category": "freizeitpark",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.50309164285714,
+        "lng": 13.533662428571429
+      },
+      "query": "Giraffenpfad, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.4506734,
+        "lng": 13.4258355,
+        "display_name": "BSR Umladestation, Gradestraße, Berlin, Deutschland",
+        "class": "amenity",
+        "type": "waste_transfer_station",
+        "provider": "photon"
+      },
+      "delta_m": 9344,
+      "from_city_m": 8908,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "berlin_panorama_bar",
+      "name": "Panorama Bar",
+      "category": "aussicht",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.47688236363637,
+        "lng": 13.328905909090908
+      },
+      "query": "Panorama Bar, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.5111669,
+        "lng": 13.4430356,
+        "display_name": "Berghain, Am Wriezener Bahnhof, Berlin, Deutschland",
+        "class": "amenity",
+        "type": "nightclub",
+        "provider": "photon"
+      },
+      "delta_m": 8616,
+      "from_city_m": 7037,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "berlin_drachenberg",
+      "name": "Drachenberg",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.5383472142857,
+        "lng": 13.205404964285714
+      },
+      "query": "Drachenberg, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.5023685,
+        "lng": 13.2482422,
+        "display_name": "Drachenberg, Teufelsseechaussee, Berlin, Deutschland",
+        "class": "tourism",
+        "type": "viewpoint",
+        "provider": "photon"
+      },
+      "delta_m": 4940,
+      "from_city_m": 13655,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "berlin_berlin_treptower_park",
+        "berlin_aussichtsturm_am_vogelschutz_reservat",
+        "berlin_kleiner_aussichtsturm_altes_schachklubhaus",
+        "berlin_altstadt_spandau",
+        "berlin_altstadt_kopenick",
+        "berlin_aussichtspunkt_drachenberg",
+        "berlin_aussichtspunkt_am_koppchensee",
+        "berlin_berliner_panorama"
+      ]
+    },
+    {
+      "id": "berlin_wanderweg_an_der_panke",
+      "name": "Wanderweg an der Panke",
+      "category": "wanderung",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.585598624999996,
+        "lng": 13.430563125
+      },
+      "query": "Wanderweg an der Panke, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.6148678,
+        "lng": 13.4578385,
+        "display_name": "An der Panke, Berlin, Deutschland",
+        "class": "highway",
+        "type": "footway",
+        "provider": "photon"
+      },
+      "delta_m": 3740,
+      "from_city_m": 7496,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "berlin_yachthafen_kopenick",
+      "name": "Yachthafen Köpenick",
+      "category": "hafen",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.445982400000005,
+        "lng": 13.585016200000002
+      },
+      "query": "Yachthafen Köpenick, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.4187861,
+        "lng": 13.5868255,
+        "display_name": "Yachthafen Wendenschloß - Historisches Fährhaus, Müggelbergallee, Berlin, Deutschland",
+        "class": "leisure",
+        "type": "marina",
+        "provider": "photon"
+      },
+      "delta_m": 3027,
+      "from_city_m": 14709,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "berlin_neukollner_wochenmarkte_rixdorf",
+      "name": "Neuköllner Wochenmärkte - Rixdorf",
+      "category": "markt",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.47332166666666,
+        "lng": 13.441196166666666
+      },
+      "query": "Neuköllner Wochenmärkte, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.4952407,
+        "lng": 13.422854,
+        "display_name": "Wochenmarkt am Maybachufer, Maybachufer, Berlin, Deutschland",
+        "class": "amenity",
+        "type": "marketplace",
+        "provider": "photon"
+      },
+      "delta_m": 2736,
+      "from_city_m": 5740,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "berlin_grunes_band_berlin_schonholz",
+      "name": "Grünes Band Berlin - Schönholz",
+      "category": "radweg",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.5787363,
+        "lng": 13.369399
+      },
+      "query": "Grünes Band Berlin, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.5998616,
+        "lng": 13.3717322,
+        "display_name": "Grünes Band Berlin, Berliner Mauerweg, Berlin, Deutschland",
+        "class": "information",
+        "type": "board",
+        "provider": "photon"
+      },
+      "delta_m": 2354,
+      "from_city_m": 6961,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "berlin_nordeingang_naturpark_schoneberger_sudgelande",
+      "name": "Nordeingang Naturpark Schöneberger Südgelände",
+      "category": "natur",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.4699497,
+        "lng": 13.3623023
+      },
+      "query": "Nordeingang Naturpark Schöneberger Südgelände, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.4639807,
+        "lng": 13.3595566,
+        "display_name": "Naturpark Schöneberger Südgelände, Berlin, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "provider": "photon"
+      },
+      "delta_m": 689,
+      "from_city_m": 6271,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "berlin_wuhletal_wanderweg",
+      "name": "Wuhletal-Wanderweg",
+      "category": "wanderung",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.52900750000001,
+        "lng": 13.5845404
+      },
+      "query": "Wuhletal-Wanderweg, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.5264403,
+        "lng": 13.5766649,
+        "display_name": "Wuhletal-Wanderweg, Cecilienstraße, Berlin, Deutschland",
+        "class": "information",
+        "type": "guidepost",
+        "provider": "photon"
+      },
+      "delta_m": 604,
+      "from_city_m": 12188,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "berlin_havelhohenweg",
+      "name": "Havelhöhenweg",
+      "category": "wanderung",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.46414910000001,
+        "lng": 13.1961301
+      },
+      "query": "Havelhöhenweg, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.4689774,
+        "lng": 13.1985489,
+        "display_name": "Havelhöhenweg, Berlin, Deutschland",
+        "class": "highway",
+        "type": "track",
+        "provider": "photon"
+      },
+      "delta_m": 561,
+      "from_city_m": 15445,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "berlin_gewachshauser_botanischer_garten_berlin",
+      "name": "Gewächshäuser Botanischer Garten Berlin",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.45651642307692,
+        "lng": 13.307340692307692
+      },
+      "query": "Gewächshäuser Botanischer Garten Berlin, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.4543967,
+        "lng": 13.3041225,
+        "display_name": "Botanischer Garten, Berlin, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "provider": "photon"
+      },
+      "delta_m": 321,
+      "from_city_m": 9672,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "berlin_kunsthalle_am_hamburger_platz",
+      "name": "KUNSTHALLE AM HAMBURGER PLATZ",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.5560570909091,
+        "lng": 13.439373636363634
+      },
+      "query": "KUNSTHALLE AM HAMBURGER PLATZ, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.5537819,
+        "lng": 13.4368597,
+        "display_name": "Schule am Hamburger Platz, Gustav-Adolf-Straße, Berlin, Deutschland",
+        "class": "amenity",
+        "type": "school",
+        "provider": "photon"
+      },
+      "delta_m": 305,
+      "from_city_m": 4635,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "berlin-umland_osm_transit_4200225209"
+      ]
+    },
+    {
+      "id": "berlin_wildtiergehege_im_botanischen_volkspark",
+      "name": "Wildtiergehege im Botanischen Volkspark",
+      "category": "natur",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.60709919999999,
+        "lng": 13.397649999999999
+      },
+      "query": "Wildtiergehege im Botanischen Volkspark, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.6058233,
+        "lng": 13.3936842,
+        "display_name": "Waldteich im Botanischen Volkspark, Berlin, Deutschland",
+        "class": "water",
+        "type": "pond",
+        "provider": "photon"
+      },
+      "delta_m": 303,
+      "from_city_m": 9698,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "berlin_barenschaufenster",
+      "name": "Bärenschaufenster",
+      "category": "freizeitpark",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.4982944,
+        "lng": 13.523689200000002
+      },
+      "query": "Bärenschaufenster, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.4974009,
+        "lng": 13.5197847,
+        "display_name": "Apotheke am Bärenschaufenster, Erich-Kurz-Straße, Berlin, Deutschland",
+        "class": "amenity",
+        "type": "pharmacy",
+        "provider": "photon"
+      },
+      "delta_m": 282,
+      "from_city_m": 8387,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "berlin_botanischer_volkspark_blankenfelde_pankow",
+      "name": "Botanischer Volkspark Blankenfelde-Pankow",
+      "category": "natur",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.604005571428566,
+        "lng": 13.39780614285714
+      },
+      "query": "Botanischer Volkspark Blankenfelde-Pankow, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.6053003,
+        "lng": 13.3954469,
+        "display_name": "Botanischer Volkspark Blankenfelde-Pankow, Berlin, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "provider": "photon"
+      },
+      "delta_m": 215,
+      "from_city_m": 9354,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "berlin_freizeitpark_lubars",
+      "name": "Freizeitpark Lübars",
+      "category": "freizeitpark",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.6123384,
+        "lng": 13.3688263
+      },
+      "query": "Freizeitpark Lübars, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.6107159,
+        "lng": 13.3693149,
+        "display_name": "Freizeitpark Lübars, Berlin, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "provider": "photon"
+      },
+      "delta_m": 183,
+      "from_city_m": 10555,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "berlin_berliner_panorama",
+      "name": "Berliner-Panorama",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.5383472142857,
+        "lng": 13.205404964285714
+      },
+      "query": "Berliner-Panorama, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.5208279,
+        "lng": 13.4094214,
+        "display_name": "Berliner Fernsehturm, Panoramastraße, Berlin, Deutschland",
+        "class": "building",
+        "type": "tower",
+        "provider": "photon"
+      },
+      "delta_m": 13938,
+      "from_city_m": 13655,
+      "status": "CHECK",
+      "flags": [
+        "house_like_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "berlin_berlin_treptower_park",
+        "berlin_aussichtsturm_am_vogelschutz_reservat",
+        "berlin_kleiner_aussichtsturm_altes_schachklubhaus",
+        "berlin_altstadt_spandau",
+        "berlin_altstadt_kopenick",
+        "berlin_aussichtspunkt_drachenberg",
+        "berlin_aussichtspunkt_am_koppchensee",
+        "berlin_drachenberg"
+      ]
+    },
+    {
+      "id": "berlin_marina_lanke_berlin_ag",
+      "name": "Marina Lanke Berlin AG",
+      "category": "hafen",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.50189128571429,
+        "lng": 13.185805428571427
+      },
+      "query": "Marina Lanke Berlin AG, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.5014259,
+        "lng": 13.1876751,
+        "display_name": "Marina Lanke, Scharfe Lanke, Berlin, Deutschland",
+        "class": "leisure",
+        "type": "marina",
+        "provider": "photon"
+      },
+      "delta_m": 137,
+      "from_city_m": 14970,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "berlin_tierpark_berlin",
+      "name": "Tierpark Berlin",
+      "category": "freizeit",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.502425,
+        "lng": 13.5315146
+      },
+      "query": "Tierpark Berlin, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.5015541,
+        "lng": 13.5312674,
+        "display_name": "Tierpark Berlin, Am Tierpark, Berlin, Deutschland",
+        "class": "tourism",
+        "type": "zoo",
+        "provider": "photon"
+      },
+      "delta_m": 98,
+      "from_city_m": 8782,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "berlin_schlossgarten_schonhausen",
+      "name": "Schlossgarten Schönhausen",
+      "category": "natur",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.578324416666675,
+        "lng": 13.405680250000001
+      },
+      "query": "Schlossgarten Schönhausen, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.5778997,
+        "lng": 13.4069519,
+        "display_name": "Schlosspark Niederschönhausen, Berlin, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "provider": "photon"
+      },
+      "delta_m": 98,
+      "from_city_m": 6486,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "berlin_schloss_schonhausen"
+      ]
+    },
+    {
+      "id": "berlin_tempelhofer_hafen_berlin",
+      "name": "Tempelhofer Hafen, Berlin",
+      "category": "hafen",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.455769809523815,
+        "lng": 13.385783000000004
+      },
+      "query": "Tempelhofer Hafen, Berlin, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.4549292,
+        "lng": 13.3861535,
+        "display_name": "Tempelhofer Hafen, Berlin, Deutschland",
+        "class": "natural",
+        "type": "water",
+        "provider": "photon"
+      },
+      "delta_m": 97,
+      "from_city_m": 7260,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "berlin_yachthafen_tempelhof",
+        "berlin-umland_osm_transit_471136930",
+        "berlin-umland_osm_transit_2959939718"
+      ]
+    },
+    {
+      "id": "berlin_himalaya_gebirgswelten",
+      "name": "Himalaya-Gebirgswelten",
+      "category": "freizeitpark",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.5077864,
+        "lng": 13.5329951
+      },
+      "query": "Himalaya-Gebirgswelten, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.5081789,
+        "lng": 13.5342423,
+        "display_name": "Himalaya-Gebirgswelt, Am Tierpark, Berlin, Deutschland",
+        "class": "tourism",
+        "type": "attraction",
+        "provider": "photon"
+      },
+      "delta_m": 95,
+      "from_city_m": 8767,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "berlin_altstadt_spandau",
+      "name": "Altstadt Spandau",
+      "category": "altstadt",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.53834839767442,
+        "lng": 13.205397976744184
+      },
+      "query": "Altstadt Spandau, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.5388381,
+        "lng": 13.2062573,
+        "display_name": "Altstadt Spandau, Havelstraße, Berlin, Deutschland",
+        "class": "railway",
+        "type": "station",
+        "provider": "photon"
+      },
+      "delta_m": 80,
+      "from_city_m": 13656,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "berlin_berlin_treptower_park",
+        "berlin_aussichtsturm_am_vogelschutz_reservat",
+        "berlin_kleiner_aussichtsturm_altes_schachklubhaus",
+        "berlin_altstadt_kopenick",
+        "berlin_aussichtspunkt_drachenberg",
+        "berlin_aussichtspunkt_am_koppchensee",
+        "berlin_drachenberg",
+        "berlin_berliner_panorama"
+      ]
+    },
+    {
+      "id": "berlin_freizeitpark_marienfelde",
+      "name": "Freizeitpark Marienfelde",
+      "category": "freizeitpark",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.4017436,
+        "lng": 13.3686715
+      },
+      "query": "Freizeitpark Marienfelde, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.4022928,
+        "lng": 13.3680823,
+        "display_name": "Freizeitpark Marienfelde, Berlin, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "provider": "photon"
+      },
+      "delta_m": 73,
+      "from_city_m": 13378,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "berlin_wochenmarkt_pankow",
+      "name": "Wochenmarkt Pankow",
+      "category": "markt",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.56968777777778,
+        "lng": 13.406293999999999
+      },
+      "query": "Wochenmarkt Pankow, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.5702236,
+        "lng": 13.4065799,
+        "display_name": "Wochenmarkt Pankow, Breite Straße, Berlin, Deutschland",
+        "class": "amenity",
+        "type": "marketplace",
+        "provider": "photon"
+      },
+      "delta_m": 63,
+      "from_city_m": 5526,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "berlin-umland_osm_transit_1685738604"
+      ]
+    },
+    {
+      "id": "berlin_wochenmarkt_die_dicke_linda",
+      "name": "Wochenmarkt DIE DICKE LINDA",
+      "category": "markt",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.46599166666667,
+        "lng": 13.438076666666667
+      },
+      "query": "Wochenmarkt DIE DICKE LINDA, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.4662082,
+        "lng": 13.4372321,
+        "display_name": "Regionalmarkt am Kranoldplatz, Kranoldplatz, Berlin, Deutschland",
+        "class": "amenity",
+        "type": "marketplace",
+        "provider": "photon"
+      },
+      "delta_m": 62,
+      "from_city_m": 6409,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "berlin_id_paintball_shop",
+      "name": "ID-Paintball Shop",
+      "category": "freizeitpark",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.565254888888894,
+        "lng": 13.44590788888889
+      },
+      "query": "ID-Paintball Shop, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.5652032,
+        "lng": 13.4456346,
+        "display_name": "ID-Paintball Shop, Berlin, Deutschland",
+        "class": "landuse",
+        "type": "retail",
+        "provider": "photon"
+      },
+      "delta_m": 19,
+      "from_city_m": 5742,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "berlin-umland_osm_transit_4200225263"
+      ]
+    },
+    {
+      "id": "berlin_grunewaldturm",
+      "name": "Grunewaldturm",
+      "category": "aussicht",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.478218500000004,
+        "lng": 13.196704125000002
+      },
+      "query": "Grunewaldturm, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.4781935,
+        "lng": 13.1967309,
+        "display_name": "Grunewaldturm, Havelchaussee, Berlin, Deutschland",
+        "class": "man_made",
+        "type": "tower",
+        "provider": "photon"
+      },
+      "delta_m": 3,
+      "from_city_m": 14846,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "berlin-umland_osm_transit_2122487249"
+      ]
+    },
+    {
+      "id": "berlin_schloss_schonhausen",
+      "name": "Schloss Schönhausen",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.578324416666675,
+        "lng": 13.405680250000001
+      },
+      "query": "Schloss Schönhausen, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.5783469,
+        "lng": 13.4056942,
+        "display_name": "Schloss Schönhausen, Tschaikowskistraße, Berlin, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 3,
+      "from_city_m": 6486,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "berlin_schlossgarten_schonhausen"
+      ]
+    },
+    {
+      "id": "berlin_wolkenhain_auf_dem_kienberg",
+      "name": "Wolkenhain auf dem Kienberg",
+      "category": "aussicht",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.53482399999999,
+        "lng": 13.580990722222225
+      },
+      "query": "Wolkenhain auf dem, Berlin Umland, Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 12019,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "berlin_aussichtsturm_am_vogelschutz_reservat",
+      "name": "Aussichtsturm am Vogelschutz-Reservat",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.5383472142857,
+        "lng": 13.205404964285714
+      },
+      "query": "Aussichtsturm am Vogelschutz-Reservat, Berlin Umland",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 13655,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "berlin_berlin_treptower_park",
+        "berlin_kleiner_aussichtsturm_altes_schachklubhaus",
+        "berlin_altstadt_spandau",
+        "berlin_altstadt_kopenick",
+        "berlin_aussichtspunkt_drachenberg",
+        "berlin_aussichtspunkt_am_koppchensee",
+        "berlin_drachenberg",
+        "berlin_berliner_panorama"
+      ]
+    },
+    {
+      "id": "berlin_kleiner_aussichtsturm_altes_schachklubhaus",
+      "name": "Kleiner Aussichtsturm \"Altes Schachklubhaus\"",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.5383472142857,
+        "lng": 13.205404964285714
+      },
+      "query": "Kleiner Aussichtsturm \"Altes, Berlin Umland, Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 13655,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "berlin_berlin_treptower_park",
+        "berlin_aussichtsturm_am_vogelschutz_reservat",
+        "berlin_altstadt_spandau",
+        "berlin_altstadt_kopenick",
+        "berlin_aussichtspunkt_drachenberg",
+        "berlin_aussichtspunkt_am_koppchensee",
+        "berlin_drachenberg",
+        "berlin_berliner_panorama"
+      ]
+    },
+    {
+      "id": "berlin_stadt_sportplatz_freizeitsportanlage",
+      "name": "Städt. Sportplatz Freizeitsportanlage",
+      "category": "freizeit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.51828464705883,
+        "lng": 13.192282941176469
+      },
+      "query": "Städt. Sportplatz Freizeitsportanlage, Berlin Umland",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 14394,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "berlin_alter_dorfkern_marzahn",
+      "name": "alter Dorfkern Marzahn",
+      "category": "altstadt",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.543142,
+        "lng": 13.561038
+      },
+      "query": "alter Dorfkern Marzahn, Berlin Umland",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 10864,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "berlin_aussichtspunkt_drachenberg",
+      "name": "Aussichtspunkt Drachenberg",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.5383472142857,
+        "lng": 13.205404964285714
+      },
+      "query": "Aussichtspunkt Drachenberg, Berlin Umland",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 13655,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "berlin_berlin_treptower_park",
+        "berlin_aussichtsturm_am_vogelschutz_reservat",
+        "berlin_kleiner_aussichtsturm_altes_schachklubhaus",
+        "berlin_altstadt_spandau",
+        "berlin_altstadt_kopenick",
+        "berlin_aussichtspunkt_am_koppchensee",
+        "berlin_drachenberg",
+        "berlin_berliner_panorama"
+      ]
+    },
+    {
+      "id": "berlin_aussichtspunkt_am_koppchensee",
+      "name": "Aussichtspunkt am Köppchensee",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.5383472142857,
+        "lng": 13.205404964285714
+      },
+      "query": "Aussichtspunkt am Köppchensee, Berlin Umland",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 13655,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "berlin_berlin_treptower_park",
+        "berlin_aussichtsturm_am_vogelschutz_reservat",
+        "berlin_kleiner_aussichtsturm_altes_schachklubhaus",
+        "berlin_altstadt_spandau",
+        "berlin_altstadt_kopenick",
+        "berlin_aussichtspunkt_drachenberg",
+        "berlin_drachenberg",
+        "berlin_berliner_panorama"
+      ]
+    },
+    {
+      "id": "berlin_rundwanderweg_eichwerder_moorwiesen",
+      "name": "Rundwanderweg Eichwerder Moorwiesen",
+      "category": "wanderung",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.6255996,
+        "lng": 13.3674844
+      },
+      "query": "Rundwanderweg Eichwerder Moorwiesen, Berlin Umland",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 12013,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "berlin_eichwerder_moorwiesen",
+      "name": "Eichwerder Moorwiesen",
+      "category": "wanderung",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.6270445,
+        "lng": 13.3377671
+      },
+      "query": "Eichwerder Moorwiesen, Berlin Umland",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 12740,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "berlin_wanderweg_entlang_der_neuen_wuhle",
+      "name": "Wanderweg entlang der Neuen Wuhle",
+      "category": "wanderung",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.5657645,
+        "lng": 13.5522493
+      },
+      "query": "Wanderweg entlang der, Berlin Umland, Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 11183,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "berlin_waldlehrpfad_hermsdorf",
+      "name": "Waldlehrpfad Hermsdorf",
+      "category": "wanderung",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.6097587,
+        "lng": 13.2818823
+      },
+      "query": "Waldlehrpfad Hermsdorf, Berlin Umland",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 12995,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "berlin_gb_infravelo_gmbh",
+      "name": "GB infraVelo GmbH",
+      "category": "radweg",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.453420000000015,
+        "lng": 13.385410021276597
+      },
+      "query": "GB infraVelo GmbH, Berlin Umland",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 7521,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "berlin_mauerradweg_rapsfelder_berlin_schonefeld",
+      "name": "Mauerradweg Rapsfelder Berlin Schönefeld",
+      "category": "radweg",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.4086058,
+        "lng": 13.4730105
+      },
+      "query": "Mauerradweg Rapsfelder Berlin, Berlin Umland, Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 13216,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "berlin_fahrradweg_am_mauerweg_und_kanal",
+      "name": "Fahrradweg am Mauerweg und Kanal",
+      "category": "radweg",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.44355940000001,
+        "lng": 13.573899200000005
+      },
+      "query": "Fahrradweg am Mauerweg, Berlin Umland",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 14250,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "berlin_berliner_mauerweg",
+        "berlin_botanischer_garten_und_botanisches_museum",
+        "berlin_unter_den_eichen_botanischer_garten",
+        "berlin_britzer_garten"
+      ]
+    },
+    {
+      "id": "berlin_mittelmeerhaus_im_botanischen_garten",
+      "name": "Mittelmeerhaus im Botanischen Garten",
+      "category": "natur",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.45550490000001,
+        "lng": 13.3077626
+      },
+      "query": "Mittelmeerhaus im Botanischen, Berlin Umland, Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 9735,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "berlin_arzneipflanzengarten_im_botanischen_garten",
+      "name": "Arzneipflanzengarten im Botanischen Garten",
+      "category": "natur",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.4557452,
+        "lng": 13.301736400000001
+      },
+      "query": "Arzneipflanzengarten im Botanischen, Berlin Umland, Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 9997,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "berlin_yachthafen_tempelhof",
+      "name": "Yachthafen Tempelhof",
+      "category": "hafen",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.455769809523815,
+        "lng": 13.385783000000004
+      },
+      "query": "Yachthafen Tempelhof, Berlin Umland",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 7260,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "berlin_tempelhofer_hafen_berlin",
+        "berlin-umland_osm_transit_471136930",
+        "berlin-umland_osm_transit_2959939718"
+      ]
+    },
+    {
+      "id": "berlin_marina_base_hafen",
+      "name": "Marina Base Hafen",
+      "category": "hafen",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.50801668,
+        "lng": 13.198304560000002
+      },
+      "query": "Marina Base Hafen, Berlin Umland",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 14050,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "berlin_otteranlage_tierpark_berlin",
+      "name": "Otteranlage, Tierpark Berlin",
+      "category": "freizeitpark",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.5055388,
+        "lng": 13.529618599999997
+      },
+      "query": "Otteranlage, Tierpark Berlin, Berlin Umland",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 8585,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "berlin_vari_wald",
+      "name": "Vari-Wald",
+      "category": "freizeitpark",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.5031085,
+        "lng": 13.531677666666667
+      },
+      "query": "Vari-Wald, Berlin Umland",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 8776,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "berlin_bootsverleih_waterlounge_berlin",
+      "name": "Bootsverleih Waterlounge-Berlin",
+      "category": "tour",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.439473888888884,
+        "lng": 13.578060777777775
+      },
+      "query": "Bootsverleih Waterlounge-Berlin, Berlin Umland",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 14749,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "berlin_lemkes_ladchen_werksverkauf",
+      "name": "Lemkes Lädchen- Werksverkauf",
+      "category": "souvenir",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.4511695,
+        "lng": 13.459085312500001
+      },
+      "query": "Lemkes Lädchen- Werksverkauf, Berlin Umland",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 8485,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "berlin_schloss_kopenick",
+      "name": "Schloss Köpenick",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.44355962000001,
+        "lng": 13.57323034
+      },
+      "query": "Schloss Köpenick, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.4438598,
+        "lng": 13.5727293,
+        "display_name": "Schloss Köpenick, Schlosshof, Berlin, Deutschland",
+        "class": "building",
+        "type": "yes",
+        "provider": "photon"
+      },
+      "delta_m": 48,
+      "from_city_m": 14214,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "berlin_karl_foerster_garten_im_tierpark",
+      "name": "Karl Foerster Garten im Tierpark",
+      "category": "natur",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.50596299999999,
+        "lng": 13.5256582
+      },
+      "query": "Karl Foerster Garten, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.5057795,
+        "lng": 13.5262195,
+        "display_name": "Karl-Förster-Garten, Berlin, Deutschland",
+        "class": "leisure",
+        "type": "garden",
+        "provider": "photon"
+      },
+      "delta_m": 43,
+      "from_city_m": 8313,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "berlin_behnitz_kolk_alteste_siedlungsgebiet_innerhalb_der_altstadt_spandau",
+      "name": "Behnitz / Kolk älteste Siedlungsgebiet innerhalb der Altstadt Spandau",
+      "category": "altstadt",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.539418624999996,
+        "lng": 13.20756125
+      },
+      "query": "Behnitz / Kolk, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.5391394,
+        "lng": 13.2079072,
+        "display_name": "St. Marien am Behnitz, Behnitz, Berlin, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 39,
+      "from_city_m": 13529,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "berlin_natur_park_sudgelande",
+      "name": "Natur Park Südgelände",
+      "category": "natur",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.4591684,
+        "lng": 13.3569088
+      },
+      "query": "Natur Park Südgelände, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.459052,
+        "lng": 13.3564641,
+        "display_name": "Natur-Park Schöneberger Südgelände, Tälchenweg, Berlin, Deutschland",
+        "class": "information",
+        "type": "board",
+        "provider": "photon"
+      },
+      "delta_m": 33,
+      "from_city_m": 7507,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "berlin_steglitzer_hafen",
+      "name": "Steglitzer Hafen",
+      "category": "hafen",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.4429015,
+        "lng": 13.326737
+      },
+      "query": "Steglitzer Hafen, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.4431015,
+        "lng": 13.3270073,
+        "display_name": "Hafen Steglitz, Berlin, Deutschland",
+        "class": "water",
+        "type": "harbour",
+        "provider": "photon"
+      },
+      "delta_m": 29,
+      "from_city_m": 10079,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "berlin_citygolf_berlin",
+      "name": "Citygolf Berlin",
+      "category": "freizeit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.5630336,
+        "lng": 13.5693176
+      },
+      "query": "Citygolf Berlin, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.5628429,
+        "lng": 13.5691041,
+        "display_name": "Citygolf Berlin, Wittenberger Straße, Berlin, Deutschland",
+        "class": "leisure",
+        "type": "miniature_golf",
+        "provider": "photon"
+      },
+      "delta_m": 26,
+      "from_city_m": 12099,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "berlin_kickerworld_berlin_spandau",
+      "name": "Kickerworld Berlin Spandau",
+      "category": "freizeitpark",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.548929166666674,
+        "lng": 13.226431499999999
+      },
+      "query": "Kickerworld Berlin Spandau, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.548925,
+        "lng": 13.2268076,
+        "display_name": "Kickerworld Berlin, Kleine Eiswerderstraße, Berlin, Deutschland",
+        "class": "leisure",
+        "type": "sports_centre",
+        "provider": "photon"
+      },
+      "delta_m": 25,
+      "from_city_m": 12499,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "berlin_3d_schwarzlicht_minigolf_berlin",
+      "name": "3D Schwarzlicht-Minigolf Berlin",
+      "category": "freizeit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.455344125,
+        "lng": 13.388029125
+      },
+      "query": "3D Schwarzlicht-Minigolf Berlin, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.4552548,
+        "lng": 13.3879711,
+        "display_name": "3D-Minigolf, Lorenzweg, Berlin, Deutschland",
+        "class": "leisure",
+        "type": "miniature_golf",
+        "provider": "photon"
+      },
+      "delta_m": 11,
+      "from_city_m": 7281,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "berlin_als_bootsverleih",
+      "name": "ALS Bootsverleih",
+      "category": "tour",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.4535524,
+        "lng": 13.567475400000001
+      },
+      "query": "ALS Bootsverleih, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.4535257,
+        "lng": 13.5676115,
+        "display_name": "ALS Bootsverleih, Lindenstraße, Berlin, Deutschland",
+        "class": "amenity",
+        "type": "boat_rental",
+        "provider": "photon"
+      },
+      "delta_m": 10,
+      "from_city_m": 13252,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "berlin_jagdschloss_grunewald",
+      "name": "Jagdschloss Grunewald",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.46735221052631,
+        "lng": 13.261376157894736
+      },
+      "query": "Jagdschloss Grunewald, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.4673699,
+        "lng": 13.2615082,
+        "display_name": "Jagdschloss Grunewald, Hüttenweg, Berlin, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 9,
+      "from_city_m": 11350,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "berlin_ehrenpfortenberg",
+      "name": "Ehrenpfortenberg",
+      "category": "wanderung",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.61400459999999,
+        "lng": 13.2713627
+      },
+      "query": "Ehrenpfortenberg, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.6139479,
+        "lng": 13.2714126,
+        "display_name": "Ehrenpfortenberg, Berlin, Deutschland",
+        "class": "natural",
+        "type": "peak",
+        "provider": "photon"
+      },
+      "delta_m": 7,
+      "from_city_m": 13815,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "berlin_parkplatz_1_am_tierpark",
+      "name": "Parkplatz 1 am Tierpark",
+      "category": "freizeitpark",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.50335459999999,
+        "lng": 13.5216265
+      },
+      "query": "Parkplatz 1 am Tierpark, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.5033449,
+        "lng": 13.5217268,
+        "display_name": "Parkplatz P1 Tierpark Eingang Schloß, Am Tierpark, Berlin, Deutschland",
+        "class": "amenity",
+        "type": "parking",
+        "provider": "photon"
+      },
+      "delta_m": 7,
+      "from_city_m": 8107,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "berlin_evangelische_freikirche_leuchtturm",
+      "name": "Evangelische Freikirche Leuchtturm",
+      "category": "aussicht",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.504718499999996,
+        "lng": 13.581778375000003
+      },
+      "query": "Evangelische Freikirche Leuchtturm, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.5047514,
+        "lng": 13.5818309,
+        "display_name": "Evangelische Freikirche Leuchtturm, Alt-Kaulsdorf, Berlin, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 5,
+      "from_city_m": 12083,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "berlin_alfred_brehm_haus",
+      "name": "Alfred-Brehm-Haus",
+      "category": "freizeitpark",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.4996587475728,
+        "lng": 13.534352611650482
+      },
+      "query": "Alfred-Brehm-Haus, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.4996623,
+        "lng": 13.5344065,
+        "display_name": "Alfred-Brehm-Haus, Richard-Kolkwitz-Weg, Berlin, Deutschland",
+        "class": "building",
+        "type": "yes",
+        "provider": "photon"
+      },
+      "delta_m": 4,
+      "from_city_m": 9042,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "berlin_japanischer_garten",
+      "name": "Japanischer Garten",
+      "category": "natur",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.53853616666666,
+        "lng": 13.580306499999999
+      },
+      "query": "Japanischer Garten, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.5385323,
+        "lng": 13.5802573,
+        "display_name": "Japanischer Garten des zusammenfließenden Wassers, Berlin, Deutschland",
+        "class": "leisure",
+        "type": "garden",
+        "provider": "photon"
+      },
+      "delta_m": 3,
+      "from_city_m": 12037,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "berlin_christlicher_garten",
+      "name": "Christlicher Garten",
+      "category": "natur",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.5369044,
+        "lng": 13.5779133
+      },
+      "query": "Christlicher Garten, Berlin Umland, Germany",
+      "osm": {
+        "lat": 52.5369137,
+        "lng": 13.5779014,
+        "display_name": "Christlicher Garten, Berlin, Deutschland",
+        "class": "leisure",
+        "type": "garden",
+        "provider": "photon"
+      },
+      "delta_m": 1,
+      "from_city_m": 11847,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    }
+  ]
+}

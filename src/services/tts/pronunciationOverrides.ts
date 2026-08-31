@@ -209,6 +209,7 @@ export const PRONUNCIATION_OVERRIDES: Record<string, string> = {
   frankfurt: 'ˈfʁaŋkfʊʁt',
   wien: 'viːn',
   salzburg: 'ˈzaltsbʊʁk',
+  yorro: 'ˈjɔʁo',
   findus: 'fˈɪndʊs',
   finnus: 'fˈɪnʊs',
   begleiter: 'bəˈɡlaɪtɐ',

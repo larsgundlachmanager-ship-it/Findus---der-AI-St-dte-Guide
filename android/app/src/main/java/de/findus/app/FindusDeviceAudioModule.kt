@@ -122,4 +122,40 @@ class FindusDeviceAudioModule(
       promise.reject("TORCH", e.message, e)
     }
   }
+
+  @ReactMethod
+  fun adjustMediaVolume(direction: String, promise: Promise) {
+    try {
+      val am = audioManager()
+      when (direction.lowercase()) {
+        "max" -> {
+          am.setStreamVolume(
+            AudioManager.STREAM_MUSIC,
+            am.getStreamMaxVolume(AudioManager.STREAM_MUSIC),
+            AudioManager.FLAG_SHOW_UI,
+          )
+        }
+        "min" -> {
+          am.setStreamVolume(AudioManager.STREAM_MUSIC, 0, AudioManager.FLAG_SHOW_UI)
+        }
+        "down" -> {
+          am.adjustStreamVolume(
+            AudioManager.STREAM_MUSIC,
+            AudioManager.ADJUST_LOWER,
+            AudioManager.FLAG_SHOW_UI,
+          )
+        }
+        else -> {
+          am.adjustStreamVolume(
+            AudioManager.STREAM_MUSIC,
+            AudioManager.ADJUST_RAISE,
+            AudioManager.FLAG_SHOW_UI,
+          )
+        }
+      }
+      promise.resolve(true)
+    } catch (e: Exception) {
+      promise.reject("VOLUME", e.message, e)
+    }
+  }
 }

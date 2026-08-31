@@ -335,8 +335,19 @@ async function processCity(cityId, radiusM) {
   const minStory = suggestedMinStory(pack);
   console.log(`[classify] ${cityId} radius=${radius}m minStory≈${minStory}`);
   const recl = reclassifyExisting(pack);
-  const disc = await discoverStoryCategories(pack, radius);
   refreshIndex(pack);
+  const skipDiscover =
+    hasFlag('skip-discover') ||
+    (!hasFlag('force-discover') && (pack._pack_index?.story || 0) >= minStory);
+  let disc = { added: 0, near: 0 };
+  if (skipDiscover) {
+    console.log(
+      `[classify] skip Places discovery (story=${pack._pack_index.story} ≥ ${minStory}; --force-discover zum Erzwingen)`,
+    );
+  } else {
+    disc = await discoverStoryCategories(pack, radius);
+    refreshIndex(pack);
+  }
   const gate = runQualityGate(pack, { strict: false });
   if (pack._pack_index.story < minStory) {
     console.warn(

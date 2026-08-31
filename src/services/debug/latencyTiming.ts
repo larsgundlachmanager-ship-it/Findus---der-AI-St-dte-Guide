@@ -95,9 +95,11 @@ export function latencyMark(
           : mark === 'research'
             ? 'researchMs'
             : 'ttsMs final_audio';
-  console.log(
-    `[latency] +${delta}ms ${label}${detail ? ` · ${detail}` : ''} id=${active.id}`,
-  );
+  if (__DEV__) {
+    console.log(
+      `[latency] +${delta}ms ${label}${detail ? ` · ${detail}` : ''} id=${active.id}`,
+    );
+  }
 
   if (mark === 'tts') {
     latencyFlushSummary();
@@ -120,7 +122,8 @@ export function latencyFlushSummary(): void {
   const ttsMs = row('tts');
   const total = ttsMs ?? Math.round(now() - t0);
 
-  console.log(
+  if (__DEV__) {
+    console.log(
     '[latency] SUMMARY',
     JSON.stringify({
       id: turn.id,
@@ -148,7 +151,8 @@ export function latencyFlushSummary(): void {
         ack_to_tts: ack != null && ttsMs != null ? ttsMs - ack : null,
       },
     }),
-  );
+    );
+  }
 
   // Production-fähig: Breadcrumb an Sentry (wenn DSN gesetzt)
   try {

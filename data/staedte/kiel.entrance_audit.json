@@ -1,0 +1,554 @@
+{
+  "city_id": "kiel",
+  "apply": true,
+  "storyOnly": true,
+  "maxDelta": 80,
+  "country": "Germany",
+  "summary": {
+    "ok": 11,
+    "check": 6,
+    "bad": 3,
+    "errors": 0,
+    "applied": 7,
+    "skipped_directory": 367,
+    "skipped_cached_google": 21
+  },
+  "rows": [
+    {
+      "id": "kiel_kiel_hauptbahnhof",
+      "name": "Kiel Hauptbahnhof",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 54.315364951351356,
+        "lng": 10.132080005405406
+      }
+    },
+    {
+      "id": "kiel_seegarten",
+      "name": "Seegarten",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 54.32375813076924,
+        "lng": 10.142931446153844
+      }
+    },
+    {
+      "id": "kiel_kreuzfahrtterminal_ostseekai",
+      "name": "Kreuzfahrtterminal Ostseekai",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 54.325143044444445,
+        "lng": 10.14567825
+      }
+    },
+    {
+      "id": "kiel_kiel_norwegenkai",
+      "name": "Kiel (Norwegenkai)",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 54.3160177923077,
+        "lng": 10.13898146923077
+      }
+    },
+    {
+      "id": "kiel_zoologisches_museum_kiel",
+      "name": "Zoologisches Museum Kiel",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 54.32825466666666,
+        "lng": 10.144216933333333
+      }
+    },
+    {
+      "id": "kiel_kieler_schifffahrtsmuseum_fischhalle",
+      "name": "Kieler Schifffahrtsmuseum Fischhalle",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 54.32276023125,
+        "lng": 10.14363145625
+      }
+    },
+    {
+      "id": "kiel_stadtmuseum_warleberger_hof",
+      "name": "Stadtmuseum Warleberger Hof",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 54.324417371428574,
+        "lng": 10.141115271428573
+      }
+    },
+    {
+      "id": "kiel_aquarium_geomar",
+      "name": "Aquarium GEOMAR",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 54.33000072413794,
+        "lng": 10.148428382758619
+      }
+    },
+    {
+      "id": "kiel_schrevenpark",
+      "name": "Schrevenpark",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 54.32819844489796,
+        "lng": 10.123626924489797
+      }
+    },
+    {
+      "id": "kiel_fordeblick_park_an_der_kiellinie_b1",
+      "name": "Fördeblick Park an der Kiellinie B1",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 54.33085926666667,
+        "lng": 10.150391916666667
+      }
+    },
+    {
+      "id": "kiel_forstbaumschule",
+      "name": "Forstbaumschule",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 54.34666437837835,
+        "lng": 10.142421541891888
+      }
+    },
+    {
+      "id": "kiel_leuchtturm_kiel_holtenau",
+      "name": "Leuchtturm Kiel-Holtenau",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 54.36923806666666,
+        "lng": 10.153934549999997
+      }
+    },
+    {
+      "id": "kiel_rathausturm_kiel",
+      "name": "Rathausturm Kiel",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 54.32244247999999,
+        "lng": 10.1324083
+      }
+    },
+    {
+      "id": "kiel_opernhaus_kiel_theater_kiel",
+      "name": "Opernhaus Kiel (Theater Kiel)",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 54.323080534999995,
+        "lng": 10.133232135
+      }
+    },
+    {
+      "id": "kiel_nord_ostsee_kanal",
+      "name": "Nord-Ostsee-Kanal",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 54.3701186,
+        "lng": 10.114140800000001
+      }
+    },
+    {
+      "id": "kiel_kieler_forde",
+      "name": "Kieler Förde",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 54.37305975742572,
+        "lng": 10.17767040052418
+      }
+    },
+    {
+      "id": "kiel_alter_botanischer_garten",
+      "name": "Alter Botanischer Garten",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 54.33040708709677,
+        "lng": 10.146904077419356
+      }
+    },
+    {
+      "id": "kiel_kunsthalle_zu_kiel",
+      "name": "Kunsthalle zu Kiel",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 54.32854987199998,
+        "lng": 10.14599912
+      }
+    },
+    {
+      "id": "kiel_alter_markt",
+      "name": "Alter Markt",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 54.323134374999995,
+        "lng": 10.139140274999999
+      }
+    },
+    {
+      "id": "kiel_theater_kiel_schauspielhaus",
+      "name": "Theater Kiel | Schauspielhaus",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 54.336964058333336,
+        "lng": 10.132924375000002
+      }
+    },
+    {
+      "id": "kiel_museumshafen_kiel_e_v",
+      "name": "Museumshafen Kiel e.V.",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 54.31473646190476,
+        "lng": 10.13811697142857
+      }
+    },
+    {
+      "id": "kiel_nikolaikirche",
+      "name": "Nikolaikirche",
+      "before": {
+        "lat": 54.32280236,
+        "lng": 10.140262131999998
+      },
+      "google": {
+        "lat": 54.3228588,
+        "lng": 10.1400281,
+        "place_id": "ChIJKZxyVLRFskcRG9KNodKTOQQ",
+        "address": "Alter Markt, 24103 Kiel, Germany"
+      },
+      "delta_m": 16,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "kiel_stadt_und_schifffahrtsmuseum",
+      "name": "Stadt- und Schifffahrtsmuseum",
+      "before": {
+        "lat": 54.32427531999999,
+        "lng": 10.140764299999999
+      },
+      "google": {
+        "lat": 54.3228514,
+        "lng": 10.1436817,
+        "place_id": "ChIJLSWm_lxWskcR1OQ-bGRC0c4",
+        "address": "Wall 65, 24103 Kiel, Germany"
+      },
+      "delta_m": 247,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "kiel_holstenstrasse",
+      "name": "Holstenstraße",
+      "before": {
+        "lat": 54.32074759333334,
+        "lng": 10.135373706666666
+      },
+      "google": {
+        "lat": 54.3211562,
+        "lng": 10.1351683,
+        "place_id": "ChIJhYOXCl5WskcR9bQemb85U6Q",
+        "address": "Holstenstraße, 24103 Kiel, Germany"
+      },
+      "delta_m": 47,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "kiel_bootshafen",
+      "name": "Bootshafen",
+      "before": {
+        "lat": 54.32129375714285,
+        "lng": 10.138620428571427
+      },
+      "google": {
+        "lat": 54.321319499999994,
+        "lng": 10.1386736,
+        "place_id": "ChIJT3oRMlxWskcRrLsk3tfmAuQ",
+        "address": "Bootshafen, 24103 Kiel, Germany"
+      },
+      "delta_m": 4,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "kiel_schwedenkai",
+      "name": "Schwedenkai",
+      "before": {
+        "lat": 54.31886835428571,
+        "lng": 10.138209201428573
+      },
+      "google": {
+        "lat": 54.3191284,
+        "lng": 10.137544,
+        "place_id": "ChIJ20wh9F5WskcR_HhuBQp7sDc",
+        "address": "Schwedenkai, 24103 Kiel, Germany"
+      },
+      "delta_m": 52,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "kiel_wunderino_arena",
+      "name": "Wunderino Arena",
+      "before": {
+        "lat": 54.320563594117644,
+        "lng": 10.130649208823533
+      },
+      "google": {
+        "lat": 54.3208141,
+        "lng": 10.131212399999999,
+        "place_id": "ChIJf2mMzWBWskcRjV-WNAI31YA",
+        "address": "Europapl. 1, 24103 Kiel, Germany"
+      },
+      "delta_m": 46,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "kiel_schleusen_holtenau",
+      "name": "Schleusen Holtenau",
+      "before": {
+        "lat": 54.36674564000001,
+        "lng": 10.13998506
+      },
+      "google": {
+        "lat": 54.366939599999995,
+        "lng": 10.1410606,
+        "place_id": "ChIJN5Vautv5skcRoLt9HpaaVSI",
+        "address": "24159 Kiel-Holtenau, Germany"
+      },
+      "delta_m": 73,
+      "status": "CHECK",
+      "streetview": "ZERO_RESULTS",
+      "applied": true
+    },
+    {
+      "id": "kiel_schlossgarten",
+      "name": "Schlossgarten",
+      "before": {
+        "lat": 54.326339435294116,
+        "lng": 10.142660129411766
+      },
+      "google": {
+        "lat": 54.3264902,
+        "lng": 10.1436972,
+        "place_id": "ChIJYX4WWkNWskcRYjlUI6ozjYs",
+        "address": "Schloßgarten, Kiel, Germany"
+      },
+      "delta_m": 69,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "kiel_hornbrucke",
+      "name": "Hörnbrücke",
+      "before": {
+        "lat": 54.31507192,
+        "lng": 10.1351342
+      },
+      "google": {
+        "lat": 54.315045899999994,
+        "lng": 10.1352163,
+        "place_id": "ChIJt38VgvVWskcRM-qIMZSOqRI",
+        "address": "Hörnbrücke, Kiel, Germany"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "kiel_strand_falckenstein",
+      "name": "Strand Falckenstein",
+      "before": {
+        "lat": 54.40560644,
+        "lng": 10.189154400000001
+      },
+      "google": {
+        "lat": 54.4053621,
+        "lng": 10.1893332,
+        "place_id": "ChIJxUKK__34skcRKaKXQkuIXPQ",
+        "address": "Falckensteiner Strand, 24159 Kiel, Germany"
+      },
+      "delta_m": 30,
+      "status": "CHECK",
+      "streetview": "ZERO_RESULTS",
+      "applied": true
+    },
+    {
+      "id": "kiel_olympiazentrum_schilksee",
+      "name": "Olympiazentrum Schilksee",
+      "before": {
+        "lat": 54.42767937333333,
+        "lng": 10.16939058
+      },
+      "google": {
+        "lat": 54.427575,
+        "lng": 10.1696087,
+        "place_id": "ChIJGwUcmGFWskcR5NYqD8XCp9Y",
+        "address": "Soling 38, 24159 Kiel-Schilksee, Germany"
+      },
+      "delta_m": 18,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "kiel_marine_ehrenmal_laboe",
+      "name": "Marine-Ehrenmal Laboe",
+      "before": {
+        "lat": 54.412171006250006,
+        "lng": 10.230763643749999
+      },
+      "google": {
+        "lat": 54.412201599999996,
+        "lng": 10.2307112,
+        "place_id": "ChIJ8dxluLj5skcRQmBi6NPfjkY",
+        "address": "Strandstraße 92, 24235 Laboe, Germany"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "kiel_u_boot_u_995_laboe",
+      "name": "U-Boot U-995 Laboe",
+      "before": {
+        "lat": 54.41245712142858,
+        "lng": 10.228894457142857
+      },
+      "google": {
+        "lat": 54.4123667,
+        "lng": 10.2287161,
+        "place_id": "ChIJj3oFK4r4skcRAMTaktqUlc0",
+        "address": "Strandstraße 92, 24235 Laboe, Germany"
+      },
+      "delta_m": 15,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "kiel_heiligengeistkirche",
+      "name": "Heiligengeistkirche",
+      "before": {
+        "lat": 54.33558707333334,
+        "lng": 10.132881986666666
+      },
+      "google": {
+        "lat": 54.335547999999996,
+        "lng": 10.1328511,
+        "place_id": "ChIJk1QOZGtWskcRNAOKeFnvNOQ",
+        "address": "Holtenauer Str. 89, 24105 Kiel, Germany"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "kiel_anscharkirche",
+      "name": "Anscharkirche",
+      "before": {
+        "lat": 54.33558707333334,
+        "lng": 10.132881986666666
+      },
+      "google": {
+        "lat": 54.335547999999996,
+        "lng": 10.1328511,
+        "place_id": "ChIJk1QOZGtWskcRNAOKeFnvNOQ",
+        "address": "Holtenauer Str. 89, 24105 Kiel, Germany"
+      },
+      "delta_m": 5,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "kiel_moorteichwiese",
+      "name": "Moorteichwiese",
+      "before": {
+        "lat": 54.309509145454555,
+        "lng": 10.119347906060606
+      },
+      "google": {
+        "lat": 54.3087248,
+        "lng": 10.1195227,
+        "place_id": "ChIJq6qq9o5WskcRqNowImrl5_s",
+        "address": "24114 Kiel, Germany"
+      },
+      "delta_m": 88,
+      "status": "BAD",
+      "streetview": "ZERO_RESULTS",
+      "applied": true
+    },
+    {
+      "id": "kiel_blucherbrucke",
+      "name": "Blücherbrücke",
+      "before": {
+        "lat": 54.336403022727275,
+        "lng": 10.15745329090909
+      },
+      "google": {
+        "lat": 54.3363195,
+        "lng": 10.1575838,
+        "place_id": "ChIJVdEU6zdWskcRHGH0fVIojOA",
+        "address": "Blücherbrücke, 24105 Kiel, Germany"
+      },
+      "delta_m": 13,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "kiel_reventloubrucke",
+      "name": "Reventloubrücke",
+      "before": {
+        "lat": 54.333574022222216,
+        "lng": 10.152249233333334
+      },
+      "google": {
+        "lat": 54.3335886,
+        "lng": 10.1525496,
+        "place_id": "ChIJAWS_ykdWskcRI9ZPjDG9HmQ",
+        "address": "Reventloubrücke, Kiel, Germany"
+      },
+      "delta_m": 20,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "kiel_kieler_schloss",
+      "name": "Kieler Schloss",
+      "before": {
+        "lat": 54.323752669230785,
+        "lng": 10.142911426923076
+      },
+      "google": {
+        "lat": 54.3239155,
+        "lng": 10.1429209,
+        "place_id": "ChIJl5BMX_8DYkERyTCrBl2yIlM",
+        "address": "Schlosspl. 2, 24103 Kiel, Germany"
+      },
+      "delta_m": 18,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "kiel_christian_albrechts_universitat",
+      "name": "Christian-Albrechts-Universität",
+      "before": {
+        "lat": 54.343578680769234,
+        "lng": 10.11255906923077
+      },
+      "google": {
+        "lat": 54.343467,
+        "lng": 10.115024799999999,
+        "place_id": "ChIJx3BSVgpWskcRe3IkF1-XXdE",
+        "address": "Christian-Albrechts-Platz 4, 24118 Kiel, Germany"
+      },
+      "delta_m": 160,
+      "status": "BAD",
+      "streetview": "OK"
+    }
+  ]
+}

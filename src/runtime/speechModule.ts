@@ -48,10 +48,15 @@ export async function speakRuntimeText(
 export async function speakRuntimeSentences(
   sentences: AsyncIterable<string>,
   voice?: SpeakVoiceOptions,
-  opts?: { deliveryKind?: SpeechDeliveryKind; priority?: SpeechPriority },
+  opts?: {
+    deliveryKind?: SpeechDeliveryKind;
+    priority?: SpeechPriority;
+    bypassDeliveryPolicy?: boolean;
+  },
 ): Promise<void> {
   onSpeechStart();
   await playSentenceChunks(sentences, voice, {
+    bypassDeliveryPolicy: opts?.bypassDeliveryPolicy,
     deliveryKind: opts?.deliveryKind ?? 'assistant',
     priority: opts?.priority ?? defaultPriorityForModule(),
   });

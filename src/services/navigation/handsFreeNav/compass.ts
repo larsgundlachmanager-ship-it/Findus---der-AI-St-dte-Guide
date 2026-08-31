@@ -1,29 +1,34 @@
 /**
- * Adaptive compass: snappy when rotating fast, damped when slow.
+ * Adaptive compass: snappy on real turns (°/s), stable when standing.
  * Pocket / screen-off → heading watch should be disabled (caller).
+ *
+ * Do NOT snap on absolute ~12° sample jumps — magnetometer noise does that
+ * left/right while idle and caused the needle to twitch.
  */
 
 import { HeadingLowPass } from '../sensorFilter';
-import { shortestAngleDelta } from '../bearing';
 
-/** Higher alpha = snappier. */
-const ALPHA_FAST = 0.88;
-const ALPHA_SLOW = 0.42;
-const SNAP_ABS_DEG = 22;
+/** Standing baseline — HeadingLowPass raises this via angular rate. */
+const ALPHA_STAND = 0.14;
+/** Walking: slightly livelier tracking of phone turns. */
+const ALPHA_WALK = 0.28;
 
-let filter = new HeadingLowPass(ALPHA_FAST);
-let lastRaw: number | null = null;
+let filter = new HeadingLowPass(ALPHA_STAND);
 let lastPushAtMs = 0;
+/** Extra hold while standing — suppress magnetometer chatter before UI. */
+let lastEmittedDeg: number | null = null;
+let lastEmitAtMs = 0;
 
 export function resetHandsFreeCompass(): void {
-  filter = new HeadingLowPass(ALPHA_FAST);
-  lastRaw = null;
+  filter = new HeadingLowPass(ALPHA_STAND);
   lastPushAtMs = 0;
+  lastEmittedDeg = null;
+  lastEmitAtMs = 0;
 }
 
 /**
  * Push device heading. Returns filtered deg.
- * Large intentional turns snap quickly; micro jitter is damped.
+ * Rate-aware: fast body turns catch up immediately; L↔R noise is held.
  */
 export function pushAdaptiveHeading(
   rawDeg: number,
@@ -32,25 +37,20 @@ export function pushAdaptiveHeading(
   const now = opts?.nowMs ?? Date.now();
   const raw = ((rawDeg % 360) + 360) % 360;
   const speed = opts?.speedMps ?? 0;
-
-  if (lastRaw != null) {
-    const delta = Math.abs(shortestAngleDelta(lastRaw, raw));
-    if (delta >= SNAP_ABS_DEG) {
-      // Intentional body turn — almost raw
-      filter = new HeadingLowPass(ALPHA_FAST);
-      const v = filter.push(raw);
-      lastRaw = raw;
-      lastPushAtMs = now;
-      return v;
-    }
-    // Slow / pocket jitter
-    const slow = speed < 0.4;
-    filter = new HeadingLowPass(slow ? ALPHA_SLOW : ALPHA_FAST);
-  }
-
-  const v = filter.push(raw);
-  lastRaw = raw;
+  filter.setAlpha(speed >= 0.4 ? ALPHA_WALK : ALPHA_STAND);
+  const v = filter.push(raw, now);
   lastPushAtMs = now;
+
+  // Standing: don't emit micro-twitches to the map (≤4° / <180 ms)
+  if (speed < 0.35 && lastEmittedDeg != null) {
+    let d = Math.abs(v - lastEmittedDeg);
+    if (d > 180) d = 360 - d;
+    if (d < 4 && now - lastEmitAtMs < 180) {
+      return lastEmittedDeg;
+    }
+  }
+  lastEmittedDeg = v;
+  lastEmitAtMs = now;
   return v;
 }
 

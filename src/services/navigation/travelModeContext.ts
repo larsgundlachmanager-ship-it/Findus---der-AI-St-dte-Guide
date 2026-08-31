@@ -50,12 +50,13 @@ export function travelModeToMobility(m: TravelMode): MobilityMode {
 
 /**
  * Inferiert Modus aus GPS-Geschwindigkeit (m/s).
- * > ~12 km/h → Zweirad, > ~25 km/h → ÖPNV, sonst Fuß.
+ * ≥ ~9 km/h → Zweirad, ≥ ~22 km/h → ÖPNV, sonst Fuß.
  */
 export function inferTravelModeFromSpeed(speedMs: number | null): TravelMode {
   if (speedMs == null || !Number.isFinite(speedMs)) return 'foot';
-  if (speedMs >= 7) return 'transit';
-  if (speedMs >= 3.2) return 'bike';
+  if (speedMs >= 6.1) return 'transit'; // ~22 km/h
+  // Align mit transportMode SPEED_WALK_MAX_MS (~10 km/h)
+  if (speedMs >= 2.78) return 'bike';
   return 'foot';
 }
 
@@ -176,14 +177,35 @@ export function travelModeToDirectionsMode(
   return 'walking';
 }
 
+export const CRUTCH_MAX_WALK_MIN = 7;
+/** ~80 m/Min Fuß. */
+export const CRUTCH_MAX_WALK_M = CRUTCH_MAX_WALK_MIN * 80;
+
 /** Für navigationService preferTransit / preferBike. */
-export function travelModeNavPrefs(mode?: TravelMode | null): {
+export function travelModeNavPrefs(
+  mode?: TravelMode | null,
+  opts?: { walkDistanceM?: number | null },
+): {
   preferTransit: boolean;
   preferBike: boolean;
 } {
   const m = mode ?? resolveActiveTravelMode().mode;
+  let preferTransit = m === 'transit';
+  try {
+    const access = getCachedUserProfile()?.accessibility ?? [];
+    if (access.includes('rollstuhl')) preferTransit = true;
+    if (
+      access.includes('kruecke') &&
+      typeof opts?.walkDistanceM === 'number' &&
+      opts.walkDistanceM > CRUTCH_MAX_WALK_M
+    ) {
+      preferTransit = true;
+    }
+  } catch {
+    /* soft */
+  }
   return {
-    preferTransit: m === 'transit',
+    preferTransit,
     preferBike: m === 'bike',
   };
 }

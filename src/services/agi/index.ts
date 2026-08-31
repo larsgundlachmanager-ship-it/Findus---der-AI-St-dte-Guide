@@ -1,5 +1,5 @@
 /**
- * Findus AGI Runtime — Verfassung + Routing + Guardrails + Judge.
+ * Yorro AGI Runtime — Verfassung + Routing + Guardrails + Judge.
  */
 
 export {

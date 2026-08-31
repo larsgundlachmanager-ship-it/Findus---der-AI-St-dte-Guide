@@ -1,0 +1,3489 @@
+{
+  "generated_at": "2026-08-28T07:08:23.205Z",
+  "summary": {
+    "city_id": "amsterdam",
+    "checked": 126,
+    "ok": 60,
+    "check": 38,
+    "bad": 28,
+    "errors": 0,
+    "max_delta_m": 180,
+    "city_halo_m": 28000,
+    "story_only": true
+  },
+  "rows": [
+    {
+      "id": "amsterdam_melkweg",
+      "name": "Melkweg",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.418419400000005,
+        "lng": 4.881150628571428
+      },
+      "query": "Melkweg, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3647777,
+        "lng": 4.8810734,
+        "display_name": "Melkweg, Lijnbaansgracht, Amsterdam, Niederlande",
+        "class": "amenity",
+        "type": "theatre",
+        "provider": "photon"
+      },
+      "delta_m": 5965,
+      "from_city_m": 5865,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_joods_cultureel_kwartier",
+      "name": "Joods Cultureel Kwartier",
+      "category": "altstadt",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.36713477878789,
+        "lng": 4.903878033333332
+      },
+      "query": "Joods Cultureel Kwartier, Amsterdam",
+      "osm": {
+        "lat": 52.331864,
+        "lng": 4.8613261,
+        "display_name": "Joods Cultureel Centrum, Weldam, Amsterdam, Niederlande",
+        "class": "building",
+        "type": "synagogue",
+        "provider": "photon"
+      },
+      "delta_m": 4872,
+      "from_city_m": 52,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "amsterdam_joods_historisch_museum"
+      ]
+    },
+    {
+      "id": "amsterdam_service_apotheek_de_castro",
+      "name": "Service Apotheek De Castro",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.36227602857143,
+        "lng": 4.911450642857142
+      },
+      "query": "Service Apotheek De Castro, Amsterdam",
+      "osm": {
+        "lat": 52.391232,
+        "lng": 4.9248969,
+        "display_name": "Service Apotheek De Meeuwen, Waddenweg, Amsterdam, Niederlande",
+        "class": "amenity",
+        "type": "pharmacy",
+        "provider": "photon"
+      },
+      "delta_m": 3347,
+      "from_city_m": 770,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_sumatra_pharmacy",
+      "name": "Sumatra Pharmacy",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.36172575714286,
+        "lng": 4.936017485714286
+      },
+      "query": "Sumatra Pharmacy, Amsterdam",
+      "osm": {
+        "lat": 52.3800745,
+        "lng": 4.8992326,
+        "display_name": "Doctor & Pharmacy, De Ruijterkade, Amsterdam, Niederlande",
+        "class": "amenity",
+        "type": "pharmacy",
+        "provider": "photon"
+      },
+      "delta_m": 3225,
+      "from_city_m": 2260,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_leeuwen_artis",
+      "name": "Leeuwen (Artis)",
+      "category": "freizeit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.36668474166667,
+        "lng": 4.911714733333333
+      },
+      "query": "Leeuwen, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3671452,
+        "lng": 4.9563804,
+        "display_name": "Leeuwen van Zeeburg, Zeeburgerdijk, Amsterdam, Niederlande",
+        "class": "tourism",
+        "type": "artwork",
+        "provider": "photon"
+      },
+      "delta_m": 3033,
+      "from_city_m": 524,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_oba_centrale_bibliotheek",
+      "name": "OBA Centrale Bibliotheek",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.375726840000006,
+        "lng": 4.9081793
+      },
+      "query": "OBA Centrale Bibliotheek, Amsterdam",
+      "osm": {
+        "lat": 52.3641781,
+        "lng": 4.93883,
+        "display_name": "OBA Javaplein, Javaplein, Amsterdam, Niederlande",
+        "class": "amenity",
+        "type": "library",
+        "provider": "photon"
+      },
+      "delta_m": 2445,
+      "from_city_m": 947,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_amsterdamse_bos",
+      "name": "Amsterdamse Bos",
+      "category": "natur",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.314855939999994,
+        "lng": 4.83213628
+      },
+      "query": "Amsterdamse Bos, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3270089,
+        "lng": 4.857364,
+        "display_name": "Amsterdamse Bos, Amsterdamseweg, Amsterdam, Niederlande",
+        "class": "highway",
+        "type": "bus_stop",
+        "provider": "photon"
+      },
+      "delta_m": 2183,
+      "from_city_m": 7635,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_museum_rembrandthuis",
+      "name": "Museum Rembrandthuis",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.36930592857142,
+        "lng": 4.901267742857143
+      },
+      "query": "Museum Rembrandthuis, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3576405,
+        "lng": 4.8850128,
+        "display_name": "Deutsches Generalkonsulat Amsterdam, Honthorststraat, Amsterdam, Niederlande",
+        "class": "office",
+        "type": "diplomatic",
+        "provider": "photon"
+      },
+      "delta_m": 1703,
+      "from_city_m": 274,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "amsterdam_rembrandt_house_museum"
+      ]
+    },
+    {
+      "id": "amsterdam_de_vogel_pharmacy",
+      "name": "De Vogel Pharmacy",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.37083686666666,
+        "lng": 4.916430999999999
+      },
+      "query": "De Vogel Pharmacy, Amsterdam",
+      "osm": {
+        "lat": 52.3800745,
+        "lng": 4.8992326,
+        "display_name": "Doctor & Pharmacy, De Ruijterkade, Amsterdam, Niederlande",
+        "class": "amenity",
+        "type": "pharmacy",
+        "provider": "photon"
+      },
+      "delta_m": 1555,
+      "from_city_m": 910,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_carecraftmedsnow_pharmacy",
+      "name": "CARECRAFTMEDSNOW PHARMACY",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.36838845,
+        "lng": 4.9079575166666665
+      },
+      "query": "CARECRAFTMEDSNOW PHARMACY, Amsterdam",
+      "osm": {
+        "lat": 52.3800745,
+        "lng": 4.8992326,
+        "display_name": "Doctor & Pharmacy, De Ruijterkade, Amsterdam, Niederlande",
+        "class": "amenity",
+        "type": "pharmacy",
+        "provider": "photon"
+      },
+      "delta_m": 1428,
+      "from_city_m": 275,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_artis_royal_zoo",
+      "name": "Artis Royal Zoo",
+      "category": "freizeit",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.36599915714286,
+        "lng": 4.9168385571428574
+      },
+      "query": "Artis Royal Zoo, Amsterdam",
+      "osm": {
+        "lat": 52.3564096,
+        "lng": 4.911595,
+        "display_name": "A Vos & Zoons medische artikelen, Eerste Oosterparkstraat, Amsterdam, Niederlande",
+        "class": "shop",
+        "type": "medical_supply",
+        "provider": "photon"
+      },
+      "delta_m": 1124,
+      "from_city_m": 880,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_herengracht",
+      "name": "Herengracht",
+      "category": "altstadt",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.37214977272728,
+        "lng": 4.887505936363636
+      },
+      "query": "Herengracht, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3651493,
+        "lng": 4.8978869,
+        "display_name": "Herengracht, Amsterdam, Niederlande",
+        "class": "waterway",
+        "type": "canal",
+        "provider": "photon"
+      },
+      "delta_m": 1050,
+      "from_city_m": 1239,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_joods_historisch_museum",
+      "name": "Joods Historisch Museum",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.36713477878789,
+        "lng": 4.903878033333332
+      },
+      "query": "Joods Historisch Museum, Amsterdam",
+      "osm": {
+        "lat": 52.3704312,
+        "lng": 4.8904288,
+        "display_name": "Amsterdam Museum, Kalverstraat, Amsterdam, Niederlande",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 984,
+      "from_city_m": 52,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "amsterdam_joods_cultureel_kwartier"
+      ]
+    },
+    {
+      "id": "amsterdam_singel",
+      "name": "Singel",
+      "category": "altstadt",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.37337602,
+        "lng": 4.88912924
+      },
+      "query": "Singel, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3670469,
+        "lng": 4.8935232,
+        "display_name": "Singel, Amsterdam, Niederlande",
+        "class": "waterway",
+        "type": "canal",
+        "provider": "photon"
+      },
+      "delta_m": 764,
+      "from_city_m": 1206,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_uw_apotheek_de_amsterdam",
+      "name": "Uw Apotheek De amsterdam",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.359399483333334,
+        "lng": 4.9016894
+      },
+      "query": "Uw Apotheek De amsterdam, Amsterdam",
+      "osm": {
+        "lat": 52.3626689,
+        "lng": 4.9111959,
+        "display_name": "Medicijnman Apotheek De Castro, Roetersstraat, Amsterdam, Niederlande",
+        "class": "amenity",
+        "type": "pharmacy",
+        "provider": "photon"
+      },
+      "delta_m": 741,
+      "from_city_m": 924,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_amsterdam_tourist_doctors",
+      "name": "Amsterdam Tourist Doctors",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.37080576969696,
+        "lng": 4.900352824242425
+      },
+      "query": "Amsterdam Tourist Doctors, Amsterdam",
+      "osm": {
+        "lat": 52.3769134,
+        "lng": 4.8977452,
+        "display_name": "Amsterdam Tourist Services, Damrak, Amsterdam, Niederlande",
+        "class": "shop",
+        "type": "gift",
+        "provider": "photon"
+      },
+      "delta_m": 702,
+      "from_city_m": 442,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_grachtengordel",
+      "name": "Grachtengordel",
+      "category": "altstadt",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.364556173333334,
+        "lng": 4.892189386666667
+      },
+      "query": "Grachtengordel, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3667342,
+        "lng": 4.885005,
+        "display_name": "Grachtengordel, Amsterdam, Niederlande",
+        "class": "place",
+        "type": "quarter",
+        "provider": "photon"
+      },
+      "delta_m": 545,
+      "from_city_m": 878,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "amsterdam_cafe_restaurant_de_bazel_amsterdam_centrum"
+      ]
+    },
+    {
+      "id": "amsterdam_centraal_viewpoint",
+      "name": "Centraal viewpoint",
+      "category": "bahnhof",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.38188257999999,
+        "lng": 4.904837000000001
+      },
+      "query": "Centraal viewpoint, Amsterdam",
+      "osm": {
+        "lat": 52.378901,
+        "lng": 4.9005805,
+        "display_name": "Amsterdam Hauptbahnhof, Middentunnel, Amsterdam, Niederlande",
+        "class": "railway",
+        "type": "station",
+        "provider": "photon"
+      },
+      "delta_m": 440,
+      "from_city_m": 1592,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "amsterdam_centraal_noord_ferry"
+      ]
+    },
+    {
+      "id": "amsterdam_centraal_noord_ferry",
+      "name": "Centraal–Noord Ferry",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.38188257999999,
+        "lng": 4.904837000000001
+      },
+      "query": "Centraal–Noord Ferry, Amsterdam",
+      "osm": {
+        "lat": 52.378901,
+        "lng": 4.9005805,
+        "display_name": "Amsterdam Hauptbahnhof, Middentunnel, Amsterdam, Niederlande",
+        "class": "railway",
+        "type": "station",
+        "provider": "photon"
+      },
+      "delta_m": 440,
+      "from_city_m": 1592,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "amsterdam_centraal_viewpoint"
+      ]
+    },
+    {
+      "id": "amsterdam_overhoeks",
+      "name": "Overhoeks",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.38379974687502,
+        "lng": 4.902200890625
+      },
+      "query": "Overhoeks, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3870477,
+        "lng": 4.9026751,
+        "display_name": "Overhoeks, Amsterdam, Niederlande",
+        "class": "place",
+        "type": "neighbourhood",
+        "provider": "photon"
+      },
+      "delta_m": 363,
+      "from_city_m": 1809,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "amsterdam_a_dam_lookout"
+      ]
+    },
+    {
+      "id": "amsterdam_zeedijk",
+      "name": "Zeedijk",
+      "category": "altstadt",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.373188199999994,
+        "lng": 4.900385244444444
+      },
+      "query": "Zeedijk, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3761604,
+        "lng": 4.9002116,
+        "display_name": "Zeedijk, Amsterdam, Niederlande",
+        "class": "highway",
+        "type": "pedestrian",
+        "provider": "photon"
+      },
+      "delta_m": 331,
+      "from_city_m": 674,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "amsterdam_bredero_monument_by_piet_esser_1968"
+      ]
+    },
+    {
+      "id": "amsterdam_kadijken",
+      "name": "Kadijken",
+      "category": "altstadt",
+      "place_tier": 3,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.36954954285714,
+        "lng": 4.9145097714285715
+      },
+      "query": "Kadijken, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3681554,
+        "lng": 4.9185863,
+        "display_name": "Kadijken, Amsterdam, Niederlande",
+        "class": "place",
+        "type": "neighbourhood",
+        "provider": "photon"
+      },
+      "delta_m": 317,
+      "from_city_m": 738,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_jordaan",
+      "name": "Jordaan",
+      "category": "altstadt",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.37320248000001,
+        "lng": 4.88017058
+      },
+      "query": "Jordaan, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3754157,
+        "lng": 4.8810958,
+        "display_name": "Jordaan, Amsterdam, Niederlande",
+        "class": "place",
+        "type": "quarter",
+        "provider": "photon"
+      },
+      "delta_m": 254,
+      "from_city_m": 1743,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_amstelpark",
+      "name": "Amstelpark",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.33037356999999,
+        "lng": 4.89313933
+      },
+      "query": "Amstelpark, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3281305,
+        "lng": 4.89367,
+        "display_name": "Amstelpark, Amsterdam, Niederlande",
+        "class": "leisure",
+        "type": "park",
+        "provider": "photon"
+      },
+      "delta_m": 252,
+      "from_city_m": 4203,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_de_wallen",
+      "name": "De Wallen",
+      "category": "altstadt",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.37176907999999,
+        "lng": 4.89598898
+      },
+      "query": "De Wallen, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3734085,
+        "lng": 4.8982807,
+        "display_name": "de Wallen, Stoofsteeg, Amsterdam, Niederlande",
+        "class": "tourism",
+        "type": "attraction",
+        "provider": "photon"
+      },
+      "delta_m": 240,
+      "from_city_m": 724,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_artis_groote_museum",
+      "name": "ARTIS - Groote Museum",
+      "category": "freizeit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.3661857625,
+        "lng": 4.913169743749999
+      },
+      "query": "ARTIS, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3662382,
+        "lng": 4.9165461,
+        "display_name": "Artis, Plantage Kerklaan, Amsterdam, Niederlande",
+        "class": "tourism",
+        "type": "zoo",
+        "provider": "photon"
+      },
+      "delta_m": 229,
+      "from_city_m": 632,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_dam_apotheek",
+      "name": "Dam Apotheek",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.370642287500004,
+        "lng": 4.892313387500001
+      },
+      "query": "Dam Apotheek, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3723707,
+        "lng": 4.8940844,
+        "display_name": "Dam Apotheek, Damstraat, Amsterdam, Niederlande",
+        "class": "amenity",
+        "type": "pharmacy",
+        "provider": "photon"
+      },
+      "delta_m": 227,
+      "from_city_m": 872,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_reguliersgracht",
+      "name": "Reguliersgracht",
+      "category": "altstadt",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.36231358333333,
+        "lng": 4.895745116666666
+      },
+      "query": "Reguliersgracht, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3640867,
+        "lng": 4.8959228,
+        "display_name": "Reguliersgracht, Amsterdam, Niederlande",
+        "class": "waterway",
+        "type": "canal",
+        "provider": "photon"
+      },
+      "delta_m": 198,
+      "from_city_m": 817,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_westerpark_market",
+      "name": "Westerpark Market",
+      "category": "natur",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.385711699999995,
+        "lng": 4.8694479
+      },
+      "query": "Westerpark Market, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.5510932,
+        "lng": 13.3564031,
+        "display_name": "Mini Market Alper, Amsterdamer Straße, Berlin, Deutschland",
+        "class": "shop",
+        "type": "convenience",
+        "provider": "photon"
+      },
+      "delta_m": 574867,
+      "from_city_m": 3101,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_medicine_man",
+      "name": "Medicine Man",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.36258695714287,
+        "lng": 4.8985378
+      },
+      "query": "Medicine Man, Amsterdam, Germany",
+      "osm": {
+        "lat": 50.0823213,
+        "lng": 9.0072646,
+        "display_name": "Amsterdam, Am Campingplatz, Kahl am Main, Deutschland",
+        "class": "building",
+        "type": "static_caravan",
+        "provider": "photon"
+      },
+      "delta_m": 382206,
+      "from_city_m": 672,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_keizersgracht_canal_viewpoint",
+      "name": "Keizersgracht Canal Viewpoint",
+      "category": "altstadt",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.3635504,
+        "lng": 4.898274333333333
+      },
+      "query": "Keizersgracht Canal Viewpoint, Amsterdam",
+      "osm": {
+        "lat": 52.3762875,
+        "lng": 4.8863183,
+        "display_name": "Canal House, Keizersgracht, Amsterdam, Niederlande",
+        "class": "tourism",
+        "type": "hotel",
+        "provider": "photon"
+      },
+      "delta_m": 1632,
+      "from_city_m": 599,
+      "status": "CHECK",
+      "flags": [
+        "house_like_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_vondelpark",
+      "name": "Vondelpark",
+      "category": "natur",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.3581700625,
+        "lng": 4.868826775
+      },
+      "query": "Vondelpark, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3610783,
+        "lng": 4.8750032,
+        "display_name": "Vondelparkpaviljoen, Vondelpark, Amsterdam, Niederlande",
+        "class": "building",
+        "type": "yes",
+        "provider": "photon"
+      },
+      "delta_m": 530,
+      "from_city_m": 2616,
+      "status": "CHECK",
+      "flags": [
+        "house_like_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_prinsengracht_anne_frank_house_viewpoint",
+      "name": "Prinsengracht – Anne Frank House Viewpoint",
+      "category": "altstadt",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.37407485000001,
+        "lng": 4.882682362500001
+      },
+      "query": "Prinsengracht, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3718513,
+        "lng": 4.8826175,
+        "display_name": "Prinsengracht, Amsterdam, Niederlande",
+        "class": "highway",
+        "type": "residential",
+        "provider": "photon"
+      },
+      "delta_m": 247,
+      "from_city_m": 1626,
+      "status": "CHECK",
+      "flags": [
+        "house_like_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_brouwersgracht",
+      "name": "Brouwersgracht",
+      "category": "altstadt",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.38075424545455,
+        "lng": 4.888205036363637
+      },
+      "query": "Brouwersgracht, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3796652,
+        "lng": 4.8900232,
+        "display_name": "Brouwersgracht, Amsterdam, Niederlande",
+        "class": "waterway",
+        "type": "canal",
+        "provider": "photon"
+      },
+      "delta_m": 173,
+      "from_city_m": 1822,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_museumplein",
+      "name": "Museumplein",
+      "category": "altstadt",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.35794869701493,
+        "lng": 4.881358329850746
+      },
+      "query": "Museumplein, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3587124,
+        "lng": 4.8834415,
+        "display_name": "Museumsplatz, Amsterdam, Niederlande",
+        "class": "place",
+        "type": "square",
+        "provider": "photon"
+      },
+      "delta_m": 165,
+      "from_city_m": 1881,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "amsterdam_van_gogh_museum"
+      ]
+    },
+    {
+      "id": "amsterdam_negen_straatjes",
+      "name": "Negen Straatjes",
+      "category": "altstadt",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.370153779999995,
+        "lng": 4.885980479999999
+      },
+      "query": "Negen Straatjes, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3688508,
+        "lng": 4.8849938,
+        "display_name": "De 9 Straatjes, Amsterdam, Niederlande",
+        "class": "landuse",
+        "type": "commercial",
+        "provider": "photon"
+      },
+      "delta_m": 160,
+      "from_city_m": 1266,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_amsterdam_centraal",
+      "name": "Amsterdam Centraal",
+      "category": "bahnhof",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.377898550000005,
+        "lng": 4.8989996499999995
+      },
+      "query": "Amsterdam Centraal, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.378901,
+        "lng": 4.9005805,
+        "display_name": "Amsterdam Hauptbahnhof, Middentunnel, Amsterdam, Niederlande",
+        "class": "railway",
+        "type": "station",
+        "provider": "photon"
+      },
+      "delta_m": 155,
+      "from_city_m": 1200,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "amsterdam_centraal_station"
+      ]
+    },
+    {
+      "id": "amsterdam_centraal_station",
+      "name": "Centraal Station",
+      "category": "bahnhof",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.377898550000005,
+        "lng": 4.8989996499999995
+      },
+      "query": "Centraal Station, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.378901,
+        "lng": 4.9005805,
+        "display_name": "Amsterdam Hauptbahnhof, Middentunnel, Amsterdam, Niederlande",
+        "class": "railway",
+        "type": "station",
+        "provider": "photon"
+      },
+      "delta_m": 155,
+      "from_city_m": 1200,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "amsterdam_amsterdam_centraal"
+      ]
+    },
+    {
+      "id": "amsterdam_ndsm_werf",
+      "name": "NDSM-Werf",
+      "category": "altstadt",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.401150744444436,
+        "lng": 4.891185866666667
+      },
+      "query": "NDSM-Werf, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.4003737,
+        "lng": 4.8929539,
+        "display_name": "NDSM, Amsterdam, Niederlande",
+        "class": "place",
+        "type": "neighbourhood",
+        "provider": "photon"
+      },
+      "delta_m": 148,
+      "from_city_m": 3836,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_bloemenmarkt",
+      "name": "Bloemenmarkt",
+      "category": "markt",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.3667926,
+        "lng": 4.8929323714285715
+      },
+      "query": "Bloemenmarkt, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3669308,
+        "lng": 4.8907645,
+        "display_name": "Blumenmarkt, Sint Jorisstraat, Amsterdam, Niederlande",
+        "class": "amenity",
+        "type": "marketplace",
+        "provider": "photon"
+      },
+      "delta_m": 148,
+      "from_city_m": 766,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_westergasfabriek",
+      "name": "Westergasfabriek",
+      "category": "altstadt",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.386746577500006,
+        "lng": 4.868836281249999
+      },
+      "query": "Westergasfabriek, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3866324,
+        "lng": 4.8709829,
+        "display_name": "Westergasfabriek, Brettenpad, Amsterdam, Niederlande",
+        "class": "amenity",
+        "type": "arts_centre",
+        "provider": "photon"
+      },
+      "delta_m": 146,
+      "from_city_m": 3207,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_park_frankendael",
+      "name": "Park Frankendael",
+      "category": "natur",
+      "place_tier": 3,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.351210400000014,
+        "lng": 4.9309378525
+      },
+      "query": "Park Frankendael, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3504486,
+        "lng": 4.929952,
+        "display_name": "Park Frankendael, Amsterdam, Niederlande",
+        "class": "leisure",
+        "type": "park",
+        "provider": "photon"
+      },
+      "delta_m": 108,
+      "from_city_m": 2573,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "amsterdam_pure_markt_park_frankendael"
+      ]
+    },
+    {
+      "id": "amsterdam_westerpark",
+      "name": "Westerpark",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.38695548382351,
+        "lng": 4.873021675
+      },
+      "query": "Westerpark, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3872277,
+        "lng": 4.8717903,
+        "display_name": "Westerpark, Amsterdam, Niederlande",
+        "class": "leisure",
+        "type": "park",
+        "provider": "photon"
+      },
+      "delta_m": 89,
+      "from_city_m": 3018,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_nieuwmarkt",
+      "name": "Nieuwmarkt",
+      "category": "altstadt",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.37216464545454,
+        "lng": 4.901315593939394
+      },
+      "query": "Nieuwmarkt, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3725948,
+        "lng": 4.9003449,
+        "display_name": "Neumarkt, Amsterdam, Niederlande",
+        "class": "place",
+        "type": "square",
+        "provider": "photon"
+      },
+      "delta_m": 81,
+      "from_city_m": 545,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_de_krijtberg",
+      "name": "De Krijtberg",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.36773093225808,
+        "lng": 4.8880273064516135
+      },
+      "query": "De Krijtberg, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3684177,
+        "lng": 4.8878097,
+        "display_name": "Krijtbergbrug, Singel, Amsterdam, Niederlande",
+        "class": "man_made",
+        "type": "bridge",
+        "provider": "photon"
+      },
+      "delta_m": 78,
+      "from_city_m": 1094,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_johan_cruijff_arena",
+      "name": "Johan Cruijff ArenA",
+      "category": "sport",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.31430005454546,
+        "lng": 4.9417709636363645
+      },
+      "query": "Johan Cruijff ArenA, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.314353,
+        "lng": 4.9428431,
+        "display_name": "Johan Cruijff ArenA, Johan Cruijff Boulevard, Amsterdam, Niederlande",
+        "class": "leisure",
+        "type": "stadium",
+        "provider": "photon"
+      },
+      "delta_m": 73,
+      "from_city_m": 6452,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_apotheek_koek_schaeffer_van_tijen",
+      "name": "Apotheek Koek, Schaeffer & van Tijen",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.36093185714286,
+        "lng": 4.891853885714285
+      },
+      "query": "Apotheek Koek, Schaeffer, Amsterdam",
+      "osm": {
+        "lat": 52.3615553,
+        "lng": 4.891734,
+        "display_name": "Koek, Schaeffer & van Tijen, Vijzelgracht, Amsterdam, Niederlande",
+        "class": "amenity",
+        "type": "pharmacy",
+        "provider": "photon"
+      },
+      "delta_m": 70,
+      "from_city_m": 1114,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_de_waag",
+      "name": "De Waag",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.37276182352942,
+        "lng": 4.90033682352941
+      },
+      "query": "De Waag, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3733323,
+        "lng": 4.9001463,
+        "display_name": "De Waag, Zeedijk, Amsterdam, Niederlande",
+        "class": "shop",
+        "type": "newsagent",
+        "provider": "photon"
+      },
+      "delta_m": 65,
+      "from_city_m": 632,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "amsterdam_minderbroeders_of_grauwmonnikenklooster"
+      ]
+    },
+    {
+      "id": "amsterdam_kalverstraat",
+      "name": "Kalverstraat",
+      "category": "einkaufen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.36999146666667,
+        "lng": 4.891008488888889
+      },
+      "query": "Kalverstraat, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3704312,
+        "lng": 4.8904288,
+        "display_name": "Amsterdam Museum, Kalverstraat, Amsterdam, Niederlande",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 63,
+      "from_city_m": 931,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_olympisch_stadion",
+      "name": "Olympisch Stadion",
+      "category": "sport",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.34344248,
+        "lng": 4.853145499999999
+      },
+      "query": "Olympisch Stadion, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3434439,
+        "lng": 4.8540543,
+        "display_name": "Olympiastadion, Olympisch Stadion, Amsterdam, Niederlande",
+        "class": "leisure",
+        "type": "stadium",
+        "provider": "photon"
+      },
+      "delta_m": 62,
+      "from_city_m": 4381,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_h_art_museum",
+      "name": "H'ART Museum",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.36517664,
+        "lng": 4.90214494
+      },
+      "query": "H'ART Museum, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3656522,
+        "lng": 4.9022137,
+        "display_name": "H'ART Museum, Amstel, Amsterdam, Niederlande",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 53,
+      "from_city_m": 299,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "amsterdam_eremitage_amsterdam"
+      ]
+    },
+    {
+      "id": "amsterdam_van_gogh_museum",
+      "name": "Van Gogh Museum",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.35794869701493,
+        "lng": 4.881358329850746
+      },
+      "query": "Van Gogh Museum, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3583673,
+        "lng": 4.88109,
+        "display_name": "Van-Gogh-Museum, Paulus Potterstraat, Amsterdam, Niederlande",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 50,
+      "from_city_m": 1881,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "amsterdam_museumplein"
+      ]
+    },
+    {
+      "id": "amsterdam_het_muziektheater",
+      "name": "Het Muziektheater",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.36731958666666,
+        "lng": 4.900886082666667
+      },
+      "query": "Het Muziektheater, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3675554,
+        "lng": 4.901289,
+        "display_name": "Nationale Opera en Ballet, Lange Houtgang, Amsterdam, Niederlande",
+        "class": "building",
+        "type": "government",
+        "provider": "photon"
+      },
+      "delta_m": 38,
+      "from_city_m": 223,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "amsterdam_spinoza_monument",
+        "amsterdam_neoseum_amsterdam",
+        "amsterdam_the_art_cafe_amsterdam",
+        "amsterdam_stopera",
+        "amsterdam_nationale_opera_ballet"
+      ]
+    },
+    {
+      "id": "amsterdam_het_scheepvaartmuseum",
+      "name": "Het Scheepvaartmuseum",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.371687439999995,
+        "lng": 4.914773800000001
+      },
+      "query": "Het Scheepvaartmuseum, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.372005,
+        "lng": 4.9149527,
+        "display_name": "Das Schifffahrtmuseum, Kattenburgerplein, Amsterdam, Niederlande",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 37,
+      "from_city_m": 855,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "amsterdam_schifffahrtsmuseum"
+      ]
+    },
+    {
+      "id": "amsterdam_stopera",
+      "name": "Stopera",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.36742051276595,
+        "lng": 4.900900136170213
+      },
+      "query": "Stopera, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3675554,
+        "lng": 4.901289,
+        "display_name": "Nationale Opera en Ballet, Lange Houtgang, Amsterdam, Niederlande",
+        "class": "building",
+        "type": "government",
+        "provider": "photon"
+      },
+      "delta_m": 30,
+      "from_city_m": 221,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "amsterdam_spinoza_monument",
+        "amsterdam_neoseum_amsterdam",
+        "amsterdam_het_muziektheater",
+        "amsterdam_the_art_cafe_amsterdam",
+        "amsterdam_nationale_opera_ballet"
+      ]
+    },
+    {
+      "id": "amsterdam_nationale_opera_ballet",
+      "name": "Nationale Opera & Ballet",
+      "category": "theater",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.36742051276595,
+        "lng": 4.900900136170213
+      },
+      "query": "Nationale Opera, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3675554,
+        "lng": 4.901289,
+        "display_name": "Nationale Opera en Ballet, Lange Houtgang, Amsterdam, Niederlande",
+        "class": "building",
+        "type": "government",
+        "provider": "photon"
+      },
+      "delta_m": 30,
+      "from_city_m": 221,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "amsterdam_spinoza_monument",
+        "amsterdam_neoseum_amsterdam",
+        "amsterdam_het_muziektheater",
+        "amsterdam_the_art_cafe_amsterdam",
+        "amsterdam_stopera"
+      ]
+    },
+    {
+      "id": "amsterdam_nemo_science_museum",
+      "name": "NEMO Science Museum",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.37434206984128,
+        "lng": 4.912265036507936
+      },
+      "query": "NEMO Science Museum, Amsterdam",
+      "osm": {
+        "lat": 52.3741151,
+        "lng": 4.9123201,
+        "display_name": "Bar of NEMO Science Center, IJ-tunnel, Amsterdam, Niederlande",
+        "class": "amenity",
+        "type": "cafe",
+        "provider": "photon"
+      },
+      "delta_m": 26,
+      "from_city_m": 933,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "amsterdam_nemo"
+      ]
+    },
+    {
+      "id": "amsterdam_rembrandtplein",
+      "name": "Rembrandtplein",
+      "category": "altstadt",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.366051219999996,
+        "lng": 4.89635361
+      },
+      "query": "Rembrandtplein, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.365988,
+        "lng": 4.8966112,
+        "display_name": "Rembrandtplatz, Amsterdam, Niederlande",
+        "class": "place",
+        "type": "square",
+        "provider": "photon"
+      },
+      "delta_m": 19,
+      "from_city_m": 555,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "amsterdam_rembrandt_monument"
+      ]
+    },
+    {
+      "id": "amsterdam_torensluis",
+      "name": "Torensluis",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.37452746666667,
+        "lng": 4.889601866666666
+      },
+      "query": "Torensluis, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3746328,
+        "lng": 4.8894807,
+        "display_name": "Torensluis, Torensluis, Amsterdam, Niederlande",
+        "class": "man_made",
+        "type": "bridge",
+        "provider": "photon"
+      },
+      "delta_m": 14,
+      "from_city_m": 1254,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "amsterdam_multatuli_standbild"
+      ]
+    },
+    {
+      "id": "amsterdam_anne_frank_huis",
+      "name": "Anne Frank Huis",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.37505204,
+        "lng": 4.884169926666668
+      },
+      "query": "Anne Frank Huis, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3751558,
+        "lng": 4.8840807,
+        "display_name": "Anne-Frank-Haus, Prinsengracht, Amsterdam, Niederlande",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 13,
+      "from_city_m": 1590,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "amsterdam_anne_frank_haus"
+      ]
+    },
+    {
+      "id": "amsterdam_a_dam_lookout",
+      "name": "A’DAM Lookout",
+      "category": "aussicht",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.38379974687502,
+        "lng": 4.902200890625
+      },
+      "query": "A’DAM Lookout, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3838564,
+        "lng": 4.9021028,
+        "display_name": "A'dam Lookout, Overhoeksplein, Amsterdam, Niederlande",
+        "class": "tourism",
+        "type": "viewpoint",
+        "provider": "photon"
+      },
+      "delta_m": 9,
+      "from_city_m": 1809,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "amsterdam_overhoeks"
+      ]
+    },
+    {
+      "id": "amsterdam_oude_kerk",
+      "name": "Oude Kerk",
+      "category": "kirche",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.37435270434786,
+        "lng": 4.89795389347826
+      },
+      "query": "Oude Kerk, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3743621,
+        "lng": 4.8980733,
+        "display_name": "Alte Kirche, Alter Kirchplatz, Amsterdam, Niederlande",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 8,
+      "from_city_m": 863,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "amsterdam_alte_kirche"
+      ]
+    },
+    {
+      "id": "amsterdam_moco_museum_amsterdam",
+      "name": "Moco Museum Amsterdam",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.35870342,
+        "lng": 4.88192692
+      },
+      "query": "Moco Museum Amsterdam, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3587165,
+        "lng": 4.8819619,
+        "display_name": "Moco Museum, Honthorststraat, Amsterdam, Niederlande",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 3,
+      "from_city_m": 1802,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "amsterdam_museum_market"
+      ]
+    },
+    {
+      "id": "amsterdam_portugese_synagoge",
+      "name": "Portugese Synagoge",
+      "category": "kirche",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.36752110952381,
+        "lng": 4.905397938095239
+      },
+      "query": "Portugese Synagoge, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3675344,
+        "lng": 4.9053568,
+        "display_name": "Portugiesische Synagoge, Jonas Daniël Meijerplein, Amsterdam, Niederlande",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 3,
+      "from_city_m": 86,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "amsterdam_artisan_food_selection",
+        "amsterdam_stadtgeschichte"
+      ]
+    },
+    {
+      "id": "amsterdam_sculpture_of_anne_frank",
+      "name": "Sculpture of Anne Frank",
+      "category": "museum",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.3455551,
+        "lng": 4.9002279
+      },
+      "query": "Sculpture of Anne, Amsterdam, Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 2463,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_artisan_food_selection",
+      "name": "Artisan Food Selection",
+      "category": "freizeit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.36752110952381,
+        "lng": 4.905397938095239
+      },
+      "query": "Artisan Food Selection, Amsterdam",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 86,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "amsterdam_portugese_synagoge",
+        "amsterdam_stadtgeschichte"
+      ]
+    },
+    {
+      "id": "amsterdam_wereldmuseum_amsterdam",
+      "name": "Wereldmuseum Amsterdam",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.362342139999996,
+        "lng": 4.92185194
+      },
+      "query": "Wereldmuseum Amsterdam, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.362688,
+        "lng": 4.9224397,
+        "display_name": "Wereldmuseum Amsterdam, Linnaeusstraat, Amsterdam, Niederlande",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 55,
+      "from_city_m": 1336,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_ziggo_dome",
+      "name": "Ziggo Dome",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.31354828,
+        "lng": 4.93704976
+      },
+      "query": "Ziggo Dome, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3137527,
+        "lng": 4.937709,
+        "display_name": "Ziggo Dome, De passage, Amsterdam, Niederlande",
+        "class": "amenity",
+        "type": "music_venue",
+        "provider": "photon"
+      },
+      "delta_m": 50,
+      "from_city_m": 6410,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_chinatown_amsterdam",
+      "name": "Chinatown Amsterdam",
+      "category": "altstadt",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.373746940000004,
+        "lng": 4.900354
+      },
+      "query": "Chinatown Amsterdam, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3733393,
+        "lng": 4.9006342,
+        "display_name": "Chinatown, Amsterdam, Niederlande",
+        "class": "place",
+        "type": "neighbourhood",
+        "provider": "photon"
+      },
+      "delta_m": 49,
+      "from_city_m": 733,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_huis_marseille_garden",
+      "name": "Huis Marseille Garden",
+      "category": "museum",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.36761347499999,
+        "lng": 4.885515600000001
+      },
+      "query": "Huis Marseille Garden, Amsterdam",
+      "osm": {
+        "lat": 52.3676412,
+        "lng": 4.8848369,
+        "display_name": "Haus Marseille, Keizersgracht, Amsterdam, Niederlande",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 46,
+      "from_city_m": 1264,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_blauwbrug",
+      "name": "Blauwbrug",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.36634905714287,
+        "lng": 4.900953299999999
+      },
+      "query": "Blauwbrug, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3662467,
+        "lng": 4.900427,
+        "display_name": "Blauwbrug, Amstel, Amsterdam, Niederlande",
+        "class": "highway",
+        "type": "busway",
+        "provider": "photon"
+      },
+      "delta_m": 38,
+      "from_city_m": 256,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_hortus_botanicus_amsterdam",
+      "name": "Hortus Botanicus Amsterdam",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.367007439999995,
+        "lng": 4.90739214
+      },
+      "query": "Hortus Botanicus Amsterdam, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.366806,
+        "lng": 4.9077777,
+        "display_name": "Hortus Botanicus, Plantage Middenlaan, Amsterdam, Niederlande",
+        "class": "leisure",
+        "type": "garden",
+        "provider": "photon"
+      },
+      "delta_m": 34,
+      "from_city_m": 230,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_theater_carre",
+      "name": "Theater Carré",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.36240261891892,
+        "lng": 4.904392540540542
+      },
+      "query": "Theater Carré, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3623349,
+        "lng": 4.9039264,
+        "display_name": "Koninklijk Theater Carré, Amstel, Amsterdam, Niederlande",
+        "class": "amenity",
+        "type": "theatre",
+        "provider": "photon"
+      },
+      "delta_m": 33,
+      "from_city_m": 575,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_leidsestraat_pharmacy_amsterdam",
+      "name": "Leidsestraat Pharmacy, Amsterdam",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.36539719999999,
+        "lng": 4.884722472727273
+      },
+      "query": "Leidsestraat Pharmacy, Amsterdam, Amsterdam",
+      "osm": {
+        "lat": 52.3651669,
+        "lng": 4.884984,
+        "display_name": "De Amsterdammer, Leidsestraat, Amsterdam, Niederlande",
+        "class": "shop",
+        "type": "gift",
+        "provider": "photon"
+      },
+      "delta_m": 31,
+      "from_city_m": 1340,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_java_eiland",
+      "name": "Java-eiland",
+      "category": "altstadt",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.37831542,
+        "lng": 4.9294508
+      },
+      "query": "Java-eiland, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3783972,
+        "lng": 4.9298824,
+        "display_name": "Java-eiland, Amsterdam, Niederlande",
+        "class": "place",
+        "type": "neighbourhood",
+        "provider": "photon"
+      },
+      "delta_m": 31,
+      "from_city_m": 2093,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_dam",
+      "name": "Dam",
+      "category": "altstadt",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.3731962967533,
+        "lng": 4.89194038051948
+      },
+      "query": "Dam, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3731162,
+        "lng": 4.8923511,
+        "display_name": "Damplatz, Amsterdam, Niederlande",
+        "class": "place",
+        "type": "square",
+        "provider": "photon"
+      },
+      "delta_m": 29,
+      "from_city_m": 1038,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_albert_cuyp_markt",
+      "name": "Albert Cuyp Markt",
+      "category": "markt",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.355362314285706,
+        "lng": 4.891405385714286
+      },
+      "query": "Albert Cuyp Markt, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3552329,
+        "lng": 4.8917785,
+        "display_name": "Albert Cuyp-markt, Albert Cuypstraat, Amsterdam, Niederlande",
+        "class": "amenity",
+        "type": "marketplace",
+        "provider": "photon"
+      },
+      "delta_m": 29,
+      "from_city_m": 1610,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_houseboat_museum",
+      "name": "Houseboat Museum",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.369977160000005,
+        "lng": 4.8822947
+      },
+      "query": "Houseboat Museum, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3701526,
+        "lng": 4.882602,
+        "display_name": "Houseboat Museum, Prinsengracht, Amsterdam, Niederlande",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 29,
+      "from_city_m": 1507,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_muziekgebouw_aan_t_ij",
+      "name": "Muziekgebouw aan 't IJ",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.37822618571429,
+        "lng": 4.913512271428572
+      },
+      "query": "Muziekgebouw aan 't IJ, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3782711,
+        "lng": 4.9131079,
+        "display_name": "Muziekgebouw, Piet Heinkade, Amsterdam, Niederlande",
+        "class": "amenity",
+        "type": "theatre",
+        "provider": "photon"
+      },
+      "delta_m": 28,
+      "from_city_m": 1345,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_sarphatipark",
+      "name": "Sarphatipark",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.35445720344828,
+        "lng": 4.89601918275862
+      },
+      "query": "Sarphatipark, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3543751,
+        "lng": 4.8963881,
+        "display_name": "Sarphatipark, Amsterdam, Niederlande",
+        "class": "leisure",
+        "type": "park",
+        "provider": "photon"
+      },
+      "delta_m": 27,
+      "from_city_m": 1559,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_wertheimpark",
+      "name": "Wertheimpark",
+      "category": "natur",
+      "place_tier": 3,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.36766015333333,
+        "lng": 4.908804039999999
+      },
+      "query": "Wertheimpark, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3678922,
+        "lng": 4.9088971,
+        "display_name": "Wertheimpark, Amsterdam, Niederlande",
+        "class": "leisure",
+        "type": "park",
+        "provider": "photon"
+      },
+      "delta_m": 27,
+      "from_city_m": 317,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_knsm_eiland",
+      "name": "KNSM-eiland",
+      "category": "altstadt",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.3768756076923,
+        "lng": 4.942593492307692
+      },
+      "query": "KNSM-eiland, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3766658,
+        "lng": 4.9427724,
+        "display_name": "KNSM-eiland, Amsterdam, Niederlande",
+        "class": "place",
+        "type": "island",
+        "provider": "photon"
+      },
+      "delta_m": 26,
+      "from_city_m": 2808,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_oosterpark",
+      "name": "Oosterpark",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.360001024999995,
+        "lng": 4.920696675000002
+      },
+      "query": "Oosterpark, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3602065,
+        "lng": 4.9205433,
+        "display_name": "Oosterpark, Amsterdam, Niederlande",
+        "class": "leisure",
+        "type": "park",
+        "provider": "photon"
+      },
+      "delta_m": 25,
+      "from_city_m": 1405,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_begijnhof",
+      "name": "Begijnhof",
+      "category": "altstadt",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.36946390000001,
+        "lng": 4.89039632
+      },
+      "query": "Begijnhof, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3694314,
+        "lng": 4.8900431,
+        "display_name": "Beginenhof, Gedempte Begijnensloot, Amsterdam, Niederlande",
+        "class": "tourism",
+        "type": "attraction",
+        "provider": "photon"
+      },
+      "delta_m": 24,
+      "from_city_m": 956,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_spui",
+      "name": "Spui",
+      "category": "altstadt",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.368652680000004,
+        "lng": 4.8905411800000005
+      },
+      "query": "Spui, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3685848,
+        "lng": 4.8902006,
+        "display_name": "Universiteit van Amsterdam, Spui, Amsterdam, Niederlande",
+        "class": "amenity",
+        "type": "university",
+        "provider": "photon"
+      },
+      "delta_m": 24,
+      "from_city_m": 931,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_stedelijk_museum",
+      "name": "Stedelijk Museum",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.35809493421052,
+        "lng": 4.879726584210527
+      },
+      "query": "Stedelijk Museum, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3579003,
+        "lng": 4.8798598,
+        "display_name": "Stedelijk Museum, Museumplein, Amsterdam, Niederlande",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 23,
+      "from_city_m": 1964,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_verzetsmuseum_amsterdam",
+      "name": "Verzetsmuseum Amsterdam",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.36788578787878,
+        "lng": 4.912406218181817
+      },
+      "query": "Verzetsmuseum Amsterdam, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3678083,
+        "lng": 4.912728,
+        "display_name": "Verzetsmuseum, Plantage Kerklaan, Amsterdam, Niederlande",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 23,
+      "from_city_m": 562,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_ons_lieve_heer_op_solder",
+      "name": "Ons' Lieve Heer op Solder",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.37501086363636,
+        "lng": 4.899144127272726
+      },
+      "query": "Ons' Lieve Heer op Solder, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3751725,
+        "lng": 4.8993657,
+        "display_name": "Ons' Lieve Heer op Solder, Oudezijds Voorburgwal, Amsterdam, Niederlande",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 23,
+      "from_city_m": 894,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_allard_pierson",
+      "name": "Allard Pierson",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.368661040000006,
+        "lng": 4.8928128200000005
+      },
+      "query": "Allard Pierson, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3688053,
+        "lng": 4.8930549,
+        "display_name": "Allard Pierson Museum, Oude Turfmarkt, Amsterdam, Niederlande",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 23,
+      "from_city_m": 778,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_eye_filmmuseum",
+      "name": "EYE Filmmuseum",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.38422224000001,
+        "lng": 4.90106996
+      },
+      "query": "EYE Filmmuseum, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.384335,
+        "lng": 4.900812,
+        "display_name": "Eye Filmmuseum, IJpromenade, Amsterdam, Niederlande",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 22,
+      "from_city_m": 1863,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_sint_nicolaasbasiliek",
+      "name": "Sint-Nicolaasbasiliek",
+      "category": "kirche",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.376506983333336,
+        "lng": 4.900863666666667
+      },
+      "query": "Sint-Nicolaasbasiliek, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3764358,
+        "lng": 4.9011646,
+        "display_name": "Konkathedrale St. Nikolaus, Prins Hendrikkade, Amsterdam, Niederlande",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 22,
+      "from_city_m": 1018,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_olvg_apotheek_oost",
+      "name": "OLVG Apotheek Oost",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.358342699999994,
+        "lng": 4.9157440999999995
+      },
+      "query": "OLVG Apotheek Oost, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3584164,
+        "lng": 4.9160283,
+        "display_name": "OLVG Apotheek, 's-Gravesandeplein, Amsterdam, Niederlande",
+        "class": "amenity",
+        "type": "pharmacy",
+        "provider": "photon"
+      },
+      "delta_m": 21,
+      "from_city_m": 1294,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_amsterdam_central_pharmacy",
+      "name": "Amsterdam Central Pharmacy",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.380240300000004,
+        "lng": 4.899325759999999
+      },
+      "query": "Amsterdam Central Pharmacy, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3800745,
+        "lng": 4.8992326,
+        "display_name": "Doctor & Pharmacy, De Ruijterkade, Amsterdam, Niederlande",
+        "class": "amenity",
+        "type": "pharmacy",
+        "provider": "photon"
+      },
+      "delta_m": 19,
+      "from_city_m": 1446,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_waterlooplein",
+      "name": "Waterlooplein",
+      "category": "markt",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.36835454,
+        "lng": 4.9020258
+      },
+      "query": "Waterlooplein, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3684453,
+        "lng": 4.9017859,
+        "display_name": "Waterlooplein, Amsterdam, Niederlande",
+        "class": "highway",
+        "type": "pedestrian",
+        "provider": "photon"
+      },
+      "delta_m": 19,
+      "from_city_m": 168,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_rijksmuseum_amsterdam",
+      "name": "Rijksmuseum Amsterdam",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.35995611568625,
+        "lng": 4.884871903921568
+      },
+      "query": "Rijksmuseum Amsterdam, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3598431,
+        "lng": 4.8850395,
+        "display_name": "Reichsmuseum, Paulus Potterstraat, Amsterdam, Niederlande",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 17,
+      "from_city_m": 1558,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_heineken_experience",
+      "name": "Heineken Experience",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.35771126666666,
+        "lng": 4.891705376190477
+      },
+      "query": "Heineken Experience, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3578404,
+        "lng": 4.891784,
+        "display_name": "Heineken Experience, Stadhouderskade, Amsterdam, Niederlande",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 15,
+      "from_city_m": 1384,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_felix_meritis",
+      "name": "Felix Meritis",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.36994692,
+        "lng": 4.8840515
+      },
+      "query": "Felix Meritis, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3699902,
+        "lng": 4.884254,
+        "display_name": "Felix Meritis, Keizersgracht, Amsterdam, Niederlande",
+        "class": "amenity",
+        "type": "community_centre",
+        "provider": "photon"
+      },
+      "delta_m": 15,
+      "from_city_m": 1389,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_museum_willet_holthuysen",
+      "name": "Museum Willet-Holthuysen",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.365639480000006,
+        "lng": 4.89881842
+      },
+      "query": "Museum Willet-Holthuysen, Amsterdam",
+      "osm": {
+        "lat": 52.3656031,
+        "lng": 4.8990152,
+        "display_name": "Willet-Holthuysen, Herengracht, Amsterdam, Niederlande",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 14,
+      "from_city_m": 420,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_museum_van_loon",
+      "name": "Museum Van Loon",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.36335258333333,
+        "lng": 4.893351475
+      },
+      "query": "Museum Van Loon, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.363464,
+        "lng": 4.8933781,
+        "display_name": "Museum Van Loon, Keizersgracht, Amsterdam, Niederlande",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 13,
+      "from_city_m": 870,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_bimhuis",
+      "name": "Bimhuis",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.37792227999999,
+        "lng": 4.912715459999999
+      },
+      "query": "Bimhuis, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3779694,
+        "lng": 4.9128862,
+        "display_name": "Bimhuis, Piet Heinkade, Amsterdam, Niederlande",
+        "class": "amenity",
+        "type": "theatre",
+        "provider": "photon"
+      },
+      "delta_m": 13,
+      "from_city_m": 1290,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_bijbels_museum",
+      "name": "Bijbels Museum",
+      "category": "museum",
+      "place_tier": 3,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.36591463999999,
+        "lng": 4.9036357399999995
+      },
+      "query": "Bijbels Museum, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3659879,
+        "lng": 4.9037884,
+        "display_name": "Bijbels Museum (not museum, office only), Nieuwe Herengracht, Amsterdam, Niederlande",
+        "class": "office",
+        "type": "yes",
+        "provider": "photon"
+      },
+      "delta_m": 13,
+      "from_city_m": 188,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_nationaal_holocaust_namenmonument",
+      "name": "Nationaal Holocaust Namenmonument",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.36568722,
+        "lng": 4.904832520000001
+      },
+      "query": "Nationaal Holocaust Namenmonument, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3657056,
+        "lng": 4.904975,
+        "display_name": "Nationaal Holocaust Namenmonument, Weesperstraat, Amsterdam, Niederlande",
+        "class": "historic",
+        "type": "memorial",
+        "provider": "photon"
+      },
+      "delta_m": 10,
+      "from_city_m": 215,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_homomonument",
+      "name": "Homomonument",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.37445334999999,
+        "lng": 4.884744483333333
+      },
+      "query": "Homomonument, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3745281,
+        "lng": 4.8846678,
+        "display_name": "Homomonument, Keizersgracht, Amsterdam, Niederlande",
+        "class": "historic",
+        "type": "memorial",
+        "provider": "photon"
+      },
+      "delta_m": 10,
+      "from_city_m": 1523,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_foam",
+      "name": "FOAM",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.364052542857145,
+        "lng": 4.893149799999999
+      },
+      "query": "FOAM, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3639884,
+        "lng": 4.8932631,
+        "display_name": "foam, Keizersgracht, Amsterdam, Niederlande",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 10,
+      "from_city_m": 843,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_hollandsche_schouwburg",
+      "name": "Hollandsche Schouwburg",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.366369141666674,
+        "lng": 4.911069666666666
+      },
+      "query": "Hollandsche Schouwburg, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3664388,
+        "lng": 4.911154,
+        "display_name": "Hollandsche Schouwburg, Plantage Middenlaan, Amsterdam, Niederlande",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 10,
+      "from_city_m": 489,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_ferdinand_bol_apotheek",
+      "name": "Ferdinand Bol Apotheek",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.35322582857143,
+        "lng": 4.891289857142858
+      },
+      "query": "Ferdinand Bol Apotheek, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3532063,
+        "lng": 4.8911827,
+        "display_name": "Ferdinand Bol Apotheek, Ferdinand Bolstraat, Amsterdam, Niederlande",
+        "class": "amenity",
+        "type": "pharmacy",
+        "provider": "photon"
+      },
+      "delta_m": 8,
+      "from_city_m": 1818,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_concertgebouw",
+      "name": "Concertgebouw",
+      "category": "theater",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.356225275000014,
+        "lng": 4.878938386363636
+      },
+      "query": "Concertgebouw, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3561982,
+        "lng": 4.8790448,
+        "display_name": "Konzertgebäude, Concertgebouwplein, Amsterdam, Niederlande",
+        "class": "amenity",
+        "type": "theatre",
+        "provider": "photon"
+      },
+      "delta_m": 8,
+      "from_city_m": 2126,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_micropia",
+      "name": "Micropia",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.36695258333334,
+        "lng": 4.9127320333333335
+      },
+      "query": "Micropia, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3668906,
+        "lng": 4.9126888,
+        "display_name": "Micropia, Plantage Kerklaan, Amsterdam, Niederlande",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 7,
+      "from_city_m": 588,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_beurs_van_berlage",
+      "name": "Beurs van Berlage",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.3750797,
+        "lng": 4.896298654761905
+      },
+      "query": "Beurs van Berlage, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3750218,
+        "lng": 4.8962647,
+        "display_name": "Alte Börse, Damrak, Amsterdam, Niederlande",
+        "class": "tourism",
+        "type": "attraction",
+        "provider": "photon"
+      },
+      "delta_m": 7,
+      "from_city_m": 990,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_begijnhofkapel",
+      "name": "Begijnhofkapel",
+      "category": "altstadt",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.369350811764704,
+        "lng": 4.889583194117647
+      },
+      "query": "Begijnhofkapel, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3692964,
+        "lng": 4.8896053,
+        "display_name": "Begijnhofkapel, Beginenhof, Amsterdam, Niederlande",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 6,
+      "from_city_m": 1008,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_koninklijk_paleis",
+      "name": "Koninklijk Paleis",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.373120619999995,
+        "lng": 4.891272799999999
+      },
+      "query": "Koninklijk Paleis, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3731449,
+        "lng": 4.8913363,
+        "display_name": "Königlicher Palast, Nieuwezijds Voorburgwal, Amsterdam, Niederlande",
+        "class": "building",
+        "type": "yes",
+        "provider": "photon"
+      },
+      "delta_m": 5,
+      "from_city_m": 1069,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_trippenhuis",
+      "name": "Trippenhuis",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.37126145999999,
+        "lng": 4.89956028
+      },
+      "query": "Trippenhuis, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3712197,
+        "lng": 4.8995252,
+        "display_name": "Trippenhuis, Kloveniersburgwal, Amsterdam, Niederlande",
+        "class": "building",
+        "type": "yes",
+        "provider": "photon"
+      },
+      "delta_m": 5,
+      "from_city_m": 515,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_westerkerk",
+      "name": "Westerkerk",
+      "category": "kirche",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.374514556756765,
+        "lng": 4.883996245945944
+      },
+      "query": "Westerkerk, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3745473,
+        "lng": 4.8839863,
+        "display_name": "Westerkerk, Westermarkt, Amsterdam, Niederlande",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 4,
+      "from_city_m": 1570,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_schreierstoren",
+      "name": "Schreierstoren",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.3763814076923,
+        "lng": 4.90227726153846
+      },
+      "query": "Schreierstoren, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3763565,
+        "lng": 4.9022446,
+        "display_name": "Schreierstoren, Prins Hendrikkade, Amsterdam, Niederlande",
+        "class": "building",
+        "type": "yes",
+        "provider": "photon"
+      },
+      "delta_m": 4,
+      "from_city_m": 988,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_noorderkerk",
+      "name": "Noorderkerk",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.37963134666666,
+        "lng": 4.886463773333334
+      },
+      "query": "Noorderkerk, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3796292,
+        "lng": 4.8863993,
+        "display_name": "Noorderkerk, Noordermarkt, Amsterdam, Niederlande",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 4,
+      "from_city_m": 1799,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_zuiderkerk",
+      "name": "Zuiderkerk",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.370270627272724,
+        "lng": 4.899822227272727
+      },
+      "query": "Zuiderkerk, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3702917,
+        "lng": 4.8997993,
+        "display_name": "Südkirche, Onkelboerensteeg, Amsterdam, Niederlande",
+        "class": "tourism",
+        "type": "attraction",
+        "provider": "photon"
+      },
+      "delta_m": 3,
+      "from_city_m": 419,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_nieuwe_kerk",
+      "name": "Nieuwe Kerk",
+      "category": "kirche",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.37389717246378,
+        "lng": 4.891674123188407
+      },
+      "query": "Nieuwe Kerk, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3739231,
+        "lng": 4.8916924,
+        "display_name": "Neue Kirche, Dam, Amsterdam, Niederlande",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 3,
+      "from_city_m": 1100,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_boerderij_westerpark",
+      "name": "Boerderij Westerpark",
+      "category": "natur",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.38738624,
+        "lng": 4.865360659999999
+      },
+      "query": "Boerderij Westerpark, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3873804,
+        "lng": 4.8653278,
+        "display_name": "Boerderij Westerpark, Overbrakerpad, Amsterdam, Niederlande",
+        "class": "tourism",
+        "type": "zoo",
+        "provider": "photon"
+      },
+      "delta_m": 2,
+      "from_city_m": 3433,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_benu_apotheek_w_h_van_der_meulen",
+      "name": "BENU Apotheek W.H. van der Meulen",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.37421468333334,
+        "lng": 4.9008807333333335
+      },
+      "query": "BENU Apotheek W.H. van der, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3742119,
+        "lng": 4.9008588,
+        "display_name": "Apotheek H.W. van der Meulen, Geldersekade, Amsterdam, Niederlande",
+        "class": "amenity",
+        "type": "pharmacy",
+        "provider": "photon"
+      },
+      "delta_m": 2,
+      "from_city_m": 771,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_wittop_koning_apotheek_pharmacy_amsterdam",
+      "name": "Wittop Koning | Apotheek / Pharmacy Amsterdam",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.36268365000001,
+        "lng": 4.875856
+      },
+      "query": "Wittop Koning, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3627008,
+        "lng": 4.8758365,
+        "display_name": "Wittop Koning, Overtoom, Amsterdam, Niederlande",
+        "class": "amenity",
+        "type": "pharmacy",
+        "provider": "photon"
+      },
+      "delta_m": 2,
+      "from_city_m": 1996,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_vondelpark_openluchttheater",
+      "name": "Vondelpark Openluchttheater",
+      "category": "natur",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.35841768,
+        "lng": 4.87109586
+      },
+      "query": "Vondelpark Openluchttheater, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3584331,
+        "lng": 4.8711158,
+        "display_name": "Vondelpark Openluchttheater, Vondelpark, Amsterdam, Niederlande",
+        "class": "amenity",
+        "type": "theatre",
+        "provider": "photon"
+      },
+      "delta_m": 2,
+      "from_city_m": 2464,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_museum_het_schip",
+      "name": "Museum Het Schip",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.390474411111114,
+        "lng": 4.873708066666667
+      },
+      "query": "Museum Het Schip, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3904885,
+        "lng": 4.8737264,
+        "display_name": "Museum Het Schip, Oostzaanstraat, Amsterdam, Niederlande",
+        "class": "tourism",
+        "type": "museum",
+        "provider": "photon"
+      },
+      "delta_m": 2,
+      "from_city_m": 3279,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_montelbaanstoren",
+      "name": "Montelbaanstoren",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.37203884666667,
+        "lng": 4.9056824
+      },
+      "query": "Montelbaanstoren, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3720393,
+        "lng": 4.9056627,
+        "display_name": "Montelbaanstoren, Oudeschans, Amsterdam, Niederlande",
+        "class": "tourism",
+        "type": "attraction",
+        "provider": "photon"
+      },
+      "delta_m": 1,
+      "from_city_m": 507,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_munttoren",
+      "name": "Munttoren",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.36705939090909,
+        "lng": 4.893204709090909
+      },
+      "query": "Munttoren, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3670603,
+        "lng": 4.8932124,
+        "display_name": "Munttoren, Muntplein, Amsterdam, Niederlande",
+        "class": "tourism",
+        "type": "attraction",
+        "provider": "photon"
+      },
+      "delta_m": 1,
+      "from_city_m": 745,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_magere_brug",
+      "name": "Magere Brug",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.363580472,
+        "lng": 4.902363114
+      },
+      "query": "Magere Brug, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3635843,
+        "lng": 4.9023753,
+        "display_name": "Magere Brug, Amstel, Amsterdam, Niederlande",
+        "class": "man_made",
+        "type": "bridge",
+        "provider": "photon"
+      },
+      "delta_m": 1,
+      "from_city_m": 460,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "amsterdam_paradiso",
+      "name": "Paradiso",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.36215320476192,
+        "lng": 4.8837894238095245
+      },
+      "query": "Paradiso, Amsterdam, Germany",
+      "osm": {
+        "lat": 52.3621554,
+        "lng": 4.8837824,
+        "display_name": "Paradiso, Weteringschans, Amsterdam, Niederlande",
+        "class": "amenity",
+        "type": "concert_hall",
+        "provider": "photon"
+      },
+      "delta_m": 1,
+      "from_city_m": 1507,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    }
+  ]
+}

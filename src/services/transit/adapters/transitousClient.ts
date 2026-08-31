@@ -7,7 +7,7 @@ import { env } from '../../../config/env';
 
 const DEFAULT_BASE = 'https://api.transitous.org/api';
 const FETCH_MS = 14_000;
-const USER_AGENT = 'Findus/2.0 (https://findus.app; contact@findus.app)';
+const USER_AGENT = 'Yorro/2.0 (https://yorro.de; contact@yorro.de)';
 
 export function transitousBaseUrl(): string {
   const fromEnv = (

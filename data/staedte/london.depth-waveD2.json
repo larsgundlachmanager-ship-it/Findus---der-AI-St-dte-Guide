@@ -1,0 +1,615 @@
+{
+  "spots": [
+    {
+      "id": "london_wallace_collection",
+      "name": "Wallace Collection",
+      "general_info": "Die Wallace Collection zeigt in Hertford House rund 5.500 Kunstwerke aus fünf privaten Sammlergenerationen. Französische Kunst des 18. Jahrhunderts, Alte Meister, Porzellan sowie Waffen und Rüstungen prägen das Haus.",
+      "deep_data_pool": [
+        {
+          "text": "Die Sammlung entstand über etwa ein Jahrhundert: Der erste bis vierte Marquess of Hertford und anschließend Sir Richard Wallace erwarben ihre Bestände zwischen den 1780er- und 1880er-Jahren. Besonders der meist in Paris lebende vierte Marquess bestimmte den starken französischen Schwerpunkt.",
+          "tags": ["geschichte", "sammlung", "provenienz"]
+        },
+        {
+          "text": "Hertford House war seit 1797 mit der Familie verbunden. Während die zweite Marchioness dort einen gesellschaftlichen Salon führte, nutzte der vierte Marquess das Gebäude weitgehend als Depot seiner wachsenden Kunstsammlung; Wallace ließ es ab 1872 für die Präsentation umbauen.",
+          "tags": ["geschichte", "architektur", "stadtgesellschaft"]
+        },
+        {
+          "text": "Noch vor der Museumseröffnung machte Wallace große Teile seines Besitzes öffentlich: Mehr als 2.000 Werke bildeten 1872 die Eröffnungsausstellung des Bethnal Green Museum im Londoner East End. Die vielbesuchte Leihschau erweiterte den Zugang jenseits aristokratischer Kreise.",
+          "tags": ["museumsgeschichte", "bildung", "quer"]
+        },
+        {
+          "text": "Lady Wallace vermachte 1897 die Kunstwerke im Erd- und Obergeschoss der britischen Nation. Der Staat erwarb Hertford House als dauerhaften Standort; am 22. Juni 1900 öffnete die Wallace Collection dort als öffentliches Museum.",
+          "tags": ["geschichte", "stiftung", "museum"]
+        },
+        {
+          "text": "Die rund 25 Galerien verbinden Gemälde, Möbel, Uhren, Skulpturen und Porzellan zu historischen Raumensembles. Diese gemeinsame Präsentation macht sichtbar, wie Kunst in einem vornehmen Stadthaus gesammelt und inszeniert wurde, statt Objekte streng nach Gattungen zu trennen.",
+          "tags": ["innenraum", "sammlung", "museumspraxis"]
+        },
+        {
+          "text": "Zum Malereibestand gehören neben Frans Hals Werke von Titian, Van Dyck, Rembrandt, Velázquez, Gainsborough und Delacroix. Die französischen Bestände umfassen zudem Gemälde, Sèvres-Porzellan, kostbare Kleinobjekte und Möbel bedeutender Ebenisten.",
+          "tags": ["kunst", "sammlung", "alte_meister"]
+        },
+        {
+          "text": "Die Rüstkammern decken nicht nur europäische Turnier- und Kriegsrüstung ab. Osmanische, persische und indische Waffen erlauben Vergleiche von Stahlbearbeitung, Einlegearbeit und höfischer Repräsentation; ihre Herkunft und frühere Sammlungskontexte sind Teil heutiger Forschung.",
+          "tags": ["waffen", "handwerk", "globalgeschichte"]
+        },
+        {
+          "text": "Der Bequest galt lange als besonders geschlossen: Kunstwerke durften nicht aus der Sammlung entfernt oder verliehen werden. Erst eine Entscheidung der Charity Commission von 2019 eröffnete dem Museum die Möglichkeit, unter geregelten Bedingungen zeitweilige Leihgaben zu vergeben.",
+          "tags": ["museumsgeschichte", "recht", "sammlung"]
+        },
+        {
+          "text": "Hertford House ist als Grade II geschütztes Gebäude selbst Teil des Museumserlebnisses. Die vergleichsweise häusliche Fassade am begrünten Manchester Square verbirgt eine dichte Galerieabfolge und unterscheidet das Haus deutlich von den monumentalen Museumsbauten South Kensingtons.",
+          "tags": ["architektur", "denkmalschutz", "orientierung"]
+        },
+        {
+          "text": "LIVE: Freier Zugang zur Dauersammlung, Öffnungszeiten, Sonderausstellungen, Führungen sowie einzelne ausgeliehene oder konservierte Werke auf der offiziellen Museumsseite prüfen. Die historische Leihbeschränkung bedeutet nicht, dass jedes Objekt jederzeit ausgestellt ist.",
+          "tags": ["live_hint", "ephemeral", "besuch"]
+        }
+      ]
+    },
+    {
+      "id": "london_southwark_cathedral",
+      "name": "Southwark Cathedral",
+      "general_info": "Southwark Cathedral steht am ältesten Themseübergang Londons. Mittelalterlicher Chor, viktorianisches Langhaus und Erinnerungen an Shakespeare, John Harvard und die Theaterwelt von Bankside verbinden Kirchen- und Stadtgeschichte.",
+      "deep_data_pool": [
+        {
+          "text": "Eine mündliche Überlieferung nennt eine Gemeinschaft von Nonnen im 7. Jahrhundert; der erste sichere schriftliche Nachweis ist jedoch ein im Domesday Book von 1086 erwähntes Münster. Die Quellenlage trennt damit lokale Tradition von dokumentierter Geschichte.",
+          "tags": ["geschichte", "religion", "quellenkritik"]
+        },
+        {
+          "text": "Zwei normannische Ritter gründeten die Kirche 1106 als Augustinerpriorat neu. Die Chorherren lebten nach der Regel des Augustinus; ihr Hospital neben der Kirche war der direkte Vorläufer des heutigen St Thomas' Hospital.",
+          "tags": ["mittelalter", "religion", "medizin"]
+        },
+        {
+          "text": "Der Beiname St Mary Overie wurde als Bezug auf Maria „over the river“ verstanden. Die Lage südlich der alten London Bridge war entscheidend: Reisende, Händler und Pilger passierten hier über Jahrhunderte den wichtigsten Zugang zur City von Süden.",
+          "tags": ["namensgeschichte", "orientierung", "stadtgeschichte"]
+        },
+        {
+          "text": "Nach der Auflösung des Priorats mietete die Gemeinde die Kirche zunächst von der Krone. 1611 kauften lokale Kaufleute, die als Bargainers bekannt wurden, das Gebäude für 800 Pfund von James I. und sicherten es als Pfarrkirche.",
+          "tags": ["reformation", "gemeinde", "geschichte"]
+        },
+        {
+          "text": "Die Theaterwelt von Bankside hinterließ konkrete Spuren: Schauspieler, Dramatiker und Unternehmer wie Edmund Shakespeare, John Fletcher und Philip Henslowe wurden hier bestattet. Edmunds Gedenkstein liegt im Chor; sein ursprüngliches Grab ist nicht markiert.",
+          "tags": ["theater", "literatur", "bestattung"]
+        },
+        {
+          "text": "Lancelot Andrewes, Bischof von Winchester und wichtiger Mitarbeiter an der King-James-Bibel, wurde 1626 in der Kirche beigesetzt. Sein Grabmal steht im südlichen Chorumgang und verbindet die Kathedrale mit englischer Bibel- und Sprachgeschichte.",
+          "tags": ["religion", "biografie", "literatur"]
+        },
+        {
+          "text": "Der Retrochor hinter dem Hochaltar gehört zu den ältesten erhaltenen Teilen. Vier kleine Kapellen öffnen sich unter getrennten Gewölben; ihre Ostfenster von Hardman aus dem Jahr 1921 behandeln Geburt und frühes Leben Christi.",
+          "tags": ["architektur", "glasmalerei", "mittelalter"]
+        },
+        {
+          "text": "John Harvards Vater Robert betrieb in der nahen Pepper Alley ein Fleischereigeschäft und war Kirchenvorsteher. John wurde am 29. November 1607 hier getauft; nach seiner Auswanderung vermachte er dem jungen College in Massachusetts Geld und seine Bibliothek.",
+          "tags": ["biografie", "bildung", "transatlantisch"]
+        },
+        {
+          "text": "Das heutige Langhaus entstand 1895 unter dem Baumeister Thomas Rider, nachdem frühere Eingriffe mittelalterliche Substanz beseitigt hatten. Ein Fenster im Retrochor zeigt mehrere Bauphasen symbolisch als betende Figuren um den Turm.",
+          "tags": ["architektur", "restaurierung", "visuell"]
+        },
+        {
+          "text": "LIVE: Die Kathedrale ist täglicher Gottesdienst-, Gebets- und Musikort. Gottesdienstzeiten, Chorprogramm, Führungen, Fotoeinschränkungen und zugängliche Kapellen aktuell prüfen; liturgische Nutzung hat Vorrang vor Besichtigung.",
+          "tags": ["live_hint", "ephemeral", "respekt"]
+        }
+      ]
+    },
+    {
+      "id": "london_st_katharine_docks",
+      "name": "St Katharine Docks",
+      "general_info": "St Katharine Docks wurden 1828 als kompakter Warenhafen neben dem Tower eröffnet. Zwei verbundene Becken, eine Schleuse, erhaltene Speicher und die heutige Marina zeigen Londons Wandel vom Industriehafen zum Wohnviertel.",
+      "deep_data_pool": [
+        {
+          "text": "Ein Parlamentsgesetz von 1825 schuf die Dockgesellschaft; die Bauarbeiten begannen im Mai 1827. Das 23 Acre große Projekt beseitigte das mittelalterliche Hospital St Katharine by the Tower sowie rund 1.250 Häuser in einem dicht bewohnten Hafenviertel.",
+          "tags": ["geschichte", "stadtentwicklung", "sozialgeschichte"]
+        },
+        {
+          "text": "Etwa 11.300 Menschen, überwiegend Arbeiterfamilien des Hafens, verloren durch den Bau ihr Zuhause. Entschädigt wurden Eigentümer, nicht die große Zahl der Mieter. Die schnelle technische Modernisierung hatte deshalb einen erheblichen sozialen Preis.",
+          "tags": ["sozialgeschichte", "vertreibung", "hafen"]
+        },
+        {
+          "text": "Thomas Telford organisierte auf engem Raum ein Ost- und ein Westbecken mit möglichst viel Kailänge. Beide waren über ein zentrales Becken und eine einzige Schleuse mit der Themse verbunden, sodass Schiffe und Waren in kontrollierten Abläufen bewegt wurden.",
+          "tags": ["ingenieurwesen", "hafen", "architektur"]
+        },
+        {
+          "text": "Dampfmaschinen nach Entwürfen von Boulton und Watt hielten den Wasserspiegel der Becken ungefähr vier Fuß über dem Pegel der gezeitenabhängigen Themse. Dadurch konnten die Hafenbecken unabhängig vom wechselnden Flussstand effizienter betrieben werden.",
+          "tags": ["ingenieurwesen", "technik", "themse"]
+        },
+        {
+          "text": "Am 25. Oktober 1828 wurde der Hafen offiziell eröffnet. Bis 1830 kostete das Vorhaben mehr als zwei Millionen Pfund; trotz intensiver Nutzung blieb der wirtschaftliche Erfolg begrenzt, weil Einfahrt und Becken für wachsende Schiffstypen zu klein waren.",
+          "tags": ["wirtschaft", "geschichte", "schifffahrt"]
+        },
+        {
+          "text": "Die Lagerflächen umfassten mehr als 116.000 Quadratmeter. Speicher standen direkt an der Kaimauer, damit Kräne Güter unmittelbar vom Schiff in mehrgeschossige Lager heben konnten; dieses Prinzip verkürzte Wege, erhöhte aber die bauliche Dichte.",
+          "tags": ["logistik", "industriegeschichte", "architektur"]
+        },
+        {
+          "text": "1864 wurden St Katharine Docks mit den benachbarten London Docks vereinigt; ab 1909 verwaltete die Port of London Authority das Gelände. Containerisierung war auf dem engen Areal nicht realisierbar, weshalb der Schiffsumschlag 1968 und der Speicherbetrieb 1969 endeten.",
+          "tags": ["hafen", "wirtschaft", "stadtentwicklung"]
+        },
+        {
+          "text": "Der Greater London Council erwarb das Gelände 1969. Taylor Woodrows Konzept bewahrte mehr Infrastruktur als konkurrierende Vorschläge und kombinierte Marina, Wohnungen, Büros, Hotel und Gastronomie; das Projekt wurde zu einem frühen Modell britischer Dockland-Regeneration.",
+          "tags": ["stadtplanung", "nachnutzung", "architektur"]
+        },
+        {
+          "text": "Ivory House aus den 1850er-Jahren überlebte als markanter Speicher. Sein Name erinnert an wertvolle Importgüter, macht aber zugleich die kolonialen Handelsketten sichtbar, über die tierisches Elfenbein und andere Luxuswaren nach London gelangten.",
+          "tags": ["kolonialgeschichte", "architektur", "handel"]
+        },
+        {
+          "text": "LIVE: Marina-Zugang, Schleusenbetrieb, Bootsliegeplätze, Veranstaltungen und öffentlich begehbare Stege beim Betreiber prüfen. Die Wasserbecken sind Arbeits- und Liegeflächen einer aktiven Marina, nicht frei zugängliche Freizeitgewässer.",
+          "tags": ["live_hint", "ephemeral", "sicherheit"]
+        }
+      ]
+    },
+    {
+      "id": "london_portobello_road_market",
+      "name": "Portobello Road Market",
+      "general_info": "Portobello und Golborne bilden einen kilometerlangen Straßenmarkt mit rund 160 Jahren Geschichte. Lebensmittelhandel, Antiquitäten, Secondhand, Migration und lokale Alltagsversorgung liegen in deutlich verschiedenen Abschnitten.",
+      "deep_data_pool": [
+        {
+          "text": "In den 1860er-Jahren war Portobello Road noch eine ländliche Straße, an der Bauern Lebensmittel an die wachsende Nachbarschaft verkauften. Die Eröffnung der Metropolitan Railway Station Notting Hill, heute Ladbroke Grove, beschleunigte ab 1864 die Urbanisierung.",
+          "tags": ["geschichte", "transport", "stadtentwicklung"]
+        },
+        {
+          "text": "Der frühe Markt versorgte Anwohner vor allem mit Obst, Gemüse, Fleisch, Fisch und Blumen. Erst in den 1940er- und 1950er-Jahren kamen Antiquitätenhändler in größerer Zahl hinzu; der heute weltbekannte Schwerpunkt ist also vergleichsweise jung.",
+          "tags": ["markt", "geschichte", "handel"]
+        },
+        {
+          "text": "In den 1920er- und 1930er-Jahren erweiterten ehemalige Soldaten und Seeleute sowie Menschen, die vor dem Spanischen Bürgerkrieg flohen, das Angebot. Neben Lebensmitteln erschienen zunehmend gebrauchte Kleidung, Schuhe und Haushaltsobjekte.",
+          "tags": ["migration", "sozialgeschichte", "handel"]
+        },
+        {
+          "text": "Nach dem Zweiten Weltkrieg ließen sich portugiesische Händler im nördlichen Bereich um Golborne Road nieder. Fachgeschäfte und Gastronomie bewahrten dort eine andere lokale Prägung als der stärker touristische Antiquitätenabschnitt im Süden.",
+          "tags": ["migration", "essen", "stadtviertel"]
+        },
+        {
+          "text": "Karibische Einwanderung veränderte das Viertel ebenfalls tiefgreifend und steht im Zusammenhang mit der Entstehung des Notting Hill Carnival. Der Markt ist daher nicht nur Kulisse, sondern Teil einer Nachbarschaftsgeschichte von Arbeit, Rassismus und kultureller Selbstbehauptung.",
+          "tags": ["migration", "kultur", "sozialgeschichte"]
+        },
+        {
+          "text": "Der Markt ist kommunal verwaltet und verteilt sich entlang einer normalen Wohn- und Geschäftsstraße. Feste Läden, Arkaden und temporäre Stände folgen unterschiedlichen Regeln; ein Foto des Straßenbildes zeigt deshalb nie das gesamte Marktangebot.",
+          "tags": ["markt", "stadtwissen", "orientierung"]
+        },
+        {
+          "text": "Unter dem Westway verändert sich der Maßstab deutlich: Die Hochstraße überspannt den nördlichen Marktbereich, während südlich schmale viktorianische Häuser und Ladenfronten dominieren. Golborne Road knickt am Nordende aus der geraden Portobello-Achse ab.",
+          "tags": ["visuell", "orientierung", "architektur"]
+        },
+        {
+          "text": "Filmproduktionen wie Bedknobs and Broomsticks, Notting Hill und Paddington machten die Straße international wiedererkennbar. Die reale Marktgeschichte reicht jedoch weit vor diese Bilder zurück und umfasst Alltagsversorgung, Gebrauchtwaren und mehrere Einwanderungsgeschichten.",
+          "tags": ["film", "kultur", "kontext"]
+        },
+        {
+          "text": "Die Marktbereiche sind nicht an jedem Tag gleich. Historisch konzentriert sich das vollständige Antiquitätenangebot besonders auf den Hauptmarkttag, während Lebensmittel, Mode, Gebrauchtwaren und feste Geschäfte eigene Rhythmen haben.",
+          "tags": ["markt", "orientierung", "live_hint"]
+        },
+        {
+          "text": "LIVE: Konkrete Handelstage, Standbereiche, Veranstaltungssperren und Carnival-Verkehr bei Royal Borough of Kensington and Chelsea sowie Visit Portobello prüfen. Angaben zu einzelnen Händlern und Sortimenten sind flüchtig und gehören nicht als Dauerfakt in die Story.",
+          "tags": ["live_hint", "ephemeral", "markt"]
+        }
+      ]
+    },
+    {
+      "id": "london_leadenhall_market",
+      "name": "Leadenhall Market",
+      "general_info": "Leadenhall Market steht über Forum und Basilika des römischen Londinium. Der viktorianische Eisen-Glas-Bau von Horace Jones folgt mittelalterlichen Wegen und bewahrt inmitten des Finanzviertels eine jahrtausendealte Handelslage.",
+      "deep_data_pool": [
+        {
+          "text": "Unter dem Markt lag das politische und kommerzielle Zentrum Londiniums. Ein erstes Forum entstand etwa um 70 n. Chr.; der um 100 erneuerte Komplex war größer als Trafalgar Square und besaß die größte bekannte römische Basilika nördlich der Alpen.",
+          "tags": ["rom", "archaeologie", "stadtgeschichte"]
+        },
+        {
+          "text": "Die Basilika diente nicht religiösen Zwecken, sondern als Rathaus, Gericht und Verwaltungsbau. Ihre Ost-West-Achse schneidet den Nordteil des heutigen Marktes; ein Pfeilerrest der südlichen Arkade blieb im Keller von 90 Gracechurch Street erhalten.",
+          "tags": ["rom", "archaeologie", "politik"]
+        },
+        {
+          "text": "Das römische Straßennetz wirkt im heutigen Stadtgrundriss nach: Bishopsgate, Cheapside und Leadenhall Street folgen alten Verkehrsachsen. Die Handelslage war mit dem damaligen Themseübergang verbunden, obwohl die moderne Umgebung völlig anders aussieht.",
+          "tags": ["rom", "orientierung", "stadtplanung"]
+        },
+        {
+          "text": "Richard Whittington erwarb das Gelände 1408 und übergab es 1411 der City of London Corporation. Diese kommunale Verbindung besteht bis heute; Leadenhall ist damit nicht nur Einkaufsarkade, sondern Teil einer sehr langen städtischen Verwaltungsgeschichte.",
+          "tags": ["mittelalter", "politik", "markt"]
+        },
+        {
+          "text": "Leadenhall handelte zeitweise mit Fleisch, Wild, Geflügel, Häuten und Getreide und konkurrierte mit Smithfield. Im 19. Jahrhundert empfanden City-Kaufleute den offenen, geruchsintensiven Handel als unvereinbar mit dem entstehenden Finanzdistrikt.",
+          "tags": ["handel", "sozialgeschichte", "stadtentwicklung"]
+        },
+        {
+          "text": "Horace Jones erhielt den Auftrag für eine respektable Geflügelarkade. Sein Bau kostete 1881 rund 99.000 Pfund; zusätzliche Arbeiten an den Zugängen waren mit etwa 148.000 Pfund sogar teurer als die eigentliche Markthalle.",
+          "tags": ["architektur", "wirtschaft", "geschichte"]
+        },
+        {
+          "text": "Jones orientierte sich an Giuseppe Mengonis Galleria Vittorio Emanuele II in Mailand. Anders als deren strenge Geometrie musste Leadenhall jedoch mittelalterliche Wegerechte aufnehmen; deshalb verbindet die repräsentative Kreuzung unregelmäßige schmale Passagen.",
+          "tags": ["architektur", "stadtplanung", "quer"]
+        },
+        {
+          "text": "Die heutige Farbigkeit aus Dunkelgrün, Creme und Rot hebt Stützen, Bögen, Ladenfronten und Dachornamente voneinander ab. Kopfsteinpflaster und glasgedeckte Gänge erzeugen einen Innenraum, der rechtlich und funktional zugleich Durchgang durch die City bleibt.",
+          "tags": ["visuell", "architektur", "orientierung"]
+        },
+        {
+          "text": "Neue Funde unter 85 Gracechurch Street bestätigten weitere Teile der ersten römischen Basilika. Ihre geplante Erhaltung zeigt, dass die Archäologie des Forums nicht auf einen einzigen sichtbaren Kellerrest beschränkt ist, sondern unter mehreren modernen Parzellen liegt.",
+          "tags": ["archaeologie", "forschung", "quer"]
+        },
+        {
+          "text": "LIVE: Händler, Gastronomie, Veranstaltungen, Filmaufnahmen und der Zugang zu archäologischen Resten aktuell prüfen. Die Arkaden sind häufig durchquerbar, doch einzelne Geschäfte folgen eigenen Zeiten und römische Befunde sind nicht automatisch öffentlich zugänglich.",
+          "tags": ["live_hint", "ephemeral", "besuch"]
+        }
+      ]
+    },
+    {
+      "id": "london_spitalfields_market",
+      "name": "Old Spitalfields Market",
+      "general_info": "Old Spitalfields Market verbindet eine königliche Marktgenehmigung von 1682 mit viktorianischen Horner Buildings. Die Halle erzählt von Londons Lebensmittelversorgung, Hugenotten, späteren Migrationen und der Umnutzung zum Handelsquartier.",
+      "deep_data_pool": [
+        {
+          "text": "Der Ortsname geht auf St Mary Spital zurück, ein 1197 gegründetes Hospital und Priorat, das nach der Auflösung der Klöster 1539 verschwand. Archäologische Grabungen fanden auf dem Gelände zudem Bestattungen, deren Geschichte bis in die Römerzeit zurückreicht.",
+          "tags": ["mittelalter", "archaeologie", "namensgeschichte"]
+        },
+        {
+          "text": "Charles I erlaubte 1638 den Verkauf von Fleisch, Geflügel und Wurzeln in den damals noch ländlichen Spital Fields. Nach dem Großen Brand von 1666 verlagerte sich zusätzlicher Handel vor die Stadttore, wo mehr Raum als in der dicht bebauten City verfügbar war.",
+          "tags": ["geschichte", "markt", "stadtentwicklung"]
+        },
+        {
+          "text": "Die Royal Charter von 1682 gab dem Seidenverarbeiter John Balch das Recht, donnerstags und samstags Markt zu halten. Der Markt zog Handel und Bevölkerung an und wurde zu einem Motor der Bebauung des östlichen Londoner Vororts.",
+          "tags": ["markt", "recht", "geschichte"]
+        },
+        {
+          "text": "Robert Horner war zunächst Marktträger und wurde später Eigentümer. In den 1870er-Jahren investierte er 80.000 Pfund in die Modernisierung und beauftragte George Campbell Sherrin, einen beratenden Architekten der Metropolitan Railway.",
+          "tags": ["biografie", "architektur", "wirtschaft"]
+        },
+        {
+          "text": "Die bis 1893 vollendeten Horner Buildings kombinierten eine Eisen-Glas-Halle mit roten Backsteinfronten, umlaufenden Läden und Wohnräumen darüber. Straßenzugänge an allen Seiten erleichterten den raschen Umschlag verderblicher Waren.",
+          "tags": ["architektur", "logistik", "visuell"]
+        },
+        {
+          "text": "1920 kaufte die City of London Corporation den Markt und investierte zwei Millionen Pfund in eine Erweiterung. Queen Mary eröffnete den umgebauten Komplex 1928 zwischen aufwendig präsentierten Pyramiden aus Obst.",
+          "tags": ["geschichte", "politik", "handel"]
+        },
+        {
+          "text": "Der Großmarkt versorgte London über Jahrhunderte mit Obst und Gemüse. Als Lieferverkehr, Kühlung und Handelsvolumen den engen innerstädtischen Standort überforderten, zog der Großhandel 1991 nach Leyton; dort besteht New Spitalfields Market.",
+          "tags": ["logistik", "stadtentwicklung", "markt"]
+        },
+        {
+          "text": "Hugenottische Seidenweber prägten das Viertel seit dem späten 17. Jahrhundert. Jüdische Einwanderung und später die bengalische Gemeinschaft schufen weitere Schichten; Markt, Brick Lane und Gotteshäuser lassen sich nur als gemeinsame Migrationslandschaft verstehen.",
+          "tags": ["migration", "textil", "quer"]
+        },
+        {
+          "text": "Die Wiederentwicklung bewahrte Teile der denkmalgeschützten Horner Buildings, schuf aber zugleich Büros, Bishops Square und Crispin Place. Old Spitalfields ist deshalb weder unveränderte viktorianische Halle noch vollständig modernes Einkaufszentrum.",
+          "tags": ["denkmalschutz", "stadtplanung", "kontext"]
+        },
+        {
+          "text": "LIVE: Themenmärkte, Händlerlisten, Ausstellungen und Öffnungen der angrenzenden Bereiche auf der offiziellen Seite prüfen. Der Name Spitalfields kann Old Spitalfields Market, neuere Hallenteile oder den gesamten Stadtteil bezeichnen.",
+          "tags": ["live_hint", "ephemeral", "orientierung"]
+        }
+      ]
+    },
+    {
+      "id": "london_camden_market",
+      "name": "Camden Market",
+      "general_info": "Camden Market wuchs ab 1974 aus 16 Kunsthandwerksständen zu mehreren Marktarealen am Regent's Canal. Viaduktbögen, ehemalige Pickfords-Ställe und ein Pferdehospital bewahren die frühere Logistiklandschaft.",
+      "deep_data_pool": [
+        {
+          "text": "Am 30. März 1974 eröffnete im Hof von Dingwalls ein kleiner Markt mit 16 Händlern für Antiquitäten, Schmuck und Kunsthandwerk. Er war als zeitweilige Wochenendnutzung eines ehemaligen Holzlagerplatzes gedacht, wurde aber rasch zu einem dauerhaften Ziel.",
+          "tags": ["geschichte", "markt", "kultur"]
+        },
+        {
+          "text": "Die provisorische Gründung hing auch mit einer geplanten Stadtautobahn zusammen: Solange der Trassenbau möglich schien, war eine große dauerhafte Entwicklung des Kanalgeländes riskant. Nach Aufgabe des Plans 1976 konnte sich Camden Lock Market fest etablieren.",
+          "tags": ["stadtplanung", "geschichte", "verkehr"]
+        },
+        {
+          "text": "Camdens industrielle Bedeutung beruhte auf dem Zusammenspiel von Regent's Canal, Eisenbahn und Straßenfuhrwerken. Waren wurden zwischen Booten, Güterzügen, Lagern und Pferdewagen umgeschlagen; die heutigen Höfe und Bögen folgen dieser Logistik.",
+          "tags": ["industriegeschichte", "transport", "stadtplanung"]
+        },
+        {
+          "text": "Gin war vor dem Marktzeitalter ein wichtiger lokaler Wirtschaftszweig. Brennereien und Lager nutzten den Kanal für Rohstoffe und Versand; der mächtige Interchange Building-Komplex erinnert an die Größe der industriellen Lagerlandschaft.",
+          "tags": ["industriegeschichte", "handel", "kanal"]
+        },
+        {
+          "text": "Pickfords unterhielt hier Ställe für Pferde, die Wagen und Kanalboote bewegten. Nach einem Brand von 1857 wurden Anlagen für rund 300 Tiere neu gebaut; ein eigenes Pferdehospital versorgte erschöpfte und verletzte Arbeitspferde.",
+          "tags": ["tiere", "industriegeschichte", "arbeit"]
+        },
+        {
+          "text": "Unter Straßen und Eisenbahnanlagen verliefen Pferdetunnel, damit Tiere und Güter zwischen Ställen, Gleisen und Kanalkai zirkulieren konnten. Ein Teil dieses Systems ist nicht regulär öffentlich zugänglich, erklärt aber die mehrgeschossige Topografie des Marktes.",
+          "tags": ["ingenieurwesen", "orientierung", "industriegeschichte"]
+        },
+        {
+          "text": "Viele Geschäfte der Stables liegen in gemauerten Eisenbahnviaduktbögen. Die massiven Pferdeskulpturen und Stallmotive sind moderne Erinnerungszeichen innerhalb einer tatsächlich erhaltenen viktorianischen Arbeitslandschaft, nicht der Ursprung des Marktes von 1974.",
+          "tags": ["visuell", "architektur", "kontext"]
+        },
+        {
+          "text": "Camden Market bezeichnet mehrere benachbarte Handelsareale, darunter Camden Lock, Stables, Hawley Wharf, Buck Street und Inverness Street. Eigentum, Architektur und Sortiment unterscheiden sich; die touristische Wahrnehmung fasst sie dennoch als ein Ziel zusammen.",
+          "tags": ["orientierung", "markt", "stadtwissen"]
+        },
+        {
+          "text": "Alternative Mode entwickelte sich im Umfeld lokaler Musikorte und Subkulturen. Dingwalls, Electric Ballroom und Roundhouse verbanden Konzertpublikum mit jungen Designern und Händlern; Punk-, Goth- und Clubästhetik wurden dadurch Teil des Marktimages.",
+          "tags": ["musik", "mode", "subkultur"]
+        },
+        {
+          "text": "LIVE: Zugänge, Händler, Marktareale, Konzertbetrieb und Veranstaltungen aktuell prüfen. Wochenenden sind häufig besonders dicht; Kanalwege, Brücken und Treppen bleiben zugleich Verkehrswege und dürfen nicht durch Gruppen oder Fotostopps blockiert werden.",
+          "tags": ["live_hint", "ephemeral", "sicherheit"]
+        }
+      ]
+    },
+    {
+      "id": "london_downing_street",
+      "name": "Downing Street",
+      "general_info": "Hinter der schmalen Front von 10 Downing Street liegen zwei verbundene historische Häuser und Teile von Number 12. Der Komplex ist Regierungsarbeitsplatz, Amtssitz und Bühne britischer Politik, aber kein öffentliches Museum.",
+      "deep_data_pool": [
+        {
+          "text": "Das heutige Number 10 besteht aus einem eher bescheiden gebauten Reihenhaus an Downing Street und einem älteren, größeren Haus mit Blick auf Horse Guards Parade. William Kent verband beide 1732 bis 1735 über zwei Geschosse.",
+          "tags": ["architektur", "geschichte", "regierung"]
+        },
+        {
+          "text": "Das vordere Haus entstand 1682 bis 1683 auf sumpfigem Untergrund und besaß schwache Fundamente. Aufgemalte Mörtellinien sollten das unregelmäßige Mauerwerk hochwertiger wirken lassen; die berühmte Fassade war also von Beginn an teilweise Inszenierung.",
+          "tags": ["architektur", "baugeschichte", "detail"]
+        },
+        {
+          "text": "Number 10 trug ursprünglich die Hausnummer 5 und erhielt erst 1779 seine heutige Nummer. Die Nummerierung der frühen Straße war uneinheitlich; Häuser wurden häufig eher über Namen und Titel ihrer Bewohner identifiziert.",
+          "tags": ["stadtgeschichte", "namensgeschichte", "wissen"]
+        },
+        {
+          "text": "George II bot Robert Walpole den Komplex persönlich an. Walpole bestand darauf, ihn als Amtssitz des First Lord of the Treasury anzunehmen. Deshalb ist die Bezeichnung auf dem Briefkasten der Tür institutionell und nicht bloß historischer Schmuck.",
+          "tags": ["politik", "geschichte", "detail"]
+        },
+        {
+          "text": "Kent verlegte den Haupteingang zur Downing-Street-Seite und schuf hinter der schmalen Front repräsentative Räume sowie eine dreiseitige Treppe. Die Straßenfassade funktioniert damit räumlich als Zugangspassage zu einem wesentlich größeren Hinterhaus.",
+          "tags": ["architektur", "innenraum", "orientierung"]
+        },
+        {
+          "text": "Walpolés Arbeitszimmer wurde zum Cabinet Room. 1796 vergrößerte man den Raum durch den Abbruch einer Wand; Säulen tragen seither die größere Spannweite. Hier tagt das Kabinett an einem langen Tisch in einem Raum, dessen Form mehrere Umbauten bewahrt.",
+          "tags": ["innenraum", "politik", "architektur"]
+        },
+        {
+          "text": "Der Gebäudekomplex greift heute auch nach links in große Teile von Number 12 aus; ein innerer Korridor verbindet die Bereiche. Die von außen sichtbare Reihe einzelner Hausnummern entspricht daher nicht vollständig der tatsächlichen Regierungsnutzung.",
+          "tags": ["architektur", "regierung", "stadtwissen"]
+        },
+        {
+          "text": "Während des Blitz nutzte das Kriegskabinett verstärkte unterirdische Räume im nahen Regierungsviertel; die Churchills zogen in einen Annex über den War Rooms. In Number 10 blieben nur ausgewählte Arbeitsräume in Nutzung, während Möbel und Wertsachen ausgelagert wurden.",
+          "tags": ["zweiter_weltkrieg", "regierung", "geschichte"]
+        },
+        {
+          "text": "Eine umfassende Sanierung im 20. Jahrhundert legte schwere Schäden offen: Wände, Böden und selbst Säulen im Cabinet Room und Pillared Room waren instabil oder verfault. Große Teile wurden konstruktiv erneuert, obwohl das historische Erscheinungsbild erhalten blieb.",
+          "tags": ["restaurierung", "architektur", "geschichte"]
+        },
+        {
+          "text": "LIVE: Wegen Regierungsbetrieb, Demonstrationen, Staatsbesuchen und Sicherheitslagen können Sicht und Zugang an Whitehall kurzfristig eingeschränkt sein. Absperrungen nicht umgehen; öffentliche Besichtigungen von Number 10 sind im normalen Tourismusbetrieb nicht verfügbar.",
+          "tags": ["live_hint", "ephemeral", "sicherheit"]
+        }
+      ]
+    },
+    {
+      "id": "london_national_maritime_museum",
+      "name": "National Maritime Museum",
+      "general_info": "Das 1937 eröffnete National Maritime Museum nutzt ehemalige Schulgebäude in Greenwich. Seine Sammlungen verbinden Seefahrt, Navigation, Empire, Handel und individuelle Lebenswege mit dem UNESCO-Ensemble Maritime Greenwich.",
+      "deep_data_pool": [
+        {
+          "text": "Die Society for Nautical Research schlug 1927 vor, die frei werdenden Gebäude der Royal Hospital School als Nationalmuseum zu nutzen. Ein Trust unter Lord Stanhope und der Historiker Geoffrey Callender trieb das Vorhaben institutionell voran.",
+          "tags": ["museumsgeschichte", "institution", "greenwich"]
+        },
+        {
+          "text": "Der National Maritime Museum Act vom 25. Juli 1934 schuf einen dauerhaften Board of Trustees. Zwischen 1934 und 1937 wurden Queen's House und die ehemaligen Schulflügel restauriert und für die Sammlungen umgebaut.",
+          "tags": ["recht", "museumsgeschichte", "architektur"]
+        },
+        {
+          "text": "Zu den Gründungsbeständen gehörten fast 300 Gemälde der Greenwich Hospital Collection, die seit 1824 als Naval Gallery im Painted Hall gezeigt worden waren, sowie Objekte des früheren Royal Naval Museum.",
+          "tags": ["sammlung", "kunst", "provenienz"]
+        },
+        {
+          "text": "Sir James Caird finanzierte einen großen Teil der Herrichtung der historischen Gebäude. König George VI. eröffnete das Museum am 27. April 1937; Geoffrey Callender wurde erster Direktor und blieb bis zu seinem Tod 1946 im Amt.",
+          "tags": ["geschichte", "stiftung", "museum"]
+        },
+        {
+          "text": "Im Zweiten Weltkrieg war das Museum weitgehend geschlossen, und die Admiralität übernahm den East Wing. Dieser Flügel wurde erst 1951 als öffentlicher Galerieraum entwickelt; die Gebäudenutzung folgte damit direkt den Erfordernissen des Krieges.",
+          "tags": ["zweiter_weltkrieg", "architektur", "museumsgeschichte"]
+        },
+        {
+          "text": "Nelsons blauer Vizeadmiralsrock von Trafalgar zeigt ein Einschussloch an der linken Schulter. Blutspuren an Rockschößen und Ärmel stammen wahrscheinlich von seinem zuvor getöteten Sekretär John Scott; vier Ritterorden sind fest auf die Brust genäht.",
+          "tags": ["sammlung", "nelson", "textil"]
+        },
+        {
+          "text": "Weil Nelson 1797 seinen rechten Arm verloren hatte, besitzt der rechte Ärmel eine kleine schwarze Seidenschlaufe, mit der er an einem Knopf befestigt werden konnte. Das Kleidungsstück dokumentiert so Uniformgeschichte, Körpergeschichte und das Gefecht zugleich.",
+          "tags": ["sammlung", "biografie", "detail"]
+        },
+        {
+          "text": "Die Uniformsammlung umfasst mehr als 7.000 Objekte und reicht von den ersten standardisierten Mustern der Royal Navy von 1748 bis zu Reserven, Handelsmarine und Women's Royal Naval Service. Ein großer Teil wird konservatorisch bedingt im Depot bewahrt.",
+          "tags": ["sammlung", "marine", "museumspraxis"]
+        },
+        {
+          "text": "Seit 1997 liegt das Museum im UNESCO-Welterbe Maritime Greenwich. Die Auszeichnung bezieht sich auf das Zusammenspiel von Stadtzentrum, Park, Old Royal Naval College, Queen's House, Observatory und Museumsbauten, nicht auf ein einzelnes Objekt.",
+          "tags": ["unesco", "architektur", "quer"]
+        },
+        {
+          "text": "LIVE: Galerien, Sonderausstellungen, Familienbereiche und die Präsentation empfindlicher Originale bei Royal Museums Greenwich prüfen. Freier Grundeintritt garantiert weder Zugang ohne Wartezeit noch, dass ein bestimmtes Objekt aktuell ausgestellt ist.",
+          "tags": ["live_hint", "ephemeral", "besuch"]
+        }
+      ]
+    },
+    {
+      "id": "london_guildhall",
+      "name": "Guildhall",
+      "general_info": "Guildhall ist seit dem Mittelalter das Zentrum der City of London. Die Great Hall von 1411 steht über einem römischen Amphitheater und verbindet Stadtregierung, Staatsprozesse, Zeremonien und Wiederaufbau nach Brand und Blitz.",
+      "deep_data_pool": [
+        {
+          "text": "Die heutige Great Hall wurde zwischen 1411 und 1440 unter John Croxton errichtet. Mit etwa 27 Meter hoher Decke und großen mittelalterlichen Krypten sollte sie Macht und Selbstbewusstsein der von Kaufleuten geführten City sichtbar machen.",
+          "tags": ["mittelalter", "architektur", "politik"]
+        },
+        {
+          "text": "Ein Londoner Guildhall ist bereits 1128 schriftlich erwähnt. Die westliche Krypta könnte zu einem Vorgängerbau des späten 13. Jahrhunderts gehören; der heutige Komplex setzt also eine ältere städtische Institution am selben Ort fort.",
+          "tags": ["mittelalter", "architektur", "stadtgeschichte"]
+        },
+        {
+          "text": "Die Halle diente auch als Gericht für politisch aufgeladene Hochverratsprozesse. Lady Jane Grey, die 1553 für neun Tage als Königin ausgerufen worden war, wurde hier schuldig gesprochen und zum Tod verurteilt.",
+          "tags": ["recht", "tudorzeit", "geschichte"]
+        },
+        {
+          "text": "Beim Großen Brand von 1666 blieben die steinernen Mauern stehen, doch Dach und Innenausstattung gingen verloren. Guildhall ist dadurch die einzige erhaltene weltliche Steinstruktur der City, deren Hauptbau noch vor 1666 zurückreicht.",
+          "tags": ["brand", "architektur", "denkmalschutz"]
+        },
+        {
+          "text": "Am 29. Dezember 1940 zerstörte ein Luftangriff erneut das Dach der Great Hall. Sir Giles Gilbert Scott entwarf das 1953 errichtete heutige Dach; es ist bereits die vierte Dachkonstruktion über den mittelalterlichen Mauern.",
+          "tags": ["zweiter_weltkrieg", "wiederaufbau", "architektur"]
+        },
+        {
+          "text": "Die heutigen Figuren Gog und Magog ersetzen hölzerne Riesen, die im Blitz verbrannten; diese hatten wiederum Figuren nach dem Großen Brand ersetzt. David Evans schuf das Paar 1953 nach älteren Vorbildern als Fortsetzung einer städtischen Legende.",
+          "tags": ["legende", "kunst", "erinnerungskultur"]
+        },
+        {
+          "text": "Das römische Amphitheater entstand zunächst um 74 n. Chr. aus Holz und wurde kurz nach 120 mit Mauerfundamenten erneuert. Es war das größte bekannte Amphitheater des römischen Britannien und wurde bis ins 4. Jahrhundert genutzt.",
+          "tags": ["rom", "archaeologie", "stadtgeschichte"]
+        },
+        {
+          "text": "Archäologen entdeckten die Arena bei Grabungen ab 1987 wieder. Ein dunkler Bogen im Pflaster von Guildhall Yard markiert ihren Umriss; erhaltene Mauern, Drainagen und Zugänge sind im Untergeschoss der Guildhall Art Gallery sichtbar.",
+          "tags": ["archaeologie", "visuell", "orientierung"]
+        },
+        {
+          "text": "Seit 1502 finden in Guildhall große Bürgermeister- und Staatsanlässe statt. Das jährliche Lord Mayor's Banquet unterstreicht die eigenständige Tradition der City; Lord Mayor of London und der für Greater London gewählte Mayor sind verschiedene Ämter.",
+          "tags": ["politik", "zeremoniell", "stadtwissen"]
+        },
+        {
+          "text": "LIVE: Great Hall, Krypten, Art Gallery und Amphitheaterreste haben unterschiedliche Zugänge und können wegen städtischer Sitzungen oder Veranstaltungen geschlossen sein. Vor dem Besuch aktuelle City-of-London-Hinweise prüfen.",
+          "tags": ["live_hint", "ephemeral", "besuch"]
+        }
+      ]
+    },
+    {
+      "id": "london_abbey_road_crossing",
+      "name": "Abbey Road Crossing",
+      "general_info": "Der aktive Zebrastreifen vor den Abbey Road Studios wurde durch das Beatles-Cover von 1969 zum Kulturdenkmal. Belisha-Leuchten, Straßenmarkierung, Studiogebäude und fließender Verkehr gehören gemeinsam zum realen Ort.",
+      "deep_data_pool": [
+        {
+          "text": "Die Fotosession fand am Morgen des 8. August 1969 statt und dauerte ungefähr zehn Minuten. Fotograf Iain Macmillan arbeitete von einer Leiter, während ein Polizist den Verkehr kurz anhielt; nur wenige Bildvarianten entstanden.",
+          "tags": ["musik", "fotografie", "geschichte"]
+        },
+        {
+          "text": "Apple-Art-Director John Kosh verzichtete auf Bandname und Albumtitel auf der Vorderseite. Das Motiv sollte allein genügen, weil die Beatles weltweit erkennbar waren; diese ungewöhnliche Entscheidung verstärkte die ikonische Wirkung des Covers.",
+          "tags": ["design", "musik", "mediengeschichte"]
+        },
+        {
+          "text": "Auf dem gewählten Bild führt John Lennon in weißem Anzug, gefolgt von Ringo Starr, Paul McCartney und George Harrison. McCartney läuft barfuß und im anderen Schritt, woraus später unbelegte Paul-is-dead-Deutungen konstruiert wurden.",
+          "tags": ["visuell", "musik", "popkultur"]
+        },
+        {
+          "text": "Der Übergang erhielt am 21. Dezember 2010 Grade-II-Status. Historic England begründete dies mit seiner internationalen kulturhistorischen Bedeutung und dem Gruppenwert zusammen mit den ebenfalls denkmalgeschützten Abbey Road Studios.",
+          "tags": ["denkmalschutz", "musik", "geschichte"]
+        },
+        {
+          "text": "Zur geschützten Anlage gehören breite weiße Streifen, Belisha-Leuchten und die funktionale Lage. Zickzack- und weitere Fahrbahnmarkierungen kamen später hinzu; die materiellen Bestandteile werden im normalen Straßenunterhalt erneuert.",
+          "tags": ["verkehr", "denkmalschutz", "detail"]
+        },
+        {
+          "text": "Historische Quellen widersprechen sich zur angeblichen Verschiebung des Übergangs in den 1970er-Jahren. Die offizielle Listung spricht vorsichtig von derselben ungefähren Lage; daher sollte eine exakte, meterweise Ortsbehauptung nicht als gesicherter Fakt erzählt werden.",
+          "tags": ["quellenkritik", "orientierung", "geschichte"]
+        },
+        {
+          "text": "Das Album erreichte Platz eins in Großbritannien und den USA. Das Cover wurde international vielfach parodiert, darunter von Paul McCartney selbst für Paul Is Live, wobei er den Übergang mit einem Old English Sheepdog überquerte.",
+          "tags": ["popkultur", "musik", "rezeption"]
+        },
+        {
+          "text": "Die nahe Villa wurde 1931 als EMI Recording Studios eröffnet und später nach dem Album in Abbey Road Studios umbenannt. Sie war nicht nur Beatles-Arbeitsort, sondern diente auch klassischer Musik und zahlreichen Filmmusikproduktionen.",
+          "tags": ["musik", "architektur", "quer"]
+        },
+        {
+          "text": "Die gestuften schwarz-weißen Belisha-Pfähle markieren einen britischen Fußgängerüberweg und erinnern an Verkehrsminister Leslie Hore-Belisha. Ihre Sicherheitsfunktion besteht unabhängig vom Fotomotiv; Fahrzeuge müssen dennoch reagieren können.",
+          "tags": ["verkehr", "stadtwissen", "sicherheit"]
+        },
+        {
+          "text": "LIVE: Verkehr, Bauarbeiten und Studioangebote aktuell prüfen. Der Übergang ist weder Fußgängerzone noch Fotoset: nur bei sicherem Verkehr queren, nicht stehen bleiben, keine Wiederholungen gegen den Verkehrsfluss erzwingen und private Grundstücke respektieren.",
+          "tags": ["live_hint", "ephemeral", "sicherheit"]
+        }
+      ]
+    },
+    {
+      "id": "london_royal_albert_hall",
+      "name": "Royal Albert Hall",
+      "general_info": "Die 1871 eröffnete Royal Albert Hall ist ein elliptischer Backstein- und Terrakottabau mit Eisen-Glas-Kuppel. Konzertgeschichte, technische Akustiklösungen und politische Versammlungen prägen das Grade-I-Denkmal.",
+      "deep_data_pool": [
+        {
+          "text": "Gewinne der Great Exhibition von 1851 halfen beim Erwerb des Grundstücks. Prince Alberts Idee eines dauerhaften Viertels für Kunst, Wissenschaft und Bildung wurde nach seinem Tod als Ensemble aus Institutionen, Denkmal und Halle weitergeführt.",
+          "tags": ["geschichte", "stadtplanung", "prince_albert"]
+        },
+        {
+          "text": "Captain Francis Fowke entwarf die Halle; nach seinem Tod vollendete Henry Y. D. Scott das Projekt. Beide waren Ingenieure der Royal Engineers und orientierten den elliptischen Grundriss an antiken Amphitheatern sowie zeitgenössischen europäischen Hallen.",
+          "tags": ["architektur", "ingenieurwesen", "geschichte"]
+        },
+        {
+          "text": "Der Bau von 1867 bis 1871 verwendet roten Backstein und helle Terrakotta im Stil der italienischen Renaissance. Vier zweigeschossige Eingangsvorbauten liegen an den Hauptrichtungen und gliedern den ansonsten geschlossenen Rundkörper.",
+          "tags": ["architektur", "visuell", "denkmalschutz"]
+        },
+        {
+          "text": "Der rund 244 Meter lange Mosaikfries Triumph of Arts and Sciences besteht aus sechzehn Themenfeldern. Über ihm laufen große Terrakottabuchstaben mit Widmung und Zitaten; beides lässt sich vom äußeren Rundweg ohne Eintritt betrachten.",
+          "tags": ["kunst", "visuell", "architektur"]
+        },
+        {
+          "text": "Die verglaste Eisenkuppel erreicht etwa 41 Meter Höhe. Ihre vorgefertigte Konstruktion wurde zunächst außerhalb Londons zusammengesetzt und erprobt, dann zerlegt und am Gebäude montiert, um die große stützenfreie Spannweite zu ermöglichen.",
+          "tags": ["ingenieurwesen", "architektur", "technik"]
+        },
+        {
+          "text": "Schon beim Eröffnungskonzert fiel der starke Nachhall auf. Ein Segeltuch unter der Kuppel und spätere Aluminiumflächen halfen nur begrenzt; 1969 installierte Glasfaserscheiben zerstreuten den Schall und erhielten den Spitznamen mushrooms.",
+          "tags": ["akustik", "musik", "ingenieurwesen"]
+        },
+        {
+          "text": "Akustische Messungen führten 2001 dazu, einen Teil der ursprünglich 135 Diffusoren zu entfernen und die übrigen neu zu gruppieren. Die auffällige Deckeninstallation ist somit keine einmalige historische Lösung, sondern Ergebnis fortlaufender akustischer Optimierung.",
+          "tags": ["akustik", "forschung", "innenraum"]
+        },
+        {
+          "text": "Die große Orgel wurde für die Eröffnung gebaut und später mehrfach erweitert. Nach dem Umbau durch Mander Organs von 2002 bis 2004 besitzt sie 9.997 Pfeifen; ihr Beiname Voice of Jupiter verweist auf Klangkraft und monumentale Stellung hinter der Bühne.",
+          "tags": ["orgel", "musik", "handwerk"]
+        },
+        {
+          "text": "Die Halle war auch politische Bühne: Suffragetten unterbrachen 1905 eine Rede des Premierministers; die WSPU füllte später selbst den Saal. 1912 rief Emmeline Pankhurst hier zu militanter Aktion auf, worauf die Organisation 1913 Hausverbot erhielt.",
+          "tags": ["frauenrechte", "politik", "geschichte"]
+        },
+        {
+          "text": "LIVE: Programm, Führungen, Einlasszeiten, Sicherheitsregeln und konkrete Saalkonfiguration direkt bei der Royal Albert Hall prüfen. Kapazität, Bühne und Bestuhlung variieren nach Konzert, Filmvorführung, Sport oder Zeremonie.",
+          "tags": ["live_hint", "ephemeral", "veranstaltung"]
+        }
+      ]
+    },
+    {
+      "id": "london_harrods",
+      "name": "Harrods",
+      "general_info": "Harrods entwickelte sich in Knightsbridge vom Lebensmittelgeschäft zum monumentalen Warenhaus. Terrakottafassaden, historische Food Halls, frühe Rolltreppentechnik und luxuriöse Inszenierung spiegeln mehr als ein Jahrhundert Einzelhandel.",
+      "deep_data_pool": [
+        {
+          "text": "Das offizielle Gründungsjahr ist 1849, doch die dokumentierte Belegung eines kleinen Lebensmittelgeschäfts an der Brompton Road durch Charles Henry Harrod stammt von 1853. Sein Sohn Charles Digby Harrod erweiterte Sortiment und Grundstück systematisch.",
+          "tags": ["geschichte", "handel", "quellenkritik"]
+        },
+        {
+          "text": "Der frühe Laden beschäftigte zwei Gehilfen und einen Boten und verkaufte vor allem Tee und Lebensmittel. Mit dem Wachstum des wohlhabenden West London kamen Medikamente, Parfüm, Kleidung und weitere Waren hinzu; aus Nachbarhäusern wurde schrittweise ein Kaufhaus.",
+          "tags": ["handel", "sozialgeschichte", "geschichte"]
+        },
+        {
+          "text": "Ein Großbrand zerstörte 1883 weite Teile des Geschäfts, kurz vor dem Weihnachtsgeschäft. Harrods erfüllte dennoch Kundenbestellungen und baute weiter aus; die Katastrophe beschleunigte den Übergang von zusammengefügten Ladenhäusern zu einem geplanten Großbau.",
+          "tags": ["brand", "wirtschaft", "geschichte"]
+        },
+        {
+          "text": "C. W. Stephens wurde 1894 Architekt des umfassenden Neubauprogramms. Die Bebauung des gesamten Blocks erfolgte in Etappen bis 1912; deshalb ist die scheinbar einheitliche Außenhaut das Ergebnis mehrerer Bauphasen und späterer Umbauten.",
+          "tags": ["architektur", "stadtentwicklung", "geschichte"]
+        },
+        {
+          "text": "Die Fassade an Brompton Road von 1902 bis 1903 verwendet lachsfarbene Doulton-Terrakotta. Hochreliefs, Kuppeln und die Figur Britannia verbinden Warenhauswerbung mit imperialer Monumentalität; das Motto lautet Omnia Omnibus Ubique.",
+          "tags": ["architektur", "visuell", "detail"]
+        },
+        {
+          "text": "Harrods führte am 16. November 1898 eine der ersten Rolltreppen Englands ein. Die moving staircase war ein schräges Förderband aus gewebtem Leder mit Mahagoni- und Glasbalustrade; Berichte erzählen, dass nervösen Nutzern oben Brandy angeboten wurde.",
+          "tags": ["technik", "handel", "geschichte"]
+        },
+        {
+          "text": "Der Meat Hall von 1902 bis 1903 besitzt Doulton-Keramik mit zwanzig Medaillons zu Landwirtschaft und Jagd, entworfen von W. J. Neatby. Nebenan bewahrt die frühere Bakery florale Wandfliesen der Malkin Tile Works.",
+          "tags": ["innenraum", "kunsthandwerk", "essen"]
+        },
+        {
+          "text": "Weitere Food Halls kamen in späteren Phasen hinzu und wurden restauriert oder umgestaltet. Ihre Keramik, Lichtdächer und ornamentierten Oberflächen zeigen, wie Warenhäuser Lebensmittelverkauf in eine theatralische, markenbildende Raumfolge verwandelten.",
+          "tags": ["innenraum", "handel", "architektur"]
+        },
+        {
+          "text": "Harrods wurde 1889 eine Limited Company, 1959 Teil von House of Fraser, 1985 von der Familie Al-Fayed übernommen und 2010 an die Qatar Investment Authority verkauft. Die Eigentumsgeschichte verbindet Familienbetrieb, Konzern und Staatsfonds.",
+          "tags": ["wirtschaft", "geschichte", "eigentum"]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, zugängliche Abteilungen, Gastronomie, Services, Sicherheits- und Fotoregeln direkt bei Harrods prüfen. Marken, Preise und Raumbelegung wechseln; die denkmalgeschützten Innenräume sind nicht in jeder Verkaufszone gleich gut erhalten.",
+          "tags": ["live_hint", "ephemeral", "besuch"]
+        }
+      ]
+    }
+  ]
+}

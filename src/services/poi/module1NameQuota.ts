@@ -1,6 +1,11 @@
 /**
- * Modul-1: User-Vorname sparsam — 1 Ort mit Name, dann 5 Orte ohne.
+ * Modul-1: User-Vorname sparsam — Zeit-Throttle (max. ~30 Min) + Ort-Quote.
  */
+
+import {
+  canSayUserName,
+  markUserNameSaid,
+} from '../persona/userNameThrottle';
 
 let activePoiId: number | null = null;
 /** Nach einem Namen: so viele weitere Orte ohne Name. */
@@ -32,11 +37,11 @@ export function module1QuotaPoiId(poi: {
  */
 export function beginModule1PlaceNameQuota(poiId: number): boolean {
   if (!Number.isFinite(poiId)) return false;
-  if (activePoiId === poiId) return allowNameForActivePoi;
+  if (activePoiId === poiId) return allowNameForActivePoi && canSayUserName();
 
   activePoiId = poiId;
-  if (placesUntilNameAllowed > 0) {
-    placesUntilNameAllowed -= 1;
+  if (!canSayUserName() || placesUntilNameAllowed > 0) {
+    if (placesUntilNameAllowed > 0) placesUntilNameAllowed -= 1;
     allowNameForActivePoi = false;
   } else {
     allowNameForActivePoi = true;
@@ -54,6 +59,7 @@ export function beginModule1PlaceNameQuotaForPoi(poi: {
 }
 
 export function peekModule1PlaceNameAllowed(poiId?: number | null): boolean {
+  if (!canSayUserName()) return false;
   if (poiId != null && activePoiId === poiId) return allowNameForActivePoi;
   return placesUntilNameAllowed <= 0;
 }
@@ -69,6 +75,7 @@ export function peekModule1PlaceNameAllowedForPoi(poi: {
 /** Nach erstem Aussprechen im Spot: kein zweites „Lars“ bei Ankunft nach Wegweiser. */
 export function markModule1UserNameSpoken(): void {
   allowNameForActivePoi = false;
+  markUserNameSaid();
 }
 
 /** Tests / Session-Reset. */

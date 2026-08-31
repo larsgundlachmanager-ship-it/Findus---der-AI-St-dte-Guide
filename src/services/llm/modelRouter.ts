@@ -23,6 +23,7 @@ export type GeminiTaskKind =
   | 'story'
   | 'history_deep'
   | 'itinerary'
+  | 'research'
   | 'generic';
 
 export type ResolveGeminiTierInput = {

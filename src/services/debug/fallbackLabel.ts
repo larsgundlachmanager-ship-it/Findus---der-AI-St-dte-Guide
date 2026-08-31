@@ -5,22 +5,12 @@
 
 import { useFinnusStore } from '../../store/useFinnusStore';
 
-/** Prefix für Speech/UI: „Fallback: <name> — …“ */
+/** Prefix nie in TTS — nur Log + optional Dev-Banner. */
 export function fallbackSpeech(kind: string, message: string): string {
   const k = (kind || 'unbekannt').trim();
   const m = (message || '').replace(/\s+/g, ' ').trim();
-  const line = m ? `Fallback: ${k} — ${m}` : `Fallback: ${k}`;
-  try {
-    console.warn(`[fallback] ${k}`, m || undefined);
-  } catch {
-    /* soft */
-  }
-  try {
-    useFinnusStore.getState().setTtsStatusMessage(line.slice(0, 120));
-  } catch {
-    /* soft */
-  }
-  return line;
+  noteFallback(k, m);
+  return m;
 }
 
 /** Nur Log/Status, kein Speech-Text (interne Fallbacks). */

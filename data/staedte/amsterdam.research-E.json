@@ -1,0 +1,1724 @@
+{
+  "city_id": "amsterdam",
+  "research_batch": "E",
+  "language": "de",
+  "generated_at": "2026-08-21",
+  "policy": "Nur verifizierte, stabile Fakten. LIVE-Angaben sind ephemer und müssen zur Laufzeit geprüft werden. Keine Dialogskripte.",
+  "sources": [
+    "https://www.artis.nl/nl/over-artis/geschiedenis-van-artis",
+    "https://www.iamsterdam.com/ontdek/buurten/ndsm",
+    "https://www.johancruijffarena.nl/en/making-an-impact-togehther/geschiedenis/",
+    "https://jck.nl/verhalen-en-verdieping/portugese-synagoge-geschiedenis",
+    "https://www.eyefilm.nl/en/about-eye/history",
+    "https://www.amsterdamsebos.nl/english/history/",
+    "https://www.paleisamsterdam.nl/en/about-palace/",
+    "https://www.nemosciencemuseum.nl/en/organisation/building",
+    "https://www.holocaustnamenmonument.nl/nl/holocaust-namenmonument/ontwerp/",
+    "https://www.annefrank.org/nl/anne-frank/verdieping/de-geschiedenis-van-het-achterhuis/",
+    "https://jck.nl/verhalen-en-verdieping/amsterdam-hoogduits-synagogencomplex",
+    "https://nicolaas-parochie.nl/nicolaas/over-ons/gebouw/",
+    "https://www.albertcuyp.nl/geschiedenis-albert-cuyp-markt-de-pijp/"
+  ],
+  "spots": [
+    {
+      "id": "amsterdam_artis_royal_zoo",
+      "general_info": "ARTIS wurde 1838 als Natura Artis Magistra gegründet und verbindet im Plantageviertel Zoo, historische Gartenarchitektur und naturkundliche Museen. Das Ensemble zählt zu den ältesten öffentlich zugänglichen Tiergärten Europas.",
+      "deep_data_pool": [
+        {
+          "text": "Historie: ARTIS entstand 1838 als Zoölogisch Genootschap Natura Artis Magistra. Gründer waren G.F. Westerman, J.W.H. Werlemann und J.J. Wijsmuller; der lateinische Name bedeutet sinngemäß, dass die Natur Lehrmeisterin von Kunst und Wissenschaft sei. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Anfangs war ARTIS eine Mitgliedervereinigung und besaß mehr Präparate als lebende Tiere. Aus einem kleinen Holzkabinett entwickelte sich ein Gelände mit Tierhaltung, Forschung, Sammlungen, Vorträgen und gesellschaftlichen Zusammenkünften. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Zwischen 1850 und 1855 entstand nach Plänen Jan van Mauriks das Hoofdgebouw, heute Groote Museum. Es war das erste eigens als Museum entworfene Gebäude Amsterdams; die oberen Säle bewahrten naturhistorische Sammlungen. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Das Groote Museum schloss 1947 wegen Kriegsschäden, Geldmangel und Wartungsstau. Teile der Sammlungen gingen später an Tropenmuseum, Universität Amsterdam und Naturalis; 2022 öffnete das restaurierte Haus nach 75 Jahren erneut. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: Der historische Park ist kein kompakter Neubauzoo: geschwungene Wege, alte Bäume, Backsteinbauten, Volieren und monumentale Fassaden liegen zwischen Plantage Kerklaan und Entrepotdok. Der Haupteingang trägt den Namen ARTIS deutlich über den Toren. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Das Aquarium von 1882 stand auf 1.740 Holzpfählen und galt mit über einer Million Liter Wasser als technisches Weltwunder. Gerlof Salm verband klassizistische Tempelarchitektur mit einem damals international kopierten Filtersystem. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Quer: Der Aquariumsbau machte ARTIS schrittweise öffentlicher: Wegen der Zusammenarbeit mit der Gemeente Universiteit durften Studierende hinein, und an bestimmten Tagen konnten erstmals auch Nichtmitglieder gegen Eintritt das Aquarium besuchen. Die Querverbindung liefert Kontext für eine dynamische Erzählung, ohne einen Dialog oder eine feste Route vorzuschreiben. Sie trennt dauerhaft belegte Zusammenhänge ausdrücklich von wechselndem Programm und Vermarktung.",
+          "tags": [
+            "quer",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: Am Artisplein markieren das Groote Museum und Micropia einen frei zugänglichen Vorplatz außerhalb der eigentlichen Zoo-Runde. Im Groote Museum sind originale Holzböden, Vitrinen und die monumentale Vlindertrap wichtige erhaltene Details. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Quer: Um 1900 lagen auf dem Gelände zehn museale Sammlungen. Konzerte in der Musikkiosk machten ARTIS zugleich zu einem bürgerlichen Kulturort; die Verbindung von Tiergarten, Wissenschaft und Unterhaltung gehört daher zur ursprünglichen Anlage. Die Querverbindung liefert Kontext für eine dynamische Erzählung, ohne einen Dialog oder eine feste Route vorzuschreiben. Sie trennt dauerhaft belegte Zusammenhänge ausdrücklich von wechselndem Programm und Vermarktung.",
+          "tags": [
+            "quer",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Micropia eröffnete 2014 als weltweit erstes Museum, das Mikroorganismen zum Hauptthema macht. Es ergänzt die historische Idee von ARTIS: Natur nicht nur als große Tiere, sondern von Mikroben bis zu ökologischen Systemen zu vermitteln. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: Das Aquarium ist an seiner langen, symmetrischen Tempelfassade am Plantage Middenlaan erkennbar. Salz hatte den Bau nach fast 140 Jahren stark geschädigt; Restaurierungen legten historische Farben, Ornamente und Sichtachsen wieder frei. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Quer: Das erhaltene Lloyd-Wasserfiltersystem des Aquariums gilt als letztes funktionsfähiges Exemplar seiner Art. Moderne Technik, Isolierglas, Niedertemperaturheizung und Solarmodule wurden so ergänzt, dass das Rijksmonument lesbar bleibt. Die Querverbindung liefert Kontext für eine dynamische Erzählung, ohne einen Dialog oder eine feste Route vorzuschreiben. Sie trennt dauerhaft belegte Zusammenhänge ausdrücklich von wechselndem Programm und Vermarktung.",
+          "tags": [
+            "quer",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "LIVE: Vor dem Besuch aktuelle Öffnung einzelner Bereiche, Tierhäuser, Aquariumstatus, Zeitfenster, Eintritt und Tagesprogramm ausschließlich auf artis.nl prüfen. Restaurierungen, Fütterungen und Zugänge können sich kurzfristig ändern. Nur als Rechercheauftrag verwenden: Ergebnis, Datum und Primärquelle zur Laufzeit verifizieren, Preise oder Zeiten nie ungeprüft aus dem Pack vorlesen und bei widersprüchlichen Angaben die offizielle Betreiberquelle priorisieren.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "amsterdam_ndsm_werf",
+      "general_info": "Die NDSM-Werf ist ein ehemaliges Großwerftgelände am IJ, dessen Hallen, Kräne und Slipanlagen heute Ateliers, Street-Art, Kultur und Veranstaltungen tragen. Der industrielle Maßstab blieb trotz der neuen Nutzung sichtbar.",
+      "deep_data_pool": [
+        {
+          "text": "Historie: Die Werftgeschichte reicht bis 1894 zur Nederlandsche Scheepsbouw Maatschappij zurück. 1946 fusionierte sie mit der Nederlandsche Dok Maatschappij zur NDSM, zeitweise einer der größten und modernsten Schiffbaubetriebe der Welt. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Auf dem Gelände entstanden Passagierschiffe, Frachter und Tanker. Die riesigen Hallen und Slipanlagen waren auf die serielle Fertigung großer Schiffskörper ausgelegt; dieses Produktionsraster prägt die offenen Flächen bis heute. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Nach wirtschaftlichen Krisen und Umstrukturierungen endete der Schiffbau 1984. Das lange brachliegende Areal wurde ab den späten 1990er-Jahren von Künstlern, Skatern und Initiativen genutzt und schrittweise als Kulturstandort entwickelt. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: Vom Fähranleger öffnet sich ein ungewöhnlich weiter Raum aus Beton, Schienenresten, Hallen und Kränen. Die Scheepsbouwloods ist an ihrer enormen, kleinteiligen Glas-Stahl-Fassade zu erkennen; Street-Art sitzt direkt auf der Industriehaut. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Die große Scheepsbouwloods wurde 1920 errichtet und ist seit mehr als einem Jahrhundert Teil des IJ-Ufers. In der Halle liegen heute etwa achtzig Ateliers; Film, Fotografie, Tanz, Theater und Veranstaltungen nutzen den ehemaligen Produktionsraum. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: Die Kraanspoor genannte ehemalige Kranbahn ist ein langes Betongerüst am Wasser; darüber schwebt heute ein gläserner Büroaufbau. Das Relikt zeigt, wie Kräne früher parallel zu den Schiffbauplätzen bewegt wurden. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Quer: STRAAT Museum nutzt eine ehemalige Schweiß- und Lagerhalle. Großformatige Werke passen hier nicht zufällig hinein: Die Wände und Spannweiten waren für Schiffbau dimensioniert und geben Graffiti sowie Street-Art musealen Raum ohne White-Cube-Maßstab. Die Querverbindung liefert Kontext für eine dynamische Erzählung, ohne einen Dialog oder eine feste Route vorzuschreiben. Sie trennt dauerhaft belegte Zusammenhänge ausdrücklich von wechselndem Programm und Vermarktung.",
+          "tags": [
+            "quer",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Quer: Die IJ-Hallen verwandeln Hallen und Außengelände regelmäßig in einen großen Flohmarkt. Der Termin ist kein stabiler Packfakt; dauerhaft relevant ist die Wiederverwendung derselben Logistikflächen, auf denen früher Material und Schiffsteile bewegt wurden. Die Querverbindung liefert Kontext für eine dynamische Erzählung, ohne einen Dialog oder eine feste Route vorzuschreiben. Sie trennt dauerhaft belegte Zusammenhänge ausdrücklich von wechselndem Programm und Vermarktung.",
+          "tags": [
+            "quer",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: Orientierung: Das IJ liegt südlich, der Fähranleger östlich der zentralen Werftflächen. Die hohe, weithin sichtbare Kranstruktur und die groß beschrifteten Hallen helfen besser als Hausnummern; das Gelände besitzt mehrere offene Zugänge. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: NDSM steht für Nederlandsche Dok en Scheepsbouw Maatschappij. Der Name ist deshalb kein erfundener Szenebegriff, sondern die fortlebende Abkürzung des Unternehmens, dessen Beschäftigte und Anlagen Amsterdam-Noord industriell prägten. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Quer: Die kostenlose Fährverbindung über das IJ verknüpft die Werft direkt mit Amsterdam Centraal. Diese Wasserquerung macht den historischen Gegensatz lesbar: gegenüber die kompakte Innenstadt, hier die großmaßstäbliche Arbeits- und Hafenlandschaft. Die Querverbindung liefert Kontext für eine dynamische Erzählung, ohne einen Dialog oder eine feste Route vorzuschreiben. Sie trennt dauerhaft belegte Zusammenhänge ausdrücklich von wechselndem Programm und Vermarktung.",
+          "tags": [
+            "quer",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: Erhaltene Schienen, Poller, Rampen, rohe Betonfelder und Kaimauern sind keine Dekoration, sondern Spuren des Produktionsablaufs. Bei Nässe und Wind wirken die offenen Hafenflächen deutlich rauer als die geschützten Gassen der Innenstadt. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "LIVE: Fährrouten und Abfahrtsstege bei GVB, Veranstaltungen bei Stichting NDSM, Ausstellungen bei STRAAT und Termine der IJ-Hallen aktuell prüfen. Festivals können Wege sperren; Markt- und Eventtage niemals aus dem Pack behaupten. Nur als Rechercheauftrag verwenden: Ergebnis, Datum und Primärquelle zur Laufzeit verifizieren, Preise oder Zeiten nie ungeprüft aus dem Pack vorlesen und bei widersprüchlichen Angaben die offizielle Betreiberquelle priorisieren.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "amsterdam_johan_cruijff_arena",
+      "general_info": "Die 1996 eröffnete ArenA ist Heimstadion von Ajax und ein früher europäischer Großbau mit beweglichem Dach. Seit 2018 trägt sie den Namen Johan Cruijffs und bildet mit Bahnhof, Boulevard und Veranstaltungshallen ein eigenes Zentrum.",
+      "deep_data_pool": [
+        {
+          "text": "Historie: Der Bau begann 1993 nach Plänen des niederländischen Architekten Rob Schuurman. Er entwickelte sich aus Amsterdams gescheiterter Olympiabewerbung für 1992; Leichtathletikbahn und festes Dach wichen einem kompakten Fußballstadion. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Am 14. August 1996 wurde die Amsterdam ArenA mit einem Freundschaftsspiel Ajax gegen AC Milan eröffnet. Ajax verließ damit De Meer, das seit 1934 Heimstätte gewesen war und den modernen Kapazitäts- und Sicherheitsanforderungen nicht mehr genügte. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Die ArenA galt bei ihrer Eröffnung als erstes europäisches Stadion mit vollständig schließbarem Dach über dem Spielfeld. Zwei große bewegliche Dachteile ermöglichen Fußball und Konzerte, brachten anfangs aber Probleme bei Licht, Luft und Rasenqualität. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: Von Bahnhof Bijlmer ArenA führen breite Fußgängerachsen direkt zum elliptischen Bau. Außen dominieren Sichtbeton, umlaufende Rampen, Stahltragwerk und zwei gewaltige Dachbögen; die farbigen Zugänge sind über den Ring verteilt. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: 2018 wurde das Stadion offiziell nach Johan Cruijff benannt, der 2016 gestorben war. Die ungewöhnliche Schreibweise ArenA mit großem Schluss-A blieb als Teil der eingeführten Markenform erhalten. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Quer: Ajax ist seit der Eröffnung Hauptnutzer, doch der Bau war von Beginn an multifunktional. Konzerte, American Football und Großveranstaltungen nutzen Innenraum und Dach anders; Kapazität und Bestuhlung ändern sich deshalb je nach Aufbau. Die Querverbindung liefert Kontext für eine dynamische Erzählung, ohne einen Dialog oder eine feste Route vorzuschreiben. Sie trennt dauerhaft belegte Zusammenhänge ausdrücklich von wechselndem Programm und Vermarktung.",
+          "tags": [
+            "quer",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Die ArenA war Spielort der EURO 2000 und der verschobenen EURO 2020. Zudem fanden hier das Champions-League-Finale 1998 und das Europa-League-Finale 2013 statt, wodurch der Bau mehrfach europäische Endspiele trug. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: Im Inneren liegen zwei große Zuschauerränge dicht um das rechteckige Feld. Die Dachöffnung verläuft längs über dem Spielfeld; Tragwerk, Technik und geschlossene Ecken erklären, warum das Stadion akustisch sehr konzentriert wirkt. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Quer: Unter und neben dem Stadion wurde ein Transferium in die Planung integriert. Bahnhof Bijlmer ArenA, Metro, Regionalzüge, Busse, Parkhäuser und Arena Boulevard zeigen den 1990er-Jahre-Ansatz, Großveranstaltungen mit Verkehrsknoten zu koppeln. Die Querverbindung liefert Kontext für eine dynamische Erzählung, ohne einen Dialog oder eine feste Route vorzuschreiben. Sie trennt dauerhaft belegte Zusammenhänge ausdrücklich von wechselndem Programm und Vermarktung.",
+          "tags": [
+            "quer",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Umbauten zwischen 2016 und 2021 erweiterten und rundeten Fassadenbereiche sowie Umläufe. Für die EURO wurden insbesondere Zugänglichkeit, Besucherströme und Nutzflächen verbessert, ohne die ursprüngliche Schüssel vollständig zu ersetzen. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Quer: Johan Cruijff prägte Ajax als Spieler und Trainer sowie den niederländischen Totaalvoetbal. Die Umbenennung bindet das Stadion an eine Sportidee und Biografie, obwohl Cruijffs wichtigste Ajax-Jahre lange vor dem ArenA-Bau lagen. Die Querverbindung liefert Kontext für eine dynamische Erzählung, ohne einen Dialog oder eine feste Route vorzuschreiben. Sie trennt dauerhaft belegte Zusammenhänge ausdrücklich von wechselndem Programm und Vermarktung.",
+          "tags": [
+            "quer",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: Orientierung: Der Haupteindruck entsteht nicht an einem einzelnen Portal, sondern auf dem Arena Boulevard. Bei Events werden Sektoren, Brücken und Schleusen getrennt geführt; deshalb immer den auf dem Ticket genannten Eingang statt nur den Stadionnamen ansteuern. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "LIVE: Spieltage, Touren, Dachstatus, Einlass, Taschenregeln, Zugangstore und Kapazität auf johancruijffarena.nl beziehungsweise ajax.nl prüfen. Konzert- und Fußballbetrieb verändern Wege und Sicherheitszonen kurzfristig. Nur als Rechercheauftrag verwenden: Ergebnis, Datum und Primärquelle zur Laufzeit verifizieren, Preise oder Zeiten nie ungeprüft aus dem Pack vorlesen und bei widersprüchlichen Angaben die offizielle Betreiberquelle priorisieren.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "amsterdam_portugese_synagoge",
+      "general_info": "Die 1675 vollendete Portugiesische Synagoge, auch Esnoga oder Snoge, bewahrt einen nahezu vollständigen historischen Innenraum ohne elektrische Beleuchtung und Heizung. Sie ist Museumserbe und weiterhin Gebetshaus der sephardischen Gemeinde.",
+      "deep_data_pool": [
+        {
+          "text": "Historie: Sephardische Juden aus Portugal und Spanien fanden nach Verfolgung und Zwangskonversion in Amsterdam vergleichsweise sichere Lebens- und Handelsmöglichkeiten. Ihre Gemeinde ließ die monumentale Esnoga im 17. Jahrhundert offen sichtbar errichten. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Der Bau wurde 1675 vollendet und war damals eine der größten Synagogen der Welt. Elias Bouman entwarf einen strengen klassizistischen Backsteinbau, dessen freistehende Lage und hoher Gebetsraum den Rang der Gemeinde ausdrückten. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: Von Mr. Visserplein erscheint ein hoher, rechteckiger Backsteinkörper mit großen Rundbogenfenstern hinter einer Hofmauer. Der Zugang führt zuerst in den stillen Innenhof; Nebengebäude rahmen den Hauptraum wie ein geschütztes Geviert. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: Im Gebetsraum liegen Holzbohlen über Sand. Hohe Fenster, Messingkronleuchter, dunkle Bänke, Bima und der Hechal prägen den Raum; elektrische Leitungen und Heizkörper fehlen bewusst, Kerzen bleiben Teil der realen Nutzung. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Die Synagoge überstand die deutsche Besatzung, obwohl die Gemeinde verfolgt und fast vernichtet wurde. Dass Gebäude und Ausstattung erhalten blieben, darf nicht mit ungebrochener Gemeindegeschichte verwechselt werden. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Quer: Der Hechal, der Schrein für die Torarollen, steht in Richtung Jerusalem; von Amsterdam aus sind das ungefähr 120 Grad ostwärts. Gegenüber liegt die Bima, sodass Lesung und Gebet räumlich zwischen Gemeinde und Schrein vermittelt werden. Die Querverbindung liefert Kontext für eine dynamische Erzählung, ohne einen Dialog oder eine feste Route vorzuschreiben. Sie trennt dauerhaft belegte Zusammenhänge ausdrücklich von wechselndem Programm und Vermarktung.",
+          "tags": [
+            "quer",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Unter den umlaufenden Nebengebäuden liegen Schatzkammern mit Silber, Textilien, Toraschmuck, Büchern und Zeremonialobjekten. Die Keller wurden bei der Restaurierung bis 2011 für Besucher erschlossen. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: 2022 fanden Restauratoren unter dem Hechal einen verborgenen Lagerraum mit gerollten Leinen-Wandbehängen aus etwa 1740 bis 1760. Der Fund zeigt, dass selbst in einem intensiv erforschten Innenraum historische Nutzungsschichten verborgen blieben. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Quer: Zur Anlage gehört Ets Haim, eine 1616 gegründete Bibliothek der portugiesisch-jüdischen Gemeinde. Ihre Handschriften und Drucke dokumentieren Religion, Gelehrsamkeit und die internationale Vernetzung des sephardischen Amsterdam. Die Querverbindung liefert Kontext für eine dynamische Erzählung, ohne einen Dialog oder eine feste Route vorzuschreiben. Sie trennt dauerhaft belegte Zusammenhänge ausdrücklich von wechselndem Programm und Vermarktung.",
+          "tags": [
+            "quer",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: Die vier mächtigen Innenpfeiler und hölzernen Galerien geben dem Saal fast die Wirkung einer protestantischen Predigtkirche, doch Bima, Hechal, Sitzordnung und liturgische Ausstattung folgen der sephardischen Tradition. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Quer: Direkt gegenüber liegt der aschkenasische Synagogenkomplex des Joods Museum. Die Nachbarschaft macht zwei unterschiedliche Migrationsgeschichten sichtbar: iberisch-sephardisch in der Esnoga, deutsch- und osteuropäisch-aschkenasisch gegenüber. Die Querverbindung liefert Kontext für eine dynamische Erzählung, ohne einen Dialog oder eine feste Route vorzuschreiben. Sie trennt dauerhaft belegte Zusammenhänge ausdrücklich von wechselndem Programm und Vermarktung.",
+          "tags": [
+            "quer",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Eine umfassende Restaurierung des hölzernen, kupfernen und textilen Interieurs wurde 2025 abgeschlossen. Ziel war nicht eine moderne Neugestaltung, sondern die Sicherung der über Jahrhunderte weiterbenutzten Ausstattung. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "LIVE: Gottesdienste, jüdische Feiertage, Sicherheitskontrollen, Kerzenlichtkonzerte, Schatzkammerzugang und Besuchszeiten beim Joods Cultureel Kwartier prüfen. Religiöse Nutzung hat Vorrang und kann touristische Öffnung verändern. Nur als Rechercheauftrag verwenden: Ergebnis, Datum und Primärquelle zur Laufzeit verifizieren, Preise oder Zeiten nie ungeprüft aus dem Pack vorlesen und bei widersprüchlichen Angaben die offizielle Betreiberquelle priorisieren.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "amsterdam_eye_filmmuseum",
+      "general_info": "Eye ist Niederlands nationales Museum und Archiv für Film und bewegtes Bild. Der 2012 eröffnete weiße Bau am IJ verbindet vier Kinos, Ausstellungen, Restaurierung und Sammlung; seine scharf gefaltete Form inszeniert Licht und Bewegung.",
+      "deep_data_pool": [
+        {
+          "text": "Historie: Die institutionellen Wurzeln reichen zur Gründung des Nederlands Historisch Filmarchief 1946. Sammlungen mehrerer Filmarchive wurden 1952 zum Nederlands Filmmuseum gebündelt, das lange im Vondelparkpaviljoen arbeitete. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Am 4. April 2012 öffnete Eye am Nordufer des IJ. Königin Beatrix eröffnete den Neubau, der als erste große Kulturinstitution den neuen Stadtteil Overhoeks deutlich mit der historischen Innenstadt verband. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: Der Bau von Delugan Meissl Associated Architects wirkt je nach Blick wie Auge, Muschel, Möwe oder Raumschiff. Weiße Aluminiumflächen falten sich über einer verglasten Basis; kaum ein Innenwinkel beträgt exakt neunzig Grad. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: Im zentralen Arena-Raum steigt eine breite Holztreppe wie eine Tribüne an. Gegenüber wird die Glasfassade zum lebenden Filmfenster: Fähren, Wasser, Bahnhof und Lichtreflexe des IJ bilden ein ständig wechselndes Bild. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Quer: Die Architektur übersetzt filmische Mittel in Raum: wechselnde Rahmung, Hell-Dunkel, offene und geschlossene Sequenzen sowie überraschende Sichtachsen. Wege zu den Sälen blenden Außenwelt und Geräusch schrittweise aus. Die Querverbindung liefert Kontext für eine dynamische Erzählung, ohne einen Dialog oder eine feste Route vorzuschreiben. Sie trennt dauerhaft belegte Zusammenhänge ausdrücklich von wechselndem Programm und Vermarktung.",
+          "tags": [
+            "quer",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Eye bewahrt die Jean-Desmet-Sammlung mit mehr als 900 Filmen und rund 2.000 Plakaten, Fotos, Programmen und Geschäftsdokumenten aus der frühen Kinozeit, vor allem 1907 bis 1916. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Jean Desmet war Wanderkinobetreiber, Kinobesitzer und ab 1910 Filmverleiher. Weil er Filme und Geschäftsunterlagen aufbewahrte, dokumentiert sein Archiv den Übergang vom Jahrmarktmedium zum dauerhaften Kinobetrieb ungewöhnlich vollständig. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Quer: Die Desmet-Sammlung wurde 2011 in das UNESCO-Register Memory of the World aufgenommen. Viele Kopien sind Unikate; Geschäftsbriefe, Rechnungen und Verleihlisten erlauben außerdem Forschung jenseits einzelner Filmwerke. Die Querverbindung liefert Kontext für eine dynamische Erzählung, ohne einen Dialog oder eine feste Route vorzuschreiben. Sie trennt dauerhaft belegte Zusammenhänge ausdrücklich von wechselndem Programm und Vermarktung.",
+          "tags": [
+            "quer",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: Die Dauerausstellung zeigt historische Apparate wie Laterna magica, Mutoskop, Kinamo und eine Mitchell-35-mm-Kamera. Sie machen sichtbar, dass Filmgeschichte zugleich eine Geschichte von Optik, Mechanik, Material und Vorführung ist. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Quer: Vier Kinosäle zeigen restaurierte Klassiker, Retrospektiven, Arthouse, Festivals und Stummfilme mit Live-Musik. Eye ist daher nicht nur Ausstellungshaus: Projektion und Aufführung bleiben Teil der Sammlungspraxis. Die Querverbindung liefert Kontext für eine dynamische Erzählung, ohne einen Dialog oder eine feste Route vorzuschreiben. Sie trennt dauerhaft belegte Zusammenhänge ausdrücklich von wechselndem Programm und Vermarktung.",
+          "tags": [
+            "quer",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Das Sammlungszentrum liegt nicht vollständig im ikonischen Museumsbau. Archive, Konservierung und Digitalisierung benötigen spezialisierte Bedingungen; der öffentliche IJ-Bau ist Schaufenster eines wesentlich größeren filmischen Gedächtnisses. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: Orientierung: Eye liegt direkt westlich des A’DAM-Turms am IJ. Vom Bahnhof führt die kostenlose Fähre nach Buiksloterweg; nach dem Anlegen ist die weiße, auskragende Form links kaum zu verwechseln. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "LIVE: Kinoprogramm, Vorführformat, Sprachen, Sonderausstellungen, Restaurierungspräsentationen, Tickets und Zuschläge auf eyefilm.nl prüfen. Der frei zugängliche Arena-Bereich ist nicht gleichbedeutend mit freiem Eintritt in alle Säle. Nur als Rechercheauftrag verwenden: Ergebnis, Datum und Primärquelle zur Laufzeit verifizieren, Preise oder Zeiten nie ungeprüft aus dem Pack vorlesen und bei widersprüchlichen Angaben die offizielle Betreiberquelle priorisieren.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "amsterdam_amsterdamse_bos",
+      "general_info": "Der rund 1.000 Hektar große Amsterdamse Bos ist eine geplante Kulturlandschaft aus Wald, Wiesen, Wasser und Sportanlagen. Er entstand ab 1934 im Boschplan, überwiegend durch Arbeitsbeschaffung, und liegt größtenteils in Amstelveen.",
+      "deep_data_pool": [
+        {
+          "text": "Historie: Der Botaniker Jac. P. Thijsse forderte schon um 1900 mehr Natur für die wachsende Stadt. 1928 beschloss der Gemeinderat den Bau; Cornelis van Eesteren und Jakoba Mulder entwarfen den Boschplan als moderne Erholungslandschaft. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Zwischen 1934 und 1940 arbeiteten mehr als 20.000 arbeitslose Männer am Wald. Mit Schaufeln, Loren und Schubkarren formten sie Gelände und Gewässer; das Projekt war Hilfe, aber zugleich disziplinierende Pflichtarbeit unter Krisenbedingungen. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Der Zweite Weltkrieg unterbrach die geplante Fertigstellung 1948. Arbeiten gingen begrenzt weiter; der letzte Baum des ursprünglichen Plans wurde erst 1970 von Schulkindern am Heuvel gepflanzt. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: Der Bos wirkt natürlich, ist aber sorgfältig komponiert: geschwungene Waldränder, lange Sichtachsen, offene Spielwiesen, Brücken und Teiche wechseln rhythmisch. Orientierung gelingt über benannte Hauptwege, Bosbaan und große Wasserzüge besser als über Gebäude. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Die Bosbaan war eines der ersten Teilprojekte und wurde 1937 für Rennen eröffnet. Sie gilt als älteste eigens gebaute künstliche Regattastrecke der Welt und wurde später auf acht Bahnen sowie 118 Meter Breite erweitert. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Quer: Der Plan verbindet englischen Landschaftsgarten mit dem deutschen Volksparkgedanken. Schöne Aussicht allein genügte nicht: Rudern, Spielen, Baden, Laufen und Picknick waren von Anfang an als aktive öffentliche Nutzung vorgesehen. Die Querverbindung liefert Kontext für eine dynamische Erzählung, ohne einen Dialog oder eine feste Route vorzuschreiben. Sie trennt dauerhaft belegte Zusammenhänge ausdrücklich von wechselndem Programm und Vermarktung.",
+          "tags": [
+            "quer",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Während der Besatzung lagen im Gebiet Arbeitslager, darunter eines für jüdische Männer nördlich der Bosbaan. Sie mussten Gräben in den Oeverlanden ziehen und wurden später verschleppt; militärische Stellungen schützten den nahen Flughafen Schiphol. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Im Hungerwinter 1944/45 fällten Einwohner Holz zum Heizen. Kriegsnutzung, Rodung und verzögerte Pflanzung erklären, weshalb der heutige Wald trotz älter wirkender Landschaft großteils eine Schöpfung des 20. Jahrhunderts ist. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Quer: Die Geitenboerderij Ridammerhoeve, das Open-Air-Bostheater, Boerderij Meerzicht und De Boswinkel sind eigenständige Ziele in einem sehr großen Gebiet. Entfernungen sollten nicht aus dem Sammelnamen Amsterdamse Bos unterschätzt werden. Die Querverbindung liefert Kontext für eine dynamische Erzählung, ohne einen Dialog oder eine feste Route vorzuschreiben. Sie trennt dauerhaft belegte Zusammenhänge ausdrücklich von wechselndem Programm und Vermarktung.",
+          "tags": [
+            "quer",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: Die Bosbaan bildet eine außergewöhnlich gerade Wasserachse im sonst geschwungenen Park. Tribünen- und Trainingsbauten konzentrieren sich am nordöstlichen Ende; Läufer nutzen einen markierten Rundweg von ungefähr fünf Kilometern. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Quer: Obwohl der Name Amsterdam trägt, liegt der größte Teil des Waldes auf Amstelveener Gebiet; Eigentümer und Verwalter ist die Gemeinde Amsterdam. Diese Verwaltungsgrenze ist vor Ort kaum sichtbar, erklärt aber unterschiedliche Adressangaben. Die Querverbindung liefert Kontext für eine dynamische Erzählung, ohne einen Dialog oder eine feste Route vorzuschreiben. Sie trennt dauerhaft belegte Zusammenhänge ausdrücklich von wechselndem Programm und Vermarktung.",
+          "tags": [
+            "quer",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: Mehrere Eingänge und Parkplätze verteilen sich entlang Amstelveenseweg, Nieuwe Meer und Amstelveen. Es gibt keinen einzigen Haupteingang für alle Ziele; Route immer auf Bosbaan, Boswinkel, Theater oder Bauernhof konkretisieren. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "LIVE: Wegsperrungen, Veranstaltungen, Theaterprogramm, Bauernhoföffnung, Bootsverleih, Badehinweise und ÖPNV aktuell auf amsterdamsebos.nl und beim jeweiligen Betreiber prüfen. Sturm und Arbeiten können Waldwege kurzfristig schließen. Nur als Rechercheauftrag verwenden: Ergebnis, Datum und Primärquelle zur Laufzeit verifizieren, Preise oder Zeiten nie ungeprüft aus dem Pack vorlesen und bei widersprüchlichen Angaben die offizielle Betreiberquelle priorisieren.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "amsterdam_a_dam_lookout",
+      "general_info": "A’DAM Lookout sitzt auf dem 1971 eröffneten früheren Shell-Hochhaus am IJ. Der 22-geschossige, schräg zur Uferkante gedrehte Turm wurde 2016 als Musik-, Hotel-, Gastronomie- und Aussichtshaus neu eröffnet.",
+      "deep_data_pool": [
+        {
+          "text": "Historie: Arthur Staal entwarf den Turm ab 1965 als Shell-Hauptverwaltung. Er stellte den Bau um 45 Grad zur IJ-Kante; daraus entstand der frühere Name Overhoeks, wörtlich etwa diagonal oder über Eck. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Shell bezog den Turm 1971 und verließ ihn 2009. Die Umwandlung war Teil des Wandels von Overhoeks vom abgeschlossenen Industrie- und Forschungsgelände zu einem gemischten Stadtquartier. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Nach umfassendem Umbau öffnete der Bau 2016 als A’DAM Toren. Der Name spielt zugleich mit Amsterdam, Dance and Music; Büros von Musikunternehmen, Hotel, Club, Bars und Restaurants teilen sich den vertikalen Bau. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: Der schlanke dunkle Turm steht direkt hinter Eye. Ein kantig auskragender Dachaufsatz und die rhythmische Glasfassade machen ihn vom Bahnhof aus sichtbar; der öffentliche Eingang liegt am Overhoeksplein, nicht an der Wasserkante. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: Vom Dach lassen sich IJ, Centraal, Altstadt, Hafengebiete und Amsterdam-Noord in 360 Grad lesen. Der Unterschied zwischen gebogenem Grachtengürtel und großmaßstäblichem Hafen wird aus der Höhe besonders deutlich. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Quer: Die Dachschaukel Over the Edge ragt über die Gebäudekante. Sie ist eine separate Attraktion und kein notwendiger Teil des Aussichtsrundgangs; ihre Bewerbung als höchste Schaukel Europas ist ein Betreiberclaim und live zu prüfen. Die Querverbindung liefert Kontext für eine dynamische Erzählung, ohne einen Dialog oder eine feste Route vorzuschreiben. Sie trennt dauerhaft belegte Zusammenhänge ausdrücklich von wechselndem Programm und Vermarktung.",
+          "tags": [
+            "quer",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Quer: Im 19. Stock liegt ein drehendes Restaurant. Die langsame Rotation verändert den Blick ohne Ortswechsel und knüpft an Aussichtsturm-Typologien der Nachkriegsmoderne an; Zugang und Reservierung sind von der Aussichtsplattform getrennt. Die Querverbindung liefert Kontext für eine dynamische Erzählung, ohne einen Dialog oder eine feste Route vorzuschreiben. Sie trennt dauerhaft belegte Zusammenhänge ausdrücklich von wechselndem Programm und Vermarktung.",
+          "tags": [
+            "quer",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Der Turm bildet mit Eye einen starken Kontrast: dort ein niedriger weißer Kulturbau von 2012, hier ein modernistisches Bürohochhaus von 1971. Zusammen markieren sie den städtebaulichen Sprung über das IJ. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: Orientierung vom Centraal: Fähre nach Buiksloterweg nehmen, nach dem Anleger geradeaus beziehungsweise leicht links zwischen Eye und Turm gehen. Die Dachkante bleibt sichtbar, doch der Eingang liegt unter dem Turm und kann durch Eventführung variieren. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Quer: Der 22-geschossige Bau ist keine reine Aussichtsplattform. Nachtclub Shelter liegt im Untergeschoss, während Hotel und Musikfirmen darüber verteilt sind; öffentliche und private Aufzüge sowie Warteschlangen sind daher getrennt. Die Querverbindung liefert Kontext für eine dynamische Erzählung, ohne einen Dialog oder eine feste Route vorzuschreiben. Sie trennt dauerhaft belegte Zusammenhänge ausdrücklich von wechselndem Programm und Vermarktung.",
+          "tags": [
+            "quer",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: Die Aussicht nach Süden wird vom langgestreckten Centraal und den Kirchtürmen der Altstadt gerahmt; nach Westen dominieren Hafenbecken und NDSM, nach Norden neuere Quartiere. Gute Sicht hängt stark von Wetter und Dunst ab. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Der Umbau bewahrte den tragenden Büroturm, veränderte jedoch Sockel, Fassade, Erschließung und Dachnutzung. Aus einem Konzernsitz wurde damit ein öffentlich vermarktetes Zeichen der postindustriellen Nordseite. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Zeitfenster, Aufzug, Schaukelbetrieb, Wetter, Sicht, Alters- oder Größenregeln und einzelne Bereiche auf adamlookout.com prüfen. Wind kann die Schaukel schließen, ohne dass die Plattform insgesamt geschlossen ist. Nur als Rechercheauftrag verwenden: Ergebnis, Datum und Primärquelle zur Laufzeit verifizieren, Preise oder Zeiten nie ungeprüft aus dem Pack vorlesen und bei widersprüchlichen Angaben die offizielle Betreiberquelle priorisieren.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "amsterdam_sint_nicolaasbasiliek",
+      "general_info": "Die 1884–1887 errichtete St.-Nikolaus-Basilika gegenüber dem Centraal ist Amsterdams wichtigste römisch-katholische Kirche. A.C. Bleijs verband Neobarock und Neorenaissance; die 58 Meter hohe Kuppel prägt die Hafenfront.",
+      "deep_data_pool": [
+        {
+          "text": "Historie: Architekt Adrianus Bleijs baute die Kirche 1884 bis 1887 als Sint Nicolaas binnen de Veste. Der Name erinnerte an die Lage innerhalb der alten Befestigung und an Nikolaus als Schutzpatron von Seeleuten und Amsterdam. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Die Wahl von Neobarock und Neorenaissance war ungewöhnlich, weil im niederländischen Katholizismus des 19. Jahrhunderts die Neugotik dominierte. Bleijs setzte bewusst auf eine monumentale, stadträumlich wirksame Mischform. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: Die Westfassade zur Prins Hendrikkade wird von zwei Türmen, Rosette und skulptiertem Giebel gerahmt. Dahinter steigt die achteckige Kuppel mit Laterne auf; vom Bahnhofsvorplatz wirkt sie wie ein Gegenüber zur Bahnhoffassade. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: Der Grundriss ist eine dreischiffige Kreuzbasilika. Über der Vierung sitzt die Kuppel, im Südosten schließen Marien- und Josephskapelle an; Hauptschiff, Querhaus und Chor ordnen den Blick zum Hochaltar. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: Die 58 Meter hohe Kuppel besitzt eine äußere Schale und eine farbige innere Glaskuppel. Mehrere Ebenen von Buntglas filtern das Licht als Sternenhimmel; dieses Detail ist von unten wichtiger als die Außenhöhe allein. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Jan Dunselman schuf einen umfangreichen Zyklus religiöser Malereien, darunter Darstellungen aus der Nikolauslegende. Die Ausstattung entstand über Jahrzehnte und macht den Innenraum zu einem Gesamtkunstwerk des späten 19. Jahrhunderts. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Quer: Das Sauer-Orgelwerk von 1889 ist Opus 505 des Frankfurter Orgelbauers Wilhelm Sauer. Es gilt als größtes deutsches Orgelinstrument des 19. Jahrhunderts in den Niederlanden und bewahrt wesentliche Teile seines romantischen Klangcharakters. Die Querverbindung liefert Kontext für eine dynamische Erzählung, ohne einen Dialog oder eine feste Route vorzuschreiben. Sie trennt dauerhaft belegte Zusammenhänge ausdrücklich von wechselndem Programm und Vermarktung.",
+          "tags": [
+            "quer",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Die Gemeinde finanzierte das ursprünglich 30.000 Gulden teure Instrument. Veränderungen im 20. Jahrhundert passten es zeitweise an barocke Klangideale an; eine Restaurierung um 2000 gewann viele Sauer-Register und technische Teile zurück. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Eine große Restaurierung der Kirche wurde 2001 abgeschlossen. 2012 erhob Papst Benedikt XVI. sie zur Basilica minor; 2025 wurde sie Co-Kathedrale des Bistums Haarlem-Amsterdam. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Quer: Die Kirche ist die dritte bedeutende Amsterdamer Nikolauskirche: Die mittelalterliche Oude Kerk wurde nach der Reformation protestantisch, Ons’ Lieve Heer op Solder bewahrte katholische Praxis verborgen, die Basilika brachte sie wieder monumental ins Stadtbild. Die Querverbindung liefert Kontext für eine dynamische Erzählung, ohne einen Dialog oder eine feste Route vorzuschreiben. Sie trennt dauerhaft belegte Zusammenhänge ausdrücklich von wechselndem Programm und Vermarktung.",
+          "tags": [
+            "quer",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: Orientierung: vom Haupteingang des Centraal über den Bahnhofsvorplatz zur Prins Hendrikkade blicken. Die Doppeltürme und zentrale Kuppel stehen östlich der Damrak-Achse; Verkehr und Bauarbeiten können den direkten Fußweg verändern. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Quer: Nikolaus ist Patron der Stadt und der Seefahrt. Die Lage am früheren offenen Hafenbecken ist daher inhaltlich passend: Kirche, Bahnhof, Schifffahrt und Ankunft überlagern sich an derselben historischen Stadtkante. Die Querverbindung liefert Kontext für eine dynamische Erzählung, ohne einen Dialog oder eine feste Route vorzuschreiben. Sie trennt dauerhaft belegte Zusammenhänge ausdrücklich von wechselndem Programm und Vermarktung.",
+          "tags": [
+            "quer",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "LIVE: Messen, Choral Evensong, Orgelkonzerte, touristische Öffnung und mögliche Zutrittsbeschränkungen auf der Pfarr- und Musikwebsite prüfen. Während Liturgie keine touristische Rundgangslogik oder garantierte Besichtigung behaupten. Nur als Rechercheauftrag verwenden: Ergebnis, Datum und Primärquelle zur Laufzeit verifizieren, Preise oder Zeiten nie ungeprüft aus dem Pack vorlesen und bei widersprüchlichen Angaben die offizielle Betreiberquelle priorisieren.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "amsterdam_nationaal_holocaust_namenmonument",
+      "general_info": "Daniel Libeskinds 2021 eröffnetes Namenmonument erinnert mit rund 102.000 einzeln gravierten Steinen an jüdische, Sinti- und Roma-Opfer ohne bekanntes Grab. Backsteinwände und spiegelnder Stahl bilden das hebräische Erinnerungswort.",
+      "deep_data_pool": [
+        {
+          "text": "Historie: Das Nederlands Auschwitz Comité initiierte das Denkmal nach jahrelanger Vorbereitung. Mehr als 75 Jahre nach Kriegsende entstand erstmals in den Niederlanden ein nationales Monument, das die Opfer ohne Grab einzeln beim Namen nennt. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Am 19. September 2021 enthüllte König Willem-Alexander das Monument. Es nennt aus den Niederlanden deportierte Opfer sowie niederländische Juden, die aus anderen Ländern deportiert und ermordet wurden. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: Besucher gehen durch schmale Gänge zwischen zwei Meter hohen Backsteinwänden. Jeder gravierte Stein trägt Name, Geburtsdatum und Alter oder Todesangabe; die Schrift liegt auf Handhöhe und macht individuelle Namen berührbar. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: Über den Ziegelwänden schweben vier große, spiegelnde Edelstahlkörper. Ihre Formen ergeben hebräische Buchstaben des Ausdrucks Lezecher, sinngemäß in Erinnerung an; aus Bodennähe sind sie eher als Fragmente denn als Wort zu lesen. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Quer: Libeskind verbindet vertrauten niederländischen Backstein mit hochglänzendem, geometrischem Stahl. Eine schmale Fuge zwischen beiden lässt die Metallformen optisch schweben und symbolisiert einen Bruch in Geschichte und Kultur. Die Querverbindung liefert Kontext für eine dynamische Erzählung, ohne einen Dialog oder eine feste Route vorzuschreiben. Sie trennt dauerhaft belegte Zusammenhänge ausdrücklich von wechselndem Programm und Vermarktung.",
+          "tags": [
+            "quer",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Genannt werden etwa 102.000 jüdische Opfer sowie 220 Sinti und Roma. Zusätzlich erinnern unbeschriftete Steine an Menschen, deren Namen nicht ermittelt werden konnten; Zahlen ersetzen dennoch nicht die individuell gravierten Biografien. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Quer: Daniel Libeskind wurde 1946 in Łódź als Sohn von Holocaustüberlebenden geboren. Zu seinen bekannten Arbeiten zählen das Jüdische Museum Berlin und der Masterplan für Ground Zero; persönliche und architektonische Erinnerung greifen hier ineinander. Die Querverbindung liefert Kontext für eine dynamische Erzählung, ohne einen Dialog oder eine feste Route vorzuschreiben. Sie trennt dauerhaft belegte Zusammenhänge ausdrücklich von wechselndem Programm und Vermarktung.",
+          "tags": [
+            "quer",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: Das Monument liegt an der Weesperstraat im ehemaligen jüdischen Viertel, teilweise hinter bestehenden Bäumen und Bebauung. Es ist kein einzelner hoher Obelisk: Erst beim Eintritt in das Labyrinth erschließt sich seine räumliche Form. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Quer: Die spiegelnden Flächen nehmen Himmel, Bäume, Häuser und Besucher auf. Gegenwart erscheint dadurch über den Namen, während die Ziegel materiell an die historische Stadt erinnern; Reflexion ist Bestandteil des Konzepts, nicht bloßer Schmuck. Die Querverbindung liefert Kontext für eine dynamische Erzählung, ohne einen Dialog oder eine feste Route vorzuschreiben. Sie trennt dauerhaft belegte Zusammenhänge ausdrücklich von wechselndem Programm und Vermarktung.",
+          "tags": [
+            "quer",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Das Monument erinnert an Menschen, die in Konzentrations- und Vernichtungslagern, durch Erschießung, Krankheit, Hunger, Zwangsarbeit, Transporte oder Todesmärsche starben und deren Grab unbekannt ist. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Quer: In der Nähe liegen Portugiesische Synagoge, Joods Museum, Hollandsche Schouwburg und Nationaal Holocaustmuseum. Das Namenmonument ersetzt deren historische Orte nicht, sondern ergänzt sie um eine nationale, personenbezogene Namenslandschaft. Die Querverbindung liefert Kontext für eine dynamische Erzählung, ohne einen Dialog oder eine feste Route vorzuschreiben. Sie trennt dauerhaft belegte Zusammenhänge ausdrücklich von wechselndem Programm und Vermarktung.",
+          "tags": [
+            "quer",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: Die Gänge sind bewusst eng und die Namen dicht gesetzt. Ruhiges Bewegen, Freihalten der Durchgänge und respektvolle Fotografie sind Teil des angemessenen Ortsgebrauchs; das Monument ist Gedenkort, keine Kulisse. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "LIVE: Zugänglichkeit, Gedenkveranstaltungen, Namenssuche, Gruppenhinweise und etwaige Sperrungen auf holocaustnamenmonument.nl prüfen. Öffentliche Zeremonien können Wege verändern; Opferzahlen nur nach aktueller offizieller Datenlage nennen. Nur als Rechercheauftrag verwenden: Ergebnis, Datum und Primärquelle zur Laufzeit verifizieren, Preise oder Zeiten nie ungeprüft aus dem Pack vorlesen und bei widersprüchlichen Angaben die offizielle Betreiberquelle priorisieren.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "amsterdam_joods_cultureel_kwartier",
+      "general_info": "Das Joods Cultureel Kwartier verbindet mehrere eigenständige Orte der jüdischen Geschichte. Kern des Joods Museum ist Europas größter historischer aschkenasischer Synagogenkomplex mit vier Bauten von 1671 bis 1752.",
+      "deep_data_pool": [
+        {
+          "text": "Historie: Aschkenasische Juden lebten seit etwa 1635 in Amsterdam. Die Grote Sjoel wurde 1671 nach Plänen der Stadtbaumeister Elias Bouman und Daniël Stalpaert geweiht und folgt im Grundriss einem griechischen Kreuz. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Wegen des Gemeindewachstums entstanden Obbene Sjoel 1686–1688, Dritt Sjoel 1700 und eine erste Neie Sjoel 1730. 1752 ersetzte ein größerer Neubau mit Kuppel und ionischem Eingang die Neue Synagoge. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: Am Jonas Daniël Meijerplein erscheinen mehrere Backsteinbauten statt eines einzigen Museumsblocks. Kuppel, hohe Rundbogenfenster und unterschiedliche Dachlinien verraten die vier Synagogen; gläserne Verbindungen stammen aus dem Museumsumbau. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Die letzte Feier in der Grote Sjoel fand 1943 statt; danach wurde der Komplex geplündert. Nach dem Krieg kehrte die durch Verfolgung dezimierte Gemeinde nicht in diese Gebäude als reguläre Synagogen zurück. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Die Stadt kaufte den vernachlässigten Komplex 1954. Das Joods Historisch Museum erwarb ihn 1974 symbolisch für einen Gulden; nach Restaurierung und Umbau öffnete das Museum dort am 3. Mai 1987. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: Die frühere Sjoelgasse zwischen den Gebäuden wurde mit Glas und Stahl überdacht. Sie verbindet heute die vier Häuser, ohne ihre Unterschiede zu verwischen; historische Backsteinwände bleiben im modernen Innenweg sichtbar. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Das Museum selbst war 1931 in De Waag gegründet worden, wurde 1940 von den deutschen Besatzern geschlossen und öffnete 1955 erneut. Ein großer Teil seiner damaligen Sammlung war durch Plünderung verloren. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Quer: Die Rintel-Chanukkia ist mehr als einen Meter hoch und etwa anderthalb Meter breit. Sara Rintel stiftete das Silberobjekt 1753 für die Grote Synagoge; es steht damit seit über zwei Jahrhunderten im ursprünglichen Raumkontext. Die Querverbindung liefert Kontext für eine dynamische Erzählung, ohne einen Dialog oder eine feste Route vorzuschreiben. Sie trennt dauerhaft belegte Zusammenhänge ausdrücklich von wechselndem Programm und Vermarktung.",
+          "tags": [
+            "quer",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Quer: Das Quartier umfasst nicht nur das Joods Museum: Portugiesische Synagoge, Nationaal Holocaustmuseum, Hollandsche Schouwburg und Bildungsangebote bilden getrennte Orte mit unterschiedlicher Geschichte und Besuchslogik. Die Querverbindung liefert Kontext für eine dynamische Erzählung, ohne einen Dialog oder eine feste Route vorzuschreiben. Sie trennt dauerhaft belegte Zusammenhänge ausdrücklich von wechselndem Programm und Vermarktung.",
+          "tags": [
+            "quer",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Amsterdam wurde durch sephardische Zuwanderung von der Iberischen Halbinsel und spätere aschkenasische Migration aus Mittel- und Osteuropa zu einem bedeutenden jüdischen Zentrum. Beide Traditionen liegen hier unmittelbar gegenüber. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: In der Nieuwe Synagoge tragen vier marmorierte Säulen Gewölbe und Galerien; eine zentrale Lichtkuppel hebt sie von der älteren Grote Sjoel ab. Historische Geschlechtergalerien gehören zur ursprünglichen Raumordnung. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Quer: Ausstellungen behandeln Religion, Feste, Kunst, Alltag, Migration, Verfolgung und jüdisches Leben heute. Der Ort darf deshalb nicht auf Holocaustgeschichte reduziert werden, obwohl die Zerstörung der Gemeinde in den Gebäuden sichtbar bleibt. Die Querverbindung liefert Kontext für eine dynamische Erzählung, ohne einen Dialog oder eine feste Route vorzuschreiben. Sie trennt dauerhaft belegte Zusammenhänge ausdrücklich von wechselndem Programm und Vermarktung.",
+          "tags": [
+            "quer",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "LIVE: Kombiticket, Reservierungen, Sicherheitskontrolle, Feiertagsschließungen und Öffnung jedes Standorts auf jck.nl prüfen. Ein Ticket bedeutet nicht automatisch, dass alle Häuser gleichzeitig oder ohne Zeitfenster zugänglich sind. Nur als Rechercheauftrag verwenden: Ergebnis, Datum und Primärquelle zur Laufzeit verifizieren, Preise oder Zeiten nie ungeprüft aus dem Pack vorlesen und bei widersprüchlichen Angaben die offizielle Betreiberquelle priorisieren.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "amsterdam_anne_frank_huis",
+      "general_info": "Prinsengracht 263 bewahrt das Vorder- und Hinterhaus, in dem Anne Frank, ihre Familie und vier weitere Verfolgte von 1942 bis 1944 untertauchten. Das 1960 eröffnete Museum verbindet authentische Räume mit Dokumentation.",
+      "deep_data_pool": [
+        {
+          "text": "Historie: Das Vorderhaus an der Prinsengracht entstand 1635 zwischen Wohn- und Lagerbauten. Das heutige größere Hinterhaus wurde 1739 errichtet; schmale, tiefe Parzellen und Innenhöfe waren typisch für den Grachtengürtel. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Otto Franks Firmen Opekta und Pectacon nutzten das Gebäude. Hinter den Geschäftsräumen lag das kaum einsehbare Achterhuis, das vor der Besatzung als mögliches Versteck vorbereitet wurde. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Am 6. Juli 1942 tauchten Otto, Edith, Margot und Anne Frank unter. Eine Woche später folgte die Familie Van Pels; im November kam Fritz Pfeffer hinzu. Acht Menschen lebten gut zwei Jahre verborgen. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: Der Zugang zum Versteck lag hinter einem drehbaren Bücherregal. Das Regal war Tarnung innerhalb des Gebäudes, nicht der Museumseingang; Besucher erreichen das Haus heute über Westermarkt 20 um die Ecke. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Miep Gies, Johannes Kleiman, Victor Kugler, Bep Voskuijl und weitere Helfer versorgten die Untergetauchten unter großem Risiko. Die Geschichte umfasst deshalb auch Arbeitsalltag, Versorgung, Geheimhaltung und Entscheidungen der Helfenden. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Am 4. August 1944 wurden die Untergetauchten verhaftet. Die genaue Verrats- oder Entdeckungsursache ist bis heute nicht abschließend bewiesen; eine einzelne Person als gesicherten Verräter zu nennen wäre sachlich falsch. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Anne hatte ihr Tagebuch zum 13. Geburtstag am 12. Juni 1942 erhalten. Im Versteck überarbeitete sie Texte für eine spätere Veröffentlichung, nachdem sie im Radio zur Bewahrung von Kriegszeugnissen aufgerufen worden war. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Otto Frank überlebte als Einziger der acht Untergetauchten. Miep Gies hatte Annes Aufzeichnungen nach der Verhaftung aufgehoben; Otto gab 1947 die niederländische Ausgabe Het Achterhuis heraus. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: Die Räume des Hinterhauses blieben nach Otto Franks Wunsch weitgehend unmöbliert. Fotos, Wandmarkierungen und Annes ausgeschnittene Bilder sind umso wichtiger; Leere zeigt Verlust, nicht einen vollständig rekonstruierten Haushalt. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: In den 1950er-Jahren drohte der Häuserblock dem Abriss. Proteste und die 1957 gegründete Anne Frank Stichting retteten das Gebäude; nach Restaurierung öffnete das Anne Frank Huis am 3. Mai 1960. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Quer: Die Tagebücher, Hefte und losen Blätter gehören zu den zentralen Sammlungsstücken. Unterschiedliche Fassungen erklären, warum Textgeschichte, redaktionelle Bearbeitung und Veröffentlichung differenzierter sind als die Vorstellung eines einzigen fertigen Tagebuchs. Die Querverbindung liefert Kontext für eine dynamische Erzählung, ohne einen Dialog oder eine feste Route vorzuschreiben. Sie trennt dauerhaft belegte Zusammenhänge ausdrücklich von wechselndem Programm und Vermarktung.",
+          "tags": [
+            "quer",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: Prinsengracht 263 ist eine schmale dunkle Grachtenfassade nahe Westerkerk. Die moderne Besuchserschließung liegt am Westermarkt; eine Warteschlange vor dem historischen Haus ist daher kein verlässlicher Eingangshinweis. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "LIVE: Eintritt ausschließlich über annefrank.org prüfen und nur ein Online-Ticket mit Zeitfenster verwenden. Verkaufsrhythmus, Öffnungszeiten und Programme sind ephemer; keine Abendkasse, Warteliste oder Drittanbieter-Zugänge versprechen. Nur als Rechercheauftrag verwenden: Ergebnis, Datum und Primärquelle zur Laufzeit verifizieren, Preise oder Zeiten nie ungeprüft aus dem Pack vorlesen und bei widersprüchlichen Angaben die offizielle Betreiberquelle priorisieren.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "amsterdam_koninklijk_paleis",
+      "general_info": "Das Königliche Palais am Dam wurde ab 1648 als Amsterdamer Rathaus nach Plänen Jacob van Campens gebaut. Seit Louis Bonaparte es 1808 zum Palast machte, verbindet es republikanische Stadtsymbolik mit königlicher Repräsentation.",
+      "deep_data_pool": [
+        {
+          "text": "Historie: Amsterdam begann 1648, im Jahr des Westfälischen Friedens, mit dem neuen Rathaus. Jacob van Campen entwarf einen klassizistischen Monumentalbau, der Wohlstand, Verwaltungskraft und weltweite Ambitionen der Handelsstadt verkörpern sollte. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Der Rathausbetrieb wurde 1655 aufgenommen, obwohl Ausstattung und Bauarbeiten bis in die 1660er-Jahre weitergingen. Daniël Stalpaert führte Arbeiten fort, nachdem Van Campen das Projekt verlassen hatte. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: Die lange Sandsteinfassade wirkt heute dunkel verwittert. Ein flacher Mittelrisalit, Pilaster, Dreiecksgiebel und Kuppelturm ordnen die Dam-Seite; die berühmte Atlasfigur steht hoch an der Rückseite und ist vom Dam aus nicht vollständig präsent. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: Die Burgerzaal bildet das Zentrum. Marmorböden zeigen Welt- und Himmelskarten, Skulpturen und Gemälde stellen Amsterdam symbolisch ins Zentrum des Kosmos; Galerien verbinden die früheren Verwaltungs- und Gerichtsräume. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Artus Quellinus leitete das Skulpturenprogramm. Allegorien von Frieden, Gerechtigkeit, Weisheit, Handel und Weltmeeren waren politische Bildsprache des Rathauses, nicht ursprünglich Dekoration eines Königshauses. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Quer: Die sechs Meter hohe Atlasfigur trägt die Weltkugel. Sie übersetzt Amsterdams globale Selbstsicht in Mythologie; ähnliche Weltkugeln und Karten im Inneren wiederholen das Motiv von Verantwortung und Herrschaft. Die Querverbindung liefert Kontext für eine dynamische Erzählung, ohne einen Dialog oder eine feste Route vorzuschreiben. Sie trennt dauerhaft belegte Zusammenhänge ausdrücklich von wechselndem Programm und Vermarktung.",
+          "tags": [
+            "quer",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Louis Bonaparte, Napoleons Bruder und König von Holland, machte das Rathaus 1808 zum Palast. Büros wurden Wohn- und Repräsentationsräume; Empiremöbel, Uhren und Leuchter dieser kurzen französischen Phase blieben erhalten. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Nach Napoleons Sturz gab Willem von Oranien das Gebäude zunächst der Stadt zurück, nutzte es aber bald wieder für die Monarchie. 1936 ging es in Staatseigentum über und steht dem jeweiligen Staatsoberhaupt gesetzlich zur Verfügung. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Quer: Heute ist es Empfangspalast, keine dauerhafte königliche Wohnung. Staatsbesuche, Neujahrsempfänge, Preisverleihungen und Bankette finden hier statt; genau deshalb ist die öffentliche Zugänglichkeit wechselnd. Die Querverbindung liefert Kontext für eine dynamische Erzählung, ohne einen Dialog oder eine feste Route vorzuschreiben. Sie trennt dauerhaft belegte Zusammenhänge ausdrücklich von wechselndem Programm und Vermarktung.",
+          "tags": [
+            "quer",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Wilhelmina 1948, Juliana 1980 und Beatrix 2013 unterzeichneten hier ihre Abdankungsurkunden. Die Burgerzaal und angrenzenden Räume sind dadurch Schauplatz moderner Verfassungsgeschichte, nicht nur des 17. Jahrhunderts. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: Das Gebäude steht an der Westseite des Dam neben Nieuwe Kerk und gegenüber Nationaal Monument. Sein Eingang kann zwischen Museumsbetrieb und Staatsnutzung anders geführt sein; Absperrungen auf dem Platz sind nicht ungewöhnlich. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Quer: Gemälde von Govert Flinck, Ferdinand Bol, Jan Lievens und anderen arbeiten mit Quellinus’ Skulpturen zusammen. Rembrandts Claudius Civilis war für das Rathaus bestimmt, wurde aber entfernt und nur fragmentarisch erhalten. Die Querverbindung liefert Kontext für eine dynamische Erzählung, ohne einen Dialog oder eine feste Route vorzuschreiben. Sie trennt dauerhaft belegte Zusammenhänge ausdrücklich von wechselndem Programm und Vermarktung.",
+          "tags": [
+            "quer",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnung, Zeitfenster, Staatsnutzung, Ausstellungen und gesperrte Säle auf paleisamsterdam.nl prüfen. Königliche Termine können kurzfristig schließen; Öffnung an den meisten Tagen ist keine tägliche Garantie. Nur als Rechercheauftrag verwenden: Ergebnis, Datum und Primärquelle zur Laufzeit verifizieren, Preise oder Zeiten nie ungeprüft aus dem Pack vorlesen und bei widersprüchlichen Angaben die offizielle Betreiberquelle priorisieren.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "amsterdam_museum_rembrandthuis",
+      "general_info": "Rembrandt lebte und arbeitete von 1639 bis 1658 im heutigen Museum an der Jodenbreestraat. Das Haus rekonstruiert Werkstatt, Kunsthandel und Haushalt anhand des Konkursinventars von 1656 und bewahrt eine nahezu vollständige Radierungssammlung.",
+      "deep_data_pool": [
+        {
+          "text": "Historie: Das Haus wurde 1606–1607 errichtet und um 1627 vermutlich unter Jacob van Campen aufgestockt sowie mit einem Dreiecksgiebel versehen. Rembrandt kaufte es am 5. Januar 1639 für 13.000 Gulden auf Raten. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Hier lebte Rembrandt mit Saskia van Uylenburgh; ihr Sohn Titus wurde 1641 geboren. Nach Saskias Tod 1642 gehörten auch Geertje Dircx und später Hendrickje Stoffels zum komplizierten Haushalt. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Quer: Das Gebäude war Wohnung, Atelier, Lehrbetrieb, Büro und Kunsthandlung zugleich. Rembrandt verkaufte eigene Arbeiten, Werke von Schülern und ältere Kunst; seine berufliche Praxis war breiter als das Bild eines allein malenden Genies. Die Querverbindung liefert Kontext für eine dynamische Erzählung, ohne einen Dialog oder eine feste Route vorzuschreiben. Sie trennt dauerhaft belegte Zusammenhänge ausdrücklich von wechselndem Programm und Vermarktung.",
+          "tags": [
+            "quer",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: Die große Werkstatt im Obergeschoss besitzt hohe Nordfenster für gleichmäßiges Licht. Staffeleien, Farbpigmente, Requisiten und abgegrenzte Arbeitsplätze zeigen die materielle Organisation einer erfolgreichen Werkstatt. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Rembrandt konnte die Raten und weitere Schulden nicht mehr bedienen. 1656 erklärte ihn der Hohe Rat von Holland zahlungsunfähig; Hausrat, Kunst, Naturalia und Werkstattausstattung wurden detailliert inventarisiert. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Quer: Das Konkursinventar ist Grundlage der heutigen Rekonstruktion. Raum für Raum nennt es Möbel und Objekte; dennoch ist die Einrichtung eine wissenschaftliche Annäherung, nicht lückenlos original erhaltenes Mobiliar. Die Querverbindung liefert Kontext für eine dynamische Erzählung, ohne einen Dialog oder eine feste Route vorzuschreiben. Sie trennt dauerhaft belegte Zusammenhänge ausdrücklich von wechselndem Programm und Vermarktung.",
+          "tags": [
+            "quer",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Haus und Besitz wurden versteigert; 1658 zog Rembrandt in die Rozengracht. Der Verkaufspreis des Hauses lag unter seinem Kaufpreis, während Titus und Hendrickje später eine Firma gründeten, die ihn beschäftigte und vor Gläubigern schützte. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: Die Kunstkammer enthält Muscheln, Gipsabgüsse, Waffen, Stoffe und Naturgegenstände. Solche Dinge dienten Sammlung, Status und als Studienmaterial; sie erscheinen in Zeichnungen und Gemälden als präzise beobachtete Requisiten. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Quer: Rembrandt war ein experimenteller Radierer. Variationen von Druckzustand, Papier, Tinte und Wischton machten aus derselben Kupferplatte unterschiedliche Bilder; Vorführungen erklären diese technische Seite seiner Kunst. Die Querverbindung liefert Kontext für eine dynamische Erzählung, ohne einen Dialog oder eine feste Route vorzuschreiben. Sie trennt dauerhaft belegte Zusammenhänge ausdrücklich von wechselndem Programm und Vermarktung.",
+          "tags": [
+            "quer",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Die Stadt kaufte das verfallene Haus 1907. K.P.C. de Bazel restaurierte es, Königin Wilhelmina eröffnete 1911 das Museum; ein moderner Nachbarflügel von 1998 schuf Raum für Wechselausstellungen. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Quer: Die Sammlung besitzt nahezu alle Radierungen Rembrandts und einige originale Kupferplatten. Wegen Lichtempfindlichkeit und konservatorischer Regeln sind nicht alle Blätter gleichzeitig zu sehen; Ausstellung wechselt zwangsläufig. Die Querverbindung liefert Kontext für eine dynamische Erzählung, ohne einen Dialog oder eine feste Route vorzuschreiben. Sie trennt dauerhaft belegte Zusammenhänge ausdrücklich von wechselndem Programm und Vermarktung.",
+          "tags": [
+            "quer",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: Die schmale Fassade liegt an der Jodenbreestraat nahe Waterlooplein. Historisches Haus und moderner Erweiterungsbau stehen direkt nebeneinander; der Museumseingang kann im Neubau liegen, obwohl die Story das alte Haus betrifft. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "LIVE: Zeitfenster, Radier- oder Farbvorführungen, gezeigte Drucke, Sonderausstellungen und barrierearme Route auf rembrandthuis.nl prüfen. Fragile Arbeiten rotieren; kein bestimmtes Blatt als dauerhaft ausgestellt versprechen. Nur als Rechercheauftrag verwenden: Ergebnis, Datum und Primärquelle zur Laufzeit verifizieren, Preise oder Zeiten nie ungeprüft aus dem Pack vorlesen und bei widersprüchlichen Angaben die offizielle Betreiberquelle priorisieren.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "amsterdam_nemo_science_museum",
+      "general_info": "NEMO ist Niederlands größtes Science Center und sitzt seit 1997 in Renzo Pianos kupfergrünem Bau über dem IJtunnel. Fünf Ausstellungsebenen und ein öffentliches Dach verbinden Experimente, Infrastruktur und Stadtblick.",
+      "deep_data_pool": [
+        {
+          "text": "Historie: Die Institution begann 1923 als Museum van den Arbeid des Künstlers Herman Heijenbrock. Später hieß sie Nederlands Instituut voor Nijverheid en Techniek, 1997 newMetropolis und seit 2016 NEMO Science Museum. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Der heutige Bau öffnete 1997. Renzo Piano musste direkt über dem Eingang des IJtunnels bauen; die Krümmung der Tunnelrampe inspirierte die aufsteigende, keilförmige Gebäudegestalt. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: Oxidiertes Kupfer gibt der Fassade ihre grüne Farbe. Vom Oosterdok wirkt der Bau wie ein Schiffsrumpf, der aus dem Wasser steigt; die schräge Dachkante setzt die Abwärtsbewegung des Straßentunnels spiegelbildlich nach oben fort. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Quer: Piano nannte das Innere eine noble factory. Neutrale graue Wände, wenige Fenster und eine klare Haupttreppe nehmen sich zurück, damit Experimentierstationen und Phänomene Aufmerksamkeit erhalten. Die Querverbindung liefert Kontext für eine dynamische Erzählung, ohne einen Dialog oder eine feste Route vorzuschreiben. Sie trennt dauerhaft belegte Zusammenhänge ausdrücklich von wechselndem Programm und Vermarktung.",
+          "tags": [
+            "quer",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: Das Dach ist als städtische Piazza angelegt, nicht nur als technische Abdeckung. Breite Stufen steigen auf ungefähr 22 Meter; von oben sind Oosterdok, Altstadt, Centraal und Schifffahrtsmuseum gut lesbar. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: 2025 wurde der neu gestaltete Dachplatz eröffnet. Mehr als 75 Pflanzenarten, Messinstrumente und ein Freiluftbereich verbinden Biodiversität, Klima, Wind, Wolken, Sonne und Sterne mit öffentlichem Stadtraum. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Quer: Die Ausstellungen setzen auf eigenes Handeln: Besucher erzeugen Strom, untersuchen Wasser, testen Konstruktionen, lösen chemische oder physikalische Aufgaben und beobachten den menschlichen Körper. Das Haus ist kein klassisches Objektmuseum. Die Querverbindung liefert Kontext für eine dynamische Erzählung, ohne einen Dialog oder eine feste Route vorzuschreiben. Sie trennt dauerhaft belegte Zusammenhänge ausdrücklich von wechselndem Programm und Vermarktung.",
+          "tags": [
+            "quer",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: Fünf Ebenen stapeln Themen um die zentrale Erschließung. Große offene Lufträume, sichtbare Technik und robuste Stationen unterstützen Gruppen und Familien; ruhige Sammlungsästhetik ist bewusst nicht das Leitbild. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Quer: Der Bau vermittelt zwischen kleinteiliger Altstadt und offenem Hafengebiet. Die Fußgängerbrücke vom Oosterdok und die Dachrampe machen aus einer schwierigen Tunnelzone einen begehbaren Kultur- und Aussichtspunkt. Die Querverbindung liefert Kontext für eine dynamische Erzählung, ohne einen Dialog oder eine feste Route vorzuschreiben. Sie trennt dauerhaft belegte Zusammenhänge ausdrücklich von wechselndem Programm und Vermarktung.",
+          "tags": [
+            "quer",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Die museale Linie von Arbeit über Industrie und Technik zum interaktiven Science Center spiegelt veränderte Wissenschaftsvermittlung. NEMO erklärt heute nicht nur Maschinen, sondern auch Energie, Kosmos, Biologie und gesellschaftliche Technikfragen. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: Orientierung: östlich von Centraal entlang Oosterdokskade gehen; der grüne Keil ist weithin sichtbar. Museumseingang und freier Dachzugang können unterschiedlich geführt sein, besonders bei Arbeiten oder Veranstaltungen. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Quer: Das Dach wurde als Geschenk zum 750-jährigen Stadtjubiläum neu eröffnet. Seine Funktion als kostenloser öffentlicher Platz folgt Pianos Kritik, Amsterdam fehle ein erhöhter urbaner Aussichtsbalkon. Die Querverbindung liefert Kontext für eine dynamische Erzählung, ohne einen Dialog oder eine feste Route vorzuschreiben. Sie trennt dauerhaft belegte Zusammenhänge ausdrücklich von wechselndem Programm und Vermarktung.",
+          "tags": [
+            "quer",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "LIVE: Museumstickets, Dachöffnung, Wetterverschluss, Ferienandrang, Vorführungen und einzelne Experimente auf nemosciencemuseum.nl prüfen. Der Dachplatz kann frei sein, obwohl Museumseintritt und Zeitfenster separat geregelt sind. Nur als Rechercheauftrag verwenden: Ergebnis, Datum und Primärquelle zur Laufzeit verifizieren, Preise oder Zeiten nie ungeprüft aus dem Pack vorlesen und bei widersprüchlichen Angaben die offizielle Betreiberquelle priorisieren.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "amsterdam_de_waag",
+      "general_info": "De Waag am Nieuwmarkt ist das erhaltene Sint-Anthoniespoort von 1488. Nach dem Verlust der Wehrfunktion diente es ab dem 17. Jahrhundert als Waage und Zunfthaus; Türme und Innenräume erzählen Medizin-, Handwerks- und Stadtgeschichte.",
+      "deep_data_pool": [
+        {
+          "text": "Historie: Das Sint-Anthoniespoort entstand 1488 als östliches Stadttor in der mittelalterlichen Mauer. Zwei schwere Tortürme, Durchfahrt und Maueranschlüsse kontrollierten den Verkehr zwischen Stadt, Lastage und Umland. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Mit der Stadterweiterung des frühen 17. Jahrhunderts verlor das Tor seine Wehrfunktion. Der Bereich der alten Mauer wurde bebaut oder abgetragen; das freistehende Tor blieb und erhielt eine neue Rolle als öffentliche Waage. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Ab 1617 nutzten mehrere Zünfte obere Räume, darunter Maurer, Schmiede, Maler und Chirurgen. Eigene Zugänge und Turmzimmer erklären die vielen Treppen, Wappensteine und voneinander getrennten Innenbereiche. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: Der unregelmäßige Backsteinbau besitzt mehrere runde und polygonale Türme, steile Dächer und ein großes Durchfahrtstor. Er steht frei in der Platzmitte; aus jeder Richtung sieht die Silhouette anders aus. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Quer: Die Chirurgengilde führte im Theatrum Anatomicum öffentliche Sektionen durch. Anatomie war zugleich Ausbildung, Forschung und gesellschaftliches Ereignis; lateinische Inschriften und Darstellungen erinnerten an Vergänglichkeit. Die Querverbindung liefert Kontext für eine dynamische Erzählung, ohne einen Dialog oder eine feste Route vorzuschreiben. Sie trennt dauerhaft belegte Zusammenhänge ausdrücklich von wechselndem Programm und Vermarktung.",
+          "tags": [
+            "quer",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Rembrandts Anatomische les van Dr. Nicolaes Tulp von 1632 zeigt eine Vorlesung der Amsterdamer Chirurgen. Das Bild entstand im Umfeld der Gilde, doch der heute bekannte Innenraum darf nicht als exakt gemalte Architektur der Waag gelesen werden. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Quer: Auch Maler waren hier organisiert; die Lukasgilde regelte Ausbildung und Beruf. Damit bündelte das Gebäude Tätigkeiten, die heute getrennt als Kunst, Medizin, Handwerk und Marktverwaltung erscheinen. Die Querverbindung liefert Kontext für eine dynamische Erzählung, ohne einen Dialog oder eine feste Route vorzuschreiben. Sie trennt dauerhaft belegte Zusammenhänge ausdrücklich von wechselndem Programm und Vermarktung.",
+          "tags": [
+            "quer",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Nach dem Ende des Zunftwesens wechselten Nutzungen: unter anderem Feuerwehr, Stadtarchiv und Museum waren zeitweise untergebracht. Das Joods Historisch Museum eröffnete 1931 in der Waag, bevor es später zum Synagogenkomplex zog. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: Im Pflaster des Nieuwmarkt lässt sich die frühere Torlage nur indirekt erkennen. Der Platz ist breiter als eine mittelalterliche Straße, weil hier Wasser, Markt und später zugeschüttete Stadträume mehrfach umgestaltet wurden. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Der Nieuwmarkt entstand, als Teile der umliegenden Grachten im frühen 17. Jahrhundert zugeschüttet wurden. De Waag wurde so vom Grenztor zum Mittelpunkt eines Marktplatzes, ohne physisch versetzt zu werden. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Quer: Der Name Waag bezeichnet die amtliche Wiegefunktion für Handelswaren. Waaggebäude schufen Vertrauen in Gewicht und Abgaben; die Architektur war daher Teil städtischer Wirtschaftsaufsicht und nicht bloß dekoratives Marktzeichen. Die Querverbindung liefert Kontext für eine dynamische Erzählung, ohne einen Dialog oder eine feste Route vorzuschreiben. Sie trennt dauerhaft belegte Zusammenhänge ausdrücklich von wechselndem Programm und Vermarktung.",
+          "tags": [
+            "quer",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: Orientierung: De Waag steht zentral auf dem Nieuwmarkt und ist vom Metroausgang sofort sichtbar. Das Gebäude ist innen nicht dauerhaft als historisches Museum zugänglich; öffentliche Gastronomie und Veranstaltungsnutzung sind davon zu trennen. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "LIVE: Aktuelle Innenraumnutzung, Veranstaltungen, Gastronomie, Führungen und mögliche Bauarbeiten vor Ort beziehungsweise beim Betreiber prüfen. Historische Zunfträume nicht als regulär frei zugängliche Dauerausstellung ankündigen. Nur als Rechercheauftrag verwenden: Ergebnis, Datum und Primärquelle zur Laufzeit verifizieren, Preise oder Zeiten nie ungeprüft aus dem Pack vorlesen und bei widersprüchlichen Angaben die offizielle Betreiberquelle priorisieren.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "amsterdam_albert_cuyp_markt",
+      "general_info": "Der Albert-Cuyp-Markt entstand 1905 aus informellem Straßenhandel in der rasch gewachsenen Arbeitergegend De Pijp. Seit 1912 ist er ein sechstägiger Tagesmarkt; seine lineare Form folgt einer zugeschütteten Sägewerksgracht.",
+      "deep_data_pool": [
+        {
+          "text": "Historie: An Stelle der Albert Cuypstraat verlief die Zaagmolensloot durch Polderland. Seit dem 17. Jahrhundert standen dort holzverarbeitende Windmühlen; Ende des 19. Jahrhunderts wichen Gracht und Betriebe der dichten Stadterweiterung. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Um 1900 lebten ungefähr 50.000 Menschen in De Pijp. Straßenhändler sammelten sich mit Handkarren in der breiten Straße, weil die neuen Wohnviertel weit von älteren Innenstadtmärkten entfernt lagen. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Am 7. Juli 1905 erlaubte die Stadt offiziell einen kostenlosen Samstagabendmarkt. Die Regelung sollte den zuvor chaotischen Handel ordnen; 1912 wurde daraus ein Tagesmarkt an sechs Tagen pro Woche. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: Der Markt zieht sich als lange Gerade zwischen Ferdinand Bolstraat und Van Woustraat. Stände stehen beidseits der Fahrbahn, Geschäfte und Gastronomie bleiben dahinter sichtbar; an Markttagen wird die Straße zum Fußgängerraum. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Quer: Der Name erinnert an den Dordrechtener Landschaftsmaler Albert Cuyp aus dem 17. Jahrhundert. Er hat keine direkte Marktgeschichte; viele Straßen der Umgebung wurden nach niederländischen Künstlern benannt. Die Querverbindung liefert Kontext für eine dynamische Erzählung, ohne einen Dialog oder eine feste Route vorzuschreiben. Sie trennt dauerhaft belegte Zusammenhänge ausdrücklich von wechselndem Programm und Vermarktung.",
+          "tags": [
+            "quer",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Frühe Händler kauften Ware in zentralen Markthallen und brachten sie mit Karren in die Straße. Platzvergabe, Polizeipfiff, Konkurrenz und gegenseitige Hilfe prägten eine eigene Händlerkultur. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: 1934 schränkte eine neue Straßenhandelsverordnung freies Hausieren ein. Mehr Händler beantragten feste Marktplätze, und der Albert Cuyp wurde bis zur Van Woustraat verlängert. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Historie: Vor dem Zweiten Weltkrieg war ein großer Teil der Händler jüdisch. Während der Besatzung wurden Juden vom Markt ausgeschlossen; viele wurden ermordet und kehrten nicht zurück. Diese Leerstelle veränderte die soziale Kultur des Marktes dauerhaft. Die Angabe ist als stabiler historischer Kontext gedacht; Jahreszahlen und institutionelle Zuordnung beruhen auf offiziellen Haus-, Stadt- oder Denkmaldarstellungen und dürfen nicht zu einer erfundenen Szene ausgeschmückt werden.",
+          "tags": [
+            "geschichte",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Quer: Das Sortiment wandelte sich von Grundversorgung mit Gemüse, Fisch, Kartoffeln und Haushaltswaren zu einer Mischung aus Alltagsmarkt, Textilien, internationalen Lebensmitteln und touristischen Snacks. Einzelne Produkte sind keine stabilen Garantien. Die Querverbindung liefert Kontext für eine dynamische Erzählung, ohne einen Dialog oder eine feste Route vorzuschreiben. Sie trennt dauerhaft belegte Zusammenhänge ausdrücklich von wechselndem Programm und Vermarktung.",
+          "tags": [
+            "quer",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: An den Enden wirkt die Straße zunächst wie eine normale Geschäftsstraße; erst die dichten Reihen einheitlicher Marktstände zeigen die eigentliche Achse. Bei Abbau bleibt kaum ein monumentales Marktgebäude zurück. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Quer: De Pijp veränderte sich von dichtem Arbeiterquartier zu internationalem, stark gentrifiziertem Wohn- und Ausgehviertel. Der Markt bedient deshalb Nachbarschaft, Pendler und Touristen gleichzeitig; diese Funktionen können miteinander konkurrieren. Die Querverbindung liefert Kontext für eine dynamische Erzählung, ohne einen Dialog oder eine feste Route vorzuschreiben. Sie trennt dauerhaft belegte Zusammenhänge ausdrücklich von wechselndem Programm und Vermarktung.",
+          "tags": [
+            "quer",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "Visuell/Wegweiser: Orientierung mit Metro: Station De Pijp liegt nahe Ferdinand Bolstraat und ungefähr am westlichen Marktabschnitt. Wer die ganze Achse sehen will, sollte nicht nur einen einzelnen populären Essensstand als Ziel setzen. Dieser Hinweis dient der realen Wiedererkennung und räumlichen Orientierung: sichtbare Bauform, Material und Zugang sind wichtiger als ein fest formulierter Vorlesetext; temporäre Beschilderung bleibt unberücksichtigt.",
+          "tags": [
+            "visuell",
+            "wegweiser",
+            "deep_research"
+          ]
+        },
+        {
+          "text": "LIVE: Markttage, Uhrzeiten, Feiertagsbetrieb, aktuelle Händler, Produkte und Preise auf der offiziellen Marktseite prüfen. Wetter, Genehmigungen und Tagesbelegung verändern Zahl und Art der Stände; nichts als täglich garantiert ausgeben. Nur als Rechercheauftrag verwenden: Ergebnis, Datum und Primärquelle zur Laufzeit verifizieren, Preise oder Zeiten nie ungeprüft aus dem Pack vorlesen und bei widersprüchlichen Angaben die offizielle Betreiberquelle priorisieren.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    }
+  ],
+  "offline_qa": [
+    {
+      "q": "Gilt die Museumkaart in allen Amsterdamer Museen?",
+      "a": "Nein. LIVE: Vor jedem Besuch die aktuelle Teilnehmerliste auf museum.nl und die Seite des Museums prüfen. Private Attraktionen und einzelne Sonderangebote können ausgeschlossen sein; die Karte ist kein ÖPNV-Pass.",
+      "tags": [
+        "museumkaart",
+        "live_hint",
+        "ephemeral"
+      ]
+    },
+    {
+      "q": "Brauche ich mit Museumkaart trotzdem ein Zeitfenster?",
+      "a": "Oft ja. Beim Rijksmuseum ist ein Startzeitfenster auch für Museumkaart-Inhaber verpflichtend. LIVE: Reservierungsregeln jedes Hauses aktuell prüfen; kostenloser Eintritt ersetzt keine notwendige Reservierung.",
+      "tags": [
+        "museumkaart",
+        "reservierung",
+        "live_hint"
+      ]
+    },
+    {
+      "q": "Was deckt ein GVB-Tagesticket ab?",
+      "a": "LIVE: Es gilt für die angegebene Dauer in GVB-Tram, -Bus und -Metro nach den aktuellen Tarifbedingungen. NS-Züge, regionale Betreiber und Flughafenverbindungen sind nicht automatisch enthalten; Produktseite vor Kauf prüfen.",
+      "tags": [
+        "gvb",
+        "oepnv",
+        "live_hint",
+        "ephemeral"
+      ]
+    },
+    {
+      "q": "Beginnt das GVB-Tagesticket am Kalendertag oder mit Nutzung?",
+      "a": "LIVE: GVB verkauft zeitbasierte Produkte mit konkreten Aktivierungsregeln. Vor Kauf prüfen, ob die gewählte digitale oder physische Variante bei erster Nutzung startet und wie Ein- und Auschecken funktioniert.",
+      "tags": [
+        "gvb",
+        "ticket",
+        "live_hint"
+      ]
+    },
+    {
+      "q": "Welche Grachtenfahrt ist landschaftlich sinnvoll?",
+      "a": "Eine Route durch Grachtengürtel plus IJ oder Oosterdok zeigt unterschiedliche Stadtstrukturen. LIVE: Route, Dauer, Abfahrt und Sprache beim Betreiber prüfen; Wasserstand, Bauarbeiten und Events können Strecken ändern.",
+      "tags": [
+        "grachtenfahrt",
+        "orientierung",
+        "live_hint"
+      ]
+    },
+    {
+      "q": "Sollte ich eine Grachtenfahrt vorab buchen?",
+      "a": "Für ein bestimmtes Zeitfenster oder eine kleine Bootsart ist Vorbuchung sinnvoll. LIVE: Verfügbarkeit und Stornierung direkt beim Betreiber prüfen; spontane Tickets können existieren, sind zu Stoßzeiten aber nicht garantiert.",
+      "tags": [
+        "grachtenfahrt",
+        "buchung",
+        "live_hint"
+      ]
+    },
+    {
+      "q": "Wo kaufe ich sichere Tickets fürs Anne Frank Haus?",
+      "a": "Ausschließlich auf annefrank.org. LIVE: Das Haus verlangt ein namentliches Online-Ticket mit Zeitfenster und verkauft keine Eintrittskarten an der Tür; Drittanbieter-Touren enthalten keinen garantierten Museumszugang.",
+      "tags": [
+        "anne_frank",
+        "tickets",
+        "live_hint"
+      ]
+    },
+    {
+      "q": "Wann werden Anne-Frank-Tickets freigeschaltet?",
+      "a": "LIVE: Die offizielle Seite nennt derzeit Dienstag 10 Uhr für Besuche sechs Wochen später. Diese Regel ist ephemer und vor der Planung erneut zu prüfen; bei ausverkauftem Datum gibt es laut Haus keine Warteliste.",
+      "tags": [
+        "anne_frank",
+        "tickets",
+        "ephemeral"
+      ]
+    },
+    {
+      "q": "Hat das Rijksmuseum wirklich jeden Tag gleich geöffnet?",
+      "a": "LIVE: Das Rijksmuseum nennt derzeit täglich 9–17 Uhr, auch an Feiertagen. Café, Shop, Garten und Restaurant haben abweichende Zeiten; Sonderbetrieb oder außergewöhnliche Schließungen immer auf rijksmuseum.nl prüfen.",
+      "tags": [
+        "rijksmuseum",
+        "oeffnungszeiten",
+        "live_hint"
+      ]
+    },
+    {
+      "q": "Kann ich mit Museumkaart ohne Reservierung ins Rijksmuseum?",
+      "a": "Nein, nach aktueller offizieller Regel braucht auch die Museumkaart ein gebuchtes Startzeitfenster. LIVE: Gewünschten Termin online sichern; nach Eintritt darf man derzeit innerhalb der Öffnungszeit bleiben.",
+      "tags": [
+        "rijksmuseum",
+        "museumkaart",
+        "reservierung",
+        "live_hint"
+      ]
+    }
+  ]
+}

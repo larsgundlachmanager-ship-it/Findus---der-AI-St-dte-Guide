@@ -1,5 +1,5 @@
 /**
- * Findus Tour-Director — verbindlicher Ablauf bei JEDEM Trigger.
+ * Yorro Tour-Director — verbindlicher Ablauf bei JEDEM Trigger.
  *
  * 1   Wo sind wir?
  * 1.2 Schon da / Hauptfokus schon gesprochen → Stopp;
@@ -43,10 +43,10 @@ import {
 } from '../research/liveResearchRegistry';
 import { isApproachFireLocked } from '../poi/approachFireTracker';
 import {
+  amenitySkipBlocksProactive,
   bakeryTimeAllows,
   findInterestOverrideHook,
   hotelProactiveOk,
-  isAmenitySkipPoi,
   isMustHavePoi,
   nightSupplyAllows,
   resolvePlaceTiers,
@@ -199,6 +199,12 @@ export async function planFindusTrigger(input: {
 
   const mustHave = isMustHavePoi(poi);
 
+  // amenity_skip / Directory: Hard-Noise immer raus.
+  // Interesse-Venues (Sport/Theater/Kino/Café/…) dürfen bei Pref=yes feuern.
+  if (!mustHave && amenitySkipBlocksProactive(poi, input.profile)) {
+    return { action: 'skip', reason: 'place_tier:amenity_skip' };
+  }
+
   // Pref-Pyramide (must_have/yes immer · neutral ≥3 min · no skip)
   try {
     const { evaluateModule1PrefGate } = await import(
@@ -231,18 +237,8 @@ export async function planFindusTrigger(input: {
     /* soft — Pref-Gate optional */
   }
 
-  // Place-Tiers (amenity / Zeit / Touri)
+  // Place-Tiers (Zeit / Touri) — amenity_skip schon oben
   if (!mustHave) {
-    if (isAmenitySkipPoi(poi)) {
-      const overrideAmenity = findInterestOverrideHook(
-        poi,
-        poi.facts ?? [],
-        input.profile,
-      );
-      if (!overrideAmenity) {
-        return { action: 'skip', reason: 'place_tier:amenity_skip' };
-      }
-    }
     if (!bakeryTimeAllows(poi)) {
       return { action: 'skip', reason: 'place_tier:bakery_off_hours' };
     }
@@ -512,7 +508,7 @@ function formatBriefForPrompt(
       ? `### ${title}\n${items.map((t) => `- ${t}`).join('\n')}`
       : `### ${title}\n- (keine Belege — diesen Beat kurz halten oder überspringen)`;
 
-  return `## Findus Story-Brief für „${poiName}" (NUR diese Stoffe — unsichtbare Beats!)
+  return `## Yorro Story-Brief für „${poiName}" (NUR diese Stoffe — unsichtbare Beats!)
 User-Interessen-Keys: ${interestIds.slice(0, 10).join(', ') || 'keine speziellen'}
 
 ${line('ORIGIN — Anfang / Jahreszahl / Damals', beats.origin)}
@@ -527,7 +523,7 @@ ${line('ACTION/QUIZ — Neu, schätzbar, noch nicht oben', beats.action)}
 
 Regie: Daraus EINEN fließenden Audioguide-Text bauen — wie ein Freund neben dem User.
 Keine Labels vorlesen. Keine Rubriken. Jeder Fakt nur einmal.
-Struktur intern: sinnlicher Hook (ohne Nutzername) → visueller Anker (Besonderheit zuerst wenn belegt) → Geschichte/Heute → was man hier machen kann.
+Struktur intern: sinnlicher Hook (ohne Nutzername) → User ist Teil der Geschichte → flüssige Brücke (derselbe Fleck) → Leben jetzt als Payoff (anfassbar, nur belegt).
 Wenn Ort-Angebote/Events belegt: gegen Ende natürlich erwähnen (Recurring-Abend, buchen, mitmachen) — NIE erfinden.
 Aktivitäts-Orte (Sport, Wasserski, Freizeit…): Historie kurz — Schwerpunkt LEBEN JETZT: Aktivität, was besonders ist, Preise/Dauer/Tipps NUR wenn belegt, Abschluss = Charakter-angepasste Motivation zum Mitmachen (ohne Meta-„frag mich“).
 Abschluss: kurze lebendige Einladung ok — NIE Meta „frag mich“ / „was macht besonders?“.
@@ -596,4 +592,4 @@ export function applyBriefToCoreFacts<
  * Unsichtbarer Spannungsbogen — Spiegel der CHARMING-Formel in promptBuilder.
  * Hier dokumentiert für den Tour-Director; Prompt-Quelle bleibt promptBuilder.
  */
-export const FINDUS_BEST_FRIEND_PIPELINE = `Siehe CHARMING_4_STEP_STORY_FRAMEWORK / buildDeepStoryPrompt — Best-Friend-Beats A–G.`;
+export const FINDUS_BEST_FRIEND_PIPELINE = `Siehe CHARMING_4_STEP_STORY_FRAMEWORK / buildDeepStoryPrompt.`;

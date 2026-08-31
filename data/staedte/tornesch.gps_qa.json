@@ -1,0 +1,1323 @@
+{
+  "generated_at": "2026-08-28T06:27:33.267Z",
+  "summary": {
+    "city_id": "tornesch",
+    "checked": 48,
+    "ok": 14,
+    "check": 23,
+    "bad": 11,
+    "errors": 0,
+    "max_delta_m": 180,
+    "city_halo_m": 28000,
+    "story_only": true
+  },
+  "rows": [
+    {
+      "id": "tornesch_p_r_pendlerparkplatz_tornesch_1",
+      "name": "P+R Pendlerparkplatz Tornesch 1",
+      "category": "natur",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.697013000000005,
+        "lng": 9.716402200000001
+      },
+      "query": "P+R Pendlerparkplatz Tornesch 1, Tornesch, Germany",
+      "osm": {
+        "lat": 53.718372,
+        "lng": 9.7589111,
+        "display_name": "P+R Pendlerparkplatz Tornesch, Lise-Meitner-Allee, Tornesch, Deutschland",
+        "class": "amenity",
+        "type": "parking",
+        "provider": "photon"
+      },
+      "delta_m": 3670,
+      "from_city_m": 268,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "tornesch_hexenwald",
+      "name": "Hexenwald",
+      "category": "wanderung",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.6948702,
+        "lng": 9.670741099999999
+      },
+      "query": "Hexenwald, Tornesch, Germany",
+      "osm": {
+        "lat": 53.6959113,
+        "lng": 9.7114755,
+        "display_name": "Tornesch, Kreis Pinneberg, Deutschland",
+        "class": "place",
+        "type": "town",
+        "provider": "photon"
+      },
+      "delta_m": 2684,
+      "from_city_m": 2755,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "tornesch_hundefreilauf_tornesch",
+      "name": "Hundefreilauf Tornesch",
+      "category": "natur",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.6925073,
+        "lng": 9.733733599999999
+      },
+      "query": "Hundefreilauf Tornesch, Tornesch, Germany",
+      "osm": {
+        "lat": 53.6971225,
+        "lng": 9.7136309,
+        "display_name": "Tornescher Hof, Tornesch, Deutschland",
+        "class": "highway",
+        "type": "path",
+        "provider": "photon"
+      },
+      "delta_m": 1420,
+      "from_city_m": 1505,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "tornesch_kirchensaal_esinger_schule",
+      "name": "Kirchensaal Esinger Schule",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.68987111764706,
+        "lng": 9.72319094117647
+      },
+      "query": "Kirchensaal Esinger Schule, Tornesch, Germany",
+      "osm": {
+        "lat": 53.6909038,
+        "lng": 9.7090834,
+        "display_name": "Tornesch, Klaus-Groth-Schule, Klaus-Groth-Straße, Tornesch, Deutschland",
+        "class": "highway",
+        "type": "bus_stop",
+        "provider": "photon"
+      },
+      "delta_m": 936,
+      "from_city_m": 1094,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "tornesch_vereinsheim_tus_esingen_e_v",
+      "name": "Vereinsheim TuS Esingen e.V.",
+      "category": "freizeit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.68936933333333,
+        "lng": 9.7109705
+      },
+      "query": "Vereinsheim TuS Esingen e.V., Tornesch, Germany",
+      "osm": {
+        "lat": 53.6973449,
+        "lng": 9.7138694,
+        "display_name": "TuS Esingen e.V., Bahnhofsplatz, Tornesch, Deutschland",
+        "class": "office",
+        "type": "association",
+        "provider": "photon"
+      },
+      "delta_m": 907,
+      "from_city_m": 891,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "tornesch_denkmal_uetersen",
+      "name": "Denkmal Uetersen",
+      "category": "denkmal",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.6822318,
+        "lng": 9.668675799999999
+      },
+      "query": "Denkmal Uetersen, Tornesch, Germany",
+      "osm": {
+        "lat": 53.6810171,
+        "lng": 9.6800525,
+        "display_name": "Eisenbahnfreunde Uetersen-Tornesch e. V., Bahnstraße, Uetersen, Deutschland",
+        "class": "club",
+        "type": "doityourself",
+        "provider": "photon"
+      },
+      "delta_m": 761,
+      "from_city_m": 3332,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "tornesch_osm_transit_295427283"
+      ]
+    },
+    {
+      "id": "tornesch_naturlehrpfad_liether_moor",
+      "name": "Naturlehrpfad Liether Moor",
+      "category": "wanderung",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.7230095,
+        "lng": 9.6968327
+      },
+      "query": "Naturlehrpfad Liether Moor, Tornesch, Germany",
+      "osm": {
+        "lat": 53.7185142,
+        "lng": 9.6916832,
+        "display_name": "Naturlehrpfad Liether Moor, Heideweg, Klein Nordende, Elmshorn-Land, Kreis Pinneberg, Schleswig-Holstein, 25336, Deutschland",
+        "class": "information",
+        "type": "board",
+        "importance": 0.00004393148699163832,
+        "osm_type": "node",
+        "osm_id": 11264828324,
+        "provider": "nominatim"
+      },
+      "delta_m": 604,
+      "from_city_m": 3032,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "tornesch_parkplatz_forst_rantzau",
+      "name": "Parkplatz Forst Rantzau",
+      "category": "natur",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.7027308,
+        "lng": 9.7742658
+      },
+      "query": "Parkplatz Forst Rantzau, Tornesch, Germany",
+      "osm": {
+        "lat": 53.7066145,
+        "lng": 9.7693874,
+        "display_name": "Forst Rantzau, Tornesch, Deutschland",
+        "class": "highway",
+        "type": "rest_area",
+        "provider": "photon"
+      },
+      "delta_m": 538,
+      "from_city_m": 4118,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "tornesch_ev_kirche_tornesch_ev_luth_kirchengemeinde_tornesch",
+      "name": "Tornescher Kirche",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.6961058,
+        "lng": 9.7077904
+      },
+      "query": "Tornescher Kirche, Tornesch, Germany",
+      "osm": {
+        "lat": 53.6971225,
+        "lng": 9.7136309,
+        "display_name": "Tornescher Hof, Tornesch, Deutschland",
+        "class": "highway",
+        "type": "path",
+        "provider": "photon"
+      },
+      "delta_m": 401,
+      "from_city_m": 332,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "tornesch_esinger_wohld",
+      "name": "Esinger Wohld · Staatsforst Rantzau",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.7032787,
+        "lng": 9.762839099999999
+      },
+      "query": "Esinger Wohld ·, Tornesch, Germany",
+      "osm": {
+        "lat": 53.7050502,
+        "lng": 9.7656783,
+        "display_name": "Esinger Wohld, Tornesch, Kreis Pinneberg, Schleswig-Holstein, Deutschland",
+        "class": "landuse",
+        "type": "forest",
+        "importance": 0.08005720531013959,
+        "osm_type": "way",
+        "osm_id": 157804768,
+        "provider": "nominatim"
+      },
+      "delta_m": 272,
+      "from_city_m": 3387,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "tornesch_alte_brennerei",
+      "name": "Alte Brennerei & Zwangsarbeiter-Gedenkstätte",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.6959522,
+        "lng": 9.715218
+      },
+      "query": "Alte Brennerei, Tornesch, Germany",
+      "osm": {
+        "lat": 53.6959113,
+        "lng": 9.7114755,
+        "display_name": "Tornesch, Kreis Pinneberg, Deutschland",
+        "class": "place",
+        "type": "town",
+        "provider": "photon"
+      },
+      "delta_m": 246,
+      "from_city_m": 242,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "tornesch_hanse_stick_and_more",
+        "tornesch_osm_post_office_1353681162",
+        "tornesch_osm_parcel_locker_11347312867"
+      ]
+    },
+    {
+      "id": "tornesch_dr_med_karin_kowollik_facharztin_fur_allgemeinmedizin",
+      "name": "Dr. med. Karin Kowollik Fachärztin für Allgemeinmedizin",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.704806600000005,
+        "lng": 9.7170575
+      },
+      "query": "Dr. med. Karin Kowollik Fachärztin, Tornesch, Germany",
+      "osm": {
+        "lat": 48.7186126,
+        "lng": 9.22811,
+        "display_name": "Dr. med. Karin Roth Fachärztin für Allgemeinmedizin, Friedrichstraße, Kemnat, Deutschland",
+        "class": "amenity",
+        "type": "doctors",
+        "provider": "photon"
+      },
+      "delta_m": 555481,
+      "from_city_m": 886,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "tornesch_frau_dr_med_petra_gienow",
+      "name": "Frau Dr. med. Petra Gienow",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.69712079999999,
+        "lng": 9.7191646
+      },
+      "query": "Frau Dr. med. Petra Gienow, Tornesch, Germany",
+      "osm": {
+        "lat": 52.6037327,
+        "lng": 13.4225906,
+        "display_name": "Dr. med. Petra Stalp, Chartronstraße, Berlin, Deutschland",
+        "class": "amenity",
+        "type": "doctors",
+        "provider": "photon"
+      },
+      "delta_m": 275223,
+      "from_city_m": 448,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "tornesch_weisser_garten_arboretum_ellerhoop",
+      "name": "Weißer Garten Arboretum Ellerhoop",
+      "category": "natur",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.717793199999996,
+        "lng": 9.7768334
+      },
+      "query": "Weißer Garten Arboretum, Tornesch, Germany",
+      "osm": {
+        "lat": 51.6400821,
+        "lng": 11.1397169,
+        "display_name": "Imbiss am Torteich, Weißer Garten, Harzgerode, Deutschland",
+        "class": "amenity",
+        "type": "fast_food",
+        "provider": "photon"
+      },
+      "delta_m": 248618,
+      "from_city_m": 4814,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "tornesch_geologischer_lehrpfad",
+      "name": "Geologischer Lehrpfad",
+      "category": "wanderung",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.72132209999999,
+        "lng": 9.6791453
+      },
+      "query": "Geologischer Lehrpfad, Tornesch, Germany",
+      "osm": {
+        "lat": 51.8758404,
+        "lng": 10.2902905,
+        "display_name": "geologischer Lehrpfad, Langelsheim, Deutschland",
+        "class": "highway",
+        "type": "path",
+        "provider": "photon"
+      },
+      "delta_m": 209279,
+      "from_city_m": 3449,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "tornesch_torneum_fussballpark",
+      "name": "Torneum Fußballpark",
+      "category": "freizeit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.69485811111111,
+        "lng": 9.734775444444445
+      },
+      "query": "Torneum Fußballpark, Tornesch, Germany",
+      "osm": {
+        "lat": 53.6940172,
+        "lng": 9.7327695,
+        "display_name": "Tornesch, Torneum, Lindenweg, Tornesch, Deutschland",
+        "class": "highway",
+        "type": "bus_stop",
+        "provider": "photon"
+      },
+      "delta_m": 162,
+      "from_city_m": 1500,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "tornesch_torneum"
+      ]
+    },
+    {
+      "id": "tornesch_garten_des_sudens_arboretum_ellerhoop",
+      "name": "Garten des Südens - Arboretum Ellerhoop",
+      "category": "natur",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.716626313888895,
+        "lng": 9.777382830555553
+      },
+      "query": "Garten des Südens, Tornesch, Germany",
+      "osm": {
+        "lat": 53.7155302,
+        "lng": 9.7763305,
+        "display_name": "Garten des Südens, Rundweg, Ellerhoop, Deutschland",
+        "class": "tourism",
+        "type": "attraction",
+        "provider": "photon"
+      },
+      "delta_m": 140,
+      "from_city_m": 4786,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "tornesch_liether_kalkgrube",
+      "name": "Liether Kalkgrube",
+      "category": "wanderung",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.72088859999999,
+        "lng": 9.681388799999999
+      },
+      "query": "Liether Kalkgrube, Tornesch, Germany",
+      "osm": {
+        "lat": 53.7203567,
+        "lng": 9.6830381,
+        "display_name": "Pflanzen der Liether Kalkgrube, Heideweg, Klein Nordende, Elmshorn-Land, Kreis Pinneberg, Schleswig-Holstein, 25336, Deutschland",
+        "class": "information",
+        "type": "board",
+        "importance": 0.00004393148699163832,
+        "osm_type": "node",
+        "osm_id": 8971976725,
+        "provider": "nominatim"
+      },
+      "delta_m": 124,
+      "from_city_m": 3319,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "tornesch_spielplatz_am_luttensee",
+      "name": "Spielplatz am Lüttensee",
+      "category": "freizeit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.7006922,
+        "lng": 9.727875599999999
+      },
+      "query": "Spielplatz am Lüttensee, Tornesch, Germany",
+      "osm": {
+        "lat": 53.7013487,
+        "lng": 9.7270301,
+        "display_name": "EDEKA am Lüttensee, Ohlenhoff, Tornesch, Deutschland",
+        "class": "shop",
+        "type": "supermarket",
+        "provider": "photon"
+      },
+      "delta_m": 92,
+      "from_city_m": 1086,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "tornesch_tornesch",
+      "name": "Tornesch Stadtgeschichte & Orientierung",
+      "category": "geschichte",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.69703871428572,
+        "lng": 9.714775714285716
+      },
+      "query": "Tornesch Stadtgeschichte, Tornesch, Germany",
+      "osm": {
+        "lat": 53.6971225,
+        "lng": 9.7136309,
+        "display_name": "Tornescher Hof, Tornesch, Deutschland",
+        "class": "highway",
+        "type": "path",
+        "provider": "photon"
+      },
+      "delta_m": 76,
+      "from_city_m": 161,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "tornesch_bahnhof"
+      ]
+    },
+    {
+      "id": "tornesch_bahnhof",
+      "name": "Bahnhof Tornesch & Bahnhofsplatz",
+      "category": "bahnhof",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.69703871428572,
+        "lng": 9.714775714285716
+      },
+      "query": "Bahnhof Tornesch, Tornesch, Germany",
+      "osm": {
+        "lat": 53.697001,
+        "lng": 9.7152916,
+        "display_name": "Tornesch, Alte Ahrenloher Straße, Esingen, Tornesch, Kreis Pinneberg, Schleswig-Holstein, 25436, Deutschland",
+        "class": "railway",
+        "type": "station",
+        "importance": 0.00004537651636525547,
+        "osm_type": "node",
+        "osm_id": 3664727610,
+        "provider": "nominatim"
+      },
+      "delta_m": 34,
+      "from_city_m": 161,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "tornesch_tornesch"
+      ]
+    },
+    {
+      "id": "tornesch_pomm_91_begegnungsstatte_fur_jung_und_alt",
+      "name": "POMM 91 • Begegnungsstätte für Jung und Alt",
+      "category": "freizeit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.6988978076923,
+        "lng": 9.714254807692306
+      },
+      "query": "POMM 91 •, Tornesch, Germany",
+      "osm": {
+        "lat": 53.6987071,
+        "lng": 9.7145614,
+        "display_name": "Deutsches Rotes Kreuz, 91, Pommernstraße, Esingen, Tornesch, Kreis Pinneberg, Schleswig-Holstein, 25436, Deutschland",
+        "class": "amenity",
+        "type": "social_facility",
+        "importance": 0.00004537651636525547,
+        "osm_type": "node",
+        "osm_id": 6012388246,
+        "provider": "nominatim"
+      },
+      "delta_m": 29,
+      "from_city_m": 213,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "tornesch_petanquebahn_tornesch"
+      ]
+    },
+    {
+      "id": "tornesch_linden_apotheke_25436_tornesch",
+      "name": "Linden Apotheke 25436 Tornesch",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.697228714285714,
+        "lng": 9.71799
+      },
+      "query": "Linden Apotheke 25436 Tornesch, Tornesch, Germany",
+      "osm": {
+        "lat": 53.6973208,
+        "lng": 9.7176886,
+        "display_name": "Linden-Apotheke, 2, Lindenweg, Esingen, Tornesch, Kreis Pinneberg, Schleswig-Holstein, 25436, Deutschland",
+        "class": "amenity",
+        "type": "pharmacy",
+        "importance": 0.00004537651636525547,
+        "osm_type": "node",
+        "osm_id": 1446807326,
+        "provider": "nominatim"
+      },
+      "delta_m": 22,
+      "from_city_m": 370,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "tornesch_osm_parcel_locker_7012651496"
+      ]
+    },
+    {
+      "id": "tornesch_p_r_pendlerparkplatz_tornesch_2",
+      "name": "P+R Pendlerparkplatz Tornesch 2",
+      "category": "natur",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.718252,
+        "lng": 9.7590492
+      },
+      "query": "P+R Pendlerparkplatz Tornesch 2, Tornesch, Germany",
+      "osm": {
+        "lat": 53.718372,
+        "lng": 9.7589111,
+        "display_name": "P+R Pendlerparkplatz Tornesch, Lise-Meitner-Allee, Tornesch, Deutschland",
+        "class": "amenity",
+        "type": "parking",
+        "provider": "photon"
+      },
+      "delta_m": 16,
+      "from_city_m": 3853,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "tornesch_osm_post_box_590912993"
+      ]
+    },
+    {
+      "id": "tornesch_stichhafen_des_wsv_uetersen",
+      "name": "Stichhafen des WSV Uetersen",
+      "category": "hafen",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.679233599999996,
+        "lng": 9.667851
+      },
+      "query": "Stichhafen des WSV, Tornesch, Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 3557,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "tornesch_kunstlicher_steinhaufen_fur_kleintiere",
+      "name": "Künstlicher Steinhaufen für Kleintiere",
+      "category": "natur",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.7147416,
+        "lng": 9.7334214
+      },
+      "query": "Künstlicher Steinhaufen für, Tornesch, Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 2380,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "tornesch_aussichtsplattform_liether_moor",
+      "name": "Aussichtsplattform Liether Moor",
+      "category": "aussicht",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.7185497,
+        "lng": 9.691652
+      },
+      "query": "Aussichtsplattform Liether Moor, Tornesch",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 2724,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "tornesch_heimathaus_tornesch",
+      "name": "Heimathaus Ostermannscher Hof & Stadtarchiv",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.685249285714285,
+        "lng": 9.726128142857144
+      },
+      "query": "Heimathaus Ostermannscher Hof, Tornesch",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 1621,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "tornesch_almthof_erlebnisbauernhof_und_hofcafe",
+      "name": "Almthof Erlebnisbauernhof und Hofcafé",
+      "category": "freizeitpark",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.66342359999999,
+        "lng": 9.723691900000002
+      },
+      "query": "Almthof Erlebnisbauernhof, Tornesch",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 3844,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "tornesch_hanse_stick_and_more",
+      "name": "Hanse Stick and more",
+      "category": "souvenir",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.6959522,
+        "lng": 9.715218
+      },
+      "query": "Hanse Stick and, Tornesch, Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 242,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "tornesch_alte_brennerei",
+        "tornesch_osm_post_office_1353681162",
+        "tornesch_osm_parcel_locker_11347312867"
+      ]
+    },
+    {
+      "id": "tornesch_hgpt_hausarztliche_gesundheitspraxis_tornesch_dr_med_a_hartmaring",
+      "name": "HGPT Hausärztliche Gesundheitspraxis Tornesch/Dr. med. A. Hartmaring",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.6956488,
+        "lng": 9.7137306
+      },
+      "query": "HGPT Hausärztliche Gesundheitspraxis, Tornesch, Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 208,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "tornesch_stolperstein_anna_billian",
+      "name": "Stolperstein Anna Billian",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.703353920000005,
+        "lng": 9.713798980000002
+      },
+      "query": "Stolperstein Anna Billian, Tornesch",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 675,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "tornesch_gedenktafel_kg_lager",
+      "name": "Gedenktafel sowjetisches Kriegsgefangenenlager",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.696844999999996,
+        "lng": 9.717593400000002
+      },
+      "query": "Gedenktafel sowjetisches Kriegsgefangenenlager, Tornesch",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 348,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "tornesch_villen_bahnhof",
+      "name": "Villen am Bahnhofsumfeld",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.6982926,
+        "lng": 9.720477800000001
+      },
+      "query": "Villen am Bahnhofsumfeld, Tornesch",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 544,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "tornesch_dampfmuhlen_ruine",
+      "name": "Bi de Moehl · ehemalige Windmuehle",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.6885216,
+        "lng": 9.7241418
+      },
+      "query": "Bi de Moehl · ehemalige, Tornesch, Germany",
+      "osm": {
+        "lat": 53.6880926,
+        "lng": 9.7238017,
+        "display_name": "Bi de Möhl, Tornesch, Deutschland",
+        "class": "highway",
+        "type": "residential",
+        "provider": "photon"
+      },
+      "delta_m": 53,
+      "from_city_m": 1250,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "tornesch_denkmal_opfer_der_nationalsozialisten",
+      "name": "Denkmal Opfer der Nationalsozialisten",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.697177571428576,
+        "lng": 9.709827700000002
+      },
+      "query": "Denkmal Opfer der Nationalsozialisten, Tornesch, Germany",
+      "osm": {
+        "lat": 53.6969176,
+        "lng": 9.7100621,
+        "display_name": "Denkmal Tornescher Opfer der Nationalsozialisten, Jürgen-Siemsen-Straße, Esingen, Tornesch, Kreis Pinneberg, Schleswig-Holstein, 25436, Deutschland",
+        "class": "historic",
+        "type": "memorial",
+        "importance": 0.000056491187914809146,
+        "osm_type": "node",
+        "osm_id": 8576455609,
+        "provider": "nominatim"
+      },
+      "delta_m": 33,
+      "from_city_m": 169,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "tornesch_jurgen_frenzel_schwimmhalle",
+      "name": "Jürgen-Frenzel-Schwimmhalle",
+      "category": "freizeit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.6857838,
+        "lng": 9.668668
+      },
+      "query": "Jürgen-Frenzel-Schwimmhalle, Tornesch, Germany",
+      "osm": {
+        "lat": 53.6856816,
+        "lng": 9.6682673,
+        "display_name": "Jürgen-Frenzel-Schwimmhalle, Kleiner Sand, Uetersen, Deutschland",
+        "class": "leisure",
+        "type": "sports_centre",
+        "provider": "photon"
+      },
+      "delta_m": 29,
+      "from_city_m": 3152,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "tornesch_naturbad_oberglinde",
+      "name": "Naturbad Oberglinde",
+      "category": "freizeit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.667103714285716,
+        "lng": 9.691307142857141
+      },
+      "query": "Naturbad Oberglinde, Tornesch, Germany",
+      "osm": {
+        "lat": 53.6672471,
+        "lng": 9.6913921,
+        "display_name": "Naturbad Oberglinde (Eingang), An der Tonkuhle, Moorrege, Deutschland",
+        "class": "building",
+        "type": "yes",
+        "provider": "photon"
+      },
+      "delta_m": 17,
+      "from_city_m": 3637,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "tornesch_rathaus_tornesch",
+      "name": "Rathaus Tornesch",
+      "category": "verwaltung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.69329544444445,
+        "lng": 9.6995
+      },
+      "query": "Rathaus Tornesch, Tornesch, Germany",
+      "osm": {
+        "lat": 53.6933775,
+        "lng": 9.6995848,
+        "display_name": "Rathaus Tornesch, Pracherdamm, Uetersen, Deutschland",
+        "class": "amenity",
+        "type": "townhall",
+        "provider": "photon"
+      },
+      "delta_m": 11,
+      "from_city_m": 960,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "tornesch_burg_kino",
+      "name": "Burg Kino",
+      "category": "theater",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.683022666666666,
+        "lng": 9.657988333333334
+      },
+      "query": "Burg Kino, Tornesch, Germany",
+      "osm": {
+        "lat": 53.6831013,
+        "lng": 9.657898,
+        "display_name": "Burg-Kino Uetersen, Marktstraße, Uetersen, Deutschland",
+        "class": "amenity",
+        "type": "cinema",
+        "provider": "photon"
+      },
+      "delta_m": 11,
+      "from_city_m": 3919,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "tornesch_wunscherfuller_mit_herz",
+      "name": "Wunscherfüller Mit-Herz",
+      "category": "souvenir",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.6827336,
+        "lng": 9.6532994
+      },
+      "query": "Wunscherfüller Mit-Herz, Tornesch, Germany",
+      "osm": {
+        "lat": 53.6826571,
+        "lng": 9.6533813,
+        "display_name": "Wunscherfüller - Geschenke mit Herz, Kuhlenstraße, Uetersen, Deutschland",
+        "class": "shop",
+        "type": "interior_decoration",
+        "provider": "photon"
+      },
+      "delta_m": 10,
+      "from_city_m": 4215,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "tornesch_ubuto_uhren_schmuck",
+      "name": "Ubuto Uhren & Schmuck",
+      "category": "souvenir",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.69675900000001,
+        "lng": 9.7114092
+      },
+      "query": "Ubuto Uhren, Tornesch, Germany",
+      "osm": {
+        "lat": 53.6967632,
+        "lng": 9.7112856,
+        "display_name": "Ubuto Uhren & Schmuck, 9, Uetersener Straße, Esingen, Tornesch, Kreis Pinneberg, Schleswig-Holstein, 25436, Deutschland",
+        "class": "shop",
+        "type": "jewelry",
+        "importance": 0.000056491187914809146,
+        "osm_type": "node",
+        "osm_id": 9694660645,
+        "provider": "nominatim"
+      },
+      "delta_m": 8,
+      "from_city_m": 91,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "tornesch_de_danzenbarg",
+      "name": "De Danzenbarg · Grabhuegel",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.67610712,
+        "lng": 9.71395134
+      },
+      "query": "De Danzenbarg · Grabhuegel, Tornesch, Germany",
+      "osm": {
+        "lat": 53.6761592,
+        "lng": 9.7139594,
+        "display_name": "De Danzenbarg, Wischmöhlenweg, Tornesch, Deutschland",
+        "class": "historic",
+        "type": "archaeological_site",
+        "provider": "photon"
+      },
+      "delta_m": 6,
+      "from_city_m": 2363,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "tornesch_fasanen_apotheke_25436_tornesch",
+      "name": "Fasanen Apotheke 25436 Tornesch",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.698559777777774,
+        "lng": 9.718306333333334
+      },
+      "query": "Fasanen Apotheke 25436 Tornesch, Tornesch, Germany",
+      "osm": {
+        "lat": 53.6985218,
+        "lng": 9.7183321,
+        "display_name": "Fasanen-Apotheke, 2, Wilhelmstraße, Esingen, Tornesch, Kreis Pinneberg, Schleswig-Holstein, 25436, Deutschland",
+        "class": "amenity",
+        "type": "pharmacy",
+        "importance": 0.00004537651636525547,
+        "osm_type": "node",
+        "osm_id": 1446807327,
+        "provider": "nominatim"
+      },
+      "delta_m": 5,
+      "from_city_m": 413,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "tornesch_friedenskapelle",
+      "name": "Friedenskapelle & historischer Grabsteinwall",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.69331940000001,
+        "lng": 9.7067628
+      },
+      "query": "Friedenskapelle, Tornesch, Germany",
+      "osm": {
+        "lat": 53.6933163,
+        "lng": 9.7068053,
+        "display_name": "Friedenskapelle, Friedensallee, Esingen, Tornesch, Kreis Pinneberg, Schleswig-Holstein, 25436, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.000056491187914809146,
+        "osm_type": "way",
+        "osm_id": 536641977,
+        "provider": "nominatim"
+      },
+      "delta_m": 3,
+      "from_city_m": 580,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "tornesch_skater_park_tornesch",
+      "name": "Skater-Park Tornesch",
+      "category": "natur",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.6880761,
+        "lng": 9.713309299999999
+      },
+      "query": "Skater-Park Tornesch, Tornesch, Germany",
+      "osm": {
+        "lat": 53.6881015,
+        "lng": 9.7132856,
+        "display_name": "Skatepark Tornesch, Esinger Weg, Tornesch, Deutschland",
+        "class": "leisure",
+        "type": "pitch",
+        "provider": "photon"
+      },
+      "delta_m": 3,
+      "from_city_m": 1032,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "tornesch_molln_hof",
+      "name": "Mölln Hof · Volkskundliches Museum",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 53.688265,
+        "lng": 9.7263384
+      },
+      "query": "Mölln Hof ·, Tornesch, Germany",
+      "osm": {
+        "lat": 53.6882477,
+        "lng": 9.7263374,
+        "display_name": "Mölln Hof, 43, Bockhorn, Esingen, Tornesch, Kreis Pinneberg, Schleswig-Holstein, 25436, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.00005720531013957454,
+        "osm_type": "way",
+        "osm_id": 930716058,
+        "provider": "nominatim"
+      },
+      "delta_m": 2,
+      "from_city_m": 1365,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "tornesch_neue_sporthalle_kgst",
+      "name": "Neue Sporthalle KGST",
+      "category": "freizeit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 53.691446,
+        "lng": 9.709485
+      },
+      "query": "Neue Sporthalle KGST, Tornesch, Germany",
+      "osm": {
+        "lat": 53.6914271,
+        "lng": 9.7094995,
+        "display_name": "neue Sporthalle KGST, Klaus-Groth-Straße, Esingen, Tornesch, Kreis Pinneberg, Schleswig-Holstein, 25436, Deutschland",
+        "class": "leisure",
+        "type": "sports_hall",
+        "importance": 0.000056491187914809146,
+        "osm_type": "node",
+        "osm_id": 9716988872,
+        "provider": "nominatim"
+      },
+      "delta_m": 2,
+      "from_city_m": 682,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    }
+  ]
+}

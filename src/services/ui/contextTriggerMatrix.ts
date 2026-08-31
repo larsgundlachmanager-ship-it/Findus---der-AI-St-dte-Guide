@@ -194,18 +194,8 @@ export function evaluateContextTriggers(opts?: {
       prompt:
         'Trinkbrunnen oder Trinkwasser in der Nähe — kurz mit Distanz und Route.',
     });
-    push({
-      id: 'park_pause',
-      score: 48,
-      title: 'Pause / Park?',
-      prompt: 'Sitzmöglichkeit oder Park zum Durchatmen in der Nähe?',
-    });
-    push({
-      id: 'photo_spots',
-      score: profile?.experiencePrefs?.aussichten === 'yes' ? 75 : 45,
-      title: 'Foto-Spot hier?',
-      prompt: 'Fotogener Spot in der Nähe — einer reicht.',
-    });
+    // park_pause / photo_spots: nur über Nearby-Amenity-Karten (Ort + Min),
+    // nie als leere Kategorie-Frage in der Live-Anzeige.
   }
 
   // Hitze → Eis (locker)

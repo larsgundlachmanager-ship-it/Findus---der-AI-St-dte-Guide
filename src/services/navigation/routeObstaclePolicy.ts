@@ -70,9 +70,24 @@ export function formatObstacleBufferHint(summary: RouteObstacleSummary): string 
     parts.push(`Treppen (+1 Min)`);
   }
   if (summary.bridges > 0) {
-    parts.push(
-      `${summary.bridges} Brücke${summary.bridges === 1 ? '' : 'n'} (Ansage, kein Zeitpuffer)`,
-    );
+    const foot = summary.hits.filter(
+      (h) =>
+        h.kind === 'bridge' &&
+        /fu[ßss]?g[äa]ngerbr[uü]cke|fussgaengerbruecke/i.test(h.label || ''),
+    ).length;
+    if (foot > 0 && foot === summary.bridges) {
+      parts.push(
+        `${foot} Fußgängerbrücke${foot === 1 ? '' : 'n'} (Ansage, kein Zeitpuffer)`,
+      );
+    } else if (foot > 0) {
+      parts.push(
+        `${summary.bridges} Brücke${summary.bridges === 1 ? '' : 'n'} inkl. ${foot} Fußgängerbrücke${foot === 1 ? '' : 'n'} (Ansage, kein Zeitpuffer)`,
+      );
+    } else {
+      parts.push(
+        `${summary.bridges} Brücke${summary.bridges === 1 ? '' : 'n'} (Ansage, kein Zeitpuffer)`,
+      );
+    }
   }
   if (!parts.length) return '';
   return `Routen-Puffer: ${parts.join(' · ')} → +${summary.bufferMin} Min.`;

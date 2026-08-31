@@ -243,7 +243,8 @@ export type PathProjection = {
 };
 
 /**
- * Project GPS onto spline: find closest segment, return next micro-WP ahead.
+ * Project GPS onto spline: find closest segment ahead, return next micro-WP ahead.
+ * Always scans forward from currentIndex so Abkürzungen sofort den Fortschritt nachziehen.
  */
 export function projectOntoSpline(
   lat: number,
@@ -253,12 +254,31 @@ export function projectOntoSpline(
 ): PathProjection | null {
   if (!spline.length) return null;
 
-  let bestIdx = Math.min(currentIndex, spline.length - 1);
+  const floor = Math.max(0, Math.min(currentIndex, spline.length - 1));
+  let bestIdx = floor;
   let bestD = distanceMeters(lat, lng, spline[bestIdx].lat, spline[bestIdx].lng);
 
-  const start = Math.max(0, currentIndex - 2);
-  const end = Math.min(spline.length - 1, currentIndex + 12);
-  for (let i = start; i <= end; i++) {
+  // Grobe Vorwärtssuche (Abkürzung / Jump) — nie hinter floor zurück
+  for (let i = floor; i < spline.length; i += 5) {
+    const d = distanceMeters(lat, lng, spline[i].lat, spline[i].lng);
+    if (d < bestD) {
+      bestD = d;
+      bestIdx = i;
+    }
+  }
+  // Feinjustierung um den Treffer + kurzes lokales Fenster
+  const refineLo = Math.max(floor, bestIdx - 6);
+  const refineHi = Math.min(spline.length - 1, bestIdx + 8);
+  for (let i = refineLo; i <= refineHi; i++) {
+    const d = distanceMeters(lat, lng, spline[i].lat, spline[i].lng);
+    if (d < bestD) {
+      bestD = d;
+      bestIdx = i;
+    }
+  }
+  // Nahfenster um floor (GPS-Zittern auf der Linie)
+  const localHi = Math.min(spline.length - 1, floor + 16);
+  for (let i = floor; i <= localHi; i++) {
     const d = distanceMeters(lat, lng, spline[i].lat, spline[i].lng);
     if (d < bestD) {
       bestD = d;

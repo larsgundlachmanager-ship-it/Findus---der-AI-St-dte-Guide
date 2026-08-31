@@ -25,11 +25,11 @@ const de: Dict = {
   email: 'E-Mail',
   aboutMe: 'Erzähl kurz etwas über dich',
   aboutMeHint:
-    'Hobbies, Beruf, Familie oder Solo — plus Telefon & Geschlecht, was Findus wissen soll…',
+    'Hobbies, Beruf, Familie oder Solo — plus Telefon & Geschlecht, was Yorro wissen soll…',
   age: 'Alter',
   characterTitle: 'Wie soll ich sein?',
   characterHint:
-    'Persönlichkeit und Tonalität: Mehrfachauswahl, jeweils max. 3. Findus mixt den Stil. Reisezweck und Begleitung dazu. Barrierefreiheit ist optional. Tippe auf das i für Erklärungen.',
+    'Persönlichkeit und Tonalität: Mehrfachauswahl, jeweils max. 3. Yorro mixt den Stil. Reisezweck und Begleitung dazu. Barrierefreiheit ist optional. Tippe auf das i für Erklärungen.',
   cityTitle: 'Wohin soll die Reise gehen?',
   nearby: 'In der Nähe',
   otherCities: 'Weitere Städte',
@@ -56,23 +56,33 @@ const de: Dict = {
   settings: 'Einstellungen',
   settingsVoice: 'Stimme',
   settingsLanguage: 'Sprache',
-  settingsLanguageHint: 'Aktuell spricht Findus Deutsch.',
-  settingsCharacter: 'Charakter',
+  settingsLanguageHint: 'Aktuell spricht Yorro Deutsch.',
+  settingsCharacter: 'Yorros Charakter',
   settingsInterests: 'Interessen',
-  settingsCity: 'Stadt',
+  settingsCity: 'Stadtauswahl',
   settingsCityCurrent: 'Aktuelle Stadt',
   citySearchPlaceholder: 'Stadt, Land, Bundesland, Insel…',
   citySearchHits: 'Treffer',
   citySearchNoHits: 'Keine Treffer',
   settingsDeveloper: 'Entwicklungseinstellungen',
   settingsLegal: 'Datenschutz & Impressum',
-  settingsHelp: 'So funktioniert Findus',
+  settingsHelp: 'So funktioniert Yorro',
   settingsSetup: 'Einrichtung',
   legalImprintTitle: 'Impressum & Transparenz',
   legalPrivacyTitle: 'Datenschutz',
   affiliateDisclosure:
-    'Sternchen (★) an Links: Partner-Links. Wenn du darüber buchst, erhält Findus eine kleine Provision — Preis für dich gleich. Details in den Einstellungen.',
+    'Sternchen (★) an Links: Partner-Links. Wenn du darüber buchst, erhält Yorro eine kleine Provision — Preis für dich gleich. Details in den Einstellungen.',
   cityInstallFailed: 'Stadt konnte nicht installiert werden',
+  settingsStorage: 'Offline-Städte',
+  settingsStorageHint:
+    'Heruntergeladene Stadt-Packs und Offline-Karten. Tippen zum Löschen oder Aktualisieren — Zugang bleibt, Dateien kannst du jederzeit neu laden.',
+  settingsStorageEmpty: 'Noch keine Offline-Städte auf dem Gerät.',
+  settingsStorageActive: 'Aktiv — zuerst eine andere Stadt wählen',
+  settingsStorageDelete: 'Löschen',
+  settingsStorageDeleteTitle: 'Datensatz löschen?',
+  settingsStorageDeleteBody:
+    'Nur die lokale Kopie wird entfernt. Du kannst den Datensatz später wieder herunterladen.',
+  settingsStorageTotal: 'Belegt',
   resetApp: 'App zurücksetzen',
   resetConfirm:
     'Einrichtung löschen und von vorne starten? Lokale Profildaten und Stimmen-Cache werden entfernt.',
@@ -125,7 +135,7 @@ export function voiceLabel(_lang: AppLanguage, id: VoiceId): string {
 }
 
 export const INTRO_WELCOME_DE =
-  'Kennst du das? Du willst eine Stadt erleben — und landest trotzdem die ganze Zeit am Handy. Google Maps bleibt offen, und wenn du essen willst, scrollst du zwanzig Minuten. Vor einem Gebäude schaust du es an — und fragst dich: was soll das sein? Und wenn du mal dein Handy in der Hose lässt? Dann erfährst du nichts. Genau das werde ich ändern! Hey — ich bin Findus. Ich recherchiere für dich, was sich lohnt — vom Restaurant bis zur Unterkunft. Ich navigiere dich nur mit der Stimme. Und wenn du irgendwo ankommst, erzähl ich dir, was das ist und was du erleben kannst. Wie dein Concierge. Ich freu mich riesig — aber zuerst will ich dich kennenlernen.';
+  'Kennst du das? Du willst eine Stadt erleben — und landest trotzdem die ganze Zeit am Handy. Google Maps bleibt offen, und wenn du essen willst, scrollst du zwanzig Minuten. Vor einem Gebäude schaust du es an — und fragst dich: was soll das sein? Genau das ändere ich. Hey — ich bin Yorro. Kopfhörer rein, ich lauf mit. Am Ort erzähl ich dir, was das ist — zu dem, was dich interessiert. Du fragst mit der Stimme, ich recherchiere und navigiere. Restaurant, Weg, Unterkunft: dieselbe Stimme. Wie dein Guide auf dem Städtetrip. Ich freu mich — aber zuerst will ich dich kennenlernen.';
 
 /** Kurzer Opener – sofort hörbar (kalter Start). */
 export const ONBOARDING_INTRO_HEAD_DE = 'Kennst du das?';
@@ -233,7 +243,7 @@ function coreExplanation(
         },
         {
           hint: 'settings',
-          text: `Das Zahnrad oben öffnet Einstellungen und den Tour-Verlauf — dort passt du mich an, jederzeit.`,
+          text: `Unten rechts unter Einst. passt du mich an — Stimme, Profil, Audio — jederzeit.`,
         },
         {
           hint: 'none',
@@ -265,7 +275,7 @@ function coreExplanation(
         },
         {
           hint: 'none',
-          text: `Findus checkt Verbindungen, sagt wo was ist, reserviert Tische, sucht Hotels und bucht Touren. Komm, wir düsen los!`,
+          text: `Yorro checkt Verbindungen, sagt wo was ist, reserviert Tische, sucht Hotels und bucht Touren. Komm, wir düsen los!`,
         },
       ],
     };
@@ -317,7 +327,7 @@ function coreExplanation(
         },
         {
           hint: 'settings',
-          text: `Das Zahnrad oben öffnet die Einstellungen sowie den Verlauf besuchter Orte.`,
+          text: `Unten rechts unter Einst. öffnest du die Einstellungen; unter Orte suchst und filterst du Plätze.`,
         },
         {
           hint: 'none',
@@ -345,7 +355,7 @@ function coreExplanation(
         },
         {
           hint: 'settings',
-          text: `Zahnrad oben: Settings und der ganze Tour-Verlauf als Recap.`,
+          text: `Unten: Timeline für den Tag, Orte zum Suchen, Einst. für Settings.`,
         },
         {
           hint: 'none',
@@ -368,7 +378,7 @@ function coreExplanation(
       },
       {
         hint: 'none',
-        text: `Unter dem Zahnrad öffnet das Karten-Icon die Stempelkarte: Fog-of-War, besuchte Orte und deine Route. Die Live-Zeile oben links tippst du für Tipps.`,
+        text: `Dein Home ist die Karte. Oben wischst du durch Live-Karten — Ort, Wetter, Tipps. Unten: Timeline, Orte mit Legende, und Einst.`,
       },
       {
         hint: 'mic',
@@ -376,7 +386,7 @@ function coreExplanation(
       },
       {
         hint: 'settings',
-        text: `Das Zahnrad oben rechts öffnet die Einstellungen — Stimme, Persönlichkeit, Interessen und Datenschutz. Schau einmal rein, dann kennst du alles.`,
+        text: `Rechts unten unter Einst. findest du Stimme, Persönlichkeit, Interessen und Datenschutz. Schau einmal rein, dann kennst du alles.`,
       },
       {
         hint: 'none',

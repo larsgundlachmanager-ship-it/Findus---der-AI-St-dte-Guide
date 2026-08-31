@@ -12,12 +12,12 @@
   <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
   <uses-permission android:name="android.permission.RECORD_AUDIO"/>
   <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
-  <uses-permission android:name="android.permission.USE_EXACT_ALARM"/>
-  <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
   <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+  <uses-permission android:name="android.permission.USE_EXACT_ALARM"/>
   <uses-permission android:name="android.permission.VIBRATE"/>
   <uses-permission android:name="android.permission.WAKE_LOCK"/>
   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+  <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
   <uses-feature android:name="android.hardware.camera" android:required="false"/>
   <uses-feature android:name="android.hardware.camera.flash" android:required="false"/>
   <queries>
@@ -34,7 +34,12 @@
       <action android:name="android.intent.action.VIEW"/>
       <data android:scheme="spotify"/>
     </intent>
+    <intent>
+      <action android:name="android.intent.action.VIEW"/>
+      <data android:scheme="uber"/>
+    </intent>
     <package android:name="com.spotify.music"/>
+    <package android:name="com.ubercab"/>
   </queries>
   <queries>
     <package android:name="com.google.android.googlequicksearchbox"/>
@@ -42,7 +47,6 @@
       <action android:name="android.speech.RecognitionService"/>
     </intent>
   </queries>
-  <!-- Package visibility for AlarmClock intents + common OEM clock apps (Android 11+) -->
   <queries>
     <intent>
       <action android:name="android.intent.action.SET_ALARM"/>
@@ -70,23 +74,25 @@
     <package android:name="com.sonyericsson.organizer"/>
     <package android:name="com.asus.deskclock"/>
   </queries>
-  <application android:name=".MainApplication" android:label="@string/app_name" android:icon="@mipmap/ic_launcher" android:roundIcon="@mipmap/ic_launcher_round" android:allowBackup="true" android:theme="@style/AppTheme" android:supportsRtl="true">
+  <application android:name=".MainApplication" android:label="@string/app_name" android:icon="@mipmap/ic_launcher" android:roundIcon="@mipmap/ic_launcher_round" android:allowBackup="true" android:theme="@style/AppTheme" android:supportsRtl="true" android:largeHeap="true" android:usesCleartextTraffic="true" android:networkSecurityConfig="@xml/network_security_config">
+    <meta-data android:name="com.google.firebase.messaging.default_notification_channel_id" android:value="findus-departure-reminders"/>
+    <meta-data android:name="com.google.firebase.messaging.default_notification_color" android:resource="@color/notification_icon_color"/>
+    <meta-data android:name="com.google.firebase.messaging.default_notification_icon" android:resource="@drawable/notification_icon"/>
+    <meta-data android:name="expo.modules.notifications.default_notification_color" android:resource="@color/notification_icon_color"/>
+    <meta-data android:name="expo.modules.notifications.default_notification_icon" android:resource="@drawable/notification_icon"/>
     <meta-data android:name="expo.modules.updates.ENABLED" android:value="false"/>
     <meta-data android:name="expo.modules.updates.EXPO_UPDATES_CHECK_ON_LAUNCH" android:value="ALWAYS"/>
     <meta-data android:name="expo.modules.updates.EXPO_UPDATES_LAUNCH_WAIT_MS" android:value="0"/>
-    <activity android:name=".MainActivity" android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|uiMode" android:launchMode="singleTask" android:windowSoftInputMode="adjustResize" android:theme="@style/Theme.App.SplashScreen" android:exported="true" android:screenOrientation="portrait">
+    <activity android:name=".MainActivity" android:configChanges="keyboard|keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout|uiMode|density|fontScale|layoutDirection|colorMode|locale" android:launchMode="singleTask" android:windowSoftInputMode="adjustResize" android:theme="@style/Theme.App.SplashScreen" android:exported="true" android:screenOrientation="portrait" android:enableOnBackInvokedCallback="false">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
-      <meta-data
-        android:name="android.app.shortcuts"
-        android:resource="@xml/shortcuts"/>
       <intent-filter>
         <action android:name="android.intent.action.VIEW"/>
         <category android:name="android.intent.category.DEFAULT"/>
         <category android:name="android.intent.category.BROWSABLE"/>
-        <!-- Auth deep links (Magic Link / OAuth). Must match Linking.createURL scheme. -->
+        <data android:scheme="yorro"/>
         <data android:scheme="findus"/>
         <data android:scheme="de.findus.app"/>
         <data android:scheme="exp+findus"/>
@@ -95,32 +101,59 @@
         <action android:name="android.intent.action.VIEW"/>
         <category android:name="android.intent.category.DEFAULT"/>
         <category android:name="android.intent.category.BROWSABLE"/>
+        <data android:scheme="yorro" android:host="auth" android:pathPrefix="/"/>
         <data android:scheme="findus" android:host="auth" android:pathPrefix="/"/>
       </intent-filter>
       <intent-filter>
         <action android:name="android.intent.action.VIEW"/>
         <category android:name="android.intent.category.DEFAULT"/>
         <category android:name="android.intent.category.BROWSABLE"/>
+        <data android:scheme="yorro" android:host="voice" android:pathPrefix="/"/>
         <data android:scheme="findus" android:host="voice" android:pathPrefix="/"/>
       </intent-filter>
-      <!-- Optional: erscheint als Assistent-Kandidat — ersetzt Gemini/Power-Taste nicht automatisch -->
       <intent-filter>
         <action android:name="android.intent.action.ASSIST"/>
         <category android:name="android.intent.category.DEFAULT"/>
       </intent-filter>
+      <intent-filter data-generated="true">
+        <action android:name="android.intent.action.VIEW"/>
+        <data android:scheme="yorro"/>
+        <data android:scheme="findus"/>
+        <data android:scheme="de.findus.app"/>
+        <category android:name="android.intent.category.BROWSABLE"/>
+        <category android:name="android.intent.category.DEFAULT"/>
+      </intent-filter>
+      <intent-filter data-generated="true">
+        <action android:name="android.intent.action.VIEW"/>
+        <data android:scheme="yorro" android:host="auth" android:pathPrefix="/"/>
+        <data android:scheme="findus" android:host="auth" android:pathPrefix="/"/>
+        <category android:name="android.intent.category.BROWSABLE"/>
+        <category android:name="android.intent.category.DEFAULT"/>
+      </intent-filter>
+      <intent-filter data-generated="true">
+        <action android:name="android.intent.action.VIEW"/>
+        <data android:scheme="yorro" android:host="voice" android:pathPrefix="/"/>
+        <data android:scheme="findus" android:host="voice" android:pathPrefix="/"/>
+        <category android:name="android.intent.category.BROWSABLE"/>
+        <category android:name="android.intent.category.DEFAULT"/>
+      </intent-filter>
+      <intent-filter data-generated="true">
+        <action android:name="android.intent.action.ASSIST"/>
+        <category android:name="android.intent.category.DEFAULT"/>
+      </intent-filter>
+      <meta-data android:name="android.app.shortcuts" android:resource="@xml/shortcuts"/>
     </activity>
-    <receiver
-      android:name=".FindusAlarmReceiver"
+    <!-- Fängt Recents-Wisch ab → Hintergrund-GPS stoppen (nicht bei Home/Lock) -->
+    <service
+      android:name=".FindusLocationGuardService"
       android:exported="false"
-      android:enabled="true">
+      android:stopWithTask="true"/>
+    <receiver android:name=".FindusAlarmReceiver" android:exported="false" android:enabled="true">
       <intent-filter>
         <action android:name="de.findus.app.ACTION_FINDUS_ALARM_FIRE"/>
       </intent-filter>
     </receiver>
-    <receiver
-      android:name=".FindusAlarmBootReceiver"
-      android:exported="false"
-      android:enabled="true">
+    <receiver android:name=".FindusAlarmBootReceiver" android:exported="false" android:enabled="true">
       <intent-filter>
         <action android:name="android.intent.action.BOOT_COMPLETED"/>
         <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED"/>

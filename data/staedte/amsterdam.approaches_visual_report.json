@@ -1,0 +1,850 @@
+{
+  "city": "amsterdam",
+  "apply": true,
+  "touched": 105,
+  "approachesFixed": 105,
+  "faqAdded": 69,
+  "data_version": 23,
+  "rows": [
+    {
+      "id": "amsterdam_amsterdam_centraal",
+      "name": "Amsterdam Centraal",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_nieuwmarkt",
+      "name": "Nieuwmarkt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_ndsm_werf",
+      "name": "NDSM-Werf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_buiksloterveer",
+      "name": "Buiksloterveer",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_a_dam_lookout",
+      "name": "A’DAM Lookout",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_rijksmuseum_amsterdam",
+      "name": "Rijksmuseum Amsterdam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_moco_museum_amsterdam",
+      "name": "Moco Museum Amsterdam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_van_gogh_museum",
+      "name": "Van Gogh Museum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_stedelijk_museum",
+      "name": "Stedelijk Museum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_nemo",
+      "name": "NEMO",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_verzetsmuseum_amsterdam",
+      "name": "Verzetsmuseum Amsterdam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_wereldmuseum_amsterdam",
+      "name": "Wereldmuseum Amsterdam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_zuiderkerk",
+      "name": "Zuiderkerk",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_de_krijtberg",
+      "name": "De Krijtberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_nieuwe_kerk",
+      "name": "Nieuwe Kerk",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_westerkerk",
+      "name": "Westerkerk",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_nationaal_holocaust_namenmonument",
+      "name": "Nationaal Holocaust Namenmonument",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_vondelpark",
+      "name": "Vondelpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_oosterpark",
+      "name": "Oosterpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_amstelpark",
+      "name": "Amstelpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_amsterdamse_bos",
+      "name": "Amsterdamse Bos",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_westerpark",
+      "name": "Westerpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_sarphatipark",
+      "name": "Sarphatipark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_flevopark",
+      "name": "Flevopark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_hortus_botanicus_amsterdam",
+      "name": "Hortus Botanicus Amsterdam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_montelbaanstoren",
+      "name": "Montelbaanstoren",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_munttoren",
+      "name": "Munttoren",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_dam",
+      "name": "Dam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_chinatown_amsterdam",
+      "name": "Chinatown Amsterdam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_het_muziektheater",
+      "name": "Het Muziektheater",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_micropia",
+      "name": "Micropia",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_homomonument",
+      "name": "Homomonument",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_magere_brug",
+      "name": "Magere Brug",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_park_frankendael",
+      "name": "Park Frankendael",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_theater_carre",
+      "name": "Theater Carré",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_albert_cuyp_markt",
+      "name": "Albert Cuyp Markt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_ok",
+      "name": "OK",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 0
+    },
+    {
+      "id": "amsterdam_leidseplein",
+      "name": "Leidseplein",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_ij_hallen",
+      "name": "IJ-Hallen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 0
+    },
+    {
+      "id": "amsterdam_anne_frank_huis",
+      "name": "Anne Frank Huis",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_koninklijk_paleis",
+      "name": "Koninklijk Paleis",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_oude_kerk",
+      "name": "Oude Kerk",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_het_scheepvaartmuseum",
+      "name": "Het Scheepvaartmuseum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_museum_rembrandthuis",
+      "name": "Museum Rembrandthuis",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_nemo_science_museum",
+      "name": "NEMO Science Museum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_eye_filmmuseum",
+      "name": "EYE Filmmuseum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_concertgebouw",
+      "name": "Concertgebouw",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_museumplein",
+      "name": "Museumplein",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_portugese_synagoge",
+      "name": "Portugese Synagoge",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_joods_historisch_museum",
+      "name": "Joods Historisch Museum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_bloemenmarkt",
+      "name": "Bloemenmarkt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_begijnhof",
+      "name": "Begijnhof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_de_waag",
+      "name": "De Waag",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_artis_royal_zoo",
+      "name": "Artis Royal Zoo",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_schreierstoren",
+      "name": "Schreierstoren",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_ons_lieve_heer_op_solder",
+      "name": "Ons' Lieve Heer op Solder",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_beurs_van_berlage",
+      "name": "Beurs van Berlage",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_sint_nicolaasbasiliek",
+      "name": "Sint-Nicolaasbasiliek",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_noorderkerk",
+      "name": "Noorderkerk",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_rembrandtplein",
+      "name": "Rembrandtplein",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_waterlooplein",
+      "name": "Waterlooplein",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_de_wallen",
+      "name": "De Wallen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_negen_straatjes",
+      "name": "Negen Straatjes",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_brouwersgracht",
+      "name": "Brouwersgracht",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_herengracht",
+      "name": "Herengracht",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_singel",
+      "name": "Singel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_foam",
+      "name": "FOAM",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_allard_pierson",
+      "name": "Allard Pierson",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_museum_van_loon",
+      "name": "Museum Van Loon",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_museum_willet_holthuysen",
+      "name": "Museum Willet-Holthuysen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_h_art_museum",
+      "name": "H'ART Museum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_hollandsche_schouwburg",
+      "name": "Hollandsche Schouwburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_heineken_experience",
+      "name": "Heineken Experience",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_houseboat_museum",
+      "name": "Houseboat Museum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_oba_centrale_bibliotheek",
+      "name": "OBA Centrale Bibliotheek",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_stopera",
+      "name": "Stopera",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_muziekgebouw_aan_t_ij",
+      "name": "Muziekgebouw aan 't IJ",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_bimhuis",
+      "name": "Bimhuis",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_paradiso",
+      "name": "Paradiso",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_melkweg",
+      "name": "Melkweg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_olympisch_stadion",
+      "name": "Olympisch Stadion",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_johan_cruijff_arena",
+      "name": "Johan Cruijff ArenA",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_westergasfabriek",
+      "name": "Westergasfabriek",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_java_eiland",
+      "name": "Java-eiland",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_knsm_eiland",
+      "name": "KNSM-eiland",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_spui",
+      "name": "Spui",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_kalverstraat",
+      "name": "Kalverstraat",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_zeedijk",
+      "name": "Zeedijk",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_reguliersgracht",
+      "name": "Reguliersgracht",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_trippenhuis",
+      "name": "Trippenhuis",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_felix_meritis",
+      "name": "Felix Meritis",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_bijbels_museum",
+      "name": "Bijbels Museum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_museum_het_schip",
+      "name": "Museum Het Schip",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_jordaan",
+      "name": "Jordaan",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_grachtengordel",
+      "name": "Grachtengordel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_joods_cultureel_kwartier",
+      "name": "Joods Cultureel Kwartier",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_wertheimpark",
+      "name": "Wertheimpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_kadijken",
+      "name": "Kadijken",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_blauwbrug",
+      "name": "Blauwbrug",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_torensluis",
+      "name": "Torensluis",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_tolhuistuin",
+      "name": "Tolhuistuin",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_overhoeks",
+      "name": "Overhoeks",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_centraal_noord_ferry",
+      "name": "Centraal–Noord Ferry",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_ziggo_dome",
+      "name": "Ziggo Dome",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "amsterdam_nationale_opera_ballet",
+      "name": "Nationale Opera & Ballet",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    }
+  ]
+}

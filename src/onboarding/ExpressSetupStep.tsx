@@ -1,11 +1,10 @@
 /**
  * Express-Einrichtung = verkürzte Standardeinrichtung:
- * Profil → Golden Presets (inkl. True Crime) → alle Stimmen → Kern-Prefs.
+ * Profil → Schnellprofile → Stimme → Aktuelle Reise (lite).
  */
 
 import React, { useEffect, useMemo, useState } from 'react';
 import {
-  Image,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -19,29 +18,23 @@ import {
   StepSubtitle,
   StepTitle,
 } from './OnboardingUI';
+import { NamePronunciationEditor } from '../components/settings/NamePronunciationEditor';
 import { AgeLifeSlider } from './AgeLifeSlider';
 import { VoiceSelectorList } from '../components/VoiceSelectorList';
-import { ExperiencePrefsEditor } from '../components/ExperiencePrefsEditor';
+import { AktuelleReiseEditor } from '../components/settings/AktuelleReiseEditor';
 import { EqualChipRow } from '../components/EqualChipRow';
 import { colors, spacing } from '../constants/theme';
-import { ALLERGY_INTOLERANCE_OPTIONS } from '../constants/conciergePrefs';
-import { CORE_ROLE_PORTRAITS } from '../constants/personaPortraits';
 import {
-  CORE_ROLES,
-  defaultExpressComboForRole,
+  ALLERGY_INTOLERANCE_OPTIONS,
+  ANSWER_STYLE_OPTIONS,
+} from '../constants/conciergePrefs';
+import {
+  expressGoldenCombos,
   matchGoldenCombo,
   type GoldenCombo,
 } from '../constants/personalityMatrix';
-import {
-  primaryVoiceForCoreRole,
-  voiceForGoldenCombo,
-} from '../services/persona/personalityVoiceMap';
-import {
-  TRAVEL_PERIOD_PRESETS,
-  matchTravelPeriodPreset,
-  type TravelPeriodPreset,
-} from '../constants/travelPeriod';
-import type { UserProfile, VoiceId } from '../types/userProfile';
+import { voiceForGoldenCombo } from '../services/persona/personalityVoiceMap';
+import type { AnswerStyle, UserProfile, VoiceId } from '../types/userProfile';
 import { voicePreloader } from '../services/ttsService';
 
 type Props = {
@@ -79,27 +72,27 @@ function listMissingExpress(draft: UserProfile): MissingItem[] {
   });
   if (!combo) missing.push({ id: 'character', label: 'Persönlichkeit' });
   if (!draft.voiceId) missing.push({ id: 'voice', label: 'Stimme' });
+  if (!(draft.motives ?? []).length) {
+    missing.push({ id: 'motives', label: 'Reisezweck' });
+  }
+  if (!draft.travelParty) missing.push({ id: 'party', label: 'Mit wem' });
+  if (!draft.mobilityMode) missing.push({ id: 'mobility', label: 'Mobilität' });
+  if (!draft.energyLevel) missing.push({ id: 'energy', label: 'Energie' });
+  if (!draft.budgetCategory) missing.push({ id: 'budget', label: 'Budget' });
   if (!draft.tourLengthPref) {
     missing.push({ id: 'tours', label: 'Tourlänge' });
-  }
-  if (!draft.budgetCategory) {
-    missing.push({ id: 'budget', label: 'Budget' });
-  }
-  if (!(draft.travelPeriod?.trim().length ?? 0)) {
-    missing.push({ id: 'period', label: 'Reisezeitraum' });
   }
   if (!draft.cityId) missing.push({ id: 'city', label: 'Stadt' });
   return missing;
 }
 
 export function ExpressSetupStep({ draft, onChange, onNext }: Props) {
-  const [periodPreset, setPeriodPreset] = useState<TravelPeriodPreset>(() =>
-    matchTravelPeriodPreset(draft.travelPeriod),
-  );
   const [allergyOpen, setAllergyOpen] = useState(() => {
     const tags = draft.allergyTags ?? [];
     return tags.some((t) => t !== 'keine');
   });
+
+  const goldenPresets = useMemo(() => expressGoldenCombos(), []);
 
   const selectedCombo: GoldenCombo | null = useMemo(
     () =>
@@ -133,9 +126,7 @@ export function ExpressSetupStep({ draft, onChange, onNext }: Props) {
   }, [selectedCombo?.id, draft.gender]);
 
   const applyCombo = (combo: GoldenCombo) => {
-    const voiceId =
-      primaryVoiceForCoreRole(combo.coreRole) ||
-      voiceForGoldenCombo(combo, draft.gender);
+    const voiceId = voiceForGoldenCombo(combo, draft.gender);
     onChange({
       coreRole: combo.coreRole,
       vibeTone: combo.vibeTone,
@@ -147,18 +138,6 @@ export function ExpressSetupStep({ draft, onChange, onNext }: Props) {
       tonalities: [combo.vibeTone],
     });
     void voicePreloader.switchActiveVoice(voiceId);
-  };
-
-  const setPeriod = (preset: TravelPeriodPreset) => {
-    setPeriodPreset(preset);
-    if (preset === 'custom') {
-      if (matchTravelPeriodPreset(draft.travelPeriod) !== 'custom') {
-        onChange({ travelPeriod: '' });
-      }
-      return;
-    }
-    const hit = TRAVEL_PERIOD_PRESETS.find((p) => p.id === preset);
-    onChange({ travelPeriod: hit?.value ?? '' });
   };
 
   const toggleAllergy = (id: string) => {
@@ -185,10 +164,7 @@ export function ExpressSetupStep({ draft, onChange, onNext }: Props) {
       energyLevel: draft.energyLevel ?? 'medium',
       mustHaveStyles: draft.mustHaveStyles ?? [],
       touristMode: draft.touristMode ?? 'mix',
-      answerStyle:
-        draft.tourLengthPref === 'fewer_stops'
-          ? 'short'
-          : draft.answerStyle ?? 'short',
+      answerStyle: draft.answerStyle ?? 'short',
       notificationsEnabled: draft.notificationsEnabled !== false,
       dataSaverMode: false,
       experiencePrefs: {
@@ -207,7 +183,8 @@ export function ExpressSetupStep({ draft, onChange, onNext }: Props) {
     <OnboardingShell style={styles.shell}>
       <ScrollView
         contentContainerStyle={styles.scroll}
-        keyboardShouldPersistTaps="handled"
+        keyboardShouldPersistTaps="always"
+        keyboardDismissMode="none"
       >
         <StepTitle>Express-Einrichtung</StepTitle>
         <StepSubtitle>
@@ -230,7 +207,11 @@ export function ExpressSetupStep({ draft, onChange, onNext }: Props) {
             value={draft.firstName}
             onChangeText={(firstName) => onChange({ firstName })}
             autoCapitalize="words"
+            autoCorrect={false}
+            autoComplete="off"
+            showSoftInputOnFocus
           />
+          <NamePronunciationEditor draft={draft} onChange={onChange} />
           <TextInput
             style={styles.input}
             placeholder={isGuest ? 'Nachname' : 'Nachname *'}
@@ -337,40 +318,45 @@ export function ExpressSetupStep({ draft, onChange, onNext }: Props) {
         <View style={styles.group}>
           <Text style={styles.label}>Wie soll ich sein?</Text>
           <Text style={styles.hint}>
-            Eine Kernrolle wählen — wie in der Standardeinrichtung. Jede Rolle
-            hat ihr eigenes Bild; Tonalität und Stimme setze ich passend mit.
+            Schnellprofile — Tonalität, Wissen und Spleens setze ich passend mit.
           </Text>
-          <View style={styles.roleRow}>
-            {CORE_ROLES.map((role) => {
-              const on = draft.coreRole === role.id;
+          <View style={styles.presetCol}>
+            {goldenPresets.map((combo) => {
+              const on = selectedCombo?.id === combo.id;
               return (
                 <Pressable
-                  key={role.id}
-                  onPress={() => {
-                    const combo = defaultExpressComboForRole(role.id);
-                    if (combo) applyCombo(combo);
-                    else onChange({ coreRole: role.id });
-                  }}
-                  style={[styles.roleCard, on && styles.roleCardOn]}
+                  key={combo.id}
+                  onPress={() => applyCombo(combo)}
+                  style={[styles.presetCard, on && styles.presetCardOn]}
                 >
-                  <View style={styles.roleImageFrame}>
-                    <Image
-                      source={CORE_ROLE_PORTRAITS[role.id]}
-                      style={styles.roleImage}
-                      resizeMode="cover"
-                      accessibilityIgnoresInvertColors
-                    />
+                  <Text style={styles.presetEmoji}>{combo.emoji}</Text>
+                  <View style={styles.presetCopy}>
+                    <Text style={styles.presetTitle}>{combo.labelDe}</Text>
+                    <Text style={styles.presetHint} numberOfLines={2}>
+                      {combo.infoDe}
+                    </Text>
                   </View>
-                  <Text style={styles.roleTitle} numberOfLines={2}>
-                    {role.labelDe}
-                  </Text>
-                  <Text style={styles.roleHint} numberOfLines={3}>
-                    {role.infoDe}
-                  </Text>
                 </Pressable>
               );
             })}
           </View>
+          <Text style={[styles.subLabel, { marginTop: spacing.sm }]}>
+            Antwortstil
+          </Text>
+          <EqualChipRow count={ANSWER_STYLE_OPTIONS.length}>
+            {ANSWER_STYLE_OPTIONS.map((o) => {
+              const on = (draft.answerStyle ?? 'short') === o.id;
+              return (
+                <Pressable
+                  key={o.id}
+                  onPress={() => onChange({ answerStyle: o.id as AnswerStyle })}
+                  style={[styles.chip, on && styles.chipOn]}
+                >
+                  <Text style={styles.chipText}>{o.label}</Text>
+                </Pressable>
+              );
+            })}
+          </EqualChipRow>
         </View>
 
         <View style={styles.group}>
@@ -379,7 +365,7 @@ export function ExpressSetupStep({ draft, onChange, onNext }: Props) {
             Alle Stimmen wie in der Standardeinrichtung.
             {recommendedVoice
               ? ` Empfehlung: ${recommendedVoice}.`
-              : ' Wähle zuerst ein Profil für die Empfehlung.'}
+              : ' Wähle zuerst ein Schnellprofil.'}
           </Text>
           <VoiceSelectorList
             selectedVoiceId={draft.voiceId}
@@ -392,33 +378,13 @@ export function ExpressSetupStep({ draft, onChange, onNext }: Props) {
         </View>
 
         <View style={styles.group}>
-          <Text style={styles.label}>Reisezeitraum</Text>
-          <EqualChipRow count={TRAVEL_PERIOD_PRESETS.length}>
-            {TRAVEL_PERIOD_PRESETS.map((p) => {
-              const on = periodPreset === p.id;
-              return (
-                <Pressable
-                  key={p.id}
-                  onPress={() => setPeriod(p.id)}
-                  style={[styles.chip, on && styles.chipOn]}
-                >
-                  <Text style={styles.chipText}>{p.label}</Text>
-                </Pressable>
-              );
-            })}
-          </EqualChipRow>
-          {periodPreset === 'custom' ? (
-            <TextInput
-              style={styles.input}
-              placeholder="z. B. 3.–10. August"
-              placeholderTextColor={colors.textMuted}
-              value={draft.travelPeriod ?? ''}
-              onChangeText={(travelPeriod) => onChange({ travelPeriod })}
-            />
-          ) : null}
+          <Text style={styles.label}>Aktuelle Reise</Text>
+          <AktuelleReiseEditor
+            draft={draft}
+            onChange={onChange}
+            mode="lite"
+          />
         </View>
-
-        <ExperiencePrefsEditor draft={draft} onChange={onChange} mode="lite" />
 
         <View style={styles.footer}>
           <PrimaryButton
@@ -491,54 +457,24 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(196, 163, 90, 0.18)',
   },
   chipText: { color: colors.text, fontSize: 13, fontWeight: '600' },
-  roleRow: {
+  presetCol: { gap: spacing.sm },
+  presetCard: {
     flexDirection: 'row',
-    flexWrap: 'wrap',
+    alignItems: 'center',
     gap: spacing.sm,
-  },
-  roleCard: {
-    width: '47%',
-    borderRadius: 16,
-    borderWidth: 1.5,
+    padding: spacing.sm,
+    borderRadius: 14,
+    borderWidth: 1,
     borderColor: colors.border,
     backgroundColor: colors.surface,
-    overflow: 'hidden',
-    paddingBottom: spacing.sm,
   },
-  roleCardOn: {
+  presetCardOn: {
     borderColor: colors.accent,
-    borderWidth: 2,
     backgroundColor: colors.accentSoft,
   },
-  /**
-   * Wie Standardeinrichtung: quadratische Assets (900×900) in 1:1-Frame —
-   * kein Querformat, nichts abgeschnitten.
-   */
-  roleImageFrame: {
-    width: '100%',
-    aspectRatio: 1,
-    backgroundColor: 'transparent',
-    overflow: 'hidden',
-  },
-  roleImage: {
-    width: '100%',
-    height: '100%',
-  },
-  roleTitle: {
-    color: colors.text,
-    fontSize: 13,
-    fontWeight: '700',
-    textAlign: 'center',
-    paddingHorizontal: spacing.sm,
-    paddingTop: 8,
-  },
-  roleHint: {
-    color: colors.textMuted,
-    fontSize: 11,
-    lineHeight: 14,
-    textAlign: 'center',
-    paddingHorizontal: spacing.sm,
-    marginTop: 2,
-  },
+  presetEmoji: { fontSize: 28 },
+  presetCopy: { flex: 1 },
+  presetTitle: { color: colors.text, fontWeight: '700', fontSize: 14 },
+  presetHint: { color: colors.textMuted, fontSize: 12, marginTop: 2 },
   footer: { marginTop: spacing.sm },
 });

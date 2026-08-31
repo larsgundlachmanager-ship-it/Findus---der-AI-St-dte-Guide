@@ -7,7 +7,7 @@
  * Adaptive GPS in Production (gpsPolicy + adaptiveGpsService)
  */
 
-import { updateAdaptiveGpsProfile, distanceToNearestTriggerM } from '../services/adaptiveGpsService';
+import { updateAdaptiveGpsProfile } from '../services/adaptiveGpsService';
 import {
   isGpsDeepSleeping,
   tickStillnessFromGps,
@@ -15,10 +15,6 @@ import {
 import { speakRuntimeText } from './speechModule';
 import { getActiveCatchMyBusReminder } from '../services/transit/catchMyBusReminder';
 import { getPendingWakeProposal } from '../services/alarms/wakeAlarmAdvisor';
-import {
-  getWeatherRoutingAdjustment,
-  resolveWeatherRouting,
-} from '../services/weatherService';
 import {
   getGpsStreamProfile,
   setGpsStreamProfile,
@@ -39,8 +35,6 @@ import { tickDeadlineWatcher } from '../services/planning/tickDeadlineWatcher';
 import { evaluateProactiveHud } from '../services/ui/proactiveHudEngine';
 import { tickProactiveReminderEngine } from '../services/ui/proactiveReminderEngine';
 import { useFinnusStore } from '../store/useFinnusStore';
-import { resolveGpsPollPolicy } from './gpsPolicy';
-import type { GpsSample } from './types';
 
 /** ~30 Min ohne Bewegung/Interaktion → Presence-Ping (kontextueller Vorschlag). */
 export const PRESENCE_SILENCE_MS = 30 * 60_000;
@@ -100,27 +94,8 @@ export function isTransitSubModeActive(): boolean {
   return store.navActive && isTransitMode(mode);
 }
 
-function mapTransportForPolicy(
-  mode: TransportMode,
-): 'walk' | 'bicycle' | 'transit' | 'unknown' {
-  if (mode === 'bicycle') return 'bicycle';
-  if (mode === 'walk') return 'walk';
-  if (isTransitMode(mode)) return 'transit';
-  return 'unknown';
-}
-
-function profileFromPolicyInterval(
-  intervalMs: number,
-  transportMode: TransportMode,
-): GpsStreamProfile {
-  if (intervalMs >= 25_000) return 'far';
-  if (intervalMs >= 4_500) return 'economy';
-  if (transportMode === 'bicycle') return 'realtime-bike';
-  return 'realtime';
-}
-
 /**
- * Production adaptive GPS: runtime gpsPolicy + distance tiers + bike profile.
+ * GPS-Takt nur nach Tempo (gpsCadence). Audio/POI-Distanz drosseln nicht.
  */
 export async function applyAdaptiveGpsForTick(opts: {
   lat: number;
@@ -129,63 +104,32 @@ export async function applyAdaptiveGpsForTick(opts: {
   audioBusy?: boolean;
   transportMode: TransportMode;
 }): Promise<GpsStreamProfile> {
-  if (isGpsDeepSleeping()) return 'sleep';
-
-  const store = useFinnusStore.getState();
-  const nearestDist = await distanceToNearestTriggerM(opts.lat, opts.lng);
-  const sample: GpsSample = {
+  if (isGpsDeepSleeping()) {
+    if (getGpsStreamProfile() !== 'sleep') {
+      await setGpsStreamProfile('sleep');
+    }
+    return 'sleep';
+  }
+  return updateAdaptiveGpsProfile({
     lat: opts.lat,
     lng: opts.lng,
     speedMs: opts.speedMs ?? null,
-  };
-  const policy = resolveGpsPollPolicy({
-    sample,
-    nearestTriggerDistM: nearestDist,
-    transportMode: mapTransportForPolicy(opts.transportMode),
+    audioBusy: opts.audioBusy,
   });
-
-  let next = profileFromPolicyInterval(policy.intervalMs, opts.transportMode);
-
-  if (opts.audioBusy || store.isPlayingAudio) {
-    next = 'throttled';
-  } else if (store.navActive) {
-    const base = await updateAdaptiveGpsProfile({
-      lat: opts.lat,
-      lng: opts.lng,
-      speedMs: opts.speedMs ?? null,
-      audioBusy: opts.audioBusy,
-    });
-    next = base;
-    // Bike-Nav: hohe Frequenz nur während aktiver Navigation
-    if (
-      opts.transportMode === 'bicycle' &&
-      base !== 'sleep' &&
-      base !== 'throttled' &&
-      base !== 'far'
-    ) {
-      next = 'realtime-bike';
-    }
-  } else {
-    // Free-Roam: sparsam — kein realtime-bike (Paywall/Akku); nahe POI → realtime
-    const base = await updateAdaptiveGpsProfile({
-      lat: opts.lat,
-      lng: opts.lng,
-      speedMs: opts.speedMs ?? null,
-      audioBusy: opts.audioBusy,
-    });
-    next = base;
-  }
-
-  if (getGpsStreamProfile() !== next) {
-    await setGpsStreamProfile(next);
-  }
-  return next;
 }
 
 async function speakProactiveLine(
   speech: string,
   opts?: { critical?: boolean },
 ): Promise<void> {
+  try {
+    const { canSpeakUnsolicited } = await import(
+      '../services/navigation/modulePriorityPolicy'
+    );
+    if (!canSpeakUnsolicited().ok && !opts?.critical) return;
+  } catch {
+    /* soft */
+  }
   const store = useFinnusStore.getState();
   if (!opts?.critical) {
     try {
@@ -195,6 +139,22 @@ async function speakProactiveLine(
       if (!allowProactiveVoice()) return;
     } catch {
       /* soft — Policy fehlt → weiter */
+    }
+    try {
+      const { isPlanningModuleActive } = await import(
+        '../module2/planning/planSessionState'
+      );
+      const { usePlanCalendarUiStore } = await import(
+        '../module2/timeline/planCalendarUiStore'
+      );
+      if (
+        isPlanningModuleActive() ||
+        usePlanCalendarUiStore.getState().calendarVisible
+      ) {
+        return;
+      }
+    } catch {
+      /* soft */
     }
   }
   try {
@@ -239,20 +199,22 @@ async function maybeWeatherBikeConflict(transportMode: TransportMode): Promise<v
   const store = useFinnusStore.getState();
   if (store.isPlayingAudio || store.isListening || store.navActive) return;
 
-  const adj =
-    store.lastGpsLat != null && store.lastGpsLng != null
-      ? await resolveWeatherRouting({
-          lat: store.lastGpsLat,
-          lng: store.lastGpsLng,
-        })
-      : getWeatherRoutingAdjustment();
-
-  if (!adj.isHeavyRain || !adj.voiceAlert) return;
+  const { getCachedWeatherSnapshot } = await import('../services/weatherService');
+  const snap = getCachedWeatherSnapshot();
+  const { minutesUntilIncomingRain } = await import(
+    '../services/weather/rainIncomingPolicy'
+  );
+  const mins = minutesUntilIncomingRain({
+    rainStartsInMin: snap?.rainStartsInMin ?? null,
+    nextRainAtMs: snap?.nextRainAtMs ?? null,
+    currentPrecipMm: snap?.precipitationMm ?? null,
+  });
+  if (mins == null || mins > 35) return;
 
   lastWeatherBikeWarnMs = now;
   const extra =
-    ' Wenn du lieber trocken bleiben willst, sag Bescheid — dann schauen wir uns ÖPNV an.';
-  await speakProactiveLine(`${adj.voiceAlert}${extra}`);
+    ' Mit dem Rad wird das ungemütlich — wenn du lieber trocken bleiben willst, nehmen wir die Öffis.';
+  await speakProactiveLine(`In etwa ${mins} Minuten Regen.${extra}`);
 }
 
 async function maybeTransitImminentPing(): Promise<void> {
@@ -365,7 +327,7 @@ async function requestPresencePingViaGemini(): Promise<void> {
     const { allowActivitySoftTips } = await import(
       '../services/ui/nachtruhePolicy'
     );
-    // Presence = „was machen?“ — nur 10:30–19:30
+    // Presence = „was machen?“ — nur 9:00–21:30
     if (!allowActivitySoftTips()) return;
   } catch {
     /* soft */
@@ -430,9 +392,6 @@ function humanPlaceLabel(raw: string | null | undefined): string {
   return t;
 }
 
-const VENUE_BUSY_RE =
-  /\b(restaurant|café|cafe|bistro|imbiss|pizzeria|gasthof|museum|galerie|kino|theater|ausstellung|sport|tennis|fitness|gym|bad|schwimm|bibliothek|kirche|dom|schloss|zoo|freizeitpark|bowling|minigolf|escape|workshop|kurs|praxis|zahnarzt|friseur|frisör)\b/iu;
-
 async function shouldOfferPresenceSuggestion(): Promise<{
   ok: boolean;
   atHotel: boolean;
@@ -448,6 +407,9 @@ async function shouldOfferPresenceSuggestion(): Promise<{
       speedMs: 0,
     });
     atHotel = presence.role === 'hotel';
+    if (presence.role === 'poi') {
+      return { ok: false, atHotel, openTodo: null };
+    }
   } catch {
     /* soft */
   }
@@ -467,28 +429,7 @@ async function shouldOfferPresenceSuggestion(): Promise<{
     /* soft */
   }
 
-  // Bekannter POI vom Typ Restaurant/Museum/Aktivität → still
-  const placeBlob = `${store.currentLocationName ?? ''}`.toLowerCase();
-  if (!atHotel && store.currentPoiId != null && VENUE_BUSY_RE.test(placeBlob)) {
-    return { ok: false, atHotel, openTodo };
-  }
-  if (!atHotel && store.currentPoiId != null) {
-    try {
-      const { getAllPois } = await import('../db/database');
-      const pois = await getAllPois();
-      const poi = pois.find((p) => p.id === store.currentPoiId);
-      if (poi) {
-        const cat = `${poi.category ?? ''} ${poi.kind ?? ''} ${poi.name}`.toLowerCase();
-        if (VENUE_BUSY_RE.test(cat)) {
-          return { ok: false, atHotel, openTodo };
-        }
-      }
-    } catch {
-      /* soft */
-    }
-  }
-
-  // Hotel, random / kein Eintrag, oder nicht im Plan → Vorschlag ok
+  // Hotel, random / kein Eintrag → Vorschlag ok
   return { ok: true, atHotel, openTodo };
 }
 
@@ -643,6 +584,9 @@ export async function tickMobilityOnGps(
   // Proaktive HUD + Reminder — max alle 15 Min (Voice/Push/HUD)
   evaluateProactiveHud({ ctx: { lat, lng } });
   void tickProactiveReminderEngine({ lat, lng });
+  void import('../services/memory/hotelBasePresence').then((m) =>
+    m.tickHotelBasePresenceAsk({ lat, lng }),
+  );
 }
 
 /** ÖPNV Push + Verspätung — Re-Export für Modul-3-Fassade. */

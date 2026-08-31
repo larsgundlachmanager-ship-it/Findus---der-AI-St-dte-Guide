@@ -1,23 +1,19 @@
 /**
- * Adaptive GPS-Frequenz — Battery Saver Engine:
- * - >500 m from next WP → far (15 s)
- * - <100 m from next WP → realtime (1 s)
- * - Pedometer sleep handled separately (2 min stillness)
+ * Adaptive GPS-Frequenz — Speed-Leiter (gpsCadence).
+ * POI-Distanz darf den Takt nicht mehr auf 15 s drücken.
  */
 
 import {
-  getGpsStreamProfile,
-  setGpsStreamProfile,
+  setGpsWatchInterval,
   type GpsStreamProfile,
 } from './locationService';
 import { getAllPois } from '../db/database';
 import { useFinnusStore } from '../store/useFinnusStore';
 import { isGpsDeepSleeping } from './battery/pedometerSleep';
-
-/** Spec: <100 m → 1 s polling */
-const NEAR_TRIGGER_M = 100;
-/** Spec: >500 m → 15 s throttle */
-const FAR_TRIGGER_M = 500;
+import {
+  gpsIntervalMsForSpeedMs,
+  resolveEffectiveSpeedMs,
+} from '../runtime/gpsCadence';
 
 function haversineM(
   lat1: number,
@@ -83,51 +79,33 @@ export async function distanceToNearestTriggerM(
   }
 }
 
-/**
- * Wählt realtime / far / economy / throttled.
- * Respects pedometer deep-sleep (does not override while sleeping).
- */
+/** Speed-Leiter. Audio drosselt nicht mehr, solange man sich bewegt. */
 export async function updateAdaptiveGpsProfile(opts: {
   lat: number;
   lng: number;
   speedMs?: number | null;
   audioBusy?: boolean;
 }): Promise<GpsStreamProfile> {
+  void opts.lat;
+  void opts.lng;
+  void opts.audioBusy;
   if (isGpsDeepSleeping()) {
     return 'sleep';
   }
-
-  const store = useFinnusStore.getState();
-
-  let next: GpsStreamProfile = 'economy';
-
-  if (opts.audioBusy || store.isPlayingAudio) {
-    // Während Story: GPS drosseln
-    next = 'throttled';
-  } else if (store.navActive) {
-    // Nur Navigation: scharfe Profile (BestForNavigation im locationService)
-    const dist = await distanceToNearestTriggerM(opts.lat, opts.lng);
-    if (dist != null && dist > FAR_TRIGGER_M) {
-      next = 'far';
-    } else if (dist != null && dist <= NEAR_TRIGGER_M) {
-      next = 'realtime';
-    } else {
-      next = 'economy';
-    }
-  } else {
-    // Free-Roam: sparsam — realtime nur nahe am nächsten POI (Geofence)
-    const dist = await distanceToNearestTriggerM(opts.lat, opts.lng);
-    if (dist != null && dist <= NEAR_TRIGGER_M) {
-      next = 'realtime';
-    } else if (dist != null && dist > FAR_TRIGGER_M) {
-      next = 'far';
-    } else {
-      next = 'economy';
-    }
+  let trackMs: number | null = null;
+  let smoothed: number | null = null;
+  try {
+    const { getTrackSpeedMs } = require('./navigation/gpsTrackBuffer') as {
+      getTrackSpeedMs: () => number | null;
+    };
+    const { getSmoothedSpeedMs } = require('./navigation/transportMode') as {
+      getSmoothedSpeedMs: () => number;
+    };
+    trackMs = getTrackSpeedMs();
+    smoothed = getSmoothedSpeedMs();
+  } catch {
+    /* soft */
   }
-
-  if (getGpsStreamProfile() !== next) {
-    await setGpsStreamProfile(next);
-  }
-  return next;
+  const effective = resolveEffectiveSpeedMs(opts.speedMs, trackMs, smoothed);
+  return setGpsWatchInterval(gpsIntervalMsForSpeedMs(effective));
 }

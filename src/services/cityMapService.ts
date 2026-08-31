@@ -2,11 +2,11 @@
  * Offizielle Stadt-/Inselkarten aus dem City-Pack (z. B. Wangerooge Ortsplan).
  */
 
+import { Linking } from 'react-native';
 import type { CityPackLink } from './cityPack';
 import { getCityPackLinks } from './cityCatalogService';
 import { getCachedUserProfile } from './userProfileService';
 import type { QuickAction } from '../types/concierge';
-import { useFinnusStore } from '../store/useFinnusStore';
 
 export type CityMapView = {
   url: string;
@@ -31,7 +31,7 @@ export function speechMentionsMap(speech: string): boolean {
   );
 }
 
-/** Findus sagt, er zeigt/öffnet die Karte — dann sofort anzeigen. */
+/** Yorro sagt, er zeigt/öffnet die Karte — dann sofort anzeigen. */
 export function speechCommitsToMap(speech: string): boolean {
   const t = speech.trim();
   if (!speechMentionsMap(t)) return false;
@@ -53,11 +53,12 @@ export async function getCityMapLink(): Promise<CityPackLink | null> {
 export async function openCityMap(link?: CityPackLink | null): Promise<boolean> {
   const hit = link ?? (await getCityMapLink());
   if (!hit?.url) return false;
-  useFinnusStore.getState().setCityMap({
-    url: hit.url,
-    title: hit.title || 'Inselkarte',
-  });
-  return true;
+  try {
+    await Linking.openURL(hit.url);
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 export function buildCityMapAction(link: CityPackLink): QuickAction {

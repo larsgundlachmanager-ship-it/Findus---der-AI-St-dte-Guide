@@ -14,7 +14,7 @@ const TOOLS_DIR = path.join(ROOT, 'native-assets', 'piper-tools');
 const PIPER_EXE = path.join(TOOLS_DIR, 'piper', 'piper.exe');
 
 const INTRO_TEXT =
-  'Hallo und herzlich willkommen. Ich bin Findus. Ich bin kein normaler Audioguide, der einfach nur Texte vorliest. Ich bin das, was du aus mir machst. Gleich darfst du entscheiden, wie ich klingen soll. Lass uns gemeinsam dein Profil anlegen – damit ich dir die Stadt genauso erklären kann, wie es perfekt zu dir passt. Ich freue mich auf dich.';
+  'Hallo und herzlich willkommen. Ich bin Yorro. Ich bin kein normaler Audioguide, der einfach nur Texte vorliest. Ich bin das, was du aus mir machst. Gleich darfst du entscheiden, wie ich klingen soll. Lass uns gemeinsam dein Profil anlegen – damit ich dir die Stadt genauso erklären kann, wie es perfekt zu dir passt. Ich freue mich auf dich.';
 
 const PIPER_VOICES = [
   {

@@ -1,5 +1,5 @@
 /**
- * Modul 5 — Smart Mobility (ÖPNV vs. Taxi, 5/10-Min-Regeln).
+ * Modul 5 — Smart Mobility (nutzt planMobilityPolicy SSOT: 20 / ≥5 / 30 Min).
  */
 
 import { estimateTravelEtaRouted } from '../../services/navigation/travelEta';
@@ -115,16 +115,19 @@ export async function fetchAllOSRMModes(
 }
 
 /**
- * Masterplan-Mathematik:
- * - Bike wenn (walk/3) ≤ 20
- * - Taxi wenn walk > 30 UND ÖPNV nicht ≥10 Min schneller
- * - Transit wenn walk > 20 UND ÖPNV ≥5 Min schneller
+ * Masterplan-Mathematik (SSOT: planMobilityPolicy):
+ * - Fuß/Rad bis ~20 Min
+ * - ÖPNV wenn ≥5 Min schneller bzw. ab ~30 Min Fuß immer
  * - Dauer: ceil/5*5 + 10 Puffer
  */
 export async function calculateNavigation(
   startNode: PlanNavNode,
   endNode: PlanNavNode,
 ): Promise<NavigationLeg> {
+  const {
+    pickPlanMobilityMode,
+    toEngineTransportMode,
+  } = await import('./planMobilityPolicy');
   const routingModes = await fetchAllOSRMModes(
     startNode.coords,
     endNode.coords,
@@ -132,19 +135,16 @@ export async function calculateNavigation(
 
   const walkMins = routingModes.walk.durationMins;
   const transitMins = routingModes.transit.durationMins;
+  const bikeMins = routingModes.bicycle.durationMins;
   const hasBike = checkUserContextForBike();
 
-  let selectedMode: TransportMode = 'WALKING';
-
-  if (hasBike && walkMins / 3 <= 20) {
-    selectedMode = 'BICYCLE';
-  } else if (walkMins > 30 && walkMins - transitMins < 10) {
-    // Fußweg über 30 Min UND ÖPNV ist NICHT mind. 10 Min schneller
-    selectedMode = 'TAXI';
-  } else if (walkMins > 20 && walkMins - transitMins >= 5) {
-    // Fußweg über 20 Min UND ÖPNV ist mind. 5 Min schneller
-    selectedMode = 'TRANSIT';
-  }
+  const picked = pickPlanMobilityMode({
+    walkMin: walkMins,
+    bikeMin: bikeMins,
+    transitMin: transitMins,
+    preferBike: hasBike,
+  });
+  const selectedMode = toEngineTransportMode(picked);
 
   const rawDuration =
     selectedMode === 'WALKING'

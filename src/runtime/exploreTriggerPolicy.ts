@@ -41,19 +41,23 @@ export async function countNearbyUnspokenTriggers(
   lng: number,
   excludePoiId: number,
   withinM: number,
-  radiusScale = 1,
+  excludeSpotKey?: string | null,
 ): Promise<number> {
   const spoken = allSpokenTriggerIds();
   const pois = await getAllPois();
+  const skipSpot = (excludeSpotKey || '').trim();
   let count = 0;
   for (const poi of pois) {
     if (poi.id === excludePoiId) continue;
     if (spoken.has(poi.id)) continue;
+    if (skipSpot && poi.spot_key === skipSpot) continue;
     const kind = (poi.kind ?? 'legacy') as PoiKind;
     if (!isAnchorKnotenpunkt(kind)) continue;
+    const blob = `${poi.tags_json ?? ''}`.toLowerCase();
+    if (/amenity_skip|"directory"|"tier4"|prune_/.test(blob)) continue;
     const d = haversineMeters(lat, lng, poi.lat, poi.lng);
-    const effectiveR = Math.max(poi.radius_meters * radiusScale, withinM * 0.5);
-    if (d <= withinM || d <= effectiveR) count += 1;
+    // Nur der 20-m-Cluster — nicht den großen Story-Floor (80 m) als Nachbar zählen.
+    if (d <= withinM) count += 1;
   }
   return count;
 }
@@ -74,6 +78,8 @@ export async function resolveExploreDepth(input: {
   navExploreMode?: NavExploreMode | null;
   /** Aktives Nav-Ziel ist genau dieser POI */
   isNavDestination?: boolean;
+  /** Gleicher Spot darf den Arrival nicht zum Teaser degradieren */
+  spotKey?: string | null;
 }): Promise<ExploreDepthResult> {
   const distToPoiM = haversineMeters(
     input.lat,
@@ -81,7 +87,6 @@ export async function resolveExploreDepth(input: {
     input.poiLat,
     input.poiLng,
   );
-  const scale = input.radiusScale ?? 1;
   const navMode: NavExploreMode = input.navExploreMode ?? 'quiet';
 
   if (input.force || input.interestDeepDive) {
@@ -107,7 +112,7 @@ export async function resolveExploreDepth(input: {
     input.lng,
     input.poiId,
     EXPLORE_CLUSTER_CLEAR_M,
-    scale,
+    input.spotKey,
   );
 
   const speed = Math.max(0, input.speedMs ?? 0);
@@ -136,7 +141,7 @@ export async function resolveExploreDepth(input: {
 
   if (!treatAsFreeRoam && input.navActive) {
     // Mode A quiet: Teaser unterwegs; Full nur unter 10 km/h
-    if (nearby20 > 0) {
+    if (nearby20 > 0 && distToPoiM > 40) {
       return {
         depth: 'teaser',
         reason: 'nav_cluster_20m',
@@ -181,7 +186,11 @@ export async function resolveExploreDepth(input: {
   }
 
   // Free roam / full mode
-  if (nearby20 > 0 && input.planAction === 'full_story') {
+  if (
+    nearby20 > 0 &&
+    input.planAction === 'full_story' &&
+    distToPoiM > 40
+  ) {
     return {
       depth: 'teaser',
       reason: 'free_roam_cluster_20m',

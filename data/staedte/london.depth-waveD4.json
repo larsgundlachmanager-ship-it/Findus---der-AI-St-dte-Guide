@@ -1,0 +1,432 @@
+{
+  "spots": [
+    {
+      "id": "london_national_gallery",
+      "general_info": "Die National Gallery bewahrt am Trafalgar Square die britische Nationalsammlung westeuropäischer Malerei vom 13. bis frühen 20. Jahrhundert. Der 1838 eröffnete Bau und spätere Erweiterungen zeigen Meisterwerke als öffentlich zugängliche Sammlung.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Die lange helle Fassade an der Nordseite des Trafalgar Square erkennt man am zentralen Säulenportikus und der flachen, gerippten Kuppel; breite Freitreppen heben den Bau über den Platz.",
+          "tags": ["visuell", "wegweiser", "architektur"]
+        },
+        {
+          "text": "Besuch: In den Sammlungsräumen lassen sich über Jahrhunderte Malerei unter anderem von Uccello, Gentileschi, Turner und Van Gogh vergleichen; einzelne Bilder können wegen Leihen oder Bauarbeiten den Raum wechseln.",
+          "tags": ["placeOffers", "kunst", "sammlung"]
+        },
+        {
+          "text": "Architekturdetail: Mehrere Skulpturen am zentralen Portikus waren ursprünglich für Marble Arch bestimmt und wurden aus Kostengründen an der National Gallery wiederverwendet.",
+          "tags": ["architektur", "querwissen"]
+        },
+        {
+          "text": "Quer: Vor der Galerie liegen Nelson's Column, Brunnen und Fourth Plinth; hinter dem Gebäude schließen Leicester Square und Covent Garden an. Die Galerie bildet damit die kulturelle Nordkante des Trafalgar Square.",
+          "tags": ["quer", "orientierung"]
+        },
+        {
+          "text": "LIVE: Aktuellen Haupteingang, freie Zeitfenster, Sonderausstellungen, Raum- und Werksschließungen direkt bei der National Gallery prüfen; der Zugang wurde zuletzt über den Sainsbury Wing geführt.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich die National Gallery?",
+          "a": "An der langen klassizistischen Platzfront mit zentralem Säulenportikus, flacher Kuppel und Freitreppen direkt an der Nordseite des Trafalgar Square."
+        }
+      ]
+    },
+    {
+      "id": "london_british_museum",
+      "general_info": "Das 1753 gegründete British Museum erschließt in Bloomsbury Kulturen aus rund zwei Millionen Jahren Menschheitsgeschichte. Hinter der klassizistischen Front verbinden historische Galerien und der überdachte Great Court Objekte aus vielen Weltregionen.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Der Haupteingang an Great Russell Street wirkt wie ein griechischer Tempel: eine breite Front aus ionischen Säulen, Dreiecksgiebel und monumentale Freitreppe stehen eng zwischen Bloomsburys Straßen.",
+          "tags": ["visuell", "wegweiser", "architektur"]
+        },
+        {
+          "text": "Innenraum: Der Great Court bildet unter einem gläsernen Netzdach den zentralen Verteiler. In seiner Mitte steht der runde ehemalige Lesesaal; von hier zweigen Treppen und Galerien in mehrere Flügel ab.",
+          "tags": ["visuell", "orientierung", "architektur"]
+        },
+        {
+          "text": "Besuch: Ein kompakter Rundgang kann Rosetta Stone, assyrische Reliefs und Parthenon-Skulpturen verbinden; die Sammlung ist zu groß für einen vollständigen Besuch und lässt sich sinnvoll nach Epochen oder Weltregionen gliedern.",
+          "tags": ["placeOffers", "sammlung", "planung"]
+        },
+        {
+          "text": "Quer: Russell Square liegt wenige Straßen östlich, die British Library weiter nördlich bei St Pancras. Das Museum bewahrte bis zum Umzug 1997 auch die nationale Bibliothekssammlung in seinem Komplex.",
+          "tags": ["quer", "stadtgeschichte"]
+        },
+        {
+          "text": "LIVE: Freie Besuchsfenster, empfohlene Reservierung, Sonderausstellungen und geschlossene Galerien vorab beim British Museum prüfen; prominente Objekte können konserviert, verliehen oder versetzt sein.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich das British Museum?",
+          "a": "An der monumentalen ionischen Säulenfront und dem Dreiecksgiebel an Great Russell Street; innen ist das gläserne Netzdach des Great Court das stärkste Merkmal."
+        }
+      ]
+    },
+    {
+      "id": "london_westminster_abbey",
+      "general_info": "Westminster Abbey ist königliche Krönungskirche, aktiver anglikanischer Gottesdienstort und Grab- sowie Gedenkort bedeutender Briten. Der überwiegend gotische Bau vereint mittelalterliche Kapellen, Königgräber und nationale Erinnerungskultur.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Die Westfront erkennt man an zwei nahezu symmetrischen hellen Türmen, hohen Spitzbogenfenstern und reichem Maßwerk; an der Nordseite tritt das große Rosenfenster über dem Querhaus hervor.",
+          "tags": ["visuell", "wegweiser", "architektur"]
+        },
+        {
+          "text": "Besuch: Im Inneren lassen sich Krönungsstuhl, Poets' Corner, königliche Gräber, das Grab des Unknown Warrior und die fächergewölbte Lady Chapel räumlich miteinander verbinden.",
+          "tags": ["placeOffers", "geschichte", "kunst"]
+        },
+        {
+          "text": "Sinneseindruck: Das hohe, schmale Mittelschiff lenkt den Blick durch dicht gestellte Pfeiler nach oben; Stein, Grabplatten, farbiges Glas und Chorgesang machen die Kirche deutlich anders erfahrbar als ein Museum.",
+          "tags": ["sensorik", "visuell", "religion"]
+        },
+        {
+          "text": "Quer: Direkt östlich liegen Parliament Square und der Palace of Westminster; St Margaret's Church steht zwischen Abbey und Platz. Alle drei gehören zum historischen Westminster-Ensemble.",
+          "tags": ["quer", "orientierung"]
+        },
+        {
+          "text": "LIVE: Besuchszeiten, Gottesdienste, Verger-Führungen, Foto- und Zugangsregeln bei Westminster Abbey prüfen; kirchliche Feiern und Staatsanlässe können die touristische Besichtigung einschränken.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich Westminster Abbey?",
+          "a": "An der hellen gotischen Westfront mit zwei Türmen und hohen Spitzbogenfenstern westlich des Parliament Square; sie ist nicht mit der rötlicheren Westminster Cathedral zu verwechseln."
+        }
+      ]
+    },
+    {
+      "id": "london_tower_of_london",
+      "general_info": "Der Tower of London ist eine seit dem 11. Jahrhundert gewachsene Festungs-, Palast- und Gefängnisanlage an der Themse. Im Zentrum steht der normannische White Tower; Ringmauern, Türme, Kronjuwelen und Zeremonien bewahren viele Schichten königlicher Macht.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Der fast würfelförmige White Tower mit vier Ecktürmen ragt innerhalb zweier Mauerringe auf. Von der Themse sieht man Zinnen, helle Steinflächen und dahinter die modernen Hochhäuser der City.",
+          "tags": ["visuell", "wegweiser", "architektur"]
+        },
+        {
+          "text": "Besuch: Ein Rundgang kann Crown Jewels, White Tower mit Rüstungen, Wehrgänge, Medieval Palace, Tower Green und die Raben verbinden; Yeoman-Warder-Führungen ordnen die weitläufige Anlage historisch ein.",
+          "tags": ["placeOffers", "geschichte", "besuch"]
+        },
+        {
+          "text": "Sinneseindruck: Enge Steintreppen, zugige Wehrgänge, Innenhöfe und das Wechselspiel aus Kapellen, Wohnräumen und Waffenbeständen machen sichtbar, dass der Tower zugleich Festung und Residenz war.",
+          "tags": ["sensorik", "architektur"]
+        },
+        {
+          "text": "Quer: Tower Bridge beginnt unmittelbar östlich, St Katharine Docks liegen dahinter; westlich folgt entlang der Themse die City. Vom Südufer bei City Hall lässt sich der gesamte Festungsgrundriss gut lesen.",
+          "tags": ["quer", "orientierung"]
+        },
+        {
+          "text": "LIVE: Öffnung einzelner Türme, Crown-Jewels-Wartezeit, Yeoman-Warder-Touren, Zeremonien und Sicherheitsregeln bei Historic Royal Palaces prüfen; zugängliche Bereiche können wechseln.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich den Tower of London?",
+          "a": "Am massiven hellen White Tower innerhalb mehrerer zinnenbekrönter Mauerringe direkt westlich der Tower Bridge am Nordufer der Themse."
+        }
+      ]
+    },
+    {
+      "id": "london_palace_of_westminster",
+      "general_info": "Der Palace of Westminster ist Sitz von House of Commons und House of Lords. Der neugotische Neubau von Charles Barry und Augustus Pugin entstand nach dem Brand von 1834; Westminster Hall bewahrt als ältester Teil mehr als neun Jahrhunderte Geschichte.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Die lange goldbraune Flussfront ist an dichtem neugotischem Maßwerk, vielen Türmchen und zwei ungleichen Haupttürmen erkennbar: Elizabeth Tower im Norden und Victoria Tower im Süden.",
+          "tags": ["visuell", "wegweiser", "architektur"]
+        },
+        {
+          "text": "Besuch: Offizielle Touren führen je nach parlamentarischem Betrieb durch Westminster Hall, zentrale Korridore sowie Räume von Commons und Lords und erklären zugleich Architektur und heutige Gesetzgebung.",
+          "tags": ["placeOffers", "politik", "geschichte"]
+        },
+        {
+          "text": "Architekturdetail: Westminster Hall überstand den Brand von 1834. Ihr gewaltiges mittelalterliches Hammerbalkendach überspannt den Raum ohne innere Säulen und kontrastiert mit den neugotischen Sälen des 19. Jahrhunderts.",
+          "tags": ["architektur", "geschichte", "visuell"]
+        },
+        {
+          "text": "Quer: Westminster Abbey liegt westlich, Big Ben im Elizabeth Tower an der Nordostecke und das London Eye direkt gegenüber am Südufer; Westminster Bridge verbindet beide Sichtseiten.",
+          "tags": ["quer", "orientierung"]
+        },
+        {
+          "text": "LIVE: Sitzungsbetrieb, Debattenzugang, Touren, Sicherheitskontrolle und wegen Restaurierung gesperrte Bereiche ausschließlich bei UK Parliament prüfen; Staatsanlässe verändern die Zugänge.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich den Palace of Westminster?",
+          "a": "An der langen neugotischen Themsefront zwischen Elizabeth Tower mit Uhr und dem höheren, quadratischen Victoria Tower."
+        }
+      ]
+    },
+    {
+      "id": "london_buckingham_palace",
+      "general_info": "Buckingham Palace ist die offizielle Londoner Residenz des Monarchen und ein arbeitender königlicher Palast. Die heutige Front mit Mittelbalkon blickt über Vorhof, Gitter und Victoria Memorial auf The Mall; innen dienen State Rooms staatlichen Empfängen.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Die breite symmetrische Portlandsteinfassade besitzt einen leicht vorspringenden Mittelteil mit dem berühmten Balkon. Schwarze und goldene Gitter trennen den Vorhof vom Victoria Memorial.",
+          "tags": ["visuell", "wegweiser", "architektur"]
+        },
+        {
+          "text": "Besuch: Bei geöffnetem Palast führen Besichtigungen durch State Rooms wie Grand Staircase, Throne Room, Ballroom und Picture Gallery; King's Gallery und Royal Mews sind eigenständige Besuchsorte am Komplex.",
+          "tags": ["placeOffers", "kunst", "zeremoniell"]
+        },
+        {
+          "text": "Architekturdetail: Der East Wing schloss 1847 bis 1849 den zuvor offenen hufeisenförmigen Hof. Die heute sichtbare Hauptfront wurde bis 1914 mit Portlandstein neu verkleidet.",
+          "tags": ["architektur", "geschichte"]
+        },
+        {
+          "text": "Quer: The Mall bildet die direkte zeremonielle Achse zum Admiralty Arch und Trafalgar Square; St James's Park liegt nordöstlich, Green Park nördlich des Palastes.",
+          "tags": ["quer", "orientierung"]
+        },
+        {
+          "text": "LIVE: State-Room-Termine, East-Wing-Führungen, Wachwechsel, Flaggen, Sperrungen und Sicherheitsregeln bei Royal Collection Trust und Household Division prüfen; Balkonauftritte sind an Anlässe gebunden.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich Buckingham Palace?",
+          "a": "An der langen hellen Palastfront mit Mittelbalkon hinter schwarz-goldenen Gittern und dem großen Victoria Memorial im Kreisverkehr davor."
+        }
+      ]
+    },
+    {
+      "id": "london_big_ben",
+      "general_info": "Big Ben bezeichnet genau genommen die 13,7 Tonnen schwere Great Bell im 96 Meter hohen Elizabeth Tower des Palace of Westminster. Turm, Uhrwerk und fünf Glocken wurden zum akustischen und visuellen Symbol Londons; der heutige Name des Turms gilt seit 2012.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Der quadratische neugotische Turm trägt vier große Uhrzifferblätter unter einer reich vergoldeten Spitze. Nachts werden Zifferblätter beleuchtet; oberhalb zeigt das Ayrton Light parlamentarische Sitzungen an.",
+          "tags": ["visuell", "wegweiser", "architektur"]
+        },
+        {
+          "text": "Hören: Vier Viertelglocken spielen die Westminster Quarters; die tiefere Great Bell schlägt die Stunden. Big Ben ist daher kein frei schwingendes Läutwerk, sondern wird außen von einem Hammer angeschlagen.",
+          "tags": ["sensorik", "musik", "technik"]
+        },
+        {
+          "text": "Besuch: Offizielle Elizabeth-Tower-Touren führen über mehr als 300 Stufen zu Uhrwerk und Glocken; die enge historische Anlage besitzt keinen gewöhnlichen spontanen Aussichtszugang.",
+          "tags": ["placeOffers", "technik", "zugang"]
+        },
+        {
+          "text": "Quer: Der stärkste freie Nahblick liegt auf Westminster Bridge und am gegenüberliegenden Südufer beim London Eye; zusammen mit der Flussfront erklärt der Turm die Nordostecke des Palace of Westminster.",
+          "tags": ["quer", "orientierung", "aussicht"]
+        },
+        {
+          "text": "LIVE: Aktuelle Glockenschläge, Beleuchtung, Elizabeth-Tower-Touren, Alters- und Fitnessregeln sowie mögliche Sperrungen bei UK Parliament prüfen; Touren sind kapazitätsbegrenzt.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich Big Ben?",
+          "a": "Am hohen quadratischen Uhrturm an der Nordostecke des Parlaments. Genau genommen ist Big Ben die große Stundenglocke im Elizabeth Tower, nicht der gesamte Turm."
+        }
+      ]
+    },
+    {
+      "id": "london_trafalgar_square",
+      "general_info": "Trafalgar Square ist Londons großer öffentlicher Platz zwischen Whitehall, Strand und West End. Nelson's Column, Brunnen, Bronzelöwen und National Gallery formen das Ensemble; Demonstrationen, Feiern und wechselnde Kunst machen ihn zugleich zur politischen Bühne.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Nelson's Column steht im offenen Platzraum über vier großen Bronzelöwen; zwei Brunnen liegen seitlich. Die National Gallery bildet mit Säulenportikus und Kuppel die erhöhte Nordkante.",
+          "tags": ["visuell", "wegweiser", "stadtbild"]
+        },
+        {
+          "text": "Besuch: Der Platz lässt sich als kostenloser Skulpturenraum lesen: Reliefs am Säulensockel, Löwen, Brunnenfiguren, historische Standbilder und zeitgenössische Fourth-Plinth-Kunst stehen dicht beieinander.",
+          "tags": ["placeOffers", "kunst", "geschichte"]
+        },
+        {
+          "text": "Quer: Whitehall führt südlich zu Horse Guards, Downing Street und Parliament; westlich liegt The Mall hinter Admiralty Arch, östlich schließen St Martin-in-the-Fields und Strand an.",
+          "tags": ["quer", "orientierung"]
+        },
+        {
+          "text": "Stadtwissen: Der Fourth Plinth im Nordwesten blieb ursprünglich ohne geplantes Reiterstandbild. Seit 1999 dient er wechselnden zeitgenössischen Auftragswerken und bringt neue Debatten in das historische Denkmalensemble.",
+          "tags": ["kunst", "stadtgeschichte", "querwissen"]
+        },
+        {
+          "text": "LIVE: Aktuelles Werk auf dem Fourth Plinth, Veranstaltungen, Demonstrationen, Straßensperrungen und Brunnenbetrieb bei London City Hall und den zuständigen Behörden prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich Trafalgar Square?",
+          "a": "An Nelson's Column mit vier Bronzelöwen, zwei großen Brunnen und der erhöhten National Gallery an der Nordseite."
+        }
+      ]
+    },
+    {
+      "id": "london_tower_bridge",
+      "general_info": "Tower Bridge ist eine 1894 eröffnete kombinierte Klapp- und Hängebrücke nahe dem Tower of London. Zwei steinerne Türme, obere Stege und bewegliche Fahrbahnhälften verbinden viktorianische Ingenieurtechnik mit einer der bekanntesten Silhouetten der Themse.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Zwei massive neugotisch verkleidete Türme stehen auf Flusspfeilern und sind oben durch zwei horizontale Stege verbunden; blau-weiße Stahlteile und die geteilte Fahrbahn unterscheiden sie klar von London Bridge.",
+          "tags": ["visuell", "wegweiser", "architektur"]
+        },
+        {
+          "text": "Besuch: Die Tower-Bridge-Ausstellung verbindet Nord- und Südturm, hoch gelegene Walkways mit Glasboden sowie die separat erreichbaren viktorianischen Engine Rooms südlich der Brücke.",
+          "tags": ["placeOffers", "ingenieurwesen", "aussicht"]
+        },
+        {
+          "text": "Sinneseindruck: Bei einer Brückenöffnung kippen die beiden Bascules nach oben, Verkehrssignale und Schranken stoppen Straße und Fußwege; vom Ufer wird die Mechanik deutlicher als direkt auf der Fahrbahn.",
+          "tags": ["sensorik", "technik", "visuell"]
+        },
+        {
+          "text": "Quer: Am Nordwestufer liegt der Tower of London, nordöstlich St Katharine Docks; am Südufer führen Wege zu City Hall, HMS Belfast und Borough Market.",
+          "tags": ["quer", "orientierung"]
+        },
+        {
+          "text": "LIVE: Brückenöffnungen, Ausstellungseinlass, Glasboden, Aufzüge, Engine Rooms und zeitweilige Verkehrs- oder Fußwegsperrungen auf der offiziellen Tower-Bridge-Seite prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich Tower Bridge?",
+          "a": "An den zwei steinverkleideten Türmen mit zwei oberen Verbindungsstegen und der blau-weißen, in der Mitte aufklappbaren Fahrbahn."
+        }
+      ]
+    },
+    {
+      "id": "london_london_eye",
+      "general_info": "Das London Eye ist ein 135 Meter hohes, einseitig gelagertes Aussichtsrad am South Bank. Seit 2000 drehen 32 verglaste Kapseln langsam über der Themse und öffnen einen Rundblick auf Westminster, City und die weit ausgreifende Londoner Stadtsilhouette.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Das schlanke weiße Rad hängt wie ein großes Fahrradrad an Speichen und wird von schrägen Stützen nur auf der Landseite getragen; außen montierte Glaskapseln bleiben während der Drehung waagerecht.",
+          "tags": ["visuell", "wegweiser", "ingenieurwesen"]
+        },
+        {
+          "text": "Besuch: Während einer langsamen Umdrehung lassen sich Palace of Westminster und Big Ben besonders nah erkennen; weiter reichen die Sichtachsen zu St Paul's, Buckingham Palace und den Hochhäusern von City und Canary Wharf.",
+          "tags": ["placeOffers", "aussicht", "orientierung"]
+        },
+        {
+          "text": "Quer: Direkt südlich liegen County Hall und Jubilee Gardens, nördlich führt die Hungerford-Fußbrücke zum Embankment; Westminster Bridge verbindet den Standort mit Parliament Square.",
+          "tags": ["quer", "orientierung"]
+        },
+        {
+          "text": "Querwissen: Die 32 Kapseln stehen symbolisch für Londons Boroughs. Sie sind mit 1 bis 33 nummeriert, wobei die Nummer 13 ausgelassen wurde.",
+          "tags": ["querwissen", "technik"]
+        },
+        {
+          "text": "LIVE: Zeitfenster, Warteschlange, Betriebsunterbrechungen durch Wetter oder Wartung, barrierearme Buchung und Sichtbedingungen direkt beim London Eye prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich das London Eye?",
+          "a": "Am großen weißen Speichenrad mit außen sitzenden Glaskapseln am South Bank, direkt gegenüber von Big Ben und dem Palace of Westminster."
+        }
+      ]
+    },
+    {
+      "id": "london_platform_nine_three_quarters",
+      "general_info": "Platform 9¾ in King's Cross ist eine öffentlich zugängliche Fotoinszenierung zum fiktionalen Hogwarts-Bahnsteig aus Harry Potter. Ein halber Gepäckwagen verschwindet unter dem Schild in einer Wand der Bahnhofshalle; ein Themenladen liegt unmittelbar daneben.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Unter einem bogenförmigen Schild mit der Aufschrift Platform 9¾ steckt ein halber dunkler Gepäckwagen scheinbar in einer Backsteinwand; Schlange und benachbarter Shop machen den Punkt zusätzlich erkennbar.",
+          "tags": ["visuell", "wegweiser", "film"]
+        },
+        {
+          "text": "Besuch: Man kann die Installation ansehen und am Wagen fotografieren; angebotene Schals, Requisiten und professionelle Bilder gehören zum kommerziellen Ablauf und sind nicht für das Erkennen des Ortes nötig.",
+          "tags": ["placeOffers", "fotografie", "kultur"]
+        },
+        {
+          "text": "Historie: Eine frühe Plattformtafel wurde 1999 im Bahnhof angebracht. Wegen Umbauten wechselte die Fotoinszenierung mehrfach ihren Standort, bevor sie mit dem Shop in der neuen westlichen Halle gebündelt wurde.",
+          "tags": ["geschichte", "film"]
+        },
+        {
+          "text": "Querwissen: J. K. Rowling erklärte später, sie habe beim Schreiben die räumliche Anordnung von King's Cross nicht exakt vor Augen gehabt; die realen Gleise 9 und 10 lassen keinen gemauerten Zwischenraum wie im Roman.",
+          "tags": ["literatur", "querwissen", "geschichte"]
+        },
+        {
+          "text": "Quer: Die neugotische Front von St Pancras steht direkt westlich und lieferte Filmbilder für die magische Bahnhofswelt; Granary Square und Regent's Canal liegen nördlich der Gleise.",
+          "tags": ["quer", "film", "orientierung"]
+        },
+        {
+          "text": "LIVE: Standort in der Halle, Warteschlange, Fotoablauf, Requisiten, Shop-Zeiten und bahnbedingte Zugangsbeschränkungen bei King's Cross beziehungsweise dem offiziellen Shop prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich Platform 9¾?",
+          "a": "Am halb in einer Backsteinwand steckenden Gepäckwagen unter dem bogenförmigen Platform-9¾-Schild in der öffentlichen Halle von King's Cross."
+        }
+      ]
+    },
+    {
+      "id": "london_canary_wharf",
+      "general_info": "Canary Wharf ist ein Hochhaus- und Geschäftsviertel auf den ehemaligen West India Docks der Isle of Dogs. Wasserbecken, Dockkanten und Hafenreste liegen zwischen Bürotürmen, Parks, Kunstwerken und Verkehrsbauten und machen den Wandel vom Welthafen zur neuen Stadt sichtbar.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: One Canada Square mit pyramidenförmiger Metallspitze dominiert das Cluster. Zu seinen Füßen wechseln glänzende Turmfassaden, rechtwinklige Dockbecken, Fußbrücken, Bäume und abgesenkte Plätze.",
+          "tags": ["visuell", "wegweiser", "architektur"]
+        },
+        {
+          "text": "Besuch: Ein freier Rundgang kann Dockpromenaden, Jubilee Park, Crossrail Place Roof Garden und die über das Viertel verteilte öffentliche Kunst verbinden; viele Werke stehen ohne Museumseingang im Außenraum.",
+          "tags": ["placeOffers", "kunst", "spaziergang"]
+        },
+        {
+          "text": "Historie: Die West India Docks öffneten 1802 als abgeschirmte Hafenanlage. Ihr Handel war eng mit kolonialen Warenströmen und den Plantagenökonomien der britischen Karibik verbunden.",
+          "tags": ["geschichte", "kolonialgeschichte", "hafen"]
+        },
+        {
+          "text": "Historie: Nach Containerisierung und Hafenniedergang schlossen die Docks 1980. Die London Docklands Development Corporation und private Investoren trieben anschließend die großmaßstäbliche Neuentwicklung voran.",
+          "tags": ["geschichte", "stadtentwicklung"]
+        },
+        {
+          "text": "Quer: Vom Greenwich Park erscheint Canary Wharf hinter Queen's House als moderne Fernkulisse; westlich bewahrt das Museum of London Docklands in einem Lagerhaus die Hafen- und Handelsgeschichte.",
+          "tags": ["quer", "orientierung", "geschichte"]
+        },
+        {
+          "text": "LIVE: Zugänglichkeit von Roof Garden, Parks, Kunstrundgang, Veranstaltungen, Baustellen und Bootsverkehr bei Canary Wharf und TfL prüfen; Büro- und Mallpassagen können abweichende Zeiten haben.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich Canary Wharf?",
+          "a": "Am dichten Hochhauscluster um One Canada Square mit seiner pyramidenförmigen Spitze sowie an den rechtwinkligen alten Dockbecken zwischen den Türmen."
+        }
+      ]
+    },
+    {
+      "id": "london_barbican_centre",
+      "general_info": "Das 1982 eröffnete Barbican Centre ist das Kulturzentrum des brutalistischen Barbican Estate. Konzertsaal, Theater, Kinos, Galerien, Bibliothek und Conservatory sind in ein mehrstöckiges Ensemble aus Sichtbeton, Wasserbecken, Terrassen und Hochwegen eingebettet.",
+      "deep_data_pool": [
+        {
+          "text": "Visuell: Tief strukturierter, grob bearbeiteter Beton, breite Terrassen, geometrische Pflanztröge und ein großes Wasserbecken prägen den Zugang; Wohntürme und Highwalks steigen dahinter auf mehreren Ebenen an.",
+          "tags": ["visuell", "wegweiser", "brutalismus"]
+        },
+        {
+          "text": "Besuch: Auch ohne Vorstellung lassen sich öffentliche Foyers, Seeterrasse, Ausstellungen und Teile der Architektur erkunden; Konzert, Theater, Kino, Bibliothek und Conservatory haben jeweils eigene Zugangsregeln.",
+          "tags": ["placeOffers", "kultur", "architektur"]
+        },
+        {
+          "text": "Historie: Der Wiederaufbauplan reagierte auf die Zerstörung von Cripplegate durch den Luftangriff vom 29. Dezember 1940. Baubeginn des Gesamtprojekts war 1960; das Arts Centre vollendete die Anlage 1982.",
+          "tags": ["geschichte", "stadtentwicklung"]
+        },
+        {
+          "text": "Historie: Chamberlin, Powell and Bon trennten Fuß- und Autoverkehr auf verschiedenen Ebenen. Wasserflächen und erhöhte Wege wurden teilweise von Venedig als Modell einer verkehrsfreien Fußgängerwelt angeregt.",
+          "tags": ["geschichte", "stadtplanung", "architektur"]
+        },
+        {
+          "text": "Quer: St Giles-without-Cripplegate und Reste der London Wall liegen im Ensemble; westlich schließen Museum of London und Smithfield an, südlich erreicht man Guildhall und die mittelalterliche City.",
+          "tags": ["quer", "orientierung", "geschichte"]
+        },
+        {
+          "text": "LIVE: Heutiges Programm, kostenlose Ausstellungen, Architekturführungen, Conservatory-Öffnung, Baustellen und gesperrte Highwalks auf der offiziellen Barbican-Seite prüfen.",
+          "tags": ["live_hint", "ephemeral"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich das Barbican Centre?",
+          "a": "Am terrassierten brutalistischen Sichtbetonbau über einem Wasserbecken, umgeben von Highwalks, Pflanztrögen und den hohen Wohntürmen des Barbican Estate."
+        }
+      ]
+    }
+  ]
+}

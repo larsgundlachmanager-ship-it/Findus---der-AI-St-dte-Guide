@@ -69,30 +69,19 @@ spot.approach_triggers = [
   },
 ];
 
+// Wartehäuschen = own story (prisdorf_bahnwartehaeuschen). No Güter-pin.
 spot.sub_pois = [
   {
-    id: 'prisdorf_bahnhof_wartehaeuschen_sub',
-    name: 'Historisches Bahnwartehäuschen',
-    // Slightly north of track center toward Bahnhofstraße side
-    lat: 53.67535,
-    lng: 9.76035,
-    radius_m: 12,
-    fact_details:
-      'Siehst du das Fachwerk mit dem Walmdach? 1911 von Bürgern mitfinanziert, später vom Verein Wartehäuschen Prisdorf vor dem Abriss gerettet und saniert.',
-    tags: ['denkmal', 'architecture'],
-  },
-  {
-    id: 'prisdorf_bahnhof_gueterbahnsteig_sub',
-    name: 'Alter Güterbahnsteig / abgetrenntes Gleis',
-    // Offset along platform (historically west/side remnant)
-    lat: 53.67528,
-    lng: 9.75985,
-    radius_m: 14,
-    fact_details:
-      'Am Gleisende erinnern Spuren des Güterverkehrs und abgetrennter Gleise daran, dass hier früher mehr Bahnhof war als nur ein Haltepunkt.',
-    tags: ['transport', 'historical_core'],
+    id: 'prisdorf_bahnhof_wartehäuschen_sub_eingang',
+    name: 'Bahnhof Prisdorf · Haupteingang',
+    lat: STATION.lat,
+    lng: STATION.lng,
+    radius_m: 10,
+    fact_details: 'GPS-Eingang (OSM railway=halt / DB zugradar).',
+    tags: ['sub_poi', 'eingang', 'gps_entrance', 'nav_target', 'sourced_osm'],
   },
 ];
+spot.name = 'Bahnhof Prisdorf';
 
 trigger.lat = STATION.lat;
 trigger.lng = STATION.lng;

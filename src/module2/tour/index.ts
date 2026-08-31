@@ -31,7 +31,11 @@ export {
   needsDurationAsk,
   clampBridgeWords,
   buildTourParentBridge,
+  wantsUnseenTour,
+  parseEndAnchorKind,
+  defaultUnseenTourDurationMin,
 } from './parentBrief';
+export { resolveTourEndAnchorFromText } from './endAnchor';
 export { useLiveTourStore, publishTourResult } from './tourSpeech';
 export { mirrorTourToTimeline } from './mirrorTourToTimeline';
 export {

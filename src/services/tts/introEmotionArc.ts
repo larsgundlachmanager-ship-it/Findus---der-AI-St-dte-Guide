@@ -1,7 +1,7 @@
 /**
- * Onboarding-Intro: Premium-Erzähler-Bogen (~45 s).
- * Große Kontraste — wie ein geiler Storyteller auf der Bühne.
- * Hook neugierig → Pain genervt/angespannt → Turn bestimmt → Rise begeistert → Close warm.
+ * Onboarding-Intro: Tempo/Lautstärke-Bogen — ohne Cartesia-Emotion-Tags.
+ * EN-Emotion (curious/frustrated/excited) zieht de-DE-Stimmen in den US-Akzent.
+ * Dynamik kommt aus dem deutschen Intro-Text + Speed/Volume.
  */
 
 import type { CartesiaGenerationConfig } from '../cartesiaTtsService';
@@ -9,16 +9,11 @@ import type { CartesiaGenerationConfig } from '../cartesiaTtsService';
 type IntroPhase = 'hook' | 'pain' | 'turn' | 'rise' | 'joy';
 
 const PHASE_CONFIG: Record<IntroPhase, CartesiaGenerationConfig> = {
-  // Einstieg: neugierig, etwas langsamer — zieht rein
-  hook: { emotion: 'curious', speed: 0.92, volume: 1.05 },
-  // Problem: genervt, enger, druckvoller
-  pain: { emotion: 'frustrated', speed: 0.96, volume: 1.12 },
-  // Wendepunkt: klar, laut, bestimmt
-  turn: { emotion: 'determined', speed: 1.02, volume: 1.28 },
-  // Findus: Energie, Begeisterung
-  rise: { emotion: 'excited', speed: 1.12, volume: 1.22 },
-  // Close: warm, einladend
-  joy: { emotion: 'happy', speed: 1.05, volume: 1.12 },
+  hook: { speed: 0.92, volume: 1.05 },
+  pain: { speed: 0.96, volume: 1.12 },
+  turn: { speed: 1.02, volume: 1.28 },
+  rise: { speed: 1.12, volume: 1.22 },
+  joy: { speed: 1.05, volume: 1.12 },
 };
 
 /** Stateful Resolver — ein Intro-Durchlauf, Phasen nur vorwärts. */

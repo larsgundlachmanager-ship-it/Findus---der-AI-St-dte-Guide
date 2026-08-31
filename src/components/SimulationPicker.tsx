@@ -157,7 +157,7 @@ export function SimulationPicker({
             <Text style={styles.sheetHint}>
               {mode === 'navigate'
                 ? 'Live-Kompass ohne Story — Position wird an den Ort gesetzt.'
-                : 'Tipp = du stehst virtuell dort → Findus erzählt Modul 1.'}
+                : 'Tipp = du stehst virtuell dort → Yorro erzählt Modul 1.'}
             </Text>
             {sortedPois.length === 0 ? (
               <Text style={styles.emptyHint}>
@@ -222,7 +222,7 @@ export function SimulationPicker({
         <Text style={styles.triggerLabel}>Ort wechseln (GPS-Simulation)</Text>
         <Text style={styles.triggerHint}>
           {busy
-            ? 'Findus erzählt… (Liste trotzdem öffnen)'
+            ? 'Yorro erzählt… (Liste trotzdem öffnen)'
             : `${pois.length} POIs · Modul 1 manuell`}
         </Text>
       </Pressable>
@@ -306,12 +306,12 @@ const styles = StyleSheet.create({
   },
   modalRoot: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: '#0A1A15',
+    backgroundColor: 'transparent',
     justifyContent: 'flex-end',
   },
   backdropHit: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0,0,0,0.35)',
+    backgroundColor: 'rgba(0,0,0,0.55)',
   },
   sheet: {
     maxHeight: '70%',

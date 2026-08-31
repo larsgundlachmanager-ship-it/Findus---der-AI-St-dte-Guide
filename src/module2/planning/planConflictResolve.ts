@@ -41,66 +41,40 @@ import {
   eveningGapHours,
   largestGapHours,
 } from '../../services/affiliate/helpFirstMonetization';
+import {
+  findPlanOverlapPair,
+  planStopsOverlap,
+} from './planTimeOverlap';
+import {
+  isHardFixedStop,
+  isSoftMovableStop,
+  prioOfStop,
+} from './planHardLock';
 
 function prioOf(s: FuturePlanStop): PlanPriority {
-  return (s.planPriority ?? (s.hardAnchor ? 1 : 5)) as PlanPriority;
-}
-
-function intervalsOverlap(
-  a: FuturePlanStop,
-  b: FuturePlanStop,
-): boolean {
-  const a0 = a.plannedStartMs;
-  const b0 = b.plannedStartMs;
-  if (a0 == null || b0 == null) return false;
-  const a1 = a.plannedEndMs ?? a0 + 45 * 60_000;
-  const b1 = b.plannedEndMs ?? b0 + 45 * 60_000;
-  return a0 < b1 && b0 < a1;
+  return prioOfStop(s);
 }
 
 export function hasTimeOverlap(
   stops: FuturePlanStop[] = useFuturePlanStore.getState().plan.stops,
 ): boolean {
-  const timed = stops.filter(
-    (s) =>
-      s.kind !== 'wish' &&
-      s.kind !== 'nav_leg' &&
-      !s.id.startsWith('choice_') &&
-      s.plannedStartMs != null,
-  );
-  for (let i = 0; i < timed.length; i++) {
-    for (let j = i + 1; j < timed.length; j++) {
-      if (intervalsOverlap(timed[i]!, timed[j]!)) return true;
-    }
-  }
-  return false;
+  return planStopsOverlap(stops);
 }
 
 function findOverlapPair(
   stops: FuturePlanStop[],
 ): [FuturePlanStop, FuturePlanStop] | null {
-  const timed = stops.filter(
-    (s) =>
-      s.kind !== 'wish' &&
-      s.kind !== 'nav_leg' &&
-      !s.id.startsWith('choice_') &&
-      s.plannedStartMs != null,
-  );
-  for (let i = 0; i < timed.length; i++) {
-    for (let j = i + 1; j < timed.length; j++) {
-      if (intervalsOverlap(timed[i]!, timed[j]!)) {
-        return [timed[i]!, timed[j]!];
-      }
-    }
-  }
-  return null;
+  return findPlanOverlapPair(stops);
 }
 
-/** Weicheres Event im Overlap (höhere Prio-Zahl = weicher). */
+/** Weicheres Event im Overlap (höhere Prio-Zahl = weicher; Hard nie soft). */
 function softerOf(
   a: FuturePlanStop,
   b: FuturePlanStop,
 ): FuturePlanStop {
+  const aHard = isHardFixedStop(a);
+  const bHard = isHardFixedStop(b);
+  if (aHard !== bHard) return aHard ? b : a;
   return prioOf(a) >= prioOf(b) ? a : b;
 }
 
@@ -108,17 +82,22 @@ function harderOf(
   a: FuturePlanStop,
   b: FuturePlanStop,
 ): FuturePlanStop {
+  const aHard = isHardFixedStop(a);
+  const bHard = isHardFixedStop(b);
+  if (aHard !== bHard) return aHard ? a : b;
   return prioOf(a) < prioOf(b) ? a : b;
 }
 
 /**
  * Stop hinter härteren Anker schieben (Prio 4 Pflicht; auch Fallback wenn User nicht löschen will).
+ * Harte User-Termine werden nie verschoben.
  */
 export function shiftStopPastHarder(
   soft: FuturePlanStop,
   hard: FuturePlanStop,
   reason = 'Verschoben',
 ): boolean {
+  if (isHardFixedStop(soft) || !isSoftMovableStop(soft)) return false;
   const hardEnd =
     hard.plannedEndMs ??
     (hard.plannedStartMs != null
@@ -212,8 +191,8 @@ export async function resolveOverlapsInteractive(): Promise<{
     const hard = harderOf(pair[0], pair[1]);
     const p = prioOf(soft);
 
-    if (p <= 2) {
-      // Heilig — nicht auto-opfern
+    if (p <= 2 || isHardFixedStop(soft)) {
+      // Heilig — nicht auto-opfern / nicht verschieben
       break;
     }
 
@@ -346,7 +325,23 @@ export async function injectGeoStopsIfOnRoute(
         planPriority: 5,
         emoji: '🛒',
         notes: `Geo-Trigger: ${wish.itemLabel}`,
-        mapsUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(hit.name)}`,
+        mapsUrl:
+          (() => {
+            try {
+              const { mapsUrlForGooglePlace } = require('../../services/research/eventInfoUrl') as {
+                mapsUrlForGooglePlace: (o: {
+                  placeName?: string | null;
+                  placeId?: string | null;
+                }) => string | null;
+              };
+              return mapsUrlForGooglePlace({
+                placeName: hit.name,
+                placeId: hit.placeId,
+              }) || undefined;
+            } catch {
+              return undefined;
+            }
+          })(),
       });
     } catch {
       /* soft */
@@ -434,9 +429,63 @@ function findDiningStops(): FuturePlanStop[] {
 }
 
 /**
- * Leave-by-Trigger setzen nach verbindlicher Matrix.
- * Prio 1–3: 30 + 5; ÖPNV-Legs: 10; sonst Leave-by: 5; Prio 5/6: keine Event-Reminder.
+ * Erste Morgen-Abfahrt → Wecker rückwärts (Leave-by − Prep).
+ * Nicht die gesprochene Los-Uhrzeit als Weckzeit.
  */
+async function armWakeFromFirstLeaveBy(): Promise<void> {
+  const stops = [...useFuturePlanStore.getState().plan.stops].sort(
+    (a, b) => (a.plannedStartMs ?? 0) - (b.plannedStartMs ?? 0),
+  );
+  const firstLeave = stops.find((s) => {
+    if (s.plannedStartMs == null) return false;
+    const h = new Date(s.plannedStartMs).getHours();
+    if (h >= 14) return false;
+    if (s.kind === 'nav_leg') return true;
+    return /\b(anreise|abfahrt|aufbruch|bahn|zug)\b/i.test(
+      `${s.title} ${s.notes ?? ''}`,
+    );
+  });
+  if (!firstLeave?.plannedStartMs) return;
+  if (firstLeave.plannedStartMs < Date.now() + 20 * 60_000) return;
+
+  const { DEFAULT_MORNING_PREP_MIN, buildWakeProposalFromLeaveBy } =
+    await import('../../services/alarms/wakeAlarmAdvisor');
+  const proposal = buildWakeProposalFromLeaveBy({
+    leaveByMs: firstLeave.plannedStartMs,
+    departureMs: firstLeave.plannedStartMs,
+    reasonLabel: firstLeave.title || 'Losgehen',
+    prepMin: DEFAULT_MORNING_PREP_MIN,
+  });
+  if (!proposal) return;
+
+  const { setWakeAlarmWithBridge } = await import(
+    '../../services/alarms/nativeAlarmBridge'
+  );
+  const result = await setWakeAlarmWithBridge({
+    wakeAtMs: proposal.wakeAtMs,
+    reasonLabel: proposal.reasonLabel,
+    leaveByMs: proposal.leaveByMs,
+    reminderKey: `plan_end_wake:${firstLeave.id}`,
+    preferNative: true,
+    wakeMode: 'replace',
+  });
+  if (result.ok) {
+    const wakeClock = new Date(proposal.wakeAtMs).toLocaleTimeString('de-DE', {
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+    const leaveClock = new Date(firstLeave.plannedStartMs).toLocaleTimeString(
+      'de-DE',
+      { hour: '2-digit', minute: '2-digit' },
+    );
+    enqueueSpeech({
+      kind: 'main',
+      text: sanitizePlanSpeech(`Wecker steht auf ${wakeClock}, Losgehen ${leaveClock}.`),
+      turnId: `m5_final_${Date.now()}`,
+    });
+  }
+}
+
 export function applyPlanReminderMatrix(): void {
   const nodes = useFuturePlanStore.getState().plan.stops.filter(
     (s) => s.kind !== 'wish' && !s.id.startsWith('choice_'),
@@ -657,6 +706,87 @@ export async function runFinalTimelineOptimization(): Promise<void> {
   }
 
   applyPlanReminderMatrix();
+
+  // Wecker erst JETZT — rückwärts von der ersten Abfahrt, nie die Los-Uhrzeit selbst.
+  try {
+    await armWakeFromFirstLeaveBy();
+  } catch (err) {
+    console.warn('[module5] plan-end wake failed', err);
+  }
+
+  // Flug/Checkout-Puffer aus timeBufferPolicy (Logistik)
+  try {
+    const { assessTimeBuffer } = await import(
+      '../../services/planning/timeBufferPolicy'
+    );
+    const { getPlanTripPrefsSync } = await import('./planTripPrefs');
+    const prefs = getPlanTripPrefsSync();
+    for (const s of useFuturePlanStore.getState().plan.stops) {
+      if (s.kind === 'nav_leg' || s.kind === 'wish') continue;
+      const blob = `${s.title} ${s.notes ?? ''}`;
+      if (!/\b(flug|flieger|abflug|check-?out|boarding)\b/i.test(blob)) continue;
+      const kind = /\b(flug|flieger|abflug|boarding)\b/i.test(blob)
+        ? 'flight_commercial'
+        : 'hotel_checkout';
+      const assessed = assessTimeBuffer({
+        kind: kind as 'flight_commercial' | 'hotel_checkout',
+        text: blob,
+        userPreferredMin: prefs.extraWakeBufferMin ?? undefined,
+      });
+      if (assessed?.minutes && s.plannedStartMs) {
+        const leaveMs = s.plannedStartMs - assessed.minutes * 60_000;
+        useFuturePlanStore.getState().upsertStop({
+          ...s,
+          bufferMin: Math.max(s.bufferMin || 0, assessed.minutes),
+          notes: [s.notes, assessed.reason].filter(Boolean).join(' · ').slice(0, 200),
+        });
+        if (assessed.askUserSpeech) {
+          usePlanCalendarUiStore.getState().setMirroredActions([
+            ...usePlanCalendarUiStore.getState().mirroredActions,
+            {
+              type: 'SET_WAKE_ALARM',
+              label: '⏰ Wecker',
+              payload: {
+                destName: `Los zu ${s.title}`.slice(0, 40),
+                timeLabel: new Date(leaveMs).toLocaleTimeString('de-DE', {
+                  hour: '2-digit',
+                  minute: '2-digit',
+                }),
+              },
+            },
+          ]);
+        }
+      }
+    }
+  } catch {
+    /* soft */
+  }
+
+  // Bei echten Rest-Konflikten optional Pro-Slot (Geld-Deckel)
+  if (hasTimeOverlap()) {
+    try {
+      const { tryConsumePlanProSlot } = await import('./planProScore');
+      if (tryConsumePlanProSlot('final_conflict')) {
+        const { runPlanAgentFollowUp } = await import('./planAgentSession');
+        const dayKey = useFuturePlanStore.getState().plan.dayKey;
+        const fix = await runPlanAgentFollowUp({
+          userText:
+            'Final-Konflikt: Timeline hat noch Überlappungen. Schlage minimale Fixes vor und setze Tools.',
+          dayKey,
+          event: 'final_conflict',
+        });
+        if (fix.speech) {
+          enqueueSpeech({
+            kind: 'main',
+            text: sanitizePlanSpeech(fix.speech),
+            turnId: `m5_final_cf_${Date.now()}`,
+          });
+        }
+      }
+    } catch {
+      /* soft */
+    }
+  }
 
   // Per-Stop: Speisekarte/Termin-Links nachziehen wo fehlend
   for (const node of useFuturePlanStore.getState().plan.stops) {

@@ -5,8 +5,19 @@
 
 import type { TransportMode } from './navigationTypes';
 import { isTransitMode } from './transportMode';
+import {
+  isTurnManeuver,
+  isAlleyRoadName,
+  isHandsFreeSpeakTurn,
+} from './navSpeakTurn';
+
+export { isTurnManeuver, isAlleyRoadName, isHandsFreeSpeakTurn };
 
 export const FINISH_BEFORE_TURN_SEC = 2;
+/** Aktuellen Yorro-Satz ausreden lassen, bevor Navi spricht. */
+export const FINDUS_SENTENCE_YIELD_SEC = 3.2;
+/** Akustische Pause vor dem Navi-Einschub (500ms). */
+export const NAV_INSERT_GAP_SEC = 0.5;
 export const COMPLEX_WARN_FOOT_M = 20;
 
 /** Legacy constants (approx defaults at 1.25 m/s walk / 5 m/s bike). */
@@ -25,12 +36,18 @@ function speakStartM(
   speechSec: number,
 ): number {
   const fallback =
-    transportMode === 'bicycle' ? DEFAULT_BIKE_MPS : DEFAULT_WALK_MPS;
+    transportMode === 'bicycle'
+      ? DEFAULT_BIKE_MPS
+      : transportMode === 'jog'
+        ? 2.5
+        : DEFAULT_WALK_MPS;
   const speed =
     typeof speedMs === 'number' && speedMs > 0.3 ? speedMs : fallback;
+  // Fertig 2 s vor dem Maneuver — Yield liegt in der Audio-Queue, nicht in Metern.
   const raw = (speechSec + FINISH_BEFORE_TURN_SEC) * speed;
-  const ceil = transportMode === 'bicycle' ? 220 : 80;
-  return Math.max(5, Math.min(ceil, Math.round(raw)));
+  const ceil =
+    transportMode === 'bicycle' ? 220 : transportMode === 'jog' ? 110 : 80;
+  return Math.max(8, Math.min(ceil, Math.round(raw)));
 }
 
 /**
@@ -50,15 +67,6 @@ export function predictiveWarmDistanceM(
   speedMs?: number | null,
 ): number {
   if (isTransitMode(transportMode)) return 220;
-  const pad = transportMode === 'bicycle' ? 45 : 25;
+  const pad = transportMode === 'bicycle' ? 70 : 40;
   return speakStartM(transportMode, speedMs, 3.5) + pad;
-}
-
-export function isTurnManeuver(maneuver: string | null | undefined): boolean {
-  const m = (maneuver ?? '').toLowerCase();
-  if (!m) return false;
-  if (/^(straight|arrive|continue)$/.test(m)) return false;
-  return /left|right|uturn|u-turn|roundabout|fork|ramp|keep|end of road/.test(
-    m,
-  );
 }

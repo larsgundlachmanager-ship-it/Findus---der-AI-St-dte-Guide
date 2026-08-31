@@ -10,8 +10,45 @@ import { reverseGeocodeStreet } from '../navigation/googleMapsNav';
 import { runWebResearch } from './webResearchService';
 import { generateGeminiText, hasGeminiApiKey } from '../geminiService';
 import { allSpokenTriggerIds } from '../../runtime/triggerEngine';
+import {
+  isHardAmenityNoise,
+  isNonStoryTouristNoisePoi,
+} from '../../interests/amenityInterestPolicy';
+import { parseTagsJson } from '../geo/triggerPolicy';
 
 const DRAFT_PATH = `${FileSystem.documentDirectory}findus-poi-drafts.json`;
+
+const AMENITY_DETOUR_NOISE_RE =
+  /\b(fris[oö]r|friseur|coiffeur|haarstudio|barber|nagelsalon|nagelstudio|blumenladen|florist|floristik|\bladen\b|\bshop\b|boutique|kiosk|drogerie|supermarkt)\b/i;
+
+function nearbyExploreScore(poi: {
+  name: string;
+  category?: string | null;
+  tags_json?: string | null;
+}): number {
+  const tags = parseTagsJson(poi.tags_json);
+  let score = 0;
+  if (tags.includes('must_have') || tags.includes('must-see') || tags.includes('must_see')) {
+    score += 100;
+  }
+  if (tags.includes('story') || tags.includes('story_enriched') || tags.includes('landmark')) {
+    score += 50;
+  }
+  if (tags.includes('directory') || tags.includes('amenity_skip') || tags.includes('tier4')) {
+    score -= 80;
+  }
+  const blob = `${poi.category ?? ''} ${poi.name} ${tags.join(' ')}`;
+  const isMust =
+    tags.includes('must_have') ||
+    tags.includes('must-see') ||
+    tags.includes('must_see') ||
+    tags.includes('landmark');
+  // Commerce-Noise immer bestrafen — außer echtes Must/Landmark
+  if (AMENITY_DETOUR_NOISE_RE.test(blob) && !isMust) {
+    score -= 120;
+  }
+  return score;
+}
 
 export type PoiDraftFact = {
   text: string;
@@ -103,6 +140,7 @@ export async function findNearbyPackPoi(
 
 /**
  * Nearby unvisited anchors for „was als Nächstes?“
+ * Preferiert Story/Explore — kein Amenity-Directory als „Abstecher lohnt“.
  */
 export async function suggestNearbyUnvisited(
   lat: number,
@@ -115,20 +153,33 @@ export async function suggestNearbyUnvisited(
   );
   try {
     const pois = await getAllPois();
-    const rows: Array<{ name: string; distanceM: number; poiId: number }> = [];
+    const rows: Array<{
+      name: string;
+      distanceM: number;
+      poiId: number;
+      score: number;
+    }> = [];
     for (const p of pois) {
       const kind = p.kind ?? 'legacy';
       if (kind !== 'area' && kind !== 'legacy' && kind !== 'approach') continue;
       if (spoken.has(p.id) || visited.has(p.id)) continue;
+      if (isHardAmenityNoise(p) || isNonStoryTouristNoisePoi(p)) continue;
+      const score = nearbyExploreScore(p);
+      // Directory-Salon/Florist/Shop ohne Story: nicht als Detour vorschlagen
+      if (score < -50) continue;
       const d = haversineMeters(lat, lng, p.lat, p.lng);
       if (d > 2500) continue;
       rows.push({
         name: p.name.replace(/\s*[·•|]\s*Wegweiser\s*$/i, '').trim(),
         distanceM: Math.round(d),
         poiId: p.id,
+        score,
       });
     }
-    return rows.sort((a, b) => a.distanceM - b.distanceM).slice(0, limit);
+    return rows
+      .sort((a, b) => b.score - a.score || a.distanceM - b.distanceM)
+      .slice(0, limit)
+      .map(({ name, distanceM, poiId }) => ({ name, distanceM, poiId }));
   } catch {
     return [];
   }
@@ -190,7 +241,7 @@ export async function researchAndDraftPoi(opts: {
           `Stadt: ${profile?.cityName ?? 'unbekannt'}`,
           'Antworte JSON: { "facts": ["...", "..."], "category": "cemetery|landmark|park|other" }',
         ].join('\n'),
-        { task: 'generic', maxTokens: 500, temperature: 0.2, useFindusSystem: false },
+        { task: 'research', maxTokens: 500, temperature: 0.2, useFindusSystem: false },
       );
       const m = raw.match(/\{[\s\S]*\}/);
       if (m) {
@@ -262,5 +313,13 @@ export async function researchAndDraftPoi(opts: {
     /* soft */
   }
 
-  return draft;
+  try {
+    const { persistDiscoveredPoiIntoDataset } = await import(
+      './persistDiscoveredPoi'
+    );
+    return await persistDiscoveredPoiIntoDataset(draft);
+  } catch (err) {
+    if (__DEV__) console.warn('[poiDiscovery] persist failed', err);
+    return draft;
+  }
 }

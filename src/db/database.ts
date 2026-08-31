@@ -6,25 +6,190 @@ import { ensureUserSettingsTable } from './userSettings';
 import { ensureCityPronunciationsTable } from './cityPronunciations';
 import { ensureUserCustomPhoneticsTable } from './userCustomPhonetics';
 import { ensureFeedbackEntriesTable } from './feedbackEntries';
+import { ensureUserMemoryFactsTable } from './userMemoryFacts';
 import {
   approxPolygonAreaM2,
+  distanceToPolygonM,
   parsePolygonJson,
-  pointInPolygon,
+  parsePolygonRings,
 } from '../services/geo/polygon';
+import { runExclusiveDbWrite } from './dbWriteLock';
+import {
+  effectiveTriggerRadiusM,
+  geoKindRank,
+  teasedApproachSpotKeys,
+} from '../services/geo/triggerRadius';
+import { FOOTPRINT_TRIGGER_BUFFER_M } from '../services/geo/footprintTrigger';
+
+export { runExclusiveDbWrite } from './dbWriteLock';
 
 const DB_NAME = 'findus.db';
 
-let dbPromise: Promise<SQLite.SQLiteDatabase> | null = null;
+type FindusDbGlobal = typeof globalThis & {
+  __findusDbPromise?: Promise<SQLite.SQLiteDatabase> | null;
+  __findusDbInitPromise?: Promise<void> | null;
+  __findusDbClosing?: boolean;
+  __findusDbInFlight?: number;
+};
 
-async function getDb(): Promise<SQLite.SQLiteDatabase> {
-  if (!dbPromise) {
-    dbPromise = SQLite.openDatabaseAsync(DB_NAME);
+function instrumentSqlite(db: SQLite.SQLiteDatabase): SQLite.SQLiteDatabase {
+  const anyDb = db as SQLite.SQLiteDatabase & {
+    __findusDbg?: boolean;
+    __findusDead?: boolean;
+  };
+  if (anyDb.__findusDbg) return db;
+  anyDb.__findusDbg = true;
+  const wrap = (method: 'getAllAsync' | 'getFirstAsync' | 'runAsync') => {
+    const orig = anyDb[method].bind(db) as (
+      sql: string,
+      ...rest: unknown[]
+    ) => Promise<unknown>;
+    (anyDb as unknown as Record<string, unknown>)[method] = async (
+      sql: string,
+      ...rest: unknown[]
+    ) => {
+      if (anyDb.__findusDead || g.__findusDbClosing) {
+        const fresh = await getDb();
+        const next = fresh as unknown as Record<
+          string,
+          (s: string, ...r: unknown[]) => Promise<unknown>
+        >;
+        return next[method](sql, ...rest);
+      }
+      g.__findusDbInFlight = (g.__findusDbInFlight ?? 0) + 1;
+      try {
+        return await orig(sql, ...rest);
+      } finally {
+        g.__findusDbInFlight = Math.max(0, (g.__findusDbInFlight ?? 1) - 1);
+      }
+    };
+  };
+  wrap('getAllAsync');
+  wrap('getFirstAsync');
+  wrap('runAsync');
+  return db;
+}
+
+const g = globalThis as FindusDbGlobal;
+
+/** Soft-Reload setzt Modul-State zurück, Native-Connection bleibt — sonst 2. Open → locked. */
+function getDbPromiseSlot(): Promise<SQLite.SQLiteDatabase> | null {
+  return g.__findusDbPromise ?? null;
+}
+
+function setDbPromiseSlot(p: Promise<SQLite.SQLiteDatabase> | null): void {
+  g.__findusDbPromise = p;
+}
+
+function getInitPromiseSlot(): Promise<void> | null {
+  return g.__findusDbInitPromise ?? null;
+}
+
+function setInitPromiseSlot(p: Promise<void> | null): void {
+  g.__findusDbInitPromise = p;
+}
+
+/** Soft-Reload / Unmount: Native-Handle freigeben, sonst bleibt die DB locked. */
+export async function closeFindusDatabase(): Promise<void> {
+  const slot = getDbPromiseSlot();
+  g.__findusDbClosing = true;
+  const t0 = Date.now();
+  while ((g.__findusDbInFlight ?? 0) > 0 && Date.now() - t0 < 2000) {
+    await new Promise((r) => setTimeout(r, 40));
   }
-  return dbPromise;
+  setDbPromiseSlot(null);
+  setInitPromiseSlot(null);
+  if (!slot) {
+    g.__findusDbClosing = false;
+    return;
+  }
+  try {
+    const db = await slot;
+    (db as SQLite.SQLiteDatabase & { __findusDead?: boolean }).__findusDead =
+      true;
+    await db.closeAsync();
+  } catch {
+    /* already closed / soft-reload race */
+  } finally {
+    g.__findusDbClosing = false;
+  }
+}
+
+async function getDb(opts?: { forceNew?: boolean }): Promise<SQLite.SQLiteDatabase> {
+  if (opts?.forceNew) {
+    await closeFindusDatabase();
+  }
+  let slot = getDbPromiseSlot();
+  if (!slot) {
+    slot = (async () => {
+      const openOnce = async (forceNew: boolean) => {
+        let db: SQLite.SQLiteDatabase | null = null;
+        try {
+          db = await SQLite.openDatabaseAsync(DB_NAME, {
+            // After Soft-Reload the native cache can hold a mid-transaction handle.
+            useNewConnection: forceNew,
+            finalizeUnusedStatementsBeforeClosing: true,
+          });
+          try {
+            if (await db.isInTransactionAsync()) {
+              await db.execAsync('ROLLBACK;');
+            }
+          } catch {
+            /* no open txn */
+          }
+          await db.execAsync(`
+            PRAGMA journal_mode = WAL;
+            PRAGMA busy_timeout = 15000;
+            PRAGMA foreign_keys = ON;
+          `);
+          return instrumentSqlite(db);
+        } catch (err) {
+          if (db) {
+            try {
+              await db.closeAsync();
+            } catch {
+              /* leaked open */
+            }
+          }
+          throw err;
+        }
+      };
+      let last: unknown;
+      for (let attempt = 0; attempt < 6; attempt += 1) {
+        try {
+          return await openOnce(attempt > 0 || !!opts?.forceNew);
+        } catch (err) {
+          last = err;
+          const locked =
+            /database is locked|finalizeAsync|SQLITE_BUSY|Error code 5/i.test(
+              String(err ?? ''),
+            );
+          if (!locked || attempt === 5) throw err;
+          // Don't close our own in-flight promise — just wait and open a new native conn.
+          await new Promise((r) => setTimeout(r, 150 * (attempt + 1)));
+        }
+      }
+      throw last;
+    })().catch((err) => {
+      setDbPromiseSlot(null);
+      throw err;
+    });
+    setDbPromiseSlot(slot);
+  }
+  return slot;
 }
 
 /** Für Settings-Sync außerhalb von POI-Queries. */
 export async function getDatabase(): Promise<SQLite.SQLiteDatabase> {
+  // Wenn Boot gerade initialisiert: warten, sonst Race mit CREATE/Seed.
+  const init = getInitPromiseSlot();
+  if (init) {
+    try {
+      await init;
+    } catch {
+      /* init failed — caller may still open for soft paths */
+    }
+  }
   return getDb();
 }
 
@@ -49,48 +214,88 @@ async function ensurePoiGeoColumns(db: SQLite.SQLiteDatabase): Promise<void> {
 }
 
 export async function initDatabase(): Promise<void> {
-  const db = await getDb();
-
-  await db.execAsync(`
-    PRAGMA journal_mode = WAL;
-    PRAGMA foreign_keys = ON;
-    CREATE TABLE IF NOT EXISTS pois (
-      id INTEGER PRIMARY KEY NOT NULL,
-      name TEXT NOT NULL,
-      lat REAL NOT NULL,
-      lng REAL NOT NULL,
-      radius_meters REAL NOT NULL,
-      spot_key TEXT,
-      parent_poi_id INTEGER,
-      kind TEXT DEFAULT 'legacy',
-      category TEXT,
-      tags_json TEXT,
-      polygon_json TEXT,
-      teaser_text TEXT,
-      condition_rule TEXT DEFAULT 'always',
-      special_radius_m REAL
-    );
-    CREATE TABLE IF NOT EXISTS facts (
-      id INTEGER PRIMARY KEY NOT NULL,
-      poi_id INTEGER NOT NULL,
-      fact_text TEXT NOT NULL,
-      FOREIGN KEY (poi_id) REFERENCES pois(id) ON DELETE CASCADE
-    );
-  `);
-
-  await ensurePoiGeoColumns(db);
-  await ensureUserSettingsTable(db);
-  await ensureCityPronunciationsTable(db);
-  await ensureUserCustomPhoneticsTable(db);
-  await ensureFeedbackEntriesTable(db);
-
-  const row = await db.getFirstAsync<{ count: number }>(
-    'SELECT COUNT(*) as count FROM pois',
-  );
-
-  if ((row?.count ?? 0) === 0) {
-    await seedDatabase(db);
+  // StrictMode / soft boot / Fast-Refresh — share one init across JS reloads.
+  const existing = getInitPromiseSlot();
+  if (existing) {
+    try {
+      await existing;
+      return;
+    } catch {
+      // Stale rejected init from Soft-Reload — clear and retry fresh.
+      setInitPromiseSlot(null);
+    }
   }
+  const initPromise = (async () => {
+    await runExclusiveDbWrite(async () => {
+      let db = await getDb();
+      try {
+        if (await db.isInTransactionAsync()) {
+          await db.execAsync('ROLLBACK;');
+        }
+      } catch {
+        /* soft */
+      }
+
+      const runSchema = async (database: SQLite.SQLiteDatabase) => {
+        await database.execAsync(`
+          CREATE TABLE IF NOT EXISTS pois (
+            id INTEGER PRIMARY KEY NOT NULL,
+            name TEXT NOT NULL,
+            lat REAL NOT NULL,
+            lng REAL NOT NULL,
+            radius_meters REAL NOT NULL,
+            spot_key TEXT,
+            parent_poi_id INTEGER,
+            kind TEXT DEFAULT 'legacy',
+            category TEXT,
+            tags_json TEXT,
+            polygon_json TEXT,
+            teaser_text TEXT,
+            condition_rule TEXT DEFAULT 'always',
+            special_radius_m REAL
+          );
+          CREATE TABLE IF NOT EXISTS facts (
+            id INTEGER PRIMARY KEY NOT NULL,
+            poi_id INTEGER NOT NULL,
+            fact_text TEXT NOT NULL,
+            FOREIGN KEY (poi_id) REFERENCES pois(id) ON DELETE CASCADE
+          );
+        `);
+
+        await ensurePoiGeoColumns(database);
+        await ensureUserSettingsTable(database);
+        await ensureCityPronunciationsTable(database);
+        await ensureUserCustomPhoneticsTable(database);
+        await ensureFeedbackEntriesTable(database);
+        await ensureUserMemoryFactsTable(database);
+
+        const row = await database.getFirstAsync<{ count: number }>(
+          'SELECT COUNT(*) as count FROM pois',
+        );
+
+        if ((row?.count ?? 0) === 0) {
+          await seedDatabase(database);
+        }
+      };
+
+      try {
+        await runSchema(db);
+      } catch (err) {
+        const locked =
+          /database is locked|finalizeAsync|SQLITE_BUSY|Error code 5/i.test(
+            String(err ?? ''),
+          );
+        if (!locked) throw err;
+        db = await getDb({ forceNew: true });
+        await runSchema(db);
+      }
+    });
+  })().catch((err) => {
+    setInitPromiseSlot(null);
+    throw err;
+  });
+  setInitPromiseSlot(initPromise);
+  return initPromise;
 }
 
 async function seedDatabase(db: SQLite.SQLiteDatabase): Promise<void> {
@@ -126,51 +331,68 @@ async function seedDatabase(db: SQLite.SQLiteDatabase): Promise<void> {
 }
 
 /**
- * Master-Sync aus Supabase: lokale POIs/Fakten komplett durch Remote ersetzen.
+ * Master-Sync: lokale POIs/Fakten ersetzen.
+ * Batches + Write-Lock → UI bleibt ansprechbar, keine Nested-Transactions.
  */
 export async function replacePoisAndFacts(
   pois: RemotePoi[],
   facts: RemoteFact[],
 ): Promise<void> {
-  const db = await getDb();
-  await ensurePoiGeoColumns(db);
+  await runExclusiveDbWrite(async () => {
+    const db = await getDb();
+    await ensurePoiGeoColumns(db);
 
-  await db.withTransactionAsync(async () => {
-    await db.runAsync('DELETE FROM facts');
-    await db.runAsync('DELETE FROM pois');
+    await db.withTransactionAsync(async () => {
+      await db.runAsync('DELETE FROM facts');
+      await db.runAsync('DELETE FROM pois');
+    });
 
-    for (const poi of pois) {
-      await db.runAsync(
-        `INSERT INTO pois (
-          id, name, lat, lng, radius_meters,
-          spot_key, parent_poi_id, kind, category, tags_json,
-          polygon_json, teaser_text, condition_rule, special_radius_m
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-        poi.id,
-        poi.name,
-        poi.lat,
-        poi.lng,
-        poi.radius_meters,
-        poi.spot_key ?? null,
-        poi.parent_poi_id ?? null,
-        poi.kind ?? 'legacy',
-        poi.category ?? null,
-        poi.tags_json ?? null,
-        poi.polygon_json ?? null,
-        poi.teaser_text ?? null,
-        poi.condition_rule ?? 'always',
-        poi.special_radius_m ?? null,
-      );
+    const BATCH = 48;
+    for (let i = 0; i < pois.length; i += BATCH) {
+      const slice = pois.slice(i, i + BATCH);
+      await db.withTransactionAsync(async () => {
+        for (const poi of slice) {
+          await db.runAsync(
+            `INSERT INTO pois (
+              id, name, lat, lng, radius_meters,
+              spot_key, parent_poi_id, kind, category, tags_json,
+              polygon_json, teaser_text, condition_rule, special_radius_m
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+            poi.id,
+            poi.name,
+            poi.lat,
+            poi.lng,
+            poi.radius_meters,
+            poi.spot_key ?? null,
+            poi.parent_poi_id ?? null,
+            poi.kind ?? 'legacy',
+            poi.category ?? null,
+            poi.tags_json ?? null,
+            poi.polygon_json ?? null,
+            poi.teaser_text ?? null,
+            poi.condition_rule ?? 'always',
+            poi.special_radius_m ?? null,
+          );
+        }
+      });
+      // JS-Thread atmen lassen (große Packs wie Hamburg)
+      await new Promise<void>((r) => setTimeout(r, 0));
     }
 
-    for (const fact of facts) {
-      await db.runAsync(
-        `INSERT INTO facts (id, poi_id, fact_text)
-         VALUES (?, ?, ?)`,
-        fact.id,
-        fact.poi_id,
-        fact.fact_text,
-      );
+    for (let i = 0; i < facts.length; i += BATCH) {
+      const slice = facts.slice(i, i + BATCH);
+      await db.withTransactionAsync(async () => {
+        for (const fact of slice) {
+          await db.runAsync(
+            `INSERT INTO facts (id, poi_id, fact_text)
+             VALUES (?, ?, ?)`,
+            fact.id,
+            fact.poi_id,
+            fact.fact_text,
+          );
+        }
+      });
+      await new Promise<void>((r) => setTimeout(r, 0));
     }
   });
 }
@@ -188,12 +410,129 @@ export async function getAllPois(): Promise<Poi[]> {
   return db.getAllAsync<Poi>('SELECT * FROM pois ORDER BY name ASC');
 }
 
+/** Grobes Rechteck um den User — Geofence muss nicht alle POIs der Stadt anfassen. */
+export async function getPoisNear(
+  lat: number,
+  lng: number,
+  padDeg = 0.025,
+): Promise<Poi[]> {
+  if (!Number.isFinite(lat) || !Number.isFinite(lng)) return getAllPois();
+  const db = await getDb();
+  const lngPad = padDeg * 1.6;
+  return db.getAllAsync<Poi>(
+    `SELECT * FROM pois
+     WHERE lat BETWEEN ? AND ?
+       AND lng BETWEEN ? AND ?
+     ORDER BY name ASC`,
+    lat - padDeg,
+    lat + padDeg,
+    lng - lngPad,
+    lng + lngPad,
+  );
+}
+
+export async function getPoiById(id: number): Promise<Poi | null> {
+  if (!Number.isFinite(id)) return null;
+  const db = await getDb();
+  return db.getFirstAsync<Poi>('SELECT * FROM pois WHERE id = ?', id);
+}
+
+/** OSM-Footprint nachziehen — Homescreen-Karte + Modul-1-Geofence. */
+export async function updatePoiPolygonJson(
+  poiId: number,
+  polygonJson: string,
+): Promise<void> {
+  if (!Number.isFinite(poiId) || !polygonJson.trim()) return;
+  const db = await getDb();
+  await db.runAsync('UPDATE pois SET polygon_json = ? WHERE id = ?', [
+    polygonJson,
+    poiId,
+  ]);
+}
+
 export async function getFactsForPoi(poiId: number): Promise<Fact[]> {
   const db = await getDb();
   return db.getAllAsync<Fact>(
     'SELECT * FROM facts WHERE poi_id = ? ORDER BY id ASC',
     poiId,
   );
+}
+
+/** Viewport-Prefetch: Fakten für mehrere sichtbare Orte in einem Roundtrip. */
+export async function getFactsForPois(
+  poiIds: number[],
+): Promise<Map<number, Fact[]>> {
+  const ids = [
+    ...new Set(
+      poiIds.filter((id) => Number.isFinite(id) && id > 0).map((id) => id | 0),
+    ),
+  ].slice(0, 48);
+  const out = new Map<number, Fact[]>();
+  if (ids.length === 0) return out;
+  const db = await getDb();
+  const placeholders = ids.map(() => '?').join(', ');
+  const rows = await db.getAllAsync<Fact>(
+    `SELECT * FROM facts WHERE poi_id IN (${placeholders}) ORDER BY poi_id ASC, id ASC`,
+    ...ids,
+  );
+  for (const row of rows) {
+    const pid = Number(row.poi_id);
+    if (!Number.isFinite(pid)) continue;
+    const list = out.get(pid) ?? [];
+    list.push(row);
+    out.set(pid, list);
+  }
+  return out;
+}
+
+/**
+ * Autonomes Lernen: recherchierter Fakt landet im lokalen Pack-Datensatz (SQLite),
+ * damit derselbe User / nächster Turn den Ort reicher hat.
+ * Pack-JSON auf Disk wird nicht überschrieben — Sync über Community-FAQ-Cache.
+ */
+export async function appendLearnedFactToPoi(opts: {
+  poiId: number;
+  factText: string;
+  /** stabile Id-Suffix-Quelle, z. B. FAQ-id */
+  idHint?: string | null;
+}): Promise<boolean> {
+  const text = (opts.factText || '').trim();
+  if (!text || text.length < 12 || !Number.isFinite(opts.poiId)) return false;
+  try {
+    const db = await getDb();
+    const existing = await getFactsForPoi(opts.poiId);
+    const lower = text.toLowerCase().slice(0, 80);
+    if (
+      existing.some(
+        (f) => (f.fact_text || '').toLowerCase().slice(0, 80) === lower,
+      )
+    ) {
+      return false;
+    }
+    const idNum =
+      Number.parseInt(String(opts.idHint || '').replace(/\D/g, ''), 10) || 0;
+    const id =
+      idNum > 0
+        ? idNum
+        : (Math.abs(
+            (opts.poiId * 4099 + text.length * 9176 + (text.charCodeAt(0) || 1)) |
+              0,
+          ) %
+            80_000_000) +
+          910_000_000;
+    await runExclusiveDbWrite(async () => {
+      await db.runAsync(
+        `INSERT OR IGNORE INTO facts (id, poi_id, fact_text) VALUES (?, ?, ?)`,
+        id,
+        opts.poiId,
+        text.slice(0, 2000),
+      );
+    });
+    return true;
+  } catch (err) {
+    if (__DEV__) console.warn('[db] appendLearnedFactToPoi', err);
+    return false;
+  }
 }
 
 export async function getPoiWithFacts(poiId: number): Promise<PoiWithFacts | null> {
@@ -231,10 +570,11 @@ export async function collectGeoHits(
     radiusScale?: number;
   },
 ): Promise<GeoMatch[]> {
-  const pois = await getAllPois();
+  const pois = await getPoisNear(lat, lng);
   const hits: GeoMatch[] = [];
   const exclude = opts?.excludePoiIds;
   const visitedSpots = opts?.visitedSpotKeys;
+  const teasedSpots = teasedApproachSpotKeys(pois, exclude);
   const scale =
     typeof opts?.radiusScale === 'number' &&
     Number.isFinite(opts.radiusScale) &&
@@ -251,13 +591,13 @@ export async function collectGeoHits(
     if (
       kind === 'approach' &&
       spotKey &&
-      visitedSpots?.has(spotKey)
+      (visitedSpots?.has(spotKey) || teasedSpots.has(spotKey))
     ) {
       continue;
     }
 
     const distance = haversineMeters(lat, lng, poi.lat, poi.lng);
-    const radius = Math.max(1, poi.radius_meters * scale);
+    const radius = effectiveTriggerRadiusM(poi, scale);
 
     if (kind === 'sub') {
       if (distance <= radius) {
@@ -274,10 +614,31 @@ export async function collectGeoHits(
     }
 
     const polygon = parsePolygonJson(poi.polygon_json);
-    if (polygon && pointInPolygon(lat, lng, polygon)) {
-      hits.push({ poi, distanceM: distance, via: 'polygon' });
+    const rings = parsePolygonRings(poi.polygon_json);
+    const nearFootprint =
+      (polygon &&
+        distanceToPolygonM(lat, lng, polygon) <= FOOTPRINT_TRIGGER_BUFFER_M) ||
+      rings.some(
+        (r) =>
+          r.length >= 3 &&
+          distanceToPolygonM(lat, lng, r) <= FOOTPRINT_TRIGGER_BUFFER_M,
+      );
+    if (nearFootprint) {
+      const dPoly =
+        polygon != null
+          ? distanceToPolygonM(lat, lng, polygon)
+          : rings.reduce(
+              (best, r) => Math.min(best, distanceToPolygonM(lat, lng, r)),
+              Number.POSITIVE_INFINITY,
+            );
+      hits.push({
+        poi,
+        distanceM: Number.isFinite(dPoly) ? dPoly : distance,
+        via: 'polygon',
+      });
       continue;
     }
+    // Ohne Footprint: Punkt-Radius (Story-Floors unverändert für Approaches)
     if (distance <= radius) {
       hits.push({
         poi,
@@ -292,21 +653,22 @@ export async function collectGeoHits(
 
 function sortGeoHitsNearest(hits: GeoMatch[]): GeoMatch[] {
   return [...hits].sort((a, b) => {
-    const distDiff = a.distanceM - b.distanceM;
-    if (Math.abs(distDiff) > 2) return distDiff;
+    const ka = geoKindRank(a.poi, a.via);
+    const kb = geoKindRank(b.poi, b.via);
+    // Gleicher Spot: Hauptort vor eigenem Wegweiser (User steht schon da)
+    const sameSpot =
+      Boolean(a.poi.spot_key) && a.poi.spot_key === b.poi.spot_key;
+    if (sameSpot && ka !== kb) return ka - kb;
 
-    const sizeRank = (m: GeoMatch): number => {
-      const k = (m.poi.kind ?? 'legacy') as PoiKind;
-      if (k === 'sub') return 0;
-      if (k === 'approach') return 1;
-      if (m.via === 'polygon') {
-        return approxPolygonAreaM2(parsePolygonJson(m.poi.polygon_json) ?? []);
-      }
-      return Math.max(m.poi.radius_meters, 1) ** 2;
-    };
-    const sa = sizeRank(a);
-    const sb = sizeRank(b);
-    if (sa !== sb) return sa - sb;
+    const distDiff = a.distanceM - b.distanceM;
+    if (Math.abs(distDiff) > 8) return distDiff;
+    if (ka !== kb) return ka - kb;
+
+    if (a.via === 'polygon' || b.via === 'polygon') {
+      const sa = approxPolygonAreaM2(parsePolygonJson(a.poi.polygon_json) ?? []);
+      const sb = approxPolygonAreaM2(parsePolygonJson(b.poi.polygon_json) ?? []);
+      if (sa !== sb) return sa - sb;
+    }
     return a.distanceM - b.distanceM;
   });
 }
@@ -373,18 +735,4 @@ export async function findPoiAtLocation(
   return match?.poi ?? null;
 }
 
-export function haversineMeters(
-  lat1: number,
-  lng1: number,
-  lat2: number,
-  lng2: number,
-): number {
-  const R = 6371000;
-  const toRad = (deg: number) => (deg * Math.PI) / 180;
-  const dLat = toRad(lat2 - lat1);
-  const dLng = toRad(lng2 - lng1);
-  const a =
-    Math.sin(dLat / 2) ** 2 +
-    Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLng / 2) ** 2;
-  return 2 * R * Math.asin(Math.sqrt(a));
-}
+export { haversineMeters } from '../services/geo/haversine';

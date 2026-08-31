@@ -1,0 +1,274 @@
+{
+  "city": "prisdorf",
+  "apply": true,
+  "touched": 33,
+  "approachesFixed": 33,
+  "faqAdded": 4,
+  "data_version": 73,
+  "rows": [
+    {
+      "id": "prisdorf_bahnhof_wartehäuschen",
+      "name": "Bahnhof Prisdorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "prisdorf_bahnwartehaeuschen",
+      "name": "Historisches Bahnwartehäuschen",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "prisdorf_kriegerehrenmal_bilsbek",
+      "name": "Kriegerehrenmal an der Bilsbekbrücke",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "prisdorf_pinnau_ufer",
+      "name": "Pinnau-Niederung an der südlichen Gemeindegrenze",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "prisdorf_tsv_sportgelände",
+      "name": "TSV Prisdorf Sportgelände und Vereinsheim",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "prisdorf_tcp_tennis",
+      "name": "Tennis-Club Prisdorf TCP",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "prisdorf_eisenbahnbrücke_hudenbarg",
+      "name": "Eisenbahnbrücke am Hudenbarg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "prisdorf_feuerlöschteich_gemeindeteich",
+      "name": "Feuerlöschteich und Gemeindeteich",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "prisdorf_alte_schule_lütte_prisdörper",
+      "name": "Kindergarten Lütte Prisdörper",
+      "status": "HARDENED",
+      "approaches": 3,
+      "visual_bits": 0,
+      "had_approaches": 3
+    },
+    {
+      "id": "prisdorf_freiwillige_feuerwehr",
+      "name": "Freiwillige Feuerwehr Prisdorf seit 1889",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "prisdorf_heimatverein",
+      "name": "Heimatverein für Dorfgemeinschaft Prisdorf von 1967",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "prisdorf_stadtgeschichte_gesamt",
+      "name": "Prisdorf übergreifende Dorfgeschichte und Orientierung",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "prisdorf_kitz_jungtierrettung",
+      "name": "Kitz- und Jungtierrettung Prisdorf e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "prisdorf_bilsbek_fluss",
+      "name": "Bilsbek durch Prisdorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "prisdorf_kirche_kummerfeld",
+      "name": "Kirchengemeinde Kummerfeld für Prisdorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "prisdorf_zur_schwalbe_geschichte",
+      "name": "Kita-Geschichte Zur Schwalbe",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "prisdorf_wald_hauen",
+      "name": "Wald Naherholung Hauen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "prisdorf_sav_angelteich",
+      "name": "SAV Angelteich Prisdorf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "prisdorf_jagdgemeinschaft",
+      "name": "Jagdgemeinschaft Prisdorf",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "prisdorf_strassen_gestern_heute",
+      "name": "Heimatverein Broschüre Straßen gestern und heute",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "prisdorf_strassenverzeichnis",
+      "name": "Prisdorfer Straßenverzeichnis 25497",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "prisdorfer_feldmark",
+      "name": "Prisdorfer Feldmark Zonenweg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "prisdorf_esinger_wohld",
+      "name": "Esinger Wohld",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "prisdorf_arboretum_ellerhoop",
+      "name": "Arboretum Ellerhoop",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "prisdorf_kriegerdenkmal",
+      "name": "Kriegerdenkmal",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "prisdorf_aussichtspunkt_tavsmoor_appen_heist",
+      "name": "Aussichtspunkt Tävsmoor Appen/Heist",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "prisdorf_baumpark_pinneberg",
+      "name": "Baumpark Pinneberg",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "prisdorf_norddeutsche_gartenschau",
+      "name": "Norddeutsche Gartenschau",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "prisdorf_pinneberg_pinnau_park",
+      "name": "Pinneberg Pinnau-Park",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "prisdorf_naturlehrpfad_liether_moor",
+      "name": "Naturlehrpfad Liether Moor",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "prisdorf_tavsmoor_haselauer_moor",
+      "name": "Tävsmoor / Haselauer Moor",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "prisdorf_johannes_schneider_halle",
+      "name": "Johannes Schneider Halle",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "prisdorf_florentina_theater",
+      "name": "Florentina-Theater",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    }
+  ]
+}

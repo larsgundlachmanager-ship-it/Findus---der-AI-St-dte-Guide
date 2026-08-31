@@ -90,7 +90,7 @@ async function runMenuJob(
     patchSlot(cardId, job.slotId, null);
     return;
   }
-  const ok = await validateMenuUrl(found.url, signal);
+  const ok = await validateMenuUrl(found.url, signal, { label: found.label });
   if (signal.aborted || !ok) {
     patchSlot(cardId, job.slotId, null);
     return;

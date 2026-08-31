@@ -95,12 +95,8 @@ function formatClock(hour: number, minute: number): string {
   return `${hour}:${minute.toString().padStart(2, '0')} Uhr`;
 }
 
-function successSpeech(hour: number, minute: number, tier: NativeAlarmTier): string {
-  const clock = formatClock(hour, minute);
-  if (tier === 'notification') {
-    return `Alles klar, Wecker ist für ${clock} gestellt (Findus-Mitteilung).`;
-  }
-  return `Alles klar, Wecker ist für ${clock} gestellt!`;
+function successSpeech(hour: number, minute: number, _tier: NativeAlarmTier): string {
+  return `Ich habe deinen Wecker auf ${formatClock(hour, minute)} gestellt.`;
 }
 
 function nativeModule(): FindusAlarmNative | null {
@@ -136,7 +132,7 @@ async function tryIntentLauncher(
   }
 }
 
-/** Versuch 2: Kotlin AlarmClock (+ AlarmManager Fallback im Modul) */
+/** Versuch 1: Kotlin AlarmManager.setAlarmClock (+ optional Clock-Sync) */
 async function tryKotlinModule(
   hour: number,
   minute: number,
@@ -150,7 +146,21 @@ async function tryKotlinModule(
     return { ok: false, detail: 'native_module_missing' };
   }
 
-  // Zuerst expliziter AlarmClock-Intent (SKIP_UI)
+  // Primär: AlarmManager (Statusleisten-Wecker, kein OEM-Chooser)
+  try {
+    const res = await mod.setAlarm(hour, minute, label);
+    if (res?.ok) {
+      return {
+        ok: true,
+        detail: res.detail,
+        status: res.status || 'alarm_manager',
+      };
+    }
+  } catch (err) {
+    console.warn('[alarmService] Kotlin setAlarm failed:', err);
+  }
+
+  // Optional: AlarmClock SKIP_UI (OEM-Uhr)
   if (typeof mod.setAlarmClockIntent === 'function') {
     try {
       const clockRes = await mod.setAlarmClockIntent(hour, minute, label);
@@ -161,31 +171,20 @@ async function tryKotlinModule(
           status: clockRes.status || 'alarm_clock',
         };
       }
+      return {
+        ok: false,
+        detail: clockRes?.detail || 'kotlin_failed',
+        status: clockRes?.status,
+      };
     } catch (err) {
-      console.warn('[alarmService] setAlarmClockIntent failed:', err);
+      const detail =
+        err instanceof Error ? err.message : String(err ?? 'kotlin_error');
+      console.warn('[alarmService] setAlarmClockIntent failed:', detail);
+      return { ok: false, detail };
     }
   }
 
-  // Hardcore: AlarmManager.setAlarmClock (+ optional Clock-Sync)
-  try {
-    const res = await mod.setAlarm(hour, minute, label);
-    if (res?.ok) {
-      return {
-        ok: true,
-        detail: res.detail,
-        status: res.status || 'alarm_manager',
-      };
-    }
-    return {
-      ok: false,
-      detail: res?.detail || res?.status || 'kotlin_failed',
-      status: res?.status,
-    };
-  } catch (err) {
-    const detail = err instanceof Error ? err.message : String(err ?? 'kotlin_error');
-    console.warn('[alarmService] Kotlin setAlarm failed:', detail);
-    return { ok: false, detail };
-  }
+  return { ok: false, detail: 'kotlin_failed' };
 }
 
 /** Versuch 3: In-App Local Notification */
@@ -198,6 +197,8 @@ async function tryLocalNotification(
       wakeAtMs,
       reasonLabel: label,
       reminderKey: `native_alarm:${wakeAtMs}`,
+      // Expliziter User-Befehl — nicht von Reminder-Pref blockieren
+      force: true,
     });
     if (notif.ok) {
       return { ok: true, detail: 'local_notification' };
@@ -229,7 +230,7 @@ export async function setNativeAlarm(
     };
   }
 
-  const label = (input.label || 'Findus').trim().slice(0, 60) || 'Findus';
+  const label = (input.label || 'Yorro').trim().slice(0, 60) || 'Yorro';
   const { hour, minute, wakeAtMs } = parts;
 
   // iOS: nur Notification-Pfad
@@ -254,24 +255,10 @@ export async function setNativeAlarm(
     };
   }
 
-  // Tier 1 — IntentLauncher (SET_ALARM + SKIP_UI)
-  const t1 = await tryIntentLauncher(hour, minute, label);
+  // Tier 1 — Kotlin AlarmManager (zuverlässig)
+  const t1 = await tryKotlinModule(hour, minute, label);
   if (t1.ok) {
-    return {
-      ok: true,
-      tier: 'intent_launcher',
-      hour,
-      minute,
-      wakeAtMs,
-      label,
-      detail: t1.detail,
-      speech: successSpeech(hour, minute, 'intent_launcher'),
-    };
-  }
-
-  // Tier 2 — Kotlin AlarmClock / AlarmManager
-  const t2 = await tryKotlinModule(hour, minute, label);
-  if (t2.ok) {
+    void tryIntentLauncher(hour, minute, label);
     return {
       ok: true,
       tier: 'kotlin',
@@ -279,8 +266,23 @@ export async function setNativeAlarm(
       minute,
       wakeAtMs,
       label,
-      detail: t2.detail,
+      detail: t1.detail,
       speech: successSpeech(hour, minute, 'kotlin'),
+    };
+  }
+
+  // Tier 2 — IntentLauncher (SET_ALARM + SKIP_UI)
+  const t2 = await tryIntentLauncher(hour, minute, label);
+  if (t2.ok) {
+    return {
+      ok: true,
+      tier: 'intent_launcher',
+      hour,
+      minute,
+      wakeAtMs,
+      label,
+      detail: t2.detail,
+      speech: successSpeech(hour, minute, 'intent_launcher'),
     };
   }
 
@@ -301,7 +303,7 @@ export async function setNativeAlarm(
 
   return {
     ok: false,
-    reason: t3.reason || t2.detail || t1.detail || 'permission',
+    reason: t3.reason || t1.detail || t2.detail || 'permission',
     detail: [t1.detail, t2.detail, t3.detail].filter(Boolean).join(' | '),
     speech: PERMISSION_SPEECH,
   };

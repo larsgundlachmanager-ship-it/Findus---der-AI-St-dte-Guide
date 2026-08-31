@@ -1,0 +1,101 @@
+{
+  "at": "2026-08-29T06:08:45.614389+00:00",
+  "device": "00143157P001105",
+  "results": [
+    {
+      "id": "wetter",
+      "q": "Wie ist das Wetter gerade hier?",
+      "verdict": "PASS",
+      "bridge_ok": true,
+      "call2_ok": true,
+      "bullets_ok": true,
+      "buttons_ok": null,
+      "buttons_found": [
+        "route"
+      ],
+      "integration_ok": true,
+      "fails": [],
+      "snippet": "🅿️ Parkplatz · T− 9 Std 33 Min | Geparkt seit 8 Min · 😊 Tippen | 🌧 Regen noch 21 Min | Aktuelle Regendauer · Tippen | 📍 Hier in der Gegend | 0 von 29 Orten · 0 % erkundet |  | Wetter in Pinneberg | ✕ | • ALDI Nord · 2,6 Kilometer | • ALDI Pinneberg · 3,4 Kilometer | 🎟️ Touren suchen | * | 📍 ALDI Nord | 🥈 Route | soll’s | gehen? | "
+    },
+    {
+      "id": "vegan",
+      "q": "Kein Fleisch bitte, ich will vegan essen",
+      "verdict": "FAIL",
+      "bridge_ok": true,
+      "call2_ok": false,
+      "bullets_ok": true,
+      "buttons_ok": true,
+      "buttons_found": [
+        "route"
+      ],
+      "integration_ok": false,
+      "fails": [],
+      "snippet": "🌧 Regen noch 20 Min | Aktuelle Regendauer · Tippen | 🚆 Abfahrt 08:23 | Bahnhof Thema in Prisdorf · in 13 Min · hilft das? | 📍 Hier in der Gegend | 0 von 29 Orten · 0 % erkundet |  |  |  | Timeline |  | Orte |  | Einst. | 🌧 Regen noch 20 Min. Tippen: Tipps. Wischen: nächste Karte. Unten: Timeline · Orte · Einst. | 🚆 Abfahrt 08:23. Tippen: Tipps. Wischen: nächste Karte. Unten: Timeline · Orte · Einst. | 📍 Hier in der Gegend. Tippen: Tipps. Wischen: nächste Karte. Unten: Timeline · Orte · Eins"
+    },
+    {
+      "id": "angus",
+      "q": "Restaurant mit Angus-Steak in der Naehe",
+      "verdict": "FAIL",
+      "bridge_ok": true,
+      "call2_ok": false,
+      "bullets_ok": true,
+      "buttons_ok": true,
+      "buttons_found": [
+        "route"
+      ],
+      "integration_ok": false,
+      "fails": [],
+      "snippet": "🌧 Regen noch 18 Min | 16° · heute bis 20° | 🅿️ Parkplatz · T− 9 Std 30 Min | Geparkt seit 11 Min · 😊 Tippen | Aktuelle Regendauer · Tippen | 0 von 29 Orten · 0 % erkundet |  |  |  | Timeline |  | Orte |  | Einst. | 🌧 Regen noch 18 Min. Tippen: Wetter und Tipps. Wischen: nächste Karte. | 🅿️ Parkplatz · T− 9 Std 30 Min. Tippen: Tipps. Wischen: nächste Karte. Unten: Timeline · Orte · Einst. | 🌧 Regen noch 18 Min. Tippen: Tipps. Wischen: nächste Karte. Unten: Timeline · Orte · Einst. | Showing "
+    },
+    {
+      "id": "fuss_notfall",
+      "q": "Mein Freund hat den Fuss gebrochen, wo koennen wir hin?",
+      "verdict": "FAIL",
+      "bridge_ok": true,
+      "call2_ok": false,
+      "bullets_ok": true,
+      "buttons_ok": true,
+      "buttons_found": [
+        "route"
+      ],
+      "integration_ok": false,
+      "fails": [],
+      "snippet": "🚆 Abfahrt 08:23 | Bahnhof Thema in Prisdorf · in 12 Min · hilft das? | 📍 Hier in der Gegend | 🌧 Regen noch 18 Min | 16° · heute bis 20° | 0 von 29 Orten · 0 % erkundet |  |  |  | Timeline |  | Orte |  | Einst. | 🚆 Abfahrt 08:23. Tippen: Tipps. Wischen: nächste Karte. Unten: Timeline · Orte · Einst. | 📍 Hier in der Gegend. Tippen: Tipps. Wischen: nächste Karte. Unten: Timeline · Orte · Einst. | 🌧 Regen noch 18 Min. Tippen: Wetter und Tipps. Wischen: nächste Karte. | Showing a Map created wit"
+    },
+    {
+      "id": "zahn",
+      "q": "Ich habe akute Zahnschmerzen, welcher Zahnarzt hat jetzt Notdienst?",
+      "verdict": "FAIL",
+      "bridge_ok": true,
+      "call2_ok": false,
+      "bullets_ok": true,
+      "buttons_ok": true,
+      "buttons_found": [
+        "route"
+      ],
+      "integration_ok": false,
+      "fails": [],
+      "snippet": "🅿️ Parkplatz · T− 9 Std 28 Min | Geparkt seit 13 Min · 😊 Tippen | 🌧 Regen noch 16 Min | Aktuelle Regendauer · Tippen | 🚆 Abfahrt 08:23 | Bahnhof Thema in Prisdorf · in 10 Min · hilft das? | 0 von 29 Orten · 0 % erkundet |  |  |  | Timeline |  | Orte |  | Einst. | 🅿️ Parkplatz · T− 9 Std 28 Min. Tippen: Tipps. Wischen: nächste Karte. Unten: Timeline · Orte · Einst. | 🌧 Regen noch 16 Min. Tippen: Tipps. Wischen: nächste Karte. Unten: Timeline · Orte · Einst. | 🚆 Abfahrt 08:23. Tippen: Tipps. "
+    },
+    {
+      "id": "outfit",
+      "q": "Was soll ich heute Abend anziehen?",
+      "verdict": "PASS",
+      "bridge_ok": true,
+      "call2_ok": true,
+      "bullets_ok": true,
+      "buttons_ok": null,
+      "buttons_found": [
+        "route"
+      ],
+      "integration_ok": true,
+      "fails": [],
+      "snippet": "📍 Hier in der Gegend | 🌧 Regen noch 16 Min | 16° · heute bis 20° | 🅿️ Parkplatz · T− 9 Std 28 Min | Geparkt seit 13 Min · 😊 Tippen | 0 von 29 Orten · 0 % erkundet |  | Zwei Optionen | ✕ | 🥇 | Feuerlöschteich und Gemeindeteich | Etwa 8 Minuten zu Fuß (604 m) | Schöner Ort für Spaziergänge und Tierbeobachtungen | Ausreichend Sitzgelegenheiten vorhanden | Tippen zum Wählen | 🥈 | Heimatverein für Dorfgemeinschaft Prisdorf von 1967 | Etwa 5 Minuten zu Fuß (398 m)"
+    }
+  ],
+  "summary": {
+    "pass": 2,
+    "total": 6,
+    "rate": 0.3333333333333333
+  }
+}

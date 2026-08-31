@@ -18,6 +18,7 @@ import {
   savePack,
   slugify,
   writeJson,
+  packCostIsCheap,
 } from './lib.mjs';
 import {
   DIRECTORY_QUERIES,
@@ -25,6 +26,7 @@ import {
   resolvePlace,
   placesText,
 } from './google.mjs';
+import { fetchOsmDirectory } from '../geo/osm.mjs';
 import { runQualityGate } from './qualityGate.mjs';
 
 loadEnvFile();
@@ -88,6 +90,9 @@ function addDirectorySpot(pack, place, stats) {
     approach_triggers: [],
     sub_pois: [],
   };
+  if (place.place_id) {
+    spot._google = { place_id: place.place_id };
+  }
   const trigger = {
     id,
     name: place.name,
@@ -99,7 +104,7 @@ function addDirectorySpot(pack, place, stats) {
     deep_data_pool: [
       {
         text: `GPS: ${place.lat.toFixed(6)}, ${place.lng.toFixed(6)}${place.address ? ` — ${place.address}` : ''}.`,
-        tags: ['gps_confirmed', 'sourced_google', 'directory'],
+        tags: ['gps_confirmed', place.source === 'osm' ? 'sourced_osm' : 'sourced_google', 'directory'],
       },
       {
         text: `Kategorie: ${category}. Für Offline-Fragen und Modul-2-Lookup; keine Wegweiser-Story.`,
@@ -339,7 +344,22 @@ async function main() {
   const center = { lat: pack.lat, lng: pack.lng };
   const stats = { added: 0, skippedNear: 0, skippedDup: 0, extras: 0 };
 
-  console.log(`[dir] discover directory around ${cityId}`);
+  const cheap = packCostIsCheap();
+  console.log(
+    `[dir] discover directory around ${cityId} mode=${cheap ? 'cheap/OSM' : 'full/Places'}`,
+  );
+  if (cheap) {
+    try {
+      const osmHits = await fetchOsmDirectory(center.lat, center.lng, radiusM);
+      console.log(`[dir] OSM hits ${osmHits.length}`);
+      for (const hit of osmHits) {
+        if (distM(center, { lat: hit.lat, lng: hit.lng }) > radiusM + 1200) continue;
+        addDirectorySpot(pack, hit, stats);
+      }
+    } catch (e) {
+      console.warn(`[dir] OSM directory failed — skip Places in cheap mode: ${e.message}`);
+    }
+  } else
   for (const dq of DIRECTORY_QUERIES) {
     const query = `${dq.q} ${pack.name || cityId}`;
     console.log(`[dir] ${query}`);
@@ -368,6 +388,7 @@ async function main() {
           address: r.formatted_address || r.vicinity || null,
           types: r.types || [],
           category: dq.categoryHint,
+          place_id: r.place_id || null,
         },
         stats,
       );

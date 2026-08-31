@@ -1,6 +1,6 @@
 /**
  * Beside-/Smalltalk-Modus: User spricht mit einer anderen Person.
- * Findus bleibt still, bis er per Name/Wake wieder angesprochen wird.
+ * Yorro bleibt still, bis er per Name/Wake wieder angesprochen wird.
  * In-Memory sticky (kein Persist) — kurze Hold-Zeit.
  */
 

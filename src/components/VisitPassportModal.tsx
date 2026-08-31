@@ -4,34 +4,26 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  useWindowDimensions,
   View,
 } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors, spacing } from '../constants/theme';
 import { UI_LAYER } from '../constants/uiLayers';
 import { useFinnusStore } from '../store/useFinnusStore';
 import { getNavigationRoutePlan } from '../services/navigation';
-import {
-  STAMP_MAP_LEGEND,
-  colorForStampCategory,
-  resolveStampMapCategory,
-  type StampMapCategory,
-} from '../services/navigation/stampMapCategories';
-import {
-  MODUL1_MAP_CATEGORY,
-  MODUL1_MAP_COLORS,
-} from '../services/navigation/stampMapModul1';
 import { clearNavigationHard } from '../services/navigation/hardNavOverride';
 import {
   getTopQuickAddTargets,
   loadNavSearchHistory,
   recordNavSearch,
 } from '../services/navigation/navSearchHistory';
-import { StampCityMap, type StampMapMarker } from './StampCityMap';
 import { DraggableStopList } from './DraggableStopList';
 import { SwipeBackView } from './SwipeBackView';
-import { computeAreaCoverage } from '../services/discovery/areaCoverageService';
+import {
+  computeCityExploreProgress,
+} from '../services/discovery/cityExploreProgress';
 import { ensureActiveCityCoverageBounds } from '../services/discovery/cityCoverageBounds';
+import { getCachedUserProfile } from '../services/userProfileService';
 import {
   getWalkTrackSnapshot,
   loadWalkTrack,
@@ -47,14 +39,14 @@ import {
   type PassportTabLegacy,
 } from './Header';
 import {
-  loadStampPassportUxPrefs,
-  markStampMapInteracted,
-  shouldShowStampMapOnboarding,
-} from '../services/ui/stampPassportUxPrefs';
-import {
   getPlanBikeMPerMin,
   getPlanWalkMPerMin,
 } from '../services/mobility/paceProfile';
+import {
+  buildStampRecapShareText,
+  buildTripInviteShareText,
+  shareFindusText,
+} from '../services/share/shareMoment';
 
 type Props = {
   visible: boolean;
@@ -69,26 +61,11 @@ function formatKm(m: number | null | undefined): string {
   return `${(m / 1000).toFixed(1)} km`;
 }
 
-const CATEGORY_PLURAL: Partial<Record<StampMapCategory, string>> = {
-  modul1: 'Modul-1-Trigger',
-  essen: 'Restaurants',
-  cafe: 'Cafés',
-  kultur: 'Kulturorte',
-  natur: 'Naturspots',
-  kirche: 'Kirchen',
-  transport: 'Transit-Stops',
-  hotel: 'Hotels',
-  einkaufen: 'Läden',
-  service: 'Services',
-  freizeit: 'Freizeitorte',
-  sonstiges: 'Orte',
-};
-
 /**
  * Stempelkarte / Reisepass — Overlay statt RN-Modal
  * (Android blockiert Modals oft während aktiver Navigation).
  */
-export function VisitPassportModal({
+export const VisitPassportModal = React.memo(function VisitPassportModal({
   visible,
   onClose,
   initialTab,
@@ -100,23 +77,17 @@ export function VisitPassportModal({
   const navVisible = useFinnusStore((s) => s.navVisible);
   const multiStopTour = useFinnusStore((s) => s.multiStopTour);
   const [tab, setTab] = useState<PassportTab>('discover');
-  const [showVisited, setShowVisited] = useState(true);
-  const [enabledCategories, setEnabledCategories] = useState<
-    Set<StampMapCategory>
-  >(() => new Set());
   const [navHistory, setNavHistory] = useState<string[]>([]);
   const [quickAdds, setQuickAdds] = useState(getTopQuickAddTargets());
   const [routeListDragging, setRouteListDragging] = useState(false);
-  const [showMapOnboarding, setShowMapOnboarding] = useState(true);
   const [coverageTick, setCoverageTick] = useState(0);
-  const [mapWidth, setMapWidth] = useState(0);
-  const { width: windowWidth } = useWindowDimensions();
   const lastGpsLat = useGpsStore((s) => s.lat);
   const lastGpsLng = useGpsStore((s) => s.lng);
   const transportMode = useFinnusStore((s) => s.transportMode);
 
   const navigating = navActive && navVisible;
   const routePlan = navigating || multiStopTour ? getNavigationRoutePlan() : null;
+  const insets = useSafeAreaInsets();
   const hasRoute =
     !!multiStopTour ||
     (navigating && (routePlan?.stops.length ?? 0) > 0) ||
@@ -159,9 +130,6 @@ export function VisitPassportModal({
       setNavHistory(h);
       setQuickAdds(getTopQuickAddTargets());
     });
-    void loadStampPassportUxPrefs().then(() => {
-      setShowMapOnboarding(shouldShowStampMapOnboarding());
-    });
   }, [visible]);
 
   useEffect(() => {
@@ -182,85 +150,64 @@ export function VisitPassportModal({
     return null;
   }, [lastGpsLat, lastGpsLng]);
 
-  const areaCoverage = useMemo(() => {
+  const exploreProgress = useMemo(() => {
+    if (!visible) {
+      return {
+        seenPlaces: 0,
+        totalPlaces: 0,
+        placePercent: 0,
+        areaPercent: 0,
+        cityName: null,
+        cityId: null,
+        line: '',
+      };
+    }
     void coverageTick;
-    return computeAreaCoverage({
+    const cityId = (getCachedUserProfile()?.cityId ?? '').trim().toLowerCase();
+    return computeCityExploreProgress({
       pois,
+      visitedHistory,
       walkTrack: getWalkTrackSnapshot(),
       userLoc,
+      cityId: cityId || null,
     });
-  }, [pois, userLoc, coverageTick]);
+  }, [visible, pois, userLoc, coverageTick, visitedHistory]);
 
-  const onMapInteracted = useCallback(() => {
-    void markStampMapInteracted().then(() => {
-      setShowMapOnboarding(false);
-    });
+  const onClearRoute = useCallback(() => {
+    void clearNavigationHard({ silent: true });
   }, []);
 
-  const toggleCategory = useCallback((id: StampMapCategory) => {
-    setEnabledCategories((prev) => {
-      const next = new Set(prev);
-      if (next.has(id)) next.delete(id);
-      else next.add(id);
-      return next;
-    });
-  }, []);
-
-  const visitedPoiIds = useMemo(() => {
-    const s = new Set<number>();
-    for (const e of visitedHistory) s.add(e.poiId);
-    return s;
-  }, [visitedHistory]);
-
-  /** Stempel ohne Match im aktuellen Pack — trotzdem auf der Karte zeigen. */
-  const orphanVisited = useMemo((): StampMapMarker[] => {
-    const poiById = new Map(pois.map((p) => [p.id, p]));
-    const out: StampMapMarker[] = [];
-    for (const e of visitedHistory) {
-      const pack = poiById.get(e.poiId);
-      if (pack && Number.isFinite(pack.lat) && Number.isFinite(pack.lng)) {
-        continue;
-      }
-      const lat = e.lat;
-      const lng = e.lng;
-      if (
-        lat == null ||
-        lng == null ||
-        !Number.isFinite(lat) ||
-        !Number.isFinite(lng)
-      ) {
-        continue;
-      }
-      const category = resolveStampMapCategory({
-        category: null,
-        name: e.name,
-        kind: e.kind,
-        tags: null,
-      });
-      out.push({
-        id: e.poiId,
-        name: e.name,
-        lat,
-        lng,
-        visited: true,
-        category,
-        color: colorForStampCategory(category),
-      });
-    }
-    return out;
-  }, [visitedHistory, pois]);
-
-  // Alte Stempel ohne lat/lng aus aktuellem Pack nachziehen (einmalig soft)
+  // Alte Stempel ohne lat/lng aus aktuellem Pack nachziehen (einmalig soft).
   useEffect(() => {
     if (!visible || !pois.length) return;
+    const activeCity =
+      (getCachedUserProfile()?.cityId ?? '').trim().toLowerCase() || null;
     const cur = useFinnusStore.getState().visitedHistory;
     let changed = false;
     const next = cur.map((e) => {
       if (e.lat != null && e.lng != null) return e;
-      const p = pois.find((x) => x.id === e.poiId);
+      const stampCity = (e.cityId ?? '').trim().toLowerCase();
+      if (stampCity && activeCity && stampCity !== activeCity) return e;
+      const nameNorm = (e.name ?? '').toLowerCase().replace(/\s+/g, ' ').trim();
+      const p = pois.find((x) => {
+        if (x.id !== e.poiId) return false;
+        const pn = (x.name ?? '').toLowerCase().replace(/\s+/g, ' ').trim();
+        return (
+          !nameNorm ||
+          !pn ||
+          pn === nameNorm ||
+          pn.includes(nameNorm) ||
+          nameNorm.includes(pn)
+        );
+      });
       if (!p || !Number.isFinite(p.lat) || !Number.isFinite(p.lng)) return e;
       changed = true;
-      return { ...e, lat: p.lat, lng: p.lng };
+      return {
+        ...e,
+        lat: p.lat,
+        lng: p.lng,
+        cityId: e.cityId ?? activeCity,
+      };
     });
     if (changed) {
       useFinnusStore.setState({ visitedHistory: next });
@@ -270,23 +217,6 @@ export function VisitPassportModal({
     }
   }, [visible, pois, visitedHistory.length]);
 
-  const discoveredCount = visitedPoiIds.size;
-
-  const mapHeight = useMemo(() => {
-    const w =
-      mapWidth > 40
-        ? mapWidth
-        : Math.max(280, windowWidth - spacing.md * 2);
-    return Math.round((w * 10) / 12);
-  }, [mapWidth, windowWidth]);
-
-  const areaTotal = useMemo(
-    () =>
-      pois.filter((p) => p.kind === 'area' || p.kind === 'legacy' || !p.kind)
-        .length,
-    [pois],
-  );
-
   const onQuickAdd = useCallback(
     (prompt: string) => {
       void recordNavSearch(prompt);
@@ -295,24 +225,24 @@ export function VisitPassportModal({
     [onQuickNavAdd],
   );
 
-  const handleBack = useCallback(() => {
-    if (showMapOnboarding) {
-      setShowMapOnboarding(false);
-      return;
-    }
-    onClose();
-  }, [showMapOnboarding, onClose]);
-
   if (!visible) return null;
 
   return (
     <View style={styles.overlay} pointerEvents="auto">
       <Pressable
         style={styles.backdropTap}
-        onPress={handleBack}
+        onPress={onClose}
         accessibilityLabel="Schließen"
       />
-      <SwipeBackView enabled={visible} onBack={handleBack} style={styles.sheet}>
+      <SwipeBackView
+        enabled={visible}
+        captureHardwareBack={false}
+        onBack={onClose}
+        style={[
+          styles.sheet,
+          { paddingBottom: Math.max(insets.bottom, spacing.lg) },
+        ]}
+      >
         <View style={styles.header}>
           <View style={styles.headerText}>
             <Text style={styles.kicker}>🎫 Stempelkarte</Text>
@@ -320,13 +250,7 @@ export function VisitPassportModal({
               {multiStopTour?.title ?? 'Deine Tour'}
             </Text>
             <Text style={styles.subtitle}>
-              {areaCoverage.cityName
-                ? `${areaCoverage.percent} % von ${areaCoverage.cityName} erkundet · `
-                : areaCoverage.percent > 0
-                  ? `${areaCoverage.percent} % der Gegend erkundet · `
-                  : ''}
-              {discoveredCount}
-              {areaTotal > 0 ? ` von ${areaTotal}` : ''} Orte entdeckt
+              {exploreProgress.line}
               {multiStopTour ? ` · ${multiStopTour.stops.length} Stopps` : ''}
             </Text>
           </View>
@@ -364,172 +288,72 @@ export function VisitPassportModal({
             keyboardShouldPersistTaps="handled"
             showsVerticalScrollIndicator={false}
           >
-            {showMapOnboarding ? (
-              <View style={styles.guideCard}>
-                <Text style={styles.guideTitle}>Deine Entdeckungen</Text>
-                <Text style={styles.guideBody}>
-                  Oben filterst du Verweilt, Modul-1-Trigger, Restaurants und
-                  mehr — darunter die Karte mit Fog-of-War und deinem
-                  Erkundungsstand.
-                </Text>
-              </View>
-            ) : null}
-
-            {/* Filter oben: Verweilt · Modul 1 · Restaurants · … */}
-            <View style={styles.filterBlock}>
-              <Text style={styles.filterHint}>
-                Tippe, um Pins auf der Karte ein- oder auszublenden. „Modul-1-Trigger“
-                zeigt Orte, an denen Findus von allein sprechen würde (ohne
-                Prefs wie „keine Kirchen“).
-              </Text>
-              <View style={styles.legendRow}>
-                <Pressable
-                  onPress={() => setShowVisited((v) => !v)}
-                  style={[
-                    styles.legendItem,
-                    showVisited && styles.legendItemOn,
-                    !showVisited && styles.legendItemOff,
-                  ]}
-                  accessibilityRole="button"
-                  accessibilityState={{ selected: showVisited }}
-                  accessibilityLabel="Verweilte Orte ein- oder ausblenden"
-                >
-                  <View style={[styles.dot, styles.dotVisited]}>
-                    <Text style={styles.dotCheck}>✓</Text>
-                  </View>
-                  <Text
-                    style={[
-                      styles.legendLabel,
-                      !showVisited && styles.legendLabelOff,
-                    ]}
-                  >
-                    Verweilt
-                  </Text>
-                </Pressable>
-                {STAMP_MAP_LEGEND.map((item) => {
-                  const on = enabledCategories.has(item.id);
-                  const isModul1 = item.id === MODUL1_MAP_CATEGORY;
-                  return (
-                    <Pressable
-                      key={item.id}
-                      onPress={() => toggleCategory(item.id)}
-                      style={[
-                        styles.legendItem,
-                        on && styles.legendItemOn,
-                        !on && styles.legendItemOff,
-                      ]}
-                      accessibilityRole="button"
-                      accessibilityState={{ selected: on }}
-                      accessibilityLabel={`${item.label}${on ? ' ausblenden' : ' einblenden'}`}
-                    >
-                      {isModul1 ? (
-                        <View style={styles.modul1Dots}>
-                          <View
-                            style={[
-                              styles.dot,
-                              { backgroundColor: MODUL1_MAP_COLORS.neutral },
-                              !on && styles.dotOff,
-                            ]}
-                          />
-                          <View
-                            style={[
-                              styles.dot,
-                              { backgroundColor: MODUL1_MAP_COLORS.liked },
-                              !on && styles.dotOff,
-                            ]}
-                          />
-                          <View
-                            style={[
-                              styles.dot,
-                              { backgroundColor: MODUL1_MAP_COLORS.visited },
-                              !on && styles.dotOff,
-                            ]}
-                          />
-                        </View>
-                      ) : (
-                        <View
-                          style={[
-                            styles.dot,
-                            { backgroundColor: item.color },
-                            !on && styles.dotOff,
-                          ]}
-                        />
-                      )}
-                      <Text
-                        style={[
-                          styles.legendLabel,
-                          !on && styles.legendLabelOff,
-                        ]}
-                      >
-                        {CATEGORY_PLURAL[item.id] ?? item.label}
-                      </Text>
-                    </Pressable>
-                  );
-                })}
-              </View>
-              {enabledCategories.has(MODUL1_MAP_CATEGORY) ? (
-                <View style={styles.modul1ToneRow}>
-                  <View style={styles.modul1ToneItem}>
-                    <View
-                      style={[
-                        styles.dot,
-                        { backgroundColor: MODUL1_MAP_COLORS.neutral },
-                      ]}
-                    />
-                    <Text style={styles.modul1ToneLabel}>Neutral</Text>
-                  </View>
-                  <View style={styles.modul1ToneItem}>
-                    <View
-                      style={[
-                        styles.dot,
-                        { backgroundColor: MODUL1_MAP_COLORS.liked },
-                      ]}
-                    />
-                    <Text style={styles.modul1ToneLabel}>Gerne · offen</Text>
-                  </View>
-                  <View style={styles.modul1ToneItem}>
-                    <View
-                      style={[
-                        styles.dot,
-                        styles.dotVisited,
-                        { backgroundColor: MODUL1_MAP_COLORS.visited },
-                      ]}
-                    >
-                      <Text style={styles.dotCheck}>✓</Text>
-                    </View>
-                    <Text style={styles.modul1ToneLabel}>Schon da</Text>
-                  </View>
-                </View>
+            <View style={styles.statsBlock}>
+              <Text style={styles.statsTitle}>Deine Entdeckungen</Text>
+              {exploreProgress.cityName ? (
+                <Text style={styles.statsCity}>{exploreProgress.cityName}</Text>
               ) : null}
-            </View>
-
-            {/* Karte + Prozent / Fortschritt */}
-            <View
-              style={styles.mapBlock}
-              onLayout={(e) => setMapWidth(e.nativeEvent.layout.width)}
-            >
-              <View style={styles.coverageBadge}>
-                <Text style={styles.coverageValue}>{areaCoverage.percent} %</Text>
-                <Text style={styles.coverageLabel}>
-                  {areaCoverage.cityName
-                    ? `${areaCoverage.cityName} erkundet`
-                    : 'Fläche erkundet'}
-                </Text>
-                <Text style={styles.coverageCount}>
-                  {discoveredCount}
-                  {areaTotal > 0 ? ` / ${areaTotal}` : ''} Orte
-                </Text>
+              <View style={styles.statsRow}>
+                <View style={styles.statItem}>
+                  <Text style={styles.statValue}>
+                    {exploreProgress.areaPercent} %
+                  </Text>
+                  <Text style={styles.statLabel}>Fläche erkundet</Text>
+                </View>
+                <View style={styles.statDivider} />
+                <View style={styles.statItem}>
+                  <Text style={styles.statValue}>
+                    {exploreProgress.seenPlaces}
+                    {exploreProgress.totalPlaces > 0
+                      ? ` / ${exploreProgress.totalPlaces}`
+                      : ''}
+                  </Text>
+                  <Text style={styles.statLabel}>
+                    Orte
+                    {exploreProgress.placePercent > 0
+                      ? ` · ${exploreProgress.placePercent} %`
+                      : ''}
+                  </Text>
+                </View>
               </View>
-              <StampCityMap
-                pois={pois}
-                visitedPoiIds={visitedPoiIds}
-                showVisited={showVisited}
-                orphanVisited={orphanVisited}
-                enabledCategories={enabledCategories}
-                height={mapHeight}
-                onMapInteracted={onMapInteracted}
-                showDayRoute={false}
-              />
+              <Text style={styles.statsHint}>
+                Yorro merkt sich, wo du warst — je mehr du unterwegs bist, desto
+                vollständiger wird dein Entdeckungsstand.
+              </Text>
+              <View style={styles.shareRow}>
+                <Pressable
+                  style={styles.shareChip}
+                  onPress={() => {
+                    void shareFindusText(
+                      buildStampRecapShareText({
+                        cityName: exploreProgress.cityName,
+                        seenPlaces: exploreProgress.seenPlaces,
+                        areaPercent: exploreProgress.areaPercent,
+                      }),
+                      exploreProgress.cityName ?? 'Stempelkarte',
+                    );
+                  }}
+                  accessibilityRole="button"
+                  accessibilityLabel="Entdeckungen teilen"
+                >
+                  <Text style={styles.shareChipTxt}>Entdeckungen teilen</Text>
+                </Pressable>
+                <Pressable
+                  style={styles.shareChip}
+                  onPress={() => {
+                    void shareFindusText(
+                      buildTripInviteShareText({
+                        cityName: exploreProgress.cityName,
+                      }),
+                      'Yorro mitnehmen',
+                    );
+                  }}
+                  accessibilityRole="button"
+                  accessibilityLabel="Freund einladen"
+                >
+                  <Text style={styles.shareChipTxt}>Freund einladen</Text>
+                </Pressable>
+              </View>
             </View>
           </ScrollView>
         ) : null}
@@ -576,10 +400,21 @@ export function VisitPassportModal({
               <View style={styles.emptyCard}>
                 <Text style={styles.emptyEmoji}>🧭</Text>
                 <Text style={styles.empty}>
-                  Noch keine aktive Route. Sag Findus wohin — oder nutze Schnell
+                  Noch keine aktive Route. Sag Yorro wohin — oder nutze Schnell
                   hinzufügen unten.
                 </Text>
               </View>
+            ) : null}
+
+            {hasRoute ? (
+              <Pressable
+                style={styles.clearRouteBtn}
+                onPress={onClearRoute}
+                accessibilityRole="button"
+                accessibilityLabel="Route löschen"
+              >
+                <Text style={styles.clearRouteTxt}>Route löschen</Text>
+              </Pressable>
             ) : null}
 
             <View style={styles.quickBlock}>
@@ -614,22 +449,12 @@ export function VisitPassportModal({
                 </>
               ) : null}
             </View>
-
-            <Pressable
-              style={styles.clearRouteBtn}
-              onPress={() => {
-                void clearNavigationHard({ silent: true });
-                onClose();
-              }}
-            >
-              <Text style={styles.clearRouteTxt}>Route löschen</Text>
-            </Pressable>
           </ScrollView>
         ) : null}
       </SwipeBackView>
     </View>
   );
-}
+});
 
 const styles = StyleSheet.create({
   overlay: {
@@ -654,207 +479,14 @@ const styles = StyleSheet.create({
     zIndex: 1,
     elevation: 1,
   },
-  mapPane: {
-    height: 280,
-    flexShrink: 0,
-    paddingHorizontal: spacing.md,
-    gap: 8,
-    zIndex: 2,
-    elevation: 4,
-    backgroundColor: colors.bgElevated,
-  },
   discoverScroll: {
     paddingHorizontal: spacing.md,
     paddingBottom: spacing.xl,
     gap: 14,
   },
-  filterBlock: {
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 14,
-    backgroundColor: colors.bg,
-    padding: spacing.md,
-    gap: 8,
-  },
-  filterTitle: {
-    color: colors.text,
-    fontSize: 15,
-    fontWeight: '800',
-  },
-  filterHint: {
-    color: colors.textMuted,
-    fontSize: 12,
-    lineHeight: 16,
-  },
-  legendRow: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 8,
-  },
-  legendItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 6,
-    paddingHorizontal: 10,
-    paddingVertical: 7,
-    borderRadius: 20,
-    borderWidth: 1,
-    borderColor: colors.border,
-    backgroundColor: colors.surface,
-  },
-  legendItemOn: {
-    borderColor: colors.accent,
-    backgroundColor: colors.accentSoft,
-  },
-  legendItemOff: {
-    opacity: 0.55,
-  },
-  legendLabel: {
-    color: colors.text,
-    fontSize: 12,
-    fontWeight: '600',
-  },
-  legendLabelOff: {
-    color: colors.textMuted,
-  },
-  dot: {
-    width: 10,
-    height: 10,
-    borderRadius: 5,
-  },
-  dotOff: {
-    opacity: 0.35,
-  },
-  modul1Dots: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 2,
-  },
-  modul1ToneRow: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 12,
-    marginTop: 4,
-  },
-  modul1ToneItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 5,
-  },
-  modul1ToneLabel: {
-    color: colors.textMuted,
-    fontSize: 11,
-    fontWeight: '600',
-  },
-  dotVisited: {
-    width: 14,
-    height: 14,
-    borderRadius: 7,
-    backgroundColor: colors.accent,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  dotCheck: {
-    color: colors.bg,
-    fontSize: 8,
-    fontWeight: '800',
-    lineHeight: 10,
-  },
-  timelineHeader: {
-    gap: 4,
-    marginTop: 4,
-  },
-  timelineTitle: {
-    color: colors.text,
-    fontSize: 17,
-    fontWeight: '800',
-  },
-  timelineSub: {
-    color: colors.textMuted,
-    fontSize: 12,
-    lineHeight: 16,
-  },
-  searchInput: {
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 12,
-    backgroundColor: colors.bg,
-    paddingHorizontal: spacing.md,
-    paddingVertical: 10,
-    color: colors.text,
-    fontSize: 15,
-  },
-  guideCard: {
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 14,
-    backgroundColor: colors.bg,
-    padding: spacing.md,
-    gap: 6,
-  },
-  guideTitle: {
-    color: colors.text,
-    fontSize: 15,
-    fontWeight: '800',
-  },
-  guideBody: {
-    color: colors.textMuted,
-    fontSize: 13,
-    lineHeight: 18,
-  },
-  stampsPane: {
-    flex: 1,
-    minHeight: 0,
-  },
-  mapBlock: {
-    marginHorizontal: -spacing.md,
-    paddingHorizontal: 0,
-    gap: 10,
-    paddingBottom: spacing.sm,
-    position: 'relative',
-  },
-  coverageBadge: {
-    position: 'absolute',
-    top: spacing.sm,
-    right: spacing.md,
-    zIndex: UI_LAYER.sheet + 2,
-    backgroundColor: 'rgba(8, 18, 14, 0.88)',
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: colors.accent,
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    alignItems: 'center',
-    minWidth: 72,
-  },
-  coverageValue: {
-    color: colors.accent,
-    fontSize: 22,
-    fontWeight: '800',
-    lineHeight: 26,
-  },
-  coverageLabel: {
-    color: colors.textMuted,
-    fontSize: 10,
-    fontWeight: '600',
-    textTransform: 'uppercase',
-    letterSpacing: 0.4,
-    marginTop: 2,
-  },
-  coverageCount: {
-    color: colors.text,
-    fontSize: 11,
-    fontWeight: '700',
-    marginTop: 4,
-  },
   bodyScroll: {
     flex: 1,
     minHeight: 0,
-  },
-  stampList: {
-    paddingHorizontal: spacing.md,
-    paddingBottom: spacing.xl,
-    gap: 14,
   },
   header: {
     flexDirection: 'row',
@@ -905,65 +537,76 @@ const styles = StyleSheet.create({
     gap: 10,
     flexGrow: 1,
   },
-  toggleRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: spacing.md,
-    paddingVertical: 4,
-    paddingHorizontal: 4,
-  },
-  toggleText: {
-    flex: 1,
-    minWidth: 0,
-  },
-  toggleTitle: {
-    color: colors.text,
-    fontSize: 15,
-    fontWeight: '700',
-  },
-  toggleHint: {
-    color: colors.textMuted,
-    fontSize: 12,
-    marginTop: 2,
-  },
   statsBlock: {
     borderWidth: 1,
     borderColor: colors.border,
     borderRadius: 14,
     backgroundColor: colors.bg,
-    padding: spacing.md,
-    gap: 4,
+    padding: spacing.lg,
+    gap: spacing.sm,
   },
-  nerdBlock: {
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 14,
-    backgroundColor: colors.bg,
-    padding: spacing.md,
-    gap: 10,
-  },
-  nerdTitle: {
+  statsTitle: {
     color: colors.text,
-    fontSize: 15,
+    fontSize: 17,
     fontWeight: '800',
   },
-  nerdRow: {
-    gap: 2,
-  },
-  nerdPoi: {
+  statsCity: {
     color: colors.accent,
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: '700',
   },
-  nerdFact: {
+  statsRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: spacing.sm,
+  },
+  statItem: {
+    flex: 1,
+    alignItems: 'center',
+    gap: 4,
+  },
+  statDivider: {
+    width: 1,
+    height: 48,
+    backgroundColor: colors.border,
+    marginHorizontal: spacing.md,
+  },
+  statValue: {
+    color: colors.accent,
+    fontSize: 28,
+    fontWeight: '800',
+    lineHeight: 32,
+  },
+  statLabel: {
+    color: colors.textMuted,
+    fontSize: 12,
+    fontWeight: '600',
+    textAlign: 'center',
+  },
+  statsHint: {
     color: colors.textMuted,
     fontSize: 13,
     lineHeight: 18,
+    marginTop: spacing.sm,
   },
-  statsLine: {
-    color: colors.text,
-    fontSize: 14,
-    lineHeight: 20,
+  shareRow: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 8,
+    marginTop: spacing.md,
+  },
+  shareChip: {
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: 999,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: colors.accent,
+    backgroundColor: 'rgba(196, 163, 90, 0.16)',
+  },
+  shareChipTxt: {
+    color: colors.accent,
+    fontSize: 13,
+    fontWeight: '700',
   },
   emptyCard: {
     alignItems: 'center',
@@ -984,89 +627,11 @@ const styles = StyleSheet.create({
     lineHeight: 22,
     textAlign: 'center',
   },
-  card: {
-    flexDirection: 'row',
-    gap: 14,
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 18,
-    backgroundColor: colors.bg,
-    padding: spacing.md,
-  },
-  stampSeal: {
-    width: 58,
-    height: 58,
-    borderRadius: 29,
-    borderWidth: 2,
-    borderColor: colors.accent,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: colors.accentSoft,
-  },
-  stampEmoji: {
-    fontSize: 22,
-    lineHeight: 26,
-  },
-  stampNum: {
-    color: colors.accent,
-    fontWeight: '800',
-    fontSize: 10,
-    marginTop: 1,
-  },
-  cardBody: {
-    flex: 1,
-    minWidth: 0,
-  },
-  cardTitle: {
-    color: colors.text,
-    fontSize: 17,
-    fontWeight: '700',
-  },
-  cardMeta: {
-    color: colors.textMuted,
-    fontSize: 12,
-    marginTop: 2,
-    marginBottom: 6,
-  },
-  summary: {
-    color: colors.text,
-    fontSize: 14,
-    lineHeight: 20,
-    opacity: 0.9,
-  },
   tabs: {
     flexDirection: 'row',
     gap: 8,
     paddingHorizontal: spacing.md,
     marginBottom: spacing.sm,
-  },
-  historyBar: {
-    paddingHorizontal: spacing.md,
-    marginBottom: spacing.sm,
-  },
-  histChip: {
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 10,
-    backgroundColor: colors.surface,
-    borderWidth: 1,
-    borderColor: colors.border,
-    marginRight: 6,
-  },
-  histChipOn: {
-    borderColor: colors.accent,
-    backgroundColor: colors.accentSoft,
-  },
-  histChipText: {
-    color: colors.textMuted,
-    fontSize: 12,
-    fontWeight: '700',
-  },
-  histChipTextOn: { color: colors.text },
-  histSummary: {
-    color: colors.textMuted,
-    fontSize: 11,
-    marginTop: 6,
   },
   tab: {
     flex: 1,
@@ -1088,19 +653,6 @@ const styles = StyleSheet.create({
   },
   tabTextActive: {
     color: colors.accent,
-  },
-  routeSummary: {
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 16,
-    backgroundColor: colors.bg,
-    padding: spacing.md,
-    gap: 6,
-  },
-  routeLine: {
-    color: colors.text,
-    fontSize: 14,
-    lineHeight: 20,
   },
   routeStop: {
     flexDirection: 'row',
@@ -1132,10 +684,6 @@ const styles = StyleSheet.create({
     color: colors.text,
     fontSize: 15,
     fontWeight: '700',
-  },
-  routeStopDone: {
-    color: colors.textMuted,
-    textDecorationLine: 'line-through',
   },
   quickBlock: {
     marginTop: spacing.md,
@@ -1179,14 +727,18 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   clearRouteBtn: {
-    marginTop: spacing.md,
+    marginTop: spacing.sm,
+    marginBottom: spacing.sm,
     alignItems: 'center',
-    paddingVertical: 12,
-    borderRadius: 10,
+    paddingVertical: 14,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: 'rgba(217, 107, 92, 0.55)',
     backgroundColor: 'rgba(217, 107, 92, 0.22)',
   },
   clearRouteTxt: {
     color: colors.danger,
-    fontWeight: '700',
+    fontWeight: '800',
+    fontSize: 15,
   },
 });

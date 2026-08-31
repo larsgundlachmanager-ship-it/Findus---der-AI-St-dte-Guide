@@ -34,7 +34,15 @@ function scoreQa(entry: PackOfflineQa, subject: string): number {
   if (!s) return 0;
   if (q === s || q.replace(/\?+$/, '') === s.replace(/\?+$/, '')) return 100;
   if (q.includes(s) || s.includes(q.replace(/\?+$/, '').slice(0, 24))) return 70;
-  const tokens = s.split(/[^a-zäöüß0-9]+/i).filter((t) => t.length > 2);
+  const tokens = s
+    .split(/[^a-zäöüß0-9]+/i)
+    .filter((t) => t.length > 2)
+    .filter(
+      (t) =>
+        !/^(was|ist|das|der|die|dem|den|ein|eine|und|oder|hier|dort|bitte|mich|zum|zur|von|aus|in|im|am|an|bei|mit|für|fuer|über|ueber|wo|gibt|wie|alt|hoch|breit|tief|groß|gross|wer|war|wann|warum)$/i.test(
+          t,
+        ),
+    );
   if (!tokens.length) return 0;
   let hit = 0;
   for (const t of tokens) {
@@ -50,7 +58,7 @@ export function lookupOfflineQa(
 ): PackOfflineQa[] {
   const ranked = entries
     .map((e) => ({ e, score: scoreQa(e, subject) }))
-    .filter((x) => x.score >= 28)
+    .filter((x) => x.score >= 52)
     .sort((a, b) => b.score - a.score);
   return ranked.slice(0, limit).map((x) => x.e);
 }

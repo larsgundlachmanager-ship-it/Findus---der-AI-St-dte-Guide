@@ -8,21 +8,60 @@ import {
   hasGeminiApiKey,
   resolveFindusSystemInstruction,
   resolveMasterPromptContext,
+  streamGeminiSentences,
 } from '../../services/geminiService';
 import {
   FINDUS_ANSWER_FIRST_BLOCK,
   FINDUS_REBOOT_MANAGER_THINK_AHEAD_BLOCK,
+  FINDUS_SYNTHESIS_RAIL_BLOCK,
   FINDUS_FEW_SHOT_DISCLAIMER,
   FINDUS_BRIDGE_CONTINUITY_BLOCK,
   FINDUS_LIVE_CHAT_HUMAN_BLOCK,
+  FINDUS_SPEECH_LENGTH_BLOCK,
+  FINDUS_CORE_WOVEN_SPEECH_BLOCK,
+  FINDUS_TYPICAL_SPEECH_MAX_CHARS,
+  FINDUS_HELP_FIRST_MONETIZATION_BLOCK,
 } from '../../services/concierge/findusResponsePolicy';
+import type { HelpFirstMoment } from '../../services/affiliate/helpFirstMonetization';
 import { chunkTextForTts } from '../speech/ttsChunker';
 import { humanizeAgentDraft, humanizeBullets } from '../speech/draftToHumanSpeech';
 import type { AgentResult, Module2ActionButton, SynthesisPayload } from '../types';
 import { formatThreadContextForPrompt } from '../../services/memory/conversationThreads';
 import { getLiveChatTurnContext } from '../../services/handsFree/liveChatTurnContext';
+import {
+  buildCall2TailPrompt,
+  mergeCall2Bullets,
+  parseCall2Tail,
+} from './pipeline/call2Tail';
+import { buildCall2HistoryBlock } from './pipeline/topicScopeHistory';
+import type { TurnRucksackV1 } from './pipeline/turnRucksack';
+import { upsertUserMemoryFacts } from '../../db/userMemoryFacts';
+import { getCachedUserProfile } from '../../services/userProfileService';
+import {
+  buildPersonalityMatrixPromptBlock,
+  resolveEffectivePersonalityMatrix,
+} from '../../services/persona/personalityMatrixPrompt';
 
-function buildSynthesisBlock(budget: number): string {
+function resolveSynthesisPersonaBlock(rucksack?: TurnRucksackV1 | null): string {
+  const profile = getCachedUserProfile();
+  const matrixOverride = rucksack?.persona
+    ? resolveEffectivePersonalityMatrix({
+        coreRole: rucksack.persona.coreRole as never,
+        vibeTone: rucksack.persona.vibeTone as never,
+        knowledgeStyle: rucksack.persona.knowledgeStyle as never,
+        spleens: rucksack.persona.spleens as never,
+      } as import('../../types/userProfile').UserProfile)
+    : undefined;
+  return buildPersonalityMatrixPromptBlock(profile, {
+    matrixOverride,
+    activeSpleens: matrixOverride?.spleens,
+  });
+}
+
+function buildSynthesisBlock(
+  budget: number,
+  opts?: { plainSpeech?: boolean; rucksack?: TurnRucksackV1 | null },
+): string {
   const live = getLiveChatTurnContext();
   const liveBlock =
     live.active && live.humanTone ? `\n${FINDUS_LIVE_CHAT_HUMAN_BLOCK}\n` : '';
@@ -30,21 +69,28 @@ function buildSynthesisBlock(budget: number): string {
     live.active && live.askBeforeDeepResearch
       ? '\n- Live-Chat: keine ungefragte Deep-Web-Recherche — erst kurze Antwort, bei Bedarf Rückfrage/Button „Tiefer recherchieren“.\n'
       : '';
-  const maxChars = live.active && live.humanTone ? Math.min(budget, 280) : budget;
   const bridgeBit = live.active
-    ? '- LIVE-CHAT: KEINE Bridge, kein Ack, kein Name am Satzanfang. Erster Satz = Antwort.\n'
+    ? '- LIVE-CHAT: kurze Bridge/Ack darf schon gesprochen sein — Haupt-Speech setzt nahtlos fort, wiederholt Bridge nicht. Erster Satz = Antwort.\n'
     : `${FINDUS_BRIDGE_CONTINUITY_BLOCK}\n`;
+  const outFmt = opts?.plainSpeech
+    ? 'Antworte NUR als Vorlese-Text (kein JSON, keine Meta-Labels).'
+    : 'JSON only: {"speech":"...","bullets":[]}';
   return `=== REBOOT SYNTHESE (Call-2) ===
 Du bekommst User-Frage + FAKTEN (stilfrei). Schreibe EINE natürliche Antwort zum Vorlesen.
+${resolveSynthesisPersonaBlock(opts?.rucksack)}
 ${FINDUS_ANSWER_FIRST_BLOCK}
+${FINDUS_SYNTHESIS_RAIL_BLOCK}
+${FINDUS_CORE_WOVEN_SPEECH_BLOCK}
 ${bridgeBit}${FINDUS_REBOOT_MANAGER_THINK_AHEAD_BLOCK}
 ${liveBlock}${deepAsk}- Nur belegte Fakten — nichts erfinden.
 - Buttons/Stichpunkte aus den mitgelieferten Actions/Bullets übernehmen oder knapp spiegeln.
 - Kein Meta (API/Agent/Pack/FAKTEN/FLOW/PACK-DATENSATZ). Keine zweite Bridge.
 - Keine Permission-Fragen („Soll ich suchen?“).
-- Max ~${maxChars} Zeichen Speech.
+${FINDUS_SPEECH_LENGTH_BLOCK}
+${FINDUS_HELP_FIRST_MONETIZATION_BLOCK}
+- Partner-Hilfe: max 1–2 Hilfe-Buttons; Taxi/Uber nur wenn User Taxi/Uber will; Smalltalk/reine Fakten ohne Reise-Lücke → keine Partner. Code injiziert echte Links — keine erfundenen Partner-URLs in Speech.
 ${FINDUS_FEW_SHOT_DISCLAIMER}
-JSON only: {"speech":"...","bullets":[]}`;
+${outFmt}`;
 }
 
 /** Nach Call-2: Leak-Labels + Doppel-Bridge raus. */
@@ -84,6 +130,14 @@ export function scrubRebootSpeech(
   }
 
   s = s.replace(/\s{2,}/g, ' ').trim();
+  try {
+    const { stripListLead } = require('../kernel/turnKernel') as {
+      stripListLead: (s: string) => string;
+    };
+    s = stripListLead(s);
+  } catch {
+    /* soft */
+  }
   return humanizeAgentDraft(s, { maxChars: opts.budget });
 }
 
@@ -94,9 +148,29 @@ export async function synthesizeRebootTurn(opts: {
   jobId: string;
   speechBudgetChars?: number;
   signal?: AbortSignal;
+  rucksack?: TurnRucksackV1 | null;
+  topicScope?: {
+    mode: 'new' | 'followup';
+    turnsForCall2: number;
+    inheritLiveInventory?: boolean;
+  };
+  cityKey?: string | null;
+  turnId?: string;
+  /**
+   * Live-Chat: Sätze sofort melden (TTS starten), sobald vorhanden.
+   * Bei SSE schon während der Generierung; sonst nach Volltext satzweise.
+   */
+  onSpeechSentence?: (sentence: string, index: number) => void;
+  /** Call-1 / Code-Detect Partner-Momente (SSOT für Prompt + Inject). */
+  partnerHints?: HelpFirstMoment[];
+  /** Call-1 dateKey + clockHm — verbindlich für Call 2. */
+  call1WhenBlock?: string | null;
+  /** Call-1 criteria Gewichte — verbindlich für Call 2 (keine neuen Orte). */
+  call1CriteriaBlock?: string | null;
 }): Promise<SynthesisPayload> {
   const buttons: Module2ActionButton[] = opts.fact.buttons ?? [];
-  const budget = opts.speechBudgetChars ?? 700;
+  const budget = opts.speechBudgetChars ?? FINDUS_TYPICAL_SPEECH_MAX_CHARS;
+  const streamLive = typeof opts.onSpeechSentence === 'function';
 
   const finalize = (raw: string, bulletsIn: string[]): SynthesisPayload => {
     const speech = scrubRebootSpeech(raw, {
@@ -113,29 +187,235 @@ export async function synthesizeRebootTurn(opts: {
 
   if (!hasGeminiApiKey()) {
     const { fallbackSpeech } = await import('../../services/debug/fallbackLabel');
-    return finalize(
+    const payload = finalize(
       fallbackSpeech(
         'Synthese-ohne-Key',
         humanizeAgentDraft(opts.fact.draftText, { maxChars: budget + 200 }),
       ),
       opts.fact.bullets ?? [],
     );
+    if (streamLive) {
+      payload.spokenChunks.forEach((c, i) => opts.onSpeechSentence?.(c, i));
+    }
+    return payload;
   }
 
-  let threadBlock = '';
+  let skipStickyThread = opts.jobId === 'taxi_rideshare';
   try {
-    threadBlock = formatThreadContextForPrompt({ includeParkedIndex: false });
+    const { wantsTaxiRide } = require('../../services/mobility/taxiRideIntent') as {
+      wantsTaxiRide: (s: string) => boolean;
+    };
+    if (wantsTaxiRide(opts.userText)) skipStickyThread = true;
   } catch {
-    threadBlock = '';
+    /* jobId flag bleibt */
   }
+  let threadBlock = '';
+  if (opts.topicScope) {
+    threadBlock = buildCall2HistoryBlock({
+      topicScope: opts.topicScope,
+      cityKey: opts.cityKey ?? null,
+    });
+  } else if (!skipStickyThread) {
+    try {
+      const { resolveCityChatScope } = require('../context/placeContext') as {
+        resolveCityChatScope: (t?: string | null) => {
+          cityKey: string;
+          cityHint: string | null;
+        };
+      };
+      const { buildCityChatRegelwerk } = require('../context/cityChatRegelwerk') as {
+        buildCityChatRegelwerk: (i?: {
+          userText?: string;
+          cityHint?: string | null;
+          cityKey?: string | null;
+        }) => string;
+      };
+      const scope = resolveCityChatScope(opts.userText);
+      threadBlock = buildCityChatRegelwerk({
+        userText: opts.userText,
+        cityHint: scope.cityHint,
+        cityKey: scope.cityKey,
+      }).slice(0, 1600);
+    } catch {
+      try {
+        threadBlock = formatThreadContextForPrompt({ includeParkedIndex: false });
+      } catch {
+        threadBlock = '';
+      }
+    }
+  }
+
+  const bulletMaxChars = opts.rucksack?.ui.bulletMaxChars ?? 72;
+
+  const attachCall2Tail = async (
+    speechText: string,
+    agentBullets: string[],
+  ): Promise<SynthesisPayload> => {
+    let tail: ReturnType<typeof parseCall2Tail> = null;
+    try {
+      const tailRaw = await generateGeminiText(
+        buildCall2TailPrompt({
+          userText: opts.userText,
+          speechText,
+          bulletMaxChars,
+          agentBullets,
+        }),
+        {
+          responseJson: true,
+          jsonMimeOnly: true,
+          maxTokens: 420,
+          temperature: 0.2,
+          tier: 'lite',
+          useFindusSystem: false,
+          signal: opts.signal,
+        },
+      );
+      tail = parseCall2Tail(tailRaw);
+    } catch {
+      tail = null;
+    }
+    const bullets = mergeCall2Bullets({
+      tailBullets: tail?.bullets ?? [],
+      agentBullets,
+      speechText,
+      bulletMaxChars,
+    });
+    if (tail?.memory_extract?.length) {
+      void upsertUserMemoryFacts({
+        subject: opts.cityKey || opts.userText.slice(0, 40) || 'general',
+        facts: tail.memory_extract,
+        sourceTurnId: opts.turnId ?? null,
+      });
+    }
+    const base = finalize(speechText, bullets);
+    return {
+      ...base,
+      shortAnswers: tail?.shortAnswers,
+      call2Tail: tail ? (tail as unknown as Record<string, unknown>) : undefined,
+    };
+  };
 
   const deep = opts.fact.meta?.depth === 'deep';
   const userPrompt = [
-    threadBlock ? `THREAD:\n${threadBlock}` : '',
+    threadBlock ? `STADT-CHAT:\n${threadBlock}` : '',
+    opts.rucksack
+      ? `PERSONA_BRIDGE: ${opts.rucksack.persona.bridgeToneHint}`
+      : '',
+    opts.rucksack?.learnedRules?.length
+      ? `LEARNED_RULES (Struktur, keine Scripts):\n${opts.rucksack.learnedRules
+          .map((r) => `- ${r.intentFamily}: ${r.summary}`)
+          .join('\n')}`
+      : '',
+    opts.rucksack?.ownerGoldHint
+      ? `OWNER_GOLD_HINT: ${opts.rucksack.ownerGoldHint}`
+      : '',
+    opts.rucksack?.retrievedMemory?.length
+      ? `USER-LTM:\n${opts.rucksack.retrievedMemory.map((l) => `- ${l}`).join('\n')}`
+      : '',
+    opts.rucksack
+      ? `BULLET_BUDGET: 3 × max ${opts.rucksack.ui.bulletMaxChars} Zeichen`
+      : '',
     `USER: ${opts.userText}`,
+    opts.call1WhenBlock?.trim() || '',
+    opts.call1CriteriaBlock?.trim() || '',
+    (() => {
+      try {
+        const { formatSynthesisRailsForPrompt } = require('../speech/synthesisRails') as {
+          formatSynthesisRailsForPrompt: (s: string) => string;
+        };
+        return formatSynthesisRailsForPrompt(opts.userText);
+      } catch {
+        return '';
+      }
+    })(),
+    (() => {
+      try {
+        const {
+          getCall1AnswerContract,
+          formatCall1AnswerContractForPrompt,
+        } = require('./pipeline/call1AnswerContract') as {
+          getCall1AnswerContract: (t: string, o?: { correction?: boolean }) => unknown;
+          formatCall1AnswerContractForPrompt: (c: unknown) => string;
+        };
+        const reject =
+          /\b(mag\s+ich\s+nicht|gefällt\s+mir\s+nicht|gefaellt\s+mir\s+nicht|nee|nö|nein|was\s+noch|andere)\b/iu.test(
+            opts.userText,
+          );
+        return formatCall1AnswerContractForPrompt(
+          getCall1AnswerContract(opts.userText, { correction: reject }),
+        );
+      } catch {
+        return '';
+      }
+    })(),
     opts.bridgeOneLiner
-      ? `BRIDGE (schon gesprochen, nicht wiederholen): ${opts.bridgeOneLiner}`
+      ? `BRIDGE (schon gesprochen — Verstanden/Zusagen, nicht wiederholen): ${opts.bridgeOneLiner}\nBeat 2 = echte Antwort: Fakten/Optionen in die Sätze packen, umgangssprachlich, zackig. Kein zweites „tolle Idee“, kein Katalog.`
       : 'BRIDGE: keine',
+    (() => {
+      try {
+        const { orchestrateUtterance } = require('./pipeline/orchestrateSlots') as {
+          orchestrateUtterance: (s: string) => {
+            jobs: string[];
+            weaveDayPlan: boolean;
+            thinkAhead: string[];
+          };
+        };
+        const { formatCall2PacketForPrompt, buildCall2Packet } = require('./pipeline/call2Packet') as {
+          buildCall2Packet: (o: unknown) => unknown;
+          formatCall2PacketForPrompt: (p: unknown) => string;
+        };
+        const {
+          detectHelpFirstMoments,
+          formatAffiliateCatalogForCall2,
+          helpFirstMonetizationPromptBlock,
+        } = require('../../services/affiliate/helpFirstMonetization') as {
+          detectHelpFirstMoments: (o: {
+            userText?: string;
+            jobHints?: string[];
+          }) => HelpFirstMoment[];
+          formatAffiliateCatalogForCall2: () => string;
+          helpFirstMonetizationPromptBlock: (m: HelpFirstMoment[]) => string;
+        };
+        const orch = orchestrateUtterance(opts.userText);
+        const moments =
+          opts.partnerHints?.length
+            ? opts.partnerHints.slice(0, 2)
+            : detectHelpFirstMoments({
+                userText: opts.userText,
+                jobHints: orch.jobs,
+              }).slice(0, 2);
+        const facts = (orch.jobs.length ? orch.jobs : ['smalltalk_general']).map(
+          (job, i) => ({
+            job,
+            why: i === 0 ? 'primary' : 'child',
+            facts:
+              i === 0
+                ? {
+                    draft: (opts.fact.draftText || '').slice(0, 600),
+                    place:
+                      typeof opts.fact.meta?.placeName === 'string'
+                        ? opts.fact.meta.placeName
+                        : null,
+                  }
+                : {},
+          }),
+        );
+        const packetBlock = formatCall2PacketForPrompt(
+          buildCall2Packet({
+            userText: opts.userText,
+            spokenBridge: opts.bridgeOneLiner,
+            orch,
+            facts,
+            partnerHints: moments,
+            partnerCatalogSnippet: formatAffiliateCatalogForCall2(),
+          }),
+        );
+        const momentBlock = helpFirstMonetizationPromptBlock(moments);
+        return [packetBlock, momentBlock].filter(Boolean).join('\n');
+      } catch {
+        return '';
+      }
+    })(),
     `JOB: ${opts.jobId}`,
     deep ? 'DEPTH: mehr Historie am selben Ort — schon Gesagtes nicht wiederholen.' : '',
     `FAKTEN-DRAFT:\n${opts.fact.draftText.slice(0, deep ? 4200 : 3200)}`,
@@ -162,13 +442,60 @@ export async function synthesizeRebootTurn(opts: {
         module1Narration: opts.jobId === 'poi_identify' && !deep,
         module1DeepDive: deep,
       }),
-    )}\n\n${buildSynthesisBlock(budget)}`;
+    )}\n\n${buildSynthesisBlock(budget, { plainSpeech: streamLive, rucksack: opts.rucksack })}`;
+
+    // Live: Plain-Text + Satz-Stream (SSE wenn möglich) → erster Satz früher hörbar
+    if (streamLive) {
+      const parts: string[] = [];
+      let idx = 0;
+      for await (const sentence of streamGeminiSentences(userPrompt, {
+        systemInstruction: system,
+        useFindusSystem: false,
+        responseJson: false,
+        maxTokens: deep ? 1200 : 900,
+        temperature: 0.55,
+        signal: opts.signal,
+        allowProEscalate: false,
+        tier: 'lite',
+        chatHistory: opts.bridgeOneLiner
+          ? [{ role: 'model', parts: [{ text: opts.bridgeOneLiner }] }]
+          : undefined,
+      })) {
+        if (opts.signal?.aborted) break;
+        const cleaned = scrubRebootSpeech(sentence, {
+          bridgeOneLiner: opts.bridgeOneLiner,
+          budget,
+        });
+        if (!cleaned) continue;
+        parts.push(cleaned);
+        opts.onSpeechSentence?.(cleaned, idx);
+        idx += 1;
+      }
+      const joined = parts.join(' ').trim();
+      if (!joined) {
+        const { fallbackSpeech } = await import('../../services/debug/fallbackLabel');
+        const payload = await attachCall2Tail(
+          fallbackSpeech(
+            'Synthese-leer',
+            humanizeAgentDraft(opts.fact.draftText, { maxChars: budget + 200 }),
+          ),
+          opts.fact.bullets ?? [],
+        );
+        if (payload.spokenChunks.length && idx === 0) {
+          payload.spokenChunks.forEach((c, i) => opts.onSpeechSentence?.(c, i));
+        }
+        return payload;
+      }
+      const tailed = await attachCall2Tail(joined, opts.fact.bullets ?? []);
+      return { ...tailed, spokenChunks: parts };
+    }
+
     const raw = await generateGeminiText(userPrompt, {
       systemInstruction: system,
       useFindusSystem: false,
       responseJson: true,
       jsonMimeOnly: true,
-      maxTokens: deep ? 700 : 500,
+      maxTokens: deep ? 1200 : 900,
       temperature: 0.55,
       signal: opts.signal,
       allowProEscalate: false,
@@ -186,7 +513,10 @@ export async function synthesizeRebootTurn(opts: {
       ? parsed.bullets
       : (opts.fact.bullets ?? []);
     return finalize(speech, bullets);
-  } catch {
+  } catch (err) {
+    if (opts.signal?.aborted) {
+      return finalize('', opts.fact.bullets ?? []);
+    }
     const { fallbackSpeech } = await import('../../services/debug/fallbackLabel');
     return finalize(
       fallbackSpeech(

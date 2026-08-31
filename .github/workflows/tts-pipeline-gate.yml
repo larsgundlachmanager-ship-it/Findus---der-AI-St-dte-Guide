@@ -1,0 +1,39 @@
+name: TTS Sentence Pipeline Gate
+
+on:
+  push:
+    paths:
+      - 'src/services/audio/**'
+      - 'src/services/AudioVoiceService.ts'
+      - 'src/runtime/audioPipeline.ts'
+      - 'src/runtime/speechModule.ts'
+      - 'src/module2/router/runConciergeTurn.ts'
+      - 'src/module2/speech/speechQueue.ts'
+      - 'src/services/ai/sentenceStream.ts'
+      - '.cursor/rules/findus-tts-sentence-pipeline-lock.mdc'
+      - '.github/workflows/tts-pipeline-gate.yml'
+      - 'package.json'
+  pull_request:
+    paths:
+      - 'src/services/audio/**'
+      - 'src/services/AudioVoiceService.ts'
+      - 'src/runtime/audioPipeline.ts'
+      - 'src/runtime/speechModule.ts'
+      - 'src/module2/router/runConciergeTurn.ts'
+      - 'src/module2/speech/speechQueue.ts'
+      - 'src/services/ai/sentenceStream.ts'
+      - '.cursor/rules/findus-tts-sentence-pipeline-lock.mdc'
+      - '.github/workflows/tts-pipeline-gate.yml'
+      - 'package.json'
+
+jobs:
+  tts-pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run test:tts-pipeline

@@ -1,0 +1,4 @@
+ and `runConciergeTurn` can hand off to `runTourModule` with `timeline_stack` + multi-stop nav buttons. **Gaps:** compound day plans block tour handoff (`compoundOwnsTour`); standalone “nicht gesehen” without “tour”/duration may get **pitch** (`factLaneRegistry` → `pitchFactLane`) instead of a full guided route; visit coverage depends on stamp/visit-log completeness, not pack visit graph alone.
+
+### 5. Wangerooge ferry vs flight — price / how it works
+**PARTIAL** — Two **separate** paths, not one comparison flow: island **flight** via `inselfliegerAdvisor.ts` (slots, tariffs, Frisonaut book links) routed from `flightTripAdvisor.ts`; **ferry** via `ferryTicketResearch.ts` + `transit_live`/`runChatLane` (operator OPEN_URL). Smoke case `j23` covers ferry tickets. **Gap:** no unified “Fähre vs Flug — Preis und Ablauf” comparator; user gets mode-specific research, not side

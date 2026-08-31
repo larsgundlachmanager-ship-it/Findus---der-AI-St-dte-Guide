@@ -14,7 +14,7 @@ export type ShoppingTaskIntent = {
   /** Soft time hint if user said heute Abend / morgen */
   dueAtMs: number | null;
   reply: string;
-  /** True when hotel is mentioned but Findus has no confirmed hotel coords yet */
+  /** True when hotel is mentioned but Yorro has no confirmed hotel coords yet */
   needsHotel?: boolean;
 };
 
@@ -25,7 +25,7 @@ const BUY_ALT_RE =
   /\b(?:nicht\s+vergessen|merk\s+dir|erinner\s+mich)(?:\s+bitte)?[,:]?\s+(?:noch\s+)?(?:eine?\s+|einen\s+|ein\s+)?(.{2,48}?)\s+(?:zu\s+)?(?:kaufen|besorgen|holen)\b/iu;
 
 const BUY_NEED_RE =
-  /\b(?:ich\s+)?brauch(?:e)?\s+(?:noch\s+)?(?:eine?\s+|einen\s+|ein\s+)?(.{2,40}?)\s*(?:aus\s+der\s+drogerie|beim?\s+dm|bei\s+rossmann)?\s*$/iu;
+  /\b(?:ich\s+)?brauch(?:e)?\s+(?:noch\s+)?(?:eine?\s+|einen\s+|ein\s+)?(?:neue[snr]?\s+|frisch(?:e[snr]?)?\s+)?(.{2,40}?)\s*(?:aus\s+der\s+drogerie|beim?\s+dm|bei\s+rossmann)?\s*[.!?]?$/iu;
 
 /** Hotel-anchor phrases */
 const HOTEL_WHERE_RE =
@@ -42,10 +42,13 @@ const HOTEL_ACTION_ALT_RE =
   /\b(?:zu\s+)?(laden|aufladen|packen|checken)\b.{0,8}\b(?:meine?\s+|die\s+|den\s+|das\s+)?([a-zäöüß0-9][\wÄÖÜäöüß\-']{1,30})\b/iu;
 
 const DONE_RE =
-  /\b(?:habe?\s+(?:die\s+|das\s+|den\s+)?(.{2,40}?)\s+)?(?:schon\s+)?(?:gekauft|besorgt|geholt|geladen|aufgeladen|erledigt)\b/iu;
+  /\b(?:habe?\s+(?:die\s+|das\s+|den\s+|meine?\s+)?(.{2,40}?)\s+)?(?:schon\s+)?(?:gekauft|besorgt|geholt|geladen|aufgeladen|erledigt|gefunden)\b/iu;
+
+const DONE_HAVE_FOUND_RE =
+  /\b(?:die\s+|das\s+|den\s+|meine?\s+)?(.{2,40}?)\s+(?:habe?\s+ich\s+)?(?:schon\s+)?gefunden\b/iu;
 
 const DONE_SIMPLE_RE =
-  /\b(?:ist\s+erledigt|aufgabe\s+(?:löschen|loeschen|weg)|erinnerung\s+(?:löschen|loeschen|weg)|brauch\s+(?:ich\s+)?nicht\s+mehr|ist\s+dran|hab(?:e)?\s+(?:sie|ihn|es)\s+geladen)\b/iu;
+  /\b(?:ist\s+erledigt|aufgabe\s+(?:löschen|loeschen|weg)|erinnerung\s+(?:löschen|loeschen|weg)|brauch\s+(?:ich\s+)?nicht\s+mehr|ist\s+dran|hab(?:e)?\s+(?:sie|ihn|es)\s+geladen|hab(?:e)?\s+(?:sie|ihn|es|die)\s+gefunden)\b/iu;
 
 const NOISE =
   /^(noch|mal|bitte|einfach|schnell|kurz|heute|morgen|eine|einen|ein|die|der|das|mir|uns|meine|mein|wieder|hotel)$/i;
@@ -272,9 +275,20 @@ export function detectShoppingTaskIntent(
     const m2 = t.match(BUY_ALT_RE);
     if (m2?.[1]) rawItem = m2[1];
   }
-  if (!rawItem && /\b(drogerie|dm|rossmann)\b/i.test(t)) {
+  if (!rawItem) {
     const m3 = t.match(BUY_NEED_RE);
-    if (m3?.[1]) rawItem = m3[1];
+    if (m3?.[1]) {
+      const candidate = cleanItem(m3[1]);
+      // „Ich brauche eine Zahnbürste“ auch ohne „DM/Rossmann“ im Satz
+      if (
+        candidate &&
+        (/\b(drogerie|dm|rossmann)\b/i.test(t) ||
+          categorizeItem(candidate)[0] === 'drugstore' ||
+          categorizeItem(candidate)[0] === 'pharmacy')
+      ) {
+        rawItem = m3[1];
+      }
+    }
   }
   if (!rawItem) return null;
 
@@ -310,7 +324,37 @@ export function detectShoppingTaskIntent(
   };
 }
 
-/** „Hab die Zahnbürste gekauft“ / „Powerbank geladen“ / „erledigt“ */
+/** „Beim Café noch 5 € Verzehrgutscheine einlösen“ → Fact + Erinnerungs-Task */
+export function detectVenueVoucherIntent(
+  text: string,
+): { placeHint: string; amountLabel: string | null; reply: string } | null {
+  const t = text.replace(/\s+/g, ' ').trim();
+  if (!/\b(gutschein|verzehrgutschein|wertgutschein)\b/iu.test(t)) return null;
+  if (!/\b(erinner|merk|vergiss|brauch|muss|noch|einl[öo]s)\b/iu.test(t)) {
+    return null;
+  }
+  const amountM = t.match(/\b(\d+[.,]?\d*)\s*(?:€|euro)\b/iu);
+  const amount = amountM?.[1] ?? null;
+  const place =
+    t.match(
+      /\b(?:bei|beim|im|in|am)\s+(?:der\s+|dem\s+|die\s+)?([A-ZÄÖÜa-zäöüß][\wÄÖÜäöüß\-&.']+(?:\s+[A-ZÄÖÜa-zäöüß][\wÄÖÜäöüß\-&.']+){0,3})/u,
+    )?.[1] ?? null;
+  const placeHint = (place ?? '')
+    .replace(/\b(gutschein|verzehr|euro|noch)\b/giu, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+  if (placeHint.length < 2) return null;
+  const amountLabel = amount ? `${amount.replace('.', ',')} €` : null;
+  return {
+    placeHint,
+    amountLabel,
+    reply: amountLabel
+      ? `Merke ich mir: ${amountLabel} Verzehrgutschein bei ${placeHint} — ich erinnere dich, wenn wir in der Nähe sind oder du den Ort planst.`
+      : `Merke ich mir: Verzehrgutschein bei ${placeHint} — ich erinnere dich rechtzeitig.`,
+  };
+}
+
+/** „Hab die Zahnbürste gekauft/gefunden“ / „Powerbank geladen“ / „erledigt“ */
 export function detectShoppingTaskDoneIntent(
   text: string,
 ): { itemHint: string | null; clearAll: boolean } | null {
@@ -318,6 +362,11 @@ export function detectShoppingTaskDoneIntent(
   if (!t) return null;
   if (DONE_SIMPLE_RE.test(t)) {
     return { itemHint: null, clearAll: false };
+  }
+  const found = t.match(DONE_HAVE_FOUND_RE);
+  if (found?.[1]) {
+    const hint = cleanItem(found[1]);
+    if (hint) return { itemHint: hint, clearAll: false };
   }
   const m = t.match(DONE_RE);
   if (!m) return null;

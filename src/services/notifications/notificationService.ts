@@ -82,7 +82,7 @@ async function ensureAndroidChannels(): Promise<void> {
     lockscreenVisibility: Notifications.AndroidNotificationVisibility.PUBLIC,
   });
   await Notifications.setNotificationChannelAsync(REMINDERS_CHANNEL_ID, {
-    name: 'Findus Hinweise',
+    name: 'Yorro Hinweise',
     description: 'Proaktive Tipps (Wetter, Termine, …) mit Ton und Vibration',
     importance: Notifications.AndroidImportance.HIGH,
     ...base,
@@ -147,7 +147,14 @@ export type ScheduleReminderResult =
   | { ok: false; reason: 'permission' | 'too_soon' | 'disabled' | 'error'; error?: string };
 
 function remindersWanted(): boolean {
-  return getCachedUserProfile()?.notificationsEnabled !== false;
+  try {
+    const { isProactiveAlertEnabled } = require('./proactiveAlerts') as {
+      isProactiveAlertEnabled: (k: 'transit') => boolean;
+    };
+    return isProactiveAlertEnabled('transit');
+  } catch {
+    return getCachedUserProfile()?.notificationsEnabled !== false;
+  }
 }
 
 async function scheduleDateNotification(opts: {
@@ -253,7 +260,7 @@ export async function scheduleLeaveByReminder(opts: {
       await cancelReminderById(`leave:${opts.reminderKey}`);
     }
     const notificationId = await scheduleDateNotification({
-      title: 'Findus — Zeit aufzubrechen',
+      title: 'Yorro — Zeit aufzubrechen',
       body,
       dateMs: leave.leaveByMs,
       channelId: DEPARTURE_CHANNEL_ID,
@@ -335,7 +342,7 @@ export async function scheduleFlightDepartureReminder(opts: {
       await cancelReminderById(identifier);
     }
     const notificationId = await scheduleDateNotification({
-      title: 'Findus — Flug-Erinnerung',
+      title: 'Yorro — Flug-Erinnerung',
       body,
       dateMs: leave.leaveByMs,
       channelId: FLIGHT_CHANNEL_ID,
@@ -364,8 +371,10 @@ export async function scheduleWakeAlarm(opts: {
   reasonLabel: string;
   leaveByMs?: number | null;
   reminderKey?: string;
+  /** Expliziter User-Befehl — Reminder-Pref nicht blockieren */
+  force?: boolean;
 }): Promise<ScheduleReminderResult> {
-  if (!remindersWanted()) return { ok: false, reason: 'disabled' };
+  if (!opts.force && !remindersWanted()) return { ok: false, reason: 'disabled' };
   const lead = opts.wakeAtMs - Date.now();
   if (lead < 30_000) return { ok: false, reason: 'too_soon' };
 
@@ -385,7 +394,7 @@ export async function scheduleWakeAlarm(opts: {
   try {
     await cancelReminderById(identifier);
     const notificationId = await scheduleDateNotification({
-      title: 'Findus — Aufstehen',
+      title: 'Yorro — Aufstehen',
       body: `Guten Morgen! Zeit aufzustehen für ${opts.reasonLabel}.${leaveHint}`,
       dateMs: opts.wakeAtMs,
       channelId: WAKE_CHANNEL_ID,
@@ -432,7 +441,7 @@ export async function scheduleCountdownTimer(opts: {
   try {
     await cancelReminderById(identifier);
     const notificationId = await scheduleDateNotification({
-      title: 'Findus — Timer',
+      title: 'Yorro — Timer',
       body:
         label !== 'Timer'
           ? `Zeit ist um — ${label}.`
@@ -506,7 +515,7 @@ export async function scheduleTestReminder(opts?: {
     await configureNotificationHandler();
     const notificationId = await Notifications.scheduleNotificationAsync({
       content: {
-        title: 'Findus — Test',
+        title: 'Yorro — Test',
         body:
           opts?.body ??
           buildLeaveReminderBody({

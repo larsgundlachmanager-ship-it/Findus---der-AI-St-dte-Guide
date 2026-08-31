@@ -61,6 +61,10 @@ export type TourRequest = {
   cityHint?: string | null;
   bridgeAlreadySpoken?: boolean;
   signal?: AbortSignal;
+  /** Plan-Tag für Timeline-Spiegel (nicht wall-clock today) */
+  planDayKey?: string | null;
+  /** Wunschfenster-Start für Timeline */
+  preferStartMs?: number | null;
 };
 
 export type TourCandidate = {

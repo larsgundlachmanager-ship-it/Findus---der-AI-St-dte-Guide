@@ -1,0 +1,3076 @@
+{
+  "generated_at": "2026-08-28T02:50:37.652Z",
+  "summary": {
+    "city_id": "bad_saarow",
+    "checked": 98,
+    "ok": 19,
+    "check": 32,
+    "bad": 47,
+    "errors": 0,
+    "max_delta_m": 180,
+    "city_halo_m": 12000,
+    "story_only": true
+  },
+  "rows": [
+    {
+      "id": "bad_saarow_burg_storkow",
+      "name": "Burg Storkow",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.252791773684216,
+        "lng": 13.933276205263159
+      },
+      "query": "Burg Storkow, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2914171,
+        "lng": 14.047315,
+        "display_name": "Storkower Gewässer, Bad Saarow, Deutschland",
+        "class": "waterway",
+        "type": "stream",
+        "provider": "photon"
+      },
+      "delta_m": 8869,
+      "from_city_m": 8600,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "bad_saarow_insekten_paradies_garten_der_burg_storkow"
+      ]
+    },
+    {
+      "id": "bad_saarow_wettermuseum_e_v",
+      "name": "Wettermuseum e.V.",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.20884732,
+        "lng": 14.113822840000001
+      },
+      "query": "Wettermuseum e.V., Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2741556,
+        "lng": 14.0412172,
+        "display_name": "Saarower Segler-Verein am Werl e.V., Alte Eichen, Bad Saarow, Deutschland",
+        "class": "leisure",
+        "type": "marina",
+        "provider": "photon"
+      },
+      "delta_m": 8785,
+      "from_city_m": 8318,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_schloss_hubertushohe",
+      "name": "Schloss Hubertushöhe",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.235874027272736,
+        "lng": 13.96773479090909
+      },
+      "query": "Schloss Hubertushöhe, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2601882,
+        "lng": 14.0724752,
+        "display_name": "Schlosspark Bad Saarow, Am Theresienhof, Bad Saarow, Deutschland",
+        "class": "leisure",
+        "type": "resort",
+        "provider": "photon"
+      },
+      "delta_m": 7626,
+      "from_city_m": 7298,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_brauereimuseum",
+      "name": "Brauereimuseum",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.35848493333334,
+        "lng": 14.063521266666667
+      },
+      "query": "Brauereimuseum, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2922975,
+        "lng": 14.0552305,
+        "display_name": "Bad Saarow, Oder-Spree, Deutschland",
+        "class": "place",
+        "type": "village",
+        "provider": "photon"
+      },
+      "delta_m": 7381,
+      "from_city_m": 9381,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_yaas_yacht_akademie_axel_schmidt",
+      "name": "YAAS - Yacht Akademie Axel Schmidt",
+      "category": "tour",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.23773315999999,
+        "lng": 14.029770199999998
+      },
+      "query": "YAAS, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2905098,
+        "lng": 14.046121,
+        "display_name": "YAAS, Ludwig-Lesser-Promenade, Bad Saarow, Scharmützelsee, Oder-Spree, Brandenburg, 15526, Deutschland",
+        "class": "amenity",
+        "type": "boat_rental",
+        "importance": 0.00004603418020900309,
+        "osm_type": "way",
+        "osm_id": 836353859,
+        "provider": "nominatim"
+      },
+      "delta_m": 5973,
+      "from_city_m": 4404,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_wasserwerk_bad_saarow_gbr",
+      "name": "Wasserwerk Bad Saarow GbR",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.2925836,
+        "lng": 14.0583358
+      },
+      "query": "Wasserwerk Bad Saarow GbR, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2448474,
+        "lng": 14.0389417,
+        "display_name": "Wasserwerk, Bad Saarow, Deutschland",
+        "class": "landuse",
+        "type": "industrial",
+        "provider": "photon"
+      },
+      "delta_m": 5470,
+      "from_city_m": 2049,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "bad_saarow_bad_saarow",
+        "bad_saarow_bad_saarow_klinikum",
+        "bad_saarow_bad_saarow_bahnhof",
+        "bad_saarow_bad_saarow_hafen",
+        "bad_saarow_fontanepark",
+        "bad_saarow_scharwenka_kulturforum",
+        "bad_saarow_regattaplatz",
+        "bad_saarow_anlegestelle_bad_saarow_strand",
+        "bad_saarow_badestelle_diensdorf_radlow",
+        "bad_saarow_scharmutzelseegebiet",
+        "bad_saarow_aussichtspunkt_scharmutzelsee",
+        "bad_saarow_golf_club_bad_saarow"
+      ]
+    },
+    {
+      "id": "bad_saarow_badestelle_diensdorf_radlow",
+      "name": "Badestelle Diensdorf-Radlow",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.2925836,
+        "lng": 14.0583358
+      },
+      "query": "Badestelle Diensdorf-Radlow, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2438172,
+        "lng": 14.0643679,
+        "display_name": "Badestelle Diensdorf, Diensdorf-Radlow, Scharmützelsee, Oder-Spree, Brandenburg, Deutschland",
+        "class": "natural",
+        "type": "beach",
+        "importance": 0.10671458838788431,
+        "osm_type": "way",
+        "osm_id": 235224705,
+        "provider": "nominatim"
+      },
+      "delta_m": 5438,
+      "from_city_m": 2049,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "bad_saarow_bad_saarow",
+        "bad_saarow_bad_saarow_klinikum",
+        "bad_saarow_bad_saarow_bahnhof",
+        "bad_saarow_bad_saarow_hafen",
+        "bad_saarow_fontanepark",
+        "bad_saarow_scharwenka_kulturforum",
+        "bad_saarow_regattaplatz",
+        "bad_saarow_anlegestelle_bad_saarow_strand",
+        "bad_saarow_scharmutzelseegebiet",
+        "bad_saarow_aussichtspunkt_scharmutzelsee",
+        "bad_saarow_wasserwerk_bad_saarow_gbr",
+        "bad_saarow_golf_club_bad_saarow"
+      ]
+    },
+    {
+      "id": "bad_saarow_stan_eby_golfplatz",
+      "name": "Stan Eby Golfplatz",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.292145125000005,
+        "lng": 14.0558161
+      },
+      "query": "Stan Eby Golfplatz, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2525632,
+        "lng": 14.0154915,
+        "display_name": "STAN EBY 18-Loch Golfplatz, Silberberger Straße, Silberberg, Reichenwalde, Bad Saarow, Scharmützelsee, Oder-Spree, Brandenburg, 15526, Deutschland",
+        "class": "leisure",
+        "type": "golf_course",
+        "importance": 0.000040588235294072134,
+        "osm_type": "way",
+        "osm_id": 95341191,
+        "provider": "nominatim"
+      },
+      "delta_m": 5186,
+      "from_city_m": 1986,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "bad_saarow_tennis_center_bad_saarow",
+        "bad_saarow_cinema_by_velotel",
+        "bad_saarow_wierich_wiesen",
+        "bad_saarow_liegewiese",
+        "bad_saarow_bank_mit_aussicht"
+      ]
+    },
+    {
+      "id": "bad_saarow_tennis_center_bad_saarow",
+      "name": "Tennis Center Bad Saarow",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.292147,
+        "lng": 14.055825571428572
+      },
+      "query": "Tennis Center Bad Saarow, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2485622,
+        "lng": 14.0293218,
+        "display_name": "Tennis Center Bad Saarow, 1, Am Golfplatz, Silberberg, Bad Saarow, Scharmützelsee, Oder-Spree, Brandenburg, 15526, Deutschland",
+        "class": "leisure",
+        "type": "sports_centre",
+        "importance": 0.00004603418020900309,
+        "osm_type": "node",
+        "osm_id": 1768918589,
+        "provider": "nominatim"
+      },
+      "delta_m": 5171,
+      "from_city_m": 1987,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "bad_saarow_stan_eby_golfplatz",
+        "bad_saarow_cinema_by_velotel",
+        "bad_saarow_wierich_wiesen",
+        "bad_saarow_liegewiese",
+        "bad_saarow_bank_mit_aussicht"
+      ]
+    },
+    {
+      "id": "bad_saarow_aussichtspunkt_scharmutzelsee",
+      "name": "Aussichtspunkt Scharmützelsee",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.2925836,
+        "lng": 14.0583358
+      },
+      "query": "Aussichtspunkt Scharmützelsee, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2472886,
+        "lng": 14.0568991,
+        "display_name": "Scharmützelsee, Bad Saarow, Deutschland",
+        "class": "water",
+        "type": "lake",
+        "provider": "photon"
+      },
+      "delta_m": 5038,
+      "from_city_m": 2049,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "bad_saarow_bad_saarow",
+        "bad_saarow_bad_saarow_klinikum",
+        "bad_saarow_bad_saarow_bahnhof",
+        "bad_saarow_bad_saarow_hafen",
+        "bad_saarow_fontanepark",
+        "bad_saarow_scharwenka_kulturforum",
+        "bad_saarow_regattaplatz",
+        "bad_saarow_anlegestelle_bad_saarow_strand",
+        "bad_saarow_badestelle_diensdorf_radlow",
+        "bad_saarow_scharmutzelseegebiet",
+        "bad_saarow_wasserwerk_bad_saarow_gbr",
+        "bad_saarow_golf_club_bad_saarow"
+      ]
+    },
+    {
+      "id": "bad_saarow_lieblingsblick_scharmutzelsee",
+      "name": "Lieblingsblick Scharmützelsee",
+      "category": "altstadt",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.29118651111112,
+        "lng": 14.054367788888888
+      },
+      "query": "Lieblingsblick Scharmützelsee, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2472886,
+        "lng": 14.0568991,
+        "display_name": "Scharmützelsee, Bad Saarow, Deutschland",
+        "class": "water",
+        "type": "lake",
+        "provider": "photon"
+      },
+      "delta_m": 4884,
+      "from_city_m": 1878,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "bad_saarow_scharmutzelsee_umgebung"
+      ]
+    },
+    {
+      "id": "bad_saarow_scharmutzelsee_umgebung",
+      "name": "Scharmützelsee & Umgebung",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.291186555555555,
+        "lng": 14.05436788888889
+      },
+      "query": "Scharmützelsee, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2472886,
+        "lng": 14.0568991,
+        "display_name": "Scharmützelsee, Bad Saarow, Scharmützelsee, Oder-Spree, Brandenburg, 15864, Deutschland",
+        "class": "water",
+        "type": "lake",
+        "importance": 0.35699141996923245,
+        "osm_type": "relation",
+        "osm_id": 19599385,
+        "provider": "nominatim"
+      },
+      "delta_m": 4884,
+      "from_city_m": 1878,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "bad_saarow_lieblingsblick_scharmutzelsee"
+      ]
+    },
+    {
+      "id": "bad_saarow_parkbuhne_furstenwalde",
+      "name": "Parkbühne Fürstenwalde",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.365504380000004,
+        "lng": 14.05097472
+      },
+      "query": "Parkbühne Fürstenwalde, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.3272653,
+        "lng": 14.0789422,
+        "display_name": "Automobil Center Fürstenwalde, Saarower Chaussee, Bad Saarow, Deutschland",
+        "class": "shop",
+        "type": "car",
+        "provider": "photon"
+      },
+      "delta_m": 4657,
+      "from_city_m": 10145,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_anlegestelle_bad_saarow_strand",
+      "name": "Anlegestelle Bad Saarow Strand",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.2925836,
+        "lng": 14.0583358
+      },
+      "query": "Anlegestelle Bad Saarow Strand, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.256403,
+        "lng": 14.0451615,
+        "display_name": "Bad Saarow-Strand, Bad Saarow, Deutschland",
+        "class": "place",
+        "type": "hamlet",
+        "provider": "photon"
+      },
+      "delta_m": 4122,
+      "from_city_m": 2049,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "bad_saarow_bad_saarow",
+        "bad_saarow_bad_saarow_klinikum",
+        "bad_saarow_bad_saarow_bahnhof",
+        "bad_saarow_bad_saarow_hafen",
+        "bad_saarow_fontanepark",
+        "bad_saarow_scharwenka_kulturforum",
+        "bad_saarow_regattaplatz",
+        "bad_saarow_badestelle_diensdorf_radlow",
+        "bad_saarow_scharmutzelseegebiet",
+        "bad_saarow_aussichtspunkt_scharmutzelsee",
+        "bad_saarow_wasserwerk_bad_saarow_gbr",
+        "bad_saarow_golf_club_bad_saarow"
+      ]
+    },
+    {
+      "id": "bad_saarow_ferienhaus_direkt_am_scharmutzelsee_bad_saarow_halbinsel_alte_eichen",
+      "name": "Ferienhaus direkt am Scharmützelsee Bad-Saarow Halbinsel Alte Eichen",
+      "category": "radweg",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.2671345,
+        "lng": 14.063191699999999
+      },
+      "query": "Ferienhaus direkt am Scharmützelsee Bad-Saarow, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2386273,
+        "lng": 14.0290764,
+        "display_name": "Precise Resort Bad Saarow am Scharmützelsee, Parkallee, Bad Saarow, Deutschland",
+        "class": "tourism",
+        "type": "hotel",
+        "provider": "photon"
+      },
+      "delta_m": 3929,
+      "from_city_m": 986,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "bad_saarow_dorfkirche_pieskow",
+        "bad_saarow_marchenwald_bad_saarow_pieskow",
+        "bad_saarow_scharmutzelsee",
+        "bad_saarow_kletterwald_bad_saarow",
+        "bad_saarow_stolperstein_goldstein"
+      ]
+    },
+    {
+      "id": "bad_saarow_bad_saarow_schifffahrts_gmbh",
+      "name": "Bad Saarow Schifffahrts GmbH",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.29142445,
+        "lng": 14.047519250000002
+      },
+      "query": "Bad Saarow Schifffahrts GmbH, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.256403,
+        "lng": 14.0451615,
+        "display_name": "Bad Saarow-Strand, Bad Saarow, Deutschland",
+        "class": "place",
+        "type": "hamlet",
+        "provider": "photon"
+      },
+      "delta_m": 3898,
+      "from_city_m": 1965,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_museum_furstenwalde",
+      "name": "Museum Fürstenwalde",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.357512328571424,
+        "lng": 14.065736857142857
+      },
+      "query": "Museum Fürstenwalde, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.3272653,
+        "lng": 14.0789422,
+        "display_name": "Automobil Center Fürstenwalde, Saarower Chaussee, Bad Saarow, Deutschland",
+        "class": "shop",
+        "type": "car",
+        "provider": "photon"
+      },
+      "delta_m": 3481,
+      "from_city_m": 9284,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_bad_saarow_strand",
+      "name": "Bad Saarow Strand",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.283668375,
+        "lng": 14.061734875000003
+      },
+      "query": "Bad Saarow Strand, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.256403,
+        "lng": 14.0451615,
+        "display_name": "Bad Saarow-Strand, Pieskow, Bad Saarow, Scharmützelsee, Oder-Spree, Brandenburg, 15526, Deutschland",
+        "class": "place",
+        "type": "hamlet",
+        "importance": 0.13337936751354237,
+        "osm_type": "node",
+        "osm_id": 1102758770,
+        "provider": "nominatim"
+      },
+      "delta_m": 3235,
+      "from_city_m": 1148,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "bad_saarow_die_statue_von_johannes_r_becher",
+        "bad_saarow_badestelle_bad_saarow_pieskow",
+        "bad_saarow_zentrale_notaufnahme_und_rettungsmedizin_helios_klinikum_bad_saarow"
+      ]
+    },
+    {
+      "id": "bad_saarow_liegewiese",
+      "name": "Liegewiese",
+      "category": "wanderung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.292147,
+        "lng": 14.055825571428572
+      },
+      "query": "Liegewiese, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2638576,
+        "lng": 14.0659106,
+        "display_name": "Liegewiese, Theresienhof, Pieskow, Bad Saarow, Scharmützelsee, Oder-Spree, Brandenburg, Deutschland",
+        "class": "landuse",
+        "type": "meadow",
+        "importance": 0.08004603418020902,
+        "osm_type": "way",
+        "osm_id": 108138970,
+        "provider": "nominatim"
+      },
+      "delta_m": 3220,
+      "from_city_m": 1987,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "bad_saarow_stan_eby_golfplatz",
+        "bad_saarow_tennis_center_bad_saarow",
+        "bad_saarow_cinema_by_velotel",
+        "bad_saarow_wierich_wiesen",
+        "bad_saarow_bank_mit_aussicht"
+      ]
+    },
+    {
+      "id": "bad_saarow_badestelle_westufer_scharmutzelsee",
+      "name": "Badestelle Westufer Scharmützelsee",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.284065428571445,
+        "lng": 14.063075571428572
+      },
+      "query": "Badestelle Westufer Scharmützelsee, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2573932,
+        "lng": 14.0462727,
+        "display_name": "Campingplatz am Westufer des Scharmützelsee, Friedrich-Engels-Damm, Bad Saarow, Deutschland",
+        "class": "tourism",
+        "type": "camp_site",
+        "provider": "photon"
+      },
+      "delta_m": 3179,
+      "from_city_m": 1228,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "bad_saarow_steinbach_brunnen"
+      ]
+    },
+    {
+      "id": "bad_saarow_kletterwald_bad_saarow",
+      "name": "Kletterwald Bad Saarow",
+      "category": "freizeitpark",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.2671345,
+        "lng": 14.063191699999999
+      },
+      "query": "Kletterwald Bad Saarow, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2928547,
+        "lng": 14.0486341,
+        "display_name": "Kletterwald Bad Saarow, 47, Seestraße, Bad Saarow, Scharmützelsee, Oder-Spree, Brandenburg, 15526, Deutschland",
+        "class": "leisure",
+        "type": "sports_centre",
+        "importance": 0.00004603418020900309,
+        "osm_type": "node",
+        "osm_id": 7806191787,
+        "provider": "nominatim"
+      },
+      "delta_m": 3027,
+      "from_city_m": 986,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "bad_saarow_dorfkirche_pieskow",
+        "bad_saarow_marchenwald_bad_saarow_pieskow",
+        "bad_saarow_ferienhaus_direkt_am_scharmutzelsee_bad_saarow_halbinsel_alte_eichen",
+        "bad_saarow_scharmutzelsee",
+        "bad_saarow_stolperstein_goldstein"
+      ]
+    },
+    {
+      "id": "bad_saarow_pieskow",
+      "name": "Pieskow",
+      "category": "bahnhof",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.2930512,
+        "lng": 14.056737799999999
+      },
+      "query": "Pieskow, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.268269,
+        "lng": 14.0697387,
+        "display_name": "Pieskow, Bad Saarow, Scharmützelsee, Oder-Spree, Brandenburg, 15526, Deutschland",
+        "class": "place",
+        "type": "village",
+        "importance": 0.14671270084687568,
+        "osm_type": "node",
+        "osm_id": 6715807052,
+        "provider": "nominatim"
+      },
+      "delta_m": 2894,
+      "from_city_m": 2090,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_bad_saarow_bahnhof",
+      "name": "Bad Saarow, Bahnhof",
+      "category": "bahnhof",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.2925836,
+        "lng": 14.0583358
+      },
+      "query": "Bad Saarow, Bahnhof, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2708883,
+        "lng": 14.0709499,
+        "display_name": "Bad Saarow-Pieskow, Bahnhofstraße, Pieskow, Bad Saarow, Scharmützelsee, Oder-Spree, Brandenburg, 15526, Deutschland",
+        "class": "railway",
+        "type": "halt",
+        "importance": 0.00004603418020900309,
+        "osm_type": "node",
+        "osm_id": 1127084098,
+        "provider": "nominatim"
+      },
+      "delta_m": 2560,
+      "from_city_m": 2049,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "bad_saarow_bad_saarow",
+        "bad_saarow_bad_saarow_klinikum",
+        "bad_saarow_bad_saarow_hafen",
+        "bad_saarow_fontanepark",
+        "bad_saarow_scharwenka_kulturforum",
+        "bad_saarow_regattaplatz",
+        "bad_saarow_anlegestelle_bad_saarow_strand",
+        "bad_saarow_badestelle_diensdorf_radlow",
+        "bad_saarow_scharmutzelseegebiet",
+        "bad_saarow_aussichtspunkt_scharmutzelsee",
+        "bad_saarow_wasserwerk_bad_saarow_gbr",
+        "bad_saarow_golf_club_bad_saarow"
+      ]
+    },
+    {
+      "id": "bad_saarow_sonne3000_events_erlebnisse",
+      "name": "Sonne3000 - Events & Erlebnisse",
+      "category": "tour",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.30057933333333,
+        "lng": 14.06555088888889
+      },
+      "query": "Sonne3000, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2794025,
+        "lng": 14.0568885,
+        "display_name": "Sonne3000, Karl-Marx-Damm, Dorf Saarow, Pieskow, Bad Saarow, Scharmützelsee, Oder-Spree, Brandenburg, 15526, Deutschland",
+        "class": "amenity",
+        "type": "boat_rental",
+        "importance": 0.00004603418020900309,
+        "osm_type": "way",
+        "osm_id": 836344255,
+        "provider": "nominatim"
+      },
+      "delta_m": 2427,
+      "from_city_m": 3015,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_scharmutzelsee",
+      "name": "Scharmützelsee",
+      "category": "radweg",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.2671345,
+        "lng": 14.063191699999999
+      },
+      "query": "Scharmützelsee, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2472886,
+        "lng": 14.0568991,
+        "display_name": "Scharmützelsee, Bad Saarow, Scharmützelsee, Oder-Spree, Brandenburg, 15864, Deutschland",
+        "class": "water",
+        "type": "lake",
+        "importance": 0.35699141996923245,
+        "osm_type": "relation",
+        "osm_id": 19599385,
+        "provider": "nominatim"
+      },
+      "delta_m": 2248,
+      "from_city_m": 986,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "bad_saarow_dorfkirche_pieskow",
+        "bad_saarow_marchenwald_bad_saarow_pieskow",
+        "bad_saarow_ferienhaus_direkt_am_scharmutzelsee_bad_saarow_halbinsel_alte_eichen",
+        "bad_saarow_kletterwald_bad_saarow",
+        "bad_saarow_stolperstein_goldstein"
+      ]
+    },
+    {
+      "id": "bad_saarow_badestelle_bad_saarow_pieskow",
+      "name": "Badestelle Bad Saarow Pieskow",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.283668375,
+        "lng": 14.061734875000003
+      },
+      "query": "Badestelle Bad Saarow Pieskow, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2637474,
+        "lng": 14.0658722,
+        "display_name": "Badestelle, Theresienhof, Pieskow, Bad Saarow, Scharmützelsee, Oder-Spree, Brandenburg, Deutschland",
+        "class": "natural",
+        "type": "beach",
+        "importance": 0.10671270084687569,
+        "osm_type": "way",
+        "osm_id": 284811812,
+        "provider": "nominatim"
+      },
+      "delta_m": 2233,
+      "from_city_m": 1148,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "bad_saarow_die_statue_von_johannes_r_becher",
+        "bad_saarow_bad_saarow_strand",
+        "bad_saarow_zentrale_notaufnahme_und_rettungsmedizin_helios_klinikum_bad_saarow"
+      ]
+    },
+    {
+      "id": "bad_saarow_kutsch_und_kremserfahrten_fred_peter",
+      "name": "Kutsch- und Kremserfahrten Fred Peter",
+      "category": "tour",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.28119819999999,
+        "lng": 14.034009399999999
+      },
+      "query": "Kutsch-, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2922975,
+        "lng": 14.0552305,
+        "display_name": "Bad Saarow, Oder-Spree, Deutschland",
+        "class": "place",
+        "type": "village",
+        "provider": "photon"
+      },
+      "delta_m": 1899,
+      "from_city_m": 1601,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_denkmal_titel_unbekannt",
+      "name": "Denkmal (Titel unbekannt)",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.28308572000001,
+        "lng": 14.06325352
+      },
+      "query": "Denkmal, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2668077,
+        "lng": 14.0655963,
+        "display_name": "Denkmal Victor F. Hess, Dorfstraße, Theresienhof, Pieskow, Bad Saarow, Scharmützelsee, Oder-Spree, Brandenburg, 15526, Deutschland",
+        "class": "historic",
+        "type": "memorial",
+        "importance": 0.00004603418020900309,
+        "osm_type": "node",
+        "osm_id": 8977102071,
+        "provider": "nominatim"
+      },
+      "delta_m": 1817,
+      "from_city_m": 1139,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_stolperstein_philippi",
+      "name": "Stolperstein Philippi",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.290211,
+        "lng": 14.043212599999999
+      },
+      "query": "Stolperstein Philippi, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2938449,
+        "lng": 14.0679233,
+        "display_name": "Philipp-Müller-Straße, Bad Saarow, Deutschland",
+        "class": "highway",
+        "type": "residential",
+        "provider": "photon"
+      },
+      "delta_m": 1728,
+      "from_city_m": 1933,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_fontanepark",
+      "name": "Fontanepark",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.2925836,
+        "lng": 14.0583358
+      },
+      "query": "Fontanepark, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2841698,
+        "lng": 14.04265,
+        "display_name": "Sportboothafen Fontanepark, Uferstraße, Dorf Saarow, Pieskow, Bad Saarow, Scharmützelsee, Oder-Spree, Brandenburg, 15526, Deutschland",
+        "class": "leisure",
+        "type": "marina",
+        "importance": 0.00004603418020900309,
+        "osm_type": "way",
+        "osm_id": 836208254,
+        "provider": "nominatim"
+      },
+      "delta_m": 1419,
+      "from_city_m": 2049,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "bad_saarow_bad_saarow",
+        "bad_saarow_bad_saarow_klinikum",
+        "bad_saarow_bad_saarow_bahnhof",
+        "bad_saarow_bad_saarow_hafen",
+        "bad_saarow_scharwenka_kulturforum",
+        "bad_saarow_regattaplatz",
+        "bad_saarow_anlegestelle_bad_saarow_strand",
+        "bad_saarow_badestelle_diensdorf_radlow",
+        "bad_saarow_scharmutzelseegebiet",
+        "bad_saarow_aussichtspunkt_scharmutzelsee",
+        "bad_saarow_wasserwerk_bad_saarow_gbr",
+        "bad_saarow_golf_club_bad_saarow"
+      ]
+    },
+    {
+      "id": "bad_saarow_bad_saarow_klinikum",
+      "name": "Bad Saarow Klinikum",
+      "category": "bahnhof",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.2925836,
+        "lng": 14.0583358
+      },
+      "query": "Bad Saarow Klinikum, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2849074,
+        "lng": 14.065955,
+        "display_name": "Bad Saarow Klinikum, Pieskower Straße, Pieskow, Bad Saarow, Scharmützelsee, Oder-Spree, Brandenburg, 15526, Deutschland",
+        "class": "railway",
+        "type": "stop",
+        "importance": 0.00004603418020900309,
+        "osm_type": "node",
+        "osm_id": 1095687586,
+        "provider": "nominatim"
+      },
+      "delta_m": 999,
+      "from_city_m": 2049,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "bad_saarow_bad_saarow",
+        "bad_saarow_bad_saarow_bahnhof",
+        "bad_saarow_bad_saarow_hafen",
+        "bad_saarow_fontanepark",
+        "bad_saarow_scharwenka_kulturforum",
+        "bad_saarow_regattaplatz",
+        "bad_saarow_anlegestelle_bad_saarow_strand",
+        "bad_saarow_badestelle_diensdorf_radlow",
+        "bad_saarow_scharmutzelseegebiet",
+        "bad_saarow_aussichtspunkt_scharmutzelsee",
+        "bad_saarow_wasserwerk_bad_saarow_gbr",
+        "bad_saarow_golf_club_bad_saarow"
+      ]
+    },
+    {
+      "id": "bad_saarow_bad_saarow_ferienhaus_am_hafen",
+      "name": "Bad Saarow Ferienhaus am Hafen",
+      "category": "wanderung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.2846484,
+        "lng": 14.0408928
+      },
+      "query": "Bad Saarow Ferienhaus am Hafen, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2909806,
+        "lng": 14.0477616,
+        "display_name": "Saarow Hafen, Ludwig-Lesser-Promenade, Bad Saarow, Deutschland",
+        "class": "leisure",
+        "type": "marina",
+        "provider": "photon"
+      },
+      "delta_m": 845,
+      "from_city_m": 1484,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_bad_saarow_hafen",
+      "name": "Bad Saarow, Hafen",
+      "category": "bahnhof",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.2925836,
+        "lng": 14.0583358
+      },
+      "query": "Bad Saarow, Hafen, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2909806,
+        "lng": 14.0477616,
+        "display_name": "Saarow Hafen, Ludwig-Lesser-Promenade, Bad Saarow, Deutschland",
+        "class": "leisure",
+        "type": "marina",
+        "provider": "photon"
+      },
+      "delta_m": 741,
+      "from_city_m": 2049,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "bad_saarow_bad_saarow",
+        "bad_saarow_bad_saarow_klinikum",
+        "bad_saarow_bad_saarow_bahnhof",
+        "bad_saarow_fontanepark",
+        "bad_saarow_scharwenka_kulturforum",
+        "bad_saarow_regattaplatz",
+        "bad_saarow_anlegestelle_bad_saarow_strand",
+        "bad_saarow_badestelle_diensdorf_radlow",
+        "bad_saarow_scharmutzelseegebiet",
+        "bad_saarow_aussichtspunkt_scharmutzelsee",
+        "bad_saarow_wasserwerk_bad_saarow_gbr",
+        "bad_saarow_golf_club_bad_saarow"
+      ]
+    },
+    {
+      "id": "bad_saarow_ahoi_mitsegeln_saarow_axel_henschke_ute_berger_gbr",
+      "name": "AHOI - Mitsegeln Saarow - Axel Henschke & Ute Berger GbR",
+      "category": "tour",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.289487380000004,
+        "lng": 14.045774600000001
+      },
+      "query": "AHOI, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2922975,
+        "lng": 14.0552305,
+        "display_name": "Bad Saarow, Oder-Spree, Deutschland",
+        "class": "place",
+        "type": "village",
+        "provider": "photon"
+      },
+      "delta_m": 715,
+      "from_city_m": 1794,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_bad_saarow_silberberg",
+      "name": "Bad Saarow, Silberberg",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.250998519999996,
+        "lng": 14.025635979999999
+      },
+      "query": "Bad Saarow, Silberberg, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2473222,
+        "lng": 14.0308339,
+        "display_name": "a-ja Resort Bad Saarow, 2, Am Golfplatz, Silberberg, Bad Saarow, Scharmützelsee, Oder-Spree, Brandenburg, 15526, Deutschland",
+        "class": "tourism",
+        "type": "hotel",
+        "importance": 0.00004603418020900309,
+        "osm_type": "way",
+        "osm_id": 376230455,
+        "provider": "nominatim"
+      },
+      "delta_m": 541,
+      "from_city_m": 3258,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_bunkermuseum_fuchsbau",
+      "name": "Bunkermuseum Fuchsbau",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.32343010000001,
+        "lng": 14.057665359999998
+      },
+      "query": "Bunkermuseum Fuchsbau, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.3265955,
+        "lng": 14.0630996,
+        "display_name": "Bunkermuseum Fuchsbau - Kasernenkomplex, Am Fuchsbau, Petersdorf, Bad Saarow, Scharmützelsee, Oder-Spree, Brandenburg, 15526, Deutschland",
+        "class": "information",
+        "type": "board",
+        "importance": 0.00004603418020900309,
+        "osm_type": "node",
+        "osm_id": 13839953338,
+        "provider": "nominatim"
+      },
+      "delta_m": 510,
+      "from_city_m": 5467,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_wierich_wiesen",
+      "name": "Wierich-Wiesen",
+      "category": "wanderung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.292147,
+        "lng": 14.055825571428572
+      },
+      "query": "Wierich-Wiesen, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2964125,
+        "lng": 14.053214,
+        "display_name": "Wierichswiesen, Bad Saarow, Deutschland",
+        "class": "place",
+        "type": "locality",
+        "provider": "photon"
+      },
+      "delta_m": 506,
+      "from_city_m": 1987,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "bad_saarow_stan_eby_golfplatz",
+        "bad_saarow_tennis_center_bad_saarow",
+        "bad_saarow_cinema_by_velotel",
+        "bad_saarow_liegewiese",
+        "bad_saarow_bank_mit_aussicht"
+      ]
+    },
+    {
+      "id": "bad_saarow_bad_saarow",
+      "name": "Bad Saarow",
+      "category": "bahnhof",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.29258030555556,
+        "lng": 14.058335988888892
+      },
+      "query": "Bad Saarow, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2934918,
+        "lng": 14.0648085,
+        "display_name": "Bad Saarow, Bahnhofsplatz, Neu Golm, Bad Saarow, Scharmützelsee, Oder-Spree, Brandenburg, 15526, Deutschland",
+        "class": "railway",
+        "type": "station",
+        "importance": 0.09078915819201436,
+        "osm_type": "node",
+        "osm_id": 47127841,
+        "provider": "nominatim"
+      },
+      "delta_m": 452,
+      "from_city_m": 2048,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "bad_saarow_bad_saarow_klinikum",
+        "bad_saarow_bad_saarow_bahnhof",
+        "bad_saarow_bad_saarow_hafen",
+        "bad_saarow_fontanepark",
+        "bad_saarow_scharwenka_kulturforum",
+        "bad_saarow_regattaplatz",
+        "bad_saarow_anlegestelle_bad_saarow_strand",
+        "bad_saarow_badestelle_diensdorf_radlow",
+        "bad_saarow_scharmutzelseegebiet",
+        "bad_saarow_aussichtspunkt_scharmutzelsee",
+        "bad_saarow_wasserwerk_bad_saarow_gbr",
+        "bad_saarow_golf_club_bad_saarow"
+      ]
+    },
+    {
+      "id": "bad_saarow_golf_club_bad_saarow",
+      "name": "Golf Club Bad Saarow",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.2925836,
+        "lng": 14.0583358
+      },
+      "query": "Golf Club Bad Saarow, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2934918,
+        "lng": 14.0648085,
+        "display_name": "Bad Saarow, Bahnhofsplatz, Bad Saarow, Deutschland",
+        "class": "railway",
+        "type": "station",
+        "provider": "photon"
+      },
+      "delta_m": 452,
+      "from_city_m": 2049,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "bad_saarow_bad_saarow",
+        "bad_saarow_bad_saarow_klinikum",
+        "bad_saarow_bad_saarow_bahnhof",
+        "bad_saarow_bad_saarow_hafen",
+        "bad_saarow_fontanepark",
+        "bad_saarow_scharwenka_kulturforum",
+        "bad_saarow_regattaplatz",
+        "bad_saarow_anlegestelle_bad_saarow_strand",
+        "bad_saarow_badestelle_diensdorf_radlow",
+        "bad_saarow_scharmutzelseegebiet",
+        "bad_saarow_aussichtspunkt_scharmutzelsee",
+        "bad_saarow_wasserwerk_bad_saarow_gbr"
+      ]
+    },
+    {
+      "id": "bad_saarow_bad_saarow_classics",
+      "name": "BAD SAAROW CLASSICS",
+      "category": "wanderung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.29169585714285,
+        "lng": 14.059860714285715
+      },
+      "query": "BAD SAAROW CLASSICS, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2934918,
+        "lng": 14.0648085,
+        "display_name": "Bad Saarow, Bahnhofsplatz, Bad Saarow, Deutschland",
+        "class": "railway",
+        "type": "station",
+        "provider": "photon"
+      },
+      "delta_m": 391,
+      "from_city_m": 1967,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_boutique_vived",
+      "name": "Boutique Vived",
+      "category": "souvenir",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.29455057142858,
+        "lng": 14.063953428571429
+      },
+      "query": "Boutique Vived, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2920608,
+        "lng": 14.061216,
+        "display_name": "Royal Boutique, Seestraße, Bad Saarow, Deutschland",
+        "class": "shop",
+        "type": "boutique",
+        "provider": "photon"
+      },
+      "delta_m": 334,
+      "from_city_m": 2339,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_park_kurpark_kolonnaden",
+      "name": "Park Kurpark Kolonnaden",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.29061818139535,
+        "lng": 14.058712109302329
+      },
+      "query": "Park Kurpark Kolonnaden, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2926671,
+        "lng": 14.0618381,
+        "display_name": "Kurpark Kolonnaden, Bad Saarow, Deutschland",
+        "class": "landuse",
+        "type": "retail",
+        "provider": "photon"
+      },
+      "delta_m": 312,
+      "from_city_m": 1836,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "bad_saarow_kurpark",
+        "bad_saarow_seebalkon_am_kurpark"
+      ]
+    },
+    {
+      "id": "bad_saarow_scharwenka_kulturforum",
+      "name": "Scharwenka Kulturforum",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.2925836,
+        "lng": 14.0583358
+      },
+      "query": "Scharwenka Kulturforum, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2947156,
+        "lng": 14.0573096,
+        "display_name": "Scharwenka Kulturforum, Moorstraße, Bad Saarow, Scharmützelsee, Oder-Spree, Brandenburg, 15526, Deutschland",
+        "class": "amenity",
+        "type": "events_venue",
+        "importance": 0.10540294855860563,
+        "osm_type": "node",
+        "osm_id": 3433606680,
+        "provider": "nominatim"
+      },
+      "delta_m": 247,
+      "from_city_m": 2049,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "bad_saarow_bad_saarow",
+        "bad_saarow_bad_saarow_klinikum",
+        "bad_saarow_bad_saarow_bahnhof",
+        "bad_saarow_bad_saarow_hafen",
+        "bad_saarow_fontanepark",
+        "bad_saarow_regattaplatz",
+        "bad_saarow_anlegestelle_bad_saarow_strand",
+        "bad_saarow_badestelle_diensdorf_radlow",
+        "bad_saarow_scharmutzelseegebiet",
+        "bad_saarow_aussichtspunkt_scharmutzelsee",
+        "bad_saarow_wasserwerk_bad_saarow_gbr",
+        "bad_saarow_golf_club_bad_saarow"
+      ]
+    },
+    {
+      "id": "bad_saarow_zufahrt_zum_bunkermuseum_fuchsbau",
+      "name": "Zufahrt zum Bunkermuseum Fuchsbau",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.327735919999995,
+        "lng": 14.065926
+      },
+      "query": "Zufahrt zum Bunkermuseum Fuchsbau, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.3265188,
+        "lng": 14.0628857,
+        "display_name": "Bunkermuseum Fuchsbau - Der neue Bunker, Am Fuchsbau, Bad Saarow, Deutschland",
+        "class": "information",
+        "type": "board",
+        "provider": "photon"
+      },
+      "delta_m": 247,
+      "from_city_m": 5991,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_regattaplatz",
+      "name": "Regattaplatz",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.2925836,
+        "lng": 14.0583358
+      },
+      "query": "Regattaplatz, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2922975,
+        "lng": 14.0552305,
+        "display_name": "Bad Saarow, Oder-Spree, Deutschland",
+        "class": "place",
+        "type": "village",
+        "provider": "photon"
+      },
+      "delta_m": 214,
+      "from_city_m": 2049,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "bad_saarow_bad_saarow",
+        "bad_saarow_bad_saarow_klinikum",
+        "bad_saarow_bad_saarow_bahnhof",
+        "bad_saarow_bad_saarow_hafen",
+        "bad_saarow_fontanepark",
+        "bad_saarow_scharwenka_kulturforum",
+        "bad_saarow_anlegestelle_bad_saarow_strand",
+        "bad_saarow_badestelle_diensdorf_radlow",
+        "bad_saarow_scharmutzelseegebiet",
+        "bad_saarow_aussichtspunkt_scharmutzelsee",
+        "bad_saarow_wasserwerk_bad_saarow_gbr",
+        "bad_saarow_golf_club_bad_saarow"
+      ]
+    },
+    {
+      "id": "bad_saarow_scharmutzelseegebiet",
+      "name": "Scharmützelseegebiet",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.2925836,
+        "lng": 14.0583358
+      },
+      "query": "Scharmützelseegebiet, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2922975,
+        "lng": 14.0552305,
+        "display_name": "Bad Saarow, Oder-Spree, Deutschland",
+        "class": "place",
+        "type": "village",
+        "provider": "photon"
+      },
+      "delta_m": 214,
+      "from_city_m": 2049,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "bad_saarow_bad_saarow",
+        "bad_saarow_bad_saarow_klinikum",
+        "bad_saarow_bad_saarow_bahnhof",
+        "bad_saarow_bad_saarow_hafen",
+        "bad_saarow_fontanepark",
+        "bad_saarow_scharwenka_kulturforum",
+        "bad_saarow_regattaplatz",
+        "bad_saarow_anlegestelle_bad_saarow_strand",
+        "bad_saarow_badestelle_diensdorf_radlow",
+        "bad_saarow_aussichtspunkt_scharmutzelsee",
+        "bad_saarow_wasserwerk_bad_saarow_gbr",
+        "bad_saarow_golf_club_bad_saarow"
+      ]
+    },
+    {
+      "id": "bad_saarow_spielplatz_klinikum_bad_saarow",
+      "name": "Spielplatz Klinikum Bad Saarow",
+      "category": "wanderung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.283659879999995,
+        "lng": 14.06369522
+      },
+      "query": "Spielplatz Klinikum Bad Saarow, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2846535,
+        "lng": 14.0659335,
+        "display_name": "Bad Saarow-Klinikum, Pieskower Straße, Bad Saarow, Deutschland",
+        "class": "railway",
+        "type": "halt",
+        "provider": "photon"
+      },
+      "delta_m": 188,
+      "from_city_m": 1209,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_lounge_catwalk",
+      "name": "Lounge Catwalk",
+      "category": "souvenir",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.2914888,
+        "lng": 14.063227000000001
+      },
+      "query": "Lounge Catwalk, Bad Saarow",
+      "osm": {
+        "lat": 36.8101854,
+        "lng": 10.1543007,
+        "display_name": "محطة اللواج باب سعدون, نهج جان باتيست كبان, Tunis, Tunesien",
+        "class": "amenity",
+        "type": "taxi",
+        "provider": "photon"
+      },
+      "delta_m": 1748427,
+      "from_city_m": 1999,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_die_statue_von_johannes_r_becher",
+      "name": "Die Statue von Johannes R.Becher",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.283668275000004,
+        "lng": 14.0617348875
+      },
+      "query": "Die Statue von, Bad Saarow, Germany",
+      "osm": {
+        "lat": 48.5145337,
+        "lng": 9.4592809,
+        "display_name": "Der Heidengraben - die Befestigung südlich von Grabenstetten, Tor E, Saaleweg, Grabenstetten, Deutschland",
+        "class": "information",
+        "type": "board",
+        "provider": "photon"
+      },
+      "delta_m": 530878,
+      "from_city_m": 1148,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city",
+        "duplicate_center"
+      ],
+      "twins": [
+        "bad_saarow_bad_saarow_strand",
+        "bad_saarow_badestelle_bad_saarow_pieskow",
+        "bad_saarow_zentrale_notaufnahme_und_rettungsmedizin_helios_klinikum_bad_saarow"
+      ]
+    },
+    {
+      "id": "bad_saarow_andre_streine",
+      "name": "André Streine",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.21366666,
+        "lng": 14.01139778
+      },
+      "query": "André Streine, Bad Saarow, Germany",
+      "osm": {
+        "lat": 49.8111298,
+        "lng": 7.8469428,
+        "display_name": "Dr. Andreas Rabel, Goetheplatz, Bad Kreuznach, Deutschland",
+        "class": "amenity",
+        "type": "doctors",
+        "provider": "photon"
+      },
+      "delta_m": 507041,
+      "from_city_m": 7357,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city",
+        "duplicate_center"
+      ],
+      "twins": [
+        "bad_saarow_markgrafensteine"
+      ]
+    },
+    {
+      "id": "bad_saarow_steinbach_brunnen",
+      "name": "Steinbach-Brunnen",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.284065428571445,
+        "lng": 14.063075571428572
+      },
+      "query": "Steinbach-Brunnen, Bad Saarow, Germany",
+      "osm": {
+        "lat": 48.9557211,
+        "lng": 9.4814497,
+        "display_name": "Brunnen, Backnang, Deutschland",
+        "class": "place",
+        "type": "locality",
+        "provider": "photon"
+      },
+      "delta_m": 491176,
+      "from_city_m": 1228,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city",
+        "duplicate_center"
+      ],
+      "twins": [
+        "bad_saarow_badestelle_westufer_scharmutzelsee"
+      ]
+    },
+    {
+      "id": "bad_saarow_der_fitness_treff_hajo_schrobitz",
+      "name": "Der Fitness Treff, Hajo Schrobitz",
+      "category": "radweg",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.29106827777778,
+        "lng": 14.059845722222223
+      },
+      "query": "Der Fitness Treff,, Bad Saarow, Germany",
+      "osm": {
+        "lat": 50.3726673,
+        "lng": 8.7498518,
+        "display_name": "Fitness-Treff, An der Birkenkaute, Steinfurth, Deutschland",
+        "class": "leisure",
+        "type": "fitness_centre",
+        "provider": "photon"
+      },
+      "delta_m": 425993,
+      "from_city_m": 1898,
+      "status": "CHECK",
+      "flags": [
+        "osm_match_outside_city"
+      ],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_marchenwald_bad_saarow_pieskow",
+      "name": "Märchenwald Bad Saarow Pieskow",
+      "category": "radweg",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.2671345,
+        "lng": 14.063191699999999
+      },
+      "query": "Märchenwald Bad Saarow Pieskow, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2666624,
+        "lng": 14.0653421,
+        "display_name": "Märchenwald, Dorfstraße, Theresienhof, Pieskow, Bad Saarow, Scharmützelsee, Oder-Spree, Brandenburg, 15526, Deutschland",
+        "class": "tourism",
+        "type": "artwork",
+        "importance": 0.00004603418020900309,
+        "osm_type": "node",
+        "osm_id": 1137905024,
+        "provider": "nominatim"
+      },
+      "delta_m": 155,
+      "from_city_m": 986,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "bad_saarow_dorfkirche_pieskow",
+        "bad_saarow_ferienhaus_direkt_am_scharmutzelsee_bad_saarow_halbinsel_alte_eichen",
+        "bad_saarow_scharmutzelsee",
+        "bad_saarow_kletterwald_bad_saarow",
+        "bad_saarow_stolperstein_goldstein"
+      ]
+    },
+    {
+      "id": "bad_saarow_sonne3000_clubschiff3000",
+      "name": "Sonne3000 - Clubschiff3000",
+      "category": "tour",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.280634879999994,
+        "lng": 14.05604822
+      },
+      "query": "Sonne3000, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2794025,
+        "lng": 14.0568885,
+        "display_name": "Sonne3000, Karl-Marx-Damm, Dorf Saarow, Pieskow, Bad Saarow, Scharmützelsee, Oder-Spree, Brandenburg, 15526, Deutschland",
+        "class": "amenity",
+        "type": "boat_rental",
+        "importance": 0.00004603418020900309,
+        "osm_type": "way",
+        "osm_id": 836344255,
+        "provider": "nominatim"
+      },
+      "delta_m": 148,
+      "from_city_m": 711,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_waldfriedhof_bad_saarow",
+      "name": "Waldfriedhof Bad Saarow",
+      "category": "wanderung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.28444118,
+        "lng": 14.02782402
+      },
+      "query": "Waldfriedhof Bad Saarow, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2832359,
+        "lng": 14.0278383,
+        "display_name": "Waldfriedhof Bad Saarow, Marienhöhe, Bad Saarow, Scharmützelsee, Oder-Spree, Brandenburg, Deutschland",
+        "class": "landuse",
+        "type": "cemetery",
+        "importance": 0.08004603418020902,
+        "osm_type": "way",
+        "osm_id": 337367172,
+        "provider": "nominatim"
+      },
+      "delta_m": 134,
+      "from_city_m": 2146,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_ferienhaus_am_see",
+      "name": "Ferienhaus am See",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.31423910000001,
+        "lng": 14.06767628
+      },
+      "query": "Ferienhaus am See, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.3133915,
+        "lng": 14.0666054,
+        "display_name": "Am See, Bad Saarow, Deutschland",
+        "class": "highway",
+        "type": "secondary",
+        "provider": "photon"
+      },
+      "delta_m": 119,
+      "from_city_m": 4529,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_seebalkon_am_kurpark",
+      "name": "Seebalkon am Kurpark",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.29061818139535,
+        "lng": 14.058712109302329
+      },
+      "query": "Seebalkon am Kurpark, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2909693,
+        "lng": 14.0603503,
+        "display_name": "SaarowTherme, Am Kurpark, Bad Saarow, Deutschland",
+        "class": "amenity",
+        "type": "public_bath",
+        "provider": "photon"
+      },
+      "delta_m": 118,
+      "from_city_m": 1836,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "bad_saarow_kurpark",
+        "bad_saarow_park_kurpark_kolonnaden"
+      ]
+    },
+    {
+      "id": "bad_saarow_bad_saarow_theresienhof",
+      "name": "Bad Saarow, Theresienhof",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.26071712,
+        "lng": 14.073847259999999
+      },
+      "query": "Bad Saarow, Theresienhof, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2601882,
+        "lng": 14.0724752,
+        "display_name": "Schlosspark Bad Saarow, Diensdorfer Straße, Theresienhof, Pieskow, Bad Saarow, Scharmützelsee, Oder-Spree, Brandenburg, 15526, Deutschland",
+        "class": "leisure",
+        "type": "resort",
+        "importance": 0.00004792172121762444,
+        "osm_type": "way",
+        "osm_id": 108138960,
+        "provider": "nominatim"
+      },
+      "delta_m": 110,
+      "from_city_m": 1996,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_markgrafenplatz",
+      "name": "Markgrafenplatz",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.28379962,
+        "lng": 14.05735646
+      },
+      "query": "Markgrafenplatz, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2842705,
+        "lng": 14.0565547,
+        "display_name": "Markgrafenplatz, Dorf Saarow, Pieskow, Bad Saarow, Scharmützelsee, Oder-Spree, Brandenburg, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "importance": 0.08004603418020902,
+        "osm_type": "way",
+        "osm_id": 98008622,
+        "provider": "nominatim"
+      },
+      "delta_m": 76,
+      "from_city_m": 1073,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "bad_saarow_osm_transit_8856473271"
+      ]
+    },
+    {
+      "id": "bad_saarow_erich_weinert_platz",
+      "name": "Erich-Weinert-Platz",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.29072014,
+        "lng": 14.045945280000002
+      },
+      "query": "Erich-Weinert-Platz, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2911479,
+        "lng": 14.0466511,
+        "display_name": "Erich-Weinert-Platz, Bad Saarow, Scharmützelsee, Oder-Spree, Brandenburg, 15526, Deutschland",
+        "class": "leisure",
+        "type": "common",
+        "importance": 0.06671270084687571,
+        "osm_type": "node",
+        "osm_id": 3448578268,
+        "provider": "nominatim"
+      },
+      "delta_m": 68,
+      "from_city_m": 1920,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_schlosspark_bad_saarow",
+      "name": "Schlosspark Bad Saarow",
+      "category": "natur",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.26052259999999,
+        "lng": 14.073256400000002
+      },
+      "query": "Schlosspark Bad Saarow, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2601882,
+        "lng": 14.0724752,
+        "display_name": "Schlosspark Bad Saarow, Am Theresienhof, Theresienhof, Pieskow, Bad Saarow, Scharmützelsee, Oder-Spree, Brandenburg, 15526, Deutschland",
+        "class": "leisure",
+        "type": "resort",
+        "importance": 0.00004792172121762444,
+        "osm_type": "way",
+        "osm_id": 108138960,
+        "provider": "nominatim"
+      },
+      "delta_m": 65,
+      "from_city_m": 1987,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_evangelische_kirche",
+      "name": "Evangelische Kirche",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.2935232,
+        "lng": 14.0541742
+      },
+      "query": "Evangelische Kirche, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2930341,
+        "lng": 14.0545864,
+        "display_name": "Saarower Kirche, Kirchstraße, Bad Saarow, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 61,
+      "from_city_m": 2138,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_bank_mit_aussicht",
+      "name": "Bank mit Aussicht",
+      "category": "wanderung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.292147,
+        "lng": 14.055825571428572
+      },
+      "query": "Bank, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2922975,
+        "lng": 14.0552305,
+        "display_name": "Bad Saarow, Oder-Spree, Deutschland",
+        "class": "place",
+        "type": "village",
+        "provider": "photon"
+      },
+      "delta_m": 44,
+      "from_city_m": 1987,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "bad_saarow_stan_eby_golfplatz",
+        "bad_saarow_tennis_center_bad_saarow",
+        "bad_saarow_cinema_by_velotel",
+        "bad_saarow_wierich_wiesen",
+        "bad_saarow_liegewiese"
+      ]
+    },
+    {
+      "id": "bad_saarow_kurpark",
+      "name": "Kurpark",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.29061818139535,
+        "lng": 14.058712109302329
+      },
+      "query": "Kurpark, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2905581,
+        "lng": 14.0584384,
+        "display_name": "Kurpark, Bad Saarow, Scharmützelsee, Oder-Spree, Brandenburg, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "importance": 0.08004603418020902,
+        "osm_type": "way",
+        "osm_id": 94113558,
+        "provider": "nominatim"
+      },
+      "delta_m": 20,
+      "from_city_m": 1836,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "bad_saarow_park_kurpark_kolonnaden",
+        "bad_saarow_seebalkon_am_kurpark"
+      ]
+    },
+    {
+      "id": "bad_saarow_dorfkirche_pieskow",
+      "name": "Dorfkirche Pieskow",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.267134379999995,
+        "lng": 14.06319163
+      },
+      "query": "Dorfkirche Pieskow, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2671504,
+        "lng": 14.0631884,
+        "display_name": "Dorfkirche Pieskow, Dorfstraße, Theresienhof, Pieskow, Bad Saarow, Scharmützelsee, Oder-Spree, Brandenburg, 15526, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.10540294855860563,
+        "osm_type": "way",
+        "osm_id": 98355687,
+        "provider": "nominatim"
+      },
+      "delta_m": 2,
+      "from_city_m": 986,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "bad_saarow_marchenwald_bad_saarow_pieskow",
+        "bad_saarow_ferienhaus_direkt_am_scharmutzelsee_bad_saarow_halbinsel_alte_eichen",
+        "bad_saarow_scharmutzelsee",
+        "bad_saarow_kletterwald_bad_saarow",
+        "bad_saarow_stolperstein_goldstein"
+      ]
+    },
+    {
+      "id": "bad_saarow_skulptur_schwebender_findling",
+      "name": "Skulptur \"schwebender Findling\"",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.283352642857146,
+        "lng": 14.06235114285714
+      },
+      "query": "Skulptur \"schwebender Findling\", Bad Saarow",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 1135,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_cinema_by_velotel",
+      "name": "Cinema by Velotel",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.292147,
+        "lng": 14.055825571428572
+      },
+      "query": "Cinema by Velotel, Bad Saarow",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 1987,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "bad_saarow_stan_eby_golfplatz",
+        "bad_saarow_tennis_center_bad_saarow",
+        "bad_saarow_wierich_wiesen",
+        "bad_saarow_liegewiese",
+        "bad_saarow_bank_mit_aussicht"
+      ]
+    },
+    {
+      "id": "bad_saarow_fahrradverleih_ernest_scheffler_home_of_bikes",
+      "name": "Fahrradverleih Ernest Scheffler \"home of bikes\"",
+      "category": "radweg",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.29476614285714,
+        "lng": 14.067304714285713
+      },
+      "query": "Fahrradverleih Ernest Scheffler, Bad Saarow, Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 2433,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_stolperstein_goldstein",
+      "name": "Stolperstein Goldstein",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.2671345,
+        "lng": 14.063191699999999
+      },
+      "query": "Stolperstein Goldstein, Bad Saarow",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 986,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "bad_saarow_dorfkirche_pieskow",
+        "bad_saarow_marchenwald_bad_saarow_pieskow",
+        "bad_saarow_ferienhaus_direkt_am_scharmutzelsee_bad_saarow_halbinsel_alte_eichen",
+        "bad_saarow_scharmutzelsee",
+        "bad_saarow_kletterwald_bad_saarow"
+      ]
+    },
+    {
+      "id": "bad_saarow_stolperstein_behrens",
+      "name": "Stolperstein Behrens",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.282524333333335,
+        "lng": 14.040334166666666
+      },
+      "query": "Stolperstein Behrens, Bad Saarow",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 1337,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_stolperstein_herrnstadt",
+      "name": "Stolperstein Herrnstadt",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.294044799999995,
+        "lng": 14.054611399999999
+      },
+      "query": "Stolperstein Herrnstadt, Bad Saarow",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 2196,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_wohlfuhlboot_hausboot_mieten_in_berlin_brandenburg_bad_saarow_am_scha",
+      "name": "Wohlfühlboot Hausboot mieten in Berlin & Brandenburg ( Bad Saarow am Scharmützelsee )",
+      "category": "tour",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.292748874999994,
+        "lng": 14.062138875
+      },
+      "query": "Wohlfühlboot Hausboot mieten, Bad Saarow, Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 2114,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_traumzeitboot_hausboote_yachten",
+      "name": "Traumzeitboot Hausboote & Yachten",
+      "category": "tour",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.28087075,
+        "lng": 14.058038750000001
+      },
+      "query": "Traumzeitboot Hausboote, Bad Saarow",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 766,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_einfach_tele_mobil_stefan_von_collrepp",
+      "name": "Einfach-Tele-Mobil Stefan von Collrepp",
+      "category": "souvenir",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.29260089473683,
+        "lng": 14.06448947368421
+      },
+      "query": "Einfach-Tele-Mobil Stefan von, Bad Saarow, Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 2142,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_hofgemeinschaft_marienhohe_gbr",
+      "name": "Hofgemeinschaft Marienhöhe GbR",
+      "category": "markt",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.29086866666666,
+        "lng": 14.022775166666667
+      },
+      "query": "Hofgemeinschaft Marienhöhe GbR, Bad Saarow",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 2846,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_aussichtsturm_rauener_berge",
+      "name": "Aussichtsturm Rauener Berge",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.32013522000001,
+        "lng": 14.039564480000001
+      },
+      "query": "Aussichtsturm Rauener Berge, Bad Saarow",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 5199,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_insekten_paradies_garten_der_burg_storkow",
+      "name": "Insekten Paradies Garten der Burg Storkow",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.252791773684216,
+        "lng": 13.933276205263159
+      },
+      "query": "Insekten Paradies Garten, Bad Saarow, Germany",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 8600,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "bad_saarow_burg_storkow"
+      ]
+    },
+    {
+      "id": "bad_saarow_hafen_wendisch_rietz",
+      "name": "Hafen Wendisch Rietz",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.21280081428572,
+        "lng": 14.011501842857141
+      },
+      "query": "Hafen Wendisch Rietz, Bad Saarow",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 7443,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_thermomix_reprasentantin_dajana_steinert",
+      "name": "Thermomix-Repräsentantin Dajana Steinert",
+      "category": "souvenir",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.31709254,
+        "lng": 14.071297300000001
+      },
+      "query": "Thermomix-Repräsentantin Dajana Steinert, Bad Saarow",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 4891,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_cecilienpark",
+      "name": "Cecilienpark",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.2798766625,
+        "lng": 14.056854731250002
+      },
+      "query": "Cecilienpark, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2794081,
+        "lng": 14.0564254,
+        "display_name": "Cecilienpark, Dorf Saarow, Pieskow, Bad Saarow, Scharmützelsee, Oder-Spree, Brandenburg, Deutschland",
+        "class": "natural",
+        "type": "beach",
+        "importance": 0.10671270084687569,
+        "osm_type": "way",
+        "osm_id": 284811813,
+        "provider": "nominatim"
+      },
+      "delta_m": 60,
+      "from_city_m": 638,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_kleistpark",
+      "name": "Kleistpark",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.28099694,
+        "lng": 14.04044884
+      },
+      "query": "Kleistpark, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2809976,
+        "lng": 14.0398333,
+        "display_name": "Kleistpark, Dorf Saarow, Pieskow, Bad Saarow, Scharmützelsee, Oder-Spree, Brandenburg, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "importance": 0.08004603418020902,
+        "osm_type": "way",
+        "osm_id": 836208255,
+        "provider": "nominatim"
+      },
+      "delta_m": 42,
+      "from_city_m": 1220,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_marina_hafen_freilichtbuhne",
+      "name": "Marina Hafen Freilichtbühne",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.290018880000005,
+        "lng": 14.04624456
+      },
+      "query": "Marina Hafen Freilichtbühne, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2901996,
+        "lng": 14.0464761,
+        "display_name": "Hafen Freilichtbühne, Freilichtbühne, Bad Saarow, Scharmützelsee, Oder-Spree, Brandenburg, 15526, Deutschland",
+        "class": "leisure",
+        "type": "marina",
+        "importance": 0.00004603418020900309,
+        "osm_type": "way",
+        "osm_id": 836363584,
+        "provider": "nominatim"
+      },
+      "delta_m": 26,
+      "from_city_m": 1840,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_hotel_esplanade_resort_spa",
+      "name": "Hotel Esplanade Resort & Spa",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.29172583333334,
+        "lng": 14.046982833333333
+      },
+      "query": "Hotel Esplanade Resort, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2918902,
+        "lng": 14.0468413,
+        "display_name": "Hotel Esplanade Resort & Spa, 49, Seestraße, Bad Saarow, Scharmützelsee, Oder-Spree, Brandenburg, 15526, Deutschland",
+        "class": "tourism",
+        "type": "hotel",
+        "importance": 0.00004603418020900309,
+        "osm_type": "way",
+        "osm_id": 320544112,
+        "provider": "nominatim"
+      },
+      "delta_m": 21,
+      "from_city_m": 2007,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_die_neue_buhne",
+      "name": "Die Neue Bühne",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.293763923076924,
+        "lng": 14.064246615384615
+      },
+      "query": "Die Neue Bühne, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2937191,
+        "lng": 14.0639909,
+        "display_name": "Die Neue Bühne, 3, Bahnhofsplatz, Neu Golm, Bad Saarow, Scharmützelsee, Oder-Spree, Brandenburg, 15526, Deutschland",
+        "class": "amenity",
+        "type": "restaurant",
+        "importance": 0.00004603418020900309,
+        "osm_type": "node",
+        "osm_id": 663434366,
+        "provider": "nominatim"
+      },
+      "delta_m": 18,
+      "from_city_m": 2261,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_saarowcentrum",
+      "name": "Saarowcentrum",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.293094839999995,
+        "lng": 14.058179400000002
+      },
+      "query": "Saarowcentrum, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2931167,
+        "lng": 14.0584269,
+        "display_name": "SaarowCentrum, 15, Ulmenstraße, Bad Saarow, Scharmützelsee, Oder-Spree, Brandenburg, 15526, Deutschland",
+        "class": "building",
+        "type": "government",
+        "importance": 0.00004603418020900309,
+        "osm_type": "way",
+        "osm_id": 320432667,
+        "provider": "nominatim"
+      },
+      "delta_m": 17,
+      "from_city_m": 2104,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_freilich_am_see",
+      "name": "Freilich am See",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.27906111111112,
+        "lng": 14.057069333333333
+      },
+      "query": "Freilich am See, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2789497,
+        "lng": 14.0571094,
+        "display_name": "Freilich am See, 57, Karl-Marx-Damm, Dorf Saarow, Pieskow, Bad Saarow, Scharmützelsee, Oder-Spree, Brandenburg, 15526, Deutschland",
+        "class": "amenity",
+        "type": "restaurant",
+        "importance": 0.00004603418020900309,
+        "osm_type": "way",
+        "osm_id": 335664095,
+        "provider": "nominatim"
+      },
+      "delta_m": 13,
+      "from_city_m": 555,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_platz_am_stein",
+      "name": "Platz am Stein",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.287534533333336,
+        "lng": 14.056544650000001
+      },
+      "query": "Platz am Stein, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2876064,
+        "lng": 14.0566526,
+        "display_name": "Platz am Stein, Bad Saarow, Scharmützelsee, Oder-Spree, Brandenburg, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "importance": 0.08004603418020902,
+        "osm_type": "way",
+        "osm_id": 94113525,
+        "provider": "nominatim"
+      },
+      "delta_m": 11,
+      "from_city_m": 1478,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_theater_am_see_restaurant",
+      "name": "Theater am See | Restaurant",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.291151,
+        "lng": 14.055693058823529
+      },
+      "query": "Theater am See, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2912417,
+        "lng": 14.0556904,
+        "display_name": "Theater am See, 22, Seestraße, Bad Saarow, Scharmützelsee, Oder-Spree, Brandenburg, 15526, Deutschland",
+        "class": "amenity",
+        "type": "theatre",
+        "importance": 0.00004603418020900309,
+        "osm_type": "way",
+        "osm_id": 836786659,
+        "provider": "nominatim"
+      },
+      "delta_m": 10,
+      "from_city_m": 1875,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_apotheke_am_kurpark",
+      "name": "Apotheke am Kurpark",
+      "category": "gesundheit",
+      "place_tier": 4,
+      "pack_role": "directory",
+      "amenity_skip": true,
+      "before": {
+        "lat": 52.29049339999999,
+        "lng": 14.0611656
+      },
+      "query": "Apotheke am Kurpark, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2904483,
+        "lng": 14.0612726,
+        "display_name": "Apotheke am Kurpark, 6, Am Kurpark, Bad Saarow, Scharmützelsee, Oder-Spree, Brandenburg, 15526, Deutschland",
+        "class": "amenity",
+        "type": "pharmacy",
+        "importance": 0.00004603418020900309,
+        "osm_type": "node",
+        "osm_id": 663434397,
+        "provider": "nominatim"
+      },
+      "delta_m": 9,
+      "from_city_m": 1855,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_wriezener_backstube",
+      "name": "Wriezener Backstube",
+      "category": "souvenir",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.292060000000006,
+        "lng": 14.063121599999999
+      },
+      "query": "Wriezener Backstube, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2920124,
+        "lng": 14.0632208,
+        "display_name": "Wriezener Backstube, Seestraße, Neu Golm, Bad Saarow, Scharmützelsee, Oder-Spree, Brandenburg, 15526, Deutschland",
+        "class": "shop",
+        "type": "bakery",
+        "importance": 0.00004603418020900309,
+        "osm_type": "node",
+        "osm_id": 6789206134,
+        "provider": "nominatim"
+      },
+      "delta_m": 9,
+      "from_city_m": 2057,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_zur_alten_gartnerei",
+      "name": "zur Alten Gärtnerei",
+      "category": "radweg",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.29556371428571,
+        "lng": 14.034078571428568
+      },
+      "query": "zur Alten Gärtnerei, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.295624,
+        "lng": 14.0341125,
+        "display_name": "zur Alten Gärtnerei, 15, Kolpiner Straße, Marienhöhe, Bad Saarow, Scharmützelsee, Oder-Spree, Brandenburg, 15526, Deutschland",
+        "class": "tourism",
+        "type": "chalet",
+        "importance": 0.00004603418020900309,
+        "osm_type": "way",
+        "osm_id": 633075781,
+        "provider": "nominatim"
+      },
+      "delta_m": 7,
+      "from_city_m": 2748,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_aja_bad_saarow",
+      "name": "aja Bad Saarow",
+      "category": "radweg",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.24735209090909,
+        "lng": 14.030932181818184
+      },
+      "query": "aja Bad Saarow, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2473222,
+        "lng": 14.0308339,
+        "display_name": "a-ja Resort Bad Saarow, Am Golfplatz, Bad Saarow, Deutschland",
+        "class": "tourism",
+        "type": "hotel",
+        "provider": "photon"
+      },
+      "delta_m": 7,
+      "from_city_m": 3403,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_amt_scharmutzelsee",
+      "name": "Amt-Scharmützelsee",
+      "category": "verwaltung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.2863474,
+        "lng": 14.060089199999998
+      },
+      "query": "Amt-Scharmützelsee, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2864031,
+        "lng": 14.0600995,
+        "display_name": "Amt Scharmützelsee, 4, Forsthausstraße, Dorf Saarow, Pieskow, Bad Saarow, Scharmützelsee, Oder-Spree, Brandenburg, 15526, Deutschland",
+        "class": "amenity",
+        "type": "townhall",
+        "importance": 0.00004603418020900309,
+        "osm_type": "way",
+        "osm_id": 98355734,
+        "provider": "nominatim"
+      },
+      "delta_m": 6,
+      "from_city_m": 1390,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_eibenhof_kultur_und_eventlocation",
+      "name": "Eibenhof - Kultur- und Eventlocation",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.2782382,
+        "lng": 14.0474434
+      },
+      "query": "Eibenhof, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2782056,
+        "lng": 14.0474531,
+        "display_name": "Herrenhaus Eibenhof, 30, Alte Eichen, Dorf Saarow, Pieskow, Bad Saarow, Scharmützelsee, Oder-Spree, Brandenburg, 15526, Deutschland",
+        "class": "historic",
+        "type": "manor",
+        "importance": 0.00004603418020900309,
+        "osm_type": "way",
+        "osm_id": 337190587,
+        "provider": "nominatim"
+      },
+      "delta_m": 4,
+      "from_city_m": 658,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_as_am_see",
+      "name": "AS am See",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.29206146153847,
+        "lng": 14.061647153846154
+      },
+      "query": "AS am See, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2920827,
+        "lng": 14.0616045,
+        "display_name": "AS am See, 9, Seestraße, Neu Golm, Bad Saarow, Scharmützelsee, Oder-Spree, Brandenburg, 15526, Deutschland",
+        "class": "amenity",
+        "type": "restaurant",
+        "importance": 0.00004603418020900309,
+        "osm_type": "way",
+        "osm_id": 336572483,
+        "provider": "nominatim"
+      },
+      "delta_m": 4,
+      "from_city_m": 2032,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_surf_fun",
+      "name": "Surf & Fun",
+      "category": "tour",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.259034199999995,
+        "lng": 14.071213199999999
+      },
+      "query": "Surf, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2590232,
+        "lng": 14.0712279,
+        "display_name": "Surf & Fun, Uferweg, Theresienhof, Pieskow, Bad Saarow, Scharmützelsee, Oder-Spree, Brandenburg, 15526, Deutschland",
+        "class": "amenity",
+        "type": "boat_rental",
+        "importance": 0.00004792172121762444,
+        "osm_type": "way",
+        "osm_id": 971402705,
+        "provider": "nominatim"
+      },
+      "delta_m": 2,
+      "from_city_m": 2037,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_ulmenhaus",
+      "name": "Ulmenhaus",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.2924224,
+        "lng": 14.055942399999998
+      },
+      "query": "Ulmenhaus, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.2924144,
+        "lng": 14.0559586,
+        "display_name": "Ulmenhaus, 16, Ulmenstraße, Bad Saarow, Scharmützelsee, Oder-Spree, Brandenburg, 15526, Deutschland",
+        "class": "tourism",
+        "type": "chalet",
+        "importance": 0.00004603418020900309,
+        "osm_type": "way",
+        "osm_id": 259374742,
+        "provider": "nominatim"
+      },
+      "delta_m": 1,
+      "from_city_m": 2017,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "bad_saarow_kinderkunst_galerie",
+      "name": "KinderKunst Galerie",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 52.293219,
+        "lng": 14.0594866
+      },
+      "query": "KinderKunst Galerie, Bad Saarow, Germany",
+      "osm": {
+        "lat": 52.293218,
+        "lng": 14.0594917,
+        "display_name": "KinderKunst Galerie, Lindenstraße, Bad Saarow, Scharmützelsee, Oder-Spree, Brandenburg, 15526, Deutschland",
+        "class": "tourism",
+        "type": "artwork",
+        "importance": 0.00004603418020900309,
+        "osm_type": "way",
+        "osm_id": 632774971,
+        "provider": "nominatim"
+      },
+      "delta_m": 0,
+      "from_city_m": 2130,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    }
+  ]
+}

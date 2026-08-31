@@ -33,7 +33,8 @@ export type EmergencyKind =
   | 'pharmacy'
   | 'doctor'
   | 'dentist'
-  | 'lost';
+  | 'lost'
+  | 'docs';
 
 /** Körperteil / Symptom → richtige Einrichtung (nicht Zahn bei Knöchel). */
 export type InjurySpecialty =
@@ -59,6 +60,10 @@ const HELP_FAST_RE =
   /\b(hilfe|schnell|sofort|dringend|nächste[rn]?|in\s+der\s+nähe|rauszuchen|finden)\b/iu;
 const LOST_RE =
   /\b(verloren|verlaufen|verirrt|ich\s+(find|finde)\s+(den\s+weg\s+)?nicht|ich\s+hab\s+mich\s+(verlaufen|verirrt|verloren)|bin\s+ich\s+verloren|lost)\b/iu;
+
+/** Reisepass / Ausweis / Konsulat — VOR person-lost. */
+const DOCS_LOST_RE =
+  /\b(reisepass|pass(?:wort)?|ausweis|personalausweis|konsulat|botschaft|auslandsvertretung|portemonnaie|geldbeutel|kreditkarte|geklaut|gestohlen)\b/iu;
 
 const FOOT_RE =
   /\b(fu[sß]|fuss|knöchel|knoechel|knie|bein|sprunggelenk).{0,24}\b(gebrochen|verstaucht|weh|schmerz|verletz)|(?:gebrochen|verstaucht).{0,24}\b(fu[sß]|fuss|knöchel|knoechel|knie|bein)\b/iu;
@@ -100,6 +105,7 @@ export function detectEmergencyIntent(text: string): EmergencyKind | null {
   if (PHARMACY_RE.test(t)) return 'pharmacy';
   // „Kumpel ist krank — Hilfe / schnell“ ohne explizites Arzt-Wort
   if (ILL_RE.test(t) && HELP_FAST_RE.test(t)) return 'doctor';
+  if (DOCS_LOST_RE.test(t)) return 'docs';
   if (LOST_RE.test(t)) return 'lost';
   return null;
 }
@@ -456,6 +462,88 @@ export async function handleEmergencyConcierge(
   const dialAdvice = dialMedicalAdvice(emergencyInfo);
   const sosNum = emergencyInfo.primary.number;
   const sosLabel = emergencyInfo.primary.label;
+
+  // Reisepass / Konsulat — nie Orientierungs-Lost / Heimatverein
+  if (kind === 'docs') {
+    let top: DiscoveryCandidate | null = null;
+    if (origin) {
+      try {
+        const expanded = await searchPlacesExpanding({
+          lat: origin.lat,
+          lng: origin.lng,
+          placeType: 'embassy',
+          keyword: 'Konsulat Botschaft Auslandsvertretung',
+          openNow: false,
+          minResults: 1,
+          rings: [15_000, 40_000, 80_000],
+          fallbackTypes: ['local_government_office', 'city_hall'],
+        });
+        const ranked = [...expanded.places]
+          .filter((pl) => {
+            const blob = `${pl.name ?? ''}`.toLowerCase();
+            return !/heimatverein|museum|verein\b|kirche\b/.test(blob);
+          })
+          .sort((a, b) => {
+            const da = distanceMeters(origin.lat, origin.lng, a.lat, a.lng);
+            const db = distanceMeters(origin.lat, origin.lng, b.lat, b.lng);
+            return da - db;
+          });
+        if (ranked[0]) {
+          top = placeFromDiscovered(ranked[0], origin);
+        }
+      } catch {
+        /* soft */
+      }
+    }
+    const bullets: string[] = [];
+    const actions: QuickAction[] = [dialSos];
+    let speech = '';
+    if (top) {
+      const km =
+        typeof top.distanceM === 'number'
+          ? Math.round(top.distanceM / 100) / 10
+          : null;
+      bullets.push(top.name);
+      if (km != null) bullets.push(`ca. ${km} km`);
+      speech =
+        `Für den verlorenen Ausweis/Pass: nächste Anlaufstelle ist ${top.name}` +
+        (km != null ? `, circa ${km} km` : '') +
+        `. Route liegt bereit — keine Heimatvereine oder Museen.`;
+      actions.push({
+        id: 'docs_nav',
+        type: 'START_NAVIGATION',
+        label: shortenActionLabel(`Route ${top.name}`),
+        payload: {
+          destName: top.name,
+          destLat: top.lat,
+          destLng: top.lng,
+        },
+      } as QuickAction);
+      if (top.phoneNumber) {
+        actions.push({
+          id: 'docs_dial',
+          type: 'DIAL_PHONE',
+          label: 'Anrufen',
+          payload: { phoneNumber: top.phoneNumber },
+        } as QuickAction);
+      }
+    } else {
+      bullets.push('Konsulat / Bürgeramt');
+      bullets.push(primaryBullet(emergencyInfo));
+      speech =
+        `Reisepass weg — ich suche die zuständige Vertretung oder das Bürgeramt mit Route. ` +
+        (origin
+          ? 'Sag mir deine Nationalität, falls die Botschaft landen muss.'
+          : 'GPS kurz an, dann zeig ich die nächste Auslandsvertretung.');
+    }
+    const concierge = buildEmergencyConcierge({
+      speech,
+      bullets: bullets.slice(0, 3),
+      actions: actions.slice(0, 5),
+      title: 'Pass / Konsulat',
+    });
+    return { handled: true, reply: speech, concierge };
+  }
 
   // Lost without GPS → hotel if known, else calm tip
   if (kind === 'lost') {

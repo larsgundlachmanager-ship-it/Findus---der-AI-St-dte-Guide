@@ -1,0 +1,30 @@
+---
+description: TTS Satz-Pipeline ist gesperrt — Fast-Hook + Prefetch, nie Satz-für-Satz-Jobs
+alwaysApply: true
+---
+
+# Findus — TTS Satz-Pipeline LOCK
+
+**Nicht umbauen.** User musste das 7× neu verdrahten. Vertrag: `npm run test:tts-pipeline` (CI: `.github/workflows/tts-pipeline-gate.yml`).
+
+## Pflicht-Verhalten
+
+- **Eine** TTS-Session pro Antwort/Story.
+- Fast-Hook zuerst (≤100 Zeichen, oft erstes Komma).
+- Während Satz 3 spricht: 4 bereit, 5+6 parallel Cartesia. 3 fertig → 4 spielt, 7+8 in Arbeit.
+- Lookahead startet bei **1**, wächst bis **6**. `MAX_SYNTH_INFLIGHT = 2`.
+
+## SSOT (nur härten, nicht ersetzen)
+
+- Queue: `src/services/audio/streamingAudioQueueService.ts`
+- Hook: `src/services/audio/punctuationChunker.ts`
+- Pump: `src/services/audio/liveSentencePump.ts` + `startLiveSpeechSession` in `runConciergeTurn.ts`
+- Play: `speakSentenceStream` / `speakChunkSource` in `AudioVoiceService.ts`
+
+## Verboten
+
+- Pro Satz ein `enqueueSpeech` / `speakRuntimeText` (Rest als Folge-Jobs).
+- Ganzes LLM puffern, bevor der erste Hook spielt (`shouldBuffer`, `materialize` auf Live-Iterable).
+- Lookahead >1 am Start, Inflight ≠ 2, Prefetch-Wachstum nach dem Satz statt währenddessen.
+
+Latenz-Bug → Queue/Pump. Nicht Kernel, nicht neuen Player.

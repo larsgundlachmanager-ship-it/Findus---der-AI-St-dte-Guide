@@ -15,13 +15,23 @@ import {
   FINDUS_FACTUAL_ANSWER_BLOCK,
   FINDUS_HELP_FIRST_MONETIZATION_BLOCK,
   FINDUS_JUST_DO_IT_BLOCK,
+  FINDUS_WOVEN_PITCH_SPEECH_BLOCK,
 } from './findusResponsePolicy';
 import { getEsimAffiliateUrl } from '../affiliate/affiliateService';
 import { parseBackgroundTasks } from './backgroundTasks';
-import {
-  filterAddressCoordBullets,
-  looksLikeAddressOrCoordBullet,
-} from '../../utils/addressPrivacy';
+import { clampVisualBullets } from './visualBullets';
+
+export {
+  MAX_VISUAL_BULLETS,
+  MAX_BULLET_CHARS,
+  BULLET_SURFACE_MAX_CHARS,
+  estimateBulletMaxChars,
+  rewriteBulletToFit,
+  isWeakOrMetaBullet,
+  clampVisualBullets,
+} from './visualBullets';
+export type { BulletSurface } from './visualBullets';
+
 const ACTION_TYPES = new Set<QuickActionType>([
   'START_NAVIGATION',
   'DIAL_PHONE',
@@ -305,211 +315,6 @@ export function parseConciergeResponse(
   };
 }
 
-/** Maximal 3 Spickzettel-Stichpunkte. */
-export const MAX_VISUAL_BULLETS = 3;
-
-/** Surface: Fallback-Cap vor Layout-Messung (UI misst echter). */
-export type BulletSurface = 'default' | 'module1' | 'pitch' | 'nav';
-
-export const BULLET_SURFACE_MAX_CHARS: Record<BulletSurface, number> = {
-  /** Konservativ bis onLayout — echte Breite überschreibt in BulletsSlot */
-  default: 72,
-  module1: 72,
-  nav: 64,
-  /** Zwei Spalten nebeneinander — eng */
-  pitch: 40,
-};
-
-/** @deprecated — nutze BULLET_SURFACE_MAX_CHARS.default */
-export const MAX_BULLET_CHARS = BULLET_SURFACE_MAX_CHARS.default;
-
-const BULLET_FLUFF_RE =
-  /\b(wurde|worden|hat man|man hat|damals|nämlich|eigentlich|richtig|sehr|besonders|bereits|schon|dann|dort|hier)\b/giu;
-
-function scoreBulletImportance(b: string): number {
-  let s = 0;
-  if (/\d/.test(b)) s += 8; // Zahlen/Preise/Zeiten zuerst
-  if (/[€$]|euro|min\b|km\b|m\b|uhr|%|stunde/i.test(b)) s += 4;
-  if (b.length <= 56) s += 2;
-  if (b.length > 120) s -= 3;
-  return s;
-}
-
-/** Max. Zeichen aus gemessener UI-Breite (Schriftgröße / 2 Zeilen). */
-export function estimateBulletMaxChars(opts: {
-  widthPx: number;
-  fontSize?: number;
-  lines?: number;
-  bulletPrefixPx?: number;
-}): number {
-  const fontSize = opts.fontSize ?? 14;
-  const lines = opts.lines ?? 2;
-  const prefix = opts.bulletPrefixPx ?? 16;
-  const usable = Math.max(48, opts.widthPx - prefix);
-  // DE-Durchschnitt ~0.55em; enger = sicherer (keine UI-Ellipse)
-  const perLine = Math.max(18, Math.floor(usable / (fontSize * 0.58)));
-  return Math.max(22, perLine * lines);
-}
-
-function compressPhrase(s: string, max: number): string {
-  const limit = Math.max(12, Math.floor(max));
-  let t = s
-    .replace(BULLET_FLUFF_RE, ' ')
-    .replace(/\b(das|die|der|dem|den|ein|eine|einem|einer|eines)\s+/giu, '')
-    .replace(/\s+/g, ' ')
-    .trim();
-  if (!t) t = s.trim();
-  if (t.length <= limit) return t;
-  const window = t.slice(0, limit + 1);
-  const cuts = [' · ', ' — ', ' – ', '; ', ', ', ' / ', ' '];
-  for (const c of cuts) {
-    const i = window.lastIndexOf(c);
-    if (i >= Math.floor(limit * 0.4)) {
-      return window.slice(0, i).trim();
-    }
-  }
-  const sp = window.lastIndexOf(' ');
-  if (sp >= Math.floor(limit * 0.5)) return window.slice(0, sp).trim();
-  return t.slice(0, limit).trim();
-}
-
-/**
- * Kürzt einen Stichpunkt so, dass er PASST und trotzdem Sinn ergibt.
- * Nie droppen, nie „…“ / Wort-Halbierung als UI-Lösung.
- */
-export function rewriteBulletToFit(raw: string, maxChars: number): string {
-  const limit = Math.max(18, Math.floor(maxChars));
-  let b = String(raw ?? '')
-    .replace(/[\r\n]+/g, ' ')
-    .replace(/\s+/g, ' ')
-    .replace(/^[\s•\-–—*]+/u, '')
-    .replace(/\s*(\.\.\.|…)\s*$/u, '')
-    .trim();
-  if (!b) return '';
-  if (b.length <= limit) return b;
-
-  const year = b.match(/\b((?:1[0-9]{3}|20[0-2]\d))\b/);
-  if (year) {
-    const rest = b
-      .replace(year[0], ' ')
-      .replace(BULLET_FLUFF_RE, ' ')
-      .replace(/\s+/g, ' ')
-      .replace(/^[\s·,\-–—]+|[\s·,\-–—]+$/g, '')
-      .trim();
-    const budget = limit - year[0].length - 3;
-    if (budget >= 8) {
-      const core = compressPhrase(rest || b, budget);
-      if (core) return `${year[0]} · ${core}`;
-    }
-  }
-
-  // Zahlen/Preise vorne halten
-  const leadNum = b.match(
-    /^(.{0,24}?\b\d+[.,]?\d*\s*(?:€|m|km|min|h|%|Pkt|Punkte|Stufen|Uhr)?)/iu,
-  );
-  if (leadNum && leadNum[1] && leadNum[1].length < limit - 6) {
-    const head = leadNum[1].trim();
-    const rest = b.slice(head.length).replace(/^[\s·,\-–—]+/, '').trim();
-    const core = compressPhrase(rest, limit - head.length - 3);
-    if (core) return `${head} · ${core}`;
-    return compressPhrase(head, limit);
-  }
-
-  return compressPhrase(b, limit) || b.slice(0, limit).trim();
-}
-
-/** Leere Labels, TTS-Meta, unfertige Fakten — raus. */
-export function isWeakOrMetaBullet(raw: string): boolean {
-  const b = String(raw ?? '')
-    .replace(/[\r\n]+/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim();
-  if (!b || b.length < 3) return true;
-  if (
-    /\b(ausgeschrieben|buchstabier|in worten|als wörter|als worte|ziffern vermeiden)\b/iu.test(
-      b,
-    )
-  ) {
-    return true;
-  }
-  if (/[:：]\s*(\.\.\.|…)?\s*$/u.test(b)) return true;
-  if (/\b(höhe|stufen|eintritt|preis|länge|breite|baujahr|öffnungs)\b/iu.test(b) && !/\d/.test(b)) {
-    return true;
-  }
-  if (
-    /^(historie|venue-offers|maps-pitch|fakten|live|heute|wissen)\b/iu.test(b) &&
-    !/\d/.test(b)
-  ) {
-    return true;
-  }
-  if (looksLikeAddressOrCoordBullet(b)) return true;
-  return false;
-}
-
-export function clampVisualBullets(
-  bullets: string[],
-  opts?: {
-    userText?: string | null;
-    allowAddress?: boolean;
-    /** UI-Kontext: pitch = enger */
-    surface?: BulletSurface;
-    /** Nur Fakten aus speechText (keine Halluzination) */
-    speechText?: string | null;
-  },
-): string[] {
-  const maxChars =
-    BULLET_SURFACE_MAX_CHARS[opts?.surface ?? 'default'] ??
-    BULLET_SURFACE_MAX_CHARS.default;
-  const speech = (opts?.speechText ?? '').replace(/\s+/g, ' ').trim();
-  const speechLc = speech.toLowerCase();
-
-  const cleaned: string[] = [];
-  for (const raw of filterAddressCoordBullets(bullets, opts)) {
-    let b = String(raw ?? '')
-      .replace(/[\r\n]+/g, ' ')
-      .replace(/\s+/g, ' ')
-      .replace(/^[\s•\-–—*]+/u, '')
-      .replace(/\s*(\.\.\.|…)\s*$/u, '')
-      .trim();
-    if (!b || isWeakOrMetaBullet(b)) continue;
-    b = b
-      .replace(/\s*ausgeschrieben\b.*$/iu, '')
-      .replace(/\s{2,}/g, ' ')
-      .trim();
-    if (!b || isWeakOrMetaBullet(b)) continue;
-    // Speech-Gate: Stichpunkt muss im Gesagten vorkommen (Zahlen/Tokens)
-    if (speechLc.length >= 40) {
-      const digits = b.match(/\d+(?:[.,]\d+)?/g) ?? [];
-      const tokens = b
-        .toLowerCase()
-        .split(/[^\p{L}\p{N}]+/u)
-        .filter((t) => t.length >= 4);
-      const digitOk =
-        digits.length === 0 || digits.some((d) => speech.includes(d));
-      const tokenOk =
-        tokens.length === 0 ||
-        tokens.filter((t) => speechLc.includes(t)).length >=
-          Math.min(2, tokens.length);
-      if (!digitOk || !tokenOk) continue;
-    }
-    const fitted = rewriteBulletToFit(b, maxChars);
-    if (!fitted || isWeakOrMetaBullet(fitted)) continue;
-    cleaned.push(fitted);
-  }
-
-  cleaned.sort((a, b) => scoreBulletImportance(b) - scoreBulletImportance(a));
-
-  const out: string[] = [];
-  const seen = new Set<string>();
-  for (const b of cleaned) {
-    const key = b.toLowerCase();
-    if (seen.has(key)) continue;
-    seen.add(key);
-    out.push(b);
-    if (out.length >= MAX_VISUAL_BULLETS) break;
-  }
-  return out;
-}
 
 /** Plain-Text-Fallback → minimale Struktur (Audio-first). */
 export function wrapPlainAsConcierge(
@@ -529,7 +334,7 @@ export const CONCIERGE_JSON_INSTRUCTION = `
 === STRUKTURIERTE ANTWORT (PFLICHT — NUR JSON) ===
 Antworte AUSSCHLIESSLICH mit einem gültigen JSON-Objekt (kein Markdown, keine Code-Fences):
 {
-  "speechText": "Gesprochener Text für Findus — Kumpelton, präzise, hilfsbereit. Das ist der EINZIGE Text für die Stimme.",
+  "speechText": "Gesprochener Text für Yorro — Kumpelton, präzise, hilfsbereit. Das ist der EINZIGE Text für die Stimme.",
   "cardTitle": "Kurzer Kartentitel (optional)",
   "visualBullets": ["optionaler Stichpunkt"],
   "background_tasks": [
@@ -557,11 +362,11 @@ Antworte AUSSCHLIESSLICH mit einem gültigen JSON-Objekt (kein Markdown, keine C
 }
 
 Regeln:
-- speechText: natürlich zum Vorlesen, 2–5 Sätze. Keine Bullet-Listen im speechText.
+- speechText: natürlich zum Vorlesen, 1–3 knackige Sätze. Fakten (Zeit, Ort, Was) in den Hiebsatz weben — keine Bullet-Listen, kein „Erstens…“.
 - ANTWORT-FIRST: erste 1–2 Sätze = klare Antwort/Zusammenfassung; Tipps/Alternativen erst danach. Kein Vorgeplänkel in speechText (Bridge kam schon).
 - Fakten-/Zahlenfragen: DIREKTE Lösung in den ersten Sätzen — Zahl/Regel darf nicht fehlen und nicht erst am Ende auftauchen.
 - NIEMALS Versprecher, Tippfehler oder STT-Fehler des Users korrigieren oder kommentieren — einfach verstehen und antworten.
-- WECKER (STRENG): Nie nur „Wecker ist gestellt“ im speechText. Bei klarer Uhrzeit IMMER background_tasks mit type SET_NATIVE_ALARM (time "HH:MM", label). Die App ruft den echten Android-Wecker; speechText darf Erfolg erst nach Native-Success. Ohne Task = Lüge.
+- WECKER (STRENG): Nie nur „Wecker ist gestellt“ / „ich wecke dich“ im speechText. Bei klarer Uhrzeit IMMER background_tasks mit type SET_NATIVE_ALARM (time "HH:MM", label). Die App ruft den echten Android-Wecker + Timeline; speechText darf Erfolg erst nach Native-Success. Ohne Task = Lüge. Auch „muss um X aufstehen“ / „geweckt werden“ / „wach sein“ zählen als Wecker.
 - PROACTIVE REASONING: Zeitlücken erkennen (Checkout vs. späteres Event/Tennis) → Unterkunft/Transport/Plan im speechText mitdenken und ggf. BOOK_STAY22 / Hotel-Nachfrage anbieten.
 - visualBullets = bei Fakten-/Zahlen-/Punkte-/Regel-Fragen PFLICHT (1–3), sonst optional; die App baut Memory-Stichpunkte nach dem Text nach. Je max. 1 kurze Zeile, keine Meta-Chips.
 - KEINE Adressen, Hausnummern, PLZ oder GPS/Koordinaten in visualBullets — außer der User fragt explizit danach (dann VOLL: Straße + Nr. + Ort, nicht nur Straßenname).
@@ -580,6 +385,7 @@ Regeln:
 - ${FINDUS_JUST_DO_IT_BLOCK}
 - ${FINDUS_BRIDGE_CONTINUITY_BLOCK}
 - ${FINDUS_ANSWER_FIRST_BLOCK}
+- ${FINDUS_WOVEN_PITCH_SPEECH_BLOCK}
 - ${FINDUS_FACTUAL_ANSWER_BLOCK}
 - ${FINDUS_HELP_FIRST_MONETIZATION_BLOCK}
 - ${FINDUS_COMPOUND_PLAN_BLOCK}
@@ -590,7 +396,7 @@ Regeln:
 - Musement-Links: volle Activity-URL — App setzt aid=findus-8445 & client_id=findus-8445. Museen/Ausstellungen → Musement bevorzugen.
 - Viator-Links: volle Tour-URL — App setzt pid=P00311883&mcid=42383&medium=link. Weltweite Touren & VIP-Erlebnisse → Viator zusätzlich/bevorzugt anbieten.
 - BOOK_UBER: nur wenn der User Fahrt/Taxi/Uber will ODER bei klarem Restaurant-Tisch-Weg mit weiter Distanz — nicht bei jeder Empfehlung. payload destLat, destLng, destName (oder targetPoiId).
-- BOOK_CAR_RENTAL: bei Reiseanfragen, Flughafen-Anreise, Streckenplanung oder wenn ein Mietwagen sinnvoll ist — Label „🚗 Mietwagen buchen“. URL setzt die App (DiscoverCars Affiliate a_aid=Findus-Ai).
+- BOOK_CAR_RENTAL: bei Reiseanfragen, Flughafen-Anreise, Streckenplanung oder wenn ein Mietwagen sinnvoll ist — Label „🚗 Mietwagen buchen“. URL setzt die App (DiscoverCars Affiliate a_aid=Yorro-Ai).
 - BOOK_BOUNCE_LUGGAGE: bei Gepäckaufbewahrung, Früheinchecken, Spätabflug oder kofferfreier Tour — Label „🧳 Gepäck-Spot buchen“. URL setzt die App (Bounce Affiliate).
 - BOOK_ESIM: bei eSIM/Roaming/Daten im Ausland — Label „📱 eSIM holen“. URL setzt die App (travSIM AWIN / Airalo-Fallback).
 - BOOK_STAY22: optional Backup Stay22. Primär Unterkunft: OPEN_URL mit Expedia-Affiliate (App baut camref/landingPage). Label „🏨 Hotels suchen“, payload.destination = Zielstadt.

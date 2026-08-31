@@ -42,6 +42,9 @@ function uniqPush(list: string[], item: string): string[] {
   return [...list, t].slice(-40);
 }
 
+const MERK_FACT_RE =
+  /\b(?:merk\s+dir|bitte\s+merken|nicht\s+vergessen|ich\s+(?:bin|habe|hab)|meine?\s+(?:freundin|freund|frau|mann|kind|kinder|eltern)|wir\s+(?:sind|haben)|vegetar|vegan|allerg|zöliak|zoeliak|laktos|gluten|ohne\s+\w+|mag\s+(?:gerne|lieber)|hasse|lieber\s+nicht|immer\s+\w+|nie\s+\w+)\b/iu;
+
 /** Deterministische Extraktion — Negation hat Vorrang vor Stil-Spiegelung. */
 export function extractPreferencesFast(text: string): CapturedPreference[] {
   const t = text.replace(/\s+/g, ' ').trim();
@@ -84,6 +87,43 @@ export function extractPreferencesFast(text: string): CapturedPreference[] {
         kind: 'fact',
         value: fact.charAt(0).toUpperCase() + fact.slice(1),
         replyHint: `Hab ich mir gemerkt: ${fact}.`,
+      });
+    }
+  }
+
+  // Freie Persona-Fakten ohne „merk dir“ (Freundin vegetarisch, Allergie, …)
+  try {
+    const { looksLikeDietSelfId } = require('../../module2/kernel/turnKernel') as {
+      looksLikeDietSelfId: (s: string) => { diet: 'vegetarisch' | 'vegan' | null };
+    };
+    const diet = looksLikeDietSelfId(t).diet;
+    if (diet) {
+      out.push({
+        kind: 'fact',
+        value: `Ernährung: ${diet}`,
+        replyHint:
+          diet === 'vegan'
+            ? 'Stand nicht drin — stell ich auf vegan um.'
+            : 'Stand nicht drin — stell ich auf vegetarisch um.',
+      });
+    }
+  } catch {
+    /* soft */
+  }
+
+  if (!merk && MERK_FACT_RE.test(t) && t.length >= 12 && t.length <= 160) {
+    const softFact = t
+      .replace(/^(ja|nee|nein|ok|okay|also|übrigens|uebrigens)[,.]?\s+/iu, '')
+      .trim();
+    if (
+      softFact.length >= 10 &&
+      /\b(freundin|freund|frau|mann|kind|vegetar|vegan|allerg|gluten|laktos|zöliak|zoeliak|ich\s+bin|wir\s+sind|mag\s+(?:gerne|lieber)|hasse)\b/iu.test(
+        softFact,
+      )
+    ) {
+      out.push({
+        kind: 'fact',
+        value: softFact.charAt(0).toUpperCase() + softFact.slice(1),
       });
     }
   }
@@ -152,9 +192,9 @@ async function extractPreferencesLlm(
 ): Promise<CapturedPreference[]> {
   if (!hasGeminiApiKey()) return [];
   if (text.length < 12) return [];
-  // Nur wenn Pref-Signal
+  // Pref-Signal breiter: Persona/Allergie/Begleitung — nicht nur „merk dir“
   if (
-    !/\b(?:nenn|merk|bitte\s+nicht|mag\s+nicht|ich\s+(?:bin|will|hasse)|sag\s+nicht|ohne|kein)\b/iu.test(
+    !/\b(?:nenn|merk|bitte\s+nicht|mag\s+nicht|ich\s+(?:bin|will|hasse|hab|habe)|sag\s+nicht|ohne|kein|freundin|freund|vegetar|vegan|allerg|gluten|laktos|zöliak|zoeliak|lieber|immer|nie\s+wieder|meine?\s+\w+)\b/iu.test(
       text,
     )
   ) {
@@ -162,9 +202,9 @@ async function extractPreferencesLlm(
   }
 
   const prompt = [
-    'Extrahiere User-Präferenzen aus dem deutschen Satz. JSON only:',
+    'Extrahiere User-Präferenzen/Fakten aus dem deutschen Satz. JSON only:',
     '{"prefs":[{"kind":"addressing|dislike|like|fact|ask_name","value":"string","negated":true|false}]}',
-    'Regeln: Negationen erkennen (nicht Bro). Keine Halluzinationen. Max 3 Prefs.',
+    'Regeln: Negationen erkennen. Persona-Fakten (Begleitung, Ernährung, Allergie, Stil) als fact. Keine Halluzinationen. Max 4 Prefs.',
     `Satz: ${text.slice(0, 400)}`,
   ].join('\n');
 
@@ -248,6 +288,16 @@ export async function persistCapturedPreferences(
       facts = uniqPush(facts, `Mag: ${p.value}`);
     } else if (p.kind === 'fact') {
       facts = uniqPush(facts, p.value);
+      const dietHit = /\b(vegan|vegetarisch)\b/iu.exec(p.value);
+      if (dietHit?.[1]) {
+        const d = dietHit[1].toLowerCase();
+        const prev = Array.isArray(pePrefs.dietaryRestrictions)
+          ? (pePrefs.dietaryRestrictions as string[])
+          : [];
+        if (!prev.some((x) => x.toLowerCase() === d)) {
+          pePrefs.dietaryRestrictions = [...prev, d];
+        }
+      }
     }
   }
 
@@ -269,6 +319,9 @@ export async function persistCapturedPreferences(
 export async function runPreferenceCaptureMiddleware(
   userText: string,
 ): Promise<{ prefs: CapturedPreference[]; replyHint: string | null }> {
+  void import('../research/eventPitchMemory')
+    .then((m) => m.learnEventAudienceFromUserText(userText))
+    .catch(() => undefined);
   let prefs = extractPreferencesFast(userText);
   const rel = extractRelationshipFlags(userText);
   if (

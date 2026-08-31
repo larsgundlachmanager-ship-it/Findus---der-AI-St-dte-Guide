@@ -1,0 +1,1038 @@
+{
+  "notes": [
+    "Quellenbasis Stadt- und Baugeschichte: deutsch-, englisch- und niederländischsprachige Wikipedia-Artikel zu Amsterdam und den einzelnen Orten; insbesondere https://en.wikipedia.org/wiki/Amsterdam, https://en.wikipedia.org/wiki/Amsterdam_Centraal, https://en.wikipedia.org/wiki/Dam_Square, https://en.wikipedia.org/wiki/Royal_Palace_of_Amsterdam, https://en.wikipedia.org/wiki/Oude_Kerk,_Amsterdam, https://en.wikipedia.org/wiki/Nieuwe_Kerk,_Amsterdam, https://en.wikipedia.org/wiki/Westerkerk, https://en.wikipedia.org/wiki/Begijnhof,_Amsterdam, https://en.wikipedia.org/wiki/Magere_Brug, https://en.wikipedia.org/wiki/Museumplein und https://en.wikipedia.org/wiki/Vondelpark.",
+    "Quellenbasis Museen und Sammlungen: offizielle Seiten von Anne Frank Huis, Rijksmuseum, Van Gogh Museum, Stedelijk Museum, Het Scheepvaartmuseum, Museum Rembrandthuis, NEMO Science Museum und Eye Filmmuseum sowie deren Wikipedia-Artikel.",
+    "Offizielle Vertiefungsquellen: https://www.annefrank.org/, https://www.rijksmuseum.nl/, https://www.vangoghmuseum.nl/, https://www.stedelijk.nl/, https://www.hetscheepvaartmuseum.nl/, https://www.rembrandthuis.nl/, https://www.nemosciencemuseum.nl/ und https://www.eyefilm.nl/.",
+    "Offizielle Bau- und Kirchengeschichte: https://www.paleisamsterdam.nl/, https://www.oudekerk.nl/, https://www.nieuwekerk.nl/, https://westerkerk.nl/ und https://hetbegijnhof.nl/.",
+    "Öffnungszeiten, Eintrittspreise, Zeitfenster, Gottesdienste, Turmzugänge, Vorführungen, Ausstellungen, Baustellen und Veranstaltungsprogramme sind veränderlich und deshalb ausschließlich als LIVE-Hinweise formuliert."
+  ],
+  "city_history": "Amsterdam entstand an einem Damm in der Amstel, der um 1270 Flussarme verband und einen Handelsplatz zwischen Damrak und Rokin schuf. Aus dem Fischerdorf wurde im Spätmittelalter eine Hafenstadt; im 17. Jahrhundert wuchs sie durch weltweiten Handel, Finanzwesen und Zuwanderung zum Zentrum der Niederländischen Republik. Der Grachtengürtel ordnete die rasche Erweiterung, während Reichtum eng mit Kolonialhandel, Ausbeutung und Sklaverei verflochten war. Nach französischer Herrschaft und Industrialisierung veränderten Eisenbahn, Hafenbauten und neue Viertel das Stadtbild. Die deutsche Besatzung führte zur Verfolgung und Ermordung eines großen Teils der jüdischen Bevölkerung. Nach 1945 entwickelte sich Amsterdam zu einer internationalen Kultur-, Wissens- und Dienstleistungsstadt, deren historisches Zentrum zugleich Wohnraum, Denkmal und stark besuchtes Reiseziel ist.",
+  "spots": [
+    {
+      "id": "amsterdam_amsterdam_centraal",
+      "name": "Amsterdam Centraal",
+      "general_info": "Amsterdam Centraal ist seit 1889 das große Eingangstor der Stadt. Pierre Cuypers verband am Stationsplein neugotische und renaissancistische Formen mit einem modernen Eisenbahnbau; die Lage auf drei künstlichen Inseln trennte die alte Innenstadt sichtbar vom offenen IJ.",
+      "deep_data_pool": [
+        {
+          "text": "Der Bahnhof entstand auf drei miteinander verbundenen künstlichen Inseln im IJ, dem heutigen Stationseiland. Für die Aufschüttung wurde Sand verwendet, der beim Bau des Nordseekanals in der Gegend von Velsen anfiel. Die Anlage veränderte damit nicht nur den Verkehr, sondern Amsterdams Uferlinie.",
+          "tags": ["baugeschichte", "stadtentwicklung", "wasser"]
+        },
+        {
+          "text": "Unter dem schweren Bau stehen 8.687 Holzpfähle im weichen Amsterdamer Boden. Instabiler Untergrund verzögerte die Arbeiten über Jahre. Das macht den Bahnhof zu einem besonders anschaulichen Beispiel dafür, wie die Stadt ihre monumentalen Steinbauten auf einer technisch beherrschten Moor- und Wasserlandschaft errichtete.",
+          "tags": ["technik", "fundament", "wasserstadt"]
+        },
+        {
+          "text": "Pierre Cuypers entwarf das 1884 vollendete Empfangsgebäude. Seine symmetrische Front mit zwei Türmen, Giebeln, Figuren und reichem Dekor verbindet Neugotik und Neorenaissance. Cuypers hatte kurz zuvor auch das Rijksmuseum entworfen; beide Bauten tragen eine historisierende, fast schlossartige Handschrift.",
+          "tags": ["architektur", "cuypers", "visuell"]
+        },
+        {
+          "text": "Die Bildprogramme an der Fassade verweisen auf Handel, Schifffahrt, Eisenbahn und Städteverbindungen. Der Bau sollte nicht bloß Züge abfertigen, sondern die wirtschaftliche Reichweite der Hauptstadt darstellen. Von der Innenstadtseite wirken die beiden Uhrtürme wie feste Orientierungspunkte am Ende des Damrak.",
+          "tags": ["fassade", "symbolik", "orientierung"]
+        },
+        {
+          "text": "Das große Bahnsteigdach gehörte nicht zu Cuypers' ursprünglichem Auftrag. Der Ingenieur L. J. Eijmer entwarf die Konstruktion mit fünfzig gebogenen Fachwerkträgern und einer Spannweite von fast 45 Metern; gefertigt wurde sie von Andrew Handyside and Company im englischen Derby.",
+          "tags": ["ingenieurbau", "bahnsteighalle", "industriegeschichte"]
+        },
+        {
+          "text": "Am 15. Oktober 1889 wurde der Bahnhof offiziell eröffnet. Schon die Besichtigung selbst war ein Ereignis: In den ersten Tagen kamen Zehntausende gegen Eintritt, um den Neubau anzusehen. Das Gebäude verkörperte den Wechsel von der wassergebundenen Hafenstadt zur modernen Eisenbahnmetropole.",
+          "tags": ["eroeffnung", "verkehrsgeschichte", "19_jahrhundert"]
+        },
+        {
+          "text": "Die Wahl des Standorts war umstritten, weil das breite Stationseiland die direkte Sicht und Verbindung der Altstadt zum IJ durchschnitt. Die Stadt richtete sich danach stärker nach innen aus; Straßen wurden neu geordnet, Kanäle teilweise verfüllt und Straßenbahn sowie Eisenbahn gewannen gegenüber dem innerstädtischen Wasserverkehr an Gewicht.",
+          "tags": ["stadtumbau", "ij", "verkehrswende"]
+        },
+        {
+          "text": "Von Süden führt das Damrak fast geradlinig zum Bahnhof und folgt dem früheren Lauf der Amstel. Nördlich öffnen sich IJ, Fähren und Amsterdam-Noord. Diese Gegensätze erklären die doppelte Rolle des Gebäudes: repräsentative Abschlussfassade der Altstadt und Verkehrsdrehscheibe zur Wasserfront.",
+          "tags": ["orientierung", "damrak", "quer"]
+        },
+        {
+          "text": "Der Bahnhof wurde im Lauf seiner Geschichte mehrfach erweitert und an U-Bahn, Straßenbahn, Bus, Fähren und Radverkehr angebunden. Die historische Front blieb dabei das Erkennungsbild, während hinter ihr eine vielschichtige Infrastruktur aus Gleisen, Tunneln, Hallen und Uferzugängen entstand.",
+          "tags": ["verkehr", "umbau", "gegenwart"]
+        },
+        {
+          "text": "LIVE: Abfahrtsgleise, Bauphasen, gesperrte Durchgänge, Fahrradabstellung, Fähranschlüsse und Öffnungszeiten von Services ändern sich. Für eine konkrete Reise stets NS, GVB und die aktuellen Bahnhofshinweise prüfen; historische Angaben ersetzen keine Echtzeit-Verbindungsauskunft.",
+          "tags": ["live_hint", "ephemeral", "verkehr"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich Amsterdam Centraal?",
+          "a": "An der langen rötlichen, reich geschmückten Fassade mit zwei Türmen am Ende des Damrak; dahinter liegen die großen gebogenen Bahnsteighallen am IJ."
+        },
+        {
+          "q": "Warum steht der Bahnhof im Wasserraum?",
+          "a": "Er wurde auf drei künstlich aufgeschütteten Inseln im IJ errichtet, die zusammen Stationseiland heißen."
+        }
+      ]
+    },
+    {
+      "id": "amsterdam_dam",
+      "name": "Dam",
+      "general_info": "Der Dam liegt am Ort des mittelalterlichen Amstel-Damms und wurde zum politischen und wirtschaftlichen Mittelpunkt Amsterdams. Königlicher Palast, Nieuwe Kerk und Nationalmonument rahmen einen Platz, dessen offene Steinfläche viele ältere Markt- und Hafenstrukturen überdeckt.",
+      "deep_data_pool": [
+        {
+          "text": "Um 1270 wurde in der Amstel ein Damm angelegt. Er verband die Siedlungsbereiche an beiden Ufern und gab Amsterdam seinen Namen. Nördlich lag der zum Hafen führende Damrak, südlich setzte sich der Flusslauf als Rokin fort; beide Straßenräume lassen diese alte Wasserachse bis heute erkennen.",
+          "tags": ["stadtgruendung", "amstel", "wasser"]
+        },
+        {
+          "text": "Der Damm wurde verbreitert und entwickelte sich aus mehreren Platzteilen. Am Middeldam lagen Handels- und Verwaltungsfunktionen, westlich schloss die Plaetse an. Schiffe konnten am Damrak Waren dicht am Markt löschen; so wurden Wasserbau, Umschlag und städtische Herrschaft an einem Ort gebündelt.",
+          "tags": ["handel", "mittelalter", "stadtentwicklung"]
+        },
+        {
+          "text": "Ein Fischmarkt prägte lange den Platz. Die Nähe zum offenen Wasser und zu anlegenden Booten machte den Dam zu einem praktischen Umschlagplatz, bevor er zum überwiegend steinernen Repräsentationsraum wurde. Die heutige Weite täuscht deshalb über eine früher viel kleinteiligere Nutzung hinweg.",
+          "tags": ["markt", "hafen", "alltag"]
+        },
+        {
+          "text": "An der Westseite steht das im 17. Jahrhundert als Rathaus errichtete heutige Königliche Palais. Direkt daneben erhebt sich die gotische Nieuwe Kerk. Das Nebeneinander von Rathaus beziehungsweise Palast und Kirche machte den Dam über Jahrhunderte zur Bühne bürgerlicher, religiöser und später königlicher Repräsentation.",
+          "tags": ["ensemble", "politik", "kirche"]
+        },
+        {
+          "text": "Das alte Waaggebäude stand bis 1808 auf dem Platz. König Louis Bonaparte ließ es nach der Umwandlung des Rathauses in einen Palast abtragen, wodurch die Sicht vor seiner Residenz freier wurde. Mit diesem Verlust änderten sich Maßstab und Raumwirkung des Dam grundlegend.",
+          "tags": ["waage", "napoleonische_zeit", "stadtbild"]
+        },
+        {
+          "text": "Auf der Ostseite steht seit 1956 das Nationalmonument nach einem Entwurf von J. J. P. Oud mit Skulpturen von John Rädecker und seinen Söhnen. Es erinnert an die Opfer des Zweiten Weltkriegs und bildet den zentralen Ort der niederländischen nationalen Totengedenkfeier am 4. Mai.",
+          "tags": ["zweiter_weltkrieg", "denkmal", "erinnerung"]
+        },
+        {
+          "text": "Am 7. Mai 1945, zwei Tage nach der deutschen Kapitulation in den Niederlanden, schossen deutsche Soldaten vom Gebäude des Großen Clubs auf Menschen auf dem Dam. Die genaue Zahl der Toten wurde lange unterschiedlich angegeben; sicher ist, dass der Platz noch am Kriegsende Schauplatz tödlicher Gewalt war.",
+          "tags": ["1945", "erinnerung", "gewaltgeschichte"]
+        },
+        {
+          "text": "Damrak, Rokin, Kalverstraat, Nieuwendijk und Damstraat laufen am Platz zusammen. Diese Straßen erklären seine dauerhafte Funktion als Knoten zwischen Bahnhof, Grachten, Einkaufsachsen und Wallen. Der Dam ist daher weniger ein abgeschlossener Platz als eine Kreuzung historischer Bewegungsräume.",
+          "tags": ["orientierung", "stadtgrundriss", "quer"]
+        },
+        {
+          "text": "Die Fassaden um den Dam gehören verschiedenen Epochen und Funktionen an: klassizistischer Palast, gotische Kirche, Kaufhaus, Hotel und Nachkriegsdenkmal. Gerade diese Uneinheitlichkeit erzählt, wie ein mittelalterlicher Damm nacheinander Markt, Rathausvorplatz, königliche Bühne und touristisches Zentrum wurde.",
+          "tags": ["architektur", "zeitschichten", "visuell"]
+        },
+        {
+          "text": "LIVE: Demonstrationen, Gedenkfeiern, königliche Anlässe, Märkte, Bühnen und Baustellen können den Platz stark verändern oder Zugänge sperren. Aktuelle Veranstaltungen und Sicherheitsmaßnahmen bei der Stadt Amsterdam prüfen; der Dam ist kein jederzeit gleich nutzbarer Freiraum.",
+          "tags": ["live_hint", "ephemeral", "veranstaltungen"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Warum heißt der Platz Dam?",
+          "a": "Hier lag der um 1270 angelegte Damm in der Amstel, aus dem sich Name und Kern der Stadt entwickelten."
+        },
+        {
+          "q": "Was ist die weiße Säule auf dem Dam?",
+          "a": "Das 1956 errichtete Nationalmonument, der zentrale niederländische Erinnerungsort für die Opfer des Zweiten Weltkriegs."
+        }
+      ]
+    },
+    {
+      "id": "amsterdam_koninklijk_paleis",
+      "name": "Koninklijk Paleis Amsterdam",
+      "general_info": "Das Königliche Palais am Dam wurde 1648 bis 1655 nicht als Schloss, sondern als Amsterdamer Rathaus errichtet. Jacob van Campens monumentaler Bau verherrlichte die selbstbewusste Handelsstadt; erst Louis Bonaparte machte ihn 1808 zur königlichen Residenz.",
+      "deep_data_pool": [
+        {
+          "text": "Der Grundstein des neuen Rathauses wurde am 28. Oktober 1648 gelegt, kurz nach dem Westfälischen Frieden, der den Achtzigjährigen Krieg beendete. Das Bauwerk sollte die politische Selbstständigkeit und den Wohlstand Amsterdams sichtbar machen; eine Friedensfigur erhielt deshalb einen prominenten Platz an der Fassade.",
+          "tags": ["baugeschichte", "1648", "stadtpolitik"]
+        },
+        {
+          "text": "Jacob van Campen entwarf den streng gegliederten klassizistischen Bau. Daniël Stalpaert wirkte als Stadtbaumeister an der Ausführung mit. Die fast palastartige Ordnung war für ein Rathaus ungewöhnlich groß, sollte aber gerade zeigen, dass in der Republik die Bürgerschaft und ihre Verwaltung monumentale Würde beanspruchten.",
+          "tags": ["architektur", "klassizismus", "van_campen"]
+        },
+        {
+          "text": "13.659 Pfähle aus norwegischer Fichte tragen das Gebäude im weichen Boden. Sandstein verkleidet die Außenflächen, im Inneren wurde viel Marmor verwendet. Schon während des Baus galt das Rathaus wegen Größe, Material und technischer Leistung als ein sogenanntes achtes Weltwunder.",
+          "tags": ["fundament", "material", "technik"]
+        },
+        {
+          "text": "Das Herz ist der Burgerzaal, der Bürgersaal. In seinen Marmorböden sind Karten der Erde und des Himmels eingelassen; Skulpturen und Malereien stellen Amsterdam sinnbildlich in die Mitte einer geordneten Welt. Der Raum war öffentliche Halle, Verkehrsfläche und ideologisches Zentrum des Rathauses.",
+          "tags": ["burgerzaal", "symbolik", "innenraum"]
+        },
+        {
+          "text": "Über dem rückwärtigen Giebel trägt Atlas die Weltkugel. Im Inneren kehrt das Motiv wieder und verbindet kommunale Verwaltung mit globaler Reichweite. Diese Selbstdarstellung verweist auf die Handelsmacht des 17. Jahrhunderts, deren Wohlstand zugleich mit Kolonialismus, Zwang und Versklavung verflochten war.",
+          "tags": ["atlas", "kolonialgeschichte", "reflexion"]
+        },
+        {
+          "text": "Der Bau nahm Gerichte, Verwaltungsräume, Gefängniszellen, Finanz- und Handelsfunktionen auf. Die Skulpturprogramme passten zu den jeweiligen Ämtern: Gerechtigkeit, Vorsicht, Handel und Frieden wurden als Tugenden einer idealen Stadtregierung dargestellt.",
+          "tags": ["rathaus", "verwaltung", "kunstprogramm"]
+        },
+        {
+          "text": "Louis Bonaparte, von Napoleon eingesetzter König von Holland, bezog 1808 das Rathaus und ließ es zum Palast umbauen. Aus dieser kurzen Herrschaft stammt ein bedeutender Bestand an Empire-Möbeln, der bis heute bei königlichen Empfängen genutzt wird.",
+          "tags": ["louis_bonaparte", "empire", "nutzungsgeschichte"]
+        },
+        {
+          "text": "Nach Napoleons Sturz wurde der Bau zunächst der Stadt zurückgegeben, bald aber wieder für das Königshaus bereitgestellt. 1936 ging er in Staatseigentum über. Heute dient er als offizieller Empfangspalast für Staatsbesuche, Preisverleihungen, Neujahrsempfänge und andere königliche Anlässe.",
+          "tags": ["koenigshaus", "staat", "gegenwart"]
+        },
+        {
+          "text": "Mehrere Abdankungsurkunden wurden hier unterzeichnet, darunter 1948 von Königin Wilhelmina, 1980 von Königin Juliana und 2013 von Königin Beatrix. Die eigentliche verfassungsrechtliche Amtseinführung der niederländischen Monarchen findet anschließend in der benachbarten Nieuwe Kerk statt.",
+          "tags": ["monarchie", "abdankung", "quer"]
+        },
+        {
+          "text": "LIVE: Der Palast bleibt bei Staatsbesuchen und königlichen Veranstaltungen geschlossen; Öffnung, Räume, Ausstellungen, Eintritt und Sicherheitskontrollen wechseln. Vor dem Besuch ausschließlich den aktuellen Kalender auf paleisamsterdam.nl prüfen.",
+          "tags": ["live_hint", "ephemeral", "besuch"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "War das Gebäude immer ein Palast?",
+          "a": "Nein. Es wurde als Rathaus eröffnet und erst 1808 von Louis Bonaparte in einen Königspalast umgewandelt."
+        },
+        {
+          "q": "Was ist der wichtigste Innenraum?",
+          "a": "Der Burgerzaal mit Marmorkarten, Skulpturen und einem Bildprogramm, das Amsterdam als Zentrum einer geordneten Welt inszeniert."
+        }
+      ]
+    },
+    {
+      "id": "amsterdam_oude_kerk",
+      "name": "Oude Kerk",
+      "general_info": "Die Oude Kerk ist Amsterdams ältestes erhaltenes Gebäude. Aus einer hölzernen Kapelle entstand eine große gotische Hallenkirche, die 1306 dem heiligen Nikolaus geweiht wurde; Grabplatten, Holzgewölbe, Orgeln und zeitgenössische Kunst verbinden acht Jahrhunderte Stadtgeschichte.",
+      "deep_data_pool": [
+        {
+          "text": "Um 1213 stand an dieser Stelle eine hölzerne Kapelle. Sie wurde durch einen Steinbau ersetzt, den der Bischof von Utrecht 1306 als katholische Nikolauskirche weihte. Der Patron passte zur frühen Hafen- und Schifferstadt, in der Handel und Wasserverkehr den Alltag bestimmten.",
+          "tags": ["mittelalter", "nikolaus", "stadtanfang"]
+        },
+        {
+          "text": "Mit dem Wachstum Amsterdams wurde die Kirche über Jahrhunderte erweitert: Seitenschiffe machten aus der Basilika eine Hallenkirche, später kamen hoher Chor, Chorumgang, Kapellen und Querhaus hinzu. Die unregelmäßige Form ist deshalb kein einheitlicher Entwurf, sondern das Ergebnis vieler Bauphasen.",
+          "tags": ["baugeschichte", "gotik", "stadtwachstum"]
+        },
+        {
+          "text": "Das große hölzerne Tonnengewölbe gehört zu den bedeutendsten mittelalterlichen Holzkonstruktionen Europas. Es ist leichter als ein Steingewölbe und damit für den weichen Baugrund vorteilhaft. Seine Form trägt außerdem zur besonderen Akustik des weiten Kirchenraums bei.",
+          "tags": ["holzgewoelbe", "architektur", "akustik"]
+        },
+        {
+          "text": "Der Boden besteht nahezu vollständig aus Grabplatten. Bis 1865 wurden Menschen in und bei der Kirche bestattet; unter mehr als zweitausend Steinen liegen die Überreste von etwa 60.000 Personen. Der Innenraum ist damit zugleich Gotteshaus, öffentliches Gedächtnis und dicht geschichteter Friedhof.",
+          "tags": ["graeber", "erinnerung", "innenraum"]
+        },
+        {
+          "text": "Zu den bekannten Bestatteten gehören Saskia van Uylenburgh, Rembrandts erste Frau, und der Komponist Jan Pieterszoon Sweelinck, der als Stadtorganist mit der Kirche verbunden war. Auch das Grabmal des Seefahrers Jacob van Heemskerck erinnert an Amsterdams maritime Expansion.",
+          "tags": ["rembrandt", "sweelinck", "seefahrt"]
+        },
+        {
+          "text": "Beim Bildersturm von 1566 wurden Altäre, Heiligenbilder und große Teile der katholischen Ausstattung zerstört. Nach der Alteratie von 1578 ging die Kirche an die reformierte Gemeinde über. Die vergleichsweise nüchterne Raumwirkung ist daher auch ein sichtbares Ergebnis religiöser und politischer Umbrüche.",
+          "tags": ["reformation", "bildersturm", "religionsgeschichte"]
+        },
+        {
+          "text": "Die Oude Kerk besitzt mehrere Orgeln. Besonders berühmt ist die 1724 von Christian Vater gebaute und später von Casper Müller veränderte Vater-Müller-Orgel. Musik gehörte schon früh zur öffentlichen Funktion des Hauses; Sweelincks Wirken machte die Kirche zu einem europäischen Bezugspunkt der Orgelkultur.",
+          "tags": ["orgel", "musik", "sweelinck"]
+        },
+        {
+          "text": "Kirchenraum und Handel waren eng verbunden. Kaufleute trafen sich hier, Nachrichten wurden ausgetauscht, und zwischen Gottesdiensten war die Kirche sozialer Stadtraum. Die reichen Grabsteine, Wappenscheiben und Stiftungen dokumentieren Wohlstand, aber auch Verbindungen zu Kolonialhandel und Versklavung.",
+          "tags": ["stadtgesellschaft", "handel", "kolonialgeschichte"]
+        },
+        {
+          "text": "Seit 2012 verbindet die Oude Kerk ihr historisches Erbe mit ortsspezifischer zeitgenössischer Kunst. Neue Arbeiten reagieren auf Architektur, Akustik, Grabkultur und belastete Geschichte. Das Gebäude bleibt zugleich eine reformierte Kirche und ist damit weder nur Museum noch bloße historische Kulisse.",
+          "tags": ["gegenwartskunst", "kirche", "nutzung"]
+        },
+        {
+          "text": "LIVE: Kunstinstallationen, Gottesdienste, Orgelkonzerte, Turmzugang, Öffnungszeiten und Eintritt wechseln. Vor Ort können einzelne Bereiche aus liturgischen oder konservatorischen Gründen gesperrt sein; aktuelle Angaben direkt bei oudekerk.nl prüfen.",
+          "tags": ["live_hint", "ephemeral", "kirche"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Warum liegen so viele Grabplatten im Boden?",
+          "a": "Die Kirche stand auf einem Friedhof; bis 1865 wurde im Gebäude bestattet, sodass unter den Platten viele Generationen Amsterdamer liegen."
+        },
+        {
+          "q": "Ist die Oude Kerk heute Kirche oder Museum?",
+          "a": "Beides: Sie ist eine reformierte Kirche und zugleich ein Ort für Kulturerbe und zeitgenössische Kunst."
+        }
+      ]
+    },
+    {
+      "id": "amsterdam_nieuwe_kerk",
+      "name": "Nieuwe Kerk",
+      "general_info": "Die Nieuwe Kerk entstand, weil die Oude Kerk für das wachsende Amsterdam zu klein geworden war. Die 1409 geweihte gotische Kirche am Dam überstand Brände und Konfessionswechsel; heute dient sie als Ausstellungs- und Staatskirche für königliche Amtseinführungen.",
+      "deep_data_pool": [
+        {
+          "text": "Als die Oude Kerk die wachsende Bevölkerung nicht mehr aufnehmen konnte, genehmigte der Bischof von Utrecht eine zweite Pfarrkirche. Willem Eggert stellte dafür seinen Obstgarten zur Verfügung. Der Bau begann im späten 14. Jahrhundert; 1409 wurde die Kirche Maria und Katharina geweiht.",
+          "tags": ["gruendung", "mittelalter", "stadtwachstum"]
+        },
+        {
+          "text": "Die Bezeichnung Nieuwe Kerk ist relativ: Sie ist über sechs Jahrhunderte alt, aber jünger als die Oude Kerk. Ihre Lage unmittelbar neben dem späteren Rathaus und heutigen Palast band sie eng an das politische Zentrum am Dam.",
+          "tags": ["name", "orientierung", "ensemble"]
+        },
+        {
+          "text": "Stadtbrände beschädigten die Kirche 1421 und 1452. 1645 brannte sie fast vollständig aus. Der anschließende Wiederaufbau bewahrte die gotische Grundform, während bedeutende Ausstattungsstücke wie Kanzel, Chorschranke und Orgel aus der Zeit nach dem Brand stammen.",
+          "tags": ["brand", "wiederaufbau", "gotik"]
+        },
+        {
+          "text": "Nach der Alteratie von 1578 wurde die katholische Kirche reformiert. Bilder und Altäre verloren ihre frühere Rolle, während Predigt und Gemeinderaum in den Mittelpunkt rückten. Die wechselnde Ausstattung macht den religiösen Systemwechsel innerhalb eines mittelalterlichen Baukörpers sichtbar.",
+          "tags": ["reformation", "religionsgeschichte", "innenraum"]
+        },
+        {
+          "text": "Die große historische Orgel wurde nach dem Brand von 1645 in Auftrag gegeben. Ihr monumentales Gehäuse beherrscht die Westseite und gehört zu den wichtigsten erhaltenen Orgelanlagen der Niederlande. Daneben besitzt die Kirche eine kleinere Querhausorgel.",
+          "tags": ["orgel", "musik", "barock"]
+        },
+        {
+          "text": "In der Kirche liegen bedeutende Niederländer begraben, darunter Admiral Michiel de Ruyter, Jan van Galen, Jan van Speyk und der Dichter Joost van den Vondel. Aufwendige Grabmonumente verbanden persönliche Erinnerung mit der öffentlichen Darstellung von Seemacht und nationaler Geschichte.",
+          "tags": ["graeber", "de_ruyter", "seefahrtsgeschichte"]
+        },
+        {
+          "text": "Seit 1814 finden hier die Amtseinführungen niederländischer Staatsoberhäupter statt. Es handelt sich nicht um Krönungen: Der Monarch schwört vor den Generalstaaten auf die Verfassung. Der Weg vom Palast in die benachbarte Kirche verbindet königliche Repräsentation und parlamentarischen Verfassungsakt.",
+          "tags": ["monarchie", "verfassung", "staatszeremonie"]
+        },
+        {
+          "text": "Auch königliche Hochzeiten fanden hier statt, darunter 2002 die kirchliche Trauung von Willem-Alexander und Máxima. 2013 wurde Willem-Alexander in der Nieuwe Kerk als König eingeführt. Solche Ereignisse prägen die nationale Funktion des Gebäudes trotz fehlender regelmäßiger Gottesdienste.",
+          "tags": ["koenigshaus", "2002", "2013"]
+        },
+        {
+          "text": "Nach einer langen Restaurierung von 1959 bis 1980 konnte die reformierte Kirche den Unterhalt nicht mehr allein tragen. 1979 übernahm eine nationale Stiftung das Gebäude und entwickelte es zum Ort für Ausstellungen, Kulturveranstaltungen und offizielle Zeremonien.",
+          "tags": ["restaurierung", "stiftung", "nutzung"]
+        },
+        {
+          "text": "LIVE: Die Nieuwe Kerk ist kein ständig gleich zugänglicher Kirchenraum. Ausstellungsthemen, Organisationsphasen, königliche Termine, Orgelkonzerte, Öffnungszeiten und Preise wechseln; aktuelle Informationen ausschließlich bei nieuwekerk.nl prüfen.",
+          "tags": ["live_hint", "ephemeral", "ausstellung"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Werden hier Könige gekrönt?",
+          "a": "Nein. In den Niederlanden findet eine verfassungsrechtliche Amtseinführung statt, keine Krönung."
+        },
+        {
+          "q": "Warum heißt eine mittelalterliche Kirche „neu“?",
+          "a": "Sie wurde als zweite Pfarrkirche nach der älteren Oude Kerk gebaut."
+        }
+      ]
+    },
+    {
+      "id": "amsterdam_westerkerk",
+      "name": "Westerkerk",
+      "general_info": "Die Westerkerk wurde 1620 bis 1631 nach Plänen Hendrick de Keysers als große protestantische Kirche errichtet. Ihr heller Renaissancebau, der 85 Meter hohe Westertoren, Rembrandts unbekanntes Grab und die Nähe zum Anne Frank Huis machen sie zu einem Schlüsselort des westlichen Grachtengürtels.",
+      "deep_data_pool": [
+        {
+          "text": "Der Amsterdamer Stadtrat gab die Kirche für die neue westliche Stadterweiterung in Auftrag. Hendrick de Keyser entwarf sie; nach seinem Tod führte sein Sohn Pieter den Bau fort. Am Pfingstsonntag 1631 wurde sie eingeweiht.",
+          "tags": ["baugeschichte", "de_keyser", "grachtenguertel"]
+        },
+        {
+          "text": "Anders als Oude und Nieuwe Kerk entstand die Westerkerk von Anfang an für den protestantischen Gottesdienst. Sie gehört zu den frühesten großen eigens reformiert geplanten Kirchen und gilt als größte niederländische Kirche, die ausdrücklich für Protestanten gebaut wurde.",
+          "tags": ["protestantismus", "kirchenbau", "religion"]
+        },
+        {
+          "text": "Der Grundriss besteht aus zwei miteinander verbundenen griechischen Kreuzen. Ein hohes Mittelschiff wird von niedrigeren Seitenschiffen begleitet; große Fenster und die klare Gliederung erzeugen einen hellen Predigtraum ohne mittelalterlichen Umgangschor.",
+          "tags": ["grundriss", "architektur", "innenraum"]
+        },
+        {
+          "text": "Der Westertoren wurde nach der Kirche vollendet und erreicht etwa 85 Meter. Er gehört der Stadt Amsterdam, nicht der Kirchengemeinde. Seine gestufte Bekrönung endet unter der Kaiserkrone, die an das Wappenprivileg Amsterdams erinnert.",
+          "tags": ["westertoren", "stadtbesitz", "visuell"]
+        },
+        {
+          "text": "Im Turm hängt ein Glockenspiel mit Glocken von François Hemony. Turm und Carillon prägen den Klang des Jordaan und des westlichen Zentrums. Anne Frank erwähnte in ihrem Tagebuch die Glocken, die aus dem Versteck an der Prinsengracht zu hören waren.",
+          "tags": ["carillon", "anne_frank", "klang"]
+        },
+        {
+          "text": "Rembrandt wurde am 8. Oktober 1669 in der Westerkerk beigesetzt. Da es sich um ein gemietetes Kirchengrab handelte und die genaue Nummer verloren ging, ist sein tatsächlicher Grabplatz unbekannt. Eine Gedenkplatte an der Nordseite erinnert an ihn, ersetzt aber kein identifiziertes Grab.",
+          "tags": ["rembrandt", "grab", "erinnerung"]
+        },
+        {
+          "text": "Bei der Einweihung gab es noch keine Orgel, weil instrumentale Kirchenmusik in streng reformierten Kreisen als unangemessen galt. Erst 1681 wurde Roelof Barentszn Duyschot beauftragt; sein Sohn vollendete die Orgel 1686, später wurde sie erweitert.",
+          "tags": ["orgel", "calvinismus", "musik"]
+        },
+        {
+          "text": "Die bemalten Orgelflügel stammen von Gerard de Lairesse und zeigen biblische Szenen. Damit kehrte repräsentative Bildkunst in einen Raum zurück, dessen ursprüngliche protestantische Konzeption Bilder und Instrumentalmusik bewusst zurückhaltend behandelt hatte.",
+          "tags": ["de_lairesse", "orgelkunst", "religionsgeschichte"]
+        },
+        {
+          "text": "Vor der Kirche liegt der Westermarkt; wenige Schritte entfernt befindet sich das Anne Frank Huis. Kirche, Turm, Prinsengracht und das ehemalige Versteck gehören zu demselben historischen Stadtraum, haben aber unterschiedliche Funktionen und dürfen in der Erzählung nicht miteinander verwechselt werden.",
+          "tags": ["orientierung", "westermarkt", "quer"]
+        },
+        {
+          "text": "LIVE: Kirchenöffnung, Gottesdienste, Konzerte, Sanierungen und die Besteigung des städtischen Westertorens ändern sich unabhängig voneinander. Zugang und Preise aktuell bei Westerkerk und Stadt Amsterdam prüfen; aus der Sichtbarkeit des Turms folgt kein offener Aufstieg.",
+          "tags": ["live_hint", "ephemeral", "turm"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Wo genau liegt Rembrandt?",
+          "a": "Er wurde 1669 in der Westerkerk bestattet, doch der genaue Grabplatz ist nicht mehr bekannt."
+        },
+        {
+          "q": "Gehört der Westertoren zur Kirche?",
+          "a": "Baulich ja, rechtlich gehört der Turm jedoch der Stadt Amsterdam."
+        }
+      ]
+    },
+    {
+      "id": "amsterdam_begijnhof",
+      "name": "Begijnhof",
+      "general_info": "Der Begijnhof ist ein mittelalterlich geprägter, bis heute bewohnter Innenhof hinter dem Spui. Beguinen lebten hier in religiöser Gemeinschaft ohne Klostergelübde; Wohnhäuser, Englische Kirche, verborgene katholische Kapelle und das Houten Huys bewahren mehrere Glaubens- und Baugeschichten.",
+      "deep_data_pool": [
+        {
+          "text": "Das genaue Gründungsjahr ist unbekannt. Eine frühe Nennung von Beguinen stammt aus dem Jahr 1307, 1346 wird ein Beghynhuys ausdrücklich erwähnt. 1393 bestätigte Albrecht von Bayern Statuten, die Gemeinschaft und Besitz schützten.",
+          "tags": ["gruendung", "mittelalter", "quellenlage"]
+        },
+        {
+          "text": "Beguinen waren fromme Frauen, die gemeinschaftlich lebten und religiöse Aufgaben übernahmen, ohne dieselben dauerhaften Gelübde wie Nonnen abzulegen. Dadurch blieb der Hof stärker mit städtischem Eigentum, Familien und individueller Lebensführung verbunden als ein abgeschlossenes Kloster.",
+          "tags": ["beguinen", "religionsgeschichte", "alltag"]
+        },
+        {
+          "text": "Der Hof liegt innerhalb des alten Singelraums, aber tiefer und abgeschirmt hinter Toren. Die Häuser bilden keine einheitliche Klosterfront: 47 individuelle Stadthäuser umgeben Grünflächen, viele mit Fassaden des 17. und 18. Jahrhunderts, während ältere Holzkonstruktionen dahinter erhalten blieben.",
+          "tags": ["stadtgrundriss", "wohnarchitektur", "visuell"]
+        },
+        {
+          "text": "Das schwarze Houten Huys am Begijnhof 34 besitzt eine seltene hölzerne Fassade und ein gotisches Tragwerk. Es gehört zu den sehr wenigen erhaltenen Holzhäusern Amsterdams. Datierungen werden in den Quellen unterschiedlich angegeben; sicher ist seine außergewöhnliche Stellung nach den großen Stadtbränden und späteren Holzbauverboten.",
+          "tags": ["houten_huys", "holzbau", "quellenkritik"]
+        },
+        {
+          "text": "Die mittelalterliche Hofkirche wurde nach der Alteratie von 1578 eingezogen. Weil die Wohnhäuser privat besessen wurden, konnte die katholische Gemeinschaft dennoch im Hof bleiben. Dieser Eigentumsunterschied half dem Begijnhof, als katholische Institution im protestantisch regierten Amsterdam fortzubestehen.",
+          "tags": ["alteratie", "eigentum", "katholizismus"]
+        },
+        {
+          "text": "1607 erhielt die englischsprachige reformierte Gemeinde die ehemalige Beguinenkirche. Sie ist bis heute als English Reformed Church in Gebrauch und gehört zur Church of Scotland. Ihr gotischer Baukörper erinnert daran, dass derselbe Raum nacheinander katholischer und reformierter Liturgie diente.",
+          "tags": ["englische_kirche", "reformation", "nutzung"]
+        },
+        {
+          "text": "Die katholischen Beguinen richteten gegenüber eine äußerlich unauffällige Hauskirche ein. Philips Vingboons gestaltete den Innenraum; 1682 wurde die Kapelle für Johannes und Ursula eröffnet. Von außen sollte sie nach Vorgabe der protestantischen Stadtregierung nicht als Kirche erkennbar sein.",
+          "tags": ["schuilkerk", "vingboons", "kapelle"]
+        },
+        {
+          "text": "Agatha Kaptein, genannt Schwester Antonia, war die letzte Beguine des Hofs. Sie starb 1971. Das Ende der historischen Gemeinschaft beendete nicht die Wohnnutzung: Der Begijnhof ist weiterhin Privatwohnsitz für Frauen und kein frei verfügbarer Museumsplatz.",
+          "tags": ["letzte_beguine", "1971", "wohnen"]
+        },
+        {
+          "text": "Giebelsteine, unterschiedliche Fassaden, die kleine Rasenfläche und die beiden Kirchen machen die Zeitschichten sichtbar. Zugleich verlangt der Ort Zurückhaltung: Die historische Ruhe ist Teil seiner Funktion, nicht eine inszenierte Kulisse für Besuchergruppen.",
+          "tags": ["vor_ort", "denkmal", "respekt"]
+        },
+        {
+          "text": "LIVE: Besucherzugang, Torzeiten, Gottesdienste und Kapellenöffnung können wechseln. Da der Hof bewohnt ist, gelten aktuelle Ruhe-, Foto- und Wegehinweise vor Ort; offizielle Angaben bei hetbegijnhof.nl und den beiden Gemeinden prüfen.",
+          "tags": ["live_hint", "ephemeral", "privatbereich"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "War der Begijnhof ein Kloster?",
+          "a": "Nein. Beguinen lebten religiös und gemeinschaftlich, legten aber nicht dieselben dauerhaften Klostergelübde wie Nonnen ab."
+        },
+        {
+          "q": "Warum stehen hier zwei Kirchen?",
+          "a": "Die alte Hofkirche wurde 1607 reformiert; Katholiken nutzten später eine äußerlich unauffällige Hauskirche gegenüber."
+        }
+      ]
+    },
+    {
+      "id": "amsterdam_anne_frank_huis",
+      "name": "Anne Frank Huis",
+      "general_info": "Das Anne Frank Huis bewahrt das Hinterhaus an der Prinsengracht 263, in dem Anne Frank, ihre Familie und vier weitere Verfolgte von 1942 bis 1944 untertauchten. Das 1960 eröffnete Museum verbindet den weitgehend leeren Versteckraum mit Originalobjekten und Bildungsarbeit gegen Antisemitismus.",
+      "deep_data_pool": [
+        {
+          "text": "Das Vorderhaus an der Prinsengracht diente Otto Franks Firmen Opekta und Pectacon. Das größere Hinterhaus war 1739 anstelle eines älteren Anbaus entstanden. Seine oberen Etagen ließen sich vom Geschäftsbetrieb abschirmen und wurden zum vorbereiteten Versteck.",
+          "tags": ["gebaeude", "hinterhaus", "vorgeschichte"]
+        },
+        {
+          "text": "Nachdem Margot Frank eine Aufforderung zum Arbeitseinsatz erhalten hatte, tauchte die Familie Frank am 6. Juli 1942 unter. Später kamen Hermann, Auguste und Peter van Pels sowie Fritz Pfeffer hinzu. Acht Menschen lebten über zwei Jahre in den engen Räumen.",
+          "tags": ["verfolgung", "untertauchen", "1942"]
+        },
+        {
+          "text": "Der Zugang lag hinter einem drehbaren Bücherregal. Mehrere Helferinnen und Helfer aus dem Umfeld der Firma versorgten die Untergetauchten mit Lebensmitteln, Nachrichten und praktischer Unterstützung. Ihre Hilfe war lebensgefährlich und konnte die ständige Bedrohung nicht beseitigen.",
+          "tags": ["buecherregal", "helfer", "widerstand"]
+        },
+        {
+          "text": "Anne hatte zu ihrem 13. Geburtstag am 12. Juni 1942 ein rot kariertes Tagebuch erhalten. Im Versteck schrieb sie in Heften und auf losen Blättern weiter. Nach einem Radioaufruf im März 1944 überarbeitete sie Texte mit dem Ziel einer späteren Veröffentlichung.",
+          "tags": ["tagebuch", "schreiben", "originalobjekt"]
+        },
+        {
+          "text": "Am 4. August 1944 wurden die acht Untergetauchten verhaftet und deportiert. Otto Frank überlebte als Einziger von ihnen den Holocaust. Miep Gies und Bep Voskuijl bewahrten Annes zurückgelassene Papiere; Otto veröffentlichte 1947 eine erste niederländische Buchausgabe.",
+          "tags": ["verhaftung", "holocaust", "publikation"]
+        },
+        {
+          "text": "Nach dem Krieg verfiel das Gebäude und war vom Abriss bedroht. Eine Amsterdamer Bürgerinitiative setzte sich für seinen Erhalt ein. 1957 wurde die Anne-Frank-Stiftung gegründet, das Haus restauriert und am 3. Mai 1960 als Museum eröffnet.",
+          "tags": ["rettung", "museumsgeschichte", "1960"]
+        },
+        {
+          "text": "Otto Frank wünschte, dass das Hinterhaus unmöbliert blieb. Die leeren Räume zeigen deshalb keine vollständige Wohnrekonstruktion. Erhaltene Spuren wie Fotos und Markierungen an den Wänden stehen neben Dokumenten und Berichten für das verlorene Leben der Bewohner.",
+          "tags": ["leere_raeume", "authentizitaet", "erinnerung"]
+        },
+        {
+          "text": "Im Museum wird das originale rot karierte Tagebuch gezeigt; weitere Manuskriptseiten werden aus konservatorischen Gründen wechselnd präsentiert. Zitate, Fotos, Filme und Gegenstände ordnen die persönlichen Texte in die nationalsozialistische Verfolgungs- und Vernichtungspolitik ein.",
+          "tags": ["sammlung", "konservierung", "ausstellung"]
+        },
+        {
+          "text": "Die Stiftung versteht den Ort nicht nur biografisch. Ihre Bildungsarbeit behandelt Antisemitismus, Rassismus, Diskriminierung, Freiheit und gleiche Rechte. Anne Franks Geschichte wird damit als konkrete individuelle Erfahrung und als Ausgangspunkt für gegenwärtige Verantwortung vermittelt.",
+          "tags": ["bildungsarbeit", "antisemitismus", "gegenwart"]
+        },
+        {
+          "text": "LIVE: Zutritt, Zeitfenster, Ticketverkauf, Sicherheitsregeln, Barrierefreiheit und gezeigte Originale ändern sich. Wegen der engen historischen Räume immer die aktuellen Angaben ausschließlich auf annefrank.org prüfen; frühere Preis- oder Öffnungsangaben nicht übernehmen.",
+          "tags": ["live_hint", "ephemeral", "tickets"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Warum ist das Hinterhaus leer?",
+          "a": "Otto Frank wollte die nach der Verhaftung ausgeräumten Räume unmöbliert lassen; ihre Leere ist Teil des Erinnerungsortes."
+        },
+        {
+          "q": "Ist das ausgestellte Tagebuch original?",
+          "a": "Ja. Das Museum bewahrt Annes originales rot kariertes Tagebuch sowie weitere Manuskripte und Dokumente."
+        }
+      ]
+    },
+    {
+      "id": "amsterdam_rijksmuseum_amsterdam",
+      "name": "Rijksmuseum Amsterdam",
+      "general_info": "Das Rijksmuseum erzählt niederländische Kunst und Geschichte vom Mittelalter bis ins 20. Jahrhundert. Pierre Cuypers' 1885 eröffneter Bau verbindet Gotik und Renaissance; Ehrenhalle, Nachtwacht-Saal, Bibliothek, Asien-Pavillon und Fahrraddurchfahrt bilden ein bewusst inszeniertes Gesamtkunstwerk.",
+      "deep_data_pool": [
+        {
+          "text": "Die nationale Sammlung begann 1798 als Nationale Kunstgalerie in Den Haag. Unter König Louis Bonaparte zog sie 1808 nach Amsterdam und wurde 1809 im Königlichen Palais eröffnet. Städtische Hauptwerke, darunter Rembrandts Nachtwache, wurden mit dem Nationalbestand verbunden.",
+          "tags": ["museumsgeschichte", "1798", "louis_bonaparte"]
+        },
+        {
+          "text": "1813 wechselte das Rijks Museum in das Trippenhuis. Das Gebäude wurde für Sammlung und Publikum bald zu klein. Nach langen Debatten erhielt Pierre Cuypers den Auftrag für einen eigenen Nationalmuseumsbau; 1876 begannen die Arbeiten, 1885 wurde das Haus eröffnet.",
+          "tags": ["trippenhuis", "neubau", "cuypers"]
+        },
+        {
+          "text": "Cuypers verband gotische und renaissancistische Formen mit nationaler Symbolik. Kritiker fanden den Entwurf damals zu mittelalterlich oder zu katholisch. Architektur, Wandmalerei, Glas, Skulptur und Ornament wurden als Gesamtkunstwerk geplant, das eine bestimmte Erzählung der niederländischen Geschichte räumlich ordnete.",
+          "tags": ["architektur", "historismus", "debatte"]
+        },
+        {
+          "text": "Die Ehrenhalle ist wie ein langes Kirchenschiff auf den Nachtwacht-Saal ausgerichtet. In seitlichen Nischen hängen Meisterwerke des 17. Jahrhunderts; eiserne Träger tragen Künstlernamen, darüber erscheinen Wappen der damaligen niederländischen Provinzen und Ansichten ihrer Hauptstädte.",
+          "tags": ["ehrenhalle", "innenraum", "symbolik"]
+        },
+        {
+          "text": "Am Ende der Hauptachse hängt Rembrandts Nachtwache in einem eigens dafür entworfenen Saal. Die Position entspricht bildlich einem Hochaltar, doch verehrt wird bürgerliche Kunst. Das Gemälde wurde mehrfach versetzt und kehrte 1983 an seine zentrale Achse zurück.",
+          "tags": ["nachtwache", "rembrandt", "inszenierung"]
+        },
+        {
+          "text": "Die Sammlung umfasst nicht nur Gemälde. Skulpturen, Möbel, Schiffsmodelle, Waffen, Drucke, Fotografien, Mode, Kunsthandwerk und historische Gegenstände erzählen rund 800 Jahre. Zu den bekannten Künstlern gehören Vermeer, Frans Hals, Jan Steen und Rembrandt.",
+          "tags": ["sammlung", "kunst", "geschichte"]
+        },
+        {
+          "text": "Die Cuypersbibliothek ist die historische Forschungsbibliothek des Museums und Teil der ursprünglichen Architektur. Mehrgeschossige Galerien umgeben einen lichtdurchfluteten Lesesaal. Sie macht sichtbar, dass Sammeln, Ordnen und wissenschaftliche Dokumentation zum Konzept eines Nationalmuseums gehören.",
+          "tags": ["bibliothek", "forschung", "architektur"]
+        },
+        {
+          "text": "Eine öffentliche Passage führt auf Bodenniveau durch die Mitte des Gebäudes. Heute wird sie besonders vom Radverkehr genutzt. Diese Durchfahrt trennt die beiden Höfe und macht das Museum zugleich zum Stadttor zwischen historischem Zentrum und Museumplein.",
+          "tags": ["passage", "radverkehr", "stadtgrundriss"]
+        },
+        {
+          "text": "Nach einer mehr als zehnjährigen Restaurierung und Neuordnung öffnete das Rijksmuseum 2013 wieder vollständig. Cruz y Ortiz stellten die Innenhöfe und Hauptachsen neu her; ein eigener Asien-Pavillon ergänzte den Bestand. Die Erneuerung versuchte, Cuypers' Raumfolge mit modernen Museumsanforderungen zu verbinden.",
+          "tags": ["restaurierung", "2013", "asien_pavillon"]
+        },
+        {
+          "text": "LIVE: Nachtwacht-Präsentation, laufende Restaurierung, Sonderausstellungen, Saalschließungen, Zeitfenster und Preise verändern sich. Aktuelle Besuchs- und Werkangaben direkt auf rijksmuseum.nl prüfen; aus dem Sammlungsbesitz folgt nicht, dass ein Objekt gerade ausgestellt ist.",
+          "tags": ["live_hint", "ephemeral", "museum"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Warum wirkt die Ehrenhalle wie eine Kirche?",
+          "a": "Cuypers plante eine langgestreckte, kathedralartige Achse, die auf den eigens für die Nachtwache geschaffenen Saal zuläuft."
+        },
+        {
+          "q": "Führt wirklich ein Radweg durch das Museum?",
+          "a": "Ja. Die öffentliche Passage unter der Mittelachse ist eine wichtige Verbindung zwischen Zentrum und Museumplein."
+        }
+      ]
+    },
+    {
+      "id": "amsterdam_van_gogh_museum",
+      "name": "Van Gogh Museum",
+      "general_info": "Das Van Gogh Museum bewahrt die weltweit größte zusammenhängende Sammlung von Werken Vincent van Goghs. Ihr Erhalt verdankt sich Theo van Goghs Familie; seit 1973 zeigt der Rietveld-Bau am Museumplein Gemälde, Zeichnungen und Briefe, ergänzt durch Kurokawas elliptischen Ausstellungsflügel.",
+      "deep_data_pool": [
+        {
+          "text": "Nach Vincents Tod 1890 und dem Tod seines Bruders Theo 1891 verwaltete Jo van Gogh-Bonger den Familienbestand. Durch Ausstellungen, Leihgaben und Publikationen trug sie entscheidend dazu bei, Van Goghs Werk bekannt zu machen, ohne die Kernsammlung auseinanderfallen zu lassen.",
+          "tags": ["jo_van_gogh_bonger", "familie", "rezeption"]
+        },
+        {
+          "text": "Später übernahm ihr Sohn Vincent Willem van Gogh die Verantwortung. Er gründete eine Stiftung, um die Werke dauerhaft zusammenzuhalten. 1962 vereinbarte die Familie mit dem niederländischen Staat die Übertragung der Sammlung an die Vincent van Gogh Foundation gegen den Bau und Unterhalt eines öffentlichen Museums.",
+          "tags": ["vincent_willem", "stiftung", "1962"]
+        },
+        {
+          "text": "Die übertragene Familiensammlung umfasste mehr als 200 Gemälde, etwa 500 Zeichnungen und rund 800 Briefe sowie Werke anderer Künstler. Sie bildet den Kern des Museums und erlaubt, Van Goghs künstlerische Entwicklung und sein Netzwerk ungewöhnlich dicht zu verfolgen.",
+          "tags": ["sammlung", "briefe", "zeichnungen"]
+        },
+        {
+          "text": "Gerrit Rietveld entwarf 1963/64 den Hauptbau. Er starb vor der Vollendung; das Museum öffnete am 2. Juni 1973. Die modernistische Architektur setzt auf klare Geometrie, offene Sichtbeziehungen und Tageslicht, damit die Kunst gegenüber historisierendem Dekor im Vordergrund bleibt.",
+          "tags": ["rietveld", "architektur", "1973"]
+        },
+        {
+          "text": "Der Hauptbau ordnet die dauerhafte Präsentation. Gemälde, Zeichnungen und Briefe werden nicht nur als isolierte Meisterwerke gezeigt, sondern als Stationen eines kurzen, intensiven Künstlerlebens zwischen Niederlanden, Paris, Arles, Saint-Rémy und Auvers-sur-Oise.",
+          "tags": ["ausstellung", "biografie", "werkentwicklung"]
+        },
+        {
+          "text": "Kisho Kurokawas 1999 eröffneter Ausstellungsflügel kontrastiert mit Rietvelds Rechteck. Der japanische Architekt wählte eine asymmetrische elliptische Form und einen schräg eingesetzten Baukörper. Der Flügel dient vor allem wechselnden Ausstellungen und verbindet europäische Moderne mit Kurokawas Idee architektonischer Symbiose.",
+          "tags": ["kurokawa", "1999", "architektur"]
+        },
+        {
+          "text": "Ein gläserner Eingangsbereich verbindet seit 2015 beide Gebäude zum Museumplein. Dadurch wurde die Ankunft von der großen Freifläche aus neu geordnet. Die Architektur ist heute eine Folge aus Rietvelds modernistischem Kubus, Kurokawas Kurve und dem transparenten Verbindungsraum.",
+          "tags": ["eingang", "museumplein", "2015"]
+        },
+        {
+          "text": "Die Sammlung umfasst auch Künstler, die Van Gogh beeinflussten, mit ihm arbeiteten oder auf ihn reagierten. Japanische Farbholzschnitte, französische Kunst des späten 19. Jahrhunderts und Werke von Zeitgenossen setzen seine Bilder in einen breiteren Kunst- und Medienkontext.",
+          "tags": ["zeitgenossen", "japonismus", "kontext"]
+        },
+        {
+          "text": "Van Goghs Briefe sind eine zentrale Quelle für Arbeitsweise, Lektüre, Beziehungen und künstlerische Entscheidungen. Das Museum erforscht, ediert und digitalisiert sie. Sie ergänzen die Bilder, dürfen aber nicht als einfache Selbstdiagnose oder lückenlose Erklärung jedes Werks missverstanden werden.",
+          "tags": ["briefe", "forschung", "quellenkritik"]
+        },
+        {
+          "text": "LIVE: Gezeigte Gemälde, Leihgaben, Sonderausstellungen, Zeitfenster, Eintritt und Zugang zu einzelnen Gebäudeteilen ändern sich. Aktuelle Informationen direkt auf vangoghmuseum.nl prüfen; bekannte Werke können konservatorisch bedingt oder wegen Leihen fehlen.",
+          "tags": ["live_hint", "ephemeral", "museum"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Wie blieb die Sammlung zusammen?",
+          "a": "Theo van Goghs Familie bewahrte sie; 1962 übertrug sie den Kernbestand an eine Stiftung, während der Staat ein dauerhaftes Museum zusagte."
+        },
+        {
+          "q": "Wer entwarf das Museum?",
+          "a": "Den Hauptbau entwarf Gerrit Rietveld, den 1999 eröffneten Ausstellungsflügel Kisho Kurokawa."
+        }
+      ]
+    },
+    {
+      "id": "amsterdam_stedelijk_museum",
+      "name": "Stedelijk Museum Amsterdam",
+      "general_info": "Das Stedelijk Museum sammelt moderne und zeitgenössische Kunst sowie Design. Hinter Weissmans historistischem Backsteinbau von 1895 entwickelte Willem Sandberg den weißen Museumsraum; seit 2012 öffnet sich die kontrastreiche, als „Badewanne“ bekannte Erweiterung zum Museumplein.",
+      "deep_data_pool": [
+        {
+          "text": "Das Museum entstand aus einer Verbindung städtischer Initiative und privater Sammler. Die 1874 gegründete Vereinigung zum Aufbau einer Sammlung zeitgenössischer Kunst und Schenkungen, besonders aus dem Umfeld Sophia Adriana de Bruyns, schufen die Grundlage für ein kommunales Museum.",
+          "tags": ["gruendung", "sammler", "stadtmuseum"]
+        },
+        {
+          "text": "Adriaan Willem Weissman entwarf den 1895 eröffneten Bau. Heller Naturstein, roter Backstein, Turm und historisierende Details sollten an niederländische Architektur des 16. Jahrhunderts erinnern. Das Haus war zunächst für Kunst, Altertümer und verschiedene städtische Sammlungen bestimmt.",
+          "tags": ["weissman", "architektur", "1895"]
+        },
+        {
+          "text": "Im 20. Jahrhundert konzentrierte sich das Stedelijk zunehmend auf moderne Kunst und Gestaltung. Die Sammlung umfasst Malerei, Skulptur, Fotografie, Grafik, Möbel, Produkt- und Kommunikationsdesign. De Stijl, Bauhaus, CoBrA, Abstraktion und internationale Nachkriegskunst bilden wichtige Schwerpunkte.",
+          "tags": ["sammlung", "moderne", "design"]
+        },
+        {
+          "text": "Willem Sandberg, zunächst Kurator und später Direktor, prägte das Erscheinungsbild des Museums. 1938 ließ er Wände mit weißem Material verkleiden und entwickelte damit früh eine Form des neutralen „White Cube“, die Kunst von historistischer Innenarchitektur absetzen sollte.",
+          "tags": ["sandberg", "white_cube", "museumsgeschichte"]
+        },
+        {
+          "text": "Sandberg verstand Grafik, Typografie und Ausstellungsgestaltung als Teil des Museums. Seine Kataloge und Plakate machten das Stedelijk selbst zu einem Labor moderner visueller Kommunikation. Das Haus zeigte damit Design nicht nur als Sammlungsgegenstand, sondern setzte es institutionell ein.",
+          "tags": ["typografie", "grafikdesign", "sandberg"]
+        },
+        {
+          "text": "1954 entstand an der Van Baerlestraat ein weitgehend gläserner Erweiterungsbau, der Sandberg-Flügel. Er entsprach dem Wunsch nach offeneren, flexibleren Räumen, wurde später jedoch für den großen Umbau abgebrochen.",
+          "tags": ["erweiterung", "1954", "umbau"]
+        },
+        {
+          "text": "Benthem Crouwel Architects planten Renovierung und Neubau, die 2012 abgeschlossen wurden. Ein Teil der zusätzlichen Flächen liegt unterirdisch, damit der historische Bau sichtbar bleibt. Der Eingang wanderte auf die Seite des Museumplein.",
+          "tags": ["benthem_crouwel", "2012", "museumplein"]
+        },
+        {
+          "text": "Der weiße, fugenarm wirkende Oberbau mit großem Vordach wird wegen seiner Form meist „Badewanne“ genannt. Er enthält Eingang, Erschließung und Räume für wechselnde Ausstellungen. Der starke Gegensatz zum Backsteinbau ist bewusst, innen werden beide Teile durch ähnliche Material- und Farbkonzepte verbunden.",
+          "tags": ["badewanne", "visuell", "architektur"]
+        },
+        {
+          "text": "Das Stedelijk war Schauplatz wegweisender Präsentationen und Debatten über moderne Kunst, institutionelle Verantwortung und gesellschaftliche Teilhabe. Seine Sammlungsgeschichte ist nicht statisch: Zuschreibungen, Provenienzen, Kanon und Repräsentation werden fortlaufend erforscht und neu geordnet.",
+          "tags": ["institution", "forschung", "gegenwart"]
+        },
+        {
+          "text": "LIVE: Sammlungspräsentation, Sonderausstellungen, Bibliothekszugang, Veranstaltungen, Eintritt und Öffnungszeiten wechseln. Aktuelle Angaben ausschließlich auf stedelijk.nl prüfen; Werke aus dem großen Bestand sind nicht automatisch dauerhaft ausgestellt.",
+          "tags": ["live_hint", "ephemeral", "museum"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Warum heißt der Neubau „Badewanne“?",
+          "a": "Der glatte weiße Oberbau mit seiner auskragenden Form erinnert viele Betrachter an eine große Badewanne."
+        },
+        {
+          "q": "Was sammelt das Stedelijk?",
+          "a": "Moderne und zeitgenössische Kunst sowie Design, darunter Malerei, Skulptur, Fotografie, Grafik, Möbel und Produktgestaltung."
+        }
+      ]
+    },
+    {
+      "id": "amsterdam_museumplein",
+      "name": "Museumplein",
+      "general_info": "Der Museumplein ist kein alter Stadtplatz, sondern ein seit dem späten 19. Jahrhundert entwickelter Kulturraum. Zwischen Rijksmuseum, Van Gogh Museum, Stedelijk und Concertgebouw liegt eine große Freifläche, deren heutige Landschaftsgestalt auf den Umbau von 1999 zurückgeht.",
+      "deep_data_pool": [
+        {
+          "text": "Vor der Entwicklung lagen hier feuchte Wiesen und unter anderem eine Wachskerzenfabrik. Das Gebiet befand sich außerhalb des älteren dicht bebauten Zentrums. Erst die Stadterweiterung des 19. Jahrhunderts machte es zu einem repräsentativen neuen Kulturviertel.",
+          "tags": ["vorgeschichte", "stadtentwicklung", "landschaft"]
+        },
+        {
+          "text": "1883 fand auf dem Gelände die Internationale Kolonial- und Exportausstellung statt. Sie präsentierte Handel, Industrie und koloniale Besitzungen. Der Ort ist deshalb nicht nur mit Kunstinstitutionen verbunden, sondern auch mit der öffentlichen Inszenierung des niederländischen Kolonialismus.",
+          "tags": ["1883", "kolonialgeschichte", "ausstellung"]
+        },
+        {
+          "text": "Nach der Eröffnung des Rijksmuseums 1885 begann die dauerhafte räumliche Ordnung. Pierre Cuypers entwarf einen Straßenplan für das Umfeld. Das Museum bildete ein monumentales Tor zwischen Innenstadt und dem neuen südlichen Viertel.",
+          "tags": ["rijksmuseum", "cuypers", "stadtgrundriss"]
+        },
+        {
+          "text": "Das Concertgebouw eröffnete 1888 südwestlich der Freifläche. Mit Rijksmuseum und Konzertsaal entstand ein bürgerliches Kulturensemble, lange bevor Van Gogh Museum und moderner Erweiterungsbau des Stedelijk ihre heutigen Formen erhielten.",
+          "tags": ["concertgebouw", "kulturviertel", "19_jahrhundert"]
+        },
+        {
+          "text": "Das Stedelijk bezog 1895 seinen Bau an der Westseite. Das Van Gogh Museum öffnete 1973, später kamen Kurokawas Ausstellungsflügel und der gläserne Eingang hinzu. Dadurch lässt sich am Platz eine Folge von Museumsarchitektur vom Historismus bis zur Gegenwart ablesen.",
+          "tags": ["museen", "architektur", "zeitschichten"]
+        },
+        {
+          "text": "1999 wurde der Museumplein nach einem Entwurf des schwedisch-dänischen Landschaftsarchitekten Sven-Ingvar Andersson neu gestaltet. Große Rasenflächen, Wege, Wasserbecken und unterirdische Nutzungen sollten die zuvor fragmentierte Rückseite der Museen als zusammenhängenden öffentlichen Raum lesbar machen.",
+          "tags": ["landschaftsarchitektur", "1999", "andersson"]
+        },
+        {
+          "text": "Die Nordseite wird vom Rijksmuseum und seiner Passage geprägt, die Westseite von Van Gogh Museum und Stedelijk, der Süden vom Concertgebouw. Die offene Mitte hält Sichtachsen frei und dient zugleich als Liegewiese, Querung und Veranstaltungsfläche.",
+          "tags": ["orientierung", "ensemble", "visuell"]
+        },
+        {
+          "text": "Der Platz ist wiederholt Bühne für Demonstrationen, nationale Feiern, Kulturveranstaltungen und gemeinschaftliche Zusammenkünfte. Seine politische Nutzung setzt die Geschichte großer öffentlicher Inszenierungen fort, verändert aber Anlass und Bedeutung.",
+          "tags": ["oeffentlicher_raum", "demonstration", "gesellschaft"]
+        },
+        {
+          "text": "Die Bezeichnung Museumplein kann leicht den Eindruck eines steinernen Vorplatzes erzeugen. Tatsächlich handelt es sich um einen langgestreckten Landschaftsraum mit Rasen, Baumreihen und abgesenkten Bereichen. Die einzelnen Museen haben verschiedene Eingänge und bilden keine gemeinsame Institution.",
+          "tags": ["orientierung", "abgrenzung", "vor_ort"]
+        },
+        {
+          "text": "LIVE: Veranstaltungen, Demonstrationen, Eisfläche, Baustellen, Rasenpflege und temporäre Installationen verändern Wege und Nutzbarkeit. Aktuelle Platzsperrungen und Programme bei der Stadt beziehungsweise den jeweiligen Veranstaltern prüfen.",
+          "tags": ["live_hint", "ephemeral", "veranstaltungen"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Ist der Museumplein ein historischer Altstadtplatz?",
+          "a": "Nein. Er entwickelte sich erst im späten 19. Jahrhundert rund um neue Kulturgebäude."
+        },
+        {
+          "q": "Welche großen Häuser liegen hier?",
+          "a": "Rijksmuseum, Van Gogh Museum, Stedelijk Museum und Concertgebouw prägen den Platz."
+        }
+      ]
+    },
+    {
+      "id": "amsterdam_vondelpark",
+      "name": "Vondelpark",
+      "general_info": "Der 1865 eröffnete Vondelpark ist Amsterdams bekanntester Stadtpark. Bürger finanzierten eine englisch wirkende Landschaft aus Wegen, Wasser, Wiesen und Baumgruppen; die Vondel-Statue, das historische Pavillon, Rosengarten und Freilichttheater spiegeln spätere Nutzungsphasen.",
+      "deep_data_pool": [
+        {
+          "text": "1864 gründete eine Gruppe wohlhabender Bürger um Christiaan Pieter van Eeghen einen Verein für einen Reit- und Spazierpark. Sie kaufte Wiesen und sumpfiges Gelände am damaligen Stadtrand. Der Park war damit zunächst eine private bürgerliche Initiative, nicht ein kommunales Projekt.",
+          "tags": ["gruendung", "buergerinitiative", "19_jahrhundert"]
+        },
+        {
+          "text": "Jan David Zocher und später sein Sohn Louis Paul Zocher gestalteten die Anlage im englischen Landschaftsstil. Geschwungene Wege, unregelmäßige Wasserflächen, Wiesen und Baumgruppen sollten natürlich erscheinen, obwohl Boden, Entwässerung und Blickachsen sorgfältig geplant waren.",
+          "tags": ["zocher", "landschaftsarchitektur", "gestaltung"]
+        },
+        {
+          "text": "Der erste Abschnitt öffnete 1865 als Nieuwe Park. 1867 wurde die Statue des Dichters und Dramatikers Joost van den Vondel aufgestellt; der Park erhielt danach seinen heutigen Namen. Pierre Cuypers entwarf den Sockel des Denkmals.",
+          "tags": ["eroeffnung", "vondel", "cuypers"]
+        },
+        {
+          "text": "Durch weitere Grundstückskäufe wuchs die Anlage auf etwa 47 Hektar. Die langgestreckte Form folgt dem verfügbaren Gelände westlich der damaligen Stadt. Heute verbindet sie mehrere Wohnviertel und liegt nahe Leidseplein sowie Museumplein.",
+          "tags": ["erweiterung", "stadtgrundriss", "orientierung"]
+        },
+        {
+          "text": "Das Vondelparkpaviljoen wurde im 19. Jahrhundert im Stil der italienischen Renaissance errichtet. Später beherbergte es lange das Filmmuseum, bevor dieses 2012 als Eye an das IJ zog. Das Gebäude dokumentiert die Verbindung von Park, Gastronomie und Kulturinstitutionen.",
+          "tags": ["pavillon", "filmmuseum", "quer"]
+        },
+        {
+          "text": "1936 wurde ein Rosengarten angelegt. In den 1950er Jahren überarbeitete der Landschaftsarchitekt Egbert Mos Wege, Pflanzungen und Pflegekonzept. Diese Eingriffe zeigen, dass auch ein scheinbar natürlicher Landschaftspark laufend an Nutzung und Unterhalt angepasst wird.",
+          "tags": ["rosengarten", "egbert_mos", "pflege"]
+        },
+        {
+          "text": "1953 übergab der private Trägerverein den Park an die Stadt, weil die intensive Nutzung den Unterhalt zu teuer gemacht hatte. Damit wurde aus dem bürgerlich initiierten Reit- und Wandelpark dauerhaft ein kommunaler öffentlicher Raum.",
+          "tags": ["stadtbesitz", "1953", "oeffentlich"]
+        },
+        {
+          "text": "In den 1960er und 1970er Jahren wurde der Vondelpark mit Jugendkultur und liberaler Stadtkultur verbunden. Spielplätze kamen hinzu, später entstand ein Freilichttheater. Der Park war damit nicht mehr nur repräsentative Landschaft, sondern Bühne informeller und organisierter Freizeit.",
+          "tags": ["jugendkultur", "freizeit", "theater"]
+        },
+        {
+          "text": "Seit 1996 steht der gesamte Park als Rijksmonument unter Schutz. Geschützt ist nicht bloß ein einzelnes Gebäude, sondern das historische Landschaftsgefüge. Gleichzeitig bleibt die Anlage stark genutzt und muss mit nassem Boden, Vegetationspflege und großem Besuchsdruck umgehen.",
+          "tags": ["denkmalschutz", "1996", "landschaft"]
+        },
+        {
+          "text": "LIVE: Freilichttheater, Gastronomie, Veranstaltungen, Wegsperrungen und Pflegearbeiten ändern sich saisonal. Aktuelle Programme, Zugänglichkeit und Regeln bei Stadt und Veranstaltern prüfen; historische Parkdaten sind keine Veranstaltungsinformation.",
+          "tags": ["live_hint", "ephemeral", "park"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Nach wem ist der Park benannt?",
+          "a": "Nach dem niederländischen Dichter und Dramatiker Joost van den Vondel, dessen Denkmal 1867 aufgestellt wurde."
+        },
+        {
+          "q": "Wirkt die Landschaft natürlich?",
+          "a": "Sie ist bewusst im englischen Landschaftsstil mit geschwungenen Wegen, Wasser, Wiesen und Baumgruppen gestaltet."
+        }
+      ]
+    },
+    {
+      "id": "amsterdam_magere_brug",
+      "name": "Magere Brug",
+      "general_info": "Die Magere Brug ist eine weiß gestrichene hölzerne Klappbrücke über die Amstel. Der heutige Bau stammt von 1934 und greift ältere Formen auf; Name, beweglicher Mittelteil und beleuchtete Silhouette machten die schmale Verbindung an der Kerkstraat zu einem Stadtzeichen.",
+      "deep_data_pool": [
+        {
+          "text": "Die erste Brücke an dieser Stelle wurde 1691 als Kerkstraatbrug gebaut. Sie besaß dreizehn Öffnungen und verband die beiden Ufer der Amstel in der Achse der Kerkstraat zwischen Keizersgracht und Prinsengracht.",
+          "tags": ["1691", "kerkstraat", "stadtgrundriss"]
+        },
+        {
+          "text": "Weil die frühe Konstruktion sehr schmal war, setzte sich der Name Magere Brug, also „magere“ oder „schmale Brücke“, durch. Der volkstümliche Name beschreibt damit wahrscheinlich ihre Gestalt und nicht eine offiziell geplante Symbolik.",
+          "tags": ["name", "ueberlieferung", "bruecke"]
+        },
+        {
+          "text": "Eine bekannte Legende erzählt von zwei Schwestern, die auf gegenüberliegenden Ufern lebten und eine Brücke bauen ließen, um einander zu besuchen; in Varianten heißen sie Mager. Diese Geschichte ist touristische Überlieferung, kein gesicherter Ursprung des Bauwerks oder Namens.",
+          "tags": ["legende", "quellenkritik", "name"]
+        },
+        {
+          "text": "1871 war die erste Brücke so baufällig, dass sie abgerissen wurde. Ein größerer hölzerner Neubau mit neun Öffnungen ersetzte sie. Auch dieser musste nach gut einem halben Jahrhundert erneuert werden.",
+          "tags": ["1871", "neubau", "baugeschichte"]
+        },
+        {
+          "text": "Piet Kramer entwarf verschiedene Möglichkeiten, darunter Stahl- und Steinlösungen. Die Stadt entschied sich jedoch für eine größere Neuinterpretation der vertrauten Holzbrücke. 1934 entstand der heutige Bau nach Kramers Überarbeitung.",
+          "tags": ["piet_kramer", "1934", "architektur"]
+        },
+        {
+          "text": "Der mittlere Abschnitt ist als doppelte Klappbrücke beweglich. Weiß gestrichenes Holz, dunkle Beschläge, Portalrahmen und Gegengewichte machen die Funktionsweise von außen ablesbar. Die Konstruktion verbindet traditionelle Erscheinung mit dem Bedarf der Schifffahrt auf der Amstel.",
+          "tags": ["klappbruecke", "technik", "visuell"]
+        },
+        {
+          "text": "1969 erfolgte eine große Renovierung. Bis 1994 wurde die Brücke von Hand geöffnet, danach automatisiert. Der Wechsel zeigt, wie ein ikonisch historisch wirkendes Bauwerk technisch weiterentwickelt wurde, ohne sein vertrautes Bild aufzugeben.",
+          "tags": ["renovierung", "automatisierung", "technikgeschichte"]
+        },
+        {
+          "text": "Die Brücke verbindet keine Hauptstraße für Autos, sondern ist heute besonders für Fuß- und Radverkehr wichtig. Von den Ufern und vom Wasser aus bildet sie zusammen mit der breiten Amstel, Baumreihen und Giebelhäusern eine stark wiedererkennbare Ansicht.",
+          "tags": ["verkehr", "amstel", "orientierung"]
+        },
+        {
+          "text": "Die Magere Brug erscheint in Filmen, darunter 1971 in „Diamonds Are Forever“. Film- und Postkartenbilder verstärkten ihren internationalen Bekanntheitsgrad, obwohl die heutige Brücke jünger ist als viele Betrachter aufgrund ihrer historischen Form vermuten.",
+          "tags": ["film", "rezeption", "stadtbild"]
+        },
+        {
+          "text": "LIVE: Brückenöffnungen, Schifffahrtsregeln, Beleuchtung, Bauarbeiten und Sperrungen ändern sich. Für eine konkrete Querung oder Bootsfahrt aktuelle Hinweise der Stadt Amsterdam und der Wasserstraßenbetreiber prüfen.",
+          "tags": ["live_hint", "ephemeral", "verkehr"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Stammt die heutige Brücke aus dem 17. Jahrhundert?",
+          "a": "Nein. Die erste Brücke entstand 1691, der heutige Bau ist eine vergrößerte Neuinterpretation von 1934."
+        },
+        {
+          "q": "Ist die Geschichte von den zwei Schwestern wahr?",
+          "a": "Sie ist eine beliebte Legende; als gesicherte Erklärung für Bau und Namen gilt sie nicht."
+        }
+      ]
+    },
+    {
+      "id": "amsterdam_het_scheepvaartmuseum",
+      "name": "Het Scheepvaartmuseum",
+      "general_info": "Het Scheepvaartmuseum befindet sich im 1656 eröffneten 's Lands Zeemagazijn, dem früheren Arsenal der Amsterdamer Admiralität. Daniël Stalpaerts strenger Speicherbau, maritime Sammlungen, Glasdach und Schiffsreplik verbinden Seemacht, Handel, Navigation und deren konfliktreiche Folgen.",
+      "deep_data_pool": [
+        {
+          "text": "Um 1650 ließ Amsterdam östlich der alten Stadt drei Inseln für Werften, Speicher und Wohnungen anlegen. Auf Kattenburg entstand die Werft der Admiralität von Amsterdam. Nach dem Ersten Englisch-Niederländischen Krieg wuchs der Druck, die Kriegsflotte besser auszurüsten.",
+          "tags": ["kattenburg", "admiralitaet", "stadtentwicklung"]
+        },
+        {
+          "text": "Daniël Stalpaert entwarf das 's Lands Zeemagazijn. Der monumentale Vierflügelbau wurde 1655/56 in sehr kurzer Zeit errichtet und 1656 eröffnet. Seine regelmäßigen Fassaden und der große Innenhof verbinden praktische Speicherfunktion mit der repräsentativen Architektur des niederländischen Klassizismus.",
+          "tags": ["stalpaert", "1656", "architektur"]
+        },
+        {
+          "text": "Im Arsenal lagerten Kanonen, Segel, Flaggen, Tauwerk, Werkzeuge und weitere Ausrüstung für die Kriegsflotte. Schießpulver wurde wegen der Explosionsgefahr nicht hier aufbewahrt. Das Haus war damit logistische Infrastruktur der Admiralität, kein Warenlager der VOC.",
+          "tags": ["arsenal", "marine", "abgrenzung"]
+        },
+        {
+          "text": "Unter dem offenen Innenhof sammelten Gewölbe Regenwasser; rund 40.000 Liter konnten als Trinkwasservorrat für Schiffe gespeichert werden. Die Anlage zeigt, wie Architektur Versorgung, Lagerung und Flottenbetrieb in einem Gebäude verband.",
+          "tags": ["regenwasser", "technik", "alltag"]
+        },
+        {
+          "text": "Der schwere Bau steht auf rund 2.300 Pfählen. Setzungen machten zusätzliche Strebepfeiler und vorspringende Bauteile nötig. Ein Brand zerstörte 1791 große Teile; der Wiederaufbau veränderte unter anderem die oberen Geschosse.",
+          "tags": ["fundament", "brand", "wiederaufbau"]
+        },
+        {
+          "text": "Das Schifffahrtsmuseum wurde 1916 gegründet und eröffnete 1922 zunächst an der Cornelis Schuytstraat. Als Sammlung und Depot dort zu groß wurden, zog es in das ehemalige Arsenal; am 13. April 1973 eröffnete Prinzessin Beatrix den neuen Standort.",
+          "tags": ["museumsgeschichte", "1916", "1973"]
+        },
+        {
+          "text": "Die Sammlung umfasst Gemälde, Karten, Atlanten, Schiffsmodelle, Navigationsinstrumente, Waffen, Fotografien und Alltagsobjekte. Sie erlaubt sowohl technische und wirtschaftliche Geschichten als auch die kritische Auseinandersetzung mit Krieg, Kolonialismus, Versklavung und globalem Handel.",
+          "tags": ["sammlung", "navigation", "kolonialgeschichte"]
+        },
+        {
+          "text": "Seit 1992 liegt am Steg eine Replik des Ostindienfahrers Amsterdam. Das Vorbild lief 1749 auf seiner ersten Reise vor der englischen Küste auf. Die Replik veranschaulicht Raum, Arbeit und Hierarchie an Bord, ist aber kein erhaltenes Originalschiff.",
+          "tags": ["schiffsreplik", "voc", "quellenkritik"]
+        },
+        {
+          "text": "Bei der Renovierung 2007 bis 2011 erhielt der Innenhof ein Glas-Stahl-Dach von Laurent Ney. Sein Liniennetz nimmt Muster historischer Seekarten und Kompasslinien auf. Wegen der Setzung des alten Gebäudes musste jedes Glaselement individuell angepasst werden.",
+          "tags": ["glasdach", "renovierung", "kartografie"]
+        },
+        {
+          "text": "LIVE: Schiffsreplik, Ausstellungen, Depotobjekte, Familienangebote, Öffnungszeiten und Preise können wechseln. Vor einem Besuch ausschließlich die aktuellen Informationen von hetscheepvaartmuseum.nl prüfen; Sammlungsumfang bedeutet nicht dauernde Sichtbarkeit aller Objekte.",
+          "tags": ["live_hint", "ephemeral", "museum"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "War das Gebäude ein VOC-Lager?",
+          "a": "Nein. Es war das Arsenal der Admiralität von Amsterdam und lagerte Ausrüstung für die Kriegsflotte."
+        },
+        {
+          "q": "Ist das Schiff am Museum original?",
+          "a": "Nein. Es ist eine Replik des 1749 gestrandeten Ostindienfahrers Amsterdam."
+        }
+      ]
+    },
+    {
+      "id": "amsterdam_museum_rembrandthuis",
+      "name": "Museum Rembrandthuis",
+      "general_info": "Im Haus an der Jodenbreestraat lebte und arbeitete Rembrandt von 1639 bis 1658. Die auf Grundlage seines Konkursinventars rekonstruierte Wohn- und Werkstattwelt zeigt Atelier, Kunstkammer und Druckpraxis; eine fast vollständige Sammlung seiner Radierungen ergänzt den historischen Ort.",
+      "deep_data_pool": [
+        {
+          "text": "Das Haus wurde um 1606 errichtet und um 1627 wahrscheinlich unter Beteiligung Jacob van Campens umgebaut. Es erhielt ein zusätzliches Geschoss und eine neue Fassade mit Dreiecksgiebel. Die damalige Breestraat lag in einem wohlhabenden Viertel nahe Kunsthandel und Auftraggebern.",
+          "tags": ["baugeschichte", "van_campen", "jodenbreestraat"]
+        },
+        {
+          "text": "Rembrandt kaufte das Gebäude 1639 für 13.000 Gulden und durfte in Raten zahlen. Er war 33 Jahre alt, erfolgreich und mit Saskia van Uylenburgh verheiratet. Das große Haus bot Räume zum Wohnen, Sammeln, Verkaufen, Unterrichten und Malen.",
+          "tags": ["rembrandt", "kauf", "1639"]
+        },
+        {
+          "text": "Im großen Atelier entstanden bedeutende Werke, während Schüler in eigenen Arbeitsräumen lernten. Lichtführung, Modelle, Requisiten und vorbereitende Studien gehörten zum Werkstattbetrieb. Das Haus war daher zugleich Familienwohnung, Künstlerunternehmen und Ausbildungsort.",
+          "tags": ["atelier", "werkstatt", "kunstproduktion"]
+        },
+        {
+          "text": "Rembrandt sammelte Gemälde, Drucke, Zeichnungen, Waffen, Kostüme, Gipsabgüsse, Muscheln und Naturgegenstände. Solche Objekte dienten als Studienmaterial, Statuszeichen und möglicherweise Handelsbestand. Die Kunstkammer zeigt seine Arbeit im Kontext einer frühneuzeitlichen Sammelkultur.",
+          "tags": ["kunstkammer", "sammlung", "materielle_kultur"]
+        },
+        {
+          "text": "Er schuf mehr als 300 unterschiedliche Radierungen und experimentierte mit Plattenzuständen, Papier und Druckwirkung. Druckgrafik ließ sich in kleinen Auflagen verbreiten und erreichte andere Käufer als große Gemälde. Das Museum bewahrt eine nahezu vollständige Sammlung seiner Radierungen und einige Kupferplatten.",
+          "tags": ["radierung", "druckgrafik", "sammlung"]
+        },
+        {
+          "text": "1656 konnte Rembrandt seine Schulden nicht mehr bedienen und wurde insolvent erklärt. Seine Besitztümer wurden Zimmer für Zimmer aufgenommen und anschließend verkauft. 1658 wurde auch das Haus versteigert; Rembrandt zog in die Rozengracht.",
+          "tags": ["konkurs", "1656", "verkauf"]
+        },
+        {
+          "text": "Das Inventar von 1656 ist die wichtigste Grundlage für die heutige Rekonstruktion. Es nennt Möbel, Kunst und Gegenstände nach Räumen. Die Einrichtung ist dennoch keine vollständig erhaltene Originalwohnung, sondern eine wissenschaftlich begründete Annäherung mit zeitgenössischen Vergleichsstücken.",
+          "tags": ["inventar", "rekonstruktion", "quellenkritik"]
+        },
+        {
+          "text": "Anfang des 20. Jahrhunderts war das Haus stark verändert und in schlechtem Zustand. Die Stadt kaufte es 1907 und übergab es einer Stiftung. Karel de Bazel restaurierte den Bau; am 10. Juni 1911 eröffnete das Museum.",
+          "tags": ["museumsgeschichte", "de_bazel", "1911"]
+        },
+        {
+          "text": "Das Nachbarhaus wurde in den Museumskomplex einbezogen und bietet moderne Ausstellungsräume. Dort können Radierungen, Arbeiten von Lehrern und Schülern sowie wechselnde Themen gezeigt werden, ohne die rekonstruierten historischen Räume vollständig mit Vitrinen zu überformen.",
+          "tags": ["erweiterung", "ausstellung", "schueler"]
+        },
+        {
+          "text": "LIVE: Druckvorführungen, Pigmentdemonstrationen, gezeigte Radierungen, Sonderausstellungen, Eintritt und Öffnungszeiten wechseln. Aktuelle Informationen auf rembrandthuis.nl prüfen; empfindliche Arbeiten auf Papier werden aus konservatorischen Gründen ausgetauscht.",
+          "tags": ["live_hint", "ephemeral", "museum"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Sind die Möbel wirklich Rembrandts Originale?",
+          "a": "Die Einrichtung ist überwiegend eine wissenschaftliche Rekonstruktion anhand des Inventars von 1656 und zeitgenössischer Vergleichsstücke."
+        },
+        {
+          "q": "Warum musste Rembrandt ausziehen?",
+          "a": "Er konnte seine Schulden nicht mehr bezahlen; Besitz und Haus wurden nach seiner Insolvenz verkauft."
+        }
+      ]
+    },
+    {
+      "id": "amsterdam_nemo_science_museum",
+      "name": "NEMO Science Museum",
+      "general_info": "NEMO ist ein interaktives Wissenschaftsmuseum über dem Eingang des IJtunnels. Renzo Pianos 1997 eröffneter kupfergrüner Bau steigt wie ein schräges Schiff aus dem Oosterdok; fünf Ausstellungsebenen und die öffentliche Dachlandschaft verbinden Experimente, Technikgeschichte und Stadtaussicht.",
+      "deep_data_pool": [
+        {
+          "text": "Die Institution geht auf das 1923 von Herman Heijenbrock gegründete Museum van den Arbeid an der Rozengracht zurück. Es wollte Arbeit, Industrie und Technik anschaulich vermitteln. 1954 wurde daraus das Nederlands Instituut voor Nijverheid en Techniek, kurz NINT.",
+          "tags": ["museumsgeschichte", "1923", "arbeit"]
+        },
+        {
+          "text": "Mit dem Neubau von 1997 erhielt das Haus den Namen newMetropolis. Seit 2000 wurde NEMO im Namen geführt, 2016 setzte sich NEMO Science Museum als heutige Bezeichnung durch. Die Namensfolge spiegelt den Wandel vom Industrieschaukasten zum interaktiven Science Center.",
+          "tags": ["name", "institution", "entwicklung"]
+        },
+        {
+          "text": "Renzo Piano musste über dem Einfahrtsbereich des IJtunnels bauen. Die gebogene Tunnelröhre bestimmte das Fundament und inspirierte die ansteigende Form. Während der Straßenverkehr unter das Wasser hinabführt, scheint das Museum spiegelbildlich aus dem Oosterdok aufzusteigen.",
+          "tags": ["renzo_piano", "ijtunnel", "architektur"]
+        },
+        {
+          "text": "Die kupferverkleidete Außenhaut entwickelte ihre grüne Patina durch Witterung. Das Gebäude wird häufig mit einem Schiffsrumpf verglichen, obwohl seine Form aus Tunnel, Grundstück und ansteigendem Dach abgeleitet ist. Am Wasser wirkt es als moderner Gegenpol zu den historischen Speichern.",
+          "tags": ["kupfer", "patina", "visuell"]
+        },
+        {
+          "text": "Piano beschrieb das Innere als „noble factory“. Neutrale graue Flächen, klare Treppenführung und wenige Außenfenster sollen Ablenkung verringern und die Aufmerksamkeit auf Experimente und Ausstellungen lenken. Der spielerische Außenbau kontrastiert bewusst mit dem konzentrierten Innenraum.",
+          "tags": ["innenraum", "noble_factory", "gestaltung"]
+        },
+        {
+          "text": "Die Ausstellungen setzen auf eigenes Handeln: Besucher erzeugen, messen, bauen und beobachten. Themen reichen je nach Präsentation von Energie, Elektrizität und Chemie über menschlichen Körper und Psychologie bis zu Mathematik und Weltraum.",
+          "tags": ["interaktiv", "wissenschaft", "bildung"]
+        },
+        {
+          "text": "Neben Mitmachstationen besitzt NEMO eine historische Sammlung wissenschaftlicher und technischer Objekte. Sie bewahrt Instrumente und Geräte, die zeigen, wie Forschung, Industrie und Alltagstechniken in den Niederlanden vermittelt und genutzt wurden.",
+          "tags": ["sammlung", "technikgeschichte", "instrumente"]
+        },
+        {
+          "text": "Das ansteigende Dach bildet einen öffentlichen Stadtplatz über dem Oosterdok. Piano wollte Amsterdam eine erhöhte Piazza geben. Terrassen, Stufen und Blickachsen öffnen sich zum historischen Zentrum; die Dachfläche ist damit städtischer Raum und Abschluss der Gebäudebewegung.",
+          "tags": ["dachplatz", "aussicht", "stadtplanung"]
+        },
+        {
+          "text": "Das Dach wurde als grüne, technisch bewirtschaftete Landschaft weiterentwickelt. Pflanzungen und Wassermanagement machen ökologische Prozesse sichtbar. Wie viel davon zugänglich oder Teil eines aktuellen Programms ist, muss jedoch live geprüft werden.",
+          "tags": ["gruendach", "oekologie", "gegenwart"]
+        },
+        {
+          "text": "LIVE: Dachzugang, Experimente, Vorführungen, Ausstellungen, Zeitfenster, Eintritt und Öffnungszeiten ändern sich. Aktuelle Informationen ausschließlich bei nemosciencemuseum.nl prüfen; der öffentliche Charakter des Dachs garantiert keinen Zugang bei jeder Wetter- oder Veranstaltungslage.",
+          "tags": ["live_hint", "ephemeral", "museum"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Warum sieht NEMO wie ein Schiff aus?",
+          "a": "Die Form folgt vor allem dem darunterliegenden IJtunnel und dem ansteigenden Dach; die Lage am Wasser verstärkt die Schiff-Assoziation."
+        },
+        {
+          "q": "Ist das Dach Teil des Museums?",
+          "a": "Es bildet einen erhöhten öffentlichen Stadtplatz, sein konkreter Zugang hängt aber von aktuellen Bedingungen ab."
+        }
+      ]
+    },
+    {
+      "id": "amsterdam_eye_filmmuseum",
+      "name": "Eye Filmmuseum",
+      "general_info": "Das Eye Filmmuseum am Nordufer des IJ verbindet Filmarchiv, Kinos, Ausstellungen und Forschung. Der 2012 eröffnete weiße Bau von Delugan Meissl reagiert mit scharfen Flächen auf Licht und Wasser; die Institution selbst reicht bis zum Nederlands Historisch Filmarchief von 1946 zurück.",
+      "deep_data_pool": [
+        {
+          "text": "1946 entstand das Nederlands Historisch Filmarchief in einem kleinen Raum beim Kino Kriterion. Es sammelte und zeigte Filmkopien in einer Zeit, in der Film noch nicht selbstverständlich als bewahrenswertes Kulturerbe galt.",
+          "tags": ["filmarchiv", "1946", "kriterion"]
+        },
+        {
+          "text": "1952 vereinigte sich das Archiv mit dem Uitkijk-Archiv zum Nederlands Filmmuseum. Zunächst war es mit dem Stedelijk Museum verbunden. 1972 zog es in das Vondelparkpaviljoen, wo es bis zum Umzug an das IJ Filme zeigte.",
+          "tags": ["filmmuseum", "1952", "vondelpark"]
+        },
+        {
+          "text": "Durch die Zusammenführung mit Filmbank, dem niederländischen Institut für Filmbildung und Holland Film entstand 2010 die heutige Institution Eye. Archivierung, Restaurierung, Bildung, internationale Vermittlung, Kino und Museum wurden damit organisatorisch gebündelt.",
+          "tags": ["fusion", "2010", "institution"]
+        },
+        {
+          "text": "Die Stadt unterstützte einen Neubau am Nordufer des IJ direkt gegenüber dem Hauptbahnhof. Der erste Pfahl wurde 2009 gesetzt; am 4. April 2012 eröffnete Königin Beatrix das neue Gebäude. Eye war eine der frühen großen Kulturinstitutionen am neuen Ufer von Amsterdam-Noord.",
+          "tags": ["neubau", "2012", "amsterdam_noord"]
+        },
+        {
+          "text": "Delugan Meissl Associated Architects aus Wien entwarfen den skulpturalen Bau. Schräg gefaltete weiße Flächen, auskragende Volumen und wechselnde Fensterrahmen erzeugen je nach Standpunkt andere Ansichten. Licht, Bewegung, Rahmung und Zeit wurden als filmische Architekturthemen verstanden.",
+          "tags": ["delugan_meissl", "architektur", "visuell"]
+        },
+        {
+          "text": "Das Gebäude enthält mehrere Kinosäle, Ausstellungsgalerien, Veranstaltungsräume und eine große Arena-Treppe mit Blick über das IJ. Es ist nicht nur Depot oder klassisches Objektmuseum, sondern ein Ort, an dem Filme projiziert, diskutiert, ausgestellt und neu kontextualisiert werden.",
+          "tags": ["kino", "ausstellung", "innenraum"]
+        },
+        {
+          "text": "Die Sammlung reicht bis zu Filmen aus dem Jahr 1896. Sie umfasst Filmkopien ebenso wie Plakate, Fotografien, Projektionsgeräte, Filmmusik sowie Archive von Filmschaffenden und Unternehmen. Einen Schwerpunkt bildet die niederländische Filmkultur.",
+          "tags": ["sammlung", "1896", "filmgeschichte"]
+        },
+        {
+          "text": "Eye restauriert, digitalisiert und katalogisiert analoge wie digitale Werke. Unterschiedliche Materialien benötigen verschiedene Klimabedingungen und Fachkenntnisse. Deshalb befindet sich ein großer Teil nicht im Schauraum, sondern im 2016 eröffneten Collection Centre in Amsterdam-Noord.",
+          "tags": ["restaurierung", "digitalisierung", "collection_centre"]
+        },
+        {
+          "text": "Vom Südufer ist der weiße Bau über das IJ hinweg gut sichtbar; die Fährverbindung vom Hauptbahnhof macht den Wasserraum zum Teil des Museumswegs. Eye markiert damit den städtebaulichen Wandel ehemaliger Industrieflächen in Amsterdam-Noord.",
+          "tags": ["ij", "faehre", "stadtentwicklung"]
+        },
+        {
+          "text": "LIVE: Filmprogramm, Ausstellungen, Vorführzeiten, Festivals, Führungen, Eintritt und Öffnungszeiten wechseln laufend. Für einen konkreten Besuch ausschließlich eyefilm.nl prüfen; Archivbestand und aktuell spielbares Kinoprogramm sind nicht identisch.",
+          "tags": ["live_hint", "ephemeral", "filmprogramm"]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Ist Eye eher Kino oder Museum?",
+          "a": "Beides, ergänzt um Archiv, Restaurierung, Forschung und Bildungsarbeit."
+        },
+        {
+          "q": "Liegt die ganze Sammlung im weißen Gebäude?",
+          "a": "Nein. Große Depot- und Arbeitsbereiche befinden sich im separaten Collection Centre in Amsterdam-Noord."
+        }
+      ]
+    }
+  ]
+}

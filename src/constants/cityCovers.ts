@@ -6,7 +6,7 @@
  * Keine Stadt-PNGs in der APK bündeln.
  */
 
-import { Image, type ImageSourcePropType } from 'react-native';
+import type { ImageSourcePropType } from 'react-native';
 import { CITY_CARD_HERO } from './personaPortraits';
 
 export type CitySearchMeta = {
@@ -18,7 +18,7 @@ export type CitySearchMeta = {
   aliases?: string[];
 };
 
-/** Crop-Fokus: Wahrzeichen im sichtbaren Ausschnitt halten. */
+/** Crop-Fokus: früher Zoom — Covers werden 1:1 angezeigt. */
 export type CityCoverFocus = {
   scale: number;
   translateY: number;
@@ -32,53 +32,9 @@ export type CityCoverFocus = {
  */
 const COVERS: Record<string, ImageSourcePropType> = {};
 
-/** Pro Stadt: leicht zoomen / verschieben, damit das Wahrzeichen bleibt. */
-const COVER_FOCUS: Record<string, CityCoverFocus> = {
-  // Goldschätzchen: Gebäude + Zelt
-  prisdorf: { scale: 1.05, translateY: -4, translateX: 0 },
-  // Drostei
-  pinneberg: { scale: 1.05, translateY: -4, translateX: 0 },
-  // Campus / Schule von oben
-  tornesch: { scale: 1.08, translateY: -2, translateX: 0 },
-  // Holstentor + Salzspeicher
-  luebeck: { scale: 1.08, translateY: -6, translateX: 4 },
-  // Stadtkern + Kirchturm
-  hechingen: { scale: 1.06, translateY: -6, translateX: 0 },
-  // Neues Schloss
-  tettnang: { scale: 1.06, translateY: -4, translateX: 0 },
-  // Insel: ganze Insel sichtbar
-  wangerooge: { scale: 1.02, translateY: 0, translateX: 0 },
-  // Elbphilharmonie rechts halten
-  hamburg: { scale: 1.08, translateY: -4, translateX: 6 },
-  // Hafen + St.-Marien-Turm mittig
-  flensburg: { scale: 1.08, translateY: -6, translateX: 0 },
-  // Marine-Ehrenmal rechts halten
-  laboe: { scale: 1.08, translateY: -4, translateX: 4 },
-  korbach: { scale: 1.06, translateY: -4, translateX: 0 },
-  'berlin-zentral': { scale: 1.06, translateY: -4, translateX: 4 },
-  'berlin-umland': { scale: 1.04, translateY: -2, translateX: 0 },
-  potsdam: { scale: 1.05, translateY: -4, translateX: 0 },
-  spreewald: { scale: 1.05, translateY: -2, translateX: 0 },
-  beelitz: { scale: 1.06, translateY: -4, translateX: 0 },
-  oranienburg: { scale: 1.06, translateY: -2, translateX: 0 },
-  werder: { scale: 1.02, translateY: 0, translateX: 0 },
-  brandenburg_havel: { scale: 1.05, translateY: -4, translateX: 0 },
-  bad_saarow: { scale: 1.05, translateY: -2, translateX: 0 },
-  chorin: { scale: 1.04, translateY: -2, translateX: 0 },
-  wandlitz: { scale: 1.05, translateY: -2, translateX: 0 },
-  rheinsberg: { scale: 1.05, translateY: -2, translateX: 0 },
-  muenchen: { scale: 1.06, translateY: -4, translateX: 2 },
-  koeln: { scale: 1.06, translateY: -4, translateX: 0 },
-  duesseldorf: { scale: 1.06, translateY: -2, translateX: 0 },
-  stuttgart: { scale: 1.05, translateY: -4, translateX: 0 },
-  dresden: { scale: 1.06, translateY: -4, translateX: 0 },
-  hochheim: { scale: 1.06, translateY: -4, translateX: 0 },
-  frankfurt: { scale: 1.06, translateY: -4, translateX: 2 },
-};
-
 const DEFAULT_FOCUS: CityCoverFocus = {
-  scale: 1.1,
-  translateY: -8,
+  scale: 1,
+  translateY: 0,
   translateX: 0,
 };
 
@@ -106,6 +62,7 @@ export const CITY_SEARCH_META: Record<string, CitySearchMeta> = {
       'Pineberg',
       'Pinneburg',
       'Pinnberg',
+      'Pillerberg',
       'SH',
       'Holstein',
       'Germany',
@@ -419,6 +376,93 @@ export const CITY_SEARCH_META: Record<string, CitySearchMeta> = {
     country: 'Deutschland',
     aliases: ['Frankfurt am Main'],
   },
+  lissabon: {
+    region: 'Portugal',
+    country: 'Portugal',
+    aliases: [
+      'Lissabon',
+      'Lisboa',
+      'Lisbon',
+      'Belém',
+      'Belem',
+      'Alfama',
+      'Portugal',
+    ],
+  },
+  london: {
+    region: 'England',
+    country: 'United Kingdom',
+    aliases: [
+      'London',
+      'Londinium',
+      'Greater London',
+      'Westminster',
+      'City of London',
+      'Tower Bridge',
+      'Big Ben',
+      'England',
+      'UK',
+    ],
+  },
+  finsterwalde: {
+    region: 'Brandenburg',
+    country: 'Deutschland',
+    aliases: [
+      'Finsterwalde',
+      'Sängerstadt',
+      'Saengerstadt',
+      'Finsterwalde Brandenburg',
+      'Elbe-Elster',
+      'Niederlausitz',
+      'Brandenburg',
+      'Germany',
+      'Deutschland',
+    ],
+  },
+  halle_saale: {
+    region: 'Sachsen-Anhalt',
+    country: 'Deutschland',
+    aliases: [
+      'Halle',
+      'Halle (Saale)',
+      'Halle Saale',
+      'Halle an der Saale',
+      'Händelstadt',
+      'Haendelstadt',
+      'Saale',
+      'Sachsen-Anhalt',
+      'Saxony-Anhalt',
+      'Germany',
+      'Deutschland',
+    ],
+  },
+
+  amsterdam: {
+    region: 'Noord-Holland',
+    country: 'Niederlande',
+    aliases: [
+      'Amsterdam',
+      'Amsterdam NL',
+      'Amsterdam Netherlands',
+      'Dam',
+      'Grachtengordel',
+      'Jordaan',
+      'Nederland',
+      'Netherlands',
+      'Holland',
+      'Niederlande',
+    ],
+  },
+  kiel: {
+    region: '',
+    country: 'Deutschland',
+    aliases: ['Kiel'],
+  },
+  bremen: {
+    region: '',
+    country: 'Deutschland',
+    aliases: ['Bremen'],
+  },
 
 };
 
@@ -449,8 +493,9 @@ export function resolveCityCoverSource(
   return CITY_CARD_HERO;
 }
 
-export function cityCoverFocus(cityId: string): CityCoverFocus {
-  return COVER_FOCUS[cityId] ?? DEFAULT_FOCUS;
+/** Früher Crop-Zoom — Covers werden 1:1 angezeigt (kein Scale/Translate). */
+export function cityCoverFocus(_cityId: string): CityCoverFocus {
+  return DEFAULT_FOCUS;
 }
 
 export function citySearchMeta(cityId: string): CitySearchMeta {
@@ -461,17 +506,22 @@ export function hasCityCover(cityId: string): boolean {
   return Object.prototype.hasOwnProperty.call(COVERS, cityId);
 }
 
-/** Cover-URL vorwärmen, sobald eine Stadt vorgeschlagen / gelistet wird. */
-export function prefetchCityCover(coverUrl?: string | null): void {
+/** Cover einmal auf die Platte legen — nicht jedes Mal per CDN. */
+export function prefetchCityCover(
+  coverUrl?: string | null,
+  cityId?: string,
+): void {
   const url = remoteCityCoverUrl(coverUrl);
   if (!url) return;
-  void Image.prefetch(url).catch(() => undefined);
+  void import('../services/cityCoverCache')
+    .then((mod) => mod.ensureCityCoverCached(cityId || '_', coverUrl))
+    .catch(() => undefined);
 }
 
 export function prefetchCityCovers(
-  cities: Array<{ coverUrl?: string | null } | null | undefined>,
+  cities: Array<{ id?: string; coverUrl?: string | null } | null | undefined>,
 ): void {
   for (const c of cities) {
-    if (c) prefetchCityCover(c.coverUrl);
+    if (c) prefetchCityCover(c.coverUrl, c.id);
   }
 }

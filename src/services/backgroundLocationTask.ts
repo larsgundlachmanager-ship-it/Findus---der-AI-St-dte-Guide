@@ -24,6 +24,8 @@ let liveHandler:
 /** Wetter im BG höchstens alle 25 Min neu planen (Regen-Push aktualisieren). */
 let lastWeatherBgMs = 0;
 const WEATHER_BG_MIN_MS = 25 * 60_000;
+let lastTravelBgMs = 0;
+const TRAVEL_BG_MIN_MS = 5 * 60_000;
 
 export function setBackgroundLocationHandler(
   handler:
@@ -56,6 +58,30 @@ if (!TaskManager.isTaskDefined(FINDUS_LOCATION_TASK)) {
     }
 
     const now = Date.now();
+    if (now - lastTravelBgMs >= TRAVEL_BG_MIN_MS) {
+      lastTravelBgMs = now;
+      try {
+        const { hasCommittedFlightWatches } = await import(
+          './flights/flightWatchStore'
+        );
+        if (hasCommittedFlightWatches()) {
+          const { tickFlightWatch } = await import(
+            './flights/flightWatchService'
+          );
+          await tickFlightWatch(now);
+        }
+      } catch (err) {
+        if (__DEV__) console.warn('[location] bg flight watch failed', err);
+      }
+      try {
+        const { pollLiveDeparturesForWatches } = await import(
+          './logistics/liveDeparturePoll'
+        );
+        await pollLiveDeparturesForWatches({ nowMs: now, force: true });
+      } catch (err) {
+        if (__DEV__) console.warn('[location] bg live departures failed', err);
+      }
+    }
     if (now - lastWeatherBgMs < WEATHER_BG_MIN_MS) return;
     lastWeatherBgMs = now;
     try {

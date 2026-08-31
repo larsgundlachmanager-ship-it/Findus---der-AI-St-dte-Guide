@@ -200,7 +200,7 @@ export function inferIntentFamily(
     return 'hotel';
   }
   if (
-    /\b(event|konzert|party|tonight|heute\s+abend|tickets?|flyer|veranstaltung|kino|film|cinema)\b/u.test(
+    /\b(event|konzert|party|tonight|heute\s+abend|tickets?|flyer|veranstaltung|kino|film|cinema|theater|theatre|schauspiel|musical|oper|popcorn)\b/u.test(
       blob,
     )
   ) {
@@ -344,7 +344,7 @@ async function extractCorrectionLlm(
     '"summary":"ein Satz Struktur-Constraint ohne festen Wortlaut"}',
     'Regeln: Nur Constraints/Struktur, nie Dialog-Skript. Nichts erfinden. Max 6 expect, 4 avoid.',
     `Vorherige User-Frage: ${(ctx.lastUser ?? '').slice(0, 220)}`,
-    `Vorherige Findus-Antwort (Auszug): ${(ctx.lastAssistant ?? '').slice(0, 280)}`,
+    `Vorherige Yorro-Antwort (Auszug): ${(ctx.lastAssistant ?? '').slice(0, 280)}`,
     `Korrektur: ${text.slice(0, 400)}`,
   ].join('\n');
 

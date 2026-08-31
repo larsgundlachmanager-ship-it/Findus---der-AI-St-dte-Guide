@@ -13,7 +13,8 @@ import {
 import type { MasterPromptContext } from '../types/userProfile';
 import type { GeminiConciergeResponse } from '../types/concierge';
 import { env } from '../config/env';
-import { sentencesFromFullText } from './ai/sentenceStream';
+import { sentencesFromFullText, splitIntoSentences } from './ai/sentenceStream';
+import { extractStreamingChunks } from './audio/punctuationChunker';
 import {
   buildDynamicSystemInstruction,
   buildMasterSystemInstruction,
@@ -35,9 +36,12 @@ import {
 } from './llm/modelRouter';
 import {
   clearGeminiCreditsExhausted,
+  isGeminiCreditsExhausted,
   isGeminiCreditsExhaustedError,
+  isGeminiCreditsExhaustedSync,
   isGeminiSoftRateLimitError,
   noteGeminiCreditsExhausted,
+  shouldRetryGeminiAfterExhaustion,
 } from './llm/geminiBillingGuard';
 import { NATURAL_SPEECH_RATE_RULE } from './ai/promptBuilder';
 import { GERMAN_TTS_PROSODY_REMINDER } from './g2p/germanTtsProsodyRules';
@@ -50,9 +54,9 @@ Deine Texte werden von Cartesia sonic-3.5 gesprochen — nicht von einem Vorlese
 Emotion, Flüstern, Begeisterung und Atempausen entstehen NUR durch Kontext und Interpunktion.
 Schreibe menschlich: Kommas für Atem, Ausrufezeichen für Energie, „..." für Flüstern/Spannung, Gedankenstriche für Pausen.
 Keine SSML, keine Regie-Anweisungen, keine phonetischen Umschreibungen.
-VERBOTEN im Vorlese-Text (nie aussprechen): „Die Stimme senkt sich…“, „mit tieferer Stimme“, „sprich leiser“, „*flüstert*“, Cartesia-/Prosodie-Kommandos.`;
+VERBOTEN im Vorlese-Text (nie aussprechen): „Die Stimme senkt sich…“, „mit tieferer Stimme“, „sprich leiser“, „*flüstert*“, „kichern“, „*kichern*“, Cartesia-/Prosodie-Kommandos.`;
 
-/** Aktive Findus-System-Instruction = Master Engine + Cartesia Speech Rules. */
+/** Aktive Yorro-System-Instruction = Master Engine + Cartesia Speech Rules. */
 export function resolveFindusSystemInstruction(
   override?: string,
   context?: MasterPromptContext,
@@ -146,7 +150,7 @@ export type GeminiGenerateOptions = {
   maxTokens?: number;
   temperature?: number;
   systemInstruction?: string;
-  /** Wenn false, keine Findus-System-Instruction (z. B. JSON-Extraktion). */
+  /** Wenn false, keine Yorro-System-Instruction (z. B. JSON-Extraktion). */
   useFindusSystem?: boolean;
   /** First-POI / Landmark-Kontext für den Master-Prompt. */
   masterContext?: MasterPromptContext;
@@ -163,6 +167,8 @@ export type GeminiGenerateOptions = {
   tier?: GeminiModelTier;
   forcePro?: boolean;
   task?: GeminiTaskKind;
+  /** Kosten-Ledger-Modul, falls der Task allein nicht reicht. */
+  costModule?: import('./diagnostics/costRates').CostModuleId;
   stopCount?: number;
   flashFailed?: boolean;
   /** Hard abort (z. B. Judge-Timeout) — bricht fetch ab, keine weiterlaufenden Kosten. */
@@ -209,6 +215,78 @@ export function hasGeminiApiKey(): boolean {
   return false;
 }
 
+export function hasAnyChatLlm(): boolean {
+  try {
+    const { hasOpenAiApiKey } = require('./llm/openAiChatFallback') as {
+      hasOpenAiApiKey: () => boolean;
+    };
+    return hasGeminiApiKey() || hasOpenAiApiKey();
+  } catch {
+    return hasGeminiApiKey();
+  }
+}
+
+async function tryOpenAiFallback(
+  prompt: string,
+  options?: GeminiGenerateOptions,
+): Promise<string> {
+  const { generateOpenAiChatText, hasOpenAiApiKey } = await import(
+    './llm/openAiChatFallback'
+  );
+  if (!hasOpenAiApiKey() || options?.signal?.aborted) return '';
+  const useSystem = options?.useFindusSystem !== false;
+  const system = useSystem
+    ? resolveFindusSystemInstruction(
+        options?.systemInstruction,
+        options?.masterContext,
+      )
+    : options?.systemInstruction;
+  const text = await generateOpenAiChatText({
+    prompt,
+    system,
+    maxTokens: options?.maxTokens,
+    temperature: options?.temperature,
+    json: options?.responseJson === true || options?.jsonMimeOnly === true,
+    signal: options?.signal,
+  });
+  if (text.trim()) {
+    if (__DEV__) console.warn('[llm] OpenAI-Fallback (Gemini leer/Guthaben)');
+    try {
+      const { noteFallback } = await import('./debug/fallbackLabel');
+      noteFallback('OpenAI', 'Gemini-Guthaben leer');
+    } catch {
+      /* soft */
+    }
+  }
+  return text;
+}
+
+async function announceGeminiCreditsEmpty(): Promise<void> {
+  const { consumeGeminiCreditsWarning } = await import(
+    './llm/geminiBillingGuard'
+  );
+  const msg = await consumeGeminiCreditsWarning();
+  if (!msg) return;
+  try {
+    useFinnusStore.getState().addChatMessage({
+      role: 'assistant',
+      content: msg,
+    });
+  } catch {
+    /* soft */
+  }
+  try {
+    const { enqueueSpeech } = await import('../module2/speech/speechQueue');
+    enqueueSpeech({
+      kind: 'bridging',
+      text: msg,
+      turnId: `gemini_credits_${Date.now()}`,
+    });
+  } catch (err) {
+    if (__DEV__) console.warn('[gemini-billing] speak failed', err);
+  }
+}
+
 /** Lazy @google/genai/web — fällt auf REST zurück, wenn Metro/RN das SDK blockt. */
 async function tryLoadSdkClient(): Promise<GeminiClient | null> {
   if (sdkClient !== undefined) return sdkClient;
@@ -239,6 +317,40 @@ async function tryLoadSdkClient(): Promise<GeminiClient | null> {
     sdkClient = null;
     return null;
   }
+}
+
+let lastGeminiGroundingUrls: string[] = [];
+
+function extractGroundingWebUrls(data: unknown): string[] {
+  const root = data as {
+    candidates?: Array<{
+      groundingMetadata?: {
+        groundingChunks?: Array<{
+          web?: { uri?: string; url?: string };
+        }>;
+      };
+    }>;
+  };
+  const chunks =
+    root.candidates?.[0]?.groundingMetadata?.groundingChunks ?? [];
+  const urls: string[] = [];
+  for (const c of chunks) {
+    const u = String(c.web?.uri || c.web?.url || '').trim();
+    if (/^https?:\/\//i.test(u)) urls.push(u);
+  }
+  return [...new Set(urls)];
+}
+
+function noteGeminiGrounding(data: unknown): void {
+  const urls = extractGroundingWebUrls(data);
+  if (urls.length) lastGeminiGroundingUrls = urls;
+}
+
+/** Suchtreffer der letzten Gemini-Google-Search — danach geleert. */
+export function takeLastGeminiGroundingUrls(): string[] {
+  const urls = lastGeminiGroundingUrls;
+  lastGeminiGroundingUrls = [];
+  return urls;
 }
 
 function extractTextFromRest(data: unknown): string {
@@ -401,8 +513,14 @@ async function generateViaRest(
 
   const signal = options?.signal;
 
+  const finish = async (): Promise<string> => {
+    const data = await postGenerate(model, body, signal);
+    noteGeminiGrounding(data);
+    return extractTextFromRest(data);
+  };
+
   try {
-    return extractTextFromRest(await postGenerate(model, body, signal));
+    return await finish();
   } catch (err) {
     if (signal?.aborted) throw err;
     const msg = err instanceof Error ? err.message : String(err);
@@ -418,7 +536,7 @@ async function generateViaRest(
           `[gemini] ${model}: google_search nicht unterstützt — Retry ohne Grounding`,
         );
       }
-      return extractTextFromRest(await postGenerate(model, body, signal));
+      return await finish();
     }
     // responseSchema nicht unterstützt → nur MIME json
     if (
@@ -434,10 +552,10 @@ async function generateViaRest(
         );
       }
       try {
-        return extractTextFromRest(await postGenerate(model, body, signal));
+        return await finish();
       } catch {
         delete (body.generationConfig as Record<string, unknown>).responseMimeType;
-        return extractTextFromRest(await postGenerate(model, body, signal));
+        return await finish();
       }
     }
     // thinkingConfig ungültig / unbekannt → ohne Thinking, aber mit hohem Cap
@@ -459,7 +577,7 @@ async function generateViaRest(
           `[gemini] ${model}: thinkingBudget nicht unterstützt — Retry mit maxOutputTokens=${gc.maxOutputTokens}`,
         );
       }
-      return extractTextFromRest(await postGenerate(model, body, signal));
+      return await finish();
     }
     throw new Error(`Gemini (${model}): ${msg}`);
   }
@@ -509,6 +627,44 @@ function isModelNotFoundError(err: unknown): boolean {
   );
 }
 
+
+async function noteGeminiUsage(
+  prompt: string,
+  text: string,
+  options: GeminiGenerateOptions | undefined,
+  geminiTier: 'lite' | 'pro',
+): Promise<void> {
+  try {
+    const { trackGeminiUsage } = await import('./llm/apiUsageTracker');
+    const { mapGeminiTaskToModule } = await import('./diagnostics/costRates');
+    trackGeminiUsage(prompt.length, text.length, {
+      module: options?.costModule ?? mapGeminiTaskToModule(options?.task),
+      label: options?.task ?? 'gemini',
+      geminiTier,
+    });
+  } catch {
+    /* ignore */
+  }
+}
+
+function noteGeminiReachable(): void {
+  try {
+    const { useRucksackStore } = require('../module2/rucksack/rucksackStore') as {
+      useRucksackStore: {
+        getState: () => {
+          setConnectivity: (c: { offline: boolean; checkedAtMs: number }) => void;
+        };
+      };
+    };
+    useRucksackStore.getState().setConnectivity({
+      offline: false,
+      checkedAtMs: Date.now(),
+    });
+  } catch {
+    /* soft */
+  }
+}
+
 /**
  * Einmalige Gemini-Antwort.
  * Primär Flash-Lite (~99%); Pro nur wenn Flash dünn/leer/überfordert ist.
@@ -517,7 +673,21 @@ export async function generateGeminiText(
   prompt: string,
   options?: GeminiGenerateOptions,
 ): Promise<string> {
-  if (!hasGeminiApiKey()) return '';
+  try {
+    await isGeminiCreditsExhausted();
+  } catch {
+    /* soft */
+  }
+  if (
+    isGeminiCreditsExhaustedSync() &&
+    !shouldRetryGeminiAfterExhaustion()
+  ) {
+    void announceGeminiCreditsEmpty();
+    return tryOpenAiFallback(prompt, options);
+  }
+  if (!hasGeminiApiKey()) {
+    return tryOpenAiFallback(prompt, options);
+  }
 
   const tierInput: ResolveGeminiTierInput = {
     tier: options?.tier,
@@ -560,6 +730,7 @@ export async function generateGeminiText(
               console.warn(`[gemini] nutze Fallback-Modell ${model}`);
             }
             void clearGeminiCreditsExhausted();
+            noteGeminiReachable();
             return viaSdk;
           }
         } catch (sdkErr) {
@@ -568,6 +739,7 @@ export async function generateGeminiText(
           if (isGeminiCreditsExhaustedError(sdkErr)) {
             sawCreditsExhausted = true;
             void noteGeminiCreditsExhausted(sdkErr);
+            void announceGeminiCreditsEmpty();
           }
           if (isModelNotFoundError(sdkErr)) {
             console.warn(`[gemini] ${model} nicht verfügbar, nächstes Modell…`);
@@ -583,6 +755,7 @@ export async function generateGeminiText(
             console.warn(`[gemini] nutze Fallback-Modell ${model}`);
           }
           void clearGeminiCreditsExhausted();
+          noteGeminiReachable();
           return viaRest;
         }
       } catch (err) {
@@ -592,6 +765,7 @@ export async function generateGeminiText(
         if (isGeminiCreditsExhaustedError(err)) {
           sawCreditsExhausted = true;
           void noteGeminiCreditsExhausted(err);
+          void announceGeminiCreditsEmpty();
           console.warn(`[gemini] Guthaben leer bei ${model}`);
           // No point cycling models — same billing account
           break;
@@ -614,18 +788,9 @@ export async function generateGeminiText(
 
   let text = await tryModels(flashFirst);
   if (!text.trim()) flashHardFailed = true;
-
-  try {
-    const { trackGeminiUsage } = await import('./llm/apiUsageTracker');
-    trackGeminiUsage(prompt.length, text.length);
-    const { recordLlmPrompt, recordLlmResponse } = await import(
-      './feedback/telemetryBuffer'
-    );
-    recordLlmPrompt(prompt);
-    if (text.trim()) recordLlmResponse(text);
-  } catch {
-    /* ignore */
-  }
+  let usedPro = options?.forcePro === true || options?.tier === 'pro';
+  const firstTier: 'lite' | 'pro' = usedPro ? 'pro' : 'lite';
+  await noteGeminiUsage(prompt, text, options, firstTier);
 
   const thinFlash = shouldEscalateHistoryToPro(text, options?.task);
   const allowPro =
@@ -680,7 +845,11 @@ export async function generateGeminiText(
           tier: 'pro',
         }),
       );
-      if (proText.trim()) text = proText;
+      if (proText.trim()) {
+        text = proText;
+        usedPro = true;
+      }
+      await noteGeminiUsage(prompt, proText, options, 'pro');
     }
   }
 
@@ -690,27 +859,326 @@ export async function generateGeminiText(
       void noteGeminiCreditsExhausted(lastError);
     }
   }
+
+  try {
+    const { recordLlmPrompt, recordLlmResponse } = await import(
+      './feedback/telemetryBuffer'
+    );
+    recordLlmPrompt(prompt);
+    if (text.trim()) recordLlmResponse(text);
+  } catch {
+    /* ignore */
+  }
+
+  if (!text.trim()) {
+    const viaOpenAi = await tryOpenAiFallback(prompt, options);
+    if (viaOpenAi.trim()) return viaOpenAi;
+  }
+
   return text;
 }
 
 /**
  * Satz-Stream für TTS.
- * React Native/Hermes hat kein ReadableStream → kein SSE-body.getReader().
- * Stattdessen: generateContent (REST) und Sätze aus dem Volltext yielden.
+ * Preferiert streamGenerateContent (SSE), falls ReadableStream verfügbar und kein Proxy.
+ * Fallback: generateContent → Sätze aus Volltext (RN/Hermes ohne Stream).
  */
 export async function* streamGeminiSentences(
   prompt: string,
   options?: GeminiGenerateOptions,
 ): AsyncGenerator<string, void, unknown> {
-  if (!hasGeminiApiKey()) return;
+  if (isGeminiCreditsExhaustedSync() || !hasGeminiApiKey()) {
+    const text = await generateGeminiText(prompt, options);
+    if (!text.trim()) return;
+    yield* sentencesFromFullText(text);
+    return;
+  }
 
   try {
+    if (!env.useLlmProxy() && resolveApiKey()) {
+      const streamed = streamGenerateContentSse(prompt, options);
+      let any = false;
+      for await (const sentence of streamed) {
+        any = true;
+        yield sentence;
+      }
+      if (any) return;
+    }
+
     const text = await generateGeminiText(prompt, options);
     if (!text.trim()) return;
     yield* sentencesFromFullText(text);
   } catch (err) {
     console.warn('[gemini] stream/generate fehlgeschlagen:', err);
   }
+}
+
+/**
+ * SSE streamGenerateContent → vollständige Sätze yielden sobald erkennbar.
+ */
+async function* streamGenerateContentSse(
+  prompt: string,
+  options?: GeminiGenerateOptions,
+): AsyncGenerator<string, void, unknown> {
+  const apiKey = resolveApiKey();
+  if (!apiKey || options?.signal?.aborted) return;
+
+  const tierInput: ResolveGeminiTierInput = {
+    tier: options?.tier ?? 'lite',
+    forcePro: options?.forcePro,
+    task: options?.task,
+    stopCount: options?.stopCount,
+    flashFailed: options?.flashFailed,
+  };
+  const models = resolveGeminiModels({ ...tierInput, tier: 'lite' });
+  const model = models[0] ?? GEMINI_MODEL;
+
+  const useSystem = options?.useFindusSystem !== false;
+  const systemText = useSystem
+    ? resolveFindusSystemInstruction(
+        options?.systemInstruction,
+        options?.masterContext,
+      )
+    : options?.systemInstruction;
+
+  const generationConfig: Record<string, unknown> = {
+    temperature: options?.temperature ?? GEMINI_TEMPERATURE,
+    maxOutputTokens: options?.maxTokens ?? 1024,
+  };
+  if (options?.responseJson) {
+    generationConfig.responseMimeType = 'application/json';
+  }
+
+  const history = Array.isArray(options?.chatHistory)
+    ? options!.chatHistory!.filter(
+        (t) =>
+          (t.role === 'user' || t.role === 'model') &&
+          typeof t.parts?.[0]?.text === 'string',
+      )
+    : [];
+  const body: Record<string, unknown> = {
+    contents: [
+      ...history,
+      { role: 'user', parts: [{ text: prompt }] },
+    ],
+    generationConfig,
+  };
+  if (systemText) {
+    body.systemInstruction = { parts: [{ text: systemText }] };
+  }
+
+  const url = `${GEMINI_API_BASE}/models/${model}:streamGenerateContent?alt=sse&key=${encodeURIComponent(apiKey)}`;
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+    signal: options?.signal,
+  });
+  if (!response.ok) {
+    throw new Error(`Gemini stream ${response.status}`);
+  }
+  const reader = response.body?.getReader?.();
+  if (!reader) return;
+
+  const decoder = new TextDecoder();
+  let sseBuf = '';
+  let textAcc = '';
+  let emittedCount = 0;
+  let firstHookDone = Boolean(options?.responseJson);
+
+  const flushSentences = function* (): Generator<string, void, unknown> {
+    if (!firstHookDone) {
+      const { chunks, rest } = extractStreamingChunks(textAcc, {
+        isFirstChunk: true,
+      });
+      if (chunks.length === 0) return;
+      firstHookDone = true;
+      yield chunks[0]!;
+      textAcc = [...chunks.slice(1), rest].filter(Boolean).join(' ');
+      emittedCount = 0;
+    }
+    const sentences = splitIntoSentences(textAcc);
+    if (sentences.length === 0) return;
+    const trimmed = textAcc.trim();
+    const lastComplete = /[.!?…]"?\s*$/u.test(trimmed);
+    const ready = lastComplete ? sentences : sentences.slice(0, -1);
+    for (let i = emittedCount; i < ready.length; i++) {
+      const s = ready[i]!.trim();
+      if (s) yield s;
+    }
+    emittedCount = ready.length;
+  };
+
+  while (true) {
+    if (options?.signal?.aborted) {
+      try {
+        await reader.cancel();
+      } catch {
+        /* soft */
+      }
+      return;
+    }
+    const { done, value } = await reader.read();
+    if (done) break;
+    sseBuf += decoder.decode(value, { stream: true });
+    const lines = sseBuf.split('\n');
+    sseBuf = lines.pop() ?? '';
+    for (const line of lines) {
+      const trimmed = line.trim();
+      if (!trimmed.startsWith('data:')) continue;
+      const payload = trimmed.slice(5).trim();
+      if (!payload || payload === '[DONE]') continue;
+      try {
+        const json = JSON.parse(payload) as {
+          candidates?: Array<{
+            content?: { parts?: Array<{ text?: string }> };
+          }>;
+        };
+        const delta = (json.candidates?.[0]?.content?.parts ?? [])
+          .map((p) => p.text ?? '')
+          .join('');
+        if (delta) {
+          textAcc += delta;
+          yield* flushSentences();
+        }
+      } catch {
+        /* partial json soft */
+      }
+    }
+  }
+
+  void noteGeminiUsage(prompt, textAcc, options, 'lite');
+
+  const remaining = splitIntoSentences(textAcc).slice(emittedCount);
+  for (const s of remaining) {
+    const t = s.trim();
+    if (t) yield t;
+  }
+}
+
+/**
+ * JSON-Stream (Call-1): SSE akkumulieren, onPartialJson bei jedem Delta.
+ * Fallback: generateGeminiText ohne Stream.
+ */
+export async function generateGeminiJsonStream(
+  prompt: string,
+  options?: GeminiGenerateOptions & {
+    onPartialJson?: (accumulated: string) => void;
+  },
+): Promise<string> {
+  if (isGeminiCreditsExhaustedSync() || !hasGeminiApiKey()) {
+    return generateGeminiText(prompt, {
+      ...options,
+      responseJson: true,
+      jsonMimeOnly: true,
+    });
+  }
+  // Hermes/RN: oft kein ReadableStream / kein body.getReader → sofort Voll-JSON (kein Throw-Noise).
+  // Early Bridge in runConciergeTurn deckt die Hörlatenz; onPartialJson feuert dann nicht.
+  const canStreamBody = typeof globalThis.ReadableStream !== 'undefined';
+  try {
+    if (canStreamBody && !env.useLlmProxy() && resolveApiKey()) {
+      const apiKey = resolveApiKey();
+      if (!apiKey || options?.signal?.aborted) {
+        return '';
+      }
+      const tierInput: ResolveGeminiTierInput = {
+        tier: options?.tier ?? 'lite',
+        forcePro: options?.forcePro,
+        task: options?.task,
+        stopCount: options?.stopCount,
+        flashFailed: options?.flashFailed,
+      };
+      const models = resolveGeminiModels({ ...tierInput, tier: 'lite' });
+      const model = models[0] ?? GEMINI_MODEL;
+      const useSystem = options?.useFindusSystem !== false;
+      const systemText = useSystem
+        ? resolveFindusSystemInstruction(
+            options?.systemInstruction,
+            options?.masterContext,
+          )
+        : options?.systemInstruction;
+      const body: Record<string, unknown> = {
+        contents: [{ role: 'user', parts: [{ text: prompt }] }],
+        generationConfig: {
+          temperature: options?.temperature ?? GEMINI_TEMPERATURE,
+          maxOutputTokens: options?.maxTokens ?? 1200,
+          responseMimeType: 'application/json',
+        },
+      };
+      if (systemText) {
+        body.systemInstruction = { parts: [{ text: systemText }] };
+      }
+      const url = `${GEMINI_API_BASE}/models/${model}:streamGenerateContent?alt=sse&key=${encodeURIComponent(apiKey)}`;
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+        signal: options?.signal,
+      });
+      if (!response.ok) {
+        throw new Error(`Gemini json stream ${response.status}`);
+      }
+      const reader = response.body?.getReader?.();
+      if (!reader) {
+        // RN fetch: body ohne Reader → still auf Voll-JSON (kein console.warn-Spam).
+        return generateGeminiText(prompt, {
+          ...options,
+          responseJson: true,
+          jsonMimeOnly: true,
+        });
+      }
+      const decoder = new TextDecoder();
+      let sseBuf = '';
+      let textAcc = '';
+      while (true) {
+        if (options?.signal?.aborted) {
+          try {
+            await reader.cancel();
+          } catch {
+            /* soft */
+          }
+          break;
+        }
+        const { done, value } = await reader.read();
+        if (done) break;
+        sseBuf += decoder.decode(value, { stream: true });
+        const lines = sseBuf.split('\n');
+        sseBuf = lines.pop() ?? '';
+        for (const line of lines) {
+          const trimmed = line.trim();
+          if (!trimmed.startsWith('data:')) continue;
+          const payload = trimmed.slice(5).trim();
+          if (!payload || payload === '[DONE]') continue;
+          try {
+            const json = JSON.parse(payload) as {
+              candidates?: Array<{
+                content?: { parts?: Array<{ text?: string }> };
+              }>;
+            };
+            const delta = (json.candidates?.[0]?.content?.parts ?? [])
+              .map((p) => p.text ?? '')
+              .join('');
+            if (delta) {
+              textAcc += delta;
+              options?.onPartialJson?.(textAcc);
+            }
+          } catch {
+            /* partial */
+          }
+        }
+      }
+      void noteGeminiUsage(prompt, textAcc, options, 'lite');
+      if (textAcc.trim()) return textAcc.trim();
+    }
+  } catch (err) {
+    console.warn('[gemini] json stream fehlgeschlagen:', err);
+  }
+  return generateGeminiText(prompt, {
+    ...options,
+    responseJson: true,
+    jsonMimeOnly: true,
+  });
 }
 
 /**
@@ -733,7 +1201,7 @@ export async function* askGeminiSentenceStream(
   const dialogue = messages
     .filter((m) => m.role !== 'system' && m.content.trim())
     .map((m) => {
-      const who = m.role === 'assistant' ? 'Findus' : 'Nutzer';
+      const who = m.role === 'assistant' ? 'Yorro' : 'Nutzer';
       return `${who}: ${m.content.trim()}`;
     })
     .join('\n\n');
@@ -743,7 +1211,7 @@ export async function* askGeminiSentenceStream(
     ...systemParts,
   ].join('\n\n');
 
-  const prompt = `${dialogue}\n\nFindus:`;
+  const prompt = `${dialogue}\n\nYorro:`;
 
   yield* streamGeminiSentences(prompt, {
     systemInstruction,
@@ -778,7 +1246,7 @@ export async function askGeminiConciergeResponse(
   const dialogue = messages
     .filter((m) => m.role !== 'system' && m.content.trim())
     .map((m) => {
-      const who = m.role === 'assistant' ? 'Findus' : 'Nutzer';
+      const who = m.role === 'assistant' ? 'Yorro' : 'Nutzer';
       return `${who}: ${m.content.trim()}`;
     })
     .join('\n\n');
@@ -789,7 +1257,7 @@ export async function askGeminiConciergeResponse(
     CONCIERGE_JSON_INSTRUCTION,
   ].join('\n\n');
 
-  const prompt = `${dialogue}\n\nFindus (nur JSON):`;
+  const prompt = `${dialogue}\n\nYorro (nur JSON):`;
 
   const timeoutMs = options?.timeoutMs ?? 20_000;
   const abortCtrl = new AbortController();
@@ -844,7 +1312,7 @@ export async function askGeminiConciergeResponse(
   try {
     const live = await generateGeminiText(
       [
-        'Du bist Findus. Die letzte Antwort war unbrauchbar.',
+        'Du bist Yorro. Die letzte Antwort war unbrauchbar.',
         `User wollte: „${(lastUser?.content ?? '').slice(0, 200)}“.`,
         'Formuliere GENAU EINEN kurzen deutschen Satz (du-Form): nachfragen, wobei du helfen sollst — natürlich, kein Template.',
       ].join('\n'),

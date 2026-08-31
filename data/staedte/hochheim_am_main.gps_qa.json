@@ -1,0 +1,4709 @@
+{
+  "generated_at": "2026-08-28T04:48:25.054Z",
+  "summary": {
+    "city_id": "hochheim_am_main",
+    "checked": 136,
+    "ok": 26,
+    "check": 14,
+    "bad": 96,
+    "errors": 0,
+    "max_delta_m": 180,
+    "city_halo_m": 28000,
+    "story_only": true
+  },
+  "rows": [
+    {
+      "id": "hochheim_am_main_dm_drogerie_markt",
+      "name": "dm-drogerie markt",
+      "category": "souvenir",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.021660080000004,
+        "lng": 8.40542192
+      },
+      "query": "dm-drogerie markt, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 49.9034883,
+        "lng": 8.2025129,
+        "display_name": "dm-drogerie markt, Oppenheimer Straße, Nieder-Olm, Deutschland",
+        "class": "shop",
+        "type": "chemist",
+        "provider": "photon"
+      },
+      "delta_m": 19579,
+      "from_city_m": 3372,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hochheim_am_main_ole_vom_wald",
+        "hochheim_am_main_hochheimer_stadtfuhrer",
+        "hochheim_am_main_weinerlebnisse",
+        "hochheim_am_main_solu_me_accessories",
+        "hochheim_am_main_alnatura_super_natur_markt",
+        "hochheim_am_main_das_brotbackstubchen_hochheim",
+        "hochheim_am_main_innatura_massiv_holzmobel",
+        "hochheim_am_main_kletterwand",
+        "hochheim_am_main_fahncheskreuz",
+        "hochheim_am_main_regionalpark_besucherzentrum_weilbacher_kiesgruben",
+        "hochheim_am_main_schneckenpark_florsheim",
+        "hochheim_am_main_lourdeskapelle",
+        "hochheim_am_main_aussichtspunkt_frankfurter_skyline",
+        "hochheim_am_main_aussichtsturm_am_silbersee_1",
+        "hochheim_am_main_aussichtspunkt_marxheim",
+        "hochheim_am_main_aussichtspunkt_zitadelle_mainz",
+        "hochheim_am_main_aussichtspunkt_an_der_landebahn_nordwest_spotterpoint",
+        "hochheim_am_main_verna_park_sudwest_eingang",
+        "hochheim_am_main_park_bad_weilbach",
+        "hochheim_am_main_restaurant_bootshaus_haupt",
+        "hochheim_am_main_yacht_club_mainz"
+      ]
+    },
+    {
+      "id": "hochheim_am_main_showspielhaus_gmbh",
+      "name": "ShowSpielhaus GmbH",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.082502777777776,
+        "lng": 8.45483091111111
+      },
+      "query": "ShowSpielhaus GmbH, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0145563,
+        "lng": 8.3619111,
+        "display_name": "Hahn Bauunternehmung GmbH, Frankfurter Straße, Hochheim am Main, Deutschland",
+        "class": "building",
+        "type": "office",
+        "provider": "photon"
+      },
+      "delta_m": 10055,
+      "from_city_m": 10230,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_regionalpark_sitzkiesel",
+      "name": "Regionalpark Sitzkiesel",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.016436920000004,
+        "lng": 8.352983260000002
+      },
+      "query": "Regionalpark Sitzkiesel, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0517101,
+        "lng": 8.4445493,
+        "display_name": "Regionalpark Sitzkiesel, Flakweg, Weilbach, Deutschland",
+        "class": "tourism",
+        "type": "artwork",
+        "provider": "photon"
+      },
+      "delta_m": 7626,
+      "from_city_m": 589,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hochheim_am_main_konigin_victoria_denkmal",
+        "hochheim_am_main_weinberge",
+        "hochheim_am_main_hexendenkmal",
+        "hochheim_am_main_trattoria_sapori_di_napoli"
+      ]
+    },
+    {
+      "id": "hochheim_am_main_yachtclub_untermain_e_v_im_adac",
+      "name": "Yachtclub Untermain e.V. im ADAC",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.01334494,
+        "lng": 8.441263079999999
+      },
+      "query": "Yachtclub Untermain e.V., Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0143328,
+        "lng": 8.3353882,
+        "display_name": "KGV Hochheim-Langgewann e.V., Hochheim am Main, Deutschland",
+        "class": "landuse",
+        "type": "allotments",
+        "provider": "photon"
+      },
+      "delta_m": 7566,
+      "from_city_m": 5812,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_aussichtsturm_am_silbersee_4",
+      "name": "Aussichtsturm am Silbersee (4)",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.04875660322582,
+        "lng": 8.459004145161291
+      },
+      "query": "Aussichtsturm am Silbersee, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0277,
+        "lng": 8.3587,
+        "display_name": "Hochheim am Main, Main-Taunus-Kreis, Deutschland",
+        "class": "place",
+        "type": "municipality",
+        "provider": "photon"
+      },
+      "delta_m": 7536,
+      "from_city_m": 8085,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_boots_club_maaraue_e_v",
+      "name": "Boots-Club Maaraue e.V.",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.0035664,
+        "lng": 8.28346708076923
+      },
+      "query": "Boots-Club Maaraue e.V., Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0356435,
+        "lng": 8.3642521,
+        "display_name": "Golf-Club Main-Taunus e.V., Akazienring, Massenheim, Deutschland",
+        "class": "leisure",
+        "type": "golf_course",
+        "provider": "photon"
+      },
+      "delta_m": 6785,
+      "from_city_m": 5577,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_aussichtsturm_am_regionalpark_portal_weilbacher_kiesgruben",
+      "name": "Aussichtsturm am Regionalpark Portal Weilbacher Kiesgruben",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.051405630769224,
+        "lng": 8.444907661538462
+      },
+      "query": "Aussichtsturm am Regionalpark, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0277,
+        "lng": 8.3587,
+        "display_name": "Hochheim am Main, Main-Taunus-Kreis, Deutschland",
+        "class": "place",
+        "type": "municipality",
+        "provider": "photon"
+      },
+      "delta_m": 6697,
+      "from_city_m": 7384,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_anlegestelle_altrheinfahre_johanna",
+      "name": "Anlegestelle Altrheinfähre \"Johanna\"",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 49.96417198666666,
+        "lng": 8.342465753333334
+      },
+      "query": "Anlegestelle Altrheinfähre \"Johanna\", Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0224288,
+        "lng": 8.3512591,
+        "display_name": "Johanna-Kirchner-Straße, Hochheim am Main, Deutschland",
+        "class": "highway",
+        "type": "residential",
+        "provider": "photon"
+      },
+      "delta_m": 6508,
+      "from_city_m": 5634,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_marina_im_zollhafen_mainz",
+      "name": "Marina im Zollhafen Mainz",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.01370375714286,
+        "lng": 8.2596005
+      },
+      "query": "Marina im Zollhafen Mainz, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0028275,
+        "lng": 8.3447191,
+        "display_name": "Mainbrücke Hochheim, Im Mörsch, Hochheim am Main, Deutschland",
+        "class": "man_made",
+        "type": "bridge",
+        "provider": "photon"
+      },
+      "delta_m": 6202,
+      "from_city_m": 7169,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_avitect_studio_rhein_main",
+      "name": "AVITECT Studio Rhein-Main",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.058027728571425,
+        "lng": 8.413379728571428
+      },
+      "query": "AVITECT Studio Rhein-Main, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0190521,
+        "lng": 8.3521129,
+        "display_name": "Glamari's Studio, Nordenstädter Straße, Hochheim am Main, Deutschland",
+        "class": "shop",
+        "type": "hairdresser",
+        "provider": "photon"
+      },
+      "delta_m": 6159,
+      "from_city_m": 6245,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_regionalpark_sitzkiesel_hochheim",
+      "name": "Regionalpark Sitzkiesel Hochheim",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.02833424,
+        "lng": 8.36785514
+      },
+      "query": "Regionalpark Sitzkiesel Hochheim, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0517101,
+        "lng": 8.4445493,
+        "display_name": "Regionalpark Sitzkiesel, Flakweg, Weilbach, Deutschland",
+        "class": "tourism",
+        "type": "artwork",
+        "provider": "photon"
+      },
+      "delta_m": 6063,
+      "from_city_m": 1735,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_mainspitze",
+      "name": "Mainspitze",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 49.99270990476192,
+        "lng": 8.298860925396825
+      },
+      "query": "Mainspitze, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0277,
+        "lng": 8.3587,
+        "display_name": "Hochheim am Main, Main-Taunus-Kreis, Deutschland",
+        "class": "place",
+        "type": "municipality",
+        "provider": "photon"
+      },
+      "delta_m": 5781,
+      "from_city_m": 4943,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_wassersportfreunde_bleiau_e_v",
+      "name": "Wassersportfreunde Bleiau e.V.",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 49.96351546923077,
+        "lng": 8.3441477
+      },
+      "query": "Wassersportfreunde Bleiau e.V., Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0143328,
+        "lng": 8.3353882,
+        "display_name": "KGV Hochheim-Langgewann e.V., Hochheim am Main, Deutschland",
+        "class": "landuse",
+        "type": "allotments",
+        "provider": "photon"
+      },
+      "delta_m": 5685,
+      "from_city_m": 5680,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_berliner_brunnen",
+      "name": "Berliner Brunnen",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.01086233999999,
+        "lng": 8.429163045
+      },
+      "query": "Berliner Brunnen, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0112425,
+        "lng": 8.3549454,
+        "display_name": "Berliner Platz, Hochheim am Main, Deutschland",
+        "class": "highway",
+        "type": "residential",
+        "provider": "photon"
+      },
+      "delta_m": 5304,
+      "from_city_m": 4956,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_verna_park_stadtpark",
+      "name": "Verna-Park (Stadtpark)",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 49.996987958823524,
+        "lng": 8.41589875882353
+      },
+      "query": "Verna-Park, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0116041,
+        "lng": 8.3458492,
+        "display_name": "Diether-Hummel-Park, Hochheim am Main, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "provider": "photon"
+      },
+      "delta_m": 5264,
+      "from_city_m": 4405,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_hochheimer_stadtfuhrer",
+      "name": "Hochheimer Stadtführer",
+      "category": "tour",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.021660080000004,
+        "lng": 8.40542192
+      },
+      "query": "Hochheimer Stadtführer, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.00216,
+        "lng": 8.3385288,
+        "display_name": "Hochheimer Mainwiesen, Hochheim am Main, Deutschland",
+        "class": "landuse",
+        "type": "meadow",
+        "provider": "photon"
+      },
+      "delta_m": 5249,
+      "from_city_m": 3372,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hochheim_am_main_ole_vom_wald",
+        "hochheim_am_main_weinerlebnisse",
+        "hochheim_am_main_solu_me_accessories",
+        "hochheim_am_main_alnatura_super_natur_markt",
+        "hochheim_am_main_das_brotbackstubchen_hochheim",
+        "hochheim_am_main_dm_drogerie_markt",
+        "hochheim_am_main_innatura_massiv_holzmobel",
+        "hochheim_am_main_kletterwand",
+        "hochheim_am_main_fahncheskreuz",
+        "hochheim_am_main_regionalpark_besucherzentrum_weilbacher_kiesgruben",
+        "hochheim_am_main_schneckenpark_florsheim",
+        "hochheim_am_main_lourdeskapelle",
+        "hochheim_am_main_aussichtspunkt_frankfurter_skyline",
+        "hochheim_am_main_aussichtsturm_am_silbersee_1",
+        "hochheim_am_main_aussichtspunkt_marxheim",
+        "hochheim_am_main_aussichtspunkt_zitadelle_mainz",
+        "hochheim_am_main_aussichtspunkt_an_der_landebahn_nordwest_spotterpoint",
+        "hochheim_am_main_verna_park_sudwest_eingang",
+        "hochheim_am_main_park_bad_weilbach",
+        "hochheim_am_main_restaurant_bootshaus_haupt",
+        "hochheim_am_main_yacht_club_mainz"
+      ]
+    },
+    {
+      "id": "hochheim_am_main_kunstliche_burgruine_im_verna_park_stadtpark",
+      "name": "Künstliche Burgruine im Verna-Park (Stadtpark)",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 49.997037774999995,
+        "lng": 8.413564091666666
+      },
+      "query": "Künstliche Burgruine im, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0028275,
+        "lng": 8.3447191,
+        "display_name": "Mainbrücke Hochheim, Im Mörsch, Hochheim am Main, Deutschland",
+        "class": "man_made",
+        "type": "bridge",
+        "provider": "photon"
+      },
+      "delta_m": 4963,
+      "from_city_m": 4252,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_hochheimer_weinberge",
+      "name": "Hochheimer Weinberge",
+      "category": "wanderung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.0179917,
+        "lng": 8.402895633333333
+      },
+      "query": "Hochheimer Weinberge, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.00216,
+        "lng": 8.3385288,
+        "display_name": "Hochheimer Mainwiesen, Hochheim am Main, Deutschland",
+        "class": "landuse",
+        "type": "meadow",
+        "provider": "photon"
+      },
+      "delta_m": 4925,
+      "from_city_m": 3109,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hochheim_am_main_adlersaule",
+        "hochheim_am_main_hummelpark",
+        "hochheim_am_main_grillplatz",
+        "hochheim_am_main_altstadt_hochheim",
+        "hochheim_am_main_weingut_dienst",
+        "hochheim_am_main_weingut_schafer_hochheim",
+        "hochheim_am_main_sports_up_hochheim_und_das_leben_wird_leichter",
+        "hochheim_am_main_zahnmedizinisches_zentrum_hochheim_oliver_j_pfeiffer_dr_silke_f",
+        "hochheim_am_main_ember_asia_vietnamesische_spezialitaten_sushi",
+        "hochheim_am_main_mohn_geschenkeboutique_gmbh",
+        "hochheim_am_main_geodesia_stele",
+        "hochheim_am_main_eisenbaum",
+        "hochheim_am_main_kleine_kapelle",
+        "hochheim_am_main_opel_russelsheim_tor_k_131",
+        "hochheim_am_main_opel_russelsheim_tor_15",
+        "hochheim_am_main_aussichtspunkt",
+        "hochheim_am_main_kleingarten_beim_vogelnest_hochheim",
+        "hochheim_am_main_kleingartenverein_langgewann_hochheim_e_v",
+        "hochheim_am_main_kita_storchennest"
+      ]
+    },
+    {
+      "id": "hochheim_am_main_kleingartenverein_langgewann_hochheim_e_v",
+      "name": "Kleingartenverein Langgewann Hochheim e. V.",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.0179917,
+        "lng": 8.402895633333333
+      },
+      "query": "Kleingartenverein Langgewann Hochheim e. V., Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0143328,
+        "lng": 8.3353882,
+        "display_name": "KGV Hochheim-Langgewann e.V., Hochheim am Main, Deutschland",
+        "class": "landuse",
+        "type": "allotments",
+        "provider": "photon"
+      },
+      "delta_m": 4841,
+      "from_city_m": 3109,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hochheim_am_main_adlersaule",
+        "hochheim_am_main_hummelpark",
+        "hochheim_am_main_grillplatz",
+        "hochheim_am_main_altstadt_hochheim",
+        "hochheim_am_main_weingut_dienst",
+        "hochheim_am_main_weingut_schafer_hochheim",
+        "hochheim_am_main_sports_up_hochheim_und_das_leben_wird_leichter",
+        "hochheim_am_main_zahnmedizinisches_zentrum_hochheim_oliver_j_pfeiffer_dr_silke_f",
+        "hochheim_am_main_ember_asia_vietnamesische_spezialitaten_sushi",
+        "hochheim_am_main_hochheimer_weinberge",
+        "hochheim_am_main_mohn_geschenkeboutique_gmbh",
+        "hochheim_am_main_geodesia_stele",
+        "hochheim_am_main_eisenbaum",
+        "hochheim_am_main_kleine_kapelle",
+        "hochheim_am_main_opel_russelsheim_tor_k_131",
+        "hochheim_am_main_opel_russelsheim_tor_15",
+        "hochheim_am_main_aussichtspunkt",
+        "hochheim_am_main_kleingarten_beim_vogelnest_hochheim",
+        "hochheim_am_main_kita_storchennest"
+      ]
+    },
+    {
+      "id": "hochheim_am_main_burgpark",
+      "name": "Burgpark",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 49.996393023333326,
+        "lng": 8.311954273333333
+      },
+      "query": "Burgpark, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0277,
+        "lng": 8.3587,
+        "display_name": "Hochheim am Main, Main-Taunus-Kreis, Deutschland",
+        "class": "place",
+        "type": "municipality",
+        "provider": "photon"
+      },
+      "delta_m": 4825,
+      "from_city_m": 3926,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_hochheimer_mainufer",
+      "name": "Hochheimer Mainufer",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.0183884,
+        "lng": 8.343932772727273
+      },
+      "query": "Hochheimer Mainufer, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 49.9976156,
+        "lng": 8.4006162,
+        "display_name": "Hochheimer Mainufer, Keramag/Falkenberg, Flörsheim, Main-Taunus-Kreis, Hessen, Deutschland",
+        "class": "leisure",
+        "type": "nature_reserve",
+        "importance": 0.08005895094224458,
+        "osm_type": "relation",
+        "osm_id": 12240921,
+        "provider": "nominatim"
+      },
+      "delta_m": 4663,
+      "from_city_m": 1262,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hochheim_am_main_hochheimer_strand",
+        "hochheim_am_main_hochheimer_ski_und_tennisverein"
+      ]
+    },
+    {
+      "id": "hochheim_am_main_grillplatz",
+      "name": "Grillplatz",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.0179917,
+        "lng": 8.402895633333333
+      },
+      "query": "Grillplatz, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0211055,
+        "lng": 8.3386602,
+        "display_name": "Grillplatz, Sudetenstraße, Weststadt, Südstadt, Hochheim, Main-Taunus-Kreis, Hessen, 65239, Deutschland",
+        "class": "amenity",
+        "type": "bbq",
+        "importance": 0.00005139620050350221,
+        "osm_type": "way",
+        "osm_id": 38631188,
+        "provider": "nominatim"
+      },
+      "delta_m": 4602,
+      "from_city_m": 3109,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hochheim_am_main_adlersaule",
+        "hochheim_am_main_hummelpark",
+        "hochheim_am_main_altstadt_hochheim",
+        "hochheim_am_main_weingut_dienst",
+        "hochheim_am_main_weingut_schafer_hochheim",
+        "hochheim_am_main_sports_up_hochheim_und_das_leben_wird_leichter",
+        "hochheim_am_main_zahnmedizinisches_zentrum_hochheim_oliver_j_pfeiffer_dr_silke_f",
+        "hochheim_am_main_ember_asia_vietnamesische_spezialitaten_sushi",
+        "hochheim_am_main_hochheimer_weinberge",
+        "hochheim_am_main_mohn_geschenkeboutique_gmbh",
+        "hochheim_am_main_geodesia_stele",
+        "hochheim_am_main_eisenbaum",
+        "hochheim_am_main_kleine_kapelle",
+        "hochheim_am_main_opel_russelsheim_tor_k_131",
+        "hochheim_am_main_opel_russelsheim_tor_15",
+        "hochheim_am_main_aussichtspunkt",
+        "hochheim_am_main_kleingarten_beim_vogelnest_hochheim",
+        "hochheim_am_main_kleingartenverein_langgewann_hochheim_e_v",
+        "hochheim_am_main_kita_storchennest"
+      ]
+    },
+    {
+      "id": "hochheim_am_main_zahnmedizinisches_zentrum_hochheim_oliver_j_pfeiffer_dr_silke_f",
+      "name": "Zahnmedizinisches Zentrum Hochheim, Oliver J. Pfeiffer, Dr. Silke Fürstenfelder und Kollegen",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.0179917,
+        "lng": 8.402895633333333
+      },
+      "query": "Zahnmedizinisches Zentrum Hochheim,, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0028275,
+        "lng": 8.3447191,
+        "display_name": "Mainbrücke Hochheim, Im Mörsch, Hochheim am Main, Deutschland",
+        "class": "man_made",
+        "type": "bridge",
+        "provider": "photon"
+      },
+      "delta_m": 4486,
+      "from_city_m": 3109,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hochheim_am_main_adlersaule",
+        "hochheim_am_main_hummelpark",
+        "hochheim_am_main_grillplatz",
+        "hochheim_am_main_altstadt_hochheim",
+        "hochheim_am_main_weingut_dienst",
+        "hochheim_am_main_weingut_schafer_hochheim",
+        "hochheim_am_main_sports_up_hochheim_und_das_leben_wird_leichter",
+        "hochheim_am_main_ember_asia_vietnamesische_spezialitaten_sushi",
+        "hochheim_am_main_hochheimer_weinberge",
+        "hochheim_am_main_mohn_geschenkeboutique_gmbh",
+        "hochheim_am_main_geodesia_stele",
+        "hochheim_am_main_eisenbaum",
+        "hochheim_am_main_kleine_kapelle",
+        "hochheim_am_main_opel_russelsheim_tor_k_131",
+        "hochheim_am_main_opel_russelsheim_tor_15",
+        "hochheim_am_main_aussichtspunkt",
+        "hochheim_am_main_kleingarten_beim_vogelnest_hochheim",
+        "hochheim_am_main_kleingartenverein_langgewann_hochheim_e_v",
+        "hochheim_am_main_kita_storchennest"
+      ]
+    },
+    {
+      "id": "hochheim_am_main_regionalpark_besucherzentrum_weilbacher_kiesgruben",
+      "name": "Regionalpark Besucherzentrum Weilbacher Kiesgruben",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.021660080000004,
+        "lng": 8.40542192
+      },
+      "query": "Regionalpark Besucherzentrum Weilbacher Kiesgruben, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0515192,
+        "lng": 8.4451804,
+        "display_name": "Regionalpark-Turm Weilbacher Kiesgruben, Flakweg, Weilbach, Deutschland",
+        "class": "tourism",
+        "type": "viewpoint",
+        "provider": "photon"
+      },
+      "delta_m": 4369,
+      "from_city_m": 3372,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hochheim_am_main_ole_vom_wald",
+        "hochheim_am_main_hochheimer_stadtfuhrer",
+        "hochheim_am_main_weinerlebnisse",
+        "hochheim_am_main_solu_me_accessories",
+        "hochheim_am_main_alnatura_super_natur_markt",
+        "hochheim_am_main_das_brotbackstubchen_hochheim",
+        "hochheim_am_main_dm_drogerie_markt",
+        "hochheim_am_main_innatura_massiv_holzmobel",
+        "hochheim_am_main_kletterwand",
+        "hochheim_am_main_fahncheskreuz",
+        "hochheim_am_main_schneckenpark_florsheim",
+        "hochheim_am_main_lourdeskapelle",
+        "hochheim_am_main_aussichtspunkt_frankfurter_skyline",
+        "hochheim_am_main_aussichtsturm_am_silbersee_1",
+        "hochheim_am_main_aussichtspunkt_marxheim",
+        "hochheim_am_main_aussichtspunkt_zitadelle_mainz",
+        "hochheim_am_main_aussichtspunkt_an_der_landebahn_nordwest_spotterpoint",
+        "hochheim_am_main_verna_park_sudwest_eingang",
+        "hochheim_am_main_park_bad_weilbach",
+        "hochheim_am_main_restaurant_bootshaus_haupt",
+        "hochheim_am_main_yacht_club_mainz"
+      ]
+    },
+    {
+      "id": "hochheim_am_main_achterbahnchen",
+      "name": "ACHTERBÄHNCHEN",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 49.99672957999999,
+        "lng": 8.32153372
+      },
+      "query": "ACHTERBÄHNCHEN, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0277,
+        "lng": 8.3587,
+        "display_name": "Hochheim am Main, Main-Taunus-Kreis, Deutschland",
+        "class": "place",
+        "type": "municipality",
+        "provider": "photon"
+      },
+      "delta_m": 4349,
+      "from_city_m": 3323,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_kleingarten_beim_vogelnest_hochheim",
+      "name": "Kleingarten beim Vogelnest Hochheim",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.0179917,
+        "lng": 8.402895633333333
+      },
+      "query": "Kleingarten beim Vogelnest Hochheim, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0305883,
+        "lng": 8.3458389,
+        "display_name": "Vogelnest, Elisabethenstraße, Hochheim am Main, Deutschland",
+        "class": "man_made",
+        "type": "tower",
+        "provider": "photon"
+      },
+      "delta_m": 4310,
+      "from_city_m": 3109,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hochheim_am_main_adlersaule",
+        "hochheim_am_main_hummelpark",
+        "hochheim_am_main_grillplatz",
+        "hochheim_am_main_altstadt_hochheim",
+        "hochheim_am_main_weingut_dienst",
+        "hochheim_am_main_weingut_schafer_hochheim",
+        "hochheim_am_main_sports_up_hochheim_und_das_leben_wird_leichter",
+        "hochheim_am_main_zahnmedizinisches_zentrum_hochheim_oliver_j_pfeiffer_dr_silke_f",
+        "hochheim_am_main_ember_asia_vietnamesische_spezialitaten_sushi",
+        "hochheim_am_main_hochheimer_weinberge",
+        "hochheim_am_main_mohn_geschenkeboutique_gmbh",
+        "hochheim_am_main_geodesia_stele",
+        "hochheim_am_main_eisenbaum",
+        "hochheim_am_main_kleine_kapelle",
+        "hochheim_am_main_opel_russelsheim_tor_k_131",
+        "hochheim_am_main_opel_russelsheim_tor_15",
+        "hochheim_am_main_aussichtspunkt",
+        "hochheim_am_main_kleingartenverein_langgewann_hochheim_e_v",
+        "hochheim_am_main_kita_storchennest"
+      ]
+    },
+    {
+      "id": "hochheim_am_main_weingut_dienst",
+      "name": "Weingut Dienst",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.0179917,
+        "lng": 8.402895633333333
+      },
+      "query": "Weingut Dienst, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0191641,
+        "lng": 8.3427423,
+        "display_name": "Straußwirtschaft Dienst Dorotheenhof, Am Weiher, Hochheim am Main, Deutschland",
+        "class": "craft",
+        "type": "winery",
+        "provider": "photon"
+      },
+      "delta_m": 4300,
+      "from_city_m": 3109,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hochheim_am_main_adlersaule",
+        "hochheim_am_main_hummelpark",
+        "hochheim_am_main_grillplatz",
+        "hochheim_am_main_altstadt_hochheim",
+        "hochheim_am_main_weingut_schafer_hochheim",
+        "hochheim_am_main_sports_up_hochheim_und_das_leben_wird_leichter",
+        "hochheim_am_main_zahnmedizinisches_zentrum_hochheim_oliver_j_pfeiffer_dr_silke_f",
+        "hochheim_am_main_ember_asia_vietnamesische_spezialitaten_sushi",
+        "hochheim_am_main_hochheimer_weinberge",
+        "hochheim_am_main_mohn_geschenkeboutique_gmbh",
+        "hochheim_am_main_geodesia_stele",
+        "hochheim_am_main_eisenbaum",
+        "hochheim_am_main_kleine_kapelle",
+        "hochheim_am_main_opel_russelsheim_tor_k_131",
+        "hochheim_am_main_opel_russelsheim_tor_15",
+        "hochheim_am_main_aussichtspunkt",
+        "hochheim_am_main_kleingarten_beim_vogelnest_hochheim",
+        "hochheim_am_main_kleingartenverein_langgewann_hochheim_e_v",
+        "hochheim_am_main_kita_storchennest"
+      ]
+    },
+    {
+      "id": "hochheim_am_main_hummelpark",
+      "name": "Hummelpark",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.0179917,
+        "lng": 8.402895633333333
+      },
+      "query": "Hummelpark, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0116041,
+        "lng": 8.3458492,
+        "display_name": "Diether-Hummel-Park, Weststadt, Südstadt, Hochheim, Main-Taunus-Kreis, Hessen, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "importance": 0.08005139620050351,
+        "osm_type": "way",
+        "osm_id": 378470596,
+        "provider": "nominatim"
+      },
+      "delta_m": 4138,
+      "from_city_m": 3109,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hochheim_am_main_adlersaule",
+        "hochheim_am_main_grillplatz",
+        "hochheim_am_main_altstadt_hochheim",
+        "hochheim_am_main_weingut_dienst",
+        "hochheim_am_main_weingut_schafer_hochheim",
+        "hochheim_am_main_sports_up_hochheim_und_das_leben_wird_leichter",
+        "hochheim_am_main_zahnmedizinisches_zentrum_hochheim_oliver_j_pfeiffer_dr_silke_f",
+        "hochheim_am_main_ember_asia_vietnamesische_spezialitaten_sushi",
+        "hochheim_am_main_hochheimer_weinberge",
+        "hochheim_am_main_mohn_geschenkeboutique_gmbh",
+        "hochheim_am_main_geodesia_stele",
+        "hochheim_am_main_eisenbaum",
+        "hochheim_am_main_kleine_kapelle",
+        "hochheim_am_main_opel_russelsheim_tor_k_131",
+        "hochheim_am_main_opel_russelsheim_tor_15",
+        "hochheim_am_main_aussichtspunkt",
+        "hochheim_am_main_kleingarten_beim_vogelnest_hochheim",
+        "hochheim_am_main_kleingartenverein_langgewann_hochheim_e_v",
+        "hochheim_am_main_kita_storchennest"
+      ]
+    },
+    {
+      "id": "hochheim_am_main_wasserfreunde_weisenau_e_v",
+      "name": "Wasserfreunde Weisenau e.V.",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 49.98278882,
+        "lng": 8.304907080000001
+      },
+      "query": "Wasserfreunde Weisenau e.V., Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0143328,
+        "lng": 8.3353882,
+        "display_name": "KGV Hochheim-Langgewann e.V., Hochheim am Main, Deutschland",
+        "class": "landuse",
+        "type": "allotments",
+        "provider": "photon"
+      },
+      "delta_m": 4129,
+      "from_city_m": 5215,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_geodesia_stele",
+      "name": "Geodesia-Stele",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.0179917,
+        "lng": 8.402895633333333
+      },
+      "query": "Geodesia-Stele, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 49.9987403,
+        "lng": 8.3535633,
+        "display_name": "Geodesia, Mainweg, Hochheim am Main, Deutschland",
+        "class": "information",
+        "type": "board",
+        "provider": "photon"
+      },
+      "delta_m": 4124,
+      "from_city_m": 3109,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hochheim_am_main_adlersaule",
+        "hochheim_am_main_hummelpark",
+        "hochheim_am_main_grillplatz",
+        "hochheim_am_main_altstadt_hochheim",
+        "hochheim_am_main_weingut_dienst",
+        "hochheim_am_main_weingut_schafer_hochheim",
+        "hochheim_am_main_sports_up_hochheim_und_das_leben_wird_leichter",
+        "hochheim_am_main_zahnmedizinisches_zentrum_hochheim_oliver_j_pfeiffer_dr_silke_f",
+        "hochheim_am_main_ember_asia_vietnamesische_spezialitaten_sushi",
+        "hochheim_am_main_hochheimer_weinberge",
+        "hochheim_am_main_mohn_geschenkeboutique_gmbh",
+        "hochheim_am_main_eisenbaum",
+        "hochheim_am_main_kleine_kapelle",
+        "hochheim_am_main_opel_russelsheim_tor_k_131",
+        "hochheim_am_main_opel_russelsheim_tor_15",
+        "hochheim_am_main_aussichtspunkt",
+        "hochheim_am_main_kleingarten_beim_vogelnest_hochheim",
+        "hochheim_am_main_kleingartenverein_langgewann_hochheim_e_v",
+        "hochheim_am_main_kita_storchennest"
+      ]
+    },
+    {
+      "id": "hochheim_am_main_restaurant_bootshaus_haupt",
+      "name": "Restaurant Bootshaus-Haupt",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.021660080000004,
+        "lng": 8.40542192
+      },
+      "query": "Restaurant Bootshaus-Haupt, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0107743,
+        "lng": 8.351367,
+        "display_name": "Restaurant Pizzeria La Botte, Frankfurter Straße, Hochheim am Main, Deutschland",
+        "class": "amenity",
+        "type": "restaurant",
+        "provider": "photon"
+      },
+      "delta_m": 4047,
+      "from_city_m": 3372,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hochheim_am_main_ole_vom_wald",
+        "hochheim_am_main_hochheimer_stadtfuhrer",
+        "hochheim_am_main_weinerlebnisse",
+        "hochheim_am_main_solu_me_accessories",
+        "hochheim_am_main_alnatura_super_natur_markt",
+        "hochheim_am_main_das_brotbackstubchen_hochheim",
+        "hochheim_am_main_dm_drogerie_markt",
+        "hochheim_am_main_innatura_massiv_holzmobel",
+        "hochheim_am_main_kletterwand",
+        "hochheim_am_main_fahncheskreuz",
+        "hochheim_am_main_regionalpark_besucherzentrum_weilbacher_kiesgruben",
+        "hochheim_am_main_schneckenpark_florsheim",
+        "hochheim_am_main_lourdeskapelle",
+        "hochheim_am_main_aussichtspunkt_frankfurter_skyline",
+        "hochheim_am_main_aussichtsturm_am_silbersee_1",
+        "hochheim_am_main_aussichtspunkt_marxheim",
+        "hochheim_am_main_aussichtspunkt_zitadelle_mainz",
+        "hochheim_am_main_aussichtspunkt_an_der_landebahn_nordwest_spotterpoint",
+        "hochheim_am_main_verna_park_sudwest_eingang",
+        "hochheim_am_main_park_bad_weilbach",
+        "hochheim_am_main_yacht_club_mainz"
+      ]
+    },
+    {
+      "id": "hochheim_am_main_das_brotbackstubchen_hochheim",
+      "name": "Das Brotbackstübchen Hochheim",
+      "category": "souvenir",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.021660080000004,
+        "lng": 8.40542192
+      },
+      "query": "Das Brotbackstübchen Hochheim, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0161718,
+        "lng": 8.3509733,
+        "display_name": "Das Brotbackstübchen, 10, Alleestraße, Weststadt, Südstadt, Hochheim, Main-Taunus-Kreis, Hessen, 65239, Deutschland",
+        "class": "shop",
+        "type": "bakery",
+        "importance": 0.00005139620050350221,
+        "osm_type": "node",
+        "osm_id": 9512829625,
+        "provider": "nominatim"
+      },
+      "delta_m": 3938,
+      "from_city_m": 3372,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hochheim_am_main_ole_vom_wald",
+        "hochheim_am_main_hochheimer_stadtfuhrer",
+        "hochheim_am_main_weinerlebnisse",
+        "hochheim_am_main_solu_me_accessories",
+        "hochheim_am_main_alnatura_super_natur_markt",
+        "hochheim_am_main_dm_drogerie_markt",
+        "hochheim_am_main_innatura_massiv_holzmobel",
+        "hochheim_am_main_kletterwand",
+        "hochheim_am_main_fahncheskreuz",
+        "hochheim_am_main_regionalpark_besucherzentrum_weilbacher_kiesgruben",
+        "hochheim_am_main_schneckenpark_florsheim",
+        "hochheim_am_main_lourdeskapelle",
+        "hochheim_am_main_aussichtspunkt_frankfurter_skyline",
+        "hochheim_am_main_aussichtsturm_am_silbersee_1",
+        "hochheim_am_main_aussichtspunkt_marxheim",
+        "hochheim_am_main_aussichtspunkt_zitadelle_mainz",
+        "hochheim_am_main_aussichtspunkt_an_der_landebahn_nordwest_spotterpoint",
+        "hochheim_am_main_verna_park_sudwest_eingang",
+        "hochheim_am_main_park_bad_weilbach",
+        "hochheim_am_main_restaurant_bootshaus_haupt",
+        "hochheim_am_main_yacht_club_mainz"
+      ]
+    },
+    {
+      "id": "hochheim_am_main_evangelische_kirche",
+      "name": "Evangelische Kirche",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.03913165555556,
+        "lng": 8.385218344444446
+      },
+      "query": "Evangelische Kirche, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0118885,
+        "lng": 8.3519183,
+        "display_name": "Evangelische Kirche, Burgeffstraße, Altstadt, Weststadt, Südstadt, Hochheim, Main-Taunus-Kreis, Hessen, 65239, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.00005139620050350221,
+        "osm_type": "way",
+        "osm_id": 378202230,
+        "provider": "nominatim"
+      },
+      "delta_m": 3852,
+      "from_city_m": 3367,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_altstadt_hochheim",
+      "name": "Altstadt Hochheim",
+      "category": "altstadt",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.0179917,
+        "lng": 8.402895633333333
+      },
+      "query": "Altstadt Hochheim, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0110569,
+        "lng": 8.3508424,
+        "display_name": "Altstadt, Weststadt, Südstadt, Hochheim, Main-Taunus-Kreis, Hessen, 65239, Deutschland",
+        "class": "place",
+        "type": "neighbourhood",
+        "importance": 0.08005139620050351,
+        "osm_type": "node",
+        "osm_id": 13173179642,
+        "provider": "nominatim"
+      },
+      "delta_m": 3798,
+      "from_city_m": 3109,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hochheim_am_main_adlersaule",
+        "hochheim_am_main_hummelpark",
+        "hochheim_am_main_grillplatz",
+        "hochheim_am_main_weingut_dienst",
+        "hochheim_am_main_weingut_schafer_hochheim",
+        "hochheim_am_main_sports_up_hochheim_und_das_leben_wird_leichter",
+        "hochheim_am_main_zahnmedizinisches_zentrum_hochheim_oliver_j_pfeiffer_dr_silke_f",
+        "hochheim_am_main_ember_asia_vietnamesische_spezialitaten_sushi",
+        "hochheim_am_main_hochheimer_weinberge",
+        "hochheim_am_main_mohn_geschenkeboutique_gmbh",
+        "hochheim_am_main_geodesia_stele",
+        "hochheim_am_main_eisenbaum",
+        "hochheim_am_main_kleine_kapelle",
+        "hochheim_am_main_opel_russelsheim_tor_k_131",
+        "hochheim_am_main_opel_russelsheim_tor_15",
+        "hochheim_am_main_aussichtspunkt",
+        "hochheim_am_main_kleingarten_beim_vogelnest_hochheim",
+        "hochheim_am_main_kleingartenverein_langgewann_hochheim_e_v",
+        "hochheim_am_main_kita_storchennest"
+      ]
+    },
+    {
+      "id": "hochheim_am_main_kleine_kapelle",
+      "name": "Kleine Kapelle",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.0179917,
+        "lng": 8.402895633333333
+      },
+      "query": "Kleine Kapelle, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0079282,
+        "lng": 8.35506,
+        "display_name": "Kapelle, Steinweg, Hochheim am Main, Deutschland",
+        "class": "historic",
+        "type": "wayside_shrine",
+        "provider": "photon"
+      },
+      "delta_m": 3597,
+      "from_city_m": 3109,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hochheim_am_main_adlersaule",
+        "hochheim_am_main_hummelpark",
+        "hochheim_am_main_grillplatz",
+        "hochheim_am_main_altstadt_hochheim",
+        "hochheim_am_main_weingut_dienst",
+        "hochheim_am_main_weingut_schafer_hochheim",
+        "hochheim_am_main_sports_up_hochheim_und_das_leben_wird_leichter",
+        "hochheim_am_main_zahnmedizinisches_zentrum_hochheim_oliver_j_pfeiffer_dr_silke_f",
+        "hochheim_am_main_ember_asia_vietnamesische_spezialitaten_sushi",
+        "hochheim_am_main_hochheimer_weinberge",
+        "hochheim_am_main_mohn_geschenkeboutique_gmbh",
+        "hochheim_am_main_geodesia_stele",
+        "hochheim_am_main_eisenbaum",
+        "hochheim_am_main_opel_russelsheim_tor_k_131",
+        "hochheim_am_main_opel_russelsheim_tor_15",
+        "hochheim_am_main_aussichtspunkt",
+        "hochheim_am_main_kleingarten_beim_vogelnest_hochheim",
+        "hochheim_am_main_kleingartenverein_langgewann_hochheim_e_v",
+        "hochheim_am_main_kita_storchennest"
+      ]
+    },
+    {
+      "id": "hochheim_am_main_weingut_schafer_hochheim",
+      "name": "Weingut Schäfer – Hochheim",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.0179917,
+        "lng": 8.402895633333333
+      },
+      "query": "Weingut Schäfer, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0140072,
+        "lng": 8.3531438,
+        "display_name": "Weingut Schäfer, Elisabethenstraße, Altstadt, Weststadt, Südstadt, Hochheim, Main-Taunus-Kreis, Hessen, 65239, Deutschland",
+        "class": "shop",
+        "type": "alcohol",
+        "importance": 0.00005139620050350221,
+        "osm_type": "node",
+        "osm_id": 504675230,
+        "provider": "nominatim"
+      },
+      "delta_m": 3582,
+      "from_city_m": 3109,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hochheim_am_main_adlersaule",
+        "hochheim_am_main_hummelpark",
+        "hochheim_am_main_grillplatz",
+        "hochheim_am_main_altstadt_hochheim",
+        "hochheim_am_main_weingut_dienst",
+        "hochheim_am_main_sports_up_hochheim_und_das_leben_wird_leichter",
+        "hochheim_am_main_zahnmedizinisches_zentrum_hochheim_oliver_j_pfeiffer_dr_silke_f",
+        "hochheim_am_main_ember_asia_vietnamesische_spezialitaten_sushi",
+        "hochheim_am_main_hochheimer_weinberge",
+        "hochheim_am_main_mohn_geschenkeboutique_gmbh",
+        "hochheim_am_main_geodesia_stele",
+        "hochheim_am_main_eisenbaum",
+        "hochheim_am_main_kleine_kapelle",
+        "hochheim_am_main_opel_russelsheim_tor_k_131",
+        "hochheim_am_main_opel_russelsheim_tor_15",
+        "hochheim_am_main_aussichtspunkt",
+        "hochheim_am_main_kleingarten_beim_vogelnest_hochheim",
+        "hochheim_am_main_kleingartenverein_langgewann_hochheim_e_v",
+        "hochheim_am_main_kita_storchennest"
+      ]
+    },
+    {
+      "id": "hochheim_am_main_el_markt_osteuropaische_spezialitaten",
+      "name": "EL - Markt „Osteuropäische Spezialitäten“",
+      "category": "souvenir",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.01493578,
+        "lng": 8.3646909
+      },
+      "query": "EL, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.04171,
+        "lng": 8.3881013,
+        "display_name": "El Changarro, 16, Neugasse, Massenheim, Hochheim, Main-Taunus-Kreis, Hessen, 65239, Deutschland",
+        "class": "amenity",
+        "type": "restaurant",
+        "importance": 0.00005139620050350221,
+        "osm_type": "node",
+        "osm_id": 12168057843,
+        "provider": "nominatim"
+      },
+      "delta_m": 3415,
+      "from_city_m": 372,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_weinerlebnisse",
+      "name": "Weinerlebnisse",
+      "category": "tour",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.021660080000004,
+        "lng": 8.40542192
+      },
+      "query": "Weinerlebnisse, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0277,
+        "lng": 8.3587,
+        "display_name": "Hochheim am Main, Main-Taunus-Kreis, Deutschland",
+        "class": "place",
+        "type": "municipality",
+        "provider": "photon"
+      },
+      "delta_m": 3405,
+      "from_city_m": 3372,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hochheim_am_main_ole_vom_wald",
+        "hochheim_am_main_hochheimer_stadtfuhrer",
+        "hochheim_am_main_solu_me_accessories",
+        "hochheim_am_main_alnatura_super_natur_markt",
+        "hochheim_am_main_das_brotbackstubchen_hochheim",
+        "hochheim_am_main_dm_drogerie_markt",
+        "hochheim_am_main_innatura_massiv_holzmobel",
+        "hochheim_am_main_kletterwand",
+        "hochheim_am_main_fahncheskreuz",
+        "hochheim_am_main_regionalpark_besucherzentrum_weilbacher_kiesgruben",
+        "hochheim_am_main_schneckenpark_florsheim",
+        "hochheim_am_main_lourdeskapelle",
+        "hochheim_am_main_aussichtspunkt_frankfurter_skyline",
+        "hochheim_am_main_aussichtsturm_am_silbersee_1",
+        "hochheim_am_main_aussichtspunkt_marxheim",
+        "hochheim_am_main_aussichtspunkt_zitadelle_mainz",
+        "hochheim_am_main_aussichtspunkt_an_der_landebahn_nordwest_spotterpoint",
+        "hochheim_am_main_verna_park_sudwest_eingang",
+        "hochheim_am_main_park_bad_weilbach",
+        "hochheim_am_main_restaurant_bootshaus_haupt",
+        "hochheim_am_main_yacht_club_mainz"
+      ]
+    },
+    {
+      "id": "hochheim_am_main_solu_me_accessories",
+      "name": "SoLu & Me Accessories",
+      "category": "souvenir",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.021660080000004,
+        "lng": 8.40542192
+      },
+      "query": "SoLu, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0277,
+        "lng": 8.3587,
+        "display_name": "Hochheim am Main, Main-Taunus-Kreis, Deutschland",
+        "class": "place",
+        "type": "municipality",
+        "provider": "photon"
+      },
+      "delta_m": 3405,
+      "from_city_m": 3372,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hochheim_am_main_ole_vom_wald",
+        "hochheim_am_main_hochheimer_stadtfuhrer",
+        "hochheim_am_main_weinerlebnisse",
+        "hochheim_am_main_alnatura_super_natur_markt",
+        "hochheim_am_main_das_brotbackstubchen_hochheim",
+        "hochheim_am_main_dm_drogerie_markt",
+        "hochheim_am_main_innatura_massiv_holzmobel",
+        "hochheim_am_main_kletterwand",
+        "hochheim_am_main_fahncheskreuz",
+        "hochheim_am_main_regionalpark_besucherzentrum_weilbacher_kiesgruben",
+        "hochheim_am_main_schneckenpark_florsheim",
+        "hochheim_am_main_lourdeskapelle",
+        "hochheim_am_main_aussichtspunkt_frankfurter_skyline",
+        "hochheim_am_main_aussichtsturm_am_silbersee_1",
+        "hochheim_am_main_aussichtspunkt_marxheim",
+        "hochheim_am_main_aussichtspunkt_zitadelle_mainz",
+        "hochheim_am_main_aussichtspunkt_an_der_landebahn_nordwest_spotterpoint",
+        "hochheim_am_main_verna_park_sudwest_eingang",
+        "hochheim_am_main_park_bad_weilbach",
+        "hochheim_am_main_restaurant_bootshaus_haupt",
+        "hochheim_am_main_yacht_club_mainz"
+      ]
+    },
+    {
+      "id": "hochheim_am_main_lourdeskapelle",
+      "name": "Lourdeskapelle",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.021660080000004,
+        "lng": 8.40542192
+      },
+      "query": "Lourdeskapelle, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0277,
+        "lng": 8.3587,
+        "display_name": "Hochheim am Main, Main-Taunus-Kreis, Deutschland",
+        "class": "place",
+        "type": "municipality",
+        "provider": "photon"
+      },
+      "delta_m": 3405,
+      "from_city_m": 3372,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hochheim_am_main_ole_vom_wald",
+        "hochheim_am_main_hochheimer_stadtfuhrer",
+        "hochheim_am_main_weinerlebnisse",
+        "hochheim_am_main_solu_me_accessories",
+        "hochheim_am_main_alnatura_super_natur_markt",
+        "hochheim_am_main_das_brotbackstubchen_hochheim",
+        "hochheim_am_main_dm_drogerie_markt",
+        "hochheim_am_main_innatura_massiv_holzmobel",
+        "hochheim_am_main_kletterwand",
+        "hochheim_am_main_fahncheskreuz",
+        "hochheim_am_main_regionalpark_besucherzentrum_weilbacher_kiesgruben",
+        "hochheim_am_main_schneckenpark_florsheim",
+        "hochheim_am_main_aussichtspunkt_frankfurter_skyline",
+        "hochheim_am_main_aussichtsturm_am_silbersee_1",
+        "hochheim_am_main_aussichtspunkt_marxheim",
+        "hochheim_am_main_aussichtspunkt_zitadelle_mainz",
+        "hochheim_am_main_aussichtspunkt_an_der_landebahn_nordwest_spotterpoint",
+        "hochheim_am_main_verna_park_sudwest_eingang",
+        "hochheim_am_main_park_bad_weilbach",
+        "hochheim_am_main_restaurant_bootshaus_haupt",
+        "hochheim_am_main_yacht_club_mainz"
+      ]
+    },
+    {
+      "id": "hochheim_am_main_aussichtsturm_am_silbersee_1",
+      "name": "Aussichtsturm am Silbersee (1)",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.021660080000004,
+        "lng": 8.40542192
+      },
+      "query": "Aussichtsturm am Silbersee, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0277,
+        "lng": 8.3587,
+        "display_name": "Hochheim am Main, Main-Taunus-Kreis, Deutschland",
+        "class": "place",
+        "type": "municipality",
+        "provider": "photon"
+      },
+      "delta_m": 3405,
+      "from_city_m": 3372,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hochheim_am_main_ole_vom_wald",
+        "hochheim_am_main_hochheimer_stadtfuhrer",
+        "hochheim_am_main_weinerlebnisse",
+        "hochheim_am_main_solu_me_accessories",
+        "hochheim_am_main_alnatura_super_natur_markt",
+        "hochheim_am_main_das_brotbackstubchen_hochheim",
+        "hochheim_am_main_dm_drogerie_markt",
+        "hochheim_am_main_innatura_massiv_holzmobel",
+        "hochheim_am_main_kletterwand",
+        "hochheim_am_main_fahncheskreuz",
+        "hochheim_am_main_regionalpark_besucherzentrum_weilbacher_kiesgruben",
+        "hochheim_am_main_schneckenpark_florsheim",
+        "hochheim_am_main_lourdeskapelle",
+        "hochheim_am_main_aussichtspunkt_frankfurter_skyline",
+        "hochheim_am_main_aussichtspunkt_marxheim",
+        "hochheim_am_main_aussichtspunkt_zitadelle_mainz",
+        "hochheim_am_main_aussichtspunkt_an_der_landebahn_nordwest_spotterpoint",
+        "hochheim_am_main_verna_park_sudwest_eingang",
+        "hochheim_am_main_park_bad_weilbach",
+        "hochheim_am_main_restaurant_bootshaus_haupt",
+        "hochheim_am_main_yacht_club_mainz"
+      ]
+    },
+    {
+      "id": "hochheim_am_main_aussichtspunkt_zitadelle_mainz",
+      "name": "Aussichtspunkt Zitadelle Mainz",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.021660080000004,
+        "lng": 8.40542192
+      },
+      "query": "Aussichtspunkt Zitadelle Mainz, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0277,
+        "lng": 8.3587,
+        "display_name": "Hochheim am Main, Main-Taunus-Kreis, Deutschland",
+        "class": "place",
+        "type": "municipality",
+        "provider": "photon"
+      },
+      "delta_m": 3405,
+      "from_city_m": 3372,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hochheim_am_main_ole_vom_wald",
+        "hochheim_am_main_hochheimer_stadtfuhrer",
+        "hochheim_am_main_weinerlebnisse",
+        "hochheim_am_main_solu_me_accessories",
+        "hochheim_am_main_alnatura_super_natur_markt",
+        "hochheim_am_main_das_brotbackstubchen_hochheim",
+        "hochheim_am_main_dm_drogerie_markt",
+        "hochheim_am_main_innatura_massiv_holzmobel",
+        "hochheim_am_main_kletterwand",
+        "hochheim_am_main_fahncheskreuz",
+        "hochheim_am_main_regionalpark_besucherzentrum_weilbacher_kiesgruben",
+        "hochheim_am_main_schneckenpark_florsheim",
+        "hochheim_am_main_lourdeskapelle",
+        "hochheim_am_main_aussichtspunkt_frankfurter_skyline",
+        "hochheim_am_main_aussichtsturm_am_silbersee_1",
+        "hochheim_am_main_aussichtspunkt_marxheim",
+        "hochheim_am_main_aussichtspunkt_an_der_landebahn_nordwest_spotterpoint",
+        "hochheim_am_main_verna_park_sudwest_eingang",
+        "hochheim_am_main_park_bad_weilbach",
+        "hochheim_am_main_restaurant_bootshaus_haupt",
+        "hochheim_am_main_yacht_club_mainz"
+      ]
+    },
+    {
+      "id": "hochheim_am_main_aussichtspunkt_an_der_landebahn_nordwest_spotterpoint",
+      "name": "Aussichtspunkt an der Landebahn Nordwest (Spotterpoint)",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.021660080000004,
+        "lng": 8.40542192
+      },
+      "query": "Aussichtspunkt an der, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0277,
+        "lng": 8.3587,
+        "display_name": "Hochheim am Main, Main-Taunus-Kreis, Deutschland",
+        "class": "place",
+        "type": "municipality",
+        "provider": "photon"
+      },
+      "delta_m": 3405,
+      "from_city_m": 3372,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hochheim_am_main_ole_vom_wald",
+        "hochheim_am_main_hochheimer_stadtfuhrer",
+        "hochheim_am_main_weinerlebnisse",
+        "hochheim_am_main_solu_me_accessories",
+        "hochheim_am_main_alnatura_super_natur_markt",
+        "hochheim_am_main_das_brotbackstubchen_hochheim",
+        "hochheim_am_main_dm_drogerie_markt",
+        "hochheim_am_main_innatura_massiv_holzmobel",
+        "hochheim_am_main_kletterwand",
+        "hochheim_am_main_fahncheskreuz",
+        "hochheim_am_main_regionalpark_besucherzentrum_weilbacher_kiesgruben",
+        "hochheim_am_main_schneckenpark_florsheim",
+        "hochheim_am_main_lourdeskapelle",
+        "hochheim_am_main_aussichtspunkt_frankfurter_skyline",
+        "hochheim_am_main_aussichtsturm_am_silbersee_1",
+        "hochheim_am_main_aussichtspunkt_marxheim",
+        "hochheim_am_main_aussichtspunkt_zitadelle_mainz",
+        "hochheim_am_main_verna_park_sudwest_eingang",
+        "hochheim_am_main_park_bad_weilbach",
+        "hochheim_am_main_restaurant_bootshaus_haupt",
+        "hochheim_am_main_yacht_club_mainz"
+      ]
+    },
+    {
+      "id": "hochheim_am_main_yacht_club_mainz",
+      "name": "Yacht-Club Mainz",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.021660080000004,
+        "lng": 8.40542192
+      },
+      "query": "Yacht-Club Mainz, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0277,
+        "lng": 8.3587,
+        "display_name": "Hochheim am Main, Main-Taunus-Kreis, Deutschland",
+        "class": "place",
+        "type": "municipality",
+        "provider": "photon"
+      },
+      "delta_m": 3405,
+      "from_city_m": 3372,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hochheim_am_main_ole_vom_wald",
+        "hochheim_am_main_hochheimer_stadtfuhrer",
+        "hochheim_am_main_weinerlebnisse",
+        "hochheim_am_main_solu_me_accessories",
+        "hochheim_am_main_alnatura_super_natur_markt",
+        "hochheim_am_main_das_brotbackstubchen_hochheim",
+        "hochheim_am_main_dm_drogerie_markt",
+        "hochheim_am_main_innatura_massiv_holzmobel",
+        "hochheim_am_main_kletterwand",
+        "hochheim_am_main_fahncheskreuz",
+        "hochheim_am_main_regionalpark_besucherzentrum_weilbacher_kiesgruben",
+        "hochheim_am_main_schneckenpark_florsheim",
+        "hochheim_am_main_lourdeskapelle",
+        "hochheim_am_main_aussichtspunkt_frankfurter_skyline",
+        "hochheim_am_main_aussichtsturm_am_silbersee_1",
+        "hochheim_am_main_aussichtspunkt_marxheim",
+        "hochheim_am_main_aussichtspunkt_zitadelle_mainz",
+        "hochheim_am_main_aussichtspunkt_an_der_landebahn_nordwest_spotterpoint",
+        "hochheim_am_main_verna_park_sudwest_eingang",
+        "hochheim_am_main_park_bad_weilbach",
+        "hochheim_am_main_restaurant_bootshaus_haupt"
+      ]
+    },
+    {
+      "id": "hochheim_am_main_ole_vom_wald",
+      "name": "Ole vom Wald",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.021660080000004,
+        "lng": 8.40542192
+      },
+      "query": "Ole vom Wald, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0131744,
+        "lng": 8.3602777,
+        "display_name": "Freiherr-vom-Stein-Ring, Hochheim am Main, Deutschland",
+        "class": "highway",
+        "type": "secondary",
+        "provider": "photon"
+      },
+      "delta_m": 3361,
+      "from_city_m": 3372,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hochheim_am_main_hochheimer_stadtfuhrer",
+        "hochheim_am_main_weinerlebnisse",
+        "hochheim_am_main_solu_me_accessories",
+        "hochheim_am_main_alnatura_super_natur_markt",
+        "hochheim_am_main_das_brotbackstubchen_hochheim",
+        "hochheim_am_main_dm_drogerie_markt",
+        "hochheim_am_main_innatura_massiv_holzmobel",
+        "hochheim_am_main_kletterwand",
+        "hochheim_am_main_fahncheskreuz",
+        "hochheim_am_main_regionalpark_besucherzentrum_weilbacher_kiesgruben",
+        "hochheim_am_main_schneckenpark_florsheim",
+        "hochheim_am_main_lourdeskapelle",
+        "hochheim_am_main_aussichtspunkt_frankfurter_skyline",
+        "hochheim_am_main_aussichtsturm_am_silbersee_1",
+        "hochheim_am_main_aussichtspunkt_marxheim",
+        "hochheim_am_main_aussichtspunkt_zitadelle_mainz",
+        "hochheim_am_main_aussichtspunkt_an_der_landebahn_nordwest_spotterpoint",
+        "hochheim_am_main_verna_park_sudwest_eingang",
+        "hochheim_am_main_park_bad_weilbach",
+        "hochheim_am_main_restaurant_bootshaus_haupt",
+        "hochheim_am_main_yacht_club_mainz"
+      ]
+    },
+    {
+      "id": "hochheim_am_main_adlersaule",
+      "name": "Adlersäule",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.0179917,
+        "lng": 8.402895633333333
+      },
+      "query": "Adlersäule, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0277,
+        "lng": 8.3587,
+        "display_name": "Hochheim am Main, Main-Taunus-Kreis, Deutschland",
+        "class": "place",
+        "type": "municipality",
+        "provider": "photon"
+      },
+      "delta_m": 3337,
+      "from_city_m": 3109,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hochheim_am_main_hummelpark",
+        "hochheim_am_main_grillplatz",
+        "hochheim_am_main_altstadt_hochheim",
+        "hochheim_am_main_weingut_dienst",
+        "hochheim_am_main_weingut_schafer_hochheim",
+        "hochheim_am_main_sports_up_hochheim_und_das_leben_wird_leichter",
+        "hochheim_am_main_zahnmedizinisches_zentrum_hochheim_oliver_j_pfeiffer_dr_silke_f",
+        "hochheim_am_main_ember_asia_vietnamesische_spezialitaten_sushi",
+        "hochheim_am_main_hochheimer_weinberge",
+        "hochheim_am_main_mohn_geschenkeboutique_gmbh",
+        "hochheim_am_main_geodesia_stele",
+        "hochheim_am_main_eisenbaum",
+        "hochheim_am_main_kleine_kapelle",
+        "hochheim_am_main_opel_russelsheim_tor_k_131",
+        "hochheim_am_main_opel_russelsheim_tor_15",
+        "hochheim_am_main_aussichtspunkt",
+        "hochheim_am_main_kleingarten_beim_vogelnest_hochheim",
+        "hochheim_am_main_kleingartenverein_langgewann_hochheim_e_v",
+        "hochheim_am_main_kita_storchennest"
+      ]
+    },
+    {
+      "id": "hochheim_am_main_eisenbaum",
+      "name": "Eisenbaum",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.0179917,
+        "lng": 8.402895633333333
+      },
+      "query": "Eisenbaum, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0277,
+        "lng": 8.3587,
+        "display_name": "Hochheim am Main, Main-Taunus-Kreis, Deutschland",
+        "class": "place",
+        "type": "municipality",
+        "provider": "photon"
+      },
+      "delta_m": 3337,
+      "from_city_m": 3109,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hochheim_am_main_adlersaule",
+        "hochheim_am_main_hummelpark",
+        "hochheim_am_main_grillplatz",
+        "hochheim_am_main_altstadt_hochheim",
+        "hochheim_am_main_weingut_dienst",
+        "hochheim_am_main_weingut_schafer_hochheim",
+        "hochheim_am_main_sports_up_hochheim_und_das_leben_wird_leichter",
+        "hochheim_am_main_zahnmedizinisches_zentrum_hochheim_oliver_j_pfeiffer_dr_silke_f",
+        "hochheim_am_main_ember_asia_vietnamesische_spezialitaten_sushi",
+        "hochheim_am_main_hochheimer_weinberge",
+        "hochheim_am_main_mohn_geschenkeboutique_gmbh",
+        "hochheim_am_main_geodesia_stele",
+        "hochheim_am_main_kleine_kapelle",
+        "hochheim_am_main_opel_russelsheim_tor_k_131",
+        "hochheim_am_main_opel_russelsheim_tor_15",
+        "hochheim_am_main_aussichtspunkt",
+        "hochheim_am_main_kleingarten_beim_vogelnest_hochheim",
+        "hochheim_am_main_kleingartenverein_langgewann_hochheim_e_v",
+        "hochheim_am_main_kita_storchennest"
+      ]
+    },
+    {
+      "id": "hochheim_am_main_aussichtspunkt",
+      "name": "Aussichtspunkt",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.0179917,
+        "lng": 8.402895633333333
+      },
+      "query": "Aussichtspunkt, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0277,
+        "lng": 8.3587,
+        "display_name": "Hochheim am Main, Main-Taunus-Kreis, Deutschland",
+        "class": "place",
+        "type": "municipality",
+        "provider": "photon"
+      },
+      "delta_m": 3337,
+      "from_city_m": 3109,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hochheim_am_main_adlersaule",
+        "hochheim_am_main_hummelpark",
+        "hochheim_am_main_grillplatz",
+        "hochheim_am_main_altstadt_hochheim",
+        "hochheim_am_main_weingut_dienst",
+        "hochheim_am_main_weingut_schafer_hochheim",
+        "hochheim_am_main_sports_up_hochheim_und_das_leben_wird_leichter",
+        "hochheim_am_main_zahnmedizinisches_zentrum_hochheim_oliver_j_pfeiffer_dr_silke_f",
+        "hochheim_am_main_ember_asia_vietnamesische_spezialitaten_sushi",
+        "hochheim_am_main_hochheimer_weinberge",
+        "hochheim_am_main_mohn_geschenkeboutique_gmbh",
+        "hochheim_am_main_geodesia_stele",
+        "hochheim_am_main_eisenbaum",
+        "hochheim_am_main_kleine_kapelle",
+        "hochheim_am_main_opel_russelsheim_tor_k_131",
+        "hochheim_am_main_opel_russelsheim_tor_15",
+        "hochheim_am_main_kleingarten_beim_vogelnest_hochheim",
+        "hochheim_am_main_kleingartenverein_langgewann_hochheim_e_v",
+        "hochheim_am_main_kita_storchennest"
+      ]
+    },
+    {
+      "id": "hochheim_am_main_aussichtspunkt_frankfurter_skyline",
+      "name": "Aussichtspunkt Frankfurter Skyline",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.021660080000004,
+        "lng": 8.40542192
+      },
+      "query": "Aussichtspunkt Frankfurter Skyline, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0142004,
+        "lng": 8.361569,
+        "display_name": "Frankfurter Straße, Hochheim am Main, Deutschland",
+        "class": "highway",
+        "type": "tertiary",
+        "provider": "photon"
+      },
+      "delta_m": 3241,
+      "from_city_m": 3372,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hochheim_am_main_ole_vom_wald",
+        "hochheim_am_main_hochheimer_stadtfuhrer",
+        "hochheim_am_main_weinerlebnisse",
+        "hochheim_am_main_solu_me_accessories",
+        "hochheim_am_main_alnatura_super_natur_markt",
+        "hochheim_am_main_das_brotbackstubchen_hochheim",
+        "hochheim_am_main_dm_drogerie_markt",
+        "hochheim_am_main_innatura_massiv_holzmobel",
+        "hochheim_am_main_kletterwand",
+        "hochheim_am_main_fahncheskreuz",
+        "hochheim_am_main_regionalpark_besucherzentrum_weilbacher_kiesgruben",
+        "hochheim_am_main_schneckenpark_florsheim",
+        "hochheim_am_main_lourdeskapelle",
+        "hochheim_am_main_aussichtsturm_am_silbersee_1",
+        "hochheim_am_main_aussichtspunkt_marxheim",
+        "hochheim_am_main_aussichtspunkt_zitadelle_mainz",
+        "hochheim_am_main_aussichtspunkt_an_der_landebahn_nordwest_spotterpoint",
+        "hochheim_am_main_verna_park_sudwest_eingang",
+        "hochheim_am_main_park_bad_weilbach",
+        "hochheim_am_main_restaurant_bootshaus_haupt",
+        "hochheim_am_main_yacht_club_mainz"
+      ]
+    },
+    {
+      "id": "hochheim_am_main_theatergruppe_delkenheim",
+      "name": "Theatergruppe Delkenheim",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.043847975,
+        "lng": 8.359754433333334
+      },
+      "query": "Theatergruppe Delkenheim, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0150067,
+        "lng": 8.3540726,
+        "display_name": "Delkenheimer Straße, Hochheim am Main, Deutschland",
+        "class": "highway",
+        "type": "residential",
+        "provider": "photon"
+      },
+      "delta_m": 3233,
+      "from_city_m": 3365,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_kita_storchennest",
+      "name": "Kita Storchennest",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.0179917,
+        "lng": 8.402895633333333
+      },
+      "query": "Kita Storchennest, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0141874,
+        "lng": 8.358878,
+        "display_name": "Kita Rappelkiste, Rauenthaler Straße, Hochheim am Main, Deutschland",
+        "class": "amenity",
+        "type": "kindergarten",
+        "provider": "photon"
+      },
+      "delta_m": 3173,
+      "from_city_m": 3109,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hochheim_am_main_adlersaule",
+        "hochheim_am_main_hummelpark",
+        "hochheim_am_main_grillplatz",
+        "hochheim_am_main_altstadt_hochheim",
+        "hochheim_am_main_weingut_dienst",
+        "hochheim_am_main_weingut_schafer_hochheim",
+        "hochheim_am_main_sports_up_hochheim_und_das_leben_wird_leichter",
+        "hochheim_am_main_zahnmedizinisches_zentrum_hochheim_oliver_j_pfeiffer_dr_silke_f",
+        "hochheim_am_main_ember_asia_vietnamesische_spezialitaten_sushi",
+        "hochheim_am_main_hochheimer_weinberge",
+        "hochheim_am_main_mohn_geschenkeboutique_gmbh",
+        "hochheim_am_main_geodesia_stele",
+        "hochheim_am_main_eisenbaum",
+        "hochheim_am_main_kleine_kapelle",
+        "hochheim_am_main_opel_russelsheim_tor_k_131",
+        "hochheim_am_main_opel_russelsheim_tor_15",
+        "hochheim_am_main_aussichtspunkt",
+        "hochheim_am_main_kleingarten_beim_vogelnest_hochheim",
+        "hochheim_am_main_kleingartenverein_langgewann_hochheim_e_v"
+      ]
+    },
+    {
+      "id": "hochheim_am_main_mohn_geschenkeboutique_gmbh",
+      "name": "Möhn Geschenkeboutique GmbH",
+      "category": "souvenir",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.0179917,
+        "lng": 8.402895633333333
+      },
+      "query": "Möhn Geschenkeboutique GmbH, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0145563,
+        "lng": 8.3619111,
+        "display_name": "Hahn Bauunternehmung GmbH, Frankfurter Straße, Hochheim am Main, Deutschland",
+        "class": "building",
+        "type": "office",
+        "provider": "photon"
+      },
+      "delta_m": 2953,
+      "from_city_m": 3109,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hochheim_am_main_adlersaule",
+        "hochheim_am_main_hummelpark",
+        "hochheim_am_main_grillplatz",
+        "hochheim_am_main_altstadt_hochheim",
+        "hochheim_am_main_weingut_dienst",
+        "hochheim_am_main_weingut_schafer_hochheim",
+        "hochheim_am_main_sports_up_hochheim_und_das_leben_wird_leichter",
+        "hochheim_am_main_zahnmedizinisches_zentrum_hochheim_oliver_j_pfeiffer_dr_silke_f",
+        "hochheim_am_main_ember_asia_vietnamesische_spezialitaten_sushi",
+        "hochheim_am_main_hochheimer_weinberge",
+        "hochheim_am_main_geodesia_stele",
+        "hochheim_am_main_eisenbaum",
+        "hochheim_am_main_kleine_kapelle",
+        "hochheim_am_main_opel_russelsheim_tor_k_131",
+        "hochheim_am_main_opel_russelsheim_tor_15",
+        "hochheim_am_main_aussichtspunkt",
+        "hochheim_am_main_kleingarten_beim_vogelnest_hochheim",
+        "hochheim_am_main_kleingartenverein_langgewann_hochheim_e_v",
+        "hochheim_am_main_kita_storchennest"
+      ]
+    },
+    {
+      "id": "hochheim_am_main_opel_russelsheim_tor_k_131",
+      "name": "Opel Rüsselsheim Tor K 131",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.0179917,
+        "lng": 8.402895633333333
+      },
+      "query": "Opel Rüsselsheim Tor, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 49.9924522,
+        "lng": 8.3919638,
+        "display_name": "Opel Tor 60, Mainzer Straße, Rüsselsheim am Main, Deutschland",
+        "class": "highway",
+        "type": "platform",
+        "provider": "photon"
+      },
+      "delta_m": 2945,
+      "from_city_m": 3109,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hochheim_am_main_adlersaule",
+        "hochheim_am_main_hummelpark",
+        "hochheim_am_main_grillplatz",
+        "hochheim_am_main_altstadt_hochheim",
+        "hochheim_am_main_weingut_dienst",
+        "hochheim_am_main_weingut_schafer_hochheim",
+        "hochheim_am_main_sports_up_hochheim_und_das_leben_wird_leichter",
+        "hochheim_am_main_zahnmedizinisches_zentrum_hochheim_oliver_j_pfeiffer_dr_silke_f",
+        "hochheim_am_main_ember_asia_vietnamesische_spezialitaten_sushi",
+        "hochheim_am_main_hochheimer_weinberge",
+        "hochheim_am_main_mohn_geschenkeboutique_gmbh",
+        "hochheim_am_main_geodesia_stele",
+        "hochheim_am_main_eisenbaum",
+        "hochheim_am_main_kleine_kapelle",
+        "hochheim_am_main_opel_russelsheim_tor_15",
+        "hochheim_am_main_aussichtspunkt",
+        "hochheim_am_main_kleingarten_beim_vogelnest_hochheim",
+        "hochheim_am_main_kleingartenverein_langgewann_hochheim_e_v",
+        "hochheim_am_main_kita_storchennest"
+      ]
+    },
+    {
+      "id": "hochheim_am_main_opel_russelsheim_tor_15",
+      "name": "Opel Rüsselsheim Tor 15",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.0179917,
+        "lng": 8.402895633333333
+      },
+      "query": "Opel Rüsselsheim Tor 15, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 49.9924522,
+        "lng": 8.3919638,
+        "display_name": "Opel Tor 60, Mainzer Straße, Rüsselsheim am Main, Deutschland",
+        "class": "highway",
+        "type": "platform",
+        "provider": "photon"
+      },
+      "delta_m": 2945,
+      "from_city_m": 3109,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hochheim_am_main_adlersaule",
+        "hochheim_am_main_hummelpark",
+        "hochheim_am_main_grillplatz",
+        "hochheim_am_main_altstadt_hochheim",
+        "hochheim_am_main_weingut_dienst",
+        "hochheim_am_main_weingut_schafer_hochheim",
+        "hochheim_am_main_sports_up_hochheim_und_das_leben_wird_leichter",
+        "hochheim_am_main_zahnmedizinisches_zentrum_hochheim_oliver_j_pfeiffer_dr_silke_f",
+        "hochheim_am_main_ember_asia_vietnamesische_spezialitaten_sushi",
+        "hochheim_am_main_hochheimer_weinberge",
+        "hochheim_am_main_mohn_geschenkeboutique_gmbh",
+        "hochheim_am_main_geodesia_stele",
+        "hochheim_am_main_eisenbaum",
+        "hochheim_am_main_kleine_kapelle",
+        "hochheim_am_main_opel_russelsheim_tor_k_131",
+        "hochheim_am_main_aussichtspunkt",
+        "hochheim_am_main_kleingarten_beim_vogelnest_hochheim",
+        "hochheim_am_main_kleingartenverein_langgewann_hochheim_e_v",
+        "hochheim_am_main_kita_storchennest"
+      ]
+    },
+    {
+      "id": "hochheim_am_main_lehrpfad_baume_und_wiese",
+      "name": "Lehrpfad Bäume und Wiese",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 49.99254914,
+        "lng": 8.370236680000001
+      },
+      "query": "Lehrpfad Bäume, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0180483,
+        "lng": 8.3658378,
+        "display_name": "Barmenia Versicherung - Keshia Birkenstock, Rheingaubogen, Hochheim am Main, Deutschland",
+        "class": "office",
+        "type": "insurance",
+        "provider": "photon"
+      },
+      "delta_m": 2853,
+      "from_city_m": 2452,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_alnatura_super_natur_markt",
+      "name": "Alnatura Super Natur Markt",
+      "category": "souvenir",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.021660080000004,
+        "lng": 8.40542192
+      },
+      "query": "Alnatura Super Natur Markt, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.01571,
+        "lng": 8.3666779,
+        "display_name": "Alnatura Super Natur Markt, 77a, Frankfurter Straße, Südstadt, Hochheim, Main-Taunus-Kreis, Hessen, 65239, Deutschland",
+        "class": "shop",
+        "type": "supermarket",
+        "importance": 0.00005139620050350221,
+        "osm_type": "node",
+        "osm_id": 8811202582,
+        "provider": "nominatim"
+      },
+      "delta_m": 2846,
+      "from_city_m": 3372,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hochheim_am_main_ole_vom_wald",
+        "hochheim_am_main_hochheimer_stadtfuhrer",
+        "hochheim_am_main_weinerlebnisse",
+        "hochheim_am_main_solu_me_accessories",
+        "hochheim_am_main_das_brotbackstubchen_hochheim",
+        "hochheim_am_main_dm_drogerie_markt",
+        "hochheim_am_main_innatura_massiv_holzmobel",
+        "hochheim_am_main_kletterwand",
+        "hochheim_am_main_fahncheskreuz",
+        "hochheim_am_main_regionalpark_besucherzentrum_weilbacher_kiesgruben",
+        "hochheim_am_main_schneckenpark_florsheim",
+        "hochheim_am_main_lourdeskapelle",
+        "hochheim_am_main_aussichtspunkt_frankfurter_skyline",
+        "hochheim_am_main_aussichtsturm_am_silbersee_1",
+        "hochheim_am_main_aussichtspunkt_marxheim",
+        "hochheim_am_main_aussichtspunkt_zitadelle_mainz",
+        "hochheim_am_main_aussichtspunkt_an_der_landebahn_nordwest_spotterpoint",
+        "hochheim_am_main_verna_park_sudwest_eingang",
+        "hochheim_am_main_park_bad_weilbach",
+        "hochheim_am_main_restaurant_bootshaus_haupt",
+        "hochheim_am_main_yacht_club_mainz"
+      ]
+    },
+    {
+      "id": "hochheim_am_main_laufsteg_uber_die_wickerbachaue",
+      "name": "Laufsteg über die Wickerbachaue",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.00946414666667,
+        "lng": 8.391479426666667
+      },
+      "query": "Laufsteg über die Wickerbachaue, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0105972,
+        "lng": 8.3535096,
+        "display_name": "Der fliegende Jakobiner - Ausstellung über die Zeit um 1800, Alte Malzfabrik, Hochheim am Main, Deutschland",
+        "class": "amenity",
+        "type": "exhibition_hall",
+        "provider": "photon"
+      },
+      "delta_m": 2716,
+      "from_city_m": 2300,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_aussichtspunkt_wickerer_weinberge",
+      "name": "Aussichtspunkt Wickerer Weinberge",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.019406079999996,
+        "lng": 8.4031358
+      },
+      "query": "Aussichtspunkt Wickerer Weinberge, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0222899,
+        "lng": 8.3661538,
+        "display_name": "Wickerer Grund, Hochheim am Main, Deutschland",
+        "class": "place",
+        "type": "locality",
+        "provider": "photon"
+      },
+      "delta_m": 2662,
+      "from_city_m": 3154,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_dauerparker_denkmal_fur_den_opel_manta_am_russelsheimer_kunstpf",
+      "name": "\"Dauerparker\" Denkmal für den Opel Manta am Rüsselsheimer Kunstpfad",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 49.99711298,
+        "lng": 8.411959880000001
+      },
+      "query": "\"Dauerparker\" Denkmal für, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0031159,
+        "lng": 8.3763606,
+        "display_name": "Königin-Victoria-Denkmal, Hochheim am Main, Deutschland",
+        "class": "historic",
+        "type": "memorial",
+        "provider": "photon"
+      },
+      "delta_m": 2631,
+      "from_city_m": 4145,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_florsheimer_st_anna_kapelle",
+      "name": "Flörsheimer St. Anna Kapelle",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.01050806,
+        "lng": 8.39292558
+      },
+      "query": "Flörsheimer St. Anna Kapelle, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0102579,
+        "lng": 8.3590809,
+        "display_name": "Flörsheimer Straße, Hochheim am Main, Deutschland",
+        "class": "highway",
+        "type": "residential",
+        "provider": "photon"
+      },
+      "delta_m": 2419,
+      "from_city_m": 2382,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_am_beinweg_weinmeile_hock_go",
+      "name": "Am Beinweg (Weinmeile \"Hock & Go\")",
+      "category": "wanderung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.00700878000001,
+        "lng": 8.351144199999998
+      },
+      "query": "Am Beinweg (Weinmeile \"Hock, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0277,
+        "lng": 8.3587,
+        "display_name": "Hochheim am Main, Main-Taunus-Kreis, Deutschland",
+        "class": "place",
+        "type": "municipality",
+        "provider": "photon"
+      },
+      "delta_m": 2363,
+      "from_city_m": 964,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_p_r_hochheim_main",
+      "name": "P+R Hochheim(Main)",
+      "category": "bahnhof",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.00455468,
+        "lng": 8.34934066
+      },
+      "query": "P+R Hochheim, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0164587,
+        "lng": 8.3757164,
+        "display_name": "Leimenkauter Pfad, Südstadt, Hochheim, Main-Taunus-Kreis, Hessen, 65239, Deutschland",
+        "class": "place",
+        "type": "locality",
+        "importance": 0.0667180628671702,
+        "osm_type": "node",
+        "osm_id": 4238117032,
+        "provider": "nominatim"
+      },
+      "delta_m": 2303,
+      "from_city_m": 1257,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_schneckenpark_florsheim",
+      "name": "Schneckenpark Flörsheim",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.021660080000004,
+        "lng": 8.40542192
+      },
+      "query": "Schneckenpark Flörsheim, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0025498,
+        "lng": 8.3940833,
+        "display_name": "Wickerbachaue von Flörsheim und Hochheim, Hochheim am Main, Deutschland",
+        "class": "leisure",
+        "type": "nature_reserve",
+        "provider": "photon"
+      },
+      "delta_m": 2274,
+      "from_city_m": 3372,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hochheim_am_main_ole_vom_wald",
+        "hochheim_am_main_hochheimer_stadtfuhrer",
+        "hochheim_am_main_weinerlebnisse",
+        "hochheim_am_main_solu_me_accessories",
+        "hochheim_am_main_alnatura_super_natur_markt",
+        "hochheim_am_main_das_brotbackstubchen_hochheim",
+        "hochheim_am_main_dm_drogerie_markt",
+        "hochheim_am_main_innatura_massiv_holzmobel",
+        "hochheim_am_main_kletterwand",
+        "hochheim_am_main_fahncheskreuz",
+        "hochheim_am_main_regionalpark_besucherzentrum_weilbacher_kiesgruben",
+        "hochheim_am_main_lourdeskapelle",
+        "hochheim_am_main_aussichtspunkt_frankfurter_skyline",
+        "hochheim_am_main_aussichtsturm_am_silbersee_1",
+        "hochheim_am_main_aussichtspunkt_marxheim",
+        "hochheim_am_main_aussichtspunkt_zitadelle_mainz",
+        "hochheim_am_main_aussichtspunkt_an_der_landebahn_nordwest_spotterpoint",
+        "hochheim_am_main_verna_park_sudwest_eingang",
+        "hochheim_am_main_park_bad_weilbach",
+        "hochheim_am_main_restaurant_bootshaus_haupt",
+        "hochheim_am_main_yacht_club_mainz"
+      ]
+    },
+    {
+      "id": "hochheim_am_main_konigin_victoria_denkmal",
+      "name": "Königin-Victoria-Denkmal",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.016436920000004,
+        "lng": 8.352983260000002
+      },
+      "query": "Königin-Victoria-Denkmal, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0031159,
+        "lng": 8.3763606,
+        "display_name": "Königin-Victoria-Denkmal, L 3028, Südstadt, Hochheim, Main-Taunus-Kreis, Hessen, 65239, Deutschland",
+        "class": "historic",
+        "type": "memorial",
+        "importance": 0.13618373728802152,
+        "osm_type": "node",
+        "osm_id": 418502489,
+        "provider": "nominatim"
+      },
+      "delta_m": 2233,
+      "from_city_m": 589,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hochheim_am_main_weinberge",
+        "hochheim_am_main_regionalpark_sitzkiesel",
+        "hochheim_am_main_hexendenkmal",
+        "hochheim_am_main_trattoria_sapori_di_napoli"
+      ]
+    },
+    {
+      "id": "hochheim_am_main_sports_up_hochheim_und_das_leben_wird_leichter",
+      "name": "Sports Up Hochheim ... und das Leben wird leichter",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.0179917,
+        "lng": 8.402895633333333
+      },
+      "query": "Sports Up Hochheim ..., Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0157731,
+        "lng": 8.3732004,
+        "display_name": "SportsUp, Hajo-Rüter-Straße, Hochheim am Main, Deutschland",
+        "class": "leisure",
+        "type": "sports_centre",
+        "provider": "photon"
+      },
+      "delta_m": 2136,
+      "from_city_m": 3109,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hochheim_am_main_adlersaule",
+        "hochheim_am_main_hummelpark",
+        "hochheim_am_main_grillplatz",
+        "hochheim_am_main_altstadt_hochheim",
+        "hochheim_am_main_weingut_dienst",
+        "hochheim_am_main_weingut_schafer_hochheim",
+        "hochheim_am_main_zahnmedizinisches_zentrum_hochheim_oliver_j_pfeiffer_dr_silke_f",
+        "hochheim_am_main_ember_asia_vietnamesische_spezialitaten_sushi",
+        "hochheim_am_main_hochheimer_weinberge",
+        "hochheim_am_main_mohn_geschenkeboutique_gmbh",
+        "hochheim_am_main_geodesia_stele",
+        "hochheim_am_main_eisenbaum",
+        "hochheim_am_main_kleine_kapelle",
+        "hochheim_am_main_opel_russelsheim_tor_k_131",
+        "hochheim_am_main_opel_russelsheim_tor_15",
+        "hochheim_am_main_aussichtspunkt",
+        "hochheim_am_main_kleingarten_beim_vogelnest_hochheim",
+        "hochheim_am_main_kleingartenverein_langgewann_hochheim_e_v",
+        "hochheim_am_main_kita_storchennest"
+      ]
+    },
+    {
+      "id": "hochheim_am_main_leons_garten",
+      "name": "Leons garten",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 49.99965126000001,
+        "lng": 8.35836371
+      },
+      "query": "Leons garten, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.013263,
+        "lng": 8.3384783,
+        "display_name": "THOMAS MORE Kultur.Garten, Langgewannweg, Hochheim am Main, Deutschland",
+        "class": "leisure",
+        "type": "garden",
+        "provider": "photon"
+      },
+      "delta_m": 2076,
+      "from_city_m": 1553,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_park_bad_weilbach",
+      "name": "Park Bad Weilbach",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.021660080000004,
+        "lng": 8.40542192
+      },
+      "query": "Park Bad Weilbach, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0336078,
+        "lng": 8.42756,
+        "display_name": "Park Bad Weilbach, Flörsheim am Main, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "provider": "photon"
+      },
+      "delta_m": 2065,
+      "from_city_m": 3372,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hochheim_am_main_ole_vom_wald",
+        "hochheim_am_main_hochheimer_stadtfuhrer",
+        "hochheim_am_main_weinerlebnisse",
+        "hochheim_am_main_solu_me_accessories",
+        "hochheim_am_main_alnatura_super_natur_markt",
+        "hochheim_am_main_das_brotbackstubchen_hochheim",
+        "hochheim_am_main_dm_drogerie_markt",
+        "hochheim_am_main_innatura_massiv_holzmobel",
+        "hochheim_am_main_kletterwand",
+        "hochheim_am_main_fahncheskreuz",
+        "hochheim_am_main_regionalpark_besucherzentrum_weilbacher_kiesgruben",
+        "hochheim_am_main_schneckenpark_florsheim",
+        "hochheim_am_main_lourdeskapelle",
+        "hochheim_am_main_aussichtspunkt_frankfurter_skyline",
+        "hochheim_am_main_aussichtsturm_am_silbersee_1",
+        "hochheim_am_main_aussichtspunkt_marxheim",
+        "hochheim_am_main_aussichtspunkt_zitadelle_mainz",
+        "hochheim_am_main_aussichtspunkt_an_der_landebahn_nordwest_spotterpoint",
+        "hochheim_am_main_verna_park_sudwest_eingang",
+        "hochheim_am_main_restaurant_bootshaus_haupt",
+        "hochheim_am_main_yacht_club_mainz"
+      ]
+    },
+    {
+      "id": "hochheim_am_main_weinstadtjournal",
+      "name": "Weinstadtjournal",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.0110994,
+        "lng": 8.345787300000001
+      },
+      "query": "Weinstadtjournal, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0277,
+        "lng": 8.3587,
+        "display_name": "Hochheim am Main, Main-Taunus-Kreis, Deutschland",
+        "class": "place",
+        "type": "municipality",
+        "provider": "photon"
+      },
+      "delta_m": 2064,
+      "from_city_m": 1048,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_pension_eventlocation_tor_zum_rheingau",
+      "name": "Pension & Eventlocation \"Tor zum Rheingau\"",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.02703771,
+        "lng": 8.40269369
+      },
+      "query": "Pension, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0403772,
+        "lng": 8.3856016,
+        "display_name": "Gästehaus und Pension Kahl, 4, Hauptstraße, Massenheim, Hochheim, Main-Taunus-Kreis, Hessen, 65239, Deutschland",
+        "class": "tourism",
+        "type": "guest_house",
+        "importance": 0.00005139620050350221,
+        "osm_type": "node",
+        "osm_id": 544555581,
+        "provider": "nominatim"
+      },
+      "delta_m": 1921,
+      "from_city_m": 3402,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_calisthenics_park_hochheim",
+      "name": "Calisthenics Park Hochheim",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.01921764,
+        "lng": 8.340489260000002
+      },
+      "query": "Calisthenics Park Hochheim, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0028275,
+        "lng": 8.3447191,
+        "display_name": "Mainbrücke Hochheim, Im Mörsch, Hochheim am Main, Deutschland",
+        "class": "man_made",
+        "type": "bridge",
+        "provider": "photon"
+      },
+      "delta_m": 1847,
+      "from_city_m": 1524,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_hochheimer_strand",
+      "name": "Hochheimer strand",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.0183884,
+        "lng": 8.343932772727273
+      },
+      "query": "Hochheimer strand, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.00216,
+        "lng": 8.3385288,
+        "display_name": "Hochheimer Mainwiesen, Hochheim am Main, Deutschland",
+        "class": "landuse",
+        "type": "meadow",
+        "provider": "photon"
+      },
+      "delta_m": 1845,
+      "from_city_m": 1262,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hochheim_am_main_hochheimer_mainufer",
+        "hochheim_am_main_hochheimer_ski_und_tennisverein"
+      ]
+    },
+    {
+      "id": "hochheim_am_main_regionalpark_aussichtsbastion_schnecken_hugel_weilbach",
+      "name": "Regionalpark Aussichtsbastion Schnecken-Hügel Weilbach",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.03823086249999,
+        "lng": 8.43067603125
+      },
+      "query": "Regionalpark, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0515192,
+        "lng": 8.4451804,
+        "display_name": "Regionalpark-Turm Weilbacher Kiesgruben, Flakweg, Weilbach, Deutschland",
+        "class": "tourism",
+        "type": "viewpoint",
+        "provider": "photon"
+      },
+      "delta_m": 1804,
+      "from_city_m": 5749,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_wickerbachaue_von_florsheim_und_hochheim",
+      "name": "Wickerbachaue von Flörsheim und Hochheim",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.01776455641026,
+        "lng": 8.40053927179487
+      },
+      "query": "Wickerbachaue von Flörsheim, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0025498,
+        "lng": 8.3940833,
+        "display_name": "Wickerbachaue von Flörsheim und Hochheim, Hochheim, Main-Taunus-Kreis, Hessen, Deutschland",
+        "class": "leisure",
+        "type": "nature_reserve",
+        "importance": 0.1570394422394589,
+        "osm_type": "relation",
+        "osm_id": 12241367,
+        "provider": "nominatim"
+      },
+      "delta_m": 1754,
+      "from_city_m": 2938,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_spielvereinigung_07_hochheim_e_v",
+      "name": "Spielvereinigung 07 Hochheim e.V.",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.01740264,
+        "lng": 8.357584679999999
+      },
+      "query": "Spielvereinigung 07 Hochheim e.V., Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0143328,
+        "lng": 8.3353882,
+        "display_name": "KGV Hochheim-Langgewann e.V., Hochheim am Main, Deutschland",
+        "class": "landuse",
+        "type": "allotments",
+        "provider": "photon"
+      },
+      "delta_m": 1622,
+      "from_city_m": 457,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_irca_manufacturing_germany_gmbh",
+      "name": "IRCA Manufacturing Germany GmbH",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.00371878,
+        "lng": 8.347571920000002
+      },
+      "query": "IRCA Manufacturing Germany GmbH, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0145563,
+        "lng": 8.3619111,
+        "display_name": "Hahn Bauunternehmung GmbH, Frankfurter Straße, Hochheim am Main, Deutschland",
+        "class": "building",
+        "type": "office",
+        "provider": "photon"
+      },
+      "delta_m": 1582,
+      "from_city_m": 1408,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_umsonst_laden_hochheim",
+      "name": "Umsonst-Laden Hochheim",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.01504958333334,
+        "lng": 8.352685966666668
+      },
+      "query": "Umsonst-Laden Hochheim, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0028275,
+        "lng": 8.3447191,
+        "display_name": "Mainbrücke Hochheim, Im Mörsch, Hochheim am Main, Deutschland",
+        "class": "man_made",
+        "type": "bridge",
+        "provider": "photon"
+      },
+      "delta_m": 1473,
+      "from_city_m": 543,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_weinberge",
+      "name": "Weinberge",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.016436920000004,
+        "lng": 8.352983260000002
+      },
+      "query": "Weinberge, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0277,
+        "lng": 8.3587,
+        "display_name": "Hochheim am Main, Main-Taunus-Kreis, Deutschland",
+        "class": "place",
+        "type": "municipality",
+        "provider": "photon"
+      },
+      "delta_m": 1317,
+      "from_city_m": 589,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hochheim_am_main_konigin_victoria_denkmal",
+        "hochheim_am_main_regionalpark_sitzkiesel",
+        "hochheim_am_main_hexendenkmal",
+        "hochheim_am_main_trattoria_sapori_di_napoli"
+      ]
+    },
+    {
+      "id": "hochheim_am_main_hexendenkmal",
+      "name": "Hexendenkmal",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.016436920000004,
+        "lng": 8.352983260000002
+      },
+      "query": "Hexendenkmal, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0277,
+        "lng": 8.3587,
+        "display_name": "Hochheim am Main, Main-Taunus-Kreis, Deutschland",
+        "class": "place",
+        "type": "municipality",
+        "provider": "photon"
+      },
+      "delta_m": 1317,
+      "from_city_m": 589,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hochheim_am_main_konigin_victoria_denkmal",
+        "hochheim_am_main_weinberge",
+        "hochheim_am_main_regionalpark_sitzkiesel",
+        "hochheim_am_main_trattoria_sapori_di_napoli"
+      ]
+    },
+    {
+      "id": "hochheim_am_main_hochheimer_weinfest",
+      "name": "Hochheimer Weinfest",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.01112938,
+        "lng": 8.35014824
+      },
+      "query": "Hochheimer Weinfest, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.00216,
+        "lng": 8.3385288,
+        "display_name": "Hochheimer Mainwiesen, Hochheim am Main, Deutschland",
+        "class": "landuse",
+        "type": "meadow",
+        "provider": "photon"
+      },
+      "delta_m": 1298,
+      "from_city_m": 750,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_katholisches_vereinshaus_hochheim_am_main",
+      "name": "Katholisches Vereinshaus, Hochheim am Main",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.013731033333336,
+        "lng": 8.350362877777778
+      },
+      "query": "Katholisches Vereinshaus, Hochheim am Main, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0028275,
+        "lng": 8.3447191,
+        "display_name": "Mainbrücke Hochheim, Im Mörsch, Hochheim am Main, Deutschland",
+        "class": "man_made",
+        "type": "bridge",
+        "provider": "photon"
+      },
+      "delta_m": 1278,
+      "from_city_m": 684,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_blasorchester_hochheim_am_main_e_v",
+      "name": "Blasorchester Hochheim am Main e.V.",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.017014499999995,
+        "lng": 8.351800899999999
+      },
+      "query": "Blasorchester Hochheim am Main e.V., Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0143328,
+        "lng": 8.3353882,
+        "display_name": "KGV Hochheim-Langgewann e.V., Hochheim am Main, Deutschland",
+        "class": "landuse",
+        "type": "allotments",
+        "provider": "photon"
+      },
+      "delta_m": 1210,
+      "from_city_m": 695,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_stadtverwaltung_hochheim_am_main",
+      "name": "Stadtverwaltung Hochheim am Main",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.012860492307695,
+        "lng": 8.349849238461537
+      },
+      "query": "Stadtverwaltung Hochheim am Main, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0028275,
+        "lng": 8.3447191,
+        "display_name": "Mainbrücke Hochheim, Im Mörsch, Hochheim am Main, Deutschland",
+        "class": "man_made",
+        "type": "bridge",
+        "provider": "photon"
+      },
+      "delta_m": 1174,
+      "from_city_m": 725,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_alter_wasserturm",
+      "name": "Alter Wasserturm",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.012824205,
+        "lng": 8.345894009999999
+      },
+      "query": "Alter Wasserturm, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0190117,
+        "lng": 8.357968,
+        "display_name": "Wasserturm, Massenheimer Landstraße, Hochheim am Main, Deutschland",
+        "class": "man_made",
+        "type": "water_tower",
+        "provider": "photon"
+      },
+      "delta_m": 1103,
+      "from_city_m": 1007,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hochheim_am_main_sportplatz_am_wasserturm"
+      ]
+    },
+    {
+      "id": "hochheim_am_main_sportplatz_am_wasserturm",
+      "name": "Sportplatz Am Wasserturm",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.012824205,
+        "lng": 8.345894009999999
+      },
+      "query": "Sportplatz Am Wasserturm, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0190117,
+        "lng": 8.357968,
+        "display_name": "Wasserturm, Massenheimer Landstraße, Hochheim am Main, Deutschland",
+        "class": "man_made",
+        "type": "water_tower",
+        "provider": "photon"
+      },
+      "delta_m": 1103,
+      "from_city_m": 1007,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hochheim_am_main_alter_wasserturm"
+      ]
+    },
+    {
+      "id": "hochheim_am_main_sonderausstellung_hochheim_weinfestselig",
+      "name": "Sonderausstellung HOCHHEIM:WEINFESTSELIG",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.010726139999996,
+        "lng": 8.3532814
+      },
+      "query": "Sonderausstellung HOCHHEIM:WEINFESTSELIG, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0028275,
+        "lng": 8.3447191,
+        "display_name": "Mainbrücke Hochheim, Im Mörsch, Hochheim am Main, Deutschland",
+        "class": "man_made",
+        "type": "bridge",
+        "provider": "photon"
+      },
+      "delta_m": 1070,
+      "from_city_m": 572,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_segelclub_mainspitze_e_v",
+      "name": "Segelclub Mainspitze e.V.",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 49.99259188333333,
+        "lng": 8.302090900000001
+      },
+      "query": "Segelclub Mainspitze e.V., Hochheim am Main, Germany",
+      "osm": {
+        "lat": 49.9928338,
+        "lng": 8.3144033,
+        "display_name": "Hafen Segelclub Mainspitze e.V., Landdammstraße, Gustavsburg, Deutschland",
+        "class": "leisure",
+        "type": "marina",
+        "provider": "photon"
+      },
+      "delta_m": 881,
+      "from_city_m": 4747,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_palais_hochheim",
+      "name": "PALAIS HOCHHEIM",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.0091925,
+        "lng": 8.351539899999999
+      },
+      "query": "PALAIS HOCHHEIM, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0028275,
+        "lng": 8.3447191,
+        "display_name": "Mainbrücke Hochheim, Im Mörsch, Hochheim am Main, Deutschland",
+        "class": "man_made",
+        "type": "bridge",
+        "provider": "photon"
+      },
+      "delta_m": 859,
+      "from_city_m": 773,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_mainwiesen_hochheim",
+      "name": "Mainwiesen Hochheim",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.00134704,
+        "lng": 8.350027440000002
+      },
+      "query": "Mainwiesen Hochheim, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.00216,
+        "lng": 8.3385288,
+        "display_name": "Hochheimer Mainwiesen, Mainz-Kostheim, Südstadt, Hochheim, Main-Taunus-Kreis, Hessen, Deutschland",
+        "class": "landuse",
+        "type": "meadow",
+        "importance": 0.08005139620050351,
+        "osm_type": "way",
+        "osm_id": 144963342,
+        "provider": "nominatim"
+      },
+      "delta_m": 827,
+      "from_city_m": 1534,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_opel_werk_russelsheim_tor_15",
+      "name": "Opel Werk Rüsselsheim, Tor 15",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 49.98529631428572,
+        "lng": 8.392176385714285
+      },
+      "query": "Opel Werk Rüsselsheim, Tor 15, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 49.9924522,
+        "lng": 8.3919638,
+        "display_name": "Opel Tor 60, Mainzer Straße, Rüsselsheim am Main, Deutschland",
+        "class": "highway",
+        "type": "platform",
+        "provider": "photon"
+      },
+      "delta_m": 796,
+      "from_city_m": 3899,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_opel_werk_russelsheim_tor_20",
+      "name": "Opel Werk Rüsselsheim, Tor 20",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 49.99285771666666,
+        "lng": 8.399779949999997
+      },
+      "query": "Opel Werk Rüsselsheim, Tor 20, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 49.9924522,
+        "lng": 8.3919638,
+        "display_name": "Opel Tor 60, Mainzer Straße, Rüsselsheim am Main, Deutschland",
+        "class": "highway",
+        "type": "platform",
+        "provider": "photon"
+      },
+      "delta_m": 561,
+      "from_city_m": 3664,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_b_b_hotels_germany_gmbh",
+      "name": "B&B Hotels Germany GmbH",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.01176528,
+        "lng": 8.366082299999999
+      },
+      "query": "B&B Hotels Germany GmbH, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0141022,
+        "lng": 8.3722283,
+        "display_name": "W.B. Druckerei GmbH, Dr.-Ruben-Rausing-Straße, Hochheim am Main, Deutschland",
+        "class": "building",
+        "type": "industrial",
+        "provider": "photon"
+      },
+      "delta_m": 510,
+      "from_city_m": 484,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_rhein_main_yacht_charter",
+      "name": "Rhein-Main-Yacht-Charter",
+      "category": "tour",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.04283958,
+        "lng": 8.387090660000002
+      },
+      "query": "Rhein-Main-Yacht-Charter, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0395846,
+        "lng": 8.3862459,
+        "display_name": "Apartment Rhein Main, Pfarrgasse, Massenheim, Deutschland",
+        "class": "tourism",
+        "type": "apartment",
+        "provider": "photon"
+      },
+      "delta_m": 367,
+      "from_city_m": 3788,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_evangelische_kirche_massenheim_evangelische_kirchengemeinde_mas",
+      "name": "Evangelische Kirche Massenheim - Evangelische Kirchengemeinde Massenheim-Wicker",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.04074912,
+        "lng": 8.388246500000001
+      },
+      "query": "Evangelische Kirche Massenheim, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0389437,
+        "lng": 8.3850957,
+        "display_name": "Massenheimer Kirche, Am Weinberg, Massenheim, Deutschland",
+        "class": "information",
+        "type": "board",
+        "provider": "photon"
+      },
+      "delta_m": 302,
+      "from_city_m": 3635,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_parkplatz_spielpark_hochheim",
+      "name": "Parkplatz Spielpark Hochheim",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.02842030625,
+        "lng": 8.3518603875
+      },
+      "query": "Parkplatz Spielpark Hochheim, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0298387,
+        "lng": 8.3551686,
+        "display_name": "Spielpark Hochheim, Hochheim am Main, Deutschland",
+        "class": "leisure",
+        "type": "playground",
+        "provider": "photon"
+      },
+      "delta_m": 284,
+      "from_city_m": 1748,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_dr_med_julia_poliakov",
+      "name": "Dr. med Julia Poliakov",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.0110878,
+        "lng": 8.351599799999999
+      },
+      "query": "Dr. med Julia Poliakov, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.010926,
+        "lng": 8.3543839,
+        "display_name": "Dr. med. Fischer, Flörsheimer Straße, Hochheim am Main, Deutschland",
+        "class": "amenity",
+        "type": "doctors",
+        "provider": "photon"
+      },
+      "delta_m": 200,
+      "from_city_m": 657,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_aussicht_auf_russelsheim_den_main_und_die_opel_werke",
+      "name": "Aussicht auf Rüsselsheim, den Main und die Opel-Werke",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.003089540000005,
+        "lng": 8.387426940000001
+      },
+      "query": "Aussicht auf Rüsselsheim, den Main, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0038585,
+        "lng": 8.3850606,
+        "display_name": "Schöne Aussicht, Hochheim am Main, Deutschland",
+        "class": "tourism",
+        "type": "viewpoint",
+        "provider": "photon"
+      },
+      "delta_m": 190,
+      "from_city_m": 2285,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_innatura_massiv_holzmobel",
+      "name": "INNATURA Massiv - Holzmöbel",
+      "category": "souvenir",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.021660080000004,
+        "lng": 8.40542192
+      },
+      "query": "INNATURA Massiv, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0158505,
+        "lng": 8.3673658,
+        "display_name": "Innatura Massivholzmöbel GmbH, Frankfurter Straße, Hochheim am Main, Deutschland",
+        "class": "building",
+        "type": "retail",
+        "provider": "photon"
+      },
+      "delta_m": 2795,
+      "from_city_m": 3372,
+      "status": "CHECK",
+      "flags": [
+        "house_like_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hochheim_am_main_ole_vom_wald",
+        "hochheim_am_main_hochheimer_stadtfuhrer",
+        "hochheim_am_main_weinerlebnisse",
+        "hochheim_am_main_solu_me_accessories",
+        "hochheim_am_main_alnatura_super_natur_markt",
+        "hochheim_am_main_das_brotbackstubchen_hochheim",
+        "hochheim_am_main_dm_drogerie_markt",
+        "hochheim_am_main_kletterwand",
+        "hochheim_am_main_fahncheskreuz",
+        "hochheim_am_main_regionalpark_besucherzentrum_weilbacher_kiesgruben",
+        "hochheim_am_main_schneckenpark_florsheim",
+        "hochheim_am_main_lourdeskapelle",
+        "hochheim_am_main_aussichtspunkt_frankfurter_skyline",
+        "hochheim_am_main_aussichtsturm_am_silbersee_1",
+        "hochheim_am_main_aussichtspunkt_marxheim",
+        "hochheim_am_main_aussichtspunkt_zitadelle_mainz",
+        "hochheim_am_main_aussichtspunkt_an_der_landebahn_nordwest_spotterpoint",
+        "hochheim_am_main_verna_park_sudwest_eingang",
+        "hochheim_am_main_park_bad_weilbach",
+        "hochheim_am_main_restaurant_bootshaus_haupt",
+        "hochheim_am_main_yacht_club_mainz"
+      ]
+    },
+    {
+      "id": "hochheim_am_main_opel_werk_russelsheim_tor_55",
+      "name": "Opel Werk Rüsselsheim Tor 55",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 49.99313755,
+        "lng": 8.3931874875
+      },
+      "query": "Opel Werk Rüsselsheim Tor 55, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 49.9924522,
+        "lng": 8.3919638,
+        "display_name": "Opel Tor 60, Mainzer Straße, Rüsselsheim am Main, Deutschland",
+        "class": "highway",
+        "type": "platform",
+        "provider": "photon"
+      },
+      "delta_m": 116,
+      "from_city_m": 3289,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_hochheim",
+      "name": "Hochheim",
+      "category": "bahnhof",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.00402020000001,
+        "lng": 8.350413833333333
+      },
+      "query": "Hochheim, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0043507,
+        "lng": 8.3495262,
+        "display_name": "Hochheim(Main), Sandstraße, Südstadt, Hochheim, Main-Taunus-Kreis, Hessen, 65239, Deutschland",
+        "class": "railway",
+        "type": "station",
+        "importance": 0.2772938966131108,
+        "osm_type": "node",
+        "osm_id": 3175310450,
+        "provider": "nominatim"
+      },
+      "delta_m": 73,
+      "from_city_m": 1262,
+      "status": "CHECK",
+      "flags": [
+        "moderate_delta"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_wasserturm_hochheim_kutlev",
+      "name": "Wasserturm Hochheim Kutlev",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.0190243,
+        "lng": 8.357938337037037
+      },
+      "query": "Wasserturm Hochheim Kutlev, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0190417,
+        "lng": 8.3578849,
+        "display_name": "Wasserturm Kutlev, Massenheimer Landstraße, Hochheim am Main, Deutschland",
+        "class": "amenity",
+        "type": "restaurant",
+        "provider": "photon"
+      },
+      "delta_m": 4,
+      "from_city_m": 622,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "hochheim_am_main_osm_transit_652940489"
+      ]
+    },
+    {
+      "id": "hochheim_am_main_ember_asia_vietnamesische_spezialitaten_sushi",
+      "name": "Ember Asia - Vietnamesische Spezialitäten & Sushi",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.0179917,
+        "lng": 8.402895633333333
+      },
+      "query": "Ember Asia, Hochheim am Main",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 3109,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hochheim_am_main_adlersaule",
+        "hochheim_am_main_hummelpark",
+        "hochheim_am_main_grillplatz",
+        "hochheim_am_main_altstadt_hochheim",
+        "hochheim_am_main_weingut_dienst",
+        "hochheim_am_main_weingut_schafer_hochheim",
+        "hochheim_am_main_sports_up_hochheim_und_das_leben_wird_leichter",
+        "hochheim_am_main_zahnmedizinisches_zentrum_hochheim_oliver_j_pfeiffer_dr_silke_f",
+        "hochheim_am_main_hochheimer_weinberge",
+        "hochheim_am_main_mohn_geschenkeboutique_gmbh",
+        "hochheim_am_main_geodesia_stele",
+        "hochheim_am_main_eisenbaum",
+        "hochheim_am_main_kleine_kapelle",
+        "hochheim_am_main_opel_russelsheim_tor_k_131",
+        "hochheim_am_main_opel_russelsheim_tor_15",
+        "hochheim_am_main_aussichtspunkt",
+        "hochheim_am_main_kleingarten_beim_vogelnest_hochheim",
+        "hochheim_am_main_kleingartenverein_langgewann_hochheim_e_v",
+        "hochheim_am_main_kita_storchennest"
+      ]
+    },
+    {
+      "id": "hochheim_am_main_radweg_bischofsheim_russelsheim",
+      "name": "Radweg Bischofsheim - Rüsselsheim",
+      "category": "radweg",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 49.995865679999994,
+        "lng": 8.39505672
+      },
+      "query": "Radweg Bischofsheim, Hochheim am Main",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 3191,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_galerie_rosemarie_jager",
+      "name": "Galerie Rosemarie Jäger",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.010073039999995,
+        "lng": 8.3484577
+      },
+      "query": "Galerie Rosemarie Jäger, Hochheim am Main",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 908,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_weinautomat_kunstler",
+      "name": "Weinautomat Künstler",
+      "category": "souvenir",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.010785780000006,
+        "lng": 8.346982800000001
+      },
+      "query": "Weinautomat Künstler, Hochheim am Main",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 976,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hochheim_am_main_osm_transit_4837318598"
+      ]
+    },
+    {
+      "id": "hochheim_am_main_regionalpark_projekt_haus_des_dichters",
+      "name": "Regionalpark Projekt - Haus des Dichters",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.044635015384614,
+        "lng": 8.44588573076923
+      },
+      "query": "Regionalpark Projekt, Hochheim am Main",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 7044,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_aussichtspunkt_marxheim",
+      "name": "Aussichtspunkt Marxheim",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.021660080000004,
+        "lng": 8.40542192
+      },
+      "query": "Aussichtspunkt Marxheim, Hochheim am Main",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 3372,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hochheim_am_main_ole_vom_wald",
+        "hochheim_am_main_hochheimer_stadtfuhrer",
+        "hochheim_am_main_weinerlebnisse",
+        "hochheim_am_main_solu_me_accessories",
+        "hochheim_am_main_alnatura_super_natur_markt",
+        "hochheim_am_main_das_brotbackstubchen_hochheim",
+        "hochheim_am_main_dm_drogerie_markt",
+        "hochheim_am_main_innatura_massiv_holzmobel",
+        "hochheim_am_main_kletterwand",
+        "hochheim_am_main_fahncheskreuz",
+        "hochheim_am_main_regionalpark_besucherzentrum_weilbacher_kiesgruben",
+        "hochheim_am_main_schneckenpark_florsheim",
+        "hochheim_am_main_lourdeskapelle",
+        "hochheim_am_main_aussichtspunkt_frankfurter_skyline",
+        "hochheim_am_main_aussichtsturm_am_silbersee_1",
+        "hochheim_am_main_aussichtspunkt_zitadelle_mainz",
+        "hochheim_am_main_aussichtspunkt_an_der_landebahn_nordwest_spotterpoint",
+        "hochheim_am_main_verna_park_sudwest_eingang",
+        "hochheim_am_main_park_bad_weilbach",
+        "hochheim_am_main_restaurant_bootshaus_haupt",
+        "hochheim_am_main_yacht_club_mainz"
+      ]
+    },
+    {
+      "id": "hochheim_am_main_fontanen_teich_im_verna_park_stadtpark",
+      "name": "Fontänen-Teich im Verna-Park (Stadtpark)",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 49.996724490000005,
+        "lng": 8.41529762
+      },
+      "query": "Fontänen-Teich im Verna-Park, Hochheim am Main",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 4378,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_verna_park_sudwest_eingang",
+      "name": "Verna Park, Südwest-Eingang",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.021660080000004,
+        "lng": 8.40542192
+      },
+      "query": "Verna Park, Südwest-Eingang, Hochheim am Main",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 3372,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit",
+        "duplicate_center"
+      ],
+      "twins": [
+        "hochheim_am_main_ole_vom_wald",
+        "hochheim_am_main_hochheimer_stadtfuhrer",
+        "hochheim_am_main_weinerlebnisse",
+        "hochheim_am_main_solu_me_accessories",
+        "hochheim_am_main_alnatura_super_natur_markt",
+        "hochheim_am_main_das_brotbackstubchen_hochheim",
+        "hochheim_am_main_dm_drogerie_markt",
+        "hochheim_am_main_innatura_massiv_holzmobel",
+        "hochheim_am_main_kletterwand",
+        "hochheim_am_main_fahncheskreuz",
+        "hochheim_am_main_regionalpark_besucherzentrum_weilbacher_kiesgruben",
+        "hochheim_am_main_schneckenpark_florsheim",
+        "hochheim_am_main_lourdeskapelle",
+        "hochheim_am_main_aussichtspunkt_frankfurter_skyline",
+        "hochheim_am_main_aussichtsturm_am_silbersee_1",
+        "hochheim_am_main_aussichtspunkt_marxheim",
+        "hochheim_am_main_aussichtspunkt_zitadelle_mainz",
+        "hochheim_am_main_aussichtspunkt_an_der_landebahn_nordwest_spotterpoint",
+        "hochheim_am_main_park_bad_weilbach",
+        "hochheim_am_main_restaurant_bootshaus_haupt",
+        "hochheim_am_main_yacht_club_mainz"
+      ]
+    },
+    {
+      "id": "hochheim_am_main_historische_rheinschiffsmuhle_ginsheim",
+      "name": "Historische Rheinschiffsmühle Ginsheim",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 49.970562883333336,
+        "lng": 8.328988783333335
+      },
+      "query": "Historische Rheinschiffsmühle Ginsheim, Hochheim am Main",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 5270,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_hafen_eden",
+      "name": "Hafen Eden",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.01427164166666,
+        "lng": 8.262533383333333
+      },
+      "query": "Hafen Eden, Hochheim am Main",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 6960,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_sport_und_kulturhalle_massenheim",
+      "name": "Sport- und Kulturhalle Massenheim",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.03796984,
+        "lng": 8.3809146
+      },
+      "query": "Sport-, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0383242,
+        "lng": 8.3815327,
+        "display_name": "Sport- und Kulturhalle Massenheim, 17, Untergasse, Massenheim, Hochheim, Main-Taunus-Kreis, Hessen, 65239, Deutschland",
+        "class": "amenity",
+        "type": "community_centre",
+        "importance": 0.00005139620050350221,
+        "osm_type": "way",
+        "osm_id": 39009339,
+        "provider": "nominatim"
+      },
+      "delta_m": 59,
+      "from_city_m": 3098,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_verein_der_hundefreunde_hochheim_2000_e_v",
+      "name": "Verein der Hundefreunde Hochheim 2000 e.V.",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.01705208,
+        "lng": 8.335252899999999
+      },
+      "query": "Verein der Hundefreunde Hochheim 2000, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0168759,
+        "lng": 8.3359372,
+        "display_name": "Hundefreunde Hochheim 2000 e.V., Im Langgewann, Hochheim am Main, Deutschland",
+        "class": "amenity",
+        "type": "animal_training",
+        "provider": "photon"
+      },
+      "delta_m": 53,
+      "from_city_m": 1805,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_massenheimer_kiesgruben",
+      "name": "Massenheimer Kiesgruben",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.03212034,
+        "lng": 8.360608019999999
+      },
+      "query": "Massenheimer Kiesgruben, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0317201,
+        "lng": 8.360373,
+        "display_name": "Massenheimer Kiesgruben, Hochheim, Main-Taunus-Kreis, Hessen, Deutschland",
+        "class": "leisure",
+        "type": "nature_reserve",
+        "importance": 0.08005139620050351,
+        "osm_type": "way",
+        "osm_id": 40021162,
+        "provider": "nominatim"
+      },
+      "delta_m": 48,
+      "from_city_m": 2062,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_fenster_zur_deponie",
+      "name": "Fenster zur Deponie",
+      "category": "wanderung",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.025484680000005,
+        "lng": 8.37308938
+      },
+      "query": "Fenster zur Deponie, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0257736,
+        "lng": 8.3732896,
+        "display_name": "Fenster zur Deponie, Umgehungsstraße Hochheim, Weststadt, Hochheim, Main-Taunus-Kreis, Hessen, 65239, Deutschland",
+        "class": "tourism",
+        "type": "attraction",
+        "importance": 0.000050584420538597966,
+        "osm_type": "node",
+        "osm_id": 442540121,
+        "provider": "nominatim"
+      },
+      "delta_m": 35,
+      "from_city_m": 1623,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_kleine_residenz_am_schloss",
+      "name": "Kleine Residenz Am Schloss",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.04020562000001,
+        "lng": 8.384812799999999
+      },
+      "query": "Kleine Residenz Am Schloss, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0401506,
+        "lng": 8.3852383,
+        "display_name": "Kleine Residenz am Schloss, 2, Schloßgasse, Massenheim, Hochheim, Main-Taunus-Kreis, Hessen, 65239, Deutschland",
+        "class": "tourism",
+        "type": "hotel",
+        "importance": 0.00005139620050350221,
+        "osm_type": "node",
+        "osm_id": 544555578,
+        "provider": "nominatim"
+      },
+      "delta_m": 31,
+      "from_city_m": 3453,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_aussichtsturm_am_mainhafen",
+      "name": "Aussichtsturm am Mainhafen",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.001998099999994,
+        "lng": 8.31153754
+      },
+      "query": "Aussichtsturm am Mainhafen, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0017956,
+        "lng": 8.3117607,
+        "display_name": "Aussichtsturm am Mainhafen, Mainufer, Wiesbaden, Deutschland",
+        "class": "man_made",
+        "type": "tower",
+        "provider": "photon"
+      },
+      "delta_m": 28,
+      "from_city_m": 3691,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_oberfeldhof",
+      "name": "Oberfeldhof",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.05104425,
+        "lng": 8.380007766666667
+      },
+      "query": "Oberfeldhof, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0510445,
+        "lng": 8.3803982,
+        "display_name": "Oberfeldhof, Massenheim, Hochheim, Main-Taunus-Kreis, Hessen, Deutschland",
+        "class": "place",
+        "type": "farm",
+        "importance": 0.10671806286717019,
+        "osm_type": "way",
+        "osm_id": 23750970,
+        "provider": "nominatim"
+      },
+      "delta_m": 28,
+      "from_city_m": 4405,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_festung_russelsheim",
+      "name": "Festung Rüsselsheim",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 49.99942286842105,
+        "lng": 8.419386478947368
+      },
+      "query": "Festung Rüsselsheim, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 49.9992954,
+        "lng": 8.4197062,
+        "display_name": "Festung Rüsselsheim, Hauptmann-Scheuermann-Weg, Rüsselsheim am Main, Deutschland",
+        "class": "building",
+        "type": "castle",
+        "provider": "photon"
+      },
+      "delta_m": 27,
+      "from_city_m": 4531,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_hochheimer_weinbaumuseum",
+      "name": "Hochheimer Weinbaumuseum",
+      "category": "hafen",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.01161448,
+        "lng": 8.34712644
+      },
+      "query": "Hochheimer Weinbaumuseum, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.011756,
+        "lng": 8.3473005,
+        "display_name": "Hochheimer Weinbaumuseum, 1, Wiesbadener Straße, Altstadt, Weststadt, Südstadt, Hochheim, Main-Taunus-Kreis, Hessen, 65239, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.00005139620050350221,
+        "osm_type": "node",
+        "osm_id": 8043803923,
+        "provider": "nominatim"
+      },
+      "delta_m": 20,
+      "from_city_m": 941,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_spielpark_hochheim",
+      "name": "Spielpark Hochheim",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.02973164,
+        "lng": 8.35502932
+      },
+      "query": "Spielpark Hochheim, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0298387,
+        "lng": 8.3551686,
+        "display_name": "Spielpark Hochheim, L 3028, Hochheim, Main-Taunus-Kreis, Hessen, 65239, Deutschland",
+        "class": "leisure",
+        "type": "playground",
+        "importance": 0.00005139620050350221,
+        "osm_type": "way",
+        "osm_id": 24222080,
+        "provider": "nominatim"
+      },
+      "delta_m": 16,
+      "from_city_m": 1830,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_daubhauschen",
+      "name": "Daubhäuschen",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.0107651,
+        "lng": 8.345175955555556
+      },
+      "query": "Daubhäuschen, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0108703,
+        "lng": 8.3450329,
+        "display_name": "Daubhäuschen, Mainzer Straße, Altstadt, Weststadt, Südstadt, Hochheim, Main-Taunus-Kreis, Hessen, 65239, Deutschland",
+        "class": "highway",
+        "type": "bus_stop",
+        "importance": 0.00005139620050350221,
+        "osm_type": "node",
+        "osm_id": 652906893,
+        "provider": "nominatim"
+      },
+      "delta_m": 16,
+      "from_city_m": 1100,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_segelclub_hochheim_e_v",
+      "name": "Segelclub Hochheim e.V.",
+      "category": "hafen",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.00091188,
+        "lng": 8.35226826
+      },
+      "query": "Segelclub Hochheim e.V., Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0010253,
+        "lng": 8.3523803,
+        "display_name": "Segelclub Hochheim, Mainweg, Hochheim am Main, Deutschland",
+        "class": "club",
+        "type": "sport",
+        "provider": "photon"
+      },
+      "delta_m": 15,
+      "from_city_m": 1512,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_aussichtskanzel_vogelnest",
+      "name": "Aussichtskanzel Vogelnest",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.03059684,
+        "lng": 8.34567822
+      },
+      "query": "Aussichtskanzel Vogelnest, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0305883,
+        "lng": 8.3458389,
+        "display_name": "Vogelnest, Elisabethenstraße, Hochheim am Main, Deutschland",
+        "class": "man_made",
+        "type": "tower",
+        "provider": "photon"
+      },
+      "delta_m": 12,
+      "from_city_m": 2149,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_thomas_more_kultur_garten",
+      "name": "THOMAS MORE Kultur.Garten",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.01324227,
+        "lng": 8.33862255
+      },
+      "query": "THOMAS MORE Kultur.Garten, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.013263,
+        "lng": 8.3384783,
+        "display_name": "THOMAS MORE Kultur.Garten, Weststadt, Südstadt, Hochheim, Main-Taunus-Kreis, Hessen, 65239, Deutschland",
+        "class": "leisure",
+        "type": "garden",
+        "importance": 0.0667180628671702,
+        "osm_type": "way",
+        "osm_id": 1292296948,
+        "provider": "nominatim"
+      },
+      "delta_m": 11,
+      "from_city_m": 1523,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_labyrinth_florsheim_wicker",
+      "name": "Labyrinth Flörsheim-Wicker",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.018463,
+        "lng": 8.4028294
+      },
+      "query": "Labyrinth Flörsheim-Wicker, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0185504,
+        "lng": 8.4028818,
+        "display_name": "Komm ins Labyrinth Wicker, Panoramaweg, Flörsheim am Main, Deutschland",
+        "class": "information",
+        "type": "board",
+        "provider": "photon"
+      },
+      "delta_m": 10,
+      "from_city_m": 3113,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_st_bonifatius",
+      "name": "St.Bonifatius",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.01612391515151,
+        "lng": 8.346242212121211
+      },
+      "query": "St.Bonifatius, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0160896,
+        "lng": 8.3461321,
+        "display_name": "Sankt Bonifatius, Kolpingstraße, Altstadt, Weststadt, Südstadt, Hochheim, Main-Taunus-Kreis, Hessen, 65239, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.00005139620050350221,
+        "osm_type": "way",
+        "osm_id": 784881036,
+        "provider": "nominatim"
+      },
+      "delta_m": 9,
+      "from_city_m": 1018,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_buchhandlung_eulenspiegel",
+      "name": "Buchhandlung Eulenspiegel",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.012549799999995,
+        "lng": 8.351569099999999
+      },
+      "query": "Buchhandlung Eulenspiegel, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0125327,
+        "lng": 8.3514484,
+        "display_name": "Eulenspiegel, Weiherstraße, Hochheim am Main, Deutschland",
+        "class": "shop",
+        "type": "books",
+        "provider": "photon"
+      },
+      "delta_m": 9,
+      "from_city_m": 609,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_leinreiter_denkmal",
+      "name": "Leinreiter-Denkmal",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 49.99685152000001,
+        "lng": 8.41090328
+      },
+      "query": "Leinreiter-Denkmal, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 49.9969148,
+        "lng": 8.4109854,
+        "display_name": "Leinreiter, Mainstraße, Rüsselsheim am Main, Deutschland",
+        "class": "historic",
+        "type": "memorial",
+        "provider": "photon"
+      },
+      "delta_m": 9,
+      "from_city_m": 4090,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_pfarrkirche_st_peter_und_paul",
+      "name": "Pfarrkirche St. Peter und Paul",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.008508247058835,
+        "lng": 8.352354641176472
+      },
+      "query": "Pfarrkirche St. Peter, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0084645,
+        "lng": 8.3522688,
+        "display_name": "Sankt Peter und Paul, Kirchstraße, Hochheim am Main, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "provider": "photon"
+      },
+      "delta_m": 8,
+      "from_city_m": 782,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_theater_russelsheim",
+      "name": "Theater Rüsselsheim",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 49.992254482352955,
+        "lng": 8.425842794117647
+      },
+      "query": "Theater Rüsselsheim, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 49.9922853,
+        "lng": 8.4257901,
+        "display_name": "Theater Rüsselsheim, Am Treff, Rüsselsheim am Main, Deutschland",
+        "class": "amenity",
+        "type": "theatre",
+        "provider": "photon"
+      },
+      "delta_m": 5,
+      "from_city_m": 5274,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_altes_rathaus_trausaal_standesamt_hochheim",
+      "name": "Altes Rathaus (Trausaal Standesamt Hochheim)",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.00985250909091,
+        "lng": 8.350647500000001
+      },
+      "query": "Altes Rathaus, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0098892,
+        "lng": 8.3506625,
+        "display_name": "Altes Rathaus, 13, Kirchstraße, Altstadt, Weststadt, Südstadt, Hochheim, Main-Taunus-Kreis, Hessen, 65239, Deutschland",
+        "class": "building",
+        "type": "civic",
+        "importance": 0.00005139620050350221,
+        "osm_type": "way",
+        "osm_id": 377907173,
+        "provider": "nominatim"
+      },
+      "delta_m": 4,
+      "from_city_m": 782,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_evangelische_kirche_hochheim_am_main_evangelische_kirchengemein",
+      "name": "Evangelische Kirche Hochheim am Main - Evangelische Kirchengemeinde Hochheim",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.01190905675676,
+        "lng": 8.351953081081081
+      },
+      "query": "Evangelische Kirche Hochheim am Main, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0118885,
+        "lng": 8.3519183,
+        "display_name": "Evangelische Kirche, Burgeffstraße, Altstadt, Weststadt, Südstadt, Hochheim, Main-Taunus-Kreis, Hessen, 65239, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.00005139620050350221,
+        "osm_type": "way",
+        "osm_id": 378202230,
+        "provider": "nominatim"
+      },
+      "delta_m": 3,
+      "from_city_m": 600,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_familienzentrum_mamma_mia_e_v",
+      "name": "Familienzentrum Mamma Mia e.V.",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.01052695714286,
+        "lng": 8.352177214285714
+      },
+      "query": "Familienzentrum Mamma Mia e.V., Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0105302,
+        "lng": 8.3522009,
+        "display_name": "Familienzentrum Mamma Mia, Hintergasse, Hochheim am Main, Deutschland",
+        "class": "building",
+        "type": "yes",
+        "provider": "photon"
+      },
+      "delta_m": 2,
+      "from_city_m": 650,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_zweirad_hartwin_neumann_e_k",
+      "name": "Zweirad Hartwin Neumann e.K.",
+      "category": "radweg",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.011813025,
+        "lng": 8.3546335625
+      },
+      "query": "Zweirad Hartwin Neumann, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0117975,
+        "lng": 8.3546504,
+        "display_name": "Fahrrad Neumann, Massenheimer Straße, Hochheim am Main, Deutschland",
+        "class": "shop",
+        "type": "bicycle",
+        "provider": "photon"
+      },
+      "delta_m": 2,
+      "from_city_m": 427,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_polnische_spezialitaten_gbr",
+      "name": "Polnische Spezialitäten GbR",
+      "category": "souvenir",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.01892395714286,
+        "lng": 8.35204827142857
+      },
+      "query": "Polnische Spezialitäten GbR, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0189309,
+        "lng": 8.352065,
+        "display_name": "Polnische Spezialitäten, Dresdener Ring, Hochheim am Main, Deutschland",
+        "class": "shop",
+        "type": "convenience",
+        "provider": "photon"
+      },
+      "delta_m": 1,
+      "from_city_m": 819,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "hochheim_am_main_neuapostolische_kirche_hochheim",
+      "name": "Neuapostolische Kirche Hochheim",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 50.009671780000005,
+        "lng": 8.36165728
+      },
+      "query": "Neuapostolische Kirche Hochheim, Hochheim am Main, Germany",
+      "osm": {
+        "lat": 50.0096728,
+        "lng": 8.3616546,
+        "display_name": "Neuapostolische Kirche, Auf der Schlicht, Altstadt, Südstadt, Hochheim, Main-Taunus-Kreis, Hessen, 65239, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.00005139620050350221,
+        "osm_type": "node",
+        "osm_id": 266820879,
+        "provider": "nominatim"
+      },
+      "delta_m": 0,
+      "from_city_m": 452,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    }
+  ]
+}

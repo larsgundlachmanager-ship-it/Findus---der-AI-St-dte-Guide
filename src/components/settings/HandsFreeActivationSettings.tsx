@@ -61,7 +61,7 @@ export function HandsFreeActivationSettings() {
 
       <Row
         title="„Sprechen“-Notification"
-        hint="Feste Notification — Tippen startet Mikro (auch Sperrbildschirm)."
+        hint="Nur wenn GPS nicht schon eine Yorro-Karte in der Leiste hat. Tippen startet das Mikro."
         value={prefs.stickyListenNotification}
         onChange={(stickyListenNotification) =>
           void update({ stickyListenNotification })
@@ -87,7 +87,7 @@ export function HandsFreeActivationSettings() {
       </Text>
       <Text style={styles.hint}>
         Play/Pause bzw. Hook — Aus, Mikro an, oder Live-Chat. Greift, wenn
-        Findus die Media-Session hält (nicht während Spotify o. Ä.).
+        Yorro die Media-Session hält (nicht während Spotify o. Ä.).
       </Text>
       <View style={styles.chipRow}>
         {HEADSET_OPTS.map(({ id, label }) => {
@@ -131,7 +131,7 @@ export function HandsFreeActivationSettings() {
 
       <Row
         title="Strenger Adress-Filter"
-        hint="Aus (empfohlen): nach Start/Antwort frei weiterreden — „führ mich dahin“. An: nur klarere Findus-Fragen."
+        hint="Aus (empfohlen): nach Start/Antwort frei weiterreden — „führ mich dahin“. An: nur klarere Yorro-Fragen."
         value={prefs.requireKeywordEveryTurn}
         onChange={(requireKeywordEveryTurn) =>
           void update({ requireKeywordEveryTurn })
@@ -145,14 +145,10 @@ export function HandsFreeActivationSettings() {
           void update({ humanConversationTone })
         }
       />
-      <Row
-        title="Vor Deep Research nachfragen"
-        hint="Schnelle Antwort zuerst; tiefe Web-Recherche erst nach Ja / Button."
-        value={prefs.askBeforeDeepResearch}
-        onChange={(askBeforeDeepResearch) =>
-          void update({ askBeforeDeepResearch })
-        }
-      />
+      <Text style={[styles.hint, { marginBottom: spacing.sm }]}>
+        Live-Chat: Deep Research erst nachfragen (Fast-Lane zuerst). Außerhalb
+        Live-Chat: Recherche immer automatisch.
+      </Text>
 
       <Pressable
         style={styles.btn}
@@ -193,7 +189,7 @@ export function HandsFreeActivationSettings() {
       </Pressable>
 
       <Text style={[styles.hint, { marginTop: spacing.md }]}>
-        Launcher: Icon lange drücken → „Sprechen“. Power/Gemini ersetzt Findus
+        Launcher: Icon lange drücken → „Sprechen“. Power/Gemini ersetzt Yorro
         nicht — Assistenten-Einstellungen öffnen.
       </Text>
 

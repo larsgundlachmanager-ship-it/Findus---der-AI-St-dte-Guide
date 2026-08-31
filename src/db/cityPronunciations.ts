@@ -1,4 +1,5 @@
 import type { SQLiteDatabase } from 'expo-sqlite';
+import { runExclusiveDbWrite } from './dbWriteLock';
 
 export type CityPronunciationRow = {
   city_id: string;
@@ -30,23 +31,25 @@ export async function replaceCityPronunciations(
   const id = cityId.trim().toLowerCase();
   if (!id) return;
 
-  await db.withTransactionAsync(async () => {
-    await db.runAsync(
-      'DELETE FROM city_pronunciations WHERE city_id = ?',
-      id,
-    );
-    for (const e of entries) {
-      const word = e.word.trim().toLowerCase();
-      const ipa = e.ipa.trim();
-      if (!word || !ipa) continue;
+  await runExclusiveDbWrite(async () => {
+    await db.withTransactionAsync(async () => {
       await db.runAsync(
-        `INSERT OR REPLACE INTO city_pronunciations (city_id, word, ipa)
-         VALUES (?, ?, ?)`,
+        'DELETE FROM city_pronunciations WHERE city_id = ?',
         id,
-        word,
-        ipa,
       );
-    }
+      for (const e of entries) {
+        const word = e.word.trim().toLowerCase();
+        const ipa = e.ipa.trim();
+        if (!word || !ipa) continue;
+        await db.runAsync(
+          `INSERT OR REPLACE INTO city_pronunciations (city_id, word, ipa)
+           VALUES (?, ?, ?)`,
+          id,
+          word,
+          ipa,
+        );
+      }
+    });
   });
 }
 
@@ -76,5 +79,7 @@ export async function deleteCityPronunciations(
 ): Promise<void> {
   const id = cityId.trim().toLowerCase();
   if (!id) return;
-  await db.runAsync('DELETE FROM city_pronunciations WHERE city_id = ?', id);
+  await runExclusiveDbWrite(async () => {
+    await db.runAsync('DELETE FROM city_pronunciations WHERE city_id = ?', id);
+  });
 }

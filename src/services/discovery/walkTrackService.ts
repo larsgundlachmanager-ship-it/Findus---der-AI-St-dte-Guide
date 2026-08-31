@@ -1,7 +1,7 @@
 /**
  * GPS-Trail für Fog-of-War / Discovery-Map.
- * Lücken nur füllen wenn Fixes ≤ 5 Min auseinander (keine Fernreise-Striche).
- * Reveal-Radius 20 m (echte Meter auf der Karte).
+ * Reveal: 50 m Radius / 100 m Durchmesser, als vereinigte Fläche (fogCoverage.ts).
+ * Lücken zwischen Bändern bis 20 m schließen. Fixes ≤ 5 Min auseinander verbinden.
  */
 
 import * as FileSystem from 'expo-file-system';
@@ -10,22 +10,22 @@ import { haversineMeters } from '../../db/database';
 export type WalkTrackPoint = { lat: number; lng: number; at: number };
 
 const PATH = `${FileSystem.documentDirectory}findus-walk-track.json`;
-const MIN_STEP_M = 6;
+const MIN_STEP_M = 5;
 const MAX_POINTS = 5_000;
-/** Reveal-Radius auf der Karte (Meter) — Fog-of-War heller Bereich. */
-export const WALK_REVEAL_RADIUS_M = 60;
+/** Fog-/Explore-Radius um User und Laufspur. */
+export const WALK_REVEAL_RADIUS_M = 42;
 /**
  * Zwischen zwei Fixes Lücke füllen — nur wenn ≤ 5 Minuten.
  * Längere Pausen (Auto, Zug, Flug) erzeugen KEINE Linie.
  */
 export const GAP_FILL_MAX_MS = 5 * 60_000;
-/** Auch bei kurzer Zeit: keine Füllung über große Distanz (z. B. Tunnel-Sprung). */
-const GAP_FILL_MAX_M = 400;
-/** Dichter als Reveal-Durchmesser/2 → keine Löcher im Trail. */
-const GAP_FILL_STEP_M = 8;
-/** Fog/Route: Segment abbrechen wenn Zeit oder Distanz zu groß. */
+/** Gap-Fill nur bis 60 m — sonst Teleport-Spaghetti. */
+const GAP_FILL_MAX_M = 60;
+/** Dichter als Reveal-Radius/6 → keine Löcher im interpolierten Trail. */
+const GAP_FILL_STEP_M = 10;
+/** Fog-Korridor: Zeit ≤ 5 Min UND Distanz ≤ 60 m. */
 export const FOG_SEGMENT_BREAK_MS = GAP_FILL_MAX_MS;
-export const FOG_SEGMENT_BREAK_M = 250;
+export const FOG_SEGMENT_BREAK_M = GAP_FILL_MAX_M;
 
 let points: WalkTrackPoint[] = [];
 let loaded = false;
@@ -39,8 +39,51 @@ async function persistSoon(): Promise<void> {
     void FileSystem.writeAsStringAsync(
       PATH,
       JSON.stringify({ points: points.slice(-MAX_POINTS) }),
-    ).catch(() => undefined);
+    )
+      .then(() => notifyCloudSoon())
+      .catch(() => undefined);
   }, 2_500);
+}
+
+function notifyCloudSoon(): void {
+  void import('../account/userCloudSync')
+    .then((m) => m.scheduleUserCloudPush())
+    .catch(() => undefined);
+}
+
+function mergeWalkPoints(
+  local: WalkTrackPoint[],
+  remote: WalkTrackPoint[],
+): WalkTrackPoint[] {
+  const map = new Map<string, WalkTrackPoint>();
+  const key = (p: WalkTrackPoint) =>
+    `${p.at}:${p.lat.toFixed(5)}:${p.lng.toFixed(5)}`;
+  for (const p of remote) map.set(key(p), p);
+  for (const p of local) map.set(key(p), p);
+  return pruneLongHaulWalkPoints(
+    [...map.values()].sort((a, b) => a.at - b.at),
+  ).slice(-MAX_POINTS);
+}
+
+export function snapshotWalkTrackForCloud(): WalkTrackPoint[] {
+  return points.slice(-MAX_POINTS);
+}
+
+export async function applyWalkTrackFromCloud(
+  remote: WalkTrackPoint[],
+): Promise<void> {
+  await loadWalkTrack();
+  if (!Array.isArray(remote) || remote.length === 0) return;
+  points = mergeWalkPoints(points, remote);
+  loaded = true;
+  try {
+    await FileSystem.writeAsStringAsync(
+      PATH,
+      JSON.stringify({ points: points.slice(-MAX_POINTS) }),
+    );
+  } catch {
+    /* soft */
+  }
 }
 
 /**
@@ -132,7 +175,7 @@ function interpolateGap(
   const dt = to.at - from.at;
   if (dt <= 0 || dt > GAP_FILL_MAX_MS) return [];
   if (dist > GAP_FILL_MAX_M) return [];
-  const steps = Math.min(24, Math.floor(dist / GAP_FILL_STEP_M));
+  const steps = Math.min(48, Math.floor(dist / GAP_FILL_STEP_M));
   if (steps < 1) return [];
   const out: WalkTrackPoint[] = [];
   for (let i = 1; i <= steps; i++) {
@@ -148,12 +191,18 @@ function interpolateGap(
 
 /** Neuen Fix anhängen, wenn ≥ MIN_STEP_M vom letzten Punkt. */
 export function recordWalkFix(lat: number, lng: number): WalkTrackPoint[] {
+  if (!loaded) void loadWalkTrack();
   if (!Number.isFinite(lat) || !Number.isFinite(lng)) return points;
   const now = Date.now();
   const last = points[points.length - 1];
   if (last) {
     const d = haversineMeters(last.lat, last.lng, lat, lng);
     if (d < MIN_STEP_M) return points;
+    // Nav-Watcher / stale Last-Known: kein 20-km-Teleport in den Nebel malen
+    const dt = now - last.at;
+    if (d > GAP_FILL_MAX_M && dt >= 0 && dt < 60_000) {
+      return points;
+    }
     const gap = interpolateGap(last, { lat, lng, at: now });
     if (gap.length) {
       points = [...points, ...gap].slice(-MAX_POINTS);
@@ -168,6 +217,7 @@ export function recordWalkFix(lat: number, lng: number): WalkTrackPoint[] {
  * Dichte Stichprobe — bewahrt Zeitlücken (kein Überspringen zu Fernziel).
  */
 export function sampleWalkTrackForMap(maxPoints = 1_200): WalkTrackPoint[] {
+  void loadWalkTrack();
   if (points.length <= maxPoints) return points;
   const out: WalkTrackPoint[] = [];
   const step = Math.ceil(points.length / maxPoints);
@@ -175,6 +225,26 @@ export function sampleWalkTrackForMap(maxPoints = 1_200): WalkTrackPoint[] {
     out.push(points[i]!);
   }
   const last = points[points.length - 1];
+  if (last && out[out.length - 1] !== last) out.push(last);
+  return out;
+}
+
+/** Erster Karten-Paint: nur Spur um den User, Rest später. */
+export function sampleWalkTrackNear(
+  lat: number,
+  lng: number,
+  radiusM = 1_800,
+  maxPoints = 400,
+): WalkTrackPoint[] {
+  void loadWalkTrack();
+  const nearby = points.filter(
+    (p) => haversineMeters(p.lat, p.lng, lat, lng) <= radiusM,
+  );
+  if (nearby.length <= maxPoints) return nearby;
+  const out: WalkTrackPoint[] = [];
+  const step = Math.ceil(nearby.length / maxPoints);
+  for (let i = 0; i < nearby.length; i += step) out.push(nearby[i]!);
+  const last = nearby[nearby.length - 1];
   if (last && out[out.length - 1] !== last) out.push(last);
   return out;
 }

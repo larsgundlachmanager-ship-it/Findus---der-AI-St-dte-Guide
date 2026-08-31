@@ -13,6 +13,7 @@ class FindusDeviceAudioPackage : ReactPackage {
       FindusDeviceAudioModule(reactContext),
       FindusHandsFreeModule(reactContext),
       FindusHeadsetModule(reactContext),
+      FindusMapCompassModule(reactContext),
     )
 
   override fun createViewManagers(

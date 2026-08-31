@@ -1,0 +1,152 @@
+{
+  "spots": [
+    {
+      "id": "lissabon_cristo_rei",
+      "name": "Cristo Rei",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Das Santuário de Cristo Rei erhebt sich in Almada südlich des Tejo. Von seinem Aussichtspunkt reicht der Blick über Lissabon und zur Ponte 25 de Abril.",
+      "deep_data_pool": [
+        {
+          "text": "Ort und Lage: Das Santuário de Cristo Rei steht in Almada am südlichen Ufer des Tejo, Lissabon direkt gegenüber. Seine erhöhte Position macht das Monument zu einem weithin sichtbaren Orientierungspunkt im Großraum der portugiesischen Hauptstadt.",
+          "tags": [
+            "lage",
+            "orientierung",
+            "almada"
+          ]
+        },
+        {
+          "text": "Visuelles Profil: Über einem hohen, hellen Sockel erhebt sich die Christusfigur mit weit ausgebreiteten Armen. Die klare Silhouette ist bereits aus großer Entfernung zu erkennen und prägt besonders den Blick vom Lissabonner Tejo-Ufer nach Süden.",
+          "tags": [
+            "visuell",
+            "architektur",
+            "wegweiser"
+          ]
+        },
+        {
+          "text": "Inspiration: Das portugiesische Monument wurde vom Cristo Redentor in Rio de Janeiro angeregt. Die Idee überträgt das Motiv des segnenden Christus auf die Landschaft am Tejo, entwickelt jedoch durch Sockel, Standort und Proportionen eine eigene Wirkung.",
+          "tags": [
+            "geschichte",
+            "inspiration",
+            "rio_de_janeiro"
+          ]
+        },
+        {
+          "text": "Historischer Hintergrund: Der Bau war als Dank dafür gedacht, dass Portugal von den unmittelbaren Zerstörungen des Zweiten Weltkriegs verschont geblieben war. Diese religiöse Deutung gehört zum zentralen Entstehungskontext des Heiligtums.",
+          "tags": [
+            "geschichte",
+            "zweiter_weltkrieg",
+            "religion"
+          ]
+        },
+        {
+          "text": "Grundstein und Bauzeit: Der Grundstein wurde 1949 gelegt. Bis zur Einweihung verging ein Jahrzehnt, in dem die monumentale Anlage mit ihrem hohen Sockel, der Kapelle und der weithin sichtbaren Figur Gestalt annahm.",
+          "tags": [
+            "geschichte",
+            "baugeschichte",
+            "1949"
+          ]
+        },
+        {
+          "text": "Einweihung: Das Heiligtum wurde 1959 feierlich eingeweiht. Damit erhielt die bereits länger verfolgte Idee eines portugiesischen Christusmonuments ihren sichtbaren Abschluss und Almada ein neues religiöses wie landschaftliches Wahrzeichen.",
+          "tags": [
+            "geschichte",
+            "einweihung",
+            "1959"
+          ]
+        },
+        {
+          "text": "Urheberschaft: Die Christusstatue stammt vom Bildhauer Francisco Franco de Sousa. Für die architektonische Gestaltung des Sockels und der Kapellenanlage wird insbesondere António Lino genannt; weitere Beteiligte werden je nach Darstellung ergänzend aufgeführt.",
+          "tags": [
+            "kunst",
+            "architektur",
+            "urheber"
+          ]
+        },
+        {
+          "text": "Maße: Die Gesamtanlage erreicht mit Sockel ungefähr 110 Meter Höhe; die Christusfigur selbst ist etwa 28 Meter hoch. Gerade der Kontrast zwischen schlanker Sockelarchitektur und ausgebreiteten Armen verstärkt die Fernwirkung.",
+          "tags": [
+            "architektur",
+            "masse",
+            "statue"
+          ]
+        },
+        {
+          "text": "Sockel und Kapelle: Der monumentale Unterbau ist nicht nur Träger der Statue. Er gehört zum religiösen Bauprogramm des Heiligtums und nimmt Kapellenräume auf, sodass Cristo Rei zugleich Denkmal, Aussichtsbau und aktiver Andachtsort ist.",
+          "tags": [
+            "architektur",
+            "kapelle",
+            "religion"
+          ]
+        },
+        {
+          "text": "Aussichtsplattform: Im Sockel befindet sich eine erhöhte Plattform, die per Aufzug erreichbar ist. Von dort öffnet sich das Panorama über den breiten Tejo, die gegenüberliegende Stadtkulisse Lissabons und große Teile der Flusslandschaft.",
+          "tags": [
+            "aussicht",
+            "plattform",
+            "aufzug"
+          ]
+        },
+        {
+          "text": "Brückenblick: Besonders markant ist die Sicht auf die Ponte 25 de Abril. Monument und Hängebrücke stehen auf der südlichen Tejo-Seite räumlich nah beieinander und bilden aus vielen Blickrichtungen ein gemeinsames Panorama mit Lissabon.",
+          "tags": [
+            "aussicht",
+            "ponte_25_de_abril",
+            "panorama"
+          ]
+        },
+        {
+          "text": "Stadtlandschaft: Der Standort macht verständlich, wie stark Lissabon und Almada durch den Tejo getrennt und zugleich miteinander verbunden sind. Von Cristo Rei lassen sich Flussbreite, Uferlinien, Brücke und das Relief der Metropolregion gleichzeitig erfassen.",
+          "tags": [
+            "geografie",
+            "stadtlandschaft",
+            "tejo"
+          ]
+        },
+        {
+          "text": "Doppelte Bedeutung: Cristo Rei ist zugleich Wallfahrts- und Aussichtsort. Wer die Anlage besucht, begegnet daher einer Mischung aus religiöser Nutzung, nationaler Erinnerungskultur, monumentaler Bildhauerei und touristischem Panorama.",
+          "tags": [
+            "religion",
+            "erinnerungskultur",
+            "aussicht"
+          ]
+        },
+        {
+          "text": "Wahrnehmung aus Lissabon: Von der nördlichen Flussseite erscheint die Figur oberhalb des Südufers. Vor Ort kehrt sich diese Perspektive um: Nun liegt Lissabon gegenüber, während Brücke und Tejo den räumlichen Zusammenhang der Region sichtbar machen.",
+          "tags": [
+            "visuell",
+            "perspektive",
+            "orientierung"
+          ]
+        },
+        {
+          "text": "LIVE: Aktuelle Öffnungszeiten des Heiligtums, Zugang zur Aussichtsplattform, mögliche Gottesdienste, vorübergehende Schließungen sowie geltende Eintrittspreise unmittelbar vor dem Besuch auf der offiziellen Website prüfen.",
+          "tags": [
+            "live_hint",
+            "ephemeral",
+            "oeffnungszeiten",
+            "tickets"
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": "Woran erkenne ich Cristo Rei?",
+          "a": "An der Christusfigur mit weit ausgebreiteten Armen auf einem sehr hohen, hellen Sockel oberhalb des südlichen Tejo-Ufers."
+        },
+        {
+          "q": "Warum wurde das Monument errichtet?",
+          "a": "Es entstand als religiöses Dankeszeichen dafür, dass Portugal von den unmittelbaren Zerstörungen des Zweiten Weltkriegs verschont geblieben war."
+        },
+        {
+          "q": "Was sieht man von der Aussichtsplattform?",
+          "a": "Das Panorama umfasst den Tejo, Lissabon auf der gegenüberliegenden Seite und die Ponte 25 de Abril."
+        },
+        {
+          "q": "Sind Öffnungszeiten und Eintritt dauerhaft im Pack gespeichert?",
+          "a": "Nein. Diese Angaben können sich ändern und müssen deshalb vor dem Besuch live geprüft werden."
+        }
+      ]
+    }
+  ]
+}

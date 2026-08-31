@@ -12,7 +12,10 @@ import {
   trackLedgerMaps,
   trackLedgerTts,
   type CostOverview,
+  type LedgerTrackMeta,
 } from '../diagnostics/apiCostLedger';
+import { geminiEur, mapsEur, ttsEur } from '../diagnostics/costRates';
+import { useFinnusStore } from '../../store/useFinnusStore';
 
 type UsageBucket = {
   requests: number;
@@ -33,12 +36,6 @@ const state: {
 };
 
 /** Gemini Flash-Lite ≈ €0.10 / 1M input, €0.40 / 1M output (approx). */
-const GEMINI_IN_PER_M = 0.1;
-const GEMINI_OUT_PER_M = 0.4;
-/** Rough Maps Places/Directions call ≈ €0.005–0.017 — use mid. */
-const MAPS_PER_CALL = 0.008;
-/** Cartesia sonic-3.5 ≈ €0.009 / 1k chars. */
-const TTS_CLOUD_PER_1K = 0.009;
 
 function bump(bucket: UsageBucket, charsIn: number, charsOut: number): void {
   bucket.requests += 1;
@@ -46,23 +43,37 @@ function bump(bucket: UsageBucket, charsIn: number, charsOut: number): void {
   bucket.charsOut += Math.max(0, charsOut);
 }
 
-export function trackGeminiUsage(charsIn: number, charsOut: number): void {
+export function trackGeminiUsage(
+  charsIn: number,
+  charsOut: number,
+  meta?: LedgerTrackMeta,
+): void {
   bump(state.gemini, charsIn, charsOut);
-  trackLedgerGemini(charsIn, charsOut);
+  trackLedgerGemini(charsIn, charsOut, meta);
 }
 
 export function trackMapsUsage(label = 'maps'): void {
   bump(state.maps, label.length, 0);
-  trackLedgerMaps(label);
+  let module: import('../diagnostics/costRates').CostModuleId = 'maps';
+  try {
+    if (useFinnusStore.getState().navActive) module = 'nav';
+  } catch {
+    /* store may be unavailable in tests */
+  }
+  trackLedgerMaps(label, module);
 }
 
-export function trackTtsUsage(chars: number, cloud = false): void {
+export function trackTtsUsage(
+  chars: number,
+  cloud = false,
+  meta?: LedgerTrackMeta,
+): void {
   if (!cloud) {
     bump(state.tts, chars, 0);
     return;
   }
   bump(state.tts, chars, chars);
-  trackLedgerTts(chars, true);
+  trackLedgerTts(chars, true, meta);
 }
 
 export type ApiUsageSnapshot = {
@@ -82,12 +93,13 @@ export type ApiUsageSnapshot = {
 };
 
 export function getApiUsageSnapshot(): ApiUsageSnapshot {
-  const geminiEur =
-    (state.gemini.charsIn / 1_000_000) * GEMINI_IN_PER_M +
-    (state.gemini.charsOut / 1_000_000) * GEMINI_OUT_PER_M;
-  const mapsEur = state.maps.requests * MAPS_PER_CALL;
-  const ttsEur =
-    (state.tts.charsOut / 1000) * TTS_CLOUD_PER_1K;
+  const geminiEurVal = geminiEur(
+    state.gemini.charsIn,
+    state.gemini.charsOut,
+    'conservative',
+  );
+  const mapsEurVal = mapsEur(state.maps.requests, 'conservative');
+  const ttsEurVal = ttsEur(state.tts.charsOut, 'conservative');
   return {
     geminiRequests: state.gemini.requests,
     geminiCharsIn: state.gemini.charsIn,
@@ -95,12 +107,16 @@ export function getApiUsageSnapshot(): ApiUsageSnapshot {
     mapsRequests: state.maps.requests,
     ttsRequests: state.tts.requests,
     ttsChars: state.tts.charsOut,
-    estimatedEur: geminiEur + mapsEur + ttsEur,
+    estimatedEur: geminiEurVal + mapsEurVal + ttsEurVal,
     sessionMinutes: Math.max(
       0,
       Math.round((Date.now() - state.startedAtMs) / 60_000),
     ),
-    breakdown: { geminiEur, mapsEur, ttsEur },
+    breakdown: {
+      geminiEur: geminiEurVal,
+      mapsEur: mapsEurVal,
+      ttsEur: ttsEurVal,
+    },
   };
 }
 

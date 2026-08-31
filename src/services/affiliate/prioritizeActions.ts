@@ -30,7 +30,7 @@ const PRIORITY: Record<QuickActionType, number> = {
 
 /** Hard-Cap für Spickzettel — default 3; Event-Turns bis 4. */
 export const MAX_QUICK_ACTIONS = 4;
-export const MAX_EVENT_QUICK_ACTIONS = 4;
+export const MAX_EVENT_QUICK_ACTIONS = 5;
 
 /** Mehrere Routen-Chips — Events dürfen bis 3 Nav-Buttons. */
 const MAX_NAV_ACTIONS = 2;

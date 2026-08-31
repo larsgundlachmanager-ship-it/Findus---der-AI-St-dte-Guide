@@ -18,6 +18,7 @@ web-build/
 *.gguf
 *.onnx
 .tmp-espeak/
+.tmp/
 .tmp-*/
 .tmp-*.txt
 tsc-*.txt
@@ -41,8 +42,10 @@ assets/onboarding/remote-covers/*.png
 releases/
 .tools/
 
-# Research paste leftovers
-data/staedte/*.gemini-*.md
+data/staedte/*.map.json
+data/staedte/.places-cache.json
+data/staedte/_refresh_all_state.json
+data/staedte/_upload_hashes.json
 GEMINI-STIMMEN-PASTE.md
 src/assets/audio/_female_audit/
 
@@ -51,6 +54,12 @@ credentials.json
 *service-account*.json
 google-play-*.json
 pc-api-*.json
+
+# Founder weekly report artifacts (may include user feedback text)
+reports/weekly/*.md
+reports/weekly/*.slack.txt
+reports/weekly/*.json
+!reports/weekly/.gitkeep.md
 
 
 # Local Google/Firebase JSON dumps

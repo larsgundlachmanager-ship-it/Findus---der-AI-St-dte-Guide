@@ -8,13 +8,10 @@ import { AppState, type AppStateStatus } from 'react-native';
 import { useFinnusStore } from '../store/useFinnusStore';
 import { getCachedUserProfile } from './userProfileService';
 import {
-  speakAssistantText,
-  getVoiceSettingsForTour,
-} from './ttsService';
-import {
   buildWeatherRoutingAdjustment,
   type WeatherRoutingAdjustment,
 } from './weather/weatherRouting';
+import { markRainWarnSessionStart } from './weather/rainWarnSessionGate';
 
 const STATE_PATH = `${FileSystem.documentDirectory}findus-weather-cache.json`;
 const FETCH_MS = 8_000;
@@ -51,8 +48,10 @@ export type WeatherSnapshot = {
   warned5ForRainAt?: number | null;
   /** Schon Voice-Alert für aktuellen Starkregen-Zustand */
   warnedHeavyRainAtMs: number | null;
-  /** Minuten bis Regen (minutely) */
+  /** Minuten bis Regen (minutely) — Snapshot; HUD live aus nextRainAtMs */
   rainStartsInMin?: number | null;
+  /** Ende des aktuellen Regenfensters (ms), wenn belegt */
+  rainEndsAtMs?: number | null;
   rainWindows?: Array<{ startMs: number; endMs: number; pop: number }>;
   /** Sonnenuntergang (ms), wenn von OWM bekannt */
   sunsetMs?: number | null;
@@ -60,12 +59,15 @@ export type WeatherSnapshot = {
   currentTempC?: number | null;
   /** Tageshoch bis Abend °C */
   dayHighC?: number | null;
+  /** Morgen kurz, nur belegt */
+  tomorrowSummary?: string | null;
+  /** Tiefstwert heute Nacht °C (jetzt bis morgen früh) */
+  nightLowC?: number | null;
 };
 
 let cache: WeatherSnapshot | null = null;
 let tickTimer: ReturnType<typeof setInterval> | null = null;
 let appStateSub: { remove: () => void } | null = null;
-let speakingWarn = false;
 let started = false;
 
 function haversineKm(
@@ -126,39 +128,40 @@ function buildColloquialSummary(opts: {
   weatherLabel: string | null;
   isHeavyRain: boolean;
 }): string {
-  const t =
-    opts.temp != null ? `So um die ${Math.round(opts.temp)} Grad` : 'Wetter gerade unklar';
-  if (opts.isHeavyRain) {
-    return `${t}, und draußen regnet es stark (${opts.weatherLabel ?? 'Regen'}).`;
+  try {
+    const { weatherSpokenLine } = require('./tts/offlinePhraseBank') as {
+      weatherSpokenLine: (o: {
+        tempC: number | null;
+        rainProbNext: number;
+        gustKmh: number | null;
+        rainSoonClock: string | null;
+        isHeavyRain: boolean;
+      }) => string;
+    };
+    return weatherSpokenLine({
+      tempC: opts.temp,
+      rainProbNext: opts.rainProbNext,
+      gustKmh: opts.gust,
+      rainSoonClock: opts.rainSoonClock,
+      isHeavyRain: opts.isHeavyRain,
+    });
+  } catch {
+    const t =
+      opts.temp != null
+        ? `So um die ${Math.round(opts.temp)} Grad`
+        : 'Wetter gerade unklar';
+    if (opts.isHeavyRain) return `${t}, und draußen regnet es stark.`;
+    if (opts.rainProbNext >= RAIN_PROB_THRESHOLD && opts.rainSoonClock) {
+      return `${t}, und ab ca. ${opts.rainSoonClock} sieht's nach Regen aus.`;
+    }
+    if (opts.gust != null && opts.gust >= 40) {
+      return `${t}, aber mit ordentlich Wind.`;
+    }
+    if (opts.rainProbNext >= 20) {
+      return `${t}, Schauer möglich — kein sicheres Trocken.`;
+    }
+    return `${t}, trocken bis zum Abend.`;
   }
-  if (opts.rainProbNext >= RAIN_PROB_THRESHOLD && opts.rainSoonClock) {
-    return `${t}, und ab ca. ${opts.rainSoonClock} sieht's nach Regen aus (ca. ${opts.rainProbNext} %).`;
-  }
-  if (opts.gust != null && opts.gust >= 40) {
-    return `${t}, aber mit ordentlich Wind — Böen bis so ${Math.round(opts.gust)} km/h.`;
-  }
-  // 20–44 %: nicht als „trocken“ verkaufen
-  if (opts.rainProbNext >= 20 && opts.rainProbNext < RAIN_PROB_THRESHOLD) {
-    return `${t}, Schauer möglich (ca. ${opts.rainProbNext} %) — kein sicheres Trocken${
-      opts.weatherLabel ? ` (${opts.weatherLabel})` : ''
-    }.`;
-  }
-  if (opts.rainProbNext < 20) {
-    return `${t}, trocken bis zum Abend${opts.weatherLabel ? ` (${opts.weatherLabel})` : ''}.`;
-  }
-  return `${t}, Regenrisiko so bei ${opts.rainProbNext} %.`;
-}
-
-async function speakWeatherLine(speech: string): Promise<void> {
-  const voice = await getVoiceSettingsForTour();
-  useFinnusStore.getState().addChatMessage({
-    role: 'assistant',
-    content: speech,
-  });
-  await speakAssistantText(speech, {
-    voiceId: voice.voiceId,
-    speechRate: voice.speechRate,
-  });
 }
 
 function resolveCoords(): { lat: number; lng: number } | null {
@@ -171,93 +174,13 @@ function resolveCoords(): { lat: number; lng: number } | null {
 }
 
 async function maybeWarnHeavyRain(snap: WeatherSnapshot): Promise<void> {
-  if (!snap.isHeavyRain) return;
-  if (speakingWarn) return;
-  const store = useFinnusStore.getState();
-  if (store.isPlayingAudio || store.isListening || store.isGenerating) return;
-
-  // Höchstens alle 45 Min erneut
-  if (
-    snap.warnedHeavyRainAtMs != null &&
-    Date.now() - snap.warnedHeavyRainAtMs < 45 * 60_000
-  ) {
-    return;
-  }
-
-  const routing = buildWeatherRoutingAdjustment({
-    weatherCode: snap.weatherCode,
-    precipitationMm: snap.precipitationMm,
-  });
-  if (!routing.voiceAlert) return;
-
-  speakingWarn = true;
-  try {
-    await speakWeatherLine(routing.voiceAlert);
-    await saveCache({
-      ...snap,
-      warnedHeavyRainAtMs: Date.now(),
-    });
-  } catch (err) {
-    console.warn('[weather] heavy-rain warn failed:', err);
-  } finally {
-    speakingWarn = false;
-  }
+  // Aktueller Starkregen wird nicht angesagt — User merkt nasse Straße selbst.
+  void snap;
 }
 
 async function maybeWarnRain(snap: WeatherSnapshot): Promise<void> {
-  if (snap.isHeavyRain) {
-    await maybeWarnHeavyRain(snap);
-    return;
-  }
-  if (speakingWarn) return;
-  if (snap.nextRainAtMs == null) return;
-  const store = useFinnusStore.getState();
-  if (store.isPlayingAudio || store.isListening || store.isGenerating) return;
-
-  const mins = (snap.nextRainAtMs - Date.now()) / 60_000;
-  if (mins < 0 || mins > 35) return;
-
-  let kind: '30' | '10' | '5' | null = null;
-  if (mins <= 5 && snap.warned5ForRainAt !== snap.nextRainAtMs) {
-    kind = '5';
-  } else if (mins <= 12 && snap.warned10ForRainAt !== snap.nextRainAtMs) {
-    kind = '10';
-  } else if (
-    mins <= 32 &&
-    mins > 12 &&
-    snap.warned30ForRainAt !== snap.nextRainAtMs
-  ) {
-    kind = '30';
-  }
-  if (!kind) return;
-
-  const clock = new Date(snap.nextRainAtMs).toTimeString().slice(0, 5);
-  const prob = snap.nextRainProb != null ? ` so ${Math.round(snap.nextRainProb)} Prozent` : '';
-  const speech =
-    kind === '5'
-      ? `Gleich wird's nass — in etwa ${Math.max(1, Math.round(mins))} Minuten Regen ab so ${clock}.`
-      : kind === '10'
-      ? `Kurzer Wetter-Check: in ungefähr zehn Minuten kann's nass werden — Prognose ab so ${clock}${prob ? `, Wahrscheinlichkeit${prob}` : ''}.`
-      : `Hey, Wetter-Update: in etwa einer halben Stunde sieht's nach Regen aus — so ab ${clock}${prob ? ` (${prob.trim()} Chance)` : ''}. Café oder Indoor, oder ist dir Regen egal?`;
-
-  speakingWarn = true;
-  try {
-    await speakWeatherLine(speech);
-    const next: WeatherSnapshot = {
-      ...snap,
-      warned30ForRainAt:
-        kind === '30' ? snap.nextRainAtMs : snap.warned30ForRainAt,
-      warned10ForRainAt:
-        kind === '10' ? snap.nextRainAtMs : snap.warned10ForRainAt,
-      warned5ForRainAt:
-        kind === '5' ? snap.nextRainAtMs : snap.warned5ForRainAt ?? null,
-    };
-    await saveCache(next);
-  } catch (err) {
-    console.warn('[weather] rain warn failed:', err);
-  } finally {
-    speakingWarn = false;
-  }
+  // Stimme: nur weatherTracker (30 und 5 Min). Hier kein zweites „es regnet“.
+  void snap;
 }
 
 /**
@@ -267,12 +190,51 @@ async function maybeWarnRain(snap: WeatherSnapshot): Promise<void> {
 export async function ensureWeatherFresh(
   reason: 'open' | 'tick' | 'force' = 'tick',
   coords?: { lat: number; lng: number } | null,
+  opts?: { userAsked?: boolean },
 ): Promise<WeatherSnapshot | null> {
   const prev = await loadCache();
   const c = coords ?? resolveCoords();
   if (!c) return prev;
 
+  // Proaktiv: Shared/Live nur nach 30 Min + GPS in Stadt.
+  // User-Frage oder Cache schon nass → Session-Gate überspringen.
+  const userAsked = opts?.userAsked === true;
+  if (!userAsked) {
+    try {
+      const { canFetchLiveWeather } = await import('./weather/weatherFetchGate');
+      const { isRainAlreadyFalling } = await import('./weather/rainIncomingPolicy');
+      const wetCache =
+        !!prev &&
+        isRainAlreadyFalling({
+          nowMs: Date.now(),
+          nextRainAtMs: prev.nextRainAtMs,
+          rainStartsInMin: prev.rainStartsInMin,
+          currentPrecipMm: prev.precipitationMm,
+          weatherCode: prev.weatherCode,
+        });
+      const gate = canFetchLiveWeather({
+        lat: c.lat,
+        lng: c.lng,
+        cityId: getCachedUserProfile()?.cityId ?? null,
+        bypassSession: wetCache || reason === 'force',
+      });
+      if (!gate.ok) {
+        if (prev) void maybeWarnRain(prev);
+        return prev;
+      }
+    } catch {
+      /* soft */
+    }
+  }
+
   let force = reason === 'force';
+  // Kaputte Legacy-Summary („Temperatur unklar“) → Soft-Refresh
+  if (
+    prev &&
+    /Temperatur unklar|Wetter gerade unklar/i.test(prev.summaryLine ?? '')
+  ) {
+    force = true;
+  }
   if (prev && haversineKm(prev.lat, prev.lng, c.lat, c.lng) > 15) {
     force = true;
   }
@@ -305,6 +267,8 @@ export async function ensureWeatherFresh(
             promptBlock: meteo.promptBlock,
             rainWindows: meteo.rainWindows,
             dayHighC: meteo.dayHighC ?? null,
+            tomorrowSummary: meteo.tomorrowSummary ?? null,
+            nightLowC: meteo.nightLowC ?? null,
           },
           prev,
         );
@@ -348,6 +312,8 @@ export async function ensureWeatherFresh(
             promptBlock: meteo.promptBlock,
             rainWindows: meteo.rainWindows,
             dayHighC: meteo.dayHighC ?? null,
+            tomorrowSummary: meteo.tomorrowSummary ?? null,
+            nightLowC: meteo.nightLowC ?? null,
           },
           prev,
         );
@@ -376,11 +342,14 @@ export async function ensureWeatherFreshFromOwm(
     nextRainAtMs: number | null;
     nextRainProb: number | null;
     rainStartsInMin: number | null;
+    rainEndsAtMs?: number | null;
     summaryLine: string;
     promptBlock: string;
     rainWindows: Array<{ startMs: number; endMs: number; pop: number }>;
     sunsetMs?: number | null;
     dayHighC?: number | null;
+    tomorrowSummary?: string | null;
+    nightLowC?: number | null;
   },
   prev?: WeatherSnapshot | null,
 ): Promise<WeatherSnapshot> {
@@ -388,8 +357,13 @@ export async function ensureWeatherFreshFromOwm(
   const isHeavy =
     (owm.currentPrecipMm ?? 0) > 2 ||
     (owm.currentWeatherId != null &&
-      owm.currentWeatherId >= 200 &&
-      owm.currentWeatherId < 600);
+      // OWM: 2xx Gewitter, 502+ starker Regen — nicht jeder Schauer
+      ((owm.currentWeatherId >= 200 && owm.currentWeatherId < 300) ||
+        owm.currentWeatherId === 502 ||
+        owm.currentWeatherId === 503 ||
+        owm.currentWeatherId === 504 ||
+        owm.currentWeatherId === 522 ||
+        owm.currentWeatherId === 531));
   const dayHigh =
     owm.dayHighC ??
     (() => {
@@ -425,11 +399,17 @@ export async function ensureWeatherFreshFromOwm(
     warnedHeavyRainAtMs:
       prior && prior.isHeavyRain && isHeavy ? prior.warnedHeavyRainAtMs : null,
     rainStartsInMin: owm.rainStartsInMin,
+    rainEndsAtMs: owm.rainEndsAtMs ?? null,
     rainWindows: owm.rainWindows,
     sunsetMs: owm.sunsetMs ?? prior?.sunsetMs ?? null,
     currentTempC: owm.currentTemp,
     dayHighC:
       dayHigh != null && Number.isFinite(dayHigh) ? dayHigh : prior?.dayHighC ?? null,
+    tomorrowSummary: owm.tomorrowSummary ?? prior?.tomorrowSummary ?? null,
+    nightLowC:
+      owm.nightLowC != null && Number.isFinite(owm.nightLowC)
+        ? owm.nightLowC
+        : prior?.nightLowC ?? null,
   };
   await saveCache(snap);
 
@@ -505,6 +485,7 @@ export function startWeatherMonitor(): () => void {
     return () => undefined;
   }
   started = true;
+  markRainWarnSessionStart();
 
   void ensureWeatherFresh('open');
   // Modul-4 Tracker ist SSOT für OWM-Taktung (Sleep / Rain-Watch / Hysterese)

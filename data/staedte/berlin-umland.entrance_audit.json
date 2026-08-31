@@ -1,1615 +1,320 @@
 {
   "city_id": "berlin-umland",
   "apply": true,
+  "storyOnly": true,
   "maxDelta": 80,
+  "country": "Germany",
   "summary": {
-    "ok": 78,
-    "check": 2,
-    "bad": 14,
+    "ok": 0,
+    "check": 1,
+    "bad": 4,
     "errors": 0,
-    "applied": 3
+    "applied": 1,
+    "skipped_directory": 10103,
+    "skipped_cached_google": 24
   },
   "rows": [
     {
-      "id": "berlin_tempelhofer_hafen_berlin",
-      "name": "Tempelhofer Hafen, Berlin",
-      "before": {
-        "lat": 52.45567038,
-        "lng": 13.385798840000001
-      },
-      "google": {
-        "lat": 52.4557099,
-        "lng": 13.3858637,
-        "place_id": "ChIJB3zXilZFqEcR3Ny1GCeM9Ks",
-        "address": "Tempelhofer Damm 227, 12099 Berlin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "berlin_natur_park_sudgelande",
-      "name": "Natur Park Südgelände",
-      "before": {
-        "lat": 52.45912888,
-        "lng": 13.35684394
-      },
-      "google": {
-        "lat": 52.4591684,
-        "lng": 13.3569088,
-        "place_id": "ChIJ1Z88_QhQqEcRnKDiC6q65KQ",
-        "address": "Prellerweg 47-49, 12157 Berlin-Bezirk Tempelhof-Schöneberg"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "berlin_nordeingang_naturpark_schoneberger_sudgelande",
-      "name": "Nordeingang Naturpark Schöneberger Südgelände",
-      "before": {
-        "lat": 52.46991018,
-        "lng": 13.36223742
-      },
-      "google": {
-        "lat": 52.4699497,
-        "lng": 13.3623023,
-        "place_id": "ChIJNwDk2qFRqEcRu7lR2y4aU6o",
-        "address": "Fußgängerbrücke zum Ein- Ausgang Naturpark Schöneberger Südgelände, Unnamed Road, 10829 Berlin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
       "id": "berlin_berlin_treptower_park",
       "name": "Berlin Treptower Park",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.493926380000005,
-        "lng": 13.461321380000001
-      },
-      "google": {
-        "lat": 52.4939659,
-        "lng": 13.4613863,
-        "place_id": "ChIJWVbXxhhPqEcR3OZE5GXI9I4",
-        "address": "Puschkinallee, Elsenstraße, 12435 Berlin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 52.53834845890411,
+        "lng": 13.205419147945204
+      }
     },
     {
       "id": "berlin_grunewaldturm",
       "name": "Grunewaldturm",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.47819398,
-        "lng": 13.1967297
-      },
-      "google": {
-        "lat": 52.4782335,
-        "lng": 13.1967946,
-        "place_id": "ChIJUy9z9ipYqEcRxve7L7iEBd4",
-        "address": "Havelchaussee 61, 14193 Berlin-Bezirk Charlottenburg-Wilmersdorf"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.478218500000004,
+        "lng": 13.196704125000002
+      }
     },
     {
       "id": "berlin_wolkenhain_auf_dem_kienberg",
       "name": "Wolkenhain auf dem Kienberg",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.53476578,
-        "lng": 13.581088119999999
-      },
-      "google": {
-        "lat": 52.5348053,
-        "lng": 13.5811531,
-        "place_id": "ChIJb87cPMVLqEcRDi-7R_f-4Oo",
-        "address": "Hellersdorfer Straße, GHMJ+GM, Auf dem Kienberg 159, 12619 Berlin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.53482399999999,
+        "lng": 13.580990722222225
+      }
     },
     {
       "id": "berlin_aussichtsturm_am_vogelschutz_reservat",
       "name": "Aussichtsturm am Vogelschutz-Reservat",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.568044480000005,
-        "lng": 13.28240438
-      },
-      "google": {
-        "lat": 52.568084,
-        "lng": 13.2824694,
-        "place_id": "ChIJQakrdwBVqEcRULDvpKAblTY",
-        "address": "Tegel, 13405 Berlin-Bezirk Reinickendorf"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "berlin_evangelische_freikirche_leuchtturm",
-      "name": "Evangelische Freikirche Leuchtturm",
-      "before": {
-        "lat": 52.504610979999995,
-        "lng": 13.58153206
-      },
-      "google": {
-        "lat": 52.5046505,
-        "lng": 13.581597,
-        "place_id": "ChIJc3Mk1p5JqEcRUo13INJDWvo",
-        "address": "Chemnitzer Str. 5, 12621 Berlin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 52.5383472142857,
+        "lng": 13.205404964285714
+      }
     },
     {
       "id": "berlin_kleiner_aussichtsturm_altes_schachklubhaus",
       "name": "Kleiner Aussichtsturm \"Altes Schachklubhaus\"",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.47102908000001,
-        "lng": 13.41664972
-      },
-      "google": {
-        "lat": 52.4710686,
-        "lng": 13.4167146,
-        "place_id": "ChIJfZwoTwBPqEcRaHg-K7noUsI",
-        "address": "Oderstraße 174, 12049 Berlin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "berlin_citygolf_berlin",
-      "name": "Citygolf Berlin",
-      "before": {
-        "lat": 52.56301268,
-        "lng": 13.56931358
-      },
-      "google": {
-        "lat": 52.56305219999999,
-        "lng": 13.5693786,
-        "place_id": "ChIJh4MjlpxLqEcRm3pzvXf8qKA",
-        "address": "Wittenberger Str. 50, 12689 Berlin-Bezirk Marzahn-Hellersdorf"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "berlin_3d_schwarzlicht_minigolf_berlin",
-      "name": "3D Schwarzlicht-Minigolf Berlin",
-      "before": {
-        "lat": 52.45511858,
-        "lng": 13.388056839999999
-      },
-      "google": {
-        "lat": 52.4983833,
-        "lng": 13.4336923,
-        "place_id": "ChIJjc74IU1OqEcR9uDoOKSh3bI",
-        "address": "im Görlitzer Park, Görlitzer Str. 1/Haus 1, 10997 Berlin"
-      },
-      "delta_m": 5718,
-      "status": "BAD",
-      "streetview": "OK"
-    },
-    {
-      "id": "berlin_stadt_sportplatz_freizeitsportanlage",
-      "name": "Städt. Sportplatz Freizeitsportanlage",
-      "before": {
-        "lat": 52.51836688000001,
-        "lng": 13.19229154
-      },
-      "google": {
-        "lat": 52.5184064,
-        "lng": 13.1923565,
-        "place_id": "ChIJDUGF1bVXqEcRpvNhy_wU7Ww",
-        "address": "Am Südpark 51, 13595 Berlin-Bezirk Spandau"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 52.5383472142857,
+        "lng": 13.205404964285714
+      }
     },
     {
       "id": "berlin_altstadt_spandau",
       "name": "Altstadt Spandau",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.53718778,
-        "lng": 13.205062419999999
-      },
-      "google": {
-        "lat": 52.5372273,
-        "lng": 13.2051274,
-        "place_id": "ChIJaSgVmEZWqEcR0ApglyGwfXY",
-        "address": "Markt 6, 13597 Berlin-Bezirk Spandau"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 52.53834839767442,
+        "lng": 13.205397976744184
+      }
     },
     {
       "id": "berlin_altstadt_kopenick",
       "name": "Altstadt Köpenick",
       "before": {
-        "lat": 52.44630748000001,
-        "lng": 13.57491546
+        "lat": 52.5383472142857,
+        "lng": 13.205404964285714
       },
       "google": {
         "lat": 52.4465583,
-        "lng": 13.576064,
+        "lng": 13.576063999999999,
         "place_id": "ChIJ5Vx2t3FIqEcRHGz1Gtuions",
-        "address": "12555, Rosenstraße, 12555 Berlin"
+        "address": "12555, Rosenstraße, 12555 Berlin, Germany"
       },
-      "delta_m": 83,
+      "delta_m": 27091,
       "status": "BAD",
-      "streetview": "OK",
-      "applied": true
+      "streetview": "OK"
     },
     {
       "id": "berlin_behnitz_kolk_alteste_siedlungsgebiet_innerhalb_der_altstadt_spandau",
       "name": "Behnitz / Kolk älteste Siedlungsgebiet innerhalb der Altstadt Spandau",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.539401180000006,
-        "lng": 13.207525319999998
-      },
-      "google": {
-        "lat": 52.5394407,
-        "lng": 13.2075903,
-        "place_id": "ChIJLRArs75XqEcRB6BfXmP8RFo",
-        "address": "Kolk 5, 13597 Berlin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "berlin_alter_dorfkern_marzahn",
-      "name": "alter Dorfkern Marzahn",
-      "before": {
-        "lat": 52.54328538,
-        "lng": 13.5604918
-      },
-      "google": {
-        "lat": 52.54332489999999,
-        "lng": 13.5605568,
-        "place_id": "ChIJxZ6CRgBLqEcRL_n7NpIt5uI",
-        "address": "Alt-Marzahn 48, 12685 Berlin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.539418624999996,
+        "lng": 13.20756125
+      }
     },
     {
       "id": "berlin_aussichtspunkt_drachenberg",
       "name": "Aussichtspunkt Drachenberg",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.50237958,
-        "lng": 13.24965496
-      },
-      "google": {
-        "lat": 52.5024191,
-        "lng": 13.2497199,
-        "place_id": "ChIJOfjH2PpXqEcRsE8Y4op_3-Y",
-        "address": "Unnamed Road, 14055 Berlin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.5383472142857,
+        "lng": 13.205404964285714
+      }
     },
     {
       "id": "berlin_aussichtspunkt_am_koppchensee",
       "name": "Aussichtspunkt am Köppchensee",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.62638598000001,
-        "lng": 13.374002380000002
-      },
-      "google": {
-        "lat": 52.6264255,
-        "lng": 13.3740675,
-        "place_id": "ChIJi598XmdTqEcRJYkBq53HYMw",
-        "address": "13159 Berlin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.5383472142857,
+        "lng": 13.205404964285714
+      }
     },
     {
       "id": "berlin_drachenberg",
       "name": "Drachenberg",
       "before": {
-        "lat": 52.502738480000005,
-        "lng": 13.24799106
+        "lat": 52.5383472142857,
+        "lng": 13.205404964285714
       },
       "google": {
-        "lat": 52.5022387,
-        "lng": 13.2486413,
-        "place_id": "ChIJ4cV5PjxXqEcRg8VuwJRqx64",
-        "address": "Teufelsseechaussee 2, 14193 Berlin-Bezirk Charlottenburg-Wilmersdorf"
+        "lat": 52.502778,
+        "lng": 13.248056,
+        "place_id": "ChIJi5tkSDxXqEcRXLBgT53cvoE",
+        "address": "Drachenberg, 14055 Berlin, Germany"
       },
-      "delta_m": 71,
-      "status": "CHECK",
-      "streetview": "ZERO_RESULTS",
-      "applied": true
+      "delta_m": 4896,
+      "status": "BAD",
+      "streetview": "OK"
     },
     {
       "id": "berlin_berliner_panorama",
       "name": "Berliner-Panorama",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.56650508,
-        "lng": 13.47040178
-      },
-      "google": {
-        "lat": 52.5209828,
-        "lng": 13.3940778,
-        "place_id": "ChIJQ18KmuVRqEcR1FOxCIqMflU",
-        "address": "Am Kupfergraben 2, 10117 Berlin"
-      },
-      "delta_m": 7229,
-      "status": "BAD",
-      "streetview": "OK"
-    },
-    {
-      "id": "berlin_panorama_bar",
-      "name": "Panorama Bar",
-      "before": {
-        "lat": 52.47666027999999,
-        "lng": 13.328845699999999
-      },
-      "google": {
-        "lat": 52.51106910000001,
-        "lng": 13.4429945,
-        "place_id": "ChIJn17Gi0NOqEcRfHX8oRvU9ms",
-        "address": "Am Wriezener bhf, 10243 Berlin"
-      },
-      "delta_m": 8623,
-      "status": "BAD",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.5383472142857,
+        "lng": 13.205404964285714
+      }
     },
     {
       "id": "berlin_neukollner_oper_e_v",
       "name": "Neuköllner Oper e.V.",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.47755518,
-        "lng": 13.439108300000001
-      },
-      "google": {
-        "lat": 52.4775947,
-        "lng": 13.4391732,
-        "place_id": "ChIJkdlx2qNPqEcRHXPu-DsuErI",
-        "address": "Karl-Marx-Straße 131/133, 12043 Berlin-Bezirk Neukölln"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "berlin_rundwanderweg_eichwerder_moorwiesen",
-      "name": "Rundwanderweg Eichwerder Moorwiesen",
-      "before": {
-        "lat": 52.62556008,
-        "lng": 13.367419280000002
-      },
-      "google": {
-        "lat": 52.6270445,
-        "lng": 13.3377671,
-        "place_id": "ChIJVSYvqE9TqEcR6orb4mxjgRA",
-        "address": "13469 Berlin"
-      },
-      "delta_m": 2008,
-      "status": "BAD",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "berlin_wuhletal_wanderweg",
-      "name": "Wuhletal-Wanderweg",
-      "before": {
-        "lat": 52.528967980000004,
-        "lng": 13.58447542
-      },
-      "google": {
-        "lat": 52.5487166,
-        "lng": 13.5861957,
-        "place_id": "ChIJP9IcZblLqEcR8wNKAqprF3Q",
-        "address": "12685 Berlin"
-      },
-      "delta_m": 2199,
-      "status": "BAD",
-      "streetview": "OK"
-    },
-    {
-      "id": "berlin_havelhohenweg",
-      "name": "Havelhöhenweg",
-      "before": {
-        "lat": 52.46410958,
-        "lng": 13.19606522
-      },
-      "google": {
-        "lat": 52.46414910000001,
-        "lng": 13.1961301,
-        "place_id": "ChIJCxNHR-hZqEcRoR3eHqKxMCE",
-        "address": "Havelchaussee, 14193 Berlin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "berlin_eichwerder_moorwiesen",
-      "name": "Eichwerder Moorwiesen",
-      "before": {
-        "lat": 52.627004979999995,
-        "lng": 13.33770198
-      },
-      "google": {
-        "lat": 52.6270445,
-        "lng": 13.3377671,
-        "place_id": "ChIJVSYvqE9TqEcR6orb4mxjgRA",
-        "address": "13469 Berlin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "berlin_wanderweg_an_der_panke",
-      "name": "Wanderweg an der Panke",
-      "before": {
-        "lat": 52.58522957999999,
-        "lng": 13.43085514
-      },
-      "google": {
-        "lat": 52.5852691,
-        "lng": 13.4309202,
-        "place_id": "ChIJe_lnJIBTqEcR7aH9OeH6qHk",
-        "address": "Pasewalker Str. 111, 13127 Berlin-Bezirk Pankow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "berlin_uferweg",
-      "name": "Uferweg",
-      "before": {
-        "lat": 52.451519680000004,
-        "lng": 13.575463439999998
-      },
-      "google": {
-        "lat": 52.5034248,
-        "lng": 13.4432014,
-        "place_id": "ChIJdYpmkhdPqEcRs3stOOt9Xas",
-        "address": "Unnamed Road, 10243 Berlin"
-      },
-      "delta_m": 10656,
-      "status": "BAD",
-      "streetview": "OK"
-    },
-    {
-      "id": "berlin_wanderweg_entlang_der_neuen_wuhle",
-      "name": "Wanderweg entlang der Neuen Wuhle",
-      "before": {
-        "lat": 52.565724980000006,
-        "lng": 13.55218428
-      },
-      "google": {
-        "lat": 52.5487166,
-        "lng": 13.5861957,
-        "place_id": "ChIJP9IcZblLqEcR8wNKAqprF3Q",
-        "address": "12685 Berlin"
-      },
-      "delta_m": 2977,
-      "status": "BAD",
-      "streetview": "OK"
-    },
-    {
-      "id": "berlin_waldlehrpfad_hermsdorf",
-      "name": "Waldlehrpfad Hermsdorf",
-      "before": {
-        "lat": 52.60971918,
-        "lng": 13.2818172
-      },
-      "google": {
-        "lat": 52.6097587,
-        "lng": 13.2818823,
-        "place_id": "ChIJl7wkUfBUqEcR2JrsRMyYSkM",
-        "address": "Unnamed Road, 13467, Berlin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "berlin_ehrenpfortenberg",
-      "name": "Ehrenpfortenberg",
-      "before": {
-        "lat": 52.61396508,
-        "lng": 13.2712976
-      },
-      "google": {
-        "lat": 52.61400459999999,
-        "lng": 13.2713627,
-        "place_id": "ChIJq-OWIuNUqEcRss7xVlPUFRM",
-        "address": "13503 Berlin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.47756832,
+        "lng": 13.439327259999999
+      }
     },
     {
       "id": "berlin_berliner_mauerweg",
       "name": "Berliner Mauerweg",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.526694080000006,
-        "lng": 13.37425494
-      },
-      "google": {
-        "lat": 52.6124055,
-        "lng": 13.3779906,
-        "place_id": "ChIJYbq9miJTqEcRrEBQYCTeHTA",
-        "address": "Berliner Mauerweg, 13159 Berlin-Bezirk Pankow"
-      },
-      "delta_m": 9534,
-      "status": "BAD",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "berlin_gb_infravelo_gmbh",
-      "name": "GB infraVelo GmbH",
-      "before": {
-        "lat": 52.45329718000001,
-        "lng": 13.385269639999999
-      },
-      "google": {
-        "lat": 52.45333669999999,
-        "lng": 13.3853345,
-        "place_id": "ChIJ--WGD5ZFqEcR94bgea3wEjk",
-        "address": "Ullsteinhaus, Mariendorfer Damm 1, 12099 Berlin-Bezirk Tempelhof-Schöneberg"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "berlin_mauerradweg_rapsfelder_berlin_schonefeld",
-      "name": "Mauerradweg Rapsfelder Berlin Schönefeld",
-      "before": {
-        "lat": 52.40856628,
-        "lng": 13.4729457
-      },
-      "google": {
-        "lat": 52.4086058,
-        "lng": 13.4730105,
-        "place_id": "ChIJ-eq8OwBFqEcRejDUGjGo0kM",
-        "address": "Groß-Ziethener Ch 172, 12355 Berlin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 52.4435317891892,
+        "lng": 13.573882605405407
+      }
     },
     {
       "id": "berlin_fahrradweg_am_mauerweg_und_kanal",
       "name": "Fahrradweg am Mauerweg und Kanal",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.442639580000005,
-        "lng": 13.47882286
-      },
-      "google": {
-        "lat": 52.4543919,
-        "lng": 13.4605328,
-        "place_id": "ChIJK9mkBY9PqEcRpt5NHfowIck",
-        "address": "Baumschulenweg, 12359 Berlin"
-      },
-      "delta_m": 1801,
-      "status": "BAD",
-      "streetview": "OK"
-    },
-    {
-      "id": "berlin_grunes_band_berlin_schonholz",
-      "name": "Grünes Band Berlin - Schönholz",
-      "before": {
-        "lat": 52.57869678000001,
-        "lng": 13.36933396
-      },
-      "google": {
-        "lat": 52.5787363,
-        "lng": 13.369399,
-        "place_id": "ChIJW4SUHONTqEcRVecFz1sugAI",
-        "address": "Mittelsteg 38A, 13158 Berlin-Bezirk Pankow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "berlin_kickerworld_berlin_spandau",
-      "name": "Kickerworld Berlin Spandau",
-      "before": {
-        "lat": 52.54886398,
-        "lng": 13.226584200000001
-      },
-      "google": {
-        "lat": 52.54890349999999,
-        "lng": 13.2266492,
-        "place_id": "ChIJ10Hq42NWqEcRRKFrQX9QOzM",
-        "address": "Kleine Eiswerderstraße 1, 13599 Berlin-Bezirk Spandau"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.44355940000001,
+        "lng": 13.573899200000005
+      }
     },
     {
       "id": "berlin_tierpark_berlin",
       "name": "Tierpark Berlin",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.502143880000006,
-        "lng": 13.53140836
-      },
-      "google": {
-        "lat": 52.5021834,
-        "lng": 13.5314733,
-        "place_id": "ChIJ3b92pjZJqEcR3P-0LbMptL8",
-        "address": "Am Tierpark 125, 10319 Berlin-Bezirk Lichtenberg"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "berlin_freizeitpark_lubars",
-      "name": "Freizeitpark Lübars",
-      "before": {
-        "lat": 52.612298880000004,
-        "lng": 13.3687612
-      },
-      "google": {
-        "lat": 52.6123384,
-        "lng": 13.3688263,
-        "place_id": "ChIJfZpLOz5TqEcR0GpG1_0__ho",
-        "address": "Alter Bernauer Heerweg, 13469 Berlin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "berlin_giraffenpfad",
-      "name": "Giraffenpfad",
-      "before": {
-        "lat": 52.50303118000001,
-        "lng": 13.53347066
-      },
-      "google": {
-        "lat": 52.50307069999999,
-        "lng": 13.5335356,
-        "place_id": "ChIJj58_VHBJqEcRvGRRciRGv-o",
-        "address": "Friedrichsfelde, 10319 Berlin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "berlin_barenschaufenster",
-      "name": "Bärenschaufenster",
-      "before": {
-        "lat": 52.49791808,
-        "lng": 13.523734480000002
-      },
-      "google": {
-        "lat": 52.4979576,
-        "lng": 13.5237994,
-        "place_id": "ChIJYf0IFaxJqEcRsKrbYrROZbs",
-        "address": "Am Tierpark 125, 10319 Berlin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "berlin_paintball_shop_berlin_paintattack",
-      "name": "Paintball Shop Berlin - Paintattack",
-      "before": {
-        "lat": 52.60650858,
-        "lng": 13.32449542
-      },
-      "google": {
-        "lat": 52.6065481,
-        "lng": 13.3245605,
-        "place_id": "ChIJ8TmvX9NTqEcR71yl4cfPge4",
-        "address": "Paintattack Paintball Shop, Auf dem OBI Parkplatz, Oraniendamm 70/Aufgang A, 13469 Berlin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "berlin_id_paintball_shop",
-      "name": "ID-Paintball Shop",
-      "before": {
-        "lat": 52.56513748,
-        "lng": 13.44552788
-      },
-      "google": {
-        "lat": 52.565177,
-        "lng": 13.4455929,
-        "place_id": "ChIJ45n2G5JNqEcRxpIUfjQdtRY",
-        "address": "Romain-Rolland-Straße 14-24, 13089 Berlin-Bezirk Pankow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 52.502425,
+        "lng": 13.5315146
+      }
     },
     {
       "id": "berlin_kunsthalle_am_hamburger_platz",
       "name": "KUNSTHALLE AM HAMBURGER PLATZ",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.556230479999996,
-        "lng": 13.43913498
-      },
-      "google": {
-        "lat": 52.55627,
-        "lng": 13.4392,
-        "place_id": "ChIJN-LXDvJNqEcRR2DUYC8Fzlw",
-        "address": "Gustav-Adolf-Straße 140, 13086 Berlin-Bezirk Pankow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 52.5560570909091,
+        "lng": 13.439373636363634
+      }
     },
     {
       "id": "berlin_schloss_schonhausen",
       "name": "Schloss Schönhausen",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.57830548,
-        "lng": 13.40563696
-      },
-      "google": {
-        "lat": 52.578345,
-        "lng": 13.405702,
-        "place_id": "ChIJm6npdWdSqEcRPDMYhH2JjeI",
-        "address": "Tschaikowskistraße 1, 13156 Berlin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.578324416666675,
+        "lng": 13.405680250000001
+      }
     },
     {
       "id": "berlin_jagdschloss_grunewald",
       "name": "Jagdschloss Grunewald",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.467319180000004,
-        "lng": 13.26135802
-      },
-      "google": {
-        "lat": 52.46735870000001,
-        "lng": 13.2614229,
-        "place_id": "ChIJzRr4mPhZqEcRsxzpAkOUDe0",
-        "address": "Hüttenweg 100, 14193 Berlin-Bezirk Steglitz-Zehlendorf"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.46735221052631,
+        "lng": 13.261376157894736
+      }
     },
     {
       "id": "berlin_schloss_kopenick",
       "name": "Schloss Köpenick",
       "before": {
-        "lat": 52.443582979999995,
-        "lng": 13.57326866
+        "lat": 52.44387999210527,
+        "lng": 13.57279518157895
       },
       "google": {
         "lat": 52.4436225,
-        "lng": 13.5733335,
+        "lng": 13.573333499999999,
         "place_id": "ChIJ11yF3yNOqEcRU4MuuNKEC9k",
-        "address": "Schlossinsel 1, 12557 Berlin-Bezirk Treptow-Köpenick"
+        "address": "Schlossinsel 1, 12557 Berlin-Bezirk Treptow-Köpenick, Germany"
       },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+      "delta_m": 46,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
     },
     {
       "id": "berlin_botanischer_garten_und_botanisches_museum",
       "name": "Botanischer Garten und Botanisches Museum",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.45415817999999,
-        "lng": 13.30553304
-      },
-      "google": {
-        "lat": 52.45419769999999,
-        "lng": 13.3055979,
-        "place_id": "ChIJC49cbXtaqEcR6I2NHP-sohU",
-        "address": "Königin-Luise-Straße 6-8, 14195 Berlin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.44355940000001,
+        "lng": 13.573899200000005
+      }
     },
     {
       "id": "berlin_gewachshauser_botanischer_garten_berlin",
       "name": "Gewächshäuser Botanischer Garten Berlin",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.45654908,
-        "lng": 13.307365440000002
-      },
-      "google": {
-        "lat": 52.4565886,
-        "lng": 13.3074303,
-        "place_id": "ChIJ5YUEKIhbqEcRqCsGqRBZ_T0",
-        "address": "Botanical Garden and Botanical Museum, 14195 Berlin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "berlin_botanischer_volkspark_blankenfelde_pankow",
-      "name": "Botanischer Volkspark Blankenfelde-Pankow",
-      "before": {
-        "lat": 52.60394948,
-        "lng": 13.397646920000003
-      },
-      "google": {
-        "lat": 52.603989,
-        "lng": 13.397712,
-        "place_id": "ChIJD8LsfOZSqEcRUBsz4sVkyII",
-        "address": "Blankenfelder Ch 5, 13159 Berlin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "berlin_mittelmeerhaus_im_botanischen_garten",
-      "name": "Mittelmeerhaus im Botanischen Garten",
-      "before": {
-        "lat": 52.45538388,
-        "lng": 13.30733924
-      },
-      "google": {
-        "lat": 52.4554234,
-        "lng": 13.3074041,
-        "place_id": "ChIJlc9Oqz5bqEcRQ4uH62147W8",
-        "address": "Lichterfelde, 14195 Berlin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "berlin_karl_foerster_garten_im_tierpark",
-      "name": "Karl Foerster Garten im Tierpark",
-      "before": {
-        "lat": 52.50592348,
-        "lng": 13.525593259999999
-      },
-      "google": {
-        "lat": 52.50596299999999,
-        "lng": 13.5256582,
-        "place_id": "ChIJLQ67FDVJqEcR8OMTPdw7vVo",
-        "address": "Alt-Friedrichsfelde 60, 10315 Berlin-Bezirk Lichtenberg"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "berlin_christlicher_garten",
-      "name": "Christlicher Garten",
-      "before": {
-        "lat": 52.536864879999996,
-        "lng": 13.577848319999998
-      },
-      "google": {
-        "lat": 52.5369044,
-        "lng": 13.5779133,
-        "place_id": "ChIJlYXHfsRLqEcRCemk_Kd9AHU",
-        "address": "Marzahn-Mitte, 12685 Berlin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.45651642307692,
+        "lng": 13.307340692307692
+      }
     },
     {
       "id": "berlin_unter_den_eichen_botanischer_garten",
       "name": "Unter den Eichen/Botanischer Garten",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.45160048,
-        "lng": 13.31034514
-      },
-      "google": {
-        "lat": 52.45164,
-        "lng": 13.31041,
-        "place_id": "ChIJZY3vDmJaqEcRronzsAnkMqg",
-        "address": "12203 Berlin, Deutschland"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 52.44355940000001,
+        "lng": 13.573899200000005
+      }
     },
     {
       "id": "berlin_britzer_garten",
       "name": "Britzer Garten",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.438681079999995,
-        "lng": 13.41283396
-      },
-      "google": {
-        "lat": 52.4387206,
-        "lng": 13.4128988,
-        "place_id": "ChIJYYLF9XRFqEcRcjMc_yXeNYE",
-        "address": "Sangerhauser Weg 1, 12349 Berlin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "berlin_arzneipflanzengarten_im_botanischen_garten",
-      "name": "Arzneipflanzengarten im Botanischen Garten",
-      "before": {
-        "lat": 52.45547638000001,
-        "lng": 13.30139734
-      },
-      "google": {
-        "lat": 52.45551589999999,
-        "lng": 13.3014622,
-        "place_id": "ChIJPxAYjNtbqEcRxYq68AiXSY8",
-        "address": "Lichterfelde, 14195 Berlin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "berlin_wildtiergehege_im_botanischen_volkspark",
-      "name": "Wildtiergehege im Botanischen Volkspark",
-      "before": {
-        "lat": 52.60684798,
-        "lng": 13.39737202
-      },
-      "google": {
-        "lat": 52.6068875,
-        "lng": 13.3974371,
-        "place_id": "ChIJP4T0su9TqEcROaRmXGzxN3U",
-        "address": "Blankenfelder Ch 7, 13159 Berlin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.44355940000001,
+        "lng": 13.573899200000005
+      }
     },
     {
       "id": "berlin_botanischer_garten",
       "name": "Botanischer Garten",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.44792048000001,
-        "lng": 13.30716514
-      },
-      "google": {
-        "lat": 52.45419769999999,
-        "lng": 13.3055979,
-        "place_id": "ChIJC49cbXtaqEcR6I2NHP-sohU",
-        "address": "Königin-Luise-Straße 6-8, 14195 Berlin"
-      },
-      "delta_m": 706,
-      "status": "BAD",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "berlin_japanischer_garten",
-      "name": "Japanischer Garten",
-      "before": {
-        "lat": 52.53845878,
-        "lng": 13.58018992
-      },
-      "google": {
-        "lat": 52.5384983,
-        "lng": 13.5802549,
-        "place_id": "ChIJzd5wGMRLqEcRZL7O7Az2NlI",
-        "address": "Eisenacher Str. 99, 12685 Berlin-Bezirk Marzahn-Hellersdorf"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.56414183333334,
+        "lng": 13.410919
+      }
     },
     {
       "id": "berlin_garten_der_welt",
       "name": "Gärten der Welt",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.53792158,
-        "lng": 13.56921322
-      },
-      "google": {
-        "lat": 52.5379611,
-        "lng": 13.5692782,
-        "place_id": "ChIJOwzNtsNLqEcR5oI4qHhyuxU",
-        "address": "Blumberger Damm 44, 12685 Berlin-Bezirk Marzahn-Hellersdorf"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "berlin_schlossgarten_schonhausen",
-      "name": "Schlossgarten Schönhausen",
-      "before": {
-        "lat": 52.57854838000001,
-        "lng": 13.40687926
-      },
-      "google": {
-        "lat": 52.5785879,
-        "lng": 13.4069443,
-        "place_id": "ChIJZ3HpNGRSqEcRvDif9o0_3oI",
-        "address": "Tschaikowskistraße 1, 13156 Berlin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "berlin_marina_lanke_berlin_ag",
-      "name": "Marina Lanke Berlin AG",
-      "before": {
-        "lat": 52.501968780000006,
-        "lng": 13.18588306
-      },
-      "google": {
-        "lat": 52.5020083,
-        "lng": 13.185948,
-        "place_id": "ChIJBc3VjpVXqEcR9e6-JQNRHrg",
-        "address": "Scharfe Lanke 109-131, 13595 Berlin-Bezirk Spandau"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "berlin_yachthafen_tempelhof",
-      "name": "Yachthafen Tempelhof",
-      "before": {
-        "lat": 52.455107080000005,
-        "lng": 13.386167140000001
-      },
-      "google": {
-        "lat": 52.4551466,
-        "lng": 13.386232,
-        "place_id": "ChIJR3lf5rBFqEcR0ArYS9-M8CU",
-        "address": "Lorenzweg 1, 12099 Berlin-Bezirk Tempelhof-Schöneberg"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "berlin_marina_base_hafen",
-      "name": "Marina Base Hafen",
-      "before": {
-        "lat": 52.50789658,
-        "lng": 13.19848086
-      },
-      "google": {
-        "lat": 52.5080733,
-        "lng": 13.1979993,
-        "place_id": "ChIJIdP8VjlXqEcRTAIjgjhWhRI",
-        "address": "Am Pichelssee 40a/40c, 13595 Berlin"
-      },
-      "delta_m": 38,
-      "status": "CHECK",
-      "streetview": "ZERO_RESULTS",
-      "applied": true
-    },
-    {
-      "id": "berlin_yachthafen_kopenick",
-      "name": "Yachthafen Köpenick",
-      "before": {
-        "lat": 52.44603018,
-        "lng": 13.58482296
-      },
-      "google": {
-        "lat": 52.4460697,
-        "lng": 13.5848878,
-        "place_id": "ChIJZdUanXJIqEcRQmTrUfALhP4",
-        "address": "Wendenschloßstraße 72g, 12559 Berlin-Bezirk Treptow-Köpenick"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "berlin_steglitzer_hafen",
-      "name": "Steglitzer Hafen",
-      "before": {
-        "lat": 52.442861979999996,
-        "lng": 13.326672159999998
-      },
-      "google": {
-        "lat": 52.4429015,
-        "lng": 13.326737,
-        "place_id": "ChIJm39H0OxaqEcR75XTaXBhvyw",
-        "address": "Teltowkanal, 12247 Berlin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "berlin_otteranlage_tierpark_berlin",
-      "name": "Otteranlage, Tierpark Berlin",
-      "before": {
-        "lat": 52.50549588,
-        "lng": 13.52958806
-      },
-      "google": {
-        "lat": 52.5055354,
-        "lng": 13.529653,
-        "place_id": "ChIJO1uMAQBJqEcRqMPswJGIZrc",
-        "address": "Am Tierpark 125, 10319 Berlin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "berlin_vari_wald",
-      "name": "Vari-Wald",
-      "before": {
-        "lat": 52.50311388,
-        "lng": 13.531771359999999
-      },
-      "google": {
-        "lat": 52.5031534,
-        "lng": 13.5318363,
-        "place_id": "ChIJA--N1aNJqEcRJ4ifWck1X6c",
-        "address": "Friedrichsfelde, 10319 Berlin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "berlin_freizeitpark_marienfelde",
-      "name": "Freizeitpark Marienfelde",
-      "before": {
-        "lat": 52.40170408,
-        "lng": 13.368606719999999
-      },
-      "google": {
-        "lat": 52.4017436,
-        "lng": 13.3686715,
-        "place_id": "ChIJpXlmOcREqEcR7dFUZ2SInIE",
-        "address": "Marienfelde, 12277 Berlin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "berlin_alfred_brehm_haus",
-      "name": "Alfred-Brehm-Haus",
-      "before": {
-        "lat": 52.499694479999995,
-        "lng": 13.53434468
-      },
-      "google": {
-        "lat": 52.499734,
-        "lng": 13.5344096,
-        "place_id": "ChIJ2VAaVYNJqEcRD6YjVPV0mpo",
-        "address": "Am Tierpark 125, 10319 Berlin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "berlin_himalaya_gebirgswelten",
-      "name": "Himalaya-Gebirgswelten",
-      "before": {
-        "lat": 52.50774688,
-        "lng": 13.532930160000001
-      },
-      "google": {
-        "lat": 52.5077864,
-        "lng": 13.5329951,
-        "place_id": "ChIJpUf_ugJJqEcRLHCM7KFgnJg",
-        "address": "Am Tierpark 125, 10319 Berlin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "berlin_parkplatz_1_am_tierpark",
-      "name": "Parkplatz 1 am Tierpark",
-      "before": {
-        "lat": 52.50331508000001,
-        "lng": 13.52156156
-      },
-      "google": {
-        "lat": 52.50335459999999,
-        "lng": 13.5216265,
-        "place_id": "ChIJJ6UVTMtOqEcR_QMncPts0rc",
-        "address": "P1, Am Tierpark 51, 10319 Berlin-Bezirk Lichtenberg"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "berlin_bootsverleih_waterlounge_berlin",
-      "name": "Bootsverleih Waterlounge-Berlin",
-      "before": {
-        "lat": 52.43926758,
-        "lng": 13.577661759999998
-      },
-      "google": {
-        "lat": 52.4393071,
-        "lng": 13.5777266,
-        "place_id": "ChIJmxEoUnRIqEcRCJXb7MHvLZY",
-        "address": "Gartenstraße 68, 12557 Berlin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "berlin_als_bootsverleih",
-      "name": "ALS Bootsverleih",
-      "before": {
-        "lat": 52.45351278,
-        "lng": 13.56746354
-      },
-      "google": {
-        "lat": 52.4535523,
-        "lng": 13.5675284,
-        "place_id": "ChIJ38mMAmRIqEcRDg5lhahohaA",
-        "address": "Lindenstraße 27, 12555 Berlin-Bezirk Treptow-Köpenick"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "berlin_lemkes_ladchen_werksverkauf",
-      "name": "Lemkes Lädchen- Werksverkauf",
-      "before": {
-        "lat": 52.45146858,
-        "lng": 13.459552339999998
-      },
-      "google": {
-        "lat": 52.4515081,
-        "lng": 13.4596172,
-        "place_id": "ChIJZavRmWFPqEcRJILZaIJx7Tk",
-        "address": "Späthstraße 31-32, 12359 Berlin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "berlin_wochenmarkt_die_dicke_linda",
-      "name": "Wochenmarkt DIE DICKE LINDA",
-      "before": {
-        "lat": 52.46622248,
-        "lng": 13.43781832
-      },
-      "google": {
-        "lat": 52.466262,
-        "lng": 13.4378832,
-        "place_id": "ChIJ_fln_udPqEcR0W1SUs2p2b0",
-        "address": "Kranoldpl., 12051 Berlin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "berlin_neukollner_wochenmarkte_rixdorf",
-      "name": "Neuköllner Wochenmärkte - Rixdorf",
-      "before": {
-        "lat": 52.473583180000006,
-        "lng": 13.44106802
-      },
-      "google": {
-        "lat": 52.4736227,
-        "lng": 13.4411329,
-        "place_id": "ChIJTbsBx81PqEcRZdS_DJCnHkY",
-        "address": "Karl-Marx-Platz 1, 12043 Berlin"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "berlin_wochenmarkt_pankow",
-      "name": "Wochenmarkt Pankow",
-      "before": {
-        "lat": 52.56995268000001,
-        "lng": 13.406154860000001
-      },
-      "google": {
-        "lat": 52.56999219999999,
-        "lng": 13.4062199,
-        "place_id": "ChIJeSaL2mtSqEcR8K5fSNo-tUM",
-        "address": "Breite Str. 17, 13187 Berlin-Bezirk Pankow"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "berlin_rewe_lieferlager",
-      "name": "REWE Lieferlager",
-      "before": {
-        "lat": 52.56028916,
-        "lng": 13.430281219999998
-      },
-      "google": {
-        "lat": 52.5603179,
-        "lng": 13.4303285,
-        "place_id": "ChIJI9x1qIhNqEcRrhUbkkCXcPw",
-        "address": "Prenzlauer Promenade 44, 13089 Berlin-Bezirk Pankow"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "berlin_drk_kliniken_berlin_mitte_zentrale_notaufnahme",
-      "name": "DRK Kliniken Berlin Mitte - Zentrale Notaufnahme",
-      "before": {
-        "lat": 52.55710945999999,
-        "lng": 13.37643152
-      },
-      "google": {
-        "lat": 52.5571382,
-        "lng": 13.3764788,
-        "place_id": "ChIJHa_Z4S9SqEcR69nNBtmX44Q",
-        "address": "Drontheimer Str. 39–40, 13359 Berlin"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "berlin_zentrale_notaufnahme_rettungsstelle_caritas_klinik_maria_heimsuchung_berl",
-      "name": "Zentrale Notaufnahme | Rettungsstelle | Caritas-Klinik Maria Heimsuchung Berlin-Pankow",
-      "before": {
-        "lat": 52.57110686000001,
-        "lng": 13.4144913
-      },
-      "google": {
-        "lat": 52.5711356,
-        "lng": 13.4145386,
-        "place_id": "ChIJ____OG5SqEcRx1vtdnttc_E",
-        "address": "Breite Str. 46/47, 13187 Berlin"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "berlin_polizeidirektion_1_abschnitt_13",
-      "name": "Polizeidirektion 1 - Abschnitt 13",
-      "before": {
-        "lat": 52.56975826,
-        "lng": 13.4149358
-      },
-      "google": {
-        "lat": 52.569787,
-        "lng": 13.4149831,
-        "place_id": "ChIJv42xHG5SqEcR_Fb7kzhuwLE",
-        "address": "Hadlichstraße 37, 13187 Berlin-Bezirk Pankow"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
+        "lat": 52.56414166666667,
+        "lng": 13.410919
+      }
     },
     {
       "id": "berlin_berta_block",
       "name": "Berta Block",
+      "status": "SKIP_CACHED_GOOGLE",
       "before": {
-        "lat": 52.56365366,
-        "lng": 13.409859519999998
-      },
-      "google": {
-        "lat": 52.5636824,
-        "lng": 13.4099068,
-        "place_id": "ChIJI7Yo2xJSqEcRW05M_QWQU_A",
-        "address": "Mühlenstraße 62, 13187 Berlin"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "berlin_kombibad_seestrasse_sommerbad_berliner_bader",
-      "name": "Kombibad Seestraße - Sommerbad - Berliner Bäder",
-      "before": {
-        "lat": 52.55709066000001,
-        "lng": 13.36337442
-      },
-      "google": {
-        "lat": 52.5571194,
-        "lng": 13.3634217,
-        "place_id": "ChIJNYaZRy1SqEcRgFN1vcUUzMk",
-        "address": "Seestraße 80, 13347 Berlin"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "berlin_sommerbad_am_insulaner_berliner_bader",
-      "name": "Sommerbad am Insulaner - Berliner Bäder",
-      "before": {
-        "lat": 52.45587556,
-        "lng": 13.351468119999998
-      },
-      "google": {
-        "lat": 52.4559043,
-        "lng": 13.3515153,
-        "place_id": "ChIJYTie9qNaqEcR61lJEowuyzg",
-        "address": "Zugang über den, Munsterdamm 80, 12169 Berlin-Bezirk Steglitz-Zehlendorf"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "berlin_sommerbad_pankow_berliner_bader",
-      "name": "Sommerbad Pankow - Berliner Bäder",
-      "before": {
-        "lat": 52.57492426000001,
-        "lng": 13.4144339
-      },
-      "google": {
-        "lat": 52.57495300000001,
-        "lng": 13.4144812,
-        "place_id": "ChIJ1_0tmGVSqEcRxBwqJQyXZMw",
-        "address": "Wolfshagener Str. 91-93, 13187 Berlin-Bezirk Pankow"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "berlin_suchthilfeverband_blaues_kreuz_in_deutschland_land",
-      "name": "Suchthilfeverband Blaues Kreuz in Deutschland Land",
-      "before": {
-        "lat": 52.560115159999995,
-        "lng": 13.360782319999998
-      },
-      "google": {
-        "lat": 52.5601439,
-        "lng": 13.3608296,
-        "place_id": "ChIJczHLGTZOqEcR6f3aO9dp6PM",
-        "address": "Brienzer Str. 22, 13407 Berlin"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "berlin_deutsches_rotes_kreuz_kv_berlin_zentrum_e_v",
-      "name": "Deutsches Rotes Kreuz KV Berlin-Zentrum e. V.",
-      "before": {
-        "lat": 52.50397316000001,
-        "lng": 13.28669998
-      },
-      "google": {
-        "lat": 52.5377739,
-        "lng": 13.3733228,
-        "place_id": "ChIJj-98RY5RqEcR1G2RBxwfm9k",
-        "address": "Chausseestraße 84, 10115 Berlin"
-      },
-      "delta_m": 6962,
-      "status": "BAD",
-      "streetview": "OK"
-    },
-    {
-      "id": "berlin_deutsches_rotes_kreuz_landesverband_berlin",
-      "name": "Deutsches Rotes Kreuz Landesverband Berlin",
-      "before": {
-        "lat": 52.47401126,
-        "lng": 13.3279703
-      },
-      "google": {
-        "lat": 52.47404,
-        "lng": 13.3280175,
-        "place_id": "ChIJw1q0w3xQqEcRDRER2Ul93DA",
-        "address": "Bundesallee 73, 12161 Berlin-Bezirk Tempelhof-Schöneberg"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "berlin_drk_lv_berliner_rotes_kreuz_e_v_hilfsmittelcentrum_rollstuhlverleih_berli",
-      "name": "DRK LV Berliner Rotes Kreuz e.V. - Hilfsmittelcentrum - Rollstuhlverleih Berlin",
-      "before": {
-        "lat": 52.47455396,
-        "lng": 13.327183
-      },
-      "google": {
-        "lat": 52.4745827,
-        "lng": 13.3272302,
-        "place_id": "ChIJw1q0w3xQqEcRvj3oqPJX3Fw",
-        "address": "Bachestraße 11, 12161 Berlin-Bezirk Tempelhof-Schöneberg"
-      },
-      "delta_m": 5,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
-    },
-    {
-      "id": "berlin_tropenhalle_balinesischer_garten",
-      "name": "Tropenhalle | Balinesischer Garten",
-      "before": {
-        "lat": 52.53940805999999,
-        "lng": 13.577540619999999
-      },
-      "google": {
-        "lat": 52.539444,
-        "lng": 13.5775997,
-        "place_id": "ChIJR1gLccFLqEcR27GjbsnT7yM",
-        "address": "Eisenacher Str. 99, 12685 Berlin-Bezirk Marzahn-Hellersdorf"
-      },
-      "delta_m": 6,
-      "status": "OK",
-      "streetview": "OK"
-    },
-    {
-      "id": "berlin_wanderweg_am_erpetal",
-      "name": "Wanderweg am Erpetal",
-      "before": {
-        "lat": 52.47481636,
-        "lng": 13.626297399999999
-      },
-      "google": {
-        "lat": 52.4591278,
-        "lng": 13.6159903,
-        "place_id": "ChIJfybfGtVJqEcRHUSnkHULG54",
-        "address": "12587 Berlin"
-      },
-      "delta_m": 1879,
-      "status": "BAD",
-      "streetview": "ZERO_RESULTS"
+        "lat": 52.56373990000001,
+        "lng": 13.4101119
+      }
     },
     {
       "id": "berlin_tempelhofer_feld",
       "name": "Tempelhofer Feld",
       "before": {
-        "lat": 52.47296048,
-        "lng": 13.40293512
+        "lat": 52.56414166666667,
+        "lng": 13.410919
       },
       "google": {
         "lat": 52.4748569,
         "lng": 13.4005926,
         "place_id": "ChIJ65nY9-hPqEcRi3G7rJmOiYg",
-        "address": "Tempelhofer Damm, 12101 Berlin"
+        "address": "Tempelhofer Damm, 12101 Berlin, Germany"
       },
-      "delta_m": 264,
+      "delta_m": 9953,
       "status": "BAD",
-      "streetview": "ZERO_RESULTS"
+      "streetview": "OK"
     },
     {
       "id": "berlin_olympiastadion_berlin",
       "name": "Olympiastadion Berlin",
       "before": {
-        "lat": 52.514460480000004,
-        "lng": 13.23943506
+        "lat": 52.56414166666667,
+        "lng": 13.410919
       },
       "google": {
         "lat": 52.5146782,
         "lng": 13.239517,
         "place_id": "ChIJKbbrgh5XqEcRXdMMO-aUUc4",
-        "address": "Olympischer Platz 3, 14053 Berlin"
+        "address": "Olympischer Platz 3, 14053 Berlin, Germany"
       },
-      "delta_m": 25,
-      "status": "OK",
-      "streetview": "ZERO_RESULTS"
+      "delta_m": 12831,
+      "status": "BAD",
+      "streetview": "OK"
     }
   ]
 }

@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "title": "Call-1 Selbständigkeit (Phase 0B) — nicht im Familienkatalog",
+  "purpose": "Bewerte Call-1-JSON: Hat der Planer einen ausführbaren Auftrag erfunden? Nicht: Traf er Szenario-ID X?",
+  "checks": [
+    "ziel_klar",
+    "luecken_ehrlich",
+    "work_sinnvoll",
+    "keine_venues_in_call1",
+    "execution_passend",
+    "call2Brief_struktur"
+  ],
+  "deviceNote": "Danach Gerät: brauchbare Speech + passende Buttons. FAIL wenn Call 1 Orte erfindet oder work[] leer bei klarer Recherche-Lücke.",
+  "scenarios": [
+    {
+      "id": "aut_quiet_desk_outlet",
+      "question": "Wir wollen was Ruhiges mit Wifi und Steckdose, nicht laut — zum Arbeiten eine Stunde.",
+      "whyNovel": "Kein Standard-Steak/Kino — Mix aus Ruhe, Wifi, Steckdose, Dauer.",
+      "expectCall1Thinks": [
+        "Ziel: Ort zum Arbeiten finden + hingehen",
+        "criteria: ruhig, wifi, steckdose, naehe — Gewichte selbst setzen",
+        "work: places/pack Pitch Top-5",
+        "keine Café-Namen in Call 1"
+      ]
+    },
+    {
+      "id": "aut_seasick_child",
+      "question": "Mein Kind ist seekrank auf der Fähre — was jetzt?",
+      "whyNovel": "Notfall-adjacent, kein Zahnarzt-Skript; braucht sofort Hilfe + ggf. Apotheke/Ort.",
+      "expectCall1Thinks": [
+        "Ziel: sofort helfen, Just-Do-It",
+        "work: Apotheke/Erste Hilfe nah + ggf. Nav",
+        "keine erfundenen Medikamente als Fakt ohne Beleg",
+        "pace cover oder instant je nach Recherche"
+      ]
+    },
+    {
+      "id": "aut_concert_probe",
+      "question": "Gibt’s hier irgendwo eine Probe oder Soundcheck, den man als Zuschauer mitbekommen kann?",
+      "whyNovel": "Kein klassisches Event-„was geht heute“ — spezieller Zugang.",
+      "expectCall1Thinks": [
+        "Ziel: herausfinden ob Probe/Soundcheck öffentlich",
+        "needsResearch deep / events",
+        "ehrlich wenn nichts belegt",
+        "call2Brief: Funde oder klare Absage + Alternative"
+      ]
+    },
+    {
+      "id": "aut_stroller_rain_cafe",
+      "question": "Es fängt an zu nieseln, wir haben den Kinderwagen dabei — wo können wir kurz trocken Kaffee trinken und den Wagen reinrollen?",
+      "whyNovel": "Wetter + Barriere/Kinderwagen + Café — zusammengesetzte criteria.",
+      "expectCall1Thinks": [
+        "when/now + weather hint",
+        "criteria: cafe, kinderwagen/zugang, nah, indoor",
+        "execution pitch oder chat+pack",
+        "Top-2 Orte in call2Brief, Buttons Route"
+      ]
+    },
+    {
+      "id": "aut_last_train_missed",
+      "question": "Wir haben den letzten Zug verpasst — wie kommen wir noch irgendwie zurück, ohne uns arm zu zahlen?",
+      "whyNovel": "Mobilität + Budget + Zeitdruck, kein reines ÖPNV-„zum Hbf“.",
+      "expectCall1Thinks": [
+        "Ziel: Heim/Ziel erreichen, Kosten im Blick",
+        "work: transit live + ggf. Taxi/Nachtbus Alternativen",
+        "criteria/budget soft",
+        "keine erfundenen Fahrpläne in Bridge"
+      ]
+    }
+  ]
+}

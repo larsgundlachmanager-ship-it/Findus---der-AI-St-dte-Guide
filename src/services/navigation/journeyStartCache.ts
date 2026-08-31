@@ -27,5 +27,10 @@ export function peekRememberedJourney(): typeof lastJourney {
 
 export function takeRememberedJourney(): typeof lastJourney {
   const j = lastJourney;
+  lastJourney = null;
   return j;
+}
+
+export function clearRememberedJourney(): void {
+  lastJourney = null;
 }

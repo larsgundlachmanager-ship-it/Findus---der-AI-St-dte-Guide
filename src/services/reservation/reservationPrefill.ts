@@ -161,9 +161,19 @@ export function withReservationPrefill(
       }
     }
     if (prefill.guestName?.trim()) {
+      const name = prefill.guestName.trim();
       for (const key of ['name', 'guestName', 'customer_name', 'fullname']) {
-        if (!u.searchParams.has(key))
-          u.searchParams.set(key, prefill.guestName.trim());
+        if (!u.searchParams.has(key)) u.searchParams.set(key, name);
+      }
+      const parts = name.split(/\s+/).filter(Boolean);
+      if (parts[0] && !u.searchParams.has('firstName') && !u.searchParams.has('first_name')) {
+        u.searchParams.set('firstName', parts[0]!);
+        u.searchParams.set('first_name', parts[0]!);
+      }
+      const last = parts.slice(1).join(' ');
+      if (last && !u.searchParams.has('lastName') && !u.searchParams.has('last_name')) {
+        u.searchParams.set('lastName', last);
+        u.searchParams.set('last_name', last);
       }
     }
     if (prefill.guestEmail?.trim()) {
@@ -182,6 +192,16 @@ export function withReservationPrefill(
       for (const key of ['notes', 'comment', 'message', 'special_requests']) {
         if (!u.searchParams.has(key))
           u.searchParams.set(key, prefill.notes.trim());
+      }
+    }
+    // OpenTable: datetime+covers ist der öffentliche Widget-Deep-Link
+    if (/opentable\./i.test(u.hostname)) {
+      if (covers != null && covers > 0) u.searchParams.set('covers', String(covers));
+      if (prefill.dateIso) {
+        const hm = prefill.timeHm && /^\d{2}:\d{2}$/.test(prefill.timeHm)
+          ? prefill.timeHm
+          : '19:00';
+        u.searchParams.set('datetime', `${prefill.dateIso}T${hm}`);
       }
     }
     return u.toString();
@@ -234,7 +254,7 @@ export function buildReservationMailtoDraft(opts: {
     'Viele Grüße',
     opts.guestName || '',
     '',
-    '(Anfrage über die Findus App)',
+    '(Anfrage über die Yorro App)',
   ]
     .filter((l) => l != null && l !== '')
     .join('\n');

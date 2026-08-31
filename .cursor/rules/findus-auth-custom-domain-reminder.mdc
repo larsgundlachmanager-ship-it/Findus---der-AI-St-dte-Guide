@@ -1,0 +1,20 @@
+---
+description: Erinnerung ab November 2026 — Auth-Domain auth.yorro.de statt supabase.co
+alwaysApply: true
+---
+
+# Erinnerung — Custom Domain für Google/Apple-Login
+
+App-Name: **Yorro** (nicht mehr Findus).
+
+Gilt nur, wenn das **heutige Datum November 2026 oder später** ist (siehe `user_info`).
+
+Dann **einmal pro Conversation früh** erinnern:
+
+User wollte im November 2026: **Supabase Custom Domain** `auth.yorro.de`, damit Google-Sicherheitsmails und der Consent-Screen **Yorro** zeigen statt `evswmsydbmrzzjjfynvj.supabase.co`.
+
+Danach: Google Redirect-URI + Authorized Domains auf die neue Auth-URL umstellen.
+
+Nicht erinnern, wenn `EXPO_PUBLIC_SUPABASE_URL` / Auth bereits auf `yorro.de` (oder `auth.yorro.de`) läuft.
+
+Zusätzlich nebenbei: Apple-OAuth-Secret (Key `DY378CXL82`) wurde **2026-08-20** erzeugt, läuft **ca. Februar 2027** ab — dann neu generieren.

@@ -1,0 +1,31 @@
+APP STORE — Listing DE
+Name (max. 30): Yorro – Audio-Stadtguide
+Untertitel (max. 30): Kopfhörer rein. Stadt läuft.
+Werbetext / Promotional (max. 170):
+Kopfhörer rein — Yorro läuft mit. Am Ort erzählt er, was dich interessiert. Fragen, Weg, Essen, Hotel: dieselbe Stimme. Für den Städtetrip.
+
+Beschreibung:
+Kopfhörer rein. Die Stadt läuft mit.
+
+Yorro ist der hands-free Stadtguide für den Städtetrip. Du läufst — er erkennt den Ort und erzählt, was dazu passt. Fragen stellst du mit der Stimme. Der Weg kommt mit, ohne dass du dauernd aufs Display starrst.
+
+Was Yorro macht
+• Automatische Geschichten an Sehenswürdigkeiten
+• Hands-free Navigation und Tipps
+• Hilfe bei Essen, Weg und Hotel — dieselbe Stimme, wenn du fragst
+• Eigene Persönlichkeit und Stimme, einmal eingerichtet
+
+Was Yorro nicht ist
+Kein Alltagskarten-Ersatz. Kein stummes MP3-Hörbuch. Keine Booking-App mit Guide-Anstrich.
+
+Für den Moment, in dem du eine neue Stadt wirklich angucken willst.
+
+Wake-Wort: „Yorro“.
+
+Öffentlicher Launch: 1. November 2026
+https://yorro.de/
+
+Keywords (max. 100 Zeichen, kommagetrennt):
+stadtguide,audio,reise,stadttour,stadtfuehrer,gps,handsfree,städtetrip,tourguide,stadtreise
+
+Grafiken: store/de-DE/graphics/

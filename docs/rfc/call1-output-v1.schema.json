@@ -1,0 +1,297 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "yorro://schemas/call1-output-v1",
+  "title": "Yorro Call-1 Router Output",
+  "description": "Version 1.0.0 — streambar: bridge MUSS Key 1 sein. Modell: Gemini Lite.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "bridge",
+    "bridgeMeta",
+    "session",
+    "authorIntent",
+    "topicScope",
+    "memoryPolicy",
+    "cityScope",
+    "lane",
+    "handoff",
+    "needsResearch",
+    "work",
+    "tasks"
+  ],
+  "properties": {
+    "bridge": {
+      "type": ["string", "null"],
+      "maxLength": 600,
+      "description": "Beat 1 — sofort sprechen. Persona-Ton aus Rucksack (kurz). null nur continue/resume ohne neuen Beat."
+    },
+    "bridgeMeta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["researchBudgetSec", "bridgeTargetWords", "pace"],
+      "properties": {
+        "researchBudgetSec": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 12,
+          "description": "LLM-Schätzung. Backend: clamp(CODE_TABLE[lane][needsResearch] ± 2)."
+        },
+        "bridgeTargetWords": {
+          "type": "integer",
+          "minimum": 8,
+          "maximum": 48,
+          "description": "Backend: clamp(8 + finalResearchBudgetSec * 2.5, 12, 48)."
+        },
+        "pace": {
+          "type": "string",
+          "enum": ["instant", "standard", "cover"]
+        }
+      }
+    },
+    "session": {
+      "type": "string",
+      "enum": ["new", "continue", "resume"]
+    },
+    "threadMatchId": { "type": ["string", "null"], "maxLength": 48 },
+    "intentSummary": { "type": "string", "maxLength": 160 },
+    "authorIntent": {
+      "type": "string",
+      "maxLength": 280,
+      "description": "1 Satz für Call 2: Was will der User JETZT."
+    },
+    "topicScope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "turnsForCall2"],
+      "properties": {
+        "mode": { "type": "string", "enum": ["new", "followup"] },
+        "turnsForCall2": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10
+        },
+        "inheritLiveInventory": {
+          "type": "boolean",
+          "default": false,
+          "description": "true bei ja/genau/wie teuer nach Hotel/Events/Pitch — liveInventoryGate erbt Auftrag."
+        }
+      }
+    },
+    "memoryPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["shortTerm", "longTerm"],
+      "properties": {
+        "shortTerm": { "type": "boolean" },
+        "longTerm": { "type": "boolean" }
+      }
+    },
+    "cityScope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["cityId", "researchCity", "packPolicy"],
+      "properties": {
+        "cityId": {
+          "type": ["string", "null"],
+          "pattern": "^[a-z0-9_]+$"
+        },
+        "researchCity": {
+          "type": ["string", "null"],
+          "maxLength": 64,
+          "description": "Recherche-Stadt — NICHT UI-selectedCity (nur M1-Geofence)."
+        },
+        "packPolicy": {
+          "type": "string",
+          "enum": ["use_local", "require_download", "live_bootstrap", "none"]
+        }
+      }
+    },
+    "lane": {
+      "type": "string",
+      "enum": ["chat", "nav", "m1", "plan", "pitch"]
+    },
+    "handoff": {
+      "type": "string",
+      "enum": [
+        "none",
+        "m1_poi",
+        "m3_nav",
+        "m5_plan",
+        "pitch",
+        "tour",
+        "flight",
+        "memory",
+        "reisebuero"
+      ]
+    },
+    "route": {
+      "type": "string",
+      "enum": [
+        "m1_poi",
+        "m3_nav_start",
+        "m3_nav_query",
+        "m5_plan",
+        "memory",
+        "blueprint",
+        "smalltalk"
+      ]
+    },
+    "needsResearch": {
+      "type": "string",
+      "enum": ["quick", "pack", "deep"]
+    },
+    "blueprintId": { "type": ["string", "null"], "maxLength": 48 },
+    "blueprintStage": { "type": ["string", "null"], "maxLength": 48 },
+    "personaVariant": {
+      "type": "string",
+      "enum": ["default", "family_kids", "party_nightlife", "solo_adult"]
+    },
+    "jobHint": { "type": ["string", "null"] },
+    "festTypeHint": {
+      "type": ["string", "null"],
+      "enum": [
+        null,
+        "weinfest",
+        "stadtfest",
+        "street_fest",
+        "markt",
+        "konzert",
+        "kino",
+        "generic"
+      ],
+      "description": "Weinfest ≠ Weinhandlung — kein dining_pitch bei Fest-Frage."
+    },
+    "thinkAhead": {
+      "type": "array",
+      "items": { "type": "string", "maxLength": 48 },
+      "maxItems": 3
+    },
+    "needsBlockingChoice": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["active"],
+      "properties": {
+        "active": { "type": "boolean" },
+        "question": { "type": ["string", "null"], "maxLength": 120 },
+        "options": {
+          "type": "array",
+          "items": { "type": "string", "maxLength": 40 },
+          "maxItems": 4
+        },
+        "slotKey": {
+          "type": ["string", "null"],
+          "description": "baggage_type | pitch_option | plan_fork | sup_own_vs_rent | generic_fork"
+        }
+      }
+    },
+    "splitPlan": {
+      "type": ["object", "null"],
+      "properties": {
+        "part": { "type": "integer", "minimum": 1, "maximum": 3 },
+        "total": { "type": "integer", "minimum": 2, "maximum": 3 },
+        "deferBrief": { "type": "string", "maxLength": 200 }
+      }
+    },
+    "mustHaves": {
+      "type": "array",
+      "items": { "type": "string", "maxLength": 80 },
+      "maxItems": 8,
+      "description": "Hard-Match aus DIESEM Satz (Mietrad-Portal, Steak, Pannfisch, …)."
+    },
+    "bookingPlatformHint": {
+      "type": ["string", "null"],
+      "maxLength": 48,
+      "description": "Genanntes Portal = Must-Have-Filter (Mietrad, Stay22, …)."
+    },
+    "work": {
+      "type": "array",
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "required": ["id", "worker", "brief"],
+        "properties": {
+          "id": { "type": "string", "maxLength": 48 },
+          "worker": {
+            "type": "string",
+            "enum": [
+              "plan",
+              "dining",
+              "nav",
+              "transit",
+              "flight",
+              "hotel",
+              "pitch",
+              "chat",
+              "m1",
+              "tour",
+              "reisebuero"
+            ]
+          },
+          "brief": { "type": "string", "maxLength": 280 },
+          "destCity": { "type": ["string", "null"] },
+          "startIsGps": { "type": "boolean" },
+          "dependsOn": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "tasks": {
+      "type": "array",
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "required": ["id", "lane", "brief", "priority", "affectsSpeech"],
+        "properties": {
+          "id": { "type": "string", "maxLength": 48 },
+          "lane": {
+            "type": "string",
+            "enum": [
+              "weather",
+              "pack",
+              "places",
+              "hours",
+              "walk_eta",
+              "web_events",
+              "grocery_on_way",
+              "dining",
+              "cinema",
+              "amenity",
+              "parking",
+              "combo",
+              "knowledge",
+              "instagram",
+              "other"
+            ]
+          },
+          "brief": { "type": "string", "maxLength": 280 },
+          "priority": {
+            "type": "string",
+            "enum": ["fast", "silent_slow", "spoken_slow"]
+          },
+          "affectsSpeech": { "type": "boolean" },
+          "thinkAhead": { "type": "boolean" }
+        }
+      }
+    },
+    "intents": {
+      "type": "array",
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "required": ["lane", "brief"],
+        "properties": {
+          "id": { "type": "string" },
+          "lane": { "type": "string" },
+          "blueprintId": { "type": ["string", "null"] },
+          "brief": { "type": "string", "maxLength": 200 },
+          "dependsOn": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "openLoops": {
+      "type": "array",
+      "items": { "type": "string", "maxLength": 100 },
+      "maxItems": 3
+    },
+    "nameAllowed": { "type": "boolean", "const": false }
+  }
+}

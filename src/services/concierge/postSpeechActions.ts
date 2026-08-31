@@ -22,13 +22,30 @@ import {
 import { getAllPois } from '../../db/database';
 import { namesAlign } from './canonicalDestination';
 import { buildNamedBookingPortalActions } from './bookingPlatformActions';
+import { buildRemindOnlyQuickAction } from './reminderActionPolicy';
 
 function clean(s: string): string {
   return s.replace(/\s+/g, ' ').trim();
 }
 
 const STOP_PLACE =
-  /^(Heute|Abend|Uhr|Oder|Auch|Hier|Mein|Dein|Einen|Eine|Dort|Dann|Noch|Sehr|Ganz|Zwei|Drei|Beide)$/iu;
+  /^(Heute|Abend|Uhr|Oder|Auch|Hier|Mein|Dein|Einen|Eine|Dort|Dann|Noch|Sehr|Ganz|Zwei|Drei|Beide|Januar|Februar|März|Maerz|April|Mai|Juni|Juli|August|September|Oktober|November|Dezember|Montag|Dienstag|Mittwoch|Donnerstag|Freitag|Samstag|Sonntag)$/iu;
+
+function isForbiddenNavPlaceName(name: string): boolean {
+  if (STOP_PLACE.test(name)) return true;
+  try {
+    const {
+      isMonthOrDateOnlyNavName,
+      isBogusNavDestName,
+    } = require('../research/htmlResearchGate') as {
+      isMonthOrDateOnlyNavName: (n: string) => boolean;
+      isBogusNavDestName: (n: string) => boolean;
+    };
+    return isMonthOrDateOnlyNavName(name) || isBogusNavDestName(name);
+  } catch {
+    return false;
+  }
+}
 
 /** ≥2 Optionen aus dem Text — egal ob Supermarkt, Toilette, Café, Apotheke… */
 export function extractChoicePlaces(speech: string): string[] {
@@ -48,13 +65,14 @@ export function extractChoicePlaces(speech: string): string[] {
   if (fav?.[1]) places.push(clean(fav[1]));
   if (alt?.[1]) places.push(clean(alt[1]));
 
+  // Nummerierte Optionen — NICHT Kalenderdaten „27. Dezember“ (Monat als Fake-Route)
   const numbered =
     speech.match(
-      /\b(?:\d+[).:]\s*|erstens\s+|zweitens\s+)([A-ZÄÖÜ][\wÄÖÜäöüß\-&.']+(?:\s+[A-ZÄÖÜa-zäöüß][\wÄÖÜäöüß\-&.']*){0,3})/gu,
+      /\b(?:erstens\s+|zweitens\s+|\d+[).]\s+)([A-ZÄÖÜ][\wÄÖÜäöüß\-&.']+(?:\s+[A-ZÄÖÜa-zäöüß][\wÄÖÜäöüß\-&.']*){0,3})/gu,
     ) ?? [];
   for (const n of numbered) {
     places.push(
-      clean(n.replace(/^(?:\d+[).:]\s*|erstens\s+|zweitens\s+)/iu, '')),
+      clean(n.replace(/^(?:erstens\s+|zweitens\s+|\d+[).]\s+)/iu, '')),
     );
   }
 
@@ -69,7 +87,7 @@ export function extractChoicePlaces(speech: string): string[] {
   const unique: string[] = [];
   const seen = new Set<string>();
   for (const p of places) {
-    if (p.length < 3 || STOP_PLACE.test(p)) continue;
+    if (p.length < 3 || isForbiddenNavPlaceName(p)) continue;
     const k = p.toLowerCase();
     if (seen.has(k)) continue;
     seen.add(k);
@@ -164,6 +182,40 @@ function extractBookingIntents(
 }
 
 async function navActionForPlace(name: string): Promise<QuickAction> {
+  if (isForbiddenNavPlaceName(name)) {
+    return {
+      type: 'SHOW_MORE',
+      label: shortenActionLabel(`ℹ️ Mehr`),
+      payload: {
+        textPrompt: `Erzähl mehr zum genannten Termin — ohne Route zu einem Datum.`,
+      },
+    };
+  }
+  const alreadyHere = (
+    lat?: number,
+    lng?: number,
+    poiId?: number,
+  ): QuickAction | null => {
+    try {
+      const { isAlreadyAtCoords } = require('../../module2/pitch/navActionPolicy') as {
+        isAlreadyAtCoords: (a?: number | null, b?: number | null) => boolean;
+      };
+      if (!isAlreadyAtCoords(lat, lng)) return null;
+      return {
+        type: 'SHOW_MORE',
+        label: shortenActionLabel(`ℹ️ ${name}`),
+        payload: {
+          textPrompt: `Erzähl mehr über ${name}`,
+          destName: name,
+          destLat: lat,
+          destLng: lng,
+          targetPoiId: poiId,
+        },
+      };
+    } catch {
+      return null;
+    }
+  };
   try {
     const pois = await getAllPois();
     const needle = name.toLowerCase();
@@ -174,6 +226,8 @@ async function navActionForPlace(name: string): Promise<QuickAction> {
         return n.includes(needle.slice(0, 14)) || needle.includes(n.slice(0, 14));
       });
     if (poi && Number.isFinite(poi.lat) && Number.isFinite(poi.lng)) {
+      const here = alreadyHere(poi.lat, poi.lng, poi.id);
+      if (here) return here;
       return {
         type: 'START_NAVIGATION',
         label: shortenActionLabel(`📍 ${poi.name}`),
@@ -182,6 +236,40 @@ async function navActionForPlace(name: string): Promise<QuickAction> {
           destLat: poi.lat,
           destLng: poi.lng,
           targetPoiId: poi.id,
+        },
+      };
+    }
+  } catch {
+    /* soft */
+  }
+  try {
+    const { geocodePlaceNameOsmFirst } = require('../navigation/googleMapsNav') as {
+      geocodePlaceNameOsmFirst: (
+        q: string,
+        o?: { biasLat?: number; biasLng?: number },
+      ) => Promise<{ lat: number; lng: number } | null>;
+    };
+    const { useGpsStore } = require('../../store/useGpsStore') as {
+      useGpsStore: {
+        getState: () => { lat: number | null; lng: number | null };
+      };
+    };
+    const gps = useGpsStore.getState();
+    const geo = await geocodePlaceNameOsmFirst(name, {
+      biasLat: gps.lat ?? undefined,
+      biasLng: gps.lng ?? undefined,
+    });
+    if (geo && Number.isFinite(geo.lat) && Number.isFinite(geo.lng)) {
+      const here = alreadyHere(geo.lat, geo.lng, -1);
+      if (here) return here;
+      return {
+        type: 'START_NAVIGATION',
+        label: shortenActionLabel(`📍 ${name}`),
+        payload: {
+          destName: name,
+          destLat: geo.lat,
+          destLng: geo.lng,
+          targetPoiId: -1,
         },
       };
     }
@@ -258,8 +346,28 @@ export async function deriveHelpActionsFromSpeech(opts: {
   const notes: string[] = [`scene:${scene}`];
   const derived: QuickAction[] = [];
 
+  let namedSchedule = false;
+  try {
+    const { looksLikeNamedScheduleQuery } = require('./sportsScheduleQuery') as {
+      looksLikeNamedScheduleQuery: (s: string) => boolean;
+    };
+    namedSchedule =
+      looksLikeNamedScheduleQuery(opts.userText || '') ||
+      looksLikeNamedScheduleQuery(speech);
+  } catch {
+    namedSchedule = false;
+  }
+
   const push = (a: QuickAction) => {
     if (derived.length >= max) return;
+    if (
+      a.type === 'START_NAVIGATION' &&
+      (namedSchedule ||
+        isForbiddenNavPlaceName(String(a.payload.destName || a.label || '')))
+    ) {
+      notes.push('skip-month-or-schedule-nav');
+      return;
+    }
     derived.push({
       ...a,
       label: shortenActionLabel(a.label || a.type),
@@ -355,6 +463,24 @@ export async function deriveHelpActionsFromSpeech(opts: {
     }
   }
 
+  // Soft-Offer „soll ich dich erinnern“ → echter Button nur mit Ort/Zeit-Anker
+  const remind = buildRemindOnlyQuickAction({
+    speech,
+    userText: opts.userText,
+  });
+  if (remind) {
+    const already = [...(opts.existing ?? []), ...derived].some(
+      (a) =>
+        a.type === 'SET_DEPARTURE_REMINDER' ||
+        a.type === 'SET_WAKE_ALARM' ||
+        a.type === 'SET_TIMER',
+    );
+    if (!already) {
+      push(remind);
+      notes.push(`remind:${remind.payload.destName ?? remind.payload.timeLabel ?? 'ok'}`);
+    }
+  }
+
   if (scene === 'booking' || scene === 'activity') {
     const hasBookingUrl = derived.some(
       (a) =>
@@ -386,11 +512,55 @@ export async function deriveHelpActionsFromSpeech(opts: {
     }
   }
 
+  // Ziel-Empfehlung mit einem Ort (kein „oder“) → trotzdem Route
+  if (derived.filter((a) => a.type === 'START_NAVIGATION').length === 0) {
+    let go = false;
+    try {
+      const { isPlaceGoQuery } = require('../../module2/router/placeGoQuery') as {
+        isPlaceGoQuery: (s: string) => boolean;
+      };
+      go = isPlaceGoQuery(opts.userText || '');
+    } catch {
+      go = false;
+    }
+    if (
+      go ||
+      /\b(strand|kurstrand|priwall|badestelle|freibad|ostseestrand)\b/iu.test(
+        `${opts.userText ?? ''} ${speech}`,
+      )
+    ) {
+      const extra =
+        speech.match(
+          /\b(?:in|am|auf|samt|bei)\s+(?:der\s+|dem\s+|die\s+)?([A-ZÄÖÜ][\wÄÖÜäöüß\-]+(?:\s+[A-ZÄÖÜ][\wÄÖÜäöüß\-]+){0,2})/gu,
+        ) ?? [];
+      const names = extra
+        .map((x) =>
+          clean(
+            x.replace(
+              /^(?:in|am|auf|samt|bei)\s+(?:der\s+|dem\s+|die\s+)?/i,
+              '',
+            ),
+          ),
+        )
+        .filter((n) => n.length >= 4 && !STOP_PLACE.test(n));
+      for (const n of names.slice(0, 2)) {
+        push(await navActionForPlace(n));
+      }
+    }
+  }
+
   const merged: QuickAction[] = [];
   const seen = new Set<string>();
   const preferExisting = (opts.existing ?? []).filter((a) => {
     if (a.type === 'OPEN_URL' && a.payload.url) return true;
     if (a.type === 'DIAL_PHONE' && a.payload.phoneNumber) return true;
+    if (
+      a.type === 'SET_DEPARTURE_REMINDER' ||
+      a.type === 'SET_WAKE_ALARM' ||
+      a.type === 'SET_TIMER'
+    ) {
+      return true;
+    }
     if (
       a.type === 'START_NAVIGATION' &&
       (a.payload.destLat != null || a.payload.destName)

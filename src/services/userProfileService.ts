@@ -3,6 +3,7 @@ import {
   createDefaultProfile,
   normalizeLanguage,
   normalizeVoiceId,
+  profileHasFinishedSetup,
   type AudioOutputMode,
   type MobilityPrefs,
   type MustHaveStyleId,
@@ -99,6 +100,21 @@ function normalizeProfile(parsed: Partial<UserProfile>): UserProfile {
   merged.voiceId = normalizeVoiceId(merged.voiceId as string);
   merged.speechRate = 1; // Systemweit fest — kein Slider
   merged.ttsProvider = normalizeTtsProvider(merged.ttsProvider);
+  {
+    const { sanitizeNameSpeechHint } = require('./persona/userNameSpeechHint') as {
+      sanitizeNameSpeechHint: (raw: string | null | undefined) => string;
+    };
+    const hint = sanitizeNameSpeechHint(
+      typeof parsed.firstNameSpeechHint === 'string'
+        ? parsed.firstNameSpeechHint
+        : merged.firstNameSpeechHint,
+    );
+    const written = (merged.firstName || '').trim();
+    merged.firstNameSpeechHint =
+      hint && hint.toLowerCase() !== written.toLowerCase() ? hint : '';
+    merged.firstNameSpeechHintEnabled =
+      parsed.firstNameSpeechHintEnabled === true;
+  }
   merged.phoneNumber =
     typeof parsed.phoneNumber === 'string'
       ? parsed.phoneNumber
@@ -115,6 +131,7 @@ function normalizeProfile(parsed: Partial<UserProfile>): UserProfile {
     ...(parsed.storytelling ?? {}),
   };
   // Legacy-Duplikat „Berühmte Personen“ → kanonische Pref `personen`
+  // Legacy `theater_kultur` → theater / kino / konzert_musical
   {
     const prefs = { ...(merged.experiencePrefs ?? {}) } as Record<
       string,
@@ -126,8 +143,16 @@ function normalizeProfile(parsed: Partial<UserProfile>): UserProfile {
         prefs.personen = legacy;
       }
       delete prefs.beruehmte_personen;
-      merged.experiencePrefs = prefs as UserProfile['experiencePrefs'];
     }
+    const kultur = prefs.theater_kultur;
+    if (kultur === 'yes' || kultur === 'no' || kultur === 'neutral') {
+      for (const k of ['theater', 'kino', 'konzert_musical'] as const) {
+        if (prefs[k] == null || prefs[k] === 'neutral') {
+          prefs[k] = kultur;
+        }
+      }
+    }
+    merged.experiencePrefs = prefs as UserProfile['experiencePrefs'];
   }
   merged.learnedFacts = Array.isArray(parsed.learnedFacts)
     ? parsed.learnedFacts.map(String).filter(Boolean).slice(-40)
@@ -196,7 +221,8 @@ function normalizeProfile(parsed: Partial<UserProfile>): UserProfile {
   merged.energyLevel =
     parsed.energyLevel === 'low' ||
     parsed.energyLevel === 'medium' ||
-    parsed.energyLevel === 'high'
+    parsed.energyLevel === 'high' ||
+    parsed.energyLevel === 'extreme'
       ? parsed.energyLevel
       : base.energyLevel ?? null;
   merged.dietaryTags = Array.isArray(parsed.dietaryTags)
@@ -267,10 +293,31 @@ function normalizeProfile(parsed: Partial<UserProfile>): UserProfile {
     navMode === 'quiet' || navMode === 'mute_until_dest' || navMode === 'full'
       ? navMode
       : base.navExploreMode ?? 'quiet';
+  const m1Story = parsed.module1StoryMode;
+  merged.module1StoryMode =
+    m1Story === 'brief' || m1Story === 'full'
+      ? m1Story
+      : base.module1StoryMode ?? 'full';
   merged.notificationsEnabled =
     parsed.notificationsEnabled === undefined
       ? true
       : !!parsed.notificationsEnabled;
+  const pa = parsed.proactiveAlerts;
+  if (pa && typeof pa === 'object') {
+    merged.proactiveAlerts = {
+      weather: pa.weather === undefined ? undefined : !!pa.weather,
+      parking: pa.parking === undefined ? undefined : !!pa.parking,
+      transit: pa.transit === undefined ? undefined : !!pa.transit,
+      ambientEvents:
+        pa.ambientEvents === undefined ? undefined : !!pa.ambientEvents,
+      cityWelcome:
+        pa.cityWelcome === undefined ? undefined : !!pa.cityWelcome,
+      welcomeBack:
+        pa.welcomeBack === undefined ? undefined : !!pa.welcomeBack,
+    };
+  } else {
+    merged.proactiveAlerts = base.proactiveAlerts ?? {};
+  }
   merged.dataSaverMode = !!parsed.dataSaverMode;
   merged.audioOutputMode = normalizeAudioOutputMode(parsed.audioOutputMode);
   merged.isPremiumSubscriber = !!parsed.isPremiumSubscriber;
@@ -335,7 +382,8 @@ function normalizeProfile(parsed: Partial<UserProfile>): UserProfile {
   merged.tourLengthPref =
     parsed.tourLengthPref === 'more_stops' ||
     parsed.tourLengthPref === 'balanced' ||
-    parsed.tourLengthPref === 'fewer_stops'
+    parsed.tourLengthPref === 'fewer_stops' ||
+    parsed.tourLengthPref === 'max_stops'
       ? parsed.tourLengthPref
       : base.tourLengthPref ?? null;
   merged.diningLevel =
@@ -450,17 +498,27 @@ export async function loadUserProfile(): Promise<UserProfile | null> {
 export async function saveUserProfile(
   profile: UserProfile,
 ): Promise<UserProfile> {
-  const next = normalizeProfile(profile);
+  let next = normalizeProfile(profile);
+  // Re-Login / Onboarding-Draft darf ein fertiges Profil nicht zurücksetzen
+  if (cached && profileHasFinishedSetup(cached) && !profileHasFinishedSetup(next)) {
+    return cached;
+  }
+  if (cached?.firstMapWelcomeDone && !next.firstMapWelcomeDone) {
+    next = { ...next, firstMapWelcomeDone: true };
+  }
+  if (cached?.setupComplete && !next.setupComplete) {
+    next = { ...next, setupComplete: true, completedAt: next.completedAt ?? cached.completedAt };
+  }
+  cached = next;
+  syncTtsProviderToStore(next.ttsProvider ?? 'cartesia');
+  syncPremiumToStore(!!next.isPremiumSubscriber);
+  notify(next);
   await FileSystem.writeAsStringAsync(
     PROFILE_PATH,
     JSON.stringify(next, null, 2),
     { encoding: FileSystem.EncodingType.UTF8 },
   );
-  cached = next;
   await syncVoiceSettingsToSqlite(next);
-  syncTtsProviderToStore(next.ttsProvider ?? 'cartesia');
-  syncPremiumToStore(!!next.isPremiumSubscriber);
-  notify(next);
   return next;
 }
 
@@ -478,8 +536,11 @@ export async function resetUserProfile(): Promise<void> {
     // ignore
   }
   try {
+    const { runExclusiveDbWrite } = await import('../db/dbWriteLock');
     const db = await getDatabase();
-    await db.runAsync('DELETE FROM user_settings WHERE id = 1');
+    await runExclusiveDbWrite(async () => {
+      await db.runAsync('DELETE FROM user_settings WHERE id = 1');
+    });
   } catch {
     // ignore
   }

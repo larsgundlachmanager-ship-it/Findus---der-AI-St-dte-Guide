@@ -11,6 +11,7 @@ import {
   type LiveQualityReport,
   type LiveQualityScenario,
 } from '../module2/jobs/liveQualityHarness';
+import { getInteractionDelaySnapshot } from '../services/diagnostics/interactionDelay';
 
 export function LiveQualityPanel() {
   const suite = useMemo(() => getLiveQualitySuite(), []);
@@ -21,6 +22,11 @@ export function LiveQualityPanel() {
   const [checked, setChecked] = useState<Record<string, boolean>>({});
   const [report, setReport] = useState<LiveQualityReport | null>(null);
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [delayTick, setDelayTick] = useState(0);
+  const delay = useMemo(
+    () => getInteractionDelaySnapshot(),
+    [delayTick],
+  );
 
   const onRunRouting = useCallback(() => {
     setReport(runLiveQualityHarness({ tier: 'all' }));
@@ -36,6 +42,16 @@ export function LiveQualityPanel() {
     <View style={styles.wrap}>
       <Text style={styles.title}>{suite.title}</Text>
       {suite.gpsHint ? <Text style={styles.hint}>{suite.gpsHint}</Text> : null}
+      <Pressable onPress={() => setDelayTick((n) => n + 1)}>
+        <Text style={styles.hint}>
+          Tap→Frame p95:{' '}
+          {delay.p95Ms != null
+            ? `${Math.round(delay.p95Ms)} ms`
+            : 'noch keine Samples'}
+          {'  '}
+          {'(>16 ms = Ruckler, nichts geht kaputt)'}
+        </Text>
+      </Pressable>
 
       <Text style={styles.section}>Playbook (Gerät)</Text>
       {suite.devicePlaybook.map((line, i) => (

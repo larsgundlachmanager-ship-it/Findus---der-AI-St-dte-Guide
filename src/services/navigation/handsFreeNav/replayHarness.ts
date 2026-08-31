@@ -115,8 +115,18 @@ export function replayCompassSnap(): HarnessReport {
   });
   checks.push({
     name: 'time_based_speak_distance',
-    ok: speakM >= 5 && speakM <= 80,
-    detail: `speakStartM=${speakM} (5s speech + 2s buffer @ 1.25m/s ≈ 8.75m)`,
+    ok: speakM >= 8 && speakM <= 12,
+    detail: `speakStartM=${speakM} ((5+2)s × 1.25 m/s, floor 8)`,
+  });
+  const sprint = speakStartDistanceM({
+    speechSec: 4,
+    speedMps: 10,
+    transportMode: 'walk',
+  });
+  checks.push({
+    name: 'finish_2s_before_at_speed',
+    ok: sprint === 60,
+    detail: `4s speech @ 10 m/s → start ${sprint} m (want 60)`,
   });
   return { ok: checks.every((c) => c.ok), checks };
 }

@@ -17,9 +17,27 @@ export async function planTransitHandsFree(opts: {
     to: opts.to,
     travelMode: 'transit',
     departAt: opts.departAt ?? new Date(),
-    numItineraries: 3,
+    numItineraries: 5,
   });
   return result.itineraries[0] ?? null;
+}
+
+export async function planTransitHandsFreeDetailed(opts: {
+  from: { lat: number; lng: number };
+  to: { lat: number; lng: number };
+  departAt?: Date | null;
+}): Promise<{ itinerary: JourneyItinerary | null; tight: boolean }> {
+  const result = await planJourney({
+    from: opts.from,
+    to: opts.to,
+    travelMode: 'transit',
+    departAt: opts.departAt ?? new Date(),
+    numItineraries: 5,
+  });
+  return {
+    itinerary: result.itineraries[0] ?? null,
+    tight: result.tight === true,
+  };
 }
 
 /**
@@ -30,10 +48,11 @@ export async function startTransitHandsFree(opts: {
   to: { lat: number; lng: number };
   destName: string;
 }): Promise<{ ok: boolean; message?: string; source?: string }> {
-  const best = await planTransitHandsFree({
+  const planned = await planTransitHandsFreeDetailed({
     from: opts.from,
     to: opts.to,
   });
+  const best = planned.itinerary;
   if (!best) {
     return {
       ok: false,
@@ -53,6 +72,7 @@ export async function startTransitHandsFree(opts: {
     destName: opts.destName,
     destLat: opts.to.lat,
     destLng: opts.to.lng,
+    tight: planned.tight,
   });
   return {
     ok: jr.ok,

@@ -1,6 +1,6 @@
 /**
  * Temporäres Stummschalten mit Wake: Dauer / Uhrzeit / Geofence.
- * Museum-Tipp: Findus kann stumm — und wacht nach Zeit oder Distanz wieder auf.
+ * Museum-Tipp: Yorro kann stumm — und wacht nach Zeit oder Distanz wieder auf.
  */
 
 import * as FileSystem from 'expo-file-system';
@@ -245,7 +245,7 @@ export async function tickMuteSession(opts: {
 /** Museum / indoor tip copy — never say „Wegweiser“. */
 export function museumMuteTipSpeech(): string {
   return (
-    'Tipp: Im Museum kannst du Findus stumm schalten — ' +
+    'Tipp: Im Museum kannst du Yorro stumm schalten — ' +
     'er wacht nach einer Stunde, zwei Stunden, zu einer Uhrzeit ' +
     'oder wenn du 100 bzw. 200 Meter weiter bist wieder auf.'
   );

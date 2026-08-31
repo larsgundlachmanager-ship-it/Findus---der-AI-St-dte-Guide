@@ -1,0 +1,1258 @@
+{
+  "city": "werder",
+  "apply": true,
+  "touched": 156,
+  "approachesFixed": 156,
+  "faqAdded": 0,
+  "data_version": 31,
+  "rows": [
+    {
+      "id": "werder_werder_havel",
+      "name": "Werder (Havel)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_fahrradbrucke_zum_bahnhof_werder",
+      "name": "Fahrradbrücke zum Bahnhof Werder",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_werder_havel_markt",
+      "name": "Werder (Havel), Markt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_werder_havel_bahnhof",
+      "name": "Werder (Havel), Bahnhof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_parkhaus",
+      "name": "Parkhaus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_werder_havel_gluckstr",
+      "name": "Werder (Havel), Gluckstr.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_werder_havel_post",
+      "name": "Werder (Havel), Post",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_anlegestelle_werder_insel",
+      "name": "Anlegestelle Werder (Insel)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_schiffsanleger_werder_insel",
+      "name": "Schiffsanleger Werder Insel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_ms_bismarckhohe",
+      "name": "MS Bismarckhöhe",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_fahre_petzow",
+      "name": "Fähre Petzow",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_wasserwanderrastplatz_werder_havel",
+      "name": "Wasserwanderrastplatz Werder (Havel)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_yachthafen_scheunhornweg",
+      "name": "Yachthafen Scheunhornweg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_ziegeleimuseum_glindow",
+      "name": "Ziegeleimuseum Glindow",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_christian_morgenstern_literaturmuseum",
+      "name": "Christian Morgenstern Literaturmuseum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_museum_bockwindmuhle",
+      "name": "Museum Bockwindmühle",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_stadtgalerie_kunst_geschoss",
+      "name": "Stadtgalerie KUNST-GESCHOSS",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_heimatverein_glindow_e_v_im_heimatmuseum",
+      "name": "Heimatverein Glindow e.V. im Heimatmuseum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_insel_werder",
+      "name": "Insel Werder",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_waschhaus_petzow",
+      "name": "Waschhaus Petzow",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_glindower_alpen",
+      "name": "Glindower Alpen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_heilig_geist_kirche",
+      "name": "Heilig-Geist-Kirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_maria_meeresstern_katholische_kirche",
+      "name": "\"Maria Meeresstern\" Katholische Kirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_ev_heilig_geist_kirchengemeinde_werder_gemeindeburo",
+      "name": "Ev. Heilig-Geist- Kirchengemeinde Werder Gemeindebüro",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_neuapostolische_kirche_werder_havel",
+      "name": "Neuapostolische Kirche Werder (Havel)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_kirche_petzow",
+      "name": "Kirche Petzow",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_alter_friedhof_inselstadt_werder",
+      "name": "Alter Friedhof Inselstadt Werder",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_dorfkirche_glindow",
+      "name": "Dorfkirche Glindow",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_c_k_p_p_dienstleistungen",
+      "name": "C.K.P.P. Dienstleistungen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_ev_heilig_geist_kirchengemeinde_werder_havel_buro_glindow",
+      "name": "Ev. Heilig-Geist-Kirchengemeinde Werder/Havel Büro Glindow",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_dorfkirche_plessow",
+      "name": "Dorfkirche Plessow",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_adventgemeinde_werder",
+      "name": "Adventgemeinde Werder",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_alte_bergamotte_werder",
+      "name": "Alte Bergamotte Werder",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_kriegerdenkmal_geltow",
+      "name": "Kriegerdenkmal Geltow",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_bronzeskulptur_fischotter",
+      "name": "Bronzeskulptur Fischotter",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_atelier_werderkeramik",
+      "name": "Atelier Werderkeramik",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_strandbad_werder",
+      "name": "Strandbad Werder",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_strand_am_glindower_see",
+      "name": "Strand am Glindower See",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_stadtpark",
+      "name": "Stadtpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_aussichtsturm_wachtelberg",
+      "name": "Aussichtsturm Wachtelberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_wiese_an_der_regattastrecke_werder",
+      "name": "Wiese an der Regattastrecke Werder",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_werder_parkplatz_historische_altstadt",
+      "name": "Werder Parkplatz Historische Altstadt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_inselsteg_werder",
+      "name": "Inselsteg Werder",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_strandbad_glindow",
+      "name": "Strandbad Glindow",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_prinz_albert_gedachtniswiese",
+      "name": "Prinz Albert Gedächtniswiese",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_heiliger_zen_teich",
+      "name": "Heiliger Zen-Teich",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_werderaner_rentner_umsonst",
+      "name": "Werderaner Rentner umsonst",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_schwielowsee_havelpromenade",
+      "name": "Schwielowsee Havelpromenade",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_petzow_schlosspark",
+      "name": "Petzow, Schloßpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_werder_havel_werderpark",
+      "name": "Werder (Havel), Werderpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_schlosspark_schloss_petzow",
+      "name": "Schlosspark Schloss Petzow",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_werderaner_fc_viktoria_1920",
+      "name": "Werderaner FC Viktoria 1920",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_regattastrecke_werder",
+      "name": "Regattastrecke Werder",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_stadtverwaltung_burgerservice",
+      "name": "Stadtverwaltung Bürgerservice",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_landkreis_potsdam_mittelmark",
+      "name": "Landkreis Potsdam-Mittelmark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_stadtarchiv_werder",
+      "name": "Stadtarchiv Werder",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_ekz_werderpark",
+      "name": "EKZ Werderpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_unter_den_linden_werder_havel",
+      "name": "Unter den Linden Werder (Havel)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_jahnufer",
+      "name": "Jahnufer",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_belvedere_glindower_alpen",
+      "name": "Belvedere Glindower Alpen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_aussichtspunkt",
+      "name": "Aussichtspunkt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_holzfiguren",
+      "name": "Holzfiguren",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_scala_kulturpalast",
+      "name": "Scala Kulturpalast",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_ton_kirschen_theater_e_v",
+      "name": "Ton & Kirschen Theater e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_wanderweg_rund_um_geltow",
+      "name": "Wanderweg rund um Geltow",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_fuchsberg_bei_glindow",
+      "name": "Fuchsberg bei Glindow",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_wilde_badestelle_im_plessower_see",
+      "name": "Wilde Badestelle im Plessower See",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_schloss_petzow",
+      "name": "Schloss Petzow",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_heimatverein_petzow_e_v",
+      "name": "Heimatverein Petzow e.V",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_das_radhaus_werder_an_der_havel",
+      "name": "Das Radhaus Werder an der Havel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_bootsvermietung_kruger_till_werder_havel",
+      "name": "Bootsvermietung Krüger & Till Werder Havel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_christine_berger_gmbh_co_kg",
+      "name": "Christine Berger GmbH & Co. KG",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_weintiene",
+      "name": "Weintiene",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_gahejuwele",
+      "name": "GaheJuwele",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_atelier_werderkeramik_im_andenkenhaus_petzow_am_schlosspark",
+      "name": "Atelier Werderkeramik im Andenkenhaus Petzow am Schlosspark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_erdeberg",
+      "name": "Erdeberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_ankerplatz_vor_halbinsel_werder_havel",
+      "name": "Ankerplatz vor Halbinsel Werder (Havel)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_lauschpunkte_am_schwielowsee_und_in_werder_per_app",
+      "name": "Lauschpunkte am Schwielowsee und in Werder per App",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_obelisk",
+      "name": "Obelisk",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_wasserturm",
+      "name": "Wasserturm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_staffelgiebelturme",
+      "name": "Staffelgiebeltürme",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_mia_gallery",
+      "name": "MIA Gallery",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_galerie_geltow",
+      "name": "Galerie - Geltow",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_christian_morgenstern",
+      "name": "Christian Morgenstern",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_wachtelburg_christliches_jugendzentrum_und_begegnungsstatte",
+      "name": "Wachtelburg - Christliches Jugendzentrum und Begegnungsstätte",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_schlossgarten_petzow",
+      "name": "Schlossgarten Petzow",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_badestelle_schwielowsee_petzow",
+      "name": "Badestelle Schwielowsee Petzow",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_parkplatz",
+      "name": "Parkplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_zelterhaus",
+      "name": "Zelterhaus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_drei_kaehne",
+      "name": "Drei Kaehne",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_gut_schloss_golm",
+      "name": "Gut Schloß Golm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_plettenbergs_garten",
+      "name": "Plettenbergs Gärten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_kleingartenverein_an_der_dahlienstrasse_e_v",
+      "name": "Kleingartenverein an der Dahlienstrasse e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_kleingartenverein_asternstrasse_1981e_v",
+      "name": "Kleingartenverein Asternstraße 1981e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_pgg_potsdamer_gartengestaltung_wo_grun_begeistert",
+      "name": "PGG Potsdamer Gartengestaltung. Wo Grün begeistert",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_marina_havelauen_in_werder_havel_pro_marin_maintenance_service",
+      "name": "Marina Havelauen in Werder (Havel) // PRO marin (Maintenance & Service)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_marina_zernsee",
+      "name": "Marina Zernsee",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_bootshaus_ditze",
+      "name": "Bootshaus Ditze",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_marina_vulkan_werft",
+      "name": "Marina Vulkan Werft",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_marina_inselblick",
+      "name": "Marina Inselblick",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_unruh_marine",
+      "name": "Unruh Marine",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_yachtcharter_werder_in_berlin_brandenburg",
+      "name": "Yachtcharter Werder in Berlin/Brandenburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_flossvermietung_werder",
+      "name": "Floßvermietung Werder",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_glamping_und_floss_vermietung_werder_havel",
+      "name": "Glamping und Floß Vermietung Werder (Havel)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_kajakverleih_am_glindower_see",
+      "name": "Kajakverleih am Glindower See",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_reederei_bernd_kuhl_gmbh_hier_keine_abfahrt",
+      "name": "Reederei Bernd Kuhl Gmbh(Hier keine Abfahrt)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_perlenfischerei_on_tour_ug",
+      "name": "Perlenfischerei On Tour UG",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_kaim_bringt_s_werder_havel",
+      "name": "Kaim bringt's - Werder Havel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_my_rebella",
+      "name": "My Rebella",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_werder_feinkost_gmbh",
+      "name": "Werder Feinkost GmbH",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_landbackerei_kirstein",
+      "name": "Landbäckerei Kirstein",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_denns_biomarkt_werder",
+      "name": "Denns BioMarkt Werder",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_vs_mode_werder_havel",
+      "name": "VS-Mode Werder/ Havel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_kleiner_plessower_see",
+      "name": "Kleiner Plessower See",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_saltwater_s_gmbh",
+      "name": "SALTWATER‘s GmbH",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_evangelische_kirchengemeinde",
+      "name": "Evangelische Kirchengemeinde",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_immobilienburo_vehlow",
+      "name": "Immobilienbüro Vehlow",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_winterwunderland",
+      "name": "Winterwunderland",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_museumsshop_schloss_sanssouci",
+      "name": "Museumsshop - Schloss Sanssouci",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "werder_loch",
+      "name": "LOCH",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "werder_aussichtspunkt_wachtelberg_phoben",
+      "name": "Aussichtspunkt Wachtelberg Phöben",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "werder_historischer_fahranleger_phoben",
+      "name": "Historischer Fähranleger Phöben",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "werder_denkmal_otto_lilienthal_erste_fluge",
+      "name": "Denkmal Otto Lilienthal \"Erste Flüge\"",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 2,
+      "had_approaches": 1
+    },
+    {
+      "id": "werder_geo_concept_brunnenbau",
+      "name": "GEO Concept Brunnenbau",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "werder_statuenrondell_ohne_namen",
+      "name": "Statuenrondell ohne Namen",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "werder_die_statue_der_flora",
+      "name": "Die Statue der Flora",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 2,
+      "had_approaches": 1
+    },
+    {
+      "id": "werder_kriegerdenkmal",
+      "name": "Kriegerdenkmal",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "werder_freundschaftsbrunnen_gorch_wenske_heinz_dubel_eberhard_bachmann",
+      "name": "Freundschaftsbrunnen - Gorch Wenske, Heinz Dübel, Eberhard Bachmann",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "werder_rossbrunnen",
+      "name": "Roßbrunnen",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "werder_obelisk_der_nachhaltigkeit",
+      "name": "Obelisk der Nachhaltigkeit",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "werder_gedenkstele_jurgen_von_woyski",
+      "name": "Gedenkstele - Jürgen von Woyski",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "werder_bastian_dressler_michael_geist_brunnenbau_gbr",
+      "name": "Bastian Dreßler & Michael Geist Brunnenbau GbR",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "werder_museum_der_havellandischen_malerkolonie",
+      "name": "Museum der Havelländischen Malerkolonie",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "werder_lillienthal_gedenkhaus_derwitz",
+      "name": "Lillienthal-Gedenkhaus Derwitz",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "werder_potsdam_museum_forum_fur_kunst_und_geschichte",
+      "name": "Potsdam Museum – Forum für Kunst und Geschichte",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "werder_atelier_ralf_wilhelm_schmidt",
+      "name": "Atelier Ralf Wilhelm Schmidt",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "werder_wald_galerie_ferch",
+      "name": "WALD GALERIE FERCH",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "werder_kirche_phoben",
+      "name": "Kirche Phöben",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 2,
+      "had_approaches": 1
+    },
+    {
+      "id": "werder_burgruine_zolchow",
+      "name": "Burgruine Zolchow",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "werder_schloss_paretz",
+      "name": "Schloss Paretz",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "werder_schloss_caputh",
+      "name": "Schloss Caputh",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "werder_toplitzer_spitze",
+      "name": "Töplitzer Spitze",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "werder_aussichtsturm_wietkiekenberg",
+      "name": "Aussichtsturm Wietkiekenberg",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "werder_aussichtspunkt_havel",
+      "name": "Aussichtspunkt Havel",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "werder_aussichtsplattform_caputher_gemunde",
+      "name": "Aussichtsplattform Caputher Gemünde",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "werder_aussichtspunkt_wublitz",
+      "name": "Aussichtspunkt Wublitz",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "werder_aussichtsplattform_schwielowsee",
+      "name": "Aussichtsplattform Schwielowsee",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "werder_kleingartenkolonie_berliner_bar",
+      "name": "Kleingartenkolonie Berliner Bär",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "werder_garten_in_glindow",
+      "name": "Garten in Glindow",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "werder_kirschgarten_werder",
+      "name": "Kirschgarten Werder",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "werder_kleiner_badestrand_von_alt_toplitz",
+      "name": "Kleiner Badestrand von Alt Töplitz",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "werder_yachthafen_ringel",
+      "name": "Yachthafen Ringel",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "werder_marina_ferch",
+      "name": "Marina Ferch",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "werder_wegestern_im_wildpark",
+      "name": "Wegestern im Wildpark",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "werder_hausbootvermietung_werder_gbr",
+      "name": "Hausbootvermietung Werder GbR",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "werder_bootscharter_keser",
+      "name": "Bootscharter Keser",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    }
+  ]
+}

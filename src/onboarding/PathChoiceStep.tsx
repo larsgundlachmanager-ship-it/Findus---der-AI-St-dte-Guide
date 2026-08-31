@@ -19,16 +19,18 @@ type Props = {
 export function PathChoiceStep({ onChoose }: Props) {
   return (
     <OnboardingShell>
-      <StepTitle>Willkommen bei Findus</StepTitle>
+      <StepTitle>Kopfhörer rein. Die Stadt läuft mit.</StepTitle>
       <StepSubtitle>
-        Kurze Einrichtung — dauert nur ein paar Minuten. Wähle selbst, wie tief
-        wir starten.
+        Yorro ist dein Stadtguide für den Städtetrip — am Ort erzählt er, du
+        fragst mit der Stimme. Einrichtung einmal, dann läuft der Trip.
       </StepSubtitle>
 
       <View style={styles.card}>
-        <Text style={styles.badge}>Express</Text>
+        <Text style={styles.badge}>Empfohlen</Text>
         <Text style={styles.cardTitle}>Express-Einrichtung</Text>
-        <Text style={styles.cardBody}>Nur das Nötigste.</Text>
+        <Text style={styles.cardBody}>
+          Nur das Nötigste — danach Kopfhörer rein.
+        </Text>
         <PrimaryButton
           label="Express starten"
           onPress={() => onChoose('express')}
@@ -36,10 +38,11 @@ export function PathChoiceStep({ onChoose }: Props) {
       </View>
 
       <View style={[styles.card, styles.cardSecondary]}>
-        <Text style={styles.badge}>Standard</Text>
+        <Text style={styles.badge}>Ausführlich</Text>
         <Text style={styles.cardTitle}>Standard-Einrichtung</Text>
         <Text style={styles.cardBody}>
-          Für den perfekt zugeschnittenen Findus.
+          Für den perfekt zugeschnittenen Yorro — Feinschliff auch später in
+          den Einstellungen.
         </Text>
         <PrimaryButton
           label="Standard starten"
@@ -78,8 +81,7 @@ const styles = StyleSheet.create({
   },
   cardBody: {
     color: colors.textMuted,
-    fontSize: 13,
-    lineHeight: 18,
-    marginBottom: spacing.xs,
+    fontSize: 14,
+    lineHeight: 20,
   },
 });

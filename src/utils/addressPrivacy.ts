@@ -1,13 +1,32 @@
 /**
- * Adresse / GPS / Koordinaten — nie in UI-Stichpunkten,
- * außer der User fragt explizit danach.
+ * Adresse / GPS / Koordinaten — nie in Speech oder UI-Stichpunkten,
+ * außer der User fragt **explizit** danach.
  */
 
-/** Explizit Adresse, Straße, GPS oder Koordinaten. */
+/** Letzter User-Turn — für TTS-Scrub (Adressen nur bei expliziter Nachfrage). */
+let lastUserTextForPrivacy = '';
+
+export function noteUserTextForAddressPrivacy(text: string): void {
+  const t = String(text ?? '').trim();
+  if (t) lastUserTextForPrivacy = t.slice(0, 500);
+}
+
+export function getLastUserTextForAddressPrivacy(): string {
+  return lastUserTextForPrivacy;
+}
+
+/**
+ * Explizit Adresse / Anschrift / Straße+Nr. / GPS —
+ * nicht schon bei beiläufigem „Straße“ im Satz.
+ */
 export function userAskedForAddressOrCoords(text: string): boolean {
-  return /\b(adresse|anschrift|stra[ßs]e|hausnummer|plz|postleitzahl|wo\s+genau|wo\s+sitzt|schick(?:\s+mir)?(?:\s+die)?\s+adresse|nenn(?:\s+mir)?(?:\s+die)?\s+adresse|wie\s+hei[ßs]t\s+die\s+adresse|welche\s+adresse|welche\s+stra[ßs]e|koordinaten?|gps|geo[- ]?lage|lat(?:itude)?|long(?:itude)?|lng)\b/i.test(
+  return /\b(adresse|anschrift|hausnummer|plz|postleitzahl|wo\s+genau|wo\s+liegt\s+(?:das|es|der|die|der\s+ort)|wo\s+sitzt|schick(?:\s+mir)?(?:\s+die)?\s+adresse|nenn(?:\s+mir)?(?:\s+die)?\s+adresse|wie\s+hei[ßs]t\s+die\s+adresse|welche\s+adresse|welche\s+stra[ßs]e|die\s+stra[ßs]e\s+(?:bitte|nenne|sag|und)|stra[ßs]e\s+und\s+(?:hausnummer|nummer)|voll(?:e|ständige)?\s+adresse|koordinaten?|gps(?:\s*[- ]?\s*koordinaten?)?|geo[- ]?lage|lat(?:itude)?\s*(?:und|,|\/)\s*long)\b/i.test(
     text,
   );
+}
+
+export function lastUserAskedForAddressOrCoords(): boolean {
+  return userAskedForAddressOrCoords(lastUserTextForPrivacy);
 }
 
 /**
@@ -41,7 +60,7 @@ export function looksLikeAddressOrCoordBullet(text: string): boolean {
 
   // Dezimal-Koordinaten-Paar oder einzelnes Lat/Lng-Token
   if (
-    /\b-?\d{1,2}\.\d{3,}\s*[,;/\s]\s*-?\d{1,3}\.\d{3,}\b/.test(t) ||
+    /\b-?\d{1,2}\.\d{2,}\s*[,;/\s]\s*-?\d{1,3}\.\d{2,}\b/.test(t) ||
     /\bort\s+bei\s+-?\d{1,3}\.\d{2,}/i.test(t) ||
     /\b(lat|lng|lon|latitude|longitude|koordinate|koordinaten|gps)\b/i.test(t)
   ) {

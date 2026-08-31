@@ -12,6 +12,7 @@ import {
   getHandsFreePrefsSync,
   loadHandsFreePrefs,
 } from './handsFreePrefs';
+import { shouldShowHandsFreeSticky } from './handsFreeNotificationPolicy';
 
 export const HANDSFREE_CHANNEL_ID = 'findus-handsfree';
 export const HANDSFREE_CATEGORY = 'findus_handsfree';
@@ -24,7 +25,7 @@ async function ensureChannelAndCategory(): Promise<void> {
   await configureNotificationHandler();
   if (Platform.OS === 'android') {
     await Notifications.setNotificationChannelAsync(HANDSFREE_CHANNEL_ID, {
-      name: 'Findus Hands-free',
+      name: 'Yorro Hands-free',
       description: 'Schnell sprechen — auch bei gesperrtem Display',
       importance: Notifications.AndroidImportance.HIGH,
       vibrationPattern: [0, 120],
@@ -61,13 +62,38 @@ export async function syncHandsFreeListenNotification(): Promise<void> {
 
   if (!prefs.stickyListenNotification) return;
 
+  let locationFgs = false;
+  if (Platform.OS === 'android') {
+    try {
+      const loc = require('../locationService') as {
+        isLocationForegroundServiceActive?: () => boolean;
+        isLocationForegroundServiceActiveAsync?: () => Promise<boolean>;
+      };
+      locationFgs = loc.isLocationForegroundServiceActive?.() === true;
+      if (!locationFgs && loc.isLocationForegroundServiceActiveAsync) {
+        locationFgs = await loc.isLocationForegroundServiceActiveAsync();
+      }
+    } catch {
+      locationFgs = false;
+    }
+  }
+  if (
+    !shouldShowHandsFreeSticky({
+      prefOn: true,
+      locationFgsActive: locationFgs,
+      os: Platform.OS,
+    })
+  ) {
+    return;
+  }
+
   const perm = await requestNotificationPermission();
   if (!perm.granted) return;
 
   await Notifications.scheduleNotificationAsync({
     identifier: HANDSFREE_NOTIF_ID,
     content: {
-      title: 'Findus bereit',
+      title: 'Yorro bereit',
       body: '„Sprechen“ tippen — Mikro startet hands-free.',
       sticky: Platform.OS === 'android',
       autoDismiss: false,

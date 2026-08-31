@@ -11,9 +11,6 @@ import {
   resolveMasterPromptContext,
 } from '../services/personaEngine';
 
-export const OPENAI_MODEL = 'gpt-4o-mini';
-export const OPENAI_API_URL = 'https://api.openai.com/v1/chat/completions';
-
 /** @deprecated Re-export — Text-Engine ist Gemini. */
 export {
   GEMINI_MODEL,
@@ -22,7 +19,7 @@ export {
 } from './gemini';
 
 /**
- * Wissens- & Rechercheprotokoll: damit Findus viele Fakten sortiert,
+ * Wissens- & Rechercheprotokoll: damit Yorro viele Fakten sortiert,
  * differenziert, wiederfindet und sinnvoll kombiniert – ohne zu halluzinieren.
  */
 export const FINDUS_RESEARCH_PROTOCOL_DE = `## Wissens- & Rechercheprotokoll (verbindlich)
@@ -45,7 +42,7 @@ Für JEDEN mitgelieferten Fakt merke dir still:
 5. Details ([Detail]/[Thema:]) für Tiefenfragen („warum“, „wie lange“, „wie komme ich…“).
 6. Wenn mehrere passen: priorisiere aktuellen Ort → gleiche Themen-Tags → klarste Zahlen/Daten.
 7. POI-Story: Fehlt etwas → sag klar, was in den Fakten nicht steht. ERFINDE NICHTS.
-8. RÜCKFRAGEN des Users: Wenn lokale Fakten nicht reichen, darfst und sollst du OpenAI-Wissen nutzen, um kurz und hilfreich zu antworten — der User fragt oft genau das, was Findus noch nicht gesagt hat.
+8. RÜCKFRAGEN des Users: Wenn lokale Fakten nicht reichen, darfst und sollst du OpenAI-Wissen nutzen, um kurz und hilfreich zu antworten — der User fragt oft genau das, was Yorro noch nicht gesagt hat.
 
 ### 3) Kombinieren
 - Verbinde 2–4 passende Fakten zu einer schlüssigen Antwort (Ursache→Wirkung, Damals→Heute, Ort→Nutzen).
@@ -61,7 +58,6 @@ Für JEDEN mitgelieferten Fakt merke dir still:
 ### 5) Antwortstil (Audio)
 3–6 Sätze, klar zum Zuhören. Fließtext ohne Rubriken.
 Bei Rückfragen: DIREKT antworten — Frage nicht wiederholen; kein „weiter radeln“-Outro.`;
-
 
 export const FINDUS_RESEARCH_PROTOCOL_EN = `## Knowledge & research protocol (mandatory)
 
@@ -124,7 +120,7 @@ ${FINDUS_RESEARCH_PROTOCOL_DE}`;
 }
 
 /** Statischer Fallback (Tests / Boot ohne Profil). */
-export const FINDUS_SYSTEM_PROMPT = `Du BIST Findus — lebendiger Kumpel neben dem Nutzer, kein Roboter.
+export const FINDUS_SYSTEM_PROMPT = `Du BIST Yorro — lebendiger Kumpel neben dem Nutzer, kein Roboter.
 Sprich warm, klar und flüssig – ideal fürs Zuhören unterwegs (ca. 3–6 Sätze).
 Nutze die mitgelieferten Fakten als Grundlage, erfinde keine Daten.
 Antworte auf Deutsch. Keine Rubriken, keine Adressen vorlesen.

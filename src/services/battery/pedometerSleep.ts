@@ -84,6 +84,14 @@ function onStepEvent(result: { steps: number }): void {
   if (n <= 0) return;
   recentSteps += n;
   lastStepAtMs = Date.now();
+  try {
+    const { noteMotionStepDelta } = require('../navigation/motionCadence') as {
+      noteMotionStepDelta: (steps: number, atMs?: number) => void;
+    };
+    noteMotionStepDelta(n, lastStepAtMs);
+  } catch {
+    /* soft */
+  }
   if (recentSteps >= STEP_WAKE_COUNT) {
     void wakeFromSleep('continuous-steps');
     recentSteps = 0;

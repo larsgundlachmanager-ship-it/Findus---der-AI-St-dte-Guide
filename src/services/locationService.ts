@@ -7,6 +7,8 @@
  * - Watcher zeitbasiert (nicht nur bei 5 m Bewegung)
  * - Background-Permission erst NACH dem Watcher (blockiert nicht den Start)
  * - AppState: bei Background/Resume Background-Updates & Watcher halten
+ * - App wirklich geschlossen (Recents weg): GPS aus (killServiceOnDestroy +
+ *   native FindusLocationShutdown) — Home/Sperrbildschirm behält Standort
  *
  * Android: ACCESS_BACKGROUND_LOCATION + FOREGROUND_SERVICE(_LOCATION) in Manifest.
  * iOS: UIBackgroundModes location (+ NSLocationAlways… Usage Descriptions).
@@ -24,6 +26,22 @@ import { showPermissionMissingAlert } from '../utils/permissionAlerts';
 import { pushGpsTrackFix, hydrateGpsTrackBuffer } from './navigation/gpsTrackBuffer';
 import { startPedometerSleepMonitor } from './battery/pedometerSleep';
 import { ensureLocationProminentDisclosure } from './location/locationProminentDisclosure';
+import {
+  headingFromExpoEvent,
+  noteGpsCourse,
+  noteHeadingAccuracy,
+  noteExpoCompassHeading,
+} from './navigation/liveDeviceHeading';
+import { startFacingHeadingWatch, stopFacingHeadingWatch } from './navigation/facingHeadingWatch';
+import {
+  isNativeMapCompassActive,
+  setNativeMapCompassFix,
+} from './navigation/nativeMapCompass';
+import {
+  gpsIntervalMsForSpeedMs,
+  resolveEffectiveSpeedMs,
+} from '../runtime/gpsCadence';
+import { noteSplashGpsLive } from './homeMap/splashReadyGate';
 
 export type LocationUpdateHandler = (coords: {
   lat: number;
@@ -46,11 +64,42 @@ export type GpsStreamProfile =
   | 'throttled';
 
 let subscription: LocationSubscription | null = null;
+let headingSubscription: LocationSubscription | null = null;
 let updateHandler: LocationUpdateHandler | null = null;
 let backgroundStarted = false;
+
+export function isLocationForegroundServiceActive(): boolean {
+  return Platform.OS === 'android' && backgroundStarted;
+}
+
+/** Auch nach JS-Reload: Android-FGS kann noch laufen, Flag ist frisch false. */
+export async function isLocationForegroundServiceActiveAsync(): Promise<boolean> {
+  if (Platform.OS !== 'android') return false;
+  if (backgroundStarted) return true;
+  try {
+    return await Location.hasStartedLocationUpdatesAsync(FINDUS_LOCATION_TASK);
+  } catch {
+    return false;
+  }
+}
+
+function syncPersistentNotifications(): void {
+  try {
+    const hf = require('./handsFree/handsFreeNotification') as {
+      syncHandsFreeListenNotification?: () => Promise<void>;
+    };
+    void hf.syncHandsFreeListenNotification?.();
+  } catch {
+    /* soft */
+  }
+}
 let watchdogTimer: ReturnType<typeof setInterval> | null = null;
 let lastFixAtMs = 0;
-let streamProfile: GpsStreamProfile = 'realtime';
+let streamProfile: GpsStreamProfile = 'economy';
+let cadenceIntervalMs = 4_000;
+let cadenceApplyTimer: ReturnType<typeof setTimeout> | null = null;
+let immediateFixInFlight = false;
+let lastImmediateFixAt = 0;
 let appStateSub: { remove: () => void } | null = null;
 let lastAppState: AppStateStatus = AppState.currentState;
 
@@ -64,15 +113,56 @@ function emitUpdate(coords: {
   accuracy?: number | null;
   speedMs?: number | null;
   headingDeg?: number | null;
+  altitudeM?: number | null;
 }): void {
   lastFixAtMs = Date.now();
+  try {
+    const { noteLiveGpsOk, noteGpsAbsencePlaceLabel } = require('./location/gpsAbsence') as {
+      noteLiveGpsOk: () => void;
+      noteGpsAbsencePlaceLabel: (s: string | null) => void;
+    };
+    noteLiveGpsOk();
+    try {
+      const { getCachedUserProfile } = require('./userProfileService') as {
+        getCachedUserProfile: () => { cityName?: string | null } | null;
+      };
+      const n = getCachedUserProfile()?.cityName;
+      if (n) noteGpsAbsencePlaceLabel(n);
+    } catch {
+      /* soft */
+    }
+  } catch {
+    /* soft */
+  }
+  setNativeMapCompassFix(coords.lat, coords.lng, coords.altitudeM);
   useFinnusStore.getState().reportGpsFix({
     lat: coords.lat,
     lng: coords.lng,
     accuracy: coords.accuracy,
+    live: true,
   });
+  noteSplashGpsLive();
   // Last-3 GPS track for vector-aware discovery (Masterbook V5)
   pushGpsTrackFix(coords.lat, coords.lng);
+  try {
+    const { getTrackSpeedMs } = require('./navigation/gpsTrackBuffer') as {
+      getTrackSpeedMs: () => number | null;
+    };
+    const { pushSpeedSample, getSmoothedSpeedMs } = require('./navigation/transportMode') as {
+      pushSpeedSample: (s: number | null | undefined) => number;
+      getSmoothedSpeedMs: () => number;
+    };
+    pushSpeedSample(coords.speedMs);
+    const effective = resolveEffectiveSpeedMs(
+      coords.speedMs,
+      getTrackSpeedMs(),
+      getSmoothedSpeedMs(),
+    );
+    coords.speedMs = effective;
+    void setGpsWatchInterval(gpsIntervalMsForSpeedMs(effective));
+  } catch {
+    void setGpsWatchInterval(gpsIntervalMsForSpeedMs(coords.speedMs));
+  }
   void import('./mobility/paceProfile')
     .then(({ pushPaceSample, modeHintFromSessionTravel }) => {
       pushPaceSample({
@@ -86,56 +176,93 @@ function emitUpdate(coords: {
   updateHandler?.(coords);
 }
 
-function watchOptionsForProfile(profile: GpsStreamProfile) {
-  if (profile === 'sleep') {
-    // Deep sleep: 2 min stillness → GPS max every 2 min; wake via pedometer
-    return {
-      accuracy: Location.Accuracy.Lowest,
-      timeInterval: 120_000,
-      distanceInterval: 40,
-      mayShowUserSettingsDialog: true,
-    };
+function emitFromLocation(location: LocationObject): void {
+  const speed = location.coords.speed;
+  const speedMs =
+    typeof speed === 'number' && Number.isFinite(speed) && speed >= 0
+      ? speed
+      : null;
+  const courseDeg =
+    typeof location.coords.heading === 'number' &&
+    Number.isFinite(location.coords.heading) &&
+    location.coords.heading >= 0
+      ? location.coords.heading
+      : null;
+  const alt =
+    typeof location.coords.altitude === 'number' &&
+    Number.isFinite(location.coords.altitude)
+      ? location.coords.altitude
+      : null;
+  if (courseDeg != null) noteGpsCourse(courseDeg, speedMs);
+  emitUpdate({
+    lat: location.coords.latitude,
+    lng: location.coords.longitude,
+    accuracy: location.coords.accuracy,
+    speedMs,
+    headingDeg: courseDeg,
+    altitudeM: alt,
+  });
+}
+
+async function startHeadingWatch(): Promise<void> {
+  await startFacingHeadingWatch();
+  // Android Maps-Kompass: Rotation-Vector. Expo magHeading würde dagegen arbeiten.
+  if (Platform.OS === 'android' && isNativeMapCompassActive()) return;
+  if (headingSubscription) return;
+  try {
+    headingSubscription = await Location.watchHeadingAsync((h) => {
+      // Android-Genauigkeit kommt nur vom Rotation-Vector — Expo 0/1 nörgelt sonst dauernd.
+      if (Platform.OS !== 'android' && typeof h.accuracy === 'number') {
+        noteHeadingAccuracy(h.accuracy);
+      }
+      const raw = headingFromExpoEvent(h);
+      if (raw != null) noteExpoCompassHeading(raw);
+    });
+  } catch (err) {
+    if (__DEV__) console.warn('[location] heading watch failed:', err);
   }
-  if (profile === 'far') {
-    // >500 m from next waypoint — throttle to 15 s
-    return {
-      accuracy: Location.Accuracy.Balanced,
-      timeInterval: 15_000,
-      distanceInterval: 25,
-      mayShowUserSettingsDialog: true,
-    };
+}
+
+/** Homescreen-Karte: Kompass auch ohne Nav-Watch anstoßen. */
+export async function ensureHeadingWatch(): Promise<void> {
+  await startHeadingWatch();
+}
+
+function stopHeadingWatch(): void {
+  stopFacingHeadingWatch();
+  if (headingSubscription) {
+    headingSubscription.remove();
+    headingSubscription = null;
   }
-  if (profile === 'throttled') {
-    return {
-      accuracy: Location.Accuracy.Balanced,
-      timeInterval: 5000,
-      distanceInterval: 10,
-      mayShowUserSettingsDialog: true,
-    };
-  }
-  if (profile === 'economy') {
-    return {
-      accuracy: Location.Accuracy.Balanced,
-      timeInterval: 4000,
-      distanceInterval: 12,
-      mayShowUserSettingsDialog: true,
-    };
-  }
-  if (profile === 'realtime-bike') {
-    return {
-      accuracy: Location.Accuracy.BestForNavigation,
-      timeInterval: 1000,
-      distanceInterval: 1,
-      mayShowUserSettingsDialog: true,
-    };
-  }
-  // realtime: <100 m from next WP / Nav — 3-4 s (Walking Mode Throttling)
+}
+
+function profileFromInterval(intervalMs: number): GpsStreamProfile {
+  if (intervalMs >= 60_000) return 'sleep';
+  if (intervalMs >= 12_000) return 'far';
+  if (intervalMs >= 6_000) return 'throttled';
+  if (intervalMs >= 3_000) return 'economy';
+  if (intervalMs <= 1_200) return 'realtime-bike';
+  return 'realtime';
+}
+
+function watchOptionsForInterval(intervalMs: number) {
+  const ms = Math.max(500, Math.min(120_000, Math.round(intervalMs)));
+  const moving = ms <= 4_000;
   return {
-    accuracy: Location.Accuracy.BestForNavigation,
-    timeInterval: 3500,
-    distanceInterval: 2,
+    accuracy: moving
+      ? Location.Accuracy.BestForNavigation
+      : Location.Accuracy.Balanced,
+    timeInterval: ms,
+    distanceInterval: ms >= 12_000 ? 8 : ms >= 6_000 ? 4 : ms >= 3_000 ? 2 : 1,
     mayShowUserSettingsDialog: true,
   };
+}
+
+function watchOptionsForProfile(profile: GpsStreamProfile) {
+  if (profile === 'sleep') {
+    return watchOptionsForInterval(120_000);
+  }
+  return watchOptionsForInterval(cadenceIntervalMs);
 }
 
 function stopWatchdog(): void {
@@ -159,8 +286,8 @@ function startWatchdog(): void {
 async function kickstartFix(opts?: { quiet?: boolean }): Promise<void> {
   try {
     const last = await Location.getLastKnownPositionAsync({
-      maxAge: 60_000,
-      requiredAccuracy: 200,
+      maxAge: 15 * 60_000,
+      requiredAccuracy: 250,
     });
     if (last) {
       emitUpdate({
@@ -193,6 +320,118 @@ async function kickstartFix(opts?: { quiet?: boolean }): Promise<void> {
     if (!opts?.quiet) {
       console.warn('[location] kickstart failed:', err);
     }
+  }
+}
+
+/**
+ * GPS schon während Intro/Splash — kein Permission-Dialog, kein Watcher.
+ * Puck nur mit frischem Last-Known; älteres nur als Kamera-Seed.
+ */
+export async function warmupGpsDuringIntro(): Promise<void> {
+  try {
+    const { status } = await Location.getForegroundPermissionsAsync();
+    if (status !== 'granted') return;
+  } catch {
+    return;
+  }
+
+  try {
+    const recent = await Location.getLastKnownPositionAsync({
+      maxAge: 15 * 60_000,
+      requiredAccuracy: 250,
+    });
+    if (recent) {
+      useFinnusStore.getState().reportGpsFix({
+        lat: recent.coords.latitude,
+        lng: recent.coords.longitude,
+        accuracy: recent.coords.accuracy,
+        live: false,
+      });
+    } else {
+      const older = await Location.getLastKnownPositionAsync({
+        maxAge: 36 * 60 * 60_000,
+        requiredAccuracy: 800,
+      });
+      if (older) {
+        useFinnusStore.getState().reportGpsFix({
+          lat: older.coords.latitude,
+          lng: older.coords.longitude,
+          accuracy: older.coords.accuracy,
+          live: false,
+        });
+      }
+    }
+  } catch {
+    /* Last-Known optional */
+  }
+
+  try {
+    const fresh = await Promise.race([
+      Location.getCurrentPositionAsync({
+        accuracy: Location.Accuracy.BestForNavigation,
+      }),
+      new Promise<null>((resolve) => {
+        setTimeout(() => resolve(null), 2_800);
+      }),
+    ]);
+    if (fresh) {
+      emitUpdate({
+        lat: fresh.coords.latitude,
+        lng: fresh.coords.longitude,
+        accuracy: fresh.coords.accuracy,
+      });
+    } else {
+      try {
+        const { noteLiveGpsFail } = require('./location/gpsAbsence') as {
+          noteLiveGpsFail: () => void;
+        };
+        noteLiveGpsFail();
+        const again = await Promise.race([
+          Location.getCurrentPositionAsync({
+            accuracy: Location.Accuracy.Balanced,
+          }),
+          new Promise<null>((resolve) => {
+            setTimeout(() => resolve(null), 2_400);
+          }),
+        ]);
+        if (again) {
+          emitUpdate({
+            lat: again.coords.latitude,
+            lng: again.coords.longitude,
+            accuracy: again.coords.accuracy,
+          });
+        } else {
+          noteLiveGpsFail();
+        }
+      } catch {
+        try {
+          const { noteLiveGpsFail } = require('./location/gpsAbsence') as {
+            noteLiveGpsFail: () => void;
+          };
+          noteLiveGpsFail();
+        } catch {
+          /* soft */
+        }
+      }
+    }
+  } catch {
+    try {
+      const { noteLiveGpsFail } = require('./location/gpsAbsence') as {
+        noteLiveGpsFail: () => void;
+      };
+      noteLiveGpsFail();
+      noteLiveGpsFail();
+    } catch {
+      /* soft */
+    }
+  }
+
+  try {
+    if (!subscription) {
+      void startWatchingLocation(() => undefined);
+    }
+  } catch {
+    /* Watcher startet mit Home / useGeofencing */
   }
 }
 
@@ -243,7 +482,7 @@ async function requestBackgroundPermissionLater(): Promise<void> {
 
     Alert.alert(
       'Standort immer erlauben',
-      'Damit Findus mit gesperrtem Bildschirm weiter navigieren und Orte erkennen kann, tippe bitte auf „Immer zulassen“.\n\nIch öffne dir jetzt den passenden System-Dialog — dort reicht ein Tipp, ohne durch mehrere Einstellungs-Seiten zu klicken.',
+      'Damit Yorro mit gesperrtem Bildschirm weiter navigieren und Orte erkennen kann, tippe bitte auf „Immer zulassen“.\n\nIch öffne dir jetzt den passenden System-Dialog — dort reicht ein Tipp, ohne durch mehrere Einstellungs-Seiten zu klicken.',
       [
         { text: 'Später', style: 'cancel' },
         {
@@ -412,22 +651,7 @@ export async function startWatchingLocation(
     subscription = await Location.watchPositionAsync(
       watchOptionsForProfile(streamProfile),
       (location: LocationObject) => {
-        const speed = location.coords.speed;
-        emitUpdate({
-          lat: location.coords.latitude,
-          lng: location.coords.longitude,
-          accuracy: location.coords.accuracy,
-          speedMs:
-            typeof speed === 'number' && Number.isFinite(speed) && speed >= 0
-              ? speed
-              : null,
-          headingDeg:
-            typeof location.coords.heading === 'number' &&
-            Number.isFinite(location.coords.heading) &&
-            location.coords.heading >= 0
-              ? location.coords.heading
-              : null,
-        });
+        emitFromLocation(location);
       },
     );
     useFinnusStore.getState().setGpsWatching(true);
@@ -436,6 +660,7 @@ export async function startWatchingLocation(
     }
     startWatchdog();
     ensureAppStateListener();
+    void startHeadingWatch();
   } catch (err) {
     console.warn('[location] watchPosition failed:', err);
     useFinnusStore.getState().setGpsWatching(false);
@@ -464,6 +689,7 @@ async function startBackgroundUpdatesIfPossible(): Promise<void> {
     ).catch(() => false);
     if (started) {
       backgroundStarted = true;
+      syncPersistentNotifications();
       return;
     }
 
@@ -472,20 +698,24 @@ async function startBackgroundUpdatesIfPossible(): Promise<void> {
         streamProfile === 'throttled'
           ? Location.Accuracy.Balanced
           : Location.Accuracy.BestForNavigation,
-      timeInterval: streamProfile === 'throttled' ? 5000 : 1000,
-      distanceInterval: streamProfile === 'throttled' ? 10 : 1,
-      deferredUpdatesInterval: streamProfile === 'throttled' ? 5000 : 1000,
+      timeInterval: cadenceIntervalMs >= 8_000 ? cadenceIntervalMs : 1_000,
+      distanceInterval: cadenceIntervalMs >= 8_000 ? 8 : 1,
+      deferredUpdatesInterval:
+        cadenceIntervalMs >= 8_000 ? cadenceIntervalMs : 1_000,
       showsBackgroundLocationIndicator: true,
       pausesUpdatesAutomatically: false,
       activityType: Location.ActivityType.Fitness,
       foregroundService: {
-        notificationTitle: 'Findus greift auf deinen Standort zu',
+        notificationTitle: 'Yorro',
         notificationBody:
-          'Tour aktiv — automatische Audio-Hinweise an Orten entlang der Route.',
+          'Standort für die Tour — tippen öffnet die App (Sprechen).',
         notificationColor: '#C4A35A',
+        // Recents-Wisch / App beendet → FGS + Tracking stoppen (nicht bei Home/Lock)
+        killServiceOnDestroy: true,
       },
     });
     backgroundStarted = true;
+    syncPersistentNotifications();
     if (__DEV__) {
       console.log(`[location] background updates started (${Platform.OS})`);
     }
@@ -498,6 +728,7 @@ export async function stopWatchingLocation(opts?: {
   keepHandler?: boolean;
 }): Promise<void> {
   stopWatchdog();
+  stopHeadingWatch();
 
   if (subscription) {
     subscription.remove();
@@ -516,6 +747,7 @@ export async function stopWatchingLocation(opts?: {
       console.warn('[location] stop background failed:', err);
     }
     backgroundStarted = false;
+    syncPersistentNotifications();
   }
 
   if (!opts?.keepHandler) {
@@ -535,11 +767,20 @@ export async function stopWatchingLocation(opts?: {
 
 export async function getCurrentCoords(options?: {
   timeoutMs?: number;
+  /** High = GPS genauer (Karte/Recenter). */
+  accuracy?: 'balanced' | 'high';
+  /** true = keinen LastKnown-Cache, frischen Fix abwarten. */
+  preferFresh?: boolean;
 }): Promise<{
   lat: number;
   lng: number;
 } | null> {
   const timeoutMs = options?.timeoutMs ?? 8000;
+  const preferFresh = options?.preferFresh === true;
+  const accuracy =
+    options?.accuracy === 'high'
+      ? Location.Accuracy.BestForNavigation
+      : Location.Accuracy.Balanced;
 
   try {
     const granted = await requestLocationPermission();
@@ -547,41 +788,40 @@ export async function getCurrentCoords(options?: {
 
     useFinnusStore.getState().setGpsStatus('searching');
 
-    // Cache zuerst — oft sofort verfügbar
-    try {
-      const last = await Location.getLastKnownPositionAsync({
-        maxAge: 30_000,
-        requiredAccuracy: 150,
-      });
-      if (last) {
-        const coords = {
-          lat: last.coords.latitude,
-          lng: last.coords.longitude,
-          accuracy: last.coords.accuracy,
-        };
-        useFinnusStore.getState().reportGpsFix(coords);
-        // Frischen Fix im Hintergrund nachziehen
-        void Location.getCurrentPositionAsync({
-          accuracy: Location.Accuracy.Balanced,
-        })
-          .then((loc) => {
-            useFinnusStore.getState().reportGpsFix({
-              lat: loc.coords.latitude,
-              lng: loc.coords.longitude,
-              accuracy: loc.coords.accuracy,
-            });
-          })
-          .catch(() => undefined);
-        return { lat: coords.lat, lng: coords.lng };
+    // Cache zuerst — oft sofort verfügbar (außer preferFresh)
+    if (!preferFresh) {
+      try {
+        const last = await Location.getLastKnownPositionAsync({
+          maxAge: 15 * 60_000,
+          requiredAccuracy: 250,
+        });
+        if (last) {
+          const coords = {
+            lat: last.coords.latitude,
+            lng: last.coords.longitude,
+            accuracy: last.coords.accuracy,
+          };
+          useFinnusStore.getState().reportGpsFix({ ...coords, live: false });
+          // Frischen Fix im Hintergrund nachziehen
+          void Location.getCurrentPositionAsync({ accuracy })
+            .then((loc) => {
+              useFinnusStore.getState().reportGpsFix({
+                lat: loc.coords.latitude,
+                lng: loc.coords.longitude,
+                accuracy: loc.coords.accuracy,
+                live: true,
+              });
+            })
+            .catch(() => undefined);
+          return { lat: coords.lat, lng: coords.lng };
+        }
+      } catch {
+        // weiter mit frischem Fix
       }
-    } catch {
-      // weiter mit frischem Fix
     }
 
     const location = await Promise.race([
-      Location.getCurrentPositionAsync({
-        accuracy: Location.Accuracy.Balanced,
-      }),
+      Location.getCurrentPositionAsync({ accuracy }),
       new Promise<null>((resolve) => {
         setTimeout(() => resolve(null), timeoutMs);
       }),
@@ -589,6 +829,26 @@ export async function getCurrentCoords(options?: {
 
     if (!location) {
       console.warn('[location] GPS Timeout');
+      // Fallback: LastKnown wenn Fresh fehlschlägt
+      if (preferFresh) {
+        try {
+          const last = await Location.getLastKnownPositionAsync({
+            maxAge: 120_000,
+            requiredAccuracy: 500,
+          });
+          if (last) {
+            const coords = {
+              lat: last.coords.latitude,
+              lng: last.coords.longitude,
+              accuracy: last.coords.accuracy,
+            };
+            useFinnusStore.getState().reportGpsFix({ ...coords, live: false });
+            return { lat: coords.lat, lng: coords.lng };
+          }
+        } catch {
+          /* ignore */
+        }
+      }
       return null;
     }
 
@@ -617,40 +877,38 @@ export async function probeGpsFix(): Promise<boolean> {
 }
 
 /**
- * High-frequency (1 Hz) vs. throttled while POI-Audio läuft.
- * Restartet den Watcher nur bei Profilwechsel.
+ * Speed-Leiter: Watcher-Intervall (1–15 s). Debounced, damit der Watcher nicht flattert.
  */
-export async function setGpsStreamProfile(
-  profile: GpsStreamProfile,
-): Promise<void> {
-  if (profile === streamProfile) return;
-  streamProfile = profile;
-  if (!subscription || !updateHandler) return;
-  if (useFinnusStore.getState().isSimulationMode) return;
+export async function setGpsWatchInterval(
+  intervalMs: number,
+): Promise<GpsStreamProfile> {
+  const nextMs = Math.max(1_000, Math.min(120_000, Math.round(intervalMs)));
+  const nextProfile = profileFromInterval(nextMs);
+  const same =
+    Math.abs(nextMs - cadenceIntervalMs) < 400 && nextProfile === streamProfile;
+  cadenceIntervalMs = nextMs;
+  streamProfile = nextProfile;
+  if (same) return streamProfile;
+  if (!subscription || !updateHandler) return streamProfile;
+  if (useFinnusStore.getState().isSimulationMode) return streamProfile;
+  if (cadenceApplyTimer) clearTimeout(cadenceApplyTimer);
+  cadenceApplyTimer = setTimeout(() => {
+    cadenceApplyTimer = null;
+    void restartWatcherForCadence();
+  }, 700);
+  return streamProfile;
+}
 
+async function restartWatcherForCadence(): Promise<void> {
+  if (!subscription || !updateHandler) return;
   const handler = updateHandler;
   try {
     subscription.remove();
     subscription = null;
     subscription = await Location.watchPositionAsync(
-      watchOptionsForProfile(profile),
+      watchOptionsForInterval(cadenceIntervalMs),
       (location: LocationObject) => {
-        const speed = location.coords.speed;
-        emitUpdate({
-          lat: location.coords.latitude,
-          lng: location.coords.longitude,
-          accuracy: location.coords.accuracy,
-          speedMs:
-            typeof speed === 'number' && Number.isFinite(speed) && speed >= 0
-              ? speed
-              : null,
-          headingDeg:
-            typeof location.coords.heading === 'number' &&
-            Number.isFinite(location.coords.heading) &&
-            location.coords.heading >= 0
-              ? location.coords.heading
-              : null,
-        });
+        emitFromLocation(location);
       },
     );
     updateHandler = handler;
@@ -669,11 +927,67 @@ export async function setGpsStreamProfile(
       void startBackgroundUpdatesIfPossible();
     }
     if (__DEV__) {
-      console.log(`[location] GPS profile → ${profile}`);
+      console.log(
+        `[location] GPS cadence → ${cadenceIntervalMs}ms (${streamProfile})`,
+      );
     }
   } catch (err) {
-    console.warn('[location] setGpsStreamProfile failed:', err);
+    console.warn('[location] setGpsWatchInterval failed:', err);
   }
+}
+
+/** Beschleunigungssensor: plötzlich Tempo → nicht auf den 15-s-Takt warten. */
+export function noteMotionBurst(): void {
+  const now = Date.now();
+  if (now - lastFixAtMs < 1_200) return;
+  if (now - lastImmediateFixAt < 2_000) return;
+  if (cadenceIntervalMs <= 2_200) return;
+  void requestImmediateGpsFix();
+}
+
+export async function requestImmediateGpsFix(): Promise<void> {
+  if (immediateFixInFlight) return;
+  if (useFinnusStore.getState().isSimulationMode) return;
+  immediateFixInFlight = true;
+  lastImmediateFixAt = Date.now();
+  try {
+    const location = await Location.getCurrentPositionAsync({
+      accuracy: Location.Accuracy.BestForNavigation,
+    });
+    emitFromLocation(location);
+    const speed = location.coords.speed;
+    const speedMs =
+      typeof speed === 'number' && Number.isFinite(speed) && speed >= 0
+        ? speed
+        : null;
+    await setGpsWatchInterval(gpsIntervalMsForSpeedMs(speedMs));
+  } catch (err) {
+    if (__DEV__) console.warn('[location] immediate fix failed:', err);
+  } finally {
+    immediateFixInFlight = false;
+  }
+}
+
+/**
+ * High-frequency (1 Hz) vs. throttled while POI-Audio läuft.
+ * Restartet den Watcher nur bei Profilwechsel.
+ */
+export async function setGpsStreamProfile(
+  profile: GpsStreamProfile,
+): Promise<void> {
+  const mapped =
+    profile === 'sleep'
+      ? 120_000
+      : profile === 'far'
+        ? 15_000
+        : profile === 'throttled'
+          ? 8_000
+          : profile === 'economy'
+            ? 4_000
+            : profile === 'realtime-bike'
+              ? 500
+              : 2_000;
+  await setGpsWatchInterval(mapped);
 }
 
 export function getGpsStreamProfile(): GpsStreamProfile {

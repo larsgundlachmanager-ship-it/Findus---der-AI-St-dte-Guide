@@ -1,6 +1,7 @@
 /**
- * Survival Mode (Masterbook V5): battery < 15% → audio-first + konkrete Ladeoptionen
+ * Survival Mode: battery ≤ 20% → audio-first + konkrete Ladeoptionen
  * (Powerbank-Automat / Steckdose / Café) — stadt-agnostisch via OSM+Google.
+ * Poll alle 3 Min; erneut erinnern solange der Akku niedrig bleibt (~20 Min Gap).
  */
 
 import * as Battery from 'expo-battery';
@@ -15,8 +16,8 @@ import {
 import { runPhoneChargeDiscovery } from '../navigation/phoneChargeDiscovery';
 import { shortenActionLabel } from '../concierge/actionLabelShorten';
 
-const SURVIVAL_PCT = 15;
-const COOLDOWN_MS = 4 * 60 * 60_000;
+const SURVIVAL_PCT = 20;
+const COOLDOWN_MS = 20 * 60_000;
 
 let lastPromptAtMs = 0;
 let started = false;
@@ -42,6 +43,7 @@ async function searchChargeNearby(): Promise<DiscoveryResult | null> {
       speech: charge.speech,
       candidates: charge.candidates,
       quickActions: charge.quickActions,
+      visualBullets: charge.visualBullets,
       needsConfirmation: charge.needsConfirmation,
       autoInserted: charge.autoInserted,
     };
@@ -69,7 +71,7 @@ async function maybePromptSurvival(level: number | null): Promise<void> {
     cardTitle: 'Akku schwach',
     speechText: intro,
     visualBullets: [
-      'Akku unter 15 % — Audio-first',
+      'Akku unter 20 % — Audio-first',
       'Handy in die Tasche stecken',
       'Suche Powerbank / Steckdose…',
     ],
@@ -104,14 +106,17 @@ async function maybePromptSurvival(level: number | null): Promise<void> {
   // Just-Do-It: konkrete Orte nachliefern (Powerbank bevorzugt)
   const found = await searchChargeNearby();
   if (found && found.candidates.length > 0) {
+    const speech = found.speech;
     presentDiscoveryAsConcierge({
       ...found,
-      speech: `${found.speech} Akku-Tipp: Audio-first bleiben, bis du steckst.`,
-      queryLabel: 'Akku · Handy laden',
+      speech,
+      visualBullets: (found.visualBullets ?? []).slice(0, 2),
+      queryLabel: 'Handy laden',
     });
     try {
       const voice = await getVoiceSettingsForTour();
-      await speakAssistantText(found.speech, {
+      // Dieselbe Speech wie auf der Karte (Stichpunkte = gesprochene Orte)
+      await speakAssistantText(speech, {
         voiceId: voice.voiceId,
         speechRate: voice.speechRate,
       });
@@ -128,7 +133,7 @@ async function maybePromptSurvival(level: number | null): Promise<void> {
     speechText:
       'Noch kein klarer Lade-Spot in der Nähe — tipp den Button, dann such ich nochmal Powerbank oder Steckdose.',
     visualBullets: [
-      'Akku unter 15 % — Audio-first',
+      'Akku unter 20 % — Audio-first',
       'Powerbank-Automat oder Café mit Steckdose',
       'GPS an = bessere Treffer',
     ],

@@ -1,10 +1,13 @@
 {
   "expo": {
-    "name": "Findus",
+    "name": "Yorro",
     "slug": "findus",
-    "version": "2.0.2",
+    "version": "2.0.26",
     "owner": "findusai",
-    "scheme": "findus",
+    "scheme": [
+      "yorro",
+      "findus"
+    ],
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "dark",
@@ -17,21 +20,27 @@
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "de.findus.app",
-      "buildNumber": "17",
+      "buildNumber": "26",
       "usesAppleSignIn": true,
       "infoPlist": {
-        "NSLocationWhenInUseUsageDescription": "Findus nutzt deinen Standort, um Tour-Stops in der Nähe zu erkennen.",
-        "NSLocationAlwaysAndWhenInUseUsageDescription": "Findus braucht auch im Hintergrund und bei gesperrtem Bildschirm deinen Standort, damit die Tour weiterläuft.",
-        "NSLocationAlwaysUsageDescription": "Findus braucht auch im Hintergrund und bei gesperrtem Bildschirm deinen Standort, damit die Tour weiterläuft.",
+        "NSLocationWhenInUseUsageDescription": "Yorro nutzt deinen Standort, um Tour-Stops in der Nähe zu erkennen.",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "Yorro braucht auch im Hintergrund und bei gesperrtem Bildschirm deinen Standort, damit die Tour weiterläuft.",
+        "NSLocationAlwaysUsageDescription": "Yorro braucht auch im Hintergrund und bei gesperrtem Bildschirm deinen Standort, damit die Tour weiterläuft.",
         "UIBackgroundModes": [
           "location",
           "audio"
         ],
-        "NSMicrophoneUsageDescription": "Findus braucht das Mikrofon für deine Rückfragen.",
-        "NSSpeechRecognitionUsageDescription": "Findus wandelt deine Sprache in Text um.",
-        "NSPhotoLibraryUsageDescription": "Findus greift nicht aktiv auf deine Fotomediathek zu. Diese Angabe ist erforderlich, weil eingebundene Bibliotheken die Foto-API referenzieren können.",
+        "NSMicrophoneUsageDescription": "Yorro braucht das Mikrofon für deine Rückfragen.",
+        "NSMotionUsageDescription": "Yorro nutzt Bewegungssensoren für den Kompass auf der Karte.",
+        "NSSpeechRecognitionUsageDescription": "Yorro wandelt deine Sprache in Text um.",
+        "NSPhotoLibraryUsageDescription": "Yorro greift nicht aktiv auf deine Fotomediathek zu. Diese Angabe ist erforderlich, weil eingebundene Bibliotheken die Foto-API referenzieren können.",
         "ITSAppUsesNonExemptEncryption": false,
-        "NSCameraUsageDescription": "Findus nutzt die Kamera nur für die Taschenlampe (Torch), nicht für Fotos."
+        "NSCameraUsageDescription": "Yorro nutzt die Kamera nur für die Taschenlampe (Torch), nicht für Fotos.",
+        "LSApplicationQueriesSchemes": [
+          "uber",
+          "uberauth",
+          "spotify"
+        ]
       }
     },
     "android": {
@@ -40,12 +49,16 @@
         "backgroundColor": "#18181B"
       },
       "package": "de.findus.app",
-      "versionCode": 25,
+      "versionCode": 53,
+      "largeHeap": true,
       "intentFilters": [
         {
           "action": "VIEW",
           "autoVerify": false,
           "data": [
+            {
+              "scheme": "yorro"
+            },
             {
               "scheme": "findus"
             },
@@ -63,6 +76,11 @@
           "autoVerify": false,
           "data": [
             {
+              "scheme": "yorro",
+              "host": "auth",
+              "pathPrefix": "/"
+            },
+            {
               "scheme": "findus",
               "host": "auth",
               "pathPrefix": "/"
@@ -77,6 +95,11 @@
           "action": "VIEW",
           "autoVerify": false,
           "data": [
+            {
+              "scheme": "yorro",
+              "host": "voice",
+              "pathPrefix": "/"
+            },
             {
               "scheme": "findus",
               "host": "voice",
@@ -114,6 +137,8 @@
     "plugins": [
       "./plugins/withJetifier",
       "./plugins/withFindusEspeak",
+      "./plugins/withMapLibreGlyphs",
+      "@maplibre/maplibre-react-native",
       [
         "expo-dev-client",
         {
@@ -123,8 +148,8 @@
       [
         "expo-location",
         {
-          "locationWhenInUsePermission": "Findus nutzt deinen Standort, um Tour-Stops in der Nähe zu erkennen.",
-          "locationAlwaysAndWhenInUsePermission": "Findus braucht auch im Hintergrund und bei gesperrtem Bildschirm deinen Standort, damit die Tour weiterläuft.",
+          "locationWhenInUsePermission": "Yorro nutzt deinen Standort, um Tour-Stops in der Nähe zu erkennen.",
+          "locationAlwaysAndWhenInUsePermission": "Yorro braucht auch im Hintergrund und bei gesperrtem Bildschirm deinen Standort, damit die Tour weiterläuft.",
           "isAndroidBackgroundLocationEnabled": true,
           "isAndroidForegroundServiceEnabled": true
         }
@@ -133,7 +158,7 @@
         "expo-notifications",
         {
           "icon": "./assets/icon.png",
-          "color": "#C4A35A",
+          "color": "#FCC70A",
           "sounds": [],
           "defaultChannel": "findus-departure-reminders"
         }
@@ -141,22 +166,23 @@
       [
         "expo-av",
         {
-          "microphonePermission": "Findus braucht das Mikrofon für deine Rückfragen."
+          "microphonePermission": "Yorro braucht das Mikrofon für deine Rückfragen."
         }
       ],
       "expo-sqlite",
       [
         "expo-speech-recognition",
         {
-          "microphonePermission": "Findus braucht das Mikrofon für deine Rückfragen.",
-          "speechRecognitionPermission": "Findus wandelt deine Sprache in Text um.",
+          "microphonePermission": "Yorro braucht das Mikrofon für deine Rückfragen.",
+          "speechRecognitionPermission": "Yorro wandelt deine Sprache in Text um.",
           "androidSpeechServicePackages": [
             "com.google.android.googlequicksearchbox"
           ]
         }
       ],
       "expo-asset",
-      "expo-font"
+      "expo-font",
+      "expo-apple-authentication"
     ],
     "extra": {
       "eas": {

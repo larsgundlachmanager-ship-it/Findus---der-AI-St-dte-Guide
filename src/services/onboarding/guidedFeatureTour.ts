@@ -1,6 +1,6 @@
 /**
  * Geführte Feature-Tour nach Setup — SSOT für Sprache + Demo-Hints.
- * Kompakt, ~0,5 s Pause zwischen Abschnitten (Runner), echte UI-Demos.
+ * First-download Erklärung ≠ normale App-Starts (Welcome-Back / City-Return).
  */
 
 import { budgetSpeechFromProfile } from '../../constants/budgetHints';
@@ -13,6 +13,8 @@ import {
   getCachedWeatherSummary,
   type WeatherSnapshot,
 } from '../weatherService';
+import { splitTextToStreamingChunks } from '../audio/punctuationChunker';
+import { estimateSpeechDurationMs } from '../../utils/subtitleWholeWords';
 
 export type GuidedTourSegment = ExplanationSegment & {
   demoTitle?: string;
@@ -43,28 +45,58 @@ function clampChars(text: string, min: number, max: number): string {
   return cut.trim();
 }
 
-/** Regionale Begrüßung nach Stadt / Region. */
+/** Nach der App-Erklärung: kurz selbst ankommen, dann Stadt-Welcome. */
+export const POST_EXPLANATION_SETTLE_MS = 2_000;
+
+/** Regionale Begrüßung nach Stadt / Region — einheimisch, nicht 0815. */
 export function regionalGreeting(cityName: string | null | undefined): string {
   const c = (cityName ?? '').toLowerCase();
   if (
-    /hamburg|prisdorf|schleswig|kiel|lübeck|lubeck|bremen|niedersachsen|emden|flensburg|rostock|wismar|stralsund|sylt|wangerooge|norderney|helgoland|cuxhaven|oldenburg|hannover/.test(
+    /london|manchester|liverpool|edinburgh|oxford|cambridge|bristol|glasgow|dublin|birmingham|leeds/.test(
+      c,
+    )
+  ) {
+    return 'Hello';
+  }
+  if (
+    /paris|lyon|marseille|nice|bordeaux|toulouse|lille|strasbourg|nantes/.test(c)
+  ) {
+    return 'Bonjour';
+  }
+  if (
+    /roma|rom\b|milan|milano|firenze|florenz|venezia|venedig|napoli|neapel|torino/.test(
+      c,
+    )
+  ) {
+    return 'Ciao';
+  }
+  if (/madrid|barcelona|sevilla|valencia|lisboa|lisbon|porto/.test(c)) {
+    return 'Hola';
+  }
+  if (/amsterdam|rotterdam|utrecht|den haag|haarlem/.test(c)) {
+    return 'Hoi';
+  }
+  if (/zürich|zurich|bern|genf|geneva|basel|luzern/.test(c)) {
+    return 'Grüezi';
+  }
+  if (
+    /kopenhagen|copenhagen|stockholm|oslo|göteborg|goteborg|helsinki/.test(c)
+  ) {
+    return 'Hej';
+  }
+  if (
+    /hamburg|prisdorf|pinneberg|schleswig|kiel|lübeck|lubeck|bremen|niedersachsen|emden|flensburg|rostock|wismar|stralsund|sylt|wangerooge|norderney|helgoland|cuxhaven|oldenburg|hannover/.test(
       c,
     )
   ) {
     return 'Moin';
   }
   if (
-    /münchen|munchen|bayern|nürnberg|nurnberg|augsburg|regensburg|passau|stuttgart|baden|freiburg|ulm|konstanz|salzburg|innsbruck|wien/.test(
+    /münchen|munchen|bayern|nürnberg|nurnberg|augsburg|regensburg|passau|stuttgart|baden|freiburg|ulm|konstanz|salzburg|innsbruck|wien|graz/.test(
       c,
     )
   ) {
     return 'Servus';
-  }
-  if (/köln|koln|düsseldorf|dusseldorf|rhein|ruhr|essen|dortmund|bonn/.test(c)) {
-    return 'Hallo';
-  }
-  if (/berlin|leipzig|dresden|potsdam|magdeburg/.test(c)) {
-    return 'Hallo';
   }
   return 'Hallo';
 }
@@ -74,7 +106,7 @@ export type CityDemoPack = {
   intro: string;
   highlights: string;
   timelineStops: [string, string, string];
-  /** Kurzer Aktivitäts-Teaser bei gutem Wetter */
+  /** Kurzer Aktivitäts-Teaser bei gutem Wetter (in den Fließtext eingewebt). */
   fairWeatherTeaser: string;
 };
 
@@ -85,51 +117,57 @@ export function cityDemoPack(cityName: string | null | undefined): CityDemoPack 
     return {
       landmark: 'Elbphilharmonie',
       intro:
-        'Hamburg ist Hafenstadt mit Speicherstadt, Elbe und einer Skyline, die sich ständig neu erfindet.',
+        'Hamburg atmet Hafen, Speicherstadt und Elbe — eine Stadt, die sich zwischen Wasser und Backstein ständig neu erfindet.',
       highlights:
-        'Unbedingt mal sehen: Elbphilharmonie, Speicherstadt und die Landungsbrücken.',
+        'Wenn du magst, steuern wir die Elbphilharmonie an, tauchen in die Speicherstadt und lassen die Landungsbrücken auf dich wirken.',
       timelineStops: ['Elbphilharmonie', 'Speicherstadt', 'Landungsbrücken'],
-      fairWeatherTeaser: 'kurze Runde am Hafen oder hoch zur Elphi-Plaza',
+      fairWeatherTeaser: 'eine Runde am Hafen oder hoch zur Plaza',
     };
   }
   if (/berlin/.test(c)) {
     return {
       landmark: 'Brandenburger Tor',
       intro:
-        'Berlin ist Geschichte und Gegenwart auf engstem Raum — Kieze, Museen, große Plätze.',
+        'Berlin ist Geschichte und Gegenwart auf engstem Raum — Kieze, Museen, große Plätze, die plötzlich ganz still werden können.',
       highlights:
-        'Klassiker: Brandenburger Tor, Museumsinsel und ein Spaziergang am Spreeufer.',
+        'Klassiker wie das Brandenburger Tor, die Museumsinsel und ein Spaziergang am Spreeufer lohnen sich immer.',
       timelineStops: ['Brandenburger Tor', 'Museumsinsel', 'East Side Gallery'],
-      fairWeatherTeaser: 'Spaziergang am Spreeufer oder ein Kaffee im Freien',
+      fairWeatherTeaser: 'ein Spaziergang am Spreeufer oder Kaffee draußen',
     };
   }
   if (/münchen|munchen/.test(c)) {
     return {
       landmark: 'Marienplatz',
       intro:
-        'München mischt Traditionsbiergarten und Großstadt — Altstadt, Parks und Alpenblick.',
-      highlights: 'Muss-Sees: Marienplatz, Englischer Garten und die Pinakotheken.',
+        'München mischt Traditionsbiergarten und Großstadt — Altstadt, Parks und manchmal sogar Alpenblick.',
+      highlights:
+        'Marienplatz, Englischer Garten und die Pinakotheken sind starke Anker, wenn du die Stadt spüren willst.',
       timelineStops: ['Marienplatz', 'Englischer Garten', 'Deutsches Museum'],
-      fairWeatherTeaser: 'Schlaufe durch den Englischen Garten',
+      fairWeatherTeaser: 'eine Schlaufe durch den Englischen Garten',
     };
   }
   if (/prisdorf/.test(c)) {
     return {
-      landmark: 'Bahnhof Prisdorf',
+      landmark: 'Gemeindezentrum am Hudenbarg',
       intro:
-        'Prisdorf ist gemütliches Schleswig-Holstein — klein, grün, und wenn du willst in null Komma nix in Hamburg. Der Bahnhof ist dein Startpunkt, nicht die große Show.',
+        'Prisdorf ist gemütliches Schleswig-Holstein: Marsch, Dorfkern und die Bahn nach Hamburg in greifbarer Nähe — kein Touristen-Zirkus, eher ein Ort zum Ankommen.',
       highlights:
-        'Von hier raus in die Marsch, rein ins Dorf — oder einfach den Zug nehmen, wenn die Stadt ruft. Kein Stress, kein Touristen-Zirkus.',
-      timelineStops: ['Bahnhof Prisdorf', 'Dorfkern', 'Abendsonne am Feldrand'],
-      fairWeatherTeaser: 'kurze Runde durchs Dorf oder raus an den Feldrand',
+        'Am Hudenbarg schlägt das Herz mit Gemeindezentrum, Feuerwehr und Kindergarten; vom Bahnhof bist du schnell in der Stadt, oder du bleibst einfach im Grünen.',
+      timelineStops: [
+        'Gemeindezentrum am Hudenbarg',
+        'Bahnhof Prisdorf',
+        'Abendlicht am Feldrand',
+      ],
+      fairWeatherTeaser: 'eine lockere Runde durchs Dorf oder raus an den Feldrand',
     };
   }
   if (/pinneberg/.test(c)) {
     return {
       landmark: 'Drostei',
       intro:
-        'Pinneberg mischt Kleinstadt-Ruhe mit schneller Anbindung nach Hamburg — und der Drostei als Herzstück.',
-      highlights: 'Schau dir die Drostei an, den Stadtpark und die Fußgängerzone.',
+        'Pinneberg mischt Kleinstadt-Ruhe mit schneller Anbindung nach Hamburg — und die Drostei sitzt mittendrin wie ein ruhiger Anker.',
+      highlights:
+        'Schau dir die Drostei an, gönn dir den Stadtpark und lass die Fußgängerzone auf dich wirken.',
       timelineStops: ['Drostei', 'Stadtpark', 'Fußgängerzone'],
       fairWeatherTeaser: 'Café vor der Drostei oder eine Runde Stadtpark',
     };
@@ -137,10 +175,23 @@ export function cityDemoPack(cityName: string | null | undefined): CityDemoPack 
   if (/köln|koln/.test(c)) {
     return {
       landmark: 'Kölner Dom',
-      intro: 'Köln lebt vom Dom, dem Rhein und einer lockeren, offenen Stimmung.',
-      highlights: 'Pflicht: Dom, Rheinboulevard und die Altstadt um den Heumarkt.',
+      intro:
+        'Köln lebt vom Dom, dem Rhein und einer lockeren, offenen Stimmung, die dich schnell mitnimmt.',
+      highlights:
+        'Dom, Rheinboulevard und die Altstadt um den Heumarkt — das sind die Klassiker, die sitzen.',
       timelineStops: ['Kölner Dom', 'Rheinboulevard', 'Alter Markt'],
-      fairWeatherTeaser: 'Rheinboulevard oder Altstadt-Bummel',
+      fairWeatherTeaser: 'Rheinboulevard oder ein Bummel durch die Altstadt',
+    };
+  }
+  if (/london/.test(c)) {
+    return {
+      landmark: 'Tower Bridge',
+      intro:
+        'London ist Schichten aus Geschichte und Großstadt-Rhythmus — Themse, Parks und Wahrzeichen, die man am besten zu Fuß spürt.',
+      highlights:
+        'Tower Bridge, Westminster und ein Bummel am Fluss geben dir schnell ein Gefühl für die Stadt.',
+      timelineStops: ['Tower Bridge', 'Westminster', 'South Bank'],
+      fairWeatherTeaser: 'eine Runde entlang der Themse',
     };
   }
   const city = (cityName ?? '').trim() || 'deiner Stadt';
@@ -149,15 +200,16 @@ export function cityDemoPack(cityName: string | null | undefined): CityDemoPack 
     intro: clampChars(
       `${city} steckt voller Ecken, die man am besten zu Fuß entdeckt — Geschichte, Plätze und lokale Treffpunkte.`,
       150,
-      200,
+      220,
     ),
-    highlights: `Schau dir das berühmteste Ensemble an, den zentralen Platz und einen lokalen Lieblingsort.`,
+    highlights:
+      'Lass uns das berühmteste Ensemble ansteuern, den zentralen Platz und einen lokalen Lieblingsort.',
     timelineStops: [
       `Zentrum ${city}`,
       'Lokales Highlight',
       'Sonnenuntergang',
     ],
-    fairWeatherTeaser: 'kurze Runde draußen, solange es so bleibt',
+    fairWeatherTeaser: 'eine kurze Runde draußen, solange es so bleibt',
   };
 }
 
@@ -167,21 +219,32 @@ function prefLabel(id: string): string {
   return id.replace(/_/g, ' ');
 }
 
-/** Max. 2–3 Interessen als natürliche Phrase — keine ID-Liste. */
+/** Interessen als natürliche Phrase — Prefs + Freitext, keine ID-Liste. */
 function interestPhrase(profile: UserProfile): string {
   const likes: string[] = [];
   for (const [k, v] of Object.entries(profile.experiencePrefs ?? {})) {
     if (v === 'yes') likes.push(prefLabel(k));
   }
-  const want = (profile.wantToExperience ?? '').trim();
-  if (want && want.length <= 80) {
-    return want.replace(/\s+/g, ' ');
+  const want = (profile.wantToExperience ?? '').trim().replace(/\s+/g, ' ');
+  if (likes.length === 0) {
+    return want.length <= 120 ? want : want.slice(0, 117).replace(/\s+\S*$/, '');
   }
-  if (likes.length === 0) return '';
-  const top = likes.slice(0, 3);
-  if (top.length === 1) return top[0]!;
-  if (top.length === 2) return `${top[0]} und ${top[1]}`;
-  return `${top[0]}, ${top[1]} und ${top[2]}`;
+  const top = likes.slice(0, 5);
+  let prefs = '';
+  if (top.length === 1) prefs = top[0]!;
+  else if (top.length === 2) prefs = `${top[0]} und ${top[1]}`;
+  else if (top.length === 3) {
+    prefs = `${top[0]}, ${top[1]} und ${top[2]}`;
+  } else {
+    prefs = `${top.slice(0, -1).join(', ')} und ${top[top.length - 1]}`;
+  }
+  if (!want || want.length > 100) return prefs;
+  if (want.toLowerCase().includes(prefs.toLowerCase().slice(0, 12))) {
+    return want.length <= 140
+      ? want
+      : `${want.slice(0, 137).replace(/\s+\S*$/, '')}…`;
+  }
+  return `${prefs} — und du willst ${want.length <= 70 ? want : `${want.slice(0, 67)}…`}`;
 }
 
 function roleVibeBit(profile: UserProfile): string {
@@ -212,16 +275,16 @@ function foodCareBit(profile: UserProfile): string {
     .filter(Boolean)
     .slice(0, 2);
   if (allergy.length) {
-    return `Essen: ich passe auf ${allergy.join(' und ')} auf`;
+    return `Beim Essen passe ich auf ${allergy.join(' und ')} auf`;
   }
   if (diet.length) {
-    return `Essen: ${diet.join(' und ')} im Blick`;
+    return `Beim Essen habe ich ${diet.join(' und ')} im Blick`;
   }
   return '';
 }
 
 /**
- * Echte Kurz-Zusammenfassung — keine Kategorie-Vorlese, kein 1:1-AboutMe.
+ * Interessen-Zusammenfassung — fließend, erlebnisorientiert (sehen/erleben).
  */
 function paraphraseProfile(profile: UserProfile): string {
   const name = profile.firstName.trim() || 'du';
@@ -234,34 +297,37 @@ function paraphraseProfile(profile: UserProfile): string {
   const parts: string[] = [];
   if (vibe && interests) {
     parts.push(
-      `${name}, ich nehm dich ${vibe} — und dreh den Fokus auf ${interests}.`,
+      `${name}, ich nehme dich ${vibe} mit — du willst vor allem ${interests} sehen und spüren.`,
     );
   } else if (interests) {
-    parts.push(`${name}, Fokus liegt bei dir klar auf ${interests}.`);
+    parts.push(`${name}, bei dir geht’s klar ums Erleben: ${interests}.`);
   } else if (vibe) {
-    parts.push(`${name}, ich begleite dich ${vibe}.`);
+    parts.push(
+      `${name}, ich begleite dich ${vibe} und wir finden Orte, die dazu passen.`,
+    );
   } else {
-    parts.push(`${name}, Profil sitzt — wir finden unseren Rhythmus.`);
+    parts.push(
+      `${name}, dein Profil sitzt — wir drehen den Fokus auf das, was du hier erleben willst.`,
+    );
   }
 
-  if (avoid && avoid.length <= 60) {
+  if (avoid && avoid.length <= 70) {
     parts.push(`${avoid} lassen wir links liegen.`);
   } else if (avoid) {
-    parts.push('Was du meiden willst, hab ich notiert.');
+    parts.push('Das Meiden-Zeug bleibt draußen.');
   }
 
   if (food) parts.push(`${food}.`);
 
   if (profile.budgetCategory) {
-    parts.push(`Budget: ${budgetSpeechFromProfile(profile)}.`);
+    parts.push(`Beim Budget bleibe ich bei ${budgetSpeechFromProfile(profile)}.`);
   }
 
-  // AboutMe nur als Signal, nie 1:1 vorlesen
   if (about.length > 12) {
-    parts.push('Was du über dich erzählt hast, steckt im Hinterkopf.');
+    parts.push('Passt zu dem, was du über dich erzählt hast.');
   }
 
-  return clampTour(parts.join(' '), 280);
+  return clampTour(parts.join(' '), 360);
 }
 
 function stayWindowHint(profile: UserProfile): 'today' | 'weekend' | 'few_days' {
@@ -279,7 +345,7 @@ function stayWindowHint(profile: UserProfile): 'today' | 'weekend' | 'few_days' 
 }
 
 function parseTempC(summary: string | null | undefined): number | null {
-  const m = (summary ?? '').match(/(\d{1,2})\s*Grad/i);
+  const m = (summary ?? '').match(/(\d{1,2})\s*(?:°|Grad)/i);
   if (!m) return null;
   const n = Number(m[1]);
   return Number.isFinite(n) ? n : null;
@@ -291,39 +357,50 @@ function isFairWeather(snap: WeatherSnapshot | null, summary: string | null): bo
   if ((snap?.precipitationMm ?? 0) > 0.5) return false;
   const line = (summary ?? snap?.summaryLine ?? '').toLowerCase();
   if (/starkregen|regnet\s+stark|gewitter|sturm/.test(line)) return false;
-  if (/regen/.test(line) && !/trocken bis|kein regen|kein sicheres trocken|schauer möglich/i.test(line)) {
+  if (
+    /regen/.test(line) &&
+    !/trocken bis|kein regen|kein sicheres trocken|schauer möglich/i.test(line)
+  ) {
     return false;
   }
   if (/schauer möglich|kein sicheres trocken/.test(line)) return false;
   return true;
 }
 
-function outfitHack(
+/**
+ * Wetter → Explore-Vibe (ohne Outfit/Kleidungs-Tipps — First-Launch).
+ */
+function weatherExploreFollowUp(
   snap: WeatherSnapshot | null,
   summary: string | null,
   teaser: string,
 ): string {
-  const temp = parseTempC(summary ?? snap?.summaryLine);
+  const temp =
+    snap?.currentTempC != null && Number.isFinite(snap.currentTempC)
+      ? Math.round(snap.currentTempC)
+      : parseTempC(summary ?? snap?.summaryLine);
   const fair = isFairWeather(snap, summary);
 
   if (!fair) {
     if (snap?.isHeavyRain || /starkregen|regnet\s+stark/.test(summary ?? '')) {
-      return 'Outfit: Regenlage oder Jacke — Indoor behalte ich im Auge.';
+      return 'Draußen ist’s nass — Indoor-Ideen und kurze Indoor-Stops behalte ich im Blick.';
     }
-    return 'Outfit-Hack: Schichten. Eine leichte Extra-Lage, dann bist du flexibel.';
+    return 'Die Luft kann umschlagen — wir bleiben flexibel und finden trotzdem gute Ecken.';
   }
 
-  // Gutes Wetter → knapper Outfit + Aktivitäts-Teaser
   if (temp != null && temp >= 24) {
-    return `Outfit: leicht, Sonnenbrille rein. Teaser: ${teaser}.`;
+    return `Mit rund ${temp} Grad ist draußen klar Erkunden-Wetter — ${teaser} passt super.`;
   }
   if (temp != null && temp >= 18) {
-    return `Outfit-Hack: T-Shirt plus dünne Jacke in der Tasche. Teaser: ${teaser}.`;
+    return `Bei etwa ${temp} Grad lädt’s zum Flanieren ein — ${teaser}, wenn du magst.`;
   }
   if (temp != null && temp <= 8) {
-    return `Outfit: warm schichten. Trotzdem: ${teaser}, wenn du kurz raus willst.`;
+    return `Es ist frisch (so um ${temp} Grad) — kurze Runden draußen gehen trotzdem, ${teaser}.`;
   }
-  return `Outfit-Hack: Schichten, leicht starten. Teaser: ${teaser}.`;
+  if (temp != null) {
+    return `So um ${temp} Grad: gutes Tempo zum Entdecken — ${teaser}, solange es so bleibt.`;
+  }
+  return `Gutes Erkunden-Wetter — ${teaser}, solange es so bleibt.`;
 }
 
 function weatherSpeech(
@@ -333,21 +410,23 @@ function weatherSpeech(
   snap: WeatherSnapshot | null,
   teaser: string,
 ): string {
+  void stay;
   const base =
     summary?.trim() ||
     snap?.summaryLine?.trim() ||
-    'Aktuell hab ich noch keinen frischen Wetter-Check.';
-  const outfit = outfitHack(snap, summary, teaser);
-  if (stay === 'today') {
-    return clampTour(`Heute in ${city}: ${base} ${outfit}`, 320);
-  }
-  if (stay === 'weekend') {
-    return clampTour(
-      `Wochenende in ${city}: ${base} ${outfit}`,
-      320,
-    );
-  }
-  return clampTour(`In ${city}: ${base} ${outfit}`, 320);
+    `In ${city} hab ich gerade keinen frischen Wetter-Check.`;
+  const follow = weatherExploreFollowUp(snap, summary, teaser);
+  // Kein „Zum Wetter: …“-Meta — einfach flüssig daneben sagen
+  return clampTour(`${base} ${follow}`, 360);
+}
+
+function niceTimeOfDay(): string {
+  const h = new Date().getHours();
+  if (h >= 5 && h < 11) return 'schönen Morgen';
+  if (h >= 11 && h < 14) return 'schönen Mittag';
+  if (h >= 14 && h < 18) return 'schönen Nachmittag';
+  if (h >= 18 && h < 22) return 'schönen Abend';
+  return 'schöne Nacht';
 }
 
 export type BuildTourOpts = {
@@ -357,7 +436,9 @@ export type BuildTourOpts = {
 };
 
 /**
- * Komplette Erklärung: Welcome → Profil → Stadt → Wetter → App-Demo → Hands-free → Hilfe.
+ * First-download Erklärung: lokale Begrüßung → knackige Stadt-Vorstellung →
+ * App-Tour auf der echten Karte. Kein Pref-Rückblick, kein Wetter, kein „Jo“.
+ * Danach kurze Pause + Stadt-Welcome (cityWelcomeService).
  */
 export function buildGuidedFeatureTourSegments(
   opts: BuildTourOpts | { cityName: string },
@@ -374,8 +455,6 @@ export function buildGuidedFeatureTourSegments(
         wantToExperience: '',
         avoidExperience: '',
       } as unknown as UserProfile,
-      weatherSummary: getCachedWeatherSummary(),
-      weatherSnapshot: getCachedWeatherSnapshot(),
     }).map((s) =>
       s.landmarkName ? s : { ...s, landmarkName: pack.landmark },
     );
@@ -386,132 +465,200 @@ export function buildGuidedFeatureTourSegments(
   const name = profile.firstName.trim() || 'du';
   const greet = regionalGreeting(city);
   const pack = cityDemoPack(city);
-  const stay = stayWindowHint(profile);
-  const snap = opts.weatherSnapshot ?? getCachedWeatherSnapshot();
-  const weather = weatherSpeech(
-    city,
-    stay,
-    opts.weatherSummary ?? getCachedWeatherSummary(),
-    snap,
-    pack.fairWeatherTeaser,
-  );
-  const micMode = profile.micListenMode === 'dont_hear' ? 'tip' : 'hold';
 
   return [
     {
       hint: 'none',
+      text: clampTour(`${greet} ${name} — willkommen in ${city}.`, 90),
+    },
+    {
+      hint: 'none',
+      text: clampTour(pack.intro, 160),
+    },
+    {
+      hint: 'none',
       text: clampTour(
-        `${greet} ${name} — geschafft. Willkommen in ${city}. Kurz und gemütlich, was ich mir gemerkt hab — ohne Manual-Gedresche.`,
+        'Bevor wir richtig reinstarten, zeig ich dir die App kurz.',
+        90,
+      ),
+    },
+    {
+      hint: 'passport',
+      demoTitle: 'Karte & Orte',
+      landmarkName: pack.landmark,
+      text: clampTour(
+        `Karte und Mikro sind zentral. Auf der Karte siehst du, wo du bist, und die Orte um dich: Grün schon gesehen, lila interessant, blau geplant. Unten bei Orte kannst du Kategorien wählen, suchen und Vorschläge anschauen.`,
         280,
       ),
     },
     {
-      hint: 'none',
-      text: paraphraseProfile(profile),
-    },
-    {
-      hint: 'none',
-      text: clampTour(
-        `${clampChars(pack.intro, 120, 220)} ${pack.highlights}`,
-        360,
-      ),
-    },
-    {
-      hint: 'none',
-      text: weather,
-    },
-    {
-      hint: 'none',
-      text: clampTour(
-        `Und jetzt die App — einmal gesehen, dann darfst du mich auch einfach ignorieren und loslaufen.`,
-        160,
-      ),
-    },
-    {
-      hint: 'module1',
-      demoTitle: 'Vor Ort',
-      landmarkName: pack.landmark,
-      text: clampTour(
-        `Du schlenderst durch ${city}. Kommst du an etwas Spannendes — zum Beispiel ${pack.landmark} — melde ich mich von allein und erzähl dir was dazu.`,
-      ),
-    },
-    {
-      hint: 'bullets',
-      demoTitle: 'Stichpunkte',
-      landmarkName: pack.landmark,
-      text: clampTour(
-        `Danach ein paar Stichpunkte — der schnelle Überblick, ohne Essay.`,
-      ),
-    },
-    {
       hint: 'actions',
-      demoTitle: 'Action-Buttons',
+      demoTitle: 'Ort öffnen',
       landmarkName: pack.landmark,
       text: clampTour(
-        `Darunter Buttons: Route, Speisekarte, mehr Infos — tippen statt tippen und suchen.`,
-      ),
-    },
-    {
-      hint: 'mic',
-      demoTitle: 'Mikrofon · Rückfragen',
-      text: clampTour(
-        micMode === 'tip'
-          ? `Rückfragen? Kurz aufs Mikro tippen und schreiben.`
-          : `Rückfragen? Mikro tippen zum Tippen — oder halten und sprechen. Links wischen startet Live-Chat, rechts fixiert.`,
-      ),
-    },
-    {
-      hint: 'live_hud',
-      demoTitle: 'Live-Anzeige',
-      text: clampTour(
-        `Oben links die Live-Anzeige: Ort, Tipps, Countdowns. Tippen lädt Tipps — zum Beispiel Parkticket, Wecker oder „Brauchst du Akku?“.`,
-        320,
+        'Tipp auf einen Ort — dann startest du die Navigation, oder öffnest die Website wenn eine da ist.',
+        140,
       ),
     },
     {
       hint: 'timeline',
       demoTitle: 'Timeline',
       text: clampTour(
-        `Oben rechts der Kalender: Timeline. Oben Erlebtes, darunter Planung — hier mit ${pack.timelineStops[0]}, ${pack.timelineStops[1]}, ${pack.timelineStops[2]}.`,
-        360,
+        `Unten links die Timeline: was ansteht — zum Beispiel ${pack.timelineStops[0]}, ${pack.timelineStops[1]}, ${pack.timelineStops[2]}.`,
+        220,
       ),
     },
     {
       hint: 'settings',
       demoTitle: 'Einstellungen',
       text: clampTour(
-        `Daneben das Zahnrad — Stimme, Profil, Trigger. Gleich öffne ich’s kurz.`,
-        200,
+        'Einstellungen findest du unten rechts.',
+        80,
       ),
     },
     {
       hint: 'settings_panel',
       demoTitle: 'Einstellungen offen',
       text: clampTour(
-        `Hier drin: Einrichtung, Stadt wechseln, Audio, Erklärungen, Feedback. Fertig — ich schließ wieder.`,
+        'Hier wechselst du die Stadt und stellst die Reise ein. Der Rest kann warten.',
+        140,
+      ),
+    },
+    {
+      hint: 'live_hud',
+      demoTitle: 'Live-Anzeige',
+      text: clampTour(
+        'Wieder auf dem Homescreen: oben die Live-Anzeige für Tipps, News und Erinnerungen — vor allem oben links.',
+        160,
+      ),
+    },
+    {
+      hint: 'mic',
+      demoTitle: 'Mikrofon',
+      text: clampTour(
+        'Und das Herzstück bin ich. Tipp aufs Mikro — zum Beispiel wo du Eis essen kannst, wo ein günstiges Hotel liegt, oder wann die Bahn fährt. Wenn was hakt, sag einfach Bescheid.',
         240,
       ),
     },
     {
-      hint: 'passport',
-      demoTitle: 'Stempelkarte',
-      text: clampTour(
-        `Unter dem Zahnrad das Karten-Icon: Stempelkarte — Fog-of-War und was du schon erkundet hast. Nicht die Live-Zeile tippen, sondern genau dieses Icon.`,
-        320,
-      ),
-    },
-    {
-      hint: 'help_prompt',
-      demoTitle: 'Hands-free',
-      text: clampTour(
-        `Am besten hands-free: Kopfhörer rein, Handy in die Tasche. In-Ear-Taste kann Findus starten, wenn du’s in den Einstellungen an hast. Frag mich einfach — Essen, Weg, Gebäude vor dir. Ich übernehme.`,
-        400,
-      ),
+      hint: 'none',
+      text: clampTour(`Viel Spaß in ${city}.`, 80),
     },
   ];
 }
 
-/** Drei Start-Vorschläge nach der Tour. */
+/**
+ * Speech-Stream für die Erklärung: Fast-Hook zuerst, dann Phrase-Chunks
+ * (wachsender Prefetch in der TTS-Queue).
+ */
+export async function* explanationSpeechChunkStream(
+  segments: GuidedTourSegment[],
+): AsyncGenerator<string, void, unknown> {
+  for (const seg of segments) {
+    const line = seg.text?.trim();
+    if (!line) continue;
+    const parts = splitTextToStreamingChunks(line);
+    if (parts.length === 0) {
+      yield line;
+      continue;
+    }
+    for (const p of parts) {
+      if (p?.trim()) yield p.trim();
+    }
+  }
+}
+
+function normTourSpeech(s: string): string {
+  return s.replace(/\s+/g, ' ').trim().toLowerCase();
+}
+
+/** Welches Tour-Segment die Stimme gerade spricht (akkumulierte Chunks). */
+export function explanationSegmentIndexForSpoken(
+  spoken: string,
+  segments: Array<{ text: string }>,
+): number {
+  if (segments.length === 0) return 0;
+  const spokenLen = normTourSpeech(spoken).length;
+  let acc = 0;
+  for (let i = 0; i < segments.length; i++) {
+    const len = normTourSpeech(segments[i]!.text).length;
+    const end = acc + len;
+    if (spokenLen <= end || i === segments.length - 1) return i;
+    acc = end + 1;
+  }
+  return segments.length - 1;
+}
+
+/** Orte-Sheet erst, wenn die Stimme den zweiten Teil der Karten-Erklärung erreicht. */
+export function explanationPassportPlacesCueReached(
+  spoken: string,
+  segments: Array<{ hint: string; text: string }>,
+): boolean {
+  const idx = segments.findIndex((s) => s.hint === 'passport');
+  if (idx < 0) return false;
+  const cur = explanationSegmentIndexForSpoken(spoken, segments);
+  if (cur > idx) return true;
+  if (cur < idx) return false;
+  const blob = normTourSpeech(spoken);
+  if (/unten bei orte|kategorien wählen|vorschläge anschauen/.test(blob)) {
+    return true;
+  }
+  let acc = 0;
+  for (let i = 0; i < idx; i++) {
+    acc += normTourSpeech(segments[i]!.text).length + 1;
+  }
+  const len = Math.max(1, normTourSpeech(segments[idx]!.text).length);
+  return (normTourSpeech(spoken).length - acc) / len >= 0.72;
+}
+
+/**
+ * Speech-Cursor für die Erklärung: Visuals folgen echten TTS-Chunks,
+ * nicht einer Zeichen-Stoppuhr (die der Stimme davoneilt).
+ */
+export function createExplanationSpeechCursor(
+  segments: Array<{ hint: string; text: string }>,
+): {
+  pushChunk: (text: string) => void;
+  segmentIndex: () => number;
+  passportPlacesCue: () => boolean;
+  waitForSegment: (index: number, isActive: () => boolean) => Promise<void>;
+} {
+  let spoken = '';
+  const waiters: Array<() => void> = [];
+  const wake = () => {
+    const w = waiters.splice(0);
+    for (const fn of w) fn();
+  };
+  return {
+    pushChunk(text: string) {
+      const t = text.replace(/\s+/g, ' ').trim();
+      if (!t) return;
+      spoken = spoken ? `${spoken} ${t}` : t;
+      wake();
+    },
+    segmentIndex() {
+      return explanationSegmentIndexForSpoken(spoken, segments);
+    },
+    passportPlacesCue() {
+      return explanationPassportPlacesCueReached(spoken, segments);
+    },
+    async waitForSegment(index: number, isActive: () => boolean) {
+      while (isActive() && explanationSegmentIndexForSpoken(spoken, segments) < index) {
+        await Promise.race([
+          new Promise<void>((r) => waiters.push(r)),
+          new Promise<void>((r) => setTimeout(r, 100)),
+        ]);
+      }
+    },
+  };
+}
+
+/** Fallback-Halt, falls Chunk-Events ausbleiben (expo-speech / Stream-Fail). */
+export function explanationSegmentHoldMs(text: string): number {
+  return estimateSpeechDurationMs(text) + 420;
+}
+
+/** Drei Start-Vorschläge nach der Tour (optional / Hilfe-Chips). */
 export function buildPostTourHelpActions(cityName: string | null | undefined): Array<{
   label: string;
   prompt: string;
@@ -528,8 +675,8 @@ export function buildPostTourHelpActions(cityName: string | null | undefined): A
       prompt: `Empfiehl mir jetzt ein gutes Restaurant in ${city}: suche konkrete Orte raus, kurz warum sie passen, und gib Route- und Speisekarten-Buttons wenn möglich.`,
     },
     {
-      label: 'Einfach loslaufen',
-      prompt: `Lass uns in ${city} einfach loslaufen — starte mit etwas Spannendem in der Nähe, z. B. Richtung ${pack.landmark}, und navigiere mich dahin.`,
+      label: `Mehr zu ${pack.landmark}`,
+      prompt: `Erzähl mir mehr zu ${pack.landmark} in ${city} — Geschichte und was man dort jetzt machen kann.`,
     },
   ];
 }

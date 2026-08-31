@@ -16,12 +16,14 @@ import {
   type ShoppingPlaceCategory,
 } from '../../store/useShoppingTaskStore';
 import type { QuickAction } from '../../types/concierge';
+import { publishShoppingNeedPlaces } from './shoppingNeedMapCache';
 
-const PROMPT_RADIUS_M = 150;
+const PROMPT_RADIUS_M = 120;
+const PROMPT_RADIUS_DRUGSTORE_M = 160;
 const HOTEL_RADIUS_M = 95;
-const SEARCH_RADIUS_M = 220;
-const MIN_SEARCH_INTERVAL_MS = 18_000;
-const GLOBAL_PROMPT_GAP_MS = 40_000;
+const SEARCH_RADIUS_M = 280;
+const MIN_SEARCH_INTERVAL_MS = 15_000;
+const GLOBAL_PROMPT_GAP_MS = 35_000;
 const SAME_PLACE_COOLDOWN_MS = 2 * 3600_000;
 const TASK_SAME_PLACE_GAP_MS = 25 * 60_000;
 const TASK_FOLLOWUP_GAP_MS = 3 * 60_000;
@@ -71,8 +73,12 @@ function pickBestPlace(
   headingDeg: number | null,
   movementBearingDeg: number | null,
 ): DiscoveredPlace | null {
+  const drugstore =
+    task.placeTypes.includes('drugstore') ||
+    /zahnbürste|zahnbuerste|drogerie|dm|rossmann/i.test(task.itemLabel);
+  const radius = drugstore ? PROMPT_RADIUS_DRUGSTORE_M : PROMPT_RADIUS_M;
   const usable = places
-    .filter((p) => p.distanceM <= PROMPT_RADIUS_M)
+    .filter((p) => p.distanceM <= radius)
     .filter((p) => !placeAlreadyPrompted(task, p.placeId, now))
     .sort((a, b) => a.distanceM - b.distanceM);
 
@@ -83,6 +89,14 @@ function pickBestPlace(
   const lng = store.lastGpsLng;
   if (lat == null || lng == null) return usable[0] ?? null;
 
+  const brandBonus = (name: string) => {
+    if (!drugstore) return 0;
+    if (/\bdm\b|dm[- ]?drogerie/i.test(name)) return -40;
+    if (/rossmann/i.test(name)) return -40;
+    if (/müller|mueller|budni/i.test(name)) return -15;
+    return 0;
+  };
+
   const scored = usable.map((p) => {
     const targetBearing = compassBearing(lat, lng, p.lat, p.lng);
     const aheadOk = isAheadOfMovement(
@@ -91,7 +105,11 @@ function pickBestPlace(
       targetBearing,
       130,
     );
-    return { p, aheadOk, d: p.distanceM };
+    return {
+      p,
+      aheadOk,
+      d: p.distanceM + brandBonus(p.name),
+    };
   });
   scored.sort((a, b) => {
     if (a.aheadOk !== b.aheadOk) return a.aheadOk ? -1 : 1;
@@ -338,6 +356,16 @@ export async function tickShoppingReminders(
 
       const sincePrompt = now - (task.lastPromptAtMs || 0);
       const places = await searchForTypes(task.placeTypes, lat, lng);
+      publishShoppingNeedPlaces(
+        task.id,
+        task.itemLabel,
+        places.map((p) => ({
+          placeId: p.placeId,
+          name: p.name,
+          lat: p.lat,
+          lng: p.lng,
+        })),
+      );
       const place = pickBestPlace(
         places,
         task,

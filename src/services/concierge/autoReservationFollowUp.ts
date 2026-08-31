@@ -175,14 +175,13 @@ export async function presentAutoReservationFollowUp(
     buildFindusSystemPrompt(),
     buildReservationPromptBlock(info, profile),
     CONCIERGE_JSON_INSTRUCTION,
-    `Der User hat dieses Restaurant gerade ausgewählt und läuft vermutlich jetzt dorthin.
-Schlage JETZT Tischreservierung vor — JUST-DO-IT:
-- KEINE Permission-Frage („Soll ich vorbereiten?“).
-- Speech: kurz sagen, dass Tisch für ${partySize} Personen ${timeLabel} bereitliegt — User tippt Confirm.
-- quickActions PFLICHT: passende CONFIRM_API_RESERVATION / SEND_RESERVATION_EMAIL / TRIGGER_AI_CALL / DIAL_PHONE
-  plus SHOW_MORE „Andere Uhrzeit“, „Neuer Termin“, „Später“.
-- Defaults: ${partySize} Personen, ${timeLabel}. targetPoiId=${info.poiId ?? poiId}.
-- Nie behaupten der Tisch sei schon gebucht.
+    `Der User hat dieses Restaurant gerade ausgewählt und die Route läuft.
+Frage JETZT, ob ein Tisch reserviert werden soll — think-ahead, Wortlaut frei:
+- Kurze Frage, ob reservieren.
+- Wenn die aktuelle Ankunft (ÖPNV/Fahrt) belegt ist: als Vorschlag nennen (z. B. Ankunftszeit) UND alternativ heute Abend.
+- Danach Personenanzahl / Uhrzeit nur wenn der User ja sagt — Defaults ${partySize} Personen, ${timeLabel} bereithalten.
+- KEINE Behauptung der Tisch sei schon gebucht.
+- quickActions: Tisch reservieren plus SHOW_MORE „Andere Uhrzeit“, „Neuer Termin“, „Später“.
 Kein START_NAVIGATION in diesem Turn.`,
   ].join('\n\n');
 
@@ -200,7 +199,7 @@ Kein START_NAVIGATION in diesem Turn.`,
     { maxTokens: 600 },
   );
 
-  const fallbackSpeech = `Tisch für ${partySize} bei ${info.name} ${timeLabel} liegt bereit — tipp Reservieren, oder wähl Uhrzeit / neuer Termin.`;
+  const fallbackSpeech = `Soll ich bei ${info.name} einen Tisch reservieren? Für ${partySize} Personen ${timeLabel} — oder lieber heute Abend?`;
 
   let response: GeminiConciergeResponse =
     raw && raw.speechText.trim()
@@ -210,15 +209,10 @@ Kein START_NAVIGATION in diesem Turn.`,
           visualBullets: [`${partySize} Personen · ${timeLabel}`],
         });
 
-  // Permission-Fragen → Button-Sprache
+  // Permission-Fragen nicht mehr rausstrippen — Reservierung darf fragen.
   response = {
     ...response,
-    speechText: response.speechText
-      .replace(
-        /[^.?!]*\bsoll\s+ich\b[^.?!]*(vorbereiten|reservier|buch)[^.?!]*[.?!]?\s*/giu,
-        '',
-      )
-      .trim() || fallbackSpeech,
+    speechText: response.speechText.trim() || fallbackSpeech,
     cardTitle: response.cardTitle || `Reservierung · ${info.name}`,
     visualBullets:
       response.visualBullets.length > 0
@@ -231,4 +225,68 @@ Kein START_NAVIGATION in diesem Turn.`,
   };
 
   await presentConciergeResponse(response);
+}
+
+
+/** Nach Gastro-Wahl ohne Pack-POI: Reservierung fragen + Ankunft vorschlagen. */
+export async function presentPlaceReservationAsk(opts: {
+  name: string;
+  lat?: number;
+  lng?: number;
+}): Promise<void> {
+  const name = String(opts.name || "").trim();
+  if (!name) return;
+  const partySize = defaultPartySize();
+  let arrivalHint = "";
+  try {
+    const { useFinnusStore } = require("../../store/useFinnusStore") as {
+      useFinnusStore: {
+        getState: () => { navEtaMin: number | null };
+      };
+    };
+    const eta = useFinnusStore.getState().navEtaMin;
+    if (typeof eta === "number" && eta > 0) {
+      const at = new Date(Date.now() + eta * 60_000);
+      arrivalHint = at.toLocaleTimeString("de-DE", {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+    }
+  } catch {
+    /* soft */
+  }
+  const timeLabel = arrivalHint
+    ? "ca. " + arrivalHint + " (Ankunft)"
+    : defaultTimeLabel();
+  const speech = arrivalHint
+    ? "Soll ich bei " + name + " einen Tisch reservieren? Mit der Verbindung wärst du so gegen " + arrivalHint + " da — passt das, oder lieber heute Abend?"
+    : "Soll ich bei " + name + " einen Tisch reservieren? Sag wann und für wie viele — oder heute Abend.";
+  const chips: QuickAction[] = [
+    {
+      type: "SHOW_MORE",
+      label: "🍽 Tisch reservieren",
+      payload: {
+        textPrompt: "Tisch reservieren bei " + name + " für " + partySize + " Personen " + timeLabel,
+      },
+    },
+    {
+      type: "SHOW_MORE",
+      label: "Heute Abend",
+      payload: {
+        textPrompt: "Tisch reservieren bei " + name + " heute Abend für " + partySize + " Personen",
+      },
+    },
+    {
+      type: "SHOW_MORE",
+      label: "Nein danke",
+      payload: { textPrompt: "Keine Tischreservierung" },
+    },
+  ];
+  await presentConciergeResponse(
+    wrapPlainAsConcierge(speech, {
+      cardTitle: "Reservierung · " + name,
+      visualBullets: [partySize + " Personen · " + timeLabel],
+      quickActions: chips,
+    }),
+  );
 }

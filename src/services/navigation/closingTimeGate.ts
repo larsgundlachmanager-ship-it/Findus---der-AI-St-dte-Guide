@@ -139,8 +139,7 @@ export async function checkClosingTimeGate(opts: {
     return {
       allow: false,
       warningSpeech:
-        `${name} ist gerade zu. Soll ich einen offenen Alternativ-Ort suchen ` +
-        `oder willst du trotzdem hin?`,
+        `${name} ist gerade zu. Offene Alternative in der Nähe oder trotzdem hin — beides als Button.`,
       etaMinutes: eta.totalMinutes,
       minutesUntilClose: 0,
       hoursStatus: hours.hoursStatus,
@@ -179,8 +178,8 @@ export async function checkClosingTimeGate(opts: {
     place,
   );
   const alt = isFoodish
-    ? `Soll ich eine offene Alternative in der Nähe suchen?`
-    : `Schaffst du das noch per Rad, oder wollen wir eine Alternative?`;
+    ? `Offene Alternative in der Nähe oder trotzdem hin — Buttons.`
+    : `Mit der Fahrzeit kommst du vor Schluss kaum an. Offene Alternative oder trotzdem hin — Buttons.`;
 
   return {
     allow: false,

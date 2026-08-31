@@ -2,6 +2,9 @@
  * Correction merge — pure, no RN imports (harness-safe).
  */
 
+import { extractStreetAddressFromUtterance } from '../../services/navigation/streetAddressQuery';
+import { resolveNavDestCorrection } from '../../services/navigation/navDestCityCorrection';
+
 export type CorrectionMerge = {
   mergedUserText: string;
   isCorrection: boolean;
@@ -14,11 +17,31 @@ export function mergeCorrectionUtterance(opts: {
 }): CorrectionMerge {
   const prev = (opts.previousUserText || '').trim();
   const next = (opts.newUserText || '').trim();
-  if (!prev || !next) {
+  if (!next) {
+    return { mergedUserText: next, isCorrection: false };
+  }
+  const streetFromPrev =
+    extractStreetAddressFromUtterance(prev) || prev || null;
+  const destCorr = resolveNavDestCorrection({
+    userText: next,
+    lastStreetQuery: streetFromPrev,
+    currentDestName: prev || null,
+  });
+  if (destCorr) {
+    const hasAddr = Boolean(extractStreetAddressFromUtterance(next));
+    const cue =
+      /\b(nein|nicht|sondern|ich\s+meinte?|es\s+ist|falsch|stattdessen|in)\b/iu.test(
+        next,
+      );
+    if (hasAddr || (prev && cue)) {
+      return { mergedUserText: destCorr, isCorrection: true };
+    }
+  }
+  if (!prev) {
     return { mergedUserText: next, isCorrection: false };
   }
   const correctionCue =
-    /\b(ich\s+meine|nein\s+doch|stattdessen|nicht\s+\w+\s+sondern|übermorgen|uebermorgen|anders|korrektur)\b/iu.test(
+    /\b(ich\s+meine|ich\s+meinte|nein\s+doch|stattdessen|nicht\s+\w+\s+sondern|übermorgen|uebermorgen|anders|korrektur|nein[,.]?\s+(?:es\s+ist|in)|es\s+ist)\b/iu.test(
       next,
     ) ||
     (next.length < 48 &&

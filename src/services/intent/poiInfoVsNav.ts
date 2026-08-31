@@ -12,12 +12,22 @@ const DEICTIC_POI_RE =
   /\b(?:was\s+ist\s+das|was\s+soll\s+das\s+(?:sein|darstellen)|was\s+stellt\s+das\s+dar|was\s+für\s+ein\s+(?:ding|gebäude|denkmal)|hier\s+vor\s+(?:mir|uns)|direkt\s+vor\s+(?:mir|uns)|das\s+ding\s+(?:da|hier)|vor\s+so\s+einem\s+ding)\b/iu;
 
 export function isDeicticPoiQuestion(text: string): boolean {
-  return DEICTIC_POI_RE.test(text.replace(/\s+/g, ' ').trim());
+  const t = text.replace(/\s+/g, ' ').trim();
+  if (!DEICTIC_POI_RE.test(t)) return false;
+  // „Was ist das DRK / Marinedenkmal …?“ = benannter Ort, keine reine Deiktik
+  if (
+    /\bwas\s+ist\s+das\s+(?!hier\b|da\b|dort\b|vor\b|für\b|fuer\b)([A-Za-zÄÖÜäöüß][\wÄÖÜäöüß.\-]{1,})/iu.test(
+      t,
+    )
+  ) {
+    return false;
+  }
+  return true;
 }
 
 /** Explicit movement / go-to verbs — ONLY these may start START_NAV. */
 const EXPLICIT_NAV_RE =
-  /\b(?:bring\s+mich|führ\s+mich|fuehr\s+mich|navigier(?:e|en)?|navigation\s+(?:zu|nach|zum|zur)|wie\s+komm(?:e|en)?\s+ich|lass\s+(?:uns|mich)\s+(?:zum|zur|nach|zu)|geh(?:en)?\s+(?:wir|ich)\s+(?:zum|zur|nach|zu|hin)|zeig\s+mir\s+(?:den\s+weg|die\s+route)|route\s+(?:zu|nach|zum|zur)|kompass\s+(?:zu|nach|an)|ich\s+(?:will|möchte|moechte|muss)\s+(?:jetzt\s+)?(?:zum|zur|nach|zu|ins|hin))\b/iu;
+  /\b(?:bring\s+mich|nimm\s+mich|nehm\s+mich|führ\s+mich|fuehr\s+mich|fahr\s+mich|lauf\s+(?:mich|uns)|navigier(?:e|en|t)?(?:\s+(?:mich|werden))?|navi(?:gation)?\s+(?:zu|nach|zum|zur)|navigation\s+(?:zu|nach|zum|zur)|wie\s+komm(?:e|en)?\s+ich|lass\s+(?:uns|mich)\s+(?:zum|zur|nach|zu)|geh(?:en)?\s+(?:wir|ich)\s+(?:zum|zur|nach|zu|hin)|zeig\s+mir\s+(?:den\s+weg|die\s+route)|route\s+(?:zu|nach|zum|zur|starten)|kompass\s+(?:zu|nach|an)|ich\s+(?:will|möchte|moechte|muss)\s+(?:jetzt\s+)?(?:zum|zur|nach|zu|ins|hin)|(?:führ|fuehr|bring|fahr|navigier|nimm|nehm)\w*\s+(?:mich\s+)?(?:dahin|dorthin|hin))\b/iu;
 
 /** Soft discovery / meal ROUTES — not pure info questions. */
 const MEAL_ROUTE_RE =
@@ -42,6 +52,20 @@ export function isExplicitNavIntent(text: string): boolean {
   const t = text.replace(/\s+/g, ' ').trim();
   if (!t) return false;
   if (isPoiInfoQuestion(t)) return false;
+  try {
+    const gate = require('../../module2/planning/planUtteranceGate') as {
+      looksLikeChaoticDayPlanUtterance: (s: string) => boolean;
+      looksLikeModul5PlanUtterance: (s: string) => boolean;
+    };
+    if (
+      gate.looksLikeChaoticDayPlanUtterance(t) ||
+      gate.looksLikeModul5PlanUtterance(t)
+    ) {
+      return false;
+    }
+  } catch {
+    /* soft */
+  }
   return EXPLICIT_NAV_RE.test(t);
 }
 

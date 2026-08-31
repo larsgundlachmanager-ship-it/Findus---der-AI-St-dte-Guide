@@ -35,7 +35,7 @@ export function speechJustifiesOpenUrl(
 ): boolean {
   const s = speech.replace(/\s+/g, ' ');
   const lookUp =
-    /\b(webseite|website|seite|speisekarte|menü|menu|pdf|flyer|programm|ticket|link|nachschauen|nachsehen|öffnen|öffne|hier\s+der\s+link)\b/iu.test(
+    /\b(webseite|website|seite|speisekarte|menü|menu|pdf|flyer|programm|tickets?|buchung|buchen|link|nachschauen|nachsehen|öffnen|öffne|hier\s+der\s+link|route)\b/iu.test(
       s,
     );
   const bareLabel = label
@@ -48,8 +48,8 @@ export function speechJustifiesOpenUrl(
   if (lookUp) return true;
   if (bareLabel.length >= 3 && namesAlignFn(s, bareLabel)) return true;
   if (
-    /pdf|programm|flyer|ticket|speisekarte/i.test(label) &&
-    /\b(pdf|programm|flyer|ticket|speisekarte|karte)\b/iu.test(s)
+    /pdf|programm|flyer|tickets?|buchung|speisekarte/i.test(label) &&
+    /\b(pdf|programm|flyer|tickets?|buchung|buchen|speisekarte|karte)\b/iu.test(s)
   ) {
     return true;
   }

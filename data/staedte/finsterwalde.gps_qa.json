@@ -1,0 +1,695 @@
+{
+  "generated_at": "2026-08-28T07:01:08.629Z",
+  "summary": {
+    "city_id": "finsterwalde",
+    "checked": 23,
+    "ok": 11,
+    "check": 4,
+    "bad": 8,
+    "errors": 0,
+    "max_delta_m": 180,
+    "city_halo_m": 12000,
+    "story_only": true
+  },
+  "rows": [
+    {
+      "id": "finsterwalde_schloss_park_finsterwalde",
+      "name": "Schloß Park Finsterwalde",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.62765327222221,
+        "lng": 13.710407305555556
+      },
+      "query": "Schloß Park Finsterwalde, Finsterwalde, Germany",
+      "osm": {
+        "lat": 51.5636282,
+        "lng": 13.7225942,
+        "display_name": "Solarpark Finsterwalde, Finsterwalde, Deutschland",
+        "class": "landuse",
+        "type": "industrial",
+        "provider": "photon"
+      },
+      "delta_m": 7169,
+      "from_city_m": 320,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "finsterwalde_schloss_finsterwalde"
+      ]
+    },
+    {
+      "id": "finsterwalde_marktplatz_finsterwalde",
+      "name": "Marktplatz Finsterwalde",
+      "category": "altstadt",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.6305127,
+        "lng": 13.708463619999998
+      },
+      "query": "Marktplatz Finsterwalde, Finsterwalde, Germany",
+      "osm": {
+        "lat": 51.6360559,
+        "lng": 13.6717288,
+        "display_name": "Flugplatz Finsterwalde-Heinrichsruh, Florian-Geyer-Straße, Finsterwalde, Deutschland",
+        "class": "aeroway",
+        "type": "aerodrome",
+        "provider": "photon"
+      },
+      "delta_m": 2609,
+      "from_city_m": 26,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "finsterwalde_stadtgeschichte"
+      ]
+    },
+    {
+      "id": "finsterwalde_marchenhaus_finsterwalde",
+      "name": "Märchenhaus Finsterwalde",
+      "category": "altstadt",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.637391042857146,
+        "lng": 13.700016357142857
+      },
+      "query": "Märchenhaus Finsterwalde, Finsterwalde, Germany",
+      "osm": {
+        "lat": 51.6360559,
+        "lng": 13.6717288,
+        "display_name": "Flugplatz Finsterwalde-Heinrichsruh, Florian-Geyer-Straße, Finsterwalde, Deutschland",
+        "class": "aeroway",
+        "type": "aerodrome",
+        "provider": "photon"
+      },
+      "delta_m": 1958,
+      "from_city_m": 984,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "finsterwalde_ehrenmal_finsterwalde",
+      "name": "Ehrenmal, Finsterwalde",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.625419,
+        "lng": 13.71495078
+      },
+      "query": "Ehrenmal, Finsterwalde, Finsterwalde, Germany",
+      "osm": {
+        "lat": 51.6340567,
+        "lng": 13.7145993,
+        "display_name": "Sowjetisches Ehrenmal, Am Wasserturm, Finsterwalde, Elbe-Elster, Brandenburg, 03238, Deutschland",
+        "class": "historic",
+        "type": "memorial",
+        "importance": 0.00005413519493395922,
+        "osm_type": "node",
+        "osm_id": 892663560,
+        "provider": "nominatim"
+      },
+      "delta_m": 961,
+      "from_city_m": 700,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "finsterwalde_osm_transit_5246870228"
+      ]
+    },
+    {
+      "id": "finsterwalde_flugplatz_finsterwalde_heinrichsruh",
+      "name": "Flugplatz Finsterwalde-Heinrichsruh",
+      "category": "tour",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.635561575000004,
+        "lng": 13.6805374125
+      },
+      "query": "Flugplatz Finsterwalde-Heinrichsruh, Finsterwalde, Germany",
+      "osm": {
+        "lat": 51.6360559,
+        "lng": 13.6717288,
+        "display_name": "Flugplatz Finsterwalde-Heinrichsruh, L 60, Hennersdorf, Finsterwalde, Elbe-Elster, Brandenburg, 03238, Deutschland",
+        "class": "aeroway",
+        "type": "aerodrome",
+        "importance": 0.23648094285300414,
+        "osm_type": "way",
+        "osm_id": 119912032,
+        "provider": "nominatim"
+      },
+      "delta_m": 610,
+      "from_city_m": 2017,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "finsterwalde_glaserne_sanger",
+      "name": "Gläserne Sänger",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.635300380000004,
+        "lng": 13.707791480000001
+      },
+      "query": "Gläserne Sänger, Finsterwalde, Germany",
+      "osm": {
+        "lat": 51.6310883,
+        "lng": 13.7129971,
+        "display_name": "Sängerstadt Finsterwalde, Lange Straße, Finsterwalde, Deutschland",
+        "class": "information",
+        "type": "map",
+        "provider": "photon"
+      },
+      "delta_m": 590,
+      "from_city_m": 560,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "finsterwalde_burgerheide",
+      "name": "Bürgerheide",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.63246202222222,
+        "lng": 13.693456011111111
+      },
+      "query": "Bürgerheide, Finsterwalde, Germany",
+      "osm": {
+        "lat": 51.6316998,
+        "lng": 13.6852466,
+        "display_name": "An der Bürgerheide, Finsterwalde, Elbe-Elster, Brandenburg, 03238, Deutschland",
+        "class": "highway",
+        "type": "track",
+        "importance": 0.053387468528267305,
+        "osm_type": "way",
+        "osm_id": 130651748,
+        "provider": "nominatim"
+      },
+      "delta_m": 573,
+      "from_city_m": 1066,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "finsterwalde_sanger_und_kaufmannsmuseum_finsterwalde",
+      "name": "Sänger- und Kaufmannsmuseum Finsterwalde",
+      "category": "museum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.62988716666666,
+        "lng": 13.709810583333335
+      },
+      "query": "Sänger-, Finsterwalde, Germany",
+      "osm": {
+        "lat": 51.6317383,
+        "lng": 13.7084944,
+        "display_name": "Sängerdenkmal, Schulstraße, Finsterwalde, Elbe-Elster, Brandenburg, 03238, Deutschland",
+        "class": "tourism",
+        "type": "artwork",
+        "importance": 0.00005413519493395922,
+        "osm_type": "node",
+        "osm_id": 4128211109,
+        "provider": "nominatim"
+      },
+      "delta_m": 225,
+      "from_city_m": 100,
+      "status": "BAD",
+      "flags": [
+        "far_from_name_match"
+      ],
+      "twins": []
+    },
+    {
+      "id": "finsterwalde_schloss_finsterwalde",
+      "name": "Schloss Finsterwalde",
+      "category": "denkmal",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.62765327222221,
+        "lng": 13.710407305555556
+      },
+      "query": "Schloss Finsterwalde, Finsterwalde, Germany",
+      "osm": {
+        "lat": 51.6291296,
+        "lng": 13.7094009,
+        "display_name": "Schloßstraße, Finsterwalde, Elbe-Elster, Brandenburg, 03238, Deutschland",
+        "class": "highway",
+        "type": "residential",
+        "importance": 0.053387468528267305,
+        "osm_type": "way",
+        "osm_id": 23682408,
+        "provider": "nominatim"
+      },
+      "delta_m": 178,
+      "from_city_m": 320,
+      "status": "CHECK",
+      "flags": [
+        "house_like_name_match",
+        "duplicate_center"
+      ],
+      "twins": [
+        "finsterwalde_schloss_park_finsterwalde"
+      ]
+    },
+    {
+      "id": "finsterwalde_freibad_schwimmstadion_der_freundschaft_finsterwalde",
+      "name": "Freibad Schwimmstadion der Freundschaft Finsterwalde",
+      "category": "freizeit",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.64450051875,
+        "lng": 13.69962888125
+      },
+      "query": "Freibad Schwimmstadion der Freundschaft Finsterwalde, Finsterwalde, Germany",
+      "osm": {
+        "lat": 51.6449285,
+        "lng": 13.7001904,
+        "display_name": "Schwimmstadion der Freundschaft, Am Schwimmstadion, Finsterwalde, Deutschland",
+        "class": "leisure",
+        "type": "water_park",
+        "provider": "photon"
+      },
+      "delta_m": 61,
+      "from_city_m": 1696,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "finsterwalde_freibad_finsterwalde_mit_trainingsflache_der_taifuns_fur_beachvolle"
+      ]
+    },
+    {
+      "id": "finsterwalde_rathaus",
+      "name": "Rathaus",
+      "category": "verwaltung",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.62981361999999,
+        "lng": 13.7085893
+      },
+      "query": "Rathaus, Finsterwalde, Germany",
+      "osm": {
+        "lat": 51.6298046,
+        "lng": 13.7086315,
+        "display_name": "Rathaus Finsterwalde, 1, Markt, Finsterwalde, Elbe-Elster, Brandenburg, 03238, Deutschland",
+        "class": "amenity",
+        "type": "townhall",
+        "importance": 0.00005413519493395922,
+        "osm_type": "way",
+        "osm_id": 194816885,
+        "provider": "nominatim"
+      },
+      "delta_m": 3,
+      "from_city_m": 52,
+      "status": "CHECK",
+      "flags": [
+        "duplicate_center"
+      ],
+      "twins": [
+        "finsterwalde_osm_transit_5534518238"
+      ]
+    },
+    {
+      "id": "finsterwalde_stadtpfarrkirche_st_trinitatis",
+      "name": "Stadtpfarrkirche St. Trinitatis",
+      "category": "kirche",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.629184092857145,
+        "lng": 13.708883928571428
+      },
+      "query": "Stadtpfarrkirche St. Trinitatis, Finsterwalde",
+      "osm": null,
+      "delta_m": null,
+      "from_city_m": 125,
+      "status": "CHECK",
+      "flags": [
+        "no_geocode_hit"
+      ],
+      "twins": []
+    },
+    {
+      "id": "finsterwalde_kulturweberei_finsterwalde",
+      "name": "Kulturweberei Finsterwalde",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.62813648333333,
+        "lng": 13.705978750000002
+      },
+      "query": "Kulturweberei Finsterwalde, Finsterwalde, Germany",
+      "osm": {
+        "lat": 51.6277556,
+        "lng": 13.7064346,
+        "display_name": "Kulturweberei, 9, Oscar-Kjellberg-Straße, Kjellberg Finsterwalde, Finsterwalde, Elbe-Elster, Brandenburg, 03238, Deutschland",
+        "class": "building",
+        "type": "yes",
+        "importance": 0.00005413519493395922,
+        "osm_type": "way",
+        "osm_id": 857068781,
+        "provider": "nominatim"
+      },
+      "delta_m": 53,
+      "from_city_m": 295,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "finsterwalde_wasserturm",
+      "name": "Wasserturm",
+      "category": "aussicht",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.63385560500001,
+        "lng": 13.714127225000002
+      },
+      "query": "Wasserturm, Finsterwalde, Germany",
+      "osm": {
+        "lat": 51.6335009,
+        "lng": 13.7137864,
+        "display_name": "Am Wasserturm, Finsterwalde, Elbe-Elster, Brandenburg, 03238, Deutschland",
+        "class": "highway",
+        "type": "residential",
+        "importance": 0.053387468528267305,
+        "osm_type": "way",
+        "osm_id": 145086673,
+        "provider": "nominatim"
+      },
+      "delta_m": 46,
+      "from_city_m": 556,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "finsterwalde_stadtpark",
+      "name": "Stadtpark",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.632654554545454,
+        "lng": 13.706832436363635
+      },
+      "query": "Stadtpark, Finsterwalde, Germany",
+      "osm": {
+        "lat": 51.6323418,
+        "lng": 13.7072454,
+        "display_name": "Stadtpark, Finsterwalde, Elbe-Elster, Brandenburg, Deutschland",
+        "class": "leisure",
+        "type": "park",
+        "importance": 0.08005413519493397,
+        "osm_type": "way",
+        "osm_id": 524366709,
+        "provider": "nominatim"
+      },
+      "delta_m": 45,
+      "from_city_m": 288,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "finsterwalde_kath_pfarramt_st_maria_mater_dolorosa",
+      "name": "Kath. Pfarramt St. Maria Mater Dolorosa",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.63423956923077,
+        "lng": 13.712108900000002
+      },
+      "query": "Kath. Pfarramt St. Maria Mater, Finsterwalde, Germany",
+      "osm": {
+        "lat": 51.6340846,
+        "lng": 13.712625,
+        "display_name": "Pfarramt St. Maria Mater Dolorosa, Am Wasserturm, Finsterwalde, Deutschland",
+        "class": "office",
+        "type": "religion",
+        "provider": "photon"
+      },
+      "delta_m": 40,
+      "from_city_m": 506,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "finsterwalde_tierpark_finsterwalde",
+      "name": "Tierpark Finsterwalde",
+      "category": "freizeit",
+      "place_tier": 1,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.62963442857142,
+        "lng": 13.688884128571429
+      },
+      "query": "Tierpark Finsterwalde, Finsterwalde, Germany",
+      "osm": {
+        "lat": 51.6293223,
+        "lng": 13.6885884,
+        "display_name": "Tierpark Finsterwalde, An der Bürgerheide, Finsterwalde, Elbe-Elster, Brandenburg, 03238, Deutschland",
+        "class": "tourism",
+        "type": "zoo",
+        "importance": 0.00005413519493395922,
+        "osm_type": "way",
+        "osm_id": 114763853,
+        "provider": "nominatim"
+      },
+      "delta_m": 40,
+      "from_city_m": 1356,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "finsterwalde_sangerdenkmal",
+      "name": "Sängerdenkmal",
+      "category": "denkmal",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.63171297142857,
+        "lng": 13.708153157142856
+      },
+      "query": "Sängerdenkmal, Finsterwalde, Germany",
+      "osm": {
+        "lat": 51.6317383,
+        "lng": 13.7084944,
+        "display_name": "Sängerdenkmal, Schulstraße, Finsterwalde, Elbe-Elster, Brandenburg, 03238, Deutschland",
+        "class": "tourism",
+        "type": "artwork",
+        "importance": 0.00005413519493395922,
+        "osm_type": "node",
+        "osm_id": 4128211109,
+        "provider": "nominatim"
+      },
+      "delta_m": 24,
+      "from_city_m": 161,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "finsterwalde_finsterwalde",
+      "name": "Finsterwalde",
+      "category": "bahnhof",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.63687364,
+        "lng": 13.710445340000001
+      },
+      "query": "Finsterwalde, Finsterwalde, Germany",
+      "osm": {
+        "lat": 51.6369946,
+        "lng": 13.710383,
+        "display_name": "Finsterwalde (Niederlausitz), Bahnhofstraße, Finsterwalde, Elbe-Elster, Brandenburg, 03238, Deutschland",
+        "class": "railway",
+        "type": "station",
+        "importance": 0.26124069590558274,
+        "osm_type": "node",
+        "osm_id": 5272794041,
+        "provider": "nominatim"
+      },
+      "delta_m": 14,
+      "from_city_m": 745,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "finsterwalde_weltspiegel_kino",
+      "name": "Weltspiegel Kino",
+      "category": "theater",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.63404173333334,
+        "lng": 13.709480716666668
+      },
+      "query": "Weltspiegel Kino, Finsterwalde, Germany",
+      "osm": {
+        "lat": 51.6339584,
+        "lng": 13.7095169,
+        "display_name": "Weltspiegel, 8, Karl-Marx-Straße, Finsterwalde, Elbe-Elster, Brandenburg, 03238, Deutschland",
+        "class": "amenity",
+        "type": "cinema",
+        "importance": 0.00005413519493395922,
+        "osm_type": "way",
+        "osm_id": 144978349,
+        "provider": "nominatim"
+      },
+      "delta_m": 10,
+      "from_city_m": 424,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "finsterwalde_feuerwehrmuseum_finsterwalde",
+      "name": "Feuerwehrmuseum Finsterwalde",
+      "category": "museum",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.627690339999994,
+        "lng": 13.712839740000001
+      },
+      "query": "Feuerwehrmuseum Finsterwalde, Finsterwalde, Germany",
+      "osm": {
+        "lat": 51.6276638,
+        "lng": 13.7128777,
+        "display_name": "Feuerwehrmuseum, Rue de Montataire, Finsterwalde, Elbe-Elster, Brandenburg, 03238, Deutschland",
+        "class": "tourism",
+        "type": "museum",
+        "importance": 0.00005413519493395922,
+        "osm_type": "way",
+        "osm_id": 365379999,
+        "provider": "nominatim"
+      },
+      "delta_m": 4,
+      "from_city_m": 415,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "finsterwalde_katharinenkirche",
+      "name": "Katharinenkirche",
+      "category": "kirche",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.611707214285715,
+        "lng": 13.713928642857141
+      },
+      "query": "Katharinenkirche, Finsterwalde, Germany",
+      "osm": {
+        "lat": 51.611685,
+        "lng": 13.713925,
+        "display_name": "Katharinenkirche, Pestalozzistraße, Nehesdorf, Finsterwalde, Elbe-Elster, Brandenburg, 03238, Deutschland",
+        "class": "amenity",
+        "type": "place_of_worship",
+        "importance": 0.11734328469919902,
+        "osm_type": "way",
+        "osm_id": 387329704,
+        "provider": "nominatim"
+      },
+      "delta_m": 2,
+      "from_city_m": 2099,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    },
+    {
+      "id": "finsterwalde_ascheberg_finsterwalde",
+      "name": "Ascheberg Finsterwalde",
+      "category": "natur",
+      "place_tier": 2,
+      "pack_role": "story",
+      "amenity_skip": false,
+      "before": {
+        "lat": 51.629596400000004,
+        "lng": 13.719361249999999
+      },
+      "query": "Ascheberg Finsterwalde, Finsterwalde, Germany",
+      "osm": {
+        "lat": 51.6295747,
+        "lng": 13.7193571,
+        "display_name": "Ascheberg, Finsterwalde, Elbe-Elster, Brandenburg, 03238, Deutschland",
+        "class": "natural",
+        "type": "peak",
+        "importance": 1e-10,
+        "osm_type": "node",
+        "osm_id": 1339088888,
+        "provider": "nominatim"
+      },
+      "delta_m": 2,
+      "from_city_m": 753,
+      "status": "OK",
+      "flags": [],
+      "twins": []
+    }
+  ]
+}

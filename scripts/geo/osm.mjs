@@ -8,43 +8,61 @@ export async function sleep(ms) {
 }
 
 export async function fetchJson(url, options = {}) {
-  const res = await fetch(url, {
-    ...options,
-    headers: {
-      'User-Agent': UA,
-      Accept: 'application/json',
-      ...(options.headers || {}),
-    },
-  });
-  if (!res.ok) {
-    const body = await res.text().catch(() => '');
-    throw new Error(`HTTP ${res.status} ${url}: ${body.slice(0, 200)}`);
+  const timeoutMs = options.timeoutMs ?? 55_000;
+  const { timeoutMs: _t, ...fetchOpts } = options;
+  void _t;
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), timeoutMs);
+  try {
+    const res = await fetch(url, {
+      ...fetchOpts,
+      signal: fetchOpts.signal || ctrl.signal,
+      headers: {
+        'User-Agent': UA,
+        Accept: 'application/json',
+        ...(fetchOpts.headers || {}),
+      },
+    });
+    if (!res.ok) {
+      const body = await res.text().catch(() => '');
+      throw new Error(`HTTP ${res.status} ${url}: ${body.slice(0, 200)}`);
+    }
+    return res.json();
+  } finally {
+    clearTimeout(timer);
   }
-  return res.json();
 }
 
 /** Try primary Overpass, then mirrors on failure. */
-export async function fetchOverpass(query) {
+export async function fetchOverpass(query, { timeoutMs = 180_000 } = {}) {
   const endpoints = [
     'https://overpass-api.de/api/interpreter',
     'https://overpass.kumi.systems/api/interpreter',
+    'https://overpass.private.coffee/api/interpreter',
     'https://overpass.openstreetmap.ru/cgi/interpreter',
     'https://maps.mail.ru/osm/tools/overpass/api/interpreter',
   ];
   let lastErr;
-  for (const endpoint of endpoints) {
-    try {
-      const data = await fetchJson(endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: `data=${encodeURIComponent(query)}`,
-      });
-      await sleep(400);
-      return data;
-    } catch (e) {
-      lastErr = e;
-      console.warn(`[osm] overpass fail ${endpoint}: ${e.message}`);
-      await sleep(1200);
+  for (let round = 0; round < 2; round++) {
+    for (const endpoint of endpoints) {
+      try {
+        const data = await fetchJson(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: `data=${encodeURIComponent(query)}`,
+          timeoutMs,
+        });
+        await sleep(400);
+        return data;
+      } catch (e) {
+        lastErr = e;
+        console.warn(`[osm] overpass fail ${endpoint}: ${e.message}`);
+        await sleep(1500);
+      }
+    }
+    if (round === 0) {
+      console.warn('[osm] overpass all mirrors busy — retry in 8s');
+      await sleep(8000);
     }
   }
   throw lastErr || new Error('overpass failed');
@@ -278,6 +296,86 @@ export async function fetchWikidataFacts(lat, lng) {
   // Optional: reverse wikipedia via Nominatim extratags not always available.
   // Keep sourced-only: return empty if nothing reliable.
   return [];
+}
+
+const OSM_DIRECTORY_FILTERS = [
+  { overpass: 'shop=supermarket', category: 'supermarket' },
+  { overpass: 'shop=convenience', category: 'supermarket' },
+  { overpass: 'amenity=pharmacy', category: 'apotheke' },
+  { overpass: 'amenity=hospital', category: 'gesundheit' },
+  { overpass: 'amenity=clinic', category: 'gesundheit' },
+  { overpass: 'amenity=police', category: 'service' },
+  { overpass: 'leisure=playground', category: 'spielplatz' },
+  { overpass: 'leisure=golf_course', category: 'golf' },
+  { overpass: 'amenity=cinema', category: 'kino' },
+  { overpass: 'amenity=theatre', category: 'kino' },
+  { overpass: 'leisure=sports_centre', category: 'sport' },
+  { overpass: 'leisure=stadium', category: 'sport' },
+  { overpass: 'leisure=swimming_pool', category: 'freizeit' },
+  { overpass: 'amenity=fuel', category: 'tankstelle' },
+  { overpass: 'shop=bakery', category: 'cafe' },
+  { overpass: 'shop=chemist', category: 'einkaufen' },
+  { overpass: 'historic=wayside_cross', category: 'denkmal' },
+  { overpass: 'historic=wayside_shrine', category: 'denkmal' },
+  { overpass: 'amenity=toilets', category: 'toilette' },
+  { overpass: 'amenity=drinking_water', category: 'wasser' },
+  { overpass: 'tourism=information', category: 'tourist_info' },
+  { overpass: 'amenity=marketplace', category: 'markt' },
+  { overpass: 'shop=gift', category: 'souvenir' },
+];
+
+function osmElementLatLng(el) {
+  if (typeof el.lat === 'number' && typeof el.lon === 'number') {
+    return { lat: el.lat, lng: el.lon };
+  }
+  if (el.center && typeof el.center.lat === 'number') {
+    return { lat: el.center.lat, lng: el.center.lon };
+  }
+  return null;
+}
+
+function osmCategoryForTags(tags = {}) {
+  for (const f of OSM_DIRECTORY_FILTERS) {
+    const [k, v] = f.overpass.split('=');
+    if (tags[k] === v) return f.category;
+  }
+  return null;
+}
+
+/** Free directory harvest (supermarkets, pharmacies, toilets, …). No Google. */
+export async function fetchOsmDirectory(lat, lng, radiusM = 7000) {
+  const r = Math.min(Math.max(Number(radiusM) || 7000, 500), 25000);
+  const union = OSM_DIRECTORY_FILTERS.map(
+    (f) => `  nwr(around:${r},${lat},${lng})[${f.overpass}];`,
+  ).join('\n');
+  const query = `[out:json][timeout:75];\n(\n${union}\n);\nout center tags;`;
+  const data = await fetchOverpass(query);
+  const perCat = new Map();
+  const out = [];
+  for (const el of data.elements || []) {
+    const tags = el.tags || {};
+    const name = String(tags.name || tags.brand || '').trim();
+    if (!name) continue;
+    const loc = osmElementLatLng(el);
+    if (!loc) continue;
+    const category = osmCategoryForTags(tags);
+    if (!category) continue;
+    const n = perCat.get(category) || 0;
+    if (n >= 14) continue;
+    perCat.set(category, n + 1);
+    out.push({
+      name,
+      lat: loc.lat,
+      lng: loc.lng,
+      address: [tags['addr:street'], tags['addr:housenumber'], tags['addr:city']]
+        .filter(Boolean)
+        .join(' ') || null,
+      types: [],
+      category,
+      source: 'osm',
+    });
+  }
+  return out;
 }
 
 export function bearingLabel(fromLat, fromLng, toLat, toLng) {

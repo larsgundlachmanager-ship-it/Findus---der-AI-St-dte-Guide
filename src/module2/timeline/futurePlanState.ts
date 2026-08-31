@@ -46,6 +46,10 @@ export type FuturePlanStop = {
   menuUrl?: string | null;
   /** Nach Confirm: Tisch reservieren (1:1 zum Ort) */
   reserveUrl?: string | null;
+  /** Venue-Website (nicht Speisekarte) */
+  websiteUrl?: string | null;
+  /** Gleis / Abfahrtsbereich (Timeline-Chip) */
+  badge?: string | null;
   /**
    * Sacred Time: User hat Uhrzeit explizit vorgegeben.
    * false/undefined = Engine-Zeit → auto-verschiebbar (Prio 4–6 Soft).
@@ -62,6 +66,11 @@ export type FuturePlanStop = {
    * dann OSRM im Hintergrund (routed, normale Farbe).
    */
   routeEstimate?: 'fallback' | 'routed' | null;
+  /** ÖPNV Akkordeon: Umstiege / Linien (mehrzeilig) */
+  journeyDetail?: string | null;
+  /** Flug/Reise: zusammenklappbare Gruppe (Anreise / Flughafen / Flug) */
+  groupId?: string | null;
+  groupLabel?: string | null;
 };
 
 export type FuturePlanBase = {
@@ -78,6 +87,8 @@ export type FuturePlanState = {
   vibe?: string | null;
   /** Fester Aufenthalts-Anker (Zuhause/Hotel) — oben in der UI, kein Fake-08:00-Stop. */
   base?: FuturePlanBase | null;
+  /** Wo du JETZT bist — bleibt sichtbar wenn Plan-Tag in der Zukunft liegt. */
+  originBase?: FuturePlanBase | null;
   updatedAtMs: number;
 };
 
@@ -126,6 +137,7 @@ type Store = {
   setTransportDefault: (t: FuturePlanTransport) => void;
   /** Basis (Zuhause/Hotel) für den Tag setzen — ohne Fake-Timeline-Stop. */
   setDayBase: (dayKey: string, base: FuturePlanBase | null) => void;
+  setDayOriginBase: (dayKey: string, base: FuturePlanBase | null) => void;
   clearDay: (dayKey: string) => void;
   ensureDay: (dayKey: string) => void;
   getPlanForDay: (dayKey: string) => FuturePlanState;
@@ -141,6 +153,7 @@ export function emptyPlan(dayKey?: string): FuturePlanState {
     transportDefault: 'walk',
     vibe: null,
     base: null,
+    originBase: null,
     updatedAtMs: Date.now(),
   };
 }
@@ -260,16 +273,19 @@ export const useFuturePlanStore = create<Store>((set, get) => ({
   },
 
   removeStop: (id) => {
-    const plan = get().plan;
-    const next = {
-      ...plan,
-      stops: sortStopsChronologically(plan.stops.filter((s) => s.id !== id)),
+    const { plan, plansByDay } = get();
+    const scrub = (p: FuturePlanState): FuturePlanState => ({
+      ...p,
+      stops: sortStopsChronologically(p.stops.filter((s) => s.id !== id)),
       updatedAtMs: Date.now(),
-    };
-    set({
-      plan: next,
-      plansByDay: commitDay(get().plansByDay, next),
     });
+    const nextPlan = scrub(plan);
+    const nextByDay: Record<string, FuturePlanState> = {};
+    for (const [k, p] of Object.entries(plansByDay)) {
+      nextByDay[k] = scrub(p);
+    }
+    nextByDay[nextPlan.dayKey] = nextPlan;
+    set({ plan: nextPlan, plansByDay: nextByDay });
   },
 
   setStopStatus: (id, status) => {
@@ -317,6 +333,25 @@ export const useFuturePlanStore = create<Store>((set, get) => ({
       ...existing,
       dayKey,
       base,
+      updatedAtMs: Date.now(),
+    };
+    if (cur.dayKey === dayKey) {
+      set({ plan: next, plansByDay: commitDay(get().plansByDay, next) });
+    } else {
+      set({ plansByDay: commitDay(get().plansByDay, next) });
+    }
+  },
+
+  setDayOriginBase: (dayKey, originBase) => {
+    const cur = get().plan;
+    const existing =
+      cur.dayKey === dayKey
+        ? cur
+        : (get().plansByDay[dayKey] ?? emptyPlan(dayKey));
+    const next: FuturePlanState = {
+      ...existing,
+      dayKey,
+      originBase,
       updatedAtMs: Date.now(),
     };
     if (cur.dayKey === dayKey) {

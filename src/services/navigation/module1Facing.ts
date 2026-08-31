@@ -19,6 +19,7 @@ import {
   type FacingSource,
 } from './facingReference';
 import { getSmoothedSpeedMs } from './transportMode';
+import { getLiveDeviceHeadingDeg } from './liveDeviceHeading';
 
 export type Module1LookCue = {
   lookPhrase: string;
@@ -60,6 +61,49 @@ export function getStableModule1MovementBearingDeg(): number | null {
   const path = distanceMeters(a.lat, a.lng, b.lat, b.lng);
   if (path < MIN_PATH_M) return getTrackMovementBearingDeg();
   return bearingDegrees(a.lat, a.lng, b.lat, b.lng);
+}
+
+/** Distanz für Speech: 12 m → „etwa 10 Meter“, 0.8 km → „etwa 800 Meter“. */
+export function formatLookDistancePhrase(distM: number | null | undefined): string | null {
+  if (typeof distM !== 'number' || !Number.isFinite(distM) || distM < 0) {
+    return null;
+  }
+  if (distM < 8) return 'direkt vor dir';
+  if (distM < 1000) {
+    const rounded = distM < 30 ? Math.round(distM) : Math.round(distM / 5) * 5;
+    return `etwa ${rounded} Meter`;
+  }
+  const km = (distM / 1000).toFixed(1).replace('.', ',');
+  return `etwa ${km} Kilometer`;
+}
+
+/** lookPhrase + Distanz, z. B. „nach rechts, etwa 10 Meter“. */
+export function formatLookCueSpeech(cue: Module1LookCue): string {
+  const dist = formatLookDistancePhrase(cue.distToHauptM);
+  if (dist && cue.lookPhrase) return `${cue.lookPhrase}, ${dist}`;
+  return cue.lookPhrase;
+}
+
+/** Kompass + GPS → gesprochene Blickrichtung zum Ziel (Concierge / Pitch). */
+export function lookCueSpeechToDest(opts: {
+  userLat: number;
+  userLng: number;
+  destLat: number;
+  destLng: number;
+  deviceHeadingDeg?: number | null;
+  speedMs?: number | null;
+}): string {
+  const heading =
+    opts.deviceHeadingDeg ?? getLiveDeviceHeadingDeg();
+  const cue = resolveModule1LookCue({
+    userLat: opts.userLat,
+    userLng: opts.userLng,
+    hauptLat: opts.destLat,
+    hauptLng: opts.destLng,
+    speedMs: opts.speedMs,
+    deviceHeadingDeg: heading,
+  });
+  return formatLookCueSpeech(cue);
 }
 
 function phraseFromRelDeg(relDeg: number): {
@@ -168,9 +212,11 @@ export function resolveModule1LookCue(input: {
 
 /** Prompt-Block für Gemini — Seite EISERN. */
 export function formatModule1LookCueForPrompt(cue: Module1LookCue): string {
+  const spoken = formatLookCueSpeech(cue);
   return [
     'RICHTUNG_CODE (EISERN — nicht spiegeln, nicht raten):',
     `lookPhrase: "${cue.lookPhrase}"`,
+    `lookSpeech: "${spoken}"`,
     `facingSource: ${cue.facingSource}`,
     `relDeg: ${cue.relDeg ?? '—'}`,
     `distToHauptM: ${cue.distToHauptM ?? '—'}`,

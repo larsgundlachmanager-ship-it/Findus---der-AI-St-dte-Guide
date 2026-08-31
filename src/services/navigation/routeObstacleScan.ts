@@ -148,6 +148,84 @@ function elPoint(el: OsmEl): { lat: number; lng: number } | null {
   return null;
 }
 
+function isBridgeTag(t: Record<string, string>): boolean {
+  const b = (t.bridge || '').toLowerCase();
+  if (
+    b === 'yes' ||
+    b === 'viaduct' ||
+    b === 'boardwalk' ||
+    b === 'cantilever' ||
+    b === 'movable' ||
+    b === 'lifting' ||
+    b === 'bascule' ||
+    b === 'swing' ||
+    b === 'covered'
+  ) {
+    return true;
+  }
+  return t.man_made === 'bridge';
+}
+
+/**
+ * OSM-Heuristik: Fuß-/Radsteg vs. Straßenbrücke.
+ * highway=footway|path|pedestrian|steps (+ ggf. cycleway mit Fuß) → Fußgängerbrücke.
+ */
+export function isPedestrianBridgeTags(t: Record<string, string>): boolean {
+  if (!isBridgeTag(t)) return false;
+  const hw = (t.highway || '').toLowerCase();
+  if (
+    hw === 'footway' ||
+    hw === 'path' ||
+    hw === 'pedestrian' ||
+    hw === 'steps' ||
+    hw === 'bridleway'
+  ) {
+    return true;
+  }
+  if (hw === 'cycleway') {
+    const foot = (t.foot || '').toLowerCase();
+    if (foot === 'no' || foot === 'private') return false;
+    return true;
+  }
+  const foot = (t.foot || '').toLowerCase();
+  const bicycle = (t.bicycle || '').toLowerCase();
+  if (
+    (foot === 'designated' || foot === 'yes') &&
+    (!hw ||
+      hw === 'service' ||
+      hw === 'track' ||
+      hw === 'unclassified' ||
+      t.man_made === 'bridge')
+  ) {
+    // Keine echte Autobahn-/Hauptstraßenbrücke nur wegen Gehweg
+    if (
+      hw === 'motorway' ||
+      hw === 'trunk' ||
+      hw === 'primary' ||
+      hw === 'secondary' ||
+      hw === 'tertiary' ||
+      hw === 'residential'
+    ) {
+      return false;
+    }
+    return true;
+  }
+  if (
+    t.man_made === 'bridge' &&
+    (foot === 'designated' || foot === 'yes' || bicycle === 'designated')
+  ) {
+    return true;
+  }
+  return false;
+}
+
+export function bridgeLabelFromTags(t: Record<string, string>): string {
+  const name = (t.name || t['name:de'] || '').trim();
+  if (name) return name;
+  if (isPedestrianBridgeTags(t)) return 'Fußgängerbrücke';
+  return 'Brücke';
+}
+
 function classify(el: OsmEl): RouteObstacleHit['kind'] | null {
   const t = el.tags ?? {};
   if (
@@ -157,10 +235,8 @@ function classify(el: OsmEl): RouteObstacleHit['kind'] | null {
   ) {
     return 'crossing';
   }
-  if (t.highway === 'steps') return 'stairs';
-  if (t.bridge === 'yes' || t.man_made === 'bridge' || t.bridge === 'viaduct') {
-    return 'bridge';
-  }
+  if (t.highway === 'steps' && !isBridgeTag(t)) return 'stairs';
+  if (isBridgeTag(t)) return 'bridge';
   return null;
 }
 
@@ -174,6 +250,17 @@ export function obstaclesFromInstructions(
     if (!t) continue;
     if (/bahnübergang|bahnuebergang|level crossing|railroad crossing|schranke/.test(t)) {
       hits.push({ kind: 'crossing', lat: 0, lng: 0, label: 'Bahnübergang' });
+    } else if (
+      /fu[ßss]?g[äa]nger\s*br[uü]cke|fussgaengerbruecke|footbridge|pedestrian bridge|foot bridge/.test(
+        t,
+      )
+    ) {
+      hits.push({
+        kind: 'bridge',
+        lat: 0,
+        lng: 0,
+        label: 'Fußgängerbrücke',
+      });
     } else if (/\bbrücke\b|\bbruecke\b|\bbridge\b/.test(t)) {
       hits.push({ kind: 'bridge', lat: 0, lng: 0, label: 'Brücke' });
     } else if (/\btreppe|\bstufen|\bstairs|\bsteps\b/.test(t)) {
@@ -202,7 +289,7 @@ export async function scanRouteObstacles(
   node["railway"="crossing"](${box.south},${box.west},${box.north},${box.east});
   node["crossing"="railway"](${box.south},${box.west},${box.north},${box.east});
   way["highway"="steps"](${box.south},${box.west},${box.north},${box.east});
-  way["bridge"="yes"](${box.south},${box.west},${box.north},${box.east});
+  way["bridge"](${box.south},${box.west},${box.north},${box.east});
   way["man_made"="bridge"](${box.south},${box.west},${box.north},${box.east});
 );
 out center tags;
@@ -217,21 +304,23 @@ out center tags;
     if (!kind) continue;
     const pt = elPoint(el);
     if (!pt) continue;
-    if (minDistToPolylineM(pt.lat, pt.lng, samples) > NEAR_ROUTE_M) continue;
+    if (minDistToPolylineM(pt.lat, pt.lng, samples) > (kind === 'bridge' ? 60 : NEAR_ROUTE_M)) continue;
     const key = `${kind}:${pt.lat.toFixed(5)},${pt.lng.toFixed(5)}`;
     if (seen.has(key)) continue;
     seen.add(key);
+    const tags = el.tags ?? {};
+    const label =
+      kind === 'crossing'
+        ? 'Bahnübergang'
+        : kind === 'bridge'
+          ? bridgeLabelFromTags(tags)
+          : 'Treppen';
     hits.push({
       kind,
       lat: pt.lat,
       lng: pt.lng,
       alongM: alongRouteM(pt.lat, pt.lng, samples),
-      label:
-        kind === 'crossing'
-          ? 'Bahnübergang'
-          : kind === 'bridge'
-            ? 'Brücke'
-            : 'Treppen',
+      label,
     });
   }
 

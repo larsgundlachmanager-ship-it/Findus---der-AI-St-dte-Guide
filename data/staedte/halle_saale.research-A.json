@@ -1,0 +1,580 @@
+{
+  "notes": [
+    "Quellenbasis: Stadt Halle (Saale), Stadtchronik und Geologischer Lehrpfad: https://halle.de/kultur-tourismus/stadtgeschichte/chronik und https://halle.de/leben-in-halle/klimaschutz-und-umwelt/natur-und-artenschutz/geologischer-lehrpfad",
+    "Quellenbasis Sakralbauten: Stadt Halle, offene Kirchen; Marktkirchengemeinde; Moritzkirche; Paulusgemeinde: https://halle.de/leben-in-halle/kirche-und-religionen/offene-kirchen, https://www.marktkirche-halle.de/, https://www.moritzkirche-halle.de/, https://paulusgemeinde-halle.de/",
+    "Quellenbasis Museen und Stiftungen: https://www.kunstmuseum-moritzburg.de/, https://www.landesmuseum-vorgeschichte.de/ und https://www.francke-halle.de/",
+    "Ergänzend geprüft gegen die deutschsprachigen Wikipedia-Artikel zu den einzelnen Bauwerken. Öffnungszeiten, Eintrittspreise, Führungen, Gottesdienste, Konzerte und aktuelle Ausstellungen sind ausschließlich als LIVE-Hinweise formuliert.",
+    "Der Spot Rathaus Halle bezeichnet den heutigen Ratshof am Marktplatz 1. Das historische Alte Rathaus stand davor, wurde 1945 schwer beschädigt und 1948 bis 1950 abgerissen; das südlich gelegene Stadthaus ist ein eigenes Gebäude."
+  ],
+  "city_history": "Halle verdankt seine Entstehung den Solequellen an der Halle-Störung; Salzgewinnung und die Halloren prägten Wirtschaft und Selbstbild über Jahrhunderte. Seit dem 12. Jahrhundert bildet der Marktplatz das Zentrum. Im Spätmittelalter wuchs die Stadt zur Handelsmacht und gehörte zeitweise der Hanse an. Kardinal Albrecht von Brandenburg formte Halle im 16. Jahrhundert mit Dom, Neuer Residenz und Marktkirche zur Renaissance-Residenz, konnte die Reformation aber nicht aufhalten. 1694 entstand die Universität, ab 1698 Franckes international ausstrahlende Schulstadt. Industrialisierung und starkes Wachstum veränderten Halle im 19. Jahrhundert. 1945 blieb die Stadt durch ihre weitgehend kampflose Übergabe von flächiger Zerstörung verschont, verlor aber einzelne bedeutende Bauten wie das Alte Rathaus.",
+  "spots": [
+    {
+      "id": "halle_saale_marktplatz_halle",
+      "name": "Marktplatz Halle",
+      "general_info": "Der Marktplatz ist Halles historisches und städtisches Zentrum. Roter Turm und Marktkirche bilden hier die berühmte Silhouette der fünf Türme; Händeldenkmal, Ratshof, Stadthaus, Marktschlösschen und die Leerstelle des Alten Rathauses erzählen weitere Schichten der Stadtgeschichte.",
+      "deep_data_pool": [
+        {
+          "text": "Der Platz entstand bei der großen Stadterweiterung um 1120 und bündelte wichtige Straßen und Handelswege. Neben dem älteren Hallmarkt wurde er zu einem mittelalterlichen Siedlungs- und Wirtschaftskern. Seine außergewöhnliche Größe und die bis heute auf ihn zulaufenden Straßenzüge machen die Funktion als Handelsmittelpunkt im Stadtgrundriss unmittelbar lesbar.",
+          "tags": ["geschichte", "stadtentwicklung"]
+        },
+        {
+          "text": "Die beherrschende Ansicht besteht aus fünf Türmen: den vier Türmen der Marktkirche Unser Lieben Frauen und dem freistehenden Roten Turm. Diese Gruppe begründete Halles Beiname als Stadt der fünf Türme. Die beiden Turmpaare der Kirche stammen von zwei älteren Marktpfarrkirchen, die im 16. Jahrhundert durch ein gemeinsames Schiff verbunden wurden.",
+          "tags": ["architektur", "wahrzeichen", "visuell"]
+        },
+        {
+          "text": "In der Platzmitte steht seit 1859 das Händeldenkmal. Es erinnert an den 1685 in Halle geborenen Komponisten Georg Friedrich Händel. Die Figur ist in Richtung London gewandt, wo Händel den größten Teil seiner Karriere verbrachte; hinter ihr liegen die Türme der Marktkirche, in der er getauft wurde.",
+          "tags": ["haendel", "denkmal", "geschichte"]
+        },
+        {
+          "text": "Unter dem Markt verläuft die Halle-Störung, früher Marktplatzverwerfung genannt. Sie trennt die Merseburg-Scholle von der Halle-Wittenberg-Scholle; die tektonisch zerrütteten Schichten ermöglichten den Aufstieg von Sole. Diese Salzquellen waren ein entscheidender Grund für Besiedlung, Salzgewerbe und den Namen Halle.",
+          "tags": ["geologie", "salz", "stadtgeschichte"]
+        },
+        {
+          "text": "Das 2006 aufgestellte Geoskop macht die unsichtbare Verwerfung erfahrbar. Durch das drehbare Beobachtungsinstrument lassen sich Gesteine der Störungszone betrachten und die Richtung der Verwerfung anpeilen. Es gehört zum geologischen Lehrpfad der Stadt und steht am authentischen Verlauf der Störung.",
+          "tags": ["geologie", "vor_ort", "visuell"]
+        },
+        {
+          "text": "Die Südostseite des Platzes wirkt heute auffällig offen. Dort standen bis 1945 das Alte Rathaus und die benachbarte Ratswaage, ein bedeutendes Renaissancegebäude. Beide wurden im Krieg beschädigt und anschließend schrittweise abgerissen. Der freie Raum vor dem Ratshof ist deshalb eine historische Leerstelle, nicht das Ergebnis des mittelalterlichen Platzplans.",
+          "tags": ["kriegsfolge", "rathaus", "stadtbild"]
+        },
+        {
+          "text": "Das Stadthaus an der Südseite wurde 1891 bis 1894 als Versammlungs-, Sitzungs- und Festgebäude errichtet. Sein neugotisch-neorenaissancezeitlicher Werksteinbau zeigt, wie die rasch wachsende Industriestadt des späten 19. Jahrhunderts neben dem zu kleinen Alten Rathaus neue repräsentative Räume schuf.",
+          "tags": ["architektur", "19_jahrhundert", "quer"]
+        },
+        {
+          "text": "Archäologische Grabungen während der Umgestaltung 2004 bis 2006 fanden westlich des Roten Turms zahlreiche Bestattungen des früheren Friedhofs der alten Marienkirche. Weitere Befunde belegten historische Marktbuden. Der heutige offene Steinplatz liegt damit über einem dicht belegten Geflecht aus Kirchen, Gräbern, Handel und Stadtumbau.",
+          "tags": ["archaeologie", "mittelalter"]
+        },
+        {
+          "text": "LIVE: Wochenmarkt, Weihnachtsmarkt, Stadtfeste, Demonstrationen, Baustellen und andere Platznutzungen verändern sich. Aktuelle Termine, Sperrungen und Angebote vor einem Besuch über die Stadt Halle und die jeweiligen Veranstalter prüfen.",
+          "tags": ["live_hint", "ephemeral", "veranstaltungen"]
+        }
+      ],
+      "faqs": []
+    },
+    {
+      "id": "halle_saale_roter_turm",
+      "name": "Roter Turm",
+      "general_info": "Der freistehende spätgotische Glocken- und Uhrturm wurde 1418 bis 1506 auf dem Marktplatz errichtet. Gemeinsam mit den vier Türmen der Marktkirche bildet er Halles Wahrzeichen. Sein Carillon, seine Kriegszerstörung und der Roland am Fuß verbinden Musik-, Bau- und Stadtgeschichte.",
+      "deep_data_pool": [
+        {
+          "text": "Fast neun Jahrzehnte dauerte der Bau: 1418 wurde begonnen, am 24. Juli 1506 war der Turm mit Knopf und 246 Stacheln vollendet. Drei lateinische Bauinschriften aus den Jahren 1418, 1446 und 1470 dokumentieren Etappen und Unterbrechungen. Die Stadt beteiligte sich finanziell und gewann Nutzungsrechte an dem zunächst kirchlich gebundenen Projekt.",
+          "tags": ["baugeschichte", "mittelalter"]
+        },
+        {
+          "text": "Der schlanke, rechteckige Bau folgt dem Typ des freistehenden italienischen Campanile. Seine spätgotische Gestalt und die beträchtliche Höhe machten ihn zur städtischen Dominante. Schon die Vollendungsurkunde von 1506 bezeichnete ihn als Zierde der Stadt und Region – ein sichtbares Zeichen der Wirtschaftskraft der Salzstadt.",
+          "tags": ["architektur", "stadtgeschichte"]
+        },
+        {
+          "text": "Ursprünglich hieß das Bauwerk Neuer Turm. Der Name Roter Turm setzte sich erst im 17. Jahrhundert durch. Er wird unter anderem mit dem einst rötlich wirkenden Kupferdach oder mit dem Blutgericht in Verbindung gebracht; die Quellenlage zur genauen Namensentstehung ist nicht eindeutig.",
+          "tags": ["name", "ueberlieferung"]
+        },
+        {
+          "text": "Am Turm steht der Hallesche Roland als Zeichen städtischer Rechts- und Freiheitsvorstellungen. Eine Rolandfigur ist bereits für das 16. Jahrhundert am Turm belegt. Die heutige Figur wurde restauriert und 2006, zum 1200-jährigen Stadtjubiläum, wieder unmittelbar am Bauwerk aufgestellt.",
+          "tags": ["roland", "stadtfreiheit", "visuell"]
+        },
+        {
+          "text": "Am 16. April 1945 traf Artilleriebeschuss den Turm; er brannte aus und verlor seinen charakteristischen Helm. Ein Flachdach sicherte die Ruine. Erst 1975 erhielt der Turm wieder eine Spitze, zunächst in moderner Form. Die heutige Erscheinung ist deshalb auch Ergebnis mehrerer Wiederherstellungsphasen nach dem Krieg.",
+          "tags": ["zweiter_weltkrieg", "wiederaufbau"]
+        },
+        {
+          "text": "Lange war der Turm von Buden und später festen Umbauten umgeben. Von 1825 bis 1945 bestand eine neugotische Backsteinumbauung, 1976 folgte eine moderne Verkleidung. Bei der Neugestaltung des Marktes 2004 bis 2006 wurde die jüngere Umbauung entfernt, sodass der Turmkörper wieder frei auf dem Platz steht.",
+          "tags": ["stadtbild", "umbauten"]
+        },
+        {
+          "text": "Im Turm hängt das Europa-Carillon mit 76 Glocken. Es wurde 1993 installiert und gehört zu den größten Carillons der Welt; als Konzertinstrument wird es über einen Stockspieltisch gespielt. Die Glocken erweitern die mittelalterliche Funktion des Turms um eine moderne, international beachtete Musikkultur.",
+          "tags": ["carillon", "musik", "haendelstadt"]
+        },
+        {
+          "text": "Die Turmspitze trägt eine vergoldete Kugel mit 246 Stacheln. Historisch wurden solche Spitzen auch apotropäisch, also als Abwehrzeichen gegen Unheil, gedeutet. Vom Boden aus fallen vor allem die stark vertikale Gliederung, das Kupferdach und die unmittelbare Nachbarschaft zur breiten Marktkirche auf.",
+          "tags": ["detail", "visuell", "architektur"]
+        },
+        {
+          "text": "LIVE: Carillon-Konzerte, Führungen und mögliche Turmzugänge finden nicht ständig statt. Spieltermine, Zugang, Eintritt und eventuelle Einschränkungen aktuell beim Stadtmuseum beziehungsweise den zuständigen halleschen Veranstaltern prüfen.",
+          "tags": ["live_hint", "ephemeral", "musik"]
+        }
+      ],
+      "faqs": []
+    },
+    {
+      "id": "halle_saale_rathaus_halle",
+      "name": "Rathaus Halle",
+      "general_info": "Der heutige Ratshof am Marktplatz 1 ist ein 1928/29 errichteter Verwaltungsbau. Er stand ursprünglich hinter dem Alten Rathaus. Dessen kriegsbeschädigte, aber teilweise erhaltungsfähige Anlage wurde 1948 bis 1950 abgerissen; die freie Fläche vor dem Ratshof markiert seinen früheren Standort.",
+      "deep_data_pool": [
+        {
+          "text": "Das historische Alte Rathaus war spätestens seit dem späten 13. beziehungsweise frühen 14. Jahrhundert Sitz der Stadtverwaltung. Über Jahrhunderte entstand ein komplexes Bauensemble mit Ratskapelle, spätgotischen Staffelgiebeln, Treppenturm, Loggia und späteren Erweiterungen. Es galt als bedeutendes mitteldeutsches Profanbauwerk.",
+          "tags": ["altes_rathaus", "mittelalter", "baugeschichte"]
+        },
+        {
+          "text": "An das Alte Rathaus grenzte die Ratswaage, ein herausragender Renaissancebau. Ein Verbindungsgang koppelte beide Gebäude. Gemeinsam schlossen sie die Ostseite des Marktes deutlich stärker, als es der heutige Platzraum erkennen lässt. Historische Ansichten zeigen deshalb eine völlig andere Raumkante vor dem heutigen Ratshof.",
+          "tags": ["ratswaage", "renaissance", "stadtbild"]
+        },
+        {
+          "text": "Der Ratshof wurde 1928/29 hinter dem Alten Rathaus errichtet, um zusätzliche Räume für die Verwaltung zu schaffen. Der fünfgeschossige Bau folgt nüchtern-monumentalen Formen der Zwischenkriegszeit. Er war kein Ersatzbau nach dem Krieg, sondern bereits Teil des älteren Verwaltungsensembles.",
+          "tags": ["ratshof", "architektur", "20_jahrhundert"]
+        },
+        {
+          "text": "An der Ecke zur Leipziger Straße stehen überlebensgroße Bronzeplastiken, die Industrie, Saale, Handel, Saalelandschaft und Bergbau verkörpern. Es handelt sich um Kopien der im Zweiten Weltkrieg eingeschmolzenen Originale von Gustav Weidanz. Sie übersetzen zentrale Wirtschaftsthemen der Stadt in Figuren.",
+          "tags": ["kunst_am_bau", "wirtschaftsgeschichte", "visuell"]
+        },
+        {
+          "text": "Am 31. März 1945 beschädigte ein amerikanischer Bombenangriff Teile des Alten Rathauses und der Ratswaage schwer. Der Barockflügel am Eingang der Leipziger Straße blieb nahezu unversehrt. In den Nachkriegsdebatten standen Wiederaufbau, Teilbewahrung und vollständiger Neubau nebeneinander.",
+          "tags": ["zweiter_weltkrieg", "zerstoerung"]
+        },
+        {
+          "text": "Ein Wettbewerb von 1947 bezog namhafte Architekten ein; viele Entwürfe erhielten Teile des Ensembles. Trotz des Wettbewerbsergebnisses und entgegen politischen beziehungsweise denkmalpflegerischen Einwänden wurde das Alte Rathaus 1948 abgebrochen. Die restlichen Teile und die Ratswaage verschwanden schrittweise bis 1950.",
+          "tags": ["nachkrieg", "denkmalverlust"]
+        },
+        {
+          "text": "Heute liegt zwischen Ratshof und Markt eine offene Fläche. Sie ist die präziseste Orientierung zum verlorenen Rathausstandort. Initiativen beschäftigen sich seit Jahren mit Erinnerung, Portalrekonstruktion und künftiger Platzgestaltung; konkrete Planungsstände sind veränderlich und daher keine dauerhaften Packfakten.",
+          "tags": ["erinnerungskultur", "vor_ort"]
+        },
+        {
+          "text": "Das südlich am Markt stehende Stadthaus darf nicht mit dem Ratshof verwechselt werden. Es entstand 1891 bis 1894 als Fest-, Sitzungs- und Versammlungsgebäude in Formen von Neogotik und Neorenaissance. Dort tagt ebenfalls der Stadtrat, während der Ratshof der eigentliche Verwaltungsbau am Marktplatz 1 ist.",
+          "tags": ["abgrenzung", "stadthaus", "orientierung"]
+        },
+        {
+          "text": "LIVE: Der Ratshof ist ein Arbeitsgebäude der Stadtverwaltung. Besuchsmöglichkeiten, Bürgerdienste, Trauungen, Ausstellungen, Sitzungstermine und Zugänglichkeit einzelner Bereiche aktuell auf halle.de prüfen; aus der historischen Bedeutung folgt kein dauerhafter touristischer Innenzugang.",
+          "tags": ["live_hint", "ephemeral", "verwaltung"]
+        }
+      ],
+      "faqs": []
+    },
+    {
+      "id": "halle_saale_marktkirche_st_marien_unser_lieben_frauen_zu_halle_saale",
+      "name": "Marktkirche St. Marien – Unser Lieben Frauen",
+      "general_info": "Die Marktkirche entstand 1529 bis 1554, indem die Turmpaare zweier älterer Marktpfarrkirchen durch ein neues Hallenschiff verbunden wurden. Sie prägt Halles Fünf-Türme-Silhouette und verbindet Kardinal Albrechts Kirchenpolitik, Reformation, Luther und Händels Taufe.",
+      "deep_data_pool": [
+        {
+          "text": "Am Markt standen ursprünglich St. Gertruden im Westen und St. Marien im Osten. 1529 beschlossen erzbischöfliche Räte, Magistrat und Pfarrer auf Initiative Kardinal Albrechts, beide Kirchen bis auf ihre Turmpaare abzubrechen und mit einem einzigen großen Kirchenschiff zu verbinden.",
+          "tags": ["baugeschichte", "kardinal_albrecht"]
+        },
+        {
+          "text": "Caspar Krafft entwarf den dreischiffigen Hallenbau; nach seinem Tod 1540 führte Nickel Hoffmann die westliche Hälfte und die Emporen weiter. Gebaut wurde 1530 bis 1539 und nach einer Unterbrechung 1542 bis 1554. Die Kirche gilt als letzter großer Hallenbau der obersächsischen Spätgotik im Übergang zur Renaissance.",
+          "tags": ["architektur", "spaetgotik", "renaissance"]
+        },
+        {
+          "text": "Die östlichen, hoch aufragenden Türme heißen Hausmannstürme. Dort wohnte der Hausmann, der die Stadt beobachtete und bei Feuer Alarm gab; der letzte Türmer lebte bis 1916 mit seiner Familie in den Turmräumen. Die westlichen Blauen Türme tragen achteckige Aufsätze und unterscheiden sich sichtbar vom Ostpaar.",
+          "tags": ["tuermer", "visuell", "stadtgeschichte"]
+        },
+        {
+          "text": "Die westlichen Türme stehen leicht schief. Ursache ist die Hallesche Marktplatzverwerfung, die den Untergrund in unterschiedlich stabile Bereiche teilt. Damit ist die unregelmäßige Silhouette kein bloßer optischer Eindruck, sondern verweist direkt auf die Geologie, aus der auch Halles Solequellen hervorgingen.",
+          "tags": ["geologie", "architektur", "visuell"]
+        },
+        {
+          "text": "Justus Jonas, enger Mitstreiter Martin Luthers, hielt in der Karwoche 1541 die erste evangelische Predigt der Gemeinde. Als Luthers Leichnam 1546 von Eisleben nach Wittenberg überführt wurde, war er in der ehemaligen Sakristei der Marktkirche aufgebahrt.",
+          "tags": ["reformation", "luther"]
+        },
+        {
+          "text": "Die Kirche bewahrt eine Totenmaske Martin Luthers, die vermutlich durch Justus Jonas nach Halle gelangte, sowie Abgüsse seiner Hände. Die Wachsmaske wird aus konservatorischen Gründen nicht ständig gezeigt. Ihr Ort hinter dem Altar entspricht der ehemaligen Sakristei, in der Luthers Leichnam lag.",
+          "tags": ["luther", "sammlung", "konservierung"]
+        },
+        {
+          "text": "Georg Friedrich Händel wurde 1685 in der Marktkirche getauft. Zu den mit der Kirche verbundenen Musikern zählen außerdem Samuel Scheidt, Händels Lehrer Friedrich Wilhelm Zachow und Wilhelm Friedemann Bach. Eine historische Reichel-Orgel und die große Schuke-Orgel tragen die musikalische Tradition weiter.",
+          "tags": ["haendel", "musik", "orgel"]
+        },
+        {
+          "text": "Zur Ausstattung gehört ein Flügelaltar aus der Schule Lucas Cranachs des Älteren. Das Zusammenspiel von spätgotischem Hallenraum, Emporen, Renaissanceelementen und reformationsgeschichtlichen Erinnerungsstücken macht die Kirche zu einem Schlüsselort für den religiösen Umbruch des 16. Jahrhunderts.",
+          "tags": ["kunst", "innenraum", "reformation"]
+        },
+        {
+          "text": "LIVE: Kirchenöffnung, Gottesdienste, Orgelmusiken, Führungen, Turmbesteigungen und die Sichtbarkeit der Luther-Totenmaske wechseln. Aktuelle Zeiten, Eintritt beziehungsweise Spendenhinweise und Zugangsbedingungen direkt bei der Marktkirchengemeinde prüfen.",
+          "tags": ["live_hint", "ephemeral", "kirche"]
+        }
+      ],
+      "faqs": []
+    },
+    {
+      "id": "halle_saale_hallescher_dom",
+      "name": "Hallescher Dom",
+      "general_info": "Der turmlose Hallesche Dom geht auf die Kirche eines 1271 gegründeten Dominikanerklosters zurück und ist das älteste erhaltene Kirchengebäude der Altstadt. Kardinal Albrecht ließ ihn ab 1520 zur prächtigen Stiftskirche umformen; später wirkte Händel hier als Organist.",
+      "deep_data_pool": [
+        {
+          "text": "Die Dominikaner ließen sich 1271 in Halle nieder. Ihre langgestreckte, turmlose Klosterkirche zählt zu den frühen Hallenkirchen Mitteldeutschlands. Der schlichte Bettelordensbau erklärt, warum der Hallesche Dom anders als viele Kathedralen weder Westwerk noch monumentale Türme besitzt.",
+          "tags": ["dominikaner", "mittelalter", "architektur"]
+        },
+        {
+          "text": "Halle war nie Bischofssitz; die Bezeichnung Dom entstand durch die Nutzung als Stiftskirche und setzte sich zunächst im Volksmund durch. Kardinal Albrecht von Brandenburg machte die ehemalige Klosterkirche zum Mittelpunkt seines 1520 gegründeten Neuen Stifts.",
+          "tags": ["begriff", "kardinal_albrecht", "kirchengeschichte"]
+        },
+        {
+          "text": "Ab 1520 gestaltete die Bauhütte Bastian Binders die Kirche um. 1523 wurde sie als Stiftskirche des heiligen Mauritius und der Maria Magdalena neu geweiht, bis 1526 war der Umbau im Wesentlichen beendet. Der Bau verbindet die strenge gotische Halle mit repräsentativen Formen der Frührenaissance.",
+          "tags": ["baugeschichte", "spaetgotik", "renaissance"]
+        },
+        {
+          "text": "Besonders auffällig ist der Kranz aus welschen Rundgiebeln vor dem Dach. Die von italienischer Architektur angeregten Formen gehörten zu den frühesten erhaltenen Beispielen nördlich der Alpen und waren ursprünglich mit Lilienfresken geschmückt. Sie geben dem turmlosen Bau seine unverwechselbare Horizontale.",
+          "tags": ["welsche_giebel", "visuell", "architektur"]
+        },
+        {
+          "text": "Albrecht wollte Dom und benachbarte Neue Residenz zum Kern eines machtvollen Stifts machen. Das Hallesche Heiltum, eine große Reliquiensammlung, wurde hier präsentiert. Für die Ausstattung bestellte der Kardinal unter anderem umfangreiche Altarwerke bei Lucas Cranach dem Älteren und einen Pfeilerfigurenzyklus.",
+          "tags": ["hallesches_heiltum", "kunst", "kardinal_albrecht"]
+        },
+        {
+          "text": "Als Albrecht 1541 das reformatorisch gewordene Halle verließ, nahm er den größten Teil der beweglichen Kunstschätze und Reliquiare nach Aschaffenburg mit. Im Dom blieben jedoch bedeutende Steinfiguren erhalten. Die heutige Ausstattung ist daher zugleich Rest eines einst sehr viel umfassenderen Gesamtkunstwerks.",
+          "tags": ["reformation", "kunstverlust", "aschaffenburg"]
+        },
+        {
+          "text": "Nach wechselnden höfischen Nutzungen wurde die Kirche 1680 evangelisch-reformierte Gemeindekirche. Georg Friedrich Händel erhielt hier 1702 seine erste feste Musikerstelle als Organist auf Probe. Schon 1703 ging er nach Hamburg, doch der kurze Dienst war ein entscheidender Schritt zur Berufslaufbahn.",
+          "tags": ["haendel", "musik", "reformiert"]
+        },
+        {
+          "text": "Der Dom steht am westlichen Altstadtrand nahe dem Mühlgraben. Zusammen mit Neuer Residenz und Moritzburg prägt er die historische Saalefront. Reste des gotischen Kreuzgangs erinnern an das Dominikanerkloster; die bemerkenswerte Akustik wird für Konzerte und Theater genutzt.",
+          "tags": ["stadtbild", "kreuzgang", "akustik"]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, öffentliche Führungen, Gottesdienste, Konzerte und Theateraufführungen wechseln. Aktuelle Zugänglichkeit beim Dom beziehungsweise der Kulturstiftung Sachsen-Anhalt prüfen; historische Hinweise auf regelmäßige Führungen sind nicht als dauerhafter Termin zu verstehen.",
+          "tags": ["live_hint", "ephemeral", "kirche"]
+        }
+      ],
+      "faqs": []
+    },
+    {
+      "id": "halle_saale_ulrichskirche",
+      "name": "Ulrichskirche",
+      "general_info": "Die ehemalige Klosterkirche der Serviten wurde ab 1339 errichtet und 1510 weitgehend vollendet. Der asymmetrische zweischiffige Hallenbau dient seit 1976 als städtische Konzerthalle und ist besonders für Chormusik und seine große Sauer-Orgel bekannt.",
+      "deep_data_pool": [
+        {
+          "text": "Serviten, auch Marienknechte genannt, kamen 1339 nach Halle und begannen ihre Klosterkirche. 1496 wurde sie erstmals geweiht; mit dem Einzug der Gewölbe war der Bau 1510 weitgehend fertig. Noch vor der vollständigen Vollendung wurde das Kloster 1527 im Zuge der Reformation aufgehoben.",
+          "tags": ["serviten", "mittelalter", "reformation"]
+        },
+        {
+          "text": "Die Kirche ist eine asymmetrische zweischiffige Hallenkirche und damit eine architektonische Rarität. Statt eines großen Turms besitzt sie zurückhaltendere Aufbauten; die ungleiche Raumordnung und der spätgotische Hallencharakter prägen ihre Wirkung.",
+          "tags": ["architektur", "spaetgotik", "visuell"]
+        },
+        {
+          "text": "Ab 1531 diente sie als Pfarrkirche der Ulrichgemeinde, nachdem deren ältere Kirche auf Anordnung Kardinal Albrechts abgebrochen worden war. Von 1806 bis 1836 war sie zusätzlich Universitätskirche und damit auch mit der akademischen Geschichte Halles verbunden.",
+          "tags": ["pfarrkirche", "universitaet", "geschichte"]
+        },
+        {
+          "text": "1971 vereinigte sich die Ulrichgemeinde mit der Marktgemeinde. Die Kirche wurde der Stadt für eine langfristige kulturelle Nutzung überlassen. Nach dem Umbau von 1972 bis 1976 eröffnete sie als Konzerthalle am Boulevard; damit endete die reguläre Nutzung als Gotteshaus.",
+          "tags": ["umnutzung", "ddr", "kultur"]
+        },
+        {
+          "text": "Beim Umbau ging ein großer Teil der Kirchenausstattung verloren oder wurde versetzt. Ein spätgotischer Flügelaltar, das Taufbecken und weitere Stücke gelangten in die Wallonerkirche Magdeburg. Der heutige Innenraum ist daher wesentlich durch die Konzertnutzung geprägt.",
+          "tags": ["ausstattung", "denkmalwandel"]
+        },
+        {
+          "text": "Die 1979/80 von Wilhelm Sauer gebaute Konzertorgel besitzt 56 Register und 4.531 Pfeifen. Sie wurde 2019 von Alexander Schuke Orgelbau saniert und ist auf ein breites Repertoire verschiedener Epochen ausgelegt.",
+          "tags": ["orgel", "musik"]
+        },
+        {
+          "text": "Im Dachstuhl sind historische Spuren erhalten, darunter eine Lastenwinde mit hölzernem Zahnrad aus dem 16. Jahrhundert und eine Bronzeglocke aus dem 14. Jahrhundert, die seit 1665 in der neu gebauten Glockenstube hängt.",
+          "tags": ["dachstuhl", "detail", "technikgeschichte"]
+        },
+        {
+          "text": "LIVE: Die Ulrichskirche ist primär Veranstaltungsort. Konzertprogramm, Einlass, Kartenpreise, Barrierezugang und Besichtigungsmöglichkeiten aktuell bei der Stadt Halle beziehungsweise der Konzerthalle prüfen; außerhalb von Veranstaltungen ist der Innenraum nicht automatisch zugänglich.",
+          "tags": ["live_hint", "ephemeral", "konzert"]
+        }
+      ],
+      "faqs": []
+    },
+    {
+      "id": "halle_saale_moritzkirche",
+      "name": "Moritzkirche",
+      "general_info": "Die Moritzkirche ist Halles älteste Pfarrkirche und ein Schlüsselbau der mitteldeutschen Spätgotik. Sie war Kirche der Talgemeinde und der Salzwirker, wurde von Conrad von Einbeck geprägt und bewahrt bedeutende Steinskulpturen sowie eine restaurierte Sauer-Orgel von 1925.",
+      "deep_data_pool": [
+        {
+          "text": "Die Pfarrkirche der südlichen Altstadt wurde vermutlich im zweiten Drittel des 12. Jahrhunderts gegründet und ist seit 1184 zugleich als Stiftskirche des Augustiner-Chorherrenstifts belegt. Ihre besondere Verbindung zur halleschen Pfännerschaft macht sie zu einem Ort der Salzgeschichte.",
+          "tags": ["mittelalter", "halloren", "salz"]
+        },
+        {
+          "text": "Der heutige spätgotische Bau begann im 14. Jahrhundert. Conrad von Einbeck wirkte als Bauleiter, Architekt und Bildhauer; zuvor hatte er im Umfeld der Prager Veitsdom-Bauhütte gearbeitet. Die Moritzkirche gilt als sein hallesches Lebenswerk.",
+          "tags": ["baugeschichte", "conrad_von_einbeck", "spaetgotik"]
+        },
+        {
+          "text": "Von Conrad von Einbeck stammen beziehungsweise werden ihm bedeutende Steinskulpturen zugeschrieben: Schellenmoritz, Schmerzensmann, Schmerzensmutter, Christus an der Geißelsäule und das Epitaph der Heiligen Drei Könige. Sie machen den Innenraum zu einem wichtigen Ensemble spätgotischer Plastik.",
+          "tags": ["skulptur", "kunst", "innenraum"]
+        },
+        {
+          "text": "Der Baugrund nahe der Hallsaale erwies sich als problematisch. 1789 beschloss man den Abbruch des erst 1696 errichteten Turms; während der Arbeiten stürzten die Reste in die Hallsaale. Die Sage vom Schellenmoritz verband das Ereignis später mit einer ruhelosen Seele.",
+          "tags": ["turm", "baugrund", "sage"]
+        },
+        {
+          "text": "Die Kirche war nacheinander Stifts- und Pfarrkirche der Salzwirker, zeitweise Klosterkirche der Dominikaner, ab 1542 evangelisch und seit 1970 Kirche einer katholischen Gemeinde. Heute nutzt sie die katholische Pfarrei St. Mauritius und St. Elisabeth.",
+          "tags": ["konfessionsgeschichte", "nutzung"]
+        },
+        {
+          "text": "Die Wilhelm-Sauer-Orgel wurde 1925 als Opus 1307 gebaut und bei ihrer Einweihung vom Leipziger Thomasorganisten Günther Ramin gespielt. Mit 53 Registern und umfangreichen Spielhilfen war sie auch als Konzertinstrument angelegt und gilt als wichtiges Denkmal spätromantischen Orgelbaus.",
+          "tags": ["orgel", "musik", "1925"]
+        },
+        {
+          "text": "Nach Umbauten, Vernachlässigung und Bauschäden war die Orgel lange nur eingeschränkt oder gar nicht spielbar. Eine umfassende Restaurierung durch Reinhard Hüfken wurde 2011 abgeschlossen; zum 600-jährigen Weihejubiläum erklang das Instrument wieder vollständig.",
+          "tags": ["restaurierung", "orgel"]
+        },
+        {
+          "text": "LIVE: Kirchenöffnung, Gottesdienste, Konzerte, Führungen und Sanierungsbereiche können wechseln. Wegen laufender Erhaltungsaufgaben Zugänglichkeit und Programm aktuell bei der Pfarrei beziehungsweise der Bürgergesellschaft St. Mauritius prüfen.",
+          "tags": ["live_hint", "ephemeral", "kirche"]
+        }
+      ],
+      "faqs": []
+    },
+    {
+      "id": "halle_saale_pauluskirche",
+      "name": "Pauluskirche",
+      "general_info": "Die evangelische Pauluskirche wurde 1900 bis 1903 als weithin sichtbarer Mittelpunkt des neu geplanten Paulusviertels errichtet. Der kreuzförmige Zentralbau in märkischer Backsteingotik steht auf dem Hasenberg und wird durch Freitreppe, Vierungsturm und moderne dreiteilige Orgelanlage geprägt.",
+      "deep_data_pool": [
+        {
+          "text": "Der Bauunternehmer Friedrich Kuhnt schenkte der Gemeinde 1897 das Grundstück auf dem Hasenberg. Die Grundsteinlegung erfolgte am 22. Oktober 1900, dem Geburtstag Kaiserin Auguste Viktorias, unter deren Protektorat das Projekt stand; eingeweiht wurde die Kirche am 6. September 1903.",
+          "tags": ["baugeschichte", "kaiserzeit"]
+        },
+        {
+          "text": "Der Entwurf entstand in der Bauabteilung des preußischen Ministeriums für öffentliche Arbeiten unter Leitung Richard Schultzes. Oskar Hossfeld und Johannes Matz begleiteten die Ausführung. Die Formen orientieren sich an der mittelalterlichen märkischen beziehungsweise norddeutschen Backsteingotik.",
+          "tags": ["architektur", "historismus"]
+        },
+        {
+          "text": "Der kreuzförmige Zentralbau steht auf einem Porphyrsockel und besitzt rote Formziegelmauern. Über der Vierung erhebt sich ein etwa 60 Meter hoher Turm, flankiert von vier runden Treppentürmen. Die kurze Kreuzform konzentriert den Raum auf die Mitte.",
+          "tags": ["architektur", "visuell"]
+        },
+        {
+          "text": "Eine 7,5 Meter breite Freitreppe mit 62 Stufen führt vom Rathenauplatz zum Westportal. Die erhöhte Lage auf dem früheren Hasenberg verstärkt die monumentale Wirkung. Radial auf die Kirche zulaufende Straßen machen sie zum städtebaulichen Mittelpunkt des um 1900 geplanten Viertels.",
+          "tags": ["stadtplanung", "orientierung", "visuell"]
+        },
+        {
+          "text": "Das Paulusviertel entstand als Kaiserviertel für Professoren, Beamte, Angestellte und Offiziere. Historismus, Jugendstil und späteres Neues Bauen prägen seine Straßen. Die Kirche ist deshalb zugleich religiöser Bau und zentraler Orientierungspunkt einer planmäßig angelegten Stadterweiterung.",
+          "tags": ["paulusviertel", "stadtentwicklung"]
+        },
+        {
+          "text": "Vom ursprünglichen Rühlmann-Instrument von 1903 blieb vor allem der Prospekt. Später wurde eine 1893 für die Stephanuskirche gebaute und mehrfach umgestaltete Orgel übernommen. Diese wechselvolle Geschichte führte zum jüngsten großen Orgelprojekt.",
+          "tags": ["orgel", "musikgeschichte"]
+        },
+        {
+          "text": "Die 2024 vollendete Anlage verteilt eine Hauptorgel und zwei Fernwerke auf drei Positionen des Zentralraums. Sie besitzt fünf Werke auf vier Manualen, 60 Register und rund 3.000 Pfeifen; ein Teil älteren Pfeifenmaterials und der historische Prospekt wurden einbezogen.",
+          "tags": ["orgel", "gegenwart", "akustik"]
+        },
+        {
+          "text": "LIVE: Kirchenöffnung, Gottesdienste, Orgelvorführungen, Konzerte und Besichtigungen wechseln. Aktuelle Termine und mögliche Einschränkungen direkt bei der Paulusgemeinde prüfen; die Kirche ist kein Museum mit garantiertem täglichen Zugang.",
+          "tags": ["live_hint", "ephemeral", "kirche"]
+        }
+      ],
+      "faqs": []
+    },
+    {
+      "id": "halle_saale_katholische_propsteikirche_st_franziskus_und_st_elisabeth",
+      "name": "Katholische Propsteikirche St. Franziskus und St. Elisabeth",
+      "general_info": "Die katholische Propsteikirche entstand 1894 bis 1896 nach Plänen des Paderborner Dombaumeisters Arnold Güldenpfennig. Die neugotische Backsteinbasilika mit asymmetrisch gesetztem Turm dokumentiert das Wachstum der katholischen Gemeinde im industrialisierten Halle.",
+      "deep_data_pool": [
+        {
+          "text": "Nach jahrhundertelang kleiner katholischer Präsenz nahm die Gemeinde im 19. Jahrhundert durch Zuzug stark zu. Halle wurde 1867 Sitz eines Dekanats. 1883 erwarb man das Grundstück an der damaligen Mauergasse zwischen St.-Georgen-Kirche und Franckeschen Stiftungen.",
+          "tags": ["katholizismus", "19_jahrhundert"]
+        },
+        {
+          "text": "Der Kulturkampf zwischen preußischem Staat und katholischer Kirche verzögerte den Baubeginn um etwa ein Jahrzehnt. Erst am 24. Mai 1894 wurde der Grundstein gelegt. Die Weihe vollzog Bischof Hubert Theophil Simar am 20. Mai 1896.",
+          "tags": ["kulturkampf", "baugeschichte"]
+        },
+        {
+          "text": "Architekt war Arnold Güldenpfennig, Diözesan- und Dombaumeister des damaligen Bistums Paderborn, zu dem Halle gehörte. Er entwarf einen neugotischen Backsteinbau, der die katholische Gemeinde selbstbewusst in das Stadtbild der Gründerzeit einordnete.",
+          "tags": ["architekt", "neugotik"]
+        },
+        {
+          "text": "Die Kirche ist eine dreischiffige, kreuzförmige Pfeilerbasilika mit Querhaus. Der hohe Turm steht asymmetrisch an der nordöstlichen Ecke des Langhauses. Blendtriforien im Langhaus und hallenartig erhöhte Seitenkapellen am Chor differenzieren den Innenraum.",
+          "tags": ["architektur", "visuell"]
+        },
+        {
+          "text": "Als Patrone wurden Franz von Assisi und Elisabeth von Thüringen gewählt. Beide Namen verweisen auf Armut, Fürsorge und tätige Nächstenliebe und passten damit zur sozialen Prägung des katholischen Umfelds nahe dem Elisabeth-Krankenhaus.",
+          "tags": ["patrozinium", "religionsgeschichte"]
+        },
+        {
+          "text": "1964 malte der hallesche Künstler Fritz Leweke die Gewölbe neu aus. Die neugotische Architektur trägt damit auch eine deutlich jüngere künstlerische Schicht, die von den Veränderungen katholischer Kirchenräume im 20. Jahrhundert erzählt.",
+          "tags": ["innenraum", "kunst", "20_jahrhundert"]
+        },
+        {
+          "text": "In der Turmvorhalle wurde 1922 ein Ehrenmal für die Gefallenen des Ersten Weltkriegs eingeweiht. Dazu gehört eine expressionistische Pietà aus Sandstein, die dem halleschen Bildhauer Richard Horn oder in anderer Überlieferung seinem Vater Paul Horn zugeschrieben wird; die Zuschreibung ist nicht völlig einheitlich.",
+          "tags": ["denkmal", "kunst", "quellenkritik"]
+        },
+        {
+          "text": "LIVE: Gottesdienste, offene Kirche, Konzerte und Besichtigungen richten sich nach dem aktuellen Gemeindeleben. Zeiten und Zugänglichkeit bei der Pfarrei St. Mauritius und St. Elisabeth prüfen; liturgische Nutzung hat Vorrang.",
+          "tags": ["live_hint", "ephemeral", "kirche"]
+        }
+      ],
+      "faqs": []
+    },
+    {
+      "id": "halle_saale_kunstmuseum_moritzburg_halle_saale",
+      "name": "Kunstmuseum Moritzburg Halle (Saale)",
+      "general_info": "Das Kunstmuseum des Landes Sachsen-Anhalt verbindet eine spätgotische erzbischöfliche Burg mit moderner Museumsarchitektur. Seine rund 250.000 Objekte reichen von älterer Kunst bis zur Gegenwart; besonders bedeutend sind Klassische Moderne, Feiningers Halle-Zyklus und Kunst nach 1945.",
+      "deep_data_pool": [
+        {
+          "text": "Erzbischof Ernst von Sachsen begann 1484 den Bau der Moritzburg als befestigte Residenz und Zwingburg. Kardinal Albrecht von Brandenburg ließ sie vollenden und prächtig ausstatten. Die Anlage markierte landesherrliche Macht unmittelbar am Rand der bürgerlichen Stadt.",
+          "tags": ["burg", "mittelalter", "kardinal_albrecht"]
+        },
+        {
+          "text": "Im Dreißigjährigen Krieg wurde die Burg schwer beschädigt und blieb teilweise Ruine. Gerade dieses Nebeneinander aus erhaltenen Flügeln, Mauern und offenem Ruinenraum prägt ihren Charakter. Spätere Museumsbauten mussten sich deshalb mit einer unvollständigen historischen Anlage auseinandersetzen.",
+          "tags": ["dreissigjaehriger_krieg", "ruine", "architektur"]
+        },
+        {
+          "text": "Das Museum ging aus dem 1885 gegründeten Städtischen Museum für Kunst und Kunstgewerbe hervor. Ab 1904 wurden Teile der Moritzburg genutzt, seit 1921 befinden sich die Sammlungen vollständig dort. Bürgerliche Spenden halfen, Bereiche der Burg für Museumszwecke auszubauen.",
+          "tags": ["museumsgeschichte", "buergersinn"]
+        },
+        {
+          "text": "Heute umfasst die nahezu universale Sammlung etwa 250.000 Gemälde, Grafiken, Fotografien, Plastiken, kunsthandwerkliche Objekte und weitere Werke. Die Gemäldesammlung konzentriert sich auf Kunst in Deutschland seit der Spätgotik, mit einem klaren Schwerpunkt im 20. Jahrhundert.",
+          "tags": ["sammlung", "kunst"]
+        },
+        {
+          "text": "Unter Max Sauerlandt und Alois J. Schardt entwickelte sich das Haus zu einem führenden Museum der damaligen Gegenwartskunst. Sie erwarben Werke von Sezession, Expressionismus, Bauhaus und konstruktiver Abstraktion, darunter Arbeiten von Klee, Kandinsky, Lissitzky, Kirchner und weiteren Künstlern der Moderne.",
+          "tags": ["klassische_moderne", "museumsgeschichte"]
+        },
+        {
+          "text": "Lyonel Feininger arbeitete 1929 bis 1931 in einem Atelier im Torturm. Aus dem Auftrag für eine Stadtansicht entstand nach intensiven Streifzügen ein Zyklus von elf Gemälden und 29 Zeichnungen. Marktkirche, Roter Turm, Dom und Straßen Halles wurden zu prismatisch verdichteten Motiven; drei Gemälde gehören heute wieder dem Museum.",
+          "tags": ["feininger", "bauhaus", "halle_zyklus"]
+        },
+        {
+          "text": "1937 traf die nationalsozialistische Aktion Entartete Kunst die moderne Sammlung schwer: Hunderte Werke wurden beschlagnahmt, verkauft oder zerstört. Das Museum erforscht und vermittelt diese Verluste. Seine heutige Moderne-Sammlung ist deshalb auch eine Rekonstruktion gebrochener Sammlungsgeschichte.",
+          "tags": ["nationalsozialismus", "entartete_kunst", "provenienz"]
+        },
+        {
+          "text": "Zu den herausragenden Gemälden gehört Gustav Klimts Bildnis Marie Henneberg von 1902, eines von nur wenigen Klimt-Gemälden in deutschen Sammlungen. Weitere Schwerpunkte reichen von Caspar David Friedrich und Carl Blechen über Brücke-Künstler bis zu Kunst in der DDR und nach 1990.",
+          "tags": ["klimt", "sammlung", "moderne"]
+        },
+        {
+          "text": "Der moderne Ausbau von Fuensanta Nieto und Enrique Sobejano überspannt Teile des Ruinenraums mit einer neuen Dachlandschaft. So entstanden zusätzliche Ausstellungsebenen, ohne die Brüche der Burg zu verstecken. Alte Wehrmauern und zeitgenössische Konstruktion bleiben gleichzeitig sichtbar.",
+          "tags": ["museumsarchitektur", "alt_neu", "visuell"]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Sonderausstellungen, sichtbare Werke und Führungen ändern sich. Vor dem Besuch Programm und Ticketinformationen auf kunstmuseum-moritzburg.de prüfen; einzelne Hauptwerke können verliehen oder vorübergehend nicht ausgestellt sein.",
+          "tags": ["live_hint", "ephemeral", "museum"]
+        }
+      ],
+      "faqs": []
+    },
+    {
+      "id": "halle_saale_neue_residenz",
+      "name": "Neue Residenz",
+      "general_info": "Die 1531 bis 1539 für Kardinal Albrecht errichtete Neue Residenz ist eine bedeutende Vierflügelanlage der deutschen Frührenaissance. Neben Dom und Mühlgraben zeigt sie den Versuch, Halle in eine fürstliche, gegenreformatorische Residenzstadt umzubauen.",
+      "deep_data_pool": [
+        {
+          "text": "Für den Bau ließ Kardinal Albrecht das Cyriakushospital südlich des Doms abbrechen und zuvor an anderer Stelle ersetzen. 1531 begann das zunächst New Gebew genannte Projekt; die Bezeichnung Neue Residenz ist seit 1644 gebräuchlich.",
+          "tags": ["baugeschichte", "kardinal_albrecht"]
+        },
+        {
+          "text": "Hans von Schönitz wirkte zunächst als Bauverwalter und möglicherweise am Konzept mit. Als Werkmeister sind Andreas Günther und später Bastian Binder belegt. 1537 entstand der Nordflügel mit Kapelle, 1538 beziehungsweise 1539 war die Anlage im Wesentlichen vollendet.",
+          "tags": ["architekten", "renaissance"]
+        },
+        {
+          "text": "Die Residenz ist eine unbefestigte, trapezförmige Vierflügelanlage aus zwei- bis dreigeschossigen Bruchsteinbauten mit Sattel- und Walmdächern. Sie besaß einen aufwendigen Arkadenhof und war mit einem Garten jenseits der Stadtmauer verbunden.",
+          "tags": ["architektur", "visuell"]
+        },
+        {
+          "text": "Baumaterial stammte unter anderem aus dem abgebrochenen Kloster Neuwerk und der alten Ulrichskirche. Eingebaute romanische Bauteile aus der Zeit um 1180/1200 sind deshalb wesentlich älter als die Residenz selbst und machen sie zugleich zu einem Zeugnis frühneuzeitlicher Wiederverwendung.",
+          "tags": ["spolien", "romanisch", "baugeschichte"]
+        },
+        {
+          "text": "Der Komplex gilt als früher Import italienischer Renaissance-Ideen nach Mittel- und Norddeutschland. Gemeinsam mit dem umgestalteten Dom sollte er den Hof Kardinal Albrechts repräsentieren und Halle als katholisches Macht- und Kunstzentrum gegenüber Wittenberg profilieren.",
+          "tags": ["renaissance", "reformation", "residenz"]
+        },
+        {
+          "text": "Nach Albrechts Weggang 1541 wechselten Funktion und Bewohner. Herzog August von Sachsen-Weißenfels nutzte die Anlage im 17. Jahrhundert; 1680 starb er hier als letzter Administrator des Erzstifts Magdeburg. Danach fiel das Erzstift an Brandenburg.",
+          "tags": ["nutzungsgeschichte", "17_jahrhundert"]
+        },
+        {
+          "text": "Die Anlage liegt zwischen Dom und Mühlgraben am historischen westlichen Stadtrand. Zusammen mit Moritzburg und Dom bildet sie ein städtebauliches Ensemble an der Saalefront und gehört zur Straße der Romanik, obwohl ihr Hauptcharakter frührenaissancezeitlich ist.",
+          "tags": ["stadtbild", "strasse_der_romanik", "quer"]
+        },
+        {
+          "text": "LIVE: Eigentums-, Sanierungs- und Nutzungskonzepte sowie die Zugänglichkeit des Innenhofs können sich ändern. Aktuelle Öffnungen, saisonale Gestaltungen und Veranstaltungen bei der Stadt Halle oder dem Land Sachsen-Anhalt prüfen; keine regelmäßige Innenbesichtigung voraussetzen.",
+          "tags": ["live_hint", "ephemeral", "zugang"]
+        }
+      ],
+      "faqs": []
+    },
+    {
+      "id": "halle_saale_landesmuseum_fur_vorgeschichte_halle_saale",
+      "name": "Landesmuseum für Vorgeschichte Halle (Saale)",
+      "general_info": "Das Landesmuseum gehört zu den wichtigsten archäologischen Museen Mitteleuropas. Seine Dauerausstellung führt durch mehr als 450.000 Jahre Menschheitsgeschichte. Hauptwerk ist die originale Himmelsscheibe von Nebra, eine rund 3.600 Jahre alte Darstellung kosmischer Phänomene.",
+      "deep_data_pool": [
+        {
+          "text": "Die Sammlung wurzelt im 1819 gegründeten Thüringisch-Sächsischen Altertumsverein und in der archäologischen Denkmalpflege der preußischen Provinz Sachsen. Aus der Verbindung von Sammlung, Forschung und Bodendenkmalpflege entwickelte sich eine Institution, die Funde nicht nur zeigt, sondern auch wissenschaftlich erschließt.",
+          "tags": ["museumsgeschichte", "archaeologie"]
+        },
+        {
+          "text": "Wilhelm Kreis entwarf das Museumsgebäude, dessen monumentale Form sich an der Porta Nigra in Trier orientiert. Errichtet wurde es 1911 bis 1913; wegen Krieg und Verzögerungen erfolgte die Einweihung am 9. Oktober 1918. Es war Deutschlands erstes eigens für Vorgeschichte gebautes Museumsgebäude.",
+          "tags": ["architektur", "wilhelm_kreis", "museumsgeschichte"]
+        },
+        {
+          "text": "Elf thematische Abschnitte führen durch gut 450.000 Jahre Menschheitsgeschichte, vom Beginn der Steinzeit bis in die frühe Neuzeit. Die Präsentation verbindet Originalfunde mit wissenschaftlich fundierten Rekonstruktionen und ordnet einzelne Objekte in größere Kultur- und Lebenswelten ein.",
+          "tags": ["dauerausstellung", "menschheitsgeschichte"]
+        },
+        {
+          "text": "Die Himmelsscheibe von Nebra zeigt die weltweit älteste bekannte konkrete Darstellung astronomischer Phänomene. Goldene Elemente verbinden Sonne beziehungsweise Vollmond, Mondsichel und Sterne; später ergänzte Horizonte und eine Himmelsbarke verknüpfen Beobachtung, Kalenderwissen und religiöse Deutung.",
+          "tags": ["himmelsscheibe", "bronzezeit", "astronomie"]
+        },
+        {
+          "text": "Die Scheibe entstand vor rund 3.600 Jahren und gehörte zu einem Bronzeschatz. Raubgräber gruben ihn 1999 illegal auf dem Mittelberg bei Nebra aus. Nach Stationen im Hehlermilieu stellte die Basler Polizei den Fund im Februar 2002 zusammen mit deutschen Ermittlern sicher.",
+          "tags": ["himmelsscheibe", "fundgeschichte", "raubgrabung"]
+        },
+        {
+          "text": "Seit dem 23. Mai 2008 wird das Original dauerhaft in der Schatzkammer des Landesmuseums präsentiert. Die inszenierte Dunkelheit lenkt den Blick auf Bronze und Gold, während die Ausstellung den Fundkontext, die Herstellung und das bronzezeitliche Wissen erläutert.",
+          "tags": ["himmelsscheibe", "praesentation", "museum"]
+        },
+        {
+          "text": "2013 nahm die UNESCO die Himmelsscheibe in das Register Memory of the World auf. Ausschlaggebend ist ihre Bedeutung als einzigartiges Dokument frühen astronomischen Wissens und kosmologischer Vorstellungen, nicht ein Status als klassisches Weltkulturerbe-Gebäude.",
+          "tags": ["unesco", "dokumentenerbe", "himmelsscheibe"]
+        },
+        {
+          "text": "Die Scheibe erklärt nicht einfach einen modernen Sternenhimmel. Horizontbögen markieren den jährlichen Sonnenlauf, die Sternengruppe wird häufig als Plejaden gelesen, und die Barke verweist auf mythische Vorstellungen. Mehrere Veränderungsphasen zeigen, dass das Objekt über längere Zeit umgedeutet wurde.",
+          "tags": ["deutung", "astronomie", "religion"]
+        },
+        {
+          "text": "Neben der Himmelsscheibe zeigt das Museum zahlreiche international bedeutende Funde aus Sachsen-Anhalt. Die Erzählung reicht von frühen Menschen und Eiszeit über neolithische Monumente und Bronzezeit bis zu germanischen, römischen und mittelalterlichen Lebenswelten.",
+          "tags": ["sammlung", "archaeologie", "sachsen_anhalt"]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Sonderausstellungen, Führungen und digitale Zusatzangebote ändern sich. Aktuelle Informationen auf landesmuseum-vorgeschichte.de prüfen. Auch bei der Himmelsscheibe können konservatorische oder organisatorische Ausnahmen nicht dauerhaft ausgeschlossen werden.",
+          "tags": ["live_hint", "ephemeral", "museum"]
+        }
+      ],
+      "faqs": []
+    },
+    {
+      "id": "halle_saale_franckesche_stiftungen",
+      "name": "Franckesche Stiftungen",
+      "general_info": "August Hermann Francke schuf ab 1698 vor den Toren Halles eine pietistische Schulstadt mit Waisenhaus, Schulen, Druckerei, Apotheke und Lehrsammlungen. Das einzigartige Ensemble verbindet Sozialreform, Pädagogik, weltweite Netzwerke und eine original erhaltene barocke Kunst- und Naturalienkammer.",
+      "deep_data_pool": [
+        {
+          "text": "Franckes Werk begann 1695 mit Schulen für unterschiedliche soziale Gruppen. 1698 legte er den Grundstein zum großen Waisenhaus, dem Kern einer rasch wachsenden Schulstadt. Ziel war eine christlich geprägte Bildung, die Erziehung, soziale Fürsorge und praktische Ausbildung eng verband.",
+          "tags": ["august_hermann_francke", "gruendung", "pietismus"]
+        },
+        {
+          "text": "Das Historische Waisenhaus ist ein dreigeschossiger Bau mit Sockel, Freitreppe und großem Mansarddach. Seine klare, zurückhaltende Fassade verband die Würde eines Stadtpalais mit pietistischer Sparsamkeit. Im Inneren lagen Druckerei, Labore, Lager, Buchhandlung, Apotheke, Wohn- und Unterrichtsräume.",
+          "tags": ["waisenhaus", "architektur", "visuell"]
+        },
+        {
+          "text": "Das Mansarddach schuf zusätzlichen Raum und gehörte zu den frühen Beispielen dieser Dachform in Mitteldeutschland. Zunächst schliefen dort Waisenknaben; nach ihrem Umzug 1734 wurde der Saal zur Kunst- und Naturalienkammer umgestaltet.",
+          "tags": ["mansarddach", "baugeschichte", "wunderkammer"]
+        },
+        {
+          "text": "Franckes mehrgliedriges Schulsystem umfasste Deutsche Schulen, Lateinische Schule und das Pädagogium. Mädchen und Jungen sowie verschiedene Stände wurden in getrennten Einrichtungen, aber innerhalb einer gemeinsamen Bildungslandschaft unterrichtet. Individuelle Begabungen sollten stärker berücksichtigt werden.",
+          "tags": ["paedagogik", "schulstadt", "sozialgeschichte"]
+        },
+        {
+          "text": "Sammlungen, Anatomiestube und Lehrgärten dienten dem Anschauungsunterricht. Studierende der Universität arbeiteten als Lehrer; daraus entwickelte sich ein frühes institutionalisiertes Modell der Lehrerbildung. Praxisorientierte Ausbildung prägte auch Theologie und Medizin.",
+          "tags": ["lehrerbildung", "anschauungsunterricht", "universitaet"]
+        },
+        {
+          "text": "Buchhandlung, Druckerei, Buchbinderei und Apotheke erwirtschafteten Einnahmen für das soziale Werk. 1710 gründeten Francke und Carl Hildebrand von Canstein die Cansteinsche Bibelanstalt. Mit dauerhaft stehendem Schriftsatz konnten Bibeln in sehr hohen Auflagen günstiger produziert werden.",
+          "tags": ["druckgeschichte", "bibelanstalt", "wirtschaft"]
+        },
+        {
+          "text": "Die Kunst- und Naturalienkammer wurde 1698 angelegt und später von Gottfried August Gründler systematisch geordnet. In originalen Schränken versammelt sie mehr als 3.000 Naturalia, Artefakte, Modelle, Waffen und Kunstwerke aus aller Welt. Sie diente Schülern als Lehrsammlung und gilt als außergewöhnlich vollständig erhaltene barocke Wunderkammer.",
+          "tags": ["wunderkammer", "sammlung", "barock"]
+        },
+        {
+          "text": "Zu den anschaulichen Objekten gehören ein ausgestopftes Nilkrokodil, Modelle, Präparate und Gegenstände aus weit entfernten Regionen. Die Sammlung sollte die Ordnung der Schöpfung zeigen und zugleich das globale Netzwerk des halleschen Pietismus abbilden.",
+          "tags": ["objekte", "globalgeschichte", "wunderkammer"]
+        },
+        {
+          "text": "Theologen und Pädagogen aus Halle wirkten im 18. Jahrhundert im Baltikum, in Russland, Skandinavien, England, Nordamerika und Indien. Briefe, Bücher, Spenden und Objekte verbanden die Stiftungen mit einem internationalen Netzwerk; Halle wurde dadurch ein Zentrum des europäischen Pietismus.",
+          "tags": ["pietismus", "netzwerk", "globalgeschichte"]
+        },
+        {
+          "text": "Nach starkem Verfall in der DDR wurde das Historische Waisenhaus 1993 bis 1995 umfassend gerettet und als kulturelles Zentrum wiedereröffnet. Heute arbeiten auf dem Gelände erneut Schulen, Forschungs-, Kultur- und Sozialeinrichtungen; die historische Zweckarchitektur ist als Kandidat auf Deutschlands UNESCO-Vorschlagsliste verzeichnet.",
+          "tags": ["sanierung", "gegenwart", "unesco_vorschlagsliste"]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Ausstellungen, Führungen und die Zugänglichkeit von Wunderkammer, Bibliothek und historischen Räumen wechseln. Vor dem Besuch das aktuelle Programm der Franckeschen Stiftungen prüfen; das weitläufige Gelände enthält zugleich öffentliche und institutionell genutzte Bereiche.",
+          "tags": ["live_hint", "ephemeral", "museum"]
+        }
+      ],
+      "faqs": []
+    }
+  ]
+}

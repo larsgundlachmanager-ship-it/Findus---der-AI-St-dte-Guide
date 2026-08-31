@@ -1,0 +1,1809 @@
+{
+  "notes": [
+    "Depth Wave B: 30 T2-Ziele in Lissabon; deutsche, quellengebundene Vertiefung ohne Dialogskripte.",
+    "Quellen: offizielle Betreiber-, Museums-, Parlaments-, Präsidentschafts- und Stadtseiten sowie etablierte Denkmaldokumentation. Preise, Zeiten, Programme und Zugänge nur LIVE.",
+    "Historische Datensatznamen bleiben als IDs erhalten; institutionelle Umbenennungen werden im Inhalt ausdrücklich erklärt."
+  ],
+  "spots": [
+    {
+      "id": "lissabon_centro_cultural_de_belem",
+      "name": "Centro Cultural de Belém",
+      "lat": 38.6955029,
+      "lng": -9.2083542,
+      "place_tier": 2,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Das Centro Cultural de Belém entstand nach einem 1988 gefassten Regierungsbeschluss. Es wurde für Portugals EG-Ratspräsidentschaft 1992 benötigt und 1993 als Kulturzentrum eröffnet.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Den internationalen Wettbewerb gewannen Vittorio Gregotti und Manuel Salgado. Der große, mit hellem Kalkstein verkleidete Komplex ist wie eine Folge von Straßen, Höfen, Terrassen und massiven Baukörpern organisiert.",
+          "tags": [
+            "architektur"
+          ]
+        },
+        {
+          "text": "Zum CCB gehören ein Konferenzzentrum, Säle für Musik, Oper und darstellende Kunst sowie das Ausstellungszentrum. Dadurch verbindet das Haus Kongressbetrieb, Bühne, Bildung und bildende Kunst.",
+          "tags": [
+            "einordnung"
+          ]
+        },
+        {
+          "text": "Das Gebäude steht zwischen Jerónimos-Kloster und Tejo. Seine zurückhaltende Höhe und die steinernen Fassaden beziehen sich auf die monumentale Architektur und die Plätze von Belém.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Seit 2002 ist der Bau als Denkmal von öffentlichem Interesse klassifiziert. Frei zugängliche Innenhöfe, Wege und Terrassen machen Teile des Komplexes auch ohne Veranstaltungsbesuch erlebbar.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Das Ausstellungszentrum beherbergte 1999 bis 2006 das Designmuseum und 2007 bis 2022 das Museu Coleção Berardo. Seit 2023 arbeitet es als MAC/CCB für moderne Kunst und Architektur.",
+          "tags": [
+            "wissen"
+          ]
+        },
+        {
+          "text": "Quellenbasis: offizielle Informationen von ccb.pt sowie institutionelle Denkmal-, Museums- oder Stadtangaben. Der Text trennt dauerhafte Geschichte von veränderlichen Besucherinformationen und verwendet den heutigen institutionellen Namen, wenn er vom historischen Datensatznamen abweicht.",
+          "tags": [
+            "quelle",
+            "verifiziert"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen, Veranstaltungsprogramm, Reservierung, Baustellen und tatsächliche Zugänglichkeit unmittelbar vor dem Besuch auf ccb.pt prüfen; diese Angaben sind ephemer und werden hier bewusst nicht als dauerhafte Fakten festgeschrieben.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lissabon_pasteis_de_belem",
+      "name": "Pastéis de Belém",
+      "lat": 38.6975105,
+      "lng": -9.2032276,
+      "place_tier": 2,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Die Hausgeschichte setzt 1837 ein: In einer Zuckerraffinerie neben dem Jerónimos-Kloster begann der Verkauf der nach klösterlicher Überlieferung hergestellten Törtchen.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Nach der liberalen Revolution wurden 1834 Portugals Klöster aufgehoben. Ein früherer Bewohner des Jerónimos-Klosters bot daraufhin in der nahen Raffinerie süßes Gebäck zum Verkauf an.",
+          "tags": [
+            "architektur"
+          ]
+        },
+        {
+          "text": "Der geschützte Hausname lautet Pastéis de Belém; die allgemeine portugiesische Gebäckart heißt pastel de nata. Das Unternehmen erklärt, die genaue Rezeptur werde bis heute geheim gehalten.",
+          "tags": [
+            "einordnung"
+          ]
+        },
+        {
+          "text": "Kennzeichnend sind Blätterteigschichten und eine gebackene Eiercreme. Traditionell werden Zimt und Puderzucker separat gereicht; beides ist Ergänzung und nicht Teil einer vorgeschriebenen Verkostung.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Die Produktion findet weiterhin an der Rua de Belém nahe dem Kloster statt. Durch Schaufenster und Arbeitsbereiche ist ein Teil der handwerklichen Fertigung für Gäste nachvollziehbar.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Die blau-weißen Azulejos der historischen Gasträume und die lange Straßenfront prägen den Ort. Der Betrieb ist Café, Konditorei, Verkauf und Produktionsstätte zugleich.",
+          "tags": [
+            "wissen"
+          ]
+        },
+        {
+          "text": "Quellenbasis: offizielle Informationen von pasteisdebelem.pt sowie institutionelle Denkmal-, Museums- oder Stadtangaben. Der Text trennt dauerhafte Geschichte von veränderlichen Besucherinformationen und verwendet den heutigen institutionellen Namen, wenn er vom historischen Datensatznamen abweicht.",
+          "tags": [
+            "quelle",
+            "verifiziert"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen, Veranstaltungsprogramm, Reservierung, Baustellen und tatsächliche Zugänglichkeit unmittelbar vor dem Besuch auf pasteisdebelem.pt prüfen; diese Angaben sind ephemer und werden hier bewusst nicht als dauerhafte Fakten festgeschrieben.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lissabon_museu_colecao_berardo",
+      "name": "Museu Coleção Berardo",
+      "lat": 38.6958741,
+      "lng": -9.2090914,
+      "place_tier": 2,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Der historische Datensatzname bezeichnet das Museu Coleção Berardo, das im Ausstellungszentrum des CCB von 2007 bis 2022 bestand. Seit 2023 heißt der Museumsbetrieb dort MAC/CCB.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Die Berardo-Sammlung bleibt ein wichtiger Bestand am selben Ort, wird heute jedoch zusammen mit der Ellipse-Sammlung, der Sammlung Teixeira de Freitas und staatlicher Gegenwartskunst präsentiert.",
+          "tags": [
+            "architektur"
+          ]
+        },
+        {
+          "text": "Das MAC/CCB widmet sich moderner und zeitgenössischer Kunst sowie Architektur. Seine flexiblen Galerien umfassen nach Angaben des CCB insgesamt rund 9.000 Quadratmeter Ausstellungsfläche.",
+          "tags": [
+            "einordnung"
+          ]
+        },
+        {
+          "text": "Vertreten sind internationale und portugiesische Positionen seit der Moderne, darunter Werke von Picasso, Duchamp, Miró, Warhol, Paula Rego, Helena Almeida und Almada Negreiros.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Die Räume waren 1993 bis 2005 als Ausstellungszentrum aktiv und beherbergten 1999 bis 2006 das Museu do Design. Der institutionelle Wechsel 2023 erweiterte Auftrag und Sammlungsbasis.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Für die Orientierung gilt: Der frühere Name steht noch in älteren Karten und Reiseführern. Vor Ort ist nach MAC/CCB im Centro Cultural de Belém zu suchen, nicht nach einem separaten Berardo-Gebäude.",
+          "tags": [
+            "wissen"
+          ]
+        },
+        {
+          "text": "Quellenbasis: offizielle Informationen von ccb.pt/macccb sowie institutionelle Denkmal-, Museums- oder Stadtangaben. Der Text trennt dauerhafte Geschichte von veränderlichen Besucherinformationen und verwendet den heutigen institutionellen Namen, wenn er vom historischen Datensatznamen abweicht.",
+          "tags": [
+            "quelle",
+            "verifiziert"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen, Veranstaltungsprogramm, Reservierung, Baustellen und tatsächliche Zugänglichkeit unmittelbar vor dem Besuch auf ccb.pt/macccb prüfen; diese Angaben sind ephemer und werden hier bewusst nicht als dauerhafte Fakten festgeschrieben.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lissabon_palacio_de_belem",
+      "name": "Palácio de Belém",
+      "lat": 38.6979905,
+      "lng": -9.2005493,
+      "place_tier": 2,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Der Palácio Nacional de Belém ist seit 1910 der Amtssitz des Präsidenten der Portugiesischen Republik. Er dient Staatsgeschäften und offiziellen Empfängen, nicht als frei zugänglicher Alltagspalast.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Das Anwesen geht auf das 16. Jahrhundert zurück. König João V. erwarb es 1726 vom Grafen von Aveiras und ließ den Komplex für den Hof erweitern und ausstatten.",
+          "tags": [
+            "architektur"
+          ]
+        },
+        {
+          "text": "Beim Erdbeben von 1755 hielten sich König José I. und seine Familie in Belém auf. Der Palast überstand die Katastrophe vergleichsweise gut und wurde zeitweise zum Zentrum des Hoflebens.",
+          "tags": [
+            "einordnung"
+          ]
+        },
+        {
+          "text": "Die rosa Fassaden, niedrigen Flügel und Gärten unterscheiden den Palast von einer geschlossenen Stadtresidenz. Zur Anlage gehören repräsentative Säle, Hofbereiche und historische Gartenräume.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Vor dem Palast liegt die Praça Afonso de Albuquerque mit dem Denkmal des zweiten portugiesischen Vizekönigs von Indien. Die Staatswache macht die offizielle Nutzung des Ensembles sichtbar.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Zum Präsidentschaftskomplex gehört das Museu da Presidência da República. Es erklärt die Republik, die Staatsoberhäupter und Insignien; Palastführungen und Zugänge folgen einem gesonderten Programm.",
+          "tags": [
+            "wissen"
+          ]
+        },
+        {
+          "text": "Quellenbasis: offizielle Informationen von presidencia.pt sowie institutionelle Denkmal-, Museums- oder Stadtangaben. Der Text trennt dauerhafte Geschichte von veränderlichen Besucherinformationen und verwendet den heutigen institutionellen Namen, wenn er vom historischen Datensatznamen abweicht.",
+          "tags": [
+            "quelle",
+            "verifiziert"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen, Veranstaltungsprogramm, Reservierung, Baustellen und tatsächliche Zugänglichkeit unmittelbar vor dem Besuch auf presidencia.pt prüfen; diese Angaben sind ephemer und werden hier bewusst nicht als dauerhafte Fakten festgeschrieben.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lissabon_jardim_botanico_tropical",
+      "name": "Jardim Botânico Tropical",
+      "lat": 38.6981989,
+      "lng": -9.2037743,
+      "place_tier": 2,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Der Garten wurde 1906 als Jardim Colonial gegründet und diente der Lehre und Forschung zu Nutz- und Zierpflanzen aus Portugals damaligen tropischen Besitzungen.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Er gehört heute zur Universität Lissabon und bildet zusammen mit dem Palácio de Belém und seinen Gärten ein als Nationaldenkmal geschütztes Ensemble.",
+          "tags": [
+            "architektur"
+          ]
+        },
+        {
+          "text": "Auf rund sieben Hektar wachsen Bestände aus tropischen und subtropischen Regionen. Besonders sichtbar sind Palmen, Cycadeen, Drachenbäume und große Feigenbäume.",
+          "tags": [
+            "einordnung"
+          ]
+        },
+        {
+          "text": "Zum historischen Aufbau gehören das Hauptgebäude Palácio dos Condes da Calheta, Gewächshausbereiche, Wasserflächen, Wege und ein asiatisch geprägter Gartenabschnitt.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Mehrere Skulpturen stammen aus der Portugiesischen Weltausstellung von 1940. Sie dokumentieren zugleich die koloniale Bildsprache ihrer Entstehungszeit und benötigen kritische historische Einordnung.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Der Garten wurde nach einer umfassenden Sanierung 2020 wiedereröffnet. Restauriert wurden Wege, Wassertechnik und Pflanzenbereiche; botanische Sammlung und Forschung bleiben seine Kernaufgaben.",
+          "tags": [
+            "wissen"
+          ]
+        },
+        {
+          "text": "Quellenbasis: offizielle Informationen von museus.ulisboa.pt sowie institutionelle Denkmal-, Museums- oder Stadtangaben. Der Text trennt dauerhafte Geschichte von veränderlichen Besucherinformationen und verwendet den heutigen institutionellen Namen, wenn er vom historischen Datensatznamen abweicht.",
+          "tags": [
+            "quelle",
+            "verifiziert"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen, Veranstaltungsprogramm, Reservierung, Baustellen und tatsächliche Zugänglichkeit unmittelbar vor dem Besuch auf museus.ulisboa.pt prüfen; diese Angaben sind ephemer und werden hier bewusst nicht als dauerhafte Fakten festgeschrieben.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lissabon_casa_fernando_pessoa",
+      "name": "Casa Fernando Pessoa",
+      "lat": 38.7167116,
+      "lng": -9.162497,
+      "place_tier": 2,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Fernando Pessoa lebte von 1920 bis zu seinem Tod 1935 in diesem Haus an der Rua Coelho da Rocha. Es war seine letzte und längste feste Adresse in Lissabon.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Die Stadt Lissabon eröffnete das Literaturhaus 1993. Nach einem Umbau wurde es 2020 mit einer neu konzipierten Dauerausstellung wiedereröffnet.",
+          "tags": [
+            "architektur"
+          ]
+        },
+        {
+          "text": "Zu sehen sind persönliche Gegenstände, Dokumente und Teile von Pessoas Privatbibliothek. Seine Bücher tragen Lesespuren und Anmerkungen und erschließen seine Arbeitsweise unmittelbar.",
+          "tags": [
+            "einordnung"
+          ]
+        },
+        {
+          "text": "Pessoa schrieb unter zahlreichen literarischen Identitäten. Alberto Caeiro, Ricardo Reis und Álvaro de Campos besitzen jeweils eigene Biografie, Stil und Weltanschauung und sind mehr als bloße Pseudonyme.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Das rekonstruierte Zimmer mit Schreibplatz und persönlichen Objekten verbindet Werkgeschichte mit dem Alltag des Autors. Das Haus ist zugleich Bibliothek, Archiv-, Bildungs- und Veranstaltungsort.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Der Stadtteil Campo de Ourique war Pessoas privater Rückzugsraum, während Cafés und Büros der Baixa sein Arbeitsleben prägten. Das Museum ergänzt daher Orte wie A Brasileira, ersetzt sie aber nicht.",
+          "tags": [
+            "wissen"
+          ]
+        },
+        {
+          "text": "Quellenbasis: offizielle Informationen von casafernandopessoa.pt sowie institutionelle Denkmal-, Museums- oder Stadtangaben. Der Text trennt dauerhafte Geschichte von veränderlichen Besucherinformationen und verwendet den heutigen institutionellen Namen, wenn er vom historischen Datensatznamen abweicht.",
+          "tags": [
+            "quelle",
+            "verifiziert"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen, Veranstaltungsprogramm, Reservierung, Baustellen und tatsächliche Zugänglichkeit unmittelbar vor dem Besuch auf casafernandopessoa.pt prüfen; diese Angaben sind ephemer und werden hier bewusst nicht als dauerhafte Fakten festgeschrieben.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lissabon_museu_da_marioneta",
+      "name": "Museu da Marioneta",
+      "lat": 38.707972,
+      "lng": -9.155776,
+      "place_tier": 2,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Das 1987 gegründete Museu da Marioneta ist Portugals erstes Museum, das ausschließlich dem Puppentheater und verwandten Formen gewidmet ist. Seit 2001 sitzt es im Convento das Bernardas.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Der Konvent wurde im 17. Jahrhundert für Zisterzienserinnen gegründet. Nach Erdbebenschäden von 1755 wurde die Anlage wiederaufgebaut; Kreuzgang und klösterliche Struktur sind weiterhin ablesbar.",
+          "tags": [
+            "architektur"
+          ]
+        },
+        {
+          "text": "Die Sammlung dokumentiert portugiesische Traditionen ebenso wie Figuren und Theaterformen aus Europa, Afrika und Asien. Sie zeigt Handpuppen, Stab- und Fadenpuppen sowie Schattenfiguren.",
+          "tags": [
+            "einordnung"
+          ]
+        },
+        {
+          "text": "Ein Schwerpunkt liegt auf dem portugiesischen Marionettentheater, darunter die Bonecos de Santo Aleixo aus dem Alentejo, deren Spieltradition mit kleinen Stabpuppen weitergeführt wird.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Masken und Figuren aus Südost- und Ostasien verdeutlichen, dass bewegte Bilder, Ritual und Erzähltheater lange vor modernen Bühnenformen miteinander verbunden waren.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Das Museum behandelt nicht nur fertige Figuren, sondern auch Bau, Mechanik, Bühnenraum und Animation. Workshops und Aufführungen machen die Sammlung als lebendige Theaterpraxis verständlich.",
+          "tags": [
+            "wissen"
+          ]
+        },
+        {
+          "text": "Quellenbasis: offizielle Informationen von museudamarioneta.pt sowie institutionelle Denkmal-, Museums- oder Stadtangaben. Der Text trennt dauerhafte Geschichte von veränderlichen Besucherinformationen und verwendet den heutigen institutionellen Namen, wenn er vom historischen Datensatznamen abweicht.",
+          "tags": [
+            "quelle",
+            "verifiziert"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen, Veranstaltungsprogramm, Reservierung, Baustellen und tatsächliche Zugänglichkeit unmittelbar vor dem Besuch auf museudamarioneta.pt prüfen; diese Angaben sind ephemer und werden hier bewusst nicht als dauerhafte Fakten festgeschrieben.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lissabon_pink_street",
+      "name": "Pink Street",
+      "lat": 38.7072464,
+      "lng": -9.1437847,
+      "place_tier": 2,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Pink Street ist der populäre Name eines Abschnitts der Rua Nova do Carvalho in Cais do Sodré. Die Fahrbahn wurde 2013 im Zuge einer städtischen Umgestaltung auffällig rosa gestrichen.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Die Straße lag im früheren Hafen- und Vergnügungsviertel. Bars, Nachtclubs und Häuser mit Seefahrerpublikum prägten das Gebiet, bevor Gastronomie und Kreativwirtschaft es neu besetzten.",
+          "tags": [
+            "architektur"
+          ]
+        },
+        {
+          "text": "Das Projekt sollte Verkehr zurückdrängen und eine zusammenhängende Ausgehzone schaffen. Die farbige Oberfläche wurde zum visuellen Zeichen dieser Umwandlung und zu einem häufig fotografierten Motiv.",
+          "tags": [
+            "einordnung"
+          ]
+        },
+        {
+          "text": "Über der Straße liegt die eiserne Fußgängerbrücke, die zwei Gebäudeseiten verbindet. Zusammen mit rosa Boden, engen Fassaden und Leuchtreklamen bildet sie den klarsten Orientierungspunkt.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Der historische Name Rua Nova do Carvalho bleibt die offizielle Adresse. Pink Street bezeichnet weder einen eigenen Stadtteil noch die gesamte Uferzone von Cais do Sodré.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Tagsüber ist die Straße Durchgang und Fotomotiv, nachts Teil eines dichten Bar- und Clubviertels. Lärm, Besucherandrang und konkrete Betriebe verändern sich und sind keine stabilen Packfakten.",
+          "tags": [
+            "wissen"
+          ]
+        },
+        {
+          "text": "Quellenbasis: offizielle Informationen von visitlisboa.com sowie institutionelle Denkmal-, Museums- oder Stadtangaben. Der Text trennt dauerhafte Geschichte von veränderlichen Besucherinformationen und verwendet den heutigen institutionellen Namen, wenn er vom historischen Datensatznamen abweicht.",
+          "tags": [
+            "quelle",
+            "verifiziert"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen, Veranstaltungsprogramm, Reservierung, Baustellen und tatsächliche Zugänglichkeit unmittelbar vor dem Besuch auf visitlisboa.com prüfen; diese Angaben sind ephemer und werden hier bewusst nicht als dauerhafte Fakten festgeschrieben.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lissabon_torre_vasco_da_gama",
+      "name": "Torre Vasco da Gama",
+      "lat": 38.7749407,
+      "lng": -9.0914524,
+      "place_tier": 2,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Die Torre Vasco da Gama wurde für die Expo 98 errichtet und nach dem Seefahrer benannt. Mit rund 145 Metern ist sie eines der höchsten Bauwerke Lissabons.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Die Konstruktion von Leonor Janeiro und Nick Jacobs erinnert an ein Segel: Der schlanke Betonschaft wirkt wie ein Mast, die seitliche Stahlstruktur wie ein geblähtes Segel.",
+          "tags": [
+            "architektur"
+          ]
+        },
+        {
+          "text": "Ein Aussichtskörper an der Spitze war Teil des Expo-Konzepts. Die Form nimmt das Ausstellungsthema „Die Ozeane, ein Erbe für die Zukunft“ sichtbar auf.",
+          "tags": [
+            "einordnung"
+          ]
+        },
+        {
+          "text": "Nach der Weltausstellung blieb der Turm als Landmarke des Parque das Nações erhalten. Er steht am Tejo nördlich des früheren Expo-Hauptgeländes und nahe der Seilbahntrasse.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "2012 wurde der Turm in den Neubau des Myriad-Hotels integriert. Der Hotelkörper steht unmittelbar am Schaft; Turm und Hotel bilden heute eine gemeinsame Silhouette.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Ein Restaurant befindet sich in großer Höhe im Turm. Aussichtszugang, Reservierung und Nutzbarkeit hängen vom Hotel- und Restaurantbetrieb ab und dürfen nicht als freie öffentliche Plattform verstanden werden.",
+          "tags": [
+            "wissen"
+          ]
+        },
+        {
+          "text": "Quellenbasis: offizielle Informationen von myriad.pt sowie institutionelle Denkmal-, Museums- oder Stadtangaben. Der Text trennt dauerhafte Geschichte von veränderlichen Besucherinformationen und verwendet den heutigen institutionellen Namen, wenn er vom historischen Datensatznamen abweicht.",
+          "tags": [
+            "quelle",
+            "verifiziert"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen, Veranstaltungsprogramm, Reservierung, Baustellen und tatsächliche Zugänglichkeit unmittelbar vor dem Besuch auf myriad.pt prüfen; diese Angaben sind ephemer und werden hier bewusst nicht als dauerhafte Fakten festgeschrieben.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lissabon_telecabine_lisboa",
+      "name": "Telecabine Lisboa",
+      "lat": 38.7623875,
+      "lng": -9.0922881,
+      "place_tier": 2,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Die Telecabine Lisboa wurde für die Expo 98 gebaut. Sie folgt dem Tejo-Ufer im Parque das Nações und verbindet einen südlichen und einen nördlichen Einstieg.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Die Strecke ist ungefähr 1,2 Kilometer lang und verläuft über dem ehemaligen Ausstellungsgelände. Die Fahrt eröffnet erhöhte Blicke auf Tejo, Expo-Bauten und die Ponte Vasco da Gama.",
+          "tags": [
+            "architektur"
+          ]
+        },
+        {
+          "text": "Die Kabinenbahn ist eine touristische Aussichtsfahrt und kein Bestandteil des normalen Metro- oder Carris-Netzes. Tickets und Betriebsregeln werden separat vom Betreiber festgelegt.",
+          "tags": [
+            "einordnung"
+          ]
+        },
+        {
+          "text": "Am südlichen Abschnitt liegen Oceanário und Pavilhão do Conhecimento, am nördlichen Abschnitt der Bereich bei Torre Vasco da Gama und Myriad-Hotel.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Stützen, Seil und geschlossene Gondeln prägen die Uferansicht. Die lineare Trasse macht die Nord-Süd-Ausdehnung des ehemaligen Expo-Geländes besonders gut lesbar.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Wind und technische Wartung können den Betrieb beeinflussen. Die historische Einordnung als Expo-Infrastruktur bleibt stabil, konkrete Fahrtdauer, Tarife und Tagesbetrieb sind dagegen LIVE-Daten.",
+          "tags": [
+            "wissen"
+          ]
+        },
+        {
+          "text": "Quellenbasis: offizielle Informationen von telecabinelisboa.pt sowie institutionelle Denkmal-, Museums- oder Stadtangaben. Der Text trennt dauerhafte Geschichte von veränderlichen Besucherinformationen und verwendet den heutigen institutionellen Namen, wenn er vom historischen Datensatznamen abweicht.",
+          "tags": [
+            "quelle",
+            "verifiziert"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen, Veranstaltungsprogramm, Reservierung, Baustellen und tatsächliche Zugänglichkeit unmittelbar vor dem Besuch auf telecabinelisboa.pt prüfen; diese Angaben sind ephemer und werden hier bewusst nicht als dauerhafte Fakten festgeschrieben.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lissabon_pavilhao_do_conhecimento",
+      "name": "Pavilhão do Conhecimento",
+      "lat": 38.7622587,
+      "lng": -9.095872,
+      "place_tier": 2,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Das Gebäude war bei der Expo 98 der Pavilhão do Conhecimento dos Mares. Nach dem Umbau öffnete es 1999 als interaktives Wissenschaftszentrum Ciência Viva.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Architekt João Luís Carrilho da Graça entwarf einen klaren, weißen Bau aus großen geometrischen Körpern. Ein weit auskragender Bauteil und der offene Vorplatz bestimmen die Ansicht.",
+          "tags": [
+            "architektur"
+          ]
+        },
+        {
+          "text": "Das Haus gehört zum nationalen Netzwerk Ciência Viva. Sein Auftrag ist Wissenschaftsvermittlung durch Experimente, Ausstellungen, Laborangebote und Programme für Schulen und Familien.",
+          "tags": [
+            "einordnung"
+          ]
+        },
+        {
+          "text": "Viele Stationen sind zum Berühren und Ausprobieren gedacht. Physik, Technik, Mathematik, Wahrnehmung und Alltagswissenschaft werden über Handlungen statt nur über Vitrinen vermittelt.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Wechselnde Ausstellungen ergänzen dauerhafte Experimentierbereiche. Welche Themen und Installationen gerade zugänglich sind, hängt vom aktuellen Programm ab.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Der Ort bewahrt die Expo-Architektur, hat aber eine neue dauerhafte Funktion erhalten. In Laufweite liegen Oceanário, Telecabine, Uferpromenade und weitere umgenutzte Expo-Bauten.",
+          "tags": [
+            "wissen"
+          ]
+        },
+        {
+          "text": "Quellenbasis: offizielle Informationen von pavconhecimento.pt sowie institutionelle Denkmal-, Museums- oder Stadtangaben. Der Text trennt dauerhafte Geschichte von veränderlichen Besucherinformationen und verwendet den heutigen institutionellen Namen, wenn er vom historischen Datensatznamen abweicht.",
+          "tags": [
+            "quelle",
+            "verifiziert"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen, Veranstaltungsprogramm, Reservierung, Baustellen und tatsächliche Zugänglichkeit unmittelbar vor dem Besuch auf pavconhecimento.pt prüfen; diese Angaben sind ephemer und werden hier bewusst nicht als dauerhafte Fakten festgeschrieben.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lissabon_praca_do_imperio",
+      "name": "Praça do Império",
+      "lat": 38.6971694,
+      "lng": -9.2063788,
+      "place_tier": 2,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Die Praça do Império wurde für die Exposição do Mundo Português von 1940 angelegt. Sie bildete den repräsentativen Freiraum zwischen Jerónimos-Kloster und Tejo.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Die Ausstellung inszenierte unter dem Estado Novo eine staatliche Erzählung portugiesischer Geschichte und Expansion. Platz und Garten sind daher auch Zeugnisse politischer Repräsentation.",
+          "tags": [
+            "architektur"
+          ]
+        },
+        {
+          "text": "Im Zentrum liegt ein großes Wasserbecken mit Monumentalbrunnen. Geometrische Hecken, Wege und Rasenflächen ordnen die symmetrische Anlage.",
+          "tags": [
+            "einordnung"
+          ]
+        },
+        {
+          "text": "Die in Pflanzenmustern dargestellten Wappen beziehen sich auf frühere portugiesische Distrikte und Kolonialgebiete. Ihre historische Aussage ist aus dem Kontext von 1940 zu erklären.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Das CCB begrenzt den Platz im Westen, das Jerónimos-Kloster im Norden. Unterführungen und breite Straßen trennen Garten und Ufer, obwohl die Anlage visuell zum Tejo ausgerichtet ist.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Der Garten wurde mehrfach instand gesetzt; Bepflanzung, Wasserbetrieb und Zugänglichkeit können sich ändern. Stabil sind Entstehungszeit, Achsenbezug und die Funktion als monumentaler Vorplatz.",
+          "tags": [
+            "wissen"
+          ]
+        },
+        {
+          "text": "Quellenbasis: offizielle Informationen von lisboa.pt sowie institutionelle Denkmal-, Museums- oder Stadtangaben. Der Text trennt dauerhafte Geschichte von veränderlichen Besucherinformationen und verwendet den heutigen institutionellen Namen, wenn er vom historischen Datensatznamen abweicht.",
+          "tags": [
+            "quelle",
+            "verifiziert"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen, Veranstaltungsprogramm, Reservierung, Baustellen und tatsächliche Zugänglichkeit unmittelbar vor dem Besuch auf lisboa.pt prüfen; diese Angaben sind ephemer und werden hier bewusst nicht als dauerhafte Fakten festgeschrieben.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lissabon_museu_militar_de_lisboa",
+      "name": "Museu Militar de Lisboa",
+      "lat": 38.7126973,
+      "lng": -9.1246317,
+      "place_tier": 2,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Das Militärmuseum befindet sich beim Bahnhof Santa Apolónia in Gebäuden des früheren königlichen Arsenals. Seine institutionellen Wurzeln reichen in das 19. Jahrhundert.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "1851 wurde dort ein Artilleriemuseum eingerichtet; unter König Luís I. entwickelte sich die Sammlung weiter. Seit 1926 trägt die Einrichtung den Namen Museu Militar de Lisboa.",
+          "tags": [
+            "architektur"
+          ]
+        },
+        {
+          "text": "Die Bestände umfassen Geschütze, Waffen, Uniformen, Orden, Modelle, Dokumente und Kunstwerke. Besonders bedeutend ist die umfangreiche Artilleriesammlung.",
+          "tags": [
+            "einordnung"
+          ]
+        },
+        {
+          "text": "Mehrere Säle sind selbst historische Inszenierungen: Deckengemälde, Azulejos, Skulpturen und patriotische Bildprogramme verbinden Sammlung und Architektur.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Die Ausstellung behandelt Konflikte und Staatsgeschichte vom Mittelalter bis in die Neuzeit, darunter Restaurationskrieg, Napoleonische Kriege und portugiesische Feldzüge.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Der Standort am ehemaligen Arsenal erklärt die großen Hallen und Höfe. Er liegt unmittelbar östlich der Alfama und verbindet Industrie-, Militär- und Hafenhistorie.",
+          "tags": [
+            "wissen"
+          ]
+        },
+        {
+          "text": "Quellenbasis: offizielle Informationen von exercito.pt sowie institutionelle Denkmal-, Museums- oder Stadtangaben. Der Text trennt dauerhafte Geschichte von veränderlichen Besucherinformationen und verwendet den heutigen institutionellen Namen, wenn er vom historischen Datensatznamen abweicht.",
+          "tags": [
+            "quelle",
+            "verifiziert"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen, Veranstaltungsprogramm, Reservierung, Baustellen und tatsächliche Zugänglichkeit unmittelbar vor dem Besuch auf exercito.pt prüfen; diese Angaben sind ephemer und werden hier bewusst nicht als dauerhafte Fakten festgeschrieben.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lissabon_campo_pequeno",
+      "name": "Campo Pequeno",
+      "lat": 38.7416308,
+      "lng": -9.145067,
+      "place_tier": 2,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Die Praça de Touros do Campo Pequeno wurde 1892 eröffnet. Architekt António José Dias da Silva entwarf die Arena in einem historistischen, maurisch inspirierten Stil.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Roter Backstein, Rundbogenfenster, Zinnen und vier kuppelbekrönte Ecktürme machen den Bau unverwechselbar. Der kreisförmige Arenakörper liegt als Solitär im Platzraum.",
+          "tags": [
+            "architektur"
+          ]
+        },
+        {
+          "text": "Das Gebäude entstand als Lissabons zentrale Stierkampfarena. Portugiesische Corridas unterscheiden sich in Regeln und Ablauf von spanischen Formen; die Praxis bleibt gesellschaftlich umstritten.",
+          "tags": [
+            "einordnung"
+          ]
+        },
+        {
+          "text": "Nach längerer Schließung und Umbau wurde Campo Pequeno 2006 wiedereröffnet. Unter dem Bau entstand ein Einkaufs- und Parkbereich, die Arena erhielt moderne Veranstaltungsinfrastruktur.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Heute finden neben Corridas auch Konzerte, Shows, Sport- und Firmenveranstaltungen statt. Die jeweilige Nutzung ist programmabhängig und nicht aus der historischen Gebäudefunktion abzuleiten.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Der Name Campo Pequeno bezeichnet sowohl Arena als auch Umgebung, Platz und Metrostation. Für die Story ist der markante Rundbau gemeint, nicht der gesamte Stadtbereich.",
+          "tags": [
+            "wissen"
+          ]
+        },
+        {
+          "text": "Quellenbasis: offizielle Informationen von campopequeno.com sowie institutionelle Denkmal-, Museums- oder Stadtangaben. Der Text trennt dauerhafte Geschichte von veränderlichen Besucherinformationen und verwendet den heutigen institutionellen Namen, wenn er vom historischen Datensatznamen abweicht.",
+          "tags": [
+            "quelle",
+            "verifiziert"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen, Veranstaltungsprogramm, Reservierung, Baustellen und tatsächliche Zugänglichkeit unmittelbar vor dem Besuch auf campopequeno.com prüfen; diese Angaben sind ephemer und werden hier bewusst nicht als dauerhafte Fakten festgeschrieben.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lissabon_assembleia_da_republica",
+      "name": "Assembleia da República",
+      "lat": 38.7125529,
+      "lng": -9.1538565,
+      "place_tier": 2,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Die Assembleia da República tagt im Palácio de São Bento. Das Gebäude entstand ab dem späten 16. Jahrhundert als Benediktinerkloster und wurde nach 1834 staatlich genutzt.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Nach Aufhebung der Orden zog 1834 das portugiesische Parlament ein. Der Bau wurde mehrfach stark verändert, um Plenarsaal, Ausschüsse, Bibliothek und Verwaltung aufzunehmen.",
+          "tags": [
+            "architektur"
+          ]
+        },
+        {
+          "text": "Die monumentale neoklassizistische Hauptfassade mit breiter Freitreppe entstand im 20. Jahrhundert nach Plänen von Ventura Terra und wurde nach seinem Tod weitergeführt.",
+          "tags": [
+            "einordnung"
+          ]
+        },
+        {
+          "text": "Portugal besitzt ein Einkammerparlament. Die Assembleia da República beschließt Gesetze, kontrolliert die Regierung und vertritt die Bürger im demokratischen Verfassungssystem.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Vor der Freitreppe steht das klassizistische Gebäude, hinter dem sich ältere Klosterteile und moderne Erweiterungen verbergen. Die offizielle Adresse heißt Praça da Constituição de 1976.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Neben dem Parlamentspalast liegt die Residenz des Premierministers. Sicherheitszonen, Sitzungen und Staatsakte beeinflussen den Zugang; Besuchsmöglichkeiten folgen dem offiziellen Parlamentsprogramm.",
+          "tags": [
+            "wissen"
+          ]
+        },
+        {
+          "text": "Quellenbasis: offizielle Informationen von parlamento.pt sowie institutionelle Denkmal-, Museums- oder Stadtangaben. Der Text trennt dauerhafte Geschichte von veränderlichen Besucherinformationen und verwendet den heutigen institutionellen Namen, wenn er vom historischen Datensatznamen abweicht.",
+          "tags": [
+            "quelle",
+            "verifiziert"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen, Veranstaltungsprogramm, Reservierung, Baustellen und tatsächliche Zugänglichkeit unmittelbar vor dem Besuch auf parlamento.pt prüfen; diese Angaben sind ephemer und werden hier bewusst nicht als dauerhafte Fakten festgeschrieben.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lissabon_casa_dos_bicos",
+      "name": "Casa dos Bicos",
+      "lat": 38.7090442,
+      "lng": -9.1326694,
+      "place_tier": 2,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Die Casa dos Bicos wurde ab 1523 für Brás de Albuquerque, einen Sohn des Indien-Vizekönigs Afonso de Albuquerque, errichtet. Italienische Paläste beeinflussten ihre ungewöhnliche Gestaltung.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Die Fassade trägt diamantförmig zugespitzte Steinquader, die dem Haus den Namen „Haus der Spitzen“ gaben. Fenster und Türen sind bewusst unregelmäßig in dieses Raster gesetzt.",
+          "tags": [
+            "architektur"
+          ]
+        },
+        {
+          "text": "Das Erdbeben von 1755 zerstörte die oberen Geschosse. Über lange Zeit blieb das Gebäude niedriger; erst die Restaurierung vor der Europaratsausstellung 1983 stellte zwei Obergeschosse wieder her.",
+          "tags": [
+            "einordnung"
+          ]
+        },
+        {
+          "text": "Archäologische Befunde im Untergeschoss zeigen römische Fischverarbeitungstanks sowie Abschnitte spätantiker und mittelalterlicher Stadtmauern. Der Ort bündelt damit mehrere Schichten Lissabons.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Seit 2012 hat die Fundação José Saramago hier ihren Sitz. Eine Dauerausstellung behandelt Leben und Werk des Literaturnobelpreisträgers; seine Asche liegt unter einem Olivenbaum vor dem Haus.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Die Casa dos Bicos steht nahe dem Tejo zwischen Baixa und Alfama. Ihre Spitzenfassade ist das wichtigste Erkennungsmerkmal; Museum und Stiftung teilen sich den historischen Gebäudekomplex.",
+          "tags": [
+            "wissen"
+          ]
+        },
+        {
+          "text": "Quellenbasis: offizielle Informationen von josesaramago.org sowie institutionelle Denkmal-, Museums- oder Stadtangaben. Der Text trennt dauerhafte Geschichte von veränderlichen Besucherinformationen und verwendet den heutigen institutionellen Namen, wenn er vom historischen Datensatznamen abweicht.",
+          "tags": [
+            "quelle",
+            "verifiziert"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen, Veranstaltungsprogramm, Reservierung, Baustellen und tatsächliche Zugänglichkeit unmittelbar vor dem Besuch auf josesaramago.org prüfen; diese Angaben sind ephemer und werden hier bewusst nicht als dauerhafte Fakten festgeschrieben.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lissabon_igreja_da_graca",
+      "name": "Igreja da Graça",
+      "lat": 38.716504,
+      "lng": -9.1312228,
+      "place_tier": 2,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Kirche und Kloster Nossa Senhora da Graça gehen auf einen 1271 gegründeten Augustinerkonvent zurück. Der Standort liegt auf dem Hügel oberhalb von Mouraria und Alfama.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Das Erdbeben von 1755 beschädigte die Anlage schwer. Der heutige Kirchenraum und die Fassade wurden im späten 18. Jahrhundert wiederaufgebaut und verbinden ältere Substanz mit barocker Gestaltung.",
+          "tags": [
+            "architektur"
+          ]
+        },
+        {
+          "text": "Im Inneren fallen vergoldete Holzarbeiten, Seitenkapellen, Malerei und Azulejos auf. Der große Klosterkomplex grenzt unmittelbar an die Kirche, wird aber nicht vollständig museal genutzt.",
+          "tags": [
+            "einordnung"
+          ]
+        },
+        {
+          "text": "Mit der Kirche verbunden ist die Verehrung von Senhor dos Passos da Graça. Die traditionsreiche Prozession führt in der Fastenzeit durch Lissabon und ist eine lebendige religiöse Praxis.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Auf dem angrenzenden Largo liegt der Miradouro da Graça, offiziell Miradouro Sophia de Mello Breyner Andresen. Aussichtsterrasse und Kirche sind benachbart, aber zwei unterschiedliche Ziele.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Die erhöhte Lage erklärt die weiten Blicke über Castelo, Baixa und Tejo. Von der Mouraria führen steile Straßen und Treppen hinauf; die visuelle Orientierung erfolgt über Fassade, Glockenturm und Platz.",
+          "tags": [
+            "wissen"
+          ]
+        },
+        {
+          "text": "Quellenbasis: offizielle Informationen von patrimoniocultural.gov.pt sowie institutionelle Denkmal-, Museums- oder Stadtangaben. Der Text trennt dauerhafte Geschichte von veränderlichen Besucherinformationen und verwendet den heutigen institutionellen Namen, wenn er vom historischen Datensatznamen abweicht.",
+          "tags": [
+            "quelle",
+            "verifiziert"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen, Veranstaltungsprogramm, Reservierung, Baustellen und tatsächliche Zugänglichkeit unmittelbar vor dem Besuch auf patrimoniocultural.gov.pt prüfen; diese Angaben sind ephemer und werden hier bewusst nicht als dauerhafte Fakten festgeschrieben.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lissabon_mouraria",
+      "name": "Mouraria",
+      "lat": 38.716821,
+      "lng": -9.1355586,
+      "place_tier": 2,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Die Mouraria entstand nach der christlichen Eroberung Lissabons 1147 als Gebiet, in dem muslimische Bewohner außerhalb der damaligen Stadtmauern lebten. Ihr Name bewahrt diese Geschichte.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Das Viertel liegt an den Hängen nördlich und westlich des Castelo de São Jorge. Enge Gassen, Treppen und kleine Plätze folgen dem starken Geländeanstieg.",
+          "tags": [
+            "architektur"
+          ]
+        },
+        {
+          "text": "Mouraria gilt als einer der Ursprungsräume des Fado. Mit Maria Severa Onofriana, einer Sängerin des 19. Jahrhunderts, verbindet sich eine zentrale Figur der frühen Fado-Erzählung.",
+          "tags": [
+            "einordnung"
+          ]
+        },
+        {
+          "text": "Am Largo da Severa erinnern Haus und öffentliche Zeichen an Severa. Der Mythos überlagerte lange die komplexere Sozialgeschichte aus Arbeit, Armut, Migration und städtischer Unterhaltung.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Heute ist Mouraria durch Einwanderung aus verschiedenen Weltregionen geprägt. Geschäfte, Restaurants, religiöse Orte und Sprachen machen die Gegend zu einem besonders vielfältigen Teil der Innenstadt.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Mouraria ist kein einzelnes Monument mit klarer Grenze. Für die Orientierung eignen sich Martim Moniz, Rua do Benformoso, Largo dos Trigueiros und die aufsteigenden Wege Richtung Graça und Castelo.",
+          "tags": [
+            "wissen"
+          ]
+        },
+        {
+          "text": "Quellenbasis: offizielle Informationen von museudofado.pt sowie institutionelle Denkmal-, Museums- oder Stadtangaben. Der Text trennt dauerhafte Geschichte von veränderlichen Besucherinformationen und verwendet den heutigen institutionellen Namen, wenn er vom historischen Datensatznamen abweicht.",
+          "tags": [
+            "quelle",
+            "verifiziert"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen, Veranstaltungsprogramm, Reservierung, Baustellen und tatsächliche Zugänglichkeit unmittelbar vor dem Besuch auf museudofado.pt prüfen; diese Angaben sind ephemer und werden hier bewusst nicht als dauerhafte Fakten festgeschrieben.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lissabon_largo_do_carmo",
+      "name": "Largo do Carmo",
+      "lat": 38.7118615,
+      "lng": -9.1410133,
+      "place_tier": 2,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Der Largo do Carmo ist ein kleiner, von Jacaranda-Bäumen geprägter Platz in Chiado. Die offene Ruine der Igreja do Carmo bildet seine markanteste Platzwand.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Das Karmeliterkloster wurde ab 1389 von Nuno Álvares Pereira gestiftet. Das Erdbeben von 1755 ließ das steinerne Kirchenschiff einstürzen; die Bögen blieben als sichtbare Ruine stehen.",
+          "tags": [
+            "architektur"
+          ]
+        },
+        {
+          "text": "Im früheren Chor und in Klosterräumen befindet sich das Museu Arqueológico do Carmo. Kirche, Museum und Platz sind eng verbunden, aber nicht mit identischen Zugangsregeln belegt.",
+          "tags": [
+            "einordnung"
+          ]
+        },
+        {
+          "text": "Am 25. April 1974 verschanzte sich Regierungschef Marcelo Caetano in der Kaserne der Guarda Nacional Republicana am Platz. Seine Kapitulation wurde zum entscheidenden Moment der Nelkenrevolution.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Die Kaserne ist weiterhin Sitz der GNR. Damit treffen am Largo mittelalterliche Klostergeschichte, die Erinnerung an 1755 und Portugals demokratischer Umbruch räumlich unmittelbar aufeinander.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Ein oberer Zugang zum Elevador de Santa Justa liegt nahe dem Platz. Er verbindet die hohe Lage von Carmo mit der Baixa; Platz, Aufzug und Ruine bleiben dennoch eigenständige Orte.",
+          "tags": [
+            "wissen"
+          ]
+        },
+        {
+          "text": "Quellenbasis: offizielle Informationen von museuarqueologicodocarmo.pt sowie institutionelle Denkmal-, Museums- oder Stadtangaben. Der Text trennt dauerhafte Geschichte von veränderlichen Besucherinformationen und verwendet den heutigen institutionellen Namen, wenn er vom historischen Datensatznamen abweicht.",
+          "tags": [
+            "quelle",
+            "verifiziert"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen, Veranstaltungsprogramm, Reservierung, Baustellen und tatsächliche Zugänglichkeit unmittelbar vor dem Besuch auf museuarqueologicodocarmo.pt prüfen; diese Angaben sind ephemer und werden hier bewusst nicht als dauerhafte Fakten festgeschrieben.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lissabon_praca_dos_restauradores",
+      "name": "Praça dos Restauradores",
+      "lat": 38.7157819,
+      "lng": -9.1412387,
+      "place_tier": 2,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Die Praça dos Restauradores erinnert an die Wiederherstellung der portugiesischen Unabhängigkeit 1640 nach sechzig Jahren dynastischer Union mit der spanischen Krone.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Der zentrale Obelisk wurde 1886 eingeweiht. Die Namen und Daten auf seinem Sockel verweisen auf Kämpfe des Restaurationskriegs; allegorische Figuren stehen für Sieg und Freiheit.",
+          "tags": [
+            "architektur"
+          ]
+        },
+        {
+          "text": "Der längliche Platz liegt am nordwestlichen Ende des Rossio und am Beginn der Avenida da Liberdade. Er bildet damit ein Scharnier zwischen Baixa und der Stadterweiterung des 19. Jahrhunderts.",
+          "tags": [
+            "einordnung"
+          ]
+        },
+        {
+          "text": "Zu den prägenden Fassaden gehören der Palácio Foz sowie historische Hotel- und Theaterbauten. Unterschiedliche Bauzeiten ergeben ein geschlossen wirkendes, aber historisch vielschichtiges Ensemble.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "An der Westseite beginnt der Elevador da Glória hinauf nach Bairro Alto. Dieser ist nicht mit dem einige Straßen entfernten Elevador do Lavra zu verwechseln.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Metrostation, Straßenverkehr und Veranstaltungen beeinflussen die Platznutzung. Stabil bleiben Obelisk, historische Widmung und die städtebauliche Achse zwischen Rossio und Avenida.",
+          "tags": [
+            "wissen"
+          ]
+        },
+        {
+          "text": "Quellenbasis: offizielle Informationen von lisboa.pt sowie institutionelle Denkmal-, Museums- oder Stadtangaben. Der Text trennt dauerhafte Geschichte von veränderlichen Besucherinformationen und verwendet den heutigen institutionellen Namen, wenn er vom historischen Datensatznamen abweicht.",
+          "tags": [
+            "quelle",
+            "verifiziert"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen, Veranstaltungsprogramm, Reservierung, Baustellen und tatsächliche Zugänglichkeit unmittelbar vor dem Besuch auf lisboa.pt prüfen; diese Angaben sind ephemer und werden hier bewusst nicht als dauerhafte Fakten festgeschrieben.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lissabon_elevador_do_lavra",
+      "name": "Elevador do Lavra",
+      "lat": 38.7178357,
+      "lng": -9.1417827,
+      "place_tier": 2,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Der Elevador do Lavra wurde 1884 eröffnet und gilt als älteste noch bestehende Standseilbahn Lissabons. Er verbindet die Rua Câmara Pestana mit der tiefer gelegenen Rua de São José.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Entworfen wurde die Anlage vom portugiesischen Ingenieur Raoul Mesnier du Ponsard, der auch an weiteren Lissabonner Aufzügen und Standseilbahnen arbeitete.",
+          "tags": [
+            "architektur"
+          ]
+        },
+        {
+          "text": "Anfangs wurde die Bahn mit Wasserballast betrieben, später mit Dampf und seit dem frühen 20. Jahrhundert elektrisch. Diese Abfolge spiegelt die Entwicklung städtischer Verkehrstechnik.",
+          "tags": [
+            "einordnung"
+          ]
+        },
+        {
+          "text": "Zwei Wagen verkehren auf der steilen, kurzen Strecke gegeneinander und begegnen sich in einer Ausweichstelle. Die Schienen liegen direkt in einer schmalen Wohnstraße.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Die gelben Wagen und Oberleitungen sind charakteristisch, doch Fahrzeuge können Werbung oder abweichende Lackdetails tragen. Die Bahn ist Verkehrsmittel und geschütztes technisches Erbe.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Der Lavra liegt östlich der Avenida da Liberdade. Er ist nicht der Elevador da Glória am Restauradores-Platz und nicht der Elevador da Bica bei Cais do Sodré.",
+          "tags": [
+            "wissen"
+          ]
+        },
+        {
+          "text": "Quellenbasis: offizielle Informationen von carris.pt sowie institutionelle Denkmal-, Museums- oder Stadtangaben. Der Text trennt dauerhafte Geschichte von veränderlichen Besucherinformationen und verwendet den heutigen institutionellen Namen, wenn er vom historischen Datensatznamen abweicht.",
+          "tags": [
+            "quelle",
+            "verifiziert"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen, Veranstaltungsprogramm, Reservierung, Baustellen und tatsächliche Zugänglichkeit unmittelbar vor dem Besuch auf carris.pt prüfen; diese Angaben sind ephemer und werden hier bewusst nicht als dauerhafte Fakten festgeschrieben.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lissabon_cais_do_sodre",
+      "name": "Cais do Sodré",
+      "lat": 38.70589,
+      "lng": -9.14475,
+      "place_tier": 2,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Cais do Sodré bezeichnet Uferbereich, Platz und Verkehrsknoten am Tejo. Der Name wird mit der Familie Sodré verbunden, deren Angehörige in der portugiesischen Seefahrt Bedeutung hatten.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Der Bahnhof wurde 1928 als Endpunkt der Linha de Cascais eröffnet. Sein Art-déco-Bau nach Plänen von Porfírio Pardal Monteiro prägt die Nordseite des Verkehrsknotens.",
+          "tags": [
+            "architektur"
+          ]
+        },
+        {
+          "text": "Hier treffen Vorortzüge Richtung Cascais, Metro, Busse, Straßenbahnen und Fähren über den Tejo zusammen. Die einzelnen Systeme besitzen getrennte Bahnsteige und Betriebsinformationen.",
+          "tags": [
+            "einordnung"
+          ]
+        },
+        {
+          "text": "Der nahe Mercado da Ribeira geht als Marktstandort auf das 19. Jahrhundert zurück; ein Teil wird weiterhin als Lebensmittelmarkt genutzt, ein anderer seit 2014 als Gastronomiehalle.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Die benachbarte Rua Nova do Carvalho wurde als Pink Street bekannt. Sie gehört zum Ausgehviertel, ist aber nicht gleichbedeutend mit Bahnhof, Fährterminal oder dem gesamten Cais do Sodré.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Die Uferlage erklärt die historische Mischung aus Hafenarbeit, Verkehr, Handel und Nachtleben. Heute ist der Ort vor allem ein Umstiegspunkt und Zugang zur Ribeira das Naus.",
+          "tags": [
+            "wissen"
+          ]
+        },
+        {
+          "text": "Quellenbasis: offizielle Informationen von metrolisboa.pt sowie institutionelle Denkmal-, Museums- oder Stadtangaben. Der Text trennt dauerhafte Geschichte von veränderlichen Besucherinformationen und verwendet den heutigen institutionellen Namen, wenn er vom historischen Datensatznamen abweicht.",
+          "tags": [
+            "quelle",
+            "verifiziert"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen, Veranstaltungsprogramm, Reservierung, Baustellen und tatsächliche Zugänglichkeit unmittelbar vor dem Besuch auf metrolisboa.pt prüfen; diese Angaben sind ephemer und werden hier bewusst nicht als dauerhafte Fakten festgeschrieben.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lissabon_pilar_7_bridge_experience",
+      "name": "Pilar 7 Bridge Experience",
+      "lat": 38.7004031,
+      "lng": -9.1788387,
+      "place_tier": 2,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Die Pilar 7 Bridge Experience befindet sich am siebten Brückenpfeiler der Ponte 25 de Abril auf der Alcântara-Seite. Sie erschließt einen technischen Teil des Brückenbauwerks.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Die Hängebrücke wurde 1966 als Ponte Salazar eröffnet und nach der Revolution vom 25. April 1974 umbenannt. Sie verbindet Lissabon mit Almada über den Tejo.",
+          "tags": [
+            "architektur"
+          ]
+        },
+        {
+          "text": "Eine Ausstellung erläutert Planung, Bau, Tragwerk und Betrieb. Modelle und audiovisuelle Stationen ordnen Pfeiler, Fahrbahn, Kabel und Fundamente in das Gesamtsystem ein.",
+          "tags": [
+            "einordnung"
+          ]
+        },
+        {
+          "text": "Ein gläserner Aufzug führt zu einer Aussichtsplattform nahe der Fahrbahnhöhe. Die Perspektive zeigt Alcântara, Tejo und Brückenstruktur aus ungewöhnlicher Nähe.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Zur Erfahrung gehört ein Blick in Bereiche des massiven Pfeilers. Der Besuch ist damit keine Brückenüberquerung und bietet keinen Zugang zu Fahrbahn oder Hauptkabeln.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Die Anlage liegt bei der Doca de Santo Amaro und dem LX-Factory-Gebiet. Wetter, Wind, Wartung und Sicherheitsregeln können den Plattformbetrieb beeinflussen.",
+          "tags": [
+            "wissen"
+          ]
+        },
+        {
+          "text": "Quellenbasis: offizielle Informationen von experienciapilar7.pt sowie institutionelle Denkmal-, Museums- oder Stadtangaben. Der Text trennt dauerhafte Geschichte von veränderlichen Besucherinformationen und verwendet den heutigen institutionellen Namen, wenn er vom historischen Datensatznamen abweicht.",
+          "tags": [
+            "quelle",
+            "verifiziert"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen, Veranstaltungsprogramm, Reservierung, Baustellen und tatsächliche Zugänglichkeit unmittelbar vor dem Besuch auf experienciapilar7.pt prüfen; diese Angaben sind ephemer und werden hier bewusst nicht als dauerhafte Fakten festgeschrieben.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lissabon_livraria_bertrand",
+      "name": "Livraria Bertrand",
+      "lat": 38.7106505,
+      "lng": -9.1411355,
+      "place_tier": 2,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Die Buchhandlung Bertrand führt ihre Geschichte auf 1732 zurück, als Pedro Faure in Lissabon eine Buchhandlung eröffnete. Später traten die Brüder Bertrand in das Unternehmen ein.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Das Erdbeben von 1755 zerstörte den damaligen Standort. Nach einer Zwischenphase eröffnete das Geschäft 1773 in der Rua Garrett, wo die Filiale bis heute besteht.",
+          "tags": [
+            "architektur"
+          ]
+        },
+        {
+          "text": "Guinness World Records führt die Chiado-Filiale als älteste noch betriebene Buchhandlung der Welt. Der Rekord bezieht sich auf institutionelle Kontinuität, nicht auf ein unverändertes Gebäude seit 1732.",
+          "tags": [
+            "einordnung"
+          ]
+        },
+        {
+          "text": "Mehrere hintereinanderliegende, gewölbte Verkaufsräume prägen das Innere. Die Räume sind nach portugiesischen Autoren benannt und verbinden normalen Buchhandel mit Literaturgeschichte.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Bertrand war Treffpunkt von Schriftstellern und Intellektuellen; Alexandre Herculano und weitere Figuren des portugiesischen Kulturlebens sind mit der Hausgeschichte verbunden.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Heute ist Bertrand eine portugiesische Buchhandelskette. Die historische Filiale in Chiado bleibt ein reguläres Geschäft, während Sortiment, Veranstaltungen und Service laufend wechseln.",
+          "tags": [
+            "wissen"
+          ]
+        },
+        {
+          "text": "Quellenbasis: offizielle Informationen von bertrand.pt sowie institutionelle Denkmal-, Museums- oder Stadtangaben. Der Text trennt dauerhafte Geschichte von veränderlichen Besucherinformationen und verwendet den heutigen institutionellen Namen, wenn er vom historischen Datensatznamen abweicht.",
+          "tags": [
+            "quelle",
+            "verifiziert"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen, Veranstaltungsprogramm, Reservierung, Baustellen und tatsächliche Zugänglichkeit unmittelbar vor dem Besuch auf bertrand.pt prüfen; diese Angaben sind ephemer und werden hier bewusst nicht als dauerhafte Fakten festgeschrieben.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lissabon_a_brasileira",
+      "name": "A Brasileira",
+      "lat": 38.7107003,
+      "lng": -9.1420317,
+      "place_tier": 2,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "A Brasileira wurde 1905 von Adriano Telles eröffnet. Anfangs förderte das Geschäft brasilianischen Kaffee und gab Kunden beim Kauf von Bohnen eine Tasse zum Probieren.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Das heutige Café in Chiado erhielt 1908 eine Schanklizenz. Seine reich dekorierte Fassade und das Interieur mit Holz, Spiegeln, Messing und Bildkunst wurden zu einem Stadtbildzeichen.",
+          "tags": [
+            "architektur"
+          ]
+        },
+        {
+          "text": "Im frühen 20. Jahrhundert trafen sich hier Künstler und Schriftsteller der portugiesischen Moderne. Fernando Pessoa gehört zu den bekanntesten Gästen, war aber nicht der einzige.",
+          "tags": [
+            "einordnung"
+          ]
+        },
+        {
+          "text": "Seit 1988 sitzt eine Bronzefigur Pessoas von Lagoa Henriques an einem Tisch vor dem Café. Die Skulptur ist ein später Erinnerungsort und keine Ausstattung aus Pessoas Lebenszeit.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Der Name „Brasileira“ verweist auf den Handel mit brasilianischem Kaffee. Das Café half, den damals noch nicht selbstverständlichen öffentlichen Kaffeekonsum in Lissabon zu verbreiten.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "A Brasileira ist weiterhin Gastronomiebetrieb und zugleich historischer Kulturort. Speisekarte, Preise, Tischbetrieb und mögliche Wartezeiten sind veränderlich und keine dauerhaften Storyfakten.",
+          "tags": [
+            "wissen"
+          ]
+        },
+        {
+          "text": "Quellenbasis: offizielle Informationen von abrasileira.pt sowie institutionelle Denkmal-, Museums- oder Stadtangaben. Der Text trennt dauerhafte Geschichte von veränderlichen Besucherinformationen und verwendet den heutigen institutionellen Namen, wenn er vom historischen Datensatznamen abweicht.",
+          "tags": [
+            "quelle",
+            "verifiziert"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen, Veranstaltungsprogramm, Reservierung, Baustellen und tatsächliche Zugänglichkeit unmittelbar vor dem Besuch auf abrasileira.pt prüfen; diese Angaben sind ephemer und werden hier bewusst nicht als dauerhafte Fakten festgeschrieben.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lissabon_doca_de_santo_amaro",
+      "name": "Doca de Santo Amaro",
+      "lat": 38.700283,
+      "lng": -9.1766947,
+      "place_tier": 2,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Die Doca de Santo Amaro ist ein Hafenbecken in Alcântara unmittelbar unter der Ponte 25 de Abril. Masten, Brückenpfeiler und rote Stahlkonstruktion bestimmen das Panorama.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Das Becken gehört zum Lissabonner Hafen und wird heute vor allem als Freizeithafen genutzt. Die Umnutzung verbindet maritime Infrastruktur mit öffentlicher Ufer- und Gastronomienutzung.",
+          "tags": [
+            "architektur"
+          ]
+        },
+        {
+          "text": "Historische Lager- und Hafenbauten entlang des Beckens wurden für Restaurants und Freizeitangebote angepasst. Welche Betriebe bestehen, ist veränderlich und gehört nicht zur stabilen Ortsgeschichte.",
+          "tags": [
+            "einordnung"
+          ]
+        },
+        {
+          "text": "Von der Doca lässt sich die Dimension der 1966 eröffneten Hängebrücke aus nächster Nähe erkennen. Der siebte Pfeiler beherbergt die getrennt zugängliche Pilar 7 Bridge Experience.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Die Eisenbahn- und Straßenachsen von Alcântara trennen Teile des Hafens vom Stadtviertel. Fußwege und Unterführungen bestimmen daher den praktischen Zugang zum Wasser.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Die Doca ist nicht der Passagierterminal von Belém und nicht Cais do Sodré. Sie ist ein eigenes Hafenbecken zwischen Alcântara-Mar und der Brücke.",
+          "tags": [
+            "wissen"
+          ]
+        },
+        {
+          "text": "Quellenbasis: offizielle Informationen von portodelisboa.pt sowie institutionelle Denkmal-, Museums- oder Stadtangaben. Der Text trennt dauerhafte Geschichte von veränderlichen Besucherinformationen und verwendet den heutigen institutionellen Namen, wenn er vom historischen Datensatznamen abweicht.",
+          "tags": [
+            "quelle",
+            "verifiziert"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen, Veranstaltungsprogramm, Reservierung, Baustellen und tatsächliche Zugänglichkeit unmittelbar vor dem Besuch auf portodelisboa.pt prüfen; diese Angaben sind ephemer und werden hier bewusst nicht als dauerhafte Fakten festgeschrieben.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lissabon_teatro_nacional_d_maria_ii",
+      "name": "Teatro Nacional D. Maria II",
+      "lat": 38.7148005,
+      "lng": -9.1397875,
+      "place_tier": 2,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Das Nationaltheater steht an der Nordseite des Rossio auf dem Gelände des früheren Inquisitionspalasts. Es wurde 1846 eröffnet und nach Königin Maria II. benannt.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Der neoklassizistische Bau von Fortunato Lodi besitzt einen sechssäuligen Portikus. Im Giebel steht Gil Vicente, der als Begründer des portugiesischen Theaters gilt.",
+          "tags": [
+            "architektur"
+          ]
+        },
+        {
+          "text": "Ein Brand zerstörte 1964 große Teile des Inneren; die Außenmauern blieben erhalten. Nach langem Wiederaufbau wurde das Theater 1978 erneut eröffnet.",
+          "tags": [
+            "einordnung"
+          ]
+        },
+        {
+          "text": "Als Nationaltheater produziert und zeigt das Haus portugiesisches und internationales Schauspiel, fördert Künstler und betreibt Vermittlungs- und Dokumentationsarbeit.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Die Fassade bildet mit Rossio-Pflaster, Brunnen und Statue Pedros IV. eine zentrale Blickachse. Der Besuch des Platzes ist unabhängig vom Zugang zu Bühnenräumen.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Das Gebäude wird seit 2023 umfassend saniert; Vorstellungen werden während der Arbeiten an anderen Orten gezeigt. Wiedereröffnung, Spielorte und Führungen sind zwingend als LIVE zu prüfen.",
+          "tags": [
+            "wissen"
+          ]
+        },
+        {
+          "text": "Quellenbasis: offizielle Informationen von tndm.pt sowie institutionelle Denkmal-, Museums- oder Stadtangaben. Der Text trennt dauerhafte Geschichte von veränderlichen Besucherinformationen und verwendet den heutigen institutionellen Namen, wenn er vom historischen Datensatznamen abweicht.",
+          "tags": [
+            "quelle",
+            "verifiziert"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen, Veranstaltungsprogramm, Reservierung, Baustellen und tatsächliche Zugänglichkeit unmittelbar vor dem Besuch auf tndm.pt prüfen; diese Angaben sind ephemer und werden hier bewusst nicht als dauerhafte Fakten festgeschrieben.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lissabon_mercado_de_campo_de_ourique",
+      "name": "Mercado de Campo de Ourique",
+      "lat": 38.7163117,
+      "lng": -9.1667393,
+      "place_tier": 2,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Der Mercado de Campo de Ourique wurde 1934 eröffnet und dient dem westlich der Innenstadt gelegenen Wohnviertel als lokaler Lebensmittelmarkt.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Die Markthalle vereint traditionelle Verkaufsstände für Fisch, Fleisch, Obst, Gemüse und weitere Lebensmittel mit gastronomischen Angeboten zum Essen vor Ort.",
+          "tags": [
+            "architektur"
+          ]
+        },
+        {
+          "text": "Eine Umgestaltung zu Beginn der 2010er Jahre stärkte die Kombination aus Versorgung und Gastronomie. Der Markt blieb dabei kleiner und stärker quartiersbezogen als die Ribeira-Halle.",
+          "tags": [
+            "einordnung"
+          ]
+        },
+        {
+          "text": "Die überdachte Halle besitzt zentrale Marktgänge und rundum angeordnete Stände. Sie ist ein funktionaler Alltagsort, kein rekonstruiertes Freilichtmuseum.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Campo de Ourique entwickelte sich als planmäßig angelegtes Stadtviertel mit rechtwinkligem Straßennetz. Der Markt liegt in diesem Wohn- und Geschäftsgefüge nahe der Casa Fernando Pessoa.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Einzelne Händler, Menüs, Veranstaltungen und Auslastung wechseln. Stabil sind die Marktfunktion, die Eröffnung 1934 und die Verbindung von Frischehandel und Gastronomie.",
+          "tags": [
+            "wissen"
+          ]
+        },
+        {
+          "text": "Quellenbasis: offizielle Informationen von mercadodecampodeourique.pt sowie institutionelle Denkmal-, Museums- oder Stadtangaben. Der Text trennt dauerhafte Geschichte von veränderlichen Besucherinformationen und verwendet den heutigen institutionellen Namen, wenn er vom historischen Datensatznamen abweicht.",
+          "tags": [
+            "quelle",
+            "verifiziert"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen, Veranstaltungsprogramm, Reservierung, Baustellen und tatsächliche Zugänglichkeit unmittelbar vor dem Besuch auf mercadodecampodeourique.pt prüfen; diese Angaben sind ephemer und werden hier bewusst nicht als dauerhafte Fakten festgeschrieben.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lissabon_marques_de_pombal",
+      "name": "Praça Marquês de Pombal",
+      "lat": 38.7252549,
+      "lng": -9.1500292,
+      "place_tier": 2,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Die Praça Marquês de Pombal liegt am oberen Ende der Avenida da Liberdade und am Eingang zum Parque Eduardo VII. Sie ist ein zentraler Verkehrsknoten Lissabons.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Das Denkmal für Sebastião José de Carvalho e Melo, den Marquês de Pombal, wurde 1934 eingeweiht. Die hohe Säule trägt seine Figur neben einem Löwen.",
+          "tags": [
+            "architektur"
+          ]
+        },
+        {
+          "text": "Pombal leitete als Minister unter König José I. den Wiederaufbau nach dem Erdbeben von 1755. Die planmäßige Baixa Pombalina ist eng mit seiner Verwaltung verbunden.",
+          "tags": [
+            "einordnung"
+          ]
+        },
+        {
+          "text": "Reliefs und Figurengruppen am Sockel verweisen auf Wiederaufbau, Landwirtschaft, Industrie, Bildung und politische Reformen. Das Denkmal inszeniert Pombals staatliche Modernisierung.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Der Platz hieß nach Gründung der Republik Praça Marquês de Pombal, war im 20. Jahrhundert zeitweise als Rotunda bekannt und wird umgangssprachlich weiterhin so bezeichnet.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Mehrspuriger Kreisverkehr erschwert die unmittelbare Annäherung. Die beste räumliche Einordnung ergibt sich aus der Achse Avenida da Liberdade, Denkmal und ansteigendem Parque Eduardo VII.",
+          "tags": [
+            "wissen"
+          ]
+        },
+        {
+          "text": "Quellenbasis: offizielle Informationen von lisboa.pt sowie institutionelle Denkmal-, Museums- oder Stadtangaben. Der Text trennt dauerhafte Geschichte von veränderlichen Besucherinformationen und verwendet den heutigen institutionellen Namen, wenn er vom historischen Datensatznamen abweicht.",
+          "tags": [
+            "quelle",
+            "verifiziert"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen, Veranstaltungsprogramm, Reservierung, Baustellen und tatsächliche Zugänglichkeit unmittelbar vor dem Besuch auf lisboa.pt prüfen; diese Angaben sind ephemer und werden hier bewusst nicht als dauerhafte Fakten festgeschrieben.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lissabon_amoreiras_360_panoramic_view",
+      "name": "Amoreiras 360",
+      "lat": 38.723757,
+      "lng": -9.161325,
+      "place_tier": 2,
+      "pack_role": "story",
+      "deep_data_pool": [
+        {
+          "text": "Amoreiras 360 ist eine Aussichtsterrasse auf einem der Türme des Amoreiras-Komplexes. Sie liegt westlich des historischen Zentrums und bietet dadurch einen weiten Blick über die Stadthügel.",
+          "tags": [
+            "geschichte"
+          ]
+        },
+        {
+          "text": "Der Gebäudekomplex wurde von Tomás Taveira entworfen und 1985 eröffnet. Seine postmodernen Türme, kräftigen Formen und dekorativen Fassadenelemente prägen die westliche Skyline.",
+          "tags": [
+            "architektur"
+          ]
+        },
+        {
+          "text": "Die Plattform befindet sich in etwa 174 Metern Höhe über dem Meeresspiegel. Die Bauhöhe selbst ist geringer; Höhenangabe und Gebäudehöhe dürfen nicht verwechselt werden.",
+          "tags": [
+            "einordnung"
+          ]
+        },
+        {
+          "text": "Von oben sind unter anderem Tejo, Ponte 25 de Abril, Castelo de São Jorge, Monsanto, Aqueduto das Águas Livres und die Innenstadtachsen einzuordnen.",
+          "tags": [
+            "leben_jetzt"
+          ]
+        },
+        {
+          "text": "Der Zugang erfolgt über das Amoreiras Shopping Center und anschließend über einen gesonderten Aufzug zur Dachplattform. Sie ist kein frei zugänglicher öffentlicher Dachgarten.",
+          "tags": [
+            "quer"
+          ]
+        },
+        {
+          "text": "Sichtweite und Aufenthaltsqualität hängen stark von Wetter, Dunst und Wind ab. Öffnung, Tickets, letzte Auffahrt und mögliche Schließungen sind ausschließlich als LIVE-Information zu behandeln.",
+          "tags": [
+            "wissen"
+          ]
+        },
+        {
+          "text": "Quellenbasis: offizielle Informationen von amoreiras360view.com sowie institutionelle Denkmal-, Museums- oder Stadtangaben. Der Text trennt dauerhafte Geschichte von veränderlichen Besucherinformationen und verwendet den heutigen institutionellen Namen, wenn er vom historischen Datensatznamen abweicht.",
+          "tags": [
+            "quelle",
+            "verifiziert"
+          ]
+        },
+        {
+          "text": "LIVE: Öffnungszeiten, Eintritt, Führungen, Veranstaltungsprogramm, Reservierung, Baustellen und tatsächliche Zugänglichkeit unmittelbar vor dem Besuch auf amoreiras360view.com prüfen; diese Angaben sind ephemer und werden hier bewusst nicht als dauerhafte Fakten festgeschrieben.",
+          "tags": [
+            "live_hint",
+            "ephemeral"
+          ]
+        }
+      ]
+    }
+  ]
+}

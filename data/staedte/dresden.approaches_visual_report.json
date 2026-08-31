@@ -1,0 +1,2322 @@
+{
+  "city": "dresden",
+  "apply": true,
+  "touched": 289,
+  "approachesFixed": 289,
+  "faqAdded": 0,
+  "data_version": 33,
+  "rows": [
+    {
+      "id": "dresden_dresden_hauptbahnhof",
+      "name": "Dresden Hauptbahnhof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_dresden_mitte",
+      "name": "Dresden Mitte",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_dresden_neustadt",
+      "name": "Dresden-Neustadt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_mitte",
+      "name": "Mitte",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_dresden_hbf",
+      "name": "Dresden Hbf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_dresden_plauen",
+      "name": "Dresden-Plauen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_bahnhof_neustadt",
+      "name": "Bahnhof Neustadt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_dresden_industriegelande",
+      "name": "Dresden Industriegelände",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_freiberger_strasse",
+      "name": "Freiberger Straße",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_dresden_bahnhof_neustadt_hansastrasse_1",
+      "name": "Dresden Bahnhof Neustadt (Hansastraße) 1",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_dresden_bahnhof_mitte_5",
+      "name": "Dresden Bahnhof Mitte 5",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_hauptbahnhof",
+      "name": "Hauptbahnhof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_dresden_pieschen",
+      "name": "Dresden-Pieschen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_dresden_trachau",
+      "name": "Dresden-Trachau",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_anleger_der_elbdampfschiffahrt_und_kartenverkauf",
+      "name": "Anleger der Elbdampfschiffahrt und Kartenverkauf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_elbhafen",
+      "name": "Elbhafen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_hafen_dresden_friedrichstadt",
+      "name": "Hafen Dresden-Friedrichstadt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_sachsische_dampfschifffahrt",
+      "name": "Sächsische Dampfschifffahrt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_personenfahre_niederpoyritz_laubegast",
+      "name": "Personenfähre Niederpoyritz – Laubegast",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_personen_autofahre_kleinzschachwitz_pillnitz",
+      "name": "Personen- / Autofähre Kleinzschachwitz - Pillnitz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_sachsische_dampfschifffahrt_anlegestelle_pillnitz",
+      "name": "Sächsische Dampfschifffahrt Anlegestelle Pillnitz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_sachsische_dampfschifffahrt_anlegestelle_blasewitz",
+      "name": "Sächsische Dampfschifffahrt Anlegestelle Blasewitz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_kleinzschachwitz_fahre",
+      "name": "Kleinzschachwitz Fähre",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_fahrstelle_neustadt",
+      "name": "Fährstelle Neustadt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_weisse_flotte_1836_alteste_und_grosste_raddampferflotte_der_welt",
+      "name": "Weiße Flotte (1836; älteste und größte Raddampferflotte der Welt)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_neustadter_hafen",
+      "name": "Neustädter Hafen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_dresden_fahrstelle_laubegast",
+      "name": "Dresden Fährstelle Laubegast",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_dresden_fahrstelle_johannstadt",
+      "name": "Dresden Fährstelle Johannstadt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_bootsanlegestelle_pillnitz",
+      "name": "Bootsanlegestelle Pillnitz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_fv_hafen_dresden_e_v",
+      "name": "FV Hafen Dresden e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_stadtmuseum_und_stadtische_galerie_dresden",
+      "name": "Stadtmuseum und Städtische Galerie Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_dresdner_zwinger",
+      "name": "Dresdner Zwinger",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_festung_xperience_festung_dresden",
+      "name": "Festung Xperience (Festung Dresden)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_verkehrsmuseum_dresden",
+      "name": "Verkehrsmuseum Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_historisches_grunes_gewolbe",
+      "name": "Historisches Grünes Gewölbe",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_deutsches_hygiene_museum_dresden",
+      "name": "Deutsches Hygiene-Museum Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_albertinum",
+      "name": "Albertinum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_gemaldegalerie_alte_meister",
+      "name": "Gemäldegalerie Alte Meister",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_zwinger_xperience",
+      "name": "Zwinger Xperience",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_skd_mathematisch_physikalischer_salon",
+      "name": "SKD | Mathematisch-Physikalischer Salon",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_porzellansammlung",
+      "name": "Porzellansammlung",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_technische_sammlungen_dresden",
+      "name": "Technische Sammlungen Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_fernmeldemuseum_dresden",
+      "name": "Fernmeldemuseum Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_historische_innenstadt_dresden",
+      "name": "Historische Innenstadt Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_kugelgenhaus_museum_der_dresdner_romantik",
+      "name": "Kügelgenhaus - Museum der Dresdner Romantik",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_panometer_dresden",
+      "name": "Panometer Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_camondas_schokoladenmuseum_dresden",
+      "name": "CAMONDAS Schokoladenmuseum Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_dreikonigskirche_haus_der_kirche_dresden",
+      "name": "Dreikönigskirche - Haus der Kirche Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_kathedrale_sanctissimae_trinitatis_dresdener_hofkirche",
+      "name": "Kathedrale Sanctissimae Trinitatis (Dresdener Hofkirche)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_kreuzkirche_dresden",
+      "name": "Kreuzkirche Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_russisch_orthodoxe_kirche",
+      "name": "Russisch-Orthodoxe Kirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_kapelle_des_joseph_stift_dresden",
+      "name": "Kapelle des Joseph-Stift Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_evangelisch_reformierte_gemeinde_zu_dresden",
+      "name": "Evangelisch-Reformierte Gemeinde zu Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_frauenkirche_dresden",
+      "name": "Frauenkirche Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_lukaskirche",
+      "name": "Lukaskirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_garnisonkirche_st_martin",
+      "name": "Garnisonkirche St. Martin",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_katholische_pfarrei_selige_martyrer_vom_munchner_platz_gemeinde_st_paulu",
+      "name": "Katholische Pfarrei selige Märtyrer vom Münchner Platz, Gemeinde St. Paulus Dresden-Plauen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_herz_jesu_kirche",
+      "name": "Herz-Jesu-Kirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_katholische_kirche_st_josef",
+      "name": "Katholische Kirche St. Josef",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_martin_luther_kirche_frei_zugangliche_kirche_ev_luth_kirchspiel_dresden_",
+      "name": "Martin-Luther-Kirche - Frei zugängliche Kirche Ev.-Luth. Kirchspiel Dresden-Neustadt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_kirche_st_petrus",
+      "name": "Kirche St. Petrus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_busmannkapelle_der_sophienkirche_1964",
+      "name": "Busmannkapelle der Sophienkirche (<1964)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_st_markuskirche",
+      "name": "St. Markuskirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_auferstehungskirche",
+      "name": "Auferstehungskirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_ev_luth_pfarramt_christuskirche_strehlen",
+      "name": "Ev.-Luth. Pfarramt Christuskirche Strehlen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_superintendentur_kirchenbezirk_dresden_mitte",
+      "name": "Superintendentur Kirchenbezirk Dresden Mitte",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_mozartbrunnen",
+      "name": "Mozartbrunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_denkmal_friedrich_august_dem_gerechten",
+      "name": "Denkmal „Friedrich August dem Gerechten“",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_pusteblumenbrunnen_prager_strasse",
+      "name": "Pusteblumenbrunnen Prager Straße",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_mosaikbrunnen",
+      "name": "Mosaikbrunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_konig_johann_denkmal",
+      "name": "König-Johann-Denkmal",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_delphinbrunnen",
+      "name": "Delphinbrunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_trummerfrau_denkmal_dresden",
+      "name": "Trümmerfrau-Denkmal Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_schalenbrunnen",
+      "name": "Schalenbrunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_brunnen_stille_wasser_1894_robert_diez",
+      "name": "Brunnen \"Stille Wasser\" (1894; Robert Diez)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_nymphenbrunnen_1738_1742_johann_benjamin_thomae",
+      "name": "Nymphenbrunnen (1738-1742; Johann Benjamin Thomae)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_nymphenbrunnen_die_badende",
+      "name": "Nymphenbrunnen „Die Badende“",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_skulptur_venus_mit_amor",
+      "name": "Skulptur Venus mit Amor",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_dinglingerbrunnen",
+      "name": "Dinglingerbrunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_drei_grazien_brunnen",
+      "name": "Drei-Grazien-Brunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_dresdner_aussicht",
+      "name": "Dresdner Aussicht",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_grosser_garten",
+      "name": "Großer Garten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_pulvermuhlenpark",
+      "name": "Pulvermühlenpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_aussicht_friedensblick_mit_obelisk",
+      "name": "Aussicht \"Friedensblick\" mit Obelisk",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_park_dresdner_elbschlosser",
+      "name": "Park \"Dresdner Elbschlösser\"",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_staudengarten",
+      "name": "Staudengarten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_bluherpark",
+      "name": "Blüherpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_sternplatz",
+      "name": "Sternplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_rockauer_hohe_aussichtspunkt",
+      "name": "Rockauer Höhe - Aussichtspunkt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_rosengarten",
+      "name": "Rosengarten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_hugo_burkner_park",
+      "name": "Hugo-Bürkner Park",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_beutlerpark",
+      "name": "Beutlerpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_hotel_schone_aussicht_designhotel_dresden",
+      "name": "Hotel Schöne Aussicht Designhotel Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_waldpark_blasewitz",
+      "name": "Waldpark Blasewitz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_herzogin_garten_1591",
+      "name": "Herzogin Garten (1591)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_aussichtsturm_obere_station_schwebebahn",
+      "name": "Aussichtsturm Obere Station Schwebebahn",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_westlicher_promenadenring",
+      "name": "Westlicher Promenadenring",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_park",
+      "name": "Park",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_rathausturm_dresden",
+      "name": "Rathausturm Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_hausmannsturm",
+      "name": "Hausmannsturm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_leuchtturm_moritzburg",
+      "name": "Leuchtturm Moritzburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_fichteturm",
+      "name": "Fichteturm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_wolfshugelturm",
+      "name": "Wolfshügelturm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_bismarcksaule",
+      "name": "Bismarcksäule",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_stein_turm",
+      "name": "Stein Turm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_aussichtspunkt_weisseritztalbrucke",
+      "name": "Aussichtspunkt Weißeritztalbrücke",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_aussichtspunkt_hellerberg",
+      "name": "Aussichtspunkt Hellerberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_kaitzer_hohe_aussichtspunkt_sitzgelegenheiten",
+      "name": "Kaitzer Höhe, Aussichtspunkt, Sitzgelegenheiten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_bismarckdenkmal",
+      "name": "Bismarckdenkmal",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_aussichtspunkt_auf_plauenschen_grund",
+      "name": "Aussichtspunkt auf Plauenschen Grund",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_aussichtsterrasse_mit_trummerbahn",
+      "name": "Aussichtsterrasse mit Trümmerbahn",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_startblock_e_v_kita_leuchtturm",
+      "name": "Startblock e. V. | KiTa Leuchtturm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_glowing_rooms_3d_schwarzlicht_minigolf_dresden",
+      "name": "Glowing Rooms 3D Schwarzlicht Minigolf Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_georg_arnhold_bad_familienbad_saunalandschaft",
+      "name": "Georg-Arnhold-Bad Familienbad & Saunalandschaft",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_minigolf_am_grossen_garten",
+      "name": "Minigolf am Großen Garten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_sportpark_ostra",
+      "name": "Sportpark Ostra",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_sportpark_dresden",
+      "name": "Sportpark Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_luftbad_dolzschen",
+      "name": "Luftbad Dölzschen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_city_sauna",
+      "name": "City-Sauna",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_elbamare_erlebnisbad",
+      "name": "Elbamare Erlebnisbad",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_strandbad_wostra",
+      "name": "Strandbad Wostra",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_cineplex_kristallpalast_dresden",
+      "name": "Cineplex Kristallpalast Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_freibad_cotta",
+      "name": "Freibad Cotta",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_sitzgelegenheit_aussichtspunkt",
+      "name": "Sitzgelegenheit, Aussichtspunkt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_aussichtspunkt_uber_ganz_dresden_blickrichtung_nordost",
+      "name": "Aussichtspunkt über ganz Dresden Blickrichtung Nordost",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_aussichtspunkt_am_neuen_teich",
+      "name": "Aussichtspunkt am Neuen Teich",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_aussichtspunkt_flughafen_drs",
+      "name": "Aussichtspunkt Flughafen DRS",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_zuckerhut",
+      "name": "Zuckerhut",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_aussichtspunkt",
+      "name": "Aussichtspunkt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_aussichtspunkt_an_der_winzerei",
+      "name": "Aussichtspunkt An der Winzerei",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_raubtierfelsen_und_aussichtspunkt",
+      "name": "Raubtierfelsen und Aussichtspunkt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_semperoper_dresden",
+      "name": "Semperoper Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_hochwasserlehrpfad_dresden",
+      "name": "Hochwasserlehrpfad Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_dresdner_heide_sanddune",
+      "name": "Dresdner Heide - Sanddüne",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_leitenweg_weinlehrpfad_naturschutzgebiet",
+      "name": "Leitenweg (Weinlehrpfad), Naturschutzgebiet",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_omsewitzer_grund",
+      "name": "Omsewitzer Grund",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_rastplatz_am_leitenweg_weinlehrpfad_aussichtpunkt",
+      "name": "Rastplatz am Leitenweg (Weinlehrpfad), Aussichtpunkt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_wanderstrecke_elbradweg",
+      "name": "Wanderstrecke Elbradweg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_feldblick",
+      "name": "Feldblick",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_kaitzgrund_bei_kaitz",
+      "name": "Kaitzgrund bei Kaitz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_kaitzbachtal_bei_mockritz",
+      "name": "Kaitzbachtal bei Mockritz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_heilstattenweg",
+      "name": "Heilstättenweg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_weisseritzgrunzug_sachsischer_pilgerweg_fahrradweg_spielplatz_biotop",
+      "name": "Weißeritzgrünzug, Sächsischer Pilgerweg, Fahrradweg, Spielplatz, Biotop",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_adfc_dresden_e_v",
+      "name": "ADFC Dresden e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_cube_store_dresden_powered_by_die_fahrrad_kette",
+      "name": "Cube Store Dresden powered by Die Fahrrad-Kette",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_bike_center_dresden_neustadt_fahrradwerkstatt_fahrradverkauf",
+      "name": "Bike Center Dresden - Neustadt (Fahrradwerkstatt & Fahrradverkauf)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_wegebund",
+      "name": "wegebund",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_giant_testcenter_dresden",
+      "name": "GIANT Testcenter Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_fahrrad_xxl_dresden",
+      "name": "Fahrrad XXL Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_bot_botanischer_garten_dresden",
+      "name": "BOT Botanischer Garten, Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_adventureland_dresden_paintball_und_lasertag",
+      "name": "Adventureland Dresden - Paintball und Lasertag",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_zoo_dresden",
+      "name": "Zoo Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_erlebnisplantage_moritzburg",
+      "name": "Erlebnisplantage Moritzburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_schneeleopard",
+      "name": "Schneeleopard",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_orang_utan_haus",
+      "name": "Orang Utan Haus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_parkplatz_am_zoo_dresden",
+      "name": "Parkplatz Am Zoo Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_laserland_dresden",
+      "name": "Laserland Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_giraffen_und_zebra_anlage",
+      "name": "Giraffen und Zebra Anlage",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_konigreich_der_dinosaurier_dresden",
+      "name": "Königreich der Dinosaurier Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_prof_brandes_haus",
+      "name": "Prof. Brandes Haus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_7th_space_dresden_virtual_reality_erlebniswelt",
+      "name": "7th Space Dresden - Virtual-Reality-Erlebniswelt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_zoo_dresden_imbiss_africa_lodge",
+      "name": "Zoo Dresden – Imbiss Africa Lodge",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_remember_dresden_souvenir_shop",
+      "name": "Remember Dresden Souvenir Shop",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_dresden_memories_more",
+      "name": "Dresden memories + more",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_dresden_gifts_goods_for_you",
+      "name": "Dresden GIFTS + GOODS for you",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_kunsthandwerk_in_der_altmarkt_galerie",
+      "name": "Kunsthandwerk in der Altmarkt-Galerie",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_hello_dresden",
+      "name": "Hello Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_souvenirshop_geschenkeladen_shop_dresden_onlineshop_fur_besonderes_zum_s",
+      "name": "Souvenirshop & Geschenkeladen Shop-Dresden - Onlineshop für Besonderes zum Schenken und Genießen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_ddv_lokal_haus_der_presse",
+      "name": "DDV Lokal - Haus der Presse",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_sara_handmade_personalisierte_geschenke",
+      "name": "SARA Handmade (personalisierte geschenke)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_elbenwald",
+      "name": "Elbenwald",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_souvenirstand",
+      "name": "Souvenirstand",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_bruhlsche_terrasse",
+      "name": "Brühlsche Terrasse",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_kunsthofpassage_dresden",
+      "name": "Kunsthofpassage Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_kronentor",
+      "name": "Kronentor",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_dynamo_dresden_wandbild",
+      "name": "Dynamo Dresden Wandbild",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_kulturpalast_erleben",
+      "name": "Kulturpalast Erleben",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_wasserspiele_prager_strasse",
+      "name": "Wasserspiele Prager Straße",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_brunnen_bastion_saturn",
+      "name": "Brunnen Bastion Saturn",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_artesischer_brunnen",
+      "name": "Artesischer Brunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_sarrasani_brunnen",
+      "name": "Sarrasani Brunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_centrum_galerie",
+      "name": "Centrum-Galerie",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_skd_museum_fur_sachsische_volkskunst",
+      "name": "SKD | Museum für Sächsische Volkskunst",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_leonhardi_museum_der_stadt_dresden",
+      "name": "Leonhardi-Museum der Stadt Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_galerie_holger_john",
+      "name": "GALERIE HOLGER JOHN",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_bistum_dresden_meissen_bischofliches_ordinariat",
+      "name": "Bistum Dresden-Meißen, Bischöfliches Ordinariat",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_zentrales_burgerburo_altstadt",
+      "name": "Zentrales Bürgerbüro Altstadt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_kulturrathaus_dresden",
+      "name": "Kulturrathaus Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_schloss_albrechtsberg_dresden",
+      "name": "Schloss Albrechtsberg Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_lingnerschloss",
+      "name": "Lingnerschloss",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_schloss_pillnitz",
+      "name": "Schloss Pillnitz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_schloss_ubigau",
+      "name": "Schloss Übigau",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_renaissanceschloss_schonfeld",
+      "name": "Renaissanceschloß Schönfeld",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_staatliche_schlosser_burgen_und_garten_sachsen",
+      "name": "Staatliche Schlösser, Burgen und Gärten Sachsen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_hellerblick_auf_dem_proschhubel",
+      "name": "Hellerblick auf dem Proschhübel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_ostrablick",
+      "name": "Ostrablick",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_dahliengarten",
+      "name": "Dahliengarten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_zwingergarten_mit_zwingerteich",
+      "name": "Zwingergarten mit Zwingerteich",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_ko_11_garten",
+      "name": "Kö 11 Garten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_dresdner_parkeisenbahn",
+      "name": "Dresdner Parkeisenbahn",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_rhododendronanlage_am_palais",
+      "name": "Rhododendronanlage am Palais",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_burgerwiese",
+      "name": "Bürgerwiese",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_grosser_garten_dresden",
+      "name": "Großer Garten Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_zschauketal",
+      "name": "Zschauketal",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_am_wasserkraftwerk_plauenscher_grund",
+      "name": "Am Wasserkraftwerk Plauenscher Grund",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_elbe_delta",
+      "name": "Elbe Delta",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_der_laden_der_lebenshilfe_dresden_e_v",
+      "name": "Der Laden der Lebenshilfe Dresden e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_staatsoperette_dresden",
+      "name": "Staatsoperette Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_boulevardtheater_dresden",
+      "name": "Boulevardtheater Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_staatsschauspiel_dresden",
+      "name": "Staatsschauspiel Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_theaterkahn_dresdner_brettl_das_theater_auf_der_elbe",
+      "name": "THEATERKAHN - Dresdner Brettl - Das Theater auf der Elbe",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_semper_zwei",
+      "name": "Semper Zwei",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_august_theater_dresden",
+      "name": "AUGUST Theater Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_comodie_dresden",
+      "name": "COMÖDIE Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_jorg_bretschneider_dresdner_figurentheater",
+      "name": "Jörg Bretschneider - Dresdner Figurentheater",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_kleines_haus_staatsschauspiel_dresden",
+      "name": "\"Kleines Haus\" (Staatsschauspiel Dresden)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_puppentheater_sonnenhausel",
+      "name": "Puppentheater Sonnenhäusel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_hoftheater_dresden_prinzipal_rolf_hoppe_in_memoriam",
+      "name": "Hoftheater Dresden | Prinzipal Rolf Hoppe *in memoriam",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_tud_theater_die_buhne",
+      "name": "TUD | Theater \"DIE BÜHNE\"",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_parktheater",
+      "name": "Parktheater",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_marina_garden",
+      "name": "Marina Garden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_die_hafenmeister_eventlocation",
+      "name": "Die Hafenmeister – Eventlocation",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_anleger_zschieren_altsobrigen",
+      "name": "Anleger Zschieren Altsöbrigen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_pieschener_hafen_1856_59",
+      "name": "Pieschener Hafen (1856-59)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_schiffsanlegestelle_loschwitz",
+      "name": "Schiffsanlegestelle Loschwitz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_usd_hafen_city_dresden_gmbh",
+      "name": "USD Hafen City Dresden GmbH",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_schwenk_beton_dresden_gmbh_co_kg_werk_3073_dresden_hafen",
+      "name": "SCHWENK Beton Dresden GmbH & Co. KG, Werk 3073 Dresden-Hafen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_restaurant_alberthafen_dresden",
+      "name": "Restaurant Alberthafen Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_wildgehege_moritzburg_staatsbetrieb_sachsenforst_forstbezirk_dresden",
+      "name": "Wildgehege Moritzburg - Staatsbetrieb Sachsenforst Forstbezirk Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_zoo_unter_der_erde",
+      "name": "Zoo unter der Erde",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_somalischaf_watussirind",
+      "name": "Somalischaf & Watussirind",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_wildgehege_albertpark",
+      "name": "Wildgehege Albertpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_bootsverleih_freizeitspass_dresden",
+      "name": "Bootsverleih FreizeitSpass Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_die_dresdner_stadtrundfahrten_gmbh",
+      "name": "Die Dresdner Stadtrundfahrten GmbH",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_stadtrundfahrt_com_dresden",
+      "name": "STADTRUNDFAHRT.com | Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_mietboot_dresden_bootsverleih_dresden",
+      "name": "Mietboot-Dresden - Bootsverleih Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_silver_line_bootsvermietung_gmbh",
+      "name": "Silver Line Bootsvermietung GmbH",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_bootsverleih",
+      "name": "Bootsverleih",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_conferencebikes_stadtrundfahrt_teamevent_dresden",
+      "name": "ConferenceBikes Stadtrundfahrt & Teamevent Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_seg_city_dresden_stadtfuhrungen_mit_dem_segway",
+      "name": "SEG-CITY Dresden | Stadtführungen mit dem Segway",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_die_dresdner_stadtrundfahrten_postplatz",
+      "name": "Die Dresdner Stadtrundfahrten Postplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_tagestour_dresden_de",
+      "name": "TAGESTOUR-DRESDEN.de",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_gastefuhrer_robert_noack",
+      "name": "Gästeführer Robert Noack",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_catapult_mhb_gmbh",
+      "name": "Catapult MHB GmbH",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_halloren_shop_am_furstenzug",
+      "name": "Halloren Shop am Fürstenzug",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_hussel_confiserie",
+      "name": "HUSSEL Confiserie",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_morgenland_dresden",
+      "name": "Morgenland Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_sachsenmarkt",
+      "name": "Sachsenmarkt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_wochenmarkt_auf_dem_alaunplatz",
+      "name": "Wochenmarkt auf dem Alaunplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_wochenmarkt_munchner_platz",
+      "name": "Wochenmarkt Münchner Platz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_wochenmarkt_schillerplatz",
+      "name": "Wochenmarkt Schillerplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_marktschwarmer_dresden_neustadt",
+      "name": "Marktschwärmer Dresden-Neustadt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_wochenmarkt_dresden_johannstadt",
+      "name": "Wochenmarkt Dresden Johannstadt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_wochenmarkt_dresden_strehlen_wasaplatz",
+      "name": "Wochenmarkt Dresden Strehlen - Wasaplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_wochenmarkt_dresden_striesen_borsbergstrasse",
+      "name": "Wochenmarkt Dresden - Striesen - Borsbergstraße",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_wochenmarkt_dresden_trachau",
+      "name": "Wochenmarkt - Dresden Trachau",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_wochenmarkt_am_brauhaus",
+      "name": "Wochenmarkt Am Brauhaus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_marktschwarmer_dresden_friedrichstadt",
+      "name": "Marktschwärmer Dresden-Friedrichstadt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_neustadter_markthalle",
+      "name": "Neustädter Markthalle",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_marktschwarmer_dresden_pieschen",
+      "name": "Marktschwärmer Dresden-Pieschen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_cineplex_rundkino_dresden",
+      "name": "Cineplex Rundkino Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_zentralkino",
+      "name": "Zentralkino",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "dresden_filmnachte_am_elbufer",
+      "name": "Filmnächte am Elbufer",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_cinemaxx_dresden",
+      "name": "CinemaxX Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_filmtheater_schauburg",
+      "name": "Filmtheater Schauburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_thalia_cinema_coffee_and_cycling",
+      "name": "Thalia - Cinema . Coffee and Cycling",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_kletterarena_dresden",
+      "name": "Kletterarena Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_mandala_boulderhalle_dresden_auch_an_feiertagen_geoffnet",
+      "name": "Mandala - Boulderhalle Dresden (auch an Feiertagen geöffnet))",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_mandala_boulderhalle_dresden",
+      "name": "Mandala Boulderhalle Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_kletterhalle_und_vereinszentrum_des_sachsischen_bergsteigerbund_e_v_sbb",
+      "name": "Kletterhalle und Vereinszentrum des Sächsischen Bergsteigerbund e.V. (SBB)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_bouldercity_dresden_e_v_vereinshalle",
+      "name": "Bouldercity Dresden e.V - Vereinshalle",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_bouldercity_der_laden_outdoorschuhe_kletterausrustung_bekleidung",
+      "name": "Bouldercity - Der Laden - Outdoorschuhe/Kletterausrüstung/Bekleidung",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_naturdenkmal_platanenallee_bremer_strasse_dresden_naturschutzeule",
+      "name": "Naturdenkmal Platanenallee (Bremer Straße Dresden) - Naturschutzeule",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_drk_kreisverband_dresden_e_v",
+      "name": "DRK-Kreisverband Dresden e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_ev_luth_kirchgemeinde_johannes_kreuz_lukas_dresden_johanneshaus",
+      "name": "Ev.-Luth. Kirchgemeinde Johannes-Kreuz-Lukas Dresden, Johanneshaus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_schwarzes_kreuz",
+      "name": "Schwarzes Kreuz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_deutsches_rotes_kreuz",
+      "name": "Deutsches Rotes Kreuz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_johannisloge_zum_goldenen_kreuz",
+      "name": "Johannisloge \"Zum Goldenen Kreuz\"",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_jugendrotkreuz_drk_kreisverband_dresden_e_v",
+      "name": "Jugendrotkreuz, DRK-Kreisverband Dresden e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_drk_landesverband_sachsen_e_v",
+      "name": "DRK Landesverband Sachsen e. V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_stadtgeschichte",
+      "name": "Geschichte von Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_residenzschloss_dresden",
+      "name": "Residenzschloss Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_dresden_fahrstelle_pillnitz",
+      "name": "Dresden Fährstelle Pillnitz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_kirche_jesu_christi_der_heiligen_der_letzten_tage",
+      "name": "Kirche Jesu Christi der Heiligen der Letzten Tage",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_citybeach_dresden",
+      "name": "Citybeach Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_hafenkran",
+      "name": "Hafenkran",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_burgerwiese_sudostabschnitt",
+      "name": "Bürgerwiese – Südostabschnitt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_elbespass_gmbh",
+      "name": "Elbespass GmbH",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "dresden_bauernhof_hofladen_marcus_kuhne_dresden",
+      "name": "Bauernhof & Hofladen Marcus Kühne Dresden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    }
+  ]
+}

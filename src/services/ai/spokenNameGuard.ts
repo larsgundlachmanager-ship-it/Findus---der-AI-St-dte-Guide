@@ -1,7 +1,13 @@
-/**
+﻿/**
  * Verhindert, dass TTS-Modell-/Stimmen-Namen als User-Vornamen gesprochen werden.
  * Prompt-Priming mit „nicht Thorsten sagen“ führt bei kleinen Modellen oft zum Gegenteil.
+ * Zusätzlich: 30-Min-Throttle für echten User-Vornamen.
  */
+
+import {
+  canSayUserName,
+  markUserNameSaid,
+} from '../persona/userNameThrottle';
 
 /** Interne Stimmen-/Modell-Tokens — nie als Anrede. */
 const VOICE_MODEL_NAME_RE =
@@ -34,7 +40,7 @@ export function scrubInventedVoiceNames(
 }
 
 /**
- * Entfernt den User-Vornamen aus Speech, wenn die Modul-1-Quote ihn blockt.
+ * Entfernt den User-Vornamen aus Speech, wenn die Modul-1-Quote / Throttle ihn blockt.
  */
 export function scrubBlockedUserFirstName(
   text: string,
@@ -85,4 +91,26 @@ export function textContainsUserFirstName(
   if (!text || !name || name.length < 2) return false;
   const esc = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   return new RegExp(`\\b${esc}\\b`, 'iu').test(text);
+}
+
+/**
+ * TTS-SSOT: Stimmen-Namen raus + User-Vorname max. 1× und nur wenn 30-Min-Throttle frei.
+ * Markiert Cooldown, wenn der Vorname tatsächlich stehen bleibt.
+ */
+export function applyUserNameSpeechPolicy(
+  text: string,
+  firstName?: string | null,
+): string {
+  if (!text) return text;
+  const name = firstName?.trim() || null;
+  let s = scrubInventedVoiceNames(text, name);
+  if (!name) return s;
+  if (!canSayUserName()) {
+    return scrubBlockedUserFirstName(s, name);
+  }
+  s = limitUserFirstNameToOnce(s, name);
+  if (textContainsUserFirstName(s, name)) {
+    markUserNameSaid();
+  }
+  return s;
 }

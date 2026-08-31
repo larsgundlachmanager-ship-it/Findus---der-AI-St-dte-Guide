@@ -1,0 +1,266 @@
+{
+  "city": "chorin",
+  "apply": true,
+  "touched": 32,
+  "approachesFixed": 32,
+  "faqAdded": 0,
+  "data_version": 19,
+  "rows": [
+    {
+      "id": "chorin_chorin_bahnhof",
+      "name": "Chorin Bahnhof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "chorin_kloster_chorin",
+      "name": "Kloster Chorin",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "chorin_touristinformation_kloster_chorin",
+      "name": "Touristinformation Kloster Chorin",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "chorin_hotel_haus_chorin",
+      "name": "Hotel Haus Chorin",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "chorin_choriner_dorfkirche",
+      "name": "Choriner Dorfkirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "chorin_ehemalige_ragoser_muhle",
+      "name": "Ehemalige Ragöser Mühle",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "chorin_lehrpfad_chorin",
+      "name": "Lehrpfad Chorin",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "chorin_privatparkplatz_kloster_chorin",
+      "name": "Privatparkplatz Kloster Chorin",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "chorin_waldlehrgarten_weinberg",
+      "name": "Waldlehrgarten Weinberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "chorin_parkplatz_kloster_chorin",
+      "name": "Parkplatz Kloster Chorin",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "chorin_amtssee",
+      "name": "Amtssee",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "chorin_fettseemoor",
+      "name": "Fettseemoor",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "chorin_listnride_fahrradverleih_in_chorin",
+      "name": "ListNRide - Fahrradverleih in Chorin",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "chorin_sports_field",
+      "name": "Sports Field",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "chorin_gleis_9_n_e_v",
+      "name": "Gleis 9 n.E.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "chorin_alpakas_vom_serwester_hof",
+      "name": "Alpakas vom Serwester Hof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "chorin_ruine_der_klostermuhle_chorin",
+      "name": "Ruine der Klostermühle Chorin",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "chorin_stele_senftenhutte",
+      "name": "Stele Senftenhütte",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "chorin_kriegsgraberstatte_erster_und_zweiter_weltkrieg",
+      "name": "Kriegsgräberstätte Erster und Zweiter Weltkrieg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "chorin_neuehutte_denkmal",
+      "name": "Neuehütte Denkmal",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "chorin_rapp_keramik_chorin",
+      "name": "RAPP KERAMIK CHORIN",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "chorin_futterhandel_kornscheune_ronald_kuter",
+      "name": "Futterhandel Kornscheune Ronald Küter",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "chorin_hof_langanke",
+      "name": "Hof Langanke",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "chorin_spilwut",
+      "name": "Spilwut",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "chorin_plagefenn",
+      "name": "Plagefenn",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "chorin_planetenweg",
+      "name": "Planetenweg",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "chorin_kleiner_rummelsberg",
+      "name": "Kleiner Rummelsberg",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "chorin_ragoser_schleuse",
+      "name": "Ragöser Schleuse",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "chorin_aussichtspunkt",
+      "name": "Aussichtspunkt",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 1,
+      "had_approaches": 1
+    },
+    {
+      "id": "chorin_besucher_und_informationszentrum_geopark_gross_ziethen",
+      "name": "Besucher- und Informationszentrum Geopark Groß Ziethen",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "chorin_britz_chorin_oderberg",
+      "name": "Britz-Chorin-Oderberg",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "chorin_okohof_engler",
+      "name": "Ökohof Engler",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    }
+  ]
+}

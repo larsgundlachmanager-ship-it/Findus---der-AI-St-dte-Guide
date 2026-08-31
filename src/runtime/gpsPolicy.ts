@@ -1,13 +1,16 @@
 /**
- * Adaptive GPS polling — bike vs foot, density, speed.
- * No hardcoded trigger examples; purely kinematic + proximity heuristics.
+ * Adaptive GPS polling — Speed-Leiter (gpsCadence) + Trigger-Skip.
  */
 
 import type { GpsPollPolicy, GpsSample } from './types';
+import {
+  gpsCadenceReason,
+  gpsIntervalMsForSpeedMs,
+  kmhFromSpeedMs,
+} from './gpsCadence';
 
 const MS_WALK = 1.25;
 const MS_BIKE = 4.5;
-const MS_FAST = 8.0;
 
 export type GpsPolicyInput = {
   sample: GpsSample;
@@ -17,38 +20,15 @@ export type GpsPolicyInput = {
 };
 
 /**
- * Far from triggers on bike → slow poll (30s).
- * Tight alleys / fast / near trigger → 1s.
- * Normal foot → 3–5s.
+ * GPS-Intervall nur nach Tempo. Distanz zum POI darf nicht 15–30 s erzwingen.
  */
 export function resolveGpsPollPolicy(input: GpsPolicyInput): GpsPollPolicy {
   const speed = Math.max(0, input.sample.speedMs ?? 0);
-  const dist = input.nearestTriggerDistM;
-  const bike =
-    input.transportMode === 'bicycle' || speed >= MS_BIKE * 0.85;
-  const veryFast = speed >= MS_FAST;
-  const near = dist != null && dist <= 100;
-  const tight = input.tightUrbanHint === true || (near && speed < MS_WALK * 2);
-
-  if (bike && dist != null && dist > 100 && !tight) {
-    return { intervalMs: 30_000, reason: 'bike_open_100m_plus' };
-  }
-  if (veryFast && dist != null && dist < 40) {
-    return {
-      intervalMs: 1_000,
-      reason: 'fast_pass_through_may_skip_trigger',
-    };
-  }
-  if (tight || near) {
-    return { intervalMs: 1_000, reason: 'tight_or_near_trigger' };
-  }
-  if (bike) {
-    return { intervalMs: 1_000, reason: 'bike_active' };
-  }
-  if (speed <= MS_WALK * 0.3) {
-    return { intervalMs: 5_000, reason: 'foot_slow' };
-  }
-  return { intervalMs: 3_500, reason: 'foot_normal' };
+  const kmh = kmhFromSpeedMs(speed);
+  return {
+    intervalMs: gpsIntervalMsForSpeedMs(speed),
+    reason: gpsCadenceReason(kmh),
+  };
 }
 
 /**

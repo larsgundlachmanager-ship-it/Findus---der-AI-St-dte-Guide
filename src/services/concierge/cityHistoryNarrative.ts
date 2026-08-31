@@ -5,11 +5,10 @@
  * Nachfrage klein ~1500 · mittel ~2222 · groß max 3000
  * Nie mehr als 3000 Zeichen ausgeben.
  *
- * Orts-/Bahnhof-Historie → placeHistoryNarrative.ts (nicht hier).
+ * Orts-Historie (Bahnhof/Kirche) läuft über den normalen Concierge/M1-Pfad.
  */
 
 import { generateGeminiText, hasGeminiApiKey } from '../geminiService';
-import { isDeviceOffline } from '../navigation/networkState';
 import { getCachedUserProfile } from '../userProfileService';
 import type { GeminiConciergeResponse } from '../../types/concierge';
 import { shortenActionLabel } from './actionLabelShorten';
@@ -29,7 +28,7 @@ const MORE_RE =
 const SHORT_RE =
   /\b(kurz|knapp|in\s+zwei\s+sätzen|zusammenfassung)\b/iu;
 
-/** Orts-Historie (Bahnhof/Kirche…) — wird in placeHistoryNarrative behandelt. */
+/** Orts-Historie (Bahnhof/Kirche) — nicht als Stadt-Chronik routen. */
 const PLACE_SCOPED_HISTORY_RE =
   /\b(geschichte|historie|historisch|früher|eröffnet|gebaut).{0,50}\b(bahnhof|haltepunkt|güterbahn|gueterbahn|wartehäuschen|wartehaeuschen|kirche|museum|schloss)\b|\b(bahnhof|haltepunkt|güterbahn|kirche|museum).{0,50}\b(geschichte|historie|früher|eröffnet|gebaut)\b/iu;
 
@@ -133,8 +132,7 @@ export async function runCityHistoryNarrative(opts: {
     .filter(Boolean)
     .join('\n');
 
-  const offline = await isDeviceOffline();
-  if (offline || !hasGeminiApiKey()) {
+  if (!hasGeminiApiKey()) {
     const bullets = extractHistoryFactBullets(
       '',
       opts.factBlock,

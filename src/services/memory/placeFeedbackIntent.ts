@@ -6,6 +6,7 @@ import { useUserMemoryStore } from '../../store/useUserMemoryStore';
 import { useFinnusStore } from '../../store/useFinnusStore';
 import { getCachedUserProfile } from '../userProfileService';
 import { pushCommunityPlaceFeedback } from './communityPlaceFeedback';
+import { contributeErrorAvoidSignal } from './collectiveLearning';
 
 export type PlaceFeedback = {
   placeName: string;
@@ -151,7 +152,16 @@ export function capturePlaceFeedback(text: string): PlaceFeedback | null {
       .find((e) =>
         e.name.toLowerCase().includes(fb.placeName.toLowerCase()),
       );
-    if (hotel) mem.confirmEntity(hotel.id);
+    if (hotel) {
+      mem.confirmEntity(hotel.id);
+      void import('./hotelBasePresence').then((m) =>
+        m.applyConfirmedHotelAsDayBase({
+          name: hotel.name,
+          lat: hotel.lat,
+          lng: hotel.lng,
+        }),
+      );
+    }
   }
 
   const city =
@@ -169,6 +179,21 @@ export function capturePlaceFeedback(text: string): PlaceFeedback | null {
     tipText: fb.tipText,
     dishMention: fb.dishMention,
   });
+
+  // Negativ → Crowd-Avoid für alle (Auto ab ≥3 Contributors; Key stabil = Ortsname)
+  if (fb.sentiment < 0) {
+    const family =
+      fb.placeType === 'hotel'
+        ? 'accommodation'
+        : fb.placeType === 'restaurant'
+          ? 'dining'
+          : 'sight';
+    void contributeErrorAvoidSignal({
+      intentFamily: family,
+      avoid: [fb.placeName.toLowerCase()],
+      summary: `Negativ-Feedback: ${fb.placeName}`.slice(0, 160),
+    });
+  }
 
   return { ...fb, savedLocally: true };
 }

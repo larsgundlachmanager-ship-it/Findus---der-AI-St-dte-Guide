@@ -1,6 +1,7 @@
 /**
- * Modul-2: lokale Pack-Fakten (SQLite) zu einem Subject / Ortsnamen.
- * Pack zuerst für stabile Fakten; Live-Hints markieren ephemeral Nachsuche.
+ * Modul-2: lokale Pack-Fakten zu einem Subject / Ortsnamen.
+ * Active city → SQLite; any other downloaded city → cities/<id>.json cache.
+ * Modul 1 triggers stay SQLite-only; this path is for Q&A / concierge.
  */
 
 import { getAllPois, getFactsForPoi, haversineMeters } from '../../db/database';
@@ -11,6 +12,7 @@ import {
   lookupOfflineQa,
 } from '../../services/research/offlineQaRegistry';
 import { isDeicticPoiQuestion } from '../../services/intent/poiInfoVsNav';
+import { isQuickLookupQuery } from '../../services/concierge/celestialSkyQuery';
 
 const PREFIX_RE =
   /^\[(Kurzfakt|Erzählung|Detail|FAQ|Teaser|Hook|Narration|CTA|Thema:[^\]]+)\]\s*/iu;
@@ -25,6 +27,9 @@ const CATEGORY_QUERY_RE: Array<{ re: RegExp; category: string }> = [
   { re: /\b(golf)\b/i, category: 'golf' },
   { re: /\b(kino|theater|konzert)\b/i, category: 'kino' },
   { re: /\b(tankstelle|benzin)\b/i, category: 'tankstelle' },
+  { re: /\b(packstation|paketautomat|parcel.?locker)\b/i, category: 'packstation' },
+  { re: /\b(briefkasten|postkasten|post_box|mailbox)\b/i, category: 'briefkasten' },
+  { re: /\b(postfiliale|post\s*filiale)\b/i, category: 'post' },
   { re: /\b(wandern|wanderweg|wanderung|lehrpfad|uferweg|naturpfad|trail)\b/i, category: 'wanderung' },
   { re: /\b(fahrradweg|radweg|radroute|radtour|fernradweg|veloroute|radeln)\b/i, category: 'radweg' },
   { re: /\b(naturschutz|park|natur)\b/i, category: 'natur' },
@@ -82,10 +87,21 @@ function nameScore(poiName: string, subject: string): number {
   if (a === b) return 100;
   if (a.includes(b) || b.includes(a)) return 70;
   const at = a.split(/[^a-zäöüß0-9]+/i).filter((t) => t.length > 2);
-  const bt = b.split(/[^a-zäöüß0-9]+/i).filter((t) => t.length > 2);
+  const bt = b
+    .split(/[^a-zäöüß0-9]+/i)
+    .filter((t) => t.length > 2)
+    // Frage-/Füllwörter nicht als Match-Tokens
+    .filter(
+      (t) =>
+        !/^(was|ist|das|der|die|dem|den|ein|eine|und|oder|hier|dort|bitte|mich|zum|zur|von|aus|in|im|am|an|bei|mit|für|fuer|über|ueber|wo|gibt|naechste|nächste|naechster|nächster|naechsten|nächsten|nahe|nahes|nächstes)$/i.test(
+          t,
+        ),
+    );
   let hit = 0;
   for (const t of bt) if (at.some((x) => x.includes(t) || t.includes(x))) hit += 1;
   if (!bt.length) return 0;
+  // Einzel-Token-Treffer wie „DRK“ stark belohnen
+  if (bt.length === 1 && hit === 1) return 90;
   return Math.round((hit / bt.length) * 50);
 }
 
@@ -121,6 +137,72 @@ async function factsForPoiId(
  * Findet den besten Pack-POI zum Subject und liefert stabile Fakten + Live-Hints.
  * Zusätzlich: Kategorie-Directory und `_offline_qa`.
  */
+async function hitFromCachedPack(
+  cityId: string,
+  query: string,
+  limit: number,
+  offlineQaBlock: string,
+): Promise<PackFactHit | null> {
+  try {
+    const {
+      loadCachedPackFacts,
+      lookupPlaceInCachedPack,
+    } = await import('../../services/navigation/packPlaceResolve');
+    const factsHit = await loadCachedPackFacts(cityId, query, limit);
+    if (factsHit && factsHit.facts.length) {
+      return {
+        poi: {
+          id: -1,
+          name: factsHit.name,
+          lat: factsHit.lat,
+          lng: factsHit.lng,
+          radius_meters: 80,
+        },
+        facts: factsHit.facts,
+        liveHints: [],
+        score: 85,
+        offlineQaBlock: offlineQaBlock || undefined,
+      };
+    }
+    const place = await lookupPlaceInCachedPack(cityId, query);
+    if (place) {
+      return {
+        poi: {
+          id: -1,
+          name: place.name,
+          lat: place.lat,
+          lng: place.lng,
+          radius_meters: 80,
+        },
+        facts: [
+          `Ort aus heruntergeladenem Stadt-Pack „${cityId}“ (nicht die aktive Modul-1-Stadt).`,
+        ],
+        liveHints: [],
+        score: 70,
+        offlineQaBlock: offlineQaBlock || undefined,
+      };
+    }
+  } catch {
+    /* soft */
+  }
+  return null;
+}
+
+function activePackCityId(): string | null {
+  try {
+    const { getCachedUserProfile } = require('../../services/userProfileService') as {
+      getCachedUserProfile: () => { cityId?: string | null } | null;
+    };
+    const id = String(getCachedUserProfile()?.cityId || '')
+      .trim()
+      .toLowerCase();
+    if (!id || /^soft_/i.test(id)) return null;
+    return id;
+  } catch {
+    return null;
+  }
+}
+
 export async function lookupPackFactsForSubject(opts: {
   subject: string;
   cityHint?: string | null;
@@ -131,50 +213,102 @@ export async function lookupPackFactsForSubject(opts: {
   const subject = (opts.subject || '').trim();
   if (subject.length < 2) return null;
 
-  const offlineQa = lookupOfflineQa(subject, 4);
+  const worldQ = isQuickLookupQuery(subject);
+  const offlineQa = worldQ ? [] : lookupOfflineQa(subject, 4);
   const offlineQaBlock = formatOfflineQaForAgent(offlineQa);
+  const limit = opts.limitFacts ?? 12;
+
+  // Prefer a named / non-active downloaded city before active SQLite.
+  let preferredCityId: string | null = null;
+  try {
+    const {
+      canonicalizeLandmarkQuery,
+      resolveCachedCityIdFromHint,
+    } = await import('../../services/navigation/packPlaceResolve') as {
+      canonicalizeLandmarkQuery: (s: string) => {
+        query: string;
+        preferredCityId: string | null;
+      };
+      resolveCachedCityIdFromHint: (
+        h: string | null | undefined,
+      ) => Promise<string | null>;
+    };
+    const canon = canonicalizeLandmarkQuery(subject);
+    preferredCityId =
+      canon.preferredCityId ||
+      (await resolveCachedCityIdFromHint(opts.cityHint)) ||
+      (await resolveCachedCityIdFromHint(canon.query));
+  } catch {
+    preferredCityId = null;
+  }
+  const activeId = activePackCityId();
+  const foreignPreferred =
+    Boolean(preferredCityId) &&
+    Boolean(activeId) &&
+    preferredCityId !== activeId;
+
+  if (preferredCityId && (foreignPreferred || !activeId)) {
+    const foreign = await hitFromCachedPack(
+      preferredCityId,
+      subject,
+      limit,
+      offlineQaBlock,
+    );
+    if (foreign) return foreign;
+  }
 
   let pois: Poi[] = [];
   try {
-    pois = await getAllPois();
+    // Skip SQLite when the user clearly asked about another downloaded city.
+    if (!foreignPreferred) {
+      pois = await getAllPois();
+    }
   } catch {
-    if (offlineQaBlock) {
-      return {
-        poi: {
-          id: 0,
-          name: 'Offline-Q&A',
-          lat: opts.lat ?? 0,
-          lng: opts.lng ?? 0,
-          radius_meters: 0,
-        },
-        facts: offlineQa.map((e) => `${e.q} → ${e.a}`),
-        liveHints: [],
-        score: 40,
-        offlineQaBlock,
-      };
-    }
     return null;
   }
+  // Empty SQLite (foreign city asked, or no active pack) → cached-pack fallback below.
   if (!pois.length) {
-    if (offlineQaBlock) {
-      return {
-        poi: {
-          id: 0,
-          name: 'Offline-Q&A',
-          lat: opts.lat ?? 0,
-          lng: opts.lng ?? 0,
-          radius_meters: 0,
-        },
-        facts: offlineQa.map((e) => `${e.q} → ${e.a}`),
-        liveHints: [],
-        score: 40,
-        offlineQaBlock,
+    try {
+      const {
+        canonicalizeLandmarkQuery,
+        listCachedCityPackIds,
+        resolveCachedCityIdFromHint,
+      } = await import('../../services/navigation/packPlaceResolve') as {
+        canonicalizeLandmarkQuery: (s: string) => {
+          query: string;
+          preferredCityId: string | null;
+        };
+        listCachedCityPackIds: () => Promise<string[]>;
+        resolveCachedCityIdFromHint: (
+          h: string | null | undefined,
+        ) => Promise<string | null>;
       };
+      const canon = canonicalizeLandmarkQuery(subject);
+      const preferred =
+        preferredCityId ||
+        canon.preferredCityId ||
+        (await resolveCachedCityIdFromHint(opts.cityHint));
+      const ids = await listCachedCityPackIds();
+      const order = preferred
+        ? [preferred, ...ids.filter((i) => i !== preferred)]
+        : ids;
+      for (const cityId of order) {
+        const hit = await hitFromCachedPack(
+          cityId,
+          canon.query || subject,
+          limit,
+          offlineQaBlock,
+        );
+        if (hit) return hit;
+      }
+    } catch {
+      /* soft */
+    }
+    if (offlineQaBlock) {
+      return null;
     }
     return null;
   }
-
-  const limit = opts.limitFacts ?? 14;
 
   // „Was ist das?“ → nächste Pack-POIs (nicht Namenssuche, nicht Google)
   if (
@@ -224,6 +358,13 @@ export async function lookupPackFactsForSubject(opts: {
 
   const catHit = CATEGORY_QUERY_RE.find((c) => c.re.test(subject));
   if (catHit) {
+    const origin =
+      opts.lat != null &&
+      opts.lng != null &&
+      Number.isFinite(opts.lat) &&
+      Number.isFinite(opts.lng)
+        ? { lat: opts.lat, lng: opts.lng }
+        : null;
     const peers = pois
       .filter((p) => p.kind !== 'approach' && p.kind !== 'sub')
       .filter((p) => {
@@ -233,6 +374,13 @@ export async function lookupPackFactsForSubject(opts: {
           cat === catHit.category ||
           tags.includes(catHit.category) ||
           catHit.re.test(`${p.name} ${cat}`)
+        );
+      })
+      .sort((a, b) => {
+        if (!origin) return 0;
+        return (
+          haversineMeters(origin.lat, origin.lng, a.lat, a.lng) -
+          haversineMeters(origin.lat, origin.lng, b.lat, b.lng)
         );
       })
       .slice(0, 10);
@@ -260,7 +408,7 @@ export async function lookupPackFactsForSubject(opts: {
   for (const poi of pois) {
     if (poi.kind === 'approach') continue;
     let score = nameScore(poi.name, subject);
-    if (score < 25) continue;
+    if (score < 48) continue;
     if (opts.lat != null && opts.lng != null) {
       const d = haversineMeters(opts.lat, opts.lng, poi.lat, poi.lng);
       score += Math.max(0, 15 - Math.min(15, Math.floor(d / 400)));
@@ -269,22 +417,46 @@ export async function lookupPackFactsForSubject(opts: {
   }
   ranked.sort((a, b) => b.score - a.score);
   const best = ranked[0];
-  if ((!best || best.score < 30) && offlineQaBlock) {
-    return {
-      poi: {
-        id: 0,
-        name: 'Offline-Q&A',
-        lat: opts.lat ?? 0,
-        lng: opts.lng ?? 0,
-        radius_meters: 0,
-      },
-      facts: offlineQa.map((e) => `${e.q} → ${e.a}`),
-      liveHints: [],
-      score: 40,
-      offlineQaBlock,
-    };
+  if (!best || best.score < 48) {
+    // Any downloaded pack (active city may already be covered by SQLite above)
+    try {
+      const {
+        canonicalizeLandmarkQuery,
+        listCachedCityPackIds,
+        resolveCachedCityIdFromHint,
+      } = await import('../../services/navigation/packPlaceResolve') as {
+        canonicalizeLandmarkQuery: (s: string) => {
+          query: string;
+          preferredCityId: string | null;
+        };
+        listCachedCityPackIds: () => Promise<string[]>;
+        resolveCachedCityIdFromHint: (
+          h: string | null | undefined,
+        ) => Promise<string | null>;
+      };
+      const canon = canonicalizeLandmarkQuery(subject);
+      const preferred =
+        canon.preferredCityId ||
+        (await resolveCachedCityIdFromHint(opts.cityHint)) ||
+        preferredCityId;
+      const ids = await listCachedCityPackIds();
+      const order = preferred
+        ? [preferred, ...ids.filter((i) => i !== preferred)]
+        : ids;
+      for (const cityId of order) {
+        const hit = await hitFromCachedPack(
+          cityId,
+          canon.query || subject,
+          limit,
+          offlineQaBlock,
+        );
+        if (hit) return hit;
+      }
+    } catch {
+      /* soft */
+    }
+    return null;
   }
-  if (!best || best.score < 30) return null;
 
   const { facts, liveHints } = await factsForPoiId(best.poi.id, limit);
 

@@ -1,19 +1,21 @@
 /**
  * Persistente API-Kosten: gesamt seit Installation, heute, letzte & aktuelle Session.
+ * Tester-Anzeige = konservative Listenpreise (Obergrenze).
  */
 
 import * as FileSystem from 'expo-file-system';
 import { AppState, type NativeEventSubscription } from 'react-native';
+import {
+  COST_MODULE_LABELS,
+  geminiEur,
+  mapsEur,
+  ttsEur,
+  type CostModuleId,
+  type GeminiCostTier,
+} from './costRates';
 
 const STORAGE_PATH = `${FileSystem.documentDirectory}api-cost-ledger-v1.json`;
-
-/** Gemini Flash-Lite ≈ €0.10 / 1M input, €0.40 / 1M output. */
-const GEMINI_IN_PER_M = 0.1;
-const GEMINI_OUT_PER_M = 0.4;
-/** Maps Places/Directions ≈ €0.008 / Call. */
-const MAPS_PER_CALL = 0.008;
-/** Cartesia sonic-3.5 ≈ €0.009 / 1k chars. */
-const TTS_CLOUD_PER_1K = 0.009;
+const MAX_EVENTS = 80;
 
 export type UsageBucket = {
   requests: number;
@@ -26,6 +28,8 @@ export type CostBreakdown = {
   mapsEur: number;
   ttsEur: number;
   totalEur: number;
+  conservativeEur: number;
+  efficientEur: number;
 };
 
 export type UsageCostSlice = {
@@ -37,13 +41,21 @@ export type UsageCostSlice = {
   endedAt?: string;
 };
 
-export type CostOverview = {
-  installedAt: string;
-  lifetime: UsageCostSlice;
-  today: UsageCostSlice & { day: string };
-  lastSession: UsageCostSlice;
-  currentSession: UsageCostSlice & { startedAtMs: number };
-  todayReasons: TodayCostReason[];
+export type CostModuleSlice = {
+  id: CostModuleId;
+  label: string;
+  requests: number;
+  conservativeEur: number;
+};
+
+export type CostEvent = {
+  atMs: number;
+  module: CostModuleId;
+  kind: 'gemini' | 'maps' | 'tts';
+  label: string;
+  conservativeEur: number;
+  charsIn: number;
+  charsOut: number;
 };
 
 export type TodayCostReason = {
@@ -51,6 +63,28 @@ export type TodayCostReason = {
   detail: string;
   eur: number;
 };
+
+export type CostOverview = {
+  installedAt: string;
+  lifetime: UsageCostSlice;
+  today: UsageCostSlice & { day: string };
+  lastSession: UsageCostSlice;
+  currentSession: UsageCostSlice & { startedAtMs: number };
+  todayReasons: TodayCostReason[];
+  todayModules: CostModuleSlice[];
+  sessionModules: CostModuleSlice[];
+  lastSessionModules: CostModuleSlice[];
+  lifetimeModules: CostModuleSlice[];
+  recentEvents: CostEvent[];
+};
+
+export type LedgerTrackMeta = {
+  module?: CostModuleId;
+  label?: string;
+  geminiTier?: GeminiCostTier;
+};
+
+type ModuleCounts = Record<CostModuleId, { requests: number; conservativeEur: number }>;
 
 type PersistedLedger = {
   installedAt: string;
@@ -61,17 +95,54 @@ type PersistedLedger = {
   todayGemini: UsageBucket;
   todayMaps: UsageBucket;
   todayTts: UsageBucket;
+  todayModules: ModuleCounts;
+  lifetimeModules: ModuleCounts;
   lastSession: {
     endedAt: string;
     durationMin: number;
     gemini: UsageBucket;
     maps: UsageBucket;
     tts: UsageBucket;
+    modules?: ModuleCounts;
   } | null;
+  recentEvents?: CostEvent[];
 };
+
+const MODULE_IDS: CostModuleId[] = [
+  'nav',
+  'research',
+  'concierge',
+  'story',
+  'followup',
+  'tts',
+  'maps',
+  'other',
+];
 
 function emptyBucket(): UsageBucket {
   return { requests: 0, charsIn: 0, charsOut: 0 };
+}
+
+function emptyModules(): ModuleCounts {
+  const out = {} as ModuleCounts;
+  for (const id of MODULE_IDS) {
+    out[id] = { requests: 0, conservativeEur: 0 };
+  }
+  return out;
+}
+
+function mergeModules(raw?: Partial<ModuleCounts> | null): ModuleCounts {
+  const base = emptyModules();
+  if (!raw) return base;
+  for (const id of MODULE_IDS) {
+    const row = raw[id];
+    if (!row) continue;
+    base[id] = {
+      requests: Math.max(0, Number(row.requests) || 0),
+      conservativeEur: Math.max(0, Number(row.conservativeEur) || 0),
+    };
+  }
+  return base;
 }
 
 function localDayKey(d = new Date()): string {
@@ -86,16 +157,19 @@ function calcBreakdown(
   maps: UsageBucket,
   tts: UsageBucket,
 ): CostBreakdown {
-  const geminiEur =
-    (gemini.charsIn / 1_000_000) * GEMINI_IN_PER_M +
-    (gemini.charsOut / 1_000_000) * GEMINI_OUT_PER_M;
-  const mapsEur = maps.requests * MAPS_PER_CALL;
-  const ttsEur = (tts.charsOut / 1000) * TTS_CLOUD_PER_1K;
+  const geminiCons = geminiEur(gemini.charsIn, gemini.charsOut, 'conservative');
+  const geminiEff = geminiEur(gemini.charsIn, gemini.charsOut, 'efficient');
+  const mapsCons = mapsEur(maps.requests, 'conservative');
+  const mapsEff = mapsEur(maps.requests, 'efficient');
+  const ttsCons = ttsEur(tts.charsOut, 'conservative');
+  const ttsEff = ttsEur(tts.charsOut, 'efficient');
   return {
-    geminiEur,
-    mapsEur,
-    ttsEur,
-    totalEur: geminiEur + mapsEur + ttsEur,
+    geminiEur: geminiCons,
+    mapsEur: mapsCons,
+    ttsEur: ttsCons,
+    totalEur: geminiCons + mapsCons + ttsCons,
+    conservativeEur: geminiCons + mapsCons + ttsCons,
+    efficientEur: geminiEff + mapsEff + ttsEff,
   };
 }
 
@@ -114,6 +188,17 @@ function sliceFrom(
   };
 }
 
+function modulesToSlices(mods: ModuleCounts): CostModuleSlice[] {
+  return MODULE_IDS.map((id) => ({
+    id,
+    label: COST_MODULE_LABELS[id],
+    requests: mods[id]?.requests ?? 0,
+    conservativeEur: mods[id]?.conservativeEur ?? 0,
+  }))
+    .filter((m) => m.requests > 0 || m.conservativeEur > 0.00005)
+    .sort((a, b) => b.conservativeEur - a.conservativeEur);
+}
+
 const persisted: PersistedLedger = {
   installedAt: new Date().toISOString(),
   lifetime: emptyBucket(),
@@ -123,6 +208,8 @@ const persisted: PersistedLedger = {
   todayGemini: emptyBucket(),
   todayMaps: emptyBucket(),
   todayTts: emptyBucket(),
+  todayModules: emptyModules(),
+  lifetimeModules: emptyModules(),
   lastSession: null,
 };
 
@@ -131,7 +218,10 @@ const session = {
   gemini: emptyBucket(),
   maps: emptyBucket(),
   tts: emptyBucket(),
+  modules: emptyModules(),
 };
+
+const recentEvents: CostEvent[] = [];
 
 let hydrated = false;
 let hydratePromise: Promise<void> | null = null;
@@ -145,6 +235,7 @@ function ensureToday(): void {
     persisted.todayGemini = emptyBucket();
     persisted.todayMaps = emptyBucket();
     persisted.todayTts = emptyBucket();
+    persisted.todayModules = emptyModules();
   }
 }
 
@@ -152,6 +243,13 @@ function bumpBucket(bucket: UsageBucket, charsIn: number, charsOut: number): voi
   bucket.requests += 1;
   bucket.charsIn += Math.max(0, charsIn);
   bucket.charsOut += Math.max(0, charsOut);
+}
+
+function bumpModule(mods: ModuleCounts, id: CostModuleId, eur: number): void {
+  const row = mods[id] ?? { requests: 0, conservativeEur: 0 };
+  row.requests += 1;
+  row.conservativeEur += Math.max(0, eur);
+  mods[id] = row;
 }
 
 async function hydrate(): Promise<void> {
@@ -172,7 +270,16 @@ async function hydrate(): Promise<void> {
           persisted.todayGemini = parsed.todayGemini ?? emptyBucket();
           persisted.todayMaps = parsed.todayMaps ?? emptyBucket();
           persisted.todayTts = parsed.todayTts ?? emptyBucket();
+          persisted.todayModules = mergeModules(parsed.todayModules);
+          persisted.lifetimeModules = mergeModules(parsed.lifetimeModules);
           persisted.lastSession = parsed.lastSession ?? null;
+          if (Array.isArray(parsed.recentEvents)) {
+            recentEvents.length = 0;
+            for (const ev of parsed.recentEvents.slice(0, MAX_EVENTS)) {
+              if (!ev || typeof ev !== 'object') continue;
+              recentEvents.push(ev as CostEvent);
+            }
+          }
         }
       }
     } catch {
@@ -196,13 +303,35 @@ function schedulePersist(): void {
   }, 400);
 }
 
+function conservativeFor(
+  kind: 'gemini' | 'maps' | 'tts',
+  charsIn: number,
+  charsOut: number,
+  geminiTier: GeminiCostTier = 'lite',
+): number {
+  if (kind === 'gemini') {
+    return geminiEur(charsIn, charsOut, 'conservative', geminiTier);
+  }
+  if (kind === 'maps') return mapsEur(1, 'conservative');
+  return ttsEur(charsOut, 'conservative');
+}
+
+function defaultModule(kind: 'gemini' | 'maps' | 'tts'): CostModuleId {
+  if (kind === 'maps') return 'maps';
+  if (kind === 'tts') return 'tts';
+  return 'other';
+}
+
 function recordUsage(
   kind: 'gemini' | 'maps' | 'tts',
   charsIn: number,
   charsOut: number,
+  meta?: LedgerTrackMeta,
 ): void {
   ensureToday();
   const bump = (b: UsageBucket) => bumpBucket(b, charsIn, charsOut);
+  const module = meta?.module ?? defaultModule(kind);
+  const eur = conservativeFor(kind, charsIn, charsOut, meta?.geminiTier);
 
   if (kind === 'gemini') {
     bump(session.gemini);
@@ -217,6 +346,23 @@ function recordUsage(
     bump(persisted.ttsLifetime);
     bump(persisted.todayTts);
   }
+
+  bumpModule(session.modules, module, eur);
+  bumpModule(persisted.todayModules, module, eur);
+  bumpModule(persisted.lifetimeModules, module, eur);
+
+  recentEvents.unshift({
+    atMs: Date.now(),
+    module,
+    kind,
+    label: (meta?.label || COST_MODULE_LABELS[module]).slice(0, 80),
+    conservativeEur: eur,
+    charsIn: Math.max(0, charsIn),
+    charsOut: Math.max(0, charsOut),
+  });
+  if (recentEvents.length > MAX_EVENTS) recentEvents.length = MAX_EVENTS;
+  persisted.recentEvents = recentEvents.slice(0, 40);
+
   schedulePersist();
   void hydrate();
 }
@@ -228,6 +374,9 @@ export function bootstrapApiCostLedger(): () => void {
     appStateSub = AppState.addEventListener('change', (next) => {
       if (next === 'background' || next === 'inactive') {
         finalizeCurrentSession();
+        void import('./deviceCostUpload')
+          .then((m) => m.uploadDeviceCostDay())
+          .catch(() => undefined);
       }
     });
   }
@@ -238,20 +387,28 @@ export function bootstrapApiCostLedger(): () => void {
   };
 }
 
-export function trackLedgerGemini(charsIn: number, charsOut: number): void {
-  recordUsage('gemini', charsIn, charsOut);
+export function trackLedgerGemini(
+  charsIn: number,
+  charsOut: number,
+  meta?: LedgerTrackMeta,
+): void {
+  recordUsage('gemini', charsIn, charsOut, meta);
 }
 
-export function trackLedgerMaps(label = 'maps'): void {
-  recordUsage('maps', label.length, 0);
+export function trackLedgerMaps(label = 'maps', module: CostModuleId = 'maps'): void {
+  recordUsage('maps', label.length, 0, { module, label });
 }
 
-export function trackLedgerTts(chars: number, cloud = false): void {
+export function trackLedgerTts(
+  chars: number,
+  cloud = false,
+  meta?: LedgerTrackMeta,
+): void {
   if (!cloud) {
-    recordUsage('tts', chars, 0);
+    recordUsage('tts', chars, 0, { ...meta, module: meta?.module ?? 'tts' });
     return;
   }
-  recordUsage('tts', chars, chars);
+  recordUsage('tts', chars, chars, { ...meta, module: meta?.module ?? 'tts' });
 }
 
 export function finalizeCurrentSession(): void {
@@ -260,10 +417,7 @@ export function finalizeCurrentSession(): void {
     Math.round((Date.now() - session.startedAtMs) / 60_000),
   );
   const hasUsage =
-    session.gemini.requests +
-      session.maps.requests +
-      session.tts.requests >
-    0;
+    session.gemini.requests + session.maps.requests + session.tts.requests > 0;
   if (!hasUsage) return;
 
   persisted.lastSession = {
@@ -272,6 +426,7 @@ export function finalizeCurrentSession(): void {
     gemini: { ...session.gemini },
     maps: { ...session.maps },
     tts: { ...session.tts },
+    modules: { ...session.modules },
   };
   schedulePersist();
 }
@@ -283,21 +438,21 @@ function buildTodayReasons(today: UsageCostSlice): TodayCostReason[] {
   if (breakdown.geminiEur >= 0.0001) {
     reasons.push({
       label: 'Gemini (KI)',
-      detail: `${gemini.requests} Anfragen · ${gemini.charsIn.toLocaleString('de-DE')} Zeichen rein · ${gemini.charsOut.toLocaleString('de-DE')} raus — Stories, Antworten, Concierge`,
+      detail: `${gemini.requests} Anfragen · ${gemini.charsIn.toLocaleString('de-DE')} Zeichen rein · ${gemini.charsOut.toLocaleString('de-DE')} raus — Obergrenze Pro-Listenpreis`,
       eur: breakdown.geminiEur,
     });
   }
   if (breakdown.mapsEur >= 0.0001) {
     reasons.push({
       label: 'Google Maps',
-      detail: `${maps.requests} API-Calls — Navigation, Orte, Geocoding`,
+      detail: `${maps.requests} API-Calls — Places / Directions / Geocode (OSM zählt nicht)`,
       eur: breakdown.mapsEur,
     });
   }
   if (breakdown.ttsEur >= 0.0001) {
     reasons.push({
       label: 'Cartesia (TTS)',
-      detail: `${tts.requests} Sprachausgaben · ${tts.charsOut.toLocaleString('de-DE')} Zeichen — Findus-Stimme live`,
+      detail: `${tts.requests} Cloud-Calls · ${tts.charsOut.toLocaleString('de-DE')} Zeichen — nur echte Synthese, Cache ist gratis`,
       eur: breakdown.ttsEur,
     });
   }
@@ -321,11 +476,7 @@ export function getCostOverview(): CostOverview {
   );
   const today = {
     day: persisted.todayDay,
-    ...sliceFrom(
-      persisted.todayGemini,
-      persisted.todayMaps,
-      persisted.todayTts,
-    ),
+    ...sliceFrom(persisted.todayGemini, persisted.todayMaps, persisted.todayTts),
   };
   const lastSession = persisted.lastSession
     ? sliceFrom(
@@ -358,6 +509,13 @@ export function getCostOverview(): CostOverview {
     lastSession,
     currentSession,
     todayReasons: buildTodayReasons(today),
+    todayModules: modulesToSlices(persisted.todayModules),
+    sessionModules: modulesToSlices(session.modules),
+    lastSessionModules: modulesToSlices(
+      mergeModules(persisted.lastSession?.modules),
+    ),
+    lifetimeModules: modulesToSlices(persisted.lifetimeModules),
+    recentEvents: recentEvents.slice(0, 24),
   };
 }
 
@@ -366,11 +524,39 @@ export async function getCostOverviewAsync(): Promise<CostOverview> {
   return getCostOverview();
 }
 
+export function getTodayCostUploadPayload(): {
+  day: string;
+  conservativeEur: number;
+  efficientEur: number;
+  geminiRequests: number;
+  mapsRequests: number;
+  ttsChars: number;
+  modules: ModuleCounts;
+} {
+  ensureToday();
+  const today = sliceFrom(
+    persisted.todayGemini,
+    persisted.todayMaps,
+    persisted.todayTts,
+  );
+  return {
+    day: persisted.todayDay,
+    conservativeEur: today.breakdown.conservativeEur,
+    efficientEur: today.breakdown.efficientEur,
+    geminiRequests: persisted.todayGemini.requests,
+    mapsRequests: persisted.todayMaps.requests,
+    ttsChars: persisted.todayTts.charsOut,
+    modules: persisted.todayModules,
+  };
+}
+
 export function resetCurrentSessionUsage(): void {
   session.startedAtMs = Date.now();
   session.gemini = emptyBucket();
   session.maps = emptyBucket();
   session.tts = emptyBucket();
+  session.modules = emptyModules();
+  recentEvents.length = 0;
 }
 
 export async function resetAllCostLedger(): Promise<void> {
@@ -383,6 +569,8 @@ export async function resetAllCostLedger(): Promise<void> {
   persisted.todayGemini = emptyBucket();
   persisted.todayMaps = emptyBucket();
   persisted.todayTts = emptyBucket();
+  persisted.todayModules = emptyModules();
+  persisted.lifetimeModules = emptyModules();
   persisted.lastSession = null;
   resetCurrentSessionUsage();
   schedulePersist();

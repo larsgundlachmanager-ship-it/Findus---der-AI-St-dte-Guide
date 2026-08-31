@@ -1,0 +1,322 @@
+{
+  "city": "kiel",
+  "apply": true,
+  "touched": 39,
+  "approachesFixed": 39,
+  "faqAdded": 39,
+  "data_version": 15,
+  "rows": [
+    {
+      "id": "kiel_kiel_hauptbahnhof",
+      "name": "Kiel Hauptbahnhof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "kiel_seegarten",
+      "name": "Seegarten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "kiel_kreuzfahrtterminal_ostseekai",
+      "name": "Kreuzfahrtterminal Ostseekai",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "kiel_kiel_norwegenkai",
+      "name": "Kiel (Norwegenkai)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "kiel_zoologisches_museum_kiel",
+      "name": "Zoologisches Museum Kiel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "kiel_kieler_schifffahrtsmuseum_fischhalle",
+      "name": "Kieler Schifffahrtsmuseum Fischhalle",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "kiel_stadtmuseum_warleberger_hof",
+      "name": "Stadtmuseum Warleberger Hof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "kiel_aquarium_geomar",
+      "name": "Aquarium GEOMAR",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "kiel_schrevenpark",
+      "name": "Schrevenpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "kiel_fordeblick_park_an_der_kiellinie_b1",
+      "name": "Fördeblick Park an der Kiellinie B1",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "kiel_forstbaumschule",
+      "name": "Forstbaumschule",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "kiel_leuchtturm_kiel_holtenau",
+      "name": "Leuchtturm Kiel-Holtenau",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "kiel_rathausturm_kiel",
+      "name": "Rathausturm Kiel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "kiel_opernhaus_kiel_theater_kiel",
+      "name": "Opernhaus Kiel (Theater Kiel)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "kiel_nord_ostsee_kanal",
+      "name": "Nord-Ostsee-Kanal",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "kiel_kieler_forde",
+      "name": "Kieler Förde",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "kiel_alter_botanischer_garten",
+      "name": "Alter Botanischer Garten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "kiel_kunsthalle_zu_kiel",
+      "name": "Kunsthalle zu Kiel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "kiel_alter_markt",
+      "name": "Alter Markt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "kiel_theater_kiel_schauspielhaus",
+      "name": "Theater Kiel | Schauspielhaus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "kiel_museumshafen_kiel_e_v",
+      "name": "Museumshafen Kiel e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "kiel_nikolaikirche",
+      "name": "Nikolaikirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "kiel_stadt_und_schifffahrtsmuseum",
+      "name": "Stadt- und Schifffahrtsmuseum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "kiel_holstenstrasse",
+      "name": "Holstenstraße",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "kiel_bootshafen",
+      "name": "Bootshafen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "kiel_schwedenkai",
+      "name": "Schwedenkai",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "kiel_wunderino_arena",
+      "name": "Wunderino Arena",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "kiel_schleusen_holtenau",
+      "name": "Schleusen Holtenau",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "kiel_schlossgarten",
+      "name": "Schlossgarten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "kiel_hornbrucke",
+      "name": "Hörnbrücke",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "kiel_strand_falckenstein",
+      "name": "Strand Falckenstein",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "kiel_olympiazentrum_schilksee",
+      "name": "Olympiazentrum Schilksee",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "kiel_marine_ehrenmal_laboe",
+      "name": "Marine-Ehrenmal Laboe",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "kiel_u_boot_u_995_laboe",
+      "name": "U-Boot U-995 Laboe",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "kiel_heiligengeistkirche",
+      "name": "Heiligengeistkirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "kiel_anscharkirche",
+      "name": "Anscharkirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "kiel_moorteichwiese",
+      "name": "Moorteichwiese",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "kiel_blucherbrucke",
+      "name": "Blücherbrücke",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "kiel_reventloubrucke",
+      "name": "Reventloubrücke",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    }
+  ]
+}

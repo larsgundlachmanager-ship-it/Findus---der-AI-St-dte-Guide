@@ -131,7 +131,10 @@ export function FeedbackSection({ defaultUserName = '' }: Props) {
       setDesiredBehavior('');
       await refreshPendingCount();
       recordLastAction('feedback_saved_local');
-      Alert.alert('Gespeichert', 'Feedback lokal gesichert — bereit zum Upload.');
+      Alert.alert(
+        'Gespeichert',
+        'Feedback liegt auf diesem Gerät. Abends wird es automatisch in die Cloud gelegt — du musst nicht extra auf Upload drücken.',
+      );
     } catch (err) {
       Alert.alert(
         'Fehler',
@@ -173,8 +176,10 @@ export function FeedbackSection({ defaultUserName = '' }: Props) {
     <View style={styles.section}>
       <Text style={styles.title}>Feedback & Fehler melden</Text>
       <Text style={styles.hint}>
-        Hilf uns, Findus zu verbessern. Beschreibe das Problem — optional per
-        Mikro. Beim Upload werden die letzten 10 Minuten Telemetrie mitgeschickt.
+        Hilf uns, Yorro zu verbessern. Speichern reicht — nach 21 Uhr wird
+        ausstehendes Feedback automatisch hochgeladen (nicht ständig, nur
+        abends). Optional kannst du trotzdem sofort uploaden. Es gehen die
+        letzten 10 Minuten Telemetrie mit.
       </Text>
 
       <Text style={styles.label}>Dein Name</Text>
@@ -239,7 +244,7 @@ export function FeedbackSection({ defaultUserName = '' }: Props) {
       <Text style={styles.pendingLabel}>
         {pendingCount === 0
           ? 'Kein ausstehendes Feedback'
-          : `${pendingCount} Eintrag/Einträge bereit zum Upload`}
+          : `${pendingCount} Eintrag/Einträge lokal — Upload abends automatisch`}
       </Text>
 
       <View style={styles.actions}>

@@ -1,0 +1,2226 @@
+{
+  "city": "muenchen",
+  "apply": true,
+  "touched": 277,
+  "approachesFixed": 277,
+  "faqAdded": 0,
+  "data_version": 21,
+  "rows": [
+    {
+      "id": "muenchen_munchen_hauptbahnhof",
+      "name": "München Hauptbahnhof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_munchen_ost",
+      "name": "München Ost",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_marienplatz",
+      "name": "Marienplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_s_bahn_kundencenter_munchen_hbf",
+      "name": "S-Bahn Kundencenter München Hbf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_isartor",
+      "name": "Isartor",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_u_bahn_s_bahn_marienplatz",
+      "name": "U-Bahn / S-Bahn Marienplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_rosenheimer_platz",
+      "name": "Rosenheimer Platz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_hauptbahnhof_u_tram",
+      "name": "Hauptbahnhof (U, Tram)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_db_regio_ag_s_bahn_munchen",
+      "name": "DB Regio AG, S-Bahn München",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_st_martin_strasse",
+      "name": "St.-Martin-Straße",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_karlsplatz",
+      "name": "Karlsplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_hackerbrucke",
+      "name": "Hackerbrücke",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_s_bahn_kundencenter_munchen_ost",
+      "name": "S-Bahn Kundencenter München Ost",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_giesing",
+      "name": "Giesing",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_hauptbahnhof",
+      "name": "Hauptbahnhof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_donnersbergerbrucke",
+      "name": "Donnersbergerbrücke",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_s_bahn_munchen_werkstatt_steinhausen",
+      "name": "S-Bahn München, Werkstatt Steinhausen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_berg_am_laim",
+      "name": "Berg am Laim",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_hafen_urlrich",
+      "name": "Hafen Urlrich",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_ehemaliger_garchinger_hafen",
+      "name": "Ehemaliger Garchinger Hafen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_sendlinger_yachthafen",
+      "name": "Sendlinger Yachthafen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_deutsches_museum",
+      "name": "Deutsches Museum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_alte_pinakothek",
+      "name": "Alte Pinakothek",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_kunsthalle_munchen",
+      "name": "Kunsthalle München",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_pinakothek_der_moderne",
+      "name": "Pinakothek der Moderne",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_bayerisches_nationalmuseum",
+      "name": "Bayerisches Nationalmuseum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_haus_der_kunst",
+      "name": "Haus der Kunst",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_wow_museum_room_for_illusions_munchen",
+      "name": "WOW Museum – Room for Illusions München",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_bmw_museum",
+      "name": "BMW Museum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_staatliches_museum_agyptischer_kunst",
+      "name": "Staatliches Museum Ägyptischer Kunst",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_museum_brandhorst",
+      "name": "Museum Brandhorst",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_museum_funf_kontinente",
+      "name": "Museum Fünf Kontinente",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_muca_museum_of_urban_and_contemporary_art",
+      "name": "MUCA - Museum of Urban and Contemporary Art",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_munchner_stadtmuseum",
+      "name": "Münchner Stadtmuseum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_stadtische_galerie_im_lenbachhaus_und_kunstbau_munchen",
+      "name": "Städtische Galerie im Lenbachhaus und Kunstbau München",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_kunstareal_munchen",
+      "name": "Kunstareal München",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_spielzeugmuseum_im_alten_rathausturm",
+      "name": "Spielzeugmuseum im Alten Rathausturm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_glyptothek",
+      "name": "Glyptothek",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_ns_dokumentationszentrum_munchen",
+      "name": "NS-Dokumentationszentrum München",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_judisches_museum_munchen",
+      "name": "Jüdisches Museum München",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_residenz_museum",
+      "name": "Residenz Museum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_st_michael_kirche",
+      "name": "St. Michael Kirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_st_peter",
+      "name": "St. Peter",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_asamkirche",
+      "name": "Asamkirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_theatinerkirche",
+      "name": "Theatinerkirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_heilig_geist",
+      "name": "Heilig Geist",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_dreifaltigkeitskirche",
+      "name": "Dreifaltigkeitskirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_pfarrkirche_st_anna",
+      "name": "Pfarrkirche St. Anna",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_allerheiligenkirche_am_kreuz",
+      "name": "Allerheiligenkirche am Kreuz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_st_nikolai_am_gasteig",
+      "name": "St. Nikolai am Gasteig",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_mariahilfkirche",
+      "name": "Mariahilfkirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_kath_pfarramt_st_maximilian",
+      "name": "Kath. Pfarramt St. Maximilian",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_st_markus_evangelisch_lutherische_kirchengemeinde_munchen_st_markus",
+      "name": "St. Markus - Evangelisch-Lutherische Kirchengemeinde München - St. Markus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_klosterkirche_st_anna",
+      "name": "Klosterkirche St. Anna",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_st_ludwig_munchen",
+      "name": "St. Ludwig München",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_evang_luth_kirche_st_johannes",
+      "name": "Evang.-Luth. Kirche St. Johannes",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_allerheiligen_hofkirche",
+      "name": "Allerheiligen-Hofkirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_kirche_st_paul",
+      "name": "Kirche St. Paul",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_hofkapelle_der_residenz",
+      "name": "Hofkapelle der Residenz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_karl_valentin_brunnen",
+      "name": "Karl-Valentin-Brunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_wittelsbacher_brunnen",
+      "name": "Wittelsbacher Brunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_kronprinz_rupprecht_brunnen",
+      "name": "Kronprinz-Rupprecht-Brunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_joseph_ruederer_gedachtnis_brunnen",
+      "name": "Joseph-Ruederer-Gedächtnis-Brunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_wolfsbrunnen_munchen_heinrich_dull_georg_pezold_1904",
+      "name": "Wolfsbrunnen, München - Heinrich Düll & Georg Pezold (1904)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_brunnen_am_shakespeareplatz",
+      "name": "Brunnen am Shakespeareplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_liesl_karlstadt_brunnen",
+      "name": "Liesl-Karlstadt-Brunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_schnitterinbrunnen",
+      "name": "Schnitterinbrunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_denkmal_fur_maximilian_i_joseph",
+      "name": "Denkmal für Maximilian I. Joseph",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_springbrunnen_vor_dem_maximilianeum",
+      "name": "Springbrunnen vor dem Maximilianeum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_wasserglockenbrunnen",
+      "name": "Wasserglockenbrunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_vater_rhein_brunnen",
+      "name": "Vater-Rhein-Brunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_brunnen_rindermarkt",
+      "name": "Brunnen Rindermarkt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_kurt_eisner_denkmal",
+      "name": "Kurt-Eisner-Denkmal",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_nornenbrunnen",
+      "name": "Nornenbrunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_brunnenbuberl",
+      "name": "Brunnenbuberl",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_aussichtsplattform_ostpark",
+      "name": "Aussichtsplattform Ostpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_praterstrand",
+      "name": "Praterstrand",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_isarpark",
+      "name": "Isarpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_weissenseepark",
+      "name": "Weißenseepark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_luitpoldpark",
+      "name": "Luitpoldpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_bavariapark",
+      "name": "Bavariapark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_hofgarten",
+      "name": "Hofgarten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_westpark",
+      "name": "Westpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_ostpark",
+      "name": "Ostpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_neuhofener_berg",
+      "name": "Neuhofener Berg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_englischer_garten",
+      "name": "Englischer Garten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_kronepark_am_nockherberg",
+      "name": "Kronepark am Nockherberg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_herzog_wilhelm_park",
+      "name": "Herzog-Wilhelm-Park",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_okologische_vorrangflache_baumkirchen_mitte",
+      "name": "Ökologische Vorrangfläche Baumkirchen Mitte",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_massmannpark",
+      "name": "Maßmannpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_petuelpark",
+      "name": "Petuelpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_schlosspark_nymphenburg",
+      "name": "Schlosspark Nymphenburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_flaucher",
+      "name": "Flaucher",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_chinesischer_turm",
+      "name": "Chinesischer Turm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_isartreppen",
+      "name": "Isartreppen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_brk_haus_fur_kinder_leuchtturm",
+      "name": "BRK Haus für Kinder \"Leuchtturm\"",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_umriss_vom_schonen_turm_am_boden",
+      "name": "Umriss vom Schönen Turm am Boden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_balls_clubs_indoor_minigolf_in_munchen",
+      "name": "Balls&Clubs - Indoor-Minigolf in München",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_muller_sches_volksbad_hallenbad",
+      "name": "Müller’sches Volksbad (Hallenbad)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_exus_munchen_3d_neongolf",
+      "name": "Exus München - 3D Neongolf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_schyrenbad_freibad",
+      "name": "Schyrenbad (Freibad)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_nordbad_hallenbad",
+      "name": "Nordbad (Hallenbad)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_stadtwerke_munchen_cosimabad",
+      "name": "Stadtwerke München Cosimabad",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_naturbad_georgenschwaige_freibad",
+      "name": "Naturbad Georgenschwaige (Freibad)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_olympia_schwimmhalle_hallenbad",
+      "name": "Olympia-Schwimmhalle (Hallenbad)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_pato_golf",
+      "name": "PATO Golf",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_golf_maul",
+      "name": "Golf Maul",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_alter_hof_munchen",
+      "name": "Alter Hof München",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_altstadt",
+      "name": "Altstadt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_alte_stadtmauer",
+      "name": "Alte Stadtmauer",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_tour",
+      "name": "Tour",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_aussichtspunkt_mit_zwei_picknickplatzen",
+      "name": "Aussichtspunkt mit zwei Picknickplätzen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_aussichtspunkt_riem",
+      "name": "Aussichtspunkt Riem",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_aussichtspunkt_wka_fohnix",
+      "name": "Aussichtspunkt WKA \"Föhnix\"",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_fotospot_wehrsteg_isar_panorama_st_lukas",
+      "name": "Fotospot Wehrsteg – Isar Panorama & St. Lukas 🌉📸",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_flak_hugel",
+      "name": "Flak-Hügel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_aussichtspunkt_frottmaninger_heide",
+      "name": "Aussichtspunkt Fröttmaninger Heide",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_isarspitze_schwindinsel_aussichtspunkt_oase",
+      "name": "Isarspitze Schwindinsel – Aussichtspunkt & Oase",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_aussichtspunkt_am_poschinger_weiher",
+      "name": "Aussichtspunkt am Poschinger Weiher",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_brucke_uber_den_schwabinger_see_aussichtspunkt",
+      "name": "Brücke über den Schwabinger See – Aussichtspunkt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_viewpoint_consulting_gmbh",
+      "name": "Viewpoint Consulting GmbH",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_baumhaus_am_neuhofener_berg",
+      "name": "Baumhaus am Neuhofener Berg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_aussichtspunkt_am_lusssee",
+      "name": "Aussichtspunkt am Lußsee",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_olympiasee_brucke",
+      "name": "Olympiasee-Brücke",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_aussichtsplattform_freiham",
+      "name": "Aussichtsplattform Freiham",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_viewpoint",
+      "name": "Viewpoint",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_mission_360_und_3d_panorama_tours_munchen",
+      "name": "Mission 360 und 3D Panorama Tours München",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_bayerische_staatsoper",
+      "name": "Bayerische Staatsoper",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_gartnerplatztheater",
+      "name": "Gärtnerplatztheater",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_munchner_kammerspiele",
+      "name": "Münchner Kammerspiele",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_tageskasse_der_bayerischen_staatsoper",
+      "name": "Tageskasse der Bayerischen Staatsoper",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_deutsches_theater_munchen",
+      "name": "Deutsches Theater München",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_gop_variete_theater_munchen",
+      "name": "GOP Varieté-Theater München",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_residenztheater",
+      "name": "Residenztheater",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_prinzregententheater",
+      "name": "Prinzregententheater",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_theater_im_marstall",
+      "name": "Theater im Marstall",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_hofspielhaus",
+      "name": "HOFSPIELHAUS",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_iberl_buhne_iberlbuhne_munchen",
+      "name": "Iberl Bühne (Iberlbühne) München",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_werkraum_munchner_kammerspiele",
+      "name": "Werkraum Münchner Kammerspiele",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_palais_an_der_oper",
+      "name": "Palais an der Oper",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_komodie_im_bayerischen_hof",
+      "name": "Komödie im Bayerischen Hof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_munchner_marionettentheater",
+      "name": "Münchner Marionettentheater",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_theater_drehleier_theatergaststatte_szenerie",
+      "name": "Theater Drehleier & Theatergaststätte \"Szenerie\"",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_munchner_volkstheater",
+      "name": "Münchner Volkstheater",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_rad_und_fussweg_entlang_der_a8",
+      "name": "Rad- und Fußweg entlang der A8",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_kreis_am_bolzplatz_neuhofen",
+      "name": "Kreis am Bolzplatz Neuhofen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_munchen_pasing",
+      "name": "München Pasing",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_bogenhausen_district_western_forest_territory",
+      "name": "Bogenhausen District Western Forest Territory",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_giesinger_waldhaus",
+      "name": "Giesinger Waldhaus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_mit_vergnugen_munchen",
+      "name": "Mit Vergnügen München",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_eingang_kirchweg",
+      "name": "Eingang Kirchweg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_salinenhof",
+      "name": "Salinenhof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_isar",
+      "name": "Isar",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_munchener_tierpark_hellabrunn",
+      "name": "Münchener Tierpark Hellabrunn",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_obacht_der_laden_fur_heimatgefuhl",
+      "name": "OBACHT' Der Laden für Heimatgefühl",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_souvenirs_flohr",
+      "name": "Souvenirs Flohr",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_herrmann_geschenke_gmbh",
+      "name": "Herrmann Geschenke GmbH",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_servus_heimat",
+      "name": "servus.heimat",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_doppler_shop_munchen_geschenke_und_mehr",
+      "name": "Doppler Shop München Geschenke und mehr",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_souvenir_stand",
+      "name": "Souvenir Stand",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_medical_center_viktualienmarkt",
+      "name": "Medical Center Viktualienmarkt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_olympiapark_munchen",
+      "name": "Olympiapark München",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_eisbachwelle",
+      "name": "Eisbachwelle",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_modell_der_stadt_munchen",
+      "name": "Modell der Stadt München",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_schloss_nymphenburg",
+      "name": "Schloss Nymphenburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_munchner_freiheit",
+      "name": "Münchner Freiheit",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_residenz_munchen",
+      "name": "Residenz München",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_munich_olympic_walk_of_stars",
+      "name": "Munich Olympic Walk Of Stars",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_wappenhaus",
+      "name": "Wappenhaus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_fischtreppe",
+      "name": "Fischtreppe",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_grosse_kaskaden",
+      "name": "Große Kaskaden",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_hecken_labyrinth",
+      "name": "Hecken-Labyrinth",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_munchen_panzermauer",
+      "name": "München Panzermauer",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_neptunbrunnen",
+      "name": "Neptunbrunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_kriegerdenkmal_im_hofgarten",
+      "name": "Kriegerdenkmal im Hofgarten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_dominikanerkloster_bei_st_kajetan",
+      "name": "Dominikanerkloster bei St. Kajetan",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_st_willibrord",
+      "name": "St. Willibrord",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_kloster_der_servitinnen",
+      "name": "Kloster der Servitinnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_griechisch_orthodoxe_salvatorkirche",
+      "name": "Griechisch-Orthodoxe Salvatorkirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_pagodenburg",
+      "name": "Pagodenburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_suresnes_schlossl",
+      "name": "Suresnes Schlössl",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_schlossschanke_blutenburg",
+      "name": "Schlossschänke Blutenburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_burgmuseum_grunwald",
+      "name": "Burgmuseum Grünwald",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_badenburg",
+      "name": "Badenburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_siegestor",
+      "name": "Siegestor",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_amalienburg",
+      "name": "Amalienburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_sendlinger_tor",
+      "name": "Sendlinger Tor",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_schloss_nymphenburg_marstallmuseum",
+      "name": "Schloss Nymphenburg Marstallmuseum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_schlossanlage_schleissheim",
+      "name": "Schlossanlage Schleißheim",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_haferkater_sendlinger_tor_munchen",
+      "name": "Haferkater, Sendlinger Tor, München",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_am_munchner_tor",
+      "name": "Am Münchner Tor",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_neues_schloss_schleissheim",
+      "name": "Neues Schloss Schleißheim",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_pattaravadee_thai_massage_am_sendlinger_tor_munchen",
+      "name": "Pattaravadee Thai Massage am Sendlinger Tor-München",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_botanischer_garten_munchen_nymphenburg",
+      "name": "Botanischer Garten München-Nymphenburg",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_alter_botanischer_garten",
+      "name": "Alter Botanischer Garten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_spielplatz_alter_botanischer_garten",
+      "name": "Spielplatz Alter Botanischer Garten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_mimi",
+      "name": "Mimi",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_kleines_theater_im_pfortnerhaus_kindertheater",
+      "name": "Kleines Theater im Pförtnerhaus | Kindertheater",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_phlop_figurentheater",
+      "name": "Phlop Figurentheater",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_munchner_theater_fur_kinder",
+      "name": "Münchner Theater für Kinder",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_schauburg_munchen",
+      "name": "Schauburg München",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_theater_in_der_au_e_v",
+      "name": "Theater in der Au e.V.",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_marina_wassersport_gmbh",
+      "name": "Marina Wassersport GmbH",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_marina_monaco",
+      "name": "Marina Monaco",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_beauty_studio_marina_tsalina_munchen",
+      "name": "Beauty Studio Marina Tsalina - München",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_marina_schwertfirm",
+      "name": "Marina Schwertfirm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_muhlendorf_tierpark_hellabrunn",
+      "name": "Mühlendorf, Tierpark Hellabrunn",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_kinderland_hellabrunn",
+      "name": "Kinderland Hellabrunn",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_historisches_kinderkarussell",
+      "name": "Historisches Kinderkarussell",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_marche_tierpark",
+      "name": "Marché Tierpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_lowen_anlage_thalkirchen_tierpark",
+      "name": "Löwen-Anlage Thalkirchen Tierpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_parkplatz_munchener_tierpark",
+      "name": "Parkplatz Münchener Tierpark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_isar_eingang",
+      "name": "Isar-Eingang",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_flamingo_eingang_tor_7",
+      "name": "Flamingo Eingang Tor 7",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_sport_u_freizeitpark_taufkirchen",
+      "name": "Sport- u. Freizeitpark Taufkirchen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_sandbox_vr_munchen",
+      "name": "Sandbox VR München",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_bootsverleih_seehaus",
+      "name": "Bootsverleih Seehaus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_stadtrundfahrt_citysightseeing_stadtrundfahrten",
+      "name": "Stadtrundfahrt - CitySightseeing - Stadtrundfahrten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_bootsverleih_im_olympiapark",
+      "name": "Bootsverleih im Olympiapark",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_weis_s_er_stadtvogel_gmbh_stadtfuhrungen_munchen",
+      "name": "Weis(s)er Stadtvogel GmbH - Stadtführungen München",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_spurwechsel_stadtfuhrungen_veranstaltungen_gmbh",
+      "name": "Spurwechsel Stadtführungen & Veranstaltungen GmbH",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_gray_line_munich_daytrips",
+      "name": "Gray Line Munich DAYTRIPS",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_rikscha_munchen",
+      "name": "Rikscha München",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_gray_line_munchener_stadtrundfahrten",
+      "name": "Gray Line Münchener Stadtrundfahrten",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_pedalhelden_munchen_rikscha_munchen_conferencebikes_efiaker",
+      "name": "Pedalhelden München: Rikscha München, ConferenceBikes, eFiaker",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_lederhosen_express_rikscha_munchen",
+      "name": "Lederhosen-Express | Rikscha München",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_radius_tours",
+      "name": "Radius Tours",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_munchner_bulli_tours",
+      "name": "Münchner Bulli Tours",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_hot_rod_fun_munchen",
+      "name": "Hot Rod Fun München",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_stattreisen_munchen_stadtfuhrungen_in_munchen",
+      "name": "Stattreisen München - Stadtführungen in München",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_manfred_platz_radlguide",
+      "name": "Manfred Platz Radlguide",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_munich_walk_tours",
+      "name": "Munich Walk Tours",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_friede_stern_geschenke_boutique_feinkost_einrichtung_papeterie_bucher",
+      "name": "FRIEDE + STERN Geschenke Boutique Feinkost Einrichtung Papeterie Bücher",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_karusa",
+      "name": "Karusa",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_pylones",
+      "name": "Pylones",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_wochenmarkt_au",
+      "name": "Wochenmarkt Au",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_bauernmarkt_am_josephsplatz",
+      "name": "Bauernmarkt am Josephsplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_bauernmarkt",
+      "name": "Bauernmarkt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_bauernmarkt_schwanthalerhohe",
+      "name": "Bauernmarkt Schwanthalerhöhe",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_wochenmarkt_haidhausen",
+      "name": "Wochenmarkt Haidhausen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_wochenmarkt_untersendling",
+      "name": "Wochenmarkt Untersendling",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_bauernmarkt_mangfallplatz",
+      "name": "Bauernmarkt Mangfallplatz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_wochenmarkt_schwabing_west",
+      "name": "Wochenmarkt Schwabing-West",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_wochenmarkt_bogenhausen",
+      "name": "Wochenmarkt Bogenhausen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_wochenmarkt_neuhausen",
+      "name": "Wochenmarkt Neuhausen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_wochenmarkt_giesing",
+      "name": "Wochenmarkt Giesing",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_wochenmarkt_schwabing",
+      "name": "Wochenmarkt Schwabing",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_wochenmarkt_berg_am_laim",
+      "name": "Wochenmarkt Berg am Laim",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_wochenmarkt_sendling",
+      "name": "Wochenmarkt Sendling",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_polizeiinspektion_11_altstadt",
+      "name": "Polizeiinspektion 11 - Altstadt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_cinemaxx_munchen",
+      "name": "CinemaxX München",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_mathaser_filmpalast",
+      "name": "mathäser Filmpalast",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_cinema_munchen_ov",
+      "name": "CINEMA München OV",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_city_atelier_kinos",
+      "name": "City-Atelier Kinos",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_arena_kino",
+      "name": "Arena Kino",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "muenchen_astor_film_lounge_im_arri",
+      "name": "ASTOR Film Lounge im ARRI",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_royal_filmpalast",
+      "name": "Royal Filmpalast",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_rio_filmpalast",
+      "name": "Rio Filmpalast",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_boulderwelt_munchen_ost",
+      "name": "Boulderwelt München Ost",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_dav_kletter_und_boulderzentrum_munchen_sud",
+      "name": "DAV Kletter- und Boulderzentrum München-Süd",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_element_boulders_munchen",
+      "name": "ELEMENT Boulders München",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_the_boulder_room",
+      "name": "The Boulder Room",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_heavens_gate_klettern_bouldern",
+      "name": "Heavens Gate Klettern & Bouldern",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_einstein_boulderhalle_munchen",
+      "name": "Einstein Boulderhalle München",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_riesige_rosi_offentliche_boulderpassage",
+      "name": "Riesige Rosi - öffentliche Boulderpassage",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_bund_naturschutz_kreisgruppe_munchen",
+      "name": "BUND Naturschutz Kreisgruppe München",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_berger_kreuz_strasse",
+      "name": "Berger-Kreuz-Straße",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_zum_alten_kreuz",
+      "name": "Zum Alten Kreuz",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_wegkreuz",
+      "name": "Wegkreuz",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 4,
+      "had_approaches": 1
+    },
+    {
+      "id": "muenchen_blaukreuz_zentrum_munchen_ost",
+      "name": "Blaukreuz-Zentrum München-Ost",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_kontakt_und_begegnungsstatte_offene_tur_des_blaukreuz_zentrums_munchen",
+      "name": "Kontakt- und Begegnungsstätte \"Offene Tür\" des Blaukreuz-Zentrums München",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_gedenkkreuz_fur_die_luftkriegsopfer",
+      "name": "Gedenkkreuz für die Luftkriegsopfer",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_bayerisches_rotes_kreuz_bereitschaftsheim_schulstrasse",
+      "name": "Bayerisches Rotes Kreuz, Bereitschaftsheim Schulstraße",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_bayerisches_rotes_kreuz_kreisverband_munchen_bereitschaften_sud_1_und_s",
+      "name": "Bayerisches Rotes Kreuz Kreisverband München, Bereitschaften Süd 1 und Süd 2",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_brk_kreisverband_munchen_geschaftsstelle",
+      "name": "BRK-Kreisverband München - Geschäftsstelle",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_frauenkirche",
+      "name": "Frauenkirche (Dom zu Unserer Lieben Frau)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "muenchen_olympiaturm",
+      "name": "Olympiaturm München",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    }
+  ]
+}

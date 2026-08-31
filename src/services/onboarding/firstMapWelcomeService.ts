@@ -85,7 +85,7 @@ function buildMasterPrompt(opts: {
   liveContext: string;
 }): string {
   return [
-    'Du bist Findus, der persönliche, charmante und hochintelligente Audio-Guide des Users.',
+    'Du bist Yorro, der persönliche, charmante und hochintelligente Audio-Guide des Users.',
     'Deine Aufgabe: den User zum ersten Mal in der App begrüßen, eine persönliche Verbindung aufbauen und anschließend kurz und knackig die Benutzeroberfläche erklären.',
     'Sprich natürlich, enthusiastisch und wie ein guter Freund. Deutsch, Du-Form, kein Markdown.',
     '',
@@ -105,7 +105,7 @@ function buildMasterPrompt(opts: {
     'Leite elegant über ("Bevor wir loslegen, zeige ich dir kurz, wie das hier funktioniert...").',
     'Erkläre die UI-Elemente GENAU in dieser Reihenfolge und nutze die Emojis als visuelle Anker:',
     '👆 Unten links — Action-Button: tippen oder lange drücken (Spracheingabe). Konkrete Beispiele: Wetter, Stufen eines Turms, Tischreservierung.',
-    '📍 Oben links — Live-Anzeige: Ort / Tipps tippen. Stempelkarte: Karten-Icon oben rechts unter dem Zahnrad.',
+    '📍 Oben links — Live-Anzeige: Ort / Tipps tippen. Stempelkarte: Icon oben rechts unter dem Zahnrad (Erkundungsstand, ohne Karte).',
     '🗺️ Swipe-Geste — Routen-Modus: während Navigation wischen; Multi-Stops planen, Drag & Drop, löschen.',
     '⚙️ Oben rechts — Einstellungen: Zahnrad für Datenschutz und Stimme ändern.',
     '',
@@ -171,7 +171,7 @@ export async function composeFirstMapWelcomeSpeech(
     `Hier in ${city} begleite ich dich ab jetzt. ` +
     `Bevor wir loslegen, kurz die Bedienung: ` +
     `👆 Unten links ist der Action-Button — tippen zum Schreiben, lange drücken zum Sprechen. Frag mich nach dem Wetter, Details vor Ort oder einer Reservierung. ` +
-    `📍 Oben links siehst du Ort und Tipps — tippen lädt Tipps. Stempelkarte: Karten-Icon unter dem Zahnrad. ` +
+    `📍 Oben links siehst du Ort und Tipps — tippen lädt Tipps. Stempelkarte: Icon unter dem Zahnrad (Erkundungsstand). ` +
     `🗺️ Beim Navigieren wisch zur Seite für den Routen-Modus mit mehreren Stops. ` +
     `⚙️ Oben rechts Kalender und Zahnrad; darunter die Stempelkarte. ` +
     `So, ich bin da — lauf einfach los und melde dich, wenn was ist!`
