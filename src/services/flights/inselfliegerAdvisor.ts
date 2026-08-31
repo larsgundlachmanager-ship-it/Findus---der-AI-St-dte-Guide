@@ -1,7 +1,7 @@
 /**
  * Inselflieger (FLN Harle ⇄ Wangerooge) — Website-Recherche + Buchungs-Flow.
  *
- * Kein /api/flights: Findus liest öffentliche Seiten (inselflieger.de) und
+ * Kein /api/flights: Yorro liest öffentliche Seiten (inselflieger.de) und
  * recherchiert Zeiten/Preise per Search Grounding. Konkrete Slots nur wenn
  * öffentlich; sonst ehrlich + Frisonaut-Link.
  */
@@ -236,7 +236,7 @@ function contactHint(): string {
   if (c.fullName) {
     return `Namen habe ich als ${c.fullName}. Frisonaut-Links können Passagierfelder nicht vorausfüllen — einmal manuell, dann zahlen.`;
   }
-  return 'Tipp: Name und E-Mail in den Findus-Einstellungen hinterlegen, dann geht Checkout schneller.';
+  return 'Tipp: Name und E-Mail in den Yorro-Einstellungen hinterlegen, dann geht Checkout schneller.';
 }
 
 /** Enrich Frisonaut deep link with date/time hints + profile query (best-effort; portal may ignore extras). */

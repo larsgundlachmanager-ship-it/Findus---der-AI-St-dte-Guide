@@ -63,7 +63,10 @@
     "beta:situations:review": "node scripts/betaSituations.mjs review",
     "beta:situations:sync": "node scripts/betaSituations.mjs sync",
     "beta:situations:promote": "node scripts/betaSituations.mjs promote",
-    "beta:situations:reject": "node scripts/betaSituations.mjs reject"
+    "beta:situations:reject": "node scripts/betaSituations.mjs reject",
+    "gold:publish": "node scripts/ownerGoldPublish.mjs",
+    "test:owner-gold": "npx --yes --package tsx@4.19.4 tsx src/module2/blueprints/ownerGold.smoke.test.ts",
+    "test:turn-kernel": "npx --yes --package tsx@4.19.4 tsx src/module2/kernel/turnKernel.smoke.test.ts"
   },
   "dependencies": {
     "@google/genai": "^2.13.0",

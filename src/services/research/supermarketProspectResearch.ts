@@ -5,7 +5,6 @@
  */
 
 import { generateGeminiText, hasGeminiApiKey } from '../geminiService';
-import { isDeviceOffline } from '../navigation/networkState';
 import { searchPlacesExpanding } from '../navigation/expandingPlaceSearch';
 import {
   searchPlacesByText,
@@ -14,6 +13,18 @@ import {
 import { shortenActionLabel } from '../concierge/actionLabelShorten';
 import type { Module2ActionButton } from '../../module2/types';
 import { FINDUS_FEW_SHOT_DISCLAIMER } from '../concierge/findusResponsePolicy';
+import {
+  detectChainFromName,
+  extractSupermarketOfferHints,
+  usableProspectUrl,
+} from './supermarketProspectGates';
+
+export {
+  extractSupermarketOfferHints,
+  isHollowProspectUrl,
+  isSupermarketOfferQuery,
+  usableProspectUrl,
+} from './supermarketProspectGates';
 
 export type SupermarketVenue = {
   name: string;
@@ -54,149 +65,9 @@ export type SupermarketProspectResult = {
   offersPending?: boolean;
 };
 
-const CHAIN_PATTERNS: Array<{ id: string; re: RegExp; query: string }> = [
-  { id: 'rewe', re: /\brewe\b/iu, query: 'REWE' },
-  { id: 'aldi', re: /\baldi(?:\s*süd|\s*sued|\s*nord)?\b/iu, query: 'Aldi' },
-  { id: 'lidl', re: /\blidl\b/iu, query: 'Lidl' },
-  { id: 'edeka', re: /\bedeka\b/iu, query: 'Edeka' },
-  { id: 'kaufland', re: /\bkaufland\b/iu, query: 'Kaufland' },
-  { id: 'netto', re: /\bnetto\b/iu, query: 'Netto' },
-  { id: 'penny', re: /\bpenny\b/iu, query: 'Penny' },
-  { id: 'norma', re: /\bnorma\b/iu, query: 'Norma' },
-  { id: 'marktkauf', re: /\bmarktkauf\b/iu, query: 'Marktkauf' },
-  { id: 'real', re: /\breal\b/iu, query: 'Real' },
-];
-
-const OFFER_SIGNAL_RE =
-  /\b(angebot|angebote|aktionspreis|aktion|prospekt|wochenprospekt|handzettel|werbebeilage|reduziert|im\s+sonderangebot|sonderpreis|was\s+(?:ist|gibt'?s|gibt\s+es)\s+(?:gerade\s+)?(?:im\s+)?angebot|welches?.{0,40}angebot|günstig(?:er)?\s+(?:zu\s+haben|im\s+markt)|irgendwo\s+(?:im\s+)?angebot|im\s+angebot\s+(?:hier|irgendwo)|haben\s+wollen|brauchen\s+wir)\b/iu;
-
-const PRODUCTISH_RE =
-  /\b(bier|pils|weizen|helles|cola|wasser|milch|butter|käse|kaese|joghurt|brot|eier|kaffee|schokolade|chips|nudeln|pasta|reis|fleisch|wurst|hack|hähnchen|haehnchen|pizza|eis|wein|sekt|spirituosen|waschmittel|klopapier|toilettenpapier|shampoo|sahne|quark|apfelsaft|orangensaft|olivenöl|olivenoel|nudeln|tomaten|gurke|bananen?|äpfel|aepfel)\b/giu;
-
-/** User fragt nach aktuellen Supermarkt-Angeboten / Prospekt. */
-export function isSupermarketOfferQuery(text: string): boolean {
-  const t = (text ?? '').replace(/\s+/g, ' ').trim();
-  if (!t) return false;
-  if (OFFER_SIGNAL_RE.test(t)) {
-    if (CHAIN_PATTERNS.some((c) => c.re.test(t))) return true;
-    if (PRODUCTISH_RE.test(t)) return true;
-    if (
-      /\b(supermarkt|discounter|markt|einkauf|hier\s+im\s+laden|hier\s+im\s+markt|irgendwo|in\s+der\s+nähe|in\s+der\s+naehe)\b/iu.test(
-        t,
-      )
-    ) {
-      return true;
-    }
-    if (
-      /\b(?:was|welche[srn]?|gibt'?s|gibt\s+es|ist\s+(?:das|es)|haben\s+wir).{0,40}\bangebot/iu.test(
-        t,
-      ) ||
-      /\bprospekt\b/iu.test(t) ||
-      /\b(?:wollen|brauchen)\s+(?:wir|noch).{0,40}\b(?:angebot|günstig|guenstig)/iu.test(
-        t,
-      )
-    ) {
-      return true;
-    }
-  }
-  if (
-    CHAIN_PATTERNS.some((c) => c.re.test(t)) &&
-    PRODUCTISH_RE.test(t) &&
-    /\b(preis|kostet|günstig|guenstig|billig|aktion)\b/iu.test(t)
-  ) {
-    return true;
-  }
-  // „Wir wollen Bier und Milch — ist das irgendwo im Angebot?“
-  if (
-    /\b(wollen|brauchen|haben\s+wollen)\b/iu.test(t) &&
-    /\b(angebot|prospekt|günstig|guenstig)\b/iu.test(t)
-  ) {
-    return true;
-  }
-  return false;
-}
-
-export function extractSupermarketOfferHints(text: string): {
-  productHint: string | null;
-  productHints: string[];
-  chainHint: string | null;
-  cityHint: string | null;
-} {
-  const t = text.replace(/\s+/g, ' ').trim();
-  let chainHint: string | null = null;
-  for (const c of CHAIN_PATTERNS) {
-    if (c.re.test(t)) {
-      chainHint = c.query;
-      break;
-    }
-  }
-
-  let cityHint: string | null = null;
-  const cityM = t.match(
-    /\b(?:in|bei|nahe)\s+([A-ZÄÖÜ][\wÄÖÜäöüß-]{2,}(?:\s+[A-ZÄÖÜ][\wÄÖÜäöüß-]{2,})?)/u,
-  );
-  if (
-    cityM?.[1] &&
-    !/Angebot|Prospekt|Supermarkt|Aldi|Lidl|Rewe|Edeka/i.test(cityM[1])
-  ) {
-    cityHint = cityM[1].trim();
-  }
-
-  const productHints: string[] = [];
-  const seen = new Set<string>();
-  for (const m of t.matchAll(PRODUCTISH_RE)) {
-    const p = (m[0] || '').trim().toLowerCase();
-    if (!p || seen.has(p)) continue;
-    seen.add(p);
-    productHints.push(p);
-  }
-  if (!productHints.length) {
-    const list = t.match(
-      /\b(?:wollen|brauchen|haben\s+wollen)\s+(?:wir\s+)?(?:noch\s+)?(.+?)(?:\s*[,—–-]?\s*(?:ist\s+das|irgendwo|im\s+angebot|angeboten)\b|$)/iu,
-    );
-    if (list?.[1]) {
-      const parts = list[1]
-        .split(/\s+(?:und|sowie|,)\s+/iu)
-        .map((x) => x.replace(/^(eine?|einen|ein|noch|mal|das|die|den)\s+/iu, '').trim())
-        .filter((x) => x.length >= 2 && x.length <= 32 && !/angebot|prospekt/i.test(x));
-      for (const p of parts.slice(0, 4)) {
-        const key = p.toLowerCase();
-        if (seen.has(key)) continue;
-        seen.add(key);
-        productHints.push(p);
-      }
-    }
-  }
-  if (!productHints.length) {
-    const which = t.match(
-      /\b(?:welches?|welche|was\s+für(?:\s+ein(?:e|en)?)?)\s+([a-zäöüß][\wäöüß-]{2,28})\b/iu,
-    );
-    if (
-      which?.[1] &&
-      !/angebot|prospekt|supermarkt|laden|markt/i.test(which[1])
-    ) {
-      productHints.push(which[1].trim());
-    }
-  }
-
-  return {
-    productHint: productHints[0] ?? null,
-    productHints,
-    chainHint,
-    cityHint,
-  };
-}
-
 function formatDist(m: number): string {
   if (m < 1000) return `${Math.max(50, Math.round(m / 50) * 50)} m`;
   return `${(m / 1000).toFixed(m >= 10_000 ? 0 : 1)} km`;
-}
-
-function detectChainFromName(name: string): string | null {
-  for (const c of CHAIN_PATTERNS) {
-    if (c.re.test(name)) return c.query;
-  }
-  return null;
 }
 
 function extractJsonObject(raw: string): unknown | null {
@@ -250,13 +121,24 @@ function urlButton(
   };
 }
 
+function prospectButtonLabel(o: ProspectOfferHit, index: number): string {
+  const price = o.priceLabel?.trim();
+  const name = o.productLabel.trim().slice(0, price ? 10 : 14);
+  if (price) return `📄 ${name} ${price}`;
+  if (index === 0) return '📄 Prospekt';
+  return `📄 ${name}`;
+}
+
 function matchVenueForStore(
   storeLabel: string,
   venues: SupermarketVenue[],
 ): SupermarketVenue | null {
   const n = storeLabel.toLowerCase();
   for (const v of venues) {
-    if (v.name.toLowerCase().includes(n) || n.includes(v.name.toLowerCase().slice(0, 6))) {
+    if (
+      v.name.toLowerCase().includes(n) ||
+      n.includes(v.name.toLowerCase().slice(0, 6))
+    ) {
       return v;
     }
     if (v.chain && n.includes(v.chain.toLowerCase())) return v;
@@ -348,8 +230,6 @@ async function researchProspectOffers(opts: {
   signal?: AbortSignal;
 }): Promise<{ offers: ProspectOfferHit[]; notes: string }> {
   if (!hasGeminiApiKey()) return { offers: [], notes: 'no_gemini' };
-  const offline = await isDeviceOffline();
-  if (offline) return { offers: [], notes: 'offline' };
 
   const now = new Date();
   const today = now.toLocaleDateString('de-DE', {
@@ -371,7 +251,7 @@ async function researchProspectOffers(opts: {
       : 'aus der User-Frage ableiten';
 
   const prompt = [
-    'Du recherchierst aktuelle Supermarkt-Wochenangebote / Prospekte (Google Search).',
+    'Du recherchierst aktuelle Supermarkt-Wochenangebote / Prospekte mit Google Search Grounding.',
     `HEUTE: ${today}.`,
     `User: „${opts.userText.trim().slice(0, 320)}“`,
     `Gesuchte Produkte: ${products}.`,
@@ -381,20 +261,22 @@ async function researchProspectOffers(opts: {
       ? `Nahe Märkte (GPS): ${nearbyList}`
       : 'Keine GPS-Märkte — regionale Ketten der Umgebung nutzen.',
     '',
+    'SUCH-MUST: Für jedes Produkt mind. eine Query à la „{Produkt} Angebot Prospekt {Kette} {Woche/Jahr}“ und „{Produkt} Aktionspreis {nahe Kette}“.',
     'AUFGABE:',
     '- Prüfe für JEDES gesuchte Produkt, ob es DIESE WOCHE irgendwo in der Nähe im Prospekt ist.',
-    '- Wenn ja: welcher Laden/Kette, Angebotspreis, ggf. Normalpreis + Ersparnis (nur wenn im Prospekt/Quelle steht), Packung, Gültigkeit, Prospekt-URL.',
+    '- Wenn ja: welcher Laden/Kette, Angebotspreis (MUSS in priceLabel), ggf. Normalpreis + Ersparnis (nur wenn Quelle zeigt), Packung, Gültigkeit, URL.',
+    '- prospectUrl = tiefste öffentliche Produkt-/Prospekt-/Flyer-Seite (Kaufda-Flyer-Seite, MeinProspekt, …/angebote/…/produkt…, Wochenprospekt-PDF) — NIE Ketten-Homepage-Root (/ oder /de).',
     '- Mehrere Produkte → pro Produkt bester belegter Treffer (gern verschiedene Märkte).',
-    '- Quellen: offizielle Prospekte, Marktjagd, Kaufda, MeinProspekt, Filial-Seiten.',
-    '- Nicht gefunden → ehrlich, keine Fake-Preise.',
-    'VERBOTEN: erfundene Preise/Ersparnisse, Fake-URLs, veraltete Angebote als aktuell.',
+    '- Quellen: offizielle Prospekte, Marktjagd, Kaufda, MeinProspekt, Filial-Angebotsseiten.',
+    '- Nicht gefunden → ehrlich weglassen, keine Fake-Preise. Nur Home-URL → prospectUrl null.',
+    'VERBOTEN: erfundene Preise/Ersparnisse, Fake-URLs, veraltete Angebote als aktuell, Homepage als Prospekt, Reiseplanung.',
     FINDUS_FEW_SHOT_DISCLAIMER,
     '',
     'Nur JSON:',
     '{',
     '  "researchNotes": "kurz",',
     '  "offers": [',
-    '    { "productLabel":"…", "priceLabel":"0,79 €"|null, "regularPriceLabel":"1,19 €"|null, "savingsLabel":"0,40 € günstiger"|null, "validityLabel":"diese Woche"|null, "storeLabel":"Lidl", "detail":"0,5 l"|null, "prospectUrl":"https://…"|null }',
+    '    { "productLabel":"…", "priceLabel":"0,79 €"|null, "regularPriceLabel":"1,19 €"|null, "savingsLabel":"0,40 € günstiger"|null, "validityLabel":"diese Woche"|null, "storeLabel":"Lidl", "detail":"0,5 l"|null, "prospectUrl":"https://…/angebote/…"|null }',
     '  ]',
     '}',
   ]
@@ -405,8 +287,8 @@ async function researchProspectOffers(opts: {
     const raw = await generateGeminiText(prompt, {
       task: 'generic',
       enableGoogleSearch: true,
-      maxTokens: 1100,
-      temperature: 0.2,
+      maxTokens: 1400,
+      temperature: 0.15,
       useFindusSystem: false,
       signal: opts.signal,
     });
@@ -428,17 +310,16 @@ async function researchProspectOffers(opts: {
         .trim()
         .slice(0, 60);
       const matched = matchVenueForStore(storeLabel, opts.venues);
-      const prospectUrl =
-        typeof r.prospectUrl === 'string' &&
-        /^https?:\/\//i.test(r.prospectUrl)
-          ? r.prospectUrl
+      const prospectUrl = usableProspectUrl(
+        typeof r.prospectUrl === 'string' ? r.prospectUrl.trim() : null,
+      );
+      const priceLabel =
+        typeof r.priceLabel === 'string' && r.priceLabel.trim()
+          ? r.priceLabel.trim().slice(0, 40)
           : null;
       offers.push({
         productLabel: productLabel.slice(0, 80),
-        priceLabel:
-          typeof r.priceLabel === 'string' && r.priceLabel.trim()
-            ? r.priceLabel.trim().slice(0, 40)
-            : null,
+        priceLabel,
         regularPriceLabel:
           typeof r.regularPriceLabel === 'string' && r.regularPriceLabel.trim()
             ? r.regularPriceLabel.trim().slice(0, 40)
@@ -460,6 +341,15 @@ async function researchProspectOffers(opts: {
         distanceM: matched?.distanceM ?? null,
       });
     }
+    // Preise zuerst; Deep-Link-Treffer vor reinen Text-Hits
+    offers.sort((a, b) => {
+      const ap = a.priceLabel ? 0 : 1;
+      const bp = b.priceLabel ? 0 : 1;
+      if (ap !== bp) return ap - bp;
+      const au = a.prospectUrl ? 0 : 1;
+      const bu = b.prospectUrl ? 0 : 1;
+      return au - bu;
+    });
     return { offers: offers.slice(0, 6), notes };
   } catch {
     return { offers: [], notes: 'research_fail' };
@@ -534,14 +424,9 @@ export async function researchSupermarketProspect(opts: {
 
   for (let i = 0; i < offers.length && buttons.length < 4; i++) {
     const o = offers[i]!;
-    if (o.prospectUrl) {
-      buttons.push(
-        urlButton(
-          `prospect_${i}`,
-          i === 0 ? '📄 Prospekt' : `📄 ${o.productLabel.slice(0, 18)}`,
-          o.prospectUrl,
-        ),
-      );
+    const deep = usableProspectUrl(o.prospectUrl);
+    if (deep) {
+      buttons.push(urlButton(`prospect_${i}`, prospectButtonLabel(o, i), deep));
     }
   }
 
@@ -577,7 +462,7 @@ export async function researchSupermarketProspect(opts: {
     'ANTWORT-FLOW:',
     '1) Ja/Nein vorne: Produkt X bei Laden Y — Distanz — Preis — Ersparnis nur wenn belegt.',
     '2) Mehrere Produkte nacheinander, klar getrennt.',
-    '3) Buttons: Route zum besten Markt, Prospekt-URL.',
+    '3) Buttons: Route zum besten Markt + Deep-Link (Preis im Label wenn belegt) zur Produkt-/Prospekt-Seite — nie Ketten-Home.',
     '4) Nichts erfinden.',
     FINDUS_FEW_SHOT_DISCLAIMER,
   ]

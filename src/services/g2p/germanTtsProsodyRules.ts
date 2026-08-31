@@ -35,7 +35,7 @@ const LLM_MARKER_REPLACEMENTS: [RegExp, string][] = [
  * `*flüstert*: mit` sonst → Sternchen weg, „flüstert“ bleibt und wird gesprochen.
  */
 const STAGE_DIRECTION_INNER =
-  /^(?:flüster(?:t|nd)?|fluester(?:t|nd)?|whisper(?:s|ing)?|lacht?|kichert|grinst|seufzt?|stöhnt?|hustet?|räuspert(?:\s+sich)?|stockt|pause|pausiert|leise|laut|betont|ironisch|sarkastisch|aufgeregt|traurig|freudig|geheimnisvoll|psst|aside|zu\s+sich|stimme\s+senkt|stimme\s+hebt|tiefer|leiser|lauter)(?:[\s,:-]+[\p{L}'’-]{1,20}){0,4}$/iu;
+  /^(?:flüster(?:t|n|nd)?|fluester(?:t|n|nd)?|whisper(?:s|ing)?|lach(?:t|en|end)?|kicher(?:t|n|nd)?|giggle(?:s|r|ing)?|hihi+|haha+|hehe+|grinst|seufz(?:t|en)?|stöhn(?:t|en)?|huste(?:t)?|räuspert(?:\s+sich)?|stockt|pause|pausiert|leise|laut|betont|ironisch|sarkastisch|aufgeregt|traurig|freudig|geheimnisvoll|psst|aside|zu\s+sich|stimme\s+senkt|stimme\s+hebt|stimme\s+senken|stimme\s+heben|tiefer|leiser|lauter)(?:[\s,:-]+[\p{L}'’-]{1,20}){0,4}$/iu;
 
 /**
  * Gesprochene TTS-/Cartesia-Regie im Fließtext (nie vorlesen).
@@ -45,11 +45,12 @@ const SPOKEN_VOICE_DIRECTION_RES: RegExp[] = [
   /\b(?:die\s+)?Stimme\s+senkt\s+sich(?:\s+noch)?(?:\s+ein\s+bisschen)?(?:\s+(?:tiefer|leiser|lauter|höher))?\b[,.:;–—]?\s*/giu,
   /\b(?:die\s+)?Stimme\s+hebt\s+sich(?:\s+noch)?(?:\s+ein\s+bisschen)?(?:\s+(?:höher|lauter|tiefer|leiser))?\b[,.:;–—]?\s*/giu,
   /\b(?:die\s+)?Stimme\s+(?:wird|klingt)\s+(?:jetzt\s+)?(?:etwas\s+|noch\s+(?:ein\s+bisschen\s+)?)?(?:tiefer|höher|leiser|lauter|ruhiger|sanfter)\b[,.:;–—]?\s*/giu,
+  /\b(?:bitte\s+)?(?:die\s+)?Stimme\s+(?:etwas\s+|noch\s+(?:ein\s+bisschen\s+)?)?(?:senken|heben|tiefer\s+setzen|leiser\s+machen)\b[,.:;–—]?\s*/giu,
   /\b(?:mit\s+)?(?:etwas\s+|noch\s+(?:ein\s+bisschen\s+)?)?(?:tieferer|höherer|leiserer|lauterer)\s+Stimme\b[,:]?\s*/giu,
   /\b(?:sprich|spreche|rede)\s+(?:jetzt\s+)?(?:bitte\s+)?(?:leiser|lauter|tiefer|höher|langsamer|schneller)\b[,.:;–—]?\s*/giu,
   /\b(?:Tonlage|Pitch|Volume|Lautstärke|Sprechtempo)\s*[:=]\s*[\wÄÖÜäöüß\- ]{1,40}\b[,.:;–—]?\s*/giu,
   /\b(?:für\s+)?Cartesia\s*[:：]\s*[^.!?\n]{1,80}[.!…]?\s*/giu,
-  /\b(?:Regie|SSML|Prosodie-Anweisung)\s*[:：]\s*[^.!?\n]{1,80}[.!…]?\s*/giu,
+  /\b(?:Regie|SSML|Prosodie-Anweisung|Anweisung)\s*[:：]\s*[^.!?\n]{1,80}[.!…]?\s*/giu,
 ];
 
 /** Entfernt `*flüstert*`, `(lacht)`, Stimme-senkt-sich-Regie — nie vorlesen. */
@@ -91,11 +92,15 @@ export function stripStageDirections(text: string): string {
     return full;
   });
 
-  // Nach Asterisk-Strip oft übrig: „flüstert: …“
+  // Nach Asterisk-Strip oft übrig: „flüstert: …“ / „kichern: …“
   s = s.replace(
-    /\b(?:flüster(?:t|nd)?|fluester(?:t|nd)?|whisper(?:s|ing)?)\s*:\s*/giu,
+    /\b(?:flüster(?:t|n|nd)?|fluester(?:t|n|nd)?|whisper(?:s|ing)?|kicher(?:t|n|nd)?|lach(?:t|en)?)\s*:\s*/giu,
     ' ',
   );
+
+  // Infinitiv-Regie ohne Sternchen: „Kichern.“ / „kichert,“ — TTS kann nicht kichern
+  s = s.replace(/\b(?:kichern|kichert|kichernd|gekicher)\b[.!,…]?\s*/giu, ' ');
+  s = s.replace(/\b(?:hihi+|haha+|hehe+)\b[.!,…]?\s*/giu, ' ');
 
   // Gesprochene Cartesia-/Stimm-Regie im Fließtext
   for (const re of SPOKEN_VOICE_DIRECTION_RES) {
@@ -335,15 +340,15 @@ export function isGreetingOrWelcomeSentence(sentence: string): boolean {
 }
 
 /** Satzende-Pause (ms). */
-export const SENTENCE_END_PAUSE_MS = 320;
+export const SENTENCE_END_PAUSE_MS = 160;
 /** Begrüßung / Ausruf (ms). */
-export const GREETING_PAUSE_MS = 520;
-/** Komma-Klausel (ms) — etwas länger, damit TTS nicht durchrauscht. */
-export const COMMA_PAUSE_MS = 200;
-/** Doppelpunkt (ms) — Aufzählung / Ansage. */
-export const COLON_PAUSE_MS = 260;
+export const GREETING_PAUSE_MS = 240;
+/** Komma-Klausel (ms). */
+export const COMMA_PAUSE_MS = 90;
+/** Doppelpunkt (ms). */
+export const COLON_PAUSE_MS = 120;
 /** Gedankenstrich / langer Strich (ms). */
-export const DASH_PAUSE_MS = 280;
+export const DASH_PAUSE_MS = 130;
 
 export function sentenceEndPauseMs(
   sentence: string,
@@ -352,8 +357,8 @@ export function sentenceEndPauseMs(
   const s = sentence.replace(/\s+/g, ' ').trim();
   if (!s) return SENTENCE_END_PAUSE_MS;
   if (isGreetingOrWelcomeSentence(s)) return GREETING_PAUSE_MS;
-  if (/!$/.test(s)) return Math.max(SENTENCE_END_PAUSE_MS, 380);
-  if (/\?$/.test(s)) return Math.max(SENTENCE_END_PAUSE_MS, 300);
+  if (/!$/.test(s)) return Math.max(SENTENCE_END_PAUSE_MS, 200);
+  if (/\?$/.test(s)) return Math.max(SENTENCE_END_PAUSE_MS, 180);
   return SENTENCE_END_PAUSE_MS;
 }
 
@@ -387,4 +392,4 @@ export function applyTtsProsody(text: string): string {
 
 /** Kurzer Reminder für LLM → Cartesia sonic-3.5 (Master-Prompt-Anhang). */
 export const GERMAN_TTS_PROSODY_REMINDER = `Deutsch für TTS: Kommas = Atem, „…“ = Spannung/Flüstern, ! = Energie, Gedankenstriche = Pause.
-Keine SSML/Regie — Emotion nur über Interpunktion und Wortwahl.`;
+Keine SSML/Regie — Emotion nur über Interpunktion und Wortwahl. Nie „kichern“/„lacht“ als Wort schreiben.`;

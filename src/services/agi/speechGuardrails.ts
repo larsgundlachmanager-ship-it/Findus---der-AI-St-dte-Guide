@@ -9,6 +9,7 @@ import type { QuickAction } from '../../types/concierge';
 import { shortenActionLabel } from '../concierge/actionLabelShorten';
 import { stripPermissionAsksWhenActionsReady } from '../concierge/justDoItPolicy';
 import { stripStageDirections } from '../g2p/germanTtsProsodyRules';
+import { bindSpeechToCommittedRoute } from '../navigation/navSpeechDistance';
 import {
   filterAddressCoordBullets,
   userAskedForAddressOrCoords,
@@ -17,7 +18,7 @@ import { isProtectedDot } from '../audio/punctuationChunker';
 
 export const SPEECH_MAX_CHARS = 600;
 /** Explizite Stadtgeschichte / lange Narrative (Nachfrage) — mind. genug Platz für ~1000+. */
-export const SPEECH_MAX_CHARS_HISTORY = 2200;
+export const SPEECH_MAX_CHARS_HISTORY = 2000;
 /** Marker: Guardrails sind sync / Early (vor TTS). */
 export const GUARDRAILS_SYNC = true as const;
 
@@ -31,6 +32,16 @@ export function resolveSpeechMaxChars(userText?: string, speech?: string): numbe
   if ((speech?.length ?? 0) > 700 && /\b(1342|urkunde|jahrhundert|heute:)\b/i.test(speech ?? '')) {
     return SPEECH_MAX_CHARS_HISTORY;
   }
+  // Event-/Festival-Briefing (Top-2 + Programm) — bis ~1200
+  if (
+    /\b(weinfest|bierfest|straßenfest|stadtfest|festival|fest\b|heute\s+abend|programm|eintritt|winzer)\b/iu.test(
+      blob,
+    ) ||
+    ((speech?.length ?? 0) > 500 &&
+      /\b(favorit|alternative|öpnv|anreise|läuft\s+noch)\b/iu.test(speech ?? ''))
+  ) {
+    return 1200;
+  }
   return SPEECH_MAX_CHARS;
 }
 
@@ -40,6 +51,9 @@ const EMAIL_RE = /\b[\w.+-]+@[\w.-]+\.\w{2,}\b/giu;
 const PLZ_RE = /\b\d{4,5}\s+[A-ZÄÖÜ][a-zäöüß]+(?:\s+[A-ZÄÖÜ][a-zäöüß]+)*/gu;
 const STREET_NUM_RE =
   /\b(?:straße|strasse|str\.|weg|allee|platz|gasse)\s+\w[\w\-]*(?:\s+\d{1,4}[a-zA-Z]?)?/giu;
+/** DE: „Eppendorfer Landstraße 42“ / „Am Markt 3“ — Name vor Straßentyp */
+const DE_ADDRESS_LINE_RE =
+  /\b(?:[A-ZÄÖÜ][\wÄÖÜäöüß.-]*(?:straße|strasse|str\.|allee|weg|platz|gasse|ring|damm)|Am\s+[A-ZÄÖÜ][\wÄÖÜäöüß.-]+|An\s+der\s+[A-ZÄÖÜ][\wÄÖÜäöüß.-]+)\s+\d{1,4}[a-zA-Z]?(?:\s*,\s*\d{5})?(?:\s+[A-ZÄÖÜ][\wÄÖÜäöüß.-]+)?\b/gu;
 const COUNTRY_DE_RE = /\bDeutschland\b/giu;
 /** Dezimal-Koordinaten (nie vorlesen) */
 const COORD_PAIR_RE =
@@ -128,6 +142,49 @@ export function expandGermanAbbreviationsForSpeech(speech: string): string {
   t = t.replace(/\bd\.\s*h\.\s*/gi, 'das heißt ');
   t = t.replace(/\bo\.\s*[Ää]\.\s*/g, 'oder Ähnliches ');
 
+  // Kalenderdatum: „14. September“ → „vierzehnten September“ (TTS liest „14.“ sonst schlecht)
+  const DAY_ORDINAL: Record<number, string> = {
+    1: 'ersten',
+    2: 'zweiten',
+    3: 'dritten',
+    4: 'vierten',
+    5: 'fünften',
+    6: 'sechsten',
+    7: 'siebten',
+    8: 'achten',
+    9: 'neunten',
+    10: 'zehnten',
+    11: 'elften',
+    12: 'zwölften',
+    13: 'dreizehnten',
+    14: 'vierzehnten',
+    15: 'fünfzehnten',
+    16: 'sechzehnten',
+    17: 'siebzehnten',
+    18: 'achtzehnten',
+    19: 'neunzehnten',
+    20: 'zwanzigsten',
+    21: 'einundzwanzigsten',
+    22: 'zweiundzwanzigsten',
+    23: 'dreiundzwanzigsten',
+    24: 'vierundzwanzigsten',
+    25: 'fünfundzwanzigsten',
+    26: 'sechsundzwanzigsten',
+    27: 'siebenundzwanzigsten',
+    28: 'achtundzwanzigsten',
+    29: 'neunundzwanzigsten',
+    30: 'dreißigsten',
+    31: 'einunddreißigsten',
+  };
+  t = t.replace(
+    /\b(\d{1,2})\.\s+(Januar|Februar|März|Maerz|April|Mai|Juni|Juli|August|September|Oktober|November|Dezember)\b/giu,
+    (_full, dayRaw: string, month: string) => {
+      const n = Number(dayRaw);
+      const ord = DAY_ORDINAL[n];
+      return ord ? `${ord} ${month}` : `${dayRaw}. ${month}`;
+    },
+  );
+
   return t;
 }
 
@@ -157,7 +214,8 @@ export function scrubSpeechForTts(
   s = s.replace(INTERNAL_META_RE, ' ');
   s = s.replace(INTERNAL_PHRASE_RE, ' ');
   s = s.replace(STANDALONE_CHECK_RE, (m) => (m.startsWith('.') || m.startsWith('!') || m.startsWith('?') ? m[0]! : ' '));
-  s = s.replace(/\bCheck\.(?=\s|$)/giu, ' ');
+  s = s.replace(/^\s*Fallback:\s*[^\n—–-]*[—–-]\s*/iu, '');
+  s = s.replace(/\bFallback:\s*/giu, ' ');
 
   // Cartesia-/IPA-Leaks nie vorlesen oder in Untertiteln zeigen
   if (/<<[^>]*>>|⟦[^⟧]*⟧|\[[ˈˌ]/.test(s)) {
@@ -211,6 +269,7 @@ export function scrubSpeechForTts(
   if (!opts?.userAskedAddress) {
     const prev = s;
     s = s.replace(PLZ_RE, '');
+    s = s.replace(DE_ADDRESS_LINE_RE, '');
     s = s.replace(STREET_NUM_RE, '');
     s = s.replace(COUNTRY_DE_RE, '');
     // „in 26486 Wangerooge“-ähnlich
@@ -264,7 +323,7 @@ function clampBullet(b: string): string {
 
 function clampActionLabel(label: string): string {
   const t = label.trim().replace(URL_RE, '').replace(/\s+/g, ' ');
-  // Max 30 Zeichen — Emoji + Kurzformen (Route, Karte, Web, …)
+  // Max 22 Zeichen — Emoji + Kurzformen (Route, Karte, Web, …)
   return shortenActionLabel(t);
 }
 
@@ -313,6 +372,7 @@ export function applyHardGuardrails(
     speechText,
     response.quickActions,
   );
+  speechText = bindSpeechToCommittedRoute(speechText);
 
   const bulletsRaw = filterAddressCoordBullets(
     (response.visualBullets ?? []).slice(0, 3).map(clampBullet),

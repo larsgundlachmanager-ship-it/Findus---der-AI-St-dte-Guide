@@ -1,11 +1,21 @@
 /**
- * Filter + Rank: open_at visitAt, Hard-Wishes vorbereiten, Soft-Fail + Out-of-box, immer ≤2.
+ * Filter + Rank: open_at visitAt, Hard-Wishes, Multi-Faktor-Score → Shortlist 5 → Speak Top-2.
  * Dish-/Amenity-Beleg-Finale läuft in hardMatchVerify (runPitchModule).
  */
 
 import { placeFitsPlanVisit } from '../agents/placeHoursFit';
 import type { PitchCandidate, PitchRequest, PitchWish } from './types';
-import { isWegweiserOrApproachName } from './candidatePool';
+import {
+  isGroceryOrMarketCounterVenue,
+  isParkingOrForestLotVenue,
+  isWegweiserOrApproachName,
+} from './nonFoodVenueGate';
+import { scoreSpecializedFoodWish, isOppositeDietVenue } from './specializedFoodMatch';
+import { namedVenueFromWishes, venueNameMatches } from './namedVenueIntent';
+import {
+  PITCH_SHORTLIST_SIZE,
+  rankCandidatesForUser,
+} from './candidateRank';
 
 /** Vorläufig Top-N für Hard-Verify (Belege / Menü / Amenities). */
 export function filterAndRankPool(
@@ -15,8 +25,15 @@ export function filterAndRankPool(
 ): RankOutcome {
   const full = filterAndRank(req, pool);
   if (full.top.length === 0) return full;
-  // Re-run internal open list via soft scoring: take more than 2 when available
-  const visitFiltered = pool.filter((c) => prefsOk(c, req) && fitsVisit(c, req));
+  let visitFiltered = pool.filter((c) => prefsOk(c, req) && fitsVisit(c, req));
+  if (!visitFiltered.length && (req.kind === 'food' || req.kind === 'bar')) {
+    // Nur wirklich zu (nicht: offen, aber zu knapp bis zur Schließung)
+    visitFiltered = pool.filter(
+      (c) =>
+        prefsOk(c, req) &&
+        (c.openNow === false || c.closedOnVisitDay === true),
+    );
+  }
   const musts = req.wishes.filter((w) => w.hardness === 'must');
   const scored = visitFiltered.map((c) => {
     let wishScore = 0;
@@ -24,13 +41,16 @@ export function filterAndRankPool(
     return { c, wishScore };
   });
   let open = scored.map((s) => s.c);
-  const hardKinds = musts.filter(
-    (w) =>
-      w.kind === 'cuisine' ||
-      w.kind === 'amenity' ||
-      w.kind === 'dish' ||
-      w.kind === 'vibe',
-  );
+  const namedVenuePool = namedVenueFromWishes(musts);
+  const hardKinds = namedVenuePool
+    ? musts.filter((w) => w.kind === 'venue')
+    : musts.filter(
+        (w) =>
+          w.kind === 'cuisine' ||
+          w.kind === 'amenity' ||
+          w.kind === 'dish' ||
+          w.kind === 'vibe',
+      );
   if (hardKinds.length) {
     const hard = scored.filter((s) =>
       hardKinds.every((w) => {
@@ -39,15 +59,39 @@ export function filterAndRankPool(
       }),
     );
     if (hard.length) open = hard.map((s) => s.c);
-    else if (musts.some((w) => w.kind === 'dish' || w.kind === 'amenity' || w.kind === 'vibe')) {
+    else if (namedVenuePool) {
       open = [];
+    } else if (
+      musts.some(
+        (w) =>
+          w.kind === 'dish' ||
+          w.kind === 'amenity' ||
+          w.kind === 'vibe' ||
+          w.kind === 'cuisine',
+      )
+    ) {
+      const family = scored.filter((s) =>
+        hardKinds.some((w) => softMatchWish(s.c, w) >= 1),
+      );
+      open =
+        req.kind === 'food' || req.kind === 'bar'
+          ? (family.length ? family : scored).map((s) => s.c)
+          : [];
     }
   }
   const rankKey = (c: PitchCandidate) => {
     const prio = c.detourPrio ?? 6;
     const rating = c.rating ?? 0;
     const dist = c.distFromAnchorM ?? 99_000;
-    return prio * 1_000_000 - rating * 1000 + dist / 100;
+    const specialized = req.wishes.some(
+      (w) =>
+        w.hardness === 'must' &&
+        (w.kind === 'dish' || w.kind === 'cuisine'),
+    );
+    const ratingW =
+      specialized || req.searchMode === 'city_best' ? 8000 : 1000;
+    const reviewW = Math.log10(Math.max(10, c.ratingCount ?? 10));
+    return prio * 1_000_000 - rating * ratingW * reviewW + dist / 100;
   };
   open = [...open].sort((a, b) => rankKey(a) - rankKey(b));
   if (!open.length) return full;
@@ -96,6 +140,9 @@ function fitsVisit(c: PitchCandidate, req: PitchRequest): boolean {
 }
 
 function softMatchWish(c: PitchCandidate, w: PitchWish): number {
+  if (w.kind === 'venue') {
+    return venueNameMatches(c.name, w.text) ? 4 : 0;
+  }
   const blob = `${c.name} ${(c.softTags ?? []).join(' ')} ${(c.hardEvidence ?? []).join(' ')} ${(c.hookNotes ?? []).join(' ')} ${c.address ?? ''}`.toLowerCase();
   const wt = w.text.toLowerCase();
   if (blob.includes(wt)) return w.hardness === 'must' ? 3 : 2;
@@ -116,6 +163,10 @@ function softMatchWish(c: PitchCandidate, w: PitchWish): number {
       }
     }
     if (/griech/.test(wt) && /griech|gyro|souvlaki|hellas/.test(blob)) return 2;
+    {
+      const spec = scoreSpecializedFoodWish(blob, w);
+      if (spec >= 0) return spec;
+    }
   }
   if (w.kind === 'amenity' && /takeaway|mitnehmen|to[-\s]?go/.test(wt)) {
     try {
@@ -127,6 +178,10 @@ function softMatchWish(c: PitchCandidate, w: PitchWish): number {
       return /takeaway|mitnehmen|to[-\s]?go|meal_takeaway/.test(blob) ? 3 : 0;
     }
   }
+  if (w.kind === 'amenity' && /zugrestaurant|speisewagen|dining/.test(wt)) {
+    const spec = scoreSpecializedFoodWish(blob, w);
+    if (spec >= 0) return spec;
+  }
   if (w.kind === 'dish') {
     if (/spaghetti/.test(wt) && /eis/.test(wt)) {
       if (/spaghetti[- ]?eis|spaghettieis/.test(blob)) return 4;
@@ -137,6 +192,10 @@ function softMatchWish(c: PitchCandidate, w: PitchWish): number {
       if (/eisdiele|gelater|eiscafe|eiscafé|\beis\b/.test(blob)) return 2;
       return 0;
     }
+    {
+      const spec = scoreSpecializedFoodWish(blob, w);
+      if (spec >= 0) return spec;
+    }
     if (blob.includes(wt)) return 3;
     return 0;
   }
@@ -144,6 +203,20 @@ function softMatchWish(c: PitchCandidate, w: PitchWish): number {
     if (blob.includes(wt)) return 3;
     if (/blick|view|aussicht/.test(wt) && /blick|view|aussicht/.test(blob)) {
       return 2;
+    }
+    if (
+      /authentisch|heimisch|dorf|homestyle|gemütlich|gemuetlich|traditionell|rustikal|hausgemacht|cozy/.test(
+        wt,
+      )
+    ) {
+      if (
+        /authent|heimisch|homestyle|gemütlich|gemuetlich|cozy|tradition|family|rustikal|hausgemacht|homemade|dorf|ländlich|laendlich/.test(
+          blob,
+        )
+      ) {
+        return 2;
+      }
+      return 1;
     }
     return 0;
   }
@@ -154,7 +227,33 @@ function prefsOk(c: PitchCandidate, req: PitchRequest): boolean {
   if (isWegweiserOrApproachName(c.name, (c.softTags ?? []).join(' '))) {
     return false;
   }
+  if (
+    (req.kind === 'food' || req.kind === 'bar') &&
+    isParkingOrForestLotVenue(c.name, [...(c.softTags ?? []), c.address ?? ''].join(' '))
+  ) {
+    return false;
+  }
+  if (
+    (req.kind === 'food' || req.kind === 'bar') &&
+    isGroceryOrMarketCounterVenue(c.name, [...(c.softTags ?? []), c.address ?? ''])
+  ) {
+    return false;
+  }
   const blob = `${c.name} ${(c.softTags ?? []).join(' ')}`.toLowerCase();
+  const mustFood = req.wishes
+    .filter((w) => w.hardness === 'must' && (w.kind === 'dish' || w.kind === 'cuisine'))
+    .map((w) => w.text)
+    .join(' ');
+  const wishBlob = mustFood || `${req.title} ${req.context}`;
+  if (
+    !namedVenueFromWishes(req.wishes) &&
+    isOppositeDietVenue(
+      `${c.name} ${(c.softTags ?? []).join(' ')} ${(c.hookNotes ?? []).join(' ')}`,
+      wishBlob,
+    )
+  ) {
+    return false;
+  }
   for (const a of req.prefs.avoidCategories ?? []) {
     if (blob.includes(a.toLowerCase())) return false;
   }
@@ -187,15 +286,25 @@ function isBakeryOnlyBlob(blob: string): boolean {
 
 function isInfraLandmarkName(name: string, blob: string): boolean {
   const n = `${name} ${blob}`.toLowerCase();
-  return /\b(brücke|bruecke|bridge|eisenbahn|bahnübergang|bahnuebergang|viadukt|parkplatz|parkplatz|haltestelle|bushaltestelle|bahnhof|route|highway|railway|denkmal|aussichtspunkt|spielplatz)\b/.test(
+  if (
+    /(wald)?parkplatz|parkhaus|p\+r\b|park.?and.?ride|parking[_ -]?lot/.test(n) &&
+    !/restaurant|gasthof|wirtshaus|hotel|café|cafe|bistro/.test(n)
+  ) {
+    return true;
+  }
+  return /\b(brücke|bruecke|bridge|eisenbahn|bahnübergang|bahnuebergang|viadukt|haltestelle|bushaltestelle|bahnhof|route|highway|railway|denkmal|aussichtspunkt|spielplatz)\b/.test(
     n,
   );
 }
 
 function kindFitsCandidate(c: PitchCandidate, req: PitchRequest): boolean {
+  const namedVenue = namedVenueFromWishes(req.wishes);
+  if (namedVenue && venueNameMatches(c.name, namedVenue)) {
+    return true;
+  }
   const blob = `${c.name} ${(c.softTags ?? []).join(' ')} ${c.address ?? ''}`.toLowerCase();
   if (
-    /coiffeur|friseur|frisör|frisoer|hair|nagelstudio|physiother|zahnarzt|apotheke|büro|buero|verwaltung|supermarkt|aldi|lidl/.test(
+    /coiffeur|friseur|frisör|frisoer|hair|nagelstudio|physiother|zahnarzt|apotheke|büro|buero|verwaltung|supermarkt|aldi|lidl|marktkauf|kaufland|edeka|penny|netto|frischecenter|allwörden|allwoerden/.test(
       blob,
     )
   ) {
@@ -251,8 +360,9 @@ function kindFitsCandidate(c: PitchCandidate, req: PitchRequest): boolean {
       }
     }
     // Eis / Spaghetti-Eis: nur Eisdielen/Cafés mit Eis-Signal
-    if (/eis|gelato|ice\s*cream|spaghetti/.test(wishBlob)) {
-      return /eis|gelat|ice.?cream|parfait|eisdiele|eiscafé|eiscafe|café|cafe|konditor|süß|suess/.test(
+    // Wichtig: \beis\b — sonst matcht „Fleisch“ falsch
+    if (/\beis\b|gelato|ice\s*cream|spaghetti/.test(wishBlob)) {
+      return /\beis\b|gelat|ice.?cream|parfait|eisdiele|eiscafé|eiscafe|café|cafe|konditor|süß|suess/.test(
         blob,
       );
     }
@@ -274,6 +384,14 @@ function kindFitsCandidate(c: PitchCandidate, req: PitchRequest): boolean {
     }
     // Frühstück: reine Biergärten/Bars ohne Café-Signal raus
     if (/frühstück|fruehstueck|breakfast/.test(wishBlob)) {
+      try {
+        const { isProductionOnlyBakery } = require('../agents/localDiningCatalog') as {
+          isProductionOnlyBakery: (n: string, t?: string | null) => boolean;
+        };
+        if (isProductionOnlyBakery(c.name, blob)) return false;
+      } catch {
+        /* soft */
+      }
       if (
         /biergarten|weinbar|cocktailbar|nachtclub|disco/.test(blob) &&
         !/café|cafe|frühstück|fruehstueck|breakfast|bistro|restaurant|bäck|baeck/.test(
@@ -283,9 +401,9 @@ function kindFitsCandidate(c: PitchCandidate, req: PitchRequest): boolean {
         return false;
       }
     }
-    // Abendessen: echtes Gastro-Signal nötig — softTag „food“ allein reicht nicht
+    // Abendessen: echtes Gastro-Lokal — Küchenwort allein reicht nicht (Asia-Regal im Markt)
     if (isDinnerOrEveningMeal(req)) {
-      return /\b(restaurant|pizza|pasta|trattoria|osteria|bistro|gastro|imbiss|burger|sushi|griech|döner|doener|kebab|grill|steak|italiener|asia|thai|indisch|chinesisch|vegan|wirtshaus|gasthof|brasserie)\b/.test(
+      return /\b(restaurant|pizza|pasta|trattoria|osteria|bistro|gastro|imbiss|burger|sushi|döner|doener|kebab|grill|steak|wirtshaus|gasthof|brasserie|steakhouse|ramen|tapas|vietnames|thailänd|thailaend|chinesisch|japanisch|koreanisch|indisch|griech)\b/.test(
         blob,
       );
     }
@@ -302,11 +420,35 @@ function kindFitsCandidate(c: PitchCandidate, req: PitchRequest): boolean {
   if (req.kind === 'cinema') {
     return /kino|cinema|filmtheater/.test(blob);
   }
+  if (req.kind === 'sight') {
+    const wish = `${req.title} ${req.context} ${req.wishes.map((w) => w.text).join(' ')}`;
+    try {
+      const { looksLikePicnicQuery, isPicnicUnsuitableVenue } = require('./picnicIntent') as {
+        looksLikePicnicQuery: (s: string) => boolean;
+        isPicnicUnsuitableVenue: (n: string, e?: string | string[] | null) => boolean;
+      };
+      if (looksLikePicnicQuery(wish) && isPicnicUnsuitableVenue(c.name, blob)) {
+        return false;
+      }
+    } catch {
+      /* soft */
+    }
+  }
   return true;
+}
+
+function pickDiningOutOfBox(
+  c: PitchCandidate | null | undefined,
+): PitchCandidate | null {
+  if (!c) return null;
+  if (isGroceryOrMarketCounterVenue(c.name, c.softTags ?? [])) return null;
+  return c;
 }
 
 export type RankOutcome = {
   top: PitchCandidate[];
+  /** Volle Shortlist (bis 5) nach Multi-Faktor-Ranking — Speak nutzt top */
+  shortlist?: PitchCandidate[];
   softFail: boolean;
   outOfBox: PitchCandidate | null;
   reason?: string;
@@ -319,26 +461,44 @@ export function filterAndRank(
   const visitAt = req.visitAtMs;
   const stayMin = req.stayMin ?? (req.kind === 'food' ? 75 : 45);
 
+  let wishSoftFail = false;
+  let allClosedNow = false;
   let open = pool.filter((c) => {
     if (!prefsOk(c, req)) return false;
     return fitsVisit(c, req);
   });
+  if (open.length === 0 && (req.kind === 'food' || req.kind === 'bar')) {
+    const closed = pool.filter((c) => {
+      if (!prefsOk(c, req)) return false;
+      return c.openNow === false || c.closedOnVisitDay === true;
+    });
+    if (closed.length) {
+      open = closed;
+      allClosedNow = true;
+    } else {
+      open = [];
+      wishSoftFail = true;
+    }
+  }
 
   // Soft wish boost + Hard must filter (cuisine / amenity / dish / vibe)
   const musts = req.wishes.filter((w) => w.hardness === 'must');
+  const namedVenue = namedVenueFromWishes(musts);
   const scored = open.map((c) => {
     let wishScore = 0;
     for (const w of req.wishes) wishScore += softMatchWish(c, w);
     return { c, wishScore };
   });
 
-  const hardKinds = musts.filter(
-    (w) =>
-      w.kind === 'cuisine' ||
-      w.kind === 'amenity' ||
-      w.kind === 'dish' ||
-      w.kind === 'vibe',
-  );
+  const hardKinds = namedVenue
+    ? musts.filter((w) => w.kind === 'venue')
+    : musts.filter(
+        (w) =>
+          w.kind === 'cuisine' ||
+          w.kind === 'amenity' ||
+          w.kind === 'dish' ||
+          w.kind === 'vibe',
+      );
   if (hardKinds.length) {
     // Cuisine/Amenity/Vibe: Name/Tags-Score reicht als Vorfilter
     // Dish: mind. Kategorie-Signal (Score≥1), Beleg kommt in hardMatchVerify
@@ -353,9 +513,27 @@ export function filterAndRank(
       open = hard
         .sort((a, b) => b.wishScore - a.wishScore)
         .map((s) => s.c);
-    } else if (musts.some((w) => w.kind === 'dish' || w.kind === 'amenity' || w.kind === 'vibe')) {
-      // Kein Kategorie-/Amenity-Vorfilter-Treffer → nicht mit Fremdorten füllen
+    } else if (namedVenue) {
       open = [];
+      wishSoftFail = true;
+    } else if (musts.some((w) => w.kind === 'dish' || w.kind === 'amenity' || w.kind === 'vibe' || w.kind === 'cuisine')) {
+      if (req.kind === 'food' || req.kind === 'bar') {
+        const family = scored.filter((s) =>
+          hardKinds.some((w) => softMatchWish(s.c, w) >= 1),
+        );
+        // Must-Filter ohne Familie → leer (kein Rating-Flood mit Döner bei Steak)
+        if (!family.length) {
+          open = [];
+          wishSoftFail = true;
+        } else {
+          open = family
+            .sort((a, b) => b.wishScore - a.wishScore)
+            .map((s) => s.c);
+          wishSoftFail = true;
+        }
+      } else {
+        open = [];
+      }
     } else {
       open = scored
         .sort((a, b) => b.wishScore - a.wishScore)
@@ -367,15 +545,15 @@ export function filterAndRank(
       .map((s) => s.c);
   }
 
+  const shortlistN = req.shortlistSize ?? PITCH_SHORTLIST_SIZE;
+  const speakN = 2;
+
   const rankKey = (c: PitchCandidate) => {
-    const prio = c.detourPrio ?? 6;
-    const rating = c.rating ?? 0;
-    const dist = c.distFromAnchorM ?? 99_000;
-    // näher schlägt ~0.1 Stern: dist in 100m-Blöcken
-    return prio * 1_000_000 - rating * 1000 + dist / 100;
+    // niedriger = besser für legacy Array.sort(a-b) — invertierte Multi-Faktor-Score
+    return -rankCandidatesForUser(req, [c])[0]!.score;
   };
 
-  open = [...open].sort((a, b) => rankKey(a) - rankKey(b));
+  open = rankCandidatesForUser(req, open).map((r) => r.c);
 
   const cheapAsk =
     req.prefs.budgetHint === 'günstig' ||
@@ -409,41 +587,113 @@ export function filterAndRank(
   }
 
   if (open.length === 0) {
-    // Soft-fail: nur kind-passende Alternativen — nie Friseur für Pizza
-    const fallback = [...pool]
-      .filter((p) => fitsVisit(p, req) && prefsOk(p, req))
-      .sort((a, b) => rankKey(a) - rankKey(b));
-    if (fallback.length === 0) {
+    if (namedVenue) {
       return {
         top: [],
+        softFail: true,
+        outOfBox: null,
+        reason: 'Genannten Ort nicht gefunden — ich ersetze ihn nicht durch Nearby.',
+      };
+    }
+    const hasMustFood = musts.some(
+      (w) =>
+        w.kind === 'dish' ||
+        w.kind === 'amenity' ||
+        w.kind === 'vibe' ||
+        w.kind === 'cuisine',
+    );
+    // Must-Filter: keine „irgendeine Gastro“-Flut (Steak ≠ Döner)
+    if (hasMustFood) {
+      return {
+        top: [],
+        shortlist: [],
         softFail: true,
         outOfBox: null,
         reason:
           'In der Nähe nichts Passendes gefunden — sag Ort/Stadtteil oder wir suchen weiter.',
       };
     }
-    const alt = fallback.slice(0, 2);
-    const oob = fallback[2] ?? null;
+    const gastroAlts = [...pool].filter(
+      (p) => prefsOk(p, req) && (allClosedNow || fitsVisit(p, req)),
+    );
+    if ((req.kind === 'food' || req.kind === 'bar') && gastroAlts.length) {
+      const alt = rankCandidatesForUser(req, gastroAlts).map((r) => r.c);
+      const shortlist = alt.slice(0, shortlistN);
+      return {
+        top: shortlist.slice(0, speakN),
+        shortlist,
+        softFail: true,
+        outOfBox: pickDiningOutOfBox(shortlist[speakN]),
+        reason: allClosedNow
+          ? 'Alle Treffer gerade zu — Optionen für morgen.'
+          : 'Wunsch nicht hart belegt — ehrliche Alternativen aus der Live-Suche.',
+      };
+    }
+    // Soft-fail: nur kind-passende Alternativen — nie Friseur für Pizza
+    const fallback = rankCandidatesForUser(
+      req,
+      pool.filter((p) => fitsVisit(p, req) && prefsOk(p, req)),
+    ).map((r) => r.c);
+    if (fallback.length === 0) {
+      return {
+        top: [],
+        shortlist: [],
+        softFail: true,
+        outOfBox: null,
+        reason:
+          'In der Nähe nichts Passendes gefunden — sag Ort/Stadtteil oder wir suchen weiter.',
+      };
+    }
+    const shortlist = fallback.slice(0, shortlistN);
     return {
-      top: alt,
+      top: shortlist.slice(0, speakN),
+      shortlist,
       softFail: true,
-      outOfBox: oob,
+      outOfBox: pickDiningOutOfBox(shortlist[speakN]),
       reason: 'Nichts wirklich Passendes — Alternativen mit besseren Chancen.',
     };
   }
 
   if (open.length === 1) {
-    const rest = pool
-      .filter((p) => p.name !== open[0]!.name && fitsVisit(p, req) && prefsOk(p, req))
-      .sort((a, b) => rankKey(a) - rankKey(b));
+    if (namedVenue) {
+      return {
+        top: [open[0]!],
+        shortlist: [open[0]!],
+        softFail: wishSoftFail || allClosedNow,
+        outOfBox: null,
+        reason: allClosedNow
+          ? 'Alle Treffer gerade zu — Optionen für morgen.'
+          : undefined,
+      };
+    }
+    const rest = rankCandidatesForUser(
+      req,
+      pool
+        .filter((p) => p.name !== open[0]!.name && fitsVisit(p, req) && prefsOk(p, req))
+        .filter((p) => {
+          if (!musts.length) return true;
+          return musts.every((w) => {
+            if (w.kind === 'generic') return true;
+            const part = softMatchWish(p, w);
+            return w.kind === 'dish' ? part >= 1 : part >= 2;
+          });
+        }),
+    ).map((r) => r.c);
     const alt = rest.find((p) => !sameBrandFamily(open[0]!.name, p.name)) ?? rest[0];
+    const top = alt ? [open[0]!, alt] : [open[0]!];
+    const shortlist = [open[0]!, ...rest].slice(0, shortlistN);
     return {
-      top: alt ? [open[0]!, alt] : [open[0]!],
-      softFail: !alt,
-      outOfBox: rest.find((p) => p !== alt) ?? null,
-      reason: alt
-        ? undefined
-        : 'Nur eine klare Option — Alternative unsicher.',
+      top,
+      shortlist,
+      softFail: !alt || wishSoftFail || allClosedNow,
+      outOfBox: pickDiningOutOfBox(rest.find((p) => p !== alt)),
+      reason: allClosedNow
+        ? 'Alle Treffer gerade zu — Optionen für morgen.'
+        : wishSoftFail
+          ? 'Wunsch nicht hart belegt — ehrliche Alternativen aus der Live-Suche.'
+          : alt
+            ? undefined
+            : 'Nur eine klare Option — Alternative unsicher.',
     };
   }
 
@@ -473,9 +723,17 @@ export function filterAndRank(
     /* soft */
   }
   return {
-    top: [first, second].filter(Boolean).slice(0, 2),
-    softFail: false,
-    outOfBox: open.find((c) => c !== first && c !== second) ?? null,
+    top: [first, second].filter(Boolean).slice(0, speakN),
+    shortlist: open.slice(0, shortlistN),
+    softFail: wishSoftFail || allClosedNow,
+    outOfBox: pickDiningOutOfBox(
+      open.find((c) => c !== first && c !== second),
+    ),
+    reason: allClosedNow
+      ? 'Alle Treffer gerade zu — Optionen für morgen.'
+      : wishSoftFail
+        ? 'Wunsch nicht hart belegt — ehrliche Alternativen aus der Live-Suche.'
+        : undefined,
   };
 }
 

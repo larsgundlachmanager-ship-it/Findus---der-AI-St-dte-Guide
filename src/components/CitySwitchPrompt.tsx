@@ -1,11 +1,10 @@
-/**
- * Stadtwechsel-Prompt — Cover + Fakten wie Stadt-Katalog, Findus-Design.
+﻿/**
+ * Stadtwechsel-Prompt â€” Cover + Fakten wie Stadt-Katalog, Yorro-Design.
  * Overlay statt RN-Modal (Android: Modal oft nur Fragmente / kein Inhalt).
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
-  ActivityIndicator,
   Image,
   Pressable,
   ScrollView,
@@ -13,18 +12,23 @@ import {
   Text,
   View,
 } from 'react-native';
+import { Feather } from '@expo/vector-icons';
+import { triggerHapticPulse } from '../services/navigation/haptics';
 import { colors, spacing } from '../constants/theme';
 import { UI_LAYER } from '../constants/uiLayers';
 import {
-  cityCoverFocus,
   citySearchMeta,
-  prefetchCityCover,
   resolveCityCoverSource,
 } from '../constants/cityCovers';
+import {
+  ensureCityCoverCached,
+  peekCachedCoverFile,
+} from '../services/cityCoverCache';
 import { CITY_CARD_HERO } from '../constants/personaPortraits';
 import {
   registerCitySwitchPresenter,
   registerCitySwitchSettledListener,
+  registerCitySwitchAbort,
   type CitySwitchPromptPayload,
   type CitySwitchDecision,
 } from '../services/cityProximityService';
@@ -40,44 +44,56 @@ function formatKm(km: number): string {
   return `${Math.round(km)} km`;
 }
 
-function CityHero({ city }: { city: CityCatalogItem }) {
-  const focus = cityCoverFocus(city.id);
+function CityHero({
+  city,
+  soft,
+  badge,
+}: {
+  city: CityCatalogItem;
+  soft?: boolean;
+  badge?: string;
+}) {
   const [coverPhase, setCoverPhase] = useState<'primary' | 'hero'>('primary');
+  const [localCover, setLocalCover] = useState<string | null>(() =>
+    peekCachedCoverFile(city.id, city.coverUrl),
+  );
 
   useEffect(() => {
     setCoverPhase('primary');
-    prefetchCityCover(city.coverUrl);
-  }, [city.id, city.coverUrl]);
+    const peek = peekCachedCoverFile(city.id, city.coverUrl);
+    setLocalCover(peek);
+    if (peek || soft) return;
+    let cancelled = false;
+    void ensureCityCoverCached(city.id, city.coverUrl).then((uri) => {
+      if (!cancelled && uri) setLocalCover(uri);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [city.id, city.coverUrl, soft]);
 
   const coverSource =
-    coverPhase === 'hero'
+    coverPhase === 'hero' || soft
       ? CITY_CARD_HERO
-      : resolveCityCoverSource(city.id, city.coverUrl);
+      : localCover
+        ? { uri: localCover.startsWith('file:') ? localCover : `file://${localCover}` }
+        : resolveCityCoverSource(city.id, city.coverUrl);
 
   return (
     <View style={styles.heroClip}>
       <Image
-        key={`${city.id}:${coverPhase}:${city.coverUrl || ''}`}
+        key={`${city.id}:${coverPhase}:${city.coverUrl || ''}:${soft ? 's' : 'p'}`}
         source={coverSource}
-        style={[
-          styles.heroImg,
-          {
-            transform: [
-              { scale: focus.scale },
-              { translateY: focus.translateY },
-              { translateX: focus.translateX },
-            ],
-          },
-        ]}
+        style={styles.heroImg}
         resizeMode="cover"
         onError={() => {
           setCoverPhase('hero');
         }}
       />
-      <View style={styles.heroShadeTop} pointerEvents="none" />
-      <View style={styles.heroShadeBottom} pointerEvents="none" />
       <View style={styles.heroBadge}>
-        <Text style={styles.heroBadgeText}>Näher bei dir</Text>
+        <Text style={styles.heroBadgeText}>
+          {badge || (soft ? 'Neu erkannt' : 'NÃ¤her bei dir')}
+        </Text>
       </View>
     </View>
   );
@@ -93,52 +109,84 @@ function StatPill({ num, label }: { num: number; label: string }) {
 }
 
 /**
- * Einmal in App mounten — Presenter für cityProximityService.
- * Absolutes Overlay (kein RN-Modal) → Android zeigt die Karte zuverlässig.
+ * Einmal in App mounten â€” Presenter fÃ¼r cityProximityService.
+ * Absolutes Overlay (kein RN-Modal) â†’ Android zeigt die Karte zuverlÃ¤ssig.
  */
 export function CitySwitchPromptHost() {
   const [pending, setPending] = useState<Pending | null>(null);
-  const [busy, setBusy] = useState(false);
+  const [acceptedFlash, setAcceptedFlash] = useState(false);
+  const acceptedRef = useRef(false);
+  const pendingRef = useRef<Pending | null>(null);
+  pendingRef.current = pending;
+
+  const finish = (decision: CitySwitchDecision) => {
+    const cur = pendingRef.current;
+    if (!cur) return;
+    triggerHapticPulse(decision === 'accept' ? 'heavy' : 'single');
+    if (decision === 'accept') {
+      if (acceptedRef.current) return;
+      acceptedRef.current = true;
+      setAcceptedFlash(true);
+      cur.resolve('accept');
+      setTimeout(() => {
+        acceptedRef.current = false;
+        pendingRef.current = null;
+        setPending(null);
+        setAcceptedFlash(false);
+      }, 520);
+      return;
+    }
+    try {
+      cur.resolve('dismiss');
+    } catch {
+      /* soft */
+    }
+    acceptedRef.current = false;
+    pendingRef.current = null;
+    setPending(null);
+    setAcceptedFlash(false);
+  };
+
+  const finishRef = useRef(finish);
+  finishRef.current = finish;
 
   useEffect(() => {
     registerCitySwitchPresenter((payload) => {
       return new Promise<CitySwitchDecision>((resolve) => {
-        setBusy(false);
-        setPending({ payload, resolve });
+        acceptedRef.current = false;
+        setAcceptedFlash(false);
+        const next = { payload, resolve };
+        pendingRef.current = next;
+        setPending(next);
       });
     });
     registerCitySwitchSettledListener(() => {
+      if (acceptedRef.current) return;
+      pendingRef.current = null;
       setPending(null);
-      setBusy(false);
+      setAcceptedFlash(false);
     });
+    registerCitySwitchAbort((d) => finishRef.current(d));
     return () => {
       registerCitySwitchPresenter(null);
       registerCitySwitchSettledListener(null);
+      registerCitySwitchAbort(null);
     };
   }, []);
 
-  const finish = (decision: CitySwitchDecision) => {
-    if (!pending || busy) return;
-    if (decision === 'accept') {
-      setBusy(true);
-      pending.resolve('accept');
-      return;
-    }
-    pending.resolve('dismiss');
-    setPending(null);
-    setBusy(false);
-  };
-
   if (!pending) return null;
 
-  const { nearest, selected, nearestKm, selectedKm } = pending.payload;
+  const { nearest, selected, nearestKm, selectedKm, softTarget, reason } =
+    pending.payload;
+  const research = reason === 'research';
   const meta = citySearchMeta(nearest.id);
-  const regionLine = [meta.region, meta.country].filter(Boolean).join(' · ');
+  const regionLine = [meta.region, meta.country].filter(Boolean).join(' Â· ');
   const triggers = nearest.triggerCount ?? nearest.placeCount ?? 0;
   const zones = nearest.zoneCount ?? nearest.directoryCount ?? 0;
   const stories = nearest.storyCount ?? 0;
   const facts = nearest.factCount ?? 0;
   const selectedName = selected.name?.trim() || 'deiner Stadt';
+  const soft = Boolean(softTarget);
 
   return (
     <View
@@ -149,28 +197,41 @@ export function CitySwitchPromptHost() {
       <Pressable
         style={styles.backdropHit}
         onPress={() => finish('dismiss')}
-        disabled={busy}
-        accessibilityLabel="Schließen"
+        accessibilityLabel="SchlieÃŸen"
       />
       <View style={styles.centerWrap} pointerEvents="box-none">
         <View
           style={styles.card}
           accessibilityRole="summary"
-          accessibilityLabel={`${nearest.name} — näher als ${selectedName}`}
+          accessibilityLabel={`${nearest.name} â€” ${soft ? 'neu erkannt' : `nÃ¤her als ${selectedName}`}`}
         >
           <ScrollView
             bounces={false}
             showsVerticalScrollIndicator={false}
             contentContainerStyle={styles.scrollContent}
           >
-            <CityHero city={nearest} />
+            <CityHero
+              city={nearest}
+              soft={soft}
+              badge={research ? 'Datensatz' : undefined}
+            />
 
             <View style={styles.body}>
-              <Text style={styles.eyebrow}>Stadt in der Nähe</Text>
+              <Text style={styles.eyebrow}>
+                {research
+                  ? 'FÃ¼r die Recherche'
+                  : soft
+                    ? 'Stadt erkannt'
+                    : 'Stadt in der NÃ¤he'}
+              </Text>
               <Text style={styles.title}>{nearest.name}</Text>
-              {regionLine ? (
+              {regionLine && !soft ? (
                 <Text style={styles.region} numberOfLines={1}>
                   {regionLine}
+                </Text>
+              ) : soft ? (
+                <Text style={styles.region} numberOfLines={2}>
+                  Ohne Datensatz â€” Restaurants, Hotels & Orte live vor Ort
                 </Text>
               ) : null}
 
@@ -180,56 +241,74 @@ export function CitySwitchPromptHost() {
                     {selectedName}
                   </Text>
                   <Text style={styles.compareKmMuted}>
-                    {formatKm(selectedKm)}
+                    {research ? 'jetzt' : formatKm(selectedKm)}
                   </Text>
                 </View>
-                <Text style={styles.compareArrow}>→</Text>
+                <Text style={styles.compareArrow}>â†’</Text>
                 <View style={[styles.compareCol, styles.compareColFocus]}>
                   <Text style={styles.compareLabelFocus} numberOfLines={1}>
                     {nearest.name}
                   </Text>
-                  <Text style={styles.compareKm}>{formatKm(nearestKm)}</Text>
+                  <Text style={styles.compareKm}>
+                    {research ? 'laden' : formatKm(nearestKm)}
+                  </Text>
                 </View>
               </View>
 
-              <View style={styles.statRow}>
-                <StatPill num={triggers} label="Trigger" />
-                <StatPill num={zones} label="Orte" />
-                <StatPill num={stories} label="Stories" />
-                <StatPill num={facts} label="Fakten" />
-              </View>
+              {!soft && !research ? (
+                <View style={styles.statRow}>
+                  <StatPill num={triggers} label="Trigger" />
+                  <StatPill num={zones} label="Orte" />
+                  <StatPill num={stories} label="Stories" />
+                  <StatPill num={facts} label="Fakten" />
+                </View>
+              ) : null}
 
               <Text style={styles.prompt}>
-                Du bist näher an {nearest.name} als an {selectedName}. Pack
-                wechseln und hier weiter entdecken?
+                {research
+                  ? `FÃ¼r ${nearest.name} recherchiere ich besser, wenn wir wechseln. Wollen wir das?`
+                  : soft
+                    ? `Du bist in ${nearest.name}. Hier weiter entdecken â€” Suche & Tipps laufen auf ${nearest.name}, auch ohne fertigen Datensatz.`
+                    : `Du bist nÃ¤her an ${nearest.name} als an ${selectedName}. Pack wechseln und hier weiter entdecken?`}
               </Text>
-
-              <View style={styles.actions}>
-                <Pressable
-                  onPress={() => finish('dismiss')}
-                  disabled={busy}
-                  style={styles.secondary}
-                  accessibilityRole="button"
-                  accessibilityLabel={`Bei ${selectedName} bleiben`}
-                >
-                  <Text style={styles.secondaryText}>Bleiben</Text>
-                </Pressable>
-                <Pressable
-                  onPress={() => finish('accept')}
-                  disabled={busy}
-                  style={styles.primary}
-                  accessibilityRole="button"
-                  accessibilityLabel={`Auf ${nearest.name} wechseln`}
-                >
-                  {busy ? (
-                    <ActivityIndicator color={colors.bg} />
-                  ) : (
-                    <Text style={styles.primaryText}>Wechseln</Text>
-                  )}
-                </Pressable>
-              </View>
             </View>
           </ScrollView>
+          <View style={styles.actions}>
+            <Pressable
+              onPress={() => finish('dismiss')}
+              style={styles.secondary}
+              hitSlop={16}
+              accessibilityRole="button"
+              accessibilityLabel={`Bei ${selectedName} bleiben`}
+            >
+              <Text style={styles.secondaryText}>Bleiben</Text>
+            </Pressable>
+            <Pressable
+              onPress={() => finish('accept')}
+              disabled={acceptedFlash}
+              style={styles.primary}
+              hitSlop={16}
+              accessibilityRole="button"
+              accessibilityLabel={
+                soft
+                  ? `${nearest.name} als Stadt wÃ¤hlen`
+                  : `Auf ${nearest.name} wechseln`
+              }
+            >
+              {acceptedFlash ? (
+                <View style={styles.acceptedRow}>
+                  <Feather name="check" size={20} color={colors.bg} />
+                  <Text style={styles.primaryText} numberOfLines={1}>
+                    {nearest.name}
+                  </Text>
+                </View>
+              ) : (
+                <Text style={styles.primaryText}>
+                  {research ? 'Wechseln' : soft ? 'Hier nutzen' : 'Wechseln'}
+                </Text>
+              )}
+            </Pressable>
+          </View>
         </View>
       </View>
     </View>
@@ -239,8 +318,8 @@ export function CitySwitchPromptHost() {
 const styles = StyleSheet.create({
   overlay: {
     ...StyleSheet.absoluteFillObject,
-    zIndex: UI_LAYER.overlay + 20,
-    elevation: UI_LAYER.overlay + 20,
+    zIndex: UI_LAYER.askSheet,
+    elevation: UI_LAYER.askSheet,
   },
   backdropHit: {
     ...StyleSheet.absoluteFillObject,
@@ -272,29 +351,14 @@ const styles = StyleSheet.create({
   },
   heroClip: {
     width: '100%',
-    height: 188,
+    // Covers sind 3:2 â€” Rahmen muss matchen, sonst fehlt unten Bildinhalt
+    aspectRatio: 3 / 2,
     backgroundColor: colors.surface,
     overflow: 'hidden',
   },
   heroImg: {
     width: '100%',
     height: '100%',
-  },
-  heroShadeTop: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    height: 48,
-    backgroundColor: 'rgba(15, 44, 36, 0.25)',
-  },
-  heroShadeBottom: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    bottom: 0,
-    height: 88,
-    backgroundColor: 'rgba(15, 44, 36, 0.55)',
   },
   heroBadge: {
     position: 'absolute',
@@ -423,7 +487,9 @@ const styles = StyleSheet.create({
   actions: {
     flexDirection: 'row',
     gap: 10,
-    marginTop: 10,
+    paddingHorizontal: spacing.md,
+    paddingBottom: spacing.lg,
+    paddingTop: 8,
   },
   secondary: {
     flex: 1,
@@ -452,5 +518,11 @@ const styles = StyleSheet.create({
     color: colors.bg,
     fontSize: 15,
     fontWeight: '800',
+  },
+  acceptedRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    paddingHorizontal: 8,
   },
 });

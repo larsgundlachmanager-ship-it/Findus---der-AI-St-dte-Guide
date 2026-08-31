@@ -1,0 +1,714 @@
+{
+  "blueprints": [
+    {
+      "intentFamily": "general",
+      "situationKey": "general::bridge_understood_commit_v1",
+      "tags": [
+        "bridge",
+        "ack",
+        "call1"
+      ],
+      "expect": [
+        "answer_first",
+        "casual_tone"
+      ],
+      "avoid": [
+        "vague_filler",
+        "permission_questions"
+      ],
+      "summary": "Bridge (Call 1): Nur DIESE User-Nachricht — Wunsch verstanden + Zusage. Neues Thema (z. B. Flug nach Essen) = frische Bridge, kein toter Faden. Kurz 1–2 Sätze. Wetter ≠ Optionen. Keine Venue-Namen/Preise/Minuten. Call 2 hängt flüssig an."
+    },
+    {
+      "intentFamily": "dining",
+      "situationKey": "dining::pitch_reject_followup_v1",
+      "tags": [
+        "pitch",
+        "followup",
+        "reject"
+      ],
+      "expect": [
+        "alternatives",
+        "answer_first",
+        "concrete_place",
+        "route_button"
+      ],
+      "avoid": [
+        "vague_filler",
+        "permission_questions",
+        "long_history"
+      ],
+      "summary": "Ablehnung einer Pitch-Option (mag ich nicht / kein X / was noch): gleicher Suchkontext, andere Orte ohne Abgelehntes. Call-2 nur diesen Faden, kein totes Trivia."
+    },
+    {
+      "intentFamily": "dining",
+      "situationKey": "dining::compound_sunset_view_v1",
+      "tags": [
+        "pitch",
+        "compound",
+        "sunset",
+        "view",
+        "topic_cut"
+      ],
+      "expect": [
+        "concrete_place",
+        "alternatives",
+        "answer_first",
+        "route_button",
+        "menu"
+      ],
+      "avoid": [
+        "vague_filler",
+        "permission_questions",
+        "long_history",
+        "address_unless_asked"
+      ],
+      "summary": "Compound-Abend (Gericht + Sonnenuntergang/Blick): neues Thema ohne alten Chat. Backend Top-5 nach Kriterien (Gericht, Blick, Offen, Budget, Diät, Timeline), Speak Top-2. Call 2 pitcht Warum; nach Wahl jetzt=Nav oder später=Timeline+Leave-by."
+    },
+    {
+      "intentFamily": "dining",
+      "tags": [
+        "pitch",
+        "topic_cut",
+        "future_place"
+      ],
+      "expect": [
+        "concrete_place",
+        "alternatives",
+        "answer_first",
+        "route_button"
+      ],
+      "avoid": [
+        "vague_filler",
+        "permission_questions",
+        "long_history"
+      ],
+      "summary": "Essenswunsch (auch morgen in anderer Stadt): Bridge zusagen, dann Pitch mit zwei passenden Orten. Totes Trivia nicht mischen. Kein Tagesplan-Popup, kein Pack-Zwang."
+    },
+    {
+      "intentFamily": "dining",
+      "tags": [
+        "speisekarte",
+        "reviews",
+        "maps",
+        "route",
+        "cafe",
+        "bar",
+        "snack",
+        "fruehstueck"
+      ],
+      "expect": [
+        "prices",
+        "menu",
+        "concrete_place",
+        "alternatives",
+        "answer_first",
+        "route_button"
+      ],
+      "avoid": [
+        "vague_filler",
+        "fake_promises",
+        "address_unless_asked",
+        "long_history",
+        "hours_unless_tight",
+        "opposite_diet"
+      ],
+      "summary": "Gastro inkl. Frühstück, Café, Bar, Snack, Gericht: genannter Ort = genau der, auch außerhalb GPS; sonst Nähe. Preise, Speisekarte als Deep-Link (nicht Homepage). Zweite Option hinten. Route."
+    },
+    {
+      "intentFamily": "navigation",
+      "tags": [
+        "taxi",
+        "uber",
+        "airport",
+        "transfer"
+      ],
+      "expect": [
+        "concrete_place",
+        "booking_url"
+      ],
+      "avoid": [
+        "vague_filler",
+        "permission_questions"
+      ],
+      "summary": "Taxi und Flughafentransfer: Ziel aus Route oder Flughafen; Partnerlink Pickup+Dropoff zuerst, lokale Nummer optional; ÖPNV beenden; Fahrtdauer nennen."
+    },
+    {
+      "intentFamily": "general",
+      "tags": [
+        "weather"
+      ],
+      "expect": [
+        "answer_first",
+        "sky_conditions",
+        "temp_range",
+        "rain_timing",
+        "clothing_tip",
+        "casual_tone"
+      ],
+      "avoid": [
+        "vague_filler",
+        "address_unless_asked",
+        "permission_questions",
+        "station_board_fallback",
+        "aushang",
+        "invent_storm",
+        "dry_list"
+      ],
+      "summary": "Wetter locker und menschlich (auch Live-HUD-Tap): 2–3 Sätze Alltagston — Aktuell … Grad bei …, Tagsüber bis …, Regen ja/nein mit Uhr ohne Prozent und ohne „Regenfenster“. Kein Heute-Spam, kein Fakten-Stakkato. Stichpunkte kompakt mit °. Kartentitel Wetter/Stadt — nie Temperatur-Zahlwort als Stadt. Kein Options-Pitch."
+    },
+    {
+      "intentFamily": "general",
+      "tags": [
+        "outfit",
+        "clothing",
+        "weather_outfit"
+      ],
+      "expect": [
+        "answer_first",
+        "clothing_tip",
+        "casual_tone"
+      ],
+      "avoid": [
+        "vague_filler",
+        "permission_questions",
+        "dry_list"
+      ],
+      "summary": "Outfit/Anziehen: konkrete Kleidung zuerst (Jacke/Schichten/Schuhe) aus belegtem Wetter + Plan, Stichpunkte kompakt. Kein Touren-suchen-Button, kein Sightseeing/Teich-Pitch, kein leeres Titel=Bullet-Echo. Kartentitel Outfit/Kleidung."
+    },
+    {
+      "intentFamily": "general",
+      "tags": [
+        "passport",
+        "konsulat",
+        "embassy",
+        "lost_docs"
+      ],
+      "expect": [
+        "concrete_place",
+        "answer_first",
+        "route_button"
+      ],
+      "avoid": [
+        "vague_filler",
+        "permission_questions"
+      ],
+      "summary": "Reisepass verloren / Konsulat: nächste zuständige Auslandsvertretung oder Bürgeramt-Schritt, Route/Anruf. Nie Heimatverein/Dorfmuseum als Treffer."
+    },
+    {
+      "intentFamily": "navigation",
+      "tags": [
+        "hauptbahnhof",
+        "hbf",
+        "fast_nav"
+      ],
+      "expect": [
+        "concrete_place",
+        "route_button",
+        "answer_first"
+      ],
+      "avoid": [
+        "vague_filler"
+      ],
+      "summary": "„Zum Hauptbahnhof“ ohne Ortsname: großer Hbf der Region (z. B. Hamburg Hbf), nicht der Dorf-Bahnhof am GPS. Schnell + Route starten."
+    },
+    {
+      "intentFamily": "general",
+      "tags": [
+        "fact",
+        "trivia",
+        "news_followup"
+      ],
+      "expect": [
+        "answer_first",
+        "casual_tone",
+        "lookup_button"
+      ],
+      "avoid": [
+        "siezen",
+        "permission_questions",
+        "vague_more_button",
+        "stage_directions",
+        "dead_thread_weave"
+      ],
+      "summary": "Faktenfrage: Call-1 kurze Bridge (Würdigung), dann Call-2 Answer-First mit Zahl/Name plus 1–2 belegte Fun-Facts. Neues Thema = Isolation, kein toter Faden. Stichpunkte Alter/Name/Datum — keine nackten Gattungs-Labels. Keine Regie im Speech."
+    },
+    {
+      "intentFamily": "activity_poi",
+      "tags": [
+        "picknick",
+        "outdoor",
+        "weather"
+      ],
+      "expect": [
+        "concrete_place",
+        "route_button",
+        "alternatives",
+        "answer_first"
+      ],
+      "avoid": [
+        "long_history",
+        "address_unless_asked"
+      ],
+      "summary": "Picknick outdoor: Park/Wiese/See/Grillplatz plus Wetter; Tap startet Nav, keine Heritage-Tour. Unverbindlich fragen, ob noch Einkauf für unterwegs."
+    },
+    {
+      "intentFamily": "planning",
+      "tags": [
+        "sightseeing",
+        "tickets",
+        "day_plan"
+      ],
+      "expect": [
+        "prices",
+        "tickets",
+        "website",
+        "concrete_place",
+        "answer_first"
+      ],
+      "avoid": [
+        "vague_filler",
+        "address_unless_asked",
+        "permission_questions"
+      ],
+      "summary": "Tag oder Sehenswürdigkeit: Preise und Ticket-Link in derselben Antwort; Stichpunkte aus dem Gesagten; genannte Orte in die Timeline, nicht GPS-Heimat-POIs."
+    },
+    {
+      "intentFamily": "planning",
+      "tags": [
+        "ticketed_access",
+        "transit"
+      ],
+      "expect": [
+        "prices",
+        "tickets",
+        "website",
+        "concrete_place",
+        "answer_first"
+      ],
+      "avoid": [
+        "vague_filler",
+        "permission_questions"
+      ],
+      "summary": "Ticketpflichtiger Zugang erbt Transit: Betreiber, Verbindung, belegter Preis, Ticket-Link (Partner vor Website). Timeline-Stop. Lokalen Modus recherchieren."
+    },
+    {
+      "intentFamily": "planning",
+      "tags": [
+        "leave_by",
+        "fixed_clock"
+      ],
+      "expect": [
+        "times_hours",
+        "answer_first"
+      ],
+      "avoid": [
+        "vague_filler",
+        "permission_questions"
+      ],
+      "summary": "Fester Termin: erst Halt und Losgehen rückwärts, dann der Rest — analog Bahn, Konzert, Training. Geländer, Wortlaut frei."
+    },
+    {
+      "intentFamily": "activity_poi",
+      "situationKey": "activity_poi::interest_activity_expand_v1",
+      "tags": [
+        "interest",
+        "sight",
+        "pitch",
+        "expand_radius",
+        "ticket"
+      ],
+      "expect": [
+        "concrete_place",
+        "alternatives",
+        "answer_first",
+        "route_button",
+        "tickets"
+      ],
+      "avoid": [
+        "vague_filler",
+        "permission_questions",
+        "long_history"
+      ],
+      "summary": "Lust auf Thema (z. B. Dinosaurier): Pitch Top-2. Pack lokal zuerst; wenn leer Umkreis erweitern (50–100 km). Distanz, Preis/Ticket, Anreise. Outdoor/Kleidung/Wetter nur wenn’s passt und heute noch nicht gesagt — nie erzwingen. Follow-up gleiches Thema vertiefen."
+    },
+    {
+      "intentFamily": "planning",
+      "situationKey": "planning::day_plan_hamburg_walk_v1",
+      "tags": [
+        "day_plan",
+        "timeline",
+        "pitch_walk",
+        "landmark_qa",
+        "tour"
+      ],
+      "expect": [
+        "answer_first",
+        "times_hours",
+        "concrete_place",
+        "tickets"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler",
+        "long_history"
+      ],
+      "summary": "Tagesplan multi-slot: Bridge + Timeline-Gerüst (Los, Frühstück-Pitch, Sunset−1h Abend-Pitch, Landmarke Q&A ohne Top-2, Tour). Walk nacheinander; Ablehnung = neue Suche; Ticket gekauft bestätigen; Ende Übernachten vs Heimfahrt. Zielstadt-Pack, nicht GPS-Heimat."
+    },
+    {
+      "intentFamily": "planning",
+      "situationKey": "planning::flight_leave_by_staged_v1",
+      "tags": [
+        "flight",
+        "leave_by",
+        "luggage",
+        "buffer",
+        "airport_access"
+      ],
+      "expect": [
+        "answer_first",
+        "times_hours",
+        "casual_tone"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler",
+        "fake_promises"
+      ],
+      "summary": "Leave-by Staging: Bridge würdigt Ziel. Explizites morgen/heute bleibt stehen — Folge-Uhrzeit überschreibt den Tag nicht. Flug aus Abflugtafel/FlightAware, Tag + Uhr in Speech nennen, Chips zum Korrigieren (heute/morgen/andere Zeit). Gepäck vor Leave-by; Puffer; ÖPNV/Taxi."
+    },
+    {
+      "intentFamily": "planning",
+      "situationKey": "planning::reisebuero_collect_v1",
+      "tags": [
+        "reisebuero",
+        "trip",
+        "weekend",
+        "hotel",
+        "flight",
+        "funnel"
+      ],
+      "expect": [
+        "answer_first",
+        "tickets",
+        "website",
+        "casual_tone"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler",
+        "fake_promises"
+      ],
+      "summary": "Reise (Flug/Hotel/Wochenende mit Zielstadt): Switch Reisebüro. Call 1: was haben wir, was fehlt; ein Gap, Board füllen. Reines Hotel-Amenity ohne Zielstadt = lokal pitchen (nicht dieses Funnel)."
+    },
+    {
+      "intentFamily": "planning",
+      "situationKey": "planning::hotel_local_amenities_v1",
+      "tags": [
+        "hotel",
+        "stay",
+        "pool",
+        "sauna",
+        "stay22"
+      ],
+      "expect": [
+        "concrete_place",
+        "alternatives",
+        "answer_first",
+        "booking_url"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler"
+      ],
+      "summary": "Hotel mit Amenities/Budget ohne Zielstadt: 2 Optionen am GPS + Stay22, Must-Amenities nur belegt. Kein Reisebüro „von wo?“."
+    },
+    {
+      "intentFamily": "planning",
+      "situationKey": "planning::stay_day_interactive_v1",
+      "tags": [
+        "stay",
+        "timeline",
+        "highlights",
+        "events",
+        "tour"
+      ],
+      "expect": [
+        "answer_first",
+        "concrete_place",
+        "times_hours",
+        "casual_tone"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler"
+      ],
+      "summary": "Ort+Daten schon fest: Tag interaktiv füllen (Highlights, Tour, Abend Live-Musik) in Timeline/Pitch/Events — kein neues Reisebüro-Funnel."
+    },
+    {
+      "intentFamily": "planning",
+      "tags": [
+        "flight",
+        "airport",
+        "leave_by"
+      ],
+      "expect": [
+        "times_hours",
+        "tickets",
+        "website",
+        "answer_first"
+      ],
+      "avoid": [
+        "vague_filler",
+        "permission_questions"
+      ],
+      "summary": "Gebuchter Flug: zuerst Ziel/Tag/Uhr oder Ident klären (nachfragen, Live selber holen) — Leave-by rückwärts. Nie Airline-App-Selbstcheck statt Recherche. E-SIM erst wenn Flug in der Timeline steht. Nach Trivia/Essen nur Flug — totes Thema nicht mischen."
+    },
+    {
+      "intentFamily": "knowledge",
+      "situationKey": "knowledge::topic_cut_isolation_v1",
+      "tags": [
+        "topic_cut",
+        "isolation"
+      ],
+      "expect": [
+        "answer_first"
+      ],
+      "avoid": [
+        "vague_filler",
+        "long_history"
+      ],
+      "summary": "Beantwortetes Trivia ist tot, sobald ein neues Thema (Flug, Nav, Plan) kommt — nicht in Bridge oder Stichpunkte weiterschicken."
+    },
+    {
+      "intentFamily": "knowledge",
+      "situationKey": "knowledge::person_age_trivia_v1",
+      "tags": [
+        "trivia",
+        "person",
+        "age",
+        "topic_cut",
+        "quick_lookup"
+      ],
+      "expect": [
+        "answer_first",
+        "short_history"
+      ],
+      "avoid": [
+        "vague_filler",
+        "permission_questions",
+        "long_history",
+        "fake_promises"
+      ],
+      "summary": "Personen-Alter/Trivia: neuer Thread (Sport/Pitch tot). Bridge sofort, dann belegtes Alter zuerst; 1–2 Fun-Facts nur belegt. Kein Spielplan, keine fremde Historie."
+    },
+    {
+      "intentFamily": "knowledge",
+      "situationKey": "knowledge::named_product_offer_nearby_v1",
+      "tags": [
+        "angebot",
+        "prospekt",
+        "supermarkt",
+        "preis",
+        "deep_link"
+      ],
+      "expect": [
+        "prices",
+        "website",
+        "answer_first",
+        "concrete_place",
+        "route_button"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler",
+        "fake_promises",
+        "address_unless_asked"
+      ],
+      "summary": "Genanntes Produkt im Angebot (auch „irgendwo“): GPS-nahe Märkte, Prospekt filtern, belegte Preise. Button = Produkt-/Flyer-Deep-Link inkl. Preis — nie Ketten-Home, nie Reisebüro. Produkt-agnostisch."
+    },
+    {
+      "intentFamily": "dining",
+      "situationKey": "dining::cuisine_tonight_authentic_v1",
+      "tags": [
+        "pitch",
+        "cuisine",
+        "tonight",
+        "atmosphere",
+        "retry"
+      ],
+      "expect": [
+        "concrete_place",
+        "alternatives",
+        "answer_first",
+        "route_button",
+        "menu"
+      ],
+      "avoid": [
+        "vague_filler",
+        "permission_questions",
+        "fake_promises",
+        "address_unless_asked",
+        "opposite_diet"
+      ],
+      "summary": "Cuisine + heute Abend + Atmosphäre (authentisch/heimisch): Call 1 zieht Küche/Zeit/Stadt/Vibe; Backend sucht Pack+Places; Vibe nur Soft. Leer → Retry (breitere Query, Vibe lockern). Mindestens 1–2 Optionen oder ehrlich nach Retry — nie sofort „kein Treffer“, nie Nightlife-Ersatz."
+    },
+    {
+      "intentFamily": "dining",
+      "tags": [
+        "steak",
+        "doener",
+        "hard_match",
+        "dish_filter"
+      ],
+      "expect": [
+        "concrete_place",
+        "alternatives",
+        "answer_first",
+        "menu"
+      ],
+      "avoid": [
+        "vague_filler",
+        "permission_questions",
+        "opposite_diet",
+        "fake_promises"
+      ],
+      "summary": "Gericht-Wunsch (Steak, Angus, Döner, …): Must-Filter in der Fact-Lane. Soft-Fail nur in derselben Familie. Nie Steak durch Döner/Pizza ersetzen; ehrlich wenn kein Beleg."
+    },
+    {
+      "intentFamily": "events",
+      "situationKey": "events::cinema_program_first_v1",
+      "tags": [
+        "tonight",
+        "cinema",
+        "programm",
+        "filme"
+      ],
+      "expect": [
+        "concrete_place",
+        "alternatives",
+        "answer_first",
+        "tickets"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler",
+        "address_unless_asked"
+      ],
+      "summary": "Kino Turn 1: Programmvorschau (Filme) zuerst, Kinos als Träger. Spielzeiten und bestes Kino erst nach Film-/Genre-Wahl. Keine Uhrzeiten-Salve am Anfang."
+    },
+    {
+      "intentFamily": "events",
+      "situationKey": "events::sports_schedule_tickets_v1",
+      "tags": [
+        "sports",
+        "schedule",
+        "tickets",
+        "team"
+      ],
+      "expect": [
+        "answer_first",
+        "concrete_place",
+        "tickets",
+        "times_hours",
+        "prices",
+        "booking_url",
+        "website"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler",
+        "meta_app_pitch",
+        "fake_promises",
+        "nav_auto_start"
+      ],
+      "summary": "Genannter Termin: flüssige 1–3 Sätze (nächstes Spiel, optional zweites, Venue, Tickets ab X belegt). Kein Stakkato/Pitch-Opener. Buttons nur Spielplan-Deep-Link + Tickets — nie Monat/Datum als Route."
+    },
+    {
+      "intentFamily": "events",
+      "tags": [
+        "tonight",
+        "cinema",
+        "concert",
+        "market",
+        "open_air"
+      ],
+      "expect": [
+        "concrete_place",
+        "alternatives",
+        "answer_first",
+        "route_button"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler",
+        "address_unless_asked"
+      ],
+      "summary": "Abendprogramm: zwei echte laufende Optionen (Kino, Konzert, Markt, Open Air, Club) mit Uhrzeit und Route; nichts vorschlagen, was schon vorbei ist; keine Essensfrage nach 19 Uhr."
+    },
+    {
+      "intentFamily": "navigation",
+      "situationKey": "navigation::on_route_zwischenstopp_top2_v1",
+      "tags": [
+        "on_route",
+        "zwischenstopp",
+        "detour",
+        "pitch"
+      ],
+      "expect": [
+        "alternatives",
+        "answer_first",
+        "concrete_place",
+        "route_button"
+      ],
+      "avoid": [
+        "nav_auto_start",
+        "permission_questions",
+        "vague_filler"
+      ],
+      "summary": "Zwischenstopp unterwegs: Top-2 mit Umweg-Minuten pitchen, User wählt. Nach Wahl nahtlos als Stopp einfügen — laufende Route nicht ersetzen."
+    },
+    {
+      "intentFamily": "planning",
+      "situationKey": "planning::path_tour_learned_pace_v1",
+      "tags": [
+        "path_tour",
+        "jog",
+        "walk",
+        "bike",
+        "pace"
+      ],
+      "expect": [
+        "duration",
+        "answer_first",
+        "concrete_place"
+      ],
+      "avoid": [
+        "vague_filler",
+        "permission_questions"
+      ],
+      "summary": "km- oder Zeit-Runde: Distanz/Dauer aus Wunsch; Tempo aus gelerntem Pace-Profil sobald Segmente da, sonst Default. Route grob treffen, kein Pflichtwortlaut."
+    },
+    {
+      "intentFamily": "general",
+      "situationKey": "general::live_hud_concrete_pitch_v1",
+      "tags": [
+        "live_hud",
+        "proactive",
+        "pitch",
+        "leave_by"
+      ],
+      "expect": [
+        "concrete_place",
+        "answer_first",
+        "route_button",
+        "times_hours"
+      ],
+      "avoid": [
+        "vague_filler",
+        "permission_questions",
+        "meta_app_pitch"
+      ],
+      "summary": "Live-Anzeige oben: konkrete Orte/Events mit Distanz, Uhrzeit, Preis/ETA nur belegt — nie Gattungs-Pins („Hochhäuser“, „Museen“). Kategorie-Frage → konkreter Ort + „Navigation zu …?“ + grobe Ankunft/ÖPNV; Topic/Stadt weg (z. B. Athen) → Pin weg. Nie Dauer-Tippen-Erklärungen (Coach max. 1×). Tap = Vertiefung/Route."
+    }
+  ]
+}

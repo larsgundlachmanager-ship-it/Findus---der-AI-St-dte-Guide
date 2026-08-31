@@ -6,6 +6,8 @@
 import {
   isCurrentlyListening,
   peekListeningTranscript,
+  setListeningPartialHandler,
+  unlockListeningPartialHandler,
   startListening,
   stopListening,
 } from '../sttService';
@@ -66,7 +68,7 @@ let listenGeneration = 0;
 let softCommitSnapshot = '';
 /** VAD darf Cut nicht endlos blockieren (Straßenlärm → silence nie „echt“) */
 let endpointDeferCount = 0;
-const MAX_ENDPOINT_DEFERS = 8;
+const MAX_ENDPOINT_DEFERS = 4;
 
 const listeners = new Set<(active: boolean, phase: LiveChatPhase) => void>();
 
@@ -140,6 +142,19 @@ export function isLiveChatOpenFloor(): boolean {
   return active && openFloor;
 }
 
+/**
+ * Rückfrage: Turn darf weiterwarten, Mic trotzdem wieder auf.
+ * Sonst blockt `processing` das nächste „Ja“ / freie Follow-up.
+ */
+export function releaseLiveChatFloorForAsk(): void {
+  if (!active) return;
+  processing = false;
+  openFloor = true;
+  bumpAddressedActivity();
+  const gen = listenGeneration;
+  void waitSpeechIdleThenListen(gen, { awaitSpeechStartMs: 900 });
+}
+
 export function getLiveChatPhase(): LiveChatPhase {
   return phase;
 }
@@ -168,25 +183,37 @@ export function getLiveChatHandlers(): Handlers | null {
  */
 async function waitSpeechIdleThenListen(
   gen: number,
-  opts?: { awaitSpeechStartMs?: number },
+  opts?: { awaitSpeechStartMs?: number; postIdleMs?: number },
 ): Promise<void> {
   if (!active || gen !== listenGeneration) return;
   const awaitStart = opts?.awaitSpeechStartMs ?? 900;
+  const postIdle = opts?.postIdleMs ?? 400;
   setMicVadTtsGate(true);
   // Pipeline-Lag: Bestätigung startet oft erst nach Return
   await sleep(awaitStart);
-  for (let i = 0; i < 60; i++) {
+  for (let i = 0; i < 120; i++) {
     if (!active || gen !== listenGeneration) return;
+    let speechOn = false;
+    let generating = false;
     try {
       const { isSpeechActive } = await import('../../module2/speech/speechQueue');
-      setMicVadTtsGate(isSpeechActive());
-      if (!isSpeechActive()) break;
+      speechOn = isSpeechActive();
+      setMicVadTtsGate(speechOn);
     } catch {
-      break;
+      speechOn = false;
     }
+    try {
+      const { useFinnusStore } = require('../../store/useFinnusStore') as {
+        useFinnusStore: { getState: () => { isGenerating?: boolean } };
+      };
+      generating = Boolean(useFinnusStore.getState().isGenerating);
+    } catch {
+      generating = false;
+    }
+    if (!speechOn && !generating) break;
     await sleep(250);
   }
-  await sleep(400);
+  if (postIdle > 0) await sleep(postIdle);
   if (!active || gen !== listenGeneration) return;
   setMicVadTtsGate(false);
   await resumeListening(gen, { echoWarmup: true });
@@ -403,10 +430,30 @@ async function finalizeSoftCommit(snapshot: string): Promise<void> {
   await cutAndProcess(snapshot || now);
 }
 
+function minLiveChatUtteranceChars(): number {
+  try {
+    const { getFlightTripSession } = require('../flights/flightTripSession') as {
+      getFlightTripSession: () => { pendingAsk?: string | null } | null;
+    };
+    if (getFlightTripSession()?.pendingAsk) return 2;
+  } catch {
+    /* soft */
+  }
+  try {
+    const { isPlanAwaitingUserReply } = require('../../module2/planning/planSessionState') as {
+      isPlanAwaitingUserReply: () => boolean;
+    };
+    if (isPlanAwaitingUserReply()) return 2;
+  } catch {
+    /* soft */
+  }
+  return MIN_UTTERANCE_CHARS;
+}
+
 async function cutAndProcess(snapshot: string): Promise<void> {
   if (!active || processing) return;
   const raw = (snapshot || peekListeningTranscript()).replace(/\s+/g, ' ').trim();
-  if (raw.length < MIN_UTTERANCE_CHARS) return;
+  if (raw.length < minLiveChatUtteranceChars()) return;
   if (looksLikeFindusEcho(raw)) {
     if (__DEV__) console.log('[liveChat] echo cut skip');
     return;
@@ -502,7 +549,8 @@ async function cutAndProcess(snapshot: string): Promise<void> {
   setLiveChatTurnContext({
     active: true,
     humanTone: prefs.humanConversationTone !== false,
-    askBeforeDeepResearch: prefs.askBeforeDeepResearch,
+    // Live-Chat: Deep Research immer erst fragen — außerhalb immer automatisch
+    askBeforeDeepResearch: true,
   });
 
   // Sofort-Ack nur bei langsamer Recherche — sonst labert er dauernd
@@ -588,6 +636,9 @@ async function cutAndProcess(snapshot: string): Promise<void> {
   }
 
   if (active && gen === listenGeneration) {
+    // Floor schon für Rückfrage freigegeben (releaseLiveChatFloorForAsk) —
+    // dann nicht nochmal reopenMicAfterSpeech (doppeltes Listen / Echo).
+    if (!processing && isCurrentlyListening()) return;
     await reopenMicAfterSpeech();
   } else {
     processing = false;
@@ -611,6 +662,36 @@ export async function startLiveChatSession(
     };
   }
 
+  try {
+    const { getCachedUserProfile } = require('../userProfileService') as {
+      getCachedUserProfile: () => {
+        micListenMode?: string | null;
+        hasAcceptedAudioConsent?: boolean;
+      } | null;
+    };
+    const profile = getCachedUserProfile();
+    if (
+      profile?.micListenMode === 'dont_hear' ||
+      !profile?.hasAcceptedAudioConsent ||
+      profile?.micListenMode !== 'hear'
+    ) {
+      const { showAudioConsentMissingAlert } = require('../../utils/permissionAlerts') as {
+        showAudioConsentMissingAlert: (o?: {
+          force?: boolean;
+          onTypeAsk?: () => void;
+        }) => void;
+      };
+      showAudioConsentMissingAlert({ force: true });
+      return {
+        ok: false,
+        message:
+          'Mikrofon-Einwilligung fehlt — bitte unter Einstellungen Sprache an aktivieren.',
+      };
+    }
+  } catch {
+    /* soft — STT prüft OS-Permission separat */
+  }
+
   active = true;
   openFloor = true; // sofort freie Follow-ups im Fenster
   processing = false;
@@ -622,20 +703,57 @@ export async function startLiveChatSession(
 
   if (__DEV__) console.log('[liveChat] start:', reason);
 
-  // Cue nicht blockieren — Mikro erst nach Cue/Bestätigungs-TTS (kein Echo)
   void playLiveChatStartCue().catch(() => undefined);
-  void waitSpeechIdleThenListen(gen, {
-    awaitSpeechStartMs: reason === 'voice' ? 1100 : 700,
-  });
 
   const idle = getHandsFreePrefsSync().liveChatIdleSeconds;
   const needKw = getHandsFreePrefsSync().requireKeywordEveryTurn;
-  return {
-    ok: true,
-    message: needKw
-      ? `Live-Chat an. Sprich mich klar an (Name oder Frage an mich). Nach ${idle} Sekunden ohne mich ist das Mikro aus.`
-      : `Live-Chat an — ich höre zu. Frag frei, z. B. „führ mich dahin“. Mit Freunden quatschen stört nicht. Nach ${idle} Sekunden ohne mich schalte ich das Mikro aus.`,
-  };
+  const okMessage = needKw
+    ? `Live-Chat an. Sprich mich klar an (Name oder Frage an mich). Nach ${idle} Sekunden ohne mich ist das Mikro aus.`
+    : `Live-Chat an — ich höre zu. Frag frei, z. B. „führ mich dahin“. Mit Freunden quatschen stört nicht. Nach ${idle} Sekunden ohne mich schalte ich das Mikro aus.`;
+
+  // Hold->Live: STT laeuft schon — Handler umhaengen, kein Stop/Restart.
+  if (isCurrentlyListening()) {
+    setListeningPartialHandler((partial) => {
+      if (!active || gen !== listenGeneration) return;
+      onPartial(partial);
+    }, { lock: true });
+    armMicVadWarmup(VAD_WARMUP_MS);
+    setMicVadTtsGate(false);
+    return { ok: true, message: okMessage };
+  }
+
+  const swipeStart = reason === 'swipe_left';
+  let speechOn = false;
+  let generating = false;
+  try {
+    const { isSpeechActive } = require('../../module2/speech/speechQueue') as {
+      isSpeechActive: () => boolean;
+    };
+    speechOn = isSpeechActive();
+  } catch {
+    speechOn = false;
+  }
+  try {
+    const { useFinnusStore } = require('../../store/useFinnusStore') as {
+      useFinnusStore: { getState: () => { isGenerating?: boolean } };
+    };
+    generating = Boolean(useFinnusStore.getState().isGenerating);
+  } catch {
+    generating = false;
+  }
+
+  // Still: sofort zuhoeren — kein kuenstliches Idle-Warten.
+  if (!speechOn && !generating) {
+    void resumeListening(gen, { echoWarmup: false });
+  } else {
+    const awaitSpeechStartMs = reason === 'voice' ? 1100 : swipeStart ? 200 : 700;
+    void waitSpeechIdleThenListen(gen, {
+      awaitSpeechStartMs,
+      postIdleMs: swipeStart ? 120 : 400,
+    });
+  }
+
+  return { ok: true, message: okMessage };
 }
 
 export async function stopLiveChatSession(reason = 'manual'): Promise<void> {
@@ -649,7 +767,11 @@ export async function stopLiveChatSession(reason = 'manual'): Promise<void> {
   clearEndpoint();
   lastPartial = '';
   setMicVadTtsGate(false);
+  unlockListeningPartialHandler();
   clearLiveChatTurnContext();
+  // UI sofort idle — nicht erst nach stopListening (sonst wirkt Tap tot,
+  // nächster Tipp öffnet Tippfeld während Mic noch „live“ aussieht).
+  setPhase('idle');
   try {
     const { clearManagerWarmup } = require('../../module2/router/managerWarmup') as {
       clearManagerWarmup: () => void;
@@ -671,7 +793,6 @@ export async function stopLiveChatSession(reason = 'manual'): Promise<void> {
   } catch {
     /* soft */
   }
-  setPhase('idle');
 }
 
 export async function maybeStartLiveChatFromHandsFree(): Promise<boolean> {
@@ -689,7 +810,7 @@ export function wantsLiveChatVoiceCommand(text: string): boolean {
   const t = raw.replace(/\s+/g, ' ').trim();
   if (!head && !t) return false;
   if (
-    /^(live\s+(on|an|ein|start(?:en)?|aktiv)|live[-\s]?chat(?:\s+(an|ein|start(?:en)?|aktiv))?|findus[-\s]?live)$/iu.test(
+    /^(live\s+(on|an|ein|start(?:en)?|aktiv)|live[-\s]?chat(?:\s+(an|ein|start(?:en)?|aktiv))?|(?:yorro|findus)[-\s]?live)$/iu.test(
       head,
     )
   ) {
@@ -700,7 +821,7 @@ export function wantsLiveChatVoiceCommand(text: string): boolean {
     /\b(live[-\s]?chat|gesprächs?modus|unterhaltungs?modus)\s+(an|ein|start(?:en)?|aktiv)\b/i.test(
       t,
     ) ||
-    /\b(gespräch\s+(an|starten)|durchgehend\s+zuh[oö]ren|findus[-\s]?live)\b/i.test(
+    /\b(gespräch\s+(an|starten)|durchgehend\s+zuh[oö]ren|(?:yorro|findus)[-\s]?live)\b/i.test(
       t,
     ) ||
     /\blive\s+(on|an|ein)\b/i.test(t)
@@ -712,6 +833,9 @@ export function wantsStopLiveChatVoiceCommand(text: string): boolean {
   if (!raw) return false;
   const head = raw.split(/\n/)[0]?.replace(/\s+/g, ' ').trim() ?? '';
   const t = raw.replace(/\s+/g, ' ').trim();
+  if (/^(beenden|stopp|stop|aus|schluss|ende)\.?$/iu.test(head) && isLiveChatActive()) {
+    return true;
+  }
   if (
     /^(live\s+(off|aus|stopp)|live[-\s]?chat\s+(aus|stopp|beend\w*))$/iu.test(
       head,

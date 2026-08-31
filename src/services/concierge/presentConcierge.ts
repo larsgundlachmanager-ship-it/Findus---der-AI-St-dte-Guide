@@ -1,6 +1,6 @@
 /**
  * Voice-first Concierge Playback:
- * 1) Wenn Findus Navigation ankündigt → Kompass SOFORT
+ * 1) Wenn Yorro Navigation ankündigt → Kompass SOFORT
  * 2) TTS parallel (User kann schon losgehen)
  * 3) Spickzettel-Karte, sobald die Stimme läuft
  */
@@ -27,24 +27,68 @@ import {
   buildBounceLuggageAction,
   buildCarRentalAction,
   buildEsimAction,
+  getAiraloAffiliateUrl,
   buildStay22AccommodationAction,
   buildExpediaAccommodationAction,
   buildTourBookingAction,
   buildTravelInsuranceAction,
+  buildCampingInfoAction,
+  buildSolmarAction,
+  buildPackageHolidayAction,
+  buildCheck24CarRentalAction,
   buildTravelpayoutsCategoryAction,
+  buildEconomyBookingsAction,
   looksLikeFakeTourSlug,
   buildGetYourGuideSearchUrl,
   normalizeAffiliateUrl,
   isBounceAvailableForCity,
+  buildUberRideAction,
 } from '../affiliate/affiliateService';
-
-const TOUR_PARTNER_URL_RE =
-  /getyourguide|musement|viator|tripadvisor|klook|tiqets|kkday|wegotrip|gocity/i;
+import {
+  extractCampingplatzName,
+  parseTravelDateYmd,
+  parseClockHmm,
+  parseLuggageBagCount,
+  addDaysYmd,
+  resolveEsimCountry,
+  roundClockHmmDownTo5,
+  encodeUriBrackets,
+} from '../affiliate/partnerDeepPrefill';
+import {
+  withWegotripPrefill,
+  withSailyAffiliate,
+  buildSailyCountryPageUrl,
+  buildYesimCountryPageUrl,
+  buildCompensairCheckUrl,
+} from '../affiliate/partnerTpxDeepLink';
+import { parseOriginIata } from '../affiliate/partnerAwinHolidayDeepLink';
+import { buildKonfettiAction } from '../affiliate/konfettiAffiliate';
+import {
+  buildReservixAction,
+  RESERVIX_LIVE_EVENT_RE,
+} from '../affiliate/reservixAffiliate';
 import {
   MAX_QUICK_ACTIONS,
   MAX_EVENT_QUICK_ACTIONS,
   prioritizeQuickActions,
 } from '../affiliate/prioritizeActions';
+
+const TOUR_PARTNER_URL_RE =
+  /getyourguide|musement|viator|tripadvisor|klook|tiqets|kkday|wegotrip|gocity/i;
+
+function readGpsLatLng(): { lat: number | null; lng: number | null } {
+  try {
+    const { useGpsStore } = require('../../store/useGpsStore') as {
+      useGpsStore: {
+        getState: () => { lat: number | null; lng: number | null };
+      };
+    };
+    const gps = useGpsStore.getState();
+    return { lat: gps.lat ?? null, lng: gps.lng ?? null };
+  } catch {
+    return { lat: null, lng: null };
+  }
+}
 import { pickPendingAffiliateOffer } from '../affiliate/pendingAffiliateOffer';
 import { enrichPlaylistOffers } from '../playlistService';
 import { getCachedUserProfile } from '../userProfileService';
@@ -72,6 +116,7 @@ import {
 import {
   speechAdmitsNoActionableData,
   stripFakeReservationClaims,
+  stripOrphanButtonClaims,
   stripUnbackedActions,
 } from './zeroFakeActions';
 import { recordFindusActionsTriggered } from '../feedback/executionTracking';
@@ -84,13 +129,28 @@ function sleep(ms: number): Promise<void> {
   return new Promise((r) => setTimeout(r, ms));
 }
 
-async function waitUntilVoicePlaying(timeoutMs = 4000): Promise<boolean> {
+/** Wartet auf hörbares Audio — nicht auf isPlayingAudio (das wird vor Synth gesetzt). */
+async function waitUntilVoicePlaying(timeoutMs = 8000): Promise<boolean> {
   const start = Date.now();
   while (Date.now() - start < timeoutMs) {
-    if (useFinnusStore.getState().isPlayingAudio) return true;
-    await sleep(40);
+    try {
+      const { isAudiblyPlaying } = require('../AudioVoiceService') as {
+        isAudiblyPlaying: () => boolean;
+      };
+      if (isAudiblyPlaying()) return true;
+    } catch {
+      if (useFinnusStore.getState().isAudiblySpeaking) return true;
+    }
+    await sleep(50);
   }
-  return useFinnusStore.getState().isPlayingAudio;
+  try {
+    const { isAudiblyPlaying } = require('../AudioVoiceService') as {
+      isAudiblyPlaying: () => boolean;
+    };
+    return isAudiblyPlaying();
+  } catch {
+    return useFinnusStore.getState().isAudiblySpeaking === true;
+  }
 }
 
 export function toConciergeCardState(
@@ -106,7 +166,7 @@ export function toConciergeCardState(
   };
 }
 
-/** Findus behauptet, Navigation zu starten (kein bloßes Angebot). */
+/** Yorro behauptet, Navigation zu starten (kein bloßes Angebot). */
 export function speechCommitsToNavigation(speech: string): boolean {
   const t = speech.trim();
   if (!t) return false;
@@ -118,7 +178,7 @@ export function speechCommitsToNavigation(speech: string): boolean {
     /\b(kompass|navigation|route|führ|fuehr|hinnavig|anmachen)\b/iu.test(t);
 
   const commits =
-    /\b(ich\s+starte\s+die\s+navigation|ich\s+(führ|fuehr|bring|schalt|mach|start)(?:e|en)?|folge(?:\s+\w+){0,3}\s+dem\s+pfeil|kompass\s+(?:ist\s+)?(?:an|aktiv)|navigation\s+(?:startet|läuft|laeuft|ist\s+an)|schalt(?:e|)\s+(?:dir\s+)?(?:sofort\s+)?den\s+kompass|mach(?:e|)\s+(?:dir\s+)?(?:sofort\s+)?den\s+kompass|route\s+(?:startet|läuft|laeuft)|gleich\s+los|direkt\s+los)\b/iu.test(
+    /\b(ich\s+starte\s+die\s+navigation|ich\s+(führ|fuehr|bring|schalt|mach|start)(?:e|en)?|führ\s+dich\s+hin|fuehr\s+dich\s+hin|folge(?:\s+\w+){0,3}\s+dem\s+pfeil|kompass\s+(?:ist\s+)?(?:an|aktiv)|navigation\s+(?:startet|läuft|laeuft|ist\s+an)|schalt(?:e|)\s+(?:dir\s+)?(?:sofort\s+)?den\s+kompass|mach(?:e|)\s+(?:dir\s+)?(?:sofort\s+)?den\s+kompass|route\s+(?:startet|läuft|laeuft)|gleich\s+los|direkt\s+los)\b/iu.test(
       t,
     );
 
@@ -145,6 +205,11 @@ async function attachCityMapAction(
  * Kompass sofort aktivieren, wenn Speech das zusagt.
  * Blockiert die Stimme nicht länger als nötig.
  */
+export type AutoNavCommitResult = {
+  started: boolean;
+  confirmSpeech?: string;
+};
+
 export async function autoStartNavigationIfCommitted(
   response: GeminiConciergeResponse,
   opts?: {
@@ -153,14 +218,25 @@ export async function autoStartNavigationIfCommitted(
     /** Reboot Fact-Lane: Unique-Amenity / Just-Do-It — Speech-Heuristik überspringen */
     forceAutoNav?: boolean;
   },
-): Promise<boolean> {
-  if (opts?.skipAutoNav) return false;
+): Promise<AutoNavCommitResult> {
+  const NO: AutoNavCommitResult = { started: false };
+  const YES: AutoNavCommitResult = { started: true };
+  if (opts?.skipAutoNav) return NO;
   const store = useFinnusStore.getState();
   const userText = (opts?.userText ?? '').replace(/\s+/g, ' ').trim();
   const force = opts?.forceAutoNav === true;
+  let affirming = false;
+  try {
+    const { isNavAffirmation } = require('../navigation/pendingOffer') as {
+      isNavAffirmation: (t: string) => boolean;
+    };
+    affirming = Boolean(userText && isNavAffirmation(userText));
+  } catch {
+    /* soft */
+  }
 
   // Reine Faktenfragen nie auto-nav — außer Fact-Lane erzwingt Unique-Ziel
-  if (userText && shouldBlockAutoNavigation(userText) && !force) return false;
+  if (userText && shouldBlockAutoNavigation(userText) && !force) return NO;
 
   // Kalender offen / pending choice: nie auto-nav — außer User sagt „jetzt sofort los“
   try {
@@ -173,10 +249,12 @@ export async function autoStartNavigationIfCommitted(
     const planningOn = planUi.pendingChoice != null;
     const userNow =
       userText &&
-      /\b(jetzt\s+sofort\s+los|jetzt\s+navigier|sofort\s+navigier|jetzt\s+starten)\b/i.test(
-        userText,
-      );
-    if (planningOn && !userNow) return false;
+      (isExplicitNavIntent(userText) ||
+        /\b(jetzt\s+sofort\s+los|jetzt\s+navigier|sofort\s+navigier|jetzt\s+starten)\b/i.test(
+          userText,
+        ));
+    // Explizite Nav / Force: Pending-Choice (Pitch/Timeline) darf Just-Do-It nicht blocken
+    if (planningOn && !userNow && !force) return NO;
   } catch {
     /* soft */
   }
@@ -190,7 +268,7 @@ export async function autoStartNavigationIfCommitted(
       response.speechText,
     );
   const onlyAsking =
-    /\b(soll\s+ich|darf\s+ich|sollen\s+wir|wollen\s+wir|möchtest\s+du|moechtest\s+du|willst\s+du)\b/iu.test(
+    /\b(soll\s+ich|darf\s+ich|sollen\s+wir|wollen\s+wir|möchtest\s+du|moechtest\s+du|willst\s+du|meinst\s+du)\b/iu.test(
       response.speechText,
     ) && !commits;
 
@@ -215,53 +293,197 @@ export async function autoStartNavigationIfCommitted(
     !uniqueAmenityGo &&
     !userExplicit
   ) {
-    return false;
+    return NO;
   }
+  // Explizites „Bring mich…“ ohne Button: Ziel aus Text resolven + starten (nicht Buttons-only)
   if (
-    !force &&
-    userExplicit &&
+    (force || userExplicit) &&
     navActions.length === 0 &&
     !store.pendingNavOffer
   ) {
-    return false;
-  }
-  if (force && navActions.length === 0 && !store.pendingNavOffer) {
-    return false;
+    try {
+      const { getShortTerm, resolveLocalAnchor } = require('../../module2/context/shortTermContext') as {
+        getShortTerm: () => { lastPlaceName: string | null };
+        resolveLocalAnchor: (t: string) => {
+          name: string;
+          lat: number;
+          lng: number;
+        } | null;
+      };
+      const { extractNamedDestinationLabel } = require('./canonicalDestination') as {
+        extractNamedDestinationLabel: (t: string) => string | null;
+      };
+      const short = getShortTerm();
+      const named = extractNamedDestinationLabel(userText);
+      const anchor =
+        resolveLocalAnchor(userText) ||
+        (named ? resolveLocalAnchor(named) : null) ||
+        (short.lastPlaceName
+          ? resolveLocalAnchor(short.lastPlaceName)
+          : null);
+      if (anchor) {
+        store.setPendingNavOffer({
+          poiId: -1,
+          name: anchor.name,
+          lat: anchor.lat,
+          lng: anchor.lng,
+        });
+      } else if (named || userExplicit) {
+        // Name ohne lokale Coords → commitHandsFreeNavStart resolvt Pack/Geocode
+        const { commitHandsFreeNavStart } = await import(
+          '../navigation/handsFreeNav'
+        );
+        const started = await commitHandsFreeNavStart(
+          {
+            poiId: null,
+            name: named || userText,
+            lat: null,
+            lng: null,
+          },
+          { skipClosingGate: true },
+        );
+        if (started.ok) {
+          const speechHasEta =
+            /\b\d{1,3}\s*(?:min(?:ute)?n?)\b/iu.test(response.speechText || '');
+          if (speechHasEta) {
+            try {
+              const { markNavOpeningSpoken } = require('../navigation/landmarkNavCoach') as {
+                markNavOpeningSpoken: () => void;
+              };
+              markNavOpeningSpoken();
+            } catch {
+              /* soft */
+            }
+          }
+          if (__DEV__) {
+            console.log(
+              `[concierge] auto-start nav (explicit resolve) via=${started.via} name=${started.name}`,
+            );
+          }
+          return YES;
+        }
+        if (started.needsConfirm) {
+          return { started: false, confirmSpeech: started.message };
+        }
+        return NO;
+      } else {
+        return NO;
+      }
+    } catch {
+      return NO;
+    }
   }
 
-  // Laufende Nav: keine Rückfragen neu starten — Unique-Amenity/Force darf einweben
+  // Confirm-Offer: nicht im selben Turn auto-starten (Name enthält schon die Stadt)
   if (
-    store.navActive &&
-    !commits &&
-    !userExplicit &&
-    !uniqueAmenityGo &&
-    !force
+    useFinnusStore.getState().pendingNavOffer?.awaitConfirm &&
+    !affirming
   ) {
-    return false;
+    return NO;
+  }
+
+  // Laufende Nav: bei neuem expliziten Ziel / Force → Retarget (nicht Fake-Success)
+  if (store.navActive) {
+    const navActionPeek = navActions[0];
+    const offerPeek = useFinnusStore.getState().pendingNavOffer;
+    const nextName = (
+      navActionPeek?.payload.destName ||
+      navActionPeek?.label ||
+      offerPeek?.name ||
+      ''
+    )
+      .trim()
+      .toLowerCase();
+    const curName = (store.navTargetName || '').trim().toLowerCase();
+    const sameDest =
+      nextName.length >= 2 &&
+      curName.length >= 2 &&
+      (nextName === curName ||
+        nextName.includes(curName) ||
+        curName.includes(nextName));
+    if (sameDest && (commits || userExplicit || force || uniqueAmenityGo)) {
+      return YES;
+    }
+    if (!commits && !userExplicit && !uniqueAmenityGo && !force) {
+      return NO;
+    }
+    // sonst unten commitHandsFreeNavStart (Retarget)
   }
 
   const navAction = navActions[0];
-  const offer = store.pendingNavOffer;
+  const offer = useFinnusStore.getState().pendingNavOffer;
   const { commitHandsFreeNavStart } = await import(
     '../navigation/handsFreeNav'
   );
-  const started = await commitHandsFreeNavStart({
-    poiId: navAction?.payload.targetPoiId ?? offer?.poiId,
-    name:
-      navAction?.payload.destName ||
-      navAction?.label ||
-      offer?.name ||
-      null,
-    lat: navAction?.payload.destLat ?? offer?.lat ?? null,
-    lng: navAction?.payload.destLng ?? offer?.lng ?? null,
-  });
+  // Explizite Action-Koordinaten schlagen immer ein altes Pending-Offer (sonst Drift zu letztem POI)
+  const hasActionCoords =
+    typeof navAction?.payload.destLat === 'number' &&
+    typeof navAction?.payload.destLng === 'number' &&
+    Number.isFinite(navAction.payload.destLat) &&
+    Number.isFinite(navAction.payload.destLng);
+  const started = await commitHandsFreeNavStart(
+    {
+      poiId: hasActionCoords
+        ? (navAction?.payload.targetPoiId ?? -1)
+        : (navAction?.payload.targetPoiId ?? offer?.poiId),
+      name:
+        navAction?.payload.destName ||
+        navAction?.label ||
+        offer?.name ||
+        null,
+      lat: hasActionCoords
+        ? navAction!.payload.destLat!
+        : (navAction?.payload.destLat ?? offer?.lat ?? null),
+      lng: hasActionCoords
+        ? navAction!.payload.destLng!
+        : (navAction?.payload.destLng ?? offer?.lng ?? null),
+    },
+    {
+      // User sagt explizit navigieren → nicht an Closing-Gate hängen
+      skipClosingGate: force || userExplicit,
+    },
+  );
 
   if (!started.ok) {
+    if (started.needsConfirm) {
+      return { started: false, confirmSpeech: started.message };
+    }
     console.warn(
       '[concierge] Speech sagt Navigation zu, aber Ziel nicht auflösbar',
       started.message,
     );
-    return false;
+    return NO;
+  }
+
+  // Distanz-SSOT: nur committed Routenmeter (kein LLM-/Luftlinien-Raten)
+  try {
+    const { bindSpeechToCommittedRoute } = require('../navigation/navSpeechDistance') as {
+      bindSpeechToCommittedRoute: (
+        s: string,
+        o?: { appendIfMissing?: boolean },
+      ) => string;
+    };
+    if (response.speechText) {
+      response.speechText = bindSpeechToCommittedRoute(response.speechText, {
+        appendIfMissing: true,
+      });
+    }
+  } catch {
+    /* soft */
+  }
+
+  // Coach-ETA nur schlucken, wenn Concierge die Minuten schon gesagt hat
+  const speechHasEta =
+    /\b\d{1,3}\s*(?:min(?:ute)?n?)\b/iu.test(response.speechText || '');
+  if (speechHasEta) {
+    try {
+      const { markNavOpeningSpoken } = require('../navigation/landmarkNavCoach') as {
+        markNavOpeningSpoken: () => void;
+      };
+      markNavOpeningSpoken();
+    } catch {
+      /* soft */
+    }
   }
 
   if (__DEV__) {
@@ -269,8 +491,9 @@ export async function autoStartNavigationIfCommitted(
       `[concierge] auto-start nav via=${started.via} name=${started.name} ok=true explicit=${userExplicit}`,
     );
   }
-  return true;
+  return YES;
 }
+
 
 /** Event-Turns: bis 4 Buttons; sonst Default-Cap. */
 function actionCap(ctx: ConciergeContext | null): number {
@@ -302,7 +525,25 @@ export async function enrichWithConciergeOffers(
     if (!speechText || !mentionsAny) {
       speechText = synthesizeEventSpeech(research);
     }
-    const fromResearch = eventResearchToActions(research);
+    const fromResearch = eventResearchToActions(research, {
+      includeNav:
+        research.events.length === 1 ||
+        (() => {
+          try {
+            const {
+              wantsEventBriefingActions,
+              isEventFestivalDeepenQuery,
+            } = require('./eventFestivalType') as {
+              wantsEventBriefingActions: (s: string) => boolean;
+              isEventFestivalDeepenQuery: (s: string) => boolean;
+            };
+            const ut = research.userText || '';
+            return wantsEventBriefingActions(ut) || isEventFestivalDeepenQuery(ut);
+          } catch {
+            return false;
+          }
+        })(),
+    });
     const geminiAligned = response.quickActions.filter((a) => {
       if (a.type === 'START_NAVIGATION') {
         return research.events.some((e) =>
@@ -382,10 +623,7 @@ export async function enrichWithConciergeOffers(
       speechText = ctx.fallbackSpeech.trim();
       try {
         const { noteFallback } = await import('../debug/fallbackLabel');
-        if (!speechText.startsWith('Fallback:')) {
-          noteFallback('Concierge-Speech', 'fallbackSpeech ohne Prefix');
-          speechText = `Fallback: Concierge-Speech — ${speechText}`;
-        }
+        noteFallback('Concierge-Speech', speechText.slice(0, 80));
       } catch {
         /* soft */
       }
@@ -601,11 +839,14 @@ export async function enrichWithConciergeOffers(
       });
     }
 
-    // Sekundär: Uber erst nach Zusagen / explizitem Fahrt-Wunsch
+    // Uber: explizit · Food-Zusage · lange ÖPNV-Strecke
     const offerUber =
       wantsUberExplicitly(response.speechText) ||
       ((ctx.kind === 'food' || ctx.kind === 'reservation') &&
-        speechCommitsToNavigation(response.speechText));
+        speechCommitsToNavigation(response.speechText)) ||
+      /\b(öpnv|oepnv|uber|taxi|fuß\s+dauert|fuss\s+dauert)\b/iu.test(
+        response.speechText,
+      );
 
     if (offerUber) {
       let destLat: number | undefined = ctx.primaryOffer.lat;
@@ -620,15 +861,69 @@ export async function enrichWithConciergeOffers(
       }
       const hasUber = actions.some((a) => a.type === 'BOOK_UBER');
       if (!hasUber && destLat != null && destLng != null) {
-        actions.push({
-          type: 'BOOK_UBER',
-          label: 'Uber',
-          payload: { destLat, destLng, destName },
-        });
+        const time = parseClockHmm(response.speechText);
+        actions.push(
+          buildUberRideAction(destLat, destLng, destName, undefined, {
+            dropoffFormattedAddress: destName,
+            pickupTimeLabel: time,
+          }),
+        );
       }
+      actions = actions.map((a) => {
+        if (a.type !== 'BOOK_UBER') return a;
+        const t = (a.payload.pickupTimeLabel || '').trim();
+        const rounded = t ? roundClockHmmDownTo5(t) : t;
+        const url = a.payload.url
+          ? encodeUriBrackets(a.payload.url)
+          : a.payload.url;
+        let label = a.label;
+        if (t && rounded && t !== rounded) {
+          label = label.replace(t, rounded);
+        }
+        return {
+          ...a,
+          label,
+          payload: {
+            ...a.payload,
+            url,
+            pickupTimeLabel: rounded || undefined,
+          },
+        };
+      });
     } else {
       actions = actions.filter((a) => a.type !== 'BOOK_UBER');
     }
+  }
+
+  // Uber Eats — nur bei klarem Liefer-Intent (User-Text)
+  try {
+    const {
+      wantsUberEatsExplicitly,
+      buildUberEatsAction,
+    } = require('../affiliate/affiliateService') as {
+      wantsUberEatsExplicitly: (t: string) => boolean;
+      buildUberEatsAction: (o?: {
+        cityHint?: string | null;
+        query?: string | null;
+      }) => { type: 'OPEN_URL'; label: string; payload: { url: string } };
+    };
+    const blob = `${response.speechText || ''}`;
+    // Speech allein reicht selten — Concierge-Ctx-Kind food + Liefer-Wörter
+    if (
+      wantsUberEatsExplicitly(blob) ||
+      (ctx?.kind === 'food' &&
+        /\b(liefern|lieferung|delivery|uber\s*eats)\b/iu.test(blob))
+    ) {
+      const eats = buildUberEatsAction({
+        cityHint: ctx?.primaryOffer?.name,
+        query: ctx?.primaryOffer?.name,
+      });
+      if (!actions.some((a) => a.payload?.url === eats.payload.url)) {
+        actions.push(eats as any);
+      }
+    }
+  } catch {
+    /* soft */
   }
 
   const offerCar =
@@ -640,7 +935,16 @@ export async function enrichWithConciergeOffers(
 
   if (offerCar) {
     const carIdx = actions.findIndex((a) => a.type === 'BOOK_CAR_RENTAL');
-    const carAction = buildCarRentalAction();
+    const carCity =
+      getCachedUserProfile()?.cityName?.trim() ||
+      null;
+    const carPickup = parseTravelDateYmd(response.speechText);
+    const carDrop = carPickup ? addDaysYmd(carPickup, 3) : null;
+    const carAction = buildCarRentalAction({
+      pickupLocation: carCity,
+      pickupDate: carPickup,
+      dropoffDate: carDrop,
+    });
     if (carIdx >= 0) {
       actions[carIdx] = {
         ...actions[carIdx],
@@ -652,6 +956,35 @@ export async function enrichWithConciergeOffers(
       };
     } else {
       actions.push(carAction);
+    }
+    if (
+      /\b(check[\s-]?24|vergleich(?:en)?)\b/iu.test(response.speechText) &&
+      !actions.some(
+        (a) =>
+          a.type === 'OPEN_URL' &&
+          /mietwagen\.check24\.de|check24\.net\/mietwagen|awin1\.com.*9364/i.test(
+            a.payload.url ?? '',
+          ),
+      )
+    ) {
+      actions.push(buildCheck24CarRentalAction());
+    }
+    if (
+      /\beconomy[\s-]?bookings\b/iu.test(response.speechText) &&
+      !actions.some(
+        (a) =>
+          a.type === 'OPEN_URL' &&
+          /economybookings\.com/i.test(a.payload.url ?? ''),
+      )
+    ) {
+      actions.push(
+        buildEconomyBookingsAction({
+          pickupDate: carPickup,
+          dropoffDate: carDrop,
+          pickupTime: '10:00',
+          dropoffTime: '10:00',
+        }),
+      );
     }
   }
 
@@ -670,7 +1003,15 @@ export async function enrichWithConciergeOffers(
 
   if (offerBounce) {
     const bounceIdx = actions.findIndex((a) => a.type === 'BOOK_BOUNCE_LUGGAGE');
-    const bounceAction = buildBounceLuggageAction();
+    const bounceDay =
+      parseTravelDateYmd(response.speechText) ||
+      new Date().toISOString().slice(0, 10);
+    const bags = parseLuggageBagCount(response.speechText) ?? 2;
+    const bounceAction = buildBounceLuggageAction({
+      fromDate: bounceDay,
+      toDate: bounceDay,
+      standardBags: bags,
+    });
     if (bounceAction) {
       if (bounceIdx >= 0) {
         actions[bounceIdx] = {
@@ -684,6 +1025,27 @@ export async function enrichWithConciergeOffers(
       } else {
         actions.push(bounceAction);
       }
+    }
+    const cityName = getCachedUserProfile()?.cityName?.trim() || '';
+    const gps = readGpsLatLng();
+    const hasRadical = actions.some(
+      (a) =>
+        a.type === 'OPEN_URL' && /radicalstorage/i.test(a.payload.url ?? ''),
+    );
+    if (!hasRadical) {
+      const day = parseTravelDateYmd(response.speechText);
+      actions.push(
+        buildTravelpayoutsCategoryAction('luggage', {
+          cityOrQuery: cityName,
+          lat: gps.lat,
+          lng: gps.lng,
+          dateIso: day,
+          endDateIso: day,
+          dropOffTimeHm: parseClockHmm(response.speechText) || '11:00',
+          pickUpTimeHm: '16:00',
+          bags: parseLuggageBagCount(response.speechText) ?? 2,
+        }),
+      );
     }
   } else {
     // Kein Bounce vor Ort — Radical Storage (Travelpayouts) als Fallback
@@ -701,20 +1063,56 @@ export async function enrichWithConciergeOffers(
           /radicalstorage|bounce/i.test(a.payload.url ?? ''),
       );
       if (!hasLuggageUrl) {
-        actions.push(buildTravelpayoutsCategoryAction('luggage'));
+        const cityName = getCachedUserProfile()?.cityName?.trim() || '';
+        const gps = readGpsLatLng();
+        const day = parseTravelDateYmd(response.speechText);
+        actions.push(
+          buildTravelpayoutsCategoryAction('luggage', {
+            cityOrQuery: cityName,
+            lat: gps.lat,
+            lng: gps.lng,
+            dateIso: day,
+            endDateIso: day,
+            dropOffTimeHm: parseClockHmm(response.speechText) || '11:00',
+            pickUpTimeHm: '16:00',
+            bags: parseLuggageBagCount(response.speechText) ?? 2,
+          }),
+        );
       }
     }
   }
 
-  // eSIM (Airalo via Travelpayouts)
+  // eSIM (Airalo via Travelpayouts) — nicht mitten in offener Flug-Slot-Abfrage.
+  let flightSlotsOpen = false;
+  try {
+    const { getFlightTripSession } = require('../flights/flightTripSession') as {
+      getFlightTripSession: () => { pendingAsk?: string | null } | null;
+    };
+    flightSlotsOpen = Boolean(getFlightTripSession()?.pendingAsk);
+  } catch {
+    flightSlotsOpen = false;
+  }
+  const userAskedEsim = /\b(esim|e-sim|roaming|daten\s*ausland|internet\s*ausland|sim\s*karte)\b/iu.test(
+    opts?.userText || '',
+  );
   const offerEsim =
-    actions.some((a) => a.type === 'BOOK_ESIM') ||
-    /\b(esim|e-sim|roaming|daten\s*ausland|internet\s*ausland|sim\s*karte)\b/iu.test(
-      response.speechText,
-    );
+    !flightSlotsOpen &&
+    (userAskedEsim ||
+      actions.some((a) => a.type === 'BOOK_ESIM') ||
+      /\b(esim|e-sim|roaming|daten\s*ausland|internet\s*ausland|sim\s*karte)\b/iu.test(
+        response.speechText,
+      ));
   if (offerEsim) {
     const esimIdx = actions.findIndex((a) => a.type === 'BOOK_ESIM');
-    const esimAction = buildEsimAction();
+    const esimHit = resolveEsimCountry({
+      text: response.speechText,
+      cityName: getCachedUserProfile()?.cityName,
+    });
+    const esimAction = buildEsimAction({
+      countrySlug: esimHit?.airaloSlug,
+      countryLabel: esimHit?.labelDe,
+      textHint: response.speechText,
+    });
     if (esimAction) {
       if (esimIdx >= 0) {
         actions[esimIdx] = {
@@ -727,6 +1125,59 @@ export async function enrichWithConciergeOffers(
         };
       } else {
         actions.push(esimAction);
+      }
+    }
+    const airaloUrl = getAiraloAffiliateUrl(esimHit?.airaloSlug);
+    if (
+      airaloUrl &&
+      !actions.some(
+        (a) =>
+          a.type === 'OPEN_URL' &&
+          /airalo\.com|tp\.media\/r\?[^?\s]*p=8310|airalo\.tpx\.li/i.test(
+            a.payload.url ?? '',
+          ),
+      )
+    ) {
+      actions.push({
+        type: 'OPEN_URL',
+        label: esimHit?.labelDe
+          ? `📱 Airalo ${esimHit.labelDe}`
+          : '📱 Airalo eSIM',
+        payload: { url: airaloUrl },
+      });
+    }
+    const slug = esimHit?.airaloSlug;
+    if (slug) {
+      const sailyUrl = withSailyAffiliate(buildSailyCountryPageUrl(slug));
+      if (
+        !actions.some(
+          (a) =>
+            a.type === 'OPEN_URL' &&
+            /saily\.com|go\.saily\.site/i.test(a.payload.url ?? ''),
+        )
+      ) {
+        actions.push({
+          type: 'OPEN_URL',
+          label: esimHit?.labelDe
+            ? `📱 Saily ${esimHit.labelDe}`
+            : '📱 Saily eSIM',
+          payload: { url: sailyUrl },
+        });
+      }
+      const yesimUrl = buildYesimCountryPageUrl(slug);
+      if (
+        !actions.some(
+          (a) =>
+            a.type === 'OPEN_URL' && /yesim\.tech/i.test(a.payload.url ?? ''),
+        )
+      ) {
+        actions.push({
+          type: 'OPEN_URL',
+          label: esimHit?.labelDe
+            ? `📱 Yesim ${esimHit.labelDe}`
+            : '📱 Yesim eSIM',
+          payload: { url: yesimUrl },
+        });
       }
     }
   }
@@ -752,7 +1203,18 @@ export async function enrichWithConciergeOffers(
         ),
     );
     if (!hasTransfer) {
-      actions.push(buildTravelpayoutsCategoryAction('transfer'));
+      const cityName = getCachedUserProfile()?.cityName?.trim() || '';
+      actions.push(
+        buildTravelpayoutsCategoryAction('transfer', {
+          cityOrQuery: cityName,
+          dateIso:
+            parseTravelDateYmd(response.speechText) ||
+            new Date().toISOString().slice(0, 10),
+          timeHm: parseClockHmm(response.speechText),
+          adults: 2,
+          luggage: parseLuggageBagCount(response.speechText) ?? 2,
+        }),
+      );
     }
   }
 
@@ -788,6 +1250,18 @@ export async function enrichWithConciergeOffers(
     if (!hasComp) {
       actions.push(buildTravelpayoutsCategoryAction('compensation'));
     }
+    if (
+      !actions.some(
+        (a) =>
+          a.type === 'OPEN_URL' && /compensair\.com/i.test(a.payload.url ?? ''),
+      )
+    ) {
+      actions.push({
+        type: 'OPEN_URL',
+        label: '✈️ Entschädigung Compensair',
+        payload: { url: buildCompensairCheckUrl() },
+      });
+    }
   }
 
   // Bike / Scooter mieten — genannte Portale (Mietrad) vor generischem BikesBooking
@@ -813,7 +1287,33 @@ export async function enrichWithConciergeOffers(
         a.type === 'OPEN_URL' && /bikesbooking/i.test(a.payload.url ?? ''),
     );
     if (!hasBike) {
-      actions.push(buildTravelpayoutsCategoryAction('bike'));
+      const start = parseTravelDateYmd(response.speechText);
+      actions.push(
+        buildTravelpayoutsCategoryAction('bike', {
+          dateIso: start,
+          endDateIso: start ? addDaysYmd(start, 3) : null,
+        }),
+      );
+    }
+  }
+
+  // QEEQ Pocket-WiFi / Powerbank-Miete am Standort
+  const offerQeeq =
+    /\b(qeeq|pocket[-\s]?wifi|wlan\s*mieten|powerbank\s*mieten)\b/iu.test(
+      response.speechText,
+    );
+  if (offerQeeq) {
+    const gps = readGpsLatLng();
+    const hasQeeq = actions.some(
+      (a) => a.type === 'OPEN_URL' && /qeeq\.com/i.test(a.payload.url ?? ''),
+    );
+    if (!hasQeeq && gps.lat != null && gps.lng != null) {
+      actions.push(
+        buildTravelpayoutsCategoryAction('wifi_power', {
+          lat: gps.lat,
+          lng: gps.lng,
+        }),
+      );
     }
   }
 
@@ -827,7 +1327,30 @@ export async function enrichWithConciergeOffers(
       (a) => a.type === 'OPEN_URL' && /gocity/i.test(a.payload.url ?? ''),
     );
     if (!hasPass) {
-      actions.push(buildTravelpayoutsCategoryAction('city_pass'));
+      const cityName = getCachedUserProfile()?.cityName?.trim() || '';
+      actions.push(
+        buildTravelpayoutsCategoryAction('city_pass', {
+          cityOrQuery: cityName,
+          adults: 2,
+        }),
+      );
+    }
+  }
+
+  for (let i = 0; i < actions.length; i++) {
+    const a = actions[i];
+    if (a.type !== 'OPEN_URL') continue;
+    const u = a.payload.url ?? '';
+    if (
+      /klook\.com|kkday\.com|wegotrip\.com|gocity\.com|welcomepickups|gettransfer|kiwitaxi|intui\.travel|localrent|getrentacar|autoeurope|bikesbooking|radicalstorage|airhelp|compensair|qeeq|saily\.com|yesim\.tech/i.test(
+        u,
+      ) &&
+      !/affiliate\.klook|invl\.me|prf\.hn|go\.saily\.site/i.test(u)
+    ) {
+      actions[i] = {
+        ...a,
+        payload: { ...a.payload, url: normalizeAffiliateUrl(u) },
+      };
     }
   }
 
@@ -846,6 +1369,112 @@ export async function enrichWithConciergeOffers(
     );
     if (!hasIns) {
       actions.push(buildTravelInsuranceAction());
+    }
+  }
+
+  // Camping — camping.info (AWIN mid=44063)
+  const offerCamping = /\b(camping|campingplatz|camper|wohnwagen|wohnmobil|glamping|stellplatz|zeltplatz)\b/iu.test(
+    response.speechText,
+  );
+  if (offerCamping) {
+    const hasCamp = actions.some(
+      (a) =>
+        a.type === 'OPEN_URL' &&
+        /camping\.info|awin1\.com.*44063/i.test(a.payload.url ?? ''),
+    );
+    if (!hasCamp) {
+      const city = getCachedUserProfile()?.cityName?.trim() || null;
+      const campsite = extractCampingplatzName(response.speechText);
+      const arrival = parseTravelDateYmd(response.speechText);
+      const departure = arrival ? addDaysYmd(arrival, 2) : null;
+      actions.push(
+        buildCampingInfoAction({
+          cityOrQuery: campsite ? null : city,
+          campsiteName: campsite,
+          arrival,
+          departure,
+          adults: 2,
+        }),
+      );
+    }
+  }
+
+  const offerKonfetti =
+    /\b(gokonfetti|go[\s-]?konfetti|\bkonfetti\b|\bconfetti\b|workshop|kochkurs|weinprobe)\b/iu.test(
+      response.speechText,
+    );
+  if (offerKonfetti) {
+    const hasK = actions.some(
+      (a) =>
+        a.type === 'OPEN_URL' &&
+        /gokonfetti\.com|awin1\.com.*31804/i.test(a.payload.url ?? ''),
+    );
+    if (!hasK) {
+      const city = getCachedUserProfile()?.cityName?.trim() || null;
+      actions.push(buildKonfettiAction({ cityOrQuery: city }));
+    }
+  }
+
+  // Reservix — Live-Events DE (Konzert, Theater, Festival, Sport)
+  const offerReservix =
+    !ctx?.eventResearch?.events?.length &&
+    RESERVIX_LIVE_EVENT_RE.test(response.speechText) &&
+    !/\b(workshop|kochkurs|weinprobe|gokonfetti|konfetti|confetti)\b/iu.test(
+      response.speechText,
+    );
+  if (offerReservix) {
+    const hasReservix = actions.some(
+      (a) =>
+        a.type === 'OPEN_URL' &&
+        /reservix\.(de|at|ch)|awin1\.com.*31293/i.test(a.payload.url ?? ''),
+    );
+    if (!hasReservix) {
+      const city = getCachedUserProfile()?.cityName?.trim() || null;
+      actions.push(buildReservixAction({ cityOrQuery: city }));
+    }
+  }
+
+  // Solmar — Spanien Bus-/Pauschalreisen (AWIN mid=114510)
+  const offerSolmar =
+    /\b(solmar|busreise\s+spanien|spanien\s+bus|bus\s+nach\s+spanien|costa\s+blanca|costa\s+brava|costa\s+dorada|costa\s+del\s+azahar|pauschalreise\s+spanien|spanien\s+pauschal|spanienurlaub|urlaub\s+spanien\s+bus)\b/iu.test(
+      response.speechText,
+    );
+  if (offerSolmar) {
+    const hasSolmar = actions.some(
+      (a) =>
+        a.type === 'OPEN_URL' &&
+        /solmar\.de|awin1\.com.*114510/i.test(a.payload.url ?? ''),
+    );
+    if (!hasSolmar) {
+      actions.push(buildSolmarAction());
+    }
+  }
+
+  // Pauschal / Last Minute / Kurztrips — CHECK24 (9364) primär
+  const offerPackageHoliday =
+    /\b(check[\s-]?24|ab[\s-]?in[\s-]?den[\s-]?urlaub|invia|weg\.de|pauschalreise|last\s*minute|lastminute|all[\s-]?inclusive|pauschal\s+buchen|urlaub\s+pauschal)\b/iu.test(
+      response.speechText,
+    );
+  if (offerPackageHoliday) {
+    const hasPackagePartner = actions.some(
+      (a) =>
+        a.type === 'OPEN_URL' &&
+        /check24\.(de|net)|awin1\.com.*9364|ab-in-den-urlaub\.(de|at|ch)|awin1\.com.*9369|\bweg\.de\b|awin1\.com.*12224/i.test(
+          a.payload.url ?? '',
+        ),
+    );
+    if (!hasPackagePartner) {
+      const city = getCachedUserProfile()?.cityName?.trim() || null;
+      const pkgDate = parseTravelDateYmd(response.speechText);
+      actions.push(
+        buildPackageHolidayAction({
+          cityOrQuery: city,
+          speechOrBlob: response.speechText,
+          departureDate: pkgDate,
+          airport: parseOriginIata(response.speechText),
+          adults: 2,
+        }),
+      );
     }
   }
 
@@ -968,10 +1597,17 @@ export async function enrichWithConciergeOffers(
               payload: { ...a.payload, url: normalizeAffiliateUrl(url) },
             };
           }
-        } else if (/musement|viator|tripadvisor/i.test(url)) {
+        } else if (/musement|viator|tripadvisor|klook|kkday|wegotrip|gocity/i.test(url)) {
+          let next = url;
+          if (/wegotrip\.com/i.test(url)) {
+            next = withWegotripPrefill(url, {
+              dateIso: parseTravelDateYmd(response.speechText),
+              adults: 2,
+            });
+          }
           actions[i] = {
             ...a,
-            payload: { ...a.payload, url: normalizeAffiliateUrl(url) },
+            payload: { ...a.payload, url: normalizeAffiliateUrl(next) },
           };
         }
       }
@@ -1011,12 +1647,26 @@ export async function enrichWithConciergeOffers(
         query: city || undefined,
       });
       const tourUrl = tourAction.payload.url ?? '';
-      const isBareSearch =
-        /\/search\/?\?/i.test(tourUrl) ||
-        (/awin1\.com\/cread\.php/i.test(tourUrl) &&
-          /tiqets\.com.*(search|%2Fsearch)/i.test(tourUrl));
-      if (!isBareSearch) {
-        actions.push(tourAction);
+      try {
+        const {
+          mayShowAsPartnerBookAction,
+        } = require('../affiliate/hollowPartnerUrl') as {
+          mayShowAsPartnerBookAction: (o: {
+            label: string;
+            url?: string | null;
+          }) => boolean;
+        };
+        if (
+          mayShowAsPartnerBookAction({
+            label: tourAction.label,
+            url: tourUrl,
+          }) &&
+          !/suchen/i.test(tourAction.label)
+        ) {
+          actions.push(tourAction);
+        }
+      } catch {
+        /* soft — lieber kein Fake-Ticket-Button */
       }
     }
   }
@@ -1033,7 +1683,10 @@ export async function enrichWithConciergeOffers(
     offerCompensation ||
     offerBike ||
     offerCityPass ||
-    offerInsurance
+    offerInsurance ||
+    offerCamping ||
+    offerSolmar ||
+    offerWegDe
   ) {
     primaryIntent.push('OPEN_URL', 'OPEN_GYG_WIDGET');
   }
@@ -1052,7 +1705,10 @@ export async function enrichWithConciergeOffers(
     !offerCompensation &&
     !offerBike &&
     !offerCityPass &&
-    !offerInsurance
+    !offerInsurance &&
+    !offerCamping &&
+    !offerSolmar &&
+    !offerWegDe
   ) {
     const keepEventUrls = Boolean(ctx.eventResearch?.events?.length);
     actions = actions.filter(
@@ -1126,7 +1782,24 @@ export async function enrichWithConciergeOffers(
     ),
     quickActions: withMap,
     cardTitle:
-      response.cardTitle || (ctx ? titleForKind(ctx.kind) : undefined),
+      response.cardTitle ||
+      (() => {
+        try {
+          const { deriveSpickzettelTitle } = require('./spickzettelTitle') as {
+            deriveSpickzettelTitle: (o: {
+              userText?: string | null;
+              speech?: string | null;
+              bullets?: string[] | null;
+            }) => string;
+          };
+          return deriveSpickzettelTitle({
+            speech: response.speechText,
+            bullets: bullets.length ? bullets : response.visualBullets,
+          });
+        } catch {
+          return ctx ? titleForKind(ctx.kind) : 'Spickzettel';
+        }
+      })(),
   };
   const enriched =
     ctx?.kind === 'general' || !wantsMusicExplicitly(response.speechText)
@@ -1176,7 +1849,7 @@ function titleForKind(kind: ConciergeContext['kind']): string {
     case 'general':
       return 'Heute vor Ort';
     default:
-      return 'Findus Spickzettel';
+      return 'Spickzettel';
   }
 }
 
@@ -1330,6 +2003,16 @@ function ensureZeroDeadEndActions(
   }
 
   if (!skipNav && offer) {
+    try {
+      const { isAlreadyAtCoords } = require('../../module2/pitch/navActionPolicy') as {
+        isAlreadyAtCoords: (lat?: number | null, lng?: number | null) => boolean;
+      };
+      if (isAlreadyAtCoords(offer.lat, offer.lng)) {
+        return response;
+      }
+    } catch {
+      /* soft */
+    }
     return {
       ...response,
       quickActions: [
@@ -1385,10 +2068,27 @@ export async function presentConciergeResponse(
     response = guarded.response;
   }
 
-  // P1: Research-Ack hart ablösen bevor Final spricht
+  // Bridge darf ausreden — nicht hart killen (sonst fällt Yorro sich ins Wort).
   try {
+    const { hadRecentLatencyAck } = require('../speech/floskelEngine') as {
+      hadRecentLatencyAck: (ms?: number) => boolean;
+    };
     const { stopSpeaking } = await import('../ttsService');
-    await stopSpeaking();
+    const {
+      isAudiblyPlaying,
+      getActiveTtsSessionCount,
+    } = await import('../AudioVoiceService');
+    if (hadRecentLatencyAck(12_000) || isAudiblyPlaying()) {
+      const deadline = Date.now() + 8_000;
+      while (
+        Date.now() < deadline &&
+        (isAudiblyPlaying() || getActiveTtsSessionCount() > 0)
+      ) {
+        await new Promise((r) => setTimeout(r, 80));
+      }
+    } else {
+      await stopSpeaking();
+    }
   } catch {
     /* ignore */
   }
@@ -1419,57 +2119,84 @@ export async function presentConciergeResponse(
   const cardId = `ab_${Date.now()}`;
   let deepJobs: import('../actionBoard').DeepJob[] = [];
   try {
-    const { applyActionBoardToResponse } = await import('../actionBoard');
-    // Transit-Karte: nur Station mit Coords — keine Speech-Mining-Fake-Maps
-    let boardEntities: import('../actionBoard').ActionEntity[] | undefined;
-    if (response.cardTitle === 'Nächste Bahn') {
-      const nav = response.quickActions?.find(
-        (a) =>
-          a.type === 'START_NAVIGATION' &&
-          typeof a.payload.destLat === 'number' &&
-          typeof a.payload.destLng === 'number',
-      );
-      if (nav) {
-        boardEntities = [
-          {
-            name: String(nav.payload.destName || 'Bahnhof'),
-            rank: 1,
-            lat: nav.payload.destLat as number,
-            lng: nav.payload.destLng as number,
-            poiId: nav.payload.targetPoiId ?? null,
-            category: 'other',
-          },
-        ];
-      } else {
-        boardEntities = [];
+    const skipBoard =
+      response.cardTitle === 'Günstige Flieger' ||
+      response.cardTitle === 'Aufgabegepäck?' ||
+      response.cardTitle === 'Wann fliegst du?' ||
+      response.cardTitle === 'Welche Uhrzeit?';
+    if (!skipBoard) {
+      const { applyActionBoardToResponse } = await import('../actionBoard');
+      // Transit-Karte: nur Station mit Coords — keine Speech-Mining-Fake-Maps
+      let boardEntities: import('../actionBoard').ActionEntity[] | undefined;
+      if (response.cardTitle === 'Nächste Bahn') {
+        const nav = response.quickActions?.find(
+          (a) =>
+            a.type === 'START_NAVIGATION' &&
+            typeof a.payload.destLat === 'number' &&
+            typeof a.payload.destLng === 'number',
+        );
+        if (nav) {
+          boardEntities = [
+            {
+              name: String(nav.payload.destName || 'Bahnhof'),
+              rank: 1,
+              lat: nav.payload.destLat as number,
+              lng: nav.payload.destLng as number,
+              poiId: nav.payload.targetPoiId ?? null,
+              category: 'other',
+            },
+          ];
+        } else {
+          boardEntities = [];
+        }
       }
+      const boarded = applyActionBoardToResponse(response, {
+        userText: opts?.userText,
+        cardId,
+        startDeep: false,
+        entities: boardEntities,
+      });
+      response = boarded.response;
+      deepJobs = boarded.deepJobs;
     }
-    const boarded = applyActionBoardToResponse(response, {
-      userText: opts?.userText,
-      cardId,
-      startDeep: false,
-      entities: boardEntities,
-    });
-    response = boarded.response;
-    deepJobs = boarded.deepJobs;
   } catch (err) {
     if (__DEV__) console.warn('[present] actionBoard failed:', err);
   }
 
+  // Live Deep-Link: toten 404-Button durch aktuellsten lebenden Link ersetzen
+  try {
+    const { resolveLiveOpenUrlActions } = await import('../research/liveDeepLink');
+    const live = await resolveLiveOpenUrlActions(response.quickActions, {
+      userText: opts?.userText,
+      timeoutMs: 1200,
+    });
+    response = { ...response, quickActions: live.actions };
+  } catch (err) {
+    if (__DEV__) console.warn('[present] liveDeepLink', err);
+  }
+
   // Zero-Fake: Turnierplan-Chips ohne URL etc. weg
+  const cleanedActions = stripUnbackedActions(response.quickActions);
   response = {
     ...response,
-    speechText: stripFakeReservationClaims(
-      response.speechText,
-      response.quickActions,
+    speechText: stripOrphanButtonClaims(
+      stripFakeReservationClaims(
+        response.speechText,
+        cleanedActions,
+        // Nav-Claims erst nach Auto-Start-Versuch strippen
+        { navActuallyStarted: true },
+      ),
+      cleanedActions,
     ),
-    quickActions: stripUnbackedActions(response.quickActions),
+    quickActions: cleanedActions,
   };
 
   // Native Background-Tasks (Wecker) VOR der Stimme — Speech an echtes Ergebnis koppeln
   try {
     const { applyBackgroundTasks } = await import('./backgroundTasks');
-    const bg = await applyBackgroundTasks(response);
+    const bg = await applyBackgroundTasks(response, {
+      userText: opts?.userText,
+    });
     response = bg.response;
     if (__DEV__ && bg.changed) {
       console.log(
@@ -1481,24 +2208,152 @@ export async function presentConciergeResponse(
     console.warn('[present] background-tasks failed:', err);
   }
 
+  // Erinnerung: Fake-Claim „ich erinnere dich“ → echt stellen oder ehrlich strippen
+  try {
+    const {
+      speechClaimsReminderSet,
+      buildRemindOnlyQuickAction,
+      speechOffersRemind,
+    } = await import('./reminderActionPolicy');
+    const claimed =
+      speechClaimsReminderSet(response.speechText) ||
+      speechOffersRemind(response.speechText);
+    const hasRemindBtn = response.quickActions.some(
+      (a) =>
+        a.type === 'SET_DEPARTURE_REMINDER' ||
+        a.type === 'SET_WAKE_ALARM' ||
+        a.type === 'SET_TIMER',
+    );
+    if (claimed && !hasRemindBtn) {
+      const btn = buildRemindOnlyQuickAction({
+        speech: response.speechText,
+        userText: opts?.userText,
+        requireOfferOrAsk: false,
+      });
+      if (btn && speechClaimsReminderSet(response.speechText)) {
+        // Behaupteter Erfolg → sofort ausführen
+        const { handleQuickAction } = await import('../actionHandlerService');
+        const r = await handleQuickAction(btn);
+        response = {
+          ...response,
+          speechText:
+            r.message ||
+            (r.ok !== false
+              ? response.speechText
+              : 'Erinnerung ist noch nicht gestellt.'),
+          visualBullets: (
+            r.ok !== false
+              ? [
+                  btn.payload.timeLabel
+                    ? `⏰ ${btn.payload.timeLabel}`
+                    : 'Erinnerung aktiv',
+                  ...(response.visualBullets ?? []),
+                ]
+              : ['Erinnerung fehlgeschlagen', ...(response.visualBullets ?? [])]
+          ).slice(0, 3),
+          quickActions:
+            r.ok === false
+              ? [btn, ...response.quickActions].slice(0, 4)
+              : response.quickActions,
+        };
+      } else if (btn) {
+        // Soft-Offer → Button erzwingen
+        response = {
+          ...response,
+          quickActions: [btn, ...response.quickActions].slice(0, 4),
+        };
+      } else if (speechClaimsReminderSet(response.speechText)) {
+        response = {
+          ...response,
+          speechText: response.speechText
+            .replace(
+              /[^.!?]*(?:ich\s+erinnere\s+dich|erinnerung\s+(?:ist\s+)?(?:gestellt|gesetzt)|sag(?:e|)\s+(?:ich\s+)?(?:dir|euch)\s+bescheid)[^.!?]*[.!?]?/giu,
+              ' ',
+            )
+            .replace(/\s+/g, ' ')
+            .trim() ||
+            'Sag mir Uhrzeit oder Ort — dann stelle ich die Erinnerung echt.',
+          visualBullets: ['Erinnerung noch nicht gestellt'],
+          quickActions: [
+            {
+              type: 'SHOW_MORE' as const,
+              label: 'In 30 Min',
+              payload: { textPrompt: 'Erinner mich in 30 Minuten' },
+            },
+            ...response.quickActions,
+          ].slice(0, 4),
+        };
+      }
+    }
+  } catch (err) {
+    console.warn('[present] reminder honesty failed:', err);
+  }
+
   // Zero Dead-Ends: nur echte nächste Klicks
   response = ensureZeroDeadEndActions(response, opts?.skipAutoNav === true);
 
+  try {
+    const title = response.cardTitle || '';
+    if (
+      title === 'Aufgabegepäck?' ||
+      title === 'Wann fliegst du?' ||
+      title === 'Welche Uhrzeit?'
+    ) {
+      const chips = (response.quickActions ?? [])
+        .filter((a) => a.type === 'SHOW_MORE')
+        .slice(0, 5)
+        .map((a, i) => ({
+          id: `flight_chip_${i}_${a.label}`,
+          label: a.label,
+          action: 'prompt' as const,
+          prompt: String(a.payload?.textPrompt || a.label),
+        }));
+      if (chips.length) {
+        const { usePlanCalendarUiStore } = require('../../module2/timeline/planCalendarUiStore') as {
+          usePlanCalendarUiStore: {
+            getState: () => { setShortAnswers: (a: typeof chips) => void };
+          };
+        };
+        usePlanCalendarUiStore.getState().setShortAnswers(chips);
+      }
+    }
+  } catch {
+    /* soft */
+  }
+
   // 1) Navigation SOFORT — Kompass sichtbar, User kann losgehen
   //    Stimme startet danach und läuft parallel weiter (kein Warten auf TTS-Ende).
-  const navStarted = await autoStartNavigationIfCommitted(response, opts);
-  if (navStarted) {
+  const navCommit = await autoStartNavigationIfCommitted(response, opts);
+  if (navCommit.started) {
     useFinnusStore.getState().patchNavigation({
       navActive: true,
       navVisible: true,
     });
+  } else if (navCommit.confirmSpeech) {
+    const card = useFinnusStore.getState().activeConciergeCard;
+    if (card?.id.startsWith('nav-retarget')) {
+      response = {
+        ...response,
+        speechText: navCommit.confirmSpeech,
+        visualBullets: card.visualBullets,
+        quickActions: card.quickActions,
+        cardTitle: card.cardTitle,
+      };
+    } else {
+      response = {
+        ...response,
+        speechText: navCommit.confirmSpeech,
+      };
+    }
   } else if (speechCommitsToNavigation(response.speechText)) {
     // Say–Do: nie „ich starte Navigation“ ohne echten Start
     response = {
       ...response,
-      speechText: stripFakeReservationClaims(response.speechText, [
-        ...response.quickActions.filter((a) => a.type !== 'START_NAVIGATION'),
-      ]),
+      speechText: stripFakeReservationClaims(
+        response.speechText,
+        response.quickActions.filter((a) => a.type !== 'START_NAVIGATION'),
+        { navActuallyStarted: false },
+      ),
     };
   }
 
@@ -1598,16 +2453,19 @@ export async function presentConciergeResponse(
 
   useFinnusStore.getState().setIsGenerating(false);
 
+  // Thinking halten — aber Card erst bei hörbarem Audio (nicht vor Synth).
+  useFinnusStore.getState().setIsPlayingAudio(true);
+
   const speakPromise = speakRuntimeText(speech, {
     voiceId: voiceSettings.voiceId,
     speechRate: voiceSettings.speechRate,
   });
 
-  // 3) Spickzettel sobald Stimme startet — nicht auf TTS-Ende warten
+  // 3) Spickzettel erst wenn wirklich gesprochen wird — sonst Stichpunkte 20–30 s vor Speech
   if (card) {
-    // Deep Exec Telemetry: generated action buttons (what Findus put into the UI).
     recordFindusActionsTriggered(card.quickActions, Date.now());
-    await waitUntilVoicePlaying(2500);
+    // Card parallel zur Speech: kurz auf Hörstart warten, dann immer zeigen.
+    await waitUntilVoicePlaying(1_200);
     useFinnusStore.getState().setActiveConciergeCard(card);
     // Deep Recharge parallel zum Audio (Pending-Chips → echte Links)
     if (deepJobs.length > 0) {

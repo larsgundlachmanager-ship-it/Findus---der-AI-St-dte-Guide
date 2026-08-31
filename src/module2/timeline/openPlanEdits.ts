@@ -6,6 +6,7 @@ import { emojiForPlace } from '../../services/navigation/stampBullets';
 import { buildDayTimeline, type OpenPlanItem } from './buildDayTimeline';
 import { useFuturePlanStore } from './futurePlanState';
 import { kickGapFillInBackground } from './planTravelHelpers';
+import { retireCommitmentsForStop } from './retireTimelineCommitments';
 
 function taskIdFromOpenId(openId: string): string | null {
   if (openId.startsWith('wish_')) {
@@ -15,20 +16,37 @@ function taskIdFromOpenId(openId: string): string | null {
   return null;
 }
 
+function dayKeyForOpenEdits(): string {
+  try {
+    const { usePlanCalendarUiStore } = require('./planCalendarUiStore') as {
+      usePlanCalendarUiStore: {
+        getState: () => { requestedDayKey: string | null };
+      };
+    };
+    const dk = usePlanCalendarUiStore.getState().requestedDayKey?.trim();
+    if (dk && /^\d{4}-\d{2}-\d{2}$/.test(dk)) return dk;
+  } catch {
+    /* soft */
+  }
+  return useFuturePlanStore.getState().plan.dayKey;
+}
+
 function listOpenPlans(): OpenPlanItem[] {
-  const dayKey = useFuturePlanStore.getState().plan.dayKey;
-  return buildDayTimeline(dayKey, Date.now()).openPlans;
+  return buildDayTimeline(dayKeyForOpenEdits(), Date.now()).openPlans;
 }
 
 /** Alle sichtbaren Offenen Pläne als Wish-Stops mit openOrder materialisieren. */
 function materializeOpenOrder(items: OpenPlanItem[]): void {
   const store = useFuturePlanStore.getState();
+  const dayKey = dayKeyForOpenEdits();
+  store.ensureDay(dayKey);
+  const dayStops = store.getPlanForDay(dayKey).stops;
   const transport = store.plan.transportDefault;
   for (let i = 0; i < items.length; i++) {
     const p = items[i]!;
-    const existing = store.plan.stops.find((s) => s.id === p.id);
+    const existing = dayStops.find((s) => s.id === p.id);
     const taskId = taskIdFromOpenId(p.id) ?? existing?.planTaskId ?? null;
-    store.upsertStop({
+    store.upsertStopOnDay(dayKey, {
       id: p.id,
       title: p.title,
       emoji: p.emoji || emojiForPlace({ name: p.title }),
@@ -156,6 +174,7 @@ function clearProposalsLinkedToOpenPlan(opts: {
 /** Offenen Plan löschen (Wish-Stop) + Timeline neu rechnen. */
 export function removeOpenPlan(openId: string): void {
   const store = useFuturePlanStore.getState();
+  store.ensureDay(dayKeyForOpenEdits());
   const removedStop = store.plan.stops.find((s) => s.id === openId);
   const removedTitle =
     removedStop?.title ??
@@ -172,6 +191,13 @@ export function removeOpenPlan(openId: string): void {
   });
 
   store.removeStop(openId);
+  if (removedStop) {
+    try {
+      retireCommitmentsForStop(removedStop);
+    } catch {
+      /* soft */
+    }
+  }
   if (taskId) {
     store.removeStop(`wish_${taskId}`);
   }

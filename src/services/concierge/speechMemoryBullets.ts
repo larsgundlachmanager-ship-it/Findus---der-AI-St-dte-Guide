@@ -6,6 +6,11 @@
 
 import { extractHistoryFactBullets } from './historyFactBullets';
 import {
+  ageFromBirthYear,
+  bulletClockKey,
+  compactBulletDigits,
+} from './bulletDigits';
+import {
   extractSpokenAddresses,
   looksLikeAddressOrCoordBullet,
   userAskedForAddressOrCoords,
@@ -15,7 +20,7 @@ const FLUFF_RE =
   /^(lebendig|kompakt|ausführlich|offline|kurzfassung|meilensteine\s+folgen|bahn-historie|ok|super|cool|genau|historie\s*→\s*heute|venue-offers|maps-pitch)$/iu;
 
 function clean(s: string): string {
-  return s.replace(/\s+/g, ' ').trim();
+  return compactBulletDigits(s.replace(/\s+/g, ' ').trim());
 }
 
 function isFluff(b: string, allowAddress = false): boolean {
@@ -57,7 +62,24 @@ function extractQuantities(speech: string): string[] {
     /\b(\d{1,3}\s*(?:–|-|bis\s+)?\d{0,3}\s*(?:Min(?:uten)?|Std\.?|Stunden?|km|m|€|Euro|Pkt\.?|Punkte?)|ca\.\s*\d{1,3}\s*(?:Min|km|Pkt|Punkte)|~\s*\d{1,3}\s*(?:Min|km))\b/giu;
   let m: RegExpExecArray | null;
   while ((m = re.exec(speech))) {
-    out.push(clean(m[1]).replace(/\s+/g, ' '));
+    let q = clean(m[1]).replace(/\s+/g, ' ');
+    // Nie „200 Min(uten)“ in Stichpunkten — in Stunden umrechnen
+    const minHit = q.match(/^~?\s*(\d{2,3})\s*Min(?:uten)?$/i);
+    if (minHit) {
+      const mins = Number(minHit[1]);
+      if (Number.isFinite(mins) && mins >= 60) {
+        try {
+          const { formatDurationMinutesDe } = require('../navigation/travelEta') as {
+            formatDurationMinutesDe: (n: number, s?: 'short' | 'speech') => string;
+          };
+          q = formatDurationMinutesDe(mins, 'short');
+        } catch {
+          const h = Math.round(mins / 60);
+          q = `ca. ${h} Std`;
+        }
+      }
+    }
+    out.push(q);
   }
   // Ranking / Turnier-Punkte mit optionaler Stufe
   const pointRes: Array<{ re: RegExp; fmt: (a: string, b?: string) => string }> = [
@@ -86,15 +108,11 @@ function extractQuantities(speech: string): string[] {
       if (n) out.push(fmt(n));
     }
   }
-  // Höhe / Meter / Stufen — mit Label
+  // Höhe / Meter / Stufen — mit Label (nackte Meter nur Fallback; Name+Höhe hat Vorrang)
   const measureRes: Array<{ re: RegExp; fmt: (n: string, unit: string) => string }> = [
     {
       re: /\b(?:höhe|hoch|turmhöhe|gesamt(?:höhe)?)\b[^\d]{0,24}(\d{2,4})\s*(m|meter|metern)?\b/giu,
       fmt: (n, u) => `Höhe ${n} ${u || 'm'}`,
-    },
-    {
-      re: /\b(\d{2,4})\s*(m|meter|metern)\b(?:\s*(?:hoch|höhe|turm))?/giu,
-      fmt: (n, u) => `${n} ${u === 'm' ? 'm' : 'm'}`,
     },
     {
       re: /\b(\d{2,4})\s*(stufen|treppenstufen|stiege)\b/giu,
@@ -116,6 +134,73 @@ function extractQuantities(speech: string): string[] {
   return out;
 }
 
+const NAME_HEIGHT_STOP =
+  /^(?:Der|Die|Das|Ein|Eine|Mit|Und|Oder|Dann|Auch|Noch|Heute|Morgen|Ca|Etwa|Rund|Hoch|Hoehe|Höhe|Meter|Turm|Gebäude|Gebaeude|Stadt|Hamburg|Berlin|Nikolai)$/iu;
+
+/** Eigenname: Großstart + Partikel/weitere Großwörter — kein Fließtext. */
+const PROPER_NAME_RE =
+  '(?:St\\.?\\s+)?[A-ZÄÖÜ][\\wÄÖÜäöüß\\-]+(?:(?:\\s+|-)(?:de[rsn]?|von|vom|am|im|und|&|St\\.?|[A-ZÄÖÜ][\\wÄÖÜäöüß\\-]+))*';
+
+/**
+ * Genannte Gebäude/Türme mit Höhe — Spickzettel "Name · Xm" (nicht nackte Meter).
+ */
+export function extractNamedHeights(speech: string): string[] {
+  const s = (speech || '').replace(/\s+/g, ' ').trim();
+  if (!s) return [];
+  const out: string[] = [];
+  const seen = new Set<string>();
+  const push = (nameRaw: string, numRaw: string) => {
+    let name = clean(nameRaw)
+      .replace(/^(?:der|die|das|dem|den)\s+/iu, '')
+      .replace(/[,:;–—\-]+$/u, '')
+      .trim();
+    if (!name || name.length < 3 || name.length > 42) return;
+    if (NAME_HEIGHT_STOP.test(name)) return;
+    if (/\b(?:ist|war|liegt|kommt|höchste|hoehe|höhe|gebäude|gebaeude)\b/iu.test(name)) {
+      return;
+    }
+    if (!/^[A-ZÄÖÜ]/.test(name) && !/^St\./i.test(name)) return;
+    const num = numRaw.replace(',', '.');
+    const nVal = Number(num);
+    if (!Number.isFinite(nVal) || nVal < 20 || nVal > 2000) return;
+    const key = `${name.toLowerCase()}|${num}`;
+    if (seen.has(key)) return;
+    seen.add(key);
+    out.push(`${name} · ${num.replace(/\.0$/, '')} m`);
+  };
+
+  const patterns: RegExp[] = [
+    // kein /i — sonst matcht [A-ZÄÖÜ] auch Kleinbuchstaben und frisst Fließtext
+    new RegExp(
+      `\\b(${PROPER_NAME_RE})\\s+(?:[Ii]st|[Ww]ar|[Ll]iegt|[Mm]isst|[Hh]at)\\s+(?:ca\\.?\\s*|[Ee]twa\\s*|[Rr]und\\s*)?(\\d{2,4}(?:[.,]\\d+)?)\\s*(?:[Mm]|[Mm]eter|[Mm]etern)\\b`,
+      'gu',
+    ),
+    new RegExp(
+      `\\b(${PROPER_NAME_RE})\\s+(?:[Kk]ommt\\s+(?:\\w+\\s+){0,2}auf|[Mm]it)\\s+(?:ca\\.?\\s*|[Ee]twa\\s*|[Rr]und\\s*)?(\\d{2,4}(?:[.,]\\d+)?)\\s*(?:[Mm]|[Mm]eter|[Mm]etern)\\b`,
+      'gu',
+    ),
+    new RegExp(
+      `\\b(${PROPER_NAME_RE})\\s*[\\(–—,:]\\s*(?:ca\\.?\\s*)?(\\d{2,4}(?:[.,]\\d+)?)\\s*(?:[Mm]|[Mm]eter)\\b`,
+      'gu',
+    ),
+    new RegExp(
+      `\\b(\\d{2,4}(?:[.,]\\d+)?)\\s*(?:[Mm]|[Mm]eter|[Mm]etern)\\s+(?:hoher?|hohe[rsn]?|[Hh]och)\\s+(${PROPER_NAME_RE})\\b`,
+      'gu',
+    ),
+  ];
+
+  for (let i = 0; i < patterns.length; i++) {
+    const re = patterns[i]!;
+    re.lastIndex = 0;
+    let m: RegExpExecArray | null;
+    while ((m = re.exec(s))) {
+      if (i === 3) push(m[2]!, m[1]!);
+      else push(m[1]!, m[2]!);
+    }
+  }
+  return out;
+}
+
 /** Orte / Themen als Eckpunkte (Proper Names + bekannte Labels) */
 function extractThemes(speech: string): string[] {
   const out: string[] = [];
@@ -125,7 +210,16 @@ function extractThemes(speech: string): string[] {
     ) ?? [];
   for (const t of themes) {
     const c = clean(t);
-    if (c.length >= 4) out.push(c);
+    if (c.length < 4) continue;
+    // Nackte Gattung ohne Eigenname — kein Spickzettel („Kirche“ bei Papst)
+    if (
+      /^(Kirche|Museum|Hafen|Strand|Düne|Aussicht|Rathaus|Markt|Tour|Toilette|Restaurant|Café|Cafe)$/iu.test(
+        c,
+      )
+    ) {
+      continue;
+    }
+    out.push(c);
   }
   // „X oder Y“ Choice-Namen
   const orPair = speech.match(
@@ -135,6 +229,64 @@ function extractThemes(speech: string): string[] {
     out.push(clean(orPair[1]));
     out.push(clean(orPair[2]));
   }
+  return out;
+}
+
+const MONTH_IDX: Record<string, number> = {
+  januar: 0,
+  februar: 1,
+  märz: 2,
+  maerz: 2,
+  april: 3,
+  mai: 4,
+  juni: 5,
+  juli: 6,
+  august: 7,
+  september: 8,
+  oktober: 9,
+  november: 10,
+  dezember: 11,
+};
+
+/** Geburt + Alter — auch wenn Speech die Zahlen ausschreibt. */
+function extractAgeAndBirth(speech: string, userText?: string): string[] {
+  const compact = compactBulletDigits(speech);
+  const out: string[] = [];
+  const date =
+    compact.match(
+      /\b(?:geboren\s+am\s+)?(\d{1,2})\.\s+(Januar|Februar|März|Maerz|April|Mai|Juni|Juli|August|September|Oktober|November|Dezember)\s+(\d{4})\b/iu,
+    ) ??
+    compact.match(
+      /\bam\s+(\d{1,2})\.\s+(Januar|Februar|März|Maerz|April|Mai|Juni|Juli|August|September|Oktober|November|Dezember)\s+(\d{4})\b/iu,
+    );
+  if (date) {
+    out.push(`geboren am ${date[1]}. ${date[2]} ${date[3]}`);
+  }
+  const ageHit = compact.match(/\b(\d{1,3})\s+Jahre(?:n)?(?:\s+alt)?\b/iu);
+  if (ageHit) {
+    out.push(`${ageHit[1]} Jahre`);
+  } else if (
+    date &&
+    /\b(wie\s+alt|alter|jahre)\b/iu.test(userText ?? '')
+  ) {
+    const month = MONTH_IDX[date[2]!.toLowerCase().replace('ä', 'ae')];
+    const age = ageFromBirthYear(
+      Number(date[3]),
+      new Date(),
+      month,
+      Number(date[1]),
+    );
+    if (age != null) out.push(`${age} Jahre`);
+  }
+  // Titel/Name (Papst Leo XIV. / bürgerlicher Name)
+  const papst = speech.match(
+    /\b(Papst\s+[A-ZÄÖÜ][\wÄÖÜäöüß\-]*(?:\s+[IVXLCDM]+\.?)?)\b/u,
+  );
+  if (papst?.[1]) out.unshift(clean(papst[1]));
+  const buerger = speech.match(
+    /\b(?:bürgerlichem\s+Namen|mit\s+Namen)\s+([A-ZÄÖÜ][\wÄÖÜäöüß\-]+(?:\s+[A-ZÄÖÜ][\wÄÖÜäöüß\-]+){1,3})\b/u,
+  );
+  if (buerger?.[1] && out.length < 3) out.push(clean(buerger[1]));
   return out;
 }
 
@@ -150,6 +302,8 @@ function dedupePush(
   if (!t || isFluff(t, allowAddress)) return;
   const key = t.toLowerCase().replace(/^[\p{Extended_Pictographic}\uFE0F\s]+/u, '');
   if (seen.has(key)) return;
+  const clock = bulletClockKey(t);
+  if (clock && [...seen].some((k) => k.includes(clock))) return;
   // Cap length for display — Adressen etwas länger erlauben
   const cap = allowAddress && looksLikeAddressOrCoordBullet(t) ? 64 : 48;
   const clipped =
@@ -181,12 +335,12 @@ export function classifySpeechScene(
   ) {
     return 'history';
   }
-  // Zahl-/Punkte-/Regel-Fragen → Fakten-Spickzettel priorisieren
+  // Zahl-/Punkte-/Regel-/Höhen-Fragen → Fakten-Spickzettel priorisieren
   if (
-    /\b(wie\s+viele|wieviel|wie\s+viel|punkte?|pkt\.?|runde|stufe|ranking|regel|kostet|preis|eintritt)\b/iu.test(
+    /\b(wie\s+alt|wie\s+viele|wieviel|wie\s+viel|wie\s+hoch|höchste|hoehe|höhe|gebäude|turm|punkte?|pkt\.?|runde|stufe|ranking|regel|kostet|preis|eintritt|geboren)\b/iu.test(
       blob,
     ) &&
-    /\d/.test(speech)
+    (/\d/.test(speech) || /jahre|geboren|hundert|meter|\bm\b/iu.test(speech))
   ) {
     return 'fact_answer';
   }
@@ -242,6 +396,16 @@ export function deriveMemoryBullets(
   existing?: string[] | null,
   opts?: { userText?: string; factBlock?: string | null },
 ): string[] {
+  const existingList = (existing ?? []).map((b) => b.trim()).filter(Boolean);
+  const chargeReady = existingList.filter((b) =>
+    /^(Powerbank|Ladestation|Steckdose|Café)\s·\s.+\s·\s(\d+\s*m|\d+[.,]\d+\s*km)$/i.test(
+      b,
+    ),
+  );
+  if (chargeReady.length > 0 && existingList.length <= 2) {
+    return existingList.slice(0, 2);
+  }
+
   const scene = classifySpeechScene(speech, opts?.userText);
   const out: string[] = [];
   const seen = new Set<string>();
@@ -267,10 +431,21 @@ export function deriveMemoryBullets(
       continue;
     }
     if (isFluff(b, allowAddress)) continue;
-    if (/\d/.test(b) || /€|Uhr|Min|km|\bm\b|RB|RE|·|Stufen/i.test(b)) {
+    if (
+      /\d/.test(compactBulletDigits(b)) ||
+      /€|Uhr|Min|km|\bm\b|RB|RE|·|Stufen|Jahre/i.test(b)
+    ) {
       pushSafe(b);
     }
   }
+
+  for (const b of extractAgeAndBirth(speech, opts?.userText)) {
+    pushSafe(b);
+  }
+
+  // Gebäude/Türme: Name + Höhe zuerst (nicht nackte „79 m“)
+  const namedHeights = extractNamedHeights(speech);
+  for (const b of namedHeights) pushSafe(b);
 
   if (scene === 'history') {
     for (const b of extractHistoryFactBullets(speech, opts?.factBlock, max)) {
@@ -279,7 +454,22 @@ export function deriveMemoryBullets(
   }
 
   // Faktenantworten: Zahlen zuerst (inkl. Runden/Punkte), dann Rest
-  for (const b of extractQuantities(speech)) pushSafe(b);
+  // Wenn Name+Höhe schon da: nackte Meter-Mengen skippen (sonst „79 m“ statt Gebäude).
+  const namedHeightNums = new Set(
+    namedHeights
+      .map((b) => b.match(/(\d+(?:[.,]\d+)?)\s*m\b/i)?.[1]?.replace(',', '.'))
+      .filter(Boolean) as string[],
+  );
+  for (const b of extractQuantities(speech)) {
+    if (namedHeightNums.size > 0) {
+      const bare = b.match(/^(?:Höhe\s+)?(\d+(?:[.,]\d+)?)\s*m$/i);
+      if (bare && namedHeightNums.has(bare[1]!.replace(',', '.'))) continue;
+      if (/^(?:Höhe\s+)?\d/i.test(b) && /\bm\b/i.test(b) && namedHeights.length >= 2) {
+        continue;
+      }
+    }
+    pushSafe(b);
+  }
   for (const b of extractTimes(speech)) pushSafe(b);
 
   if (scene === 'fact_answer' && out.length === 0) {
@@ -289,7 +479,7 @@ export function deriveMemoryBullets(
     }
   }
 
-  if (out.length < max) {
+  if (out.length < max && scene !== 'fact_answer') {
     for (const t of extractThemes(speech)) {
       // Keine nackten Straßennamen wenn volle Adresse schon da / erwartet
       if (

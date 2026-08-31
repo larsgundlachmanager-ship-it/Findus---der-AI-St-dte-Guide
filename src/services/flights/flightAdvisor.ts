@@ -153,10 +153,29 @@ export async function prepareFlightFollowUp(
       ? { lat: store.lastGpsLat, lng: store.lastGpsLng }
       : null;
 
+  let airportCoords: { lat: number; lng: number } | null = null;
+  try {
+    const { nearestCommercialAirport } = await import('./airportIata');
+    const { findAirportPoi } = await import('./findAirportPoi');
+    if (from) {
+      const near = nearestCommercialAirport(from.lat, from.lng);
+      if (near) airportCoords = { lat: near.lat, lng: near.lng };
+    }
+    if (!airportCoords) {
+      const poi = await findAirportPoi({
+        lat: from?.lat,
+        lng: from?.lng,
+      });
+      if (poi) airportCoords = { lat: poi.lat, lng: poi.lng };
+    }
+  } catch {
+    /* soft */
+  }
+
   const plan = await buildAirportArrivalPlan({
     flightCode: code,
     from,
-    airportCoords: null,
+    airportCoords,
   });
 
   if (!plan) {

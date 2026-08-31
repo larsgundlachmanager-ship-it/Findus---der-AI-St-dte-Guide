@@ -297,9 +297,6 @@ export const knowledgeAgent: Module2Agent = {
         });
 
         const bullets: string[] = [];
-        for (const v of research.venues.slice(0, 2)) {
-          bullets.push(`${v.name} · ${formatCinemaDist(v.distanceM)}`);
-        }
         if (research.phase === 'orient') {
           for (const f of research.filmPicks.slice(0, 2)) {
             if (bullets.length >= 3) break;
@@ -307,7 +304,14 @@ export const knowledgeAgent: Module2Agent = {
               f.genreHint ? `${f.title} · ${f.genreHint}` : f.title,
             );
           }
+          for (const v of research.venues.slice(0, 2)) {
+            if (bullets.length >= 3) break;
+            bullets.push(`${v.name} · ${formatCinemaDist(v.distanceM)}`);
+          }
         } else {
+          for (const v of research.venues.slice(0, 2)) {
+            bullets.push(`${v.name} · ${formatCinemaDist(v.distanceM)}`);
+          }
           for (const s of research.showtimes.slice(0, 2)) {
             if (bullets.length >= 3) break;
             const price =
@@ -340,6 +344,19 @@ export const knowledgeAgent: Module2Agent = {
 
         const spokenParts: string[] = [];
         if (research.phase === 'orient') {
+          // Programmvorschau zuerst — Filme, dann Träger-Kinos
+          if (research.filmPicks.length) {
+            const picks = research.filmPicks.slice(0, 3).map((f) => {
+              const g = f.genreHint ? ` (${f.genreHint})` : '';
+              const line = f.oneLiner ? `: ${f.oneLiner}` : '';
+              return `${f.title}${g}${line}`;
+            });
+            spokenParts.push(`Aktuell im Programm: ${picks.join(' · ')}.`);
+          } else {
+            spokenParts.push(
+              'Im Angebot typisch: Komödie, Action, Drama — sag Genre oder Film, dann hole ich konkrete Zeiten.',
+            );
+          }
           const venueBits = research.venues.slice(0, 2).map((v) => {
             const vibe = venueCharacterHint(v.name);
             const far =
@@ -349,30 +366,15 @@ export const knowledgeAgent: Module2Agent = {
             return `${v.name}${far} — ${vibe}`;
           });
           if (venueBits.length) {
-            spokenParts.push(
-              `In Reichweite: ${venueBits.join('; ')}.`,
-            );
+            spokenParts.push(`Läuft u. a. in: ${venueBits.join('; ')}.`);
           } else {
             spokenParts.push(
               'Gerade kein Kino in Reichweite — ich erweitere die Suche ehrlich.',
             );
           }
-          if (research.filmPicks.length) {
-            const picks = research.filmPicks.slice(0, 3).map((f) => {
-              const g = f.genreHint ? ` (${f.genreHint})` : '';
-              const line = f.oneLiner ? `: ${f.oneLiner}` : '';
-              return `${f.title}${g}${line}`;
-            });
-            spokenParts.push(`Aktuell spannend: ${picks.join(' · ')}.`);
-          } else {
-            spokenParts.push(
-              'Im Angebot typisch: Komödie, Action, Drama — sag Genre oder Kino-Vibe, dann hole ich konkrete Zeiten.',
-            );
-          }
           spokenParts.push(
-            'Welches Kino oder Genre soll es werden? Zeiten und Tickets kommen danach — nicht vorher die ganze Uhrzeiten-Liste.',
+            'Welcher Film oder welches Genre? Spielzeiten und Tickets kommen danach — nicht vorher die ganze Uhrzeiten-Liste.',
           );
-          // Struktur-Hints für Synthese (nicht wörtlich)
           spokenParts.push(`\n${research.promptBlock}`);
         } else {
           const optionBits = research.venues.slice(0, 2).map((v) => {
