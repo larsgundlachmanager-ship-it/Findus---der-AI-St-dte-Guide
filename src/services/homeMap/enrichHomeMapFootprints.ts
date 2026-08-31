@@ -11,7 +11,7 @@ import {
   type OsmFootprintRing,
 } from '../navigation/osmBuildingFootprint';
 import { isHomePresenceMapPoi } from './homeMapPlaceTone';
-import { isKeepDotMapPoi, isMapShelterBuildingPoi } from './homeMapPlaceType';
+import { isMapShelterBuildingPoi, isStreetPointAmenity } from './homeMapPlaceType';
 import type { UserProfile } from '../../types/userProfile';
 
 export type FootprintRingByPoiId = Map<number, OsmFootprintRing>;
@@ -32,7 +32,8 @@ export async function enrichHomeMapFootprints(
     const kind = p.kind ?? 'legacy';
     if (kind === 'approach') return false;
     if (kind === 'sub' && !isMapShelterBuildingPoi(p)) return false;
-    if (isKeepDotMapPoi(p) && !isMapShelterBuildingPoi(p)) return false;
+    // Nur echte Punkt-Amenities überspringen — Story-Museen/Hotels bekommen OSM-Umriss.
+    if (isStreetPointAmenity(p) && !isMapShelterBuildingPoi(p)) return false;
     if (
       typeof nearLat === 'number' &&
       typeof nearLng === 'number' &&

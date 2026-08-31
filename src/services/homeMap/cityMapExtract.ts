@@ -243,7 +243,13 @@ export async function buildAndPersistDisplaySnap(
   lng: number,
   radiusM?: number,
 ): Promise<CityMapExtract> {
-  const clipped = prepareExtractForDisplay(full, lat, lng, cityId, radiusM);
+  const clipped = await prepareExtractForDisplayAsync(
+    full,
+    lat,
+    lng,
+    cityId,
+    radiusM,
+  );
   rememberDisplayExtract({
     cityId: cityId.toLowerCase(),
     lat,
@@ -509,6 +515,117 @@ export function clipCityMapExtractForDisplay(
           n.lng <= east,
       )
       .slice(0, 2_400),
+    graph: EMPTY_GRAPH,
+  };
+}
+
+function yieldToMainThread(): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, 0));
+}
+
+/**
+ * Wie prepareExtractForDisplay, aber mit Yields — Mic/Settings bleiben tippbar.
+ */
+export async function prepareExtractForDisplayAsync(
+  extract: CityMapExtract,
+  lat: number,
+  lng: number,
+  cityId?: string | null,
+  radiusOverrideM?: number,
+): Promise<CityMapExtract> {
+  const id = (cityId || extract.cityId || '').toLowerCase();
+  const region = isRegionPackCityId(id);
+  const n =
+    (extract.roads?.length ?? 0) +
+    (extract.buildings?.length ?? 0) +
+    (extract.water?.length ?? 0) +
+    (extract.parks?.length ?? 0);
+  if (n <= 4000 && !region && radiusOverrideM == null) {
+    return { ...extract, graph: EMPTY_GRAPH };
+  }
+  const radiusM =
+    radiusOverrideM ??
+    (region ? REGION_CLIP_RADIUS_M : DISPLAY_WIDE_RADIUS_M);
+  const maxBuildings = region
+    ? 4_000
+    : radiusM <= 1_500
+      ? 2_500
+      : radiusM <= 10_000
+        ? 8_000
+        : 10_000;
+  return clipCityMapExtractForDisplayAsync(
+    extract,
+    lat,
+    lng,
+    radiusM,
+    maxBuildings,
+  );
+}
+
+export async function clipCityMapExtractForDisplayAsync(
+  extract: CityMapExtract,
+  lat: number,
+  lng: number,
+  radiusM = 5200,
+  maxBuildings = 8_000,
+): Promise<CityMapExtract> {
+  const dLat = radiusM / 111_320;
+  const cos = Math.cos((lat * Math.PI) / 180);
+  const dLng = radiusM / (111_320 * Math.max(0.2, cos));
+  const south = lat - dLat;
+  const north = lat + dLat;
+  const west = lng - dLng;
+  const east = lng + dLng;
+  const hit = (ring?: Array<[number, number]>) =>
+    ringTouchesBox(ring, south, north, west, east);
+  const maxRoads =
+    radiusM <= 1_500 ? 2_500 : radiusM <= 10_000 ? 5_500 : 9_000;
+
+  const roads = extract.roads.filter((r) => hit(r.c)).slice(0, maxRoads);
+  await yieldToMainThread();
+
+  const buildings: typeof extract.buildings = [];
+  const srcB = extract.buildings;
+  const CHUNK = 2_500;
+  for (let i = 0; i < srcB.length && buildings.length < maxBuildings; i += CHUNK) {
+    const end = Math.min(i + CHUNK, srcB.length);
+    for (let j = i; j < end && buildings.length < maxBuildings; j += 1) {
+      const b = srcB[j]!;
+      if (hit(b)) buildings.push(b);
+    }
+    if (i + CHUNK < srcB.length && buildings.length < maxBuildings) {
+      await yieldToMainThread();
+    }
+  }
+
+  const water = extract.water.filter(hit);
+  await yieldToMainThread();
+  const parks = extract.parks.filter(hit);
+  const woods = extract.woods.filter(hit);
+  const land = (extract.land || []).filter(hit).slice(0, 80);
+  const rails = extract.rails.filter(hit);
+  const housenumbers = extract.housenumbers
+    .filter(
+      (n) =>
+        n.lat >= south &&
+        n.lat <= north &&
+        n.lng >= west &&
+        n.lng <= east,
+    )
+    .slice(0, 2_400);
+
+  return {
+    v: extract.v,
+    cityId: extract.cityId,
+    bbox: { south, west, north, east },
+    roads,
+    buildings,
+    water,
+    parks,
+    woods,
+    land,
+    rails,
+    housenumbers,
     graph: EMPTY_GRAPH,
   };
 }

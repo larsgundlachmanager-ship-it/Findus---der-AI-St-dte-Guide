@@ -12,20 +12,20 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { InteractionManager, StyleSheet, View } from 'react-native';
-import type { Feature } from 'geojson';
 import {
   CircleLayer,
   FillLayer,
   Images,
   LineLayer,
   MapView,
+  MarkerView,
   ShapeSource,
   SymbolLayer,
   type OnPressEvent,
   type RegionPayload,
   type ShapeSourceRef,
 } from '@maplibre/maplibre-react-native';
+import { InteractionManager, Pressable, StyleSheet, Text, View } from 'react-native';
 import {
   YorroHomeCamera,
   type YorroHomeCameraRef,
@@ -486,9 +486,10 @@ function routeToGeojson(route: NavRouteMapPayload | null): {
   current: GeoJsonFc;
   ahead: GeoJsonFc;
   pins: GeoJsonFc;
+  arrows: GeoJsonFc;
 } {
   if (!route) {
-    return { current: EMPTY_FC, ahead: EMPTY_FC, pins: EMPTY_FC };
+    return { current: EMPTY_FC, ahead: EMPTY_FC, pins: EMPTY_FC, arrows: EMPTY_FC };
   }
   const current: GeoJsonFeature[] = [];
   const cur = lineFromCoords(route.current);
@@ -535,10 +536,23 @@ function routeToGeojson(route: NavRouteMapPayload | null): {
       },
     });
   }
+  const arrows: GeoJsonFeature[] = [];
+  for (const a of route.arrows ?? []) {
+    if (!Number.isFinite(a.lat) || !Number.isFinite(a.lng)) continue;
+    arrows.push({
+      type: 'Feature',
+      properties: {
+        bearing: a.bearing,
+        kind: a.kind === 'turn' ? 'turn' : 'flow',
+      },
+      geometry: { type: 'Point', coordinates: [a.lng, a.lat] },
+    });
+  }
   return {
     current: { type: 'FeatureCollection', features: current },
     ahead: { type: 'FeatureCollection', features: ahead },
     pins: { type: 'FeatureCollection', features: pins },
+    arrows: { type: 'FeatureCollection', features: arrows },
   };
 }
 
@@ -928,6 +942,20 @@ export const NativeHomeMapView = memo(
       );
     };
 
+    /** MapLibre zieht Richtung GPS — nie als Fling/User werten. */
+    const looksLikeGpswardSnap = (lat: number, lng: number) => {
+      const gps = gpsPosRef.current;
+      const u = userViewCamRef.current;
+      if (gps.lat == null || gps.lng == null) return false;
+      if (isLiveNearGps(lat, lng) && isAnchorFarFromGps()) return true;
+      const liveDist =
+        Math.abs(lat - gps.lat) + Math.abs(lng - gps.lng);
+      const userDist =
+        Math.abs(u.lat - gps.lat) + Math.abs(u.lng - gps.lng);
+      // Deutlich näher am GPS als die User-View → Snap, kein Fling.
+      return userDist > 0.0012 && liveDist < userDist * 0.72;
+    };
+
     const restoreExploreAnchorIfGpsSnap = (
       lat: number,
       lng: number,
@@ -998,50 +1026,38 @@ export const NativeHomeMapView = memo(
     };
 
     /**
-     * Safety: MapLibre-Snap auf GPS → zurück zur letzten User-View.
-     * Bewegt NIE Richtung GPS — nur weg davon.
-     * Sonst: Live-View als Anker übernehmen (freie Erkundung).
+     * Safety: MapLibre-Drift/Snap (Extract, Regional, Idle) → zurück zur User-View.
+     * Bewegt NIE Richtung GPS — nur zurück zur letzten echten Geste.
+     * Nie Live als neuen Anker übernehmen (sonst schleicht die Kamera zum GPS).
      */
-    const restoreUserViewIfSnappedToGps = () => {
+    const restoreUserViewIfSnappedToGps = (opts?: { force?: boolean }) => {
       if (fingerDown.current) return;
       if (locationFollowRef.current) return;
       if (!userDetached.current) return;
-      if (Date.now() < layerApplyQuietUntil.current) return;
+      // Fling/Trägheit nach Finger-hoch kurz aushalten — danach hart halten.
+      // force=true: Extract/Layer-Apply (kein Fling).
+      if (!opts?.force && Date.now() - lastFingerUpAt.current < 2_800) return;
       const u = userViewCamRef.current;
       if (!Number.isFinite(u.lat) || !Number.isFinite(u.lng)) return;
-      const gps = gpsPosRef.current;
       const live = camLiveRef.current;
-      if (gps.lat == null || gps.lng == null) return;
-      const liveNearGps =
-        Math.abs(live.lat - gps.lat) < 0.0003 &&
-        Math.abs(live.lng - gps.lng) < 0.0003;
-      const userFar =
-        Math.abs(u.lat - gps.lat) > 0.0015 ||
-        Math.abs(u.lng - gps.lng) > 0.0015 ||
-        Math.abs(u.zoom - live.zoom) > 0.6;
-      if (liveNearGps && userFar) {
-        const now = Date.now();
-        if (now - lastHoldAt.current < 120) return;
-        lastHoldAt.current = now;
-        if (__DEV__) {
-          console.log('[map-cam] restore user view (blocked GPS snap)');
-        }
-        syncBootCamFrom(u);
-        applyCenterMove(u.lng, u.lat, {
-          kind: 'restore',
-          zoom: u.zoom,
-          heading: Number.isFinite(u.heading) ? u.heading : 0,
-        });
-        camLiveRef.current = { ...u };
-        return;
-      }
-      const liveDriftFromUser =
+      const drifted =
         Math.abs(live.lat - u.lat) > 0.00012 ||
         Math.abs(live.lng - u.lng) > 0.00012 ||
         Math.abs(live.zoom - u.zoom) > 0.06;
-      if (liveDriftFromUser && !liveNearGps) {
-        commitUserView({ ...live });
+      if (!drifted) return;
+      const now = Date.now();
+      if (now - lastHoldAt.current < 120) return;
+      lastHoldAt.current = now;
+      if (__DEV__) {
+        console.log('[map-cam] restore user view (blocked idle/extract drift)');
       }
+      syncBootCamFrom(u);
+      applyCenterMove(u.lng, u.lat, {
+        kind: 'restore',
+        zoom: u.zoom,
+        heading: Number.isFinite(u.heading) ? u.heading : 0,
+      });
+      camLiveRef.current = { ...u };
     };
 
     /** Nur defaultStop frisch halten — kein setCamera. */
@@ -1096,6 +1112,9 @@ export const NativeHomeMapView = memo(
             syncBootOnly();
             layerApplyQuietUntil.current = Date.now() + 900;
             suppressRegionUntil.current = Date.now() + 900;
+            setTimeout(() => {
+              if (!cancelled) restoreUserViewIfSnappedToGps({ force: true });
+            }, 100);
           });
         });
       }, HOME_MAP_WORLD_AFTER_CORE_MS);
@@ -1133,12 +1152,16 @@ export const NativeHomeMapView = memo(
           if (cancelled) return;
           if (!userDetached.current || locationFollowRef.current) return;
           const live = camLiveRef.current;
-          restoreExploreAnchorIfGpsSnap(
-            live.lat,
-            live.lng,
-            live.zoom,
-            live.heading,
-          );
+          if (
+            !restoreExploreAnchorIfGpsSnap(
+              live.lat,
+              live.lng,
+              live.zoom,
+              live.heading,
+            )
+          ) {
+            restoreUserViewIfSnappedToGps({ force: true });
+          }
           syncBootOnly();
         }, 80);
         const quietMs = phase === 'core' ? 2_200 : 1_200;
@@ -1205,6 +1228,54 @@ export const NativeHomeMapView = memo(
     const cityFc = useMemo(() => citiesToGeojson(props.cities), [props.cities]);
     const routeFc = useMemo(() => routeToGeojson(props.route), [props.route]);
     const routePreview = props.route?.preview === true;
+    const [dismissedRouteChips, setDismissedRouteChips] = useState<Record<string, true>>({});
+    useEffect(() => {
+      setDismissedRouteChips({});
+    }, [props.route?.fitKey]);
+    const routeChipMarkers = useMemo(() => {
+      const pins = props.route?.pins ?? [];
+      const out: React.ReactNode[] = [];
+      const seen = new Set<string>();
+      for (const pin of pins) {
+        const title = pin.chip?.title?.trim();
+        if (!title) continue;
+        const geoKey = `${pin.lat.toFixed(5)},${pin.lng.toFixed(5)}`;
+        if (seen.has(geoKey)) continue;
+        seen.add(geoKey);
+        const key = `${pin.n || ''}:${pin.name || ''}`;
+        if (dismissedRouteChips[key]) continue;
+        out.push(
+          <MarkerView
+            key={`nav-chip-${key}-${geoKey}`}
+            coordinate={[pin.lng, pin.lat]}
+            anchor={{ x: 0.5, y: 0 }}
+            allowOverlap
+          >
+            <View style={styles.navChip} pointerEvents="box-none">
+              <Text style={styles.navChipTitle} numberOfLines={2}>
+                {title}
+              </Text>
+              {pin.chip?.sub ? (
+                <Text style={styles.navChipSub} numberOfLines={1}>
+                  {pin.chip.sub}
+                </Text>
+              ) : null}
+              <Pressable
+                accessibilityLabel="Chip schließen"
+                hitSlop={8}
+                onPress={() =>
+                  setDismissedRouteChips((prev) => ({ ...prev, [key]: true }))
+                }
+                style={styles.navChipClose}
+              >
+                <Text style={styles.navChipCloseText}>×</Text>
+              </Pressable>
+            </View>
+          </MarkerView>,
+        );
+      }
+      return out;
+    }, [props.route?.pins, dismissedRouteChips]);
     const pinFc = useMemo(() => dropPinGeojson(props.dropPin), [props.dropPin]);
     const regionalGeo = useRegionalFallbackStore((s) => s.snap?.geojson ?? EMPTY_FC);
     const hasRegional = useRegionalFallbackStore(
@@ -1438,8 +1509,7 @@ export const NativeHomeMapView = memo(
         }}
         onResponderRelease={() => {
           fingerDown.current = false;
-          // Nur übernehmen wenn die Live-Kamera nicht gerade am GPS-Puck klebt
-          // während die User-View woanders war (MapLibre-Reset während der Geste).
+          // Nur nach echtem Pan/Zoom übernehmen — Tippen/teilweiser GPS-Snap nicht.
           const live = camLiveRef.current;
           const gps = gpsPosRef.current;
           const u = userViewCamRef.current;
@@ -1453,11 +1523,12 @@ export const NativeHomeMapView = memo(
             (Math.abs(u.lat - live.lat) > 0.002 ||
               Math.abs(u.lng - live.lng) > 0.002 ||
               Math.abs(u.zoom - live.zoom) > 0.8);
-          if (!(liveNearGps && userWasElsewhere)) {
-            commitUserView({ ...live });
-          } else {
-            // MapLibre hat während Geste auf GPS gesetzt — zurück auf User-View.
-            restoreUserViewIfSnappedToGps();
+          if (userGesturing.current) {
+            if (!(liveNearGps && userWasElsewhere)) {
+              commitUserView({ ...live });
+            } else {
+              restoreUserViewIfSnappedToGps({ force: true });
+            }
           }
           userGesturing.current = false;
           gestureOriginCam.current = null;
@@ -1479,10 +1550,12 @@ export const NativeHomeMapView = memo(
             (Math.abs(u.lat - live.lat) > 0.002 ||
               Math.abs(u.lng - live.lng) > 0.002 ||
               Math.abs(u.zoom - live.zoom) > 0.8);
-          if (!(liveNearGps && userWasElsewhere)) {
-            commitUserView({ ...live });
-          } else {
-            restoreUserViewIfSnappedToGps();
+          if (userGesturing.current) {
+            if (!(liveNearGps && userWasElsewhere)) {
+              commitUserView({ ...live });
+            } else {
+              restoreUserViewIfSnappedToGps({ force: true });
+            }
           }
           userGesturing.current = false;
           gestureOriginCam.current = null;
@@ -1532,8 +1605,6 @@ export const NativeHomeMapView = memo(
           onRegionIsChanging={(feature) => {
             const b = feature.properties as RegionPayload;
             const userInteract = b?.isUserInteraction === true;
-            const recentExplore =
-              Date.now() - lastUserGestureAt.current < 12_000;
             const bearing = b?.heading;
             if (typeof bearing === 'number' && Number.isFinite(bearing)) {
               if (
@@ -1562,11 +1633,11 @@ export const NativeHomeMapView = memo(
             if (fingerDown.current && moved) {
               noteUserGesture();
             }
-            // User-View nur bei echter Bewegung mitschreiben — nicht bei
-            // MapLibre-Reset unter noch gedrücktem Finger (GPS-Vergiftung).
+            // User-View NUR bei Finger/isUserInteraction — nie nach Idle
+            // (sonst vergiften Extract/Regional-Resets den Anker Richtung GPS).
             if (
               moved &&
-              (fingerDown.current || userInteract || recentExplore) &&
+              (fingerDown.current || userInteract) &&
               !locationFollowRef.current &&
               vb?.[0] &&
               vb?.[1]
@@ -1586,7 +1657,8 @@ export const NativeHomeMapView = memo(
             if (
               !fingerDown.current &&
               Math.abs(zoom - camLiveRef.current.zoom) >= 0.08 &&
-              !locationFollowRef.current
+              !locationFollowRef.current &&
+              userInteract
             ) {
               noteUserGesture();
             }
@@ -1594,10 +1666,10 @@ export const NativeHomeMapView = memo(
           onRegionDidChange={(feature) => {
             const b = feature.properties as RegionPayload;
             const suppressed = Date.now() < suppressRegionUntil.current;
+            // Nur kurze Trägheit nach Finger-hoch — kein 12s-Fenster
+            // (Extract/Regional nach ~5–10s sonst als „User“ gespeichert).
             const recentFinger =
-              Date.now() - lastFingerUpAt.current < 2_500;
-            const recentExplore =
-              Date.now() - lastUserGestureAt.current < 12_000;
+              Date.now() - lastFingerUpAt.current < 2_800;
             const zoom = b?.zoomLevel ?? camLiveRef.current.zoom;
             const zoomDelta = Math.abs(zoom - userViewCamRef.current.zoom);
 
@@ -1620,6 +1692,15 @@ export const NativeHomeMapView = memo(
               Math.abs(midLng - userViewCamRef.current.lng) > 0.00009 ||
               Math.abs(zoom - userViewCamRef.current.zoom) > 0.12;
             const moved = gestureMovedEnough(midLat, midLng, zoom) || zoomDelta >= 0.06;
+            const gpsward = looksLikeGpswardSnap(midLat, midLng);
+            // Finales Gesture-Event oft ohne isUserInteraction — aber Snap ≠ Geste.
+            // Tippen (finger ohne Move) unlockt den GPS-Fix nicht.
+            const user =
+              !gpsward &&
+              (b?.isUserInteraction === true ||
+                (fingerDown.current && moved) ||
+                (recentFinger && moved));
+
             if (__DEV__ && userDetached.current && !locationFollowRef.current) {
               const gps = gpsPosRef.current;
               if (gps.lat != null && gps.lng != null && !user) {
@@ -1639,47 +1720,22 @@ export const NativeHomeMapView = memo(
                 }
               }
             }
-            // Finales Gesture-Event oft ohne isUserInteraction — aber Snap ≠ Geste.
-            // Tippen (finger ohne Move) unlockt den GPS-Fix nicht.
-            const user =
-              b?.isUserInteraction === true ||
-              (fingerDown.current && moved) ||
-              (recentFinger && moved) ||
-              (recentExplore && moved && !suppressed);
 
-            // Programmatic Reset: Anker nicht vergiften — aber GPS-Snap aktiv zurückdrücken.
+            // Programmatic Reset: Anker nie übernehmen — nur zurückdrücken.
             if (suppressed && !user) {
               if (hasBounds) {
-                const movedFromAnchor =
-                  Math.abs(midLat - userViewCamRef.current.lat) > 0.00045 ||
-                  Math.abs(midLng - userViewCamRef.current.lng) > 0.00045 ||
-                  Math.abs(zoom - userViewCamRef.current.zoom) > 0.08;
-                if (
-                  movedFromAnchor &&
-                  recentExplore &&
-                  !locationFollowRef.current
-                ) {
-                  commitUserView({
-                    lat: midLat,
-                    lng: midLng,
-                    zoom,
-                    heading:
-                      typeof bearing === 'number' && Number.isFinite(bearing)
-                        ? bearing
-                        : userViewCamRef.current.heading,
-                  });
-                }
+                camLiveRef.current = {
+                  lat: midLat,
+                  lng: midLng,
+                  zoom,
+                  heading: bearing,
+                };
                 if (
                   !restoreExploreAnchorIfGpsSnap(midLat, midLng, zoom, bearing)
                 ) {
-                  camLiveRef.current = {
-                    lat: midLat,
-                    lng: midLng,
-                    zoom,
-                    heading: bearing,
-                  };
-                  syncBootOnly();
+                  restoreUserViewIfSnappedToGps({ force: true });
                 }
+                syncBootOnly();
               } else {
                 syncBootOnly();
               }
@@ -1704,9 +1760,10 @@ export const NativeHomeMapView = memo(
               Math.abs(midLat - userViewCamRef.current.lat) > 0.00045 ||
               Math.abs(midLng - userViewCamRef.current.lng) > 0.00045 ||
               Math.abs(zoom - userViewCamRef.current.zoom) > 0.08;
+            // Nur echte Geste / kurze Fling-Trägheit schreibt den Anker.
             if (
               movedFromAnchor &&
-              (user || recentExplore || fingerDown.current) &&
+              user &&
               !locationFollowRef.current
             ) {
               commitUserView({
@@ -1725,25 +1782,30 @@ export const NativeHomeMapView = memo(
             const west = vb[1][0]!;
             const south = vb[1][1]!;
 
-            // MapLibre-Reset ohne Finger: nur bei echtem GPS-Snap korrigieren.
+            // Idle/Extract ohne Finger: Drift zurück — Viewport NICHT mit Snap melden
+            // (sonst Places/Extract am GPS während die Kamera woanders steht).
             if (
               !user &&
               userDetached.current &&
               !locationFollowRef.current &&
               drifted
             ) {
-              if (
-                restoreExploreAnchorIfGpsSnap(midLat, midLng, zoom, bearing)
-              ) {
-                return;
-              }
               camLiveRef.current = {
                 lat: midLat,
                 lng: midLng,
                 zoom,
                 heading: bearing,
               };
-              restoreUserViewIfSnappedToGps();
+              if (
+                !restoreExploreAnchorIfGpsSnap(midLat, midLng, zoom, bearing)
+              ) {
+                restoreUserViewIfSnappedToGps();
+              }
+              rememberCamera(midLat, midLng, zoom, bearing, {
+                fromUser: false,
+              });
+              // Places bleiben am User-View — kein GPS-Inject.
+              return;
             }
 
             rememberCamera(midLat, midLng, zoom, bearing, {
@@ -2543,22 +2605,30 @@ export const NativeHomeMapView = memo(
                 ...(routePreview ? { lineDasharray: [2, 1.4] } : {}),
               }}
             />
-            {!routePreview && (props.route?.current?.length ?? 0) >= 3 ? (
+          </ShapeSource>
+          {!routePreview && (props.route?.arrows?.length ?? 0) > 0 ? (
+            <ShapeSource id="route-arrows" shape={routeFc.arrows}>
               <SymbolLayer
                 id="route-chevrons"
                 minZoomLevel={12}
                 style={{
-                  symbolPlacement: 'line',
-                  symbolSpacing: 42,
                   iconImage: 'route-chevron',
-                  iconSize: 0.55,
+                  iconSize: [
+                    'case',
+                    ['==', ['get', 'kind'], 'turn'],
+                    0.7,
+                    0.5,
+                  ],
+                  iconRotate: ['to-number', ['coalesce', ['get', 'bearing'], 0]],
+                  iconRotationAlignment: 'map',
+                  iconPitchAlignment: 'map',
                   iconAllowOverlap: true,
                   iconIgnorePlacement: true,
-                  iconRotationAlignment: 'map',
+                  iconAnchor: 'center',
                 }}
               />
-            ) : null}
-          </ShapeSource>
+            </ShapeSource>
+          ) : null}
           {/* Orte über der Route — sonst stehlen Linien die Taps. */}
           <ShapeSource
             id="places-fill"
@@ -2858,37 +2928,8 @@ export const NativeHomeMapView = memo(
                 iconIgnorePlacement: true,
               }}
             />
-            <SymbolLayer
-              id="route-pins-label"
-              style={{
-                textField: [
-                  'case',
-                  [
-                    'all',
-                    ['has', 'chipSub'],
-                    ['!=', ['get', 'chipSub'], ''],
-                  ],
-                  [
-                    'concat',
-                    ['to-string', ['get', 'chip']],
-                    '\n',
-                    ['to-string', ['get', 'chipSub']],
-                  ],
-                  ['to-string', ['get', 'chip']],
-                ],
-                textFont: MAP_TEXT_FONT,
-                textSize: 11,
-                textColor: '#F4F1EA',
-                textHaloColor: '#0E2A22',
-                textHaloWidth: 1.2,
-                textOffset: [0, 0.35],
-                textAnchor: 'top',
-                textAllowOverlap: true,
-                textIgnorePlacement: true,
-                textMaxWidth: 14,
-              }}
-            />
           </ShapeSource>
+          {routeChipMarkers}
           <ShapeSource id="drop-pin" shape={pinFc} onPress={onPlacePress}>
             <CircleLayer
               id="drop-pin-circle"
@@ -2935,5 +2976,49 @@ const styles = StyleSheet.create({
   dim: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: `rgba(0,0,0,${HOME_MAP_CHROME_DIM})`,
+  },
+  navChip: {
+    maxWidth: 240,
+    minWidth: 88,
+    backgroundColor: '#0C100E',
+    borderColor: 'rgba(255,255,255,0.22)',
+    borderWidth: StyleSheet.hairlineWidth,
+    borderRadius: 12,
+    paddingTop: 8,
+    paddingBottom: 8,
+    paddingLeft: 12,
+    paddingRight: 24,
+    shadowColor: '#000',
+    shadowOpacity: 0.45,
+    shadowRadius: 10,
+    shadowOffset: { width: 0, height: 3 },
+    elevation: 6,
+  },
+  navChipTitle: {
+    color: '#F4F1EA',
+    fontSize: 13,
+    fontWeight: '700',
+    lineHeight: 16,
+  },
+  navChipSub: {
+    color: 'rgba(244,241,234,0.85)',
+    fontSize: 11,
+    marginTop: 2,
+    lineHeight: 14,
+  },
+  navChipClose: {
+    position: 'absolute',
+    top: 2,
+    right: 4,
+    width: 18,
+    height: 18,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  navChipCloseText: {
+    color: '#F2F5F3',
+    fontSize: 14,
+    lineHeight: 16,
+    opacity: 0.75,
   },
 });

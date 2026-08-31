@@ -9,13 +9,13 @@
 export const HOME_MAP_PLACES_AFTER_EXTRACT_MS = 0;
 
 /** Gebäude/Hausnummern nach Core-Straßen (Zwei-Phasen-Paint). */
-export const HOME_MAP_BUILDINGS_AFTER_CORE_MS = 450;
+export const HOME_MAP_BUILDINGS_AFTER_CORE_MS = 320;
 
 /** Welt-GeoJSON (~5 MB) einmal nach erstem Straßen-Paint. */
-export const HOME_MAP_WORLD_AFTER_CORE_MS = 700;
+export const HOME_MAP_WORLD_AFTER_CORE_MS = 550;
 
 /** Footprints einmal nach Kern — kein Ring-Ladder. */
-export const HOME_MAP_FOOTPRINTS_AFTER_MS = 2_800;
+export const HOME_MAP_FOOTPRINTS_AFTER_MS = 2_400;
 
 /** Einmaliger Near-User-Warmup (kein 2/10-km-Expand). */
 export const HOME_MAP_WARMUP_RINGS_AFTER_MS = 3_200;

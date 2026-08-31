@@ -16,7 +16,7 @@ import {
   hydrateDisplayExtract,
   peekCityMapExtract,
   peekDisplayExtract,
-  prepareExtractForDisplay,
+  prepareExtractForDisplayAsync,
   rememberDisplayExtract,
   prefetchCityMapExtract,
   type CityMapExtract,
@@ -27,7 +27,8 @@ const RECLIP_M = 1_400;
 const KEEP_EXTRACT_M = 14_000;
 /** Außerhalb der Admin-Fläche: trotzdem Extract der nächsten lokalen Stadt (10 km Umland). */
 const NEAR_CITY_EXTRACT_M = 10_000;
-const VIEWPORT_SWITCH_RATIO = 0.6;
+/** Ab diesem Anteil sichtbarer Stadtfläche → Extract wechseln (Tornesch/Pinneberg). */
+const VIEWPORT_SWITCH_RATIO = 0.28;
 
 let loadGen = 0;
 let localMapIds = new Set<string>();
@@ -244,7 +245,7 @@ export async function loadExtractForViewport(
   }
   const fullMem = peekCityMapExtract(id);
   if (fullMem && (urgent || cityChanged)) {
-    const clipped = prepareExtractForDisplay(
+    const clipped = await prepareExtractForDisplayAsync(
       fullMem,
       lat,
       lng,
@@ -311,10 +312,16 @@ export async function loadExtractForViewport(
     return runLoad();
   }
 
+  // Nie ewig hinter Map-Gesten/TTS hängen — Mic/Settings brauchen den JS-Thread.
   return new Promise((resolve) => {
-    InteractionManager.runAfterInteractions(() => {
+    let settled = false;
+    const go = () => {
+      if (settled) return;
+      settled = true;
       void runLoad().then(resolve);
-    });
+    };
+    InteractionManager.runAfterInteractions(go);
+    setTimeout(go, 80);
   });
 }
 
@@ -324,15 +331,28 @@ export function reclipExtractIfNeeded(lat: number, lng: number): void {
   if (metersBetween(st.clipCenter, { lat, lng }) < RECLIP_M) return;
   const full = peekCityMapExtract(st.cityId);
   if (!full) return;
-  const clipped = prepareExtractForDisplay(full, lat, lng, st.cityId);
-  rememberDisplayExtract({
-    cityId: st.cityId,
-    lat,
-    lng,
-    atMs: Date.now(),
-    extract: clipped,
-  });
-  useMapExtractStore.getState().setExtract(st.cityId, clipped, { lat, lng });
+  const cityId = st.cityId;
+  void (async () => {
+    try {
+      const { prepareExtractForDisplayAsync } = await import('./cityMapExtract');
+      const clipped = await prepareExtractForDisplayAsync(
+        full,
+        lat,
+        lng,
+        cityId,
+      );
+      rememberDisplayExtract({
+        cityId,
+        lat,
+        lng,
+        atMs: Date.now(),
+        extract: clipped,
+      });
+      useMapExtractStore.getState().setExtract(cityId, clipped, { lat, lng });
+    } catch {
+      /* soft */
+    }
+  })();
 }
 
 export { RECLIP_M, KEEP_EXTRACT_M, VIEWPORT_SWITCH_RATIO };

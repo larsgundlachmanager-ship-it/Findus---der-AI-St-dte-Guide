@@ -210,7 +210,8 @@ export const HOME_MAP_ICON_LOD_ZOOM = {
   gastroTop: { goneAt: 11.8 },
   everyday: { goneAt: 12.6 },
   gastro: { goneAt: 13.4 },
-  micro: { goneAt: 14.2 },
+  /** Briefkasten/Parken — frueher sichtbar (wie HTML ~13.6). */
+  micro: { goneAt: 13.4 },
   park: { goneAt: 14.0 },
 } as const;
 
@@ -357,6 +358,27 @@ export function placeMapIcon(poi: Poi): HomeMapPlaceIcon | null {
   return null;
 }
 
+/** Echte Punkt-Amenities — nie Gebäude-Fill (Briefkasten, Halt, WC, …). */
+export function isStreetPointAmenity(poi: Poi): boolean {
+  const blob = blobOf(poi);
+  return (
+    STREET_AMENITY_RE.test(blob) ||
+    TOILET_RE.test(blob) ||
+    PARKING_RE.test(blob) ||
+    INFO_RE.test(blob) ||
+    VIEWPOINT_RE.test(blob) ||
+    WATER_RE.test(blob) ||
+    ATM_RE.test(blob) ||
+    BIKE_RE.test(blob) ||
+    FERRY_RE.test(blob) ||
+    PHARMACY_RE.test(blob) ||
+    FUEL_RE.test(blob) ||
+    DOCTOR_RE.test(blob) ||
+    isMapCrossingKeepDotPoi(poi) ||
+    isTransitMapPoi(poi)
+  );
+}
+
 /** Briefkasten, Toilette, Info, Aussicht, Wasser, Mietrad — immer auf der Karte. */
 export function isAlwaysOnMapAmenity(poi: Poi): boolean {
   const blob = blobOf(poi);
@@ -417,13 +439,17 @@ export function isMapShelterBuildingPoi(poi: Poi): boolean {
  * als unsichtbare Fläche entlang der Gleise verschwinden.
  * Wartehäuschen daneben bleibt Gebäude — beides gleichzeitig.
  * Eisenbahnbrücke = Punkt auf der Straße unter den Gleisen.
+ *
+ * Gastro/Hotel/Museum: Icon-Punkt wenn kein Story-Gebäude — Story behält Fill.
  */
 export function isKeepDotMapPoi(poi: Poi): boolean {
   if (isMapShelterBuildingPoi(poi)) return false;
-  if (isAlwaysOnMapAmenity(poi)) return true;
-  if (placeMapIcon(poi)) return true;
+  if (isStreetPointAmenity(poi)) return true;
   if (isMapCrossingKeepDotPoi(poi)) return true;
-  return isTransitMapPoi(poi);
+  // Gabel/Hotel/Museum-Icon nur als Punkt wenn kein Story-Ort
+  // (Story → Gebäudefläche; Directory-Gastro bleibt Icon).
+  if (placeMapIcon(poi)) return true;
+  return false;
 }
 
 /** Typ-Chip für die Orte-Filter (kein Status). */

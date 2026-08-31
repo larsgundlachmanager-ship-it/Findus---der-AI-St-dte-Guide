@@ -38,6 +38,7 @@ export const HOME_MAP_AMENITY_IMAGES: Record<string, number> = {
   'place-ferry': require('../../assets/homeMap/place-ferry.png'),
   'user-arrow': require('../../assets/homeMap/user-arrow.png'),
   'route-chevron': require('../../assets/homeMap/route-chevron.png'),
+  'route-label-pill': require('../../assets/homeMap/route-label-pill.png'),
   'route-pin-now': require('../../assets/homeMap/route-pin-now.png'),
   'route-pin-now-1': require('../../assets/homeMap/route-pin-now-1.png'),
   'route-pin-now-2': require('../../assets/homeMap/route-pin-now-2.png'),

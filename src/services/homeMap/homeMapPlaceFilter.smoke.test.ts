@@ -6,6 +6,7 @@ import type { Poi } from '../../db/types';
 import {
   isAlwaysOnMapAmenity,
   isKeepDotMapPoi,
+  isStreetPointAmenity,
   homeMapTypeFilterId,
   isMapShelterBuildingPoi,
   isMapCrossingKeepDotPoi,
@@ -71,6 +72,11 @@ assert(!isTransitMapPoi(resto), 'Restaurant ist kein ÖPNV');
 assert(isKeepDotMapPoi(halt), 'Haltepunkt bleibt Karten-Punkt');
 assert(isKeepDotMapPoi(bus), 'Bushaltestelle bleibt Karten-Punkt');
 assert(isKeepDotMapPoi(resto), 'Restaurant = Gabel-Messer-Icon');
+assert(isStreetPointAmenity(halt), 'Halt = Punkt-Amenity');
+assert(isStreetPointAmenity(poi({ id: 99, name: 'Briefkasten', lat: 53.67, lng: 9.76 })), 'Briefkasten = Punkt');
+assert(!isStreetPointAmenity(resto), 'Restaurant ist kein Street-Punkt');
+assert(!isStreetPointAmenity(museum), 'Museum ist kein Street-Punkt — Story darf Fill');
+
 assert(placeMapIcon(resto) === 'restaurant', 'Gasthof = Restaurant-Icon');
 
 const cabin = poi({

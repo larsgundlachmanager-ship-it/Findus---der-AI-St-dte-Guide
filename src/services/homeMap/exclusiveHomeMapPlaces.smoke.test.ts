@@ -86,4 +86,36 @@ const halt = exclusiveHomeMapPlaces([
 ]);
 assert(halt.length === 2, 'Halt auf den Gleisen bleibt getrennt vom Nachbar-Gebäude');
 
+const stolen = exclusiveHomeMapPlaces([
+  {
+    id: 20,
+    lat: 53.675,
+    lng: 9.76,
+    color: green,
+    ring: null,
+    keepDot: true,
+    pointOnly: true,
+    icon: 'rail',
+  },
+  {
+    id: 21,
+    lat: 53.67505,
+    lng: 9.76008,
+    color: purple,
+    ring: null,
+    keepDot: true,
+    pointOnly: true,
+    icon: 'post',
+  },
+]);
+assert(stolen.length === 2, 'Bahn und Briefkasten bleiben getrennt');
+assert(
+  stolen.some((p) => p.icon === 'rail' && Math.abs(p.lat - 53.675) < 1e-6),
+  'rail-Icon bleibt am Bahnhof',
+);
+assert(
+  stolen.some((p) => p.icon === 'post'),
+  'Briefkasten-Icon bleibt',
+);
+
 console.log('exclusiveHomeMapPlaces.smoke.test.ts OK');

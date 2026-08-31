@@ -94,8 +94,16 @@ assert(!view.includes('extract-streets-label'), 'keine schwebenden Straßennamen
 assert(mapStyle.includes('maxAngleDeg: 48'), 'Straßenlabel-Winkel nicht zu streng');
 assert(!view.includes('extract-housenumbers-circle'), 'keine weißen Hausnummer-Punkte');
 assert(view.includes('id="route-pins-icon"'), 'Nav-Wegpunkte als Pinnadel-Icon');
-assert(view.includes('id="route-pins-label"'), 'Nav-Wegpunkte mit Beschriftung');
-assert(view.includes('chipSub'), 'Gleis/Steig-Subzeile auf Native-Pins');
+assert(view.includes('MarkerView'), 'Nav-Wegpunkt-Chips als MarkerView-Buttons');
+assert(view.includes('navChipSub'), 'Gleis/Steig-Subzeile auf Native-Chips');
+assert(view.includes("backgroundColor: '#0C100E'"), 'Nav-Chip als schwarzer Button');
+assert(
+  readFileSync(
+    join(process.cwd(), 'src/services/navigation/navRouteMapPayload.ts'),
+    'utf8',
+  ).includes('Linie immer User → Ziel'),
+  'Route-Orientierung User→Ziel für Pfeile',
+);
 assert(view.includes('haversineRouteM'), '2-Punkt-Luftlinie nicht zeichnen');
 assert(view.includes('!routePreview'), 'Chevrons nicht auf Preview/Air');
 assert(amenity.includes('route-pin-now'), 'Routen-Pinnadel-Assets registriert');
@@ -139,7 +147,8 @@ assert(view.includes('Finger down allein unlockt nicht'), 'Tipp löst GPS-Fix ni
 assert(view.includes('gestureMovedEnough'), 'Unlock erst bei echtem Pan/Zoom');
 assert(host.includes('nextHudLockTap'), 'GPS: 1. Tipp pulse · 2. in 5s Lock');
 assert(host.includes("snapGps(next.action === 'lock' ? 'lock' : 'pulse')"), 'Recenter pulse/lock');
-assert(host.includes('nur Recenter-Button / Nav-Route'), 'Stadtwechsel zieht Kamera nicht');
+assert(host.includes('jumpTo(lat, lng, 13.2, true)'), 'Stadtwechsel springt zur gewählten Stadt');
+assert(host.includes('injectOfflineMapExtract(true, { lat, lng }, undefined, cityId, true)'), 'Stadtwechsel lädt Stadt-Extract');
 assert(view.includes('reattach'), 'Kamera nur Recenter/Nav');
 assert(view.includes('releaseFollow'), 'Freie Erkundung nach Boot/Geste');
 assert(view.includes('anchorCamRef'), 'Anker-Kamera überlebt Extract-Reload');
@@ -213,7 +222,8 @@ assert(host.includes('Immer detach'), 'Boot detach auch ohne GPS');
 assert(view.includes('Detached: höchstens Kompass-Rotation'), 'Detached zentriert nie auf GPS');
 assert(view.includes('userDetached bleibt true'), 'Kompass lässt freie Erkundung');
 assert(!/tourPlaceDemo[\s\S]{0,400}jumpTo\(pick/.test(host), 'Tour springt Kamera nicht');
-assert(!host.includes('fitBounds.latMin'), 'Stadt-Overview fitBounds nicht an Kamera');
+assert(host.includes('fitBounds.latMin'), 'Stadtwechsel nutzt Coverage-Mitte');
+assert(host.includes('jumpTo(lat, lng, 13.2, true)'), 'Stadtwechsel zeigt die gewählte Stadt');
 assert(
   host.includes('Kein reattach') || host.includes('Immer detach'),
   'Boot reißt freie Erkundung nicht dauerhaft auf GPS',
@@ -232,8 +242,17 @@ assert(view.includes('Idle / Extract / 30'), 'Idle-Scroll ohne Zentrums-Move');
 assert(view.includes('restoreUserViewIfSnappedToGps'), 'Safety bei GPS-Snap');
 assert(view.includes('lastUserGestureAt'), 'Explore-Gesten-Fenster gegen Trägheit');
 assert(view.includes('currentDefaultStopCam'), 'defaultStop folgt Live-View bei Erkundung');
-assert(view.includes('recentExplore'), 'Region-Events nach Pan als User werten');
+assert(
+  !view.includes('lastUserGestureAt.current < 12_000'),
+  'kein 12s-recentExplore — Idle/Extract vergiftet User-View nicht',
+);
+assert(
+  view.includes('blocked idle/extract drift') ||
+    view.includes('restoreUserViewIfSnappedToGps({ force: true })'),
+  'Idle/Extract-Drift wird zurückgedrückt',
+);
 assert(view.includes('layerApplyQuietUntil'), 'Apply-Quiet gegen Kamera-Zack');
+assert(view.includes('Nur bei Finger/isUserInteraction') || view.includes('User-View NUR bei Finger'), 'User-View nur echte Geste');
 assert(view.includes('ohne reattach nie bewegen'), 'jumpTo hart geblockt');
 assert(host.includes('didBootJumpRef'), 'Boot-Jump nur 1× pro Session');
 assert(host.includes('Map-Remount darf nicht zurückreißen'), 'kein Ready-GPS-Snap');
@@ -347,3 +366,7 @@ assert(
 );
 
 console.log('nativeHomeMap.smoke.test.ts OK');
+
+assert(host.includes('isStreetPointAmenity'), 'Street-Punkt vs Story-Fill');
+assert(host.includes('keepPin: amenityDot'), 'Cap pinned nur echte Amenities');
+assert(!host.includes('keepPin: keepDotForced'), 'Restaurants killen Stories nicht im Cap');

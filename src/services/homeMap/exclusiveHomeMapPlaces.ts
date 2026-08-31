@@ -54,8 +54,7 @@ function ringOf(p: ExclusiveMapPlace): Array<[number, number]> | null {
 }
 
 export function isBuildingFillPlace(p: ExclusiveMapPlace): boolean {
-  if (p.amenityDot) return false;
-  // Echter Umriss = Fläche — Icon/keepDot dürfen die Füllung nicht killen.
+  // Echter Umriss = Fläche — auch wenn Host amenityDot falsch gesetzt hat.
   return ringOf(p) != null;
 }
 
@@ -119,7 +118,10 @@ function mergePair<T extends ExclusiveMapPlace>(keep: T, drop: T): T {
       icon: undefined,
     };
   }
-  const icon = keep.icon || drop.icon;
+  // Icon vom Verlierer nur mitnehmen wenn praktisch dieselbe Position —
+  // sonst wandert z. B. rail auf den Nachbar-Punkt.
+  const sameSpot = metersBetween(keep.lat, keep.lng, drop.lat, drop.lng) < 4;
+  const icon = sameSpot ? keep.icon || drop.icon : keep.icon;
   return {
     ...keep,
     color,
@@ -165,7 +167,18 @@ export function exclusiveHomeMapPlaces<T extends ExclusiveMapPlace>(
             ? pointInRing(acc.lat, acc.lng, ring)
             : metersBetween(acc.lat, acc.lng, other.lat, other.lng) < 12;
         } else {
-          hit = metersBetween(acc.lat, acc.lng, other.lat, other.lng) < 12;
+          // Zwei Punkte: unterschiedliche Icons nie verschmelzen
+          // (sonst landet das Bahn-Icon auf dem Nachbar-POI).
+          if (
+            acc.icon &&
+            other.icon &&
+            acc.icon !== other.icon &&
+            metersBetween(acc.lat, acc.lng, other.lat, other.lng) > 2
+          ) {
+            hit = false;
+          } else {
+            hit = metersBetween(acc.lat, acc.lng, other.lat, other.lng) < 12;
+          }
         }
         if (!hit) continue;
         const accRank = statusColorRank(acc.color);

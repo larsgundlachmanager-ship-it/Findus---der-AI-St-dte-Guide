@@ -3,7 +3,7 @@
  * Extract-Load: nur HomePresenceMap (queueViewportExtract) — hier kein Dual-Load.
  */
 
-import { buildNavRouteMapPayload } from '../navigation/navRouteMapPayload';
+import { buildNavRouteMapPayload, navRoutePayloadSig } from '../navigation/navRouteMapPayload';
 import { useMapRouteStore } from '../../store/useMapRouteStore';
 import { useSensorStore } from '../../store/useSensorStore';
 import { useGpsStore } from '../../store/useGpsStore';
@@ -36,9 +36,9 @@ let lastNavRouteJson = '';
 function syncNavRouteOnce(): void {
   try {
     const payload = buildNavRouteMapPayload();
-    const json = payload == null ? 'null' : JSON.stringify(payload);
-    if (json === lastNavRouteJson) return;
-    lastNavRouteJson = json;
+    const sig = navRoutePayloadSig(payload);
+    if (sig === lastNavRouteJson) return;
+    lastNavRouteJson = sig;
     useMapRouteStore.getState().setRoute(payload);
   } catch {
     /* soft */

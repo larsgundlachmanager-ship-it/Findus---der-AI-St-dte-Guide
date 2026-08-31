@@ -60,25 +60,25 @@ const BUILTIN: Record<string, Omit<CityCoverageBounds, 'cityId' | 'source'>> = {
   },
   prisdorf: {
     name: 'Prisdorf',
-    // Gemeindegebiet grob inkl. Feldmark / Bahnhof
-    latMin: 53.655,
-    latMax: 53.705,
-    lngMin: 9.72,
-    lngMax: 9.81,
+    // OSM-Admin-BBox — eng, sonst frisst Prisdorf Pinneberg/Tornesch-Mitte
+    latMin: 53.6628,
+    latMax: 53.6969,
+    lngMin: 9.745,
+    lngMax: 9.7797,
   },
   pinneberg: {
     name: 'Pinneberg',
-    latMin: 53.62,
-    latMax: 53.68,
-    lngMin: 9.75,
-    lngMax: 9.85,
+    latMin: 53.6086,
+    latMax: 53.6839,
+    lngMin: 9.7636,
+    lngMax: 9.8286,
   },
   tornesch: {
     name: 'Tornesch',
-    latMin: 53.68,
-    latMax: 53.73,
-    lngMin: 9.68,
-    lngMax: 9.76,
+    latMin: 53.6728,
+    latMax: 53.7246,
+    lngMin: 9.6952,
+    lngMax: 9.7815,
   },
   appen: {
     name: 'Appen',

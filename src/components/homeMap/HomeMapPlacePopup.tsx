@@ -389,8 +389,8 @@ export const HomeMapPlacePopup = React.memo(function HomeMapPlacePopup({
 const styles = StyleSheet.create({
   root: {
     ...StyleSheet.absoluteFillObject,
-    zIndex: UI_LAYER.askSheet,
-    elevation: UI_LAYER.askSheet,
+    zIndex: UI_LAYER.placePopup,
+    elevation: UI_LAYER.placePopup,
     justifyContent: 'flex-end',
   },
   backdrop: {

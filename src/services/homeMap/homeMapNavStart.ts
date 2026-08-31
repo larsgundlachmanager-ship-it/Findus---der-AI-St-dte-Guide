@@ -117,6 +117,56 @@ async function commitImmediateNav(
     /* soft */
   }
 
+  const travelMode = mode === 'bike' ? 'bicycling' : 'walking';
+  const origin = await resolveUserCoords();
+  // FOSSGIS/Offline parallel zum Start — Karte bekommt Straße sobald da (nicht nach Enrich-Timeout)
+  if (origin != null) {
+    void (async () => {
+      try {
+        const { fetchProgressiveRoute } = await import(
+          '../navigation/handsFreeNav/routeEngine'
+        );
+        const progressive = await fetchProgressiveRoute({
+          originLat: origin.lat,
+          originLng: origin.lng,
+          destLat: dest.lat,
+          destLng: dest.lng,
+          travelMode,
+          lightBufferMin: 0,
+        });
+        if (!progressive?.waypoints || progressive.waypoints.length < 3) return;
+        const { seedActiveNavRoute } = require('../navigation/navigationService') as {
+          seedActiveNavRoute: (o: {
+            waypoints: typeof progressive.waypoints;
+            walkingDistanceM?: number;
+          }) => boolean;
+        };
+        seedActiveNavRoute({
+          waypoints: progressive.waypoints,
+          walkingDistanceM: progressive.distanceM,
+        });
+        try {
+          const { putCachedRoute } = require('../navigation/offlineNavCache') as {
+            putCachedRoute: (o: Record<string, unknown>) => Promise<void>;
+          };
+          void putCachedRoute({
+            destName: dest.name,
+            destLat: dest.lat,
+            destLng: dest.lng,
+            waypoints: progressive.waypoints,
+            stations: progressive.stations,
+            travelMode: progressive.travelMode,
+            walkingDistanceM: progressive.distanceM,
+          });
+        } catch {
+          /* soft */
+        }
+      } catch {
+        /* soft */
+      }
+    })();
+  }
+
   const startOnce = (poiId?: number) =>
     startNavigationToCoords({
       name: dest.name,
@@ -146,6 +196,7 @@ async function commitImmediateNav(
         ok = false;
       }
     }
+
     notifyNavRouteGeometryChanged();
     if (ok || useFinnusStore.getState().navActive) {
       return { ok: true, mode: mode === 'bike' ? 'bike' : 'walk' };

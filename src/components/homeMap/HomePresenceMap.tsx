@@ -94,7 +94,7 @@ import {
   resolveHomeMapLodStable,
   type HomeMapLodMode,
 } from '../../services/homeMap/homeMapLod';
-import { buildNavRouteMapPayload } from '../../services/navigation/navRouteMapPayload';
+import { buildNavRouteMapPayload, navRoutePayloadSig } from '../../services/navigation/navRouteMapPayload';
 import { useMapRouteStore } from '../../store/useMapRouteStore';
 import {
   loadMapPinIndex,
@@ -118,6 +118,7 @@ import {
   isKeepDotMapPoi,
   isMapShelterBuildingPoi,
   isNatureLandscapeNotPin,
+  isStreetPointAmenity,
   placeMapIcon,
   homeMapIconLod,
   type HomeMapPlaceIcon,
@@ -651,10 +652,11 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
               v.name.toLowerCase() === poi.name.toLowerCase())),
         );
       const isPlanned = planned.has(poi.id);
-      const amenityDot = isAlwaysOnMapAmenity(poi);
+      const amenityDot = isStreetPointAmenity(poi);
       const keepDotForced = isKeepDotMapPoi(poi) && !story;
       if (
         !amenityDot &&
+        !isAlwaysOnMapAmenity(poi) &&
         !poiPassesHomeMapFilter(poi, {
           visited,
           planned: isPlanned,
@@ -693,8 +695,10 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
         story: story ? 1 : 0,
         pointOnly: keepDot,
         keepDot,
-        amenityDot,
-        keepPin: keepDotForced,
+        // Nur echte Punkt-Amenities (Briefkasten/Halt/…) — Stories behalten Fill.
+        amenityDot: amenityDot || (!!icon && !hasBuilding && !story),
+        // Cap: ÖPNV/Briefkasten zuerst — nicht jedes Restaurant killt Stories.
+        keepPin: amenityDot,
         icon,
         iconLod: icon ? homeMapIconLod(icon, poi) : undefined,
       });
@@ -751,9 +755,13 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
     const skipRings = skipPlaceRingsForView(span);
     const cap = placeCapForMapView(radiusM, span);
     const originLat =
-      gpsLatRef.current ?? useFinnusStore.getState().lastGpsLat;
+      view
+        ? (view.south + view.north) / 2
+        : gpsLatRef.current ?? useFinnusStore.getState().lastGpsLat;
     const originLng =
-      gpsLngRef.current ?? useFinnusStore.getState().lastGpsLng;
+      view
+        ? (view.west + view.east) / 2
+        : gpsLngRef.current ?? useFinnusStore.getState().lastGpsLng;
     let visible = fallback;
     if (view) {
       const padLat = Math.max(0.006, (view.north - view.south) * 0.35);
@@ -766,6 +774,7 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
           p.lng <= view.east + padLng;
         if (inView) return true;
         if (skipRings) return false;
+        // Außerhalb: nur nah am Viewport-Zentrum (nicht GPS — sonst Heide ohne Orte).
         if (originLat == null || originLng == null) return false;
         return metersBetween(p.lat, p.lng, originLat, originLng) <= radiusM;
       });
@@ -1065,10 +1074,13 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
     }
     enrichRunningRef.current = true;
     try {
-      const lat =
-        gpsLatRef.current ?? useFinnusStore.getState().lastGpsLat ?? undefined;
-      const lng =
-        gpsLngRef.current ?? useFinnusStore.getState().lastGpsLng ?? undefined;
+      const view = viewRef.current;
+      const lat = view
+        ? (view.south + view.north) / 2
+        : gpsLatRef.current ?? useFinnusStore.getState().lastGpsLat ?? undefined;
+      const lng = view
+        ? (view.west + view.east) / 2
+        : gpsLngRef.current ?? useFinnusStore.getState().lastGpsLng ?? undefined;
       const missing = pois.filter((p) => !osmFootprintsRef.current.has(p.id));
       const fetched = await enrichHomeMapFootprints(missing, profile, {
         nearLat: lat,
@@ -1566,11 +1578,13 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
         offer.awaitConfirm === true &&
         (offer.previewRoute?.length ?? 0) >= 2;
       if (hasWegweiserPreview) {
+        const street =
+          (offer.previewRoute?.length ?? 0) >= 3 ? offer.previewRoute! : [];
         const payload =
-          previewStore?.preview && (previewStore.current?.length ?? 0) >= 2
+          previewStore?.preview && (previewStore.current?.length ?? 0) >= 3
             ? previewStore
             : {
-                current: offer.previewRoute!,
+                current: street,
                 ahead: [],
                 pins: [
                   {
@@ -1581,18 +1595,18 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
                   },
                 ],
                 arrows: [],
-                preview: true,
+                preview: street.length < 3,
                 previewPin: { lat: offer.lat!, lng: offer.lng! },
               };
-        const json = JSON.stringify(payload);
+        const json = navRoutePayloadSig(payload);
         if (json !== lastRouteJson.current) {
           lastRouteJson.current = json;
           setMapRoute(payload);
         }
         return;
       }
-      if (lastRouteJson.current !== '[]') {
-        lastRouteJson.current = '[]';
+      if (lastRouteJson.current !== 'null') {
+        lastRouteJson.current = 'null';
         setMapRoute(null);
       }
       return;
@@ -1606,7 +1620,7 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
     if (payload?.fitWide) {
       followRef.current = false;
     }
-    const json = JSON.stringify(
+    const json = navRoutePayloadSig(
       payload ?? { current: [], ahead: [], pins: [], arrows: [] },
     );
     if (json === lastRouteJson.current) return;
@@ -1730,7 +1744,8 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
     return () => clearInterval(t);
   }, [cityId]);
 
-  // Stadtwechsel: sofort Overview (Fit), Pins im neuen Viewport; GPS-Follow bleibt aus.
+  // Stadtwechsel (Einstellungen): Karte zur Stadt + Offline-Extract laden.
+  // Freie Erkundung danach bleibt — kein Dauer-Follow.
   useEffect(() => {
     if (!readyRef.current || !cityId) return;
     const prevInjected = placesInjectedForCity.current;
@@ -1743,9 +1758,24 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
     if (switched) {
       followRef.current = false;
       didCameraLock.current = true;
-      // Kamera bleibt wo der User ist — nur Recenter-Button / Nav-Route holen zurück.
       locationFollowRef.current = false;
+      headingFollowRef.current = false;
       setLocationFollow(false);
+      setHeadingFollow(false);
+      const fitBounds = resolveFitBounds(cityId);
+      if (fitBounds) {
+        const lat = (fitBounds.latMin + fitBounds.latMax) / 2;
+        const lng = (fitBounds.lngMin + fitBounds.lngMax) / 2;
+        viewRef.current = viewBoxFromCoverageBounds(fitBounds);
+        ignoreUserPanUntil.current = Date.now() + 900;
+        mapRef.current?.releaseFollow();
+        mapRef.current?.jumpTo(lat, lng, 13.2, true);
+        void injectOfflineMapExtract(true, { lat, lng }, undefined, cityId, true);
+        void prefetchCityMapExtract(cityId).catch(() => undefined);
+      } else {
+        void injectOfflineMapExtract(true, null, undefined, cityId, true);
+        void prefetchCityMapExtract(cityId).catch(() => undefined);
+      }
     }
     injectFastCityPins(cityId);
     void injectPlacesAndRoads();
@@ -1754,6 +1784,7 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
   }, [
     cityId,
     fitActiveCityOverview,
+    injectOfflineMapExtract,
     injectPlacesAndRoads,
     scheduleHeavyMapOverlays,
     injectFastCityPins,
