@@ -1,6 +1,6 @@
 /**
- * Care-Lane Parken: Leave-by aus OSM/Luftlinie, Reminder, Invalidate wenn Auto weg.
- * Kein Gemini — nur Code + GPS.
+ * Care-Lane Parken: Leave-by aus Live-Wegzeit, Logistics-Trigger (30/5 Ansage),
+ * Invalidate wenn Auto weg. Soft deadline (~10 Min Spielraum).
  */
 
 import { haversineMeters } from '../../db/database';
@@ -23,8 +23,10 @@ export type ParkingCareState = {
 };
 
 let lastLeaveByMs: number | null = null;
-let lastRemindSpokenAt = 0;
+/** Letzte geschätzte Wegzeit zum Spot — Sync für Live-HUD. */
+let lastWalkMinEstimate: number | null = null;
 let watchTimer: ReturnType<typeof setInterval> | null = null;
+let lastWatchSyncMs = 0;
 
 function expiresAtFromSpot(spot: ParkingSpot): number | null {
   if (spot.maxDurationMin == null || spot.maxDurationMin <= 0) return null;
@@ -32,8 +34,64 @@ function expiresAtFromSpot(spot: ParkingSpot): number | null {
 }
 
 /** Grobe Gehzeit ohne API — 4,8 km/h. */
-function walkMinutes(distM: number): number {
+function walkMinutesFallback(distM: number): number {
   return Math.max(3, Math.ceil(distM / 80));
+}
+
+async function resolveWalkMin(
+  from: { lat: number; lng: number },
+  to: { lat: number; lng: number; name: string },
+): Promise<number> {
+  try {
+    const { estimateTravelEtaRouted } = await import(
+      '../navigation/travelEta'
+    );
+    const eta = await estimateTravelEtaRouted({
+      userLat: from.lat,
+      userLng: from.lng,
+      destLat: to.lat,
+      destLng: to.lng,
+      destName: to.name,
+    });
+    return Math.max(3, Math.ceil(eta.totalMinutes));
+  } catch {
+    const dist = haversineMeters(from.lat, from.lng, to.lat, to.lng);
+    return walkMinutesFallback(dist);
+  }
+}
+
+function syncParkingLogisticsWatch(opts: {
+  spot: ParkingSpot;
+  expiresAtMs: number;
+  leaveByMs: number;
+  walkMin: number;
+}): void {
+  try {
+    const { registerDepartureWatch } = require('../logistics/logisticsTriggerEngine') as {
+      registerDepartureWatch: (input: Record<string, unknown>) => {
+        leaveByMs: number;
+      };
+    };
+    registerDepartureWatch({
+      eventId: `parking:${opts.spot.id}`,
+      title: opts.spot.label || 'Parkplatz',
+      departureMs: opts.expiresAtMs,
+      walkEtaMin: opts.walkMin,
+      mode: 'car',
+      destLat: opts.spot.lat,
+      destLng: opts.spot.lng,
+      destName: opts.spot.label || 'Auto',
+      detail: `Parkticket · max ${opts.spot.maxDurationMin} Min`,
+      warnLeadMin: 30,
+      planPriority: 2,
+      deadlineSoftness: 'forgiving',
+      scheduleOsPush: true,
+      externalId: `parking:${opts.spot.id}`,
+    });
+    void opts.leaveByMs;
+  } catch (err) {
+    console.warn('[parkingCare] logistics sync failed', err);
+  }
 }
 
 export async function evaluateParkingCare(
@@ -75,10 +133,21 @@ export async function evaluateParkingCare(
     Number.isFinite(lng)
   ) {
     const dist = haversineMeters(lat, lng, spot.lat, spot.lng);
-    const driving = speed != null && speed > 6; // ~22 km/h
+    const driving = speed != null && speed > 6;
     if (driving && dist > 180) {
       clearParkingSpot();
       lastLeaveByMs = null;
+      lastWalkMinEstimate = null;
+      try {
+        const { useLogisticsTriggerStore } = require('../../store/useLogisticsTriggerStore') as {
+          useLogisticsTriggerStore: {
+            getState: () => { cancelEvent: (id: string) => void };
+          };
+        };
+        useLogisticsTriggerStore.getState().cancelEvent(`parking:${spot.id}`);
+      } catch {
+        /* soft */
+      }
       return {
         spot,
         expiresAtMs,
@@ -93,17 +162,44 @@ export async function evaluateParkingCare(
   let walkMin: number | null = null;
   let leaveByMs: number | null = null;
   if (
-    expiresAtMs != null &&
     spot.lat != null &&
     spot.lng != null &&
     lat != null &&
     lng != null
   ) {
-    const dist = haversineMeters(lat, lng, spot.lat, spot.lng);
-    walkMin = walkMinutes(dist);
-    // Puffer 3 Min
-    leaveByMs = expiresAtMs - (walkMin + 3) * 60_000;
-    lastLeaveByMs = leaveByMs;
+    walkMin = await resolveWalkMin(
+      { lat, lng },
+      { lat: spot.lat, lng: spot.lng, name: spot.label || 'Auto' },
+    );
+    lastWalkMinEstimate = walkMin;
+
+    if (expiresAtMs != null) {
+      // Kleiner Puffer; Spielraum ~10 Min steckt in deadlineSoftness
+      leaveByMs = expiresAtMs - (walkMin + 3) * 60_000;
+      lastLeaveByMs = leaveByMs;
+
+      // Logistics-Watch max. alle 4 Min aktualisieren (ETA-Drift)
+      if (nowMs - lastWatchSyncMs > 4 * 60_000 || lastWatchSyncMs === 0) {
+        lastWatchSyncMs = nowMs;
+        let parkingOk = true;
+        try {
+          const { isProactiveAlertEnabled } = require('../notifications/proactiveAlerts') as {
+            isProactiveAlertEnabled: (k: 'parking') => boolean;
+          };
+          parkingOk = isProactiveAlertEnabled('parking');
+        } catch {
+          parkingOk = true;
+        }
+        if (parkingOk) {
+          syncParkingLogisticsWatch({
+            spot,
+            expiresAtMs,
+            leaveByMs,
+            walkMin,
+          });
+        }
+      }
+    }
   }
 
   return {
@@ -115,31 +211,11 @@ export async function evaluateParkingCare(
   };
 }
 
-/** Ob jetzt eine lockere Reminder-Speech fällig ist (max 1× / 8 Min). */
+/** @deprecated Speech läuft über Logistics 30/5 — kein Extra-Spam. */
 export function parkingReminderDue(
-  care: ParkingCareState,
-  nowMs = Date.now(),
+  _care: ParkingCareState,
+  _nowMs = Date.now(),
 ): string | null {
-  if (care.invalidated || care.leaveByMs == null || care.expiresAtMs == null) {
-    return null;
-  }
-  if (nowMs - lastRemindSpokenAt < 8 * 60_000) return null;
-  const minsToLeave = (care.leaveByMs - nowMs) / 60_000;
-  const minsToExpiry = (care.expiresAtMs - nowMs) / 60_000;
-
-  if (minsToExpiry <= 0) {
-    lastRemindSpokenAt = nowMs;
-    return `Dein Parkticket ist abgelaufen — falls du verlängern willst, besser jetzt zum Auto.`;
-  }
-  if (minsToLeave <= 0 && minsToExpiry > 0) {
-    lastRemindSpokenAt = nowMs;
-    const w = care.walkMinEstimate ?? 10;
-    return `Zeit Richtung Auto — etwa ${w} Minuten Fußweg, Ticket läuft in ${Math.round(minsToExpiry)} Minuten ab.`;
-  }
-  if (minsToLeave <= 15 && minsToLeave > 0) {
-    lastRemindSpokenAt = nowMs;
-    return `Nur kurz: in etwa ${Math.round(minsToLeave)} Minuten solltest du los zum Auto, sonst wird’s knapp mit dem Ticket.`;
-  }
   return null;
 }
 
@@ -147,33 +223,24 @@ export function getLastParkingLeaveByMs(): number | null {
   return lastLeaveByMs;
 }
 
-/** Hintergrund-Tick — von App-Start / GPS-Writer aufrufen. */
+export function getLastParkingWalkMinEstimate(): number | null {
+  return lastWalkMinEstimate;
+}
+
+/** Nach Speichern: sofort Logistics + Watch. */
+export async function armParkingCare(): Promise<ParkingCareState | null> {
+  lastWatchSyncMs = 0;
+  const care = await evaluateParkingCare();
+  startParkingCareWatch();
+  return care;
+}
+
+/** Hintergrund-Tick — ETA/Leave nachziehen, Speech über Logistics-Trigger. */
 export function startParkingCareWatch(): void {
   if (watchTimer) return;
   watchTimer = setInterval(() => {
-    void (async () => {
-      const care = await evaluateParkingCare();
-      if (!care || care.invalidated) return;
-      const line = parkingReminderDue(care);
-      if (!line) return;
-      try {
-        const { enqueueSpeech } = require('../../module2/speech/speechQueue') as {
-          enqueueSpeech: (o: {
-            kind: string;
-            text: string;
-            turnId: string;
-          }) => void;
-        };
-        enqueueSpeech({
-          kind: 'bridging',
-          text: line,
-          turnId: `park_care_${Date.now()}`,
-        });
-      } catch {
-        /* soft */
-      }
-    })();
-  }, 45_000);
+    void evaluateParkingCare();
+  }, 90_000);
 }
 
 export function stopParkingCareWatch(): void {

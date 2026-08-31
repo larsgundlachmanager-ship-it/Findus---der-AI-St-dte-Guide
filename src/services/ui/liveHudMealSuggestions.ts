@@ -15,6 +15,10 @@ export type MealHudSuggestion = {
   walkMin: number;
   distanceM: number;
   openNow: boolean | null;
+  lat?: number;
+  lng?: number;
+  cuisine?: string | null;
+  types?: string[];
 };
 
 export type MealHudCache = {
@@ -69,6 +73,40 @@ function placeTypeFor(slot: MealSlotKind): string {
   return 'restaurant';
 }
 
+function looksLikeStreetLabel(name: string): boolean {
+  const n = name.trim();
+  if (
+    /restaurant|imbiss|pizza|sushi|grill|café|cafe|bar|bistro|kitchen|stube|krug|haus|thai|asia|steak|burger/i.test(
+      n,
+    )
+  ) {
+    return false;
+  }
+  if (/\b(straße|strasse|weg|allee|damm|ring|platz)\s+\d+/i.test(n)) return true;
+  if (/^[A-ZÄÖÜ][A-Za-zÄÖÜäöüß\-]+ \d+[a-zA-Z]?\s*$/.test(n)) return true;
+  return false;
+}
+
+function cuisineFromPlace(name: string, types: string[]): string | null {
+  const blob = `${name} ${types.join(' ')}`.toLowerCase();
+  const rules: Array<[RegExp, string]> = [
+    [/burger|smash/, 'Burger'],
+    [/sushi|ramen|thai|viet|pho|asia|chinese|japan|korea|poke|wok|indisch|curry/, 'Asiatisch'],
+    [/steak|grill|bbq|ribs|steakhouse/, 'Steak & Grill'],
+    [/pizza|pasta|trattoria|italiano|italian/, 'Italienisch'],
+    [/döner|doener|kebab|gyros|meze|griech/, 'Grill & Döner'],
+    [/tapas|spanisch|paella/, 'Spanisch'],
+    [/fisch|meeres|seafood/, 'Fisch'],
+    [/vegan|veggie/, 'Vegetarisch'],
+    [/schnitzel|gasthaus|brauhaus|deutsch/, 'Deftig'],
+  ];
+  for (const [re, label] of rules) {
+    if (re.test(blob)) return label;
+  }
+  if (types.some((t) => /restaurant|meal_takeaway|food/.test(t))) return 'Küche vor Ort';
+  return null;
+}
+
 function cellKey(lat: number, lng: number): string {
   return `${(lat / (CELL_M / 111_000)).toFixed(0)},${(
     lng /
@@ -120,12 +158,30 @@ export async function ensureMealHudFresh(opts?: {
         radiusM: slot === 'bakery' ? 900 : 1400,
         openNow: true,
       });
-      const items: MealHudSuggestion[] = hits.slice(0, 2).map((h) => ({
-        name: h.name.trim() || 'Lokal',
-        walkMin: walkMinutesForDistanceM(h.distanceM),
-        distanceM: Math.round(h.distanceM),
-        openNow: h.openNow ?? null,
-      }));
+      const ranked: MealHudSuggestion[] = [];
+      const seenCuisine = new Set<string>();
+      for (const h of hits) {
+        const name = h.name.trim();
+        if (!name || looksLikeStreetLabel(name)) continue;
+        const types = h.types ?? [];
+        const cuisine = cuisineFromPlace(name, types);
+        if (slot === 'dinner' && cuisine && seenCuisine.has(cuisine) && ranked.length) {
+          continue;
+        }
+        if (cuisine) seenCuisine.add(cuisine);
+        ranked.push({
+          name,
+          walkMin: walkMinutesForDistanceM(h.distanceM),
+          distanceM: Math.round(h.distanceM),
+          openNow: h.openNow ?? null,
+          lat: h.lat,
+          lng: h.lng,
+          cuisine,
+          types,
+        });
+        if (ranked.length >= 2) break;
+      }
+      const items = ranked;
 
       if (items.length === 0) {
         cache = null;
@@ -133,10 +189,31 @@ export async function ensureMealHudFresh(opts?: {
         return;
       }
 
-      const lines = items.map(
-        (it) => `${it.name} · ${it.walkMin} Min zu Fuß`,
-      );
-      const title = slotLabel(slot);
+      const primary = items[0]!;
+      const secondary = items[1];
+      const title =
+        primary.cuisine && primary.cuisine !== 'Küche vor Ort'
+          ? `Bock auf ${primary.cuisine}?`
+          : slot === 'bakery'
+            ? `🥐 ${primary.name}`
+            : `🍽 ${primary.name}`;
+      const metaLines: string[] = [
+        primary.cuisine && primary.cuisine !== 'Küche vor Ort'
+          ? `${primary.name} · ${primary.walkMin} Min`
+          : `${primary.walkMin} Min zu Fuß${primary.openNow ? ' · offen' : ''}`,
+      ];
+      if (secondary) {
+        metaLines.push(
+          secondary.cuisine
+            ? `oder ${secondary.name} (${secondary.cuisine}, ${secondary.walkMin} Min)`
+            : `oder ${secondary.name} · ${secondary.walkMin} Min`,
+        );
+      }
+      const names = items.map((i) => i.name).join(' oder ');
+      const dirs = items
+        .map((i) => i.cuisine)
+        .filter((c): c is string => Boolean(c))
+        .join(' vs. ');
       cache = {
         slot,
         atMs: nowMs,
@@ -144,11 +221,11 @@ export async function ensureMealHudFresh(opts?: {
         lng,
         items,
         title,
-        meta: fitHudMeta(lines.join('\n')),
+        meta: fitHudMeta(metaLines.join('\n')),
         tellMorePrompt:
-          `Zwei konkrete ${title}-Tipps in meiner Nähe mit Öffnungszeiten und Route: ` +
-          items.map((i) => i.name).join(' und ') +
-          '.',
+          slot === 'dinner'
+            ? `Abendessen: zwei Richtungen${dirs ? ` (${dirs})` : ''} — ${names}. Sofort Pitch-Modus, kurze Pitches, Route-Buttons. Keine Straßen als Restaurant, keine Frage ob ich noch essen will.`
+            : `Pitch: ${slotLabel(slot)} in meiner Nähe — zeig mir 1–2 Optionen (${names}) mit kurzem Pitch und Route-Button. Sofort Pitch-Modus, keine lange Liste.`,
       };
       notify();
     } catch {

@@ -28,7 +28,13 @@ export type HudTipKind =
   | 'shopping_closing'
   | 'session_deadline'
   | 'weather_rain'
+  | 'weather_heat'
   | 'weather_summary'
+  | 'luggage_drop'
+  | 'umbrella_day'
+  | 'sunset_tip'
+  | 'free_slot'
+  | 'nice_tip'
   | 'open_task'
   | 'battery_charge'
   | 'wake_alarm'
@@ -72,6 +78,12 @@ const KIND_TIEBREAK: Record<HudTipKind, number> = {
   hotel_checkin: 80,
   hotel_breakfast: 75,
   weather_rain: 72,
+  weather_heat: 58,
+  luggage_drop: 57,
+  sunset_tip: 52,
+  umbrella_day: 50,
+  free_slot: 48,
+  nice_tip: 45,
   open_task: 55,
   weather_summary: 40,
   generic: 10,
@@ -325,7 +337,7 @@ const produceSessionDeadline: TipProducer = (ctx) => {
         id: `leaveby-${plan.leaveByMs}`,
         kind: 'session_deadline',
         text: countdown,
-        meta: `Leave-by ${formatClock(plan.leaveByMs)} · Tippen hilft?`,
+        meta: `Leave-by ${formatClock(plan.leaveByMs)}`,
         tellMorePrompt: `Leave-by ${formatClock(plan.leaveByMs)} — kurz bestätigen und Route/nächste Schritte, falls ich jetzt los muss.`,
         score,
       });
@@ -341,7 +353,7 @@ const produceSessionDeadline: TipProducer = (ctx) => {
         id: `arrive-${stop.id}`,
         kind: 'session_deadline',
         text: `${stop.label} bis ${formatClock(stop.arriveByMs!)} Uhr`,
-        meta: 'Termin · Tippen für Leave-by',
+        meta: 'Termin',
         tellMorePrompt: `Termin „${stop.label}“ bis ${formatClock(stop.arriveByMs!)} — wann los und Route?`,
         score,
       });
@@ -353,74 +365,150 @@ const produceSessionDeadline: TipProducer = (ctx) => {
 
 const produceWeather: TipProducer = () => {
   const tips: HudTipCandidate[] = [];
-
+  let allowRainWarn = true;
   try {
-    const { getWeatherHudLine, getWeatherTrackerState } = require('../logistics/weatherTracker') as {
-      getWeatherHudLine: () => string | null;
-      getWeatherTrackerState: () => {
-        nextRainAtMs: number | null;
-        rainStartsInMin: number | null;
-        summaryLine: string;
-      } | null;
+    const { canIssueProactiveRainWarning } = require('../weather/rainWarnSessionGate') as {
+      canIssueProactiveRainWarning: () => boolean;
     };
-    const line = getWeatherHudLine();
-    const st = getWeatherTrackerState();
-    if (line) {
-      const mins =
-        st?.rainStartsInMin ??
-        (st?.nextRainAtMs != null
-          ? Math.round((st.nextRainAtMs - Date.now()) / 60_000)
-          : 99);
-      const soon = mins <= 30;
-      tips.push({
-        id: `rain-hud-${st?.nextRainAtMs ?? 'x'}`,
-        kind: 'weather_rain',
-        text: line,
-        meta: soon
-          ? 'Schirm/Indoor? Tippen, wenn’s hilft.'
-          : mins <= 90
-            ? `In ~${mins} Min — Schirm mitnehmen?`
-            : undefined,
-        tellMorePrompt: soon
-          ? 'Regen bald — Café oder Indoor in der Nähe mit Route, und sag mir ob Schirm sinnvoll ist.'
-          : `In etwa ${mins} Minuten könnte es regnen — was soll ich anpassen (Route, Indoor, Schirm)?`,
-        score: mins <= 5 ? 95 : mins <= 30 ? 88 : mins <= 90 ? 74 : 60,
-      });
-    }
+    allowRainWarn = canIssueProactiveRainWarning();
   } catch {
-    /* soft */
+    allowRainWarn = true;
+  }
+
+  if (allowRainWarn) {
+    try {
+      const { getWeatherHudLine, getWeatherTrackerState } = require('../logistics/weatherTracker') as {
+        getWeatherHudLine: () => string | null;
+        getWeatherTrackerState: () => {
+          nextRainAtMs: number | null;
+          rainStartsInMin: number | null;
+          summaryLine: string;
+        } | null;
+      };
+      const line = getWeatherHudLine();
+      const st = getWeatherTrackerState();
+      if (line) {
+        const rainingNow = /^(🌧\s*)?Regen (jetzt|noch )/i.test(line);
+        const soonClock = /^Regen ab /i.test(line);
+        const mins = rainingNow
+          ? 0
+          : soonClock
+            ? 90
+            : st?.nextRainAtMs != null
+              ? Math.round((st.nextRainAtMs - Date.now()) / 60_000)
+              : 99;
+        const soon = rainingNow || mins <= 30;
+        tips.push({
+          id: `rain-hud-${st?.nextRainAtMs ?? 'now'}`,
+          kind: 'weather_rain',
+          text: line.startsWith('🌧') ? line : `🌧 ${line}`,
+          meta: rainingNow
+            ? 'Aktuelle Dauer'
+            : soon
+              ? 'Schirm dabei?'
+              : mins <= 90
+                ? 'Bald nass'
+                : undefined,
+          tellMorePrompt: rainingNow
+            ? 'Es regnet — Café oder Indoor in der Nähe mit Route.'
+            : soon
+              ? 'Regen bald — Café oder Indoor in der Nähe mit Route, und sag mir ob Schirm sinnvoll ist.'
+              : `In etwa ${mins} Minuten könnte es regnen — was soll ich anpassen (Route, Indoor, Schirm)?`,
+          score: rainingNow || mins <= 5 ? 95 : mins <= 30 ? 88 : mins <= 90 ? 74 : 60,
+        });
+      }
+    } catch {
+      /* soft */
+    }
+  } else {
+    // Auch ohne Warn-Gate: akuter Regen-Status (jetzt / noch …).
+    try {
+      const { getWeatherHudLine } = require('../logistics/weatherTracker') as {
+        getWeatherHudLine: () => string | null;
+      };
+      const line = getWeatherHudLine();
+      if (line && /^(🌧\s*)?Regen (jetzt|noch )/i.test(line)) {
+        tips.push({
+          id: 'rain-hud-now',
+          kind: 'weather_rain',
+          text: line.startsWith('🌧') ? line : `🌧 ${line}`,
+          meta: 'Aktuelle Regendauer',
+          tellMorePrompt: 'Es regnet — Café oder Indoor in der Nähe mit Route.',
+          score: 95,
+        });
+      }
+    } catch {
+      /* soft */
+    }
   }
 
   const weather = getCachedWeatherSnapshot();
   if (!weather) return tips;
 
-  if (weather.nextRainAtMs != null && !tips.some((t) => t.kind === 'weather_rain')) {
-    const delta = weather.nextRainAtMs - Date.now();
-    // HUD ab 90 Min; Speech bleibt ~30 Min (weatherTracker)
-    if (delta > 0 && delta <= 90 * 60_000) {
-      const mins = Math.round(delta / 60_000);
-      tips.push({
-        id: `rain-${weather.nextRainAtMs}`,
-        kind: 'weather_rain',
-        text:
-          weather.rainStartsInMin != null
-            ? `🌧 Regen in ${weather.rainStartsInMin} Min`
-            : `🌧 Regen in ${mins} Min (${formatClock(weather.nextRainAtMs)})`,
-        meta:
-          delta <= 30 * 60_000
-            ? 'Schirm/Indoor? Tippen, wenn’s hilft.'
-            : `Ab ~${formatClock(weather.nextRainAtMs)} · Schirm?`,
-        tellMorePrompt:
-          delta <= 30 * 60_000
-            ? 'Regen bald — Café oder Indoor in der Nähe mit Route.'
-            : `In etwa ${mins} Minuten Regen möglich — Schirm/Jacke oder Plan anpassen?`,
-        score: delta <= 30 * 60_000 ? 84 : 72,
+  if (allowRainWarn && !tips.some((t) => t.kind === 'weather_rain')) {
+    try {
+      const { formatRainHudLine } = require('../weather/rainIncomingPolicy') as {
+        formatRainHudLine: (opts: {
+          currentPrecipMm?: number | null;
+          rainStartsInMin?: number | null;
+          nextRainAtMs?: number | null;
+          rainEndsAtMs?: number | null;
+          rainWindows?: Array<{ startMs: number; endMs: number; pop?: number }> | null;
+        }) => string | null;
+      };
+      const line = formatRainHudLine({
+        currentPrecipMm: weather.precipitationMm,
+        nextRainAtMs: weather.nextRainAtMs,
+        rainStartsInMin: weather.rainStartsInMin,
+        rainEndsAtMs: weather.rainEndsAtMs,
+        rainWindows: weather.rainWindows,
+        weatherCode: weather.weatherCode,
+        isHeavyRain: weather.isHeavyRain,
       });
+      if (line) {
+        const rainingNow = /^(🌧\s*)?Regen (jetzt|noch )/i.test(line);
+        const mins =
+          !rainingNow && weather.nextRainAtMs != null
+            ? Math.round((weather.nextRainAtMs - Date.now()) / 60_000)
+            : rainingNow
+              ? 0
+              : 99;
+        const soon = rainingNow || mins <= 30;
+        tips.push({
+          id: `rain-${weather.nextRainAtMs ?? 'now'}`,
+          kind: 'weather_rain',
+          text: `🌧 ${line}${
+            !rainingNow && weather.nextRainAtMs != null
+              ? ` (${formatClock(weather.nextRainAtMs)})`
+              : ''
+          }`,
+          meta: soon
+            ? 'Schirm/Indoor?'
+            : weather.nextRainAtMs != null
+              ? `Ab ~${formatClock(weather.nextRainAtMs)} · Schirm?`
+              : undefined,
+          tellMorePrompt: rainingNow
+            ? 'Es regnet — Café oder Indoor in der Nähe mit Route.'
+            : soon
+              ? 'Regen bald — Café oder Indoor in der Nähe mit Route.'
+              : `In etwa ${mins} Minuten Regen möglich — Schirm/Jacke oder Plan anpassen?`,
+          score: rainingNow || mins <= 5 ? 95 : soon ? 84 : 72,
+        });
+      }
+    } catch {
+      /* soft */
     }
   }
 
   const summary = weather.summaryLine?.trim();
-  if (summary && summary.length <= 72) {
+  // Kein zweites Wetter-Tipp mit „Aktuell … Regen …“, wenn Regen-Karte schon da.
+  const hasRainTip = tips.some((t) => t.kind === 'weather_rain');
+  if (
+    summary &&
+    summary.length <= 72 &&
+    !hasRainTip &&
+    !/^aktuell\b/i.test(summary)
+  ) {
     tips.push({
       id: `wx-${summary.slice(0, 24)}`,
       kind: 'weather_summary',
@@ -428,6 +516,24 @@ const produceWeather: TipProducer = () => {
       meta: 'Mehr Wetter-Tipps?',
       tellMorePrompt: '__WEATHER_DAY_CHECK__',
       score: 38,
+    });
+  }
+
+  // Hitze → Trinken / Sonnencreme (Nice-to-know, nicht akut wie Regen-5-Min)
+  const temp =
+    typeof weather.currentTempC === 'number' ? weather.currentTempC : null;
+  const high =
+    typeof weather.dayHighC === 'number' ? weather.dayHighC : temp;
+  if ((temp != null && temp >= 26) || (high != null && high >= 28)) {
+    const tLabel = Math.round(high ?? temp ?? 0);
+    tips.push({
+      id: `heat-${Math.round(Date.now() / (3 * 60 * 60_000))}`,
+      kind: 'weather_heat',
+      text: `☀️ ${tLabel}° — Wasser & Sonnencreme`,
+      meta: 'Tipp für draußen',
+      tellMorePrompt:
+        'Es ist heiß — erinnere mich an Trinken und Sonnencreme, und zeig kurz eine Trinkwasserstelle oder Drogerie in der Nähe falls sinnvoll.',
+      score: temp != null && temp >= 30 ? 76 : 68,
     });
   }
 
@@ -451,7 +557,7 @@ const produceBatteryCharge: TipProducer = () => {
         : '🔋 Brauchst du mehr Akku?',
       meta: critical
         ? 'Nächste Station ansteuern?'
-        : `Noch ${pct} % · Tippen = suchen`,
+        : `Noch ${pct} % — Station suchen?`,
       tellMorePrompt:
         'Akku wird knapp — such Powerbank-Automaten oder Café mit Steckdosen in der Nähe und gib mir Route-Buttons.',
       score: critical ? 97 : pct <= 18 ? 93 : 80,
@@ -487,19 +593,16 @@ const produceWakeAlarm: TipProducer = (ctx) => {
     if (delta > 14 * 60 * 60_000) return [];
     const mins = Math.max(0, Math.round(delta / 60_000));
     const clock = formatClock(next.plannedStartMs);
+    // Nur HUD-Chip — nie Push/Voice vor dem Wecken („ich wecke dich um 8“)
+    if (mins > 20) return [];
     return [
       {
         id: `wake-${next.plannedStartMs}`,
         kind: 'wake_alarm',
         text: `⏰ Wecker ${clock}`,
-        meta:
-          mins <= 0
-            ? 'Gleich · passt das?'
-            : mins < 60
-              ? `In ${mins} Min · passt das?`
-              : `Noch ${Math.floor(mins / 60)} Std ${mins % 60} Min`,
-        tellMorePrompt: `Mein Wecker steht auf ${clock}. Kurz prüfen ob das passt, oder anpassen.`,
-        score: mins <= 30 ? 90 : mins <= 120 ? 70 : 52,
+        meta: mins <= 1 ? 'Gleich' : `In ${mins} Min`,
+        tellMorePrompt: `Mein Wecker steht auf ${clock}. Nur anpassen wenn ich das will — keine Vorab-Erinnerung.`,
+        score: mins <= 2 ? 42 : 28,
       },
     ];
   } catch {
@@ -518,6 +621,7 @@ const produceParkingTicket: TipProducer = (ctx) => {
       formatParkingHudCard: (nowMs: number) => {
         title: string;
         meta?: string;
+        tellMorePrompt: string;
       } | null;
     };
     const spot = getParkingSpot();
@@ -525,8 +629,6 @@ const produceParkingTicket: TipProducer = (ctx) => {
     const line = formatParkingHudCard(ctx.nowMs);
     if (!line) return [];
     let score = 58;
-    let tell =
-      'Status zu meinem Parkplatz — Countdown und ob ich bald zurück muss.';
     if (spot.maxDurationMin != null && spot.maxDurationMin > 0) {
       const rem =
         spot.maxDurationMin -
@@ -535,20 +637,14 @@ const produceParkingTicket: TipProducer = (ctx) => {
       else if (rem <= 20) score = 92;
       else if (rem <= 45) score = 84;
       else if (rem <= 90) score = 70;
-      tell =
-        rem <= 0
-          ? 'Parkticket abgelaufen — Route zurück zum Auto und was ich tun soll.'
-          : `Parkticket: noch ca. ${rem} Min. Sag mir, wann ich los zum Auto soll — mit Route.`;
     }
     return [
       {
         id: `park-ticket-${spot.parkedAtMs}`,
         kind: 'parking_ticket',
         text: line.title,
-        meta: line.meta
-          ? `${line.meta} · Tippen hilft?`
-          : 'Tippen für Leave-by',
-        tellMorePrompt: tell,
+        meta: line.meta ?? undefined,
+        tellMorePrompt: line.tellMorePrompt,
         score,
       },
     ];
@@ -590,8 +686,8 @@ const produceNavEta: TipProducer = (ctx) => {
     {
       id: `nav-eta-${target}`,
       kind: 'nav_eta',
-      text: `📍 Ankunft ~${formatClock(arriveAt)}`,
-      meta: `${target} · ${distLabel} · ~${etaMin} Min`,
+      text: target,
+      meta: `${distLabel} · ~${etaMin} Min · Ankunft ${formatClock(arriveAt)}`,
       tellMorePrompt: `Kurz zur Route nach ${target}: Ankunft, nächster Hinweis, und was ich unterwegs beachten soll.`,
       score: etaMin <= 8 ? 78 : 62,
     },
@@ -669,7 +765,7 @@ const produceOpenTasks: TipProducer = (ctx) => {
       id: `task-${top.id}`,
       kind: 'open_task',
       text: `Noch offen: ${top.itemLabel}`,
-      meta: 'Tippen, wenn’s jetzt hilft',
+      meta: 'Auf der Liste',
       tellMorePrompt: `Offener Punkt „${top.itemLabel}“ — konkrete nächste Schritte und Route wenn sinnvoll.`,
       score: 48,
     },
@@ -695,16 +791,36 @@ const produceContextMatrix: TipProducer = () => {
     if (t.id === 'drinking_water_nearby' && amenityKinds.has('drinking_water'))
       return false;
     if (t.id === 'ice_cream_hot' && amenityKinds.has('ice_cream')) return false;
+    if (t.id === 'supermarket_evening' && amenityKinds.has('supermarket'))
+      return false;
+    // Generisches „Supermarkt“ ohne Nearby-Treffer nicht zeigen
+    if (t.id === 'supermarket_evening') return false;
+    // Sunset-Karte aus liveHudCards ist SSOT (Uhr + Wetter)
+    if (t.id === 'sunset_spot') return false;
+    if (t.id === 'lunch_nearby' || t.id === 'dinner_reservation') return false;
     return true;
   });
   return top.map((t) => ({
     id: `ctx-${t.id}`,
     kind: 'generic' as const,
     text: t.title,
-    meta: 'Nur wenn’s hilft — tippen.',
+    meta: undefined,
     tellMorePrompt: t.prompt,
     score: Math.min(82, Math.round(t.score * 0.85)),
   }));
+};
+
+const produceNiceInfoScenarios: TipProducer = () => {
+  try {
+    const { collectNiceInfoScenarioTips } = require('./niceInfoScenarios') as {
+      collectNiceInfoScenarioTips: (opts?: {
+        nowMs?: number;
+      }) => HudTipCandidate[];
+    };
+    return collectNiceInfoScenarioTips();
+  } catch {
+    return [];
+  }
 };
 
 /** Registry — neue Situationen = neuer Producer, kein if/else-Wachstum im Picker. */
@@ -721,6 +837,7 @@ const PRODUCERS: TipProducer[] = [
   produceNavEta,
   produceTransitDepart,
   produceOpenTasks,
+  produceNiceInfoScenarios,
   produceContextMatrix,
 ];
 

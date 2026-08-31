@@ -1,6 +1,6 @@
 /**
  * Live-HUD Nearby-Amenities — locker, nur wenn wirklich nah.
- * Toilette · Trinkwasser · Eis bei Hitze (kein Dauer-Spam).
+ * Toilette · Trinkwasser · Eis · Museum · Supermarkt abends (kein Dauer-Spam).
  */
 
 import { useFinnusStore } from '../../store/useFinnusStore';
@@ -10,13 +10,15 @@ import { getCachedWeatherSnapshot } from '../weatherService';
 import { fitHudMeta } from './hudTextFit';
 import { isActivitySuggestionWindow } from './nachtruhePolicy';
 
-export type NearbyAmenityKind = 'toilet' | 'drinking_water' | 'ice_cream';
+export type NearbyAmenityKind = 'toilet' | 'drinking_water' | 'ice_cream' | 'museum' | 'supermarket';
 
 export type NearbyAmenityHit = {
   kind: NearbyAmenityKind;
   name: string;
   distanceM: number;
   walkMin: number;
+  lat?: number;
+  lng?: number;
 };
 
 export type NearbyAmenityHudCard = {
@@ -27,6 +29,7 @@ export type NearbyAmenityHudCard = {
   tellMorePrompt: string;
   /** 0–100 für Carousel-Priorität */
   score: number;
+  navDest?: { name: string; lat: number; lng: number };
 };
 
 type Cache = {
@@ -37,13 +40,15 @@ type Cache = {
   cards: NearbyAmenityHudCard[];
 };
 
-const TTL_MS = 18 * 60_000;
+const TTL_MS = 5 * 60_000;
 const CELL_M = 160;
 /** Nur zeigen wenn wirklich „um die Ecke“. */
 const MAX_M: Record<NearbyAmenityKind, number> = {
   toilet: 420,
   drinking_water: 480,
   ice_cream: 900,
+  museum: 1600,
+  supermarket: 1200,
 };
 
 let cache: Cache | null = null;
@@ -105,8 +110,8 @@ function cardFor(hit: NearbyAmenityHit): NearbyAmenityHudCard {
     return {
       id: `amenity-toilet-${Math.round(hit.distanceM)}`,
       kind: 'toilet',
-      title: 'Klo in der Nähe?',
-      meta: fitHudMeta(`${hit.name} · ${dist} · ${walk}`),
+      title: `🚻 ${hit.name}`,
+      meta: fitHudMeta(`${dist} · ${walk}`),
       tellMorePrompt:
         `Öffentliche Toilette „${hit.name}“ (~${dist}) — Route dahin und ob sie offen wirkt.`,
       score: hit.distanceM <= 180 ? 64 : hit.distanceM <= 320 ? 56 : 48,
@@ -117,23 +122,64 @@ function cardFor(hit: NearbyAmenityHit): NearbyAmenityHudCard {
     return {
       id: `amenity-water-${Math.round(hit.distanceM)}`,
       kind: 'drinking_water',
-      title: 'Trinkwasser um die Ecke?',
-      meta: fitHudMeta(`${hit.name} · ${dist} · ${walk}`),
+      title: `💧 ${hit.name}`,
+      meta: fitHudMeta(`${dist} · ${walk}`),
       tellMorePrompt:
         `Trinkwasser / Brunnen „${hit.name}“ (~${dist}) — Route und kurz sagen, wie ich hinfinde.`,
       score: hit.distanceM <= 200 ? 62 : hit.distanceM <= 350 ? 54 : 46,
     };
   }
 
+  if (hit.kind === 'museum') {
+    return {
+      id: `amenity-museum-${Math.round(hit.distanceM)}`,
+      kind: 'museum',
+      title: `🏛 ${hit.name}`,
+      meta: fitHudMeta(`${dist} · ${walk} — passt zu dir`),
+      tellMorePrompt:
+        `Museum „${hit.name}“ (~${dist}): kurzer Pitch warum es sich lohnt, Eintritt nur wenn belegt, Route und optional Ticket.`,
+      score: hit.distanceM <= 500 ? 72 : hit.distanceM <= 1000 ? 64 : 55,
+      navDest: navFromHit(hit),
+    };
+  }
+
+  if (hit.kind === 'supermarket') {
+    return {
+      id: `amenity-market-${Math.round(hit.distanceM)}`,
+      kind: 'supermarket',
+      title: 'Noch schnell was besorgen?',
+      meta: fitHudMeta(`${hit.name} · ${dist}`),
+      tellMorePrompt:
+        `Nächster Supermarkt „${hit.name}“ (~${dist}) — Route starten, kurz ob noch offen.`,
+      score: hit.distanceM <= 400 ? 74 : hit.distanceM <= 800 ? 66 : 58,
+      navDest: navFromHit(hit),
+    };
+  }
+
   return {
     id: `amenity-ice-${Math.round(hit.distanceM)}`,
     kind: 'ice_cream',
-    title: 'Heiß heute — Eis gefällig?',
-    meta: fitHudMeta(`${hit.name} · ${dist} · ${walk}`),
+    title: `🍦 ${hit.name}`,
+    meta: fitHudMeta(`${dist} · ${walk}`),
     tellMorePrompt:
       `Nächste Eisdiele „${hit.name}“ (~${dist}) — kurz warum sie passt und Route-Button.`,
     score: hit.distanceM <= 400 ? 68 : hit.distanceM <= 700 ? 58 : 50,
+    navDest: navFromHit(hit),
   };
+}
+
+function navFromHit(
+  hit: NearbyAmenityHit,
+): { name: string; lat: number; lng: number } | undefined {
+  if (
+    hit.lat == null ||
+    hit.lng == null ||
+    !Number.isFinite(hit.lat) ||
+    !Number.isFinite(hit.lng)
+  ) {
+    return undefined;
+  }
+  return { name: hit.name, lat: hit.lat, lng: hit.lng };
 }
 
 export function getNearbyAmenityHudCards(nowMs = Date.now()): NearbyAmenityHudCard[] {
@@ -154,8 +200,17 @@ async function searchKind(
       ? 'ice_cream'
       : kind === 'drinking_water'
         ? 'drinking_water'
-        : 'toilet';
-  const openNow = kind === 'ice_cream' ? true : false;
+        : kind === 'museum'
+          ? 'museum'
+          : kind === 'supermarket'
+            ? 'supermarket'
+            : 'toilet';
+  const openNow =
+    kind === 'ice_cream' ||
+    kind === 'museum' ||
+    kind === 'supermarket'
+      ? true
+      : false;
 
   const hits = await searchOpenPlacesAhead({
     lat,
@@ -176,13 +231,19 @@ async function searchKind(
       ? 'Öffentliches WC'
       : kind === 'drinking_water'
         ? 'Trinkbrunnen'
-        : 'Eisdiele');
+        : kind === 'museum'
+          ? 'Museum'
+          : kind === 'supermarket'
+            ? 'Supermarkt'
+            : 'Eisdiele');
 
   return {
     kind,
     name,
     distanceM: Math.round(best.distanceM),
     walkMin: walkMinutesForDistanceM(best.distanceM),
+    lat: best.lat,
+    lng: best.lng,
   };
 }
 
@@ -223,6 +284,25 @@ export async function ensureNearbyAmenityHudFresh(opts?: {
     try {
       const kinds: NearbyAmenityKind[] = ['toilet', 'drinking_water'];
       if (wantIce) kinds.push('ice_cream');
+      const hour = new Date(nowMs).getHours();
+      // Ab Nachmittag: konkreter Supermarkt-Pitch statt leerem „Supermarkt“
+      if (hour >= 16 && hour <= 21) kinds.push('supermarket');
+      try {
+        const { getCachedUserProfile } = require('../userProfileService') as {
+          getCachedUserProfile: () => {
+            experiencePrefs?: Record<string, string>;
+            wantToExperience?: string;
+          } | null;
+        };
+        const profile = getCachedUserProfile();
+        const want = (profile?.wantToExperience ?? '').toLowerCase();
+        const prefs = profile?.experiencePrefs ?? {};
+        if (prefs.museen === 'yes' || /museum|kunst|dinosaur/.test(want)) {
+          kinds.push('museum');
+        }
+      } catch {
+        /* soft */
+      }
 
       const found = (
         await Promise.all(kinds.map((k) => searchKind(k, lat, lng)))

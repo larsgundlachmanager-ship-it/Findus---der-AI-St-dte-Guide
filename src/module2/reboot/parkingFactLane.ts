@@ -10,16 +10,13 @@ import {
 } from '../../services/timeline/parkingSpotStore';
 import {
   evaluateParkingCare,
-  startParkingCareWatch,
+  armParkingCare,
 } from '../../services/timeline/parkingCareEngine';
 import type { AgentResult } from '../types';
+import { isParkingCareIntent } from '../../services/concierge/timeCareIntent';
 
 export function isParkingCareUtterance(text: string): boolean {
-  return (
-    isParkingSpotSaveIntent(text) ||
-    (/\bparkticket\b/iu.test(text) &&
-      /\b(bis|gilt|uhr|\d{1,2}[:.]\d{2})\b/iu.test(text))
-  );
+  return isParkingCareIntent(text) || isParkingSpotSaveIntent(text);
 }
 
 export async function researchParkingCare(opts: {
@@ -33,9 +30,8 @@ export async function researchParkingCare(opts: {
     lng: gps.lastGpsLng,
     maxDurationMin,
   });
-  startParkingCareWatch();
+  const care = (await armParkingCare()) ?? (await evaluateParkingCare());
 
-  const care = await evaluateParkingCare();
   const untilClock = opts.userText.match(
     /\b(?:bis|gilt\s+bis|läuft\s+bis|laeuft\s+bis|ticket\s+bis)\s*(\d{1,2})[:.](\d{2})\b/iu,
   );
@@ -46,16 +42,39 @@ export async function researchParkingCare(opts: {
     const mm = untilClock[2];
     draft = `Parkplatz ist gespeichert — Ticket bis ${hh}:${mm}. Ich behalte die Position im Blick und erinner dich rechtzeitig, bevor die Zeit abläuft.`;
   } else if (maxDurationMin != null) {
-    draft = `Parkplatz gespeichert — max. ${maxDurationMin} Minuten. Restzeit siehst du oben; ich melde mich bevor’s eng wird.`;
+    const h = maxDurationMin / 60;
+    const dur =
+      Number.isInteger(h) && h >= 1
+        ? `${h} Stunden`
+        : `${maxDurationMin} Minuten`;
+    draft = `Parkplatz gespeichert — max. ${dur}. Restzeit siehst du oben; ich melde mich ~30 und ~5 Minuten bevor du los zum Auto musst.`;
   } else {
     draft =
       'Parkplatz ist gespeichert. Ich merke mir den Spot — sag mir die maximale Parkdauer, dann plane ich den Leave-by.';
   }
 
-  if (care?.walkMinEstimate != null && care.leaveByMs != null) {
-    const leave = new Date(care.leaveByMs);
-    const leaveStr = `${String(leave.getHours()).padStart(2, '0')}:${String(leave.getMinutes()).padStart(2, '0')}`;
-    draft += ` Aktuell ca. ${care.walkMinEstimate} Min zurück zum Auto — Leave-by grob ${leaveStr}.`;
+  if (care?.walkMinEstimate != null) {
+    const walk = care.walkMinEstimate;
+    draft += ` Zurück zum Auto aktuell ca. ${walk} Min.`;
+    if (spot.maxDurationMin != null && spot.maxDurationMin > 0) {
+      const elapsed = Math.max(
+        0,
+        Math.round((Date.now() - spot.parkedAtMs) / 60_000),
+      );
+      const remAt = spot.maxDurationMin - (elapsed + walk);
+      if (remAt > 0) {
+        draft += ` Bei Ankunft hättest du noch ca. ${remAt} Min Ticketzeit.`;
+      } else if (remAt === 0) {
+        draft += ` Bei Ankunft wäre das Ticket gerade abgelaufen.`;
+      } else {
+        draft += ` Bei Ankunft wärst du ca. ${Math.abs(remAt)} Min über der Zeit.`;
+      }
+    }
+    if (care.leaveByMs != null) {
+      const leave = new Date(care.leaveByMs);
+      const leaveStr = `${String(leave.getHours()).padStart(2, '0')}:${String(leave.getMinutes()).padStart(2, '0')}`;
+      draft += ` Leave-by grob ${leaveStr}.`;
+    }
   }
 
   return {

@@ -36,6 +36,10 @@ import {
   subscribeMealHud,
 } from '../services/ui/liveHudMealSuggestions';
 import {
+  ensureSunsetHudFresh,
+  subscribeSunsetHud,
+} from '../services/ui/sunsetHorizonSpots';
+import {
   ensureNearbyAmenityHudFresh,
   subscribeNearbyAmenityHud,
 } from '../services/ui/liveHudNearbyAmenities';
@@ -57,14 +61,17 @@ import {
   shouldShowCoachStamp,
 } from '../services/onboarding/uiCoachMarks';
 import { presenceHint } from '../runtime/uiModule';
-import { formatNavHudTitle } from '../services/navigation/transportMode';
+import { formatNavHudTitle, formatRemainingStations } from '../services/navigation/transportMode';
 import {
   bikeMinutesForDistanceM,
+  formatDurationMinutesDe,
   walkMinutesForDistanceM,
 } from '../services/navigation/travelEta';
 import { getCachedUserProfile } from '../services/userProfileService';
 import { resolvePersonaEngine } from '../services/personaEngine';
 import { resolveActiveTravelMode } from '../services/navigation/travelModeContext';
+import { pickNavHudEta } from '../services/navigation/navHudEta';
+import { stripNavDestLeak } from '../services/navigation/streetAddressQuery';
 
 const ROUTE_HINT = 'Tippen für geplante Route';
 const TAP_TIPS_HINT = 'tippen für Tipps';
@@ -72,6 +79,8 @@ const TAP_TIPS_HINT = 'tippen für Tipps';
 const AUTO_ROTATE_MS = 10_000;
 /** Nach User-Swipe: Auto-Rotate pausiert. */
 const USER_PAUSE_MS = 10_000;
+/** Horizontal-Padding der Live-Karten (locationPress). */
+const HUD_TEXT_PAD_X = spacing.md * 2;
 
 export type PassportTab = 'discover' | 'route';
 
@@ -98,12 +107,34 @@ type Props = {
   /** Stempelkarte unter dem Zahnrad (Dreieck-Layout). */
   stampMapRef?: React.RefObject<View | null>;
   settingsDisabled?: boolean;
+  /** Karte läuft darunter — kein harter grüner Balken. */
+  overlay?: boolean;
+  /** Home-Dock übernimmt Kalender / Stempel / Einstellungen. */
+  hideTools?: boolean;
+  /** Live-Anzeige volle Breite (kein Seiten-Padding, Karten = Screen-Width). */
+  fullBleedLive?: boolean;
 };
 
 function formatKm(m: number | null | undefined): string {
   if (m == null || !Number.isFinite(m)) return '—';
   if (m < 1000) return `${Math.max(0, Math.round(m))} m`;
-  return `${(m / 1000).toFixed(1)} km`;
+  return `${(m / 1000).toFixed(1).replace('.', ',')} km`;
+}
+
+/** Straßen-/Adress-Labels nicht als „via …“ im HUD — nur echte Landmarken. */
+function isRoadLikeNavLabel(name: string): boolean {
+  const t = name.replace(/\s+/g, ' ').trim();
+  if (!t) return true;
+  if (
+    /\b(straße|strasse|str\.|allee|weg|platz|gasse|ring|damm|chaussee|ufer|allee)\b/iu.test(
+      t,
+    )
+  ) {
+    return true;
+  }
+  // Hausnummer / reine Adresse
+  if (/\d{1,4}[a-z]?\s*$/iu.test(t) && t.length <= 40) return true;
+  return false;
 }
 
 type HudMode = 'idle' | 'poi' | 'nav';
@@ -118,47 +149,132 @@ const NavHudMeta = React.memo(function NavHudMeta({
     const isMultiStop = tour != null && tour.stops.length > 1;
     const footTotalM = tour ? tour.estimatedDistanceM : s.navTotalDistanceM;
     const remaining = s.navDistanceM ?? footTotalM;
-    const nextWp =
+    const nextLandmark = s.navNextTargetName?.trim() || null;
+    const destName =
       (isMultiStop
         ? tour!.stops[tour!.currentIndex]?.name
         : null) ||
-      s.navNextTargetName ||
-      s.navTargetName;
+      s.navTargetName ||
+      'Ziel';
+    const destShort = stripNavDestLeak(destName.replace(/\s+/g, ' ').trim());
+    const landmarkBit =
+      nextLandmark &&
+      nextLandmark.toLowerCase() !== destShort.toLowerCase() &&
+      !isRoadLikeNavLabel(nextLandmark) &&
+      !/^[A-Z]\.\s+\w+/u.test(nextLandmark)
+        ? `via ${nextLandmark}`
+        : null;
     const travel = resolveActiveTravelMode().mode;
     const mobility =
       travel === 'bike'
         ? 'bike'
         : resolvePersonaEngine(getCachedUserProfile()).mobilityMode;
-    const totalEtaMin =
-      remaining != null && remaining > 0
-        ? travel === 'bike' || mobility === 'bike'
+    let walkFallback: number | null = null;
+    if (remaining != null && remaining > 0) {
+      walkFallback =
+        travel === 'bike' || mobility === 'bike'
           ? bikeMinutesForDistanceM(remaining)
-          : walkMinutesForDistanceM(remaining)
-        : null;
+          : walkMinutesForDistanceM(remaining);
+    }
+    const lastStopEndMs = tour
+      ? [...tour.stops]
+          .reverse()
+          .find((st) => st.endMs != null && Number.isFinite(st.endMs))?.endMs ??
+        null
+      : null;
+    const rideStartMs = tour
+      ? tour.stops.find((st) => {
+          const ms = st.vehicleStartMs;
+          return (
+            ms != null &&
+            Number.isFinite(ms) &&
+            (st.role === 'alight' || st.role === 'board' || Boolean(st.line))
+          );
+        })?.vehicleStartMs ?? null
+      : null;
+    const hudEta = pickNavHudEta({
+      lastStopEndMs,
+      rideStartMs,
+      navEtaMin: s.navEtaMin,
+      remainingM: remaining,
+      walkFallbackMin: walkFallback,
+      nowMs: Date.now(),
+    });
+    const totalEtaMin = hudEta.etaMin;
     const stopProg = isMultiStop
       ? `Stop ${Math.min(tour!.currentIndex + 1, tour!.stops.length)}/${tour!.stops.length}`
       : null;
+    const arriveClock =
+      hudEta.arriveMs != null
+        ? new Date(hudEta.arriveMs).toLocaleTimeString('de-DE', {
+            hour: '2-digit',
+            minute: '2-digit',
+          })
+        : null;
+    const transitHud = Boolean(
+      tour?.stops.some(
+        (st) =>
+          st.role === 'alight' || st.role === 'board' || Boolean(st.line),
+      ) || tour?.liveMeta,
+    );
+    const distEta = transitHud
+      ? totalEtaMin != null
+        ? formatDurationMinutesDe(totalEtaMin, 'short')
+        : null
+      : remaining != null
+        ? totalEtaMin != null
+          ? `${formatKm(remaining)} · ${formatDurationMinutesDe(totalEtaMin, 'short')}`
+          : formatKm(remaining)
+        : null;
     const parts = [
       stopProg,
-      nextWp ? nextWp : null,
-      remaining != null
-        ? totalEtaMin != null
-          ? `Gesamt ${formatKm(remaining)} · ~${totalEtaMin} Min`
-          : `Gesamt ${formatKm(remaining)}`
-        : null,
+      landmarkBit,
+      distEta,
+      arriveClock ? `Ankunft ${arriveClock}` : null,
       s.navPhase === 'in_transit'
         ? 'ÖPNV'
         : s.navPhase === 'walk_to_stop'
           ? 'Zur Haltestelle'
           : null,
+      s.navPhase === 'in_transit' && s.remainingStations != null
+        ? formatRemainingStations(s.remainingStations)
+        : null,
       showRouteHint ? ROUTE_HINT : null,
     ].filter(Boolean);
     return parts.join(' · ') || 'Route aktiv';
   });
 
   return (
-    <Text style={styles.meta} numberOfLines={2}>
+    <Text style={styles.meta} numberOfLines={2} ellipsizeMode="tail">
       {meta}
+    </Text>
+  );
+});
+
+const NavHudTitle = React.memo(function NavHudTitle() {
+  const title = useFinnusStore((s) => {
+    const tour = s.multiStopTour;
+    const open = (tour?.stops ?? []).filter((x) => !x.done);
+    const finalStop =
+      open.length > 1
+        ? open.find((x) => x.role === 'dest') ?? open[open.length - 1]
+        : null;
+    const name =
+      (tour?.title && /^Reise\b/i.test(tour.title.trim())
+        ? tour.title.trim()
+        : null) ||
+      (finalStop?.name && finalStop.name.trim()) ||
+      (tour != null && tour.stops.length > 1
+        ? tour.title.replace(/^ÖPNV\s*→\s*/i, '').trim()
+        : null) ||
+      s.navTargetName?.trim() ||
+      'Ziel';
+    const clean = stripNavDestLeak(name.replace(/\s+/g, ' ').trim());
+    return formatNavHudTitle(clean, s.transportMode);
+  });
+  return (
+    <Text style={styles.location} numberOfLines={2} ellipsizeMode="tail">
+      {title}
     </Text>
   );
 });
@@ -173,6 +289,9 @@ export const Header = React.memo(function Header({
   planCalendarRef,
   stampMapRef,
   settingsDisabled,
+  overlay,
+  hideTools,
+  fullBleedLive,
 }: Props) {
   const currentLocationName = useFinnusStore((s) => s.currentLocationName);
   const currentPoiId = useFinnusStore((s) => s.currentPoiId);
@@ -214,6 +333,7 @@ export const Header = React.memo(function Header({
   const cardsLenRef = useRef(1);
   const cardIndexRef = useRef(0);
   const didSwipeRef = useRef(false);
+  const lastNavTapRef = useRef<{ key: string; at: number } | null>(null);
   const fade = useRef(new Animated.Value(1)).current;
 
   useEffect(() => {
@@ -221,6 +341,7 @@ export const Header = React.memo(function Header({
     void tickProactiveReminderEngine({ force: true });
     void ensureMealHudFresh({ force: true });
     void ensureNearbyAmenityHudFresh({ force: true });
+    void ensureSunsetHudFresh({ force: true });
     const unsubTip = subscribeHudTip(() => {
       setCardTick((n) => n + 1);
     });
@@ -230,17 +351,22 @@ export const Header = React.memo(function Header({
     const unsubAmenity = subscribeNearbyAmenityHud(() => {
       setCardTick((n) => n + 1);
     });
+    const unsubSunset = subscribeSunsetHud(() => {
+      setCardTick((n) => n + 1);
+    });
     const interval = setInterval(() => {
       evaluateProactiveHud({ force: false });
       void tickProactiveReminderEngine({ force: false });
       void ensureMealHudFresh();
       void ensureNearbyAmenityHudFresh();
+      void ensureSunsetHudFresh();
       setCardTick((n) => n + 1);
     }, Math.min(HUD_ENGINE_INTERVAL_MS, 120_000));
     return () => {
       unsubTip();
       unsubMeal();
       unsubAmenity();
+      unsubSunset();
       clearInterval(interval);
     };
   }, []);
@@ -251,10 +377,18 @@ export const Header = React.memo(function Header({
     return 'idle';
   }, [currentPoiId, currentLocationName, navigating]);
 
+  const [laneW, setLaneW] = useState(() =>
+    Math.max(120, Dimensions.get('window').width - HUD_TEXT_PAD_X),
+  );
+  const cardWidth = laneW;
+  const cardWidthRef = useRef(cardWidth);
+  cardWidthRef.current = cardWidth;
+
   const cards: LiveHudCard[] = useMemo(() => {
-    return buildLiveHudCards({ mode });
+    return buildLiveHudCards({ mode, textWidthPx: laneW });
   }, [
     mode,
+    laneW,
     cardTick,
     currentLocationName,
     currentPoiId,
@@ -276,27 +410,29 @@ export const Header = React.memo(function Header({
 
   const loopEnabled = mode === 'idle' && cards.length > 1;
 
-  const scrollToLogical = useCallback(
-    (logical: number, animated: boolean) => {
-      const w = Math.max(120, Dimensions.get('window').width - 120);
-      const len = cardsLenRef.current;
-      if (len <= 1) {
-        scrollRef.current?.scrollTo({ x: logical * w, animated });
-        return;
-      }
-      // +1 wegen führendem Clone
-      scrollRef.current?.scrollTo({ x: (logical + 1) * w, animated });
-    },
-    [],
-  );
+  const scrollToLogical = useCallback((logical: number, animated: boolean) => {
+    const w = cardWidthRef.current;
+    const len = cardsLenRef.current;
+    if (len <= 1) {
+      scrollRef.current?.scrollTo({ x: logical * w, animated });
+      return;
+    }
+    // +1 wegen führendem Clone
+    scrollRef.current?.scrollTo({ x: (logical + 1) * w, animated });
+  }, []);
+
+  useEffect(() => {
+    requestAnimationFrame(() => {
+      scrollToLogical(cardIndexRef.current, false);
+    });
+  }, [cardWidth, scrollToLogical]);
 
   // Nur bei Mode-Wechsel zurücksetzen — NICHT bei jedem Karten-Inhalt-Update
   useEffect(() => {
     setCardIndex(0);
     cardIndexRef.current = 0;
-    const w = Math.max(120, Dimensions.get('window').width - 120);
-    // Idle-Loop startet auf erstem echten Slot (Index 1)
     requestAnimationFrame(() => {
+      const w = cardWidthRef.current;
       scrollRef.current?.scrollTo({
         x: mode === 'idle' && cardsLenRef.current > 1 ? w : 0,
         animated: false,
@@ -322,7 +458,7 @@ export const Header = React.memo(function Header({
       if (Date.now() < autoResumeAtMs.current) return;
       const len = cardsLenRef.current;
       if (len <= 1) return;
-      const w = Math.max(120, Dimensions.get('window').width - 120);
+      const w = cardWidthRef.current;
       const prev = cardIndexRef.current;
       const next = (prev + 1) % len;
       cardIndexRef.current = next;
@@ -373,16 +509,75 @@ export const Header = React.memo(function Header({
     void import('../services/onboarding/uiCoachMarks').then((m) =>
       m.onUserOpenedStampMap(),
     );
+    openPassportRef.current?.({ tab: openTab });
     if (openTab === 'route' || mode === 'nav') {
       void markHudRouteOverlayUsed();
     }
-    openPassportRef.current?.({ tab: openTab });
     setShowStampCoach(false);
     setTimeout(refreshHints, 80);
   }, [openTab, mode, refreshHints]);
 
+  const handleOpenStampMap = useCallback(() => {
+    void markHudStempelkarteUsed();
+    void markFeatureTipCompleted('visit_passport');
+    void import('../services/onboarding/uiCoachMarks').then((m) =>
+      m.onUserOpenedStampMap(),
+    );
+    openPassportRef.current?.({ tab: openTab });
+    setShowStampCoach(false);
+    setTimeout(refreshHints, 80);
+  }, [openTab, refreshHints]);
+
   const handleTellMore = useCallback(() => {
     void markHudLongPressMoreUsed().then(refreshHints);
+    // Nav aktiv / Route-Karte → Stempelkarte Route-Tab
+    if (
+      mode === 'nav' ||
+      activeCard?.openRoutePassport ||
+      activeCard?.id?.startsWith('nav-')
+    ) {
+      if (onOpenPlanCalendar) onOpenPlanCalendar();
+      else handleOpenPassport();
+      void markHudRouteOverlayUsed().then(refreshHints);
+      return;
+    }
+    // Gastro-HUD → Pitch (1–2 Optionen), nicht still Nav zum ersten Treffer
+    if (activeCard?.id?.startsWith('meal-') || activeCard?.id === 'sunset-spots') {
+      const prompt =
+        activeCard.tellMorePrompt ||
+        'Mittagessen in der Nähe — zwei kurze Optionen zum Auswählen.';
+      onTellMore?.(prompt);
+      return;
+    }
+    // Konkreter Ort auf der Live-Karte → Navigation starten (Debounce)
+    const dest = activeCard?.navDest;
+    if (
+      dest &&
+      Number.isFinite(dest.lat) &&
+      Number.isFinite(dest.lng) &&
+      dest.name.trim()
+    ) {
+      const now = Date.now();
+      const key = `${dest.name}|${dest.lat.toFixed(4)},${dest.lng.toFixed(4)}`;
+      if (
+        lastNavTapRef.current &&
+        lastNavTapRef.current.key === key &&
+        now - lastNavTapRef.current.at < 8_000
+      ) {
+        return;
+      }
+      lastNavTapRef.current = { key, at: now };
+      useFinnusStore.getState().setNavRouteLoading(true);
+      useFinnusStore.getState().setIsGenerating(true);
+      void import('../services/navigation/handsFreeNav').then((m) =>
+        m.commitHandsFreeNavStart({
+          name: dest.name.trim(),
+          lat: dest.lat,
+          lng: dest.lng,
+        }),
+      );
+      return;
+    }
     // Wetter-HUD: eigener Tagescheck — kein Concierge/Planning (keine offenen Pläne)
     if (
       activeCard?.id === 'weather-live' ||
@@ -394,14 +589,16 @@ export const Header = React.memo(function Header({
       return;
     }
     const prompt =
-      activeCard?.tellMorePrompt ||
-      (mode === 'nav'
-        ? `Kurz: wie komme ich zu ${navTargetName || 'Ziel'}?`
-        : 'Was wäre jetzt am hilfreichsten?');
+      activeCard?.tellMorePrompt || 'Was wäre jetzt am hilfreichsten?';
     onTellMore?.(prompt);
-  }, [activeCard, mode, navTargetName, onTellMore, refreshHints]);
-
-  const cardWidth = Math.max(120, Dimensions.get('window').width - 120);
+  }, [
+    activeCard,
+    handleOpenPassport,
+    mode,
+    onTellMore,
+    onOpenPlanCalendar,
+    refreshHints,
+  ]);
 
   const onScrollEnd = useCallback(
     (e: NativeSyntheticEvent<NativeScrollEvent>) => {
@@ -444,9 +641,18 @@ export const Header = React.memo(function Header({
 
   const onCardTap = useCallback(() => {
     if (didSwipeRef.current || userSwiping.current) return;
+    // Route/NavDest brauchen kein onTellMore — Passport/Start reichen
+    if (
+      mode === 'nav' ||
+      activeCard?.openRoutePassport ||
+      activeCard?.navDest
+    ) {
+      handleTellMore();
+      return;
+    }
     if (!onTellMore) return;
     handleTellMore();
-  }, [handleTellMore, onTellMore]);
+  }, [activeCard, handleTellMore, mode, onTellMore]);
 
   const titleFallback =
     mode === 'poi' && currentLocationName?.trim()
@@ -461,12 +667,24 @@ export const Header = React.memo(function Header({
   const presenceLine = presenceHint(findusPresence);
 
   return (
-    <View style={styles.hudBlock} pointerEvents="box-none">
+    <View
+      style={[
+        styles.hudBlock,
+        overlay && !fullBleedLive && styles.hudBlockOverlay,
+        fullBleedLive && styles.hudBlockFullBleed,
+      ]}
+      pointerEvents="box-none"
+    >
       <View style={styles.topRow} pointerEvents="box-none">
         <View
           ref={locationRef as React.RefObject<View> | undefined}
           collapsable={false}
           style={styles.titleSide}
+          onLayout={(e) => {
+            const outer = Math.round(e.nativeEvent.layout.width);
+            const inner = Math.max(120, outer - HUD_TEXT_PAD_X);
+            if (Math.abs(inner - laneW) >= 2) setLaneW(inner);
+          }}
         >
           {loopEnabled ? (
             <View style={styles.locationPress}>
@@ -494,14 +712,22 @@ export const Header = React.memo(function Header({
                       accessibilityLabel={
                         c.id === 'weather-live'
                           ? `${c.title}. Tippen: Wetter und Tipps. Wischen: nächste Karte.`
-                          : `${c.title}. Tippen: Tipps. Wischen: nächste Karte. Stempelkarte: Karten-Icon unter dem Zahnrad.`
+                          : `${c.title}. Tippen: Tipps. Wischen: nächste Karte. Unten: Timeline · Orte · Einst.`
                       }
                     >
-                      <Text style={styles.location} numberOfLines={1}>
+                      <Text
+                        style={styles.location}
+                        numberOfLines={1}
+                        ellipsizeMode="tail"
+                      >
                         {c.title}
                       </Text>
                       {c.meta ? (
-                        <Text style={styles.meta} numberOfLines={2}>
+                        <Text
+                          style={styles.meta}
+                          numberOfLines={2}
+                          ellipsizeMode="tail"
+                        >
                           {c.meta}
                         </Text>
                       ) : null}
@@ -526,8 +752,8 @@ export const Header = React.memo(function Header({
               accessibilityRole="button"
               accessibilityLabel={
                 mode === 'nav'
-                  ? 'Live-Anzeige. Tippen für Tipps zur Route. Stempelkarte: Karten-Icon unter dem Zahnrad.'
-                  : 'Live-Anzeige. Tippen für Tipps. Stempelkarte: Karten-Icon unter dem Zahnrad.'
+                  ? 'Live-Anzeige. Tippen für Tipps zur Route. Unten: Timeline · Orte · Einst.'
+                  : 'Live-Anzeige. Tippen für Tipps. Unten: Timeline · Orte · Einst.'
               }
               style={[
                 styles.locationPress,
@@ -536,12 +762,24 @@ export const Header = React.memo(function Header({
               ]}
             >
               <Animated.View style={{ opacity: fade }}>
-                <Text style={styles.location} numberOfLines={2}>
-                  {activeCard?.title ?? titleFallback}
-                </Text>
+                {mode === 'nav' ? (
+                  <NavHudTitle />
+                ) : (
+                  <Text
+                    style={styles.location}
+                    numberOfLines={2}
+                    ellipsizeMode="tail"
+                  >
+                    {activeCard?.title ?? titleFallback}
+                  </Text>
+                )}
                 {mode === 'poi' && isAudiblySpeaking ? null : activeCard?.meta &&
                   mode !== 'nav' ? (
-                  <Text style={styles.meta} numberOfLines={1}>
+                  <Text
+                    style={styles.meta}
+                    numberOfLines={2}
+                    ellipsizeMode="tail"
+                  >
                     {activeCard.meta}
                   </Text>
                 ) : null}
@@ -553,11 +791,6 @@ export const Header = React.memo(function Header({
                   {presenceLine ? (
                     <Text style={styles.meta} numberOfLines={1}>
                       {presenceLine}
-                    </Text>
-                  ) : null}
-                  {cards[1] ? (
-                    <Text style={styles.meta} numberOfLines={1}>
-                      {cards[1].title}
                     </Text>
                   ) : null}
                 </>
@@ -572,6 +805,7 @@ export const Header = React.memo(function Header({
           )}
         </View>
 
+        {hideTools ? null : (
         <View style={styles.settingsWrap} pointerEvents="auto">
           <View style={styles.rightCluster}>
             <View style={styles.rightTopRow}>
@@ -644,6 +878,8 @@ export const Header = React.memo(function Header({
             >
               <TouchableOpacity
                 onPress={handleOpenPassport}
+                onLongPress={handleOpenStampMap}
+                delayLongPress={380}
                 disabled={!onOpenPassport}
                 hitSlop={{ top: 8, bottom: 12, left: 8, right: 8 }}
                 activeOpacity={0.75}
@@ -652,18 +888,19 @@ export const Header = React.memo(function Header({
                   !onOpenPassport && styles.settingsBtnDisabled,
                 ]}
                 accessibilityRole="button"
-                accessibilityLabel="Stempelkarte"
+                accessibilityLabel="Orte und Stempelkarte — unten Orte oder Fortschritts-Chip."
               >
                 <Feather name="map" size={20} color={colors.text} />
               </TouchableOpacity>
               {showStampCoach ? (
                 <Text style={styles.coachArrow} numberOfLines={1}>
-                  ← Stempelkarte
+                  ← Karte
                 </Text>
               ) : null}
             </View>
           </View>
         </View>
+        )}
       </View>
     </View>
   );
@@ -671,11 +908,21 @@ export const Header = React.memo(function Header({
 
 const styles = StyleSheet.create({
   hudBlock: {
+    width: '100%',
     paddingHorizontal: spacing.md,
-    paddingTop: spacing.sm,
-    paddingBottom: spacing.xs ?? 4,
+    paddingTop: spacing.xs,
+    paddingBottom: spacing.xs,
     zIndex: UI_LAYER.hud,
     elevation: UI_LAYER.hud,
+    backgroundColor: colors.bg,
+  },
+  hudBlockOverlay: {
+    backgroundColor: 'transparent',
+  },
+  /** Volle Breite + solider Cut zur Karte darunter. */
+  hudBlockFullBleed: {
+    paddingHorizontal: 0,
+    backgroundColor: colors.bg,
   },
   topRow: {
     flexDirection: 'row',
@@ -686,11 +933,15 @@ const styles = StyleSheet.create({
   titleSide: {
     flex: 1,
     minWidth: 0,
-    paddingTop: 2,
+    alignSelf: 'stretch',
+    alignItems: 'stretch',
+    paddingTop: 0,
   },
   locationPress: {
     width: '100%',
+    alignSelf: 'stretch',
     paddingVertical: 2,
+    paddingHorizontal: spacing.md,
   },
   locationPressNav: {
     borderLeftWidth: 3,
@@ -703,17 +954,26 @@ const styles = StyleSheet.create({
     paddingLeft: spacing.sm,
   },
   location: {
+    width: '100%',
     color: colors.text,
     fontSize: 16,
     fontWeight: '700',
     lineHeight: 20,
+    textAlign: 'left',
+    textShadowColor: 'rgba(15,44,36,0.9)',
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 8,
   },
   meta: {
+    width: '100%',
     marginTop: 2,
     color: colors.textMuted,
     fontSize: 12,
     lineHeight: 15,
-    maxHeight: 30,
+    maxHeight: 36,
+    textShadowColor: 'rgba(15,44,36,0.9)',
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 6,
   },
   hintMini: {
     marginTop: 3,

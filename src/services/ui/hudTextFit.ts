@@ -1,6 +1,19 @@
 /**
- * HUD-Text: max. Zeilen, kein harter Schnitt an Doppelpunkt/Wortmitte.
+ * HUD-Text: max. Zeilen-Budget, kein harter Schnitt an Doppelpunkt/Wortmitte.
+ * Umbruch macht React Native an der echten Breite — hier kein künstliches `\n`.
  */
+
+/** ~0.52em Durchschnitt; eher knapp, damit Truncation nicht zu früh greift. */
+const HUD_GLYPH_EM = 0.52;
+
+/** Fallback, wenn die Lane noch nicht gemessen ist (volle HUD-Breite, ~360er Phone). */
+export const HUD_META_CHARS_PER_LINE = 52;
+export const HUD_TITLE_CHARS_PER_LINE = 56;
+
+export function hudCharsForWidth(widthPx: number, fontSize: number): number {
+  if (!(widthPx > 0) || !(fontSize > 0)) return HUD_META_CHARS_PER_LINE;
+  return Math.max(28, Math.floor(widthPx / (fontSize * HUD_GLYPH_EM)));
+}
 
 export function fitHudLine(text: string, maxChars: number): string {
   const t = text.replace(/\s+/g, ' ').trim();
@@ -17,38 +30,19 @@ export function fitHudLine(text: string, maxChars: number): string {
   return cut.replace(/[:·,;/\-–—]\s*$/u, '').trim();
 }
 
-/** Bis zu `maxLines` Zeilen à ~`charsPerLine` Zeichen. */
+/**
+ * Kürzt auf max. Zeilen-Budget. Kein erzwungenes `\n` —
+ * sonst bricht der Text um, obwohl in der Live-Anzeige noch Platz ist.
+ */
 export function fitHudMeta(
   text: string,
   opts?: { maxLines?: number; charsPerLine?: number },
 ): string {
   const maxLines = opts?.maxLines ?? 2;
-  const charsPerLine = opts?.charsPerLine ?? 38;
+  const charsPerLine = opts?.charsPerLine ?? HUD_META_CHARS_PER_LINE;
   const t = text.replace(/\s+/g, ' ').trim();
   if (!t) return '';
-  if (t.length <= charsPerLine) return t;
-
-  const words = t.split(' ');
-  const lines: string[] = [];
-  let cur = '';
-  for (const w of words) {
-    const next = cur ? `${cur} ${w}` : w;
-    if (next.length <= charsPerLine) {
-      cur = next;
-      continue;
-    }
-    if (cur) lines.push(cur);
-    cur = w;
-    if (lines.length >= maxLines) break;
-  }
-  if (lines.length < maxLines && cur) {
-    lines.push(fitHudLine(cur, charsPerLine));
-  }
-  while (lines.length > maxLines) lines.pop();
-  // Letzte Zeile ggf. kürzen ohne Doppelpunkt-Abfall
-  if (lines.length) {
-    const last = lines.length - 1;
-    lines[last] = fitHudLine(lines[last]!, charsPerLine);
-  }
-  return lines.filter(Boolean).join('\n');
+  const budget = Math.max(1, maxLines) * Math.max(1, charsPerLine);
+  if (t.length <= budget) return t;
+  return fitHudLine(t, budget);
 }

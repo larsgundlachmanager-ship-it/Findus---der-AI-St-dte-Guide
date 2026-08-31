@@ -5,6 +5,11 @@
 import * as FileSystem from 'expo-file-system';
 import { dateKeyFromMs, uid } from '../../utils/dateKeys';
 import { upsertVisitFromStamp } from './visitLog';
+import { isParkingSearchIntent } from '../concierge/timeCareIntent';
+import { parkingTicketAtArrival } from './parkingTicketMath';
+
+export { isParkingSearchIntent } from '../concierge/timeCareIntent';
+export { parkingTicketAtArrival } from './parkingTicketMath';
 
 export type ParkingSpot = {
   id: string;
@@ -115,37 +120,194 @@ function formatDurationDe(totalMin: number): string {
   return `${h} Std ${rest} Min`;
 }
 
-/** Kompakte HUD-Zeile: „geparkt seit …“ / „T− …“ / „… schon drüber“. */
-export function formatParkingHudCard(nowMs = Date.now()): {
+function resolveTravelMinToSpot(spot: ParkingSpot): {
+  travelMin: number;
+  modeLabel: string;
+} | null {
+  try {
+    const {
+      getLastParkingWalkMinEstimate,
+    } = require('./parkingCareEngine') as {
+      getLastParkingWalkMinEstimate: () => number | null;
+    };
+    const cached = getLastParkingWalkMinEstimate();
+    if (cached != null && cached > 0) {
+      let modeLabel = 'Fuß';
+      try {
+        const { resolveActiveTravelMode } = require('../navigation/travelModeContext') as {
+          resolveActiveTravelMode: () => { mode: string };
+        };
+        if (resolveActiveTravelMode().mode === 'bike') modeLabel = 'Rad';
+      } catch {
+        /* soft */
+      }
+      return { travelMin: cached, modeLabel };
+    }
+  } catch {
+    /* soft */
+  }
+  if (spot.lat == null || spot.lng == null) return null;
+  try {
+    const { useFinnusStore } = require('../../store/useFinnusStore') as {
+      useFinnusStore: {
+        getState: () => {
+          lastGpsLat: number | null;
+          lastGpsLng: number | null;
+        };
+      };
+    };
+    const { haversineMeters } = require('../../db/database') as {
+      haversineMeters: (
+        aLat: number,
+        aLng: number,
+        bLat: number,
+        bLng: number,
+      ) => number;
+    };
+    const gps = useFinnusStore.getState();
+    if (
+      gps.lastGpsLat == null ||
+      gps.lastGpsLng == null ||
+      !Number.isFinite(gps.lastGpsLat) ||
+      !Number.isFinite(gps.lastGpsLng)
+    ) {
+      return null;
+    }
+    const dist = haversineMeters(
+      gps.lastGpsLat,
+      gps.lastGpsLng,
+      spot.lat,
+      spot.lng,
+    );
+    let travelMin = Math.max(1, Math.ceil(dist / 80));
+    let modeLabel = 'Fuß';
+    try {
+      const { resolveActiveTravelMode } = require('../navigation/travelModeContext') as {
+        resolveActiveTravelMode: () => { mode: string };
+      };
+      const { walkMinutesForDistanceM, bikeMinutesForDistanceM } = require('../navigation/travelEta') as {
+        walkMinutesForDistanceM: (m: number) => number;
+        bikeMinutesForDistanceM: (m: number) => number;
+      };
+      const mode = resolveActiveTravelMode().mode;
+      if (mode === 'bike') {
+        travelMin = bikeMinutesForDistanceM(dist);
+        modeLabel = 'Rad';
+      } else {
+        travelMin = walkMinutesForDistanceM(dist);
+        modeLabel = 'Fuß';
+      }
+    } catch {
+      /* keep fallback */
+    }
+    return { travelMin, modeLabel };
+  } catch {
+    return null;
+  }
+}
+
+export type ParkingHudCardLine = {
   title: string;
   meta?: string;
-} | null {
+  tellMorePrompt: string;
+  navDest?: { name: string; lat: number; lng: number };
+};
+
+/** Kompakte HUD-Zeile: Wegzeit + Restzeit bei Ankunft / drüber. */
+export function formatParkingHudCard(nowMs = Date.now()): ParkingHudCardLine | null {
   void hydrateParkingSpot();
   if (!spot) return null;
-  const elapsedMin = Math.max(
-    0,
-    Math.round((nowMs - spot.parkedAtMs) / 60_000),
-  );
-  const since = formatDurationDe(elapsedMin);
+  const travel = resolveTravelMinToSpot(spot);
+  const ticket = parkingTicketAtArrival({
+    nowMs,
+    parkedAtMs: spot.parkedAtMs,
+    maxDurationMin: spot.maxDurationMin,
+    travelMin: travel?.travelMin ?? 0,
+  });
+  const since = formatDurationDe(ticket.elapsedMin);
+  const navDest =
+    spot.lat != null &&
+    spot.lng != null &&
+    Number.isFinite(spot.lat) &&
+    Number.isFinite(spot.lng)
+      ? { name: spot.label || 'Parkplatz', lat: spot.lat, lng: spot.lng }
+      : undefined;
 
-  if (spot.maxDurationMin != null && spot.maxDurationMin > 0) {
-    const rem = spot.maxDurationMin - elapsedMin;
-    if (rem > 0) {
-      return {
-        title: `🅿️ ${spot.label} · T− ${formatDurationDe(rem)}`,
-        meta: `Geparkt seit ${since}`,
-      };
+  const travelBit = travel
+    ? `~${travel.travelMin} Min ${travel.modeLabel}`
+    : null;
+
+  let arrivalBit: string | null = null;
+  if (ticket.remAtArrivalMin != null && travel) {
+    if (ticket.remAtArrivalMin > 0) {
+      arrivalBit = `bei Ankunft noch ${formatDurationDe(ticket.remAtArrivalMin)}`;
+    } else if (ticket.remAtArrivalMin === 0) {
+      arrivalBit = 'bei Ankunft gerade abgelaufen';
+    } else {
+      arrivalBit = `bei Ankunft ${formatDurationDe(Math.abs(ticket.remAtArrivalMin))} drüber`;
     }
-    const over = Math.abs(rem);
-    return {
-      title: `🅿️ ${spot.label} · ${formatDurationDe(over)} drüber`,
-      meta: `Max ${formatDurationDe(spot.maxDurationMin)}`,
-    };
+  } else if (ticket.remNowMin != null) {
+    if (ticket.remNowMin > 0) {
+      arrivalBit = `noch ${formatDurationDe(ticket.remNowMin)}`;
+    } else {
+      arrivalBit = `${formatDurationDe(Math.abs(ticket.remNowMin))} drüber`;
+    }
   }
 
+  const metaParts = [
+    travelBit,
+    arrivalBit,
+    !travelBit && !arrivalBit ? `Geparkt seit ${since}` : null,
+    travelBit && ticket.remAtArrivalMin == null ? `seit ${since}` : null,
+  ].filter(Boolean) as string[];
+
+  let title: string;
+  if (ticket.remNowMin != null) {
+    if (ticket.remNowMin > 0) {
+      title = `🅿️ ${spot.label} · T− ${formatDurationDe(ticket.remNowMin)}`;
+    } else {
+      title = `🅿️ ${spot.label} · ${formatDurationDe(Math.abs(ticket.remNowMin))} drüber`;
+    }
+  } else {
+    title = `🅿️ ${spot.label}`;
+  }
+
+  const tellBits: string[] = [];
+  if (travel) {
+    tellBits.push(
+      `Route zurück zum ${spot.label || 'Parkplatz'} — ca. ${travel.travelMin} Min ${travel.modeLabel}`,
+    );
+  } else {
+    tellBits.push(`Route zurück zum ${spot.label || 'Parkplatz'}`);
+  }
+  if (ticket.remAtArrivalMin != null && travel) {
+    if (ticket.remAtArrivalMin > 0) {
+      tellBits.push(
+        `bei Ankunft noch ca. ${formatDurationDe(ticket.remAtArrivalMin)} Ticketzeit`,
+      );
+    } else if (ticket.remAtArrivalMin === 0) {
+      tellBits.push('bei Ankunft wäre das Ticket gerade abgelaufen');
+    } else {
+      tellBits.push(
+        `bei Ankunft ca. ${formatDurationDe(Math.abs(ticket.remAtArrivalMin))} über der Zeit`,
+      );
+    }
+  } else if (ticket.remNowMin != null) {
+    if (ticket.remNowMin > 0) {
+      tellBits.push(`Ticket noch ${formatDurationDe(ticket.remNowMin)}`);
+    } else {
+      tellBits.push(
+        `Ticket schon ${formatDurationDe(Math.abs(ticket.remNowMin))} drüber`,
+      );
+    }
+  }
+  tellBits.push('Navigation starten und Leave-by klar sagen.');
+
   return {
-    title: `🅿️ ${spot.label}`,
-    meta: `Geparkt seit ${since}`,
+    title,
+    meta: metaParts.length ? metaParts.join(' · ') : `Geparkt seit ${since}`,
+    tellMorePrompt: tellBits.join(' — '),
+    navDest,
   };
 }
 
@@ -191,9 +353,25 @@ export function parseParkingMaxDurationMin(text: string): number | null {
 export function isParkingSpotSaveIntent(text: string): boolean {
   const t = text.replace(/\s+/g, ' ').trim();
   if (!t) return false;
+  if (isParkingSearchIntent(t)) return false;
   if (
     /\bparkticket\b/iu.test(t) &&
-    /\b(?:bis|gilt|läuft|laeuft|uhr|\d{1,2}[:.]\d{2})\b/iu.test(t)
+    /\b(?:bis|gilt|läuft|laeuft|uhr|\d{1,2}[:.]\d{2}|stunden|stunde)\b/iu.test(t)
+  ) {
+    return true;
+  }
+  // „Mein Auto — darf nur 3 Stunden parken“ — nicht „mit dem Auto … Parkplatz suchen“
+  if (
+    /\b(?:mein(?:en)?\s+)?auto\b/iu.test(t) &&
+    /\b(?:park(?:en|platz|ticket)|ticket)\b/iu.test(t) &&
+    /\b(speicher|merk|hier|geparkt|darf\s+nur|maximale\s+park)\b/iu.test(t)
+  ) {
+    return true;
+  }
+  if (
+    /\bpark(?:en|platz|ticket)\b/iu.test(t) &&
+    parseParkingMaxDurationMin(t) != null &&
+    /\b(speicher|merk|ticket|darf\s+nur|max\.?)\b/iu.test(t)
   ) {
     return true;
   }

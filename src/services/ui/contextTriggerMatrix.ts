@@ -161,7 +161,7 @@ export function evaluateContextTriggers(opts?: {
       id: 'wake_alarm_check',
       score: part === 'night' ? 92 : 40,
       title: 'Wecker',
-      prompt: 'Soll ich einen Wecker für morgen stellen oder prüfen?',
+      prompt: 'Wecker für morgen — passende Zeit vorschlagen und stellen.',
       actions: [
         {
           type: 'SET_WAKE_ALARM',
@@ -289,25 +289,63 @@ export function evaluateContextTriggers(opts?: {
       title: (() => {
         const wx = getCachedWeatherSnapshot() as {
           sunsetMs?: number | null;
+          summaryLine?: string | null;
+          weatherCode?: number | null;
+          precipitationMm?: number | null;
+          isHeavyRain?: boolean;
         } | null;
-        if (wx?.sunsetMs && wx.sunsetMs > Date.now() - 30 * 60_000) {
-          const t = new Date(wx.sunsetMs).toLocaleTimeString('de-DE', {
-            hour: '2-digit',
-            minute: '2-digit',
-          });
-          return `Sonnenuntergang: ${t} Uhr`;
+        let sunsetMs =
+          wx?.sunsetMs && wx.sunsetMs > Date.now() - 30 * 60_000
+            ? wx.sunsetMs
+            : null;
+        if (sunsetMs == null) {
+          try {
+            const store = require('../../store/useFinnusStore') as {
+              useFinnusStore: {
+                getState: () => {
+                  lastGpsLat: number | null;
+                  lastGpsLng: number | null;
+                };
+              };
+            };
+            const { computeSunsetMs } = require('../geo/solarTimes') as {
+              computeSunsetMs: (
+                lat: number,
+                lng: number,
+                nowMs: number,
+              ) => number | null;
+            };
+            const g = store.useFinnusStore.getState();
+            if (
+              g.lastGpsLat != null &&
+              g.lastGpsLng != null &&
+              Number.isFinite(g.lastGpsLat) &&
+              Number.isFinite(g.lastGpsLng)
+            ) {
+              sunsetMs = computeSunsetMs(
+                g.lastGpsLat,
+                g.lastGpsLng,
+                Date.now(),
+              );
+            }
+          } catch {
+            /* soft */
+          }
         }
-        return 'Sonnenuntergang';
+        if (sunsetMs == null || sunsetMs <= Date.now() - 30 * 60_000) {
+          return 'Sonnenuntergang';
+        }
+        const t = new Date(sunsetMs).toLocaleTimeString('de-DE', {
+          hour: '2-digit',
+          minute: '2-digit',
+        });
+        // Uhr zuerst — Truncation darf die Zeit nicht schlucken
+        return `🌅 ${t} Sonnenuntergang`;
       })(),
-      prompt: 'Wann Sonnenuntergang und wo der beste Spot?',
-    });
-    push({
-      id: 'supermarket_evening',
-      score: 72,
-      title: 'Supermarkt',
       prompt:
-        'Supermarkt-Öffnungszeiten in der Nähe für Snacks/Getränke — live, nicht schätzen.',
+        'Wann genau ist Sonnenuntergang, wie ist das Wetter dafür, und wo der beste Spot — Route wenn klar.',
     });
+    // supermarket_evening: nur Fallback — konkrete Nearby-Karte schlägt später
     push({
       id: 'day_summary',
       score: part === 'evening' ? 65 : 40,

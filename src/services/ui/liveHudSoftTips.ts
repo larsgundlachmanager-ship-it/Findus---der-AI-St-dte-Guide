@@ -48,12 +48,25 @@ export function pinnedIdeaSoftTips(nowMs = Date.now()): SoftHudTip[] {
 
   const plan = useSessionPlanStore.getState().getActivePlan();
   const openStop = plan?.stops.find((s) => !s.done);
-  if (openStop) {
+  let planNudgeMuted = false;
+  try {
+    const {
+      isPlanOpenPointNudgeMuted,
+    } = require('../navigation/modulePriorityPolicy') as {
+      isPlanOpenPointNudgeMuted: () => boolean;
+    };
+    planNudgeMuted = isPlanOpenPointNudgeMuted();
+  } catch {
+    planNudgeMuted = false;
+  }
+  if (openStop && !planNudgeMuted) {
     tips.push({
       id: `pin-stop-${openStop.id}`,
       title: `${openStop.label} — noch offen?`,
       meta: fitHudMeta(
-        'Steckt in deinem Plan. Tippen, wenn ich Route oder Leave-by machen soll.',
+        openStop.arriveByMs != null
+          ? 'Steckt in deinem Plan — Leave-by & Route bereit.'
+          : 'Steckt in deinem Plan.',
       ),
       tellMorePrompt: `Geplanter Stopp „${openStop.label}“ — wann los und Route?`,
       score: openStop.arriveByMs != null ? 62 : 52,
@@ -79,37 +92,15 @@ export function pinnedIdeaSoftTips(nowMs = Date.now()): SoftHudTip[] {
   return tips;
 }
 
-/** Erkundungs-Fragen — profilnah, frageförmig, ohne Druck. */
+/** Erkundungs-Fragen — nur profilnah, ohne leere Kategorie-Listen. */
 export function exploreNudgeSoftTips(nowMs = Date.now()): SoftHudTip[] {
   const profile = getCachedUserProfile();
-  const cityLabel =
-    profile?.cityName?.trim() || profile?.cityId || 'der Nähe';
   const prefs = profile?.experiencePrefs ?? {};
-  const h = new Date(nowMs).getHours();
   const tips: SoftHudTip[] = [];
   const wantBlob = (profile?.wantToExperience ?? '').toLowerCase();
 
-  tips.push({
-    id: 'explore-near',
-    title: 'Was lohnt sich hier um die Ecke?',
-    meta: fitHudMeta(
-      `Kurzer Erkundungs-Vorschlag in ${cityLabel} — nur wenn’s zu dir passt.`,
-    ),
-    tellMorePrompt: `Ein Erkundungs-Vorschlag in meiner Nähe in ${cityLabel}, der zu meinen Vorlieben passt — kurz warum, Fußweg, Route.`,
-    score: h >= 10 && h <= 18 ? 50 : 34,
-    theme: 'soft_city',
-  });
-
-  if (prefs.museen === 'yes' || /museum|kunst/.test(wantBlob)) {
-    tips.push({
-      id: 'explore-museum',
-      title: 'Museum in Gehweite?',
-      meta: fitHudMeta('Du magst Museen — ich checke was offen und nah ist.'),
-      tellMorePrompt: `Welches Museum in ${cityLabel} ist jetzt offen und in der Nähe — mit Route.`,
-      score: 57,
-      theme: 'user_relevant',
-    });
-  }
+  // Keine Soft-Kategorie-Karten ohne Nearby-Treffer — konkrete Orte kommen
+  // aus Meal-/Amenity-Cache. Nur leichte Profil-Nudge wenn klar gewünscht.
 
   if (
     prefs.natur === 'yes' ||
@@ -126,21 +117,6 @@ export function exploreNudgeSoftTips(nowMs = Date.now()): SoftHudTip[] {
     });
   }
 
-  if (
-    prefs.kulinarik === 'yes' ||
-    prefs.lokale_maerkte === 'yes' ||
-    /essen|café|cafe|restaurant|kulinar/.test(wantBlob)
-  ) {
-    tips.push({
-      id: 'explore-food',
-      title: 'Snack oder Café, das zu dir passt?',
-      meta: fitHudMeta('Kein Restaurant-Marathon — ein guter, naher Tipp.'),
-      tellMorePrompt: `Ein Café oder Snack in der Nähe, der zu meinen Vorlieben passt — mit Route.`,
-      score: h >= 11 && h <= 20 ? 54 : 36,
-      theme: 'user_relevant',
-    });
-  }
-
   if (prefs.aussichten === 'yes' || prefs.streetart === 'yes') {
     tips.push({
       id: 'explore-photo',
@@ -154,6 +130,8 @@ export function exploreNudgeSoftTips(nowMs = Date.now()): SoftHudTip[] {
     });
   }
 
+  void cityLabel;
+  void h;
   return tips;
 }
 
@@ -239,77 +217,18 @@ export function citySoftTips(nowMs = Date.now()): SoftHudTip[] {
   return tips;
 }
 
-/** Events / Konzerte / Stadt-News — soft, ohne Live-Scraping-Pflicht. */
+/** Events / Konzerte / Stadt-News — nur mit Profil-Bezug, nie Genre-Inventar. */
 export function curatedCityPulseTips(nowMs = Date.now()): SoftHudTip[] {
   const profile = getCachedUserProfile();
-  const city = cityKey(profile?.cityName ?? profile?.cityId);
   const cityLabel = profile?.cityName?.trim() || profile?.cityId || 'deiner Stadt';
-  const h = new Date(nowMs).getHours();
   const tips: SoftHudTip[] = [...pinnedIdeaSoftTips(nowMs)];
 
-  tips.push({
-    id: 'pulse-events',
-    title: 'Was geht heute Abend?',
-    meta: fitHudMeta(
-      `Kurz checken, was in ${cityLabel} heute noch offen ist — Konzert, Markt, Open Air.`,
-    ),
-    tellMorePrompt: `Was geht heute Abend in ${cityLabel}? Echte Termine, Orte, Eintritt — und Route.`,
-    score: h >= 14 && h <= 22 ? 58 : 36,
-    theme: 'events',
-  });
-
-  tips.push({
-    id: 'pulse-concerts',
-    title: 'Live-Musik in der Nähe?',
-    meta: fitHudMeta(
-      'Bands, Clubs, Kirchenkonzerte — wenn was läuft, lohnt ein früher Blick auf Startzeit.',
-    ),
-    tellMorePrompt: `Gibt es heute oder morgen ein Konzert in ${cityLabel}, das zu mir passt?`,
-    score: h >= 16 || h <= 1 ? 54 : 32,
-    theme: 'concerts',
-  });
-
-  tips.push({
-    id: 'pulse-news',
-    title: `Neu in ${cityLabel}?`,
-    meta: fitHudMeta(
-      'Baustellen, Sperrungen, neue Spots — kurzer Stadt-Pulse, der den Tag leichter macht.',
-    ),
-    tellMorePrompt: `Was ist gerade neu oder wichtig in ${cityLabel} — für mich als Gast/Bewohner?`,
-    score: 44,
-    theme: 'city_news',
-  });
+  // Keine Soft-Karten „Kino, Konzert, Markt in X — nur was noch läuft“:
+  // das liest sich wie ein Live-Programm. Konkrete Events kommen per
+  // Recherche/Pitch; HUD zeigt nur Fakten (Leave-by, Meal-Treffer, Amenities).
 
   const want = (profile?.wantToExperience ?? '').toLowerCase();
   const prefs = profile?.experiencePrefs ?? {};
-  if (prefs.museen === 'yes' || /museum|kunst/.test(want)) {
-    tips.push({
-      id: 'pulse-user-museum',
-      title: 'Museum, das zu dir passt?',
-      meta: fitHudMeta(
-        'Du magst Museen — ich kann das nächste Offene mit kurzer Route nennen.',
-      ),
-      tellMorePrompt: `Welches Museum in ${cityLabel} passt jetzt zu mir — offen, lohnenswert, Route?`,
-      score: 60,
-      theme: 'user_relevant',
-    });
-  }
-  if (
-    prefs.kulinarik === 'yes' ||
-    prefs.lokale_maerkte === 'yes' ||
-    /essen|café|cafe|restaurant|kulinar/.test(want)
-  ) {
-    tips.push({
-      id: 'pulse-user-food',
-      title: 'Essen nach deinem Geschmack?',
-      meta: fitHudMeta(
-        'Dein Profil sagt: Gastronomie lohnt — zwei konkrete Tipps wären drin.',
-      ),
-      tellMorePrompt: `Zwei Essens-Tipps in ${cityLabel}, die zu meinen Vorlieben passen — mit Route.`,
-      score: h >= 11 && h <= 21 ? 57 : 38,
-      theme: 'user_relevant',
-    });
-  }
   if (prefs.kirchen === 'yes' || /kirche|geschichte|histor/.test(want)) {
     tips.push({
       id: 'pulse-user-history',
@@ -320,20 +239,6 @@ export function curatedCityPulseTips(nowMs = Date.now()): SoftHudTip[] {
       tellMorePrompt: `Ein historischer Ort in ${cityLabel} in der Nähe — kurz und mit Kontext.`,
       score: 52,
       theme: 'user_relevant',
-    });
-  }
-
-  if (/hamburg/.test(city)) {
-    tips.push({
-      id: 'pulse-hh-elphi',
-      title: 'Elbphilharmonie-News?',
-      meta: fitHudMeta(
-        'Führungen, Konzerte, Plaza — lohnt ein Blick, ob heute was freies Slot hat.',
-      ),
-      tellMorePrompt:
-        'Was läuft heute an der Elbphilharmonie — Konzert, Führung, Plaza?',
-      score: 50,
-      theme: 'concerts',
     });
   }
 
