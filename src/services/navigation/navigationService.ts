@@ -127,6 +127,7 @@ import {
   markRerouteFired,
   markRerouteAttemptFailed,
   markRerouteAttemptStarted,
+  canSilentReroute,
 } from './wrongWayMonitor';
 import {
   resetBoardingDetector,
@@ -151,6 +152,25 @@ import {
 
 let active: NavDestination | null = null;
 let waypointIndex = 0;
+/**
+ * Steigt bei User-Abort (clearNavigationHard). In-flight resolveAndStart
+ * muss vor dem Commit prüfen — sonst startet nach „beende Navigation“ noch
+ * ein alter Async-Start (z. B. Sporthalle).
+ */
+let navCommitGeneration = 0;
+
+export function bumpNavCommitGeneration(): number {
+  navCommitGeneration += 1;
+  return navCommitGeneration;
+}
+
+export function getNavCommitGeneration(): number {
+  return navCommitGeneration;
+}
+
+export function isNavCommitGenerationCurrent(gen: number): boolean {
+  return gen === navCommitGeneration;
+}
 /** Silent auto-reroute in flight. */
 let rerouteInFlight = false;
 /** Arrival speech/handler already started for this nav session. */
@@ -773,23 +793,44 @@ function applyTick(tick: NavigationTick, arrowName: string): void {
   });
 
   if (wrongWayAction === 'warn' && active) {
-    // Eine Ansage + Auto-Reroute passiert in silentRecalculateRoute (Delta / Sackgasse)
-    markRerouteAttemptStarted();
-    void silentRecalculateRoute({ announce: true });
+    // Nur kurze Korrektur-Ansage — kein sofortiges OSRM-Recalc
+    try {
+      const { speakWrongWayInterrupt } = require('./landmarkNavCoach') as {
+        speakWrongWayInterrupt: (o: {
+          landmark: string | null;
+          headingDeg: number;
+          correctTargetBearingDeg: number;
+          backtrackM?: number | null;
+        }) => void;
+      };
+      speakWrongWayInterrupt({
+        landmark: null,
+        headingDeg: pathBearing,
+        correctTargetBearingDeg: pathBearing,
+        backtrackM: null,
+      });
+    } catch {
+      /* soft */
+    }
   } else if (wrongWayAction === 'reroute' && active) {
+    markRerouteAttemptStarted();
     void silentRecalculateRoute({ announce: true });
   } else if (
     active &&
     !isTransitMode(tick.transportMode) &&
     tick.navPhase !== 'in_transit' &&
     (tick.speedMs ?? 0) >= 0.45 &&
-    (tick.distanceToPathM ?? 0) > 18 &&
+    (tick.distanceToPathM ?? 0) > 45 &&
     tick.distanceToDestinationM + 30 <
       Math.max(60, (navTotalDistanceM ?? tick.distanceToDestinationM) * 0.85)
   ) {
-    // Stille Abkürzungs-Neuberechnung (ohne Wrong-Way-Ansage)
+    // Stille Abkürzungs-Neuberechnung — seltener, mit Wrong-Way-Cooldown
     const now = Date.now();
-    if (now - lastShortcutRerouteAtMs > 8_000 && !rerouteInFlight) {
+    if (
+      now - lastShortcutRerouteAtMs > 20_000 &&
+      !rerouteInFlight &&
+      canSilentReroute(now)
+    ) {
       lastShortcutRerouteAtMs = now;
       void silentRecalculateRoute({ announce: false });
     }
@@ -807,7 +848,7 @@ function applyTick(tick: NavigationTick, arrowName: string): void {
     const rem = tick.distanceToDestinationM;
     if (air < 150 && rem > Math.max(400, air * 3) && (tick.speedMs ?? 0) >= 0.45) {
       const now = Date.now();
-      if (now - lastShortcutRerouteAtMs > 6_000) {
+      if (now - lastShortcutRerouteAtMs > 20_000 && canSilentReroute(now)) {
         lastShortcutRerouteAtMs = now;
         void silentRecalculateRoute({ announce: false });
       }
@@ -1835,7 +1876,10 @@ export function restorePreviousNavRoute(): boolean {
   }
 }
 
-export async function startNavigation(poiId: number, opts?: { offlineOnly?: boolean }): Promise<boolean> {
+export async function startNavigation(poiId: number, opts?: {
+  offlineOnly?: boolean;
+  commitGeneration?: number;
+}): Promise<boolean> {
   const poi = await getPoiWithFacts(poiId);
   if (!poi) {
     console.warn(`[nav] POI #${poiId} not found`);
@@ -1866,6 +1910,7 @@ export async function startNavigation(poiId: number, opts?: { offlineOnly?: bool
     ),
     spotKey: dest.spot_key ?? poi.spot_key ?? null,
     offlineOnly: opts?.offlineOnly,
+    commitGeneration: opts?.commitGeneration,
   });
 }
 
@@ -1885,7 +1930,18 @@ export async function startNavigationToCoords(opts: {
   skipDestVerify?: boolean;
   /** Explizite Fuß-/Rad-Route — nicht von GPS-lastTransportMode überschreiben */
   forceTravelMode?: 'foot' | 'bike';
+  /** Generation zum Start des Resolve — nach User-Stop verwerfen */
+  commitGeneration?: number;
 }): Promise<boolean> {
+  if (
+    opts.commitGeneration != null &&
+    !isNavCommitGenerationCurrent(opts.commitGeneration)
+  ) {
+    if (__DEV__) {
+      console.warn('[nav] start aborted — superseded by stop');
+    }
+    return false;
+  }
   if (
     !Number.isFinite(opts.lat) ||
     !Number.isFinite(opts.lng) ||
@@ -2146,6 +2202,16 @@ export async function startNavigationToCoords(opts: {
     }
   } catch {
     /* soft */
+  }
+
+  if (
+    opts.commitGeneration != null &&
+    !isNavCommitGenerationCurrent(opts.commitGeneration)
+  ) {
+    if (__DEV__) {
+      console.warn('[nav] start aborted before active — superseded by stop');
+    }
+    return false;
   }
 
   active = {

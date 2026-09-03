@@ -39,6 +39,41 @@ export function isStopOrClearNavigationIntent(text: string): boolean {
   return isClearRouteIntent(text);
 }
 
+/**
+ * Compound: „beende Navigation und bring mich zum X“ → Rest „bring mich zum X“.
+ * Bloßer Ortsname nach Stop (STT-Noise) zählt NICHT als neuer Auftrag.
+ */
+export function stripStopNavigationForContinue(text: string): string | null {
+  const t = text.replace(/\s+/g, ' ').trim();
+  if (!CLEAR_ROUTE_RE.test(t)) return null;
+  let rest = t.replace(CLEAR_ROUTE_RE, ' ').replace(/\s+/g, ' ').trim();
+  rest = rest.replace(/^(?:[,.!\s]|und|aber|dann|bitte)+/giu, '').trim();
+  if (!rest || rest.length < 4) return null;
+  if (/^(bitte|danke|ok|okay|mal|jetzt|einmal)[.!]?$/iu.test(rest)) return null;
+  try {
+    const { isExplicitNavIntent } = require('../intent/poiInfoVsNav') as {
+      isExplicitNavIntent: (s: string) => boolean;
+    };
+    if (isExplicitNavIntent(rest)) return rest;
+  } catch {
+    /* soft */
+  }
+  if (
+    HARD_DEST_RE.test(rest) ||
+    /\b(?:bring|führ|fuehr|navigier|nimm|nehm)\b/iu.test(rest)
+  ) {
+    return rest;
+  }
+  return null;
+}
+
+/** Reiner Stopp — kein zweiter Auftrag im selben Satz. */
+export function isPureStopNavigationIntent(text: string): boolean {
+  const t = text.replace(/\s+/g, ' ').trim();
+  if (!isClearRouteIntent(t)) return false;
+  return stripStopNavigationForContinue(t) == null;
+}
+
 /** Kategorie ohne Eigenname — gehört zur Open-Now-Discovery. */
 export function isCategoryNavDestination(dest: string): boolean {
   return CATEGORY_DEST_RE.test(dest.replace(/\s+/g, ' ').trim());
@@ -54,6 +89,12 @@ export function detectHardNavOverride(
 ): string | null {
   const t = text.replace(/\s+/g, ' ').trim();
   if (!t || t.length < 3) return null;
+  // „beende Navigation“ nie als neues Ziel — Compound nur über Rest-Satz
+  if (isClearRouteIntent(t)) {
+    const cont = stripStopNavigationForContinue(t);
+    if (!cont) return null;
+    return detectHardNavOverride(cont, ctx);
+  }
   // Info questions about a POI must NEVER become hard nav
   if (isPoiInfoQuestion(t)) return null;
   // Let chained / hotel / discovery handlers own those phrases
@@ -172,6 +213,23 @@ export async function clearNavigationHard(opts?: {
     useFinnusStore.getState().setStopQueueVisible(false);
     useFinnusStore.getState().setDiscoveryCandidates([]);
     useFinnusStore.getState().setPendingNavOffer(null);
+    useFinnusStore.getState().setPendingNavAlternatives([]);
+  } catch {
+    /* soft */
+  }
+  try {
+    const { bumpNavCommitGeneration } = require('./navigationService') as {
+      bumpNavCommitGeneration: () => number;
+    };
+    bumpNavCommitGeneration();
+  } catch {
+    /* soft */
+  }
+  try {
+    const { invalidateProgressiveNavEnrich } = require('./handsFreeNav/startNav') as {
+      invalidateProgressiveNavEnrich: () => void;
+    };
+    invalidateProgressiveNavEnrich();
   } catch {
     /* soft */
   }
@@ -199,7 +257,10 @@ export async function clearNavigationHard(opts?: {
  */
 export async function hardOverrideNavigationTo(
   destName: string,
-): Promise<{ ok: boolean; reply: string; name: string }> {
+): Promise<{ ok: boolean; reply: string; name: string; replaced: boolean }> {
+  const replaced =
+    Boolean(useFinnusStore.getState().navActive) ||
+    Boolean(String(useFinnusStore.getState().navTargetName || '').trim());
   await clearNavigationHard({ silent: true });
   const result = await commitHandsFreeNavStart({
     name: destName,
@@ -211,14 +272,19 @@ export async function hardOverrideNavigationTo(
     return {
       ok: false,
       name: destName,
+      replaced,
       reply:
         result.message ||
         `Ich finde „${destName}“ gerade nicht. Sag den Namen nochmal?`,
     };
   }
+  // Kurze Fallback-Speech — Router setzt ETA dran wenn möglich.
   return {
     ok: true,
     name: result.name,
-    reply: `Alles klar — alte Route weg. Ich führ dich jetzt zu ${result.name}.`,
+    replaced,
+    reply: replaced
+      ? `Alles klar — ich führ dich jetzt zu ${result.name}.`
+      : `Alles klar — ich starte die Navigation zu ${result.name}.`,
   };
 }

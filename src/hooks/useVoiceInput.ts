@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { AppState, type AppStateStatus } from 'react-native';
 import { useFinnusStore } from '../store/useFinnusStore';
 import { getCachedUserProfile } from '../services/userProfileService';
 import { showAudioConsentMissingAlert } from '../utils/permissionAlerts';
@@ -8,7 +9,10 @@ import {
   getVoiceSettingsForTour,
 } from '../services/ttsService';
 import {
+  destroyStt,
   isCurrentlyListening,
+  isSttAwaitingRestart,
+  isSttRecognitionLive,
   peekListeningTranscript,
   startListening,
   stopListening,
@@ -658,8 +662,29 @@ export function useVoiceInput(options?: {
             }
             if (isNavCorrectionIntent(text)) {
               text = extractCorrectedQuestion(text) || text;
+            } else {
+              const { isPureStopNavigationIntent, stripStopNavigationForContinue } =
+                await import('../services/navigation/hardNavOverride');
+              if (isPureStopNavigationIntent(text)) {
+                // Reiner Stopp: Module2 darf NICHT nochmal eine Route starten
+                // (Call-1/Sticky/In-flight → Sporthalle-Bug).
+                const stopReply = 'Alles klar — Navigation ist aus.';
+                try {
+                  await speakPlain(stopReply, epoch);
+                } catch {
+                  /* soft */
+                }
+                try {
+                  void withSide(stopReply);
+                } catch {
+                  /* soft */
+                }
+                return;
+              }
+              const cont = stripStopNavigationForContinue(text);
+              if (cont) text = cont;
             }
-            // Reiner Stopp: nicht hier sprechen — Call-1 formuliert / Compound läuft weiter
+            // Compound: Rest geht an Module2 („… und bring mich zum …“)
           }
         }
 
@@ -1182,9 +1207,13 @@ export function useVoiceInput(options?: {
       unsub = live.subscribeLiveChat((on, phase) => {
         if (!on || phase === 'idle') {
           setIsMicLocked(false);
+          setIsListening(false);
           return;
         }
-        setIsMicLocked(true);
+        // Wie onPhaseChange: nur listening = Mic-Optik, sonst kein Fake-Rot
+        const hearing = phase === 'listening';
+        setIsMicLocked(hearing);
+        setIsListening(hearing);
       });
     });
     return () => {
@@ -1200,6 +1229,124 @@ export function useVoiceInput(options?: {
       }
     };
   }, [setIsListening]);
+
+  /**
+   * Notification-Shade / App-Wechsel: PressOut geht oft verloren → Mic bleibt rot,
+   * STT läuft „halb“ (Permission-Dot an, aber kein echtes Zuhören).
+   * Hold (voice) abbrechen; Fixierung/Live-Chat bewusst weiterlaufen lassen.
+   */
+  useEffect(() => {
+    let appState: AppStateStatus = AppState.currentState;
+    let zombieTicks = 0;
+    let uiOrphanTicks = 0;
+
+    const clearUiMic = () => {
+      pressModeRef.current = 'idle';
+      setIsMicLocked(false);
+      setIsListening(false);
+      setIsFinalizing(false);
+      setPartialText('');
+      partialTextRef.current = '';
+      try {
+        const { noteMicActive } = require('../services/boot/interactiveBootGate') as {
+          noteMicActive: (active: boolean) => void;
+        };
+        noteMicActive(false);
+      } catch {
+        /* soft */
+      }
+    };
+
+    const sub = AppState.addEventListener('change', (next) => {
+      const prev = appState;
+      appState = next;
+      if (
+        (next === 'inactive' || next === 'background') &&
+        (prev === 'active' || prev === 'unknown')
+      ) {
+        const mode = pressModeRef.current;
+        if (mode === 'voice' || mode === 'pending') {
+          void abortProvisionalMic();
+        }
+      }
+      if (next === 'active' && prev !== 'active') {
+        // Nach Shade: UI-Listening ohne Session → hart bereinigen
+        const mode = pressModeRef.current;
+        const uiOn = useFinnusStore.getState().isListening;
+        if (mode === 'idle' && uiOn && !isCurrentlyListening()) {
+          clearUiMic();
+        }
+      }
+    });
+
+    const heal = setInterval(() => {
+      let liveChat = false;
+      try {
+        const live = require('../services/handsFree/liveChatSession') as {
+          isLiveChatActive: () => boolean;
+        };
+        liveChat = live.isLiveChatActive();
+      } catch {
+        liveChat = false;
+      }
+
+      const mode = pressModeRef.current;
+      const uiOn =
+        useFinnusStore.getState().isListening ||
+        mode === 'voice' ||
+        mode === 'locked';
+      const sttHold = isCurrentlyListening();
+      const nativeLive = isSttRecognitionLive();
+
+      // STT hält Mic-Permission, UI aus, kein Live-Chat → Privacy-Dot ohne Nutzen
+      if (sttHold && !uiOn && !liveChat && mode === 'idle') {
+        void stopListening({ tailMs: 0, finalizeMs: 0 }).catch(() => undefined);
+        zombieTicks = 0;
+        uiOrphanTicks = 0;
+        return;
+      }
+
+      // Keep-Alive-Zombie: Hold an, Native tot → OS-Dot flackert / „irgendwie an“
+      if (
+        sttHold &&
+        !nativeLive &&
+        !isSttAwaitingRestart() &&
+        (uiOn || liveChat)
+      ) {
+        zombieTicks += 1;
+        uiOrphanTicks = 0;
+        if (zombieTicks >= 3) {
+          zombieTicks = 0;
+          void (async () => {
+            try {
+              await destroyStt();
+            } catch {
+              /* soft */
+            }
+            if (!liveChat) clearUiMic();
+          })();
+        }
+        return;
+      }
+      zombieTicks = 0;
+
+      // UI rot, aber gar kein STT — erst nach ~4s (Start-Race tolerieren)
+      if (uiOn && !sttHold && !liveChat && mode !== 'pending') {
+        uiOrphanTicks += 1;
+        if (uiOrphanTicks >= 3) {
+          uiOrphanTicks = 0;
+          clearUiMic();
+        }
+        return;
+      }
+      uiOrphanTicks = 0;
+    }, 1_400);
+
+    return () => {
+      sub.remove();
+      clearInterval(heal);
+    };
+  }, [abortProvisionalMic, setIsListening]);
 
   const onPressOut = useCallback(() => {
     if (skipNextPressOutRef.current) {

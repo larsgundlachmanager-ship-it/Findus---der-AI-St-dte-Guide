@@ -30,6 +30,13 @@ export function getLastProgressiveStartMeta(): ProgressiveStartMeta | null {
   return lastProgressiveMeta;
 }
 
+/** User-Stop: laufendes Progressive-Enrich / Polish killen. */
+export function invalidateProgressiveNavEnrich(): void {
+  polishEpoch += 1;
+  polishDestKey = '';
+  lastProgressiveMeta = null;
+}
+
 /** One commit auto-start path for explicit nav intents. */
 export async function commitHandsFreeNavStart(
   input: NavTargetInput,
@@ -119,6 +126,22 @@ export async function progressiveEnrichRoute(opts: {
     navDistanceM: progressive.distanceM,
     navEtaMin: progressive.etaMin,
   });
+
+  // Karte sofort — nicht warten auf Landmark-Polish / Enrich-Commit (sonst HUD mit ETA, Linie fehlt).
+  try {
+    const { seedActiveNavRoute } = require('../navigationService') as {
+      seedActiveNavRoute: (o: {
+        waypoints: typeof progressive.waypoints;
+        walkingDistanceM?: number;
+      }) => boolean;
+    };
+    seedActiveNavRoute({
+      waypoints: progressive.waypoints,
+      walkingDistanceM: progressive.distanceM,
+    });
+  } catch {
+    /* soft */
+  }
 
   void resolveStartLandmark({
     lat: opts.originLat,

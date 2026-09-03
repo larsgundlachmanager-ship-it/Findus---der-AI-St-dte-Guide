@@ -1,6 +1,9 @@
 /**
  * Schlanker Pin-Index pro installierter Stadt (nicht das volle Pack).
  * Viewport lädt Nachbarstädte aus Cache, ohne SQLite zu tauschen.
+ *
+ * Sichtbar gleichzeitig: bis MAP_VIEWPORT_PACK_CITY_LIMIT heruntergeladene Packs
+ * (Orte / Icons / Gebäude-Umrisse im Ausschnitt) — Rest bleibt nur auf Disk.
  */
 
 import * as FileSystem from 'expo-file-system';
@@ -39,6 +42,16 @@ export type MapPin = {
   liked: 0 | 1;
   ring?: Array<[number, number]> | null;
 };
+
+/** Max. Packs gleichzeitig als Karten-Inhalt im Viewport (Erkunden / Nav). */
+export const MAP_VIEWPORT_PACK_CITY_LIMIT = 3;
+/** Slot 1: GPS-/Aufenthalts-Stadt bleibt immer (wenn Pack installiert). */
+export const MAP_STICKY_PACK_SLOTS = 1;
+/** Slots 2–3: Viewport-Städte wandern dynamisch mit (Hamburg→Berlin→…). */
+export const MAP_BROWSE_PACK_SLOTS = 2;
+
+/** Pin-Indexes warm im RAM (mehr als Paint-Limit — schneller Stadtwechsel). */
+export const MAP_PIN_INDEX_WARM_LIMIT = 8;
 
 const DOC = FileSystem.documentDirectory;
 const DIR = DOC ? `${DOC}cities/` : null;
@@ -273,6 +286,23 @@ function pinInView(p: MapPin, view: ViewBox): boolean {
   );
 }
 
+function viewCenter(view: ViewBox): { lat: number; lng: number } {
+  return {
+    lat: (view.south + view.north) / 2,
+    lng: (view.west + view.east) / 2,
+  };
+}
+
+function distToViewCenterM(b: CityCoverageBounds, view: ViewBox): number {
+  const c = viewCenter(view);
+  const midLat = (b.latMin + b.latMax) / 2;
+  const midLng = (b.lngMin + b.lngMax) / 2;
+  const dLat = (midLat - c.lat) * 111_320;
+  const dLng =
+    (midLng - c.lng) * 111_320 * Math.max(0.2, Math.cos((c.lat * Math.PI) / 180));
+  return Math.hypot(dLat, dLng);
+}
+
 /** Stabile negative Overlay-Ids — kollidieren nicht mit SQLite der Aktiv-Stadt. */
 export function overlayPinId(cityId: string, poiId: number): number {
   let h = poiId | 0;
@@ -282,36 +312,121 @@ export function overlayPinId(cityId: string, poiId: number): number {
   return h < 0 ? h : -h - 1;
 }
 
+/**
+ * Orte/Icons/Umrisse anderer heruntergeladener Packs im Viewport.
+ *
+ * Modell:
+ * - stickyCityId (GPS/Aufenthalt): bleibt immer warm; wenn im Ausschnitt und
+ *   ≠ Active-SQLite → mitzeichnen.
+ * - bis MAP_BROWSE_PACK_SLOTS weitere Packs folgen dem Viewport dynamisch
+ *   (Hamburg→Berlin→Danzig→Amsterdam; ältere wandern raus).
+ * - Active-Stadt kommt aus SQLite (buildPlacePayloads), hier nicht doppelt.
+ * - Nur vorinstallierte Packs.
+ */
 export async function loadNeighborPinsInViewport(opts: {
   view: ViewBox;
   activeCityId: string | null;
+  /** GPS-Stadt — sticky, wandert nicht weg. */
+  stickyCityId?: string | null;
   bufferFactor?: number;
+  maxCities?: number;
 }): Promise<MapPin[]> {
-  const active = (opts.activeCityId ?? '').trim().toLowerCase();
-  const padded = padView(opts.view, opts.bufferFactor ?? 0.35);
-  const cities = listKnownCityCoverageBounds().filter(
-    (b) => b.cityId !== active && overlaps(b, padded),
+  const maxCities = Math.max(
+    1,
+    Math.min(6, opts.maxCities ?? MAP_VIEWPORT_PACK_CITY_LIMIT),
   );
+  const active = (opts.activeCityId ?? '').trim().toLowerCase();
+  const sticky = (opts.stickyCityId ?? '').trim().toLowerCase() || null;
+  const padded = padView(opts.view, opts.bufferFactor ?? 0.35);
+  const known = listKnownCityCoverageBounds();
   const { isCityPackCachedOnDevice } = await import('../cityCatalogService');
+
+  const isCached = async (id: string): Promise<boolean> => {
+    if (mem.has(id)) return true;
+    return isCityPackCachedOnDevice(id);
+  };
+
+  // Active (SQLite) belegt einen Paint-Slot, wenn gesetzt.
+  const paintBudget = Math.max(0, maxCities - (active ? 1 : 0));
+  const paintIds: string[] = [];
+  const tryAdd = async (id: string | null | undefined): Promise<void> => {
+    const x = (id ?? '').trim().toLowerCase();
+    if (!x || x === active || paintIds.includes(x)) return;
+    if (paintIds.length >= paintBudget) return;
+    if (!(await isCached(x))) return;
+    paintIds.push(x);
+  };
+
+  // 1) Sticky zuerst, wenn Coverage den Viewport trifft.
+  if (sticky && sticky !== active) {
+    const stickyBounds = known.find((b) => b.cityId === sticky) ?? null;
+    if (stickyBounds && overlaps(stickyBounds, padded)) {
+      await tryAdd(sticky);
+    } else if (await isCached(sticky)) {
+      void loadMapPinIndex(sticky).catch(() => undefined);
+    }
+  } else if (sticky && (await isCached(sticky))) {
+    void loadMapPinIndex(sticky).catch(() => undefined);
+  }
+
+  // 2) Viewport-Browse: nächste installierte Packs zum Zentrum.
+  const candidates = known
+    .filter(
+      (b) =>
+        b.cityId !== active &&
+        !paintIds.includes(b.cityId) &&
+        overlaps(b, padded),
+    )
+    .sort(
+      (a, b) => distToViewCenterM(a, padded) - distToViewCenterM(b, padded),
+    );
+
+  for (const b of candidates) {
+    if (paintIds.length >= paintBudget) break;
+    const browseUsed = paintIds.filter((id) => id !== sticky).length;
+    if (browseUsed >= MAP_BROWSE_PACK_SLOTS) break;
+    await tryAdd(b.cityId);
+  }
+
   const out: MapPin[] = [];
-  for (const b of cities) {
-    const cached = await isCityPackCachedOnDevice(b.cityId);
-    if (!cached && !mem.has(b.cityId)) continue;
-    const pins = await loadMapPinIndex(b.cityId);
+  for (const id of paintIds) {
+    const pins = await loadMapPinIndex(id);
     for (const p of pins) {
       if (pinInView(p, padded)) out.push(p);
     }
   }
+
+  retainWarmPinIndexes(
+    new Set([
+      ...(sticky ? [sticky] : []),
+      ...(active ? [active] : []),
+      ...paintIds,
+    ]),
+  );
+
   return out;
+}
+
+/** RAM: Sticky + aktuelle Viewport-Packs behalten; Rest raus wenn über Warm-Limit. */
+function retainWarmPinIndexes(keep: Set<string>): void {
+  if (mem.size <= MAP_PIN_INDEX_WARM_LIMIT) return;
+  for (const id of [...mem.keys()]) {
+    if (mem.size <= MAP_PIN_INDEX_WARM_LIMIT) break;
+    if (keep.has(id)) continue;
+    mem.delete(id);
+  }
 }
 
 export async function warmNearbyPinIndexes(opts: {
   activeCityId: string | null;
+  stickyCityId?: string | null;
   lat: number | null;
   lng: number | null;
 }): Promise<void> {
   const lat = opts.lat;
   const lng = opts.lng;
+  const sticky = (opts.stickyCityId ?? '').trim().toLowerCase() || null;
+  const active = (opts.activeCityId ?? '').trim().toLowerCase() || null;
   const view: ViewBox =
     lat != null && lng != null
       ? {
@@ -321,15 +436,40 @@ export async function warmNearbyPinIndexes(opts: {
           east: lng + 0.06,
         }
       : { south: 0, west: 0, north: 0, east: 0 };
-  const cities = listKnownCityCoverageBounds().filter((b) => {
-    if (b.cityId === (opts.activeCityId ?? '').toLowerCase()) return true;
-    if (lat == null || lng == null) return false;
-    return overlaps(b, view);
-  });
+
   const { isCityPackCachedOnDevice } = await import('../cityCatalogService');
-  for (const b of cities.slice(0, 8)) {
-    const cached = await isCityPackCachedOnDevice(b.cityId);
-    if (!cached) continue;
-    await loadMapPinIndex(b.cityId);
+  const ordered: string[] = [];
+  const push = (id: string | null) => {
+    const x = (id ?? '').trim().toLowerCase();
+    if (!x || ordered.includes(x)) return;
+    ordered.push(x);
+  };
+  push(sticky);
+  push(active);
+
+  const cities = listKnownCityCoverageBounds()
+    .filter((b) => {
+      if (ordered.includes(b.cityId)) return false;
+      if (lat == null || lng == null) return false;
+      return overlaps(b, view);
+    })
+    .sort((a, b) => distToViewCenterM(a, view) - distToViewCenterM(b, view));
+
+  for (const b of cities) {
+    if (ordered.length >= MAP_PIN_INDEX_WARM_LIMIT) break;
+    ordered.push(b.cityId);
   }
+
+  for (const id of ordered.slice(0, MAP_PIN_INDEX_WARM_LIMIT)) {
+    const cached = await isCityPackCachedOnDevice(id);
+    if (!cached) continue;
+    await loadMapPinIndex(id);
+  }
+  retainWarmPinIndexes(
+    new Set([
+      ...(sticky ? [sticky] : []),
+      ...(active ? [active] : []),
+      ...ordered.slice(0, MAP_VIEWPORT_PACK_CITY_LIMIT),
+    ]),
+  );
 }

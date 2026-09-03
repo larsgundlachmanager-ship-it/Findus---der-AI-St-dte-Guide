@@ -7,7 +7,12 @@ import { getAllPois, getPoiWithFacts, haversineMeters } from '../../db/database'
 import { useFinnusStore } from '../../store/useFinnusStore';
 import { getCachedUserProfile } from '../userProfileService';
 import { geocodePlaceNameOsmFirst } from './googleMapsNav';
-import { startNavigation, startNavigationToCoords } from './navigationService';
+import {
+  startNavigation,
+  startNavigationToCoords,
+  getNavCommitGeneration,
+  isNavCommitGenerationCurrent,
+} from './navigationService';
 import { recordNavSearch } from './navSearchHistory';
 import { checkClosingTimeGate } from './closingTimeGate';
 import { getCachedGeocodeForNav } from './landmarkCache';
@@ -57,6 +62,8 @@ let pendingNavCommitMode: { replaceRoute: boolean; addStop: boolean } = {
   replaceRoute: false,
   addStop: false,
 };
+/** Aktive Resolve-Generation — Weave/Start lesen das, wenn nicht explizit gesetzt. */
+let pendingResolveCommitGeneration: number | undefined;
 
 /**
  * Einzelziel starten — bei laufender Tour: einweben statt Queue zu killen.
@@ -72,12 +79,27 @@ async function startNavOrWeaveIntoTour(opts: {
   userQuery?: string;
   /** Pin / „Ja, dorthin“ — Verify überspringen */
   skipDestVerify?: boolean;
+  commitGeneration?: number;
 }): Promise<{
   ok: boolean;
   weaveSpeech?: string;
   message?: string;
   needsConfirm?: boolean;
 }> {
+  if (
+    opts.commitGeneration != null &&
+    !isNavCommitGenerationCurrent(opts.commitGeneration)
+  ) {
+    return { ok: false };
+  }
+  const commitGeneration =
+    opts.commitGeneration ?? pendingResolveCommitGeneration;
+  if (
+    commitGeneration != null &&
+    !isNavCommitGenerationCurrent(commitGeneration)
+  ) {
+    return { ok: false };
+  }
   const verifyName = (opts.userQuery || opts.name).trim() || opts.name;
   if (!opts.skipDestVerify) {
     const check = verifyNavDestBeforeCommit({
@@ -215,6 +237,7 @@ async function startNavOrWeaveIntoTour(opts: {
     offlineOnly: opts.offlineOnly,
     // Verify lief oben schon — kein stiller Doppel-Abbruch
     skipDestVerify: true,
+    commitGeneration: opts.commitGeneration ?? pendingResolveCommitGeneration,
   });
   if (!ok) {
     const again = verifyDestPlausible({
@@ -766,10 +789,16 @@ export async function resolveAndStartNavigation(
     replaceRoute: opts?.replaceRoute === true,
     addStop: opts?.addStop === true,
   };
+  const commitGeneration = getNavCommitGeneration();
+  pendingResolveCommitGeneration = commitGeneration;
   try {
-    return await resolveAndStartNavigationInner(input, opts);
+    return await resolveAndStartNavigationInner(input, {
+      ...opts,
+      commitGeneration,
+    });
   } finally {
     pendingNavCommitMode = { replaceRoute: false, addStop: false };
+    pendingResolveCommitGeneration = undefined;
   }
 }
 
@@ -779,8 +808,26 @@ async function resolveAndStartNavigationInner(
     skipClosingGate?: boolean;
     offlineOnly?: boolean;
     skipDestVerify?: boolean;
+    commitGeneration?: number;
   },
 ): Promise<NavStartResult> {
+  const commitGeneration = opts?.commitGeneration;
+  const aborted = (): NavStartResult | null => {
+    if (
+      commitGeneration != null &&
+      !isNavCommitGenerationCurrent(commitGeneration)
+    ) {
+      return {
+        ok: false,
+        poiId: null,
+        name: cleanName(input.name) || 'Ziel',
+        via: 'none',
+      };
+    }
+    return null;
+  };
+  const earlyAbort = aborted();
+  if (earlyAbort) return earlyAbort;
   let nameHint = cleanName(input.name);
   try {
     const { expandBareHauptbahnhofQuery } = require('./expandBareHauptbahnhof') as {
@@ -992,7 +1039,10 @@ async function resolveAndStartNavigationInner(
         return stopped;
       }
     }
-    const ok = await startNavigation(existingId, { offlineOnly: opts?.offlineOnly });
+    const ok = await startNavigation(existingId, {
+      offlineOnly: opts?.offlineOnly,
+      commitGeneration: opts?.commitGeneration ?? pendingResolveCommitGeneration,
+    });
     if (ok) {
       void recordNavSearch(poiName);
       if (poi) {

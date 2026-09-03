@@ -230,6 +230,8 @@ export {
   hardOverrideNavigationTo,
   detectHardNavOverride,
   isClearRouteIntent,
+  isPureStopNavigationIntent,
+  stripStopNavigationForContinue,
 } from './hardNavOverride';
 export {
   resolveNavDestCorrection,

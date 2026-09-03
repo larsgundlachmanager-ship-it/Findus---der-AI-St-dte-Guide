@@ -793,6 +793,70 @@ export async function isCityPackCachedOnDevice(cityId: string): Promise<boolean>
   }
 }
 
+let browseEnsureInFlight: Promise<boolean> | null = null;
+let browseEnsureInFlightId: string | null = null;
+
+/**
+ * Pack nur auf Disk + Pin-Index (Zubringer / Viewport).
+ * Kein SQLite-Swap, kein writeActiveInstall, kein Profil-Stadtwechsel.
+ * GPS-/Aktiv-Stadt bleibt unverändert.
+ */
+export async function ensureBrowseCityPackOnDevice(
+  cityId: string,
+): Promise<boolean> {
+  const id = cityId.trim().toLowerCase();
+  if (!id) return false;
+  if (browseEnsureInFlight && browseEnsureInFlightId === id) {
+    return browseEnsureInFlight;
+  }
+  if (browseEnsureInFlight) {
+    try {
+      await browseEnsureInFlight;
+    } catch {
+      /* soft */
+    }
+  }
+  browseEnsureInFlightId = id;
+  browseEnsureInFlight = (async () => {
+    try {
+      let pack: CityPack | null = null;
+      if (await isCityPackCachedOnDevice(id)) {
+        pack = await loadCityPackLocalOnly(id);
+      } else {
+        pack = await fetchCityPackById(id);
+      }
+      if (!pack) return false;
+      const mapped = mapCityPackToRemote(pack);
+      if (!mapped.pois.length) return false;
+      try {
+        const { writeMapPinIndex } = await import('./homeMap/mapPinIndex');
+        await writeMapPinIndex(id, mapped.pois);
+      } catch {
+        /* soft */
+      }
+      await registerCoverageFromLocalPacks({ cityIds: [id] });
+      if (__DEV__) {
+        console.log(
+          `[cityCatalog] Browse-Pack bereit (ohne Aktiv-Switch): ${id} (${mapped.pois.length} Orte)`,
+        );
+      }
+      return true;
+    } catch (err) {
+      console.warn(
+        `[cityCatalog] Browse-Pack ${id} fehlgeschlagen:`,
+        String(err).slice(0, 180),
+      );
+      return false;
+    }
+  })();
+  try {
+    return await browseEnsureInFlight;
+  } finally {
+    browseEnsureInFlight = null;
+    browseEnsureInFlightId = null;
+  }
+}
+
 export async function listLocalCityDatasets(): Promise<LocalCityDataset[]> {
   if (!CITIES_DIR) return [];
   try {
@@ -1316,12 +1380,15 @@ export async function installCityPack(
       }
     }
 
-    // Offline-Karte nicht beim Pack-Switch parsen — JSON.parse von 10–28 MB friert die UI.
+    // Offline-Extract nur Legacy (MAP_VECTOR_TILES=0). Protomaps: kein *.map.json.
     try {
-      const { scheduleIdleCityMapExtract } = await import('./homeMap/cityMapExtract');
-      scheduleIdleCityMapExtract(id);
+      const { isVectorBasemapEnabled } = await import('./homeMap/mapTileConfig');
+      if (!isVectorBasemapEnabled()) {
+        const { scheduleIdleCityMapExtract } = await import('./homeMap/cityMapExtract');
+        scheduleIdleCityMapExtract(id);
+      }
     } catch {
-      /* Extract optional bei 404 — Liberty-Fallback */
+      /* Extract optional */
     }
     await yieldToUi(checkRemote ? 40 : 120);
     const { pack, decision } = await resolvePackForInstall(id, checkRemote);
