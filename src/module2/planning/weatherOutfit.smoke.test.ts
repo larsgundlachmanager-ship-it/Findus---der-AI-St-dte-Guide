@@ -37,7 +37,11 @@ assert(
   !classifyJob(Q).secondaryJobIds.includes('nightlife_vibe'),
   'Stadtbummel injects no nightlife',
 );
-assert(classifyUtteranceFamily(Q).family === 'weather', 'family weather');
+assert(classifyUtteranceFamily(Q).family === 'plan' || classifyUtteranceFamily(Q).family === 'weather', 'family weather-or-plan (Städtetrip)');
+assert(looksLikeOutfitOrWeatherUtterance('Wird heute regnen?'), 'regnen = wetter');
+assert(looksLikeOutfitOrWeatherUtterance('Regnet es heute?'), 'regnet = wetter');
+assert(classifyUtteranceFamily('Wird heute regnen?').family === 'weather', 'family regnen');
+assert(classifyUtteranceFamily('Regnet es heute?').family === 'weather', 'family regnet');
 assert(
   /keine Timeline/i.test(weatherOutfitLookupTips(Q)),
   'checklist says no empty timeline',

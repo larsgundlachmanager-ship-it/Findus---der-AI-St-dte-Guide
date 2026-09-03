@@ -31,12 +31,22 @@ export function keepCityStickyForFollowUp(text: string): boolean {
   } catch {
     /* soft */
   }
-  // Wetter/Outfit ohne „hier“ → Gesprächsstadt behalten (Athen-Talk → Athen-Wetter)
+  // Wetter/Outfit: Default GPS. Nur „da/dort“ hält Gesprächsstadt; „hier“ = GPS.
   if (/\b(wetter|regen|temperatur|anziehen|outfit|wie\s+kalt|wie\s+warm)\b/iu.test(t)) {
     if (/\b(hier|vor\s+ort|wo\s+ich\s+(?:gerade\s+)?(?:bin|stehe))\b/iu.test(t)) {
       return false;
     }
-    return true;
+    try {
+      const {
+        weatherAskWantsConversationPlace,
+      } = require('../planning/planUtteranceGate') as {
+        weatherAskWantsConversationPlace: (s: string) => boolean;
+      };
+      if (weatherAskWantsConversationPlace(t)) return true;
+    } catch {
+      /* soft */
+    }
+    return false;
   }
   // Neue Suche / Empfehlungsfrage → Sticky nicht behalten
   if (

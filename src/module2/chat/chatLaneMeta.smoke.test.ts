@@ -16,5 +16,13 @@ assert(
   !/LOCAL_SHOW/i.test(stripChatLaneMeta('Regen. LOCAL_SHOW: none')),
   'strips LOCAL_SHOW',
 );
+assert(
+  !/PACK-DATENSATZ|Tennis|Beantworte|Nutze diese Fakten/i.test(
+    stripChatLaneMeta(
+      'Beantworte wie wird das Wetter. Nutze diese Fakten. PACK-DATENSATZ Tennis-Club. Es werden 17 Grad.',
+    ),
+  ),
+  'strips pack/meta leak from weather speech',
+);
 
 console.log('chatLaneMeta.smoke.test.ts OK');

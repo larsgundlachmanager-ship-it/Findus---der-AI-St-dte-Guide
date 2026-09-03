@@ -213,8 +213,24 @@ export function extractTravelCityFromText(text: string): string | null {
 
 export function extractCityFromText(text: string): string | null {
   if (/hafencity|hafen\s*city/i.test(text)) return 'Hamburg';
-  // Demonym: „Hamburger Pannfisch“ / „Berliner Dom“ — Stamm vor CITY_RE.
-  const demonymed = text.replace(/\b(hamburg|berlin|prisdorf|pinneberg)er(?:in)?n?\b/giu, '$1');
+  // „Hamburger Pannfisch“ / „Berliner Currywurst“ = Gericht-Adjektiv, keine Zielstadt
+  const dishDemonymOnly =
+    /\b(hamburg|berlin|münchen|muenchen|köln|koeln|dresden|leipzig|prag|wiener)er(?:in)?n?\s+\w{3,}/iu.test(
+      text,
+    ) &&
+    !/\b(in|nach|aus|bei)\s+(hamburg|berlin|münchen|muenchen|köln|koeln|dresden|leipzig|prag|wien)\b/iu.test(
+      text,
+    );
+  // Demonym: „Berliner Dom“ — Stamm vor CITY_RE; bei Gericht-Demonym Stamm entfernen.
+  const demonymed = dishDemonymOnly
+    ? text.replace(
+        /\b(hamburg|berlin|münchen|muenchen|köln|koeln|dresden|leipzig|prag|wiener)er(?:in)?n?\b/giu,
+        ' ',
+      )
+    : text.replace(
+        /\b(hamburg|berlin|prisdorf|pinneberg)er(?:in)?n?\b/giu,
+        '$1',
+      );
   const cities = [...demonymed.matchAll(CITY_RE)].map((m) => m[1]!);
   if (cities.length) {
     const raw = cities[cities.length - 1]!;

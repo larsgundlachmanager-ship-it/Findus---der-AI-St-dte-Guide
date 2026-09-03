@@ -128,6 +128,13 @@ export type ManagerAnalysis = {
     | 'reisebuero';
   /** Kurzauftrag für Call-2-Synthese (aus Call-1, nicht Code) */
   call2Brief?: string | null;
+  /**
+   * Bridge hat die User-Antwort bereits vollständig geliefert
+   * (Nav-Stop, Mode-Switch, reine Bestätigung) → Call-2-Synth skippen.
+   */
+  bridgeComplete?: boolean;
+  /** Owner-Gold situationKeys, die Call 1 für Call 2 ausgewählt hat */
+  selectedGoldKeys?: string[];
   festTypeHint?: string | null;
   bookingPlatformHint?: string | null;
   mustHaves?: string[];

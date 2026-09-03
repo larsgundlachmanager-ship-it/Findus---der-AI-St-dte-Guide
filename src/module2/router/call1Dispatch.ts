@@ -154,6 +154,17 @@ export function finalizeCall1Execution(
   analysis: ManagerAnalysis,
   userText: string,
 ): Call1ExecutionBackend {
+  // Explizite Nav („navigiere mich …“) schlägt Pitch/M1/Pack-Story — Just-Do-It.
+  try {
+    const { isExplicitNavIntent } = require('../../services/intent/poiInfoVsNav') as {
+      isExplicitNavIntent: (s: string) => boolean;
+    };
+    if (isExplicitNavIntent(userText)) {
+      return 'nav_execute';
+    }
+  } catch {
+    /* soft */
+  }
   // Lokal Hotel-Amenity schlägt LLM-/Situation-Reisebüro (kein „von wo?“).
   if (isLocalHotelAmenityQuery(userText)) {
     return 'pitch_module';
@@ -232,6 +243,28 @@ export function finalizeCall1Execution(
       })
     ) {
       return 'flight_advisor';
+    }
+  } catch {
+    /* soft */
+  }
+  // Wetter-Opener (ohne Deixis auf Ort): immer chat_lane — nie Pitch/Nav/Pack-Sticky.
+  try {
+    const {
+      looksLikeOutfitOrWeatherUtterance,
+      weatherAskWantsConversationPlace,
+    } = require('../planning/planUtteranceGate') as {
+      looksLikeOutfitOrWeatherUtterance: (s: string) => boolean;
+      weatherAskWantsConversationPlace: (s: string) => boolean;
+    };
+    const { looksLikePicnicQuery } = require('../pitch/picnicIntent') as {
+      looksLikePicnicQuery: (s: string) => boolean;
+    };
+    if (
+      looksLikeOutfitOrWeatherUtterance(userText) &&
+      !weatherAskWantsConversationPlace(userText) &&
+      !looksLikePicnicQuery(userText)
+    ) {
+      return 'chat_lane';
     }
   } catch {
     /* soft */

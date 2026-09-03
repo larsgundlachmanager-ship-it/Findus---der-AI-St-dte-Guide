@@ -49,7 +49,7 @@ const CINEMA_RE =
   /\b(kino|kinoprogramm|welche\s+filme|ins\s+kino|filmtheater)\b/iu;
 
 const WEATHER_RE =
-  /\b(wetter|regen|temperatur|wie\s+kalt|wie\s+warm|anziehen|outfit)\b/iu;
+  /\b(wetter|regnen|regnet|regen|regnerisch|schneit|schneien|schnee|temperatur|wie\s+kalt|wie\s+warm|anziehen|outfit)\b/iu;
 
 const TRAVEL_AGENCY_RE =
   /\b(reiseb[uü]ro|irgendwohin|irgendwo.{0,40}(?:warm|hin|weg|fliegen|urlaub)|wo(?:hin)?\s+(?:es\s+)?warm|nächste\s+woche.{0,40}(?:weg|urlaub|fliegen)|weiß\s+nicht\s+wohin|weiss\s+nicht\s+wohin)\b/iu;
@@ -98,14 +98,15 @@ export function classifyUtteranceFamily(text: string): UtteranceFamilyHit {
   ) {
     return { family: 'travel_agency', confidence: 0.88 };
   }
-  if (looksLikeArriveByAppointment(t) || PLAN_VERB_RE.test(t) || /\b(\w+\s+erkunden|wie\s+könnte\s+mein\s+tag)\b/iu.test(t)) {
-    return { family: 'plan', confidence: 0.93 };
-  }
   if (WHERE_AM_I_RE.test(t) || (M1_RE.test(t) && !PITCH_RE.test(t) && !CINEMA_RE.test(t))) {
     return { family: 'm1', confidence: 0.84 };
   }
-  if (WEATHER_RE.test(t) && !PLAN_VERB_RE.test(t) && !PITCH_RE.test(t)) {
+  // Wetter vor Plan — sonst „regnet? + Städtetrip“ → Sticky Tennis/Plan statt Wetter.
+  if (WEATHER_RE.test(t) && !PITCH_RE.test(t)) {
     return { family: 'weather', confidence: 0.88 };
+  }
+  if (looksLikeArriveByAppointment(t) || PLAN_VERB_RE.test(t) || /\b(\w+\s+erkunden|wie\s+könnte\s+mein\s+tag)\b/iu.test(t)) {
+    return { family: 'plan', confidence: 0.93 };
   }
   // Supermarkt-Prospekt / Produktangebot — vor Pitch (Bier ≠ Gastro).
   try {

@@ -274,6 +274,71 @@ assert.equal(
 );
 
 assert.equal(
+  finalizeCall1Execution(
+    baseAnalysis({
+      execution: 'pitch_module',
+      chatLane: 'pitch',
+      session: 'continue',
+    }),
+    'Wie wird heute das Wetter?',
+  ),
+  'chat_lane',
+  'weather opener beats sticky pitch/tennis',
+);
+
+assert.equal(
+  finalizeCall1Execution(
+    baseAnalysis({
+      execution: 'nav_execute',
+      chatLane: 'nav',
+      session: 'continue',
+    }),
+    'Wie wird heute das Wetter?',
+  ),
+  'chat_lane',
+  'weather opener beats sticky nav',
+);
+
+assert.equal(
+  finalizeCall1Execution(
+    baseAnalysis({
+      execution: 'pitch_module',
+      chatLane: 'pitch',
+      session: 'continue',
+    }),
+    'Wird heute regnen?',
+  ),
+  'chat_lane',
+  'regnen opener beats sticky pitch (not only wetter-noun)',
+);
+
+assert.equal(
+  finalizeCall1Execution(
+    baseAnalysis({
+      execution: 'pitch_module',
+      chatLane: 'pitch',
+      session: 'continue',
+    }),
+    'Regnet es heute?',
+  ),
+  'chat_lane',
+  'regnet opener beats sticky pitch',
+);
+
+assert.equal(
+  finalizeCall1Execution(
+    baseAnalysis({
+      execution: 'pitch_module',
+      chatLane: 'pitch',
+      session: 'new',
+    }),
+    'Navigiere mich zum Tennis-Club Prisdorf',
+  ),
+  'nav_execute',
+  'explicit nav beats pitch/pack story',
+);
+
+assert.equal(
   shouldSpeakManagerBridge(
     baseAnalysis({
       session: 'new',

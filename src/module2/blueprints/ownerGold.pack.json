@@ -16,7 +16,27 @@
         "vague_filler",
         "permission_questions"
       ],
-      "summary": "Bridge (Call 1): Nur DIESE User-Nachricht — Wunsch verstanden + Zusage. Neues Thema (z. B. Flug nach Essen) = frische Bridge, kein toter Faden. Kurz 1–2 Sätze. Wetter ≠ Optionen. Keine Venue-Namen/Preise/Minuten. Call 2 hängt flüssig an."
+      "summary": "Bridge (Call 1): Nur DIESE User-Nachricht — Wunsch verstanden + Zusage. Ausnahme: fehlender Blocker-Slot (ohne den Aktion sinnlos) → kurze Gegenfrage, bridgeComplete, keine Recherche-Zusage. Nie Meta-Warte. Neues Thema = frische Bridge. Kontext/Thread darf Slots füllen. Kurz 1–2 Sätze. Keine Venue-Namen/Preise/Minuten. Call 2 hängt flüssig an — außer bridgeComplete."
+    },
+    {
+      "intentFamily": "general",
+      "situationKey": "general::missing_blocker_slot_clarify_v1",
+      "tags": [
+        "bridge",
+        "clarify",
+        "call1",
+        "missing_slot"
+      ],
+      "expect": [
+        "answer_first",
+        "casual_tone"
+      ],
+      "avoid": [
+        "vague_filler",
+        "permission_questions",
+        "fake_research_ack"
+      ],
+      "summary": "Aktion/Recherche ohne Pflicht-Slot sinnlos (Flug ohne Uhr, Taxi buchen ohne Ziel, …): Call-1 Bridge = eine gezielte Klärfrage, bridgeComplete=true, work leer. Zuerst Slot aus offenem Thread/Kontext herleiten — nur nachfragen wenn wirklich kein Anker. session=continue. Wortlaut frei."
     },
     {
       "intentFamily": "dining",
@@ -134,6 +154,7 @@
     },
     {
       "intentFamily": "general",
+      "situationKey": "general::weather_night_sky_woven_outfit_v1",
       "tags": [
         "weather"
       ],
@@ -143,7 +164,8 @@
         "temp_range",
         "rain_timing",
         "clothing_tip",
-        "casual_tone"
+        "casual_tone",
+        "woven_clothing"
       ],
       "avoid": [
         "vague_filler",
@@ -152,12 +174,15 @@
         "station_board_fallback",
         "aushang",
         "invent_storm",
-        "dry_list"
+        "dry_list",
+        "sun_as_day_at_night",
+        "parenthetical_aside"
       ],
-      "summary": "Wetter locker und menschlich (auch Live-HUD-Tap): 2–3 Sätze Alltagston — Aktuell … Grad bei …, Tagsüber bis …, Regen ja/nein mit Uhr ohne Prozent und ohne „Regenfenster“. Kein Heute-Spam, kein Fakten-Stakkato. Stichpunkte kompakt mit °. Kartentitel Wetter/Stadt — nie Temperatur-Zahlwort als Stadt. Kein Options-Pitch."
+      "summary": "Wetter locker und menschlich: Himmel + Temp/Höchst + Regen-Timing in 1–3 kurzen VOLLEN Sätzen (Subjekt+Verb), optional Kleidung eingewebt. Nie Telegramm-Fetzen („Wetter gut, leichte Kleidung reicht“). Nie „keine Live-Daten“ / Aushang. Timeline nur wenn Plan wetterrelevant."
     },
     {
       "intentFamily": "general",
+      "situationKey": "general::outfit_woven_prose_v1",
       "tags": [
         "outfit",
         "clothing",
@@ -166,14 +191,16 @@
       "expect": [
         "answer_first",
         "clothing_tip",
-        "casual_tone"
+        "casual_tone",
+        "woven_clothing"
       ],
       "avoid": [
         "vague_filler",
         "permission_questions",
-        "dry_list"
+        "dry_list",
+        "parenthetical_aside"
       ],
-      "summary": "Outfit/Anziehen: konkrete Kleidung zuerst (Jacke/Schichten/Schuhe) aus belegtem Wetter + Plan, Stichpunkte kompakt. Kein Touren-suchen-Button, kein Sightseeing/Teich-Pitch, kein leeres Titel=Bullet-Echo. Kartentitel Outfit/Kleidung."
+      "summary": "Outfit/Anziehen: konkrete Kleidung zuerst aus belegtem Wetter+Plan, in kurzen vollständigen Sätzen weben — keine (…)-Klammern/Meta, kein Telegramm. Stichpunkte kompakt. Kein Touren-Button, kein Sightseeing-Pitch."
     },
     {
       "intentFamily": "general",
@@ -230,7 +257,43 @@
         "stage_directions",
         "dead_thread_weave"
       ],
-      "summary": "Faktenfrage: Call-1 kurze Bridge (Würdigung), dann Call-2 Answer-First mit Zahl/Name plus 1–2 belegte Fun-Facts. Neues Thema = Isolation, kein toter Faden. Stichpunkte Alter/Name/Datum — keine nackten Gattungs-Labels. Keine Regie im Speech."
+      "summary": "Faktenfrage: Call-1 kurze Bridge, Call-2 Answer-First in 1–2 Sätzen (Zahl/Name). Stichpunkte eine klare Ziffer — keine Tausender-Splits. Kein Essay, keine ungefragte Tour. Isolation bei neuem Thema."
+    },
+    {
+      "intentFamily": "knowledge",
+      "situationKey": "knowledge::compact_stat_v1",
+      "tags": [
+        "trivia",
+        "einwohner",
+        "flaeche",
+        "compact"
+      ],
+      "expect": [
+        "answer_first"
+      ],
+      "avoid": [
+        "vague_filler",
+        "long_history",
+        "permission_questions"
+      ],
+      "summary": "Statistik-Kurzfrage (Einwohner, Fläche, Höhe): eine klare Zahl nennen (ca. gerundet ok), fertig. Stichpunkte dieselbe Zahl — deutsche Tausender nie splitten (45000 oder 45.000 als EIN Fakt). Keine ungefragte Zusatzfläche/Tour, kein „wenn du magst…“."
+    },
+    {
+      "intentFamily": "knowledge",
+      "situationKey": "knowledge::arith_short_v1",
+      "tags": [
+        "math",
+        "rechen",
+        "compact"
+      ],
+      "expect": [
+        "answer_first"
+      ],
+      "avoid": [
+        "vague_filler",
+        "long_history"
+      ],
+      "summary": "Einfache Rechnung: Call-1 spiegelt knapp die Aufgabe (oder kurze Rechen-Zusage), Call-2 = Ergebniszahl in einem Wort/Satz — kein Theater („schlicht und ergreifend“). Stichpunkt = Rechnung + Ergebnis."
     },
     {
       "intentFamily": "activity_poi",
@@ -352,7 +415,7 @@
         "vague_filler",
         "long_history"
       ],
-      "summary": "Tagesplan multi-slot: Bridge + Timeline-Gerüst (Los, Frühstück-Pitch, Sunset−1h Abend-Pitch, Landmarke Q&A ohne Top-2, Tour). Walk nacheinander; Ablehnung = neue Suche; Ticket gekauft bestätigen; Ende Übernachten vs Heimfahrt. Zielstadt-Pack, nicht GPS-Heimat."
+      "summary": "Tagesplan multi-slot (auch lange Sprachnachricht): Bridge kurz zusagen, dann Timeline — Los/Anreise, typisches Frühstück-Pitch, Must-Haves/Tour, Landmarke Q&A (was ist das / Eintritt) ohne Top-2-Drift, Abendessen-Pitch zum Sunset/Blick. Charakter färbt nur Ton, nie Inhalt durch Archaik ersetzen. Walk nacheinander; Ablehnung = neue Suche; Ticket bestätigen; Ende Übernachten vs Heimfahrt. Zielstadt-Pack, nicht GPS-Heimat."
     },
     {
       "intentFamily": "planning",
@@ -374,7 +437,29 @@
         "vague_filler",
         "fake_promises"
       ],
-      "summary": "Leave-by Staging: Bridge würdigt Ziel. Explizites morgen/heute bleibt stehen — Folge-Uhrzeit überschreibt den Tag nicht. Flug aus Abflugtafel/FlightAware, Tag + Uhr in Speech nennen, Chips zum Korrigieren (heute/morgen/andere Zeit). Gepäck vor Leave-by; Puffer; ÖPNV/Taxi."
+      "summary": "Leave-by ohne Abflugzeit/Nummer: Bridge würdigt Ziel, kein Recherche-Versprechen. Call 2 fragt sofort Uhrzeit oder Flugnummer — keine Abflugtafel-/Cheap-Flight-Warteschleife. Mit Uhr: Board matchen (±45 Min auf geplante Abflugzeit), Gepäck-Chips einmal, dann Leave-by + ÖPNV/Taxi/Transfer. Eine Anreise-Wahl räumt die anderen weg; Taxi → Uber-Vorbestellen-Button; Transfer → erst Personen+Abholadresse, dann Welcome-Pickups. Explizites morgen/heute bleibt stehen."
+    },
+    {
+      "intentFamily": "planning",
+      "situationKey": "planning::flight_access_choice_v1",
+      "tags": [
+        "flight",
+        "airport_access",
+        "taxi",
+        "transit",
+        "transfer"
+      ],
+      "expect": [
+        "answer_first",
+        "just_do_it",
+        "casual_tone"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler",
+        "fake_promises"
+      ],
+      "summary": "Flughafen-Anreise gewählt: Soft-Commit sofort, rivalisierende Timeline-Optionen weg, kein Floskel-Bridge. Taxi → Uber-Link als Hauptbutton + Vorbestellen-Frage. ÖPNV → Kette in Timeline. Transfer → Personen und Abholadresse vor Partner-Link; Gruppengröße für Fahrzeug merken."
     },
     {
       "intentFamily": "planning",
@@ -461,7 +546,27 @@
         "vague_filler",
         "permission_questions"
       ],
-      "summary": "Gebuchter Flug: zuerst Ziel/Tag/Uhr oder Ident klären (nachfragen, Live selber holen) — Leave-by rückwärts. Nie Airline-App-Selbstcheck statt Recherche. E-SIM erst wenn Flug in der Timeline steht. Nach Trivia/Essen nur Flug — totes Thema nicht mischen."
+      "summary": "Gebuchter Flug: zuerst Ziel/Tag/Uhr oder Ident klären — fehlt Uhr und Thread hat keine → Call-1 Klärfrage (bridgeComplete), kein Leave-by-Raten. Uhr da → Leave-by rückwärts. Nie Airline-App-Selbstcheck statt Recherche. E-SIM erst wenn Flug in der Timeline steht. Nach Trivia/Essen nur Flug — totes Thema nicht mischen."
+    },
+    {
+      "intentFamily": "mobility",
+      "situationKey": "mobility::taxi_missing_destination_clarify_v1",
+      "tags": [
+        "taxi",
+        "clarify",
+        "call1",
+        "missing_slot"
+      ],
+      "expect": [
+        "answer_first",
+        "casual_tone"
+      ],
+      "avoid": [
+        "vague_filler",
+        "permission_questions",
+        "fake_research_ack"
+      ],
+      "summary": "Taxi/Uber buchen ohne Ziel: zuerst Ziel aus offenem Thread (Kino, Flughafen, Ort) ziehen. Fehlt jeder Anker → Call-1 Bridge = kurze Wohin-Frage, bridgeComplete, keine Buchungs-Recherche. Personenanzahl allein reicht nicht. Wortlaut frei."
     },
     {
       "intentFamily": "knowledge",
@@ -490,8 +595,7 @@
         "quick_lookup"
       ],
       "expect": [
-        "answer_first",
-        "short_history"
+        "answer_first"
       ],
       "avoid": [
         "vague_filler",
@@ -499,7 +603,27 @@
         "long_history",
         "fake_promises"
       ],
-      "summary": "Personen-Alter/Trivia: neuer Thread (Sport/Pitch tot). Bridge sofort, dann belegtes Alter zuerst; 1–2 Fun-Facts nur belegt. Kein Spielplan, keine fremde Historie."
+      "summary": "Personen-Alter/Trivia: Call-1 ohne Floskel („spannende Frage“). Call-2 = Name + Alter, Punkt fertig. Geburtsdatum optional nur in Stichpunkten — nicht ungefragt in der Speech nachschieben. Kein „wenn du magst schau ich Geburt…“."
+    },
+    {
+      "intentFamily": "knowledge",
+      "situationKey": "knowledge::sunrise_sunset_clock_v1",
+      "tags": [
+        "trivia",
+        "sunrise",
+        "sunset",
+        "sonnenaufgang",
+        "compact"
+      ],
+      "expect": [
+        "answer_first"
+      ],
+      "avoid": [
+        "vague_filler",
+        "long_history",
+        "permission_questions"
+      ],
+      "summary": "Sonnenaufgang/-untergang: Call-2 nur Ort + Uhrzeit (1 Satz). Kein Firmament-Essay, kein Extra-Offer."
     },
     {
       "intentFamily": "knowledge",
@@ -575,6 +699,51 @@
       "summary": "Gericht-Wunsch (Steak, Angus, Döner, …): Must-Filter in der Fact-Lane. Soft-Fail nur in derselben Familie. Nie Steak durch Döner/Pizza ersetzen; ehrlich wenn kein Beleg."
     },
     {
+      "intentFamily": "dining",
+      "situationKey": "dining::post_choice_step_v1",
+      "tags": [
+        "pitch",
+        "timing",
+        "reserve",
+        "nav"
+      ],
+      "expect": [
+        "answer_first",
+        "concrete_place",
+        "route_button",
+        "booking_url",
+        "menu",
+        "prices"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler",
+        "long_history",
+        "new_pitch"
+      ],
+      "summary": "Nach Gastro-Wahl: Timing jetzt vs. Abend. Jetzt → Nav/ÖPNV. Abend → Timeline + Tisch-Link. Stichpunkte = Vibe/Specialty/Preis, keine Kategorie-Labels. Speisekarte = echte Karte-URL."
+    },
+    {
+      "intentFamily": "dining",
+      "situationKey": "dining::reserve_sticky_venue_v1",
+      "tags": [
+        "reserve",
+        "followup",
+        "sticky"
+      ],
+      "expect": [
+        "booking_url",
+        "answer_first",
+        "concrete_place"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler",
+        "new_pitch"
+      ],
+      "summary": "Tisch reservieren nach Wahl: gleiches Venue, Reservierungs-URL — kein neuer Pitch, keine fremden Orte, keine zweite Dual-Option."
+    },
+    {
       "intentFamily": "events",
       "situationKey": "events::cinema_program_first_v1",
       "tags": [
@@ -587,14 +756,42 @@
         "concrete_place",
         "alternatives",
         "answer_first",
-        "tickets"
+        "tickets",
+        "times_hours",
+        "prices"
       ],
       "avoid": [
         "permission_questions",
         "vague_filler",
-        "address_unless_asked"
+        "address_unless_asked",
+        "new_pitch"
       ],
-      "summary": "Kino Turn 1: Programmvorschau (Filme) zuerst, Kinos als Träger. Spielzeiten und bestes Kino erst nach Film-/Genre-Wahl. Keine Uhrzeiten-Salve am Anfang."
+      "summary": "Kino ohne Film: 2 Kinos mit Charakter (nicht Distanz-Junk). Nach Kino-Wahl: Laden + heutiges Programm/Preise; Show-Ticket-Deep-Link. Filmwahl → passende Vorstellung + Buchungs-URL."
+    },
+    {
+      "intentFamily": "events",
+      "situationKey": "events::cinema_after_venue_choice_v1",
+      "tags": [
+        "cinema",
+        "programm",
+        "tickets",
+        "post_choice"
+      ],
+      "expect": [
+        "answer_first",
+        "concrete_place",
+        "times_hours",
+        "prices",
+        "tickets",
+        "website"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler",
+        "new_pitch",
+        "nav_auto_start"
+      ],
+      "summary": "Nach Kino-Tap: sofort Programm briefen (heute, sonst morgen/Website). Ticket = Show-Deep-Link wenn belegt. Fakten, kein Re-Pitch und kein Gastro-Drift."
     },
     {
       "intentFamily": "events",
@@ -621,7 +818,28 @@
         "fake_promises",
         "nav_auto_start"
       ],
-      "summary": "Genannter Termin: flüssige 1–3 Sätze (nächstes Spiel, optional zweites, Venue, Tickets ab X belegt). Kein Stakkato/Pitch-Opener. Buttons nur Spielplan-Deep-Link + Tickets — nie Monat/Datum als Route."
+      "summary": "Nächstes Spiel: 1–2 Sätze (Datum, Uhr, Gegner, genannte Halle hard-match). Kein Zahlen-Stakkato. Stichpunkte kurz lesbar. Partner-Ticket wenn belegt, sonst Venue/Club — kein toter Ticketmaster-Link."
+    },
+    {
+      "intentFamily": "general",
+      "situationKey": "general::weather_not_help_v1",
+      "tags": [
+        "weather",
+        "tonight",
+        "call1"
+      ],
+      "expect": [
+        "answer_first",
+        "clothing_tip",
+        "temp_range",
+        "rain_timing"
+      ],
+      "avoid": [
+        "vague_filler",
+        "meta_app_pitch",
+        "permission_questions"
+      ],
+      "summary": "Wetterfrage: belegter Ausblick (Himmel/Temp/Regen) + kurze Kleidung in vollständigen kurzen Sätzen, flüssig. Nie Hilfe-Katalog, nie Telegramm-Fetzen, nie leeres „keine Live-Daten“, nie Abendplan/Sunset-Queue. Call-1 = kurze Wetter-Zusage."
     },
     {
       "intentFamily": "events",
@@ -709,6 +927,27 @@
         "meta_app_pitch"
       ],
       "summary": "Live-Anzeige oben: konkrete Orte mit Distanz/Minuten, Uhr, Preis/ETA nur belegt — nie Gattungs-Fragen („Pause/Park?“, „Foto-Spot?“, „Hochhäuser“). Erholung = menschlicher Opener + Parkname + Gehzeit nur wenn Treffer in der Nähe; Fotospot = Einladung zum Hingucken + Name + Distanz, sonst stumm. Tap = Vertiefung/Route."
+    },
+    {
+      "intentFamily": "general",
+      "situationKey": "general::wake_alarm_confirm_v1",
+      "tags": [
+        "wake",
+        "alarm",
+        "timer",
+        "timeline"
+      ],
+      "expect": [
+        "answer_first",
+        "casual_tone"
+      ],
+      "avoid": [
+        "long_history",
+        "vague_filler",
+        "permission_questions",
+        "meta_app_pitch"
+      ],
+      "summary": "Wecker gestellt: max. 1–2 kurze Sätze — Bestätigung mit Uhrzeit; abends optional ein knapper Gute-Nacht-Satz. Kein Plan-Essay, keine Regie-Stimmanweisungen im Text (sanft/leise = echte TTS-Lautstärke, nicht vorlesen). Keine Wetter-/Plan-Tipps in der Speech."
     }
   ]
 }

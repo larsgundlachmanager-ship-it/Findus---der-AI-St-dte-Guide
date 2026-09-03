@@ -20,6 +20,7 @@ function assert(cond: unknown, msg: string): void {
   assert(/GELÄNDER/i.test(FINDUS_CALL1_THINK_FRAME), 'geländer');
   assert(/Keine Restaurant/i.test(FINDUS_CALL1_THINK_FRAME) || /keine Restaurant/i.test(FINDUS_CALL1_THINK_FRAME), 'no venues');
   assert(!/nur diese 12 Familien/i.test(FINDUS_CALL1_THINK_FRAME), 'no closed catalog');
+  assert(/Mode-Switch|anderer Modus|lieber zu Fuß/i.test(FINDUS_CALL1_THINK_FRAME), 'mode-switch geländer');
   assert(CALL1_AUTONOMY_JSON_CHECKS.length === 6, '6 checks');
 }
 
@@ -32,7 +33,7 @@ function assert(cond: unknown, msg: string): void {
     scenarios: Array<{ id: string; question: string }>;
     checks: string[];
   };
-  assert(raw.scenarios.length === 5, '5 autonomy scenarios');
+  assert(raw.scenarios.length === 6, '6 autonomy scenarios');
   assert(
     raw.checks.every((c) =>
       (CALL1_AUTONOMY_JSON_CHECKS as readonly string[]).includes(c),

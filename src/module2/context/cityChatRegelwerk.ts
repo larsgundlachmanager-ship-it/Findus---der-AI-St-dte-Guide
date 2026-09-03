@@ -14,6 +14,14 @@ export type CityChatRegelwerkInput = {
   cityKey?: string | null;
   navActive?: boolean;
   calendarOpen?: boolean;
+  /**
+   * Call-1 topicScope.turnsForCall2.
+   * 0 / unset-with-skipSticky → keine Thread-/Ort-Historie (neues Thema).
+   * Follow-up: typisch 3.
+   */
+  maxRecentTurns?: number;
+  /** Topic-Cut / neues Thema — kein Sticky-Ort, kein Thread-Block. */
+  skipStickyThread?: boolean;
 };
 
 function prefsLine(): string {
@@ -68,9 +76,17 @@ export function buildCityChatRegelwerk(input: CityChatRegelwerkInput = {}): stri
       return null;
     }
   })();
+  // skipSticky früh — sonst Stadt-Label aus lastMentionedCity (Amsterdam nach Tennis).
+  let skipStickyThread = input.skipStickyThread === true;
+  const maxRecent =
+    typeof input.maxRecentTurns === 'number'
+      ? Math.max(0, Math.min(10, Math.round(input.maxRecentTurns)))
+      : null;
+  if (maxRecent === 0) skipStickyThread = true;
+
   const cityLabel =
     (input.cityHint || '').trim() ||
-    short?.lastMentionedCity ||
+    (skipStickyThread ? null : short?.lastMentionedCity) ||
     resolveActiveCity() ||
     'unbekannt';
   const cityKey =
@@ -91,7 +107,6 @@ export function buildCityChatRegelwerk(input: CityChatRegelwerkInput = {}): stri
 
   const pref = prefsLine();
   if (pref) lines.push(pref);
-  let skipStickyThread = false;
   try {
     const { wantsTaxiRide } = require('../../services/mobility/taxiRideIntent') as {
       wantsTaxiRide: (s: string) => boolean;
@@ -128,17 +143,41 @@ export function buildCityChatRegelwerk(input: CityChatRegelwerkInput = {}): stri
       lastClosedTopic: lastClosed,
     });
     skipStickyThread =
+      skipStickyThread ||
       wantsTaxiRide(input.userText || '') ||
       shouldScrubDeadThread(mode as never);
+    // Wetter ohne Deixis: nie letzten Nav-POI in den Prompt
+    try {
+      const {
+        looksLikeOutfitOrWeatherUtterance,
+        weatherAskWantsConversationPlace,
+      } = require('../planning/planUtteranceGate') as {
+        looksLikeOutfitOrWeatherUtterance: (s: string) => boolean;
+        weatherAskWantsConversationPlace: (s: string) => boolean;
+      };
+      if (
+        looksLikeOutfitOrWeatherUtterance(input.userText || '') &&
+        !weatherAskWantsConversationPlace(input.userText || '')
+      ) {
+        skipStickyThread = true;
+      }
+    } catch {
+      /* soft */
+    }
   } catch {
     try {
       const { wantsTaxiRide } = require('../../services/mobility/taxiRideIntent') as {
         wantsTaxiRide: (s: string) => boolean;
       };
-      skipStickyThread = wantsTaxiRide(input.userText || '');
+      skipStickyThread = skipStickyThread || wantsTaxiRide(input.userText || '');
     } catch {
-      skipStickyThread = false;
+      /* keep skipStickyThread */
     }
+  }
+  if (skipStickyThread) {
+    lines.push(
+      'HISTORIE: KEIN Verlauf — neues Thema. Nur DIESE User-Äußerung + frische Fakten.',
+    );
   }
   const plan = skipStickyThread ? '' : planLine(input.userText);
   if (plan) lines.push(plan);
@@ -156,7 +195,7 @@ export function buildCityChatRegelwerk(input: CityChatRegelwerkInput = {}): stri
   lines.push(
     'WEICHE: Zuerst DIESE User-Äußerung. Geparkte Threads nur bei klarem Bezug (gleiches Ziel/Thema). Uhrzeit+morgen allein ist kein Flug-Resume.',
   );
-  // Topic-Cut / Taxi: keine geparkten Threads in den Prompt (sonst Leak wie Gurkenzeit→Papst).
+  // Topic-Cut / Taxi / topicScope=0: keine Threads in den Prompt.
   if (!skipStickyThread) {
     try {
       const { wantsTaxiRide } = require('../../services/mobility/taxiRideIntent') as {
@@ -165,8 +204,9 @@ export function buildCityChatRegelwerk(input: CityChatRegelwerkInput = {}): stri
       if (!wantsTaxiRide(input.userText || '')) {
         const thread = formatThreadContextForPrompt({
           includeParkedIndex: true,
-          maxParked: 4,
+          maxParked: maxRecent != null && maxRecent <= 3 ? 0 : 4,
           cityKey,
+          maxRecentTurns: maxRecent ?? 3,
         });
         if (thread) lines.push(thread);
       }
@@ -174,8 +214,9 @@ export function buildCityChatRegelwerk(input: CityChatRegelwerkInput = {}): stri
       try {
         const thread = formatThreadContextForPrompt({
           includeParkedIndex: true,
-          maxParked: 4,
+          maxParked: maxRecent != null && maxRecent <= 3 ? 0 : 4,
           cityKey,
+          maxRecentTurns: maxRecent ?? 3,
         });
         if (thread) lines.push(thread);
       } catch {

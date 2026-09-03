@@ -364,6 +364,18 @@ function sanitizeCall1Schema(
     typeof parsed?.call2Brief === 'string' && parsed.call2Brief.trim()
       ? parsed.call2Brief.trim().slice(0, 320)
       : analysis.call2Brief ?? null;
+  const bridgeComplete =
+    parsed?.bridgeComplete === true ||
+    parsed?.bridge_complete === true ||
+    analysis.bridgeComplete === true;
+  const selectedGoldKeys = (() => {
+    const raw = parsed?.selectedGoldKeys ?? parsed?.selected_gold_keys;
+    if (!Array.isArray(raw)) return analysis.selectedGoldKeys;
+    return raw
+      .map((x) => String(x || '').trim())
+      .filter(Boolean)
+      .slice(0, 8);
+  })();
 
   return {
     ...analysis,
@@ -375,6 +387,8 @@ function sanitizeCall1Schema(
     nearestBlueprint: sanitized.nearestBlueprint,
     execution: execution ?? analysis.execution,
     call2Brief,
+    bridgeComplete: bridgeComplete || undefined,
+    selectedGoldKeys: selectedGoldKeys?.length ? selectedGoldKeys : undefined,
     intents: sanitized.intents.map((i) => ({
       id: i.id,
       lane: i.lane,
@@ -390,14 +404,16 @@ function buildManagerPrompt(opts: {
   threadBlock: string;
   city: string | null;
   navActive: boolean;
+  /** Reiche Nav-FLAG-Zeile (Mode + Ziel + Mode-Switch-Auftrag) */
+  navContextFlag?: string | null;
   calendarOpen: boolean;
   liveChat?: boolean;
   dialogFlags?: string[];
   rucksackLine?: string | null;
 }): string {
   const bridgeRule = opts.liveChat
-    ? '- bridge: Beat 1 = Verstanden + Zuspruch/Zusagen (1–2 Sätze). Keine Fakten/Optionen. Ja/Nein/„los“: null. Trivia/Faktenfrage (wie alt/wer ist): kurze Bridge Pflicht (Würdigung), nie null, session=new.'
-    : '- bridge: Beat 1 = „Ich habe dich verstanden“ + Idee würdigen oder klar zusagen was du tust (Nav starten / Eventkalender / Mittag am genannten Ort). NICHT schon Call-2 (keine Venue-Namen, Preise, Minuten). Cover 2–3 Sätze bei Recherche. Trivia/Faktenfrage: immer kurze Bridge, session=new. Bei continue/resume IMMER null. Kein Name. Wortlaut nie als Script.';
+    ? '- bridge: Beat 1 = Verstanden + Zuspruch/Zusagen (1–2 Sätze). Keine Fakten/Optionen. Kein „gleich fertig“/Warte-Meta. Ja/Nein/„los“: null. Trivia/Faktenfrage (wie alt/wer ist): kurze Bridge Pflicht (Würdigung), nie null, session=new.'
+    : '- bridge: Beat 1 = „Ich habe dich verstanden“ + Idee würdigen oder klar zusagen was du tust (Nav starten / Eventkalender / Mittag am genannten Ort). NICHT schon Call-2 (keine Venue-Namen, Preise, Minuten). Kein „gleich fertig“ / „bin gleich soweit“ / Meta-Warte. Cover 2–3 Sätze bei Recherche. Trivia/Faktenfrage: immer kurze Bridge, session=new. Bei continue/resume IMMER null. Kein Name. Wortlaut nie als Script.';
   const bridgeVoiceHint = buildCompactBridgeVoiceHint(
     resolveEffectivePersonalityMatrix(getCachedUserProfile()),
   );
@@ -418,7 +434,9 @@ function buildManagerPrompt(opts: {
     '- intentSummary: 1 Satz intern',
     '- lane: chat | nav | m1 | plan | pitch  (PRIMÄR — chat = Default)',
     '- execution: chat_lane | pitch_module | flight_advisor | plan_module | plan_walkthrough | tour_module | events_research | nav_execute | m1_poi | memory | task_fanout | reisebuero — EIN Backend pro Turn; Code dispatcht nur danach.',
-    '- call2Brief: 1–3 Sätze intern — Antwort-STRUKTUR für Call 2 (was zuerst, Top-2, Buttons) — kein Dialog-Script.',
+    '- call2Brief: 1–3 Sätze intern — Antwort-STRUKTUR für Call 2 (was zuerst, Top-2, Buttons) — kein Dialog-Script. null/leer wenn bridgeComplete=true (Bridge war die ganze Antwort / Klärfrage).',
+    '- bridgeComplete: true wenn die Bridge die User-Antwort schon vollständig trägt — inkl. gezielter Klärfrage bei fehlendem Pflicht-Slot (Flug-Uhr, Taxi-Ziel, …), Nav-Stop, Mode-Switch, reine Bestätigung. Dann Call 2 / Recherche skippen. Wortlaut der Frage frei, kein Script.',
+    '- selectedGoldKeys: 0–N Keys aus OWNER_GOLD_KATALOG die zu DIESEM Satz passen; bei unbekannter Frage [] und Auftrag selbst erfinden.',
     '- route: legacy m1_poi | m3_nav_start | m3_nav_query | m5_plan | memory | blueprint | smalltalk (an lane anpassen)',
     '- blueprintId / blueprintStage: cinema/cinema_orient, dining/dining_choice, hotel/hotel_choice, live_events/today, compound_evening_goal/grill — oder null wenn keiner passt (neu denken, nicht erzwingen)',
     '- nearestBlueprint: ähnliche Id oder null (Theater→cinema)',
@@ -446,27 +464,32 @@ function buildManagerPrompt(opts: {
     '- nameAllowed: immer false außer echte Begrüßung nach langer Pause',
     '- jobHint: flight_trip nur bei klarem Flug/Thread — nie nur wegen Uhr+morgen',
     '- bridgeMeta: { researchBudgetSec: 0–12 }',
-    '- topicScope: { mode: new|followup, turnsForCall2: 0–10, inheritLiveInventory?: bool }',
+    '- topicScope: { mode: new|followup, turnsForCall2: 0–10, inheritLiveInventory?: bool }. HART: mode=new ⇒ turnsForCall2=0 + inheritLiveInventory=false (Code erzwingt 0 Historie). Follow-up: typisch turnsForCall2=3, max 10.',
     '- cityScope: { cityId, researchCity, packPolicy: use_local|require_download|live_bootstrap|none }',
     '- memoryPolicy: { shortTerm: bool, longTerm: bool }',
     '',
     'HART (Bug-Schutz — kurz):',
+    '- HAUPTZIEL: Userfrage bestmöglich beantworten, User glücklich. Erfinde Teilfragen + work[] dafür.',
+    '- Unbekannte Frage (Höhlentour, Malkurs, …) → Auftrag erfinden (execution/work/destCity/call2Brief/criteria), nie „fehlt in Gold → Laber“, nie Fakten erfinden, nie falsche Kategorie.',
+    '- Nav-Stop („stopp Navigation“) → execution=nav_execute, bridge sagt Stopp zu, bridgeComplete=true — kein neuer Start.',
     '- Unbekannte Frage → Auftrag erfinden (execution/work/destCity/call2Brief), nie Fakten erfinden, nie falsche Kategorie (Nightlife statt Team).',
     '- HART: Genanntes Team/Act/Halle + Terminfrage → execution=events_research, destCity/cityScope.researchCity aus dem Satz (nicht GPS-Heimat). Call 2 sucht genau DAS — kein Club/Konzert-Ersatz.',
-    '- Zuerst DIESE Äußerung. Resume nur bei klarem Bezug; sonst session=new. Isolation: toten Thread nicht weben.',
+    '- Zuerst DIESE Äußerung. Resume nur bei klarem Bezug; sonst session=new + topicScope.mode=new + turnsForCall2=0. Isolation: toten Thread nicht weben — Code schickt dann KEINE alte Historie.',
     '- Nie aus zwei Wörtern (Uhrzeit, morgen) einen Flug ableiten. Ort+Uhr einplanen = plan. Flug/Flughafen/Leave-by = flight_advisor.',
     '- lane=chat erfindet keine Hotels, Event-Programme, Orts-Empfehlungen ohne Distanz.',
-    '- Bridge: keine Fakten. Fehlt Pflicht-Slot (Flug-Uhr) → mündlich nachfragen, nichts erfinden.',
-    '- Follow-up am offenen Auftrag: session=continue, topicScope followup. Neues Thema nach Trivia: turnsForCall2=0.',
+    '- Bridge: keine Fakten erfinden. Fehlt Blocker-Slot (Flug-Uhr, Taxi-Ziel ohne Thread-Anker) → Bridge = kurze Gegenfrage + bridgeComplete=true + work[] leer; Kontext/Thread darf Slots füllen — nicht bei jeder Lücke nerven.',
+    '- Follow-up am offenen Auftrag: session=continue, topicScope followup + turnsForCall2 1–3. Klärfrage = continue. Neues Thema / Trivia / Wetter: session=new, turnsForCall2=0.',
     '- Multi-Intent: intents[]/work[] nicht weglassen.',
     '- Korrektur/„mag ich nicht“: session=continue, neue criteria — kein Themen-Sprung.',
     opts.liveChat
       ? '- LIVE-CHAT: pace=instant; needsResearch=quick außer explizit „recherchier/online“. Bridge kürzer.'
       : '',
     '',
-    'GELÄNDER siehe DENKRAHMEN oben (Flug/Hotel/Kino/Events/Gastro/Plan/Notfall/Nav/Wetter/Reisebüro) — nur wenn’s passt. Unbekannte Frage = selber planen.',
+    'GELÄNDER siehe DENKRAHMEN oben (Flug/Hotel/Kino/Events/Gastro/Plan/Notfall/Nav/Mode-Switch/Wetter/Reisebüro) — nur wenn’s passt. Unbekannte Frage = selber planen.',
     '',
-    opts.navActive ? 'FLAG: Navigation läuft.' : '',
+    opts.navActive
+      ? opts.navContextFlag || 'FLAG: Navigation läuft.'
+      : '',
     opts.calendarOpen
       ? 'FLAG: Plan-Kalender offen — Plan-Edits = plan; Just-Do-It Wissen = chat. User kann rausspringen — passende Lane, Plan-Session bleibt.'
       : '',
@@ -490,6 +513,8 @@ export async function analyzeManagerTurn(opts: {
   cityHint?: string | null;
   cityKey?: string | null;
   navActive?: boolean;
+  /** Optional vorgefertigte Nav-FLAG (sonst aus Live-Nav ableiten) */
+  navContextFlag?: string | null;
   calendarOpen?: boolean;
   signal?: AbortSignal;
   /** Warmup: skip speaking constraints */
@@ -537,16 +562,6 @@ export async function analyzeManagerTurn(opts: {
       bridgeMaxWords: live ? 8 : undefined,
       fastDeadlineMs: live ? 1500 : undefined,
     });
-    const taxiRide = (() => {
-      try {
-        const { wantsTaxiRide } = require('../../services/mobility/taxiRideIntent') as {
-          wantsTaxiRide: (s: string) => boolean;
-        };
-        return wantsTaxiRide(userText);
-      } catch {
-        return false;
-      }
-    })();
     return attachTurnFrame(
       sanitizeCall1Schema(
       {
@@ -554,8 +569,8 @@ export async function analyzeManagerTurn(opts: {
         route: h.route,
         blueprintId: h.blueprintId,
         blueprintStage: h.blueprintStage,
-        session: getForegroundThread() && !taxiRide ? 'continue' : 'new',
-        threadMatchId: taxiRide ? null : getForegroundThread()?.id ?? null,
+        session: 'new',
+        threadMatchId: null,
         subject: null,
         bridge: null,
         lanePlan: 'fast_only',
@@ -568,6 +583,7 @@ export async function analyzeManagerTurn(opts: {
         nameAllowed: false,
         jobHint: h.jobHint,
         chatLane: laneFromLegacyRoute(h.route),
+        topicScope: { mode: 'new', turnsForCall2: 0, inheritLiveInventory: false },
       },
       null,
     ),
@@ -594,6 +610,8 @@ export async function analyzeManagerTurn(opts: {
         cityKey,
         navActive: Boolean(opts.navActive),
         calendarOpen: Boolean(opts.calendarOpen),
+        // Call 1 braucht genug Kontext zum Topic-Cut, aber nicht 10 Turns.
+        maxRecentTurns: 3,
       });
     }
   } catch {
@@ -604,6 +622,7 @@ export async function analyzeManagerTurn(opts: {
         cityKey,
         navActive: Boolean(opts.navActive),
         calendarOpen: Boolean(opts.calendarOpen),
+        maxRecentTurns: 3,
       });
     } catch {
       threadBlock = '';
@@ -625,6 +644,20 @@ export async function analyzeManagerTurn(opts: {
     threadBlock: threadBlock.slice(0, 2800),
     city: cityHint ?? null,
     navActive: Boolean(opts.navActive),
+    navContextFlag: (() => {
+      if (opts.navContextFlag) return opts.navContextFlag;
+      if (!opts.navActive) return null;
+      try {
+        const {
+          formatActiveNavCall1Flag,
+        } = require('../../services/navigation/switchActiveNavTravelMode') as {
+          formatActiveNavCall1Flag: () => string | null;
+        };
+        return formatActiveNavCall1Flag();
+      } catch {
+        return null;
+      }
+    })(),
     calendarOpen: Boolean(opts.calendarOpen),
     liveChat: live,
     dialogFlags,

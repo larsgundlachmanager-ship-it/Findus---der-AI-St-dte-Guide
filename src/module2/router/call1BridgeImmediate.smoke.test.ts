@@ -1,5 +1,5 @@
 /**
- * Call1 Bridge → TTS bevor Call2: Source-Vertrag.
+ * Call1 Bridge → TTS: Manager-Verfassung = nur Call-1 JSON-Stream (onBridge).
  * Run: npx --yes tsx src/module2/router/call1BridgeImmediate.smoke.test.ts
  */
 
@@ -18,31 +18,25 @@ const fused = readFileSync(
   join(process.cwd(), 'src/module2/speech/fusedTurnSpeech.ts'),
   'utf8',
 );
-const choice = readFileSync(
-  join(process.cwd(), 'src/module2/router/choiceTurnContext.ts'),
-  'utf8',
-);
 
-assert(turn.includes('fireEarlyFloskelBridge'), 'Early Floskel Helper');
 assert(
-  turn.includes('Call-1 Bridge SOFORT nach Rewrite'),
-  'Bridge startet nach Rewrite, vor Pack/Hydrate/Analyze',
+  !/fireEarlyFloskelBridge\s*\(/.test(turn),
+  'keine Early-Floskel vor Call 1',
 );
-assert(turn.includes('force: true'), 'Early Bridge force gegen Dedup-Stille');
+assert(turn.includes('onBridge:'), 'Call-1 Stream-Bridge onBridge');
 assert(
-  turn.includes('Ack erst NACH echtem Enqueue'),
-  'noteLatencyAck erst nach fusedEnqueue',
-);
-assert(
-  turn.includes('Early Bridge: erst nach echtem TTS-Start'),
-  'bridgeSpokenEarly erst nach Speak',
+  turn.includes('JSON-Stream') || turn.includes('onBridge'),
+  'Bridge aus Call-1 Stream',
 );
 assert(
-  turn.includes('Early-Flag ohne laufende Session'),
-  'Safety: Flag ohne Pump → nochmal Bridge',
+  turn.includes('speakBridgeFromAnalysis'),
+  'speakBridgeFromAnalysis für Stream',
 );
-assert(turn.includes('peekChoiceFastPath'), 'Choice-Fast peek vor Early Bridge');
-assert(choice.includes('export function peekChoiceFastPath'), 'peekChoiceFastPath export');
+assert(
+  turn.includes('Early Bridge: erst nach echtem TTS-Start') ||
+    turn.includes('bridgeSpokenEarly'),
+  'bridgeSpokenEarly Markierung',
+);
 
 assert(fused.includes('return p.hasStarted() || starting'), 'fusedEnqueue meldet echten Start');
 assert(

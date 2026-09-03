@@ -18,7 +18,10 @@ export function looksLikeOutfitOrWeatherUtterance(text: string): boolean {
       t,
     ) &&
       /\b(soll|empfehl|brauch|mitnehm|wetter|abend|heute)\b/i.test(t)) ||
-    (/\b(wetter|regen|temperatur|grad|wie\s+kalt|wie\s+warm)\b/i.test(t) &&
+    // Verb-Formen: regnen/regnet — sonst Sticky-Pitch (Tennis) nach Regen-Frage.
+    (/\b(wetter|regnen|regnet|regen|regnerisch|schneit|schneien|schnee|temperatur|grad|wie\s+kalt|wie\s+warm)\b/i.test(
+      t,
+    ) &&
       !/\b(plan(e|en|ung)|einplanen|timeline|kalender)\b/i.test(t))
   );
 }
@@ -29,7 +32,9 @@ export function weatherAskIsImmediateNow(text: string): boolean {
   if (!t) return false;
   return (
     /\b(jetzt|gerade|im moment|momentan|aktuell)\b/i.test(t) ||
-    /\b(regnet|schneit's|schneit|gibt's regen|regnet es)\b/i.test(t)
+    /\b(regnet|regnen|schneit's|schneit|gibt's regen|regnet es|wird(?:'s|s)?\s+(?:es\s+)?(?:heute\s+)?regnen)\b/i.test(
+      t,
+    )
   );
 }
 
@@ -50,6 +55,42 @@ export function weatherAskWantsLocalGps(text: string): boolean {
   }
   return /\b(hier|vor\s+ort|wo\s+ich\s+(?:gerade\s+)?(?:bin|stehe)|an\s+meinem\s+standort|meine(?:r)?\s+(?:gps[-\s]?)?position)\b/iu.test(
     t,
+  );
+}
+
+/**
+ * Deixis auf Gesprächsort: „Wetter da / dort / aktuell da“ → Sticky-Stadt.
+ * Default Wetter bleibt GPS — nur mit klarem „da/dort“.
+ */
+export function weatherAskWantsConversationPlace(text: string): boolean {
+  const t = (text ?? '').replace(/\s+/g, ' ').trim();
+  if (!t) return false;
+  try {
+    const { extractCityFromText } = require('../context/shortTermContext') as {
+      extractCityFromText: (s: string) => string | null;
+    };
+    if (extractCityFromText(t)) return false;
+  } catch {
+    /* soft */
+  }
+  if (weatherAskWantsLocalGps(t)) return false;
+  // „danach/damit/…“ nicht als Orts-Deixis
+  const cleaned = t
+    .replace(
+      /\b(danach|damit|davon|dazu|daran|dafür|dafuer|dabei|dadurch|dadurch|darauf|darunter)\b/giu,
+      ' ',
+    )
+    .replace(/\s+/g, ' ')
+    .trim();
+  return (
+    /\b(?:wetter|regen|temperatur|kalt|warm|anzug|anziehen|outfit|kleidung).{0,48}\b(?:da|dort)\b/iu.test(
+      cleaned,
+    ) ||
+    /\b(?:da|dort)\b.{0,48}\b(?:wetter|regen|temperatur|kalt|warm|anzug|anziehen|outfit)\b/iu.test(
+      cleaned,
+    ) ||
+    /\bwie\s+ist\s+(?:das\s+)?wetter\s+(?:da|dort)(?:\s+aktuell)?\b/iu.test(cleaned) ||
+    /\b(?:da|dort)\s+aktuell\b/iu.test(cleaned)
   );
 }
 
@@ -93,14 +134,16 @@ export function weatherOutfitLookupTips(text: string): string {
     future
       ? '- Gefragter Tag ist nicht heute — Vorhersage für diesen Tag, nicht den Jetzt-Snap als ganze Antwort.'
       : '- Gefragter Tag: heute, Live-Zahlen.',
-    '- Stadt: GPS/aktueller Ort, außer der User nennt eine andere.',
-    '- Speech immer (nur belegt, nie erfinden): Himmel (Sonne/Wolken), Temperatur von–bis oder Spitze, wann Regen/Schauer, ein Kleidungstipp.',
+    '- Stadt: immer GPS/Standort — außer explizit genannt („Wetter in London“) oder Deixis „da/dort“ (Gesprächsstadt).',
+    '- Speech immer (nur belegt, nie erfinden): Himmel, Temperatur von–bis oder Spitze, wann Regen/Schauer, ein Kleidungstipp — alles in kurzen VOLLEN Sätzen (Subjekt+Verb), kein Komma-Telegramm.',
+    '- Nach Sonnenuntergang / vor Sonnenaufgang: klarer Himmel / Wolken — nie Sonne als Tag-Wetter. Sterne nur ehrlich (Dorf/Land oft, Stadt oft nicht).',
+    '- Kleidung natürlich einweben — keine Parenthesen, kein „(Jacke mitnehmen)“-Meta, kein „leichte Bekleidung reicht“ als Fetzen ohne Satzbau.',
     '- Stichpunkte dieselben drei: 1) Himmel 2) Temperatur 3) Kleidung (bei Nässe Jacke/Schirm im Tipp).',
-    '- Ton: locker, flüssig — kein Behörden-Wetterbericht, keine Aufzählung wie eine Liste vorlesen.',
+    '- Ton: locker, flüssig — kein Behörden-Wetterbericht, keine Aufzählung wie eine Liste vorlesen. Kurz und knapp JA, abgehackt NEIN.',
     '- VERBOTEN: Aushang, schwarzes Brett, Bahnhof, „selber nachgucken“ als Wetter-Antwort; kein Gewitter ohne Beleg.',
     outfitAsk
-      ? '- Outfit gefragt: Kleidung etwas präsenter, Wetter kurz als Begründung.'
-      : '- Nur Wetter gefragt: Wetter vorne, Kleidung ein kurzer Tipp hinten — Jacke nicht erzwingen wenn mild/trocken.',
+      ? '- Outfit gefragt: Kleidung etwas präsenter im Fließtext, Wetter kurz als Begründung.'
+      : '- Nur Wetter gefragt: Wetter vorne, Kleidung ein kurzer Tipp im selben Fließtext — Jacke nicht erzwingen wenn mild/trocken.',
     '- Timeline nur mitdenken wenn dort schon Stops stehen; leer → ignorieren, nichts eintragen.',
   ].join('\n');
 }

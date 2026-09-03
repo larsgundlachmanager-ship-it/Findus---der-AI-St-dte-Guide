@@ -64,6 +64,12 @@ export type ChatLaneInput = {
   openIntentsSummary?: string | null;
   signal?: AbortSignal;
   fromPlanContext?: boolean;
+  /** Call-1 topicScope — Chat-Lane Historie hart begrenzen. */
+  topicScope?: {
+    mode: 'new' | 'followup';
+    turnsForCall2: number;
+    inheritLiveInventory?: boolean;
+  } | null;
 };
 
 export type ChatLaneResult = {
@@ -233,6 +239,15 @@ async function gatherToolContext(opts: {
   }
 
   if (opts.needsResearch === 'deep' || opts.needsResearch === 'pack') {
+    let skipPackGrow = false;
+    try {
+      const { looksLikeOutfitOrWeatherUtterance } = require('../planning/planUtteranceGate') as {
+        looksLikeOutfitOrWeatherUtterance: (s: string) => boolean;
+      };
+      skipPackGrow = looksLikeOutfitOrWeatherUtterance(opts.userText);
+    } catch {
+      skipPackGrow = false;
+    }
     let skipHtml = false;
     try {
       const { shouldSkipHtmlWebResearch } = require('../../services/research/htmlResearchGate') as {
@@ -243,41 +258,43 @@ async function gatherToolContext(opts: {
       skipHtml = false;
     }
     if (!skipHtml) {
-      try {
-        const { maybeGrowPackFromUserTurn } = require('../../services/research/packGrowthFromTurn') as {
-          maybeGrowPackFromUserTurn: (o: {
-            userText: string;
-            lat?: number | null;
-            lng?: number | null;
-          }) => Promise<{ promptBlock?: string } | null>;
-        };
-        let lat: number | null = null;
-        let lng: number | null = null;
+      if (!skipPackGrow) {
         try {
-          const { useFinnusStore } = require('../../store/useFinnusStore') as {
-            useFinnusStore: {
-              getState: () => {
-                lastGpsLat?: number | null;
-                lastGpsLng?: number | null;
+          const { maybeGrowPackFromUserTurn } = require('../../services/research/packGrowthFromTurn') as {
+            maybeGrowPackFromUserTurn: (o: {
+              userText: string;
+              lat?: number | null;
+              lng?: number | null;
+            }) => Promise<{ promptBlock?: string } | null>;
+          };
+          let lat: number | null = null;
+          let lng: number | null = null;
+          try {
+            const { useFinnusStore } = require('../../store/useFinnusStore') as {
+              useFinnusStore: {
+                getState: () => {
+                  lastGpsLat?: number | null;
+                  lastGpsLng?: number | null;
+                };
               };
             };
-          };
-          const st = useFinnusStore.getState();
-          lat = typeof st.lastGpsLat === 'number' ? st.lastGpsLat : null;
-          lng = typeof st.lastGpsLng === 'number' ? st.lastGpsLng : null;
+            const st = useFinnusStore.getState();
+            lat = typeof st.lastGpsLat === 'number' ? st.lastGpsLat : null;
+            lng = typeof st.lastGpsLng === 'number' ? st.lastGpsLng : null;
+          } catch {
+            /* soft */
+          }
+          const grown = await maybeGrowPackFromUserTurn({
+            userText: opts.userText,
+            lat,
+            lng,
+          });
+          if (grown?.promptBlock) {
+            chunks.push(grown.promptBlock.slice(0, 1600));
+          }
         } catch {
           /* soft */
         }
-        const grown = await maybeGrowPackFromUserTurn({
-          userText: opts.userText,
-          lat,
-          lng,
-        });
-        if (grown?.promptBlock) {
-          chunks.push(grown.promptBlock.slice(0, 1600));
-        }
-      } catch {
-        /* soft */
       }
       try {
         const { runWebResearch } = require('../../services/research/webResearchService') as {
@@ -397,14 +414,14 @@ async function gatherToolContext(opts: {
 }
 
 const WEITERDENKEN = [
-  'WEITERDENKEN (Butler, max. EIN Offer):',
-  '- Nach der Antwort: was hilft als Nächstes — im Persona-Ton, immer Du, nie Siezen (auch Aristokrat/Kind).',
-  '- Faktenfrage (Alter, Ort, Person): erst die Kurzantwort. Optional weiches Live-Angebot („wenn du magst, schau ich kurz …“) — kein steifes „Kann/Soll ich … sagen?“ / kein Siezen.',
-  '- Wenn Nachschlagen Sinn macht: Button-Label genau „schau nach“ (nie vages „Mehr“), textPrompt = genau das Thema live vertiefen.',
+  'WEITERDENKEN (Butler — nur wenn es wirklich hilft):',
+  '- Geschlossene Faktenfrage (Alter, Einwohner, Fläche, Sonnenaufgang, Rechnung, eine Maßzahl): Antwort + Stichpunkte, KEIN Offer, kein „wenn du magst…“.',
+  '- Nur bei offenen Themen (News, Programm, Künstler vor Ort, zeitgebundenes Event): max. EIN weiches Angebot im Persona-Ton, immer Du.',
+  '- Wenn Nachschlagen Sinn macht und der User nicht schon fertig ist: Button-Label genau „schau nach“, textPrompt = genau das Thema.',
   '- Künstler/Band: Auftritt in aktueller Stadt/Nähe nur wenn belegt → kurz + Interesse fragen.',
   '- Zeitgebunden (Finsternis, Konzert): Erinnern anbieten wenn sinnvoll.',
   '- Wolken nur mit Wetterbeleg.',
-  '- wantsReminder / localShowHint im Output setzen wenn Offer passt.',
+  '- wantsReminder / localShowHint im Output setzen wenn Offer passt — sonst weglassen.',
 ].join('\n');
 
 export async function runChatLane(
@@ -423,21 +440,28 @@ export async function runChatLane(
         blueprintId: input.blueprintId,
       })
     ) {
-      const { detectLiveInventoryKind } = require('../router/liveInventoryGate') as {
-        detectLiveInventoryKind: (s: string) => 'hotel' | 'pitch_choice' | 'events' | null;
-      };
-      const kind = detectLiveInventoryKind(userText);
-      return {
-        speech: '',
-        bullets: [],
-        buttons: [],
-        bridgeSpoken: null,
-        blueprintId: input.blueprintId || null,
-        personaVariant: input.personaVariant || 'default',
-        needsResearch: input.needsResearch || 'deep',
-        celestial: false,
-        nextHandoff: kind === 'events' ? 'events' : 'pitch',
-      };
+      // Neues Thema: Inventory-Heuristik darf Call-1 chat_lane nicht stehlen.
+      const isolated =
+        input.topicScope?.mode === 'new' ||
+        (input.topicScope?.turnsForCall2 ?? 1) <= 0 ||
+        input.topicScope?.inheritLiveInventory === false;
+      if (!isolated) {
+        const { detectLiveInventoryKind } = require('../router/liveInventoryGate') as {
+          detectLiveInventoryKind: (s: string) => 'hotel' | 'pitch_choice' | 'events' | null;
+        };
+        const kind = detectLiveInventoryKind(userText);
+        return {
+          speech: '',
+          bullets: [],
+          buttons: [],
+          bridgeSpoken: null,
+          blueprintId: input.blueprintId || null,
+          personaVariant: input.personaVariant || 'default',
+          needsResearch: input.needsResearch || 'deep',
+          celestial: false,
+          nextHandoff: kind === 'events' ? 'events' : 'pitch',
+        };
+      }
     }
   } catch {
     /* soft */
@@ -504,7 +528,7 @@ export async function runChatLane(
         bridgeSpoken: bridge,
         blueprintId: 'weather',
         personaVariant: input.personaVariant || 'default',
-        needsResearch: 'pack',
+        needsResearch: 'quick',
         celestial: false,
         nextHandoff: null,
         cardTitle,
@@ -709,6 +733,21 @@ export async function runChatLane(
       if (!looksLikeOutfitOrWeatherUtterance(userText) || looksLikePicnicQuery(userText)) {
         return false;
       }
+      // Fremde Stadt / „da“ → Sync-Cache (GPS) nicht nehmen — fetchAndFormatWeatherVoice geocodet
+      try {
+        const {
+          resolveWeatherPlaceTarget,
+        } = require('../../services/ui/weatherDayPlanSpeech') as {
+          resolveWeatherPlaceTarget: (
+            t: string,
+            h?: string | null,
+          ) => { useGps: boolean; namedCity: boolean };
+        };
+        const place = resolveWeatherPlaceTarget(userText, input.cityHint);
+        if (!place.useGps || place.namedCity) return false;
+      } catch {
+        /* soft — Cache ok */
+      }
       const { getCachedWeatherSnapshot } = require('../../services/weatherService') as {
         getCachedWeatherSnapshot: () => {
           currentTempC?: number | null;
@@ -785,12 +824,21 @@ export async function runChatLane(
         userText?: string;
         cityHint?: string | null;
         cityKey?: string | null;
+        maxRecentTurns?: number;
+        skipStickyThread?: boolean;
       }) => string;
     };
+    const scope = input.topicScope;
+    const turns =
+      scope?.mode === 'new' || (scope?.turnsForCall2 ?? 0) <= 0
+        ? 0
+        : Math.max(1, Math.min(10, scope?.turnsForCall2 ?? 3));
     cityRegelwerk = buildCityChatRegelwerk({
       userText,
       cityHint: input.cityHint,
       cityKey: input.cityKey,
+      maxRecentTurns: turns,
+      skipStickyThread: turns === 0,
     }).slice(0, 1800);
   } catch {
     cityRegelwerk = '';
@@ -823,7 +871,13 @@ export async function runChatLane(
       'WELTWISSEN: Das ist eine Faktenfrage, kein Stadt-Pack-Treffer.',
       'Nicht aus dem Offline-Katalog antworten. Nicht navigieren. Nicht Prisdorf/Stadt erfinden.',
       'Kurze belegte Antwort (Alter/Zahl/Name). Google Search nutzen.',
-    ].join(' ');
+      'Kompakt: max 1–2 Sätze Speech. Stichpunkte: klare Ziffern (ca. 2300, nicht „2“ + „297“).',
+      /\d+\s*(?:\+|plus|minus|-)\s*\d+/iu.test(userText)
+        ? 'Rechenfrage: nur die Ergebniszahl, kein Theater.'
+        : '',
+    ]
+      .filter(Boolean)
+      .join(' ');
   }
 
   if (!liveWeatherDone && hasAnyChatLlm() && needsResearch === 'quick') {

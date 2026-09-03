@@ -758,6 +758,8 @@ export function routeConversationTopic(opts: {
   cityHint?: string | null;
   /** Pflicht-Partition; fehlt → aus cityHint / unknown */
   cityKey?: string | null;
+  /** Call-1 session=new / turns=0 — kein Resume, kein Continue. */
+  forceNew?: boolean;
 }): TopicRouteDecision {
   const text = (opts.userText || '').trim();
   const cityKey = normalizeThreadCityKey(
@@ -787,6 +789,17 @@ export function routeConversationTopic(opts: {
   }
 
   const freshFg = getForegroundThread();
+
+  // Call-1 Isolation: session=new → nie geparkten Thread wiederbeleben.
+  if (opts.forceNew) {
+    if (freshFg) {
+      mutate((s) => {
+        parkThread(s, freshFg.id);
+        parkedIds.push(freshFg.id);
+        if (s.foregroundId === freshFg.id) s.foregroundId = null;
+      });
+    }
+  } else {
   const resumable = listResumableThreads(cityKey).filter(
     (t) => t.id !== freshFg?.id,
   );
@@ -877,9 +890,11 @@ export function routeConversationTopic(opts: {
       return { mode: 'continue', thread, parkedIds };
     }
   }
+  } // !forceNew
 
   // Parallel: keep previous parked, open new foreground
   const parallel =
+    !opts.forceNew &&
     wantsParallel(text) &&
     freshFg &&
     normalizeThreadCityKey(freshFg.cityKey || freshFg.cityHint) === cityKey &&
@@ -888,13 +903,14 @@ export function routeConversationTopic(opts: {
   // New topic (default when not continue/resume)
   let created!: ConversationThread;
   mutate((s) => {
-    if (freshFg) {
-      parkThread(s, freshFg.id);
-      parkedIds.push(freshFg.id);
+    const stillFg = getForegroundThread();
+    if (stillFg) {
+      parkThread(s, stillFg.id);
+      parkedIds.push(stillFg.id);
     }
     // Park other actives
     for (const t of s.threads) {
-      if (t.status === 'active' && t.id !== freshFg?.id) {
+      if (t.status === 'active' && t.id !== stillFg?.id) {
         parkThread(s, t.id);
         parkedIds.push(t.id);
       }
@@ -1081,6 +1097,8 @@ export function formatThreadContextForPrompt(opts?: {
   includeParkedIndex?: boolean;
   maxParked?: number;
   cityKey?: string | null;
+  /** Max. kürzliche User/Assistant-Paare im Prompt (Call-1 topicScope). */
+  maxRecentTurns?: number;
 }): string {
   const scopeKey = opts?.cityKey
     ? normalizeThreadCityKey(opts.cityKey)
@@ -1095,15 +1113,20 @@ export function formatThreadContextForPrompt(opts?: {
   }
   const includeParked = opts?.includeParkedIndex !== false;
   const maxParked = opts?.maxParked ?? 3;
+  const maxRecent = Math.max(0, Math.min(10, opts?.maxRecentTurns ?? 10));
   const lines: string[] = [
     '=== GESPRÄCHS-THREAD (SSOT — nur dieser Kontext für Kontinuität) ===',
   ];
   if (scopeKey) {
     lines.push(`cityKey=${scopeKey}`);
   }
+  if (maxRecent <= 0) {
+    lines.push('Kein Verlauf — frischer Start, nicht auf alte Themen beziehen.');
+    return lines.join('\n');
+  }
   if (!fg) {
     lines.push('Kein aktiver Thread — frischer Start, nicht auf alte Themen beziehen.');
-    if (includeParked) {
+    if (includeParked && maxParked > 0) {
       const parked = listResumableThreads(scopeKey).slice(0, maxParked);
       if (parked.length) {
         lines.push(
@@ -1126,20 +1149,26 @@ export function formatThreadContextForPrompt(opts?: {
   lines.push(
     `Aktiv: ${fg.label} [${fg.category}] · cityKey=${normalizeThreadCityKey(fg.cityKey || fg.cityHint)} · ${age}`,
   );
-  if (fg.summary) lines.push(`Stand: ${fg.summary}`);
+  if (fg.summary && maxRecent >= 2) lines.push(`Stand: ${fg.summary}`);
   const ents = Object.entries(fg.entities);
-  if (ents.length) {
+  if (ents.length && maxRecent >= 2) {
     lines.push(
       `Entities: ${ents.map(([k, v]) => `${k}=${v}`).join(', ')}`,
     );
   }
-  if (fg.openLoops.length) {
+  if (fg.openLoops.length && maxRecent >= 2) {
     lines.push(`Offene Punkte: ${fg.openLoops.slice(0, 3).join('; ')}`);
   }
-  if (fg.lastAssistantSnippet) {
-    lines.push(`Zuletzt gesagt (kurz): ${fg.lastAssistantSnippet}`);
+  // Hartes Limit: bei maxRecent=1 nur letzte User-Zeile; sonst Kurzsnippet.
+  if (fg.lastUserText) {
+    lines.push(`Letzter User: ${fg.lastUserText.slice(0, maxRecent >= 3 ? 220 : 120)}`);
   }
-  if (includeParked) {
+  if (fg.lastAssistantSnippet && maxRecent >= 2) {
+    lines.push(
+      `Zuletzt gesagt (kurz): ${fg.lastAssistantSnippet.slice(0, maxRecent >= 3 ? 220 : 100)}`,
+    );
+  }
+  if (includeParked && maxParked > 0 && maxRecent >= 3) {
     const parked = listResumableThreads(scopeKey || fg.cityKey || fg.cityHint)
       .filter((t) => t.id !== fg!.id)
       .slice(0, maxParked);
@@ -1152,7 +1181,7 @@ export function formatThreadContextForPrompt(opts?: {
     }
   }
   lines.push(
-    'Regel: Zuerst DIESE Äußerung. Aktiven/geparkten Thread nur aufgreifen, wenn der Satz klar dazugehört (gleiches Ziel, Anapher, „der Flieger“). Uhrzeit+Tag allein = kein Resume.',
+    `Regel: Zuerst DIESE Äußerung. Max ${maxRecent} jüngste Bezugspunkte. Älteres ignorieren. Uhrzeit+Tag allein = kein Resume.`,
   );
   return lines.join('\n');
 }

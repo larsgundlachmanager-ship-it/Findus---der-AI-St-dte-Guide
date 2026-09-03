@@ -74,9 +74,13 @@ const TIME_FOLLOW_RE =
 const EVENT_DEEPEN_FOLLOW_RE =
   /\b(erzähl|erzaehl|mehr\s+dazu|mehr\s+darüber|mehr\s+darueber|mehr\s+programm|läuft|laeuft|wirklich|tatsächlich|tatsaechlich|programm|flyer|pdf|eintritt|details?|darüber|darueber)\b/iu;
 
-/** Pitch-Follow-up: Ablehnung / mehr Optionen / weitermachen — gleicher Suchkontext. */
+/** Pitch-Follow-up: Ablehnung / mehr Optionen / Timing-Antwort nach Fork. */
 const PITCH_FOLLOW_RE =
   /\b(?:(?:das|die|den|es)\s+)?(?:mag\s+ich\s+nicht|gefällt\s+mir\s+nicht|gefaellt\s+mir\s+nicht|will\s+ich\s+nicht|nichts\s+für\s+mich|nicht\s+so\s+gerne|nicht\s+gerne)|(?:nee|nö|nein)(?:\s+(?:das|die|den))?(?:\s+mag\s+ich\s+nicht)?|\b(?:was\s+gibt(?:'s|s|\s+es)\s+noch|was\s+noch|andere(?:s|n)?\s+option(?:en)?|andere(?:r|s)?\s+vorschlag|neu\s*suchen|beides\s+nicht|lieber\s+was\s+anderes|etwas\s+anderes|was\s+anderes|wie\s+geht(?:'s|s|\s+es)\s+(?:denn\s+)?(?:da\s+)?weiter|und\s+weiter|zeig\s+(?:mir\s+)?(?:noch\s+)?(?:mehr|andere)|kein(?:e|en)?\s+\w{3,20}\s+(?:so\s+)?gerne)\b/iu;
+
+/** Nach Timing-Frage (jetzt vs. Abend) — Live-Inventar behalten. */
+const PITCH_TIMING_FOLLOW_RE =
+  /\b(?:jetzt(?:\s+hin)?|gleich\s+hin|heute\s+abend|für\s+heute(?:\s+abend)?|spaeter|später|einplanen|heute\s+um\s+\d)/iu;
 
 /** Nackte Uhrzeit am offenen Auftrag („um 20 Uhr“) — kein neues Thema. */
 const BARE_CLOCK_FOLLOW_RE =
@@ -134,6 +138,14 @@ export function isInventoryFollowUp(text: string): boolean {
   const t = (text || '').replace(/\s+/g, ' ').trim();
   if (!t) return false;
   try {
+    const { isStickyVenueTaskIntent } = require('../pitch/shouldHandoffPitch') as {
+      isStickyVenueTaskIntent: (s: string) => boolean;
+    };
+    if (isStickyVenueTaskIntent(t)) return false;
+  } catch {
+    /* soft */
+  }
+  try {
     const { shouldPreserveFlightTripSession } = require('../../services/flights/flightTripIntent') as {
       shouldPreserveFlightTripSession: (s: string) => boolean;
     };
@@ -183,6 +195,13 @@ export function isInventoryFollowUp(text: string): boolean {
     (TIME_FOLLOW_RE.test(t) || EVENT_DEEPEN_FOLLOW_RE.test(t));
   if (eventDeepen) return true;
   if (pending?.kind === 'pitch_choice' && PITCH_FOLLOW_RE.test(t)) {
+    return true;
+  }
+  if (
+    pending?.kind === 'pitch_choice' &&
+    PITCH_TIMING_FOLLOW_RE.test(t) &&
+    t.length <= 80
+  ) {
     return true;
   }
   if (pending?.kind === 'hotel' && PITCH_FOLLOW_RE.test(t)) {

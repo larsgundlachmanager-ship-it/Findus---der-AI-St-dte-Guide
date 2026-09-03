@@ -44,6 +44,11 @@ function assert(cond: unknown, msg: string): void {
   assert(scope.turnsForCall2 === 10, 'clamp 10');
   const fresh = parseTopicScope({ mode: 'new', turnsForCall2: 0 });
   assert(fresh.turnsForCall2 === 0, 'zero turns new');
+  const forceZero = parseTopicScope({ mode: 'new', turnsForCall2: 5 });
+  assert(forceZero.turnsForCall2 === 0, 'mode=new forces turns 0');
+  assert(forceZero.inheritLiveInventory === false, 'mode=new no inventory');
+  const followDefault = parseTopicScope({ mode: 'followup' });
+  assert(followDefault.turnsForCall2 === 3, 'followup default 3');
 }
 
 console.log('[call1-bridge-stream] ok');

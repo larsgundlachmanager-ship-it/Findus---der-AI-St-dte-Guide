@@ -26,7 +26,6 @@ import type { HelpFirstMoment } from '../../services/affiliate/helpFirstMonetiza
 import { chunkTextForTts } from '../speech/ttsChunker';
 import { humanizeAgentDraft, humanizeBullets } from '../speech/draftToHumanSpeech';
 import type { AgentResult, Module2ActionButton, SynthesisPayload } from '../types';
-import { formatThreadContextForPrompt } from '../../services/memory/conversationThreads';
 import { getLiveChatTurnContext } from '../../services/handsFree/liveChatTurnContext';
 import {
   buildCall2TailPrompt,
@@ -77,6 +76,8 @@ function buildSynthesisBlock(
     : 'JSON only: {"speech":"...","bullets":[]}';
   return `=== REBOOT SYNTHESE (Call-2) ===
 Du bekommst User-Frage + FAKTEN (stilfrei). Schreibe EINE natürliche Antwort zum Vorlesen.
+Du darfst mitdenken: aus vorhandenen Fakten schließen, Lücken ehrlich benennen, Stichpunkte + Fließtext formen.
+Backend-Fakten, die die Userfrage NICHT treffen (z. B. Restaurant statt Wetter) → NICHT vorlesen; sag knapp dass du neu suchst oder lass Tail Call-3 nachziehen.
 ${resolveSynthesisPersonaBlock(opts?.rucksack)}
 ${FINDUS_ANSWER_FIRST_BLOCK}
 ${FINDUS_SYNTHESIS_RAIL_BLOCK}
@@ -103,13 +104,25 @@ export function scrubRebootSpeech(
 
   s = s
     .replace(/\bPACK-DATENSATZ\b[^.!?]*/gi, '')
+    .replace(/\bSICHTBARKEIT\b[^.!?]*/gi, '')
     .replace(
-      /\b(MEHR HISTORIE|LÜCKE|LIVE-HINTS|TOPIC-LOCK|FAKTEN-DRAFT|Beantworte die|Erkläre was das ist —)\b[^.!?]*/gi,
+      /\bUser sieht den Ort\b[^.!?]*/gi,
+      '',
+    )
+    .replace(
+      /\b(Nutze diese Fakten als primäre Quelle|Erfinde nichts darüber hinaus|Allgemeine Beschreibung(?:\s*\/\s*Fakten)? ok)\b[^.!?]*/gi,
+      '',
+    )
+    .replace(
+      /\b(MEHR HISTORIE|LÜCKE|LIVE-HINTS|TOPIC-LOCK|FAKTEN-DRAFT|Beantworte die|Erkläre was das ist —|KEINE Formulierungen)\b[^.!?]*/gi,
       '',
     )
     .replace(/\bNichts erfinden\.?/gi, '')
     .replace(/\bMax\s*~\s*\d+\s*Zeichen[^.!?]*/gi, '')
     .replace(/\bOrt:\s*/gi, '')
+    .replace(/\bFLOW:\s*[^.!?]*/gi, '')
+    .replace(/\bLIVE-ANREICHERUNG:\s*/gi, '')
+    .replace(/\bFAKTEN Knowledge\b[^.!?]*/gi, '')
     .replace(
       /\b(gute frage|interessante frage|ich schau(e)? (mal|kurz)|lass mich (kurz )?schauen|ich recherchier(e)?)\b[,!.\s]*/giu,
       '',
@@ -167,6 +180,10 @@ export async function synthesizeRebootTurn(opts: {
   call1WhenBlock?: string | null;
   /** Call-1 criteria Gewichte — verbindlich für Call 2 (keine neuen Orte). */
   call1CriteriaBlock?: string | null;
+  /** Call-1 Antwort-Struktur (kein Script). */
+  call2Brief?: string | null;
+  /** Von Call 1 gewählte Owner-Gold Constraints. */
+  selectedGoldBlock?: string | null;
 }): Promise<SynthesisPayload> {
   const buttons: Module2ActionButton[] = opts.fact.buttons ?? [];
   const budget = opts.speechBudgetChars ?? FINDUS_TYPICAL_SPEECH_MAX_CHARS;
@@ -216,33 +233,11 @@ export async function synthesizeRebootTurn(opts: {
       cityKey: opts.cityKey ?? null,
     });
   } else if (!skipStickyThread) {
-    try {
-      const { resolveCityChatScope } = require('../context/placeContext') as {
-        resolveCityChatScope: (t?: string | null) => {
-          cityKey: string;
-          cityHint: string | null;
-        };
-      };
-      const { buildCityChatRegelwerk } = require('../context/cityChatRegelwerk') as {
-        buildCityChatRegelwerk: (i?: {
-          userText?: string;
-          cityHint?: string | null;
-          cityKey?: string | null;
-        }) => string;
-      };
-      const scope = resolveCityChatScope(opts.userText);
-      threadBlock = buildCityChatRegelwerk({
-        userText: opts.userText,
-        cityHint: scope.cityHint,
-        cityKey: scope.cityKey,
-      }).slice(0, 1600);
-    } catch {
-      try {
-        threadBlock = formatThreadContextForPrompt({ includeParkedIndex: false });
-      } catch {
-        threadBlock = '';
-      }
-    }
+    // Kein topicScope ⇒ konservativ neu (kein Tennis→Wetter-Leak).
+    threadBlock = buildCall2HistoryBlock({
+      topicScope: { mode: 'new', turnsForCall2: 0, inheritLiveInventory: false },
+      cityKey: opts.cityKey ?? null,
+    });
   }
 
   const bulletMaxChars = opts.rucksack?.ui.bulletMaxChars ?? 72;
@@ -306,8 +301,13 @@ export async function synthesizeRebootTurn(opts: {
           .map((r) => `- ${r.intentFamily}: ${r.summary}`)
           .join('\n')}`
       : '',
-    opts.rucksack?.ownerGoldHint
-      ? `OWNER_GOLD_HINT: ${opts.rucksack.ownerGoldHint}`
+    opts.selectedGoldBlock?.trim()
+      ? opts.selectedGoldBlock.trim()
+      : opts.rucksack?.ownerGoldHint
+        ? `OWNER_GOLD_HINT: ${opts.rucksack.ownerGoldHint}`
+        : '',
+    opts.call2Brief?.trim()
+      ? `CALL1_BRIEF (Struktur, Wortlaut frei): ${opts.call2Brief.trim()}`
       : '',
     opts.rucksack?.retrievedMemory?.length
       ? `USER-LTM:\n${opts.rucksack.retrievedMemory.map((l) => `- ${l}`).join('\n')}`
