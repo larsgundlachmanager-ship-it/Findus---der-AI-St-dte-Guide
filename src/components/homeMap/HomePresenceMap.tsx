@@ -16,6 +16,7 @@ import { parseTagsJson } from '../../services/geo/triggerPolicy';
 import { colors } from '../../constants/theme';
 import { UI_LAYER } from '../../constants/uiLayers';
 import { useGpsStore } from '../../store/useGpsStore';
+import { useSensorStore } from '../../store/useSensorStore';
 import {
   selectNavRouteLoading,
   useFinnusStore,
@@ -83,11 +84,11 @@ import {
 import { shouldShowCarMobilityAmenityOnMap } from '../../services/homeMap/homeMapMobilityAmenity';
 import { HOME_MAP_PLACE_COLORS } from '../../services/homeMap/homeMapStyle';
 import {
-  enabledHomeMapFilterSet,
   HOME_MAP_FILTER_IDS,
-  poiPassesHomeMapFilter,
+  homeMapFilterIdsForPoi,
+  type HomeMapFilterId,
 } from '../../services/homeMap/homeMapPlaceFilter';
-import { useHomeMapUiStore } from '../../store/useHomeMapUiStore';
+import { isAmenityIconEnabled } from '../../services/homeMap/homeMapAmenityIconPrefs';
 import {
   cityFullyVisibleInBounds,
   resolveHomeMapLod,
@@ -99,6 +100,7 @@ import { useMapRouteStore } from '../../store/useMapRouteStore';
 import {
   loadMapPinIndex,
   loadNeighborPinsInViewport,
+  MAP_VIEWPORT_PACK_CITY_LIMIT,
   overlayPinId,
   peekMapPinIndex,
   type MapPin,
@@ -121,29 +123,33 @@ import {
   isStreetPointAmenity,
   placeMapIcon,
   homeMapIconLod,
+  isTransitIconLod,
   type HomeMapPlaceIcon,
 } from '../../services/homeMap/homeMapPlaceType';
 import {
   bindMapPlacePreview,
-  enrichMapPlaceMapsIfListed,
   instantMapPlacePopup,
   MAP_DROP_PIN_ID,
   prefetchVisibleMapPlaces,
   prioritizeMapPlacePreview,
+  skeletonMapPlacePopup,
 } from '../../services/homeMap/mapPlacePreview';
+import { MAP_BASEMAP_POI_ID } from '../../services/homeMap/basemapFeatureQuery';
 import { noteUiTap } from '../../services/diagnostics/interactionDelay';
 import {
   hydrateDisplayExtract,
   peekCityMapExtract,
   peekDisplayExtract,
   rememberDisplayExtract,
+  flushDisplayExtractNow,
   scheduleIdleCityMapExtract,
   ensureCityMapExtract,
   prefetchCityMapExtract,
-  DISPLAY_BOOT_RADIUS_M,
+  deleteCityMapExtractFile,
   type CityMapExtract,
 } from '../../services/homeMap/cityMapExtract';
 import { useHomeOverlayStore } from '../../store/useHomeOverlayStore';
+import { useHomeMapUiStore } from '../../store/useHomeMapUiStore';
 import { usePlanCalendarUiStore } from '../../module2/timeline/planCalendarUiStore';
 import { useReisebueroStore } from '../../reisebuero/store';
 import {
@@ -159,15 +165,12 @@ import { useMapExtractStore } from '../../store/useMapExtractStore';
 import {
   startMapSceneController,
   stopMapSceneController,
-  onMapViewport,
   onMapGpsFog,
 } from '../../services/homeMap/mapSceneController';
-import { loadExtractForViewport, RECLIP_M, invalidateLocalMapIndex, peekLocalMapIds, resolveViewportCityIdForView, warmLocalMapIndex } from '../../services/homeMap/mapExtractLoader';
+import { loadExtractForViewport, invalidateLocalMapIndex, warmLocalMapIndex } from '../../services/homeMap/mapExtractLoader';
 import {
   HOME_MAP_FOOTPRINTS_AFTER_MS,
   HOME_MAP_PLACES_AFTER_EXTRACT_MS,
-  HOME_MAP_PLACES_REINJECT_MIN_M,
-  HOME_MAP_PLACES_REINJECT_ZOOM,
   HOME_MAP_WARMUP_RINGS_AFTER_MS,
 } from '../../services/homeMap/homeMapBootSchedule';
 import {
@@ -188,8 +191,38 @@ import { HomeMapExploreChip } from './HomeMapExploreChip';
 import {
   seedMapCameraGps,
   persistLastMapGpsSoon,
+  flushLastMapGpsNow,
 } from '../../services/location/lastKnownMapGps';
-import { noteSplashMapInteractive } from '../../services/homeMap/splashReadyGate';
+import {
+  isSplashCurtainUp,
+  noteSplashMapCoreReady,
+  noteSplashMapFogReady,
+  noteSplashMapInteractive,
+  noteSplashMapPlacesReady,
+} from '../../services/homeMap/splashReadyGate';
+import {
+  MAP_CITY_PARTIAL_DEADLINE_MS,
+  MAP_CITY_RADIUS_M,
+  MAP_NEAR_RADIUS_M,
+  beginMapLoadPhases,
+  isMapExtractFrozen,
+  noteMapCityFinal,
+  noteMapNearReady,
+  noteMapPlacesReady,
+  peekMapLoadPhases,
+  releaseMapWorld,
+  shouldSkipSameCityReclip,
+} from '../../services/homeMap/mapLoadPhases';
+import {
+  hydrateHomeMapHudFollowPrefs,
+  noteHomeMapHudFollowPrefs,
+  peekHomeMapHudFollowPrefs,
+} from '../../services/homeMap/homeMapHudFollowPrefs';
+import {
+  packRingNeedsTileSnap,
+  resolvePlaceFillRing,
+  type LatLngRing,
+} from '../../services/homeMap/extractBuildingUnderPin';
 import { getSmoothedSpeedMs } from '../../services/navigation/transportMode';
 import {
   homeMapViewSpanM,
@@ -198,6 +231,26 @@ import {
   skipPlaceRingsForView,
   warmupSettleRingsM,
 } from '../../services/homeMap/homeMapWarmupRings';
+import { waitMapIdle } from '../../services/homeMap/mapIdleGate';
+import {
+  isMapUserGesturing,
+  registerMapGestureProbe,
+} from '../../services/homeMap/mapGestureLane';
+import {
+  noteMapDataPainted,
+  resetMapDataCache,
+} from '../../services/homeMap/mapDataCache';
+import {
+  isMapLayerDebugEnabled,
+  isMapLayerDebugExtractLocked,
+  mapLayerDebugAllows,
+  resetMapLayerDebugStep,
+} from '../../services/homeMap/mapLayerDebug';
+import { isVectorBasemapEnabled } from '../../services/homeMap/mapTileConfig';
+import { isMapExtractRoadsSane } from '../../services/homeMap/mapExtractSanity';
+import { isCityPackDownloaded, isYorroMapContentAllowed } from '../../services/homeMap/mapPackGate';
+import { promptCityPackDownloadIfNeeded, ensureBrowsePackAtViewport } from '../../services/homeMap/mapPackPrompt';
+import { MapLayerDebugHud } from './MapLayerDebugHud';
 
 type Props = {
   hudHeight: number;
@@ -232,6 +285,7 @@ type PlacePayload = {
   amenityDot?: boolean;
   /** Cap darf diesen Pin nicht zugunsten ferner Stories droppen */
   keepPin?: boolean;
+  filterTags: HomeMapFilterId[];
 };
 
 function ringFromPoi(
@@ -255,10 +309,11 @@ function ringFromPoi(
   const longM = Math.max(spanLatM, spanLngM);
   // Bahnsteige / Gleis-Hüllen: lang und schmal — nie als Orts-Fill.
   if (longM > 80 && shortM > 0 && longM / shortM >= 4) return null;
-  // Nur Stadt-/Pack-Kästen verwerfen — rechteckige Häuser bleiben Fill.
-  if (isAxisAlignedBoxPolygon(poly) && approxM > 90) return null;
+  // Achsen-Boxen sind nie echte OSM-Umrisse → kein Fill (Tile-Snap übernimmt).
+  if (isAxisAlignedBoxPolygon(poly)) return null;
   const tags = parseTagsJson(poi.tags_json);
-  if (tags.includes('map_point') && isAxisAlignedBoxPolygon(poly)) return null;
+  // map_point ist ein reiner GPS-Marker — nie als Fläche zeichnen.
+  if (tags.includes('map_point')) return null;
   return poly.map((p) => [p.latitude, p.longitude] as [number, number]);
 }
 
@@ -338,6 +393,12 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
   const lastDwellAt = useRef(Date.now());
   const lastHereCityRef = useRef<string | null>(null);
   const osmFootprintsRef = useRef<Map<number, OsmFootprintRing>>(new Map());
+  /** Gebäudeumrisse aus der Vector-Basemap (queryRenderedFeaturesAtPoint). */
+  const tileFootprintsRef = useRef<Map<number, LatLngRing>>(new Map());
+  /** POIs schon per Tile-Snap versucht (auch ohne Treffer) — kein Requery-Sturm. */
+  const tileSnapTriedRef = useRef<Set<number>>(new Set());
+  const tileSnapTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const runTileFootprintSnapRef = useRef<() => void>(() => undefined);
   const enrichRunningRef = useRef(false);
   const lastGpsTapAt = useRef(0);
   const lastCompassTapAt = useRef(0);
@@ -346,6 +407,8 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
   const didCameraLock = useRef(false);
   /** Boot-jumpTo nur 1× — Remount/onReady darf nicht erneut auf GPS ziehen. */
   const didBootJumpRef = useRef(false);
+  /** Extract-Boot nur 1× — MapView-Remount sonst ShapeSource-Sturm → Kamera-Snap. */
+  const didExtractBootRef = useRef(false);
   const prevCityIdRef = useRef<string | null>(null);
   const viewRef = useRef<{
     south: number;
@@ -361,11 +424,23 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
   );
   const lastRouteJson = useRef('');
   const pendingNavFitRef = useRef(false);
+  /** Token für verzögertes Nav-Ranzoomen (Overview → Nah). */
+  const pendingNavZoomTokenRef = useRef(0);
   const placesInjectGen = useRef(0);
   const popupHoldRef = useRef(false);
   const ignorePlaceTapUntil = useRef(0);
   const lastPlacesSig = useRef('');
   const placesBootCommittedRef = useRef(false);
+  /** Mindestens einmal Orte mit Inhalt gezeichnet (Pack-Race nach Stadtwechsel). */
+  const placesHadContentRef = useRef(false);
+  /** Filter-Tap darf Places auch zwischen Splash und Final neu setzen. */
+  const placesForceRef = useRef(false);
+  /** Nach Final-Places: kein weiteres Places-Paint (außer Filter). */
+  const placesFinalDoneRef = useRef(false);
+  /** Cities-Layer Force (Boot / Final / Filter). */
+  const citiesForceRef = useRef(false);
+  /** User hat die Karte schon bewegt (Session) — Final wartet auf Idle, fällt nicht weg. */
+  const mapUserExploredRef = useRef(false);
   const overlaysEnabledRef = useRef(false);
   const extractCityIdRef = useRef<string | null>(null);
   const extractClipCenterRef = useRef<{ lat: number; lng: number } | null>(null);
@@ -380,11 +455,56 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
   const viewportInjectTimer = useRef<ReturnType<typeof setTimeout> | null>(
     null,
   );
+  /** Idle: Orte für Viewport-Pack(s) nachladen (Prisdorf↔Hamburg↔Lissabon). */
+  const viewportPlacesRefreshTimer = useRef<ReturnType<typeof setTimeout> | null>(
+    null,
+  );
+  const lastViewportPackAtRef = useRef<string | null>(null);
   const poisRef = useRef<Poi[]>([]);
   const injectPlacesOnlyRef = useRef<() => void>(() => undefined);
+  const mapPlacesPaintSigRef = useRef('');
+  const mapExtractPaintSigRef = useRef('');
+  const mapExtractPaintLockedRef = useRef(false);
   const [mapExtractLocal, setMapExtract] = useState<CityMapExtract | null>(null);
   const mapExtractFromStore = useMapExtractStore((s) => s.extract);
-  const mapExtract = mapExtractFromStore ?? mapExtractLocal;
+  const [mapExtractPaint, setMapExtractPaint] = useState<CityMapExtract | null>(
+    mapExtractFromStore ?? mapExtractLocal,
+  );
+  const mapExtractDeferTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const mapExtract = mapExtractPaint ?? mapExtractFromStore ?? mapExtractLocal;
+
+  useEffect(() => {
+    const next = mapExtractFromStore ?? mapExtractLocal;
+    if (mapExtractDeferTimer.current) {
+      clearTimeout(mapExtractDeferTimer.current);
+      mapExtractDeferTimer.current = null;
+    }
+    const commit = () => {
+      if (isMapLayerDebugExtractLocked() && mapExtractPaintLockedRef.current) return;
+      if (next) mapExtractPaintLockedRef.current = true;
+      setMapExtractPaint(next);
+    };
+    if (!next) {
+      commit();
+      return;
+    }
+    const waitGestureClear = () => {
+      if (isMapUserGesturing()) {
+        mapExtractDeferTimer.current = setTimeout(waitGestureClear, 350);
+        return;
+      }
+      commit();
+    };
+    if (isMapUserGesturing() || userMapGestureRef.current) {
+      waitGestureClear();
+      return () => {
+        if (mapExtractDeferTimer.current) {
+          clearTimeout(mapExtractDeferTimer.current);
+        }
+      };
+    }
+    commit();
+  }, [mapExtractFromStore, mapExtractLocal]);
   const [mapPlaces, setMapPlaces] = useState<NativeMapPlace[]>([]);
   const [mapCities, setMapCities] = useState<NativeMapCity[]>([]);
   const [mapRoute, setMapRoute] = useState<NavRouteMapPayload | null>(null);
@@ -394,8 +514,16 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
 
   const pois = useFinnusStore((s) => s.pois);
   poisRef.current = pois;
+  const poisByIdRef = useRef(new Map<number, (typeof pois)[number]>());
+  useEffect(() => {
+    const m = new Map<number, (typeof pois)[number]>();
+    for (const p of pois) m.set(p.id, p);
+    poisByIdRef.current = m;
+  }, [pois]);
   const visitedHistory = useFinnusStore((s) => s.visitedHistory);
   const mapFilters = useHomeMapUiStore((s) => s.filters);
+  const amenityIcons = useHomeMapUiStore((s) => s.amenityIcons);
+  const seekVisible = useHomeOverlayStore((s) => s.seekVisible);
   const navActive = useFinnusStore((s) => s.navActive);
   const navRouteLoading = useFinnusStore(selectNavRouteLoading);
   const navRouteRev = useFinnusStore((s) => s.navRouteRev);
@@ -437,6 +565,7 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
   useEffect(() => {
     markHomeMapBootStart();
     startMapSceneController();
+    void hydrateHomeMapHudFollowPrefs();
     return () => stopMapSceneController();
   }, []);
 
@@ -482,11 +611,104 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
   >(peekCityIndexCache() ?? []);
   /** Lokal heruntergeladene Packs/Karten — immer auf der Rubbelkarte (auch offline). */
   const localOfflineCityIdsRef = useRef<string[]>([]);
+  /** Nur hasPack — Yorro-Orte/Nav-Gate (Vector-Basemap). */
+  const localPackIdsRef = useRef<string[]>([]);
+  const packContentAllowedRef = useRef<boolean | null>(null);
 
   const storeProfile = useUserProfileStore((s) => s.profile);
   const profile = storeProfile ?? getCachedUserProfile();
   const cityId = (profile?.cityId ?? '').toLowerCase() || null;
   const bounds = resolveCityCoverageBoundsSync(cityId);
+
+  const yorroContentAt = useCallback(
+    (viewportLat?: number | null, viewportLng?: number | null) => {
+      const known = listKnownCityCoverageBounds();
+      return isYorroMapContentAllowed({
+        cityId,
+        localPackIds: localPackIdsRef.current,
+        viewportLat,
+        viewportLng,
+        view: viewRef.current,
+        coverageBounds: known,
+        locateCity: (la, ln) => smallestCityIdContainingPoint(la, ln, known),
+      });
+    },
+    [cityId],
+  );
+
+  const maybePromptPackAt = useCallback(
+    (viewportLat: number, viewportLng: number, cityEnter = false) => {
+      if (!isVectorBasemapEnabled()) return;
+      void promptCityPackDownloadIfNeeded({
+        viewportLat,
+        viewportLng,
+        cityId,
+        localPackIds: localPackIdsRef.current,
+        cityEnter,
+      });
+    },
+    [cityId],
+  );
+
+  /** Swipe in Nachbarstadt → Pack still als Zubringer (GPS-Stadt bleibt). */
+  const maybeEnsureBrowsePackAt = useCallback(
+    (viewportLat: number, viewportLng: number) => {
+      if (!isVectorBasemapEnabled()) return;
+      const known = listKnownCityCoverageBounds();
+      const gpsLat =
+        gpsLatRef.current ?? useFinnusStore.getState().lastGpsLat ?? null;
+      const gpsLng =
+        gpsLngRef.current ?? useFinnusStore.getState().lastGpsLng ?? null;
+      let stickyCityId: string | null = null;
+      if (
+        typeof gpsLat === 'number' &&
+        typeof gpsLng === 'number' &&
+        Number.isFinite(gpsLat) &&
+        Number.isFinite(gpsLng)
+      ) {
+        stickyCityId =
+          smallestCityIdContainingPoint(gpsLat, gpsLng, known)?.toLowerCase() ??
+          null;
+      }
+      void ensureBrowsePackAtViewport({
+        viewportLat,
+        viewportLng,
+        profileCityId: cityId,
+        stickyCityId,
+        localPackIds: localPackIdsRef.current,
+      }).then(async (res) => {
+        if (!res?.ready || !res.cityId) return;
+        try {
+          const rows = await listLocalCityDatasets();
+          localPackIdsRef.current = rows
+            .filter((row) => row.hasPack)
+            .map((row) => row.id.toLowerCase());
+          localOfflineCityIdsRef.current = rows
+            .filter((row) => row.hasPack || row.hasMap)
+            .map((row) => row.id.toLowerCase())
+            .filter((id) => id && !isRegionPackCityId(id));
+        } catch {
+          /* soft */
+        }
+        if (!localPackIdsRef.current.includes(res.cityId)) {
+          localPackIdsRef.current = [
+            ...localPackIdsRef.current,
+            res.cityId,
+          ];
+        }
+        lastViewportPackAtRef.current = res.cityId;
+        if (userMapGestureRef.current || isMapUserGesturing()) return;
+        placesForceRef.current = true;
+        lastPlacesSig.current = '';
+        injectPlacesOnlyRef.current();
+        placesForceRef.current = false;
+        citiesForceRef.current = true;
+        injectCitiesRef.current();
+        citiesForceRef.current = false;
+      });
+    },
+    [cityId],
+  );
 
   useEffect(() => {
     readyRef.current = false;
@@ -514,6 +736,9 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
     extractClipCenterRef.current = null;
     extractInjectGen.current += 1;
     if (prev && cityId && prev !== cityId) {
+      // Stadtwechsel: Tile-Snap-Umrisse gehören zur alten POI-Menge.
+      tileFootprintsRef.current.clear();
+      tileSnapTriedRef.current.clear();
       followRef.current = false;
       didCameraLock.current = true;
       headingFollowRef.current = false;
@@ -522,39 +747,79 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
       lastCompassTapAt.current = 0;
       setHeadingFollow(false);
       setLocationFollow(false);
+      if (isMapLayerDebugEnabled()) resetMapLayerDebugStep();
+      // Pack-Popup nur bei echtem Stadtwechsel (nicht Pan/Zoom/Blank-Tap).
+      const lat = gpsLatRef.current ?? useFinnusStore.getState().lastGpsLat;
+      const lng = gpsLngRef.current ?? useFinnusStore.getState().lastGpsLng;
+      if (typeof lat === 'number' && typeof lng === 'number') {
+        maybePromptPackAt(lat, lng, true);
+      }
     }
-  }, [cityId]);
+  }, [cityId, maybePromptPackAt]);
+
+  useEffect(() => {
+    return registerMapGestureProbe(() => userMapGestureRef.current);
+  }, []);
 
   useEffect(() => {
     void applyCompassLockForCity(cityId);
   }, [cityId]);
 
-  // Display-Extract schon vor Map-Ready aus RAM/Disk — Straßen/Gebäude nicht erst nach Splash.
+  // Display-Extract: RAM/Disk warm — kein Push während Geste / 3-Release / nach Freeze.
   useEffect(() => {
+    if (isVectorBasemapEnabled()) return;
     const id = (cityId || env.cityId() || '').toLowerCase();
     if (!id) return;
+    if (isMapLayerDebugExtractLocked()) return;
+    if (isMapUserGesturing()) return;
+    const phases = peekMapLoadPhases();
+    if (phases.paintRelease > 0 && phases.paintRelease < 3) return;
+    if (isMapExtractFrozen(id)) return;
+    const view = viewRef.current;
     const seed = seedMapCameraGps();
     const lat =
+      (mapUserExploredRef.current && view
+        ? (view.south + view.north) / 2
+        : null) ??
       seed?.lat ??
       gpsLatRef.current ??
       (bounds != null ? (bounds.latMin + bounds.latMax) / 2 : null);
     const lng =
+      (mapUserExploredRef.current && view
+        ? (view.west + view.east) / 2
+        : null) ??
       seed?.lng ??
       gpsLngRef.current ??
       (bounds != null ? (bounds.lngMin + bounds.lngMax) / 2 : null);
     const mem = peekDisplayExtract(id);
     if (mem?.extract) {
-      useMapExtractStore.getState().setExtract(id, mem.extract, {
-        lat: mem.lat,
-        lng: mem.lng,
-      });
-      extractCityIdRef.current = id;
-      extractClipCenterRef.current = { lat: mem.lat, lng: mem.lng };
-      return;
+      if (!isMapExtractRoadsSane(mem.extract)) {
+        useMapExtractStore.getState().clear();
+        void deleteCityMapExtractFile(id).catch(() => undefined);
+      } else {
+        useMapExtractStore.getState().setExtract(id, mem.extract, {
+          lat: mem.lat,
+          lng: mem.lng,
+        });
+        extractCityIdRef.current = id;
+        extractClipCenterRef.current = { lat: mem.lat, lng: mem.lng };
+        return;
+      }
     }
     void (async () => {
       const snap = (await hydrateDisplayExtract(id)) ?? peekDisplayExtract(id);
-      if (!snap?.extract) return;
+      if (!snap?.extract || !isMapExtractRoadsSane(snap.extract)) {
+        if (lat != null && lng != null) {
+          void loadExtractForViewport(lat, lng, {
+            force: true,
+            urgent: true,
+            cityId: id,
+          });
+        } else {
+          void prefetchCityMapExtract(id);
+        }
+        return;
+      }
       useMapExtractStore.getState().setExtract(id, snap.extract, {
         lat: snap.lat,
         lng: snap.lng,
@@ -563,7 +828,13 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
       extractClipCenterRef.current = { lat: snap.lat, lng: snap.lng };
       if (lat != null && lng != null) {
         const drift = metersBetween(lat, lng, snap.lat, snap.lng);
-        if (drift > 1_400) {
+        if (
+          drift > 1_400 &&
+          !isMapExtractFrozen(id) &&
+          !shouldSkipSameCityReclip(id) &&
+          !mapUserExploredRef.current &&
+          !isMapUserGesturing()
+        ) {
           void loadExtractForViewport(lat, lng);
         }
       }
@@ -591,6 +862,9 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
       if (heavyOverlayTimer.current) {
         clearTimeout(heavyOverlayTimer.current);
       }
+      if (tileSnapTimer.current) {
+        clearTimeout(tileSnapTimer.current);
+      }
     };
   }, []);
 
@@ -605,7 +879,6 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
 
   const buildPlacePayloads = useCallback((): PlacePayload[] => {
     const planned = plannedPoiIdSet(pois, collectOpenPlanStops());
-    const enabled = enabledHomeMapFilterSet(mapFilters);
     const view = viewRef.current;
     const span = view ? homeMapViewSpanM(view) : 0;
     const skipRings = skipPlaceRingsForView(span);
@@ -619,11 +892,17 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
         isPackStoryMapPoi(poi) ||
         isCityExploreMapPoi(poi) ||
         isMapShelterBuildingPoi(poi);
+      const shelterBldg = isMapShelterBuildingPoi(poi);
+      // Stadt-Übersicht: Directory-Noise weglassen — aber Always-On-Icons behalten
+      // (sonst fehlen Restaurant/Arzt nach Places-Freeze beim Reinzoomen).
       if (
         cityScale &&
         !story &&
+        !shelterBldg &&
         !isModul1AutoTriggerMapPoi(poi, profile) &&
         !isKeepDotMapPoi(poi) &&
+        !isStreetPointAmenity(poi) &&
+        !isAlwaysOnMapAmenity(poi) &&
         isTouristDirectoryMapPoi(poi)
       ) {
         continue;
@@ -651,31 +930,65 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
               v.name.toLowerCase() === poi.name.toLowerCase())),
         );
       const isPlanned = planned.has(poi.id);
-      const amenityDot = isStreetPointAmenity(poi);
-      const keepDotForced = isKeepDotMapPoi(poi) && !story;
-      if (
-        !amenityDot &&
-        !isAlwaysOnMapAmenity(poi) &&
-        !poiPassesHomeMapFilter(poi, {
-          visited,
-          planned: isPlanned,
-          profile,
-          enabled,
-        })
-      ) {
+      const amenityDot = isStreetPointAmenity(poi) || shelterBldg;
+      const rawIcon = placeMapIcon(poi) ?? undefined;
+      const iconAllowed = isAmenityIconEnabled(amenityIcons, rawIcon);
+      const keepTransitIcon = isTransitIconLod(
+        rawIcon ? homeMapIconLod(rawIcon, poi) : null,
+      );
+      // Story-Halt: nie Bahnsteig-Fill → sonst Icon weg, nur lila Punkt.
+      // Wartehäuschen: Punkt+Historic-Icon, kein Fill das das Icon frisst.
+      const keepDotForced =
+        keepTransitIcon ||
+        shelterBldg ||
+        (isKeepDotMapPoi(poi) && !story);
+      const filterTags = homeMapFilterIdsForPoi(poi, {
+        visited,
+        planned: isPlanned,
+        profile,
+      });
+      // Amenity-Bypass nur wenn Icon erlaubt — Orte steuert die Karte, nicht M1.
+      const amenityBypass =
+        iconAllowed && (amenityDot || isAlwaysOnMapAmenity(poi));
+      if (!amenityBypass && filterTags.length === 0) {
         continue;
       }
-      const ring = keepDotForced || skipRings
+      const packOrOsm = keepDotForced || skipRings
         ? null
         : ringFromPoi(poi, osmFootprintsRef.current.get(poi.id));
+      // Live aus Store — nach Extract-Inject noch vor dem nächsten Render.
+      const extractBuildings =
+        useMapExtractStore.getState().extract?.buildings ??
+        mapExtract?.buildings;
+      // Vector-Basemap: extract leer → Tile-Snap-Umriss als Gebäude-Kandidat.
+      const tileRing = tileFootprintsRef.current.get(poi.id);
+      const buildingCandidates: LatLngRing[] | undefined = tileRing
+        ? extractBuildings && extractBuildings.length
+          ? [tileRing, ...extractBuildings]
+          : [tileRing]
+        : extractBuildings;
+      // Fill = dasselbe Haus wie Extract-Umriss unter dem Pin (kein versetztes Pack-Viereck).
+      const ring =
+        keepDotForced || skipRings
+          ? null
+          : resolvePlaceFillRing(
+              Number(poi.lat),
+              Number(poi.lng),
+              packOrOsm,
+              buildingCandidates,
+              { name: poi.name, category: poi.category },
+            );
       const hasBuilding = !keepDotForced && !!(ring && ring.length >= 3);
       // Gebäudeumriss schlägt Icon-Punkt — Statusfarbe als Fläche.
+      // Ausnahme ÖPNV: Bahn-Icon behalten (sonst nur Story-Punkt auf den Gleisen).
       const keepDot = !hasBuilding;
       const wegweiserTarget =
         pendingNavOffer?.source === 'wegweiser' &&
         pendingNavOffer.awaitConfirm === true &&
         pendingNavOffer.poiId === poi.id;
-      const icon = hasBuilding ? undefined : placeMapIcon(poi) ?? undefined;
+      const rawIconForMap =
+        iconAllowed && !(hasBuilding && !keepTransitIcon) ? rawIcon : undefined;
+      const icon = rawIconForMap;
       out.push({
         id: poi.id,
         name: poi.name,
@@ -683,31 +996,207 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
         lng: Number(poi.lng),
         color: wegweiserTarget
           ? HOME_MAP_PLACE_COLORS.planned
-          : colorForHomeMapPoi(poi, profile, visited, {
-              planned: isPlanned,
-              typeFilters: enabled,
-            }),
+          : colorForHomeMapPoi(poi, profile, visited, { planned: isPlanned }),
         radiusM: Math.max(18, Math.min(80, poi.radius_meters || 30)),
-        ring: keepDot ? null : slimRing(ring),
+        // Transit: nie Ring — exclusiveHomeMapPlaces würde sonst Fill erzwingen und Icon löschen.
+        ring: keepDot || keepTransitIcon ? null : slimRing(ring),
         spotKey: poi.spot_key,
         category: categoryLabelForPoi(poi),
         story: story ? 1 : 0,
-        pointOnly: keepDot,
-        keepDot,
+        pointOnly: keepDot || keepTransitIcon,
+        keepDot: keepDot || keepTransitIcon,
         // Nur echte Punkt-Amenities (Briefkasten/Halt/…) — Stories behalten Fill.
-        amenityDot: amenityDot || (!!icon && !hasBuilding && !story),
+        // Transit-Stories: Icon-Punkt, kein Riesen-Bahnsteig-Fill.
+        amenityDot:
+          amenityDot ||
+          keepTransitIcon ||
+          (!!icon && !hasBuilding && !story),
         // Cap: ÖPNV/Briefkasten zuerst — nicht jedes Restaurant killt Stories.
-        keepPin: amenityDot,
+        keepPin: amenityDot || keepTransitIcon,
         icon,
         iconLod: icon ? homeMapIconLod(icon, poi) : undefined,
+        filterTags,
       });
     }
     return exclusiveHomeMapPlaces(out);
-  }, [bounds, cityId, mapFilters, pendingNavOffer, pois, profile, visitedHistory]);
+  }, [
+    amenityIcons,
+    bounds,
+    cityId,
+    mapExtract?.buildings,
+    pendingNavOffer,
+    pois,
+    profile,
+    visitedHistory,
+  ]);
+
+  const scheduleNeighborPackPlacesMerge = useCallback(
+    (baseVisible: PlacePayload[], genAtStart: number) => {
+      const viewForNeighbors = viewRef.current;
+      if (!viewForNeighbors || !isVectorBasemapEnabled()) return;
+      const known = listKnownCityCoverageBounds();
+      const gpsLat =
+        gpsLatRef.current ?? useFinnusStore.getState().lastGpsLat ?? null;
+      const gpsLng =
+        gpsLngRef.current ?? useFinnusStore.getState().lastGpsLng ?? null;
+      let stickyCityId: string | null = null;
+      if (
+        typeof gpsLat === 'number' &&
+        typeof gpsLng === 'number' &&
+        Number.isFinite(gpsLat) &&
+        Number.isFinite(gpsLng)
+      ) {
+        const at = smallestCityIdContainingPoint(gpsLat, gpsLng, known);
+        if (at && isCityPackDownloaded(at, localPackIdsRef.current)) {
+          stickyCityId = at.toLowerCase();
+        }
+      }
+      if (
+        !stickyCityId &&
+        cityId &&
+        isCityPackDownloaded(cityId, localPackIdsRef.current)
+      ) {
+        stickyCityId = cityId;
+      }
+      void loadNeighborPinsInViewport({
+        view: viewForNeighbors,
+        activeCityId: cityId,
+        stickyCityId,
+        maxCities: MAP_VIEWPORT_PACK_CITY_LIMIT,
+      })
+        .then((neighbors) => {
+          if (!neighbors.length) return;
+          if (genAtStart !== placesInjectGen.current) return;
+          if (userMapGestureRef.current || isMapUserGesturing()) return;
+          if (popupHoldRef.current) return;
+          const overlayMap = new Map<
+            number,
+            { name: string; cityId: string; lat: number; lng: number }
+          >();
+          const extra: PlacePayload[] = [];
+          for (const p of neighbors) {
+            const oid = overlayPinId(p.cityId, p.id);
+            overlayMap.set(oid, {
+              name: p.name,
+              cityId: p.cityId,
+              lat: p.lat,
+              lng: p.lng,
+            });
+            let icon: HomeMapPlaceIcon | undefined;
+            let iconLod: ReturnType<typeof homeMapIconLod> | undefined;
+            if (p.category) {
+              const fake = {
+                id: p.id,
+                name: p.name,
+                category: p.category,
+                kind: 'legacy' as const,
+              };
+              const ic = placeMapIcon(fake as never);
+              if (ic) {
+                icon = ic;
+                iconLod = homeMapIconLod(ic, fake as never);
+              }
+            }
+            const ring =
+              p.ring && p.ring.length >= 3 ? slimRing(p.ring) : null;
+            extra.push({
+              id: oid,
+              name: p.name,
+              lat: p.lat,
+              lng: p.lng,
+              color: p.liked
+                ? HOME_MAP_PLACE_COLORS.liked
+                : p.story
+                  ? HOME_MAP_PLACE_COLORS.neutral
+                  : HOME_MAP_PLACE_COLORS.rest,
+              radiusM: p.radiusM || 30,
+              ring,
+              category: p.category || p.cityId,
+              story: p.story,
+              pointOnly: !ring,
+              keepDot: !ring,
+              amenityDot: !ring && !p.story,
+              icon,
+              iconLod,
+              filterTags: (['story'] as HomeMapFilterId[]),
+            });
+          }
+          if (!extra.length) return;
+          const merged = exclusiveHomeMapPlaces([...baseVisible, ...extra]);
+          const mergeCap = placeCapForMapView(
+            placeRadiusRef.current,
+            homeMapViewSpanM(viewForNeighbors),
+          );
+          let next = merged;
+          if (next.length > mergeCap) {
+            const oLat =
+              (viewForNeighbors.south + viewForNeighbors.north) / 2;
+            const oLng =
+              (viewForNeighbors.west + viewForNeighbors.east) / 2;
+            next = capMapPlacesForView(next, mergeCap, (pl) =>
+              metersBetween(pl.lat, pl.lng, oLat, oLng),
+            );
+          }
+          const mergeSig = next
+            .map(
+              (p) => `${p.id}:${p.color}:${p.story || 0}:${p.keepDot ? 1 : 0}`,
+            )
+            .join('|');
+          if (mergeSig === lastPlacesSig.current) return;
+          lastPlacesSig.current = mergeSig;
+          mapPlacesPaintSigRef.current = mergeSig;
+          overlayPinsRef.current = overlayMap;
+          setMapPlaces(next);
+          prefetchVisibleMapPlaces(next.map((p) => p.id));
+        })
+        .catch(() => undefined);
+    },
+    [cityId],
+  );
 
   const injectPlacesOnly = useCallback(() => {
     if (!readyRef.current) return;
+    if (isVectorBasemapEnabled()) {
+      const view = viewRef.current;
+      const vLat =
+        (view ? (view.south + view.north) / 2 : null) ??
+        gpsLatRef.current ??
+        null;
+      const vLng =
+        (view ? (view.west + view.east) / 2 : null) ??
+        gpsLngRef.current ??
+        null;
+      if (!yorroContentAt(vLat, vLng)) {
+        const navOn = useFinnusStore.getState().navActive;
+        // Nav-Kamera darf kurz Pack-Zone verlassen — Orte nicht verwerfen.
+        // Profil-Pack + schon Inhalt: nicht leer wischen (Gate-Race / Coverage).
+        const profilePack =
+          !!cityId &&
+          isCityPackDownloaded(cityId, localPackIdsRef.current);
+        if (
+          !(navOn && placesHadContentRef.current) &&
+          !(profilePack && placesHadContentRef.current)
+        ) {
+          setMapPlaces([]);
+        }
+        return;
+      }
+    }
+    if (
+      isMapLayerDebugEnabled() &&
+      !mapLayerDebugAllows('places') &&
+      !placesForceRef.current
+    ) {
+      return;
+    }
     if (popupHoldRef.current) return;
+    if (isMapUserGesturing()) return;
+    // Während Pan/Drehen: kein Places-ShapeSource-Update (Kamera-Snap).
+    if (userMapGestureRef.current) return;
+    // Places: nur Boot/Final/Filter mit Force — sonst still (auch nach Final).
+    if (placesBootCommittedRef.current && !placesForceRef.current) {
+      return;
+    }
     const places = buildPlacePayloads().filter(
       (p) => Number.isFinite(p.lat) && Number.isFinite(p.lng),
     );
@@ -723,7 +1212,8 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
         };
       }
     }
-    const allFiltersOn = HOME_MAP_FILTER_IDS.every((id) => mapFilters[id]);
+    const chipFilters = useHomeMapUiStore.getState().filters;
+    const allFiltersOn = HOME_MAP_FILTER_IDS.every((id) => chipFilters[id]);
     const fallback =
       places.length > 0 || !allFiltersOn
         ? places
@@ -746,6 +1236,7 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
               story: 1,
               pointOnly: true,
               keepDot: true,
+              filterTags: ['story' as HomeMapFilterId],
             }));
     const storyN = fallback.filter((p) => p.story === 1).length;
     const view = viewRef.current;
@@ -791,12 +1282,19 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
     if (sig === lastPlacesSig.current) {
       if (visible.length > 0) markHomeMapBoot('places');
       prefetchVisibleMapPlaces(visible.map((p) => p.id));
+      scheduleNeighborPackPlacesMerge(visible, placesInjectGen.current);
       return;
     }
     lastPlacesSig.current = sig;
+    mapPlacesPaintSigRef.current = sig;
     const gen = ++placesInjectGen.current;
     overlayPinsRef.current.clear();
     placesBootCommittedRef.current = true;
+    if (visible.length > 0) placesHadContentRef.current = true;
+    if (peekMapLoadPhases().phase === 'final') {
+      placesFinalDoneRef.current = true;
+    }
+    noteMapDataPainted(cityId, 'places');
     setMapPlaces(visible);
     if (visible.length > 0) markHomeMapBoot('places');
     if (
@@ -809,64 +1307,28 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
       placesInjectCenterRef.current = { lat: midLat, lng: midLng, zoom: 16 };
     }
     prefetchVisibleMapPlaces(visible.map((p) => p.id));
-    if (view && cityId && !skipRings) {
-      const snap = view;
-      void loadNeighborPinsInViewport({
-        view: snap,
-        activeCityId: cityId,
-        bufferFactor: 0.35,
-      }).then((extra) => {
-        if (gen !== placesInjectGen.current || popupHoldRef.current) return;
-        if (extra.length === 0) return;
-        const { runMapIdleWhenFree } = require('../../services/boot/interactiveBootGate') as {
-          runMapIdleWhenFree: (fn: () => void) => void;
-        };
-        runMapIdleWhenFree(() => {
-          if (gen !== placesInjectGen.current || popupHoldRef.current) return;
-          const merged = [...visible];
-          for (const p of extra) {
-            const dup = visible.some(
-              (v) => metersBetween(v.lat, v.lng, p.lat, p.lng) < 45,
-            );
-            if (dup) continue;
-            const oid = overlayPinId(p.cityId, p.id);
-            overlayPinsRef.current.set(oid, {
-              name: p.name,
-              cityId: p.cityId,
-              lat: p.lat,
-              lng: p.lng,
-            });
-            const ring = p.ring && p.ring.length >= 3 ? slimRing(p.ring) : null;
-            merged.push({
-              id: oid,
-              name: p.name,
-              lat: p.lat,
-              lng: p.lng,
-              color: '#6E8B7A',
-              radiusM: p.radiusM,
-              ring,
-              spotKey: `${p.cityId}:${p.id}`,
-              category: p.category || '',
-              story: p.story,
-              pointOnly: !ring,
-              keepDot: !ring,
-            });
-          }
-          if (merged.length > cap) {
-            const capped = capMapPlacesForView(merged, cap, (p) =>
-              originLat != null && originLng != null
-                ? metersBetween(p.lat, p.lng, originLat, originLng)
-                : 0,
-            );
-            setMapPlaces(capped);
-            return;
-          }
-          setMapPlaces(merged);
-        });
-      });
-    }
-  }, [buildPlacePayloads, cityId, mapFilters, pois, profile]);
+    // Nachbar-Packs im Viewport (Multi-Stadt) — Merge nach Idle, nicht während Geste.
+    scheduleNeighborPackPlacesMerge(visible, placesInjectGen.current);
+  }, [
+    buildPlacePayloads,
+    cityId,
+    pois,
+    profile,
+    scheduleNeighborPackPlacesMerge,
+    yorroContentAt,
+  ]);
   injectPlacesOnlyRef.current = injectPlacesOnly;
+
+  // Orte-Chips: MapLibre Layer-Filter — kein GeoJSON-Rebuild (Kamera-Snap).
+  // Amenity-Icons: nach Idle einmal — nie während Geste (ShapeSource-Snap).
+  useEffect(() => {
+    if (!readyRef.current || !placesBootCommittedRef.current) return;
+    if (userMapGestureRef.current || isMapUserGesturing()) return;
+    lastPlacesSig.current = '';
+    placesForceRef.current = true;
+    injectPlacesOnlyRef.current();
+    placesForceRef.current = false;
+  }, [amenityIcons]);
 
   const injectOfflineMapExtract = useCallback(
     async (
@@ -876,7 +1338,10 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
       preferCityId?: string | null,
       urgent = false,
     ) => {
+      if (isVectorBasemapEnabled()) return;
       if (!readyRef.current) return;
+      const mayBypassGesture = urgent && !mapUserExploredRef.current;
+      if (isMapUserGesturing() && !mayBypassGesture) return;
       const gpsId = (cityId || env.cityId() || '').toLowerCase();
       const gpsBounds = resolveCityCoverageBoundsSync(gpsId);
       const lat =
@@ -902,17 +1367,86 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
         !!targetId &&
         !!activeExtractId &&
         targetId !== activeExtractId.toLowerCase();
-      // radiusM nur setzen wenn explizit (Boot = eng). Pan/Idle → Display-Wide.
+      // radiusM nur setzen wenn explizit (Boot = Near). Pan/Idle → Display-Wide.
       // preferCityId = Viewport-Overlap (Tornesch sichtbar) — unabhängig von Modul-1.
-      void loadExtractForViewport(lat, lng, {
+      return loadExtractForViewport(lat, lng, {
         force,
-        urgent: urgent || citySwitch,
+        urgent: (urgent || citySwitch) && !mapUserExploredRef.current,
         ...(radiusM != null ? { radiusM } : {}),
         ...(preferCityId ? { cityId: preferCityId } : {}),
       });
     },
     [cityId],
   );
+
+  const applyMapLayerDebugStepEffects = useCallback(
+    async (step: number) => {
+      if (!isMapLayerDebugEnabled() || !readyRef.current) return;
+      const activeId = (cityId || env.cityId() || '').toLowerCase() || null;
+      const nearLat =
+        gpsLatRef.current ??
+        seedMapCameraGps()?.lat ??
+        useFinnusStore.getState().lastGpsLat ??
+        null;
+      const nearLng =
+        gpsLngRef.current ??
+        seedMapCameraGps()?.lng ??
+        useFinnusStore.getState().lastGpsLng ??
+        null;
+
+      if (step >= 1) {
+        placesForceRef.current = true;
+        lastPlacesSig.current = '';
+        injectPlacesOnlyRef.current();
+        placesForceRef.current = false;
+        noteMapPlacesReady(activeId);
+      }
+      if (step >= 4) {
+        try {
+          const track = await loadWalkTrack();
+          setWalkTrack(track);
+          if (!isMapUserGesturing()) forceFogRecompute(track);
+        } catch {
+          /* soft */
+        }
+      }
+      if (step >= 5) {
+        citiesForceRef.current = true;
+        injectCitiesRef.current();
+        citiesForceRef.current = false;
+      }
+      if (step >= 6 && nearLat != null && nearLng != null) {
+        await waitMapIdle({
+          isGesturing: () => userMapGestureRef.current,
+          quietMs: 800,
+        });
+        await injectOfflineMapExtract(
+          true,
+          { lat: nearLat, lng: nearLng },
+          MAP_CITY_RADIUS_M,
+          activeId,
+          false,
+        );
+        noteMapCityFinal(activeId);
+        noteMapDataPainted(activeId, 'final');
+        placesFinalDoneRef.current = true;
+      }
+      if (step >= 7) {
+        releaseMapWorld();
+      }
+    },
+    [cityId, injectOfflineMapExtract],
+  );
+
+  // Orte-Sheet offen → nur Places neu (Extract nie — kein 4. Release).
+  useEffect(() => {
+    if (!seekVisible || !readyRef.current) return;
+    if (!mapLayerDebugAllows('places')) return;
+    lastPlacesSig.current = '';
+    placesForceRef.current = true;
+    injectPlacesOnlyRef.current();
+    placesForceRef.current = false;
+  }, [seekVisible, cityId]);
 
   const flushDeferredExtract = useCallback(() => {
     const pending = pendingExtractCenter.current;
@@ -951,23 +1485,34 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
       lng: number,
       opts?: { cityId?: string | null; force?: boolean; urgent?: boolean },
     ) => {
+      if (isMapUserGesturing() && !opts?.urgent) return;
       const activeExtractId = useMapExtractStore.getState().cityId;
       const targetId = (opts?.cityId || '').toLowerCase();
       const citySwitch =
         !!targetId &&
         !!activeExtractId &&
         targetId !== activeExtractId.toLowerCase();
-      const urgent = opts?.urgent === true || opts?.force === true || citySwitch;
+      // Freeze / settled: kein Nachladen — auch nicht force (nur echter Stadtwechsel).
+      if (!citySwitch && isMapExtractFrozen(targetId || activeExtractId)) {
+        return;
+      }
+      if (
+        !citySwitch &&
+        shouldSkipSameCityReclip(targetId || activeExtractId)
+      ) {
+        return;
+      }
+      const urgent = opts?.urgent === true || citySwitch;
       pendingExtractCenter.current = {
         lat,
         lng,
         cityId: opts?.cityId ?? null,
-        force: opts?.force === true,
+        force: citySwitch,
         urgent,
       };
       if (urgent) {
         void injectOfflineMapExtract(
-          opts?.force === true || citySwitch,
+          citySwitch,
           { lat, lng },
           undefined,
           opts?.cityId ?? null,
@@ -991,9 +1536,33 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
 
   useEffect(() => {
     const sub = AppState.addEventListener('change', (state) => {
+      // Kill/Hintergrund: Kamera + Display-Snap sofort sichern — sonst Cold-Start ohne Cache.
+      if (state === 'background' || state === 'inactive') {
+        const view = viewRef.current;
+        if (view) {
+          const midLat = (view.south + view.north) / 2;
+          const midLng = (view.west + view.east) / 2;
+          if (Number.isFinite(midLat) && Number.isFinite(midLng)) {
+            persistLastMapGpsSoon({
+              lat: midLat,
+              lng: midLng,
+              zoom: seedMapCameraGps()?.zoom ?? undefined,
+            });
+          }
+        }
+        void flushLastMapGpsNow();
+        void flushDisplayExtractNow();
+        return;
+      }
       if (state !== 'active') return;
       if (!readyRef.current) return;
       invalidateLocalMapIndex();
+      const activeId =
+        useMapExtractStore.getState().cityId ||
+        (cityId || env.cityId() || '').toLowerCase() ||
+        null;
+      // Settled Stadt: kein Force-Reclip beim App-Zurück — nur Index warmhalten.
+      if (isMapExtractFrozen(activeId) || shouldSkipSameCityReclip(activeId)) return;
       const view = viewRef.current;
       if (view) {
         const midLat = (view.south + view.north) / 2;
@@ -1004,35 +1573,71 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
       void injectOfflineMapExtract(true);
     });
     return () => sub.remove();
-  }, [injectOfflineMapExtract, queueViewportExtract]);
+  }, [cityId, injectOfflineMapExtract, queueViewportExtract]);
 
   const scheduleHeavyMapOverlays = useCallback(() => {
+    // Nur Force (Boot/Final/Filter) — kein POI-Effekt-Churn.
+    if (placesBootCommittedRef.current && !placesForceRef.current) {
+      return;
+    }
+    if (isMapUserGesturing()) return;
     overlaysEnabledRef.current = true;
     if (heavyOverlayTimer.current) {
       clearTimeout(heavyOverlayTimer.current);
       heavyOverlayTimer.current = null;
     }
+    const run = () => {
+      if (userMapGestureRef.current) {
+        heavyOverlayTimer.current = setTimeout(run, 400);
+        return;
+      }
+      injectPlacesOnlyRef.current();
+      // Vector-Basemap: nach dem Places-Paint Umrisse aus den Kacheln snappen.
+      if (isVectorBasemapEnabled()) {
+        if (tileSnapTimer.current) clearTimeout(tileSnapTimer.current);
+        tileSnapTimer.current = setTimeout(() => {
+          tileSnapTimer.current = null;
+          runTileFootprintSnapRef.current();
+        }, 700);
+      }
+    };
     // Orte sofort (Pin-Index / SQLite) — nicht hinter Idle-Queue verstecken.
     if (HOME_MAP_PLACES_AFTER_EXTRACT_MS <= 0) {
-      injectPlacesOnlyRef.current();
+      run();
       return;
     }
     InteractionManager.runAfterInteractions(() => {
       if (heavyOverlayTimer.current) clearTimeout(heavyOverlayTimer.current);
-      heavyOverlayTimer.current = setTimeout(() => {
-        heavyOverlayTimer.current = null;
-        injectPlacesOnlyRef.current();
-      }, HOME_MAP_PLACES_AFTER_EXTRACT_MS);
+      heavyOverlayTimer.current = setTimeout(run, HOME_MAP_PLACES_AFTER_EXTRACT_MS);
     });
   }, []);
 
-  // POIs nachgeladen → Story-Orte erneut zeichnen (Race mit Map-Ready).
-  // Während Footprint-Enrich: Skip — Enrich injectet selbst (kein Doppel-Churn).
+  // POIs nachgeladen → Story-Orte erneut zeichnen (Race mit Map-Ready / Stadtwechsel).
   useEffect(() => {
     if (!readyRef.current || !pois.length) return;
     if (enrichRunningRef.current) return;
-    scheduleHeavyMapOverlays();
-  }, [pois, scheduleHeavyMapOverlays]);
+    if (userMapGestureRef.current || isMapUserGesturing()) return;
+    const cityMismatch =
+      !!cityId && placesInjectedForCity.current !== cityId;
+    // Pack kam nach leerem Places-Boot → Force (sonst placesBootCommitted sperrt).
+    // Vector: nur einmal nachziehen wenn noch leer — kein POI-Churn-Rebuild.
+    const needForce =
+      cityMismatch ||
+      !placesBootCommittedRef.current ||
+      !placesHadContentRef.current;
+    if (!needForce) return;
+    const tryPaint = () => {
+      if (userMapGestureRef.current) {
+        setTimeout(tryPaint, 350);
+        return;
+      }
+      placesForceRef.current = true;
+      lastPlacesSig.current = '';
+      injectPlacesOnlyRef.current();
+      placesForceRef.current = false;
+    };
+    tryPaint();
+  }, [pois, cityId]);
 
   // Nach Clean-Install / leerer DB: Stadt-Pack nachladen, sonst bleibt die Karte leer
   useEffect(() => {
@@ -1105,7 +1710,67 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
     }
   }, [injectPlacesOnly, pois, profile]);
 
+  // Vector-Basemap: Pack-Boxen / fehlende Umrisse auf den gerenderten
+  // Protomaps-Gebäudeumriss unter dem Pin snappen (queryBuildingRingAt).
+  const runTileFootprintSnap = useCallback(async () => {
+    if (!isVectorBasemapEnabled()) return;
+    if (!readyRef.current) return;
+    if (userMapGestureRef.current || isMapUserGesturing()) return;
+    const handle = mapRef.current;
+    if (!handle?.queryBuildingRingAt) return;
+    const list = poisRef.current;
+    if (!list.length) return;
+    const view = viewRef.current;
+    let changed = false;
+    let budget = 24;
+    for (const poi of list) {
+      if (budget <= 0) break;
+      const id = poi.id;
+      if (tileSnapTriedRef.current.has(id)) continue;
+      const lat = Number(poi.lat);
+      const lng = Number(poi.lng);
+      if (!Number.isFinite(lat) || !Number.isFinite(lng)) continue;
+      if (
+        view &&
+        (lat < view.south ||
+          lat > view.north ||
+          lng < view.west ||
+          lng > view.east)
+      ) {
+        continue;
+      }
+      // Nur wo der Pack-Ring keine echte OSM-Hülle liefert (Box / fehlt / zu grob).
+      const packRing = ringFromPoi(poi, osmFootprintsRef.current.get(id));
+      if (packRing && !packRingNeedsTileSnap(packRing)) continue;
+      budget -= 1;
+      tileSnapTriedRef.current.add(id);
+      try {
+        const ring = await handle.queryBuildingRingAt(lat, lng);
+        if (ring && ring.length >= 3) {
+          tileFootprintsRef.current.set(id, ring);
+          changed = true;
+        }
+      } catch {
+        /* Soft-Fail: kein Snap für diesen Ort */
+      }
+    }
+    if (changed && readyRef.current && !isMapUserGesturing()) {
+      placesForceRef.current = true;
+      lastPlacesSig.current = '';
+      injectPlacesOnlyRef.current();
+      placesForceRef.current = false;
+    }
+  }, []);
+  runTileFootprintSnapRef.current = () => {
+    void runTileFootprintSnap();
+  };
+
   const runWarmupRings = useCallback(() => {
+    // Vector: Orte einmal beim Boot — keine Warmup-Ring-Re-Injects (Kamera-Snap).
+    if (isVectorBasemapEnabled()) {
+      if (!placesBootCommittedRef.current) scheduleHeavyMapOverlays();
+      return;
+    }
     const gen = ++warmupRingGen.current;
     const gpsLat =
       gpsLatRef.current ?? useFinnusStore.getState().lastGpsLat;
@@ -1310,8 +1975,35 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
 
   const injectCities = useCallback(() => {
     if (!readyRef.current) return;
+    if (
+      isMapLayerDebugEnabled() &&
+      !mapLayerDebugAllows('cities') &&
+      !citiesForceRef.current
+    ) {
+      return;
+    }
+    if (isVectorBasemapEnabled()) {
+      const packIds = new Set(localPackIdsRef.current);
+      if (packIds.size === 0) {
+        setMapCities([]);
+        return;
+      }
+    }
+    if (isMapUserGesturing() && !citiesForceRef.current) return;
     const activeId = (cityId ?? '').toLowerCase();
-    const localIds = localOfflineCityIdsRef.current;
+    if (isMapExtractFrozen(activeId) && !citiesForceRef.current) return;
+    // Zwischen Splash und Final: kein Cities-ShapeSource-Update (Snap).
+    if (
+      !isVectorBasemapEnabled() &&
+      isSplashCurtainUp() &&
+      peekMapLoadPhases().phase !== 'final' &&
+      !citiesForceRef.current
+    ) {
+      return;
+    }
+    const localIds = isVectorBasemapEnabled()
+      ? localPackIdsRef.current
+      : localOfflineCityIdsRef.current;
     const catalogIds = [
       ...new Set([
         ...catalogCitiesRef.current
@@ -1410,7 +2102,10 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
         lng: gpsLngRef.current ?? useFinnusStore.getState().lastGpsLng,
         maxFetch,
         catalogCities: catalog,
-        onProgress: () => injectCitiesRef.current(),
+        onProgress: () => {
+          if (isMapUserGesturing()) return;
+          injectCitiesRef.current();
+        },
       }).then(() => injectCitiesRef.current());
     },
     [cityId],
@@ -1454,15 +2149,18 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
 
   useEffect(() => {
     void hydrateCityDwellTracker().then(() => {
-      if (readyRef.current) injectCitiesRef.current();
+      if (readyRef.current && mapLayerDebugAllows('cities')) injectCitiesRef.current();
     });
-    void loadWalkTrack().then(setWalkTrack);
+    if (!isMapLayerDebugEnabled()) {
+      void loadWalkTrack().then(setWalkTrack);
+    }
   }, []);
 
   useEffect(() => {
     if (!readyRef.current) return;
+    if (isMapExtractFrozen((cityId || '').toLowerCase())) return;
     injectCities();
-  }, [injectCities]);
+  }, [cityId, injectCities]);
 
   useEffect(() => {
     void ensureHeadingWatch();
@@ -1485,13 +2183,14 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
         lastSent == null ? 999 : Math.abs(shortestAngleDelta(lastSent, d));
       const following =
         headingFollowRef.current || locationFollowRef.current;
-      const minDeg = following ? 1.4 : 6;
-      const minMs = following ? 70 : 280;
+      const minDeg = following ? 0.6 : 1.2;
+      const minMs = following ? 16 : 48;
       if (jump < minDeg && now - lastSentAt < minMs) return;
-      if (lastSent == null || jump >= minDeg || now - lastSentAt >= minMs) {
-        lastSent = d;
-        lastSentAt = now;
-      }
+      lastSent = d;
+      lastSentAt = now;
+      headingRef.current = d;
+      // Backup: Sensor-Store + Puck (Scene-Controller kann fehlen / gefiltert sein).
+      useSensorStore.getState().reportHeading(d);
     };
     const unsub = subscribeMapHeading((d) => {
       headingRef.current = d;
@@ -1558,6 +2257,38 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
 
   const fogExpandedRef = useRef(false);
 
+  const applyHudFollowPrefs = useCallback(
+    (prefs: { locationFollow: boolean; headingFollow: boolean }) => {
+      ignoreUserPanUntil.current = Date.now() + 900;
+      if (prefs.locationFollow) {
+        locationFollowRef.current = true;
+        followRef.current = true;
+        setLocationFollow(true);
+        mapRef.current?.reattachFollow();
+        const lat = gpsLatRef.current ?? useFinnusStore.getState().lastGpsLat;
+        const lng = gpsLngRef.current ?? useFinnusStore.getState().lastGpsLng;
+        if (lat != null && lng != null) {
+          mapRef.current?.jumpTo(lat, lng, 16, true);
+        }
+      } else {
+        locationFollowRef.current = false;
+        followRef.current = false;
+        setLocationFollow(false);
+        mapRef.current?.releaseFollow();
+      }
+      if (prefs.headingFollow) {
+        headingFollowRef.current = true;
+        setHeadingFollow(true);
+        mapRef.current?.setHeadingFollow(true);
+      } else {
+        headingFollowRef.current = false;
+        setHeadingFollow(false);
+        mapRef.current?.setHeadingFollow(false);
+      }
+    },
+    [],
+  );
+
   // Walk track → fog schon beim Öffnen, nicht erst wenn Navigation startet
   useEffect(() => {
     injectWalkFog(!fogExpandedRef.current);
@@ -1565,6 +2296,24 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
 
   const injectNavRoute = useCallback(() => {
     if (!readyRef.current) return;
+    if (isVectorBasemapEnabled()) {
+      const view = viewRef.current;
+      const vLat =
+        (view ? (view.south + view.north) / 2 : null) ??
+        gpsLatRef.current ??
+        null;
+      const vLng =
+        (view ? (view.west + view.east) / 2 : null) ??
+        gpsLngRef.current ??
+        null;
+      if (!yorroContentAt(vLat, vLng)) {
+        if (lastRouteJson.current !== 'null') {
+          lastRouteJson.current = 'null';
+          setMapRoute(null);
+        }
+        return;
+      }
+    }
     const liveActive = useFinnusStore.getState().navActive;
     const tourOpen = (useFinnusStore.getState().multiStopTour?.stops ?? []).some(
       (s) => !s.done,
@@ -1616,9 +2365,6 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
     } catch {
       return;
     }
-    if (payload?.fitWide) {
-      followRef.current = false;
-    }
     const json = navRoutePayloadSig(
       payload ?? { current: [], ahead: [], pins: [], arrows: [] },
     );
@@ -1632,55 +2378,101 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
     pendingNavFitRef.current = false;
     followRef.current = false;
     locationFollowRef.current = false;
+    headingFollowRef.current = false;
     setLocationFollow(false);
+    setHeadingFollow(false);
+    mapRef.current?.releaseFollow();
+    mapRef.current?.setHeadingFollow(false);
+    // Überblick: Gesten-Echos vom Fit kurz ignorieren — danach Pan bleibt frei.
+    // Nach Overview kurz ranzoomen (ohne Follow-Lock), damit die Route lesbar wird.
     ignoreUserPanUntil.current = Date.now() + 900;
-    if (payload?.fitWide) {
-      const pts = [
-        ...(payload.current ?? []),
-        ...(payload.ahead ?? []).flat(),
-        ...(payload.pins ?? []),
-      ];
-      if (pts.length >= 2) {
-        let south = 90;
-        let north = -90;
-        let west = 180;
-        let east = -180;
-        for (const p of pts) {
-          if (p.lat < south) south = p.lat;
-          if (p.lat > north) north = p.lat;
-          if (p.lng < west) west = p.lng;
-          if (p.lng > east) east = p.lng;
-        }
-        // Vertrag: kurz ganze Route, dann zur aktuellen Position, dann frei.
-        mapRef.current?.fitBounds(south, west, north, east, true);
-        const gpsLat =
-          gpsLatRef.current ?? useFinnusStore.getState().lastGpsLat;
-        const gpsLng =
-          gpsLngRef.current ?? useFinnusStore.getState().lastGpsLng;
-        setTimeout(() => {
-          if (gpsLat != null && gpsLng != null) {
-            mapRef.current?.jumpTo(gpsLat, gpsLng, undefined, true);
-          }
-          mapRef.current?.releaseFollow();
-          locationFollowRef.current = false;
-          setLocationFollow(false);
-        }, 1_600);
-        return;
+    const gpsLat =
+      gpsLatRef.current ?? useFinnusStore.getState().lastGpsLat;
+    const gpsLng =
+      gpsLngRef.current ?? useFinnusStore.getState().lastGpsLng;
+    const nextPin =
+      payload?.pins?.[0] ??
+      payload?.previewPin ??
+      null;
+    const pts: { lat: number; lng: number }[] = [];
+    if (gpsLat != null && gpsLng != null) {
+      pts.push({ lat: gpsLat, lng: gpsLng });
+    }
+    // Alle nummerierten Stops (1+2), nicht nur der nächste — sonst falscher Ausschnitt.
+    for (const p of payload?.pins ?? []) {
+      if (Number.isFinite(p.lat) && Number.isFinite(p.lng)) {
+        pts.push({ lat: p.lat, lng: p.lng });
       }
     }
-    const lat = gpsLatRef.current ?? useFinnusStore.getState().lastGpsLat;
-    const lng = gpsLngRef.current ?? useFinnusStore.getState().lastGpsLng;
-    if (lat != null && lng != null) {
-      mapRef.current?.jumpTo(lat, lng, undefined, true);
-      mapRef.current?.releaseFollow();
+    if (
+      nextPin &&
+      Number.isFinite(nextPin.lat) &&
+      Number.isFinite(nextPin.lng)
+    ) {
+      pts.push({ lat: nextPin.lat, lng: nextPin.lng });
     }
-  }, [navActive, navRouteRev, multiStopTour]);
+    // Gesamte Polyline in den Überblick, nicht nur GPS+Pin.
+    for (const p of payload?.current ?? []) {
+      if (Number.isFinite(p.lat) && Number.isFinite(p.lng)) {
+        pts.push({ lat: p.lat, lng: p.lng });
+      }
+    }
+    if (pts.length >= 2) {
+      let south = 90;
+      let north = -90;
+      let west = 180;
+      let east = -180;
+      for (const p of pts) {
+        if (p.lat < south) south = p.lat;
+        if (p.lat > north) north = p.lat;
+        if (p.lng < west) west = p.lng;
+        if (p.lng > east) east = p.lng;
+      }
+      // User-Ausschnitt: etwas Luft um die Route, kein Street-Tight-Fit.
+      const padLat = Math.max((north - south) * 0.55, 0.0022);
+      const padLng = Math.max((east - west) * 0.55, 0.0028);
+      south -= padLat;
+      north += padLat;
+      west -= padLng;
+      east += padLng;
+      mapRef.current?.fitBounds(south, west, north, east, true);
+      // Nach Overview: Ranzoomen ohne Follow — Finger kann jederzeit panzen.
+      const zoomLat = gpsLat;
+      const zoomLng = gpsLng;
+      if (zoomLat != null && zoomLng != null) {
+        const token = Date.now();
+        pendingNavZoomTokenRef.current = token;
+        setTimeout(() => {
+          if (pendingNavZoomTokenRef.current !== token) return;
+          if (!useFinnusStore.getState().navActive) return;
+          if (Date.now() < ignoreUserPanUntil.current) return;
+          try {
+            const { isMapUserGesturing } = require('../../services/homeMap/mapGestureLane') as {
+              isMapUserGesturing?: () => boolean;
+            };
+            if (isMapUserGesturing?.()) return;
+          } catch {
+            /* soft */
+          }
+          mapRef.current?.jumpTo(zoomLat, zoomLng, 15.8, true);
+        }, 2200);
+      }
+      return;
+    }
+    if (gpsLat != null && gpsLng != null) {
+      // Ohne Ziel-Pin: leichter Überblick (~14.6), kein Street-Lock 16.
+      mapRef.current?.jumpTo(gpsLat, gpsLng, 14.6, true);
+    }
+  }, [yorroContentAt]);
 
   const wasNavActive = useRef(false);
   useEffect(() => {
     if (navActive && !wasNavActive.current) {
       lastRouteJson.current = '';
       pendingNavFitRef.current = true;
+    }
+    if (!navActive && wasNavActive.current) {
+      pendingNavZoomTokenRef.current = 0;
     }
     wasNavActive.current = navActive;
     injectNavRoute();
@@ -1710,7 +2502,9 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
       );
       if (hereNow !== lastHereCityRef.current) {
         lastHereCityRef.current = hereNow;
-        if (readyRef.current) injectCitiesRef.current();
+        if (readyRef.current && hereNow && !isMapExtractFrozen(hereNow)) {
+          injectCitiesRef.current();
+        }
       }
       if (pausedRef.current) return;
       const now = Date.now();
@@ -1736,15 +2530,18 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
       if (best) {
         notePlaceDwellDelta(here, best.spot_key || String(best.id), delta);
       }
-      if (newlyGreen) injectCitiesRef.current();
+      if (newlyGreen && here && !isMapExtractFrozen(here)) {
+        injectCitiesRef.current();
+      }
     };
     tick();
     const t = setInterval(tick, 4_000);
     return () => clearInterval(t);
   }, [cityId]);
 
-  // Stadtwechsel (Einstellungen): Karte zur Stadt + Offline-Extract laden.
-  // Freie Erkundung danach bleibt — kein Dauer-Follow.
+  // Stadtwechsel (Einstellungen): 3 Releases — Outline → Places → Final.
+  // Nur cityId in Deps — sonst re-triggert jeder Callback-Identitätswechsel
+  // (Fast Refresh / LOD-Edits) Extract+Places → Ruckeln und Kamera-Snap.
   useEffect(() => {
     if (!readyRef.current || !cityId) return;
     const prevInjected = placesInjectedForCity.current;
@@ -1755,40 +2552,117 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
     osmFootprintsRef.current = new Map();
     const switched = prevInjected != null && prevInjected !== cityId;
     if (switched) {
+      placesBootCommittedRef.current = false;
+      placesFinalDoneRef.current = false;
+      placesHadContentRef.current = false;
+      // Freie Erkundung nach Wechsel — sonst springt die Kamera zurück.
+      mapUserExploredRef.current = true;
+      lastPlacesSig.current = '';
       followRef.current = false;
       didCameraLock.current = true;
       locationFollowRef.current = false;
       headingFollowRef.current = false;
       setLocationFollow(false);
       setHeadingFollow(false);
+      beginMapLoadPhases(cityId);
+      resetMapDataCache(cityId);
+      useMapExtractStore.getState().setLoading(cityId);
       const fitBounds = resolveFitBounds(cityId);
-      if (fitBounds) {
-        const lat = (fitBounds.latMin + fitBounds.latMax) / 2;
-        const lng = (fitBounds.lngMin + fitBounds.lngMax) / 2;
+      const jumpLat = fitBounds
+        ? (fitBounds.latMin + fitBounds.latMax) / 2
+        : null;
+      const jumpLng = fitBounds
+        ? (fitBounds.lngMin + fitBounds.lngMax) / 2
+        : null;
+      if (fitBounds && jumpLat != null && jumpLng != null) {
         viewRef.current = viewBoxFromCoverageBounds(fitBounds);
-        ignoreUserPanUntil.current = Date.now() + 900;
+        ignoreUserPanUntil.current = Date.now() + 220;
         mapRef.current?.releaseFollow();
-        mapRef.current?.jumpTo(lat, lng, 13.2, true);
-        void injectOfflineMapExtract(true, { lat, lng }, undefined, cityId, true);
-        void prefetchCityMapExtract(cityId).catch(() => undefined);
-      } else {
-        void injectOfflineMapExtract(true, null, undefined, cityId, true);
-        void prefetchCityMapExtract(cityId).catch(() => undefined);
+        mapRef.current?.setHeadingFollow(false);
+        mapRef.current?.jumpTo(jumpLat, jumpLng, 13.2, true);
       }
+      if (isVectorBasemapEnabled()) {
+        noteMapNearReady(cityId);
+        noteMapCityFinal(cityId);
+        noteMapDataPainted(cityId, 'final');
+        placesFinalDoneRef.current = true;
+        if (yorroContentAt(jumpLat, jumpLng)) {
+          placesForceRef.current = true;
+          lastPlacesSig.current = '';
+          injectPlacesOnlyRef.current();
+          placesForceRef.current = false;
+          noteMapPlacesReady(cityId);
+        } else {
+          setMapPlaces([]);
+        }
+        citiesForceRef.current = true;
+        injectCitiesRef.current();
+        citiesForceRef.current = false;
+        placesInjectedForCity.current = cityId;
+        return;
+      }
+      void (async () => {
+        const center =
+          jumpLat != null && jumpLng != null
+            ? { lat: jumpLat, lng: jumpLng }
+            : null;
+        const idle = () =>
+          waitMapIdle({
+            isGesturing: () => userMapGestureRef.current,
+            quietMs: 800,
+          });
+        try {
+          await prefetchCityMapExtract(cityId);
+        } catch {
+          /* soft */
+        }
+        mapRef.current?.releaseFollow();
+        // R1 — Straßen / Wasser / Bahn (5 km, core).
+        await injectOfflineMapExtract(
+          true,
+          center,
+          MAP_NEAR_RADIUS_M,
+          cityId,
+          true,
+        );
+        noteMapNearReady(cityId);
+        noteMapDataPainted(cityId, 'near');
+        await idle();
+        mapRef.current?.releaseFollow();
+        // R2 — Orte + Icons (kein Extract).
+        placesForceRef.current = true;
+        lastPlacesSig.current = '';
+        injectPlacesOnlyRef.current();
+        placesForceRef.current = false;
+        noteMapPlacesReady(cityId);
+        await idle();
+        // R3 — Rest (10 km full) — Freeze erst danach.
+        await injectOfflineMapExtract(
+          true,
+          center,
+          MAP_CITY_RADIUS_M,
+          cityId,
+          true,
+        );
+        noteMapCityFinal(cityId);
+        noteMapDataPainted(cityId, 'final');
+        placesFinalDoneRef.current = true;
+        await waitMapIdle({
+          isGesturing: () => userMapGestureRef.current,
+          quietMs: 640,
+        });
+        mapRef.current?.releaseFollow();
+        citiesForceRef.current = true;
+        injectCitiesRef.current();
+        citiesForceRef.current = false;
+      })();
+      placesInjectedForCity.current = cityId;
+      return;
     }
     injectFastCityPins(cityId);
     void injectPlacesAndRoads();
-    setTimeout(() => injectCitiesRef.current(), 400);
-    void runWarmupRings();
-  }, [
-    cityId,
-    fitActiveCityOverview,
-    injectOfflineMapExtract,
-    injectPlacesAndRoads,
-    scheduleHeavyMapOverlays,
-    injectFastCityPins,
-    runWarmupRings,
-  ]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- absichtlich nur cityId
+  }, [cityId]);
 
   const onNativeReady = useCallback(() => {
     readyRef.current = true;
@@ -1804,8 +2678,13 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
       typeof seed?.zoom === 'number' && seed.zoom >= 10 && seed.zoom <= 18
         ? seed.zoom
         : 16;
-    // Nur EINMAL pro Session auf GPS — Map-Remount darf nicht zurückreißen.
-    if (!didBootJumpRef.current && bootLat != null && bootLng != null) {
+    // Boot-GPS nur wenn User noch nicht weggewischt hat (onReady kann spät kommen).
+    if (
+      !didBootJumpRef.current &&
+      bootLat != null &&
+      bootLng != null &&
+      !mapUserExploredRef.current
+    ) {
       didBootJumpRef.current = true;
       followRef.current = false;
       viewRef.current = viewBoxAroundGps(bootLat, bootLng);
@@ -1822,10 +2701,28 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
     setHeadingFollow(false);
     invalidateLocalMapIndex();
     void warmLocalMapIndex();
+    const activeMapId = (cityId || env.cityId() || '').toLowerCase();
+    const bootExtract = useMapExtractStore.getState().extract;
+    const bootCity = (useMapExtractStore.getState().cityId || '').toLowerCase();
+    if (
+      bootExtract &&
+      activeMapId &&
+      bootCity === activeMapId &&
+      !isMapExtractRoadsSane(bootExtract)
+    ) {
+      useMapExtractStore.getState().clear();
+      void deleteCityMapExtractFile(activeMapId).catch(() => undefined);
+      if (bootLat != null && bootLng != null) {
+        void loadExtractForViewport(bootLat, bootLng, {
+          force: true,
+          urgent: true,
+          cityId: activeMapId,
+        });
+      }
+    }
     // Nur aktive Stadt vorwärmen — keine serielle Prefetch-Kette aller Offline-Packs
     // (Viewport-First: Tornesch/Kiel erst wenn Viewport sie braucht).
-    const activeMapId = (cityId || env.cityId() || '').toLowerCase();
-    if (activeMapId) {
+    if (!isVectorBasemapEnabled() && activeMapId) {
       void prefetchCityMapExtract(activeMapId).catch(() => undefined);
     }
     void (async () => {
@@ -1836,6 +2733,9 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
           .map((row) => row.id.toLowerCase())
           .filter((id) => id && !isRegionPackCityId(id));
         localOfflineCityIdsRef.current = offlineIds;
+        localPackIdsRef.current = rows
+          .filter((row) => row.hasPack)
+          .map((row) => row.id.toLowerCase());
         // Pack-_coverage für Offline-Städte (Tornesch etc.) — vor Fills, ohne Map-Download.
         await registerCoverageFromLocalPacks({
           cityIds: offlineIds.filter((id) =>
@@ -1844,7 +2744,7 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
         });
         invalidateLocalMapIndex();
         await warmLocalMapIndex();
-        if (readyRef.current) injectCitiesRef.current();
+        if (readyRef.current && mapLayerDebugAllows('cities')) injectCitiesRef.current();
         // Optional: genau EIN Nah-Nachbar idle vorwärmen — nie die ganze Offline-Liste.
         const { runMapIdleWhenFree } = require('../../services/boot/interactiveBootGate') as {
           runMapIdleWhenFree: (fn: () => void) => void;
@@ -1878,7 +2778,7 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
             }
           }
         }
-        if (near) {
+        if (near && !isVectorBasemapEnabled()) {
           setTimeout(() => {
             runMapIdleWhenFree(() => {
               void prefetchCityMapExtract(near!).catch(() => undefined);
@@ -1889,72 +2789,189 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
         /* soft */
       }
     })();
-    // 1) Extract zuerst (Disk-Snapshot / RAM) — Places bewusst verzögert.
-    const already = useMapExtractStore.getState().extract;
-    void injectOfflineMapExtract(
-      !already,
-      {
-        lat: bootLat ?? gpsLatRef.current,
-        lng: bootLng ?? gpsLngRef.current,
-      },
-      DISPLAY_BOOT_RADIUS_M,
-    );
-    scheduleHeavyMapOverlays();
-    injectNavRoute();
-    // Footprints / Ringe / Fog später — mapIdle (Settings blockiert Paint nicht).
-    InteractionManager.runAfterInteractions(() => {
-      setTimeout(() => {
-        const { runMapIdleWhenFree } = require('../../services/boot/interactiveBootGate') as {
-          runMapIdleWhenFree: (fn: () => void) => void;
-        };
-        runMapIdleWhenFree(() => {
-          if (bootLat != null && bootLng != null) {
-            void runFootprintEnrich(500);
+    // Boot: 3 Releases wie Stadtwechsel — R1 unter Splash, R3 spätestens idle/60s.
+    if (!didExtractBootRef.current) {
+      didExtractBootRef.current = true;
+      const activeId = (cityId || env.cityId() || '').toLowerCase() || null;
+      beginMapLoadPhases(activeId);
+      if (isVectorBasemapEnabled()) {
+        noteMapNearReady(activeId);
+        noteMapCityFinal(activeId);
+        noteMapDataPainted(activeId, 'final');
+        noteSplashMapPlacesReady();
+        void (async () => {
+          try {
+            const rows = await listLocalCityDatasets();
+            localOfflineCityIdsRef.current = rows
+              .filter((row) => row.hasPack || row.hasMap)
+              .map((row) => row.id.toLowerCase())
+              .filter((id) => id && !isRegionPackCityId(id));
+            localPackIdsRef.current = rows
+              .filter((row) => row.hasPack)
+              .map((row) => row.id.toLowerCase());
+            await registerCoverageFromLocalPacks({
+              cityIds: localPackIdsRef.current,
+            }).catch(() => undefined);
+            // Immer Force-Inject nach Pack-Liste — Gate-Race sonst leere Orte.
+            placesForceRef.current = true;
+            lastPlacesSig.current = '';
+            placesBootCommittedRef.current = false;
+            injectPlacesOnlyRef.current();
+            placesForceRef.current = false;
+            if (yorroContentAt(bootLat, bootLng)) {
+              noteMapPlacesReady(activeId);
+            }
+            citiesForceRef.current = true;
+            injectCitiesRef.current();
+            citiesForceRef.current = false;
+          } catch {
+            /* soft */
           }
+        })();
+      } else {
+      const already = useMapExtractStore.getState().extract;
+      const alreadyCity = (
+        useMapExtractStore.getState().cityId || ''
+      ).toLowerCase();
+      const nearLat = bootLat ?? gpsLatRef.current;
+      const nearLng = bootLng ?? gpsLngRef.current;
+      void (async () => {
+        const idle = () =>
+          waitMapIdle({
+            isGesturing: () => userMapGestureRef.current,
+            quietMs: 800,
+          });
+        const cacheHit =
+          !!already &&
+          !!activeId &&
+          alreadyCity === activeId.toLowerCase() &&
+          isMapExtractRoadsSane(already);
+        if (!cacheHit && nearLat != null && nearLng != null) {
+          await injectOfflineMapExtract(
+            true,
+            { lat: nearLat, lng: nearLng },
+            MAP_NEAR_RADIUS_M,
+            activeId,
+            true,
+          );
+        }
+        noteMapNearReady(activeId);
+        noteMapDataPainted(activeId, 'near');
+        if (isMapLayerDebugEnabled()) return;
+        await idle();
+        placesForceRef.current = true;
+        lastPlacesSig.current = '';
+        injectPlacesOnlyRef.current();
+        placesForceRef.current = false;
+        noteMapPlacesReady(activeId);
+        noteSplashMapPlacesReady();
+        try {
+          const track = await loadWalkTrack();
+          setWalkTrack(track);
+          if (!isMapUserGesturing()) {
+            forceFogRecompute(track);
+          }
+        } catch {
+          /* soft */
+        }
+        noteSplashMapFogReady();
+        await idle();
+        citiesForceRef.current = true;
+        injectCitiesRef.current();
+        citiesForceRef.current = false;
+      })();
+
+      if (!isMapLayerDebugEnabled()) {
+      const cityLat = nearLat;
+      const cityLng = nearLng;
+      let cityDone = false;
+      const applyCityFinal = async () => {
+        if (cityDone) return;
+        if (peekMapLoadPhases().phase === 'final') return;
+        if (cityLat == null || cityLng == null) return;
+        // Freie Erkundung: Final-Extract nicht mehr nachziehen —
+        // ShapeSource-Sturm = Kamera zurück auf Boot-GPS (live verifiziert).
+        if (mapUserExploredRef.current) {
+          cityDone = true;
+          if (activeId && !isMapExtractFrozen(activeId)) {
+            noteMapCityFinal(activeId);
+            noteMapDataPainted(activeId, 'final');
+          }
+          return;
+        }
+        if (userMapGestureRef.current) {
+          setTimeout(() => {
+            void applyCityFinal();
+          }, 800);
+          return;
+        }
+        if (mapUserExploredRef.current && isMapUserGesturing()) {
+          setTimeout(() => {
+            void applyCityFinal();
+          }, 800);
+          return;
+        }
+        cityDone = true;
+        await waitMapIdle({ isGesturing: () => userMapGestureRef.current });
+        await injectOfflineMapExtract(
+          true,
+          { lat: cityLat, lng: cityLng },
+          MAP_CITY_RADIUS_M,
+          activeId,
+          true,
+        );
+        noteMapCityFinal(activeId);
+        noteMapDataPainted(activeId, 'final');
+        placesFinalDoneRef.current = true;
+        await waitMapIdle({
+          isGesturing: () => userMapGestureRef.current,
+          quietMs: 640,
         });
-      }, HOME_MAP_FOOTPRINTS_AFTER_MS);
-      setTimeout(() => {
-        const { runMapIdleWhenFree } = require('../../services/boot/interactiveBootGate') as {
-          runMapIdleWhenFree: (fn: () => void) => void;
-        };
-        runMapIdleWhenFree(() => {
-          runWarmupRings();
-        });
-      }, HOME_MAP_WARMUP_RINGS_AFTER_MS);
-      setTimeout(() => {
-        const { runMapIdleWhenFree } = require('../../services/boot/interactiveBootGate') as {
-          runMapIdleWhenFree: (fn: () => void) => void;
-        };
-        runMapIdleWhenFree(() => {
+        if (!userMapGestureRef.current) {
+          citiesForceRef.current = true;
           injectCitiesRef.current();
-          refreshCatalogBoundaries(12);
+          citiesForceRef.current = false;
+        }
+      };
+
+      const finalDeadline = setTimeout(() => {
+        void applyCityFinal();
+      }, MAP_CITY_PARTIAL_DEADLINE_MS);
+
+      setTimeout(() => {
+        const { runMapIdleWhenFree } = require('../../services/boot/interactiveBootGate') as {
+          runMapIdleWhenFree: (fn: () => void) => void;
+        };
+        runMapIdleWhenFree(() => {
+          void (async () => {
+            try {
+              if (activeId) {
+                await prefetchCityMapExtract(activeId).catch(() => undefined);
+              }
+              await applyCityFinal();
+            } finally {
+              clearTimeout(finalDeadline);
+            }
+          })();
         });
-      }, 180);
-      void loadWalkTrack().then((track) => {
-        setWalkTrack(track);
-        setTimeout(() => {
-          forceFogRecompute(track);
-          injectWalkFog(true);
-        }, 2_200);
-        setTimeout(() => {
-          fogExpandedRef.current = true;
-          injectWalkFog(false);
-        }, 5_000);
-      });
-    });
+      }, 2_800);
+      }
+      }
+    }
+    injectNavRoute();
+    // Kein Footprint-/Warmup-/Fog-Ladder nach Splash — das waren die Snap-Quellen.
   }, [
+    cityId,
     injectNavRoute,
     injectOfflineMapExtract,
-    injectWalkFog,
-    queueViewportExtract,
     refreshCatalogBoundaries,
-    runWarmupRings,
-    runFootprintEnrich,
-    scheduleHeavyMapOverlays,
   ]);
 
   const onNativeUserPan = useCallback(() => {
-    if (Date.now() < ignoreUserPanUntil.current) return;
+    // Echte User-Bewegung: immer sofort Unlock — ignoreUserPanUntil gilt nur
+    // gegen programmierte Jump-Echoes (die noteUserGesture gar nicht feuern).
+    mapUserExploredRef.current = true;
+    userMapGestureRef.current = true;
     pendingRingDone.current?.();
     followRef.current = false;
     locationFollowRef.current = false;
@@ -1963,18 +2980,51 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
     lastCompassTapAt.current = 0;
     setLocationFollow(false);
     setHeadingFollow(false);
+    // Prefs bewusst nicht speichern — Pan ist Session-Unlock.
+    mapRef.current?.releaseFollow();
+    mapRef.current?.setHeadingFollow(false);
   }, []);
 
+  const gestureQuietTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const onNativeMapGestureStart = useCallback(() => {
     userMapGestureRef.current = true;
+    if (gestureQuietTimer.current) {
+      clearTimeout(gestureQuietTimer.current);
+      gestureQuietTimer.current = null;
+    }
   }, []);
 
   const onNativeMapGestureEnd = useCallback(() => {
-    userMapGestureRef.current = false;
-    if (pendingExtractCenter.current) {
-      scheduleIdleExtractLoad();
+    // Finger hoch ≠ Idle — Fling/Trägheit ~2,8 s wie native Region-Handler.
+    if (gestureQuietTimer.current) clearTimeout(gestureQuietTimer.current);
+    gestureQuietTimer.current = setTimeout(() => {
+      gestureQuietTimer.current = null;
+      userMapGestureRef.current = false;
+      // Nach Swipe: fehlenden Nachbar-Pack still holen + Orte mergen.
+      const view = viewRef.current;
+      if (view && isVectorBasemapEnabled()) {
+        const midLat = (view.south + view.north) / 2;
+        const midLng = (view.west + view.east) / 2;
+        if (Number.isFinite(midLat) && Number.isFinite(midLng)) {
+          maybeEnsureBrowsePackAt(midLat, midLng);
+          placesForceRef.current = true;
+          lastPlacesSig.current = '';
+          injectPlacesOnlyRef.current();
+          placesForceRef.current = false;
+        }
+      }
+    }, 2_800);
+    // Pan/Zoom: kein Extract-Nachladen — pending verwerfen.
+    pendingExtractCenter.current = null;
+    if (extractDeferTimer.current) {
+      clearTimeout(extractDeferTimer.current);
+      extractDeferTimer.current = null;
     }
-  }, [scheduleIdleExtractLoad]);
+    if (viewportInjectTimer.current) {
+      clearTimeout(viewportInjectTimer.current);
+      viewportInjectTimer.current = null;
+    }
+  }, [maybeEnsureBrowsePackAt]);
 
   const onNativeMapBearing = useCallback((bearing: number) => {
     useHomeMapUiStore.getState().setMapBearing(bearing);
@@ -1989,7 +3039,9 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
       zoom: number;
       bearing: number;
     }) => {
-      useHomeMapUiStore.getState().setMapBearing(v.bearing);
+      if (!userMapGestureRef.current) {
+        useHomeMapUiStore.getState().setMapBearing(v.bearing);
+      }
       const midLat = (v.south + v.north) / 2;
       const midLng = (v.west + v.east) / 2;
       const workKey = `${Math.round(midLat * 2500)}:${Math.round(midLng * 2500)}:${Math.round(v.zoom * 10)}`;
@@ -2007,64 +3059,33 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
           north: v.north,
           east: v.east,
         };
-        const zoom = v.zoom ?? 16;
-        const clip = useMapExtractStore.getState().clipCenter;
-        const activeExtractCity = useMapExtractStore.getState().cityId;
-        const localIds = peekLocalMapIds();
-        const preferCity =
-          localIds.size > 0
-            ? resolveViewportCityIdForView(
-                {
-                  south: v.south,
-                  west: v.west,
-                  north: v.north,
-                  east: v.east,
-                },
-                localIds,
-              )
-            : null;
-        const cityChanged =
-          !!preferCity &&
-          preferCity !== (activeExtractCity ?? '').toLowerCase();
-        const extractMoved =
-          !clip ||
-          metersBetween(midLat, midLng, clip.lat, clip.lng) >= RECLIP_M;
-        // Stadtwechsel ODER Clip-Drift → Extract der sichtbaren lokalen Stadt.
-        // Modul-1-Datensatz steuert das nicht.
-        if (zoom >= 7.2 && (extractMoved || cityChanged)) {
-          if (preferCity) {
-            void prefetchCityMapExtract(preferCity);
-          }
-          queueViewportExtract(midLat, midLng, {
-            cityId: preferCity,
-            force: cityChanged,
-            urgent: cityChanged,
-          });
-        }
-        onMapViewport(midLat, midLng, zoom);
-
-        const prevPlaces = placesInjectCenterRef.current;
-        const placesMoved =
-          !prevPlaces ||
-          metersBetween(midLat, midLng, prevPlaces.lat, prevPlaces.lng) >=
-            HOME_MAP_PLACES_REINJECT_MIN_M ||
-          Math.abs(zoom - prevPlaces.zoom) >= HOME_MAP_PLACES_REINJECT_ZOOM;
-        if (!popupHoldRef.current && placesMoved) {
-          if (viewportInjectTimer.current) {
-            clearTimeout(viewportInjectTimer.current);
-          }
-          viewportInjectTimer.current = setTimeout(() => {
-            viewportInjectTimer.current = null;
-            placesInjectCenterRef.current = {
-              lat: midLat,
-              lng: midLng,
-              zoom,
-            };
-            injectPlacesOnlyRef.current();
-          }, 800);
-        }
+        // Kartenbewegung: kein Extract-, Places- oder Cities-ShapeSource-Update.
+        // Boot / Filter / Stadtwechsel / GPS-Lock laden weiter separat.
       }
-      if (!bounds) return;
+      if (!bounds) {
+        // Ohne Profil-Coverage trotzdem Pack-Orte pflegen (Vector).
+        if (isVectorBasemapEnabled()) {
+          const allowed = yorroContentAt(midLat, midLng);
+          const prevAllowed = packContentAllowedRef.current;
+          packContentAllowedRef.current = allowed;
+          if (
+            allowed &&
+            (prevAllowed === false ||
+              prevAllowed == null ||
+              mapPlaces.length === 0) &&
+            !userMapGestureRef.current
+          ) {
+            placesForceRef.current = true;
+            lastPlacesSig.current = '';
+            injectPlacesOnlyRef.current();
+            placesForceRef.current = false;
+            citiesForceRef.current = true;
+            injectCitiesRef.current();
+            citiesForceRef.current = false;
+          }
+        }
+        return;
+      }
       const fully = cityFullyVisibleInBounds({
         viewSouth: v.south,
         viewWest: v.west,
@@ -2075,6 +3096,7 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
         cityLatMax: bounds.latMax,
         cityLngMax: bounds.lngMax,
       });
+      // LOD nur merken — kein injectCities / Boundary-Refresh beim Pan (Shape-Snap).
       const next = resolveHomeMapLodStable(
         lodRef.current,
         resolveHomeMapLod({
@@ -2082,15 +3104,78 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
           cityFullyVisible: fully,
         }),
       );
-      if (next !== lodRef.current) {
-        lodRef.current = next;
-        injectCitiesRef.current();
-        if (next === 'city' || next === 'region') {
-          refreshCatalogBoundaries(next === 'region' ? 24 : 12);
+      lodRef.current = next;
+
+      if (isVectorBasemapEnabled()) {
+        const allowed = yorroContentAt(midLat, midLng);
+        const prevAllowed = packContentAllowedRef.current;
+        packContentAllowedRef.current = allowed;
+        if (!allowed) {
+          const navOn = useFinnusStore.getState().navActive;
+          if (!(navOn && placesHadContentRef.current)) {
+            if (mapPlaces.length > 0) setMapPlaces([]);
+            if (mapCities.length > 0) setMapCities([]);
+            placesBootCommittedRef.current = false;
+            placesHadContentRef.current = false;
+          }
+          // Genau hier: Viewport in Nachbarstadt ohne Pack → still nachladen.
+          maybeEnsureBrowsePackAt(midLat, midLng);
+          return;
+        }
+        // Pack unter Kamera gewechselt (Prisdorf → Tornesch) → Idle-Refresh.
+        const known = listKnownCityCoverageBounds();
+        const packAt =
+          smallestCityIdContainingPoint(midLat, midLng, known)?.toLowerCase() ??
+          null;
+        const packDownloaded =
+          packAt != null &&
+          isCityPackDownloaded(packAt, localPackIdsRef.current);
+        // Nachbarstadt ohne Pack: still als Zubringer nachladen (GPS bleibt).
+        if (
+          packAt &&
+          !packDownloaded &&
+          packAt !== lastViewportPackAtRef.current
+        ) {
+          maybeEnsureBrowsePackAt(midLat, midLng);
+        }
+        const packChanged =
+          packAt != null &&
+          packAt !== lastViewportPackAtRef.current &&
+          packDownloaded;
+        if (packChanged) {
+          lastViewportPackAtRef.current = packAt;
+        }
+        const needPlaces =
+          mapPlaces.length === 0 ||
+          prevAllowed === false ||
+          prevAllowed == null ||
+          packChanged;
+        if (needPlaces && !userMapGestureRef.current && !placesForceRef.current) {
+          if (viewportPlacesRefreshTimer.current) {
+            clearTimeout(viewportPlacesRefreshTimer.current);
+          }
+          viewportPlacesRefreshTimer.current = setTimeout(() => {
+            viewportPlacesRefreshTimer.current = null;
+            if (userMapGestureRef.current || isMapUserGesturing()) return;
+            placesForceRef.current = true;
+            lastPlacesSig.current = '';
+            injectPlacesOnlyRef.current();
+            placesForceRef.current = false;
+            citiesForceRef.current = true;
+            injectCitiesRef.current();
+            citiesForceRef.current = false;
+          }, 420);
         }
       }
     },
-    [bounds, queueViewportExtract, refreshCatalogBoundaries],
+    [
+      bounds,
+      cityId,
+      mapCities.length,
+      mapPlaces.length,
+      maybeEnsureBrowsePackAt,
+      yorroContentAt,
+    ],
   );
 
   const onNativePlaceTap = useCallback(
@@ -2101,8 +3186,59 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
       lat: number;
       lng: number;
     }) => {
-      const placeId = Number(place.id);
+      let placeId = Number(place.id);
+      let placeName = place.name;
+      let placeCategory = place.category;
+      let placeLat = place.lat;
+      let placeLng = place.lng;
       if (!Number.isFinite(placeId)) return;
+      // Basemap-Label (Famila etc.): nächsten Pack-POI matchen, sonst ephemeres Popup.
+      if (placeId === MAP_BASEMAP_POI_ID) {
+        const nameKey = String(place.name || '')
+          .toLowerCase()
+          .replace(/[^\p{L}\p{N}]+/gu, ' ')
+          .trim();
+        let bestId = 0;
+        let bestScore = 0;
+        for (const [id, poi] of poisByIdRef.current) {
+          if (id <= 0) continue;
+          const dLat = (Number(poi.lat) - place.lat) * 111_320;
+          const dLng =
+            (Number(poi.lng) - place.lng) *
+            111_320 *
+            Math.cos((place.lat * Math.PI) / 180);
+          const dist = Math.hypot(dLat, dLng);
+          if (dist > 90) continue;
+          const poiKey = String(poi.name || '')
+            .toLowerCase()
+            .replace(/[^\p{L}\p{N}]+/gu, ' ')
+            .trim();
+          let score = 0;
+          if (nameKey && poiKey && (poiKey.includes(nameKey) || nameKey.includes(poiKey))) {
+            score = 80 - dist * 0.2;
+          } else if (nameKey && poiKey) {
+            const tokens = nameKey.split(/\s+/).filter((t) => t.length >= 3);
+            const hits = tokens.filter((t) => poiKey.includes(t)).length;
+            if (hits) score = 40 + hits * 10 - dist * 0.3;
+          } else if (dist < 35) {
+            score = 25 - dist * 0.4;
+          }
+          if (score > bestScore) {
+            bestScore = score;
+            bestId = id;
+          }
+        }
+        if (bestId > 0 && bestScore >= 30) {
+          const matched = poisByIdRef.current.get(bestId);
+          placeId = bestId;
+          placeName = matched?.name || place.name;
+          placeCategory = matched
+            ? categoryLabelForPoi(matched)
+            : place.category;
+          placeLat = Number(matched?.lat ?? place.lat);
+          placeLng = Number(matched?.lng ?? place.lng);
+        }
+      }
       if (Date.now() < ignorePlaceTapUntil.current) return;
       noteUiTap('mapPlace');
       if (viewportInjectTimer.current) {
@@ -2111,31 +3247,52 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
       }
       popupHoldRef.current = true;
       const overlay = overlayPinsRef.current.get(placeId);
-      const poi = poisRef.current.find((p) => p.id === placeId) ?? null;
+      // Frame 1: Skeleton ohne Bullet-Parsing — Popup sofort sichtbar.
       useHomeMapUiStore.getState().setPlacePopup(
-        instantMapPlacePopup({
+        skeletonMapPlacePopup({
           id: placeId,
-          name: place.name || overlay?.name || poi?.name,
-          category: place.category || overlay?.cityId || undefined,
-          lat: place.lat,
-          lng: place.lng,
-          poi,
+          name: placeName || overlay?.name,
+          category: placeCategory || overlay?.cityId || undefined,
+          lat: placeLat,
+          lng: placeLng,
         }),
       );
-      requestAnimationFrame(() => {
-        const preview = useHomeMapUiStore.getState().placePopup;
-        if (preview) void enrichMapPlaceMapsIfListed(preview);
-        if (!overlay && placeId > 0) {
-          void prioritizeMapPlacePreview(placeId);
-        }
+      // Frame 2+: Bullets / Prefetch hinter dem ersten Paint.
+      InteractionManager.runAfterInteractions(() => {
+        requestAnimationFrame(() => {
+          const poi = poisByIdRef.current.get(placeId) ?? null;
+          const full = instantMapPlacePopup({
+            id: placeId,
+            name: placeName || overlay?.name || poi?.name,
+            category: placeCategory || overlay?.cityId || undefined,
+            lat: placeLat,
+            lng: placeLng,
+            poi,
+          });
+          const cur = useHomeMapUiStore.getState().placePopup;
+          if (!cur || cur.id !== placeId) return;
+          useHomeMapUiStore.getState().setPlacePopup({
+            ...full,
+            lat: cur.lat,
+            lng: cur.lng,
+          });
+          // Kein Google-Places-Enrich beim Tap — Popup bleibt Google-frei.
+          if (!overlay && placeId > 0) {
+            void prioritizeMapPlacePreview(placeId);
+          }
+        });
       });
     },
-    [pois.length],
+    [],
   );
 
   const onNativeDropPin = useCallback(
     (latN: number, lngN: number) => {
       if (!Number.isFinite(latN) || !Number.isFinite(lngN)) return;
+      if (isVectorBasemapEnabled() && !yorroContentAt(latN, lngN)) {
+        maybePromptPackAt(latN, lngN);
+        return;
+      }
       noteUiTap('mapDropPin');
       const snap = snapMapLongPress({
         lat: latN,
@@ -2182,15 +3339,33 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
         }),
       );
     },
-    [mapExtract, mapPlaces, onNativePlaceTap],
+    [mapExtract, mapPlaces, onNativePlaceTap, yorroContentAt, maybePromptPackAt],
   );
 
   const onNativeBlankTap = useCallback(() => {
+    const view = viewRef.current;
+    const vLat =
+      (view ? (view.south + view.north) / 2 : null) ??
+      gpsLatRef.current ??
+      null;
+    const vLng =
+      (view ? (view.west + view.east) / 2 : null) ??
+      gpsLngRef.current ??
+      null;
+    if (
+      isVectorBasemapEnabled() &&
+      typeof vLat === 'number' &&
+      typeof vLng === 'number' &&
+      !yorroContentAt(vLat, vLng)
+    ) {
+      maybePromptPackAt(vLat, vLng);
+      return;
+    }
     if (useHomeMapUiStore.getState().placePopup) {
       useHomeMapUiStore.getState().setPlacePopup(null);
     }
     setDropPin(null);
-  }, []);
+  }, [maybePromptPackAt, yorroContentAt]);
 
   const snapGps = useCallback(
     (mode: 'pulse' | 'lock') => {
@@ -2209,7 +3384,8 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
         followRef.current = false;
         locationFollowRef.current = false;
         setLocationFollow(false);
-        mapRef.current?.jumpTo(lat, lng, 16, true);
+        // Pulse: nur zentrieren — Zoom lassen (kein Street-Snap 16).
+        mapRef.current?.jumpTo(lat, lng, undefined, true);
         mapRef.current?.releaseFollow();
       };
       const lat = gpsLatRef.current ?? useFinnusStore.getState().lastGpsLat;
@@ -2251,22 +3427,15 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
     lastGpsTapAt.current = next.lastTapAt;
     locationFollowRef.current = next.locked;
     setLocationFollow(next.locked);
+    noteHomeMapHudFollowPrefs({ locationFollow: next.locked });
     if (next.action === 'unlock') {
       followRef.current = false;
       mapRef.current?.releaseFollow();
       return;
     }
-    // Fix-Modus: Norden oben, solange kein Blickrichtungs-Follow.
-    if (next.action === 'lock' && !headingFollowRef.current) {
-      mapRef.current?.setNorthUp();
-      useHomeMapUiStore.getState().setMapBearing(0);
-    }
-    if (next.action === 'pulse' && !headingFollowRef.current) {
-      mapRef.current?.setNorthUp();
-      useHomeMapUiStore.getState().setMapBearing(0);
-    }
+    // Pulse = einmal zentrieren. Lock = Karte folgt GPS (Punkt bleibt Mitte).
+    // Kein Auto-Norden — das macht nur der Kompass-Button.
     ignoreUserPanUntil.current = Date.now() + 700;
-    // Lock: Follow anlocken. Pulse: nur einmal springen, kein reattach-Fenster.
     if (next.action === 'lock') {
       mapRef.current?.reattachFollow();
     }
@@ -2277,10 +3446,7 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
     locationFollowRef.current = true;
     lastGpsTapAt.current = Date.now();
     setLocationFollow(true);
-    if (!headingFollowRef.current) {
-      mapRef.current?.setNorthUp();
-      useHomeMapUiStore.getState().setMapBearing(0);
-    }
+    noteHomeMapHudFollowPrefs({ locationFollow: true });
     ignoreUserPanUntil.current = Date.now() + 700;
     mapRef.current?.reattachFollow();
     snapGps('lock');
@@ -2297,13 +3463,15 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
     lastCompassTapAt.current = next.lastTapAt;
     headingFollowRef.current = next.locked;
     setHeadingFollow(next.locked);
+    noteHomeMapHudFollowPrefs({ headingFollow: next.locked });
     ignoreUserPanUntil.current = Date.now() + 700;
     if (next.action === 'lock') {
+      // 2. Tipp in 5 s: Karte dreht mit Blickrichtung.
       mapRef.current?.setHeadingFollow(true);
       return;
     }
+    // 1. Tipp / Unlock: Norden oben.
     mapRef.current?.setHeadingFollow(false);
-    // Nur auf Kompass-Tipp → Norden. Manuelles Drehen snappt nicht zurück.
     useHomeMapUiStore.getState().setMapBearing(0);
     mapRef.current?.setNorthUp();
   }, []);
@@ -2312,6 +3480,7 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
     headingFollowRef.current = false;
     lastCompassTapAt.current = Date.now();
     setHeadingFollow(false);
+    noteHomeMapHudFollowPrefs({ headingFollow: false });
     mapRef.current?.setHeadingFollow(false);
     useHomeMapUiStore.getState().setMapBearing(0);
     ignoreUserPanUntil.current = Date.now() + 700;
@@ -2320,6 +3489,7 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
 
   const onCalibrateCompass = useCallback(() => {
     resetNativeMapCompass();
+    void ensureHeadingWatch();
     setCalibrateOpen(true);
   }, []);
 
@@ -2357,8 +3527,7 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
         }),
       );
       if (pick.id > 0) void prioritizeMapPlacePreview(pick.id);
-      const preview = useHomeMapUiStore.getState().placePopup;
-      if (preview) void enrichMapPlaceMapsIfListed(preview);
+      // Kein Google-Places-Enrich beim Tap — Popup bleibt Google-frei.
     })();
   }, [buildPlacePayloads, tourPlaceDemo]);
 
@@ -2368,13 +3537,15 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
         styles.root,
         { top: Math.max(0, hudHeight - 8), bottom: bottomChrome },
       ]}
-      pointerEvents="box-none"
+      pointerEvents="auto"
     >
       <NativeHomeMapView
         ref={mapRef}
-        extract={mapExtract}
+        extract={isVectorBasemapEnabled() ? null : mapExtract}
         places={mapPlaces}
         cities={mapCities}
+        placeFilters={mapFilters}
+        amenityIcons={amenityIcons}
         route={mapRoute}
         walkTrack={walkTrack}
         dropPin={dropPin}
@@ -2408,6 +3579,7 @@ export const HomePresenceMap = React.memo(function HomePresenceMap({
         needsCalibration={needsCalibration}
         calibrating={calibrateOpen}
       />
+      <MapLayerDebugHud onStepChange={applyMapLayerDebugStepEffects} />
       <CompassCalibrateModal
         visible={calibrateOpen}
         cityId={cityId}

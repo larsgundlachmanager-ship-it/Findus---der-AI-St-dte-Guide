@@ -6,6 +6,7 @@
 import React, {
   forwardRef,
   memo,
+  useCallback,
   useEffect,
   useImperativeHandle,
   useMemo,
@@ -21,11 +22,13 @@ import {
   MarkerView,
   ShapeSource,
   SymbolLayer,
+  type MapViewRef,
   type OnPressEvent,
   type RegionPayload,
   type ShapeSourceRef,
 } from '@maplibre/maplibre-react-native';
 import { InteractionManager, Pressable, StyleSheet, Text, View } from 'react-native';
+import { MapLayerGate } from './MapLayerGate';
 import {
   YorroHomeCamera,
   type YorroHomeCameraRef,
@@ -43,6 +46,19 @@ import type {
   GeoJsonFeature,
 } from '../../services/homeMap/cityMapExtractGeojson';
 import { OFFLINE_HOME_MAP_STYLE } from '../../services/homeMap/offlineHomeMapStyle';
+import { isVectorBasemapEnabled } from '../../services/homeMap/mapTileConfig';
+import {
+  loadYorroProtomapsBasemapStyle,
+  peekYorroProtomapsBasemapStyle,
+} from '../../services/homeMap/yorroProtomapsBasemapStyle';
+import {
+  listBasemapBuildingLayerIds,
+  listBasemapPoiLayerIds,
+  MAP_BASEMAP_POI_ID,
+  pickBasemapPoiAt,
+  pickBestBuildingRingAt,
+} from '../../services/homeMap/basemapFeatureQuery';
+import { buildYorroVectorMapStyle } from '../../services/homeMap/yorroVectorMapStyle';
 import {
   getWorldOverview,
   getWorldLabels,
@@ -50,10 +66,24 @@ import {
   type WorldOverviewBundle,
 } from '../../services/homeMap/worldOverviewGeojson';
 import {
-  HOME_MAP_BUILDINGS_AFTER_CORE_MS,
   HOME_MAP_WORLD_AFTER_CORE_MS,
 } from '../../services/homeMap/homeMapBootSchedule';
+import {
+  combineMapLayerFilters,
+  HOME_MAP_FILTER_IDS,
+  mapPlaceVisibilityFilter,
+  type HomeMapFilterId,
+} from '../../services/homeMap/homeMapPlaceFilter';
+import type { HomeMapPlaceIcon } from '../../services/homeMap/homeMapPlaceType';
 import { markHomeMapBoot } from '../../services/homeMap/homeMapBootMetrics';
+import { noteSplashMapCoreReady } from '../../services/homeMap/splashReadyGate';
+import { whenMapWorldAllowed, peekMapLoadPhases, isMapWorldReleaseAllowed, isMapExtractFrozen } from '../../services/homeMap/mapLoadPhases';
+import {
+  isMapLayerDebugEnabled,
+  isMapLayerDebugExtractLocked,
+  isMapLayerGroupVisible,
+  mapLayerDebugAllows,
+} from '../../services/homeMap/mapLayerDebug';
 import {
   HOME_MAP_ADMIN1_BORDER,
   HOME_MAP_ADMIN1_FILL,
@@ -66,10 +96,11 @@ import {
   HOME_MAP_FOG_FILL,
   HOME_MAP_FOG_MASK_ENABLED,
   HOME_MAP_FOG_REVEAL,
+  HOME_MAP_FOG_REVEAL_OPACITY,
   HOME_MAP_FOG_ZOOM,
   HOME_MAP_LAND_FAR,
-  HOME_MAP_OCEAN,
   HOME_MAP_OVERVIEW_LOD,
+  HOME_MAP_WORLD_MAX_ZOOM,
   HOME_MAP_WORLD_STRUCTURE_LOD,
   HOME_MAP_STREET_LABEL_LOD,
   HOME_MAP_PARK,
@@ -99,6 +130,7 @@ import {
 } from '../../services/discovery/fogCoverage';
 import { WALK_REVEAL_RADIUS_M, type WalkTrackPoint } from '../../services/discovery/walkTrackService';
 import type { NavRouteMapPayload } from '../../services/navigation/navRouteMapPayload';
+import { isGenericMapPointLabel } from '../../services/navigation/streetAddressQuery';
 import { MAP_DROP_PIN_ID } from '../../services/homeMap/mapPlacePreview';
 import { useSensorStore } from '../../store/useSensorStore';
 import { useFogStore } from '../../store/useFogStore';
@@ -111,6 +143,7 @@ import {
   HOME_MAP_PARK_ICONS,
   HOME_MAP_TRANSIT_ICONS,
   homeMapIconLod,
+  isTransitIconLod,
   type HomeMapIconLod,
 } from '../../services/homeMap/homeMapPlaceType';
 import {
@@ -132,6 +165,8 @@ export type NativeMapPlace = {
   icon?: string;
   iconLod?: HomeMapIconLod;
   story?: number;
+  /** Chip-Tags für MapLibre Layer-Filter (ohne GeoJSON-Rebuild). */
+  filterTags?: string[];
 };
 
 export type NativeMapCity = {
@@ -160,12 +195,23 @@ export type NativeHomeMapHandle = {
   reattachFollow: () => void;
   /** Freie Erkundung: GPS darf die Kamera nie zurückziehen. */
   releaseFollow: () => void;
+  /**
+   * Gebäudeumriss unter GPS-Punkt aus der gerenderten Protomaps-Basiskarte.
+   * Vector-Basemap: extract={null} → Pack-Boxen können hier auf echten Umriss snappen.
+   * Soft-Fail: null bei jedem Fehler.
+   */
+  queryBuildingRingAt: (
+    lat: number,
+    lng: number,
+  ) => Promise<Array<[number, number]> | null>;
 };
 
 type Props = {
   extract: CityMapExtract | null;
   places: NativeMapPlace[];
   cities: NativeMapCity[];
+  placeFilters: Record<HomeMapFilterId, boolean>;
+  amenityIcons: Record<HomeMapPlaceIcon, boolean>;
   route: NavRouteMapPayload | null;
   walkTrack: WalkTrackPoint[];
   dropPin: { lat: number; lng: number } | null;
@@ -217,6 +263,7 @@ const EMPTY_LABELS: WorldLabelsBundle = {
   rivers: EMPTY_FC,
   roads: EMPTY_FC,
   regions: EMPTY_FC,
+  countries: EMPTY_FC,
 };
 const MAP_TEXT_FONT = ['Noto Sans Regular'];
 
@@ -241,23 +288,34 @@ function ringTooWideForFill(
   return m > (story ? 2200 : 420);
 }
 
+function closeRingLngLat(ring: Array<[number, number]>): Array<[number, number]> | null {
+  if (ring.length < 3) return null;
+  const a = ring[0]!;
+  const b = ring[ring.length - 1]!;
+  const closed =
+    a[0] === b[0] && a[1] === b[1] ? ring.slice() : ring.concat([a]);
+  if (closed.length < 4) return null;
+  let unique = 1;
+  for (let i = 1; i < closed.length - 1; i += 1) {
+    const p = closed[i]!;
+    const prev = closed[i - 1]!;
+    if (p[0] !== prev[0] || p[1] !== prev[1]) unique += 1;
+  }
+  return unique >= 3 ? closed : null;
+}
+
 function ringToPolygon(
   ring: Array<[number, number]>,
   holes: Array<Array<[number, number]>> = [],
 ): GeoJsonFeature | null {
   if (!ring || ring.length < 3) return null;
-  const coords = ring.map((p) => [p[1], p[0]] as [number, number]);
-  const a = coords[0]!;
-  const b = coords[coords.length - 1]!;
-  if (a[0] !== b[0] || a[1] !== b[1]) coords.push(a);
+  const coords = closeRingLngLat(ring.map((p) => [p[1], p[0]] as [number, number]));
+  if (!coords) return null;
   const holeCoords: Array<Array<[number, number]>> = [];
   for (const h of holes) {
     if (!h || h.length < 3) continue;
-    const c = h.map((p) => [p[1], p[0]] as [number, number]);
-    const ha = c[0]!;
-    const hb = c[c.length - 1]!;
-    if (ha[0] !== hb[0] || ha[1] !== hb[1]) c.push(ha);
-    holeCoords.push(c);
+    const c = closeRingLngLat(h.map((p) => [p[1], p[0]] as [number, number]));
+    if (c) holeCoords.push(c);
   }
   return {
     type: 'Feature',
@@ -275,6 +333,18 @@ function placesToGeojson(places: NativeMapPlace[]): {
   const dots: GeoJsonFeature[] = [];
   const amenities: GeoJsonFeature[] = [];
   for (const p of places) {
+    // Halt ohne Icon (Story/Ring-Pfad) → trotzdem Bahn-Piktogramm, nie nackter Status-Punkt.
+    const inferredRail =
+      !p.icon &&
+      /\b(bahnhof|haltepunkt|hbf)\b/i.test(`${p.name ?? ''} ${p.category ?? ''}`) &&
+      !/\b(toilette|parkplatz|p\+r|kiosk|praxis|café|cafe|restaurant)\b/i.test(
+        `${p.name ?? ''} ${p.category ?? ''}`,
+      );
+    const icon = p.icon || (inferredRail ? 'rail' : undefined);
+    const iconLod =
+      p.iconLod ||
+      (icon ? homeMapIconLod(icon) : undefined) ||
+      (inferredRail ? 'transit' : undefined);
     const props = {
       id: p.id,
       name: p.name,
@@ -282,13 +352,17 @@ function placesToGeojson(places: NativeMapPlace[]): {
       color: p.color,
       lat: p.lat,
       lng: p.lng,
-      icon: p.icon || '',
-      iconImg: amenityIconImageName(p.icon),
-      kind: p.iconLod || homeMapIconLod(p.icon),
+      icon: icon || '',
+      iconImg: amenityIconImageName(icon),
+      kind: iconLod || homeMapIconLod(icon),
+      tags: p.filterTags ?? [],
     };
     // Haltepunkt/Bahnhof: nie Bahnsteig-Polygon als Riesen-Fläche
     const skipFillForPoint =
-      !!p.keepDot || props.kind === 'transit' || !!p.amenityDot;
+      !!p.keepDot ||
+      isTransitIconLod(props.kind) ||
+      !!p.amenityDot ||
+      inferredRail;
     const poly =
       !skipFillForPoint &&
       p.ring &&
@@ -305,7 +379,7 @@ function placesToGeojson(places: NativeMapPlace[]): {
       geometry: { type: 'Point', coordinates: [p.lng, p.lat] },
     };
     const hasAmenityIcon =
-      (p.amenityDot || p.icon) && amenityIconImageName(p.icon);
+      (p.amenityDot || icon || inferredRail) && amenityIconImageName(icon);
     if (hasAmenityIcon) {
       amenities.push(pt);
     } else if (!poly) {
@@ -552,6 +626,7 @@ function routeToGeojson(route: NavRouteMapPayload | null): {
       properties: {
         bearing: a.bearing,
         kind: a.kind === 'turn' ? 'turn' : 'flow',
+        lod: a.lod === 'hi' ? 'hi' : 'lo',
       },
       geometry: { type: 'Point', coordinates: [a.lng, a.lat] },
     });
@@ -616,12 +691,71 @@ function fogTrackSegments(
   return segs;
 }
 
+function placesPaintSig(places: NativeMapPlace[]): string {
+  if (!places.length) return '0';
+  return `${places.length}:${places[0]?.id}:${places[places.length - 1]?.id}`;
+}
+
+function filtersSig(flags: Record<HomeMapFilterId, boolean>): string {
+  return HOME_MAP_FILTER_IDS.map((id) => (flags[id] ? '1' : '0')).join('');
+}
+
+function nativeMapPropsEqual(prev: Props, next: Props): boolean {
+  if (prev.locationFollow !== next.locationFollow) return false;
+  if (prev.headingFollow !== next.headingFollow) return false;
+  if (prev.chromeDim !== next.chromeDim) return false;
+  if (prev.dropPin !== next.dropPin) return false;
+  if (isVectorBasemapEnabled()) {
+    if (prev.places !== next.places) return false;
+    if (prev.cities !== next.cities) return false;
+    if (prev.route !== next.route) return false;
+    if (filtersSig(prev.placeFilters) !== filtersSig(next.placeFilters)) {
+      return false;
+    }
+    if (prev.walkTrack !== next.walkTrack) return false;
+    return true;
+  }
+  if (prev.walkTrack !== next.walkTrack) {
+    const fogWanted =
+      HOME_MAP_FOG_ENABLED &&
+      (!isMapLayerDebugEnabled() || isMapLayerGroupVisible('fog'));
+    if (fogWanted) return false;
+  }
+  if (prev.route !== next.route) return false;
+  if (filtersSig(prev.placeFilters) !== filtersSig(next.placeFilters)) {
+    return false;
+  }
+
+  const frozenCity = next.extract?.cityId;
+  if (frozenCity && isMapExtractFrozen(frozenCity)) {
+    const exSig = (e: CityMapExtract | null) =>
+      e
+        ? `${e.cityId}:${e.roads?.length ?? 0}:${e.buildings?.length ?? 0}`
+        : '';
+    if (exSig(prev.extract) !== exSig(next.extract)) return false;
+    if (placesPaintSig(prev.places) !== placesPaintSig(next.places)) {
+      return false;
+    }
+    if ((prev.cities?.length ?? 0) !== (next.cities?.length ?? 0)) {
+      return false;
+    }
+    return true;
+  }
+
+  return (
+    prev.extract === next.extract &&
+    prev.places === next.places &&
+    prev.cities === next.cities
+  );
+}
+
 export const NativeHomeMapView = memo(
   forwardRef(function NativeHomeMapView(
   props: Props,
   ref: React.ForwardedRef<NativeHomeMapHandle>,
 ) {
     const cameraRef = useRef<YorroHomeCameraRef>(null);
+    const mapViewRef = useRef<MapViewRef>(null);
     const gpsArrowRef = useRef<ShapeSourceRef>(null);
     const gpsAccRef = useRef<ShapeSourceRef>(null);
     const ignorePanUntil = useRef(0);
@@ -643,14 +777,11 @@ export const NativeHomeMapView = memo(
       lng: number;
       zoom: number;
     } | null>(null);
-    /** Debounce gegen Undo↔Region-Ruckel-Loop. */
-    const lastHoldAt = useRef(0);
     /**
      * Freie Erkundung (Default). Zentrum darf sich NUR bewegen wenn:
      * - centerMoveArmedUntil (Boot / Zentrieren-Pulse / Nav-Fit), oder
-     * - GPS-Lock (locationFollow && !detached), oder
-     * - restore nach erkanntem MapLibre-GPS-Snap (weg VOM GPS, nicht hin).
-     * Idle / Extract / 30‑Min-Scroll: kein Zentrums-Move.
+     * - GPS-Lock (locationFollow && !detached).
+     * Kein Restore/Gegenwehr — Idle / Extract / Layer-Reload setzen die Kamera nie.
      */
     const userDetached = useRef(true);
     const centerMoveArmedUntil = useRef(0);
@@ -663,6 +794,10 @@ export const NativeHomeMapView = memo(
     const bearingRafRef = useRef(0);
     const programmaticBearingRef = useRef(false);
     const lastBearingUiAt = useRef(0);
+    /** MapView schluckt Touches — Bearing/Pan-Delta = Live-Geste. */
+    const liveMapTurnRef = useRef(false);
+    /** User hat schon erkundet → keine Boot-World/Layer-Nachzieh-Snaps. */
+    const userHasExploredRef = useRef(false);
     const gpsPosRef = useRef({
       lat: null as number | null,
       lng: null as number | null,
@@ -670,21 +805,32 @@ export const NativeHomeMapView = memo(
     });
     const headingFollowRef = useRef(props.headingFollow);
     const locationFollowRef = useRef(props.locationFollow);
-    // Nur bei Prop-Wechsel syncen — NICHT jeden Render.
-    // Detached: nie wieder anlocken außer reattach/GPS-Button.
+    /** Letzter programmierter Center-Move — Region-Events danach kurz = Echo, nicht User-Pan. */
+    const lastProgrammaticCenterAt = useRef(0);
+    // Prop → Ref immer syncen. Attach nur über reattachFollow (nie still userDetached=false).
     useEffect(() => {
-      if (userDetached.current) {
-        if (!props.locationFollow) locationFollowRef.current = false;
-        return;
-      }
       locationFollowRef.current = props.locationFollow;
-      if (props.locationFollow) followMode.current = 'gps';
+      if (props.locationFollow) {
+        followMode.current = 'gps';
+      } else {
+        // React-State aus → hart frei (Pan darf nie hinter altem Lock kleben).
+        userDetached.current = true;
+        followMode.current = 'explore';
+        stopHeadingFollowLoop();
+        headingFollowRef.current = false;
+      }
     }, [props.locationFollow]);
 
     const postBearingUi = (bearing: number) => {
       if (!Number.isFinite(bearing)) return;
       const now = Date.now();
-      if (now - lastBearingUiAt.current < 40) return;
+      // Live mit Kartendrehung: kein Throttle während Finger / MapView-Turn.
+      const live =
+        fingerDown.current ||
+        userGesturing.current ||
+        liveMapTurnRef.current;
+      const minGap = live ? 48 : 32;
+      if (minGap > 0 && now - lastBearingUiAt.current < minGap) return;
       lastBearingUiAt.current = now;
       props.onBearing?.(bearing);
     };
@@ -702,9 +848,15 @@ export const NativeHomeMapView = memo(
       displayBearingRef.current = b;
       camLiveRef.current = { ...camLiveRef.current, heading: b };
       markProgrammaticBearing();
+      // Android: Heading-only setCamera fällt oft auf defaultStop-Zentrum (Boot-GPS)
+      // zurück — immer Live-Center+Zoom mitschicken (Google: drehen ≠ springen).
+      const live = camLiveRef.current;
       cameraRef.current?.setCamera({
+        centerCoordinate: [live.lng, live.lat],
+        zoomLevel: live.zoom,
         heading: b,
         animationDuration: 0,
+        animationMode: 'moveTo',
       });
       postBearingUi(b);
     };
@@ -720,9 +872,12 @@ export const NativeHomeMapView = memo(
     const tickDisplayBearing = () => {
       bearingRafRef.current = 0;
       if (!headingFollowRef.current) return;
-      // Heading-Follow darf bei freier Erkundung (detached) weiterlaufen —
-      // nur Finger/Geste pausiert die Rotation.
-      if (fingerDown.current || userGesturing.current) {
+      // User dreht/pannt die Karte → Follow pausieren (sonst „festgenagelt“).
+      if (
+        fingerDown.current ||
+        userGesturing.current ||
+        liveMapTurnRef.current
+      ) {
         return;
       }
       const target = targetBearingRef.current;
@@ -730,16 +885,19 @@ export const NativeHomeMapView = memo(
       let current = displayBearingRef.current;
       const d = shortestSignedBearing(current, target);
       const ad = Math.abs(d);
-      if (ad < 0.18) {
+      // Flüssig: große Sprünge schnell, kleine sofort — kein zähes Nachlaufen.
+      if (ad < 0.35) {
+        current = target;
+      } else if (ad < 3) {
         current = target;
       } else {
-        const k = ad > 14 ? 0.38 : ad > 6 ? 0.3 : 0.24;
+        const k = ad > 25 ? 0.72 : ad > 10 ? 0.58 : 0.45;
         current = ((current + d * k) % 360 + 360) % 360;
       }
-      if (Math.abs(shortestSignedBearing(current, displayBearingRef.current)) >= 0.08) {
+      if (Math.abs(shortestSignedBearing(current, displayBearingRef.current)) >= 0.05) {
         applyMapBearing(current);
       }
-      if (Math.abs(shortestSignedBearing(current, target)) >= 0.18) {
+      if (Math.abs(shortestSignedBearing(current, target)) >= 0.35) {
         bearingRafRef.current = requestAnimationFrame(tickDisplayBearing);
       }
     };
@@ -755,23 +913,17 @@ export const NativeHomeMapView = memo(
       // wieder Host-Jumps und der GPS-Anker kann die freie Erkundung fressen.
       userGesturing.current = false;
       fingerDown.current = false;
+      liveMapTurnRef.current = false;
       displayBearingRef.current = camLiveRef.current.heading;
       targetBearingRef.current = headingRef.current;
       if (fromUserTap) {
-        ignorePanUntil.current = Date.now() + 900;
-        suppressRegionUntil.current = Date.now() + 900;
+        ignorePanUntil.current = Date.now() + 220;
+        suppressRegionUntil.current = Date.now() + 220;
       }
       queueHeadingFollowTick();
     };
 
     useEffect(() => {
-      if (userDetached.current) {
-        if (!props.headingFollow) {
-          headingFollowRef.current = false;
-          stopHeadingFollowLoop();
-        }
-        return;
-      }
       if (props.headingFollow) {
         enableHeadingFollowInternal(false);
       } else {
@@ -805,6 +957,13 @@ export const NativeHomeMapView = memo(
       zoom: props.initialZoom,
       heading: 0,
     });
+    /** Letzte Geste-Mitte aus IsChanging — DidChange kann schon Snap-Back auf Boot sein. */
+    const gestureCamRef = useRef<{
+      lat: number;
+      lng: number;
+      zoom: number;
+      heading: number;
+    } | null>(null);
     /** gps = Follow-Puck · explore = freie User-View · nav = Route-Follow */
     const followMode = useRef<HomeMapFollowMode>('gps');
     const bootCam = useRef({
@@ -813,6 +972,8 @@ export const NativeHomeMapView = memo(
       heading: 0,
     }).current;
     const [viewBounds, setViewBounds] = useState<FogBounds | null>(null);
+    /** Fog-Maske: Bounds einmal setzen, bis Final — Pan darf ShapeSource nicht neu laden. */
+    const fogBoundsFrozenRef = useRef(false);
     const gps0 = useSensorStore.getState();
     gpsPosRef.current = { lat: gps0.lat, lng: gps0.lng, acc: gps0.accuracyM };
     headingRef.current = gps0.headingDeg;
@@ -890,29 +1051,31 @@ export const NativeHomeMapView = memo(
       })) {
         return;
       }
+      // Follow-Ticks: nur Live-Kamera — NICHT userViewCam überschreiben.
+      // Sonst misst Pan gegen GPS und Follow gewinnt immer (Ruckeln / klebt).
+      camLiveRef.current = {
+        lat,
+        lng,
+        zoom: userViewCamRef.current.zoom,
+        heading: followHead
+          ? userViewCamRef.current.heading
+          : 0,
+      };
       if (!followHead) {
         lastCamHeading.current = 0;
         displayBearingRef.current = 0;
-        commitUserView({
-          lat,
-          lng,
-          zoom: userViewCamRef.current.zoom,
-          heading: 0,
-        });
         return;
       }
       if (Number.isFinite(heading)) {
         targetBearingRef.current = heading;
         queueHeadingFollowTick();
       }
-      commitUserView({
-        lat,
-        lng,
-        zoom: userViewCamRef.current.zoom,
-        heading: userViewCamRef.current.heading,
-      });
     };
 
+    /**
+     * bootCam (JS) immer; native defaultStop NACH Boot nie mehr anfassen.
+     * setNativeProps(defaultStop) = Kamera-Snap auf Android (Pan/Rotate tot).
+     */
     const syncBootCamFrom = (c: {
       lat: number;
       lng: number;
@@ -923,70 +1086,10 @@ export const NativeHomeMapView = memo(
       bootCam.centerCoordinate = [c.lng, c.lat];
       bootCam.zoomLevel = c.zoom;
       bootCam.heading = Number.isFinite(c.heading) ? c.heading : 0;
-      // Native defaultStop mitziehen — Remount darf nicht auf Boot-GPS springen.
-      cameraRef.current?.syncDefaultStop({
-        centerCoordinate: [c.lng, c.lat],
-        zoomLevel: c.zoom,
-        heading: Number.isFinite(c.heading) ? c.heading : 0,
-      });
     };
 
     /** defaultStop = User-Anker bei freier Erkundung (nie Live-GPS-Snap). */
     const currentDefaultStopCam = () => userViewCamRef.current;
-
-    const isLiveNearGps = (lat: number, lng: number) => {
-      const gps = gpsPosRef.current;
-      return (
-        gps.lat != null &&
-        gps.lng != null &&
-        Math.abs(lat - gps.lat) < 0.00035 &&
-        Math.abs(lng - gps.lng) < 0.00035
-      );
-    };
-
-    const isAnchorFarFromGps = () => {
-      const gps = gpsPosRef.current;
-      const u = userViewCamRef.current;
-      return (
-        gps.lat != null &&
-        gps.lng != null &&
-        (Math.abs(u.lat - gps.lat) > 0.0015 ||
-          Math.abs(u.lng - gps.lng) > 0.0015)
-      );
-    };
-
-    /** MapLibre zieht Richtung GPS — nie als Fling/User werten. */
-    const looksLikeGpswardSnap = (lat: number, lng: number) => {
-      const gps = gpsPosRef.current;
-      const u = userViewCamRef.current;
-      if (gps.lat == null || gps.lng == null) return false;
-      if (isLiveNearGps(lat, lng) && isAnchorFarFromGps()) return true;
-      const liveDist =
-        Math.abs(lat - gps.lat) + Math.abs(lng - gps.lng);
-      const userDist =
-        Math.abs(u.lat - gps.lat) + Math.abs(u.lng - gps.lng);
-      // Deutlich näher am GPS als die User-View → Snap, kein Fling.
-      return userDist > 0.0012 && liveDist < userDist * 0.72;
-    };
-
-    const restoreExploreAnchorIfGpsSnap = (
-      lat: number,
-      lng: number,
-      zoom: number,
-      heading: number,
-    ) => {
-      if (!userDetached.current || locationFollowRef.current) return false;
-      if (!isLiveNearGps(lat, lng) || !isAnchorFarFromGps()) return false;
-      const u = userViewCamRef.current;
-      syncBootCamFrom(u);
-      applyCenterMove(u.lng, u.lat, {
-        kind: 'restore',
-        zoom: u.zoom,
-        heading: Number.isFinite(u.heading) ? u.heading : 0,
-      });
-      camLiveRef.current = { ...u };
-      return true;
-    };
 
     const commitUserView = (c: {
       lat: number;
@@ -998,20 +1101,49 @@ export const NativeHomeMapView = memo(
       camLiveRef.current = { ...c };
       anchorCamRef.current = { ...c };
       followMode.current = 'explore';
+      // Mid-Geste nie syncDefaultStop — MapView schluckt oft fingerDown,
+      // liveMapTurnRef hält Drehen/Pan frei (sonst Rotation blockiert).
+      if (
+        fingerDown.current ||
+        userGesturing.current ||
+        liveMapTurnRef.current
+      ) {
+        return;
+      }
       syncBootCamFrom(c);
+    };
+
+    /**
+     * Finger weg: nur JS-Anker = Live-View.
+     * Kein setCamera / syncDefaultStop — Maps-Verfassung: Kamera bleibt wo der Finger sie ließ
+     * (Fling-Trägheit inkl.). Snap-Ursachen am Paint beheben, nicht gegensteuern.
+     */
+    const endMapFingerGesture = () => {
+      fingerDown.current = false;
+      liveMapTurnRef.current = false;
+      userHasExploredRef.current = true;
+      const live = { ...(gestureCamRef.current ?? camLiveRef.current) };
+      userViewCamRef.current = live;
+      camLiveRef.current = live;
+      anchorCamRef.current = live;
+      syncBootCamFrom(live);
+      userGesturing.current = false;
+      gestureOriginCam.current = null;
+      lastFingerUpAt.current = Date.now();
+      props.onGestureEnd?.();
     };
 
     /**
      * Einziger Pfad für programmierte Zentrums-Moves.
      * kind=armed → Boot/Zentrieren/Nav (vorher armCenterMove).
      * kind=follow → nur GPS-Lock.
-     * kind=restore → nur weg vom GPS-Snap zurück zur User-View.
+     * Kein restore/Gegenwehr — nie zurückspringen.
      */
     const applyCenterMove = (
       lng: number,
       lat: number,
       opts: {
-        kind: 'armed' | 'follow' | 'restore';
+        kind: 'armed' | 'follow';
         zoom?: number;
         heading?: number;
       },
@@ -1026,74 +1158,17 @@ export const NativeHomeMapView = memo(
           if (__DEV__) console.log('[map-cam] center blocked (no lock)');
           return false;
         }
-      } else if (opts.kind === 'restore') {
-        if (!userDetached.current || locationFollowRef.current) return false;
       }
       markProgrammaticBearing();
+      lastProgrammaticCenterAt.current = Date.now();
       cameraRef.current?.setCamera({
         centerCoordinate: [lng, lat],
         ...(opts.zoom != null ? { zoomLevel: opts.zoom } : {}),
         ...(opts.heading != null ? { heading: opts.heading } : {}),
         animationDuration: 0,
+        animationMode: 'moveTo',
       });
       return true;
-    };
-
-    /**
-     * Safety: nur gegen echten MapLibre-GPS-Snap.
-     * Freies Pan/Zoom NIEMALS zurücksetzen — sonst „springt zurück“ im Live-Test.
-     * Zoom/Pan ohne Flags: Live als User-View übernehmen.
-     */
-    const restoreUserViewIfSnappedToGps = (opts?: { force?: boolean }) => {
-      if (fingerDown.current) return;
-      if (userGesturing.current) return;
-      if (locationFollowRef.current) return;
-      if (!userDetached.current) return;
-      if (followMode.current !== 'explore') return;
-      // Fling/Trägheit nach Finger-hoch kurz aushalten.
-      if (!opts?.force && Date.now() - lastFingerUpAt.current < 2_800) return;
-      if (Date.now() - lastUserZoomAt.current < 3_200) return;
-      if (Date.now() - lastUserGestureAt.current < 2_400) return;
-      const u = userViewCamRef.current;
-      if (!Number.isFinite(u.lat) || !Number.isFinite(u.lng)) return;
-      const live = camLiveRef.current;
-      const centerDrifted =
-        Math.abs(live.lat - u.lat) > 0.00012 ||
-        Math.abs(live.lng - u.lng) > 0.00012;
-      const zoomDrifted = Math.abs(live.zoom - u.zoom) > 0.06;
-      if (!centerDrifted && !zoomDrifted) return;
-
-      // Kein GPS-Snap → freie Erkundung akzeptieren (Pinch/Pan ohne Flags).
-      if (!looksLikeGpswardSnap(live.lat, live.lng)) {
-        if (zoomDrifted) lastUserZoomAt.current = Date.now();
-        lastUserGestureAt.current = Date.now();
-        commitUserView({
-          lat: live.lat,
-          lng: live.lng,
-          zoom: live.zoom,
-          heading: Number.isFinite(live.heading) ? live.heading : u.heading,
-        });
-        return;
-      }
-
-      const now = Date.now();
-      if (now - lastHoldAt.current < 120) return;
-      lastHoldAt.current = now;
-      if (__DEV__) {
-        console.log('[map-cam] restore user view (blocked GPS snap)');
-      }
-      syncBootCamFrom(u);
-      applyCenterMove(u.lng, u.lat, {
-        kind: 'restore',
-        zoom: u.zoom,
-        heading: Number.isFinite(u.heading) ? u.heading : 0,
-      });
-      camLiveRef.current = { ...u };
-    };
-
-    /** Nur defaultStop frisch halten — kein setCamera. */
-    const syncBootOnly = () => {
-      syncBootCamFrom(currentDefaultStopCam());
     };
 
     useEffect(() => {
@@ -1112,47 +1187,172 @@ export const NativeHomeMapView = memo(
           maybeFollowCamera(gpsPosRef.current.lat, gpsPosRef.current.lng, s.headingDeg);
         }
       });
+      // Direkt vom Sensor — unabhängig vom Store-Filter (Pfeil folgt Handy-Drehung).
+      const { subscribeMapHeading } = require('../../services/navigation/liveDeviceHeading') as {
+        subscribeMapHeading: (cb: (deg: number) => void) => () => void;
+      };
+      const unsubHeading = subscribeMapHeading((deg) => {
+        if (!Number.isFinite(deg)) return;
+        pushPuckHeading(deg);
+        maybeFollowCamera(gpsPosRef.current.lat, gpsPosRef.current.lng, deg);
+      });
       return () => {
         unsubSensor();
+        unsubHeading();
         stopHeadingFollowLoop();
       };
     }, []);
 
-    // Zwei-Phasen: Straßen/Wasser sofort, Gebäude kurz danach. Updates nur im Idle.
+    // Zwei-Phasen: Straßen/Wasser sofort, Gebäude kurz danach.
+    const vectorBasemap = isVectorBasemapEnabled();
+    const basemapReady = vectorBasemap;
+    /** Protomaps Style als Objekt (Fetch) — remote styleURL auf Android oft ohne Straßen. */
+    const [vectorStyle, setVectorStyle] = useState<Record<string, unknown> | null>(
+      null,
+    );
+    useEffect(() => {
+      if (!vectorBasemap) {
+        setVectorStyle(null);
+        return;
+      }
+      let cancelled = false;
+      void loadYorroProtomapsBasemapStyle().then((style) => {
+        if (cancelled) return;
+        if (style) {
+          setVectorStyle(style as unknown as Record<string, unknown>);
+          return;
+        }
+        // Kein Hosted-Style (R2/pmtiles) → eigener Style-Builder.
+        setVectorStyle(buildYorroVectorMapStyle());
+      });
+      return () => {
+        cancelled = true;
+      };
+    }, [vectorBasemap]);
+    const mapBasemapStyle =
+      vectorBasemap
+        ? vectorStyle ?? OFFLINE_HOME_MAP_STYLE
+        : OFFLINE_HOME_MAP_STYLE;
     const [geo, setGeo] = useState(emptyExtractGeojson);
     const lastExtractSigRef = useRef('');
     const lastExtractCityRef = useRef<string | null>(null);
+    const extractPaintGenRef = useRef(0);
     const geojsonCacheRef = useRef<{
       sig: string;
       bundle: ReturnType<typeof cityMapExtractToGeojson>;
     } | null>(null);
     const [world, setWorld] = useState<WorldOverviewBundle>(EMPTY_WORLD);
     const [labels, setLabels] = useState<WorldLabelsBundle>(EMPTY_LABELS);
+
+    /** EU/World einmal mit Stadt-Final — nicht Near/Partial, nicht doppelt. */
+    const worldPaintedRef = useRef(false);
+
+    /**
+     * Kamera-Verfassung (Maps): Zentrum nur über applyCenterMove (Boot/Recenter/Nav/Follow).
+     * Layer-Paint darf die Kamera nie anfassen — kein native defaultStop, kein setCamera-Hold.
+     * pinDefaultStopToUser = nur JS-Refs für Legacy-Extract (Vector: ungenutzt).
+     */
+    const pinDefaultStopToUser = () => {
+      if (
+        fingerDown.current ||
+        userGesturing.current ||
+        liveMapTurnRef.current
+      ) {
+        return;
+      }
+      const hold = currentDefaultStopCam();
+      if (!Number.isFinite(hold.lat) || !Number.isFinite(hold.lng)) return;
+      userViewCamRef.current = { ...hold };
+      anchorCamRef.current = { ...hold };
+      syncBootCamFrom(hold);
+      // kein native defaultStop — Android setInitialCamera
+    };
+
+    /** Legacy-Extract: Hold absichtlich no-op (kämpfte gegen Pan). */
+    const scheduleHoldCameraAfterLayerPaint = () => {
+      /* no-op */
+    };
+
+    const paintEuWorldBundle = () => {
+      // Vector-Basemap: Welt kommt aus Kacheln — kein GeoJSON-World (Snap).
+      if (isVectorBasemapEnabled()) return;
+      if (worldPaintedRef.current) return;
+      if (isMapLayerDebugEnabled() && !mapLayerDebugAllows('world')) return;
+      worldPaintedRef.current = true;
+      pinDefaultStopToUser();
+      setWorld(getWorldOverview());
+      setLabels(getWorldLabels());
+      scheduleHoldCameraAfterLayerPaint();
+      markHomeMapBoot('world');
+    };
+
+    /** Ein Final-Idle-Scheduler — wartet auf Finger-weg, läuft trotzdem (auch nach Erkunden). */
+    const finalIdleQueuedRef = useRef(false);
+    const finalIdleFnsRef = useRef<Array<() => void>>([]);
+    const runWhenMapIdleForFinal = (fn: () => void) => {
+      finalIdleFnsRef.current.push(fn);
+      if (finalIdleQueuedRef.current) return;
+      finalIdleQueuedRef.current = true;
+      const tryRun = () => {
+        if (
+          fingerDown.current ||
+          userGesturing.current ||
+          liveMapTurnRef.current ||
+          Date.now() - lastFingerUpAt.current < 2_800
+        ) {
+          setTimeout(tryRun, 350);
+          return;
+        }
+        const batch = finalIdleFnsRef.current.splice(0);
+        finalIdleQueuedRef.current = false;
+        // Nach User-Pan: Final-Paint darf Kamera nicht auf Boot-GPS ziehen.
+        // userViewCam vorher einfrieren, ShapeSource danach mehrfach zurückholen.
+        pinDefaultStopToUser();
+        for (const job of batch) {
+          try {
+            job();
+          } catch {
+            /* soft */
+          }
+        }
+        scheduleHoldCameraAfterLayerPaint();
+        layerApplyQuietUntil.current = Date.now() + 600;
+        suppressRegionUntil.current = Date.now() + 600;
+      };
+      InteractionManager.runAfterInteractions(tryRun);
+    };
+
     useEffect(() => {
+      // Vector: keine World-ShapeSources. Legacy: EU/World lazy nach Idle.
+      if (vectorBasemap) return;
       let cancelled = false;
-      const timer = setTimeout(() => {
-        const { runMapPolishWhenFree } = require('../../services/boot/interactiveBootGate') as {
-          runMapPolishWhenFree: (fn: () => void) => void;
-        };
-        runMapPolishWhenFree(() => {
-          InteractionManager.runAfterInteractions(() => {
-            if (cancelled) return;
-            setWorld(getWorldOverview());
-            setLabels(getWorldLabels());
-            markHomeMapBoot('world');
-            syncBootOnly();
-            // Kein Camera-Restore nach World-Apply — freie Erkundung bleibt.
-            layerApplyQuietUntil.current = Date.now() + 400;
-            suppressRegionUntil.current = Date.now() + 400;
-          });
+      const applyWorld = () => {
+        if (cancelled) return;
+        // Nur Safety: Extract-Final paintet World selbst. Hier nur wenn noch leer.
+        runWhenMapIdleForFinal(() => {
+          if (cancelled || worldPaintedRef.current) return;
+          if (isMapLayerDebugEnabled() && !mapLayerDebugAllows('world')) return;
+          paintEuWorldBundle();
         });
-      }, HOME_MAP_WORLD_AFTER_CORE_MS);
+      };
+      const unsub = whenMapWorldAllowed(applyWorld);
+      const timer = setTimeout(() => {
+        if (cancelled) return;
+        if (!isMapWorldReleaseAllowed()) {
+          const { releaseMapWorld } = require('../../services/homeMap/mapLoadPhases') as {
+            releaseMapWorld: () => void;
+          };
+          releaseMapWorld();
+        }
+      }, Math.max(HOME_MAP_WORLD_AFTER_CORE_MS * 3, 180_000));
       return () => {
         cancelled = true;
         clearTimeout(timer);
+        unsub();
       };
     }, []);
     useEffect(() => {
+      if (vectorBasemap) return;
       const extract = props.extract;
       if (!extract) return;
       const sig = `${extract.cityId}:${extract.roads?.length ?? 0}:${extract.buildings?.length ?? 0}:${extract.housenumbers?.length ?? 0}`;
@@ -1160,9 +1360,45 @@ export const NativeHomeMapView = memo(
         lastExtractCityRef.current != null &&
         lastExtractCityRef.current !== extract.cityId;
       lastExtractCityRef.current = extract.cityId;
+      if (citySwitched) {
+        worldPaintedRef.current = false;
+        fogBoundsFrozenRef.current = false;
+        // Stadtwechsel = freie Erkundung — NIE Explore-Flag löschen
+        // (sonst pinDefaultStop + Suppress → Karte springt zurück / „Radern“).
+        userDetached.current = true;
+        userHasExploredRef.current = true;
+        locationFollowRef.current = false;
+        headingFollowRef.current = false;
+        stopHeadingFollowLoop();
+      }
+      if (
+        !citySwitched &&
+        geo.hasRoads &&
+        isMapLayerDebugExtractLocked() &&
+        lastExtractSigRef.current
+      ) {
+        return;
+      }
       if (sig === lastExtractSigRef.current && geo.hasRoads && !citySwitched) return;
+      // Nach Freeze: gleiche Stadt nie neu painten (auch bei Store-Churn / Force).
+      if (
+        !citySwitched &&
+        geo.hasRoads &&
+        lastExtractSigRef.current &&
+        isMapExtractFrozen(extract.cityId)
+      ) {
+        return;
+      }
+      const loadPhase = peekMapLoadPhases().phase;
+      const finalRelease =
+        loadPhase === 'final' || isMapWorldReleaseAllowed();
+      const sigUnchanged =
+        sig === lastExtractSigRef.current && lastExtractSigRef.current !== '';
+      // R1→R3: Extract wächst (mehr Straßen/Gebäude) — trotzdem painten.
+      if (!citySwitched && geo.hasRoads && !finalRelease && sigUnchanged) {
+        return;
+      }
       let cancelled = false;
-      let buildingsTimer: ReturnType<typeof setTimeout> | null = null;
       const apply = (phase: ExtractGeojsonPhase) => {
         if (cancelled) return;
         const cacheKey = `${sig}:${phase}`;
@@ -1172,16 +1408,63 @@ export const NativeHomeMapView = memo(
           if (phase === 'full') {
             lastExtractSigRef.current = sig;
             geojsonCacheRef.current = { sig: cacheKey, bundle };
+          } else if (phase === 'core') {
+            lastExtractSigRef.current = `${sig}:core`;
           }
-          setGeo(bundle);
-          syncBootOnly();
-          // Extract nie an die Kamera fassen — sonst Zoom/Pan-Snap-Back.
-          const quietMs = phase === 'core' ? 900 : 500;
-          suppressRegionUntil.current = Date.now() + Math.max(400, quietMs);
-          layerApplyQuietUntil.current = Date.now() + quietMs;
-          if (bundle.hasRoads) markHomeMapBoot('roads');
-          if (phase === 'full' && (bundle.buildings.features?.length ?? 0) > 0) {
-            markHomeMapBoot('buildings');
+          const doPaint = () => {
+            if (cancelled) return;
+            if (fingerDown.current || userGesturing.current || liveMapTurnRef.current) {
+              runWhenMapIdleForFinal(doPaint);
+              return;
+            }
+            pinDefaultStopToUser();
+            setGeo(bundle);
+            scheduleHoldCameraAfterLayerPaint();
+            // EU/World separat nach Idle — nicht im selben Tick wie Full-Extract.
+            if (finalRelease && phase === 'full') {
+              runWhenMapIdleForFinal(() => {
+                if (cancelled) return;
+                paintEuWorldBundle();
+              });
+            }
+            const quietMs =
+              userDetached.current || userHasExploredRef.current
+                ? 120
+                : finalRelease
+                  ? 600
+                  : 320;
+            suppressRegionUntil.current = Date.now() + Math.max(80, quietMs);
+            layerApplyQuietUntil.current = Date.now() + quietMs;
+            if (bundle.hasRoads) {
+              markHomeMapBoot('roads');
+              noteSplashMapCoreReady();
+              // Fog-Bounds einmal um Boot-Kamera — danach hart eingefroren (kein Pan-Idle).
+              if (!fogBoundsFrozenRef.current) {
+                const hold = camLiveRef.current;
+                if (Number.isFinite(hold.lat) && Number.isFinite(hold.lng)) {
+                  const dLat = 0.045;
+                  const dLng = 0.07;
+                  setViewBounds({
+                    west: hold.lng - dLng,
+                    east: hold.lng + dLng,
+                    south: hold.lat - dLat,
+                    north: hold.lat + dLat,
+                  });
+                  fogBoundsFrozenRef.current = true;
+                }
+              }
+            }
+            if (phase === 'full' && (bundle.buildings.features?.length ?? 0) > 0) {
+              markHomeMapBoot('buildings');
+              if (__DEV__) {
+                console.log('[map-extract] buildings features', bundle.buildings.features.length);
+              }
+            }
+          };
+          if (finalRelease && phase === 'full') {
+            runWhenMapIdleForFinal(doPaint);
+          } else {
+            doPaint();
           }
         };
         if (cached?.sig === cacheKey) {
@@ -1192,78 +1475,61 @@ export const NativeHomeMapView = memo(
           finish(cityMapExtractToGeojson(extract, phase));
           return;
         }
-        // full: Yields — Mic/Settings bleiben tippbar.
+        const paintGen = ++extractPaintGenRef.current;
         void cityMapExtractToGeojsonAsync(extract, phase).then((bundle) => {
+          if (cancelled || paintGen !== extractPaintGenRef.current) return;
           finish(bundle);
         });
       };
-      // Viewport-Stadtwechsel: sofort volles Extract — nicht auf Geste-Ende warten.
-      if (citySwitched) {
+      // Viewport-Stadtwechsel / leere Karte: ein Paint pro Release (core ODER full).
+      if (citySwitched || !geo.hasRoads) {
         lastExtractSigRef.current = '';
-        apply('full');
-        return () => {
-          cancelled = true;
-        };
-      }
-      if (!geo.hasRoads) {
-        apply('core');
-        buildingsTimer = setTimeout(() => {
-          const { runMapPolishWhenFree } = require('../../services/boot/interactiveBootGate') as {
-            runMapPolishWhenFree: (fn: () => void) => void;
-          };
-          runMapPolishWhenFree(() => {
-            if (!cancelled) apply('full');
-          });
-        }, HOME_MAP_BUILDINGS_AFTER_CORE_MS);
-        return () => {
-          cancelled = true;
-          if (buildingsTimer) clearTimeout(buildingsTimer);
-        };
-      }
-      let retryTimer: ReturnType<typeof setTimeout> | null = null;
-      const task = InteractionManager.runAfterInteractions(() => {
-        if (cancelled) return;
-        if (fingerDown.current || userGesturing.current) {
-          retryTimer = setTimeout(() => {
-            if (!cancelled && !fingerDown.current) apply('full');
-          }, 900);
-          return;
+        if (finalRelease) {
+          apply('full');
+        } else {
+          apply('core');
         }
-        apply('full');
-      });
+        return () => {
+          cancelled = true;
+        };
+      }
+      // Final-Release: Stadt noch einmal voll (Clip) + EU/World.
+      apply('full');
       return () => {
         cancelled = true;
-        task.cancel();
-        if (retryTimer) clearTimeout(retryTimer);
-        if (buildingsTimer) clearTimeout(buildingsTimer);
       };
-    }, [props.extract, geo.hasRoads]);
-
-    // Places/Cities: nur Boot-Cam syncen, Kamera nicht anfassen.
-    const placesHoldSig = useRef('');
-    useEffect(() => {
-      if (!userDetached.current || locationFollowRef.current) return;
-      const sig = `${props.places?.length ?? 0}:${props.cities?.length ?? 0}`;
-      if (sig === placesHoldSig.current) return;
-      placesHoldSig.current = sig;
-      syncBootOnly();
-    }, [props.places, props.cities]);
+    }, [props.extract, geo.hasRoads, vectorBasemap]);
 
     const placeFc = useMemo(() => placesToGeojson(props.places), [props.places]);
+    const placeVisFilter = useMemo(
+      () => mapPlaceVisibilityFilter(props.placeFilters),
+      [props.placeFilters],
+    );
     const cityFc = useMemo(() => citiesToGeojson(props.cities), [props.cities]);
+    // Orte/Städte: kein setCamera-Hold nach ShapeSource — Kamera-Verfassung.
     const routeFc = useMemo(() => routeToGeojson(props.route), [props.route]);
     const routePreview = props.route?.preview === true;
     const [dismissedRouteChips, setDismissedRouteChips] = useState<Record<string, true>>({});
+    /** Übersicht: Chips aus — sie verdecken die Route (User-Ausschnitt). */
+    const [showRouteChips, setShowRouteChips] = useState(true);
+    const showRouteChipsRef = useRef(true);
+    const noteRouteChipZoom = useCallback((zoom: number) => {
+      const next = zoom >= 14.15;
+      if (next === showRouteChipsRef.current) return;
+      showRouteChipsRef.current = next;
+      setShowRouteChips(next);
+    }, []);
     useEffect(() => {
       setDismissedRouteChips({});
     }, [props.route?.fitKey]);
     const routeChipMarkers = useMemo(() => {
+      if (!showRouteChips) return [] as React.ReactNode[];
       const pins = props.route?.pins ?? [];
       const out: React.ReactNode[] = [];
       const seen = new Set<string>();
       for (const pin of pins) {
         const title = pin.chip?.title?.trim();
-        if (!title) continue;
+        if (!title || isGenericMapPointLabel(title)) continue;
         const geoKey = `${pin.lat.toFixed(5)},${pin.lng.toFixed(5)}`;
         if (seen.has(geoKey)) continue;
         seen.add(geoKey);
@@ -1300,7 +1566,7 @@ export const NativeHomeMapView = memo(
         );
       }
       return out;
-    }, [props.route?.pins, dismissedRouteChips]);
+    }, [props.route?.pins, dismissedRouteChips, showRouteChips]);
     const pinFc = useMemo(() => dropPinGeojson(props.dropPin), [props.dropPin]);
     const regionalGeo = useRegionalFallbackStore((s) => s.snap?.geojson ?? EMPTY_FC);
     const hasRegional = useRegionalFallbackStore(
@@ -1311,12 +1577,18 @@ export const NativeHomeMapView = memo(
     const exploredFromStore = useFogStore((s) => s.exploredPolygons);
     const fogStoreTrackKey = useFogStore((s) => s.trackKey);
 
+    const fogLayersWanted =
+      HOME_MAP_FOG_ENABLED &&
+      (!isMapLayerDebugEnabled() || isMapLayerGroupVisible('fog'));
+
     // Viewport-Maske absichtlich aus: Abdunkeln = dunkle Basiskarte (kein Nachlade-Flash).
+    const mapCoreReady = vectorBasemap || geo.hasRoads;
+
     const fogFc = useMemo(() => {
       if (
-        !HOME_MAP_FOG_ENABLED ||
+        !fogLayersWanted ||
         !HOME_MAP_FOG_MASK_ENABLED ||
-        !geo.hasRoads ||
+        !mapCoreReady ||
         !viewBounds
       ) {
         return EMPTY_FC;
@@ -1332,10 +1604,10 @@ export const NativeHomeMapView = memo(
       const mask = fogMaskFromExplored(viewBounds, explored);
       return fogPolygonsToGeoJSON(mask);
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [geo.hasRoads, fogStoreTrackKey, fogViewKey, exploredFromStore.length]);
+    }, [mapCoreReady, fogStoreTrackKey, fogViewKey, exploredFromStore.length]);
 
     const revealFc = useMemo(() => {
-      if (!HOME_MAP_FOG_ENABLED || !geo.hasRoads) return EMPTY_FC;
+      if (!fogLayersWanted || !mapCoreReady) return EMPTY_FC;
       const explored =
         exploredFromStore.length > 0
           ? exploredFromStore
@@ -1346,29 +1618,40 @@ export const NativeHomeMapView = memo(
             );
       return fogPolygonsToGeoJSON(explored);
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [geo.hasRoads, fogStoreTrackKey, exploredFromStore.length]);
+    }, [mapCoreReady, fogStoreTrackKey, exploredFromStore.length]);
 
     // Statische Start-Shape — Live-Puck nur per setNativeProps, sonst ShapeSource-Churn.
     const puckFc = EMPTY_PUCK_FC;
 
     const noteUserGesture = () => {
       if (programmaticBearingRef.current) return;
-      if (headingFollowRef.current && Date.now() < suppressRegionUntil.current) {
-        return;
-      }
+      // Sofort raus aus Zentriert + Blickrichtung — kein suppress-Block mehr.
+      const wasExploring = userGesturing.current || liveMapTurnRef.current;
       lastUserGestureAt.current = Date.now();
       userGesturing.current = true;
       userDetached.current = true;
+      userHasExploredRef.current = true;
+      liveMapTurnRef.current = true;
+      fingerDown.current = true;
+      if (!gestureOriginCam.current) {
+        gestureOriginCam.current = {
+          lat: camLiveRef.current.lat,
+          lng: camLiveRef.current.lng,
+          zoom: camLiveRef.current.zoom,
+        };
+      }
       stopHeadingFollowLoop();
-      // Follow sofort lokal killen — sonst zieht GPS die Kamera zurück, bevor Parent reagiert.
       locationFollowRef.current = false;
       headingFollowRef.current = false;
+      // Pending Follow-/GPS-setCamera abbrechen — Finger gewinnt (Google).
+      cameraRef.current?.setCamera({});
+      if (!wasExploring) props.onGestureStart?.();
       props.onUserPan();
     };
 
     /**
      * Android/MapLibre: Pan/Pinch oft ohne isUserInteraction und ohne Parent-fingerDown
-     * (Native MapView schluckt Touches). Jede Bewegung weg vom GPS = User.
+     * (Native MapView schluckt Touches). Bewegung = User — nie GPS-Snap-Heuristik.
      */
     const likelyUserExploreMotion = (
       lat: number,
@@ -1376,25 +1659,39 @@ export const NativeHomeMapView = memo(
       zoom: number,
       opts?: { userInteract?: boolean },
     ) => {
-      if (locationFollowRef.current) return false;
-      if (Date.now() < suppressRegionUntil.current && !opts?.userInteract) {
+      // Detached/Stadtwechsel: Suppress darf Pan nicht schlucken (Android oft ohne isUserInteraction).
+      if (
+        Date.now() < suppressRegionUntil.current &&
+        !opts?.userInteract &&
+        !userDetached.current &&
+        !userHasExploredRef.current &&
+        !fingerDown.current &&
+        !userGesturing.current
+      ) {
         return false;
       }
-      if (looksLikeGpswardSnap(lat, lng)) return false;
+      // GPS-Follow-Ticks nicht als User werten — sonst fliegt der Lock von allein.
+      if (
+        locationFollowRef.current &&
+        !opts?.userInteract &&
+        !fingerDown.current &&
+        !userGesturing.current
+      ) {
+        return false;
+      }
       const u = userViewCamRef.current;
       const zoomDelta = Math.abs(zoom - u.zoom);
       const centerDelta =
         Math.abs(lat - u.lat) + Math.abs(lng - u.lng);
-      const moved =
-        gestureMovedEnough(lat, lng, zoom) ||
-        zoomDelta >= 0.05 ||
-        centerDelta > 0.00008;
-      if (!moved) return false;
+      // Bei aktivem Follow: kleinere Bewegung reicht zum Unlock.
+      const followOn =
+        locationFollowRef.current || headingFollowRef.current;
+      const zoomGate = followOn ? 0.03 : 0.05;
+      const centerGate = followOn ? 0.00008 : 0.00014;
       if (opts?.userInteract || fingerDown.current || userGesturing.current) {
-        return true;
+        return zoomDelta >= zoomGate || centerDelta > centerGate;
       }
-      // Ohne Flags: Zoom ODER deutliches Pan = User (MapView frisst Touch-Events).
-      return zoomDelta >= 0.05 || centerDelta > 0.00014;
+      return zoomDelta >= 0.08 || centerDelta > 0.00014;
     };
 
     /** Echtes Pan/Zoom vs. Tippen — Unlock nur bei aktiver Kartenbewegung. */
@@ -1441,16 +1738,20 @@ export const NativeHomeMapView = memo(
         // Hart: ohne reattach nie bewegen — auch nicht wenn kurz „attached“.
         if (!reattach) return;
         armCenterMove(1_800);
-        // Pulse/Boot/Nav: einmal springen, detached bleiben.
+        // Pulse/Boot/Nav/Stadtwechsel: einmal springen, detached bleiben.
         // Lock: Caller setzt locationFollow + reattachFollow vorher.
         if (!locationFollowRef.current) {
           userDetached.current = true;
+          userHasExploredRef.current = true;
+          stopHeadingFollowLoop();
+          headingFollowRef.current = false;
         } else {
           userDetached.current = false;
         }
         userGesturing.current = false;
-        suppressRegionUntil.current = Date.now() + 500;
-        ignorePanUntil.current = Date.now() + 500;
+        // Kurz gegen Jump-Echo — Pan danach sofort erlaubt (Detached).
+        suppressRegionUntil.current = Date.now() + 180;
+        ignorePanUntil.current = Date.now() + 180;
         const nextZoom = zoom ?? userViewCamRef.current.zoom;
         const next = {
           lat,
@@ -1472,7 +1773,9 @@ export const NativeHomeMapView = memo(
         userGesturing.current = false;
         suppressRegionUntil.current = Date.now() + 500;
         ignorePanUntil.current = Date.now() + 500;
-        cameraRef.current?.fitBounds([east, north], [west, south], 28, 0);
+        // Mehr Padding = Überblick (GPS + Ziel), kein Street-Tight-Fit.
+        // 132 ≈ User-Ausschnitt mit Platz für HUD, ohne Chip-Überdeckung.
+        cameraRef.current?.fitBounds([east, north], [west, south], 132, 0);
         const mid = {
           lat: (south + north) / 2,
           lng: (west + east) / 2,
@@ -1489,7 +1792,14 @@ export const NativeHomeMapView = memo(
         const next = { ...userViewCamRef.current, heading: 0 };
         commitUserView(next);
         markProgrammaticBearing();
-        cameraRef.current?.setCamera({ heading: 0, animationDuration: 0 });
+        // Center+Zoom mitschicken — Heading-only = Android-Snap auf Boot-GPS.
+        cameraRef.current?.setCamera({
+          centerCoordinate: [next.lng, next.lat],
+          zoomLevel: next.zoom,
+          heading: 0,
+          animationDuration: 0,
+          animationMode: 'moveTo',
+        });
         postBearingUi(0);
       },
       setHeadingFollow(on: boolean) {
@@ -1500,29 +1810,105 @@ export const NativeHomeMapView = memo(
         stopHeadingFollowLoop();
         headingFollowRef.current = false;
       },
-      /** Follow wieder anbinden (nach Kompass-/GPS-Lock), ohne Kamera zu springen. */
+      /** Follow wieder anbinden (GPS-Lock) — setzt locationFollow lokal mit. */
       reattachFollow() {
         userDetached.current = false;
         userGesturing.current = false;
         fingerDown.current = false;
+        locationFollowRef.current = true;
+        followMode.current = 'gps';
+        // Anker = aktuelle Live-Mitte, damit Pan-Delta gegen Follow messbar bleibt.
+        commitUserView({ ...camLiveRef.current });
       },
       releaseFollow() {
         userDetached.current = true;
-        userGesturing.current = false;
+        // userGesturing/fingerDown NICHT löschen — sonst Mid-Pan Anker-Race + Snap-Back.
         locationFollowRef.current = false;
         headingFollowRef.current = false;
         stopHeadingFollowLoop();
       },
+      async queryBuildingRingAt(lat, lng) {
+        try {
+          const mv = mapViewRef.current;
+          if (!mv) return null;
+          if (!Number.isFinite(lat) || !Number.isFinite(lng)) return null;
+          const layerIds = listBasemapBuildingLayerIds(
+            peekYorroProtomapsBasemapStyle(),
+          );
+          const px = await mv.getPointInView([lng, lat]);
+          if (!px || px.length < 2) return null;
+          const fc = await mv.queryRenderedFeaturesAtPoint(
+            [px[0]!, px[1]!],
+            undefined,
+            layerIds,
+          );
+          return pickBestBuildingRingAt(lat, lng, fc?.features ?? []);
+        } catch {
+          return null;
+        }
+      },
     }));
 
     const ignoreBlankUntil = useRef(0);
+    /** Nach Ort-Tap: kein Extract-Flush (TouchEnd kommt oft vor onPress). */
+    const placeTapQuietUntil = useRef(0);
     const readyOnce = useRef(false);
-    const onMapPress = () => {
+    const onMapPress = (feature: {
+      geometry?: { type?: string; coordinates?: unknown } | null;
+    }) => {
       if (Date.now() < ignoreBlankUntil.current) return;
-      props.onBlankTap();
+      if (Date.now() < placeTapQuietUntil.current) return;
+      const g = feature?.geometry;
+      let lat = camLiveRef.current.lat;
+      let lng = camLiveRef.current.lng;
+      if (g && g.type === 'Point' && Array.isArray(g.coordinates)) {
+        const x = Number(g.coordinates[0]);
+        const y = Number(g.coordinates[1]);
+        if (Number.isFinite(x) && Number.isFinite(y)) {
+          lng = x;
+          lat = y;
+        }
+      }
+      // Basemap-POI (Famila etc.): Label unter Tap → Popup, sonst Blank.
+      void (async () => {
+        try {
+          const mv = mapViewRef.current;
+          const poiLayers = listBasemapPoiLayerIds(
+            peekYorroProtomapsBasemapStyle(),
+          );
+          if (mv && poiLayers.length && Number.isFinite(lat) && Number.isFinite(lng)) {
+            const px = await mv.getPointInView([lng, lat]);
+            if (px && px.length >= 2) {
+              const fc = await mv.queryRenderedFeaturesAtPoint(
+                [px[0]!, px[1]!],
+                undefined,
+                poiLayers,
+              );
+              const hit = pickBasemapPoiAt(lat, lng, fc?.features ?? []);
+              if (hit) {
+                placeTapQuietUntil.current = Date.now() + 450;
+                ignoreBlankUntil.current = Date.now() + 280;
+                props.onPlaceTap({
+                  id: MAP_BASEMAP_POI_ID,
+                  name: hit.name,
+                  category: hit.kind || 'ort',
+                  lat: hit.lat,
+                  lng: hit.lng,
+                });
+                return;
+              }
+            }
+          }
+        } catch {
+          /* soft → blank */
+        }
+        props.onBlankTap();
+      })();
     };
 
-    const onLongPress = (feature: Feature) => {
+    const onLongPress = (feature: {
+      geometry?: { type?: string; coordinates?: unknown } | null;
+    }) => {
       const g = feature.geometry;
       if (!g || g.type !== 'Point' || !Array.isArray(g.coordinates)) return;
       const lng = Number(g.coordinates[0]);
@@ -1532,6 +1918,7 @@ export const NativeHomeMapView = memo(
     };
 
     const onPlacePress = (e: OnPressEvent) => {
+      placeTapQuietUntil.current = Date.now() + 450;
       ignoreBlankUntil.current = Date.now() + 280;
       const feat = e.features?.[0];
       const pr = feat?.properties;
@@ -1548,97 +1935,11 @@ export const NativeHomeMapView = memo(
     };
 
     return (
-      <View
-        style={styles.root}
-        collapsable={false}
-        onTouchStart={() => {
-          // Multi-Touch/Pinch: Responder-Capture greift oft nicht — TouchStart schon.
-          fingerDown.current = true;
-          gestureOriginCam.current = {
-            lat: camLiveRef.current.lat,
-            lng: camLiveRef.current.lng,
-            zoom: camLiveRef.current.zoom,
-          };
-          props.onGestureStart?.();
-        }}
-        onStartShouldSetResponderCapture={() => {
-          // Finger down allein unlockt nicht — nur echtes Pan/Zoom (Region-Events).
-          // Sonst würde ein Tippen den GPS-Fix sofort lösen.
-          fingerDown.current = true;
-          gestureOriginCam.current = {
-            lat: camLiveRef.current.lat,
-            lng: camLiveRef.current.lng,
-            zoom: camLiveRef.current.zoom,
-          };
-          props.onGestureStart?.();
-          return false;
-        }}
-        onResponderRelease={() => {
-          fingerDown.current = false;
-          // Nur nach echtem Pan/Zoom übernehmen — Tippen/teilweiser GPS-Snap nicht.
-          const live = camLiveRef.current;
-          const gps = gpsPosRef.current;
-          const u = userViewCamRef.current;
-          const liveNearGps =
-            gps.lat != null &&
-            gps.lng != null &&
-            Math.abs(live.lat - gps.lat) < 0.00025 &&
-            Math.abs(live.lng - gps.lng) < 0.00025;
-          const userWasElsewhere =
-            Number.isFinite(u.lat) &&
-            (Math.abs(u.lat - live.lat) > 0.002 ||
-              Math.abs(u.lng - live.lng) > 0.002 ||
-              Math.abs(u.zoom - live.zoom) > 0.8);
-          if (userGesturing.current) {
-            if (!(liveNearGps && userWasElsewhere)) {
-              commitUserView({ ...live });
-            } else {
-              restoreUserViewIfSnappedToGps({ force: true });
-            }
-          }
-          userGesturing.current = false;
-          gestureOriginCam.current = null;
-          lastFingerUpAt.current = Date.now();
-          props.onGestureEnd?.();
-        }}
-        onTouchEnd={() => {
-          fingerDown.current = false;
-          const live = camLiveRef.current;
-          const gps = gpsPosRef.current;
-          const u = userViewCamRef.current;
-          const liveNearGps =
-            gps.lat != null &&
-            gps.lng != null &&
-            Math.abs(live.lat - gps.lat) < 0.00025 &&
-            Math.abs(live.lng - gps.lng) < 0.00025;
-          const userWasElsewhere =
-            Number.isFinite(u.lat) &&
-            (Math.abs(u.lat - live.lat) > 0.002 ||
-              Math.abs(u.lng - live.lng) > 0.002 ||
-              Math.abs(u.zoom - live.zoom) > 0.8);
-          if (userGesturing.current) {
-            if (!(liveNearGps && userWasElsewhere)) {
-              commitUserView({ ...live });
-            } else {
-              restoreUserViewIfSnappedToGps({ force: true });
-            }
-          }
-          userGesturing.current = false;
-          gestureOriginCam.current = null;
-          lastFingerUpAt.current = Date.now();
-          props.onGestureEnd?.();
-        }}
-        onTouchCancel={() => {
-          fingerDown.current = false;
-          userGesturing.current = false;
-          gestureOriginCam.current = null;
-          lastFingerUpAt.current = Date.now();
-          props.onGestureEnd?.();
-        }}
-      >
+      <View style={styles.root} collapsable={false}>
         <MapView
+          ref={mapViewRef}
           style={styles.map}
-          mapStyle={OFFLINE_HOME_MAP_STYLE}
+          mapStyle={mapBasemapStyle}
           compassEnabled={false}
           logoEnabled={false}
           attributionEnabled={false}
@@ -1646,21 +1947,40 @@ export const NativeHomeMapView = memo(
           pitchEnabled={false}
           scrollEnabled
           zoomEnabled
-          regionWillChangeDebounceTime={50}
-          regionDidChangeDebounceTime={80}
+          regionWillChangeDebounceTime={0}
+          regionDidChangeDebounceTime={64}
           onDidFinishLoadingMap={() => {
             if (readyOnce.current) return;
             readyOnce.current = true;
             markHomeMapBoot('mapReady');
+            if (vectorBasemap) {
+              noteSplashMapCoreReady();
+              markHomeMapBoot('roads');
+            }
             props.onReady();
           }}
           onRegionWillChange={(feature) => {
             const b = feature.properties as RegionPayload;
             const userInteract = b?.isUserInteraction === true;
-            if (!userInteract && Date.now() < suppressRegionUntil.current) return;
-            if (!userInteract && Date.now() < ignorePanUntil.current) return;
-            const zoom = b?.zoomLevel ?? camLiveRef.current.zoom;
-            const zoomDelta = Math.abs(zoom - camLiveRef.current.zoom);
+            const zoomEarly = b?.zoomLevel ?? camLiveRef.current.zoom;
+            const zoomDeltaEarly = Math.abs(zoomEarly - camLiveRef.current.zoom);
+            // Pinch oft ohne isUserInteraction — Zoom-Delta darf Suppress nicht schlucken.
+            if (
+              !userInteract &&
+              zoomDeltaEarly < 0.05 &&
+              Date.now() < suppressRegionUntil.current
+            ) {
+              return;
+            }
+            if (
+              !userInteract &&
+              zoomDeltaEarly < 0.05 &&
+              Date.now() < ignorePanUntil.current
+            ) {
+              return;
+            }
+            const zoom = zoomEarly;
+            const zoomDelta = zoomDeltaEarly;
             const vb = b?.visibleBounds;
             let midLat = camLiveRef.current.lat;
             let midLng = camLiveRef.current.lng;
@@ -1670,11 +1990,20 @@ export const NativeHomeMapView = memo(
             }
             const moved =
               gestureMovedEnough(midLat, midLng, zoom) || zoomDelta >= 0.06;
+            // Follow aktiv: schon kleine Geste = Unlock (sonst kämpft GPS gegen Finger).
+            const followFight =
+              (locationFollowRef.current || headingFollowRef.current) &&
+              Date.now() - lastProgrammaticCenterAt.current > 100 &&
+              (userInteract ||
+                zoomDelta >= 0.02 ||
+                Math.abs(midLat - userViewCamRef.current.lat) > 0.00004 ||
+                Math.abs(midLng - userViewCamRef.current.lng) > 0.00004);
             // Tippen ohne Move → Follow bleibt. Pan/Zoom → sofort Unlock.
             // Pinch oft ohne isUserInteraction → Zoom-Delta allein reicht.
             if (
-              moved &&
-              likelyUserExploreMotion(midLat, midLng, zoom, { userInteract })
+              followFight ||
+              (moved &&
+                likelyUserExploreMotion(midLat, midLng, zoom, { userInteract }))
             ) {
               noteUserGesture();
               if (zoomDelta >= 0.05) lastUserZoomAt.current = Date.now();
@@ -1684,17 +2013,6 @@ export const NativeHomeMapView = memo(
             const b = feature.properties as RegionPayload;
             const userInteract = b?.isUserInteraction === true;
             const bearing = b?.heading;
-            if (typeof bearing === 'number' && Number.isFinite(bearing)) {
-              if (
-                (userInteract || fingerDown.current || userGesturing.current) &&
-                !headingFollowRef.current
-              ) {
-                displayBearingRef.current = bearing;
-                postBearingUi(bearing);
-              } else if (!userInteract && !programmaticBearingRef.current) {
-                postBearingUi(bearing);
-              }
-            }
             const vb = b?.visibleBounds;
             const zoom = b?.zoomLevel ?? userViewCamRef.current.zoom;
             let midLat = camLiveRef.current.lat;
@@ -1707,6 +2025,86 @@ export const NativeHomeMapView = memo(
               midLat = (south + north) / 2;
               midLng = (west + east) / 2;
             }
+            // Live immer tracken (auch ohne commit) — sonst ist touchEnd-Anker stale.
+            camLiveRef.current = {
+              lat: midLat,
+              lng: midLng,
+              zoom,
+              heading:
+                typeof bearing === 'number' && Number.isFinite(bearing)
+                  ? bearing
+                  : camLiveRef.current.heading,
+            };
+            gestureCamRef.current = { ...camLiveRef.current };
+            // Sofort raus aus Zentriert + Blickrichtung bei aktiver Bewegung.
+            if (
+              !programmaticBearingRef.current &&
+              (locationFollowRef.current || headingFollowRef.current)
+            ) {
+              const rotD =
+                typeof bearing === 'number' && Number.isFinite(bearing)
+                  ? Math.abs(
+                      shortestSignedBearing(displayBearingRef.current, bearing),
+                    )
+                  : 0;
+              const zD = Math.abs(zoom - userViewCamRef.current.zoom);
+              const movedNow =
+                userInteract ||
+                fingerDown.current ||
+                gestureMovedEnough(midLat, midLng, zoom) ||
+                zD >= 0.03 ||
+                rotD > 0.8;
+              if (movedNow) {
+                noteUserGesture();
+              }
+            }
+            if (typeof bearing === 'number' && Number.isFinite(bearing)) {
+              // Kompass-Nadel immer live mitdrehen — auch ohne isUserInteraction (Android).
+              const rotDelta = Math.abs(
+                shortestSignedBearing(displayBearingRef.current, bearing),
+              );
+              // Heading-Follow setCamera → nicht als User-Drehung werten.
+              if (programmaticBearingRef.current) {
+                displayBearingRef.current = bearing;
+                postBearingUi(bearing);
+              } else {
+                const userRotating =
+                  userInteract ||
+                  fingerDown.current ||
+                  userGesturing.current ||
+                  rotDelta > 0.5;
+                if (rotDelta > 0.25 || userInteract || fingerDown.current) {
+                  liveMapTurnRef.current = true;
+                }
+                if (!headingFollowRef.current && (userRotating || rotDelta > 0.2)) {
+                  displayBearingRef.current = bearing;
+                }
+                if (rotDelta > 0.08 || userRotating) {
+                  postBearingUi(bearing);
+                }
+                // Heading in Anker (ohne syncDefaultStop mid-turn).
+                if (
+                  userRotating &&
+                  rotDelta > 0.4 &&
+                  !locationFollowRef.current
+                ) {
+                  commitUserView({
+                    lat: midLat,
+                    lng: midLng,
+                    zoom,
+                    heading: bearing,
+                  });
+                }
+                // User dreht → Heading-Follow/Locks lösen (auch wenn Follow an war!).
+                if (
+                  rotDelta > 2.5 &&
+                  userRotating &&
+                  Date.now() >= suppressRegionUntil.current
+                ) {
+                  noteUserGesture();
+                }
+              }
+            }
             const zoomDelta = Math.abs(zoom - userViewCamRef.current.zoom);
             const moved = gestureMovedEnough(midLat, midLng, zoom) || zoomDelta >= 0.05;
             const explore = likelyUserExploreMotion(midLat, midLng, zoom, {
@@ -1714,7 +2112,20 @@ export const NativeHomeMapView = memo(
             });
             if (explore) {
               noteUserGesture();
+              liveMapTurnRef.current = true;
               if (zoomDelta >= 0.05) lastUserZoomAt.current = Date.now();
+              // Detached: Pan sofort in User-View — sonst holt Layer-Idle Boot-GPS.
+              if (!locationFollowRef.current && vb?.[0] && vb?.[1]) {
+                commitUserView({
+                  lat: midLat,
+                  lng: midLng,
+                  zoom,
+                  heading:
+                    typeof bearing === 'number' && Number.isFinite(bearing)
+                      ? bearing
+                      : userViewCamRef.current.heading,
+                });
+              }
             }
             // User-View bei Finger / isUserInteraction / erkanntem Pinch-Zoom.
             // Nie nach Idle (sonst vergiftet Extract den Anker Richtung GPS).
@@ -1735,8 +2146,20 @@ export const NativeHomeMapView = memo(
                     : userViewCamRef.current.heading,
               });
             }
-            if (!userInteract && Date.now() < suppressRegionUntil.current) return;
-            if (!userInteract && Date.now() < ignorePanUntil.current) return;
+            if (
+              !userInteract &&
+              zoomDelta < 0.05 &&
+              Date.now() < suppressRegionUntil.current
+            ) {
+              return;
+            }
+            if (
+              !userInteract &&
+              zoomDelta < 0.05 &&
+              Date.now() < ignorePanUntil.current
+            ) {
+              return;
+            }
             if (
               !fingerDown.current &&
               Math.abs(zoom - camLiveRef.current.zoom) >= 0.08 &&
@@ -1759,6 +2182,7 @@ export const NativeHomeMapView = memo(
               Date.now() - lastUserGestureAt.current < 2_800;
             const zoom = b?.zoomLevel ?? camLiveRef.current.zoom;
             const zoomDelta = Math.abs(zoom - userViewCamRef.current.zoom);
+            noteRouteChipZoom(zoom);
 
             const vb = b?.visibleBounds;
             const bearing = b?.heading ?? 0;
@@ -1774,64 +2198,23 @@ export const NativeHomeMapView = memo(
               midLng = (west + east) / 2;
               hasBounds = true;
             }
-            const drifted =
-              Math.abs(midLat - userViewCamRef.current.lat) > 0.00009 ||
-              Math.abs(midLng - userViewCamRef.current.lng) > 0.00009 ||
-              Math.abs(zoom - userViewCamRef.current.zoom) > 0.12;
             const moved = gestureMovedEnough(midLat, midLng, zoom) || zoomDelta >= 0.06;
-            const gpsward = looksLikeGpswardSnap(midLat, midLng);
-            // Finales Gesture-Event oft ohne isUserInteraction — aber Snap ≠ Geste.
+            // Finales Gesture-Event oft ohne isUserInteraction.
             // Tippen (finger ohne Move) unlockt den GPS-Fix nicht.
             // Pinch-Zoom: Zoom-Delta / recentZoom zählen auch ohne Flags.
+            // Keine GPS-Snap-Heuristik — nie zurückspringen / Gegenwehr.
             const user =
-              !gpsward &&
-              (b?.isUserInteraction === true ||
-                (fingerDown.current && moved) ||
-                (recentFinger && moved) ||
-                (recentZoom && moved) ||
-                (recentGesture && moved) ||
-                likelyUserExploreMotion(midLat, midLng, zoom, {
-                  userInteract: b?.isUserInteraction === true,
-                }));
+              b?.isUserInteraction === true ||
+              (fingerDown.current && moved) ||
+              (recentFinger && moved) ||
+              (recentZoom && moved) ||
+              (recentGesture && moved) ||
+              likelyUserExploreMotion(midLat, midLng, zoom, {
+                userInteract: b?.isUserInteraction === true,
+              });
 
-            if (__DEV__ && userDetached.current && !locationFollowRef.current) {
-              const gps = gpsPosRef.current;
-              if (gps.lat != null && gps.lng != null && !user) {
-                const prev = camLiveRef.current;
-                const wasFarFromGps =
-                  Math.abs(prev.lat - gps.lat) > 0.008 ||
-                  Math.abs(prev.lng - gps.lng) > 0.008;
-                const nowNearGps =
-                  Math.abs(midLat - gps.lat) < 0.00035 &&
-                  Math.abs(midLng - gps.lng) < 0.00035;
-                if (wasFarFromGps && nowNearGps) {
-                  console.log('[map-cam] SNAP-BACK detected', {
-                    from: { lat: prev.lat, lng: prev.lng },
-                    to: { lat: midLat, lng: midLng },
-                    gps: { lat: gps.lat, lng: gps.lng },
-                  });
-                }
-              }
-            }
-
-            // Programmatic Reset: Anker nie übernehmen — nur zurückdrücken.
+            // Extract/Programmatic: Anker nicht anfassen — syncDefaultStop wäre Snap.
             if (suppressed && !user) {
-              if (hasBounds) {
-                camLiveRef.current = {
-                  lat: midLat,
-                  lng: midLng,
-                  zoom,
-                  heading: bearing,
-                };
-                if (
-                  !restoreExploreAnchorIfGpsSnap(midLat, midLng, zoom, bearing)
-                ) {
-                  restoreUserViewIfSnappedToGps({ force: true });
-                }
-                syncBootOnly();
-              } else {
-                syncBootOnly();
-              }
               return;
             }
             if (user && moved) {
@@ -1840,7 +2223,6 @@ export const NativeHomeMapView = memo(
             } else if (
               zoomDelta >= 0.08 &&
               !locationFollowRef.current &&
-              !gpsward &&
               (b?.isUserInteraction === true || recentZoom || recentGesture)
             ) {
               noteUserGesture();
@@ -1850,7 +2232,77 @@ export const NativeHomeMapView = memo(
             if (user && !headingFollowRef.current && typeof b?.heading === 'number') {
               displayBearingRef.current = bearing;
             }
+            // MapView-Geste vorbei: Live → Anker (JS), Flags räumen.
+            const wasTurning =
+              liveMapTurnRef.current ||
+              userGesturing.current ||
+              fingerDown.current;
+            if (wasTurning || user) {
+              userHasExploredRef.current = true;
+              const fromDid = {
+                lat: midLat,
+                lng: midLng,
+                zoom,
+                heading:
+                  typeof bearing === 'number' && Number.isFinite(bearing)
+                    ? bearing
+                    : camLiveRef.current.heading,
+              };
+              const g = gestureCamRef.current;
+              const gps = gpsPosRef.current;
+              let settle = fromDid;
+              // Snap-Back: DidChange klebt wieder am GPS, IsChanging war schon woanders.
+              if (
+                g &&
+                gps.lat != null &&
+                gps.lng != null &&
+                Number.isFinite(gps.lat) &&
+                Number.isFinite(gps.lng)
+              ) {
+                const didToGps = Math.hypot(fromDid.lat - gps.lat, fromDid.lng - gps.lng);
+                const gestToGps = Math.hypot(g.lat - gps.lat, g.lng - gps.lng);
+                if (didToGps + 0.00015 < gestToGps) settle = g;
+              } else if (g) {
+                settle = g;
+              }
+              userViewCamRef.current = settle;
+              camLiveRef.current = settle;
+              anchorCamRef.current = settle;
+              syncBootCamFrom(settle);
+            }
+            // Gesten-Ende nur wenn MapLibre idle (kein isUserInteraction) —
+            // sonst Zwei-Finger-Rotate / Pinch abwürgen.
+            if ((wasTurning || user) && !b?.isUserInteraction) {
+              endMapFingerGesture();
+            } else if (!b?.isUserInteraction) {
+              liveMapTurnRef.current = false;
+              fingerDown.current = false;
+            }
+            if (typeof bearing === 'number' && Number.isFinite(bearing)) {
+              postBearingUi(bearing);
+            }
             if (!hasBounds || !vb?.[0] || !vb?.[1]) return;
+
+            const headingDelta =
+              typeof bearing === 'number' && Number.isFinite(bearing)
+                ? Math.abs(
+                    shortestSignedBearing(userViewCamRef.current.heading, bearing),
+                  )
+                : 0;
+            // Reines Drehen (Zentrum gleich): Heading trotzdem ankern.
+            if (
+              headingDelta > 1.5 &&
+              (user || recentFinger || recentGesture) &&
+              !locationFollowRef.current &&
+              !headingFollowRef.current
+            ) {
+              commitUserView({
+                lat: midLat,
+                lng: midLng,
+                zoom,
+                heading: bearing,
+              });
+            }
 
             const movedFromAnchor =
               Math.abs(midLat - userViewCamRef.current.lat) > 0.00045 ||
@@ -1878,66 +2330,32 @@ export const NativeHomeMapView = memo(
             const west = vb[1][0]!;
             const south = vb[1][1]!;
 
-            // Idle/Extract: nur GPS-Snap zurückdrücken. Sonst View übernehmen
-            // (Pan ohne Flags — sonst springt die Karte zum GPS zurück).
-            if (
-              !user &&
-              userDetached.current &&
-              !locationFollowRef.current &&
-              drifted
-            ) {
-              camLiveRef.current = {
-                lat: midLat,
-                lng: midLng,
-                zoom,
-                heading: bearing,
-              };
-              if (gpsward) {
-                if (
-                  !restoreExploreAnchorIfGpsSnap(midLat, midLng, zoom, bearing)
-                ) {
-                  restoreUserViewIfSnappedToGps({ force: true });
-                }
-                rememberCamera(midLat, midLng, zoom, bearing, {
-                  fromUser: false,
-                });
-                return;
-              }
-              // Freie Erkundung ohne Touch-Flags → Anker nachziehen, nicht zurückspringen.
-              lastUserGestureAt.current = Date.now();
-              userDetached.current = true;
-              locationFollowRef.current = false;
-              if (zoomDelta >= 0.05) lastUserZoomAt.current = Date.now();
-              commitUserView({
-                lat: midLat,
-                lng: midLng,
-                zoom,
-                heading:
-                  typeof bearing === 'number' && Number.isFinite(bearing)
-                    ? bearing
-                    : userViewCamRef.current.heading,
-              });
-              props.onUserPan();
-              // weiter mit normalem Viewport-Update unten
-            }
+            // Kein Idle/Extract-Drift → User-View: das war die Snap-Vergiftung
+            // (MapLibre springt auf defaultStop, Idle übernimmt das als „User“).
 
             rememberCamera(midLat, midLng, zoom, bearing, {
-              fromUser: user || (!gpsward && drifted),
+              fromUser: !!user,
             });
-            const padLat = (north - south) * 0.25;
-            const padLng = (east - west) * 0.25;
-            const nextBounds = {
-              west: Math.min(west, east) - padLng,
-              east: Math.max(west, east) + padLng,
-              south: Math.min(south, north) - padLat,
-              north: Math.max(south, north) + padLat,
-            };
-            setViewBounds((prev) => {
-              if (prev && fogBoundsCacheKey(prev) === fogBoundsCacheKey(nextBounds)) {
-                return prev;
-              }
-              return nextBounds;
-            });
+            // Fog-Bounds: einmal gesetzt → für die Session hart eingefroren (auch nach Final).
+            // Pan-Idle darf ShapeSource nicht neu laden (Snap).
+            if (
+              !fogBoundsFrozenRef.current &&
+              !user &&
+              !fingerDown.current &&
+              !recentFinger &&
+              !recentGesture
+            ) {
+              const padLat = (north - south) * 0.25;
+              const padLng = (east - west) * 0.25;
+              const nextBounds = {
+                west: Math.min(west, east) - padLng,
+                east: Math.max(west, east) + padLng,
+                south: Math.min(south, north) - padLat,
+                north: Math.max(south, north) + padLat,
+              };
+              setViewBounds(nextBounds);
+              fogBoundsFrozenRef.current = true;
+            }
             props.onViewport({
               south: Math.min(south, north),
               west: Math.min(west, east),
@@ -1955,9 +2373,11 @@ export const NativeHomeMapView = memo(
             defaultSettings={bootCam}
           />
           <Images images={HOME_MAP_AMENITY_IMAGES} />
+          <MapLayerGate group="world-base">
           <ShapeSource id="world-land" shape={world.land}>
             <FillLayer
               id="world-land-fill"
+              maxZoomLevel={HOME_MAP_WORLD_MAX_ZOOM}
               style={{
                 fillColor: [
                   'interpolate',
@@ -2003,9 +2423,12 @@ export const NativeHomeMapView = memo(
           <ShapeSource id="world-lakes" shape={world.lakes}>
             <FillLayer
               id="world-lakes-fill"
+              maxZoomLevel={HOME_MAP_WORLD_MAX_ZOOM}
               style={{ fillColor: HOME_MAP_WATER, fillOpacity: 1 }}
             />
           </ShapeSource>
+          </MapLayerGate>
+          <MapLayerGate group="world-labels">
           <ShapeSource id="world-rivers" shape={labels.rivers}>
             <LineLayer
               id="world-rivers-major"
@@ -2158,6 +2581,12 @@ export const NativeHomeMapView = memo(
                 textHaloWidth: 1.35,
                 textAllowOverlap: false,
                 textOptional: true,
+                // Städte weichen Ländernamen bei Weit-Zoom.
+                symbolSortKey: [
+                  '+',
+                  20,
+                  ['to-number', ['coalesce', ['get', 'r'], 5]],
+                ],
               }}
             />
             <SymbolLayer
@@ -2188,6 +2617,58 @@ export const NativeHomeMapView = memo(
                 textHaloWidth: 1.2,
                 textAllowOverlap: false,
                 textOptional: true,
+                symbolSortKey: [
+                  '+',
+                  24,
+                  ['to-number', ['coalesce', ['get', 'r'], 8]],
+                ],
+              }}
+            />
+          </ShapeSource>
+          <ShapeSource
+            id="world-countries"
+            shape={labels.countries ?? EMPTY_FC}
+          >
+            <SymbolLayer
+              id="world-countries-label"
+              minZoomLevel={HOME_MAP_WORLD_STRUCTURE_LOD.countriesFrom}
+              maxZoomLevel={HOME_MAP_WORLD_STRUCTURE_LOD.countriesUntil}
+              filter={['<=', ['to-number', ['get', 'r']], 5]}
+              style={{
+                textField: ['to-string', ['get', 'n']],
+                textFont: MAP_TEXT_FONT,
+                textSize: [
+                  'interpolate',
+                  ['linear'],
+                  ['zoom'],
+                  1.5,
+                  13,
+                  3.2,
+                  16,
+                  5.2,
+                  14,
+                ],
+                textColor: '#FFFFFF',
+                textHaloColor: '#0A241C',
+                textHaloWidth: 1.6,
+                textOpacity: [
+                  'interpolate',
+                  ['linear'],
+                  ['zoom'],
+                  1.4,
+                  0.92,
+                  4.2,
+                  0.88,
+                  5.6,
+                  0.35,
+                ],
+                textAllowOverlap: false,
+                textOptional: false,
+                // Niedriger SortKey = Länder vor Städten bei Collision.
+                symbolSortKey: [
+                  'to-number',
+                  ['coalesce', ['get', 'r'], 3],
+                ],
               }}
             />
           </ShapeSource>
@@ -2223,6 +2704,8 @@ export const NativeHomeMapView = memo(
               }}
             />
           </ShapeSource>
+          </MapLayerGate>
+          <MapLayerGate group="world-base">
           <ShapeSource id="world-borders" shape={world.borders}>
             <LineLayer
               id="world-borders-line"
@@ -2274,7 +2757,9 @@ export const NativeHomeMapView = memo(
               }}
             />
           </ShapeSource>
+          </MapLayerGate>
           {hasRegional ? (
+            <MapLayerGate group="regional">
             <ShapeSource id="regional-fallback" shape={regionalGeo}>
               <FillLayer
                 id="regional-urban-fill"
@@ -2338,7 +2823,9 @@ export const NativeHomeMapView = memo(
                 }}
               />
             </ShapeSource>
+            </MapLayerGate>
           ) : null}
+          <MapLayerGate group="extract">
           <ShapeSource id="extract-land" shape={geo.land}>
             <FillLayer
               id="extract-land-fill"
@@ -2377,6 +2864,8 @@ export const NativeHomeMapView = memo(
               style={{ fillColor: HOME_MAP_WATER, fillOpacity: 0.92 }}
             />
           </ShapeSource>
+          </MapLayerGate>
+          <MapLayerGate group="fog">
           <ShapeSource id="fog-reveal" shape={revealFc}>
             <FillLayer
               id="fog-reveal-fill"
@@ -2388,55 +2877,15 @@ export const NativeHomeMapView = memo(
                   ['linear'],
                   ['zoom'],
                   HOME_MAP_FOG_ZOOM.goneAt,
-                  0.18,
-                  HOME_MAP_FOG_ZOOM.fullAt,
-                  0.42,
-                ],
-              }}
-            />
-          </ShapeSource>
-          <ShapeSource id="extract-buildings" shape={geo.buildings}>
-            <FillLayer
-              id="extract-buildings-fill"
-              minZoomLevel={10.4}
-              style={{
-                fillColor: HOME_MAP_BUILDING_FILL,
-                fillOutlineColor: HOME_MAP_BUILDING_STROKE,
-                fillOpacity: [
-                  'interpolate',
-                  ['linear'],
-                  ['zoom'],
-                  10.4,
                   0,
-                  11.0,
-                  0.55,
-                  12.5,
-                  0.72,
-                  14.5,
-                  0.88,
-                  16,
-                  0.94,
+                  HOME_MAP_FOG_ZOOM.fullAt,
+                  HOME_MAP_FOG_REVEAL_OPACITY,
                 ],
               }}
             />
           </ShapeSource>
-          <ShapeSource id="extract-housenumbers" shape={geo.housenumbers}>
-            <SymbolLayer
-              id="extract-housenumbers-label"
-              minZoomLevel={17.2}
-              style={{
-                textField: ['to-string', ['get', 'n']],
-                textSize: 10,
-                textFont: MAP_TEXT_FONT,
-                textColor: '#E8F0EC',
-                textHaloColor: HOME_MAP_BG,
-                textHaloWidth: 1.2,
-                textAllowOverlap: false,
-                textIgnorePlacement: false,
-                textOptional: true,
-              }}
-            />
-          </ShapeSource>
+          </MapLayerGate>
+          <MapLayerGate group="extract">
           <ShapeSource id="extract-rails" shape={geo.rails}>
             <LineLayer
               id="extract-rails-line"
@@ -2463,7 +2912,7 @@ export const NativeHomeMapView = memo(
             <LineLayer
               id="extract-roads-major"
               minZoomLevel={9.4}
-              filter={['==', ['get', 'k'], 0]}
+              filter={['==', ['to-number', ['get', 'k']], 0]}
               style={{
                 lineColor: HOME_MAP_ROAD_COLORS.major,
                 lineWidth: [
@@ -2484,14 +2933,14 @@ export const NativeHomeMapView = memo(
             <LineLayer
               id="extract-roads-street"
               minZoomLevel={HOME_MAP_BASE_LOD.secondaryFrom}
-              filter={['==', ['get', 'k'], 1]}
+              filter={['==', ['to-number', ['get', 'k']], 1]}
               style={{
                 lineColor: HOME_MAP_ROAD_COLORS.street,
                 lineWidth: [
                   'interpolate',
                   ['linear'],
                   ['zoom'],
-                  9.7,
+                  9.2,
                   0.55,
                   12,
                   1.35,
@@ -2505,43 +2954,150 @@ export const NativeHomeMapView = memo(
             <LineLayer
               id="extract-roads-path"
               minZoomLevel={HOME_MAP_BASE_LOD.minorFrom}
-              filter={['==', ['get', 'k'], 2]}
+              filter={['==', ['to-number', ['get', 'k']], 2]}
               style={{
                 lineColor: HOME_MAP_ROAD_COLORS.path,
                 lineWidth: [
                   'interpolate',
                   ['linear'],
                   ['zoom'],
-                  11.2,
-                  0.35,
+                  10.4,
+                  0.5,
                   14,
-                  1.05,
-                  16,
-                  2.3,
+                  1.35,
+                  16.5,
+                  2.8,
                 ],
                 lineCap: 'round',
                 lineJoin: 'round',
               }}
             />
-          </ShapeSource>
-          <ShapeSource id="fog-mask" shape={fogFc}>
-            <FillLayer
-              id="fog-mask-fill"
-              minZoomLevel={HOME_MAP_FOG_ZOOM.goneAt}
+            <SymbolLayer
+              id="extract-roads-label-major"
+              minZoomLevel={HOME_MAP_STREET_LABEL_LOD.majorFrom}
+              filter={[
+                'all',
+                ['==', ['get', 'k'], 0],
+                ['>', ['length', ['to-string', ['get', 'n']]], 1],
+              ]}
               style={{
-                fillColor: HOME_MAP_FOG_FILL,
+                symbolPlacement: 'line',
+                textField: ['to-string', ['get', 'n']],
+                textSize: [
+                  'interpolate',
+                  ['linear'],
+                  ['zoom'],
+                  HOME_MAP_STREET_LABEL_LOD.majorFrom,
+                  10.5,
+                  14,
+                  13,
+                  16,
+                  14.5,
+                  18,
+                  15.5,
+                ],
+                textFont: MAP_TEXT_FONT,
+                textColor: '#FFE08A',
+                textHaloColor: '#0A1F18',
+                textHaloWidth: 1.6,
+                textOptional: false,
+                textAllowOverlap: true,
+                textIgnorePlacement: true,
+                textMaxAngle: HOME_MAP_STREET_LABEL_LOD.maxAngleDeg,
+                textKeepUpright: true,
+                textPitchAlignment: 'viewport',
+                textRotationAlignment: 'map',
+                symbolSpacing: HOME_MAP_STREET_LABEL_LOD.spacing,
+              }}
+            />
+            <SymbolLayer
+              id="extract-roads-label"
+              minZoomLevel={HOME_MAP_STREET_LABEL_LOD.streetFrom}
+              filter={[
+                'all',
+                ['==', ['get', 'k'], 1],
+                ['>', ['length', ['to-string', ['get', 'n']]], 1],
+              ]}
+              style={{
+                symbolPlacement: 'line',
+                textField: ['to-string', ['get', 'n']],
+                textSize: [
+                  'interpolate',
+                  ['linear'],
+                  ['zoom'],
+                  HOME_MAP_STREET_LABEL_LOD.streetFrom,
+                  10.5,
+                  15,
+                  12.5,
+                  17,
+                  13.5,
+                  18,
+                  14.5,
+                ],
+                textFont: MAP_TEXT_FONT,
+                textColor: '#FFE08A',
+                textHaloColor: '#0A1F18',
+                textHaloWidth: 1.55,
+                textOptional: false,
+                textAllowOverlap: true,
+                textIgnorePlacement: true,
+                textMaxAngle: HOME_MAP_STREET_LABEL_LOD.maxAngleDeg,
+                textKeepUpright: true,
+                textPitchAlignment: 'viewport',
+                textRotationAlignment: 'map',
+                symbolSpacing: HOME_MAP_STREET_LABEL_LOD.spacing,
+              }}
+            />
+          </ShapeSource>
+          <ShapeSource id="extract-buildings" shape={geo.buildings}>
+            <FillLayer
+              id="extract-buildings-fill"
+              minZoomLevel={10.4}
+              style={{
+                fillColor: HOME_MAP_BUILDING_FILL,
+                // Leicht — Form über Fill + haarfeine Outline (wie Story-Orte).
                 fillOpacity: [
                   'interpolate',
                   ['linear'],
                   ['zoom'],
-                  HOME_MAP_FOG_ZOOM.goneAt,
+                  10.4,
                   0,
-                  HOME_MAP_FOG_ZOOM.fullAt,
-                  1,
+                  12.0,
+                  0.22,
+                  14.0,
+                  0.34,
+                  16.0,
+                  0.42,
                 ],
+                // 1-px-Kontrast wie places-fill — kein dicker LineLayer-Rahmen.
+                fillOutlineColor: HOME_MAP_BUILDING_STROKE,
               }}
             />
           </ShapeSource>
+          </MapLayerGate>
+          {HOME_MAP_FOG_MASK_ENABLED ? (
+            <MapLayerGate group="fog">
+            <ShapeSource id="fog-mask" shape={fogFc}>
+              <FillLayer
+                id="fog-mask-fill"
+                minZoomLevel={HOME_MAP_FOG_ZOOM.goneAt}
+                style={{
+                  fillColor: HOME_MAP_FOG_FILL,
+                  fillOpacity: [
+                    'interpolate',
+                    ['linear'],
+                    ['zoom'],
+                    HOME_MAP_FOG_ZOOM.goneAt,
+                    0,
+                    HOME_MAP_FOG_ZOOM.fullAt,
+                    1,
+                  ],
+                }}
+              />
+            </ShapeSource>
+            </MapLayerGate>
+          ) : null}
+          <MapLayerGate group="cities">
           <ShapeSource id="cities" shape={cityFc}>
             <FillLayer
               id="cities-fill"
@@ -2675,6 +3231,367 @@ export const NativeHomeMapView = memo(
               }}
             />
           </ShapeSource>
+          </MapLayerGate>
+          {/* Ort-Status-Gebäude (lila/grün/blau/rot) — eine feste Layer, Inhalt = Orte-Filter.
+              Route/Pins kommen DANACH, sonst liegen Linie + Pin unter dem Gebäude-Fill. */}
+          <MapLayerGate group="places-fill">
+          <ShapeSource
+            id="places-fill"
+            shape={placeFc.fills}
+            onPress={onPlacePress}
+            hitbox={{ width: 44, height: 44 }}
+          >
+            <FillLayer
+              id="places-fill-layer"
+              minZoomLevel={HOME_MAP_DETAIL_FADE.goneAt}
+              filter={placeVisFilter as never}
+              style={{
+                visibility:
+                  (placeFc.fills.features?.length ?? 0) > 0
+                    ? 'visible'
+                    : 'none',
+                fillColor: ['get', 'color'],
+                fillOpacity: HOME_MAP_PLACE_FILL_OPACITY,
+                fillOutlineColor: ['get', 'color'],
+              }}
+            />
+          </ShapeSource>
+          </MapLayerGate>
+          <MapLayerGate group="places-icons">
+          <ShapeSource
+            id="places-amenity" /* Icons via amenityIcons — nicht Typ-Chips (Standard) */
+            shape={placeFc.amenities}
+            onPress={onPlacePress}
+            hitbox={{ width: 56, height: 56 }}
+          >
+            <SymbolLayer
+              id="places-icon-transit"
+              minZoomLevel={HOME_MAP_ICON_LOD_ZOOM.transitMajor.goneAt}
+              filter={
+                [
+                  'any',
+                  ['==', ['get', 'kind'], 'transitMajor'],
+                  ['==', ['get', 'kind'], 'transit'],
+                ] as never
+              }
+              style={{
+                iconImage: ['get', 'iconImg'],
+                // Wie Everyday — früher absichtlich ~1.5× größer, wirkte „klebt“.
+                iconSize: [
+                  'interpolate',
+                  ['linear'],
+                  ['zoom'],
+                  10,
+                  0.11,
+                  12,
+                  0.14,
+                  14,
+                  0.2,
+                  16,
+                  0.28,
+                  18,
+                  0.36,
+                ],
+                iconAllowOverlap: true,
+                iconIgnorePlacement: true,
+              }}
+            />
+            <SymbolLayer
+              id="places-icon-transit-local"
+              minZoomLevel={HOME_MAP_ICON_LOD_ZOOM.transitLocal.goneAt}
+              filter={
+                [
+                  '==',
+                  ['get', 'kind'],
+                  'transitLocal',
+                ] as never
+              }
+              style={{
+                iconImage: ['get', 'iconImg'],
+                iconSize: [
+                  'interpolate',
+                  ['linear'],
+                  ['zoom'],
+                  14.2,
+                  0.14,
+                  16,
+                  0.26,
+                  18,
+                  0.36,
+                ],
+                iconAllowOverlap: true,
+                iconIgnorePlacement: true,
+              }}
+            />
+            <SymbolLayer
+              id="places-icon-highlight"
+              minZoomLevel={HOME_MAP_ICON_LOD_ZOOM.highlight.goneAt}
+              filter={
+                [
+                  '==',
+                  ['get', 'kind'],
+                  'highlight',
+                ] as never
+              }
+              style={{
+                iconImage: ['get', 'iconImg'],
+                iconSize: [
+                  'interpolate',
+                  ['linear'],
+                  ['zoom'],
+                  12.2,
+                  0.16,
+                  15,
+                  0.26,
+                  18,
+                  0.38,
+                ],
+                iconAllowOverlap: false,
+                iconIgnorePlacement: false,
+              }}
+            />
+            <SymbolLayer
+              id="places-icon-gastro-top"
+              minZoomLevel={HOME_MAP_ICON_LOD_ZOOM.gastroTop.goneAt}
+              filter={
+                [
+                  '==',
+                  ['get', 'kind'],
+                  'gastroTop',
+                ] as never
+              }
+              style={{
+                iconImage: ['get', 'iconImg'],
+                iconSize: [
+                  'interpolate',
+                  ['linear'],
+                  ['zoom'],
+                  13.2,
+                  0.16,
+                  15,
+                  0.26,
+                  18,
+                  0.38,
+                ],
+                iconAllowOverlap: false,
+                iconIgnorePlacement: false,
+              }}
+            />
+            <SymbolLayer
+              id="places-icon-everyday"
+              minZoomLevel={HOME_MAP_ICON_LOD_ZOOM.everyday.goneAt}
+              filter={
+                [
+                  '==',
+                  ['get', 'kind'],
+                  'everyday',
+                ] as never
+              }
+              style={{
+                iconImage: ['get', 'iconImg'],
+                iconSize: [
+                  'interpolate',
+                  ['linear'],
+                  ['zoom'],
+                  14.2,
+                  0.14,
+                  16,
+                  0.26,
+                  18,
+                  0.36,
+                ],
+                iconAllowOverlap: false,
+                iconIgnorePlacement: false,
+              }}
+            />
+            <SymbolLayer
+              id="places-icon-gastro"
+              minZoomLevel={HOME_MAP_ICON_LOD_ZOOM.gastro.goneAt}
+              filter={
+                [
+                  '==',
+                  ['get', 'kind'],
+                  'gastro',
+                ] as never
+              }
+              style={{
+                iconImage: ['get', 'iconImg'],
+                iconSize: [
+                  'interpolate',
+                  ['linear'],
+                  ['zoom'],
+                  15.4,
+                  0.14,
+                  16.5,
+                  0.24,
+                  18,
+                  0.34,
+                ],
+                iconAllowOverlap: false,
+                iconIgnorePlacement: false,
+              }}
+            />
+            <SymbolLayer
+              id="places-icon-micro"
+              minZoomLevel={HOME_MAP_ICON_LOD_ZOOM.micro.goneAt}
+              filter={
+                [
+                  '==',
+                  ['get', 'kind'],
+                  'micro',
+                ] as never
+              }
+              style={{
+                iconImage: ['get', 'iconImg'],
+                iconSize: [
+                  'interpolate',
+                  ['linear'],
+                  ['zoom'],
+                  14.8,
+                  0.16,
+                  16.5,
+                  0.28,
+                  18,
+                  0.36,
+                ],
+                iconAllowOverlap: false,
+                iconIgnorePlacement: false,
+              }}
+            />
+            <SymbolLayer
+              id="places-icon-micro-close"
+              minZoomLevel={HOME_MAP_ICON_LOD_ZOOM.microClose.goneAt}
+              filter={
+                [
+                  '==',
+                  ['get', 'kind'],
+                  'microClose',
+                ] as never
+              }
+              style={{
+                iconImage: ['get', 'iconImg'],
+                iconSize: [
+                  'interpolate',
+                  ['linear'],
+                  ['zoom'],
+                  15.0,
+                  0.18,
+                  16.8,
+                  0.28,
+                  18,
+                  0.36,
+                ],
+                iconAllowOverlap: false,
+                iconIgnorePlacement: false,
+              }}
+            />
+            <SymbolLayer
+              id="places-icon-micro-clinic"
+              minZoomLevel={HOME_MAP_ICON_LOD_ZOOM.microClinic.goneAt}
+              filter={
+                [
+                  '==',
+                  ['get', 'kind'],
+                  'microClinic',
+                ] as never
+              }
+              style={{
+                iconImage: ['get', 'iconImg'],
+                iconSize: [
+                  'interpolate',
+                  ['linear'],
+                  ['zoom'],
+                  16.2,
+                  0.2,
+                  17.2,
+                  0.3,
+                  18.2,
+                  0.38,
+                ],
+                iconAllowOverlap: false,
+                iconIgnorePlacement: false,
+              }}
+            />
+            <SymbolLayer
+              id="places-icon-park"
+              minZoomLevel={HOME_MAP_ICON_LOD_ZOOM.park.goneAt}
+              filter={
+                [
+                  '==',
+                  ['get', 'kind'],
+                  'park',
+                ] as never
+              }
+              style={{
+                iconImage: ['get', 'iconImg'],
+                iconSize: [
+                  'interpolate',
+                  ['linear'],
+                  ['zoom'],
+                  14.5,
+                  0.14,
+                  16.5,
+                  0.26,
+                  18,
+                  0.34,
+                ],
+                iconAllowOverlap: false,
+                iconIgnorePlacement: false,
+              }}
+            />
+          </ShapeSource>
+          </MapLayerGate>
+          <MapLayerGate group="places-dot">
+          <ShapeSource
+            id="places-dot"
+            shape={placeFc.dots}
+            onPress={onPlacePress}
+            hitbox={{ width: 52, height: 52 }}
+          >
+            <CircleLayer
+              id="places-dot-halo"
+              minZoomLevel={HOME_MAP_DETAIL_FADE.goneAt}
+              filter={placeVisFilter as never}
+              style={{
+                circleColor: '#FFFFFF',
+                circleRadius: [
+                  'interpolate',
+                  ['linear'],
+                  ['zoom'],
+                  10,
+                  1.6,
+                  14,
+                  5.5,
+                  16.5,
+                  8.5,
+                ],
+                circleOpacity: 0.88,
+              }}
+            />
+            <CircleLayer
+              id="places-dot-circle"
+              minZoomLevel={HOME_MAP_DETAIL_FADE.goneAt}
+              filter={placeVisFilter as never}
+              style={{
+                circleColor: ['get', 'color'],
+                circleRadius: [
+                  'interpolate',
+                  ['linear'],
+                  ['zoom'],
+                  10,
+                  1.1,
+                  14,
+                  4.2,
+                  16.5,
+                  7,
+                ],
+                circleStrokeColor: '#0A1F18',
+                circleStrokeWidth: 1.2,
+              }}
+            />
+          </ShapeSource>
+          </MapLayerGate>
+          {/* Route über Gebäude-Fill — Linie und Pins bleiben sichtbar. */}
           <ShapeSource id="route-ahead" shape={routeFc.ahead}>
             <LineLayer
               id="route-ahead-casing"
@@ -2721,9 +3638,36 @@ export const NativeHomeMapView = memo(
           </ShapeSource>
           {!routePreview && (props.route?.arrows?.length ?? 0) > 0 ? (
             <ShapeSource id="route-arrows" shape={routeFc.arrows}>
+              {/* Unter Zoom ~13.8 weg — sonst Pfeil-Klumpen im Überblick. */}
               <SymbolLayer
-                id="route-chevrons"
-                minZoomLevel={12}
+                id="route-chevrons-far"
+                minZoomLevel={13.8}
+                maxZoomLevel={14.55}
+                filter={['==', ['get', 'lod'], 'lo']}
+                style={{
+                  iconImage: 'route-chevron',
+                  iconSize: [
+                    'case',
+                    ['==', ['get', 'kind'], 'turn'],
+                    0.58,
+                    0.38,
+                  ],
+                  iconRotate: ['to-number', ['coalesce', ['get', 'bearing'], 0]],
+                  iconRotationAlignment: 'map',
+                  iconPitchAlignment: 'map',
+                  iconAllowOverlap: false,
+                  iconIgnorePlacement: false,
+                  iconAnchor: 'center',
+                }}
+              />
+              <SymbolLayer
+                id="route-chevrons-near"
+                minZoomLevel={14.5}
+                filter={[
+                  'any',
+                  ['==', ['get', 'lod'], 'hi'],
+                  ['==', ['get', 'kind'], 'turn'],
+                ]}
                 style={{
                   iconImage: 'route-chevron',
                   iconSize: [
@@ -2742,302 +3686,24 @@ export const NativeHomeMapView = memo(
               />
             </ShapeSource>
           ) : null}
-          {/* Orte über der Route — sonst stehlen Linien die Taps. */}
-          <ShapeSource
-            id="places-fill"
-            shape={placeFc.fills}
-            onPress={onPlacePress}
-            hitbox={{ width: 44, height: 44 }}
-          >
-            <FillLayer
-              id="places-fill-layer"
-              minZoomLevel={HOME_MAP_DETAIL_FADE.goneAt}
-              style={{
-                fillColor: ['get', 'color'],
-                fillOpacity: HOME_MAP_PLACE_FILL_OPACITY,
-                fillOutlineColor: ['get', 'color'],
-              }}
-            />
-          </ShapeSource>
-          <ShapeSource id="places-amenity" shape={placeFc.amenities} onPress={onPlacePress} hitbox={{ width: 52, height: 52 }}>
-            <SymbolLayer
-              id="places-icon-transit"
-              minZoomLevel={HOME_MAP_ICON_LOD_ZOOM.transit.goneAt}
-              filter={['==', ['get', 'kind'], 'transit']}
-              style={{
-                iconImage: ['get', 'iconImg'],
-                // Zoom-skaliert, kompakt — nie „Riesen-Bahnhof“ bei Stadtzoom
-                iconSize: [
-                  'interpolate',
-                  ['linear'],
-                  ['zoom'],
-                  11,
-                  0.1,
-                  14,
-                  0.14,
-                  16,
-                  0.18,
-                  18,
-                  0.22,
-                ],
-                iconAllowOverlap: true,
-                iconIgnorePlacement: true,
-              }}
-            />
-            <SymbolLayer
-              id="places-icon-highlight"
-              minZoomLevel={HOME_MAP_ICON_LOD_ZOOM.highlight.goneAt}
-              filter={['==', ['get', 'kind'], 'highlight']}
-              style={{
-                iconImage: ['get', 'iconImg'],
-                iconSize: [
-                  'interpolate',
-                  ['linear'],
-                  ['zoom'],
-                  12.2,
-                  0.16,
-                  15,
-                  0.26,
-                  18,
-                  0.38,
-                ],
-                iconAllowOverlap: false,
-                iconIgnorePlacement: false,
-              }}
-            />
-            <SymbolLayer
-              id="places-icon-gastro-top"
-              minZoomLevel={HOME_MAP_ICON_LOD_ZOOM.gastroTop.goneAt}
-              filter={['==', ['get', 'kind'], 'gastroTop']}
-              style={{
-                iconImage: ['get', 'iconImg'],
-                iconSize: [
-                  'interpolate',
-                  ['linear'],
-                  ['zoom'],
-                  13.2,
-                  0.16,
-                  15,
-                  0.26,
-                  18,
-                  0.38,
-                ],
-                iconAllowOverlap: false,
-                iconIgnorePlacement: false,
-              }}
-            />
-            <SymbolLayer
-              id="places-icon-everyday"
-              minZoomLevel={HOME_MAP_ICON_LOD_ZOOM.everyday.goneAt}
-              filter={['==', ['get', 'kind'], 'everyday']}
-              style={{
-                iconImage: ['get', 'iconImg'],
-                iconSize: [
-                  'interpolate',
-                  ['linear'],
-                  ['zoom'],
-                  14.2,
-                  0.14,
-                  16,
-                  0.26,
-                  18,
-                  0.36,
-                ],
-                iconAllowOverlap: false,
-                iconIgnorePlacement: false,
-              }}
-            />
-            <SymbolLayer
-              id="places-icon-gastro"
-              minZoomLevel={HOME_MAP_ICON_LOD_ZOOM.gastro.goneAt}
-              filter={['==', ['get', 'kind'], 'gastro']}
-              style={{
-                iconImage: ['get', 'iconImg'],
-                iconSize: [
-                  'interpolate',
-                  ['linear'],
-                  ['zoom'],
-                  15.4,
-                  0.14,
-                  16.5,
-                  0.24,
-                  18,
-                  0.34,
-                ],
-                iconAllowOverlap: false,
-                iconIgnorePlacement: false,
-              }}
-            />
-            <SymbolLayer
-              id="places-icon-micro"
-              minZoomLevel={HOME_MAP_ICON_LOD_ZOOM.micro.goneAt}
-              filter={['==', ['get', 'kind'], 'micro']}
-              style={{
-                iconImage: ['get', 'iconImg'],
-                iconSize: [
-                  'interpolate',
-                  ['linear'],
-                  ['zoom'],
-                  15.8,
-                  0.14,
-                  17,
-                  0.24,
-                  18,
-                  0.32,
-                ],
-                iconAllowOverlap: false,
-                iconIgnorePlacement: false,
-              }}
-            />
-            <SymbolLayer
-              id="places-icon-park"
-              minZoomLevel={HOME_MAP_ICON_LOD_ZOOM.park.goneAt}
-              filter={['==', ['get', 'kind'], 'park']}
-              style={{
-                iconImage: ['get', 'iconImg'],
-                iconSize: [
-                  'interpolate',
-                  ['linear'],
-                  ['zoom'],
-                  15.6,
-                  0.14,
-                  16.5,
-                  0.24,
-                  18,
-                  0.32,
-                ],
-                iconAllowOverlap: false,
-                iconIgnorePlacement: false,
-              }}
-            />
-          </ShapeSource>
-          <ShapeSource id="places-dot" shape={placeFc.dots} onPress={onPlacePress} hitbox={{ width: 48, height: 48 }}>
+          <ShapeSource id="route-pins" shape={routeFc.pins} onPress={onPlacePress} hitbox={{ width: 52, height: 52 }}>
             <CircleLayer
-              id="places-dot-halo"
-              minZoomLevel={HOME_MAP_DETAIL_FADE.goneAt}
+              id="route-pins-halo"
               style={{
                 circleColor: '#FFFFFF',
-                circleRadius: [
-                  'interpolate',
-                  ['linear'],
-                  ['zoom'],
-                  10,
-                  1.6,
-                  14,
-                  5.5,
-                  16.5,
-                  8.5,
-                ],
-                circleOpacity: 0.88,
-              }}
-            />
-            <CircleLayer
-              id="places-dot-circle"
-              minZoomLevel={HOME_MAP_DETAIL_FADE.goneAt}
-              style={{
-                circleColor: ['get', 'color'],
-                circleRadius: [
-                  'interpolate',
-                  ['linear'],
-                  ['zoom'],
-                  10,
-                  1.1,
-                  14,
-                  4.2,
-                  16.5,
-                  7,
-                ],
+                circleRadius: 11,
+                circleOpacity: 0.92,
                 circleStrokeColor: '#0A1F18',
-                circleStrokeWidth: 1.2,
+                circleStrokeWidth: 1.4,
               }}
             />
-          </ShapeSource>
-          {/* Straßennamen ÜBER Gebäuden/Orten — sonst liegen sie unsichtbar darunter. */}
-          <ShapeSource id="extract-roads-labels" shape={geo.roads}>
-            <SymbolLayer
-              id="extract-roads-label-major"
-              minZoomLevel={HOME_MAP_STREET_LABEL_LOD.majorFrom}
-              filter={[
-                'all',
-                ['==', ['get', 'k'], 0],
-                ['>', ['length', ['to-string', ['get', 'n']]], 1],
-              ]}
-              style={{
-                symbolPlacement: 'line',
-                textField: ['to-string', ['get', 'n']],
-                textSize: [
-                  'interpolate',
-                  ['linear'],
-                  ['zoom'],
-                  HOME_MAP_STREET_LABEL_LOD.majorFrom,
-                  10.5,
-                  14,
-                  13,
-                  16,
-                  14.5,
-                  18,
-                  15.5,
-                ],
-                textFont: MAP_TEXT_FONT,
-                textColor: '#FFE08A',
-                textHaloColor: '#0A1F18',
-                textHaloWidth: 1.6,
-                textOptional: false,
-                textAllowOverlap: true,
-                textIgnorePlacement: true,
-                textMaxAngle: HOME_MAP_STREET_LABEL_LOD.maxAngleDeg,
-                textKeepUpright: true,
-                textPitchAlignment: 'viewport',
-                textRotationAlignment: 'map',
-                symbolSpacing: HOME_MAP_STREET_LABEL_LOD.spacing,
-              }}
-            />
-            <SymbolLayer
-              id="extract-roads-label"
-              minZoomLevel={HOME_MAP_STREET_LABEL_LOD.streetFrom}
-              filter={[
-                'all',
-                ['==', ['get', 'k'], 1],
-                ['>', ['length', ['to-string', ['get', 'n']]], 1],
-              ]}
-              style={{
-                symbolPlacement: 'line',
-                textField: ['to-string', ['get', 'n']],
-                textSize: [
-                  'interpolate',
-                  ['linear'],
-                  ['zoom'],
-                  HOME_MAP_STREET_LABEL_LOD.streetFrom,
-                  10.5,
-                  15,
-                  12.5,
-                  17,
-                  13.5,
-                  18,
-                  14.5,
-                ],
-                textFont: MAP_TEXT_FONT,
-                textColor: '#FFE08A',
-                textHaloColor: '#0A1F18',
-                textHaloWidth: 1.55,
-                textOptional: false,
-                textAllowOverlap: true,
-                textIgnorePlacement: true,
-                textMaxAngle: HOME_MAP_STREET_LABEL_LOD.maxAngleDeg,
-                textKeepUpright: true,
-                textPitchAlignment: 'viewport',
-                textRotationAlignment: 'map',
-                symbolSpacing: HOME_MAP_STREET_LABEL_LOD.spacing,
-              }}
-            />
-          </ShapeSource>
-          <ShapeSource id="route-pins" shape={routeFc.pins} onPress={onPlacePress} hitbox={{ width: 44, height: 44 }}>
             <SymbolLayer
               id="route-pins-icon"
               style={{
                 iconImage: ['coalesce', ['get', 'icon'], 'route-pin-now'],
-                iconSize: 0.42,
+                iconSize: 0.52,
                 iconAnchor: 'bottom',
+                iconOffset: [0, 2],
                 iconAllowOverlap: true,
                 iconIgnorePlacement: true,
               }}
@@ -3082,11 +3748,12 @@ export const NativeHomeMapView = memo(
       </View>
     );
   }),
+  nativeMapPropsEqual,
 );
 
 const styles = StyleSheet.create({
-  root: { flex: 1, backgroundColor: HOME_MAP_OCEAN },
-  map: { flex: 1, backgroundColor: HOME_MAP_OCEAN },
+  root: { flex: 1, backgroundColor: HOME_MAP_BG },
+  map: { flex: 1, backgroundColor: HOME_MAP_BG },
   dim: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: `rgba(0,0,0,${HOME_MAP_CHROME_DIM})`,

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Ort-Popup vorbereiten, bevor der User tippt.
  * Sichtbare Pins laufen im Hintergrund; ein Tap springt an die Spitze
  * und blockiert die restliche Prefetch-Schlange nicht.
@@ -10,12 +10,16 @@ import {
   categoryLabelForPoi,
 } from './homeMapPlaceBullets';
 import {
+  deriveMapPlaceLiveActions,
+  type MapPlaceLiveActionDef,
+} from './mapPlaceLiveActions';
+import {
   isEstablishedGoogleMapsPlaceUrl,
   mapsUrlForGooglePlace,
   pickNearbyListedGooglePlace,
 } from '../research/eventInfoUrl';
 
-/** Langer Fingerdruck auf leere Karte — kein Pack-POI. */
+/** Langer Fingerdruck auf leere Karte â€” kein Pack-POI. */
 export const MAP_DROP_PIN_ID = -2;
 
 export type MapPlacePreview = {
@@ -25,10 +29,16 @@ export type MapPlacePreview = {
   bullets: string[];
   websiteUrl?: string | null;
   extraActions?: Array<{ label: string; url: string }> | null;
+  /** Buttons, die erst beim Tap eine Live-Abfrage auslÃ¶sen (Google-frei). */
+  liveActions?: MapPlaceLiveActionDef[] | null;
+  /** GÃ¤stebewertung aus Pack (0â€“5), wenn belegt. */
+  rating?: number | null;
+  /** Anzahl Bewertungen aus Pack, wenn belegt. */
+  ratingCount?: number | null;
   lat: number;
   lng: number;
   spotKey?: string | null;
-  /** Google-Place-Suche für Maps schon gelaufen (Treffer oder bewusst kein Link). */
+  /** Google-Place-Suche fÃ¼r Maps schon gelaufen (Treffer oder bewusst kein Link). */
   mapsLookedUp?: boolean;
 };
 
@@ -61,6 +71,48 @@ export function bindMapPlacePreview(opts: {
 
 export function peekMapPlacePreview(id: number): MapPlacePreview | null {
   return cache.get(id) ?? null;
+}
+
+/**
+ * Erster Popup-Frame: nur Name/Kategorie/Koords â€” kein Bullet-Parsing.
+ * Bullets + Facts kommen per Enrich direkt danach.
+ */
+export function skeletonMapPlacePopup(opts: {
+  id: number;
+  name?: string | null;
+  category?: string | null;
+  lat?: number | null;
+  lng?: number | null;
+  poi?: Poi | null;
+}): MapPlacePreview {
+  const cached = cache.get(opts.id);
+  if (cached) {
+    const tapLat = opts.lat == null ? Number.NaN : Number(opts.lat);
+    const tapLng = opts.lng == null ? Number.NaN : Number(opts.lng);
+    const lat = Number.isFinite(tapLat) ? tapLat : cached.lat;
+    const lng = Number.isFinite(tapLng) ? tapLng : cached.lng;
+    const name = (opts.name || cached.name || 'Ort').trim() || cached.name;
+    if (cached.lat === lat && cached.lng === lng && cached.name === name) {
+      return cached;
+    }
+    return { ...cached, name, lat, lng };
+  }
+  const poi = opts.poi ?? getPoi(opts.id) ?? null;
+  const tapLat = opts.lat == null ? Number.NaN : Number(opts.lat);
+  const tapLng = opts.lng == null ? Number.NaN : Number(opts.lng);
+  return {
+    id: opts.id,
+    name: (opts.name || poi?.name || 'Ort').trim() || 'Ort',
+    category:
+      (opts.category || '').trim() ||
+      (poi ? categoryLabelForPoi(poi) : 'Ort'),
+    bullets: [],
+    websiteUrl: null,
+    extraActions: null,
+    lat: Number.isFinite(tapLat) ? tapLat : Number(poi?.lat ?? 0),
+    lng: Number.isFinite(tapLng) ? tapLng : Number(poi?.lng ?? 0),
+    spotKey: poi?.spot_key ?? null,
+  };
 }
 
 export function instantMapPlacePopup(opts: {
@@ -100,6 +152,14 @@ export function instantMapPlacePopup(opts: {
     poi ? { ...poi, facts } : null,
     category,
   );
+  const liveActions = deriveMapPlaceLiveActions({
+    name,
+    category,
+    tagsBlob: poi ? parseTagsBlob(poi) : `${name} ${category}`,
+  });
+  const { rating, ratingCount } = poi
+    ? readRatingFromPoi(poi)
+    : { rating: null, ratingCount: null };
   return {
     id: opts.id,
     name,
@@ -107,6 +167,9 @@ export function instantMapPlacePopup(opts: {
     bullets,
     websiteUrl: null,
     extraActions: null,
+    liveActions: liveActions.length ? liveActions : null,
+    rating,
+    ratingCount,
     lat,
     lng,
     spotKey: poi?.spot_key ?? null,
@@ -183,9 +246,62 @@ function firstWebsiteUrl(poi: Poi, facts: Fact[]): string | null {
   return url;
 }
 
+function parseTagsBlob(poi: Poi): string {
+  const parts: string[] = [poi.name ?? '', poi.category ?? ''];
+  const raw = poi.tags_json ?? '';
+  if (raw) {
+    try {
+      const arr = JSON.parse(raw);
+      if (Array.isArray(arr)) parts.push(arr.map(String).join(' '));
+      else parts.push(String(raw));
+    } catch {
+      parts.push(String(raw));
+    }
+  }
+  return parts.join(' ');
+}
+
+/** Pack-Rating aus tags_json lesen (`rating:4.3`, `ratings:120`). */
+function readRatingFromPoi(poi: Poi): {
+  rating: number | null;
+  ratingCount: number | null;
+} {
+  const raw = poi.tags_json ?? '';
+  if (!raw) return { rating: null, ratingCount: null };
+  let tags: string[] = [];
+  try {
+    const arr = JSON.parse(raw);
+    if (Array.isArray(arr)) tags = arr.map(String);
+  } catch {
+    /* soft */
+  }
+  let rating: number | null = null;
+  let ratingCount: number | null = null;
+  for (const t of tags) {
+    const rm = t.match(/^rating:(\d(?:[.,]\d)?)$/i);
+    if (rm) {
+      const v = Number(rm[1]!.replace(',', '.'));
+      if (Number.isFinite(v) && v > 0 && v <= 5) rating = v;
+      continue;
+    }
+    const cm = t.match(/^ratings?:(\d{1,7})$/i);
+    if (cm) {
+      const v = Number(cm[1]);
+      if (Number.isFinite(v) && v > 0) ratingCount = v;
+    }
+  }
+  return { rating, ratingCount };
+}
+
 function buildFromPoi(poi: Poi, facts: Fact[]): MapPlacePreview {
   const full = { ...poi, facts };
   const category = categoryLabelForPoi(poi);
+  const { rating, ratingCount } = readRatingFromPoi(poi);
+  const liveActions = deriveMapPlaceLiveActions({
+    name: poi.name,
+    category,
+    tagsBlob: parseTagsBlob(poi),
+  });
   return {
     id: poi.id,
     name: poi.name,
@@ -193,13 +309,16 @@ function buildFromPoi(poi: Poi, facts: Fact[]): MapPlacePreview {
     bullets: buildHomeMapPlaceBullets(full, poi.category),
     websiteUrl: firstWebsiteUrl(poi, facts),
     extraActions: null,
+    liveActions: liveActions.length ? liveActions : null,
+    rating,
+    ratingCount,
     lat: poi.lat,
     lng: poi.lng,
     spotKey: poi.spot_key,
   };
 }
 
-/** Maps nur wenn Google denselben Ort in der Nähe als Place führt. */
+/** Maps nur wenn Google denselben Ort in der NÃ¤he als Place fÃ¼hrt. */
 export async function enrichMapPlaceMapsIfListed(
   place: MapPlacePreview,
 ): Promise<void> {
@@ -287,23 +406,19 @@ export function prioritizeMapPlacePreview(
   if (id <= 0) return Promise.resolve(null);
   const hit = cache.get(id);
   if (hit) {
-    if (!hit.mapsLookedUp) void enrichMapPlaceMapsIfListed(hit);
+    // Kein Google-Places-Enrich mehr beim Tap â€” Popup bleibt Google-frei.
     return Promise.resolve(hit);
   }
   pending = [id, ...pending.filter((x) => x !== id)];
   tapBusy = true;
   return loadOne(id)
-    .then((place) => {
-      if (place) void enrichMapPlaceMapsIfListed(place);
-      return place;
-    })
     .finally(() => {
       tapBusy = false;
       void kickBackground();
     });
 }
 
-/** Sichtbare Pack-Orte vorwärmen (ohne Overlay-IDs). */
+/** Sichtbare Pack-Orte vorwÃ¤rmen (ohne Overlay-IDs). */
 export function prefetchVisibleMapPlaces(ids: number[]): void {
   const want = ids.filter((id) => Number.isFinite(id) && id > 0 && !cache.has(id));
   const head = pending[0];

@@ -9,8 +9,124 @@
  */
 
 import { looksLikeAddressOrCoordBullet } from '../../utils/addressPrivacy';
-import type { PoiWithFacts } from '../../db/types';
+import type { Poi, PoiWithFacts } from '../../db/types';
 import { parkingCostHintFromPoi } from './homeMapMobilityAmenity';
+
+/**
+ * Kuratierte Anzeige-Labels für Facet-/Specialty-Tags (Gastro + Hotel + Museum +
+ * Park + Aktivität). Nur Tags aus dieser Karte werden als Stichpunkt gezeigt —
+ * so bleibt Rausch (sourced_osm, map_outline, tier4 …) draußen.
+ */
+const FACET_LABELS: Record<string, string> = {
+  // Gastro / Küche
+  steak: 'Steak',
+  steakhouse: 'Steakhouse',
+  grill: 'Grill',
+  schnitzel: 'Schnitzel',
+  burger: 'Burger',
+  pizza: 'Pizza',
+  pasta: 'Pasta',
+  sushi: 'Sushi',
+  asiatisch: 'asiatisch',
+  italienisch: 'italienisch',
+  indisch: 'indisch',
+  vegan: 'vegan',
+  vegetarisch: 'vegetarisch',
+  fisch: 'Fisch',
+  pannfisch: 'Pannfisch',
+  labskaus: 'Labskaus',
+  döner: 'Döner',
+  doener: 'Döner',
+  frühstück: 'Frühstück',
+  fruehstueck: 'Frühstück',
+  terrasse: 'Terrasse',
+  biergarten: 'Biergarten',
+  fleisch: 'Fleisch',
+  angus: 'Angus',
+  wagyu: 'Wagyu',
+  fleckvieh: 'Fleckvieh',
+  zugrestaurant: 'Zugrestaurant',
+  // Getränke
+  weißbier: 'Weißbier',
+  weissbier: 'Weißbier',
+  craftbeer: 'Craft Beer',
+  cocktail: 'Cocktails',
+  // Ambiente / Arbeiten
+  wlan: 'WLAN',
+  steckdose: 'Steckdosen',
+  ruhig: 'ruhig',
+  // Hotel
+  parkplatz: 'Parkplatz',
+  familie: 'familienfreundlich',
+  zentral: 'zentral',
+  spa: 'Spa',
+  hundefreundlich: 'hundefreundlich',
+  // Museum
+  kinderfreundlich: 'kinderfreundlich',
+  ausstellung: 'Ausstellung',
+  // Park
+  spielplatz: 'Spielplatz',
+  picknick: 'Picknick',
+  hundewiese: 'Hundewiese',
+  aussicht: 'Aussicht',
+  // Aktivität
+  anfaenger: 'für Anfänger',
+  anfänger: 'für Anfänger',
+  ausruestung: 'Ausrüstung vor Ort',
+  ausrüstung: 'Ausrüstung vor Ort',
+  buchbar: 'buchbar',
+};
+
+const FACET_META_TAGS = new Set([
+  'directory',
+  'tier4',
+  'offline_lookup',
+  'optional_live',
+  'auto_polish',
+  'story',
+  'review_facet',
+  'module1',
+  'master_report',
+  'must_have',
+  'map_outline',
+  'sourced_osm',
+]);
+
+/** Facet-/Specialty-Stichpunkt aus tags_json bauen ("Gäste nennen oft: …"). */
+function facetBulletFromPoi(poi: Poi | null | undefined): string | null {
+  const raw = poi?.tags_json ?? '';
+  if (!raw) return null;
+  let tags: string[] = [];
+  try {
+    const arr = JSON.parse(raw);
+    if (Array.isArray(arr)) tags = arr.map((t) => String(t).toLowerCase().trim());
+  } catch {
+    return null;
+  }
+  if (!tags.length) return null;
+  const fromReviews = tags.includes('review_facet');
+  const labels: string[] = [];
+  const seen = new Set<string>();
+  for (const t of tags) {
+    if (FACET_META_TAGS.has(t)) continue;
+    const label = FACET_LABELS[t];
+    if (!label) continue;
+    const key = label.toLowerCase();
+    if (seen.has(key)) continue;
+    seen.add(key);
+    labels.push(label);
+    if (labels.length >= 3) break;
+  }
+  if (!labels.length) return null;
+  const lead = fromReviews ? 'Gäste nennen oft' : 'Bekannt für';
+  let line = `${lead}: ${labels.join(', ')}`;
+  // Bei Überlänge Tags reduzieren statt mitten im Wort schneiden.
+  while (line.length > 72 && labels.length > 1) {
+    labels.pop();
+    line = `${lead}: ${labels.join(', ')}`;
+  }
+  return line.length <= 74 ? line : null;
+}
 
 const TAG_RE =
   /^\[(?:Erzählung|Detail|Teaser|Kurzfakt|FAQ|Hook|Narration|Thema:[^\]]+)\]\s*/i;
@@ -352,14 +468,26 @@ export function buildHomeMapPlaceBullets(
     if (uniq.some((u) => u.toLowerCase() === t.toLowerCase())) continue;
     uniq.push(t);
   }
-  if (uniq.length >= 2) return uniq.slice(0, 2);
+  const facetBullet = facetBulletFromPoi(poi);
+
+  if (uniq.length >= 2) {
+    if (facetBullet && !uniq.some((u) => u === facetBullet)) {
+      // Facet-Zeile bevorzugt als Bullet 2, ursprüngliches „Warum“ dahinter.
+      return [uniq[0]!, facetBullet, uniq[1]!].slice(0, 3);
+    }
+    return uniq.slice(0, 2);
+  }
   if (uniq.length === 1) {
+    if (facetBullet && facetBullet !== uniq[0]) {
+      return [uniq[0]!, facetBullet];
+    }
     const parkHint = poi ? parkingCostHintFromPoi(poi) : null;
     if (parkHint && !uniq[0]!.toLowerCase().includes('kostenlos')) {
       return [uniq[0]!, compactLine(parkHint, WHY_MAX)];
     }
     return uniq;
   }
+  if (facetBullet) return [facetBullet];
   const parkHint = poi ? parkingCostHintFromPoi(poi) : null;
   if (parkHint) return [compactLine(parkHint, WHAT_MAX)];
   return [];
@@ -386,6 +514,14 @@ export function categoryLabelForPoi(poi: {
   if (/hotel|hostel/.test(blob)) return 'Hotel';
   if (/briefkasten|post_box|mailbox/.test(blob)) return 'Briefkasten';
   if (/packstation|parcel_locker|paketautomat/.test(blob)) return 'Packstation';
+  // Bushaltestelle statt „bahnhof“, wenn Tags Bus/Transit ohne Schiene meinen.
+  const hasRail =
+    /\bbahnhof\b|haltepunkt|hbf|s-?bahn|u-?bahn|\brail\b|\bzug\b|gleis|train|tram|stra[ßs]enbahn/.test(
+      blob,
+    );
+  if (/bus_stop|\bbus\b|busbahnhof|\bzob\b/.test(blob) && !hasRail) {
+    return 'Bushaltestelle';
+  }
   if (/bahnhof|haltepunkt|haltestelle|bus/.test(blob)) return 'ÖPNV';
   if (/praxis|arzt|zahn|gesundheit/.test(blob)) return 'Gesundheit';
   if (/feuerwehr/.test(blob)) return 'Feuerwehr';

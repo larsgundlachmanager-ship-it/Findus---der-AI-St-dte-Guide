@@ -1,0 +1,68 @@
+---
+description: Karte — Protomaps-Basiskarte + Yorro-Overlays LOCK, kein Kamera-Snap
+alwaysApply: true
+---
+
+# Findus — Karte: Maps-Verfassung LOCK
+
+**Vertrag:** `npm run test:map-releases` (mapLoadPhases + mapTileConfig + nativeHomeMap smokes)
+
+Live bewährt (2.0.63+): freie Pan/Zoom **ohne** GPS-Rücksprung, Straßen aus Protomaps, Orte/Städte/Route darüber.
+
+## Architektur (Default — nicht umbauen)
+
+```
+Protomaps Style v5 (Fetch → JSON-Objekt → Yorro-Recolor)
+        ↑ Basiskarte (Straßen, Gebäude, Wasser, Labels)
+Yorro ShapeSources darüber: Orte · Städte · Route · GPS · Fog
+```
+
+1. **Basiskarte** — `loadYorroProtomapsBasemapStyle()` in `yorroProtomapsBasemapStyle.ts`  
+   Style **als Objekt** an `MapView.mapStyle` (nicht nur remote styleURL — Android sonst oft ohne Straßen).  
+   Quelle: `resolveProtomapsStyleUrl()` → `styles/v5/{theme}/{lang}.json?key=…`  
+   Farben: `recolorProtomapsStyleForYorro` (grün/gelb aus `homeMapStyle.ts`).
+
+2. **Overlays** — Pack-gated Orte/Icons, Städte, Route, GPS-Puck. Einmal nach Pack-Ready, dann still. Filter = Layer-Filter, kein GeoJSON-Rebuild.
+
+3. **Kamera-Verfassung** — Zentrum nur Boot / Recenter-Button / Nav-Fit / Follow-Lock.  
+   Kein `syncDefaultStop` nach Boot, kein `setCamera`-Hold nach Layer-Paint, Finger-up ohne Gegenwehr.
+
+4. **Vector Default an** wenn `EXPO_PUBLIC_PROTOMAPS_API_KEY` (oder R2/PMTiles) gesetzt — außer `EXPO_PUBLIC_MAP_VECTOR_TILES=0`.
+
+## Env SSOT
+
+- `EXPO_PUBLIC_PROTOMAPS_API_KEY` — Pflicht für Hosted-Basiskarte  
+- `EXPO_PUBLIC_PROTOMAPS_THEME` — default `dark`  
+- `EXPO_PUBLIC_PROTOMAPS_LANG` — default `de`  
+- `EXPO_PUBLIC_MAP_VECTOR_TILES=0` — **Notausgang** Legacy Extract (Snap-Risiko, nicht Default)
+
+## Legacy Extract (nur `MAP_VECTOR_TILES=0`)
+
+Stadtwechsel genau 3 Releases: R1 Straßen → R2 Orte → R3 Rest + Freeze.  
+Danach: kein Pan-Reclip, kein Force-Repaint. Siehe historisch `mapLoadPhases.ts`.
+
+## Datei-Besitz
+
+| Thema | Datei |
+|---|---|
+| Style-URL / Vector-Flag | `mapTileConfig.ts` |
+| Fetch + Recolor | `yorroProtomapsBasemapStyle.ts` |
+| MapView + Kamera | `NativeHomeMapView.tsx`, `YorroHomeCamera.tsx` |
+| Overlays / Boot | `HomePresenceMap.tsx` |
+| Legacy-Layer ausblenden | `MapLayerGate.tsx` |
+| Custom-Style nur R2/PMTiles | `yorroVectorMapStyle.ts` |
+
+## Verboten
+
+- Zurück auf GeoJSON-Extract als Default „weil einfacher“
+- Remote `mapStyle={styleUrl}` ohne Fetch-Objekt als einziger Pfad (Android: leere Straßen)
+- `syncDefaultStop` / `setCamera`-Hold nach Places/Extract-Paint
+- ShapeSource-Sturm während Pan (Places/Cities/Extract Re-Inject)
+- Doppel-Paint Near→Final im Legacy-Pfad
+- Pflicht-Sätze / Orts-Hardcodes in Map-Prompts
+
+## Härten statt ersetzen
+
+Bug „keine Straßen“ → Fetch/Recolor/Key/Netz.  
+Bug „Kamera-Snap“ → Kamera-Verfassung / Overlay-Injects.  
+Nicht zweites Map-System, nicht TTS-/Kernel-Umbau als Map-Fix.

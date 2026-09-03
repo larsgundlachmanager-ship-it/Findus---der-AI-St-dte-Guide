@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 /**
- * Story-Orte: echte OSM-Gebäude-/Platz-Umrisse (wie Prisdorf), keine GPS-Box.
+ * Story- + Directory-Orte: echte OSM-Gebäude-/Platz-Umrisse (wie Prisdorf), keine GPS-Box.
+ * Map-Point-Amenities (Haltestelle, Briefkasten, Toilette, Trinkwasser, ATM, Aussicht) bleiben Punkte.
  *
  *   node scripts/cityPack/snapOsmStoryFootprints.mjs --city laboe
  *   node scripts/cityPack/snapOsmStoryFootprints.mjs --all
@@ -24,6 +25,45 @@ import { fetchJson, sleep, fetchNominatimPolygon } from '../geo/osm.mjs';
 
 const SKIP_NAME_RE =
   /stadtgeschichte|strassenverzeichnis|strassen_gestern|gestern_heute|virtuell/i;
+
+/** Punkt-POIs — kein Gebäude-Fill (Haltestelle, Briefkasten, WC, …). */
+const MAP_POINT_CATS = new Set([
+  'toilette',
+  'trinkwasser',
+  'briefkasten',
+  'post_box',
+  'aussicht',
+  'viewpoint',
+  'atm',
+  'geldautomat',
+  'haltestelle',
+  'bus_stop',
+]);
+const MAP_POINT_TAGS = new Set([
+  'map_point',
+  'transit',
+  'post_box',
+  'briefkasten',
+  'toilette',
+  'toilets',
+  'drinking_water',
+  'viewpoint',
+  'atm',
+  'bus_stop',
+  'haltestelle',
+]);
+
+function isMapPointAmenity(spot) {
+  const tags = (spot.tags || []).map((t) => String(t).toLowerCase());
+  if (tags.includes('map_point')) return true;
+  if (tags.some((t) => MAP_POINT_TAGS.has(t))) return true;
+  const cat = String(spot.category || spot.district || '').toLowerCase();
+  if (MAP_POINT_CATS.has(cat)) return true;
+  const blob = `${spot.id || ''} ${spot.name || ''} ${cat}`.toLowerCase();
+  return /briefkasten|post.?box|bus.?halt|bushaltestelle|haltestelle|trinkwasser|toilette|viewpoint|aussichtspunkt|atm|geldautomat/.test(
+    blob,
+  );
+}
 
 function listCityIds() {
   const indexPath = path.join(STAEDTE_DIR, 'index.json');
@@ -148,9 +188,7 @@ function alreadyOsm(spot) {
 }
 
 function needsSnap(spot, pack) {
-  if (spot.pack_role === 'directory' || Number(spot.place_tier) === 4) {
-    return false;
-  }
+  if (isMapPointAmenity(spot)) return false;
   const blob = `${spot.id || ''} ${spot.name || ''}`;
   if (SKIP_NAME_RE.test(blob)) return false;
   const poly = spot.polygonCoordinates || spot.polygon;
@@ -178,7 +216,7 @@ function sharedFootprint(pack, spot) {
   const key = `${a.lat.toFixed(5)},${a.lng.toFixed(5)}#${poly.length}`;
   let n = 0;
   for (const s of pack.spots || []) {
-    if (s === spot || s.pack_role === 'directory') continue;
+    if (s === spot) continue;
     const p = s.polygonCoordinates || s.polygon;
     if (!p || p.length !== poly.length) continue;
     const b = toLatLng(p[0]);
@@ -445,24 +483,22 @@ async function processCity(cityId, { dry, skipUpload }) {
     console.warn(`[osm-foot] skip missing ${cityId}`);
     return { cityId, saved: false, rows: [] };
   }
-  const stories = (pack.spots || []).filter(
-    (s) => s.pack_role !== 'directory' && Number(s.place_tier) !== 4,
-  );
+  const spots = pack.spots || [];
   const used = new Set();
-  for (const s of stories) {
+  for (const s of spots) {
     if (sharedFootprint(pack, s)) continue;
     const fp = ringFingerprint(s.polygonCoordinates || s.polygon);
     if (fp) used.add(fp);
   }
   const targets = [];
-  for (const spot of stories) {
+  for (const spot of spots) {
     if (!needsSnap(spot, pack)) continue;
     const pin = spotPin(pack, spot);
     if (!pin) continue;
     targets.push({ spot, pin });
   }
   if (!targets.length) {
-    console.log(`[osm-foot] ${cityId}: alle Story-Umrisse schon da`);
+    console.log(`[osm-foot] ${cityId}: alle Spot-Umrisse schon da`);
     return { cityId, saved: false, rows: [] };
   }
 

@@ -19,13 +19,20 @@ import {
   placesTextIdsOnly,
   placeDetailsReviews,
   requireGoogleKey,
+  googleBudgetExceeded,
+  googleSpendEstUsd,
+  googleBudgetCapEur,
 } from './google.mjs';
 import { extractReviewFacetTags } from './reviewFacetTags.mjs';
 
 loadEnvFile();
 
-const GASTRO_RE =
-  /restaurant|cafe|café|gastro|bistro|imbiss|bar|pub|gasthof|gasthaus|landgasthof|wirtshaus|hotel|pension|bakery|bäck|baeck|pizzeria|trattoria|osteria|grill/i;
+// Facet-Ziele: Gastro + Hotel + Museum + Park + Aktivität (Leisure) + Attraktion.
+const FACET_TARGET_RE =
+  /restaurant|cafe|café|gastro|bistro|imbiss|bar|pub|gasthof|gasthaus|landgasthof|wirtshaus|hotel|pension|hostel|bakery|bäck|baeck|pizzeria|trattoria|osteria|grill|museum|ausstellung|galerie|kunsthalle|park|garten|leisure|freizeit|kletter|boulder|schwimmbad|freibad|hallenbad|minigolf|bowling|kino|theater|sport|fitness|attraction|sehensw|aussicht|zoo|tierpark|wasserski|surf/i;
+
+// Toiletten: nur OSM-Tags (Directory-Expand) — kein teures Google hier.
+const TOILET_RE = /toilette|\btoilet\b|\bwc\b|klohaus|sanit[aä]r|pissoir/i;
 
 const META_TAGS = new Set([
   'directory',
@@ -39,9 +46,14 @@ const META_TAGS = new Set([
   'master_report',
 ]);
 
-function isGastroSpot(spot) {
-  const blob = `${spot.category || ''} ${(spot.tags || []).join(' ')} ${spot.name || ''}`;
-  return GASTRO_RE.test(blob);
+function spotBlob(spot) {
+  return `${spot.category || ''} ${(spot.tags || []).join(' ')} ${spot.name || ''}`;
+}
+
+function isFacetTargetSpot(spot) {
+  const blob = spotBlob(spot);
+  if (TOILET_RE.test(blob)) return false; // OSM-only, kein Google
+  return FACET_TARGET_RE.test(blob);
 }
 
 function mergeTags(existing, extra) {
@@ -54,6 +66,29 @@ function placeIdOf(spot) {
 
 function facetLine(facets) {
   return `Gäste erwähnen regelmäßig: ${facets.join(', ')}. (Review-Facetten, keine Preise.)`;
+}
+
+/** Rating aus Google-Details in Pack (spot._google) + Runtime-Tags schreiben. */
+function applyRating(spot, det) {
+  const rating = Number(det?.result?.rating);
+  const count = Number(det?.result?.user_ratings_total);
+  const hasRating = Number.isFinite(rating) && rating > 0 && rating <= 5;
+  const hasCount = Number.isFinite(count) && count > 0;
+  if (!hasRating && !hasCount) return;
+  spot._google = { ...(spot._google || {}) };
+  if (hasRating) spot._google.rating = Math.round(rating * 10) / 10;
+  if (hasCount) spot._google.user_ratings_total = Math.round(count);
+  // Runtime-Tags, damit das Popup Rating ohne Google zeigen kann.
+  const ratingTags = [];
+  if (hasRating) ratingTags.push(`rating:${(Math.round(rating * 10) / 10).toFixed(1)}`);
+  if (hasCount) ratingTags.push(`ratings:${Math.round(count)}`);
+  if (ratingTags.length) {
+    // Alte rating:/ratings:-Tags entfernen, dann neu setzen.
+    spot.tags = (spot.tags || []).filter(
+      (t) => !/^ratings?:/i.test(String(t)),
+    );
+    spot.tags = mergeTags(spot.tags, ratingTags);
+  }
 }
 
 function applyFacets(pack, spot, facets, placeId) {
@@ -113,17 +148,37 @@ async function main() {
   const cheap = packCostIsCheap();
   const cap = Number(arg('limit') || (cheap ? 40 : 120));
   const force = hasFlag('force');
-  const gastro = (pack.spots || []).filter(isGastroSpot);
-  const todo = gastro.filter((s) => force || !(s.tags || []).includes('review_facet'));
+  const targets = (pack.spots || []).filter(isFacetTargetSpot);
+  const todo = targets.filter((s) => {
+    if (force) return true;
+    if (!(s.tags || []).includes('review_facet')) return true;
+    // Rating nachziehen, wenn Facetten schon da sind.
+    const r = Number(s?._google?.rating);
+    return !(Number.isFinite(r) && r > 0);
+  });
   const slice = todo.slice(0, cap);
 
   console.log(
-    `[review-facets] ${cityId} gastro=${gastro.length} pending=${todo.length} cap=${cap} mode=${cheap ? 'cheap' : 'full'}`,
+    `[review-facets] ${cityId} targets=${targets.length} pending=${todo.length} cap=${cap} budget=€${googleBudgetCapEur()} mode=${cheap ? 'cheap' : 'full'}`,
   );
 
-  const stats = { tagged: 0, empty: 0, fail: 0, skip: gastro.length - todo.length };
+  const stats = {
+    tagged: 0,
+    empty: 0,
+    fail: 0,
+    skip: targets.length - todo.length,
+    budgetStop: false,
+  };
 
   for (const spot of slice) {
+    // Budget-Wächter: vor jeder teuren Details-Abfrage prüfen.
+    if (googleBudgetExceeded()) {
+      stats.budgetStop = true;
+      console.warn(
+        `[review-facets] BUDGET STOP: est $${googleSpendEstUsd().toFixed(2)} ≥ €${googleBudgetCapEur()} — restliche ${slice.length - (stats.tagged + stats.empty + stats.fail)} Spots übersprungen.`,
+      );
+      break;
+    }
     try {
       const placeId = await resolvePlaceId(spot, pack);
       if (!placeId) {
@@ -131,6 +186,7 @@ async function main() {
         continue;
       }
       const det = await placeDetailsReviews(placeId);
+      applyRating(spot, det);
       const reviews = det.result?.reviews || [];
       const blob = [
         det.result?.editorialSummary || '',
@@ -155,7 +211,7 @@ async function main() {
 
   savePack(pack, { bumpVersion: true });
   console.log(
-    `[review-facets] tagged=${stats.tagged} empty=${stats.empty} fail=${stats.fail} already=${stats.skip}`,
+    `[review-facets] tagged=${stats.tagged} empty=${stats.empty} fail=${stats.fail} already=${stats.skip}${stats.budgetStop ? ' [BUDGET-CAPPED]' : ''} est=$${googleSpendEstUsd().toFixed(2)}`,
   );
 }
 

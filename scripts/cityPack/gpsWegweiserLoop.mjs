@@ -3,7 +3,7 @@
  * Pflicht-Schleife für jede Stadt nach Pack-Build / Research-Merge:
  *   1) Story-GPS → Google-Navigationspin / Haupteingang (--story-only)
  *   2) Wegweiser visuell härten (2 Approaches, Teaser, FAQ, Entrance-Sub)
- *   3) OSM-Gebäude-/Platz-Umrisse für Story-Orte (wie Prisdorf)
+ *   3) OSM-Gebäude-/Platz-Umrisse für Story- + Directory-Orte (Map-Points ausgenommen)
  *
  * Usage:
  *   node scripts/cityPack/gpsWegweiserLoop.mjs --city luebeck
@@ -49,14 +49,15 @@ export function runGpsWegweiserLoop(cityId) {
     ['--city', cityId, '--no-upload'],
     { fatal: false },
   );
-  if (hasFlag('skip-map')) {
-    console.log(`[gps-wegweiser] skip offline-map ${cityId}`);
-  } else {
+  if (hasFlag('with-offline-map')) {
     runStep(
       'buildCityOfflineMap.mjs',
       ['--city', cityId, '--no-upload'],
       { fatal: false },
     );
+  } else {
+    // Protomaps-Weltkarte ist SSOT — kein *.map.json mehr mit dem Pack.
+    console.log(`[gps-wegweiser] skip offline-map ${cityId} (Protomaps)`);
   }
   console.log(`[gps-wegweiser] done ${cityId}`);
 }

@@ -318,7 +318,11 @@ const OSM_DIRECTORY_FILTERS = [
   { overpass: 'historic=wayside_cross', category: 'denkmal' },
   { overpass: 'historic=wayside_shrine', category: 'denkmal' },
   { overpass: 'amenity=toilets', category: 'toilette' },
-  { overpass: 'amenity=drinking_water', category: 'wasser' },
+  { overpass: 'amenity=drinking_water', category: 'trinkwasser' },
+  { overpass: 'amenity=post_box', category: 'briefkasten' },
+  { overpass: 'amenity=atm', category: 'atm' },
+  { overpass: 'highway=bus_stop', category: 'haltestelle' },
+  { overpass: 'tourism=viewpoint', category: 'aussicht' },
   { overpass: 'tourism=information', category: 'tourist_info' },
   { overpass: 'amenity=marketplace', category: 'markt' },
   { overpass: 'shop=gift', category: 'souvenir' },
@@ -334,6 +338,25 @@ function osmElementLatLng(el) {
   return null;
 }
 
+function osmDirectoryTags(tags = {}) {
+  const pick = [
+    'opening_hours',
+    'website',
+    'collection_times',
+    'network',
+    'operator',
+    'brand',
+    'cuisine',
+    'wheelchair',
+    'changing_table',
+    'fee',
+  ];
+  const out = {};
+  for (const k of pick) {
+    if (tags[k] != null && String(tags[k]).trim()) out[k] = String(tags[k]).trim();
+  }
+  return out;
+}
 function osmCategoryForTags(tags = {}) {
   for (const f of OSM_DIRECTORY_FILTERS) {
     const [k, v] = f.overpass.split('=');
@@ -373,6 +396,10 @@ export async function fetchOsmDirectory(lat, lng, radiusM = 7000) {
       types: [],
       category,
       source: 'osm',
+      osm_tags: osmDirectoryTags(tags),
+      amenity: tags.amenity || null,
+      highway: tags.highway || null,
+      railway: tags.railway || null,
     });
   }
   return out;

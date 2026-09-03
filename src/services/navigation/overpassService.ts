@@ -12,6 +12,10 @@ export type OsmPlace = {
   distanceM: number;
   openNow: boolean;
   rating: null;
+  /** Roher OSM `opening_hours`-String (z. B. "Mo-Fr 09:00-18:00"), wenn getaggt. */
+  openingHours: string | null;
+  /** OSM `website` / `contact:website`, wenn getaggt. */
+  website: string | null;
 };
 
 const OVERPASS_ENDPOINTS = [
@@ -329,6 +333,14 @@ function elementToPlace(
   }
   const distanceM = Math.round(haversine(originLat, originLng, lat, lng));
   const placeId = `osm:${el.type ?? 'n'}:${el.id ?? `${lat.toFixed(5)},${lng.toFixed(5)}`}`;
+  const openingHours = (tags.opening_hours ?? '').trim() || null;
+  const website =
+    (
+      tags.website ??
+      tags['contact:website'] ??
+      tags.url ??
+      ''
+    ).trim() || null;
   return {
     placeId,
     name,
@@ -340,6 +352,8 @@ function elementToPlace(
     distanceM,
     openNow: openNowFromOsmTags(tags),
     rating: null,
+    openingHours,
+    website,
   };
 }
 

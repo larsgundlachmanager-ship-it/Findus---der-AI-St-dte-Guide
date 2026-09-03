@@ -69,6 +69,77 @@ const REVIEW_FACET_DEFS: FacetDef[] = [
     tag: 'zugrestaurant',
     re: /zugrestaurant|zug[\s-]?restaurant|bahnrestaurant|speisewagen|dining[\s-]?car|restaurantwagen|eisenbahn[\s-]?(?:restaurant|wirtshaus|gasthof)/i,
   },
+  { tag: 'labskaus', re: /\blabskaus\b/i },
+  // Getränke
+  { tag: 'weißbier', re: /wei[ßs]bier|hefewei[ßs]en|weizenbier|hefeweizen/i },
+  {
+    tag: 'craftbeer',
+    re: /craft.?beer|craft.?bier|hausbrauerei|mikrobrauerei|india\s+pale\s+ale|\bipa\b|pale\s+ale|brewpub|brauhaus/i,
+  },
+  {
+    tag: 'cocktail',
+    re: /\bcocktails?\b|cocktailbar|\blongdrinks?\b|caipirinha|mojito|gin.?tonic|aperol/i,
+  },
+  // Hotel
+  {
+    tag: 'parkplatz',
+    re: /\bparkplatz\b|parkpl[aä]tze|kostenlos(?:e|es)?\s+park|tiefgarage|hotelparkplatz|eigene?\s+parkpl|parkm[oö]glichkeit/i,
+  },
+  {
+    tag: 'familie',
+    re: /famili(?:e|en)freundlich|f[uü]r\s+famili|family.?friendly|familienzimmer/i,
+  },
+  {
+    tag: 'zentral',
+    re: /\bzentral\b|zentrale\s+lage|zentrumsnah|mitten\s+im\s+zentrum|innenstadtlage|zentrumslage/i,
+  },
+  {
+    tag: 'spa',
+    re: /\bspa\b|wellness|\bsauna\b|dampfbad|whirlpool|thermalbad/i,
+  },
+  {
+    tag: 'hundefreundlich',
+    re: /hundefreundlich|hunde\s+(?:erlaubt|willkommen)|dog.?friendly|haustiere?\s+erlaubt/i,
+  },
+  // Museum
+  {
+    tag: 'kinderfreundlich',
+    re: /kinderfreundlich|f[uü]r\s+kinder|kinderprogramm|mitmach|familienausstellung/i,
+  },
+  {
+    tag: 'ausstellung',
+    re: /ausstellung|sonderausstellung|dauerausstellung|exponat|ausgestellt/i,
+  },
+  // Park
+  {
+    tag: 'spielplatz',
+    re: /\bspielplatz\b|spielpl[aä]tze|spielger[aä]t|kletterger[uü]st|sandkasten/i,
+  },
+  {
+    tag: 'picknick',
+    re: /\bpicknick\b|picknickplatz|picknickwiese|picknicken|liegewiese/i,
+  },
+  {
+    tag: 'hundewiese',
+    re: /hundewiese|hundeauslauf|hunde(?:auslauf)?freilauf|freilauffl[aä]che/i,
+  },
+  {
+    tag: 'aussicht',
+    re: /\baussicht\b|ausblick|panorama|aussichtspunkt|blick\s+[uü]ber/i,
+  },
+  // Aktivität
+  {
+    tag: 'anfaenger',
+    re: /anf[aä]nger|einsteiger|beginner|schnupperkurs|f[uü]r\s+einsteiger/i,
+  },
+  {
+    tag: 'ausruestung',
+    re: /ausr[uü]stung|leihausr[uü]stung|equipment|material\s+gestellt|leihmaterial/i,
+  },
+  {
+    tag: 'buchbar',
+    re: /\bbuchbar\b|online\s+buchen|voranmeldung|kurse?\s+buchen|termin\s+buchen|reservierung\s+n[oö]tig/i,
+  },
 ];
 
 function extraBlob(extra?: string | string[] | null): string {

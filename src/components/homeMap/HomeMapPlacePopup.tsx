@@ -35,6 +35,10 @@ import { useFinnusStore } from '../../store/useFinnusStore';
 import { useHomeMapUiStore } from '../../store/useHomeMapUiStore';
 import { noteUiVisible } from '../../services/diagnostics/interactionDelay';
 import type { MapPlacePreview } from '../../services/homeMap/mapPlacePreview';
+import {
+  runMapPlaceLiveAction,
+  type MapPlaceLiveActionId,
+} from '../../services/homeMap/mapPlaceLiveActions';
 import { isEstablishedGoogleMapsPlaceUrl } from '../../services/research/eventInfoUrl';
 import {
   airNeedsTransitLookahead,
@@ -79,6 +83,11 @@ export const HomeMapPlacePopup = React.memo(function HomeMapPlacePopup({
 }: Props) {
   const [busy, setBusy] = useState(false);
   const busyRef = React.useRef(false);
+  const [liveBusyId, setLiveBusyId] = useState<MapPlaceLiveActionId | null>(
+    null,
+  );
+  const [liveBullets, setLiveBullets] = useState<string[]>([]);
+  const [liveNote, setLiveNote] = useState<string | null>(null);
   const safePad = useSystemSafePad();
   const buttonMul = useUiScaleStore((s) => s.buttonMul);
   const navActive = useFinnusStore((s) => s.navActive);
@@ -251,9 +260,81 @@ export const HomeMapPlacePopup = React.memo(function HomeMapPlacePopup({
     void Linking.openURL(u);
   }, []);
 
+  // Live-Ergebnisse zurücksetzen, wenn ein anderer Ort geöffnet wird.
+  const placeKey = place ? place.id : null;
+  useEffect(() => {
+    setLiveBusyId(null);
+    setLiveBullets([]);
+    setLiveNote(null);
+  }, [placeKey]);
+
+  const speakBrief = useCallback((text: string) => {
+    const t = (text || '').trim();
+    if (!t) return;
+    void import('../../services/ttsService')
+      .then((m) => m.speakAssistantText(t))
+      .catch(() => undefined);
+  }, []);
+
+  const runLiveAction = useCallback(
+    (action: MapPlaceLiveActionId) => {
+      if (!place || liveBusyId) return;
+      setLiveBusyId(action);
+      setLiveNote(null);
+      const profile = getCachedUserProfile();
+      void (async () => {
+        try {
+          const result = await runMapPlaceLiveAction(action, {
+            id: place.id,
+            name: place.name,
+            category: place.category,
+            lat: Number(place.lat),
+            lng: Number(place.lng),
+            websiteUrl: place.websiteUrl ?? null,
+            city: profile?.cityName ?? profile?.cityId ?? null,
+            tagsBlob: place.category ?? null,
+          });
+          if (result.url) {
+            openUrl(result.url);
+          }
+          if (result.bullets?.length) {
+            setLiveBullets((prev) => {
+              const merged = [...prev];
+              for (const b of result.bullets ?? []) {
+                if (b && !merged.includes(b)) merged.push(b);
+              }
+              return merged.slice(0, 4);
+            });
+          }
+          if (!result.ok && result.message) {
+            setLiveNote(result.message);
+          } else if (result.message && !result.url) {
+            setLiveNote(result.message);
+          }
+          if (result.speak) speakBrief(result.speak);
+        } catch {
+          setLiveNote('Das hat gerade nicht geklappt. Versuch es nochmal.');
+        } finally {
+          setLiveBusyId(null);
+        }
+      })();
+    },
+    [liveBusyId, openUrl, place, speakBrief],
+  );
+
   if (!place) return null;
 
-  const bullets = (place.bullets ?? []).slice(0, 2);
+  const bullets = (place.bullets ?? []).slice(0, 3);
+  const ratingValue =
+    typeof place.rating === 'number' && place.rating > 0 ? place.rating : null;
+  const ratingLine = ratingValue
+    ? `★ ${ratingValue.toFixed(1)}${
+        place.ratingCount && place.ratingCount > 0
+          ? ` · ${place.ratingCount} Bewertungen`
+          : ''
+      }`
+    : null;
+  const liveActions = place.liveActions ?? [];
   const linkActions: HomeMapPopupAction[] = [];
   const seen = new Set<string>();
   const pushLink = (label: string, url: string | null | undefined) => {
@@ -263,7 +344,13 @@ export const HomeMapPlacePopup = React.memo(function HomeMapPlacePopup({
     linkActions.push({ label, url: u });
   };
   pushLink('Webseite', listedPopupUrl(place.websiteUrl));
+  // Maps nur bei Restaurants/Cafés — Hotels/ÖPNV/Museum bleiben in-app
+  // bzw. über Affiliate-Buttons (Buchen/Tickets).
+  const allowMaps = /\b(restaurant|caf[eé]|bistro|imbiss|pizzeria|gasthof|gasthaus|wirtshaus|trattoria|osteria|bar|pub|kneipe|b[aä]ck|baeck|bakery|steakhouse)\b/i.test(
+    `${place.name} ${place.category}`,
+  );
   for (const a of place.extraActions ?? []) {
+    if (/^maps$/i.test(a.label) && !allowMaps) continue;
     pushLink(a.label, listedPopupUrl(a.url));
   }
 
@@ -297,11 +384,18 @@ export const HomeMapPlacePopup = React.memo(function HomeMapPlacePopup({
           {place.name}
         </Text>
         <Text style={styles.cat}>{place.category}</Text>
+        {ratingLine ? <Text style={styles.rating}>{ratingLine}</Text> : null}
         {bullets.map((b, i) => (
           <Text key={i} style={styles.bullet} numberOfLines={3}>
             · {b}
           </Text>
         ))}
+        {liveBullets.map((b, i) => (
+          <Text key={`live_${i}`} style={styles.bulletLive} numberOfLines={3}>
+            · {b}
+          </Text>
+        ))}
+        {liveNote ? <Text style={styles.note}>{liveNote}</Text> : null}
         <View style={styles.row}>
           {retarget ? (
             <>
@@ -369,6 +463,35 @@ export const HomeMapPlacePopup = React.memo(function HomeMapPlacePopup({
             </>
           )}
         </View>
+        {liveActions.length > 0 ? (
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles.linkRow}
+          >
+            {liveActions.map((a) => {
+              const active = liveBusyId === a.id;
+              return (
+                <Pressable
+                  key={`live_${a.id}`}
+                  style={[styles.btn, styles.btnSecondary, styles.linkBtn]}
+                  onPress={() => runLiveAction(a.id)}
+                  disabled={liveBusyId != null}
+                  accessibilityRole="button"
+                  accessibilityLabel={a.label}
+                >
+                  {active ? (
+                    <ActivityIndicator color={colors.text} />
+                  ) : (
+                    <Text style={styles.btnSecondaryText} numberOfLines={1}>
+                      {a.label}
+                    </Text>
+                  )}
+                </Pressable>
+              );
+            })}
+          </ScrollView>
+        ) : null}
         {linkActions.length > 0 ? (
           <ScrollView
             horizontal
@@ -427,11 +550,30 @@ const styles = StyleSheet.create({
     marginTop: 4,
     marginBottom: 8,
   },
+  rating: {
+    color: colors.text,
+    fontSize: 13,
+    fontWeight: '600',
+    marginBottom: 6,
+  },
   bullet: {
     color: colors.textMuted,
     fontSize: 14,
     lineHeight: 20,
     marginBottom: 4,
+  },
+  bulletLive: {
+    color: colors.text,
+    fontSize: 14,
+    lineHeight: 20,
+    marginBottom: 4,
+  },
+  note: {
+    color: colors.textMuted,
+    fontSize: 12,
+    fontStyle: 'italic',
+    marginTop: 2,
+    marginBottom: 2,
   },
   row: {
     flexDirection: 'row',

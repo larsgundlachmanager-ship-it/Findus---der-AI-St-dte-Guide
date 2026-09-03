@@ -22,7 +22,7 @@ const PLACES_FIELD_MASK_ID = 'places.id';
 const DETAILS_FIELD_MASK_ESSENTIALS =
   'id,displayName,location,formattedAddress,types,googleMapsUri';
 const DETAILS_FIELD_MASK_REVIEWS =
-  'id,displayName,types,editorialSummary,reviews.text,reviews.rating';
+  'id,displayName,types,editorialSummary,rating,userRatingCount,reviews.text,reviews.rating';
 
 const CACHE_PATH = path.join(STAEDTE_DIR, '.places-cache.json');
 const CACHE_TTL_MS = 30 * 24 * 60 * 60 * 1000;
@@ -56,6 +56,41 @@ function logCost(reason = 'done') {
 }
 
 process.on('exit', () => logCost('exit'));
+
+/**
+ * Budget-Wächter. Cap in EUR aus FINDUS_GOOGLE_BUDGET_EUR (Default 50).
+ * Vergleich konservativ gegen die geschätzte USD-Summe (USD < EUR → wir stoppen
+ * eher zu früh als zu spät). Nur für Backfill-Scripts — Runtime ruft Google nie.
+ */
+export function googleBudgetCapEur() {
+  const v = Number(
+    process.env.FINDUS_GOOGLE_BUDGET_EUR ||
+      process.env.FINDUS_GOOGLE_BUDGET ||
+      50,
+  );
+  return Number.isFinite(v) && v > 0 ? v : 50;
+}
+
+/** Aktuelle geschätzte Ausgaben dieses Prozesses (USD). */
+export function googleSpendEstUsd() {
+  return estUsd();
+}
+
+/** True, sobald die Schätzung den EUR-Cap überschreitet. */
+export function googleBudgetExceeded() {
+  return estUsd() >= googleBudgetCapEur();
+}
+
+/** Bricht hart ab, wenn der Cap gerissen ist (für Loops mit try/catch außen). */
+export function assertGoogleBudget(reason = '') {
+  if (googleBudgetExceeded()) {
+    throw new Error(
+      `GOOGLE_BUDGET_EXCEEDED${reason ? ` (${reason})` : ''}: est $${estUsd().toFixed(
+        2,
+      )} ≥ cap €${googleBudgetCapEur()} (FINDUS_GOOGLE_BUDGET_EUR). Aborting.`,
+    );
+  }
+}
 
 function loadCache() {
   try {

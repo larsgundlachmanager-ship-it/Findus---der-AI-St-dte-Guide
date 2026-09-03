@@ -45,7 +45,68 @@ function mapCategory(hint, types = []) {
   if (/gym|stadium/i.test(t)) return 'sport';
   if (/park|natural/i.test(t)) return 'natur';
   if (/gas_station/i.test(t)) return 'tankstelle';
+  if (/bus_stop|transit/i.test(t)) return 'haltestelle';
   return 'ort';
+}
+
+const MAP_POINT_CATS = new Set([
+  'toilette',
+  'trinkwasser',
+  'briefkasten',
+  'atm',
+  'aussicht',
+  'haltestelle',
+]);
+
+function isMapPointDirectory(place, category) {
+  if (MAP_POINT_CATS.has(category)) return true;
+  if (place.highway === 'bus_stop') return true;
+  if (place.amenity === 'post_box' || place.amenity === 'toilets') return true;
+  if (place.amenity === 'drinking_water' || place.amenity === 'atm') return true;
+  return false;
+}
+
+function buildDirectoryBullets(place, category) {
+  const tags = place.osm_tags || {};
+  const bullets = [];
+
+  if (category === 'haltestelle' || place.highway === 'bus_stop') {
+    const net = tags.network || tags.operator;
+    bullets.push(`Bushaltestelle${net ? ` · ${net}` : ''}`);
+  } else if (category === 'toilette') {
+    bullets.push('Öffentliche Toilette');
+    if (tags.wheelchair === 'yes') bullets.push('Rollstuhlgängig');
+    else if (tags.changing_table === 'yes') bullets.push('Wickeltisch vorhanden');
+    else if (tags.fee === 'yes') bullets.push('Kostenpflichtig');
+    else if (tags.fee === 'no') bullets.push('Kostenlos');
+  } else if (category === 'briefkasten' || place.amenity === 'post_box') {
+    bullets.push('Briefkasten');
+    if (tags.collection_times) {
+      bullets.push(`Leerung: ${String(tags.collection_times).slice(0, 48)}`);
+    } else if (tags.operator) {
+      bullets.push(`Betreiber: ${tags.operator}`);
+    }
+  } else if (category === 'trinkwasser') {
+    bullets.push('Trinkwasser');
+  } else if (category === 'aussicht') {
+    bullets.push('Aussichtspunkt');
+  } else {
+    if (tags.cuisine) bullets.push(String(tags.cuisine).replace(/;/g, ', '));
+    else if (tags.brand) bullets.push(String(tags.brand));
+    if (tags.opening_hours) {
+      bullets.push(`Öffnung: ${String(tags.opening_hours).slice(0, 48)}`);
+    } else if (tags.website) {
+      bullets.push('Website hinterlegt');
+    } else if (place.address) {
+      bullets.push(`Adresse: ${place.address}`);
+    }
+  }
+
+  if (bullets.length < 2 && tags.operator && !bullets.some((b) => b.includes(tags.operator))) {
+    bullets.push(`Betreiber: ${tags.operator}`);
+  }
+  if (!bullets.length && place.address) bullets.push(`Adresse: ${place.address}`);
+  return bullets.slice(0, 2);
 }
 
 function alreadyNear(pack, lat, lng, meters = 55) {
@@ -69,6 +130,17 @@ function addDirectorySpot(pack, place, stats) {
     return;
   }
   const category = mapCategory(place.category, place.types);
+  const mapPoint = isMapPointDirectory(place, category);
+  const bullets = buildDirectoryBullets(place, category);
+  const spotTags = [
+    category,
+    'directory',
+    'tier4',
+    'offline_lookup',
+    'optional_live',
+  ];
+  if (mapPoint) spotTags.push('map_point');
+  if (place.source === 'osm') spotTags.push('sourced_osm');
   const spot = {
     id,
     name: place.name,
@@ -77,19 +149,20 @@ function addDirectorySpot(pack, place, stats) {
     pack_role: 'directory',
     place_tier: 4,
     relevance: ['offline_lookup', category],
-    tags: [category, 'directory', 'tier4', 'offline_lookup', 'optional_live'],
-    bullets: [
-      place.address ? `Adresse: ${place.address}.` : null,
-      'Offline-Katalog: Standort für Fragen/Suche — kein proaktiver Story-Trigger.',
-    ].filter(Boolean),
+    tags: spotTags,
+    bullets,
     facts: {
-      now: place.address ? `Adresse: ${place.address}` : undefined,
+      now: bullets[0] || (place.address ? `Adresse: ${place.address}` : undefined),
       tags: [category, 'directory'],
+      ...(place.osm_tags ? { osm: place.osm_tags } : {}),
     },
-    polygonCoordinates: boxPolygon(place.lat, place.lng, 16),
     approach_triggers: [],
     sub_pois: [],
   };
+  if (!mapPoint) {
+    // Kein Platzhalter-Box — OSM-Snap füllt echte Gebäudeumrisse.
+    spot.polygonCoordinates = undefined;
+  }
   if (place.place_id) {
     spot._google = { place_id: place.place_id };
   }
@@ -98,18 +171,22 @@ function addDirectorySpot(pack, place, stats) {
     name: place.name,
     lat: place.lat,
     lng: place.lng,
-    radius_m: 16,
+    radius_m: mapPoint ? 12 : 16,
     trigger_kind: 'point',
-    general_info: `${place.name} — Offline-Directory (${category}).`,
+    general_info: bullets[0]
+      ? `${place.name} — ${bullets[0]}`
+      : `${place.name} — Offline-Directory (${category}).`,
     deep_data_pool: [
       {
         text: `GPS: ${place.lat.toFixed(6)}, ${place.lng.toFixed(6)}${place.address ? ` — ${place.address}` : ''}.`,
         tags: ['gps_confirmed', place.source === 'osm' ? 'sourced_osm' : 'sourced_google', 'directory'],
       },
-      {
-        text: `Kategorie: ${category}. Für Offline-Fragen und Modul-2-Lookup; keine Wegweiser-Story.`,
-        tags: ['directory', 'meta'],
-      },
+      ...(bullets[1]
+        ? [{ text: bullets[1], tags: ['kurzfakt', 'directory'] }]
+        : []),
+      ...(place.osm_tags?.website
+        ? [{ text: place.osm_tags.website, tags: ['website', 'directory'] }]
+        : []),
       {
         text: 'LIVE: Öffnungszeiten, Speisekarte/Preise oder aktuelle Angebote frisch prüfen — nie aus dem Pack vorlesen.',
         tags: ['live_hint', 'ephemeral', 'directory'],

@@ -13,7 +13,6 @@ import path from 'node:path';
 import {
   STAEDTE_DIR,
   arg,
-  boxPolygon,
   suggestedPolygonHalfM,
   centroid,
   distM,
@@ -107,6 +106,26 @@ function alreadyGooglePinned(spot, trigger) {
     const tags = Array.isArray(e?.tags) ? e.tags : [];
     return tags.some((t) => /sourced_google/i.test(String(t)));
   });
+}
+
+function toLatLng(p) {
+  return {
+    lat: p.lat ?? p.latitude,
+    lng: p.lng ?? p.longitude,
+  };
+}
+
+function isAxisBox(poly) {
+  if (!poly || poly.length < 4 || poly.length > 6) return false;
+  const lats = new Set();
+  const lngs = new Set();
+  for (const p of poly) {
+    const { lat, lng } = toLatLng(p);
+    if (!Number.isFinite(lat) || !Number.isFinite(lng)) return false;
+    lats.add(lat.toFixed(6));
+    lngs.add(lng.toFixed(6));
+  }
+  return lats.size === 2 && lngs.size === 2;
 }
 
 async function main() {
@@ -216,7 +235,12 @@ async function main() {
         spot.category || spot.district,
         spot.name,
       );
-      spot.polygonCoordinates = boxPolygon(google.lat, google.lng, half);
+      // GPS/Trigger ja — aber keine Google-Box als Karten-Fill (OSM-Snap / Tile-Snap füllt echte Umrisse).
+      const existingPoly = spot.polygonCoordinates || spot.polygon;
+      if (!existingPoly || isAxisBox(existingPoly)) {
+        delete spot.polygonCoordinates;
+        delete spot.polygon;
+      }
       spot.approach_triggers = rebuildApproaches(spot, google.lat, google.lng);
       delete spot._oldLat;
       delete spot._oldLng;
@@ -242,10 +266,14 @@ async function main() {
         trigger.lat = google.lat;
         trigger.lng = google.lng;
         trigger.radius_m = half;
-        trigger.polygon = spot.polygonCoordinates.map((p) => ({
-          lat: p.latitude,
-          lng: p.longitude,
-        }));
+        if (spot.polygonCoordinates?.length) {
+          trigger.polygon = spot.polygonCoordinates.map((p) => ({
+            lat: p.latitude ?? p.lat,
+            lng: p.longitude ?? p.lng,
+          }));
+        } else {
+          delete trigger.polygon;
+        }
         const pool = trigger.deep_data_pool || [];
         const gpsLine = {
           text: `GPS-Eingang (Google Maps Pin): ${google.lat.toFixed(6)}, ${google.lng.toFixed(6)}${google.address ? ` â€” ${google.address}` : ''}.`,

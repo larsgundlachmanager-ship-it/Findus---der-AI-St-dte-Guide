@@ -35,13 +35,18 @@ function main() {
   if (only.size) ids = ids.filter((id) => only.has(id));
   ids = ids.filter((id) => !skip.has(id));
   const noUpload = hasFlag('no-upload');
-  console.log(`[backfill-facets] ${ids.length} Städte · full · upload=${!noUpload}`);
+  const force = hasFlag('force');
+  console.log(
+    `[backfill-facets] ${ids.length} Städte · full · force=${force} · upload=${!noUpload} · budget=${process.env.FINDUS_GOOGLE_BUDGET_EUR || '50'}EUR`,
+  );
 
   const report = [];
   for (let i = 0; i < ids.length; i++) {
     const id = ids[i];
     console.log(`\n[backfill-facets] ▶ ${i + 1}/${ids.length} ${id}`);
-    const facets = run('enrichReviewFacets.mjs', ['--city', id, '--full']);
+    const facetArgs = ['--city', id, '--full'];
+    if (force) facetArgs.push('--force');
+    const facets = run('enrichReviewFacets.mjs', facetArgs);
     if (!facets) {
       report.push({ id, ok: false, step: 'facets' });
       continue;
