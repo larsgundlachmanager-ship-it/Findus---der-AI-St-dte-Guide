@@ -199,6 +199,7 @@ function attachTurnFrame(
   userText: string,
   gpsCity: string | null,
   parsed?: Record<string, unknown> | null,
+  recentTexts?: string[],
 ): ManagerAnalysis {
   const heuristic = heuristicTurnFrame(userText, gpsCity, {
     session: analysis.session,
@@ -212,11 +213,59 @@ function attachTurnFrame(
   frame.threadId = analysis.threadMatchId;
   frame.subject = analysis.subject;
   frame.bridge = analysis.bridge;
+  try {
+    const {
+      validateCall1Referents,
+      referentsFromFollowupBackup,
+    } = require('./call1Referents') as {
+      validateCall1Referents: (
+        refs: NonNullable<typeof frame.referents>,
+        o: { userText: string; recentTexts?: string[] },
+      ) => NonNullable<typeof frame.referents>;
+      referentsFromFollowupBackup: (
+        u: string,
+        r: Array<{ role: 'user' | 'assistant'; text: string }>,
+      ) => NonNullable<typeof frame.referents>;
+    };
+    let refs = validateCall1Referents(frame.referents ?? [], {
+      userText,
+      recentTexts,
+    });
+    if (!refs.length) {
+      const recent = (recentTexts ?? []).slice(-4).map((text, i) => ({
+        role: (i % 2 === 0 ? 'user' : 'assistant') as 'user' | 'assistant',
+        text,
+      }));
+      // Better: pair from thread if available — backup only fills water/flight/venue
+      refs = referentsFromFollowupBackup(
+        userText,
+        recent.length
+          ? recent
+          : [{ role: 'user', text: userText }],
+      );
+      refs = validateCall1Referents(refs, { userText, recentTexts });
+    }
+    frame.referents = refs;
+  } catch {
+    /* soft */
+  }
   const merged = { ...analysis, frame };
-  return {
+  let out: ManagerAnalysis = {
     ...merged,
     execution: merged.execution ?? resolveCall1Execution(merged),
   };
+  try {
+    const { applyDiningTaxiCompoundToAnalysis } = require('./call1MobilityCompound') as {
+      applyDiningTaxiCompoundToAnalysis: (
+        a: ManagerAnalysis,
+        u: string,
+      ) => ManagerAnalysis;
+    };
+    out = applyDiningTaxiCompoundToAnalysis(out, userText);
+  } catch {
+    /* soft */
+  }
+  return out;
 }
 
 function heuristicTasksFromClassify(userText: string): {
@@ -412,8 +461,8 @@ function buildManagerPrompt(opts: {
   rucksackLine?: string | null;
 }): string {
   const bridgeRule = opts.liveChat
-    ? '- bridge: Beat 1 = Verstanden + Zuspruch/Zusagen (1–2 Sätze). Keine Fakten/Optionen. Kein „gleich fertig“/Warte-Meta. Ja/Nein/„los“: null. Trivia/Faktenfrage (wie alt/wer ist): kurze Bridge Pflicht (Würdigung), nie null, session=new.'
-    : '- bridge: Beat 1 = „Ich habe dich verstanden“ + Idee würdigen oder klar zusagen was du tust (Nav starten / Eventkalender / Mittag am genannten Ort). NICHT schon Call-2 (keine Venue-Namen, Preise, Minuten). Kein „gleich fertig“ / „bin gleich soweit“ / Meta-Warte. Cover 2–3 Sätze bei Recherche. Trivia/Faktenfrage: immer kurze Bridge, session=new. Bei continue/resume IMMER null. Kein Name. Wortlaut nie als Script.';
+    ? '- bridge: Beat 1. DEFAULT = Verstanden + Zusagen MIT Bezug zur DIESEM Wunsch (1–2 Sätze) — Job nennen (AYCE/Steak/Rad-Route/Wetter/SUP/Reservierung/…), keine Venue-Namen/Preise/Minuten. VERBOTEN allein: 0815 („ich schau mal“, „gute Frage“, „wissen kommt gleich“, „genau das klären wir jetzt“, „ich hole nützliche Fakten“) ohne Wunsch-Anker. TRIVIA/RECHNUNG/Quick-Lookup: Antwort-EINLEITUNG nur (Person/Aufgabe ansteuern) — NIE Zahl/Alter/Name. Call-2 liefert den Wert. Kein „finde heraus“, keine Klärfrage bei Amtstiteln. Ja/Nein/„los“: null. Trivia nie null wenn es die Einleitung trägt, session=new.'
+    : '- bridge: Beat 1. DEFAULT = Verstanden + Zusagen MIT Bezug zum Wunsch (Nav/Event/Gastro/… Job nennen). NICHT Call-2 spoilern. VERBOTEN allein: leere 0815-Floskeln ohne Wunsch-Anker. TRIVIA/RECHNUNG: nur Einleitung (kein Alter/keine Zahl/kein Name). Cover 2–3 Sätze nur bei langer Recherche. Trivia: keine Klärfrage bei Amtstiteln, kein Recherche-Theater. Bei continue/resume oft null. Kein Name. Wortlaut nie als Script.';
   const bridgeVoiceHint = buildCompactBridgeVoiceHint(
     resolveEffectivePersonalityMatrix(getCachedUserProfile()),
   );
@@ -421,6 +470,7 @@ function buildManagerPrompt(opts: {
     'Du bist der Yorro-Planer (Call-1). Ein Durchgang = ausführbarer Auftrag. Keine Keyword-Weiche davor.',
     bridgeVoiceHint,
     require('./call1ThinkFrame').FINDUS_CALL1_THINK_FRAME as string,
+    require('./call1OpenWorldContract').FINDUS_CALL1_OPEN_WORLD_BLOCK as string,
     require('../reboot/pipeline/call1Frozen').CALL1_FROZEN_CONTRACT as string,
     'Antworte NUR als JSON (kein Markdown).',
     'JSON-REIHENFOLGE (Streaming): bridge ZUERST im Objekt, dann execution, session, lane — damit Beat 1 sofort gesprochen werden kann.',
@@ -436,7 +486,7 @@ function buildManagerPrompt(opts: {
     '- execution: chat_lane | pitch_module | flight_advisor | plan_module | plan_walkthrough | tour_module | events_research | nav_execute | m1_poi | memory | task_fanout | reisebuero — EIN Backend pro Turn; Code dispatcht nur danach.',
     '- call2Brief: 1–3 Sätze intern — Antwort-STRUKTUR für Call 2 (was zuerst, Top-2, Buttons) — kein Dialog-Script. null/leer wenn bridgeComplete=true (Bridge war die ganze Antwort / Klärfrage).',
     '- bridgeComplete: true wenn die Bridge die User-Antwort schon vollständig trägt — inkl. gezielter Klärfrage bei fehlendem Pflicht-Slot (Flug-Uhr, Taxi-Ziel, …), Nav-Stop, Mode-Switch, reine Bestätigung. Dann Call 2 / Recherche skippen. Wortlaut der Frage frei, kein Script.',
-    '- selectedGoldKeys: 0–N Keys aus OWNER_GOLD_KATALOG die zu DIESEM Satz passen; bei unbekannter Frage [] und Auftrag selbst erfinden.',
+    '- selectedGoldKeys: 0–N Keys aus OWNER_GOLD_KATALOG deren Situation zur Absicht DIESES Satzes passt (auch neue Formulierung/Stadt). Daraus execution + call2Brief ableiten. Unbekannt → [] und Auftrag selbst erfinden — nie „fehlt → Laber“.',
     '- route: legacy m1_poi | m3_nav_start | m3_nav_query | m5_plan | memory | blueprint | smalltalk (an lane anpassen)',
     '- blueprintId / blueprintStage: cinema/cinema_orient, dining/dining_choice, hotel/hotel_choice, live_events/today, compound_evening_goal/grill — oder null wenn keiner passt (neu denken, nicht erzwingen)',
     '- nearestBlueprint: ähnliche Id oder null (Theater→cinema)',
@@ -458,14 +508,19 @@ function buildManagerPrompt(opts: {
     '- criteria: Array {key, role: must|nice|soft, weight: 1-30} — du setzt Prioritäten zur Frage. Keine Venue-Namen/Punkte. Shortlist Top-5 → Speak Top-2.',
     '- authorIntent: 1 Satz was der User JETZT will',
     '- thinkAhead: 0–3 grobe Hinweise. Nicht ausführen.',
-    '- work: 1–4 Aufträge {id, worker: plan|dining|nav|transit|flight|hotel|pitch|chat|m1, brief, destCity, startIsGps, when, mustHaves, dependsOn} — erfinde was die Lücke schließt',
+    '- work: 1–6 Aufträge {id, worker: plan|dining|nav|transit|taxi|flight|hotel|package_quick|pitch|chat|m1|weather|place|fact|events|tour|deep_web|timer_alarm|timeline_reminder|memory_prefs|memory_recall|identify_nearby|map_pin|voice_settings|device_action|m1_poi|reisebuero, brief, destCity, startIsGps, when, mustHaves, dependsOn, executeWhen: now|later|on_confirm} — Toolbox komponieren, kein Käfig. Novel/Specialty → deep_web. Unabhängige Intents parallel; abhängige mit dependsOn. Fehlt Pflicht-Slot (Taxi Flughafen ohne Flug) → askBack/bridgeComplete, work LEER. „Morgen dahin“ → executeWhen=later. Kombi → mehrere work-Items.',
+    '- referents: 0–4 {role: place|water|venue|flight|event|person, name, from: utterance|prior} — Bezüge (Alster→SUP). Nur Namen aus Satz/Thread, nichts erfinden.',
+    '- curatedContext: 0–6 Kernsätze für Call 2 (Absicht, Stadt, Bezug) — KEIN Chat-Dump, kein Events-Leak bei Dining-Follow-up.',
+    '- selfQuestions: 0–6 interne Teilfragen bei unbekannter Absicht → daraus work[] bauen.',
+    '- askBack: nur echte Blockade oder null. Just-Do-It wenn Harvest+URL möglich (Museum/Ticket/Dining) — kein Permission-Ask.',
+    '- uiRequirements (mitdenken, Code ergänzt): needMenuUrl, showPriceInBullets, needTicket, needMaps, maxBullets=3, bulletMaxLines=2 — Call-2 setzt nur Evidence um.',
     '- tasks: optional legacy Array',
     '- openLoops: andere Themen später',
     '- nameAllowed: immer false außer echte Begrüßung nach langer Pause',
     '- jobHint: flight_trip nur bei klarem Flug/Thread — nie nur wegen Uhr+morgen',
-    '- bridgeMeta: { researchBudgetSec: 0–12 }',
+    '- bridgeMeta: { researchBudgetSec: 0–22 } — Pace: instant 2–4, fast 4–7, standard 8–12, deep 12–18, heavy 15–22',
     '- topicScope: { mode: new|followup, turnsForCall2: 0–10, inheritLiveInventory?: bool }. HART: mode=new ⇒ turnsForCall2=0 + inheritLiveInventory=false (Code erzwingt 0 Historie). Follow-up: typisch turnsForCall2=3, max 10.',
-    '- cityScope: { cityId, researchCity, packPolicy: use_local|require_download|live_bootstrap|none }',
+    '- cityScope: { cityId, researchCity, packPolicy: use_local|require_download|live_bootstrap|none }. Specialty-Gastro (Gericht+Blick/Terrasse o. ä.) ohne genannte Stadt: researchCity = sinnvolle Metro/Ziel-Stadt für den Datensatz — nicht nur GPS-Heimatdorf. Leer lokal → nächste gecachte Packs / Live-Expand; Radius wächst ehrlich.',
     '- memoryPolicy: { shortTerm: bool, longTerm: bool }',
     '',
     'HART (Bug-Schutz — kurz):',
@@ -474,12 +529,14 @@ function buildManagerPrompt(opts: {
     '- Nav-Stop („stopp Navigation“) → execution=nav_execute, bridge sagt Stopp zu, bridgeComplete=true — kein neuer Start.',
     '- Unbekannte Frage → Auftrag erfinden (execution/work/destCity/call2Brief), nie Fakten erfinden, nie falsche Kategorie (Nightlife statt Team).',
     '- HART: Genanntes Team/Act/Halle + Terminfrage → execution=events_research, destCity/cityScope.researchCity aus dem Satz (nicht GPS-Heimat). Call 2 sucht genau DAS — kein Club/Konzert-Ersatz.',
+    '- HART: FRAGE-ART selbst: Reise AN SICH (Flug/Hotel/Anreise/Trip-Inspiration) → reisebuero. Was VOR ORT/im Fenster möglich/los ist → events_research. Datum+Stadt allein ≠ Reisebüro. Kein Keyword-Katalog — Absicht erkennen.',
     '- Zuerst DIESE Äußerung. Resume nur bei klarem Bezug; sonst session=new + topicScope.mode=new + turnsForCall2=0. Isolation: toten Thread nicht weben — Code schickt dann KEINE alte Historie.',
     '- Nie aus zwei Wörtern (Uhrzeit, morgen) einen Flug ableiten. Ort+Uhr einplanen = plan. Flug/Flughafen/Leave-by = flight_advisor.',
     '- lane=chat erfindet keine Hotels, Event-Programme, Orts-Empfehlungen ohne Distanz.',
     '- Bridge: keine Fakten erfinden. Fehlt Blocker-Slot (Flug-Uhr, Taxi-Ziel ohne Thread-Anker) → Bridge = kurze Gegenfrage + bridgeComplete=true + work[] leer; Kontext/Thread darf Slots füllen — nicht bei jeder Lücke nerven.',
     '- Follow-up am offenen Auftrag: session=continue, topicScope followup + turnsForCall2 1–3. Klärfrage = continue. Neues Thema / Trivia / Wetter: session=new, turnsForCall2=0.',
     '- Multi-Intent: intents[]/work[] nicht weglassen.',
+    '- COMPOUND Essen+Taxi: nie dünner transit-Einzeiler. Klare Reihenfolge → work dining→transit (Ziel/Vorbestellen/ETA/Preis-Slots). Ohne Reihenfolge → Prioritätsfrage + bridgeComplete + needsBlockingChoice, Spuren in intents[].',
     '- Korrektur/„mag ich nicht“: session=continue, neue criteria — kein Themen-Sprung.',
     opts.liveChat
       ? '- LIVE-CHAT: pace=instant; needsResearch=quick außer explizit „recherchier/online“. Bridge kürzer.'
@@ -495,6 +552,47 @@ function buildManagerPrompt(opts: {
       : '',
     ...(opts.dialogFlags || []),
     opts.rucksackLine ? opts.rucksackLine : '',
+    // LearnedRules in Call-1 (Struktur, keine Scripts) — Autonomy Reboot Phase 4
+    (() => {
+      try {
+        const { matchLearnedRules } = require('../../services/memory/correctionLearning') as {
+          matchLearnedRules: (o: {
+            userText?: string;
+            limit?: number;
+          }) => Array<{ intentFamily: string; summary: string; expect?: string[]; avoid?: string[] }>;
+        };
+        const rules = matchLearnedRules({
+          userText: opts.userText,
+          limit: 4,
+        });
+        if (!rules.length) return '';
+        const lines = rules.map(
+          (r) =>
+            `- ${r.intentFamily}: ${r.summary}` +
+            (r.expect?.length ? ` expect[${r.expect.slice(0, 3).join(',')}]` : '') +
+            (r.avoid?.length ? ` avoid[${r.avoid.slice(0, 3).join(',')}]` : ''),
+        );
+        return [
+          'LEARNED_RULES (dieses Profil — Struktur-Blaupause, Wortlaut frei):',
+          ...lines,
+        ].join('\n');
+      } catch {
+        return '';
+      }
+    })(),
+    (() => {
+      try {
+        const { collectiveLearningPromptBlock } = require('../../services/memory/collectiveLearning') as {
+          collectiveLearningPromptBlock: (o?: {
+            intentFamily?: string | null;
+          }) => string;
+        };
+        const block = collectiveLearningPromptBlock({ intentFamily: 'general' });
+        return block ? String(block).trim() : '';
+      } catch {
+        return '';
+      }
+    })(),
     opts.city
       ? `GPS-START (wo der User steht, oft NICHT das Ziel): ${opts.city}`
       : '',
@@ -734,6 +832,9 @@ export async function analyzeManagerTurn(opts: {
         typeof bridgeMeta?.researchBudgetSec === 'number'
           ? bridgeMeta.researchBudgetSec
           : null,
+      userText,
+      execution: String(parsed.execution || ''),
+      jobHint: String(parsed.jobHint || ''),
     });
     const paceBase = resolvePaceBudget({
       pace: liveDeep
@@ -876,10 +977,34 @@ export async function analyzeManagerTurn(opts: {
     }
     bridge = stripNameSpam(bridge, false);
     try {
-      const { sanitizeBridgeText } = require('../chat/butlerOfferBus') as {
+      const {
+        sanitizeBridgeText,
+        scrubTriviaClarifyBridge,
+        scrubPrematureTriviaFacts,
+      } = require('../chat/butlerOfferBus') as {
         sanitizeBridgeText: (t: string | null) => string | null;
+        scrubTriviaClarifyBridge: (o: {
+          bridge: string;
+          userText: string;
+        }) => string | null;
+        scrubPrematureTriviaFacts: (o: {
+          bridge: string;
+          userText: string;
+        }) => string | null;
       };
       bridge = sanitizeBridgeText(bridge);
+      if (bridge) {
+        bridge = scrubTriviaClarifyBridge({
+          bridge,
+          userText,
+        });
+      }
+      if (bridge) {
+        bridge = scrubPrematureTriviaFacts({
+          bridge,
+          userText,
+        });
+      }
     } catch {
       /* soft */
     }
