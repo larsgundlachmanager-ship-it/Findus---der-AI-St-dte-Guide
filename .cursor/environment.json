@@ -1,0 +1,10 @@
+{
+  "name": "Findus",
+  "install": "npm install",
+  "terminals": [
+    {
+      "name": "expo",
+      "command": "npx expo start --port 8081"
+    }
+  ]
+}
