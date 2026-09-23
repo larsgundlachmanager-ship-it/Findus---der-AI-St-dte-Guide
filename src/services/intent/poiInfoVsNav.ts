@@ -27,7 +27,10 @@ export function isDeicticPoiQuestion(text: string): boolean {
 
 /** Explicit movement / go-to verbs — ONLY these may start START_NAV. */
 const EXPLICIT_NAV_RE =
-  /\b(?:bring\s+mich|nimm\s+mich|nehm\s+mich|führ\s+mich|fuehr\s+mich|fahr\s+mich|lauf\s+(?:mich|uns)|navigier(?:e|en|t)?(?:\s+(?:mich|werden))?|navi(?:gation)?\s+(?:zu|nach|zum|zur)|navigation\s+(?:zu|nach|zum|zur)|wie\s+komm(?:e|en)?\s+ich|lass\s+(?:uns|mich)\s+(?:zum|zur|nach|zu)|geh(?:en)?\s+(?:wir|ich)\s+(?:zum|zur|nach|zu|hin)|zeig\s+mir\s+(?:den\s+weg|die\s+route)|route\s+(?:zu|nach|zum|zur|starten)|kompass\s+(?:zu|nach|an)|ich\s+(?:will|möchte|moechte|muss)\s+(?:jetzt\s+)?(?:zum|zur|nach|zu|ins|hin)|(?:führ|fuehr|bring|fahr|navigier|nimm|nehm)\w*\s+(?:mich\s+)?(?:dahin|dorthin|hin))\b/iu;
+  /\b(?:bring\s+mich|nimm\s+mich|nehm\s+mich|führ\s+mich|fuehr\s+mich|fahr\s+mich|fahr(?:e|en)?\s+(?:mich\s+|uns\s+)?(?:jetzt\s+)?(?:zum|zur|nach|zu)|lauf\s+(?:mich|uns)|navigier(?:e|en|t)?(?:\s+(?:mich|werden))?|navi(?:gation)?\s+(?:zu|nach|zum|zur)|navigation\s+(?:zu|nach|zum|zur|starten)|wie\s+komm(?:e|en)?\s+ich|lass\s+(?:uns|mich)\s+(?:zum|zur|nach|zu)|geh(?:en)?\s+(?:wir|ich)\s+(?:zum|zur|nach|zu|hin)|zeig\s+mir\s+(?:den\s+weg|die\s+route)|route\s+(?:zu|nach|zum|zur|starten)|kompass\s+(?:zu|nach|an)|ich\s+(?:will|möchte|moechte|muss)\s+(?:jetzt\s+)?(?:zum|zur|nach|zu|ins|hin)|(?:führ|fuehr|bring|fahr|navigier|nimm|nehm)\w*\s+(?:mich\s+)?(?:dahin|dorthin|hin))\b/iu;
+
+/** „zum <bekannter Ort>“ ohne Verb — nur mit Unique-Local-Anker (kein Blind-Start). */
+const GO_PREP_NAMED_RE = /\b(?:zum|zur|nach)\s+\S{2,}/iu;
 
 /** Soft discovery / meal ROUTES — not pure info questions. */
 const MEAL_ROUTE_RE =
@@ -53,6 +56,14 @@ export function isExplicitNavIntent(text: string): boolean {
   if (!t) return false;
   if (isPoiInfoQuestion(t)) return false;
   try {
+    const { looksLikeCruiseCenterNavAsk } = require('../stt/cruiseVoiceRepair') as {
+      looksLikeCruiseCenterNavAsk: (s: string) => boolean;
+    };
+    if (looksLikeCruiseCenterNavAsk(t)) return true;
+  } catch {
+    /* soft */
+  }
+  try {
     const gate = require('../../module2/planning/planUtteranceGate') as {
       looksLikeChaoticDayPlanUtterance: (s: string) => boolean;
       looksLikeModul5PlanUtterance: (s: string) => boolean;
@@ -66,7 +77,19 @@ export function isExplicitNavIntent(text: string): boolean {
   } catch {
     /* soft */
   }
-  return EXPLICIT_NAV_RE.test(t);
+  if (EXPLICIT_NAV_RE.test(t)) return true;
+  // Go-to zu Unique-Local-Anker („zum Tennis Club“) — Verb optional, Info-Fragen schon raus
+  if (GO_PREP_NAMED_RE.test(t)) {
+    try {
+      const { resolveLocalAnchor } = require('../../module2/context/shortTermContext') as {
+        resolveLocalAnchor: (s: string) => { name: string } | null;
+      };
+      if (resolveLocalAnchor(t)) return true;
+    } catch {
+      /* soft */
+    }
+  }
+  return false;
 }
 
 export function isMealRouteIntent(text: string): boolean {

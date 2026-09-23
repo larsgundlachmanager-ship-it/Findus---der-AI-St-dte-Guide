@@ -48,6 +48,24 @@ function cleanLabel(s: string): string {
 export function extractNamedDestinationLabel(text: string): string | null {
   const t = text.replace(/\s+/g, ' ').trim();
   if (!t || t.length < 4) return null;
+  try {
+    const { extractCruiseCenterNavDest } = require('../stt/cruiseVoiceRepair') as {
+      extractCruiseCenterNavDest: (s: string) => string | null;
+    };
+    const cruiseDest = extractCruiseCenterNavDest(t);
+    if (cruiseDest) return cruiseDest;
+  } catch {
+    /* soft */
+  }
+  try {
+    const { isSoloFlightAbSearch, isFlightTripQuery } = require('../flights/flightTripIntent') as {
+      isSoloFlightAbSearch: (s: string) => boolean;
+      isFlightTripQuery: (s: string) => boolean;
+    };
+    if (isSoloFlightAbSearch(t) || isFlightTripQuery(t)) return null;
+  } catch {
+    /* soft */
+  }
   if (isPoiInfoQuestion(t) && !isExplicitNavIntent(t)) return null;
 
   const spokenAddr = extractStreetAddressFromUtterance(t);

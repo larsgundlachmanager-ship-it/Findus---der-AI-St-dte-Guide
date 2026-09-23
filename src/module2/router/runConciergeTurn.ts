@@ -36,6 +36,7 @@ import {
   loadConversationThreads,
   commitThreadTurn,
   getForegroundThread,
+  getConversationThreadsSync,
 } from '../../services/memory/conversationThreads';
 import {
   classifyJob,
@@ -56,7 +57,10 @@ import {
   analyzeManagerTurn,
   enrichAnalysisWithBlueprint,
 } from './analyzeTurn';
-import { takeManagerWarmupIfMatch } from './managerWarmup';
+import {
+  kickManagerWarmupForFinal,
+  takeManagerWarmupIfMatch,
+} from './managerWarmup';
 import {
   applyManagerSession,
   mergeCorrectionUtterance,
@@ -144,8 +148,46 @@ async function speakBridgeFromAnalysis(
   } catch {
     /* soft */
   }
+  // Alter-Trivia: LLM-Cover durch kurzen Peek-Lead ersetzen (Antwort kommt schnell).
+  try {
+    if (userText && /\bwie\s+alt\b/iu.test(userText)) {
+      const { peekAnswerLeadBridge } = require('../../services/speech/answerLeadBridge') as {
+        peekAnswerLeadBridge: (s: string) => string | null;
+      };
+      const peek = peekAnswerLeadBridge(userText);
+      if (peek?.trim()) bridge = peek.trim();
+    }
+  } catch {
+    /* soft */
+  }
+  // Wetter: kurze Zusage — nie „schau nach wie das Wetter in X wird“ als Bridge-Essay.
+  try {
+    if (
+      userText &&
+      /\b(wetter|regnet|regnen|temperatur|wie\s+wird\s+(?:heute|morgen)\b)/iu.test(
+        userText,
+      )
+    ) {
+      const t = (bridge || '').toLowerCase();
+      if (
+        !bridge?.trim() ||
+        /schau\w*\s+nach|wie\s+das\s+wetter|in\s+\w+\s+wird|wird\s+folgender|also\s+das\s+wetter/iu.test(
+          t,
+        ) ||
+        (bridge || '').split(/\s+/).length > 12
+      ) {
+        bridge = /\bregen|regnet|regnen\b/iu.test(userText)
+          ? 'Klar, ich check den Regen.'
+          : 'Klar, ich check das Wetter.';
+      }
+    }
+  } catch {
+    /* soft */
+  }
   bridge = clipBridgeToWordLimit(bridge, analysis.bridgeMaxWords);
-  const spoken = await speakModuleWaitBridge(bridge, turnId);
+  const spoken = await speakModuleWaitBridge(bridge, turnId, {
+    userText: userText || '',
+  });
   return { text: spoken, alreadySpoken: Boolean(spoken) };
 }
 
@@ -153,15 +195,86 @@ async function speakBridgeFromAnalysis(
 async function speakModuleWaitBridge(
   line: string | null | undefined,
   turnId: string,
-  opts?: { force?: boolean },
+  opts?: { force?: boolean; userText?: string },
 ): Promise<string | null> {
   let t = (line || '').replace(/\s+/g, ' ').trim();
   if (!t) return null;
   try {
-    const { sanitizeBridgeText } = require('../chat/butlerOfferBus') as {
+    const {
+      sanitizeBridgeText,
+      scrubBridgeCityLeak,
+      scrubTriviaClarifyBridge,
+      scrubPrematureTriviaFacts,
+      scrubAffiliateMonetizationSpeech,
+      scrubMetaPraiseBridge,
+    } = require('../chat/butlerOfferBus') as {
       sanitizeBridgeText: (s: string | null) => string | null;
+      scrubBridgeCityLeak: (o: {
+        bridge: string;
+        userText: string;
+        gpsCities?: Array<string | null | undefined> | null;
+      }) => string;
+      scrubTriviaClarifyBridge: (o: {
+        bridge: string;
+        userText: string;
+      }) => string | null;
+      scrubPrematureTriviaFacts: (o: {
+        bridge: string;
+        userText: string;
+      }) => string | null;
+      scrubAffiliateMonetizationSpeech: (s: string | null | undefined) => string;
+      scrubMetaPraiseBridge: (o: {
+        bridge: string;
+        userText: string;
+      }) => string | null;
     };
+    // Call-1 Bridge 1:1 — keine Floskel-Notbremse / kein Ersatz-Text
     t = sanitizeBridgeText(t) || '';
+    if (t && opts?.userText) {
+      t = scrubMetaPraiseBridge({ bridge: t, userText: opts.userText }) || '';
+    }
+    if (t && opts?.userText) {
+      t = scrubTriviaClarifyBridge({ bridge: t, userText: opts.userText }) || '';
+    }
+    if (t && opts?.userText) {
+      t = scrubPrematureTriviaFacts({ bridge: t, userText: opts.userText }) || '';
+    }
+    if (t) {
+      t = scrubAffiliateMonetizationSpeech(t) || '';
+    }
+    // Scrub leer → still (kein Code-Peek/Floskel). Call-1-LLM liefert Bridge.
+    if (t) {
+      const gpsCities: string[] = [];
+      try {
+        const { readRucksackSync } = require('../rucksack/rucksackStore') as {
+          readRucksackSync: () => { cityHint?: string | null };
+        };
+        const hint = readRucksackSync()?.cityHint;
+        if (hint) gpsCities.push(hint);
+      } catch {
+        /* soft */
+      }
+      try {
+        const { useFinnusStore } = require('../../store/useFinnusStore') as {
+          useFinnusStore: {
+            getState: () => { cityName?: string | null; cityId?: string | null };
+          };
+        };
+        const st = useFinnusStore.getState();
+        if (st.cityName) gpsCities.push(String(st.cityName));
+      } catch {
+        /* soft */
+      }
+      // speakModuleWaitBridge: userText für GPS-Stadt-Leak-Scrub
+      const ut = opts?.userText || '';
+      if (ut) {
+        t = scrubBridgeCityLeak({
+          bridge: t,
+          userText: ut,
+          gpsCities,
+        });
+      }
+    }
   } catch {
     /* soft */
   }
@@ -246,6 +359,20 @@ async function speakModuleWaitBridge(
 
   if (!enqueued) return null;
 
+  // Pace: Bridge gestartet → Sprechdauer aus Wörtern (nicht Research-Budget)
+  try {
+    const {
+      notePaceBridgeStarted,
+    } = require('../reboot/pipeline/paceTurnSession') as {
+      notePaceBridgeStarted: (at?: number, speechMs?: number) => void;
+    };
+    const words = t.split(/\s+/).filter(Boolean).length;
+    const speechMs = Math.max(1400, Math.min(6000, Math.round(words * 380)));
+    notePaceBridgeStarted(Date.now(), speechMs);
+  } catch {
+    /* soft */
+  }
+
   // Ack erst NACH echtem Enqueue — sonst skippt die Safety-Bridge und es bleibt still.
   try {
     const { noteLatencyAck } = require('../../services/speech/floskelEngine') as {
@@ -307,6 +434,8 @@ async function speakHandoffIntro(opts: {
 export async function runConciergeTurn(
   input: PipelineTurnInput,
 ): Promise<PipelineTurnResult> {
+  // Threads sofort parallel — nicht serial vor Call-1.
+  void loadConversationThreads().catch(() => undefined);
   beginFusedTurnSpeech(input.turnId);
   try {
     return await runConciergeTurnBody(input);
@@ -325,11 +454,47 @@ async function runConciergeTurnBody(
 ): Promise<PipelineTurnResult> {
   const turnId = input.turnId;
   const signal = input.signal;
+  let call1ComposeShape: import('./call1JobShape').Call1JobShape | null = null;
 
-  // Manager-Verfassung: KEIN Pre-Call-1 Bypass (kein Nav-Stop-Return, keine Early-Floskel,
-  // kein Mode-Switch vor Analyze). Bridge nur aus Call-1 JSON-Stream (onBridge).
+  // Isolation: Yorros Reisebüro ist eigener Raum — kein Modul-2-Antwortpfad.
+  try {
+    const { useReisebueroStore } = require('../../reisebuero/store') as {
+      useReisebueroStore: { getState: () => { overlayOpen?: boolean } };
+    };
+    if (useReisebueroStore.getState().overlayOpen) {
+      if (__DEV__) console.log('[runConciergeTurn] blocked — Reisebüro isoliert');
+      const logic: LogicNodeOutput = {
+        spokenDraft: '',
+        bullets: [],
+        buttons: [],
+        moneyEur: [],
+        warnings: [],
+      };
+      return {
+        turnId,
+        tasks: [],
+        bridgingText: null,
+        logic,
+        synthesis: {
+          spokenChunks: [],
+          bullets: [],
+          buttons: [],
+          fullDraftForUi: '',
+        },
+        deepResearchQueued: false,
+        jobId: 'reisebuero_isolated',
+      };
+    }
+  } catch {
+    /* soft */
+  }
+
+  // Manager-Verfassung: KEIN Pre-Call-1 Bypass (kein Nav-Stop-Return, keine Early-Floskel
+  // vor Analyze, kein Mode-Switch vor Analyze). Beat-1 startet MIT Call-1 (parallel zum Stream).
   let earlyBridgePromise: Promise<string | null> = Promise.resolve(null);
   let bridgeSpokenDuringAnalyze = false;
+  let beat1Locked = false;
+  let call1LeadEarly: string | null = null;
   let earlyNavModeSwitchPromise: Promise<{
     ok: boolean;
     speech: string;
@@ -339,18 +504,109 @@ async function runConciergeTurnBody(
   } | null> | null = null;
   let earlyNavModeSwitchBridge: string | null = null;
 
-  await loadConversationThreads();
+  // Call-1 Speech immer sofort — Peek TTS fire-and-forget, Worker parallel,
+  // nie auf Follow-Through / Analyze / Speech-Ende warten. Call-2 klebt fused.
+  try {
+    const rawLead = String(input.userText || '').replace(/\s+/g, ' ').trim();
+    const microAck =
+      /^(ja|nein|ok|okay|passt|genau|mach\s+das|los|klar|bitte|danke)[.!?]?$/iu.test(
+        rawLead,
+      );
+    const { shouldSuppressBridge } = require('../reboot/managerTurn') as {
+      shouldSuppressBridge: (o: {
+        topicMode: null;
+        jobId: string;
+        userText: string;
+      }) => boolean;
+    };
+    if (
+      !microAck &&
+      !shouldSuppressBridge({
+        topicMode: null,
+        jobId: '',
+        userText: input.userText,
+      })
+    ) {
+      const { peekAnswerLeadBridgeOrCommit } = require('../../services/speech/answerLeadBridge') as {
+        peekAnswerLeadBridgeOrCommit: (s: string) => string;
+      };
+      const peek = peekAnswerLeadBridgeOrCommit(input.userText)?.trim();
+      if (peek) {
+        call1LeadEarly = peek;
+        beat1Locked = true;
+        try {
+          const { markBridgeFirst } = require('../reboot/pipeline/turnLatencyMetrics') as {
+            markBridgeFirst: () => void;
+          };
+          markBridgeFirst();
+        } catch {
+          /* soft */
+        }
+        earlyBridgePromise = speakModuleWaitBridge(peek, turnId, {
+          userText: input.userText,
+        }).then((spoken) => {
+          if (spoken) bridgeSpokenDuringAnalyze = true;
+          else beat1Locked = false;
+          return spoken;
+        });
+      }
+    }
+  } catch {
+    /* soft */
+  }
+  try {
+    const { kickCall1ParallelWork } = require('../../services/concierge/kickCall1ParallelWork') as {
+      kickCall1ParallelWork: (o: {
+        userText: string;
+        rewritten?: string | null;
+      }) => void;
+    };
+    kickCall1ParallelWork({ userText: input.userText });
+  } catch {
+    /* soft */
+  }
+
+  // Call-1 Prep parallel — Bridge-Token nicht hinter FS/Import-Serial.
+  const threadsP = loadConversationThreads().catch(() => getConversationThreadsSync());
+  const flightP = import('../../services/flights/flightTripSession')
+    .then((m) => m.hydrateFlightTripSession())
+    .catch(() => undefined);
+  const followThroughP = import('./missionFollowThrough')
+    .then((m) => m.ensureFollowThroughHydrated())
+    .catch(() => undefined);
+  const bulletP = import('../reboot/pipeline/bulletUiBudget')
+    .then((m) => m.loadBulletUiBudget())
+    .catch(() => null);
+  const placeCtxP = import('../context/placeContext');
+  const rucksackModP = import('../reboot/pipeline/turnRucksack');
+  const goldModP = import('./call1OwnerGoldCatalog');
+
   const rucksack = readRucksackSync();
   // Snapshot erst nach Call-1 Isolation lesen — sonst leakt Tennis/Amsterdam trotz scrub.
   let short = getShortTerm();
   noteUserUtterance(input.userText);
 
-  const { resolveCityChatScope } = await import('../context/placeContext');
+  // Threads: Sync-Peek für Korrektur; max ~100 ms Soft-Wait wenn Cache kalt.
+  // Follow-Through Persist: hart awaiten (Resume „wieder Taxi“ nach Kill).
+  let prevFg = getForegroundThread();
+  try {
+    await followThroughP;
+  } catch {
+    /* soft */
+  }
+  if (!prevFg) {
+    await Promise.race([
+      threadsP.then(() => undefined),
+      new Promise<void>((r) => setTimeout(r, 100)),
+    ]);
+    prevFg = getForegroundThread();
+  }
+
+  const { resolveCityChatScope } = await placeCtxP;
   const cityScope = resolveCityChatScope(input.userText);
   const turnCityHint = cityScope.cityHint;
   const turnCityKey = cityScope.cityKey;
 
-  const prevFg = getForegroundThread();
   const correction = mergeCorrectionUtterance({
     previousUserText: prevFg?.lastUserText,
     newUserText: input.userText,
@@ -365,12 +621,12 @@ async function runConciergeTurnBody(
     const { looksLikeNamedTriviaSubject } = require('../kernel/turnKernel') as {
       looksLikeNamedTriviaSubject: (s: string) => boolean;
     };
+    const { looksLikeInstantAnswerLeadQuery } = require('../kernel/instantAnswerLeadQuery') as {
+      looksLikeInstantAnswerLeadQuery: (s: string) => boolean;
+    };
     let quick = false;
     try {
-      const { isQuickLookupQuery } = require('../../services/concierge/celestialSkyQuery') as {
-        isQuickLookupQuery: (s: string) => boolean;
-      };
-      quick = isQuickLookupQuery(rawForRewrite);
+      quick = looksLikeInstantAnswerLeadQuery(rawForRewrite);
     } catch {
       quick = false;
     }
@@ -426,12 +682,12 @@ async function runConciergeTurnBody(
     /* soft */
   }
 
-  // Flug-Session vor Live-Inventory — nacktes „um 20 Uhr“ darf nicht Pitch/Hafen klauen.
+  // Flug-Session: Soft-Budget — Call-1 nicht hinter Disk warten.
   try {
-    const { hydrateFlightTripSession } = await import(
-      '../../services/flights/flightTripSession'
-    );
-    await hydrateFlightTripSession();
+    await Promise.race([
+      flightP,
+      new Promise<void>((r) => setTimeout(r, 80)),
+    ]);
   } catch {
     /* soft */
   }
@@ -440,6 +696,59 @@ async function runConciergeTurnBody(
   // Kein rewriteQuery / Live-Inventory vor Analyze — Isolation entscheidet Call 1.
   let rewritten = String(rawForRewrite || input.userText || '').trim();
   const rawUserTextForCall1 = String(input.userText || '').trim() || rewritten;
+
+  // Solo-Flug A→B: sticky Nav/ÖPNV sofort killen — sonst „Fahrt nach Hamburg nach Split“
+  try {
+    const { isSoloFlightAbSearch, isFlightTripQuery } = require('../../services/flights/flightTripIntent') as {
+      isSoloFlightAbSearch: (s: string) => boolean;
+      isFlightTripQuery: (s: string) => boolean;
+    };
+    const flightAsk =
+      isSoloFlightAbSearch(rawUserTextForCall1) ||
+      isSoloFlightAbSearch(rewritten) ||
+      isFlightTripQuery(rawUserTextForCall1);
+    if (flightAsk && useFinnusStore.getState().navActive) {
+      try {
+        const { stopNavigation } = require('../../services/navigation/navigationService') as {
+          stopNavigation: (o?: { silent?: boolean }) => void | Promise<void>;
+        };
+        void stopNavigation({ silent: true });
+      } catch {
+        /* soft */
+      }
+      try {
+        const { clearMultiStopTour } = require('../../services/navigation/multiStopTour') as {
+          clearMultiStopTour: () => void;
+        };
+        clearMultiStopTour();
+      } catch {
+        /* soft */
+      }
+    }
+  } catch {
+    /* soft */
+  }
+
+  // Speculative Call-1 parallel zu Rucksack/Gold — auch wenn Mic vor STABLE_MS losließ.
+  try {
+    let kickNav = Boolean(useFinnusStore.getState().navActive);
+    let kickCal = false;
+    try {
+      const { usePlanCalendarUiStore } = require('../timeline/planCalendarUiStore') as {
+        usePlanCalendarUiStore: { getState: () => { calendarVisible: boolean } };
+      };
+      kickCal = usePlanCalendarUiStore.getState().calendarVisible;
+    } catch {
+      kickCal = false;
+    }
+    kickManagerWarmupForFinal(rawUserTextForCall1, {
+      cityHint: turnCityHint,
+      navActive: kickNav,
+      calendarOpen: kickCal,
+    });
+  } catch {
+    /* soft */
+  }
 
   // Kontext-Hygiene (kein Answer-Bypass): Wetter ohne Deixis → Sticky-POI/Pitch/Nav-Laden weg vor Call 1.
   try {
@@ -450,7 +759,17 @@ async function runConciergeTurnBody(
       looksLikeOutfitOrWeatherUtterance: (s: string) => boolean;
       weatherAskWantsConversationPlace: (s: string) => boolean;
     };
+    const { detectPitchKind } = require('../pitch/parentBrief') as {
+      detectPitchKind: (s: string) => string;
+    };
+    const { looksLikeAyceQuery } = require('../pitch/ayceIntent') as {
+      looksLikeAyceQuery: (s: string) => boolean;
+    };
+    const diningPrimary =
+      detectPitchKind(rawUserTextForCall1) === 'food' ||
+      looksLikeAyceQuery(rawUserTextForCall1);
     if (
+      !diningPrimary &&
       looksLikeOutfitOrWeatherUtterance(rawUserTextForCall1) &&
       !weatherAskWantsConversationPlace(rawUserTextForCall1)
     ) {
@@ -512,29 +831,85 @@ async function runConciergeTurnBody(
     /* soft */
   }
 
-  // Wetter-API parallel zu Call-1 laden — kein Routing, nur IO.
+  // Straße+Hausnummer ist bereits ein vollständiger Nav-Auftrag: dieselbe dynamische
+  // Nav-Bridge wie bei lokalen Ankern sofort starten. Geocode/Route laufen danach
+  // parallel und dürfen den ersten TTS-Hook nicht durch synchrone Modul-Loads verzögern.
   try {
-    const { classifyUtteranceFamily } = require('../kernel/utteranceFamily') as {
-      classifyUtteranceFamily: (s: string) => { family: string };
+    const { extractStreetAddressFromUtterance } = require('../../services/navigation/streetAddressQuery') as {
+      extractStreetAddressFromUtterance: (s: string) => string | null;
     };
-    if (classifyUtteranceFamily(rawUserTextForCall1).family === 'weather') {
-      const { ensureWeatherFresh } = require('../../services/weatherService') as {
-        ensureWeatherFresh: (
-          reason: 'tick',
-          coords?: { lat: number; lng: number } | null,
-          opts?: { userAsked?: boolean },
-        ) => Promise<unknown>;
+    const address =
+      extractStreetAddressFromUtterance(rawUserTextForCall1) ||
+      extractStreetAddressFromUtterance(rewritten);
+    if (address && !beat1Locked) {
+      const { resolveNavDestSpeechName } = require('../../services/navigation/navDestSpeechName') as {
+        resolveNavDestSpeechName: (o: {
+          query?: string;
+          geoLabel?: string;
+        }) => string;
       };
-      const { useGpsStore } = require('../../store/useGpsStore') as {
-        useGpsStore: { getState: () => { lat: number | null; lng: number | null } };
+      const { buildExplicitNavBridgeSpeech } = require('../../services/navigation/navStartSpeech') as {
+        buildExplicitNavBridgeSpeech: (n: string) => string;
       };
-      const gps = useGpsStore.getState();
-      void ensureWeatherFresh(
-        'tick',
-        gps.lat != null && gps.lng != null ? { lat: gps.lat, lng: gps.lng } : null,
-        { userAsked: true },
-      );
+      const speechName = resolveNavDestSpeechName({
+        query: address,
+        geoLabel: address,
+      });
+      const peek = buildExplicitNavBridgeSpeech(speechName);
+      call1LeadEarly = peek;
+      beat1Locked = true;
+      try {
+        useFinnusStore.getState().setNavRouteLoading(true);
+      } catch {
+        /* soft */
+      }
+      // Geocode + Pin/Route sofort parallel zur Bridge — Karte malt während TTS.
+      try {
+        const { kickInstantMapNav } = require('../../services/navigation/navDestPrefetch') as {
+          kickInstantMapNav: (o: {
+            destLabel: string;
+            userText?: string | null;
+          }) => void;
+        };
+        kickInstantMapNav({
+          destLabel: address,
+          userText: rewritten || rawUserTextForCall1,
+        });
+      } catch {
+        /* soft */
+      }
+      try {
+        const { markBridgeFirst } = require('../reboot/pipeline/turnLatencyMetrics') as {
+          markBridgeFirst: () => void;
+        };
+        markBridgeFirst();
+      } catch {
+        /* soft */
+      }
+      earlyBridgePromise = speakModuleWaitBridge(peek, turnId, {
+        userText: rewritten || rawUserTextForCall1,
+      }).then((spoken) => {
+        if (spoken) bridgeSpokenDuringAnalyze = true;
+        else beat1Locked = false;
+        return spoken;
+      });
     }
+  } catch (err) {
+    if (__DEV__) console.warn('[runConciergeTurn] early address nav bridge', err);
+  }
+
+  // Call-1 Parallel-Work: Wetter/Nav/Pitch-IO — parallel zu Analyze+Bridge.
+  try {
+    const { kickCall1ParallelWork } = require('../../services/concierge/kickCall1ParallelWork') as {
+      kickCall1ParallelWork: (o: {
+        userText: string;
+        rewritten?: string | null;
+      }) => void;
+    };
+    kickCall1ParallelWork({
+      userText: rawUserTextForCall1,
+      rewritten,
+    });
   } catch {
     /* soft */
   }
@@ -542,31 +917,50 @@ async function runConciergeTurnBody(
   // Call-1 sieht JEDEN Satz (auch 5k / Plan-Ja / Hamburg-Tag).
   // M5 / Pitch / Tour sind Backends NACH Call-1, keine Early-Weiche.
 
-  // Modul-1/Geofence ~60 s pausieren, solange User-Frage läuft
-  try {
-    const { holdExploreForUserQuestion } = await import('../../runtime/exploreHold');
-    if (rawUserTextForCall1.length >= 4) {
-      holdExploreForUserQuestion(60_000, 'concierge_turn');
+  // Explore-Hold / Travel-Mode / Nav-Choice: parallel zu Call-1 — nicht davor blocken.
+  void (async () => {
+    try {
+      const { holdExploreForUserQuestion } = await import(
+        '../../runtime/exploreHold'
+      );
+      if (rawUserTextForCall1.length >= 4) {
+        holdExploreForUserQuestion(60_000, 'concierge_turn');
+      }
+    } catch {
+      /* soft */
     }
-  } catch {
-    /* soft */
-  }
-
-  // Hard-Nav / Just-Do-It / Stadt-Pack / M1 / Reisebüro erst NACH Call-1.
-  // Pack-Popup: nicht mid-turn soft-offer — nur Call-1 packPolicy / echter Stadtwechsel.
-
-  try {
-    const {
-      detectTravelModeVoiceOverride,
-      forceBikeModeFromVoice,
-      setPreferredTravelMode,
-    } = await import('../../services/navigation/travelModeContext');
-    const mode = detectTravelModeVoiceOverride(rawUserTextForCall1);
-    if (mode === 'bike') forceBikeModeFromVoice();
-    else if (mode === 'foot') setPreferredTravelMode('foot');
-  } catch {
-    /* soft */
-  }
+    try {
+      const {
+        detectTravelModeVoiceOverride,
+        forceBikeModeFromVoice,
+        setPreferredTravelMode,
+      } = await import('../../services/navigation/travelModeContext');
+      const mode = detectTravelModeVoiceOverride(rawUserTextForCall1);
+      if (mode === 'bike') forceBikeModeFromVoice();
+      else if (mode === 'foot') setPreferredTravelMode('foot');
+    } catch {
+      /* soft */
+    }
+    try {
+      const { isExplicitNavIntent } = await import(
+        '../../services/intent/poiInfoVsNav'
+      );
+      if (isExplicitNavIntent(rewritten)) {
+        try {
+          const { usePlanCalendarUiStore } = await import(
+            '../timeline/planCalendarUiStore'
+          );
+          const ui = usePlanCalendarUiStore.getState();
+          ui.clearShortAnswers?.();
+          ui.setPendingChoice?.(null);
+        } catch {
+          /* soft */
+        }
+      }
+    } catch {
+      /* soft */
+    }
+  })();
 
   const navActive = Boolean(useFinnusStore.getState().navActive);
   let calendarOpen = false;
@@ -579,39 +973,18 @@ async function runConciergeTurnBody(
     calendarOpen = false;
   }
 
-  // Explizite Nav: Planungs-UI (Pending-Choice / Short-Answers) darf Just-Do-It nicht blocken
-  try {
-    const { isExplicitNavIntent } = await import(
-      '../../services/intent/poiInfoVsNav'
-    );
-    if (isExplicitNavIntent(rewritten)) {
-      try {
-        const { usePlanCalendarUiStore } = await import(
-          '../timeline/planCalendarUiStore'
-        );
-        const ui = usePlanCalendarUiStore.getState();
-        ui.clearShortAnswers?.();
-        ui.setPendingChoice?.(null);
-      } catch {
-        /* soft */
-      }
-    }
-  } catch {
-    /* soft */
-  }
-
   // Plan/Tour/Reisebüro erst NACH dem Manager — keine Keyword-Weiche vor der KI.
 
   let turnRucksack: import('../reboot/pipeline/turnRucksack').TurnRucksackV1 | null =
     null;
   try {
-    const { loadBulletUiBudget } = await import(
+    const { buildTurnRucksack } = await rucksackModP;
+    const { peekBulletUiBudget } = await import(
       '../reboot/pipeline/bulletUiBudget'
     );
-    const { buildTurnRucksack, formatRucksackLine } = await import(
-      '../reboot/pipeline/turnRucksack'
-    );
-    const bulletBudget = await loadBulletUiBudget();
+    // Soft: Budget parallel; Peek für Call-1 (kein AsyncStorage-Block).
+    void bulletP;
+    const bulletBudget = peekBulletUiBudget();
     let liveChatActive = false;
     try {
       const { isLiveChatTurnActive } = require('../../services/handsFree/liveChatTurnContext') as {
@@ -646,17 +1019,28 @@ async function runConciergeTurnBody(
   let rucksackLine: string | null = null;
   try {
     if (turnRucksack) {
-      const { formatRucksackLine } = await import(
-        '../reboot/pipeline/turnRucksack'
-      );
+      const { formatRucksackLine } = await rucksackModP;
       rucksackLine = formatRucksackLine(turnRucksack);
     }
-    const { formatOwnerGoldCatalogForCall1 } = await import(
-      './call1OwnerGoldCatalog'
+    const { formatOwnerGoldCatalogForCall1, inferOwnerGoldFamilyHints } =
+      await goldModP;
+    const goldHints = inferOwnerGoldFamilyHints(rewritten);
+    const goldBlock = formatOwnerGoldCatalogForCall1(
+      undefined,
+      goldHints[0] ?? null,
+      goldHints,
     );
-    const goldBlock = formatOwnerGoldCatalogForCall1();
     if (goldBlock) {
       rucksackLine = [rucksackLine, goldBlock].filter(Boolean).join('\n');
+    }
+    try {
+      const { buildUnifiedLearnFacade } = await import('../playbooks/learnFacade');
+      const facade = await buildUnifiedLearnFacade({ userText: rewritten });
+      if (facade.promptBlock?.trim()) {
+        rucksackLine = [rucksackLine, facade.promptBlock].filter(Boolean).join('\n');
+      }
+    } catch {
+      /* playbooks optional */
     }
     if (correction.isCorrection) {
       rucksackLine = [
@@ -670,7 +1054,298 @@ async function runConciergeTurnBody(
     rucksackLine = rucksackLine ?? null;
   }
 
-  // choiceFast VOR Analyze (kein TDZ). Early Bridge läuft schon parallel (nach Rewrite).
+  // Threads für listResumableThreads: Soft-Wait, Call-1 startet trotzdem.
+  await Promise.race([
+    threadsP.then(() => undefined),
+    new Promise<void>((r) => setTimeout(r, 50)),
+  ]);
+
+  // Timer/Wecker: VOR Choice + Call-1-Nav — sticky Pitch/Nav darf den Auftrag nicht fressen.
+  try {
+    const { isTimerIntent } = require('../../services/alarms/timerService') as {
+      isTimerIntent: (s: string) => boolean;
+    };
+    let forceClock = isTimerIntent(rewritten);
+    if (!forceClock) {
+      try {
+        const { isLocalTimeAsk } = require('../../services/alarms/localTimeAsk') as {
+          isLocalTimeAsk: (s: string) => boolean;
+        };
+        forceClock = isLocalTimeAsk(rewritten);
+      } catch {
+        /* soft */
+      }
+    }
+    if (!forceClock) {
+      try {
+        const { isWakeAlarmIntent, hasClockHint } = require('../../services/alarms/wakeIntentDetect') as {
+          isWakeAlarmIntent: (s: string) => boolean;
+          hasClockHint: (s: string) => boolean;
+        };
+        const { looksLikeClockIntentLite } = require('../kernel/turnKernel') as {
+          looksLikeClockIntentLite: (s: string) => boolean;
+        };
+        forceClock =
+          (isWakeAlarmIntent(rewritten) && hasClockHint(rewritten)) ||
+          looksLikeClockIntentLite(rewritten);
+      } catch {
+        forceClock = false;
+      }
+    }
+    if (forceClock) {
+      try {
+        const { takeChoiceFastPath } = await import('./choiceTurnContext');
+        // Armed Choice verwerfen — Timer/Wecker schlägt Options-Tap.
+        takeChoiceFastPath();
+      } catch {
+        /* soft */
+      }
+      const { tryEarlyJustDoIt } = await import(
+        '../../services/concierge/earlyJustDoIt'
+      );
+      let earlyClock: Awaited<ReturnType<typeof tryEarlyJustDoIt>> = null;
+      try {
+        const { takeEarlyJustDoItKick } = require('../../services/concierge/kickCall1ParallelWork') as {
+          takeEarlyJustDoItKick: (
+            s: string,
+          ) => Promise<Awaited<ReturnType<typeof tryEarlyJustDoIt>>> | null;
+        };
+        earlyClock = await (takeEarlyJustDoItKick(rewritten) ||
+          takeEarlyJustDoItKick(rawUserTextForCall1) ||
+          tryEarlyJustDoIt(rewritten));
+      } catch {
+        earlyClock = await tryEarlyJustDoIt(rewritten);
+      }
+      if (
+        earlyClock?.speech &&
+        (earlyClock.kind === 'timer' || earlyClock.kind === 'wake' || earlyClock.kind === 'local_time')
+      ) {
+        const { presentConciergeResponse } = await import(
+          '../../services/concierge/presentConcierge'
+        );
+        await presentConciergeResponse(
+          {
+            speechText: earlyClock.speech,
+            visualBullets: (earlyClock.bullets ?? []).slice(0, 1),
+            quickActions: (earlyClock.quickActions ?? []).slice(0, 5),
+            cardTitle: earlyClock.cardTitle,
+          },
+          {
+            userText: rewritten,
+            skipAutoNav: true,
+            skipButlerRemind: true,
+            skipAlarmBackgroundTasks: true,
+          },
+        );
+        const logic: LogicNodeOutput = {
+          spokenDraft: earlyClock.speech,
+          bullets: (earlyClock.bullets ?? []).slice(0, 3),
+          buttons: [],
+          moneyEur: [],
+          warnings: [],
+        };
+        return {
+          turnId,
+          tasks: [],
+          bridgingText: earlyClock.speech,
+          logic,
+          synthesis: synthesizeOutput(logic),
+          deepResearchQueued: false,
+          jobId: earlyClock.kind === 'timer' || earlyClock.kind === 'wake' ? 'memory' : 'day_plan_budget',
+        };
+      }
+    }
+  } catch (err) {
+    console.warn('[runConciergeTurn] early timer/wake failed', err);
+  }
+
+  // Instant-Rechnung: Lead sofort + Zahl als Call-2 — kein LLM-Bridge-Warten.
+  // Ergebnis steht lokal fest, bevor irgendeine Bridge fertig wäre.
+  try {
+    const { tryLocalMathAnswer } = require('../../services/speech/localInstantAnswer') as {
+      tryLocalMathAnswer: (s: string) => {
+        lead: string;
+        speech: string;
+        bullets: string[];
+      } | null;
+    };
+    const localArithEarly = tryLocalMathAnswer(rawUserTextForCall1);
+    if (localArithEarly) {
+      const { presentChatLaneResult } = await import('../chat/presentChatLane');
+      return await presentChatLaneResult({
+        turnId,
+        result: {
+          speech: localArithEarly.speech,
+          bullets: localArithEarly.bullets,
+          buttons: [],
+          bridgeSpoken: localArithEarly.lead,
+          blueprintId: null,
+          personaVariant: 'default',
+          needsResearch: 'quick',
+          celestial: false,
+          nextHandoff: null,
+        },
+        bridgeFromRouter: localArithEarly.lead,
+        userText: rewritten,
+      });
+    }
+  } catch (err) {
+    if (__DEV__) console.warn('[runConciergeTurn] early local math', err);
+  }
+
+  // Instant Call-1 Lead: Peek = Call 1 → TTS sofort,
+  // Backend (Analyze + Research) parallel — kein Warten auf Gemini-Bridge-Feld.
+  // Wetter/Flug/Recherche/Nav: Mini-Zusage sofort, nicht erst nach Stream.
+  try {
+    if (!(beat1Locked || call1LeadEarly)) {
+    let wantPeek = /\bwie\s+alt\b/iu.test(rawUserTextForCall1) || /\bwie\s+gro/iu.test(rawUserTextForCall1);
+    if (!wantPeek) {
+      try {
+        const { looksLikeInstantAnswerLeadQuery } = require('../kernel/instantAnswerLeadQuery') as {
+          looksLikeInstantAnswerLeadQuery: (s: string) => boolean;
+        };
+        wantPeek = looksLikeInstantAnswerLeadQuery(rawUserTextForCall1);
+      } catch {
+        wantPeek = false;
+      }
+    }
+    if (!wantPeek) {
+      try {
+        const { classifyUtteranceFamily } = require('../kernel/utteranceFamily') as {
+          classifyUtteranceFamily: (s: string) => { family: string };
+        };
+        const fam = classifyUtteranceFamily(rawUserTextForCall1).family;
+        wantPeek =
+          fam === 'weather' ||
+          fam === 'flight' ||
+          fam === 'knowledge' ||
+          fam === 'nav' ||
+          fam === 'pitch';
+      } catch {
+        /* soft */
+      }
+    }
+    if (!wantPeek) {
+      try {
+        const { peekAnswerLeadBridge } = require('../../services/speech/answerLeadBridge') as {
+          peekAnswerLeadBridge: (s: string) => string | null;
+        };
+        wantPeek = !!peekAnswerLeadBridge(rawUserTextForCall1)?.trim();
+      } catch {
+        /* soft */
+      }
+    }
+    if (wantPeek) {
+      let peek: string | null = null;
+      try {
+        const { peekAnswerLeadBridge } = require('../../services/speech/answerLeadBridge') as {
+          peekAnswerLeadBridge: (s: string) => string | null;
+        };
+        peek = peekAnswerLeadBridge(rawUserTextForCall1)?.trim() || null;
+      } catch {
+        peek = null;
+      }
+      if (!peek) {
+        try {
+          const { peekFlightBeat1Bridge } = require('../../services/flights/flightTripAdvisor') as {
+            peekFlightBeat1Bridge: (s: string) => string | null;
+          };
+          peek = peekFlightBeat1Bridge(rawUserTextForCall1)?.trim() || null;
+        } catch {
+          /* soft */
+        }
+      }
+      if (peek) {
+        call1LeadEarly = peek;
+        beat1Locked = true;
+        try {
+          const { markBridgeFirst } = require('../reboot/pipeline/turnLatencyMetrics') as {
+            markBridgeFirst: () => void;
+          };
+          markBridgeFirst();
+        } catch {
+          /* soft */
+        }
+        earlyBridgePromise = speakModuleWaitBridge(peek, turnId, {
+          userText: rewritten || rawUserTextForCall1,
+        }).then((spoken) => {
+          if (spoken) bridgeSpokenDuringAnalyze = true;
+          else beat1Locked = false;
+          return spoken;
+        });
+      }
+    }
+    }
+  } catch (err) {
+    if (__DEV__) console.warn('[runConciergeTurn] early call1 lead', err);
+  }
+
+  // Known Local Go-To: Ziel klar → Bridge sofort („hab ich / starte Navigation“),
+  // Route/Karte parallel (kickCall1ParallelWork), Timeline still.
+  try {
+    if (!call1LeadEarly) {
+      const { isExplicitNavIntent } = require('../../services/intent/poiInfoVsNav') as {
+        isExplicitNavIntent: (s: string) => boolean;
+      };
+      const { isPrematureNavStart } = require('./call1TaskBrief') as {
+        isPrematureNavStart: (s: string) => boolean;
+      };
+      const ut = rewritten || rawUserTextForCall1;
+      if (isExplicitNavIntent(ut) && !isPrematureNavStart(ut)) {
+        const { resolveLocalAnchor } = require('../context/shortTermContext') as {
+          resolveLocalAnchor: (s: string) => {
+            name: string;
+            lat: number;
+            lng: number;
+          } | null;
+        };
+        const anchor =
+          resolveLocalAnchor(ut) || resolveLocalAnchor(rawUserTextForCall1);
+        if (anchor) {
+          const { resolveNavDestSpeechName } = require('../../services/navigation/navDestSpeechName') as {
+            resolveNavDestSpeechName: (o: {
+              query?: string;
+              geoLabel?: string;
+            }) => string;
+          };
+          const { buildExplicitNavBridgeSpeech } = require('../../services/navigation/navStartSpeech') as {
+            buildExplicitNavBridgeSpeech: (n: string) => string;
+          };
+          const speechName = resolveNavDestSpeechName({
+            query: anchor.name,
+            geoLabel: anchor.name,
+          });
+          const peek = buildExplicitNavBridgeSpeech(speechName);
+          call1LeadEarly = peek;
+          beat1Locked = true;
+          try {
+            useFinnusStore.getState().setNavRouteLoading(true);
+          } catch {
+            /* soft */
+          }
+          try {
+            const { markBridgeFirst } = require('../reboot/pipeline/turnLatencyMetrics') as {
+              markBridgeFirst: () => void;
+            };
+            markBridgeFirst();
+          } catch {
+            /* soft */
+          }
+          earlyBridgePromise = speakModuleWaitBridge(peek, turnId, {
+            userText: ut,
+          }).then((spoken) => {
+            if (spoken) bridgeSpokenDuringAnalyze = true;
+            else beat1Locked = false;
+            return spoken;
+          });
+        }
+      }
+    }
+  } catch (err) {
+    if (__DEV__) console.warn('[runConciergeTurn] early named nav bridge', err);
+  }
+
+  // choiceFast VOR Analyze (kein TDZ). Beat-1 startet mit Call-1 (nicht erst nach JSON).
   let choiceFast: import('./choiceTurnContext').ChoiceFastPathArm | null = null;
   try {
     const { takeChoiceFastPath } = await import('./choiceTurnContext');
@@ -700,6 +1375,12 @@ async function runConciergeTurnBody(
     } catch {
       streamBridgeMaxWords = 14;
     }
+    // Beat-1 = Call-1 Bridge (Stream onBridge) — außer Peek schon als Call 1 TTS.
+    // Keine Floskel vor Call 1: Peek = derselbe Antwort-Einstieg, nur ohne Stream-Warten.
+    if (!call1LeadEarly) {
+      beat1Locked = false;
+      earlyBridgePromise = Promise.resolve(null);
+    }
     analysis =
       (await takeManagerWarmupIfMatch(rawUserTextForCall1)) ||
       (await analyzeManagerTurn({
@@ -711,10 +1392,11 @@ async function runConciergeTurnBody(
         signal,
         rucksackLine,
         onBridge: (bridge) => {
-          if (!bridge?.trim() || bridgeSpokenDuringAnalyze) return;
+          if (!bridge?.trim() || bridgeSpokenDuringAnalyze || beat1Locked) return;
           // Mode-Switch-Bridge hat Zusagen+ETA schon — kein zweites Stream-Bridge
           if (earlyNavModeSwitchBridge) return;
           if (!(streamBridgeMaxWords > 0)) return;
+          beat1Locked = true;
           try {
             const { markBridgeFirst } = require('../reboot/pipeline/turnLatencyMetrics') as {
               markBridgeFirst: () => void;
@@ -748,13 +1430,14 @@ async function runConciergeTurnBody(
             'new',
           ).then((r) => {
             if (r?.alreadySpoken || r?.text) bridgeSpokenDuringAnalyze = true;
+            else beat1Locked = false;
           });
         },
       }));
   }
-  // Early Bridge: erst nach echtem TTS-Start als „gesprochen“ markieren.
+  // Early Bridge: TTS parallel — Backend/Call-2 nicht auf Enqueue/Playback warten.
   {
-    const earlySpoken = await earlyBridgePromise.catch(() => null);
+    void earlyBridgePromise.catch(() => null);
     let pumpLive = false;
     try {
       const { getFusedTurnPump } = require('../speech/fusedTurnSpeech') as {
@@ -764,8 +1447,20 @@ async function runConciergeTurnBody(
     } catch {
       pumpLive = false;
     }
-    if (earlySpoken || bridgeSpokenDuringAnalyze || pumpLive) {
+    if (
+      call1LeadEarly ||
+      bridgeSpokenDuringAnalyze ||
+      pumpLive ||
+      beat1Locked
+    ) {
       analysis = { ...analysis, bridgeSpokenEarly: true };
+    }
+    if (call1LeadEarly) {
+      analysis = {
+        ...analysis,
+        bridge: call1LeadEarly,
+        bridgeSpokenEarly: true,
+      };
     }
   }
   analysis = enrichAnalysisWithBlueprint(analysis);
@@ -814,7 +1509,296 @@ async function runConciergeTurnBody(
   let call1Execution = finalizeCall1Execution(analysis, rawUserTextForCall1);
   analysis = { ...analysis, execution: call1Execution };
 
+  // Call-1 Orchestrator: curatedContext, askBack, Timing-Brief; Phase C work[] → execution
+  let call1BriefBlock: string | null = null;
+  let call1OrchBrief: import('./call1TaskBrief').Call1TaskBrief | null = null;
+  try {
+    const {
+      resolveCall1Task,
+      formatBriefForCall2,
+      reconcileExecutionWithOrchestrator,
+      managerTasksFromWork,
+    } = await import('./call1WorkOrchestrator');
+    const orch = resolveCall1Task({
+      analysis,
+      userText: rawUserTextForCall1,
+      call2Tips: analysis.call2Brief ? [analysis.call2Brief] : null,
+    });
+    try {
+      const {
+        isCriticalSlotAskBack,
+        resolveBridgeCompleteFlag,
+      } = require('./call1BridgeCompleteGate') as {
+        isCriticalSlotAskBack: (a: string | null, u: string) => boolean;
+        resolveBridgeCompleteFlag: (o: {
+          userText: string;
+          claimedComplete: boolean;
+          askBack: string | null;
+          runnableWorkCount: number;
+          novelRequiresDeepWeb?: boolean;
+        }) => boolean;
+      };
+      if (
+        orch.brief.askBack &&
+        !isCriticalSlotAskBack(orch.brief.askBack, rawUserTextForCall1)
+      ) {
+        orch.brief.askBack = null;
+      }
+      orch.brief.bridgeComplete = resolveBridgeCompleteFlag({
+        userText: rawUserTextForCall1,
+        claimedComplete:
+          Boolean(analysis.bridgeComplete) || orch.brief.bridgeComplete,
+        askBack: orch.brief.askBack,
+        runnableWorkCount: orch.brief.runnableWork.length,
+        novelRequiresDeepWeb: orch.brief.openWorld?.novelRequiresDeepWeb,
+      });
+    } catch {
+      if (orch.brief.runnableWork.length > 0) {
+        orch.brief.bridgeComplete = false;
+        orch.brief.askBack = null;
+      }
+    }
+    call1OrchBrief = orch.brief;
+    const reconciled = reconcileExecutionWithOrchestrator(
+      call1Execution,
+      orch,
+      rawUserTextForCall1,
+    );
+    call1Execution = reconciled;
+    // Solo-Flug: nur flight_only — nie Reisebüro/Paket überschreiben
+    try {
+      const { isSoloFlightAbSearch } = require('../../services/flights/flightTripIntent') as {
+        isSoloFlightAbSearch: (s: string) => boolean;
+      };
+      const { isFindusReisebueroHandoff } = require('../../reisebuero/handoff') as {
+        isFindusReisebueroHandoff: (s: string) => boolean;
+      };
+      const { inferCall1JobShape, jobShapeNeedsCompose } = require('./call1JobShape') as {
+        inferCall1JobShape: (s: string) => string;
+        jobShapeNeedsCompose: (s: string) => boolean;
+      };
+      const shape = inferCall1JobShape(rawUserTextForCall1 || rewritten);
+      if (jobShapeNeedsCompose(shape as never)) {
+        call1Execution = 'task_fanout';
+        call1ComposeShape = shape as import('./call1JobShape').Call1JobShape;
+      } else if (
+        reconciled !== 'reisebuero' &&
+        !isFindusReisebueroHandoff(rawUserTextForCall1) &&
+        !isFindusReisebueroHandoff(rewritten) &&
+        shape === 'flight_only' &&
+        (isSoloFlightAbSearch(rawUserTextForCall1) ||
+          isSoloFlightAbSearch(rewritten))
+      ) {
+        call1Execution = 'flight_advisor';
+      } else if (
+        isFindusReisebueroHandoff(rawUserTextForCall1) ||
+        isFindusReisebueroHandoff(rewritten) ||
+        shape === 'trip_package'
+      ) {
+        call1Execution = 'reisebuero';
+      }
+    } catch {
+      /* soft */
+    }
+    let nextTasks = analysis.tasks;
+    if (
+      (reconciled === 'task_fanout' || orch.brief.runnableWork.length >= 2) &&
+      (!(analysis.tasks?.length) || analysis.tasks.length === 0)
+    ) {
+      const synthesized = managerTasksFromWork(orch.brief.runnableWork);
+      if (synthesized.length) nextTasks = synthesized;
+    }
+    let nextBridgeComplete = orch.brief.bridgeComplete;
+    analysis = {
+      ...analysis,
+      execution: call1Execution,
+      curatedContext: orch.brief.curatedContext,
+      selfQuestions: orch.brief.selfQuestions,
+      // Brief gewinnt: null = kein LLM-AskBack-Leak (Medical/Just-Do-It/Ambiguity)
+      askBack: orch.brief.askBack,
+      bridgeComplete: nextBridgeComplete,
+      tasks: nextTasks,
+    };
+    if (call1ComposeShape) {
+      try {
+        const { augmentAnalysisForCompose } = require('./composeRunner') as typeof import('./composeRunner');
+        analysis = augmentAnalysisForCompose(
+          analysis,
+          rawUserTextForCall1 || rewritten,
+          call1ComposeShape,
+        );
+        call1Execution = 'task_fanout';
+      } catch {
+        /* soft */
+      }
+    }
+    try {
+      const { scheduleWriteExecutionHint } = require('../timeline/timelineUpsert') as typeof import('../timeline/timelineUpsert');
+      if (
+        scheduleWriteExecutionHint(rawUserTextForCall1 || rewritten) ===
+          'plan_module' &&
+        call1Execution !== 'flight_advisor' &&
+        call1Execution !== 'reisebuero'
+      ) {
+        call1Execution = 'plan_module';
+        analysis = { ...analysis, execution: 'plan_module' };
+      }
+    } catch {
+      /* soft */
+    }
+    // Phase 3 Belt: Ambiguity-/Permission-Ask nie als Bridge sprechen
+    if (orch.brief.askBack) {
+      try {
+        const {
+          looksLikeAmbiguityAskBack,
+          looksLikePermissionAskBack,
+        } = require('../mission/resolveMissionAskBack') as {
+          looksLikeAmbiguityAskBack: (s: string) => boolean;
+          looksLikePermissionAskBack: (s: string) => boolean;
+        };
+        const ageClear =
+          /\bwie\s+alt\b/iu.test(rewritten) &&
+          /\b(papst|pope|leo|neuer|müller|mueller)\b/iu.test(rewritten);
+        if (
+          ageClear ||
+          looksLikeAmbiguityAskBack(orch.brief.askBack) ||
+          looksLikePermissionAskBack(orch.brief.askBack)
+        ) {
+          analysis = { ...analysis, askBack: null };
+        } else if (!analysis.bridge || analysis.bridge.length < 8) {
+          analysis = { ...analysis, bridge: orch.brief.askBack };
+        }
+      } catch {
+        if (!analysis.bridge || analysis.bridge.length < 8) {
+          analysis = { ...analysis, bridge: orch.brief.askBack };
+        }
+      }
+    }
+    call1BriefBlock = formatBriefForCall2(orch.brief, rawUserTextForCall1);
+  } catch {
+    call1BriefBlock = null;
+  }
+
+  // Research/Fanout SOFORT parallel zur Call-1-Bridge — nicht hinter Nav/Pitch-Fallthrough.
+  let earlyFanoutPromise: ReturnType<typeof runManagerTaskFanout> | null = null;
+  try {
+    const wantFanout =
+      !choiceFast &&
+      (call1Execution === 'task_fanout' ||
+        call1Execution === 'nav_execute' ||
+        ((analysis.tasks?.length ?? 0) > 0 &&
+          call1Execution !== 'chat_lane' &&
+          call1Execution !== 'events_research' &&
+          call1Execution !== 'pitch_module' &&
+          call1Execution !== 'reisebuero'));
+    if (wantFanout) {
+      earlyFanoutPromise = runManagerTaskFanout({
+        analysis,
+        userText: rewritten,
+        rucksack,
+        subject: analysis.subject || null,
+        city: short.lastMentionedCity,
+        signal,
+      });
+    }
+  } catch {
+    earlyFanoutPromise = null;
+  }
+  // Bridge fire-and-forget falls Stream sie noch nicht gesprochen hat.
+  try {
+    if (
+      !bridgeSpokenDuringAnalyze &&
+      !analysis.bridgeSpokenEarly &&
+      (analysis.bridge || '').trim() &&
+      analysis.bridgeComplete !== true
+    ) {
+      analysis = { ...analysis, bridgeSpokenEarly: true };
+      bridgeSpokenDuringAnalyze = true;
+      void speakBridgeFromAnalysis(
+        analysis,
+        turnId,
+        rewritten,
+        'new',
+      );
+    }
+  } catch {
+    /* soft */
+  }
+
+  // Pace-Turn-Session (Autonomy Reboot) — Bridge-Budget ↔ Collective
+  try {
+    const { beginPaceTurn } = require('../reboot/pipeline/paceTurnSession') as {
+      beginPaceTurn: (o: {
+        turnId: string;
+        userText: string;
+        execution?: string | null;
+        lane?: string | null;
+        jobHint?: string | null;
+        bridgeBudgetSec?: number | null;
+      }) => void;
+    };
+    beginPaceTurn({
+      turnId,
+      userText: rewritten,
+      execution: call1Execution,
+      lane: analysis.chatLane,
+      jobHint: analysis.jobHint,
+      bridgeBudgetSec: analysis.researchBudgetSec ?? null,
+    });
+  } catch {
+    /* soft */
+  }
+
+  // Root-Ziel / Thread-Spine (Autonomy Reboot) — hält Follow-ups zusammen.
+  try {
+    const {
+      noteSessionRootGoal,
+      getSessionRootGoal,
+      appendSessionThreadSpine,
+      clearSessionRootGoal,
+    } = require('../context/shortTermContext') as {
+      noteSessionRootGoal: (g: string | null) => void;
+      getSessionRootGoal: () => string | null;
+      appendSessionThreadSpine: (b: string | null) => void;
+      clearSessionRootGoal: () => void;
+    };
+    const isNew =
+      analysis.session === 'new' ||
+      analysis.topicScope?.mode === 'new' ||
+      (analysis.topicScope?.turnsForCall2 ?? 1) <= 0;
+    if (isNew) {
+      clearSessionRootGoal();
+      try {
+        const {
+          onTopicBoundaryPreserveFollowThrough,
+        } = require('./missionFollowThrough') as {
+          onTopicBoundaryPreserveFollowThrough: (t: string) => void;
+        };
+        onTopicBoundaryPreserveFollowThrough(rawUserTextForCall1 || '');
+      } catch {
+        /* soft */
+      }
+      const goal =
+        (analysis.call2Brief || analysis.intentSummary || rawUserTextForCall1 || '')
+          .replace(/\s+/g, ' ')
+          .trim()
+          .slice(0, 220);
+      if (goal) noteSessionRootGoal(goal);
+    } else if (!getSessionRootGoal()) {
+      noteSessionRootGoal(
+        (analysis.intentSummary || rawUserTextForCall1 || '').slice(0, 220),
+      );
+    } else {
+      appendSessionThreadSpine(
+        (analysis.intentSummary || rawUserTextForCall1 || '').slice(0, 80),
+      );
+    }
+  } catch {
+    /* soft */
+  }
+
   // Wetter-Opener: Call-1 Isolation erzwingen (auch wenn LLM session=continue sagt).
+  // Nie bei Gastro/AYCE — sonst „heute Abend essen“ → Wetter-Chat.
   try {
     const {
       looksLikeOutfitOrWeatherUtterance,
@@ -826,7 +1810,17 @@ async function runConciergeTurnBody(
     const { looksLikePicnicQuery } = require('../pitch/picnicIntent') as {
       looksLikePicnicQuery: (s: string) => boolean;
     };
+    const { detectPitchKind } = require('../pitch/parentBrief') as {
+      detectPitchKind: (s: string) => string;
+    };
+    const { looksLikeAyceQuery } = require('../pitch/ayceIntent') as {
+      looksLikeAyceQuery: (s: string) => boolean;
+    };
+    const diningPrimary =
+      detectPitchKind(rawUserTextForCall1) === 'food' ||
+      looksLikeAyceQuery(rawUserTextForCall1);
     if (
+      !diningPrimary &&
       looksLikeOutfitOrWeatherUtterance(rawUserTextForCall1) &&
       !weatherAskWantsConversationPlace(rawUserTextForCall1) &&
       !looksLikePicnicQuery(rawUserTextForCall1)
@@ -881,7 +1875,7 @@ async function runConciergeTurnBody(
   // Isolation: neues Thema → Sticky/Card/Pitch scrubben (Call-1 topicScope ehren).
   try {
     const { scrubStickyAfterCall1 } = await import('./call1ManagerIsolation');
-    await scrubStickyAfterCall1(analysis);
+    await scrubStickyAfterCall1(analysis, rawUserTextForCall1);
   } catch {
     /* soft */
   }
@@ -901,27 +1895,27 @@ async function runConciergeTurnBody(
     const stopAsk = isPureStopNavigationIntent(rawUserTextForCall1);
     if (stopAsk) {
       await clearNavigationHard({ silent: true });
-      const text =
-        (analysis.bridge || '').trim() ||
-        'Alles klar — Navigation ist aus.';
-      if (!analysis.bridgeSpokenEarly) {
-        try {
-          const spoken = await speakModuleWaitBridge(text, turnId, { force: true });
-          if (spoken) {
-            analysis = {
-              ...analysis,
-              bridgeSpokenEarly: true,
-              bridgeComplete: true,
-              execution: 'nav_execute',
-            };
-            bridgeSpokenDuringAnalyze = true;
-          }
-        } catch {
-          /* soft */
-        }
-      } else {
+      // Immer feste Stop-Ansagen — nie LLM „behalte im Blick“ als Bridge
+      const text = 'Alles klar — Navigation ist aus.';
+      try {
+        void speakModuleWaitBridge(text, turnId, {
+          force: true,
+          userText: rawUserTextForCall1,
+        }).then((spoken) => {
+          if (spoken) bridgeSpokenDuringAnalyze = true;
+        });
         analysis = {
           ...analysis,
+          bridge: text,
+          bridgeSpokenEarly: true,
+          bridgeComplete: true,
+          execution: 'nav_execute',
+        };
+        bridgeSpokenDuringAnalyze = true;
+      } catch {
+        analysis = {
+          ...analysis,
+          bridge: text,
           bridgeComplete: true,
           execution: 'nav_execute',
         };
@@ -932,7 +1926,7 @@ async function runConciergeTurnBody(
         );
         await presentConciergeResponse(
           {
-            speechText: analysis.bridgeSpokenEarly ? '' : text,
+            speechText: '',
             visualBullets: [],
             quickActions: [],
             cardTitle: 'Navigation',
@@ -943,7 +1937,7 @@ async function runConciergeTurnBody(
         /* soft */
       }
       const logic: LogicNodeOutput = {
-        spokenDraft: analysis.bridgeSpokenEarly ? '' : text,
+        spokenDraft: '',
         bullets: [],
         buttons: [],
         moneyEur: [],
@@ -952,7 +1946,7 @@ async function runConciergeTurnBody(
       return {
         turnId,
         tasks: [],
-        bridgingText: analysis.bridge || text,
+        bridgingText: text,
         logic,
         synthesis: synthesizeOutput(logic),
         deepResearchQueued: false,
@@ -963,16 +1957,113 @@ async function runConciergeTurnBody(
     console.warn('[runConciergeTurn] call1 nav-stop failed', err);
   }
 
-  // bridgeComplete → Call 2 skip (Bridge = ganze Antwort / Klärfrage).
+  // Trivia/Quick-Lookup: nie Klärfrage + nie Call-2 skip (Papst-Alter u.ä.).
+  try {
+    const { looksLikeNamedTriviaSubject } = require('../kernel/turnKernel') as {
+      looksLikeNamedTriviaSubject: (s: string) => boolean;
+    };
+    const { looksLikeInstantAnswerLeadQuery } = require('../kernel/instantAnswerLeadQuery') as {
+      looksLikeInstantAnswerLeadQuery: (s: string) => boolean;
+    };
+    const triviaAsk =
+      looksLikeInstantAnswerLeadQuery(rawUserTextForCall1) ||
+      looksLikeNamedTriviaSubject(rawUserTextForCall1);
+    if (triviaAsk) {
+      analysis = {
+        ...analysis,
+        bridgeComplete: false,
+        execution: 'chat_lane',
+        chatLane: 'chat',
+        pace: 'instant',
+        bridgeMaxWords: Math.min(analysis.bridgeMaxWords ?? 18, 18),
+        needsResearch: 'quick',
+      };
+      call1Execution = 'chat_lane';
+      // Klärfrage / Recherche-Theater verwerfen — Call-1 soll Antwort einleiten
+      const br = String(analysis.bridge || '');
+      if (
+        /\b(wen|was|welche[rn]?)\s+(genau\s+)?meinst\b|\bwen\s+genau\b|\bwie\s+alt\s+ist\s+wer\b/iu.test(
+          br,
+        ) ||
+        /\b(finde\s+(gerne\s+)?heraus|schau\s+mal\s+wer|recherchier|gute\s+frage|spannende\s+frage|tolle\s+frage)\b/iu.test(
+          br,
+        )
+      ) {
+        // Meta/Klärfrage verwerfen — kein Code-Ersatz; Call 2 liefert den Fakt.
+        analysis = {
+          ...analysis,
+          bridge: null,
+          bridgeSpokenEarly: Boolean(bridgeSpokenDuringAnalyze),
+        };
+      }
+    }
+  } catch {
+    /* soft */
+  }
+
+  // Explizite Nav: Bridge darf Zusagen, aber bridgeComplete darf den Start nicht killen.
+  try {
+    const { isExplicitNavIntent } = require('../../services/intent/poiInfoVsNav') as {
+      isExplicitNavIntent: (s: string) => boolean;
+    };
+    if (
+      analysis.bridgeComplete === true &&
+      isExplicitNavIntent(rawUserTextForCall1)
+    ) {
+      analysis = {
+        ...analysis,
+        bridgeComplete: false,
+        execution: 'nav_execute',
+        chatLane: 'nav',
+      };
+      call1Execution = 'nav_execute';
+    }
+  } catch {
+    /* soft */
+  }
+
+  // bridgeComplete → Call 2 skip NUR bei echten Blockern (Gate).
+  // Touristen-Invent / runnable Work / Novel-Web → weiter recherchieren.
+  if (analysis.bridgeComplete === true) {
+    let allowSkip = true;
+    try {
+      const {
+        shouldSkipCall2ForBridgeComplete,
+      } = require('./call1BridgeCompleteGate') as {
+        shouldSkipCall2ForBridgeComplete: (o: {
+          userText: string;
+          claimedComplete: boolean;
+          askBack: string | null;
+          runnableWorkCount: number;
+          novelRequiresDeepWeb?: boolean;
+        }) => boolean;
+      };
+      allowSkip = shouldSkipCall2ForBridgeComplete({
+        userText: rawUserTextForCall1,
+        claimedComplete: true,
+        askBack: analysis.askBack ?? call1OrchBrief?.askBack ?? null,
+        runnableWorkCount: call1OrchBrief?.runnableWork?.length ?? 0,
+        novelRequiresDeepWeb: call1OrchBrief?.openWorld?.novelRequiresDeepWeb,
+      });
+    } catch {
+      if ((call1OrchBrief?.runnableWork?.length ?? 0) > 0) allowSkip = false;
+    }
+    if (!allowSkip) {
+      analysis = { ...analysis, bridgeComplete: false, askBack: null };
+    }
+  }
   if (analysis.bridgeComplete === true) {
     const text = (analysis.bridge || '').trim();
     if (text && !analysis.bridgeSpokenEarly && !bridgeSpokenDuringAnalyze) {
       try {
-        const spoken = await speakModuleWaitBridge(text, turnId, { force: true });
-        if (spoken) {
-          analysis = { ...analysis, bridgeSpokenEarly: true };
-          bridgeSpokenDuringAnalyze = true;
-        }
+        void speakModuleWaitBridge(text, turnId, {
+          force: true,
+          userText: rawUserTextForCall1,
+        }).then((spoken) => {
+          if (spoken) bridgeSpokenDuringAnalyze = true;
+        });
+        analysis = { ...analysis, bridgeSpokenEarly: true };
+        bridgeSpokenDuringAnalyze = true;
       } catch {
         /* soft */
       }
@@ -1084,6 +2175,52 @@ async function runConciergeTurnBody(
       rememberLiveInventoryQuery(rewritten, invFollow.kind);
     }
   }
+
+  // Hotel-Follow-up auf leerem Pitch — kein stilles Leerlauf / kein Fake-Hotel
+  try {
+    const { resolveHotelEmptyFollowUp } = await import('./hotelPitchFollowUp');
+    const hotelEmpty = resolveHotelEmptyFollowUp({
+      userText: rewritten,
+      turnId,
+      inheritInventory: analysis.topicScope?.inheritLiveInventory === true,
+    });
+    if (hotelEmpty && 'retryQuery' in hotelEmpty) {
+      rewritten = hotelEmpty.retryQuery;
+      analysis = {
+        ...analysis,
+        execution: 'pitch_module',
+        session: 'continue',
+        topicScope: {
+          mode: 'followup',
+          turnsForCall2: Math.max(2, analysis.topicScope?.turnsForCall2 ?? 3),
+          inheritLiveInventory: true,
+        },
+      };
+      call1Execution = 'pitch_module';
+      rememberLiveInventoryQuery(rewritten, 'hotel');
+      try {
+        const { noteLastLiveInventory } = require('../context/shortTermContext') as {
+          noteLastLiveInventory: (o: {
+            kind: 'hotel';
+            query: string;
+            hotelRetried?: boolean;
+          }) => void;
+        };
+        noteLastLiveInventory({
+          kind: 'hotel',
+          query: rewritten,
+          hotelRetried: true,
+        });
+      } catch {
+        /* soft */
+      }
+    } else if (hotelEmpty && 'turnId' in hotelEmpty) {
+      return hotelEmpty;
+    }
+  } catch {
+    /* soft */
+  }
+
   if (call1Execution === 'flight_advisor') {
     try {
       const { releasePlanWaitForForeignTopic } = await import(
@@ -1093,18 +2230,20 @@ async function runConciergeTurnBody(
     } catch {
       /* soft */
     }
-    try {
-      const { tryFlightAdvisorHandoff } = await import('./handoffs/flightEarly');
-      const flightResult = await tryFlightAdvisorHandoff({
-        rewritten,
-        turnId,
-        turnCityKey,
-        turnCityHint,
-        analysis,
-      });
-      if (flightResult) return flightResult;
-    } catch (err) {
-      console.warn('[runConciergeTurn] flight advisor handoff failed', err);
+    if (!call1ComposeShape) {
+      try {
+        const { tryFlightAdvisorHandoff } = await import('./handoffs/flightEarly');
+        const flightResult = await tryFlightAdvisorHandoff({
+          rewritten,
+          turnId,
+          turnCityKey,
+          turnCityHint,
+          analysis,
+        });
+        if (flightResult) return flightResult;
+      } catch (err) {
+        console.warn('[runConciergeTurn] flight advisor handoff failed', err);
+      }
     }
   }
 
@@ -1160,16 +2299,35 @@ async function runConciergeTurnBody(
       }
       if (cap.rule) {
         try {
-          const { scrubStickyAfterCall1 } = await import('./call1ManagerIsolation');
-          await scrubStickyAfterCall1({
-            ...analysis,
-            session: 'new',
-            topicScope: {
-              mode: 'new',
-              turnsForCall2: 0,
-              inheritLiveInventory: false,
-            },
+          const { replanHintFromCorrection, playbookCandidateFromCorrection } =
+            await import('../playbooks/correctionReplan');
+          const replan = replanHintFromCorrection(cap.rule);
+          if (replan) {
+            analysis = {
+              ...analysis,
+              intentSummary: `${analysis.intentSummary || ''} ${replan}`.trim(),
+            };
+          }
+          void playbookCandidateFromCorrection(cap.rule, {
+            hasBookingLink: (cap.rule.expect ?? []).includes('booking_url'),
           });
+        } catch {
+          /* soft */
+        }
+        try {
+          const { scrubStickyAfterCall1 } = await import('./call1ManagerIsolation');
+          await scrubStickyAfterCall1(
+            {
+              ...analysis,
+              session: 'new',
+              topicScope: {
+                mode: 'new',
+                turnsForCall2: 0,
+                inheritLiveInventory: false,
+              },
+            },
+            rawUserTextForCall1,
+          );
         } catch {
           /* soft */
         }
@@ -1207,13 +2365,22 @@ async function runConciergeTurnBody(
     const { isRainDontCareUtterance } = await import(
       '../../services/weather/rainIncomingPolicy'
     );
-    const rainCard =
-      useFinnusStore.getState().activeConciergeCard?.cardTitle === 'Wetter';
+    const rainTitle =
+      useFinnusStore.getState().activeConciergeCard?.cardTitle ?? '';
+    const rainCard = /^regenwarnung$/i.test(rainTitle) || /^wetter$/i.test(rainTitle);
     if (
       isRainDontCareUtterance(rewritten) ||
       (rainCard && /^\s*(ist mir )?egal\.?\s*$/i.test(rewritten))
     ) {
       useFinnusStore.getState().setActiveConciergeCard(null);
+      try {
+        const { markRainDontCareUntilMorning } = await import(
+          '../../services/weather/rainWarnSessionGate'
+        );
+        markRainDontCareUntilMorning();
+      } catch {
+        /* soft */
+      }
     }
   } catch {
     /* soft */
@@ -1276,9 +2443,85 @@ async function runConciergeTurnBody(
     console.warn('[runConciergeTurn] emergency early failed', err);
   }
 
+  // Absichtsticket (actions/place/topic). Phrasen nur wenn Call 1 kein Ticket schrieb.
+  try {
+    const cruiseUtRaw = rewritten || rawUserTextForCall1 || input.userText;
+    const heard = String(analysis.heardAs || '').trim();
+    const { executeIntentAct } = await import('./intentActExecute');
+    const done = await executeIntentAct({
+      act: analysis.order?.act,
+      userText: cruiseUtRaw,
+      heardAs: heard,
+    });
+    if (done?.speech) {
+      const { presentConciergeResponse } = await import(
+        '../../services/concierge/presentConcierge'
+      );
+      await presentConciergeResponse(
+        {
+          speechText: done.speech,
+          visualBullets: done.bullets.slice(0, 3),
+          quickActions: [],
+          cardTitle: done.cardTitle,
+        },
+        { userText: cruiseUtRaw, skipAutoNav: true },
+      );
+      const logic: LogicNodeOutput = {
+        spokenDraft: done.speech,
+        bullets: done.bullets.slice(0, 3),
+        buttons: [],
+        moneyEur: [],
+        warnings: [],
+      };
+      return {
+        turnId,
+        tasks: [],
+        bridgingText: analysis.bridge || null,
+        logic,
+        synthesis: synthesizeOutput(logic),
+        deepResearchQueued: false,
+        jobId: 'nav_route',
+      };
+    }
+  } catch (err) {
+    console.warn('[runConciergeTurn] intent act failed', err);
+  }
+
   // Call-1 sagte nav_execute → Hard-Dest / Mode-Switch. Kein Keyword-Steal mehr.
   try {
-    if (call1Execution === 'nav_execute') {
+    let skipNavForClock = false;
+    try {
+      const { isTimerIntent } = require('../../services/alarms/timerService') as {
+        isTimerIntent: (s: string) => boolean;
+      };
+      skipNavForClock = isTimerIntent(rewritten);
+      if (!skipNavForClock) {
+        const { isWakeAlarmIntent, hasClockHint } = require('../../services/alarms/wakeIntentDetect') as {
+          isWakeAlarmIntent: (s: string) => boolean;
+          hasClockHint: (s: string) => boolean;
+        };
+        skipNavForClock = isWakeAlarmIntent(rewritten) && hasClockHint(rewritten);
+      }
+    } catch {
+      skipNavForClock = false;
+    }
+    if (call1Execution === 'nav_execute' && !skipNavForClock && !call1ComposeShape) {
+      // Solo-Flug A→B darf nie Hard-Nav/ÖPNV werden (dest „Hamburg nach Split vom 27“)
+      let skipNavForFlight = false;
+      try {
+        const { isSoloFlightAbSearch, isFlightTripQuery } = require('../../services/flights/flightTripIntent') as {
+          isSoloFlightAbSearch: (s: string) => boolean;
+          isFlightTripQuery: (s: string) => boolean;
+        };
+        skipNavForFlight =
+          isSoloFlightAbSearch(rewritten) ||
+          isSoloFlightAbSearch(rawUserTextForCall1) ||
+          isFlightTripQuery(rewritten) ||
+          isFlightTripQuery(rawUserTextForCall1);
+      } catch {
+        skipNavForFlight = false;
+      }
+      if (!skipNavForFlight) {
       const forceExplicitNav = true;
       // Mode-Switch zum selben Ziel (ÖPNV→Fuß) — bevor Hard-Dest-Geocode
       if (!earlyNavModeSwitchPromise) {
@@ -1372,7 +2615,9 @@ async function runConciergeTurnBody(
         currentDestName: store.navTargetName,
         lastStreetQuery: peekLastStreetNavQuery(),
       };
+      const ticketPlace = analysis.order?.act?.place?.trim() || '';
       const dest =
+        (ticketPlace.length >= 2 ? ticketPlace : null) ||
         detectHardNavOverride(rewritten, navCtx) ||
         detectHardNavOverride(input.userText, navCtx) ||
         extractNamedDestinationLabel(rewritten) ||
@@ -1381,39 +2626,131 @@ async function runConciergeTurnBody(
         /\b(restaurant|café|cafe|bistro|imbiss)\b/iu.test(rewritten) ||
         /\b(tisch|reservier|speisekarte)\b/iu.test(rewritten);
       if (dest && !gastroNamed && !detectChainedNavIntent(rewritten)) {
-        const result = await hardOverrideNavigationTo(dest);
+        // Route SOFORT parallel zur Bridge — Karte malt während TTS (nicht erst danach).
+        const navPromise = hardOverrideNavigationTo(dest, {
+          userText: rewritten || input.userText,
+        });
+        let earlyBridgeSpoken = Boolean(
+          bridgeSpokenDuringAnalyze || analysis.bridgeSpokenEarly,
+        );
+        let speechName = dest;
+        try {
+          const { resolveNavDestSpeechName } = require('../../services/navigation/navDestSpeechName') as {
+            resolveNavDestSpeechName: (o: { query?: string; geoLabel?: string }) => string;
+          };
+          const { buildExplicitNavBridgeSpeech } = require('../../services/navigation/navStartSpeech') as {
+            buildExplicitNavBridgeSpeech: (n: string) => string;
+          };
+          speechName = resolveNavDestSpeechName({ query: dest, geoLabel: dest });
+          if (!earlyBridgeSpoken) {
+            const bridgeLine = buildExplicitNavBridgeSpeech(speechName);
+            presentToUi(bridgeLine, [], [], {
+              skipBulletDerive: true,
+              skipConciergeCard: true,
+              userText: rewritten || input.userText,
+            });
+            enqueueSpeech({ kind: 'main', text: bridgeLine, turnId });
+            earlyBridgeSpoken = true;
+          }
+        } catch {
+          /* soft */
+        }
+        const result = await navPromise;
         let text = result.reply;
         // Kurze Nav-Speech: Zusagen + ETA — kein Pack/M1-Roman
         if (result.ok) {
+          // Timeline still spiegeln — nie ansagen
+          try {
+            const {
+              allowLiveNavMirror,
+              upsertLiveNavFromStore,
+              purgeStaleJourneysForHardNav,
+            } = require('../../module2/timeline/syncLiveNavToPlan') as {
+              allowLiveNavMirror: () => void;
+              upsertLiveNavFromStore: (o?: { force?: boolean }) => void;
+              purgeStaleJourneysForHardNav: (dest?: string | null) => void;
+            };
+            allowLiveNavMirror();
+            purgeStaleJourneysForHardNav(result.name || dest);
+            upsertLiveNavFromStore({ force: true });
+          } catch {
+            /* soft */
+          }
           try {
             await new Promise((r) => setTimeout(r, 280));
-            const etaMin = useFinnusStore.getState().navEtaMin;
-            const bridgeAlready =
-              bridgeSpokenDuringAnalyze || analysis.bridgeSpokenEarly;
+            let etaMin = useFinnusStore.getState().navEtaMin;
+            try {
+              const { resolveNavSpeechEtaMin } = require('../../services/navigation/navHudEta') as {
+                resolveNavSpeechEtaMin: (o?: { storeEtaMin?: number | null }) => number | null;
+              };
+              const hud = resolveNavSpeechEtaMin({ storeEtaMin: etaMin });
+              if (hud != null) etaMin = hud;
+            } catch {
+              /* soft */
+            }
+            const safeName = (() => {
+              try {
+                const { resolveNavDestSpeechName } = require('../../services/navigation/navDestSpeechName') as {
+                  resolveNavDestSpeechName: (o: { query?: string; geoLabel?: string }) => string;
+                };
+                return resolveNavDestSpeechName({
+                  query: dest,
+                  geoLabel: result.name,
+                });
+              } catch {
+                return speechName || result.name;
+              }
+            })();
+            const bridgeAlready = earlyBridgeSpoken;
             if (typeof etaMin === 'number' && etaMin > 0) {
-              const dur = formatDurationMinutesDe(etaMin, 'speech');
-              text = bridgeAlready
-                ? `Das dauert etwa ${dur}.`
-                : result.replaced
-                  ? `Alles klar — ich führ dich jetzt zu ${result.name}. Das dauert etwa ${dur}.`
-                  : `Alles klar — ich starte die Navigation zu ${result.name}. Das dauert etwa ${dur}.`;
+              try {
+                const {
+                  buildExplicitNavBridgeSpeech: mkBridge,
+                  buildExplicitNavEtaSpeech: mkEta,
+                } = require('../../services/navigation/navStartSpeech') as {
+                  buildExplicitNavBridgeSpeech: (n: string) => string;
+                  buildExplicitNavEtaSpeech: (o: {
+                    etaMin: number | null;
+                    mode?: 'foot' | 'bike' | 'drive' | null;
+                  }) => string;
+                };
+                const etaLine = mkEta({ etaMin, mode: 'foot' });
+                text = bridgeAlready
+                  ? etaLine
+                  : `${mkBridge(safeName)} ${etaLine}`.trim();
+              } catch {
+                const dur = formatDurationMinutesDe(etaMin, 'speech');
+                text = bridgeAlready
+                  ? `Dauert etwa ${dur}.`
+                  : `Alles klar — ich navigiere dich zu ${safeName}. Dauert etwa ${dur}.`;
+              }
             } else if (bridgeAlready) {
               // Bridge hat Zusagen schon — keine zweite „Alles klar“-Schleife
               text = '';
             } else if (!result.replaced) {
-              text = `Alles klar — ich starte die Navigation zu ${result.name}.`;
+              text = `Alles klar — ich navigiere dich zu ${safeName}.`;
             }
           } catch {
-            if (!result.replaced) {
-              text = `Alles klar — ich starte die Navigation zu ${result.name}.`;
+            if (!result.replaced && !earlyBridgeSpoken) {
+              text = `Alles klar — ich navigiere dich zu ${result.name}.`;
+            } else if (earlyBridgeSpoken) {
+              text = '';
             }
           }
         }
         if (text) {
-          presentToUi(text, [], []);
+          presentToUi(text, [], [], {
+            skipBulletDerive: true,
+            skipConciergeCard: true,
+            userText: rewritten || input.userText,
+          });
           enqueueSpeech({ kind: 'main', text, turnId });
-        } else {
-          presentToUi(result.reply, [], []);
+        }
+        // Kein Spickzettel / „5 Minuten“-Card — ETA steht im Nav-HUD.
+        try {
+          useFinnusStore.getState().setActiveConciergeCard(null);
+        } catch {
+          /* soft */
         }
         const logic: LogicNodeOutput = {
           spokenDraft: text || result.reply,
@@ -1440,6 +2777,13 @@ async function runConciergeTurnBody(
           chatLane: 'nav',
         };
       }
+      } else {
+        analysis = {
+          ...analysis,
+          execution: 'flight_advisor',
+          chatLane: 'flight',
+        };
+      } // !skipNavForFlight
     }
   } catch (err) {
     console.warn('[runConciergeTurn] hard dest after manager failed', err);
@@ -1554,12 +2898,22 @@ async function runConciergeTurnBody(
   // Nav-Angebot „Ja“ nach Call-1 — Compound (Ja + Wecker) nicht abbrechen.
   if (managerLane === 'nav') {
     try {
+      let clockBlocksNavOffer = false;
+      try {
+        const { isTimerIntent } = require('../../services/alarms/timerService') as {
+          isTimerIntent: (s: string) => boolean;
+        };
+        clockBlocksNavOffer = isTimerIntent(rewritten);
+      } catch {
+        clockBlocksNavOffer = false;
+      }
       const {
         shouldStartNavFromOffer,
         resolveNavOfferFromReply,
       } = await import('../../services/navigation/pendingOffer');
       const store = useFinnusStore.getState();
       if (
+        !clockBlocksNavOffer &&
         shouldStartNavFromOffer(
           rewritten,
           store.pendingNavOffer,
@@ -1789,26 +3143,161 @@ async function runConciergeTurnBody(
     }
   }
 
-  // Just-Do-It (Wecker/Lautstärke/Timer) nur wenn Call 1 es freigibt —
-  // nie Keyword-Steal gegen execution/lane.
+  // Travel schedule harden: Hotel / Cruise / Bahn / Flug / FlixBus / Event → Timeline
+  try {
+    const {
+      looksLikeTravelScheduleWriteJob,
+      runTravelScheduleHarden,
+    } = require('../timeline/travelScheduleHarden') as {
+      looksLikeTravelScheduleWriteJob: (s: string) => boolean;
+      runTravelScheduleHarden: (o: {
+        userText: string;
+        lat?: number | null;
+        lng?: number | null;
+        cityHint?: string | null;
+      }) => Promise<{
+        kind: string | null;
+        ok: boolean;
+        speech: string;
+        bullets: string[];
+        actions?: Array<{
+          type: 'OPEN_URL';
+          label: string;
+          payload: { url: string };
+        }>;
+      } | null>;
+    };
+    const ut = rawUserTextForCall1 || rewritten;
+    if (looksLikeTravelScheduleWriteJob(ut)) {
+      let lat: number | null = null;
+      let lng: number | null = null;
+      try {
+        const { useFinnusStore } = require('../../store/useFinnusStore') as {
+          useFinnusStore: {
+            getState: () => { lastGpsLat?: number | null; lastGpsLng?: number | null };
+          };
+        };
+        const st = useFinnusStore.getState();
+        lat = st.lastGpsLat ?? null;
+        lng = st.lastGpsLng ?? null;
+      } catch {
+        /* soft */
+      }
+      const hardened = await runTravelScheduleHarden({
+        userText: ut,
+        lat,
+        lng,
+      });
+      if (hardened?.speech) {
+        const { presentConciergeResponse } = await import(
+          '../../services/concierge/presentConcierge'
+        );
+        await presentConciergeResponse(
+          {
+            speechText: hardened.speech,
+            visualBullets: (hardened.bullets ?? []).slice(0, 3),
+            quickActions: (hardened.actions ?? []).slice(0, 4),
+            cardTitle:
+              hardened.kind === 'cruise_glance'
+                ? 'Kreuzfahrt'
+                : hardened.kind === 'hotel_stamm'
+                  ? 'Hotel'
+                  : 'Timeline',
+          },
+          { userText: rewritten, skipAutoNav: true },
+        );
+        const logic: LogicNodeOutput = {
+          spokenDraft: hardened.speech,
+          bullets: (hardened.bullets ?? []).slice(0, 3),
+          buttons: [],
+          moneyEur: [],
+          warnings: [],
+        };
+        return {
+          turnId,
+          tasks: [],
+          bridgingText: analysis.bridge || null,
+          logic,
+          synthesis: synthesizeOutput(logic),
+          deepResearchQueued: false,
+          jobId: 'day_plan_budget',
+        };
+      }
+    }
+  } catch (err) {
+    console.warn('[pipeline] travel schedule harden failed', err);
+  }
+
+  // Just-Do-It (Wecker/Lautstärke/Timer/Wiederholen).
+  // Wecker+klare Zeit: IMMER Native stellen — nie nur LLM „gestellt“ + Reminder-Button.
   try {
     const { shouldAbortTurnForEarlyJustDoIt, looksLikeClockIntentLite } =
       require('../kernel/turnKernel') as {
         shouldAbortTurnForEarlyJustDoIt: (s: string) => boolean;
         looksLikeClockIntentLite: (s: string) => boolean;
       };
+    let isRepeatAsk = false;
+    try {
+      const { isRepeatLastSpeechIntent } = require('../../services/speech/lastReplayableSpeech') as {
+        isRepeatLastSpeechIntent: (s: string) => boolean;
+      };
+      isRepeatAsk = isRepeatLastSpeechIntent(rewritten);
+    } catch {
+      isRepeatAsk = false;
+    }
+    let forceWakeClock = false;
+    try {
+      const { isWakeAlarmIntent, hasClockHint } = require('../../services/alarms/wakeIntentDetect') as {
+        isWakeAlarmIntent: (s: string) => boolean;
+        hasClockHint: (s: string) => boolean;
+      };
+      const { isTimerIntent } = require('../../services/alarms/timerService') as {
+        isTimerIntent: (s: string) => boolean;
+      };
+      forceWakeClock =
+        (isWakeAlarmIntent(rewritten) && hasClockHint(rewritten)) ||
+        isTimerIntent(rewritten) ||
+        looksLikeClockIntentLite(rewritten);
+    } catch {
+      forceWakeClock = looksLikeClockIntentLite(rewritten);
+    }
+    let forceReminder = false;
+    let forceTransit = false;
+    try {
+      const { classifyTimeCareIntent } = require('../../services/concierge/timeCareIntent') as {
+        classifyTimeCareIntent: (s: string) => { kind: string } | null;
+      };
+      const { userAsksRemind } = require('../../services/concierge/reminderActionPolicy') as {
+        userAsksRemind: (s: string) => boolean;
+      };
+      const careKind = classifyTimeCareIntent(rewritten)?.kind;
+      forceReminder = careKind === 'reminder' || userAsksRemind(rewritten);
+      forceTransit =
+        careKind === 'transit_leave' || careKind === 'compound_wake_transit';
+    } catch {
+      forceReminder = false;
+      forceTransit = false;
+    }
     const call1AllowsJustDoIt =
       call1Execution === 'memory' ||
       call1Execution === 'chat_lane' ||
-      call1Execution === 'task_fanout';
+      call1Execution === 'task_fanout' ||
+      call1Execution === 'plan_module' ||
+      isRepeatAsk ||
+      forceWakeClock ||
+      forceReminder ||
+      forceTransit;
     if (
-      call1AllowsJustDoIt &&
       !choiceFast &&
-      shouldAbortTurnForEarlyJustDoIt(rewritten) &&
-      managerLane !== 'nav' &&
-      managerLane !== 'pitch' &&
-      managerLane !== 'plan' &&
-      managerLane !== 'm1'
+      (isRepeatAsk ||
+        forceWakeClock ||
+        forceTransit ||
+        (call1AllowsJustDoIt &&
+          shouldAbortTurnForEarlyJustDoIt(rewritten) &&
+          managerLane !== 'nav' &&
+          managerLane !== 'pitch' &&
+          managerLane !== 'plan' &&
+          managerLane !== 'm1'))
     ) {
       const { tryEarlyJustDoIt } = await import(
         '../../services/concierge/earlyJustDoIt'
@@ -1821,11 +3310,32 @@ async function runConciergeTurnBody(
         await presentConciergeResponse(
           {
             speechText: early.speech,
-            visualBullets: (early.bullets ?? []).slice(0, 3),
+            visualBullets: (early.bullets ?? []).slice(0, 1),
             quickActions: (early.quickActions ?? []).slice(0, 5),
             cardTitle: early.cardTitle,
           },
-          { userText: rewritten, skipAutoNav: true },
+          {
+            userText: rewritten,
+            skipAutoNav: true,
+            skipNoteReplayable: early.kind === 'repeat',
+            skipButlerRemind: early.kind === 'wake' || early.kind === 'timer',
+            // Nur skippen wenn Native-Confirm schon in der Speech steckt —
+            // sonst force-wake in presentConcierge (kein LLM-Fake).
+            skipAlarmBackgroundTasks: (() => {
+              if (early.kind === 'timer') return true;
+              if (early.kind !== 'wake') return false;
+              try {
+                const {
+                  looksLikeNativeWakeSpeech,
+                } = require('../../services/alarms/ensureWakeNativePresent') as {
+                  looksLikeNativeWakeSpeech: (s: string) => boolean;
+                };
+                return looksLikeNativeWakeSpeech(early.speech);
+              } catch {
+                return true;
+              }
+            })(),
+          },
         );
         const logic: LogicNodeOutput = {
           spokenDraft: early.speech,
@@ -1841,14 +3351,9 @@ async function runConciergeTurnBody(
           logic,
           synthesis: synthesizeOutput(logic),
           deepResearchQueued: false,
-          jobId: 'day_plan_budget',
+          jobId: early.kind === 'wake' || early.kind === 'timer' ? 'memory' : 'day_plan_budget',
         };
       }
-    } else if (call1AllowsJustDoIt && looksLikeClockIntentLite(rewritten)) {
-      const { prepareClockIntentFollowUp } = await import(
-        '../../services/alarms/clockIntents'
-      );
-      void prepareClockIntentFollowUp(rewritten);
     }
   } catch (err) {
     console.warn('[pipeline] just-do-it after manager failed', err);
@@ -1907,23 +3412,39 @@ async function runConciergeTurnBody(
     try {
         const { useReisebueroStore } = await import('../../reisebuero/store');
         useReisebueroStore.getState().openOverlay({ reset: true, seedText: rewritten });
-        const speech =
+        let speech =
           'Das klären wir im Reisebüro — ich mach da den Plan mit euch, ohne dass wir hier abdriften.';
+        try {
+          const { parseBriefSlots } = await import('../../reisebuero/parseBriefSlots');
+          const { mergeLedger, cloneEmptyLedger } = await import('../../reisebuero/slotLedger');
+          const { inventoryRecapHint, isInventoryGapFill } = await import(
+            '../../reisebuero/inventoryRecap'
+          );
+          const led = mergeLedger(cloneEmptyLedger(), parseBriefSlots(rewritten));
+          if (isInventoryGapFill(led)) {
+            const hint = inventoryRecapHint(led);
+            speech = hint
+              ? `Mach ich im Reisebüro — ${hint}, den Rest hole ich nach.`
+              : 'Mach ich im Reisebüro — was schon da ist, lasse ich, und fülle nur die Lücken.';
+          }
+        } catch {
+          /* soft bridge */
+        }
         const { presentConciergeResponse } = await import(
           '../../services/concierge/presentConcierge'
         );
         await presentConciergeResponse(
           {
             speechText: speech,
-            visualBullets: ['Yorro Reisebüro', 'Plan sammeln, dann suchen'],
+            visualBullets: ['Yorros Reisebüro', 'Plan sammeln, dann suchen'],
             quickActions: [],
-            cardTitle: 'Yorro Reisebüro',
+            cardTitle: 'Yorros Reisebüro',
           },
           { userText: rewritten, skipAutoNav: true },
         );
         const logic: LogicNodeOutput = {
           spokenDraft: speech,
-          bullets: ['Yorro Reisebüro'],
+          bullets: ['Yorros Reisebüro'],
           buttons: [],
           moneyEur: [],
           warnings: [],
@@ -1999,27 +3520,58 @@ async function runConciergeTurnBody(
 
   const liveKind = detectLiveInventoryKind(rewritten);
 
-  // Manager-Bridge = Beat 1 — sofort in die Queue, Lane läuft parallel.
-  // Safety: Early-Flag ohne laufende Session → nochmal Bridge (sonst Stille bis Call 2).
+  // Fanout schon früh gestartet — hier nur nachziehen wenn noch nicht, mit frischem subject.
+  if (!earlyFanoutPromise) {
+    const prefetchFanout =
+      !choiceFast &&
+      (call1Execution === 'task_fanout' ||
+        call1Execution === 'nav_execute' ||
+        ((analysis.tasks?.length ?? 0) > 0 &&
+          call1Execution !== 'chat_lane' &&
+          call1Execution !== 'events_research' &&
+          call1Execution !== 'pitch_module' &&
+          call1Execution !== 'reisebuero'));
+    if (prefetchFanout) {
+      earlyFanoutPromise = runManagerTaskFanout({
+        analysis,
+        userText: rewritten,
+        rucksack,
+        subject,
+        city: short.lastMentionedCity,
+        signal,
+      });
+    }
+  }
+
+  // Manager-Bridge = Beat 1 — TTS fire-and-forget; Research/Call-2 parallel (nicht await).
+  // Safety: Early-Flag ohne laufende Session → nochmal Bridge kick (sonst Stille bis Call 2).
   if (analysis.bridgeSpokenEarly) {
     try {
-      const { getFusedTurnPump } = require('../speech/fusedTurnSpeech') as {
-        getFusedTurnPump: () => { hasStarted: () => boolean };
+      const { fusedBridgeCommitted } = require('../speech/fusedTurnSpeech') as {
+        fusedBridgeCommitted: () => boolean;
       };
-      if (!getFusedTurnPump().hasStarted()) {
+      // Nie clearen nur weil Pump nach Bridge-Satz ended — sonst 2. Bridge + 2. Antwort.
+      if (!fusedBridgeCommitted()) {
         analysis = { ...analysis, bridgeSpokenEarly: false };
       }
     } catch {
       /* soft */
     }
   }
-  if (!analysis.bridgeSpokenEarly) {
-    await speakBridgeFromAnalysis(
+  if (!analysis.bridgeSpokenEarly && (analysis.bridge || '').trim()) {
+    // Sofort markieren → Call-2/Fanout starten parallel zur Bridge-TTS.
+    analysis = { ...analysis, bridgeSpokenEarly: true };
+    bridgeSpokenDuringAnalyze = true;
+    void speakBridgeFromAnalysis(
       analysis,
       turnId,
       rewritten,
       topicDecision.mode,
-    );
+    ).then((br) => {
+      if (!br?.alreadySpoken && !br?.text) {
+        /* soft — Flag bleibt; fused kann trotzdem laufen */
+      }
+    });
   }
 
   let compoundPlanDayKey: string | null = null;
@@ -2027,20 +3579,146 @@ async function runConciergeTurnBody(
     const { shouldIngestCompoundPlan, ingestCompoundDayPlan } = await import(
       '../planning/compoundPlanIngest'
     );
-    if (shouldIngestCompoundPlan(rewritten)) {
+    let blockExploreForFlight = call1Execution === 'flight_advisor';
+    try {
+      const { blocksExploreDriftForFlight } = require('../../services/flights/flightTripIntent') as {
+        blocksExploreDriftForFlight: (s: string) => boolean;
+      };
+      if (blocksExploreDriftForFlight(rewritten)) blockExploreForFlight = true;
+    } catch {
+      /* soft */
+    }
+    if (!blockExploreForFlight && shouldIngestCompoundPlan(rewritten)) {
       const ingested = await ingestCompoundDayPlan({
         userText: rewritten,
         frame: analysis.frame ?? null,
+        openCalendar: true,
       });
       if (ingested?.targetDate) {
         compoundPlanDayKey = ingested.targetDate;
+      }
+      // Auto: Timeline auf + Step-Loop — nicht auf Button „Punkte durchgehen“ warten
+      if (
+        ingested &&
+        (ingested.openWishesQueue?.length ?? 0) > 0 &&
+        call1Execution !== 'flight_advisor'
+      ) {
+        if (__DEV__) {
+          console.log(
+            '[m5] compound ingest → auto step-loop',
+            rewritten.slice(0, 100),
+          );
+        }
+        const { startPlanStepLoop } = await import(
+          '../planning/planSessionOrchestrator'
+        );
+        await startPlanStepLoop({ plan: ingested });
+        const logic: LogicNodeOutput = {
+          spokenDraft: '',
+          bullets: [],
+          buttons: [],
+          moneyEur: [],
+          warnings: [],
+        };
+        return {
+          turnId,
+          tasks: [],
+          bridgingText: null,
+          logic,
+          synthesis: synthesizeOutput(logic),
+          deepResearchQueued: false,
+          jobId: 'day_plan_budget',
+        };
       }
     }
   } catch (err) {
     if (__DEV__) console.warn('[runConciergeTurn] compound plan ingest', err);
   }
 
+  // Force-Tagesplan ohne Compound-Skelett → Modul 5 (Call-1 Bridge schon raus)
+  if (!compoundPlanDayKey && call1Execution !== 'flight_advisor') {
+    try {
+      const { shouldForceModul5Handoff } = await import(
+        '../planning/planHandoffGuard'
+      );
+      if (shouldForceModul5Handoff(rewritten)) {
+        if (__DEV__) {
+          console.log(
+            '[m5] post-call1 force → runPlanningModule',
+            rewritten.slice(0, 100),
+          );
+        }
+        const { runPlanningModule } = await import(
+          '../planning/runPlanningModule'
+        );
+        await runPlanningModule({
+          userText: rewritten,
+          turnId,
+          frame: analysis.frame,
+        });
+        const logic: LogicNodeOutput = {
+          spokenDraft: '',
+          bullets: [],
+          buttons: [],
+          moneyEur: [],
+          warnings: [],
+        };
+        return {
+          turnId,
+          tasks: [],
+          bridgingText: null,
+          logic,
+          synthesis: synthesizeOutput(logic),
+          deepResearchQueued: false,
+          jobId: 'day_plan_budget',
+        };
+      }
+    } catch (err) {
+      if (__DEV__) console.warn('[runConciergeTurn] post-call1 m5 force', err);
+    }
+  }
+
+  // --- Instant-Rechnung Fallback (Early-Path oben deckt den Normalfall) ---
+  try {
+    const { tryLocalMathAnswer } = require('../../services/speech/localInstantAnswer') as {
+      tryLocalMathAnswer: (s: string) => {
+        lead: string;
+        speech: string;
+        bullets: string[];
+      } | null;
+    };
+    const localArith = tryLocalMathAnswer(rawUserTextForCall1);
+    if (localArith) {
+      const bridgeAlready =
+        bridgeSpokenDuringAnalyze || Boolean(analysis.bridgeSpokenEarly);
+      const speech = bridgeAlready
+        ? localArith.speech
+        : `${localArith.lead} ${localArith.speech}`.replace(/\s+/g, ' ').trim();
+      const presented = await presentChatLaneResult({
+        turnId,
+        result: {
+          speech,
+          bullets: localArith.bullets,
+          buttons: [],
+          bridgeSpoken: bridgeAlready ? analysis.bridge : null,
+          blueprintId: analysis.blueprintId,
+          personaVariant: analysis.personaVariant || 'default',
+          needsResearch: 'quick',
+          celestial: false,
+          nextHandoff: null,
+        },
+        bridgeFromRouter: null,
+        userText: rewritten,
+      });
+      return presented;
+    }
+  } catch {
+    /* soft */
+  }
+
   // --- Call-2 Chat-Lane: nur wenn Call-1 execution=chat_lane ---
+  let chatHandoffToPitch = false;
+  let chatHandoffToEvents = false;
   {
     const useChat =
       call1Execution === 'chat_lane' &&
@@ -2072,6 +3750,8 @@ async function runConciergeTurnBody(
           turnsForCall2: 0,
           inheritLiveInventory: false,
         },
+        execution: call1Execution,
+        chatLane: analysis.chatLane,
       });
 
       // Chat hat selbst Live-Recherche angefordert → nicht die Chat-Erfindung vorlesen
@@ -2079,6 +3759,8 @@ async function runConciergeTurnBody(
         chatResult.nextHandoff === 'pitch' ||
         chatResult.nextHandoff === 'events'
       ) {
+        chatHandoffToPitch = chatResult.nextHandoff === 'pitch';
+        chatHandoffToEvents = chatResult.nextHandoff === 'events';
         const allowInventory =
           analysis.topicScope?.inheritLiveInventory === true &&
           analysis.session !== 'new' &&
@@ -2093,6 +3775,29 @@ async function runConciergeTurnBody(
         }
       } else {
         completeActiveIntent();
+
+        // Hotel-Chat ohne benannte Optionen merken (Follow-up „erstes Hotel“)
+        try {
+          const invKind = detectLiveInventoryKind(rewritten);
+          if (
+            invKind === 'hotel' ||
+            /\bhotel\b/iu.test(rewritten) ||
+            String(analysis.blueprintId || '').startsWith('hotel')
+          ) {
+            const { inferHotelPitchOutcomeFromSpeech, noteHotelPitchOutcome } =
+              await import('./hotelPitchFollowUp');
+            const outcome = inferHotelPitchOutcomeFromSpeech(
+              chatResult.speech || '',
+              chatResult.bullets || [],
+            );
+            noteHotelPitchOutcome({
+              query: rewritten,
+              outcome,
+            });
+          }
+        } catch {
+          /* soft */
+        }
 
         // Weitere Chat-Intents in derselben Antwort nachziehen (nichts verwerfen)
         let extraSpeech = '';
@@ -2128,6 +3833,8 @@ async function runConciergeTurnBody(
                 turnsForCall2: 0,
                 inheritLiveInventory: false,
               },
+              execution: call1Execution,
+              chatLane: next.lane || analysis.chatLane,
             });
             if (
               follow.nextHandoff === 'pitch' ||
@@ -2481,27 +4188,32 @@ async function runConciergeTurnBody(
       buildEmptyEventResearch,
     } = await import('../../services/concierge/eventResearchService');
     if (
-      call1Execution === 'events_research' &&
+      (call1Execution === 'events_research' || chatHandoffToEvents) &&
       handoff !== 'm5_plan' &&
       handoff !== 'm3_nav_start' &&
       handoff !== 'm1_poi_offer'
     ) {
       if (__DEV__) console.log('[events] handoff → researchTodaysEvents', rewritten.slice(0, 80));
       rememberLiveInventoryQuery(rewritten, 'events');
-      const eventWait = await speakHandoffIntro({
-        analysis,
-        userText: rewritten,
-        turnId,
-      });
       const eventCity =
         analysis.frame?.destCity ||
         analysis.cityScope?.researchCity ||
         resolveEventResearchCity(rewritten);
+      // Bridge + Event-Research parallel — kein Warten auf Intro vor dem Fetch.
+      const eventWaitP = speakHandoffIntro({
+        analysis,
+        userText: rewritten,
+        turnId,
+      });
+      const researchP = researchTodaysEvents(rewritten, {
+        cityHint: eventCity,
+        force: true,
+        call2Brief: analysis.call2Brief ?? null,
+        authorIntent: analysis.authorIntent ?? analysis.call2Brief ?? null,
+      });
+      const [eventWait, researchRaw] = await Promise.all([eventWaitP, researchP]);
       const research =
-        (await researchTodaysEvents(rewritten, {
-          cityHint: eventCity,
-          force: true,
-        })) ||
+        researchRaw ||
         buildEmptyEventResearch(eventCity, 'research_unavailable');
       try {
         const { enrichEventsWithLiveTransit } = await import(
@@ -2796,10 +4508,10 @@ async function runConciergeTurnBody(
     }
   }
 
-  // Auswahl-Pitch (M2): nur wenn Call-1 execution=pitch_module
+  // Auswahl-Pitch (M2): Call-1 pitch_module ODER Chat-Handoff → Pitch
   try {
     if (
-      call1Execution === 'pitch_module' &&
+      (call1Execution === 'pitch_module' || chatHandoffToPitch) &&
       handoff !== 'm5_plan' &&
       handoff !== 'm3_nav_start' &&
       handoff !== 'm1_poi_offer'
@@ -2851,18 +4563,48 @@ async function runConciergeTurnBody(
         '../pitch/buildPitchRequest'
       );
       const { runPitchModule } = await import('../pitch/runPitchModule');
-      const intro = await speakHandoffIntro({
+      let pitchText = rewritten;
+      try {
+        const { normalizeAyceStt } = await import('../pitch/ayceIntent');
+        pitchText = normalizeAyceStt(rewritten);
+      } catch {
+        /* soft */
+      }
+      const introText = resolveHandoffIntro(analysis);
+      // Bridge-TTS + Pitch-Recherche parallel — nicht erst Intro abwarten.
+      const introP = speakHandoffIntro({
         analysis,
-        userText: rewritten,
+        userText: pitchText,
         turnId,
       });
+      const owMusts: string[] = [];
+      try {
+        const { buildOpenWorldContract } = await import('./call1OpenWorldContract');
+        const ow = buildOpenWorldContract({
+          userText: pitchText,
+          authorIntent: analysis.authorIntent || analysis.intentSummary,
+          mustHaves: [
+            ...(analysis.order?.must ?? []),
+            ...(analysis.order?.avoid ?? []),
+            ...(analysis.mustHaves ?? []),
+            ...(analysis.frame?.mustHaves ?? []),
+          ],
+          order: analysis.order ?? null,
+        });
+        owMusts.push(...ow.must);
+      } catch {
+        /* soft */
+      }
       const { request, bridge } = buildPitchRequestFromText({
-        text: rewritten,
+        text: pitchText,
         requestId: `m2_${turnId}`,
         uiLayout: 'live_split',
         signal,
-        continueFromBridge: intro,
+        continueFromBridge: introText,
         call1MustHaves: [
+          ...owMusts,
+          ...(analysis.order?.must ?? []),
+          ...(analysis.order?.avoid ?? []),
           ...(analysis.mustHaves ?? []),
           ...(analysis.frame?.mustHaves ?? []),
           ...(analysis.criteria ?? [])
@@ -2881,6 +4623,7 @@ async function runConciergeTurnBody(
           analysis.cityScope?.cityId ||
           null,
         call1When: analysis.frame?.when ?? null,
+        call1Order: analysis.order ?? null,
       });
       if (signal?.aborted) {
         try {
@@ -2911,7 +4654,42 @@ async function runConciergeTurnBody(
           jobId: 'sight_recommend',
         };
       }
-      const result = await runPitchModule(request);
+      const [intro, result] = await Promise.all([
+        introP,
+        runPitchModule(request),
+      ]);
+      void intro;
+      // Order.ui.startNav — erste harte Option nach Pitch (optional delay)
+      if (
+        analysis.order?.ui?.startNav &&
+        !result.softFail &&
+        result.options[0]
+      ) {
+        const first = result.options[0];
+        const go = async () => {
+          try {
+            const { startNavigationFromOffer } = await import(
+              '../../services/navigation/resolveNavTarget'
+            );
+            await startNavigationFromOffer({
+              poiId: -1,
+              lat: first.lat,
+              lng: first.lng,
+              name: first.name,
+            });
+          } catch {
+            /* soft */
+          }
+        };
+        const d = analysis.order.ui.delayMs;
+        if (typeof d === 'number' && d > 0) {
+          setTimeout(() => {
+            void go();
+          }, Math.min(15_000, d));
+        } else {
+          void go();
+        }
+      }
       if (signal?.aborted) {
         try {
           const { useLivePitchStore } = await import('../pitch/publishPitchUi');
@@ -3075,6 +4853,40 @@ async function runConciergeTurnBody(
         text: pitchSpeech,
         turnId,
       });
+      try {
+        const pitchKind = (() => {
+          try {
+            const { useLivePitchStore } = require('../pitch/publishPitchUi') as {
+              useLivePitchStore: {
+                getState: () => { pitchKind?: string | null };
+              };
+            };
+            return useLivePitchStore.getState().pitchKind;
+          } catch {
+            return null;
+          }
+        })();
+        if (
+          pitchKind === 'hotel' ||
+          detectLiveInventoryKind(rewritten) === 'hotel'
+        ) {
+          const { noteHotelPitchOutcome, inferHotelPitchOutcomeFromSpeech } =
+            await import('./hotelPitchFollowUp');
+          const names = result.options.map((o) => o.name).filter(Boolean);
+          const outcome = inferHotelPitchOutcomeFromSpeech(
+            result.spokenText,
+            pitchBullets,
+            names,
+          );
+          noteHotelPitchOutcome({
+            query: rewritten,
+            outcome,
+            hotelNames: names,
+          });
+        }
+      } catch {
+        /* soft */
+      }
       const logic: LogicNodeOutput = {
         spokenDraft: pitchSpeech,
         bullets: pitchBullets,
@@ -3131,12 +4943,6 @@ async function runConciergeTurnBody(
   }
 
   if (handoff === 'm1_poi_offer') {
-    const { text: bridge } = await speakBridgeFromAnalysis(
-      analysis,
-      turnId,
-      rewritten,
-      topicDecision.mode,
-    );
     const coords = anchorCoords(rucksack);
     const offer = await buildM1PoiOffer({
       userText: rewritten,
@@ -3144,6 +4950,46 @@ async function runConciergeTurnBody(
       lng: coords.lng,
       headingDeg: null,
     });
+    if (!(offer.speech || '').trim() && !offer.poiId) {
+      const chatResult = await runChatLane({
+        userText: rewritten,
+        turnId,
+        bridgeFromRouter: analysis.bridge,
+        blueprintId: analysis.blueprintId,
+        nearestBlueprint: analysis.nearestBlueprint,
+        blueprintStage: analysis.blueprintStage,
+        needsResearch: 'deep',
+        personaVariant: analysis.personaVariant,
+        cityHint: turnCityHint,
+        cityKey: turnCityKey,
+        openIntentsSummary: summarizeOpenIntents(),
+        signal,
+        fromPlanContext: false,
+        topicScope: analysis.topicScope ?? {
+          mode: 'new',
+          turnsForCall2: 0,
+          inheritLiveInventory: false,
+        },
+        execution: 'chat_lane',
+        chatLane: 'chat',
+      });
+      return await presentChatLaneResult({
+        turnId,
+        result: chatResult,
+        bridgeFromRouter: analysis.bridgeSpokenEarly ? null : analysis.bridge,
+        userText: rewritten,
+      });
+    }
+    if (!analysis.bridgeSpokenEarly && (analysis.bridge || '').trim()) {
+      analysis = { ...analysis, bridgeSpokenEarly: true };
+      void speakBridgeFromAnalysis(
+        analysis,
+        turnId,
+        rewritten,
+        topicDecision.mode,
+      );
+    }
+    const bridge = analysis.bridge;
     presentToUi(offer.speech, offer.placeName ? [offer.placeName] : [], [], {
       userText: rewritten,
     });
@@ -3224,7 +5070,8 @@ async function runConciergeTurnBody(
 
   const fanoutPromise = amenityFact
     ? null
-    : runManagerTaskFanout({
+    : earlyFanoutPromise ??
+      runManagerTaskFanout({
         analysis,
         userText: rewritten,
         rucksack,
@@ -3238,24 +5085,29 @@ async function runConciergeTurnBody(
     : null;
   if (analysis.bridgeSpokenEarly) {
     try {
-      const { getFusedTurnPump } = require('../speech/fusedTurnSpeech') as {
-        getFusedTurnPump: () => { hasStarted: () => boolean };
+      const { fusedBridgeCommitted } = require('../speech/fusedTurnSpeech') as {
+        fusedBridgeCommitted: () => boolean;
       };
-      if (!getFusedTurnPump().hasStarted()) {
+      // Nie clearen nur weil Pump nach Bridge-Satz ended — sonst 2. Bridge + 2. Antwort.
+      if (!fusedBridgeCommitted()) {
         analysis = { ...analysis, bridgeSpokenEarly: false };
       }
     } catch {
       /* soft */
     }
   }
-  if (!analysis.bridgeSpokenEarly) {
-    const br = await speakBridgeFromAnalysis(
+  if (!analysis.bridgeSpokenEarly && (analysis.bridge || '').trim()) {
+    bridgingText = analysis.bridge;
+    analysis = { ...analysis, bridgeSpokenEarly: true };
+    bridgeSpokenDuringAnalyze = true;
+    void speakBridgeFromAnalysis(
       analysis,
       turnId,
       rewritten,
       topicDecision.mode,
     );
-    bridgingText = br.text;
+  } else if (!bridgingText) {
+    bridgingText = analysis.bridge;
   }
 
   const bridgeOnce = bridgingText;
@@ -3290,6 +5142,24 @@ async function runConciergeTurnBody(
   }
 
   let fact = fanout.mergedFact;
+
+  if (call1ComposeShape && 'fastResults' in fanout) {
+    try {
+      const { mergeComposeSpeechFromResults } = require('./composeRunner') as typeof import('./composeRunner');
+      const composed = mergeComposeSpeechFromResults(fanout.fastResults);
+      if (composed.speech.trim()) {
+        fact = {
+          ...fact,
+          draftText: composed.speech,
+          bullets: composed.bullets.length
+            ? composed.bullets
+            : (fact?.bullets ?? []).slice(0, 3),
+        };
+      }
+    } catch {
+      /* soft */
+    }
+  }
 
   if (compoundPlanDayKey) {
     try {
@@ -3399,11 +5269,26 @@ async function runConciergeTurnBody(
             (r.buttons?.length ?? 0) > 0,
         );
         if (igHit?.draftText?.trim()) {
-          enqueueSpeech({
-            kind: 'main',
-            text: String(igHit.draftText).slice(0, 1200),
-            turnId: `${turnId}_ig`,
-          });
+          try {
+            const { fusedEnqueue } = require('../speech/fusedTurnSpeech') as {
+              fusedEnqueue: (o: {
+                kind: 'bridging' | 'main';
+                text: string;
+                turnId: string;
+              }) => Promise<boolean>;
+            };
+            void fusedEnqueue({
+              kind: 'main',
+              text: String(igHit.draftText).slice(0, 1200),
+              turnId,
+            });
+          } catch {
+            enqueueSpeech({
+              kind: 'main',
+              text: String(igHit.draftText).slice(0, 1200),
+              turnId: `${turnId}_ig`,
+            });
+          }
           try {
             const { useFinnusStore } = require('../../store/useFinnusStore') as {
               useFinnusStore: {
@@ -3445,19 +5330,45 @@ async function runConciergeTurnBody(
           .join(' ')
           .slice(0, 400);
         if (extra && !/INSTAGRAM:\s*Keine belegten/i.test(extra)) {
-          enqueueSpeech({
-            kind: 'main',
-            text: extra,
-            turnId: `${turnId}_slow`,
-          });
+          try {
+            const { fusedEnqueue } = require('../speech/fusedTurnSpeech') as {
+              fusedEnqueue: (o: {
+                kind: 'bridging' | 'main';
+                text: string;
+                turnId: string;
+              }) => Promise<boolean>;
+            };
+            void fusedEnqueue({ kind: 'main', text: extra, turnId });
+          } catch {
+            enqueueSpeech({
+              kind: 'main',
+              text: extra,
+              turnId: `${turnId}_slow`,
+            });
+          }
           return;
         }
         if (fanout.spokenSlowPending.some((t) => t.lane === 'instagram')) {
-          enqueueSpeech({
-            kind: 'main',
-            text: 'Auf Instagram war öffentlich nichts Brauchbares dazu — ich bleibe bei den Web-Quellen.',
-            turnId: `${turnId}_ig_empty`,
-          });
+          try {
+            const { fusedEnqueue } = require('../speech/fusedTurnSpeech') as {
+              fusedEnqueue: (o: {
+                kind: 'bridging' | 'main';
+                text: string;
+                turnId: string;
+              }) => Promise<boolean>;
+            };
+            void fusedEnqueue({
+              kind: 'main',
+              text: 'Auf Instagram war öffentlich nichts Brauchbares dazu — ich bleibe bei den Web-Quellen.',
+              turnId,
+            });
+          } catch {
+            enqueueSpeech({
+              kind: 'main',
+              text: 'Auf Instagram war öffentlich nichts Brauchbares dazu — ich bleibe bei den Web-Quellen.',
+              turnId: `${turnId}_ig_empty`,
+            });
+          }
         }
       })
       .catch(() => undefined);
@@ -3532,144 +5443,132 @@ async function runConciergeTurnBody(
       const { commitHandsFreeNavStart } = await import(
         '../../services/navigation/handsFreeNav'
       );
-      const started = await commitHandsFreeNavStart(
+      const destLabel =
+        typeof fact.meta.destName === 'string' && fact.meta.destName.trim()
+          ? fact.meta.destName.trim()
+          : 'Ziel';
+      // Call-2 SOFORT — nicht auf FOSSGIS/Enrich warten (Live: Lücke nach „alles klar“).
+      // Target-Name setzen: sonst denkt presentToUi „neues Ziel“ und awaitet commit nochmal (~30s).
+      useFinnusStore.getState().patchNavigation({
+        navActive: true,
+        navVisible: true,
+        navTargetName: destLabel,
+      });
+      try {
+        useFinnusStore.getState().setNavRouteLoading(true);
+      } catch {
+        /* soft */
+      }
+      try {
+        useFinnusStore.getState().setPendingNavOffer({
+          poiId: -1,
+          name: destLabel,
+          lat: fact.meta.destLat,
+          lng: fact.meta.destLng,
+          source: 'concierge',
+        });
+      } catch {
+        /* soft */
+      }
+      navPreStarted = true;
+      try {
+        const {
+          buildExplicitNavCommitSpeech,
+          arriveHmFromEtaMin,
+        } = require('../../services/navigation/navStartSpeech') as {
+          buildExplicitNavCommitSpeech: (o: {
+            destName: string;
+            etaMin: number | null;
+            mode?: 'foot' | 'bike' | 'drive' | null;
+            arriveHm?: string | null;
+            bridgeAlreadySpoken?: boolean;
+          }) => string;
+          arriveHmFromEtaMin: (m: number | null) => string | null;
+        };
+        const { getCommittedRoutePhrase } = require('../../services/navigation/navSpeechDistance') as {
+          getCommittedRoutePhrase: () => { etaMin: number | null } | null;
+        };
+        const phrase = getCommittedRoutePhrase();
+        let etaMin =
+          phrase?.etaMin ??
+          (typeof fact.meta.etaMin === 'number' && Number.isFinite(fact.meta.etaMin)
+            ? Math.max(1, Math.round(fact.meta.etaMin))
+            : useFinnusStore.getState().navEtaMin);
+        if (etaMin != null && Number.isFinite(etaMin)) {
+          etaMin = Math.max(1, Math.round(etaMin));
+        } else {
+          etaMin = null;
+        }
+        let mode: 'foot' | 'bike' | 'drive' | null = null;
+        try {
+          const {
+            resolveActiveTravelMode,
+          } = require('../../services/navigation/travelModeContext') as {
+            resolveActiveTravelMode: () => { mode: string };
+          };
+          const m = resolveActiveTravelMode().mode;
+          mode =
+            m === 'bike' || m === 'drive' || m === 'foot'
+              ? m
+              : fact.meta?.bike === true
+                ? 'bike'
+                : 'foot';
+        } catch {
+          mode = fact.meta?.bike === true ? 'bike' : 'foot';
+        }
+        const arriveHm =
+          etaMin != null && etaMin > 60 ? arriveHmFromEtaMin(etaMin) : null;
+        fact = {
+          ...fact,
+          draftText: buildExplicitNavCommitSpeech({
+            destName: destLabel,
+            etaMin,
+            mode,
+            arriveHm,
+            bridgeAlreadySpoken: Boolean(
+              bridgeSpokenDuringAnalyze || analysis.bridgeSpokenEarly,
+            ),
+          }),
+          bullets: [],
+          buttons: [],
+        };
+        try {
+          const { markNavOpeningSpoken } = require('../../services/navigation/landmarkNavCoach') as {
+            markNavOpeningSpoken: () => void;
+          };
+          markNavOpeningSpoken();
+        } catch {
+          /* soft */
+        }
+      } catch {
+        fact = {
+          ...fact,
+          draftText: `Alles klar, ich starte die Navigation zum ${destLabel}.`,
+          bullets: [],
+          buttons: [],
+        };
+      }
+      void commitHandsFreeNavStart(
         {
           poiId: -1,
-          name:
-            typeof fact.meta.destName === 'string' && fact.meta.destName.trim()
-              ? fact.meta.destName
-              : 'Ziel',
+          name: destLabel,
           lat: fact.meta.destLat,
           lng: fact.meta.destLng,
           userQuery: rewritten,
         },
         { skipClosingGate: true },
-      );
-      navPreStarted = started.ok === true;
-      if (__DEV__) {
-        console.log(
-          '[runConciergeTurn] pre-start nav',
-          started.ok,
-          'via=' + (started as { via?: string }).via,
-          'name=' + started.name,
-        );
-      }
-      if (started.needsConfirm && started.message) {
-        fact = {
-          ...fact,
-          draftText: started.message,
-          meta: {
-            ...fact.meta,
-            autoStartNav: false,
-            forceAutoNav: false,
-            needsNavConfirm: true,
-          },
-        };
-      } else if (navPreStarted) {
-        useFinnusStore.getState().patchNavigation({
-          navActive: true,
-          navVisible: true,
-        });
-        // Explizite Nav: nur Call1+Call2 — kein Pack-/Meta-/Gastro-Gelaber
-        try {
-          const {
-            buildExplicitNavCommitSpeech,
-            arriveHmFromEtaMin,
-          } = require('../../services/navigation/navStartSpeech') as {
-            buildExplicitNavCommitSpeech: (o: {
-              destName: string;
-              etaMin: number | null;
-              mode?: 'foot' | 'bike' | 'drive' | null;
-              arriveHm?: string | null;
-              bridgeAlreadySpoken?: boolean;
-            }) => string;
-            arriveHmFromEtaMin: (m: number | null) => string | null;
-          };
-          const { getCommittedRoutePhrase } = require('../../services/navigation/navSpeechDistance') as {
-            getCommittedRoutePhrase: () => { etaMin: number | null } | null;
-          };
-          const dest =
-            typeof fact.meta.destName === 'string' && fact.meta.destName.trim()
-              ? fact.meta.destName.trim()
-              : 'Ziel';
-          const phrase = getCommittedRoutePhrase();
-          let etaMin =
-            phrase?.etaMin ??
-            (typeof fact.meta.etaMin === 'number' && Number.isFinite(fact.meta.etaMin)
-              ? Math.max(1, Math.round(fact.meta.etaMin))
-              : useFinnusStore.getState().navEtaMin);
-          if (etaMin != null && Number.isFinite(etaMin)) {
-            etaMin = Math.max(1, Math.round(etaMin));
-          } else {
-            etaMin = null;
-          }
-          let mode: 'foot' | 'bike' | 'drive' | null = null;
-          try {
-            const {
-              resolveActiveTravelMode,
-            } = require('../../services/navigation/travelModeContext') as {
-              resolveActiveTravelMode: () => { mode: string };
-            };
-            const m = resolveActiveTravelMode().mode;
-            mode =
-              m === 'bike' || m === 'drive' || m === 'foot'
-                ? m
-                : fact.meta?.bike === true
-                  ? 'bike'
-                  : 'foot';
-          } catch {
-            mode = fact.meta?.bike === true ? 'bike' : 'foot';
-          }
-          const arriveHm =
-            etaMin != null && etaMin > 60 ? arriveHmFromEtaMin(etaMin) : null;
-          fact = {
-            ...fact,
-            draftText: buildExplicitNavCommitSpeech({
-              destName: dest,
-              etaMin,
-              mode,
-              arriveHm,
-              bridgeAlreadySpoken:
-                (bridgeSpokenDuringAnalyze || analysis.bridgeSpokenEarly) &&
-                /starte die Navigation|Navigation (zum|nach|zu)\b/i.test(
-                  String(analysis.bridge || ''),
-                ),
-            }),
-            bullets: [],
-            buttons: [],
-          };
-          try {
-            const { markNavOpeningSpoken } = require('../../services/navigation/landmarkNavCoach') as {
-              markNavOpeningSpoken: () => void;
-            };
-            markNavOpeningSpoken();
-          } catch {
-            /* soft */
-          }
-        } catch {
-          const dest =
-            typeof fact.meta.destName === 'string' && fact.meta.destName.trim()
-              ? fact.meta.destName
-              : 'Ziel';
-          fact = {
-            ...fact,
-            draftText: `Alles klar, ich starte die Navigation zum ${dest}.`,
-            bullets: [],
-            buttons: [],
-          };
+      ).then((started) => {
+        if (__DEV__) {
+          console.log(
+            '[runConciergeTurn] pre-start nav',
+            started.ok,
+            'via=' + (started as { via?: string }).via,
+            'name=' + started.name,
+          );
         }
-      } else if (typeof fact.draftText === 'string' && fact.draftText.trim()) {
-        const { stripFakeReservationClaims } = await import(
-          '../../services/concierge/zeroFakeActions'
-        );
-        fact = {
-          ...fact,
-          draftText: stripFakeReservationClaims(fact.draftText, [], {
-            navActuallyStarted: false,
-          }),
-          meta: { ...fact.meta, autoStartNav: false },
-        };
-      }
+      }).catch((err) => {
+        console.warn('[runConciergeTurn] pre-start nav failed', err);
+      });
     } catch (err) {
       console.warn('[runConciergeTurn] pre-start nav failed', err);
     }
@@ -3723,6 +5622,27 @@ async function runConciergeTurnBody(
       } catch {
         /* soft */
       }
+      try {
+        const {
+          notePaceCall2Ready,
+          notePaceBridgeEnded,
+          getPaceTurn,
+        } = require('../reboot/pipeline/paceTurnSession') as {
+          notePaceCall2Ready: () => void;
+          notePaceBridgeEnded: (at?: number) => void;
+          getPaceTurn: () => { bridgeEndedAtMs: number | null } | null;
+        };
+        // Bridge gilt als „fertig genug“ sobald Call-2 Speech startet
+        const pt = getPaceTurn();
+        if (pt && pt.bridgeEndedAtMs == null) {
+          notePaceBridgeEnded(Date.now());
+        } else if (pt?.bridgeEndedAtMs && Date.now() > pt.bridgeEndedAtMs) {
+          /* already estimated */
+        }
+        notePaceCall2Ready();
+      } catch {
+        /* soft */
+      }
     }
     if (!livePump.hasStarted()) {
       await startLiveSpeechSession(livePump, turnId, sentence);
@@ -3760,7 +5680,9 @@ async function runConciergeTurnBody(
     } catch {
       partnerHints = [];
     }
-    synthesis = await synthesizeRebootTurn({
+    // Call-2 primary: Hard-Cap nach Bridge — Interim aus Logic, Synthese läuft weiter
+    let allowSynthStream = true;
+    const synthPromise = synthesizeRebootTurn({
       userText: rewritten,
       fact,
       bridgeOneLiner: bridgeOnce,
@@ -3773,6 +5695,19 @@ async function runConciergeTurnBody(
       turnId,
       partnerHints,
       call2Brief: analysis.call2Brief ?? null,
+      call1OrderBlock: (() => {
+        try {
+          const { formatCall1OrderTicketForPrompt } = require('./call1OrderTicket') as {
+            formatCall1OrderTicketForPrompt: (o: unknown) => string;
+          };
+          return formatCall1OrderTicketForPrompt(analysis.order) || null;
+        } catch {
+          return null;
+        }
+      })(),
+      bulletBudgetMax: analysis.order?.bulletBudget?.max ?? 3,
+      curatedContext: analysis.curatedContext ?? null,
+      call1TaskBriefBlock: call1BriefBlock,
       selectedGoldBlock: (() => {
         try {
           const { formatSelectedGoldForCall2 } = require('./call1OwnerGoldCatalog') as {
@@ -3791,6 +5726,18 @@ async function runConciergeTurnBody(
             ) => string;
           };
           return formatCall1WhenSlotsForPrompt(analysis.frame) || null;
+        } catch {
+          return null;
+        }
+      })(),
+      call1ReferentsBlock: (() => {
+        try {
+          const { formatCall1ReferentsForPrompt } = require('./call1Referents') as {
+            formatCall1ReferentsForPrompt: (
+              r: NonNullable<ManagerAnalysis['frame']>['referents'],
+            ) => string;
+          };
+          return formatCall1ReferentsForPrompt(analysis.frame?.referents) || null;
         } catch {
           return null;
         }
@@ -3820,9 +5767,83 @@ async function runConciergeTurnBody(
         }
       })(),
       onSpeechSentence: (sentence, index) => {
+        if (!allowSynthStream) return;
         void speakStreamedSentence(sentence, index);
       },
     });
+    try {
+      const {
+        raceCall2ReadyOrGapCap,
+      } = require('./call2AfterBridge') as {
+        raceCall2ReadyOrGapCap: <T>(o: {
+          ready: Promise<T>;
+          bridgeEndedAtMs: number;
+        }) => Promise<{ value: T | null; forcedByGapCap: boolean }>;
+      };
+      const {
+        getPaceTurn,
+        notePaceForcedByGapCap,
+        notePaceBridgeEnded,
+      } = require('../reboot/pipeline/paceTurnSession') as {
+        getPaceTurn: () => {
+          bridgeEndedAtMs: number | null;
+          bridgeStartedAtMs: number | null;
+          bridgeBudgetSec: number;
+        } | null;
+        notePaceForcedByGapCap: () => void;
+        notePaceBridgeEnded: (at?: number) => void;
+      };
+      const pt = getPaceTurn();
+      let bridgeEnd =
+        pt?.bridgeEndedAtMs ??
+        (pt?.bridgeStartedAtMs != null
+          ? pt.bridgeStartedAtMs + Math.max(1500, pt.bridgeBudgetSec * 1000)
+          : null);
+      if (bridgeEnd == null && pt) {
+        bridgeEnd = Date.now() + Math.max(1500, pt.bridgeBudgetSec * 1000);
+        notePaceBridgeEnded(bridgeEnd);
+      }
+      if (bridgeEnd != null) {
+        const raced = await raceCall2ReadyOrGapCap({
+          ready: synthPromise,
+          bridgeEndedAtMs: bridgeEnd,
+        });
+        if (raced.value) {
+          synthesis = raced.value;
+        } else {
+          notePaceForcedByGapCap();
+          allowSynthStream = false;
+          const interim = synthesizeOutput(logic);
+          synthesis = interim;
+          void synthPromise
+            .then((full) => {
+              if (!full?.fullDraftForUi?.trim()) return;
+              synthesis = {
+                ...full,
+                fullDraftForUi: full.fullDraftForUi,
+                bullets: full.bullets?.length ? full.bullets : interim.bullets,
+                buttons: full.buttons?.length ? full.buttons : interim.buttons,
+              };
+              try {
+                const rest = remainingSpeechAfterLead(
+                  full.fullDraftForUi,
+                  interim.fullDraftForUi,
+                );
+                if (rest && livePump.hasStarted() && !livePump.isEnded()) {
+                  livePump.push(rest.slice(0, 1200));
+                }
+              } catch {
+                /* soft */
+              }
+            })
+            .catch(() => undefined);
+        }
+      } else {
+        synthesis = await synthPromise;
+      }
+    } catch {
+      synthesis = await synthPromise;
+    }
   }
 
   let buttons =
@@ -4079,6 +6100,7 @@ async function runConciergeTurnBody(
           userText: rewritten,
           frame: analysis.frame ?? null,
           skipIfRichSession: true,
+          openCalendar: true,
         });
         if (ingested?.targetDate) compoundPlanDayKey = ingested.targetDate;
       }
@@ -4113,21 +6135,27 @@ async function runConciergeTurnBody(
     buttons = [planBtn, walkBtn, ...rest].slice(0, 4);
   }
 
-  // Multi-Intent: aktuellen Job abhaken; offene kurz ansagen (vor Speech)
+  // Multi-Intent: aktuellen Job abhaken; nächsten Block natürlich (kein Permission-Ritual)
   try {
-    completeActiveIntent();
-    if (hasPendingIntents()) {
-      const rest = summarizeOpenIntents();
-      const tip = rest.split('|')[0]?.trim();
-      if (tip && synthesis.fullDraftForUi && !/als nächstes/i.test(synthesis.fullDraftForUi)) {
-        const add = ` Als Nächstes: ${tip}.`;
-        synthesis = {
-          ...synthesis,
-          fullDraftForUi: `${synthesis.fullDraftForUi}${add}`,
-        };
-        if (logic.spokenDraft) {
-          logic.spokenDraft = `${logic.spokenDraft}${add}`;
-        }
+    const { completeActiveAndPeekNatural } = require('./intentQueue') as {
+      completeActiveAndPeekNatural: () => {
+        next: unknown;
+        softBrief: string | null;
+      };
+    };
+    const { softBrief } = completeActiveAndPeekNatural();
+    if (
+      softBrief &&
+      synthesis.fullDraftForUi &&
+      !/als nächstes|dann kümmern|weiter im plan/i.test(synthesis.fullDraftForUi)
+    ) {
+      const add = ` ${softBrief}`;
+      synthesis = {
+        ...synthesis,
+        fullDraftForUi: `${synthesis.fullDraftForUi}${add}`,
+      };
+      if (logic.spokenDraft) {
+        logic.spokenDraft = `${logic.spokenDraft}${add}`;
       }
     }
   } catch {
@@ -4135,6 +6163,28 @@ async function runConciergeTurnBody(
   }
 
   // Speech vor Card/Nav — außer explizite Nav (Say–Do: Nav zuerst)
+  // Wake: Native VOR erstem TTS-Satz (sonst LLM-Fake im earlySpeech).
+  try {
+    const { ensureWakeNativeBeforePresent } = await import(
+      '../../services/alarms/ensureWakeNativePresent'
+    );
+    const ensured = await ensureWakeNativeBeforePresent(
+      rewritten,
+      synthesis.fullDraftForUi || '',
+    );
+    if (ensured) {
+      synthesis = {
+        ...synthesis,
+        fullDraftForUi: ensured.speech,
+        spokenChunks: [ensured.speech],
+        bullets: (ensured.bullets ?? []).slice(0, 3),
+      };
+      if (logic.spokenDraft != null) logic.spokenDraft = ensured.speech;
+    }
+  } catch {
+    /* soft */
+  }
+
   const earlySpeech =
     !forceAutoNav &&
     !navPreStarted &&
@@ -4149,6 +6199,18 @@ async function runConciergeTurnBody(
     );
   }
 
+  // Explizite Nav: Call-2 JETZT — nie hinter presentToUi/Geocode/FOSSGIS (Live: 30s Stille).
+  if (
+    navPreStarted &&
+    streamedSentenceCount === 0 &&
+    (synthesis.fullDraftForUi || fact.draftText || '').trim()
+  ) {
+    const call2 =
+      (typeof fact.draftText === 'string' && fact.draftText.trim()) ||
+      synthesis.fullDraftForUi.trim();
+    await speakStreamedSentence(call2, 0);
+  }
+
   const presented = await presentToUi(
     synthesis.fullDraftForUi,
     synthesis.bullets,
@@ -4160,6 +6222,7 @@ async function runConciergeTurnBody(
       boardEntities: board.entities,
       boardModule1: board.module1,
       startActionDeep,
+      skipConciergeCard: navPreStarted === true,
     },
   );
 
@@ -4204,23 +6267,62 @@ async function runConciergeTurnBody(
       completeness,
     });
     const coords = anchorCoords(rucksack);
-    const call3 = await maybeRunCall3Enrichment({
-      tail: rethinkTail,
-      synthesis,
-      buttons,
-      userText: rewritten,
-      fact,
-      jobId,
-      rucksack,
-      city: turnCityHint,
-      lat: coords.lat,
-      lng: coords.lng,
-      signal,
-    });
-    if (call3.ran) {
-      call3DeepFillRan = true;
-      synthesis = call3.synthesis;
-      buttons = call3.buttons;
+    // Mic/Blau an, solange Call-3 noch läuft (auch nach Call-2-Speech)
+    let call3KeepBlue = false;
+    try {
+      const { shouldRunCall3Rethink } = require('../reboot/pipeline/call3Rethink') as {
+        shouldRunCall3Rethink: (t: typeof rethinkTail) => boolean;
+      };
+      call3KeepBlue = shouldRunCall3Rethink(rethinkTail);
+      if (call3KeepBlue) {
+        const { useFinnusStore } = require('../../store/useFinnusStore') as {
+          useFinnusStore: { getState: () => { setIsGenerating: (v: boolean) => void } };
+        };
+        useFinnusStore.getState().setIsGenerating(true);
+      }
+    } catch {
+      call3KeepBlue = false;
+    }
+    try {
+      const call3 = await maybeRunCall3Enrichment({
+        tail: rethinkTail,
+        synthesis,
+        buttons,
+        userText: rewritten,
+        fact,
+        jobId,
+        rucksack,
+        city: turnCityHint,
+        lat: coords.lat,
+        lng: coords.lng,
+        signal,
+      });
+      if (call3.ran) {
+        call3DeepFillRan = true;
+        synthesis = call3.synthesis;
+        buttons = call3.buttons;
+        try {
+          const { notePaceUsedCall3 } = require('../reboot/pipeline/paceTurnSession') as {
+            notePaceUsedCall3: () => void;
+          };
+          notePaceUsedCall3();
+        } catch {
+          /* soft */
+        }
+      }
+    } finally {
+      if (call3KeepBlue) {
+        try {
+          const { useFinnusStore } = require('../../store/useFinnusStore') as {
+            useFinnusStore: {
+              getState: () => { setIsGenerating: (v: boolean) => void };
+            };
+          };
+          useFinnusStore.getState().setIsGenerating(false);
+        } catch {
+          /* soft */
+        }
+      }
     }
     if (compoundPlanDayKey) {
       const { enrichCompoundPlanFromFacts } = await import(
@@ -4384,6 +6486,14 @@ async function runConciergeTurnBody(
   try {
     const { flushTurnLatency } = await import('../reboot/pipeline/turnLatencyMetrics');
     flushTurnLatency();
+  } catch {
+    /* soft */
+  }
+  try {
+    const { flushPaceTurnSample } = require('../reboot/pipeline/paceTurnSession') as {
+      flushPaceTurnSample: () => Promise<void>;
+    };
+    void flushPaceTurnSample();
   } catch {
     /* soft */
   }

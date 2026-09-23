@@ -3,6 +3,7 @@
  */
 
 import type { Module2ActionButton } from '../types';
+import type { Call1OrderTicket } from './call1OrderTicket';
 import type { TurnFrame } from './turnFrame';
 
 export type ManagerRoute =
@@ -139,6 +140,11 @@ export type ManagerAnalysis = {
   bookingPlatformHint?: string | null;
   mustHaves?: string[];
   /**
+   * Order-Ticket SSOT — must/avoid/search/need/ui/bulletBudget.
+   * Backend + Call 2 lesen nur das; Soft-Fill gegen must verboten.
+   */
+  order?: Call1OrderTicket;
+  /**
    * Call-1 Ranking-Kriterien (key/role/weight) — keine Venue-Punkte.
    * Backend rankt Shortlist Top-5 danach.
    */
@@ -149,6 +155,20 @@ export type ManagerAnalysis = {
   }>;
   needsBlockingChoice?: boolean;
   authorIntent?: string | null;
+  /**
+   * Call 1: was der User meint, ein korrigierter Satz.
+   * STT/Tippfehler nicht wörtlich — Backend prüft Detektoren auch hier.
+   */
+  heardAs?: string | null;
+  /**
+   * Call-1 kuratierter Kern für Call 2 (kein Roh-Chat).
+   * Gefüllt vom Orchestrator / analyzeTurn.
+   */
+  curatedContext?: string[];
+  /** Self-Questions, aus denen work[] gebaut wurde */
+  selfQuestions?: string[];
+  /** Eine Blockade-Rückfrage (Taxi ohne Flug, …) */
+  askBack?: string | null;
 };
 
 export type ManagerTaskResult = {

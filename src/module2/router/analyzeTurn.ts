@@ -461,15 +461,24 @@ function buildManagerPrompt(opts: {
   rucksackLine?: string | null;
 }): string {
   const bridgeRule = opts.liveChat
-    ? '- bridge: Beat 1. DEFAULT = Verstanden + Zusagen MIT Bezug zur DIESEM Wunsch (1–2 Sätze) — Job nennen (AYCE/Steak/Rad-Route/Wetter/SUP/Reservierung/…), keine Venue-Namen/Preise/Minuten. VERBOTEN allein: 0815 („ich schau mal“, „gute Frage“, „wissen kommt gleich“, „genau das klären wir jetzt“, „ich hole nützliche Fakten“) ohne Wunsch-Anker. TRIVIA/RECHNUNG/Quick-Lookup: Antwort-EINLEITUNG nur (Person/Aufgabe ansteuern) — NIE Zahl/Alter/Name. Call-2 liefert den Wert. Kein „finde heraus“, keine Klärfrage bei Amtstiteln. Ja/Nein/„los“: null. Trivia nie null wenn es die Einleitung trägt, session=new.'
-    : '- bridge: Beat 1. DEFAULT = Verstanden + Zusagen MIT Bezug zum Wunsch (Nav/Event/Gastro/… Job nennen). NICHT Call-2 spoilern. VERBOTEN allein: leere 0815-Floskeln ohne Wunsch-Anker. TRIVIA/RECHNUNG: nur Einleitung (kein Alter/keine Zahl/kein Name). Cover 2–3 Sätze nur bei langer Recherche. Trivia: keine Klärfrage bei Amtstiteln, kein Recherche-Theater. Bei continue/resume oft null. Kein Name. Wortlaut nie als Script.';
+    ? '- bridge: PFLICHT bei neuem Auftrag. Länge = pace (instant=Peek/Mini, standard=1 Satz, cover=2–3 Sätze Cover). = Verstanden + Zusagen MIT Bezug ZU DIESEM Satz. Keine Venue-Namen/Preise/Minuten/Daten. VERBOTEN allein: 0815 ohne Wunsch-Anker. SCHNELL-FAKT: Antwort-Einstieg Peek (Satz offen, KEIN Faktwert); selectedGoldKeys knowledge::instant_answer_lead_v1. Nur Mikro-Ack → null. Wortlaut frei — siehe CALL-1 BRIDGE SPRECHEN.'
+    : '- bridge: PFLICHT bei neuem Auftrag. Länge = pace (instant/standard/cover). Verstanden + Zusagen MIT Wunsch-Bezug. NICHT Call-2 spoilern. SCHNELL-FAKT: Peek ohne Faktwert. Cover nur bei langer Recherche (Hotel/Spielplan/Specialty). Nur Mikro-Ack → null. Wortlaut frei — siehe CALL-1 BRIDGE SPRECHEN.';
   const bridgeVoiceHint = buildCompactBridgeVoiceHint(
     resolveEffectivePersonalityMatrix(getCachedUserProfile()),
   );
   return [
     'Du bist der Yorro-Planer (Call-1). Ein Durchgang = ausführbarer Auftrag. Keine Keyword-Weiche davor.',
     bridgeVoiceHint,
+    (() => {
+      try {
+        return require('../../services/concierge/findusResponsePolicy')
+          .FINDUS_CALL1_BRIDGE_SPEAK_BLOCK as string;
+      } catch {
+        return '';
+      }
+    })(),
     require('./call1ThinkFrame').FINDUS_CALL1_THINK_FRAME as string,
+    require('./call1OrderTicket').FINDUS_CALL1_TOOLBOX_BLOCK as string,
     require('./call1OpenWorldContract').FINDUS_CALL1_OPEN_WORLD_BLOCK as string,
     require('../reboot/pipeline/call1Frozen').CALL1_FROZEN_CONTRACT as string,
     'Antworte NUR als JSON (kein Markdown).',
@@ -482,6 +491,7 @@ function buildManagerPrompt(opts: {
     '',
     'Felder:',
     '- intentSummary: 1 Satz intern',
+    '- heardAs: EIN korrigierter Satz, was der User meint (Hörfehler/Tippfehler weg). Leer wenn der Rohtext schon klar ist. Kein Dialog-Script.',
     '- lane: chat | nav | m1 | plan | pitch  (PRIMÄR — chat = Default)',
     '- execution: chat_lane | pitch_module | flight_advisor | plan_module | plan_walkthrough | tour_module | events_research | nav_execute | m1_poi | memory | task_fanout | reisebuero — EIN Backend pro Turn; Code dispatcht nur danach.',
     '- call2Brief: 1–3 Sätze intern — Antwort-STRUKTUR für Call 2 (was zuerst, Top-2, Buttons) — kein Dialog-Script. null/leer wenn bridgeComplete=true (Bridge war die ganze Antwort / Klärfrage).',
@@ -504,7 +514,8 @@ function buildManagerPrompt(opts: {
     '- destCity: genannte Zielstadt oder null. GPS-Hint ist NUR Start, nie Ziel wenn destCity gesetzt.',
     '- startIsGps: true wenn Anreise/Los vom aktuellen Standort.',
     '- when: Array {kind: now|clock|day, at:"HH:mm"|null, dateKey:"YYYY-MM-DD"|null, label}. User-Zeit verbindlich; Code zieht fehlende dateKey/clock aus dem Satz nach — nichts neu raten.',
-    '- mustHaves: Hard-Filter aus DIESEM Satz (max 8) — keine erfundenen Orte',
+    '- mustHaves: Hard-Filter aus DIESEM Satz (max 8) — Legacy; bevorzugt order.must',
+    '- order: { jobShape:..., act:{actions:[navigate|timeline|research|pack], place, topic:cruise|hotel|train|flight|event|pack|place}, must:[], avoid:[], search:{...}, need:{...}, ui:{...}, bulletBudget:{...} } — act ist der Auftrag aus der Absicht, jede Sprache. Mehrere actions = alle. Soft-Fill gegen must VERBOTEN.',
     '- criteria: Array {key, role: must|nice|soft, weight: 1-30} — du setzt Prioritäten zur Frage. Keine Venue-Namen/Punkte. Shortlist Top-5 → Speak Top-2.',
     '- authorIntent: 1 Satz was der User JETZT will',
     '- thinkAhead: 0–3 grobe Hinweise. Nicht ausführen.',
@@ -537,6 +548,7 @@ function buildManagerPrompt(opts: {
     '- Follow-up am offenen Auftrag: session=continue, topicScope followup + turnsForCall2 1–3. Klärfrage = continue. Neues Thema / Trivia / Wetter: session=new, turnsForCall2=0.',
     '- Multi-Intent: intents[]/work[] nicht weglassen.',
     '- COMPOUND Essen+Taxi: nie dünner transit-Einzeiler. Klare Reihenfolge → work dining→transit (Ziel/Vorbestellen/ETA/Preis-Slots). Ohne Reihenfolge → Prioritätsfrage + bridgeComplete + needsBlockingChoice, Spuren in intents[].',
+    '- COMPOUND Flug+Taxi: Erkennung zuerst (Wunsch=Taxi pünktlich + gegebene Infos). Task 1 worker=flight: Startflughafen selbst herleiten, Abflugtafel, Boarding/Gate/Gepäck-Chips, Leave-by, Timeline. Task 2 worker=transit/taxi dependsOn=flight: Deep-Link voll prefilled — nie droppen. Nur Blocker-Slots fragen; sonst sofort Task1→2. GPS≠Abflugstadt → zusätzliche Anreise-Task. Nie Explore statt Flug.',
     '- Korrektur/„mag ich nicht“: session=continue, neue criteria — kein Themen-Sprung.',
     opts.liveChat
       ? '- LIVE-CHAT: pace=instant; needsResearch=quick außer explizit „recherchier/online“. Bridge kürzer.'
@@ -944,37 +956,41 @@ export async function analyzeManagerTurn(opts: {
         ? parsed.authorIntent.trim().slice(0, 200)
         : null;
 
+    let order: import('./call1OrderTicket').Call1OrderTicket | undefined;
+    let mustHavesResolved = mustHaves;
+    try {
+      const {
+        parseCall1OrderTicket,
+        orderTicketToMustHaves,
+      } = require('./call1OrderTicket') as {
+        parseCall1OrderTicket: (
+          p: Record<string, unknown>,
+          o?: { mustHaves?: string[] | null; criteria?: ManagerAnalysis['criteria'] },
+        ) => import('./call1OrderTicket').Call1OrderTicket;
+        orderTicketToMustHaves: (t: import('./call1OrderTicket').Call1OrderTicket) => string[];
+      };
+      order = parseCall1OrderTicket(parsed as Record<string, unknown>, {
+        mustHaves,
+        criteria,
+        userText: userText,
+      });
+      const fromOrder = orderTicketToMustHaves(order);
+      if (fromOrder.length) {
+        mustHavesResolved = fromOrder.slice(0, 8);
+      }
+    } catch {
+      order = undefined;
+    }
+
     let session = asSession(parsed.session);
     let threadMatchId =
       typeof parsed.threadMatchId === 'string' ? parsed.threadMatchId : null;
-    // Compound / topicCut: neues Thema → keine Chat-Historie (Call1-Vertrag)
-    try {
-      const { getCall1AnswerContract } = require('../reboot/pipeline/call1AnswerContract') as {
-        getCall1AnswerContract: (t: string) => { topicCut: boolean };
-      };
-      if (getCall1AnswerContract(userText).topicCut) {
-        topicScope = {
-          mode: 'new',
-          turnsForCall2: 0,
-          inheritLiveInventory: false,
-        };
-        session = 'new';
-        threadMatchId = null;
-      }
-    } catch {
-      /* soft */
-    }
-    // Call-1 LLM ist SSOT für session/topicScope — kein Keyword-Override danach.
-    // Manager-LLM entscheidet session selbst — keine Heuristik-Überschreibung.
+    // Call-1 LLM ist SSOT für session/topicScope — kein Keyword-/AnswerContract-Override.
+    // (Früher: getCall1AnswerContract.topicCut überschrieb continue — dem Plan entgegen.)
     let bridge = typeof parsed.bridge === 'string' ? parsed.bridge.trim() : null;
-    // Außerhalb Live-Chat: continue/resume ohne Bridge
-    if (!live && (session === 'continue' || session === 'resume')) {
-      bridge = null;
-    }
-    // Live-Chat Follow-up: keine zweite Bridge. Sonst Beat 1 behalten — kein Slow-Check.
-    if (live && (session === 'continue' || session === 'resume')) {
-      bridge = null;
-    }
+    // Call-1 ist SSOT für die Bridge — auch bei continue/resume.
+    // Früher: continue/resume → bridge=null → User hörte keine Zusage (SUP/Rad/…).
+    // Nur Call-1 selbst darf bridge=null setzen (Mikro-Ack / bridgeComplete-Klärfrage).
     bridge = stripNameSpam(bridge, false);
     try {
       const {
@@ -1078,10 +1094,15 @@ export async function analyzeManagerTurn(opts: {
         handoff,
         festTypeHint,
         bookingPlatformHint,
-        mustHaves,
+        mustHaves: mustHavesResolved,
+        order,
         criteria,
         needsBlockingChoice,
         authorIntent,
+        heardAs:
+          typeof parsed.heardAs === 'string' && parsed.heardAs.trim()
+            ? parsed.heardAs.trim().slice(0, 280)
+            : null,
       },
       parsed,
     ),

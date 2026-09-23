@@ -50,7 +50,7 @@ const TAP_MAX_MS = 220;
 /** Kurz nach Loslassen weiterhören — Ziel ~100–150ms. */
 const STT_TAIL_MS = 120;
 /** Hold ≥ 2 s → Frage gilt; darunter während Yorro spricht = Abbruch (Resume). */
-const MIN_VOICE_MS = 2_000;
+const MIN_VOICE_MS = 700;
 const STT_FINALIZE_MS = 450;
 /** Nach Live-Chat-Stop kein Tippfeld (Nachschlag oft Beenden-Tipp). */
 const SUPPRESS_SHORT_PRESS_AFTER_LIVE_STOP_MS = 700;
@@ -122,27 +122,15 @@ export function useVoiceInput(options?: {
   const softMuteFindusForMic = useCallback(async () => {
     provisionalPausedRef.current = false;
     try {
-      const { pauseSpeakingForNav } = await import('../services/AudioVoiceService');
-      provisionalPausedRef.current = await pauseSpeakingForNav();
+      // Nie stopSpeaking/restoreAmbient hier — Race mit STT → vol=-2 / leeres Transkript.
+      const { softStopSpeakingForMic } = await import('../services/AudioVoiceService');
+      provisionalPausedRef.current = await softStopSpeakingForMic();
     } catch {
       provisionalPausedRef.current = false;
     }
     if (provisionalPausedRef.current) {
       useFinnusStore.getState().setIsPlayingAudio(false);
       useFinnusStore.getState().setIsAudiblySpeaking(false);
-      return;
-    }
-    // Kein pausierbarer Sound → hart stoppen (Resume dann nicht möglich)
-    try {
-      await stopSpeaking();
-    } catch {
-      /* ignore */
-    }
-    try {
-      const { forceClearSpeakingUi } = await import('../services/AudioVoiceService');
-      forceClearSpeakingUi();
-    } catch {
-      useFinnusStore.getState().setIsPlayingAudio(false);
     }
   }, []);
 
@@ -377,21 +365,50 @@ export function useVoiceInput(options?: {
       m.onUserUsedMicHold(),
     );
 
-    // Soft-Mute parallel zu STT — Button sofort rot (Listening), nicht blau.
-    const muteP = softMuteFindusForMic();
+    // Soft-Mute VOR STT — kein Ambient-Restore-Race (vol=-2 / leeres Transkript).
+    await softMuteFindusForMic().catch(() => undefined);
     const result = await startListening((partial) => {
       partialTextRef.current = partial;
       setPartialText(partial);
       try {
         const { notePartialForManagerWarmup } = require('../module2/router/managerWarmup') as {
-          notePartialForManagerWarmup: (t: string) => void;
+          notePartialForManagerWarmup: (
+            t: string,
+            ctx?: { cityHint?: string | null; navActive?: boolean; calendarOpen?: boolean },
+          ) => void;
         };
-        notePartialForManagerWarmup(partial);
+        let cityHint: string | null = null;
+        let navActive = false;
+        let calendarOpen = false;
+        try {
+          const { getShortTerm } = require('../module2/context/shortTermContext') as {
+            getShortTerm: () => { lastMentionedCity?: string | null };
+          };
+          cityHint = getShortTerm().lastMentionedCity ?? null;
+        } catch {
+          /* soft */
+        }
+        try {
+          const { useFinnusStore } = require('../store/useFinnusStore') as {
+            useFinnusStore: { getState: () => { navActive?: boolean } };
+          };
+          navActive = Boolean(useFinnusStore.getState().navActive);
+        } catch {
+          /* soft */
+        }
+        try {
+          const { usePlanCalendarUiStore } = require('../module2/timeline/planCalendarUiStore') as {
+            usePlanCalendarUiStore: { getState: () => { calendarVisible: boolean } };
+          };
+          calendarOpen = usePlanCalendarUiStore.getState().calendarVisible;
+        } catch {
+          /* soft */
+        }
+        notePartialForManagerWarmup(partial, { cityHint, navActive, calendarOpen });
       } catch {
         /* soft */
       }
     }, { keepAlive: true });
-    await muteP.catch(() => undefined);
 
     if (
       pressModeRef.current !== 'voice' &&
@@ -467,6 +484,9 @@ export function useVoiceInput(options?: {
   const submitUserQuestion = useCallback(
     async (text: string) => {
       const epoch = ++questionEpochRef.current;
+      // Lane B starts before correction/context imports so map polish cannot
+      // slip into the STT→manager handoff.
+      setIsGenerating(true);
       try {
         const { noteTravelPrefsActiveUse } = await import(
           '../services/memory/travelPrefsReview'
@@ -692,7 +712,6 @@ export function useVoiceInput(options?: {
 
         if (!stillCurrent(epoch)) return;
         // Modul 2 — Chef entscheidet (Bahn/Nav/Kino/Timeline/…)
-        setIsGenerating(true);
         try {
           const turnId = `m2_${epoch}_${Date.now()}`;
           const { beginModule2TurnAbort } = await import(
@@ -724,6 +743,7 @@ export function useVoiceInput(options?: {
           if (stillCurrent(epoch)) setIsGenerating(false);
         }
       } finally {
+        if (stillCurrent(epoch)) setIsGenerating(false);
         onUserInputEnd();
       }
     },
@@ -763,15 +783,6 @@ export function useVoiceInput(options?: {
     setIsFinalizing(true);
 
     try {
-      const { noteMicActive } = require('../services/boot/interactiveBootGate') as {
-        noteMicActive: (active: boolean) => void;
-      };
-      noteMicActive(false);
-    } catch {
-      /* soft */
-    }
-
-    try {
       const { latencyStartTurn } = require('../services/debug/latencyTiming') as {
         latencyStartTurn: (meta?: string) => string | null;
       };
@@ -792,11 +803,28 @@ export function useVoiceInput(options?: {
           tailMs: STT_TAIL_MS,
           finalizeMs: STT_FINALIZE_MS,
         });
-        const text = (
+        try {
+          const { noteMicActive } = require('../services/boot/interactiveBootGate') as {
+            noteMicActive: (active: boolean) => void;
+          };
+          noteMicActive(false);
+        } catch {
+          /* soft */
+        }
+        const textRaw = (
           transcript.trim() ||
           fromPartial ||
           peekedBeforeStop
         ).trim();
+        let text = textRaw;
+        try {
+          const { repairCruiseVoiceText } = require('../services/stt/cruiseVoiceRepair') as {
+            repairCruiseVoiceText: (s: string) => string;
+          };
+          text = repairCruiseVoiceText(textRaw) || textRaw;
+        } catch {
+          /* soft */
+        }
         recordUserSpeechExact(text || transcript, Date.now());
         if (!text) {
           try {
@@ -808,24 +836,7 @@ export function useVoiceInput(options?: {
             /* soft */
           }
           setIsGenerating(false);
-          if (calendarOpen) {
-            try {
-              const { enqueueSpeech } = require('../module2/speech/speechQueue') as {
-                enqueueSpeech: (o: {
-                  kind: string;
-                  text: string;
-                  turnId: string;
-                }) => void;
-              };
-              enqueueSpeech({
-                kind: 'main',
-                text: 'Hab dich nicht verstanden — nochmal kurz halten und sprechen.',
-                turnId: `mic_empty_${Date.now()}`,
-              });
-            } catch {
-              /* soft */
-            }
-          }
+          // Leeres Mic: still — kein „nicht verstanden“-Spam
           return;
         }
         console.log(
@@ -834,6 +845,14 @@ export function useVoiceInput(options?: {
         );
         await submitUserQuestion(text);
       } finally {
+        try {
+          const { noteMicActive } = require('../services/boot/interactiveBootGate') as {
+            noteMicActive: (active: boolean) => void;
+          };
+          noteMicActive(false);
+        } catch {
+          /* soft */
+        }
         setIsFinalizing(false);
         setIsListening(false);
         setIsMicLocked(false);

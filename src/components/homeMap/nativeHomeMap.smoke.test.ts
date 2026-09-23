@@ -96,7 +96,11 @@ assert(yorroCam.includes("'MLRNCamera'"), 'nutzt registrierten Native-Namen');
 assert(!view.includes('followUserLocation={true}'), 'Kamera folgt GPS nicht von allein');
 assert(view.includes('onLongPress'), 'Long-Press Drop-Pin');
 assert(view.includes('id="world-land"'), 'Welt-Fallback Land');
-assert(view.includes('id="world-borders"'), 'Ländergrenzen');
+assert(
+  view.includes('Protomaps boundaries_country') ||
+    !view.includes('id="pack-country-borders"'),
+  'Ländergrenzen aus Basemap, kein Eigen-Overlay',
+);
 assert(view.includes('id="world-admin1"'), 'Bundesländer');
 assert(view.includes('onRegionWillChange'), 'Geste bricht Follow sofort');
 assert(
@@ -113,6 +117,11 @@ assert(view.includes('id="world-cities"'), 'Städtenamen');
 assert(view.includes('id="world-rivers"'), 'Flüsse');
 assert(view.includes('id="world-roads-mid"'), 'dichteres Straßennetz');
 assert(view.includes('id="cities-label"'), 'Pack-Stadtname');
+assert(
+  view.includes("kind: 'city-label'") &&
+    view.includes("['==', ['geometry-type'], 'Point']"),
+  'Stadtname einmal als Centroid-Punkt',
+);
 assert(view.includes('id="cities-line-dash"'), 'gestrichelte Grenze nur bei dashed');
 assert(view.includes('HOME_MAP_WORLD_STRUCTURE_LOD'), 'Weltstruktur-LOD');
 assert(view.includes('id="world-regions"'), 'Gebirgsnamen');
@@ -126,8 +135,8 @@ const mapStyle = readFileSync(
 );
 assert(
   view.includes('extract-roads-label-major') &&
-    !view.includes('id="extract-roads-labels"'),
-  'Straßennamen in extract-roads (eine ShapeSource)',
+    view.includes('id="extract-road-names"'),
+  'Straßennamen als eigene Source über der Route',
 );
 assert(view.includes('extract-roads-label'), 'Straßennamen auf der Linie');
 assert(view.includes("symbolPlacement: 'line'"), 'Straßennamen folgen der Straßenlinie');
@@ -137,6 +146,12 @@ assert(mapStyle.includes('maxAngleDeg: 48'), 'Straßenlabel-Winkel nicht zu stre
 assert(!view.includes('extract-housenumbers-circle'), 'keine weißen Hausnummer-Punkte');
 assert(view.includes('id="route-pins-icon"'), 'Nav-Wegpunkte als Pinnadel-Icon');
 assert(view.includes('MarkerView'), 'Nav-Wegpunkt-Chips als MarkerView-Buttons');
+assert(
+  view.includes('belowLayerID: routeBelowStreetLabelId') ||
+    view.includes('belowLayerID={routeBelowStreetLabelId}'),
+  'Route unter Vector-Straßennamen',
+);
+assert(view.includes('PROTOMAPS_ROAD_LABEL_LAYER_FALLBACK'), 'Protomaps roads_labels_minor Fallback');
 assert(view.includes('navChipSub'), 'Gleis/Steig-Subzeile auf Native-Chips');
 assert(view.includes("backgroundColor: '#0C100E'"), 'Nav-Chip als schwarzer Button');
 assert(
@@ -147,10 +162,15 @@ assert(
   'Route-Orientierung User→Ziel für Pfeile',
 );
 assert(view.includes('haversineRouteM'), '2-Punkt-Luftlinie nicht zeichnen');
+assert(view.includes('maxChordDevM'), 'Quasi-Sehne/Luftlinie nicht zeichnen');
 assert(view.includes('!routePreview'), 'Chevrons nicht auf Preview/Air');
 assert(amenity.includes('route-pin-now'), 'Routen-Pinnadel-Assets registriert');
 assert(view.includes('minZoomLevel={10.4}'), 'Gebäude als Fläche ab Zoom 10.4');
-assert(host.includes('smallestCityIdContainingPoint(lat, lng, known)'), 'Extract folgt der Stadt unter der Kamera');
+assert(
+  host.includes('smallestCityIdContainingPoint(midLat, midLng, known)') ||
+    host.includes('smallestCityIdContainingPoint(gpsLat, gpsLng, known)'),
+  'Extract folgt der Stadt unter der Kamera',
+);
 assert(host.includes('peekCityMapExtract'), 'Vollextract nur aus RAM, kein Parse auf dem Karten-Pfad');
 assert(!host.includes('loadCachedCityMapExtract'), 'kein JSON.parse des Vollextracts beim Map-Inject');
 assert(
@@ -177,7 +197,14 @@ assert(
   const vectorBoot = boot.includes('if (isVectorBasemapEnabled())');
   if (vectorBoot) {
     assert(boot.includes('noteMapCityFinal(activeId)'), 'Vector-Boot: Final sofort');
-    assert(boot.includes('noteSplashMapPlacesReady'), 'Vector-Boot: Places-Splash');
+    assert(boot.includes('noteSplashMapFogReady'), 'Vector-Boot: Fog unter Splash');
+    assert(boot.includes('loadWalkTrack'), 'Vector-Boot: Walk-Track für Fog');
+    assert(
+      !boot.includes('noteSplashMapPlacesReady()') ||
+        boot.indexOf('injectPlacesOnlyRef.current()') <
+          boot.indexOf('noteSplashMapPlacesReady'),
+      'Vector-Boot: Places-Splash nicht vor Inject faken',
+    );
     assert(
       !boot.includes('injectOfflineMapExtract(true') ||
         boot.indexOf('if (isVectorBasemapEnabled())') <
@@ -191,13 +218,15 @@ assert(
     assert(boot.includes('applyCityFinal'), 'Boot: R3 final idle');
   }
   assert(
-    boot.includes('noteSplashMapPlacesReady') &&
-      boot.includes('injectPlacesOnlyRef.current()'),
-    'Boot: Places unter Splash',
+    host.includes('noteSplashMapPlacesReady') &&
+      host.includes('injectPlacesOnlyRef.current()'),
+    'Boot: Places-Signal nach Inject',
   );
-  assert(boot.includes('noteMapNearReady(activeId)'), 'Boot: near ready');
-  assert(boot.includes('noteMapPlacesReady(activeId)'), 'Boot: places ready');
-  assert(boot.includes('noteMapCityFinal(activeId)'), 'Boot: city final');
+  assert(host.includes('noteSplashGpsLive'), 'Boot: GPS-Punkt für Splash');
+  assert(host.includes('noteSplashMapFogReady'), 'Boot: Fog für Splash');
+  assert(host.includes('noteMapNearReady(activeId)'), 'Boot: near ready');
+  assert(host.includes('noteMapPlacesReady(activeId)'), 'Boot: places ready');
+  assert(host.includes('noteMapCityFinal(activeId)'), 'Boot: city final');
   assert(
     !boot.includes('scheduleHeavyMapOverlays()'),
     'Boot: kein Places-Delay-Ladder nach Splash',
@@ -245,20 +274,108 @@ assert(host.includes('seekVisible'), 'Orte-Sheet lädt Stadt-Final');
     view.includes('sigUnchanged') || view.includes('sig === lastExtractSigRef'),
     'Native: R3 darf wachsen trotz Near-Phase',
   );
-assert(view.includes('iconSize: 0.22'), 'GPS-Pfeil 65% kleiner');
+assert(
+  view.includes("id=\"gps-arrow-icon\"") &&
+    view.includes("'interpolate'") &&
+    view.includes("['zoom']") &&
+    view.includes('iconOpacity: 1'),
+  'GPS-Pfeil: Zoom-Skalierung (kleiner beim Rauszoomen)',
+);
+assert(
+  !view.includes('<GpsLockCenterPuck') &&
+    view.includes('animateMs: glide ? 560 : 0'),
+  'GPS-Lock: derselbe Pfeil, Kamera gleitet (kein Overlay-Pop)',
+);
+assert(view.includes('gpsLockCenterRef'), 'Lock-State für Follow/Glide');
+assert(
+  view.includes('Heading-Follow: um GPS drehen') ||
+    view.includes('Sofort GPS als Drehzentrum'),
+  'Heading-up pinnt GPS-Center',
+);
+assert(
+  view.includes('nie Kamera-Center') ||
+    view.includes('Immer echte GPS-Koordinaten'),
+  'Pan: Puck geo-fix auf GPS',
+);
+assert(
+  view.includes('ohne commitUserView') || view.includes('ohne commitUserView (das flippt auf explore)'),
+  'reattachFollow flippt nicht auf explore',
+);
+assert(
+  host.includes('Location-Follow und Heading-Follow sind getrennt wählbar') &&
+    host.includes('mapRef.current?.setHeadingFollow(headingFollowRef.current)'),
+  'GPS- und Heading-Lock bleiben getrennt wählbar',
+);
+assert(
+  host.includes('Gespeicherte HUD-Locks nicht auto-reaktivieren') ||
+    host.includes('Cold start: Karte immer frei'),
+  'Cold start ohne auto GPS-Lock',
+);
+assert(view.includes('gps-arrow-icon'), 'GPS-Pfeil');
+assert(!view.includes('gps-arrow-halo'), 'kein Kreis-Halo um GPS-Pfeil');
+assert(!view.includes('gps-accuracy-fill'), 'kein Accuracy-Kreis unter dem Pfeil');
+assert(
+  view.includes('Nur Store') || view.includes('exploredFromStore.length === 0'),
+  'Fog nur aus Store — kein sync buildExplored im Render',
+);
+assert(
+  view.includes('fogRevealFrozenRef') && view.includes('fogMaskFrozenRef'),
+  'Fog-Snapshot nur während Geste',
+);
+assert(
+  view.includes('midGesture') &&
+    view.includes('Freie Erkundung: User besitzt die Kamera'),
+  'Fog live nachziehen ohne Kamera-Snap',
+);
+assert(
+  view.includes('Live-Cam bevorzugen') || view.includes('camLiveRef.current'),
+  'reassertUserCamera hält Live-View, nicht Boot-GPS',
+);
+assert(view.includes('route-turn-shaft'), 'goldener Garmin-Abbiege-Shaft');
+assert(view.includes('sanitizePolygonFc'), 'Polygon-Sanitize gegen MapLibre-Blackscreen');
+assert(view.includes('route-turn-heads'), 'Pfeilköpfe eigene ShapeSource');
+assert(view.includes('Ausgefüllter goldener Pfeilkopf'), 'Pfeilkopf Fill-Polygon');
+assert(
+  view.includes('hasFallback') || view.includes('Label-Layer im Style wirklich'),
+  'belowLayerID nur bei existierendem Straßenlabel-Layer',
+);
+assert(view.includes('circleOpacity: 0'), 'kein weißer Pin-Halo');
 assert(view.includes("kind: 'follow'"), 'GPS-Lock zentriert nur über applyCenterMove');
 assert(
   view.includes('gestureMovedEnough') || view.includes('likelyUserExploreMotion'),
   'Tipp löst GPS-Fix nicht — erst echte Bewegung',
 );
-assert(view.includes('gestureMovedEnough'), 'Unlock erst bei echtem Pan/Zoom');
+assert(view.includes('gestureMovedEnough'), 'Unlock erst bei echtem Pan');
+assert(
+  view.includes('isPanUnlockWhileLocked') &&
+    view.includes('absorbLockZoom') &&
+    view.includes('Zoom allein löst Follow NICHT'),
+  'Fix: Zoom frei, nur Verschieben unlockt',
+);
+assert(
+  view.includes('lockZoomHoldUntil') && view.includes('repinLockAfterZoom'),
+  'Fix+Pinch: Follow pausiert, danach GPS-Mitte',
+);
 assert(
   explore.includes('onPress={onRecenter}') &&
     !explore.includes('onPressIn={onRecenter}'),
   'GPS-Button onPress (kein PressIn-Snap)',
 );
-assert(host.includes('nextHudLockTap'), 'GPS: 1. Tipp pulse · 2. in 5s Lock');
-assert(host.includes("snapGps(next.action === 'lock' ? 'lock' : 'pulse')"), 'Recenter pulse/lock');
+assert(
+  explore.includes('needleNorth') &&
+    explore.includes('needleSouth') &&
+    explore.includes('compassDial'),
+  'Kompass ist klassische Nadel (rot/weiß)',
+);
+assert(
+  explore.includes('Kompass kalibrieren') &&
+    explore.includes('btnCalibrate') &&
+    !explore.includes('showCalibrate ?'),
+  'Acht-Button immer sichtbar',
+);
+assert(host.includes('nextGpsRecenterTap'), 'GPS: ein Tipp zentriert + Fixierung');
+assert(host.includes('snapGps(next.action)'), 'Recenter führt reine GPS-Aktion aus');
+assert(host.includes('currentMapZoomRef.current'), 'GPS-Zoomschritt nutzt aktuellen Kartenzoom');
 assert(host.includes('applyHudFollowPrefs'), 'Nav: HUD-Follow Prefs');
 assert(
   host.includes('Kein delayed jumpTo') ||
@@ -327,6 +444,14 @@ assert(
   'Extract-Reload hält User-Kamera (kein GPS-Snap)',
 );
 assert(view.includes('HOME_MAP_FOG_MASK_ENABLED'), 'Fog-Maske abschaltbar');
+assert(view.includes('fog-trail'), 'Fog A: Nav-Trail Layer');
+assert(view.includes('Kein Fog-Trail') || view.includes('navFogTrailActive') || view.includes('EMPTY_FC'), 'Fog A: Trail nur während Nav');
+assert(view.includes('HOME_MAP_FOG_MASK_OPACITY'), 'Fog-Maske weiche Deckkraft');
+assert(view.includes('HOME_MAP_FOG_REVEAL_EDGE'), 'Fog-Reveal weicher Rand');
+assert(view.includes('volle Viewport-Maske'), 'Fog bei 0 % erkundet sichtbar');
+assert(view.includes('HOME_MAP_FOG_MASK_OPACITY'), 'Fog-Maske weiche Deckkraft');
+assert(view.includes('HOME_MAP_FOG_REVEAL_EDGE'), 'Fog-Reveal weicher Rand');
+assert(view.includes('volle Viewport-Maske'), 'Fog bei 0 % erkundet sichtbar');
 assert(view.includes('HOME_MAP_AMENITY_IMAGES'), 'Amenity-Piktogramme');
 assert(!view.includes('animationDuration={0}'), 'Camera-Prop setzt Zoom nicht zurück');
 assert(host.includes('snapMapLongPress'), 'Long-Press snappt an Ort/Adresse');
@@ -403,7 +528,24 @@ assert(
   'Boot reißt freie Erkundung nicht dauerhaft auf GPS',
 );
 assert(view.includes('exclusiveCityRings'), 'Stadtflächen ohne Overlap');
-assert(view.includes('HOME_MAP_CITY_FILL_ZOOM.visibleFrom'), 'Stadtflächen auch bei DE/EU-Zoom');
+assert(
+  !view.includes('pack-country-borders-line'),
+  'kein grobes Pack-Länder-Overlay',
+);
+assert(
+  host.includes('colorsForHomeMapCityTone') &&
+    host.includes('resolveHomeMapCityTone'),
+  'Pack-Städte: rot/grün/blau nach Status',
+);
+assert(
+  !host.includes('filterCountryBordersForPackCountries'),
+  'keine Eigen-Ländergrenzen mehr',
+);
+assert(
+  !/packIds\.size === 0[\s\S]{0,80}setMapCities\(\[\]\)/.test(host),
+  'kein Cities-Wipe bei leeren Packs',
+);
+
 assert(style.includes('visibleFrom: 2.6'), 'City-Fill ab Europa-Zoom');
 assert(view.includes('YorroHomeCamera'), 'eigene Camera mit syncDefaultStop');
 assert(
@@ -439,7 +581,11 @@ assert(
   'GPS-Follow vergiftet User-View nicht (Pan-Unlock)',
 );
 assert(view.includes('lastProgrammaticCenterAt'), 'Follow-Echo ≠ User-Pan');
-assert(view.includes('followFight'), 'Follow-Kampf → sofort Unlock');
+assert(
+  view.includes('isPanUnlockWhileLocked') ||
+    view.includes("noteUserGesture('position')"),
+  'Follow-Kampf → Standort-Unlock nur bei Pan (Zoom hält Fix)',
+);
 assert(view.includes('cityMapExtractToGeojson'), 'GeoJSON Extract sync');
 assert(
   view.includes('Ein Paint unter Splash') ||
@@ -488,9 +634,10 @@ assert(
   'Drehen: kein defaultStop mitten in der Geste',
 );
 assert(
-  view.includes('Sofort raus aus Zentriert + Blickrichtung') ||
-    view.includes('kein suppress-Block mehr'),
-  'User-Bewegung unlockt GPS+Heading sofort',
+  view.includes('Pan/Zoom und Rotation lösen ihre Follow-Achse unabhängig') &&
+    view.includes("noteUserGesture('position')") &&
+    view.includes("noteUserGesture('heading')"),
+  'Pan und Rotation unlocken Position/Heading getrennt',
 );
 assert(
   view.includes('subscribeMapHeading') && view.includes('pushPuckHeading'),
@@ -549,7 +696,22 @@ assert(
   'kein Ready-GPS-Snap nach freier Erkundung',
 );
 assert(view.includes('Kompass-Nadel immer live mitdrehen'), 'Kompass-Nadel live');
-assert(host.includes('Kein Auto-Norden'), 'Recenter erzwingt kein Norden');
+assert(
+  host.includes('Kein Kompass-Zwang — Location-Follow allein') &&
+    host.includes('headingFollow: headingFollowRef.current'),
+  'GPS-Lock erhält den separat gewählten Heading-Modus',
+);
+assert(
+  view.includes("noteUserGesture('heading')") &&
+    view.includes("noteUserGesture('position')") &&
+    host.includes('onUserRotate={onNativeUserRotate}'),
+  'Pan und Rotation lösen ihre Follow-Achse getrennt',
+);
+assert(
+  explore.includes('Der Kompass bleibt unverändert') &&
+    explore.includes('Der Standort-Fix bleibt unverändert'),
+  'HUD beschreibt getrennte GPS- und Kompass-Folgen',
+);
 assert(host.includes('mapRef.current?.releaseFollow()'), 'Geste löst Follow nativ');
 assert(
   host.includes('Mindestspanne') ||
@@ -609,8 +771,11 @@ assert(appJson.includes('@maplibre/maplibre-react-native'), 'Expo-Plugin');
 
 const stt = readFileSync(join(process.cwd(), 'src/services/sttService.ts'), 'utf8');
 assert(stt.includes('warmMicrophonePipeline'), 'Mic-Pipeline Boot-Prewarm');
-assert(stt.includes('com.google.android.googlequicksearchbox'), 'STT: Quick Search Box bevorzugt wenn installiert');
-assert(stt.includes('com.google.android.tts'), 'STT: Google TTS als Engine wenn QSB fehlt');
+assert(
+  stt.includes('googlequicksearchbox') && stt.includes('nicht bindbar'),
+  'STT: QSB auf Nothing als nicht bindbar dokumentiert',
+);
+assert(stt.includes('com.google.android.tts'), 'STT: Google TTS Recognition bevorzugt');
 assert(stt.includes('available.has(p)'), 'STT: nur installierte Recognition-Packages');
 assert(stt.includes('failedAndroidPackages'), 'STT: tote Engines blacklisten');
 assert(stt.includes('prepareAudioForMicrophone'), 'STT gibt TTS-Fokus vor dem Mikrofon ab');
@@ -618,7 +783,16 @@ const nav = readFileSync(
   join(process.cwd(), 'src/services/navigation/navigationService.ts'),
   'utf8',
 );
-assert(nav.includes('>= 0.45'), 'Keine stillen Reroutes im Stand');
+assert(nav.includes('Route-Lock'), 'Keine stillen Shortcut-Reroutes (Route gelockt)');
+assert(nav.includes('offPathMinM: offRouteThresholdM'), 'Wrong-Way bike-aware');
+assert(nav.includes('Dual-watcher Dedupe'), 'GPS-Tick Dedupe bei Tempo');
+assert(
+  nav.includes('isForegroundLocationWatchActive') &&
+    nav.includes('no duplicate watch') &&
+      nav.includes('gpsIntervalMsWhileNavigating') &&
+      nav.includes('startWatchingLocation'),
+  'Single GPS watcher (locationService)',
+);
 assert(view.includes('runAfterInteractions'), 'Extract-GeoJSON nach dem ersten Paint');
 assert(view.includes('EMPTY_PUCK_FC'), 'GPS-Puck nicht bei jedem Render neu');
 assert(view.includes('emptyExtractGeojson'), 'erste Karte ohne Gebäude-Parse');
@@ -634,7 +808,20 @@ assert(
 );
 assert(view.includes('HOME_MAP_WORLD_AFTER_CORE_MS'), 'Welt lazy nach Core');
 assert(view.includes('whenMapWorldAllowed'), 'EU erst mit Stadt-Final');
-assert(view.includes('noteSplashMapCoreReady'), 'Splash nach 5-km-Straßen');
+assert(view.includes('noteSplashMapCoreReady'), 'Splash nach Straßen-Kern');
+assert(
+  view.includes('onDidFinishRenderingMapFully'),
+  'Vector-Splash nach voll gerenderten Kacheln (nicht nur LoadingMap)',
+);
+assert(
+  view.includes('noteVectorStreetsSplashReady') ||
+    view.includes('vectorStreetsSplashOnce'),
+  'Vector-Splash gated auf Protomaps-Style (nicht Offline-BG)',
+);
+assert(
+  !/onDidFinishLoadingMap=\{\(\) => \{[^}]*noteSplashMapCoreReady/s.test(view),
+  'Splash-Core nicht mehr in onDidFinishLoadingMap (früh/leere Karte)',
+);
 assert(view.includes('EMPTY_WORLD'), 'Welt startet leer');
 assert(view.includes('markHomeMapBoot'), 'Boot-Messpunkte');
 assert(host.includes('markHomeMapBoot'), 'Host markiert Places');
@@ -708,6 +895,12 @@ const warmupSrc = readFileSync(
 );
 assert(warmupSrc.includes('peekDisplayExtract'), 'Splash nutzt Display-Snapshot');
 assert(
+  warmupSrc.includes('isVectorBasemapEnabled') &&
+    (warmupSrc.includes('kein GeoJSON') ||
+      warmupSrc.includes('PROTOMAPS_STYLE_SPLASH_BUDGET')),
+  'Vector-Kaltstart: Protomaps unter Splash, kein Extract-Default',
+);
+assert(
   warmupSrc.includes('Kein Vollextract') || warmupSrc.includes('Kein Vollextract'),
   'Splash parst nicht 10–28 MB',
 );
@@ -729,10 +922,25 @@ assert(
 assert(host.includes('loadNeighborPinsInViewport'), 'Multi-Stadt Orte aus Pin-Index');
 assert(host.includes('scheduleNeighborPackPlacesMerge'), 'Nachbar-Packs in Viewport mergen');
 assert(host.includes('maybeEnsureBrowsePackAt'), 'Browse-Zubringer Pack still nachladen');
-assert(host.includes('ensureBrowsePackAtViewport'), 'Browse ensure API');
+assert(host.includes('ensureBrowsePacksOverlappingViewport'), 'Browse ensure Viewport-Overlap');
 assert(host.includes('coverageBounds'), 'Pack-Gate überlappt Viewport-Coverage');
 assert(host.includes('isStreetPointAmenity'), 'Street-Punkt vs Story-Fill');
 assert(host.includes('keepPin: amenityDot'), 'Cap pinned nur echte Amenities');
 assert(!host.includes('keepPin: keepDotForced'), 'Restaurants killen Stories nicht im Cap');
+assert(host.includes('popupFocusId'), 'Fokus-Blau aus Place-Popup');
+assert(host.includes('HOME_MAP_PLACE_COLORS.planned'), 'Fokus/Plan nutzt planned-Blau');
+assert(host.includes('getActiveNavDestination'), 'Nav-Ziel-Blau aus live Dest (Offer genullt)');
+assert(host.includes('placeFillRingCacheRef'), 'Session-Fill-Cache gegen Pan-Reload');
+assert(host.includes('basemapLabelAtRef'), 'Eigenes Icon nur ohne Basemap-Label');
+assert(view.includes('places-hit'), 'Unsichtbarer Hit-Layer für Nicht-Fill');
+assert(host.includes('shouldPaintPlaceBuildingFill'), 'Fill-Gate SSOT Status-only');
+assert(host.includes('wantFill'), 'Fill nur visited/nav/M1-auto');
+assert(view.includes('places-fill-outline'), 'Gebäude-Outline stärker sichtbar');
+const bulletsSrc = readFileSync(
+  join(process.cwd(), 'src/services/homeMap/homeMapPlaceBullets.ts'),
+  'utf8',
+);
+assert(!bulletsSrc.includes('Mehr Infos und Route im Popup'), 'Kein Mehr-Infos-Fallback');
+assert(bulletsSrc.includes("return 'Fotospot'"), 'Fotospot-Kategorie');
 
 console.log('nativeHomeMap.smoke.test.ts OK');

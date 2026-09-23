@@ -1133,10 +1133,25 @@ export async function geocodePlaceNameOsmFirst(
     cityHint?: string | null;
     /** Prefer rooftop / street_address over establishment (address nav). */
     preferStreetAddress?: boolean;
+    /** Roh-User-Satz für kontextfeste Geocode-Alternativen (STT). */
+    userText?: string | null;
+    /** Intern: Expand nicht nochmal anwenden. */
+    skipFuzzyExpand?: boolean;
   },
 ): Promise<GeocodeResult | null> {
   let q = query.replace(/\s+/g, ' ').trim();
   if (q.length < 2) return null;
+  try {
+    const { cruiseTerminalPin } = require('../stt/cruiseVoiceRepair') as {
+      cruiseTerminalPin: (s: string) => { name: string; lat: number; lng: number } | null;
+    };
+    const pin =
+      cruiseTerminalPin(q) ||
+      (opts?.userText ? cruiseTerminalPin(opts.userText) : null);
+    if (pin) return { lat: pin.lat, lng: pin.lng, label: pin.name };
+  } catch {
+    /* soft */
+  }
   try {
     const { sanitizeNavDestQuery } = require('./streetAddressQuery') as {
       sanitizeNavDestQuery: (s: string) => string;
@@ -1144,6 +1159,32 @@ export async function geocodePlaceNameOsmFirst(
     q = sanitizeNavDestQuery(q) || q;
   } catch {
     /* soft */
+  }
+
+  // Kontextfeste Alternativen (STT/Pack-Miss) — Original zuerst, dann Soft-Repair.
+  // Kein LLM-Rewrite: nur zusätzliche Geocode-Versuche.
+  if (!opts?.skipFuzzyExpand) {
+    try {
+      const { expandNavGeocodeQueries } = require('./navDestFuzzyRepair') as {
+        expandNavGeocodeQueries: (
+          raw: string,
+          o?: { userText?: string | null },
+        ) => string[];
+      };
+      const alts = expandNavGeocodeQueries(q, { userText: opts?.userText ?? null });
+      if (alts.length > 1) {
+        for (const cand of alts) {
+          const hit = await geocodePlaceNameOsmFirst(cand, {
+            ...opts,
+            skipFuzzyExpand: true,
+          });
+          if (hit) return hit;
+        }
+        return null;
+      }
+    } catch {
+      /* soft — fall through single query */
+    }
   }
   let biasLat = opts?.biasLat;
   let biasLng = opts?.biasLng;
@@ -1166,15 +1207,19 @@ export async function geocodePlaceNameOsmFirst(
     /* soft */
   }
   const biasOpts = { biasLat, biasLng, cityHint };
+  // Straße+Nr.: Kandidaten tragen Stadt schon mit (expandStreetAddressGeocodeQueries).
+  // GPS-Stadt nicht nochmal anhängen — sonst stirbt „Heisterhoop 12“ als „…, FalscheStadt“.
   let withCity = q;
-  try {
-    const { composeGeocodeQuery } = require('./fuzzyCityResolve') as {
-      composeGeocodeQuery: (query: string, hint?: string | null) => string;
-    };
-    withCity = composeGeocodeQuery(q, cityHint);
-  } catch {
-    if (cityHint && !q.toLowerCase().includes(cityHint.toLowerCase())) {
-      withCity = `${q}, ${cityHint}`;
+  if (!opts?.preferStreetAddress) {
+    try {
+      const { composeGeocodeQuery } = require('./fuzzyCityResolve') as {
+        composeGeocodeQuery: (query: string, hint?: string | null) => string;
+      };
+      withCity = composeGeocodeQuery(q, cityHint);
+    } catch {
+      if (cityHint && !q.toLowerCase().includes(cityHint.toLowerCase())) {
+        withCity = `${q}, ${cityHint}`;
+      }
     }
   }
 
@@ -1276,8 +1321,13 @@ export async function geocodePlaceNameOsmFirst(
   }
 
   // Lokaler Miss (z. B. „Holstentor, Prisdorf“) → ohne Stadt-Bias nochmal
-  if (withCity !== q && !opts?.preferStreetAddress) {
-    return geocodePlaceNameOsmFirst(q);
+  // Auch Straße+Nr.: Bare-Retry (ohne GPS-Stadt), wenn withCity doch gesetzt war
+  if (withCity !== q) {
+    return geocodePlaceNameOsmFirst(q, {
+      preferStreetAddress: opts?.preferStreetAddress,
+      biasLat: opts?.biasLat,
+      biasLng: opts?.biasLng,
+    });
   }
   return null;
 }
@@ -1347,7 +1397,24 @@ async function geocodeViaGoogle(
     return {
       lat,
       lng,
-      label: (hit.formatted_address ?? address).trim(),
+      label: (() => {
+        try {
+          const { resolveNavDestSpeechName } = require('./navDestSpeechName') as {
+            resolveNavDestSpeechName: (o: {
+              query?: string;
+              geoLabel?: string;
+              streetMode?: boolean;
+            }) => string;
+          };
+          return resolveNavDestSpeechName({
+            query: address,
+            geoLabel: hit.formatted_address ?? address,
+            streetMode: Boolean(opts?.preferStreetAddress),
+          });
+        } catch {
+          return (hit.formatted_address ?? address).split(',')[0]?.trim() || address;
+        }
+      })(),
     };
   } finally {
     clearTimeout(timer);
@@ -1430,12 +1497,16 @@ async function geocodeViaNominatim(
       opts?.biasLng != null &&
       Number.isFinite(opts.biasLng)
     ) {
-      const d = 0.4;
+      // Straße+Nr.: enger + bounded — sonst springt Nominatim zur gleichen Straße in anderer Stadt.
+      const d = opts?.preferStreetAddress === true ? 0.12 : 0.4;
       u.searchParams.set(
         'viewbox',
         `${opts.biasLng - d},${opts.biasLat + d},${opts.biasLng + d},${opts.biasLat - d}`,
       );
-      u.searchParams.set('bounded', '0');
+      u.searchParams.set(
+        'bounded',
+        opts?.preferStreetAddress === true ? '1' : '0',
+      );
     }
     const res = await fetch(u.toString(), {
       signal: ctrl.signal,
@@ -1450,7 +1521,7 @@ async function geocodeViaNominatim(
       lon?: string;
       display_name?: string;
     }>;
-    const hits = (rows ?? [])
+    let hits = (rows ?? [])
       .map((hit) => {
         const lat = hit?.lat != null ? Number(hit.lat) : NaN;
         const lng = hit?.lon != null ? Number(hit.lon) : NaN;
@@ -1458,10 +1529,70 @@ async function geocodeViaNominatim(
         return {
           lat,
           lng,
-          label: (hit.display_name ?? query).trim(),
+          label: (() => {
+            try {
+              const { resolveNavDestSpeechName } = require('./navDestSpeechName') as {
+                resolveNavDestSpeechName: (o: {
+                  query?: string;
+                  geoLabel?: string;
+                }) => string;
+              };
+              return resolveNavDestSpeechName({
+                query,
+                geoLabel: hit.display_name ?? query,
+              });
+            } catch {
+              return (hit.display_name ?? query).split(',')[0]?.trim() || query;
+            }
+          })(),
         };
       })
       .filter((h): h is GeocodeResult => h != null);
+    if (!hits.length && opts?.preferStreetAddress === true) {
+      // bounded street retry: einmal ohne Bound, dann nächsten Treffer < 25 km
+      try {
+        const soft = new URL(u.toString());
+        soft.searchParams.set('bounded', '0');
+        const softRes = await fetch(soft.toString(), {
+          signal: ctrl.signal,
+          headers: {
+            Accept: 'application/json',
+            'User-Agent': 'FindusNav/2.0 (tourist walking guide)',
+          },
+        });
+        if (softRes.ok) {
+          const softRows = (await softRes.json()) as Array<{
+            lat?: string;
+            lon?: string;
+            display_name?: string;
+          }>;
+          hits = (softRows ?? [])
+            .map((hit) => {
+              const lat = hit?.lat != null ? Number(hit.lat) : NaN;
+              const lng = hit?.lon != null ? Number(hit.lon) : NaN;
+              if (!Number.isFinite(lat) || !Number.isFinite(lng)) return null;
+              if (
+                opts?.biasLat != null &&
+                opts?.biasLng != null &&
+                airDistanceMeters(
+                  { lat: opts.biasLat, lng: opts.biasLng },
+                  { lat, lng },
+                ) >= 25_000
+              ) {
+                return null;
+              }
+              return {
+                lat,
+                lng,
+                label: (hit.display_name ?? query).split(',')[0]?.trim() || query,
+              };
+            })
+            .filter((h): h is GeocodeResult => h != null);
+        }
+      } catch {
+        /* soft */
+      }
+    }
     if (!hits.length) return null;
     let spokenCity: string | null = null;
     try {
@@ -1582,7 +1713,22 @@ export async function geocodeNamedPlaceHits(
         return {
           lat,
           lng,
-          label: (hit.display_name ?? q).trim(),
+          label: (() => {
+            try {
+              const { resolveNavDestSpeechName } = require('./navDestSpeechName') as {
+                resolveNavDestSpeechName: (o: {
+                  query?: string;
+                  geoLabel?: string;
+                }) => string;
+              };
+              return resolveNavDestSpeechName({
+                query: q,
+                geoLabel: hit.display_name ?? q,
+              });
+            } catch {
+              return (hit.display_name ?? q).split(',')[0]?.trim() || q;
+            }
+          })(),
         };
       })
       .filter((h): h is GeocodeResult => h != null);
@@ -2083,6 +2229,27 @@ async function searchPlacesNearbyNew(opts: {
   }
 }
 
+/**
+ * Nearby by Google place type (stadium, performing_arts_theater, …).
+ * Discovery field mask — cheap.
+ */
+export async function searchPlacesNearbyForType(opts: {
+  lat: number;
+  lng: number;
+  radiusM: number;
+  includedType: string;
+  enrich?: boolean;
+}): Promise<DiscoveredPlace[]> {
+  const { places } = await searchPlacesNearbyNew({
+    lat: opts.lat,
+    lng: opts.lng,
+    radiusM: opts.radiusM,
+    includedType: opts.includedType,
+    enrich: opts.enrich,
+  });
+  return places;
+}
+
 
 
 /**
@@ -2141,12 +2308,14 @@ export async function searchPlacesByText(opts: {
       });
       if (neu.places.length) return neu.places;
       hardError = neu.hardError;
-      // Gastro-Textsuche: leere New-API darf Legacy versuchen (Maps findet oft Review-Treffer).
+      // Gastro-/Verleih-Textsuche: leere New-API darf Legacy versuchen.
       const foodLive =
         /\b(restaurant|steak|grill|pizza|sushi|vegan|vegetar|gastro|essen|pannfisch|pannenfisch|pfannfisch|fischrestaurant|\bfisch\b)\b/i.test(
           q,
         );
-      if (!hardError && !foodLive) return [];
+      const rentalLive =
+        /\b(sup\b|stand\s*up|paddle|paddel|verleih|wassersport)\b/i.test(q);
+      if (!hardError && !foodLive && !rentalLive) return [];
     } finally {
       clearTimeout(neuTimer);
     }
